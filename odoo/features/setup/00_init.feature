@@ -23,6 +23,11 @@ Feature: Parameter the new database
         | name                    |
         # oca/ocb
         | document                |
+        | account                 |
+        | sale                    |
+        | sale_stock              |
+        | stock                   |
+        | purchase                |
         # OCA/server-tools
         #| disable_openerp_online  |
         # local-src
