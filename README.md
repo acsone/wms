@@ -174,12 +174,18 @@ docker exec -ti alcyon_odoo_1 bash
 
 **docker run** spawns a new container for a given service, allowing the
 interactive mode, which is exactly what we want to run Odoo with pdb.
+This is probably the command you'll use the more often.
+
+The `--rm` option drops the container after usage, which is usually what we
+want.
 
 ```bash
 # start Odoo
-docker-compose run odoo odoo.py --workers=0 ... additional arguments
+docker-compose run --rm odoo odoo.py --workers=0 ... additional arguments
+# start Odoo and expose the port 8069 to the host on the same port
+docker-compose run --rm -p 8069:8069 odoo odoo.py
 # open an odoo shell
-docker-compose run odoo odoo.py shell  
+docker-compose run --rm odoo odoo.py shell  
 ```
 
 
@@ -189,7 +195,7 @@ Finally, a few aliases suggestions:
 alias doco='docker-compose'
 alias docu='docker-compose up -d'
 alias docl='docker-compose logs'
-alias docsh='docker-compose run odoo ./src/odoo.py shell'
+alias docsh='docker-compose run --rm odoo ./src/odoo.py shell'
 alias bro='chromium-browser --incognito $(docker-compose port odoo 8069)'
 ```
 
@@ -207,7 +213,7 @@ docl odoo
 docl db
 
 # run a one-off command in a container
-doco run odoo bash
+doco run --rm odoo bash
 
 # open a chromium browser on the running odoo
 bro
