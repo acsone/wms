@@ -5,6 +5,11 @@ Feature: Parameter the new database
   In order to have a coherent installation
   I've automated the manual steps.
 
+  @no_demo_data
+  Scenario: deactivate demo data
+    Given I update the module list
+    And I do not want all demo data to be loaded on install
+
   @no_login
   Scenario: CREATE DATABASE
     Given I find or create database from config file
@@ -13,9 +18,39 @@ Feature: Parameter the new database
   Scenario: SETUP company informations
     Given I need a "res.company" with oid: base.main_company
     And having
-       | key        | value   |
-       | name       | Alcyon |
-    # Given the company has the "images/logo.png" logo
+       | key                | value                 |
+       | name               | Alcyon Belux SA       |
+       | street             | Rue le Marais 17      |
+       | street2            |                       |
+       | zip                | 4530                  |
+       | city               | Villers-le-Bouillet   |
+       | country_id         | by code: BE           |
+       | phone              |                       |
+       | fax                |                       |
+       | email              |                       |
+       | website            | www.alcyonbelux.be    |
+       | vat                |                       |
+       | company_registry   |                       |
+       | rml_header1        |                       |
+    Given the company has the "images/logo-alcyon.png" logo
+
+    Given I need a "res.partner" with oid: base.main_partner
+    And having:
+       | key                | value                     |
+       | name               | Alcyon Belux SA           |
+       | street             | Rue le Marais 17          |
+       | street2            |                           |
+       | zip                | 4530                      |
+       | city               | Villers-le-Bouillet       |
+       | country_id         | by code: BE               |
+       | phone              |                           |
+       | fax                |                           |
+       | email              |                           |
+       | website            | www.alcyonbelux.be        |
+       | lang               | fr_FR                     |
+       | company_id         | by oid: base.main_company |
+
+    And the partner has the "images/logo_alcyon.png" logo
 
   @modules
   Scenario: install modules
