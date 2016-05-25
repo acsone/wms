@@ -54,6 +54,7 @@ Feature: Parameter the new database
 
   @modules
   Scenario: install modules
+    Given I do not want all demo data to be loaded on install
     Given I install the required modules with dependencies:
         | name                    |
         # oca/ocb
