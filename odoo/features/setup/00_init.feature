@@ -5,14 +5,36 @@ Feature: Parameter the new database
   In order to have a coherent installation
   I've automated the manual steps.
 
-  @no_demo_data
-  Scenario: deactivate demo data
-    Given I update the module list
-    And I do not want all demo data to be loaded on install
-
   @no_login
   Scenario: CREATE DATABASE
     Given I find or create database from config file
+
+  @lang
+  Scenario: install lang
+   Given I install the following language :
+      | lang  |
+      | fr_BE |
+      | nl_BE |
+    Then the language should be available
+    
+    Given I find a "res.lang" with code: en_US
+    And having:
+      | key         | value    |
+      | grouping    | [3,0]    |
+      | date_format | %d/%m/%Y |
+    
+    Given I find a "res.lang" with code: fr_BE
+    And having:
+      | key         | value    |
+      | grouping    | [3,0]    |
+      | date_format | %d/%m/%Y |
+
+    Given I find a "res.lang" with code: nl_BE
+    And having:
+      | key         | value    |
+      | grouping    | [3,0]    |
+      | date_format | %d/%m/%Y |
+
 
   @company
   Scenario: SETUP company informations
@@ -50,8 +72,6 @@ Feature: Parameter the new database
        | lang               | fr_FR                     |
        | company_id         | by oid: base.main_company |
 
-    And the partner has the "images/logo_alcyon.png" logo
-
   @modules
   Scenario: install modules
     Given I do not want all demo data to be loaded on install
@@ -68,19 +88,3 @@ Feature: Parameter the new database
         #| disable_openerp_online  |
         # local-src
 
-  @lang
-  Scenario: install lang
-   Given I install the following language :
-      | lang  |
-      | fr_FR |
-    Then the language should be available
-    Given I find a "res.lang" with code: en_US
-    And having:
-      | key         | value    |
-      | grouping    | [3,0]    |
-      | date_format | %d/%m/%Y |
-    Given I find a "res.lang" with code: fr_FR
-    And having:
-      | key         | value    |
-      | grouping    | [3,0]    |
-      | date_format | %d/%m/%Y |
