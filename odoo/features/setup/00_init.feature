@@ -38,43 +38,42 @@ Feature: Parameter the new database
 
   @company
   Scenario: SETUP company informations
-    Given I need a "res.company" with oid: base.main_company
+    Given I need a "res.company" with oid: base.main_company_alcyon
     And having
-       | key                | value                 |
-       | name               | Alcyon Belux SA       |
-       | street             | Rue le Marais 17      |
-       | street2            |                       |
-       | zip                | 4530                  |
-       | city               | Villers-le-Bouillet   |
-       | country_id         | by code: BE           |
-       | phone              |                       |
-       | fax                |                       |
-       | email              |                       |
-       | website            | www.alcyonbelux.be    |
-       | vat                |                       |
-       | company_registry   |                       |
-       | rml_header1        |                       |
+       | key                | value                       |
+       | name               | Alcyon Belux SA             |
+       | street             | Rue le Marais 17            |
+       | street2            |                             |
+       | zip                | 4530                        |
+       | city               | Villers-le-Bouillet         |
+       | country_id         | by code: BE                 |
+       | phone              | 04/3383490                  |
+       | fax                | 04/3382783                  |
+       | email              | secretariat@alcyonbelux.be  |
+       | website            | www.alcyonbelux.be          |
+       | vat                | BE 0421.801.233             |
+       | company_registry   |                             |
+       | rml_header1        |                             |
     Given the company has the "images/logo-alcyon.png" logo
 
-    Given I need a "res.partner" with oid: base.main_partner
+    Given I need a "res.partner" with oid: base.main_partner_alcyon
     And having:
-       | key                | value                     |
-       | name               | Alcyon Belux SA           |
-       | street             | Rue le Marais 17          |
-       | street2            |                           |
-       | zip                | 4530                      |
-       | city               | Villers-le-Bouillet       |
-       | country_id         | by code: BE               |
-       | phone              |                           |
-       | fax                |                           |
-       | email              |                           |
-       | website            | www.alcyonbelux.be        |
-       | lang               | fr_FR                     |
-       | company_id         | by oid: base.main_company |
+       | key                | value                            |
+       | name               | Alcyon Belux SA                  |
+       | street             | Rue le Marais 17                 |
+       | street2            |                                  |
+       | zip                | 4530                             |
+       | city               | Villers-le-Bouillet              |
+       | country_id         | by code: BE                      |
+       | phone              | 04/3383490                       |
+       | fax                | 04/3382783                       |
+       | email              | secretariat@alcyonbelux.be       |
+       | website            | www.alcyonbelux.be               |
+       | lang               | fr_BE                            |
+       | company_id         | by oid: base.main_company_alcyon |
 
   @modules
   Scenario: install modules
-    Given I do not want all demo data to be loaded on install
     Given I install the required modules with dependencies:
         | name                    |
         # oca/ocb
