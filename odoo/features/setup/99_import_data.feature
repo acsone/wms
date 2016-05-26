@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-@alcyon @import
+@alcyon @import @setup
 
 Feature: import master data
 
