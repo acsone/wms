@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-@alcyon @import @setup
+@alcyon @import
 
 Feature: import master data
 
@@ -7,13 +7,13 @@ Feature: import master data
   Scenario: Default product value
     Given I need a "ir.values" with oid: scenario.product_template_value
      And having:
-     | key            | value            |
-     | name           | type             |
-     | model          | product.template |
-     | value_unpickle | product          |
-     | key            | default          |
-     | key2           |                  |
-     | company_id     | by oid: base.main_company_alcyon |     
+     | key            | value             |
+     | name           | type              |
+     | model          | product.template  |
+     | value_unpickle | product           |
+     | key            | default           |
+     | key2           |                   |
+     | company_id     | by oid: base.main |     
 
   @csv @suppliers_import
   Scenario: import specific suppliers

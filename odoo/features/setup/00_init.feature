@@ -38,7 +38,7 @@ Feature: Parameter the new database
 
   @company
   Scenario: SETUP company informations
-    Given I need a "res.company" with oid: base.main_company_alcyon
+    Given I need a "res.company" with oid: base.main_company
     And having
        | key                | value                       |
        | name               | Alcyon Belux SA             |
@@ -56,21 +56,6 @@ Feature: Parameter the new database
        | rml_header1        |                             |
     Given the company has the "images/logo-alcyon.png" logo
 
-    Given I need a "res.partner" with oid: base.main_partner_alcyon
-    And having:
-       | key                | value                            |
-       | name               | Alcyon Belux SA                  |
-       | street             | Rue le Marais 17                 |
-       | street2            |                                  |
-       | zip                | 4530                             |
-       | city               | Villers-le-Bouillet              |
-       | country_id         | by code: BE                      |
-       | phone              | 04/3383490                       |
-       | fax                | 04/3382783                       |
-       | email              | secretariat@alcyonbelux.be       |
-       | website            | www.alcyonbelux.be               |
-       | lang               | fr_BE                            |
-       | company_id         | by oid: base.main_company_alcyon |
 
   @modules
   Scenario: install modules
