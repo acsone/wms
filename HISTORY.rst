@@ -3,8 +3,11 @@
 Release History
 ---------------
 
-unreleased (unknown)
-++++++++++++++++++++
+9.0.0 (2016-06-01)
+++++++++++++++++++
+
+This is the first iteration of the project which corresponds to the Sprint 0,
+this is why the version is `9.0.0` (`9` meaning that it is based on Odoo 9.0).
 
 **Features and Improvements**
 
