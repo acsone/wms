@@ -16,13 +16,13 @@ Feature: Parameter the new database
       | fr_BE |
       | nl_BE |
     Then the language should be available
-    
+
     Given I find a "res.lang" with code: en_US
     And having:
       | key         | value    |
       | grouping    | [3,0]    |
       | date_format | %d/%m/%Y |
-    
+
     Given I find a "res.lang" with code: fr_BE
     And having:
       | key         | value    |
