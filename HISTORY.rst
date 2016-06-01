@@ -12,7 +12,17 @@ unreleased (unknown)
 
 **Build**
 
+* Add the private Odoo enterprise repository in the submodules
+
 **Documentation**
+
+* Improve project's documentation (Docker, submodules, processes)
+
+
+Creation of the project (2016-05-09)
+++++++++++++++++++++++++++++++++++++
+
+Bootstrap of the project with the Docker template.
 
 .. Template:
 
