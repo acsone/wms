@@ -8,6 +8,8 @@ unreleased (unknown)
 
 **Features and Improvements**
 
+* Add base scenario with base data (company address, logo, languages, ...)
+
 **Bugfixes**
 
 **Build**
