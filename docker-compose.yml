@@ -17,8 +17,8 @@ services:
       - "./odoo/features:/opt/odoo/features"
       - "./odoo/data:/opt/odoo/data"
       - "data-odoo:/data/odoo"
-    links:
-      - db:db
+    depends_on:
+      - db
     environment:
       - SCENARIO_MAIN_TAG=alcyon
       - DB_USER=odoo
@@ -45,8 +45,8 @@ services:
     image: camptocamp/odoo-nginx:9.0
     ports:
       - 80:80
-    links:
-      - odoo:odoo
+    depends_on:
+      - odoo
 
 volumes:
   data-odoo:
