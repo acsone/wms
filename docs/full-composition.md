@@ -22,3 +22,36 @@ $ docker-compose -f testers.latest.yml -f akeneo.yml up
 
 Now, you can open a browser on http://localhost:9000.
 The login is `admin / admin`.
+
+# WSO2
+
+For developers:
+
+```
+$ docker-compose -f docker-compose.yml -f wso2.yml up
+```
+
+For testers:
+
+```
+$ docker-compose -f testers.latest.yml -f wso2.yml up
+```
+
+
+Now, you can open a browser on https://localhost:9443 (you will have to accept
+the unsecure connection).
+The login is `admin / admin`.
+
+# All of them:
+
+For developers:
+
+```
+$ docker-compose -f docker-compose.yml -f akeneo.yml -f wso2.yml up
+```
+
+For testers:
+
+```
+$ docker-compose -f testers.latest.yml -f akeneo.yml -f wso2.yml up
+```
