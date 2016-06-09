@@ -1,0 +1,36 @@
+# Composition for testers, runs the latest image
+#
+# This file should be called with
+# docker-compose -f odoo.latest.yml up
+version: '2'
+
+services:
+  odoo:
+    image: camptocamp/alcyon_odoo:latest
+    volumes:
+      - "data-odoo:/data/odoo"
+    environment:
+      - SCENARIO_MAIN_TAG=alcyon
+      - DB_USER=odoo
+      - DB_PASSWORD=odoo
+      - DB_NAME=odoodb
+      - ADMIN_PASSWD=mijaebohb8Thae1g
+      - RUNNING_ENV=dev
+      - DEMO=scenario
+
+  db:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - "data-db:/var/lib/postgresql/data"
+
+  nginx:
+    image: camptocamp/odoo-nginx:9.0
+    ports:
+      - 80:80
+
+volumes:
+  data-odoo:
+  data-db:
