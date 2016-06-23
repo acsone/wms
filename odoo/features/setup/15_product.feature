@@ -8,22 +8,22 @@ Feature: Configure products
     Given I need a "product.category" with oid: __init.product_categ_materiel
     And having:
       | key            | value        |
-      | name           | materiel     |
+      | name           | Materiel     |
 
     Given I need a "product.category" with oid: __init.product_categ_ali
     And having:
       | key            | value        |
-      | name           | aliments     |
+      | name           | Aliments     |
 
     Given I need a "product.category" with oid: __init.product_categ_medoc
     And having:
       | key            | value        |
-      | name           | medicaments  |
+      | name           | Medicaments  |
 
     Given I need a "product.category" with oid: __init.product_categ_frigo
     And having:
       | key            | value        |
-      | name           | frigo        |
+      | name           | Frigo        |
 
     # Given I need a "product.category" with oid: __init.product_categ_congel
     # And having:
