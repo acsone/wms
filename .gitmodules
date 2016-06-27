@@ -7,3 +7,6 @@
 [submodule "odoo/external-src/enterprise"]
 	path = odoo/external-src/enterprise
 	url = git@github.com:odoo/enterprise
+[submodule "odoo/external-src/stock-logistics-workflow"]
+	path = odoo/external-src/stock-logistics-workflow
+	url = git@github.com:OCA/stock-logistics-workflow.git
