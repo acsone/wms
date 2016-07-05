@@ -73,3 +73,5 @@ Feature: Parameter the new database
         # local-src
         | delivery_rounds         |
         | stock_picking_subcode   |
+        | product_price_category  |
+
