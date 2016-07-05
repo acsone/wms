@@ -16,4 +16,5 @@ class ProductTemplate(models.Model):
     price_category_id = fields.Many2one(
         'product.price.category',
         string='Price Category',
+        ondelete='restrict',
     )
