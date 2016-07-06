@@ -1,0 +1,44 @@
+odoo:
+  image: camptocamp/alcyon_odoo:latest
+  links:
+    - db:db
+  volumes:
+    - alcyon-latest-dataodoo:/data/odoo
+  environment:
+    - SCENARIO_MAIN_TAG=${SCENARIO_MAIN_TAG}
+    - DB_USER=${DB_USER}
+    - DB_PASSWORD=${DB_PASSWORD}
+    - DB_NAME=${DB_NAME}
+    - DB_PORT=${DB_PORT}
+    - ADMIN_PASSWD=${ADMIN_PASSWD}
+    - RUNNING_ENV=${RUNNING_ENV}
+    - DEMO=${DEMO}
+    - WORKERS=${WORKERS}
+    - MAX_CRON_THREADS=${MAX_CRON_THREADS}
+    - LOG_LEVEL=${LOG_LEVEL}
+    - LOG_HANDLER=${LOG_HANDLER}
+    - DB_MAXCONN=${DB_MAXCONN}
+    - LIMIT_MEMORY_SOFT=${LIMIT_MEMORY_SOFT}
+    - LIMIT_MEMORY_HARD=${LIMIT_MEMORY_HARD}
+    - LIMIT_REQUEST=${LIMIT_REQUEST}
+    - LIMIT_TIME_CPU=${LIMIT_TIME_CPU}
+    - LIMIT_TIME_REAL=${LIMIT_TIME_REAL}
+
+db:
+  image: camptocamp/postgresql:pg9.5-latest
+  environment:
+    - POSTGRES_USER=${DB_USER}
+    - POSTGRES_PASSWORD=${DB_PASSWORD}
+    - PG_SYSTEM_SHARED_BUFFERS=256MB
+    - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
+    - PG_SYSTEM_WAL_BUFFERS=8MB
+    - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
+  volumes:
+    - alcyon-latest-datadb:/var/lib/postgresql
+
+nginx:
+  image: camptocamp/odoo-nginx:9.0
+  ports:
+    - 8080:80
+  links:
+    - odoo:odoo

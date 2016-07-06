@@ -12,10 +12,11 @@ env:
     - LINT_CHECK="1"
     - TESTS="1"
   global:
-    - DOCKER_COMPOSE_VERSION="1.6.0"
+    - DOCKER_COMPOSE_VERSION="1.7.1"
     - TESTS="0" LINT_CHECK="0"
     - ADDONS_DIR=${TRAVIS_BUILD_DIR}/odoo/local-src
     - COMPOSE_PROJECT_NAME=alcyon
+    - RANCHER_STACK_NAME=alcyon-odoo-test
 
 before_install:
   - sudo apt-get update
@@ -44,4 +45,4 @@ script:
   - if [ "$TESTS" == "1" ] ; then docker-compose run --rm -e DEMO=scenario odoo odoo.py --stop-after-init ; fi
 
 after_success:
-  - if [ "$TESTS" == "1" ] ; then ./.publish.sh ; fi
+  - if [ "$TESTS" == "1" ] ; then ./travis/publish.sh ; fi
