@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <record id="view_round_instance_tree" model="ir.ui.view">
+        <field name="name">round.instance.tree</field>
+        <field name="model">round.instance</field>
+        <field name="arch" type="xml">
+            <tree string="Round Instances">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_round_instance_form" model="ir.ui.view">
+        <field name="name">round.instance.form</field>
+        <field name="model">round.instance</field>
+        <field name="arch" type="xml">
+            <form string="Round Instance">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="date" />
+                    </group>
+                    <group>
+                        <field name="vehicle_id" />
+                    </group>
+                </group>
+                <field name="picking_ids" widget="many2many"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_round_instance_tree" model="ir.actions.act_window">
+        <field name="name">Round Instances</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">round.instance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_round_instance_tree" id="menu_round_instance" parent="menu_delivery_round" sequence="20"/>
+
+
+  </data>
+</openerp>
