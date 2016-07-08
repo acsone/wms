@@ -19,27 +19,17 @@
 #
 ##############################################################################
 
-{
-    'name': 'Delivery Rounds',
-    'version': '1.0',
-    'author': "BCIM",
-    'maintainer': 'Camptocamp',
-    'category': 'Stock Management',
-    'depends': [
-        'stock',
-        ],
-    'data': [
-        'views/menu.xml',
-        'views/vehicle.xml',
-        'views/zone.xml',
-        'views/instance.xml',
-        'views/picking.xml',
-        'data/sequence.xml',
-        'security/ir.model.access.csv',
-        'wizards/instance_zone_import.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-    'application': False,
-}
+from openerp import _, api, exceptions, fields, models
+
+
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
+
+    subcode = fields.Char('Code')
+
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    picking_type_subcode = fields.Char(
+        related='picking_type_id.subcode', readonly=True)

@@ -110,6 +110,7 @@ Feature: Configure stock
     Given I need a "procurement.rule" with oid: __init.procurement_rule_materiel
     And having:
       | key                      | value                                    |
+      | sequence                 | 15                                       |
       | name                     | WH: Stock -> Output (MAT)                |
       | action                   | move                                     |
       | location_id              | by oid: stock.stock_location_output      |
@@ -122,6 +123,7 @@ Feature: Configure stock
     Given I need a "procurement.rule" with oid: __init.procurement_rule_ali
     And having:
       | key                      | value                                    |
+      | sequence                 | 15                                       |
       | name                     | WH: Stock -> Output (ALI)                |
       | action                   | move                                     |
       | location_id              | by oid: stock.stock_location_output      |
@@ -134,6 +136,7 @@ Feature: Configure stock
     Given I need a "procurement.rule" with oid: __init.procurement_rule_medoc
     And having:
       | key                      | value                                    |
+      | sequence                 | 15                                       |
       | name                     | WH: Stock -> Output (MED)                |
       | action                   | move                                     |
       | location_id              | by oid: stock.stock_location_output      |
@@ -146,6 +149,7 @@ Feature: Configure stock
     Given I need a "procurement.rule" with oid: __init.procurement_rule_froid
     And having:
       | key                      | value                                    |
+      | sequence                 | 15                                       |
       | name                     | WH: Stock -> Output (FRIGO)              |
       | action                   | move                                     |
       | location_id              | by oid: stock.stock_location_output      |
@@ -161,6 +165,7 @@ Feature: Configure stock
     Given I need a "stock.location.route" with oid: __init.stock_location_route_pick_materiel
     And having:
       | key                      | value                                    |
+      | sequence                 | 20                                       |
       | name                     | Alcyon Belux SA: Pick (MAT)              |
       | product_categ_selectable | True                                     |
       | product_selectable       | False                                    |
@@ -169,6 +174,7 @@ Feature: Configure stock
     Given I need a "stock.location.route" with oid: __init.stock_location_route_pick_ali
     And having:
       | key                      | value                                    |
+      | sequence                 | 20                                       |
       | name                     | Alcyon Belux SA: Pick (ALI)              |
       | product_categ_selectable | True                                     |
       | product_selectable       | False                                    |
@@ -177,6 +183,7 @@ Feature: Configure stock
     Given I need a "stock.location.route" with oid: __init.stock_location_route_pick_medoc
     And having:
       | key                      | value                                    |
+      | sequence                 | 20                                       |
       | name                     | Alcyon Belux SA: Pick (MED)              |
       | product_categ_selectable | True                                     |
       | product_selectable       | False                                    |
@@ -185,6 +192,7 @@ Feature: Configure stock
     Given I need a "stock.location.route" with oid: __init.stock_location_route_pick_froid
     And having:
       | key                      | value                                    |
+      | sequence                 | 20                                       |
       | name                     | Alcyon Belux SA: Pick (FROID)            |
       | product_categ_selectable | True                                     |
       | product_selectable       | False                                    |

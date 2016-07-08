@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Rounds',
+    'name': 'Stock Picking Subcode',
     'version': '1.0',
     'author': "BCIM",
     'maintainer': 'Camptocamp',
@@ -29,14 +29,7 @@
         'stock',
         ],
     'data': [
-        'views/menu.xml',
-        'views/vehicle.xml',
-        'views/zone.xml',
-        'views/instance.xml',
-        'views/picking.xml',
-        'data/sequence.xml',
-        'security/ir.model.access.csv',
-        'wizards/instance_zone_import.xml',
+        'views/stock.xml',
     ],
     'installable': True,
     'auto_install': False,
