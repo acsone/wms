@@ -71,4 +71,5 @@ Feature: Parameter the new database
         # OCA/server-tools
         #| disable_openerp_online  |
         # local-src
-
+        | delivery_rounds         |
+        | stock_picking_subcode   |
