@@ -3,6 +3,37 @@
 Release History
 ---------------
 
+Unreleased
+++++++++++
+
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.1.0 (2016-07-11)
+++++++++++++++++++
+
+Jira's Sprint 2.
+
+**Features and Improvements**
+
+* Add first version of the addon for the delivery rounds (``delivery_rounds``)
+* Add a local module that adds a subcode on pickings
+  (``stock_picking_subcode``)
+* Add data for logistics and products
+
+
+**Build**
+
+* Setup Rancher for the test and integration servers
+* Use docker compose files v2
+* Fix .dockerignore, reducing size of roughly 2GB
+
 9.0.0 (2016-06-01)
 ++++++++++++++++++
 
