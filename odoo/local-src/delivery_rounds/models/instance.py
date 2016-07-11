@@ -19,9 +19,10 @@
 #
 ##############################################################################
 
-from openerp import _, api, exceptions, fields, models
+from openerp import api, fields, models
+# from openerp import _, api, exceptions, fields, models
 
-from datetime import datetime
+# from datetime import datetime
 
 
 class RoundInstance(models.Model):
@@ -31,7 +32,7 @@ class RoundInstance(models.Model):
     name = fields.Char(
         'Name',
         required=True,
-        #default=lambda *a: datetime.now().strftime('%y%m%d')
+        # default=lambda *a: datetime.now().strftime('%y%m%d')
         default='New',
         )
     date = fields.Datetime(
@@ -60,23 +61,25 @@ class RoundInstance(models.Model):
     shipping_ids = fields.One2many(
         'stock.picking', 'delivery_round_dest_id', 'Deliveries',
         domain=[('picking_type_code', '=', 'outgoing')],
-        #readonly=True,
+        # readonly=True,
         )
 
-    #picking_ids = fields.One2many(
-    #    'stock.picking', 'delivery_round_id', 'Deliveries',
-    #    domain=[('picking_type_code', '=', 'outgoing'),
-    #            ('state', '!=', 'done')])
+    # picking_ids = fields.One2many(
+    #     'stock.picking', 'delivery_round_id', 'Deliveries',
+    #     domain=[('picking_type_code', '=', 'outgoing'),
+    #             ('state', '!=', 'done')])
 
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code('round.instance') or '/'
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'round.instance') or '/'
         return super(RoundInstance, self).create(vals)
 
     @api.multi
     def button_zone_import(self):
-        return dict(self.env.ref('delivery_rounds.action_round_zone_import').read()[0])
+        return dict(self.env.ref(
+            'delivery_rounds.action_round_zone_import').read()[0])
 
 
 class StockPicking(models.Model):
@@ -128,12 +131,16 @@ class StockPicking(models.Model):
             move_ids = self._get_all_dest_moves()
             moves = self.env['stock.move'].browse(move_ids)
             moves.write({'delivery_round_id': vals['delivery_round_id']})
-            pickings = moves.mapped('picking_id').write({'delivery_round_dest_id': vals['delivery_round_id']})
+            pickings = moves.mapped('picking_id').write(
+                {'delivery_round_dest_id': vals['delivery_round_id']})
         if 'sequence' in vals:
-            shippings = self.filtered(lambda r: r.picking_type_code == 'outgoing')
+            shippings = self.filtered(
+                lambda r: r.picking_type_code == 'outgoing')
             rounds = shippings.mapped('delivery_round_dest_id')
             for ri in rounds:
-                pickings = ri.picking_ids.filtered(lambda r: r.partner_id.id in shippings.mapped('partner_id.id'))
+                pickings = ri.picking_ids.filtered(
+                    lambda r: r.partner_id.id in shippings.mapped(
+                        'partner_id.id'))
                 pickings.write({'sequence': vals['sequence']})
         return super(StockPicking, self).write(vals)
 
