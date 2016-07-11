@@ -33,6 +33,10 @@ Feature: import master data
   Scenario: import locators (stock bin)
     Given "stock.location" is imported from CSV "setup/locators_subset.csv" using delimiter ","
 
+  @csv @stock_output_import
+  Scenario: import output locations
+    Given "stock.location" is imported from CSV "setup/chariots.csv" using delimiter ","
+
   @csv @product_import
   Scenario: import specific product
     Given "product.template" is imported from CSV "setup/product.template.csv" using delimiter ","
