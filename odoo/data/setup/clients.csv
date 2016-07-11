@@ -1,0 +1,49 @@
+id,customer,name,street,zip,city,mobile,phone,email,vat
+scenario.client_7610,1,ANYMALIS MEDICAMENTS,"Chaussée de Gembloux, 30",5140,TONGRINNE,0484/070346,071852474,cliniqueanymalis@gmail.com,BE0839055146
+scenario.client_415,1,BAIJOT JEAN-MARIE,Route de la Semois  65,5575,LOUETTE-ST-PIERRE,0474/573978,061589123,jeanmarie.baijot@hotmail.be,BE0722278232
+scenario.client_426,1,BATAILLE EMMANUEL *,Rue de Fize 17,4537,VERLAINE,019/566272,0475660630,vetbataille@skynet.be,BE0446779030
+scenario.client_432,1,BECART LOUIS-MARIE *,Barcène 3,5590,CINEY,0475/934927,,lmbecart@msn.com,BE0448522753
+scenario.client_4115,1,BLONDIAU VIRGINIE *,"Rue du Canal, 19",1480,OISQUERCQ (TUBIZE),0475/604727,023550828,vblondiau@hotmail.com,BE0666369313
+scenario.client_8123,1,BREYNE CORENTIN,Rue Reine Fabiola 22 A,7730,ESTAIMPUIS,0493/049594,056/344854,corentinbreyne@live.be,BE0561949704
+scenario.client_798,1,BUYCK PASCAL *,"Rue Nazareth, 3",5630,SILENRIEUX,0494/398439,071633431,veterinaire.barrages@fulladsl.be,BE0445875544
+scenario.client_7478,1,CAB VETERINAIRE E. WITVROUW *,"Rue de Visé, 554",4020,WANDRE,0495/256590,043621639,e.wite@belgacom.net,BE0845379348
+scenario.client_8117,1,CABINET VETER. DE LA FLÈCHE*,rue de la Fèche 38,6880,BERTRIX,0493/099087,061413036,cabinetveterinairedelafleche@hotmail.com,BE0543350052
+scenario.client_4348,1,CABINET VETERINAIRE MARCHAND *,"Rue du Docteur René Bureau, 63",7190,ECAUSSINES,0495/185579,067444712,fabienne.marchand@skynet.be,BE0443640287
+scenario.client_5970,1,CLIN.VET. D'ARLON ALIMENTS *,Route de Bastogne 310,6700,ARLON,063/226565,,clin.vet.arlon@busmail.net,BE0442008313
+scenario.client_683,1,CLINIQUE DES PETITS ANIMAUX *,Terhulpensesteenweg 621/A,3090,OVERIJSE,02/6880075,,info@vetcenter.be,BE0407020809
+scenario.client_3768,1,CORNELLE J-P.& B. BRACKMAN L.,"Rue Mazy, 68",5100,JAMBES (NAMUR),081/301160,,cornellebe@hotmail.com,BE0692375607
+scenario.client_7035,1,DAP BOLLAERT-DESIMPELAERE,"Kanegem Dorp, 21",8700,KANEGEM (TIELT),0478/269948,,,BE0899779720
+scenario.client_7138,1,DAP DE MANDEL,"Hoogstraat, 56",8780,OOSTROZEBEKE,0479/297347,056663573,dap.demandel@skynet.be,BE0676203529
+scenario.client_7353,1,DAP VETRICURE,"Westkerkestraat, 18",8480,EERNEGEM,0498/544980,0477/328552,,BE0844329966
+scenario.client_7736,1,DARDENNE-MONIN *,Avenue de Salm 69,6690,VIELSALM,0499/105398,080217555,dardennethib@hotmail.com,BE0714877924
+scenario.client_4661,1,DELGOFFE SEBASTIEN *,Chaussée de Louvain 27 C,1320,HAMME-MILLE,0475/468917,010846616,s.delgoffe@myoffice.mobistar.be,BE0877698560
+scenario.client_3157,1,DETHIER-WILLEM *,"Rue Baras, 2",5380,FERNELMONT,0475/473192,081833441,v.dethier13@gmail.com,BE0454190820
+scenario.client_7025,1,DIERENARTSEN PRAKTIJK MALFLIET,"Martelarenlaan, 1",9200,DENDERMONDE,052/214075,,dierenartsenpraktijk@gmail.com,BE0812117157
+scenario.client_7269,1,DRS GERON - BURY *,Chaussée de Louvain 353,1300,WAVRE,0475/731606,010225197,drsgeron.bury@gmail.com,BE0837912625
+scenario.client_8181,1,EQUIVET'S SCPRL,"Route de Hannut, 303",5021,BONINNE (NAMUR),0496/474217,,elineremacle@hotmail.com,BE0563673532
+scenario.client_7200,1,FV BIJTEBIER - FRANCK,"Heirweg, 28 A",9750,ZINGEM,0476/864233,09/3246050,frederik.bijtebier@telenet.be,BE0835125755
+scenario.client_7118,1,GRAF PHILIPPE,"Rue Philippe Dewolfs, 12",1170,WATERMAEL-BOITSFORT,0475/410775,,phgraf@skynet.be,BE0611925983
+scenario.client_170,1,HUYNEN KARINE,Rue du Baron d'Obin 93,4219,WASSEIGES,0477/370190,081740411,info@veterinaire-huynen.be,BE0651395085
+scenario.client_242,1,LADADE VALERIE *,Avenue Charles Madoux 27,1160,AUDERGHEM,0479/950063,027352528,valerie.ladade@skynet.be,BE0559710487
+scenario.client_4538,1,LOUSBERG ANTONIN *,La Vaulx Richard 12,4970,STAVELOT,0473/727726,,alousberg@scarlet.be,BE0866933936
+scenario.client_3337,1,MARCHAND YVES *,Drève Sainte Anne 36,1020,BRUXELLES,0497/682057,024143984,yves.marchand1@outlook.com,BE0562611777
+scenario.client_5094,1,MASCETTI CHRISTOPHE *,"Route de La Roche, 6",6987,RENDEUX,0474/518192,,dr.mascetti@gmail.com,BE0875827054
+scenario.client_2612,1,MASURE SYLVIE *,"Rue les combles, 149",4910,THEUX (LA REID),0496/121843,087530085,veterinaire@soleilhopi.com,BE0713386696
+scenario.client_4672,1,MATTART GERARD *,"Rue Louis Delvaux, 8",1367,GEROMPONT(RAMILLIES),0495/248269,,gerard.mattart@tvcablenet.be,BE0874621185
+scenario.client_2630,1,PETRUSZKA DAVID *,"Avenue de Mars, 66",1200,WOLUWE-ST-LAMBERT,0476/331200,,david.petruszka@gmail.com,BE0562687694
+scenario.client_849,1,PHILIPPI NANCY *,"Rue Emile Herman, 93",7170,FAYT-LEZ-MANAGE,0485/553537,064558702,philippi.nancy@skynet.be,BE0665405350
+scenario.client_4604,1,PLUMET ETIENNE VETERINAIRE *,"Rue de Souvret, 51",6141,FORCHIES-LA-MARCHE,0477/749994,071524616,sophie.gouverneur@hotmail.com,BE0472676050
+scenario.client_6759,1,SAMAIN DIRK,"Moenstraat, 8",8554,ZWEVEGEM (SINT-DENIJS),0475/341275,056/455080,,BE0678139272
+scenario.client_5455,1,SCPRL VETERINAIRE LEMAIRE *,Beho 80a,6672,GOUVY,080/510740,,e-lemaire-vet@skynet.be,BE0895149850
+scenario.client_7691,1,SENGER-TASIAUX SPRL *,Avenue de France 167,6900,MARCHE-EN-FAMENNE,084/316031,0471/076625,sengertasiaux@hotmail.com,BE0842961177
+scenario.client_616,1,SINON COLETTE *,Rue des Fougères 179,6010,COUILLET,0477527768,071439444,,BE0786023266
+scenario.client_4636,1,SOL DELPHINE *,"Rue du Château, 23",7740,PECQ,0477/667574,,sol.delphine@skynet.be,BE0875443410
+scenario.client_4638,1,TSALOS LAURENCE *,Avenue de la Résistance 508,4630,SOUMAGNE,0476/612909,04/2483370,info@veterinairedeherve.be,BE0877755770
+scenario.client_7115,1,UYSTEPRUYST & KESTELOOT,"Rue des Bois, 47",7618,TAINTIGNIES,0494/809300,069686365,christophe.uystepruyst@skynet.be,BE0832460829
+scenario.client_6545,1,VAN HULLE TOM,"Molenstraat, 139",9970,KAPRIJKE,09/3798330,,,BE0890902339
+scenario.client_1257,1,VAN LIERDE FABRICE,"Rue de Gougnies, 31",5640,BIESME-METTET,071/729012,,fabricevanlierde@skynet.be,BE0689482631
+scenario.client_6470,1,VANDERVENNET SOFIE *,"Nieuwpoortkeiweg, 15 bus 3",8630,VEURNE,0494/040232,,sofie.vandervennet@telenet.be,BE0676346356
+scenario.client_5124,1,VET & CIE  SC SPRL *,"Rue Borrens, 38",1050,IXELLES,0475/728445,026477175,delersfontaine@skynet.be,BE0885775294
+scenario.client_5777,1,VET DONEUX - DUMON *,Rue du Clair-Val 17,5020,SUARLEE,0495/502175,081/735635,bp@vet-doneux-dumon.be,BE0807270424
+scenario.client_5446,1,VETERINAIRE BONGARTZ & *,"Esplanade de la Paix, 3/5",4040,HERSTAL,0475/452791,042272727,cmdalcyon@gmail.com,BE0897362242
+scenario.client_2408,1,VONDI GMBH,"Manderfeld, 142",4760,MANDERFELD,080/548135,00491717776527,vondivet@yahoo.de,BE0471751976

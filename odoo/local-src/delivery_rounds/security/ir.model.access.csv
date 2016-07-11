@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_round_vehicle,access_round_vehicle,model_round_vehicle,stock.group_stock_user,1,0,0,0
+access_round_vehicle_adm,access_round_vehicle,model_round_vehicle,stock.group_stock_manager,1,1,1,1
+access_round_zone,access_round_zone,model_round_zone,stock.group_stock_user,1,0,0,0
+access_round_zone_adm,access_round_zone,model_round_zone,stock.group_stock_manager,1,1,1,1
+access_round_zone_position,access_round_zone_position,model_round_zone_position,stock.group_stock_user,1,0,0,0
+access_round_zone_position_adm,access_round_zone_position,model_round_zone_position,stock.group_stock_manager,1,1,1,1
