@@ -12,6 +12,9 @@ Unreleased
 
 **Build**
 
+* Extend the server timeout of HAProxy on Rancher to 6h to align with the nginx
+  option (we can have very long requests on Odoo!)
+
 **Documentation**
 
 
