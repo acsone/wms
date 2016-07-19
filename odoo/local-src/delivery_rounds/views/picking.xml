@@ -74,7 +74,7 @@
         </field>
     </record>
 
-    <menuitem id="menu_round_picking" name="Rounds' Pickings" parent="stock.menu_stock_warehouse_mgmt" sequence="10" action="action_picking_tree_round" groups="stock.group_stock_manager,stock.group_stock_user"/>
+    <menuitem id="menu_round_picking" name="Rounds' Pickings" parent="menu_delivery_round" sequence="50" action="action_picking_tree_round" groups="stock.group_stock_manager,stock.group_stock_user"/>
 
 
   </data>
