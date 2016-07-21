@@ -56,13 +56,16 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: product_price_category
-#: code:addons/product_price_category/models/product_pricelist.py:253
 #: model:ir.model.fields,field_description:product_price_category.field_product_pricelist_item_price_category_id
 #: model:ir.model.fields,field_description:product_price_category.field_product_template_price_category_id
-#: selection:product.pricelist.item,applied_on:0
-#, python-format
 msgid "Price Category"
 msgstr "Catégorie de prix"
+
+#. module: product_price_category
+#: code:addons/product_price_category/models/product_pricelist.py:252
+#, python-format
+msgid "Price Category: %s"
+msgstr "Catégorie de prix: %s"
 
 #. module: product_price_category
 #: model:ir.model,name:product_price_category.model_product_pricelist

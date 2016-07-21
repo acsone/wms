@@ -249,6 +249,4 @@ class ProductPricelistItem(models.Model):
         for rec in self:
             super(ProductPricelistItem, rec)._get_pricelist_item_name_price()
             if rec.price_category_id:
-                rec.name = "%s: %s" % (
-                    _("Price Category"), rec.price_category_id.name
-                )
+                rec.name = _("Price Category: %s") % rec.price_category_id.name
