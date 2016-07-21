@@ -37,6 +37,10 @@ Feature: import master data
   Scenario: import output locations
     Given "stock.location" is imported from CSV "setup/chariots.csv" using delimiter ","
 
+  @csv @product_import @price_category
+  Scenario: import specific product
+    Given "product.price.category" is imported from CSV "setup/product.price.category.csv" using delimiter ","
+
   @csv @product_import
   Scenario: import specific product
     Given "product.template" is imported from CSV "setup/product.template.csv" using delimiter ","
