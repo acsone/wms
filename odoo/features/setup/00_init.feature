@@ -74,4 +74,5 @@ Feature: Parameter the new database
         | delivery_rounds         |
         | stock_picking_subcode   |
         | product_price_category  |
+        | pricelist_discount      |
 

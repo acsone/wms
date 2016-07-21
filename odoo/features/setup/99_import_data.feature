@@ -48,3 +48,7 @@ Feature: import master data
   @csv @product_import @stock
   Scenario: import specific product
     Given "product.template" is imported from CSV "setup/products.csv" using delimiter ";"
+
+  @csv @product_import @pricelist
+  Scenario: import specific product
+    Given "product.pricelist" is imported from CSV "setup/product.pricelist.csv" using delimiter ","
