@@ -81,6 +81,43 @@ class RoundInstance(models.Model):
         return dict(self.env.ref(
             'delivery_rounds.action_round_zone_import').read()[0])
 
+    @api.multi
+    def button_update(self):
+        for zone_id in self.zone_ids:
+            self._update_zone(zone_id)
+
+    def _update_zone(self, zone_id):
+        partner_ids = zone_id.partner_position_ids.mapped('partner_id.id')
+        # call Try to reserve from stock the qty for confirmed pickings
+        picking_confirmed = self.env['stock.picking'].search([
+            ('partner_id', 'in', partner_ids),
+            ('state', '=', 'confirmed')])
+        picking_confirmed.action_assign()
+
+        # retrieve all pickings (partially) available not yet bound to a delivery round
+        pickings = self.env['stock.picking'].search([
+            ('delivery_round_id', '=', False),
+            ('partner_id', 'in', partner_ids),
+            # ('state', 'in', ('confirmed', 'partially_available', 'assigned'))])
+            ('state', 'in', ('partially_available', 'assigned'))])
+        pickings.write({'delivery_round_id': self.id})
+
+    def find(self, partner_id):
+        import pdb;pdb.set_trace()
+        # find a delivery_round for this partner otherwise create one
+        zone = self.partner_id.zone_ids[0]
+        instance = self.search([
+            ('state', '=', 'draft'),
+            ('zone_ids', 'in', zone.id),
+            ])
+        if not instance:
+            zone_ids = list(set(zone.id + zone.vehicle_id.zone_ids.ids))
+            instance = self.create({
+                'vehicle': zone.vehicle_id.id,
+                'zone_ids': zone_ids
+                })  # what date???
+        return instance
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -134,6 +171,7 @@ class StockPicking(models.Model):
             pickings = moves.mapped('picking_id').write(
                 {'delivery_round_dest_id': vals['delivery_round_id']})
         if 'sequence' in vals:
+            # when we set a sequence on a delivery, we copy that value on the pickings
             shippings = self.filtered(
                 lambda r: r.picking_type_code == 'outgoing')
             rounds = shippings.mapped('delivery_round_dest_id')
