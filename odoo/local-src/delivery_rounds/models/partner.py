@@ -22,10 +22,10 @@
 from openerp import fields, models
 
 
-class RoundVehicle(models.Model):
-    _name = "round.vehicle"
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
 
-    name = fields.Char('Name')
-    zone_ids = fields.Many2many(
-        'round.zone',
-        string="Zones")
+    round_zone_ids = fields.One2many(
+        'round.zone.position', 'partner_id',
+        'Delivery Zones',
+        readonly=True)

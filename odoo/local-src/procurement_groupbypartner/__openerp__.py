@@ -19,13 +19,21 @@
 #
 ##############################################################################
 
-from openerp import fields, models
-
-
-class RoundVehicle(models.Model):
-    _name = "round.vehicle"
-
-    name = fields.Char('Name')
-    zone_ids = fields.Many2many(
-        'round.zone',
-        string="Zones")
+{
+    'name': 'Procurement Group by partner',
+    'version': '1.0',
+    'author': "BCIM",
+    'maintainer': 'Camptocamp',
+    'category': 'Stock Management',
+    'depends': [
+        'stock',
+        'sale',
+        ],
+    'data': [
+        'views/procurement.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'license': 'AGPL-3',
+    'application': False,
+}

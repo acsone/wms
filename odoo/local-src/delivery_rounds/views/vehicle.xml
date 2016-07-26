@@ -19,6 +19,9 @@
                 <group>
                     <field name="name" />
                 </group>
+                <group string="Zones">
+                    <field name="zone_ids" nolabel="1"/>
+                </group>
             </form>
         </field>
     </record>

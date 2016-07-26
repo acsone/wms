@@ -27,6 +27,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
+        'delivery',
         'stock_picking_subcode',
         ],
     'data': [
@@ -35,6 +36,7 @@
         'views/zone.xml',
         'views/instance.xml',
         'views/picking.xml',
+        'views/partner.xml',
         'data/sequence.xml',
         'security/ir.model.access.csv',
         'wizards/instance_zone_import.xml',

@@ -6,7 +6,7 @@
         <field name="name">round.instance.tree</field>
         <field name="model">round.instance</field>
         <field name="arch" type="xml">
-            <tree string="Round Instances">
+            <tree string="Delivery Rounds">
                 <field name="name" />
             </tree>
         </field>
@@ -15,7 +15,7 @@
         <field name="name">round.instance.form</field>
         <field name="model">round.instance</field>
         <field name="arch" type="xml">
-            <form string="Round Instance">
+            <form string="Delivery Round">
                 <header>
                     <field name="state" widget="statusbar" clickable="True"/>
                 </header>
@@ -55,7 +55,7 @@
     </record>
 
     <record id="action_round_instance" model="ir.actions.act_window">
-        <field name="name">Round Instances</field>
+        <field name="name">Delivery Rounds</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">round.instance</field>
         <field name="view_type">form</field>

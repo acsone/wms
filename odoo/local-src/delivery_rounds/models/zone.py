@@ -19,19 +19,31 @@
 #
 ##############################################################################
 
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class RoundZone(models.Model):
     _name = 'round.zone'
+    _order = 'sequence'
 
+    sequence = fields.Integer('Sequence')
     name = fields.Char('Name', required=True)
     code = fields.Char('Code')
+    color = fields.Integer('Color Index')
     partner_position_ids = fields.One2many(
         'round.zone.position', 'zone_id', 'Partners')
     vehicle_id = fields.Many2one(
         'round.vehicle', 'Vehicle',
         ondelete='restrict')
+
+    @api.model
+    def _group_vehicle(self, ids, domain, **kwargs):
+        vehicle = self.env['round.vehicle'].search([]).name_get()
+        return vehicle, None
+
+    _group_by_full = {
+        'vehicle_id': _group_vehicle,
+    }
 
 
 class RoundZonePosition(models.Model):
@@ -40,7 +52,7 @@ class RoundZonePosition(models.Model):
     _order = 'sequence'
 
     zone_id = fields.Many2one(
-        'res.partner', 'Zone',
+        'round.zone', 'Zone',
         ondelete='cascade')
     sequence = fields.Integer('Sequence')
     partner_id = fields.Many2one(

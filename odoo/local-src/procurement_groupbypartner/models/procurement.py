@@ -19,13 +19,28 @@
 #
 ##############################################################################
 
-from openerp import fields, models
+from openerp import api, fields, models
 
 
-class RoundVehicle(models.Model):
-    _name = "round.vehicle"
+class ProcurementRule(models.Model):
+    _inherit = 'procurement.rule'
 
-    name = fields.Char('Name')
-    zone_ids = fields.Many2many(
-        'round.zone',
-        string="Zones")
+    group_propagation_groupbypartner = fields.Boolean(
+        'Propagate group by partner')
+
+
+class ProcurementOrder(models.Model):
+    _inherit = 'procurement.order'
+
+    @api.model
+    def _run_move_create(self, procurement):
+        vals = super(ProcurementOrder, self)._run_move_create(procurement)
+        if procurement.rule_id.group_propagation_option == 'propagate':
+            if (vals['partner_id'] and
+                    procurement.rule_id.group_propagation_groupbypartner):
+                groups = self.env['procurement.group'].search(
+                    [('partner_id', '=', vals['partner_id'])],
+                    order='id',
+                    limit=1)
+                vals['group_id'] = groups[0].id
+        return vals
