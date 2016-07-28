@@ -22,14 +22,12 @@
 from openerp import api, fields, models
 
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
     @api.multi
-    def write(self, vals):
-        if vals.get('state') == 'assigned' or vals.get('partially_available'):
-            import pdb;pdb.set_trace()
-            if (not self.picking_id.delivery_round_id and
-                    self.picking_id.picking_type_subcode == 'PICK'):
-                self.picking_id.delivery_round_id = self.env['round.instance'].find(self.picking_id.partner_id)
-        return super(StockMove, self).write(vals)
+    @api.depends('procurement_group_id')
+    def _compute_picking_ids(self):
+        for order in self:
+            order.picking_ids = self.env['stock.move'].search([('group_id', '=', order.procurement_group_id.id)]).mapped('picking_id') if order.procurement_group_id else []
+            order.delivery_count = len(order.picking_ids)

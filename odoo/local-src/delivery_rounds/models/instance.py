@@ -105,11 +105,12 @@ class RoundInstance(models.Model):
     def find(self, partner_id):
         import pdb;pdb.set_trace()
         # find a delivery_round for this partner otherwise create one
-        zone = self.partner_id.zone_ids[0]
+        zone = partner_id.round_zone_ids[0].zone_id
         instance = self.search([
             ('state', '=', 'draft'),
             ('zone_ids', 'in', zone.id),
             ])
+#            ]).filtered(lambda r: zone.id in r.zone_ids.ids)
         if not instance:
             zone_ids = list(set(zone.id + zone.vehicle_id.zone_ids.ids))
             instance = self.create({
@@ -164,11 +165,18 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        if 'delivery_round_id' in vals:
+        if vals.get('delivery_round_id'):
+            # propagate to delivery when a picking is assigned to a delivery round
             move_ids = self._get_all_dest_moves()
             moves = self.env['stock.move'].browse(move_ids)
             moves.write({'delivery_round_id': vals['delivery_round_id']})
-            pickings = moves.mapped('picking_id').write(
+            shippings = moves.mapped('picking_id')
+            #shippings.write(
+            #    {'delivery_round_dest_id': vals['delivery_round_id']})
+            # ensure all related pickings are assigned to the same delivery round
+            import pdb;pdb.set_trace()
+            pickings = shippings._get_all_from_moves() & shippings
+            pickings.write(
                 {'delivery_round_dest_id': vals['delivery_round_id']})
         if 'sequence' in vals:
             # when we set a sequence on a delivery, we copy that value on the pickings

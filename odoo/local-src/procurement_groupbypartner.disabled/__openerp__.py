@@ -26,8 +26,7 @@
     'maintainer': 'Camptocamp',
     'category': 'Stock Management',
     'depends': [
-        'stock',
-        'sale',
+        'sale_stock',
         ],
     'data': [
         'views/procurement.xml',

@@ -19,17 +19,20 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    @api.multi
-    def write(self, vals):
-        if vals.get('state') == 'assigned' or vals.get('partially_available'):
-            import pdb;pdb.set_trace()
-            if (not self.picking_id.delivery_round_id and
-                    self.picking_id.picking_type_subcode == 'PICK'):
-                self.picking_id.delivery_round_id = self.env['round.instance'].find(self.picking_id.partner_id)
-        return super(StockMove, self).write(vals)
+{
+    'name': 'Stock Group by partner',
+    'version': '1.0',
+    'author': "BCIM",
+    'maintainer': 'Camptocamp',
+    'category': 'Stock Management',
+    'depends': [
+        'sale_stock',
+        ],
+    'data': [
+        'views/stock.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'license': 'AGPL-3',
+    'application': False,
+}
