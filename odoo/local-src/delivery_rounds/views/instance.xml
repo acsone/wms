@@ -2,6 +2,84 @@
 <openerp>
   <data>
 
+    <record id="view_round_instance_kanban" model="ir.ui.view">
+        <field name="name">round.instance.kanban</field>
+        <field name="model">round.instance</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_stock_kanban">
+                <field name="color"/>
+                <field name="count_picking_available_total"/>
+                <field name="count_picking_available_partner"/>
+                <field name="count_picking_available_weight"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary"><field name="vehicle_id"/></div>
+                                    <div class="o_secondary"><field class="o_secondary"  name="name"/></div>
+                                </div>
+                                <div class="o_kanban_manage_button_section">
+                                    <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content o_visible">
+                                <div class="row">
+                                    <div class="col-xs-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="get_action_picking_tree_available" type="object">
+                                            <span ><t t-esc="record.count_picking_available_total.value"/> Pickings</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-6 o_kanban_primary_right">
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                Destinations
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <field name="count_picking_available_partner"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                Weight
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <field name="count_picking_available_weight"/>kg
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <field name="zone_ids"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 o_kanban_primary_bottom">
+                                        <field name="count_picking_done_total" widget="progress" title="Pickings" options="{'current_value': 'count_picking_done_total', 'max_value': 'count_picking_available_total'}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="container o_kanban_card_manage_pane o_invisible">
+                                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                    <div class="col-xs-8">
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a type="edit">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
     <record id="view_round_instance_tree" model="ir.ui.view">
         <field name="name">round.instance.tree</field>
         <field name="model">round.instance</field>
@@ -59,7 +137,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">round.instance</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <menuitem action="action_round_instance" id="menu_round_instance" parent="menu_delivery_round" sequence="20"/>

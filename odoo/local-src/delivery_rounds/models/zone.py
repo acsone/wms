@@ -32,18 +32,22 @@ class RoundZone(models.Model):
     color = fields.Integer('Color Index')
     partner_position_ids = fields.One2many(
         'round.zone.position', 'zone_id', 'Partners')
-    vehicle_id = fields.Many2one(
-        'round.vehicle', 'Vehicle',
-        ondelete='restrict')
+    vehicle_ids = fields.Many2many(
+        'round.vehicle',
+        string='Vehicle')
 
-    @api.model
-    def _group_vehicle(self, ids, domain, **kwargs):
-        vehicle = self.env['round.vehicle'].search([]).name_get()
-        return vehicle, None
+    # vehicle_id = fields.Many2one(
+    #     'round.vehicle', 'Vehicle',
+    #     ondelete='restrict')
 
-    _group_by_full = {
-        'vehicle_id': _group_vehicle,
-    }
+    #@api.model
+    #def _group_vehicle(self, ids, domain, **kwargs):
+    #    vehicle = self.env['round.vehicle'].search([]).name_get()
+    #    return vehicle, None
+
+    #_group_by_full = {
+    #    'vehicle_id': _group_vehicle,
+    #}
 
 
 class RoundZonePosition(models.Model):

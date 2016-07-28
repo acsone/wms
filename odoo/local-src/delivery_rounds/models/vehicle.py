@@ -29,3 +29,4 @@ class RoundVehicle(models.Model):
     zone_ids = fields.Many2many(
         'round.zone',
         string="Zones")
+    color = fields.Integer('Color Index')

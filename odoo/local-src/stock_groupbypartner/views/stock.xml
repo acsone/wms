@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <field name="warehouse_id" position="after">
                 <field name="groupbypartner"/>
+                <field name="groupbypartner_maxweight" attrs="{'invisible': [('groupbypartner','=',False)]}"/>
             </field>
         </field>
     </record>

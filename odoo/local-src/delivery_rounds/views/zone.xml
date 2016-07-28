@@ -2,6 +2,7 @@
 <openerp>
   <data>
 
+      <!--
     <record id="view_round_zone_kanban" model="ir.ui.view">
         <field name="name">round.zone.kanban</field>
         <field name="model">round.zone</field>
@@ -18,10 +19,6 @@
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                     <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
                                     <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
-                                    <!--
-                                    <li t-if="! record.active.value"><a name="action_set_active" type="object">Unarchive</a></li>
-                                    <li t-if="record.active.value"><a name="action_set_unactive" type="object">Archive</a></li>
-                                    -->
                                     <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
                                 </ul>
                             </div>
@@ -38,6 +35,7 @@
             </kanban>
         </field>
     </record>
+    -->
 
     <record id="view_round_zone_tree" model="ir.ui.view">
         <field name="name">round.zone.tree</field>
@@ -62,7 +60,7 @@
                     </group>
                     <group>
                         <field name="sequence" />
-                        <field name="vehicle_id" />
+                        <field name="vehicle_ids" widget="many2many_tags"/>
                     </group>
                 </group>
                 <field name="partner_position_ids">
@@ -80,7 +78,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">round.zone</field>
         <field name="view_type">form</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem action="action_round_zone_tree" id="menu_round_zone" parent="menu_delivery_round" sequence="20"/>

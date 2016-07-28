@@ -42,6 +42,8 @@ class RoundInstance(models.Model):
     vehicle_id = fields.Many2one(
         'round.vehicle', 'Vehicle',
         ondelete='restrict')
+    color = fields.Integer(
+        related='vehicle_id.color')
     state = fields.Selection(
         [('draft', 'Draft'),
          ('open', 'Confirmed'),
@@ -94,30 +96,68 @@ class RoundInstance(models.Model):
             ('state', '=', 'confirmed')])
         picking_confirmed.action_assign()
 
-        # retrieve all pickings (partially) available not yet bound to a delivery round
+        # retrieve all pickings (partially) available not yet bound to a
+        # delivery round
         pickings = self.env['stock.picking'].search([
             ('delivery_round_id', '=', False),
             ('partner_id', 'in', partner_ids),
-            # ('state', 'in', ('confirmed', 'partially_available', 'assigned'))])
-            ('state', 'in', ('partially_available', 'assigned'))])
+            ('state', 'in', (
+                # 'confirmed',
+                'partially_available',
+                'assigned'))])
         pickings.write({'delivery_round_id': self.id})
 
     def find(self, partner_id):
-        import pdb;pdb.set_trace()
         # find a delivery_round for this partner otherwise create one
-        zone = partner_id.round_zone_ids[0].zone_id
+        zone_ids = partner_id.round_zone_ids.mapped('zone_id.id')
         instance = self.search([
             ('state', '=', 'draft'),
-            ('zone_ids', 'in', zone.id),
-            ])
-#            ]).filtered(lambda r: zone.id in r.zone_ids.ids)
-        if not instance:
-            zone_ids = list(set(zone.id + zone.vehicle_id.zone_ids.ids))
-            instance = self.create({
-                'vehicle': zone.vehicle_id.id,
-                'zone_ids': zone_ids
-                })  # what date???
-        return instance
+            ('zone_ids', 'in', zone_ids),
+            ], limit=1)
+        if instance:
+            return instance[0]
+        return None  # do not automatically create new round instance
+        # zone_ids = list(set(zone.id + zone.vehicle_id.zone_ids.ids))
+        # instance = self.create({
+        #     'vehicle': zone.vehicle_id.id,
+        #     'zone_ids': zone_ids
+        #     })  # what date???
+        # return instance
+
+    count_picking_available_total = fields.Integer(
+        'Picking Available Total',
+        compute='_get_count_picking',
+        readonly=True)
+    count_picking_done_total = fields.Integer(
+        'Picking Donee Total',
+        compute='_get_count_picking',
+        readonly=True)
+    count_picking_available_partner = fields.Integer(
+        'Picking Available Partner',
+        compute='_get_count_picking',
+        readonly=True)
+    count_picking_available_weight = fields.Integer(
+        'Picking Available Total',
+        compute='_get_count_picking',
+        readonly=True)
+
+    @api.one
+    @api.depends('picking_ids')
+    def _get_count_picking(self):
+        self.count_picking_done_total = len(self.picking_ids.filtered(
+            lambda r: r.state == ('done')))
+        pickings = self.picking_ids.filtered(
+            lambda r: r.state in ('partially_available', 'assigned', 'done'))
+        self.count_picking_available_total = len(pickings)
+        self.count_picking_available_partner = \
+            len(pickings.mapped('partner_id'))
+        weight = 0.0
+        for pack in pickings.mapped('pack_operation_ids'):
+            weight += pack.product_id.weight * pack.product_qty
+        self.count_picking_available_weight = weight
+
+    def get_action_picking_tree_available(self):
+        pass
 
 
 class StockPicking(models.Model):
@@ -136,7 +176,7 @@ class StockPicking(models.Model):
     delivery_round_dest_id = fields.Many2one(
         'round.instance', 'Round Instance')
 
-    def _get_all_from_moves(self):
+    def _get_all_from_pickings(self):
         res = set()
 
         def _rec_add(moves):
@@ -147,9 +187,9 @@ class StockPicking(models.Model):
         for picking in self:
             moves = picking.move_lines
             _rec_add(moves)
-        return list(res)
+        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
 
-    def _get_all_dest_moves(self):
+    def _get_all_dest_pickings(self):
         res = set()
 
         def _rec_add(moves):
@@ -161,25 +201,34 @@ class StockPicking(models.Model):
         for picking in self:
             moves = picking.move_lines
             _rec_add(moves)
-        return list(res)
+        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
 
     @api.multi
     def write(self, vals):
         if vals.get('delivery_round_id'):
-            # propagate to delivery when a picking is assigned to a delivery round
-            move_ids = self._get_all_dest_moves()
-            moves = self.env['stock.move'].browse(move_ids)
-            moves.write({'delivery_round_id': vals['delivery_round_id']})
-            shippings = moves.mapped('picking_id')
-            #shippings.write(
-            #    {'delivery_round_dest_id': vals['delivery_round_id']})
-            # ensure all related pickings are assigned to the same delivery round
-            import pdb;pdb.set_trace()
-            pickings = shippings._get_all_from_moves() & shippings
+            # propagate to delivery when a picking is assigned to a delivery
+            # round
+            shippings = self._get_all_dest_pickings().filtered(
+                lambda r: r.picking_type_code == 'outgoing')
+            # ensure all related pickings are assigned to the same delivery
+            # round
+            pickings = shippings._get_all_from_pickings()
+            # TODO: we should ensure a picking is not already done for another
+            #       delivery round
+            pickings = pickings - self
+            pickings = pickings.filtered(
+                lambda r: r.state in (
+                    'waiting',
+                    'confirmed',
+                    'partially_available',
+                    'assigned') and
+                r.delivery_round_dest_id.id != vals['delivery_round_id'])
             pickings.write(
                 {'delivery_round_dest_id': vals['delivery_round_id']})
+            vals.update({'delivery_round_dest_id': vals['delivery_round_id']})
         if 'sequence' in vals:
-            # when we set a sequence on a delivery, we copy that value on the pickings
+            # when we set a sequence on a delivery, we copy that value on the
+            # pickings
             shippings = self.filtered(
                 lambda r: r.picking_type_code == 'outgoing')
             rounds = shippings.mapped('delivery_round_dest_id')
@@ -191,9 +240,9 @@ class StockPicking(models.Model):
         return super(StockPicking, self).write(vals)
 
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    delivery_round_id = fields.Many2one(
-        'round.instance', 'Round Instance',
-        readonly=True)
+# class StockMove(models.Model):
+#     _inherit = 'stock.move'
+#
+#     delivery_round_id = fields.Many2one(
+#         'round.instance', 'Round Instance',
+#         readonly=True)

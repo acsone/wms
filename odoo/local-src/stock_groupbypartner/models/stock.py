@@ -27,6 +27,7 @@ class StockPickingType(models.Model):
 
     groupbypartner = fields.Boolean(
         'Use existing picking having same partner')
+    groupbypartner_maxweight = fields.Integer('Max Weight')
 
 
 class StockMove(models.Model):
@@ -54,11 +55,19 @@ class StockMove(models.Model):
                 ('state', 'in', ['draft', 'confirmed', 'waiting',
                                  'partially_available', 'assigned'])
             ], limit=1, context=context)
-        if picks:
+        # check weight
+        import pdb;pdb.set_trace()
+        total_weight = 0.0
+        pickings = self.pool['stock.picking'].browse(cr, uid, picks, context=context)
+        if move.picking_type_id.groupbypartner_maxweight:
+            total_weight = move.product_id.weight * move.product_qty
+            for pmove in pickings.move_lines:
+                total_weight += pmove.product_id.weight * pmove.product_qty
+        if picks and total_weight <= move.picking_type_id.groupbypartner_maxweight:
             pick = picks[0]
         else:
             values = self._prepare_picking_assign(
                 cr, uid, move, context=context)
             pick = pick_obj.create(cr, uid, values, context=context)
-        return self.write(cr, uid, move_ids, {'picking_id': pick},
+        res = self.write(cr, uid, move_ids, {'picking_id': pick},
                           context=context)
