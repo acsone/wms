@@ -29,11 +29,11 @@ class StockMove(models.Model):
     def write(self, vals):
         if vals.get('state') == 'assigned' or vals.get('partially_available'):
             if self.picking_id.picking_type_subcode == 'PICK':
-                if not (self.picking_id.delivery_round_id or self.picking_id.delivery_round_dest_id):
+                if not self.picking_id.delivery_round_id:
                     delivery_round = self.env['round.instance'].find(self.picking_id.partner_id)
                     if delivery_round:
                         self.picking_id.delivery_round_id = delivery_round
                 else:
                     # reassign to propagate values to newly created dest moves pickings
-                    self.picking_id.delivery_round_id = self.picking_id.delivery_round_id or self.picking_id.delivery_round_dest_id
+                    self.picking_id.delivery_round_id = self.picking_id.delivery_round_id
         return super(StockMove, self).write(vals)

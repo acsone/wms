@@ -27,7 +27,7 @@ from openerp import api, fields, models
 
 class RoundInstance(models.Model):
     _name = 'round.instance'
-    _order = 'date desc'
+    _order = 'date desc, time asc'
 
     name = fields.Char(
         'Name',
@@ -35,10 +35,12 @@ class RoundInstance(models.Model):
         # default=lambda *a: datetime.now().strftime('%y%m%d')
         default='New',
         )
-    date = fields.Datetime(
+    date = fields.Date(
         'Date',
         required=True,
-        default=fields.Datetime.now)
+        default=fields.Date.context_today)
+    time = fields.Float(
+        'Planned Time')
     vehicle_id = fields.Many2one(
         'round.vehicle', 'Vehicle',
         ondelete='restrict')
@@ -61,7 +63,7 @@ class RoundInstance(models.Model):
         domain=[('picking_type_subcode', '=', 'PICK')],
         )
     shipping_ids = fields.One2many(
-        'stock.picking', 'delivery_round_dest_id', 'Deliveries',
+        'stock.picking', 'delivery_round_id', 'Deliveries',
         domain=[('picking_type_code', '=', 'outgoing')],
         # readonly=True,
         )
@@ -156,8 +158,10 @@ class RoundInstance(models.Model):
             weight += pack.product_id.weight * pack.product_qty
         self.count_picking_available_weight = weight
 
-    def get_action_picking_tree_available(self):
-        pass
+    @api.multi
+    def action_picking_tree_available(self):
+        return dict(self.env.ref(
+            'delivery_rounds.action_picking_tree_available_round').read()[0])
 
 
 class StockPicking(models.Model):
@@ -167,14 +171,11 @@ class StockPicking(models.Model):
     sequence = fields.Integer(
         'Seq.')
     delivery_round_id = fields.Many2one(
-        'round.instance', 'Round Instance Link')
+        'round.instance', 'Delivery Round')
     delivery_round_state = fields.Selection(
         related='delivery_round_id.state',
         store=True,
-        string="Round Instance State")
-
-    delivery_round_dest_id = fields.Many2one(
-        'round.instance', 'Round Instance')
+        string="Delivery Round State")
 
     def _get_all_from_pickings(self):
         res = set()
@@ -205,7 +206,8 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        if vals.get('delivery_round_id'):
+        if (vals.get('delivery_round_id') and
+                not self._context.get('noround_write')):
             # propagate to delivery when a picking is assigned to a delivery
             # round
             shippings = self._get_all_dest_pickings().filtered(
@@ -222,16 +224,15 @@ class StockPicking(models.Model):
                     'confirmed',
                     'partially_available',
                     'assigned') and
-                r.delivery_round_dest_id.id != vals['delivery_round_id'])
-            pickings.write(
-                {'delivery_round_dest_id': vals['delivery_round_id']})
-            vals.update({'delivery_round_dest_id': vals['delivery_round_id']})
+                r.delivery_round_id.id != vals['delivery_round_id'])
+            pickings.with_context(noround_write=True).write(
+                {'delivery_round_id': vals['delivery_round_id']})
         if 'sequence' in vals:
             # when we set a sequence on a delivery, we copy that value on the
             # pickings
             shippings = self.filtered(
                 lambda r: r.picking_type_code == 'outgoing')
-            rounds = shippings.mapped('delivery_round_dest_id')
+            rounds = shippings.mapped('delivery_round_id')
             for ri in rounds:
                 pickings = ri.picking_ids.filtered(
                     lambda r: r.partner_id.id in shippings.mapped(

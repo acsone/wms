@@ -30,3 +30,5 @@ class RoundVehicle(models.Model):
         'round.zone',
         string="Zones")
     color = fields.Integer('Color Index')
+    time = fields.Float(
+        'Planned Time')

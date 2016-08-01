@@ -40,6 +40,7 @@
         'data/sequence.xml',
         'security/ir.model.access.csv',
         'wizards/instance_zone_import.xml',
+        'wizards/make_today_delivery_plan.xml',
     ],
     'installable': True,
     'auto_install': False,

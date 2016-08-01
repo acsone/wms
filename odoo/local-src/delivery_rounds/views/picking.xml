@@ -25,7 +25,7 @@
                 <field name="sequence"/>
             </field>
             <field name="state" position="after">
-                <field name="delivery_round_dest_id"/>
+                <field name="delivery_round_id"/>
             </field>
         </field>
     </record>
@@ -46,7 +46,7 @@
                 <field name="group_id" invisible="1"/>
                 <field name="backorder_id"/>
                 <field name="state"/>
-                <field name="delivery_round_dest_id"/>
+                <field name="delivery_round_id"/>
                 <field name="priority" invisible="1"/>
                 <field name="picking_type_id" invisible="1"/>
             </tree>
@@ -70,6 +70,25 @@
         <field name="help" type="html">
           <p>
             List of pickings to process. Only pickings linked to confirmed delivery rounds are displayed.
+          </p>
+        </field>
+    </record>
+    <record id="action_picking_tree_available_round" model="ir.actions.act_window">
+        <field name="name">Stock Operations</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
+        <field name="domain">[('picking_type_subcode', '=', 'PICK')]</field>
+        <field name="context">{
+                'search_default_delivery_round_id': active_id,
+        }
+        </field>
+        <field name="view_id" ref="view_vpicktree_ro"/>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        <field name="help" type="html">
+          <p>
+            List of pickings attached to a delivery round.
           </p>
         </field>
     </record>

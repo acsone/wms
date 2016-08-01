@@ -81,7 +81,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="action_round_zone_tree" id="menu_round_zone" parent="menu_delivery_round" sequence="20"/>
+    <menuitem action="action_round_zone_tree" id="menu_round_zone" parent="menu_delivery_round_settings" sequence="20"/>
 
 
   </data>
