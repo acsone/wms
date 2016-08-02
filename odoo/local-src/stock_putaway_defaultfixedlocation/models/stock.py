@@ -19,24 +19,22 @@
 #
 ##############################################################################
 
-from openerp import api, models
+from openerp import fields, models
 
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
+class ProductPutaway(models.Model):
+    _inherit = 'product.putaway'
 
-    @api.multi
-    def write(self, vals):
-        if vals.get('state') == 'assigned' or vals.get('partially_available'):
-            for picking in self.mapped('picking_id'):
-                if picking.picking_type_subcode == 'PICK':
-                    if not picking.delivery_round_id:
-                        delivery_round = self.env['round.instance'].find(
-                            picking.partner_id)
-                        if delivery_round:
-                            picking.delivery_round_id = delivery_round
-                    else:
-                        # reassign to propagate values to newly created dest
-                        # moves pickings
-                        picking.delivery_round_id = picking.delivery_round_id
-        return super(StockMove, self).write(vals)
+    fixed_location_id = fields.Many2one(
+        'stock.location',
+        string='Default Fixed Location',
+        help="Destination fixed location when no fixed location is defined "
+             "for a product category")
+
+    def putaway_apply(self, cr, uid, putaway_strat, product, context=None):
+        res = super(ProductPutaway, self).putaway_apply(
+            cr, uid, putaway_strat, product, context=context)
+        if putaway_strat.method == 'fixed':
+            if not res:
+                return putaway_strat.fixed_location_id.id
+        return res

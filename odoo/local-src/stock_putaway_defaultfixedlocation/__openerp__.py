@@ -19,24 +19,20 @@
 #
 ##############################################################################
 
-from openerp import api, models
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    @api.multi
-    def write(self, vals):
-        if vals.get('state') == 'assigned' or vals.get('partially_available'):
-            for picking in self.mapped('picking_id'):
-                if picking.picking_type_subcode == 'PICK':
-                    if not picking.delivery_round_id:
-                        delivery_round = self.env['round.instance'].find(
-                            picking.partner_id)
-                        if delivery_round:
-                            picking.delivery_round_id = delivery_round
-                    else:
-                        # reassign to propagate values to newly created dest
-                        # moves pickings
-                        picking.delivery_round_id = picking.delivery_round_id
-        return super(StockMove, self).write(vals)
+{
+    'name': 'Stock Putaway Default Fixed Location',
+    'version': '1.0',
+    'author': "BCIM",
+    'maintainer': 'Camptocamp',
+    'category': 'Stock Management',
+    'depends': [
+        'stock',
+        ],
+    'data': [
+        'views/stock.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'license': 'AGPL-3',
+    'application': False,
+}
