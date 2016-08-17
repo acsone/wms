@@ -1,0 +1,10 @@
+customer,city,name,zip,phone,street,supplier,ref,id,vat
+False,MONMOUTH,NATURAL ANIMAL FEEDS LTD,NP25 5JA,,Wonaqtow Road Ind. Estate West,True,32420,scenario.supplier_32420,
+False,VILLERS LE BOUILLET,ALCYON CONSO INTERNE,4530,,,True,60201,scenario.supplier_60201,
+False,OLNE,AIP DEVELOPPEMENT,4877,04/2272423,Rue des Artisans 2,True,60390,scenario.supplier_60390,
+False,LILLE,DECHRA VETERINARY PRODUCTS *,2275,014/443670,Achterstenhoek 48,True,60400,scenario.supplier_60400,
+False,LIEGE,AIR LIQUIDE MEDICAL,4020,04/3498989,Quai des Vennes 8,True,60402,scenario.supplier_60402,
+False,BRIGNOLES,AFUBOX,83170,0033977077257,Rue Tourmalaute 40,True,60418,scenario.supplier_60418,
+False,LILLE,DECHRA VETERINARY PRODUCTS *,2275,011/231241,Achterstenhoek 48,True,60422,scenario.supplier_60422,
+False,KONTICH,AGFA HEALTHCARE,2550,03/4509794,Prins Boudewynlaan 5,True,60423,scenario.supplier_60423,
+False,BASECLES,AGORA SANA SCRL,7971,069/773854,Rue Porte à Camp 10-12,True,60425,scenario.supplier_60425,
