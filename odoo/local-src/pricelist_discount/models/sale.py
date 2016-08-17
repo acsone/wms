@@ -55,46 +55,51 @@ class SaleOrderLine(models.Model):
     price_unit_supplier = fields.Monetary(
         compute='_compute_amount',
         readonly=True,
-        store=True
     )
 
     price_unit_alcyon = fields.Monetary(
         compute='_compute_amount',
         readonly=True,
-        store=True
     )
 
     supplier_promotion = fields.Float(
         compute='_compute_discount',
+        inverse='_inverse_promotion_discount',
         string='Promotion (%)',
-        readonly=True,
-        digits_compute=dp.get_precision('Discount')
+        digits=dp.get_precision('Discount'),
     )
     alcyon_discount = fields.Float(
         compute='_compute_discount',
+        inverse='_inverse_promotion_discount',
         string='Discount (%)',
-        readonly=True,
-        digits_compute=dp.get_precision('Discount')
+        digits=dp.get_precision('Discount'),
     )
 
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    edited_supplier_promotion = fields.Float(
+        digits=dp.get_precision('Discount'),
+    )
+
+    edited_alcyon_discount = fields.Float(
+        digits=dp.get_precision('Discount'),
+    )
+
+    @api.depends(
+        'product_uom_qty', 'discount', 'price_unit', 'tax_id',
+        'edited_supplier_promotion', 'edited_alcyon_discount'
+    )
     def _compute_amount(self):
         """ Compute the amounts of the SO line.
         """
         for line in self:
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
 
-            price_supplier = self.apply_discount_pricelist(
-                line.product_id, line.order_id.promotion_pricelist_id, price
-            )
-
-            if not price_supplier:
-                price_alcyon = price_supplier
+            if line.edited_supplier_promotion:
+                price_supplier, price_alcyon = line._compute_discount_prices(
+                    price
+                )
             else:
-                price_alcyon = self.apply_discount_pricelist(
-                    line.product_id,
-                    line.order_id.discount_pricelist_id,
-                    price_supplier
+                price_supplier, price_alcyon = line._compute_pricelist_prices(
+                    price
                 )
 
             taxes = line.tax_id.compute_all(
@@ -110,31 +115,102 @@ class SaleOrderLine(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
 
+    def _compute_pricelist_prices(self, price):
+        """ Compute supplier_unit_price and alcyon_unit_price based on
+        price_unit and sale.order pricelists.
+        """
+        self.ensure_one()
+
+        price_supplier = self.apply_discount_pricelist(
+            self.product_id, self.order_id.promotion_pricelist_id, price
+        )
+
+        if not price_supplier:
+            price_alcyon = price_supplier
+        else:
+            price_alcyon = self.apply_discount_pricelist(
+                self.product_id,
+                self.order_id.discount_pricelist_id,
+                price_supplier
+            )
+        return price_supplier, price_alcyon
+
+    def _compute_discount_prices(self, price):
+        """ Compute supplier_unit_price and alcyon_unit_price based on
+        price_unit and supplier_promotion / alcyon_discount.
+        """
+
+        self.ensure_one()
+
+        currency_round = self.order_id.currency_id.round
+
+        price_supplier = currency_round(
+            price * (1 - (self.edited_supplier_promotion or 0) / 100.0)
+        )
+
+        if not price_supplier:
+            price_alcyon = price_supplier
+        else:
+            price_alcyon = currency_round(
+                price_supplier * (
+                    1 - (self.edited_alcyon_discount or 0) / 100.0
+                )
+            )
+
+        return price_supplier, price_alcyon
+
     @api.depends('price_unit_supplier', 'price_unit_alcyon')
     def _compute_discount(self):
         """ Compute supplier_promotion and alcyon_discount percentages.
         """
         for line in self:
-            if not line.price_unit:
-                line.supplier_promotion = 0
-                line.alcyon_discount = 0
+            if line.edited_supplier_promotion:
+                line.supplier_promotion = line.edited_supplier_promotion
+                line.alcyon_discount = line.edited_alcyon_discount
+
             else:
-                price_unit = line.price_unit
-                price_supplier = line.price_unit_supplier
-                price_alcyon = line.price_unit_alcyon
-
-                if not price_supplier:
-                    line.supplier_promotion = 100
+                if not line.price_unit:
+                    line.supplier_promotion = 0
                     line.alcyon_discount = 0
-
                 else:
-                    line.supplier_promotion = (
-                        (1.0 - price_supplier / price_unit) * 100
-                    )
+                    price_unit = line.price_unit
+                    price_supplier = line.price_unit_supplier
+                    price_alcyon = line.price_unit_alcyon
 
-                    line.alcyon_discount = (
-                        (1.0 - price_alcyon / price_supplier) * 100
-                    )
+                    if not price_supplier:
+                        line.supplier_promotion = 100
+                        line.alcyon_discount = 0
+
+                    else:
+                        line.supplier_promotion = (
+                            (1.0 - price_supplier / price_unit) * 100
+                        )
+
+                        line.alcyon_discount = (
+                            (1.0 - price_alcyon / price_supplier) * 100
+                        )
+
+    def _inverse_promotion_discount(self):
+        for line in self:
+            line.update({
+                'edited_supplier_promotion': line.supplier_promotion,
+                'edited_alcyon_discount': line.alcyon_discount
+            })
+
+    @api.onchange('supplier_promotion', 'alcyon_discount')
+    def onchange_promotion_discount(self):
+        """ Force inverse call on discount to fill manual discounts.
+        """
+        self._inverse_promotion_discount()
+
+    @api.onchange('product_id')
+    def onchange_product_id_reset_discount(self):
+        """ If product of order line is changed, we reset the manual discount.
+        """
+        self.update({
+            'edited_supplier_promotion': False,
+            'edited_alcyon_discount': False
+        })
 
     @staticmethod
     def apply_discount_pricelist(product, pricelist, price):

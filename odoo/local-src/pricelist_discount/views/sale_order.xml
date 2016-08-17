@@ -15,11 +15,13 @@
             <!-- In form view replace discount by supplier_promotion and alcyon_discount -->
             <xpath expr="//div[@name='discount']" position="replace">
                 <div name="supplier_promotion">
+                    <field name="edited_supplier_promotion" invisible="1"/>
                     <field name="supplier_promotion" class="oe_inline"/>
                     %%
                 </div>
 
                 <div name="alcyon_discount">
+                    <field name="edited_alcyon_discount" invisible="1"/>
                     <field name="alcyon_discount" class="oe_inline"/>
                     %%
                 </div>
@@ -27,7 +29,9 @@
             <!-- Tree view of order_lines used in SO -->
             <xpath expr="//tree/field[@name='discount']" position="replace">
                 <field name="supplier_promotion"/>
+                <field name="edited_supplier_promotion" invisible="1"/>
                 <field name="alcyon_discount"/>
+                <field name="edited_alcyon_discount" invisible="1"/>
             </xpath>
         </field>
     </record>
