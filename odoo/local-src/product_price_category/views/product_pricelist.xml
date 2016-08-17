@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <field name="applied_on" position="after">
                 <field name="price_category_id"
-                       attrs="{'invisible':[('applied_on', '!=', '4_product_price_category')], 'required':[('applied_on', '=', '4_product_price_category')]}"/>
+                       attrs="{'invisible':[('applied_on', '!=', '2b_product_price_category')], 'required':[('applied_on', '=', '2b_product_price_category')]}"/>
             </field>
         </field>
     </record>

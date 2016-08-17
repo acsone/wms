@@ -222,7 +222,7 @@ class ProductPricelistItem(models.Model):
     _inherit = 'product.pricelist.item'
 
     applied_on = fields.Selection(
-        selection_add=[('4_product_price_category', 'Price Category')]
+        selection_add=[('2b_product_price_category', 'Price Category')]
     )
 
     price_category_id = fields.Many2one(
@@ -238,7 +238,7 @@ class ProductPricelistItem(models.Model):
         """ Reset the price_category_id value if applied_on
         is not price_category
         """
-        if self.applied_on != '4_product_price_category':
+        if self.applied_on != '2b_product_price_category':
             self.price_category_id = False
 
     @api.depends('price_category_id')

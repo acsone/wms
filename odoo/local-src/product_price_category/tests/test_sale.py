@@ -27,7 +27,7 @@ class TestSale(TransactionCase):
             'name': 'Unittest Pricelist',
             'item_ids': [
                 (0, False, {
-                    'applied_on': '4_product_price_category',
+                    'applied_on': '2b_product_price_category',
                     'price_category_id': price_category_2.id,
                     'compute_price': 'percentage',
                     'percent_price': 5,
