@@ -23,6 +23,8 @@ odoo:
     - LIMIT_REQUEST=${LIMIT_REQUEST}
     - LIMIT_TIME_CPU=${LIMIT_TIME_CPU}
     - LIMIT_TIME_REAL=${LIMIT_TIME_REAL}
+    - MARABUNTA_ALLOW_SERIE=True
+    - MARABUNTA_MODE=demo
 
 db:
   image: camptocamp/postgresql:pg9.5-latest

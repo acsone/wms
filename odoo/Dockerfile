@@ -1,4 +1,4 @@
-FROM camptocamp/odoo-project:9.0
+FROM camptocamp/odoo-project:9.0-1.2.1
 MAINTAINER Camptocamp
 
 # Install additional debian packages if needed
@@ -17,4 +17,8 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/enterprise, \
   /opt/odoo/external-src/server-tools, \
   /opt/odoo/external-src/stock-logistics-workflow, \
-  /opt/odoo/src/addons"
+  /opt/odoo/src/addons" \
+  LIMIT_TIME_CPU=86400 \
+  LIMIT_TIME_REAL=86400 \
+  LIMIT_MEMORY_SOFT=1342177280 \
+  LIMIT_MEMORY_HARD=1610612736

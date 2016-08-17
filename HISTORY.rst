@@ -19,6 +19,8 @@ Unreleased
 
 * Extend the server timeout of HAProxy on Rancher to 6h to align with the nginx
   option (we can have very long requests on Odoo!)
+* Now using the new migration stack (anthem and marabunta), oerpscenario is
+  deprecated
 
 **Documentation**
 
