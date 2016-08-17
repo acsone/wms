@@ -27,6 +27,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
+        'stock_picking_subcode',
         ],
     'data': [
         'views/menu.xml',
