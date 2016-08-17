@@ -1,0 +1,13 @@
+lb:
+  ports:
+  - 443:80
+  external_links:
+  - alcyon-odoo-integration/nginx:nginx
+  - alcyon-odoo-test/nginx:nginx
+  labels:
+    io.rancher.loadbalancer.ssl.ports: '443'
+    io.rancher.loadbalancer.target.alcyon-odoo-test/nginx: erp-test.alcyonbelux.be:443
+    io.rancher.loadbalancer.target.alcyon-odoo-integration/nginx: erp-integration.alcyonbelux.be:443
+  tty: true
+  image: rancher/load-balancer-service
+  stdin_open: true
