@@ -6,7 +6,7 @@
     'name': 'Product Price Category',
     'summary': 'Add Price Category field on product and allow to apply '
                'a pricelist on this field.',
-    'version': '9.0.1.0.0',
+    'version': '9.0.1.0.1',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
     'category': 'Product',
