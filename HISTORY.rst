@@ -8,7 +8,12 @@ Unreleased
 
 **Features and Improvements**
 
+* Make supplier_promotion and alcyon_discount editable.
+* Update demo csv files with AS400 imported data
+
 **Bugfixes**
+
+* Fix the applied_on order for pricelist item.
 
 **Build**
 
