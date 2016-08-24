@@ -4,6 +4,10 @@
 
 import pickle
 
+from pkg_resources import Requirement
+
+req = Requirement.parse('alcyon-odoo')
+
 
 def create_default_value(ctx, model, field, value, company_id):
     ctx.env.cr.execute("""

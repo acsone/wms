@@ -12,7 +12,7 @@ from anthem.lyrics.loaders import load_csv_stream
 @anthem.log
 def import_banks(ctx, req):
     """ Importing banks """
-    content = resource_stream(req, 'data/setup/res.bank.csv')
+    content = resource_stream(req, 'data/demo/res.bank.csv')
     load_csv_stream(ctx, 'res.bank', content, delimiter=',')
 
 
