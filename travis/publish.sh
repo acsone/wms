@@ -9,7 +9,7 @@ function deploy {
     TEMPLATE_DIR="${PWD}/rancher/${version}"
     openssl aes-256-cbc -K $encrypted_b48a3d2c67c7_key -iv $encrypted_b48a3d2c67c7_iv -in .rancher.env.enc -out "$HOME/.rancher.env" -d
     (. "$HOME/.rancher.env" ; cd "${TEMPLATE_DIR}" && \
-     ${RANCHER_COMPOSE} -p "${RANCHER_STACK_NAME}" rm --force && \
+     ${RANCHER_COMPOSE} -p "${RANCHER_STACK_NAME}" rm odoo db --force && \
      sleep 30 && \
      ${RANCHER_COMPOSE} -p "${RANCHER_STACK_NAME}" up --pull --recreate --force-recreate --confirm-upgrade -d)
 }

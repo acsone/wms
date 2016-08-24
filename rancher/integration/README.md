@@ -49,7 +49,7 @@ Things to check:
 2. stop and drop the services if they are running
 
   ```
-  rancher-compose -p alcyon-odoo-integration rm --force
+  rancher-compose -p alcyon-odoo-integration rm odoo db --force
   ```
 
 3. start the new stack
