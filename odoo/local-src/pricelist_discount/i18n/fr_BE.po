@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-07 11:54+0000\n"
-"PO-Revision-Date: 2016-07-07 11:54+0000\n"
+"POT-Creation-Date: 2016-08-18 08:37+0000\n"
+"PO-Revision-Date: 2016-08-18 08:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,25 +16,40 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_main_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_discount_pricelist_id
+msgid "Alcyon Discount"
+msgstr "Remise Alcyon"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_id
+msgid "Alcyon Discount Pricelist"
+msgstr "Liste Remises Alcyon"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_alcyon_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_alcyon_discount
 msgid "Discount (%)"
 msgstr "Remise (%)"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_second_discount
-msgid "Discount 2 (%)"
-msgstr "Remise 2 (%)"
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_edited_alcyon_discount
+msgid "Edited alcyon discount"
+msgstr "Edited alcyon discount"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_id
-#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_discount_pricelist_id
-msgid "Discount Pricelist"
-msgstr "Liste de prix remise"
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_edited_supplier_promotion
+msgid "Edited supplier promotion"
+msgstr "Edited supplier promotion"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,help:pricelist_discount.field_sale_order_discount_pricelist_id
-msgid "Discount Pricelist for current sales order."
-msgstr "Liste de prix remise pour le bon de commande actuel"
+#: model:ir.model,name:pricelist_discount.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: pricelist_discount
+#: model:ir.model,name:pricelist_discount.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de facturation"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_res_partner
@@ -42,29 +57,16 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: pricelist_discount
-#: model:ir.model,name:pricelist_discount.model_product_pricelist
-msgid "Pricelist"
-msgstr "Liste de prix"
+#: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_price_unit_alcyon
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_price_unit_alcyon
+msgid "Price unit alcyon"
+msgstr "Price unit alcyon"
 
 #. module: pricelist_discount
-#: model:ir.model,name:pricelist_discount.model_product_product
-msgid "Product"
-msgstr "Produit"
-
-#. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_product_product_alert_time
-msgid "Product Alert Time"
-msgstr "Délai avant alerte"
-
-#. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_product_product_life_time
-msgid "Product Life Time"
-msgstr "Délai de consommation"
-
-#. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_product_product_removal_time
-msgid "Product Removal Time"
-msgstr "Délai avant retrait"
+#: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_price_unit_supplier
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_price_unit_supplier
+msgid "Price unit supplier"
+msgstr "Price unit supplier"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_product_template
@@ -72,9 +74,10 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_product_product_use_time
-msgid "Product Use Time"
-msgstr "Délai d'utilisation optimale"
+#: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_supplier_promotion
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_supplier_promotion
+msgid "Promotion (%)"
+msgstr "Promotion (%)"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_sale_order
@@ -87,22 +90,12 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,help:pricelist_discount.field_product_product_alert_time
-msgid "When a new a Serial Number is issued, this is the number of days before an alert should be notified."
-msgstr "Quand un nouveau numéro de lot est créé, c'est le nombre de jours avant qu'une alerte soit remontée."
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_promotion_pricelist_id
+msgid "Supplier Promotion"
+msgstr "Promotion fournisseur"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,help:pricelist_discount.field_product_product_life_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods may become dangerous and must not be consumed."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises deviennent dangereuses et ne doivent plus être consommées."
-
-#. module: pricelist_discount
-#: model:ir.model.fields,help:pricelist_discount.field_product_product_removal_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods should be removed from the stock."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours après lesquels les marchandises doivent être enlevées du stock."
-
-#. module: pricelist_discount
-#: model:ir.model.fields,help:pricelist_discount.field_product_product_use_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods starts deteriorating, without being dangerous yet."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_promotion_pricelist_id
+msgid "Supplier Promotion Pricelist"
+msgstr "Liste Promotions Fournisseur"
 

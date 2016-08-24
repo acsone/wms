@@ -90,16 +90,17 @@ class AccountInvoiceLine(models.Model):
         discount percentages.
         """
         for line in self:
+            currency_round = line.invoice_id.currency_id.round
             if not line.price_unit:
                 supplier_price = 0.0
                 alcyon_price = 0.0
             else:
-                supplier_price = line.price_unit * (
+                supplier_price = currency_round(line.price_unit * (
                     1 - (line.supplier_promotion or 0.0) / 100.0
-                )
-                alcyon_price = supplier_price * (
+                ))
+                alcyon_price = (supplier_price * (
                     1 - (line.alcyon_discount or 0.0) / 100.0
-                )
+                ))
             line.update({
                 'price_unit_supplier': supplier_price,
                 'price_unit_alcyon': alcyon_price,
