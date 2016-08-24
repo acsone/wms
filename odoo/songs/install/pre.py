@@ -3,13 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from base64 import b64encode
-from pkg_resources import Requirement, resource_string
+from pkg_resources import resource_string
 
 import anthem
+from ..common import req
 
 
 @anthem.log
-def setup_company(ctx, req):
+def setup_company(ctx):
     """ Configuring company data """
     company = ctx.env.ref('base.main_company')
     company.write({
@@ -48,6 +49,5 @@ def setup_language(ctx):
 @anthem.log
 def main(ctx):
     """ Executing main entry point called before upgrade of addons """
-    req = Requirement.parse('alcyon-odoo')
     setup_language(ctx)
-    setup_company(ctx, req)
+    setup_company(ctx)

@@ -2,15 +2,17 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import Requirement, resource_stream
+from pkg_resources import resource_stream
 
 import anthem
 from anthem.lyrics.records import create_or_update
 from anthem.lyrics.loaders import load_csv_stream
 
+from ..common import req
+
 
 @anthem.log
-def import_banks(ctx, req):
+def import_banks(ctx):
     """ Importing banks """
     content = resource_stream(req, 'data/demo/res.bank.csv')
     load_csv_stream(ctx, 'res.bank', content, delimiter=',')
@@ -150,9 +152,7 @@ def create_financial_journals(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring accounting """
-    req = Requirement.parse('alcyon-odoo')
-
-    import_banks(ctx, req)
+    import_banks(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
     create_bank_accounts(ctx)
