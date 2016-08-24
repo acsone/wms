@@ -1,4 +1,6 @@
 id,name
-scenario.product_price_category_a,"Catégory A"
-scenario.product_price_category_b,"Catégory B"
-scenario.product_price_category_c,"Catégory C"
+scenario.product_price_category_ali,ALI
+scenario.product_price_category_alg,ALG
+scenario.product_price_category_alh,ALH
+scenario.product_price_category_gma,GMA
+scenario.product_price_category_imp,IMP

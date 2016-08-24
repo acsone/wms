@@ -21,13 +21,13 @@ Feature: import master data
     WHERE id in (SELECT res_id FROM ir_model_data WHERE module = 'scenario' AND name = 'ir_values_default_product_template_type')
     """
 
-  @csv @suppliers_import
-  Scenario: import specific suppliers
-    Given "res.partner" is imported from CSV "setup/suppliers.csv" using delimiter ","
-
-  @csv @clients_import
+  @csv @partner_import
   Scenario: import specific clients
-    Given "res.partner" is imported from CSV "setup/clients.csv" using delimiter ","
+    Given "res.partner" is imported from CSV "setup/customer.csv" using delimiter ","
+
+  @csv @partner_import
+  Scenario: import specific clients
+    Given "res.partner" is imported from CSV "setup/supplier.csv" using delimiter ","
 
   @csv @stock_bin_import
   Scenario: import locators (stock bin)
@@ -41,13 +41,17 @@ Feature: import master data
   Scenario: import specific product
     Given "product.price.category" is imported from CSV "setup/product.price.category.csv" using delimiter ","
 
-  @csv @product_import
-  Scenario: import specific product
-    Given "product.template" is imported from CSV "setup/product.template.csv" using delimiter ","
-
   @csv @product_import @stock
   Scenario: import specific product
-    Given "product.template" is imported from CSV "setup/products.csv" using delimiter ";"
+    Given "product.product" is imported from CSV "setup/product.csv" using delimiter ","
+    Given  I execute the SQL commands
+    """
+    UPDATE product_template SET active=False WHERE id IN (SELECT product_tmpl_id FROM product_product WHERE not active);
+    """
+
+  @csv @product_import @supplierinfo
+  Scenario: import specific product supplierinfo
+    Given "product.supplierinfo" is imported from CSV "setup/supplierinfo.csv" using delimiter ","
 
   @csv @product_import @pricelist
   Scenario: import specific product
