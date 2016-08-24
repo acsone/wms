@@ -4,6 +4,9 @@ As we use GitHub private repositories and the private Docker Hub, you must be
 able to connect to both of them. This guide is not complete yet as the
 deployment process is not yet a thing.
 
+See also: [Automated rancher build](rancher.md) for the test instance
+deployment using Rancher.
+
 ### Docker
 ```bash
 docker login
