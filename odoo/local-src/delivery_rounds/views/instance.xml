@@ -113,6 +113,7 @@
         <field name="arch" type="xml">
             <form string="Delivery Round">
                 <header>
+                    <button name="button_deliver" type="object" string="Deliver" states="open" class="oe_highlight"/>
                     <field name="state" widget="statusbar" clickable="True"/>
                 </header>
                 <div class="oe_title">
@@ -135,14 +136,13 @@
                     <page string="Deliveries">
                         <field name="shipping_ids" widget="many2many"
                             options="{'no_create': True}"
-                            domain="[('picking_type_subcode', '=', 'PICK'), ('delivery_round_id', '=', False), ('state', 'in', ('partially_available', 'assigned'))]"
                             context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
                             >
                         </field>
                     </page>
                     <page string="Pickings">
-                        <field name="picking_ids" widget="many2many" 
-                            options="{'no_create': True}"
+                        <field name="picking_ids" widget="many2many"
+                            options="{'no_create': True, 'not_delete': True}"
                             domain="[('picking_type_subcode', '=', 'PICK'), ('delivery_round_id', '=', False), ('state', 'in', ('partially_available', 'assigned'))]"
                             />
                     </page>

@@ -38,11 +38,15 @@ class RoundInstance(models.Model):
     date = fields.Date(
         'Date',
         required=True,
+        states={'done': [('readonly', True)]},
         default=fields.Date.context_today)
     time = fields.Float(
-        'Planned Time')
+        'Planned Time',
+        states={'done': [('readonly', True)]},
+        )
     vehicle_id = fields.Many2one(
         'round.vehicle', 'Vehicle',
+        states={'done': [('readonly', True)]},
         ondelete='restrict')
     color = fields.Integer(
         related='vehicle_id.color')
@@ -61,17 +65,14 @@ class RoundInstance(models.Model):
     picking_ids = fields.One2many(
         'stock.picking', 'delivery_round_id', 'Pickings',
         domain=[('picking_type_subcode', '=', 'PICK')],
+        states={'done': [('readonly', True)]},
         )
     shipping_ids = fields.One2many(
         'stock.picking', 'delivery_round_id', 'Deliveries',
         domain=[('picking_type_code', '=', 'outgoing')],
+        states={'done': [('readonly', True)]},
         # readonly=True,
         )
-
-    # picking_ids = fields.One2many(
-    #     'stock.picking', 'delivery_round_id', 'Deliveries',
-    #     domain=[('picking_type_code', '=', 'outgoing'),
-    #             ('state', '!=', 'done')])
 
     @api.model
     def create(self, vals):
@@ -110,7 +111,7 @@ class RoundInstance(models.Model):
         pickings.write({'delivery_round_id': self.id})
 
     def find(self, partner_id):
-        # find a delivery_round for this partner otherwise create one
+        """ Find a delivery_round for this partner otherwise create one """
         zone_ids = partner_id.round_zone_ids.mapped('zone_id.id')
         instance = self.search([
             ('state', '=', 'draft'),
@@ -163,6 +164,29 @@ class RoundInstance(models.Model):
         return dict(self.env.ref(
             'delivery_rounds.action_picking_tree_available_round').read()[0])
 
+    @api.one
+    def button_deliver(self):
+        """ Validate all deliveries that are available. Mark as done and unlink
+        other deliveries """
+        for shipping in self.shipping_ids:
+            if shipping.state in ('assigned', 'partially_available'):
+                for pack in shipping.pack_operation_ids:
+                    if pack.product_qty > 0:
+                        pack.write({'qty_done': pack.product_qty})
+                    else:
+                        pack.unlink()
+                shipping.do_transfer()
+        self.button_done()
+
+    @api.one
+    def button_done(self):
+        """ Mark as done and unlink waiting deliveries
+        """
+        self.state = 'done'
+        for shipping in self.shipping_ids:
+            if shipping.state == 'waiting':
+                shipping.delivery_round_id = False
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -206,10 +230,10 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        if (vals.get('delivery_round_id') and
+        if ('delivery_round_id' in vals and
                 not self._context.get('noround_write')):
-            # propagate to delivery when a picking is assigned to a delivery
-            # round
+            # propagate to delivery when a picking is (un)assigned to a
+            # delivery round
             shippings = self._get_all_dest_pickings().filtered(
                 lambda r: r.picking_type_code == 'outgoing')
             # ensure all related pickings are assigned to the same delivery
@@ -239,11 +263,3 @@ class StockPicking(models.Model):
                         'partner_id.id'))
                 pickings.write({'sequence': vals['sequence']})
         return super(StockPicking, self).write(vals)
-
-
-# class StockMove(models.Model):
-#     _inherit = 'stock.move'
-#
-#     delivery_round_id = fields.Many2one(
-#         'round.instance', 'Round Instance',
-#         readonly=True)
