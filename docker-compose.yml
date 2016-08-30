@@ -2,49 +2,32 @@ version: '2'
 
 services:
   odoo:
-    tty: true
-    stdin_open: true
     build: ./odoo/
-    command: ""
-    ports:
-      - 8069
-      - 8072
     volumes:
-      # for dev only (todo: add configuration files per env)
-      - "./odoo/src:/opt/odoo/src"
-      - "./odoo/local-src:/opt/odoo/local-src"
-      - "./odoo/external-src:/opt/odoo/external-src"
-      - "./odoo/features:/opt/odoo/features"
-      - "./odoo/data:/opt/odoo/data"
       - "data-odoo:/data/odoo"
     depends_on:
       - db
     environment:
-      - SCENARIO_MAIN_TAG=alcyon
       - DB_USER=odoo
       - DB_PASSWORD=odoo
       - DB_NAME=odoodb
       - ADMIN_PASSWD=mijaebohb8Thae1g
-      - LIMIT_TIME_CPU=5000
-      - LIMIT_TIME_REAL=5000
       - RUNNING_ENV=dev
-      - DEMO=scenario
 
   db:
-    image: postgres:9.5
+    image: camptocamp/postgresql:pg9.5-latest
     environment:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
+      - PG_SYSTEM_SHARED_BUFFERS=256MB
+      - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
+      - PG_SYSTEM_WAL_BUFFERS=8MB
+      - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
     volumes:
       - "data-db:/var/lib/postgresql/data"
-    ports:
-      - 5432
 
-  # can be useful for dev when longpolling is required
   nginx:
     image: camptocamp/odoo-nginx:9.0
-    ports:
-      - 80:80
     depends_on:
       - odoo
 

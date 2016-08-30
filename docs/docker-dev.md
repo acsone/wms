@@ -134,8 +134,6 @@ docker-compose run --rm odoo odoo.py --workers=0 ... additional arguments
 docker-compose run --rm -p 8069:8069 odoo odoo.py
 # open an odoo shell
 docker-compose run --rm odoo odoo.py shell  
-# run scenario tag @setup
-docker-compose run --rm odoo bin/oerpscenario -t@setup
 ```
 
 
