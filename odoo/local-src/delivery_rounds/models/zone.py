@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class RoundZone(models.Model):
@@ -40,14 +40,14 @@ class RoundZone(models.Model):
     #     'round.vehicle', 'Vehicle',
     #     ondelete='restrict')
 
-    #@api.model
-    #def _group_vehicle(self, ids, domain, **kwargs):
-    #    vehicle = self.env['round.vehicle'].search([]).name_get()
-    #    return vehicle, None
+    # @api.model
+    # def _group_vehicle(self, ids, domain, **kwargs):
+    #     vehicle = self.env['round.vehicle'].search([]).name_get()
+    #     return vehicle, None
 
-    #_group_by_full = {
-    #    'vehicle_id': _group_vehicle,
-    #}
+    # _group_by_full = {
+    #     'vehicle_id': _group_vehicle,
+    # }
 
 
 class RoundZonePosition(models.Model):

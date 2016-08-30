@@ -28,7 +28,7 @@
     'depends': [
         'stock',
         ],
-    'data' : [
+    'data': [
         'views/product.xml',
         'views/stock.xml',
         'security/ir.model.access.csv',

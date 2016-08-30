@@ -37,7 +37,8 @@ class RoundZoneImport(models.TransientModel):
             return act_close
         assert len(instance_ids) == 1, "Only 1 ID expected"
         instance = self.env['round.instance'].browse(instance_ids)
-        partner_ids = self.zone_id.partner_position_ids.mapped('partner_id.id')
+        # partner_ids = self.zone_id.partner_position_ids.mapped(
+        #   'partner_id.id')
         positions = {}
         for pos in self.zone_id.partner_position_ids:
             positions[pos.partner_id.id] = pos.sequence
@@ -48,10 +49,12 @@ class RoundZoneImport(models.TransientModel):
 
         # set sequence on deliveries according to sequence defined in the zone
         shippings = instance.shipping_ids
-        last_seq = max([1] + shippings.mapped('sequence'))
+        # last_seq = max([1] + shippings.mapped('sequence'))
         for shipping in shippings:
             if not shipping.sequence:
-                # shipping.sequence = last_seq + positions[shipping.partner_id.id]
-                shipping.sequence = self.zone_id.sequence*10000 + positions[shipping.partner_id.id]
+                # shipping.sequence = last_seq + positions[
+                #   shipping.partner_id.id]
+                shipping.sequence = self.zone_id.sequence*10000 + positions[
+                    shipping.partner_id.id]
 
         return act_close
