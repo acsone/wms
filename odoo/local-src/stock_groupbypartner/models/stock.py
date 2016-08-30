@@ -41,6 +41,7 @@ class StockMove(models.Model):
         (moves should already have them identical) Otherwise, create a new
         picking to Assign them to.
         """
+        # FIXME TODO: does not work for MTO products.
         move = self.browse(cr, uid, move_ids, context=context)[0]
         if not move.picking_type_id.groupbypartner:
             return super(StockMove, self)._picking_assign(
@@ -56,7 +57,6 @@ class StockMove(models.Model):
                                  'partially_available', 'assigned'])
             ], limit=1, context=context)
         # check weight
-        import pdb;pdb.set_trace()
         total_weight = 0.0
         pickings = self.pool['stock.picking'].browse(cr, uid, picks, context=context)
         if move.picking_type_id.groupbypartner_maxweight:
