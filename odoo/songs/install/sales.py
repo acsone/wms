@@ -36,10 +36,17 @@ def import_uom(ctx):
     load_csv_stream(ctx, 'product.uom', content, delimiter=',')
 
 @anthem.log
+def import_crm_team(ctx):
+    """ Importing sales teams """
+    content = resource_stream(req, 'data/demo/crm.team.csv')
+    load_csv_stream(ctx, 'crm.team', content, delimiter=',')
+
+@anthem.log
 def main(ctx):
     """ run scenario """
     sale_setup(ctx)
     import_price_categories(ctx)
     import_uom(ctx)
+    import_crm_team(ctx)
 
 
