@@ -75,6 +75,15 @@ class RoundInstance(models.Model):
         )
 
     @api.model
+    @api.depends('vehicle_id', 'date', 'time')
+    def name_get(self):
+        res = []
+        for rec in self:
+            res.append((rec.id, '%s %s - %s' % (
+                rec.date, rec.time, rec.vehicle_id.display_name)))
+        return res
+
+    @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code(
@@ -263,3 +272,27 @@ class StockPicking(models.Model):
                         'partner_id.id'))
                 pickings.write({'sequence': vals['sequence']})
         return super(StockPicking, self).write(vals)
+
+    @api.model
+    def _group_delivery_round(self, ids, domain, **kwargs):
+        vehicle = self.env['round.instance'].search(
+            [('state', 'in', ('draft', ))]).name_get()
+        return vehicle, None
+
+    _group_by_full = {
+        'delivery_round_id': _group_delivery_round,
+    }
+
+
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
+
+    @api.multi
+    def get_action_picking_tree_ready(self):
+        """ Add filter for 'To Do' picking from dashboard to activate a filter
+        to display only pickings linked to open delivery round """
+        res = super(StockPickingType, self).get_action_picking_tree_ready()
+        if self.subcode == 'PICK':
+            res['context'] = res['context'].replace(
+                ',', ", 'search_default_delivery_round_state': 'open', ", 1)
+        return res

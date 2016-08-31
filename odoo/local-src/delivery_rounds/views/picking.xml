@@ -20,17 +20,6 @@
         </field>
     </record>
 
-    <record id="stock.action_picking_tree_ready" model="ir.actions.act_window">
-        <field name="context">{
-                'search_default_picking_type_id': [active_id],
-                'default_picking_type_id': active_id,
-                'contact_display': 'partner_address',
-                'search_default_available': 1,
-                'search_default_delivery_round_state': 'open',
-        }
-        </field>
-    </record>
-
     <record id="view_vpicktree" model="ir.ui.view">
         <field name="name">stock.picking.tree.round</field>
         <field name="model">stock.picking</field>
