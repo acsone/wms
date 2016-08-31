@@ -84,27 +84,27 @@ class GRN(models.Model):
                 cr, uid, 'stock.grn', context=c),
     }
 
-    #@api.multi
-    #def name_get(self):
-    #    """ Read the stored complete_name field """
-    #    res = []
-    #    for record in self:
-    #        name = record.name
-    #        if record.ref:
-    #            name = '[%s] %s' % (record.ref, name)
-    #        if record.origin:
-    #            name = '%s (%s)' % (name, record.origin)
-    #        res.append((record.id, name))
-    #    return res
+    # @api.multi
+    # def name_get(self):
+    #     """ Read the stored complete_name field """
+    #     res = []
+    #     for record in self:
+    #         name = record.name
+    #         if record.ref:
+    #             name = '[%s] %s' % (record.ref, name)
+    #         if record.origin:
+    #             name = '%s (%s)' % (name, record.origin)
+    #         res.append((record.id, name))
+    #     return res
 
-    #@api.model
-    #def name_search(self, name='', args=None, operator='ilike', limit=100):
-    #    """ Perform name search on name only """
-    #    name = name.split(']')[-1]
-    #    name = name.split('(')[-1]
-    #    name = name.strip()
-    #    return super(GRN, self).name_search(
-    #        name, args=args, operator=operator, limit=limit)
+    # @api.model
+    # def name_search(self, name='', args=None, operator='ilike', limit=100):
+    #     """ Perform name search on name only """
+    #     name = name.split(']')[-1]
+    #     name = name.split('(')[-1]
+    #     name = name.strip()
+    #     return super(GRN, self).name_search(
+    #         name, args=args, operator=operator, limit=limit)
 
     @api.multi
     def print_label(self):
