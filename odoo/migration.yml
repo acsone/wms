@@ -30,6 +30,7 @@ migration:
         upgrade:
           #### core
           - account
+          - account_accountant
           - document
           - sale
           - sale_stock
