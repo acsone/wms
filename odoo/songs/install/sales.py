@@ -2,8 +2,11 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from pkg_resources import resource_stream
+
 import anthem
-from anthem.lyrics.records import create_or_update
+from anthem.lyrics.loaders import load_csv_stream
+from ..common import req
 
 @anthem.log
 def sale_setup(ctx):
@@ -28,7 +31,15 @@ def import_price_categories(ctx):
 
 @anthem.log
 def import_uom(ctx):
-    """ Importing output locations from csv"""
+    """ Importing unit of measure """
     content = resource_stream(req, 'data/demo/product.uom.csv')
-    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    load_csv_stream(ctx, 'product.uom', content, delimiter=',')
+
+@anthem.log
+def main(ctx):
+    """ run scenario """
+    sale_setup(ctx)
+    import_price_categories(ctx)
+    import_uom(ctx)
+
 
