@@ -8,11 +8,12 @@ import anthem
 from anthem.lyrics.loaders import load_csv_stream
 from ..common import req
 
+
 @anthem.log
 def sale_setup(ctx):
     """ Settings for the Sale module """
     employee_group = ctx.env.ref('base.group_user')
-    
+
     # Active multi Unit of measure
     employee_group.write({
         'implied_ids': [(4, ctx.env.ref('product.group_uom').id)]
@@ -20,8 +21,11 @@ def sale_setup(ctx):
 
     # Active sales prices based formula
     employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('product.group_pricelist_item').id),(4, ctx.env.ref('product.group_sale_pricelist').id)]
-    })    
+        'implied_ids': [
+         (4, ctx.env.ref('product.group_pricelist_item').id),
+         (4, ctx.env.ref('product.group_sale_pricelist').id)]
+    })
+
 
 @anthem.log
 def import_price_categories(ctx):
@@ -29,17 +33,20 @@ def import_price_categories(ctx):
     content = resource_stream(req, 'data/demo/product.price.category.csv')
     load_csv_stream(ctx, 'product.price.category', content, delimiter=',')
 
+
 @anthem.log
 def import_uom(ctx):
     """ Importing unit of measure """
     content = resource_stream(req, 'data/demo/product.uom.csv')
     load_csv_stream(ctx, 'product.uom', content, delimiter=',')
 
+
 @anthem.log
 def import_crm_team(ctx):
     """ Importing sales teams """
     content = resource_stream(req, 'data/demo/crm.team.csv')
     load_csv_stream(ctx, 'crm.team', content, delimiter=',')
+
 
 @anthem.log
 def main(ctx):
@@ -48,5 +55,3 @@ def main(ctx):
     import_price_categories(ctx)
     import_uom(ctx)
     import_crm_team(ctx)
-
-
