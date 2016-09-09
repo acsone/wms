@@ -3,12 +3,12 @@ COUGH LINCTUS 500ML,0,product.product_uom_unit,0021830,True,,scenario.product_00
 ESTIFOR 500GR CHIEN/CHAT,0.600,product.product_uom_unit,3241019,True,,scenario.product_3241019,product.product_uom_unit
 FORFAIT DEPLACEMENT,0,product.product_uom_unit,7750013,True,scenario.product_price_category_gma,scenario.product_7750013,product.product_uom_unit
 GUIDE SONDE BIVONA VGW,0,product.product_uom_unit,6020117,True,scenario.product_price_category_gma,scenario.product_6020117,product.product_uom_unit
-AIMANT CAGE BOVIMAX BOVIN AIP 12P,1.860,product.product_uom_unit,5039027,True,scenario.product_price_category_gma,scenario.product_5039027,product.product_uom_unit
+AIMANT CAGE BOVIMAX BOVIN AIP 12P,1.860,scenario.product_uom_boite,5039027,True,scenario.product_price_category_gma,scenario.product_5039027,scenario.product_uom_boite
 ANANXIVIA CHAT/PETIT CHIEN 30 GELULES,0.030,product.product_uom_unit,5039010,True,scenario.product_price_category_gma,scenario.product_5039010,product.product_uom_unit
 ANANXIVIA GRAND CHIEN 30 GELULES,0.030,product.product_uom_unit,5039009,True,scenario.product_price_category_gma,scenario.product_5039009,product.product_uom_unit
-ANIMAL ID TRANSPONDEURS 10P,0,product.product_uom_unit,5039032,True,scenario.product_price_category_gma,scenario.product_5039032,product.product_uom_unit
+ANIMAL ID TRANSPONDEURS 10P,0,scenario.product_uom_boite,5039032,True,scenario.product_price_category_gma,scenario.product_5039032,scenario.product_uom_boite
 ARTIVIA 10x15 COMPRIMES,0,product.product_uom_unit,5039013,True,scenario.product_price_category_gma,scenario.product_5039013,product.product_uom_unit
-BELCAM ID TRANSPONDEURS 10P,0,product.product_uom_unit,5039031,True,scenario.product_price_category_gma,scenario.product_5039031,product.product_uom_unit
+BELCAM ID TRANSPONDEURS 10P,0,scenario.product_uom_boite,5039031,True,scenario.product_price_category_gma,scenario.product_5039031,scenario.product_uom_boite
 "COMPRESSE N-ST 16PL 07,5x12,5 par 50",0.190,product.product_uom_unit,5180316,True,scenario.product_price_category_gma,scenario.product_5180316,product.product_uom_unit
 CONTEXO CATGUT CH USP2 EP6 50M,0.260,product.product_uom_unit,6040020,True,scenario.product_price_category_gma,scenario.product_6040020,product.product_uom_unit
 CONTEXO CATGUT CH USP3 EP7 50M,0.270,product.product_uom_unit,6040040,True,scenario.product_price_category_gma,scenario.product_6040040,product.product_uom_unit
@@ -91,7 +91,7 @@ ATIPAM  5ml,0.010,product.product_uom_unit,2511780,True,,scenario.product_251178
 ATIPAM 10ml,0.010,product.product_uom_unit,2511798,True,,scenario.product_2511798,product.product_uom_unit
 BEXEPRIL  5MG 28CP,0.010,product.product_uom_unit,2744498,True,,scenario.product_2744498,product.product_uom_unit
 BEXEPRIL 20MG 28CP,0.030,product.product_uom_unit,2744506,True,,scenario.product_2744506,product.product_uom_unit
-BOVI C3 10X125GR,1.440,product.product_uom_unit,0878272,True,,scenario.product_0878272,product.product_uom_unit
+BOVI C3 10X125GR,1.440,product.product_uom_unit,0878272,True,,scenario.product_0878272,scenario.product_uom_boite
 BOVIMEC B 500ML,0.010,product.product_uom_unit,2049146,True,,scenario.product_2049146,product.product_uom_unit
 CALCI BOROGLUCONATE 500ML EUROVET,0.620,product.product_uom_unit,0135996,True,,scenario.product_0135996,product.product_uom_unit
 "CARDISURE  1,25MG 10x10CP",0.070,product.product_uom_unit,2879526,True,,scenario.product_2879526,product.product_uom_unit
@@ -151,9 +151,9 @@ RHEUMOCAM CHIEN 100ml,0.150,product.product_uom_unit,5044143,True,,scenario.prod
 RHEUMOCAM CHIEN 200ml,0.270,product.product_uom_unit,5044144,True,,scenario.product_5044144,product.product_uom_unit
 RHEUMOCAM HORSE 15mg/ml 100ml,0.170,product.product_uom_unit,2881548,True,,scenario.product_2881548,product.product_uom_unit
 RHEUMOCAM 20MG/ML INJ 100ML,0.100,product.product_uom_unit,3028149,True,,scenario.product_3028149,product.product_uom_unit
-RIMIFIN  20MG 100CP,0.050,product.product_uom_unit,2389153,True,,scenario.product_2389153,product.product_uom_unit
-RIMIFIN  50MG 100CP,0.070,product.product_uom_unit,2389161,True,,scenario.product_2389161,product.product_uom_unit
-RIMIFIN 100MG 100CP,0.110,product.product_uom_unit,2389179,True,,scenario.product_2389179,product.product_uom_unit
+RIMIFIN  20MG 100CP,0.050,product.product_uom_unit,2389153,True,,scenario.product_2389153,scenario.product_uom_boite
+RIMIFIN  50MG 100CP,0.070,product.product_uom_unit,2389161,True,,scenario.product_2389161,scenario.product_uom_boite
+RIMIFIN 100MG 100CP,0.110,product.product_uom_unit,2389179,True,,scenario.product_2389179,scenario.product_uom_boite
 RODIKOLAN 15ml,0.060,product.product_uom_unit,2441376,True,,scenario.product_2441376,product.product_uom_unit
 SE PILL 4 BOLI,0,product.product_uom_unit,2985158,True,,scenario.product_2985158,product.product_uom_unit
 SEDATOR 10ml,0.040,product.product_uom_unit,2451870,True,,scenario.product_2451870,product.product_uom_unit
