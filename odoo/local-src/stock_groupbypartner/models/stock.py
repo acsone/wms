@@ -48,14 +48,14 @@ class StockMove(models.Model):
                 cr, uid, move_ids, context=context)
         pick_obj = self.pool.get("stock.picking")
         picks = pick_obj.search(cr, uid, [
-                ('partner_id', '=', move.group_id.partner_id.id),
-                ('location_id', '=', move.location_id.id),
-                ('location_dest_id', '=', move.location_dest_id.id),
-                ('picking_type_id', '=', move.picking_type_id.id),
-                ('printed', '=', False),
-                ('state', 'in', ['draft', 'confirmed', 'waiting',
-                                 'partially_available', 'assigned'])
-            ], limit=1, context=context)
+            ('partner_id', '=', move.group_id.partner_id.id),
+            ('location_id', '=', move.location_id.id),
+            ('location_dest_id', '=', move.location_dest_id.id),
+            ('picking_type_id', '=', move.picking_type_id.id),
+            ('printed', '=', False),
+            ('state', 'in', ['draft', 'confirmed', 'waiting',
+                             'partially_available', 'assigned'])
+        ], limit=1, context=context)
         # check weight
         total_weight = 0.0
         pickings = self.pool['stock.picking'].browse(
