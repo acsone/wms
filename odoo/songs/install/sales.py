@@ -47,6 +47,7 @@ def import_crm_team(ctx):
     content = resource_stream(req, 'data/install/crm.team.csv')
     load_csv_stream(ctx, 'crm.team', content, delimiter=',')
 
+
 @anthem.log
 def import_pricelist(ctx):
     """ Importing sales teams """
