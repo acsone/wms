@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="sale_channel_visible" invisible="1"/>
+                <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
