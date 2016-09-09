@@ -30,22 +30,28 @@ def sale_setup(ctx):
 @anthem.log
 def import_price_categories(ctx):
     """ Importing prices categories from csv"""
-    content = resource_stream(req, 'data/demo/product.price.category.csv')
+    content = resource_stream(req, 'data/install/product.price.category.csv')
     load_csv_stream(ctx, 'product.price.category', content, delimiter=',')
 
 
 @anthem.log
 def import_uom(ctx):
     """ Importing unit of measure """
-    content = resource_stream(req, 'data/demo/product.uom.csv')
+    content = resource_stream(req, 'data/install/product.uom.csv')
     load_csv_stream(ctx, 'product.uom', content, delimiter=',')
 
 
 @anthem.log
 def import_crm_team(ctx):
     """ Importing sales teams """
-    content = resource_stream(req, 'data/demo/crm.team.csv')
+    content = resource_stream(req, 'data/install/crm.team.csv')
     load_csv_stream(ctx, 'crm.team', content, delimiter=',')
+
+@anthem.log
+def import_pricelist(ctx):
+    """ Importing sales teams """
+    content = resource_stream(req, 'data/install/product.pricelist.csv')
+    load_csv_stream(ctx, 'product.pricelist', content, delimiter=',')
 
 
 @anthem.log
@@ -55,3 +61,4 @@ def main(ctx):
     import_price_categories(ctx)
     import_uom(ctx)
     import_crm_team(ctx)
+    import_pricelist(ctx)
