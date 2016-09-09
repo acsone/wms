@@ -27,34 +27,91 @@ def set_delivery_pick_ship(ctx):
 @anthem.log
 def create_locations(ctx):
     """ Creating stock locations """
-    locations = [('__init.stock_location_materiel', u'Matériel'),
-                 ('__init.stock_location_ali', u'Aliments'),
-                 ('__init.stock_location_medoc', u'Médicaments'),
-                 ('__init.stock_location_froid', u'Froid'),
-                 ('__init.stock_location_frigo', u'Frigo'),
-                 # ('__init.stock_location_congel', u'Congel -12'),
-                 ]
+    loc_stock = ctx.env.ref('stock.stock_location_stock')
+
+    locations = [
+        ('__init.stock_location_materiel', u'Matériel'),
+        ('__init.stock_location_ali', u'Aliments'),
+        ('__init.stock_location_medoc', u'Médicaments'),
+        ('__init.stock_location_froid', u'Froid'),
+        # ('__init.stock_location_congel', u'Congel -12'),
+    ]
+
     for xmlid, name in locations:
-        create_or_update(ctx, 'stock.location', xmlid, {'name': name})
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name, 'location_id': loc_stock.id
+        })
+
+    sub_locations = [
+        ('__init.stock_location_frigo', u'Frigo',
+         ctx.env.ref('__init.stock_location_froid').id),
+        ('__init.stock_location_parking_medoc', u'Parking Medicaments',
+         ctx.env.ref('__init.stock_location_medoc').id),
+    ]
+
+    for xmlid, name, location_id in sub_locations:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name, 'location_id': location_id
+        })
+
+
+@anthem.log
+def create_putaway(ctx):
+    """ Create putaway and putaway strat
+    """
+    ref = ctx.env.ref
+
+    loc_stock_id = ref('stock.stock_location_stock').id
+
+    create_or_update(ctx, 'product.putaway', '__init.stock_putaway_parking', {
+        'name': u'Parking',
+        'method': u'fixed',
+        'fixed_location_id': loc_stock_id,
+    })
+
+    create_or_update(
+        ctx, 'stock.fixed.putaway.strat', '__init.stock_putaway_parking_medoc',
+        {
+            'putaway_id': ref('__init.stock_putaway_parking').id,
+            'category_id': ref('__init.product_categ_medoc').id,
+            'fixed_location_id': ref('__init.stock_location_parking_medoc').id,
+        }
+    )
+
+    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
+        'location_id': loc_stock_id,
+        'putaway_strategy_id': ref('__init.stock_putaway_parking').id
+    })
+
+    create_or_update(ctx, 'stock.picking.type', 'stock.picking_type_in', {
+        'default_location_dest_id': ref('stock.stock_location_company').id
+    })
 
 
 @anthem.log
 def create_picking_types(ctx):
     """ Creating picking types """
-    sequence = ctx.env['ir.sequence'].search(
+    picking_sequence = ctx.env['ir.sequence'].search(
         [('name', '=', 'Alcyon Belux SA Sequence picking')],
         limit=1,
     )
+
+    internal_sequence = ctx.env['ir.sequence'].search(
+        [('name', '=', 'Alcyon Belux SA Sequence internal')],
+        limit=1,
+    )
+
     location_out = ctx.env.ref('stock.stock_location_output')
     location_mat = ctx.env.ref('__init.stock_location_materiel')
     location_ali = ctx.env.ref('__init.stock_location_ali')
-    location_medic = ctx.env.ref('__init.stock_location_medoc')
+    location_medoc = ctx.env.ref('__init.stock_location_medoc')
     location_froid = ctx.env.ref('__init.stock_location_froid')
+    location_parking_medoc = ctx.env.ref('__init.stock_location_parking_medoc')
     types = [
         {'xmlid': '__init.stock_picking_type_materiel',
          'name': 'Pick Matériel',
          'code': 'internal',
-         'sequence_id': sequence.id,
+         'sequence_id': picking_sequence.id,
          'default_location_src_id': location_mat.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
@@ -62,7 +119,7 @@ def create_picking_types(ctx):
         {'xmlid': '__init.stock_picking_type_ali',
          'name': 'Pick Aliments',
          'code': 'internal',
-         'sequence_id': sequence.id,
+         'sequence_id': picking_sequence.id,
          'default_location_src_id': location_ali.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
@@ -70,17 +127,25 @@ def create_picking_types(ctx):
         {'xmlid': '__init.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
          'code': 'internal',
-         'sequence_id': sequence.id,
-         'default_location_src_id': location_medic.id,
+         'sequence_id': picking_sequence.id,
+         'default_location_src_id': location_medoc.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
          },
         {'xmlid': '__init.stock_picking_type_froid',
          'name': 'Pick Frigo',
          'code': 'internal',
-         'sequence_id': sequence.id,
+         'sequence_id': picking_sequence.id,
          'default_location_src_id': location_froid.id,
          'default_location_dest_id': location_out.id,
+         'use_create_lots': False,
+         },
+        {'xmlid': '__init.stock_picking_type_rangement',
+         'name': 'Rangement Medicaments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_medoc.id,
+         'default_location_dest_id': location_medoc.id,
          'use_create_lots': False,
          },
     ]
@@ -201,6 +266,7 @@ def main(ctx):
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)
+    create_putaway(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
     create_routes(ctx)
