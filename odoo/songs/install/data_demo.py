@@ -38,13 +38,6 @@ def import_output_locations(ctx):
 
 
 @anthem.log
-def import_price_categories(ctx):
-    """ Importing prices categories from csv"""
-    content = resource_stream(req, 'data/demo/product.price.category.csv')
-    load_csv_stream(ctx, 'product.price.category', content, delimiter=',')
-
-
-@anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
     content = resource_stream(req, 'data/demo/product.csv')
@@ -86,7 +79,6 @@ def main(ctx):
     import_clients(ctx)
     import_locators(ctx)
     import_output_locations(ctx)
-    import_price_categories(ctx)
     import_products(ctx)
     import_product_supplierinfo(ctx)
     import_pricelists(ctx)

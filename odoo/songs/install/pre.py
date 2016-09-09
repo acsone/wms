@@ -19,7 +19,7 @@ def setup_company(ctx):
         'street2': '',
         'zip': '4530',
         'city': 'Villers-le-Bouillet',
-        'country_id': ctx.env.ref('base.ch').id,
+        'country_id': ctx.env.ref('base.be').id,
         'phone': '04/3383490',
         'fax': '04/3382783',
         'email': 'secretariat@alcyonbelux.be',

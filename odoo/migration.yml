@@ -15,6 +15,7 @@ migration:
           - anthem songs.install.accounting::main
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
+          - anthem songs.install.sales::main
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
       modes:
@@ -30,6 +31,7 @@ migration:
         upgrade:
           #### core
           - account
+          - account_accountant
           - document
           - sale
           - sale_stock

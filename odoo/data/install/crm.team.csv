@@ -1,0 +1,4 @@
+id,name
+sales_team.team_sales_department,Ventes traditionnelles
+scenario.sales_team_ecommerce,Ventes e-commerce
+scenario.sales_team_ebusiness,Ventes e-business
