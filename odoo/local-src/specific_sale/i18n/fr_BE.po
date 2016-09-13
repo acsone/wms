@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* specific_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-09 14:39+0000\n"
+"PO-Revision-Date: 2016-09-09 14:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Fax"
+msgstr "Fax"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Mail"
+msgstr "Email"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
+msgid "Sale channel"
+msgstr "Canal de vente"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel_visible
+msgid "Sale channel visible"
+msgstr "Sale channel visible"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
