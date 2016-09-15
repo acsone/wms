@@ -66,10 +66,10 @@ def import_product_supplierinfo(ctx):
 
 
 @anthem.log
-def import_pricelists(ctx):
+def import_pricelist_items(ctx):
     """ Importing pricelists from csv"""
-    content = resource_stream(req, 'data/demo/product.pricelist.csv')
-    load_csv_stream(ctx, 'product.pricelist', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/pricelist_items.csv')
+    load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
 
 
 @anthem.log
@@ -81,4 +81,4 @@ def main(ctx):
     import_output_locations(ctx)
     import_products(ctx)
     import_product_supplierinfo(ctx)
-    import_pricelists(ctx)
+    import_pricelist_items(ctx)
