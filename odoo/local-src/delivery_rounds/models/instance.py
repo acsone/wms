@@ -74,7 +74,7 @@ class RoundInstance(models.Model):
         # readonly=True,
         )
 
-    @api.model
+    @api.multi
     @api.depends('vehicle_id', 'date', 'time')
     def name_get(self):
         res = []
@@ -250,7 +250,7 @@ class StockPicking(models.Model):
             pickings = shippings._get_all_from_pickings()
             # TODO: we should ensure a picking is not already done for another
             #       delivery round
-            pickings = pickings - self
+            pickings = pickings
             pickings = pickings.filtered(
                 lambda r: r.state in (
                     'waiting',
@@ -260,6 +260,7 @@ class StockPicking(models.Model):
                 r.delivery_round_id.id != vals['delivery_round_id'])
             pickings.with_context(noround_write=True).write(
                 {'delivery_round_id': vals['delivery_round_id']})
+            del vals['delivery_round_id']
         if 'sequence' in vals:
             # when we set a sequence on a delivery, we copy that value on the
             # pickings
@@ -271,6 +272,8 @@ class StockPicking(models.Model):
                     lambda r: r.partner_id.id in shippings.mapped(
                         'partner_id.id'))
                 pickings.write({'sequence': vals['sequence']})
+        if not vals:
+            return True
         return super(StockPicking, self).write(vals)
 
     @api.model
@@ -282,6 +285,11 @@ class StockPicking(models.Model):
     _group_by_full = {
         'delivery_round_id': _group_delivery_round,
     }
+
+    @api.multi
+    def button_delivery_round(self):
+        return dict(self.env.ref(
+            'delivery_rounds.action_picking_assign_delivery_round').read()[0])
 
 
 class StockPickingType(models.Model):

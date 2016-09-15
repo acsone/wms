@@ -144,6 +144,7 @@
                         <field name="picking_ids" widget="many2many"
                             options="{'no_create': True, 'not_delete': True}"
                             domain="[('picking_type_subcode', '=', 'PICK'), ('delivery_round_id', '=', False), ('state', 'in', ('partially_available', 'assigned'))]"
+                            context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
                             />
                     </page>
                 </notebook>

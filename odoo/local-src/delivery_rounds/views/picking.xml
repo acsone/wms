@@ -30,6 +30,11 @@
             </field>
             <field name="state" position="after">
                 <field name="delivery_round_id"/>
+                <field name="printed" invisible="1"/>
+                <button name="button_delivery_round" type="object"
+                    attrs="{'invisible': [('printed', '!=', False)]}"
+                    icon="fa-pencil"
+                    help="Include in a delivery round"/>
             </field>
         </field>
     </record>

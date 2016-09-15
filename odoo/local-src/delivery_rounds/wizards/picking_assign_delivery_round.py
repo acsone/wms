@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Jacques-Etienne Baudoux <je@bcim.be>
@@ -19,32 +19,23 @@
 #
 ##############################################################################
 
-{
-    'name': 'Delivery Rounds',
-    'version': '1.0',
-    'author': "BCIM",
-    'maintainer': 'Camptocamp',
-    'category': 'Stock Management',
-    'depends': [
-        'stock',
-        'delivery',
-        'stock_picking_subcode',
-        ],
-    'data': [
-        'views/menu.xml',
-        'views/vehicle.xml',
-        'views/zone.xml',
-        'views/instance.xml',
-        'views/picking.xml',
-        'views/partner.xml',
-        'data/sequence.xml',
-        'security/ir.model.access.csv',
-        'wizards/instance_zone_import.xml',
-        'wizards/make_today_delivery_plan.xml',
-        'wizards/picking_assign_delivery_round.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-    'application': False,
-}
+from openerp import models, fields, api
+
+
+class PickingAssignDeliveryRound(models.TransientModel):
+    _name = 'picking.assign.delivery.round'
+
+    delivery_round_id = fields.Many2one(
+        'round.instance', 'Delivery Round',
+        domain="[('state', 'in', ('draft', 'open'))]",
+        required=True)
+
+    @api.one
+    def confirm(self):
+        act_close = {'type': 'ir.actions.act_window_close'}
+        picking_ids = self._context.get('active_ids')
+        if picking_ids is None:
+            return act_close
+        picking = self.env['stock.picking'].browse(picking_ids)
+        picking.delivery_round_id = self.delivery_round_id
+        return act_close
