@@ -1,0 +1,12 @@
+id,name
+scenario.partner_category_alcyonnaire,Alcyonnaire
+scenario.partner_category_veterinary,Vétérinaires avec dépôt
+scenario.partner_category_medexport,Médicaments export
+scenario.partner_category_student,Etudiants et assimilés sans dépôt
+scenario.partner_category_pharmacy,Pharmaciens et Grossistes humains
+scenario.partner_category_callcenter,Grossistes vétérinaires et Callcenter
+scenario.partner_category_supplier,Fournisseurs
+scenario.partner_category_material,Client exclusif matériel
+scenario.partner_category_customerexport,Clients export
+scenario.partner_category_demo,Démo Alcyon
+scenario.partner_category_user,Utilisateurs déconnectés

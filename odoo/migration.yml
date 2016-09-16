@@ -16,6 +16,7 @@ migration:
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
           - anthem songs.install.sales::main
+          - anthem songs.install.partner::main
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
       modes:
@@ -44,3 +45,4 @@ migration:
           - product_price_category
           - pricelist_discount
           - specific_sale
+          - specific_partner
