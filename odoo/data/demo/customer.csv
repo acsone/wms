@@ -1,201 +1,201 @@
-city,name,zip,phone,street,ref,id
-HANZINNE,ABBELOOS DAVID,5621,071/505299,"Rue du Baty, 112 A",1391,scenario.customer_1391
-LIBRAMONT-CHEVIGNY,ABDELLICH SAMY,6800,061/224985,"Séviscourt, Rue des Ecoles 29",2564,scenario.customer_2564
-BERTRIX,ACHEN ROBERT *,6880,061/412586,Rue des Correttes 66,350,scenario.customer_350
-EUPEN,AHN FREDERIC *,4700,087/552955,Noeretherstrasse 83,365,scenario.customer_365
-EMINES (LA BRUYERE),AIDANT BERTRAND *,5080,0473/495096,"Rue Trieux des Frênes, 5",4368,scenario.customer_4368
-SPA,ARCHAMBEAU RAYMOND,4900,087/772786,Rue Adolphe Bastin 7,398,scenario.customer_398
-RANCIMONT,ARNOULD CHRISTIAN *,6860,061/279220,"Rue Saint Donat, 26",393,scenario.customer_393
-BERTRIX,ARNOULD JEAN-MARC,6880,061/688110,"Rue de la Gare, 77",4484,scenario.customer_4484
-BERTRIX,ARNOULD ROGER ET JEAN-MARC *,6880,061/411784,Rue de la Brasserie 24,2587,scenario.customer_2587
-MY,ARTUS-GHILISSEN-D'AFFNAY,4190,086/400029,Rue Sur Le Mont 20,2337,scenario.customer_2337
-LONGCHAMPS,AUBRY JACQUES,6688,061/215269,Route de la Roche 597,420,scenario.customer_420
-KETTENIS,BACHOUR LAYAL,4701,0478/277236,"Oberste Heide, 48",4885,scenario.customer_4885
-LOUETTE ST PIERRE,BAIJOT JEAN-MARIE,5575,061/589123,Route de la Semois  65,415,scenario.customer_415
-HOTTON,BALTHAZARD ANDRE,6990,084467288,Rue du Levant 13,4990,scenario.customer_4990
-BAILEUX,BARVAUX HENRI,6464,060/212226,Rue des Blanches Terres 6,3284,scenario.customer_3284
-VAUX SUR SÛRE,BASTIN JACQUES,6640,061/255056,"Chaussée de Neufchâteau, 15",3707,scenario.customer_3707
-NATOYE,BASTIN JEAN-FRANCOIS *,5360,0473/938274,"Maibelle, 1 H",5494,scenario.customer_5494
-ASSESSE,BECART LOUIS *,5330,083/655191,Rue du Pourrain 18,432,scenario.customer_432
-SPA,BECO & HEYNEMAN *,4900,087/774722,"Avenue Reine Astrid, 104",4464,scenario.customer_4464
-HOUDEMONT,BEFF PHILIPPE,6724,063/412042,"Rue du 24 Août, 6",4991,scenario.customer_4991
-WELKENRAEDT,BEGHIN FRANCOIS *,4840,087/880605,Rue Léopold 26,431,scenario.customer_431
-CIPLET,BERTHO JEAN-CHRISTOPHE,4260,0475/738685,"Rue Basse Campagne, 1",5185,scenario.customer_5185
-HAN-SUR-LESSE,BERTRAND OLIVIER,5580,084/377955,Rue Malispré 9,2454,scenario.customer_2454
-WAHA,BERWART PIERRE,6900,084/223628,"Rue du Gros Wari, 16",4822,scenario.customer_4822
-ATHUS,BLAIRON MICHELE *,6791,063/381003,Avenue de la Libération 11,1174,scenario.customer_1174
-STAVELOT,BLAISE ROGER *,4970,080/862609,"Chemin de Ster, 17",472,scenario.customer_472
-FORGES,BODEUS & FLAMME,6464,060/219596,"Rue des Templiers, 6",5545,scenario.customer_5545
-BIESME,BODRANGHIEN PIERRE,5640,071/729780,"Tiran Rue, 46",1198,scenario.customer_1198
-TOHOGNE,BONTEMPS PHILIPPE *,6941,0477/829630,Gd Houmart 13,546,scenario.customer_546
-EBLY,BORDET - LEYDER,6860,061/255568,"Rue des Pépinières, 9",3937,scenario.customer_3937
-HAVELANGE,BOTTON & CALBERG (PA),5370,083/636145,Rue de la Station 132,5518,scenario.customer_5518
-AYWAILLE,BOUDRY BENJAMIN,4920,04/2780819,"Deigné, 100",3806,scenario.customer_3806
-WINENNE,BOURLON MARC *,5570,082/712520,Rue des Ardennes 342,527,scenario.customer_527
-SPRIMONT,BOURTEMBOURG FRANCE *,4140,04/3822444,"Rue Piretfontaine, 84",1065,scenario.customer_1065
-ASSESSE,BOUVEROUX LUC *,5330,083/655500,Chaussée de Marche 27,498,scenario.customer_498
-GOUVY,BRANDT MARC,6670,080/510375,"Rue du Naneux, 20",4806,scenario.customer_4806
-MARTELANGE,BRASSEL ALEXANDRE *,6630,063/601449,Roche Percée Radelange 3,502,scenario.customer_502
-HOUR,BRASSEUR RENÉ *,5563,0476/580280,"Rue des Roches, 66",4047,scenario.customer_4047
-VAUX S/SURE,BRASSINNE JEAN-PIERRE *,6640,061/255462,Rue de Marche 49,1930,scenario.customer_1930
-HENRI-CHAPELLE,BROUWERS CEDRIC,4841,0497/832277,"Route d'Aubel, 22",4996,scenario.customer_4996
-XHENDELESSE (Herve),BROUWERS-DEMONTY & BROUWERS *,4652,087/678825,Reneubois 56,5481,scenario.customer_5481
-LOMPREZ,BUGHIN JEAN,6924,,"Rue Croix Sainte Anne, 42",2925,scenario.customer_2925
-BASTOGNE,BULTEAU STEPHANE *,6600,061/219380,"Rachamps, 37",3956,scenario.customer_3956
-AMONINES (EREZEE),BURON PHILIPPE,6997,086/477640,Rue de la Damzelle 5,805,scenario.customer_805
-BERCHEUX,BURY GAETAN *,6642,0474/269360,"Route de Neufchâteau, 69 A",5307,scenario.customer_5307
-SILENRIEUX,BUYCK PASCAL *,5630,071/633431,Rue Nazareth 3,798,scenario.customer_798
-SILENRIEUX,BUYCK PASCAL *,5630,071/633431,Rue Nazareth 3,798,scenario.customer_798
-BASTOGNE,CAB.VETERINAIRE DEGAVRE J.  *,6600,061/211580,"Hardigny, 19",5127,scenario.customer_5127
-STE MARIE-SUR-SEMOIS,CAB.VETERINAIRE DIEZ VINCENT *,6740,0476/560078,"Grand-Rue, 207",5404,scenario.customer_5404
-LA ROCHE,CAB.VETERINAIRE GABRIEL LEGROS,6980,084/345015,"Rue de la Gare, 14",5430,scenario.customer_5430
-MARCHE-EN-FAMENNE,CABINET DOCTEUR CAUDRON,6900,084/413417,"Rue des Rossignols, 10",5346,scenario.customer_5346
-VILLERS LA BONNE EAU,CABINET VET WINAND JOSEPH,6600,061/215472,Lutrebois 117,2327,scenario.customer_2327
-YVOIR,CABINET VET. WOUEZ & DE PESTEL,5530,083/613607,"Chaussée de Dinant, 46A",5548,scenario.customer_5548
-ONHAYE,CABINET VETERINAIRE COLINET,5520,082/226533,"Rue Abbé du Jardin, 15",5465,scenario.customer_5465
-BIOUL (ANHEE),CABINET VETERINAIRE PIRONET *,5537,071/798927,"Rue de Rouillon, 40",5488,scenario.customer_5488
-BIOUL (ANHEE),CABINET VETERINAIRE PIRONET *,5537,071/798927,"Rue de Rouillon, 40",5489,scenario.customer_5489
-BIOUL (ANHEE),CABINET VETERINAIRE PIRONET *,5537,071/798927,"Rue de Rouillon, 40",5490,scenario.customer_5490
-CLAVIER,CALBERG FRANCOIS,4560,0495/272414,"Rue Fontenoy, 4",5398,scenario.customer_5398
-SART-JALHAY,CARDINAL BRUNO,4845,0497/462041,"Thier du Vivier, 280",2596,scenario.customer_2596
-ETHE,CARNEVALI JEAN-CHARLES,6760,063/576027,Rue du Château Cugnon 96,576,scenario.customer_576
-ASSESSE,CASSART DOMINIQUE,5330,0478/906808,"Rue du Pourrain, 65",4943,scenario.customer_4943
-RENDEUX,CAUDRON IRENE SPRLU *,6987,0474/389481,"Route de Marche, 8A",3584,scenario.customer_3584
-SPA,CAUDRON ISABELLE,4900,0475/750901,"Rue Royale, 29",5626,scenario.customer_5626
-GRIVEGNEE,CAVADINO CELINE *,4030,04/3627884,"Place de Brouckère, 5",2843,scenario.customer_2843
-TAVIER,CEREQ DR MOTTART *,4163,04/2392580,"Baugnée, 11",3603,scenario.customer_3603
-VIRTON,CHALON ETIENNE   *,6760,063/577600,Rue de Dampicourt 59,3259,scenario.customer_3259
-HAUT-FAYS,CHAUVIAUX JOSEPH,6929,061/588874,Rue de Gedinne 44c,596,scenario.customer_596
-BERTOGNE,CHERDON D. & DELZANDRE CH.*,6687,061/211046,"Rue de Bethomont, 261a",5214,scenario.customer_5214
-HOUFFALIZE,CHIPPAUX FANNY,6660,061/460675,"Rue de Liège, 42 A",5397,scenario.customer_5397
-AUBANGE,CLIN. VET DES 3 FRONTIÈRES,6790,063/370097,"Rue de Messancy, 17",5546,scenario.customer_5546
-LIBRAMONT,CLINIQUE VETERINAIRE A.C.M*,6800,061/232282,Rue de Neufchâteau 57,2418,scenario.customer_2418
-OTEPPE,CLIVET *,4210,085/711488,"Thier de l'Eglise, 12",4668,scenario.customer_4668
-SAINT-VITH,CLOHSE GUNTHER *,4780,080/227414,Rodt 152,697,scenario.customer_697
-LIBRAMONT (MOIRCY),COENEN MARC *,6800,061/688666,"Les Blancs Cailloux,15",784,scenario.customer_784
-DINANT,COLINET ARMAND & LAURENT,5500,082/222828,"Route de Philippeville, 300",4639,scenario.customer_4639
-LIERNEUX,COLLARD ALAIN *,4990,080/340650,"Trou de Bras, 34",5118,scenario.customer_5118
-BIESME,COLLET MICHEL,5640,071/504218,"Rue de Gougnies, 8",4122,scenario.customer_4122
-LA FORET,COLLET-PECHEUR *,5550,061/500300,"Rue Saint-Agathe, 3",2884,scenario.customer_2884
-LIBRAMONT (FLOHIMONT),COLLIN PHILIPPE,6800,061/224837,"Champ Colin, 5",3798,scenario.customer_3798
-TERWAGNE,COLLINGE LOUIS *,4560,085/412473,Chaussée Romaine 1,737,scenario.customer_737
-FRAITURE TINLOT,COMTÉ JEAN *,4557,085/512260,Rue de Liège 28,739,scenario.customer_739
-TENNEVILLE,CONEM CHRISTIAN *,6972,0494/636853,"Rue Tresfontaine, 1 C",5407,scenario.customer_5407
-CHATILLON,CONTANT BERNARD,6747,063/218068,"Rue d'Aherée, 25",3393,scenario.customer_3393
-BILSTAIN,COOLEN GERARD *,4831,087/762429,Rue Chenay 13,1841,scenario.customer_1841
-NOVILLE,COP BRUNO *,6600,061/212368,"Rue du Bois, 23",2911,scenario.customer_2911
-HARRE,CORBESIER CAROLE *,6960,086/367011,"Champ de Harre, 3",5042,scenario.customer_5042
-MARCHE,CORNET FRANÇOISE,6900,084/321843,Rue du Luxembourg 78,1843,scenario.customer_1843
-MORVILLE,CORNETTE GUIDO CAB.VETERINAIRE,5620,082/688525,Rue d'Anthée 3a,3277,scenario.customer_3277
-PHILIPPEVILLE,COULONVAL ANNICK *,5600,071/668948,"Rue de l'Arsenal, 4",4467,scenario.customer_4467
-FRANCORCHAMPS,COUNESON SYLVIE,4970,080/881114,Route de l'Eau Rouge 16,761,scenario.customer_761
-SPA,COURBE DELPHINE *,4900,087/772786,"Rue Hanster, 1",4811,scenario.customer_4811
-RANCE,COX EDOUARD,6470,060/411907,"Rue du Commerce, 59 A",4125,scenario.customer_4125
-HAVELANGE,COX PHILIPPE *,5370,083/634084,"Rue de la Station, 117",3968,scenario.customer_3968
-CROMBACH,CREMER FRANK,4784,080/643439,"Crombach, 77",4086,scenario.customer_4086
-OHEY,CREVITS BRUNO *,5350,085/612949,Chaussée de Ciney 16,1352,scenario.customer_1352
-RENLIES,CUISENAIRE GAELLE *,6500,060/455778,"Rue Géramont, 8",5074,scenario.customer_5074
-REMOUCHAMPS,CULOT LAURENCE,4920,047/3848345,Route de Spa 47,1082,scenario.customer_1082
-FLORENVILLE,DAENEN J. ET GODEFROID *,6820,061/311226,"Le Haut de la Chetteur, 2",871,scenario.customer_871
-RENLIES,DAGNELIE CECILE,6500,060/455778,Rue Géramont 58,1607,scenario.customer_1607
-BASTOGNE,DANS FREDERIC,6600,0494/801717,"Rue Pierre Thomas, 14 Bte 5",4935,scenario.customer_4935
-FRAIRE,DARDENNE JEAN-MARIE,5650,071/655449,Rue des Jonquilles 8,848,scenario.customer_848
-VIELSALM,DARDENNE-MONIN *,6690,080/217555,Rue du Parc 8,3564,scenario.customer_3564
-HARINSART (HABAY),DAUBRESSE EMMANUEL,6724,063/411510,Rue de Grimodé 18,1058,scenario.customer_1058
-LIERNEUX,DAUBY EMILIE *,4990,0498/215289,"Les Villettes, Bergifa, 32",5468,scenario.customer_5468
-STAVELOT,DE BOURNONVILLE THIERRY *,4970,080/862220,"Chemin du Chateau, 81",4150,scenario.customer_4150
-HERVE,DE FROIDMONT SOPHIE,4651,087/660891,"En Wez, 20",3335,scenario.customer_3335
-BRAS-BAS (LIBRAMONT),DE GRAVE JEAN,6800,061/224986,"Rue du Patronage, 45",4539,scenario.customer_4539
-VAUX-SUR-SURE,DE ROOVER WILFRIED *,6640,061/256044,Rue du Wez 9,1906,scenario.customer_1906
-GESVES,DEBARSY JOSE *,5340,083/677750,Rue Montjoie 17,1007,scenario.customer_1007
-HAVELANGE,DECAESTECKER JULIET,5370,0486/916199,"Rue Ferdinand Davin, 5",5484,scenario.customer_5484
-DINANT,DECAUX BARBARA,5500,082/688303,"Rue Léopold, 25 B",3717,scenario.customer_3717
-MEAN,DEFRAIGNE BERNARD,5372,,"Rue du Centre, 7",3498,scenario.customer_3498
-FROIDTHIER - THIMISTER,DEGOTTE JEAN-MARIE *,4890,087/688515,"Route d'Aubel, 34",46,scenario.customer_46
-CHIMAY,DEGRANDE JULIEN *,6460,0477/173634,"Rue des Pommiers, 18",5391,scenario.customer_5391
-PALISEUL,DEGREZ LEON *,6850,061/533910,Route d'Offagne 3,1890,scenario.customer_1890
-LESSIVE (Rochefort),DEGROS FREDERIC,5580,0496/640432,"Rue de la Digue, 26 C",3646,scenario.customer_3646
-PESSOUX,DELAHAUT PHILIPPE,5590,0495/304406,"Rue de Trisogne, 31",5200,scenario.customer_5200
-LA GLEIZE,DELNOY MARTINE *,4987,080/785220,"Centre, 62",4081,scenario.customer_4081
-BASTOGNE,DELOYER ISABELLE - RAHIR *,6600,061/215700,Rue des Hêtres 33,1414,scenario.customer_1414
-HAILLOT,DEMANET MARC,5351,085/612305,Rue des Ecoles 57,969,scenario.customer_969
-CRUPET,DEMAZY JEAN-MARIE *,5332,083/655602,Rue Insefy 7,1896,scenario.customer_1896
-BATTICE,DENOEL JOSEPH,4650,087/678322,Rue Thiers Martin 78,954,scenario.customer_954
-HALANZY,DEOM CHRISTIAN,6792,063/678368,Rue du Châlet 56,841,scenario.customer_841
-HEYD,DEOM OLIVIER  *,6941,086/499750,Rue du Bati 52,1583,scenario.customer_1583
-ARLON,DEPIENNE JEAN-FRANCOIS *,6700,063/226674,Rue de Lingenthal 100,2270,scenario.customer_2270
-SART-LEZ-SPA,DEPUS ELISABETH,4845,087/474528,"Solwaster, 60",5158,scenario.customer_5158
-JULEMONT,DERKENNE FREDERIC *,4650,04/3878363,"Rue Coronmeuse, 76 B",3479,scenario.customer_3479
-CINEY,DERNIVOIX KATHY,5590,0478/990474,"Rue de l'Echevinage, 14",5380,scenario.customer_5380
-TENNEVILLE,DEROANNE CHRISTIAN,6970,084/455378,Route de Bastogne 63,1104,scenario.customer_1104
-STOUMONT,DESTER-LEDENT ANNE *,4987,080511555,Village 3,2600,scenario.customer_2600
-FERNELMONT,DETHIER-WILLEM *,5890,081/833441,"Rue de Baras, 2",3157,scenario.customer_3157
-FERNELMONT,DETHIER-WILLEM *,5890,081/833441,"Rue de Baras, 2",3157,scenario.customer_3157
-LIERNEUX,DETROZ BENEDICTE,4990,080/319212,"Rue du Centre, 94",4149,scenario.customer_4149
-ARLON,DEVAHIF PHILIPPE,6700,063/218162,"Rue Halbardier, 32",4135,scenario.customer_4135
-HAVELANGE,DEVAUX BOTTON CALBERG (GA),5370,083/636145,Rue de la Station 132,3389,scenario.customer_3389
-VILLERS LE GAMBON,DEVEUX-LEBRUN,5600,071/666708,Rue Père Heugens 33,2571,scenario.customer_2571
-STAVELOT,DEWALQUE PIERRE *,4970,0475/898210,Sous la Borseux 10,1062,scenario.customer_1062
-LEIGNON,DEWULF ET DELWICHE,5590,083215900,Rue de Meursault 26,1079,scenario.customer_1079
-FLORENVILLE,DIDIER ALBERT,6820,061/311545,Rue de France 79,2625,scenario.customer_2625
-NEUVILLERS (LIBRAMONT),DIDIER YVES *,6800,061/225910,"Rue de la Spinette, 68",4585,scenario.customer_4585
-HAVELANGE,DIDION RODOLPHE *,5370,083/634639,"Rue d'Andenne, 2 A",3709,scenario.customer_3709
-STE MARIE-SUR-SEMOIS,DIEZ & PLOMTEUX *,6740,063/456660,"Grand-Rue, 207",5001,scenario.customer_5001
-BIEVRE,DION ARSENE *,5555,061/511505,Route d'Houdremont 60,1154,scenario.customer_1154
-VIRTON,DISCRET MARC,6760,063/579315,"Avenue Bouvier, 105",3952,scenario.customer_3952
-CINEY,DIVE-MASSON-DOCHAIN *,5590,083212413,Rue du Commerce 70,3162,scenario.customer_3162
-CHAINEUX,DOCTEUR OLIVIER WERTZ *,4650,087/679719,"Rue du Trèfle, 52",5176,scenario.customer_5176
-ROMERÉE,DOZOT ARNOLD,5680,082/615252,"Rue des Tilleuls, 9",3503,scenario.customer_3503
-VILLERS LA VILLE,DRUEZ MARC,1495,071/875494,"Rue Pont Saint-Pierre, 14",2859,scenario.customer_2859
-BASTOGNE,DU FOUR YVES  *,6600,061/215700,Chaussée d'Arlon 65,1147,scenario.customer_1147
-HANZINELLE,DUBOIS MICHEL *,5621,071/688397,Rue du Vieux Moulin 152,1127,scenario.customer_1127
-ERNONHEID-FAWEUX,DUBUC BERNARD *,4920,086/434513,La Levée  30,1129,scenario.customer_1129
-SOMZEE,DUCOCHEZ LUC *,5651,071/213091,Rue l'Espenne 30,1139,scenario.customer_1139
-BASTOGNE,DUFOUR - DELOYER  *,6600,061/215700,Chaussée d'Arlon 65,2357,scenario.customer_2357
-FLORENVILLE,DUROY JEAN-POL,6820,061/313179,Rue d'Orval 76,1162,scenario.customer_1162
-BÜLLINGEN,DURSIN LIESBETH,4760,080/881977,"Eimerscheid, 18",5277,scenario.customer_5277
-ETHE,DUSSARD JEAN-LOUIS,6760,063/582359,Rue des Fusillés 9,1155,scenario.customer_1155
-SORINNES LA LONGUE,EQUIVET,5333,083/655958,"Rue du Centre, 2",3963,scenario.customer_3963
-THEUX (LA REID),EVRARD & DECHENEUX,4910,0477/292399,"Rue du Bois Renard, 539 C",4071,scenario.customer_4071
-LEGLISE,EVRARD JULIEN,6860,063/384314,"Rue de la Distillerie, 63",5073,scenario.customer_5073
-RECHT,FELTEN PASCAL,4780,080/228204,"Dorfstrasse, 20 A",4470,scenario.customer_4470
-FLORENNES,FENEAU SYLVIE,5620,071/688672,Rue Rohan Chabot,1670,scenario.customer_1670
-THY LE CHATEAU,FERAUX LAURENT,5651,071/611161,"Rue de la Citadelle, 12",5088,scenario.customer_5088
-CHANTEMELLE,FERY AUDREY,6742,0496/439211,"Rue du Sart Macré, 8",4021,scenario.customer_4021
-ARLON,FONTAINE-HUSTINX *,6700,063/226565,Route de Bastogne 310,1699,scenario.customer_1699
-TINTIGNY,FORGET GUY,6730,063/444255,Rue de France 4,1708,scenario.customer_1708
-MALMEDY,FOURGON ROLAND,4960,080/339666,"Route de Rôteu, 27",5656,scenario.customer_5656
-MALMEDY,FOURGON-DENIS *,4960,080/339666,Avenue Monbijou 95,1711,scenario.customer_1711
-OHEY,FRANCOIS JACQUES *,5350,085/612221,Rue Pierre Froidbise 72,1691,scenario.customer_1691
-JALHAY/SURISTER,FRANSOLET MICHEL GA*,4845,087/648003,Surister 16,1682,scenario.customer_1682
-JALHAY/SURISTER,FRANSOLET MICHEL PA*,4845,087/648003,Surister 16,5399,scenario.customer_5399
-CLAVIER,FRENNET JEAN-CLAUDE *,4560,085/411922,"Rue de la Gendarmerie, 13",5171,scenario.customer_5171
-SORINNES,FRIPPIAT PAUL,5503,082/225720,Grand Route de Ciney 23,2340,scenario.customer_2340
-BERTRIX,FRISEE VINCENT *,6880,0497/413383,"Rue du Stade, 6",5300,scenario.customer_5300
-RAMILLIES,FROMENT FRÉDÉRIC *,1367,081/877473,"Rue Joseph Guilleaume, 21",3633,scenario.customer_3633
-MALMEDY,GABRIEL BENEDICTE *,4960,04/2473128,"Bellevaux, 29",1968,scenario.customer_1968
-MALMEDY,GABRIEL BENEDICTE *,4960,04/2473128,"Bellevaux, 29",1968,scenario.customer_1968
-AMBLY,GALDEROUX CLAUDINE *,6953,084/214660,"Rue de Forrières, 10",3102,scenario.customer_3102
-COUVIN,GAUTHIER & DOZOT,5660,060/346564,"Faubourg Saint Germain, 12",5036,scenario.customer_5036
-THEUX,GAVAGE DANIEL,4910,087/542379,"Chaussée de Verviers, 16",1722,scenario.customer_1722
-BASTOGNE,GENIN & STAQUET *,6600,061/216311,"Luzery, 177",3953,scenario.customer_3953
-VERDENNE,GEORGES JEAN-JACQUES *,6900,084/322248,"Rue du Calvaire, 13",5186,scenario.customer_5186
-GEDINNE,GHILAIN BRUNO,5575,061/589523,Rue de Dinant 9,1681,scenario.customer_1681
-PALISEUL,GIELIS PIERRE,6850,061/614593,"Rue Saint Roch, 11/1",4862,scenario.customer_4862
-MARCHE-EN-FAMENNE,GILLARD OLIVIER,6900,084/323903,Avenue de la Toison d'Or 114,1770,scenario.customer_1770
-STOUMONT (LA GLEIZE),GILLEMAN JEAN-LUC MATERIEL*,4987,080/785039,"Cheneux, 8",5140,scenario.customer_5140
-STOUMONT (LA GLEIZE),GILLEMAN JEAN-LUC MEDICAMENTS*,4987,080/785039,"Cheneux, 8",4075,scenario.customer_4075
-TENNEVILLE,GILLET FRANÇOIS *,6970,084/455673,"Rue du Docteur Hebrant, 8",3770,scenario.customer_3770
-YVOIR,GLENISSON FLORENCE *,5530,0475711724,Place des Combattants 2,1200,scenario.customer_1200
-FLORENVILLE,GREGOIRE CYRILLE,6820,061/311354,"Chemin dessus la Haye, 9",4789,scenario.customer_4789
-MALMEDY,GROOSMAN VERONIQUE *,4960,080/337980,Avenue des Alliés 63,64,scenario.customer_64
-PLOMBIERE,GROSSKORTENHAUS STEPHANIE,4852,087/787394,Ten-Driest 17,3370,scenario.customer_3370
-SPA,GUEBEN ALAIN *,4900,087/772726,Boulevard des Anglais 10,801,scenario.customer_801
-CUL-DES-SARTS,GUERET PATRICIA   *,5660,0472/791048,"Rue de Petite Chapelle, 22/1",2860,scenario.customer_2860
-SIVRY,GUIOT-TISTE *,6470,060/456412,Rue Louvrière 21,1289,scenario.customer_1289
-GOUVY,HAAN - PONCIN,6673,0498/409806,"Rettigny, 24",5142,scenario.customer_5142
-SAINT VITH (CROMBACH),HAAS-FELTEN *,4784,080/228204,Rodt 44 A,2291,scenario.customer_2291
-NOISEUX,HACCOUR & ONGARO,5377,086/499906,"Rue de l'Ourthe, 38",5652,scenario.customer_5652
-SAINTE-ODE,HALLET PIERRE,6680,061/688409,Tillet 68,1188,scenario.customer_1188
-AUBEL,HALLEUX VICTOR *,4880,087/687279,Rue Haes 8,2011,scenario.customer_2011
-HEINSCH (ARLON),HAMES JEAN-MARC *,6700,063/234555,"Route de Neufchâteau, 512",5306,scenario.customer_5306
+city,name,zip,phone,street,ref,id,alcyon_category_id/id
+JAMBES,ALPHA REPARTITION,5100,081/245111,"Avenue de la Dame,91",1,scenario.customer_1,
+ST LAURENT BLANGY CEDEX,SAVENOR,62051,0033321246570,Rue Bourgelat BP 3,2,scenario.customer_2,
+DEURNE,ASMA BORGERS,2100,03/3267575,Belcrowsl 13,3,scenario.customer_3,
+HASSELT,DE VOOZORG S.M.,3500,011/211192,Walenstraat 77,4,scenario.customer_4,
+ROCHEFORT,EPC 001 *,5580,084/211058,Place Albert 1er 14,6,scenario.customer_6,
+BEAURAING,EPC 002 *,5570,082/714830,Rue de Rochefort 62,7,scenario.customer_7,
+SAINT SERVAIS,EPC 003 *,5002,081/730459,Rue de Gembloux 125,8,scenario.customer_8,
+BASTOGNE,EPC 004,6600,061/216047,"Rue Joseph Renquin, 74",9,scenario.customer_9,
+DINANT,EPC 005,5500,082/222101,Place Reine Astrid 8,10,scenario.customer_10,
+ARLON,EPC 006,6700,063/224171,Place Dr Hollenfeltz 14,11,scenario.customer_11,
+OTTIGNIES,GILLET YVAN,1340,0497/481088,Rue du Bon Air 14,13,scenario.customer_13,scenario.partner_category_veterinary
+TENNEVILLE,GILLET ANDRE,6970,084/455378,Route de Bastogne 37,14,scenario.customer_14,scenario.partner_category_veterinary
+TENNEVILLE,GILLET PATRICK,6970,084455378,Route de la Barrière 12,15,scenario.customer_15,scenario.partner_category_veterinary
+TAMINES,EPC 007,5060,071/771390,Rue de la Station 66,17,scenario.customer_17,
+CINEY,EPC 008,5590,083/211229,Rue du Commerce 21,18,scenario.customer_18,
+OTTIGNIES,GLOWACKI JEAN-LUC,1340,0477/362508,Rue de l'Invasion 35 A,19,scenario.customer_19,scenario.partner_category_veterinary
+NEUFCHATEAU,EPC 009,6840,061/277175,Rue Lucien Burnotte,20,scenario.customer_20,
+HANNUT,MARNEFFE  (DR HUYNEN),4280,,Rue du Broux 2a,23,scenario.customer_23,
+SOUVRET,GODIN FABIENNE,6182,0478/322372,"Rue Emile Vandervelde, 112",24,scenario.customer_24,scenario.partner_category_veterinary
+LIEGE,GODISIABOIS YVES,4000,04/2541658,"Boulevard Sainte Beuve, 2",25,scenario.customer_25,scenario.partner_category_veterinary
+COURCELLES,GODISSART PATRICK *,6180,071/458452,"Rue Winston Churchill, 310",27,scenario.customer_27,scenario.partner_category_veterinary
+BEYNE HEUSAY,GOUDERS JEAN-PIERRE,4610,04/3586726,Grand Rue 393,28,scenario.customer_28,scenario.partner_category_veterinary
+LIEGE,EPC 010,4000,041/231681,Rue Saint-Gilles 26,31,scenario.customer_31,
+BASSENGE,GONZALEZ JACQUELINE  *,4690,04/2865586,Rue Gadiot 22,32,scenario.customer_32,scenario.partner_category_veterinary
+VILLE-EN-WARET,MARLIER DIDIER,5300,081/588578,Rue du Baty Des Monts 211,33,scenario.customer_33,scenario.partner_category_veterinary
+VIRTON,EPC 011,6760,063/577803,Grand-Rue 21,34,scenario.customer_34,
+SERAING,GROSJEAN CHRISTIAN *,4100,0475/791079,Rue de la Bouteille 56/2,35,scenario.customer_35,scenario.partner_category_veterinary
+WAVRE,EPC 012,1300,010/222331,Avenue Molière 8,36,scenario.customer_36,
+PLAINEVAUX,MARCOTTY LOUIS-PHILIPPE*,4122,04/3712847,Rue Tesniere 13,38,scenario.customer_38,scenario.partner_category_veterinary
+HERSTAL,MARTIN PHILIPPE,4040,04/2640231,Rue Grand Puits 73,40,scenario.customer_40,scenario.partner_category_veterinary
+ECAUSSINES,GROSJEAN CARL,7190,067/485338,Rue Beaugrand 16,42,scenario.customer_42,scenario.partner_category_veterinary
+CERFONTAINE,MATHOT MARCEL *,5630,071/644242,Rue de Virelles 20,43,scenario.customer_43,scenario.partner_category_veterinary
+MESSANCY,EPC 013,6780,063/370599,"Route d'Arlon, 188",44,scenario.customer_44,
+NAAST,MAHIEU PATRICK *,7062,0494/278770,"Rue Max Fassiaux, 39 A",45,scenario.customer_45,scenario.partner_category_veterinary
+FROIDTHIER - THIMISTER,DEGOTTE JEAN-MARIE *,4890,0495/323597,"Route d'Aubel, 34",46,scenario.customer_46,scenario.partner_category_veterinary
+MARCHE,EPC 014,6900,084/311504,Rue Saint-Laurent 13,47,scenario.customer_47,
+HALANZY,EPC 015,6792,063/677241,Rue de la Fraternité 10,48,scenario.customer_48,
+BEAUFAYS,GRAFFART THIERRY *,4052,04/3688810,Voie de l'Air Pur 165,51,scenario.customer_51,scenario.partner_category_veterinary
+LA ROCHE,EPC 016,6980,084/411181,Rue de l'Eglise 12,52,scenario.customer_52,
+BELLEFONTAINE,GRAFF ROGER,6730,063/444745,Rue Jean-Charles de Hugo 69,53,scenario.customer_53,scenario.partner_category_veterinary
+MARLOIE,EPC 017,6900,084/311406,"Chaussée de Rochefort, 105",54,scenario.customer_54,
+NIVELLES,EPC 018,1400,067/213601,"Rue Saint-Georges, 33",55,scenario.customer_55,
+BERTRIX,EPC 019,6880,061/411470,Rue de la Gare 29,57,scenario.customer_57,
+TONGEREN,GRAUWELS MAGDA,3700,012/262226,Holenteerstraat 4,59,scenario.customer_59,scenario.partner_category_veterinary
+CARNIERES,EPC 020,7141,064/442187,Chaussée de Brunehault 415,60,scenario.customer_60,
+SPY,MATHIEU PIERRE,5190,071/780078,Rue du Chaufour 18,61,scenario.customer_61,scenario.partner_category_veterinary
+TRIVIERE,EPC 021,7100,064/222731,Rue Oscar Quertinmont 53,63,scenario.customer_63,
+MALMEDY,GROOSMAN VERONIQUE *,4960,0496/454748,Avenue des Alliés 63,64,scenario.customer_64,scenario.partner_category_veterinary
+BOUSSU LEZ MONS,EPC 022,7300,065/784033,Rue F. Dorzée 14,65,scenario.customer_65,
+TOURNAI,MAT ANDRE *,7500,069/214223,"Chaussée Romaine, 6",66,scenario.customer_66,scenario.partner_category_veterinary
+NAMUR,EPC 023,5000,081/220064,Rue de l'Ange 41,67,scenario.customer_67,
+MONTIGNY-LE-TILLEUL,GRUSELLE PHILIPPE *,6110,0479/820101,"Rue du Vert Bois, 72",68,scenario.customer_68,scenario.partner_category_veterinary
+LA LOUVIERE,EPC 024,7100,064/223826,Place Mansaert 6,69,scenario.customer_69,
+AISCHE-EN-REFAIL,MATHEISE THIERRY *,5310,081/655809,Route de Gembloux 241,70,scenario.customer_70,scenario.partner_category_veterinary
+FLOREFFE,GOOSKENS MICHEL,5150,0496/311169,Rue du Vieux Moulin 10,71,scenario.customer_71,scenario.partner_category_veterinary
+PATURAGE,EPC 025,7340,065/672543,Place de Paturage 20,73,scenario.customer_73,
+NIVELLES,DELHOVE ROGER,1400,067/218396,Avenue Albert et Elisabeth 74,75,scenario.customer_75,scenario.partner_category_veterinary
+FLORENNES,EPC 026,5620,071/688228,Place Verte 35,76,scenario.customer_76,
+MONTIGNY-LE-TILLEUL,EPC 027,6110,071/515377,Rue de Marchienne 24,77,scenario.customer_77,
+BASTOGNE,MARCIN BERNARD  *,6600,061/215955,Chemin de Musy 123,79,scenario.customer_79,scenario.partner_category_veterinary
+SAINT-MARD,EPC 028,6762,063/577178,Rue Piessevaux 1024,80,scenario.customer_80,
+JODOIGNE,EPC 029,1370,010/811254,Rue des Brasseurs 1,84,scenario.customer_84,
+SPY,GUIDARD PIERRE,5190,071/787507,Rue de la Chaussée 4,85,scenario.customer_85,scenario.partner_category_veterinary
+MONS,EPC 030,7000,065/353888,Rue d'Havre 15,86,scenario.customer_86,
+MARCINELLE,EPC 031,6001,071/363321,Rue Ernest Charles 84,88,scenario.customer_88,
+SAINT-VAAST,EPC 032,7100,064/223030,Rue E. Urbain 128,90,scenario.customer_90,
+LIEGE,MIGNON BERNARD *,4020,04/3442587,Rue Gretry 112,91,scenario.customer_91,scenario.partner_category_veterinary
+MARCHIENNE-AU-PONT,EPC 033,6030,071/515134,Route de Beaumont 376,92,scenario.customer_92,
+ANGLEUR,MIGNON YVAN *,4031,0475/351478,Place Andréa Jadoulle 13,93,scenario.customer_93,scenario.partner_category_veterinary
+CHARLEROI,EPC 034,6000,071/325510,Avenue J. Henin 19,95,scenario.customer_95,
+ORCQ,MAT BENOIT,7501,069/235101,Chaussée de Lille 2,96,scenario.customer_96,scenario.partner_category_veterinary
+SAINT-NICOLAS,GUIOT JEAN-POL *,4420,04/2460839,Rue Paul Janson 1,97,scenario.customer_97,scenario.partner_category_veterinary
+SEILLES,EPC 035,5300,085/826329,Rue de la Station 62,98,scenario.customer_98,
+VILLERS-LE-BOUILLET,GUSTIN JOEL & BERNARD,4530,0476/560759,Rue Joseph Wauters 12,99,scenario.customer_99,scenario.partner_category_veterinary
+BRAINE-L'ALLEUD,EPC 036,1420,02/3842520,Rue du Môle 4,100,scenario.customer_100,
+PAILHE,MAHOUX-ROSMEULEN (DR HUYNEN),4560,,St Fontaine 2,101,scenario.customer_101,
+IZIER,GUERMONT PAUL  (DR BONTEMPS),6941,,Rue Elva 44,102,scenario.customer_102,
+MONS,EPC 037,7000,065/335907,Avenue du Belian 30,103,scenario.customer_103,
+KETTENIS,MESSEMAN KARL *,4701,0497/501998,Oberste Heide 92,104,scenario.customer_104,scenario.partner_category_veterinary
+TUBIZE,EPC 038,1480,02/3556189,Rue de Mons 12,106,scenario.customer_106,
+LIEGE,EPC 039,4000,04/2232351,Rue des Carmes 36-38,107,scenario.customer_107,
+BASTOGNE,MICHEL PIERRE *,6600,0497/505137,Remoifosse 3,109,scenario.customer_109,scenario.partner_category_veterinary
+LIEGE,HAEZEBROUCK M. ET MAGY C. *,4000,04/2527866,Rue de la Faille 5,110,scenario.customer_110,scenario.partner_category_veterinary
+LIEGE,MELON CHRISTINE  *,4000,0495/669364,Rue de Campine 468/52,111,scenario.customer_111,scenario.partner_category_veterinary
+PERWEZ,EPC 040,1360,081/655223,Rue de la Station 10,112,scenario.customer_112,
+UCCLE,EPC 041,1180,02/3745010,Chaussée de St-Job,114,scenario.customer_114,
+CHATELINEAU,MELON JEAN-PIERRE *,6200,071/380243,Rue Jules des Essarts 128,115,scenario.customer_115,scenario.partner_category_veterinary
+WAVRE (BASSE),EPC 042,1300,010/245041,Chaussée d' Ottenbourg 25,117,scenario.customer_117,
+BURDINNE,MELCHIOR-LIGOT *,4210,085/711030,Rue Lombiery 13,118,scenario.customer_118,scenario.partner_category_veterinary
+WOLUWE-ST-LAMBERT,HANSEN PHILIPPE,1200,02/7717176,Avenue du Roi Chevalier 46,119,scenario.customer_119,scenario.partner_category_veterinary
+JEMAPPES,EPC 043,7012,065/822187,Rue Général Leman 96,120,scenario.customer_120,
+JEMAPPES,MICHEL SYLVIANE,7012,065/885975,"Rue Lloyd Georges, 79",121,scenario.customer_121,scenario.partner_category_veterinary
+WAUTHIER-BRAINE,EPC 044,1440,02/3669204,Avenue Gaston Mertens 13,123,scenario.customer_123,
+CHENEE,HAMACKER,4032,04/3651265,Rue du Centenaire 17,124,scenario.customer_124,
+WATERLOO,MEYER GEORGES,1410,02/3542268,Drève Richelle 23,125,scenario.customer_125,scenario.partner_category_veterinary
+AMBRESIN,MINNOYE MURIEL *,4219,0475/717057,"Rue Neuville, 23",126,scenario.customer_126,scenario.partner_category_veterinary
+MARCINELLE,HALLEZ-HANCQ,6001,071/364368,Avenue Eugène Mascaux 103,127,scenario.customer_127,scenario.partner_category_veterinary
+GLIMES,MATTART GERARD    *,1315,010/889445,Chée de Namur 87,128,scenario.customer_128,scenario.partner_category_veterinary
+BRAINE-LE-CHATEAU,EPC 045,1440,02/3669010,Rue de la Libération 10,129,scenario.customer_129,
+LIEGE,EPC 046,4000,04/2222837,Rue Louvrex 2,130,scenario.customer_130,
+AYWAILLE,MINGUET ARNAUD,4920,04/3848537,Avenue République Française 3,131,scenario.customer_131,scenario.partner_category_veterinary
+DOUR,EPC 047,7370,065/652728,Rue Grande 60,132,scenario.customer_132,
+WEPION,HENROTAY ANNICK,5100,0476/567281,"Chaussée de Dinant, 1044",133,scenario.customer_133,scenario.partner_category_veterinary
+CHARLEROI,EPC 048,6000,071/323705,Rue de Marchienne 1,134,scenario.customer_134,
+AUBEL,HERMAN CLAUDINE *,4880,0495/194035,Place Albert Ier 16,135,scenario.customer_135,scenario.partner_category_veterinary
+TOURNAI,EPC 049,7500,069/221371,"Rue de la Tête d'Or, 26",136,scenario.customer_136,
+CHAUMONT-GISTOUX,HERNALSTEENS ANNE *,1325,0477/276041,Rue Peumont 2,137,scenario.customer_137,scenario.partner_category_veterinary
+WAREMME,MOES JACQUES *,4300,019/326032,Rue Joseph Noville 3,138,scenario.customer_138,scenario.partner_category_veterinary
+CHARLEROI,EPC 050 *,6000,071/417664,Rue Cayauderie 48,139,scenario.customer_139,
+FLEURUS,EPC 051,6220,071/811665,Rue des Bourgeois 10,141,scenario.customer_141,
+ETHE-BELMONT,EPC 052 *,6760,063/577116,Rue Ville Basse 6 10,144,scenario.customer_144,
+CHARLEROI,EPC 053,6000,071/321374,Rue du Pont Neuf 37,146,scenario.customer_146,
+GRACE-HOLLOGNE,MONET PIERRE *,4460,0495/542188,Cité Aulichamps 7A,148,scenario.customer_148,scenario.partner_category_veterinary
+COUVIN,HURION JEAN-CLAUDE,5660,060/344647,Rue du Béguinage 5,149,scenario.customer_149,scenario.partner_category_veterinary
+LIBRAMONT,EPC 054,6800,061/222342,Grand-Rue 28,150,scenario.customer_150,
+CHENEE,MORAUX PHILIPPE,4032,0475/833982,Rue de l'Eglise 46,151,scenario.customer_151,scenario.partner_category_veterinary
+LIEGE,EPC 055,4000,04/2223012,Rue Saint-Paul 2,152,scenario.customer_152,
+TERTRE,HUSSIN & MENIN *,7333,065/641362,Rue Defuissaux 54,153,scenario.customer_153,scenario.partner_category_veterinary
+JUMET,EPC 056,6040,071/353443,Rue Puissant 36,155,scenario.customer_155,
+COINTE,HENRARD JEAN,4000,04/2530363,Rue de Bourgogne 24,156,scenario.customer_156,scenario.partner_category_veterinary
+LA BOUVERIE,EPC 057,7080,065/671437,"Rue de la Libération, 136",157,scenario.customer_157,
+VERVIERS,MOSON-LEGRAS,4800,087/352902,Rue de Mangombroux 186,158,scenario.customer_158,scenario.partner_category_veterinary
+OLLIGNIES,HENE RAYMOND,7866,068/334421,Rue de la Florbecq 48,159,scenario.customer_159,scenario.partner_category_veterinary
+SAINT-NICOLAS,EPC 058,4420,04/2339561,Rue Pansy 254,160,scenario.customer_160,
+FLORENVILLE,HENRY P. ET PREVOT CH.*,6820,061/313895,Les Hayons 5,161,scenario.customer_161,scenario.partner_category_veterinary
+HAMME MILLE,MOTTARD BENOIT,1320,010/866867,Rue d/la Comtesse Alpayde 1bt2,162,scenario.customer_162,scenario.partner_category_veterinary
+AUDERGHEM,NICAISE MARC,1160,02/6607697,Av. Vanhaelen 13,164,scenario.customer_164,scenario.partner_category_veterinary
+LIEGE,EPC 060,4020,04/3436012,Rue Carpay 20,165,scenario.customer_165,
+ST-GHISLAIN,NEUTELINGS PAUL,7330,0475/613317,"Rue de Saint-Lô, 1",166,scenario.customer_166,scenario.partner_category_veterinary
+WAVRE,MUSTIN (LLOYDS OFF 12131),1300,02/7345876,"Avenue Pasteur, 2",168,scenario.customer_168,scenario.partner_category_callcenter
+WASSEIGES,HUYNEN KARINE,4219,0477/370190,Rue du Baron d'Obin 93,170,scenario.customer_170,scenario.partner_category_veterinary
+SPA,HEYNEMAN MARTINE *,4900,087/774722,Avenue Reine Astrid 104,171,scenario.customer_171,scenario.partner_category_veterinary
+ANHEE,NEUVENS VERONIQUE *,5537,082/612928,Rue Grande 105,172,scenario.customer_172,scenario.partner_category_veterinary
+ANGLEUR,EPC 061,4031,04/3650876,Rue Vaudrée 87,174,scenario.customer_174,
+BRAINE LE COMTE,NARDELLOTTO PASCAL *,7090,067/552877,Rue de la Bienfaisance 56,175,scenario.customer_175,scenario.partner_category_veterinary
+FOREST,EPC 062,1190,02/3461079,Avenue de Monté-Carlo 1,177,scenario.customer_177,
+MONTIGNY-LE-TILLEUL,NELIS VINCENT *,6110,071/515452,Rue de la Place 14,178,scenario.customer_178,scenario.partner_category_veterinary
+UCCLE,EPC 063,1180,02/3745246,Chaussée de Waterloo 1163,180,scenario.customer_180,
+QUAREGNON,EPC 064,7390,065/786084,Rue Brenez 192,181,scenario.customer_181,
+GRAND-LEEZ,HOC EDITH,5031,081/640855,Rue Warichet 11,182,scenario.customer_182,scenario.partner_category_veterinary
+DISON,NELISSEN MARIANNE,4820,0496/941812,Rue de Husquet 13,183,scenario.customer_183,scenario.partner_category_veterinary
+ANDENNE,EPC 065,5300,085/841176,Rue Roi Albert 1er 10-12,184,scenario.customer_184,
+BERTRIX,NANNAN JEAN,6880,061/658539,La Virée 32,186,scenario.customer_186,scenario.partner_category_veterinary
+GRIVEGNEE,EPC 100,4030,04/3650366,"Rue Belvaux, 20",187,scenario.customer_187,
+HERMALLE-SOUS-HUY,EPC 067,4480,085/311252,Rue F. Terwagne 114,190,scenario.customer_190,
+BELGRADE,HORREMANS MICHEL,5001,081/730732,Rue de la Boverie 17,191,scenario.customer_191,scenario.partner_category_veterinary
+QUAREGNON,HONOREZ CHRISTIAN,7390,065/824151,Rue Louis Pierrard 37,192,scenario.customer_192,scenario.partner_category_veterinary
+EMBOURG,PAQUES BENOIT,4053,,Voie de l'Ardenne 93,194,scenario.customer_194,
+SAINT ANDRE DALHEM,HOGGE JOSE *,4606,04/3875363,Chaussée de Julemont 14,195,scenario.customer_195,scenario.partner_category_veterinary
+THUIN,NAVEAU H ET F,6530,,Champs des Oiseaux 18,198,scenario.customer_198,scenario.partner_category_veterinary
+HAMOIS,EPC 068,5360,083/611130,Chaussée de Liège 59,200,scenario.customer_200,
+NEUFCHATEAU,HUBERMONT CAMILLE  *,6840,061/278004,Avenue de la Victoire 2,201,scenario.customer_201,scenario.partner_category_veterinary
+SAINT-HUBERT,NOIRET EP. STERNOTTE,6870,061/216140,Lup'Titvoye,202,scenario.customer_202,scenario.partner_category_veterinary
+LA LOUVIERE,EPC 069,7100,064/213686,"Rue de Bouvy, 164",203,scenario.customer_203,
+SAINT GEORGES,HOUSSA PATRICE,4470,04/2595050,Rue Bailesse 11,204,scenario.customer_204,scenario.partner_category_veterinary
+CHERATTE,NOEL LUC *,4602,0475/464975,"Rue Bossette, 33",205,scenario.customer_205,scenario.partner_category_veterinary
+HUY,EPC 070,4500,085/211153,Rue des Rôtisseurs 10,206,scenario.customer_206,
+JEMELLE,EPC 071,5580,084/211484,Avenue de Ninove 91,207,scenario.customer_207,
+LIEGE,NOEL ROBERT,4000,04/2266505,Rue de Campine 9,208,scenario.customer_208,scenario.partner_category_veterinary
+GRACE-HOLLOGNE,EPC 072,4460,04/2338263,Rue Paul Janson 21,210,scenario.customer_210,
+CHERAIN,HUBERT JEAN-MARIE,6673,080/510161,Rue du Fonteny 9e,211,scenario.customer_211,scenario.partner_category_veterinary
+SERAING,HUMBLET THIERRY,4100,0475/853335,Place Merlot 14,212,scenario.customer_212,scenario.partner_category_veterinary
+RIXENSART,HOTON SOPHIE *,1330,0475/874357,Chaussée de Lasne 5,213,scenario.customer_213,scenario.partner_category_veterinary
+ORP-JAUCHE,DE KNOOP JACQUES *,1350,0475/895910,Rue des Grottes 13,214,scenario.customer_214,scenario.partner_category_veterinary
+HERSTAL,JACOBS ALAIN,4040,04/2642421,Rue Large Voie 26,218,scenario.customer_218,scenario.partner_category_veterinary
+JALHAY,JALHAY,4845,,Route de la Gileppe 31,219,scenario.customer_219,
+TOURINNES-SAINT-LAMBERT,JADOUILLE ROLAND *,1457,010/656356,Rue de la Cure 21,220,scenario.customer_220,scenario.partner_category_veterinary
+SURICE,JACQUES GEORGES,5600,082/677125,Chemin de Soulme 54,221,scenario.customer_221,scenario.partner_category_veterinary
+NIVELLES,JAUNARD MICHEL (DR DEVRIESE),1400,067/216627,Chemin Fontaine Evêque 75,222,scenario.customer_222,
+LIEGE,JOIE MICHELLE,4000,04/2274458,Rue du Pommier 16,225,scenario.customer_225,scenario.partner_category_veterinary
+BELLAIRE,JOLY JEAN,4610,04/3624207,Rue Emile Vandervelde 547,227,scenario.customer_227,scenario.partner_category_veterinary
+FEXHE-LE-HAUT-CLOCHER,JOUSTEN ANNE-MICHELLE,4347,04/2502726,Rue de la Gare 94,229,scenario.customer_229,scenario.partner_category_veterinary
+FONTAINE L'EVEQUE,JORET GUY *,6140,071/520538,Rue de l'Enseignement 57-59,230,scenario.customer_230,scenario.partner_category_veterinary
+CHAUMONT-GISTOUX,JUPSIN MARC,1325,0475/816808,Rue Peumont 2,231,scenario.customer_231,scenario.partner_category_veterinary
+SIGNY L'ABBAYE,KAKKERT ALAIN,F-08460,0033/24544749,Avenue du Huit Mai 1945,232,scenario.customer_232,
+OUPEYE,KERKHOVE MARTINE,4680,0495/538476,Avenue Reine Astrid 5,233,scenario.customer_233,scenario.partner_category_veterinary
+LIBRAMONT,KLELS ROLAND,6800,061/223603,Avenue de Bouillon 85,235,scenario.customer_235,scenario.partner_category_veterinary
+KNOKKE,KNOCKAERT FRANCIS,8300,050/600523,"Elizabethlaan, 101",236,scenario.customer_236,scenario.partner_category_veterinary
+LIEGE,LUC PIERRE,4000,04/2210511,Boulevard d'Avroy 22 bte 021,237,scenario.customer_237,scenario.partner_category_veterinary
+HEINSCH (ARLON),JAMOTTON MURIEL *,6700,063/234555,"Route de Neufchateau, 512",240,scenario.customer_240,scenario.partner_category_veterinary
+TAMINES,LAHAUT HENRI-BERNARD,5060,071/775160,Rue Lagneau 15,241,scenario.customer_241,scenario.partner_category_veterinary
+AUDERGHEM,LADADE VALERIE *,1160,0479/950063,Avenue Charles Madoux 27,242,scenario.customer_242,scenario.partner_category_veterinary
+VIVEGNIS,LADNER P. ET SCALAIS S. *,4683,04/2402440,Rue Joseph Wauters 70,243,scenario.customer_243,scenario.partner_category_veterinary
+MONT-SUR-MARCHIENNE,LAHAYE ANNE CATHERINE *,6032,071/471595,Rue du Cerisier 37,245,scenario.customer_245,scenario.partner_category_veterinary
+COUVIN,EPC 073,5660,060/344075,Rue de la Ville 30,246,scenario.customer_246,
+PIN,EPC 074,6810,061/311385,"Rue Albert Ier, 32",248,scenario.customer_248,
+LONCIN,LAKAYE CHRISTIAN *,4431,04/2630024,Rue Edouard Colson 3,249,scenario.customer_249,scenario.partner_category_veterinary
+MOUSCRON,EPC 075,7700,056/844066,Place du Tuquet 38,250,scenario.customer_250,
+CHENEE,LALLEMAND MARC *,4032,0475/557807,Rue Large 48,251,scenario.customer_251,scenario.partner_category_veterinary
+WANZE,EPC 076,4520,085/211323,Chaussée de Tirlemont 23,252,scenario.customer_252,
+UCCLE,EPC 077,1180,02/3766889,Rue Victor Allard 118,254,scenario.customer_254,
+MEAN,EPC 078,5372,086/322090,Rue de Spa 23,256,scenario.customer_256,
+PONT-A-CELLES,LANDTMETERS BAUDOUIN,6230,071/846236,Rue du Moulin 21,257,scenario.customer_257,scenario.partner_category_veterinary
+VIVEGNIS,EPC 079,4683,04/2642218,Rue César de Pape,258,scenario.customer_258,
+RETINNE,LAMBERT MICHEL,4621,,Rue Laurent Gilys 3,259,scenario.customer_259,scenario.partner_category_veterinary
+ANGLEUR,LAMBERT,4031,04/3651590,Allée de la Cense Rouge 3,260,scenario.customer_260,
+CLAVIER,EPC 080,4560,085/411303,Rue de la Gendarmerie 61,262,scenario.customer_262,
+OUGREE,LAMBERT J. CABINET VET. *,4102,0475/440598,Rue de la Rose 60,263,scenario.customer_263,scenario.partner_category_veterinary
+FRANIERE,EPC 081,5150,081/444216,Rue de Soye 6,265,scenario.customer_265,
+WAREMME,EPC 082,4300,019/322143,Rue Joseph Wauters 47,266,scenario.customer_266,
