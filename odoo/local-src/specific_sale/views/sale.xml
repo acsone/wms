@@ -7,6 +7,12 @@
                 <field name="sale_channel_visible" invisible="1"/>
                 <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
             </field>
+
+            <field name="client_order_ref" position="replace"/>
+
+            <field name="partner_id" position="after">
+                <field name="client_order_ref" required="1"/>
+            </field>
         </field>
     </record>
 </odoo>

@@ -8,6 +8,8 @@ from openerp import api, fields, models
 class Sale(models.Model):
     _inherit = 'sale.order'
 
+    client_order_ref = fields.Char(required=True)
+
     sale_channel = fields.Selection([
         ('phone', 'Phone'),
         ('mail', 'Mail'),
