@@ -199,7 +199,7 @@ class RoundInstance(models.Model):
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-    _order = 'sequence'
+    _order = "sequence, priority desc, date asc, id desc"
 
     sequence = fields.Integer(
         'Seq.')
