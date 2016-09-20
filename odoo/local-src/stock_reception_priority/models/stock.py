@@ -88,3 +88,25 @@ class StockPicking(models.Model):
                                             for prod_id in products.ids])
                 record.qty_outofstock = len(products.filtered(
                     lambda r: r.qty_available <= 0))
+
+    def _calc_priority(self):
+        return self.qty_backorder * 1000 + self.qty_outofstock
+
+    @api.multi
+    def write(self, vals):
+        if 'grn_id' in vals and 'priority' not in vals:
+            if not vals['grn_id']:
+                vals['sequence'] = 0
+            else:
+                vals['sequence'] = self._calc_priority()
+        return super(StockPicking, self).write(vals)
+
+    @api.model
+    def _cron_priority_recompute(self):
+        domain = [
+            ('grn_id', '!=', False),
+            ('state', 'in', ('assigned', 'partially_available'))]
+        for picking in self.search(domain):
+            priority = picking._calc_priority()
+            if picking.sequence != priority:
+                picking.sequence = priority

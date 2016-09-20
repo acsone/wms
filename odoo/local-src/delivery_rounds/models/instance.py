@@ -199,10 +199,10 @@ class RoundInstance(models.Model):
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-    _order = "sequence, priority desc, date asc, id desc"
+    _order = "sequence desc, priority desc, date asc, id desc"
 
     sequence = fields.Integer(
-        'Seq.')
+        'Seq.', default=-1)
     delivery_round_id = fields.Many2one(
         'round.instance', 'Delivery Round')
     delivery_round_state = fields.Selection(

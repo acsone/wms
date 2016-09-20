@@ -27,9 +27,11 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
+        'stock_grn',
         ],
     'data': [
         'views/stock.xml',
+        'data.xml',
     ],
     'installable': True,
     'auto_install': False,
