@@ -20,16 +20,16 @@ https://caas.camptocamp.net/env/1a9723)
 3. stop the services
 
   ```
-  $ rancher-compose -p qoqa-odoo-integration stop
+  $ rancher-compose -p alcyon-odoo-integration stop
   ```
 
 4. drop the odoo and db services (so we clean the database and filestore)
   ```
-  rancher-compose -p qoqa-odoo-integration rm db odoo --force
+  rancher-compose -p alcyon-odoo-integration rm db odoo --force
   ```
 
 5. upgrade the services
 
   ```
-  rancher-compose -p qoqa-odoo-integration up --pull --recreate --force-recreate --confirm-upgrade -d
+  rancher-compose -p alcyon-odoo-integration up --pull --recreate --force-recreate --confirm-upgrade -d
   ```
