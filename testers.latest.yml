@@ -10,13 +10,13 @@ services:
     volumes:
       - "data-odoo:/data/odoo"
     environment:
-      - SCENARIO_MAIN_TAG=alcyon
       - DB_USER=odoo
       - DB_PASSWORD=odoo
       - DB_NAME=odoodb
       - ADMIN_PASSWD=mijaebohb8Thae1g
       - RUNNING_ENV=dev
-      - DEMO=scenario
+      - MARABUNTA_MODE=demo
+      - DEMO=False
 
   db:
     image: postgres:9.5

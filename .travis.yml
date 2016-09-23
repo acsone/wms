@@ -18,6 +18,7 @@ env:
     - SONGS_DIR=${TRAVIS_BUILD_DIR}/odoo/songs
     - COMPOSE_PROJECT_NAME=alcyon
     - RANCHER_STACK_NAME=alcyon-odoo-test
+    - secure: "sE+53dihCQ9DzZ7TbgTy6wlSEU7cep9xHvem5+Nj0uI2xKHC31ISA/OdR0nidsLtrs4MBbbyTzZaRZU6ZnnN0xYQ+N9Vo9HGN/iWQidBZSxd3w1X7oQBRoL06ILQK211FIv/457WkENP9VzwTj47f+zSfs+2LM2I1cHamsfnhRfyW2d3V0rJ2C+aB8z30eqAYZiYodoNBeoYLcPCZHu+9rscIeIn6AxWRNoXRHPSMCfJvrl7FU1KfDrFlQdms0j/3/ATNt3RZnJNtTfeWD5MgurFy5e9CMY7KNOBuGwIhqCwWYvKgQtL78E2qfmBi+I5OAlcz4Xvd++O5ZopL8VHgtHZORYrFGCLc/ta1TebL31v51S9Y4zhlkAJKguz4M4KnqyqGgWnDpLTHinkoJjBVOgybh7c9DcWyE2J5+5Lq0PWwV9S6/4OVDcdM8lmaXDRTNjuRR9NEZvGJXZIVhbAE7GIalHttjWRomM0TnbNuE1r7C1bnSYyg1+VMd0uiDnGO4nemlMvI9nmqTMXgJxClXizS/4CA1gKNFtgjOhqkmUhhFeYuxAsJZqo9leeMsdXnDEOWzImFDwfmTOrFzFs3KkKq4RJybnN9BSHc9/ARiQ1Ux3TrOdUtqb5To8Cj6sNmxHf0FGqfC61n4SFe52F/CKgR2cJY6WTXuLi4l/GK5M="
 
 before_install:
   - sudo apt-get update
@@ -33,7 +34,6 @@ before_install:
 install:
   - if [ "$LINT_CHECK" == "0" ] ; then git submodule init ; fi
   - if [ "$LINT_CHECK" == "0" ] ; then git submodule update ; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then docker-compose build --pull ; fi
     # we always specify '-f docker-compose.yml' so 'docker-compose.override.yml'
     # is not used and so the volumes are not shared with the host
   - if [ "$LINT_CHECK" == "0" ] ; then docker-compose -f docker-compose.yml build --pull ; fi
