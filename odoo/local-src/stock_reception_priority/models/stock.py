@@ -22,6 +22,31 @@
 from openerp import fields, models, api
 
 
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    arrangement_importance = fields.Float(
+        'Arrangement Importance',
+        compute='_get_arrangement_importance')
+
+    @api.one
+    def _get_arrangement_importance(self):
+        # il faut calculer combien de temps on tient en tenant compte d'une consommation moyenne de 1,6 (=2)
+        """ How often then product is taken in a bin, how important it is to
+        arrange. This is divided by the quantity already arranged. """
+        start_date = (date.today() - timedelta(days=6 * 30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        customer_loc = self.env.ref('stock.stock_location_customers')
+        qty_moves = self.env['stock.move'].search_count([
+            ('date', '>=', start_date),
+            ('product_id', '=', self.id),
+            ('state', 'not in', ('draft', 'cancel')),
+            ('location_dest_id', '=', customer_loc.id),
+            ])
+        # WIP ... FIXME
+        # qty_in_stock = self.qty_
+        # self.arrangement_importance = qty_moves / max(1, self.qty_
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
