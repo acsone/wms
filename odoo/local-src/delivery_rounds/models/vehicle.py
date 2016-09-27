@@ -26,3 +26,9 @@ class RoundVehicle(models.Model):
     _name = "round.vehicle"
 
     name = fields.Char('Name')
+    zone_ids = fields.Many2many(
+        'round.zone',
+        string="Zones")
+    color = fields.Integer('Color Index')
+    time = fields.Float(
+        'Planned Time')

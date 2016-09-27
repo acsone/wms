@@ -20,6 +20,17 @@ def create_product_categories(ctx):
 
 
 @anthem.log
+def set_customer_lead_time(ctx):
+    create_or_update(ctx, 'ir.values', '__init.product_customer_lead', {
+        'key': 'default',
+        'name': 'sale_delay',
+        'model': 'product.template',
+        'value_unpickle': '1',
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     create_product_categories(ctx)
+    set_customer_lead_time(ctx)

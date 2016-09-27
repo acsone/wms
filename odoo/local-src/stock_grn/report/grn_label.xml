@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="brady_grn_label_v1">
+    <div class="raw"><t t-foreach="docs" t-as="object">\x02L\r
+m\r
+z\r
+H15\r
+101200100030045rem:\r
+101200100030120<t t-esc="object.from_info and object.from_info[:45]"/>\r
+101200100500390Ori:\r
+111100100500450<t t-esc="object.origin and object.origin[:10]"/>\r
+101200100500045dte:\r
+111100100500120<t t-esc="object.date and object.date[:10]"/>\r
+101200100880045AWB:\r
+111100100880120<t t-esc="object.carrier_ref and object.carrier_ref[:10]"/>\r
+101200100880390Ref:\r
+111100100880450<t t-esc="object.ref and object.ref[:10]"/>\r
+101200101260390Ord:\r
+111100101260450<t t-esc="object.order_ref and object.order_ref[:10]"/>\r
+101200101260045Car:\r
+111100101260120<t t-esc="object.carrier_id.name and object.carrier_id.name[:10]"/>\r
+101200101750390Qt:\r
+111100101750450P:<t t-esc="object.qty_pallet"/> B:<t t-esc="object.qty_box"/>\r
+101200101750045log:\r
+121100201750120<t t-esc="object.name"/>\r
+121100201800690<t t-esc="object.type_id.name and object.type_id.name[:3]"/>\r
+Q00001\r
+E\r
+\x02Kb100</t></div>
+</template>
+
+<template id="grn_label">
+    <html>
+    <head>
+    <style>
+
+    </style>
+    </head>
+    <body>
+
+    <div class="header">
+        <div style="float:left;font-size:10px">
+            <span t-field="report.name"/>
+        </div>
+        <div style="float:right;font-size:10px">
+            <span t-field="user.name"/>
+        </div>
+    </div>
+
+    <div class="footer">
+    </div>
+
+    <t t-set="labelnr" t-value="1"/>
+    <div class="page">
+        <t t-foreach="docs" t-as="object">
+
+            <div t-att-style="'padding:10px 10px; font-size:11px; page-break-inside:avoid; overflow:hidden; border:0px solid black; display:inline-block; width:%s%%%%; height:29.9mm;' % (100 / paperformat.content_columns)">
+                <div style="white-space:nowrap">
+                    <span t-field="object.name"/>
+                </div>
+            </div>
+
+            <t t-set="labelnr" t-value="labelnr + 1"/>
+            <t t-if="labelnr > paperformat.content_count and object != object[-1]">
+                <p style="page-break-after: always">&amp;nbsp;</p>
+                <t t-set="labelnr" t-value="1"/>
+            </t>
+        </t>
+    </div>
+    </body>
+    </html>
+</template>
+
+<report
+    id="report_grn_label"
+    string="GRN Label"
+    model="stock.grn"
+    report_type="qweb-pdf"
+    file="stock_grn.grn_label"
+    name="stock_grn.grn_label"
+/>
+
+<record id="report_grn_label" model="ir.actions.report.xml">
+    <field name="paperformat_id" ref="qansee_printing.paperformat_apli_a4_3x11"/>
+    <field name="proxy_template_id" ref="brady_grn_label_v1"/>
+</record>
+
+</data>
+</openerp>

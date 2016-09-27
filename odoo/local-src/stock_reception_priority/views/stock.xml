@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <record id="view_picking_tree" model="ir.ui.view">
+        <field name="name">stock.picking.prio</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="qty_backorder"/>
+                <field name="qty_outofstock"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.prio</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="qty_backorder"/>
+                <field name="qty_outofstock"/>
+            </field>
+        </field>
+    </record>
+
+  </data>
+</openerp>
