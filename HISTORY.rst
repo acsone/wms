@@ -6,14 +6,29 @@ Release History
 Unreleased
 ++++++++++
 
-**Features and Improvements**
+**Data Migration**
 
-* Make supplier_promotion and alcyon_discount editable.
-* Update demo csv files with AS400 imported data
+**Features and Improvements**
 
 **Bugfixes**
 
-* Fix the applied_on order for pricelist item.
+**Build**
+
+**Documentation**
+
+
+9.2.0 (2016-09-29)
+++++++++++++++++++
+
+**Features and Improvements**
+
+* Supplier promotion and Alcyon discount.
+* Add price category in product which can be used in pricelist.
+* Add Alcyon Category in partner.
+* Add Medical Device boolean in product.
+* Add sale channel field in sale order.
+* Improve delivery rounds.
+* Update demo csv files with AS400 imported data
 
 **Build**
 
@@ -22,8 +37,7 @@ Unreleased
 * Now using the new migration stack (anthem and marabunta), oerpscenario is
   deprecated
 * Improve the documentation, including a page on the new stack
-
-**Documentation**
+* Upgrade docker-odoo-project to 1.5.0
 
 
 9.1.0 (2016-07-11)
