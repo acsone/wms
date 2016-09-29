@@ -1,201 +1,301 @@
-name,weight,uom_id/id,default_code,active,price_category_id/id,id,uom_po_id/id
-"ATROPINE SULFATE 0,5MG 10AMP",0,product.product_uom_unit,0000001,True,scenario.product_price_category_gma,scenario.product_0000001,product.product_uom_unit
-"ATROPINE SULFATE 0,5mg 100AMP",0,product.product_uom_unit,0000002,True,scenario.product_price_category_gma,scenario.product_0000002,product.product_uom_unit
-ATROPINE SULFATE 1MG 1ML 10AMP,0,product.product_uom_unit,0000003,True,scenario.product_price_category_gma,scenario.product_0000003,product.product_uom_unit
-EPHEDRINE 50MG 1ML 10AMP,0,product.product_uom_unit,0000005,True,scenario.product_price_category_gma,scenario.product_0000005,product.product_uom_unit
-"ATROPINE SULFATE 0,25MG 10AMP",0,product.product_uom_unit,0000008,True,scenario.product_price_category_gma,scenario.product_0000008,product.product_uom_unit
-CARDUS MARIANUS 125ML DOLISOS,0,product.product_uom_unit,0000009,True,scenario.product_price_category_gma,scenario.product_0000009,product.product_uom_unit
-FLACON BRUN HEXAGONAL 100ml +CP,0.090,product.product_uom_unit,0011001,True,scenario.product_price_category_gma,scenario.product_0011001,product.product_uom_unit
-FLACON VERRE BRUN ROND  60ml+CP x25,0.060,product.product_uom_unit,0011002,True,scenario.product_price_category_gma,scenario.product_0011002,product.product_uom_unit
-BETOPTIC 5ML,0,product.product_uom_unit,0012138,True,scenario.product_price_category_gma,scenario.product_0012138,product.product_uom_unit
-NITROLINGUAL SPRAY,0,product.product_uom_unit,0012146,True,scenario.product_price_category_gma,scenario.product_0012146,product.product_uom_unit
-RENNIE 96CP SANS SUCRE,0,product.product_uom_unit,0012641,True,scenario.product_price_category_gma,scenario.product_0012641,product.product_uom_unit
-OMNIPAQUE 300 50ML,0,product.product_uom_unit,0012872,True,scenario.product_price_category_gma,scenario.product_0012872,product.product_uom_unit
-OMNIPAQUE 300 100ML,0,product.product_uom_unit,0012930,True,scenario.product_price_category_gma,scenario.product_0012930,product.product_uom_unit
-ANTIVERRUES USAGE INTERNE GT UNDA,0,product.product_uom_unit,0013992,True,scenario.product_price_category_gma,scenario.product_0013992,product.product_uom_unit
-DAKTARIN 30GR CREAM,0,product.product_uom_unit,0014258,True,scenario.product_price_category_gma,scenario.product_0014258,product.product_uom_unit
-GAZOFIX BDE  8CMx4M,0.030,product.product_uom_unit,0014290,True,scenario.product_price_category_gma,scenario.product_0014290,product.product_uom_unit
-URFADYN PL 50 CAPS.,0,product.product_uom_unit,0014738,True,scenario.product_price_category_gma,scenario.product_0014738,product.product_uom_unit
-DUSPATALIN 40DR 135MG,0,product.product_uom_unit,0014845,True,scenario.product_price_category_gma,scenario.product_0014845,product.product_uom_unit
-TENORMIN MITIS 50MG 56CP,0,product.product_uom_unit,0015032,True,scenario.product_price_category_gma,scenario.product_0015032,product.product_uom_unit
-TORENTAL 400MG 60CP,0,product.product_uom_unit,0015040,True,,scenario.product_0015040,product.product_uom_unit
-HIBITANE TEINTURE 500ml,0,product.product_uom_unit,0015073,True,,scenario.product_0015073,product.product_uom_unit
-DIABUR TEST 5000 (GLUCOSE) x50,0.060,product.product_uom_unit,0015305,True,scenario.product_price_category_gma,scenario.product_0015305,product.product_uom_unit
-"GEOMYCINE CREME 0,1% 15GR",0,product.product_uom_unit,0015735,True,scenario.product_price_category_gma,scenario.product_0015735,product.product_uom_unit
-ADRIBLASTINA RD 5 AMP 10MG,0,product.product_uom_unit,0016261,True,scenario.product_price_category_gma,scenario.product_0016261,product.product_uom_unit
-ACTAPULGITE 30 SACH 3GR,0,product.product_uom_unit,0016501,True,scenario.product_price_category_gma,scenario.product_0016501,product.product_uom_unit
-ALLOPURINOL 300MG 90CP EG,0,product.product_uom_unit,0016832,True,,scenario.product_0016832,product.product_uom_unit
-FUROSEMIDE 40MG 50CP,0,product.product_uom_unit,0017301,True,scenario.product_price_category_gma,scenario.product_0017301,product.product_uom_unit
-ALDACTAZINE 28CP,0,product.product_uom_unit,0017566,True,scenario.product_price_category_gma,scenario.product_0017566,product.product_uom_unit
-ALBICORT 10 5ML 10MG/ML,0,product.product_uom_unit,0018028,True,scenario.product_price_category_gma,scenario.product_0018028,product.product_uom_unit
-ALFAVIT 20CP,0,product.product_uom_unit,0018234,True,scenario.product_price_category_gma,scenario.product_0018234,product.product_uom_unit
-"FML LIQUIFILM COLLYRE 0,1% 5ml",0,product.product_uom_unit,0018507,True,scenario.product_price_category_gma,scenario.product_0018507,product.product_uom_unit
-ALKERAN 25CP 2MG,0,product.product_uom_unit,0018614,True,scenario.product_price_category_gma,scenario.product_0018614,product.product_uom_unit
-ALOPATE PATE 45GR,0,product.product_uom_unit,0018671,True,scenario.product_price_category_gma,scenario.product_0018671,product.product_uom_unit
-AMUKIN IM IV 500mg 2FL,0,product.product_uom_unit,0018911,True,scenario.product_price_category_gma,scenario.product_0018911,product.product_uom_unit
-ANAFRANIL 150DR 25MG,0,product.product_uom_unit,0019455,True,scenario.product_price_category_gma,scenario.product_0019455,product.product_uom_unit
-ANDROCUR 50 COMP. 50MG,0,product.product_uom_unit,0019554,True,scenario.product_price_category_gma,scenario.product_0019554,product.product_uom_unit
-ANAFRANIL 30DR 25MG,0,product.product_uom_unit,0019778,True,scenario.product_price_category_gma,scenario.product_0019778,product.product_uom_unit
-ANAFRANIL 150DR 10MG,0,product.product_uom_unit,0019786,True,scenario.product_price_category_gma,scenario.product_0019786,product.product_uom_unit
-BROMAZEPAM EG 12MG 50CP,0,product.product_uom_unit,0020008,True,scenario.product_price_category_gma,scenario.product_0020008,product.product_uom_unit
-ALDACTAZINE 98CP,0,product.product_uom_unit,0020214,True,scenario.product_price_category_gma,scenario.product_0020214,product.product_uom_unit
-DIPROSALIC ONGUENT 30GR,0,product.product_uom_unit,0021006,True,scenario.product_price_category_gma,scenario.product_0021006,product.product_uom_unit
-ASPEGIC  500 20SACHETS,0,product.product_uom_unit,0021253,True,scenario.product_price_category_gma,scenario.product_0021253,product.product_uom_unit
-"ATROVENT SOLUTION 0,25mg/ml 20x2ml",0,product.product_uom_unit,0021519,True,scenario.product_price_category_gma,scenario.product_0021519,product.product_uom_unit
-COUGH LINCTUS 500ML,0,product.product_uom_unit,0021830,True,,scenario.product_0021830,product.product_uom_unit
-"MONOSYN USP4/0 EP1,5 HR22 C22014 (36)",0,product.product_uom_unit,0022014,True,scenario.product_price_category_gma,scenario.product_0022014,product.product_uom_unit
-BACTRIM FORTE 30CP,0,product.product_uom_unit,0022269,True,scenario.product_price_category_gma,scenario.product_0022269,product.product_uom_unit
-BACTRIM FORTE 10CP,0,product.product_uom_unit,0022277,True,scenario.product_price_category_gma,scenario.product_0022277,product.product_uom_unit
-"TOBREX ONG OPHT 3,5GR",0,product.product_uom_unit,0022897,True,scenario.product_price_category_gma,scenario.product_0022897,product.product_uom_unit
-BETADERMYL SAVON 100G,0,product.product_uom_unit,0024166,True,scenario.product_price_category_gma,scenario.product_0024166,product.product_uom_unit
-BEFORPLEX 50CP,0,product.product_uom_unit,0024414,True,scenario.product_price_category_gma,scenario.product_0024414,product.product_uom_unit
-BETASERC 100CP 8MG,0,product.product_uom_unit,0024935,True,scenario.product_price_category_gma,scenario.product_0024935,product.product_uom_unit
-BEPANTHENE 100CP,0,product.product_uom_unit,0025163,True,scenario.product_price_category_gma,scenario.product_0025163,product.product_uom_unit
-BITHIOL 10% 22GR,0,product.product_uom_unit,0025700,True,,scenario.product_0025700,product.product_uom_unit
-BISOLVON INHALAT. SOL 100ML,0,product.product_uom_unit,0025817,True,scenario.product_price_category_gma,scenario.product_0025817,product.product_uom_unit
-BLEOMYCINE 1FL AMP 15MG IM IV,0,product.product_uom_unit,0025825,True,scenario.product_price_category_gma,scenario.product_0025825,product.product_uom_unit
-"OXYBUPROCAINE 0,4% 20x0,5ml",0,product.product_uom_unit,0025916,True,,scenario.product_0025916,product.product_uom_unit
-"TETRACAINE HCL 0,5% 20x0,5ml",0,product.product_uom_unit,0026245,True,scenario.product_price_category_gma,scenario.product_0026245,product.product_uom_unit
-EUCETA GEL 54GR,0,product.product_uom_unit,0026518,True,scenario.product_price_category_gma,scenario.product_0026518,product.product_uom_unit
-BORGAL 24% 100ML,0.240,product.product_uom_unit,0026963,True,,scenario.product_0026963,product.product_uom_unit
-BEFACT 100DRAG,0,product.product_uom_unit,0027400,True,scenario.product_price_category_gma,scenario.product_0027400,product.product_uom_unit
-BUSCOPAN 6AMP 20MG,0,product.product_uom_unit,0027771,True,scenario.product_price_category_gma,scenario.product_0027771,product.product_uom_unit
-COLMAN BAIN SOUVERAIN 200GR,0,product.product_uom_unit,0027904,True,scenario.product_price_category_gma,scenario.product_0027904,product.product_uom_unit
-CALSYNAR SOL INJ 2ML 400UI,0,product.product_uom_unit,0028555,True,scenario.product_price_category_gma,scenario.product_0028555,product.product_uom_unit
-CANTABILINE 90GEL,0,product.product_uom_unit,0028829,True,scenario.product_price_category_gma,scenario.product_0028829,product.product_uom_unit
-AUGMENTIN 16CP 500MG,0,product.product_uom_unit,0029025,True,scenario.product_price_category_gma,scenario.product_0029025,product.product_uom_unit
-CARBOLACTANOSE 30GEL,0,product.product_uom_unit,0029058,True,scenario.product_price_category_gma,scenario.product_0029058,product.product_uom_unit
-CATOSAL 100ML,0.210,product.product_uom_unit,0029132,True,,scenario.product_0029132,product.product_uom_unit
-"DISTINJECT SERINGUE SPEEDY 20mm 3,5ml x4",0,product.product_uom_unit,0029149,True,scenario.product_price_category_gma,scenario.product_0029149,product.product_uom_unit
-CREMICORT H 1%,0,product.product_uom_unit,0029157,True,scenario.product_price_category_gma,scenario.product_0029157,product.product_uom_unit
-CHLORPOTASSURIL 10AMP BUV,0,product.product_uom_unit,0029249,True,scenario.product_price_category_gma,scenario.product_0029249,product.product_uom_unit
-CARIL POUDRE 300gr,0,product.product_uom_unit,0029348,True,scenario.product_price_category_gma,scenario.product_0029348,product.product_uom_unit
-CELESTONE AMP 1x1ML IM IV,0,product.product_uom_unit,0029777,True,scenario.product_price_category_gma,scenario.product_0029777,product.product_uom_unit
-CHLORAMPHENICOL POMM OPHT 1% 4GR,0,product.product_uom_unit,0030304,True,scenario.product_price_category_gma,scenario.product_0030304,product.product_uom_unit
-CHAPSTICK PLUS,0,product.product_uom_unit,0030494,True,,scenario.product_0030494,product.product_uom_unit
-CITANEST 2% 20ML SS ADREN.,0,product.product_uom_unit,0031005,True,scenario.product_price_category_gma,scenario.product_0031005,product.product_uom_unit
-CLOMID 10CP,0,product.product_uom_unit,0031450,True,scenario.product_price_category_gma,scenario.product_0031450,product.product_uom_unit
-CLONAZONE PDRE 20G,0,product.product_uom_unit,0031468,True,scenario.product_price_category_gma,scenario.product_0031468,product.product_uom_unit
-CURPOL SUSP ORALE 180ML,0,product.product_uom_unit,0033019,True,scenario.product_price_category_gma,scenario.product_0033019,product.product_uom_unit
-C WILL 50CP,0,product.product_uom_unit,0033050,True,scenario.product_price_category_gma,scenario.product_0033050,product.product_uom_unit
-D CURE 4AMP,0,product.product_uom_unit,0033282,True,scenario.product_price_category_gma,scenario.product_0033282,product.product_uom_unit
-DANTRIUM 100MG 50CAPS,0,product.product_uom_unit,0033530,True,,scenario.product_0033530,product.product_uom_unit
-AUGMENTIN SIROP 125MG,0,product.product_uom_unit,0033548,True,scenario.product_price_category_gma,scenario.product_0033548,product.product_uom_unit
-DARAPRIM 30CP 25MG,0,product.product_uom_unit,0033571,True,scenario.product_price_category_gma,scenario.product_0033571,product.product_uom_unit
-OXAZEPAM 50CP 15MG EG,0,product.product_uom_unit,0033795,True,scenario.product_price_category_gma,scenario.product_0033795,product.product_uom_unit
-DAKTARIN ORAL GEL,0,product.product_uom_unit,0033910,True,scenario.product_price_category_gma,scenario.product_0033910,product.product_uom_unit
-DAKTARIN TEINT.30ML,0,product.product_uom_unit,0034009,True,scenario.product_price_category_gma,scenario.product_0034009,product.product_uom_unit
-DE ICOL CUSI COLLYRE 5ML,0,product.product_uom_unit,0034058,True,scenario.product_price_category_gma,scenario.product_0034058,product.product_uom_unit
-AUGMENTIN SIROP 250MG,0,product.product_uom_unit,0034637,True,scenario.product_price_category_gma,scenario.product_0034637,product.product_uom_unit
-"ELTHYRONE 100cp 0,2mg",0,product.product_uom_unit,0035000,True,scenario.product_price_category_gma,scenario.product_0035000,product.product_uom_unit
-MATELAS VACUUM AVEC POIGNEES 80X100cm,0,product.product_uom_unit,0035434,True,scenario.product_price_category_gma,scenario.product_0035434,product.product_uom_unit
-DIAMOX PARENTERAL VIAL 1x500MG INJ,0,product.product_uom_unit,0035469,True,,scenario.product_0035469,product.product_uom_unit
-DICHLOTRIDE 25CP 50MG,0,product.product_uom_unit,0035600,True,scenario.product_price_category_gma,scenario.product_0035600,product.product_uom_unit
-DERMOVATE ONGUENT 30GR,0,product.product_uom_unit,0035725,True,scenario.product_price_category_gma,scenario.product_0035725,product.product_uom_unit
-DIPIPERON 60CP 40MG,0,product.product_uom_unit,0036517,True,scenario.product_price_category_gma,scenario.product_0036517,product.product_uom_unit
-DIPIPERON GTTES 60ML,0,product.product_uom_unit,0036566,True,scenario.product_price_category_gma,scenario.product_0036566,product.product_uom_unit
-DUPHALAC SOL 300ML,0,product.product_uom_unit,0036632,True,scenario.product_price_category_gma,scenario.product_0036632,product.product_uom_unit
-DIPROSONE LOT.30ML,0,product.product_uom_unit,0036707,True,scenario.product_price_category_gma,scenario.product_0036707,product.product_uom_unit
-DOG-ECZEMA 100GR,0.140,product.product_uom_unit,0037028,True,,scenario.product_0037028,product.product_uom_unit
-DOGMINTH PATE TUBE 24GR,0.130,product.product_uom_unit,0037077,True,,scenario.product_0037077,product.product_uom_unit
-DULCOLAX 40dragées,0,product.product_uom_unit,0037457,True,scenario.product_price_category_gma,scenario.product_0037457,product.product_uom_unit
-DROXARYL CREME 50GR,0,product.product_uom_unit,0037473,True,scenario.product_price_category_gma,scenario.product_0037473,product.product_uom_unit
-"EFFORTYL GTTES 0,75% 50G SOLUTION",0,product.product_uom_unit,0037556,True,scenario.product_price_category_gma,scenario.product_0037556,product.product_uom_unit
-"DURATEARS UNG OPHT 3,5GR",0,product.product_uom_unit,0037820,True,scenario.product_price_category_gma,scenario.product_0037820,product.product_uom_unit
-"SAFIL USP6/0 EP0,7 15M",0,product.product_uom_unit,0038100,True,,scenario.product_0038100,product.product_uom_unit
-SAFIL USP5/0 EP1 15M VI F0038101,0,product.product_uom_unit,0038101,True,,scenario.product_0038101,product.product_uom_unit
-"SAFIL USP4/0 EP1,5 15M VI F0038102",0,product.product_uom_unit,0038102,True,,scenario.product_0038102,product.product_uom_unit
-SAFIL USP3/0 EP2 15M VI F0038103,0.160,product.product_uom_unit,0038103,True,,scenario.product_0038103,product.product_uom_unit
-SAFIL USP2/0 EP3 15M VI F1038104,0.160,product.product_uom_unit,0038104,True,,scenario.product_0038104,product.product_uom_unit
-"SAFIL USP0 EP3,5 15M VI F1038105",0,product.product_uom_unit,0038105,True,,scenario.product_0038105,product.product_uom_unit
-SAFIL USP1 EP4 15M VI F1038106,0,product.product_uom_unit,0038106,True,,scenario.product_0038106,product.product_uom_unit
-EAU PRECIEUSE SOL 375ML,0,product.product_uom_unit,0038224,True,,scenario.product_0038224,product.product_uom_unit
-EFUDIX 5% ONG 20GR,0,product.product_uom_unit,0038521,True,scenario.product_price_category_gma,scenario.product_0038521,product.product_uom_unit
-SAFIL USP3/0 EP2 250CM 1038715 x12,0,product.product_uom_unit,0038715,True,scenario.product_price_category_gma,scenario.product_0038715,product.product_uom_unit
-SAFIL USP1 EP4 250CM VE G38719,0,product.product_uom_unit,0038719,True,scenario.product_price_category_gma,scenario.product_0038719,product.product_uom_unit
-EFFERALGAN 20CP EFFERV,0,product.product_uom_unit,0038927,True,scenario.product_price_category_gma,scenario.product_0038927,product.product_uom_unit
-ENDOXAN 500MG 1VIAL,0,product.product_uom_unit,0039123,True,scenario.product_price_category_gma,scenario.product_0039123,product.product_uom_unit
-"ELTHYRONE 100CP 0,05MG",0,product.product_uom_unit,0039248,True,scenario.product_price_category_gma,scenario.product_0039248,product.product_uom_unit
-DAFALGAN 30CP,0,product.product_uom_unit,0039347,True,scenario.product_price_category_gma,scenario.product_0039347,product.product_uom_unit
-EOLINE CREME 15GR,0,product.product_uom_unit,0039669,True,scenario.product_price_category_gma,scenario.product_0039669,product.product_uom_unit
-ERYTHROCINE FLACON 1GR IV,0,product.product_uom_unit,0039834,True,,scenario.product_0039834,product.product_uom_unit
-ERYTHROFORTE 500 16SACH,0,product.product_uom_unit,0039917,True,scenario.product_price_category_gma,scenario.product_0039917,product.product_uom_unit
-PEHA-HAFT latexfree 06cmx20m,0.070,product.product_uom_unit,0040097,True,scenario.product_price_category_gma,scenario.product_0040097,product.product_uom_unit
-EUCALYPTINE PHOLCODINE SIROP 200ML,0,product.product_uom_unit,0040162,True,scenario.product_price_category_gma,scenario.product_0040162,product.product_uom_unit
-EUCALYPTINE PHOLCODINE 10SUPPO NOURISS.,0,product.product_uom_unit,0040295,True,scenario.product_price_category_gma,scenario.product_0040295,product.product_uom_unit
-OCAL BAIN 125ML,0,product.product_uom_unit,0040345,True,scenario.product_price_category_gma,scenario.product_0040345,product.product_uom_unit
-"EUMOVATE 0,05% CREME 30GR",0,product.product_uom_unit,0040394,True,,scenario.product_0040394,product.product_uom_unit
-DOGMATIL 12CP 200MG,0,product.product_uom_unit,0040766,True,scenario.product_price_category_gma,scenario.product_0040766,product.product_uom_unit
-FASIGYN 4CP 500MG,0,product.product_uom_unit,0041020,True,scenario.product_price_category_gma,scenario.product_0041020,product.product_uom_unit
-"FLEET ENEMA PEDIAT 2,250Z",0,product.product_uom_unit,0041863,True,scenario.product_price_category_gma,scenario.product_0041863,product.product_uom_unit
-FLUBENOL 5%  600 GR,0.340,product.product_uom_unit,0041921,True,,scenario.product_0041921,product.product_uom_unit
-FOLLIGON 1FL+SOLVANT 1000UI,0.050,product.product_uom_unit,0042028,True,,scenario.product_0042028,product.product_uom_unit
-FLAMMAZINE CREME 50GR,0,product.product_uom_unit,0042150,True,scenario.product_price_category_gma,scenario.product_0042150,product.product_uom_unit
-FLAMMAZINE CREME 500GR,0,product.product_uom_unit,0042168,True,scenario.product_price_category_gma,scenario.product_0042168,product.product_uom_unit
-FABRY GTTES FORMA  15ML,0.060,product.product_uom_unit,0042267,True,,scenario.product_0042267,product.product_uom_unit
-FRISIUM 50x10MG,0,product.product_uom_unit,0042390,True,,scenario.product_0042390,product.product_uom_unit
-FURADANTINE 50CP 50MG,0,product.product_uom_unit,0042500,True,scenario.product_price_category_gma,scenario.product_0042500,product.product_uom_unit
-FUCIDIN INTERTULLE 10X10CM /10,0,product.product_uom_unit,0042671,True,scenario.product_price_category_gma,scenario.product_0042671,product.product_uom_unit
-FLUIMICIL ANTIBIOTIC 3 AMPOULES,0,product.product_uom_unit,0042887,True,scenario.product_price_category_gma,scenario.product_0042887,product.product_uom_unit
-GAVISCON PDRE 50GR,0,product.product_uom_unit,0044180,True,scenario.product_price_category_gma,scenario.product_0044180,product.product_uom_unit
-GLIBENESE 100CP 5MG,0,product.product_uom_unit,0044248,True,scenario.product_price_category_gma,scenario.product_0044248,product.product_uom_unit
-DAFALGAN 32CP EFF,0,product.product_uom_unit,0044545,True,scenario.product_price_category_gma,scenario.product_0044545,product.product_uom_unit
-IVOMEC BOVINS  50ML,0.360,product.product_uom_unit,0045518,True,,scenario.product_0045518,product.product_uom_unit
-PATHOZONE SER 10X10ML,0.420,product.product_uom_unit,0045666,True,,scenario.product_0045666,product.product_uom_unit
-ASTREXINE PDRE 30gr,0,product.product_uom_unit,0045856,True,scenario.product_price_category_gma,scenario.product_0045856,product.product_uom_unit
-HALDOL 5 AMP 1ML 5MG/ML,0,product.product_uom_unit,0046128,True,scenario.product_price_category_gma,scenario.product_0046128,product.product_uom_unit
-HEMOSEDAN P POM 30GR,0,product.product_uom_unit,0046946,True,scenario.product_price_category_gma,scenario.product_0046946,product.product_uom_unit
-CORSODYL GEL 50GR,0,product.product_uom_unit,0047530,True,scenario.product_price_category_gma,scenario.product_0047530,product.product_uom_unit
-HEXOMEDINE HYDROALC 250ML 1/1000,0,product.product_uom_unit,0047555,True,scenario.product_price_category_gma,scenario.product_0047555,product.product_uom_unit
-HIBISCRUB SAVON ANTISEPTIQUE 500ml,0.620,product.product_uom_unit,0047639,True,scenario.product_price_category_gma,scenario.product_0047639,product.product_uom_unit
-CORSODYL BAIN DE BOUCHE 200ML,0,product.product_uom_unit,0047738,True,scenario.product_price_category_gma,scenario.product_0047738,product.product_uom_unit
-HIBITANE PLUS 5% CONCENTRE 5 LITRES,0,product.product_uom_unit,0047829,True,,scenario.product_0047829,product.product_uom_unit
-"TROPICOL COLLYRE 0,5%",0,product.product_uom_unit,0047894,True,scenario.product_price_category_gma,scenario.product_0047894,product.product_uom_unit
-IMAVEROL PETIT MODELE 100ml,0.340,product.product_uom_unit,0048173,True,,scenario.product_0048173,product.product_uom_unit
-IMAVEROL 1000 ml,1.200,product.product_uom_unit,0048181,True,,scenario.product_0048181,product.product_uom_unit
-HYDROCORTISONE 20CP 20MG,0,product.product_uom_unit,0048363,True,scenario.product_price_category_gma,scenario.product_0048363,product.product_uom_unit
-HOMEOPLASMINE BAUME 40GR,0,product.product_uom_unit,0048728,True,scenario.product_price_category_gma,scenario.product_0048728,product.product_uom_unit
-FABRY IDEAL SEL DE BAIN 750GR,0.800,product.product_uom_unit,0048843,True,,scenario.product_0048843,product.product_uom_unit
-IMODIUM 20CP,0,product.product_uom_unit,0049122,True,scenario.product_price_category_gma,scenario.product_0049122,product.product_uom_unit
-IMODIUM 60GEL,0,product.product_uom_unit,0049130,True,scenario.product_price_category_gma,scenario.product_0049130,product.product_uom_unit
-ISOBETADINE BUCCALE 200ml,0.360,product.product_uom_unit,0049478,True,scenario.product_price_category_gma,scenario.product_0049478,product.product_uom_unit
-ISOBETADINE GEL 100GR,0.130,product.product_uom_unit,0049479,True,scenario.product_price_category_gma,scenario.product_0049479,product.product_uom_unit
-IODURE SODIQUE COLLYRE 2% ASTA,0,product.product_uom_unit,0050237,True,scenario.product_price_category_gma,scenario.product_0050237,product.product_uom_unit
-ISOPTINE 5AMP 2ML,0,product.product_uom_unit,0050559,True,scenario.product_price_category_gma,scenario.product_0050559,product.product_uom_unit
-ISOPTO TEARS FL GUTT 15ML,0,product.product_uom_unit,0050575,True,scenario.product_price_category_gma,scenario.product_0050575,product.product_uom_unit
-ISOPTO CARPINE COLL 15ML,0,product.product_uom_unit,0050658,True,scenario.product_price_category_gma,scenario.product_0050658,product.product_uom_unit
-"ISUPREL 5 AMP 1ML 0,2MG",0,product.product_uom_unit,0050732,True,scenario.product_price_category_gma,scenario.product_0050732,product.product_uom_unit
-ISOPTO CARBACHOL 3% 15ML,0,product.product_uom_unit,0050963,True,scenario.product_price_category_gma,scenario.product_0050963,product.product_uom_unit
-KEFORAL 16CP 500MG,0,product.product_uom_unit,0051714,True,scenario.product_price_category_gma,scenario.product_0051714,product.product_uom_unit
-KY GELEE LUBRIFIANTE 82GR,0,product.product_uom_unit,0052407,True,scenario.product_price_category_gma,scenario.product_0052407,product.product_uom_unit
-LASIX AMP INJ 250MG PERF IV 5X25ML,0,product.product_uom_unit,0053017,True,scenario.product_price_category_gma,scenario.product_0053017,product.product_uom_unit
-LAXOBERON GTTES 15ML,0,product.product_uom_unit,0053330,True,scenario.product_price_category_gma,scenario.product_0053330,product.product_uom_unit
-LEDERTREXATE SODIUM 50MG 1FL,0,product.product_uom_unit,0053405,True,scenario.product_price_category_gma,scenario.product_0053405,product.product_uom_unit
-LEDERVORIN CALCIUM 6AMP 1ML,0,product.product_uom_unit,0053447,True,scenario.product_price_category_gma,scenario.product_0053447,product.product_uom_unit
-LIQUIFILM TEARS COLLYRE 15ML,0,product.product_uom_unit,0054619,True,scenario.product_price_category_gma,scenario.product_0054619,product.product_uom_unit
-PREDMYCIN P SUSP OPHT 5ml,0,product.product_uom_unit,0054627,True,scenario.product_price_category_gma,scenario.product_0054627,product.product_uom_unit
-LOCACORTENE ONGUENT 30GR,0,product.product_uom_unit,0054742,True,scenario.product_price_category_gma,scenario.product_0054742,product.product_uom_unit
-LYSOMUCIL 30 SACHET 200 mg,0,product.product_uom_unit,0055095,True,scenario.product_price_category_gma,scenario.product_0055095,product.product_uom_unit
-LOCOID ONGUENT 30GR,0,product.product_uom_unit,0055327,True,scenario.product_price_category_gma,scenario.product_0055327,product.product_uom_unit
-EAU DISTILLEE 5L,5.380,product.product_uom_unit,0055339,True,,scenario.product_0055339,product.product_uom_unit
-LYSOMUCIL 20AMP 3ML 10%US TOPIQ,0,product.product_uom_unit,0055376,True,scenario.product_price_category_gma,scenario.product_0055376,product.product_uom_unit
-MEDROL 50CP 16MG,0,product.product_uom_unit,0055996,True,scenario.product_price_category_gma,scenario.product_0055996,product.product_uom_unit
-MEDROL 30CP 4MG,0,product.product_uom_unit,0056028,True,scenario.product_price_category_gma,scenario.product_0056028,product.product_uom_unit
-MINIRIN INJ 10X1ML,0,product.product_uom_unit,0056231,True,scenario.product_price_category_gma,scenario.product_0056231,product.product_uom_unit
-MEDROL-A 14CP 16MG,0,product.product_uom_unit,0056259,True,scenario.product_price_category_gma,scenario.product_0056259,product.product_uom_unit
-PARAPLATIN 150MG IV 1VIAL,0,product.product_uom_unit,0056283,True,,scenario.product_0056283,product.product_uom_unit
-MEDICHROM AQUEUX 2% 30ML,0,product.product_uom_unit,0056341,True,scenario.product_price_category_gma,scenario.product_0056341,product.product_uom_unit
-MESTINON 150CP 60MG,0,product.product_uom_unit,0056606,True,scenario.product_price_category_gma,scenario.product_0056606,product.product_uom_unit
-MESTINON 50CP 10MG,0,product.product_uom_unit,0056622,True,scenario.product_price_category_gma,scenario.product_0056622,product.product_uom_unit
-MOTILIUM 6 SUPPO AD 60MG,0,product.product_uom_unit,0056754,True,scenario.product_price_category_gma,scenario.product_0056754,product.product_uom_unit
-MOTILIUM SUPPO ENF 30MG,0,product.product_uom_unit,0056762,True,scenario.product_price_category_gma,scenario.product_0056762,product.product_uom_unit
-MOTILIUM SOL ORALE ADULTE,0,product.product_uom_unit,0057117,True,scenario.product_price_category_gma,scenario.product_0057117,product.product_uom_unit
-METHERGINE 5 AMP 1ML,0,product.product_uom_unit,0057158,True,scenario.product_price_category_gma,scenario.product_0057158,product.product_uom_unit
-MOTILIUM 30CP 10MG,0,product.product_uom_unit,0057190,True,scenario.product_price_category_gma,scenario.product_0057190,product.product_uom_unit
-MICROLAX GEL RECTAL 4 TUBES,0,product.product_uom_unit,0057208,True,scenario.product_price_category_gma,scenario.product_0057208,product.product_uom_unit
-MINIPRESS 100CP 1MG,0,product.product_uom_unit,0057257,True,scenario.product_price_category_gma,scenario.product_0057257,product.product_uom_unit
-LORAMED 30CP 1MG,0,product.product_uom_unit,0057364,True,scenario.product_price_category_gma,scenario.product_0057364,product.product_uom_unit
-LAXAVIT 3x12ml KELA,0,product.product_uom_unit,0057448,True,,scenario.product_0057448,product.product_uom_unit
-MICROGYNON 30 3X21DR,0,product.product_uom_unit,0057489,True,scenario.product_price_category_gma,scenario.product_0057489,product.product_uom_unit
-MITOMYCIN-C 10x2MG INJECTION,0,product.product_uom_unit,0057679,True,,scenario.product_0057679,product.product_uom_unit
-MINIDIAB 90CP 5MG,0,product.product_uom_unit,0057760,True,scenario.product_price_category_gma,scenario.product_0057760,product.product_uom_unit
+name,weight,uom_id/id,medical_device,default_code,active,price_category_id/id,id,uom_po_id/id
+"ATROPINE SULFATE 0,5MG 10AMP",0,product.product_uom_unit,,0000001,True,scenario.product_price_category_gma,scenario.product_0000001,product.product_uom_unit
+"ATROPINE SULFATE 0,5mg 100AMP",0,product.product_uom_unit,,0000002,True,scenario.product_price_category_gma,scenario.product_0000002,product.product_uom_unit
+ATROPINE SULFATE 1MG 1ML 10AMP,0,scenario.product_uom_boite,,0000003,True,scenario.product_price_category_gma,scenario.product_0000003,scenario.product_uom_boite
+EPHEDRINE 50MG 1ML 10AMP,0,product.product_uom_unit,,0000005,True,scenario.product_price_category_gma,scenario.product_0000005,product.product_uom_unit
+"ATROPINE SULFATE 0,25MG 10AMP",0,product.product_uom_unit,,0000008,True,scenario.product_price_category_gma,scenario.product_0000008,product.product_uom_unit
+CARDUS MARIANUS 125ML DOLISOS,0,product.product_uom_unit,,0000009,True,scenario.product_price_category_gma,scenario.product_0000009,product.product_uom_unit
+FLACON BRUN HEXAGONAL 100ml +CP,0.090,product.product_uom_unit,,0011001,True,scenario.product_price_category_gma,scenario.product_0011001,product.product_uom_unit
+FLACON VERRE BRUN ROND  60ml+CP x25,0.060,product.product_uom_unit,,0011002,True,scenario.product_price_category_gma,scenario.product_0011002,product.product_uom_unit
+BETOPTIC 5ML,0,product.product_uom_unit,,0012138,True,scenario.product_price_category_gma,scenario.product_0012138,product.product_uom_unit
+NITROLINGUAL SPRAY,0,product.product_uom_unit,,0012146,True,scenario.product_price_category_gma,scenario.product_0012146,product.product_uom_unit
+RENNIE 96CP SANS SUCRE,0,product.product_uom_unit,,0012641,True,scenario.product_price_category_gma,scenario.product_0012641,product.product_uom_unit
+OMNIPAQUE 300 50ML,0,product.product_uom_unit,,0012872,True,scenario.product_price_category_gma,scenario.product_0012872,product.product_uom_unit
+OMNIPAQUE 300 100ML,0,product.product_uom_unit,,0012930,True,scenario.product_price_category_gma,scenario.product_0012930,product.product_uom_unit
+ANTIVERRUES USAGE INTERNE GT UNDA,0,product.product_uom_unit,,0013992,True,scenario.product_price_category_gma,scenario.product_0013992,product.product_uom_unit
+DAKTARIN 30GR CREAM,0,product.product_uom_unit,,0014258,True,scenario.product_price_category_gma,scenario.product_0014258,product.product_uom_unit
+GAZOFIX BDE  8CMx4M,0.030,product.product_uom_unit,,0014290,True,scenario.product_price_category_gma,scenario.product_0014290,product.product_uom_unit
+URFADYN PL 50 CAPS.,0,product.product_uom_unit,,0014738,True,scenario.product_price_category_gma,scenario.product_0014738,product.product_uom_unit
+DUSPATALIN 40DR 135MG,0,product.product_uom_unit,,0014845,True,scenario.product_price_category_gma,scenario.product_0014845,product.product_uom_unit
+TENORMIN MITIS 50MG 56CP,0,scenario.product_uom_boite,,0015032,True,scenario.product_price_category_gma,scenario.product_0015032,scenario.product_uom_boite
+TORENTAL 400MG 60CP,0,product.product_uom_unit,,0015040,True,,scenario.product_0015040,product.product_uom_unit
+HIBITANE TEINTURE 500ml,0,product.product_uom_unit,,0015073,True,,scenario.product_0015073,product.product_uom_unit
+DIABUR TEST 5000 (GLUCOSE) x50,0.060,product.product_uom_unit,,0015305,True,scenario.product_price_category_gma,scenario.product_0015305,product.product_uom_unit
+"GEOMYCINE CREME 0,1% 15GR",0,product.product_uom_unit,,0015735,True,scenario.product_price_category_gma,scenario.product_0015735,product.product_uom_unit
+ADRIBLASTINA RD 5 AMP 10MG,0,product.product_uom_unit,,0016261,True,scenario.product_price_category_gma,scenario.product_0016261,product.product_uom_unit
+ACTAPULGITE 30 SACH 3GR,0,product.product_uom_unit,,0016501,True,scenario.product_price_category_gma,scenario.product_0016501,product.product_uom_unit
+ALLOPURINOL 300MG 90CP EG,0,product.product_uom_unit,,0016832,True,,scenario.product_0016832,product.product_uom_unit
+FUROSEMIDE 40MG 50CP,0,product.product_uom_unit,,0017301,True,scenario.product_price_category_gma,scenario.product_0017301,product.product_uom_unit
+ALDACTAZINE 28CP,0,scenario.product_uom_boite,,0017566,True,scenario.product_price_category_gma,scenario.product_0017566,scenario.product_uom_boite
+ALBICORT 10 5ML 10MG/ML,0,product.product_uom_unit,,0018028,True,scenario.product_price_category_gma,scenario.product_0018028,product.product_uom_unit
+ALFAVIT 20CP,0,product.product_uom_unit,,0018234,True,scenario.product_price_category_gma,scenario.product_0018234,product.product_uom_unit
+"FML LIQUIFILM COLLYRE 0,1% 5ml",0,product.product_uom_unit,,0018507,True,scenario.product_price_category_gma,scenario.product_0018507,product.product_uom_unit
+ALKERAN 25CP 2MG,0,product.product_uom_unit,,0018614,True,scenario.product_price_category_gma,scenario.product_0018614,product.product_uom_unit
+ALOPATE PATE 45GR,0,product.product_uom_unit,,0018671,True,scenario.product_price_category_gma,scenario.product_0018671,product.product_uom_unit
+AMUKIN IM IV 500mg 2FL,0,product.product_uom_unit,,0018911,True,scenario.product_price_category_gma,scenario.product_0018911,product.product_uom_unit
+ANAFRANIL 150DR 25MG,0,product.product_uom_unit,,0019455,True,scenario.product_price_category_gma,scenario.product_0019455,product.product_uom_unit
+ANDROCUR 50 COMP. 50MG,0,product.product_uom_unit,,0019554,True,scenario.product_price_category_gma,scenario.product_0019554,product.product_uom_unit
+ANAFRANIL 30DR 25MG,0,product.product_uom_unit,,0019778,True,scenario.product_price_category_gma,scenario.product_0019778,product.product_uom_unit
+ANAFRANIL 150DR 10MG,0,product.product_uom_unit,,0019786,True,scenario.product_price_category_gma,scenario.product_0019786,product.product_uom_unit
+BROMAZEPAM EG 12MG 50CP,0,scenario.product_uom_boite,,0020008,True,scenario.product_price_category_gma,scenario.product_0020008,scenario.product_uom_boite
+ALDACTAZINE 98CP,0,product.product_uom_unit,,0020214,True,scenario.product_price_category_gma,scenario.product_0020214,product.product_uom_unit
+DIPROSALIC ONGUENT 30GR,0,product.product_uom_unit,,0021006,True,scenario.product_price_category_gma,scenario.product_0021006,product.product_uom_unit
+ASPEGIC  500 20SACHETS,0,product.product_uom_unit,,0021253,True,scenario.product_price_category_gma,scenario.product_0021253,product.product_uom_unit
+"ATROVENT SOLUTION 0,25mg/ml 20x2ml",0,product.product_uom_unit,,0021519,True,scenario.product_price_category_gma,scenario.product_0021519,product.product_uom_unit
+COUGH LINCTUS 500ML,0,product.product_uom_unit,,0021830,True,,scenario.product_0021830,product.product_uom_unit
+"MONOSYN USP4/0 EP1,5 HR22 C22014 (36)",0,scenario.product_uom_boite,True,0022014,True,scenario.product_price_category_gma,scenario.product_0022014,scenario.product_uom_boite
+BACTRIM FORTE 30CP,0,product.product_uom_unit,,0022269,True,scenario.product_price_category_gma,scenario.product_0022269,product.product_uom_unit
+BACTRIM FORTE 10CP,0,product.product_uom_unit,,0022277,True,scenario.product_price_category_gma,scenario.product_0022277,product.product_uom_unit
+"TOBREX ONG OPHT 3,5GR",0,product.product_uom_unit,,0022897,True,scenario.product_price_category_gma,scenario.product_0022897,product.product_uom_unit
+BETADERMYL SAVON 100G,0,product.product_uom_unit,,0024166,True,scenario.product_price_category_gma,scenario.product_0024166,product.product_uom_unit
+BEFORPLEX 50CP,0,product.product_uom_unit,,0024414,True,scenario.product_price_category_gma,scenario.product_0024414,product.product_uom_unit
+BETASERC 100CP 8MG,0,product.product_uom_unit,,0024935,True,scenario.product_price_category_gma,scenario.product_0024935,product.product_uom_unit
+BEPANTHENE 100CP,0,product.product_uom_unit,,0025163,True,scenario.product_price_category_gma,scenario.product_0025163,product.product_uom_unit
+BITHIOL 10% 22GR,0,product.product_uom_unit,,0025700,True,,scenario.product_0025700,product.product_uom_unit
+BISOLVON INHALAT. SOL 100ML,0,product.product_uom_unit,,0025817,True,scenario.product_price_category_gma,scenario.product_0025817,product.product_uom_unit
+BLEOMYCINE 1FL AMP 15MG IM IV,0,product.product_uom_unit,,0025825,True,scenario.product_price_category_gma,scenario.product_0025825,product.product_uom_unit
+"OXYBUPROCAINE 0,4% 20x0,5ml",0,product.product_uom_unit,,0025916,True,,scenario.product_0025916,product.product_uom_unit
+"TETRACAINE HCL 0,5% 20x0,5ml",0,product.product_uom_unit,,0026245,True,scenario.product_price_category_gma,scenario.product_0026245,product.product_uom_unit
+EUCETA GEL 54GR,0,product.product_uom_unit,,0026518,True,scenario.product_price_category_gma,scenario.product_0026518,product.product_uom_unit
+BORGAL 24% 100ML,0.240,product.product_uom_unit,,0026963,True,,scenario.product_0026963,product.product_uom_unit
+BEFACT 100DRAG,0,product.product_uom_unit,,0027400,True,scenario.product_price_category_gma,scenario.product_0027400,product.product_uom_unit
+BUSCOPAN 6AMP 20MG,0,product.product_uom_unit,,0027771,True,scenario.product_price_category_gma,scenario.product_0027771,product.product_uom_unit
+COLMAN BAIN SOUVERAIN 200GR,0,product.product_uom_unit,,0027904,True,scenario.product_price_category_gma,scenario.product_0027904,product.product_uom_unit
+CALSYNAR SOL INJ 2ML 400UI,0,product.product_uom_unit,,0028555,True,scenario.product_price_category_gma,scenario.product_0028555,product.product_uom_unit
+CANTABILINE 90GEL,0,product.product_uom_unit,,0028829,True,scenario.product_price_category_gma,scenario.product_0028829,product.product_uom_unit
+AUGMENTIN 16CP 500MG,0,product.product_uom_unit,,0029025,True,scenario.product_price_category_gma,scenario.product_0029025,product.product_uom_unit
+CARBOLACTANOSE 30GEL,0,product.product_uom_unit,,0029058,True,scenario.product_price_category_gma,scenario.product_0029058,product.product_uom_unit
+CATOSAL 100ML,0.210,product.product_uom_unit,,0029132,True,,scenario.product_0029132,product.product_uom_unit
+"DISTINJECT SERINGUE SPEEDY 20mm 3,5ml x4",0,product.product_uom_unit,,0029149,True,scenario.product_price_category_gma,scenario.product_0029149,product.product_uom_unit
+CREMICORT H 1%,0,product.product_uom_unit,,0029157,True,scenario.product_price_category_gma,scenario.product_0029157,product.product_uom_unit
+CHLORPOTASSURIL 10AMP BUV,0,product.product_uom_unit,,0029249,True,scenario.product_price_category_gma,scenario.product_0029249,product.product_uom_unit
+CARIL POUDRE 300gr,0,product.product_uom_unit,,0029348,True,scenario.product_price_category_gma,scenario.product_0029348,product.product_uom_unit
+CELESTONE AMP 1x1ML IM IV,0,product.product_uom_unit,,0029777,True,scenario.product_price_category_gma,scenario.product_0029777,product.product_uom_unit
+CHLORAMPHENICOL POMM OPHT 1% 4GR,0,product.product_uom_unit,,0030304,True,scenario.product_price_category_gma,scenario.product_0030304,product.product_uom_unit
+CHAPSTICK PLUS,0,product.product_uom_unit,,0030494,True,,scenario.product_0030494,product.product_uom_unit
+CITANEST 2% 20ML SS ADREN.,0,product.product_uom_unit,,0031005,True,scenario.product_price_category_gma,scenario.product_0031005,product.product_uom_unit
+CLOMID 10CP,0,product.product_uom_unit,,0031450,True,scenario.product_price_category_gma,scenario.product_0031450,product.product_uom_unit
+CLONAZONE PDRE 20G,0,product.product_uom_unit,,0031468,True,scenario.product_price_category_gma,scenario.product_0031468,product.product_uom_unit
+CURPOL SUSP ORALE 180ML,0,product.product_uom_unit,,0033019,True,scenario.product_price_category_gma,scenario.product_0033019,product.product_uom_unit
+C WILL 50CP,0,product.product_uom_unit,,0033050,True,scenario.product_price_category_gma,scenario.product_0033050,product.product_uom_unit
+D CURE 4AMP,0,product.product_uom_unit,,0033282,True,scenario.product_price_category_gma,scenario.product_0033282,product.product_uom_unit
+DANTRIUM 100MG 50CAPS,0,product.product_uom_unit,,0033530,True,,scenario.product_0033530,product.product_uom_unit
+AUGMENTIN SIROP 125MG,0,product.product_uom_unit,,0033548,True,scenario.product_price_category_gma,scenario.product_0033548,product.product_uom_unit
+DARAPRIM 30CP 25MG,0,product.product_uom_unit,,0033571,True,scenario.product_price_category_gma,scenario.product_0033571,product.product_uom_unit
+OXAZEPAM 50CP 15MG EG,0,scenario.product_uom_boite,,0033795,True,scenario.product_price_category_gma,scenario.product_0033795,scenario.product_uom_boite
+DAKTARIN ORAL GEL,0,product.product_uom_unit,,0033910,True,scenario.product_price_category_gma,scenario.product_0033910,product.product_uom_unit
+DAKTARIN TEINT.30ML,0,product.product_uom_unit,,0034009,True,scenario.product_price_category_gma,scenario.product_0034009,product.product_uom_unit
+DE ICOL CUSI COLLYRE 5ML,0,product.product_uom_unit,,0034058,True,scenario.product_price_category_gma,scenario.product_0034058,product.product_uom_unit
+AUGMENTIN SIROP 250MG,0,product.product_uom_unit,,0034637,True,scenario.product_price_category_gma,scenario.product_0034637,product.product_uom_unit
+"ELTHYRONE 100cp 0,2mg",0,product.product_uom_unit,,0035000,True,scenario.product_price_category_gma,scenario.product_0035000,product.product_uom_unit
+MATELAS VACUUM AVEC POIGNEES 80X100cm,0,product.product_uom_unit,,0035434,True,scenario.product_price_category_gma,scenario.product_0035434,product.product_uom_unit
+DIAMOX PARENTERAL VIAL 1x500MG INJ,0,product.product_uom_unit,,0035469,True,,scenario.product_0035469,product.product_uom_unit
+DICHLOTRIDE 25CP 50MG,0,product.product_uom_unit,,0035600,True,scenario.product_price_category_gma,scenario.product_0035600,product.product_uom_unit
+DERMOVATE ONGUENT 30GR,0,product.product_uom_unit,,0035725,True,scenario.product_price_category_gma,scenario.product_0035725,product.product_uom_unit
+DIPIPERON 60CP 40MG,0,product.product_uom_unit,,0036517,True,scenario.product_price_category_gma,scenario.product_0036517,product.product_uom_unit
+DIPIPERON GTTES 60ML,0,product.product_uom_unit,,0036566,True,scenario.product_price_category_gma,scenario.product_0036566,product.product_uom_unit
+DUPHALAC SOL 300ML,0,product.product_uom_unit,,0036632,True,scenario.product_price_category_gma,scenario.product_0036632,product.product_uom_unit
+DIPROSONE LOT.30ML,0,product.product_uom_unit,,0036707,True,scenario.product_price_category_gma,scenario.product_0036707,product.product_uom_unit
+DOG-ECZEMA 100GR,0.140,product.product_uom_unit,,0037028,True,,scenario.product_0037028,product.product_uom_unit
+DOGMINTH PATE TUBE 24GR,0.130,product.product_uom_unit,,0037077,True,,scenario.product_0037077,product.product_uom_unit
+DULCOLAX 40dragées,0,product.product_uom_unit,,0037457,True,scenario.product_price_category_gma,scenario.product_0037457,product.product_uom_unit
+DROXARYL CREME 50GR,0,product.product_uom_unit,,0037473,True,scenario.product_price_category_gma,scenario.product_0037473,product.product_uom_unit
+"EFFORTYL GTTES 0,75% 50G SOLUTION",0,product.product_uom_unit,,0037556,True,scenario.product_price_category_gma,scenario.product_0037556,product.product_uom_unit
+"DURATEARS UNG OPHT 3,5GR",0,product.product_uom_unit,,0037820,True,scenario.product_price_category_gma,scenario.product_0037820,product.product_uom_unit
+"SAFIL USP6/0 EP0,7 15M",0,product.product_uom_unit,,0038100,True,,scenario.product_0038100,product.product_uom_unit
+SAFIL USP5/0 EP1 15M VI F0038101,0,product.product_uom_unit,,0038101,True,,scenario.product_0038101,product.product_uom_unit
+"SAFIL USP4/0 EP1,5 15M VI F0038102",0,product.product_uom_unit,,0038102,True,,scenario.product_0038102,product.product_uom_unit
+SAFIL USP3/0 EP2 15M VI F0038103,0.160,product.product_uom_unit,,0038103,True,,scenario.product_0038103,product.product_uom_unit
+SAFIL USP2/0 EP3 15M VI F1038104,0.160,product.product_uom_unit,,0038104,True,,scenario.product_0038104,product.product_uom_unit
+"SAFIL USP0 EP3,5 15M VI F1038105",0,product.product_uom_unit,,0038105,True,,scenario.product_0038105,product.product_uom_unit
+SAFIL USP1 EP4 15M VI F1038106,0,product.product_uom_unit,,0038106,True,,scenario.product_0038106,product.product_uom_unit
+EAU PRECIEUSE SOL 375ML,0,product.product_uom_unit,,0038224,True,,scenario.product_0038224,product.product_uom_unit
+EFUDIX 5% ONG 20GR,0,product.product_uom_unit,,0038521,True,scenario.product_price_category_gma,scenario.product_0038521,product.product_uom_unit
+SAFIL USP3/0 EP2 250CM 1038715 x12,0,product.product_uom_unit,True,0038715,True,scenario.product_price_category_gma,scenario.product_0038715,product.product_uom_unit
+SAFIL USP1 EP4 250CM VE G38719,0,product.product_uom_unit,True,0038719,True,scenario.product_price_category_gma,scenario.product_0038719,product.product_uom_unit
+EFFERALGAN 20CP EFFERV,0,product.product_uom_unit,,0038927,True,scenario.product_price_category_gma,scenario.product_0038927,product.product_uom_unit
+ENDOXAN 500MG 1VIAL,0,scenario.product_uom_boite,,0039123,True,scenario.product_price_category_gma,scenario.product_0039123,scenario.product_uom_boite
+"ELTHYRONE 100CP 0,05MG",0,product.product_uom_unit,,0039248,True,scenario.product_price_category_gma,scenario.product_0039248,product.product_uom_unit
+DAFALGAN 30CP,0,product.product_uom_unit,,0039347,True,scenario.product_price_category_gma,scenario.product_0039347,product.product_uom_unit
+EOLINE CREME 15GR,0,product.product_uom_unit,,0039669,True,scenario.product_price_category_gma,scenario.product_0039669,product.product_uom_unit
+ERYTHROCINE FLACON 1GR IV,0,product.product_uom_unit,,0039834,True,,scenario.product_0039834,product.product_uom_unit
+ERYTHROFORTE 500 16SACH,0,product.product_uom_unit,,0039917,True,scenario.product_price_category_gma,scenario.product_0039917,product.product_uom_unit
+PEHA-HAFT latexfree 06cmx20m,0.070,product.product_uom_unit,,0040097,True,scenario.product_price_category_gma,scenario.product_0040097,product.product_uom_unit
+EUCALYPTINE PHOLCODINE SIROP 200ML,0,product.product_uom_unit,,0040162,True,scenario.product_price_category_gma,scenario.product_0040162,product.product_uom_unit
+EUCALYPTINE PHOLCODINE 10SUPPO NOURISS.,0,product.product_uom_unit,,0040295,True,scenario.product_price_category_gma,scenario.product_0040295,product.product_uom_unit
+OCAL BAIN 125ML,0,product.product_uom_unit,,0040345,True,scenario.product_price_category_gma,scenario.product_0040345,product.product_uom_unit
+"EUMOVATE 0,05% CREME 30GR",0,product.product_uom_unit,,0040394,True,,scenario.product_0040394,product.product_uom_unit
+DOGMATIL 12CP 200MG,0,product.product_uom_unit,,0040766,True,scenario.product_price_category_gma,scenario.product_0040766,product.product_uom_unit
+FASIGYN 4CP 500MG,0,product.product_uom_unit,,0041020,True,scenario.product_price_category_gma,scenario.product_0041020,product.product_uom_unit
+"FLEET ENEMA PEDIAT 2,250Z",0,product.product_uom_unit,,0041863,True,scenario.product_price_category_gma,scenario.product_0041863,product.product_uom_unit
+FLUBENOL 5%  600 GR,0.340,product.product_uom_unit,,0041921,True,,scenario.product_0041921,product.product_uom_unit
+FOLLIGON 1FL+SOLVANT 1000UI,0.050,product.product_uom_unit,,0042028,True,,scenario.product_0042028,product.product_uom_unit
+FLAMMAZINE CREME 50GR,0,product.product_uom_unit,,0042150,True,scenario.product_price_category_gma,scenario.product_0042150,product.product_uom_unit
+FLAMMAZINE CREME 500GR,0,product.product_uom_unit,,0042168,True,scenario.product_price_category_gma,scenario.product_0042168,product.product_uom_unit
+FABRY GTTES FORMA  15ML,0.060,product.product_uom_unit,,0042267,True,,scenario.product_0042267,product.product_uom_unit
+FRISIUM 50x10MG,0,product.product_uom_unit,,0042390,True,,scenario.product_0042390,product.product_uom_unit
+FURADANTINE 50CP 50MG,0,product.product_uom_unit,,0042500,True,scenario.product_price_category_gma,scenario.product_0042500,product.product_uom_unit
+FUCIDIN INTERTULLE 10X10CM /10,0,product.product_uom_unit,,0042671,True,scenario.product_price_category_gma,scenario.product_0042671,product.product_uom_unit
+FLUIMICIL ANTIBIOTIC 3 AMPOULES,0,product.product_uom_unit,,0042887,True,scenario.product_price_category_gma,scenario.product_0042887,product.product_uom_unit
+GAVISCON PDRE 50GR,0,product.product_uom_unit,,0044180,True,scenario.product_price_category_gma,scenario.product_0044180,product.product_uom_unit
+GLIBENESE 100CP 5MG,0,product.product_uom_unit,,0044248,True,scenario.product_price_category_gma,scenario.product_0044248,product.product_uom_unit
+DAFALGAN 32CP EFF,0,product.product_uom_unit,,0044545,True,scenario.product_price_category_gma,scenario.product_0044545,product.product_uom_unit
+IVOMEC BOVINS  50ML,0.360,product.product_uom_unit,,0045518,True,,scenario.product_0045518,product.product_uom_unit
+PATHOZONE SER 10X10ML,0.420,product.product_uom_unit,,0045666,True,,scenario.product_0045666,product.product_uom_unit
+ASTREXINE PDRE 30gr,0,product.product_uom_unit,,0045856,True,scenario.product_price_category_gma,scenario.product_0045856,product.product_uom_unit
+HAC 5L,0,product.product_uom_unit,,0046037,True,,scenario.product_0046037,product.product_uom_unit
+HALDOL 5 AMP 1ML 5MG/ML,0,product.product_uom_unit,,0046128,True,scenario.product_price_category_gma,scenario.product_0046128,product.product_uom_unit
+HEMOSEDAN P POM 30GR,0,product.product_uom_unit,,0046946,True,scenario.product_price_category_gma,scenario.product_0046946,product.product_uom_unit
+CORSODYL GEL 50GR,0,product.product_uom_unit,,0047530,True,scenario.product_price_category_gma,scenario.product_0047530,product.product_uom_unit
+HEXOMEDINE HYDROALC 250ML 1/1000,0,product.product_uom_unit,,0047555,True,scenario.product_price_category_gma,scenario.product_0047555,product.product_uom_unit
+HIBISCRUB SAVON ANTISEPTIQUE 500ml,0.620,product.product_uom_unit,,0047639,True,scenario.product_price_category_gma,scenario.product_0047639,product.product_uom_unit
+CORSODYL BAIN DE BOUCHE 200ML,0,product.product_uom_unit,,0047738,True,scenario.product_price_category_gma,scenario.product_0047738,product.product_uom_unit
+HIBITANE PLUS 5% CONCENTRE 5 LITRES,0,product.product_uom_unit,,0047829,True,,scenario.product_0047829,product.product_uom_unit
+"TROPICOL COLLYRE 0,5%",0,product.product_uom_unit,,0047894,True,scenario.product_price_category_gma,scenario.product_0047894,product.product_uom_unit
+IMAVEROL PETIT MODELE 100ml,0.340,product.product_uom_unit,,0048173,True,,scenario.product_0048173,product.product_uom_unit
+IMAVEROL 1000 ml,1.200,product.product_uom_unit,,0048181,True,,scenario.product_0048181,product.product_uom_unit
+HYDROCORTISONE 20CP 20MG,0,product.product_uom_unit,,0048363,True,scenario.product_price_category_gma,scenario.product_0048363,product.product_uom_unit
+HOMEOPLASMINE BAUME 40GR,0,product.product_uom_unit,,0048728,True,scenario.product_price_category_gma,scenario.product_0048728,product.product_uom_unit
+FABRY IDEAL SEL DE BAIN 750GR,0.800,product.product_uom_unit,,0048843,True,,scenario.product_0048843,product.product_uom_unit
+IMODIUM 20CP,0,product.product_uom_unit,,0049122,True,scenario.product_price_category_gma,scenario.product_0049122,product.product_uom_unit
+IMODIUM 60GEL,0,product.product_uom_unit,,0049130,True,scenario.product_price_category_gma,scenario.product_0049130,product.product_uom_unit
+ISOBETADINE BUCCALE 200ml,0.360,product.product_uom_unit,,0049478,True,scenario.product_price_category_gma,scenario.product_0049478,product.product_uom_unit
+ISOBETADINE GEL 100GR,0.130,product.product_uom_unit,,0049479,True,scenario.product_price_category_gma,scenario.product_0049479,product.product_uom_unit
+IODURE SODIQUE COLLYRE 2% ASTA,0,product.product_uom_unit,,0050237,True,scenario.product_price_category_gma,scenario.product_0050237,product.product_uom_unit
+ISOPTINE 5AMP 2ML,0,product.product_uom_unit,,0050559,True,scenario.product_price_category_gma,scenario.product_0050559,product.product_uom_unit
+ISOPTO TEARS FL GUTT 15ML,0,product.product_uom_unit,,0050575,True,scenario.product_price_category_gma,scenario.product_0050575,product.product_uom_unit
+ISOPTO CARPINE COLL 15ML,0,product.product_uom_unit,,0050658,True,scenario.product_price_category_gma,scenario.product_0050658,product.product_uom_unit
+"ISUPREL 5 AMP 1ML 0,2MG",0,product.product_uom_unit,,0050732,True,scenario.product_price_category_gma,scenario.product_0050732,product.product_uom_unit
+ISOPTO CARBACHOL 3% 15ML,0,product.product_uom_unit,,0050963,True,scenario.product_price_category_gma,scenario.product_0050963,product.product_uom_unit
+KEFORAL 16CP 500MG,0,product.product_uom_unit,,0051714,True,scenario.product_price_category_gma,scenario.product_0051714,product.product_uom_unit
+KY GELEE LUBRIFIANTE 82GR,0,product.product_uom_unit,,0052407,True,scenario.product_price_category_gma,scenario.product_0052407,product.product_uom_unit
+LASIX AMP INJ 250MG PERF IV 5X25ML,0,product.product_uom_unit,,0053017,True,scenario.product_price_category_gma,scenario.product_0053017,product.product_uom_unit
+LAXOBERON GTTES 15ML,0,product.product_uom_unit,,0053330,True,scenario.product_price_category_gma,scenario.product_0053330,product.product_uom_unit
+LEDERTREXATE SODIUM 50MG 1FL,0,product.product_uom_unit,,0053405,True,scenario.product_price_category_gma,scenario.product_0053405,product.product_uom_unit
+LEDERVORIN CALCIUM 6AMP 1ML,0,product.product_uom_unit,,0053447,True,scenario.product_price_category_gma,scenario.product_0053447,product.product_uom_unit
+LIQUIFILM TEARS COLLYRE 15ML,0,product.product_uom_unit,,0054619,True,scenario.product_price_category_gma,scenario.product_0054619,product.product_uom_unit
+PREDMYCIN P SUSP OPHT 5ml,0,product.product_uom_unit,,0054627,True,scenario.product_price_category_gma,scenario.product_0054627,product.product_uom_unit
+LOCACORTENE ONGUENT 30GR,0,product.product_uom_unit,,0054742,True,scenario.product_price_category_gma,scenario.product_0054742,product.product_uom_unit
+LYSOMUCIL 30 SACHET 200 mg,0,product.product_uom_unit,,0055095,True,scenario.product_price_category_gma,scenario.product_0055095,product.product_uom_unit
+LOCOID ONGUENT 30GR,0,product.product_uom_unit,,0055327,True,scenario.product_price_category_gma,scenario.product_0055327,product.product_uom_unit
+EAU DISTILLEE 5L,5.380,product.product_uom_unit,,0055339,True,,scenario.product_0055339,product.product_uom_unit
+LYSOMUCIL 20AMP 3ML 10%US TOPIQ,0,product.product_uom_unit,,0055376,True,scenario.product_price_category_gma,scenario.product_0055376,product.product_uom_unit
+MEDROL 50CP 16MG,0,product.product_uom_unit,,0055996,True,scenario.product_price_category_gma,scenario.product_0055996,product.product_uom_unit
+MEDROL 30CP 4MG,0,product.product_uom_unit,,0056028,True,scenario.product_price_category_gma,scenario.product_0056028,product.product_uom_unit
+MINIRIN INJ 10X1ML,0,product.product_uom_unit,,0056231,True,scenario.product_price_category_gma,scenario.product_0056231,product.product_uom_unit
+MEDROL-A 14CP 16MG,0,product.product_uom_unit,,0056259,True,scenario.product_price_category_gma,scenario.product_0056259,product.product_uom_unit
+PARAPLATIN 150MG IV 1VIAL,0,product.product_uom_unit,,0056283,True,,scenario.product_0056283,product.product_uom_unit
+MEDICHROM AQUEUX 2% 30ML,0,product.product_uom_unit,,0056341,True,scenario.product_price_category_gma,scenario.product_0056341,product.product_uom_unit
+MESTINON 150CP 60MG,0,product.product_uom_unit,,0056606,True,scenario.product_price_category_gma,scenario.product_0056606,product.product_uom_unit
+MESTINON 50CP 10MG,0,product.product_uom_unit,,0056622,True,scenario.product_price_category_gma,scenario.product_0056622,product.product_uom_unit
+MOTILIUM 6 SUPPO AD 60MG,0,product.product_uom_unit,,0056754,True,scenario.product_price_category_gma,scenario.product_0056754,product.product_uom_unit
+MOTILIUM SUPPO ENF 30MG,0,product.product_uom_unit,,0056762,True,scenario.product_price_category_gma,scenario.product_0056762,product.product_uom_unit
+MOTILIUM SOL ORALE ADULTE,0,product.product_uom_unit,,0057117,True,scenario.product_price_category_gma,scenario.product_0057117,product.product_uom_unit
+METHERGINE 5 AMP 1ML,0,product.product_uom_unit,,0057158,True,scenario.product_price_category_gma,scenario.product_0057158,product.product_uom_unit
+MOTILIUM 30CP 10MG,0,product.product_uom_unit,,0057190,True,scenario.product_price_category_gma,scenario.product_0057190,product.product_uom_unit
+MICROLAX GEL RECTAL 4 TUBES,0,product.product_uom_unit,,0057208,True,scenario.product_price_category_gma,scenario.product_0057208,product.product_uom_unit
+MINIPRESS 100CP 1MG,0,product.product_uom_unit,,0057257,True,scenario.product_price_category_gma,scenario.product_0057257,product.product_uom_unit
+LORAMED 30CP 1MG,0,product.product_uom_unit,,0057364,True,scenario.product_price_category_gma,scenario.product_0057364,product.product_uom_unit
+LAXAVIT 3x12ml KELA,0,product.product_uom_unit,,0057448,True,,scenario.product_0057448,product.product_uom_unit
+MICROGYNON 30 3X21DR,0,product.product_uom_unit,,0057489,True,scenario.product_price_category_gma,scenario.product_0057489,product.product_uom_unit
+MITOMYCIN-C 10x2MG INJECTION,0,product.product_uom_unit,,0057679,True,,scenario.product_0057679,product.product_uom_unit
+MINIDIAB 90CP 5MG,0,product.product_uom_unit,,0057760,True,scenario.product_price_category_gma,scenario.product_0057760,product.product_uom_unit
+MINIDIAB 30CP 5MG,0,product.product_uom_unit,,0057778,True,scenario.product_price_category_gma,scenario.product_0057778,product.product_uom_unit
+MITOSYL ONG 150gr,0,product.product_uom_unit,,0058000,True,scenario.product_price_category_gma,scenario.product_0058000,product.product_uom_unit
+VASELINE BLANCHE TUBE 50GR MONOT,0,product.product_uom_unit,,0058404,True,scenario.product_price_category_gma,scenario.product_0058404,product.product_uom_unit
+VASELINE CAMPHREE 10% TUBE 20GR,0,product.product_uom_unit,,0058405,True,scenario.product_price_category_gma,scenario.product_0058405,product.product_uom_unit
+MURAZIME POM 25GR,0,product.product_uom_unit,,0058669,True,scenario.product_price_category_gma,scenario.product_0058669,product.product_uom_unit
+NEO SABENYL SOL 200ML,0,product.product_uom_unit,,0058800,True,scenario.product_price_category_gma,scenario.product_0058800,product.product_uom_unit
+VITACYS 120 GEL,0,product.product_uom_unit,,0059675,True,scenario.product_price_category_gma,scenario.product_0059675,product.product_uom_unit
+NOVALGINE 20CP 500MG,0,product.product_uom_unit,,0059900,True,scenario.product_price_category_gma,scenario.product_0059900,product.product_uom_unit
+NOVALGINE GUTT 20ML,0,product.product_uom_unit,,0059901,True,scenario.product_price_category_gma,scenario.product_0059901,product.product_uom_unit
+NERISONA CREME 15GR,0,product.product_uom_unit,,0060269,True,scenario.product_price_category_gma,scenario.product_0060269,product.product_uom_unit
+NIVAQUINE 100MG z100CP,0,product.product_uom_unit,,0061119,True,scenario.product_price_category_gma,scenario.product_0061119,product.product_uom_unit
+ENGERIX B VACCIN HEPATITE,0,product.product_uom_unit,,0061358,True,scenario.product_price_category_gma,scenario.product_0061358,product.product_uom_unit
+NOLVADEX 10MG 30CP,0,product.product_uom_unit,,0061564,True,scenario.product_price_category_gma,scenario.product_0061564,product.product_uom_unit
+NOOTROPIL 20% SOLUTE 200ML,0,product.product_uom_unit,,0061697,True,scenario.product_price_category_gma,scenario.product_0061697,product.product_uom_unit
+VETALGIN NOVALGINE 100ML,0.230,product.product_uom_unit,,0061887,True,,scenario.product_0061887,product.product_uom_unit
+NORTUSSINE SIROP 125ML,0,product.product_uom_unit,,0062141,True,scenario.product_price_category_gma,scenario.product_0062141,product.product_uom_unit
+NYSTATINE 24ML SUSP ORALE,0,product.product_uom_unit,,0062521,True,scenario.product_price_category_gma,scenario.product_0062521,product.product_uom_unit
+DISPRIL 24 CP 75MG,0,product.product_uom_unit,,0062836,True,scenario.product_price_category_gma,scenario.product_0062836,product.product_uom_unit
+"OESTROGEL 0,06% 80GR",0,product.product_uom_unit,,0062935,True,scenario.product_price_category_gma,scenario.product_0062935,product.product_uom_unit
+DISPRIL 20CP 500MG,0,product.product_uom_unit,,0063008,True,scenario.product_price_category_gma,scenario.product_0063008,product.product_uom_unit
+ONCTOSE HYDROCORTISONE 50GR,0,product.product_uom_unit,,0063099,True,scenario.product_price_category_gma,scenario.product_0063099,product.product_uom_unit
+ORNADE SPANSULE 10CP,0,product.product_uom_unit,,0063644,True,scenario.product_price_category_gma,scenario.product_0063644,product.product_uom_unit
+PROPOXUR COLLIER 36CM,0.030,product.product_uom_unit,,0063784,True,,scenario.product_0063784,product.product_uom_unit
+PROPOXUR COLLIER 66CM,0.320,product.product_uom_unit,,0063792,True,,scenario.product_0063792,product.product_uom_unit
+OPSITE SPRAY FILM PROTECTEUR 100ML S/N,0.120,product.product_uom_unit,,0064014,True,scenario.product_price_category_gma,scenario.product_0064014,product.product_uom_unit
+OPSITE SPRAY FILM PROTECTEUR 240ML S/N,0.230,product.product_uom_unit,,0064015,True,scenario.product_price_category_gma,scenario.product_0064015,product.product_uom_unit
+ORATROL 25CP 50MG,0,product.product_uom_unit,,0064154,True,scenario.product_price_category_gma,scenario.product_0064154,product.product_uom_unit
+OTIPAX INSTIL DOSEUR AURIC,0,product.product_uom_unit,,0064279,True,scenario.product_price_category_gma,scenario.product_0064279,product.product_uom_unit
+ORS 6 SACHETS,0,product.product_uom_unit,,0064642,True,scenario.product_price_category_gma,scenario.product_0064642,product.product_uom_unit
+OTOSPECTRINE 15ML,0.040,product.product_uom_unit,,0064725,True,,scenario.product_0064725,product.product_uom_unit
+OXYPLASTINE ONGUENT 140GR,0,product.product_uom_unit,,0065128,True,scenario.product_price_category_gma,scenario.product_0065128,product.product_uom_unit
+"PARLODEL 30DP 2,5MG",0,product.product_uom_unit,,0066266,True,scenario.product_price_category_gma,scenario.product_0066266,product.product_uom_unit
+PENATEN CREME 150ML,0,product.product_uom_unit,,0067264,True,scenario.product_price_category_gma,scenario.product_0067264,product.product_uom_unit
+TENSOCREPE CELLO 15cmx4m PAR BANDE,0.050,product.product_uom_unit,,0067306,True,scenario.product_price_category_gma,scenario.product_0067306,product.product_uom_unit
+TENSOCREPE CELLO 20cmx4m PAR BANDE,0.070,product.product_uom_unit,,0067330,True,scenario.product_price_category_gma,scenario.product_0067330,product.product_uom_unit
+CREPE STELLA CELLO 30cmx4m PAR BANDE,0.140,product.product_uom_unit,,0067678,True,scenario.product_price_category_gma,scenario.product_0067678,product.product_uom_unit
+PEVARYL CREME 30GR,0,product.product_uom_unit,,0068437,True,scenario.product_price_category_gma,scenario.product_0068437,product.product_uom_unit
+PG 600 1FLx5D+SOLVANT,0.080,product.product_uom_unit,,0068536,True,,scenario.product_0068536,product.product_uom_unit
+PEVARYL LAIT DERM 30ml,0,product.product_uom_unit,,0069062,True,scenario.product_price_category_gma,scenario.product_0069062,product.product_uom_unit
+PILO 2 COLLYRE 9ML,0,product.product_uom_unit,,0069138,True,scenario.product_price_category_gma,scenario.product_0069138,product.product_uom_unit
+MAGNESPASMIL 50 100CP,0,product.product_uom_unit,,0069559,True,scenario.product_price_category_gma,scenario.product_0069559,product.product_uom_unit
+"PROPINE COLLYRE 0,1% 5ML",0,product.product_uom_unit,,0069682,True,scenario.product_price_category_gma,scenario.product_0069682,product.product_uom_unit
+PROVERA 100MG z50CP,0,product.product_uom_unit,,0069732,True,scenario.product_price_category_gma,scenario.product_0069732,product.product_uom_unit
+POLYSEPTOL POMM. 22GR,0,product.product_uom_unit,,0070177,True,scenario.product_price_category_gma,scenario.product_0070177,product.product_uom_unit
+MUSTELA LAIT DE TOILETTE 500ML,0,product.product_uom_unit,,0070383,True,,scenario.product_0070383,product.product_uom_unit
+"FLUBENOL KH 7,5ML",0.340,product.product_uom_unit,,0071514,True,,scenario.product_0071514,product.product_uom_unit
+LONARID N 30CP,0,product.product_uom_unit,,0071936,True,scenario.product_price_category_gma,scenario.product_0071936,product.product_uom_unit
+PRUNASINE SIROP 1L,0,product.product_uom_unit,,0072611,True,scenario.product_price_category_gma,scenario.product_0072611,product.product_uom_unit
+NEUROBION 6AMP 3ML,0,product.product_uom_unit,,0073000,True,scenario.product_price_category_gma,scenario.product_0073000,product.product_uom_unit
+QUELLADA SHAMP PERMETH 125ML,0,product.product_uom_unit,,0073163,True,scenario.product_price_category_gma,scenario.product_0073163,product.product_uom_unit
+QUESTRAN 50 SACHETS 4GR,0,product.product_uom_unit,,0073296,True,scenario.product_price_category_gma,scenario.product_0073296,product.product_uom_unit
+PROVIRON 25MG 50CP,0,scenario.product_uom_boite,,0073452,True,scenario.product_price_category_gma,scenario.product_0073452,scenario.product_uom_boite
+RAPHANUS S POTIER 12AMP BUV 10ML,0,product.product_uom_unit,,0073619,True,scenario.product_price_category_gma,scenario.product_0073619,product.product_uom_unit
+VANOCOMPLEX NR 14 QUIETA 20ML,0,product.product_uom_unit,,0074492,True,scenario.product_price_category_gma,scenario.product_0074492,product.product_uom_unit
+REPARIL GEL 100GR,0,product.product_uom_unit,,0074914,True,scenario.product_price_category_gma,scenario.product_0074914,product.product_uom_unit
+TRIGYNON 3z21DR,0,product.product_uom_unit,,0074963,True,scenario.product_price_category_gma,scenario.product_0074963,product.product_uom_unit
+PARACODINE 20CP 10MG,0,product.product_uom_unit,,0075000,True,scenario.product_price_category_gma,scenario.product_0075000,product.product_uom_unit
+REPARIL 100DR 20MG,0,product.product_uom_unit,,0075143,True,scenario.product_price_category_gma,scenario.product_0075143,product.product_uom_unit
+POLARAMINE 20 REPETABS 6MG,0,product.product_uom_unit,,0075200,True,scenario.product_price_category_gma,scenario.product_0075200,product.product_uom_unit
+RHINOVITA POMM.17GR,0,product.product_uom_unit,,0075622,True,scenario.product_price_category_gma,scenario.product_0075622,product.product_uom_unit
+RHINOVITA ORL GTTE,0,product.product_uom_unit,,0075630,True,scenario.product_price_category_gma,scenario.product_0075630,product.product_uom_unit
+ALCOOL DE MENTHE 100ML RICLES,0,product.product_uom_unit,,0075705,True,scenario.product_price_category_gma,scenario.product_0075705,product.product_uom_unit
+RIFADINE 50CP 300MG,0,product.product_uom_unit,,0075750,True,scenario.product_price_category_gma,scenario.product_0075750,product.product_uom_unit
+"RIVOTRIL 50X0,5MG",0,product.product_uom_unit,,0075986,True,scenario.product_price_category_gma,scenario.product_0075986,product.product_uom_unit
+ROMPUN SOL. 2% 25ML,2.200,product.product_uom_unit,,0076901,True,,scenario.product_0076901,product.product_uom_unit
+REDOMEX 25MG 100CP,0,product.product_uom_unit,,0078105,True,,scenario.product_0078105,product.product_uom_unit
+SOLUMEDROL 1AMP 2ML 125MG,0,product.product_uom_unit,,0078360,True,scenario.product_price_category_gma,scenario.product_0078360,product.product_uom_unit
+SEDOCHOL-B15 500ML,0.290,product.product_uom_unit,,0079327,True,,scenario.product_0079327,product.product_uom_unit
+SEDINAL GTTES 100ML,0,product.product_uom_unit,,0079442,True,scenario.product_price_category_gma,scenario.product_0079442,product.product_uom_unit
+SEDOCHOL-B15 125ML,0.290,product.product_uom_unit,,0079459,True,,scenario.product_0079459,product.product_uom_unit
+SEDINAL GTTE 30ML,0,product.product_uom_unit,,0079491,True,scenario.product_price_category_gma,scenario.product_0079491,product.product_uom_unit
+LOCOID LOTION 30ML,0,product.product_uom_unit,,0079954,True,scenario.product_price_category_gma,scenario.product_0079954,product.product_uom_unit
+"UNICAINE COLLYRE 0,4% 10ML",0,product.product_uom_unit,,0080200,True,scenario.product_price_category_gma,scenario.product_0080200,product.product_uom_unit
+SILOMAT 40DR,0,product.product_uom_unit,,0080283,True,scenario.product_price_category_gma,scenario.product_0080283,product.product_uom_unit
+DYNATRA 10AMP 50MG,0,product.product_uom_unit,,0080507,True,scenario.product_price_category_gma,scenario.product_0080507,product.product_uom_unit
+URGENIN MADAUS LIQ 50ML,0,product.product_uom_unit,,0080700,True,scenario.product_price_category_gma,scenario.product_0080700,product.product_uom_unit
+SOLUMEDROL 3ACT-O-VIAL 40MG,0,product.product_uom_unit,,0081034,True,scenario.product_price_category_gma,scenario.product_0081034,product.product_uom_unit
+SOLUMEDROL 500MG 8ML,0,product.product_uom_unit,,0081232,True,scenario.product_price_category_gma,scenario.product_0081232,product.product_uom_unit
+SOLUMEDROL 1000MG VIAL,0,product.product_uom_unit,,0081240,True,scenario.product_price_category_gma,scenario.product_0081240,product.product_uom_unit
+COLMAN PILULES SOUVERAINES VITAM. 500CP,0.270,product.product_uom_unit,,0081620,True,scenario.product_price_category_gma,scenario.product_0081620,product.product_uom_unit
+COLMAN PILULES SOUVERAINES VITAM.1000CP,0.490,product.product_uom_unit,,0081638,True,scenario.product_price_category_gma,scenario.product_0081638,product.product_uom_unit
+SPARTRIX 50 CP,0.030,product.product_uom_unit,,0082420,True,,scenario.product_0082420,product.product_uom_unit
+SPAGULAX M 700GR,0,product.product_uom_unit,,0082982,True,,scenario.product_0082982,product.product_uom_unit
+"IMOVAX POLIO SER 0,5ML",0,product.product_uom_unit,,0083063,True,scenario.product_price_category_gma,scenario.product_0083063,product.product_uom_unit
+FLUODONTIL PATE DENTAIRE 50ML,0,product.product_uom_unit,,0083105,True,scenario.product_price_category_gma,scenario.product_0083105,product.product_uom_unit
+SEDOCHOL-B15 5L,0.290,product.product_uom_unit,,0083253,True,,scenario.product_0083253,product.product_uom_unit
+STUGERON GTTE 100ML,0,product.product_uom_unit,,0083451,True,scenario.product_price_category_gma,scenario.product_0083451,product.product_uom_unit
+STRUMAZOL 100CP 10MG,0,product.product_uom_unit,,0083725,True,scenario.product_price_category_gma,scenario.product_0083725,product.product_uom_unit
+CEPRAVIN DC 20INJ,0.220,product.product_uom_unit,,0083873,True,,scenario.product_0083873,scenario.product_uom_boite
+SUROLAN 15ML JANSSEN,0.210,product.product_uom_unit,,0084665,True,,scenario.product_0084665,product.product_uom_unit
+SUSTANON 250 INJ 1ML,0,product.product_uom_unit,,0084715,True,scenario.product_price_category_gma,scenario.product_0084715,product.product_uom_unit
+"SYNACTHEN 1AMP 0,25MG 1ml",0,product.product_uom_unit,,0084798,True,scenario.product_price_category_gma,scenario.product_0084798,product.product_uom_unit
+SYNTOCINON 5AMP 1ML,0,product.product_uom_unit,,0085050,True,scenario.product_price_category_gma,scenario.product_0085050,product.product_uom_unit
+T61 50ML,0.500,product.product_uom_unit,,0085456,True,,scenario.product_0085456,product.product_uom_unit
+TELEBRIX 35 50ML,0,product.product_uom_unit,,0085662,True,scenario.product_price_category_gma,scenario.product_0085662,product.product_uom_unit
+TELMIN KH 1X10CP/,0.010,product.product_uom_unit,,0086058,True,,scenario.product_0086058,product.product_uom_unit
+"TENSOPLAST EAB BAND ELAST 10cmx4,50m",0.140,product.product_uom_unit,,0086132,True,scenario.product_price_category_gma,scenario.product_0086132,product.product_uom_unit
+TERRACORTRIL ONGUENT DERMIQUE 15gr,0,product.product_uom_unit,,0086280,True,,scenario.product_0086280,product.product_uom_unit
+TEARS NATURAL GUTT LUBRIF 15ml,0,product.product_uom_unit,,0086629,True,scenario.product_price_category_gma,scenario.product_0086629,product.product_uom_unit
