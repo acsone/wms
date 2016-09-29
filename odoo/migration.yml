@@ -46,3 +46,4 @@ migration:
           - pricelist_discount
           - specific_sale
           - specific_partner
+          - specific_product
