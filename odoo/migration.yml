@@ -47,3 +47,5 @@ migration:
           - specific_sale
           - specific_partner
           - specific_product
+          - stock_putaway_defaultfixedlocation
+          - stock_product_bin
