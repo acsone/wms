@@ -76,10 +76,10 @@ def import_pricelist_items(ctx):
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
     content = resource_stream(req, 'data/demo/delivery_vehicle.csv')
-    content = resource_stream(req, 'data/demo/delivery_zone.csv')
-    content = resource_stream(req, 'data/demo/delivery_clients.csv')
     load_csv_stream(ctx, 'round.vehicle', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/delivery_zone.csv')
     load_csv_stream(ctx, 'round.zone', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/delivery_clients.csv')
     load_csv_stream(ctx, 'round.zone.position', content, delimiter=',')
 
 
