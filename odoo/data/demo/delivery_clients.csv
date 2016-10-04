@@ -4,10 +4,8 @@ __demo.deliveryzoneposition_42_02,__demo.deliveryzone42,2,scenario.customer_85
 __demo.deliveryzoneposition_42_03,__demo.deliveryzone42,3,scenario.customer_182
 __demo.deliveryzoneposition_42_04,__demo.deliveryzone42,4,scenario.customer_191
 __demo.deliveryzoneposition_42_05,__demo.deliveryzone42,5,scenario.customer_1
-__demo.deliveryzoneposition_42_06,__demo.deliveryzone42,6,scenario.customer_8
 __demo.deliveryzoneposition_42_07,__demo.deliveryzone42,7,scenario.customer_33
 __demo.deliveryzoneposition_42_08,__demo.deliveryzone42,8,scenario.customer_70
-__demo.deliveryzoneposition_42_09,__demo.deliveryzone42,9,scenario.customer_112
 __demo.deliveryzoneposition_80_01,__demo.deliveryzone80,1,scenario.customer_384
 __demo.deliveryzoneposition_80_02,__demo.deliveryzone80,2,scenario.customer_387
 __demo.deliveryzoneposition_80_03,__demo.deliveryzone80,3,scenario.customer_25
@@ -18,7 +16,7 @@ __demo.deliveryzoneposition_80_07,__demo.deliveryzone80,7,scenario.customer_110
 __demo.deliveryzoneposition_80_08,__demo.deliveryzone80,8,scenario.customer_111
 __demo.deliveryzoneposition_80_09,__demo.deliveryzone80,9,scenario.customer_124
 __demo.deliveryzoneposition_80_10,__demo.deliveryzone80,10,scenario.customer_156
-__demo.deliveryzoneposition_80_11,__demo.deliveryzone80,11,scenario.customer_174
+__demo.deliveryzoneposition_80_11,__demo.deliveryzone80,11,scenario.customer_184
 __demo.deliveryzoneposition_80_12,__demo.deliveryzone80,12,scenario.customer_208
 __demo.deliveryzoneposition_80_13,__demo.deliveryzone80,13,scenario.customer_225
 __demo.deliveryzoneposition_80_14,__demo.deliveryzone80,14,scenario.customer_237
