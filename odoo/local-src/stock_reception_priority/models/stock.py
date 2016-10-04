@@ -32,7 +32,7 @@ class ProductProduct(models.Model):
     @api.one
     def _get_arrangement_importance(self):
         # il faut calculer combien de temps on tient en tenant compte d'une consommation moyenne de 1,6 (=2)
-        """ How often then product is taken in a bin, how important it is to
+        """ How often the product is taken in a bin, how important it is to
         arrange. This is divided by the quantity already arranged. """
         start_date = (date.today() - timedelta(days=6 * 30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         customer_loc = self.env.ref('stock.stock_location_customers')
@@ -42,9 +42,11 @@ class ProductProduct(models.Model):
             ('state', 'not in', ('draft', 'cancel')),
             ('location_dest_id', '=', customer_loc.id),
             ])
-        # WIP ... FIXME
-        # qty_in_stock = self.qty_
-        # self.arrangement_importance = qty_moves / max(1, self.qty_
+        # FIXME - Hugly: Parking string hardcoded
+        qty_in_stock = (self.qty_available -
+                        self.with_context(location="Parking").qty_available)
+
+        self.arrangement_importance = qty_moves / max(1, self.qty_in_stock)
 
 
 class StockPicking(models.Model):
