@@ -1,0 +1,9 @@
+id,zone_id/id,sequence,partner_id/id
+__demo.deliveryzoneposition_42_01,__demo.deliveryzone42,1,scenario.client_3768
+__demo.deliveryzoneposition_42_02,__demo.deliveryzone42,2,scenario.client_8181
+__demo.deliveryzoneposition_80_01,__demo.deliveryzone80,1,scenario.client_7478
+__demo.deliveryzoneposition_80_02,__demo.deliveryzone80,2,scenario.client_4638
+__demo.deliveryzoneposition_80_03,__demo.deliveryzone80,3,scenario.client_5446
+__demo.deliveryzoneposition_47_01,__demo.deliveryzone47,1,scenario.supplier_60405
+__demo.deliveryzoneposition_47_02,__demo.deliveryzone47,2,scenario.client_4661
+__demo.deliveryzoneposition_47_03,__demo.deliveryzone47,3,scenario.client_7269

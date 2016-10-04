@@ -1,0 +1,20 @@
+id,name,time
+__demo.vehicle1,1/ EPC,15.00
+__demo.vehicle2,2/ Pharma Sante (AM),7.45
+__demo.vehicle2b,2/ Pharma Sante (PM),15.02
+__demo.vehicle3,3/ Life (AM),7.45
+__demo.vehicle3b,3/ Life (PM),15.02
+__demo.vehicle4,4/ Pharma Belgium,15.00
+__demo.vehicle13,13/ Belmedis,7.45
+__demo.vehicle13b,13/ Belmedis,15.02
+__demo.vehicle14,14/ Lloyd Pharma,15.50
+__demo.vehicle21,21/ Flandre Occ,15.07
+__demo.vehicle37,37/ Famenne,7.48
+__demo.vehicle42,42/ Namur,9.55
+__demo.vehicle47,47/ Brabant Ouest,7.49
+__demo.vehicle48,48/ Borinage,7.49
+__demo.vehicle58,55/ Bruxelles,10.00
+__demo.vehicle58,58/ Bruxelles Sud,9.55
+__demo.vehicle59,59/ Mouscron,9.55
+__demo.vehicle70,70/ Limbourg,9.50
+__demo.vehicle80,80/ Liège,9.55
