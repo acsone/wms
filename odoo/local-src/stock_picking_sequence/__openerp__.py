@@ -20,29 +20,16 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Rounds',
+    'name': 'Stock Picking Sequence',
     'version': '1.0',
     'author': "BCIM",
     'maintainer': 'Camptocamp',
     'category': 'Stock Management',
     'depends': [
         'stock',
-        'delivery',
-        'stock_picking_subcode',
-        'stock_picking_sequence',
         ],
     'data': [
-        'views/menu.xml',
-        'views/vehicle.xml',
-        'views/zone.xml',
-        'views/instance.xml',
         'views/picking.xml',
-        'views/partner.xml',
-        'data/sequence.xml',
-        'security/ir.model.access.csv',
-        'wizards/instance_zone_import.xml',
-        'wizards/make_today_delivery_plan.xml',
-        'wizards/picking_assign_delivery_round.xml',
     ],
     'installable': True,
     'auto_install': False,

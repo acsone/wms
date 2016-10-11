@@ -25,9 +25,6 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.vpicktree"/>
         <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="sequence"/>
-            </field>
             <field name="state" position="after">
                 <field name="delivery_round_id"/>
                 <field name="printed" invisible="1"/>

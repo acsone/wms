@@ -19,6 +19,8 @@
 #
 ##############################################################################
 
+from datetime import date
+
 from openerp import fields, models, api
 
 
