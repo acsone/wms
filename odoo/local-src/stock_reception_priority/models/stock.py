@@ -51,6 +51,14 @@ class ProductProduct(models.Model):
         self.arrangement_importance = qty_moves / max(1, self.qty_in_stock)
 
 
+class StockPackOperation(models.Model):
+    _inherit = "stock.pack.operation"
+
+    qty_backorder = fields.Integer(
+        'Qty Backorder',
+        readonly=True)
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
@@ -111,12 +119,16 @@ class StockPicking(models.Model):
             backorders = dict(self._cr.fetchall())
 
             for record in pickings:
+                for packop in record.pack_operation_product_ids:
+                    packop.qty_backorder = backorders.get(packop.product_id, 0)
                 products = record.mapped('pack_operation_product_ids') \
                     .mapped('product_id')
-                record.qty_backorder = sum([backorders.get(prod_id, 0)
-                                            for prod_id in products.ids])
-                record.qty_outofstock = len(products.filtered(
-                    lambda r: r.qty_available <= 0))
+                record.write({
+                    'qty_backorder': sum([backorders.get(prod_id, 0)
+                                          for prod_id in products.ids]),
+                    'qty_outofstock': len(products.filtered(
+                        lambda r: r.qty_available <= 0)),
+                    })
 
     def _calc_priority(self):
         return self.qty_backorder * 1000 + self.qty_outofstock
