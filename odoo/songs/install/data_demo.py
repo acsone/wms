@@ -43,7 +43,7 @@ def import_products(ctx):
     content = resource_stream(req, 'data/demo/product.csv')
     load_csv_stream(ctx, 'product.product', content, delimiter=',')
     content = resource_stream(req, 'data/demo/logistics_product.csv')
-    load_csv_stream(ctx, 'product.product', content, delimiter=',')
+    load_csv_stream(ctx, 'product.product', content, delimiter=';')
     ctx.env.cr.execute("""
         UPDATE product_template
         SET active=False
