@@ -39,7 +39,9 @@ def create_locations(ctx):
 
     for xmlid, name in locations:
         create_or_update(ctx, 'stock.location', xmlid, {
-            'name': name, 'location_id': loc_stock.id
+            'name': name,
+            'location_id': loc_stock.id,
+            'subcode': 'PICK',
         })
 
     sub_locations = [
@@ -51,7 +53,9 @@ def create_locations(ctx):
 
     for xmlid, name, location_id in sub_locations:
         create_or_update(ctx, 'stock.location', xmlid, {
-            'name': name, 'location_id': location_id
+            'name': name,
+            'location_id': location_id,
+            'subcode': 'PICK',
         })
 
 

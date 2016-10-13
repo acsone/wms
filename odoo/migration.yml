@@ -41,6 +41,7 @@ migration:
           - purchase
           #### local-src
           - delivery_rounds
+          - delivery_rounds_assign
           - stock_picking_subcode
           - product_price_category
           - pricelist_discount
