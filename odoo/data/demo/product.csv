@@ -155,6 +155,7 @@ HIBITANE PLUS 5% CONCENTRE 5 LITRES,0,product.product_uom_unit,,0047829,True,,sc
 IMAVEROL PETIT MODELE 100ml,0.340,product.product_uom_unit,,0048173,True,,scenario.product_0048173,product.product_uom_unit
 IMAVEROL 1000 ml,1.200,product.product_uom_unit,,0048181,True,,scenario.product_0048181,product.product_uom_unit
 HYDROCORTISONE 20CP 20MG,0,product.product_uom_unit,,0048363,True,scenario.product_price_category_gma,scenario.product_0048363,product.product_uom_unit
+HYDROXOCOBALAMINE 10MG STEROP 3AMP 2ml,0,product.product_uom_unit,,0048454,True,,scenario.product_0048454,product.product_uom_unit
 HOMEOPLASMINE BAUME 40GR,0,product.product_uom_unit,,0048728,True,scenario.product_price_category_gma,scenario.product_0048728,product.product_uom_unit
 FABRY IDEAL SEL DE BAIN 750GR,0.800,product.product_uom_unit,,0048843,True,,scenario.product_0048843,product.product_uom_unit
 IMODIUM 20CP,0,product.product_uom_unit,,0049122,True,scenario.product_price_category_gma,scenario.product_0049122,product.product_uom_unit
@@ -298,4 +299,3 @@ TELEBRIX 35 50ML,0,product.product_uom_unit,,0085662,True,scenario.product_price
 TELMIN KH 1X10CP/,0.010,product.product_uom_unit,,0086058,True,,scenario.product_0086058,product.product_uom_unit
 "TENSOPLAST EAB BAND ELAST 10cmx4,50m",0.140,product.product_uom_unit,,0086132,True,scenario.product_price_category_gma,scenario.product_0086132,product.product_uom_unit
 TERRACORTRIL ONGUENT DERMIQUE 15gr,0,product.product_uom_unit,,0086280,True,,scenario.product_0086280,product.product_uom_unit
-TEARS NATURAL GUTT LUBRIF 15ml,0,product.product_uom_unit,,0086629,True,scenario.product_price_category_gma,scenario.product_0086629,product.product_uom_unit

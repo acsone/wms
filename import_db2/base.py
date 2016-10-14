@@ -41,7 +41,6 @@ class EntityMapper:
         self.name = self.__class__.__name__.lower().replace('mapper', '')
         self.importer = importer
 
-        # TODO: éviter ce chemin relatif
         self.file_cache_path = os.path.join(
             '/var/tmp', 'db2_caches', '%s.csv' % self.DB2_NAME
         )
@@ -141,7 +140,7 @@ class EntityMapper:
         if joins:
             query += joins
 
-        if needed_refs:
+        if not self.importer.full and needed_refs:
             assert self.DB2_REF_NAME, \
                 "DB2_REF_NAME is needed for fetching specific references!"
 
@@ -159,9 +158,10 @@ class EntityMapper:
                 where_cond = '1=1'
 
             query += "WHERE %s ORDER BY 1 asc "
-            # TODO: Configure modes (subset or full) and limit number.
-            query += "FETCH FIRST 300 ROWS ONLY"
             placeholders += (where_cond,)
+
+            if not self.importer.full:
+                query += "FETCH FIRST 300 ROWS ONLY"
 
         return query % placeholders, params
 

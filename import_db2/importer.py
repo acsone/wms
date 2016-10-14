@@ -10,12 +10,6 @@ from collections import defaultdict, OrderedDict
 from convertion import MAPPER_CLASSES
 
 
-CSV_PATH = os.path.join(
-    os.path.dirname(os.path.realpath(__file__)),
-    '..', 'odoo', 'data', 'demo'
-)
-
-
 def flatten_dict(nested_dict, prefix=None):
     """ Transform a dict with nested dict like:
     {"a": 1, "b": {'c': 3, 'd': {'e': 5}}}
@@ -40,10 +34,16 @@ def flatten_dict(nested_dict, prefix=None):
 
 class Importer:
 
-    def __init__(self, cursor):
+    def __init__(self, cursor, full=False):
         self.odoo_entities = OrderedDict()
         self.foreign_refs = defaultdict(list)
         self.cursor = cursor
+        self.full = full
+        self.csv_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            '..', 'odoo', 'data',
+            'install' if self.full else 'demo'
+        )
 
     def add_entity(self, name, entity):
         try:
@@ -65,7 +65,9 @@ class Importer:
         for name, entities in self.odoo_entities.items():
             entities = [flatten_dict(d) for d in entities]
             headers = entities[0].keys()
-            with open(os.path.join(CSV_PATH, '%s.csv' % name), 'w') as csvfile:
+
+            file_path = os.path.join(self.csv_path, '%s.csv' % name)
+            with open(file_path, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, headers)
                 writer.writeheader()
                 writer.writerows(entities)
@@ -81,6 +83,7 @@ class Importer:
 if __name__ == "__main__":
 
     cache = '--cache' in sys.argv
+    full = '--full' in sys.argv
 
     if not cache:
         conn = pyodbc.connect('DSN=Alcyon')
@@ -88,5 +91,5 @@ if __name__ == "__main__":
     else:
         cursor = None
 
-    importer = Importer(cursor)
+    importer = Importer(cursor, full=full)
     importer.process()
