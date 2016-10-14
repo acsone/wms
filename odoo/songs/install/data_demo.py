@@ -56,15 +56,8 @@ def import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
-    content = resource_stream(req, 'data/demo/product.csv')
-    load_csv_stream(ctx, 'product.product', content, delimiter=',')
-    ctx.env.cr.execute("""
-        UPDATE product_template
-        SET active = false
-        WHERE id IN (SELECT product_tmpl_id
-                     FROM product_product
-                     WHERE active = false)
-    """)
+    content = resource_stream(req, 'data/demo/supplierinfo.csv')
+    load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
 @anthem.log
