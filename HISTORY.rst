@@ -17,6 +17,18 @@ Unreleased
 **Documentation**
 
 
+9.2.1 (2016-10-14)
+++++++++++++++++++
+
+**Data Migration**
+* Import full AS400 data for integration (product/partner)
+* Importer script to parallelize import of big csv file.
+* Demo data for delivery rounds
+
+**Bugfixes**
+* Multiple fixes in delivery rounds.
+* Pricelist discount: Hide standard discount field instead of replace (in case someone used it)
+
 9.2.0 (2016-09-29)
 ++++++++++++++++++
 

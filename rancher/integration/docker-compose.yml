@@ -1,5 +1,5 @@
 odoo:
-  image: camptocamp/alcyon_odoo:9.2.0
+  image: camptocamp/alcyon_odoo:9.2.1
   links:
   - db:db
   volumes:
