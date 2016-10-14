@@ -23,12 +23,12 @@ migration:
         full:
           operations:
             post:
-              - anthem songs.install.data_full::main
               - importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
               - importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
               - importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
               - importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - anthem songs.install.data_full::main
 
         demo:
           operations:
