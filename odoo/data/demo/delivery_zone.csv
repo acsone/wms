@@ -1,0 +1,20 @@
+vehicle_ids/id,code,name,id
+__demo.vehicle1,1,EPC,__demo.deliveryzone1
+__demo.vehicle2,2,Pharma Sante (AM),__demo.deliveryzone2
+__demo.vehicle2b,2,Pharma Sante (PM),__demo.deliveryzone2b
+__demo.vehicle3,3,Life (AM),__demo.deliveryzone3
+__demo.vehicle3b,3,Life (PM),__demo.deliveryzone3b
+__demo.vehicle4,4,Pharma Belgium,__demo.deliveryzone4
+__demo.vehicle13,13,Belmedis,__demo.deliveryzone13
+__demo.vehicle13b,13,Belmedis,__demo.deliveryzone13b
+__demo.vehicle14,14,Lloyd Pharma,__demo.deliveryzone14
+__demo.vehicle21,21,Flandre Occ,__demo.deliveryzone21
+__demo.vehicle37,37,Famenne,__demo.deliveryzone37
+__demo.vehicle42,42,Namur,__demo.deliveryzone42
+__demo.vehicle47,47,Brabant Ouest,__demo.deliveryzone47
+__demo.vehicle48,48,Borinage,__demo.deliveryzone48
+__demo.vehicle58,55,Bruxelles,__demo.deliveryzone58
+__demo.vehicle58,58,Bruxelles Sud,__demo.deliveryzone58
+__demo.vehicle59,59,Mouscron,__demo.deliveryzone59
+__demo.vehicle70,70,Limbourg,__demo.deliveryzone70
+__demo.vehicle80,80,Liège,__demo.deliveryzone80

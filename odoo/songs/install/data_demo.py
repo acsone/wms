@@ -42,6 +42,8 @@ def import_products(ctx):
     """ Importing products from csv"""
     content = resource_stream(req, 'data/demo/product.csv')
     load_csv_stream(ctx, 'product.product', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/logistics_product.csv')
+    load_csv_stream(ctx, 'product.product', content, delimiter=';')
     ctx.env.cr.execute("""
         UPDATE product_template
         SET active=False
@@ -73,6 +75,17 @@ def import_pricelist_items(ctx):
 
 
 @anthem.log
+def import_delivery_round_config(ctx):
+    """ Importing delivery round config from csv"""
+    content = resource_stream(req, 'data/demo/delivery_vehicle.csv')
+    load_csv_stream(ctx, 'round.vehicle', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/delivery_zone.csv')
+    load_csv_stream(ctx, 'round.zone', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/delivery_clients.csv')
+    load_csv_stream(ctx, 'round.zone.position', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Loading demo data """
     import_suppliers(ctx)
@@ -82,3 +95,4 @@ def main(ctx):
     import_products(ctx)
     import_product_supplierinfo(ctx)
     import_pricelist_items(ctx)
+    import_delivery_round_config(ctx)
