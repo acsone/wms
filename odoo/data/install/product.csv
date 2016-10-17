@@ -1850,7 +1850,7 @@ FELOCELL CVR 25x1D,0.360,product.product_uom_unit,,1300227,True,,scenario.produc
 FELOCELL CVR-C CALICIVIROSE 25x1D,0.360,product.product_uom_unit,,1300235,True,,scenario.product_1300235,product.product_uom_unit
 FELOCELL RC 25x1D,0,product.product_uom_unit,,1300243,True,,scenario.product_1300243,product.product_uom_unit
 SCOURGUARD-3 25x1D,0.390,scenario.product_uom_flacon,,1300318,True,,scenario.product_1300318,scenario.product_uom_boite
-TERRAMYCINE 100 250ML,0.030,product.product_uom_unit,,1300334,True,,scenario.product_1300334,product.product_uom_unit
+TERRAMYCINE 100 250ML/,0.030,product.product_uom_unit,,1300334,True,,scenario.product_1300334,product.product_uom_unit
 "MOTIC LENTILLE 2,5X POUR ADAPTAT PHOTO",0,product.product_uom_unit,,1300442,True,scenario.product_price_category_gma,scenario.product_1300442,product.product_uom_unit
 FLUMIQUIL 50% WS 1KG,1.160,product.product_uom_unit,,1300573,True,,scenario.product_1300573,product.product_uom_unit
 SMI SURGICRYL PGA USP2/0 EP3 24C3/8 /12,0.080,scenario.product_uom_boite,True,1301524,True,scenario.product_price_category_gma,scenario.product_1301524,scenario.product_uom_boite
@@ -3761,7 +3761,7 @@ INFLACAM  1MG 100CP CHIEN,0,product.product_uom_unit,,2963775,True,,scenario.pro
 "INFLACAM 1,5MG/ML 200ML CHIEN",0.200,product.product_uom_unit,,2963791,True,,scenario.product_2963791,product.product_uom_unit
 BLEPHAGEL TUBE 30GR,0,product.product_uom_unit,,2964351,True,,scenario.product_2964351,product.product_uom_unit
 CYDECTIN TRICLAMOX POUR ON 5 L,5.000,product.product_uom_unit,,2965010,True,,scenario.product_2965010,product.product_uom_unit
-CYDECTIN TRICLAMOX POUR ON 1 L,1.000,product.product_uom_unit,,2965028,True,,scenario.product_2965028,product.product_uom_unit
+CYDECTIN TRICLAMOX POUR ON 1 L/,1.000,product.product_uom_unit,,2965028,True,,scenario.product_2965028,product.product_uom_unit
 "CYDECTIN TRICLAMOX POUR ON 2,5 L",2.500,product.product_uom_unit,,2966190,True,,scenario.product_2966190,product.product_uom_unit
 "TECTONIK POUR-ON 2,5L",2.500,product.product_uom_unit,,2966422,True,,scenario.product_2966422,product.product_uom_unit
 "PISTOLET TECTONIK 2,5L",0,product.product_uom_unit,,2966430,True,scenario.product_price_category_gma,scenario.product_2966430,product.product_uom_unit
@@ -4053,7 +4053,7 @@ CYSTAID PLUS BLISTER 8x30CAPS,0,product.product_uom_unit,,3073590,True,,scenario
 INFLACAM 20MG/ML 250ML BOVINS CHEVAUX,0.250,product.product_uom_unit,,3074226,True,,scenario.product_3074226,product.product_uom_unit
 INFLACAM  5MG/ML 20ML CHIEN/CHAT,0.020,product.product_uom_unit,,3074234,True,,scenario.product_3074234,product.product_uom_unit
 INFLACAM 20MG/ML 100ML BOVINS CHEVAUX,0.100,product.product_uom_unit,,3074242,True,,scenario.product_3074242,product.product_uom_unit
-"CLAVASEPTIN  62,5MG  10CP",0,product.product_uom_unit,,3074432,True,,scenario.product_3074432,product.product_uom_unit
+"CLAVASEPTIN  62,5MG  10CP/",0,product.product_uom_unit,,3074432,True,,scenario.product_3074432,product.product_uom_unit
 "CLAVASEPTIN  62,5MG 100CP",0,product.product_uom_unit,,3074440,True,,scenario.product_3074440,product.product_uom_unit
 INTRASEAL  24INJ,0,product.product_uom_unit,,3074457,True,,scenario.product_3074457,product.product_uom_unit
 INTRASEAL  60INJ,0,product.product_uom_unit,,3074465,True,,scenario.product_3074465,product.product_uom_unit
@@ -4268,6 +4268,7 @@ PROTEQFLU-TE RICHMOND 10x1D,0,product.product_uom_unit,,3228855,True,,scenario.p
 MILBACTOR SMALL DOG / PUPPY 48TABS,0.300,product.product_uom_unit,,3233756,True,,scenario.product_3233756,product.product_uom_unit
 MILBACTOR DOG 4TABS,0.100,product.product_uom_unit,,3233772,True,,scenario.product_3233772,product.product_uom_unit
 MILBACTOR DOG 48TABS,0.300,product.product_uom_unit,,3233780,True,,scenario.product_3233780,product.product_uom_unit
+FLORDOFEN 300mg/ml 250ml,0.250,product.product_uom_unit,,3233798,True,,scenario.product_3233798,product.product_uom_unit
 CARBOBEL MONO GRANULES 70GR,0,product.product_uom_unit,,3235504,True,,scenario.product_3235504,product.product_uom_unit
 "ALFAGLANDIN C 0,250mg/ml 20ml",0.020,product.product_uom_unit,,3237245,True,,scenario.product_3237245,product.product_uom_unit
 MILPRO PETIT CHAT/CHATON 24CP,0,product.product_uom_unit,,3237740,True,,scenario.product_3237740,product.product_uom_unit
@@ -4923,6 +4924,7 @@ TWYDIL HIPPACAN + C 10x50GR,0.500,scenario.product_uom_boite,,4634434,True,scena
 TWYDIL VIGORADE 10 SACHETS,0.630,product.product_uom_unit,,4635244,True,scenario.product_price_category_gma,scenario.product_4635244,product.product_uom_unit
 DOUXO CHLOREXIDINE PYO MICRO EMULSION,0.260,product.product_uom_unit,,4639992,True,scenario.product_price_category_gma,scenario.product_4639992,product.product_uom_unit
 ACTIS CHAT SPECIAL OMEGA 50ml,0.050,product.product_uom_unit,,4647951,True,scenario.product_price_category_gma,scenario.product_4647951,product.product_uom_unit
+AIGUILLE STERICAN 20Gx1 x100,0,scenario.product_uom_boite,True,4657500,True,scenario.product_price_category_gma,scenario.product_4657500,scenario.product_uom_boite
 AIGUILLE STERICAN 25Gx5/8 x100,0,scenario.product_uom_boite,True,4657853,True,scenario.product_price_category_gma,scenario.product_4657853,scenario.product_uom_boite
 ZYLKENE 450MG  30GEL,0.040,product.product_uom_unit,,4665512,True,,scenario.product_4665512,product.product_uom_unit
 EKYMASH BOOSTER 1L AUDEVARD,1.330,product.product_uom_unit,,4665759,True,scenario.product_price_category_gma,scenario.product_4665759,product.product_uom_unit
@@ -7232,7 +7234,7 @@ FLACON VERRE BRUN ROND  10ml+CP x25,5.150,scenario.product_uom_sac,,5250010,True
 FLACON VERRE BRUN ROND  15ml+CP x25,0,scenario.product_uom_sac,,5250015,True,scenario.product_price_category_gma,scenario.product_5250015,scenario.product_uom_sac
 DECTOMAX INJ 250ML,0.250,product.product_uom_unit,,5250018,True,,scenario.product_5250018,product.product_uom_unit
 FLACON VERRE BRUN ROND  20ml+CP x180,7.000,scenario.product_uom_sac,,5250020,True,scenario.product_price_category_gma,scenario.product_5250020,scenario.product_uom_sac
-FLACON VERRE BRUN ROND  30ml+CP x110,5.050,scenario.product_uom_sac,,5250030,True,scenario.product_price_category_gma,scenario.product_5250030,scenario.product_uom_sac
+FLACON VERRE BRUN ROND  30ml+CP x25,5.050,scenario.product_uom_sac,,5250031,True,scenario.product_price_category_gma,scenario.product_5250031,scenario.product_uom_sac
 SPYKE METALLIQUE D 7mm x10,0,scenario.product_uom_boite,,5250061,True,scenario.product_price_category_gma,scenario.product_5250061,scenario.product_uom_boite
 PRO PLAN CAT DELICATE 10x85GR POISSON,0.850,product.product_uom_unit,,5250099,True,scenario.product_price_category_ali,scenario.product_5250099,product.product_uom_unit
 FLACON VERRE BRUN ROND 100ml +CP x72,0,product.product_uom_unit,,5250100,True,scenario.product_price_category_gma,scenario.product_5250100,product.product_uom_unit
@@ -7676,6 +7678,7 @@ PRACTICRYL 910 USP3/0 EP2 24C3/8(12),0.070,product.product_uom_unit,True,5291009
 PRACTICRYL 910 USP2 EP5 40C1/2(12),0.080,product.product_uom_unit,True,5291017,True,scenario.product_price_category_gma,scenario.product_5291017,product.product_uom_unit
 "PRACTICRYL 910 USP0 EP3,5 36C1/2(12)",0.080,product.product_uom_unit,True,5291022,True,scenario.product_price_category_gma,scenario.product_5291022,product.product_uom_unit
 PRACTICRYL 910 USP1 EP4 36C1/2(12),0.070,product.product_uom_unit,True,5291023,True,scenario.product_price_category_gma,scenario.product_5291023,product.product_uom_unit
+LECTEUR POUR FOIN ET PAILLE TIGE 60cm,0,product.product_uom_unit,,5291120,True,scenario.product_price_category_gma,scenario.product_5291120,product.product_uom_unit
 THERMOMETRE LABO -10/+100°C,0,product.product_uom_unit,,5291125,True,scenario.product_price_category_gma,scenario.product_5291125,product.product_uom_unit
 "SERINGUE TER.INSUL.U-100 0,5ML 29Gx1/2",0.380,product.product_uom_unit,True,5291300,True,scenario.product_price_category_gma,scenario.product_5291300,product.product_uom_unit
 HALLOWELL CLOCHE PLEXI 1600/3000ml,0,product.product_uom_unit,,5291866,True,scenario.product_price_category_gma,scenario.product_5291866,product.product_uom_unit
@@ -9102,6 +9105,9 @@ CALCICAL 4x500ml,2.200,product.product_uom_unit,,5610575,True,scenario.product_p
 OBIBACA 20 BOLI,2.000,product.product_uom_unit,,5610576,True,scenario.product_price_category_gma,scenario.product_5610576,product.product_uom_unit
 RUMINOBIONE 20KG,20.000,product.product_uom_unit,,5610577,True,scenario.product_price_category_gma,scenario.product_5610577,product.product_uom_unit
 ANTE PARTUM 20KG OBIONE,20.000,product.product_uom_unit,,5610579,True,scenario.product_price_category_gma,scenario.product_5610579,product.product_uom_unit
+DRENCH RUMI 1 SACHET,0.400,product.product_uom_unit,,5610580,True,scenario.product_price_category_gma,scenario.product_5610580,product.product_uom_unit
+WAKE UP 30ml,0.030,product.product_uom_unit,,5610581,True,scenario.product_price_category_gma,scenario.product_5610581,product.product_uom_unit
+TRANSCUT 500ml,0.500,product.product_uom_unit,,5610582,True,scenario.product_price_category_gma,scenario.product_5610582,product.product_uom_unit
 TRANSCUT 1L NACTUS,1.000,product.product_uom_unit,,5610584,True,scenario.product_price_category_gma,scenario.product_5610584,product.product_uom_unit
 EQUIDES MIROIR DENTAIRE DIAM 50mm 25°,0,product.product_uom_unit,,5611001,True,scenario.product_price_category_gma,scenario.product_5611001,product.product_uom_unit
 EQUIDES LAMPE FRONTALE 11103,0,product.product_uom_unit,,5611103,True,scenario.product_price_category_gma,scenario.product_5611103,product.product_uom_unit
@@ -9544,6 +9550,7 @@ BLOUSE UNISEXE REVERS POCHE COEUR GRIS M,0,product.product_uom_unit,,5750201,Tru
 CHEVINAL PLUS 1L FORAN,0,product.product_uom_unit,,5753400,True,scenario.product_price_category_gma,scenario.product_5753400,product.product_uom_unit
 CHEVINAL PLUS 5L FORAN,5.000,product.product_uom_unit,,5753401,True,scenario.product_price_category_gma,scenario.product_5753401,product.product_uom_unit
 CISEAUX CHIR. ESTHETIQUE DROITS TC 15cm,0,product.product_uom_unit,,5755100,True,scenario.product_price_category_gma,scenario.product_5755100,product.product_uom_unit
+BIOEQUIN H EHV1 10x1d,0.100,product.product_uom_unit,,5758800,True,scenario.product_price_category_imp,scenario.product_5758800,product.product_uom_unit
 CAISSON 3 TIROIRS V01 H614xP700xL520mm,0,product.product_uom_unit,,5760051,True,scenario.product_price_category_gma,scenario.product_5760051,product.product_uom_unit
 "SURGIPRO USP4/0 EP1,5 3T16 SP631 (36)",0.200,scenario.product_uom_boite,True,5760205,True,scenario.product_price_category_gma,scenario.product_5760205,scenario.product_uom_boite
 ENVELOPPE FLEXADIN BROCHURES + CARTES F,0,product.product_uom_unit,,5760211,True,,scenario.product_5760211,product.product_uom_unit
@@ -11748,7 +11755,7 @@ RENAL CHIEN 12x410GR,5.160,scenario.product_uom_plateau,,7865046,True,scenario.p
 SENSITIVITY CHIEN 12x420GR POULET,5.040,scenario.product_uom_plateau,,7865048,True,scenario.product_price_category_alg,scenario.product_7865048,scenario.product_uom_plateau
 SITALAN SE 360CP,0.240,product.product_uom_unit,,7884350,True,scenario.product_price_category_gma,scenario.product_7884350,product.product_uom_unit
 DETARTREUR SUPRASON INSERT n°10P,0,product.product_uom_unit,,7900253,True,scenario.product_price_category_gma,scenario.product_7900253,product.product_uom_unit
-CLINDABUC 250CP,0.240,product.product_uom_unit,,7910008,True,,scenario.product_7910008,product.product_uom_unit
+CLINDABUC 250CP/,0.240,product.product_uom_unit,,7910008,True,,scenario.product_7910008,product.product_uom_unit
 SELGIAN 10MG  30CP,0.040,product.product_uom_unit,,7910009,True,,scenario.product_7910009,product.product_uom_unit
 SELGIAN  4MG  30CP,0.040,product.product_uom_unit,,7910010,True,,scenario.product_7910010,product.product_uom_unit
 SELGIAN 10MG 100CP,0.040,product.product_uom_unit,,7910011,True,,scenario.product_7910011,product.product_uom_unit
@@ -15034,6 +15041,7 @@ AIGUILLE GENALU L.L. 14Gx1 1/2(100),0.190,product.product_uom_unit,,8227683,True
 AIGUILLE GENALU L.L. 14Gx2 (100),0.190,scenario.product_uom_boite,,8227708,True,scenario.product_price_category_gma,scenario.product_8227708,scenario.product_uom_boite
 NEGATOSCOPE EXTRA PLAT 1 PLAGE,6.450,product.product_uom_unit,,8227714,True,scenario.product_price_category_gma,scenario.product_8227714,product.product_uom_unit
 NEGATOSCOPE EXTRA PLAT 2 PLAGES,1.160,product.product_uom_unit,,8227720,True,scenario.product_price_category_gma,scenario.product_8227720,product.product_uom_unit
+"PINCE KELLY HEBU DROITE 14,cm",0.035,product.product_uom_unit,,8227737,True,scenario.product_price_category_gma,scenario.product_8227737,product.product_uom_unit
 "AMPOULE 22,8V 40W POUR HEIDELBERG/OSLO",0.002,product.product_uom_unit,,8228010,True,scenario.product_price_category_gma,scenario.product_8228010,product.product_uom_unit
 SCIE CORNE ELECTRIQUE AV LAME AVOYEE,12.900,product.product_uom_unit,,8228027,True,scenario.product_price_category_gma,scenario.product_8228027,product.product_uom_unit
 TROUSSE PERFUVET DUO /pcs,0.540,product.product_uom_unit,,8228085,True,scenario.product_price_category_gma,scenario.product_8228085,product.product_uom_unit
@@ -18226,6 +18234,7 @@ ENGYSTOL N 5amp 5ml HEEL,0.060,product.product_uom_unit,,9052510,True,scenario.p
 AMPOULE BERCHTOLD 24V 150W,0,product.product_uom_unit,,9082404,True,scenario.product_price_category_gma,scenario.product_9082404,product.product_uom_unit
 BRYONIA COSMOPLEX HEEL 30ML,0,product.product_uom_unit,,9140011,True,scenario.product_price_category_gma,scenario.product_9140011,product.product_uom_unit
 MATRX VMS SUPPORT MURAL,0,product.product_uom_unit,,9180186,True,scenario.product_price_category_gma,scenario.product_9180186,product.product_uom_unit
+TABLE ELEC 5 ROUL 140x60cm PLAT + PESEE,0,product.product_uom_unit,,9212091,True,scenario.product_price_category_gma,scenario.product_9212091,product.product_uom_unit
 CARTOUCHE PISTOLET BLITZ BLEUE (50),0.150,product.product_uom_unit,,9240240,True,scenario.product_price_category_gma,scenario.product_9240240,product.product_uom_unit
 THERMOMETRE DIGITAL HARTMANN 10 SECONDES,0,product.product_uom_unit,,9250331,True,scenario.product_price_category_gma,scenario.product_9250331,product.product_uom_unit
 SHOR LINE TABLE CHIR PLAT CHAUFF ELEC,0,product.product_uom_unit,,9341211,True,scenario.product_price_category_gma,scenario.product_9341211,product.product_uom_unit
