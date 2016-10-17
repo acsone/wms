@@ -124,7 +124,8 @@ class CustomerMapper(EntityMapper):
         FieldMapper('street', 'cliadr'),
         FieldMapper('zip', 'clicpo'),
         FieldMapper('city', 'cliloc'),
-        FieldMapper('phone', 'clitel'),
+        FieldMapper('fax', 'clifax'),
+        FieldMapper('email', 'emwadr'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
             mapping=mappings.PARTNER_CATEGORY,
@@ -134,16 +135,33 @@ class CustomerMapper(EntityMapper):
         FieldMapper('title/id', 'clitit',
                     mapping=mappings.PARTNER_TITLE),
 
-        'company_type',
+        'company_type', 'phone_numbers',
     ]
 
-    def convert_company_type(self, odoo_entity, db2_entity):
+    def get_sql_joins(self):
+        return (
+            # Email table (inspired by smile query, cf google drive)
+            "left join gendata.emaweb "
+            "on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E' "
+            "and emwnli = (select min(emwnli) from gendata.emaweb "
+            "where clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
+            ")"
+        )
+
+    @staticmethod
+    def convert_company_type(odoo_entity, db2_entity):
         db2_title = db2_entity.get('clitit')
 
         if db2_title and db2_title not in mappings.PARTNER_TITLE:
             odoo_entity['company_type'] = 'company'
         else:
             odoo_entity['company_type'] = 'person'
+
+    @staticmethod
+    def convert_phone_numbers(odoo_entity, db2_entity):
+        odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
+            db2_entity.get('clitel'), db2_entity.get('clitlx')
+        )
 
 
 class SupplierMapper(EntityMapper):
@@ -159,11 +177,31 @@ class SupplierMapper(EntityMapper):
         FieldMapper('zip', 'foucpo'),
         FieldMapper('city', 'fouloc'),
         FieldMapper('phone', 'foutel'),
+        FieldMapper('fax', 'foufax'),
+        FieldMapper('email', 'emwadr'),
         FieldMapper('vat', 'foucee', check=checks.vat),
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
         FieldMapper('country_id/id', 'foucpa',
-                    mapping=mappings.COUNTRY)
+                    mapping=mappings.COUNTRY),
+        'phone_numbers',
     ]
+
+    def get_sql_joins(self):
+        return (
+            # Email table (inspired by smile query, cf google drive)
+            "left join gendata.emaweb "
+            "on founum=emwnum and emwcod=1 and emwcon=0 and emwtyp='E' "
+            "and emwnli = (select min(emwnli) from gendata.emaweb "
+            "where founum=emwnum and emwcod=1 and emwcon=0 and emwtyp='E'"
+            ")"
+        )
+
+    @staticmethod
+    def convert_phone_numbers(odoo_entity, db2_entity):
+        odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
+            db2_entity.get('foutel'), db2_entity.get('foutlx')
+        )
+
 
 MAPPER_CLASSES = [ProductMapper, CustomerMapper, SupplierMapper]
