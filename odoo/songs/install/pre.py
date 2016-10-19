@@ -26,7 +26,8 @@ def setup_company(ctx):
         'website': 'www.alcyonbelux.be',
         'vat': 'BE 0421.801.233',
         'company_registry': 'RC LIEGE : 138.989',
-        'rml_header1': 'Une société de Vétérinaires au service des Vétérinaires',
+        'rml_header1': 'Une société de Vétérinaires\
+         au service des Vétérinaires',
     })
 
     # load logo on company

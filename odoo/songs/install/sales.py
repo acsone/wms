@@ -54,6 +54,7 @@ def import_pricelist(ctx):
     content = resource_stream(req, 'data/install/product.pricelist.csv')
     load_csv_stream(ctx, 'product.pricelist', content, delimiter=',')
 
+
 @anthem.log
 def clean_pricelist_item(ctx):
     """ Deleting standard title """
