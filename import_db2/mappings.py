@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
+import re
 
 STR_BOOL = {
     'Y': True
@@ -217,3 +217,22 @@ COUNTRY = {
     817: 'base.to',
     823: 'base.fm',
 }
+
+
+def phone_converter(*values):
+    """ Try to guess landline and mobile phone numbers from a list of numbers.
+    """
+    phone, mobile = None, None
+    values = [v for v in values if v and v.strip()]
+
+    for value in list(values):
+        numbers = ''.join(re.findall('\d+', value))
+        if not mobile and len(numbers) == 10 and numbers.startswith('04'):
+            mobile = value
+            values.remove(value)
+
+        elif not phone:
+            phone = value
+            values.remove(value)
+
+    return phone, mobile
