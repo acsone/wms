@@ -45,6 +45,7 @@ migration:
           - stock
           - product_expiry
           - purchase
+          - l10n_be_invoice_bba
           #### local-src
           - delivery_rounds
           - delivery_rounds_assign
