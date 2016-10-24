@@ -1,5 +1,60 @@
 id,name
 scenario.product_pricelist_pb1,Prix de vente brut 1
 scenario.product_pricelist_pb2,Prix de vente brut 2
-scenario.product_pricelist_supplier,Promotion fournisseurs
-scenario.product_pricelist_alcyon,Remises Alcyon
+scenario.product_pricelist_supplier,Promotions fournisseurs
+scenario.pricelist_5,5. Clients remise 5 %
+scenario.pricelist_6,"6. Officine LIFE 6,4 %"
+scenario.pricelist_7,7. Clients remise 7 %
+scenario.pricelist_8,8. Clients remise 8 %
+scenario.pricelist_9,9. Clients remise 9%
+scenario.pricelist_10,10. Clients remise 10 %
+scenario.pricelist_11,11. Clients remise 11%
+scenario.pricelist_12,12. Client remise 12%
+scenario.pricelist_13,"13. Client remise 10,75%"
+scenario.pricelist_14,14. Clients remise 10 %
+scenario.pricelist_15,15. Clients V Pharmacie 12%
+scenario.pricelist_100,100. Vétérinaires remise 0 %
+scenario.pricelist_103,103. Vétérinaires remise 3 %
+scenario.pricelist_104,104. Vétérinaires remise 4 %
+scenario.pricelist_105,105. Vétérinaires remise 5 %
+scenario.pricelist_106,106. Vétérinaires remise 6 %
+scenario.pricelist_107,107. Vétos 15à30000/D7/ALI/0
+scenario.pricelist_108,108. Vétos 30à60000/D7/ALI>0
+scenario.pricelist_109,109. Vétérinaires remise 9 %
+scenario.pricelist_110,"110. Vétérinaires remise 9,5%"
+scenario.pricelist_111,111. Vétérinaires remise 10%
+scenario.pricelist_112,112. Vétos >250000/D7/ALI>60000
+scenario.pricelist_210,210. Clients remise 10 % (G.+ P)
+scenario.pricelist_211,211. Vétérinaires remise 11%
+scenario.pricelist_212,212. Clients remise 12 % (G. + P)
+scenario.pricelist_213,"213. Codifar remise 11,36%(G.+ P)"
+scenario.pricelist_214,"214. Vetria remise 11,36%(G.+ P)"
+scenario.pricelist_301,301. Vétos <15000/D7/ALI>7500à15000
+scenario.pricelist_302,302. Vétos 15à30000/D7/ALI>7500à15k
+scenario.pricelist_303,303. Vétos 30à60000/D7/ALI>7500à15k
+scenario.pricelist_304,304. Vétos >60kà100k/D7/ALI>7500à15
+scenario.pricelist_308,308. Vétos >60kà100k/D7/ALI>7500
+scenario.pricelist_310,310. Vétos 15à30000/D7/ALI>15000à60
+scenario.pricelist_311,311. Vétos 30à60000/D7/ALI>15000à60
+scenario.pricelist_312,312. Vétos >60kà100k/D7/ali>15kà60k
+scenario.pricelist_314,314. Vétos >60kà100k/D7/ali>15kà60k
+scenario.pricelist_315,315. Vétos >100kà150k/D7/ALI>30kà60
+scenario.pricelist_316,316. Vétos >150000/D7/ALI>30000à60k
+scenario.pricelist_317,317. Vétos >100kà150k/D7/ALI>60000
+scenario.pricelist_318,318. Vétos >150000/D7/ALI>60000
+scenario.pricelist_319,319. Vétos >250000/D7/ALI>15000
+scenario.pricelist_320,320. Vétos >300000/D7/ALI>00000
+scenario.pricelist_321,321. Vétos >300000/D7/ALI>15000
+scenario.pricelist_322,322. Vétos >300000/D7/ALI>60000
+scenario.pricelist_323,323. Vétos >300000/D7/ALI>15000
+scenario.pricelist_401,401. Vétos <15000/D27/ALI>7500
+scenario.pricelist_402,402. Vétos 15kà30k/D27/ALI>7500à15k
+scenario.pricelist_403,403. Vétos 30à60000/D27/ALI>7500à15
+scenario.pricelist_404,404. Vétos >60000/D27/ALI>7500à15k
+scenario.pricelist_405,405. Vétos <15000/D27/ALI<7500
+scenario.pricelist_406,406. Vétos 15à30000/D27/ALI<7500
+scenario.pricelist_407,407. Vétos 30à60000/D27/ALI<7500
+scenario.pricelist_410,410. Vétos 15à30000/D27/ALI>15kà60k
+scenario.pricelist_411,411. Vétos 30à60000/D27/ALI>15kà60k
+scenario.pricelist_412,412. Vétos >60kà100k/D27/ALI>15kà60
+scenario.pricelist_600,600. SpécBx>0/ /ALI>20000

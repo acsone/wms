@@ -50,9 +50,29 @@ def import_crm_team(ctx):
 
 @anthem.log
 def import_pricelist(ctx):
-    """ Importing sales teams """
+    """ Importing pricelist """
     content = resource_stream(req, 'data/install/product.pricelist.csv')
     load_csv_stream(ctx, 'product.pricelist', content, delimiter=',')
+
+
+@anthem.log
+def clean_pricelist_item(ctx):
+    """ Deleting pricelist items """
+    ctx.env.cr.execute("""
+        DELETE FROM product_pricelist_item
+        WHERE id NOT IN (
+            SELECT res_id
+            FROM ir_model_data
+            WHERE model='product.pricelist.item'
+        )
+    """)
+
+
+@anthem.log
+def import_pricelist_item(ctx):
+    """ Importing product pricelist """
+    content = resource_stream(req, 'data/install/product.pricelist.item.csv')
+    load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
 
 
 @anthem.log
@@ -63,3 +83,5 @@ def main(ctx):
     import_uom(ctx)
     import_crm_team(ctx)
     import_pricelist(ctx)
+    clean_pricelist_item(ctx)
+    import_pricelist_item(ctx)

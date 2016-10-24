@@ -15,22 +15,23 @@ def setup_company(ctx):
     company = ctx.env.ref('base.main_company')
     company.write({
         'name': 'Alcyon Belux SA',
-        'street': 'Rue le Marais 17',
+        'street': 'Rue le Marais,17',
         'street2': '',
         'zip': '4530',
         'city': 'Villers-le-Bouillet',
         'country_id': ctx.env.ref('base.be').id,
-        'phone': '04/3383490',
-        'fax': '04/3382783',
+        'phone': '+32 (0)4 338 34 90',
+        'fax': '+32 (0)4 338 27 83',
         'email': 'secretariat@alcyonbelux.be',
         'website': 'www.alcyonbelux.be',
         'vat': 'BE 0421.801.233',
-        'company_registry': '',
-        'rml_header1': '',
+        'company_registry': 'RC LIEGE : 138.989',
+        'rml_header1': 'Une société de Vétérinaires\
+         au service des Vétérinaires',
     })
 
     # load logo on company
-    logo_content = resource_string(req, 'data/images/logo-alcyon.png')
+    logo_content = resource_string(req, 'data/images/logo-alcyon.jpg')
     company.logo = b64encode(logo_content)
 
 
