@@ -5,7 +5,7 @@
 from pkg_resources import resource_stream
 
 import anthem
-from anthem.lyrics.records import create_or_update
+from anthem.lyrics.records import create_or_update, add_xmlid
 from anthem.lyrics.loaders import load_csv_stream
 
 from ..common import req
@@ -150,6 +150,20 @@ def create_financial_journals(ctx):
 
 
 @anthem.log
+def add_xmlid_account(ctx):
+    accounts = ctx.env['account.account'].search([])
+    for account in accounts:
+        add_xmlid(ctx, account,'scenario.account_' + account.code,noupdate=True)
+
+
+@anthem.log
+def adapt_chart_of_account(ctx):
+    """ Adapt chart of account """
+    content = resource_stream(req, 'data/install/account.account.csv')
+    load_csv_stream(ctx, 'account.account', content, delimiter=',') 
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     import_banks(ctx)
@@ -158,3 +172,5 @@ def main(ctx):
     create_bank_accounts(ctx)
     create_banks(ctx)
     create_financial_journals(ctx)
+    add_xmlid_account(ctx)
+    adapt_chart_of_account(ctx)

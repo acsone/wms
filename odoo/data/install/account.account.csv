@@ -1,0 +1,35 @@
+id,code,name,user_type_id/id,company_id/id
+scenario.account_241000,241000,Matériel Roulant,account.data_account_type_non_current_assets,base.main_company
+scenario.account_280000,280000,Cautions,account.data_account_type_fixed_assets,base.main_company
+scenario.account_340000,340000,Stock marchandises,account.data_account_type_current_assets,base.main_company
+scenario.account_400000,400000,Clients,account.data_account_type_receivable,base.main_company
+scenario.account_404000,404000,Fact à établir,account.data_account_type_receivable,base.main_company
+scenario.account_411000,411000,Tva à récupérer,account.data_account_type_current_assets,base.main_company
+scenario.account_423000,423000,Cr.Inv.Belfius 181920,account.data_account_type_current_liabilities,base.main_company
+scenario.account_440000,440000,Fournisseurs marchandises,account.data_account_type_payable,base.main_company
+scenario.account_444000,444000,Factures à recevoir,account.data_account_type_payable,base.main_company
+scenario.account_451000,451000,Tva à payer,account.data_account_type_current_liabilities,base.main_company
+scenario.account_451200,451200,Tva achats Cee,account.data_account_type_current_liabilities,base.main_company
+scenario.account_453000,453000,Précompte professionnel,account.data_account_type_current_liabilities,base.main_company
+scenario.account_454000,454000,O.N.S.S.,account.data_account_type_current_liabilities,base.main_company
+scenario.account_455000,455000,Rémunération à payer,account.data_account_type_current_liabilities,base.main_company
+scenario.account_459000,459000,Provision primes,account.data_account_type_current_liabilities,base.main_company
+scenario.account_459700,459700,Retenue Ass.Hospi,account.data_account_type_current_liabilities,base.main_company
+scenario.account_490000,490000,Charges à reporter,account.data_account_type_current_assets,base.main_company
+scenario.account_491000,491000,Produits acquis,account.data_account_type_current_assets,base.main_company
+scenario.account_492000,492000,Charges à imputer,account.data_account_type_current_liabilities,base.main_company
+scenario.account_499000,499000,Compte d'attente,account.data_account_type_current_liabilities,base.main_company
+scenario.account_580000,580000,Transfert de fonds,account.data_account_type_current_assets,base.main_company
+scenario.account_601000,601000,Achats emballages perdus,account.data_account_type_expenses,base.main_company
+scenario.account_604000,604000,Achats marchandises Vétos,account.data_account_type_expenses,base.main_company
+scenario.account_611000,611000,Entr/Rép Immeuble Interne,account.data_account_type_expenses,base.main_company
+scenario.account_614000,614000,Annonces insertions,account.data_account_type_expenses,base.main_company
+scenario.account_620200,620200,Rémun.empl.soumis Onss,account.data_account_type_expenses,base.main_company
+scenario.account_620300,620300,Rémun.ouvr.soumis Onss,account.data_account_type_expenses,base.main_company
+scenario.account_640000,640000,Taxes S/véh Utilitaires,account.data_account_type_expenses,base.main_company
+scenario.account_670000,670000,Impots et précompte Mob,account.data_account_type_expenses,base.main_company
+scenario.account_700000,700000,Ventes Vétérinaires Belge,account.data_account_type_revenue,base.main_company
+scenario.account_700100,700100,Ventes march En Cee,account.data_account_type_revenue,base.main_company
+scenario.account_700200,700200,Ventes marché à L'Export,account.data_account_type_revenue,base.main_company
+scenario.account_705000,705000,Accords De Coopération,account.data_account_type_revenue,base.main_company
+scenario.account_757000,757000,Escompte Obtenu,account.data_account_type_revenue,base.main_company
