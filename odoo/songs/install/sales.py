@@ -57,9 +57,14 @@ def import_pricelist(ctx):
 
 @anthem.log
 def clean_pricelist_item(ctx):
-    """ Deleting standard title """
+    """ Deleting pricelist items """
     ctx.env.cr.execute("""
-        DELETE FROM product_pricelist_item;
+        DELETE FROM product_pricelist_item
+        WHERE id NOT IN (
+            SELECT res_id
+            FROM ir_model_data
+            WHERE model='product.pricelist.item'
+        )
     """)
 
 
