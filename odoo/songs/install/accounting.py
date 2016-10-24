@@ -153,14 +153,18 @@ def create_financial_journals(ctx):
 def add_xmlid_account(ctx):
     accounts = ctx.env['account.account'].search([])
     for account in accounts:
-        add_xmlid(ctx, account,'scenario.account_' + account.code,noupdate=True)
+        add_xmlid(
+            ctx, account,
+            'scenario.account_' + account.code,
+            noupdate=True
+            )
 
 
 @anthem.log
 def adapt_chart_of_account(ctx):
     """ Adapt chart of account """
     content = resource_stream(req, 'data/install/account.account.csv')
-    load_csv_stream(ctx, 'account.account', content, delimiter=',') 
+    load_csv_stream(ctx, 'account.account', content, delimiter=',')
 
 
 @anthem.log
