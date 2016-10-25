@@ -115,7 +115,6 @@ def adapt_chart_of_account(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring accounting """
-    settings(ctx)
     import_banks(ctx)
     import_account_journal(ctx)
     company_currency(ctx)
@@ -123,3 +122,4 @@ def main(ctx):
     create_financial_journals(ctx)
     add_xmlid_account(ctx)
     adapt_chart_of_account(ctx)
+    settings(ctx)
