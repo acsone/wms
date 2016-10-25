@@ -1,0 +1,19 @@
+id,login,name,password,lang,email,country_id/id,tz,groups_id/id
+scenario.res_user_1,jculot,Jean-Pierre Culot,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_2,rpirard,Raymond Pirard,changeme,fr_BE,Raymond.Pirard@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_21,pvanthemsche,Pierre Van Themsche,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_5,fberteaux,Frédéric Berteaux,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_6,cheiderscheidt,Christine Heiderscheidt,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_7,mbruyere,Michel Bruyère,changeme,fr_BE,Michel.Bruyere@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_11,cdetemmerman,Catherine De Temmerman,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_12,mdegroote,Muriel De Groote,changeme,fr_BE,Muriel.DEGROOTE@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_22,gleyens,Gregory Leyens,changeme,fr_BE,Gregory.Leyens@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_13,jcauchie,Jean-Marc Cauchie,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_23,rneirynck,Rudy Neirynck,changeme,fr_BE,Rudy.Neirynck@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_14,nmichiels,Nanci Michiels,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_15,plevan,Patricia Levan,changeme,fr_BE,Patricia.Levan@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_16,cmaassen,Cindy Maassen,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_17,gkersemans,Gwen Kersemans,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_18,mhoeterickx,Miranda Hoeterickx,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_19,pderycke,Patricia Derycke,changeme,fr_BE,Patricia.DERYCKE@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+scenario.res_user_20,fheymann,Fabrice Heymann,changeme,fr_BE,Fabrice.Heymann@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
