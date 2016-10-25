@@ -28,6 +28,10 @@ def setup_company(ctx):
         'company_registry': 'RC LIEGE : 138.989',
         'rml_header1': 'Une société de Vétérinaires\
          au service des Vétérinaires',
+        'rml_footer': 'Phone: +32 (0)4 338 34 90 | Fax: +32 (0)4 338 27 83 | '
+                      'Email: secretariat@alcyonbelux.be | '
+                      'Website: http://www.alcyonbelux.be | '
+                      'TIN: BE0421801233 | Reg: RC LIEGE : 138.989',
     })
 
     # load logo on company
