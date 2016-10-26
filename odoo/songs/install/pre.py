@@ -46,6 +46,16 @@ def setup_language(ctx):
         'date_format': '%d/%m/%Y',
     })
 
+@anthem.log
+def change_config_parameters(ctx):
+    """ fix config parameters  """
+    url = "http://localhost:8069"
+    ctx.env['ir.config_parameter'].set_param('web.base.url', url)
+    ctx.env['ir.config_parameter'].set_param('web.base.url.freeze', 'True')
+    ctx.env['ir.config_parameter'].set_param(
+        'database.secret', '1ad1b60d-4379-4a5f-9b0e-a20a68bf37a7')
+    ctx.env['ir.config_parameter'].set_param(
+        'database.expiration_date', '2017-12-31')
 
 @anthem.log
 def main(ctx):
