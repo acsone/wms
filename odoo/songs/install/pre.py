@@ -46,6 +46,7 @@ def setup_language(ctx):
         'date_format': '%d/%m/%Y',
     })
 
+
 @anthem.log
 def change_config_parameters(ctx):
     """ fix config parameters  """
@@ -57,8 +58,10 @@ def change_config_parameters(ctx):
     ctx.env['ir.config_parameter'].set_param(
         'database.expiration_date', '2017-12-31')
 
+
 @anthem.log
 def main(ctx):
     """ Executing main entry point called before upgrade of addons """
     setup_language(ctx)
     setup_company(ctx)
+    change_config_parameters(ctx)
