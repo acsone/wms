@@ -17,6 +17,22 @@ Unreleased
 **Documentation**
 
 
+9.3.0 (2016-10-28)
+++++++++++++++++++
+
+**Data Migration**
+* Customer pricelists
+* Import partners phone, fax, mobile, email.
+* Bank account & bank creation.
+* Users creation.
+* Import pricelists.
+
+**Features and Improvements**
+* Accounting configuration.
+* Adapt chart of account.
+* Enable pricelist report even if no variants.
+* Fix company information.
+
 9.2.1 (2016-10-14)
 ++++++++++++++++++
 
