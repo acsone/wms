@@ -2,7 +2,7 @@
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -12,3 +12,17 @@ class ResPartner(models.Model):
         'partner.alcyon_category',
         string='Alcyon category',
     )
+
+    depot_number = fields.Char(string='Depot number')
+
+    depot_number_visible = fields.Boolean(
+        compute='_compute_depot_number_visible'
+    )
+
+    @api.depends('alcyon_category_id')
+    def _compute_depot_number_visible(self):
+        veterinary = self.env.ref('scenario.partner_category_veterinary')
+        for partner in self:
+            partner.depot_number_visible = (
+                partner.alcyon_category_id == veterinary
+            )
