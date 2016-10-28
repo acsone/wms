@@ -19,6 +19,28 @@ UOM = {
     56: 'scenario.product_uom_flacon',
 }
 
+# We could just prefix by scenario.res_user_
+# but it will fail the import if user does not exist in Odoo.
+USERS = {
+    1: 'scenario.res_user_1',
+    2: 'scenario.res_user_2',
+    21: 'scenario.res_user_21',
+    5: 'scenario.res_user_5',
+    6: 'scenario.res_user_6',
+    7: 'scenario.res_user_7',
+    11: 'scenario.res_user_11',
+    12: 'scenario.res_user_12',
+    22: 'scenario.res_user_22',
+    13: 'scenario.res_user_13',
+    23: 'scenario.res_user_23',
+    14: 'scenario.res_user_14',
+    15: 'scenario.res_user_15',
+    16: 'scenario.res_user_16',
+    17: 'scenario.res_user_17',
+    18: 'scenario.res_user_18',
+    19: 'scenario.res_user_19',
+    20: 'scenario.res_user_20',
+}
 
 PARTNER_CATEGORY = {
     1: 'scenario.partner_category_veterinary',

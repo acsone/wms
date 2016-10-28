@@ -142,6 +142,10 @@ class CustomerMapper(EntityMapper):
             'promotion_pricelist_id/id', 'clitrm',
             mapping=mappings.CLIENT_PROMOTION_PRICELIST
         ),
+        FieldMapper(
+            'user_id/id', 'clirep',
+            mapping=mappings.USERS
+        ),
 
         'company_type', 'phone_numbers',
     ]
