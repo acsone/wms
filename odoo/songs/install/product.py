@@ -25,7 +25,7 @@ def set_customer_lead_time(ctx):
         'key': 'default',
         'name': 'sale_delay',
         'model': 'product.template',
-        'value_unpickle': '1',
+        'value_unpickle': '0',
     })
 
 
