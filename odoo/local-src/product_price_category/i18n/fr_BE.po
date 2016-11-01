@@ -61,6 +61,11 @@ msgstr "Nom"
 msgid "Price Category"
 msgstr "Catégorie de prix"
 
+#. module: product
+#: selection:product.pricelist.item,applied_on:0
+msgid "Price Category"
+msgstr "Catégorie de prix"
+
 #. module: product_price_category
 #: code:addons/product_price_category/models/product_pricelist.py:252
 #, python-format

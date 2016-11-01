@@ -25,3 +25,11 @@ msgstr "Dispositif médical"
 msgid "Product Template"
 msgstr "Modèle d'article"
 
+#. module: product
+#: model:ir.actions.act_window,name:product.action_product_price_list
+#: model:ir.model,name:product.model_product_price_list
+#: model:ir.ui.view,arch_db:product.product_supplierinfo_form_view
+#: model:ir.ui.view,arch_db:product.report_pricelist
+#: model:ir.ui.view,arch_db:product.view_product_price_list
+msgid "Price List"
+msgstr "Liste de prix"
