@@ -15,7 +15,7 @@ def setup_company(ctx):
     company = ctx.env.ref('base.main_company')
     company.write({
         'name': 'Alcyon Belux SA',
-        'street': 'Rue le Marais,17',
+        'street': 'Rue le Marais, 17',
         'street2': '',
         'zip': '4530',
         'city': 'Villers-le-Bouillet',
