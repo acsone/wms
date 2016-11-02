@@ -84,11 +84,10 @@ def load_res_title(ctx):
 
 @anthem.log
 def clean_title(ctx):
-    """ Deleting standard title """
-    ctx.env.cr.execute("""
-        DELETE FROM res_partner_title
-            WHERE ID IN (2, 3);
-    """)
+
+    for xmlid in ('base.res_partner_title_sir', 'base.res_partner_title_miss'):
+        title = ctx.env.ref(xmlid)
+        title.unlink()
 
 
 @anthem.log
