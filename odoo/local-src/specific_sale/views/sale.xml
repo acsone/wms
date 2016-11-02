@@ -11,7 +11,7 @@
             <field name="client_order_ref" position="replace"/>
 
             <field name="partner_id" position="after">
-                <field name="client_order_ref" required="1"/>
+                <field name="client_order_ref"/>
             </field>
         </field>
     </record>
