@@ -15,6 +15,8 @@ class ProductMapper(EntityMapper):
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
+        FieldMapper('list_price', 'gespvr'),
+        FieldMapper('sale_delay', constant=0),
         FieldMapper('weight', 'gespbr'),
         FieldMapper(
             'uom_po_id/id', 'gesuna',
@@ -25,7 +27,7 @@ class ProductMapper(EntityMapper):
             mapping=mappings.UOM, default='product.product_uom_unit'
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
-        'name', 'price_category_id', 'seller_ids', 'prices'
+        'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
     def get_sql_joins(self):
@@ -92,18 +94,10 @@ class ProductMapper(EntityMapper):
             'fixed_price': price,
         })
 
-    def convert_prices(self, odoo_entity, db2_entity):
+    def convert_pb2(self, odoo_entity, db2_entity):
         price1 = db2_entity.get('gespvr')
-        if price1:
-            self._pricelist_item_product_price(
-                'scenario.product_pricelist_pb1',
-                odoo_entity['default_code'],
-                price1,
-                'pb1'
-            )
-
         price2 = db2_entity.get('gespv2')
-        if price2:
+        if price2 and price2 != price1:
             self._pricelist_item_product_price(
                 'scenario.product_pricelist_pb2',
                 odoo_entity['default_code'],
@@ -126,6 +120,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('city', 'cliloc'),
         FieldMapper('fax', 'clifax'),
         FieldMapper('email', 'emwadr'),
+        FieldMapper('depot_number', 'clirch'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
             mapping=mappings.PARTNER_CATEGORY,
@@ -142,8 +137,12 @@ class CustomerMapper(EntityMapper):
             'promotion_pricelist_id/id', 'clitrm',
             mapping=mappings.CLIENT_PROMOTION_PRICELIST
         ),
+        FieldMapper(
+            'user_id/id', 'clirep',
+            mapping=mappings.USERS
+        ),
 
-        'company_type', 'phone_numbers',
+        'company_type', 'phone_numbers', 'product_pricelist'
     ]
 
     def get_sql_joins(self):
@@ -170,6 +169,19 @@ class CustomerMapper(EntityMapper):
         odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
             db2_entity.get('clitel'), db2_entity.get('clitlx')
         )
+
+    @staticmethod
+    def convert_product_pricelist(odoo_entity, db2_entity):
+        code_remise = db2_entity.get('clitrm')
+        if code_remise:
+            if code_remise < 50:
+                pricelist = 'scenario.product_pricelist_pb1'
+            else:
+                pricelist = 'scenario.product_pricelist_pb2'
+        else:
+            pricelist = None
+
+        odoo_entity['property_product_pricelist/id'] = pricelist
 
 
 class SupplierMapper(EntityMapper):
