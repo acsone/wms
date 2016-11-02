@@ -5,6 +5,9 @@
         <field name="arch" type="xml">
             <field name="function" position="before">
                 <field name="alcyon_category_id"/>
+                <field name="depot_number_visible" invisible="1"/>
+                <field name="depot_number"
+                       attrs="{'invisible': [('depot_number_visible', '=', False)], 'required': [('depot_number_visible', '=', True)]}"/>
             </field>
         </field>
     </record>
