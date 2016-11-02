@@ -76,6 +76,21 @@ def import_pricelist_item(ctx):
 
 
 @anthem.log
+def load_res_title(ctx):
+    """ Import Titles  """
+    csv_content = resource_stream(req, 'data/install/res.partner.title.csv')
+    load_csv_stream(ctx, 'res.partner.title', csv_content, delimiter=',')
+
+
+@anthem.log
+def clean_title(ctx):
+
+    for xmlid in ('base.res_partner_title_sir', 'base.res_partner_title_miss'):
+        title = ctx.env.ref(xmlid)
+        title.unlink()
+
+
+@anthem.log
 def main(ctx):
     """ run scenario """
     sale_setup(ctx)
@@ -85,3 +100,5 @@ def main(ctx):
     import_pricelist(ctx)
     clean_pricelist_item(ctx)
     import_pricelist_item(ctx)
+    load_res_title(ctx)
+    clean_title(ctx)

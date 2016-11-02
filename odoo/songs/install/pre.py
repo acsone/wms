@@ -15,7 +15,7 @@ def setup_company(ctx):
     company = ctx.env.ref('base.main_company')
     company.write({
         'name': 'Alcyon Belux SA',
-        'street': 'Rue le Marais,17',
+        'street': 'Rue le Marais, 17',
         'street2': '',
         'zip': '4530',
         'city': 'Villers-le-Bouillet',
@@ -42,7 +42,7 @@ def setup_company(ctx):
 @anthem.log
 def setup_language(ctx):
     """ Installing language and configuring locale formatting """
-    for code in ('fr_BE', 'nl_BE'):
+    for code in ('fr_BE', 'nl_BE', 'de_DE'):
         ctx.env['base.language.install'].create({'lang': code}).lang_install()
 
     ctx.env['res.lang'].search([]).write({
