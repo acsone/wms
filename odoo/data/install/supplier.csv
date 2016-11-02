@@ -207,6 +207,7 @@ False,HUY,085/212401,BEST WESTERN,4500,,base.be,scenario.supplier_62638,085/2124
 False,VILLERS-LE-BOUILLET,04/3801506,BERTRAND,4530,,base.be,scenario.supplier_62639,04/2594571     ,rue Le Marais 15 G,True,62639,,
 False,EMBOURG,043661236,BLERET BRICE SC SPRL,4053,,base.be,scenario.supplier_62640,04/3661551     ,Rue de Grady 76,True,62640,,
 False,HUY,,BLOKKER,4500,,base.be,scenario.supplier_62641,085/252986     ,Quai d'Arona 19,True,62641,,
+False,ERPENT,081/300332,BLEU SARRAU,5101,,base.be,scenario.supplier_62642,081/220932     ,Chaussée de Marche 538,True,62642,,
 False,GRISIGNANO DI ZOCCO,0039/049633499,B-LINE,36040,,base.it,scenario.supplier_62643,0039/0444415048,Via dell'Industria 42,True,62643,info@b-line.it,
 False,LIEGE,04/2279207,BMI,4000,,base.be,scenario.supplier_62645,04/2279194     ,Quai Saint Léonard 10,True,62645,,
 False,VILLERS-LE-BOUILLET,085/318029,BNH TRANS,4530,,base.be,scenario.supplier_62646,085/312975     ,rue de l'Avenir 15,True,62646,,
