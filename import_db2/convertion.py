@@ -15,6 +15,7 @@ class ProductMapper(EntityMapper):
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
+        FieldMapper('list_price', 'gespvr'),
         FieldMapper('sale_delay', constant=0),
         FieldMapper('weight', 'gespbr'),
         FieldMapper(
@@ -26,7 +27,7 @@ class ProductMapper(EntityMapper):
             mapping=mappings.UOM, default='product.product_uom_unit'
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
-        'name', 'price_category_id', 'seller_ids', 'prices'
+        'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
     def get_sql_joins(self):
@@ -93,18 +94,10 @@ class ProductMapper(EntityMapper):
             'fixed_price': price,
         })
 
-    def convert_prices(self, odoo_entity, db2_entity):
+    def convert_pb2(self, odoo_entity, db2_entity):
         price1 = db2_entity.get('gespvr')
-        if price1:
-            self._pricelist_item_product_price(
-                'scenario.product_pricelist_pb1',
-                odoo_entity['default_code'],
-                price1,
-                'pb1'
-            )
-
         price2 = db2_entity.get('gespv2')
-        if price2:
+        if price2 and price2 != price1:
             self._pricelist_item_product_price(
                 'scenario.product_pricelist_pb2',
                 odoo_entity['default_code'],
