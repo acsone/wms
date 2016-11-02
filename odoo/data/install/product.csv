@@ -2575,6 +2575,7 @@ sale_delay,list_price,name,weight,uom_id/id,medical_device,default_code,active,p
 0,49.56,"PLAQUE T 1,5/2,0 6T 35mm 2T DIST T202032",0,product.product_uom_unit,,2020320,True,scenario.product_price_category_gma,scenario.product_2020320,product.product_uom_unit
 0,9.30,FIBAFIRST LAPIN 2KG,2.000,product.product_uom_unit,,2021377,True,scenario.product_price_category_gma,scenario.product_2021377,product.product_uom_unit
 0,0,DERCOS TRAIT. ANTI-CHUTE H 18 AMP.,0,product.product_uom_unit,,2021863,True,scenario.product_price_category_gma,scenario.product_2021863,product.product_uom_unit
+0,9.29,LITIERE CHAT BREEDERCELECT 30L,6.000,product.product_uom_unit,,2021963,True,scenario.product_price_category_gma,scenario.product_2021963,product.product_uom_unit
 0,16.00,HIPPODERM GEL 250ML,0.250,product.product_uom_unit,,2024817,True,scenario.product_price_category_gma,scenario.product_2024817,product.product_uom_unit
 0,0,ROCHE POSAY LIPIKAR 400ML,0,product.product_uom_unit,,2025799,True,scenario.product_price_category_gma,scenario.product_2025799,product.product_uom_unit
 0,0,DERCOS SHAMPOOING ANTIPEL GRAS 200ml,0,product.product_uom_unit,,2026524,True,scenario.product_price_category_gma,scenario.product_2026524,product.product_uom_unit
@@ -8870,6 +8871,7 @@ sale_delay,list_price,name,weight,uom_id/id,medical_device,default_code,active,p
 0,159.89,VICRYL+ USP2/0 EP3 31R1/2 VCP2016H x36,0,scenario.product_uom_boite,True,5472016,True,scenario.product_price_category_gma,scenario.product_5472016,scenario.product_uom_boite
 0,11.07,CAVALOR HARMONY VITACRUNCH 7KG,7.000,scenario.product_uom_sac,,5472478,True,scenario.product_price_category_gma,scenario.product_5472478,scenario.product_uom_sac
 0,8.78,CAVALOR HARMONY TRADITION MIX 20KG,20.000,scenario.product_uom_sac,,5472484,True,,scenario.product_5472484,scenario.product_uom_sac
+0,26.40,CAVALOR ROCKIES 10x2KG,20.000,product.product_uom_unit,,5472626,True,scenario.product_price_category_gma,scenario.product_5472626,product.product_uom_unit
 0,10.45,CAVALOR HARMONY STRUCOMIX ORIGINAL 15KG,15.000,scenario.product_uom_sac,,5472689,True,,scenario.product_5472689,scenario.product_uom_sac
 0,254.45,"VICRYL+ USP0 EP3,5 36C1/2 VCP473H x36",0,product.product_uom_unit,True,5473000,True,scenario.product_price_category_gma,scenario.product_5473000,product.product_uom_unit
 0,157.56,"VICRYL+ USP0 EP3,5 36R1/2 VCP324H x36",0,scenario.product_uom_boite,True,5473324,True,scenario.product_price_category_gma,scenario.product_5473324,scenario.product_uom_boite
