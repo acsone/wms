@@ -7,6 +7,12 @@ STR_BOOL = {
     'Y': True
 }
 
+LANG = {
+    'FR': 'fr_BE',
+    'NL': 'nl_BE',
+    'D': 'de_DE',
+}
+
 
 UOM = {
     0: 'product.product_uom_unit',
