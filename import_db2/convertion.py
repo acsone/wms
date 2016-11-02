@@ -141,6 +141,10 @@ class CustomerMapper(EntityMapper):
             'user_id/id', 'clirep',
             mapping=mappings.USERS
         ),
+        FieldMapper(
+            'lang', 'clilan',
+            mapping=mappings.LANG
+        ),
 
         'company_type', 'phone_numbers', 'product_pricelist'
     ]
@@ -204,6 +208,8 @@ class SupplierMapper(EntityMapper):
         FieldMapper('supplier', constant=True),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
+        FieldMapper('lang', 'foulan',
+                    mapping=mappings.LANG),
         'phone_numbers',
     ]
 
