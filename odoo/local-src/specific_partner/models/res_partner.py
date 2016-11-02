@@ -19,6 +19,8 @@ class ResPartner(models.Model):
         compute='_compute_depot_number_visible'
     )
 
+    legal_entity = fields.Char(string='Legal entity')
+
     @api.depends('alcyon_category_id')
     def _compute_depot_number_visible(self):
         veterinary = self.env.ref('scenario.partner_category_veterinary')
