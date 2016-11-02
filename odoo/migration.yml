@@ -57,3 +57,4 @@ migration:
           - specific_product
           - stock_putaway_defaultfixedlocation
           - stock_product_bin
+          - specific_translations
