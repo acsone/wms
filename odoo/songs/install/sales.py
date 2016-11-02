@@ -100,3 +100,5 @@ def main(ctx):
     import_pricelist(ctx)
     clean_pricelist_item(ctx)
     import_pricelist_item(ctx)
+    load_res_title(ctx)
+    clean_title(ctx)
