@@ -76,6 +76,22 @@ def import_pricelist_item(ctx):
 
 
 @anthem.log
+def load_res_title(ctx):
+    """ Import Titles  """
+    csv_content = resource_stream(req, 'data/install/res.partner.title.csv')
+    load_csv_stream(ctx, 'res.partner.title', csv_content, delimiter=',')
+
+
+@anthem.log
+def clean_title(ctx):
+    """ Deleting standard title """
+    ctx.env.cr.execute("""
+        DELETE FROM res_partner_title
+            WHERE ID IN (2, 3);
+    """)
+
+
+@anthem.log
 def main(ctx):
     """ run scenario """
     sale_setup(ctx)
