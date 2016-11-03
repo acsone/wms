@@ -11,26 +11,21 @@
 
             <!-- In Form view Remove label "discount"-->
             <xpath expr="//label[@for='discount']" position="delete" />
+            <xpath expr="//div[@name='discount']" position="delete" />
 
             <!-- In form view replace discount by supplier_promotion and alcyon_discount -->
-            <xpath expr="//div[@name='discount']" position="replace">
-                <div name="supplier_promotion">
-                    <field name="edited_supplier_promotion" invisible="1"/>
-                    <field name="supplier_promotion" class="oe_inline"/>
-                    %%
-                </div>
+            <field name="price_unit" position="after">
+                <field name="edited_supplier_promotion" invisible="1"/>
+                <field name="supplier_promotion" readonly="0" class="oe_inline"/>
+                <field name="edited_alcyon_discount" invisible="1"/>
+                <field name="alcyon_discount" readonly="0" class="oe_inline"/>
+            </field>
 
-                <div name="alcyon_discount">
-                    <field name="edited_alcyon_discount" invisible="1"/>
-                    <field name="alcyon_discount" class="oe_inline"/>
-                    %%
-                </div>
-            </xpath>
             <!-- Tree view of order_lines used in SO -->
             <xpath expr="//tree/field[@name='discount']" position="replace">
-                <field name="supplier_promotion"/>
+                <field name="supplier_promotion" readonly="0"/>
                 <field name="edited_supplier_promotion" invisible="1"/>
-                <field name="alcyon_discount"/>
+                <field name="alcyon_discount" readonly="0"/>
                 <field name="edited_alcyon_discount" invisible="1"/>
             </xpath>
         </field>

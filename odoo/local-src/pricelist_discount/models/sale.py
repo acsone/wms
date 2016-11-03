@@ -54,23 +54,23 @@ class SaleOrderLine(models.Model):
 
     price_unit_supplier = fields.Monetary(
         compute='_compute_amount',
+        store=True,
         readonly=True,
     )
 
     price_unit_alcyon = fields.Monetary(
         compute='_compute_amount',
+        store=True,
         readonly=True,
     )
 
     supplier_promotion = fields.Float(
         compute='_compute_discount',
-        inverse='_inverse_promotion_discount',
         string='Promotion (%)',
         digits=dp.get_precision('Discount'),
     )
     alcyon_discount = fields.Float(
         compute='_compute_discount',
-        inverse='_inverse_promotion_discount',
         string='Discount (%)',
         digits=dp.get_precision('Discount'),
     )
@@ -190,18 +190,14 @@ class SaleOrderLine(models.Model):
                             (1.0 - price_alcyon / price_supplier) * 100
                         )
 
-    def _inverse_promotion_discount(self):
-        for line in self:
-            line.update({
-                'edited_supplier_promotion': line.supplier_promotion,
-                'edited_alcyon_discount': line.alcyon_discount
-            })
-
     @api.onchange('supplier_promotion', 'alcyon_discount')
     def onchange_promotion_discount(self):
         """ Force inverse call on discount to fill manual discounts.
         """
-        self._inverse_promotion_discount()
+        self.update({
+            'edited_supplier_promotion': self.supplier_promotion,
+            'edited_alcyon_discount': self.alcyon_discount
+        })
 
     @api.onchange('product_id')
     def onchange_product_id_reset_discount(self):
