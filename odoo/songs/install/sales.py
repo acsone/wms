@@ -86,8 +86,9 @@ def load_res_title(ctx):
 def clean_title(ctx):
 
     for xmlid in ('base.res_partner_title_sir', 'base.res_partner_title_miss'):
-        title = ctx.env.ref(xmlid)
-        title.unlink()
+        title = ctx.env.ref(xmlid, raise_if_not_found=False)
+        if title:
+            title.unlink()
 
 
 @anthem.log
