@@ -68,8 +68,23 @@ PARTNER_CATEGORY = {
 PARTNER_TITLE = {
      11: 'base.res_partner_title_madam',
      10: 'base.res_partner_title_sir',
-     07: 'base.res_partner_title_doctor',
-     01: 'base.res_partner_title_doctor',
+     7: 'base.res_partner_title_assveter',
+     1: 'base.res_partner_title_dctveter',
+     12: 'base.res_partner_title_doctor',
+}
+
+PARTNER_LEGAL_ENTITY = {
+    2: 'Org.Resp.V10',
+    3: 'Clinique Vétérinaire',
+    4: 'SPRLU',
+    5: 'SPRL',
+    6: 'S.A.',
+    8: 'S.C.',
+    9: 'Pharmacie',
+    13: 'ASBL',
+    14: 'A.D.F.',
+    15: 'S.A.R.L.',
+    16: 'S.C.R.L.',
 }
 
 CLIENT_DISCOUNT_PRICELIST = {
