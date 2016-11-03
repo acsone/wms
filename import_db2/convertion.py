@@ -129,6 +129,8 @@ class CustomerMapper(EntityMapper):
                     mapping=mappings.COUNTRY),
         FieldMapper('title/id', 'clitit',
                     mapping=mappings.PARTNER_TITLE),
+        FieldMapper('legal_entity', 'clitit',
+                    mapping=mappings.PARTNER_LEGAL_ENTITY),
         FieldMapper(
             'discount_pricelist_id/id', 'clitrm',
             mapping=mappings.CLIENT_DISCOUNT_PRICELIST
