@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_order_specific_form" model="ir.ui.view">
+        <field name="name">sale.order.specific.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="additional_line" invisible="True"/>
+            </xpath>
+
+            <field name="order_line" position="before">
+                <!-- Be careful, fields_view_get have been overridden for these fields -->
+                <field name="order_line_original" attrs="{'readonly': [('state', 'in', ('done','cancel'))]}"/>
+                <separator string="Additional products"
+                           attrs="{'invisible': [('order_line_additional_count', '=', 0)]}"/>
+                <field name="order_line_additional"
+                       attrs="{'invisible': [('order_line_additional_count', '=', 0)]}"/>
+                <field name="order_line_additional_count" invisible="True"/>
+                <separator string="Final sale lines" groups="base.group_no_one"/>
+            </field>
+
+            <field name="order_line" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
