@@ -271,6 +271,7 @@ class TestPricelistDiscount(TransactionCase):
 
         # Change supplier promotion
         self.sol_p2.supplier_promotion = 8.24
+        self.sol_p2.onchange_promotion_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
         self.assertEqual(183.52, self.sol_p2.price_unit_supplier)
@@ -283,6 +284,7 @@ class TestPricelistDiscount(TransactionCase):
 
         # Change alcyon discount
         self.sol_p2.alcyon_discount = 3.83
+        self.sol_p2.onchange_promotion_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
         self.assertEqual(183.52, self.sol_p2.price_unit_supplier)
@@ -294,10 +296,9 @@ class TestPricelistDiscount(TransactionCase):
         self.assertEqual(352.98, self.sol_p2.price_subtotal)
 
         # Change both
-        self.sol_p2.write({
-            'supplier_promotion': 20,
-            'alcyon_discount': 10,
-        })
+        self.sol_p2.supplier_promotion = 20
+        self.sol_p2.alcyon_discount = 10
+        self.sol_p2.onchange_promotion_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
         self.assertEqual(160, self.sol_p2.price_unit_supplier)
