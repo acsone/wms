@@ -93,7 +93,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
 
-            if line.edited_supplier_promotion:
+            if line.edited_supplier_promotion or line.edited_alcyon_discount:
                 price_supplier, price_alcyon = line._compute_discount_prices(
                     price
                 )
@@ -164,7 +164,7 @@ class SaleOrderLine(models.Model):
         """ Compute supplier_promotion and alcyon_discount percentages.
         """
         for line in self:
-            if line.edited_supplier_promotion:
+            if line.edited_supplier_promotion or line.edited_alcyon_discount:
                 line.supplier_promotion = line.edited_supplier_promotion
                 line.alcyon_discount = line.edited_alcyon_discount
 
