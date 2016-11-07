@@ -53,6 +53,7 @@ migration:
           - stock_picking_subcode
           - product_price_category
           - pricelist_discount
+          - sale_product_additional
           - specific_sale
           - specific_partner
           - specific_product

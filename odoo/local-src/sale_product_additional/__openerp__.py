@@ -8,7 +8,6 @@
     'license': 'AGPL-3',
     'category': 'Specific',
     'website': 'http://www.camptocamp.com',
-    'images': [],
     'depends': [
         'base',
         'product',
@@ -19,7 +18,6 @@
         'views/product_template.xml',
         'views/sale_order.xml',
     ],
-    'test': [],
     'installable': True,
     'auto_install': False,
 }
