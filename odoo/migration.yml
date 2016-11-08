@@ -63,6 +63,7 @@ migration:
           - product_price_category
           - pricelist_discount
           - sale_product_additional
+          - specific_base
           - specific_sale
           - specific_partner
           - specific_product

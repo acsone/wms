@@ -37,6 +37,73 @@ def settings(ctx):
 
 
 @anthem.log
+def default_values(ctx):
+    """ Set some default values.
+    """
+    create_or_update(ctx, 'ir.values', 'scenario.res_partner_default_bba', {
+        'key': 'default',
+        'name': 'out_inv_comm_type',
+        'model': 'res.partner',
+        'value_unpickle': 'bba',
+    })
+    create_or_update(ctx, 'ir.values', 'scenario.res_partner_bba_random', {
+        'key': 'default',
+        'name': 'out_inv_comm_algorithm',
+        'model': 'res.partner',
+        'value_unpickle': 'random',
+    })
+
+
+@anthem.log
+def company_settings(ctx):
+    company = ctx.env.ref('base.main_company')
+    company.write({
+        'order_phone': '+32 (0)4 338 84 39',
+        'order_fax': '+32 (0)4 338 34 79',
+        'invoice_terms_conditions':
+            "Sauf stipulation écrite contraire, nos factures sont payables "
+            "au comptant.  Toute somme demeurée impayée à son échéance donne "
+            "de plein droit lieu à des intérêts de retard calculés "
+            "conformément au taux d’intérêt en vigueur de la Banque Nationale,"
+            " augmenté de 1%, sans qu’une mise en demeure préalable "
+            "ne soit nécessaire.  "
+            "Le montant dû sera en outre majoré d’une indemnité forfaitaire "
+            "de 10% avec un minimum de 40 € par facture.  "
+            "Les litiges éventuels relèvent exclusivement de la justice "
+            "de paix du canton ou des tribunaux de l’arrondissement "
+            "où est établi notre siège social.\n"
+            "Dans l'hypothèse où le client devrait être considéré comme un "
+            "consommateur au sens de la loi du 6 avril 2010 relative aux "
+            "pratiques du marché et à la protection du consommateur, "
+            "la clause pénale précitée serait également applicable à la "
+            "S.A. Alcyon dans le cas où elle n'exécuterait pas ses propres "
+            "obligations contractuelles (clause de réciprocité).\n"
+            "Nos conditions générales de vente complètes peuvent vous être "
+            "envoyées sur demande et sont consultables sur le site internet "
+            "http://www.alcyonbelux.be",
+    })
+
+    company.with_context(lang='nl_BE').write({'invoice_terms_conditions': (
+        "Behalve indien uitdrukkelijk, zijn onze facturen contant betaalbaar. "
+        "Elke bedrag die op de vervaldag niet betaald zijn, zullen van "
+        "rechtswege en zonder voorafgaande ingebrekestelling een interest "
+        "opbrengen gelijk aan de rentevoet vande Nationale Bank, "
+        "verhoogd met 1%.. Ze worden bovendien van rechtswege en zonder "
+        "voorafgaande ingebrekestelling vermeerderd met een schadevergoeding "
+        "gelijk aan 10% van het bedrag dat op de vervaldag niet betaald is, "
+        "met een minimum van € 40,00.per faktuur.  In geval van geschil, zijn "
+        "de rechtbanken van Luik alleen bevoegd\n"
+        "Als de klant als een consument moet worden beschouwd in de  zin van "
+        "de wet van 6 april 2010 betreffende marktpraktijken en "
+        "consumentenbescherming,  is de voornoemde strafclausule tevens van "
+        "toepassing op de N.V. Alcyon wanneer die haar contractuele "
+        "verplichtingen niet nakomt (wederkerigheidsclausule).\n"
+        "Zie algemene verkoops op http://www.alcyonbelux.be.  "
+        "Een papieren exemplaar wordt op annvraag kosteloos aan u verstrekt."
+    )})
+
+
+@anthem.log
 def import_banks(ctx):
     """ Importing banks """
     content = resource_stream(req, 'data/install/res.bank.csv')
@@ -113,13 +180,49 @@ def adapt_chart_of_account(ctx):
 
 
 @anthem.log
+def setup_sequences(ctx):
+    """ Configure invoicing sequences """
+    company = ctx.env.ref('base.main_company')
+    journals = ctx.env['account.journal'].search(
+        [('company_id', '=', company.id)]
+    )
+
+    customer_journal = journals.filtered(
+        lambda a: a.name == 'Customer Invoices'
+    )
+
+    customer_journal.sequence_id.write({
+        'prefix': 'FV/17/',
+        'padding': 5,
+        'use_date_range': False,
+    })
+
+    refund_seq = create_or_update(
+        ctx, 'ir.sequence','scenario.customer_invoice_refund_seq', {
+            'name': 'Customer Invoices Refund',
+            'prefix': 'NCV/17/',
+            'padding': 5,
+            'use_date_range': False,
+            'implementation': 'no_gap',
+        }
+    )
+    customer_journal.write({
+        'refund_sequence': True,
+        'refund_sequence_id': refund_seq.id,
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     import_banks(ctx)
     import_account_journal(ctx)
+    company_settings(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
     create_financial_journals(ctx)
     add_xmlid_account(ctx)
     adapt_chart_of_account(ctx)
     settings(ctx)
+    default_values(ctx)
+    setup_sequences(ctx)
