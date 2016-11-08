@@ -10,9 +10,11 @@
     'category': 'Sales',
     'depends': [
         'sale',
+        'sale_exception',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/sale_exception.xml',
         'views/sale.xml',
     ],
     'installable': True,

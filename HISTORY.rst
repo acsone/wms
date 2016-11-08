@@ -10,6 +10,7 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-22: Custom display product sale prices on template/pricelist form views
+* ALCN-132: Add sale_exception module and add rules into it
 * ALCN-262: Install warning module
 * ALCN-601: Adds additional products on product template which used on sale order
 * ALCN-642: Add city filter on partner tree/kanban views

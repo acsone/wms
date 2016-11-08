@@ -17,6 +17,7 @@ COPY ./importer.sh bin/
 
 ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/enterprise, \
+  /opt/odoo/external-src/sale-workflow, \
   /opt/odoo/external-src/server-tools, \
   /opt/odoo/external-src/stock-logistics-workflow, \
   /opt/odoo/src/addons" \
