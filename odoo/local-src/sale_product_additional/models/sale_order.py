@@ -75,14 +75,9 @@ class SaleOrder(models.Model):
                         factor = int(product_uom_qty/original_quantity)
                         new_quantity = additional_product.quantity * factor
 
-                    description = new_product.name_get()[0][1]
-                    if new_product.description_sale:
-                        description += '\n' + new_product.description_sale
                     position = additional_product.position_on_sale
                     values = {
-                        'name': description,
                         'product_id': new_product.id,
-                        'product_uom': new_product.uom_id.id,
                         'product_uom_qty': new_quantity,
                         'additional_line': True,
                         'additional_line_is_free': additional_product.is_free,
