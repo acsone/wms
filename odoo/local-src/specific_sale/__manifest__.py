@@ -20,6 +20,8 @@
     'data': [
         # Data
         'data/exception_rule.xml',
+        # Report
+        'report/sale_order.xml',
         # Views
         'views/product_template.xml',
         'views/res_partner.xml',

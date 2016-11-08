@@ -6,14 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-25 09:46+0000\n"
-"PO-Revision-Date: 2017-04-25 09:46+0000\n"
+"POT-Creation-Date: 2017-05-11 11:23+0000\n"
+"PO-Revision-Date: 2017-05-11 11:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:143
+#, python-format
+msgid "Article transferred to dispensing pharmacy: %s"
+msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_current_product_qty_unavailable
@@ -32,6 +38,24 @@ msgstr ""
 #. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Fax"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:120
+#, python-format
+msgid "Following human medicines ordered under your responsibility."
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:134
+#, python-format
+msgid "For any problems related to this command, please contact the pharmacist."
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:152
+#, python-format
+msgid "Imported medicines under your entire responsibility"
 msgstr ""
 
 #. module: specific_sale
@@ -108,6 +132,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_product_qty_unavailable
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_product_qty_unavailable
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_unavailable
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Quantity unavailable"
 msgstr ""
 
@@ -155,6 +180,18 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
 msgid "Sales Order Lines Unavailable"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:129
+#, python-format
+msgid "The medicines will be delivered to you by our care upon receipt of these from the pharmacy"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:124
+#, python-format
+msgid "This command is transferred on your behalf to the pharmacy which will ensure the delivery of medicines."
 msgstr ""
 
 #. module: specific_sale

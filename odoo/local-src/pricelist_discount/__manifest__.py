@@ -13,6 +13,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'report/sale_order.xml',
         'views/account_invoice.xml',
         'views/res_partner.xml',
         'views/sale_order.xml'

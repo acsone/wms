@@ -10,6 +10,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-641: Custom sale order report
 * ALCN-824: Add a custom sale order line exception
 
 **Bugfixes**

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_specific_document" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//h2/span[1]" position="replace">
+            <span t-if="doc.state not in ['draft','sent']">Confirmed order # </span>
+        </xpath>
+
+        <xpath expr="//t[@t-if='layout_category_size > 1 or page_size > 1']/tr" position="attributes">
+            <attribute name="groups">sale.group_sale_layout</attribute>
+            <attribute name="t-if">(layout_category_size > 1 or page_size > 1) and 'name_list' not in layout_category</attribute>
+        </xpath>
+
+        <t t-if="layout_category_size > 1 or page_size > 1" position="attributes">
+            <attribute name="groups"/>
+        </t>
+
+        <xpath expr="//t[@t-if='layout_category_size > 1 or page_size > 1']/tr" position="after">
+            <tr class="active" t-if="'name_list' in layout_category">
+                <td colspan="100%" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
+                    <t t-foreach="layout_category['name_list']" t-as="category_name">
+                        <t t-esc="category_name"/>
+                        <br/>
+                    </t>
+                </td>
+            </tr>
+        </xpath>
+
+        <t t-esc="layout_category['name']" position="replace">
+            <t t-if="'name_list' in layout_category">
+                <t t-foreach="layout_category['name_list']" t-as="category_name">
+                    <t t-esc="category_name"/>
+                    <br/>
+                </t>
+            </t>
+            <t t-if="'name_list' not in layout_category">
+                <t t-esc="layout_category['name']"/>
+            </t>
+        </t>
+
+        <xpath expr="//t[@t-as='l']/tr" position="after">
+            <t t-if="'line_additional_text' in layout_category">
+                <tr>
+                    <td colspan="100%" style="border-top: 0px;">
+                        <t t-esc="layout_category['line_additional_text']"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[3]" position="attributes">
+            <attribute name="t-if">'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[4]" position="attributes">
+            <attribute name="t-if">display_discount and 'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[5]" position="attributes">
+            <attribute name="t-if">'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[6]" position="attributes">
+            <attribute name="t-if">'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[7]" position="attributes">
+            <attribute name="t-if">'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[8]" position="attributes">
+            <attribute name="t-if">'only_quantity' not in layout_category</attribute>
+        </xpath>
+
+        <xpath expr="//th[2]" position="after">
+            <th class="text-right">Quantity unavailable</th>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[2]" position="after">
+            <td class="text-right">
+                <span t-field="l.product_qty_unavailable"/>
+            </td>
+        </xpath>
+
+        <td colspan="7" position="attributes">
+            <attribute name="colspan">8</attribute>
+        </td>
+
+        <td colspan="6" position="attributes">
+            <attribute name="colspan">7</attribute>
+        </td>
+
+    </template>
+
+</odoo>
