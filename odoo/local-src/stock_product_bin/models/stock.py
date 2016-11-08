@@ -28,6 +28,11 @@ class StockLocation(models.Model):
     def get_putaway_strategy(self, cr, uid, location, product, context=None):
         dest_location_id = super(StockLocation, self).get_putaway_strategy(
             cr, uid, location, product, context=None) or location.id
+        # dest_location_id = (
+        #     location.putaway_strategy_id
+        #     and self.env['product.putaway'].putaway_apply(
+        #         loc.putaway_strategy_id, product)
+        #     or location.id)
         bin_obj = self.pool['product.stock.bin']
         bin_ids = bin_obj.search(cr, uid, [
             ('product_id', '=', product.product_tmpl_id.id),
@@ -43,11 +48,13 @@ class StockLocation(models.Model):
             return dest_location_id
         # Search on parent location (case we are in Input under Stock and we
         # want to apply stock bin mapping)
-        bin_ids = bin_obj.search(cr, uid, [
-            ('product_id', '=', product.product_tmpl_id.id),
-            ('location_id', '=', location.location_id.id)],
-            limit=1)
-        if bin_ids:
-            return bin_obj.read(cr, uid, bin_ids[0], ['bin_location_id'],
-                                load='_classic_write')['bin_location_id']
+        while location.location_id:
+            location = location.location_id
+            bin_ids = bin_obj.search(cr, uid, [
+                ('product_id', '=', product.product_tmpl_id.id),
+                ('location_id', '=', location.id)],
+                limit=1)
+            if bin_ids:
+                return bin_obj.read(cr, uid, bin_ids[0], ['bin_location_id'],
+                                    load='_classic_write')['bin_location_id']
         return dest_location_id

@@ -48,7 +48,7 @@ def create_locations(ctx):
         ('__init.stock_location_frigo', u'Frigo',
          ctx.env.ref('__init.stock_location_froid').id),
         ('__init.stock_location_parking_medoc', u'Parking Medicaments',
-         ctx.env.ref('__init.stock_location_medoc').id),
+         ctx.env.ref('stock.stock_location_company').id),
     ]
 
     for xmlid, name, location_id in sub_locations:
@@ -105,6 +105,7 @@ def create_picking_types(ctx):
         limit=1,
     )
 
+    location_stock = ctx.env.ref('stock.stock_location_stock')
     location_out = ctx.env.ref('stock.stock_location_output')
     location_mat = ctx.env.ref('__init.stock_location_materiel')
     location_ali = ctx.env.ref('__init.stock_location_ali')
@@ -132,7 +133,8 @@ def create_picking_types(ctx):
          'name': 'Pick Médicaments',
          'code': 'internal',
          'sequence_id': picking_sequence.id,
-         'default_location_src_id': location_medoc.id,
+         # 'default_location_src_id': location_medoc.id,
+         'default_location_src_id': location_stock.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
          },
@@ -193,7 +195,8 @@ def create_procurement_rules(ctx):
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__init.stock_location_medoc').id,
+         # 'location_src_id': ref('__init.stock_location_medoc').id,
+         'location_src_id': ref('stock.stock_location_stock').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__init.stock_picking_type_medoc').id,
          'group_propagation_option': 'propagate',

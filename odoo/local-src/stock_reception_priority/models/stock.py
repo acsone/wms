@@ -19,36 +19,11 @@
 #
 ##############################################################################
 
-from datetime import date
+from datetime import date, timedelta
 
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+import openerp.addons.decimal_precision as dp
 from openerp import fields, models, api
-
-
-class ProductProduct(models.Model):
-    _inherit = 'product.product'
-
-    arrangement_importance = fields.Float(
-        'Arrangement Importance',
-        compute='_get_arrangement_importance')
-
-    @api.one
-    def _get_arrangement_importance(self):
-        # il faut calculer combien de temps on tient en tenant compte d'une consommation moyenne de 1,6 (=2)
-        """ How often the product is taken in a bin, how important it is to
-        arrange. This is divided by the quantity already arranged. """
-        start_date = (date.today() - timedelta(days=6 * 30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        customer_loc = self.env.ref('stock.stock_location_customers')
-        qty_moves = self.env['stock.move'].search_count([
-            ('date', '>=', start_date),
-            ('product_id', '=', self.id),
-            ('state', 'not in', ('draft', 'cancel')),
-            ('location_dest_id', '=', customer_loc.id),
-            ])
-        # FIXME - Hugly: Parking string hardcoded
-        qty_in_stock = (self.qty_available -
-                        self.with_context(location="Parking").qty_available)
-
-        self.arrangement_importance = qty_moves / max(1, self.qty_in_stock)
 
 
 class StockPackOperation(models.Model):
@@ -95,6 +70,8 @@ class StockPicking(models.Model):
         for stock_id, pickings in receptions.iteritems():
             packs = pickings.mapped('pack_operation_product_ids')
             all_products = packs.mapped('product_id')
+            if not all_products:
+                continue
 
             # We count the number of moves from stock in "Waiting Availability"
             # for each product
