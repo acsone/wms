@@ -2,6 +2,8 @@
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import openerp.addons.decimal_precision as dp
+
 from openerp import fields, models
 
 
@@ -11,3 +13,29 @@ class ProductTemplate(models.Model):
     medical_device = fields.Boolean(
         string='Medical Device',
     )
+
+    sale_price_2 = fields.Float(
+        digits_compute=dp.get_precision('Product Price'),
+        compute='_compute_sale_price_2',
+        readonly=True,
+        store=False,
+        string='Sale Price 2',
+    )
+
+    def _compute_sale_price_2(self):
+        for product in self:
+            pricelist = self.env.ref('scenario.product_pricelist_pb2')
+
+            item_count = self.env['product.pricelist.item'].search_count([
+                ('pricelist_id', '=', pricelist.id),
+                ('applied_on', '=', '1_product'),
+                ('product_tmpl_id', '=', product.id),
+            ])
+
+            # We check if product price is modified by the price list
+            if item_count:
+                price = pricelist.price_get(
+                    prod_id=product.product_variant_ids[0].id,
+                    qty=1
+                )
+                product.sale_price_2 = price.get(pricelist.id, 0.0)
