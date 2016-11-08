@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-642: Add city filter on partner tree/kanban views
 
 **Bugfixes**
 

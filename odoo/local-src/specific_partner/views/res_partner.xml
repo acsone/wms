@@ -1,4 +1,5 @@
 <odoo>
+
     <record id="view_partner_simple_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
@@ -14,4 +15,16 @@
             </group>
         </field>
     </record>
+
+    <record id="view_res_partner_specific_filter" model="ir.ui.view">
+        <field name="name">res.partner.specific.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="before">
+                <field name="city"/>
+            </field>
+        </field>
+    </record>
+
 </odoo>
