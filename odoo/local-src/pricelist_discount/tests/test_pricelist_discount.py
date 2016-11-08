@@ -320,6 +320,21 @@ class TestPricelistDiscount(TransactionCase):
 
         self.assertEqual(144, self.sol_p2.price_subtotal)
 
+        # Bug when only alcyon was filled
+        # (And alcyon_discount should not be recompute)
+        self.sol_p2.price_unit = 0.46
+        self.sol_p2.supplier_promotion = 0
+        self.sol_p2.alcyon_discount = 5
+        self.sol_p2.onchange_promotion_discount()
+
+        self.assertEqual(0.46, self.sol_p2.price_unit)
+        self.assertEqual(0.46, self.sol_p2.price_unit_supplier)
+        self.assertEqual(0.44, self.sol_p2.price_unit_alcyon)
+        self.assertEqual(0, self.sol_p2.supplier_promotion)
+        self.assertEqual(5, self.sol_p2.alcyon_discount)
+
+        self.assertEqual(0.44, self.sol_p2.price_subtotal)
+
     def test_create_invoice(self):
         self.tax.amount = 20
 
