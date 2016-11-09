@@ -47,6 +47,7 @@ migration:
           - purchase
           - l10n_be_invoice_bba
           - l10n_be_intrastat
+          - warning
           #### local-src
           - delivery_rounds
           - delivery_rounds_assign
