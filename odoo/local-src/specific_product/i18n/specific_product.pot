@@ -18,30 +18,30 @@ msgstr ""
 #. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_product_template_medical_device
 msgid "Medical Device"
-msgstr "Dispositif médical"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.actions.act_window,name:specific_product.action_product_price_list
 msgid "Price List"
-msgstr "Liste de prix"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.model,name:specific_product.model_product_pricelist_item
 msgid "Pricelist item"
-msgstr "Élément de la liste de prix"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.model,name:specific_product.model_product_template
 msgid "Product Template"
-msgstr "Modèle d'article"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.ui.view,arch_db:specific_product.product_template_form_view
 msgid "Sale Price 1"
-msgstr "Prix de vente 1"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_product_template_sale_price_2
 msgid "Sale Price 2"
-msgstr "Prix de vente 2"
+msgstr ""
 
