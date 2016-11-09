@@ -1,0 +1,10 @@
+id,name
+scenario.customer_category_petits_animaux,Petits animaux
+scenario.customer_category_grands_animaux,Grands animaux
+scenario.customer_category_equins,Equins
+scenario.customer_category_clinique,Clinique petits animaux
+scenario.customer_category_nac,NAC
+scenario.customer_category_fonctionnaire,Fonctionnaire
+scenario.customer_category_inseminateur,Inseminateur
+scenario.customer_category_comportementaliste,comportementaliste
+scenario.customer_category_enseignant,Enseignant Université
