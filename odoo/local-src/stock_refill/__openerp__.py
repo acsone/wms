@@ -19,31 +19,23 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
-
-
-class StockPicking(models.Model):
-    _inherit = 'stock.picking'
-    _order = "priority desc, sequence desc, date asc, id desc"
-
-    sequence = fields.Integer(
-        'Seq.', default=-1)
-
-    @api.multi
-    def write(self, vals):
-        if 'sequence' in vals:
-            # when we set a sequence on a delivery, we copy that value on the
-            # pickings
-            shippings = self.filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            rounds = shippings.mapped('delivery_round_id')
-            for ri in rounds:
-                pickings = ri.picking_ids.filtered(
-                    lambda r: r.partner_id.id in shippings.mapped(
-                        'partner_id.id'))
-                pickings.write({'sequence': vals['sequence']})
-        return super(StockPicking, self).write(vals)
-
-    @api.multi
-    def button_priority_recompute(self):
-        pass
+{
+    'name': 'Stock Refill',
+    'version': '1.0',
+    'author': "BCIM",
+    'maintainer': 'Camptocamp',
+    'category': 'Stock Management',
+    'depends': [
+        'stock',
+        'stock_quant_bylocation',
+        ],
+    'data': [
+        'views/stock.xml',
+        # 'views/product.xml',
+        # 'data.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'license': 'AGPL-3',
+    'application': False,
+}

@@ -3,12 +3,27 @@
   <data>
 
     <record id="view_vpicktree" model="ir.ui.view">
-        <field name="name">stock.picking.tree.round</field>
+        <field name="name">stock.picking.tree.sequence</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.vpicktree"/>
         <field name="arch" type="xml">
             <field name="name" position="before">
                 <field name="sequence"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.sequence</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <label for="sequence"/>
+                <div>
+                    <field name="sequence"/>
+                    <button name="button_priority_recompute" type="object" string="recompute" class="oe_link" attrs="{'invisible':[('picking_type_code', '=', 'incoming')]}"/>
+                </div>
             </field>
         </field>
     </record>

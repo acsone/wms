@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record id="view_report_stock_quant_bylocation_tree" model="ir.ui.view">
+        <field name="name">report.stock.quant.bylocation.tree.refill</field>
+        <field name="model">report.stock.quant.bylocation</field>
+        <field name="inherit_id" ref="stock_quant_bylocation.view_report_stock_quant_bylocation_tree"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="refill_priority"/>
+            </field>
+            <field name="owner_id" position="after">
+                <field name="qty_in_bin"/>
+                <!--field name="qty_in_reserve"/-->
+                <field name="qty_in_parking"/>
+                <field name="outgoing_qty"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_report_stock_quant_bylocation" model="ir.actions.act_window">
+        <field name="name">Stock in Parking</field>
+        <field name="res_model">report.stock.quant.bylocation</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_available':True}</field>
+        <field name="auto_refresh">60</field>
+    </record>
+    <record id="filter_parking" model="ir.filters">
+        <field name="name">Parking</field>
+        <field name="model_id">report.stock.quant.bylocation</field>
+        <field name="action_id" ref="action_report_stock_quant_bylocation"/>
+        <field name="domain">[[u'reservation_id', u'=', False], [u'location_id', u'child_of', u'Parking']]</field>
+        <field name="is_default">1</field>
+    </record>
+
+
+    <menuitem id="menu_report_stock_bylocation"
+        name="Stock in Parking"
+        parent="stock.menu_stock_inventory_control"
+        sequence="40"
+        action="action_report_stock_quant_bylocation"/>
+
+</data>
+</openerp>
