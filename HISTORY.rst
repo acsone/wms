@@ -9,12 +9,6 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
-* ALCN-22: Custom display product sale prices on template/pricelist form views
-* ALCN-132: Add sale_exception module and add rules into it
-* ALCN-262: Install warning module
-* ALCN-601: Adds additional products on product template which used on sale order
-* ALCN-642: Add city filter on partner tree/kanban views
-* ALCN-635: Add associated pharmacist in customer form.
 
 **Bugfixes**
 
@@ -22,6 +16,29 @@ Unreleased
 
 **Documentation**
 
+
+9.4.0 (2016-11-10)
+++++++++++++++++++
+
+**Data Migration**
+* ALCN-640: Customer categories.
+* ALCN-605: Customer title and legal entity.
+* ALCN-634: Customer & supplier lang
+
+**Features and Improvements**
+* ALCN-22: Custom display product sale prices on template/pricelist form views
+* ALCN-132: Add sale_exception module and add rules into it
+* ALCN-262: Install warning module
+* ALCN-601: Adds additional products on product template which used on sale order
+* ALCN-642: Add city filter on partner tree/kanban views
+* ALCN-635: Add associated pharmacist in customer form.
+* ALCN-631 & ALCN-624: Install module l10n_be_intrastat (and report_instrastat by dependency)
+* ALCN-618: Customer reference for sale order is no more required.
+* ALCN-633: Depot number for veterinary.
+* ALCN-634: Enable german language.
+
+**Bugfixes**
+* Pricelist discount: Fixing bugs when discount manually filled.
 
 9.3.0 (2016-10-28)
 ++++++++++++++++++
