@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<openerp>
-  <data>
-
+<odoo>
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.round</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="delivery.view_partner_property_form"/>
         <field name="arch" type="xml">
-            <field name="property_delivery_carrier_id" position="after">
-                <field name="round_zone_ids" widget="many2many_tags"/>
-            </field>
+            <field name="property_delivery_carrier_id" position="replace"/>
+
+            <group name="purchase" position="after">
+                <group name="delivery" string="Delivery">
+                    <field name="property_delivery_carrier_id"/>
+                    <field name="round_zone_ids" widget="many2many_tags"/>
+                </group>
+            </group>
+
         </field>
     </record>
-
-  </data>
-</openerp>
+</odoo>

@@ -21,6 +21,12 @@ class ResPartner(models.Model):
 
     legal_entity = fields.Char(string='Legal entity')
 
+    pharmacist_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Associated pharmacist',
+        domain=lambda self: self._get_pharmacist_id_domain()
+    )
+
     @api.depends('alcyon_category_id')
     def _compute_depot_number_visible(self):
         veterinary = self.env.ref('scenario.partner_category_veterinary')
@@ -28,3 +34,14 @@ class ResPartner(models.Model):
             partner.depot_number_visible = (
                 partner.alcyon_category_id == veterinary
             )
+
+    def _get_pharmacist_id_domain(self):
+        """ Filtering pharmacist partner on the associated alcyon category.
+        """
+        try:
+            category = self.env.ref('scenario.partner_category_pharmacy')
+        except ValueError:
+            domain = False
+        else:
+            domain = [('alcyon_category_id', '=', category.id)]
+        return domain
