@@ -10,12 +10,12 @@
                 <field name="product_id"/>
                 <field name="location_id" filter_domain="[('location_id', 'child_of', self)]"/>
                 <field name="owner_id" groups="stock.group_tracking_owner"/>
-                <filter string='Available' name="available" domain="[('reservation_id','=',False)]"/>
+                <filter string="Available" name="available" domain="[('reservation_id','=',False)]"/>
                 <group expand='0' string='Group by...'>
-                    <filter string='Location' name="locationgroup" domain="[]" context="{'group_by': 'location_id'}"/>
-                    <filter string='Product' name="productgroup" context="{'group_by': 'product_id'}"/>
-                    <filter string='Owner' context="{'group_by': 'owner_id'}" groups="stock.group_tracking_owner"/>
-                    <filter string='Company' domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    <filter string="Location" name="locationgroup" domain="[]" context="{'group_by': 'location_id'}"/>
+                    <filter string="Product" name="productgroup" context="{'group_by': 'product_id'}"/>
+                    <filter string="Owner" context="{'group_by': 'owner_id'}" groups="stock.group_tracking_owner"/>
+                    <filter string="Company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
                 </group>
             </search>
         </field>
@@ -32,12 +32,12 @@
                 <field name="location_id"/>
                 <field name="reservation_id" widget="boolean"/>
                 <field name="owner_id" groups="stock.group_tracking_owner"/>
-                <field name='company_id' groups="base.group_multi_company"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
 
-
+    <!--
     <record id="action_report_stock_quant_bylocation" model="ir.actions.act_window">
         <field name="name">Stock by Locations</field>
         <field name="res_model">report.stock.quant.bylocation</field>
@@ -50,6 +50,7 @@
         parent="stock.menu_stock_inventory_control"
         sequence="40"
         action="action_report_stock_quant_bylocation"/>
+    -->
 
 
 </data>
