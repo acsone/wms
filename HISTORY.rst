@@ -17,6 +17,12 @@ Unreleased
 **Documentation**
 
 
+9.4.1 (2016-11-10)
+++++++++++++++++++
+
+**Data Migration**
+* Fix partner title mapping.
+
 9.4.0 (2016-11-10)
 ++++++++++++++++++
 
