@@ -9255,7 +9255,7 @@ scenario.product_5650012,5650012,22.28,0,0,product.product_uom_unit,product.prod
 scenario.product_5650100,5650100,487.90,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET ECRAN 30x40cm,scenario.product_price_category_gma
 scenario.product_5650101,5650101,14500.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET PLUS DEVELOPPEUR VET PACK,scenario.product_price_category_gma
 scenario.product_5650102,5650102,220.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET ECRAN 18x24cm,scenario.product_price_category_gma
-scenario.product_5650103,5650103,340.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET ECRAN 24x30cm,scenario.product_price_category_gma
+scenario.product_5650103,5650103,340.51,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET ECRAN 24x30cm,scenario.product_price_category_gma
 scenario.product_5650104,5650104,599.70,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET ECRAN 35x43cm,scenario.product_price_category_gma
 scenario.product_5650105,5650105,45.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET HOUSSE DEVELOPPEMENT 18x24cm,scenario.product_price_category_gma
 scenario.product_5650106,5650106,45.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,CR 35 VET HOUSSE DEVELOPPEMENT 24x30cm,scenario.product_price_category_gma
@@ -12934,7 +12934,6 @@ scenario.product_8030851,8030851,3.10,0,0,product.product_uom_unit,product.produ
 scenario.product_8030897,8030897,32.80,0,0.064,product.product_uom_unit,product.product_uom_unit,,True,REFLOVET TEST CLEAN CHECK (15),scenario.product_price_category_gma
 scenario.product_8030905,8030905,17.30,0,0.189,product.product_uom_unit,product.product_uom_unit,,True,REFLOVET/VET SCAN CONES PIPETTE X500,scenario.product_price_category_gma
 scenario.product_8030911,8030911,23.30,0,0.142,product.product_uom_unit,product.product_uom_unit,,True,PAPIER IMPRIMANTE REFLOTRON II 5pc,scenario.product_price_category_gma
-scenario.product_8030912,8030912,3.90,0,0,product.product_uom_unit,product.product_uom_unit,,True,PAPIER IMPRIMANTE REFLOTRON IV/REFLOVET,scenario.product_price_category_gma
 scenario.product_8030928,8030928,174.60,0,0.174,product.product_uom_unit,product.product_uom_unit,,True,PIPETTE REFLOTRON,scenario.product_price_category_gma
 scenario.product_8030934,8030934,6980.00,0,0,product.product_uom_unit,product.product_uom_unit,,True,REFLOVET PLUS ANALYSEUR BIOCHIMIE,scenario.product_price_category_gma
 scenario.product_8030940,8030940,11.60,0,0.008,product.product_uom_unit,product.product_uom_unit,,True,RUBAN ENCREUR REFLOTRON,scenario.product_price_category_gma
@@ -15278,6 +15277,7 @@ scenario.product_8241950,8241950,77.90,0,2.820,product.product_uom_unit,product.
 scenario.product_8242025,8242025,15.50,0,0.080,product.product_uom_unit,product.product_uom_unit,,True,AIGUILLE DELVO VET LL 20-25 x12,scenario.product_price_category_gma
 scenario.product_8242035,8242035,15.63,0,0.080,product.product_uom_unit,scenario.product_uom_boite,,True,AIGUILLE DELVO VET LL 20-35 x12,scenario.product_price_category_gma
 scenario.product_8242050,8242050,47.30,0,0.080,product.product_uom_unit,product.product_uom_unit,,True,AIGUILLE DELVO VET LL 20-60 x12,scenario.product_price_category_gma
+scenario.product_8242079,8242079,16.65,0,5.390,product.product_uom_unit,product.product_uom_unit,,True,GEL ECHOGRAPHE 5l,scenario.product_price_category_gma
 scenario.product_8242116,8242116,93.69,0,0.740,product.product_uom_unit,product.product_uom_unit,,True,GANT CONTENTION KEVLAR 35cm HOMME-PAIRE,scenario.product_price_category_gma
 scenario.product_8242130,8242130,15.50,0,0.080,product.product_uom_unit,product.product_uom_unit,,True,AIGUILLE DELVO VET LL 21-30 x12,scenario.product_price_category_gma
 scenario.product_8242139,8242139,36.43,0,0.005,product.product_uom_unit,product.product_uom_unit,,True,PLAQUETTE RAZOR x3,scenario.product_price_category_gma
