@@ -31,6 +31,7 @@ class StockPicking(models.Model):
         readonly=True,  # states={'done': [('readonly', True)]},
     )
 
+
 #     @api.multi
 #     def do_transfer(self):
 #         if self.picking_type_code == 'incoming' and not self.grn_id:
@@ -47,3 +48,17 @@ class StockPicking(models.Model):
 #         store=True,
 #         related='picking_id.grn_id'
 #     )
+
+
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
+
+    def _get_action(self, cr, uid, ids, action, context=None):
+        result = super(StockPickingType, self)._get_action(
+            cr, uid, ids, action, context=context)
+        if ids:
+            picking_type = self.browse(cr, uid, ids[0], context=context)
+            if picking_type.code == 'incoming':
+                result['context'] = result['context'].replace(
+                    '{', "{'search_default_grn':1,", 1)
+        return result
