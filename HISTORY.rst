@@ -13,6 +13,7 @@ Unreleased
 * ALCN-262: Install warning module
 * ALCN-601: Adds additional products on product template which used on sale order
 * ALCN-642: Add city filter on partner tree/kanban views
+* ALCN-635: Add associated pharmacist in customer form.
 
 **Bugfixes**
 
