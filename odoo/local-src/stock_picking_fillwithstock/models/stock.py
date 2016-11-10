@@ -34,17 +34,16 @@ class StockPicking(models.Model):
         if self.move_lines:
             raise Warning(_('Moves lines already exsits'))
         quants = self.env['stock.quant'].search([
-            ('location_id', '=', self.location_id.id),
+            ('location_id', 'child_of', self.location_id.id),
             # ('reservation_id', '=', False),
             ('qty', '>', 0.0)])
-        quants_reserved = []
-        products_available = {}
+        products = {}
+        available = False
         for quant in quants:
-            if quant.reservation_id:
-                quants_reserved.append(quant)
-                continue
-            if quant.product_id.id not in products_available:
-                products_available[quant.product_id.id] = {
+            if not quant.reservation_id:
+                available = True
+            if quant.product_id.id not in products:
+                products[quant.product_id.id] = {
                     'picking_id': self.id,
                     'product_id': quant.product_id.id,
                     'name': quant.product_id.partner_ref,
@@ -55,33 +54,23 @@ class StockPicking(models.Model):
                     'location_dest_id': self.location_dest_id.id,
                     }
             else:
-                products_available[quant.product_id.id]['product_uom_qty'] += quant.qty
+                products[quant.product_id.id]['product_uom_qty'] += quant.qty
         move_obj = self.env['stock.move']
-        if not products_available:
+        if not available:
             raise Warning(_('Nothing to move'))
-        for data in products_available.values():
+        for data in products.values():
             move_obj.create(data)
         self.action_confirm()
         self.action_assign()
 
-        products_reserved = {}
-        for quant in quants_reserved:
-            if quant.product_id.id not in products_reserved:
-                products_reserved[quant.product_id.id] = {
-                    'picking_id': self.id,
-                    'product_id': quant.product_id.id,
-                    'product_qty': quant.qty,
-                    'product_uom_id': quant.product_uom_id.id,
-                    'location_id': self.location_id.id,
-                    'location_dest_id': self.location_id.id,
-                    # 'from_loc': self.location_id.name,
-                    # 'to_loc': self.location_id.name,
-                    'lots_visible': self.product_id.tracking != 'none',
-                    'fresh_record': False,
-                    }
-            else:
-                products_reserved[quant.product_id.id]['product_qty'] += quant.qty
-        pack_obj = self.env['stock.pack.operation']
-        for data in products_reserved.values():
-            pack_obj.create(data)
 
+# class StockPackOperation(models.Model):
+#     _inherit = "stock.pack.operation"
+#
+#     def _get_remaining_prod_quantities(self, cr, uid, operation, context=None):
+#         # manage extra move creation. If operation is dummmy (and not related a
+#         # move), do not create move at picking validation
+#         if operation.location_id == operation.location_dest_id:
+#             return {}
+#         return super(StockPackOperation, self)._get_remaining_prod_quantities(
+#             cr, uid, operation, context=context)
