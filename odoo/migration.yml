@@ -48,6 +48,8 @@ migration:
           - l10n_be_invoice_bba
           - l10n_be_intrastat
           - warning
+          #### external-src
+          - sale_exception
           #### local-src
           - delivery_rounds
           - delivery_rounds_assign
