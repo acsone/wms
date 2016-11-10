@@ -123,7 +123,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('depot_number', 'clirch'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
-            mapping=mappings.PARTNER_CATEGORY,
+            mapping=mappings.PARTNER_ALCYON_CATEGORY,
         ),
         FieldMapper('country_id/id', 'clicpa',
                     mapping=mappings.COUNTRY),
@@ -148,11 +148,13 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.LANG
         ),
 
-        'company_type', 'phone_numbers', 'product_pricelist'
+        'company_type', 'phone_numbers', 'product_pricelist',
+        'customer_categories'
     ]
 
     def get_sql_joins(self):
         return (
+            "left join gendata.cplcli on clinum=cpcnum "
             # Email table (inspired by smile query, cf google drive)
             "left join gendata.emaweb "
             "on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E' "
@@ -188,6 +190,14 @@ class CustomerMapper(EntityMapper):
             pricelist = None
 
         odoo_entity['property_product_pricelist/id'] = pricelist
+
+    @staticmethod
+    def convert_customer_categories(odoo_entity, db2_entity):
+        odoo_entity['category_id/id'] = ",".join([
+            mappings.CUSTOMER_CATEGORY[field_name]
+            for field_name in mappings.CUSTOMER_CATEGORY.keys()
+            if db2_entity[field_name] == 'Y'
+        ]) or None
 
 
 class SupplierMapper(EntityMapper):

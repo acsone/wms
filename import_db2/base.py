@@ -8,6 +8,7 @@
 
 import csv
 import os
+from collections import OrderedDict
 
 
 class FieldMapper:
@@ -78,7 +79,7 @@ class EntityMapper:
     def convert_entities(self, db2_entities):
         odoo_entities = []
         for db2_entity in db2_entities:
-            odoo_entity = {}
+            odoo_entity = OrderedDict(id=None)
             for field in self.FIELDS_MAPPING:
                 if isinstance(field, str):
                     field = FieldMapper(field)

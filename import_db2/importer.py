@@ -12,24 +12,41 @@ from convertion import MAPPER_CLASSES
 
 def flatten_dict(nested_dict, prefix=None):
     """ Transform a dict with nested dict like:
-    {"a": 1, "b": {'c': 3, 'd': {'e': 5}}}
+    {"a": 1, "b": {'c': 3, 'd': {'e': 5}}, "f": [{"g": 6}, {"g": 7}]}
 
-    to a flat dict like:
-    {'a': 1, 'b/c': 3, 'b/d/e': 5}
+    to a list of flat dict like:
+    [
+        {'a': 1, 'b/c': 3, 'b/d/e': 5, "f/g": 6},
+        {"f/g": 7}
+    ]
     """
-    #TODO: Does not work with one2many with multiple lines...
+    rows = []
+
     result = OrderedDict()
+    rows.append(result)
+
     for k, v in nested_dict.items():
         if prefix:
             new_key = "%s/%s" % (prefix, k)
         else:
             new_key = k
         if v and isinstance(v, dict):
-            result.update(flatten_dict(v, new_key))
+            result.update(flatten_dict(v, new_key)[0])
+
+        elif isinstance(v, list) and v and isinstance(v[0], dict):
+            # One2many or many2many case
+            if prefix:
+                raise NotImplementedError(
+                    "List of dict in sub dict is not implemented yet."
+                )
+            result.update(flatten_dict(v.pop(0), new_key)[0])
+            for other in v:
+                rows.append(flatten_dict(other, new_key)[0])
+
         else:
             result[new_key] = v
 
-    return result
+    return rows
 
 
 class Importer:
@@ -63,14 +80,16 @@ class Importer:
 
     def write_csv_files(self):
         for name, entities in self.odoo_entities.items():
-            entities = [flatten_dict(d) for d in entities]
-            headers = entities[0].keys()
+            rows = []
+            for entity in entities:
+                rows.extend(flatten_dict(entity))
+            headers = rows[0].keys()
 
             file_path = os.path.join(self.csv_path, '%s.csv' % name)
             with open(file_path, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, headers)
                 writer.writeheader()
-                writer.writerows(entities)
+                writer.writerows(rows)
 
     def process(self):
         for class_ in MAPPER_CLASSES:

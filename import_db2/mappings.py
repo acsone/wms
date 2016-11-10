@@ -48,7 +48,7 @@ USERS = {
     20: 'scenario.res_user_20',
 }
 
-PARTNER_CATEGORY = {
+PARTNER_ALCYON_CATEGORY = {
     1: 'scenario.partner_category_veterinary',
     2: 'scenario.partner_category_pharmacy',
     4: 'scenario.partner_category_callcenter',
@@ -63,6 +63,18 @@ PARTNER_CATEGORY = {
     18: 'scenario.partner_category_pharmacy',
     19: 'scenario.partner_category_pharmacy',
     20: 'scenario.partner_category_student',
+}
+
+CUSTOMER_CATEGORY = {
+    'cpcl17': 'scenario.customer_category_petits_animaux',
+    'cpcl18': 'scenario.customer_category_grands_animaux',
+    'cpcl19': 'scenario.customer_category_equins',
+    'cpcl20': 'scenario.customer_category_clinique',
+    'cpcl21': 'scenario.customer_category_nac',
+    'cpcl22': 'scenario.customer_category_fonctionnaire',
+    'cpcl23': 'scenario.customer_category_inseminateur',
+    'cpcl24': 'scenario.customer_category_comportementaliste',
+    'cpcl25': 'scenario.customer_category_enseignant',
 }
 
 PARTNER_TITLE = {

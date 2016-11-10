@@ -1,27 +1,27 @@
-customer,city,fax,name,zip,mobile,country_id/id,id,phone,street,supplier,ref,email,vat,lang
-False,MONMOUTH,00441600710700,NATURAL ANIMAL FEEDS LTD,NP25 5JA,,base.uk,scenario.supplier_32420,,Wonaqtow Road Ind. Estate West,True,32420,,,fr_BE
-False,DIEGEM (MACHELEN),025356519,BAYER S.A.,1831,,base.be,scenario.supplier_62600,02/5356649     ,J.E. Mommaertslaan 14,True,62600,,,fr_BE
-False,LEUVEN,016396999,BSN MEDICAL,3001,,base.be,scenario.supplier_62782,016/396900     ,Technologielaan 13,True,62782,,,fr_BE
-False,LIEGE,043492229,ALPHA REPARTITION,4020,,base.be,scenario.supplier_63195,09/2809040     ,Rue de Mulhouse 2,True,63195,,,fr_BE
-False,LA LOUVIERE,064260020,COLMAN LABORATOIRE,7100,,base.be,scenario.supplier_63502,064/224907     ,Rue de la Grande 68-70,True,63502,,,fr_BE
-False,IVOZ-RAMET,043379513,DUMONT VERRERIES,4400,,base.be,scenario.supplier_64010,04/3369440     ,Chaussée d'Ivoz 2,True,64010,,,fr_BE
-False,BJ CULEMBORG,0031/345589401*,EICKEMEYER MEDISCHE TECHNIEK,4104,,base.nl,scenario.supplier_66155,0031/345589400 ,Bellweg 44,True,66155,s vermeulen@eickemeyer.nl,,nl_BE
-False,BRUXELLES,027007425,ELI LILLY/ELANCO,1000,,base.be,scenario.supplier_66200,080081316      ,Rue du Marquis 1,True,66200,orders.benelux@lilly.com,,fr_BE
-False,BRUXELLES,027344899,FENDIGO,1160,,base.be,scenario.supplier_66906,02/7344690     ,"Avenue Hermann Debroux, 17",True,66906,,,fr_BE
-False,ST-HILAIRE-DE-CHALEONS,0033240031471*,GENIA,44680,,base.fr,scenario.supplier_67530,0033/240032417 ,"Rue J-Fr. Champollion, 12",True,67530,,,fr_BE
-False,SAINTES,043775039,HARTMANN PAUL,1480,,base.be,scenario.supplier_68302,02/3914466     ,Avenue Paul Hartmann 1,True,68302,,,fr_BE
-False,BRUXELLES,023709335,MSD ANIMAL HEALTH,1200,,base.be,scenario.supplier_71100,02/3709421     ,Clos du Lynx 5,True,71100,,,fr_BE
-False,WAREGEM,070233143,CERTA S.A. (MEDEVA),8790,,base.be,scenario.supplier_74153,02/3893332     ,"Textielstraat, 20",True,74153,,,fr_BE
-False,DIEGEM,080094905,MERIAL BELGIUM SA,1831,,base.be,scenario.supplier_74200,080032369      ,Leonardo Da Vincilaan 19,True,74200,,,fr_BE
-False,bruxelles,064/273.283,PHARMA BELGIUM,1140,,base.be,scenario.supplier_77320,064/273.273    ,RUE CARLISTRAAT 17/19,True,77320,,,fr_BE
-False,SERAING,043301427,PHARMA SANTE OFFICINE 31,4100,,base.be,scenario.supplier_77340,04/3371774     ,Rue des Ecoliers 138,True,77340,officine31@pharmasante.be,,fr_BE
-False,HUIZINGEN,023603085,PHARMA LOGISTICS,1654,,base.be,scenario.supplier_77605,02/3631570     ,Demeursleen 71,True,77605,,,fr_BE
-False,BRUXELLES(AUDERGHEM),,PHARMACIE DU SOUVERAIN,1160,,base.be,scenario.supplier_77666,02/6728249     ,Boulevard du Souverain 264,True,77666,orders.alcyon@pharmaciesouverain.be,,fr_BE
-False,WESEL,004928156071*,SERVOPRAX G.M.B.H.,46485,,base.de,scenario.supplier_79193,0049281952830  ,AM Marienbusch 9,True,79193,info@servoprax.de,,fr_BE
-False,ZAVENTEM,027468853,ZOETIS BELGIUM,1930,,base.be,scenario.supplier_79201,02/7468270     ,Mercuriusstraat 20,True,79201,,,fr_BE
-False,ZAVENTEM,,SMITH & NEPHEW,1930,,base.be,scenario.supplier_79245,02/7022911     ,Hector Henneaulaan 366,True,79245,,,fr_BE
-False,LIEGE,043679733,LOHMANN & RAUSCHER,4000,0477/727086    ,base.be,scenario.supplier_79301,04/3679711     ,Rue Visé-Voie 81 bte 2,True,79301,,,fr_BE
-False,LEUVEN,016387261,VIRBAC BELGIUM    *,3001,,base.be,scenario.supplier_81200,016/387260     ,Esperantolaan 4,True,81200,order@virbac.be,,fr_BE
-False,DEINZE,093816882,VERSELE-LAGA  *,9800,,base.be,scenario.supplier_82595,09/3813200     ,Kapellestraat 70,True,82595,,,fr_BE
-False,SINT NIKLAAS,037806391,KELA VETERINARIA   *,9100,,base.be,scenario.supplier_83300,03/7806390     ,Industriepark West 68,True,83300,,,fr_BE
-False,BRUXELLES,025216071,STEROP,1070,,base.be,scenario.supplier_93910,02/5243966     ,AVENUE DE SCHEUT 45_50,True,93910,,,fr_BE
+id,ref,name,street,zip,city,phone,fax,email,vat,customer,supplier,country_id/id,lang,mobile
+scenario.supplier_32420,32420,NATURAL ANIMAL FEEDS LTD,Wonaqtow Road Ind. Estate West,NP25 5JA,MONMOUTH,,00441600710700,,,False,True,base.uk,fr_BE,
+scenario.supplier_62600,62600,BAYER S.A.,J.E. Mommaertslaan 14,1831,DIEGEM (MACHELEN),02/5356649     ,025356519,,,False,True,base.be,fr_BE,
+scenario.supplier_62782,62782,BSN MEDICAL,Technologielaan 13,3001,LEUVEN,016/396900     ,016396999,,,False,True,base.be,fr_BE,
+scenario.supplier_63195,63195,ALPHA REPARTITION,Rue de Mulhouse 2,4020,LIEGE,09/2809040     ,043492229,,,False,True,base.be,fr_BE,
+scenario.supplier_63502,63502,COLMAN LABORATOIRE,Rue de la Grande 68-70,7100,LA LOUVIERE,064/224907     ,064260020,,,False,True,base.be,fr_BE,
+scenario.supplier_64010,64010,DUMONT VERRERIES,Chaussée d'Ivoz 2,4400,IVOZ-RAMET,04/3369440     ,043379513,,,False,True,base.be,fr_BE,
+scenario.supplier_66155,66155,EICKEMEYER MEDISCHE TECHNIEK,Bellweg 44,4104,BJ CULEMBORG,0031/345589400 ,0031/345589401*,s vermeulen@eickemeyer.nl,,False,True,base.nl,nl_BE,
+scenario.supplier_66200,66200,ELI LILLY/ELANCO,Rue du Marquis 1,1000,BRUXELLES,080081316      ,027007425,orders.benelux@lilly.com,,False,True,base.be,fr_BE,
+scenario.supplier_66906,66906,FENDIGO,"Avenue Hermann Debroux, 17",1160,BRUXELLES,02/7344690     ,027344899,,,False,True,base.be,fr_BE,
+scenario.supplier_67530,67530,GENIA,"Rue J-Fr. Champollion, 12",44680,ST-HILAIRE-DE-CHALEONS,0033/240032417 ,0033240031471*,,,False,True,base.fr,fr_BE,
+scenario.supplier_68302,68302,HARTMANN PAUL,Avenue Paul Hartmann 1,1480,SAINTES,02/3914466     ,043775039,,,False,True,base.be,fr_BE,
+scenario.supplier_71100,71100,MSD ANIMAL HEALTH,Clos du Lynx 5,1200,BRUXELLES,02/3709421     ,023709335,,,False,True,base.be,fr_BE,
+scenario.supplier_74153,74153,CERTA S.A. (MEDEVA),"Textielstraat, 20",8790,WAREGEM,02/3893332     ,070233143,,,False,True,base.be,fr_BE,
+scenario.supplier_74200,74200,MERIAL BELGIUM SA,Leonardo Da Vincilaan 19,1831,DIEGEM,080032369      ,080094905,,,False,True,base.be,fr_BE,
+scenario.supplier_77320,77320,PHARMA BELGIUM,RUE CARLISTRAAT 17/19,1140,bruxelles,064/273.273    ,064/273.283,,,False,True,base.be,fr_BE,
+scenario.supplier_77340,77340,PHARMA SANTE OFFICINE 31,Rue des Ecoliers 138,4100,SERAING,04/3371774     ,043301427,officine31@pharmasante.be,,False,True,base.be,fr_BE,
+scenario.supplier_77605,77605,PHARMA LOGISTICS,Demeursleen 71,1654,HUIZINGEN,02/3631570     ,023603085,,,False,True,base.be,fr_BE,
+scenario.supplier_77666,77666,PHARMACIE DU SOUVERAIN,Boulevard du Souverain 264,1160,BRUXELLES(AUDERGHEM),02/6728249     ,,orders.alcyon@pharmaciesouverain.be,,False,True,base.be,fr_BE,
+scenario.supplier_79193,79193,SERVOPRAX G.M.B.H.,AM Marienbusch 9,46485,WESEL,0049281952830  ,004928156071*,info@servoprax.de,,False,True,base.de,fr_BE,
+scenario.supplier_79201,79201,ZOETIS BELGIUM,Mercuriusstraat 20,1930,ZAVENTEM,02/7468270     ,027468853,,,False,True,base.be,fr_BE,
+scenario.supplier_79245,79245,SMITH & NEPHEW,Hector Henneaulaan 366,1930,ZAVENTEM,02/7022911     ,,,,False,True,base.be,fr_BE,
+scenario.supplier_79301,79301,LOHMANN & RAUSCHER,Rue Visé-Voie 81 bte 2,4000,LIEGE,04/3679711     ,043679733,,,False,True,base.be,fr_BE,0477/727086    
+scenario.supplier_81200,81200,VIRBAC BELGIUM    *,Esperantolaan 4,3001,LEUVEN,016/387260     ,016387261,order@virbac.be,,False,True,base.be,fr_BE,
+scenario.supplier_82595,82595,VERSELE-LAGA  *,Kapellestraat 70,9800,DEINZE,09/3813200     ,093816882,,,False,True,base.be,fr_BE,
+scenario.supplier_83300,83300,KELA VETERINARIA   *,Industriepark West 68,9100,SINT NIKLAAS,03/7806390     ,037806391,,,False,True,base.be,fr_BE,
+scenario.supplier_93910,93910,STEROP,AVENUE DE SCHEUT 45_50,1070,BRUXELLES,02/5243966     ,025216071,,,False,True,base.be,fr_BE,

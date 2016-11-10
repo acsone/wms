@@ -18,6 +18,14 @@ def create_partner_categories(ctx):
 
 
 @anthem.log
+def create_customer_category(ctx):
+    """ Importing suppliers from csv """
+    content = resource_stream(req, 'data/install/customer.category.csv')
+    load_csv_stream(ctx, 'res.partner.category', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring partner """
     create_partner_categories(ctx)
+    create_customer_category(ctx)
