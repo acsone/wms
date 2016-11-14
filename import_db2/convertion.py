@@ -229,6 +229,8 @@ class SupplierMapper(EntityMapper):
         FieldMapper('vat', 'foucee', check=checks.vat),
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
+        FieldMapper('alcyon_category_id/id',
+                    constant='scenario.partner_category_supplier'),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
