@@ -345,7 +345,7 @@ def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
     """
     phone, mobile = None, None
-    values = [v for v in values if v and v.strip()]
+    values = [v.strip() for v in values if v and v.strip()]
 
     for value in list(values):
         numbers = ''.join(re.findall('\d+', value))
