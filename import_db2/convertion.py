@@ -149,7 +149,7 @@ class CustomerMapper(EntityMapper):
         ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
-        'customer_categories'
+        'customer_categories', 'pharmacist'
     ]
 
     def get_sql_joins(self):
@@ -198,6 +198,17 @@ class CustomerMapper(EntityMapper):
             for field_name in mappings.CUSTOMER_CATEGORY.keys()
             if db2_entity[field_name] == 'Y'
         ]) or None
+
+    def convert_pharmacist(self, odoo_entity, db2_entity):
+        db2_id = db2_entity.get('cpcpha')
+
+        if db2_id:
+            self.importer.add_foreign_ref('FOURN', db2_id)
+            xml_id = self.get_xml_id('supplier', db2_id)
+        else:
+            xml_id = None
+
+        odoo_entity['pharmacist_id/id'] = xml_id
 
 
 class SupplierMapper(EntityMapper):

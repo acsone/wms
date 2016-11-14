@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Data Migration**
+* ALCN-637: Import pharmacist id in customer.
 
 **Features and Improvements**
 
