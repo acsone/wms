@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-635: Remove domain from pharmacist field on customer.
 
 **Bugfixes**
 
