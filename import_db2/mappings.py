@@ -77,6 +77,12 @@ CUSTOMER_CATEGORY = {
     'cpcl25': 'scenario.customer_category_enseignant',
 }
 
+CUSTOMER_ACTIVE = {
+    # In AS400, 1 means customer blocked => so inactive.
+    1: False,
+    0: True,
+}
+
 PARTNER_TITLE = {
      11: 'base.res_partner_title_madam',
      10: 'base.res_partner_title_mister',

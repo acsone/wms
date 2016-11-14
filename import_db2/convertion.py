@@ -114,6 +114,7 @@ class CustomerMapper(EntityMapper):
     XMLID_FIELD = 'ref'
 
     FIELDS_MAPPING = [
+        FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
         FieldMapper('ref', 'clinum'),
         FieldMapper('name', 'clinom'),
         FieldMapper('street', 'cliadr'),
