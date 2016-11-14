@@ -166,6 +166,13 @@ CLIENT_PROMOTION_PRICELIST = {
      411, 412, 600)
 }
 
+PRODUCT_TRACKING = {
+    0: 'none',
+    1: 'lot',
+    2: 'lot',
+    4: 'lot',
+}
+
 COUNTRY = {
     1: 'base.fr',
     2: 'base.be',

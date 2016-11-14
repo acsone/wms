@@ -27,6 +27,7 @@ class ProductMapper(EntityMapper):
             mapping=mappings.UOM, default='product.product_uom_unit'
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
+        FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 

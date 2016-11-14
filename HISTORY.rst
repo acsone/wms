@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 * ALCN-637: Import pharmacist id in customer.
+* ALCN-639: Import product tracking configuration.
 
 **Features and Improvements**
 
