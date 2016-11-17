@@ -37,7 +37,8 @@ class ProductProduct(models.Model):
 
     @api.one
     def _get_stat_amount_deliveries(self):
-        start_date = (date.today() - timedelta(days=6 * 30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        start_date = (date.today() - timedelta(days=6 * 30)).strftime(
+            DEFAULT_SERVER_DATETIME_FORMAT)
         customer_loc = self.env.ref('stock.stock_location_customers')
         self.stat_amount_deliveries = self.env['stock.move'].search_count([
             ('date', '>=', start_date),
@@ -62,12 +63,16 @@ class ProductProduct(models.Model):
     @api.one
     def _get_qty_in(self):
         # FIXME - Hugly: string hardcoded
-        self.qty_in_parking = self.with_context(location="Parking").qty_available
-        self.qty_in_reserve = self.with_context(location="Reserve").qty_available
+        self.qty_in_parking = self.with_context(
+            location="Parking").qty_available
+        self.qty_in_reserve = self.with_context(
+            location="Reserve").qty_available
 
-        location_ids = self.env['stock.warehouse'].search([]).mapped('lot_stock_id').ids
+        location_ids = self.env['stock.warehouse'].search([]).mapped(
+            'lot_stock_id').ids
         qty_in_stock = self.with_context(location=location_ids).qty_available
-        self.qty_in_bin = qty_in_stock - self.qty_in_parking - self.qty_in_reserve
+        self.qty_in_bin = (qty_in_stock - self.qty_in_parking -
+                           self.qty_in_reserve)
 
     move_ids = fields.One2many(
         'stock.move', 'product_id',
@@ -85,7 +90,8 @@ class ProductProduct(models.Model):
     @api.depends('stat_amount_deliveries', 'move_ids.state')
     def _get_refill_priority(self):
         """ Compute how important it is to refill the bin """
-        # il faut calculer combien de temps on tient en tenant compte d'une consommation moyenne de 1,6 (=2)
+        # il faut calculer combien de temps on tient en tenant compte d'une
+        # consommation moyenne de 1,6 (=2)
         """ How often the product is taken in a bin, how important it is to
         arrange. This is divided by the quantity already arranged. """
         qty_moves = self.stat_amount_deliveries
@@ -95,7 +101,8 @@ class ProductProduct(models.Model):
             # we will be out of stock
             prio = 1000 + min(999, qty_moves)
         else:
-            # IMP-TODO: we could compute how many days we can survive according to the mean consumption
+            # IMP-TODO: we could compute how many days we can survive according
+            # to the mean consumption
             prio = min(999, qty_moves / max(1, qty_in_stock))
         self.priority_arrangement = prio
 

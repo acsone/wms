@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models, tools
+from openerp import fields, models, tools
 
 
 class ReportStockQuantBylocation(models.Model):
@@ -37,7 +37,8 @@ class ReportStockQuantBylocation(models.Model):
                 , quant.company_id AS company_id
                 , quant.reservation_id AS reservation_id
                 """,
-            "groupby": "product_id, location_id, owner_id, company_id, reservation_id"
+            "groupby": "product_id, location_id, owner_id, company_id, "
+                       "reservation_id"
             }
 
     def init(self, cr):
@@ -68,4 +69,3 @@ class ReportStockQuantBylocation(models.Model):
         'res.company', 'Company')
     reservation_id = fields.Many2one(
         'stock.move', 'Reserved')
-

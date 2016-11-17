@@ -19,10 +19,6 @@
 #
 ##############################################################################
 
-from datetime import date, timedelta
-
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-import openerp.addons.decimal_precision as dp
 from openerp import fields, models, api
 
 
@@ -100,12 +96,13 @@ class StockPicking(models.Model):
                     qty_backorder = backorders.get(packop.product_id.id, 0)
                     if packop.qty_backorder != qty_backorder:
                         packop.write({
-                            'qty_backorder': backorders.get(packop.product_id.id, 0),
+                            'qty_backorder': backorders.get(
+                                packop.product_id.id, 0),
                         })
                 products = record.mapped('pack_operation_product_ids') \
                     .mapped('product_id')
                 record.qty_backorder = sum([backorders.get(prod_id, 0)
-                                          for prod_id in products.ids])
+                                           for prod_id in products.ids])
                 record.qty_outofstock = len(products.filtered(
                         lambda r: r.qty_available <= 0))
 

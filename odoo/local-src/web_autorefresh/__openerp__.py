@@ -23,17 +23,18 @@
 
 {
     'name': 'Web Auto Refresh Views',
-    'version': '0.1',
+    'summary': "This module use the auto_refresh field of OpenERP actions to "
+               "set a time based refresh of views used on the actions.",
+    'version': '9.0.1.0.0',
     'category': 'web',
-    'description': """This module use the auto_refresh field of OpenERP actions to set a time based refresh of views used on the actions.
-    Useful for auto-refresh Trees, Forms, Kanban, Graphs, Calendar""",
     'author': 'aekroft@gmail.com',
+    'contributor': 'Jacques-Etienne Baudoux <je@bcim.be>',
     'website': 'www.soltein.org',
-    'depends': ['web',
+    'depends': [
+        'web',
         # 'web_calendar', 'web_graph', 'web_kanban',
         ],
     'data': ['assets.xml'],
     'active': False,
     'installable': True,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

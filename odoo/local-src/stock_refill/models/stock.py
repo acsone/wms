@@ -19,11 +19,7 @@
 #
 ##############################################################################
 
-from datetime import date, timedelta
-
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-import openerp.addons.decimal_precision as dp
-from openerp import fields, models, api
+from openerp import fields, models
 
 
 class ReportStockQuantBylocation(models.Model):
@@ -54,12 +50,12 @@ class ReportStockQuantBylocation(models.Model):
 #     _name = 'report.stock.quant.bylocation.reserve'
 #     _auto = False
 #     _order = 'refill_priority desc, qty desc'
-# 
+#
 #     def _prepare_init(self):
 #         d = super(ReportStockQuantBylocation, self)._prepare_init()
 #         d['select'] += ", product.priority_arrangement as refill_priority"
 #         d['groupby'] += ",priority_arrangement"
 #         return d
-# 
+#
 #     refill_priority = fields.Integer(
 #         'Refill Priority', readonly=True)

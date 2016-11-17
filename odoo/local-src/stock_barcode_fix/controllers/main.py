@@ -2,7 +2,8 @@ from openerp import http, _
 from openerp.http import request
 
 """ This is copy/paste from stock_barcde + jbaudoux FIX """
-from openerp.addons.stock_barcode.controllers.main import StockBarcodeController
+from openerp.addons.stock_barcode.controllers.main \
+    import StockBarcodeController
 
 
 class StockBarcodeControllerFix(StockBarcodeController):
@@ -13,7 +14,8 @@ class StockBarcodeControllerFix(StockBarcodeController):
             action (open an existing / new picking) or warning.
         """
         # Get the action to open a picking form as a dict
-        action_picking_form = request.env.ref('stock_barcode.stock_picking_action_form')
+        action_picking_form = request.env.ref(
+            'stock_barcode.stock_picking_action_form')
         action_picking_form = action_picking_form.read()[0]
 
         # If the barcode represents a picking, open it
@@ -25,7 +27,8 @@ class StockBarcodeControllerFix(StockBarcodeController):
             action_picking_form['res_id'] = corresponding_picking.id
             return {'action': action_picking_form}
 
-        # If the barcode represents a location, open a new picking from this location
+        # If the barcode represents a location, open a new picking from this
+        # location
         corresponding_location = request.env['stock.location'].search([
             ('barcode', '=', barcode),
             ('usage', '=', 'internal')
@@ -39,12 +42,16 @@ class StockBarcodeControllerFix(StockBarcodeController):
                 location = location.location_id
                 internal_picking_type = location.barcode_picking_type_id
             if not internal_picking_type:
-                internal_picking_type = request.env['stock.picking.type'].search([('code', '=', 'internal')])
-                warehouse = request.env['stock.location'].get_warehouse(corresponding_location)
+                internal_picking_type = request.env['stock.picking.type'].\
+                    search([('code', '=', 'internal')])
+                warehouse = request.env['stock.location'].get_warehouse(
+                    corresponding_location)
                 if warehouse:
-                    internal_picking_type = internal_picking_type.filtered(lambda r: r.warehouse_id.id == warehouse)
+                    internal_picking_type = internal_picking_type.filtered(
+                        lambda r: r.warehouse_id.id == warehouse)
             # dest_loc = corresponding_location
-            # while dest_loc.location_id and dest_loc.location_id.usage == 'internal':
+            # while (dest_loc.location_id and
+            #        dest_loc.location_id.usage == 'internal'):
             #     dest_loc = dest_loc.location_id
             dest_loc = internal_picking_type.default_location_dest_id
             # end FIX
@@ -55,13 +62,13 @@ class StockBarcodeControllerFix(StockBarcodeController):
                     'location_id': corresponding_location.id,
                     'location_dest_id': dest_loc.id,
                 })
-                # TODO jbaudoux: fill with all AVAILABLE products in this location. For non available, add fake op?
                 picking.action_confirm()
-
                 # Open its form view
                 action_picking_form.update(res_id=picking.id)
                 return {'action': action_picking_form}
             else:
-                return {'warning': _('No internal picking type. Please configure one in warehouse settings.')}
+                return {'warning': _('No internal picking type. Please '
+                                     'configure one in warehouse settings.')}
 
-        return {'warning': _('No picking or location corresponding to barcode %(barcode)s') % {'barcode': barcode}}
+        return {'warning': _('No picking or location corresponding to barcode '
+                             '%(barcode)s') % {'barcode': barcode}}
