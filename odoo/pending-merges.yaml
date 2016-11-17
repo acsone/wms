@@ -22,3 +22,24 @@
 #     # port of account_statement_base_import
 #     - oca refs/pull/137/head
 #   target: *default_target
+#
+./external-src/account-financial-tools:
+  remotes:
+    oca: git@github.com:OCA/account-financial-tools.git
+  merges:
+    - oca 9.0
+    # port account_chart_update
+    - oca refs/pull/420/head
+  target: *default_target
+./external-src/l10n_belgium:
+  remotes:
+    oca: git@github.com:OCA/account-financial-tools.git
+  merges:
+    - oca 9.0
+    # port 9.0-l10n_be_ecotax
+    - oca refs/pull/37/head
+    # port 9.0-l10n_be_apbtax
+    - oca refs/pull/38/head
+    # port 9.0-l10n_be_antibiotax
+    - oca refs/pull/39/head
+  target: *default_target
