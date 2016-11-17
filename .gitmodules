@@ -13,3 +13,9 @@
 [submodule "odoo/external-src/sale-workflow"]
 	path = odoo/external-src/sale-workflow
 	url = git@github.com:OCA/sale-workflow.git
+[submodule "odoo/external-src/account-financial-tools"]
+	path = odoo/external-src/account-financial-tools
+	url = git@github.com:OCA/account-financial-tools.git
+[submodule "odoo/external-src/l10n_be"]
+	path = odoo/external-src/l10n_be
+	url = git@github.com:OCA/l10n_be.git
