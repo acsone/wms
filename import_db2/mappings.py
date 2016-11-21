@@ -77,6 +77,12 @@ CUSTOMER_CATEGORY = {
     'cpcl25': 'scenario.customer_category_enseignant',
 }
 
+CUSTOMER_ACTIVE = {
+    # In AS400, 1 means customer blocked => so inactive.
+    1: False,
+    0: True,
+}
+
 PARTNER_TITLE = {
      11: 'base.res_partner_title_madam',
      10: 'base.res_partner_title_mister',
@@ -164,6 +170,13 @@ CLIENT_PROMOTION_PRICELIST = {
      213, 214, 301, 302, 303, 304, 308, 310, 311, 312, 314, 315, 316, 317,
      318, 319, 320, 321, 322, 323, 401, 402, 403, 404, 405, 406, 407, 410,
      411, 412, 600)
+}
+
+PRODUCT_TRACKING = {
+    0: 'none',
+    1: 'lot',
+    2: 'lot',
+    4: 'lot',
 }
 
 COUNTRY = {
@@ -345,7 +358,7 @@ def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
     """
     phone, mobile = None, None
-    values = [v for v in values if v and v.strip()]
+    values = [v.strip() for v in values if v and v.strip()]
 
     for value in list(values):
         numbers = ''.join(re.findall('\d+', value))

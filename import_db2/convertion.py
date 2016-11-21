@@ -27,6 +27,7 @@ class ProductMapper(EntityMapper):
             mapping=mappings.UOM, default='product.product_uom_unit'
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
+        FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
@@ -113,6 +114,7 @@ class CustomerMapper(EntityMapper):
     XMLID_FIELD = 'ref'
 
     FIELDS_MAPPING = [
+        FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
         FieldMapper('ref', 'clinum'),
         FieldMapper('name', 'clinom'),
         FieldMapper('street', 'cliadr'),
@@ -149,7 +151,7 @@ class CustomerMapper(EntityMapper):
         ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
-        'customer_categories'
+        'customer_categories', 'pharmacist'
     ]
 
     def get_sql_joins(self):
@@ -199,6 +201,17 @@ class CustomerMapper(EntityMapper):
             if db2_entity[field_name] == 'Y'
         ]) or None
 
+    def convert_pharmacist(self, odoo_entity, db2_entity):
+        db2_id = db2_entity.get('cpcpha')
+
+        if db2_id:
+            self.importer.add_foreign_ref('FOURN', db2_id)
+            xml_id = self.get_xml_id('supplier', db2_id)
+        else:
+            xml_id = None
+
+        odoo_entity['pharmacist_id/id'] = xml_id
+
 
 class SupplierMapper(EntityMapper):
     DB2_NAME = 'FOURN'
@@ -218,6 +231,8 @@ class SupplierMapper(EntityMapper):
         FieldMapper('vat', 'foucee', check=checks.vat),
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
+        FieldMapper('alcyon_category_id/id',
+                    constant='scenario.partner_category_supplier'),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
