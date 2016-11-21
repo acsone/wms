@@ -12,6 +12,7 @@ Unreleased
 * ALCN-639: Import product tracking configuration.
 
 **Features and Improvements**
+* ALCN-635: Remove domain from pharmacist field on customer.
 
 **Bugfixes**
 
