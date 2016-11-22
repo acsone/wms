@@ -30,10 +30,12 @@
     - oca 9.0
     # port account_chart_update
     - oca refs/pull/420/head
+    # port account_invoice_tax_required
+    - oca refs/pull/404/head
   target: *default_target
-./external-src/l10n_belgium:
+./external-src/l10n-belgium:
   remotes:
-    oca: git@github.com:OCA/account-financial-tools.git
+    oca: git@github.com:OCA/l10n-belgium.git
   merges:
     - oca 9.0
     # port 9.0-l10n_be_ecotax
