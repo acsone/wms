@@ -41,7 +41,6 @@ def create_locations(ctx):
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': loc_stock.id,
-            'subcode': 'PICK',
         })
 
     sub_locations = [
@@ -55,7 +54,6 @@ def create_locations(ctx):
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': location_id,
-            'subcode': 'PICK',
         })
 
 
@@ -120,6 +118,7 @@ def create_picking_types(ctx):
          'default_location_src_id': location_mat.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
+         'subcode': 'PICK',
          },
         {'xmlid': '__init.stock_picking_type_ali',
          'name': 'Pick Aliments',
@@ -128,6 +127,7 @@ def create_picking_types(ctx):
          'default_location_src_id': location_ali.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
+         'subcode': 'PICK',
          },
         {'xmlid': '__init.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
@@ -137,6 +137,7 @@ def create_picking_types(ctx):
          'default_location_src_id': location_stock.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
+         'subcode': 'PICK',
          },
         {'xmlid': '__init.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -145,6 +146,7 @@ def create_picking_types(ctx):
          'default_location_src_id': location_froid.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
+         'subcode': 'PICK',
          },
         {'xmlid': '__init.stock_picking_type_rangement',
          'name': 'Rangement Medicaments',
