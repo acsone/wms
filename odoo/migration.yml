@@ -49,7 +49,9 @@ migration:
           - l10n_be_intrastat
           - warning
           #### external-src
+          - mail_environment
           - sale_exception
+          - server_environment
           #### local-src
           - delivery_rounds
           - delivery_rounds_assign
