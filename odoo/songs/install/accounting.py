@@ -198,7 +198,7 @@ def setup_sequences(ctx):
     })
 
     refund_seq = create_or_update(
-        ctx, 'ir.sequence','scenario.customer_invoice_refund_seq', {
+        ctx, 'ir.sequence', 'scenario.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
             'prefix': 'NCV/17/',
             'padding': 5,

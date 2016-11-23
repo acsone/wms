@@ -64,6 +64,7 @@ migration:
           - pricelist_discount
           - sale_product_additional
           - specific_base
+          - specific_account
           - specific_sale
           - specific_partner
           - specific_product
