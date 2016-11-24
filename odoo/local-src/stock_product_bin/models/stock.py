@@ -28,11 +28,6 @@ class StockLocation(models.Model):
     def get_putaway_strategy(self, cr, uid, location, product, context=None):
         dest_location_id = super(StockLocation, self).get_putaway_strategy(
             cr, uid, location, product, context=None) or location.id
-        # dest_location_id = (
-        #     location.putaway_strategy_id
-        #     and self.env['product.putaway'].putaway_apply(
-        #         loc.putaway_strategy_id, product)
-        #     or location.id)
         bin_obj = self.pool['product.stock.bin']
         bin_ids = bin_obj.search(cr, uid, [
             ('product_id', '=', product.product_tmpl_id.id),
