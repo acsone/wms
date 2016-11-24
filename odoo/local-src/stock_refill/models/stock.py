@@ -45,6 +45,7 @@ class ReportStockQuantBylocation(models.Model):
         'Refill Priority', readonly=True)
 
 
+# WIP for next PR
 # class ReportStockQuantBylocationReserve(models.Model):
 #     _inherit = 'report.stock.quant.bylocation'
 #     _name = 'report.stock.quant.bylocation.reserve'

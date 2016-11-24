@@ -29,14 +29,14 @@ class SaleOrderLine(models.Model):
     def _action_procurement_create(self):
         res = super(SaleOrderLine, self)._action_procurement_create()
         for picking in self.mapped('order_id.picking_ids').filtered(
-            lambda x: x.picking_type_subcode == 'PICK'):
+                lambda x: x.picking_type_subcode == 'PICK'):
             if picking.delivery_round_id:
                 continue
             delivery_round = self.env['round.instance'].find(
                 picking.partner_id)
             if delivery_round:
                 # a delivery round has been found, we reserve for this new move
-                if picking.state=='confirmed' or (
+                if picking.state == 'confirmed' or (
                         picking.state in ['partially_available', 'waiting'] and
                         not picking.printed):
                     picking.do_unreserve()
