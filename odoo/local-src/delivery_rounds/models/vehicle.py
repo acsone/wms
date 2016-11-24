@@ -24,6 +24,7 @@ from openerp import fields, models
 
 class RoundVehicle(models.Model):
     _name = "round.vehicle"
+    _order = "time"
 
     name = fields.Char('Name')
     zone_ids = fields.Many2many(

@@ -115,3 +115,23 @@ class StockPickingType(models.Model):
             res['context'] = res['context'].replace(
                 ',', ", 'search_default_delivery_round_state': 'open', ", 1)
         return res
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    @api.multi
+    def write(self, vals):
+        res = super(StockMove, self).write(vals)
+        if vals.get('picking_id'):
+            # when a picking is assigned to a move, we have to ensure the whole
+            # group (all dest moves) has the same delivery round
+            # Check delivery round on orig moves as picking assignment is
+            # performed from pick to ship
+            orig_dr = self.move_orig_ids.mapped('picking_id.delivery_round_id')
+            if orig_dr:
+                picking = self.env['stock.picking'].browse(
+                    vals.get('picking_id'))
+                if picking.delivery_round_id != orig_dr:
+                    picking.delivery_round_id = orig_dr.id
+        return res

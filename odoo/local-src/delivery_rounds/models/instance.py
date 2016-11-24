@@ -19,12 +19,24 @@
 #
 ##############################################################################
 
+import math
+
 from openerp import api, fields, models
+
+
+def float2time(value):
+    hour = math.floor(value)
+    minute = round((value % 1) * 60)
+    if (minute == 60):
+        minute = 0
+        hour = hour + 1
+    return '%d:%02d' % (hour, minute)
 
 
 class RoundInstance(models.Model):
     _name = 'round.instance'
     _order = 'date desc, time asc'
+    _rec_name = 'complete_name'
 
     name = fields.Char(
         'Name',
@@ -71,14 +83,16 @@ class RoundInstance(models.Model):
         # readonly=True,
         )
 
+    complete_name = fields.Char(
+        'Display name', readonly=True,
+        compute='_get_complete_name', store=True)
+
     @api.multi
     @api.depends('vehicle_id', 'date', 'time')
-    def name_get(self):
-        res = []
+    def _get_complete_name(self):
         for rec in self:
-            res.append((rec.id, '%s %s - %s' % (
-                rec.date, rec.time, rec.vehicle_id.display_name)))
-        return res
+            rec.complete_name = '%s %s - %s' % (
+                rec.date, float2time(rec.time), rec.vehicle_id.display_name)
 
     @api.model
     def create(self, vals):
@@ -117,7 +131,7 @@ class RoundInstance(models.Model):
         pickings.write({'delivery_round_id': self.id})
 
     def find(self, partner_id):
-        """ Find a delivery_round for this partner otherwise create one """
+        """ Find a delivery_round for this partner """
         zone_ids = partner_id.round_zone_ids.mapped('zone_id.id')
         instance = self.search([
             ('state', '=', 'draft'),

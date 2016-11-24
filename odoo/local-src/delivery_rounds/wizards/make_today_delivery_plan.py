@@ -20,7 +20,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
 
 
 class MakeTodayDeliveryPlan(models.TransientModel):
@@ -29,26 +30,36 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     vehicle_ids = fields.Many2many(
         'round.vehicle', string='Vehicles',
         )
+    assign_moves = fields.Boolean(
+        'Reserve stock', default=True)
 
     @api.one
     def confirm(self):
-        if self.vehicle_ids:
-            vehicles = self.vehicle_ids
-            today = fields.Date.context_today(self)
-            # deduct vehicles for which instance already exist
-            instances = self.env['round.instance'].search([
-                ('date', '=', today)])
-            vehicles -= instances.mapped('vehicle_id')
-            # create instance for each vehicle
-            for vehicle in vehicles:
-                ri = self.env['round.instance'].create({
-                    'vehicle_id': vehicle.id,
-                    'date': today,
-                    'time': vehicle.time,
-                    })
-                for zone in vehicle.zone_ids:
-                    rzi = self.env['round.zone.import'].create({
-                        'zone_id': zone.id})
-                    rzi.with_context(active_ids=[ri.id]).confirm()
+        if not self.vehicle_ids:
+            raise Warning(_('Please select the vehicles'))
+        if self.assign_moves:
+            user = self.env['res.users'].browse(self._uid)
+            self.pool['procurement.order'].run_scheduler(
+                self._cr, self._uid,
+                company_id=user.company_id.id,
+                context=self._context)
+
+        vehicles = self.vehicle_ids
+        today = fields.Date.context_today(self)
+        # deduct vehicles for which instance already exist
+        instances = self.env['round.instance'].search([
+            ('date', '=', today)])
+        vehicles -= instances.mapped('vehicle_id')
+        # create instance for each vehicle
+        for vehicle in vehicles:
+            ri = self.env['round.instance'].create({
+                'vehicle_id': vehicle.id,
+                'date': today,
+                'time': vehicle.time,
+                })
+            for zone in vehicle.zone_ids:
+                rzi = self.env['round.zone.import'].create({
+                    'zone_id': zone.id})
+                rzi.with_context(active_ids=[ri.id]).confirm()
         return dict(self.env.ref(
             'delivery_rounds.action_round_instance').read()[0])

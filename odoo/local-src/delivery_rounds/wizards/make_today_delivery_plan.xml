@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Make Today's Delivery Plan">
                     <group>
+                        <field name="assign_moves"/>
                         <field name="vehicle_ids"/>
                     </group>
                     <footer>
