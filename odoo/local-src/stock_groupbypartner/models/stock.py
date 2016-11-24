@@ -36,9 +36,9 @@ class StockMove(models.Model):
     @api.cr_uid_ids_context
     def _picking_assign(self, cr, uid, move_ids, context=None):
         """Try to assign the moves to an existing picking
-        that has not been reserved yet and that do not has the same
+        that has not been reserved yet and that does not have the same
         procurement group but the same partner, locations and picking type
-        (moves should already have them identical) Otherwise, create a new
+        (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
         # FIXME TODO: does not work for MTO products.
