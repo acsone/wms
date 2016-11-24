@@ -19,8 +19,7 @@
 #
 ##############################################################################
 
-from openerp import _, models, fields, api
-from openerp.exceptions import Warning
+from openerp import models, fields, api
 
 
 class GRN_Type(models.Model):
@@ -52,10 +51,6 @@ class GRN(models.Model):
     from_info = fields.Char(string='From')
     ref = fields.Char(string='Reference')
 
-    # origin = fields.Char(string='Origin')
-    # order_ref = fields.Char(string='Order')
-    # to_info = fields.Char(string='To')
-
     date = fields.Datetime(
         'Date',
         required=True,
@@ -83,42 +78,6 @@ class GRN(models.Model):
             self.pool.get('res.company')._company_default_get(
                 cr, uid, 'stock.grn', context=c),
     }
-
-    # @api.multi
-    # def name_get(self):
-    #     """ Read the stored complete_name field """
-    #     res = []
-    #     for record in self:
-    #         name = record.name
-    #         if record.ref:
-    #             name = '[%s] %s' % (record.ref, name)
-    #         if record.origin:
-    #             name = '%s (%s)' % (name, record.origin)
-    #         res.append((record.id, name))
-    #     return res
-
-    # @api.model
-    # def name_search(self, name='', args=None, operator='ilike', limit=100):
-    #     """ Perform name search on name only """
-    #     name = name.split(']')[-1]
-    #     name = name.split('(')[-1]
-    #     name = name.strip()
-    #     return super(GRN, self).name_search(
-    #         name, args=args, operator=operator, limit=limit)
-
-    @api.multi
-    def print_label(self):
-        document = self.env['report']._get_raw(
-            self._ids, 'stock_grn.report_grn_label')
-        report = self.env.ref('stock_grn.report_grn_label')
-        behaviour = report.behaviour()[report.id]
-        printer = behaviour['printer']
-        if not printer:
-            raise Warning(_('No printer assigned'))
-        try:
-            printer.print_document(report, document, 'text')
-        except:
-            raise Warning(_('Printer unavailable'))
 
     @api.model
     def create(self, vals):
