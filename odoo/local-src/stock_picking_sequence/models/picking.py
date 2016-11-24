@@ -27,7 +27,8 @@ class StockPicking(models.Model):
     _order = "priority desc, sequence desc, date asc, id desc"
 
     sequence = fields.Integer(
-        'Seq.', default=-1)
+        'Seq.', default=-1,
+        states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 
     @api.multi
     def write(self, vals):
