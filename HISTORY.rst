@@ -13,6 +13,7 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-635: Remove domain from pharmacist field on customer.
+* ALCN-645: Display 'Accounting Entries' menu for Accountants
 
 **Bugfixes**
 * ALCN-646: Fix install data of account journal

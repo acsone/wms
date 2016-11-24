@@ -6,7 +6,10 @@
 Specific Account
 ================
 
-* Alcyon invoice report. 
+This module adds Alcyon specific fields and logic for accounting.
+
+* Alcyon invoice report.
+* Display 'Accounting Entries' menu for Accountants
 
 Credits
 =======
@@ -15,3 +18,4 @@ Contributors
 ------------
 
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>
+* Julien Coux <julien.coux@camptocamp.com>
