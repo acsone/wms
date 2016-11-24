@@ -24,4 +24,5 @@ from openerp import models
 
 # Change order to ensure that first sold, is first served
 class ProcurementOrder(models.Model):
+    _inherit = 'procurement.order'
     _order = 'priority desc, id asc'
