@@ -22,15 +22,23 @@
 from openerp import fields, models, api
 
 
+class StockPackOperation(models.Model):
+    _inherit = "stock.pack.operation"
+
+    qty_backorder = fields.Integer(
+        'Nbr Backorder',
+        readonly=True)
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     qty_outofstock = fields.Integer(
-        'Qty Out of Stock',
+        'Nbr Out of Stock',
         compute='_get_qty_backorder')
 
     qty_backorder = fields.Integer(
-        'Qty Backorder',
+        'Nbr Backorder',
         compute='_get_qty_backorder')
 
     @api.multi
@@ -58,6 +66,8 @@ class StockPicking(models.Model):
         for stock_id, pickings in receptions.iteritems():
             packs = pickings.mapped('pack_operation_product_ids')
             all_products = packs.mapped('product_id')
+            if not all_products:
+                continue
 
             # We count the number of moves from stock in "Waiting Availability"
             # for each product
@@ -82,12 +92,19 @@ class StockPicking(models.Model):
             backorders = dict(self._cr.fetchall())
 
             for record in pickings:
+                for packop in record.pack_operation_product_ids:
+                    qty_backorder = backorders.get(packop.product_id.id, 0)
+                    if packop.qty_backorder != qty_backorder:
+                        packop.write({
+                            'qty_backorder': backorders.get(
+                                packop.product_id.id, 0),
+                        })
                 products = record.mapped('pack_operation_product_ids') \
                     .mapped('product_id')
                 record.qty_backorder = sum([backorders.get(prod_id, 0)
-                                            for prod_id in products.ids])
+                                           for prod_id in products.ids])
                 record.qty_outofstock = len(products.filtered(
-                    lambda r: r.qty_available <= 0))
+                        lambda r: r.qty_available <= 0))
 
     def _calc_priority(self):
         return self.qty_backorder * 1000 + self.qty_outofstock
@@ -100,6 +117,11 @@ class StockPicking(models.Model):
             else:
                 vals['sequence'] = self._calc_priority()
         return super(StockPicking, self).write(vals)
+
+    @api.multi
+    def button_priority_recompute(self):
+        super(StockPicking, self).button_priority_recompute()
+        self._cron_priority_recompute()
 
     @api.model
     def _cron_priority_recompute(self):

@@ -19,15 +19,24 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
-# from openerp import _, api, exceptions, fields, models
+import math
 
-# from datetime import datetime
+from openerp import api, fields, models
+
+
+def float2time(value):
+    hour = math.floor(value)
+    minute = round((value % 1) * 60)
+    if (minute == 60):
+        minute = 0
+        hour = hour + 1
+    return '%d:%02d' % (hour, minute)
 
 
 class RoundInstance(models.Model):
     _name = 'round.instance'
     _order = 'date desc, time asc'
+    _rec_name = 'complete_name'
 
     name = fields.Char(
         'Name',
@@ -74,14 +83,16 @@ class RoundInstance(models.Model):
         # readonly=True,
         )
 
+    complete_name = fields.Char(
+        'Display name', readonly=True,
+        compute='_get_complete_name', store=True)
+
     @api.multi
     @api.depends('vehicle_id', 'date', 'time')
-    def name_get(self):
-        res = []
+    def _get_complete_name(self):
         for rec in self:
-            res.append((rec.id, '%s %s - %s' % (
-                rec.date, rec.time, rec.vehicle_id.display_name)))
-        return res
+            rec.complete_name = '%s %s - %s' % (
+                rec.date, float2time(rec.time), rec.vehicle_id.display_name)
 
     @api.model
     def create(self, vals):
@@ -120,7 +131,7 @@ class RoundInstance(models.Model):
         pickings.write({'delivery_round_id': self.id})
 
     def find(self, partner_id):
-        """ Find a delivery_round for this partner otherwise create one """
+        """ Find a delivery_round for this partner """
         zone_ids = partner_id.round_zone_ids.mapped('zone_id.id')
         instance = self.search([
             ('state', '=', 'draft'),
@@ -195,112 +206,3 @@ class RoundInstance(models.Model):
         for shipping in self.shipping_ids:
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
-
-
-class StockPicking(models.Model):
-    _inherit = 'stock.picking'
-    _order = "sequence desc, priority desc, date asc, id desc"
-
-    sequence = fields.Integer(
-        'Seq.', default=-1)
-    delivery_round_id = fields.Many2one(
-        'round.instance', 'Delivery Round')
-    delivery_round_state = fields.Selection(
-        related='delivery_round_id.state',
-        store=True,
-        string="Delivery Round State")
-
-    def _get_all_from_pickings(self):
-        res = set()
-
-        def _rec_add(moves):
-            res.update([move.id for move in moves])
-            for move in moves:
-                _rec_add(move.move_orig_ids)
-
-        for picking in self:
-            moves = picking.move_lines
-            _rec_add(moves)
-        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
-
-    def _get_all_dest_pickings(self):
-        res = set()
-
-        def _rec_add(moves):
-            res.update([move.id for move in moves])
-            for move in moves:
-                if move.move_dest_id:
-                    _rec_add([move.move_dest_id])
-
-        for picking in self:
-            moves = picking.move_lines
-            _rec_add(moves)
-        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
-
-    @api.multi
-    def write(self, vals):
-        if ('delivery_round_id' in vals and
-                not self._context.get('noround_write')):
-            # propagate to delivery when a picking is (un)assigned to a
-            # delivery round
-            shippings = self._get_all_dest_pickings().filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            # ensure all related pickings are assigned to the same delivery
-            # round
-            pickings = shippings._get_all_from_pickings()
-            # TODO: we should ensure a picking is not already done for another
-            #       delivery round
-            pickings = pickings
-            pickings = pickings.filtered(
-                lambda r: r.state in (
-                    'waiting',
-                    'confirmed',
-                    'partially_available',
-                    'assigned') and
-                r.delivery_round_id.id != vals['delivery_round_id'])
-            pickings.with_context(noround_write=True).write(
-                {'delivery_round_id': vals['delivery_round_id']})
-            del vals['delivery_round_id']
-        if 'sequence' in vals:
-            # when we set a sequence on a delivery, we copy that value on the
-            # pickings
-            shippings = self.filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            rounds = shippings.mapped('delivery_round_id')
-            for ri in rounds:
-                pickings = ri.picking_ids.filtered(
-                    lambda r: r.partner_id.id in shippings.mapped(
-                        'partner_id.id'))
-                pickings.write({'sequence': vals['sequence']})
-        if not vals:
-            return True
-        return super(StockPicking, self).write(vals)
-
-    @api.model
-    def _group_delivery_round(self, ids, domain, **kwargs):
-        vehicle = self.env['round.instance'].search(
-            [('state', 'in', ('draft', ))]).name_get()
-        return vehicle, None
-
-    _group_by_full = {
-        'delivery_round_id': _group_delivery_round,
-    }
-
-    @api.multi
-    def button_delivery_round(self):
-        return dict(self.env.ref(
-            'delivery_rounds.action_picking_assign_delivery_round').read()[0])
-
-
-class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
-
-    @api.multi
-    def get_action_picking_tree_ready(self):
-        """ Add filter for 'To Do' picking from dashboard to activate a filter
-        to display only pickings linked to open delivery round """
-        res = super(StockPickingType, self).get_action_picking_tree_ready()
-        if self.subcode == 'PICK':
-            res['context'] = res['context'].replace(
-                ',', ", 'search_default_delivery_round_state': 'open', ", 1)
-        return res

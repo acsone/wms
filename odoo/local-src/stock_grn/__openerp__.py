@@ -27,18 +27,14 @@
  'complexity': 'normal',
  'depends': [
      'stock',
-     # 'qansee_printing',
      ],
  'website': 'http://www.bcim.be/',
  'data': [
-     # 'views/grn_type.xml',
      'views/grn.xml',
      'views/stock_picking.xml',
-     # 'views/stock_move.xml',
      'stock_sequence.xml',
      'security/ir.model.access.csv',
      'security/ir_rule.xml',
-     # 'report/grn_label.xml',
  ],
  'tests': [],
  'installable': True,

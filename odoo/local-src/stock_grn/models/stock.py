@@ -28,22 +28,19 @@ class StockPicking(models.Model):
         comodel_name='stock.grn',
         string='Goods Received Note',
         copy=False,
-        readonly=True,  # states={'done': [('readonly', True)]},
+        readonly=True,
     )
 
-#     @api.multi
-#     def do_transfer(self):
-#         if self.picking_type_code == 'incoming' and not self.grn_id:
-#             raise Warning(_('You must attach a Goods Received Note'))
-#         return super(StockPicking, self).do_transfer()
 
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
 
-# class StockMove(models.Model):
-#     _inherit = 'stock.move'
-#
-#     grn_id = fields.Many2one(
-#         comodel_name='stock.grn',
-#         string='Goods Received Note',
-#         store=True,
-#         related='picking_id.grn_id'
-#     )
+    def _get_action(self, cr, uid, ids, action, context=None):
+        result = super(StockPickingType, self)._get_action(
+            cr, uid, ids, action, context=context)
+        if ids:
+            picking_type = self.browse(cr, uid, ids[0], context=context)
+            if picking_type.code == 'incoming':
+                result['context'] = result['context'].replace(
+                    '{', "{'search_default_grn':1,", 1)
+        return result

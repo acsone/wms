@@ -43,11 +43,13 @@ class StockLocation(models.Model):
             return dest_location_id
         # Search on parent location (case we are in Input under Stock and we
         # want to apply stock bin mapping)
-        bin_ids = bin_obj.search(cr, uid, [
-            ('product_id', '=', product.product_tmpl_id.id),
-            ('location_id', '=', location.location_id.id)],
-            limit=1)
-        if bin_ids:
-            return bin_obj.read(cr, uid, bin_ids[0], ['bin_location_id'],
-                                load='_classic_write')['bin_location_id']
+        while location.location_id:
+            location = location.location_id
+            bin_ids = bin_obj.search(cr, uid, [
+                ('product_id', '=', product.product_tmpl_id.id),
+                ('location_id', '=', location.id)],
+                limit=1)
+            if bin_ids:
+                return bin_obj.read(cr, uid, bin_ids[0], ['bin_location_id'],
+                                    load='_classic_write')['bin_location_id']
         return dest_location_id

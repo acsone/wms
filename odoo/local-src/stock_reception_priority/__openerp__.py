@@ -28,6 +28,7 @@
     'depends': [
         'stock',
         'stock_grn',
+        'stock_picking_sequence',
         ],
     'data': [
         'views/stock.xml',

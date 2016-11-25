@@ -10,7 +10,7 @@
                     <field name="carrier_ref"/>
                     <group  expand='0' string='Group by...'>
                        <filter string="Carrier" domain="[]" context="{'group_by': 'carrier_id'}"/>
-                   </group>
+                    </group>
                 </search>
             </field>
         </record>
@@ -36,17 +36,15 @@
             <field name="arch" type="xml">
                 <form string="GRN">
                     <header>
-                        <button name="print_label" string="Print" class="oe_highlight" type="object"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
-<!--                             <label for="name" class="oe_edit_only"/> -->
                             <h1><field name="name" readonly="1" class="oe_inline"/></h1>
                         </div>
                         <group>
                             <group>
                                <field name="date"/>
-                               <field name="carrier_id" context="{'default_customer': False}"/>
+                               <field name="carrier_id" context="{'default_customer': False}" options="{'no_create': True}"/>
                                <field name="carrier_ref"/>
                                <field name="company_id" groups="base.group_multi_company"/>
                                <field name="qty_pallet"/>

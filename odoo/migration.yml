@@ -57,17 +57,27 @@ migration:
           - l10n_be_apb_tax
           - l10n_be_eco_tax
           #### local-src
+          - claim_from_reception
           - delivery_rounds
           - delivery_rounds_assign
-          - stock_picking_subcode
-          - product_price_category
           - pricelist_discount
+          - procurement_sale
+          - product_price_category
           - sale_product_additional
           - specific_base
           - specific_account
           - specific_sale
           - specific_partner
           - specific_product
-          - stock_putaway_defaultfixedlocation
-          - stock_product_bin
           - specific_translations
+          - stock_barcode_fix
+          - stock_grn
+          - stock_groupbypartner
+          - stock_picking_fillwithstock
+          - stock_picking_sequence
+          - stock_picking_subcode
+          - stock_product_bin
+          - stock_putaway_defaultfixedlocation
+          - stock_quant_bylocation
+          - stock_refill
+          - web_autorefresh

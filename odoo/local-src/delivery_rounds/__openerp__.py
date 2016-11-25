@@ -29,6 +29,7 @@
         'stock',
         'delivery',
         'stock_picking_subcode',
+        'stock_picking_sequence',
         ],
     'data': [
         'views/menu.xml',
