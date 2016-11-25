@@ -15,6 +15,7 @@ Unreleased
 * ALCN-635: Remove domain from pharmacist field on customer.
 
 **Bugfixes**
+* ALCN-646: Fix install data of account journal
 
 **Build**
 

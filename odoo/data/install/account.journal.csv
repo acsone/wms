@@ -1,7 +1,7 @@
-bank_acc_number,currency_id/id,inbound_payment_method_ids/id,name,display_on_footer,show_on_dashboard,type,bank_id/id
-BE20 1960 2447 3256,base.EUR,account.account_payment_method_manual_in,CBC Banque - CC,1,1,Bank,scenario.bank_cbc
-BE33 3400 3074 9846,base.EUR,account.account_payment_method_manual_in,ING Belgium - CC,1,1,Bank,scenario.bank_ing
-BE68 5523 2846 0034,base.EUR,account.account_payment_method_manual_in,BELFIUS - CC,1,1,Bank,scenario.bank_belfius
-BE95 0015 9777 0458,base.EUR,account.account_payment_method_manual_in,BNP Paribas - CC,1,1,Bank,scenario.bank_bnp
-BE67 3635 5755 1087,base.EUR,account.account_payment_method_manual_in,ING Belgium - CE,1,1,Bank,scenario.bank_ing
-BE40 0910 1943 2563,base.EUR,account.account_payment_method_manual_in,BELFIUS - CE,1,1,Bank,scenario.bank_belfius
+bank_acc_number,inbound_payment_method_ids/id,name,display_on_footer,show_on_dashboard,type,bank_id/id
+BE20 1960 2447 3256,account.account_payment_method_manual_in,CBC Banque - CC,1,1,Bank,scenario.bank_cbc
+BE33 3400 3074 9846,account.account_payment_method_manual_in,ING Belgium - CC,1,1,Bank,scenario.bank_ing
+BE68 5523 2846 0034,account.account_payment_method_manual_in,BELFIUS - CC,1,1,Bank,scenario.bank_belfius
+BE95 0015 9777 0458,account.account_payment_method_manual_in,BNP Paribas - CC,1,1,Bank,scenario.bank_bnp
+BE67 3635 5755 1087,account.account_payment_method_manual_in,ING Belgium - CE,1,1,Bank,scenario.bank_ing
+BE40 0910 1943 2563,account.account_payment_method_manual_in,BELFIUS - CE,1,1,Bank,scenario.bank_belfius
