@@ -7,6 +7,20 @@ Unreleased
 ++++++++++
 
 **Data Migration**
+
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.5.0 (2016-11-25)
+++++++++++++++++++
+
+**Data Migration**
 * ALCN-637: Import pharmacist id in customer.
 * ALCN-638: Customer active flag.
 * ALCN-639: Import product tracking configuration.
@@ -14,13 +28,18 @@ Unreleased
 **Features and Improvements**
 * ALCN-635: Remove domain from pharmacist field on customer.
 * ALCN-645: Display 'Accounting Entries' menu for Accountants
+* ALCN-625: Configure mailtrap for test/integration server.
+* Activation of l10n_be
+* Reception workflow.
 
 **Bugfixes**
 * ALCN-646: Fix install data of account journal
 
 **Build**
+* Migrate on Odoo cloud platform.
 
 **Documentation**
+* Fix DB2 import Readme.
 
 
 9.4.1 (2016-11-10)

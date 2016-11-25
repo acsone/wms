@@ -1,0 +1,4 @@
+cd /opt/odoo/local-src
+pip install coverage
+coverage run --source . /opt/odoo/src/odoo.py -d testdb -u pricelist_discount --test-enable --stop-after-init
+coverage xml
