@@ -1,0 +1,301 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* specific_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-22 16:29+0000\n"
+"PO-Revision-Date: 2016-11-22 16:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "%<br/>Alcyon<br/>discount"
+msgstr "%<br/>Remise<br/>supp."
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "%<br/>Base<br/>discount"
+msgstr "%<br/>Remise<br/>base"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "-\n"
+"                            <span>Fax:</span>"
+msgstr "-\n"
+"                            <span>Fax:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<br/>\n"
+"                                <span>Fax:</span>"
+msgstr "<br/>\n"
+"                                <span>Fax:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<br/>\n"
+"                            <span style=\"display: inline-block; vertical-align: top;\">Commands:\n"
+"                                <br/>\n"
+"                            </span>"
+msgstr "<br/>\n"
+"                            <span style=\"display: inline-block; vertical-align: top;\">Commandes:\n"
+"                                <br/>\n"
+"                            </span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<br/>\n"
+"                            <span>Email:</span>"
+msgstr "<br/>\n"
+"                            <span>Email:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<br/>\n"
+"                            <span>Phone:</span>"
+msgstr "<br/>\n"
+"                            <span>Téléphone:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<br/>\n"
+"                            <span>RPM Liège division Huy - TVA</span>"
+msgstr "<br/>\n"
+"                            <span>RPM Liège division Huy - TVA</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<br/>\n"
+"                            BIC:"
+msgstr "<br/>\n"
+"                            BIC:"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Alcyon<br/>discount</span>"
+msgstr "<span>Remise<br/>supp.</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Base<br/>discount</span>"
+msgstr "<span>Remise<br/>de base</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Commande</span>"
+msgstr "<span>Commande</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<span>Customer</span>"
+msgstr "<span>Client</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<span>Date</span>"
+msgstr "<span>Date</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Due date</span>"
+msgstr "<span>Echéance</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Gross<br/>amount</span>"
+msgstr "<span>Total<br/>Brut</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<span>N° Document</span>"
+msgstr "<span>N° Document</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<span>Phone:</span>"
+msgstr "<span>Téléphone:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>SUMMARY</span>\n"
+"                            <br/>\n"
+"                            <span>Total discount:</span>"
+msgstr "<span>RECAPITULATIF</span>\n"
+"                            <br/>\n"
+"                            <span>Total remise:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Total<br/>APB</span>"
+msgstr "<span>Total<br/>APB</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Total<br/>amount</span>"
+msgstr "<span>Total<br/>à payer</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Total<br/>tax</span>"
+msgstr "<span>Total<br/>TVA</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>Untaxed<br/>amount</span>"
+msgstr "<span>Total<br/>Net</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "<span>Your VAT number:</span>"
+msgstr "<span>Votre N° de TVA:</span>"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "<span>du</span>"
+msgstr "<span>du</span>"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_amount_alcyon_discount
+msgid "Amount alcyon discount"
+msgstr "Amount alcyon discount"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_amount_discount_total
+msgid "Amount discount total"
+msgstr "Amount discount total"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_amount_supplier_discount
+msgid "Amount supplier discount"
+msgstr "Amount supplier discount"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_amount_without_discount
+msgid "Amount without discount"
+msgstr "Amount without discount"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "BNP PARIBAS FORTIS :"
+msgstr "BNP PARIBAS FORTIS :"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Base taxable"
+msgstr "Base taxable"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "CBC:"
+msgstr "CBC:"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "Cancelled Invoice"
+msgstr "Facture annulée"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "DEXIA:"
+msgstr "DEXIA:"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_sale_order_date_order_short
+msgid "Date order short"
+msgstr "Date order short"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "Draft Invoice"
+msgstr "Facture en brouillon"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "ING:"
+msgstr "ING:"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_account_invoice
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Name"
+msgstr "Nom"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice
+msgid "PRO-FORMA"
+msgstr "PRO-FORMA"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.page_number_footer
+msgid "Page:"
+msgstr "Page :"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Product<br/>reference"
+msgstr "Référence<br/>Article"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Rate"
+msgstr "Taux"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Reference for your payment"
+msgstr "Référence à rappeler lors de votre paiement"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Subtotal<br/>price"
+msgstr "Valeur<br/>nette"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "TVA"
+msgstr "TVA"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Totals"
+msgstr "Totaux"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Unit<br/>price"
+msgstr "Prix<br/>unitaire<br/>brut"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "VAT Amount"
+msgstr "Montant TVA"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_report_account_report_invoice
+msgid "report.account.report_invoice"
+msgstr "report.account.report_invoice"
+
