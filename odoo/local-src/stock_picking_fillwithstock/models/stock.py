@@ -62,17 +62,3 @@ class StockPicking(models.Model):
             move_obj.create(data)
         self.action_confirm()
         self.action_assign()
-
-
-# class StockPackOperation(models.Model):
-#     _inherit = "stock.pack.operation"
-#
-#     def _get_remaining_prod_quantities(self, cr, uid, operation,
-#                                        context=None):
-#         # manage extra move creation. If operation is dummmy (and not related
-#         # a move), do not create move at picking validation
-#         if operation.location_id == operation.location_dest_id:
-#             return {}
-#         return super(StockPackOperation, self).\
-#             _get_remaining_prod_quantities(
-#               cr, uid, operation, context=context)

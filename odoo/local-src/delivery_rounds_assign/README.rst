@@ -2,11 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============
-Specific Sale
-=============
-
-This module adds Alcyon specific fields and logic for sale order.
+======================
+Delivert rounds assign
+======================
 
 Credits
 =======
@@ -14,4 +12,4 @@ Credits
 Contributors
 ------------
 
-* Cyril Gaudin <cyril.gaudin@camptocamp.com>
+* Jacques-Etienne Baudoux <je@bcim.be>

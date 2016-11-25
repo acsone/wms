@@ -34,7 +34,6 @@ def create_locations(ctx):
         ('__init.stock_location_ali', u'Aliments'),
         ('__init.stock_location_medoc', u'Médicaments'),
         ('__init.stock_location_froid', u'Froid'),
-        # ('__init.stock_location_congel', u'Congel -12'),
     ]
 
     for xmlid, name in locations:
@@ -135,7 +134,6 @@ def create_picking_types(ctx):
          'name': 'Pick Médicaments',
          'code': 'internal',
          'sequence_id': picking_sequence.id,
-         # 'default_location_src_id': location_medoc.id,
          'default_location_src_id': location_stock.id,
          'default_location_dest_id': location_out.id,
          'use_create_lots': False,
@@ -201,7 +199,6 @@ def create_procurement_rules(ctx):
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         # 'location_src_id': ref('__init.stock_location_medoc').id,
          'location_src_id': ref('stock.stock_location_stock').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__init.stock_picking_type_medoc').id,

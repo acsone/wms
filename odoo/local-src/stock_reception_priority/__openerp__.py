@@ -32,7 +32,6 @@
         ],
     'data': [
         'views/stock.xml',
-        # 'views/product.xml',
         'data.xml',
     ],
     'installable': True,
