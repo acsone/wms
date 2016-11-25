@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-623: Manage stock quants expiration
+
 **Bugfixes**
 
 **Build**
