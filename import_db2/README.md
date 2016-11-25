@@ -29,9 +29,32 @@ This file is available in Lastpass in Alcyon shared folder.
 ### Python client
 In python, you can use the pyodbc lib:
 
- ```bash
- pip install --user pyodbc
+```bash
+sudo apt-get install unixodbc-dev
+pip install --user pyodbc
+```
+
+If you get an error
  ```
+pyodbc.Error: ('01000', "[01000] [unixODBC][Driver Manager]Can't open lib '/opt/ibm/iSeriesAccess/lib64/libcwbodbc.so' : file not found (0) (SQLDriverConnect)")
+ ```
+You may need to check if the issue is `libcwbcore.so` and create a symlink:
+```bash
+$ ldd /opt/ibm/iSeriesAccess/lib64/libcwbodbc.so
+    linux-vdso.so.1 =>  (0x00007fffc00e9000)
+    libcwbcore.so => not found
+   	libodbcinst.so.1 => /usr/lib/x86_64-linux-gnu/libodbcinst.so.1 (0x00007f1a648f9000)
+    libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f1a646f4000)
+    libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f1a644d7000)
+   	libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f1a64155000)
+   	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f1a63e4b000)
+   	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f1a63c35000)
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f1a6386c000)
+    librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f1a63663000)
+    libltdl.so.7 => /usr/lib/x86_64-linux-gnu/libltdl.so.7 (0x00007f1a63459000)
+    /lib64/ld-linux-x86-64.so.2 (0x000055f97189d000)
+$ sudo ln -s /opt/ibm/iSeriesAccess/lib64/libcwbcore.so /usr/lib/libcwbcore.so
+```
 
 And, in a Python shell:
 
