@@ -48,6 +48,8 @@ migration:
           - l10n_be_invoice_bba
           - l10n_be_intrastat
           - warning
+          #camptocamp/cloud-platform
+          - cloud_platform
           #### external-src
           - mail_environment
           - sale_exception
