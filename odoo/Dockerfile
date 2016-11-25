@@ -9,14 +9,14 @@ MAINTAINER Camptocamp
          && apt-get clean \
          && rm -rf /var/lib/apt/lists/*
 
-# Install additional python packages if needed
-# COPY ./requirements.txt ./
-# RUN pip install -r requirements.txt
+COPY ./requirements.txt ./
+RUN pip install -r requirements.txt
 
 COPY ./importer.sh bin/
 
 ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/enterprise, \
+  /opt/odoo/external-src/odoo-cloud-platform, \
   /opt/odoo/external-src/sale-workflow, \
   /opt/odoo/external-src/server-tools, \
   /opt/odoo/external-src/stock-logistics-workflow, \

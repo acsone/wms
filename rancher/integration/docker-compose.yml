@@ -1,9 +1,10 @@
 odoo:
   image: camptocamp/alcyon_odoo:9.4.1
+  command: odoo --load=web,web_kanban,logging_json
   links:
-  - db:db
-  volumes:
-    - alcyon-integration-dataodoo:/data/odoo
+    - db:db
+  external_links:
+    - redis/redis:redis
   environment:
     - DB_USER=${DB_USER}
     - DB_PASSWORD=${DB_PASSWORD}
@@ -22,7 +23,25 @@ odoo:
     - LIMIT_REQUEST=${LIMIT_REQUEST}
     - LIMIT_TIME_CPU=${LIMIT_TIME_CPU}
     - LIMIT_TIME_REAL=${LIMIT_TIME_REAL}
+    - MARABUNTA_ALLOW_SERIE=False
     - MARABUNTA_MODE=${MARABUNTA_MODE}
+    - AWS_HOST=${AWS_HOST}
+    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - AWS_BUCKETNAME=${AWS_BUCKETNAME}
+    - ODOO_SESSION_REDIS=${ODOO_SESSION_REDIS}
+    - ODOO_SESSION_REDIS_HOST=${ODOO_SESSION_REDIS_HOST}
+    - ODOO_SESSION_REDIS_PREFIX=${ODOO_SESSION_REDIS_PREFIX}
+    - ODOO_CLOUD_PLATFORM_UNSAFE=${ODOO_CLOUD_PLATFORM_UNSAFE}
+    - ODOO_LOGGING_JSON=${ODOO_LOGGING_JSON}
+    - ODOO_STATSD=${ODOO_STATSD}
+    - STATSD_CUSTOMER=alcyon
+    - STATSD_ENVIRONMENT=${STATSD_ENVIRONMENT}
+    - STATSD_HOST=${STATSD_HOST}
+    - STATSD_PORT=${STATSD_PORT}
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.global: 'true'
 
 db:
   image: camptocamp/postgresql:pg9.5-latest
@@ -35,10 +54,13 @@ db:
     - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
   volumes:
     - alcyon-integration-datadb:/var/lib/postgresql
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
 
 nginx:
   image: camptocamp/odoo-nginx:9.0
-  ports:
-    - 80:80
   links:
     - odoo:odoo
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.global: 'true'
