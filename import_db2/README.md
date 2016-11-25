@@ -83,6 +83,11 @@ The 'Alcyon' value for DNS parameter is the section name in the odbc.ini configu
 
 For searching data in better conditions, you can use the shell.py script which contains helping methods (feel free to add others)
 
+Requirement:
+```bash
+pip install --user ipython
+```
+
 ```bash
 python import_db2/shell.py
 
