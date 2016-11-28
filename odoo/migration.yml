@@ -12,6 +12,7 @@ migration:
         pre:
           - anthem songs.install.pre::main
         post:
+          - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main

@@ -1,6 +1,6 @@
 odoo:
   image: camptocamp/alcyon_odoo:9.5.0
-  command: odoo --load=web,web_kanban,logging_json
+  command: odoo.py --load=web,web_kanban,session_redis,attachment_s3,logging_json
   links:
     - db:db
   external_links:

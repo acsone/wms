@@ -6,16 +6,8 @@ Release History
 Unreleased
 ++++++++++
 
-**Data Migration**
-
-**Features and Improvements**
-
-**Bugfixes**
-
 **Build**
-
-**Documentation**
-
+* Fix cloud platform installation
 
 9.5.0 (2016-11-25)
 ++++++++++++++++++
@@ -24,6 +16,7 @@ Unreleased
 * ALCN-637: Import pharmacist id in customer.
 * ALCN-638: Customer active flag.
 * ALCN-639: Import product tracking configuration.
+* ALCN-243: Invoice report (work in progress)
 
 **Features and Improvements**
 * ALCN-635: Remove domain from pharmacist field on customer.
