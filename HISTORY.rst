@@ -6,6 +6,20 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.5.1 (2016-11-28)
+++++++++++++++++++
+
 **Build**
 * Fix cloud platform installation
 
