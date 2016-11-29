@@ -56,21 +56,35 @@ class StockMove(models.Model):
             ('state', 'in', ['draft', 'confirmed', 'waiting',
                              'partially_available', 'assigned'])
         ], limit=1, context=context)
-        # check weight
-        total_weight = 0.0
-        pickings = self.pool['stock.picking'].browse(
-            cr, uid, picks, context=context)
-        if move.picking_type_id.groupbypartner_maxweight:
-            total_weight = move.product_id.weight * move.product_qty
-            for pmove in pickings.move_lines:
-                total_weight += pmove.product_id.weight * pmove.product_qty
-        if picks and \
-                total_weight <= move.picking_type_id.groupbypartner_maxweight:
-            pick = picks[0]
+        create = False
+        if picks:
+            # check weight
+            total_weight = 0.0
+            picking = self.pool['stock.picking'].browse(
+                cr, uid, picks[0], context=context)
+            if move.picking_type_id.groupbypartner_maxweight:
+                total_weight = move.product_id.weight * move.product_qty
+                for pmove in picking.move_lines:
+                    total_weight += pmove.product_id.weight * pmove.product_qty
+            if total_weight <= move.picking_type_id.groupbypartner_maxweight:
+                pick = picks[0]
+                # assign move to picking
+                res = self.write(cr, uid, move_ids, {'picking_id': pick},
+                                 context=context)
+                if picking.state in ('confirmed', 'assigned',
+                                     'partially_available'):
+                    # reserve available qty
+                    move.action_assign(no_prepare=True)
+                    # recompute pack op
+                    picking.do_prepare_partial()
+            else:
+                create = True
         else:
+            create = True
+        if create:
             values = self._prepare_picking_assign(
                 cr, uid, move, context=context)
             pick = pick_obj.create(cr, uid, values, context=context)
-        res = self.write(cr, uid, move_ids, {'picking_id': pick},
-                         context=context)
+            res = self.write(cr, uid, move_ids, {'picking_id': pick},
+                             context=context)
         return res
