@@ -9,6 +9,15 @@ from anthem.lyrics.loaders import load_csv_stream
 from ..common import req
 
 
+def define_settings(ctx, model, values):
+    """ Define settings like being in the interface
+     Example :
+      - model = 'sale.config.settings'
+      - values = {'default_invoice_policy': 'delivery'}
+    """
+    ctx.env[model].create(values).execute()
+
+
 @anthem.log
 def sale_setup(ctx):
     """ Settings for the Sale module """
@@ -25,6 +34,11 @@ def sale_setup(ctx):
          (4, ctx.env.ref('product.group_pricelist_item').id),
          (4, ctx.env.ref('product.group_sale_pricelist').id)]
     })
+
+    # Default invoice
+    define_settings(ctx,
+                    'sale.config.settings',
+                    {'default_invoice_policy': 'delivery'})
 
 
 @anthem.log
