@@ -1,5 +1,8 @@
 odoo:
   image: camptocamp/alcyon_odoo:latest
+  command: odoo --load=web,web_kanban,attachment_s3,session_redis,logging_json
+  external_links:
+    - redis/redis:redis
   links:
     - db:db
   volumes:
@@ -25,6 +28,16 @@ odoo:
     - MARABUNTA_ALLOW_SERIE=True
     - MARABUNTA_MODE=${MARABUNTA_MODE}
 
+    - ODOO_SESSION_REDIS=${ODOO_SESSION_REDIS}
+    - ODOO_SESSION_REDIS_HOST=${ODOO_SESSION_REDIS_HOST}
+    - ODOO_SESSION_REDIS_PREFIX=${ODOO_SESSION_REDIS_PREFIX}
+    - ODOO_SESSION_REDIS_EXPIRATION=${ODOO_SESSION_REDIS_EXPIRATION}
+    - ODOO_LOGGING_JSON=${ODOO_LOGGING_JSON}
+    - ODOO_CLOUD_PLATFORM_UNSAFE=${ODOO_CLOUD_PLATFORM_UNSAFE}
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
+
+
 db:
   image: camptocamp/postgresql:pg9.5-latest
   environment:
@@ -36,10 +49,12 @@ db:
     - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
   volumes:
     - alcyon-latest-datadb:/var/lib/postgresql
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
 
 nginx:
   image: camptocamp/odoo-nginx:9.0
-  ports:
-    - 8080:80
   links:
     - odoo:odoo
+  labels:
+    io.rancher.scheduler.affinity:host_label: application=true
