@@ -22,6 +22,7 @@ scenario.product_0015040,0015040,0,0,0,product.product_uom_unit,product.product_
 scenario.product_0015073,0015073,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,HIBITANE TEINTURE 500ml,
 scenario.product_0015305,0015305,8.50,0,0.060,product.product_uom_unit,product.product_uom_unit,,lot,True,DIABUR TEST 5000 (GLUCOSE) x50,scenario.product_price_category_gma
 scenario.product_0015735,0015735,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,"GEOMYCINE CREME 0,1% 15GR",scenario.product_price_category_gma
+scenario.product_0016188,0016188,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,AACIFEMINE 2MG 30CP,
 scenario.product_0016261,0016261,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,ADRIBLASTINA RD 5 AMP 10MG,scenario.product_price_category_gma
 scenario.product_0016501,0016501,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,ACTAPULGITE 30 SACH 3GR,scenario.product_price_category_gma
 scenario.product_0016832,0016832,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,ALLOPURINOL 300MG 90CP EG,
@@ -125,6 +126,7 @@ scenario.product_0040162,0040162,0,0,0,product.product_uom_unit,product.product_
 scenario.product_0040295,0040295,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,EUCALYPTINE PHOLCODINE 10SUPPO NOURISS.,scenario.product_price_category_gma
 scenario.product_0040345,0040345,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,OCAL BAIN 125ML,scenario.product_price_category_gma
 scenario.product_0040394,0040394,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,"EUMOVATE 0,05% CREME 30GR",
+scenario.product_0040659,0040659,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,EUSAPRIM FORTE 160mg/800mg 10TABS,
 scenario.product_0040766,0040766,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,DOGMATIL 12CP 200MG,scenario.product_price_category_gma
 scenario.product_0041020,0041020,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,FASIGYN 4CP 500MG,scenario.product_price_category_gma
 scenario.product_0041863,0041863,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,"FLEET ENEMA PEDIAT 2,250Z",scenario.product_price_category_gma
@@ -297,5 +299,3 @@ scenario.product_0085456,0085456,25.32,0,0.500,product.product_uom_unit,product.
 scenario.product_0085662,0085662,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,TELEBRIX 35 50ML,scenario.product_price_category_gma
 scenario.product_0086058,0086058,5.32,0,0.010,product.product_uom_unit,product.product_uom_unit,,lot,True,TELMIN KH 1X10CP/,
 scenario.product_0086132,0086132,11.68,0,0.140,product.product_uom_unit,product.product_uom_unit,,none,True,"TENSOPLAST EAB BAND ELAST 10cmx4,50m",scenario.product_price_category_gma
-scenario.product_0086280,0086280,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,TERRACORTRIL ONGUENT DERMIQUE 15gr,
-scenario.product_0086629,0086629,0,0,0,product.product_uom_unit,product.product_uom_unit,,none,True,TEARS NATURAL GUTT LUBRIF 15ml,scenario.product_price_category_gma
