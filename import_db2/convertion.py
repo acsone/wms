@@ -182,7 +182,7 @@ class CustomerMapper(EntityMapper):
 
     @staticmethod
     def convert_product_pricelist(odoo_entity, db2_entity):
-        code_remise = db2_entity.get('clitrm')
+        code_remise = db2_entity.get('clista')
         if code_remise:
             if code_remise < 50:
                 pricelist = 'scenario.product_pricelist_pb1'
