@@ -73,6 +73,7 @@ scenario.supplier_61410,61410,APB,rue Archimède 11,1000,BRUXELLES,02/2854200,02
 scenario.supplier_61415,61415,A.P.M.,Boulevard Kleyer 19 A32,4000,LIEGE,04/2321036,04/2370701,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_61420,61420,AQUA VITAL,Avenue Newton 1,1300,WAVRE,010/842669,010/844752,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_61425,61425,ARHOMANI SPRL,Terhulpensesteenweg 449,3090,OVERIJSE,,,info@arhomani.com,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
+scenario.supplier_61430,61430,APAM LG,Quai Van Beneden 22,4020,LIEGE,04/3665021,04/3665093,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_61500,61500,ASS.LIEG.D'ELECTRICITE,Rue Louvrex 95,4000,LIEGE,,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_61510,61510,ALDI,Zone industrielle,6640,VAUX SUR SURE,,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_61520,61520,CAREFUSION,Leuvensesteenweg 248/D,1800,Vilvoorde,02/2673899,02/2679921,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
@@ -806,6 +807,7 @@ scenario.supplier_70250,70250,ICEBERG,Avenue de la Fauconnerie 113,1170,BRUXELLE
 scenario.supplier_70295,70295,ICU MEDICAL BV,Papendorpseweg 100,3528,BJ UTRECHT,02/700.71.77,027065206,,,False,True,scenario.partner_category_supplier,base.nl,nl_BE,
 scenario.supplier_70300,70300,IDAC BENELUX BV,Postbus 160,8530,AD LEMMER,0031416379955,0031416377853,,,False,True,scenario.partner_category_supplier,base.nl,fr_BE,
 scenario.supplier_70310,70310,IDECOPY,"rue Louvrex, 8",4000,LIEGE,04/223 59 74,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
+scenario.supplier_70312,70312,IDEXX LABORATORIES SPRL,"Esplanade Heizel 1, Box 94",1020,Bruxelles,,,stijn-degryse@idexx.com,,False,True,scenario.partner_category_supplier,base.be,fr_BE,0479/177608
 scenario.supplier_70315,70315,I.D. PHAR,Iddergemsesteenweg 77,9450,HAALTERT,053/683430,053683444,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_70320,70320,IDEES,"Rue Sainte Véronique, 1",4000,LIEGE,04/252 73 77,042529019,ideepub@biz.tiscali.be,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_70325,70325,ID CHIPS ASBL,Rue de la Presse 4,1000,BRUXELLES,070/233147,070233181,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
@@ -851,6 +853,7 @@ scenario.supplier_71150,71150,ITALDECOR,"Rue Basse Préalle, 42",4040,HERSTAL,04
 scenario.supplier_71155,71155,INTECH S.L,"C/ Albardin, 9 - Nave A09",50720,La Cartuja Baja Zaragoza,0034/976751768,0034976753576,intech@intechsl.com,,False,True,scenario.partner_category_supplier,base.es,fr_BE,
 scenario.supplier_71200,71200,INTERPET LIMITED,Interpet House,RH4 3YX,"DORKING, SURREY",00441306881033,00441306885009,,,False,True,scenario.partner_category_supplier,base.uk,fr_BE,
 scenario.supplier_71210,71210,INTERMARCHE,rue du Château d'Eau 1,4530,VILLERS-LE-BOUILLET,085/316911,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
+scenario.supplier_71212,71212,INTERSURGICAL BENELUX,Baaikensstraat 2/D,9240,ZELE,05/2456991,052456992,kklem@intersurgical.be,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_71400,71400,JOHNSON ET JOHNSON MEDICAL,Leonardo Da Vincilaan 15,1831,DIEGEM,02/7463333,027463344,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_71405,71405,JOB'IN,Avenue Blonden 29,4000,LIEGE,04/3440601,04/3410170,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_71408,71408,JORDAN MEDICAL,Rijksweg 222,6582,AB HEUMEN,0031/243572400,0031243585527,,,False,True,scenario.partner_category_supplier,base.nl,fr_BE,
@@ -1049,6 +1052,7 @@ scenario.supplier_74315,74315,MIZ,Verengingstraat 36,3010,LEUVEN,,016/253348,,,F
 scenario.supplier_74320,74320,MILOA,"Résidence du Bois Madame, 7",4130,ESNEUX,,043552941,info@miloa.be,,False,True,scenario.partner_category_supplier,base.be,fr_BE,0476/993132
 scenario.supplier_74330,74330,MILLER MANUFACTURING COMPANY,1450 West 13th Street,MN55121-,1654 GLENCOE,001/6529825100,0016519825101,lemery@miller-mfg.com,,False,True,scenario.partner_category_supplier,base.us,fr_BE,
 scenario.supplier_74335,74335,MONFORT,Quai des Ardennes 86,4031,LIEGE,04/2645683,04/2645932,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
+scenario.supplier_74336,74336,MOERS MARC,Quai de Compiègne 56/57,4500,HUY,085/616090,085/616091,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_74340,74340,MONITEUR BELGE,Rue de Louvain 40-42,1000,BRUXELLES,,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_74342,74342,MLS,Ringlaan 7,8930,MENEN,056/531133,056531143,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_74343,74343,MM IT CONSULTING,rue Petite Foxhalle 169,4040,HERSTAL,047/391268,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
