@@ -33,9 +33,17 @@ class PickingAssignDeliveryRound(models.TransientModel):
     @api.one
     def confirm(self):
         act_close = {'type': 'ir.actions.act_window_close'}
-        picking_ids = self._context.get('active_ids')
-        if picking_ids is None:
+        shipping_ids = self._context.get('active_ids')
+        if shipping_ids is None:
             return act_close
-        picking = self.env['stock.picking'].browse(picking_ids)
-        picking.delivery_round_id = self.delivery_round_id
+        shipping = self.env['stock.picking'].browse(shipping_ids)
+        shipping.delivery_round_id = self.delivery_round_id
+        # make reservation
+        for picking in shipping._get_all_from_pickings().filtered(
+                lambda x: x.picking_type_subcode == 'PICK'):
+            if picking.state == 'confirmed' or (
+                    picking.state in ['partially_available', 'waiting'] and
+                    not picking.printed):
+                picking.do_unreserve()
+                picking.action_assign()
         return act_close
