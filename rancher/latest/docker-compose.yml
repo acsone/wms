@@ -27,7 +27,6 @@ odoo:
     - LIMIT_TIME_REAL=${LIMIT_TIME_REAL}
     - MARABUNTA_ALLOW_SERIE=True
     - MARABUNTA_MODE=${MARABUNTA_MODE}
-
     - ODOO_SESSION_REDIS=${ODOO_SESSION_REDIS}
     - ODOO_SESSION_REDIS_HOST=${ODOO_SESSION_REDIS_HOST}
     - ODOO_SESSION_REDIS_PREFIX=${ODOO_SESSION_REDIS_PREFIX}
@@ -37,16 +36,11 @@ odoo:
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
 
-
 db:
   image: camptocamp/postgresql:pg9.5-latest
   environment:
     - POSTGRES_USER=${DB_USER}
     - POSTGRES_PASSWORD=${DB_PASSWORD}
-    - PG_SYSTEM_SHARED_BUFFERS=256MB
-    - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
-    - PG_SYSTEM_WAL_BUFFERS=8MB
-    - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
   volumes:
     - alcyon-latest-datadb:/var/lib/postgresql
   labels:

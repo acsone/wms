@@ -53,10 +53,6 @@ db:
   environment:
     - POSTGRES_USER=${DB_USER}
     - POSTGRES_PASSWORD=${DB_PASSWORD}
-    - PG_SYSTEM_SHARED_BUFFERS=256MB
-    - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
-    - PG_SYSTEM_WAL_BUFFERS=8MB
-    - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
   volumes:
     - alcyon-integration-datadb:/var/lib/postgresql
   labels:
