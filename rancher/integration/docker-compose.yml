@@ -36,8 +36,18 @@ odoo:
     - ODOO_CLOUD_PLATFORM_UNSAFE=${ODOO_CLOUD_PLATFORM_UNSAFE}
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.sidekicks: nginx
     io.rancher.scheduler.global: 'true'
 
+nginx:
+  image: camptocamp/odoo-nginx:9.0-1.1.0
+  net: "container:odoo"
+  environment:
+    - NGX_ODOO_HOST=localhost
+  links:
+    - odoo:odoo
+
+# TODO: use the postgres-cluster
 db:
   image: camptocamp/postgresql:pg9.5-latest
   environment:
@@ -51,11 +61,3 @@ db:
     - alcyon-integration-datadb:/var/lib/postgresql
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
-
-nginx:
-  image: camptocamp/odoo-nginx:9.0
-  links:
-    - odoo:odoo
-  labels:
-    io.rancher.scheduler.affinity:host_label: application=true
-    io.rancher.scheduler.global: 'true'
