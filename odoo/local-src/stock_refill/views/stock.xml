@@ -12,7 +12,7 @@
             </field>
             <field name="owner_id" position="after">
                 <field name="qty_in_bin"/>
-                <!--field name="qty_in_reserve"/-->
+                <field name="qty_in_reserve"/>
                 <field name="qty_in_parking"/>
                 <field name="outgoing_qty"/>
             </field>

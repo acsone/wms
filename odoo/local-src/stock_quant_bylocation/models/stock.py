@@ -42,9 +42,9 @@ class ReportStockQuantBylocation(models.Model):
             }
 
     def init(self, cr):
-        tools.drop_view_if_exists(cr, 'report_stock_quant_bylocation')
+        tools.drop_view_if_exists(cr, self._table)
         cr.execute("""
-        CREATE OR REPLACE VIEW report_stock_quant_bylocation AS (
+        CREATE OR REPLACE VIEW """ + self._table + """ AS (
         SELECT %(select)s
         FROM stock_quant quant
         LEFT join product_product product ON quant.product_id=product.id

@@ -31,13 +31,14 @@ class ProductProduct(models.Model):
 
     stat_amount_deliveries = fields.Integer(
         'Amount of Deliveries',
-        help="Amount of customer deliveries on the last 6 months",
+        help="Mean amount of customer deliveries on the last 6 months",
         compute='_get_stat_amount_deliveries',
         store=True)
 
     @api.one
     def _get_stat_amount_deliveries(self):
-        start_date = (date.today() - timedelta(days=6 * 30)).strftime(
+        duration = 6 * 30
+        start_date = (date.today() - timedelta(days=duration)).strftime(
             DEFAULT_SERVER_DATETIME_FORMAT)
         customer_loc = self.env.ref('stock.stock_location_customers')
         self.stat_amount_deliveries = self.env['stock.move'].search_count([
@@ -45,7 +46,26 @@ class ProductProduct(models.Model):
             ('product_id', '=', self.id),
             ('state', 'not in', ('draft', 'cancel')),
             ('location_dest_id', '=', customer_loc.id),
-            ])
+            ]) / duration
+
+    stat_qty_delivered = fields.Integer(
+        'Mean Qty Delivered',
+        help="Mean Quantity delivered on the last 30 days",
+        compute='_get_stat_qty_delivered',
+        store=True)
+
+    @api.one
+    def _get_stat_qty_delivered(self):
+        duration = 30
+        start_date = (date.today() - timedelta(days=duration)).strftime(
+            DEFAULT_SERVER_DATETIME_FORMAT)
+        customer_loc = self.env.ref('stock.stock_location_customers')
+        self.stat_amount_deliveries = sum(self.env['stock.move'].search([
+            ('date', '>=', start_date),
+            ('product_id', '=', self.id),
+            ('state', 'not in', ('draft', 'cancel')),
+            ('location_dest_id', '=', customer_loc.id),
+            ])) / duration
 
     qty_in_parking = fields.Float(
         'Qty in parking',
@@ -106,8 +126,12 @@ class ProductProduct(models.Model):
             prio = min(999, qty_moves / max(1, qty_in_stock))
         self.priority_arrangement = prio
 
+        # min = mean consumption on the month
         qty_in_stock = self.qty_in_bin
-        prio = min(999, qty_moves / max(1, qty_in_stock))
+        prio = 0
+        if (qty_in_stock - self.stat_qty_delivered) <= 0:
+            # probability to be out of stock. Amount of moves increase priority
+            prio = min(999, qty_moves * 10)
         if ((qty_in_stock - self.outgoing_qty) < 0):
             # we will be out of stock
             prio += 2000

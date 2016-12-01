@@ -31,6 +31,7 @@
         ],
     'data': [
         'views/stock.xml',
+        'views/stock_reassort.xml',
     ],
     'installable': True,
     'auto_install': False,

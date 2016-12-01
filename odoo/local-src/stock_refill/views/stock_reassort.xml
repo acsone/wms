@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record id="view_report_stock_quant_bylocation_reserve_tree" model="ir.ui.view">
+        <field name="name">report.stock.quant.bylocation.reserve.tree.refill</field>
+        <field name="model">report.stock.quant.bylocation.reserve</field>
+        <field name="arch" type="xml">
+            <tree string="Stock by location" create="0" delete="0">
+                <field name="refill_priority"/>
+                <field name="product_id"/>
+                <field name="qty"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+                <field name="location_id"/>
+                <field name="reservation_id" widget="boolean"/>
+                <field name="owner_id" groups="stock.group_tracking_owner"/>
+                <field name="qty_in_bin"/>
+                <field name="qty_in_reserve"/>
+                <field name="qty_in_parking"/>
+                <field name="outgoing_qty"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_report_stock_quant_bylocation_reserve" model="ir.actions.act_window">
+        <field name="name">Stock in Reserve</field>
+        <field name="res_model">report.stock.quant.bylocation.reserve</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_available':True}</field>
+        <field name="auto_refresh">60</field>
+    </record>
+    <record id="filter_reserve" model="ir.filters">
+        <field name="name">Reserve</field>
+        <field name="model_id">report.stock.quant.bylocation.reserve</field>
+        <field name="action_id" ref="action_report_stock_quant_bylocation_reserve"/>
+        <field name="domain">[[u'location_id', u'child_of', u'Reserve']]</field>
+        <field name="is_default">1</field>
+    </record>
+
+
+    <menuitem id="menu_report_stock_bylocation_reserve"
+        name="Stock to Reassort"
+        parent="stock.menu_stock_inventory_control"
+        sequence="40"
+        action="action_report_stock_quant_bylocation_reserve"/>
+
+</data>
+</openerp>
