@@ -353,6 +353,19 @@ COUNTRY = {
     823: 'base.fm',
 }
 
+PRODUCT_SALE_VAT = {
+    0: "scenario.account_tax_sale_main_company_0%",
+    1: "scenario.account_tax_sale_main_company_6%",
+    2: "scenario.account_tax_sale_main_company_12%",
+    3: "scenario.account_tax_sale_main_company_21%",
+}
+
+PRODUCT_PURCHASE_VAT = {
+    0: "scenario.account_tax_purchase_main_company_0%_Marchandises",
+    1: "scenario.account_tax_purchase_main_company_6%_Marchandises",
+    2: "scenario.account_tax_purchase_main_company_12%_Marchandises",
+    3: "scenario.account_tax_purchase_main_company_21%_Marchandises",
+}
 
 def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
