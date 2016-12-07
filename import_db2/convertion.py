@@ -35,8 +35,11 @@ class ProductMapper(EntityMapper):
         return "join sbdata.cplges on gesart=cplart "
 
     def get_sql_where(self):
-        # TODO: csv only when mode will be developed
-        return "gesdem not like '|||%'"
+        # Filter deactivated products for demo data
+        if not self.importer.full:
+            # TODO: csv only when mode will be developed
+            return "gesdem not like '|||%'"
+        return None
 
     def convert_name(self, odoo_entity, db2_entity):
         """ Dans la base DB2, si le nom commence par |||, celà signifie que le
