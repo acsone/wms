@@ -122,6 +122,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('city', 'cliloc'),
         FieldMapper('fax', 'clifax'),
         FieldMapper('email', 'emwadr'),
+        FieldMapper('vat', 'clicee', check=checks.vat),
         FieldMapper('depot_number', 'clirch'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
