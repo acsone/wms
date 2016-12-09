@@ -173,6 +173,43 @@ def add_xmlid_account(ctx):
 
 
 @anthem.log
+def add_xmlid_tax(ctx):
+    """ Create xml id for vendor and customer taxes """
+    ir_model_data = ctx.env['ir.model.data']
+    taxes = ctx.env['account.tax'].search([])
+    for tax in taxes:
+        model_data = ir_model_data.search_count([
+            ('model', '=', 'account.tax'),
+            ('res_id', '=', tax.id)
+        ])
+        if not model_data:
+            if tax.company_id:
+                company_model_data = ir_model_data.search([
+                    ('model', '=', 'res.company'),
+                    ('res_id', '=', tax.company_id.id)
+                ])
+                company_xmlid_name = company_model_data.name
+            else:
+                company_xmlid_name = 'no_company'
+
+            tax_name = tax.name.replace(' ', '_').replace('(', '_')
+            tax_name = tax_name.replace(')', '_').replace('.', '_')
+            tax_name = tax_name.replace('-', '_').replace(',', '_')
+
+            ir_model_data.create({
+                'name':
+                    'account_tax_%s_%s_%s' % (
+                        tax.type_tax_use,
+                        company_xmlid_name,
+                        tax_name,
+                    ),
+                'module': 'scenario',
+                'model': 'account.tax',
+                'res_id': tax.id
+            })
+
+
+@anthem.log
 def adapt_chart_of_account(ctx):
     """ Adapt chart of account """
     content = resource_stream(req, 'data/install/account.account.csv')
@@ -222,6 +259,7 @@ def main(ctx):
     activate_multicurrency(ctx)
     create_financial_journals(ctx)
     add_xmlid_account(ctx)
+    add_xmlid_tax(ctx)
     adapt_chart_of_account(ctx)
     settings(ctx)
     default_values(ctx)

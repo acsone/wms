@@ -28,6 +28,14 @@ class ProductMapper(EntityMapper):
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
         FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
+        FieldMapper(
+            'taxes_id/id', 'gesctv',
+            mapping=mappings.PRODUCT_SALE_VAT
+        ),
+        FieldMapper(
+            'supplier_taxes_id/id', 'gesctv',
+            mapping=mappings.PRODUCT_PURCHASE_VAT
+        ),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
