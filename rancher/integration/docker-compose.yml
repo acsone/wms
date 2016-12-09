@@ -36,26 +36,52 @@ odoo:
     - ODOO_CLOUD_PLATFORM_UNSAFE=${ODOO_CLOUD_PLATFORM_UNSAFE}
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.sidekicks: nginx
     io.rancher.scheduler.global: 'true'
 
+nginx:
+  image: camptocamp/odoo-nginx:9.0-1.1.0
+  net: "container:odoo"
+  environment:
+    - NGX_ODOO_HOST=localhost
+  links:
+    - odoo:odoo
+
+# TODO: use the postgres-cluster
 db:
   image: camptocamp/postgresql:pg9.5-latest
   environment:
     - POSTGRES_USER=${DB_USER}
     - POSTGRES_PASSWORD=${DB_PASSWORD}
-    - PG_SYSTEM_SHARED_BUFFERS=256MB
-    - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
-    - PG_SYSTEM_WAL_BUFFERS=8MB
-    - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
   volumes:
     - alcyon-integration-datadb:/var/lib/postgresql
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
 
-nginx:
-  image: camptocamp/odoo-nginx:9.0
-  links:
-    - odoo:odoo
+letsencrypt:
+  environment:
+    API_VERSION: Production
+    AWS_ACCESS_KEY: ${LETSENCRYPT_AWS_ACCESS_KEY}
+    AWS_SECRET_KEY: ${LETSENCRYPT_AWS_SECRET_KEY}
+    CERT_NAME: ${DOMAIN_NAME}
+    CLOUDFLARE_EMAIL: ''
+    CLOUDFLARE_KEY: ''
+    DNSIMPLE_EMAIL: ''
+    DNSIMPLE_KEY: ''
+    DOMAINS: ${DOMAIN_NAME}
+    DO_ACCESS_TOKEN: ''
+    DYN_CUSTOMER_NAME: ''
+    DYN_PASSWORD: ''
+    DYN_USER_NAME: ''
+    EMAIL: letsencrypt@camptocamp.com
+    EULA: 'Yes'
+    PROVIDER: Route53
+    PUBLIC_KEY_TYPE: RSA-2048
+    RENEWAL_TIME: '12'
   labels:
     io.rancher.scheduler.affinity:host_label: application=true
-    io.rancher.scheduler.global: 'true'
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  image: janeczku/rancher-letsencrypt:v0.3.0
+  volumes:
+  - /etc/letsencrypt/production/certs
