@@ -8,11 +8,20 @@ Unreleased
 
 **Data Migration**
 
+* [ALCN-674] Data - Import VAT on customers
+* [ALCN-675] Product vat
+* [ALCN-676] Don't remove archived product in full data
+
 **Features and Improvements**
+
+* Change default config for default invoice
 
 **Bugfixes**
 
 **Build**
+
+* Use camptocamp/odoo-project:9.0-1.7.1
+* Rancher stacks: nginx sidekicks, letsencrypt, db_maxconn
 
 **Documentation**
 
