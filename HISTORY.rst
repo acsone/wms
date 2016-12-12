@@ -17,6 +17,14 @@ Unreleased
 **Documentation**
 
 
+9.6.1 (2016-12-12)
+++++++++++++++++++
+
+**Bugfixes**
+
+* Rollback: Importer script to parallelize import of big csv file.
+
+
 9.6.0 (2016-12-12)
 ++++++++++++++++++
 

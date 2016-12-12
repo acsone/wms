@@ -4,44 +4,30 @@
 
 from pkg_resources import resource_stream
 
-import os
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
 from ..common import req
-
-
-def get_file(req, default_file):
-    """ Check if there is a DATA_FILE in environment else open default_file.
-
-    DATA_FILE is passed by importer.sh when importing splitted file in parallel
-    """
-    try:
-        file_path = os.environ['DATA_FILE']
-    except KeyError:
-        return resource_stream(req, default_file)
-    else:
-        return open(file_path)
 
 
 @anthem.log
 def import_suppliers(ctx):
     """ Importing suppliers from csv """
 
-    content = get_file(req, 'data/install/supplier.csv')
+    content = resource_stream(req, 'data/install/supplier.csv')
     load_csv_stream(ctx, 'res.partner', content, delimiter=',')
 
 
 @anthem.log
 def import_clients(ctx):
     """ Importing clients from csv"""
-    content = get_file(req, 'data/install/customer.csv')
+    content = resource_stream(req, 'data/install/customer.csv')
     load_csv_stream(ctx, 'res.partner', content, delimiter=',')
 
 
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
-    content = get_file(req, 'data/install/product.csv')
+    content = resource_stream(req, 'data/install/product.csv')
     load_csv_stream(ctx, 'product.product', content, delimiter=',')
     ctx.env.cr.execute("""
         UPDATE product_template
@@ -55,14 +41,14 @@ def import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
-    content = get_file(req, 'data/install/product.csv')
+    content = resource_stream(req, 'data/install/product.csv')
     load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
 @anthem.log
 def import_pricelist_items(ctx):
     """ Importing pricelists from csv"""
-    content = get_file(req, 'data/install/pricelist_items.csv')
+    content = resource_stream(req, 'data/install/pricelist_items.csv')
     load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
 
 
@@ -97,6 +83,11 @@ def main(ctx):
     other files will be import by importer.sh)
     """
     # Putting some demo data in full mode because we don't have yet real data
+    import_suppliers(ctx)
+    import_clients(ctx)
+    import_products(ctx)
+    import_product_supplierinfo(ctx)
+    import_pricelist_items(ctx)
     import_locators(ctx)
     import_output_locations(ctx)
     import_delivery_round_config(ctx)
