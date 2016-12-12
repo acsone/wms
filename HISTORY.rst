@@ -8,6 +8,20 @@ Unreleased
 
 **Data Migration**
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.6.0 (2016-12-12)
+++++++++++++++++++
+
+**Data Migration**
+
 * [ALCN-674] Import VAT on customers
 * [ALCN-675] Import product taxes
 * [ALCN-676] Don't remove archived product in full data on import
@@ -16,32 +30,31 @@ Unreleased
 
 * Change default config for default invoice
 
-**Bugfixes**
-
 **Build**
 
 * Use camptocamp/odoo-project:9.0-1.7.1
 * Rancher stacks: nginx sidekicks, letsencrypt, db_maxconn
-
-**Documentation**
 
 
 9.5.1 (2016-11-28)
 ++++++++++++++++++
 
 **Build**
+
 * Fix cloud platform installation
 
 9.5.0 (2016-11-25)
 ++++++++++++++++++
 
 **Data Migration**
+
 * ALCN-637: Import pharmacist id in customer.
 * ALCN-638: Customer active flag.
 * ALCN-639: Import product tracking configuration.
 * ALCN-243: Invoice report (work in progress)
 
 **Features and Improvements**
+
 * ALCN-635: Remove domain from pharmacist field on customer.
 * ALCN-645: Display 'Accounting Entries' menu for Accountants
 * ALCN-625: Configure mailtrap for test/integration server.
@@ -49,12 +62,15 @@ Unreleased
 * Reception workflow.
 
 **Bugfixes**
+
 * ALCN-646: Fix install data of account journal
 
 **Build**
+
 * Migrate on Odoo cloud platform.
 
 **Documentation**
+
 * Fix DB2 import Readme.
 
 
@@ -62,17 +78,20 @@ Unreleased
 ++++++++++++++++++
 
 **Data Migration**
+
 * Fix partner title mapping.
 
 9.4.0 (2016-11-10)
 ++++++++++++++++++
 
 **Data Migration**
+
 * ALCN-640: Customer categories.
 * ALCN-605: Customer title and legal entity.
 * ALCN-634: Customer & supplier lang
 
 **Features and Improvements**
+
 * ALCN-22: Custom display product sale prices on template/pricelist form views
 * ALCN-132: Add sale_exception module and add rules into it
 * ALCN-262: Install warning module
@@ -85,12 +104,14 @@ Unreleased
 * ALCN-634: Enable german language.
 
 **Bugfixes**
+
 * Pricelist discount: Fixing bugs when discount manually filled.
 
 9.3.0 (2016-10-28)
 ++++++++++++++++++
 
 **Data Migration**
+
 * Customer pricelists
 * Import partners phone, fax, mobile, email.
 * Bank account & bank creation.
@@ -98,6 +119,7 @@ Unreleased
 * Import pricelists.
 
 **Features and Improvements**
+
 * Accounting configuration.
 * Adapt chart of account.
 * Enable pricelist report even if no variants.
@@ -107,11 +129,13 @@ Unreleased
 ++++++++++++++++++
 
 **Data Migration**
+
 * Import full AS400 data for integration (product/partner)
 * Importer script to parallelize import of big csv file.
 * Demo data for delivery rounds
 
 **Bugfixes**
+
 * Multiple fixes in delivery rounds.
 * Pricelist discount: Hide standard discount field instead of replace (in case someone used it)
 
