@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* Undo Rollback: Importer script to parallelize import of big csv file.
+
 **Build**
 
 **Documentation**
