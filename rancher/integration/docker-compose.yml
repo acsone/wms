@@ -43,7 +43,7 @@ nginx:
   image: camptocamp/odoo-nginx:9.0-1.1.0
   net: "container:odoo"
   environment:
-    - NGX_ODOO_HOST=localhost
+    - NGX_ODOO_HOST=127.0.0.1
   links:
     - odoo:odoo
 
