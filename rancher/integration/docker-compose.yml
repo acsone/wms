@@ -1,9 +1,8 @@
 odoo:
   image: camptocamp/alcyon_odoo:9.6.1
   command: odoo.py --load=web,web_kanban,session_redis,attachment_s3,logging_json
-  links:
-    - db:db
   external_links:
+    - postgres-cluster/lb:db
     - redis/redis:redis
   environment:
     - DB_USER=${DB_USER}
@@ -46,17 +45,6 @@ nginx:
     - NGX_ODOO_HOST=localhost
   links:
     - odoo:odoo
-
-# TODO: use the postgres-cluster
-db:
-  image: camptocamp/postgresql:pg9.5-latest
-  environment:
-    - POSTGRES_USER=${DB_USER}
-    - POSTGRES_PASSWORD=${DB_PASSWORD}
-  volumes:
-    - alcyon-integration-datadb:/var/lib/postgresql
-  labels:
-    io.rancher.scheduler.affinity:host_label: application=true
 
 letsencrypt:
   environment:

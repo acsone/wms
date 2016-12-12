@@ -17,6 +17,14 @@ Unreleased
 **Documentation**
 
 
+9.6.2 (2016-12-12)
+++++++++++++++++++
+
+**Build**
+
+* Move integration db on cluster postgres
+
+
 9.6.1 (2016-12-12)
 ++++++++++++++++++
 
