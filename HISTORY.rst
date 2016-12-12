@@ -12,11 +12,17 @@ Unreleased
 
 **Bugfixes**
 
-* Undo Rollback: Importer script to parallelize import of big csv file.
-
 **Build**
 
 **Documentation**
+
+
+9.6.3 (2016-12-12)
+++++++++++++++++++
+
+**Bugfixes**
+
+* Undo Rollback: Importer script to parallelize import of big csv file.
 
 
 9.6.2 (2016-12-12)
