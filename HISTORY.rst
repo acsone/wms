@@ -8,9 +8,9 @@ Unreleased
 
 **Data Migration**
 
-* [ALCN-674] Data - Import VAT on customers
-* [ALCN-675] Product vat
-* [ALCN-676] Don't remove archived product in full data
+* [ALCN-674] Import VAT on customers
+* [ALCN-675] Import product taxes
+* [ALCN-676] Don't remove archived product in full data on import
 
 **Features and Improvements**
 
