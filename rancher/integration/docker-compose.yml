@@ -1,5 +1,5 @@
 odoo:
-  image: camptocamp/alcyon_odoo:9.6.4
+  image: camptocamp/alcyon_odoo:9.6.5
   command: odoo.py --load=web,web_kanban,session_redis,attachment_s3,logging_json
   external_links:
     - postgres-cluster/lb:db
