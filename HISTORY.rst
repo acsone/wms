@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* Upgrade version of submodule odoo-cloud-platform (for fix)
+
 **Build**
 
 **Documentation**
