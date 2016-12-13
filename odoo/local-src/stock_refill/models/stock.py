@@ -49,13 +49,24 @@ class ReportStockQuantBylocationReserve(models.Model):
     _inherit = 'report.stock.quant.bylocation'
     _name = 'report.stock.quant.bylocation.reserve'
     _auto = False
-    _order = 'refill_priority desc, qty desc'
+    _order = 'refill_priority desc, removal_date asc, qty desc'
 
     def _prepare_init(self):
         d = super(ReportStockQuantBylocation, self)._prepare_init()
+        d['select'] = "distinct on (product_id)" + d['select']
+        d['orderby'] = "product_id"
+
         d['select'] += ", product.priority_reassort as refill_priority"
-        d['groupby'] += ",priority_reassort"
+        d['select'] += ", quant.removal_date as removal_date"
+        d['join'] += (" LEFT JOIN stock_location as location "
+                      " ON quant.location_id = location.id ")
+        d['where'] += " AND location.kind = 'reserve' "
+        d['groupby'] += ", product.priority_reassort, quant.removal_date"
         return d
 
     refill_priority = fields.Integer(
         'Refill Priority', readonly=True)
+    removal_date = fields.Datetime(
+        'Removal Date',
+        help="This is the date on which the goods with this Serial Number "
+             "should be removed from the stock.")

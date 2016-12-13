@@ -65,7 +65,7 @@ class ProductProduct(models.Model):
             ('product_id', '=', self.id),
             ('state', 'not in', ('draft', 'cancel')),
             ('location_dest_id', '=', customer_loc.id),
-            ])) / duration
+            ]).mapped('product_qty')) / duration
 
     qty_in_parking = fields.Float(
         'Qty in parking',
@@ -82,11 +82,15 @@ class ProductProduct(models.Model):
 
     @api.one
     def _get_qty_in(self):
-        # FIXME - Hugly: string hardcoded
-        self.qty_in_parking = self.with_context(
-            location="Parking").qty_available
-        self.qty_in_reserve = self.with_context(
-            location="Reserve").qty_available
+        parking_ids = self.env['stock.location'].search(
+            [('kind', '=', 'parking')]).ids
+        self.qty_in_parking = parking_ids and self.with_context(
+            location=parking_ids).qty_available or 0
+
+        reserve_ids = self.env['stock.location'].search(
+            [('kind', '=', 'reserve')]).ids
+        self.qty_in_reserve = reserve_ids and self.with_context(
+            location=reserve_ids).qty_available or 0
 
         location_ids = self.env['stock.warehouse'].search([]).mapped(
             'lot_stock_id').ids
