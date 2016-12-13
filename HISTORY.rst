@@ -12,11 +12,17 @@ Unreleased
 
 **Bugfixes**
 
-* Upgrade version of submodule odoo-cloud-platform (for fix)
-
 **Build**
 
 **Documentation**
+
+
+9.6.4 (2016-12-13)
+++++++++++++++++++
+
+**Bugfixes**
+
+* Upgrade version of submodule odoo-cloud-platform (for fix)
 
 
 9.6.3 (2016-12-12)
