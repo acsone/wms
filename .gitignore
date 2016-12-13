@@ -51,3 +51,6 @@ coverage.xml
 docs/_build/
 
 rancher.env
+
+# backup files
+.~*#
