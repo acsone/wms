@@ -12,6 +12,9 @@ Unreleased
 
 **Bugfixes**
 
+* Force nginx sidekick to use ipv4
+* Add openoffice temp files to gitignore
+
 **Build**
 
 **Documentation**
