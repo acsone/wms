@@ -67,9 +67,9 @@ def import_pricelist_items(ctx):
 
 
 @anthem.log
-def import_locators(ctx):
-    """ Importing locators from csv"""
-    content = resource_stream(req, 'data/demo/locators_subset.csv')
+def import_locations(ctx):
+    """ Importing locations from csv"""
+    content = resource_stream(req, 'data/install/location.csv')
     load_csv_stream(ctx, 'stock.location', content, delimiter=',')
     content = resource_stream(req, 'data/demo/locators_reserve.csv')
     load_csv_stream(ctx, 'stock.location', content, delimiter=',')
@@ -101,6 +101,6 @@ def main(ctx):
     other files will be import by importer.sh)
     """
     # Putting some demo data in full mode because we don't have yet real data
-    import_locators(ctx)
+    import_locations(ctx)
     import_output_locations(ctx)
     import_delivery_round_config(ctx)

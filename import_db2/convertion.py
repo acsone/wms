@@ -288,4 +288,87 @@ class SupplierMapper(EntityMapper):
         )
 
 
-MAPPER_CLASSES = [ProductMapper, CustomerMapper, SupplierMapper]
+class LocationMapper(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = 'computed'
+    XMLID_IMPORT_NAME = '__import__'
+
+    FIELDS_MAPPING = [
+        'name',
+        'parent_id'
+    ]
+
+    def get_sql_query(self):
+        query = ("select p1.stolos as location_name from sbdata.PSTOCK as p1"
+                 " UNION "
+                 "select p2.stolop as location_name from sbdata.PSTOCK as p2")
+        if not self.importer.full:
+            query += " FETCH FIRST 300 ROWS ONLY"
+
+        return query, []
+
+    def convert_entities(self, db2_entities):
+        """ Create hierarchy first """
+        odoo_entities = []
+        hierarchy = {}
+        families = [
+            ('A', '__setup__.stock_location_food'),
+            ('G', '__setup__.stock_location_drug'),
+            ('Q', '__setup__.stock_location_fridge'),
+            ('P', '__setup__.stock_location_material'),
+            ('E', '__setup__.stock_location_material')]
+
+        for f, parent in families:
+            hierarchy[f] = {}
+            odoo_entity = OrderedDict(id=None)
+            odoo_entity['name'] = f
+            odoo_entity['location_id/id'] = parent
+            odoo_entity['id'] = self.get_xml_id(
+                self.name, 'family_' + f
+            )
+            odoo_entities.append(odoo_entity)
+
+        for db2_entity in db2_entities:
+            value = db2_entity['location_name'].strip()
+            if len(value) < 8:
+                continue
+
+            family = value[0]
+            family_xmlid = self.get_xml_id(
+                self.name, 'family_' + family
+            )
+            avenue = value[1]
+
+            if family in ('A', 'P'):
+                rack = value[2:4]
+                lvl = value[4]
+                bin = '0' + value[5]
+            elif family in ('Q', 'E'):
+                rack = value[2]
+                lvl = value[3]
+                bin = value[4:6]
+            elif family == 'G':
+                # dynamic racks
+                rack = value[2]
+                lvl = value[3]
+                bin = value[4:6]
+                # TODO not found in PSTOCK non dynamic racks
+
+            # TODO assign the control code to an Odoo field
+            control_code = value[6:8]
+            control_code = control_code
+
+            bin_xmlid = self.get_xml_id(
+                self.name, 'loc_' + family + avenue + rack + lvl + bin)
+
+            odoo_entity = OrderedDict(id=None)
+            odoo_entity['name'] = rack + lvl + bin
+            odoo_entity['location_id/id'] = family_xmlid
+            odoo_entity['id'] = bin_xmlid
+            odoo_entities.append(odoo_entity)
+
+        return odoo_entities
+
+
+MAPPER_CLASSES = [LocationMapper, ProductMapper, CustomerMapper, SupplierMapper]
