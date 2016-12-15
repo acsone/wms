@@ -33,6 +33,7 @@
         'views/stock_location.xml',
         'views/stock.xml',
         'views/stock_reassort.xml',
+        'wizards/create_picking.xml',
     ],
     'installable': True,
     'auto_install': False,

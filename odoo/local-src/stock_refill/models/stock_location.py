@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-from openerp import fields, models, api
+from openerp import fields, models, api, _
+from openerp.exceptions import Warning
 
 
 class StockLocation(models.Model):
@@ -28,11 +29,31 @@ class StockLocation(models.Model):
     kind = fields.Selection(
         [('reserve', 'Reserve'),
          ('parking', 'Parking'),
+         ('bin', 'Bin'),
          ],
         string='Kind')
 
+    reserve_location_id = fields.Many2one(
+        'stock.location', 'Reserve',
+        domain=[('kind', '=', 'reserve')],
+        help="Destination for putaway strategy when the poduct must be stored "
+             "in reserve")
+
+    def _get_ancestors(self):
+        """ This method return the list of all parent locations excluding self
+        """
+        self._cr.execute("""
+            SELECT distinct c.id
+            FROM """ + self._table + ' p, ' + self._table + """ c
+            WHERE c.parent_left < p.parent_left
+              AND c.parent_right > p.parent_right
+              AND p.id in %s""", (tuple(self.ids),))
+        res = self._cr.fetchall()
+        return self.browse(map(lambda x: x[0], res))
+
     def _get_children(self):
-        """This method return the list of all children account excluding ids"""
+        """ This method return the list of all children locations excluding self
+        """
         self._cr.execute("""
             SELECT distinct c.id
             FROM """ + self._table + ' p, ' + self._table + """ c
@@ -44,9 +65,34 @@ class StockLocation(models.Model):
 
     @api.multi
     def write(self, vals):
-        """ Update kind of all children location if modified """
+        """ Update kind of all children locations if modified """
         res = super(StockLocation, self).write(vals)
         if vals.get('kind'):
             children = self._get_children()
             super(StockLocation, children).write({'kind': vals['kind']})
         return res
+
+    def get_putaway_strategy(self, cr, uid, location, product, context=None):
+        location_dest_id = super(StockLocation, self).get_putaway_strategy(
+            cr, uid, location, product, context=None) or location.id
+
+        # check if bin location
+        env = api.Environment(cr, uid, context)
+        location_dest = env['stock.location'].browse(location_dest_id)
+        if location_dest.kind != 'bin':
+            return location_dest_id
+
+        # Do not put product in bin if lot tracking (possibly fefo) and
+        # there is already stock in reserve
+        if product.tracking == 'lot' and product.qty_in_reserve > 0:
+            reserve = location_dest.reserve_location_id
+            if not reserve:
+                reserve = location_dest._get_ancestors().mapped(
+                    'reserve_location_id')[:1]
+            if not reserve:
+                raise Warning(_(
+                    'Product %s must be put in reserve but cannot '
+                    'find a suitable location') % product.display_name)
+            return reserve.id
+        return super(StockLocation, self).get_putaway_strategy(
+            cr, uid, location, product, context=None) or location.id

@@ -70,33 +70,36 @@ class ProductProduct(models.Model):
     qty_in_parking = fields.Float(
         'Qty in parking',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in')
+        compute='_get_qty_in_parking')
     qty_in_reserve = fields.Float(
         'Qty in reserve',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in')
+        compute='_get_qty_in_reserve')
     qty_in_bin = fields.Float(
         'Qty in bins',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in')
+        compute='_get_qty_in_bin')
 
     @api.one
-    def _get_qty_in(self):
+    def _get_qty_in_parking(self):
         parking_ids = self.env['stock.location'].search(
             [('kind', '=', 'parking')]).ids
         self.qty_in_parking = parking_ids and self.with_context(
             location=parking_ids).qty_available or 0
 
+    @api.one
+    def _get_qty_in_reserve(self):
         reserve_ids = self.env['stock.location'].search(
             [('kind', '=', 'reserve')]).ids
         self.qty_in_reserve = reserve_ids and self.with_context(
             location=reserve_ids).qty_available or 0
 
-        location_ids = self.env['stock.warehouse'].search([]).mapped(
-            'lot_stock_id').ids
-        qty_in_stock = self.with_context(location=location_ids).qty_available
-        self.qty_in_bin = (qty_in_stock - self.qty_in_parking -
-                           self.qty_in_reserve)
+    @api.one
+    def _get_qty_in_bin(self):
+        reserve_ids = self.env['stock.location'].search(
+            [('kind', '=', 'bin')]).ids
+        self.qty_in_bin = reserve_ids and self.with_context(
+            location=reserve_ids).qty_available or 0
 
     move_ids = fields.One2many(
         'stock.move', 'product_id',

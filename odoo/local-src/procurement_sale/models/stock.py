@@ -36,7 +36,7 @@ class StockQuant(models.Model):
     def quants_get_preferred_domain(self, cr, uid, qty, move, ops=False,
                                     lot_id=False, domain=None,
                                     preferred_domain_list=[], context=None):
-        if context.get('recount'):
+        if context and context.get('recount'):
             remaining = (move.product_id.qty_available -
                          move.product_id.outgoing_qty)
             qty = min(qty, max(remaining, 0.0))

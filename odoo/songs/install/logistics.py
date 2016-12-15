@@ -29,30 +29,57 @@ def create_locations(ctx):
     """ Creating stock locations """
     loc_stock = ctx.env.ref('stock.stock_location_stock')
 
-    locations = [
-        ('__init.stock_location_materiel', u'Matériel'),
-        ('__init.stock_location_ali', u'Aliments'),
-        ('__init.stock_location_medoc', u'Médicaments'),
-        ('__init.stock_location_froid', u'Froid'),
+    # Locations are under WH
+    reserves = [
+        ('__init.stock_location_reserve_ali', u'Réserve Aliments',
+         loc_stock.location_id.id),
+        ('__init.stock_location_reserve_medoc', u'Réserve Médicaments',
+         loc_stock.location_id.id),
     ]
-
-    for xmlid, name in locations:
-        create_or_update(ctx, 'stock.location', xmlid, {
-            'name': name,
-            'location_id': loc_stock.id,
-        })
-
-    sub_locations = [
-        ('__init.stock_location_frigo', u'Frigo',
-         ctx.env.ref('__init.stock_location_froid').id),
-        ('__init.stock_location_parking_medoc', u'Parking Medicaments',
-         ctx.env.ref('stock.stock_location_company').id),
-    ]
-
-    for xmlid, name, location_id in sub_locations:
+    for xmlid, name, location_id in reserves:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': location_id,
+            'usage': 'view',
+            'kind': 'reserve',
+        })
+
+    # Locations are under Stock
+    locations = [
+        ('__init.stock_location_materiel', u'Matériel',
+         False,
+         loc_stock.id),
+        ('__init.stock_location_ali', u'Aliments',
+         ctx.env.ref('__init.stock_location_reserve_ali').id,
+         loc_stock.id),
+        ('__init.stock_location_medoc', u'Médicaments',
+         ctx.env.ref('__init.stock_location_reserve_medoc').id,
+         loc_stock.id),
+        ('__init.stock_location_froid', u'Froid',
+         False,
+         loc_stock.id),
+        ('__init.stock_location_frigo', u'Frigo',
+         False,
+         ctx.env.ref('__init.stock_location_froid').id),
+    ]
+    for xmlid, name, reserve_id, location_id in locations:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': location_id,
+            'reserve_location_id': reserve_id,
+            'usage': 'view',
+        })
+
+    # Parking is under Input
+    parkings = [
+        ('__init.stock_location_parking_medoc', u'Parking Medicaments'),
+    ]
+    for xmlid, name in parkings:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('stock.stock_location_company').id,
+            'usage': 'view',
+            'kind': 'parking',
         })
 
 
@@ -109,6 +136,8 @@ def create_picking_types(ctx):
     location_medoc = ctx.env.ref('__init.stock_location_medoc')
     location_froid = ctx.env.ref('__init.stock_location_froid')
     location_parking_medoc = ctx.env.ref('__init.stock_location_parking_medoc')
+    location_reserve_medoc = ctx.env.ref('__init.stock_location_reserve_medoc')
+    location_reserve_ali = ctx.env.ref('__init.stock_location_reserve_ali')
     types = [
         {'xmlid': '__init.stock_picking_type_materiel',
          'name': 'Pick Matériel',
@@ -156,6 +185,22 @@ def create_picking_types(ctx):
          'sequence_id': internal_sequence.id,
          'default_location_src_id': location_parking_medoc.id,
          'default_location_dest_id': location_medoc.id,
+         'use_create_lots': False,
+         },
+        {'xmlid': '__init.stock_picking_type_reassort_medoc',
+         'name': 'Reassort Medicaments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_medoc.id,
+         'default_location_dest_id': location_medoc.id,
+         'use_create_lots': False,
+         },
+        {'xmlid': '__init.stock_picking_type_reassort_ali',
+         'name': 'Reassort Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_ali.id,
+         'default_location_dest_id': location_ali.id,
          'use_create_lots': False,
          },
     ]

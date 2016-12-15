@@ -28,6 +28,10 @@ def import_locators(ctx):
     """ Importing locators from csv"""
     content = resource_stream(req, 'data/demo/locators_subset.csv')
     load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/locators_reserve.csv')
+    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    content = resource_stream(req, 'data/demo/locators_parking.csv')
+    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
 
 
 @anthem.log
