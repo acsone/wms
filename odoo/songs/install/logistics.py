@@ -28,8 +28,9 @@ def set_delivery_pick_ship(ctx):
 def create_locations(ctx):
     """ Creating stock locations """
     loc_stock = ctx.env.ref('stock.stock_location_stock')
+    root = ctx.env.ref('stock.stock_location_locations')
 
-    # Locations are under WH
+    # Reserves = Products available => under WH, above Stock
     reserves = [
         ('__init.stock_location_reserve_ali', u'Réserve Aliments',
          loc_stock.location_id.id),
@@ -44,7 +45,7 @@ def create_locations(ctx):
             'kind': 'reserve',
         })
 
-    # Locations are under Stock
+    # Bins = Products available to pick => under Stock
     locations = [
         ('__init.stock_location_materiel', u'Matériel',
          False,
@@ -70,7 +71,7 @@ def create_locations(ctx):
             'usage': 'view',
         })
 
-    # Parking is under Input
+    # Parking is under Input (part of stock)
     parkings = [
         ('__init.stock_location_parking_medoc', u'Parking Medicaments'),
     ]
@@ -80,6 +81,41 @@ def create_locations(ctx):
             'location_id': ctx.env.ref('stock.stock_location_company').id,
             'usage': 'view',
             'kind': 'parking',
+        })
+
+    # Returns = Products unavailable => not under WH but under physical loc.
+    create_or_update(ctx, 'stock.location', '__init.stock_location_return', {
+        'name': 'Retours',
+        'location_id': root.id,
+        'usage': 'view',
+        })
+    returns = [
+        ('__init.stock_location_return_ali', u'Retours Aliments'),
+        ('__init.stock_location_return_medoc', u'Retours Médicaments'),
+        ('__init.stock_location_return_frigo', u'Retours Frigo'),
+        ('__init.stock_location_return_mat', u'Retours Matériel'),
+        ]
+    for xmlid, name in returns:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__init.stock_location_return').id,
+            'usage': 'internal',
+        })
+
+    # Casse = Products unavailable => not under WH but under physical locations
+    create_or_update(ctx, 'stock.location', '__init.stock_location_destroy', {
+        'name': 'Casse',
+        'location_id': root.id,
+        'usage': 'view',
+        })
+    destroy = [
+        ('__init.stock_location_destroy_ali', u'A détruire'),
+        ]
+    for xmlid, name in destroy:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__init.stock_location_destroy').id,
+            'usage': 'internal',
         })
 
 
