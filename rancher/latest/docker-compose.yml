@@ -34,7 +34,7 @@ odoo:
     - ODOO_LOGGING_JSON=${ODOO_LOGGING_JSON}
     - ODOO_CLOUD_PLATFORM_UNSAFE=${ODOO_CLOUD_PLATFORM_UNSAFE}
   labels:
-    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.affinity:host_label: application=true,integration=true
 
 db:
   image: camptocamp/postgresql:pg9.5-latest
@@ -44,14 +44,14 @@ db:
   volumes:
     - alcyon-latest-datadb:/var/lib/postgresql
   labels:
-    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.affinity:host_label: application=true,integration=true
 
 nginx:
   image: camptocamp/odoo-nginx:9.0
   links:
     - odoo:odoo
   labels:
-    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.affinity:host_label: application=true,integration=true
 
 letsencrypt:
   environment:
@@ -74,7 +74,7 @@ letsencrypt:
     PUBLIC_KEY_TYPE: RSA-2048
     RENEWAL_TIME: '12'
   labels:
-    io.rancher.scheduler.affinity:host_label: application=true
+    io.rancher.scheduler.affinity:host_label: application=true,integration=true
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: environment
   image: janeczku/rancher-letsencrypt:v0.3.0
