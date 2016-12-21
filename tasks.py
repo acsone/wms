@@ -102,6 +102,8 @@ def bump(ctx, feature=False, patch=False):
     pattern = r'^(\s*)image:\s+{}:\d+.\d+.\d+$'.format(DOCKER_IMAGE)
     replacement = r'\1image: {}:{}'.format(DOCKER_IMAGE, version)
     for rancher_file in VERSION_RANCHER_FILES:
+        if not os.path.exists(rancher_file):
+            continue
         # with fileinput, stdout is redirected to the file in place
         for line in fileinput.input(rancher_file, inplace=True):
             if DOCKER_IMAGE in line:
