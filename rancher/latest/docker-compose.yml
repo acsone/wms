@@ -79,4 +79,4 @@ letsencrypt:
     io.rancher.container.agent.role: environment
   image: janeczku/rancher-letsencrypt:v0.3.0
   volumes:
-  - /etc/letsencrypt/production/certs
+    - alcyon-test-certs:/etc/letsencrypt/production/certs
