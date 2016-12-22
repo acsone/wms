@@ -17,7 +17,7 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         'views/report_deliveryslip.xml',
-        #'data/paperformat.xml',
+        'data/paperformat.xml',
     ],
     'installable': True,
 }

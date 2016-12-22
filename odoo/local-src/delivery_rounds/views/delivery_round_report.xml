@@ -1,0 +1,166 @@
+<odoo>
+    <template id="delivery_rounds.delivery_round_report">
+        <t t-foreach="docs" t-as="delivery">
+            <t t-call="report.html_container">
+                <t t-set="company" t-value="res_company"/>
+
+                <div class="header">
+                    <div class="row">
+                        <div class="col-xs-1"/>
+                        <div class="col-xs-10">
+                            <table class="table table-bordered table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" class="col-xs-3" style="vertical-align: middle;">
+                                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 70px;"/>
+                                        </td>
+                                        <td align="center" class="col-xs-6" style="vertical-align: middle;">
+                                            <span t-field="company.street"/>,
+                                            <span t-field="company.zip"/>
+                                            <span t-field="company.city"/>
+                                            -
+                                            <span t-field="company.country_id"/>
+                                            <br/>
+                                            <span>Phone:</span>
+                                            <span t-field="company.phone"/>
+                                            -
+                                            <span>Fax:</span>
+                                            <span t-field="company.fax"/>
+                                            <br/>
+                                            <span>Email:</span>
+                                            <span t-field="company.email"/>
+                                        </td>
+                                        <td align="center" class="col-xs-3" style="vertical-align: middle;">
+                                            Delivery round
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-1"/>
+                    </div>
+                </div>
+                <div class="page">
+                    <h2><span t-field="delivery.name"/></h2>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-xs-5">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-ws-4">Driver</td>
+                                        <td class="col-ws-8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vehicule</td>
+                                        <td><span t-field="delivery.vehicle_id.name"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Registration</td>
+                                        <td><span t-field="delivery.vehicle_id.registration"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start mileage</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>End mileage</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-2"/>
+                        <div class="col-xs-5">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-ws-4">Stops</td>
+                                        <td class="col-ws-8">
+                                            <span t-esc="len(delivery.shipping_ids)" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Departure time</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arriving time</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                                <tr class="active">
+                                    <th>Seq.</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Mobile</th>
+                                    <th>Phone</th>
+                                    <th>Notes</th>
+                                    <th># Med.</th>
+                                    <th># Cold</th>
+                                    <th># Food</th>
+                                    <th># Hum.</th>
+                                    <th># Tot.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="delivery.shipping_ids" t-as="shipping">
+                                    <td>
+                                        <span t-field="shipping.sequence" />
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.partner_id.name" />
+                                    </td>
+                                    <td>
+                                        <address t-field="shipping.partner_id"
+                                                 t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.partner_id.mobile" />
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.partner_id.phone" />
+                                    </td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="text-center" style="border-top: 1px solid black;">
+                        <ul class="list-inline">
+                            <li>Page:</li>
+                            <li>
+                                <span class="page"/>
+                            </li>
+                            <li>/</li>
+                            <li>
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+            string="Delivery round"
+            id="action_report_delivery_round"
+            model="round.instance"
+            report_type="qweb-pdf"
+            name="delivery_rounds.delivery_round_report"
+            file="delivery_rounds.delivery_round_report"
+        />
+</odoo>

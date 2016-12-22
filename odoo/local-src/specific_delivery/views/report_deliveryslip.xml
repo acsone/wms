@@ -232,7 +232,7 @@
         </div>
     </template>
 
-    <template id="specific_deliveryslip.report_deliveryslip">
+    <template id="specific_delivery.report_deliveryslip">
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="deliveryslip">
                 <t t-set="company" t-value="res_company"/>
@@ -332,7 +332,7 @@
                     </div>
                 </div>
 
-                <t t-call="specific_deliveryslip.report_deliveryslip_alcyon" t-lang="partner.lang"/>
+                <t t-call="specific_delivery.report_deliveryslip_alcyon" t-lang="partner.lang"/>
 
                 <t t-call="specific_account.page_number_footer"/>
             </t>
@@ -340,6 +340,6 @@
     </template>
 
     <template id="stock.report_deliveryslip">
-        <t t-call="specific_deliveryslip.report_deliveryslip"/>
+        <t t-call="specific_delivery.report_deliveryslip"/>
     </template>
 </odoo>
