@@ -15,6 +15,16 @@ def change_admin_language(ctx):
 
 
 @anthem.log
+def admin_user_password(ctx):
+    # password for the test server,
+    # the password must be changed in production
+    ctx.env.user.password_crypt = (
+        '$pbkdf2-sha512$12000$cC4FIIRwjvE.p1SKcY5xTg$DkQBZfffiE18idabgyhey'
+        'UBLm9inCLxoi.UWKPFWO.E32HEpwRjz4Ps2z3/r0eSDFGL1HZXTXmNjD103jfAHYg'
+    )
+
+
+@anthem.log
 def import_users(ctx):
     """ Import users """
     content = resource_stream(req, 'data/install/res.users.csv')
@@ -25,4 +35,5 @@ def import_users(ctx):
 def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
+    admin_user_password(ctx)
     import_users(ctx)

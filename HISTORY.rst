@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Change admin password at the end of setup
+
 **Bugfixes**
 
 * Force nginx sidekick to use ipv4
