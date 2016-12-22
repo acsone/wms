@@ -28,6 +28,7 @@ class StockProductionLot(models.Model):
     product_id = fields.Many2one(
         track_visibility='onchange',
         )
+    name = fields.Char(track_visibility='onchange')
 
     def _get_fk_on(self, table):
         q = """  SELECT cl1.relname as table,
