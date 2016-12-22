@@ -26,7 +26,7 @@
 
     <template id="report_invoice_alcyon">
         <div class="page">
-            <table id="invoice_table" class="round_table">
+            <table id="products_table" class="round_table">
                 <thead>
                     <tr>
                         <th>Product<br/>reference</th>
@@ -59,33 +59,55 @@
                             <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
-                        <tr t-foreach="invoice_lines" t-as="line">
-                            <td>
-                                <span t-field="line.product_id.default_code"/>
-                            </td>
-                            <td>
-                                <span t-field="line.product_id.name"/>
-                            </td>
-                            <td>
-                                <span t-field="line.quantity"/>
-                            </td>
-                            <td>
-                                <span t-field="line.price_unit"/>
-                            </td>
-                            <td>
-                                <span t-field="line.supplier_promotion"/>
-                            </td>
-                            <td>
-                                <span t-field="line.alcyon_discount"/>
-                            </td>
-                            <td>
-                                <span t-field="line.price_subtotal"
-                                      t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
-                            </td>
-                            <td>
-                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.invoice_line_tax_ids))"/>
-                            </td>
-                        </tr>
+                        <t t-foreach="invoice_lines" t-as="line">
+                            <tr>
+                                <td>
+                                    <span t-field="line.product_id.default_code"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.product_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="int(line.quantity)"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.price_unit"
+                                          t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
+                                </td>
+                                <td>
+                                    <span t-field="line.supplier_promotion"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.alcyon_discount"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.price_subtotal"
+                                          t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
+                                </td>
+                                <td>
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"/>
+                                </td>
+                            </tr>
+                            <tr t-foreach="line.contribution_ids" t-as="contribution">
+                                <td></td>
+                                <td>
+                                    <span t-esc="contribution.description or contribution.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="int(line.quantity)"/>
+                                </td>
+                                <td>
+                                    <span t-field="contribution.amount"
+                                        t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span t-field="line.amount_contribution"/>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </t>
                     </t>
                     <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
@@ -128,14 +150,15 @@
                     </td>
                     <td>
                         <span>Untaxed<br/>amount</span>
-                        <span t-field="invoice.amount_untaxed"/>
+                        <span t-field="invoice.amount_untaxed_with_contribution"/>
                     </td>
                     <td>
                         <span>Total<br/>APB</span>
+                        <span t-field="invoice.amount_apb"/>
                     </td>
                     <td>
                         <span>Total<br/>tax</span>
-                        <span t-field="invoice.amount_tax"/>
+                        <span t-field="invoice.amount_only_tax"/>
                     </td>
                     <td>
                         <span>Total<br/>amount</span>
@@ -158,8 +181,8 @@
                         <td>Rate</td>
                         <td>VAT Amount</td>
                     </tr>
-                    <t t-if="len(invoice.tax_line_ids) &lt; 4">
-                        <t t-foreach="range(4 - len(invoice.tax_line_ids))" t-as="idx">
+                    <t t-if="len(invoice.invoice_only_tax_ids) &lt; 4">
+                        <t t-foreach="range(4 - len(invoice.invoice_only_tax_ids))" t-as="idx">
                             <tr>
                                 <td/>
                                 <td/>
@@ -168,7 +191,7 @@
                         </t>
                     </t>
 
-                    <t t-foreach="invoice.tax_line_ids" t-as="tax_line">
+                    <t t-foreach="invoice.invoice_only_tax_ids" t-as="tax_line">
                         <tr>
                             <td>
                                 <span t-field="tax_line.base"/>
@@ -252,7 +275,7 @@
                                  t-att-src="'data:image/png;base64,%s' % company.logo"
                                  style="max-height: 70px;"/>
                         </div>
-                        <div id="invoice_title">
+                        <div id="main_title">
                             <span t-if="invoice.type == 'out_invoice' and (invoice.state == 'open' or invoice.state == 'paid')">
                                 Invoice
                             </span>
@@ -293,7 +316,7 @@
                             <span>RPM Liège division Huy - TVA</span>
                             <span t-field="company.vat"/>
                         </div>
-                        <table id="invoice_reference" class="border_table round_table">
+                        <table id="document_reference" class="border_table round_table">
                             <tr>
                                 <td><span>Customer</span></td>
                                 <td><span>N° Document</span></td>
