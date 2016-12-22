@@ -13,9 +13,10 @@
                         <th>Product<br/>reference</th>
                         <th>Name</th>
                         <th>Quantity</th>
+                        <th>Lot</th>
+                        <th>Expiration<br/>date</th>
                         <th>Unit<br/>price</th>
-                        <th>%<br/>Base<br/>discount</th>
-                        <th>%<br/>Alcyon<br/>discount</th>
+                        <th>Unit<br/>price<br/>with discount</th>
                         <th>Subtotal<br/>price</th>
                         <th>TVA</th>
                     </tr>
@@ -26,9 +27,9 @@
                         <t t-set="move_lines" t-value="grouped_lines[1]"/>
 
                         <t t-if="order">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="8" class="sale_separator">
+                                <td colspan="9" class="sale_separator">
                                     <div>
                                         <span>Commande</span>
                                         <span t-field="order.name"/>
@@ -37,11 +38,12 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
                         <t  t-foreach="move_lines" t-as="line">
                             <t t-set="order_line" t-value="line.order_line_id"/>
+                            <t t-set="lot" t-value="line.restrict_lot_id"/>
                             <tr>
                                 <td>
                                     <span t-field="line.product_id.default_code"/>
@@ -53,15 +55,16 @@
                                     <span t-esc="int(line.product_qty)"/>
                                 </td>
                                 <td>
+                                    <span t-if="lot" t-field="lot.name"/>
+                                </td>
+                                <td>
+                                    <span t-if="lot" t-field="lot.life_date"/>
+                                </td>
+                                <td>
                                     <span t-if="order_line" t-field="order_line.price_unit"
                                           t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
                                 </td>
-                                <td>
-                                    <span t-if="order_line" t-field="order_line.supplier_promotion"/>
-                                </td>
-                                <td>
-                                    <span t-if="order_line" t-field="order_line.alcyon_discount"/>
-                                </td>
+                                <td></td>
                                 <td>
                                     <span t-if="order_line" t-field="order_line.price_subtotal"
                                           t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
@@ -78,11 +81,12 @@
                                 <td>
                                     <span t-esc="int(order_line.qty_delivered)"/>
                                 </td>
+                                <td></td>
+                                <td></td>
                                 <td>
                                     <span t-field="contribution.amount"
                                         t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
                                 </td>
-                                <td></td>
                                 <td></td>
                                 <td>
                                     <span t-field="order_line.amount_contribution"/>
