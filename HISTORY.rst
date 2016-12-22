@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-624: Manage stock production lot expired dates
+
 **Bugfixes**
 
 * Force nginx sidekick to use ipv4
