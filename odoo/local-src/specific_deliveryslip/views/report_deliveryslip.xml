@@ -1,0 +1,341 @@
+<odoo>
+    <template id="assets_specific" inherit_id="report.assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/specific_account/static/src/css/report_account.css"/>
+        </xpath>
+    </template>
+
+    <template id="report_deliveryslip_alcyon">
+        <div class="page">
+            <table id="products_table" class="round_table">
+                <thead>
+                    <tr>
+                        <th>Product<br/>reference</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit<br/>price</th>
+                        <th>%<br/>Base<br/>discount</th>
+                        <th>%<br/>Alcyon<br/>discount</th>
+                        <th>Subtotal<br/>price</th>
+                        <th>TVA</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <t t-foreach="deliveryslip.get_moves_by_order()" t-as="grouped_lines">
+                        <t t-set="order" t-value="grouped_lines[0]"/>
+                        <t t-set="move_lines" t-value="grouped_lines[1]"/>
+
+                        <t t-if="order">
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr>
+                                <td colspan="8" class="sale_separator">
+                                    <div>
+                                        <span>Commande</span>
+                                        <span t-field="order.name"/>
+                                        <span>du</span>
+                                        <span t-field="order.date_order_short"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                        </t>
+
+                        <t  t-foreach="move_lines" t-as="line">
+                            <t t-set="order_line" t-value="line.order_line_id"/>
+                            <tr>
+                                <td>
+                                    <span t-field="line.product_id.default_code"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.product_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="int(line.product_qty)"/>
+                                </td>
+                                <td>
+                                    <span t-if="order_line" t-field="order_line.price_unit"
+                                          t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
+                                </td>
+                                <td>
+                                    <span t-if="order_line" t-field="order_line.supplier_promotion"/>
+                                </td>
+                                <td>
+                                    <span t-if="order_line" t-field="order_line.alcyon_discount"/>
+                                </td>
+                                <td>
+                                    <span t-if="order_line" t-field="order_line.price_subtotal"
+                                          t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
+                                </td>
+                                <td>
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.only_tax_ids))"/>
+                                </td>
+                            </tr>
+                            <tr t-foreach="order_line.contribution_ids" t-as="contribution">
+                                <td></td>
+                                <td>
+                                    <span t-esc="contribution.description or contribution.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="int(order_line.qty_delivered)"/>
+                                </td>
+                                <td>
+                                    <span t-field="contribution.amount"
+                                        t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span t-field="order_line.amount_contribution"/>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </t>
+                    </t>
+                    <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                </tbody>
+            </table>
+            <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
+            <strong>Par Internet</strong> <u>www.alcyonbelux.be</u> : avant <strong>9h15</strong> le jour de livraison.<br/>
+            <strong>Par fax ou répondeur</strong> : avant <strong>9h00</strong> le jour de livraison.<br/>
+            <strong>Par téléphone</strong> (sauf pour les médicaments): avant <strong>9h00</strong> le jour de livraison</p>
+            <p style="font-size: x-small;">Seules seront prises en considération les demandes de retours signalées dans les 48 heures de la réception de la marchandise.<br/>
+            Elles devront être faites aurpès de notre <strong>service Qaulité</strong> au <strong>04/338.84.22</strong> ou pas email <strong>qualite@alcyonbelux.be</strong> ou par fax <strong>04/338.84.35</strong></p>
+
+            <!--<table id="total_table" class="border_table round_table">
+                <tr>
+                    <td>Totals</td>
+                    <td>
+                        <span>Gross<br/>amount</span>
+                        <span t-field="invoice.amount_without_discount"/>
+                    </td>
+                    <td>
+                        <span>Base<br/>discount</span>
+                        <span t-field="invoice.amount_supplier_discount"/>
+                    </td>
+                    <td>
+                        <span>Alcyon<br/>discount</span>
+                        <span t-field="invoice.amount_alcyon_discount"/>
+                    </td>
+                    <td>
+                        <span>Untaxed<br/>amount</span>
+                        <span t-field="invoice.amount_untaxed"/>
+                    </td>
+                    <td>
+                        <span>Total<br/>APB</span>
+                    </td>
+                    <td>
+                        <span>Total<br/>tax</span>
+                        <span t-field="invoice.amount_tax"/>
+                    </td>
+                    <td>
+                        <span>Total<br/>amount</span>
+                        <strong t-field="invoice.amount_total"/>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <table id="summary_table" class="round_table">
+                    <tr>
+                        <td colspan="4">
+                            <span>SUMMARY</span>
+                            <br/>
+                            <span>Total discount:</span>
+                            <span t-field="invoice.amount_discount_total"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Base taxable</td>
+                        <td>Rate</td>
+                        <td>VAT Amount</td>
+                    </tr>
+                    <t t-if="len(invoice.tax_line_ids) &lt; 4">
+                        <t t-foreach="range(4 - len(invoice.tax_line_ids))" t-as="idx">
+                            <tr>
+                                <td/>
+                                <td/>
+                                <td/>
+                            </tr>
+                        </t>
+                    </t>
+
+                    <t t-foreach="invoice.tax_line_ids" t-as="tax_line">
+                        <tr>
+                            <td>
+                                <span t-field="tax_line.base"/>
+                            </td>
+                            <td>
+                                <span t-esc="'%.2f' % (tax_line.tax_id.amount)"/>
+                            </td>
+                            <td>
+                                <span t-field="tax_line.amount"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+
+                <table id="bank_table" class="round_table">
+                    <t t-set="bank_cbc" t-value="invoice.env.ref('scenario.account_journal_cbc_1')"/>
+                    <t t-set="bank_ing" t-value="invoice.env.ref('scenario.account_journal_ing_1')"/>
+                    <t t-set="bank_dexia" t-value="invoice.env.ref('scenario.account_journal_belfius_1')"/>
+                    <t t-set="bank_bnp" t-value="invoice.env.ref('scenario.account_journal_bnp_1')"/>
+                    <tr>
+                        <td colspan="2">
+                            <t>Reference for your payment</t>
+                            <br/>
+                            <span t-field="invoice.reference"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CBC:
+                            <span t-esc="bank_cbc.bank_acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-esc="bank_cbc.bank_id.bic"/>
+                        </td>
+                        <td>
+                            ING:
+                            <span t-esc="bank_ing.bank_acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-esc="bank_ing.bank_id.bic"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            DEXIA:
+                            <span t-esc="bank_dexia.bank_acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-esc="bank_dexia.bank_id.bic"/>
+                        </td>
+                        <td>
+                            BNP PARIBAS FORTIS :
+                            <span t-esc="bank_bnp.bank_acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-esc="bank_bnp.bank_id.bic"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Due date</span>
+                        </td>
+                        <td><span t-field="invoice.date_due"/></td>
+                    </tr>
+                </table>
+            </div>-->
+        </div>
+    </template>
+
+    <template id="specific_deliveryslip.report_deliveryslip">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="deliveryslip">
+                <t t-set="company" t-value="res_company"/>
+                <t t-set="deliveryslip" t-value="deliveryslip.with_context({'lang': deliveryslip.partner_id.lang})"/>
+                <t t-set="partner" t-value="deliveryslip.partner_id"/>
+
+                <div class="header">
+                    <div>
+                        <div id="logo">
+                            <img t-if="company.logo"
+                                 t-att-src="'data:image/png;base64,%s' % company.logo"
+                                 style="max-height: 70px;"/>
+                        </div>
+                        <div id="main_title">
+                            Delivery slip
+                        </div>
+                    </div>
+                    <div id="left_header">
+                        <div id="company_header">
+                            <span t-field="company.street"/>,
+                            <span t-field="company.zip"/>
+                            <span t-field="company.city"/>
+                            -
+                            <span t-field="company.country_id"/>
+                            <br/>
+                            <span>Phone:</span>
+                            <span t-field="company.phone"/>
+                            -
+                            <span>Fax:</span>
+                            <span t-field="company.fax"/>
+                            <br/>
+                            <span>Email:</span>
+                            <span t-field="company.email"/>
+                            <br/>
+                            <span style="display: inline-block; vertical-align: top;">Commands:
+                                <br/>
+                            </span>
+                            <span style="display: inline-block; vertical-align: top;">
+                                <span>Phone:</span>
+                                <span t-field="company.order_phone"/>
+                                <br/>
+                                <span>Fax:</span>
+                                <span t-field="company.order_fax"/>
+                            </span>
+                            <br/>
+                            <span>RPM Liège division Huy - TVA</span>
+                            <span t-field="company.vat"/>
+                        </div>
+                        <table id="invoice_reference" class="border_table round_table">
+                            <tr>
+                                <td><span>Customer</span></td>
+                                <td><span>N° Document</span></td>
+                                <td><span>Scheduled date</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="partner.ref"/>
+                                </td>
+                                <td>
+                                    <span t-field="deliveryslip.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="deliveryslip.date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span>Your VAT number:</span>
+                                    <span t-field="partner.vat"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="partner_header">
+                        <t t-if="partner.parent_id">
+                            <span t-field="partner.parent_id"/>
+                            <br/>
+                        </t>
+                        <t t-if="partner.title">
+                            <span t-field="partner.title"/>
+                        </t>
+                        <span t-field="partner.name"/>
+                        <br/>
+                        <t t-if="partner.street">
+                            <span t-field="partner.street"/>
+                            <br/>
+                        </t>
+                        <t t-if="partner.zip or partner.city">
+                            <span t-field="partner.zip"/>
+                            <span t-field="partner.city"/>
+                            <br/>
+                        </t>
+                        <t t-if="partner.country_id">
+                            <span t-field="partner.country_id"/>
+                        </t>
+                    </div>
+                </div>
+
+                <t t-call="specific_deliveryslip.report_deliveryslip_alcyon" t-lang="partner.lang"/>
+
+                <t t-call="specific_account.page_number_footer"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="stock.report_deliveryslip">
+        <t t-call="specific_deliveryslip.report_deliveryslip"/>
+    </template>
+</odoo>
