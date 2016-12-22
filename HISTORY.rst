@@ -17,6 +17,11 @@ Unreleased
 
 **Build**
 
+* Transfer Rancher templates
+* Pin latest to integration server
+* Skip missing rancher files
+* Store let's encrypt certs in a named volume
+
 **Documentation**
 
 
