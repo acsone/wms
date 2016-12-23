@@ -72,6 +72,7 @@ migration:
           - specific_sale
           - specific_partner
           - specific_product
+          - specific_stock
           - specific_translations
           - stock_barcode_fix
           - stock_grn

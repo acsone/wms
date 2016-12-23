@@ -11,6 +11,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-624: Manage stock production lot expired dates
+* ALCN-677: Specific manage stock production lot expired dates
 
 **Bugfixes**
 
