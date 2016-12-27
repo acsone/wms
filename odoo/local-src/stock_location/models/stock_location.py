@@ -24,4 +24,4 @@ from openerp import fields, models, api
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    checksum = fields.Char('Checksum')
+    bin_checksum = fields.Char('Checksum')

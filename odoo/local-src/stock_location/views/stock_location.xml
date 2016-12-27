@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_location_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='usage']" position="after">
-                    <field name="checksum"/>
+                    <field name="bin_checksum"/>
                 </xpath>
             </field>
         </record>
@@ -18,7 +18,7 @@
             <field name="inherit_id" ref="stock.view_location_tree2" />
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="inside">
-                    <field name="checksum"/>
+                    <field name="bin_checksum"/>
                 </xpath>
             </field>
         </record>

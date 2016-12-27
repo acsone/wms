@@ -1,4 +1,4 @@
-id,name,location_id/id,checksum
+id,name,location_id/id,bin_checksum
 __init.stock_location_G,G,__init.stock_location_medoc,
 __init.stock_location_GAA11094,GAA110,__init.stock_location_G,94
 __init.stock_location_GAA21033,GAA210,__init.stock_location_G,33
