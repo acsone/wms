@@ -24,7 +24,8 @@
                 <tbody class="invoice_tbody">
                     <t t-foreach="deliveryslip.get_moves_by_order()" t-as="grouped_lines">
                         <t t-set="order" t-value="grouped_lines[0]"/>
-                        <t t-set="move_lines" t-value="grouped_lines[1]"/>
+                        <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
+                        <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
 
                         <t t-if="order">
                             <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
@@ -85,7 +86,7 @@
                                 <td></td>
                                 <td>
                                     <span t-field="contribution.amount"
-                                        t-field-options='{"widget": "monetary", "display_currency": "invoice.currency_id"}'/>
+                                        t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
                                 </td>
                                 <td></td>
                                 <td>
@@ -94,8 +95,36 @@
                                 <td></td>
                             </tr>
                         </t>
+
+                        <t t-if="backorder_move_lines">
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr>
+                                <td colspan="9" class="sale_separator">
+                                    <div>
+                                        <span>Solde à livrer sur la commande </span>
+                                        <span t-field="order.name"/>
+                                        <table style="width: 50%;">
+                                            <tbody>
+                                                <tr t-foreach="backorder_move_lines" t-as="line">
+                                                    <td style="border: none;">
+                                                        <span t-field="line.product_id.default_code"/>
+                                                    </td>
+                                                    <td style="border: none;">
+                                                        <span t-field="line.product_id.name"/>
+                                                    </td>
+                                                    <td style="border: none;">
+                                                        <span t-esc="int(line.product_qty)"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                        </t>
                     </t>
-                    <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                    <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
             <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
@@ -104,6 +133,45 @@
             <strong>Par téléphone</strong> (sauf pour les médicaments): avant <strong>9h00</strong> le jour de livraison</p>
             <p style="font-size: x-small;">Seules seront prises en considération les demandes de retours signalées dans les 48 heures de la réception de la marchandise.<br/>
             Elles devront être faites aurpès de notre <strong>service Qaulité</strong> au <strong>04/338.84.22</strong> ou pas email <strong>qualite@alcyonbelux.be</strong> ou par fax <strong>04/338.84.35</strong></p>
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="border_table round_table summary_deliverslip">
+                        <div style="text-align: center">
+                            Number of<br/>packages
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="border_table round_table summary_deliverslip">
+                        <div style="height: 50%; border-bottom: 1px solid black">
+                            Round:
+                        </div>
+                        <div style="height: 50%">
+                            Delivery:
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="border_table round_table summary_deliverslip" style="text-align: center">
+                        <div style="height: 50%; border-bottom: 1px solid black">
+                            PORT:
+                        </div>
+                        <div style="height: 50%">
+                            Weight:
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class=" border_table round_table summary_deliverslip">
+                        <div>
+                            Received the:<br/>
+                            Signature:
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
             <!--<table id="total_table" class="border_table round_table">
                 <tr>

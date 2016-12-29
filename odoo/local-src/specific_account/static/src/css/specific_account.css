@@ -34,6 +34,14 @@
     border-left: none;
 }
 
+.summary_deliverslip {
+    height: 100px;
+}
+
+.summary_deliverslip > div {
+    padding: 5px;
+}
+
 .intrastat_table {
     width: 35%;
     margin-left: 65%;
