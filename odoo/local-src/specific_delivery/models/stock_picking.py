@@ -40,19 +40,34 @@ class StockPicking(models.Model):
         self.ensure_one()
 
         moves_by_order = defaultdict(list)
+        backorder_moves_by_order = defaultdict(list)
         result = []
         moves_witout_order = []
+        backorder_moves_without_order = []
         for line in self.move_lines_related:
             if not line.order_id:
                 moves_witout_order.append(line)
             else:
                 moves_by_order[line.order_id].append(line)
 
+        backorders = self.env['stock.picking']. \
+            search([('backorder_id', '=', self.id)])
+        for backorder in backorders:
+            for line in backorder.move_lines_related:
+                if not line.order_id:
+                    backorder_moves_without_order.append(line)
+                else:
+                    backorder_moves_by_order[line.order_id].append(line)
+
+        result_dict = {}
+        for order, moves in moves_by_order.iteritems():
+            result_dict[order] = [moves, backorder_moves_by_order.get(order, [])]
+
         if moves_witout_order:
-            result.append((None, moves_witout_order))
+            result.append((None, moves_witout_order, backorder_moves_without_order))
 
         result.extend(
-            sorted(moves_by_order.items(),
-                   key=lambda picking: (picking[0].date_order, picking[0].id))
+            sorted(result_dict.items(),
+                   key=lambda picking: (picking[0][0].date_order, picking[0][0].id))
         )
         return result
