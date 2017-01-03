@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-668: Move internal reference field on partner form view
+
 **Bugfixes**
 
 * Force nginx sidekick to use ipv4
