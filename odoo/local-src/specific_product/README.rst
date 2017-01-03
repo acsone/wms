@@ -6,7 +6,9 @@
 Specific Product
 ================
 
-This module adds Alcyon specific fields and logic for products.
+This module adds Alcyon specific fields and logic for products:
+
+* On product tree view, replace volume and weight columns by sale price 1 (list price) and sale price 2 (from price list)
 
 Credits
 =======
@@ -14,4 +16,5 @@ Credits
 Contributors
 ------------
 
+* Julien Coux <julien.coux@camptocamp.com>
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>

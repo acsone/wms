@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-672: Add sale prices on products tree view
+
 **Bugfixes**
 
 * Force nginx sidekick to use ipv4
