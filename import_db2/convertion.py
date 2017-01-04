@@ -12,6 +12,7 @@ class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'default_code'
+    XMLID_IMPORT_NAME = 'scenario'
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
@@ -247,6 +248,7 @@ class SupplierMapper(EntityMapper):
     DB2_REF_NAME = 'founum'
 
     XMLID_FIELD = 'ref'
+    XMLID_IMPORT_NAME = 'scenario'
 
     FIELDS_MAPPING = [
         FieldMapper('ref', 'founum'),

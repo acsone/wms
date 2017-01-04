@@ -30,7 +30,7 @@ class EntityMapper:
 
     DB2_REF_NAME = None
 
-    XMLID_IMPORT_NAME = 'scenario'
+    XMLID_IMPORT_NAME = '__import__'
     XMLID_FIELD = None
 
     FIELDS_MAPPING = []
