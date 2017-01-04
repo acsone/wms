@@ -214,6 +214,26 @@ def add_xmlid_tax(ctx):
 
 
 @anthem.log
+def add_xmlid_fiscal_position(ctx):
+    fiscal_positions = ctx.env['account.fiscal.position'].search([])
+    for pos in fiscal_positions:
+        if 'Extra' in pos.name:
+            code = 'extra'
+        elif 'Intra' in pos.name:
+            code = 'intra'
+        elif 'National' in pos.name:
+            code = 'nat'
+        else:
+            code = 'cocontractor'
+
+        add_xmlid(
+            ctx, pos,
+            '__setup__.fiscal_position_' + code,
+            noupdate=True
+            )
+
+
+@anthem.log
 def adapt_chart_of_account(ctx):
     """ Adapt chart of account """
     content = resource_stream(req, 'data/install/account.account.csv')
@@ -264,6 +284,7 @@ def main(ctx):
     create_financial_journals(ctx)
     add_xmlid_account(ctx)
     add_xmlid_tax(ctx)
+    add_xmlid_fiscal_position(ctx)
     adapt_chart_of_account(ctx)
     settings(ctx)
     default_values(ctx)

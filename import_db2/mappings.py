@@ -172,6 +172,12 @@ CLIENT_PROMOTION_PRICELIST = {
      411, 412, 600)
 }
 
+CLIENT_FISCAL_POSITION = {
+  0: '__setup__.fiscal_position_nat',
+  1: '__setup__.fiscal_position_nat',
+  2: '',
+}
+
 PRODUCT_TRACKING = {
     0: 'none',
     1: 'lot',
@@ -352,6 +358,22 @@ COUNTRY = {
     817: 'base.to',
     823: 'base.fm',
 }
+
+CEE_COUNTRIES = {
+    1: 'base.fr',
+    2: 'base.be',
+    3: 'base.nl',
+    4: 'base.de',
+    5: 'base.it',
+    6: 'base.uk',
+    7: 'base.ie',
+    8: 'base.dk',
+    9: 'base.gr',
+    10: 'base.pt',
+    11: 'base.es',
+    12: 'base.lu',
+}
+
 
 PRODUCT_SALE_VAT = {
     0: "scenario.account_tax_sale_main_company_0%",
