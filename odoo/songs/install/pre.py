@@ -26,6 +26,7 @@ def setup_company(ctx):
         'website': 'www.alcyonbelux.be',
         'vat': 'BE 0421.801.233',
         'company_registry': 'RC LIEGE : 138.989',
+        'vat_check_vies': True,
         'rml_header1': 'Une société de Vétérinaires\
          au service des Vétérinaires',
         'rml_footer': 'Phone: +32 (0)4 338 34 90 | Fax: +32 (0)4 338 27 83 | '
