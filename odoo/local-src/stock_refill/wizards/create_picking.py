@@ -44,7 +44,7 @@ class StockWizardReassort(models.TransientModel):
                 'location_id': report.location_id.id,
                 'location_dest_id': picking_type.default_location_dest_id.id,
                 })
-            move = self.env['stock.move'].create({
+            self.env['stock.move'].create({
                 'name': report.product_id.display_name,
                 'picking_id': picking.id,
                 'product_id': report.product_id.id,

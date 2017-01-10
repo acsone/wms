@@ -27,7 +27,8 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def _action_procurement_create(self):
-        return super(SaleOrderLine, self.with_context(recount=True))._action_procurement_create()
+        return super(SaleOrderLine, self.with_context(recount=True)). \
+            _action_procurement_create()
 
 
 class StockQuant(models.Model):

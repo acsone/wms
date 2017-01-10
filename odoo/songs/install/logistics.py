@@ -103,10 +103,12 @@ def create_locations(ctx):
         })
 
     # Casse = Products unavailable => not under WH but under physical locations
-    create_or_update(ctx, 'stock.location', '__init.stock_location_destroyed', {
-        'name': 'Détruit',
-        'location_id': ctx.env.ref('stock.stock_location_locations_partner').id,
-        'usage': 'customer',
+    loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
+    create_or_update(
+        ctx, 'stock.location', '__init.stock_location_destroyed', {
+            'name': 'Détruit',
+            'location_id': loc_partner.id,
+            'usage': 'customer',
         })
     create_or_update(ctx, 'stock.location', '__init.stock_location_destroy', {
         'name': 'Casse',
@@ -169,7 +171,6 @@ def create_picking_types(ctx):
         [('name', '=', 'Alcyon Belux SA Sequence out')],
         limit=1,
     )
-
 
     internal_sequence = ctx.env['ir.sequence'].search(
         [('name', '=', 'Alcyon Belux SA Sequence internal')],
