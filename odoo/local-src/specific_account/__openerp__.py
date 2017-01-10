@@ -12,6 +12,7 @@
         'sale',
         'specific_base',
         'pricelist_discount',
+        'report_intrastat',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

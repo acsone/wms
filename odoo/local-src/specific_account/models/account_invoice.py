@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from collections import defaultdict
 
-from openerp import api, fields, models
+from openerp import api, fields, models, _
+from openerp.exceptions import Warning
 
 
 class AccountInvoice(models.Model):
@@ -78,3 +79,31 @@ class AccountInvoice(models.Model):
             sorted(sales.items(), key=lambda x: (x[0].date_order, x[0].id))
         )
         return result
+
+    @api.multi
+    def get_instrastat_values(self):
+        values_by_intrastat = {}
+
+        for line in self.invoice_line_ids:
+            if not line.product_id or not line.product_id.intrastat_id:
+                continue
+            intrastat = line.product_id.intrastat_id
+
+            weight = line.product_id.weight * line.quantity
+            amount = line.price_subtotal
+
+            intrastat_value = values_by_intrastat.get(intrastat.name, [])
+            if not intrastat_value:
+                intrastat_value = [weight, amount]
+            else:
+                total_weight = intrastat_value[0] + weight
+                total_amount = intrastat_value[1] + amount
+                intrastat_value = [total_weight, total_amount]
+
+            values_by_intrastat[intrastat.name] = intrastat_value
+
+        values = [(code, value[0], value[1])
+                  for code, value in values_by_intrastat.iteritems()]
+        values.sort(key=lambda line: line[0])
+
+        return values
