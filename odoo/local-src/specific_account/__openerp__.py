@@ -17,6 +17,7 @@
     'data': [
         'data/paperformat.xml',
         'views/report_invoice.xml',
+        'views/ir_sequence.xml',
         'views/menu.xml',
     ],
     'installable': True,
