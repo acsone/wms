@@ -91,7 +91,7 @@
                 </tbody>
             </table>
             <div t-if="invoice.partner_id.country_id and invoice.partner_id.country_id.intrastat and invoice.partner_id.country_id != invoice.env.ref('base.be')">
-                <table class="round_table" style="width: 35%; margin-left: 65%; font-size: x-small;">
+                <table class="round_table intrastat_table">
                     <tbody>
                         <tr>
                             <th class="text-right">Intrastat code</th>
