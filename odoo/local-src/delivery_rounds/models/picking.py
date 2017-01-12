@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp import api, fields, models, _
+from openerp.exceptions import Warning
 
 
 class StockPicking(models.Model):
@@ -80,6 +81,9 @@ class StockPicking(models.Model):
                     'partially_available',
                     'assigned') and
                 r.delivery_round_id.id != vals['delivery_round_id'])
+            if not pickings:
+                raise Warning(_(
+                    'No available picking to assign this delivery round'))
             pickings.with_context(noround_write=True).write(
                 {'delivery_round_id': vals['delivery_round_id']})
             del vals['delivery_round_id']
