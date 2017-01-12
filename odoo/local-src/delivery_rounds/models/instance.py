@@ -207,3 +207,7 @@ class RoundInstance(models.Model):
         for shipping in self.shipping_ids:
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
+
+    @api.multi
+    def print_all_deliveryslip(self):
+        return self.env['report'].get_action(self.shipping_ids, 'stock.report_deliveryslip')
