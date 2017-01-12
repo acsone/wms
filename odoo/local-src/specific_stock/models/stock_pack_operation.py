@@ -16,9 +16,9 @@ class StockPackOperationLot(models.Model):
     @api.onchange('life_date')
     def _onchange_life_date(self):
         if self.life_date:
-            self.lot_name = fields.Date.from_string(
-                self.life_date
-            ).strftime('%Y%m%d')
+            date = fields.Datetime.from_string(self.life_date)
+            date_with_timezone = fields.Datetime.context_timestamp(self, date)
+            self.lot_name = date_with_timezone.strftime('%Y%m%d')
 
     @api.multi
     def write(self, vals):
