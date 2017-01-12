@@ -30,7 +30,6 @@ class AccountInvoice(models.Model):
         else:
             journal_domain = []
 
-
         return {
             'domain': {
                 'journal_id': journal_domain,
