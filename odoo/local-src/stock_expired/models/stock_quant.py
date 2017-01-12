@@ -10,6 +10,24 @@ from openerp import models, fields, api
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
+    alert_date = fields.Datetime(
+        related='lot_id.alert_date',
+        store=True,
+        readonly=True,
+    )
+
+    use_date = fields.Datetime(
+        related='lot_id.use_date',
+        store=True,
+        readonly=True,
+    )
+
+    life_date = fields.Datetime(
+        related='lot_id.life_date',
+        store=True,
+        readonly=True,
+    )
+
     @api.model
     def apply_removal_strategy(
             self, qty, move, ops=False, domain=None, removal_strategy='fifo'

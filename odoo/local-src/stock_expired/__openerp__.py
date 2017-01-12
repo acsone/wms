@@ -19,6 +19,7 @@
         'data/data.xml',
         # Views
         'views/stock_location.xml',
+        'views/stock_quant.xml',
     ],
     'installable': True,
 }
