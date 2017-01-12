@@ -21,10 +21,10 @@ class TestStockProductionLotLifeDates(TransactionCase):
             'name': 'Unittest product',
             'type': 'product',
             'categ_id': self.category.id,
-            'use_time': 0,
-            'life_time': 1,
-            'alert_time': 2,
-            'removal_time': 3,
+            'use_time': 10,
+            'life_time': 11,
+            'alert_time': 12,
+            'removal_time': 13,
         })
         self.production_lot = self.production_lot_model.create({
             'name': '000001',
@@ -38,20 +38,41 @@ class TestStockProductionLotLifeDates(TransactionCase):
             'name': 'Unittest product 2',
             'type': 'product',
             'categ_id': self.category_2.id,
-            'use_time': -3,
-            'life_time': -2,
-            'alert_time': -1,
-            'removal_time': 0,
+            'use_time': -13,
+            'life_time': -12,
+            'alert_time': -11,
+            'removal_time': -10,
         })
         self.production_lot_2 = self.production_lot_model.create({
             'name': '000001',
             'product_id': self.product_2.id,
         })
 
+        self.category_3 = self.category_model.create({
+            'name': 'Unittest category 3',
+        })
+        self.product_3 = self.product_model.create({
+            'name': 'Unittest product 3',
+            'type': 'product',
+            'categ_id': self.category_3.id,
+            'use_time': 0,
+            'life_time': 0,
+            'alert_time': 0,
+            'removal_time': 0,
+        })
+        self.production_lot_3 = self.production_lot_model.create({
+            'name': '000001',
+            'product_id': self.product_3.id,
+        })
+
     @post_install(True)
     @at_install(False)
     def test_1_onchange_use_date(self):
-        for production_lot in [self.production_lot, self.production_lot_2]:
+        for production_lot in [
+            self.production_lot,
+            self.production_lot_2,
+            self.production_lot_3,
+        ]:
             for base_date in [None, 'alert', 'life', 'removal', 'use']:
                 production_lot.use_date = False
                 production_lot.life_date = False
@@ -63,21 +84,25 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 settings.execute()
                 production_lot.use_date = '2016-12-23 10:00:00'
                 production_lot.onchange_use_date()
+                date_must_change = (
+                    base_date == 'use'
+                    and production_lot != self.production_lot_3
+                )
                 self.assertEqual(
                     production_lot.use_date,
                     '2016-12-23 10:00:00'
                 )
                 self.assertEqual(
                     production_lot.life_date,
-                    '2016-12-24 10:00:00' if base_date == 'use' else False
+                    '2016-12-24 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.alert_date,
-                    '2016-12-25 10:00:00' if base_date == 'use' else False
+                    '2016-12-25 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.removal_date,
-                    '2016-12-26 10:00:00' if base_date == 'use' else False
+                    '2016-12-26 10:00:00' if date_must_change else False
                 )
                 # Check the onchange not fails with no value
                 production_lot.use_date = False
@@ -86,7 +111,11 @@ class TestStockProductionLotLifeDates(TransactionCase):
     @post_install(True)
     @at_install(False)
     def test_2_onchange_life_date(self):
-        for production_lot in [self.production_lot, self.production_lot_2]:
+        for production_lot in [
+            self.production_lot,
+            self.production_lot_2,
+            self.production_lot_3,
+        ]:
             for base_date in [None, 'alert', 'life', 'removal', 'use']:
                 production_lot.use_date = False
                 production_lot.life_date = False
@@ -98,9 +127,13 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 settings.execute()
                 production_lot.life_date = '2016-12-23 10:00:00'
                 production_lot.onchange_life_date()
+                date_must_change = (
+                    base_date == 'life'
+                    and production_lot != self.production_lot_3
+                )
                 self.assertEqual(
                     production_lot.use_date,
-                    '2016-12-22 10:00:00' if base_date == 'life' else False
+                    '2016-12-22 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.life_date,
@@ -108,11 +141,11 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 )
                 self.assertEqual(
                     production_lot.alert_date,
-                    '2016-12-24 10:00:00' if base_date == 'life' else False
+                    '2016-12-24 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.removal_date,
-                    '2016-12-25 10:00:00' if base_date == 'life' else False
+                    '2016-12-25 10:00:00' if date_must_change else False
                 )
                 # Check the onchange not fails with no value
                 production_lot.life_date = False
@@ -121,7 +154,11 @@ class TestStockProductionLotLifeDates(TransactionCase):
     @post_install(True)
     @at_install(False)
     def test_3_onchange_alert_date(self):
-        for production_lot in [self.production_lot, self.production_lot_2]:
+        for production_lot in [
+            self.production_lot,
+            self.production_lot_2,
+            self.production_lot_3,
+        ]:
             for base_date in [None, 'alert', 'life', 'removal', 'use']:
                 production_lot.use_date = False
                 production_lot.life_date = False
@@ -133,13 +170,17 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 settings.execute()
                 production_lot.alert_date = '2016-12-23 10:00:00'
                 production_lot.onchange_alert_date()
+                date_must_change = (
+                    base_date == 'alert'
+                    and production_lot != self.production_lot_3
+                )
                 self.assertEqual(
                     production_lot.use_date,
-                    '2016-12-21 10:00:00' if base_date == 'alert' else False
+                    '2016-12-21 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.life_date,
-                    '2016-12-22 10:00:00' if base_date == 'alert' else False
+                    '2016-12-22 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.alert_date,
@@ -147,7 +188,7 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 )
                 self.assertEqual(
                     production_lot.removal_date,
-                    '2016-12-24 10:00:00' if base_date == 'alert' else False
+                    '2016-12-24 10:00:00' if date_must_change else False
                 )
                 # Check the onchange not fails with no value
                 production_lot.alert_date = False
@@ -156,7 +197,11 @@ class TestStockProductionLotLifeDates(TransactionCase):
     @post_install(True)
     @at_install(False)
     def test_4_onchange_removal_date(self):
-        for production_lot in [self.production_lot, self.production_lot_2]:
+        for production_lot in [
+            self.production_lot,
+            self.production_lot_2,
+            self.production_lot_3,
+        ]:
             for base_date in [None, 'alert', 'life', 'removal', 'use']:
                 production_lot.use_date = False
                 production_lot.life_date = False
@@ -168,17 +213,21 @@ class TestStockProductionLotLifeDates(TransactionCase):
                 settings.execute()
                 production_lot.removal_date = '2016-12-23 10:00:00'
                 production_lot.onchange_removal_date()
+                date_must_change = (
+                    base_date == 'removal'
+                    and production_lot != self.production_lot_3
+                )
                 self.assertEqual(
                     production_lot.use_date,
-                    '2016-12-20 10:00:00' if base_date == 'removal' else False
+                    '2016-12-20 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.life_date,
-                    '2016-12-21 10:00:00' if base_date == 'removal' else False
+                    '2016-12-21 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.alert_date,
-                    '2016-12-22 10:00:00' if base_date == 'removal' else False
+                    '2016-12-22 10:00:00' if date_must_change else False
                 )
                 self.assertEqual(
                     production_lot.removal_date,

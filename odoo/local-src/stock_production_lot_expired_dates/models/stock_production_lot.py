@@ -35,17 +35,15 @@ class StockProductionLot(models.Model):
                 from_date = fields.Datetime.from_string(
                     getattr(self, from_field + '_date')
                 )
-                self.update({
-                    to_fields[0] + '_date': from_date - relativedelta(
-                        days=(from_time - times[to_fields[0] + '_time'])
-                    ),
-                    to_fields[1] + '_date': from_date - relativedelta(
-                        days=(from_time - times[to_fields[1] + '_time'])
-                    ),
-                    to_fields[2] + '_date': from_date - relativedelta(
-                        days=(from_time - times[to_fields[2] + '_time'])
-                    ),
-                })
+                values = {}
+                for index in [0, 1, 2]:
+                    if times[to_fields[index] + '_time']:
+                        days = from_time - times[to_fields[index] + '_time']
+                        values[
+                            to_fields[index] + '_date'
+                        ] = (from_date - relativedelta(days=days))
+                if values:
+                    self.update(values)
 
     @api.onchange('removal_date')
     def onchange_removal_date(self):
