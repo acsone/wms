@@ -2,15 +2,15 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============
-Specific Sale
-=============
+==============
+Specific Stock
+==============
 
 This module adds Alcyon specific fields and logic for stock.
 
 * Allow to manage expired times on product category
-* Add a required constraint on removal date of "serial numbers / lots"
-* Allow to set removal date directly on picking transfer wizard
+* Add a required constraint on life date of "serial numbers / lots"
+* Allow to set life date directly on picking transfer wizard
 
 Credits
 =======

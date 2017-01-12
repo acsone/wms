@@ -8,16 +8,16 @@ from openerp import models, fields, api
 class StockPackOperationLot(models.Model):
     _inherit = 'stock.pack.operation.lot'
 
-    removal_date = fields.Datetime(
+    life_date = fields.Datetime(
+        string='End of Life Date',
         required=True,
-        string='Removal date',
     )
 
-    @api.onchange('removal_date')
-    def _onchange_removal_date(self):
-        if self.removal_date:
+    @api.onchange('life_date')
+    def _onchange_life_date(self):
+        if self.life_date:
             self.lot_name = fields.Date.from_string(
-                self.removal_date
+                self.life_date
             ).strftime('%Y%m%d')
 
     @api.multi
@@ -25,16 +25,16 @@ class StockPackOperationLot(models.Model):
         result = super(StockPackOperationLot, self).write(vals)
         if vals.get('lot_id'):
             for pack_operation_lot in self:
-                removal_date = pack_operation_lot.removal_date
-                if removal_date:
-                    pack_operation_lot.lot_id.removal_date = removal_date
-                    pack_operation_lot.lot_id.onchange_removal_date()
+                life_date = pack_operation_lot.life_date
+                if life_date:
+                    pack_operation_lot.lot_id.life_date = life_date
+                    pack_operation_lot.lot_id.onchange_life_date()
         return result
 
     @api.model
     def create(self, vals):
         new_vals = vals.copy()
-        if vals.get('lot_id') and not vals.get('removal_date'):
+        if vals.get('lot_id') and not vals.get('life_date'):
             lot = self.env['stock.production.lot'].browse(vals['lot_id'])
-            new_vals['removal_date'] = lot.removal_date
+            new_vals['life_date'] = lot.life_date
         return super(StockPackOperationLot, self).create(new_vals)

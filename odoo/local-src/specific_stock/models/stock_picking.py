@@ -11,5 +11,5 @@ class StockPicking(models.Model):
     @api.multi
     def create_lots_for_picking(self):
         return super(StockPicking, self.with_context(
-            default_removal_date_allowed=True
+            default_life_date_allowed=True
         )).create_lots_for_picking()

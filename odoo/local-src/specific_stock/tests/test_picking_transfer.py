@@ -17,7 +17,7 @@ class TestPickingTransfer(TransactionCase):
         self.stock_config_settings_model = self.env['stock.config.settings']
 
         settings = self.stock_config_settings_model.create({
-            'production_lot_base_date': 'removal'
+            'production_lot_base_date': 'life'
         })
         settings.execute()
 
@@ -70,7 +70,7 @@ class TestPickingTransfer(TransactionCase):
         pack_operation.write({
             'pack_lot_ids': [
                 (0, 0, {
-                    'removal_date': '2017-01-02 10:00:00',
+                    'life_date': '2017-01-02 10:00:00',
                     'lot_name': '20170102',
                     'qty': 1,
                 })
@@ -84,11 +84,11 @@ class TestPickingTransfer(TransactionCase):
         ])
         self.assertEqual(len(quants), 1)
         self.assertEqual(quants[0].qty, 1)
-        self.assertEqual(quants[0].removal_date, '2017-01-02 10:00:00')
+        self.assertEqual(quants[0].removal_date, '2017-01-04 10:00:00')
 
         lot = quants[0].lot_id
         self.assertEqual(lot.name, '20170102')
-        self.assertEqual(lot.use_date, '2016-12-30 10:00:00')
-        self.assertEqual(lot.life_date, '2016-12-31 10:00:00')
-        self.assertEqual(lot.alert_date, '2017-01-01 10:00:00')
-        self.assertEqual(lot.removal_date, '2017-01-02 10:00:00')
+        self.assertEqual(lot.use_date, '2017-01-01 10:00:00')
+        self.assertEqual(lot.life_date, '2017-01-02 10:00:00')
+        self.assertEqual(lot.alert_date, '2017-01-03 10:00:00')
+        self.assertEqual(lot.removal_date, '2017-01-04 10:00:00')

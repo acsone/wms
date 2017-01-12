@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
 
             <field name="lot_name" position="before">
-                <field name="removal_date"/>
+                <field name="life_date"/>
             </field>
 
         </field>
