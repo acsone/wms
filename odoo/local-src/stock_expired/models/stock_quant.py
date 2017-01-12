@@ -31,8 +31,12 @@ class StockQuant(models.Model):
         new_domain = domain or []
         if deny_reservation_for_quants_expired:
             new_domain.append('|')
+            new_domain.append('|')
             new_domain.append(('removal_date', '=', False))
             new_domain.append(('removal_date', '>', fields.Datetime.now()))
+            new_domain.append(
+                ('location_id.ignore_quants_expiration', '=', True)
+            )
 
         return super(StockQuant, self).apply_removal_strategy(
             qty=qty,
@@ -47,6 +51,7 @@ class StockQuant(models.Model):
         domain = [
             ('lot_id.alert_date', '<=', fields.Datetime.now()),
             ('location_id.usage', '=', 'internal'),
+            ('location_id.ignore_quants_expiration', '=', False),
         ]
         quants = self.env['stock.quant'].search(domain)
         if len(quants) > 0:
@@ -72,6 +77,7 @@ class StockQuant(models.Model):
         domain = [
             ('removal_date', '<=', fields.Datetime.now()),
             ('location_id.usage', '=', 'internal'),
+            ('location_id.ignore_quants_expiration', '=', False),
             ('id', 'not in', quants_already_processed.ids)
         ]
         quants = self.env['stock.quant'].search(domain)

@@ -11,6 +11,7 @@ This module allow to manage expired stock:
 * Add a scheduled task to manage the scrapping of expired stock
 * Add a scheduled task to send an alert before the stock became expired
 * Override the quants removal strategy to deny reservation of expired quants
+* Add a flag (Ignore quants expiration) on stock location to allow reservation of expired quants
 
 
 Credits

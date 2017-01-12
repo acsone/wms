@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_expired
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 12:01+0000\n"
+"PO-Revision-Date: 2017-01-12 12:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_expired
+#: model:mail.template,body_html:stock_expired.email_template_alert_quant_expired
+msgid "\n"
+"                \n"
+"                    <p>Hello,</p>\n"
+"                    <p>Following quants are on alert:</p>\n"
+"                    <p>\n"
+"                        <ul>\n"
+"                            % for quant in ctx['quants_on_alert']:\n"
+"                            <li>${quant.name}</li>\n"
+"                            % endfor\n"
+"                        </ul>\n"
+"                    </p>\n"
+"                \n"
+"            "
+msgstr ""
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_location_ignore_quants_expiration
+msgid "Ignore quants expiration"
+msgstr ""
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_expired
+#: model:mail.template,subject:stock_expired.email_template_alert_quant_expired
+msgid "Quants on alert"
+msgstr ""
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_picking_to_process_quant_expired
+msgid "To process quant expired"
+msgstr ""
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_picking
+msgid "Transfer"
+msgstr ""
+

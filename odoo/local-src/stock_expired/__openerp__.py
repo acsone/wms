@@ -17,6 +17,8 @@
     'data': [
         # Data
         'data/data.xml',
+        # Views
+        'views/stock_location.xml',
     ],
     'installable': True,
 }

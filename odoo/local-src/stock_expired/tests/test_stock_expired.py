@@ -101,6 +101,12 @@ class TestStockExpired(TransactionCase):
         picking_out.action_assign()
         self.assertEqual(picking_out.state, 'confirmed')
 
+        # We now ignore quants expiration
+        self.stock_location.ignore_quants_expiration = True
+
+        picking_out.action_assign()
+        self.assertEqual(picking_out.state, 'assigned')
+
     @post_install(True)
     @at_install(False)
     def test_4_process_quant_expired(self):
@@ -147,23 +153,43 @@ class TestStockExpired(TransactionCase):
             fields.datetime.now(),
             tools.DEFAULT_SERVER_DATETIME_FORMAT
         )
+
         domain = [
             ('removal_date', '<=', now),
             ('location_id.usage', '=', 'internal'),
+            ('location_id.ignore_quants_expiration', '=', False),
         ]
-        quants_expired = self.quant_model.search(domain)
-        self.assertEqual(len(quants_expired), 2)
+        # First test: we ignore quants expiration
+        # Second test: we don't ignore quants expiration
+        for ignore in [True, False]:
+            self.stock_location.ignore_quants_expiration = ignore
 
-        self.quant_model.process_quant_expired()
+            quants_expired = self.quant_model.search(domain)
+            self.assertEqual(
+                len(quants_expired),
+                0 if ignore  # Quants expiration is ignored
+                else 2
+            )
 
-        self.assertEqual(product_ok_1.qty_available, 5)
-        self.assertEqual(product_ok_1.virtual_available, 5)
+            self.quant_model.process_quant_expired()
 
-        self.assertEqual(product_ko_1.qty_available, 3)
-        self.assertEqual(product_ko_1.virtual_available, 0)
+            self.assertEqual(product_ok_1.qty_available, 5)
+            self.assertEqual(product_ok_1.virtual_available, 5)
 
-        self.assertEqual(product_ko_2.qty_available, 4)
-        self.assertEqual(product_ko_2.virtual_available, 0)
+            self.assertEqual(product_ko_1.qty_available, 3)
+            self.assertEqual(
+                product_ko_1.virtual_available,
+                3 if ignore  # Quants expiration is ignored
+                else 0
+            )
+
+            self.assertEqual(product_ko_2.qty_available, 4)
+            self.assertEqual(
+                product_ko_2.virtual_available,
+                4 if ignore  # Quants expiration is ignored
+                else 0
+            )
+        # We continue tests with second test: don't ignore quants expiration
 
         scrapped_location_id = self.ref('stock.stock_location_scrapped')
         picking = self.picking_model.search([
@@ -189,7 +215,7 @@ class TestStockExpired(TransactionCase):
 
     @post_install(True)
     @at_install(False)
-    def test_4_alert_quant_expired(self):
+    def test_5_alert_quant_expired(self):
         # This test only check if alert mail is created,
         # but not the content of the mail
         self.quant_model.alert_quant_expired()
@@ -234,9 +260,20 @@ class TestStockExpired(TransactionCase):
             'alert_date': '2016-12-08 12:00:00',
         })
         self._add_product_qty(product_ko_2, production_lot_ko_2, 4)
-        self.quant_model.alert_quant_expired()
-        mail_messages = self.mail_message_model.search([
-            ('model', '=', 'stock.quant')
-        ])
-        self.assertEqual(len(mail_messages), 1)
-        self.assertEqual(mail_messages[0].subject, 'Quants on alert')
+
+        # First test: we ignore quants expiration
+        # Second test: we don't ignore quants expiration
+        for ignore in [True, False]:
+            self.stock_location.ignore_quants_expiration = ignore
+
+            self.quant_model.alert_quant_expired()
+            mail_messages = self.mail_message_model.search([
+                ('model', '=', 'stock.quant')
+            ])
+            self.assertEqual(
+                len(mail_messages),
+                0 if ignore  # Quants expiration is ignored
+                else 1
+            )
+            if not ignore:
+                self.assertEqual(mail_messages[0].subject, 'Quants on alert')
