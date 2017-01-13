@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+
+        <!--
+        EMAIL TEMPLATE
+        -->
+        <record id="email_template_alert_quant_expired" model="mail.template">
+            <field name="name">Alert quant expired</field>
+            <field name="model_id" ref="stock.model_stock_quant"/>
+            <field name="subject">Quants on alert</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hello,</p>
+                    <p>Following quants are on alert:</p>
+                    <p>
+                        <ul>
+                            % for quant in ctx['quants_on_alert']:
+                            <li>${quant.name}</li>
+                            % endfor
+                        </ul>
+                    </p>
+                ]]>
+            </field>
+        </record>
+
+        <!--
+        CRONS
+        -->
+        <record model="ir.cron" forcecreate="True" id="cron_quant_expired">
+            <field name="name">Alert quant expired</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2016-12-13 20:30:00</field>
+            <field name="doall" eval="False" />
+            <field name="model">stock.quant</field>
+            <field name="function">alert_quant_expired</field>
+        </record>
+
+        <record model="ir.cron" forcecreate="True" id="cron_process_quant_expired">
+            <field name="name">Process quant expired</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2016-12-13 20:30:00</field>
+            <field name="doall" eval="False" />
+            <field name="model">stock.quant</field>
+            <field name="function">process_quant_expired</field>
+        </record>
+
+    </data>
+</openerp>
