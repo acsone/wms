@@ -72,6 +72,7 @@ migration:
           - specific_sale
           - specific_partner
           - specific_product
+          - specific_stock
           - specific_translations
           - stock_barcode_fix
           - stock_grn
@@ -80,6 +81,7 @@ migration:
           - stock_picking_sequence
           - stock_picking_subcode
           - stock_product_bin
+          - stock_production_lot_expired_dates
           - stock_putaway_defaultfixedlocation
           - stock_quant_bylocation
           - stock_refill
