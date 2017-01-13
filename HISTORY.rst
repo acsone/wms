@@ -10,6 +10,20 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.7.0 (2017-01-13)
+++++++++++++++++++
+
+**Data Migration**
+
+**Features and Improvements**
+
 * Change admin password at the end of setup
 * ALCN-623: Manage stock quants expiration
 * ALCN-624: Manage stock production lot expired dates
@@ -28,8 +42,6 @@ Unreleased
 * Pin latest to integration server
 * Skip missing rancher files
 * Store let's encrypt certs in a named volume
-
-**Documentation**
 
 
 9.6.5 (2016-12-13)
