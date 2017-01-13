@@ -196,8 +196,8 @@ class TestStockExpired(TransactionCase):
             ('location_dest_id', '=', scrapped_location_id)
         ])
         self.assertListEqual(
-            picking.mapped('move_lines.reserved_quant_ids').ids,
-            quants_expired.ids
+            sorted(picking.mapped('move_lines.reserved_quant_ids').ids),
+            sorted(quants_expired.ids)
         )
         picking = picking.with_context(
             params={

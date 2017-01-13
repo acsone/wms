@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-623: Manage stock quants expiration (Fix unit tests)
+
 **Build**
 
 **Documentation**
