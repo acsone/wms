@@ -6,7 +6,9 @@
 Specific Partner
 ================
 
-This module adds Alcyon specific fields and logic for res partner.
+This module adds Alcyon specific fields and logic for res partner:
+
+* On partner form view, move internal reference field just bottom of the partner name
 
 Credits
 =======
@@ -14,4 +16,5 @@ Credits
 Contributors
 ------------
 
+* Julien Coux <julien.coux@camptocamp.com>
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>

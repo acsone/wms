@@ -4,12 +4,26 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='ref']/parent::group" position="attributes">
+                <attribute name="groups">base.group_multi_company</attribute>
+            </xpath>
+
+            <field name="ref" position="replace"/>
+
+            <xpath expr="//field[@name='name']/parent::h1" position="after">
+                <group>
+                    <field name="ref"/>
+                </group>
+            </xpath>
+
             <field name="function" position="before">
                 <field name="alcyon_category_id"/>
                 <field name="depot_number_visible" invisible="1"/>
                 <field name="depot_number"
                        attrs="{'invisible': [('depot_number_visible', '=', False)], 'required': [('depot_number_visible', '=', True)]}"/>
             </field>
+
             <group name="fiscal_information" position="inside">
                 <field name="legal_entity" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
             </group>
