@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Change admin password at the end of setup
+* ALCN-623: Manage stock quants expiration
 * ALCN-624: Manage stock production lot expired dates
 * ALCN-677: Specific manage stock production lot expired dates
 
