@@ -10,6 +10,7 @@ Unreleased
 
 **Features and Improvements**
 
+* Change admin password at the end of setup
 * ALCN-623: Manage stock quants expiration
 
 **Bugfixes**
