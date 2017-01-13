@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_expired
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 14:13+0000\n"
+"PO-Revision-Date: 2017-01-12 14:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_expired
+#: model:mail.template,body_html:stock_expired.email_template_alert_quant_expired
+msgid "\n"
+"                \n"
+"                    <p>Hello,</p>\n"
+"                    <p>Following quants are on alert:</p>\n"
+"                    <p>\n"
+"                        <ul>\n"
+"                            % for quant in ctx['quants_on_alert']:\n"
+"                            <li>${quant.name}</li>\n"
+"                            % endfor\n"
+"                        </ul>\n"
+"                    </p>\n"
+"                \n"
+"            "
+msgstr "\n"
+"                \n"
+"                    <p>Bonjour,</p>\n"
+"                    <p>Les stocks suivants sont en alerte :</p>\n"
+"                    <p>\n"
+"                        <ul>\n"
+"                            % for quant in ctx['quants_on_alert']:\n"
+"                            <li>${quant.name}</li>\n"
+"                            % endfor\n"
+"                        </ul>\n"
+"                    </p>\n"
+"                \n"
+"            "
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_quant_alert_date
+msgid "Alert Date"
+msgstr "Date d'alerte"
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_quant_use_date
+msgid "Best before Date"
+msgstr "Date limite d'utilisation optimale"
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_quant_life_date
+msgid "End of Life Date"
+msgstr "Date limite de consommation"
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_location_ignore_quants_expiration
+msgid "Ignore quants expiration"
+msgstr "Ignorer l'expiration des stocks"
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements de stock"
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_quant
+msgid "Quants"
+msgstr "Quants"
+
+#. module: stock_expired
+#: model:ir.ui.view,arch_db:stock_expired.stock_quant_specific_search
+msgid "Quants expired"
+msgstr "Stocks expirés"
+
+#. module: stock_expired
+#: model:ir.ui.view,arch_db:stock_expired.stock_quant_specific_search
+#: model:mail.template,subject:stock_expired.email_template_alert_quant_expired
+msgid "Quants on alert"
+msgstr "Stocks en alerte"
+
+#. module: stock_expired
+#: model:ir.actions.act_window,name:stock_expired.action_stock_quant_expired_tree
+#: model:ir.ui.menu,name:stock_expired.menu_action_stock_quant_expired_tree
+msgid "Stock quant expired"
+msgstr "Stocks expirés"
+
+#. module: stock_expired
+#: model:ir.ui.view,arch_db:stock_expired.view_stock_quant_expired_tree
+msgid "Stock quants"
+msgstr "Stocks"
+
+#. module: stock_expired
+#: model:ir.model.fields,help:stock_expired.field_stock_quant_alert_date
+msgid "This is the date on which an alert should be notified about the goods with this Serial Number."
+msgstr "Ceci est la date à laquelle une alerte doit être remontée à propos des marchandises avec ce numéro de série."
+
+#. module: stock_expired
+#: model:ir.model.fields,help:stock_expired.field_stock_quant_life_date
+msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
+msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série deviennent dangereux et ne doivent plus être consommées."
+
+#. module: stock_expired
+#: model:ir.model.fields,help:stock_expired.field_stock_quant_use_date
+msgid "This is the date on which the goods with this Serial Number start deteriorating, without being dangerous yet."
+msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série commencent à se détériorer, sans pour autant être dangereuses."
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_picking_to_process_quant_expired
+msgid "To process quant expired"
+msgstr "Stocks expirés à traiter"
+
+#. module: stock_expired
+#: model:ir.model,name:stock_expired.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
