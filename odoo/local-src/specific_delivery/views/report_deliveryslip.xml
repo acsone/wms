@@ -15,7 +15,8 @@
                         <th rowspan="2">Qty</th>
                         <th colspan="3" style="border-left: thin solid black;">Lot</th>
                         <th rowspan="2">Unit<br/>price</th>
-                        <th rowspan="2">Unit<br/>price<br/>with discount</th>
+                        <th rowspan="2">Promotion<br/>%</th>
+                        <th rowspan="2">Discount<br/>%</th>
                         <th rowspan="2">Subtotal<br/>price</th>
                         <th rowspan="2">TVA</th>
                     </tr>
@@ -32,9 +33,9 @@
                         <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
 
                         <t t-if="order">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="10" class="sale_separator">
+                                <td colspan="11" class="sale_separator">
                                     <div>
                                         <span>Commande</span>
                                         <span t-field="order.name"/>
@@ -43,7 +44,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
                         <t  t-foreach="move_lines" t-as="line">
@@ -73,7 +74,12 @@
                                     <span t-if="order_line" t-field="order_line.price_unit"
                                           t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <span t-field="order_line.supplier_promotion"/>
+                                </td>
+                                <td>
+                                    <span t-field="order_line.alcyon_discount"/>
+                                </td>
                                 <td>
                                     <span t-if="order_line" t-field="order_line.price_subtotal"
                                           t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
@@ -99,6 +105,7 @@
                                 <td/>
                                 <td/>
                                 <td/>
+                                <td/>
                             </tr>
                             <tr t-foreach="order_line.contribution_ids" t-as="contribution">
                                 <td></td>
@@ -116,6 +123,7 @@
                                         t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
                                 </td>
                                 <td></td>
+                                <td></td>
                                 <td>
                                     <span t-field="order_line.amount_contribution"/>
                                 </td>
@@ -126,9 +134,9 @@
                         </t>
 
                         <t t-if="backorder_move_lines">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="10" class="sale_separator">
+                                <td colspan="11" class="sale_separator">
                                     <div>
                                         <span>Solde à livrer sur la commande </span>
                                         <span t-field="order.name"/>
@@ -150,10 +158,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
                     </t>
-                    <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                    <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
             <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
@@ -203,6 +211,9 @@
                 </div>
             </div>
 
+            <t t-foreach="deliveryslip.get_total_amounts()" t-as="test">
+                <h3>Test</h3>
+            </t>
             <!--<table id="total_table" class="border_table round_table">
                 <tr>
                     <td>Totals</td>
@@ -234,99 +245,7 @@
                         <strong t-field="invoice.amount_total"/>
                     </td>
                 </tr>
-            </table>
-            <div>
-                <table id="summary_table" class="round_table">
-                    <tr>
-                        <td colspan="4">
-                            <span>SUMMARY</span>
-                            <br/>
-                            <span>Total discount:</span>
-                            <span t-field="invoice.amount_discount_total"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Base taxable</td>
-                        <td>Rate</td>
-                        <td>VAT Amount</td>
-                    </tr>
-                    <t t-if="len(invoice.tax_line_ids) &lt; 4">
-                        <t t-foreach="range(4 - len(invoice.tax_line_ids))" t-as="idx">
-                            <tr>
-                                <td/>
-                                <td/>
-                                <td/>
-                            </tr>
-                        </t>
-                    </t>
-
-                    <t t-foreach="invoice.tax_line_ids" t-as="tax_line">
-                        <tr>
-                            <td>
-                                <span t-field="tax_line.base"/>
-                            </td>
-                            <td>
-                                <span t-esc="'%.2f' % (tax_line.tax_id.amount)"/>
-                            </td>
-                            <td>
-                                <span t-field="tax_line.amount"/>
-                            </td>
-                        </tr>
-                    </t>
-                </table>
-
-                <table id="bank_table" class="round_table">
-                    <t t-set="bank_cbc" t-value="invoice.env.ref('scenario.account_journal_cbc_1')"/>
-                    <t t-set="bank_ing" t-value="invoice.env.ref('scenario.account_journal_ing_1')"/>
-                    <t t-set="bank_dexia" t-value="invoice.env.ref('scenario.account_journal_belfius_1')"/>
-                    <t t-set="bank_bnp" t-value="invoice.env.ref('scenario.account_journal_bnp_1')"/>
-                    <tr>
-                        <td colspan="2">
-                            <t>Reference for your payment</t>
-                            <br/>
-                            <span t-field="invoice.reference"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            CBC:
-                            <span t-esc="bank_cbc.bank_acc_number"/>
-                            <br/>
-                            BIC:
-                            <span t-esc="bank_cbc.bank_id.bic"/>
-                        </td>
-                        <td>
-                            ING:
-                            <span t-esc="bank_ing.bank_acc_number"/>
-                            <br/>
-                            BIC:
-                            <span t-esc="bank_ing.bank_id.bic"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            DEXIA:
-                            <span t-esc="bank_dexia.bank_acc_number"/>
-                            <br/>
-                            BIC:
-                            <span t-esc="bank_dexia.bank_id.bic"/>
-                        </td>
-                        <td>
-                            BNP PARIBAS FORTIS :
-                            <span t-esc="bank_bnp.bank_acc_number"/>
-                            <br/>
-                            BIC:
-                            <span t-esc="bank_bnp.bank_id.bic"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>Due date</span>
-                        </td>
-                        <td><span t-field="invoice.date_due"/></td>
-                    </tr>
-                </table>
-            </div>-->
+            </table>-->
         </div>
     </template>
 
