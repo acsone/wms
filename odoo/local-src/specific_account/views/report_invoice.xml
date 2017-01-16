@@ -105,7 +105,9 @@
                                 <td>
                                     <span t-field="line.amount_contribution"/>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"/>
+                                </td>
                             </tr>
                         </t>
                     </t>

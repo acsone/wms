@@ -126,11 +126,12 @@
                                     <td>
                                         <span t-field="shipping.partner_id.phone" />
                                     </td>
-                                    <td>0</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>4</td>
+                                    <td>#TODO</td>
+                                    <td>#TODO</td>
+                                    <td>#TODO</td>
+                                    <td>#TODO</td>
+                                    <td>#TODO</td>
+                                    <td>#TODO</td>
                                 </tr>
                             </tbody>
                         </table>

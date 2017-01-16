@@ -28,7 +28,8 @@ class StockMove(models.Model):
 
     order_line_id = fields.Many2one('sale.order.line',
                                     string='Order line',
-                                    related='procurement_id.sale_line_id')
+                                    related='procurement_id.sale_line_id',
+                                    store=True)
     order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
 
 
