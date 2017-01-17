@@ -44,7 +44,8 @@ class AccountInvoice(models.Model):
         company_id = self._context.get('company_id',
                                        self.env.user.company_id.id)
         domain = [
-            ('type', 'in', filter(None, map(self.JOURNAL_BY_INVOICE_TYPE.get, inv_types))),
+            ('type', 'in', filter(
+                None, map(self.JOURNAL_BY_INVOICE_TYPE.get, inv_types))),
             ('company_id', '=', company_id),
         ]
         return self.env['account.journal'].search(domain, limit=1)
