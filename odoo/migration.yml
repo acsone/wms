@@ -100,3 +100,4 @@ migration:
           - stock_quant_bylocation
           - stock_refill
           - web_autorefresh
+          - specific_delivery
