@@ -3,8 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from collections import defaultdict
 
-from openerp import api, fields, models, _
-from openerp.exceptions import Warning
+from openerp import api, fields, models
 
 
 class AccountInvoice(models.Model):
