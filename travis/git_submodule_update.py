@@ -13,6 +13,8 @@ os.system('mkdir %s' % dl_dir)
 with open('travis/private_repos') as f:
     private_repos = f.read()
 
+os.system('git submodule init')
+
 for sub in Repo('.').submodules:
     if sub.path not in private_repos:
         url = sub.url
@@ -28,4 +30,4 @@ for sub in Repo('.').submodules:
         os.system('rmdir %s' % sub.path)
         os.system('mv %s/* %s' % (dl_dir, sub.path))
     else:
-        sub.update()
+        os.system('git submodule update %s' % sub.path)
