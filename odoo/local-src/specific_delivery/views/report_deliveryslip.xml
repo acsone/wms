@@ -12,18 +12,13 @@
                     <tr>
                         <th rowspan="2">Product<br/>reference</th>
                         <th rowspan="2">Name</th>
-                        <th rowspan="2">Qty</th>
-                        <th colspan="3" style="border-left: thin solid black;">Lot</th>
-                        <th rowspan="2">Unit<br/>price</th>
-                        <th rowspan="2">Promotion<br/>%</th>
-                        <th rowspan="2">Discount<br/>%</th>
-                        <th rowspan="2">Subtotal<br/>price</th>
-                        <th rowspan="2">TVA</th>
+                        <th rowspan="2">Quantity</th>
+                        <th colspan="3" style="border-left: thin solid black;">By lot</th>
                     </tr>
                     <tr>
-                        <th style="border-left: thin solid black;">#</th>
-                        <th>Qty</th>
-                        <th>Expiration<br/>date</th>
+                        <th style="border-left: thin solid black;">Number</th>
+                        <th>Quantity</th>
+                        <th>Expiration date</th>
                     </tr>
                 </thead>
                 <tbody class="invoice_tbody">
@@ -33,9 +28,9 @@
                         <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
 
                         <t t-if="order">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="11" class="sale_separator">
+                                <td colspan="6" class="sale_separator">
                                     <div>
                                         <span>Commande</span>
                                         <span t-field="order.name"/>
@@ -44,7 +39,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
                         <t t-foreach="move_lines" t-as="line">
@@ -70,23 +65,6 @@
                                 <td>
                                     <span t-if="first_quant" t-esc="first_quant[2] and first_quant[2][:10]"/>
                                 </td>
-                                <td>
-                                    <span t-if="order_line" t-field="order_line.price_unit"
-                                          t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
-                                </td>
-                                <td>
-                                    <span t-field="order_line.supplier_promotion"/>
-                                </td>
-                                <td>
-                                    <span t-field="order_line.alcyon_discount"/>
-                                </td>
-                                <td>
-                                    <span t-if="order_line" t-field="order_line.price_subtotal"
-                                          t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
-                                </td>
-                                <td>
-                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.only_tax_ids))"/>
-                                </td>
                             </tr>
                             <tr t-foreach="quants" t-as="quant">
                                 <td/>
@@ -101,42 +79,13 @@
                                 <td>
                                     <span t-esc="quant[2] and quant[2][:10]"/>
                                 </td>
-                                <td/>
-                                <td/>
-                                <td/>
-                                <td/>
-                                <td/>
-                            </tr>
-                            <tr t-foreach="order_line.contribution_ids" t-as="contribution">
-                                <td></td>
-                                <td>
-                                    <span t-esc="contribution.description or contribution.name"/>
-                                </td>
-                                <td>
-                                    <span t-esc="int(order_line.qty_delivered)"/>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span t-field="contribution.amount"
-                                        t-field-options='{"widget": "monetary", "display_currency": "order.currency_id"}'/>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span t-field="order_line.amount_contribution"/>
-                                </td>
-                                <td>
-                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.only_tax_ids))"/>
-                                </td>
                             </tr>
                         </t>
 
                         <t t-if="backorder_move_lines">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="11" class="sale_separator">
+                                <td colspan="6" class="sale_separator">
                                     <div>
                                         <span>Solde à livrer sur la commande </span>
                                         <span t-field="order.name"/>
@@ -158,10 +107,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/></tr>
                         </t>
                     </t>
-                    <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                    <tr><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
             <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
