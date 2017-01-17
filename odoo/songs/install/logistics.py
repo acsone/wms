@@ -59,6 +59,15 @@ def create_locations(ctx):
         ('__init.stock_location_froid', u'Froid',
          False,
          loc_stock.id),
+    ]
+    for xmlid, name, reserve_id, location_id in locations:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': location_id,
+            'reserve_location_id': reserve_id,
+            'usage': 'view',
+        })
+    locations = [
         ('__init.stock_location_frigo', u'Frigo',
          False,
          ctx.env.ref('__init.stock_location_froid').id),
