@@ -18,11 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import fields, models, api
+from openerp import fields, models
 
 
 class StockChangeProductQty(models.TransientModel):
     _inherit = 'stock.change.product.qty'
 
-    product_tmpl_tracking = fields.Selection(related='product_tmpl_id.tracking',
-                                             readonly=True)
+    product_tmpl_tracking = \
+        fields.Selection(related='product_tmpl_id.tracking', readonly=True)

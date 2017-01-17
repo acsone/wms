@@ -69,6 +69,7 @@ class StockChangeProductQty(models.TransientModel):
 
         return result
 
+
 class ProductStockBinTemp(models.TransientModel):
     _inherit = 'product.stock.bin'
     _name = 'product.stock.bin.temp'
