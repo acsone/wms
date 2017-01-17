@@ -57,11 +57,13 @@ class ReportStockQuantBylocationReserve(models.Model):
         d['orderby'] = "product_id"
 
         d['select'] += ", product.priority_reassort as refill_priority"
-        d['select'] += ", quant.removal_date as removal_date"
+        d['select'] += ", lot.removal_date as removal_date"
         d['join'] += (" LEFT JOIN stock_location as location "
-                      " ON quant.location_id = location.id ")
+                      " ON quant.location_id = location.id "
+                      " LEFT JOIN stock_production_lot as lot "
+                      " ON quant.lot_id = lot.id ")
         d['where'] += " AND location.kind = 'reserve' "
-        d['groupby'] += ", product.priority_reassort, quant.removal_date"
+        d['groupby'] += ", product.priority_reassort, lot.removal_date"
         return d
 
     refill_priority = fields.Integer(
