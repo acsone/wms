@@ -32,77 +32,38 @@ class StockMove(models.Model):
                                     store=True)
     order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
 
+    @api.multi
+    def get_lots(self):
+        """
+        Return all lots for the stock move
+        :return: Return a list of tuple
+        """
+        qty_by_lot = {}
+
+        quants = filter(
+            None, self.linked_move_operation_ids.mapped('reserved_quant_id'))
+        for quant in quants:
+            if not quant.lot_id:
+                continue
+            lot = quant.lot_id
+
+            existing_qty = qty_by_lot.get(lot.name, [])
+            if existing_qty:
+                qty_by_lot[lot.name] = [existing_qty[0] +
+                                        quant.qty, existing_qty[1]]
+            else:
+                qty_by_lot[lot.name] = [quant.qty, lot.life_date or '']
+
+        result = [[key, value[0], value[1]]
+                  for key, value
+                  in qty_by_lot.iteritems()]
+
+        # Sort lot by name
+        return sorted(result, key=lambda lot: lot[0])
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-
-    def get_total_amounts(self):
-        tax_group_apb = self.env.ref('specific_account.tax_group_apb')
-
-        for picking in self:
-            amount_without_discount = 0
-            amount_supplier_discount = 0
-            amount_alcyon_discount = 0
-            amount_untaxed = 0
-            amount_apb = 0
-            amount_vat = 0
-            amount_total = 0
-
-            for line in picking.move_lines:
-                if not line.order_line_id:
-                    continue
-                sol = line.order_line_id
-
-                amount_without_discount += \
-                    (sol.unit_price * sol.qty_delivered)
-                amount_supplier_discount += \
-                    (sol.price_unit - sol.price_unit_supplier) * sol.qty_delivered
-                amount_alcyon_discount += \
-                    (sol.price_unit - sol.price_unit_alcyon) * sol.qty_delivered
-                amount_untaxed += sol.price_subtotal
-
-                price = sol.price_unit * (1 - (sol.discount or 0.0) / 100.0)
-
-                if sol.edited_supplier_promotion or sol.edited_alcyon_discount:
-                    price_supplier, price_alcyon = sol._compute_discount_prices(
-                        price
-                    )
-                else:
-                    price_supplier, price_alcyon = sol._compute_pricelist_prices(
-                        price
-                    )
-                taxes = line.tax_id.compute_all(
-                    price_alcyon, line.order_id.currency_id,
-                    line.product_uom_qty,
-                    product=line.product_id, partner=line.order_id.partner_id
-                )
-
-            # for invoice_tax in inv.tax_line_ids:
-            #     if invoice_tax.tax_id.include_base_amount:
-            #         invoice_contribution_ids |= invoice_tax
-            #         amount_contribution += invoice_tax.amount
-            #     elif invoice_tax.tax_id.tax_group_id == tax_group_apb:
-            #         invoice_apb_ids |= invoice_tax
-            #         amount_apb += invoice_tax.amount
-            #     else:
-            #         invoice_only_tax_ids |= invoice_tax
-            #         amount_only_tax += invoice_tax.amount
-            # inv.amount_apb = amount_apb
-            # inv.amount_contribution = amount_contribution
-            # inv.amount_only_tax = amount_only_tax
-            # inv.invoice_only_tax_ids = invoice_only_tax_ids
-            # inv.invoice_contribution_ids = invoice_contribution_ids
-            # inv.invoice_apb_ids = invoice_apb_ids
-            #
-            # inv.amount_without_discount = sum([
-            #                                       l.price_unit * l.quantity
-            #                                       for l in inv.invoice_line_ids
-            #                                       ]) + amount_contribution
-            #
-            # inv.amount_untaxed_with_contribution = \
-            #     inv.amount_untaxed + amount_contribution
-
-        return []
 
     @api.multi
     def get_moves_by_order(self):
@@ -130,13 +91,17 @@ class StockPicking(models.Model):
 
         result_dict = {}
         for order, moves in moves_by_order.iteritems():
-            result_dict[order] = [moves, backorder_moves_by_order.get(order, [])]
+            result_dict[order] = [moves,
+                                  backorder_moves_by_order.get(order, [])]
 
         if moves_witout_order:
-            result.append((None, moves_witout_order, backorder_moves_without_order))
+            result.append((None,
+                           moves_witout_order,
+                           backorder_moves_without_order))
 
         result.extend(
             sorted(result_dict.items(),
-                   key=lambda picking: (picking[0][0].date_order, picking[0][0].id))
+                   key=lambda picking: (picking[0][0].date_order,
+                                        picking[0][0].id))
         )
         return result

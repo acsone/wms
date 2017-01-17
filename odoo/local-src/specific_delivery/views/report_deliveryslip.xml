@@ -47,9 +47,9 @@
                             <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
-                        <t  t-foreach="move_lines" t-as="line">
+                        <t t-foreach="move_lines" t-as="line">
                             <t t-set="order_line" t-value="line.order_line_id"/>
-                            <t t-set="quants" t-value="filter(None, line.linked_move_operation_ids.mapped('reserved_quant_id'))"/>
+                            <t t-set="quants" t-value="line.get_lots()"/>
                             <t t-set="first_quant" t-value="quants and quants.pop()"/>
                             <tr>
                                 <td>
@@ -62,13 +62,13 @@
                                     <span t-esc="int(line.product_qty)"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="first_quant.lot_id and first_quant.lot_id.name"/>
+                                    <span t-if="first_quant" t-esc="first_quant[0]"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="int(first_quant.qty)"/>
+                                    <span t-if="first_quant" t-esc="int(first_quant[1])"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="first_quant.lot_id and first_quant.lot_id.life_date and first_quant.lot_id.life_date[:10]"/>
+                                    <span t-if="first_quant" t-esc="first_quant[2] and first_quant[2][:10]"/>
                                 </td>
                                 <td>
                                     <span t-if="order_line" t-field="order_line.price_unit"
@@ -93,13 +93,13 @@
                                 <td/>
                                 <td/>
                                 <td>
-                                    <span t-esc="quant.lot_id and quant.lot_id.name"/>
+                                    <span t-esc="quant[0]"/>
                                 </td>
                                 <td>
-                                    <span t-esc="int(quant.qty)"/>
+                                    <span t-esc="int(quant[1])"/>
                                 </td>
                                 <td>
-                                    <span t-esc="quant.lot_id and quant.lot_id.life_date and quant.lot_id.life_date[:10]"/>
+                                    <span t-esc="quant[2] and quant[2][:10]"/>
                                 </td>
                                 <td/>
                                 <td/>
@@ -210,42 +210,6 @@
                     </div>
                 </div>
             </div>
-
-            <t t-foreach="deliveryslip.get_total_amounts()" t-as="test">
-                <h3>Test</h3>
-            </t>
-            <!--<table id="total_table" class="border_table round_table">
-                <tr>
-                    <td>Totals</td>
-                    <td>
-                        <span>Gross<br/>amount</span>
-                        <span t-field="invoice.amount_without_discount"/>
-                    </td>
-                    <td>
-                        <span>Base<br/>discount</span>
-                        <span t-field="invoice.amount_supplier_discount"/>
-                    </td>
-                    <td>
-                        <span>Alcyon<br/>discount</span>
-                        <span t-field="invoice.amount_alcyon_discount"/>
-                    </td>
-                    <td>
-                        <span>Untaxed<br/>amount</span>
-                        <span t-field="invoice.amount_untaxed"/>
-                    </td>
-                    <td>
-                        <span>Total<br/>APB</span>
-                    </td>
-                    <td>
-                        <span>Total<br/>tax</span>
-                        <span t-field="invoice.amount_tax"/>
-                    </td>
-                    <td>
-                        <span>Total<br/>amount</span>
-                        <strong t-field="invoice.amount_total"/>
-                    </td>
-                </tr>
-            </table>-->
         </div>
     </template>
 
