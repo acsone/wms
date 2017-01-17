@@ -86,7 +86,7 @@
                             <tr><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
                                 <td colspan="6" class="sale_separator">
-                                    <div>
+                                    <div class="no_background">
                                         <span>Solde à livrer sur la commande </span>
                                         <span t-field="order.name"/>
                                         <table style="width: 50%;">
