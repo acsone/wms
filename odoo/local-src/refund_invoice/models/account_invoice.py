@@ -7,8 +7,6 @@ from openerp import models, fields, api
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    journal_id = fields.Many2one(default='_default_journal')
-
     JOURNAL_BY_INVOICE_TYPE = {
         'out_invoice': 'sale',
         'in_invoice': 'purchase',
@@ -38,24 +36,17 @@ class AccountInvoice(models.Model):
 
     @api.model
     def _default_journal(self):
-        """
-        The user should insert himself the journal
-        :return: Return an empty account.journal browse record set
-        """
-        return self.env['account.journal']
+        if self._context.get('default_journal_id', False):
+            return self.env['account.journal'].browse(
+                self._context.get('default_journal_id'))
+        inv_type = self._context.get('type', 'out_invoice')
+        inv_types = inv_type if isinstance(inv_type, list) else [inv_type]
+        company_id = self._context.get('company_id',
+                                       self.env.user.company_id.id)
+        domain = [
+            ('type', 'in', filter(None, map(self.JOURNAL_BY_INVOICE_TYPE.get, inv_types))),
+            ('company_id', '=', company_id),
+        ]
+        return self.env['account.journal'].search(domain, limit=1)
 
-    @api.onchange('partner_id', 'company_id')
-    def _onchange_partner_id(self):
-        """
-        We don't want to update the journal when the user change the partner_id
-        :return: The result of the onchange_partner_id
-        """
-        self.ensure_one()
-
-        current_journal = self.journal_id
-
-        result = super(AccountInvoice, self)._onchange_partner_id()
-        if self.journal_id != current_journal:
-            self.journal_id = current_journal
-
-        return result
+    journal_id = fields.Many2one(default=_default_journal)
