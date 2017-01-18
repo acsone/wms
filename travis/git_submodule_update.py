@@ -4,11 +4,16 @@
 # listed in `travis/private_repo`
 #
 import os
+import shutil
+from urllib import urlretrieve
+import zipfile
 
 from git import Repo
 
-dl_dir = 'download'
-os.system('mkdir %s' % dl_dir)
+DL_DIR = 'download'
+ZIP_PATH = '%s/submodule.zip' % DL_DIR
+
+os.makedirs(DL_DIR)
 
 with open('travis/private_repos') as f:
     private_repos = f.read()
@@ -23,11 +28,13 @@ for sub in Repo('.').submodules:
         # remove .git
         if url.endswith('.git'):
             url = url[:-4]
-        wget_archive_url = "wget %s/archive/%s.zip" % (url, sub.hexsha)
-        os.system(wget_archive_url)
-        os.system('unzip -q %s -d %s' % (sub.hexsha, dl_dir))
-        os.system('rm %s.zip' % sub.hexsha)
-        os.system('rmdir %s' % sub.path)
-        os.system('mv %s/* %s' % (dl_dir, sub.path))
+        archive_url = "%s/archive/%s.zip" % (url, sub.hexsha)
+        urlretrieve(archive_url, ZIP_PATH)
+        with zipfile.ZipFile(ZIP_PATH) as zf:
+            zf.extractall(DL_DIR)
+        os.remove(ZIP_PATH)
+        os.removedirs(sub.path)
+        submodule_dir = os.listdir(DL_DIR)[0]
+        shutil.move(os.path.join(DL_DIR ,submodule_dir), sub.path)
     else:
         os.system('git submodule update %s' % sub.path)
