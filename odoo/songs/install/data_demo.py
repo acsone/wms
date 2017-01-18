@@ -26,19 +26,25 @@ def import_clients(ctx):
 @anthem.log
 def import_locations(ctx):
     """ Importing locations from csv"""
-    content = resource_stream(req, 'data/demo/location.csv')
-    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/locators_reserve.csv')
-    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/locators_parking.csv')
-    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
 
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'defer_parent_store_computation': True})
+    Location = ctx.env['stock.location'].with_context(load_ctx)
+    with ctx.log(u"Importing warehouse locations"):
+        content = resource_stream(req, 'data/demo/location.csv')
+        load_csv_stream(ctx, Location, content, delimiter=',')
+    with ctx.log(u"Importing reserve locations"):
+        content = resource_stream(req, 'data/demo/locators_reserve.csv')
+        load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    with ctx.log(u"Importing parking locations"):
+        content = resource_stream(req, 'data/demo/locators_parking.csv')
+        load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    with ctx.log(u"Importing output locations"):
+        content = resource_stream(req, 'data/demo/chariots.csv')
+        load_csv_stream(ctx, Location, content, delimiter=',')
 
-@anthem.log
-def import_output_locations(ctx):
-    """ Importing output locations from csv"""
-    content = resource_stream(req, 'data/demo/chariots.csv')
-    load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+    with ctx.log(u"Compute parent_left, parent_right"):
+        ctx.env['stock.location']._parent_store_compute()
 
 
 @anthem.log
@@ -88,7 +94,6 @@ def main(ctx):
     import_suppliers(ctx)
     import_clients(ctx)
     import_locations(ctx)
-    import_output_locations(ctx)
     import_products(ctx)
     import_product_supplierinfo(ctx)
     import_pricelist_items(ctx)
