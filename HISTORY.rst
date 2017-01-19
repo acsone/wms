@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-38: Upgrade l10n-belgium repository
+
 **Bugfixes**
 
 **Build**
