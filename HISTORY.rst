@@ -14,6 +14,9 @@ Unreleased
 
 **Build**
 
+* Improve travis build by speeding up submodule download
+  from GitHub zip archives
+
 **Documentation**
 
 
