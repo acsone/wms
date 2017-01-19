@@ -136,40 +136,6 @@ def create_locations(ctx):
 
 
 @anthem.log
-def create_putaway(ctx):
-    """ Create putaway and putaway strat
-    """
-    ref = ctx.env.ref
-
-    loc_stock_id = ref('stock.stock_location_stock').id
-
-    create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_parking', {
-        'name': u'Parking',
-        'method': u'fixed',
-        'fixed_location_id': loc_stock_id,
-    })
-
-    create_or_update(
-        ctx, 'stock.fixed.putaway.strat', '__init.stock_putaway_parking_medoc',
-        {
-            'putaway_id': ref('__init.stock_putaway_parking').id,
-            'category_id': ref('__init.product_categ_medoc').id,
-            'fixed_location_id': ref(
-                '__setup__.stock_location_parking_drug').id,
-        }
-    )
-
-    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
-        'location_id': loc_stock_id,
-        'putaway_strategy_id': ref('__init.stock_putaway_parking').id
-    })
-
-    create_or_update(ctx, 'stock.picking.type', 'stock.picking_type_in', {
-        'default_location_dest_id': ref('stock.stock_location_company').id
-    })
-
-
-@anthem.log
 def create_picking_types(ctx):
     """ Creating picking types """
     picking_sequence = ctx.env['ir.sequence'].search(
@@ -426,7 +392,6 @@ def main(ctx):
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)
-    create_putaway(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
     create_routes(ctx)
