@@ -12,6 +12,7 @@
                     <tr>
                         <th rowspan="2">Product<br/>reference</th>
                         <th rowspan="2">Name</th>
+                        <th rowspan="2">Fridge</th>
                         <th rowspan="2">Quantity</th>
                         <th colspan="3" style="border-left: thin solid black;">By lot</th>
                     </tr>
@@ -28,9 +29,9 @@
                         <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
 
                         <t t-if="order">
-                            <tr><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="6" class="sale_separator">
+                                <td colspan="7" class="sale_separator">
                                     <div>
                                         <span>Commande</span>
                                         <span t-field="order.name"/>
@@ -39,7 +40,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                         </t>
 
                         <t t-foreach="move_lines" t-as="line">
@@ -52,6 +53,11 @@
                                 </td>
                                 <td>
                                     <span t-field="line.product_id.name"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span t-if="line.product_id.categ_id == line.env.ref('__init.product_categ_frigo')">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </span>
                                 </td>
                                 <td>
                                     <span t-esc="int(line.product_qty)"/>
@@ -70,6 +76,7 @@
                                 <td/>
                                 <td/>
                                 <td/>
+                                <td/>
                                 <td>
                                     <span t-esc="quant[0]"/>
                                 </td>
@@ -83,9 +90,9 @@
                         </t>
 
                         <t t-if="backorder_move_lines">
-                            <tr><td/><td/><td/><td/><td/><td/></tr>
+                            <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
-                                <td colspan="6" class="sale_separator">
+                                <td colspan="7" class="sale_separator">
                                     <div class="no_background">
                                         <span>Solde à livrer sur la commande </span>
                                         <span t-field="order.name"/>
@@ -107,10 +114,9 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td/><td/><td/><td/><td/><td/></tr>
                         </t>
                     </t>
-                    <tr><td/><td/><td/><td/><td/><td/></tr>
+                    <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
             <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
