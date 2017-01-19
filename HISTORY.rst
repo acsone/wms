@@ -10,21 +10,17 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-175: Stock locations
+* ALCN-179: Stock reception priorities
+* ALCN-180: Stock arrangement and priorities
+* ALCN-269: Stock reserves and reassortment priorities
+
 **Bugfixes**
 
 **Build**
 
 **Documentation**
 
-????
-++++++++++++++++++
-
-**Features and Improvements**
-
-* ALCN-175: Stock locations
-* ALCN-179: Stock reception priorities
-* ALCN-180: Stock arrangement and priorities
-* ALCN-269: Stock reserves and reassortment priorities
 
 9.7.1 (2017-01-13)
 ++++++++++++++++++
