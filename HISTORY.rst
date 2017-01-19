@@ -14,6 +14,8 @@ Unreleased
 
 **Build**
 
+* Use redis integration on test instance
+
 **Documentation**
 
 
