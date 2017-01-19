@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-669: Add the module stock_picking_assignment to assign a picking
 
 **Bugfixes**
 
