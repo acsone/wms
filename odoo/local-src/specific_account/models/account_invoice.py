@@ -177,8 +177,9 @@ class AccountInvoiceLine(models.Model):
 
     only_tax_ids = fields.Many2many('account.tax',
                                     compute='_compute_all_taxes')
-    contribution_ids = fields.Many2many('account.tax',
-                                         compute='_compute_all_taxes')
+    contribution_ids = fields.Many2many(
+        'account.tax',
+        compute='_compute_all_taxes')
     apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
     amount_contribution = fields.Monetary(compute='_compute_all_taxes')
 
