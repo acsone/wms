@@ -44,3 +44,4 @@ __setup__.product_categ_mat_img_endo,Imagerie Médicale - endoscopie,__setup__.p
 __setup__.product_categ_mat_occasion,Occasion,__setup__.product_categ_materiel
 __setup__.product_categ_mat_conso,Consommables,__setup__.product_categ_materiel
 __setup__.product_categ_mat_petshop,Petshop,__setup__.product_categ_materiel
+__temp__.product_categ_undefined,Undefined,

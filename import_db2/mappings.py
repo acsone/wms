@@ -17,13 +17,59 @@ LANG = {
 UOM = {
     0: 'product.product_uom_unit',
     2: 'product.product_uom_meter',
-    7: 'scenario.product_uom_sac',
-    8: 'scenario.product_uom_boite',
-    16: 'scenario.product_uom_blister',
-    17: 'scenario.product_uom_plateau',
-    55: 'scenario.product_uom_liasse',
-    56: 'scenario.product_uom_flacon',
+    7: '__setup__.product_uom_sac',
+    8: '__setup__.product_uom_boite',
+    16: '__setup__.product_uom_blister',
+    17: '__setup__.product_uom_plateau',
+    55: '__setup__.product_uom_liasse',
+    56: '__setup__.product_uom_flacon',
 }
+
+
+DEFAULT_PROD_CAT = '__temp__.product_categ_undefined'
+PRODUCT_CATEGORY = {i: DEFAULT_PROD_CAT for i in range(100)}
+PRODUCT_CATEGORY.update({
+    1: '__setup__.product_categ_ali_dietetique',
+    2: '__setup__.product_categ_ali_physio',
+    3: '__setup__.product_categ_antimicrobiens',
+    4: '__setup__.product_categ_pis',
+    6: '__setup__.product_categ_oeil_oreille',
+    7: '__setup__.product_categ_antiparasite',
+    9: '__setup__.product_categ_sys_nerveux',
+    10: '__setup__.product_categ_vasculo',
+    11: '__setup__.product_categ_vitamines',
+    12: '__setup__.product_categ_vaccins',
+    13: '__setup__.product_categ_mat_sutures',
+    14: '__setup__.product_categ_divers_veto',
+    15: '__setup__.product_categ_humain',
+    16: '__setup__.product_categ_ketamine',
+    18: '__setup__.product_categ_phytosanitaires',
+    20: '__setup__.product_categ_homeo',
+    23: '__setup__.product_categ_hormones',
+    24: '__setup__.product_categ_mat_cardio',
+    26: '__setup__.product_categ_divers_para',
+    29: '__setup__.product_categ_chimiques',
+    30: '__setup__.product_categ_psychotropes_25',
+    31: '__setup__.product_categ_stupefiant',
+    32: '__setup__.product_categ_mat_dentisterie',
+    34: '__setup__.product_categ_ali_comp',
+    35: '__setup__.product_categ_mat_equins',
+    36: '__setup__.product_categ_mat_rurale',
+    44: '__setup__.product_categ_topiques',
+    55: '__setup__.product_categ_mat_ortho',
+    56: '__setup__.product_categ_mat_sut_bobine',
+    58: '__setup__.product_categ_mat_equipement',
+    59: '__setup__.product_categ_mat_instrumentation',
+    60: '__setup__.product_categ_mat_img_echo',
+    61: '__setup__.product_categ_mat_img_radio',
+    62: '__setup__.product_categ_psychotropes_38',
+    63: '__setup__.product_categ_mat_img_endo',
+    66: '__setup__.product_categ_mat_occasion',
+    68: '__setup__.product_categ_mat_conso',
+    71: '__setup__.product_categ_mat_petshop',
+    75: '__setup__.product_categ_importation',
+})
+
 
 # We could just prefix by scenario.res_user_
 # but it will fail the import if user does not exist in Odoo.
@@ -376,17 +422,17 @@ CEE_COUNTRIES = {
 
 
 PRODUCT_SALE_VAT = {
-    0: "scenario.account_tax_sale_main_company_0%",
-    1: "scenario.account_tax_sale_main_company_6%",
-    2: "scenario.account_tax_sale_main_company_12%",
-    3: "scenario.account_tax_sale_main_company_21%",
+    0: "__setup__.account_tax_sale_main_company_0%",
+    1: "__setup__.account_tax_sale_main_company_6%",
+    2: "__setup__.account_tax_sale_main_company_12%",
+    3: "__setup__.account_tax_sale_main_company_21%",
 }
 
 PRODUCT_PURCHASE_VAT = {
-    0: "scenario.account_tax_purchase_main_company_0%_Marchandises",
-    1: "scenario.account_tax_purchase_main_company_6%_Marchandises",
-    2: "scenario.account_tax_purchase_main_company_12%_Marchandises",
-    3: "scenario.account_tax_purchase_main_company_21%_Marchandises",
+    0: "__setup__.account_tax_purchase_main_company_0%_Marchandises",
+    1: "__setup__.account_tax_purchase_main_company_6%_Marchandises",
+    2: "__setup__.account_tax_purchase_main_company_12%_Marchandises",
+    3: "__setup__.account_tax_purchase_main_company_21%_Marchandises",
 }
 
 def phone_converter(*values):

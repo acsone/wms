@@ -13,7 +13,7 @@ from ..common import req
 
 @anthem.log
 def set_customer_lead_time(ctx):
-    create_or_update(ctx, 'ir.values', '__init.product_customer_lead', {
+    create_or_update(ctx, 'ir.values', '__setup__.product_customer_lead', {
         'key': 'default',
         'name': 'sale_delay',
         'model': 'product.template',

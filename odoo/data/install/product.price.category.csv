@@ -1,6 +1,6 @@
 id,name
-scenario.product_price_category_ali,ALI
-scenario.product_price_category_alg,ALG
-scenario.product_price_category_alh,ALH
-scenario.product_price_category_gma,GMA
-scenario.product_price_category_imp,IMP
+__setup__.product_price_category_ali,ALI
+__setup__.product_price_category_alg,ALG
+__setup__.product_price_category_alh,ALH
+__setup__.product_price_category_gma,GMA
+__setup__.product_price_category_imp,IMP

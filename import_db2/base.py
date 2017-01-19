@@ -50,11 +50,14 @@ class EntityMapper:
     def cursor(self):
         return self.importer.cursor
 
-    def get_xml_id(self, entity_name, code):
+    def get_xml_id(self, entity_name, code, prefix=None):
         assert entity_name and code
 
+        if prefix is None:
+            prefix = self.XMLID_IMPORT_NAME
+
         return "%s.%s_%s" % (
-            self.XMLID_IMPORT_NAME, entity_name, code
+            prefix, entity_name, code
         )
 
     @staticmethod

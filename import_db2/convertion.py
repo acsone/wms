@@ -12,7 +12,7 @@ class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'default_code'
-    XMLID_IMPORT_NAME = 'scenario'
+    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
@@ -36,6 +36,10 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'supplier_taxes_id/id', 'gesctv',
             mapping=mappings.PRODUCT_PURCHASE_VAT
+        ),
+        FieldMapper(
+            'categ_id/id', 'gescsg',
+            mapping=mappings.PRODUCT_CATEGORY
         ),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
@@ -68,7 +72,7 @@ class ProductMapper(EntityMapper):
         value = db2_entity['gescre'].strip()
         if value:
             value = self.get_xml_id(
-                'product_price_category', value.lower()
+                'product_price_category', value.lower(), prefix='__setup__'
             )
         odoo_entity['price_category_id'] = OrderedDict(id=value)
 
@@ -79,7 +83,7 @@ class ProductMapper(EntityMapper):
             xml_id = self.get_xml_id(
                 'supplierinfo', '%s-%s' % (ref, db2_entity['gesart'].strip())
             )
-            supplier_xml_id = self.get_xml_id('supplier', str(ref))
+            supplier_xml_id = self.get_xml_id('supplier', str(ref), 'scenario')
 
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
@@ -124,6 +128,7 @@ class CustomerMapper(EntityMapper):
     DB2_SCHEMA = 'gendata'
 
     XMLID_FIELD = 'ref'
+    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
@@ -220,7 +225,7 @@ class CustomerMapper(EntityMapper):
 
         if db2_id:
             self.importer.add_foreign_ref('FOURN', db2_id)
-            xml_id = self.get_xml_id('supplier', db2_id)
+            xml_id = self.get_xml_id('supplier', db2_id, prefix='scenario')
         else:
             xml_id = None
 

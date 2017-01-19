@@ -1,20 +1,20 @@
 vehicle_ids/id,code,name,id
-__demo.vehicle1,1,EPC,__demo.deliveryzone1
-__demo.vehicle2,2,Pharma Sante (AM),__demo.deliveryzone2
-__demo.vehicle2b,2,Pharma Sante (PM),__demo.deliveryzone2b
-__demo.vehicle3,3,Life (AM),__demo.deliveryzone3
-__demo.vehicle3b,3,Life (PM),__demo.deliveryzone3b
-__demo.vehicle4,4,Pharma Belgium,__demo.deliveryzone4
-__demo.vehicle13,13,Belmedis,__demo.deliveryzone13
-__demo.vehicle13b,13,Belmedis,__demo.deliveryzone13b
-__demo.vehicle14,14,Lloyd Pharma,__demo.deliveryzone14
-__demo.vehicle21,21,Flandre Occ,__demo.deliveryzone21
-__demo.vehicle37,37,Famenne,__demo.deliveryzone37
-__demo.vehicle42,42,Namur,__demo.deliveryzone42
-__demo.vehicle47,47,Brabant Ouest,__demo.deliveryzone47
-__demo.vehicle48,48,Borinage,__demo.deliveryzone48
-__demo.vehicle58,55,Bruxelles,__demo.deliveryzone58
-__demo.vehicle58,58,Bruxelles Sud,__demo.deliveryzone58
-__demo.vehicle59,59,Mouscron,__demo.deliveryzone59
-__demo.vehicle70,70,Limbourg,__demo.deliveryzone70
-__demo.vehicle80,80,Liège,__demo.deliveryzone80
+__demo__.vehicle1,1,EPC,__demo__.deliveryzone1
+__demo__.vehicle2,2,Pharma Sante (AM),__demo__.deliveryzone2
+__demo__.vehicle2b,2,Pharma Sante (PM),__demo__.deliveryzone2b
+__demo__.vehicle3,3,Life (AM),__demo__.deliveryzone3
+__demo__.vehicle3b,3,Life (PM),__demo__.deliveryzone3b
+__demo__.vehicle4,4,Pharma Belgium,__demo__.deliveryzone4
+__demo__.vehicle13,13,Belmedis,__demo__.deliveryzone13
+__demo__.vehicle13b,13,Belmedis,__demo__.deliveryzone13b
+__demo__.vehicle14,14,Lloyd Pharma,__demo__.deliveryzone14
+__demo__.vehicle21,21,Flandre Occ,__demo__.deliveryzone21
+__demo__.vehicle37,37,Famenne,__demo__.deliveryzone37
+__demo__.vehicle42,42,Namur,__demo__.deliveryzone42
+__demo__.vehicle47,47,Brabant Ouest,__demo__.deliveryzone47
+__demo__.vehicle48,48,Borinage,__demo__.deliveryzone48
+__demo__.vehicle58,55,Bruxelles,__demo__.deliveryzone58
+__demo__.vehicle58,58,Bruxelles Sud,__demo__.deliveryzone58
+__demo__.vehicle59,59,Mouscron,__demo__.deliveryzone59
+__demo__.vehicle70,70,Limbourg,__demo__.deliveryzone70
+__demo__.vehicle80,80,Liège,__demo__.deliveryzone80

@@ -207,7 +207,7 @@ def add_xmlid_tax(ctx):
                         company_xmlid_name,
                         tax_name,
                     ),
-                'module': 'scenario',
+                'module': '__setup__',
                 'model': 'account.tax',
                 'res_id': tax.id
             })
