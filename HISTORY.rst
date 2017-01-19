@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-712: Add a flag on the sequence to use the end date of the range to compute prefix with range_
 
 **Bugfixes**
 
