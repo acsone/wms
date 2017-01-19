@@ -27,6 +27,7 @@ Unreleased
 * ALCN-38: Upgrade account-financial-tools repository
 
 * ALCN-38: Upgrade l10n-belgium repository
+* ALCN-701: Add tracking for all date on lot
 
 **Bugfixes**
 
