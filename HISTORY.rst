@@ -15,6 +15,8 @@ Unreleased
 **Build**
 
 * Change merge policy for git merge on HISTORY.rst
+* Improve travis build by speeding up submodule download
+  from GitHub zip archives
 
 **Documentation**
 
