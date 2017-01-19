@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-711: Set "VIES VAT check" on the company by default
 
 **Bugfixes**
 
