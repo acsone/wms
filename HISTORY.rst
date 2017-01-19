@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-708: Add the report intrastat
 
 **Bugfixes**
 
