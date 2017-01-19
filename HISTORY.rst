@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-710: Add the structured communication on supplier invoice
 
 **Bugfixes**
 
