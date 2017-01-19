@@ -14,6 +14,8 @@ Unreleased
 
 **Build**
 
+* Update odoo-cloud-platform
+
 **Documentation**
 
 
