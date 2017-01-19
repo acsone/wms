@@ -96,6 +96,7 @@
                             <thead>
                                 <tr class="active">
                                     <th>Seq.</th>
+                                    <th>Reference</th>
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Mobile</th>
@@ -104,6 +105,7 @@
                                     <th># Med.</th>
                                     <th># Cold</th>
                                     <th># Food</th>
+                                    <th># Equip.</th>
                                     <th># Hum.</th>
                                     <th># Tot.</th>
                                 </tr>
@@ -112,6 +114,9 @@
                                 <tr t-foreach="delivery.shipping_ids" t-as="shipping">
                                     <td>
                                         <span t-field="shipping.sequence" />
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.name" />
                                     </td>
                                     <td>
                                         <span t-field="shipping.partner_id.name" />
@@ -126,12 +131,25 @@
                                     <td>
                                         <span t-field="shipping.partner_id.phone" />
                                     </td>
-                                    <td>#TODO</td>
-                                    <td>#TODO</td>
-                                    <td>#TODO</td>
-                                    <td>#TODO</td>
-                                    <td>#TODO</td>
-                                    <td>#TODO</td>
+                                    <td>TODO</td>
+                                    <td>
+                                        <span t-field="shipping.number_of_medical"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.number_of_cold"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.number_of_food"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.number_of_equipment"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.number_of_human_food"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="shipping.number_total"/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
