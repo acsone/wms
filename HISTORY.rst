@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-38: Upgrade account-financial-tools repository
+
 **Bugfixes**
 
 **Build**
