@@ -43,14 +43,16 @@ class AccountInvoice(models.Model):
         compute='_compute_total_amounts'
     )
 
-    invoice_contribution_ids = fields.Many2many('account.invoice.tax',
-                                       compute='_compute_total_amounts')
+    invoice_contribution_ids = fields.Many2many(
+        'account.invoice.tax',
+        compute='_compute_total_amounts')
     amount_contribution = fields.Monetary(
         compute='_compute_total_amounts'
     )
 
-    invoice_only_tax_ids = fields.Many2many('account.invoice.tax',
-                                       compute='_compute_total_amounts')
+    invoice_only_tax_ids = fields.Many2many(
+        'account.invoice.tax',
+        compute='_compute_total_amounts')
     amount_only_tax = fields.Monetary(
         compute='_compute_total_amounts'
     )
@@ -173,7 +175,8 @@ class AccountInvoice(models.Model):
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
-    only_tax_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
+    only_tax_ids = fields.Many2many('account.tax',
+                                    compute='_compute_all_taxes')
     contribution_ids = fields.Many2many('account.tax',
                                          compute='_compute_all_taxes')
     apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')

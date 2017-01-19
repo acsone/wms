@@ -39,10 +39,12 @@ class StockPicking(models.Model):
                                     compute='_compute_number_of_products')
     number_of_food = fields.Integer('Number of food products',
                                     compute='_compute_number_of_products')
-    number_of_human_food = fields.Integer('Number of human food',
-                                      compute='_compute_number_of_products')
-    number_of_equipment = fields.Integer('Number of equipments',
-                                      compute='_compute_number_of_products')
+    number_of_human_food = fields.Integer(
+        'Number of human food',
+        compute='_compute_number_of_products')
+    number_of_equipment = fields.Integer(
+        'Number of equipments',
+        compute='_compute_number_of_products')
     number_total = fields.Integer('Number of products',
                                   compute='_compute_number_of_products')
 

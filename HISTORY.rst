@@ -55,6 +55,9 @@ Unreleased
 * Do product import before location import to avoid a bug leading to OOM
 
 **Features and Improvements**
+* Add the report delivery slip
+* Improve the report invoice
+* Add the delivery round report
 
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment

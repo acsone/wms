@@ -1,15 +1,14 @@
-    # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from collections import defaultdict
-
 from openerp import api, fields, models
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    only_tax_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
+    only_tax_ids = fields.Many2many('account.tax',
+                                    compute='_compute_all_taxes')
     contribution_ids = fields.Many2many('account.tax',
                                         compute='_compute_all_taxes')
     apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
