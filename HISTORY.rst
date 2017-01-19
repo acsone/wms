@@ -14,6 +14,8 @@ Unreleased
 
 **Build**
 
+* Change merge policy for git merge on HISTORY.rst
+
 **Documentation**
 
 
