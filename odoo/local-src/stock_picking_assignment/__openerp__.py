@@ -21,7 +21,7 @@
 
 {
     'name': 'Stock lot track',
-    'version': '1.0',
+    'version': '9.0.1.0.0',
     'category': 'Stock Management',
     'author': 'Sylvain Van Hoof',
     'description':
