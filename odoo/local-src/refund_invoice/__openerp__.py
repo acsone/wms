@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Refund invoice',
-    'version': '0.1',
+    'version': '9.0.1.0.0',
     'summary': 'Allows to create customer/supplier refunds',
     'sequence': 30,
     'description': """
