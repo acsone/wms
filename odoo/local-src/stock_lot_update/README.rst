@@ -27,6 +27,9 @@ Create an incoming shipment and add a line with product1 and lot. Make the
 reception and optionaly move or use the product. Go on the lot and change the
 reference to product2.
 
+If the product need a lot this module will force
+the user to set a lot in the update quantity on hand wizard.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/119/8.0
