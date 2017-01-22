@@ -1,7 +1,11 @@
 Stock lot track
 ==========================
 
-Track change on the lot
+Track change on following fields:
+- Best before Date
+- Removal Date
+- End of Life Date
+- Alert Date
 
 Installation
 ============
