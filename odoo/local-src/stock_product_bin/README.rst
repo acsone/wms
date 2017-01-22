@@ -10,6 +10,9 @@ Define on the product in which bin it should be stored. You can defined
 multiples rules based on different stock location.
 The put away strategy is modified to take care of that configuration.
 
+This module allows to assign a location/bin on a product.
+This assignment can be occur in the product view or in the wizard "Update quantity on hand".
+
 Installation
 ============
 
@@ -43,8 +46,6 @@ For further information, please visit:
 Known issues / Roadmap
 ======================
 
-/
-
 Bug Tracker
 ===========
 
@@ -65,6 +66,7 @@ Contributors
 ------------
 
 * Jacques-Etienne Baudoux <je@bcim.be>
+* Sylvain Van Hoof <svh@sylvainvh.be>
 
 Maintainer
 ----------
