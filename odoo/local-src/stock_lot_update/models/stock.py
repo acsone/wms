@@ -26,9 +26,6 @@ class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     product_id = fields.Many2one(
-        'product.product', 'Product',
-        required=True,
-        domain=[('type', '<>', 'service')],
         track_visibility='onchange',
         )
 
