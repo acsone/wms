@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 16:29+0000\n"
-"PO-Revision-Date: 2016-11-22 16:29+0000\n"
+"POT-Creation-Date: 2017-01-22 19:51+0000\n"
+"PO-Revision-Date: 2017-01-22 19:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -280,6 +280,11 @@ msgid "TVA"
 msgstr "TVA"
 
 #. module: specific_account
+#: sql_constraint:account.invoice:0
+msgid "The supplier invoice number must be unique by supplier"
+msgstr "Le numéro de facture doit être unique par facture fournisseur"
+
+#. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
 msgid "Totals"
 msgstr "Totaux"
@@ -295,7 +300,7 @@ msgid "VAT Amount"
 msgstr "Montant TVA"
 
 #. module: specific_account
-#: model:ir.model,name:specific_account.model_report_account_report_invoice
-msgid "report.account.report_invoice"
-msgstr "report.account.report_invoice"
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_supplier_invoice_number
+msgid "Vendor reference"
+msgstr "Référence fournisseur"
 

@@ -9,14 +9,14 @@
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="priority">20</field>
             <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='reference']" position="replace">
+                    <field name="supplier_invoice_number" required="True"/>
+                </xpath>
+
                 <xpath expr="//group[field[@name='partner_id']]" position="inside">
                     <field name="reference_type" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"
                            on_change="generate_bbacomm(type,reference_type, partner_id,reference, context)"/>
                     <field name="reference" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"/>
-                </xpath>
-
-                <xpath expr="//group/field[@name='reference']" position="replace">
-                    <field name="supplier_invoice_number" required="True"/>
                 </xpath>
             </field>
 
