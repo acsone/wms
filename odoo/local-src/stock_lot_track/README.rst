@@ -2,6 +2,8 @@ Stock lot track
 ==========================
 
 Track change on following fields:
+- Name
+- Product
 - Best before Date
 - Removal Date
 - End of Life Date
