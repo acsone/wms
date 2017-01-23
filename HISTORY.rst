@@ -29,6 +29,7 @@ Unreleased
 * Improve travis build by speeding up submodule download
   from GitHub zip archives
 * Update odoo-cloud-platform
+* Use redis integration on test instance
 
 **Documentation**
 
