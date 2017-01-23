@@ -92,6 +92,26 @@ def create_locations(ctx):
             'kind': 'parking',
         })
 
+    # Achetés-Vendus is under Input (part of stock)
+    create_or_update(ctx, 'stock.location', '__setup__.stock_location_order', {
+        'name': u'Achetés-Vendus',
+        'location_id': ctx.env.ref('stock.stock_location_company').id,
+        'usage': 'view',
+    })
+    onorders = [
+        ('__setup__.stock_location_order_ali', u'Achetés-Vendus Aliments'),
+        ('__setup__.stock_location_order_medoc',
+         u'Achetés-Vendus Médicaments'),
+        ('__setup__.stock_location_order_frigo', u'Achetés-Vendus Frigo'),
+        ('__setup__.stock_location_order_mat', u'Achetés-Vendus Matériel'),
+    ]
+    for xmlid, name in onorders:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__setup__.stock_location_order').id,
+            'usage': 'internal',
+        })
+
     # Returns = Products unavailable => not under WH but under physical loc.
     create_or_update(
         ctx, 'stock.location', '__setup__.stock_location_return',
