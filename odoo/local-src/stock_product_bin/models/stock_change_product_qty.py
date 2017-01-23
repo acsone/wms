@@ -25,7 +25,7 @@ class StockChangeProductQty(models.TransientModel):
     _inherit = 'stock.change.product.qty'
 
     stock_bin_ids = fields.One2many(
-        'product.stock.bin', 'product_id', 'Stock Bins')
+        'product.stock.bin.temp', 'product_id', 'Stock Bins')
 
     @api.model
     def default_get(self, fields):
