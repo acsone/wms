@@ -79,6 +79,7 @@ migration:
           - stock_grn
           - stock_groupbypartner
           - stock_lot_update
+          - stock_picking_assignment
           - stock_picking_fillwithstock
           - stock_picking_sequence
           - stock_picking_subcode
