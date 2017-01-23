@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright (C) 2016 BCIM <http://www.bcim.be>
+#    Author: Sylvain Van Hoof <svh@sylvainvh.be>
+#    Copyright (C) 2016
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,21 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import fields, models
 
-{
-    'name': 'Stock Lot Update',
-    'version': '1.0',
-    'category': 'Stock Management',
-    'author': 'BCIM',
-    'depends': [
-        'stock',
-        ],
-    'data': [
-        'views/stock.xml',
-        'views/stock_change_product_qty.xml',
-        ],
-    'installable': True,
-    'active': False,
-    'license': 'AGPL-3',
-    'application': False,
-}
+
+class StockLocation(models.Model):
+    _inherit = 'stock.location'
+
+    bin_checksum_1 = fields.Char('Checksum 1')
+    bin_checksum_2 = fields.Char('Checksum 2')
+    bin_checksum_3 = fields.Char('Checksum 3')

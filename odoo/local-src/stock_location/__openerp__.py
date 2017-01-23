@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright (C) 2016 BCIM <http://www.bcim.be>
+#    Author: Sylvain Van Hoof <svh@sylvainvh.be>
+#    Copyright (C) 2016
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,16 +20,14 @@
 ##############################################################################
 
 {
-    'name': 'Stock Lot Update',
+    'name': 'Stock location',
     'version': '1.0',
     'category': 'Stock Management',
-    'author': 'BCIM',
     'depends': [
         'stock',
         ],
     'data': [
-        'views/stock.xml',
-        'views/stock_change_product_qty.xml',
+        'views/stock_location.xml',
         ],
     'installable': True,
     'active': False,
