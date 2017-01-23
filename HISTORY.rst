@@ -24,6 +24,8 @@ Unreleased
 * ALCN-710: Add the structured communication on supplier invoice
 * ALCN-712: Add a flag on the sequence to use the end date of the range to compute prefix with range_
 
+* ALCN-38: Upgrade account-financial-tools repository
+
 **Bugfixes**
 
 **Build**
