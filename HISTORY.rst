@@ -9,27 +9,23 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
-* ALCN-718: Add the module account_banking_sepa_direct_debit from the repo bank-payment (OCA)
 
-* ALCN-252: Traceability
+* ALCN-38: Upgrade account-financial-tools and l10n-belgium repositories
 * ALCN-175: Stock locations
 * ALCN-179: Stock reception priorities
 * ALCN-180: Stock arrangement and priorities
+* ALCN-252: Traceability
 * ALCN-269: Stock reserves and reassortment priorities
-* ALCN-717: Add the module refund_invoice. This module allows to create customer/supplier refunds
-
+* ALCN-621: Force the lot for the wizard update quantity
+* ALCN-622: Add three checksum bin on the stock location
 * ALCN-669: Add the module stock_picking_assignment to assign a picking
+* ALCN-701: Add tracking for all date on lot
 * ALCN-708: Add the report intrastat
 * ALCN-711: Set "VIES VAT check" on the company by default
 * ALCN-710: Add the structured communication on supplier invoice
-* ALCN-712: Add a flag on the sequence to use the end date of the range to compute prefix with range_
-
-* ALCN-38: Upgrade account-financial-tools repository
-
-* ALCN-38: Upgrade l10n-belgium repository
-* ALCN-621: Force the lot for the wizard update quantity
-* ALCN-622: Add three checksum bin on the stock location
-* ALCN-701: Add tracking for all date on lot
+* ALCN-712: Add a flag on the sequence to use the end date of the range to compute prefix with range
+* ALCN-717: Add the module refund_invoice. This module allows to create customer/supplier refunds
+* ALCN-718: Add the module account_banking_sepa_direct_debit from the repo bank-payment (OCA)
 
 **Bugfixes**
 

@@ -67,6 +67,7 @@ migration:
           - pricelist_discount
           - procurement_sale
           - product_price_category
+          - refund_invoice
           - sale_product_additional
           - specific_base
           - specific_account
@@ -76,9 +77,12 @@ migration:
           - specific_stock
           - specific_translations
           - stock_barcode_fix
+          - stock_expired
           - stock_grn
           - stock_groupbypartner
+          - stock_location
           - stock_lot_update
+          - stock_lot_track
           - stock_picking_assignment
           - stock_picking_fillwithstock
           - stock_picking_sequence
@@ -89,7 +93,3 @@ migration:
           - stock_quant_bylocation
           - stock_refill
           - web_autorefresh
-          - stock_expired
-          - refund_invoice
-          - stock_location
-          - stock_lot_track
