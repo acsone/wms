@@ -301,7 +301,8 @@ class LocationMapper(EntityMapper):
 
     FIELDS_MAPPING = [
         'name',
-        'parent_id'
+        'parent_id',
+        'kind',
     ]
 
     def get_sql_query(self):
@@ -371,6 +372,7 @@ class LocationMapper(EntityMapper):
             odoo_entity['name'] = rack + lvl + bin
             odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
+            odoo_entity['kind'] = 'bin'
             odoo_entities.append(odoo_entity)
 
         return odoo_entities
