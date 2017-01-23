@@ -22,6 +22,7 @@ Unreleased
 * ALCN-708: Add the report intrastat
 * ALCN-711: Set "VIES VAT check" on the company by default
 * ALCN-710: Add the structured communication on supplier invoice
+* ALCN-712: Add a flag on the sequence to use the end date of the range to compute prefix with range_
 
 **Bugfixes**
 

@@ -10,6 +10,7 @@ This module adds Alcyon specific fields and logic for accounting.
 
 * Alcyon invoice report.
 * Display 'Accounting Entries' menu for Accountants
+* Change the sequence to display the year of the end date
 
 Credits
 =======
