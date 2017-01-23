@@ -90,6 +90,25 @@
                     <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
+            <div t-if="invoice.partner_id.country_id and invoice.partner_id.country_id.intrastat and invoice.partner_id.country_id != invoice.env.ref('base.be')">
+                <table class="round_table intrastat_table">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">Intrastat code</th>
+                            <th class="text-right">Total weight</th>
+                            <th class="text-right">Total net value</th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr t-foreach="invoice.get_instrastat_values()" t-as="line">
+                            <td class="text-right"><span t-esc="line[0]" /></td>
+                            <td class="text-right"><span t-esc="line[1]" /> Kg</td>
+                            <td class="text-right"><span t-esc="line[2]" /> <span t-esc="invoice.currency_id.symbol"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <p id="sale_condition" t-field="company.invoice_terms_conditions"/>
 
             <table id="total_table" class="border_table round_table">

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 16:29+0000\n"
-"PO-Revision-Date: 2016-11-22 16:29+0000\n"
+"POT-Creation-Date: 2017-01-22 18:16+0000\n"
+"PO-Revision-Date: 2017-01-22 18:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -164,6 +164,11 @@ msgid "<span>du</span>"
 msgstr "<span>du</span>"
 
 #. module: specific_account
+#: model:account.tax.group,name:specific_account.tax_group_apb
+msgid "APB"
+msgstr "APB"
+
+#. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_invoice_amount_alcyon_discount
 msgid "Amount alcyon discount"
 msgstr "Amount alcyon discount"
@@ -204,6 +209,11 @@ msgid "Cancelled Invoice"
 msgstr "Facture annulée"
 
 #. module: specific_account
+#: model:ir.model,name:specific_account.model_res_country
+msgid "Country"
+msgstr "Pays"
+
+#. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
 msgid "DEXIA:"
 msgstr "DEXIA:"
@@ -224,10 +234,25 @@ msgid "ING:"
 msgstr "ING:"
 
 #. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Intrastat code"
+msgstr "Code Intrastat"
+
+#. module: specific_account
 #: model:ir.model,name:specific_account.model_account_invoice
 #: model:ir.ui.view,arch_db:specific_account.report_invoice
 msgid "Invoice"
 msgstr "Facture"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de facturation"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Kg"
+msgstr "Kg"
 
 #. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
@@ -281,6 +306,16 @@ msgstr "TVA"
 
 #. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Total net value"
+msgstr "Valeur nette totale"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
+msgid "Total weight"
+msgstr "Poids total"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
 msgid "Totals"
 msgstr "Totaux"
 
@@ -293,9 +328,4 @@ msgstr "Prix<br/>unitaire<br/>brut"
 #: model:ir.ui.view,arch_db:specific_account.report_invoice_alcyon
 msgid "VAT Amount"
 msgstr "Montant TVA"
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_report_account_report_invoice
-msgid "report.account.report_invoice"
-msgstr "report.account.report_invoice"
 

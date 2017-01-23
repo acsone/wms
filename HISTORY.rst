@@ -19,6 +19,7 @@ Unreleased
 * ALCN-717: Add the module refund_invoice. This module allows to create customer/supplier refunds
 
 * ALCN-669: Add the module stock_picking_assignment to assign a picking
+* ALCN-708: Add the report intrastat
 
 **Bugfixes**
 
