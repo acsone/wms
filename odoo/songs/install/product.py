@@ -2,26 +2,18 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from pkg_resources import resource_stream
+
 import anthem
+from anthem.lyrics.loaders import load_csv_stream
 from anthem.lyrics.records import create_or_update
 
-
-@anthem.log
-def create_product_categories(ctx):
-    """ Creating product categories """
-    categories = [('__init.product_categ_materiel', u'Matériel'),
-                  ('__init.product_categ_ali', u'Aliments'),
-                  ('__init.product_categ_medoc', u'Médicaments'),
-                  ('__init.product_categ_frigo', u'Frigo'),
-                  # ('__init.product_categ_congel', u'congel -12'),
-                  ]
-    for xmlid, name in categories:
-        create_or_update(ctx, 'product.category', xmlid, {'name': name})
+from ..common import req
 
 
 @anthem.log
 def set_customer_lead_time(ctx):
-    create_or_update(ctx, 'ir.values', '__init.product_customer_lead', {
+    create_or_update(ctx, 'ir.values', '__setup__.product_customer_lead', {
         'key': 'default',
         'name': 'sale_delay',
         'model': 'product.template',
@@ -30,7 +22,21 @@ def set_customer_lead_time(ctx):
 
 
 @anthem.log
+def import_product_categories(ctx):
+    """ Importing product.categories from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'defer_parent_store_computation': True})
+    Category = ctx.env['product.category'].with_context(load_ctx)
+    content = resource_stream(req, 'data/install/product.category.csv')
+    load_csv_stream(ctx, Category, content, delimiter=',')
+
+    with ctx.log(u"Compute parent_left, parent_right"):
+        ctx.env['product.category']._parent_store_compute()
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
-    create_product_categories(ctx)
     set_customer_lead_time(ctx)
+    import_product_categories(ctx)

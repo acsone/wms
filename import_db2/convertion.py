@@ -12,6 +12,7 @@ class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'default_code'
+    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
@@ -35,6 +36,10 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'supplier_taxes_id/id', 'gesctv',
             mapping=mappings.PRODUCT_PURCHASE_VAT
+        ),
+        FieldMapper(
+            'categ_id/id', 'gescsg',
+            mapping=mappings.PRODUCT_CATEGORY
         ),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
@@ -67,7 +72,7 @@ class ProductMapper(EntityMapper):
         value = db2_entity['gescre'].strip()
         if value:
             value = self.get_xml_id(
-                'product_price_category', value.lower()
+                'product_price_category', value.lower(), prefix='__setup__'
             )
         odoo_entity['price_category_id'] = OrderedDict(id=value)
 
@@ -78,7 +83,7 @@ class ProductMapper(EntityMapper):
             xml_id = self.get_xml_id(
                 'supplierinfo', '%s-%s' % (ref, db2_entity['gesart'].strip())
             )
-            supplier_xml_id = self.get_xml_id('supplier', str(ref))
+            supplier_xml_id = self.get_xml_id('supplier', str(ref), 'scenario')
 
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
@@ -123,6 +128,7 @@ class CustomerMapper(EntityMapper):
     DB2_SCHEMA = 'gendata'
 
     XMLID_FIELD = 'ref'
+    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
@@ -163,7 +169,8 @@ class CustomerMapper(EntityMapper):
         ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
-        'customer_categories', 'pharmacist'
+        'customer_categories', 'pharmacist',
+        'property_account_position_id',
     ]
 
     def get_sql_joins(self):
@@ -218,11 +225,27 @@ class CustomerMapper(EntityMapper):
 
         if db2_id:
             self.importer.add_foreign_ref('FOURN', db2_id)
-            xml_id = self.get_xml_id('supplier', db2_id)
+            xml_id = self.get_xml_id('supplier', db2_id, prefix='scenario')
         else:
             xml_id = None
 
         odoo_entity['pharmacist_id/id'] = xml_id
+
+    @staticmethod
+    def convert_property_account_position_id(odoo_entity, db2_entity):
+        db2_vat_code = db2_entity.get('clictv')
+
+        if db2_vat_code == 3:
+            db2_country = db2_entity.get('clicpa')
+            # See mappings.CEE_COUNTRIES
+            if db2_country <= 12:
+                code = 'intra'
+            else:
+                code = 'extra'
+            pos = '__setup__.fiscal_position_' + code
+        else:
+            pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
+        odoo_entity['property_account_position_id/id'] = pos
 
 
 class SupplierMapper(EntityMapper):
@@ -230,6 +253,7 @@ class SupplierMapper(EntityMapper):
     DB2_REF_NAME = 'founum'
 
     XMLID_FIELD = 'ref'
+    XMLID_IMPORT_NAME = 'scenario'
 
     FIELDS_MAPPING = [
         FieldMapper('ref', 'founum'),
@@ -269,4 +293,89 @@ class SupplierMapper(EntityMapper):
         )
 
 
-MAPPER_CLASSES = [ProductMapper, CustomerMapper, SupplierMapper]
+class LocationMapper(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = 'computed'
+    XMLID_IMPORT_NAME = '__import__'
+
+    FIELDS_MAPPING = [
+        'name',
+        'parent_id',
+        'kind',
+    ]
+
+    def get_sql_query(self):
+        query = ("select p1.stolos as location_name from sbdata.PSTOCK as p1"
+                 " UNION "
+                 "select p2.stolop as location_name from sbdata.PSTOCK as p2")
+        if not self.importer.full:
+            query += " FETCH FIRST 300 ROWS ONLY"
+
+        return query, []
+
+    def convert_entities(self, db2_entities):
+        """ Create hierarchy first """
+        odoo_entities = []
+        hierarchy = {}
+        families = [
+            ('A', '__setup__.stock_location_ali'),
+            ('G', '__setup__.stock_location_medoc'),
+            ('Q', '__setup__.stock_location_frigo'),
+            ('P', '__setup__.stock_location_materiel'),
+            ('E', '__setup__.stock_location_materiel')]
+
+        for f, parent in families:
+            hierarchy[f] = {}
+            odoo_entity = OrderedDict(id=None)
+            odoo_entity['name'] = f
+            odoo_entity['location_id/id'] = parent
+            odoo_entity['id'] = self.get_xml_id(
+                self.name, 'family_' + f
+            )
+            odoo_entities.append(odoo_entity)
+
+        for db2_entity in db2_entities:
+            value = db2_entity['location_name'].strip()
+            if len(value) < 8:
+                continue
+
+            family = value[0]
+            family_xmlid = self.get_xml_id(
+                self.name, 'family_' + family
+            )
+            avenue = value[1]
+
+            if family in ('A', 'P'):
+                rack = value[2:4]
+                lvl = value[4]
+                bin = '0' + value[5]
+            elif family in ('Q', 'E'):
+                rack = value[2]
+                lvl = value[3]
+                bin = value[4:6]
+            elif family == 'G':
+                # dynamic racks
+                rack = value[2]
+                lvl = value[3]
+                bin = value[4:6]
+                # TODO not found in PSTOCK non dynamic racks
+
+            # TODO assign the control code to an Odoo field
+            control_code = value[6:8]
+            control_code = control_code
+
+            bin_xmlid = self.get_xml_id(
+                self.name, 'loc_' + family + avenue + rack + lvl + bin)
+
+            odoo_entity = OrderedDict(id=None)
+            odoo_entity['name'] = rack + lvl + bin
+            odoo_entity['location_id/id'] = family_xmlid
+            odoo_entity['id'] = bin_xmlid
+            odoo_entity['kind'] = 'bin'
+            odoo_entities.append(odoo_entity)
+
+        return odoo_entities
+
+
+MAPPER_CLASSES = [LocationMapper, ProductMapper, CustomerMapper, SupplierMapper]

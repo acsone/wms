@@ -8,6 +8,12 @@ Unreleased
 
 **Data Migration**
 
+* ALCN-707: Import fiscal position on customers
+* ALCN-704: Import stock locations A, G, Q, P and E
+* ALCN-77: Create product categories and set them on products
+* ALCN-77: Remove putaway strategy
+* ALCN-77: Standardize xmlids in logistics to __setup__ and __import__
+
 **Features and Improvements**
 
 **Bugfixes**
@@ -46,6 +52,9 @@ Unreleased
   from GitHub zip archives
 * Update odoo-cloud-platform
 * Use redis integration on test instance
+* Upgrade anthem version to 0.6.0
+
+**Documentation**
 
 
 9.7.1 (2017-01-13)

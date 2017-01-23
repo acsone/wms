@@ -12,7 +12,7 @@ scenario.supplier_67530,67530,GENIA,"Rue J-Fr. Champollion, 12",44680,ST-HILAIRE
 scenario.supplier_68302,68302,HARTMANN PAUL,Avenue Paul Hartmann 1,1480,SAINTES,02/3914466,043775039,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_71100,71100,MSD ANIMAL HEALTH,Clos du Lynx 5,1200,BRUXELLES,02/3709421,023709335,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_74153,74153,CERTA S.A. (MEDEVA),"Textielstraat, 20",8790,WAREGEM,02/3893332,070233143,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
-scenario.supplier_74200,74200,MERIAL BELGIUM SA,Leonardo Da Vincilaan 19,1831,DIEGEM,080032369,080094905,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
+scenario.supplier_74200,74200,MERIAL BELGIUM SA,Leonardo Da Vincilaan 19,1831,DIEGEM,080032369,,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_77320,77320,PHARMA BELGIUM,RUE CARLISTRAAT 17/19,1140,bruxelles,064/273.273,064/273.283,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_77340,77340,PHARMA SANTE OFFICINE 31,Rue des Ecoliers 138,4100,SERAING,04/3371774,043301427,officine31@pharmasante.be,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
 scenario.supplier_77605,77605,PHARMA LOGISTICS,Demeursleen 71,1654,HUIZINGEN,02/3631570,023603085,,,False,True,scenario.partner_category_supplier,base.be,fr_BE,
