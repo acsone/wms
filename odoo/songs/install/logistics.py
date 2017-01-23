@@ -93,11 +93,13 @@ def create_locations(ctx):
         })
 
     # Achetés-Vendus is under Input (part of stock)
-    create_or_update(ctx, 'stock.location', '__setup__.stock_location_order', {
-        'name': u'Achetés-Vendus',
-        'location_id': ctx.env.ref('stock.stock_location_company').id,
-        'usage': 'view',
-    })
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_onorder',
+        {
+            'name': u'Achetés-Vendus',
+            'location_id': ctx.env.ref('stock.stock_location_company').id,
+            'usage': 'view',
+        })
     onorders = [
         ('__setup__.stock_location_order_ali', u'Achetés-Vendus Aliments'),
         ('__setup__.stock_location_order_medoc',
@@ -108,7 +110,7 @@ def create_locations(ctx):
     for xmlid, name in onorders:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
-            'location_id': ctx.env.ref('__setup__.stock_location_order').id,
+            'location_id': ctx.env.ref('__setup__.stock_location_onorder').id,
             'usage': 'internal',
         })
 
@@ -167,30 +169,72 @@ def create_putaway(ctx):
 
     loc_stock_id = ref('stock.stock_location_stock').id
 
-    create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_parking', {
-        'name': u'Parking',
+    # Input - Manage Parking and Achetés-vendus
+    create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_input', {
+        'name': u'Input',
         'method': u'fixed',
         'fixed_location_id': loc_stock_id,
     })
-
     create_or_update(
-        ctx, 'stock.fixed.putaway.strat', '__setup__.stock_putaway_parking_medoc',
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_onorder',
         {
-            'putaway_id': ref('__setup__.stock_putaway_parking').id,
-            'category_id': ref('__setup__.product_categ_medoc').id,
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('stock.route_warehouse0_mto').id,
             'fixed_location_id': ref(
-                '__setup__.stock_location_parking_drug').id,
+                '__setup__.stock_location_onorder').id,
         }
     )
-
+    create_or_update(
+        ctx, 'stock.fixed.putaway.strat',
+        '__setup__.stock_putaway_strat_parking_medoc',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'category_id': ref('__setup__.product_categ_medoc').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_parking_medoc').id,
+        }
+    )
     create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
         'location_id': loc_stock_id,
-        'putaway_strategy_id': ref('__setup__.stock_putaway_parking').id
+        'putaway_strategy_id': ref('__setup__.stock_putaway_input').id
     })
 
-    create_or_update(ctx, 'stock.picking.type', 'stock.picking_type_in', {
-        'default_location_dest_id': ref('stock.stock_location_company').id
-    })
+    # Input - Manage Achetés-vendus destination by category
+    create_or_update(
+        ctx, 'product.putaway', '__setup__.stock_putaway_onorder',
+        {
+            'name': u'Achetés-Vendus',
+            'method': u'fixed',
+        })
+    onorders = [
+        ('__setup__.stock_putaway_location_order_ali',
+         '__setup__.stock_putaway_strat_onorder_ali',
+         '__setup__.stock_location_order_ali'),
+        ('__setup__.stock_putaway_location_order_medoc',
+         '__setup__.stock_putaway_strat_onorder_medoc',
+         '__setup__.stock_location_order_medoc'),
+        ('__setup__.stock_putaway_location_order_frigo',
+         '__setup__.stock_putaway_strat_onorder_frigo',
+         '__setup__.stock_location_order_frigo'),
+        ('__setup__.stock_putaway_location_order_mat'
+         '__setup__.stock_putaway_strat_onorder_mat',
+         '__setup__.stock_location_order_mat'),
+    ]
+    for xmlid, categ, loc in onorders:
+        create_or_update(
+            ctx, 'stock.fixed.putaway.strat', xmlid,
+            {
+                'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+                'category_id': ref(categ).id,
+                'fixed_location_id': ref(loc).id,
+            }
+        )
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_onorder',
+        {
+            'putaway_strategy_id': ref('__setup__.stock_putaway_onorder').id
+        })
 
 
 @anthem.log
@@ -336,6 +380,11 @@ def create_picking_types(ctx):
     for record in types:
         xmlid = record.pop('xmlid')
         create_or_update(ctx, 'stock.picking.type', xmlid, record)
+
+    create_or_update(ctx, 'stock.picking.type', 'stock.picking_type_in', {
+        'default_location_dest_id': ctx.env.ref(
+            'stock.stock_location_company').id
+    })
 
 
 @anthem.log
