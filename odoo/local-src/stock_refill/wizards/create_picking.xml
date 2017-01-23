@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="view_stock_wizard_reassort_form" model="ir.ui.view">
+        <field name="name">stock.wizard.reassort.form</field>
+        <field name="model">stock.wizard.reassort</field>
+        <field name="arch" type="xml">
+            <form string="Create Operation">
+                <group>
+                    <group>
+                        <p>Please confirm the creation of the stock operation</p>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button name="confirm" string="Assign" type="object" class="oe_highlight" />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window name="Create Operation"
+        res_model="stock.wizard.reassort"
+        src_model="report.stock.quant.bylocation.reserve"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="act_report_stock_quant_bylocation_reserve_reassort"
+        multi="True"/>
+
+</data>
+</openerp>

@@ -27,6 +27,7 @@
     'category': 'Stock Management',
     'depends': [
         'procurement',
+        'sale_stock',
         ],
     'data': [
     ],

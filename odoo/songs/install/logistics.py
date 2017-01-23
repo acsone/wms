@@ -28,31 +28,110 @@ def set_delivery_pick_ship(ctx):
 def create_locations(ctx):
     """ Creating stock locations """
     loc_stock = ctx.env.ref('stock.stock_location_stock')
+    root = ctx.env.ref('stock.stock_location_locations')
 
-    locations = [
-        ('__init.stock_location_materiel', u'Matériel'),
-        ('__init.stock_location_ali', u'Aliments'),
-        ('__init.stock_location_medoc', u'Médicaments'),
-        ('__init.stock_location_froid', u'Froid'),
+    # Reserves = Products available => under WH, above Stock
+    reserves = [
+        ('__init.stock_location_reserve_ali', u'Réserve Aliments',
+         loc_stock.location_id.id),
+        ('__init.stock_location_reserve_medoc', u'Réserve Médicaments',
+         loc_stock.location_id.id),
     ]
-
-    for xmlid, name in locations:
-        create_or_update(ctx, 'stock.location', xmlid, {
-            'name': name,
-            'location_id': loc_stock.id,
-        })
-
-    sub_locations = [
-        ('__init.stock_location_frigo', u'Frigo',
-         ctx.env.ref('__init.stock_location_froid').id),
-        ('__init.stock_location_parking_medoc', u'Parking Medicaments',
-         ctx.env.ref('stock.stock_location_company').id),
-    ]
-
-    for xmlid, name, location_id in sub_locations:
+    for xmlid, name, location_id in reserves:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': location_id,
+            'usage': 'view',
+            'kind': 'reserve',
+        })
+
+    # Bins = Products available to pick => under Stock
+    locations = [
+        ('__init.stock_location_materiel', u'Matériel',
+         False,
+         loc_stock.id),
+        ('__init.stock_location_ali', u'Aliments',
+         ctx.env.ref('__init.stock_location_reserve_ali').id,
+         loc_stock.id),
+        ('__init.stock_location_medoc', u'Médicaments',
+         ctx.env.ref('__init.stock_location_reserve_medoc').id,
+         loc_stock.id),
+        ('__init.stock_location_froid', u'Froid',
+         False,
+         loc_stock.id),
+    ]
+    for xmlid, name, reserve_id, location_id in locations:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': location_id,
+            'reserve_location_id': reserve_id,
+            'usage': 'view',
+        })
+    locations = [
+        ('__init.stock_location_frigo', u'Frigo',
+         False,
+         ctx.env.ref('__init.stock_location_froid').id),
+    ]
+    for xmlid, name, reserve_id, location_id in locations:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': location_id,
+            'reserve_location_id': reserve_id,
+            'usage': 'view',
+        })
+
+    # Parking is under Input (part of stock)
+    parkings = [
+        ('__init.stock_location_parking_medoc', u'Parking Medicaments'),
+    ]
+    for xmlid, name in parkings:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('stock.stock_location_company').id,
+            'usage': 'view',
+            'kind': 'parking',
+        })
+
+    # Returns = Products unavailable => not under WH but under physical loc.
+    create_or_update(ctx, 'stock.location', '__init.stock_location_return', {
+        'name': 'Retours',
+        'location_id': root.id,
+        'usage': 'view',
+        })
+    returns = [
+        ('__init.stock_location_return_ali', u'Retours Aliments'),
+        ('__init.stock_location_return_medoc', u'Retours Médicaments'),
+        ('__init.stock_location_return_frigo', u'Retours Frigo'),
+        ('__init.stock_location_return_mat', u'Retours Matériel'),
+        ]
+    for xmlid, name in returns:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__init.stock_location_return').id,
+            'usage': 'internal',
+        })
+
+    # Casse = Products unavailable => not under WH but under physical locations
+    loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
+    create_or_update(
+        ctx, 'stock.location', '__init.stock_location_destroyed', {
+            'name': 'Détruit',
+            'location_id': loc_partner.id,
+            'usage': 'customer',
+        })
+    create_or_update(ctx, 'stock.location', '__init.stock_location_destroy', {
+        'name': 'Casse',
+        'location_id': root.id,
+        'usage': 'view',
+        })
+    destroy = [
+        ('__init.stock_location_destroy_all', u'A détruire'),
+        ]
+    for xmlid, name in destroy:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__init.stock_location_destroy').id,
+            'usage': 'internal',
         })
 
 
@@ -97,6 +176,11 @@ def create_picking_types(ctx):
         limit=1,
     )
 
+    delivery_sequence = ctx.env['ir.sequence'].search(
+        [('name', '=', 'Alcyon Belux SA Sequence out')],
+        limit=1,
+    )
+
     internal_sequence = ctx.env['ir.sequence'].search(
         [('name', '=', 'Alcyon Belux SA Sequence internal')],
         limit=1,
@@ -109,6 +193,19 @@ def create_picking_types(ctx):
     location_medoc = ctx.env.ref('__init.stock_location_medoc')
     location_froid = ctx.env.ref('__init.stock_location_froid')
     location_parking_medoc = ctx.env.ref('__init.stock_location_parking_medoc')
+    location_reserve_medoc = ctx.env.ref('__init.stock_location_reserve_medoc')
+    location_reserve_ali = ctx.env.ref('__init.stock_location_reserve_ali')
+    location_retours = ctx.env.ref('__init.stock_location_return')
+    location_supplier = ctx.env.ref('stock.stock_location_suppliers')
+    location_casse = ctx.env.ref('__init.stock_location_destroy')
+    location_detruit = ctx.env.ref('__init.stock_location_destroyed')
+
+    color_ali = 2
+    color_mat = 4
+    color_froid = 6
+    color_medoc = 7
+    color_back = 8
+
     types = [
         {'xmlid': '__init.stock_picking_type_materiel',
          'name': 'Pick Matériel',
@@ -119,6 +216,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
+         'color': color_mat,
+         'sequence': 6,
          },
         {'xmlid': '__init.stock_picking_type_ali',
          'name': 'Pick Aliments',
@@ -129,6 +228,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
+         'color': color_ali,
+         'sequence': 5,
          },
         {'xmlid': '__init.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
@@ -139,6 +240,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
+         'color': color_medoc,
+         'sequence': 4,
          },
         {'xmlid': '__init.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -149,6 +252,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
+         'color': color_froid,
+         'sequence': 7,
          },
         {'xmlid': '__init.stock_picking_type_rangement',
          'name': 'Rangement Medicaments',
@@ -157,6 +262,48 @@ def create_picking_types(ctx):
          'default_location_src_id': location_parking_medoc.id,
          'default_location_dest_id': location_medoc.id,
          'use_create_lots': False,
+         'color': color_medoc,
+         'sequence': 9,
+         },
+        {'xmlid': '__init.stock_picking_type_reassort_medoc',
+         'name': 'Reassort Medicaments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_medoc.id,
+         'default_location_dest_id': location_medoc.id,
+         'use_create_lots': False,
+         'color': color_medoc,
+         'sequence': 10,
+         },
+        {'xmlid': '__init.stock_picking_type_reassort_ali',
+         'name': 'Reassort Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_ali.id,
+         'default_location_dest_id': location_ali.id,
+         'use_create_lots': False,
+         'color': color_ali,
+         'sequence': 11,
+         },
+        {'xmlid': '__init.stock_picking_type_return',
+         'name': 'Retours',
+         'code': 'outgoing',
+         'sequence_id': delivery_sequence.id,
+         'default_location_src_id': location_retours.id,
+         'default_location_dest_id': location_supplier.id,
+         'use_create_lots': False,
+         'color': color_back,
+         'sequence': 12,
+         },
+        {'xmlid': '__init.stock_picking_type_destroy',
+         'name': 'Destructions',
+         'code': 'outgoing',
+         'sequence_id': delivery_sequence.id,
+         'default_location_src_id': location_casse.id,
+         'default_location_dest_id': location_detruit.id,
+         'use_create_lots': False,
+         'color': color_back,
+         'sequence': 13,
          },
     ]
     for record in types:

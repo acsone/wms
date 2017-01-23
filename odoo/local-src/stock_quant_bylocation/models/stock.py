@@ -37,21 +37,29 @@ class ReportStockQuantBylocation(models.Model):
                 , quant.company_id AS company_id
                 , quant.reservation_id AS reservation_id
                 """,
-            "groupby": "product_id, location_id, owner_id, company_id, "
-                       "reservation_id"
+            "join": "",
+            "where": "",
+            "groupby": "quant.product_id, quant.location_id, quant.owner_id, "
+                       "quant.company_id, quant.reservation_id",
+            "orderby": "",
             }
 
     def init(self, cr):
-        tools.drop_view_if_exists(cr, 'report_stock_quant_bylocation')
-        cr.execute("""
-        CREATE OR REPLACE VIEW report_stock_quant_bylocation AS (
+        tools.drop_view_if_exists(cr, self._table)
+        params = self._prepare_init()
+        query = """
         SELECT %(select)s
         FROM stock_quant quant
         LEFT join product_product product ON quant.product_id=product.id
+        %(join)s
         WHERE qty >= 0
+        %(where)s
         GROUP BY %(groupby)s
-        )
-        """ % self._prepare_init())
+        """
+        if params.get('orderby'):
+            query += "ORDER BY %(orderby)s"
+        cr.execute("CREATE OR REPLACE VIEW " + self._table +
+                   " AS (" + query % params + ")")
 
     product_id = fields.Many2one(
         'product.product', 'Product',

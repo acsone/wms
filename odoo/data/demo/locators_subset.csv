@@ -1,186 +1,186 @@
-id,name,location_id/id
-__init.stock_location_G,G,__init.stock_location_medoc
-__init.stock_location_GAA11094,GAA11094,__init.stock_location_G
-__init.stock_location_GAA21033,GAA21033,__init.stock_location_G
-__init.stock_location_GAA22023,GAA22023,__init.stock_location_G
-__init.stock_location_GAB11097,GAB11097,__init.stock_location_G
-__init.stock_location_GAB12087,GAB12087,__init.stock_location_G
-__init.stock_location_GAB20000,GAB20000,__init.stock_location_G
-__init.stock_location_GAB21003,GAB21003,__init.stock_location_G
-__init.stock_location_GAB22033,GAB22033,__init.stock_location_G
-__init.stock_location_GAB23048,GAB23048,__init.stock_location_G
-__init.stock_location_GAB30081,GAB30081,__init.stock_location_G
-__init.stock_location_GAB31024,GAB31024,__init.stock_location_G
-__init.stock_location_GAB32070,GAB32070,__init.stock_location_G
-__init.stock_location_GAB40086,GAB40086,__init.stock_location_G
-__init.stock_location_GAB41067,GAB41067,__init.stock_location_G
-__init.stock_location_GAB42071,GAB42071,__init.stock_location_G
-__init.stock_location_GAB50066,GAB50066,__init.stock_location_G
-__init.stock_location_GAC10025,GAC10025,__init.stock_location_G
-__init.stock_location_GAC11066,GAC11066,__init.stock_location_G
-__init.stock_location_GAC12008,GAC12008,__init.stock_location_G
-__init.stock_location_GAC13015,GAC13015,__init.stock_location_G
-__init.stock_location_GAC20077,GAC20077,__init.stock_location_G
-__init.stock_location_GAC21083,GAC21083,__init.stock_location_G
-__init.stock_location_GAC22063,GAC22063,__init.stock_location_G
-__init.stock_location_GAC23011,GAC23011,__init.stock_location_G
-__init.stock_location_GAC25085,GAC25085,__init.stock_location_G
-__init.stock_location_GAC30012,GAC30012,__init.stock_location_G
-__init.stock_location_GAC32057,GAC32057,__init.stock_location_G
-__init.stock_location_GAC34020,GAC34020,__init.stock_location_G
-__init.stock_location_GAC35057,GAC35057,__init.stock_location_G
-__init.stock_location_GAC36066,GAC36066,__init.stock_location_G
-__init.stock_location_GAC41008,GAC41008,__init.stock_location_G
-__init.stock_location_GAC42064,GAC42064,__init.stock_location_G
-__init.stock_location_GAC44046,GAC44046,__init.stock_location_G
-__init.stock_location_GAC45035,GAC45035,__init.stock_location_G
-__init.stock_location_GAC50003,GAC50003,__init.stock_location_G
-__init.stock_location_GAC51053,GAC51053,__init.stock_location_G
-__init.stock_location_GAC52083,GAC52083,__init.stock_location_G
-__init.stock_location_GAC53045,GAC53045,__init.stock_location_G
-__init.stock_location_GAD10098,GAD10098,__init.stock_location_G
-__init.stock_location_GAD11038,GAD11038,__init.stock_location_G
-__init.stock_location_GAD13008,GAD13008,__init.stock_location_G
-__init.stock_location_GAD21077,GAD21077,__init.stock_location_G
-__init.stock_location_GAD22000,GAD22000,__init.stock_location_G
-__init.stock_location_GAD23050,GAD23050,__init.stock_location_G
-__init.stock_location_GAD25001,GAD25001,__init.stock_location_G
-__init.stock_location_GAD31075,GAD31075,__init.stock_location_G
-__init.stock_location_GAD32528,GAD32528,__init.stock_location_G
-__init.stock_location_GAD33051,GAD33051,__init.stock_location_G
-__init.stock_location_GAD41014,GAD41014,__init.stock_location_G
-__init.stock_location_GAD42037,GAD42037,__init.stock_location_G
-__init.stock_location_GAD43002,GAD43002,__init.stock_location_G
-__init.stock_location_Q,Q,__init.stock_location_frigo
-__init.stock_location_QAA21034,QAA21034,__init.stock_location_Q
-__init.stock_location_QAA31090,QAA31090,__init.stock_location_Q
-__init.stock_location_QAA32062,QAA32062,__init.stock_location_Q
-__init.stock_location_QAA41002,QAA41002,__init.stock_location_Q
-__init.stock_location_QAA42084,QAA42084,__init.stock_location_Q
-__init.stock_location_QAB12057,QAB12057,__init.stock_location_Q
-__init.stock_location_QAB15094,QAB15094,__init.stock_location_Q
-__init.stock_location_QAB21076,QAB21076,__init.stock_location_Q
-__init.stock_location_QAB31035,QAB31035,__init.stock_location_Q
-__init.stock_location_QAB32062,QAB32062,__init.stock_location_Q
-__init.stock_location_QAB41021,QAB41021,__init.stock_location_Q
-__init.stock_location_QAC11038,QAC11038,__init.stock_location_Q
-__init.stock_location_QAC21027,QAC21027,__init.stock_location_Q
-__init.stock_location_QAC22074,QAC22074,__init.stock_location_Q
-__init.stock_location_QAC31002,QAC31002,__init.stock_location_Q
-__init.stock_location_QAC42033,QAC42033,__init.stock_location_Q
-__init.stock_location_QAD21084,QAD21084,__init.stock_location_Q
-__init.stock_location_QAD21559,QAD21559,__init.stock_location_Q
-__init.stock_location_QAD31031,QAD31031,__init.stock_location_Q
-__init.stock_location_QAD32025,QAD32025,__init.stock_location_Q
-__init.stock_location_QAD41007,QAD41007,__init.stock_location_Q
-__init.stock_location_QAE21049,QAE21049,__init.stock_location_Q
-__init.stock_location_QAE31004,QAE31004,__init.stock_location_Q
-__init.stock_location_QAE41032,QAE41032,__init.stock_location_Q
-__init.stock_location_QAE42089,QAE42089,__init.stock_location_Q
-__init.stock_location_QAF21010,QAF21010,__init.stock_location_Q
-__init.stock_location_A,A,__init.stock_location_ali
-__init.stock_location_AF06C500,AF06C500,__init.stock_location_A
-__init.stock_location_AHO1A420,AHO1A420,__init.stock_location_A
-__init.stock_location_AI12A530,AI12A530,__init.stock_location_A
-__init.stock_location_AL08A260,AL08A260,__init.stock_location_A
-__init.stock_location_AK02C170,AK02C170,__init.stock_location_A
-__init.stock_location_AI07A280,AI07A280,__init.stock_location_A
-__init.stock_location_AI07A280,AI07A280,__init.stock_location_A
-__init.stock_location_AK06C720,AK06C720,__init.stock_location_A
-__init.stock_location_AG10A630,AG10A630,__init.stock_location_A
-__init.stock_location_AG10A630,AG10A630,__init.stock_location_A
-__init.stock_location_AN05A180,AN05A180,__init.stock_location_A
-__init.stock_location_AI12A602,AI12A602,__init.stock_location_A
-__init.stock_location_AH07A152,AH07A152,__init.stock_location_A
-__init.stock_location_AH07A152,AH07A152,__init.stock_location_A
-__init.stock_location_AI13A159,AI13A159,__init.stock_location_A
-__init.stock_location_AF10A562,AF10A562,__init.stock_location_A
-__init.stock_location_AH04A372,AH04A372,__init.stock_location_A
-__init.stock_location_AM06A586,AM06A586,__init.stock_location_A
-__init.stock_location_AF02B702,AF02B702,__init.stock_location_A
-__init.stock_location_AH07B310,AH07B310,__init.stock_location_A
-__init.stock_location_AD11B240,AD11B240,__init.stock_location_A
-__init.stock_location_AL05A283,AL05A283,__init.stock_location_A
-__init.stock_location_AN03C685,AN03C685,__init.stock_location_A
-__init.stock_location_AK04B888,AK04B888,__init.stock_location_A
-__init.stock_location_AK04B888,AK04B888,__init.stock_location_A
-__init.stock_location_AK04B591,AK04B591,__init.stock_location_A
-__init.stock_location_P,P,__init.stock_location_materiel
-__init.stock_location_PI16C1  ,PI16C1  ,__init.stock_location_P
-__init.stock_location_PI16C2  ,PI16C2  ,__init.stock_location_P
-__init.stock_location_PI16C3  ,PI16C3  ,__init.stock_location_P
-__init.stock_location_PI16D1  ,PI16D1  ,__init.stock_location_P
-__init.stock_location_PI16D2  ,PI16D2  ,__init.stock_location_P
-__init.stock_location_PI16D3  ,PI16D3  ,__init.stock_location_P
-__init.stock_location_PI17D1  ,PI17D1  ,__init.stock_location_P
-__init.stock_location_PI18C1  ,PI18C1  ,__init.stock_location_P
-__init.stock_location_PI18C2  ,PI18C2  ,__init.stock_location_P
-__init.stock_location_PI18C3  ,PI18C3  ,__init.stock_location_P
-__init.stock_location_PI18D1  ,PI18D1  ,__init.stock_location_P
-__init.stock_location_PI18D2  ,PI18D2  ,__init.stock_location_P
-__init.stock_location_PI20C1  ,PI20C1  ,__init.stock_location_P
-__init.stock_location_PI20C2  ,PI20C2  ,__init.stock_location_P
-__init.stock_location_PI20C3  ,PI20C3  ,__init.stock_location_P
-__init.stock_location_PI20D2  ,PI20D2  ,__init.stock_location_P
-__init.stock_location_PI20D3  ,PI20D3  ,__init.stock_location_P
-__init.stock_location_PI20D4  ,PI20D4  ,__init.stock_location_P
-__init.stock_location_PK10C1  ,PK10C1  ,__init.stock_location_P
-__init.stock_location_PK10C2  ,PK10C2  ,__init.stock_location_P
-__init.stock_location_PK10C3  ,PK10C3  ,__init.stock_location_P
-__init.stock_location_PK10D1  ,PK10D1  ,__init.stock_location_P
-__init.stock_location_PK10D3  ,PK10D3  ,__init.stock_location_P
-__init.stock_location_PK12C1  ,PK12C1  ,__init.stock_location_P
-__init.stock_location_PK12C2  ,PK12C2  ,__init.stock_location_P
-__init.stock_location_PK12C3  ,PK12C3  ,__init.stock_location_P
-__init.stock_location_E,E,__init.stock_location_materiel
-__init.stock_location_EOA101  ,EOA101  ,__init.stock_location_E
-__init.stock_location_EOA102  ,EOA102  ,__init.stock_location_E
-__init.stock_location_EOA103  ,EOA103  ,__init.stock_location_E
-__init.stock_location_EOA104  ,EOA104  ,__init.stock_location_E
-__init.stock_location_EOA105  ,EOA105  ,__init.stock_location_E
-__init.stock_location_EOA106  ,EOA106  ,__init.stock_location_E
-__init.stock_location_EOA107  ,EOA107  ,__init.stock_location_E
-__init.stock_location_EOA108  ,EOA108  ,__init.stock_location_E
-__init.stock_location_EOA109  ,EOA109  ,__init.stock_location_E
-__init.stock_location_EOA110  ,EOA110  ,__init.stock_location_E
-__init.stock_location_EOA111  ,EOA111  ,__init.stock_location_E
-__init.stock_location_EOA112  ,EOA112  ,__init.stock_location_E
-__init.stock_location_EOA113  ,EOA113  ,__init.stock_location_E
-__init.stock_location_EOA114  ,EOA114  ,__init.stock_location_E
-__init.stock_location_EOA115  ,EOA115  ,__init.stock_location_E
-__init.stock_location_EOA116  ,EOA116  ,__init.stock_location_E
-__init.stock_location_EOA117  ,EOA117  ,__init.stock_location_E
-__init.stock_location_EOA118  ,EOA118  ,__init.stock_location_E
-__init.stock_location_EOA119  ,EOA119  ,__init.stock_location_E
-__init.stock_location_EOA120  ,EOA120  ,__init.stock_location_E
-__init.stock_location_EOA121  ,EOA121  ,__init.stock_location_E
-__init.stock_location_EOA122  ,EOA122  ,__init.stock_location_E
-__init.stock_location_EOA123  ,EOA123  ,__init.stock_location_E
-__init.stock_location_EOA124  ,EOA124  ,__init.stock_location_E
-__init.stock_location_EOA125  ,EOA125  ,__init.stock_location_E
-__init.stock_location_EOA126  ,EOA126  ,__init.stock_location_E
-__init.stock_location_EOA127  ,EOA127  ,__init.stock_location_E
-__init.stock_location_EOA128  ,EOA128  ,__init.stock_location_E
-__init.stock_location_EOA129  ,EOA129  ,__init.stock_location_E
-__init.stock_location_EOA130  ,EOA130  ,__init.stock_location_E
-__init.stock_location_EOA131  ,EOA131  ,__init.stock_location_E
-__init.stock_location_EOA132  ,EOA132  ,__init.stock_location_E
-__init.stock_location_EOA133  ,EOA133  ,__init.stock_location_E
-__init.stock_location_EOA134  ,EOA134  ,__init.stock_location_E
-__init.stock_location_EOA135  ,EOA135  ,__init.stock_location_E
-__init.stock_location_EOA136  ,EOA136  ,__init.stock_location_E
-__init.stock_location_EOA137  ,EOA137  ,__init.stock_location_E
-__init.stock_location_EOA138  ,EOA138  ,__init.stock_location_E
-__init.stock_location_EOA139  ,EOA139  ,__init.stock_location_E
-__init.stock_location_EOA140  ,EOA140  ,__init.stock_location_E
-__init.stock_location_EOA141  ,EOA141  ,__init.stock_location_E
-__init.stock_location_EOA142  ,EOA142  ,__init.stock_location_E
-__init.stock_location_EOA143  ,EOA143  ,__init.stock_location_E
-__init.stock_location_EOA144  ,EOA144  ,__init.stock_location_E
-__init.stock_location_EOA145  ,EOA145  ,__init.stock_location_E
-__init.stock_location_EOA146  ,EOA146  ,__init.stock_location_E
-__init.stock_location_EOA147  ,EOA147  ,__init.stock_location_E
-__init.stock_location_EOA148  ,EOA148  ,__init.stock_location_E
-__init.stock_location_EOA149  ,EOA149  ,__init.stock_location_E
-__init.stock_location_EOA150  ,EOA150  ,__init.stock_location_E
-__init.stock_location_EOA151  ,EOA151  ,__init.stock_location_E
+id,name,location_id/id,kind
+__init.stock_location_G,G,__init.stock_location_medoc,bin
+__init.stock_location_GAA11094,GAA11094,__init.stock_location_G,bin
+__init.stock_location_GAA21033,GAA21033,__init.stock_location_G,bin
+__init.stock_location_GAA22023,GAA22023,__init.stock_location_G,bin
+__init.stock_location_GAB11097,GAB11097,__init.stock_location_G,bin
+__init.stock_location_GAB12087,GAB12087,__init.stock_location_G,bin
+__init.stock_location_GAB20000,GAB20000,__init.stock_location_G,bin
+__init.stock_location_GAB21003,GAB21003,__init.stock_location_G,bin
+__init.stock_location_GAB22033,GAB22033,__init.stock_location_G,bin
+__init.stock_location_GAB23048,GAB23048,__init.stock_location_G,bin
+__init.stock_location_GAB30081,GAB30081,__init.stock_location_G,bin
+__init.stock_location_GAB31024,GAB31024,__init.stock_location_G,bin
+__init.stock_location_GAB32070,GAB32070,__init.stock_location_G,bin
+__init.stock_location_GAB40086,GAB40086,__init.stock_location_G,bin
+__init.stock_location_GAB41067,GAB41067,__init.stock_location_G,bin
+__init.stock_location_GAB42071,GAB42071,__init.stock_location_G,bin
+__init.stock_location_GAB50066,GAB50066,__init.stock_location_G,bin
+__init.stock_location_GAC10025,GAC10025,__init.stock_location_G,bin
+__init.stock_location_GAC11066,GAC11066,__init.stock_location_G,bin
+__init.stock_location_GAC12008,GAC12008,__init.stock_location_G,bin
+__init.stock_location_GAC13015,GAC13015,__init.stock_location_G,bin
+__init.stock_location_GAC20077,GAC20077,__init.stock_location_G,bin
+__init.stock_location_GAC21083,GAC21083,__init.stock_location_G,bin
+__init.stock_location_GAC22063,GAC22063,__init.stock_location_G,bin
+__init.stock_location_GAC23011,GAC23011,__init.stock_location_G,bin
+__init.stock_location_GAC25085,GAC25085,__init.stock_location_G,bin
+__init.stock_location_GAC30012,GAC30012,__init.stock_location_G,bin
+__init.stock_location_GAC32057,GAC32057,__init.stock_location_G,bin
+__init.stock_location_GAC34020,GAC34020,__init.stock_location_G,bin
+__init.stock_location_GAC35057,GAC35057,__init.stock_location_G,bin
+__init.stock_location_GAC36066,GAC36066,__init.stock_location_G,bin
+__init.stock_location_GAC41008,GAC41008,__init.stock_location_G,bin
+__init.stock_location_GAC42064,GAC42064,__init.stock_location_G,bin
+__init.stock_location_GAC44046,GAC44046,__init.stock_location_G,bin
+__init.stock_location_GAC45035,GAC45035,__init.stock_location_G,bin
+__init.stock_location_GAC50003,GAC50003,__init.stock_location_G,bin
+__init.stock_location_GAC51053,GAC51053,__init.stock_location_G,bin
+__init.stock_location_GAC52083,GAC52083,__init.stock_location_G,bin
+__init.stock_location_GAC53045,GAC53045,__init.stock_location_G,bin
+__init.stock_location_GAD10098,GAD10098,__init.stock_location_G,bin
+__init.stock_location_GAD11038,GAD11038,__init.stock_location_G,bin
+__init.stock_location_GAD13008,GAD13008,__init.stock_location_G,bin
+__init.stock_location_GAD21077,GAD21077,__init.stock_location_G,bin
+__init.stock_location_GAD22000,GAD22000,__init.stock_location_G,bin
+__init.stock_location_GAD23050,GAD23050,__init.stock_location_G,bin
+__init.stock_location_GAD25001,GAD25001,__init.stock_location_G,bin
+__init.stock_location_GAD31075,GAD31075,__init.stock_location_G,bin
+__init.stock_location_GAD32528,GAD32528,__init.stock_location_G,bin
+__init.stock_location_GAD33051,GAD33051,__init.stock_location_G,bin
+__init.stock_location_GAD41014,GAD41014,__init.stock_location_G,bin
+__init.stock_location_GAD42037,GAD42037,__init.stock_location_G,bin
+__init.stock_location_GAD43002,GAD43002,__init.stock_location_G,bin
+__init.stock_location_Q,Q,__init.stock_location_frigo,bin
+__init.stock_location_QAA21034,QAA21034,__init.stock_location_Q,bin
+__init.stock_location_QAA31090,QAA31090,__init.stock_location_Q,bin
+__init.stock_location_QAA32062,QAA32062,__init.stock_location_Q,bin
+__init.stock_location_QAA41002,QAA41002,__init.stock_location_Q,bin
+__init.stock_location_QAA42084,QAA42084,__init.stock_location_Q,bin
+__init.stock_location_QAB12057,QAB12057,__init.stock_location_Q,bin
+__init.stock_location_QAB15094,QAB15094,__init.stock_location_Q,bin
+__init.stock_location_QAB21076,QAB21076,__init.stock_location_Q,bin
+__init.stock_location_QAB31035,QAB31035,__init.stock_location_Q,bin
+__init.stock_location_QAB32062,QAB32062,__init.stock_location_Q,bin
+__init.stock_location_QAB41021,QAB41021,__init.stock_location_Q,bin
+__init.stock_location_QAC11038,QAC11038,__init.stock_location_Q,bin
+__init.stock_location_QAC21027,QAC21027,__init.stock_location_Q,bin
+__init.stock_location_QAC22074,QAC22074,__init.stock_location_Q,bin
+__init.stock_location_QAC31002,QAC31002,__init.stock_location_Q,bin
+__init.stock_location_QAC42033,QAC42033,__init.stock_location_Q,bin
+__init.stock_location_QAD21084,QAD21084,__init.stock_location_Q,bin
+__init.stock_location_QAD21559,QAD21559,__init.stock_location_Q,bin
+__init.stock_location_QAD31031,QAD31031,__init.stock_location_Q,bin
+__init.stock_location_QAD32025,QAD32025,__init.stock_location_Q,bin
+__init.stock_location_QAD41007,QAD41007,__init.stock_location_Q,bin
+__init.stock_location_QAE21049,QAE21049,__init.stock_location_Q,bin
+__init.stock_location_QAE31004,QAE31004,__init.stock_location_Q,bin
+__init.stock_location_QAE41032,QAE41032,__init.stock_location_Q,bin
+__init.stock_location_QAE42089,QAE42089,__init.stock_location_Q,bin
+__init.stock_location_QAF21010,QAF21010,__init.stock_location_Q,bin
+__init.stock_location_A,A,__init.stock_location_ali,bin
+__init.stock_location_AF06C500,AF06C500,__init.stock_location_A,bin
+__init.stock_location_AHO1A420,AHO1A420,__init.stock_location_A,bin
+__init.stock_location_AI12A530,AI12A530,__init.stock_location_A,bin
+__init.stock_location_AL08A260,AL08A260,__init.stock_location_A,bin
+__init.stock_location_AK02C170,AK02C170,__init.stock_location_A,bin
+__init.stock_location_AI07A280,AI07A280,__init.stock_location_A,bin
+__init.stock_location_AI07A280,AI07A280,__init.stock_location_A,bin
+__init.stock_location_AK06C720,AK06C720,__init.stock_location_A,bin
+__init.stock_location_AG10A630,AG10A630,__init.stock_location_A,bin
+__init.stock_location_AG10A630,AG10A630,__init.stock_location_A,bin
+__init.stock_location_AN05A180,AN05A180,__init.stock_location_A,bin
+__init.stock_location_AI12A602,AI12A602,__init.stock_location_A,bin
+__init.stock_location_AH07A152,AH07A152,__init.stock_location_A,bin
+__init.stock_location_AH07A152,AH07A152,__init.stock_location_A,bin
+__init.stock_location_AI13A159,AI13A159,__init.stock_location_A,bin
+__init.stock_location_AF10A562,AF10A562,__init.stock_location_A,bin
+__init.stock_location_AH04A372,AH04A372,__init.stock_location_A,bin
+__init.stock_location_AM06A586,AM06A586,__init.stock_location_A,bin
+__init.stock_location_AF02B702,AF02B702,__init.stock_location_A,bin
+__init.stock_location_AH07B310,AH07B310,__init.stock_location_A,bin
+__init.stock_location_AD11B240,AD11B240,__init.stock_location_A,bin
+__init.stock_location_AL05A283,AL05A283,__init.stock_location_A,bin
+__init.stock_location_AN03C685,AN03C685,__init.stock_location_A,bin
+__init.stock_location_AK04B888,AK04B888,__init.stock_location_A,bin
+__init.stock_location_AK04B888,AK04B888,__init.stock_location_A,bin
+__init.stock_location_AK04B591,AK04B591,__init.stock_location_A,bin
+__init.stock_location_P,P,__init.stock_location_materiel,bin
+__init.stock_location_PI16C1  ,PI16C1  ,__init.stock_location_P,bin
+__init.stock_location_PI16C2  ,PI16C2  ,__init.stock_location_P,bin
+__init.stock_location_PI16C3  ,PI16C3  ,__init.stock_location_P,bin
+__init.stock_location_PI16D1  ,PI16D1  ,__init.stock_location_P,bin
+__init.stock_location_PI16D2  ,PI16D2  ,__init.stock_location_P,bin
+__init.stock_location_PI16D3  ,PI16D3  ,__init.stock_location_P,bin
+__init.stock_location_PI17D1  ,PI17D1  ,__init.stock_location_P,bin
+__init.stock_location_PI18C1  ,PI18C1  ,__init.stock_location_P,bin
+__init.stock_location_PI18C2  ,PI18C2  ,__init.stock_location_P,bin
+__init.stock_location_PI18C3  ,PI18C3  ,__init.stock_location_P,bin
+__init.stock_location_PI18D1  ,PI18D1  ,__init.stock_location_P,bin
+__init.stock_location_PI18D2  ,PI18D2  ,__init.stock_location_P,bin
+__init.stock_location_PI20C1  ,PI20C1  ,__init.stock_location_P,bin
+__init.stock_location_PI20C2  ,PI20C2  ,__init.stock_location_P,bin
+__init.stock_location_PI20C3  ,PI20C3  ,__init.stock_location_P,bin
+__init.stock_location_PI20D2  ,PI20D2  ,__init.stock_location_P,bin
+__init.stock_location_PI20D3  ,PI20D3  ,__init.stock_location_P,bin
+__init.stock_location_PI20D4  ,PI20D4  ,__init.stock_location_P,bin
+__init.stock_location_PK10C1  ,PK10C1  ,__init.stock_location_P,bin
+__init.stock_location_PK10C2  ,PK10C2  ,__init.stock_location_P,bin
+__init.stock_location_PK10C3  ,PK10C3  ,__init.stock_location_P,bin
+__init.stock_location_PK10D1  ,PK10D1  ,__init.stock_location_P,bin
+__init.stock_location_PK10D3  ,PK10D3  ,__init.stock_location_P,bin
+__init.stock_location_PK12C1  ,PK12C1  ,__init.stock_location_P,bin
+__init.stock_location_PK12C2  ,PK12C2  ,__init.stock_location_P,bin
+__init.stock_location_PK12C3  ,PK12C3  ,__init.stock_location_P,bin
+__init.stock_location_E,E,__init.stock_location_materiel,bin
+__init.stock_location_EOA101  ,EOA101  ,__init.stock_location_E,bin
+__init.stock_location_EOA102  ,EOA102  ,__init.stock_location_E,bin
+__init.stock_location_EOA103  ,EOA103  ,__init.stock_location_E,bin
+__init.stock_location_EOA104  ,EOA104  ,__init.stock_location_E,bin
+__init.stock_location_EOA105  ,EOA105  ,__init.stock_location_E,bin
+__init.stock_location_EOA106  ,EOA106  ,__init.stock_location_E,bin
+__init.stock_location_EOA107  ,EOA107  ,__init.stock_location_E,bin
+__init.stock_location_EOA108  ,EOA108  ,__init.stock_location_E,bin
+__init.stock_location_EOA109  ,EOA109  ,__init.stock_location_E,bin
+__init.stock_location_EOA110  ,EOA110  ,__init.stock_location_E,bin
+__init.stock_location_EOA111  ,EOA111  ,__init.stock_location_E,bin
+__init.stock_location_EOA112  ,EOA112  ,__init.stock_location_E,bin
+__init.stock_location_EOA113  ,EOA113  ,__init.stock_location_E,bin
+__init.stock_location_EOA114  ,EOA114  ,__init.stock_location_E,bin
+__init.stock_location_EOA115  ,EOA115  ,__init.stock_location_E,bin
+__init.stock_location_EOA116  ,EOA116  ,__init.stock_location_E,bin
+__init.stock_location_EOA117  ,EOA117  ,__init.stock_location_E,bin
+__init.stock_location_EOA118  ,EOA118  ,__init.stock_location_E,bin
+__init.stock_location_EOA119  ,EOA119  ,__init.stock_location_E,bin
+__init.stock_location_EOA120  ,EOA120  ,__init.stock_location_E,bin
+__init.stock_location_EOA121  ,EOA121  ,__init.stock_location_E,bin
+__init.stock_location_EOA122  ,EOA122  ,__init.stock_location_E,bin
+__init.stock_location_EOA123  ,EOA123  ,__init.stock_location_E,bin
+__init.stock_location_EOA124  ,EOA124  ,__init.stock_location_E,bin
+__init.stock_location_EOA125  ,EOA125  ,__init.stock_location_E,bin
+__init.stock_location_EOA126  ,EOA126  ,__init.stock_location_E,bin
+__init.stock_location_EOA127  ,EOA127  ,__init.stock_location_E,bin
+__init.stock_location_EOA128  ,EOA128  ,__init.stock_location_E,bin
+__init.stock_location_EOA129  ,EOA129  ,__init.stock_location_E,bin
+__init.stock_location_EOA130  ,EOA130  ,__init.stock_location_E,bin
+__init.stock_location_EOA131  ,EOA131  ,__init.stock_location_E,bin
+__init.stock_location_EOA132  ,EOA132  ,__init.stock_location_E,bin
+__init.stock_location_EOA133  ,EOA133  ,__init.stock_location_E,bin
+__init.stock_location_EOA134  ,EOA134  ,__init.stock_location_E,bin
+__init.stock_location_EOA135  ,EOA135  ,__init.stock_location_E,bin
+__init.stock_location_EOA136  ,EOA136  ,__init.stock_location_E,bin
+__init.stock_location_EOA137  ,EOA137  ,__init.stock_location_E,bin
+__init.stock_location_EOA138  ,EOA138  ,__init.stock_location_E,bin
+__init.stock_location_EOA139  ,EOA139  ,__init.stock_location_E,bin
+__init.stock_location_EOA140  ,EOA140  ,__init.stock_location_E,bin
+__init.stock_location_EOA141  ,EOA141  ,__init.stock_location_E,bin
+__init.stock_location_EOA142  ,EOA142  ,__init.stock_location_E,bin
+__init.stock_location_EOA143  ,EOA143  ,__init.stock_location_E,bin
+__init.stock_location_EOA144  ,EOA144  ,__init.stock_location_E,bin
+__init.stock_location_EOA145  ,EOA145  ,__init.stock_location_E,bin
+__init.stock_location_EOA146  ,EOA146  ,__init.stock_location_E,bin
+__init.stock_location_EOA147  ,EOA147  ,__init.stock_location_E,bin
+__init.stock_location_EOA148  ,EOA148  ,__init.stock_location_E,bin
+__init.stock_location_EOA149  ,EOA149  ,__init.stock_location_E,bin
+__init.stock_location_EOA150  ,EOA150  ,__init.stock_location_E,bin
+__init.stock_location_EOA151  ,EOA151  ,__init.stock_location_E,bin

@@ -1,0 +1,144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * stock_refill
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-22 08:18+0000\n"
+"PO-Revision-Date: 2017-01-22 08:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_stat_amount_deliveries
+msgid "Amount of Deliveries"
+msgstr "Nombre de livraisons"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_priority_arrangement
+msgid "Arrangement Priority"
+msgstr "Priorité de rangement"
+
+#. module: stock_refill
+#: model:ir.ui.view,arch_db:stock_refill.view_stock_wizard_reassort_form
+msgid "Assign"
+msgstr "Assigner"
+
+#. module: stock_refill
+#: model:ir.ui.view,arch_db:stock_refill.view_stock_wizard_reassort_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_refill
+#: model:ir.actions.act_window,name:stock_refill.act_report_stock_quant_bylocation_reserve_reassort
+#: model:ir.ui.view,arch_db:stock_refill.view_stock_wizard_reassort_form
+msgid "Create Operation"
+msgstr "Créer une operation"
+
+#. module: stock_refill
+#: model:ir.model.fields,help:stock_refill.field_product_product_stat_amount_deliveries
+msgid "Mean amount of customer deliveries on the last 6 months"
+msgstr "Nombre moyen de livraisons clients sur les 6 derniers mois"
+
+#. module: stock_refill
+#: code:addons/stock_refill/wizards/create_picking.py:37
+#, python-format
+msgid "Missing Operation Type on Location %s"
+msgstr "Le type d'operation est manquant dans la configuration de l'emplacement %s"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_move_ids
+msgid "Moves"
+msgstr "Mouvements"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_report_stock_quant_bylocation_outgoing_qty
+msgid "Outgoing"
+msgstr "Sortants"
+
+#. module: stock_refill
+#: model:ir.filters,name:stock_refill.filter_parking
+msgid "Parking"
+msgstr "Parking"
+
+#. module: stock_refill
+#: model:ir.ui.view,arch_db:stock_refill.view_stock_wizard_reassort_form
+msgid "Please confirm the creation of the stock operation"
+msgstr "Veuillez confirmer la creation de l'operation de stock"
+
+#. module: stock_refill
+#: code:addons/stock_refill/models/stock_location.py:93
+#, python-format
+msgid "Product %s must be put in reserve but cannot find a suitable location"
+msgstr "Le produit %s doit être mis en réserve mais aucun emplacement possible trouvé"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_bin
+#: model:ir.model.fields,field_description:stock_refill.field_report_stock_quant_bylocation_qty_in_bin
+msgid "Qty in bins"
+msgstr "Qté en bacs"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_parking
+#: model:ir.model.fields,field_description:stock_refill.field_report_stock_quant_bylocation_qty_in_parking
+msgid "Qty in parking"
+msgstr "Qté en parking"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_reserve
+#: model:ir.model.fields,field_description:stock_refill.field_report_stock_quant_bylocation_qty_in_reserve
+msgid "Qty in reserve"
+msgstr "Qté en réserve"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_product_product_priority_reassort
+msgid "Reassortment Priority"
+msgstr "Priorité de réassort"
+
+#. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_report_stock_quant_bylocation_refill_priority
+msgid "Refill Priority"
+msgstr "Refill Priority"
+
+#. module: stock_refill
+#: model:ir.ui.view,arch_db:stock_refill.view_report_stock_quant_bylocation_reserve_tree
+msgid "Stock by location"
+msgstr "Stock par emplacement"
+
+#. module: stock_refill
+#: model:ir.actions.act_window,name:stock_refill.action_report_stock_quant_bylocation
+#: model:ir.ui.menu,name:stock_refill.menu_report_stock_bylocation
+msgid "Stock in Parking"
+msgstr "Stock dans le parking"
+
+#. module: stock_refill
+#: model:ir.actions.act_window,name:stock_refill.action_report_stock_quant_bylocation_reserve
+#: model:ir.ui.menu,name:stock_refill.menu_report_stock_bylocation_reserve
+msgid "Stock to Reassort"
+msgstr "Stock à réassortir"
+
+#. module: stock_refill
+#: model:ir.ui.view,arch_db:stock_refill.view_stock_wizard_reassort_form
+msgid "or"
+msgstr "ou"
+
+#. module: stock_refill
+#: model:ir.model,name:stock_refill.model_report_stock_quant_bylocation
+msgid "report.stock.quant.bylocation"
+msgstr "report.stock.quant.bylocation"
+
+#. module: stock_refill
+#: model:ir.model,name:stock_refill.model_report_stock_quant_bylocation_reserve
+msgid "report.stock.quant.bylocation.reserve"
+msgstr "report.stock.quant.bylocation.reserve"
+
+#. module: stock_refill
+#: model:ir.model,name:stock_refill.model_stock_wizard_reassort
+msgid "stock.wizard.reassort"
+msgstr "stock.wizard.reassort"

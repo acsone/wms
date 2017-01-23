@@ -45,18 +45,30 @@ class ReportStockQuantBylocation(models.Model):
         'Refill Priority', readonly=True)
 
 
-# WIP for next PR
-# class ReportStockQuantBylocationReserve(models.Model):
-#     _inherit = 'report.stock.quant.bylocation'
-#     _name = 'report.stock.quant.bylocation.reserve'
-#     _auto = False
-#     _order = 'refill_priority desc, qty desc'
-#
-#     def _prepare_init(self):
-#         d = super(ReportStockQuantBylocation, self)._prepare_init()
-#         d['select'] += ", product.priority_arrangement as refill_priority"
-#         d['groupby'] += ",priority_arrangement"
-#         return d
-#
-#     refill_priority = fields.Integer(
-#         'Refill Priority', readonly=True)
+class ReportStockQuantBylocationReserve(models.Model):
+    _inherit = 'report.stock.quant.bylocation'
+    _name = 'report.stock.quant.bylocation.reserve'
+    _auto = False
+    _order = 'refill_priority desc, removal_date asc, qty desc'
+
+    def _prepare_init(self):
+        d = super(ReportStockQuantBylocation, self)._prepare_init()
+        d['select'] = "distinct on (product_id)" + d['select']
+        d['orderby'] = "product_id"
+
+        d['select'] += ", product.priority_reassort as refill_priority"
+        d['select'] += ", lot.removal_date as removal_date"
+        d['join'] += (" LEFT JOIN stock_location as location "
+                      " ON quant.location_id = location.id "
+                      " LEFT JOIN stock_production_lot as lot "
+                      " ON quant.lot_id = lot.id ")
+        d['where'] += " AND location.kind = 'reserve' "
+        d['groupby'] += ", product.priority_reassort, lot.removal_date"
+        return d
+
+    refill_priority = fields.Integer(
+        'Refill Priority', readonly=True)
+    removal_date = fields.Datetime(
+        'Removal Date',
+        help="This is the date on which the goods with this Serial Number "
+             "should be removed from the stock.")

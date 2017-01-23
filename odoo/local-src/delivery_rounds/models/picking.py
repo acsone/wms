@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import api, fields, models, _
 
 
 class StockPicking(models.Model):
@@ -128,8 +128,12 @@ class StockMove(models.Model):
             # group (all dest moves) has the same delivery round
             # Check delivery round on orig moves as picking assignment is
             # performed from pick to ship
-            orig_dr = self.move_orig_ids.mapped('picking_id.delivery_round_id')
-            if orig_dr:
+            orig_drs = self.mapped('move_orig_ids').mapped(
+                'picking_id.delivery_round_id')
+            if len(orig_drs) > 1:
+                raise Warning(_('Source moves have different delivery round. '
+                                'Please fix manually'))
+            for orig_dr in orig_drs:
                 picking = self.env['stock.picking'].browse(
                     vals.get('picking_id'))
                 if picking.delivery_round_id != orig_dr:

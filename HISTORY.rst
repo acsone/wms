@@ -11,6 +11,10 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-252: Traceability
+* ALCN-175: Stock locations
+* ALCN-179: Stock reception priorities
+* ALCN-180: Stock arrangement and priorities
+* ALCN-269: Stock reserves and reassortment priorities
 
 **Bugfixes**
 
