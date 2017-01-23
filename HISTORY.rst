@@ -8,12 +8,6 @@ Unreleased
 
 **Data Migration**
 
-* ALCN-707: Import fiscal position on customers
-* ALCN-704: Import stock locations A, G, Q, P and E
-* ALCN-77: Create product categories and set them on products
-* ALCN-77: Remove putaway strategy
-* ALCN-77: Standardize xmlids in logistics to __setup__ and __import__
-
 **Features and Improvements**
 
 **Bugfixes**
@@ -21,6 +15,18 @@ Unreleased
 **Build**
 
 **Documentation**
+
+
+9.8.1 (2017-01-23)
+++++++++++++++++++
+
+**Data Migration**
+
+* ALCN-707: Import fiscal position on customers
+* ALCN-704: Import stock locations A, G, Q, P and E
+* ALCN-77: Create product categories and set them on products
+* ALCN-77: Remove putaway strategy
+* ALCN-77: Standardize xmlids in logistics to __setup__ and __import__
 
 
 9.8.0 (2017-01-23)
