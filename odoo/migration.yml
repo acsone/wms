@@ -55,7 +55,7 @@ migration:
           - mail_environment
           - sale_exception
           - server_environment
-          - account_char_update
+          - account_chart_update
           - l10n_be_antibiotic_tax
           - l10n_be_apb_tax
           - l10n_be_eco_tax
@@ -77,6 +77,7 @@ migration:
           - stock_barcode_fix
           - stock_grn
           - stock_groupbypartner
+          - stock_lot_update
           - stock_picking_fillwithstock
           - stock_picking_sequence
           - stock_picking_subcode

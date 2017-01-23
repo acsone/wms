@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-252: Traceability
+
 **Bugfixes**
 
 **Build**
