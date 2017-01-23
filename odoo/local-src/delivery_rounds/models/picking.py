@@ -33,19 +33,19 @@ class StockPicking(models.Model):
         store=True,
         string="Delivery Round State")
 
-    number_of_medical = fields.Integer('Number of medical products',
+    number_of_drug = fields.Float('Number of medical products',
                                        compute='_compute_number_of_products')
-    number_of_cold = fields.Integer('Number of cold products',
+    number_of_cold = fields.Float('Number of cold products',
                                     compute='_compute_number_of_products')
-    number_of_food = fields.Integer('Number of food products',
+    number_of_food = fields.Float('Number of food products',
                                     compute='_compute_number_of_products')
-    number_of_human_food = fields.Integer(
+    number_of_human_food = fields.Float(
         'Number of human food',
         compute='_compute_number_of_products')
-    number_of_equipment = fields.Integer(
+    number_of_equipment = fields.Float(
         'Number of equipments',
         compute='_compute_number_of_products')
-    number_total = fields.Integer('Number of products',
+    number_total = fields.Float('Number of products',
                                   compute='_compute_number_of_products')
 
     @api.depends('move_lines',
@@ -53,7 +53,7 @@ class StockPicking(models.Model):
                  'move_lines.product_uom_qty')
     def _compute_number_of_products(self):
         for picking in self:
-            number_of_medical = 0
+            number_of_drug = 0
             number_of_cold = 0
             number_of_food = 0
             number_of_human_food = 0
@@ -61,26 +61,41 @@ class StockPicking(models.Model):
             number_total = 0
 
             for line in picking.move_lines:
-                qty = int(line.product_uom_qty)
+                qty = line.product_uom_qty
                 number_total += qty
 
                 if not line.product_id or not line.product_id.categ_id:
                     continue
                 categ = line.product_id.categ_id
 
-                if categ == self.env.ref('__init.product_categ_medoc'):
-                    number_of_medical += qty
-                elif categ == self.env.ref('__init.product_categ_frigo'):
-                    number_of_cold += qty
-                elif categ == self.env.ref('__init.product_categ_ali'):
-                    number_of_food += qty
-                elif categ == self.env.ref('__init.product_categ_materiel'):
-                    number_of_equipment += qty
-                # elif categ ==
-                    # self.env.ref('__init.product_categ_human_food'):
-                #    number_of_human_food += qty
+                main_categ = self.env.ref('product.product_category_all')
+                equipment_categ = \
+                    self.env.ref('__setup__.product_categ_materiel')
+                food_categ = self.env.ref('__setup__.product_categ_ali')
+                drug_categ = self.env.ref('__setup__.product_categ_medoc')
+                fridge_categ = self.env.ref('__setup__.product_categ_frigo')
+                human_categ = self.env.ref('__setup__.product_categ_humain')
 
-            picking.number_of_medical = number_of_medical
+                # We need to have the main product category of the product
+                # Equipment, Food, Drug, Fridge, Human drug
+                while categ.parent_id and categ.parent_id != main_categ:
+                    # The human drug category is a sub category of drug.
+                    if categ == human_categ:
+                        break
+                    categ = categ.parent_id
+
+                if categ == drug_categ:
+                    number_of_drug += qty
+                elif categ == fridge_categ:
+                    number_of_cold += qty
+                elif categ == food_categ:
+                    number_of_food += qty
+                elif categ == equipment_categ:
+                    number_of_equipment += qty
+                elif categ == human_categ:
+                   number_of_human_food += qty
+
+            picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold
             picking.number_of_food = number_of_food
             picking.number_of_human_food = number_of_human_food

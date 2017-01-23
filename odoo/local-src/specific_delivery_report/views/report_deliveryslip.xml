@@ -1,10 +1,4 @@
 <odoo>
-    <template id="assets_specific" inherit_id="report.assets_common">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/specific_account/static/src/css/report_account.css"/>
-        </xpath>
-    </template>
-
     <template id="report_deliveryslip_alcyon">
         <div class="page">
             <table id="products_table" class="round_table">
@@ -33,9 +27,9 @@
                             <tr>
                                 <td colspan="7" class="sale_separator">
                                     <div>
-                                        <span>Commande</span>
+                                        <span>Order</span>
                                         <span t-field="order.name"/>
-                                        <span>du</span>
+                                        <span>of</span>
                                         <span t-field="order.date_order_short"/>
                                     </div>
                                 </td>
@@ -94,7 +88,7 @@
                             <tr>
                                 <td colspan="7" class="sale_separator">
                                     <div class="no_background">
-                                        <span>Solde à livrer sur la commande </span>
+                                        <span>Balance to be delivered on order</span>
                                         <span t-field="order.name"/>
                                         <table style="width: 50%;">
                                             <tbody>
@@ -168,7 +162,7 @@
         </div>
     </template>
 
-    <template id="specific_delivery.report_deliveryslip">
+    <template id="specific_delivery_report.report_deliveryslip">
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="deliveryslip">
                 <t t-set="company" t-value="res_company"/>
@@ -203,7 +197,7 @@
                             <span>Email:</span>
                             <span t-field="company.email"/>
                             <br/>
-                            <span style="display: inline-block; vertical-align: top;">Commands:
+                            <span style="display: inline-block; vertical-align: top;">Order:
                                 <br/>
                             </span>
                             <span style="display: inline-block; vertical-align: top;">
@@ -268,7 +262,7 @@
                     </div>
                 </div>
 
-                <t t-call="specific_delivery.report_deliveryslip_alcyon" t-lang="partner.lang"/>
+                <t t-call="specific_delivery_report.report_deliveryslip_alcyon" t-lang="partner.lang"/>
 
                 <t t-call="specific_account.page_number_footer"/>
             </t>
@@ -276,6 +270,6 @@
     </template>
 
     <template id="stock.report_deliveryslip">
-        <t t-call="specific_delivery.report_deliveryslip"/>
+        <t t-call="specific_delivery_report.report_deliveryslip"/>
     </template>
 </odoo>

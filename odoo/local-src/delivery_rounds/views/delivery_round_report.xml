@@ -51,7 +51,7 @@
                                         <td class="col-ws-8"></td>
                                     </tr>
                                     <tr>
-                                        <td>Vehicule</td>
+                                        <td>Vehicle</td>
                                         <td><span t-field="delivery.vehicle_id.name"/> </td>
                                     </tr>
                                     <tr>
@@ -102,7 +102,7 @@
                                     <th>Mobile</th>
                                     <th>Phone</th>
                                     <th>Notes</th>
-                                    <th># Med.</th>
+                                    <th># Drug</th>
                                     <th># Cold</th>
                                     <th># Food</th>
                                     <th># Equip.</th>
@@ -131,24 +131,26 @@
                                     <td>
                                         <span t-field="shipping.partner_id.phone" />
                                     </td>
-                                    <td>TODO</td>
                                     <td>
-                                        <span t-field="shipping.number_of_medical"/>
+                                        <span t-field="shipping.note" />
                                     </td>
                                     <td>
-                                        <span t-field="shipping.number_of_cold"/>
+                                        <span t-esc="int(shipping.number_of_drug)"/>
                                     </td>
                                     <td>
-                                        <span t-field="shipping.number_of_food"/>
+                                        <span t-esc="int(shipping.number_of_cold)"/>
                                     </td>
                                     <td>
-                                        <span t-field="shipping.number_of_equipment"/>
+                                        <span t-esc="int(shipping.number_of_food)"/>
                                     </td>
                                     <td>
-                                        <span t-field="shipping.number_of_human_food"/>
+                                        <span t-esc="int(shipping.number_of_equipment)"/>
                                     </td>
                                     <td>
-                                        <span t-field="shipping.number_total"/>
+                                        <span t-esc="int(shipping.number_of_human_food)"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="int(shipping.number_total)"/>
                                     </td>
                                 </tr>
                             </tbody>
