@@ -19,15 +19,11 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
-
-    product_id = fields.Many2one(
-        track_visibility='onchange',
-        )
 
     def _get_fk_on(self, table):
         q = """  SELECT cl1.relname as table,

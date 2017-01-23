@@ -92,3 +92,4 @@ migration:
           - stock_expired
           - refund_invoice
           - stock_location
+          - stock_lot_track

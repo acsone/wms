@@ -29,6 +29,7 @@ Unreleased
 * ALCN-38: Upgrade l10n-belgium repository
 * ALCN-621: Force the lot for the wizard update quantity
 * ALCN-622: Add three checksum bin on the stock location
+* ALCN-701: Add tracking for all date on lot
 
 **Bugfixes**
 
