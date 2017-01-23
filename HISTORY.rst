@@ -15,6 +15,7 @@ Unreleased
 * ALCN-179: Stock reception priorities
 * ALCN-180: Stock arrangement and priorities
 * ALCN-269: Stock reserves and reassortment priorities
+* ALCN-717: Add the module refund_invoice. This module allows to create customer/supplier refunds
 
 **Bugfixes**
 

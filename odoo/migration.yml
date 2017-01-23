@@ -88,3 +88,4 @@ migration:
           - stock_refill
           - web_autorefresh
           - stock_expired
+          - refund_invoice
