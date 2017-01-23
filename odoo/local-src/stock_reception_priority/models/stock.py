@@ -71,7 +71,6 @@ class StockPicking(models.Model):
 
             # We count the number of moves from stock in
             #   - "Waiting Availability" (MTS)
-            #   - "Waiting Another Move" (MTO)
             # for each product
             # Each delivery address count for 1
             self._cr.execute("""
@@ -82,7 +81,7 @@ class StockPicking(models.Model):
                         ON move.location_id = loc.id
                     JOIN stock_location p ON p.parent_left<=loc.parent_left
                         AND p.parent_right>=loc.parent_right
-                    WHERE move.state in ('confirmed', 'waiting')
+                    WHERE move.state = 'confirmed'
                     -- AND move.partner_id IS NOT NULL
                     AND move.product_id in %s
                     AND p.id = %s
