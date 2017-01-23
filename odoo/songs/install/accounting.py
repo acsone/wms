@@ -35,6 +35,10 @@ def settings(ctx):
         'group_analytic_account_for_purchases': True,
     }).execute()
 
+    ctx.env.ref('base.main_company').write({
+        'vat_check_vies': True,
+    })
+
 
 @anthem.log
 def default_values(ctx):

@@ -20,6 +20,7 @@ Unreleased
 
 * ALCN-669: Add the module stock_picking_assignment to assign a picking
 * ALCN-708: Add the report intrastat
+* ALCN-711: Set "VIES VAT check" on the company by default
 
 **Bugfixes**
 
