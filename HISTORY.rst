@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-718: Add the module account_banking_sepa_direct_debit from the repo bank-payment (OCA)
 
 * ALCN-252: Traceability
 * ALCN-175: Stock locations

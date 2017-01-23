@@ -59,6 +59,7 @@ migration:
           - l10n_be_antibiotic_tax
           - l10n_be_apb_tax
           - l10n_be_eco_tax
+          - account_banking_sepa_direct_debit
           #### local-src
           - claim_from_reception
           - delivery_rounds
