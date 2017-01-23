@@ -96,6 +96,7 @@ migration:
           - stock_product_bin
           - stock_production_lot_expired_dates
           - stock_putaway_defaultfixedlocation
+          - stock_putaway_route
           - stock_quant_bylocation
           - stock_refill
           - web_autorefresh
