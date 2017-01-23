@@ -10,6 +10,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.8.0 (2017-01-23)
+++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-38: Upgrade account-financial-tools and l10n-belgium repositories
 * ALCN-175: Stock locations
 * ALCN-179: Stock reception priorities
@@ -27,8 +39,6 @@ Unreleased
 * ALCN-717: Add the module refund_invoice. This module allows to create customer/supplier refunds
 * ALCN-718: Add the module account_banking_sepa_direct_debit from the repo bank-payment (OCA)
 
-**Bugfixes**
-
 **Build**
 
 * Change merge policy for git merge on HISTORY.rst
@@ -36,8 +46,6 @@ Unreleased
   from GitHub zip archives
 * Update odoo-cloud-platform
 * Use redis integration on test instance
-
-**Documentation**
 
 
 9.7.1 (2017-01-13)
