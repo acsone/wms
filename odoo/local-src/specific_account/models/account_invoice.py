@@ -9,6 +9,14 @@ from openerp import api, fields, models
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    supplier_invoice_number = fields.Char('Vendor reference')
+
+    _sql_constraints = [
+        ('unique_invoice_number_by_supplier',
+         'unique (partner_id,supplier_invoice_number)',
+         'The supplier invoice number must be unique by supplier')
+    ]
+
     amount_without_discount = fields.Monetary(
         compute='_compute_total_amounts',
     )

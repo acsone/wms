@@ -13,11 +13,13 @@
         'specific_base',
         'pricelist_discount',
         'report_intrastat',
+        'l10n_be_invoice_bba',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
         'data/paperformat.xml',
         'views/report_invoice.xml',
+        'views/account_invoice_view.xml',
         'views/menu.xml',
     ],
     'installable': True,
