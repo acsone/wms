@@ -1,9 +1,9 @@
 id,name,location_id/id,kind
-__import__.location_family_A,A,__setup__.stock_location_food,
-__import__.location_family_G,G,__setup__.stock_location_drug,
-__import__.location_family_Q,Q,__setup__.stock_location_fridge,
-__import__.location_family_P,P,__setup__.stock_location_material,
-__import__.location_family_E,E,__setup__.stock_location_material,
+__import__.location_family_A,A,__setup__.stock_location_ali,
+__import__.location_family_G,G,__setup__.stock_location_medoc,
+__import__.location_family_Q,Q,__setup__.stock_location_frigo,
+__import__.location_family_P,P,__setup__.stock_location_materiel,
+__import__.location_family_E,E,__setup__.stock_location_materiel,
 __import__.location_loc_AF02A03,02A03,__import__.location_family_A,bin
 __import__.location_loc_AE03B06,03B06,__import__.location_family_A,bin
 __import__.location_loc_AC11B03,11B03,__import__.location_family_A,bin

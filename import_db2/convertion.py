@@ -319,11 +319,11 @@ class LocationMapper(EntityMapper):
         odoo_entities = []
         hierarchy = {}
         families = [
-            ('A', '__setup__.stock_location_food'),
-            ('G', '__setup__.stock_location_drug'),
-            ('Q', '__setup__.stock_location_fridge'),
-            ('P', '__setup__.stock_location_material'),
-            ('E', '__setup__.stock_location_material')]
+            ('A', '__setup__.stock_location_ali'),
+            ('G', '__setup__.stock_location_medoc'),
+            ('Q', '__setup__.stock_location_frigo'),
+            ('P', '__setup__.stock_location_materiel'),
+            ('E', '__setup__.stock_location_materiel')]
 
         for f, parent in families:
             hierarchy[f] = {}

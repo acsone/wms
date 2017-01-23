@@ -93,10 +93,12 @@ def create_locations(ctx):
         })
 
     # Returns = Products unavailable => not under WH but under physical loc.
-    create_or_update(ctx, 'stock.location', '__setup__.stock_location_return', {
-        'name': 'Retours',
-        'location_id': root.id,
-        'usage': 'view',
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_return',
+        {
+            'name': 'Retours',
+            'location_id': root.id,
+            'usage': 'view',
         })
     returns = [
         ('__setup__.stock_location_return_ali', u'Retours Aliments'),
@@ -119,10 +121,12 @@ def create_locations(ctx):
             'location_id': loc_partner.id,
             'usage': 'customer',
         })
-    create_or_update(ctx, 'stock.location', '__setup__.stock_location_destroy', {
-        'name': 'Casse',
-        'location_id': root.id,
-        'usage': 'view',
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_destroy',
+        {
+            'name': 'Casse',
+            'location_id': root.id,
+            'usage': 'view',
         })
     destroy = [
         ('__setup__.stock_location_destroy_all', u'A détruire'),
@@ -293,7 +297,7 @@ def create_procurement_rules(ctx):
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_material').id,
+         'location_src_id': ref('__setup__.stock_location_materiel').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
          'group_propagation_option': 'propagate',
@@ -304,7 +308,7 @@ def create_procurement_rules(ctx):
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_food').id,
+         'location_src_id': ref('__setup__.stock_location_ali').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
          'group_propagation_option': 'propagate',
@@ -326,7 +330,7 @@ def create_procurement_rules(ctx):
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_cold').id,
+         'location_src_id': ref('__setup__.stock_location_froid').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
          'group_propagation_option': 'propagate',
