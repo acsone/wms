@@ -177,7 +177,7 @@ def create_putaway(ctx):
     })
     create_or_update(
         ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_onorder',
+        '__setup__.stock_putaway_input_onorder',
         {
             'putaway_id': ref('__setup__.stock_putaway_input').id,
             'route_id': ref('stock.route_warehouse0_mto').id,
