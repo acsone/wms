@@ -30,6 +30,12 @@ def create_locations(ctx):
     loc_stock = ctx.env.ref('stock.stock_location_stock')
     root = ctx.env.ref('stock.stock_location_locations')
 
+    # Input
+    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
+        'usage': 'view',
+        'active': True,
+    })
+
     # Reserves = Products available => under WH, above Stock
     reserves = [
         ('__setup__.stock_location_reserve_ali', 'Réserve Aliments',
@@ -202,23 +208,22 @@ def create_putaway(ctx):
 
     # Input - Manage Achetés-vendus destination by category
     create_or_update(
-        ctx, 'product.putaway', '__setup__.stock_putaway_onorder',
-        {
+        ctx, 'product.putaway', '__setup__.stock_putaway_onorder', {
             'name': 'Achetés-Vendus',
             'method': 'fixed',
         })
     onorders = [
-        ('__setup__.stock_putaway_location_order_ali',
-         '__setup__.stock_putaway_strat_onorder_ali',
+        ('__setup__.stock_putaway_strat_onorder_ali',
+         '__setup__.product_categ_ali',
          '__setup__.stock_location_order_ali'),
-        ('__setup__.stock_putaway_location_order_medoc',
-         '__setup__.stock_putaway_strat_onorder_medoc',
+        ('__setup__.stock_putaway_strat_onorder_medoc',
+         '__setup__.product_categ_medoc',
          '__setup__.stock_location_order_medoc'),
-        ('__setup__.stock_putaway_location_order_frigo',
-         '__setup__.stock_putaway_strat_onorder_frigo',
+        ('__setup__.stock_putaway_strat_onorder_frigo',
+         '__setup__.product_categ_frigo',
          '__setup__.stock_location_order_frigo'),
-        ('__setup__.stock_putaway_location_order_mat'
-         '__setup__.stock_putaway_strat_onorder_mat',
+        ('__setup__.stock_putaway_strat_onorder_mat',
+         '__setup__.product_categ_materiel',
          '__setup__.stock_location_order_mat'),
     ]
     for xmlid, categ, loc in onorders:
