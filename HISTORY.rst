@@ -12,11 +12,17 @@ Unreleased
 
 **Bugfixes**
 
-* Fix location import typo with extra parameter context
-
 **Build**
 
 **Documentation**
+
+
+9.8.2 (2017-01-24)
+++++++++++++++++++
+
+**Bugfixes**
+
+* Fix location import typo with extra parameter context
 
 
 9.8.1 (2017-01-23)
