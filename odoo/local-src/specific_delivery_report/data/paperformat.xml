@@ -1,5 +1,0 @@
-<odoo noupdate="1">
-    <record id="specific_account.paperformat_customer_invoice" model="report.paperformat">
-        <field name="report_ids" eval="[(4, ref('stock.action_report_delivery'), False)]"/>
-    </record>
-</odoo>

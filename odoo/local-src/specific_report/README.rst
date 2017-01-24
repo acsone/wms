@@ -2,11 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-========================
-Specific Delivery Report
-========================
+===============
+Specific Report
+===============
 
-This module adds Alcyon specific fields and logic for stock picking.
+This module add some report for Alcyon:
+- Delivery round
+- Delivery slip
+- Invoice
 
 
 Credits

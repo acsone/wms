@@ -1,0 +1,29 @@
+<odoo noupdate="1">
+    <record id="paperformat_alcyon_report" model="report.paperformat">
+        <field name="name">Alcyon report</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">67</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">65</field>
+        <field name="dpi">96</field>
+        <field name="report_ids" eval="[(4, ref('account.account_invoices')), (4, ref('stock.action_report_delivery'))]"/>
+    </record>
+
+    <record id="paperformat_delivery_round" model="report.paperformat">
+        <field name="name">Delivery round</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">96</field>
+        <field name="report_ids" eval="[(4, ref('action_report_delivery_round'))]"/>
+    </record>
+</odoo>

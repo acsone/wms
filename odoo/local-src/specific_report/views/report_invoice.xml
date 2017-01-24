@@ -1,29 +1,5 @@
 <odoo>
 
-    <!-- footer with only page numbering -->
-    <template id="page_number_footer">
-        <div class="footer">
-            <div class="text-center" style="border-top: 1px solid black;">
-                <ul class="list-inline">
-                    <li>Page:</li>
-                    <li>
-                        <span class="page"/>
-                    </li>
-                    <li>/</li>
-                    <li>
-                        <span class="topage"/>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </template>
-
-    <template id="assets_specific" inherit_id="report.assets_common">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/specific_account/static/src/css/specific_account.css"/>
-        </xpath>
-    </template>
-
     <template id="report_invoice_alcyon">
         <div class="page">
             <table id="products_table" class="round_table">
@@ -263,7 +239,7 @@
         </div>
     </template>
 
-    <template id="specific_account.report_invoice">
+    <template id="report_invoice">
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="invoice">
                 <t t-set="company" t-value="res_company"/>
@@ -373,14 +349,14 @@
                     </div>
                 </div>
 
-                <t t-call="specific_account.report_invoice_alcyon" t-lang="partner.lang"/>
+                <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
 
-                <t t-call="specific_account.page_number_footer"/>
+                <t t-call="specific_report.page_number_footer"/>
             </t>
         </t>
     </template>
 
     <template id="account.report_invoice">
-        <t t-call="specific_account.report_invoice"/>
+        <t t-call="specific_report.report_invoice"/>
     </template>
 </odoo>

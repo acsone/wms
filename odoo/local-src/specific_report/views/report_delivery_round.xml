@@ -158,20 +158,7 @@
                     </div>
                 </div>
 
-                <div class="footer">
-                    <div class="text-center" style="border-top: 1px solid black;">
-                        <ul class="list-inline">
-                            <li>Page:</li>
-                            <li>
-                                <span class="page"/>
-                            </li>
-                            <li>/</li>
-                            <li>
-                                <span class="topage"/>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <t t-call="specific_report.page_number_footer"/>
             </t>
         </t>
     </template>

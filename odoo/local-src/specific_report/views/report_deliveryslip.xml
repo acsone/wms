@@ -1,5 +1,5 @@
 <odoo>
-    <template id="report_deliveryslip_alcyon">
+    <template id="specific_report.report_deliveryslip_alcyon">
         <div class="page">
             <table id="products_table" class="round_table">
                 <thead>
@@ -162,7 +162,7 @@
         </div>
     </template>
 
-    <template id="specific_delivery_report.report_deliveryslip">
+    <template id="specific_report.report_deliveryslip">
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="deliveryslip">
                 <t t-set="company" t-value="res_company"/>
@@ -262,14 +262,14 @@
                     </div>
                 </div>
 
-                <t t-call="specific_delivery_report.report_deliveryslip_alcyon" t-lang="partner.lang"/>
+                <t t-call="specific_report.report_deliveryslip_alcyon" t-lang="partner.lang"/>
 
-                <t t-call="specific_account.page_number_footer"/>
+                <t t-call="specific_report.page_number_footer"/>
             </t>
         </t>
     </template>
 
     <template id="stock.report_deliveryslip">
-        <t t-call="specific_delivery_report.report_deliveryslip"/>
+        <t t-call="specific_report.report_deliveryslip"/>
     </template>
 </odoo>

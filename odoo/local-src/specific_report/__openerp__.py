@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock picking for Alcyon',
+    'name': 'Stock report for Alcyon',
     'version': '9.0.1.0.0',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
@@ -16,7 +16,10 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'views/report_template.xml',
         'views/report_deliveryslip.xml',
+        'views/report_invoice.xml',
+        'views/report_delivery_round.xml',
         'data/paperformat.xml',
     ],
     'installable': True,

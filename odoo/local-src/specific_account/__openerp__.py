@@ -19,9 +19,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/paperformat.xml',
         'data/account_tax_group.xml',
-        'views/report_invoice.xml',
         'views/account_invoice_view.xml',
         'views/ir_sequence.xml',
         'views/menu.xml',
