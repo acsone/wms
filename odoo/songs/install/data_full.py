@@ -111,9 +111,6 @@ def import_other_locations(ctx):
     with ctx.log(u"Importing parking locations"):
         content = resource_stream(req, 'data/demo/locators_parking.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
-    with ctx.log(u"Importing output locations"):
-        content = resource_stream(req, 'data/install/chariots.csv')
-        load_csv_stream(ctx, Location, content, delimiter=',')
 
 
 @anthem.log
