@@ -318,6 +318,8 @@ class LocationMapper(EntityMapper):
         """ Create hierarchy first """
         odoo_entities = []
 
+        locations = []
+
         for db2_entity in db2_entities:
             value = db2_entity['location_name'].strip()
             if len(value) < 8:
@@ -343,13 +345,22 @@ class LocationMapper(EntityMapper):
                 lvl = value[3]
                 bin = value[4:6]
                 # TODO not found in PSTOCK non dynamic racks
+            else: # skip V, W and other unknown
+                continue
 
             # TODO assign the control code to an Odoo field
+            # TODO treat case when same location is registered multiple time
+            # some times with control code and other without
             control_code = value[6:8]
             control_code = control_code
 
             bin_xmlid = self.get_xml_id(
                 self.name, 'loc_' + family + avenue + rack + lvl + bin)
+
+            # remove duplicates
+            if bin_xmlid in locations:
+                continue
+            locations.append(bin_xmlid)
 
             odoo_entity = OrderedDict(id=None)
             odoo_entity['name'] = rack + lvl + bin
