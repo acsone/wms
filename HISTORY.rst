@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix location import typo with extra parameter context
+
 **Build**
 
 **Documentation**
