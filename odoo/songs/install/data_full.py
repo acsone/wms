@@ -27,22 +27,32 @@ def get_file(req, default_file):
 def import_suppliers(ctx):
     """ Importing suppliers from csv """
 
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
     content = get_file(req, 'data/install/supplier.csv')
-    load_csv_stream(ctx, 'res.partner', content, delimiter=',')
+    load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
 def import_clients(ctx):
     """ Importing clients from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
     content = get_file(req, 'data/install/customer.csv')
-    load_csv_stream(ctx, 'res.partner', content, delimiter=',')
+    load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Product = ctx.env['product.product'].with_context(load_ctx)
     content = get_file(req, 'data/install/product.csv')
-    load_csv_stream(ctx, 'product.product', content, delimiter=',')
+    load_csv_stream(ctx, Product, content, delimiter=',')
     ctx.env.cr.execute("""
         UPDATE product_template
         SET active=False
