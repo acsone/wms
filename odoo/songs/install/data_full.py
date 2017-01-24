@@ -75,8 +75,7 @@ def import_locations(ctx):
     Location = ctx.env['stock.location'].with_context(load_ctx)
     with ctx.log(u"Importing warehouse locations"):
         content = resource_stream(req, 'data/install/location.csv')
-        load_csv_stream(ctx, Location, content, delimiter=',',
-                        context=load_ctx)
+        load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing reserve locations"):
         content = resource_stream(req, 'data/demo/locators_reserve.csv')
         load_csv_stream(ctx, 'stock.location', content, delimiter=',')
@@ -85,8 +84,7 @@ def import_locations(ctx):
         load_csv_stream(ctx, 'stock.location', content, delimiter=',')
     with ctx.log(u"Importing output locations"):
         content = resource_stream(req, 'data/install/chariots.csv')
-        load_csv_stream(ctx, Location, content, delimiter=',',
-                        context=load_ctx)
+        load_csv_stream(ctx, Location, content, delimiter=',')
 
     with ctx.log(u"Compute parent_left, parent_right"):
         ctx.env['stock.location']._parent_store_compute()
