@@ -32,9 +32,9 @@ def create_locations(ctx):
 
     # Reserves = Products available => under WH, above Stock
     reserves = [
-        ('__setup__.stock_location_reserve_ali', u'Réserve Aliments',
+        ('__setup__.stock_location_reserve_ali', 'Réserve Aliments',
          loc_stock.location_id.id),
-        ('__setup__.stock_location_reserve_medoc', u'Réserve Médicaments',
+        ('__setup__.stock_location_reserve_medoc', 'Réserve Médicaments',
          loc_stock.location_id.id),
     ]
     for xmlid, name, location_id in reserves:
@@ -47,16 +47,16 @@ def create_locations(ctx):
 
     # Bins = Products available to pick => under Stock
     locations = [
-        ('__setup__.stock_location_materiel', u'Matériel',
+        ('__setup__.stock_location_materiel', 'Matériel',
          False,
          loc_stock.id),
-        ('__setup__.stock_location_ali', u'Aliments',
+        ('__setup__.stock_location_ali', 'Aliments',
          ctx.env.ref('__setup__.stock_location_reserve_ali').id,
          loc_stock.id),
-        ('__setup__.stock_location_medoc', u'Médicaments',
+        ('__setup__.stock_location_medoc', 'Médicaments',
          ctx.env.ref('__setup__.stock_location_reserve_medoc').id,
          loc_stock.id),
-        ('__setup__.stock_location_froid', u'Froid',
+        ('__setup__.stock_location_froid', 'Froid',
          False,
          loc_stock.id),
     ]
@@ -68,7 +68,7 @@ def create_locations(ctx):
             'usage': 'view',
         })
     locations = [
-        ('__setup__.stock_location_frigo', u'Frigo',
+        ('__setup__.stock_location_frigo', 'Frigo',
          False,
          ctx.env.ref('__setup__.stock_location_froid').id),
     ]
@@ -82,7 +82,7 @@ def create_locations(ctx):
 
     # Parking is under Input (part of stock)
     parkings = [
-        ('__setup__.stock_location_parking_medoc', u'Parking Medicaments'),
+        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments'),
     ]
     for xmlid, name in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -96,16 +96,16 @@ def create_locations(ctx):
     create_or_update(
         ctx, 'stock.location', '__setup__.stock_location_onorder',
         {
-            'name': u'Achetés-Vendus',
+            'name': 'Achetés-Vendus',
             'location_id': ctx.env.ref('stock.stock_location_company').id,
             'usage': 'view',
         })
     onorders = [
-        ('__setup__.stock_location_order_ali', u'Achetés-Vendus Aliments'),
+        ('__setup__.stock_location_order_ali', 'Achetés-Vendus Aliments'),
         ('__setup__.stock_location_order_medoc',
-         u'Achetés-Vendus Médicaments'),
-        ('__setup__.stock_location_order_frigo', u'Achetés-Vendus Frigo'),
-        ('__setup__.stock_location_order_mat', u'Achetés-Vendus Matériel'),
+         'Achetés-Vendus Médicaments'),
+        ('__setup__.stock_location_order_frigo', 'Achetés-Vendus Frigo'),
+        ('__setup__.stock_location_order_mat', 'Achetés-Vendus Matériel'),
     ]
     for xmlid, name in onorders:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -123,10 +123,10 @@ def create_locations(ctx):
             'usage': 'view',
         })
     returns = [
-        ('__setup__.stock_location_return_ali', u'Retours Aliments'),
-        ('__setup__.stock_location_return_medoc', u'Retours Médicaments'),
-        ('__setup__.stock_location_return_frigo', u'Retours Frigo'),
-        ('__setup__.stock_location_return_mat', u'Retours Matériel'),
+        ('__setup__.stock_location_return_ali', 'Retours Aliments'),
+        ('__setup__.stock_location_return_medoc', 'Retours Médicaments'),
+        ('__setup__.stock_location_return_frigo', 'Retours Frigo'),
+        ('__setup__.stock_location_return_mat', 'Retours Matériel'),
         ]
     for xmlid, name in returns:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -151,7 +151,7 @@ def create_locations(ctx):
             'usage': 'view',
         })
     destroy = [
-        ('__setup__.stock_location_destroy_all', u'A détruire'),
+        ('__setup__.stock_location_destroy_all', 'A détruire'),
         ]
     for xmlid, name in destroy:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -171,8 +171,8 @@ def create_putaway(ctx):
 
     # Input - Manage Parking and Achetés-vendus
     create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_input', {
-        'name': u'Input',
-        'method': u'fixed',
+        'name': 'Input',
+        'method': 'fixed',
         'fixed_location_id': loc_stock_id,
     })
     create_or_update(
@@ -204,8 +204,8 @@ def create_putaway(ctx):
     create_or_update(
         ctx, 'product.putaway', '__setup__.stock_putaway_onorder',
         {
-            'name': u'Achetés-Vendus',
-            'method': u'fixed',
+            'name': 'Achetés-Vendus',
+            'method': 'fixed',
         })
     onorders = [
         ('__setup__.stock_putaway_location_order_ali',
