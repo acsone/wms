@@ -317,23 +317,6 @@ class LocationMapper(EntityMapper):
     def convert_entities(self, db2_entities):
         """ Create hierarchy first """
         odoo_entities = []
-        hierarchy = {}
-        families = [
-            ('A', '__setup__.stock_location_ali'),
-            ('G', '__setup__.stock_location_medoc'),
-            ('Q', '__setup__.stock_location_frigo'),
-            ('P', '__setup__.stock_location_materiel'),
-            ('E', '__setup__.stock_location_materiel')]
-
-        for f, parent in families:
-            hierarchy[f] = {}
-            odoo_entity = OrderedDict(id=None)
-            odoo_entity['name'] = f
-            odoo_entity['location_id/id'] = parent
-            odoo_entity['id'] = self.get_xml_id(
-                self.name, 'family_' + f
-            )
-            odoo_entities.append(odoo_entity)
 
         for db2_entity in db2_entities:
             value = db2_entity['location_name'].strip()

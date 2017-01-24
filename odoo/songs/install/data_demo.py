@@ -30,6 +30,9 @@ def import_locations(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'defer_parent_store_computation': True})
     Location = ctx.env['stock.location'].with_context(load_ctx)
+    with ctx.log(u" Importing family locations from csv"):
+        content = resource_stream(req, 'data/install/location_family.csv')
+        load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing warehouse locations"):
         content = resource_stream(req, 'data/demo/location.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
