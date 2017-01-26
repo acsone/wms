@@ -128,7 +128,8 @@ class RoundInstance(models.Model):
                 # 'confirmed',
                 'partially_available',
                 'assigned'))])
-        pickings.write({'delivery_round_id': self.id})
+        if pickings:
+            pickings.write({'delivery_round_id': self.id})
 
     def find(self, partner_id):
         """ Find a delivery_round for this partner """
