@@ -106,8 +106,8 @@ def main(ctx):
     """ Loading demo data """
     import_suppliers(ctx)
     import_clients(ctx)
-    import_locations(ctx)
     import_products(ctx)
+    import_locations(ctx)
     import_product_supplierinfo(ctx)
     import_pricelist_items(ctx)
     import_delivery_round_config(ctx)
