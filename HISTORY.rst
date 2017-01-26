@@ -8,6 +8,13 @@ Unreleased
 
 **Data Migration**
 
+* Defer parent computation for all locations
+* Paralelize full data import for locations
+* Disable tracking messages for products and partners
+* Fix duplicated locations in full data
+* Remove loading of chariots location in full data (wrongly added)
+* Do product import before location import to avoid a bug leading to OOM
+
 **Features and Improvements**
 
 **Bugfixes**
