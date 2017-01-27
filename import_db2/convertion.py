@@ -317,23 +317,8 @@ class LocationMapper(EntityMapper):
     def convert_entities(self, db2_entities):
         """ Create hierarchy first """
         odoo_entities = []
-        hierarchy = {}
-        families = [
-            ('A', '__setup__.stock_location_ali'),
-            ('G', '__setup__.stock_location_medoc'),
-            ('Q', '__setup__.stock_location_frigo'),
-            ('P', '__setup__.stock_location_materiel'),
-            ('E', '__setup__.stock_location_materiel')]
 
-        for f, parent in families:
-            hierarchy[f] = {}
-            odoo_entity = OrderedDict(id=None)
-            odoo_entity['name'] = f
-            odoo_entity['location_id/id'] = parent
-            odoo_entity['id'] = self.get_xml_id(
-                self.name, 'family_' + f
-            )
-            odoo_entities.append(odoo_entity)
+        locations = []
 
         for db2_entity in db2_entities:
             value = db2_entity['location_name'].strip()
@@ -360,13 +345,22 @@ class LocationMapper(EntityMapper):
                 lvl = value[3]
                 bin = value[4:6]
                 # TODO not found in PSTOCK non dynamic racks
+            else: # skip V, W and other unknown
+                continue
 
             # TODO assign the control code to an Odoo field
+            # TODO treat case when same location is registered multiple time
+            # some times with control code and other without
             control_code = value[6:8]
             control_code = control_code
 
             bin_xmlid = self.get_xml_id(
                 self.name, 'loc_' + family + avenue + rack + lvl + bin)
+
+            # remove duplicates
+            if bin_xmlid in locations:
+                continue
+            locations.append(bin_xmlid)
 
             odoo_entity = OrderedDict(id=None)
             odoo_entity['name'] = rack + lvl + bin

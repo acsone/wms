@@ -27,22 +27,32 @@ def get_file(req, default_file):
 def import_suppliers(ctx):
     """ Importing suppliers from csv """
 
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
     content = get_file(req, 'data/install/supplier.csv')
-    load_csv_stream(ctx, 'res.partner', content, delimiter=',')
+    load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
 def import_clients(ctx):
     """ Importing clients from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
     content = get_file(req, 'data/install/customer.csv')
-    load_csv_stream(ctx, 'res.partner', content, delimiter=',')
+    load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Product = ctx.env['product.product'].with_context(load_ctx)
     content = get_file(req, 'data/install/product.csv')
-    load_csv_stream(ctx, 'product.product', content, delimiter=',')
+    load_csv_stream(ctx, Product, content, delimiter=',')
     ctx.env.cr.execute("""
         UPDATE product_template
         SET active=False
@@ -67,27 +77,46 @@ def import_pricelist_items(ctx):
 
 
 @anthem.log
-def import_locations(ctx):
-    """ Importing locations from csv"""
+def import_wh_family_locations(ctx):
+    """ Importing family locations from csv"""
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'defer_parent_store_computation': True})
     Location = ctx.env['stock.location'].with_context(load_ctx)
-    with ctx.log(u"Importing warehouse locations"):
-        content = resource_stream(req, 'data/install/location.csv')
-        load_csv_stream(ctx, Location, content, delimiter=',')
+    content = resource_stream(req, 'data/install/location_family.csv')
+    load_csv_stream(ctx, Location, content, delimiter=',')
+
+
+@anthem.log
+def import_wh_locations(ctx):
+    """ Importing warehouse locations from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'defer_parent_store_computation': True})
+    Location = ctx.env['stock.location'].with_context(load_ctx)
+    content = get_file(req, 'data/install/location.csv')
+    load_csv_stream(ctx, Location, content, delimiter=',')
+
+
+@anthem.log
+def import_other_locations(ctx):
+    """ Importing other locations from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'defer_parent_store_computation': True})
+    Location = ctx.env['stock.location'].with_context(load_ctx)
     with ctx.log(u"Importing reserve locations"):
         content = resource_stream(req, 'data/demo/locators_reserve.csv')
-        load_csv_stream(ctx, 'stock.location', content, delimiter=',')
+        load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing parking locations"):
         content = resource_stream(req, 'data/demo/locators_parking.csv')
-        load_csv_stream(ctx, 'stock.location', content, delimiter=',')
-    with ctx.log(u"Importing output locations"):
-        content = resource_stream(req, 'data/install/chariots.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
 
-    with ctx.log(u"Compute parent_left, parent_right"):
-        ctx.env['stock.location']._parent_store_compute()
+
+@anthem.log
+def location_compute_parents(ctx):
+    """Compute parent_left, parent_right"""
+    ctx.env['stock.location']._parent_store_compute()
 
 
 @anthem.log
@@ -107,5 +136,4 @@ def main(ctx):
     other files will be import by importer.sh)
     """
     # Putting some demo data in full mode because we don't have yet real data
-    import_locations(ctx)
     import_delivery_round_config(ctx)
