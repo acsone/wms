@@ -17,6 +17,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
+
 **Bugfixes**
 
 **Build**
