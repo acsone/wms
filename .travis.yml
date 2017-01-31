@@ -17,8 +17,10 @@ env:
     - ADDONS_DIR=${TRAVIS_BUILD_DIR}/odoo/local-src
     - SONGS_DIR=${TRAVIS_BUILD_DIR}/odoo/songs
     - COMPOSE_PROJECT_NAME=alcyon
-    - RANCHER_STACK_NAME=alcyon-odoo-test
-    - secure: "sE+53dihCQ9DzZ7TbgTy6wlSEU7cep9xHvem5+Nj0uI2xKHC31ISA/OdR0nidsLtrs4MBbbyTzZaRZU6ZnnN0xYQ+N9Vo9HGN/iWQidBZSxd3w1X7oQBRoL06ILQK211FIv/457WkENP9VzwTj47f+zSfs+2LM2I1cHamsfnhRfyW2d3V0rJ2C+aB8z30eqAYZiYodoNBeoYLcPCZHu+9rscIeIn6AxWRNoXRHPSMCfJvrl7FU1KfDrFlQdms0j/3/ATNt3RZnJNtTfeWD5MgurFy5e9CMY7KNOBuGwIhqCwWYvKgQtL78E2qfmBi+I5OAlcz4Xvd++O5ZopL8VHgtHZORYrFGCLc/ta1TebL31v51S9Y4zhlkAJKguz4M4KnqyqGgWnDpLTHinkoJjBVOgybh7c9DcWyE2J5+5Lq0PWwV9S6/4OVDcdM8lmaXDRTNjuRR9NEZvGJXZIVhbAE7GIalHttjWRomM0TnbNuE1r7C1bnSYyg1+VMd0uiDnGO4nemlMvI9nmqTMXgJxClXizS/4CA1gKNFtgjOhqkmUhhFeYuxAsJZqo9leeMsdXnDEOWzImFDwfmTOrFzFs3KkKq4RJybnN9BSHc9/ARiQ1Ux3TrOdUtqb5To8Cj6sNmxHf0FGqfC61n4SFe52F/CKgR2cJY6WTXuLi4l/GK5M="
+    - GENERATED_IMAGE=${COMPOSE_PROJECT_NAME}_odoo
+    - DOCKER_HUB_REPO=camptocamp/alcyon_odoo
+    - RANCHER_MINION_SERVER=https://alcyon.odoo-test.camptocamp.ch
+    - secure: "atslypRS3lvPLWzcXYrr0Ir+dcxUP2nhE57AUQVD+gWg+OidOcY5EWKw8Sdqc6VCD8jQHpLqmEvSIgR41IdAosK8fSD5yY+d3nUVGpcbomfa0u3CtzQJvxzVnQ6yEomapl7tpqZBaheASOH/qMBunC6sl55pMRhOwecLJG9qluXwY25Xuobj3GaBJhk4qcigw0TvmxnvvCOknsuwIjrTg6AzXN6iO5KlFElr+tcHSVoFUYZfvIUR/ZuEm33crYWD3ZS1Utyvpv4HvCf0RlWZz7keW98tetsRO/re3CDmDtUJ+Hg+sO9OUnjmVBZ8U2No725AmIYv21oLEYZvarHsF7+i+miqZr4v8Ha5l/NGx5usgxJauFA0gmYUQQ/bBgFJ/xYeb4Gu0CGs3/9XmDl9XCxuV9O7E/UEDFQ4W2YVP1W5ipECgovUrT7yIcvk5mNtUVutQSaK80ZWHnKY0HUiB/wlTXyQYsJ5KGdkkfyxDyCK0+ud0YQszzaEZycRUfeTd3jRHpEoYd5929DJl3uT3CcvrmjF1ewIJiK+YKmY1ckJnF0fhV0aTuL0BzxHqsyfWlfVePH+uF7NmqHUD2E455lXM8fDHWYhEsNETcmowMW1ppPptQBNo4e9C4Qc9woSYOxUr6rGEkzHtiOrbxdsj7rr/bAVfL+W2Z496t9dws0="
 
 before_install:
   - sudo apt-get update
@@ -30,7 +32,7 @@ before_install:
   - git config --global user.name "TravisCI"
   - git config --global user.email "travis@camptocamp.com"
   - if [ "$LINT_CHECK" == "1" ] ; then pip install --user -q flake8 ; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython ; fi
+  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython requests ; fi
 
 install:
   - if [ "$LINT_CHECK" == "0" ] ; then python ./travis/git_submodule_update.py ; fi
