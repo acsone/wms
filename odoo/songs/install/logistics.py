@@ -168,6 +168,14 @@ def create_locations(ctx):
             'usage': 'internal',
         })
 
+    # Pharma
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_pharma',
+        {
+            'name': 'Pharma',
+            'location_id': loc_partner.id,
+            'usage': 'customer',
+        })
 
 @anthem.log
 def create_putaway(ctx):
@@ -292,6 +300,7 @@ def create_picking_types(ctx):
     location_retours = ctx.env.ref('__setup__.stock_location_return')
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
     location_casse = ctx.env.ref('__setup__.stock_location_destroy')
+    location_pharma  = ctx.env.ref('__setup__.stock_location_pharma')
     location_detruit = ctx.env.ref('__setup__.stock_location_destroyed')
 
     color_ali = 2
@@ -349,6 +358,19 @@ def create_picking_types(ctx):
          'color': color_froid,
          'sequence': 7,
          },
+        {'xmlid': '__setup__.stock_picking_type_humain',
+         'name': 'Pick Humain',
+         'code': 'internal',
+         'sequence_id': picking_sequence.id,
+         'default_location_src_id': location_pharma.id,
+         'default_location_dest_id': location_out.id,
+         'use_create_lots': False,
+         'subcode': 'PICK',
+         'groupbypartner': True,
+         'color': color_mat,
+         'sequence': 7,
+         },
+
         {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
          'name': 'Rangement Medicaments',
          'code': 'internal',
@@ -379,6 +401,7 @@ def create_picking_types(ctx):
          'color': color_froid,
          'sequence': 9,
          },
+
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
          'name': 'Reassort Medicaments',
          'code': 'internal',
