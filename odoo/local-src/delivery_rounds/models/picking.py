@@ -81,12 +81,12 @@ class StockPicking(models.Model):
                     'partially_available',
                     'assigned') and
                 r.delivery_round_id.id != vals['delivery_round_id'])
-            if not pickings:
-                import pdb;pdb.set_trace()
-                raise Warning(_(
-                    'No available picking to assign this delivery round'))
-            pickings.with_context(noround_write=True).write(
-                {'delivery_round_id': vals['delivery_round_id']})
+            # if not pickings:
+            #     raise Warning(_(
+            #         'No available picking to assign this delivery round'))
+            if pickings:
+                pickings.with_context(noround_write=True).write(
+                    {'delivery_round_id': vals['delivery_round_id']})
             del vals['delivery_round_id']
         if not vals:
             return True
