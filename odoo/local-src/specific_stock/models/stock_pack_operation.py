@@ -11,7 +11,6 @@ class StockPackOperationLot(models.Model):
 
     life_date = fields.Datetime(
         string='End of Life Date',
-        required=True,
     )
     is_removal_date_expired = fields.Boolean('Removal date', default=False)
 
