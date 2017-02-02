@@ -177,6 +177,7 @@ def create_locations(ctx):
             'usage': 'customer',
         })
 
+
 @anthem.log
 def create_putaway(ctx):
     """ Create putaway and putaway strat
@@ -300,7 +301,7 @@ def create_picking_types(ctx):
     location_retours = ctx.env.ref('__setup__.stock_location_return')
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
     location_casse = ctx.env.ref('__setup__.stock_location_destroy')
-    location_pharma  = ctx.env.ref('__setup__.stock_location_pharma')
+    location_pharma = ctx.env.ref('__setup__.stock_location_pharma')
     location_detruit = ctx.env.ref('__setup__.stock_location_destroyed')
 
     color_ali = 2
