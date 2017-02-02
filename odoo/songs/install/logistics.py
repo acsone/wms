@@ -89,6 +89,8 @@ def create_locations(ctx):
     # Parking is under Input (part of stock)
     parkings = [
         ('__setup__.stock_location_parking_medoc', 'Parking Medicaments'),
+        ('__setup__.stock_location_parking_materiel', 'Parking Matériel'),
+        ('__setup__.stock_location_parking_frigo', 'Parking Frigo'),
     ]
     for xmlid, name in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -191,16 +193,27 @@ def create_putaway(ctx):
                 '__setup__.stock_location_onorder').id,
         }
     )
-    create_or_update(
-        ctx, 'stock.fixed.putaway.strat',
-        '__setup__.stock_putaway_strat_parking_medoc',
-        {
-            'putaway_id': ref('__setup__.stock_putaway_input').id,
-            'category_id': ref('__setup__.product_categ_medoc').id,
-            'fixed_location_id': ref(
-                '__setup__.stock_location_parking_medoc').id,
-        }
-    )
+
+    parking_strat = [
+        ('__setup__.stock_putaway_strat_parking_medoc',
+         '__setup__.product_categ_medoc',
+         '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_materiel',
+         '__setup__.product_categ_materiel',
+         '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_materiel',
+         '__setup__.product_categ_frigo',
+         '__setup__.stock_location_parking_frigo'),
+        ]
+    for xmlid, categ, loc in parking_strat:
+        create_or_update(
+            ctx, 'stock.fixed.putaway.strat', xmlid,
+            {
+                'putaway_id': ref('__setup__.stock_putaway_input').id,
+                'category_id': ref(categ).id,
+                'fixed_location_id': ref(loc).id,
+            }
+        )
     create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
         'location_id': loc_stock_id,
         'putaway_strategy_id': ref('__setup__.stock_putaway_input').id
@@ -266,8 +279,13 @@ def create_picking_types(ctx):
     location_ali = ctx.env.ref('__setup__.stock_location_ali')
     location_medoc = ctx.env.ref('__setup__.stock_location_medoc')
     location_froid = ctx.env.ref('__setup__.stock_location_froid')
+    location_frigo = ctx.env.ref('__setup__.stock_location_frigo')
     location_parking_medoc = ctx.env.ref(
         '__setup__.stock_location_parking_medoc')
+    location_parking_materiel = ctx.env.ref(
+        '__setup__.stock_location_parking_materiel')
+    location_parking_frigo = ctx.env.ref(
+        '__setup__.stock_location_parking_frigo')
     location_reserve_medoc = ctx.env.ref(
         '__setup__.stock_location_reserve_medoc')
     location_reserve_ali = ctx.env.ref('__setup__.stock_location_reserve_ali')
@@ -331,7 +349,7 @@ def create_picking_types(ctx):
          'color': color_froid,
          'sequence': 7,
          },
-        {'xmlid': '__setup__.stock_picking_type_rangement',
+        {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
          'name': 'Rangement Medicaments',
          'code': 'internal',
          'sequence_id': internal_sequence.id,
@@ -339,6 +357,26 @@ def create_picking_types(ctx):
          'default_location_dest_id': location_medoc.id,
          'use_create_lots': False,
          'color': color_medoc,
+         'sequence': 9,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
+         'name': 'Rangement Matériel',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_materiel.id,
+         'default_location_dest_id': location_mat.id,
+         'use_create_lots': False,
+         'color': color_mat,
+         'sequence': 9,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
+         'name': 'Rangement Frigo',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_frigo.id,
+         'default_location_dest_id': location_frigo.id,
+         'use_create_lots': False,
+         'color': color_froid,
          'sequence': 9,
          },
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
