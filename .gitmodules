@@ -25,3 +25,6 @@
 [submodule "odoo/external-src/bank-payment"]
 	path = odoo/external-src/bank-payment
 	url = git@github.com:OCA/bank-payment.git
+[submodule "odoo/external-src/account-invoicing"]
+	path = odoo/external-src/account-invoicing
+	url = git@github.com:OCA/account-invoicing.git

@@ -23,6 +23,7 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/l10n-belgium, \
   /opt/odoo/external-src/account-financial-tools, \
   /opt/odoo/external-src/bank-payment, \
+  /opt/odoo/external-src/account-invoicing, \
   /opt/odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \
