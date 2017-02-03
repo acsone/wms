@@ -10,17 +10,23 @@ from anthem.lyrics.loaders import load_csv_stream
 from ..common import req
 
 
-def get_file(req, default_file):
-    """ Check if there is a DATA_FILE in environment else open default_file.
+def get_files(req, default_file):
+    """ Check if there is a DATA_DIR in environment else open default_file.
 
-    DATA_FILE is passed by importer.sh when importing splitted file in parallel
+    DATA_DIR is passed by importer.sh when importing splitted file in parallel
+
+    Returns a generator of file to import as DATA_DIR can contain a split of
+    csv file
     """
     try:
-        file_path = os.environ['DATA_FILE']
+        dir_path = os.environ['DATA_DIR']
     except KeyError:
-        return resource_stream(req, default_file)
+        yield [resource_stream(req, default_file)]
     else:
-        return open(file_path)
+        file_list = os.listdir(dir_path)
+        for file_name in file_list:
+            file_path = os.path.join(dir_path, file_name)
+            yield open(file_path)
 
 
 @anthem.log
@@ -30,8 +36,8 @@ def import_suppliers(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    content = get_file(req, 'data/install/supplier.csv')
-    load_csv_stream(ctx, Partner, content, delimiter=',')
+    for content in get_files(req, 'data/install/supplier.csv'):
+        load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
@@ -41,8 +47,8 @@ def import_clients(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    content = get_file(req, 'data/install/customer.csv')
-    load_csv_stream(ctx, Partner, content, delimiter=',')
+    for content in get_files(req, 'data/install/customer.csv'):
+        load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
@@ -51,8 +57,12 @@ def import_products(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Product = ctx.env['product.product'].with_context(load_ctx)
-    content = get_file(req, 'data/install/product.csv')
-    load_csv_stream(ctx, Product, content, delimiter=',')
+    file_csv =  'data/install/product.csv'
+    for content in get_files(req, file_csv):
+        load_csv_stream(ctx, Product, content, delimiter=',')
+
+@anthem.log
+def post_import_products(ctx):
     ctx.env.cr.execute("""
         UPDATE product_template
         SET active=False
@@ -65,15 +75,15 @@ def import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
-    content = get_file(req, 'data/install/product.csv')
-    load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
+    for content in get_files(req, 'data/install/product.csv'):
+        load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
 @anthem.log
 def import_pricelist_items(ctx):
     """ Importing pricelists from csv"""
-    content = get_file(req, 'data/install/pricelist_items.csv')
-    load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
+    for content in get_files(req, 'data/install/pricelist_items.csv'):
+        load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
 
 
 @anthem.log
@@ -94,8 +104,8 @@ def import_wh_locations(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'defer_parent_store_computation': True})
     Location = ctx.env['stock.location'].with_context(load_ctx)
-    content = get_file(req, 'data/install/location.csv')
-    load_csv_stream(ctx, Location, content, delimiter=',')
+    for content in get_files(req, 'data/install/location.csv'):
+        load_csv_stream(ctx, Location, content, delimiter=',')
 
 
 @anthem.log

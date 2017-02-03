@@ -27,6 +27,7 @@ migration:
               - importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
               - importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
               - importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
+              - anthem songs.install.data_full::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
