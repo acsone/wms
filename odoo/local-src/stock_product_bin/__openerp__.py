@@ -31,7 +31,6 @@
     'data': [
         'views/product.xml',
         'views/stock.xml',
-        'views/stock_change_product_qty.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
