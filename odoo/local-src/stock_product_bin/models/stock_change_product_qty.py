@@ -24,55 +24,17 @@ from openerp import fields, models, api
 class StockChangeProductQty(models.TransientModel):
     _inherit = 'stock.change.product.qty'
 
-    stock_bin_ids = fields.One2many(
-        'product.stock.bin.temp', 'wizard_id', 'Stock Bins')
-
     @api.model
-    def default_get(self, fields):
-        result = super(StockChangeProductQty, self).default_get(fields)
-
+    def _get_default_location_id(self):
         if self.env.context.get('active_model') != 'product.template' or \
                 not self.env.context.get('active_id'):
-            return result
+            return
 
         product_tmpl_id = self.env.context['active_id']
-        if 'stock_bin_ids' in fields and result.get('product_id'):
-            stock_bins = self.env['product.stock.bin'].search(
-                [('product_id', '=', product_tmpl_id)])
-            stock_bin_values = []
-            for stock_bin in stock_bins:
-                stock_bin_values.append([0, False, {
-                    'product_id': stock_bin.product_id.id,
-                    'sequence': stock_bin.sequence,
-                    'location_id': stock_bin.location_id.id,
-                    'bin_location_id': stock_bin.bin_location_id.id,
-                }])
+        stock_bins = self.env['product.stock.bin'].search(
+            [('product_id', '=', product_tmpl_id)], limit=1)
 
-            result['stock_bin_ids'] = stock_bin_values
+        if stock_bins:
+            return stock_bins.bin_location_id.id
 
-        return result
-
-    @api.multi
-    def change_product_qty(self):
-        result = super(StockChangeProductQty, self).change_product_qty()
-
-        for wizard in self:
-            product_tmpl = wizard.product_tmpl_id
-            product_tmpl.stock_bin_ids.unlink()
-            for bin_tmp in wizard.stock_bin_ids:
-                product_tmpl.stock_bin_ids.create({
-                    'product_id': product_tmpl.id,
-                    'sequence': bin_tmp.sequence,
-                    'location_id': bin_tmp.location_id.id,
-                    'bin_location_id': bin_tmp.bin_location_id.id,
-                })
-
-        return result
-
-
-class ProductStockBinTemp(models.TransientModel):
-    _inherit = 'product.stock.bin'
-    _name = 'product.stock.bin.temp'
-
-    wizard_id = fields.Many2one('stock.change.product.qty', 'Wizard',
-                                required=True)
+    location_id = fields.Many2one(default=_get_default_location_id)
