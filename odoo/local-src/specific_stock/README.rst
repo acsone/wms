@@ -13,6 +13,7 @@ This module adds Alcyon specific fields and logic for stock.
 * Allow to set life date directly on picking transfer wizard
 * Create a cron to archive lot
 * Assign a unique (N-2/N+2) checksum on lot
+* Check if the removal date is not expired when we receive a lot
 
 Credits
 =======
@@ -21,3 +22,4 @@ Contributors
 ------------
 
 * Julien Coux <julien.coux@camptocamp.com>
+* Jacques-Etienne Baudoux <je@bcim.be>
