@@ -49,7 +49,7 @@
                                     <span t-field="line.product_id.name"/>
                                 </td>
                                 <td style="text-align: center;">
-                                    <span t-if="line.product_id.categ_id == line.env.ref('__init.product_categ_frigo')">
+                                    <span t-if="line.product_id.categ_id == line.env.ref('__setup__.product_categ_frigo')">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </span>
                                 </td>
@@ -57,13 +57,13 @@
                                     <span t-esc="int(line.product_qty)"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="first_quant[0]"/>
+                                    <t t-esc="first_quant and first_quant[0]"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="int(first_quant[1])"/>
+                                    <t t-esc="first_quant and int(first_quant[1])"/>
                                 </td>
                                 <td>
-                                    <span t-if="first_quant" t-esc="first_quant[2] and first_quant[2][:10]"/>
+                                    <t t-esc="first_quant and first_quant[2] and first_quant[2][:10]"/>
                                 </td>
                             </tr>
                             <tr t-foreach="quants" t-as="quant">
