@@ -50,9 +50,9 @@ class StockProductionLot(models.Model):
     @api.multi
     @api.depends('product_id')
     def compute_checksum(self):
-        lot_checksum_size = int(self.env['ir.config_parameter']. \
+        lot_checksum_size = int(self.env['ir.config_parameter'].
                                 get_param('lot_checksum_size', 3))
-        same_lot_checksum_range = int(self.env['ir.config_parameter']. \
+        same_lot_checksum_range = int(self.env['ir.config_parameter'].
                                       get_param('lot_checksum_size', 2))
 
         number_of_element = int(math.pow(10, lot_checksum_size)) - 1
