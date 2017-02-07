@@ -17,6 +17,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Add the module account_invoice_check_total from OCA repo account-invoicing
+
 **Bugfixes**
 
 **Build**
