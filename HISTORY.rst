@@ -58,6 +58,7 @@ Unreleased
 
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
+* ALCN-731: Compute a checksum on the lot according some rules
 
 **Build**
 
