@@ -8,6 +8,20 @@ Unreleased
 
 **Data Migration**
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.9.0 (2017-02-09)
+++++++++++++++++++
+
+**Data Migration**
+
 * Defer parent computation for all locations
 * Paralelize full data import for locations
 * Disable tracking messages for products and partners
@@ -20,13 +34,9 @@ Unreleased
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
 
-**Bugfixes**
-
 **Build**
 
 * Rewrite part of import script to split csv files in maximum 500 lines
-
-**Documentation**
 
 
 9.8.2 (2017-01-24)
