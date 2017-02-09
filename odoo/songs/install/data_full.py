@@ -76,7 +76,7 @@ def post_import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
-    for content in get_files(req, 'data/install/product.csv'):
+    for content in get_files(req, 'data/install/supplierinfo.csv'):
         load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
