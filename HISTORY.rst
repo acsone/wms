@@ -15,6 +15,7 @@ Unreleased
 **Build**
 
 * Move to new test platform
+* Upgrade attachment_s3
 
 **Documentation**
 
