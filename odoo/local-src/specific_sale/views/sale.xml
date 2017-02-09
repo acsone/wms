@@ -13,6 +13,14 @@
             <field name="partner_id" position="after">
                 <field name="client_order_ref"/>
             </field>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
+                <field name="exception"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="decoration-warning">exception</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
