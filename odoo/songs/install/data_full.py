@@ -57,9 +57,10 @@ def import_products(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Product = ctx.env['product.product'].with_context(load_ctx)
-    file_csv =  'data/install/product.csv'
+    file_csv = 'data/install/product.csv'
     for content in get_files(req, file_csv):
         load_csv_stream(ctx, Product, content, delimiter=',')
+
 
 @anthem.log
 def post_import_products(ctx):

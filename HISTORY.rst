@@ -21,6 +21,8 @@ Unreleased
 
 **Build**
 
+* Rewrite part of import script to split csv files in maximum 500 lines
+
 **Documentation**
 
 
