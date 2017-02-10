@@ -86,9 +86,12 @@ class ProductMapper(EntityMapper):
             supplier_xml_id = self.get_xml_id(
                 'supplier', str(ref), '__import__')
 
+            price = db2_entity['gespan']
+
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
                 'name/id': supplier_xml_id,
+                'price': price,
                 'product_tmpl_id/id': self.get_xml_id(
                     'product',
                     '%s_product_template' % odoo_entity['default_code']
