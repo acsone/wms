@@ -12,6 +12,8 @@ Unreleased
   __setup__ for data created once and __import__ for data generated
   by import script
 * ALCN-704: Add control code on locations
+* ALCN-722: Add product price and vendor code
+* Import MTO and MTS routes on products
 
 **Features and Improvements**
 * Add the report delivery slip
