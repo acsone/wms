@@ -87,10 +87,12 @@ class ProductMapper(EntityMapper):
                 'supplier', str(ref), '__import__')
 
             price = db2_entity['gespan']
+            vendor_code = db2_entity['gesarc'].strip()
 
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
                 'name/id': supplier_xml_id,
+                'product_code': vendor_code,
                 'price': price,
                 'product_tmpl_id/id': self.get_xml_id(
                     'product',
