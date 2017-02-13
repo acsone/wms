@@ -318,7 +318,7 @@ class LocationMapper(EntityMapper):
         """ Create hierarchy first """
         odoo_entities = []
 
-        locations = []
+        locations = {}
 
         for db2_entity in db2_entities:
             value = db2_entity['location_name'].strip()
@@ -348,26 +348,27 @@ class LocationMapper(EntityMapper):
             else: # skip V, W and other unknown
                 continue
 
-            # TODO assign the control code to an Odoo field
-            # TODO treat case when same location is registered multiple time
-            # some times with control code and other without
             control_code = value[6:8]
-            control_code = control_code
 
             bin_xmlid = self.get_xml_id(
                 self.name, 'loc_' + family + avenue + rack + lvl + bin)
 
             # remove duplicates
             if bin_xmlid in locations:
+                # try to find as many control code as possible
+                if control_code and not locations[bin_xmlid]['bin_checksum_1']:
+                    locations[bin_xmlid]['bin_checksum_1'] = control_code
                 continue
-            locations.append(bin_xmlid)
 
             odoo_entity = OrderedDict(id=None)
             odoo_entity['name'] = rack + lvl + bin
+            odoo_entity['bin_checksum_1'] = control_code
             odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'
             odoo_entities.append(odoo_entity)
+
+            locations[bin_xmlid] = odoo_entity
 
         return odoo_entities
 

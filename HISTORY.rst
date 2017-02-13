@@ -11,6 +11,7 @@ Unreleased
 * standardize all xmlid replacing remaining 'scenario' by
   __setup__ for data created once and __import__ for data generated
   by import script
+* ALCN-704: Add control code on locations
 
 **Features and Improvements**
 * Add the report delivery slip
