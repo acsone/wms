@@ -41,6 +41,7 @@ class ProductMapper(EntityMapper):
             'categ_id/id', 'gescsg',
             mapping=mappings.PRODUCT_CATEGORY
         ),
+        FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 

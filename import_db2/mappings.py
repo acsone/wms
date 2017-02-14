@@ -435,6 +435,11 @@ PRODUCT_PURCHASE_VAT = {
     3: "__setup__.account_tax_purchase_main_company_21%_Marchandises",
 }
 
+PRODUCT_ROUTES = {
+    0: "purchase.route_warehouse0_buy",
+    1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
+}
+
 def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
     """
