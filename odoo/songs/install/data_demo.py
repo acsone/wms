@@ -22,12 +22,18 @@ def import_suppliers(ctx):
 @anthem.log
 def import_clients(ctx):
     """ Importing clients from csv"""
-    content = resource_stream(req, 'data/demo/customer.csv')
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing customers"):
+        content = resource_stream(req, 'data/demo/customer.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing customer addresses"):
+        content = resource_stream(req, 'data/demo/customer_address.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log

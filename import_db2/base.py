@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016-2017 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-# -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
+import re
 import csv
 import os
 from collections import OrderedDict
+
+
+def convert_camel_case(name):
+    return re.sub('([a-z])([A-Z])', r'\1_\2', name).lower()
 
 
 class FieldMapper:
@@ -39,7 +40,8 @@ class EntityMapper:
         assert self.DB2_NAME
         assert self.XMLID_FIELD
 
-        self.name = self.__class__.__name__.lower().replace('mapper', '')
+        name = convert_camel_case(self.__class__.__name__)
+        self.name = name.replace('_mapper', '')
         self.importer = importer
 
         self.file_cache_path = os.path.join(

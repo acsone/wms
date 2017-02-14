@@ -255,6 +255,76 @@ class CustomerMapper(EntityMapper):
         odoo_entity['property_account_position_id/id'] = pos
 
 
+class AddressMapper(EntityMapper):
+    DB2_NAME = 'ADRLIV'
+    DB2_REF_NAME = 'adlnum'
+
+    XMLID_FIELD = 'ref'
+    FIELDS_MAPPING = [
+        FieldMapper('name', 'adlnom'),
+        FieldMapper('street', 'adladr'),
+        FieldMapper('zip', 'adlcpo'),
+        FieldMapper('city', 'adlloc'),
+        FieldMapper('phone', 'adltel'),
+        FieldMapper('fax', 'adlfax'),
+        FieldMapper('customer', constant=False),
+        FieldMapper('supplier', constant=False),
+        FieldMapper('country_id/id', 'adlcpa',
+                    mapping=mappings.COUNTRY),
+        FieldMapper('lang', 'adllan',
+                    mapping=mappings.LANG),
+        'phone_numbers',
+        'type', 'ref', 'parent_id',
+    ]
+
+    @staticmethod
+    def convert_phone_numbers(odoo_entity, db2_entity):
+        odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
+            db2_entity.get('adltel'), db2_entity.get('adltlx')
+        )
+
+    @staticmethod
+    def convert_ref(odoo_entity, db2_entity):
+        ttype = odoo_entity['type']
+        parent = db2_entity['adlnum'].lstrip('0')
+        odoo_entity['ref'] = "%s_%s" % (ttype, parent)
+
+    @staticmethod
+    def convert_type(odoo_entity, db2_entity):
+        db2_type = db2_entity.get('adltyp')
+        odoo_entity['type'] = 'delivery' if db2_type == 0 else 'invoice'
+
+    @staticmethod
+    def convert_parent_id(odoo_entity, db2_entity):
+        db2_partner_type = db2_entity.get('adlcod')
+        ref = db2_entity.get('adlnum').lstrip('0')
+
+        if db2_partner_type == 1:
+            partner_type = 'customer'
+        elif db2_partner_type == 2:
+            partner_type = 'supplier'
+        # TODO type 3 == customer order addresses
+        # todo with for the last 300 sale order only
+        parent_xmlid = '__import__.%s_%s' % (partner_type, ref)
+        odoo_entity['parent_id/id'] = parent_xmlid
+
+
+class CustomerAddressMapper(AddressMapper):
+
+    def get_sql_where(self):
+        # Filter remove order delivery and invoicing adresses
+        where = "adlcod = 1"
+        if not self.importer.full:
+            where += (
+                # Filter num with wrong format with spaces in it
+                # such as "1   2000"
+                " AND NOT adlnum LIKE '% %' "
+                "AND CAST(adlnum AS decimal)"
+                "  IN(SELECT clinum FROM gendata.CLIENT"
+                "     ORDER BY clinum fetch first 300 rows only)"
+            )
+        return where
+
 class SupplierMapper(EntityMapper):
     DB2_NAME = 'FOURN'
     DB2_REF_NAME = 'founum'
@@ -384,4 +454,6 @@ class LocationMapper(EntityMapper):
         return odoo_entities
 
 
-MAPPER_CLASSES = [LocationMapper, ProductMapper, CustomerMapper, SupplierMapper]
+MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  CustomerMapper, SupplierMapper,
+                  CustomerAddressMapper]
