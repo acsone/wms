@@ -83,7 +83,8 @@ class ProductMapper(EntityMapper):
             xml_id = self.get_xml_id(
                 'supplierinfo', '%s-%s' % (ref, db2_entity['gesart'].strip())
             )
-            supplier_xml_id = self.get_xml_id('supplier', str(ref), 'scenario')
+            supplier_xml_id = self.get_xml_id(
+                'supplier', str(ref), '__import__')
 
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
@@ -116,7 +117,7 @@ class ProductMapper(EntityMapper):
         price2 = db2_entity.get('gespv2')
         if price2 and price2 != price1:
             self._pricelist_item_product_price(
-                'scenario.product_pricelist_pb2',
+                '__setup__.product_pricelist_pb2',
                 odoo_entity['default_code'],
                 price2,
                 'pb2'
@@ -204,9 +205,9 @@ class CustomerMapper(EntityMapper):
         code_remise = db2_entity.get('clista')
         if code_remise:
             if code_remise < 50:
-                pricelist = 'scenario.product_pricelist_pb1'
+                pricelist = '__setup__.product_pricelist_pb1'
             else:
-                pricelist = 'scenario.product_pricelist_pb2'
+                pricelist = '__setup__.product_pricelist_pb2'
         else:
             pricelist = None
 
@@ -225,7 +226,7 @@ class CustomerMapper(EntityMapper):
 
         if db2_id:
             self.importer.add_foreign_ref('FOURN', db2_id)
-            xml_id = self.get_xml_id('supplier', db2_id, prefix='scenario')
+            xml_id = self.get_xml_id('supplier', db2_id, prefix='__import__')
         else:
             xml_id = None
 
@@ -253,7 +254,6 @@ class SupplierMapper(EntityMapper):
     DB2_REF_NAME = 'founum'
 
     XMLID_FIELD = 'ref'
-    XMLID_IMPORT_NAME = 'scenario'
 
     FIELDS_MAPPING = [
         FieldMapper('ref', 'founum'),
@@ -268,7 +268,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
         FieldMapper('alcyon_category_id/id',
-                    constant='scenario.partner_category_supplier'),
+                    constant='__setup__.partner_category_supplier'),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',

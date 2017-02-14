@@ -185,10 +185,10 @@
                 </table>
 
                 <table id="bank_table" class="round_table">
-                    <t t-set="bank_cbc" t-value="invoice.env.ref('scenario.account_journal_cbc_1')"/>
-                    <t t-set="bank_ing" t-value="invoice.env.ref('scenario.account_journal_ing_1')"/>
-                    <t t-set="bank_dexia" t-value="invoice.env.ref('scenario.account_journal_belfius_1')"/>
-                    <t t-set="bank_bnp" t-value="invoice.env.ref('scenario.account_journal_bnp_1')"/>
+                    <t t-set="bank_cbc" t-value="invoice.env.ref('__setup__.account_journal_cbc_1')"/>
+                    <t t-set="bank_ing" t-value="invoice.env.ref('__setup__.account_journal_ing_1')"/>
+                    <t t-set="bank_dexia" t-value="invoice.env.ref('__setup__.account_journal_belfius_1')"/>
+                    <t t-set="bank_bnp" t-value="invoice.env.ref('__setup__.account_journal_bnp_1')"/>
                     <tr>
                         <td colspan="2">
                             <t>Reference for your payment</t>
