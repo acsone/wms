@@ -14,6 +14,8 @@ Unreleased
 
 **Build**
 
+* Move to new test platform
+
 **Documentation**
 
 

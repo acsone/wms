@@ -1,20 +1,21 @@
 #!/bin/bash -e
 
 function deploy {
-    local environment=$1
+    local stack_name=$1
 
-    wget -O - http://releases.rancher.com/compose/beta/v0.7.2/rancher-compose-linux-amd64-v0.7.2.tar.gz |\
+    wget -O - https://releases.rancher.com/compose/v0.12.1/rancher-compose-linux-amd64-v0.12.1.tar.gz |\
         tar -x -z -C ${HOME} && mv ${HOME}/rancher-compose*/rancher-compose ${HOME}/ || exit $?
 
     RANCHER_COMPOSE="${HOME}/rancher-compose"
-    TEMPLATE_DIR="${TRAVIS_BUILD_DIR}/rancher/${environment}"
+    TEMPLATE_DIR="${TRAVIS_BUILD_DIR}/rancher/${stack_name}"
 
     source <(echo $rancher_env_password | gpg --passphrase-fd 0 --decrypt --no-tty $TEMPLATE_DIR/rancher.env.gpg)
+    source $TEMPLATE_DIR/rancher.public.env
 
     (cd "${TEMPLATE_DIR}" && \
-     ${RANCHER_COMPOSE} -p "${RANCHER_STACK_NAME}" rm odoo db --force && \
+     ${RANCHER_COMPOSE} -p "${stack_name}" rm odoo db --force && \
      sleep 30 && \
-     ${RANCHER_COMPOSE} -p "${RANCHER_STACK_NAME}" up --pull --recreate --force-recreate --confirm-upgrade -d)
+     ${RANCHER_COMPOSE} -p "${stack_name}" up --pull --recreate --force-recreate --confirm-upgrade -d)
 }
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -25,7 +26,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker tag alcyon_odoo camptocamp/alcyon_odoo:latest
     docker push "camptocamp/alcyon_odoo:latest"
     echo "Building test server"
-    deploy latest
+    deploy $RANCHER_STACK_NAME
   elif [ ! -z "$TRAVIS_TAG" ]; then
     echo "Deploying image to docker hub for tag ${TRAVIS_TAG}"
     docker tag alcyon_odoo camptocamp/alcyon_odoo:${TRAVIS_TAG}
