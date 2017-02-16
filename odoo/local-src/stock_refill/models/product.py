@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
+#    Copyright 2016-2017 BCIM sprl, Camptocamp
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -67,6 +67,21 @@ class ProductProduct(models.Model):
             ('location_dest_id', '=', customer_loc.id),
             ]).mapped('product_qty')) / duration
 
+    @api.multi
+    def _get_domain_locations(self):
+        """ Add possibility to filter by kind of location when
+        computing qty_available
+        """
+        loc_domain = super(ProductProduct, self)._get_domain_locations()
+        kind = self._context.get('loc_kind')
+        if kind:
+            loc_domain = (
+                ['&', ('location_id.kind', '=', kind)] + loc_domain[0],
+                ['&', ('location_id.kind', '=', kind)] + loc_domain[1],
+                ['&', ('location_id.kind', '=', kind)] + loc_domain[2],
+            )
+        return loc_domain
+
     qty_in_parking = fields.Float(
         'Qty in parking',
         digits=dp.get_precision('Product Unit of Measure'),
@@ -82,24 +97,17 @@ class ProductProduct(models.Model):
 
     @api.one
     def _get_qty_in_parking(self):
-        parking_ids = self.env['stock.location'].search(
-            [('kind', '=', 'parking')]).ids
-        self.qty_in_parking = parking_ids and self.with_context(
-            location=parking_ids).qty_available or 0
+        _self = self.with_context(loc_kind='parking')
+        self.qty_in_parking = _self.qty_available or 0
 
     @api.one
     def _get_qty_in_reserve(self):
-        reserve_ids = self.env['stock.location'].search(
-            [('kind', '=', 'reserve')]).ids
-        self.qty_in_reserve = reserve_ids and self.with_context(
-            location=reserve_ids).qty_available or 0
+        _self = self.with_context(loc_kind='reserve')
+        self.qty_in_reserve = _self.qty_available or 0
 
     @api.one
     def _get_qty_in_bin(self):
-        reserve_ids = self.env['stock.location'].search(
-            [('kind', '=', 'bin')]).ids
-        self.qty_in_bin = reserve_ids and self.with_context(
-            location=reserve_ids).qty_available or 0
+        self.qty_in_bin = self.with_context(loc_kind='bin').qty_available or 0
 
     move_ids = fields.One2many(
         'stock.move', 'product_id',
