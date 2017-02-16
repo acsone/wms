@@ -12,6 +12,10 @@ Unreleased
 
 **Bugfixes**
 
+* stock_refill: improve the way to compute available qty in bins
+  in order to optimize it and being able to do the computation on
+  thousands of locations
+
 **Build**
 
 * Move to new test platform
