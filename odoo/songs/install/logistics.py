@@ -7,6 +7,29 @@ from anthem.lyrics.records import create_or_update
 
 
 @anthem.log
+def company_settings(ctx):
+    company = ctx.env.ref('base.main_company')
+    company.write({
+        'delivery_terms_conditions':
+            "<p>Pour être livré le jour de livraison prévu, veuillez passer "
+            "vos commandes :<br/>"
+            "<b>Par Internet</b> <u>www.alcyonbelux.be</u> : "
+            "avant <b>9h15</b> le jour de livraison.<br/>"
+            "<b>Par fax ou répondeur</b>: avant <b>9h00</b> "
+            "le jour de livraison.<br/>"
+            "<b>Par téléphone</b> (sauf pour les médicaments): "
+            "avant <b>9h00</b> le jour de livraison</p>"
+            "<p>Seules seront prises en considération les demandes de "
+            "retours signalées dans les 48 heures de la réception "
+            "de la marchandise.<br/>"
+            "Elles devront être faites aurpès de notre "
+            "<b>service Qualité</b> au <b>04/338.84.22</b> "
+            "ou pas email <b>qualite@alcyonbelux.be</b> "
+            "ou par fax <b>04/338.84.35</b>.</p>"
+    })
+
+
+@anthem.log
 def activate_options(ctx):
     """ Activating logistics options """
     employee_group = ctx.env.ref('base.group_user')
@@ -563,6 +586,7 @@ def assign_route_categories(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring logistics """
+    company_settings(ctx)
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)

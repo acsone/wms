@@ -113,12 +113,8 @@
                     <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                 </tbody>
             </table>
-            <p>Pour être livré le jour de livraison prévu, veuillez passer vos commandes :<br/>
-            <strong>Par Internet</strong> <u>www.alcyonbelux.be</u> : avant <strong>9h15</strong> le jour de livraison.<br/>
-            <strong>Par fax ou répondeur</strong> : avant <strong>9h00</strong> le jour de livraison.<br/>
-            <strong>Par téléphone</strong> (sauf pour les médicaments): avant <strong>9h00</strong> le jour de livraison</p>
-            <p style="font-size: x-small;">Seules seront prises en considération les demandes de retours signalées dans les 48 heures de la réception de la marchandise.<br/>
-            Elles devront être faites aurpès de notre <strong>service Qaulité</strong> au <strong>04/338.84.22</strong> ou pas email <strong>qualite@alcyonbelux.be</strong> ou par fax <strong>04/338.84.35</strong></p>
+
+            <p id="delivery_condition" t-field="company.delivery_terms_conditions"/>
 
             <div class="row">
                 <div class="col-xs-2">
