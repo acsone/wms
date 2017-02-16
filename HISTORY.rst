@@ -8,6 +8,10 @@ Unreleased
 
 **Data Migration**
 
+* standardize all xmlid replacing remaining 'scenario' by
+  __setup__ for data created once and __import__ for data generated
+  by import script
+
 **Features and Improvements**
 * Add the report delivery slip
 * Improve the report invoice
