@@ -20,13 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Stock lot track',
+    'name': 'Stock Picking Assignment',
     'version': '9.0.1.0.0',
     'category': 'Stock Management',
     'author': 'Sylvain Van Hoof',
     'description':
     """
-    Stock lot track
+    Stock Picking Assignment
     """,
     'depends': [
         'stock',
