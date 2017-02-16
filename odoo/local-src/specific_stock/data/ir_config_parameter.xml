@@ -10,7 +10,7 @@
 
         <record id="same_lot_checksum_range" model="ir.config_parameter">
             <field name="key">same_lot_checksum_range</field>
-            <field name="value">same_lot_checksum_range</field>
+            <field name="value">2</field>
         </record>
     </data>
 </openerp>

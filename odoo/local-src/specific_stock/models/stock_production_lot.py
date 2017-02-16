@@ -50,10 +50,49 @@ class StockProductionLot(models.Model):
     @api.multi
     @api.depends('product_id')
     def compute_checksum(self):
+        """
+        This method will compute a checksum on each lot.
+        A checksum on a lot has some constrains:
+        - The size of the checksum should be 3 digits (can be changed)
+        - A checksum cannot be use twice in a specific range
+        (2 shelves on the left and 2 shelves on the right)
+
+        A lot may be split in several bin. It's why we need to check all BIN
+         to be sure that there no other lot with the same checksum.
+
+
+         Steps to compute a checksum:
+          1. Verify if the lot is linked to a location
+          2. Compute the range of shelves
+          3. Retrieve all checksum in this range (S-2/S+2)
+          4. Compute a random checksum not used
+
+        Example:
+        We have a new lot (0000123)
+        The lot will be split in two bin.
+        - bin_1: GB2D11 (zone: G, corridor: B, shelve: 2, height: D, box: 11)
+        - bin_2: GK6B06 (zone: G, corridor: K, shelve: 6, height: B, box: 06)
+
+        For bin_1 and bin_2:
+            (1) the location GB2D11 is correct
+            (2) the range for the location GB2D11 is GB1 to GB4
+            (3) there is 3 lots checksum in this range (023, 176, 939)
+            _____
+            (1') the location GK6B06 is correct
+            (2') the range for the location GK6B06 is GK4 to GK8
+            (3') there is 4 lots checksum in this range (032, 671, 002)
+
+        (4) compute the checksum 028 not include in
+        (023, 176, 939, 032, 671, 002)
+
+        If there is not checksum available
+        no checksum will be assigned to the lot
+        :return:
+        """
         lot_checksum_size = int(self.env['ir.config_parameter'].
                                 get_param('lot_checksum_size', 3))
         same_lot_checksum_range = int(self.env['ir.config_parameter'].
-                                      get_param('lot_checksum_size', 2))
+                                      get_param('same_lot_checksum_range', 2))
 
         number_of_element = int(math.pow(10, lot_checksum_size)) - 1
 
@@ -63,33 +102,36 @@ class StockProductionLot(models.Model):
                 continue
 
             checksum_not_available = set()
-            location_to_skip = set()
+            range_computed = {}
+            # We check all BINs
             for stock_bin in product.stock_bin_ids:
                 location = stock_bin.bin_location_id
 
+                # Step 1: Check the location
                 if not location.is_valid_location:
                     continue
 
-                # To improve this method we keep previous computed shelves
                 zone = location.zone
                 corridor = location.corridor
                 shelve = location.shelve
-                if (zone, corridor, shelve) in location_to_skip:
-                    continue
-                else:
-                    location_to_skip.add((zone, corridor, shelve))
 
-                shelves = []
-                shelve_code = ord(shelve)
-                min_shelve_code = shelve_code - same_lot_checksum_range
-                max_shelve_code = shelve_code + same_lot_checksum_range
-                for code in range(min_shelve_code, max_shelve_code):
-                    if code < ord('1') \
-                            or (ord('9') < code < ord('A')) \
-                            or code > ord('Z'):
-                        continue
-                    shelves.append(unichr(code))
+                # Step 2: Compute the range of shelves
+                range_code = '{}{}{}'.format(zone, corridor, shelve)
+                range_of_shelves = range_computed.get(range_code)
+                if not range_of_shelves:
+                    range_of_shelves = []
+                    shelve_code = ord(shelve)
+                    min_shelve_code = shelve_code - same_lot_checksum_range
+                    max_shelve_code = shelve_code + same_lot_checksum_range
+                    for code in range(min_shelve_code, (max_shelve_code+1)):
+                        if code < ord('1') \
+                                or (ord('9') < code < ord('A')) \
+                                or code > ord('Z'):
+                            continue
+                        range_of_shelves.append(unichr(code))
+                    range_computed[range_code] = range_of_shelves
 
+                # Step 3: Retrieve all lot checksum used in this shelve range
                 not_available_checksum_query = """
                 SELECT DISTINCT lot.checksum
                 FROM stock_production_lot AS lot
@@ -108,13 +150,15 @@ class StockProductionLot(models.Model):
                 self.env.cr.execute(not_available_checksum_query,
                                     (location.zone,
                                      location.corridor,
-                                     tuple(shelves)))
+                                     tuple(range_of_shelves)))
                 for result in self.env.cr.fetchall():
-                    checksum_not_available.add(result[0])
+                    if result[0]:
+                        checksum_not_available.add(result[0])
 
             if len(checksum_not_available) == number_of_element:
                 raise Warning('There is no checksum available')
 
+            # Step 4: Generate an available checksum
             checksum = None
             while not checksum:
                 new_checksum = format(random.randint(1, number_of_element),
@@ -128,6 +172,17 @@ class StockProductionLot(models.Model):
 
     @api.model
     def archive_lots(self):
+        """
+        A product can have a lot of lots. After a short period all checksum
+        can be used in a range. To avoid this problem we archive old lot.
+        Archive a lot has not effect (we not use the field active)
+        but if a lot is archived it'll not be used to compute other checksum.
+
+        We archive a lot if and only if:
+        - There are no more products in this lot
+        - There is a new lot (with a higher life date) for this product
+        :return:
+        """
         location_customers = self.env.ref('stock.stock_location_customers')
 
         query = """
