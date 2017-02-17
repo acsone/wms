@@ -15,7 +15,7 @@ Usage
 On product template form, you can configure additional products.
 
 While creating a new quotation (sale order),
-additional products are automaticly added to sale order using rules defined on product template.
+additional products are automatically added to sale order using rules defined on product template.
 
 
 Credits

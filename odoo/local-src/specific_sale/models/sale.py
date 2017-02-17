@@ -63,3 +63,17 @@ class SaleOrderLine(models.Model):
                         exception = rule.description
                         break
             line.exception = exception
+
+
+# Override the inherit of sale_product_additional
+# to complete sale.order.line.original with new specific fields
+class SaleOrderLineOriginal(models.Model):
+    _name = 'sale.order.line.original'
+    _inherit = 'sale.order.line'
+
+
+# Override the inherit of sale_product_additional
+# to complete sale.order.line.additional with new specific fields
+class SaleOrderLineAdditional(models.Model):
+    _name = 'sale.order.line.additional'
+    _inherit = 'sale.order.line'

@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Rewriting sale_product_additional module
+
 **Bugfixes**
 
 **Build**
