@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-741: Add check of rule exception on sale order line
+
 **Bugfixes**
 
 **Build**

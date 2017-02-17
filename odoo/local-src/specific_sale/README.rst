@@ -6,7 +6,9 @@
 Specific Sale
 =============
 
-This module adds Alcyon specific fields and logic for sale order.
+This module adds Alcyon specific fields and logic for sale order:
+
+* On sale order form view, add onchange to check rule exception without wait the order confirmation
 
 Credits
 =======
