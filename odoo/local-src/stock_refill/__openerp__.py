@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
+#    Copyright 2016-2017 BCIM sprl, Camptocamp
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@
 
 {
     'name': 'Stock Refill',
-    'version': '1.0',
+    'version': '1.0.1',
     'author': "BCIM",
     'maintainer': 'Camptocamp',
     'category': 'Stock Management',
