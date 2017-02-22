@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp import api, fields, models, _
+from openerp.exceptions import Warning
 
 
 class StockPicking(models.Model):
@@ -61,7 +62,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        if ('delivery_round_id' in vals and
+        if (self and 'delivery_round_id' in vals and
                 not self._context.get('noround_write')):
             # propagate to delivery when a picking is (un)assigned to a
             # delivery round
@@ -80,8 +81,12 @@ class StockPicking(models.Model):
                     'partially_available',
                     'assigned') and
                 r.delivery_round_id.id != vals['delivery_round_id'])
-            pickings.with_context(noround_write=True).write(
-                {'delivery_round_id': vals['delivery_round_id']})
+            # if not pickings:
+            #     raise Warning(_(
+            #         'No available picking to assign this delivery round'))
+            if pickings:
+                pickings.with_context(noround_write=True).write(
+                    {'delivery_round_id': vals['delivery_round_id']})
             del vals['delivery_round_id']
         if not vals:
             return True

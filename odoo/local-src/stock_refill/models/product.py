@@ -124,30 +124,31 @@ class ProductProduct(models.Model):
     @api.one
     @api.depends('stat_amount_deliveries', 'move_ids.state')
     def _get_refill_priority(self):
-        """ Compute how important it is to refill the bin """
-        # il faut calculer combien de temps on tient en tenant compte d'une
-        # consommation moyenne de 1,6 (=2)
-        """ How often the product is taken in a bin, how important it is to
+        """ Compute how important it is to refill the bin.
+        How often the product is taken in a bin, how important it is to
         arrange. This is divided by the quantity already arranged. """
         qty_moves = self.stat_amount_deliveries
+        days_to_cover = 2
 
         qty_in_stock = (self.qty_in_bin + self.qty_in_reserve)
         if ((qty_in_stock - self.outgoing_qty) < 0):
             # we will be out of stock
+            prio = 2000 + min(999, qty_moves)
+        elif (qty_in_stock - self.stat_qty_delivered * days_to_cover) < 0:
+            # probability to be out of stock. Amount of moves increase priority
             prio = 1000 + min(999, qty_moves)
         else:
-            # IMP-TODO: we could compute how many days we can survive according
-            # to the mean consumption
             prio = min(999, qty_moves / max(1, qty_in_stock))
         self.priority_arrangement = prio
 
         # min = mean consumption on the month
         qty_in_stock = self.qty_in_bin
-        prio = 0
-        if (qty_in_stock - self.stat_qty_delivered) <= 0:
-            # probability to be out of stock. Amount of moves increase priority
-            prio = min(999, qty_moves * 10)
         if ((qty_in_stock - self.outgoing_qty) < 0):
             # we will be out of stock
-            prio += 2000
+            prio = 2000 + min(999, qty_moves)
+        elif (qty_in_stock - self.stat_qty_delivered * days_to_cover) < 0:
+            # probability to be out of stock. Amount of moves increase priority
+            prio = 1000 + min(999, qty_moves)
+        else:
+            prio = 0
         self.priority_reassort = prio

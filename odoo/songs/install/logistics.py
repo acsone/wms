@@ -30,11 +30,17 @@ def create_locations(ctx):
     loc_stock = ctx.env.ref('stock.stock_location_stock')
     root = ctx.env.ref('stock.stock_location_locations')
 
+    # Input
+    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
+        'usage': 'view',
+        'active': True,
+    })
+
     # Reserves = Products available => under WH, above Stock
     reserves = [
-        ('__setup__.stock_location_reserve_ali', u'Réserve Aliments',
+        ('__setup__.stock_location_reserve_ali', 'Réserve Aliments',
          loc_stock.location_id.id),
-        ('__setup__.stock_location_reserve_medoc', u'Réserve Médicaments',
+        ('__setup__.stock_location_reserve_medoc', 'Réserve Médicaments',
          loc_stock.location_id.id),
     ]
     for xmlid, name, location_id in reserves:
@@ -47,16 +53,16 @@ def create_locations(ctx):
 
     # Bins = Products available to pick => under Stock
     locations = [
-        ('__setup__.stock_location_materiel', u'Matériel',
+        ('__setup__.stock_location_materiel', 'Matériel',
          False,
          loc_stock.id),
-        ('__setup__.stock_location_ali', u'Aliments',
+        ('__setup__.stock_location_ali', 'Aliments',
          ctx.env.ref('__setup__.stock_location_reserve_ali').id,
          loc_stock.id),
-        ('__setup__.stock_location_medoc', u'Médicaments',
+        ('__setup__.stock_location_medoc', 'Médicaments',
          ctx.env.ref('__setup__.stock_location_reserve_medoc').id,
          loc_stock.id),
-        ('__setup__.stock_location_froid', u'Froid',
+        ('__setup__.stock_location_froid', 'Froid',
          False,
          loc_stock.id),
     ]
@@ -68,7 +74,7 @@ def create_locations(ctx):
             'usage': 'view',
         })
     locations = [
-        ('__setup__.stock_location_frigo', u'Frigo',
+        ('__setup__.stock_location_frigo', 'Frigo',
          False,
          ctx.env.ref('__setup__.stock_location_froid').id),
     ]
@@ -82,7 +88,9 @@ def create_locations(ctx):
 
     # Parking is under Input (part of stock)
     parkings = [
-        ('__setup__.stock_location_parking_medoc', u'Parking Medicaments'),
+        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments'),
+        ('__setup__.stock_location_parking_materiel', 'Parking Matériel'),
+        ('__setup__.stock_location_parking_frigo', 'Parking Frigo'),
     ]
     for xmlid, name in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -90,6 +98,28 @@ def create_locations(ctx):
             'location_id': ctx.env.ref('stock.stock_location_company').id,
             'usage': 'view',
             'kind': 'parking',
+        })
+
+    # Achetés-Vendus is under Input (part of stock)
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_onorder',
+        {
+            'name': 'Achetés-Vendus',
+            'location_id': ctx.env.ref('stock.stock_location_company').id,
+            'usage': 'view',
+        })
+    onorders = [
+        ('__setup__.stock_location_order_ali', 'Achetés-Vendus Aliments'),
+        ('__setup__.stock_location_order_medoc',
+         'Achetés-Vendus Médicaments'),
+        ('__setup__.stock_location_order_frigo', 'Achetés-Vendus Frigo'),
+        ('__setup__.stock_location_order_mat', 'Achetés-Vendus Matériel'),
+    ]
+    for xmlid, name in onorders:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__setup__.stock_location_onorder').id,
+            'usage': 'internal',
         })
 
     # Returns = Products unavailable => not under WH but under physical loc.
@@ -101,10 +131,10 @@ def create_locations(ctx):
             'usage': 'view',
         })
     returns = [
-        ('__setup__.stock_location_return_ali', u'Retours Aliments'),
-        ('__setup__.stock_location_return_medoc', u'Retours Médicaments'),
-        ('__setup__.stock_location_return_frigo', u'Retours Frigo'),
-        ('__setup__.stock_location_return_mat', u'Retours Matériel'),
+        ('__setup__.stock_location_return_ali', 'Retours Aliments'),
+        ('__setup__.stock_location_return_medoc', 'Retours Médicaments'),
+        ('__setup__.stock_location_return_frigo', 'Retours Frigo'),
+        ('__setup__.stock_location_return_mat', 'Retours Matériel'),
         ]
     for xmlid, name in returns:
         create_or_update(ctx, 'stock.location', xmlid, {
@@ -129,13 +159,108 @@ def create_locations(ctx):
             'usage': 'view',
         })
     destroy = [
-        ('__setup__.stock_location_destroy_all', u'A détruire'),
+        ('__setup__.stock_location_destroy_all', 'A détruire'),
         ]
     for xmlid, name in destroy:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('__setup__.stock_location_destroy').id,
             'usage': 'internal',
+        })
+
+    # Pharma
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_pharma',
+        {
+            'name': 'Pharma',
+            'location_id': loc_partner.id,
+            'usage': 'customer',
+        })
+
+
+@anthem.log
+def create_putaway(ctx):
+    """ Create putaway and putaway strat
+    """
+    ref = ctx.env.ref
+
+    loc_stock_id = ref('stock.stock_location_stock').id
+
+    # Input - Manage Parking and Achetés-vendus
+    create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_input', {
+        'name': 'Input',
+        'method': 'fixed',
+        'fixed_location_id': loc_stock_id,
+    })
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_onorder',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('stock.route_warehouse0_mto').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_onorder').id,
+        }
+    )
+
+    parking_strat = [
+        ('__setup__.stock_putaway_strat_parking_medoc',
+         '__setup__.product_categ_medoc',
+         '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_materiel',
+         '__setup__.product_categ_materiel',
+         '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_materiel',
+         '__setup__.product_categ_frigo',
+         '__setup__.stock_location_parking_frigo'),
+        ]
+    for xmlid, categ, loc in parking_strat:
+        create_or_update(
+            ctx, 'stock.fixed.putaway.strat', xmlid,
+            {
+                'putaway_id': ref('__setup__.stock_putaway_input').id,
+                'category_id': ref(categ).id,
+                'fixed_location_id': ref(loc).id,
+            }
+        )
+    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
+        'location_id': loc_stock_id,
+        'putaway_strategy_id': ref('__setup__.stock_putaway_input').id
+    })
+
+    # Input - Manage Achetés-vendus destination by category
+    create_or_update(
+        ctx, 'product.putaway', '__setup__.stock_putaway_onorder', {
+            'name': 'Achetés-Vendus',
+            'method': 'fixed',
+        })
+    onorders = [
+        ('__setup__.stock_putaway_strat_onorder_ali',
+         '__setup__.product_categ_ali',
+         '__setup__.stock_location_order_ali'),
+        ('__setup__.stock_putaway_strat_onorder_medoc',
+         '__setup__.product_categ_medoc',
+         '__setup__.stock_location_order_medoc'),
+        ('__setup__.stock_putaway_strat_onorder_frigo',
+         '__setup__.product_categ_frigo',
+         '__setup__.stock_location_order_frigo'),
+        ('__setup__.stock_putaway_strat_onorder_mat',
+         '__setup__.product_categ_materiel',
+         '__setup__.stock_location_order_mat'),
+    ]
+    for xmlid, categ, loc in onorders:
+        create_or_update(
+            ctx, 'stock.fixed.putaway.strat', xmlid,
+            {
+                'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+                'category_id': ref(categ).id,
+                'fixed_location_id': ref(loc).id,
+            }
+        )
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_onorder',
+        {
+            'putaway_strategy_id': ref('__setup__.stock_putaway_onorder').id
         })
 
 
@@ -163,14 +288,20 @@ def create_picking_types(ctx):
     location_ali = ctx.env.ref('__setup__.stock_location_ali')
     location_medoc = ctx.env.ref('__setup__.stock_location_medoc')
     location_froid = ctx.env.ref('__setup__.stock_location_froid')
+    location_frigo = ctx.env.ref('__setup__.stock_location_frigo')
     location_parking_medoc = ctx.env.ref(
         '__setup__.stock_location_parking_medoc')
+    location_parking_materiel = ctx.env.ref(
+        '__setup__.stock_location_parking_materiel')
+    location_parking_frigo = ctx.env.ref(
+        '__setup__.stock_location_parking_frigo')
     location_reserve_medoc = ctx.env.ref(
         '__setup__.stock_location_reserve_medoc')
     location_reserve_ali = ctx.env.ref('__setup__.stock_location_reserve_ali')
     location_retours = ctx.env.ref('__setup__.stock_location_return')
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
     location_casse = ctx.env.ref('__setup__.stock_location_destroy')
+    location_pharma = ctx.env.ref('__setup__.stock_location_pharma')
     location_detruit = ctx.env.ref('__setup__.stock_location_destroyed')
 
     color_ali = 2
@@ -228,7 +359,20 @@ def create_picking_types(ctx):
          'color': color_froid,
          'sequence': 7,
          },
-        {'xmlid': '__setup__.stock_picking_type_rangement',
+        {'xmlid': '__setup__.stock_picking_type_humain',
+         'name': 'Pick Humain',
+         'code': 'internal',
+         'sequence_id': picking_sequence.id,
+         'default_location_src_id': location_pharma.id,
+         'default_location_dest_id': location_out.id,
+         'use_create_lots': False,
+         'subcode': 'PICK',
+         'groupbypartner': True,
+         'color': color_mat,
+         'sequence': 7,
+         },
+
+        {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
          'name': 'Rangement Medicaments',
          'code': 'internal',
          'sequence_id': internal_sequence.id,
@@ -238,6 +382,27 @@ def create_picking_types(ctx):
          'color': color_medoc,
          'sequence': 9,
          },
+        {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
+         'name': 'Rangement Matériel',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_materiel.id,
+         'default_location_dest_id': location_mat.id,
+         'use_create_lots': False,
+         'color': color_mat,
+         'sequence': 9,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
+         'name': 'Rangement Frigo',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_frigo.id,
+         'default_location_dest_id': location_frigo.id,
+         'use_create_lots': False,
+         'color': color_froid,
+         'sequence': 9,
+         },
+
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
          'name': 'Reassort Medicaments',
          'code': 'internal',
@@ -282,6 +447,11 @@ def create_picking_types(ctx):
     for record in types:
         xmlid = record.pop('xmlid')
         create_or_update(ctx, 'stock.picking.type', xmlid, record)
+
+    create_or_update(ctx, 'stock.picking.type', 'stock.picking_type_in', {
+        'default_location_dest_id': ctx.env.ref(
+            'stock.stock_location_company').id
+    })
 
 
 @anthem.log
@@ -396,6 +566,7 @@ def main(ctx):
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)
+    create_putaway(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
     create_routes(ctx)

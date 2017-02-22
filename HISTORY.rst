@@ -11,6 +11,10 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-741: Add check of rule exception on sale order line
+* Logistics: restored routing and added routing for MTO
+* Logistics: parking for frigo, materiel + related putaway strat + rangement + demo data
+* Logistics: picking of human products
+* Logistics: rangement/reassort priorities
 
 **Bugfixes**
 
