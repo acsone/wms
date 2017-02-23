@@ -10,7 +10,7 @@ class StockLocation(models.Model):
 
     zone = fields.Char('Zone')
     corridor = fields.Char('Corridor')
-    shelve = fields.Char('Shelve')
+    shelf = fields.Char('Shelf')
     height = fields.Char('Height')
     box = fields.Char('Box')
     is_valid_location = fields.Boolean('Valid location',
@@ -21,7 +21,7 @@ class StockLocation(models.Model):
         for location in self:
             if not location.zone \
                     or not location.corridor \
-                    or not location.shelve \
+                    or not location.shelf \
                     or not location.height \
                     or not location.box:
                 location.is_valid_location = False

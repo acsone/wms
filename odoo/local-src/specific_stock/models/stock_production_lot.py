@@ -70,8 +70,8 @@ class StockProductionLot(models.Model):
         Example:
         We have a new lot (0000123)
         The lot will be split in two bin.
-        - bin_1: GB2D11 (zone: G, corridor: B, shelve: 2, height: D, box: 11)
-        - bin_2: GK6B06 (zone: G, corridor: K, shelve: 6, height: B, box: 06)
+        - bin_1: GB2D11 (zone: G, corridor: B, shelf: 2, height: D, box: 11)
+        - bin_2: GK6B06 (zone: G, corridor: K, shelf: 6, height: B, box: 06)
 
         For bin_1 and bin_2:
             (1) the location GB2D11 is correct
@@ -102,7 +102,7 @@ class StockProductionLot(models.Model):
                 continue
 
             checksum_not_available = set()
-            range_computed = {}
+            location_to_skip = set()
             # We check all BINs
             for stock_bin in product.stock_bin_ids:
                 location = stock_bin.bin_location_id
@@ -113,37 +113,44 @@ class StockProductionLot(models.Model):
 
                 zone = location.zone
                 corridor = location.corridor
-                shelve = location.shelve
+                shelf = location.shelf
 
                 # Step 2: Compute the range of shelves
-                range_code = '{}{}{}'.format(zone, corridor, shelve)
-                range_of_shelves = range_computed.get(range_code)
-                if not range_of_shelves:
-                    range_of_shelves = []
-                    shelve_code = ord(shelve)
-                    min_shelve_code = shelve_code - same_lot_checksum_range
-                    max_shelve_code = shelve_code + same_lot_checksum_range
-                    for code in range(min_shelve_code, (max_shelve_code+1)):
-                        if code < ord('1') \
-                                or (ord('9') < code < ord('A')) \
-                                or code > ord('Z'):
-                            continue
-                        range_of_shelves.append(unichr(code))
-                    range_computed[range_code] = range_of_shelves
+                # We can ignore this step if we are already
+                # compute this location
+                if (zone, corridor, shelf) in location_to_skip:
+                    continue
 
-                # Step 3: Retrieve all lot checksum used in this shelve range
+                location_to_skip.add((zone, corridor, shelf))
+
+                range_of_shelves = []
+                shelf_code = ord(shelf)
+                min_shelf_code = shelf_code - same_lot_checksum_range
+                max_shelf_code = shelf_code + same_lot_checksum_range
+                for code in range(min_shelf_code, (max_shelf_code+1)):
+                    if code < ord('1') \
+                            or (ord('9') < code < ord('A')) \
+                            or code > ord('Z'):
+                        continue
+                    range_of_shelves.append(unichr(code))
+
+                # Step 3: Retrieve all lot checksum used in this shelf range
                 not_available_checksum_query = """
                 SELECT DISTINCT lot.checksum
                 FROM stock_production_lot AS lot
                 WHERE lot.product_id IN (
-                  SELECT stock_bin.product_id
-                  FROM product_stock_bin AS stock_bin
-                  WHERE stock_bin.location_id IN (
-                    SELECT location.id
-                    FROM stock_location AS location
-                    WHERE location.zone = %s
-                    AND location.corridor = %s
-                    AND location.shelve IN %s)
+                  SELECT product_product.id
+                  FROM product_product
+                  WHERE product_product.product_tmpl_id IN (
+                    SELECT stock_bin.product_id
+                    FROM product_stock_bin AS stock_bin
+                    WHERE stock_bin.bin_location_id IN (
+                      SELECT location.id
+                      FROM stock_location AS location
+                      WHERE location.zone = %s
+                      AND location.corridor = %s
+                      AND location.shelf IN %s)
+                    )
                   )
                 AND (lot.is_archived = FALSE OR lot.is_archived IS NULL);
                 """
