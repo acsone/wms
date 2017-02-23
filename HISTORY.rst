@@ -26,6 +26,8 @@ Unreleased
 
 * Move to new test platform
 * Upgrade attachment_s3
+* Remove letsencrypt test container
+* Create a minion at the end of the build
 
 **Documentation**
 
