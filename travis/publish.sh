@@ -31,13 +31,13 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
     deploy ${docker_tag}
 
-  elif [ ! -z "$TRAVIS_BRANCH" ]; then
-    deploy ${docker_tag}
-
   elif [ ! -z "$TRAVIS_TAG" ]; then
     echo "Pushing image to docker hub ${DOCKER_HUB_REPO}:${TRAVIS_TAG}"
     docker tag ${GENERATED_IMAGE} ${DOCKER_HUB_REPO}:${TRAVIS_TAG}
     docker push "${DOCKER_HUB_REPO}:${TRAVIS_TAG}"
+
+  elif [ ! -z "$TRAVIS_BRANCH" ]; then
+    deploy ${docker_tag}
 
   else
     echo "Not deploying image"
