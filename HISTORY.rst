@@ -10,6 +10,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.10.0 (2017-02-23)
++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-741: Add check of rule exception on sale order line
 * Logistics: restored routing and added routing for MTO
 * Logistics: parking for frigo, materiel + related putaway strat + rangement + demo data
@@ -28,8 +40,6 @@ Unreleased
 * Upgrade attachment_s3
 * Remove letsencrypt test container
 * Create a minion at the end of the build
-
-**Documentation**
 
 
 9.9.0 (2017-02-09)
