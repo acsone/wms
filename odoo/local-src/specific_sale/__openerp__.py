@@ -17,6 +17,8 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         'data/sale_exception.xml',
+        'views/product_template.xml',
+        'views/res_partner.xml',
         'views/sale.xml',
     ],
     'installable': True,

@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+# © 2017 Julien Coux (Camptocamp)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from openerp import models, api
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    @api.multi
+    def action_view_sales_available(self):
+        self.ensure_one()
+        action = self.env.ref(
+            'specific_sale.action_product_sale_available_list'
+        )
+        product_ids = self.product_variant_ids.ids
+
+        return {
+            'name': action.name,
+            'help': action.help,
+            'type': action.type,
+            'view_type': action.view_type,
+            'view_mode': action.view_mode,
+            'target': action.target,
+            'context': "{'default_product_id': " + str(product_ids[0]) + "}",
+            'res_model': action.res_model,
+            'domain': [
+                ('state', 'in', ['sale', 'done']),
+                ('product_id.product_tmpl_id', '=', self.id)
+            ],
+        }
