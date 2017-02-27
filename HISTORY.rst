@@ -11,6 +11,7 @@ Unreleased
 **Features and Improvements**
 
 * Rewriting sale_product_additional module
+* ALCN-741: Add check of rule exception on sale order line
 
 **Bugfixes**
 

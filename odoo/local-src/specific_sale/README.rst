@@ -17,3 +17,4 @@ Contributors
 ------------
 
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>
+* Julien Coux <julien.coux@camptocamp.com>

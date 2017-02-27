@@ -34,18 +34,12 @@ class Sale(models.Model):
         elif not self.sale_channel_visible:
             self.sale_channel = False
 
-    @api.onchange('partner_id')
-    def _onchange_compute_exception(self):
-        for line in self.order_line:
-            line._compute_exception()
-
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     exception = fields.Char(
         compute='_compute_exception',
-        readonly=False,
     )
 
     @api.depends('product_id', 'price_unit', 'price_subtotal')
