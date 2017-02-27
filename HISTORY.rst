@@ -15,6 +15,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix sale order line amount computation on pricelist_discount module
+
 **Build**
 
 **Documentation**
