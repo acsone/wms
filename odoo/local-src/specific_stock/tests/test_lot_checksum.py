@@ -62,7 +62,7 @@ class TestLotChecksum(TransactionCase):
         self.product_2.stock_bin_ids.create({
             'location_id': self.location_pe11.id,
             'bin_location_id': self.location_pe11.id,
-            'product_id': self.product_2.id,
+            'product_id': self.product_2.product_tmpl_id.id,
         })
 
     @post_install(True)
