@@ -12,7 +12,9 @@
         'stock',
         'specific_base',
         'report',
-        'specific_account'
+        'specific_account',
+        'account',
+        'sale',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
