@@ -73,13 +73,13 @@ migration:
           - server_environment
           ### local-src
           #- claim_from_reception
-          #- delivery_rounds
-          #- delivery_rounds_assign
-          #- pricelist_discount
-          #- procurement_sale
-          #- product_price_category
-          #- refund_invoice
-          #- sale_product_additional
+          - delivery_rounds
+          - delivery_rounds_assign
+          - pricelist_discount
+          - procurement_sale
+          - product_price_category
+          - refund_invoice
+          - sale_product_additional
           #- specific_base
           #- specific_account
           #- specific_sale
