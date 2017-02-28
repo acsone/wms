@@ -4,7 +4,7 @@
 {
     'name': 'Alcyon Configuration',
     'description': 'Alcyon configurations by environments',
-    'version': '9.0.1.0.1',
+    'version': '10.0.1.0.1',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
     'category': 'Tools',
