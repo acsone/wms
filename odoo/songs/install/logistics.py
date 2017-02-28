@@ -563,11 +563,13 @@ def assign_route_categories(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring logistics """
-    activate_options(ctx)
+    #FIXME stock.group_locations not found
+    #activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)
     create_putaway(ctx)
-    create_picking_types(ctx)
-    create_procurement_rules(ctx)
-    create_routes(ctx)
-    assign_route_categories(ctx)
+    #FIXME sequence_id violates not-null constraint
+    #create_picking_types(ctx)
+    #create_procurement_rules(ctx)
+    #create_routes(ctx)
+    #assign_route_categories(ctx)
