@@ -108,8 +108,7 @@ def main(ctx):
     import_clients(ctx)
     #FIXME depends on l10n_be_*_tax oca modules
     # import_products(ctx)
-    #FIXME depends on stock_refill module
-    # import_locations(ctx)
+    import_locations(ctx)
     #FIXME depends on import_products
     # import_product_supplierinfo(ctx)
     # import_pricelist_items(ctx)

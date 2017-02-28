@@ -555,8 +555,7 @@ def main(ctx):
     """ Configuring logistics """
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
-    #FIXME depends on stock_refill module
-    #create_locations(ctx)
+    create_locations(ctx)
     create_putaway(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
