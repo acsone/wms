@@ -267,20 +267,10 @@ def create_putaway(ctx):
 @anthem.log
 def create_picking_types(ctx):
     """ Creating picking types """
-    picking_sequence = ctx.env['ir.sequence'].search(
-        [('name', '=', 'Alcyon Belux SA Sequence picking')],
-        limit=1,
-    )
-
-    delivery_sequence = ctx.env['ir.sequence'].search(
-        [('name', '=', 'Alcyon Belux SA Sequence out')],
-        limit=1,
-    )
-
-    internal_sequence = ctx.env['ir.sequence'].search(
-        [('name', '=', 'Alcyon Belux SA Sequence internal')],
-        limit=1,
-    )
+    wh = ctx.env.ref('stock.warehouse0')
+    picking_sequence = wh.pick_type_id.sequence_id
+    delivery_sequence = wh.out_type_id.sequence_id
+    internal_sequence = wh.int_type_id.sequence_id
 
     location_stock = ctx.env.ref('stock.stock_location_stock')
     location_out = ctx.env.ref('stock.stock_location_output')
@@ -568,8 +558,7 @@ def main(ctx):
     #FIXME depends on stock_refill module
     #create_locations(ctx)
     create_putaway(ctx)
-    #FIXME sequence_id violates not-null constraint
-    #create_picking_types(ctx)
-    #create_procurement_rules(ctx)
-    #create_routes(ctx)
-    #assign_route_categories(ctx)
+    create_picking_types(ctx)
+    create_procurement_rules(ctx)
+    create_routes(ctx)
+    assign_route_categories(ctx)
