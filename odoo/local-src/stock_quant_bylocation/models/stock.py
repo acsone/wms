@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-from odoo import fields, models, tools
+from odoo import fields, models
+from odoo.tools.sql import drop_view_if_exists
 
 
 class ReportStockQuantBylocation(models.Model):
@@ -44,8 +45,8 @@ class ReportStockQuantBylocation(models.Model):
             "orderby": "",
             }
 
-    def init(self, cr):
-        tools.drop_view_if_exists(cr, self._table)
+    def init(self):
+        drop_view_if_exists(self.env.cr, self._table)
         params = self._prepare_init()
         query = """
         SELECT %(select)s
@@ -58,8 +59,8 @@ class ReportStockQuantBylocation(models.Model):
         """
         if params.get('orderby'):
             query += "ORDER BY %(orderby)s"
-        cr.execute("CREATE OR REPLACE VIEW " + self._table +
-                   " AS (" + query % params + ")")
+        self.env.cr.execute("CREATE OR REPLACE VIEW " + self._table +
+                            " AS (" + query % params + ")")
 
     product_id = fields.Many2one(
         'product.product', 'Product',
