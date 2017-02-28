@@ -2,13 +2,15 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Specific Product
-================
+=================
+Stock Receive Lot
+=================
 
-This module adds Alcyon specific fields and logic for products:
+Add a new reception wizard to more easily encode destination, lot and life date.
 
-* On product tree view, replace volume and weight columns by sale price 1 (list price) and sale price 2 (from price list)
+Also improve the standard lot reception wizard to allow to set life date.
+
+Check if the removal date is not expired when we receive a lot.
 
 Credits
 =======
@@ -16,5 +18,5 @@ Credits
 Contributors
 ------------
 
+* Jacques-Etienne Baudoux <je@bcim.be> (BCIM)
 * Julien Coux <julien.coux@camptocamp.com>
-* Cyril Gaudin <cyril.gaudin@camptocamp.com>
