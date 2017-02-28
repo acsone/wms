@@ -1,14 +1,11 @@
 <odoo>
     <record id="view_company_form" model="ir.ui.view">
-        <field name="inherit_id" ref="account.view_company_inherit_form"/>
+        <field name="inherit_id" ref="base.view_company_form"/>
         <field name="model">res.company</field>
         <field name="arch" type="xml">
             <field name="email" position="after">
                 <field name="order_phone"/>
                 <field name="order_fax"/>
-            </field>
-            <field name='tax_calculation_rounding_method' position="after">
-                <field name="invoice_terms_conditions"/>
             </field>
         </field>
     </record>

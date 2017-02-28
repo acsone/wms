@@ -80,10 +80,10 @@ migration:
           - product_price_category
           - refund_invoice
           - sale_product_additional
-          #- specific_base
-          #- specific_account
-          #- specific_sale
-          #- specific_partner
+          - specific_base
+          - specific_account
+          - specific_sale
+          - specific_partner
           #- specific_product
           #- specific_stock
           #- specific_translations

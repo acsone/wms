@@ -20,6 +20,7 @@
         'data/paperformat.xml',
         'views/report_invoice.xml',
         'views/account_invoice_view.xml',
+        'views/res_config.xml',
         'views/ir_sequence.xml',
         'views/menu.xml',
     ],
