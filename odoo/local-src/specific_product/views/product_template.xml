@@ -30,16 +30,11 @@
         <field name="inherit_id" ref="product.product_template_tree_view"/>
         <field name="arch" type="xml">
 
-            <field name="volume" position="attributes">
-                <attribute name="invisible">True</attribute>
+            <field name="list_price" position="attributes">
+                <attribute name="string">Sale Price 1</attribute>
+                <attribute name="widget">monetary</attribute>
             </field>
-
-            <field name="weight" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-
-            <field name="weight" position="after">
-                <field name="list_price" string="Sale Price 1" widget="monetary"/>
+            <field name="list_price" position="after">
                 <field name="sale_price_2" widget="monetary"/>
                 <field name="currency_id" invisible="True"/>
             </field>
