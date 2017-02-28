@@ -59,18 +59,18 @@ migration:
           ## oca/account-financial-tools
           #- account_chart_update
           ## oca/account-invoicing
-          #- account_invoice_check_total
+          - account_invoice_check_total
           ## oca/bank-payment
-          #- account_banking_sepa_direct_debit
+          - account_banking_sepa_direct_debit
           ## oca/l10n-belgium
           #- l10n_be_antibiotic_tax
           #- l10n_be_apb_tax
           #- l10n_be_eco_tax
           ## oca/sale-workflow
-          #- sale_exception
+          - sale_exception
           ## oca/server-tools
-          #- mail_environment
-          #- server_environment
+          - mail_environment
+          - server_environment
           ### local-src
           #- claim_from_reception
           #- delivery_rounds
