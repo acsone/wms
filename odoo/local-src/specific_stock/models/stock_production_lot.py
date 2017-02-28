@@ -54,6 +54,7 @@ class StockProductionLot(models.Model):
         This method will compute a checksum on each lot.
         A checksum on a lot has some constrains:
         - The size of the checksum should be 3 digits (can be changed)
+        - The checksum cannot be equal to 000
         - A checksum cannot be use twice in a specific range
         (2 shelves on the left and 2 shelves on the right)
 

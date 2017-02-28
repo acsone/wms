@@ -33,7 +33,7 @@ msgstr "Code détrompeur"
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
-msgstr "Couloire"
+msgstr "Couloir"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_lot_life_date

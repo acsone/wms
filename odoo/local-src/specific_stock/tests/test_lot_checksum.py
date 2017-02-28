@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016 Julien Coux (Camptocamp)
+# © 2017 Sylvain Van Hoof
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openerp import fields
 from openerp.tests.common import TransactionCase, post_install, at_install
@@ -22,48 +22,47 @@ class TestLotChecksum(TransactionCase):
             'box': '1',
         })
 
-        self.location_pa12 = stock_location_obj.create({
-            'name': 'Product PA12',
+        self.location_pb11 = stock_location_obj.create({
+            'name': 'Product PB11',
             'kind': 'parking',
             'zone': 'A',
             'corridor': 'P',
-            'shelf': 'A',
+            'shelf': 'B',
             'height': '1',
-            'box': '2',
+            'box': '1',
         })
 
-        self.location_pa13 = stock_location_obj.create({
-            'name': 'Product PA13',
+        self.location_pe11 = stock_location_obj.create({
+            'name': 'Product PE35',
             'kind': 'parking',
             'zone': 'A',
             'corridor': 'P',
-            'shelf': 'A',
-            'height': '1',
-            'box': '3',
-        })
-
-        self.location_pa14 = stock_location_obj.create({
-            'name': 'Product PA14',
-            'kind': 'parking',
-            'zone': 'A',
-            'corridor': 'P',
-            'shelf': 'A',
-            'height': '1',
-            'box': '4',
+            'shelf': 'E',
+            'height': '3',
+            'box': '5',
         })
 
         self.product = self.env['product.product'].create({
             'name': 'Test'
         })
         self.product.stock_bin_ids.create({
-            'location_id': self.location_pa12.id,
-            'bin_location_id': self.location_pa12.id,
+            'location_id': self.location_pa11.id,
+            'bin_location_id': self.location_pa11.id,
             'product_id': self.product.product_tmpl_id.id,
         })
         self.product.stock_bin_ids.create({
-            'location_id': self.location_pa14.id,
-            'bin_location_id': self.location_pa14.id,
+            'location_id': self.location_pb11.id,
+            'bin_location_id': self.location_pb11.id,
             'product_id': self.product.product_tmpl_id.id,
+        })
+
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Test 2'
+        })
+        self.product_2.stock_bin_ids.create({
+            'location_id': self.location_pe11.id,
+            'bin_location_id': self.location_pe11.id,
+            'product_id': self.product_2.id,
         })
 
     @post_install(True)
@@ -105,5 +104,15 @@ class TestLotChecksum(TransactionCase):
             'life_date': fields.Datetime.now(),
         }
 
+        # All checksum are assigned for this range (APA=>APD)
         with self.assertRaises(Warning):
             self.env['stock.production.lot'].create(lot_values)
+
+        # We will generate a new checksum with a product in the shelf APE
+        # This method shouldn't raise an error.
+        lot = self.env['stock.production.lot'].create({
+            'name': 'test_product_2',
+            'product_id': self.product_2.id,
+            'life_date': fields.Datetime.now(),
+        })
+        self.assertIsNotNone(lot.checksum, 'The checksum should not be empty')
