@@ -14,6 +14,7 @@
         'stock_expired',
     ],
     'data': [
+        'views/stock_pack_operation.xml',
         'wizards/stock.xml',
     ],
     'installable': True,
