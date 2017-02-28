@@ -12,7 +12,7 @@ def activate_options(ctx):
     employee_group = ctx.env.ref('base.group_user')
     employee_group.write({
         'implied_ids': [(4, ctx.env.ref('stock.group_production_lot').id),
-                        (4, ctx.env.ref('stock.group_locations').id),
+                        (4, ctx.env.ref('stock.group_stock_multi_locations').id),
                         (4, ctx.env.ref('stock.group_adv_location').id)]
 
     })
@@ -563,10 +563,10 @@ def assign_route_categories(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring logistics """
-    #FIXME stock.group_locations not found
-    #activate_options(ctx)
+    activate_options(ctx)
     set_delivery_pick_ship(ctx)
-    create_locations(ctx)
+    #FIXME depends on stock_refill module
+    #create_locations(ctx)
     create_putaway(ctx)
     #FIXME sequence_id violates not-null constraint
     #create_picking_types(ctx)
