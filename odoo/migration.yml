@@ -65,6 +65,7 @@ migration:
           - l10n_be_apb_tax
           - l10n_be_eco_tax
           - account_banking_sepa_direct_debit
+          - account_banking_sepa_credit_transfer
           - account_invoice_check_total
           #### local-src
           - claim_from_reception

@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-768: Activate the module account_banking_sepa_credit_transfer
 
 **Bugfixes**
 
