@@ -1,3 +1,7 @@
+# used for development
+# docker-compose.override.yml is automatically used by docker-compose when no
+# option -f is provided
+
 version: '2'
 
 services:
@@ -8,6 +12,7 @@ services:
       - 8069
       - 8072
     volumes:
+      - "data-odoo-pytest-cache:/opt/odoo/.cache"
       - "./odoo/src:/opt/odoo/src"
       - "./odoo/local-src:/opt/odoo/local-src"
       - "./odoo/external-src:/opt/odoo/external-src"
@@ -26,3 +31,6 @@ services:
   nginx:
     ports:
       - 80:80
+
+volumes:
+  data-odoo-pytest-cache:

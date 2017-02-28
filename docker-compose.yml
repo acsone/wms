@@ -1,12 +1,18 @@
+# Root file for the composition.
+#
+# The options specific to the development should go in
+# 'docker-compose.override.yml' which is automatically applied on top of this
+# file when the option '-f' of docker-compose is not used
+
 version: '2'
 
 services:
   odoo:
     build: ./odoo/
-    volumes:
-      - "data-odoo:/data/odoo"
     depends_on:
       - db
+    volumes:
+      - "data-odoo:/data/odoo"
     environment:
       - DB_USER=odoo
       - DB_PASSWORD=odoo

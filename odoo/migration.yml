@@ -1,102 +1,107 @@
 migration:
   options:
-    install_command: odoo.py
-    # Workaround for https://github.com/odoo/odoo/pull/12730
-    # Please remove once merged.
-    # Warning: the DEMO flag will never be considered as we force
-    # the 'without demo' mode
-    install_args: --without-demo=all
+    install_command: odoo
   versions:
-    - version: 9.0.0
+    - version: 10.0.0
       operations:
         pre:
-          - anthem songs.install.pre::main
+          - echo "TODO"
+          #- anthem songs.install.pre::main
         post:
-          - anthem openerp.addons.cloud_platform.songs::install_exoscale
-          - anthem songs.install.accounting::main
-          - anthem songs.install.product::main
-          - anthem songs.install.logistics::main
-          - anthem songs.install.sales::main
-          - anthem songs.install.partner::main
-          - anthem songs.install.user::main
-          - anthem songs.install.data_all::main
+          - echo "TODO"
+          #- anthem openerp.addons.cloud_platform.songs::install_exoscale
+          #- anthem songs.install.accounting::main
+          #- anthem songs.install.product::main
+          #- anthem songs.install.logistics::main
+          #- anthem songs.install.sales::main
+          #- anthem songs.install.partner::main
+          #- anthem songs.install.user::main
+          #- anthem songs.install.data_all::main
       modes:
         full:
           operations:
             post:
-              - importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
-              - importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
-              - importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              - anthem songs.install.data_full::post_import_products
-              - anthem songs.install.data_full::import_wh_family_locations
-              - importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
-              - anthem songs.install.data_full::import_other_locations
-              - anthem songs.install.data_full::location_compute_parents
-              - importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
-              - importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
-              - anthem songs.install.data_full::main
+              - echo "TODO"
+              #- importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
+              #- importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
+              #- importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
+              #- anthem songs.install.data_full::post_import_products
+              #- anthem songs.install.data_full::import_wh_family_locations
+              #- importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              #- anthem songs.install.data_full::import_other_locations
+              #- anthem songs.install.data_full::location_compute_parents
+              #- importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
+              #- importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              #- anthem songs.install.data_full::main
 
         demo:
           operations:
             post:
-              - anthem songs.install.data_demo::main
+              - echo "TODO"
+              #- anthem songs.install.data_demo::main
       addons:
         upgrade:
-          #### core
+          ### Odoo (src)
           - account
           - account_accountant
           - document
+          - l10n_be_intrastat
+          - l10n_be_invoice_bba
+          - product_expiry
+          - purchase
           - sale
           - sale_stock
           - stock
-          - product_expiry
-          - purchase
-          - l10n_be_invoice_bba
-          - l10n_be_intrastat
-          - warning
+          #- warning
           #camptocamp/cloud-platform
           - cloud_platform
-          #### external-src
-          - mail_environment
-          - sale_exception
-          - server_environment
-          - account_chart_update
-          - l10n_be_antibiotic_tax
-          - l10n_be_apb_tax
-          - l10n_be_eco_tax
-          - account_banking_sepa_direct_debit
-          - account_invoice_check_total
-          #### local-src
-          - claim_from_reception
-          - delivery_rounds
-          - delivery_rounds_assign
-          - pricelist_discount
-          - procurement_sale
-          - product_price_category
-          - refund_invoice
-          - sale_product_additional
-          - specific_base
-          - specific_account
-          - specific_sale
-          - specific_partner
-          - specific_product
-          - specific_stock
-          - specific_translations
-          - stock_barcode_fix
-          - stock_expired
-          - stock_grn
-          - stock_groupbypartner
-          - stock_location
-          - stock_lot_update
-          - stock_lot_track
-          - stock_picking_assignment
-          - stock_picking_fillwithstock
-          - stock_picking_sequence
-          - stock_picking_subcode
-          - stock_product_bin
-          - stock_production_lot_expired_dates
-          - stock_putaway_defaultfixedlocation
-          - stock_putaway_route
-          - stock_quant_bylocation
-          - stock_refill
-          - web_autorefresh
+          ### OCA (external-src)
+          ## oca/account-financial-tools
+          #- account_chart_update
+          ## oca/account-invoicing
+          #- account_invoice_check_total
+          ## oca/bank-payment
+          #- account_banking_sepa_direct_debit
+          ## oca/l10n-belgium
+          #- l10n_be_antibiotic_tax
+          #- l10n_be_apb_tax
+          #- l10n_be_eco_tax
+          ## oca/sale-workflow
+          #- sale_exception
+          ## oca/server-tools
+          #- mail_environment
+          #- server_environment
+          ### local-src
+          #- claim_from_reception
+          #- delivery_rounds
+          #- delivery_rounds_assign
+          #- pricelist_discount
+          #- procurement_sale
+          #- product_price_category
+          #- refund_invoice
+          #- sale_product_additional
+          #- specific_base
+          #- specific_account
+          #- specific_sale
+          #- specific_partner
+          #- specific_product
+          #- specific_stock
+          #- specific_translations
+          #- stock_barcode_fix
+          #- stock_expired
+          #- stock_grn
+          #- stock_groupbypartner
+          #- stock_location
+          #- stock_lot_update
+          #- stock_lot_track
+          #- stock_picking_assignment
+          #- stock_picking_fillwithstock
+          #- stock_picking_sequence
+          #- stock_picking_subcode
+          #- stock_product_bin
+          #- stock_production_lot_expired_dates
+          #- stock_putaway_defaultfixedlocation
+          #- stock_putaway_route
+          #- stock_quant_bylocation
+          #- stock_refill
+          #- web_autorefresh
