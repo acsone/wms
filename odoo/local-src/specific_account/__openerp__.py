@@ -22,6 +22,7 @@
         'views/account_invoice_view.xml',
         'views/ir_sequence.xml',
         'views/menu.xml',
+        'views/account_analytic_tag.xml',
     ],
     'installable': True,
 }
