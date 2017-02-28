@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-763: Add new repo account-analytic and install the module account_analytic_required
 
 **Bugfixes**
 
