@@ -33,9 +33,8 @@ class StockPicking(models.Model):
                     bad_lots.append('%s (%s)' %
                                     (line.lot_id.name,
                                      line.lot_id.removal_date[:DATE_LENGTH]))
-
             if bad_lots:
-                raise Warning(_('There one or several with an expired '
+                raise Warning(_('You cannot transfer lots with an expired '
                                 'removal date:\n\t- %s' %
                                 ('\n\t- '.join(bad_lots))))
 
