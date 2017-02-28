@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="narcotic_forbidden" model="sale.exception">
             <field name="name">Produits stupéfiants interdits</field>
@@ -41,5 +40,4 @@ if order.amount_total &lt; 100:
             </field>
         </record>
 
-    </data>
-</openerp>
+</odoo>

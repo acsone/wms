@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="1">
+<odoo noupdate="1">
         <record id="seq_round_instance" model="ir.sequence">
             <field name="name">Round Instance</field>
             <field name="code">round.instance</field>
@@ -8,5 +7,4 @@
             <field name="padding">2</field>
             <field name="company_id" eval="False"/>
         </record>
-    </data>
-</openerp>
+</odoo>

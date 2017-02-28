@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 Julien Coux (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Julien Coux (Camptocamp)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'Stock expired',

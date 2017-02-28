@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="1">
+<odoo noupdate="1">
         <!-- Sequences for stock.grn -->
         <record id="seq_grn" model="ir.sequence">
             <field name="name">Goods Received Note</field>
@@ -9,5 +8,4 @@
             <field name="padding">7</field>
             <field name="company_id" eval="False"/>
         </record>
-    </data>
-</openerp>
+</odoo>

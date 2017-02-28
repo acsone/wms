@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-  <data>
+<odoo>
 
     <record id="view_round_instance_kanban" model="ir.ui.view">
         <field name="name">round.instance.kanban</field>
@@ -168,5 +167,4 @@
     <menuitem action="action_round_instance" id="menu_round_instance" parent="menu_delivery_round" sequence="20"/>
 
 
-  </data>
-</openerp>
+</odoo>

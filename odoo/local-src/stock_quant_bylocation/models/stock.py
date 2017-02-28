@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import fields, models, tools
+from odoo import fields, models, tools
 
 
 class ReportStockQuantBylocation(models.Model):

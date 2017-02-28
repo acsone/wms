@@ -1,5 +1,4 @@
-<openerp>
-<data>
+<odoo>
     <record id="action_claim_from_reception" model="ir.actions.act_window">
         <field name="name">Claim From Reception</field>
         <field name="res_model">crm.claim</field>
@@ -24,5 +23,4 @@
             </xpath>
         </field>
     </record>
-</data>
-</openerp>
+</odoo>

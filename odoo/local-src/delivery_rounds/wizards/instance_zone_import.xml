@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <record id="view_round_zone_import" model="ir.ui.view">
             <field name="name">Delivery Date</field>
             <field name="model">round.zone.import</field>
@@ -30,5 +29,4 @@
             <field name="view_id" ref="view_round_zone_import"/>
             <field name="target">new</field>
         </record>
-    </data>
-</openerp>
+</odoo>

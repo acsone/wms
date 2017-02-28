@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import fields, models, api
+from odoo import fields, models, api
 
 
 class StockChangeProductQty(models.TransientModel):

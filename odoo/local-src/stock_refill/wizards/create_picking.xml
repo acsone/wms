@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
 
     <record id="view_stock_wizard_reassort_form" model="ir.ui.view">
         <field name="name">stock.wizard.reassort.form</field>
@@ -32,5 +31,4 @@
         id="act_report_stock_quant_bylocation_reserve_reassort"
         multi="True"/>
 
-</data>
-</openerp>
+</odoo>

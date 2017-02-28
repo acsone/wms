@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <record model="ir.ui.view" id="view_grn_search">
             <field name="name">stock.grn.search</field>
             <field name="model">stock.grn</field>
@@ -70,5 +69,4 @@
         </record>
 
         <menuitem id="menu_stock_grn" name="Goods Received Note" parent="stock.menu_stock_inventory_control" sequence="50" action="action_grn_view"/>
-    </data>
-</openerp>
+</odoo>

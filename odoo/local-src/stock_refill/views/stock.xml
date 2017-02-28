@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-<data>
+<odoo>
 
     <record id="view_report_stock_quant_bylocation_tree" model="ir.ui.view">
         <field name="name">report.stock.quant.bylocation.tree.refill</field>
@@ -41,5 +40,4 @@
         sequence="40"
         action="action_report_stock_quant_bylocation"/>
 
-</data>
-</openerp>
+</odoo>

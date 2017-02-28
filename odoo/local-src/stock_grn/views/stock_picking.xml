@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <record id="view_picking_withgrn_search" model="ir.ui.view">
             <field name="name">stock.picking.grn.search</field>
             <field name="model">stock.picking</field>
@@ -33,5 +32,4 @@
                 </field>
             </field>
         </record>
-    </data>
-</openerp>
+</odoo>

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2016 Julien Coux (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Julien Coux (Camptocamp)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
 
-from openerp import fields, tools
-from openerp.tests.common import TransactionCase, post_install, at_install
+from odoo import fields, tools
+from odoo.tests.common import TransactionCase, post_install, at_install
 
 
 class TestStockExpired(TransactionCase):

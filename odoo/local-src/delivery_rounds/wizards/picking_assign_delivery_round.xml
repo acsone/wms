@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <record id="view_picking_assign_delivery_round" model="ir.ui.view">
             <field name="name">Delivery Date</field>
             <field name="model">picking.assign.delivery.round</field>
@@ -30,5 +29,4 @@
             <field name="view_id" ref="view_picking_assign_delivery_round"/>
             <field name="target">new</field>
         </record>
-    </data>
-</openerp>
+</odoo>

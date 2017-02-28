@@ -21,9 +21,9 @@
 
 from datetime import date, timedelta
 
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-import openerp.addons.decimal_precision as dp
-from openerp import fields, models, api
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+import odoo.addons.decimal_precision as dp
+from odoo import fields, models, api
 
 
 class ProductProduct(models.Model):

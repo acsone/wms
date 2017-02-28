@@ -1,8 +1,8 @@
-from openerp import http, _
-from openerp.http import request
+from odoo import http, _
+from odoo.http import request
 
 """ This is copy/paste from stock_barcde + jbaudoux FIX """
-from openerp.addons.stock_barcode.controllers.main \
+from odoo.addons.stock_barcode.controllers.main \
     import StockBarcodeController
 
 

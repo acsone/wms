@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from itertools import chain
 
 import time
 
-from openerp import _, api, fields, models, tools
-from openerp.exceptions import UserError
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class ProductPricelist(models.Model):

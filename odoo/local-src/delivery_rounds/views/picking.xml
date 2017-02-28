@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-  <data>
+<odoo>
 
     <record id="view_picking_internal_search" model="ir.ui.view">
         <field name="name">stock.picking.search.round</field>
@@ -124,5 +123,4 @@
     <menuitem id="menu_round_picking" name="Rounds' Pickings" parent="menu_delivery_round" sequence="50" action="action_picking_tree_round" groups="stock.group_stock_manager,stock.group_stock_user"/>
 
 
-  </data>
-</openerp>
+</odoo>

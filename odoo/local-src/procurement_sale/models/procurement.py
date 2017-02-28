@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models
+from odoo import models
 
 
 # Change order to ensure that first sold, is first served

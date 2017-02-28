@@ -21,7 +21,7 @@
 
 import math
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 def float2time(value):

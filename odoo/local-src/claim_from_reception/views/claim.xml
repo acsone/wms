@@ -1,5 +1,4 @@
-<openerp>
-<data>
+<odoo>
     <record id="crm_claim" model="ir.ui.view">
         <field name="name">crm.claim.ref</field>
         <field name="model">crm.claim</field>
@@ -10,5 +9,4 @@
             </field>
         </field>
     </record>
-</data>
-</openerp>
+</odoo>

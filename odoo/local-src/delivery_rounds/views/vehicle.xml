@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-  <data>
+<odoo>
 
     <record id="view_round_vehicle_tree" model="ir.ui.view">
         <field name="name">round.vehicle.tree</field>
@@ -39,6 +38,5 @@
     <menuitem action="action_round_vehicle_tree" id="menu_round_vehicle" parent="menu_delivery_round_settings" sequence="20"/>
 
 
-  </data>
-</openerp>
+</odoo>
 

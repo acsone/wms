@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models
+from odoo import models
 
 
 class StockLocation(models.Model):
