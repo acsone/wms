@@ -9,7 +9,7 @@ from openerp import api, fields, models
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    supplier_invoice_number = fields.Char('Vendor reference')
+    supplier_invoice_number = fields.Char('Vendor reference', copy=False)
 
     _sql_constraints = [
         ('unique_invoice_number_by_supplier',
