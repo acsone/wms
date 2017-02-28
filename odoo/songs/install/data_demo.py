@@ -106,8 +106,11 @@ def main(ctx):
     """ Loading demo data """
     import_suppliers(ctx)
     import_clients(ctx)
-    import_products(ctx)
-    import_locations(ctx)
-    import_product_supplierinfo(ctx)
-    import_pricelist_items(ctx)
+    #FIXME depends on l10n_be_*_tax oca modules
+    # import_products(ctx)
+    #FIXME depends on stock_refill module
+    # import_locations(ctx)
+    #FIXME depends on import_products
+    # import_product_supplierinfo(ctx)
+    # import_pricelist_items(ctx)
     import_delivery_round_config(ctx)

@@ -5,18 +5,16 @@ migration:
     - version: 10.0.0
       operations:
         pre:
-          - echo "TODO"
-          #- anthem songs.install.pre::main
+          - anthem songs.install.pre::main
         post:
-          - echo "TODO"
-          #- anthem openerp.addons.cloud_platform.songs::install_exoscale
-          #- anthem songs.install.accounting::main
-          #- anthem songs.install.product::main
+          - anthem openerp.addons.cloud_platform.songs::install_exoscale
+          - anthem songs.install.accounting::main
+          - anthem songs.install.product::main
           #- anthem songs.install.logistics::main
-          #- anthem songs.install.sales::main
-          #- anthem songs.install.partner::main
-          #- anthem songs.install.user::main
-          #- anthem songs.install.data_all::main
+          - anthem songs.install.sales::main
+          - anthem songs.install.partner::main
+          - anthem songs.install.user::main
+          - anthem songs.install.data_all::main
       modes:
         full:
           operations:
@@ -37,8 +35,7 @@ migration:
         demo:
           operations:
             post:
-              - echo "TODO"
-              #- anthem songs.install.data_demo::main
+              - anthem songs.install.data_demo::main
       addons:
         upgrade:
           ### Odoo (src)
