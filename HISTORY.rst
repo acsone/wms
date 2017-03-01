@@ -11,6 +11,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
 **Build**
 
