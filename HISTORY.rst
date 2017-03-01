@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
 
 **Bugfixes**
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice

@@ -33,6 +33,7 @@ def settings(ctx):
         'module_payment_transfer': False,
         'group_analytic_account_for_sales': True,
         'group_analytic_account_for_purchases': True,
+        'group_supplier_inv_check_total': True,
     }).execute()
 
     ctx.env.ref('base.main_company').write({
