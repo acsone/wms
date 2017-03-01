@@ -28,7 +28,6 @@ class SaleOrder(models.Model):
         string='Additional lines count',
     )
 
-    @api.onchange('order_line_additional')
     @api.depends('order_line_additional')
     def _compute_order_line_additional_count(self):
         for order in self:
@@ -51,7 +50,6 @@ class SaleOrder(models.Model):
             'additional_line': True,
             'additional_line_is_free': additional_product.is_free,
             'additional_line_position': position,
-            'additional_line_parent_sequence': line.sequence,
             'original_line_id': line.id,
         }
 
@@ -66,8 +64,6 @@ class SaleOrder(models.Model):
                 current_line.additional_line_is_free,
             'additional_line_position':
                 current_line.additional_line_position,
-            'additional_line_parent_sequence':
-                current_line.additional_line_parent_sequence,
             'original_line_id': line.id
         }
         return current_values
@@ -98,6 +94,9 @@ class SaleOrder(models.Model):
                 # Do we have enough original products to add additional product
                 if line_product_uom_qty >= original_quantity:
                     new_template = additional_product.product_id
+                    # We get the first variant of product template
+                    # because this module doesn't manage product variants
+                    # and additional products are defined on product template
                     new_product = new_template.product_variant_ids[0]
 
                     # Get position of the additional product on sale order
@@ -123,9 +122,10 @@ class SaleOrder(models.Model):
 
                     # Get the existing additional line for the product
                     current_line = self.order_line_additional.filtered(
-                        lambda l:
+                        lambda l: (
                             l.original_line_id.id == line.id
                             and l.product_id == new_product
+                        )
                     )
 
                     # Check if the additional line must be :
@@ -135,11 +135,12 @@ class SaleOrder(models.Model):
                     if current_line:
 
                         # Additional line already exists
-                        current_values = \
+                        current_values = (
                             self.get_current_values_for_additional_line(
                                 current_line,
                                 line
                             )
+                        )
                         key_to_delete = []
                         for key, value in values.iteritems():
                             if current_values.get(key) == value:
@@ -178,6 +179,7 @@ class SaleOrder(models.Model):
                     not l.original_line_id
                 )
             )
+
             for line in lines_to_be_deleted:
                 order_line_additional.append((3, line.id))
 
@@ -234,10 +236,12 @@ class SaleOrder(models.Model):
         order_lines = []
 
         accepted_fields = self.get_accepted_fields_for_order_line()
-        accepted_relational_fields = \
+        accepted_relational_fields = (
             self.get_accepted_relational_fields_for_order_line()
-        accepted_relational_m2m_fields = \
+        )
+        accepted_relational_m2m_fields = (
             self.get_accepted_relational_m2m_fields_for_order_line()
+        )
 
         # For each original/additional line,
         # we check the changes to apply on the final line.
@@ -245,32 +249,23 @@ class SaleOrder(models.Model):
             values = {}
             # Get the current existing field
             final_line = self.order_line.filtered(
-                lambda l: getattr(l, link_field).id == line.id
+                lambda l: l[link_field].id == line.id
             )
 
             # For each line field, we check if the value has changed.
             # (Only for defined fields)
             for field in line._fields:
                 if field in accepted_fields:
-                    new_value = getattr(line, field)
-                    if (
-                                not final_line
-                            or getattr(final_line, field) != new_value
-                    ):
+                    new_value = line[field]
+                    if not final_line or final_line[field] != new_value:
                         values[field] = new_value
                 if field in accepted_relational_fields:
-                    new_value = getattr(line, field)
-                    if (
-                                not final_line
-                            or getattr(final_line, field) != new_value
-                    ):
+                    new_value = line[field]
+                    if not final_line or final_line[field] != new_value:
                         values[field] = new_value.id
                 if field in accepted_relational_m2m_fields:
-                    new_value = getattr(line, field)
-                    if (
-                                not final_line
-                            or getattr(final_line, field) != new_value
-                    ):
+                    new_value = line[field]
+                    if not final_line or final_line[field] != new_value:
                         values[field] = new_value.ids
 
             # Check if the final line must be :
@@ -293,8 +288,8 @@ class SaleOrder(models.Model):
         # without link to their original/additional line must be deleted.
         lines_to_be_deleted = self.order_line.filtered(
             lambda l: (
-                getattr(l, link_field)
-                and getattr(l, link_field).id not in lines.ids
+                l[link_field]
+                and l[link_field].id not in lines.ids
             )
         )
         for line in lines_to_be_deleted:
@@ -305,6 +300,9 @@ class SaleOrder(models.Model):
     @api.onchange('order_line_original')
     def onchange_order_line_original(self):
 
+        if not self.order_line_original:
+            return
+
         # Compute additional lines
         self.compute_additional_line()
 
@@ -312,22 +310,23 @@ class SaleOrder(models.Model):
         sequence = 1
 
         at_end_lines = []
-        for line_original in self.order_line_original.sorted(
-                key=lambda l: l.sequence
-        ):
-            original_sequence = line_original.sequence
+        lines_original = self.order_line_original.sorted(
+            key=lambda l: l.sequence
+        )
+        for line_original in lines_original:
             line_original.sequence = sequence
             sequence += 1
-            for line_add in self.order_line_additional.sorted(
-                    key=lambda l: l.sequence
-            ):
-                parent_sequence = line_add.additional_line_parent_sequence
-                if parent_sequence == original_sequence:
-                    if line_add.additional_line_position == 'just_after':
-                        line_add.sequence = sequence
-                        sequence += 1
-                    elif line_add.additional_line_position == 'at_end':
-                        at_end_lines.append(line_add)
+            lines_additional = self.order_line_additional.filtered(
+                lambda l: l.original_line_id.id == line_original.id
+            ).sorted(
+                key=lambda l: l.sequence
+            )
+            for line_additional in lines_additional:
+                if line_additional.additional_line_position == 'just_after':
+                    line_additional.sequence = sequence
+                    sequence += 1
+                elif line_additional.additional_line_position == 'at_end':
+                    at_end_lines.append(line_additional)
         for line in at_end_lines:
             line.sequence = sequence
             sequence += 1
@@ -437,9 +436,6 @@ class SaleOrderLine(models.Model):
     )
     additional_line_position = fields.Char(
         string='Additional line position'
-    )
-    additional_line_parent_sequence = fields.Integer(
-        string='Additional line parent sequence'
     )
 
     # To keep link between original/additional lines and final lines

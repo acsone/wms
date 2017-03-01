@@ -9,6 +9,13 @@ Sale Product Additional
 This module adds additional products on product template which used on sale order.
 
 
+Restrictions
+============
+
+This module doesn't manage product variants.
+So we consider, we have only one variant for each product template.
+
+
 Usage
 =====
 
