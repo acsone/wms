@@ -66,6 +66,7 @@ migration:
           - l10n_be_eco_tax
           - account_banking_sepa_direct_debit
           - account_invoice_check_total
+          - stock_available_immediately
           #### local-src
           - claim_from_reception
           - delivery_rounds

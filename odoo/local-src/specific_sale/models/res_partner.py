@@ -2,29 +2,38 @@
 # © 2017 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from openerp import models, fields, api
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    def action_view_sales_available(self):
-        self.ensure_one()
-        action = self.env.ref(
-            'specific_sale.action_product_sale_available_list'
-        )
+    def _compute_sale_lines_count(self):
+        for partner in self:
+            domain = [
+                ('state', 'in', ['sale']),
+                ('order_id.partner_id', '=', partner.id)
+            ]
 
-        return {
-            'name': action.name,
-            'help': action.help,
-            'type': action.type,
-            'view_type': action.view_type,
-            'view_mode': action.view_mode,
-            'target': action.target,
-            'res_model': action.res_model,
-            'domain': [
-                ('state', 'in', ['sale', 'done']),
-                ('order_id.partner_id', '=', self.id)
-            ],
-        }
+            partner.sale_lines_count = len(
+                self.env['sale.order.line'].search(domain)
+            )
+
+    sale_lines_count = fields.Integer(
+        compute='_compute_sale_lines_count'
+    )
+
+    @api.multi
+    def action_view_sale_lines_unavailable(self):
+        self.ensure_one()
+
+        action_data = self.env.ref(
+            'specific_sale.action_sale_lines_unavailable_list'
+        ).read()[0]
+        action_data['domain'] = [
+            ('state', 'in', ['sale']),
+            ('order_id.partner_id', '=', self.id)
+        ]
+
+        return action_data

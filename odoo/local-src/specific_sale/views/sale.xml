@@ -32,11 +32,12 @@
         </field>
     </record>
 
-    <record id="view_order_line_available_tree" model="ir.ui.view">
-        <field name="name">sale.order.line.available.tree</field>
+    <record id="view_order_lines_unavailable_tree" model="ir.ui.view">
+        <field name="name">sale.order.lines.unavailable.tree</field>
         <field name="model">sale.order.line</field>
+        <field name="priority">2000</field>
         <field name="arch" type="xml">
-            <tree string="Sales Order Lines Available" create="false" edit="false" delete="false">
+            <tree string="Sales Order Lines Unavailable" create="false" delete="false">
                 <field name="product_id" invisible="1"/>
                 <field name="order_id"/>
                 <field name="order_partner_id"/>
@@ -44,16 +45,16 @@
                 <field name="product_uom_qty"/>
                 <field name="product_qty_unavailable" string="Quantity unavailable at order line save"/>
                 <field name="current_product_qty_unavailable" string="Quantity unavailable at now"/>
-                <field name="difference_qty_unavailable" string="Difference quantity unavailable"/> <!-- Remplacer quantité déjà livrée -->
+                <field name="qty_delivered"/>
             </tree>
         </field>
     </record>
 
-    <record id="action_product_sale_available_list" model="ir.actions.act_window">
-        <field name="name">Sale Order Lines Available</field>
+    <record id="action_sale_lines_unavailable_list" model="ir.actions.act_window">
+        <field name="name">Sale Order Lines Unavailable</field>
         <field name="res_model">sale.order.line</field>
-        <field name="context">{'search_default_product_id': [active_id], 'default_product_id': active_id}</field>
-        <field name="domain">[('state', 'in', ['sale', 'done'])]</field>
+        <field name="view_id" ref="view_order_lines_unavailable_tree"/>
+        <field name="domain">[('state', 'in', ['sale'])]</field>
     </record>
 
 </odoo>

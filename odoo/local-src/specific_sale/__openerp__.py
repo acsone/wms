@@ -13,6 +13,7 @@
         'sale',
         'sale_exception',
         'sale_product_additional',
+        'stock_available_immediately',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

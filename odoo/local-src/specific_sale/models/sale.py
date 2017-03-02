@@ -108,47 +108,112 @@ class SaleOrderLine(models.Model):
 
     def _compute_current_product_qty_unavailable(self):
         for line in self:
-            line.current_product_qty_unavailable = 5
+            line.current_product_qty_unavailable = (
+                self.get_product_qty_unavailable(
+                    line.product_id,
+                    line.product_uom_qty,
+                    line.state == 'sale',
+                    line.id
+                )
+            )
 
-    difference_qty_unavailable = fields.Float(
-        string='Difference quantity unavailable',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_difference_qty_unavailable',
-    )
+    @api.model
+    def get_product_qty_unavailable(self, product, product_uom_qty,
+                                    confirmed, line_id):
+        if product and product_uom_qty:
+            immediately_usable_qty = product.immediately_usable_qty
+            if confirmed:
+                # If sale order line confirmed, ordered quantity
+                # is already computed in immediately usable quantity
+                if immediately_usable_qty < 0:
+                    # Because ordered quantity is already
+                    # computed in immediately usable quantity,
+                    # if immediately usable quantity is negative,
+                    # the unavailable quantity
+                    # equals the immediately usable quantity
+                    # minus the sum of stock move quantity
+                    # which stock move is after the order line stock move
+                    order_line_stock_move = self.env['stock.move'].search([
+                        ('procurement_id.sale_line_id', '=', line_id),
+                        ('state', 'not in', ['draft', 'cancel', 'done'])
+                    ])
+                    stock_move_date_expected = (
+                        order_line_stock_move.date_expected
+                    )
 
-    def _compute_difference_qty_unavailable(self):
-        for line in self:
-            line.difference_qty_unavailable = 10
+                    next_stock_moves = self.env['stock.move'].search([
+                        ('procurement_id.sale_line_id', '!=', line_id),
+                        ('state', 'not in', ['draft', 'cancel', 'done']),
+                        '|',
+                        ('priority', '<',  order_line_stock_move.priority),
+                        '&',
+                        ('priority', '=', order_line_stock_move.priority),
+                        ('date_expected', '>', stock_move_date_expected),
+                    ])
+                    next_quantities = 0
+                    for move in next_stock_moves:
+                        next_quantities = (
+                            next_quantities + move.product_uom_qty
+                        )
 
-    @api.onchange('product_uom_qty')
+                    good_immediately_usable_qty = (
+                        immediately_usable_qty + next_quantities
+                    )
+
+                    if good_immediately_usable_qty <= 0:
+                        return min([product_uom_qty,
+                                    abs(good_immediately_usable_qty)])
+                    else:
+                        return 0
+                else:
+                    # Because ordered quantity is already
+                    # computed in immediately usable quantity,
+                    # if immediately usable quantity is positive,
+                    # the unavailable quantity equals 0
+                    return 0
+            else:
+                # If sale order line is NOT confirmed, ordered quantity
+                # is NOT already computed in immediately usable quantity
+                if immediately_usable_qty <= 0:
+                    # If immediately usable quantity is negative,
+                    # the unavailable quantity equals the sum
+                    # between ordered quantity
+                    # and immediately usable quantity absolute value
+                    return product_uom_qty
+                else:
+                    # If immediately usable quantity is positive,
+                    # the unavailable quantity equals the ordered quantity
+                    # minus the immediately usable quantity
+                    # (limited with ordered quantity)
+                    if immediately_usable_qty >= product_uom_qty:
+                        return 0
+                    else:
+                        return product_uom_qty - immediately_usable_qty
+        else:
+            return None
+
+    @api.onchange('product_id', 'product_uom_qty')
     def onchange_for_product_qty_unavailable(self):
         context = self.env.context or {}
         if context.get('must_compute_product_qty_unavailable'):
             for line in self:
-                line.product_qty_unavailable = \
+                line.product_qty_unavailable = (
                     self.get_product_qty_unavailable(
                         self.product_id,
-                        self.product_uom_qty
+                        self.product_uom_qty,
+                        self.state == 'sale',
+                        None
                     )
-
-    @api.model
-    def get_product_qty_unavailable(self, product, product_uom_qty):
-        if product and product_uom_qty:
-            qty_available = product.qty_available
-            return (
-                qty_available - product_uom_qty
-            )
-        else:
-            return None
+                )
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):
         new_context = self.env.context.copy() if self.env.context else {}
         if isinstance(field_name, list):
-            if 'product_uom_qty' in field_name:
+            if 'product_uom_qty' in field_name or 'product_id' in field_name:
                 new_context['must_compute_product_qty_unavailable'] = True
         else:
-            if field_name == 'product_uom_qty':
+            if field_name in ['product_uom_qty', 'product_id']:
                 new_context['must_compute_product_qty_unavailable'] = True
         return super(SaleOrderLine, self.with_context(new_context)).onchange(
             values, field_name, field_onchange
