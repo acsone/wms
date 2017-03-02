@@ -16,6 +16,7 @@
         'l10n_be_antibiotic_tax',
         'l10n_be_invoice_bba',
         'report_intrastat',
+        'account',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

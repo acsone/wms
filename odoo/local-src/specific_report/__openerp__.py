@@ -15,6 +15,7 @@
         'specific_account',
         'account',
         'sale',
+        'delivery_rounds',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -2,6 +2,9 @@ Delivery rounds
 ===============
 
 Module to manage delivery rounds.
+* Manage vehicles for delivery rounds
+* Define a zone for delivery rounds (by vehicle and by partner)
+* Assign a delivery round on a picking
 * Add a report for the driver with the delivery rounds
 
 
@@ -23,6 +26,7 @@ Contributors
 ------------
 
 * Sylvain Van Hoof
+* Jacques-Etienne Beaudoux
 
 Maintainer
 ----------
