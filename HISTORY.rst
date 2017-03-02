@@ -10,8 +10,10 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-763: Add new repo account-analytic and install the module account_analytic_required
+* ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
 
 **Bugfixes**
+* ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
 **Build**
 
