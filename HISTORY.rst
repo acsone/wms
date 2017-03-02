@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-768: Activate the module account_banking_sepa_credit_transfer
 * ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
 
 **Bugfixes**
