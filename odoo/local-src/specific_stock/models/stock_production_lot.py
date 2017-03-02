@@ -56,7 +56,9 @@ class StockProductionLot(models.Model):
         - The size of the checksum should be 3 digits (can be changed)
         - The checksum cannot be equal to 000
         - A checksum cannot be use twice in a specific range
-        (2 shelves on the left and 2 shelves on the right)
+        (1 shelf on the left and 1 shelf on the right)
+
+        To have the self next door we have to add 2 to the current shelf.
 
         A lot may be split in several bin. It's why we need to check all BIN
          to be sure that there no other lot with the same checksum.
@@ -95,8 +97,6 @@ class StockProductionLot(models.Model):
         same_lot_checksum_range = int(self.env['ir.config_parameter'].
                                       get_param('same_lot_checksum_range', 2))
 
-        number_of_element = int(math.pow(10, lot_checksum_size)) - 1
-
         for lot in self:
             product = lot.product_id
             if not product or lot.checksum:
@@ -128,7 +128,7 @@ class StockProductionLot(models.Model):
                 shelf_code = ord(shelf)
                 min_shelf_code = shelf_code - same_lot_checksum_range
                 max_shelf_code = shelf_code + same_lot_checksum_range
-                for code in range(min_shelf_code, (max_shelf_code+1)):
+                for code in (min_shelf_code, shelf_code, max_shelf_code):
                     if code < ord('1') \
                             or (ord('9') < code < ord('A')) \
                             or code > ord('Z'):
@@ -163,20 +163,20 @@ class StockProductionLot(models.Model):
                     if result[0]:
                         checksum_not_available.add(result[0])
 
-            if len(checksum_not_available) == number_of_element:
+            minval = 1
+            maxval = 10 ** lot_checksum_size
+            formated_checksum = [format(item, '0%d' % lot_checksum_size)
+                                 for item
+                                 in range(minval, maxval)]
+            picklist = list(set(formated_checksum) -
+                            set(checksum_not_available))
+            if not picklist:
                 raise Warning('There is no checksum available')
 
             # Step 4: Generate an available checksum
-            checksum = None
-            while not checksum:
-                new_checksum = format(random.randint(1, number_of_element),
-                                      '0%d' % lot_checksum_size)
-                if new_checksum in checksum_not_available:
-                    continue
-                checksum = new_checksum
-
-            if checksum:
-                lot.checksum = checksum
+            checksum = random.choice(picklist)
+            checksum_not_available.add(checksum)
+            lot.checksum = checksum
 
     @api.model
     def archive_lots(self):
