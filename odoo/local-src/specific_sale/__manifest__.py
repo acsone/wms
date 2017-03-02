@@ -17,5 +17,5 @@
         'data/sale_exception.xml',
         'views/sale.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
