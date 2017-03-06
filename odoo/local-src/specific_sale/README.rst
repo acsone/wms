@@ -9,6 +9,7 @@ Specific Sale
 This module adds Alcyon specific fields and logic for sale order:
 
 * On sale order form view, add onchange to check rule exception without wait the order confirmation
+* On sale order form view, add product quantity unavailable
 
 Credits
 =======
@@ -17,3 +18,4 @@ Contributors
 ------------
 
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>
+* Julien Coux <julien.coux@camptocamp.com>

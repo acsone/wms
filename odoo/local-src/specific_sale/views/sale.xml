@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <record id="view_order_form" model="ir.ui.view">
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+
             <field name="team_id" position="after">
                 <field name="sale_channel_visible" invisible="1"/>
                 <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
@@ -14,6 +17,10 @@
                 <field name="client_order_ref"/>
             </field>
 
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']" position="after">
+                <field name="product_qty_unavailable"/>
+            </xpath>
+
             <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
                 <field name="exception"/>
             </xpath>
@@ -21,6 +28,33 @@
             <xpath expr="//field[@name='order_line']/tree" position="attributes">
                 <attribute name="decoration-warning">exception</attribute>
             </xpath>
+
         </field>
     </record>
+
+    <record id="view_order_lines_unavailable_tree" model="ir.ui.view">
+        <field name="name">sale.order.lines.unavailable.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Order Lines Unavailable" create="false" delete="false">
+                <field name="product_id" invisible="1"/>
+                <field name="order_id"/>
+                <field name="order_partner_id"/>
+                <field name="name"/>
+                <field name="product_uom_qty"/>
+                <field name="product_qty_unavailable" string="Quantity unavailable at order line save"/>
+                <field name="current_product_qty_unavailable" string="Quantity unavailable at now"/>
+                <field name="qty_delivered"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sale_lines_unavailable_list" model="ir.actions.act_window">
+        <field name="name">Sale Order Lines Unavailable</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_id" ref="view_order_lines_unavailable_tree"/>
+        <field name="domain">[('state', 'in', ['sale'])]</field>
+    </record>
+
 </odoo>
