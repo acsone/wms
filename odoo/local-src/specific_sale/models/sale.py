@@ -125,7 +125,13 @@ class SaleOrderLine(models.Model):
             if confirmed:
                 # If sale order line confirmed, ordered quantity
                 # is already computed in immediately usable quantity
-                if immediately_usable_qty < 0:
+                if immediately_usable_qty >= 0:
+                    # Because ordered quantity is already
+                    # computed in immediately usable quantity,
+                    # if immediately usable quantity is positive,
+                    # the unavailable quantity equals 0
+                    return 0
+                else:
                     # Because ordered quantity is already
                     # computed in immediately usable quantity,
                     # if immediately usable quantity is negative,
@@ -150,27 +156,19 @@ class SaleOrderLine(models.Model):
                         ('priority', '=', order_line_stock_move.priority),
                         ('date_expected', '>', stock_move_date_expected),
                     ])
-                    next_quantities = 0
-                    for move in next_stock_moves:
-                        next_quantities = (
-                            next_quantities + move.product_uom_qty
-                        )
+                    next_quantities = sum(
+                        move.product_uom_qty for move in next_stock_moves
+                    )
 
                     good_immediately_usable_qty = (
                         immediately_usable_qty + next_quantities
                     )
 
                     if good_immediately_usable_qty <= 0:
-                        return min([product_uom_qty,
-                                    abs(good_immediately_usable_qty)])
+                        return min(product_uom_qty,
+                                   abs(good_immediately_usable_qty))
                     else:
                         return 0
-                else:
-                    # Because ordered quantity is already
-                    # computed in immediately usable quantity,
-                    # if immediately usable quantity is positive,
-                    # the unavailable quantity equals 0
-                    return 0
             else:
                 # If sale order line is NOT confirmed, ordered quantity
                 # is NOT already computed in immediately usable quantity
@@ -185,10 +183,7 @@ class SaleOrderLine(models.Model):
                     # the unavailable quantity equals the ordered quantity
                     # minus the immediately usable quantity
                     # (limited with ordered quantity)
-                    if immediately_usable_qty >= product_uom_qty:
-                        return 0
-                    else:
-                        return product_uom_qty - immediately_usable_qty
+                    return max(product_uom_qty - immediately_usable_qty, 0)
         else:
             return None
 
