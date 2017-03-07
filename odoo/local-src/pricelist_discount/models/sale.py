@@ -217,12 +217,11 @@ class SaleOrderLine(models.Model):
         if not pricelist:
             return price
         else:
-            res = product.with_context(
+            product_temporary = product.with_context(
                 override_based_price={product.id: price},
                 pricelist=pricelist.id
-            )._product_price(None, None)
-
-            return res.get(product.id, 0.0)
+            ).browse(product.id)
+            return product_temporary.price
 
     @api.multi
     def _prepare_invoice_line(self, qty):
