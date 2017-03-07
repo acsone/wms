@@ -14,3 +14,6 @@ class ResCompany(models.Model):
     invoice_terms_conditions = fields.Text(
         string='Invoice Terms and Conditions', translate=True
     )
+    delivery_terms_conditions = fields.Html(
+        string='Delivery Terms and Conditions', translate=True
+    )

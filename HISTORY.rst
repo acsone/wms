@@ -16,6 +16,9 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-229: Add new journals, new chart of accounts and new products
+* Add the report delivery slip
+* Improve the report invoice
+* Add the delivery round report
 * ALCN-763: Add new repo account-analytic and install the module account_analytic_required
 * ALCN-768: Activate the module account_banking_sepa_credit_transfer
 * ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
