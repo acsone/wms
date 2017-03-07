@@ -17,6 +17,7 @@
         'l10n_be_invoice_bba',
         'report_intrastat',
         'account',
+        'analytic',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -24,6 +25,7 @@
         'views/account_invoice_view.xml',
         'views/ir_sequence.xml',
         'views/menu.xml',
+        'views/account_analytic_tag.xml',
     ],
     'installable': True,
 }

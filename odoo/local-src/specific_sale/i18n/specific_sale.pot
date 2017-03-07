@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-09 14:38+0000\n"
-"PO-Revision-Date: 2016-09-09 14:38+0000\n"
+"POT-Creation-Date: 2017-03-02 13:19+0000\n"
+"PO-Revision-Date: 2017-03-02 13:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,31 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_current_product_qty_unavailable
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_current_product_qty_unavailable
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_current_product_qty_unavailable
+msgid "Current quantity unavailable"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_exception
+msgid "Exception"
+msgstr ""
+
+#. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Fax"
+msgstr ""
+
+#. module: specific_sale
+#: model:sale.exception,description:specific_sale.order_amount_minimum
+msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
+#: model:ir.ui.view,arch_db:specific_sale.product_template_form_view_sale_lines_unavailable_button
+msgid "Lines unavailable"
 msgstr ""
 
 #. module: specific_sale
@@ -26,8 +49,58 @@ msgid "Mail"
 msgstr ""
 
 #. module: specific_sale
+#: model:sale.exception,name:specific_sale.order_amount_minimum
+msgid "Montant minimum à 100 euros"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: specific_sale
+#: model:sale.exception,name:specific_sale.no_line_at_zero
+msgid "Pas de ligne à zéro"
+msgstr ""
+
+#. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Phone"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: specific_sale
+#: model:sale.exception,description:specific_sale.narcotic_forbidden
+msgid "Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT"
+msgstr ""
+
+#. module: specific_sale
+#: model:sale.exception,name:specific_sale.narcotic_forbidden
+msgid "Produits stupéfiants interdits"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_unavailable
+msgid "Quantity unavailable"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Quantity unavailable at now"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Quantity unavailable at order line save"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+msgid "Sale Order Lines Unavailable"
 msgstr ""
 
 #. module: specific_sale
@@ -41,7 +114,30 @@ msgid "Sale channel visible"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_product_template_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_sale_lines_count
+msgid "Sale lines count"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order_line
+#: model:ir.model,name:specific_sale.model_sale_order_line_additional
+#: model:ir.model,name:specific_sale.model_sale_order_line_original
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Sales Order Lines Unavailable"
+msgstr ""
+
+#. module: specific_sale
+#: model:sale.exception,description:specific_sale.no_line_at_zero
+msgid "Une ligne de vente ne peut pas être à zéro"
 msgstr ""
 

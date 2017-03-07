@@ -12,11 +12,19 @@ Unreleased
 * Add the report delivery slip
 * Improve the report invoice
 * Add the delivery round report
+* ALCN-763: Add new repo account-analytic and install the module account_analytic_required
 * ALCN-768: Activate the module account_banking_sepa_credit_transfer
 * ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
+* ALCN-761: Add a new menuitem to access to analytic tags
+
+* Rewriting sale_product_additional module
+* ALCN-741: Add check of rule exception on sale order line
+* ALCN-742: Add custom back order informations on sale order
 
 **Bugfixes**
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
+
+* Fix sale order line amount computation on pricelist_discount module
 
 **Build**
 
@@ -64,6 +72,7 @@ Unreleased
 
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
+* ALCN-731: Compute a checksum on the lot according some rules
 
 **Build**
 
