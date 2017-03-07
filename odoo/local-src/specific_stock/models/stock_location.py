@@ -17,8 +17,7 @@ class StockLocation(models.Model):
                                        compute='_compute_is_valid_location')
 
     @api.multi
-    @api.constrains('zone', 'corridor', 'shelf', 'height', 'box')
-    @api.onchange('zone', 'corridor', 'shelf', 'height', 'box')
+    @api.depends('zone', 'corridor', 'shelf', 'height', 'box')
     def _compute_is_valid_location(self):
         for location in self:
             if not location.zone \

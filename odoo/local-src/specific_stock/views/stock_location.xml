@@ -18,6 +18,7 @@
                     <field name="shelf" />
                     <field name="height" />
                     <field name="box" />
+                    <field name="is_valid_location" invisible="1"/>
                 </group>
             </xpath>
 
