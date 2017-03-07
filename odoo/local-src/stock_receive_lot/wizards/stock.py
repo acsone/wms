@@ -112,8 +112,10 @@ class StockPackOperationLotAdd(models.TransientModel):
         if self.life_date:
             self.lot_name = oplot._calc_lotname_from_lifedate(self.life_date)
 
-        self.is_removal_date_expired = oplot._calc_is_expired(
-            self.operation_id.product_id, self.life_date)
+        line = oplot.new({
+            'life_date': self.life_date,
+            'operation_id': self.operation_id.id})
+        self.is_removal_date_expired = line.is_removal_date_expired
 
     lot_name = fields.Char('Lot Name')
     lot_id = fields.Many2one(
@@ -159,6 +161,12 @@ class StockPackOperationLotAdd(models.TransientModel):
 
         lot_name = self.lot_id.name
 
+        # A pack operation is for a destination and can have multiple lot lines
+        # (pack_lot_ids) with the constraint that you cannot have 2 lot lines
+        # with the same name (then we need to increase qty of existing line)
+        # So while the destination stay the same, we can fill lines, otherwise
+        # we need to split the pack operation and adjust the processed and
+        # remaining quantities
         if self.location_dest_id != self.operation_id.location_dest_id:
             if self.operation_id.pack_lot_ids:
                 # Location changed - split pack
@@ -179,7 +187,6 @@ class StockPackOperationLotAdd(models.TransientModel):
         else:
             self.operation_id.pack_lot_ids = [(0, 0, {
                 'qty': self.qty,
-                # 'lot_id': self.lot_id,
                 'lot_name': self.lot_id.name,
                 })]
         self.operation_id.save()

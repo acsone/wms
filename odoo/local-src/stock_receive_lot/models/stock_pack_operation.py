@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2016 Julien Coux (Camptocamp)
+# © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
 
@@ -12,19 +13,22 @@ class StockPackOperationLot(models.Model):
     life_date = fields.Datetime(
         string='End of Life Date')
     is_removal_date_expired = fields.Boolean(
-        'Removal date', readonly=True)
+        'Removal date', compute='_get_is_removal_date_expired')
 
-    def _calc_is_expired(self, product, life_date):
+    @api.depends('life_date', 'operation_id')
+    @api.one
+    def _get_is_removal_date_expired(self):
+        product = self.operation_id.product_id
         is_removal_date_expired = False
-
-        if life_date:
+        if product and self.life_date:
             if product.removal_time:
-                date = fields.Datetime.from_string(life_date)
-                removal_time = product.removal_time
-                removal_date = date - timedelta(days=removal_time)
-                if removal_date < datetime.now():
+                lot = self.env['stock.production.lot'].new({
+                    'product_id': product.id,
+                    'life_date': self.life_date})
+                lot.onchange_life_date()
+                if lot.removal_date < datetime.now():
                     is_removal_date_expired = True
-        return is_removal_date_expired
+        self.is_removal_date_expired = is_removal_date_expired
 
     def _calc_lotname_from_lifedate(self, life_date):
         date = fields.Datetime.from_string(life_date)
@@ -35,9 +39,6 @@ class StockPackOperationLot(models.Model):
     def _onchange_life_date(self):
         if self.life_date:
             self.lot_name = self._calc_lotname_from_lifedate(self.life_date)
-
-        self.is_removal_date_expired = self._calc_is_expired(
-            self.operation_id.product_id, self.life_date)
 
     @api.multi
     def write(self, vals):
