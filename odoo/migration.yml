@@ -67,6 +67,7 @@ migration:
           - account_banking_sepa_direct_debit
           - account_banking_sepa_credit_transfer
           - account_invoice_check_total
+          - account_analytic_required
           - stock_available_immediately
           #### local-src
           - claim_from_reception

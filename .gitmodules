@@ -28,6 +28,9 @@
 [submodule "odoo/external-src/account-invoicing"]
 	path = odoo/external-src/account-invoicing
 	url = git@github.com:OCA/account-invoicing.git
+[submodule "odoo/external-src/account-analytic"]
+	path = odoo/external-src/account-analytic
+	url = git@github.com:OCA/account-analytic.git
 [submodule "odoo/external-src/stock-logistics-warehouse"]
 	path = odoo/external-src/stock-logistics-warehouse
 	url = git@github.com:OCA/stock-logistics-warehouse.git
