@@ -14,6 +14,8 @@
         'pricelist_discount',
         'report_intrastat',
         'l10n_be_invoice_bba',
+        'account',
+        'analytic',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
