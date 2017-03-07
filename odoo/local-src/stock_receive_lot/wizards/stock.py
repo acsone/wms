@@ -42,7 +42,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _is_parent_child(self, parent, child):
         if parent.parent_left > child.parent_left:
             return False
-        if parent.parent_right > child.parent_right:
+        if parent.parent_right < child.parent_right:
             return False
         return True
 
@@ -51,6 +51,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         if not (self.location_dest_id and
                 self._is_parent_child(self.location_op_dest_id,
                                       self.location_dest_id)):
+            # If in the wizard, there is no location or if the current location
+            # is not valid for selected operation then we need to update it
             if self.operation_id.location_dest_id.usage == 'internal':
                 self.location_dest_id = self.operation_id.location_dest_id
             else:
