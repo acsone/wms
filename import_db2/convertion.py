@@ -366,6 +366,11 @@ class LocationMapper(EntityMapper):
             odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'
+            odoo_entity['zone'] = family
+            odoo_entity['corridor'] = avenue
+            odoo_entity['shelf'] = rack
+            odoo_entity['height'] = lvl
+            odoo_entity['box'] = bin
             odoo_entities.append(odoo_entity)
 
             locations[bin_xmlid] = odoo_entity
