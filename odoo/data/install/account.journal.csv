@@ -1,7 +1,14 @@
-id,bank_acc_number,inbound_payment_method_ids/id,name,display_on_footer,show_on_dashboard,type,bank_id/id
-scenario.account_journal_cbc_1,BE20 1960 2447 3256,account.account_payment_method_manual_in,CBC Banque - CC,1,1,Bank,scenario.bank_cbc
-scenario.account_journal_ing_1,BE33 3400 3074 9846,account.account_payment_method_manual_in,ING Belgium - CC,1,1,Bank,scenario.bank_ing
-scenario.account_journal_belfius_1,BE68 5523 2846 0034,account.account_payment_method_manual_in,BELFIUS - CC,1,1,Bank,scenario.bank_belfius
-scenario.account_journal_bnp_1,BE95 0015 9777 0458,account.account_payment_method_manual_in,BNP Paribas - CC,1,1,Bank,scenario.bank_bnp
-scenario.account_journal_ing_2,BE67 3635 5755 1087,account.account_payment_method_manual_in,ING Belgium - CE,1,1,Bank,scenario.bank_ing
-scenario.account_journal_belfius_2,BE40 0910 1943 2563,account.account_payment_method_manual_in,BELFIUS - CE,1,1,Bank,scenario.bank_belfius
+id,bank_acc_number,inbound_payment_method_ids/id,name,display_on_footer,show_on_dashboard,type,bank_id/id,default_credit_account_id/id,default_debit_account_id/id,group_invoice_lines,code
+scenario.account_journal_cbc_1,BE20 1960 2447 3256,account.account_payment_method_manual_in,CBC Banque - CC,1,1,Bank,scenario.bank_cbc,scenario.account_550002,scenario.account_550002,False,BNK1
+scenario.account_journal_ing_1,BE33 3400 3074 9846,account.account_payment_method_manual_in,ING Belgium - CC,1,1,Bank,scenario.bank_ing,scenario.account_550003,scenario.account_550003,False,BNK2
+scenario.account_journal_belfius_1,BE68 5523 2846 0034,account.account_payment_method_manual_in,BELFIUS - CC,1,1,Bank,scenario.bank_belfius,scenario.account_550004,scenario.account_550004,False,BNK3
+scenario.account_journal_bnp_1,BE95 0015 9777 0458,account.account_payment_method_manual_in,BNP Paribas - CC,1,1,Bank,scenario.bank_bnp,scenario.account_550005,scenario.account_550005,False,BNK4
+scenario.account_journal_ing_2,BE67 3635 5755 1087,account.account_payment_method_manual_in,ING Belgium - CE,1,1,Bank,scenario.bank_ing,scenario.account_550006,scenario.account_550006,False,BNK5
+scenario.account_journal_belfius_2,BE40 0910 1943 2563,account.account_payment_method_manual_in,BELFIUS - CE,1,1,Bank,scenario.bank_belfius,scenario.account_550007,scenario.account_550007,False,BNK6
+scenario.account_journal_achat_bsd,,,Achat BSD,0,1,Purchase,,scenario.account_440100,scenario.account_440100,False,BSD
+scenario.account_journal_nc_bsd,,,Note de crédit BSD,0,1,Purchase refund,,scenario.account_440100,scenario.account_440100,False,NCBSD
+scenario.account_journal_nc_supplier,,,Note de Crédit Fournisseur,0,1,Purchase refund,,scenario.account_440000,scenario.account_440000,False,NCM
+scenario.account_journal_nc_customer,,,Note de Crédit Client,0,1,Sale refund,,scenario.account_400000,scenario.account_400000,False,NCV
+scenario.account_journal_nc_cd,,,Note de Crédit sur VD,0,1,Sale refund,,scenario.account_400000,scenario.account_400000,False,NCVD
+scenario.account_journal_ventes_diverses,,,Ventes Diverses,0,1,Sale,,scenario.account_400000,scenario.account_400000,False,VD
+scenario.account_journal_op_diverses,,,Opérations Diverses,0,1,Miscellaneous,,,,False,OD

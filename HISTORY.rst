@@ -7,8 +7,15 @@ Unreleased
 ++++++++++
 
 **Data Migration**
+* ALCN-713: Add new journals
+* ALCN-758: Add new chart of account
+* ALCN-760: Add accounting products
+* ALCN-785: Change the default account for the tax "	Frais de voiture - TVA 50% Non Deductible"
+* ALCN-786: Import account analytic tag
+* ALCN-787: Import account analytic account
 
 **Features and Improvements**
+* ALCN-229: Add new journals, new chart of accounts and new products
 * ALCN-763: Add new repo account-analytic and install the module account_analytic_required
 * ALCN-768: Activate the module account_banking_sepa_credit_transfer
 * ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
