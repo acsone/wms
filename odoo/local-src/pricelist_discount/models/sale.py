@@ -85,7 +85,9 @@ class SaleOrderLine(models.Model):
 
     @api.depends(
         'product_uom_qty', 'discount', 'price_unit', 'tax_id',
-        'edited_supplier_promotion', 'edited_alcyon_discount'
+        'edited_supplier_promotion', 'edited_alcyon_discount',
+        'order_id.promotion_pricelist_id',
+        'order_id.discount_pricelist_id'
     )
     def _compute_amount(self):
         """ Compute the amounts of the SO line.

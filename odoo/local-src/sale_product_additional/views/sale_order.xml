@@ -9,10 +9,12 @@
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
                 <field name="additional_line" invisible="True"/>
+                <field name="original_line_id" invisible="True"/>
+                <field name="additional_line_id" invisible="True"/>
             </xpath>
 
             <field name="order_line" position="before">
-                <!-- Be careful, fields_view_get have been overridden for these fields -->
+                 <!--Be careful, fields_view_get have been overridden for these fields-->
                 <field name="order_line_original" attrs="{'readonly': [('state', 'in', ('done','cancel'))]}"/>
                 <separator string="Additional products"
                            attrs="{'invisible': [('order_line_additional_count', '=', 0)]}"/>
@@ -24,6 +26,7 @@
 
             <field name="order_line" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="readonly">True</attribute>
             </field>
 
         </field>
