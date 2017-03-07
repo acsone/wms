@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_production_lot_form_inherit" model="ir.ui.view">
+        <field name="name">view.production.lot.form.inherit</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="checksum"/>
+                <field name="is_archived"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
