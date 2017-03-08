@@ -7,6 +7,12 @@ Unreleased
 ++++++++++
 
 **Data Migration**
+* ALCN-713: Add new journals
+* ALCN-758: Add new chart of account
+* ALCN-760: Add accounting products
+* ALCN-785: Change the default account for the tax "	Frais de voiture - TVA 50% Non Deductible"
+* ALCN-786: Import account analytic tag
+* ALCN-787: Import account analytic account
 
 * standardize all xmlid replacing remaining 'scenario' by
   __setup__ for data created once and __import__ for data generated
@@ -16,6 +22,7 @@ Unreleased
 * Import MTO and MTS routes on products
 
 **Features and Improvements**
+* ALCN-229: Add new journals, new chart of accounts and new products
 * Add the report delivery slip
 * Improve the report invoice
 * Add the delivery round report

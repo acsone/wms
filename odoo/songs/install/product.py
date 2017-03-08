@@ -36,7 +36,15 @@ def import_product_categories(ctx):
 
 
 @anthem.log
+def import_accounting_products(ctx):
+    """ Importing accounting products """
+    content = resource_stream(req, 'data/install/accounting_products.csv')
+    load_csv_stream(ctx, 'product.product', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
     import_product_categories(ctx)
+    import_accounting_products(ctx)
