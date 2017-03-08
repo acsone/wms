@@ -12,6 +12,14 @@
         'base',
         'product',
         'sale',
+        # Because when Odoo launch the tests on this module,
+        # it has not yet loaded the `purchase` module,
+        # the default `purchase_warn` value is not used,
+        # so the test fail (on partner creation),
+        # because we have a SQL constraint not null on this field,
+        # but no default value.
+        # To fix it, we add a dependence on `purchase` module.
+        'purchase',  # Only to fix problem with unit tests
     ],
     'data': [
         'security/ir.model.access.csv',
