@@ -41,6 +41,7 @@ class ProductMapper(EntityMapper):
             'categ_id/id', 'gescsg',
             mapping=mappings.PRODUCT_CATEGORY
         ),
+        FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
@@ -83,11 +84,17 @@ class ProductMapper(EntityMapper):
             xml_id = self.get_xml_id(
                 'supplierinfo', '%s-%s' % (ref, db2_entity['gesart'].strip())
             )
-            supplier_xml_id = self.get_xml_id('supplier', str(ref), 'scenario')
+            supplier_xml_id = self.get_xml_id(
+                'supplier', str(ref), '__import__')
+
+            price = db2_entity['gespan']
+            vendor_code = db2_entity['gesarc'].strip()
 
             self.importer.add_entity('supplierinfo', {
                 'id': xml_id,
                 'name/id': supplier_xml_id,
+                'product_code': vendor_code,
+                'price': price,
                 'product_tmpl_id/id': self.get_xml_id(
                     'product',
                     '%s_product_template' % odoo_entity['default_code']
@@ -116,7 +123,7 @@ class ProductMapper(EntityMapper):
         price2 = db2_entity.get('gespv2')
         if price2 and price2 != price1:
             self._pricelist_item_product_price(
-                'scenario.product_pricelist_pb2',
+                '__setup__.product_pricelist_pb2',
                 odoo_entity['default_code'],
                 price2,
                 'pb2'
@@ -204,9 +211,9 @@ class CustomerMapper(EntityMapper):
         code_remise = db2_entity.get('clista')
         if code_remise:
             if code_remise < 50:
-                pricelist = 'scenario.product_pricelist_pb1'
+                pricelist = '__setup__.product_pricelist_pb1'
             else:
-                pricelist = 'scenario.product_pricelist_pb2'
+                pricelist = '__setup__.product_pricelist_pb2'
         else:
             pricelist = None
 
@@ -225,7 +232,7 @@ class CustomerMapper(EntityMapper):
 
         if db2_id:
             self.importer.add_foreign_ref('FOURN', db2_id)
-            xml_id = self.get_xml_id('supplier', db2_id, prefix='scenario')
+            xml_id = self.get_xml_id('supplier', db2_id, prefix='__import__')
         else:
             xml_id = None
 
@@ -253,7 +260,6 @@ class SupplierMapper(EntityMapper):
     DB2_REF_NAME = 'founum'
 
     XMLID_FIELD = 'ref'
-    XMLID_IMPORT_NAME = 'scenario'
 
     FIELDS_MAPPING = [
         FieldMapper('ref', 'founum'),
@@ -268,7 +274,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
         FieldMapper('alcyon_category_id/id',
-                    constant='scenario.partner_category_supplier'),
+                    constant='__setup__.partner_category_supplier'),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
@@ -318,7 +324,7 @@ class LocationMapper(EntityMapper):
         """ Create hierarchy first """
         odoo_entities = []
 
-        locations = []
+        locations = {}
 
         for db2_entity in db2_entities:
             value = db2_entity['location_name'].strip()
@@ -348,26 +354,32 @@ class LocationMapper(EntityMapper):
             else: # skip V, W and other unknown
                 continue
 
-            # TODO assign the control code to an Odoo field
-            # TODO treat case when same location is registered multiple time
-            # some times with control code and other without
             control_code = value[6:8]
-            control_code = control_code
 
             bin_xmlid = self.get_xml_id(
                 self.name, 'loc_' + family + avenue + rack + lvl + bin)
 
             # remove duplicates
             if bin_xmlid in locations:
+                # try to find as many control code as possible
+                if control_code and not locations[bin_xmlid]['bin_checksum_1']:
+                    locations[bin_xmlid]['bin_checksum_1'] = control_code
                 continue
-            locations.append(bin_xmlid)
 
             odoo_entity = OrderedDict(id=None)
-            odoo_entity['name'] = rack + lvl + bin
+            odoo_entity['name'] = family + avenue + rack + lvl + bin
+            odoo_entity['bin_checksum_1'] = control_code
             odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'
+            odoo_entity['zone'] = family
+            odoo_entity['corridor'] = avenue
+            odoo_entity['shelf'] = rack
+            odoo_entity['height'] = lvl
+            odoo_entity['box'] = bin
             odoo_entities.append(odoo_entity)
+
+            locations[bin_xmlid] = odoo_entity
 
         return odoo_entities
 

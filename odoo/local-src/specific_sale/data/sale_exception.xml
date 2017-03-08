@@ -9,7 +9,7 @@
             <field name="sequence">10</field>
             <field name="model">sale.order.line</field>
             <field name="code">
-veterinary = object.env.ref('scenario.partner_category_veterinary')
+veterinary = object.env.ref('__setup__.partner_category_veterinary')
 if line.order_id.partner_id.alcyon_category_id != veterinary:
     narcotic = object.env.ref('__init.product_categ_medoc')
     if line.product_id.categ_id == narcotic:
