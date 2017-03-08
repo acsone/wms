@@ -45,20 +45,20 @@ def settings(ctx):
 def default_values(ctx):
     """ Set some default values.
     """
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_default_bba', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_default_bba', {
         'key': 'default',
         'name': 'out_inv_comm_type',
         'model': 'res.partner',
         'value_unpickle': 'bba',
     })
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_bba_random', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
         'value_unpickle': 'random',
     })
 
-    account_612031 = ctx.env.ref('scenario.account_612031')
+    account_612031 = ctx.env.ref('__setup__.account_612031')
     tax_xml_id = '__setup__.account_tax_none_main_company_' \
                  'Frais_de_voiture___TVA_50%_Non_Deductible'
     create_or_update(ctx, 'account.tax', tax_xml_id, {
@@ -169,9 +169,14 @@ def activate_multicurrency(ctx):
 def create_financial_journals(ctx):
     """ Creating financial journals """
     records = [
-        {'xmlid': 'scenario.expense_journal',
+        {'xmlid': '__setup__.expense_journal',
          'name': 'Expenses',
          'code': 'EXP',
+         'type': 'purchase',
+         },
+        {'xmlid': '__setup__.wage_journal',
+         'name': 'Wage',
+         'code': 'WAG',
          'type': 'purchase',
          },
     ]
@@ -189,7 +194,7 @@ def add_xmlid_account(ctx):
     for account in accounts:
         add_xmlid(
             ctx, account,
-            'scenario.account_' + account.code,
+            '__setup__.account_' + account.code,
             noupdate=True
             )
 
@@ -277,7 +282,7 @@ def setup_sequences(ctx):
     })
 
     refund_seq = create_or_update(
-        ctx, 'ir.sequence', 'scenario.customer_invoice_refund_seq', {
+        ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
             'prefix': 'NCV/17/',
             'padding': 5,

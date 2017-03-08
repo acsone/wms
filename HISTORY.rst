@@ -14,6 +14,13 @@ Unreleased
 * ALCN-786: Import account analytic tag
 * ALCN-787: Import account analytic account
 
+* standardize all xmlid replacing remaining 'scenario' by
+  __setup__ for data created once and __import__ for data generated
+  by import script
+* ALCN-704: Add control code on locations
+* ALCN-722: Add product price and vendor code
+* Import MTO and MTS routes on products
+
 **Features and Improvements**
 * ALCN-229: Add new journals, new chart of accounts and new products
 * Add the report delivery slip
@@ -32,6 +39,7 @@ Unreleased
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
 * Fix sale order line amount computation on pricelist_discount module
+* ALCN-772: Fix compute sale price 2 on product template
 
 **Build**
 

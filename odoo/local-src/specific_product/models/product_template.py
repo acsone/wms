@@ -24,7 +24,7 @@ class ProductTemplate(models.Model):
 
     def _compute_sale_price_2(self):
         for product in self:
-            pricelist = self.env.ref('scenario.product_pricelist_pb2')
+            pricelist = self.env.ref('__setup__.product_pricelist_pb2')
 
             item_count = self.env['product.pricelist.item'].search_count([
                 ('pricelist_id', '=', pricelist.id),
@@ -33,7 +33,7 @@ class ProductTemplate(models.Model):
             ])
 
             # We check if product price is modified by the price list
-            if item_count:
+            if item_count and product.product_variant_ids:
                 price = pricelist.price_get(
                     prod_id=product.product_variant_ids[0].id,
                     qty=1
