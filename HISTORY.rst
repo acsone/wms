@@ -22,6 +22,7 @@ Unreleased
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
 * Fix sale order line amount computation on pricelist_discount module
+* ALCN-772: Fix compute sale price 2 on product template
 
 **Build**
 
