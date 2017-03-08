@@ -12,16 +12,18 @@
         'sale',
         'specific_base',
         'pricelist_discount',
-        'l10n_be_apb_tax',
-        'l10n_be_antibiotic_tax',
-        'l10n_be_invoice_bba',
+        # TODO: To migrate in V10
+        # 'l10n_be_apb_tax',
+        # 'l10n_be_antibiotic_tax',
+        # 'l10n_be_invoice_bba',
         'report_intrastat',
         'account',
         'analytic',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/account_tax_group.xml',
+        # TODO: To migrate in V10
+        # 'data/account_tax_group.xml',
         'views/account_invoice_view.xml',
         'views/res_config.xml',
         'views/ir_sequence.xml',
