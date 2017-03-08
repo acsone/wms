@@ -86,8 +86,8 @@ class Importer:
             headers = rows[0].keys()
 
             file_path = os.path.join(self.csv_path, '%s.csv' % name)
-            with open(file_path, 'w') as csvfile:
-                writer = csv.DictWriter(csvfile, headers)
+            with open(file_path, 'wb') as csvfile:
+                writer = csv.DictWriter(csvfile, headers, lineterminator='\n')
                 writer.writeheader()
                 writer.writerows(rows)
 

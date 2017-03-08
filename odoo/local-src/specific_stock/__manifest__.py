@@ -17,9 +17,16 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        # Views
         'views/product_category.xml',
         'views/product_template.xml',
         'views/stock_pack_operation.xml',
+        'views/stock_location.xml',
+        'views/stock_production_lot.xml',
+
+        # Data
+        'data/ir_cron.xml',
+        'data/ir_config_parameter.xml',
     ],
     'installable': True,
 }

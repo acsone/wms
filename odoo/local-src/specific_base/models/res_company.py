@@ -10,3 +10,10 @@ class ResCompany(models.Model):
 
     order_phone = fields.Char(string='Order phone')
     order_fax = fields.Char(string='Order fax')
+
+    invoice_terms_conditions = fields.Text(
+        string='Invoice Terms and Conditions', translate=True
+    )
+    delivery_terms_conditions = fields.Html(
+        string='Delivery Terms and Conditions', translate=True
+    )

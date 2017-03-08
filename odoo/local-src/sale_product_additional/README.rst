@@ -9,13 +9,20 @@ Sale Product Additional
 This module adds additional products on product template which used on sale order.
 
 
+Restrictions
+============
+
+This module doesn't manage product variants.
+So we consider, we have only one variant for each product template.
+
+
 Usage
 =====
 
 On product template form, you can configure additional products.
 
 While creating a new quotation (sale order),
-additional products are automaticly added to sale order using rules defined on product template.
+additional products are automatically added to sale order using rules defined on product template.
 
 
 Credits

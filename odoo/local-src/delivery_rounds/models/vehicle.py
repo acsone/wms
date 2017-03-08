@@ -33,3 +33,4 @@ class RoundVehicle(models.Model):
     color = fields.Integer('Color Index')
     time = fields.Float(
         'Planned Time')
+    registration = fields.Char('Registration')

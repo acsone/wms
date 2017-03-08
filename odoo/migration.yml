@@ -59,6 +59,7 @@ migration:
           - account_invoice_check_total
           ## oca/bank-payment
           - account_banking_sepa_direct_debit
+          - account_banking_sepa_credit_transfer
           ## oca/l10n-belgium
           #- l10n_be_antibiotic_tax
           #- l10n_be_apb_tax
@@ -68,6 +69,10 @@ migration:
           ## oca/server-tools
           - mail_environment
           - server_environment
+          ## oca/account-analytic
+          - account_analytic_required
+          ## oca/stock-logistics-warehouse
+          - stock_available_immediately
           ### local-src
           #- claim_from_reception
           - delivery_rounds
@@ -102,3 +107,4 @@ migration:
           - stock_quant_bylocation
           - stock_refill
           - web_autorefresh
+          - specific_report

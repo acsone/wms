@@ -33,6 +33,7 @@ def settings(ctx):
         'module_payment_transfer': False,
         'group_analytic_account_for_sales': True,
         'group_analytic_account_for_purchases': True,
+        'group_supplier_inv_check_total': True,
     }).execute()
 
     ctx.env.ref('base.main_company').write({
@@ -44,13 +45,13 @@ def settings(ctx):
 def default_values(ctx):
     """ Set some default values.
     """
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_default_bba', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_default_bba', {
         'key': 'default',
         'name': 'out_inv_comm_type',
         'model': 'res.partner',
         'value_unpickle': 'bba',
     })
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_bba_random', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
@@ -146,12 +147,12 @@ def activate_multicurrency(ctx):
 def create_financial_journals(ctx):
     """ Creating financial journals """
     records = [
-        {'xmlid': 'scenario.expense_journal',
+        {'xmlid': '__setup__.expense_journal',
          'name': 'Expenses',
          'code': 'EXP',
          'type': 'purchase',
          },
-        {'xmlid': 'scenario.wage_journal',
+        {'xmlid': '__setup__.wage_journal',
          'name': 'Wage',
          'code': 'WAG',
          'type': 'purchase',
@@ -171,7 +172,7 @@ def add_xmlid_account(ctx):
     for account in accounts:
         add_xmlid(
             ctx, account,
-            'scenario.account_' + account.code,
+            '__setup__.account_' + account.code,
             noupdate=True
             )
 
@@ -259,7 +260,7 @@ def setup_sequences(ctx):
     })
 
     refund_seq = create_or_update(
-        ctx, 'ir.sequence', 'scenario.customer_invoice_refund_seq', {
+        ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
             'prefix': 'NCV/17/',
             'padding': 5,

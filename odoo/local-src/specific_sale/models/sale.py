@@ -2,6 +2,8 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.addons.decimal_precision import decimal_precision as dp
+
 from odoo import api, fields, models
 
 
@@ -34,10 +36,39 @@ class Sale(models.Model):
         elif not self.sale_channel_visible:
             self.sale_channel = False
 
-    @api.onchange('partner_id')
-    def _onchange_compute_exception(self):
-        for line in self.order_line:
-            line._compute_exception()
+    @api.model
+    def get_values_for_additional_line(
+            self,
+            new_product,
+            new_quantity,
+            additional_product,
+            position,
+            line
+    ):
+        values = super(Sale, self).get_values_for_additional_line(
+            new_product,
+            new_quantity,
+            additional_product,
+            position,
+            line
+        )
+        line_model = self.env['sale.order.line']
+        qty_unavailable = line_model.get_product_qty_unavailable(
+            new_product,
+            values['product_uom_qty']
+        )
+        values['product_qty_unavailable'] = qty_unavailable
+
+        return values
+
+    @api.model
+    def get_current_values_for_additional_line(self, current_line, line):
+        current_values = super(
+            Sale, self
+        ).get_current_values_for_additional_line(current_line, line)
+        qty_unavailable = current_line.product_qty_unavailable
+        current_values['product_qty_unavailable'] = qty_unavailable
+        return current_values
 
 
 class SaleOrderLine(models.Model):
@@ -45,7 +76,6 @@ class SaleOrderLine(models.Model):
 
     exception = fields.Char(
         compute='_compute_exception',
-        readonly=False,
     )
 
     @api.depends('product_id', 'price_unit', 'price_subtotal')
@@ -63,3 +93,169 @@ class SaleOrderLine(models.Model):
                         exception = rule.description
                         break
             line.exception = exception
+
+    product_qty_unavailable = fields.Float(
+        string='Quantity unavailable',
+        digits=dp.get_precision('Product Unit of Measure'),
+        readonly=True,
+    )
+
+    current_product_qty_unavailable = fields.Float(
+        string='Current quantity unavailable',
+        digits=dp.get_precision('Product Unit of Measure'),
+        compute='_compute_current_product_qty_unavailable',
+    )
+
+    def _compute_current_product_qty_unavailable(self):
+        for line in self:
+            line.current_product_qty_unavailable = (
+                self.get_product_qty_unavailable(
+                    line.product_id,
+                    line.product_uom_qty,
+                    line.state == 'sale',
+                    line.id
+                )
+            )
+
+    @api.model
+    def get_product_qty_unavailable(self, product, product_uom_qty,
+                                    confirmed, line_id):
+        if product and product_uom_qty:
+            immediately_usable_qty = product.immediately_usable_qty
+            if confirmed:
+                # If sale order line confirmed, ordered quantity
+                # is already computed in immediately usable quantity
+                if immediately_usable_qty >= 0:
+                    # Because ordered quantity is already
+                    # computed in immediately usable quantity,
+                    # if immediately usable quantity is positive,
+                    # the unavailable quantity equals 0
+                    return 0
+                else:
+                    # Because ordered quantity is already
+                    # computed in immediately usable quantity,
+                    # if immediately usable quantity is negative,
+                    # the unavailable quantity
+                    # equals the immediately usable quantity
+                    # minus the sum of stock move quantity
+                    # which stock move is after the order line stock move
+                    order_line_stock_move = self.env['stock.move'].search([
+                        ('procurement_id.sale_line_id', '=', line_id),
+                        ('state', 'not in', ['draft', 'cancel', 'done'])
+                    ])
+                    stock_move_date_expected = (
+                        order_line_stock_move.date_expected
+                    )
+
+                    next_stock_moves = self.env['stock.move'].search([
+                        ('procurement_id.sale_line_id', '!=', line_id),
+                        ('state', 'not in', ['draft', 'cancel', 'done']),
+                        '|',
+                        ('priority', '<',  order_line_stock_move.priority),
+                        '&',
+                        ('priority', '=', order_line_stock_move.priority),
+                        ('date_expected', '>', stock_move_date_expected),
+                    ])
+                    next_quantities = sum(
+                        move.product_uom_qty for move in next_stock_moves
+                    )
+
+                    good_immediately_usable_qty = (
+                        immediately_usable_qty + next_quantities
+                    )
+
+                    if good_immediately_usable_qty <= 0:
+                        return min(product_uom_qty,
+                                   abs(good_immediately_usable_qty))
+                    else:
+                        return 0
+            else:
+                # If sale order line is NOT confirmed, ordered quantity
+                # is NOT already computed in immediately usable quantity
+                if immediately_usable_qty <= 0:
+                    # If immediately usable quantity is negative,
+                    # the unavailable quantity equals the sum
+                    # between ordered quantity
+                    # and immediately usable quantity absolute value
+                    return product_uom_qty
+                else:
+                    # If immediately usable quantity is positive,
+                    # the unavailable quantity equals the ordered quantity
+                    # minus the immediately usable quantity
+                    # (limited with ordered quantity)
+                    return max(product_uom_qty - immediately_usable_qty, 0)
+        else:
+            return None
+
+    @api.onchange('product_id', 'product_uom_qty')
+    def onchange_for_product_qty_unavailable(self):
+        context = self.env.context or {}
+        if context.get('must_compute_product_qty_unavailable'):
+            for line in self:
+                line.product_qty_unavailable = (
+                    self.get_product_qty_unavailable(
+                        self.product_id,
+                        self.product_uom_qty,
+                        self.state == 'sale',
+                        None
+                    )
+                )
+
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        new_context = self.env.context.copy() if self.env.context else {}
+        if isinstance(field_name, list):
+            if 'product_uom_qty' in field_name or 'product_id' in field_name:
+                new_context['must_compute_product_qty_unavailable'] = True
+        else:
+            if field_name in ['product_uom_qty', 'product_id']:
+                new_context['must_compute_product_qty_unavailable'] = True
+        return super(SaleOrderLine, self.with_context(new_context)).onchange(
+            values, field_name, field_onchange
+        )
+
+    @api.model
+    def create(self, vals):
+        record = super(SaleOrderLine, self).create(vals)
+        if vals.get('product_uom_qty'):
+            # Because product_qty_unavailable is readonly,
+            # we need to apply the onchange
+            # on create to save the correct values.
+            #
+            # Without that,
+            # the product_qty_unavailable isn't sent by form view,
+            # and its value isn't save.
+            record.with_context(
+                must_compute_product_qty_unavailable=True
+            ).onchange_for_product_qty_unavailable()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(SaleOrderLine, self).write(vals)
+        if vals.get('product_uom_qty'):
+            # Because product_qty_unavailable is readonly,
+            # we need to apply the onchange
+            # on write to save the correct values.
+            #
+            # Without that,
+            # the product_qty_unavailable isn't sent by form view,
+            # and its value isn't save.
+            self.with_context(
+                must_compute_product_qty_unavailable=True
+            ).onchange_for_product_qty_unavailable()
+        return result
+
+
+# Override the inherit of sale_product_additional
+# to complete sale.order.line.original with new specific fields
+class SaleOrderLineOriginal(models.Model):
+    _name = 'sale.order.line.original'
+    _inherit = 'sale.order.line'
+
+
+# Override the inherit of sale_product_additional
+# to complete sale.order.line.additional with new specific fields
+class SaleOrderLineAdditional(models.Model):
+    _name = 'sale.order.line.additional'
+    _inherit = 'sale.order.line'

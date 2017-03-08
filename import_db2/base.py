@@ -177,8 +177,9 @@ class EntityMapper:
         if not os.path.exists(caches_path):
             os.makedirs(caches_path)
 
-        with open(self.file_cache_path, 'w') as csv_file:
-            writer = csv.DictWriter(csv_file, entities[0].keys())
+        with open(self.file_cache_path, 'wb') as csv_file:
+            writer = csv.DictWriter(
+                csv_file, entities[0].keys(), lineterminator='\n')
             writer.writeheader()
             writer.writerows(entities)
 
