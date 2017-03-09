@@ -111,15 +111,16 @@ def create_locations(ctx):
 
     # Parking is under Input (part of stock)
     parkings = [
-        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments'),
-        ('__setup__.stock_location_parking_materiel', 'Parking Matériel'),
-        ('__setup__.stock_location_parking_frigo', 'Parking Frigo'),
+        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments', 'view'),
+        ('__setup__.stock_location_parking_ali', 'Parking Aliments', 'internal'),
+        ('__setup__.stock_location_parking_materiel', 'Parking Matériel', 'internal'),
+        ('__setup__.stock_location_parking_frigo', 'Parking Frigo', 'internal'),
     ]
-    for xmlid, name in parkings:
+    for xmlid, name, usage in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_company').id,
-            'usage': 'view',
+            'usage': usage,
             'kind': 'parking',
         })
 
@@ -230,6 +231,9 @@ def create_putaway(ctx):
         ('__setup__.stock_putaway_strat_parking_medoc',
          '__setup__.product_categ_medoc',
          '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_aliment',
+         '__setup__.product_categ_ali',
+         '__setup__.stock_location_parking_ali'),
         ('__setup__.stock_putaway_strat_parking_materiel',
          '__setup__.product_categ_materiel',
          '__setup__.stock_location_parking_medoc'),
@@ -314,6 +318,8 @@ def create_picking_types(ctx):
     location_frigo = ctx.env.ref('__setup__.stock_location_frigo')
     location_parking_medoc = ctx.env.ref(
         '__setup__.stock_location_parking_medoc')
+    location_parking_ali = ctx.env.ref(
+        '__setup__.stock_location_parking_ali')
     location_parking_materiel = ctx.env.ref(
         '__setup__.stock_location_parking_materiel')
     location_parking_frigo = ctx.env.ref(
@@ -403,6 +409,16 @@ def create_picking_types(ctx):
          'default_location_dest_id': location_medoc.id,
          'use_create_lots': False,
          'color': color_medoc,
+         'sequence': 9,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_ali',
+         'name': 'Rangement Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_ali.id,
+         'default_location_dest_id': location_ali.id,
+         'use_create_lots': False,
+         'color': color_ali,
          'sequence': 9,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
