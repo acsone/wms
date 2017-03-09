@@ -34,6 +34,7 @@ Unreleased
 * Rewriting sale_product_additional module
 * ALCN-741: Add check of rule exception on sale order line
 * ALCN-742: Add custom back order informations on sale order
+* Logistics: Add Parking for Aliments and routing
 
 **Bugfixes**
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
