@@ -40,6 +40,7 @@ Unreleased
 
 * Fix sale order line amount computation on pricelist_discount module
 * ALCN-772: Fix compute sale price 2 on product template
+* ALCN-701: Move tracking of lot under sheet instead of inside sheet
 
 **Build**
 
