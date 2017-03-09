@@ -104,10 +104,11 @@ class StockPackOperationLotAdd(models.TransientModel):
     life_date = fields.Datetime(
         string='End of Life Date')
     is_removal_date_expired = fields.Boolean(
-        'Removal Date Expired', readonly=True)
+        'Removal Date Expired',
+        compute='_get_is_removal_date_expired')
 
-    @api.onchange('life_date')
-    def _onchange_life_date(self):
+    @api.depends('life_date')
+    def _get_is_removal_date_expired(self):
         oplot = self.env['stock.pack.operation.lot']
         if self.life_date:
             self.lot_name = oplot._calc_lotname_from_lifedate(self.life_date)
@@ -150,9 +151,10 @@ class StockPackOperationLotAdd(models.TransientModel):
         if vals.get('lot_name'):
             self._convert_lot_name2id(vals)
         res = super(StockPackOperationLotAdd, self).write(vals)
-        if self.lot_id.life_date != self.life_date:
-            self.lot_id.life_date = self.life_date
-            self.lot_id.onchange_life_date()
+        for rec in self:
+            if rec.lot_id and rec.lot_id.life_date != rec.life_date:
+                rec.lot_id.life_date = rec.life_date
+                rec.lot_id.onchange_life_date()
         return res
 
     def _add(self):
@@ -200,5 +202,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     def button_nextlot(self):
         self._add()
         self.qty = False
+        self.life_date = False
         self.lot_name = False
         self.lot_id = False

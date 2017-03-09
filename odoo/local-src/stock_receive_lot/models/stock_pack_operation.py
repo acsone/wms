@@ -2,7 +2,7 @@
 # © 2016 Julien Coux (Camptocamp)
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from openerp import models, fields, api
 
@@ -26,7 +26,8 @@ class StockPackOperationLot(models.Model):
                     'product_id': product.id,
                     'life_date': self.life_date})
                 lot.onchange_life_date()
-                if lot.removal_date < datetime.now():
+                if (lot.removal_date and fields.Datetime.from_string(
+                        lot.removal_date) < datetime.now()):
                     is_removal_date_expired = True
         self.is_removal_date_expired = is_removal_date_expired
 
