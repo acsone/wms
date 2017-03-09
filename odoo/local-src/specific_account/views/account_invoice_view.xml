@@ -13,8 +13,11 @@
                 </xpath>
 
                 <xpath expr="//group[field[@name='partner_id']]" position="inside">
-                    <field name="reference_type" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"
-                           on_change="generate_bbacomm(type,reference_type, partner_id,reference, context)"/>
+                    <!--
+                    TODO: To reactivate after migration V10 of l10n_be_apb_tax module
+                    -->
+                    <!--<field name="reference_type" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"-->
+                           <!--on_change="generate_bbacomm(type,reference_type, partner_id,reference)"/>-->
                     <field name="reference" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"/>
                 </xpath>
             </field>
