@@ -54,6 +54,7 @@ class TestPickingTransfer(TransactionCase):
             'picking_type_id': self.ref('stock.picking_type_in'),
             'location_id': self.supplier_location.id,
             'location_dest_id': self.stock_location.id,
+            'to_process_quant_expired': True,
             'move_lines': [
                 (0, 0, {
                     'name': 'a move',
