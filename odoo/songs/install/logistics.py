@@ -7,13 +7,37 @@ from anthem.lyrics.records import create_or_update
 
 
 @anthem.log
+def company_settings(ctx):
+    company = ctx.env.ref('base.main_company')
+    company.write({
+        'delivery_terms_conditions':
+            "<p>Pour être livré le jour de livraison prévu, veuillez passer "
+            "vos commandes :<br/>"
+            "<b>Par Internet</b> <u>www.alcyonbelux.be</u> : "
+            "avant <b>9h15</b> le jour de livraison.<br/>"
+            "<b>Par fax ou répondeur</b>: avant <b>9h00</b> "
+            "le jour de livraison.<br/>"
+            "<b>Par téléphone</b> (sauf pour les médicaments): "
+            "avant <b>9h00</b> le jour de livraison</p>"
+            "<p>Seules seront prises en considération les demandes de "
+            "retours signalées dans les 48 heures de la réception "
+            "de la marchandise.<br/>"
+            "Elles devront être faites aurpès de notre "
+            "<b>service Qualité</b> au <b>04/338.84.22</b> "
+            "ou pas email <b>qualite@alcyonbelux.be</b> "
+            "ou par fax <b>04/338.84.35</b>.</p>"
+    })
+
+
+@anthem.log
 def activate_options(ctx):
     """ Activating logistics options """
     employee_group = ctx.env.ref('base.group_user')
     employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('stock.group_production_lot').id),
-                        (4, ctx.env.ref('stock.group_stock_multi_locations').id),
-                        (4, ctx.env.ref('stock.group_adv_location').id)]
+        'implied_ids':
+            [(4, ctx.env.ref('stock.group_production_lot').id),
+             (4, ctx.env.ref('stock.group_stock_multi_locations').id),
+             (4, ctx.env.ref('stock.group_adv_location').id)]
 
     })
 
@@ -88,15 +112,32 @@ def create_locations(ctx):
 
     # Parking is under Input (part of stock)
     parkings = [
-        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments'),
-        ('__setup__.stock_location_parking_materiel', 'Parking Matériel'),
-        ('__setup__.stock_location_parking_frigo', 'Parking Frigo'),
+        (
+            '__setup__.stock_location_parking_medoc',
+            'Parking Medicaments',
+            'view'
+        ),
+        (
+            '__setup__.stock_location_parking_ali',
+            'Parking Aliments',
+            'internal'
+        ),
+        (
+            '__setup__.stock_location_parking_materiel',
+            'Parking Matériel',
+            'internal'
+        ),
+        (
+            '__setup__.stock_location_parking_frigo',
+            'Parking Frigo',
+            'internal'
+        ),
     ]
-    for xmlid, name in parkings:
+    for xmlid, name, usage in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_company').id,
-            'usage': 'view',
+            'usage': usage,
             'kind': 'parking',
         })
 
@@ -207,6 +248,9 @@ def create_putaway(ctx):
         ('__setup__.stock_putaway_strat_parking_medoc',
          '__setup__.product_categ_medoc',
          '__setup__.stock_location_parking_medoc'),
+        ('__setup__.stock_putaway_strat_parking_aliment',
+         '__setup__.product_categ_ali',
+         '__setup__.stock_location_parking_ali'),
         ('__setup__.stock_putaway_strat_parking_materiel',
          '__setup__.product_categ_materiel',
          '__setup__.stock_location_parking_medoc'),
@@ -281,6 +325,8 @@ def create_picking_types(ctx):
     location_frigo = ctx.env.ref('__setup__.stock_location_frigo')
     location_parking_medoc = ctx.env.ref(
         '__setup__.stock_location_parking_medoc')
+    location_parking_ali = ctx.env.ref(
+        '__setup__.stock_location_parking_ali')
     location_parking_materiel = ctx.env.ref(
         '__setup__.stock_location_parking_materiel')
     location_parking_frigo = ctx.env.ref(
@@ -370,6 +416,16 @@ def create_picking_types(ctx):
          'default_location_dest_id': location_medoc.id,
          'use_create_lots': False,
          'color': color_medoc,
+         'sequence': 9,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_ali',
+         'name': 'Rangement Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_ali.id,
+         'default_location_dest_id': location_ali.id,
+         'use_create_lots': False,
+         'color': color_ali,
          'sequence': 9,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
@@ -553,6 +609,7 @@ def assign_route_categories(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring logistics """
+    company_settings(ctx)
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)

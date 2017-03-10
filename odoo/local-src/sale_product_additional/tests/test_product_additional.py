@@ -20,9 +20,17 @@ class TestProductAdditional(TransactionCase):
         self.add_p1 = self.env['product.template'].create({
             'name': 'Unittest additional P1',
             'uom_id': self.ref('product.product_uom_unit'),
-            'price': 50,
+            'list_price': 50,
             'taxes_id': [(6, False, [self.tax.id])],
             'description_sale': 'Unittest additional P1 for sale',
+        })
+
+        self.add_p2 = self.env['product.template'].create({
+            'name': 'Unittest additional P2',
+            'uom_id': self.ref('product.product_uom_unit'),
+            'list_price': 50,
+            'taxes_id': [(6, False, [self.tax.id])],
+            'description_sale': 'Unittest additional P2 for sale',
         })
 
         self.p1 = self.env['product.template'].create({
@@ -38,7 +46,7 @@ class TestProductAdditional(TransactionCase):
                     'position_on_sale': 'just_after',
                 }),
             ],
-            'price': 150,
+            'list_price': 150,
             'taxes_id': [(6, False, [self.tax.id])],
         })
 
@@ -60,7 +68,7 @@ class TestProductAdditional(TransactionCase):
                     'position_on_sale': 'at_end',
                 }),
             ],
-            'price': 250,
+            'list_price': 250,
             'taxes_id': [(6, False, [self.tax.id])],
         })
 
@@ -83,12 +91,12 @@ class TestProductAdditional(TransactionCase):
             'name': 'Unittest partner',
         })
 
-    def test_1_basic(self):
-        self.sale = self.env['sale.order'].new({
+    def test_01_basic(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p1.name,
@@ -100,15 +108,13 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 2)
 
-    def test_2_position_on_sale_just_after(self):
-        self.sale = self.env['sale.order'].new({
+    def test_02_position_on_sale_just_after(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p1.name,
@@ -126,8 +132,6 @@ class TestProductAdditional(TransactionCase):
                 }),
             ]
         })
-
-        self.sale._onchange_order_line_original()
 
         self.assertEqual(len(self.sale.order_line), 3)
 
@@ -142,11 +146,11 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[2].product_id,
                          self.p2.product_variant_ids[0])
 
-    def test_3_position_on_sale_at_end(self):
-        self.sale = self.env['sale.order'].new({
+    def test_03_position_on_sale_at_end(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p3.name,
@@ -165,8 +169,6 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 3)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
@@ -180,12 +182,12 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[2].product_id,
                          self.add_p1.product_variant_ids[0])
 
-    def test_4_calculation_method_once(self):
-        self.sale = self.env['sale.order'].new({
+    def test_04_calculation_method_once(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p1.name,
@@ -197,8 +199,6 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 2)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
@@ -206,8 +206,9 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[0].product_uom_qty, 1)
         self.assertEqual(lines[1].product_uom_qty, 1)
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
+                (5, 0, 0),
                 (0, 0, {
                     'name': self.p1.name,
                     'product_id': self.p1.product_variant_ids.id,
@@ -217,8 +218,6 @@ class TestProductAdditional(TransactionCase):
                 }),
             ]
         })
-
-        self.sale._onchange_order_line_original()
 
         self.assertEqual(len(self.sale.order_line), 2)
 
@@ -227,12 +226,12 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[0].product_uom_qty, 100)
         self.assertEqual(lines[1].product_uom_qty, 1)
 
-    def test_5_calculation_method_proportional(self):
-        self.sale = self.env['sale.order'].new({
+    def test_05_calculation_method_proportional(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p4.name,
@@ -244,16 +243,15 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 1)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
 
         self.assertEqual(lines[0].product_uom_qty, 1)
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
+                (5, 0, 0),
                 (0, 0, {
                     'name': self.p4.name,
                     'product_id': self.p4.product_variant_ids.id,
@@ -263,8 +261,6 @@ class TestProductAdditional(TransactionCase):
                 }),
             ]
         })
-
-        self.sale._onchange_order_line_original()
 
         self.assertEqual(len(self.sale.order_line), 2)
 
@@ -273,8 +269,9 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[0].product_uom_qty, 100)
         self.assertEqual(lines[1].product_uom_qty, 10)
 
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
+                (5, 0, 0),
                 (0, 0, {
                     'name': self.p4.name,
                     'product_id': self.p4.product_variant_ids.id,
@@ -285,8 +282,6 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 2)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
@@ -294,11 +289,11 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[0].product_uom_qty, 109)
         self.assertEqual(lines[1].product_uom_qty, 10)
 
-    def test_6_is_free(self):
-        self.sale = self.env['sale.order'].new({
+    def test_06_is_free(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p1.name,
@@ -317,24 +312,20 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        for line in self.sale.order_line_original:
-            line.product_id_change()
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 4)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
 
-        self.assertEqual(lines[0].price_unit, self.p1.price)
-        self.assertEqual(lines[1].price_unit, self.add_p1.price)
-        self.assertEqual(lines[2].price_unit, self.p3.price)
+        self.assertEqual(lines[0].price_unit, self.p1.list_price)
+        self.assertEqual(lines[1].price_unit, self.add_p1.list_price)
+        self.assertEqual(lines[2].price_unit, self.p3.list_price)
         self.assertEqual(lines[3].price_unit, 0)
 
-    def test_7_quantity(self):
-        self.sale = self.env['sale.order'].new({
+    def test_07_quantity(self):
+        self.sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
         })
-        self.sale.update({
+        self.sale.write({
             'order_line_original': [
                 (0, 0, {
                     'name': self.p3.name,
@@ -346,10 +337,6 @@ class TestProductAdditional(TransactionCase):
             ]
         })
 
-        for line in self.sale.order_line_original:
-            line.product_id_change()
-        self.sale._onchange_order_line_original()
-
         self.assertEqual(len(self.sale.order_line), 2)
 
         lines = self.sale.order_line.sorted(key=lambda l: l.sequence)
@@ -357,14 +344,62 @@ class TestProductAdditional(TransactionCase):
         self.assertEqual(lines[0].product_uom_qty, 1)
         self.assertEqual(lines[1].product_uom_qty, 4)
 
-    def test_8_constraints(self):
-        values = {
+    def get_values_for_test_constraints_quantities(
+            self, original_quantity, quantity
+    ):
+        return {
             'name': 'Unittest P1',
             'uom_id': self.ref('product.product_uom_unit'),
             'additional_product_ids': [
                 (0, 0, {
-                    'original_quantity': 0,
+                    'original_quantity': original_quantity,
                     'product_id': self.add_p1.id,
+                    'quantity': quantity,
+                    'calculation_method': 'once',
+                    'is_free': False,
+                    'position_on_sale': 'just_after',
+                }),
+            ],
+        }
+
+    def test_08_constraints_quantity(self):
+        # Exception because original_quantity is 0
+        with self.assertRaises(Exception):
+            self.env['product.template'].create(
+                self.get_values_for_test_constraints_quantities(0, 1)
+            )
+
+    def test_09_constraints_original_quantity(self):
+        # Exception because quantity is 0
+        with self.assertRaises(Exception):
+            self.env['product.template'].create(
+                self.get_values_for_test_constraints_quantities(1, 0)
+            )
+
+    def test_10_constraints_quantities_ok(self):
+        # No exception because original_quantity and quantity is 1
+        self.env['product.template'].create(
+            self.get_values_for_test_constraints_quantities(1, 1)
+        )
+
+    def get_values_for_test_constraints_duplicates(
+            self, product_id_1, product_id_2
+    ):
+        return {
+            'name': 'Unittest P1',
+            'uom_id': self.ref('product.product_uom_unit'),
+            'additional_product_ids': [
+                (0, 0, {
+                    'original_quantity': 1,
+                    'product_id': product_id_1,
+                    'quantity': 1,
+                    'calculation_method': 'once',
+                    'is_free': False,
+                    'position_on_sale': 'just_after',
+                }),
+                (0, 0, {
+                    'original_quantity': 1,
+                    'product_id': product_id_2,
                     'quantity': 1,
                     'calculation_method': 'once',
                     'is_free': False,
@@ -372,11 +407,20 @@ class TestProductAdditional(TransactionCase):
                 }),
             ],
         }
-        with self.assertRaises(Exception):
-            self.env['product.template'].create(values)
 
-        values['additional_product_ids'][0][2]['original_quantity'] = 1
-        values['additional_product_ids'][0][2]['quantity'] = 0
-
+    def test_11_constraints_duplicates(self):
+        # Exception because 2 additional product with 'add_p1' product
         with self.assertRaises(Exception):
-            self.env['product.template'].create(values)
+            self.env['product.template'].create(
+                self.get_values_for_test_constraints_duplicates(
+                    self.add_p1.id, self.add_p1.id
+                )
+            )
+
+    def test_12_constraints_duplicates(self):
+        # No exception because additional products with 2 different product
+        self.env['product.template'].create(
+            self.get_values_for_test_constraints_duplicates(
+                self.add_p1.id, self.add_p2.id
+            )
+        )

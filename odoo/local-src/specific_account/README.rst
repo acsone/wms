@@ -11,6 +11,8 @@ This module adds Alcyon specific fields and logic for accounting.
 * Alcyon invoice report.
 * Display 'Accounting Entries' menu for Accountants
 * Change the sequence to display the year of the end date
+* Add a new tax group APB to flag all APB tax
+* Display the vendor reference on supplier invoice
 
 Credits
 =======

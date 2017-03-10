@@ -9,12 +9,17 @@
     'license': 'AGPL-3',
     'category': 'Sales',
     'depends': [
+        'pricelist_discount',
         'sale',
         'sale_exception',
+        'sale_product_additional',
+        'stock_available_immediately',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
         'data/sale_exception.xml',
+        'views/product_template.xml',
+        'views/res_partner.xml',
         'views/sale.xml',
     ],
     'installable': False,

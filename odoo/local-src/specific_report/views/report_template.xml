@@ -1,0 +1,27 @@
+<odoo>
+
+    <!-- footer with only page numbering -->
+    <template id="specific_report.page_number_footer">
+        <div class="footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline">
+                    <li>Page:</li>
+                    <li>
+                        <span class="page"/>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        <span class="topage"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </template>
+
+    <template id="assets_specific" inherit_id="report.assets_common">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/specific_report/static/src/css/specific_report.css"/>
+        </xpath>
+    </template>
+
+</odoo>

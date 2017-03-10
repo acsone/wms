@@ -33,6 +33,7 @@ def settings(ctx):
         'module_payment_transfer': False,
         'group_analytic_account_for_sales': True,
         'group_analytic_account_for_purchases': True,
+        'group_supplier_inv_check_total': True,
     }).execute()
 
     ctx.env.ref('base.main_company').write({
@@ -44,17 +45,25 @@ def settings(ctx):
 def default_values(ctx):
     """ Set some default values.
     """
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_default_bba', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_default_bba', {
         'key': 'default',
         'name': 'out_inv_comm_type',
         'model': 'res.partner',
         'value_unpickle': 'bba',
     })
-    create_or_update(ctx, 'ir.values', 'scenario.res_partner_bba_random', {
+    create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
         'value_unpickle': 'random',
+    })
+
+    account_612031 = ctx.env.ref('__setup__.account_612031')
+    tax_xml_id = '__setup__.account_tax_none_main_company_' \
+                 'Frais_de_voiture___TVA_50%_Non_Deductible'
+    create_or_update(ctx, 'account.tax', tax_xml_id, {
+        'account_id': account_612031.id,
+        'refund_account_id': account_612031.id
     })
 
 
@@ -127,6 +136,20 @@ def import_account_journal(ctx):
 
 
 @anthem.log
+def import_account_analytic_tag(ctx):
+    """ Importing account analytic tags """
+    content = resource_stream(req, 'data/install/account.analytic.tag.csv')
+    load_csv_stream(ctx, 'account.analytic.tag', content, delimiter=',')
+
+
+@anthem.log
+def import_account_analytic_account(ctx):
+    """ Importing account analytic account """
+    content = resource_stream(req, 'data/install/account.analytic.account.csv')
+    load_csv_stream(ctx, 'account.analytic.account', content, delimiter=',')
+
+
+@anthem.log
 def company_currency(ctx):
     """ Setting company's currency """
     company = ctx.env.ref('base.main_company')
@@ -146,12 +169,12 @@ def activate_multicurrency(ctx):
 def create_financial_journals(ctx):
     """ Creating financial journals """
     records = [
-        {'xmlid': 'scenario.expense_journal',
+        {'xmlid': '__setup__.expense_journal',
          'name': 'Expenses',
          'code': 'EXP',
          'type': 'purchase',
          },
-        {'xmlid': 'scenario.wage_journal',
+        {'xmlid': '__setup__.wage_journal',
          'name': 'Wage',
          'code': 'WAG',
          'type': 'purchase',
@@ -171,7 +194,7 @@ def add_xmlid_account(ctx):
     for account in accounts:
         add_xmlid(
             ctx, account,
-            'scenario.account_' + account.code,
+            '__setup__.account_' + account.code,
             noupdate=True
             )
 
@@ -259,7 +282,7 @@ def setup_sequences(ctx):
     })
 
     refund_seq = create_or_update(
-        ctx, 'ir.sequence', 'scenario.customer_invoice_refund_seq', {
+        ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
             'prefix': 'NCV/17/',
             'padding': 5,
@@ -277,15 +300,17 @@ def setup_sequences(ctx):
 def main(ctx):
     """ Configuring accounting """
     import_banks(ctx)
+    add_xmlid_account(ctx)
+    adapt_chart_of_account(ctx)
     import_account_journal(ctx)
+    import_account_analytic_tag(ctx)
+    import_account_analytic_account(ctx)
     company_settings(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
     create_financial_journals(ctx)
-    add_xmlid_account(ctx)
     add_xmlid_tax(ctx)
     add_xmlid_fiscal_position(ctx)
-    adapt_chart_of_account(ctx)
     settings(ctx)
     default_values(ctx)
     setup_sequences(ctx)
