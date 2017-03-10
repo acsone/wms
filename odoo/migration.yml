@@ -106,5 +106,6 @@ migration:
           - stock_putaway_route
           - stock_quant_bylocation
           - stock_refill
+          - stock_receive_lot
           - web_autorefresh
           - specific_report

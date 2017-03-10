@@ -7,43 +7,57 @@ Unreleased
 ++++++++++
 
 **Data Migration**
+
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+9.11.0 (2017-03-10)
++++++++++++++++++++
+
+**Data Migration**
+
+* standardize all xmlid replacing remaining 'scenario' by
+  __setup__ for data created once and __import__ for data generated
+  by import script
+* Import MTO and MTS routes on products
+* ALCN-704: Add control code on locations
 * ALCN-713: Add new journals
+* ALCN-722: Add product price and vendor code
 * ALCN-758: Add new chart of account
 * ALCN-760: Add accounting products
 * ALCN-785: Change the default account for the tax "	Frais de voiture - TVA 50% Non Deductible"
 * ALCN-786: Import account analytic tag
 * ALCN-787: Import account analytic account
 
-* standardize all xmlid replacing remaining 'scenario' by
-  __setup__ for data created once and __import__ for data generated
-  by import script
-* ALCN-704: Add control code on locations
-* ALCN-722: Add product price and vendor code
-* Import MTO and MTS routes on products
-
 **Features and Improvements**
-* ALCN-229: Add new journals, new chart of accounts and new products
+
 * Add the report delivery slip
 * Improve the report invoice
 * Add the delivery round report
-* ALCN-763: Add new repo account-analytic and install the module account_analytic_required
-* ALCN-768: Activate the module account_banking_sepa_credit_transfer
-* ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
-* ALCN-761: Add a new menuitem to access to analytic tags
-
 * Rewriting sale_product_additional module
+* Logistics: Add Parking for Aliments and routing
+* ALCN-229: Add new journals, new chart of accounts and new products
+* ALCN-723: Check if the removal date is expired when we receive goods
+* ALCN-739: Show the column "End of Life Date" only for picking IN. Improve reception useability by adding a new reception wizard.
 * ALCN-741: Add check of rule exception on sale order line
 * ALCN-742: Add custom back order informations on sale order
+* ALCN-761: Add a new menuitem to access to analytic tags
+* ALCN-762: Activate by default the flag "Check Total on Vendor Bills"
+* ALCN-763: Add new repo account-analytic and install the module account_analytic_required
+* ALCN-768: Activate the module account_banking_sepa_credit_transfer
 
 **Bugfixes**
-* ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
 * Fix sale order line amount computation on pricelist_discount module
+* ALCN-701: Move tracking of lot under sheet instead of inside sheet
+* ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 * ALCN-772: Fix compute sale price 2 on product template
-
-**Build**
-
-**Documentation**
 
 
 9.10.0 (2017-02-23)
@@ -88,6 +102,8 @@ Unreleased
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
 * ALCN-731: Compute a checksum on the lot according some rules
+* ALCN-739: Show the column "End of Life Date" only for picking IN
+* ALCN-723: Check if the removal date is expired when we receive goods
 
 **Build**
 
