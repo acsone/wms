@@ -14,6 +14,20 @@ Unreleased
 
 **Build**
 
+* Migration to v10
+
+  * Fix technically migration
+
+    * Fix submodules versions for migration v10
+    * Disable l10_be_* (not migrate in v10 again) dependences on specific_account module
+    * Temporary deactivate displaying of fields on company view in V10
+    * Temporary deactivate displaying of field on invoice view in V10
+    * Fix nginx version for migration v10
+    * Temporary deactivate accounting product import in V10
+    * Fix travis script with odoo V10
+
+  * ALCN-779: Sale modules migration to v10
+
 **Documentation**
 
 
