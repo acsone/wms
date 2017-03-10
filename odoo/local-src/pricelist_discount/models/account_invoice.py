@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -77,11 +77,11 @@ class AccountInvoiceLine(models.Model):
 
     supplier_promotion = fields.Float(
         string='Promotion (%)',
-        digits_compute=dp.get_precision('Discount')
+        digits=dp.get_precision('Discount')
     )
     alcyon_discount = fields.Float(
         string='Discount (%)',
-        digits_compute=dp.get_precision('Discount')
+        digits=dp.get_precision('Discount')
     )
 
     @api.depends('price_unit', 'supplier_promotion', 'alcyon_discount')

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class ResPartner(models.Model):
@@ -20,10 +20,12 @@ class ResPartner(models.Model):
         company_dependent=True,
     )
 
-    def _commercial_fields(self, cr, uid, context=None):
+    @api.model
+    def _commercial_fields(self):
         """ Adds both new pricelists as commercial fields so
         theirs values will be synced to children partners.
         """
-        return super(ResPartner, self)._commercial_fields(
-            cr, uid, context=context
-        ) + ['promotion_pricelist_id', 'discount_pricelist_id']
+        return (
+            super(ResPartner, self)._commercial_fields() +
+            ['promotion_pricelist_id', 'discount_pricelist_id']
+        )

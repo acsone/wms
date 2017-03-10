@@ -409,11 +409,12 @@ class SaleOrder(models.Model):
                 ).onchange_order_line_original()
         return result
 
-    def fields_view_get(self, cr, user, view_id=None, view_type='form',
-                        context=None, toolbar=False, submenu=False):
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form',
+                        toolbar=False, submenu=False):
         res = super(SaleOrder, self).fields_view_get(
-            cr, user, view_id=view_id, view_type=view_type,
-            context=context, toolbar=toolbar, submenu=submenu
+            view_id=view_id, view_type=view_type,
+            toolbar=toolbar, submenu=submenu
         )
         # To avoid to define the original/additional lines form view,
         # we use the same form view of final lines

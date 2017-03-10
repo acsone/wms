@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from itertools import chain
 
 import time
@@ -13,20 +14,21 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
-    def _price_rule_get_multi(self, cr, uid, pricelist,
-                              products_by_qty_by_partner, context=None):
+    @api.multi
+    def _compute_price_rule(self,
+                            products_qty_partner, date=False, uom_id=False):
         """ Have to copy the entire parent method because
         there is no simpler way to manage a new applied_on in pricelist.
         """
-        context = context or {}
+        self.ensure_one()
+        context = self.env.context or {}
         date = context.get('date')
         if date:
             date = date[0:10]
         else:
             date = time.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
-        products = map(lambda p: p[0], products_by_qty_by_partner)
-        product_uom_obj = self.pool.get('product.uom')
+        products = map(lambda p: p[0], products_qty_partner)
 
         if not products:
             return {}
@@ -57,7 +59,7 @@ class ProductPricelist(models.Model):
             ]
 
         # Load all rules
-        cr.execute(
+        self.env.cr.execute(
             'SELECT i.id '
             'FROM product_pricelist_item AS i '
             'WHERE (product_tmpl_id IS NULL OR product_tmpl_id = any(%s))'
@@ -69,15 +71,13 @@ class ProductPricelist(models.Model):
             'AND (i.date_end IS NULL OR i.date_end >= %s))'
             'ORDER BY applied_on, min_quantity desc',
             (prod_tmpl_ids, prod_ids, categ_ids, price_categ_ids,
-             pricelist.id, date, date))
+             self.id, date, date))
 
-        item_ids = [x[0] for x in cr.fetchall()]
-        items = self.pool.get('product.pricelist.item').browse(
-            cr, uid, item_ids, context=context
-        )
+        item_ids = [x[0] for x in self.env.cr.fetchall()]
+        items = self.env['product.pricelist.item'].browse(item_ids)
 
         results = {}
-        for product, qty, partner in products_by_qty_by_partner:
+        for product, qty, partner in products_qty_partner:
             results[product.id] = 0.0
             suitable_rule = False
 
@@ -92,8 +92,9 @@ class ProductPricelist(models.Model):
             qty_in_product_uom = qty
             if qty_uom_id != product.uom_id.id:
                 try:
-                    qty_in_product_uom = product_uom_obj._compute_qty(
-                        cr, uid, context['uom'], qty, product.uom_id.id)
+                    qty_in_product_uom = self.env['product.uom'].browse(
+                        [context['uom']]
+                    )._compute_quantity(qty, product.uom_id)
                 except UserError:
                     # Ignored - incompatible UoM in context,
                     # use default product UoM
@@ -101,9 +102,7 @@ class ProductPricelist(models.Model):
 
             # if Public user try to access standard price from website sale,
             # need to call _price_get.
-            price = self.pool['product.template']._price_get(
-                cr, uid, [product], 'list_price', context=context
-            )[product.id]
+            price = product.price_compute('list_price')[product.id]
 
             price_uom_id = qty_uom_id
             for rule in items:
@@ -147,26 +146,23 @@ class ProductPricelist(models.Model):
 
                 if rule.base == 'pricelist' and rule.base_pricelist_id:
                     price_tmp = self._price_get_multi(
-                        cr, uid, rule.base_pricelist_id,
-                        [(product, qty, partner)], context=context
+                        rule.base_pricelist_id, [(product, qty, partner)]
                     )[product.id]
-                    ptype_src = rule.base_pricelist_id.currency_id.id
-                    price = self.pool['res.currency'].compute(
-                        cr, uid, ptype_src, pricelist.currency_id.id,
-                        price_tmp, round=False, context=context
-                    )
+                    ptype_src = rule.base_pricelist_id.currency_id
+                    price = ptype_src.compute(price_tmp,
+                                              self.currency_id.id,
+                                              round=False)
                 else:
                     # if base option is public price take sale price
                     # else cost price of product
                     # price_get returns the price in the context UoM,
                     #  i.e. qty_uom_id
-                    price = self.pool['product.template']._price_get(
-                        cr, uid, [product], rule.base, context=context
-                    )[product.id]
+                    price = product.price_compute(rule.base)[product.id]
 
                 convert_to_price_uom = (
-                    lambda price: product_uom_obj._compute_price(
-                        cr, uid, product.uom_id.id, price, price_uom_id)
+                    lambda price: product.uom_id._compute_price(
+                        price, price_uom_id
+                    )
                 )
 
                 if price is not False:
@@ -207,9 +203,8 @@ class ProductPricelist(models.Model):
             # Final price conversion into pricelist currency
             if suitable_rule and suitable_rule.compute_price != 'fixed' \
                     and suitable_rule.base != 'pricelist':
-                price = self.pool['res.currency'].compute(
-                    cr, uid, product.currency_id.id, pricelist.currency_id.id,
-                    price, round=False, context=context
+                price = product.currency_id.compute(
+                    price, self.currency_id, round=False
                 )
 
             results[product.id] = (

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
@@ -15,7 +15,7 @@ class ProductTemplate(models.Model):
     )
 
     sale_price_2 = fields.Float(
-        digits_compute=dp.get_precision('Product Price'),
+        digits=dp.get_precision('Product Price'),
         compute='_compute_sale_price_2',
         readonly=True,
         store=False,
