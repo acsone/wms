@@ -111,10 +111,26 @@ def create_locations(ctx):
 
     # Parking is under Input (part of stock)
     parkings = [
-        ('__setup__.stock_location_parking_medoc', 'Parking Medicaments', 'view'),
-        ('__setup__.stock_location_parking_ali', 'Parking Aliments', 'internal'),
-        ('__setup__.stock_location_parking_materiel', 'Parking Matériel', 'internal'),
-        ('__setup__.stock_location_parking_frigo', 'Parking Frigo', 'internal'),
+        (
+            '__setup__.stock_location_parking_medoc',
+            'Parking Medicaments',
+            'view'
+        ),
+        (
+            '__setup__.stock_location_parking_ali',
+            'Parking Aliments',
+            'internal'
+        ),
+        (
+            '__setup__.stock_location_parking_materiel',
+            'Parking Matériel',
+            'internal'
+        ),
+        (
+            '__setup__.stock_location_parking_frigo',
+            'Parking Frigo',
+            'internal'
+        ),
     ]
     for xmlid, name, usage in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
