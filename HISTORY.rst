@@ -34,6 +34,7 @@ Unreleased
 * Rewriting sale_product_additional module
 * ALCN-741: Add check of rule exception on sale order line
 * ALCN-742: Add custom back order informations on sale order
+* Logistics: Add Parking for Aliments and routing
 
 * ALCN-739: Show the column "End of Life Date" only for picking IN. Improve reception useability by adding a new reception wizard.
 * ALCN-723: Check if the removal date is expired when we receive goods
