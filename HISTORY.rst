@@ -35,6 +35,9 @@ Unreleased
 * ALCN-741: Add check of rule exception on sale order line
 * ALCN-742: Add custom back order informations on sale order
 
+* ALCN-739: Show the column "End of Life Date" only for picking IN. Improve reception useability by adding a new reception wizard.
+* ALCN-723: Check if the removal date is expired when we receive goods
+
 **Bugfixes**
 * ALCN-769: Fix a bug when an user try to duplicate a supplier invoice
 
@@ -89,6 +92,8 @@ Unreleased
 * Add the module account_invoice_check_total from OCA repo account-invoicing
 * ALCN-620: Change the wizard "Update quantity by hand" due to a wrong developpment
 * ALCN-731: Compute a checksum on the lot according some rules
+* ALCN-739: Show the column "End of Life Date" only for picking IN
+* ALCN-723: Check if the removal date is expired when we receive goods
 
 **Build**
 
