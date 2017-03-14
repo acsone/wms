@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+<template id="stock_lot_label_zebra_v1">
+ <div class="raw">
+<t t-foreach="docs" t-as="oplot">
+<t t-set="op" t-value="operation_id"/>
+<t t-set="pick" t-value="operation_id.picking_id"/>
+
+Locator: <t t-esc="op.product_id._bin().name"/>
+Lot interne:<t t-esc="oplot.lot_id.checksum"/>
+Ref article:<t t-esc="op.product_id.default_code"/>
+
+Lot four:<t t-esc="oplot.lot_id.name"/>
+Libelle:<t t-esc="op.product_id.name"/>
+
+</t>
+ </div>
+</template>
+
+<report
+    id="report_lot_label"
+    string="Alcyon Lot Label"
+    model="stock.pack.operation.lot"
+    report_type="qweb-pdf"
+    file="specific_print.stock_lot_label_zebra_v1"
+    name="specific_print.stock_lot_label_zebra_v1"
+/>
+
+</data>
+</openerp>

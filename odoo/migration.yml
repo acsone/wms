@@ -102,6 +102,7 @@ migration:
           - specific_account
           - specific_base
           - specific_partner
+          - specific_print
           - specific_product
           - specific_report
           - specific_sale
