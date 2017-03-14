@@ -75,11 +75,11 @@ class StockLocation(models.Model):
     def get_putaway_strategy(self, product):
         location = self
         location_dest = super(StockLocation, self).get_putaway_strategy(
-            product) or location
+            product) or location.id
 
         # check if bin location
         if location_dest.kind != 'bin':
-            return location_dest
+            return location_dest.id
 
         # Do not put product in bin if lot tracking (possibly fefo) and
         # there is already stock in reserve
@@ -94,4 +94,4 @@ class StockLocation(models.Model):
                     'find a suitable location') % product.display_name)
             return reserve.id
         return super(StockLocation, self).get_putaway_strategy(
-            product) or location
+            product) or location.id
