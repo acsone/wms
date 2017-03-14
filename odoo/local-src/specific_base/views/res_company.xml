@@ -8,24 +8,18 @@
                 <field name="order_fax"/>
             </field>
 
-            <!--
-            TODO: The field tax_calculation_rounding_method doesn't appear now on view in V10!
-            TODO: See how to display this field now.
-            -->
-            <!--<field name='tax_calculation_rounding_method' position="after">-->
-                <!--<field name="invoice_terms_conditions"/>-->
-            <!--</field>-->
-
-            <!--
-            TODO: The group account_grp doesn't appear now on view in V10!
-            TODO: See how to display this field now.
-            -->
-            <!--<xpath expr="//group[@name='account_grp']" position="after">-->
-                <!--<group name="delivery_grp" string="Delivery">-->
-                    <!--<field name="delivery_terms_conditions"/>-->
-                <!--</group>-->
-            <!--</xpath>-->
-
+            <xpath expr="//notebook" position="inside">
+                <page string="Report configuration">
+                    <group>
+                        <group>
+                            <field name="invoice_terms_conditions"/>
+                        </group>
+                        <group>
+                            <field name="delivery_terms_conditions"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>
