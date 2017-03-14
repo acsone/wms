@@ -53,5 +53,4 @@ class StockWizardReassort(models.TransientModel):
                 'location_id': report.location_id.id,
                 'location_dest_id': picking_type.default_location_dest_id.id,
                 })
-            self.pool['stock.picking'].action_assign(
-                self._cr, self._uid, [picking.id], self._context)
+            picking.action_assign()

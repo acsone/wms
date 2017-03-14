@@ -72,15 +72,14 @@ class StockLocation(models.Model):
             super(StockLocation, children).write({'kind': vals['kind']})
         return res
 
-    def get_putaway_strategy(self, cr, uid, location, product, context=None):
-        location_dest_id = super(StockLocation, self).get_putaway_strategy(
-            cr, uid, location, product, context=None) or location.id
+    def get_putaway_strategy(self, product):
+        location = self
+        location_dest = super(StockLocation, self).get_putaway_strategy(
+            product) or location
 
         # check if bin location
-        env = api.Environment(cr, uid, context)
-        location_dest = env['stock.location'].browse(location_dest_id)
         if location_dest.kind != 'bin':
-            return location_dest_id
+            return location_dest
 
         # Do not put product in bin if lot tracking (possibly fefo) and
         # there is already stock in reserve
@@ -95,4 +94,4 @@ class StockLocation(models.Model):
                     'find a suitable location') % product.display_name)
             return reserve.id
         return super(StockLocation, self).get_putaway_strategy(
-            cr, uid, location, product, context=None) or location.id
+            product) or location
