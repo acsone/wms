@@ -29,20 +29,16 @@ class ProductPutaway(models.Model):
         'stock.fixed.putaway.route.strat', 'putaway_id',
         'Fixed Locations Per Route')
 
-    def putaway_apply(self, cr, uid, putaway_strat, product, context=None):
-        if putaway_strat.route_location_ids:
+    def putaway_apply(self, product):
+        if self.route_location_ids:
             routes = product.route_ids + product.route_from_categ_ids
-            for strat in putaway_strat.route_location_ids:
+            for strat in self.route_location_ids:
                 if strat.route_id in routes:
                     dest = strat.fixed_location_id
                     if dest.putaway_strategy_id:
-                        return self.putaway_apply(
-                            cr, uid,
-                            dest.putaway_strategy_id, product,
-                            context=context)
-                    return dest.id
-        return super(ProductPutaway, self).putaway_apply(
-            cr, uid, putaway_strat, product, context=context)
+                        return dest.putaway_strategy_id.putaway_apply(product)
+                    return dest
+        return super(ProductPutaway, self).putaway_apply(product)
 
 
 class StockFixedPutawayRouteStrat(models.Model):
