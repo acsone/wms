@@ -30,19 +30,16 @@ class StockQuant(models.Model):
     )
 
     def _quants_get_reservation_domain(
-            self, move, pack_operation_id=False, lot_id=False, company_id=False, initial_domain=None
-    ):
-    @api.model
-    def apply_removal_strategy(
-            self, qty, move, ops=False, domain=None, removal_strategy='fifo'
+        self, move, pack_operation_id=False, lot_id=False,
+        company_id=False, initial_domain=None
     ):
         deny_reservation_for_quants_expired = True
 
         context = self.env.context or {}
         if (
-            context.get('params')
-            and context.get('params').get('model') == 'stock.picking'
-            and context.get('params').get('id')
+            context.get('params') and
+            context.get('params').get('model') == 'stock.picking' and
+            context.get('params').get('id')
         ):
             picking = self.env['stock.picking'].browse(
                 context['params']['id']
@@ -65,7 +62,7 @@ class StockQuant(models.Model):
             pack_operation_id=pack_operation_id,
             lot_id=lot_id,
             company_id=company_id,
-            initial_domain=new_domain,
+            initial_domain=new_domain)
 
     @api.model
     def alert_quant_expired(self):
