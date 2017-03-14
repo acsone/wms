@@ -47,5 +47,4 @@ def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
     import_product_categories(ctx)
-    # TODO: To reactivate after migration v10
-    # import_accounting_products(ctx)
+    import_accounting_products(ctx)

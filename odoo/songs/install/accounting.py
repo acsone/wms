@@ -58,14 +58,12 @@ def default_values(ctx):
         'value_unpickle': 'random',
     })
 
-    # TODO: To reactivate after migration v10
-    # account_612031 = ctx.env.ref('__setup__.account_612031')
-    # tax_xml_id = '__setup__.account_tax_none_main_company_' \
-    #              'Frais_de_voiture___TVA_50%_Non_Deductible'
-    # create_or_update(ctx, 'account.tax', tax_xml_id, {
-    #     'account_id': account_612031.id,
-    #     'refund_account_id': account_612031.id
-    # })
+    account_612031 = ctx.env.ref('__setup__.account_612031')
+    tax_xml_id = 'l10n_be.1_attn_VAT-IN-V82-CAR-EXC-C1'
+    create_or_update(ctx, 'account.tax', tax_xml_id, {
+        'account_id': account_612031.id,
+        'refund_account_id': account_612031.id
+    })
 
 
 @anthem.log
