@@ -24,3 +24,24 @@ class ProductTemplate(models.Model):
     alert_time = fields.Integer(
         related='categ_id.alert_time',
     )
+
+
+# Due to a bug in odoo 10 we need to redefine the fields
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    life_time = fields.Integer(
+        related='categ_id.life_time',
+    )
+
+    use_time = fields.Integer(
+        related='categ_id.use_time',
+    )
+
+    removal_time = fields.Integer(
+        related='categ_id.removal_time',
+    )
+
+    alert_time = fields.Integer(
+        related='categ_id.alert_time',
+    )
