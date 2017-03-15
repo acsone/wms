@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
-        <record id="narcotic_forbidden" model="sale.exception">
+        <record id="narcotic_forbidden" model="exception.rule">
             <field name="name">Produits stupéfiants interdits</field>
             <field name="description">Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT</field>
             <!--<field name="active">True</field>-->
             <field name="sequence">10</field>
+            <field name="rule_group">sale</field>
             <field name="model">sale.order.line</field>
             <field name="code">
 veterinary = object.env.ref('__setup__.partner_category_veterinary')
-if line.order_id.partner_id.alcyon_category_id != veterinary:
+if object.order_id.partner_id.alcyon_category_id != veterinary:
     narcotic = object.env.ref('__init.product_categ_medoc')
-    if line.product_id.categ_id == narcotic:
+    if object.product_id.categ_id == narcotic:
         failed=True
             </field>
         </record>
 
-        <record id="no_line_at_zero" model="sale.exception">
+        <record id="no_line_at_zero" model="exception.rule">
             <field name="name">Pas de ligne à zéro</field>
             <field name="description">Une ligne de vente ne peut pas être à zéro</field>
             <!--<field name="active">True</field>-->
             <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
             <field name="model">sale.order.line</field>
             <field name="code">
-if line.price_subtotal == 0:
+if object.price_subtotal == 0:
     failed=True
             </field>
         </record>
 
-        <record id="order_amount_minimum" model="sale.exception">
+        <record id="order_amount_minimum" model="exception.rule">
             <field name="name">Montant minimum à 100 euros</field>
             <field name="description">Le montant total de la commande ne peut pas être inférieur à 100 euros</field>
             <!--<field name="active">False</field>-->
             <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
             <field name="model">sale.order</field>
             <field name="code">
-if order.amount_total &lt; 100:
+if object.amount_total &lt; 100:
     failed=True
             </field>
         </record>
