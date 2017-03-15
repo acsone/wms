@@ -27,6 +27,7 @@ Unreleased
     * Fix travis script with odoo V10
 
   * ALCN-779: Sale modules migration to v10
+  * ALCN-777: sale_exception module migration to v10
 
 **Documentation**
 
