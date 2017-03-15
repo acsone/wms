@@ -25,6 +25,7 @@ Unreleased
     * Fix nginx version for migration v10
     * Temporary deactivate accounting product import in V10
     * Fix travis script with odoo V10
+    * Cancel auto-installing of procurement_jit
 
   * ALCN-779: Sale modules migration to v10
   * ALCN-777: sale_exception module migration to v10

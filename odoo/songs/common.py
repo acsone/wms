@@ -9,6 +9,15 @@ from pkg_resources import Requirement
 req = Requirement.parse('alcyon-odoo')
 
 
+def define_settings(ctx, model, values):
+    """ Define settings like being in the interface
+     Example :
+      - model = 'sale.config.settings'
+      - values = {'default_invoice_policy': 'delivery'}
+    """
+    ctx.env[model].create(values).execute()
+
+
 def create_default_value(ctx, model, field, value, company_id):
     ctx.env.cr.execute("""
     INSERT INTO ir_values

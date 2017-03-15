@@ -15,6 +15,9 @@ RUN cd /opt/odoo && pip install -r requirements.txt
 
 COPY ./importer.sh bin/
 
+# Copy custom runtests file
+COPY ./bin/runtests odoo/bin/
+
 ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/enterprise, \
   /opt/odoo/external-src/odoo-cloud-platform, \
