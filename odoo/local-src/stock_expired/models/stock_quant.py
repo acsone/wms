@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
+# Copyright 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import itertools
@@ -28,17 +29,17 @@ class StockQuant(models.Model):
         readonly=True,
     )
 
-    @api.model
-    def apply_removal_strategy(
-            self, qty, move, ops=False, domain=None, removal_strategy='fifo'
+    def _quants_get_reservation_domain(
+        self, move, pack_operation_id=False, lot_id=False,
+        company_id=False, initial_domain=None
     ):
         deny_reservation_for_quants_expired = True
 
         context = self.env.context or {}
         if (
-            context.get('params')
-            and context.get('params').get('model') == 'stock.picking'
-            and context.get('params').get('id')
+            context.get('params') and
+            context.get('params').get('model') == 'stock.picking' and
+            context.get('params').get('id')
         ):
             picking = self.env['stock.picking'].browse(
                 context['params']['id']
@@ -46,7 +47,7 @@ class StockQuant(models.Model):
             if picking and picking.to_process_quant_expired:
                 deny_reservation_for_quants_expired = False
 
-        new_domain = domain or []
+        new_domain = initial_domain or []
         if deny_reservation_for_quants_expired:
             new_domain.append('|')
             new_domain.append('|')
@@ -56,13 +57,12 @@ class StockQuant(models.Model):
                 ('location_id.ignore_quants_expiration', '=', True)
             )
 
-        return super(StockQuant, self).apply_removal_strategy(
-            qty=qty,
-            move=move,
-            ops=ops,
-            domain=new_domain,
-            removal_strategy=removal_strategy
-        )
+        return super(StockQuant, self)._quants_get_reservation_domain(
+            move,
+            pack_operation_id=pack_operation_id,
+            lot_id=lot_id,
+            company_id=company_id,
+            initial_domain=new_domain)
 
     @api.model
     def alert_quant_expired(self):

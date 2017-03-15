@@ -39,10 +39,8 @@ class MakeTodayDeliveryPlan(models.TransientModel):
             raise Warning(_('Please select the vehicles'))
         if self.assign_moves:
             user = self.env['res.users'].browse(self._uid)
-            self.pool['procurement.order'].run_scheduler(
-                self._cr, self._uid,
-                company_id=user.company_id.id,
-                context=self._context)
+            self.env['procurement.order'].run_scheduler(
+                company_id=user.company_id.id)
 
         vehicles = self.vehicle_ids
         today = fields.Date.context_today(self)

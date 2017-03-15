@@ -31,10 +31,9 @@ class ProductPutaway(models.Model):
         help="Destination fixed location when no fixed location is defined "
              "for a product category")
 
-    def putaway_apply(self, cr, uid, putaway_strat, product, context=None):
-        res = super(ProductPutaway, self).putaway_apply(
-            cr, uid, putaway_strat, product, context=context)
-        if putaway_strat.method == 'fixed':
+    def putaway_apply(self, product):
+        res = super(ProductPutaway, self).putaway_apply(product)
+        if self.method == 'fixed':
             if not res:
-                return putaway_strat.fixed_location_id.id
+                return self.fixed_location_id
         return res

@@ -64,20 +64,14 @@ class GRN(models.Model):
 
     company_id = fields.Many2one(
         'res.company', string='Company', change_default=True,
+        default=lambda self: self.env['res.company']._company_default_get(
+            'stock.grn'),
         required=True, readonly=True)
 
     picking_ids = fields.One2many(
         'stock.picking', 'grn_id',
         string='Incoming Shipments',
         domain=[('picking_type_code', '=', 'incoming')])
-
-    _defaults = {
-        # required to declare this way due to bug on default m2o (return id
-        # instead of record)
-        'company_id': lambda self, cr, uid, c:
-            self.pool.get('res.company')._company_default_get(
-                cr, uid, 'stock.grn', context=c),
-    }
 
     @api.model
     def create(self, vals):

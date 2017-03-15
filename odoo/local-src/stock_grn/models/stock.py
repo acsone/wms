@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class StockPicking(models.Model):
@@ -35,12 +35,12 @@ class StockPicking(models.Model):
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    def _get_action(self, cr, uid, ids, action, context=None):
+    @api.multi
+    def _get_action(self, action_xmlid):
         result = super(StockPickingType, self)._get_action(
-            cr, uid, ids, action, context=context)
-        if ids:
-            picking_type = self.browse(cr, uid, ids[0], context=context)
-            if picking_type.code == 'incoming':
+            action_xmlid)
+        if self:
+            if self.code == 'incoming':
                 result['context'] = result['context'].replace(
                     '{', "{'search_default_grn':1,", 1)
         return result

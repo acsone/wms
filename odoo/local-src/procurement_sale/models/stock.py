@@ -34,13 +34,14 @@ class SaleOrderLine(models.Model):
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
-    def quants_get_preferred_domain(self, cr, uid, qty, move, ops=False,
+    @api.model
+    def quants_get_preferred_domain(self, qty, move, ops=False,
                                     lot_id=False, domain=None,
-                                    preferred_domain_list=[], context=None):
-        if context and context.get('recount'):
+                                    preferred_domain_list=[]):
+        if self._context.get('recount'):
             remaining = (move.product_id.qty_available -
                          move.product_id.outgoing_qty)
             qty = min(qty, max(remaining, 0.0))
         return super(StockQuant, self).quants_get_preferred_domain(
-            cr, uid, qty, move, ops=ops, lot_id=lot_id, domain=domain,
-            preferred_domain_list=[], context=context)
+            qty, move, ops=ops, lot_id=lot_id, domain=domain,
+            preferred_domain_list=[])
