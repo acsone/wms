@@ -53,4 +53,6 @@
     - oca refs/pull/595/head
     # mig mail_environment
     - oca refs/pull/662/head
+    # mig base_exception (used for sale_exception)
+    - oca refs/pull/775/head
   target: *default_target

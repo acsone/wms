@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.decimal_precision import decimal_precision as dp
+import odoo.addons.decimal_precision as dp
 
 from odoo import api, fields, models
 
@@ -80,8 +80,11 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_id', 'price_unit', 'price_subtotal')
     def _compute_exception(self):
-        line_exceptions = self.env['sale.exception'].search(
-            [('model', '=', 'sale.order.line')],
+        line_exceptions = self.env['exception.rule'].search(
+            [
+                ('rule_group', '=', 'sale'),
+                ('model', '=', 'sale.order.line'),
+            ],
             order='id'
         )
 

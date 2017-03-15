@@ -67,6 +67,7 @@ migration:
           ## oca/sale-workflow
           - sale_exception
           ## oca/server-tools
+          - base_exception
           - mail_environment
           - server_environment
           ## oca/account-analytic

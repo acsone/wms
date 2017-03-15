@@ -17,10 +17,12 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/sale_exception.xml',
+        # Data
+        'data/exception_rule.xml',
+        # Views
         'views/product_template.xml',
         'views/res_partner.xml',
         'views/sale.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
