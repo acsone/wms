@@ -7,15 +7,22 @@
 <t t-foreach="docs" t-as="oplot">
 <t t-set="op" t-value="operation_id"/>
 <t t-set="pick" t-value="operation_id.picking_id"/>
-
-Locator: <t t-esc="op.product_id._bin().name"/>
-Lot interne:<t t-esc="oplot.lot_id.checksum"/>
-Ref article:<t t-esc="op.product_id.default_code"/>
-
-Lot four:<t t-esc="oplot.lot_id.name"/>
-Libelle:<t t-esc="op.product_id.name"/>
-
-</t>
+^XA
+^PRC
+^LH0,0^FS
+^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="op.product_id._bin().name"/>^FS
+^FO20,93^A0N,39,33^CI13^FR^FDNr Lot interne : ^FS
+^FO334,52^A0N,94,82^CI13^FR^FD<t t-esc="oplot.lot_id.checksum"/>^FS
+^FO432,33^A0N,118,103^CI13^FR^FD<t t-esc="oplot.lot_id.checksum"/>^FS
+^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS
+^FO20,242^A0N,37,32^CI13^FR^FDLot four : ^FS
+^FO170,242^A0N,37,32^CI13^FR^FD<t t-esc="oplot.lot_id.name"/>^FS
+^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS
+^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS
+^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="op.product_id.name"/>^FS
+^PQ1,0,0,N
+^XZ
+</t></t></t>
  </div>
 </template>
 
