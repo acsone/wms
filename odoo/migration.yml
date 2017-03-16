@@ -5,13 +5,23 @@ migration:
     - version: 10.0.0
       operations:
         pre:
+          - anthem openerp.addons.cloud_platform.songs::install_exoscale
+
+          # ***********************************************************
+          # ************* Avoid auto-install chart of accounts ********
+          # ***********************************************************
           - anthem songs.install.pre::main
+          # Install account without l10n to avoid auto install
+          - odoo.py -i account --stop-after-init --workers=0
+          - anthem songs.install.pre_holding::no_accounting
+          - odoo.py -i l10n_be --stop-after-init --workers=0
+          - anthem songs.install.post_holding::cleanup
+          - anthem songs.install.pre::complete_setup_company
         post:
           # Because this module is auto-install when sale_stock is installed.
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
           - anthem songs.install.unistall_procurement_jit_module::main
 
-          - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main

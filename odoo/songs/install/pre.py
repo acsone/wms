@@ -15,6 +15,15 @@ def setup_company(ctx):
     company = ctx.env.ref('base.main_company')
     company.write({
         'name': 'Alcyon Belux SA',
+    })
+
+
+@anthem.log
+def complete_setup_company(ctx):
+    """ Complete configuring company data """
+    company = ctx.env.ref('base.main_company')
+    company.write({
+        'name': 'Alcyon Belux SA',
         'street': 'Rue le Marais, 17',
         'street2': '',
         'zip': '4530',

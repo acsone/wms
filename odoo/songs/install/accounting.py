@@ -298,8 +298,50 @@ def setup_sequences(ctx):
 
 
 @anthem.log
+def configure_missing_chart_of_account(ctx):
+    """Configure Missing COA for companies"""
+
+    coa_dict = {
+        'base.main_company': {
+            # TODO: Use the good values here
+            'chart_template_id': 'l10n_fr.l10n_fr_pcg_chart_template',
+            'template_transfer_account_id': 'l10n_fr.pcg_58',
+            'sale_tax_id': 'l10n_fr.tva_normale',
+            'purchase_tax_id': 'l10n_fr.tva_acq_normale',
+        },
+    }
+    for company_xml_id, values in coa_dict.iteritems():
+        company = ctx.env.ref(company_xml_id)
+        coa = ctx.env.ref(values['chart_template_id'])
+        template_transfer_account = ctx.env.ref(
+            values['template_transfer_account_id']
+        )
+        sale_tax = ctx.env.ref(values['sale_tax_id'])
+        purchase_tax = ctx.env.ref(values['purchase_tax_id'])
+        if not company.chart_template_id:
+            wizard = ctx.env['wizard.multi.charts.accounts'].create({
+                # TODO: Use the good values here
+                'company_id': company.id,
+                'chart_template_id': coa.id,
+                'transfer_account_id': template_transfer_account.id,
+                'code_digits': 8,
+                'sale_tax_id': sale_tax.id,
+                'purchase_tax_id': purchase_tax.id,
+                'sale_tax_rate': 15,
+                'purchase_tax_rate': 15,
+                'complete_tax_set': coa.complete_tax_set,
+                'currency_id': ctx.env.ref('base.EUR').id,
+                'bank_account_code_prefix': coa.bank_account_code_prefix,
+                'cash_account_code_prefix': coa.cash_account_code_prefix,
+            })
+            wizard.execute()
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
+    # TODO: activate the function
+    # configure_missing_chart_of_account(ctx)
     import_banks(ctx)
     add_xmlid_account(ctx)
     adapt_chart_of_account(ctx)
