@@ -55,7 +55,9 @@ class Sale(models.Model):
         line_model = self.env['sale.order.line']
         qty_unavailable = line_model.get_product_qty_unavailable(
             new_product,
-            values['product_uom_qty']
+            values['product_uom_qty'],
+            line.state == 'sale',
+            line.id
         )
         values['product_qty_unavailable'] = qty_unavailable
 
