@@ -7,6 +7,7 @@ RUN set -x; \
          apt-get update \
          && apt-get install -y --no-install-recommends \
          parallel \
+         python-cups \
          # needed to build Cryptography
          build-essential libssl-dev libffi-dev python-dev \
          && cd /opt/odoo \
