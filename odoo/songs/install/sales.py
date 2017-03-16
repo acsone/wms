@@ -6,16 +6,8 @@ from pkg_resources import resource_stream
 
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
+from ..common import define_settings
 from ..common import req
-
-
-def define_settings(ctx, model, values):
-    """ Define settings like being in the interface
-     Example :
-      - model = 'sale.config.settings'
-      - values = {'default_invoice_policy': 'delivery'}
-    """
-    ctx.env[model].create(values).execute()
 
 
 @anthem.log

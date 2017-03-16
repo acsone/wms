@@ -7,6 +7,10 @@ migration:
         pre:
           - anthem songs.install.pre::main
         post:
+          # Because this module is auto-install when sale_stock is installed.
+          # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
+          - anthem songs.install.unistall_procurement_jit_module::main
+
           - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
           - anthem songs.install.product::main
