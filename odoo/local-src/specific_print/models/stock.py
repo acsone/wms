@@ -64,6 +64,7 @@ class StockPicking(models.Model):
                  'specific_print.report_stock_pick_packs_label')
 
     package_ids = fields.One2many(
+        'stock.quant.package',
         compute='_get_package_ids',
         string='Packages')
 
