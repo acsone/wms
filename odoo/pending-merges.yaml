@@ -45,7 +45,7 @@
     camptocamp: git@github.com:camptocamp/report-print-send.git
   merges:
     - oca 10.0
-    # mig server_environment
+    # mig base_report_to_printer
     - oca refs/pull/68/head
   target: *default_target
 ./external-src/stock-logistics-workflow:
