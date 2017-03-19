@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp.addons.web.http import request
+from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 
@@ -36,7 +36,7 @@ class Usercontext(DomainInterface):
 
             return result.format()
 
-        if not user.has_group('base.module_category_usability'):
+        if not user.has_group('stock.group_stock_user'):
             result.update({
                 'respCode': 10,
                 'respMsg': 'The user should be in the group Inventory'

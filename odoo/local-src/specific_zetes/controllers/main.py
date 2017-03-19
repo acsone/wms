@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import importlib
 
-import openerp
-from openerp.addons.web import http
+from odoo import http
+from odoo.http import request
+from odoo.addons.web.controllers.main import Home
 
 from ..tools.domain_interface import Parameters, HEADER_LABELS
 
 
-class Zetes(openerp.addons.web.controllers.main.Home):
+class Zetes(Home):
     @http.route('/zetes',
                 type='http',
                 methods=['POST'],
@@ -15,7 +16,7 @@ class Zetes(openerp.addons.web.controllers.main.Home):
                 website=True,
                 csrf=False)
     def wrapper(self, **kw):
-        cmd = http.request.httprequest.data
+        cmd = request.httprequest.data
 
         params = cmd[:-1].split(',')
         # Split the request in two parts (header and values)
@@ -48,7 +49,7 @@ class Zetes(openerp.addons.web.controllers.main.Home):
 
         mimetype = 'text/plain'
 
-        return http.request.make_response(result, [('Content-Type', mimetype)])
+        return request.make_response(result, [('Content-Type', mimetype)])
 
     @http.route('/display_values', type='http',
                 auth="public", website=True)

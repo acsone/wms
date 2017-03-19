@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp.addons.web.http import request
+from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 

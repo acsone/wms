@@ -24,7 +24,10 @@ def print_zones():
     print '==== Get zones ===='
     data = '208030824,2.2.3,3iV_101,REQU_REFDATA,{},1,20170207,072934,98427733121341,,,,,,,,,,,,,,,,,,,,,#'.format(USER_CODE)
     result = requests.post(DOMAIN, data=data)
-    for zone in result.content.split('\n'):
+    content = result.content
+    if content.endswith('#\n\n'):
+        content = content[:-3]
+    for zone in content.split('\n'):
         data = zone.split(',')
         print '{}. {}'.format(data[13], data[14])
 
@@ -52,7 +55,11 @@ def get_itempicks(picking_id):
     data = '208030828,2.2.3,3iV_101,REQU_ITEMPICK,{},1,20170207,072904,30427733118044,{},,,,1,0,,,,,,,,,,,,,,,,,,,#'.format(USER_CODE, picking_id)
     result = requests.post(DOMAIN, data=data)
 
-    for move_str in result.content.split('\n'):
+    content = result.content
+    if content.endswith('#\n\n'):
+        content = content[:-3]
+
+    for move_str in content.split('\n'):
         move = move_str.split(',')
 
         move_id = move[17]
@@ -91,7 +98,7 @@ def validate_picking(picking_id):
     requests.post(DOMAIN, data=data)
 
 identification()
-#print_zones()
-#picking_id = assignment()
-#get_itempicks(picking_id)
-#validate_picking(picking_id)
+# print_zones()
+# picking_id = assignment()
+# get_itempicks(picking_id)
+# validate_picking(1)

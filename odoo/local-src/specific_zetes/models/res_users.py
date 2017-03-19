@@ -1,4 +1,4 @@
-from openerp import models, fields, _, tools, api
+from odoo import models, fields, _, tools, api
 
 
 class ResUsers(models.Model):

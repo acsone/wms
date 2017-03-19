@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from openerp.addons.web.http import request
+from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 # ONLY FOR TEST
