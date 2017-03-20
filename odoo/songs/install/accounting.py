@@ -12,6 +12,26 @@ from ..common import req
 
 
 @anthem.log
+def no_coa_instance_lock(ctx):
+    """Prepare no accounting in holding"""
+    values = {
+        'name': "Dummy account to delete",
+        'code': "DUMMY",
+        'user_type_id': ctx.env.ref('account.data_account_type_equity').id,
+        }
+    create_or_update(ctx, 'account.account',
+                     '__setup__.dummy_holding_account', values)
+    company = ctx.env.ref('base.main_company')
+    company.expects_chart_of_accounts = False
+
+
+@anthem.log
+def no_coa_instance_unlock(ctx):
+    """ Remove dummy account on main company """
+    ctx.env.ref('__setup__.dummy_holding_account').unlink()
+
+
+@anthem.log
 def settings(ctx):
     """ Configure the Accounting Settings.
     """
@@ -303,11 +323,10 @@ def configure_missing_chart_of_account(ctx):
 
     coa_dict = {
         'base.main_company': {
-            # TODO: Use the good values here
-            'chart_template_id': 'l10n_fr.l10n_fr_pcg_chart_template',
-            'template_transfer_account_id': 'l10n_fr.pcg_58',
-            'sale_tax_id': 'l10n_fr.tva_normale',
-            'purchase_tax_id': 'l10n_fr.tva_acq_normale',
+            'chart_template_id': 'l10n_be.l10nbe_chart_template',
+            'template_transfer_account_id': 'l10n_be.trans',
+            'sale_tax_id': 'l10n_be.attn_VAT-OUT-21-L',
+            'purchase_tax_id': 'l10n_be.attn_VAT-IN-V81-21',
         },
     }
     for company_xml_id, values in coa_dict.iteritems():
@@ -320,15 +339,11 @@ def configure_missing_chart_of_account(ctx):
         purchase_tax = ctx.env.ref(values['purchase_tax_id'])
         if not company.chart_template_id:
             wizard = ctx.env['wizard.multi.charts.accounts'].create({
-                # TODO: Use the good values here
                 'company_id': company.id,
                 'chart_template_id': coa.id,
                 'transfer_account_id': template_transfer_account.id,
-                'code_digits': 8,
                 'sale_tax_id': sale_tax.id,
                 'purchase_tax_id': purchase_tax.id,
-                'sale_tax_rate': 15,
-                'purchase_tax_rate': 15,
                 'complete_tax_set': coa.complete_tax_set,
                 'currency_id': ctx.env.ref('base.EUR').id,
                 'bank_account_code_prefix': coa.bank_account_code_prefix,
@@ -340,8 +355,7 @@ def configure_missing_chart_of_account(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring accounting """
-    # TODO: activate the function
-    # configure_missing_chart_of_account(ctx)
+    configure_missing_chart_of_account(ctx)
     import_banks(ctx)
     add_xmlid_account(ctx)
     adapt_chart_of_account(ctx)
