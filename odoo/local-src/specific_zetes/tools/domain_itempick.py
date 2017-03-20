@@ -82,6 +82,9 @@ class Itempick(DomainInterface):
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
         for line in lines:
+            if line.zetes_state and line.zetes_state != '00':
+                continue
+
             line_values = Parameters(self)
             line_values.update({
                 'groupNum': picking_id,
@@ -184,5 +187,5 @@ class Itempick(DomainInterface):
             return
 
         status = params.pickStatus
-        if status and status != '00':
+        if status:
             move.zetes_state = status

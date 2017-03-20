@@ -47,17 +47,24 @@ class StockPicking(models.Model):
             checksum_available.remove(checksum)
             picking.checksum
 
+    @api.multi
+    def cancel_picking(self):
+        self.write({
+            'operator_id': None,
+        })
+
 
 class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
     zetes_state = fields.Selection([
+        ('00', 'Default'),
         ('01', 'Picked'),
         ('02', 'Shortpicked'),
         ('03', 'Skipped'),
         ('04', 'Cut'),
         ('05', 'Cancel')
-    ], string='Zetes state')
+    ], string='Zetes state', default='00')
 
 
 class StockPickingType(models.Model):

@@ -109,11 +109,11 @@ class Assignment(DomainInterface):
 
         picking.sudo(self._user).zetes_state = params.assignmentStatus
         # The picking is done
-        if params.assignmentStatus == '01':
+        if params.assignmentStatus in ['01', '02']:
             picking.sudo(self._user).write({
                 'operator_id': self._user.id,
             })
-        elif params.assignmentStatus == '04':
+        elif params.assignmentStatus in ['04', '08']:
             result = picking.sudo(self._user).do_new_transfer()
 
             if isinstance(result, dict):
@@ -123,3 +123,5 @@ class Assignment(DomainInterface):
                         .browse(int(result.get('res_id')))
 
                 wizard.process()
+        elif params.assignmentStatus == '05':
+            picking.sudo(self._user).cancel_picking()

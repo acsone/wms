@@ -15,7 +15,6 @@ class ResUsers(models.Model):
     ]
 
     @api.model
-    @tools.ormcache('operator_code')
     def get_user(self, operator_code):
         return self.sudo().search([('operator_code', '=', operator_code)])
 

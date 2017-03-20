@@ -45,6 +45,8 @@ class Print(DomainInterface):
 
         result.update({
             'respCode': 0,
+            'groupNum': picking.id,
+            'labelCD': '00',
         })
 
         return result.format()

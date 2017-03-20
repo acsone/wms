@@ -98,7 +98,7 @@ def validate_picking(picking_id):
     requests.post(DOMAIN, data=data)
 
 identification()
-# print_zones()
+print_zones()
 # picking_id = assignment()
 # get_itempicks(picking_id)
 # validate_picking(1)
