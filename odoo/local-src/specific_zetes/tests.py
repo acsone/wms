@@ -71,22 +71,22 @@ def get_itempicks(picking_id):
 
         qty = move[36]
 
-        data = '208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,{},1,20170207,072929,30427733121295,{},,,,1,{},{},{},{},{},{},2520872,00709,01,,,,,,,,,{},,{},,,,,,,,,,,#'.format(
-                USER_CODE, picking_id, move_id, zone, corridor, shelf, height, box, qty, move[63])
-        result = requests.post(DOMAIN, data=data)
-        catchweigh = result.content.split(',')
-        lot_number = catchweigh[21]
-        print 'Lot number: {}'.format(lot_number)
-
-        data = '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,{},1,20170207,072930,30427733121306,{},,,,1,{},,,,,,,,,,{},{},,,,,,,,,#'.format(
-                USER_CODE, picking_id, move_id, lot_number, qty
-            )
-        requests.post(DOMAIN, data=data)
-
-        data = '208030828,2.2.3,3iV_101,RESU_ITEMPICK,{},1,20170207,072931,30427733121317,{},,,,1,{},,{},{},,01,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,#'.format(
-                USER_CODE, picking_id, move_id, {}, {}
-            )
-        requests.post(DOMAIN, data=data)
+        # data = '208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,{},1,20170207,072929,30427733121295,{},,,,1,{},{},{},{},{},{},2520872,00709,01,,,,,,,,,{},,{},,,,,,,,,,,#'.format(
+        #         USER_CODE, picking_id, move_id, zone, corridor, shelf, height, box, qty, move[63])
+        # result = requests.post(DOMAIN, data=data)
+        # catchweigh = result.content.split(',')
+        # lot_number = catchweigh[21]
+        # print 'Lot number: {}'.format(lot_number)
+        #
+        # data = '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,{},1,20170207,072930,30427733121306,{},,,,1,{},,,,,,,,,,{},{},,,,,,,,,#'.format(
+        #         USER_CODE, picking_id, move_id, lot_number, qty
+        #     )
+        # requests.post(DOMAIN, data=data)
+        #
+        # data = '208030828,2.2.3,3iV_101,RESU_ITEMPICK,{},1,20170207,072931,30427733121317,{},,,,1,{},,{},{},,01,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,#'.format(
+        #         USER_CODE, picking_id, move_id, {}, {}
+        #     )
+        # requests.post(DOMAIN, data=data)
 
 
 def validate_picking(picking_id):
@@ -97,8 +97,8 @@ def validate_picking(picking_id):
         )
     requests.post(DOMAIN, data=data)
 
-identification()
+#identification()
 #print_zones()
 #picking_id = assignment()
-# get_itempicks(picking_id)
+get_itempicks(14)
 # validate_picking(1)

@@ -60,17 +60,15 @@ class Location(DomainInterface):
             'Usf07': product.virtual_available, # Stock available
         })
 
-        stock_bin = product.stock_bin_ids
-        if len(stock_bin):
-            bin = stock_bin[0].bin_location_id
-            result.update({
-                'IC1': bin.zone,
-                'IC2': bin.corridor,
-                'IC3': bin.shelf,
-                'IC4': bin.height,
-                'IC5': bin.box,
-                'ICCD': bin.get_checksum(),
-            })
+        location = move.location_id
+        result.update({
+            'IC1': location.zone,
+            'IC2': location.corridor,
+            'IC3': location.shelf,
+            'IC4': location.height,
+            'IC5': location.box,
+            'ICCD': location.get_checksum(),
+        })
 
         lots = request.env['stock.production.lot'].sudo(self._user) \
             .search([('product_id', '=', product.id),

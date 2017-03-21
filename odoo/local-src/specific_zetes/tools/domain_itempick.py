@@ -130,7 +130,7 @@ class Itempick(DomainInterface):
             # if line.product_uom_id != default_uom:
             #     line_values.UOMPrompt = line.product_uom_id.name
 
-            location = line.location_dest_id
+            location = line.location_id
             if not location:
                 line_values.update({
                     'respCode': 10,

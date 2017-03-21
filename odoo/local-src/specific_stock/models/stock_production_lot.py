@@ -125,15 +125,28 @@ class StockProductionLot(models.Model):
                 location_to_skip.add((zone, corridor, shelf))
 
                 range_of_shelves = []
-                shelf_code = ord(shelf)
+
+                try:
+                    shelf_code = int(shelf)
+                    is_letter = False
+                except:
+                    shelf_code = ord(shelf)
+                    is_letter = True
+
                 min_shelf_code = shelf_code - same_lot_checksum_range
                 max_shelf_code = shelf_code + same_lot_checksum_range
                 for code in (min_shelf_code, shelf_code, max_shelf_code):
-                    if code < ord('1') \
-                            or (ord('9') < code < ord('A')) \
+                    if code < 1 \
+                            or (9 < code < ord('A')) \
                             or code > ord('Z'):
                         continue
-                    range_of_shelves.append(unichr(code))
+
+                    if is_letter:
+                        code = unichr(code)
+                    else:
+                        code = format(code, '0%d' % 2)
+
+                    range_of_shelves.append(code)
 
                 # Step 3: Retrieve all lot checksum used in this shelf range
                 not_available_checksum_query = """

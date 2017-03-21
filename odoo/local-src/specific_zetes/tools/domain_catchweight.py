@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
@@ -41,7 +42,7 @@ class Catchweight(DomainInterface):
         if not move_id:
             result.update({
                 'respCode': 10,
-                'respMsg': 'No picking found'
+                'respMsg': _('No picking found')
             })
             return result.format()
 
@@ -50,7 +51,7 @@ class Catchweight(DomainInterface):
         if not move:
             result.update({
                 'respCode': 10,
-                'respMsg': 'No picking found'
+                'respMsg': _('No picking found')
             })
             return result.format()
 
@@ -58,7 +59,7 @@ class Catchweight(DomainInterface):
         if not lot_checksum:
             result.update({
                 'respCode': 11,
-                'respMsg': 'Lot not found'
+                'respMsg': _('Lot not found')
             })
 
             return result.format()
@@ -69,7 +70,7 @@ class Catchweight(DomainInterface):
         if not lot:
             result.update({
                 'respCode': 11,
-                'respMsg': 'Lot not found'
+                'respMsg': _('Lot not found')
             })
             return result.format()
 

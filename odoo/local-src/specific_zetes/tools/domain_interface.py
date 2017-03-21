@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from odoo import _
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -55,8 +56,7 @@ class Parameters:
         if values:
             formatted_values = [value.strip() for value in values]
             self.__dict__.update(dict(zip(labels, formatted_values)))
-
-        _logger.debug(str(self))
+            _logger.debug(str(self))
 
     def __str__(self):
         """
@@ -146,8 +146,8 @@ class Parameters:
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
-                raise Exception('Cannot format the value {} with type {}'
-                                .format(value, type(value)))
+                raise Exception(_('Cannot format the value {} with type {}'
+                                .format(value, type(value))))
 
             ordered_values.append(value)
 
@@ -174,14 +174,14 @@ class Parameters:
 
         bad_values = set(current_labels) - set(labels)
         if bad_values:
-            message = 'Some attributes are not valid: {}'\
-                .format(', '.join(list(bad_values)))
+            message = _('Some attributes are not valid: {}'\
+                .format(', '.join(list(bad_values))))
             _logger.error(message)
 
         default_values = self.get_example()
         if len(default_values) != len(ordered_values):
-            _logger.error('The number of label doen\'t correspond '
-                            'to the example size')
+            _logger.error(_('The number of label doen\'t correspond '
+                            'to the example size'))
 
         empty_mandatory_values = []
         for i in range(len(labels)):
@@ -189,5 +189,5 @@ class Parameters:
                 empty_mandatory_values.append(labels[i])
 
         if empty_mandatory_values:
-            _logger.warning('There are some missing mandatory values: {}'
-                            .format(', '.join(empty_mandatory_values)))
+            _logger.warning(_('There are some missing mandatory values: {}'
+                            .format(', '.join(empty_mandatory_values))))
