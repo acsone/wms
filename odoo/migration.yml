@@ -5,8 +5,6 @@ migration:
     - version: 10.0.0
       operations:
         pre:
-          - anthem openerp.addons.cloud_platform.songs::install_exoscale
-
           # ***********************************************************
           # ************* Avoid auto-install chart of accounts ********
           # ***********************************************************
@@ -25,6 +23,7 @@ migration:
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
           - anthem songs.install.unistall_procurement_jit_module::main
 
+          - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
