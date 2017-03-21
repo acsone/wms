@@ -21,7 +21,7 @@
                 </group>
                 <group>
                     <field name="picking_id" invisible="1"/>
-                    <field name="operation_id" domain="[('picking_id','=',picking_id)]"/>
+                    <field name="operation_id" required="1" domain="[('picking_id','=',picking_id)]"/>
                     <label for="remaining_qty"/>
                     <span>
                         <field name="remaining_qty" class="oe_inline" readonly="1"/> out of 
