@@ -30,6 +30,7 @@ Unreleased
   * ALCN-779: Sale modules migration to v10
   * ALCN-777: sale_exception module migration to v10
   * ALCN-795: Migrate import accounting products (replace xml id for account)
+  * Stock modules migration to v10 + reception unit test
 
 **Documentation**
 
