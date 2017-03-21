@@ -60,7 +60,8 @@ class Usercontext(DomainInterface):
             picking = request.env['stock.picking'].sudo(self._user).search(
                 [('operator_id', '=', self._user.id),
                  ('state', '=', 'assigned'),
-                 ('picking_type_code', '=', 'internal')],
+                 ('picking_type_code', '=', 'internal'),
+                 '|', ('zetes_state', '=', False), ('zetes_state', '=', '05')],
                 limit=1)
 
             # If the user has a assigned picking

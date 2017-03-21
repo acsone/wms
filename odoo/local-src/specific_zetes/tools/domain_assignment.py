@@ -35,32 +35,53 @@ class Assignment(DomainInterface):
         result = Parameters(self, action='resp')
 
         if not params.Cri02:
-            domain = [
-                ('state', '=', 'assigned'),
-                ('picking_type_code', '=', 'internal'),
-                '|',
-                ('zetes_state', '=', False),
-                ('zetes_state', '=', '05'),
-            ]
+            query_values = []
+            picking_query = """
+SELECT picking.id
+FROM stock_picking AS picking
+  LEFT JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
+WHERE picking.state = 'assigned'
+      AND type.code = 'internal'
+      AND (picking.zetes_state IS NULL OR picking.zetes_state = '05')
+      AND EXISTS(SELECT 1
+                 FROM stock_pack_operation AS operation
+                 WHERE operation.picking_id = picking.id AND
+                       (operation.zetes_state IS NULL OR
+                        operation.zetes_state IN ('00', '03')))
+            """
 
             zone_code = params.Cri01
             if zone_code:
-                zone = request.env['stock.picking.type'].sudo(self._user).search([
-                    ('zone_code', '=', zone_code)
-                ])
-                domain.append(('picking_type_id', '=', zone.id))
+                zone = \
+                    request.env['stock.picking.type'].sudo(self._user).search([
+                        ('zone_code', '=', zone_code)
+                    ])
+                picking_query += "AND picking.picking_type_id = %s "
+                query_values.append(zone.id)
 
             if params.requestType:
-                domain.append(('operator_id', '=', False))
+                picking_query += "AND picking.operator_id IS NULL "
             else:
-                domain.append(('operator_id', '=', self._user.id))
+                picking_query += "AND picking.operator_id = %s"
+                query_values.append(self._user.id)
 
-            picking = \
-                request.env['stock.picking'].sudo(self._user).search(domain, limit=1)
+            picking_query += "ORDER BY id LIMIT 1;"
+            request.env.cr.execute(picking_query, tuple(query_values))
+            query_result = request.env.cr.fetchone()
+
+            if query_result and query_result[0]:
+                picking_id = query_result[0]
+                picking = \
+                    request.env['stock.picking']\
+                        .sudo(self._user).browse(picking_id)
+            else:
+                picking = []
 
         else:
             picking_id = int(params.Cri02)
-            picking = request.env['stock.picking'].sudo(self._user).browse(picking_id)
+            picking = \
+                request.env['stock.picking']\
+                    .sudo(self._user).browse(picking_id)
 
         if not len(picking):
             result.update({

@@ -82,7 +82,7 @@ class Itempick(DomainInterface):
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
         for line in lines:
-            if line.zetes_state and line.zetes_state != '00':
+            if line.zetes_state and line.zetes_state not in ['00', '03']:
                 continue
 
             line_values = Parameters(self)
@@ -130,8 +130,8 @@ class Itempick(DomainInterface):
             # if line.product_uom_id != default_uom:
             #     line_values.UOMPrompt = line.product_uom_id.name
 
-            stock_bin = product.stock_bin_ids
-            if not stock_bin:
+            location = line.location_dest_id
+            if not location:
                 line_values.update({
                     'respCode': 10,
                     'respMsg': 'Location not found for this product',
@@ -139,26 +139,14 @@ class Itempick(DomainInterface):
                 result.append(line_values)
                 continue
 
-            bin = stock_bin[0].bin_location_id
             line_values.update({
-                'sourceLC1': bin.zone,
-                'sourceLC2': bin.corridor,
-                'sourceLC3': bin.shelf,
-                'sourceLC4': bin.height,
-                'sourceLC5': bin.box,
-                'sourceLCCD': bin.get_checksum(),
+                'sourceLC1': location.zone,
+                'sourceLC2': location.corridor,
+                'sourceLC3': location.shelf,
+                'sourceLC4': location.height,
+                'sourceLC5': location.box,
+                'sourceLCCD': location.get_checksum(),
             })
-
-            if len(stock_bin) > 1:
-                alternate_bin = stock_bin[1].bin_location_id
-                line_values.update({
-                    'altSourceLC1': alternate_bin.zone,
-                    'altSourceLC2': alternate_bin.corridor,
-                    'altSourceLC3': alternate_bin.shelf,
-                    'altSourceLC4': alternate_bin.height,
-                    'altSourceLC5': alternate_bin.box,
-                    'altSourceLCCD': alternate_bin.get_checksum(),
-                })
 
             lots = request.env['stock.production.lot'].sudo(self._user)\
                 .search([('product_id', '=', product.id),

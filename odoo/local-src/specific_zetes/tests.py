@@ -1,7 +1,7 @@
 import requests
 
 DOMAIN = 'http://localhost:8069/zetes/'
-USER_CODE = '30'
+USER_CODE = '01'
 ZONE_CODE = '01'
 
 
@@ -44,10 +44,10 @@ def assignment():
 
     print 'Picking ID: ' + picking_id
 
-    data = '208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,{},1,20170207,072836,30427733115363,{},,,,01,123456789,,,,,,,,,,#'.format(USER_CODE, picking_id)
-    requests.post(DOMAIN, data=data)
-
-    return picking_id
+    # data = '208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,{},1,20170207,072836,30427733115363,{},,,,01,123456789,,,,,,,,,,#'.format(USER_CODE, picking_id)
+    # requests.post(DOMAIN, data=data)
+    #
+    # return picking_id
 
 
 def get_itempicks(picking_id):
@@ -98,7 +98,7 @@ def validate_picking(picking_id):
     requests.post(DOMAIN, data=data)
 
 identification()
-print_zones()
-# picking_id = assignment()
+#print_zones()
+#picking_id = assignment()
 # get_itempicks(picking_id)
 # validate_picking(1)
