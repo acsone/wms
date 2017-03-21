@@ -74,8 +74,9 @@ class StockLocation(models.Model):
 
     def get_putaway_strategy(self, product):
         location = self
-        location_dest = super(StockLocation, self).get_putaway_strategy(
-            product) or location.id
+        location_dest = self.browse(
+            super(StockLocation, self).get_putaway_strategy(
+                product) or location.id)
 
         # check if bin location
         if location_dest.kind != 'bin':
