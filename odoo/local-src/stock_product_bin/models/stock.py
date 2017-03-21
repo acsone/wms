@@ -52,4 +52,4 @@ class StockLocation(models.Model):
             if lbin:
                 return lbin.read(['bin_location_id'],
                                  load='_classic_write')['bin_location_id']
-        return dest_location
+        return dest_location_id
