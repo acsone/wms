@@ -39,12 +39,12 @@ class StockMove(models.Model):
                 ('state', 'in', ['draft', 'confirmed', 'waiting',
                                  'partially_available', 'assigned'])
             ]
-            if domain in pickings:
-                picking = pickings[domain]
+            if str(domain) in pickings:
+                picking = pickings[str(domain)]
             else:
                 picking = pick_obj.search(domain, limit=1)
                 picking = picking and picking[0]
-                pickings[domain] = picking
+                pickings[str(domain)] = picking
 
             create = False
             if picking:
@@ -72,6 +72,6 @@ class StockMove(models.Model):
             if create:
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
-                pickings[domain] = picking
+                pickings[str(domain)] = picking
                 move.picking_id = picking.id
         return True
