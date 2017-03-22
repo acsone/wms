@@ -10,6 +10,15 @@ from ..common import req
 
 
 @anthem.log
+def setup_company_minimal(ctx):
+    """ Configuring company data """
+    company = ctx.env.ref('base.main_company')
+    company.write({
+        'name': 'Alcyon Belux SA',
+    })
+
+
+@anthem.log
 def setup_company(ctx):
     """ Configuring company data """
     company = ctx.env.ref('base.main_company')
@@ -67,5 +76,5 @@ def change_config_parameters(ctx):
 def main(ctx):
     """ Executing main entry point called before upgrade of addons """
     setup_language(ctx)
-    setup_company(ctx)
+    setup_company_minimal(ctx)
     change_config_parameters(ctx)

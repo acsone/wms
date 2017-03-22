@@ -5,7 +5,19 @@ migration:
     - version: 10.0.0
       operations:
         pre:
+          # ***********************************************************
+          # ************* Avoid auto-install chart of accounts ********
+          # ***********************************************************
           - anthem songs.install.pre::main
+          # Install account without l10n to avoid auto install
+          - odoo -i account --stop-after-init --workers=0
+          - anthem songs.install.accounting::no_coa_instance_lock
+          - odoo -i l10n_be                --stop-after-init --workers=0
+          - odoo -i l10n_be_antibiotic_tax --stop-after-init --workers=0
+          - odoo -i l10n_be_apb_tax        --stop-after-init --workers=0
+          - odoo -i l10n_be_eco_tax        --stop-after-init --workers=0
+          - anthem songs.install.accounting::no_coa_instance_unlock
+          - anthem songs.install.pre::setup_company
         post:
           # Because this module is auto-install when sale_stock is installed.
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module

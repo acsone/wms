@@ -56,3 +56,24 @@
     # mig base_exception (used for sale_exception)
     - oca refs/pull/775/head
   target: *default_target
+./external-src/account-financial-tools:
+  remotes:
+    oca: git@github.com:OCA/account-financial-tools.git
+    camptocamp: git@github.com:camptocamp/account-financial-tools.git
+  merges:
+    - oca 10.0
+    # Migration of module account_chart_update.
+    # I copy/past the PR for the migraiton of this module in v9 (Qansee - Jacques Etienne)
+    - oca refs/pull/460/head
+  target: *default_target
+./external-src/l10n-belgium:
+  remotes:
+    oca: git@github.com:OCA/l10n-belgium.git
+    camptocamp: git@github.com:camptocamp/l10n-belgium.git
+  merges:
+    - oca 10.0
+    # Migration of module l10n_be_antibiotic_tax, l10n_be_apb_tax, l10n_be_eco_tax.
+    # I created a single commit for these three modules because it's only data.
+    # There no code in these modules.
+    - oca refs/pull/45/head
+  target: *default_target
