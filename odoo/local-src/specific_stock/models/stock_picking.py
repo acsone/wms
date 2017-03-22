@@ -15,10 +15,10 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def create_lots_for_picking(self):
+    def _create_lots_for_picking(self):
         return super(StockPicking, self.with_context(
             default_life_date_allowed=True
-        )).create_lots_for_picking()
+        ))._create_lots_for_picking()
 
     @api.multi
     def do_new_transfer(self):

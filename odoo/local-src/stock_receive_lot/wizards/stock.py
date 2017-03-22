@@ -36,15 +36,23 @@ class StockPackOperationLotAdd(models.TransientModel):
     operation_id = fields.Many2one(
         'stock.pack.operation',
         string="Operation",
-        required=True,
         domain=[('state', '=', 'assigned')])
 
     def _is_parent_child(self, parent, child):
-        if parent.parent_left > child.parent_left:
+        if child.parent_left and child.parent_right:
+            if parent.parent_left > child.parent_left:
+                return False
+            if parent.parent_right < child.parent_right:
+                return False
+            return True
+        else:
+            # parent_left/right could be deferred and it is disabled in init
+            # mode during unittesting
+            while child.location_id:
+                if child.location_id == parent:
+                    return True
+                child = child.location_id
             return False
-        if parent.parent_right < child.parent_right:
-            return False
-        return True
 
     @api.onchange('operation_id')
     def _onchange_operation_id(self):
@@ -152,7 +160,8 @@ class StockPackOperationLotAdd(models.TransientModel):
             self._convert_lot_name2id(vals)
         res = super(StockPackOperationLotAdd, self).write(vals)
         for rec in self:
-            if rec.lot_id and rec.lot_id.life_date != rec.life_date:
+            if (rec.lot_id and rec.life_date and
+                    rec.lot_id.life_date != rec.life_date):
                 rec.lot_id.life_date = rec.life_date
                 rec.lot_id.onchange_life_date()
         return res
@@ -160,8 +169,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _add(self):
         if self.qty <= 0:
             raise Warning('Quantity must be greater than 0')
-
-        lot_name = self.lot_id.name
 
         # A pack operation is for a destination and can have multiple lot lines
         # (pack_lot_ids) with the constraint that you cannot have 2 lot lines
@@ -182,15 +189,17 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.operation_id = pack2
             self.operation_id.location_dest_id = self.location_dest_id
 
-        for lot in self.operation_id.pack_lot_ids:
-            if lot.lot_name == lot_name:
-                lot.qty += self.qty
-                break
-        else:
-            self.operation_id.pack_lot_ids = [(0, 0, {
-                'qty': self.qty,
-                'lot_name': self.lot_id.name,
-                })]
+        lot_name = self.lot_id.name
+        if lot_name:
+            for lot in self.operation_id.pack_lot_ids:
+                if lot.lot_name == lot_name:
+                    lot.qty += self.qty
+                    break
+            else:
+                self.operation_id.pack_lot_ids = [(0, 0, {
+                    'qty': self.qty,
+                    'lot_name': self.lot_id.name,
+                    })]
         self.operation_id.save()
 
     @api.multi
@@ -202,6 +211,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     def button_nextlot(self):
         self._add()
         self.qty = False
+        self.lot_id = False  # ensure we don't modify lot on next lines
         self.life_date = False
         self.lot_name = False
-        self.lot_id = False
