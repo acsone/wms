@@ -35,7 +35,7 @@ def import_locations(ctx):
     """ Importing locations from csv"""
 
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'defer_parent_store_computation': True})
+    load_ctx.update({'defer_parent_store_computation': 'manually'})
     Location = ctx.env['stock.location'].with_context(load_ctx)
     with ctx.log(u" Importing family locations from csv"):
         content = resource_stream(req, 'data/install/location_family.csv')
@@ -106,10 +106,8 @@ def main(ctx):
     """ Loading demo data """
     import_suppliers(ctx)
     import_clients(ctx)
-    # FIXME depends on l10n_be_*_tax oca modules
-    # import_products(ctx)
+    import_products(ctx)
     import_locations(ctx)
-    # FIXME depends on import_products
-    # import_product_supplierinfo(ctx)
-    # import_pricelist_items(ctx)
+    import_product_supplierinfo(ctx)
+    import_pricelist_items(ctx)
     import_delivery_round_config(ctx)

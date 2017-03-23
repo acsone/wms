@@ -35,18 +35,17 @@ migration:
         full:
           operations:
             post:
-              - echo "TODO"
-              #- importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
-              #- importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
-              #- importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              #- anthem songs.install.data_full::post_import_products
-              #- anthem songs.install.data_full::import_wh_family_locations
-              #- importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
-              #- anthem songs.install.data_full::import_other_locations
-              #- anthem songs.install.data_full::location_compute_parents
-              #- importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
-              #- importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
-              #- anthem songs.install.data_full::main
+              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
+              - anthem songs.install.data_full::post_import_products
+              - anthem songs.install.data_full::import_wh_family_locations
+              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              - anthem songs.install.data_full::import_other_locations
+              - anthem songs.install.data_full::location_compute_parents
+              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
+              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - anthem songs.install.data_full::main
 
         demo:
           operations:

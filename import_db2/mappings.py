@@ -422,17 +422,17 @@ CEE_COUNTRIES = {
 
 
 PRODUCT_SALE_VAT = {
-    0: "__setup__.account_tax_sale_main_company_0%",
-    1: "__setup__.account_tax_sale_main_company_6%",
-    2: "__setup__.account_tax_sale_main_company_12%",
-    3: "__setup__.account_tax_sale_main_company_21%",
+    0: "l10n_be.1_attn_VAT-OUT-00-L",
+    1: "l10n_be.1_attn_VAT-OUT-06-L",
+    2: "l10n_be.1_attn_VAT-OUT-12-L",
+    3: "l10n_be.1_attn_VAT-OUT-21-L",
 }
 
 PRODUCT_PURCHASE_VAT = {
-    0: "__setup__.account_tax_purchase_main_company_0%_Marchandises",
-    1: "__setup__.account_tax_purchase_main_company_6%_Marchandises",
-    2: "__setup__.account_tax_purchase_main_company_12%_Marchandises",
-    3: "__setup__.account_tax_purchase_main_company_21%_Marchandises",
+    0: "l10n_be.1_attn_VAT-IN-V81-00",
+    1: "l10n_be.1_attn_VAT-IN-V81-06",
+    2: "l10n_be.1_attn_VAT-IN-V81-12",
+    3: "l10n_be.1_attn_VAT-IN-V81-21",
 }
 
 PRODUCT_ROUTES = {

@@ -57,7 +57,7 @@ __import__.supplier_60429,60429,ADAM ET MENTEN,P.I.Hauts Sarts 4ème avenue 3A,4
 __import__.supplier_60430,60430,ADITECO (DE TURCK DIRK).,Wontergemstraat 82,8720,DENTERGEM,051/570626,051570625,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,0475/436772
 __import__.supplier_60431,60431,ACME,rue de Rixensart 18 B4,1332,GENVAL,02/2415431,02/2167132,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_60432,60432,AIR PRODUCTS HEALTHCARE BELG.,Rue de la basse Sambre 38,5140,SOMBREFFE,080/135137,071402833,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
-__import__.supplier_60433,60433,AGAT MEDICAL,Franklin Roosevelstraat 6,3600,GENK,089/247751,089208305,info@agatmedical.be,,False,True,__setup__.partner_category_supplier,base.be,nl_BE,
+__import__.supplier_60433,60433,AGAT MEDICAL,Franklin Roosevelstraat 6,3600,GENK,089/247751,089208305 *,info@agatmedical.be,,False,True,__setup__.partner_category_supplier,base.be,nl_BE,
 __import__.supplier_60434,60434,ABBEYVET EXPORT LLP,Aviation Way,LS25 6NB,SHERBURN-IN-ELMET,0044/1977685777,00441977685111,,,False,True,__setup__.partner_category_supplier,base.uk,fr_BE,
 __import__.supplier_60435,60435,EDENRED BELGIUM,Avenue Hermann Debroux 54 bte5,1160,BRUXELLES,02/6782900,02/6782828,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_60436,60436,ADAM EQUIPEMENT GMBH,Instenkamp 4,24242,FELDE,00494340403000,004943404030020,,,False,True,__setup__.partner_category_supplier,base.de,fr_BE,
@@ -513,6 +513,7 @@ __import__.supplier_63996,63996,DKV BELGIUM,Bd Bischoffsheimlaan 1-8,1000,BRUXEL
 __import__.supplier_64000,64000,AKRA DERMO JET,23bis rue Louis Barthou,64000,PAU,0033559274746,0033559272270,,,False,True,__setup__.partner_category_supplier,base.fr,fr_BE,
 __import__.supplier_64005,64005,DULIERE M.,131 BVD DESMET DE NAYER,1090,BRUXELLES,02/4250661,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_64010,64010,DUMONT VERRERIES,Chaussée d'Ivoz 2,4400,IVOZ-RAMET,04/3369440,043379513,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_64012,64012,DEBOUCK LUC,Kasteelstraat 169,8700,TIELT,051/401140,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_64020,64020,DUN & BRADSTREET,Keizer Karellaan 576,1082,BERCHEM SAINT AGATHE,02/7787211,027787272,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_64030,64030,DUPLAST,"I.Z.EIKAERT, Natveld 15",3740,BILZEN,089/414188,089492772,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_64040,64040,DUQUESNE GUY,Chaussée de Mons 85,7800,ATH,068/544544,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
@@ -787,6 +788,7 @@ __import__.supplier_68240,68240,HANEL,Postfach 82 03 09,81803,MUNCHEN,0049/89420
 __import__.supplier_68250,68250,HILL'S PET PRODUCTS BENELUX,Boulevard du Souverain 165,1160,BRUXELLES,02/646.29.00,026463555,BELGIUM_VET_DISTRIBUTION@Hillspet.com,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68257,68257,HEYER BENELUX,Schurhovenveld 3132,3800,SINT-TRUIDEN,068/268300,068268308,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68300,68300,INTERVET BELGIUM HRV,Raghenopark - Delingstr.32/1,2800,MECHELENS,015/436728,083212876,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_68301,68301,H&O EQUIPMENTS,Rue des Journaliers 1,7822,GHISLENGHIEN,068/268600,068552848,sjonny.vaneeten@ho-equipments.com,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68302,68302,HARTMANN PAUL,Avenue Paul Hartmann 1,1480,SAINTES,02/3914466,043775039,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68303,68303,HAUPTNER UND R.HERBERHOLZ,P.O BOX 22 01 34,42629,SOLINGEN,0049 212/2501-0,00492122501150*,a.fuelster@hauptner-herberholz.de,,False,True,__setup__.partner_category_supplier,base.de,fr_BE,
 __import__.supplier_68305,68305,HAVET J.,Levée de Limbourg 6,4837,BAELEN,087/882459,087/881296,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
@@ -889,7 +891,7 @@ __import__.supplier_71200,71200,INTERPET LIMITED,Interpet House,RH4 3YX,"DORKING
 __import__.supplier_71205,71205,INTERVET FRANCE,,,,,,,,False,True,__setup__.partner_category_supplier,base.fr,fr_BE,
 __import__.supplier_71208,71208,INTERVET IRELAND,,,,,,,,False,True,__setup__.partner_category_supplier,base.ie,fr_BE,
 __import__.supplier_71210,71210,INTERMARCHE,rue du Château d'Eau 1,4530,VILLERS-LE-BOUILLET,085/316911,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
-__import__.supplier_71212,71212,INTERSURGICAL BENELUX,Baaikensstraat 2/D,9240,ZELE,05/2456991,052456992,kklem@intersurgical.be,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_71212,71212,INTERSURGICAL BENELUX,Baaikensstraat 2/D,9240,ZELE (BELGIQUE),05/2456991,052456992 *,kklem@intersurgical.be,,False,True,__setup__.partner_category_supplier,base.nl,fr_BE,
 __import__.supplier_71400,71400,JOHNSON ET JOHNSON MEDICAL,Leonardo Da Vincilaan 15,1831,DIEGEM,02/7463333,027463344,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_71405,71405,JOB'IN,Avenue Blonden 29,4000,LIEGE,04/3440601,04/3410170,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_71408,71408,JORDAN MEDICAL,Rijksweg 222,6582,AB HEUMEN,0031/243572400,0031243585527,,,False,True,__setup__.partner_category_supplier,base.nl,fr_BE,
@@ -1738,6 +1740,7 @@ __import__.supplier_95270,95270,XEROX BELGIUM,Wezembeekstraat 5,1930,ZAVENTEM,02
 __import__.supplier_95275,95275,ARDENNES ETAPE,Ster 3 B,4970,STAVELOT,080/292400,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_95280,95280,ARNONE,Avenue de la Concorde 166,4100,SERAING,04/3366807,04/3309114,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_95285,95285,ARPEC,Chaussée Saint-Pierre 387,1040,ETTERBEEK,02/7322836,02/7362427,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_95286,95286,ARRIMAX,rue Fraischamps 91,4030,GRIVEGNEE,,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,0477/955915
 __import__.supplier_95290,95290,ARTELIA,rue Hongrée 6,4000,LIEGE,04/2229208,,info@artelia.be,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,0475/244993
 __import__.supplier_95295,95295,ARTEC,Quai de Compiègne 73,4500,HUY,085/233872,,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_95310,95310,Q-PHARM,Legeweg 157 I,8020,OOSTKAMP,050/542717,050542718,,,False,True,__setup__.partner_category_supplier,base.be,fr_BE,
