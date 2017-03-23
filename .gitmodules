@@ -1,6 +1,6 @@
 [submodule "odoo/src"]
 	path = odoo/src
-	url = git@github.com:OCA/OCB.git
+	url = git@github.com:camptocamp/odoo.git
 [submodule "odoo/external-src/server-tools"]
 	path = odoo/external-src/server-tools
 	url = git@github.com:camptocamp/server-tools.git
