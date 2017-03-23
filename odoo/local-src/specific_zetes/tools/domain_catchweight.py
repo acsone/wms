@@ -36,43 +36,13 @@ class Catchweight(DomainInterface):
     'Usf09', 'Usf10')
 
     def requ(self, params):
+        """
+        Currently this method do nothing.
+        We don't know why we have to use this method
+        :param params:
+        :return:
+        """
         result = Parameters(self, action='resp')
-
-        move_id = int(params.pickLineId)
-        if not move_id:
-            result.update({
-                'respCode': 10,
-                'respMsg': _('No picking found')
-            })
-            return result.format()
-
-        move = request.env['stock.pack.operation']\
-            .sudo(self._user).browse(move_id)
-        if not move:
-            result.update({
-                'respCode': 10,
-                'respMsg': _('No picking found')
-            })
-            return result.format()
-
-        lot_checksum = params.lotNumber
-        if not lot_checksum:
-            result.update({
-                'respCode': 11,
-                'respMsg': _('Lot not found')
-            })
-
-            return result.format()
-
-        lot = request.env['stock.production.lot'].sudo(self._user).search([
-                ('product_id', '=', move.product_id.id),
-                ('checksum', '=', lot_checksum)], limit=1)
-        if not lot:
-            result.update({
-                'respCode': 11,
-                'respMsg': _('Lot not found')
-            })
-            return result.format()
 
         result.update({
             'respCode': 0,
@@ -80,7 +50,7 @@ class Catchweight(DomainInterface):
             'itemPickSeqNum': 1,
             'pickLineId': params.pickLineId,
             'productCode': params.productCode,
-            'lotNumber': lot.name,
+            'lotNumber': params.lotNumber,
             'effQty': params.effQty,
         })
         return result.format()
@@ -96,8 +66,11 @@ class Catchweight(DomainInterface):
         if not len(move):
             return
 
-        lot_number = params.Usf01
         qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
+
+        lot_number = params.Usf01
+        if not lot_number:
+            return
 
         lot = request.env['stock.production.lot'].sudo(self._user)\
             .search([('product_id', '=', move.product_id.id),

@@ -12,10 +12,11 @@
     Zetes integration for Alcyon
     """,
     'depends': [
-            'stock',
+        'stock',
     ],
     'data': [
         'views/res_users.xml',
+        'views/res_partner.xml',
         'views/stock_picking_type.xml',
     ],
     'website': 'http://www.camptocamp.com',

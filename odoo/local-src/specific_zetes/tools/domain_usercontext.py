@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
@@ -31,7 +32,7 @@ class Usercontext(DomainInterface):
         if not user:
             result.update({
                 'respCode': 10,
-                'respMsg': 'User not found'
+                'respMsg': _('User not found')
             })
 
             return result.format()
@@ -39,7 +40,7 @@ class Usercontext(DomainInterface):
         if not user.has_group('stock.group_stock_user'):
             result.update({
                 'respCode': 10,
-                'respMsg': 'The user should be in the group Inventory'
+                'respMsg': _('The user should be in the group Inventory')
             })
 
             return result.format()
@@ -61,7 +62,7 @@ class Usercontext(DomainInterface):
                 [('operator_id', '=', self._user.id),
                  ('state', '=', 'assigned'),
                  ('picking_type_code', '=', 'internal'),
-                 '|', ('zetes_state', '=', False), ('zetes_state', '=', '05')],
+                 ('zetes_state', 'in', ['01', '02'])],
                 limit=1)
 
             # If the user has a assigned picking
@@ -94,6 +95,8 @@ class Usercontext(DomainInterface):
     def resu(self, params):
         if not self._user:
             return
+
+        print params.scenarioStatus
 
         pickings = request.env['stock.picking'].sudo(self._user).search([
             ('operator_id', '=', self._user.id),

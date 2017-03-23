@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
@@ -66,17 +67,18 @@ class Itempick(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': 10,
-                'respMsg': 'No picking found with the ID {}'.format(picking_id)
+                'respMsg': _('No picking found with the ID {}'
+                             .format(picking_id))
             })
             return result.format()
         picking_id = int(picking_id)
 
         if params.Cri01 == '1':
-            order_by = 'id DESC'
+            order_by = 'location_name DESC'
         else:
-            order_by = 'id ASC'
+            order_by = 'location_name ASC'
 
-        counter = 1
+        sequence = 1
         result = []
         lines = request.env['stock.pack.operation'].sudo(self._user)\
             .search([('picking_id', '=', picking_id)],
@@ -97,13 +99,6 @@ class Itempick(DomainInterface):
             })
 
             product = line.product_id
-            if not product:
-                line_values.update({
-                    'respCode': 10,
-                    'respMsg': 'Product not found',
-                })
-                result.append(line_values)
-                continue
 
             line_values.update({
                 'productCode': product.default_code,
@@ -118,7 +113,7 @@ class Itempick(DomainInterface):
                 'productBarcode': product.barcode,
                 'scanProductBarcode': 0,
                 'UOMPrompt': line.product_uom_id.name,
-                'itemPickSeqNum': counter, # TODO Improve and use a real sequence
+                'itemPickSeqNum': sequence,
             })
 
             if product.tracking == 'lot':
@@ -134,7 +129,8 @@ class Itempick(DomainInterface):
             if not location:
                 line_values.update({
                     'respCode': 10,
-                    'respMsg': 'Location not found for this product',
+                    'respMsg': _('Location not found for the product {}'
+                                 .format(product.name)),
                 })
                 result.append(line_values)
                 continue
@@ -160,7 +156,7 @@ class Itempick(DomainInterface):
                 setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
 
             result.append(line_values)
-            counter += 1
+            sequence += 1
 
         return '\n'.join([line.format() for line in result])
 

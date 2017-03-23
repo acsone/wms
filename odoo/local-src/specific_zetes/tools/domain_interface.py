@@ -53,6 +53,9 @@ class Parameters:
         self._action = action
         self._domain = domain
 
+        if domain._user:
+            request.context = dict(request.context, lang=domain._user.lang)
+
         if values:
             formatted_values = [value.strip() for value in values]
             self.__dict__.update(dict(zip(labels, formatted_values)))

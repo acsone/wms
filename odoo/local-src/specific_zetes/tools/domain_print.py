@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
@@ -32,7 +33,8 @@ class Print(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': 10,
-                'respMsg': 'No picking found with the ID {}'.format(picking_id)
+                'respMsg': _('No picking found with the ID {}'
+                             .format(picking_id))
             })
             return result.format()
         picking_id = int(picking_id)

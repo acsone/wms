@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
@@ -16,20 +17,22 @@ class Assignment(DomainInterface):
                    '072836,30427733115363,000000001625844,,,,' \
                    '01,123456789,,,,,,,,,,'
     REQU = (
-    'assignmentType', 'requestType', 'tripCounter', 'Cri01', 'Cri02', 'Cri03',
-    'Cri04', 'Cri05', 'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Cri11',
-    'Cri12', 'Cri13', 'Cri14', 'Cri15', 'Cri16', 'Cri17', 'Cri18', 'Cri19',
-    'Cri20', 'Cri21', 'Cri22', 'Cri23', 'Cri24', 'Cri25', 'Cri26', 'Cri27',
-    'Cri28', 'Cri29', 'Cri30', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
-    'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+        'assignmentType', 'requestType', 'tripCounter', 'Cri01', 'Cri02',
+        'Cri03',
+        'Cri04', 'Cri05', 'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Cri11',
+        'Cri12', 'Cri13', 'Cri14', 'Cri15', 'Cri16', 'Cri17', 'Cri18', 'Cri19',
+        'Cri20', 'Cri21', 'Cri22', 'Cri23', 'Cri24', 'Cri25', 'Cri26', 'Cri27',
+        'Cri28', 'Cri29', 'Cri30', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
+        'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
     RESP = (
-    'respCode', 'respMsg', 'assignmentType', 'responseType', 'groupNum',
-    'groupSubNum', 'assignmentStatus', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
-    'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+        'respCode', 'respMsg', 'assignmentType', 'responseType', 'groupNum',
+        'groupSubNum', 'assignmentStatus', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
+        'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
     RESU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'assignmentStatus',
-    'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08',
-    'Usf09', 'Usf10')
+        'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+        'assignmentStatus',
+        'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08',
+        'Usf09', 'Usf10')
 
     def requ(self, params):
         result = Parameters(self, action='resp')
@@ -42,12 +45,11 @@ FROM stock_picking AS picking
   LEFT JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
 WHERE picking.state = 'assigned'
       AND type.code = 'internal'
-      AND (picking.zetes_state IS NULL OR picking.zetes_state = '05')
+      AND picking.zetes_state IN ('00', '05')
       AND EXISTS(SELECT 1
                  FROM stock_pack_operation AS operation
-                 WHERE operation.picking_id = picking.id AND
-                       (operation.zetes_state IS NULL OR
-                        operation.zetes_state IN ('00', '03')))
+                 WHERE operation.picking_id = picking.id
+                 AND operation.zetes_state IN ('00', '03'))
             """
 
             zone_code = params.Cri01
@@ -72,7 +74,7 @@ WHERE picking.state = 'assigned'
             if query_result and query_result[0]:
                 picking_id = query_result[0]
                 picking = \
-                    request.env['stock.picking']\
+                    request.env['stock.picking'] \
                         .sudo(self._user).browse(picking_id)
             else:
                 picking = []
@@ -80,18 +82,15 @@ WHERE picking.state = 'assigned'
         else:
             picking_id = int(params.Cri02)
             picking = \
-                request.env['stock.picking']\
+                request.env['stock.picking'] \
                     .sudo(self._user).browse(picking_id)
 
         if not len(picking):
             result.update({
                 'respCode': 10,
-                'respMsg': 'Cannot found a picking'
+                'respMsg': _('Cannot found a picking')
             })
             return result.format()
-
-        # Assign a new checksum for this picking
-        picking.sudo(self._user).assign_picking_checksum()
 
         partner = picking.partner_id
 
@@ -105,21 +104,44 @@ WHERE picking.state = 'assigned'
             'respCode': 0,
             'assignmentType': 1,
             'groupNum': picking.id,
-            'assignmentStatus': '00',
             'Usf02': partner.alcyon_category_id.name,
             'Usf03': round,
             'Usf04': 0,
             'Usf05': 0,
-            'Usf06': 'C', # TODO see future password field on partner
             'Usf07': partner.name,
-            'Usf08': '{} {}'.format(partner.zip, partner.city), # Zip + city
-            'Usf09': len(picking.pack_operation_product_ids), # Nbr of operation
+            'Usf08': '{} {}'.format(partner.zip, partner.city),  # Zip + city
+            'Usf09': len(picking.pack_operation_product_ids),
+            # Nbr of operation
             'Usf10': None,
         })
+
+        if partner.is_passport_required:
+            result.Usf06 = 'C'  # This partner request a double control
+        else:
+            result.Usf06 = 'E'  # Simple packaging
+
+        if picking.zetes_state == '05':
+            result.update({
+                'assignmentStatus': '01',
+                'Usf01': picking.checksum,
+            })
+        else:
+            result.assignmentStatus = '00'
 
         return result.format()
 
     def resu(self, params):
+        """
+        State:
+        01/02: The operator start the picking.
+                         We assign this picking to the operator.
+        04/08: The operator has completed the picking
+                        and the picking must be validated.
+        05: The operator interrupts the picking. The picking is released
+                        and we assign a checksum for this picking.
+        :param params:
+        :return:
+        """
         picking_id = params.groupNum
         if not picking_id:
             return
@@ -140,9 +162,9 @@ WHERE picking.state = 'assigned'
             if isinstance(result, dict):
                 model = result.get('res_model')
                 wizard = \
-                    request.env[model].sudo(self._user)\
+                    request.env[model].sudo(self._user) \
                         .browse(int(result.get('res_id')))
 
                 wizard.process()
         elif params.assignmentStatus == '05':
-            picking.sudo(self._user).cancel_picking()
+            picking.sudo(self._user).interrupt_picking()

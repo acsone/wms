@@ -11,13 +11,17 @@ class StockPicking(models.Model):
 
     checksum = fields.Char('Checksum')
     zetes_state = fields.Selection([
+        ('00', 'Default'),
         ('01', 'Start'),
         ('02', 'Active'),
         ('03', 'Staging'),
         ('04', 'Done'),
         ('05', 'Cancelled'),
         ('08', 'Finished')
-    ], string='Zetes state')
+    ],
+        string='Zetes state',
+        default='00',
+        required=True)
 
     @api.multi
     def assign_picking_checksum(self):
@@ -45,10 +49,11 @@ class StockPicking(models.Model):
 
             checksum = random.choice(list(checksum_available))
             checksum_available.remove(checksum)
-            picking.checksum
+            picking.checksum = checksum
 
     @api.multi
-    def cancel_picking(self):
+    def interrupt_picking(self):
+        self.assign_picking_checksum()
         self.write({
             'operator_id': None,
         })
@@ -64,7 +69,10 @@ class StockPackOperation(models.Model):
         ('03', 'Skipped'),
         ('04', 'Cut'),
         ('05', 'Cancel')
-    ], string='Zetes state', default='00')
+    ],
+        string='Zetes state',
+        default='00',
+        required=True)
 
 
 class StockPickingType(models.Model):

@@ -39,10 +39,14 @@ def assignment():
     assignment = result.content.split(',')
     picking_id = assignment[14]
 
-    if not picking_id:
-        raise Exception('Cannot find a picking')
+    print assignment
 
-    print 'Picking ID: ' + picking_id
+    return
+
+    # if not picking_id:
+    #     raise Exception('Cannot find a picking')
+    #
+    # print 'Picking ID: ' + picking_id
 
     # data = '208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,{},1,20170207,072836,30427733115363,{},,,,01,123456789,,,,,,,,,,#'.format(USER_CODE, picking_id)
     # requests.post(DOMAIN, data=data)
@@ -97,8 +101,8 @@ def validate_picking(picking_id):
         )
     requests.post(DOMAIN, data=data)
 
-#identification()
+identification()
 #print_zones()
 #picking_id = assignment()
-get_itempicks(14)
+#get_itempicks(picking_id)
 # validate_picking(1)
