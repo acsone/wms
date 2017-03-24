@@ -14,6 +14,14 @@ Unreleased
 
 **Build**
 
+**Documentation**
+
+
+10.0.0 (2017-03-24)
++++++++++++++++++++
+
+**Build**
+
 * Migration to v10
 
   * Fix technically migration
@@ -32,8 +40,6 @@ Unreleased
   * ALCN-777: sale_exception module migration to v10
   * ALCN-795: Migrate import accounting products (replace xml id for account)
   * Stock modules migration to v10 + reception unit test
-
-**Documentation**
 
 
 9.11.0 (2017-03-10)
