@@ -21,7 +21,7 @@ def get_files(req, default_file):
     try:
         dir_path = os.environ['DATA_DIR']
     except KeyError:
-        yield [resource_stream(req, default_file)]
+        yield resource_stream(req, default_file)
     else:
         file_list = os.listdir(dir_path)
         for file_name in file_list:
@@ -92,7 +92,7 @@ def import_wh_family_locations(ctx):
     """ Importing family locations from csv"""
 
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'defer_parent_store_computation': True})
+    load_ctx.update({'defer_parent_store_computation': 'manually'})
     Location = ctx.env['stock.location'].with_context(load_ctx)
     content = resource_stream(req, 'data/install/location_family.csv')
     load_csv_stream(ctx, Location, content, delimiter=',')
@@ -103,7 +103,7 @@ def import_wh_locations(ctx):
     """ Importing warehouse locations from csv"""
 
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'defer_parent_store_computation': True})
+    load_ctx.update({'defer_parent_store_computation': 'manually'})
     Location = ctx.env['stock.location'].with_context(load_ctx)
     for content in get_files(req, 'data/install/location.csv'):
         load_csv_stream(ctx, Location, content, delimiter=',')
@@ -114,7 +114,7 @@ def import_other_locations(ctx):
     """ Importing other locations from csv"""
 
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'defer_parent_store_computation': True})
+    load_ctx.update({'defer_parent_store_computation': 'manually'})
     Location = ctx.env['stock.location'].with_context(load_ctx)
     with ctx.log(u"Importing reserve locations"):
         content = resource_stream(req, 'data/demo/locators_reserve.csv')

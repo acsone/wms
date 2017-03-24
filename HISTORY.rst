@@ -27,6 +27,7 @@ Unreleased
     * Fix travis script with odoo V10
     * Cancel auto-installing of procurement_jit
 
+  * ALCN-770: Update data, adapt taxes and fix multi process update
   * ALCN-779: Sale modules migration to v10
   * ALCN-777: sale_exception module migration to v10
   * ALCN-795: Migrate import accounting products (replace xml id for account)
