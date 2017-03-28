@@ -2,7 +2,7 @@
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models, fields
+from odoo import api, models, fields
 
 
 class StockPackOperationLotAdd(models.TransientModel):
