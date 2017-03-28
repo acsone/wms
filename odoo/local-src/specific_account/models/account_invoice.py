@@ -16,7 +16,7 @@ class AccountInvoice(models.Model):
          'The supplier invoice number must be unique by supplier')
     ]
 
-    @api.onchange('supplier_invoice_number')
+    @api.onchange('supplier_invoice_number', 'reference_type')
     def onchange_supplier_invoice_number(self):
         """
         Set the reference with the supplier invoice number

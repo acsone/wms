@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-788: Set the reference with the supplier invoice number
 
 **Bugfixes**
 
