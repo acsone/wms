@@ -4,7 +4,7 @@
 
 import lxml.html
 
-from openerp import api, models
+from odoo import api, models
 
 
 class Report(models.Model):

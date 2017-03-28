@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, fields, _
-from openerp.exceptions import Warning
+from odoo import models, api, fields, _
+from odoo.exceptions import Warning
 
 
 def hw_print(self, report_xmlid):
@@ -32,7 +15,7 @@ def hw_print(self, report_xmlid):
         raise Warning(_('No printer assigned'))
     try:
         printer.print_document(report, document, 'text')
-    except UnicodeEncodeError, e:
+    except UnicodeEncodeError as e:
         raise e
     except:
         raise Warning(_('Printer unavailable'))
@@ -52,12 +35,14 @@ class StockPackOperation(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    @api.one
+    @api.multi
     def print_products_label(self):
+        self.ensure_one()
         self.pack_operation_ids.print_product_label()
 
-    @api.one
+    @api.multi
     def print_packages_label(self, quantity=1):
+        self.ensure_one()
         if not self.partner_id:
             raise Warning(_('No destination partner defined'))
         hw_print(self.with_context(nbr=int(quantity)),
@@ -68,6 +53,27 @@ class StockPicking(models.Model):
         compute='_get_package_ids',
         string='Packages')
 
-    @api.one
+    @api.multi
     def _get_package_ids(self):
-        self.package_ids = self.pack_operation_ids.mapped('package_id')
+        for rec in self:
+            rec.package_ids = rec.pack_operation_ids.mapped('package_id')
+
+
+class StockProductionLot(models.Model):
+    _inherit = 'stock.production.lot'
+
+    @api.multi
+    def print_lot_label(self, quantity=1):
+        self.ensure_one()
+        hw_print(self.with_context(nbr=int(quantity)),
+                 'specific_print.report_lot_label')
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    @api.multi
+    def print_lot_label(self, quantity=1):
+        self.ensure_one()
+        hw_print(self.with_context(nbr=int(quantity)),
+                 'specific_print.report_lot_nolot_label')

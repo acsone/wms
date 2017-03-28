@@ -46,3 +46,8 @@ class ProductTemplate(models.Model):
 
     stock_bin_ids = fields.One2many(
         'product.stock.bin', 'product_id', 'Stock Bins')
+
+    def _bin(self):
+        if self.stock_bin_ids:
+            return self.stock_bin_ids[0].bin_location_id
+        return self.env['stock.location'].browse()

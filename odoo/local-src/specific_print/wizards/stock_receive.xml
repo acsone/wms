@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form"/>
         <field name="arch" type="xml">
             <footer position="inside">
-                <button name="print_label" string="Print" type="object" class="oe_highlight"/>
+                <field name="print_qty" class="oe_inline" style="width: 25px !important; text-align: center;"/><button name="print_label" string="Print" type="object" class="oe_highlight"/>
             </footer>
         </field>
     </record>

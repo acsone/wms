@@ -4,35 +4,59 @@
 
 <template id="stock_lot_label_zebra_v1">
  <div class="raw">
-<t t-foreach="docs" t-as="oplot">
-<t t-set="op" t-value="operation_id"/>
-<t t-set="pick" t-value="operation_id.picking_id"/>
+<t t-foreach="docs" t-as="lot">
 ^XA
 ^PRC
 ^LH0,0^FS
-^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="op.product_id._bin().name"/>^FS
+^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="lot.product_id._bin().name"/>^FS
 ^FO20,93^A0N,39,33^CI13^FR^FDNr Lot interne : ^FS
-^FO334,52^A0N,94,82^CI13^FR^FD<t t-esc="oplot.lot_id.checksum"/>^FS
-^FO432,33^A0N,118,103^CI13^FR^FD<t t-esc="oplot.lot_id.checksum"/>^FS
+^FO334,52^A0N,94,82^CI13^FR^FD<t t-esc="lot.checksum"/>^FS
+^FO432,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum"/>^FS
 ^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS
 ^FO20,242^A0N,37,32^CI13^FR^FDLot four : ^FS
-^FO170,242^A0N,37,32^CI13^FR^FD<t t-esc="oplot.lot_id.name"/>^FS
+^FO170,242^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS
 ^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS
 ^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS
-^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="op.product_id.name"/>^FS
+^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS
 ^PQ1,0,0,N
 ^XZ
-</t></t></t>
+</t>
  </div>
 </template>
 
 <report
     id="report_lot_label"
     string="Alcyon Lot Label"
-    model="stock.pack.operation.lot"
+    model="stock.production.lot"
     report_type="qweb-pdf"
     file="specific_print.stock_lot_label_zebra_v1"
     name="specific_print.stock_lot_label_zebra_v1"
+/>
+
+<template id="stock_lot_nolot_label_zebra_v1">
+ <div class="raw">
+<t t-foreach="docs" t-as="product_id">
+^XA
+^PRC
+^LH0,0^FS
+^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="product_id._bin().name"/>^FS
+^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS
+^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS
+^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS
+^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS
+^PQ1,0,0,N
+^XZ
+</t>
+ </div>
+</template>
+
+<report
+    id="report_lot_notlot_label"
+    string="Alcyon Lot Nolot Label"
+    model="product.product"
+    report_type="qweb-pdf"
+    file="specific_print.stock_lot_nolot_label_zebra_v1"
+    name="specific_print.stock_lot_nolot_label_zebra_v1"
 />
 
 </data>
