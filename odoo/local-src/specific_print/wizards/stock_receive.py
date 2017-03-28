@@ -15,7 +15,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     print_qty = fields.Integer(
         'Print Quantity',
         help="Quantity to print",
-        default='_default_print_qty')
+        default=_default_print_qty)
 
     def _add(self):
         super(StockPackOperationLotAdd, self)._add()
