@@ -66,6 +66,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             else:
                 self.location_dest_id = False
         if not self.lot_required:
+            self.life_date = False
             self.lot_name = False
 
     location_op_dest_id = fields.Many2one(
@@ -111,6 +112,13 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     life_date = fields.Datetime(
         string='End of Life Date')
+
+    @api.onchange('life_date')
+    def _onchange_life_date(self):
+        oplot = self.env['stock.pack.operation.lot']
+        if self.life_date:
+            self.lot_name = oplot._calc_lotname_from_lifedate(self.life_date)
+
     is_removal_date_expired = fields.Boolean(
         'Removal Date Expired',
         compute='_get_is_removal_date_expired')
@@ -118,9 +126,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     @api.depends('life_date')
     def _get_is_removal_date_expired(self):
         oplot = self.env['stock.pack.operation.lot']
-        if self.life_date:
-            self.lot_name = oplot._calc_lotname_from_lifedate(self.life_date)
-
         line = oplot.new({
             'life_date': self.life_date,
             'operation_id': self.operation_id.id})
@@ -214,3 +219,9 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.lot_id = False  # ensure we don't modify lot on next lines
         self.life_date = False
         self.lot_name = False
+
+    @api.multi
+    def button_nextdestloc(self):
+        self._add()
+        self.qty = False
+        self.location_dest_id = False

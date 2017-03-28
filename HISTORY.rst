@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Logistics: Reception: fix set default lot name with date, added some help, reception wizard (added button to allow to move to next destination)
+
 **Bugfixes**
 
 **Build**

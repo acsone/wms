@@ -9,6 +9,7 @@
               <header>
                   <button name="button_nextlot" type="object" string="Next Lot" class="oe_highlight" attrs="{'invisible': [('lot_required', '!=', True)]}"/>
                   <button name="button_nextop" type="object" string="Next Operation" class="oe_highlight"/>
+                  <button name="button_nextdestloc" type="object" string="Next Destination" class="oe_highlight"/>
               </header>
               <sheet>
                 <group>

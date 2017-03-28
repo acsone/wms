@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models, api
 
@@ -35,11 +18,16 @@ class StockPicking(models.Model):
 
     qty_outofstock = fields.Integer(
         'Nbr Out of Stock',
-        compute='_get_qty_backorder')
+        compute='_get_qty_backorder',
+        help="Quantity of operations having a product where the current stock "
+             "is <= 0")
 
     qty_backorder = fields.Integer(
         'Nbr Backorder',
-        compute='_get_qty_backorder')
+        compute='_get_qty_backorder',
+        help="Quantity of deliveries waiting for availability. We take all "
+             "deliveries waiting any of the products listed in the operations "
+             "and we count each distinct delivery address")
 
     @api.multi
     def _get_qty_backorder(self):
