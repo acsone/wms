@@ -6,11 +6,12 @@ from odoo import models, api, fields, _
 from odoo.exceptions import Warning
 
 
-def hw_print(self, report_xmlid):
+def hw_print(self, report_xmlid, printer=False):
     document = self.env['report']._get_raw(self._ids, report_xmlid)
     report = self.env.ref(report_xmlid)
     behaviour = report.behaviour()[report.id]
-    printer = behaviour['printer']
+    if not printer:
+        printer = behaviour['printer']
     if not printer:
         raise Warning(_('No printer assigned'))
     try:
@@ -25,28 +26,30 @@ class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
     @api.multi
-    def print_product_label(self):
+    def print_product_label(self, printer=False):
         for op in self:
             if not op.picking_id.partner_id:
                 raise Warning(_('No destination partner defined'))
-        hw_print(self, 'specific_print.report_stock_product_label')
+        hw_print(self, 'specific_print.report_stock_product_label',
+                 printer=printer)
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def print_products_label(self):
+    def print_products_label(self, printer=False):
         self.ensure_one()
-        self.pack_operation_ids.print_product_label()
+        self.pack_operation_ids.print_product_label(printer=printer)
 
     @api.multi
-    def print_packages_label(self, quantity=1):
+    def print_packages_label(self, quantity=1, printer=False):
         self.ensure_one()
         if not self.partner_id:
             raise Warning(_('No destination partner defined'))
         hw_print(self.with_context(nbr=int(quantity)),
-                 'specific_print.report_stock_pick_packs_label')
+                 'specific_print.report_stock_pick_packs_label',
+                 printer=printer)
 
     package_ids = fields.One2many(
         'stock.quant.package',
