@@ -12,10 +12,9 @@
         'sale',
         'specific_base',
         'pricelist_discount',
-        # TODO: To migrate in V10
-        # 'l10n_be_apb_tax',
-        # 'l10n_be_antibiotic_tax',
-        # 'l10n_be_invoice_bba',
+        'l10n_be_apb_tax',
+        'l10n_be_antibiotic_tax',
+        'l10n_be_invoice_bba',
         'report_intrastat',
         'account',
         'analytic',
