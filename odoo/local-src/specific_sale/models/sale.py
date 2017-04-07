@@ -251,6 +251,49 @@ class SaleOrderLine(models.Model):
             ).onchange_for_product_qty_unavailable()
         return result
 
+    production_lot_ids = fields.Many2many(
+        comodel_name='stock.production.lot',
+        compute='_compute_production_lot_ids',
+        string='Lots/Serial Numbers',
+    )
+
+    @api.depends('product_id')
+    def _compute_production_lot_ids(self):
+        production_lot_model = self.env['stock.production.lot'].with_context(
+            only_wh_stock_quants=True
+        )
+        for line in self:
+            if line.product_id:
+                production_lot_ids = production_lot_model.search([
+                    ('product_id', '=', line.product_id.id),
+                ]).filtered(
+                    lambda p: p.product_qty > 0
+                )
+            if production_lot_ids:
+                line.production_lot_ids = [(6, 0, production_lot_ids.ids)]
+            else:
+                line.production_lot_ids = [(5, 0)]
+
+    next_expected_date_for_receipt = fields.Date(
+        string='Next expected date for receipt',
+        compute='_compute_next_expected_date_for_receipt',
+    )
+
+    @api.depends('product_id')
+    def _compute_next_expected_date_for_receipt(self):
+        stock_move_model = self.env['stock.move']
+        for line in self:
+            if line.product_id:
+                move = stock_move_model.search([
+                    ('product_id', '=', line.product_id.id),
+                    ('state', '=', 'assigned'),
+                    ('picking_id.picking_type_id.code', '=', 'incoming'),
+                ], order='date_expected', limit=1)
+            if move:
+                line.next_expected_date_for_receipt = move.date_expected
+            else:
+                line.next_expected_date_for_receipt = False
+
 
 # Override the inherit of sale_product_additional
 # to complete sale.order.line.original with new specific fields
