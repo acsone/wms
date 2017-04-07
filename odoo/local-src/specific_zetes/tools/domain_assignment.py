@@ -42,9 +42,10 @@ class Assignment(DomainInterface):
             picking_query = """
 SELECT picking.id
 FROM stock_picking AS picking
-  LEFT JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-WHERE picking.state = 'assigned'
-      AND type.code = 'internal'
+  INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
+  INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
+WHERE picking.delivery_round_state = 'open'
+      AND type.subcode = 'PICK'
       AND picking.zetes_state IN ('00', '05')
       AND EXISTS(SELECT 1
                  FROM stock_pack_operation AS operation
@@ -67,7 +68,10 @@ WHERE picking.state = 'assigned'
                 picking_query += "AND picking.operator_id = %s"
                 query_values.append(self._user.id)
 
-            picking_query += "ORDER BY id LIMIT 1;"
+            picking_query += "ORDER BY round.date, " \
+                             "round.time, " \
+                             "picking.sequence " \
+                             "LIMIT 1;"
             request.env.cr.execute(picking_query, tuple(query_values))
             query_result = request.env.cr.fetchone()
 
