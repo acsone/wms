@@ -156,6 +156,7 @@ WHERE picking.state = 'assigned'
             picking.sudo(self._user).write({
                 'operator_id': self._user.id,
                 'state': 'in_progress',
+                'printed': True,
             })
         elif params.assignmentStatus in ['04', '08']:
             # If the picking required a verification (passport)

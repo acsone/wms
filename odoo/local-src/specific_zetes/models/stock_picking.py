@@ -9,6 +9,7 @@ from odoo import models, fields, api, _
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    operator_id = fields.Many2one(track_visibility='onchange')
     checksum = fields.Char('Checksum')
     state = fields.Selection([
         ('draft', 'Draft'),
