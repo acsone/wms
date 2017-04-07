@@ -43,7 +43,38 @@ class Print(DomainInterface):
             .sudo(self._user).browse(picking_id)
 
         print_type = params.printType
-        printer_address = params.printerNum
+        printer_num = params.printerNum
+
+        if print_type == '03':
+            printer = request.env['printing.printer'].sudo(self._user) \
+                .search([('code', '=', printer_num), ('type', '=', 'pdf')])
+            if not printer:
+                result.update({
+                    'respCode': 10,
+                    'respMsg': _('Cannot found a printer'),
+                })
+                return result.format()
+
+            picking.print_password_report()
+        elif print_type == '04':
+            printer_zebra = request.env['printing.printer'].sudo(self._user) \
+                .search([('code', '=', printer_num),
+                         ('type', '=', 'zebra')])
+            printer_toshiba = \
+                request.env['printing.printer'].sudo(self._user)\
+                    .search([('code', '=', printer_num),
+                             ('type', '=', 'toshiba')])
+            if not printer_zebra or not printer_toshiba:
+                result.update({
+                    'respCode': 10,
+                    'respMsg': _('Cannot found a printer'),
+                })
+                return result.format()
+
+            quantity = int(params.Usf01)
+            picking.print_products_label(printer=printer_zebra)
+            picking.print_packages_label(quantity=quantity,
+                                         printer=printer_toshiba)
 
         result.update({
             'respCode': 0,

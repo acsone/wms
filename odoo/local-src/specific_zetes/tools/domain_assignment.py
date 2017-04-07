@@ -155,16 +155,25 @@ WHERE picking.state = 'assigned'
         if params.assignmentStatus in ['01', '02']:
             picking.sudo(self._user).write({
                 'operator_id': self._user.id,
+                'state': 'in_progress',
             })
         elif params.assignmentStatus in ['04', '08']:
-            result = picking.sudo(self._user).do_new_transfer()
+            # If the picking required a verification (passport)
+            # the number of label is 0. The number of label cannot be 0
+            # for a standard picking (without passport).
+            if not params.Usf01:
+                picking.sudo(self._user).write({
+                    'state': 'check_required'
+                })
+            else:
+                result = picking.sudo(self._user).do_new_transfer()
 
-            if isinstance(result, dict):
-                model = result.get('res_model')
-                wizard = \
-                    request.env[model].sudo(self._user) \
-                        .browse(int(result.get('res_id')))
+                if isinstance(result, dict):
+                    model = result.get('res_model')
+                    wizard = \
+                        request.env[model].sudo(self._user) \
+                            .browse(int(result.get('res_id')))
 
-                wizard.process()
+                    wizard.process()
         elif params.assignmentStatus == '05':
             picking.sudo(self._user).interrupt_picking()

@@ -4,7 +4,7 @@
 
 {
     'name': 'Zetes integration for Alcyon',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'author': 'Sylvain Van Hoof',
     'license': 'AGPL-3',
     'category': 'Others',
@@ -13,6 +13,7 @@
     """,
     'depends': [
         'stock',
+        'specific_print',
     ],
     'data': [
         'views/res_users.xml',

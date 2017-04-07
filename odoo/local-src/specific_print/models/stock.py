@@ -51,6 +51,11 @@ class StockPicking(models.Model):
                  'specific_print.report_stock_pick_packs_label',
                  printer=printer)
 
+    @api.multi
+    def print_password_report(self, printer=False):
+        self.ensure_one()
+        hw_print(self, 'specific_report.report_passport', printer=printer)
+
     package_ids = fields.One2many(
         'stock.quant.package',
         compute='_get_package_ids',

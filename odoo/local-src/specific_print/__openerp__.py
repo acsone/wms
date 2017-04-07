@@ -29,10 +29,12 @@
         'stock',
         'base_report_to_printer',  # OCA/report-print-send.gi
         'stock_receive_lot',
+        'specific_report',
         ],
     'data': [
         'views/stock.xml',
         'views/stock_splitlot.xml',
+        'views/printer.xml',
         'wizards/stock_receive.xml',
         'report/stock_product_label.xml',
         'report/stock_pack_label.xml',

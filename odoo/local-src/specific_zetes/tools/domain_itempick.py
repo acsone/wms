@@ -172,4 +172,6 @@ class Itempick(DomainInterface):
 
         status = params.pickStatus
         if status:
-            move.zetes_state = status
+            move.sudo(self._user).write({
+                'zetes_state': status
+            })

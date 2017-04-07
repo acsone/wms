@@ -26,6 +26,7 @@
         'views/report_invoice.xml',
         'views/report_delivery_round.xml',
         'views/report_purchase_order.xml',
+        'views/report_passport.xml',
         'data/paperformat.xml',
     ],
     'installable': True,

@@ -10,6 +10,16 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     checksum = fields.Char('Checksum')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('cancel', 'Cancelled'),
+        ('waiting', 'Waiting Another Operation'),
+        ('confirmed', 'Waiting Availability'),
+        ('partially_available', 'Partially Available'),
+        ('assigned', 'Available'),
+        ('in_progress', 'In Progress'),
+        ('check_required', 'Check required'),
+        ('done', 'Done')])
     zetes_state = fields.Selection([
         ('00', 'Default'),
         ('01', 'Start'),
@@ -29,7 +39,7 @@ class StockPicking(models.Model):
         SELECT checksum
         FROM stock_picking
         WHERE checksum IS NOT NULL
-        AND state = 'assigned'
+        AND state IN ('assigned', 'in_progress', 'check_required')
         """
         self.env.cr.execute(active_picking_query)
         active_picking_checksum = set([row[0]
