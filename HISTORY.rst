@@ -11,6 +11,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* ALCN-812: Add missing ir.model.access
 
 **Build**
 
