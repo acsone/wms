@@ -20,7 +20,7 @@
 {RC005;<t t-if="False">Doc.n : 1/01790 /</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
 {RC002;<t t-esc="pack.product_id.name"/>|}\r
-<t t-if="pack.picking_id.partner_id">
+<t t-if="pack.picking_id.partner_id.is_price_on_labels">
 {PC007;0350,0070,05,05,J,00,B|}\r
 {RC007;PVI : <t t-esc="pack.product_id.list_price"/>|}\r
 </t>

@@ -3,10 +3,12 @@
     <record id="view_partner_form_inherit" model="ir.ui.view">
         <field name="name">view.partner.form.inherit</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="specific_print.view_partner_form_inherit"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='zetes']" position="inside">
-                <field name="is_passport_required" />
+            <xpath expr="//group[@name='container_row_2']" position="inside">
+                <group string="Zetes" name="zetes">
+                    <field name="is_price_on_labels" />
+                </group>
             </xpath>
         </field>
     </record>

@@ -35,6 +35,7 @@
         'views/stock.xml',
         'views/stock_splitlot.xml',
         'views/printer.xml',
+        'views/res_partner.xml',
         'wizards/stock_receive.xml',
         'report/stock_product_label.xml',
         'report/stock_pack_label.xml',
