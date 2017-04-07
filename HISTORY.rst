@@ -12,6 +12,7 @@ Unreleased
 * ALCN-788: Set the reference with the supplier invoice number
 
 **Bugfixes**
+* ALCN-812: Add missing ir.model.access
 
 **Build**
 

@@ -34,6 +34,7 @@
         'views/stock.xml',
         'views/stock_reassort.xml',
         'wizards/create_picking.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'auto_install': False,
