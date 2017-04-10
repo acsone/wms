@@ -20,7 +20,7 @@
 ##############################################################################
 from collections import defaultdict
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class StockPicking(models.Model):
