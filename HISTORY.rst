@@ -16,6 +16,10 @@ Unreleased
 
 **Build**
 
+* Migration to v10
+
+  * ALCN-822: Fix import with 'from openerp...' and fix migration of specific_report
+
 **Documentation**
 
 

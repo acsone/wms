@@ -103,6 +103,7 @@ migration:
           - specific_sale
           - specific_partner
           - specific_product
+          - specific_report
           - specific_stock
           - specific_translations
           - stock_barcode_fix
@@ -124,4 +125,3 @@ migration:
           - stock_refill
           - stock_receive_lot
           - web_autorefresh
-          - specific_report
