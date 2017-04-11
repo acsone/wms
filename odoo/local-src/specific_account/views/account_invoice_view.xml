@@ -12,6 +12,10 @@
                     <field name="supplier_invoice_number" required="True"/>
                 </xpath>
 
+                <xpath expr="//field[@name='check_total']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
                 <xpath expr="//group[field[@name='partner_id']]" position="inside">
                     <!--
                     TODO: To reactivate after migration V10 of l10n_be_apb_tax module

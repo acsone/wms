@@ -19,6 +19,7 @@
         'report_intrastat',
         'account',
         'analytic',
+        'account_cancel',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
