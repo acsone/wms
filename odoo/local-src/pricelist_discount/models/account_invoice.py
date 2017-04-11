@@ -15,6 +15,8 @@ class AccountInvoice(models.Model):
         Odoo does not base his tax computation on subtotal but on price_unit
         (and recompute price_unit * discount.....)
         """
+        account_tax_obj = self.env['account.tax']
+
         tax_grouped = {}
         for line in self.invoice_line_ids:
             taxes = line.invoice_line_tax_ids.compute_all(
@@ -23,7 +25,7 @@ class AccountInvoice(models.Model):
             )['taxes']
             for tax in taxes:
                 val = self._get_tax_val(line, tax)
-                key = tax['id']
+                key = account_tax_obj.browse(tax['id']).get_grouping_key(val)
                 if key not in tax_grouped:
                     tax_grouped[key] = val
                 else:
@@ -38,6 +40,7 @@ class AccountInvoice(models.Model):
             'name': tax['name'],
             'tax_id': tax['id'],
             'amount': tax['amount'],
+            'base': tax['base'],
             'manual': False,
             'sequence': tax['sequence'],
             'account_analytic_id':

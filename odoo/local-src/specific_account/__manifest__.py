@@ -24,8 +24,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        # TODO: To migrate in V10
-        # 'data/account_tax_group.xml',
+        'data/account_tax_group.xml',
         'views/account_invoice_view.xml',
         'views/res_config.xml',
         'views/ir_sequence.xml',
