@@ -153,6 +153,15 @@ def import_account_journal(ctx):
     content = resource_stream(req, 'data/install/account.journal.csv')
     load_csv_stream(ctx, 'account.journal', content, delimiter=',')
 
+    # Set the flag "update_posted" on following journals
+    # These journals have no XMLid
+    journals_to_flag = ctx.env['account.journal'].search([
+        ('code', 'in', ['STJ', 'BILL', 'EXP', 'INV', 'MISC'])
+    ])
+    journals_to_flag.write({
+        'update_posted': True
+    })
+
 
 @anthem.log
 def import_account_analytic_tag(ctx):

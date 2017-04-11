@@ -10,6 +10,7 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-788: Set the reference with the supplier invoice number
+* ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
 
 **Bugfixes**
 * ALCN-812: Add missing ir.model.access

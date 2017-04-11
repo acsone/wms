@@ -14,6 +14,7 @@ This module adds Alcyon specific fields and logic for accounting.
 * Add a new tax group APB to flag all APB tax
 * Display the vendor reference on supplier invoice
 * Set the reference of the supplier invoice with the supplier invoice number
+* Set the field "check total" required on vendor bills
 
 Credits
 =======
