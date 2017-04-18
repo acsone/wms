@@ -92,6 +92,3 @@ class Location(DomainInterface):
             result.Usf06 = specific_lot.checksum
 
         return result.format()
-
-    def resu(self, params):
-        print 'Execute method'

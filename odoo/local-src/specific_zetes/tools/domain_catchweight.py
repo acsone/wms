@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-from odoo import _
+import logging
+
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+
+_logger = logging.getLogger(__name__)
 
 
 class Catchweight(DomainInterface):
@@ -66,30 +69,36 @@ class Catchweight(DomainInterface):
         if not len(move):
             return
 
-        qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
+        try:
+            qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
 
-        lot_number = params.Usf01
-        if not lot_number:
-            return
+            lot_number = params.Usf01
+            if not lot_number:
+                return
 
-        lot = request.env['stock.production.lot'].sudo(self._user)\
-            .search([('product_id', '=', move.product_id.id),
-                     ('checksum', '=', lot_number)])
-        if lot:
-            pack_lot = \
-                move.pack_lot_ids\
-                    .filtered(lambda line: line.lot_id.id == lot.id)
+            lot = request.env['stock.production.lot'].sudo(self._user)\
+                .search([('product_id', '=', move.product_id.id),
+                         ('checksum', '=', lot_number)])
+            if lot:
+                pack_lot = \
+                    move.pack_lot_ids\
+                        .filtered(lambda line: line.lot_id.id == lot.id)
 
-            if not len(pack_lot):
-                move.pack_lot_ids.create({
-                    'operation_id': move.id,
-                    'qty': qty_done_by_lot,
-                    'lot_id': lot.id,
+                if not len(pack_lot):
+                    move.pack_lot_ids.create({
+                        'operation_id': move.id,
+                        'qty': qty_done_by_lot,
+                        'lot_id': lot.id,
+                    })
+                else:
+                    pack_lot.write({'qty': qty_done_by_lot})
+
+                qty_done = move.qty_done + qty_done_by_lot
+                move.write({
+                    'qty_done': qty_done,
                 })
-            else:
-                pack_lot.write({'qty': qty_done_by_lot})
-
-            qty_done = move.qty_done + qty_done_by_lot
-            move.write({
-                'qty_done': qty_done,
-            })
+        except Exception as e:
+            _logger.error(str(e))
+            params.log(picking_id=move.picking_id.id,
+                       operation_id=move_id,
+                       exception=e)

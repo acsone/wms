@@ -16,9 +16,14 @@
         'specific_print',
     ],
     'data': [
+        # Views
         'views/res_users.xml',
         'views/res_partner.xml',
         'views/stock_picking_type.xml',
+        'views/zetes_logger.xml',
+
+        # Security
+        'security/ir.model.access.csv',
     ],
     'website': 'http://www.camptocamp.com',
     'installable': True,

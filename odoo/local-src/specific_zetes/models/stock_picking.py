@@ -33,6 +33,8 @@ class StockPicking(models.Model):
         string='Zetes state',
         default='00',
         required=True)
+    is_zetes_error = fields.Boolean('Zetes error', default=False)
+    zetes_traceback = fields.Text('Zetes traceback')
 
     @api.multi
     def assign_picking_checksum(self):

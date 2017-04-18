@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+
+_logger = logging.getLogger(__name__)
 
 
 class Assignment(DomainInterface):
@@ -154,31 +158,35 @@ WHERE picking.delivery_round_state = 'open'
         if not len(picking_id):
             return
 
-        picking.sudo(self._user).zetes_state = params.assignmentStatus
-        # The picking is done
-        if params.assignmentStatus in ['01', '02']:
-            picking.sudo(self._user).write({
-                'operator_id': self._user.id,
-                'state': 'in_progress',
-                'printed': True,
-            })
-        elif params.assignmentStatus in ['04', '08']:
-            # If the picking required a verification (passport)
-            # the number of label is 0. The number of label cannot be 0
-            # for a standard picking (without passport).
-            if not params.Usf01:
+        try:
+            picking.sudo(self._user).zetes_state = params.assignmentStatus
+            # The picking is done
+            if params.assignmentStatus in ['01', '02']:
                 picking.sudo(self._user).write({
-                    'state': 'check_required'
+                    'operator_id': self._user.id,
+                    'state': 'in_progress',
+                    'printed': True,
                 })
-            else:
-                result = picking.sudo(self._user).do_new_transfer()
+            elif params.assignmentStatus in ['04', '08']:
+                # If the picking required a verification (passport)
+                # the number of label is 0. The number of label cannot be 0
+                # for a standard picking (without passport).
+                if not params.Usf01:
+                    picking.sudo(self._user).write({
+                        'state': 'check_required'
+                    })
+                else:
+                    result = picking.sudo(self._user).do_new_transfer()
 
-                if isinstance(result, dict):
-                    model = result.get('res_model')
-                    wizard = \
-                        request.env[model].sudo(self._user) \
-                            .browse(int(result.get('res_id')))
+                    if isinstance(result, dict):
+                        model = result.get('res_model')
+                        wizard = \
+                            request.env[model].sudo(self._user) \
+                                .browse(int(result.get('res_id')))
 
-                    wizard.process()
-        elif params.assignmentStatus == '05':
-            picking.sudo(self._user).interrupt_picking()
+                        wizard.process()
+            elif params.assignmentStatus == '05':
+                picking.sudo(self._user).interrupt_picking()
+        except Exception as e:
+            _logger.error(str(e))
+            params.log(picking_id=picking_id, exception=e)

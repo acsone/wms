@@ -194,3 +194,15 @@ class Parameters:
         if empty_mandatory_values:
             _logger.warning(_('There are some missing mandatory values: {}'
                             .format(', '.join(empty_mandatory_values))))
+
+    def log(self, picking_id=None, operation_id=None, exception=None):
+        request.env['zetes.logger'].sudo().create({
+            'domain': self._domain.__class__.__name__.lower(),
+            'action': self._action.lower(),
+            'request': self.format(),
+            'formatted_request': str(self),
+            'user_id': self._domain._user and self._domain._user.id,
+            'picking_id': picking_id,
+            'operation_id': operation_id,
+            'traceback': exception and str(exception) or None,
+        })

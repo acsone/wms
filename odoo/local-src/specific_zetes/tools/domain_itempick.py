@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+
+_logger = logging.getLogger(__name__)
 
 
 class Itempick(DomainInterface):
@@ -78,11 +82,40 @@ class Itempick(DomainInterface):
         else:
             order_by = 'location_name ASC'
 
+        # If the picking type is 'Aliment' whe need to print on portable pinter
+        query = "SELECT picking_type_id FROM stock_picking WHERE id = %s"
+        request.env.cr.execute(query, (picking_id, ))
+        query_result = request.env.cr.fetchone()
+
+        type_food = request.env.ref('__setup__.stock_picking_type_ali')
+        if query_result and query_result[0] == type_food.id:
+            print_on_portable_printer = '1'
+        else:
+            print_on_portable_printer = '0'
+
         sequence = 1
         result = []
         lines = request.env['stock.pack.operation'].sudo(self._user)\
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
+        lines = lines\
+            .filtered(lambda line: int(line.qty_done) != int(line.product_qty))
+
+        if not lines:
+            error_message = _('There is no lines for the picking {}'
+                              .format(picking_id))
+
+            request.env['stock.picking'].sudo(self._user).browse(picking_id)\
+                .write({'is_zetes_error': True,
+                        'traceback': error_message})
+
+            result = Parameters(self, action='resp')
+            result.update({
+                'respCode': 10,
+                'respMsg': error_message
+            })
+            return result.format()
+
         for line in lines:
             if line.zetes_state and line.zetes_state not in ['00', '03']:
                 continue
@@ -104,7 +137,7 @@ class Itempick(DomainInterface):
                 'productCode': product.default_code,
                 'productDescription': product.name,
                 'productProperty1': None,
-                'productProperty2': '0', # TODO
+                'productProperty2': print_on_portable_printer,
                 'lessQtyAllowed': 1,
                 'moreQtyAllowed': 0,
                 'catchWeightFlag': 0,
@@ -150,10 +183,11 @@ class Itempick(DomainInterface):
                          ],
                         order='life_date',
                         limit=5)
-            index = 0
-            for lot in lots:
-                index += 1
-                setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
+            line_values.Usf01 = '123'
+            # index = 0
+            # for lot in lots:
+            #     index += 1
+            #     setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
 
             result.append(line_values)
             sequence += 1
@@ -170,8 +204,14 @@ class Itempick(DomainInterface):
         if not len(move):
             return
 
-        status = params.pickStatus
-        if status:
-            move.sudo(self._user).write({
-                'zetes_state': status
-            })
+        try:
+            status = params.pickStatus
+            if status:
+                move.sudo(self._user).write({
+                    'zetes_state': status
+                })
+        except Exception as e:
+            _logger.error(str(e))
+            params.log(picking_id=move.picking_id.id,
+                       operation_id=move_id,
+                       exception=e)

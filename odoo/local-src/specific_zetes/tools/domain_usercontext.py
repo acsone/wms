@@ -58,18 +58,28 @@ class Usercontext(DomainInterface):
                 'scenarioStatus': '01',
             })
 
-            picking = request.env['stock.picking'].sudo(self._user).search(
-                [('operator_id', '=', self._user.id),
-                 ('state', '=', 'assigned'),
-                 ('picking_type_code', '=', 'internal'),
-                 ('zetes_state', 'in', ['01', '02'])],
-                limit=1)
+            picking_query = """
+SELECT picking.id
+FROM stock_picking AS picking
+  INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
+  INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
+WHERE picking.delivery_round_state = 'open'
+      AND type.subcode = 'PICK'
+      AND picking.zetes_state IN ('01', '02')
+      AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
+      AND picking.operator_id = %s
+ORDER BY round.date, round.time, picking.sequence 
+LIMIT 1;
+            """
+
+            request.env.cr.execute(picking_query, (self._user.id, ))
+            query_result = request.env.cr.fetchone()
 
             # If the user has a assigned picking
-            if picking:
+            if query_result and query_result[0]:
                 result.update({
                     'unitSlam': 1,
-                    'Usf01': picking.id,
+                    'Usf01': query_result[0],
                 })
             else:
                 result.unitSlam = 0
@@ -83,10 +93,8 @@ class Usercontext(DomainInterface):
                 ('state', '=', 'assigned')
             ])
             for picking in pickings:
-                bos = request.env['stock.backorder.confirmation'].sudo(self._user) \
-                    .create({
-                    'picking_id': picking.id,
-                })
+                bos = request.env['stock.backorder.confirmation']\
+                    .sudo(self._user).create({'picking_id': picking.id})
                 for bo in bos:
                     bo.process()
 

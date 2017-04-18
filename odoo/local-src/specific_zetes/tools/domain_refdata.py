@@ -40,6 +40,3 @@ class Refdata(DomainInterface):
             })
             result.append(picking_values)
         return '\n'.join([line.format() for line in result])
-
-    def resu(self, params):
-        print 'Execute method'

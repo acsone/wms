@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+
+_logger = logging.getLogger(__name__)
 
 
 class Print(DomainInterface):
@@ -46,43 +50,60 @@ class Print(DomainInterface):
         printer_num = params.printerNum
 
         if print_type == '03':
-            printer = request.env['printing.printer'].sudo(self._user) \
-                .search([('code', '=', printer_num), ('type', '=', 'pdf')])
+            printer = request.env['printing.printer'].sudo() \
+                .search([('code', '=', '1'), ('type', '=', 'pdf')])
             if not printer:
                 result.update({
                     'respCode': 10,
                     'respMsg': _('Cannot found a printer'),
+                    'labelCD': '00',
                 })
                 return result.format()
 
-            picking.print_password_report()
+            try:
+                picking.sudo().print_password_report(printer=printer)
+            except Exception as e:
+                _logger.error(str(e))
+                params.log(picking_id=picking_id, exception=e)
+                result.update({
+                    'respCode': 10,
+                    'respMsg': _('Error during printing'),
+                    'labelCD': '00',  # Default code
+                })
+                return result.format()
+
         elif print_type == '04':
-            printer_zebra = request.env['printing.printer'].sudo(self._user) \
-                .search([('code', '=', printer_num),
-                         ('type', '=', 'zebra')])
             printer_toshiba = \
-                request.env['printing.printer'].sudo(self._user)\
+                request.env['printing.printer'].sudo() \
                     .search([('code', '=', printer_num),
                              ('type', '=', 'toshiba')])
-            if not printer_zebra or not printer_toshiba:
+            if not printer_toshiba:
                 result.update({
                     'respCode': 10,
                     'respMsg': _('Cannot found a printer'),
+                    'labelCD': '00',  # Default code
                 })
                 return result.format()
 
             quantity = int(params.Usf01)
-            picking.print_products_label(printer=printer_zebra)
-            picking.print_packages_label(quantity=quantity,
-                                         printer=printer_toshiba)
+            try:
+                picking.sudo().print_products_label(printer=printer_toshiba)
+                picking.sudo().print_packages_label(quantity=quantity,
+                                                    printer=printer_toshiba)
+            except Exception as e:
+                _logger.error(str(e))
+                params.log(picking_id=picking_id, exception=e)
+                result.update({
+                    'respCode': 10,
+                    'respMsg': _('Error during printing'),
+                    'labelCD': '00',  # Default code
+                })
+                return result.format()
 
         result.update({
             'respCode': 0,
             'groupNum': picking.id,
-            'labelCD': '00',
+            'labelCD': picking.checksum,
         })
 
         return result.format()
-
-    def resu(self, params):
-        print 'Execute method'
