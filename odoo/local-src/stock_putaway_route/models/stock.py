@@ -37,7 +37,7 @@ class ProductPutaway(models.Model):
                     dest = strat.fixed_location_id
                     if dest.putaway_strategy_id:
                         return dest.putaway_strategy_id.putaway_apply(product)
-                    return dest
+                    return dest.id
         return super(ProductPutaway, self).putaway_apply(product)
 
 

@@ -35,5 +35,5 @@ class ProductPutaway(models.Model):
         res = super(ProductPutaway, self).putaway_apply(product)
         if self.method == 'fixed':
             if not res:
-                return self.fixed_location_id
+                return self.fixed_location_id.id
         return res
