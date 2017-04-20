@@ -52,19 +52,10 @@ class StockPicking(models.Model):
                  printer=printer)
 
     @api.multi
-    def print_password_report(self, printer=False):
+    def print_password_report(self, printer):
         self.ensure_one()
-        hw_print(self, 'specific_report.action_passport_report', printer=printer)
-
-    package_ids = fields.One2many(
-        'stock.quant.package',
-        compute='_get_package_ids',
-        string='Packages')
-
-    @api.multi
-    def _get_package_ids(self):
-        for rec in self:
-            rec.package_ids = rec.pack_operation_ids.mapped('package_id')
+        pdf = self.env['report'].get_pdf(self.ids, 'specific_report.report_passport')
+        printer.print_document('', pdf, '')
 
 
 class StockProductionLot(models.Model):

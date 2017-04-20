@@ -162,20 +162,12 @@ WHERE picking.delivery_round_state = 'open'
             picking.sudo(self._user).zetes_state = params.assignmentStatus
             # The picking is done
             if params.assignmentStatus in ['01', '02']:
-                picking.sudo(self._user).write({
-                    'operator_id': self._user.id,
-                    'state': 'in_progress',
-                    'printed': True,
-                })
+                picking.sudo(self._user).assign_operator()
             elif params.assignmentStatus in ['04', '08']:
                 # If the picking required a verification (passport)
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
-                if not params.Usf01:
-                    picking.sudo(self._user).write({
-                        'state': 'check_required'
-                    })
-                else:
+                if params.Usf01:
                     result = picking.sudo(self._user).do_new_transfer()
 
                     if isinstance(result, dict):

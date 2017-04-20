@@ -183,11 +183,10 @@ class Itempick(DomainInterface):
                          ],
                         order='life_date',
                         limit=5)
-            line_values.Usf01 = '123'
-            # index = 0
-            # for lot in lots:
-            #     index += 1
-            #     setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
+            index = 0
+            for lot in lots:
+                index += 1
+                setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
 
             result.append(line_values)
             sequence += 1

@@ -90,7 +90,7 @@ LIMIT 1;
 
             pickings = request.env['stock.picking'].sudo(self._user).search([
                 ('operator_id', '=', user.id),
-                ('state', '=', 'assigned')
+                ('state', 'in', ['assigned', 'partially_available'])
             ])
             for picking in pickings:
                 bos = request.env['stock.backorder.confirmation']\
@@ -108,7 +108,7 @@ LIMIT 1;
 
         pickings = request.env['stock.picking'].sudo(self._user).search([
             ('operator_id', '=', self._user.id),
-            ('state', '=', 'assigned')
+            ('state', 'in', ['assigned', 'partially_available'])
         ])
         for picking in pickings:
             bo = request.env['stock.backorder.confirmation'].sudo(self._user) \
