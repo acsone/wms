@@ -15,6 +15,7 @@ Unreleased
 **Bugfixes**
 * ALCN-812: Add missing ir.model.access
 * Delivery rounds: Fix delivery in case of lot
+* Sales order confirmation if no stock: fix move assignment in case of no quant available
 
 **Build**
 

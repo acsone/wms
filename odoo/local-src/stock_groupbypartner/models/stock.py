@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.exceptions import Warning as UserError
 
 
 class StockPickingType(models.Model):
@@ -62,7 +63,11 @@ class StockMove(models.Model):
                     if picking.state in ('confirmed', 'assigned',
                                          'partially_available'):
                         # reserve available qty
-                        move.action_assign(no_prepare=True)
+                        try:
+                            move.action_assign(no_prepare=True)
+                        except UserError:
+                            # in case of no quant available
+                            pass
                         # recompute pack op
                         picking.do_prepare_partial()
                 else:
