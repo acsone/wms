@@ -22,6 +22,7 @@
 import math
 
 from odoo import api, fields, models
+from odoo.exceptions import Warning as UserError
 
 
 def float2time(value):
@@ -117,7 +118,11 @@ class RoundInstance(models.Model):
         picking_confirmed = self.env['stock.picking'].search([
             ('partner_id', 'in', partner_ids),
             ('state', '=', 'confirmed')])
-        picking_confirmed.action_assign()
+        try:
+            picking_confirmed.action_assign()
+        except UserError:
+            # if no moves
+            pass
 
         # retrieve all pickings (partially) available not yet bound to a
         # delivery round
