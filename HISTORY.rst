@@ -14,6 +14,7 @@ Unreleased
 
 **Bugfixes**
 * ALCN-812: Add missing ir.model.access
+* Delivery rounds: Fix delivery in case of lot
 
 **Build**
 
