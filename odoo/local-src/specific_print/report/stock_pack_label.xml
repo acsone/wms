@@ -11,9 +11,8 @@
 ^XA
 ^XFE:FORMAT.ZPL^FS
 ^FN1^FD<t t-esc="pick.partner_id.name"/>^FS
-^FN2^FD<t t-esc="pick.delivery_round_id.vehicle_id.name"/>^FS
-^FN3^FD<address t-field="pick.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
-^FS
+^FN2^FD<t t-esc="pick.delivery_round_id.vehicle_id.name[:2]"/>^FS
+^FN3^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
 ^FN4^FD^FS
 ^FN5<t t-esc="nbridx"/>/<t t-esc="nbr"/>^FD^FS
 ^FN6^FD<t t-esc="pick.delivery_round_id.display_name"/>^FS

@@ -103,7 +103,7 @@ def validate_picking(picking_id):
 
 
 def print_picking(picking_id):
-    data = '6217065353,2.2.3,3iV_101,REQU_PRINT,02,1,20170418,141715,024284359531558,96,,,,,04,4,,,,2,,,,,,,,,#'.format(
+    data = '6217065353,2.2.3,3iV_101,REQU_PRINT,{},1,20170418,141715,024284359531558,{},,,,,03,1,,,,1,,,,,,,,,#'.format(
         USER_CODE, picking_id
     )
     requests.post(DOMAIN, data=data)
@@ -113,4 +113,4 @@ def print_picking(picking_id):
 #picking_id = assignment()
 #get_itempicks(picking_id)
 # validate_picking(1)
-print_picking(28)
+print_picking(13)

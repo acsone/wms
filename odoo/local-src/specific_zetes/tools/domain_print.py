@@ -46,10 +46,10 @@ class Print(DomainInterface):
         picking = request.env['stock.picking']\
             .sudo(self._user).browse(picking_id)
 
-        # # Assign a checksum on the picking (print on the package label)
-        # picking.assign_picking_checksum()
-        # # Create a pack for this picking
-        # picking.put_in_pack()
+        # Assign a checksum on the picking (print on the package label)
+        picking.assign_picking_checksum()
+        # Create a pack for this picking
+        picking.put_in_pack()
 
         print_type = params.printType
         printer_num = params.printerNum
@@ -97,7 +97,7 @@ class Print(DomainInterface):
 
             quantity = int(params.Usf01)
             try:
-                # picking.sudo().print_products_label(printer=printer_toshiba)
+                picking.sudo().print_products_label(printer=printer_toshiba)
                 picking.sudo().print_packages_label(quantity=quantity,
                                                     printer=printer_zebra)
             except Exception as e:

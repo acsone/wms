@@ -22,14 +22,7 @@ class Report(models.Model):
             'report': report,
         }
         template = report.report_name
-
-        try:
-            html = self.render(template, docargs)
-        except Exception:
-            raise
-
-        print html
-
+        html = self.render(template, docargs)
         text = ""
         try:
             root = lxml.html.fromstring(html)
@@ -42,10 +35,4 @@ class Report(models.Model):
         except lxml.etree.XMLSyntaxError:
             pass
         text = text.replace('\n', '').decode('string_escape')
-
-
-        print '========================'
-        print text
-
-        return ''
-        #return text
+        return text
