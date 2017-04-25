@@ -148,3 +148,8 @@ migration:
           - stock_receive_lot
           - stock_reception_priority
           - stock_refill
+    - version: 10.2.0
+      addons:
+        upgrade:
+          # Specific modules
+          - specific_sale

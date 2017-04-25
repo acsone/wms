@@ -43,4 +43,19 @@ if object.amount_total &lt; 100:
             </field>
         </record>
 
+        <record id="order_amount_material_maximum" model="exception.rule">
+            <field name="name">Montant maximum à 1000 euros (matériel)</field>
+            <field name="description">Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel</field>
+            <!--<field name="active">False</field>-->
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order</field>
+            <field name="code">
+material_category = object.env.ref('__setup__.product_categ_materiel')
+material_categories = object.env['product.category'].search([('id', 'child_of', material_category.ids)])
+if sum([line.price_total for line in object.order_line.filtered(lambda l: l.product_id.categ_id.id in (material_categories.ids))]) &gt; 1000:
+    failed=True
+            </field>
+        </record>
+
 </odoo>
