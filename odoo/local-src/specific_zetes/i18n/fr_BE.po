@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-23 08:38+0000\n"
-"PO-Revision-Date: 2017-03-23 08:38+0000\n"
+"POT-Creation-Date: 2017-04-25 09:43+0000\n"
+"PO-Revision-Date: 2017-04-25 09:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_supplier_invoice_count
-msgid "# Vendor Bills"
-msgstr "Nb. de factures fournisseurs"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_purchase_order_count
-msgid "# of Purchase Order"
-msgstr "Nb. de commandes d'achat"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_sale_order_count
-msgid "# of Sales Order"
-msgstr "N° de la commande"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_account_payable_id
-msgid "Account Payable"
-msgstr "Compte fournisseur"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_account_receivable_id
-msgid "Account Receivable"
-msgstr "Compte client"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_action
+#: selection:zetes.logger,action:0
+msgid "Action"
+msgstr "Action"
 
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
@@ -46,24 +27,9 @@ msgid "Active"
 msgstr "Active"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_discount_pricelist_id
-msgid "Alcyon Discount Pricelist"
-msgstr "Liste Remises Alcyon"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_alcyon_category_id
-msgid "Alcyon category"
-msgstr "Catégorie Alcyon"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_pharmacist_id
-msgid "Associated pharmacist"
-msgstr "Pharmacien associé"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_bank_account_count
-msgid "Bank"
-msgstr "Banque"
+#: selection:zetes.logger,domain:0
+msgid "Assignment"
+msgstr "Assignement"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -76,16 +42,33 @@ msgid "Cancelled"
 msgstr "Annulé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:150
+#: code:addons/specific_zetes/tools/domain_interface.py:153
 #, python-format
 msgid "Cannot format the value {} with type {}"
 msgstr "Impossible de formater la valeur {} du type {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:92
+#: code:addons/specific_zetes/tools/domain_assignment.py:99
 #, python-format
 msgid "Cannot found a picking"
 msgstr "Aucun UOP trouvé"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_print.py:63
+#: code:addons/specific_zetes/tools/domain_print.py:93
+#, python-format
+msgid "Cannot found a printer"
+msgstr "Aucune imprimante trouvée"
+
+#. module: specific_zetes
+#: selection:zetes.logger,domain:0
+msgid "Catchweight"
+msgstr "Catchweight"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_is_checked
+msgid "Checked"
+msgstr "Vérifié"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_checksum
@@ -93,90 +76,58 @@ msgid "Checksum"
 msgstr "Checksum"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_out_inv_comm_algorithm
-msgid "Communication Algorithm"
-msgstr "Type de communication"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_command
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Command"
+msgstr "Commande"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_out_inv_comm_type
-msgid "Communication Type"
-msgstr "Type de communication"
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Complete command"
+msgstr "Commande complète"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_ref_company_ids
-msgid "Companies that refers to partner"
-msgstr "Sociétés qui font réference au partenaire"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_uid
+msgid "Created by"
+msgstr "Créé par"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_contract_ids
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_contracts_count
-msgid "Contracts"
-msgstr "Contrats"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_token_count
-msgid "Count Payment Token"
-msgstr "Count Payment Token"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_currency_id
-msgid "Currency"
-msgstr "Devise"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_stock_customer
-msgid "Customer Location"
-msgstr "Emplacement Client"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_customer_payment_mode_id
-msgid "Customer Payment Mode"
-msgstr "Méthode de paiement client"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_note
-msgid "Customer Payment Promise"
-msgstr "Promesse de paiement client"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_payment_term_id
-msgid "Customer Payment Terms"
-msgstr "Conditions de Paiement Client"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_date
+msgid "Created on"
+msgstr "Créé le"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
 msgid "Cut"
-msgstr "Cut"
+msgstr "Couper"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
+#: selection:stock.picking,zetes_state:0
 msgid "Default"
 msgstr "Défaut"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_trust
-msgid "Degree of trust you have in this debtor"
-msgstr "Niveau de confiance que vous avez avec ce débiteur"
+#: model:ir.model.fields,help:specific_zetes.field_res_partner_is_passport_required
+#: model:ir.model.fields,help:specific_zetes.field_res_users_is_passport_required
+msgid "Define if pickings for this partner need to be verify by an another picker."
+msgstr "Indique si les enlèvements pour ce client doivent être vérifiés par un autre pickeur."
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_delivery_carrier_id
-msgid "Delivery Method"
-msgstr "Méthode de livraison"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_display_name
+msgid "Display Name"
+msgstr "Afficher le nom"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_round_zone_ids
-msgid "Delivery Zones"
-msgstr "Zones de livraison"
+#: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_price_on_labels
+msgid "Display price on labels"
+msgstr "Afficher le prixu sur les étiquettes"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_depot_number
-msgid "Depot number"
-msgstr "Numéro de dépôt"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_depot_number_visible
-msgid "Depot number visible"
-msgstr "Numéré de dépot"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_domain
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Domain"
+msgstr "Domaine"
 
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
@@ -184,102 +135,69 @@ msgid "Done"
 msgstr "Fait"
 
 #. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_print.py:75
+#: code:addons/specific_zetes/tools/domain_print.py:108
+#, python-format
+msgid "Error during printing"
+msgstr "Erreur durant l'impression"
+
+#. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
 msgid "Finished"
 msgstr "Terminé"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_account_position_id
-msgid "Fiscal Position"
-msgstr "Position fiscale"
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Group By"
+msgstr "Grouper par"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_responsible_id
-msgid "Follow-up Responsible"
-msgstr "Responsable des relances"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
+msgid "ID"
+msgstr "ID"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_has_unreconciled_entries
-msgid "Has unreconciled entries"
-msgstr "A des écritures non lettrées"
+#: selection:zetes.logger,domain:0
+msgid "Itempick"
+msgstr "Elément à enlever"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_invoice_warn
-msgid "Invoice"
-msgstr "Facture"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_invoice_ids
-msgid "Invoices"
-msgstr "Factures"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_issued_total
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_journal_item_count
-msgid "Journal Items"
-msgstr "Écritures comptables"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_last_time_entries_checked
-msgid "Last time the invoices & payments matching was performed for this partner. It is set either if there's not at least an unreconciled debit and an unreconciled credit or if you click the \"Done\" button."
-msgstr "La dernière fois que la correspondance des factures et paiements a été faite pour ce partenaire. C'est configuré s'il n'y a pas au moins un débit et un crédit non réconcilié ou si vous cliquez sur le bouton \"Fait\"."
+#: selection:zetes.logger,domain:0
+msgid "Location"
+msgstr "Localisation"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_last_time_entries_checked
-msgid "Latest Invoices & Payments Matching Date"
-msgstr "Date de dernière correspondance des factures et paiements"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_legal_entity
-msgid "Legal entity"
-msgstr "Entité juridique"
-
-#. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:133
+#: code:addons/specific_zetes/tools/domain_itempick.py:164
 #, python-format
 msgid "Location not found for the product {}"
-msgstr "Location not found for the product {}"
+msgstr "Localisation non trouvé pour le produit {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_catchweight.py:62
-#: code:addons/specific_zetes/tools/domain_catchweight.py:73
-#, python-format
-msgid "Lot not found"
-msgstr "Lot non trouvé"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_name
+msgid "Name"
+msgstr "Nom"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_invoice_warn_msg
-msgid "Message for Invoice"
-msgstr "Message pour Facture"
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Need to be check"
+msgstr "Doit être vérifié"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_purchase_warn_msg
-msgid "Message for Purchase Order"
-msgstr "Message pour commande fournisseur"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_sale_warn_msg
-msgid "Message for Sales Order"
-msgstr "Message sur les commandes de vente"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_picking_warn_msg
-msgid "Message for Stock Picking"
-msgstr "Message pour Colisage"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_next_action
-msgid "Next Action"
-msgstr "Action suivante"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_next_action_date
-msgid "Next Action Date"
-msgstr "Date de la prochaine action"
-
-#. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_catchweight.py:45
-#: code:addons/specific_zetes/tools/domain_catchweight.py:54
 #: code:addons/specific_zetes/tools/domain_location.py:40
 #: code:addons/specific_zetes/tools/domain_location.py:49
 #, python-format
@@ -287,21 +205,16 @@ msgid "No picking found"
 msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:71
-#: code:addons/specific_zetes/tools/domain_print.py:37
+#: code:addons/specific_zetes/tools/domain_itempick.py:75
+#: code:addons/specific_zetes/tools/domain_print.py:41
 #, python-format
 msgid "No picking found with the ID {}"
 msgstr "Aucun UOP trouvé avec l'ID {}"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_payment_next_action
-msgid "Note regarding the next action."
-msgstr "Note a propos de la prochaine action."
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_mandate_count
-msgid "Number of Mandates"
-msgstr "Numéro de mandats"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_operation_id
+msgid "Operation"
+msgstr "Opération"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_res_users_operator_code
@@ -309,29 +222,20 @@ msgid "Operator ID"
 msgstr "Opérateur ID"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_payment_responsible_id
-msgid "Optionally you can assign a user to this field, which will make him responsible for the action."
-msgstr "Si besoin, vous pouvez assigner un utilisateur à ce champ, ce qui en fera le responsable de cette action."
-
-#. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_pack_operation
 msgid "Packing Operation"
 msgstr "Colisage"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_debit_limit
-msgid "Payable Limit"
-msgstr "Limite de débit"
+#: model:ir.model,name:specific_zetes.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_payment_note
-msgid "Payment Note"
-msgstr "Note de paiement"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_payment_token_ids
-msgid "Payment Tokens"
-msgstr "Payment Tokens"
+#: model:ir.model.fields,field_description:specific_zetes.field_res_partner_is_passport_required
+#: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_passport_required
+msgid "Passport required"
+msgstr "Passport requis"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -339,48 +243,27 @@ msgid "Picked"
 msgstr "Prélevé"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_purchase_warn
-msgid "Purchase Order"
-msgstr "Commande fournisseur"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_picking_id
+msgid "Picking"
+msgstr "Opération de manutention"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_sale_lines_count
-msgid "Sale lines count"
-msgstr "Nombre de lignes de commande"
+#: selection:zetes.logger,domain:0
+msgid "Print"
+msgstr "Imprimer"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_sale_order_ids
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_sale_warn
-msgid "Sales Order"
-msgstr "Bon de commande"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_formatted_request
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_request
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
+#: selection:zetes.logger,action:0
+msgid "Request"
+msgstr "Requête"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_out_inv_comm_algorithm
-msgid "Select Algorithm to generate the Structured Communication on Outgoing Invoices."
-msgstr "Sélectionnez le mode de génération de la communication structurée pour les factures sortantes."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_out_inv_comm_type
-msgid "Select Default Communication Type for Outgoing Invoices."
-msgstr "Sélectionnez le type de communication par défaut pour les factures clients."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_customer_payment_mode_id
-msgid "Select the default payment mode for this customer."
-msgstr "Select the default payment mode for this customer."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_supplier_payment_mode_id
-msgid "Select the default payment mode for this supplier."
-msgstr "Select the default payment mode for this supplier."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_invoice_warn
-#: model:ir.model.fields,help:specific_zetes.field_res_users_picking_warn
-#: model:ir.model.fields,help:specific_zetes.field_res_users_purchase_warn
-#: model:ir.model.fields,help:specific_zetes.field_res_users_sale_warn
-msgid "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field."
-msgstr "Sélectionner l'option 'Avertissement' notifiera l'utilisateur avec le Message. Sélectionner 'Message Bloquant' lancera une exception avec le message et bloquera le flux. Le Message doit être encodé dans le champ suivant."
+#: selection:zetes.logger,action:0
+msgid "Response"
+msgstr "Réponse"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -393,7 +276,7 @@ msgid "Skipped"
 msgstr "Ignoré"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:178
+#: code:addons/specific_zetes/tools/domain_interface.py:181
 #, python-format
 msgid "Some attributes are not valid: {}"
 msgstr "Certains attributs sont invalides: {}"
@@ -409,52 +292,17 @@ msgid "Start"
 msgstr "Démarré"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_picking_warn
-msgid "Stock Picking"
-msgstr "Colisage"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_purchase_currency_id
-msgid "Supplier Currency"
-msgstr "Devise du fournisseur"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_supplier_payment_mode_id
-msgid "Supplier Payment Mode"
-msgstr "Méthode de paiement fournisseur"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_promotion_pricelist_id
-msgid "Supplier Promotion Pricelist"
-msgstr "Liste Promotions Fournisseur"
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_payment_next_action_date
-msgid "The date before which no action should be taken."
-msgstr "La date avant laquelle aucune action ne devrait être lancée."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_account_position_id
-msgid "The fiscal position will determine taxes and accounts used for the partner."
-msgstr "La position fiscale déterminera les taxes et les comptes comptables utilisés par le partneraire"
-
-#. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:183
+#: code:addons/specific_zetes/tools/domain_interface.py:186
 #, python-format
 msgid "The number of label doen't correspond to the example size"
 msgstr "Le nombre de label ne correspond pas à l'exemple"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/res_users.py:13
+#: code:addons/specific_zetes/models/res_users.py:14
 #: sql_constraint:res.users:0
 #, python-format
 msgid "The operator ID should be unique."
 msgstr "Le ID de l'opérateur doit être unique."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_has_unreconciled_entries
-msgid "The partner has at least one unreconciled debit and credit since last time the invoices & payments matching was performed."
-msgstr "Le partenaire a au moins un débit et un crédit non lettré depuis le dernier lettrage des factures et des paiements."
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_picking_type
@@ -468,82 +316,29 @@ msgid "The user should be in the group Inventory"
 msgstr "Le user doit être dans le groupe d'inventaire"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:79
+#: code:addons/specific_zetes/models/stock_picking.py:90
 #: sql_constraint:stock.picking.type:0
 #, python-format
 msgid "The zone picking type code should be unique."
 msgstr "Le type de zone doit être unique."
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:193
+#: code:addons/specific_zetes/tools/domain_interface.py:196
 #, python-format
 msgid "There are some missing mandatory values: {}"
 msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_account_payable_id
-msgid "This account will be used instead of the default one as the payable account for the current partner"
-msgstr "Ce compte de tiers remplacera le compte par défaut du partenaire. "
+#: code:addons/specific_zetes/tools/domain_itempick.py:107
+#, python-format
+msgid "There is no lines for the picking {}"
+msgstr "Il n'y a pas d'opérations pour le l'enlèvement {}"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_account_receivable_id
-msgid "This account will be used instead of the default one as the receivable account for the current partner"
-msgstr "Ce compte remplacera le compte de tiers par défaut pour ce partenaire."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_purchase_currency_id
-msgid "This currency will be used, instead of the default one, for purchases from the current partner"
-msgstr "Cette devise sera utilisée, au lieu de celle par défaut, pour les achats depuis ce partenaire actuel."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_delivery_carrier_id
-msgid "This delivery method will be used when invoicing from picking."
-msgstr "Cette méthode de livraison sera utilisée lorsqu'on facturera sur base du colisage."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_supplier_payment_term_id
-msgid "This payment term will be used instead of the default one for purchase orders and vendor bills"
-msgstr "Ce délai de paiement sera utilisé à la place de celui par défaut pour les bons de commande et les factures fournisseurs"
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_payment_term_id
-msgid "This payment term will be used instead of the default one for sale orders and customer invoices"
-msgstr "Ce délai de paiement sera utilisé à la place de celui par défaut pour les commandes et les factures clients"
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_stock_customer
-msgid "This stock location will be used, instead of the default one, as the destination location for goods you send to this partner"
-msgstr "Cette emplacement de stock sera utilisée au lieu de celui par défaut en tant que l'emplacement de destination pour les biens que vous envoyez à ce partenaire."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_property_stock_supplier
-msgid "This stock location will be used, instead of the default one, as the source location for goods you receive from the current partner"
-msgstr "Cet emplacement de stock sera utilisé au lieu de celle par défaut, comme emplacement source pour les biens reçus du partenaire courant"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_total_invoiced
-msgid "Total Invoiced"
-msgstr "Total facturé"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_debit
-msgid "Total Payable"
-msgstr "Total dû"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_credit
-msgid "Total Receivable"
-msgstr "Total du compte client"
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_credit
-msgid "Total amount this customer owes you."
-msgstr "Montant total que ce client vous doit."
-
-#. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_debit
-msgid "Total amount you have to pay to this vendor."
-msgstr "Montant total à payer au fournisseur."
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_traceback
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
+msgid "Traceback"
+msgstr "Message d'erreur"
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_picking
@@ -551,9 +346,10 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_unreconciled_aml_ids
-msgid "Unreconciled aml ids"
-msgstr "aml ids non-réconciliées"
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_user_id
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "User"
+msgstr "Utilisateur"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_usercontext.py:35
@@ -562,33 +358,54 @@ msgid "User not found"
 msgstr "Utilisateur non trouvé"
 
 #. module: specific_zetes
+#: selection:zetes.logger,domain:0
+msgid "Usercontext"
+msgstr "Usercontext"
+
+#. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_res_users
 msgid "Users"
 msgstr "Utilisateurs"
 
 #. module: specific_zetes
-#: model:ir.model.fields,help:specific_zetes.field_res_users_currency_id
-msgid "Utility field to express amount currency"
-msgstr "Champ utile pour indiquer le montant de la monnaie"
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_is_zetes_error
+msgid "Zetes error"
+msgstr "Erreur zetes"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_stock_supplier
-msgid "Vendor Location"
-msgstr "Adresse du vendeur"
+#: model:ir.actions.act_window,name:specific_zetes.action_zetes_logger
+#: model:ir.ui.menu,name:specific_zetes.menu_zetes_logger
+msgid "Zetes logger"
+msgstr "Zetes logger"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_property_supplier_payment_term_id
-msgid "Vendor Payment Terms"
-msgstr "Conditions de Paiement du Vendeur"
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
+msgid "Zetes loggers"
+msgstr "Zetes loggers"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_zetes_state
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_state
 msgid "Zetes state"
-msgstr "Zetes state"
+msgstr "Etat de Zetes"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_traceback
+msgid "Zetes traceback"
+msgstr "Message d'erreur de Zetes"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_zone_code
 msgid "Zone code"
 msgstr "Zone code"
+
+#. module: specific_zetes
+#: selection:zetes.logger,domain:0
+msgid "refdata"
+msgstr "refdata"
+
+#. module: specific_zetes
+#: model:ir.model,name:specific_zetes.model_zetes_logger
+msgid "zetes.logger"
+msgstr "zetes.logger"
 

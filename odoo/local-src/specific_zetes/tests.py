@@ -108,9 +108,16 @@ def print_picking(picking_id):
     )
     requests.post(DOMAIN, data=data)
 
+
+def reset_picking_action():
+    data = '6217065353,2.2.3,3iV_101,RESU_ITEMPICK,01,1,20170425,094959,014285040975922,17,,,,1,34,,000005,000001,,05,2,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,,,,,,,,,#'
+    requests.post(DOMAIN, data=data)
+
 #identification()
 #print_zones()
 #picking_id = assignment()
 #get_itempicks(picking_id)
 # validate_picking(1)
-print_picking(13)
+#print_picking(13)
+
+reset_picking_action()

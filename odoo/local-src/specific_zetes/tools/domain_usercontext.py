@@ -101,17 +101,9 @@ LIMIT 1;
         return result.format()
 
     def resu(self, params):
-        if not self._user:
-            return
-
-        print params.scenarioStatus
-
-        pickings = request.env['stock.picking'].sudo(self._user).search([
-            ('operator_id', '=', self._user.id),
-            ('state', 'in', ['assigned', 'partially_available'])
-        ])
-        for picking in pickings:
-            bo = request.env['stock.backorder.confirmation'].sudo(self._user) \
-                .create({'picking_id': picking.id,
-                         })
-            bo.process()
+        """
+        Not used
+        :param params: 
+        :return: 
+        """
+        return

@@ -48,8 +48,12 @@ class Print(DomainInterface):
 
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
-        # Create a pack for this picking
-        picking.put_in_pack()
+
+        try:
+            # Create a pack for this picking
+            picking.put_in_pack()
+        except:
+            pass
 
         print_type = params.printType
         printer_num = params.printerNum

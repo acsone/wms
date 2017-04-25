@@ -82,6 +82,19 @@ class Itempick(DomainInterface):
         else:
             order_by = 'location_name ASC'
 
+        print_price_query = """
+        SELECT partner.is_price_on_labels 
+        FROM stock_picking AS picking 
+          INNER JOIN res_partner AS partner ON picking.partner_id = partner.id
+        WHERE picking.id = %s;
+        """
+        request.env.cr.execute(print_price_query, (picking_id, ))
+        print_price_result = request.env.cr.fetchone()
+        if print_price_query and print_price_query[0]:
+            is_print_price = True
+        else:
+            is_print_price = False
+
         # If the picking type is 'Aliment' whe need to print on portable pinter
         query = "SELECT picking_type_id FROM stock_picking WHERE id = %s"
         request.env.cr.execute(query, (picking_id, ))
@@ -99,7 +112,8 @@ class Itempick(DomainInterface):
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
         lines = lines\
-            .filtered(lambda line: int(line.qty_done) != int(line.product_qty))
+            .filtered(lambda line: int(line.qty_done) != int(line.product_qty)
+                      and line.zetes_state in ['00', '03', '05'])
 
         if not lines:
             error_message = _('There is no lines for the picking {}'
@@ -117,9 +131,6 @@ class Itempick(DomainInterface):
             return result.format()
 
         for line in lines:
-            if line.zetes_state and line.zetes_state not in ['00', '03']:
-                continue
-
             line_values = Parameters(self)
             line_values.update({
                 'groupNum': picking_id,
@@ -148,6 +159,9 @@ class Itempick(DomainInterface):
                 'UOMPrompt': line.product_uom_id.name,
                 'itemPickSeqNum': sequence,
             })
+
+            if is_print_price:
+                line_values.Usf07 = line.product_id.list_price
 
             if product.tracking == 'lot':
                 line_values.lotTrackingFlag = 1
@@ -209,6 +223,12 @@ class Itempick(DomainInterface):
                 move.sudo(self._user).write({
                     'zetes_state': status
                 })
+
+                # Status 05 == 'Cancel' all actions for this line
+                if status == '05':
+                    move.pack_lot_ids.unlink()
+                    move.save()
+
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,

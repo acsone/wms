@@ -74,29 +74,29 @@ class Catchweight(DomainInterface):
 
             lot_number = params.Usf01
             if not lot_number:
-                return
+                move.qty_done += qty_done_by_lot
+            else:
+                lot = request.env['stock.production.lot'].sudo(self._user)\
+                    .search([('product_id', '=', move.product_id.id),
+                             ('checksum', '=', lot_number)])
+                if lot:
+                    pack_lot = \
+                        move.pack_lot_ids\
+                            .filtered(lambda line: line.lot_id.id == lot.id)
 
-            lot = request.env['stock.production.lot'].sudo(self._user)\
-                .search([('product_id', '=', move.product_id.id),
-                         ('checksum', '=', lot_number)])
-            if lot:
-                pack_lot = \
-                    move.pack_lot_ids\
-                        .filtered(lambda line: line.lot_id.id == lot.id)
+                    if not len(pack_lot):
+                        move.pack_lot_ids.create({
+                            'operation_id': move.id,
+                            'qty': qty_done_by_lot,
+                            'lot_id': lot.id,
+                        })
+                    else:
+                        pack_lot.write({'qty': qty_done_by_lot})
 
-                if not len(pack_lot):
-                    move.pack_lot_ids.create({
-                        'operation_id': move.id,
-                        'qty': qty_done_by_lot,
-                        'lot_id': lot.id,
+                    qty_done = move.qty_done + qty_done_by_lot
+                    move.write({
+                        'qty_done': qty_done,
                     })
-                else:
-                    pack_lot.write({'qty': qty_done_by_lot})
-
-                qty_done = move.qty_done + qty_done_by_lot
-                move.write({
-                    'qty_done': qty_done,
-                })
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,

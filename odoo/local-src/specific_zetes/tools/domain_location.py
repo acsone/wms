@@ -63,12 +63,12 @@ class Location(DomainInterface):
 
         location = move.location_id
         result.update({
-            'IC1': location.zone,
-            'IC2': location.corridor,
-            'IC3': location.shelf,
-            'IC4': location.height,
-            'IC5': location.box,
-            'ICCD': location.get_checksum(),
+            'lC1': location.zone,
+            'lC2': location.corridor,
+            'lC3': location.shelf,
+            'lC4': location.height,
+            'lC5': location.box,
+            'lCCD': location.get_checksum(),
         })
 
         lots = request.env['stock.production.lot'].sudo(self._user) \
