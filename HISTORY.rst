@@ -20,6 +20,7 @@ Unreleased
 * Migration to v10
 
   * ALCN-822: Fix import with 'from openerp...' and fix migration of specific_report
+  * ALCN-813: Fix putaway, must always return id and not recordset
 
 **Documentation**
 
