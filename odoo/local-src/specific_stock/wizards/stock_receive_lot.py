@@ -10,7 +10,8 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     qty_backorder = fields.Integer(
         'Backorder',
-        compute='_get_qty_backorder')
+        compute='_get_qty_backorder',
+        help="Missing quantity of products to pick")
 
     @api.depends('operation_id')
     @api.one
@@ -19,3 +20,9 @@ class StockPackOperationLotAdd(models.TransientModel):
         # Note that self.operation_id.qty_backorder is the amount of BO lines,
         # not the total qty in BO
         self.qty_backorder = self.operation_id.qty_backorder and True or False
+
+    @api.onchange('operation_id')
+    def _onchange_operation_id(self):
+        super(StockPackOperationLotAdd, self)._onchange_operation_id()
+        if self.qty_backorder:
+            self.location_dest_id = False
