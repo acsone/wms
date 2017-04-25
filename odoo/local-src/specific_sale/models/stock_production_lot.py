@@ -13,11 +13,8 @@ class StockProductionLot(models.Model):
     def _product_qty(self):
         context = self.env.context or {}
         if context.get('only_wh_stock_quants'):
-            location_ids = self.env.ref('stock.stock_location_stock').ids
-            quants = self.env['stock.quant'].search([
-                ('lot_id', '=', self.id),
-                ('location_id', 'child_of', location_ids)
-            ])
-            self.product_qty = sum(quants.mapped('qty'))
+            self.product_qty = self.product_id.with_context(
+                lot_id=self.id
+            ).qty_available
         else:
             super(StockProductionLot, self)._product_qty()
