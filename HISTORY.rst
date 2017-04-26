@@ -13,6 +13,7 @@ Unreleased
 * ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
 
 * Logistics: Reception: fix set default lot name with date, added some help, reception wizard (added button to allow to move to next destination)
+* ALCN-817 / 821: Add logistics informations in sale order form view
 
 **Bugfixes**
 * ALCN-812: Add missing ir.model.access

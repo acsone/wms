@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-02 13:19+0000\n"
-"PO-Revision-Date: 2017-03-02 13:19+0000\n"
+"POT-Creation-Date: 2017-04-25 09:46+0000\n"
+"PO-Revision-Date: 2017-04-25 09:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,9 @@ msgid "Current quantity unavailable"
 msgstr "Quantité actuellement non disponible"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_exception
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_exception
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_exception
 msgid "Exception"
 msgstr "Exception"
 
@@ -33,7 +35,7 @@ msgid "Fax"
 msgstr "Fax"
 
 #. module: specific_sale
-#: model:sale.exception,description:specific_sale.order_amount_minimum
+#: model:exception.rule,description:specific_sale.order_amount_minimum
 msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 
@@ -44,14 +46,33 @@ msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lot/N° série"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_production_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_production_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
+msgid "Lots/Serial Numbers"
+msgstr "Lots/Numéros de série"
+
+#. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Mail"
 msgstr "Email"
 
 #. module: specific_sale
-#: model:sale.exception,name:specific_sale.order_amount_minimum
+#: model:exception.rule,name:specific_sale.order_amount_minimum
 msgid "Montant minimum à 100 euros"
 msgstr "Montant minimum à 100 euros"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_next_expected_date_for_receipt
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_next_expected_date_for_receipt
+msgid "Next expected date for receipt"
+msgstr "Prochaine date prévue de réception"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_res_partner
@@ -59,7 +80,7 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_sale
-#: model:sale.exception,name:specific_sale.no_line_at_zero
+#: model:exception.rule,name:specific_sale.no_line_at_zero
 msgid "Pas de ligne à zéro"
 msgstr "Pas de ligne à zéro"
 
@@ -74,16 +95,18 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: specific_sale
-#: model:sale.exception,description:specific_sale.narcotic_forbidden
+#: model:exception.rule,description:specific_sale.narcotic_forbidden
 msgid "Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT"
 msgstr "Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT"
 
 #. module: specific_sale
-#: model:sale.exception,name:specific_sale.narcotic_forbidden
+#: model:exception.rule,name:specific_sale.narcotic_forbidden
 msgid "Produits stupéfiants interdits"
 msgstr "Produits stupéfiants interdits"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_product_qty_unavailable
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_product_qty_unavailable
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_unavailable
 msgid "Quantity unavailable"
 msgstr "Quantité non disponible"
@@ -126,8 +149,6 @@ msgstr "Bon de commande"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_order_line
-#: model:ir.model,name:specific_sale.model_sale_order_line_additional
-#: model:ir.model,name:specific_sale.model_sale_order_line_original
 msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
@@ -137,7 +158,17 @@ msgid "Sales Order Lines Unavailable"
 msgstr "Lignes de commande non disponibles"
 
 #. module: specific_sale
-#: model:sale.exception,description:specific_sale.no_line_at_zero
+#: model:exception.rule,description:specific_sale.no_line_at_zero
 msgid "Une ligne de vente ne peut pas être à zéro"
 msgstr "Une ligne de vente ne peut pas être à zéro"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order_line_additional
+msgid "sale.order.line.additional"
+msgstr "sale.order.line.additional"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order_line_original
+msgid "sale.order.line.original"
+msgstr "sale.order.line.original"
 
