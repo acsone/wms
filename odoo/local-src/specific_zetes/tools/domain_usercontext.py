@@ -67,7 +67,7 @@ WHERE picking.delivery_round_state = 'open'
       AND picking.zetes_state IN ('01', '02')
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
       AND picking.operator_id = %s
-ORDER BY round.date, round.time, picking.sequence 
+ORDER BY round.date, round.time, picking.sequence
 LIMIT 1;
             """
 
@@ -102,7 +102,5 @@ LIMIT 1;
     def resu(self, params):
         """
         Not used
-        :param params: 
-        :return: 
         """
         return

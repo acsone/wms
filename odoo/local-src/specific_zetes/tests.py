@@ -127,6 +127,7 @@ def reset_picking_action(picking_id, move_id):
            ',,,,,,,,,,,,,,,,,,,1,,,,,,,,,,#'.format(picking_id, move_id)
     requests.post(DOMAIN, data=data)
 
+
 picking_id = None
 move_id = None
 

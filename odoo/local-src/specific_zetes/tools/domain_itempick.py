@@ -84,8 +84,8 @@ class Itempick(DomainInterface):
             order_by = 'location_name ASC'
 
         print_price_query = """
-        SELECT partner.is_price_on_labels 
-        FROM stock_picking AS picking 
+        SELECT partner.is_price_on_labels
+        FROM stock_picking AS picking
           INNER JOIN res_partner AS partner ON picking.partner_id = partner.id
         WHERE picking.id = %s;
         """
