@@ -33,8 +33,8 @@ class Zetes(Home):
         module_name = \
             'openerp.addons.specific_zetes.tools.domain_{}'.format(
                 domain.lower())
-        module = importlib.import_module(module_name)
-        instance = getattr(module, domain.title())(header)
+        module_obj = importlib.import_module(module_name)
+        instance = getattr(module_obj, domain.title())(header)
 
         parameter_obj = Parameters(instance,
                                    action=command.upper(),
@@ -73,8 +73,8 @@ class Zetes(Home):
             module_name = \
                 'openerp.addons.specific_zetes.tools.domain_{}'.format(
                     domain.lower())
-            module = importlib.import_module(module_name)
-            instance = getattr(module, domain.title())([1,1,1,1,1])
+            module_obj = importlib.import_module(module_name)
+            instance = getattr(module_obj, domain.title())([1, 1, 1, 1, 1])
 
             for action in actions:
                 parameter_obj = Parameters(instance, action=action.upper())

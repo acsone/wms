@@ -6,10 +6,10 @@ class ZetesLogger(models.Model):
     _name = 'zetes.logger'
 
     action = fields.Selection([('requ', 'Request'),
-                                ('resp', 'Response'),
-                                ('resu', 'Action')],
-                               string='Action',
-                               required=True)
+                               ('resp', 'Response'),
+                               ('resu', 'Action')],
+                              string='Action',
+                              required=True)
     domain = fields.Selection([('assignment', 'Assignment'),
                                ('catchweight', 'Catchweight'),
                                ('itempick', 'Itempick'),
@@ -46,7 +46,7 @@ class ZetesLogger(models.Model):
                                            domain_displayed,
                                            log.user_id.name)
             command = '{}_{}'.format(log.action.upper(),
-                                          log.domain.upper())
+                                     log.domain.upper())
             log.name = name
             log.command = command
 

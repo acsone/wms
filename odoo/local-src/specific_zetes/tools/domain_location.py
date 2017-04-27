@@ -57,8 +57,8 @@ class Location(DomainInterface):
             'headerNum': None,
             'productCode': product.default_code,
             'productDescription': product.name,
-            'quantity': product.qty_available, # Total quantity
-            'Usf07': product.virtual_available, # Stock available
+            'quantity': product.qty_available,  # Total quantity
+            'Usf07': product.virtual_available,  # Stock available
         })
 
         location = move.location_id
@@ -92,3 +92,6 @@ class Location(DomainInterface):
             result.Usf06 = specific_lot.checksum
 
         return result.format()
+
+    def resu(self, params):
+        return

@@ -17,11 +17,10 @@ class Print(DomainInterface):
                    '073411,304277331552660,0,,000000001625844,,,,,,,,,,' \
                    '17,,,,,,,,,,'
     EXAMPLE_RESU = ''
-    REQU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'assignmentType',
-    'printType', 'printerNum', 'destLocationId', 'destCarSeqNum', 'destCarId',
-    'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08',
-    'Usf09', 'Usf10')
+    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+            'assignmentType', 'printType', 'printerNum', 'destLocationId',
+            'destCarSeqNum', 'destCarId', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
+            'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
     RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
             'headerSubNum', 'printerNum', 'destLocationId', 'destLocationCD',
             'destCarSeqNum', 'destCarId', 'numOfLabels', 'labelCD', 'Usf01',
@@ -52,7 +51,7 @@ class Print(DomainInterface):
         try:
             # Create a pack for this picking
             picking.put_in_pack()
-        except:
+        except Exception:
             pass
 
         print_type = params.printType
@@ -82,14 +81,12 @@ class Print(DomainInterface):
                 return result.format()
 
         elif print_type == '04':
-            printer_toshiba = \
-                request.env['printing.printer'].sudo() \
-                    .search([('code', '=', printer_num),
-                             ('type', '=', 'toshiba')])
-            printer_zebra = \
-                request.env['printing.printer'].sudo() \
-                    .search([('code', '=', printer_num),
-                             ('type', '=', 'zebra')])
+            printer_toshiba = request.env['printing.printer']\
+                .sudo().search([('code', '=', printer_num),
+                                ('type', '=', 'toshiba')])
+            printer_zebra = request.env['printing.printer']\
+                .sudo().search([('code', '=', printer_num),
+                                ('type', '=', 'zebra')])
 
             if not printer_toshiba or not printer_zebra:
                 result.update({
@@ -121,3 +118,6 @@ class Print(DomainInterface):
         })
 
         return result.format()
+
+    def resu(self, params):
+        return

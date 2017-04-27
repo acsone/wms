@@ -19,24 +19,24 @@ class Catchweight(DomainInterface):
     EXAMPLE_RESU = '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,30,1,20170207,' \
                    '072930,30427733121306,000000001625844,,,,1,' \
                    '00000000162584400001,,,,,,,,,,67709,000002,,,,,,,,,'
-    REQU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'itemPickSeqNum',
-    'pickLineId', 'sourceLC1', 'sourceLC2', 'sourceLC3', 'sourceLC4',
-    'sourceLC5', 'productCode', 'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05',
-    'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'effQty', 'totalCatchWeight',
-    'lotNumber', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07',
-    'Usf08', 'Usf09', 'Usf10')
+    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+            'itemPickSeqNum', 'pickLineId', 'sourceLC1', 'sourceLC2',
+            'sourceLC3', 'sourceLC4', 'sourceLC5', 'productCode', 'Cri01',
+            'Cri02', 'Cri03', 'Cri04', 'Cri05', 'Cri06', 'Cri07', 'Cri08',
+            'Cri09', 'Cri10', 'effQty', 'totalCatchWeight', 'lotNumber',
+            'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07',
+            'Usf08', 'Usf09', 'Usf10')
     RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
             'headerSubNum', 'itemPickSeqNum', 'pickLineId', 'productCode',
             'effQty', 'totalCatchWeight', 'lotNumber', 'Usf01', 'Usf02',
             'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
             'Usf10')
-    RESU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'itemSeqNum',
-    'lineId', 'assignmentType', 'unitOfMeasure', 'seqWeightInput', 'weight',
-    'barcode', 'expiryDate', 'destCarSeqNum', 'destCarId', 'lineIndicator',
-    'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08',
-    'Usf09', 'Usf10')
+    RESU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+            'itemSeqNum', 'lineId', 'assignmentType', 'unitOfMeasure',
+            'seqWeightInput', 'weight', 'barcode', 'expiryDate',
+            'destCarSeqNum', 'destCarId', 'lineIndicator', 'Usf01', 'Usf02',
+            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
+            'Usf10')
 
     def requ(self, params):
         """

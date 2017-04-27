@@ -11,7 +11,7 @@
 ^XA
 ^XFE:FORMAT.ZPL^FS
 ^FN1^FD<t t-esc="pick.partner_id.name"/>^FS
-^FN2^FD<t t-esc="pick.delivery_round_id.vehicle_id.name[:2]"/>^FS
+^FN2^FD<t t-if="len(pick.delivery_round_id.vehicle_id.zone_ids) == 1" t-esc="pick.delivery_round_id.vehicle_id.zone_ids.code"/>^FS
 ^FN3^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
 ^FN4^FD^FS
 ^FN5<t t-esc="nbridx"/>/<t t-esc="nbr"/>^FD^FS

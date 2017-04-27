@@ -81,17 +81,15 @@ WHERE picking.delivery_round_state = 'open'
 
             if query_result and query_result[0]:
                 picking_id = query_result[0]
-                picking = \
-                    request.env['stock.picking'] \
-                        .sudo(self._user).browse(picking_id)
+                picking = request.env['stock.picking']\
+                    .sudo(self._user).browse(picking_id)
             else:
                 picking = []
 
         else:
             picking_id = int(params.Cri02)
-            picking = \
-                request.env['stock.picking'] \
-                    .sudo(self._user).browse(picking_id)
+            picking = request.env['stock.picking']\
+                .sudo(self._user).browse(picking_id)
 
         if not len(picking):
             result.update({
@@ -102,18 +100,17 @@ WHERE picking.delivery_round_state = 'open'
 
         partner = picking.partner_id
 
-        # TODO FIX the sudo
-        round = None
-        if picking.sudo().delivery_round_id \
-                and picking.sudo().delivery_round_id.vehicle_id:
-            round = picking.sudo().delivery_round_id.vehicle_id.name[:2]
+        round_name = None
+        vehicle = picking.sudo().delivery_round_id.vehicle_id
+        if vehicle and len(vehicle.zone_ids) == 1:
+            round_name = vehicle.zone_ids.code
 
         result.update({
             'respCode': 0,
             'assignmentType': 1,
             'groupNum': picking.id,
             'Usf02': partner.alcyon_category_id.name,
-            'Usf03': round,
+            'Usf03': round_name,
             'Usf04': 0,
             'Usf05': 0,
             'Usf07': partner.name,
@@ -172,9 +169,8 @@ WHERE picking.delivery_round_state = 'open'
 
                     if isinstance(result, dict):
                         model = result.get('res_model')
-                        wizard = \
-                            request.env[model].sudo(self._user) \
-                                .browse(int(result.get('res_id')))
+                        wizard = request.env[model].sudo(self._user)\
+                            .browse(int(result.get('res_id')))
 
                         wizard.process()
             elif params.assignmentStatus == '05':

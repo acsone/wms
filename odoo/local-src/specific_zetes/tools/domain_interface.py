@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 _logger.setLevel(logging.DEBUG)
 
 HEADER_LABELS = ('serNum', 'verNum', 'appNum', 'msgType', 'operId', 'langId',
-            'msgDate', 'msgTime', 'packageId')
+                 'msgDate', 'msgTime', 'packageId')
 
 
 class DomainInterface:
@@ -177,8 +177,8 @@ class Parameters:
 
         bad_values = set(current_labels) - set(labels)
         if bad_values:
-            message = _('Some attributes are not valid: {}'\
-                .format(', '.join(list(bad_values))))
+            message = _('Some attributes are not valid: {}'
+                        .format(', '.join(list(bad_values))))
             _logger.error(message)
 
         default_values = self.get_example()

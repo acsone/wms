@@ -23,11 +23,11 @@ class Itempick(DomainInterface):
                    '072931,30427733121317,000000001625844,,,,1,' \
                    '00000000162584400001,,000002,000002,,' \
                    '01,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
-    REQU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'tripCounter',
-    'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05', 'Cri06', 'Cri07', 'Cri08',
-    'Cri09', 'Cri10', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06',
-    'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+            'tripCounter', 'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05',
+            'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Usf01', 'Usf02',
+            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
+            'Usf10')
     RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
             'headerSubNum', 'itemPickSeqNum', 'pickLineId', 'tripCounter',
             'reqDestCarSeqNum', 'reqDestCarSeqCD', 'sourceLC1', 'sourceLC2',
@@ -44,18 +44,19 @@ class Itempick(DomainInterface):
             'maxAllowedCW', 'expiryDate', 'productBarcode',
             'scanProductBarcode', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
             'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESU = (
-    'groupNum', 'groupSubNum', 'headerNum', 'headerSubNum', 'itemPickSeqNum',
-    'pickLineId', 'lineIndicator', 'reqQty', 'effQtySourceLC',
-    'effQtyAltSourceLC', 'pickStatus', 'tripCounter', 'unitOfMeasure',
-    'totalCatchWeight', 'lotNumber', 'productBarcode', 'sourceLCBarcode',
-    'altSourceLCBarcode', 'effQtyDestCar01', 'effQtyDestCar02',
-    'effQtyDestCar03', 'effQtyDestCar04', 'effQtyDestCar05', 'effQtyDestCar06',
-    'effQtyDestCar07', 'effQtyDestCar08', 'effQtyDestCar09', 'effQtyDestCar10',
-    'effDestCarId01', 'effDestCarId02', 'effDestCarId03', 'effDestCarId04',
-    'effDestCarId05', 'effDestCarId06', 'effDestCarId07', 'effDestCarId08',
-    'effDestCarId09', 'effDestCarId10', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
-    'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    RESU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
+            'itemPickSeqNum', 'pickLineId', 'lineIndicator', 'reqQty',
+            'effQtySourceLC', 'effQtyAltSourceLC', 'pickStatus', 'tripCounter',
+            'unitOfMeasure', 'totalCatchWeight', 'lotNumber', 'productBarcode',
+            'sourceLCBarcode', 'altSourceLCBarcode', 'effQtyDestCar01',
+            'effQtyDestCar02', 'effQtyDestCar03', 'effQtyDestCar04',
+            'effQtyDestCar05', 'effQtyDestCar06', 'effQtyDestCar07',
+            'effQtyDestCar08', 'effQtyDestCar09', 'effQtyDestCar10',
+            'effDestCarId01', 'effDestCarId02', 'effDestCarId03',
+            'effDestCarId04', 'effDestCarId05', 'effDestCarId06',
+            'effDestCarId07', 'effDestCarId08', 'effDestCarId09',
+            'effDestCarId10', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
+            'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
 
     def requ(self, params):
         if not params.groupNum:
@@ -90,7 +91,7 @@ class Itempick(DomainInterface):
         """
         request.env.cr.execute(print_price_query, (picking_id, ))
         print_price_result = request.env.cr.fetchone()
-        if print_price_query and print_price_query[0]:
+        if print_price_result and print_price_result[0]:
             is_print_price = True
         else:
             is_print_price = False
@@ -212,8 +213,8 @@ class Itempick(DomainInterface):
             return
         move_id = int(params.pickLineId)
 
-        move = \
-            request.env['stock.pack.operation'].sudo(self._user).browse(move_id)
+        move = request.env['stock.pack.operation']\
+            .sudo(self._user).browse(move_id)
         if not len(move):
             return
 

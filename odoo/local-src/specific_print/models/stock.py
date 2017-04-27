@@ -54,7 +54,8 @@ class StockPicking(models.Model):
     @api.multi
     def print_password_report(self, printer):
         self.ensure_one()
-        pdf = self.env['report'].get_pdf(self.ids, 'specific_report.report_passport')
+        pdf = self.env['report']\
+            .get_pdf(self.ids, 'specific_report.report_passport')
         printer.print_document('', pdf, '')
 
 

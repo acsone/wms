@@ -13,14 +13,13 @@ class Usercontext(DomainInterface):
                    'Serge Diplo,,0,,,,,,,,,,'
     EXAMPLE_RESU = '208092662,2.2.3,3iV_101,RESU_USERCONTEXT,87,1,20170207,' \
                    '081534,874277334413394,4,70,,1,Monica Checchi,,,,,,,,,,,,'
-    REQU = (
-    'contextType', 'requestType', 'scenarioStatus', 'Cri01', 'Cri02', 'Cri03',
-    'Cri04', 'Cri05', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06',
-    'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESP = (
-    'respCode', 'respMsg', 'contextType', 'scenarioStatus', 'responseType',
-    'assignmentType', 'operName', 'operType', 'unitSlam', 'Usf01', 'Usf02',
-    'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    REQU = ('contextType', 'requestType', 'scenarioStatus', 'Cri01', 'Cri02',
+            'Cri03', 'Cri04', 'Cri05', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
+            'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    RESP = ('respCode', 'respMsg', 'contextType', 'scenarioStatus',
+            'responseType', 'assignmentType', 'operName', 'operType',
+            'unitSlam', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06',
+            'Usf07', 'Usf08', 'Usf09', 'Usf10')
     RESU = ('contextType', 'scenarioStatus', 'requestType', 'assignmentType',
             'operName', 'operType', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
             'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
