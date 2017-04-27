@@ -1,6 +1,6 @@
 <odoo>
     <template id="specific_report.report_passport_body">
-        <div class="page">
+        <div class="page" style="font-size: large;">
             <table id="products_table" class="round_table">
                 <thead>
                     <tr>
@@ -17,10 +17,11 @@
                     </tr>
                 </thead>
                 <tbody class="invoice_tbody">
+                    <t t-set="is_black_background" t-value="True" />
                     <t t-foreach="picking.pack_operation_ids" t-as="line">
                         <t t-set="lots" t-value="[lot for lot in line.pack_lot_ids]"/>
                         <t t-set="first_lot" t-value="lots and lots.pop()"/>
-                        <tr>
+                            <tr t-att-class="bool(is_black_background) and 'black_background'">
 
                             <td>
                                 <span t-field="line.product_id.default_code"/>
@@ -44,7 +45,7 @@
                                 <span t-if="first_lot" t-field="first_lot.life_date" t-options="{'widget': 'date'}"/>
                             </td>
                         </tr>
-                        <tr t-foreach="lots" t-as="lot">
+                        <tr t-foreach="lots" t-as="lot" t-att-class="bool(is_black_background) and 'black_background'">
                             <td/>
                             <td/>
                             <td/>
@@ -59,6 +60,7 @@
                                 <span t-field="lot.life_date" t-options="{'widget': 'date'}"/>
                             </td>
                         </tr>
+                        <t t-set="is_black_background" t-value="not is_black_background"/>
                     </t>
                 </tbody>
             </table>

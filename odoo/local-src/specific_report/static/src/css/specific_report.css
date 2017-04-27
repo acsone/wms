@@ -36,6 +36,7 @@
 .round_table {
     border-radius: 1.1em;
     -moz-border-radius: 1.1em;
+    overflow: hidden;
 }
 
 .border_table td, .border_table th {
@@ -70,6 +71,11 @@
 
 .no_background {
     background-color: transparent !important;
+}
+
+.black_background {
+    background-color: black;
+    color: white;
 }
 
 #left_header {
@@ -119,6 +125,10 @@
 #products_table th {
     text-align: center;
     vertical-align: middle;
+}
+
+#products_table td, #products_table th {
+    padding: 7px;
 }
 
 #products_table tr:nth-of-type(n + 1) td:nth-of-type(n + 3) {
