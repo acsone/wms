@@ -2,11 +2,16 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===========
-Stock Print
-===========
+==============
+Specific Zetes
+==============
 
-Print stock labels and package labels
+
+This specific module offers tools to integrate a voice picking (Zetes) in Odoo:
+- A controller to communicate with Zetes
+- A error handler to catch all errors during communication
+- An interface to easily expands existing tools
+
 
 Installation
 ============
@@ -16,28 +21,19 @@ There is no specific installation procedure for this module.
 Configuration
 =============
 
-/
+You need to configure the operator ID on each use to be able to use Zetes.
 
 Usage
 =====
 
-/
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/119/8.0
-
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
-
 Known issues / Roadmap
 ======================
 
-/
-
 Bug Tracker
 ===========
+
+If you have some trouble with this module don't forget
+to change the log level to debug.
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/<project>/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
@@ -50,12 +46,10 @@ Credits
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
-
 Contributors
 ------------
 
-* Jacques-Etienne Baudoux <je@bcim.be>
+* Sylvain Van Hoof <sylvain@okia.be>
 
 Maintainer
 ----------

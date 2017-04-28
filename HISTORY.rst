@@ -116,6 +116,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
+* ALCN-740: Add tools to integrate a voice picking (Zetes) in Odoo
 * ALCN-788: Set the reference with the supplier invoice number
 * ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
 * ALCN-817 / 821: Add logistics informations in sale order form view

@@ -11,6 +11,7 @@ This module add some report for Alcyon:
 - Delivery slip
 - Invoice (this report contains line to help to fold the paper)
 - Purchase Order
+- Passport report
 
 
 Credits
