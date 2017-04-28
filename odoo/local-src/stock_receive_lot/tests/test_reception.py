@@ -124,13 +124,7 @@ class TestReception(TransactionCase):
         op2 = picking.pack_operation_product_ids[1]
         wiz.operation_id = op2
         wiz._onchange_operation_id()
-        # There is a bug/trick with Odoo 10 and computed field in unittest.
-        # The value will be read in the cache but I don't know why the value
-        # for the field remaining_qty is empty. It's why I need to load this
-        # value before run the assertEqual. You can try
-        remaining_qty = wiz.remaining_qty
-        print wiz.remaining_qty
-        self.assertEqual(remaining_qty, 5)
+        self.assertEqual(wiz.remaining_qty, 5)
         self.assertEqual(wiz.location_dest_id, self.destination_stock_location)
 
         # receive lot

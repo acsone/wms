@@ -18,6 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from datetime import date
+
 from odoo import fields, models, api
 
 
@@ -31,9 +33,14 @@ class StockLocation(models.Model):
     @api.multi
     def get_checksum(self):
         """
-        Return only the first bin checksum
-        This method should be improved
+        Rule: 
+        - even day : return checksum 1
+        - odd day: return checksum 2 
         :return:
         """
 
-        return self.bin_checksum_1
+        is_odd_day = date.today().day % 2
+        if is_odd_day:
+            return self.bin_checksum_2
+        else:
+            return self.bin_checksum_1
