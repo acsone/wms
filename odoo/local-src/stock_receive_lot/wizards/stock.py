@@ -146,7 +146,9 @@ class StockPackOperationLotAdd(models.TransientModel):
         if not lot:
             lot = lot_obj.create({
                 'name': vals['lot_name'],
+                'life_date': vals.get('life_date', self.life_date),
                 'product_id': operation.product_id.id})
+            lot.onchange_life_date()
         vals['lot_id'] = lot.id
 
     @api.model
@@ -154,15 +156,13 @@ class StockPackOperationLotAdd(models.TransientModel):
         if vals.get('lot_name'):
             self._convert_lot_name2id(vals)
         wiz = super(StockPackOperationLotAdd, self).create(vals)
-        if vals.get('life_date'):
-            wiz.lot_id.life_date = vals['life_date']
-            wiz.lot_id.onchange_life_date()
         return wiz
 
     @api.multi
     def write(self, vals):
         if vals.get('lot_name'):
-            self._convert_lot_name2id(vals)
+            for rec in self:
+                rec._convert_lot_name2id(vals)
         res = super(StockPackOperationLotAdd, self).write(vals)
         for rec in self:
             if (rec.lot_id and rec.life_date and
@@ -194,16 +194,16 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.operation_id = pack2
             self.operation_id.location_dest_id = self.location_dest_id
 
-        lot_name = self.lot_id.name
-        if lot_name:
+        if self.lot_id:
             for lot in self.operation_id.pack_lot_ids:
-                if lot.lot_name == lot_name:
+                if lot.lot_id == self.lot_id:
                     lot.qty += self.qty
                     break
             else:
                 self.operation_id.pack_lot_ids = [(0, 0, {
                     'qty': self.qty,
                     'lot_name': self.lot_id.name,
+                    'lot_id': self.lot_id.id,
                     })]
         self.operation_id.save()
 

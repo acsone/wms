@@ -134,10 +134,6 @@ class TestReception(TransactionCase):
         # go to next operation
         wiz.button_nextop()
 
-        # FIXME: end of unittest is currently disabled until odoo bug to
-        # receive existing lot is solved
-        return
-
         # validate
         picking.do_new_transfer()
         self.assertEqual(picking.state, 'done')
