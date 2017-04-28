@@ -106,6 +106,7 @@
                 </table>
             </div>
 
+            <p><br/><br/><br/></p>
             <p id="sale_condition" t-field="company.invoice_terms_conditions"/>
 
             <table id="total_table" class="border_table round_table">
