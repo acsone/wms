@@ -29,7 +29,7 @@ class ZetesLogger(models.Model):
     picking_id = fields.Many2one('stock.picking', string='Picking')
     operation_id = fields.Many2one('stock.pack.operation', string='Operation')
     request = fields.Char('Request')
-    formatted_request = fields.Char('Request')
+    formatted_request = fields.Text('Request')
     is_checked = fields.Boolean('Checked')
     traceback = fields.Text('Traceback')
 

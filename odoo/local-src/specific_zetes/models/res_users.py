@@ -18,8 +18,3 @@ class ResUsers(models.Model):
     @api.model
     def get_user(self, operator_code):
         return self.sudo().search([('operator_code', '=', operator_code)])
-
-    @api.multi
-    @api.constrains('operator_code')
-    def operator_code_invalidate_cache(self):
-        self.invalidate_cache(fnames=['operator_code'], ids=self.ids)

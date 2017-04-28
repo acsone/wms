@@ -316,15 +316,15 @@
                                 </span>
                                 <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
                                 <span t-if="invoice.state == 'draft'">Draft Invoice</span>
-                                <span t-if="invoice.state == 'cancel'">Cancelled Invoice</span>
+                                <span t-if="invoice.state == 'cancel'">Canceled Invoice</span>
                             </div>
                             <div t-if="invoice.type == 'out_refund'">
                                 <span t-if="(invoice.state == 'open' or invoice.state == 'paid')">
                                     Refund
                                 </span>
                                 <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
-                                <span t-if="invoice.state == 'draft'">Draft Refund</span>
-                                <span t-if="invoice.state == 'cancel'">Cancelled Refund</span>
+                                <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
+                                <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
                             </div>
                         </div>
                     </div>

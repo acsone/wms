@@ -5,8 +5,7 @@ from odoo import _
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
-# ONLY FOR TEST
-_logger.setLevel(logging.DEBUG)
+
 
 HEADER_LABELS = ('serNum', 'verNum', 'appNum', 'msgType', 'operId', 'langId',
                  'msgDate', 'msgTime', 'packageId')
@@ -196,6 +195,13 @@ class Parameters:
                             .format(', '.join(empty_mandatory_values))))
 
     def log(self, picking_id=None, operation_id=None, exception=None):
+        """
+        Log an error in Odoo
+        :param picking_id:  The picking ID (stock.picking)
+        :param operation_id: The operation ID (stock.pack.operation)
+        :param exception: An exception (the object himself)
+        :return: None
+        """
         request.env['zetes.logger'].sudo().create({
             'domain': self._domain.__class__.__name__.lower(),
             'action': self._action.lower(),

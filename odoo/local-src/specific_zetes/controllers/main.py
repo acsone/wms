@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import importlib
+import logging
 
 from odoo import http
 from odoo.http import request
 from odoo.addons.web.controllers.main import Home
 
 from ..tools.domain_interface import Parameters, HEADER_LABELS
+
+_logger = logging.getLogger(__name__)
 
 
 class Zetes(Home):
@@ -17,6 +20,8 @@ class Zetes(Home):
                 csrf=False)
     def wrapper(self, **kw):
         cmd = request.httprequest.data
+
+        _logger.info('Command: ' + cmd)
 
         params = cmd[:-1].split(',')
         # Split the request in two parts (header and values)
@@ -43,6 +48,7 @@ class Zetes(Home):
 
         if result and isinstance(result, str):
             # Add a # and two break line to respect Zetes requirement
+            _logger.info('Result: ' + result)
             result += '#\n\n'
         else:
             result = ''

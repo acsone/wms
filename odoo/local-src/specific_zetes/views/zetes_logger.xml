@@ -79,5 +79,5 @@
         <field name="context">{'search_default_need_to_be_check': 1}</field>
     </record>
 
-    <menuitem action="action_zetes_logger" id="menu_zetes_logger" parent="sales_team.menu_sales" sequence="20" groups="base.group_no_one"/>
+    <menuitem action="action_zetes_logger" id="menu_zetes_logger" parent="stock.menu_stock_config_settings" sequence="60" groups="stock.group_stock_manager"/>
 </odoo>

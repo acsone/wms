@@ -17,7 +17,7 @@ class StockPicking(models.Model):
         ('02', 'Active'),
         ('03', 'Staging'),
         ('04', 'Done'),
-        ('05', 'Cancelled'),
+        ('05', 'Canceled'),
         ('08', 'Finished')
     ],
         string='Zetes state',

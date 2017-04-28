@@ -110,6 +110,7 @@ migration:
           - specific_stock
           - specific_translations
           - specific_purchase
+          - specific_zetes
           - stock_barcode_fix
           - stock_expired
           - stock_grn
@@ -207,3 +208,4 @@ migration:
           - specific_purchase_report
           - specific_sale
           - connector_esb
+          - specific_zetes

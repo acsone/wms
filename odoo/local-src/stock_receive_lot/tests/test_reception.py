@@ -69,7 +69,9 @@ class TestReception(TransactionCase):
         picking.action_assign()
 
         # launch wizard
-        wiz = self.stock_reception_wizard.new({'picking_id': picking.id})
+        wiz = self.stock_reception_wizard\
+            .with_context(default_life_date_allowed=True)\
+            .new({'picking_id': picking.id})
 
         # select operation
         op1 = picking.pack_operation_product_ids[0]
@@ -127,6 +129,7 @@ class TestReception(TransactionCase):
         # for the field remaining_qty is empty. It's why I need to load this
         # value before run the assertEqual. You can try
         remaining_qty = wiz.remaining_qty
+        print wiz.remaining_qty
         self.assertEqual(remaining_qty, 5)
         self.assertEqual(wiz.location_dest_id, self.destination_stock_location)
 
