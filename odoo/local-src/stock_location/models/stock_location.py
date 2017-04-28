@@ -33,9 +33,9 @@ class StockLocation(models.Model):
     @api.multi
     def get_checksum(self):
         """
-        Rule: 
+        Rule:
         - even day : return checksum 1
-        - odd day: return checksum 2 
+        - odd day: return checksum 2
         :return:
         """
 
