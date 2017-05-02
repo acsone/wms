@@ -347,6 +347,10 @@ def create_picking_types(ctx):
     color_back = 8
 
     types = [
+        {'xmlid': 'stock.picking_type_in',
+         'use_create_lots': False,
+         'use_existing_lots': True,
+         },
         {'xmlid': '__setup__.stock_picking_type_materiel',
          'name': 'Pick Matériel',
          'code': 'internal',
