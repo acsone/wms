@@ -49,10 +49,6 @@ class AccountInvoice(models.Model):
         compute='_compute_total_amounts'
     )
 
-    amount_untaxed_with_contribution = fields.Monetary(
-        compute='_compute_total_amounts',
-    )
-
     @api.depends(
         'invoice_line_ids',
         'invoice_line_ids.quantity',

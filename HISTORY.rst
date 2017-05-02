@@ -14,6 +14,7 @@ Unreleased
 
 * Logistics: Reception: fix set default lot name with date, added some help, reception wizard (added button to allow to move to next destination)
 * ALCN-817 / 821: Add logistics informations in sale order form view
+* ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
 
 **Bugfixes**
 * ALCN-812: Add missing ir.model.access

@@ -108,7 +108,7 @@ class StockPicking(models.Model):
         result = []
         moves_witout_order = []
         backorder_moves_without_order = []
-        for line in self.move_lines_related:
+        for line in self.move_lines:
             if not line.order_id:
                 moves_witout_order.append(line)
             else:
@@ -117,7 +117,7 @@ class StockPicking(models.Model):
         backorders = self.env['stock.picking']. \
             search([('backorder_id', '=', self.id)])
         for backorder in backorders:
-            for line in backorder.move_lines_related:
+            for line in backorder.move_lines:
                 if not line.order_id:
                     backorder_moves_without_order.append(line)
                 else:
