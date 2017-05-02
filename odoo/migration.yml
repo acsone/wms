@@ -125,3 +125,26 @@ migration:
           - stock_refill
           - stock_receive_lot
           - web_autorefresh
+    - version: 10.1.0
+      operations:
+        post:
+          - anthem songs.updates.update_10_1_0.update::main
+      addons:
+        upgrade:
+          # Specific modules
+          - delivery_rounds
+          - pricelist_discount
+          - specific_account
+          - specific_report
+          - specific_sale
+          - specific_stock
+          - stock_groupbypartner
+          - stock_picking_fillwithstock
+          - stock_picking_sequence
+          - stock_picking_subcode
+          - stock_putaway_defaultfixedlocation
+          - stock_putaway_route
+          - stock_quant_bylocation
+          - stock_receive_lot
+          - stock_reception_priority
+          - stock_refill
