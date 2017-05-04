@@ -3,6 +3,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from ..models.stock_picking import AS_START, AS_ACTIVE
 
 
 class Usercontext(DomainInterface):
@@ -64,14 +65,15 @@ FROM stock_picking AS picking
   INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
 WHERE picking.delivery_round_state = 'open'
       AND type.subcode = 'PICK'
-      AND picking.zetes_state IN ('01', '02')
+      AND picking.zetes_state IN %s
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
       AND picking.operator_id = %s
 ORDER BY round.date, round.time, picking.sequence
 LIMIT 1;
             """
 
-            request.env.cr.execute(picking_query, (self._user.id, ))
+            request.env.cr.execute(picking_query, ((AS_START, AS_ACTIVE),
+                                                   self._user.id, ))
             query_result = request.env.cr.fetchone()
 
             # If the user has a assigned picking

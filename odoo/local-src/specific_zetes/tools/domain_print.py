@@ -8,6 +8,8 @@ from domain_interface import DomainInterface, Parameters
 
 _logger = logging.getLogger(__name__)
 
+PRINT_PASSPORT = '03'
+PRINT_LABELS = '04'
 
 class Print(DomainInterface):
     EXAMPLE_REQU = '208030828,2.2.3,3iV_101,REQU_PRINT,30,1,20170207,' \
@@ -57,7 +59,8 @@ class Print(DomainInterface):
         print_type = params.printType
         printer_num = params.printerNum
 
-        if print_type == '03':
+        if print_type == PRINT_PASSPORT:
+            # The passport is always printed on the printer 1
             printer = request.env['printing.printer'].sudo() \
                 .search([('code', '=', '1'), ('type', '=', 'pdf')])
             if not printer:
@@ -69,7 +72,7 @@ class Print(DomainInterface):
                 return result.format()
 
             try:
-                picking.sudo().print_password_report(printer=printer)
+                picking.sudo().print_passport_report(printer=printer)
             except Exception as e:
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
@@ -80,7 +83,7 @@ class Print(DomainInterface):
                 })
                 return result.format()
 
-        elif print_type == '04':
+        elif print_type == PRINT_LABELS:
             printer_toshiba = request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
                                 ('type', '=', 'toshiba')])

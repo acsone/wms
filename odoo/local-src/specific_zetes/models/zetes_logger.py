@@ -34,7 +34,6 @@ class ZetesLogger(models.Model):
     traceback = fields.Text('Traceback')
 
     @api.depends('action', 'domain', 'user_id')
-    @api.multi
     def _compute_name(self):
         for log in self:
             command_displayed = dict(self._fields['action'].selection)\

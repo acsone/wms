@@ -78,6 +78,7 @@ class Location(DomainInterface):
                     order='life_date',
                     limit=5)
 
+        # Lots are stored in the value Usf0#LOT_NUMBER (eg: Usf01)
         index = 0
         for lot in lots:
             index += 1

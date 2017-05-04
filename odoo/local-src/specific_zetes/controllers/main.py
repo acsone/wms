@@ -23,33 +23,49 @@ class Zetes(Home):
 
         _logger.info('Command: ' + cmd)
 
+        # For all requests Zetes sends an extra comma.
+        # We need to remove this comma before split the request
         params = cmd[:-1].split(',')
         # Split the request in two parts (header and values)
         header = params[:len(HEADER_LABELS)]
         values = params[len(HEADER_LABELS):]
 
         # Retrieve the command and the the domain
-        # e.eg: REQU_USERCONTEXT
+        # The msgType (command + domain) is always the fourth element
+        # e.g: 208030828,2.2.3,3iV_101,REQU_ITEMPICK,30
+        # In this case the msgType is REQU_ITEMPICK
         # command: requ
-        # domain: usercontext
+        # domain: itempick
         command, domain = header[3].split('_')
 
         # Create the handler
+        # If the domain is itempick the module name will be
+        # openerp.addons.specific_zetes.tools.domain_itempick
         module_name = \
             'openerp.addons.specific_zetes.tools.domain_{}'.format(
                 domain.lower())
+        # Retrieve the class inherited from DomainInterface
+        # e.g: domain == 'itempick' => Create an instance of Itempick(header)
         module_obj = importlib.import_module(module_name)
         instance = getattr(module_obj, domain.title())(header)
 
+        # Create the parameter instance with all values received in the request
         parameter_obj = Parameters(instance,
                                    action=command.upper(),
                                    values=values)
+        # Execute the the method
+        # e.g: if the msgType is REQU_ITEMPICK
+        # domain: itempick
+        # action: requ
+        # We will execute the method requ on an instance of Itempick
         result = getattr(instance, command.lower())(parameter_obj)
 
+        # If the method return something (action REQU)
         if result and isinstance(result, str):
             # Add a # and two break line to respect Zetes requirement
             _logger.info('Result: ' + result)
             result += '#\n\n'
+        # If the method return nothing (action RESU)
         else:
             result = ''
 

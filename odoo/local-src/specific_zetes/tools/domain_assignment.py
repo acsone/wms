@@ -5,6 +5,8 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from ..models.stock_picking import AS_DEFAULT, AS_START, AS_ACTIVE, AS_DONE, \
+    AS_CANCELED, AS_FINISHED, OP_DEFAULT, OP_SKIPPED
 
 _logger = logging.getLogger(__name__)
 
@@ -42,7 +44,6 @@ class Assignment(DomainInterface):
         result = Parameters(self, action='resp')
 
         if not params.Cri02:
-            query_values = []
             picking_query = """
 SELECT picking.id
 FROM stock_picking AS picking
@@ -50,12 +51,16 @@ FROM stock_picking AS picking
   INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
 WHERE picking.delivery_round_state = 'open'
       AND type.subcode = 'PICK'
-      AND picking.zetes_state IN ('00', '05')
+      AND picking.zetes_state IN %s
       AND EXISTS(SELECT 1
                  FROM stock_pack_operation AS operation
                  WHERE operation.picking_id = picking.id
-                 AND operation.zetes_state IN ('00', '03'))
+                 AND operation.zetes_state IN %s)
             """
+            query_values = [
+                (AS_DEFAULT, AS_CANCELED),
+                (OP_DEFAULT, OP_SKIPPED),
+            ]
 
             zone_code = params.Cri01
             if zone_code:
@@ -125,13 +130,13 @@ WHERE picking.delivery_round_state = 'open'
         else:
             result.Usf06 = 'E'  # Simple packaging
 
-        if picking.zetes_state == '05':
+        if picking.zetes_state == AS_CANCELED:
             result.update({
-                'assignmentStatus': '01',
+                'assignmentStatus': AS_START,
                 'Usf01': picking.checksum,
             })
         else:
-            result.assignmentStatus = '00'
+            result.assignmentStatus = AS_DEFAULT
 
         return result.format()
 
@@ -158,9 +163,9 @@ WHERE picking.delivery_round_state = 'open'
         try:
             picking.sudo(self._user).zetes_state = params.assignmentStatus
             # The picking is done
-            if params.assignmentStatus in ['01', '02']:
+            if params.assignmentStatus in [AS_START, AS_ACTIVE]:
                 picking.sudo(self._user).assign_operator()
-            elif params.assignmentStatus in ['04', '08']:
+            elif params.assignmentStatus in [AS_DONE, AS_FINISHED]:
                 # If the picking required a verification (passport)
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
@@ -173,7 +178,7 @@ WHERE picking.delivery_round_state = 'open'
                             .browse(int(result.get('res_id')))
 
                         wizard.process()
-            elif params.assignmentStatus == '05':
+            elif params.assignmentStatus == AS_CANCELED:
                 picking.sudo(self._user).interrupt_picking()
         except Exception as e:
             _logger.error(str(e))

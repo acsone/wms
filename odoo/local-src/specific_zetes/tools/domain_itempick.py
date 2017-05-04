@@ -5,6 +5,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from ..models.stock_picking import OP_DEFAULT, OP_SKIPPED, OP_CANCELED
 
 _logger = logging.getLogger(__name__)
 
@@ -114,7 +115,9 @@ class Itempick(DomainInterface):
                     order=order_by)
         lines = lines\
             .filtered(lambda line: int(line.qty_done) != int(line.product_qty)
-                      and line.zetes_state in ['00', '03', '05'])
+                      and line.zetes_state in [OP_DEFAULT,
+                                               OP_SKIPPED,
+                                               OP_CANCELED])
 
         if not lines:
             error_message = _('There is no lines for the picking {}'
@@ -139,7 +142,7 @@ class Itempick(DomainInterface):
                 'reqDestCarSeqNum': 1,
                 'reqQty': format(int(line.product_qty), '0%d' % 6),
                 'effQty': format(int(line.qty_done), '0%d' % 6),
-                'pickStatus': '00',
+                'pickStatus': OP_DEFAULT,
                 'tripCounter': 1,
             })
 
@@ -225,8 +228,8 @@ class Itempick(DomainInterface):
                     'zetes_state': status
                 })
 
-                # Status 05 == 'Cancel' all actions for this line
-                if status == '05':
+                # If status == OP_CANCELED => remove all actions for this line
+                if status == OP_CANCELED:
                     move.pack_lot_ids.unlink()
                     move.save()
 
