@@ -9,25 +9,26 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+
+* ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
 * ALCN-788: Set the reference with the supplier invoice number
 * ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
-
-* Logistics: Reception: fix set default lot name with date, added some help, reception wizard (added button to allow to move to next destination)
 * ALCN-817 / 821: Add logistics informations in sale order form view
-* ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
+* Logistics: Reception: fix set default lot name with date, added some help, reception wizard (added button to allow to move to next destination)
 
 **Bugfixes**
+
+* ALCN-810: Allow to receive a lot that already exist: change reception picking type to use existing lot instead of create new lot
 * ALCN-812: Add missing ir.model.access
 * Delivery rounds: Fix delivery in case of lot
 * Sales order confirmation if no stock: fix move assignment in case of no quant available
-* ALCN-810: Allow to receive a lot that already exist: change reception picking type to use existing lot instead of create new lot
 
 **Build**
 
 * Migration to v10
 
-  * ALCN-822: Fix import with 'from openerp...' and fix migration of specific_report
   * ALCN-813: Fix putaway, must always return id and not recordset
+  * ALCN-822: Fix import with 'from openerp...' and fix migration of specific_report
 
 **Documentation**
 
