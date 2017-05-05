@@ -10,6 +10,20 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.1.0 (2017-05-05)
++++++++++++++++++++
+
+**Data Migration**
+
+**Features and Improvements**
+
 * ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
 * ALCN-788: Set the reference with the supplier invoice number
 * ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
@@ -29,8 +43,6 @@ Unreleased
 
   * ALCN-813: Fix putaway, must always return id and not recordset
   * ALCN-822: Fix import with 'from openerp...' and fix migration of specific_report
-
-**Documentation**
 
 
 10.0.0 (2017-03-24)
