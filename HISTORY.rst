@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-824: Add a custom sale order line exception
+
 **Bugfixes**
 
 **Build**
