@@ -19,6 +19,15 @@ Unreleased
 **Documentation**
 
 
+10.1.1 (2017-05-08)
++++++++++++++++++++
+
+**Bugfixes**
+
+* Upgrade base image
+  Fixes security vulnerability CVE-2017-8291
+
+
 10.1.0 (2017-05-05)
 +++++++++++++++++++
 
