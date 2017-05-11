@@ -7,7 +7,7 @@ class ProductTemplate(models.Model):
     @api.model
     def get_default_state_id(self):
         """
-        I need to do this check because the "default" for the state_id 
+        I need to do this check because the "default" for the state_id
         can be call before data are loaded
         """
         state_active = \
