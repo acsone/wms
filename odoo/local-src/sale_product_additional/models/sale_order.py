@@ -266,7 +266,7 @@ class SaleOrder(models.Model):
                 if field in accepted_relational_m2m_fields:
                     new_value = line[field]
                     if not final_line or final_line[field] != new_value:
-                        values[field] = new_value.ids
+                        values[field] = [(6, False, new_value.ids)]
 
             # Check if the final line must be :
             # - added
@@ -301,6 +301,23 @@ class SaleOrder(models.Model):
     def onchange_order_line_original(self):
 
         if not self.order_line_original:
+            # Update the additional lines on the sale order
+            # (write method if sale order already saved, update method if not)
+            if self.env.context.get('write_values'):
+                # If sale order already exists,
+                # it's necessary to do a write and not an update,
+                # because with an update,
+                # odoo try to delete the existing lines
+                # before recreate the lines with given values
+                self.write({
+                    'order_line_additional': [(5, 0, [])],
+                    'order_line': [(5, 0, [])],
+                })
+            else:
+                self.update({
+                    'order_line_additional': [(5, 0, [])],
+                    'order_line': [(5, 0, [])],
+                })
             return
 
         # Compute additional lines
