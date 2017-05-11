@@ -191,6 +191,17 @@ class CustomerMapper(EntityMapper):
             ")"
         )
 
+    def get_sql_where(self):
+        if self.importer.full:
+            return None
+        # Filter sample of customer by customers on last sale orders
+        return (
+            "clinum"
+            "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
+            "     ORDER BY eccdss DESC, eccdaa DESC, eccdmm DESC, eccdjj DESC"
+            "     fetch first 300 rows only)"
+            )
+
     @staticmethod
     def convert_company_type(odoo_entity, db2_entity):
         db2_title = db2_entity.get('clitit')
@@ -320,8 +331,10 @@ class CustomerAddressMapper(AddressMapper):
                 # such as "1   2000"
                 " AND NOT adlnum LIKE '% %' "
                 "AND CAST(adlnum AS decimal)"
-                "  IN(SELECT clinum FROM gendata.CLIENT"
-                "     ORDER BY clinum fetch first 300 rows only)"
+                "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
+                "     ORDER BY eccdss DESC, eccdaa DESC,"
+                "              eccdmm DESC, eccdjj DESC"
+                "     fetch first 300 rows only)"
             )
         return where
 
