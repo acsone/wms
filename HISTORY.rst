@@ -14,6 +14,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-828: Fix product compute price on sale order with pricelist
+
 **Build**
 
 **Documentation**

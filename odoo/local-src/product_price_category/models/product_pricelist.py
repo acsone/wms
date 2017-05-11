@@ -161,7 +161,7 @@ class ProductPricelist(models.Model):
 
                 convert_to_price_uom = (
                     lambda price: product.uom_id._compute_price(
-                        price, price_uom_id
+                        price, self.env['product.uom'].browse(price_uom_id)
                     )
                 )
 
