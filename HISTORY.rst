@@ -15,6 +15,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-828: Fix product compute price on sale order with pricelist
+* ALCN-830: Fix sale product additional module (onchange function)
 
 **Build**
 
