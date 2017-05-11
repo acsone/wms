@@ -24,7 +24,7 @@ class FieldMapper:
         self.check = check
 
 
-class EntityMapper:
+class EntityMapper(object):
 
     DB2_NAME = None
     DB2_SCHEMA = 'sbdata'
@@ -135,6 +135,9 @@ class EntityMapper:
     def get_sql_where(self):
         return None
 
+    def get_order_by(self):
+        return None
+
     def get_sql_query(self):
         needed_refs = self.importer.get_foreign_refs(self.DB2_NAME)
 
@@ -163,8 +166,11 @@ class EntityMapper:
             if not where_cond:
                 where_cond = '1=1'
 
-            query += "WHERE %s ORDER BY 1 asc "
-            placeholders += (where_cond,)
+            order_by = self.get_order_by()
+            if not order_by:
+                order_by = "1 asc"
+            query += "WHERE %s ORDER BY %s "
+            placeholders += (where_cond, order_by)
 
             if not self.importer.full:
                 query += "FETCH FIRST 300 ROWS ONLY"
