@@ -106,6 +106,7 @@ migration:
           - specific_report
           - specific_stock
           - specific_translations
+          - specific_purchase
           - stock_barcode_fix
           - stock_expired
           - stock_grn
