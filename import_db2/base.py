@@ -138,6 +138,9 @@ class EntityMapper(object):
     def get_order_by(self):
         return None
 
+    def get_limit(self):
+        return ""
+
     def get_sql_query(self):
         needed_refs = self.importer.get_foreign_refs(self.DB2_NAME)
 
@@ -172,8 +175,9 @@ class EntityMapper(object):
             query += "WHERE %s ORDER BY %s "
             placeholders += (where_cond, order_by)
 
-            if not self.importer.full:
-                query += "FETCH FIRST 300 ROWS ONLY"
+
+            limit = self.get_limit()
+            query += limit
 
         return query % placeholders, params
 
