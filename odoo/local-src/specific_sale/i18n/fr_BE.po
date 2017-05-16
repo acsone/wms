@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 11:23+0000\n"
-"PO-Revision-Date: 2017-05-11 11:23+0000\n"
+"POT-Creation-Date: 2017-05-16 07:16+0000\n"
+"PO-Revision-Date: 2017-05-16 07:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "&amp;bull;"
+msgstr "&amp;bull;"
+
+#. module: specific_sale
 #: code:addons/specific_sale/models/sale.py:143
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Confirmed order #"
+msgstr "Commande confirmée #"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_current_product_qty_unavailable
@@ -27,6 +37,21 @@ msgstr "Article transféré vers la pharmacie distributrice : %s"
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_current_product_qty_unavailable
 msgid "Current quantity unavailable"
 msgstr "Quantité actuellement non disponible"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Description"
+msgstr "Description"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Disc.(%)"
+msgstr "Rem.(%)"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Discount"
+msgstr "Remise"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_exception
@@ -64,6 +89,11 @@ msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros
 msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.order_amount_material_maximum
+msgid "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+msgstr "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
 #: model:ir.ui.view,arch_db:specific_sale.product_template_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
@@ -85,6 +115,11 @@ msgstr "Lots/Numéros de série"
 #: selection:sale.order,sale_channel:0
 msgid "Mail"
 msgstr "Email"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.order_amount_material_maximum
+msgid "Montant maximum à 1000 euros (matériel)"
+msgstr "Montant maximum à 1000 euros (matériel)"
 
 #. module: specific_sale
 #: model:exception.rule,name:specific_sale.order_amount_minimum
@@ -114,6 +149,11 @@ msgid "Phone"
 msgstr "Téléphone"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Price"
+msgstr "Prix"
+
+#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr "Modèle d'article"
@@ -127,6 +167,16 @@ msgstr "Produits de type stupéfiants interdits à la vente pour tout client qui
 #: model:exception.rule,name:specific_sale.narcotic_forbidden
 msgid "Produits stupéfiants interdits"
 msgstr "Produits stupéfiants interdits"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Promotion"
+msgstr "Promotion"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Quantity"
+msgstr "Quantité"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_product_qty_unavailable
@@ -183,6 +233,11 @@ msgid "Sales Order Lines Unavailable"
 msgstr "Lignes de commande non disponibles"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: specific_sale
 #: code:addons/specific_sale/models/sale.py:129
 #, python-format
 msgid "The medicines will be delivered to you by our care upon receipt of these from the pharmacy"
@@ -195,9 +250,19 @@ msgid "This command is transferred on your behalf to the pharmacy which will ens
 msgstr "Cette commande est transférée en votre nom auprès de la pharmacie qui assurera la délivrance des médicaments."
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Total Price"
+msgstr "Prix total"
+
+#. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_line_at_zero
 msgid "Une ligne de vente ne peut pas être à zéro"
 msgstr "Une ligne de vente ne peut pas être à zéro"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Unit Price"
+msgstr "Prix unitaire"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_order_line_additional
