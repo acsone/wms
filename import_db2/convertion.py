@@ -552,6 +552,7 @@ class SaleOrderLineMapper(EntityMapper):
             xmlid = self.get_xml_id('product', product, '__import__')
         else:
             xmlid = '__setup__.product_other'
+            odoo_entity['name'] = "Divers"
         odoo_entity['product_id/id'] = xmlid
 
     def convert_order_id(self, odoo_entity, db2_entity):
