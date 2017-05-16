@@ -53,11 +53,9 @@ class ProductMapper(EntityMapper):
         return "join sbdata.cplges on gesart=cplart "
 
     def get_sql_where(self):
-        # Filter deactivated products for demo data
         if not self.importer.full:
             # TODO: csv only when mode will be developed
-            return ("gesdem not like '|%%' "
-                    "AND gesart IN ("
+            return ("gesart IN ("
                     "    SELECT dccart FROM sbdata.PDETCDCL"
                     "        WHERE dccsui >= %s AND dccsui <= %s"
                     ")" % (SO_MIN, SO_MAX))
