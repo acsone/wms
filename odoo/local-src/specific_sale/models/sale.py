@@ -4,7 +4,7 @@
 
 import odoo.addons.decimal_precision as dp
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class Sale(models.Model):
@@ -71,6 +71,93 @@ class Sale(models.Model):
         qty_unavailable = current_line.product_qty_unavailable
         current_values['product_qty_unavailable'] = qty_unavailable
         return current_values
+
+    @api.multi
+    def order_lines_layouted(self):
+        self.ensure_one()
+        report_pages = super(Sale, self).order_lines_layouted()
+
+        pharmacy_category = self.env.ref('__setup__.product_categ_humain')
+        pharmacy_lines = self.env['sale.order.line'].search([
+            ('order_id', '=', self.id),
+            ('product_id.categ_id', 'child_of', pharmacy_category.id),
+        ]).sorted()
+
+        cascade_category = self.env.ref('__setup__.product_categ_importation')
+        cascade_lines = self.env['sale.order.line'].search([
+            ('order_id', '=', self.id),
+            ('product_id.categ_id', 'child_of', cascade_category.id),
+        ]).sorted()
+
+        new_report_pages = []
+        for report_page_category in report_pages:
+            new_values = []
+            for report_page in report_page_category:
+                new_lines = [
+                    line
+                    for line in report_page['lines']
+                    if line.id not in pharmacy_lines.ids + cascade_lines.ids
+                ]
+                if new_lines:
+                    new_values.append({
+                        'name': report_page['name'],
+                        'subtotal': report_page['subtotal'],
+                        'pagebreak': report_page['pagebreak'],
+                        'lines': new_lines
+                    })
+            if new_values:
+                new_report_pages.append(new_values)
+            else:
+                new_report_pages.append([])
+        if pharmacy_lines:
+            pharmacist_name = (
+                pharmacy_lines[0].order_id.partner_id.pharmacist_id.name
+                if pharmacy_lines[0].order_id.partner_id.pharmacist_id
+                else ''
+            )
+            new_report_pages[-1].append({
+                'name_list': [
+                    _(
+                        u'Following human medicines ordered '
+                        u'under your responsibility.'
+                    ),
+                    _(
+                        u'This command is transferred on your behalf '
+                        u'to the pharmacy '
+                        u'which will ensure the delivery of medicines.'
+                    ),
+                    _(
+                        u'The medicines will be delivered '
+                        u'to you by our care upon receipt of these '
+                        u'from the pharmacy'
+                    ),
+                    _(
+                        u'For any problems related to this command, '
+                        u'please contact the pharmacist.'
+                    ),
+                ],
+                'subtotal': False,
+                'pagebreak': False,
+                'only_quantity': True,
+                'line_additional_text':
+                    _(
+                        u'Article transferred to dispensing pharmacy: '
+                        u'%s'
+                    ) % pharmacist_name,
+                'lines': pharmacy_lines
+            })
+        if cascade_lines:
+            new_report_pages[-1].append({
+                'name_list': [
+                    _(
+                        u'Imported medicines under your entire responsibility'
+                    ),
+                ],
+                'subtotal': False,
+                'pagebreak': False,
+                'lines': cascade_lines
+            })
+        return new_report_pages
 
 
 class SaleOrderLine(models.Model):

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_specific_document" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//th[text()='Taxes']" position="after">
+            <th class="text-right">Promotion</th>
+            <th class="text-right">Discount</th>
+        </xpath>
+
+        <xpath expr="//span[@t-field='l.price_subtotal']/parent::td" position="before">
+            <td class="text-right">
+                <span t-field="l.supplier_promotion"/>
+            </td>
+            <td class="text-right">
+                <span t-field="l.alcyon_discount"/>
+            </td>
+        </xpath>
+
+    </template>
+
+</odoo>

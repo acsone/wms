@@ -218,7 +218,7 @@ class SaleOrder(models.Model):
             To define accepted relational fields
             to copy original lines into final lines.
         """
-        return ['product_id', 'product_uom']
+        return ['product_id', 'product_uom', 'layout_category_id']
 
     @api.model
     def get_accepted_relational_m2m_fields_for_order_line(self):

@@ -152,4 +152,6 @@ migration:
       addons:
         upgrade:
           # Specific modules
+          - pricelist_discount
+          - sale_product_additional
           - specific_sale
