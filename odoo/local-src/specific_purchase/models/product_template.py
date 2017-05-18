@@ -4,6 +4,16 @@ from odoo import fields, models, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    length = fields.Float('Length', help='Length in meter')
+    width = fields.Float('Width', help='Width in meter')
+    depth = fields.Float('Depth', help='Depth in meter')
+
+    @api.onchange('length', 'width', 'depth')
+    def onchange_size(self):
+        for product in self:
+            volume = product.length * product.width * product.depth
+            product.volume = volume
+
     @api.model
     def get_default_state_id(self):
         """

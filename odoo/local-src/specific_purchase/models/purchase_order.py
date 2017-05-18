@@ -49,9 +49,7 @@ class PurchaseOrderLine(models.Model):
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
     discount_pricelist = fields.Float()
-    supplier_product_ref = fields.Char('Supplier ref',
-                                       compute='_compute_supplier_product_ref',
-                                       readonly=True)
+    product_ref = fields.Char('Product ref', related='product_id.default_code')
 
     @api.multi
     def write(self, vals):
@@ -93,16 +91,3 @@ class PurchaseOrderLine(models.Model):
         self.discount_global = self.order_id.partner_id.supplier_discount
 
         return result
-
-    @api.multi
-    def _compute_supplier_product_ref(self):
-        for line in self:
-            seller = line.product_id._select_seller(
-                partner_id=line.partner_id,
-                quantity=line.product_qty,
-                date=line.order_id.date_order
-                     and line.order_id.date_order[:10],
-                uom_id=line.product_uom)
-
-            if seller:
-                line.supplier_product_ref = seller.product_code

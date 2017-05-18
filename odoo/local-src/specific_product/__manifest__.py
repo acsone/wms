@@ -11,6 +11,7 @@
     'depends': [
         'product_price_category',
         'sale',
+        'stock',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
