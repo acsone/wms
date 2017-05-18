@@ -1,117 +1,16 @@
 id,name,street,zip,city,phone,fax,customer,supplier,country_id/id,lang,mobile,type,ref,parent_id/id
-__import__.customer_address_delivery_6,EPC 001 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_6,__import__.customer_6
-__import__.customer_address_delivery_7,EPC 002 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_7,__import__.customer_7
-__import__.customer_address_delivery_8,EPC 003 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_8,__import__.customer_8
-__import__.customer_address_delivery_9,EPC 004,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_9,__import__.customer_9
-__import__.customer_address_delivery_10,EPC 005,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_10,__import__.customer_10
-__import__.customer_address_delivery_11,EPC 006,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_11,__import__.customer_11
-__import__.customer_address_delivery_17,EPC 007,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_17,__import__.customer_17
-__import__.customer_address_delivery_18,EPC 008,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_18,__import__.customer_18
-__import__.customer_address_delivery_20,EPC 009,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_20,__import__.customer_20
-__import__.customer_address_delivery_23,DR HUYNEN KARINE,"RUE DU BARON D'OBIN,30",4319,AMBRESIN,081/85 50 25,,False,False,base.be,fr_BE,,delivery,delivery_23,__import__.customer_23
-__import__.customer_address_delivery_24,GODIN FABIENNE,Rue Mattez 28,6182,SOUVRET,,,False,False,base.be,fr_BE,,delivery,delivery_24,__import__.customer_24
-__import__.customer_address_delivery_34,EPC 011,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_34,__import__.customer_34
-__import__.customer_address_delivery_35,GROSJEAN CHRISTIAN,"RUE DES GRANDS-PRES,15",4120,NEUPRE,,,False,False,base.be,fr_BE,,delivery,delivery_35,__import__.customer_35
+__import__.customer_address_delivery_1725,GAUQUIER ETIENNE *,"RUE DES FUSILLES,14",7020,NIMMY ST JEAN,,,False,False,base.be,fr_BE,,delivery,delivery_1725,__import__.customer_1725
+__import__.customer_address_delivery_941,POIRRIER BEATRICE,"THIER DU CORBEAU,8",6900,MARCHE,,,False,False,base.be,fr_BE,,delivery,delivery_941,__import__.customer_941
+__import__.customer_address_delivery_3375,FOUBERT JEAN FRANÇOIS,Av. du Fief de Liège 7,1325,CHAUMONT GISTOUX,,,False,False,base.be,fr_BE,,delivery,delivery_3375,__import__.customer_3375
+__import__.customer_address_delivery_423,BADOT JEAN-LOUIS *,"Rue Warinaue, 94",6120,NALINNES,,,False,False,base.be,fr_BE,,delivery,delivery_423,__import__.customer_423
 __import__.customer_address_delivery_36,APC 012,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_36,__import__.customer_36
-__import__.customer_address_delivery_44,EPC 013,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_44,__import__.customer_44
-__import__.customer_address_delivery_46,DEGOTTE JEAN-MARIE *,Rue Birven 6,4880,AUBEL (LA CLOUSE),,,False,False,base.be,fr_BE,,delivery,delivery_46,__import__.customer_46
-__import__.customer_address_delivery_47,EPC 014,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_47,__import__.customer_47
-__import__.customer_address_delivery_48,EPC 015,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_48,__import__.customer_48
-__import__.customer_address_delivery_52,EPC 016,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_52,__import__.customer_52
-__import__.customer_address_delivery_54,EPC 017,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_54,__import__.customer_54
-__import__.customer_address_delivery_55,EPC 018,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_55,__import__.customer_55
-__import__.customer_address_delivery_57,EPC 019,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_57,__import__.customer_57
-__import__.customer_address_delivery_60,EPC 020,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_60,__import__.customer_60
-__import__.customer_address_delivery_63,EPC 021,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_63,__import__.customer_63
-__import__.customer_address_delivery_65,EPC 022,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_65,__import__.customer_65
-__import__.customer_address_delivery_67,EPC 023,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_67,__import__.customer_67
-__import__.customer_address_delivery_69,EPC 024,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_69,__import__.customer_69
-__import__.customer_address_delivery_73,EPC 025,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_73,__import__.customer_73
-__import__.customer_address_delivery_76,EPC 026,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_76,__import__.customer_76
-__import__.customer_address_delivery_77,EPC 027,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_77,__import__.customer_77
-__import__.customer_address_delivery_80,EPC 028,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_80,__import__.customer_80
-__import__.customer_address_delivery_84,EPC 029,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_84,__import__.customer_84
-__import__.customer_address_delivery_86,EPC 030,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_86,__import__.customer_86
-__import__.customer_address_delivery_88,EPC 031,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_88,__import__.customer_88
-__import__.customer_address_delivery_90,EPC 032,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_90,__import__.customer_90
-__import__.customer_address_delivery_92,EPC 033,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_92,__import__.customer_92
-__import__.customer_address_delivery_95,EPC 034,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_95,__import__.customer_95
-__import__.customer_address_delivery_98,EPC 035,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_98,__import__.customer_98
-__import__.customer_address_delivery_100,EPC 036,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_100,__import__.customer_100
-__import__.customer_address_delivery_101,DOCTEUR HUYNEN KARINE,"RUE DU BARON D'OBIN,30",4219,AMBRESIN,081/85 50 25,,False,False,base.be,fr_BE,,delivery,delivery_101,__import__.customer_101
-__import__.customer_address_delivery_102,DOCTEUR BONTEMPS PH.,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_102,__import__.customer_102
-__import__.customer_address_delivery_103,EPC 037,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_103,__import__.customer_103
-__import__.customer_address_delivery_106,EPC 038,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_106,__import__.customer_106
 __import__.customer_address_delivery_107,EPC 039,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_107,__import__.customer_107
-__import__.customer_address_delivery_112,EPC 040,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_112,__import__.customer_112
-__import__.customer_address_delivery_114,EPC 041,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_114,__import__.customer_114
-__import__.customer_address_delivery_117,EPC 042,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_117,__import__.customer_117
-__import__.customer_address_delivery_120,EPC 043,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_120,__import__.customer_120
-__import__.customer_address_delivery_123,EPC 044,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_123,__import__.customer_123
-__import__.customer_address_delivery_129,EPC 045,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_129,__import__.customer_129
-__import__.customer_address_delivery_130,EPC 046,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_130,__import__.customer_130
-__import__.customer_address_delivery_131,MINGUET ARNAUD,"AV DE LA LIBERATION,18",4920,AYWAILLE,,AVANT 17H,False,False,base.be,fr_BE,,delivery,delivery_131,__import__.customer_131
-__import__.customer_address_delivery_132,EPC 047,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_132,__import__.customer_132
-__import__.customer_address_delivery_134,EPC 048,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_134,__import__.customer_134
-__import__.customer_address_delivery_136,EPC 049,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_136,__import__.customer_136
-__import__.customer_address_delivery_139,EPC 050 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_139,__import__.customer_139
-__import__.customer_address_delivery_141,SC EPC 051,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_141,__import__.customer_141
-__import__.customer_address_delivery_144,EPC 052 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_144,__import__.customer_144
-__import__.customer_address_delivery_146,EPC 053,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_146,__import__.customer_146
-__import__.customer_address_delivery_150,EPC 054,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_150,__import__.customer_150
-__import__.customer_address_delivery_152,EPC 055,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_152,__import__.customer_152
-__import__.customer_address_delivery_155,EPC 056,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_155,__import__.customer_155
-__import__.customer_address_delivery_157,EPC 057,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_157,__import__.customer_157
-__import__.customer_address_delivery_159,DR HENE RAYMOND,"Route de la Florbecq, 377 B",7866,OLLIGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_159,__import__.customer_159
-__import__.customer_address_delivery_160,EPC 058,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_160,__import__.customer_160
-__import__.customer_address_delivery_165,EPC 060,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_165,__import__.customer_165
-__import__.customer_address_delivery_174,EPC 061,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_174,__import__.customer_174
-__import__.customer_address_delivery_177,EPC 062,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_177,__import__.customer_177
-__import__.customer_address_delivery_181,EPC 064,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_181,__import__.customer_181
-__import__.customer_address_delivery_182,HOC EDITH,"GRAND RUE,42",5020,GEMBLOUX,,,False,False,base.be,fr_BE,,delivery,delivery_182,__import__.customer_182
-__import__.customer_address_delivery_184,EPC 065,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_184,__import__.customer_184
-__import__.customer_address_delivery_186,NANNAN JEAN,"RUE DES COMBATTANTS,7",6880,BERTRIX,,,False,False,base.be,fr_BE,,delivery,delivery_186,__import__.customer_186
-__import__.customer_address_delivery_187,EPC100,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_187,__import__.customer_187
-__import__.customer_address_delivery_190,EPC 067,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_190,__import__.customer_190
-__import__.customer_address_delivery_200,EPC 068,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_200,__import__.customer_200
-__import__.customer_address_delivery_202,DOCTEUR STERNOTTE,LU PTE VOYE,6870,SAINT-HUBERT,,,False,False,base.be,fr_BE,,delivery,delivery_202,__import__.customer_202
-__import__.customer_address_delivery_203,EPC 069,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_203,__import__.customer_203
-__import__.customer_address_delivery_206,EPC 070,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_206,__import__.customer_206
-__import__.customer_address_delivery_207,EPC 071,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_207,__import__.customer_207
-__import__.customer_address_delivery_210,EPC 072,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_210,__import__.customer_210
-__import__.customer_address_delivery_222,DOCTEUR ANNE DEVRIESE,"RUE JEAN LORETTE,14 A",6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_222,__import__.customer_222
-__import__.customer_address_delivery_225,JOIE,"BVD DE LA SAUVENIERE,56",4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_225,__import__.customer_225
-__import__.customer_address_delivery_227,CLINIQUE VET DE LA BOVERIE,quai de la Boverie 49,4020,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_227,__import__.customer_227
-__import__.customer_address_delivery_230,JORET GUY *,"RUE DE L'ENSEIGNEMENT,59",6140,FONTAINE L'EVEQUE,,,False,False,base.be,fr_BE,,delivery,delivery_230,__import__.customer_230
-__import__.customer_address_delivery_232,KAKKERT ALAIN,"RUE A. DEFUISSEAUX,35",4340,AWANS,,,False,False,base.be,fr_BE,,delivery,delivery_232,__import__.customer_232
-__import__.customer_address_delivery_246,EPC 073,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_246,__import__.customer_246
-__import__.customer_address_delivery_248,EPC 074,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_248,__import__.customer_248
-__import__.customer_address_delivery_250,EPC 075,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_250,__import__.customer_250
-__import__.customer_address_delivery_252,EPC 076,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_252,__import__.customer_252
-__import__.customer_address_delivery_254,EPC 077,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_254,__import__.customer_254
-__import__.customer_address_delivery_256,EPC 078,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_256,__import__.customer_256
-__import__.customer_address_delivery_258,03C 079,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_258,__import__.customer_258
-__import__.customer_address_delivery_262,EPC 080,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_262,__import__.customer_262
-__import__.customer_address_delivery_265,EPC 081,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_265,__import__.customer_265
-__import__.customer_address_delivery_266,EPC 082,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_266,__import__.customer_266
-__import__.customer_address_delivery_267,LAMBERT KATIE,Rue Omer Thiriar 212,7100,LA LOUVIERE,,,False,False,base.be,fr_BE,,delivery,delivery_267,__import__.customer_267
-__import__.customer_address_delivery_268,EPC 083,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_268,__import__.customer_268
-__import__.customer_address_delivery_272,EPC 084,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_272,__import__.customer_272
-__import__.customer_address_delivery_276,EPC 085,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_276,__import__.customer_276
-__import__.customer_address_delivery_281,EPC 086,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_281,__import__.customer_281
-__import__.customer_address_delivery_284,EPC 087,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_284,__import__.customer_284
-__import__.customer_address_delivery_294,EPC 089/EX LALOUX SPRL,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_294,__import__.customer_294
-__import__.customer_address_delivery_298,EPC 091,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_298,__import__.customer_298
-__import__.customer_address_delivery_300,EPC 092,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_300,__import__.customer_300
-__import__.customer_address_delivery_303,EPC 093,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_303,__import__.customer_303
-__import__.customer_address_delivery_305,EPC 094,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_305,__import__.customer_305
-__import__.customer_address_delivery_307,EPC 095,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_307,__import__.customer_307
-__import__.customer_address_delivery_309,EPC 096,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_309,__import__.customer_309
-__import__.customer_address_delivery_345,DOCTEUR BONTEMPS PH.,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_345,__import__.customer_345
-__import__.customer_address_delivery_346,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_346,__import__.customer_346
-__import__.customer_address_delivery_348,DELBAEN FABIENNE,"AV P.PASTURE,247",6032,MONT SUR MARCHIENNE,,,False,False,base.be,fr_BE,,delivery,delivery_348,__import__.customer_348
-__import__.customer_address_delivery_358,AHN BENOIT,Rue Leopold 94,4820,DISON,,,False,False,base.be,fr_BE,,delivery,delivery_358,__import__.customer_358
-__import__.customer_address_delivery_378,DOCTEUR BONTEMPS PH,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_378,__import__.customer_378
-__import__.customer_address_delivery_386,LOUON GENEVIEVE  *,"THIER D'OUPEYE,138 OU 142",4683,VIVEGNIS,,,False,False,base.be,fr_BE,,delivery,delivery_386,__import__.customer_386
-__import__.customer_address_delivery_387,PPL+,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_387,__import__.customer_387
-__import__.customer_address_delivery_388,LOUVRIER VINCENT,"CHEE DE MONS,284",7800,ATH,,,False,False,base.be,fr_BE,,delivery,delivery_388,__import__.customer_388
+__import__.customer_address_delivery_2339,EPC 090 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_2339,__import__.customer_2339
+__import__.customer_address_delivery_3753,LUNSKENS-CRAHAY CLIN.VET.,"Chaussée Brunehaut, 387",4453,VILLERS SAINT SIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_3753,__import__.customer_3753
+__import__.customer_address_delivery_46,DEGOTTE JEAN-MARIE *,Rue Birven 6,4880,AUBEL (LA CLOUSE),,,False,False,base.be,fr_BE,,delivery,delivery_46,__import__.customer_46
+__import__.customer_address_delivery_1463,BERTRAND VINCENT *,"Rue de L'institut, 2",4670,BLEGNY,,,False,False,base.be,fr_BE,,delivery,delivery_1463,__import__.customer_1463
+__import__.customer_address_delivery_3850,DR BONGARTZ ALEXANDRE,"Rue Hoyoux, 114",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_3850,__import__.customer_3850
+__import__.customer_address_delivery_3072,BOULANGERIE ALBERT,"Rue du Pommard, 210",4970,FRANCORCHAMPS,,,False,False,base.be,fr_BE,,delivery,delivery_3072,__import__.customer_3072
+__import__.customer_address_delivery_3814,BRACKMAN & CORNELLE,"Rue du Ry d'Argent, 17",5080,RHISNES,,,False,False,base.be,fr_BE,,delivery,delivery_3814,__import__.customer_3814
+__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
+__import__.customer_address_delivery_4152,DR HERBER PASCALE,"Chauveheid, 91",4987,STOUMONT,,,False,False,base.be,fr_BE,,delivery,delivery_4152,__import__.customer_4152
