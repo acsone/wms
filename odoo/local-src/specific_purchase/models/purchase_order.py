@@ -53,6 +53,16 @@ class PurchaseOrderLine(models.Model):
                                        compute='_compute_supplier_product_ref',
                                        readonly=True)
 
+    @api.multi
+    def write(self, vals):
+        # The field price_unit is a computed field.
+        # If we write the price_unit the method will call the
+        # method _set_price_unit which call the method _compute_price_unit.
+        # This method will call the method write.
+        # At the end we have an infinite loop.
+        vals.pop('price_unit', None)
+        return super(PurchaseOrderLine, self).write(vals)
+
     @api.depends('price_unit_base', 'discount_global', 'discount_pricelist')
     def _compute_price_unit(self):
         for line in self:
