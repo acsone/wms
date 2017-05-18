@@ -513,7 +513,12 @@ class SaleOrderMapper(EntityMapper):
         where = None
         if not self.importer.full:
             where = "eccsui >= %s AND eccsui <= %s" % (SO_MIN, SO_MAX)
+        else:
+            where = "ecccss = 20 AND ecccaa = 17"
         return where
+
+    def get_order_by(self):
+        return "eccsui"
 
 
 class SaleOrderLineMapper(EntityMapper):
@@ -573,7 +578,12 @@ class SaleOrderLineMapper(EntityMapper):
         where = None
         if not self.importer.full:
             where = "dccsui >= %s AND dccsui <= %s" % (SO_MIN, SO_MAX)
+        else:
+            where = "dcccss = 20 AND dcccaa = 17"
         return where
+
+    def get_order_by(self):
+        return "eccsui, ecccli, eccuti"
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
