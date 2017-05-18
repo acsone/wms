@@ -72,6 +72,16 @@ class Sale(models.Model):
         current_values['product_qty_unavailable'] = qty_unavailable
         return current_values
 
+    @api.model
+    def get_accepted_fields_for_order_line(self):
+        """
+            To define accepted fields
+            to copy original lines into final lines.
+        """
+        return super(Sale, self).get_accepted_fields_for_order_line() + [
+            'edited_supplier_promotion', 'edited_alcyon_discount'
+        ]
+
     @api.multi
     def order_lines_layouted(self):
         self.ensure_one()
