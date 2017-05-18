@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# © 2016 Camptocamp SA, Okia SPRL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models, api
 import odoo.addons.decimal_precision as dp
 
@@ -36,9 +39,11 @@ class PurchaseOrderLine(models.Model):
     price_unit_base = fields.Float('Unit Price',
                                    required=True,
                                    digits=dp.get_precision('Product Price'))
-    price_unit = fields.Float(string='Unit Price', required=False,
+    price_unit = fields.Float(string='Unit Price (discounted)',
+                              required=False,
                               digits=dp.get_precision('Product Price'),
                               compute='_compute_price_unit',
+                              inverse='_set_price_unit',
                               store=True)
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
@@ -51,9 +56,23 @@ class PurchaseOrderLine(models.Model):
     @api.depends('price_unit_base', 'discount_global', 'discount_pricelist')
     def _compute_price_unit(self):
         for line in self:
-            line.price_unit = line.price_unit_base * \
-                              (1 - (line.discount_global / 100)) * \
-                              (1 - (line.discount_pricelist / 100))
+            price_unit = line.price_unit_base * \
+                         (1 - (line.discount_global / 100)) * \
+                         (1 - (line.discount_pricelist / 100))
+            line.price_unit = price_unit
+
+    def _set_price_unit(self):
+        for line in self:
+            line.price_unit_base = line.price_unit
+        self._compute_price_unit()
+
+    @api.onchange('product_qty', 'product_uom')
+    def _onchange_quantity(self):
+        result = super(PurchaseOrderLine, self)._onchange_quantity()
+        self.price_unit_base = self.price_unit
+        self._compute_price_unit()
+
+        return result
 
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -68,14 +87,12 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def _compute_supplier_product_ref(self):
         for line in self:
-            if not line.product_id or not line.product_id.seller_ids:
-                continue
+            seller = line.product_id._select_seller(
+                partner_id=line.partner_id,
+                quantity=line.product_qty,
+                date=line.order_id.date_order
+                     and line.order_id.date_order[:10],
+                uom_id=line.product_uom)
 
-            sellers = line.product_id.seller_ids
-            partner = line.order_id.partner_id
-
-            seller = sellers.filtered(lambda x: x.name.id == partner.id)
-            if len(seller) != 1:
-                continue
-
-            line.supplier_product_ref = seller.product_code
+            if seller:
+                line.supplier_product_ref = seller.product_code
