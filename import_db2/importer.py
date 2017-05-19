@@ -5,6 +5,7 @@ import csv
 import os
 import pyodbc
 import sys
+from shutil import copyfile
 from collections import defaultdict, OrderedDict
 
 from convertion import MAPPER_CLASSES
@@ -86,6 +87,9 @@ class Importer:
             headers = rows[0].keys()
 
             file_path = os.path.join(self.csv_path, '%s.csv' % name)
+
+            # backup the file before overwriting it to make diff csv files
+            copyfile(file_path, file_path + '.former')
             with open(file_path, 'wb') as csvfile:
                 writer = csv.DictWriter(csvfile, headers, lineterminator='\n')
                 writer.writeheader()
