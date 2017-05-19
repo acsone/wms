@@ -21,6 +21,8 @@ Unreleased
 * ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
 * ALCN-551: Add the module account_credit_control
 
+* ALCN-837: Allow to define a delivery round on delivery carrier
+
 **Bugfixes**
 
 * Migration to v10

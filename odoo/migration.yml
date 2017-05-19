@@ -173,6 +173,7 @@ migration:
           - account_credit_control
           # Specific modules
           - sale_product_additional
+          - specific_delivery
           - specific_helpdesk
           - specific_product
           - specific_sale
