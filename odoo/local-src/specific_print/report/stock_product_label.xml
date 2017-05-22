@@ -22,7 +22,7 @@
 {RC002;<t t-esc="pack.product_id.name"/>|}\r
 <t t-if="pack.picking_id.partner_id.is_price_on_labels">
 {PC007;0350,0070,05,05,J,00,B|}\r
-{RC007;PVI : <t t-esc="pack.product_id.list_price"/>|}\r
+{RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r
 </t>
 {XB01;0030,0150,9,1,02,0,0080|}\r
 {RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="'%12s' % lot_id.name[:12]"/><t t-esc="lot_id.life_date and time.strftime('%d%m%y', time.strptime(lot_id.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>|}\r

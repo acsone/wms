@@ -13,6 +13,7 @@
         'base_report_to_printer',  # OCA/report-print-send.git
         'stock_receive_lot',
         'specific_report',
+        'specific_product',
         ],
     'data': [
         'views/stock.xml',

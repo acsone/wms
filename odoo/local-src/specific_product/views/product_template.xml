@@ -21,6 +21,10 @@
                 <attribute name="string">Sale Price 1</attribute>
             </field>
 
+            <xpath expr="//field[@name='list_price']" position="after">
+                <field name="indicated_price"/>
+            </xpath>
+
         </field>
     </record>
 
