@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-823: Add the module "specific_purchase"
 
 **Bugfixes**
 
@@ -24,7 +25,6 @@ Unreleased
 
 * ALCN-641: Custom sale order report
 * ALCN-824: Add a custom sale order line exception
-* ALCN-823: Add the module "specific_purchase"
 
 **Bugfixes**
 
