@@ -323,6 +323,19 @@ def configure_missing_chart_of_account(ctx):
 
 
 @anthem.log
+def create_account_types(ctx):
+    """ Creating Account Types """
+
+    account_type_xml_id = '__setup__.account_type_annexes_hors_bilan'
+    create_or_update(ctx, 'account.account.type', account_type_xml_id, {
+        'name': 'ANNEXES/HORS BILAN',
+        'type': 'other',
+        'analytic_policy': 'optional',
+        'include_initial_balance': False,
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -340,3 +353,4 @@ def main(ctx):
     settings(ctx)
     default_values(ctx)
     setup_sequences(ctx)
+    create_account_types(ctx)
