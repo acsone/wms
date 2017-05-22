@@ -29,7 +29,7 @@ class StockProductionLot(models.Model):
     @api.model
     def create(self, vals):
         new_vals = vals.copy()
-        if 'life_date' not in vals.keys():
+        if not vals.get('life_date'):
             context = self.env.context or {}
             if context.get('default_life_date_allowed'):
                 new_vals['life_date'] = fields.datetime.now()

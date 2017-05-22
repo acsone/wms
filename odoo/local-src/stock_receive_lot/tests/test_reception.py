@@ -73,8 +73,10 @@ class TestReception(TransactionCase):
             .with_context(default_life_date_allowed=True)\
             .new({'picking_id': picking.id})
 
-        # select operation
         op1 = picking.pack_operation_product_ids[0]
+        op2 = picking.pack_operation_product_ids[1]
+
+        # select operation
         wiz.operation_id = op1
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
@@ -121,7 +123,6 @@ class TestReception(TransactionCase):
         self.assertEqual(wiz.qty, False)
 
         # select operation
-        op2 = picking.pack_operation_product_ids[1]
         wiz.operation_id = op2
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
