@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-25 09:43+0000\n"
-"PO-Revision-Date: 2017-04-25 09:43+0000\n"
+"POT-Creation-Date: 2017-05-22 09:41+0000\n"
+"PO-Revision-Date: 2017-05-22 09:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,29 +33,25 @@ msgstr "Assignement"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
-msgid "Cancel"
-msgstr "Annuler"
-
-#. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
-msgid "Cancelled"
+msgid "Canceled"
 msgstr "Annulé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:153
+#: code:addons/specific_zetes/tools/domain_interface.py:152
 #, python-format
 msgid "Cannot format the value {} with type {}"
 msgstr "Impossible de formater la valeur {} du type {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:99
+#: code:addons/specific_zetes/tools/domain_assignment.py:102
 #, python-format
 msgid "Cannot found a picking"
 msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:63
-#: code:addons/specific_zetes/tools/domain_print.py:93
+#: code:addons/specific_zetes/tools/domain_print.py:70
+#: code:addons/specific_zetes/tools/domain_print.py:98
 #, python-format
 msgid "Cannot found a printer"
 msgstr "Aucune imprimante trouvée"
@@ -135,8 +131,8 @@ msgid "Done"
 msgstr "Fait"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:75
-#: code:addons/specific_zetes/tools/domain_print.py:108
+#: code:addons/specific_zetes/tools/domain_print.py:82
+#: code:addons/specific_zetes/tools/domain_print.py:113
 #, python-format
 msgid "Error during printing"
 msgstr "Erreur durant l'impression"
@@ -182,7 +178,7 @@ msgid "Location"
 msgstr "Localisation"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:164
+#: code:addons/specific_zetes/tools/domain_itempick.py:184
 #, python-format
 msgid "Location not found for the product {}"
 msgstr "Localisation non trouvé pour le produit {}"
@@ -205,8 +201,8 @@ msgid "No picking found"
 msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:75
-#: code:addons/specific_zetes/tools/domain_print.py:41
+#: code:addons/specific_zetes/tools/domain_itempick.py:77
+#: code:addons/specific_zetes/tools/domain_print.py:43
 #, python-format
 msgid "No picking found with the ID {}"
 msgstr "Aucun UOP trouvé avec l'ID {}"
@@ -276,7 +272,7 @@ msgid "Skipped"
 msgstr "Ignoré"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:181
+#: code:addons/specific_zetes/tools/domain_interface.py:180
 #, python-format
 msgid "Some attributes are not valid: {}"
 msgstr "Certains attributs sont invalides: {}"
@@ -292,7 +288,7 @@ msgid "Start"
 msgstr "Démarré"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:186
+#: code:addons/specific_zetes/tools/domain_interface.py:185
 #, python-format
 msgid "The number of label doen't correspond to the example size"
 msgstr "Le nombre de label ne correspond pas à l'exemple"
@@ -316,20 +312,20 @@ msgid "The user should be in the group Inventory"
 msgstr "Le user doit être dans le groupe d'inventaire"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:90
+#: code:addons/specific_zetes/models/stock_picking.py:107
 #: sql_constraint:stock.picking.type:0
 #, python-format
 msgid "The zone picking type code should be unique."
 msgstr "Le type de zone doit être unique."
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:196
+#: code:addons/specific_zetes/tools/domain_interface.py:195
 #, python-format
 msgid "There are some missing mandatory values: {}"
 msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:107
+#: code:addons/specific_zetes/tools/domain_itempick.py:124
 #, python-format
 msgid "There is no lines for the picking {}"
 msgstr "Il n'y a pas d'opérations pour le l'enlèvement {}"
