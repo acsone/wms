@@ -70,12 +70,14 @@ def default_values(ctx):
         'name': 'out_inv_comm_type',
         'model': 'res.partner',
         'value_unpickle': 'bba',
+        'key2': None,
     })
     create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
         'value_unpickle': 'random',
+        'key2': None,
     })
 
     account_612031 = ctx.env.ref('__setup__.account_612031')

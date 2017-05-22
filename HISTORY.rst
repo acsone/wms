@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-831: Version 2 of the invoice report
 
 **Bugfixes**
 
