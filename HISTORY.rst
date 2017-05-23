@@ -10,6 +10,7 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-832: Import new account type
+* ALCN-833: Update chart of accounts (add account 0 and 8)
 
 **Bugfixes**
 

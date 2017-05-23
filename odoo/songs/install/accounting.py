@@ -341,6 +341,7 @@ def main(ctx):
     configure_missing_chart_of_account(ctx)
     import_banks(ctx)
     add_xmlid_account(ctx)
+    create_account_types(ctx)
     adapt_chart_of_account(ctx)
     import_account_journal(ctx)
     import_account_analytic_tag(ctx)
@@ -353,4 +354,3 @@ def main(ctx):
     settings(ctx)
     default_values(ctx)
     setup_sequences(ctx)
-    create_account_types(ctx)
