@@ -89,6 +89,11 @@ class PurchaseOrderLine(models.Model):
     def onchange_product_id(self):
         result = super(PurchaseOrderLine, self).onchange_product_id()
 
+        date_order = self.order_id.date_order
+
+        date_planned = self.get_next_scheduled_date(date_order)
+        self.date_planned = date_planned
+
         if self.discount_global:
             return result
         self.discount_global = self.order_id.partner_id.supplier_discount
@@ -136,27 +141,16 @@ class PurchaseOrderLine(models.Model):
     def _get_date_planned(self, seller, po=False):
         """
         Inherit the method "_get_date_planned" in the module purchase
-        The original method has the decorator "api.model" but 
+        The original method has the decorator "api.model" but
         it should be the decorator api.multi or api.one.
         The parameter po is priority on self (see below)
-        purchase.py: 
+        purchase.py:
         date_order = po.date_order if po else self.order_id.date_order
-        :param seller: 
-        :param po: 
-        :return: 
+        :param seller:
+        :param po:
+        :return:
         """
         date_order_str = po.date_order if po else self.order_id.date_order
         date_planned_str = self.get_next_scheduled_date(date_order_str)
 
         return fields.Datetime.from_string(date_planned_str)
-
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        result = super(PurchaseOrderLine, self).onchange_product_id()
-
-        date_order = self.order_id.date_order
-
-        date_planned = self.get_next_scheduled_date(date_order)
-        self.date_planned = date_planned
-
-        return result

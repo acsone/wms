@@ -18,7 +18,7 @@ class TestPurchaseOrder(common.TransactionCase):
         - 6 january 2017: Friday
         - 7 january 2017: Saturday
         - 8 january 2017: Sunday
-        :return: 
+        :return:
         """
         # Set the lead time to 3 days
         self.env['ir.config_parameter'].set_param('purchase.lead_time', 3)
