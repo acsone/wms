@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA, Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models, api
+from datetime import date, timedelta
+
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 import odoo.addons.decimal_precision as dp
 
 
@@ -89,5 +92,71 @@ class PurchaseOrderLine(models.Model):
         if self.discount_global:
             return result
         self.discount_global = self.order_id.partner_id.supplier_discount
+
+        return result
+
+    @api.model
+    def get_next_scheduled_date(self, date_order_str=None):
+        """
+        Return the scheduled date
+        :return: datetime - the scheduled date
+        """
+        lead_time = \
+            int(self.env['ir.config_parameter']
+                .get_param('purchase.lead_time', 0))
+        if not lead_time:
+            raise UserError(_('You need to define the lead time '
+                              'on purchase configuration'))
+
+        if date_order_str:
+            date_planned = fields.Datetime.from_string(date_order_str)
+        else:
+            date_planned = date.today()
+
+        holiday_obj = self.env['bank.holiday']
+        index = 0
+        while index < lead_time:
+            date_planned += timedelta(days=1)
+
+            # Check if there is a bank holiday for the current date planned
+            date_order_str = fields.Date.to_string(date_planned)
+            holiday = holiday_obj.search([('date', '=', date_order_str)])
+            if holiday:
+                continue
+
+            # Check if the date planned is Saturday or Sunday
+            if date_planned.isoweekday() in [6, 7]:
+                continue
+
+            index += 1
+
+        return fields.Datetime.to_string(date_planned)
+
+    @api.model
+    def _get_date_planned(self, seller, po=False):
+        """
+        Inherit the method "_get_date_planned" in the module purchase
+        The original method has the decorator "api.model" but 
+        it should be the decorator api.multi or api.one.
+        The parameter po is priority on self (see below)
+        purchase.py: 
+        date_order = po.date_order if po else self.order_id.date_order
+        :param seller: 
+        :param po: 
+        :return: 
+        """
+        date_order_str = po.date_order if po else self.order_id.date_order
+        date_planned_str = self.get_next_scheduled_date(date_order_str)
+
+        return fields.Datetime.from_string(date_planned_str)
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        result = super(PurchaseOrderLine, self).onchange_product_id()
+
+        date_order = self.order_id.date_order
+
+        date_planned = self.get_next_scheduled_date(date_order)
+        self.date_planned = date_planned
 
         return result

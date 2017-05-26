@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_product_state,access_product_state,model_product_state,base.group_user,1,0,0,0
 access_product_state_purchase_manager,access_product_state_purchase_manager,model_product_state,purchase.group_purchase_manager,1,1,1,1
+access_bank_holiday,access_bank_holiday,model_bank_holiday,base.group_user,1,0,0,0
+access_bank_holiday_purchase_manager,access_bank_holiday_purchase_manager,model_bank_holiday,purchase.group_purchase_manager,1,1,1,1

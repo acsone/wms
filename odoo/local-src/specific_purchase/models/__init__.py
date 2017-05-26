@@ -5,3 +5,5 @@ from . import res_partner
 from . import product_template
 from . import purchase_order
 from . import stock_picking
+from . import bank_holiday
+from . import purchase_config_settings

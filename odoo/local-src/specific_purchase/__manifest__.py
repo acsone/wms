@@ -11,6 +11,7 @@
     'depends': [
         'purchase',
         'stock',
+        'calendar',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -18,9 +19,12 @@
         "views/res_partner.xml",
         "views/product_template.xml",
         "views/purchase_order.xml",
+        "views/bank_holiday.xml",
+        "views/purchase_config_settings.xml",
 
         # Data
         "data/product_state.xml",
+        "data/ir_config_parameter.xml",
 
         # Security
         "security/ir.model.access.csv",
