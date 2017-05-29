@@ -23,7 +23,7 @@ msgstr ""
 #. module: specific_shipping_costs
 #: code:addons/specific_shipping_costs/models/account_invoice.py:82
 #, python-format
-msgid "An invoice can't be opened or paid if shipping costs have not computed"
+msgid "An invoice can't be opened or paid if shipping costs are not computed"
 msgstr ""
 
 #. module: specific_shipping_costs

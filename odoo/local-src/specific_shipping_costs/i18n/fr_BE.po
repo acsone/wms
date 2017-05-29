@@ -23,7 +23,7 @@ msgstr "Produits additionnels"
 #. module: specific_shipping_costs
 #: code:addons/specific_shipping_costs/models/account_invoice.py:82
 #, python-format
-msgid "An invoice can't be opened or paid if shipping costs have not computed"
+msgid "An invoice can't be opened or paid if shipping costs are not computed"
 msgstr "Une facture ne peut être validée ou payée si les frais de livraison n'ont pas été calculés"
 
 #. module: specific_shipping_costs

@@ -104,7 +104,7 @@ class AccountInvoice(models.Model):
                 if shipping_costs_computed_required:
                     raise ValidationError(
                         _("An invoice can't be opened or paid "
-                          "if shipping costs have not computed")
+                          "if shipping costs are not computed")
                     )
         return super(AccountInvoice, self).write(vals)
 
