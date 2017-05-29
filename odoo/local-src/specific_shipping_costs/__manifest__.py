@@ -10,8 +10,10 @@
     'category': 'Delivery',
     'depends': [
         'delivery',
+        'delivery_rounds',
         'sale',
         'sale_stock',
+        'stock_picking_invoice_link',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

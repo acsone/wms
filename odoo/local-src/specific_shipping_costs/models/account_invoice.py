@@ -56,36 +56,54 @@ class AccountInvoice(models.Model):
                         ).ids
                     )
                 )
-                invoice_lines_amount = sum([
-                    line.price_subtotal
-                    for line in invoice_lines
-                ])
 
-                # invoice_lines_amount < delivery_carrier.amount
-                if float_compare(
-                        invoice_lines_amount,
-                        delivery_carrier.amount,
-                        precision_digits=precision
-                ) == -1:
-                    account = self.env[
-                        'account.invoice.line'
-                    ].get_invoice_line_account(
-                        type=invoice.type,
-                        product=delivery_carrier.product_id,
-                        fpos=invoice.fiscal_position_id,
-                        company=invoice.company_id,
+                round_instances = invoice_lines.mapped(
+                    'move_line_ids.picking_id.delivery_round_id'
+                )
+
+                for round_instance in round_instances:
+
+                    round_invoice_lines = (
+                        invoice_lines.filtered(
+                            lambda l: round_instance in l.mapped(
+                                'move_line_ids.picking_id.delivery_round_id'
+                            )
+                        )
                     )
-                    lines.append(
-                        (0, 0, {
-                            'product_id': delivery_carrier.product_id.id,
-                            'price_unit': (
-                                delivery_carrier.product_id.list_price
-                            ),
-                            'account_id': account.id,
-                            'name': delivery_carrier.product_id.name,
-                            'is_shipping_line': True,
-                        })
-                    )
+
+                    invoice_lines_amount = sum([
+                        line.price_subtotal
+                        for line in round_invoice_lines
+                    ])
+
+                    # invoice_lines_amount < delivery_carrier.amount
+                    if float_compare(
+                            invoice_lines_amount,
+                            delivery_carrier.amount,
+                            precision_digits=precision
+                    ) == -1:
+                        account = self.env[
+                            'account.invoice.line'
+                        ].get_invoice_line_account(
+                            type=invoice.type,
+                            product=delivery_carrier.product_id,
+                            fpos=invoice.fiscal_position_id,
+                            company=invoice.company_id,
+                        )
+                        lines.append(
+                            (0, 0, {
+                                'product_id': delivery_carrier.product_id.id,
+                                'price_unit': (
+                                    delivery_carrier.product_id.list_price
+                                ),
+                                'account_id': account.id,
+                                'name': '%s - %s' % (
+                                    delivery_carrier.product_id.name,
+                                    round_instance.name
+                                ),
+                                'is_shipping_line': True,
+                            })
+                        )
             values = {
                 'shipping_costs_computed': True,
             }

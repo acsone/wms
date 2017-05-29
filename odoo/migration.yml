@@ -158,6 +158,8 @@ migration:
     - version: 10.3.0
       addons:
         upgrade:
+          # OCA/stock-logistics-workflow
+          - stock_picking_invoice_link
           # Specific modules
           - sale_product_additional
           - specific_sale

@@ -49,6 +49,10 @@ class TestShippingCosts(TransactionCase):
         })
         self.deliver_carrier_on_invoice._compute_fixed_price()
 
+        self.delivery_round = self.env['round.instance'].create({
+            'name': 'Unittest delivery round',
+        })
+
     def test_01_deliver_carrier_fixed(self):
         sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
@@ -69,6 +73,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -96,6 +103,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -123,6 +133,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -159,6 +172,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -193,6 +209,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -220,6 +239,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
@@ -247,6 +269,9 @@ class TestShippingCosts(TransactionCase):
         sale.action_confirm()
         self.assertEqual(len(sale.picking_ids), 1)
         picking = sale.picking_ids
+        picking.write({
+            'delivery_round_id': self.delivery_round.id,
+        })
         picking.action_assign()
         picking.action_done()
         self.assertEqual(picking.state, 'done')
