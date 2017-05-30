@@ -49,21 +49,8 @@
     camptocamp: git@github.com:camptocamp/sale-workflow.git
   merges:
     - oca 10.0
-    # mig sale_exception
-    - oca refs/pull/409/head
-  target: *default_target
-./external-src/server-tools:
-  remotes:
-    oca: git@github.com:OCA/server-tools.git
-    camptocamp: git@github.com:camptocamp/server-tools.git
-  merges:
-    - oca 10.0
-    # mig server_environment
-    - oca refs/pull/595/head
-    # mig mail_environment
-    - oca refs/pull/662/head
-    # mig base_exception (used for sale_exception)
-    - oca refs/pull/775/head
+    # fix sale_exception constaint raising Singleton error
+    - oca refs/pull/486/head
   target: *default_target
 ./external-src/account-financial-tools:
   remotes:
