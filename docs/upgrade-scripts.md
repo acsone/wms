@@ -1,3 +1,7 @@
+<!--
+This file has been generated with 'invoke project.sync'.
+Do not modify. Any manual change will be lost.
+-->
 # Upgrade scripts
 
 ## Stack
@@ -89,7 +93,7 @@ In the `migration.yml` file, it means we have to add a pre/post operation in
 the current version:
 
 ```yaml
-    - version: 9.0.0
+    - version: 10.0.0
       operations:
         post:
           - anthem songs.install.post::main
@@ -112,14 +116,14 @@ You can force it to execute an upgrade again with the `MARABUNTA_FORCE_VERSION`
 environment variable:
 
 ```
-$ docker-compose run --rm -e MARABUNTA_FORCE_VERSION=9.0.0 odoo
+$ docker-compose run --rm -e MARABUNTA_FORCE_VERSION=10.0.0 odoo
 ```
 
 With the command above, odoo will be run at the end of the migration.
 You could also run only `migrate` which will exit the container once done.
 
 ```
-$ docker-compose run --rm -e MARABUNTA_FORCE_VERSION=9.0.0 odoo migrate
+$ docker-compose run --rm -e MARABUNTA_FORCE_VERSION=10.0.0 odoo migrate
 ```
 
 ### Execute the upgrade for a given mode
@@ -128,7 +132,7 @@ Modes allow to run additional commands.
 
 ```yaml
   versions:
-    - version: 9.0.0
+    - version: 10.0.0
       operations:
         pre:
           - anthem songs.install.pre::main
@@ -194,3 +198,52 @@ When you don't want the migration to run at all, you can disable it with:
 ```
 $ docker-compose run --rm -e MIGRATE=False odoo
 ```
+
+### Upgrade all modules
+
+If you upgrade `odoo/src` and any other `odoo/external-src/*` repos,
+you might want to update all the installed modules.
+You should just declare `base` in the addons section, like this:
+
+```yaml
+  versions:
+    - version: 10.0.1
+      addons:
+        upgrade:
+          - base
+```
+
+### Load heavy files
+
+If you have to import huge files (eg: stock.location)
+you should delegate import to `importer.sh`.
+
+```python
+@anthem.log
+def setup_locations(ctx):
+    deferred_import(
+        ctx,
+        'stock.location',
+        'data/install/stock.location.csv',
+        defer_parent_computation=True)
+[...]
+@anthem.log
+def location_compute_parents(ctx):
+    deferred_compute_parents(ctx, 'stock.location')
+```
+
+```yaml
+modes:
+  full:
+    operations:
+      post:
+        - anthem songs.install.data_full::main
+        #### import heavy stuff
+        - importer.sh songs.install.inventory::setup_locations /opt/odoo/data/install/stock.location.csv
+        - anthem songs.install.inventory::location_compute_parents
+```
+
+#### WARNING
+
+If you want to import records w/ many parent/children relations (like product categories) it might fail.
+The import is done in parallel so is not granted that you'll have parents imported before children. ATM ;)
