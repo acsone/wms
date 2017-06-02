@@ -1,3 +1,3 @@
 # Local Documentation
 
-Empty. You can add an index for the documentation specific to this project.
+* [Full Composition (Odoo, Akeneo, WSO2)](./full-composition.md)
