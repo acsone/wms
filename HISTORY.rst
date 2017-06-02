@@ -14,6 +14,10 @@ Unreleased
 
 **Build**
 
+* Update to docker image 10.0-2.2.0
+* Update project from odoo-template
+* Update cloud platform addons to use Redis Sentinel in session_redis
+
 **Documentation**
 
 
