@@ -39,7 +39,12 @@ class StockInventory(models.Model):
         if date_today.isoweekday() in [6, 7]:
             return
 
-        # TODO check bank holidays with the issue ALCN-838
+        # If the crrent day is a bank holiday we skip the inventory
+        bank_holiday = self.env['bank.holiday'].search([
+            ('date', '=', fields.Date.today())
+        ])
+        if bank_holiday:
+            return
 
         inventory = self.create({
             'name': _('Daily inventory: %s') % fields.Date.today(),
