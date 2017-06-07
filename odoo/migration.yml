@@ -157,3 +157,7 @@ migration:
           - pricelist_discount
           - sale_product_additional
           - specific_sale
+    - version: 10.3.0
+      operations:
+        post:
+          - anthem songs.install.purchases::main

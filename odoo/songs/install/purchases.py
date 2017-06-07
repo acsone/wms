@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+from pkg_resources import resource_stream
 
 import anthem
+from anthem.lyrics.loaders import load_csv_stream
+
+from ..common import req
 
 
 @anthem.log
@@ -15,6 +19,14 @@ def settings(ctx):
 
 
 @anthem.log
+def import_bank_holidays(ctx):
+    """ Importing account analytic account """
+    content = resource_stream(req, 'data/install/bank.holiday.csv')
+    load_csv_stream(ctx, 'bank.holiday', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring purchases """
     settings(ctx)
+    import_bank_holidays(ctx)
