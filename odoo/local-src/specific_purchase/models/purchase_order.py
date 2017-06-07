@@ -25,16 +25,6 @@ class PurchaseOrder(models.Model):
 
             po.total_weight = total_weight
 
-    @api.model
-    def create(self, vals):
-        """
-        All purchase order are automatically confirmed
-        """
-        po = super(PurchaseOrder, self).create(vals)
-        po.button_confirm()
-
-        return po
-
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
