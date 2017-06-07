@@ -7,15 +7,24 @@ from odoo import fields, models, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    length = fields.Float('Length', help='Length')
-    width = fields.Float('Width', help='Width')
-    depth = fields.Float('Depth', help='Depth')
+    volume = fields.Float(help='Volume in liter', digits=(12,3))
+
+    length = fields.Float('Length', help='Length in cm')
+    width = fields.Float('Width', help='Width in cm')
+    depth = fields.Float('Depth', help='Depth in cm')
 
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):
+        """
+        Alcyon use centimeter for the length but use the liter for the volume.
+        As a reminder: 1 cm³ = 0.001 liter and 1000 cm³ = 1 liter
+        :return:
+        """
         for product in self:
-            volume = product.length * product.width * product.depth
-            product.volume = volume
+            volume_in_cm3 = product.length * product.width * product.depth
+            volume_in_liter = volume_in_cm3 / 1000
+            product.volume = volume_in_liter
+
 
     @api.model
     def get_default_state_id(self):
