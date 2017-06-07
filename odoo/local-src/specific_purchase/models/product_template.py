@@ -7,7 +7,7 @@ from odoo import fields, models, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    volume = fields.Float(help='Volume in liter', digits=(12,3))
+    volume = fields.Float(help='Volume in liter', digits=(12, 3))
 
     length = fields.Float('Length', help='Length in cm')
     width = fields.Float('Width', help='Width in cm')
@@ -24,7 +24,6 @@ class ProductTemplate(models.Model):
             volume_in_cm3 = product.length * product.width * product.depth
             volume_in_liter = volume_in_cm3 / 1000
             product.volume = volume_in_liter
-
 
     @api.model
     def get_default_state_id(self):
