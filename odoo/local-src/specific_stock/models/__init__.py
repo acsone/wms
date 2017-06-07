@@ -3,3 +3,5 @@ from . import product_template
 from . import stock_picking
 from . import stock_production_lot
 from . import stock_location
+from . import stock_config_settings
+from . import stock_inventory

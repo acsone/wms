@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<openerp>
+<odoo noupdate="1">
 
-    <data noupdate="1">
-        <record id="lot_checksum_size" model="ir.config_parameter">
-            <field name="key">lot_checksum_size</field>
-            <field name="value">3</field>
-        </record>
+    <record id="lot_checksum_size" model="ir.config_parameter">
+        <field name="key">lot_checksum_size</field>
+        <field name="value">3</field>
+    </record>
 
-        <record id="same_lot_checksum_range" model="ir.config_parameter">
-            <field name="key">same_lot_checksum_range</field>
-            <field name="value">2</field>
-        </record>
-    </data>
-</openerp>
+    <record id="same_lot_checksum_range" model="ir.config_parameter">
+        <field name="key">same_lot_checksum_range</field>
+        <field name="value">2</field>
+    </record>
+
+    <record id="default_nbr_open_days" model="ir.config_parameter">
+        <field name="key">stock.nbr_open_days</field>
+        <field name="value">220</field>
+    </record>
+</odoo>
