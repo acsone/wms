@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Camptocamp SA, Okia SPRL
+# © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 
