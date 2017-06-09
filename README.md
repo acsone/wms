@@ -2,7 +2,7 @@
 
 # Alcyon Odoo
 
-**The internal id for this project is: 1793**
+**Our internal id for this project is: 1793.**
 
 This project uses Docker.
 Travis builds a new image for each change on the branches and for each new tag.
@@ -13,31 +13,20 @@ The ones built from tags are built as `camptocamp/alcyon_odoo:<tag-name>`.
 
 Images are pushed on the registry only when Travis has a green build.
 
-The database is automatically created and the migration scripts
-automatically run.
+When a container starts, the database is automatically created and the
+migration scripts automatically run.
 
-You'll find a [Docker guide for the development](./docs/docker-dev.md) and on for the [testers](./docs/docker-test.md).
+## Project maintenance
 
-## Guides
+Please keep this project up-to-date by:
 
-* [Docker pre-requisite](./docs/prerequisites.md)
-* [Docker developer guide](./docs/docker-dev.md)
-* [Docker tester guide](./docs/docker-test.md)
-* [Deployment](./docs/deployment.md)
-* [Structure](./docs/structure.md)
-* [Releases and versioning](./docs/releases.md)
-* [Pull Requests](./docs/pull-requests.md)
-* [Upgrade scripts](./docs/upgrade-scripts.md)
-* [Automated rancher build](./docs/rancher.md)
-* [Full Composition (Odoo, Akeneo, WSO2)](./docs/full-composition.md)
+* ensure the `FROM` image in `odoo/Dockerfile` is the latest release
+* run regularly `invoke project.sync` to retrieve the last template's changes
 
-## How-to
+## Links
 
-* [How to add a new addons repository](./docs/how-to-add-repo.md)
-* [How to add a Python or Debian dependency](./docs/how-to-add-dependency.md)
-* [How to integrate an open pull request of an external repository](./docs/how-to-integrate-pull-request.md)
-* [How to connect to psql in Docker](./docs/how-to-connect-to-docker-psql.md)
-* [How to change Odoo configuration values](./docs/how-to-set-odoo-configuration-values.md)
-* [How to backup and restore volumes](./docs/how-to-backup-and-restore-volumes.md)
-
-The changelog is in [HISTORY.rst](HISTORY.rst).
+* [General documentation](./docs/README.md)
+* [Local documentation](./docs/README.local.md)
+* [Changelog](HISTORY.rst).
+* [Minions](https://alcyon_odoo.odoo-test.camptocamp.ch)
+* [Base image documentation](https://github.com/camptocamp/docker-odoo-project)
