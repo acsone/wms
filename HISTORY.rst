@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+
 **Bugfixes**
 
 **Build**
