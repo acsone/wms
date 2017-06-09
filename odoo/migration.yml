@@ -155,3 +155,7 @@ migration:
           - pricelist_discount
           - sale_product_additional
           - specific_sale
+    - version: 10.3.0
+      addons:
+        upgrade:
+          - specific_product

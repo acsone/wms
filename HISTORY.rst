@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-847: Add CNK field to product template
+
 **Bugfixes**
 
 **Build**
