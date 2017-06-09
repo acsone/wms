@@ -216,6 +216,15 @@ CLIENT_FISCAL_POSITION = {
   2: '',
 }
 
+CLIENT_DELIVERY_METHODS = {
+    1: '__setup__.deliver_carrier_alcyon',
+    2: '__setup__.deliver_carrier_transporter',
+    3: '__setup__.deliver_carrier_post_pack',
+    4: '__setup__.deliver_carrier_delegated',
+    9: '__setup__.deliver_carrier_by_client',
+    89: '__setup__.deliver_carrier_invoice',
+}
+
 PRODUCT_TRACKING = {
     0: 'none',
     1: 'lot',
