@@ -168,6 +168,8 @@ migration:
           - helpdesk
           # OCA/stock-logistics-workflow
           - stock_picking_invoice_link
+          # OCA/account-financial-tools
+          - account_credit_control
           # Specific modules
           - sale_product_additional
           - specific_helpdesk

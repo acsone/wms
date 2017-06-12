@@ -19,6 +19,7 @@ Unreleased
 * ALCN-847: Add CNK field to product template
 
 * ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+* ALCN-551: Add the module account_credit_control
 
 **Bugfixes**
 
