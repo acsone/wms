@@ -66,6 +66,7 @@
                 <field name="product_qty_unavailable" string="Quantity unavailable at order line save"/>
                 <field name="current_product_qty_unavailable" string="Quantity unavailable at now"/>
                 <field name="qty_delivered"/>
+                <field name="product_qty_remains_to_deliver"/>
             </tree>
         </field>
     </record>
@@ -76,5 +77,10 @@
         <field name="view_id" ref="view_order_lines_unavailable_tree"/>
         <field name="domain">[('state', 'in', ['sale'])]</field>
     </record>
+
+    <menuitem id="menu_sale_lines_unavailable_list"
+              action="action_sale_lines_unavailable_list"
+              parent="sales_team.menu_sale_report"
+              sequence="200"/>
 
 </odoo>

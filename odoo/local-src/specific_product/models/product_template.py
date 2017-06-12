@@ -22,6 +22,8 @@ class ProductTemplate(models.Model):
         string='Sale Price 2',
     )
 
+    cnk_code = fields.Char(string='CNK')
+
     def _compute_sale_price_2(self):
         for product in self:
             pricelist = self.env.ref('__setup__.product_pricelist_pb2')

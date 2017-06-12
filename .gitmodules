@@ -3,13 +3,13 @@
 	url = git@github.com:camptocamp/odoo.git
 [submodule "odoo/external-src/server-tools"]
 	path = odoo/external-src/server-tools
-	url = git@github.com:camptocamp/server-tools.git
+	url = git@github.com:oca/server-tools.git
 [submodule "odoo/external-src/enterprise"]
 	path = odoo/external-src/enterprise
 	url = git@github.com:odoo/enterprise
 [submodule "odoo/external-src/stock-logistics-workflow"]
 	path = odoo/external-src/stock-logistics-workflow
-	url = git@github.com:OCA/stock-logistics-workflow.git
+	url = git@github.com:camptocamp/stock-logistics-workflow.git
 [submodule "odoo/external-src/sale-workflow"]
 	path = odoo/external-src/sale-workflow
 	url = git@github.com:camptocamp/sale-workflow.git
