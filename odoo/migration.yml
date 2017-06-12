@@ -156,6 +156,10 @@ migration:
           - sale_product_additional
           - specific_sale
     - version: 10.3.0
+      operations:
+        post:
+          - anthem songs.install.accounting::create_account_types
+          - anthem songs.install.accounting::adapt_chart_of_account
       addons:
         upgrade:
           # OCA/stock-logistics-workflow

@@ -9,6 +9,8 @@ Unreleased
 **Data Migration**
 
 **Features and Improvements**
+* ALCN-832: Import new account type
+* ALCN-833: Update chart of accounts (add account 0 and 8)
 
 * ALCN-820: Add specific module to shipping costs calculation
 * ALCN-836: Add 'Sale Order Lines Unavailable' menu in Sales > Report
