@@ -17,6 +17,8 @@ Unreleased
 
 * ALCN-847: Add CNK field to product template
 
+* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+
 **Bugfixes**
 
 **Build**

@@ -162,10 +162,13 @@ migration:
           - anthem songs.install.accounting::adapt_chart_of_account
       addons:
         upgrade:
+          # Enterprise
+          - helpdesk
           # OCA/stock-logistics-workflow
           - stock_picking_invoice_link
           # Specific modules
           - sale_product_additional
+          - specific_helpdesk
           - specific_product
           - specific_sale
           - specific_shipping_costs
