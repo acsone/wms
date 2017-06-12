@@ -56,6 +56,7 @@
 }
 
 #left_header {
+    padding-top: 20mm;
     width: 45%;
     display: inline-block;
     vertical-align: top;
@@ -83,11 +84,11 @@
 }
 
 #products_table {
-    height:0;
-    min-height:110mm;
+    height:140mm;
     width: 100%;
     font-size: 0.8em;
     margin: 5mm 0;
+    margin-top: 25mm;
 }
 
 #products_table th {
@@ -101,11 +102,19 @@
 #products_table th {
     text-align: center;
     vertical-align: middle;
-    height: 4mm;
 }
 
 #products_table tr:nth-of-type(n + 1) td:nth-of-type(n + 3) {
     text-align: right;
+}
+
+#products_table tr:not(:last-child) {
+    line-height: 4mm;
+    height: 4mm;
+}
+
+#products_table tr:last-child {
+    height: auto;
 }
 
 #products_table .sale_separator {
@@ -129,7 +138,6 @@
 }
 
 #products_table td {
-    height: 4mm;
     padding-right: 1.5mm;
     padding-left: 1.5mm;
 }
@@ -161,6 +169,7 @@
 
 #summary_table {
     display: inline-table;
+    height: 140px;
 }
 
 #summary_table tr:nth-child(-n + 2) td {
@@ -214,6 +223,7 @@
 #bank_table {
     display: inline-table;
     float: right;
+    height: 140px;
 }
 
 #bank_table td {

@@ -158,6 +158,8 @@ migration:
     - version: 10.3.0
       operations:
         post:
+          - anthem songs.install.accounting::default_values
+          - anthem songs.updates.update_10_3_0.update::main
           - anthem songs.install.accounting::create_account_types
           - anthem songs.install.accounting::adapt_chart_of_account
       addons:
@@ -172,3 +174,4 @@ migration:
           - specific_product
           - specific_sale
           - specific_shipping_costs
+          - specific_report
