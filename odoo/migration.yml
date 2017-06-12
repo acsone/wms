@@ -166,5 +166,6 @@ migration:
           - stock_picking_invoice_link
           # Specific modules
           - sale_product_additional
+          - specific_product
           - specific_sale
           - specific_shipping_costs
