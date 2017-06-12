@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 07:16+0000\n"
-"PO-Revision-Date: 2017-05-16 07:16+0000\n"
+"POT-Creation-Date: 2017-05-30 08:58+0000\n"
+"PO-Revision-Date: 2017-05-30 08:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:143
+#: code:addons/specific_sale/models/sale.py:153
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -66,19 +66,19 @@ msgid "Fax"
 msgstr "Fax"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:120
+#: code:addons/specific_sale/models/sale.py:130
 #, python-format
 msgid "Following human medicines ordered under your responsibility."
 msgstr "Médicaments humains commandés suivant la cascade ii sous votre responsabilité."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:134
+#: code:addons/specific_sale/models/sale.py:144
 #, python-format
 msgid "For any problems related to this command, please contact the pharmacist."
 msgstr "Pour tous problèmes relatifs à cette commande, veuillez prendre contact avec le pharmacien."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:152
+#: code:addons/specific_sale/models/sale.py:162
 #, python-format
 msgid "Imported medicines under your entire responsibility"
 msgstr "Médicaments importés en cascade ii sous votre entière responsabilité."
@@ -197,7 +197,15 @@ msgid "Quantity unavailable at order line save"
 msgstr "Quantité non disponible à la sauvegarde de la ligne"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_product_qty_remains_to_deliver
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_product_qty_remains_to_deliver
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_remains_to_deliver
+msgid "Remains to deliver"
+msgstr "Solde à livrer"
+
+#. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+#: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines Unavailable"
 msgstr "Lignes de commande non disponibles"
 
@@ -238,13 +246,13 @@ msgid "Taxes"
 msgstr "Taxes"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:129
+#: code:addons/specific_sale/models/sale.py:139
 #, python-format
 msgid "The medicines will be delivered to you by our care upon receipt of these from the pharmacy"
 msgstr "Les médicaments vous serons livrés par nos soins dès réception de ceux-ci en provenance de la pharmacie."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:124
+#: code:addons/specific_sale/models/sale.py:134
 #, python-format
 msgid "This command is transferred on your behalf to the pharmacy which will ensure the delivery of medicines."
 msgstr "Cette commande est transférée en votre nom auprès de la pharmacie qui assurera la délivrance des médicaments."

@@ -11,6 +11,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-820: Add specific module to shipping costs calculation
+* ALCN-836: Add 'Sale Order Lines Unavailable' menu in Sales > Report
 
 **Bugfixes**
 
