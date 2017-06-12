@@ -162,6 +162,7 @@ migration:
           - anthem songs.updates.update_10_3_0.update::main
           - anthem songs.install.accounting::create_account_types
           - anthem songs.install.accounting::adapt_chart_of_account
+          - anthem songs.install.sales::sale_setup
       addons:
         upgrade:
           # Enterprise
