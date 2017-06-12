@@ -79,8 +79,15 @@ class Sale(models.Model):
             to copy original lines into final lines.
         """
         return super(Sale, self).get_accepted_fields_for_order_line() + [
-            'edited_supplier_promotion', 'edited_alcyon_discount'
+            'edited_supplier_promotion',
+            'edited_alcyon_discount',
+            'is_delivery',
         ]
+
+    def _create_delivery_line(self, carrier, price_unit):
+        super(Sale, self.with_context(
+            create_original_line_too=True
+        ))._create_delivery_line(carrier, price_unit)
 
     @api.multi
     def order_lines_layouted(self):

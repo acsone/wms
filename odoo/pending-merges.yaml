@@ -73,3 +73,12 @@
     # There no code in these modules.
     - oca refs/pull/45/head
   target: *default_target
+./external-src/stock-logistics-workflow:
+  remotes:
+    oca: git@github.com:OCA/stock-logistics-workflow.git
+    camptocamp: git@github.com:camptocamp/stock-logistics-workflow.git
+  merges:
+    - oca 10.0
+    # 10.0 mig stock_picking_invoice_link
+    - oca refs/pull/322/head
+  target: *default_target

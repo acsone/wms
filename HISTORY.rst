@@ -10,6 +10,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-820: Add specific module to shipping costs calculation
+
 **Bugfixes**
 
 **Build**
