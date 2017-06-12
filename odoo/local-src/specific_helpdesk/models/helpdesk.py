@@ -13,7 +13,8 @@ class HelpdeskTicket(models.Model):
     helpdesk_ticket_reason_id = fields.Many2one(
         comodel_name='helpdesk.ticket.reason', string='Reason')
 
-    ref = fields.Reference(selection=referenceable_models,
+    ref = fields.Reference(
+        selection=referenceable_models,
         string='Reference')
 
 
