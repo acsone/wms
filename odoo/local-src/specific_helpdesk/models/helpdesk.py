@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields
+from odoo.addons.base.res.res_request import referenceable_models
 
 
 class HelpdeskTicket(models.Model):
@@ -11,6 +12,9 @@ class HelpdeskTicket(models.Model):
 
     helpdesk_ticket_reason_id = fields.Many2one(
         comodel_name='helpdesk.ticket.reason', string='Reason')
+
+    ref = fields.Reference(selection=referenceable_models,
+        string='Reference')
 
 
 class HelpdeskTicketReason(models.Model):

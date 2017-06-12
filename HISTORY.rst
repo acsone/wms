@@ -20,6 +20,7 @@ Unreleased
 
 * ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
 * ALCN-551: Add the module account_credit_control
+* ALCN-844 : Add field Reference to helpdesk ticket
 
 **Bugfixes**
 
