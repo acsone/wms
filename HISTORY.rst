@@ -23,6 +23,10 @@ Unreleased
 
 **Bugfixes**
 
+* Migration to v10
+
+  * ALCN-852: Fix activation of sales prices based formula
+
 **Build**
 
 * Update to docker image 10.0-2.2.0

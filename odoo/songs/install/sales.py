@@ -21,6 +21,9 @@ def sale_setup(ctx):
     })
 
     # Active sales prices based formula
+    define_settings(ctx,
+                    'sale.config.settings',
+                    {'sale_pricelist_setting': 'formula'})
     employee_group.write({
         'implied_ids': [
          (4, ctx.env.ref('product.group_pricelist_item').id),
