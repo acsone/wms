@@ -30,6 +30,16 @@ class HelpdeskTicket(models.Model):
             res['stock_picking_id'] = self._context.get('stock_picking')
         return res
 
+    @api.model
+    def create(self, vals):
+        ticket = super(HelpdeskTicket, self).create(vals)
+        if ticket.partner_id.user_id.partner_id:
+            ticket.message_subscribe(
+                partner_ids=ticket.partner_id.user_id.partner_id.ids
+            )
+
+        return ticket
+
 
 class HelpdeskTicketReason(models.Model):
 
