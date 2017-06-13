@@ -150,7 +150,7 @@ class EntityMapper(object):
 
         joins = self.get_sql_joins()
         if joins:
-            query += joins
+            query += joins + " "
 
         if not self.importer.full and needed_refs:
             assert self.DB2_REF_NAME, \

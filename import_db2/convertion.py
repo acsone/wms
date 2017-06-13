@@ -521,6 +521,37 @@ class SaleOrderMapper(EntityMapper):
         return "eccsui"
 
 
+class SaleOrderClosedMapper(SaleOrderMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    def get_sql_where(self):
+        """ Add clause that any of the line is still open """
+        where = super(SaleOrderClosedMapper, self).get_sql_where()
+        where += (
+            " AND NOT EXISTS(SELECT dccsui FROM sbdata.PDETCDCL WHERE"
+                "    dccsui = eccsui"
+                "    AND ecccli=dccncl"
+                "    AND dccsuc=eccsuc"
+                "    AND dccquc > dccqul)")
+        return where
+
+class SaleOrderOpenMapper(SaleOrderMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    def get_sql_where(self):
+        """ Add clause that any of the line is still open """
+        where = super(SaleOrderOpenMapper, self).get_sql_where()
+        where += (
+            " AND EXISTS(SELECT dccsui FROM sbdata.PDETCDCL WHERE"
+                "    dccsui = eccsui"
+                "    AND ecccli=dccncl"
+                "    AND dccsuc=eccsuc"
+                "    AND dccquc > dccqul)")
+        return where
+
+
 class SaleOrderLineMapper(EntityMapper):
     DB2_NAME = 'PDETCDCL'
     DB2_SCHEMA = 'sbdata'
@@ -586,8 +617,11 @@ class SaleOrderLineMapper(EntityMapper):
         return "eccsui, ecccli, eccsuc"
 
 
+
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
-                  SaleOrderMapper,
-                  SaleOrderLineMapper]
+                  SaleOrderOpenMapper,
+                  SaleOrderClosedMapper,
+                  SaleOrderLineMapper
+                  ]
