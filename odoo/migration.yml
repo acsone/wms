@@ -157,6 +157,7 @@ migration:
           - pricelist_discount
           - sale_product_additional
           - specific_sale
+          - specific_purchase
     - version: 10.3.0
       operations:
         post:

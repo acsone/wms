@@ -32,40 +32,65 @@ class PurchaseOrderLine(models.Model):
     price_unit_base = fields.Float('Unit Price',
                                    required=True,
                                    digits=dp.get_precision('Product Price'))
-    price_unit = fields.Float(string='Unit Price (discounted)',
-                              required=False,
-                              digits=dp.get_precision('Product Price'),
-                              compute='_compute_price_unit',
-                              inverse='_set_price_unit',
-                              store=True)
+    price_unit = fields.Float(string='Unit Price (discounted)')
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
     discount_pricelist = fields.Float()
     product_ref = fields.Char('Product ref', related='product_id.default_code')
 
+    # By default there is no way to add a discounts in Purchase Lines.
+    # To do that I added a new field "price_unit_base".
+    # This field will replace the field "price_unit" in the view form and the
+    # field price_unit will contains the price of the product with discount.
+    #
+    # When the user create a Purchase Order Line he will set the price
+    # on price_unit_base and recompute the price with discount.
+    @api.model
+    def create(self, vals):
+        """
+        To keep a good compatibility we set the price_unit_base if
+        the user create a purchase_order_line without price_unit_base
+        (and vice versa)
+        :param vals:
+        :return:
+        """
+        if 'price_unit' in vals and 'price_unit_base' not in vals:
+            vals['price_unit_base'] = vals['price_unit']
+
+        if 'price_unit_base' in vals and 'price_unit' not in vals:
+            vals['price_unit'] = vals['price_unit_base']
+
+        return super(PurchaseOrderLine, self).create(vals)
+
     @api.multi
     def write(self, vals):
-        # The field price_unit is a computed field.
-        # If we write the price_unit the method will call the
-        # method _set_price_unit which call the method _compute_price_unit.
-        # This method will call the method write.
-        # At the end we have an infinite loop.
-        vals.pop('price_unit', None)
+        """
+        To keep a good compatibility we set the price_unit_base if the user
+        change the price_unit we need to recompute the price_unit_base.
+
+        To avoid infinite loop we need to not write the price_unit_base
+        when we recompute the price_unit.
+        """
+        if 'price_unit' in vals \
+                and 'price_unit_base' not in vals\
+                and not self.env.context.get('stop_constrains'):
+            vals['price_unit_base'] = vals['price_unit']
+
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.depends('price_unit_base', 'discount_global', 'discount_pricelist')
+    @api.constrains('price_unit_base', 'discount_global', 'discount_pricelist')
+    @api.onchange('price_unit_base', 'discount_global', 'discount_pricelist')
     def _compute_price_unit(self):
+        """
+        This method will compute the price unit according
+        the price_unit_base with discounts.
+        """
         for line in self:
             price_unit = line.price_unit_base * \
                          (1 - (line.discount_global / 100)) * \
                          (1 - (line.discount_pricelist / 100))
-            line.price_unit = price_unit
-
-    def _set_price_unit(self):
-        for line in self:
-            line.price_unit_base = line.price_unit
-        self._compute_price_unit()
+            line.with_context(stop_constrains=True).price_unit = price_unit
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
