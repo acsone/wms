@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.addons.base.res.res_request import referenceable_models
 
 
@@ -16,6 +16,19 @@ class HelpdeskTicket(models.Model):
     ref = fields.Reference(
         selection=referenceable_models,
         string='Reference')
+
+    stock_picking_id = fields.Many2one(comodel_name='stock.picking',
+                                       string='Picking')
+
+    @api.model
+    def default_get(self, fields):
+        res = super(HelpdeskTicket, self).default_get(fields)
+        logistics_type = self.env.ref('specific_helpdesk.type_logistics')
+        if (self._context.get('type') == logistics_type.id and
+                self._context.get('stock_picking')):
+            res['ticket_type_id'] = logistics_type.id
+            res['stock_picking_id'] = self._context.get('stock_picking')
+        return res
 
 
 class HelpdeskTicketReason(models.Model):

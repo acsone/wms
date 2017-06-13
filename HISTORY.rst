@@ -16,6 +16,8 @@ Unreleased
 
 * ALCN-820: Add specific module to shipping costs calculation
 * ALCN-836: Add 'Sale Order Lines Unavailable' menu in Sales > Report
+* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+* ALCN-849 : Add smart button to link stock.picking to helpdesk.ticket
 
 * ALCN-847: Add CNK field to product template
 

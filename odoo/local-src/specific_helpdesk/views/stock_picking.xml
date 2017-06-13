@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_view_tickets"
+                        type="object"
+                        icon="fa-life-ring"
+                        class="oe_stat_button oe_inline">
+                    <field name="helpdesk_tickets_count"
+                           widget="statinfo"
+                           string="Tickets"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
