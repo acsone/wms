@@ -495,8 +495,8 @@ class SaleOrderMapper(EntityMapper):
         We use user to remove duplicates """
         suite = db2_entity['eccsui'] 
         client = db2_entity['ecccli']
-        user = db2_entity['eccuti']
-        odoo_entity['id'] = "%s_%s_%s" % (suite, client, user)
+        store = db2_entity['eccsuc']
+        odoo_entity['id'] = "%s_%s_%s" % (suite, client, store)
 
     def convert_date_order(self, odoo_entity, db2_entity):
         dd = db2_entity['eccdjj']
@@ -546,9 +546,9 @@ class SaleOrderLineMapper(EntityMapper):
         """
         suite = db2_entity['dccsui']
         client = db2_entity['dccncl']
-        user = db2_entity['dccuti']
+        store = db2_entity['dccsuc']
         line_num = db2_entity['dccnli']
-        odoo_entity['id'] = "%s_%s_%s_%s" % (suite, client, user, line_num)
+        odoo_entity['id'] = "%s_%s_%s_%s" % (suite, client, store, line_num)
 
     def convert_product_id(self, odoo_entity, db2_entity):
 
@@ -563,8 +563,8 @@ class SaleOrderLineMapper(EntityMapper):
     def convert_order_id(self, odoo_entity, db2_entity):
         suite = db2_entity['eccsui'] 
         client = db2_entity['ecccli']
-        user = db2_entity['eccuti']
-        code = "%s_%s_%s" % (suite, client, user)
+        store = db2_entity['eccsuc']
+        code = "%s_%s_%s" % (suite, client, store)
         xmlid = self.get_xml_id('sale_order', code, '__import__')
         odoo_entity['order_id/id'] = xmlid
 
@@ -572,7 +572,7 @@ class SaleOrderLineMapper(EntityMapper):
         return ("join sbdata.PENTCDCL ON"
                 "    eccsui=dccsui"
                 "    AND ecccli=dccncl"
-                "    AND eccuti=dccuti ")
+                "    AND eccsuc=dccsuc ")
 
     def get_sql_where(self):
         where = None
@@ -583,7 +583,7 @@ class SaleOrderLineMapper(EntityMapper):
         return where
 
     def get_order_by(self):
-        return "eccsui, ecccli, eccuti"
+        return "eccsui, ecccli, eccsuc"
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
