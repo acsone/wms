@@ -32,14 +32,20 @@
         'stock_picking_sequence',
         ],
     'data': [
+        # Views
         'views/menu.xml',
         'views/vehicle.xml',
         'views/zone.xml',
         'views/instance.xml',
         'views/picking.xml',
         'views/partner.xml',
+        'views/delivery_carrier.xml',
+        'views/sale_order.xml',
+        # Data
         'data/sequence.xml',
+        # Security
         'security/ir.model.access.csv',
+        # Wizards
         'wizards/instance_zone_import.xml',
         'wizards/make_today_delivery_plan.xml',
         'wizards/picking_assign_delivery_round.xml',

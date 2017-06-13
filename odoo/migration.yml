@@ -172,8 +172,8 @@ migration:
           # OCA/account-financial-tools
           - account_credit_control
           # Specific modules
+          - delivery_rounds
           - sale_product_additional
-          - specific_delivery
           - specific_helpdesk
           - specific_product
           - specific_sale
