@@ -514,7 +514,7 @@ class SaleOrderMapper(EntityMapper):
         if not self.importer.full:
             where = "eccsui >= %s AND eccsui <= %s" % (SO_MIN, SO_MAX)
         else:
-            where = "ecccss = 20 AND ecccaa = 17"
+            where = ("ecccss = 20 AND ecccaa = 17 AND ecccmm = 5")
         return where
 
     def get_order_by(self):
