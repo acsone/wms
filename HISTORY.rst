@@ -25,6 +25,7 @@ Unreleased
 * ALCN-551: Add the module account_credit_control
 * ALCN-844: Add field Reference to helpdesk ticket
 * ALCN-850: Add partner vendor on follower when create helpdesk ticket
+* ALCN-854: Add a responsible on purchase order
 
 * ALCN-837: Allow to define a delivery round on delivery carrier
 

@@ -51,7 +51,7 @@ msgstr "Créé le"
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_date
 msgid "Date"
-msgstr "Date "
+msgstr "Date"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_depth
@@ -136,7 +136,7 @@ msgstr "Longueur (cm)"
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_product_template_length
 msgid "Length in cm"
-msgstr "Longueur in cm"
+msgstr "Longueur en cm"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_name
@@ -237,7 +237,7 @@ msgstr "Largeur (cm)"
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_product_template_width
 msgid "Width in cm"
-msgstr "Largeur in cm"
+msgstr "Largeur en cm"
 
 #. module: specific_purchase
 #: code:addons/specific_purchase/models/purchase_order.py:144
