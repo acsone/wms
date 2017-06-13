@@ -540,6 +540,13 @@ class SaleOrderClosedMapper(SaleOrderMapper):
     DB2_NAME = 'PENTCDCL'
     DB2_SCHEMA = 'sbdata'
 
+    def __init__(self, importer):
+        res = super(SaleOrderClosedMapper, self).__init__(importer)
+        self.FIELDS_MAPPING.append(
+            FieldMapper('state', constant='done'),
+        )
+        return res
+
     def get_sql_where(self):
         """ Add clause that any of the line is still open """
         where = super(SaleOrderClosedMapper, self).get_sql_where()
@@ -554,6 +561,13 @@ class SaleOrderClosedMapper(SaleOrderMapper):
 class SaleOrderOpenMapper(SaleOrderMapper):
     DB2_NAME = 'PENTCDCL'
     DB2_SCHEMA = 'sbdata'
+
+    def __init__(self, importer):
+        res = super(SaleOrderOpenMapper, self).__init__(importer)
+        self.FIELDS_MAPPING.append(
+            FieldMapper('state', constant='draft'),
+        )
+        return res
 
     def get_sql_where(self):
         """ Add clause that any of the line is still open """
