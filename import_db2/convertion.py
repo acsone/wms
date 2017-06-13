@@ -660,10 +660,10 @@ class SaleOrderLineMapper(EntityMapper):
 
 
 
-MAPPER_CLASSES = [#LocationMapper, ProductMapper,
-                  #CustomerMapper, SupplierMapper,
-                  #CustomerAddressMapper,
+MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  CustomerMapper, SupplierMapper,
+                  CustomerAddressMapper,
                   SaleOrderOpenMapper,
                   SaleOrderClosedMapper,
-                  #SaleOrderLineMapper
+                  SaleOrderLineMapper
                   ]
