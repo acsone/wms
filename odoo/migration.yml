@@ -157,7 +157,6 @@ migration:
           - pricelist_discount
           - sale_product_additional
           - specific_sale
-          - specific_purchase
     - version: 10.3.0
       operations:
         post:
@@ -182,3 +181,4 @@ migration:
           - specific_sale
           - specific_shipping_costs
           - specific_report
+          - specific_purchase
