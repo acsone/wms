@@ -70,12 +70,14 @@ def default_values(ctx):
         'name': 'out_inv_comm_type',
         'model': 'res.partner',
         'value_unpickle': 'bba',
+        'key2': None,
     })
     create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
         'value_unpickle': 'random',
+        'key2': None,
     })
 
     account_612031 = ctx.env.ref('__setup__.account_612031')
@@ -323,11 +325,25 @@ def configure_missing_chart_of_account(ctx):
 
 
 @anthem.log
+def create_account_types(ctx):
+    """ Creating Account Types """
+
+    account_type_xml_id = '__setup__.account_type_annexes_hors_bilan'
+    create_or_update(ctx, 'account.account.type', account_type_xml_id, {
+        'name': 'ANNEXES/HORS BILAN',
+        'type': 'other',
+        'analytic_policy': 'optional',
+        'include_initial_balance': False,
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
     import_banks(ctx)
     add_xmlid_account(ctx)
+    create_account_types(ctx)
     adapt_chart_of_account(ctx)
     import_account_journal(ctx)
     import_account_analytic_tag(ctx)

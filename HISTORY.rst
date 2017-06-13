@@ -10,10 +10,30 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-823: Add the module "specific_purchase"
+* ALCN-831: Version 2 of the invoice report
+* ALCN-832: Import new account type
+* ALCN-833: Update chart of accounts (add account 0 and 8)
+
+* ALCN-820: Add specific module to shipping costs calculation
+* ALCN-836: Add 'Sale Order Lines Unavailable' menu in Sales > Report
+
+* ALCN-847: Add CNK field to product template
+
+* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+* ALCN-551: Add the module account_credit_control
+* ALCN-844 : Add field Reference to helpdesk ticket
 
 **Bugfixes**
 
+* Migration to v10
+
+  * ALCN-852: Fix activation of sales prices based formula
+
 **Build**
+
+* Update to docker image 10.0-2.2.0
+* Update project from odoo-template
+* Update cloud platform addons to use Redis Sentinel in session_redis
 
 **Documentation**
 
@@ -31,6 +51,7 @@ Unreleased
 * ALCN-828: Fix product compute price on sale order with pricelist
 * ALCN-830: Fix sale product additional module (onchange function)
 * ALCN-835: Fix discount with sale product additional module
+* Fix sale_exception Singleton errors (on constraint and on action confirm)
 
 
 10.1.1 (2017-05-08)

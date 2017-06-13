@@ -79,8 +79,15 @@ class Sale(models.Model):
             to copy original lines into final lines.
         """
         return super(Sale, self).get_accepted_fields_for_order_line() + [
-            'edited_supplier_promotion', 'edited_alcyon_discount'
+            'edited_supplier_promotion',
+            'edited_alcyon_discount',
+            'is_delivery',
         ]
+
+    def _create_delivery_line(self, carrier, price_unit):
+        super(Sale, self.with_context(
+            create_original_line_too=True
+        ))._create_delivery_line(carrier, price_unit)
 
     @api.multi
     def order_lines_layouted(self):
@@ -196,6 +203,18 @@ class SaleOrderLine(models.Model):
                         break
             line.exception = exception
 
+    product_qty_remains_to_deliver = fields.Float(
+        string='Remains to deliver',
+        digits=dp.get_precision('Product Unit of Measure'),
+        compute='_compute_product_qty_remains_to_deliver',
+    )
+
+    def _compute_product_qty_remains_to_deliver(self):
+        for line in self:
+            line.product_qty_remains_to_deliver = (
+                line.product_uom_qty - line.qty_delivered
+            )
+
     product_qty_unavailable = fields.Float(
         string='Quantity unavailable',
         digits=dp.get_precision('Product Unit of Measure'),
@@ -244,7 +263,7 @@ class SaleOrderLine(models.Model):
                     order_line_stock_move = self.env['stock.move'].search([
                         ('procurement_id.sale_line_id', '=', line_id),
                         ('state', 'not in', ['draft', 'cancel', 'done'])
-                    ])
+                    ], limit=1)
                     stock_move_date_expected = (
                         order_line_stock_move.date_expected
                     )

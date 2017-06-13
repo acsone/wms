@@ -1,9 +1,13 @@
+<!--
+This file has been generated with 'invoke project.sync'.
+Do not modify. Any manual change will be lost.
+-->
 # Adding dependencies
 
 ## How to add a Python package
 
 The Python dependencies for Odoo are already installed in the base container
-(camptocamp/odoo-project:9.0) used for this project. At times, you might need to add an additional dependency required solely for this project, here are the steps.
+(camptocamp/odoo-project:10.0) used for this project. At times, you might need to add an additional dependency required solely for this project, here are the steps.
 
 If the file `odoo/requirements.txt` exists, skip to number 3.
 
@@ -17,6 +21,10 @@ If the file `odoo/requirements.txt` exists, skip to number 3.
 
 3. Add the Python package in `odoo/requirements.txt`
 4. Build again your Docker image: `docker-compose build odoo`
+
+You can also [add dev requirements](./docker-dev.md#extra-dev-packages) which are used on your dev machine but never
+committed.
+
 
 ## How to add a Debian package
 

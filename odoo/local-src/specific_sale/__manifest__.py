@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -9,10 +9,12 @@
     'license': 'AGPL-3',
     'category': 'Sales',
     'depends': [
+        'delivery',
         'pricelist_discount',
         'sale',
         'sale_exception',
         'sale_product_additional',
+        'sales_team',
         'stock',
         'stock_available_immediately',
     ],

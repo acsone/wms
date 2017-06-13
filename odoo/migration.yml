@@ -99,12 +99,12 @@ migration:
           - product_price_category
           - refund_invoice
           - sale_product_additional
-          - specific_base
           - specific_account
-          - specific_sale
+          - specific_base
           - specific_partner
           - specific_product
           - specific_report
+          - specific_sale
           - specific_stock
           - specific_translations
           - specific_purchase
@@ -113,8 +113,8 @@ migration:
           - stock_grn
           - stock_groupbypartner
           - stock_location
-          - stock_lot_update
           - stock_lot_track
+          - stock_lot_update
           - stock_picking_assignment
           - stock_picking_fillwithstock
           - stock_picking_sequence
@@ -124,8 +124,8 @@ migration:
           - stock_putaway_defaultfixedlocation
           - stock_putaway_route
           - stock_quant_bylocation
-          - stock_refill
           - stock_receive_lot
+          - stock_refill
           - web_autorefresh
     - version: 10.1.0
       operations:
@@ -160,4 +160,24 @@ migration:
     - version: 10.3.0
       operations:
         post:
+          - anthem songs.install.accounting::default_values
+          - anthem songs.updates.update_10_3_0.update::main
+          - anthem songs.install.accounting::create_account_types
+          - anthem songs.install.accounting::adapt_chart_of_account
+          - anthem songs.install.sales::sale_setup
           - anthem songs.install.purchases::main
+      addons:
+        upgrade:
+          # Enterprise
+          - helpdesk
+          # OCA/stock-logistics-workflow
+          - stock_picking_invoice_link
+          # OCA/account-financial-tools
+          - account_credit_control
+          # Specific modules
+          - sale_product_additional
+          - specific_helpdesk
+          - specific_product
+          - specific_sale
+          - specific_shipping_costs
+          - specific_report

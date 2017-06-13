@@ -210,7 +210,13 @@ class SaleOrder(models.Model):
             To define accepted fields
             to copy original lines into final lines.
         """
-        return ['name', 'product_uom_qty', 'price_unit', 'sequence']
+        return [
+            'name',
+            'product_uom_qty',
+            'price_unit',
+            'sequence',
+            'qty_delivered'
+        ]
 
     @api.model
     def get_accepted_relational_fields_for_order_line(self):
@@ -375,12 +381,16 @@ class SaleOrder(models.Model):
             for line in lines_to_be_deleted:
                 order_lines.append((3, line.id))
 
+            context = self.env.context or {}
+            new_context = context.copy()
+            new_context['update_from_onchange'] = True
+
             # If sale order already exists,
             # it's necessary to do a write and not an update,
             # because with an update,
             # odoo try to delete the existing lines
             # before recreate the lines with given values
-            self.write({
+            self.with_context(new_context).write({
                 'order_line': order_lines
             })
         else:
@@ -463,6 +473,54 @@ class SaleOrderLine(models.Model):
     additional_line_id = fields.Many2one(
         comodel_name='sale.order.line.additional',
     )
+
+    @api.model
+    def create(self, vals):
+        context = self.env.context or {}
+        new_vals = vals.copy()
+        if context.get('create_original_line_too'):
+            original_line = self.with_context(
+                create_original_line_too=False
+            ).env['sale.order.line.original'].create(vals)
+            new_vals['original_line_id'] = original_line.id
+        record = super(SaleOrderLine, self).create(new_vals)
+        return record
+
+    @api.model
+    def get_accepted_fields_to_report(self):
+        """
+            To define accepted fields
+            on final lines to report on original/additional lines.
+        """
+        return ['qty_delivered']
+
+    @api.multi
+    def write(self, values):
+        record = super(SaleOrderLine, self).write(values)
+        context = self.env.context or {}
+        if not context.get('update_from_onchange'):
+            for line in self:
+                values_to_report = {}
+                for key, value in values.iteritems():
+                    if key in line.get_accepted_fields_to_report():
+                        values_to_report[key] = value
+                if values_to_report:
+                    if line.original_line_id:
+                        line.original_line_id.write(values_to_report)
+                    if line.additional_line_id:
+                        line.additional_line_id.write(values_to_report)
+        return record
+
+    @api.multi
+    def unlink(self):
+        original_lines = self.mapped('original_line_id')
+        additional_lines = self.mapped('additional_line_id')
+        result = super(SaleOrderLine, self).unlink()
+        if original_lines:
+            original_lines.unlink()
+        if additional_lines:
+            additional_lines.unlink()
+        return result
 
 
 # You must override this inherit of sale_product_additional in your

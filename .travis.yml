@@ -32,7 +32,7 @@ before_install:
   - git config --global user.name "TravisCI"
   - git config --global user.email "travis@camptocamp.com"
   - if [ "$LINT_CHECK" == "1" ] ; then pip install --user -q flake8 ; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython requests ; fi
+  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython requests pyyaml ; fi
 
 install:
   - if [ "$LINT_CHECK" == "0" ] ; then python ./travis/git_submodule_update.py ; fi
