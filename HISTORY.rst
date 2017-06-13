@@ -21,9 +21,10 @@ Unreleased
 
 * ALCN-847: Add CNK field to product template
 
-* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+* ALCN-845: Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
 * ALCN-551: Add the module account_credit_control
-* ALCN-844 : Add field Reference to helpdesk ticket
+* ALCN-844: Add field Reference to helpdesk ticket
+* ALCN-850: Add partner vendor on follower when create helpdesk ticket
 
 **Bugfixes**
 
