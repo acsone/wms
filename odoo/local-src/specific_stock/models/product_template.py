@@ -113,14 +113,14 @@ class ProductProduct(models.Model):
         # On this part we'll take randomly n elements
         # rule: number of 20% best sellers / numbers of days / 2
         query = """
-        SELECT line.product_id, count(*) AS cnt 
+        SELECT line.product_id, count(*) AS cnt
         FROM sale_order_line AS line
           INNER JOIN product_product AS product ON line.product_id = product.id
-        WHERE (product.date_last_inventory < (NOW() - INTERVAL '6 months') 
+        WHERE (product.date_last_inventory < (NOW() - INTERVAL '6 months')
           OR product.date_last_inventory IS NULL)
          AND line.create_date > (NOW() - INTERVAL '1 year')
          AND line.product_id NOT IN %s
-        GROUP BY line.product_id 
+        GROUP BY line.product_id
         ORDER BY cnt DESC;
         """
         self.env.cr.execute(query, (tuple(product_ids_to_ignore), ))

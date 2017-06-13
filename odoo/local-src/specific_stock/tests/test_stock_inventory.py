@@ -90,7 +90,7 @@ class TestStockInventory(TransactionCase):
         UPDATE product_product SET date_last_inventory = NOW();
         """
         self.env.cr.execute(update_date_last_inventory_query)
-        
+
         # Create products (12 products)
         #######################
         # The best seller 1 has 2 sales orders

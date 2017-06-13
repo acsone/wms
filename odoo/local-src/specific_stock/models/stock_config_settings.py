@@ -31,7 +31,7 @@ class StockConfigSettings(models.TransientModel):
 
         self.env['ir.config_parameter']\
             .set_param('stock.price_limit_for_inventory',
-                       self.price_limit_for_inventory)
+                       self.price_limit_for_inventory or '0')
 
     @api.multi
     def set_nbr_open_days(self):
@@ -39,4 +39,4 @@ class StockConfigSettings(models.TransientModel):
 
         self.env['ir.config_parameter'] \
             .set_param('stock.nbr_open_days',
-                       self.nbr_open_days)
+                       self.nbr_open_days or '0')
