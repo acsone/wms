@@ -9,14 +9,27 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     delivery_round_id = fields.Many2one(
-        related='carrier_id.delivery_round_id',
+        comodel_name='round.instance',
+        string='Delivery round',
         readonly=True,
     )
 
     @api.multi
     def action_confirm(self):
         result = super(SaleOrder, self).action_confirm()
-        self.picking_ids.write({
-            'delivery_round_id': self.delivery_round_id.id,
-        })
+        if self.carrier_id:
+            vehicle = self.carrier_id.delivery_vehicle_id
+            delivery_round = self.env['round.instance'].search(
+                [
+                    ('vehicle_id', '=', vehicle.id),
+                    ('state', '!=', 'done')
+                ],
+                order='date asc, time asc',
+                limit=1,
+            )
+            if delivery_round:
+                self.delivery_round_id = delivery_round.id
+                self.picking_ids.write({
+                    'delivery_round_id': self.delivery_round_id.id,
+                })
         return result
