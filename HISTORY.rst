@@ -26,6 +26,8 @@ Unreleased
 * ALCN-844: Add field Reference to helpdesk ticket
 * ALCN-850: Add partner vendor on follower when create helpdesk ticket
 
+* ALCN-837: Allow to define a delivery round on delivery carrier
+
 **Bugfixes**
 
 * Migration to v10
