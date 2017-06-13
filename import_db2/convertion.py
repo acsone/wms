@@ -520,6 +520,21 @@ class SaleOrderMapper(EntityMapper):
     def get_order_by(self):
         return "eccsui"
 
+    def get_xml_id(self, entity_name, code, prefix=None):
+        """ Force use of sale_order to avoid having
+        sale_order_closed and sale_order_open in xml ids """
+        assert entity_name and code
+
+        entity_name = "sale_order"
+
+        if prefix is None:
+            prefix = self.XMLID_IMPORT_NAME
+
+        return "%s.%s_%s" % (
+            prefix, entity_name, code
+        )
+
+
 
 class SaleOrderClosedMapper(SaleOrderMapper):
     DB2_NAME = 'PENTCDCL'
