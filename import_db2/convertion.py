@@ -510,7 +510,7 @@ class SaleOrderMapper(EntityMapper):
         odoo_entity['partner_id/id'] = xmlid
 
     def get_sql_where(self):
-        where = None
+        where = "eccncr = 0 AND "
         if not self.importer.full:
             where = "eccsui >= %s AND eccsui <= %s" % (SO_MIN, SO_MAX)
         else:
