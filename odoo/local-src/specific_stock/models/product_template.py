@@ -53,34 +53,20 @@ class ProductProduct(models.Model):
         'Last inventory',
         readonly=True)
 
-    # @api.depends('inventory_line_ids')
-    # def _compute_date_last_inventory(self):
-    #     """
-    #     Compute the last inventory for all selected products
-    #     If the product doesn't have an inventory yet we use the create_date
-    #     :return:
-    #     """
-    #     query = """
-    #     SELECT line.product_id, MAX(line.create_date)
-    #     FROM stock_inventory_line AS line
-    #       INNER JOIN stock_inventory AS inventory
-    #       ON line.inventory_id = inventory.id
-    #     WHERE inventory.state = 'done'
-    #       AND line.product_id IN %s
-    #       AND inventory.inventory_type = 'inventory'
-    #     GROUP BY line.product_id;
-    #     """
-    #     self.env.cr.execute(query, (tuple(self.ids), ))
-    #     result = self.env.cr.dictfetchall()
-    #
-    #     for product in self:
-    #         if product.id not in result:
-    #             product.date_last_inventory = product.create_date
-    #         else:
-    #             product.date_last_inventory = result[product.id]
-
     @api.model
     def get_products_daily_inventory(self):
+        """
+        This method will return a product.product browse record set
+        with the daily inventory. The goal of the daily inventory is to
+        inventory all products each 6 months
+        or year (according the type of products).
+
+        There are three type of products:
+        - Expensive products (inventory each 6 months)
+        - Best sellers products (inventory each 6 months)
+        - Other products (inventory each year)
+        :return:
+        """
         config_param = self.env['ir.config_parameter']
         price = float(config_param
                       .get_param('stock.price_limit_for_inventory', 0))

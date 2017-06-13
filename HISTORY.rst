@@ -37,6 +37,10 @@ Unreleased
 * ALCN-850: Add partner vendor on follower when create helpdesk ticket
 * ALCN-854: Add a responsible on purchase order
 
+* ALCN-837: Allow to define a delivery round on delivery carrier
+* ALCN-844 : Add field Reference to helpdesk ticket
+* ALCN-840: Add a cron to create the daily inventory
+
 **Bugfixes**
 
 * Migration to v10
