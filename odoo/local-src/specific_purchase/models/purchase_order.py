@@ -85,6 +85,13 @@ class PurchaseOrderLine(models.Model):
         """
         This method will compute the price unit according
         the price_unit_base with discounts.
+
+        I use the api constrains and the onchange to ensure that
+        the price unit will be compute in any case.
+        The API onchange will be use in the form view to directly compute
+        the the unit_price and display the right price on the view.
+        The API constrains will be use if a method change a discount
+        or the price_unit (see above the method write).
         """
         for line in self:
             price_unit = line.price_unit_base * \
