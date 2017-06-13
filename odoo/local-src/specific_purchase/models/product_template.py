@@ -7,11 +7,13 @@ from odoo import fields, models, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    volume = fields.Float(help='Volume in liter', digits=(12, 3))
+    volume = fields.Float(string='Volume (liter)',
+                          help='Volume in liter',
+                          digits=(12, 3))
 
-    length = fields.Float('Length', help='Length in cm')
-    width = fields.Float('Width', help='Width in cm')
-    depth = fields.Float('Depth', help='Depth in cm')
+    length = fields.Float('Length (cm)', help='Length in cm')
+    width = fields.Float('Width (cm)', help='Width in cm')
+    depth = fields.Float('Depth (cm)', help='Depth in cm')
 
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):
