@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_state_new" model="product.state">
+        <field name="name">New</field>
+        <field name="sequence">0</field>
+    </record>
+    <record id="product_state_active" model="product.state">
+        <field name="name">Active</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="product_state_promotion_ony" model="product.state">
+        <field name="name">Promotion Only</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="product_state_inactive" model="product.state">
+        <field name="name">Inactive</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="product_state_remnant" model="product.state">
+        <field name="name">Remnant</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="product_state_discontinued" model="product.state">
+        <field name="name">Discontinued</field>
+        <field name="sequence">5</field>
+    </record>
+    <record id="product_state_introduction" model="product.state">
+        <field name="name">Introduction</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="product_state_out_of_stock" model="product.state">
+        <field name="name">Out of stock</field>
+        <field name="sequence">7</field>
+    </record>
+</odoo>

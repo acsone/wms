@@ -16,6 +16,7 @@
         'account',
         'sale',
         'delivery_rounds',
+        'specific_purchase',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -23,6 +24,7 @@
         'views/report_deliveryslip.xml',
         'views/report_invoice.xml',
         'views/report_delivery_round.xml',
+        'views/report_purchase_order.xml',
         'data/paperformat.xml',
     ],
     'installable': True,

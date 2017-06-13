@@ -28,6 +28,7 @@ migration:
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
           - anthem songs.install.sales::main
+          - anthem songs.install.purchases::main
           - anthem songs.install.partner::main
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
@@ -106,6 +107,7 @@ migration:
           - specific_sale
           - specific_stock
           - specific_translations
+          - specific_purchase
           - stock_barcode_fix
           - stock_expired
           - stock_grn
@@ -163,6 +165,7 @@ migration:
           - anthem songs.install.accounting::create_account_types
           - anthem songs.install.accounting::adapt_chart_of_account
           - anthem songs.install.sales::sale_setup
+          - anthem songs.install.purchases::main
       addons:
         upgrade:
           # Enterprise
@@ -178,3 +181,4 @@ migration:
           - specific_sale
           - specific_shipping_costs
           - specific_report
+          - specific_purchase

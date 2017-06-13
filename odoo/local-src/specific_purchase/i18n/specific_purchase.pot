@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* specific_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-11 11:35+0000\n"
+"PO-Revision-Date: 2017-05-11 11:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_active
+msgid "Active"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_back_order_accepted
+msgid "Back order accepted"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_discontinued
+msgid "Discontinued"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_global
+msgid "Discount global"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_pricelist
+msgid "Discount pricelist"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_date_out_of_stock_expected
+msgid "Expected out of stock date"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_id
+msgid "ID"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_inactive
+msgid "Inactive"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_introduction
+msgid "Introduction"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_name
+msgid "Name"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_new
+msgid "New"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_out_of_stock
+msgid "Out of stock"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_promotion_ony
+msgid "Promotion Only"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_remnant
+msgid "Remnant"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
+msgid "State"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
+msgid "Supplier discount %"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_supplier_product_ref
+msgid "Supplier ref"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
+msgid "Total weigh in Kg"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_total_weight
+msgid "Total weight"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_price_unit_base
+msgid "Unit Price"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_product_state
+msgid "product.state"
+msgstr ""
+
