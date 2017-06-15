@@ -119,7 +119,7 @@ class ProductProduct(models.Model):
         query = """
         SELECT product.id
         FROM product_product AS product
-          INNER JOIN product_template AS template 
+          INNER JOIN product_template AS template
             ON product.product_tmpl_id = template.id
         WHERE template.list_price >= %s
         AND (product.date_last_inventory < %s
