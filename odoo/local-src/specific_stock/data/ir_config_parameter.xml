@@ -16,4 +16,24 @@
         <field name="key">stock.nbr_open_days</field>
         <field name="value">220</field>
     </record>
+
+    <record id="default_months_between_inventory" model="ir.config_parameter">
+        <field name="key">stock.months_between_inventory</field>
+        <field name="value">2</field>
+    </record>
+
+    <record id="default_delay_inventory_expensive_products" model="ir.config_parameter">
+        <field name="key">stock.delay_inventory_expensive_products</field>
+        <field name="value">6</field>
+    </record>
+
+    <record id="default_delay_inventory_best_sellers_products" model="ir.config_parameter">
+        <field name="key">stock.delay_inventory_best_sellers_products</field>
+        <field name="value">6</field>
+    </record>
+
+    <record id="default_delay_inventory_other_products" model="ir.config_parameter">
+        <field name="key">stock.delay_inventory_other_products</field>
+        <field name="value">12</field>
+    </record>
 </odoo>

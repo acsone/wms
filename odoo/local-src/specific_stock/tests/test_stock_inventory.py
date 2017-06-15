@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import date
 
 from odoo import fields
 from odoo.tests.common import TransactionCase, post_install, at_install
@@ -64,6 +65,54 @@ class TestStockInventory(TransactionCase):
 
     @post_install(True)
     @at_install(False)
+    def test_compute_inventory_periods(self):
+        company = self.env.user.company_id
+        company.write({
+            'fiscalyear_last_month': 12,
+            'fiscalyear_last_day': 31,
+        })
+
+        ir_config = self.env['ir.config_parameter']
+        ir_config.set_param('stock.delay_inventory_expensive_products', 6)
+        ir_config.set_param('stock.delay_inventory_best_sellers_products', 2)
+        ir_config.set_param('stock.delay_inventory_other_products', 12)
+
+        date_today = date.today()
+        date_july = date_today.replace(month=7)
+        result = self.env['stock.inventory']\
+            .compute_inventory_periods(date_july)
+
+        self.assertEqual(len(result), 3)
+
+        # Delay of 6 months
+        expensive_products = result['expensive']
+        self.assertEqual(expensive_products['date_start'],
+                         '%s-07-01' % date_today.year)
+        self.assertEqual(expensive_products['date_end'],
+                         '%s-12-31' % date_today.year)
+        self.assertEqual(expensive_products['delay'], 6)
+        self.assertEqual(expensive_products['nbr_inventory_per_year'], 2)
+
+        # Delay of 2 months
+        best_sellers_products = result['best_sellers']
+        self.assertEqual(best_sellers_products['date_start'],
+                         '%s-07-01' % date_today.year)
+        self.assertEqual(best_sellers_products['date_end'],
+                         '%s-08-31' % date_today.year)
+        self.assertEqual(best_sellers_products['delay'], 2)
+        self.assertEqual(best_sellers_products['nbr_inventory_per_year'], 6)
+
+        # Delay of 12 months
+        other_products = result['other']
+        self.assertEqual(other_products['date_start'],
+                         '%s-01-01' % date_today.year)
+        self.assertEqual(other_products['date_end'],
+                         '%s-12-31' % date_today.year)
+        self.assertEqual(other_products['delay'], 12)
+        self.assertEqual(other_products['nbr_inventory_per_year'], 1)
+
+    @post_install(True)
+    @at_install(False)
     def test_get_products_daily_inventory(self):
         """
         To test the method get_products_daily_inventory we need to create a
@@ -73,7 +122,6 @@ class TestStockInventory(TransactionCase):
         - 10 products with sales orders
         :return:
         """
-        config_param = self.env['ir.config_parameter']
         product = self.env['product.product']
         uom_id = self.ref('product.product_uom_unit')
 
@@ -81,8 +129,13 @@ class TestStockInventory(TransactionCase):
             'name': 'Unittest partner',
         })
 
-        config_param.set_param('stock.price_limit_for_inventory', 5000)
-        config_param.set_param('stock.nbr_open_days', 1)
+        ir_config = self.env['ir.config_parameter']
+        ir_config.set_param('stock.price_limit_for_inventory', 5000)
+        ir_config.set_param('stock.nbr_open_days', 2)
+        ir_config.set_param('stock.delay_inventory_expensive_products', 6)
+        ir_config.set_param('stock.delay_inventory_best_sellers_products', 6)
+        ir_config.set_param('stock.delay_inventory_other_products', 12)
+        ir_config.set_param('stock.months_between_inventory', 2)
 
         # I need to set a date_last_inventory to all products
         # to ignore existing products during tests
@@ -339,24 +392,50 @@ class TestStockInventory(TransactionCase):
         })
 
         # Create a first inventory
-        inventory_products = product.get_products_daily_inventory()
+        date_today_overwrite = date(year=2017, month=1, day=1)
+        periods = {
+            'expensive': {
+                'date_start': '2017-01-01',
+                'date_end': '2017-01-01',
+                'delay': 6,
+                'nbr_inventory_per_year': 2,
+            },
+            'best_sellers': {
+                'date_start': '2017-01-01',
+                'date_end': '2017-01-01',
+                'delay': 6,
+                'nbr_inventory_per_year': 2,
+            },
+            'other': {
+                'date_start': '2017-01-01',
+                'date_end': '2017-01-02',
+                'delay': 12,
+                'nbr_inventory_per_year': 1,
+            },
+        }
+        inventory_products = product.get_products_daily_inventory(
+            periods, date_today_overwrite=date_today_overwrite
+        )
 
-        # I must have 6 products in this inventory
-        # - 1 expensive product (nbr of expensive products / days / 2)
-        #       2 / 1 / 2 = 1 product
-        # - 1 best seller (20% of nbr of products with so / days / 2)
-        #       20% of 10 / 1 / 2 = 1 products
-        # - 8 other products (nbr of products / days)
-        #       8 products left / 1 = 8 products
-        self.assertEqual(len(inventory_products), 10)
+        # I must have 8 products in this inventory
+        # - 2 expensive product
+        #       nbr of expensive products / (days / nbr inv per year)
+        #       2 / (2 / 2) = 1 product
+        # - 2 best seller
+        #       20% of nbr of products with so / (days / nbr inv per year)
+        #       20% of 10 / (2 / 2) = 2 products
+        # - 4 other products
+        #       nbr of products / (days / nbr inv per year)
+        #       8 products left / (2 / 1) = 4 products
+        self.assertEqual(len(inventory_products), 8)
 
         # Check if one of the two most expensive product is in the inventory
         self.assertTrue(product_7_most_expensive in inventory_products
-                        or product_4_sec_expensive in inventory_products)
+                        and product_4_sec_expensive in inventory_products)
 
         # One of the two best sellers should be in the inventory
         self.assertTrue(product_2_best_seller in inventory_products
-                        or product_1_sec_best_seller in inventory_products)
+                        and product_1_sec_best_seller in inventory_products)
 
         inventory = self.env['stock.inventory'].create({
             'name': 'Daily inventory: %s' % fields.Date.today(),
@@ -374,19 +453,55 @@ class TestStockInventory(TransactionCase):
 
         # Validate the inventory
         inventory.action_done()
+        # The method action_done will write the date_last_inventory with today
+        # or the real date_last_inventory should be 2017-01-01
+        inventory_products.write({
+            'date_last_inventory': '2017-01-01'
+        })
 
-        # Create a new inventory
-        new_inventory_products = product.get_products_daily_inventory()
+        # Create a first inventory
+        date_today_overwrite = date(year=2017, month=1, day=2)
+        new_periods = {
+            'expensive': {
+                'date_start': '2017-01-02',
+                'date_end': '2017-01-02',
+                'delay': 6,
+                'nbr_inventory_per_year': 2,
+            },
+            'best_sellers': {
+                'date_start': '2017-01-02',
+                'date_end': '2017-01-02',
+                'delay': 6,
+                'nbr_inventory_per_year': 2,
+            },
+            'other': {
+                'date_start': '2017-01-01',
+                'date_end': '2017-01-02',
+                'delay': 12,
+                'nbr_inventory_per_year': 1,
+            },
+        }
+        new_inventory_products = product.get_products_daily_inventory(
+            new_periods, date_today_overwrite=date_today_overwrite
+        )
+        # I must have 4 products in this inventory
+        # - 0 expensive product
+        # - 0 best seller
+        # - 4 other products
+        #       nbr of products / (days / nbr inv per year)
+        #       8 products left / (2 / 1) = 4 products
+        self.assertEqual(len(new_inventory_products), 4)
 
-        # I should have
-        # - 0 expensive product (1 product left but 1 divided by 2 = 0.5)
-        # - 0 best seller (20% of 1 product divided by 2 = 0.1)
-        # - 1 other product
-        # Why only 1 product ?
-        # In the first inventory we take 1 expensive product, 1 best seller
-        # and 8 other products => 10 products
-        # After that I've two products without inventory
-        # (1 expensive product and 1 simple product)
-        # I cannot take the last expensive product and a best seller
-        # (due to the split). I still have a product
-        self.assertEqual(len(new_inventory_products), 1)
+        # We'll not validate this inventory and create a new one
+        ir_config.set_param('stock.months_between_inventory', '0')
+
+        new_inventory_products = product.get_products_daily_inventory(
+            new_periods, date_today_overwrite=date_today_overwrite
+        )
+        # I must have 4 products in this inventory
+        # - 2 expensive product
+        # - 2 best seller
+        # - 4 other products
+        #       nbr of products / (days / nbr inv per year)
+        #       8 products left / (2 / 1) = 4 products
+        self.assertEqual(len(new_inventory_products), 8)

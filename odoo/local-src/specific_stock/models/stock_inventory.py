@@ -2,12 +2,16 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
+
+    INVENTORY_NAMES = ['expensive', 'best_sellers', 'other']
 
     @api.multi
     def action_done(self):
@@ -39,7 +43,7 @@ class StockInventory(models.Model):
         if date_today.isoweekday() in [6, 7]:
             return
 
-        # If the crrent day is a bank holiday we skip the inventory
+        # If the current day is a bank holiday we skip the inventory
         bank_holiday = self.env['bank.holiday'].search([
             ('date', '=', fields.Date.today())
         ])
@@ -51,7 +55,10 @@ class StockInventory(models.Model):
             'filter': 'partial',
         })
         product_obj = self.env['product.product']
-        products_inventory = product_obj.get_products_daily_inventory()
+        inventory_periods = self.compute_inventory_periods()
+        products_inventory = product_obj.get_products_daily_inventory(
+            inventory_periods
+        )
 
         if not products_inventory:
             inventory.unlink()
@@ -62,6 +69,46 @@ class StockInventory(models.Model):
                 'inventory_id': inventory.id,
                 'product_id': product.id,
             })
+
+    @api.model
+    def compute_inventory_periods(self, date_now_overwrite=None):
+        config_param = self.env['ir.config_parameter']
+
+        date_now = date_now_overwrite or date.today()
+        fiscal_year = \
+            self.env.user.company_id.compute_fiscalyear_dates(date_now)
+        fiscal_year_from = fiscal_year['date_from']
+
+        periods = {}
+        for inventory in self.INVENTORY_NAMES:
+            delay = int(config_param.get_param(
+                'stock.delay_inventory_%s_products' % inventory
+            ))
+            if not delay:
+                raise UserError(
+                    _('There is no delay for the inventory %s' % inventory)
+                )
+
+            date_start_period = fiscal_year_from
+            date_end_period = \
+                date_start_period + \
+                relativedelta(months=delay) - \
+                relativedelta(days=1)
+            while date_end_period < date_now:
+                date_start_period = date_end_period + relativedelta(days=1)
+                date_end_period = \
+                    date_start_period + \
+                    relativedelta(months=delay) - \
+                    relativedelta(days=1)
+
+            periods[inventory] = {
+                'date_start': fields.Date.to_string(date_start_period),
+                'date_end': fields.Date.to_string(date_end_period),
+                'delay': delay,
+                'nbr_inventory_per_year': 12 / delay,
+            }
+
+        return periods
 
 
 class ProductChangeQuantity(models.TransientModel):
