@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 11:34+0000\n"
-"PO-Revision-Date: 2017-05-11 11:34+0000\n"
+"POT-Creation-Date: 2017-06-13 13:45+0000\n"
+"PO-Revision-Date: 2017-06-13 13:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,14 +26,42 @@ msgid "Back order accepted"
 msgstr "Reliquat accepté"
 
 #. module: specific_purchase
+#: model:ir.actions.act_window,name:specific_purchase.bank_holiday_action
+#: model:ir.ui.menu,name:specific_purchase.menu_bank_holiday_action
+msgid "Bank Holidays"
+msgstr "Jours Fériés"
+
+#. module: specific_purchase
+#: model:ir.ui.menu,name:specific_purchase.main_menu_calendar_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_create_uid
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_create_date
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_create_date
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_date
+msgid "Date"
+msgstr "Date"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_depth
+msgid "Depth (cm)"
+msgstr "Profondeur (cm)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_product_template_depth
+msgid "Depth in cm"
+msgstr "Profondeur en cm"
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_discontinued
@@ -51,6 +79,7 @@ msgid "Discount pricelist"
 msgstr "Ristourne liste de prix"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_display_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
@@ -61,6 +90,7 @@ msgid "Expected out of stock date"
 msgstr "Date escomptée de réapprovisionnement"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_id
 msgid "ID"
 msgstr "ID"
@@ -76,21 +106,40 @@ msgid "Introduction"
 msgstr "Introduction"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday___last_update
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state___last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_write_uid
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_write_date
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_config_settings_lead_time
+msgid "Lead time (in days)"
+msgstr "Délai de livraison (en jours)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_length
+msgid "Length (cm)"
+msgstr "Longueur (cm)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_product_template_length
+msgid "Length in cm"
+msgstr "Longueur en cm"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_name
 msgid "Name"
 msgstr "Nom"
@@ -116,6 +165,11 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_product_ref
+msgid "Product ref"
+msgstr "Référence produit"
+
+#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_promotion_ony
 msgid "Promotion Only"
 msgstr "Promotion seulement"
@@ -136,6 +190,11 @@ msgid "Remnant"
 msgstr "Débris"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_responsible_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
 msgid "Sequence"
 msgstr "Séquence"
@@ -149,11 +208,6 @@ msgstr "État"
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 msgid "Supplier discount %"
 msgstr "Ristourne fournisseur %"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_supplier_product_ref
-msgid "Supplier ref"
-msgstr "Ref. fournisseur"
 
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
@@ -176,7 +230,33 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_width
+msgid "Width (cm)"
+msgstr "Largeur (cm)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_product_template_width
+msgid "Width in cm"
+msgstr "Largeur en cm"
+
+#. module: specific_purchase
+#: code:addons/specific_purchase/models/purchase_order.py:144
+#, python-format
+msgid "You need to define the lead time on purchase configuration"
+msgstr "Vous devez configurer le délai de livraison dans la configuration des achats"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_bank_holiday
+msgid "bank.holiday"
+msgstr "bank.holiday"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_product_state
 msgid "product.state"
 msgstr "product.state"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_purchase_config_settings
+msgid "purchase.config.settings"
+msgstr "purchase.config.settings"
 

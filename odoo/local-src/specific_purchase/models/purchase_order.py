@@ -15,6 +15,9 @@ class PurchaseOrder(models.Model):
                                 compute='_compute_total_weight',
                                 readonly=True,
                                 help='Total weigh in Kg')
+    responsible_id = fields.Many2one('res.users',
+                                     string='Responsible',
+                                     track_visibility='onchange')
 
     @api.multi
     def _compute_total_weight(self):
@@ -24,6 +27,12 @@ class PurchaseOrder(models.Model):
                 total_weight += line.product_id.weight * line.product_qty
 
             po.total_weight = total_weight
+
+    @api.multi
+    def button_confirm(self):
+        self.responsible_id = self.env.user.id
+
+        return super(PurchaseOrder, self).button_confirm()
 
 
 class PurchaseOrderLine(models.Model):
