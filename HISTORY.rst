@@ -6,28 +6,36 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.3.0 (2017-06-15)
++++++++++++++++++++
+
 **Data Migration**
 
 **Features and Improvements**
+
+* ALCN-551: Add the module account_credit_control
+* ALCN-820: Add specific module to shipping costs calculation
 * ALCN-823: Add the module "specific_purchase"
 * ALCN-831: Version 2 of the invoice report
 * ALCN-832: Import new account type
 * ALCN-833: Update chart of accounts (add account 0 and 8)
-
-* ALCN-820: Add specific module to shipping costs calculation
 * ALCN-836: Add 'Sale Order Lines Unavailable' menu in Sales > Report
-* ALCN-845 : Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
-* ALCN-849 : Add smart button to link stock.picking to helpdesk.ticket
-
-* ALCN-847: Add CNK field to product template
-
-* ALCN-845: Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
-* ALCN-551: Add the module account_credit_control
+* ALCN-837: Allow to define a delivery round on delivery carrier
 * ALCN-844: Add field Reference to helpdesk ticket
+* ALCN-845: Install modules Helpdesk and Specific Helpdesk (Ticket Reason)
+* ALCN-847: Add CNK field to product template
+* ALCN-849: Add smart button to link stock.picking to helpdesk.ticket
 * ALCN-850: Add partner vendor on follower when create helpdesk ticket
 * ALCN-854: Add a responsible on purchase order
-
-* ALCN-837: Allow to define a delivery round on delivery carrier
 
 **Bugfixes**
 
@@ -40,8 +48,6 @@ Unreleased
 * Update to docker image 10.0-2.2.0
 * Update project from odoo-template
 * Update cloud platform addons to use Redis Sentinel in session_redis
-
-**Documentation**
 
 
 10.2.0 (2017-05-19)
