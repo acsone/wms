@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import date
 from dateutil.relativedelta import relativedelta
-import random
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
@@ -81,9 +80,8 @@ class ProductProduct(models.Model):
         nbr_expensive_products = self.env.cr.fetchone()[0]
 
         nbr_best_sellers = int(nbr_products * 0.2)
-        nbr_other_products = nbr_products\
-                                - nbr_expensive_products\
-                                - nbr_best_sellers
+        nbr_other_products = \
+            nbr_products - nbr_expensive_products - nbr_best_sellers
 
         return nbr_expensive_products, nbr_best_sellers, nbr_other_products
 
