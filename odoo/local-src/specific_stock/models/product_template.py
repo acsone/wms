@@ -54,6 +54,40 @@ class ProductProduct(models.Model):
         readonly=True)
 
     @api.model
+    def get_number_of_products_by_category(self):
+        """
+        Return the number of products by categories
+        :return:
+        """
+        all_products_query = """
+        SELECT count(*)
+        FROM product_product
+        WHERE active = TRUE;
+        """
+        self.env.cr.execute(all_products_query)
+        nbr_products = self.env.cr.fetchone()[0]
+
+        price = float(self.env['ir.config_parameter']
+                      .get_param('stock.price_limit_for_inventory', 0))
+        expensive_products_query = """
+        SELECT count(*)
+        FROM product_product AS product
+          INNER JOIN product_template AS template
+            ON product.product_tmpl_id = template.id
+        WHERE template.list_price >= %s
+        AND product.active = TRUE;
+        """
+        self.env.cr.execute(expensive_products_query, (price,))
+        nbr_expensive_products = self.env.cr.fetchone()[0]
+
+        nbr_best_sellers = int(nbr_products * 0.2)
+        nbr_other_products = nbr_products\
+                                - nbr_expensive_products\
+                                - nbr_best_sellers
+
+        return nbr_expensive_products, nbr_best_sellers, nbr_other_products
+
+    @api.model
     def get_products_daily_inventory(self,
                                      inventory_periods,
                                      date_today_overwrite=None):
@@ -85,6 +119,9 @@ class ProductProduct(models.Model):
         interval_between_inventory = int(
             config_param.get_param('stock.months_between_inventory', 0)
         )
+        best_sellers_duration = int(
+            config_param.get_param('stock.best_sellers_duration', 0)
+        )
         date_today = date_today_overwrite or date.today()
         maximum_last_inventory_date = \
             date_today - relativedelta(months=interval_between_inventory)
@@ -97,10 +134,9 @@ class ProductProduct(models.Model):
                               'in the stock configuration'))
 
         product_ids = set()
-        # SQL doesn't like when where where clause contains a "NOT IN ()"
-        # To avoid to do a lot of tricks to avoid this I add a zero in the list
-        # There are no ID zero in DB.
-        product_ids_to_ignore = set([0])
+
+        nbr_expensive_products, nbr_best_sellers, nbr_other = \
+            self.get_number_of_products_by_category()
 
         # Expensive products
         # ------------------
@@ -110,11 +146,13 @@ class ProductProduct(models.Model):
         if not expensive_period:
             raise UserError(_('There is no period for expensive products'))
         expensive_period_start = expensive_period['date_start']
-        expensive_period_end = expensive_period['date_end']
         expensive_period_nbr_year = expensive_period['nbr_inventory_per_year']
 
         if maximum_last_inventory_date_str < expensive_period_start:
             expensive_period_start = maximum_last_inventory_date_str
+
+        qty_to_check = int(
+            nbr_expensive_products / (days / expensive_period_nbr_year))
 
         query = """
         SELECT product.id
@@ -123,29 +161,18 @@ class ProductProduct(models.Model):
             ON product.product_tmpl_id = template.id
         WHERE template.list_price >= %s
         AND (product.date_last_inventory < %s
-             OR product.date_last_inventory IS NULL);
+             OR product.date_last_inventory IS NULL)
+        AND product.active = TRUE
+        ORDER BY random()
+        LIMIT %s;
         """
-        query_args = [price, expensive_period_start]
+        query_args = [price, expensive_period_start, qty_to_check]
 
         self.env.cr.execute(query, tuple(query_args))
         result = self.env.cr.fetchall()
         expensive_products_ids = [x[0] for x in result]
 
-        # Add all expensive products in the list to ignore
-        product_ids_to_ignore.update(expensive_products_ids)
-
-        if expensive_period_end == fields.Date.to_string(date_today):
-            qty_to_check = len(expensive_period_end)
-        else:
-            qty_to_check = int(len(expensive_products_ids) /
-                               (days / expensive_period_nbr_year))
-
-        if qty_to_check >= len(expensive_products_ids):
-            product_ids.update(expensive_products_ids)
-        else:
-            product_sample_ids = \
-                random.sample(expensive_products_ids, qty_to_check)
-            product_ids.update(product_sample_ids)
+        product_ids.update(expensive_products_ids)
 
         # Best sellers
         # ------------------
@@ -156,51 +183,43 @@ class ProductProduct(models.Model):
         if not best_sellers_period:
             raise UserError(_('There is no period for best sellers products'))
         best_sellers_period_start = best_sellers_period['date_start']
-        best_sellers_period_end = best_sellers_period['date_end']
         best_sellers_period_nbr_year = \
             best_sellers_period['nbr_inventory_per_year']
 
         if maximum_last_inventory_date_str < best_sellers_period_start:
             best_sellers_period_start = maximum_last_inventory_date_str
 
+        qty_to_check = int(nbr_best_sellers /
+                           (days / best_sellers_period_nbr_year))
+
         query = """
-        SELECT line.product_id, count(*) AS cnt
-        FROM sale_order_line AS line
-          INNER JOIN product_product AS product ON line.product_id = product.id
-        WHERE line.create_date > (NOW() - INTERVAL '1 year')
-         AND line.product_id NOT IN %s
-         AND (product.date_last_inventory < %s
-              OR product.date_last_inventory IS NULL)
-        GROUP BY line.product_id
-        ORDER BY cnt DESC;
+        SELECT product_id
+        FROM (
+            SELECT line.product_id, count(*) AS cnt
+            FROM sale_order_line AS line
+              INNER JOIN product_product AS product 
+                ON line.product_id = product.id
+            WHERE line.create_date > (NOW() - INTERVAL '%s MONTHS')
+             AND (product.date_last_inventory < %s
+                  OR product.date_last_inventory IS NULL)
+             AND product.active = TRUE
+             AND product.id != ALL(%s)
+            GROUP BY line.product_id
+            ORDER BY cnt DESC
+            LIMIT %s
+          ) AS result
+        ORDER BY random()
+        LIMIT %s;
         """
-        query_args = [tuple(product_ids_to_ignore), best_sellers_period_start]
-
+        query_args = [best_sellers_duration,
+                      best_sellers_period_start,
+                      list(product_ids),
+                      nbr_best_sellers,
+                      qty_to_check]
         self.env.cr.execute(query, tuple(query_args))
-        result = self.env.cr.fetchall()
+        best_sellers_ids = [x[0] for x in self.env.cr.fetchall()]
 
-        twenty_percent = int(len(result) * 0.2)
-
-        best_sellers_ids = []
-        for i in range(twenty_percent):
-            best_sellers_ids.append(result[i][0])
-
-        # Add best sellers in the list to ignore
-        # These products doesn't take in count for the "others"
-        product_ids_to_ignore.update(best_sellers_ids)
-
-        if best_sellers_period_end == fields.Date.to_string(date_today):
-            qty_to_check = len(best_sellers_period_end)
-        else:
-            qty_to_check = int(twenty_percent /
-                               (days / best_sellers_period_nbr_year))
-
-        if qty_to_check >= twenty_percent:
-            product_ids.update(best_sellers_ids)
-        else:
-            product_sample_ids = random.sample(best_sellers_ids,
-                                               qty_to_check)
-            product_ids.update(product_sample_ids)
+        product_ids.update(best_sellers_ids)
 
         # Others
         # ------
@@ -210,37 +229,29 @@ class ProductProduct(models.Model):
         if not other_period:
             raise UserError(_('There is no period for other products'))
         other_period_start = other_period['date_start']
-        other_period_end = other_period['date_end']
         other_period_nbr_year = other_period['nbr_inventory_per_year']
 
         if maximum_last_inventory_date_str < other_period_start:
             other_period_start = maximum_last_inventory_date_str
 
-        query = """
-        SELECT DISTINCT line.product_id
-        FROM sale_order_line AS line
-          INNER JOIN product_product AS product ON line.product_id = product.id
-        WHERE line.product_id NOT IN %s
-         AND (product.date_last_inventory < %s
-              OR product.date_last_inventory IS NULL);
-        """
-        query_args = [tuple(product_ids_to_ignore), other_period_start]
+        qty_to_check = int(nbr_other / (days / other_period_nbr_year))
 
-        self.env.cr.execute(query, tuple(query_args))
+        query = """
+        SELECT id
+        FROM product_product
+        WHERE (date_last_inventory < %s OR date_last_inventory IS NULL)
+        AND active = TRUE
+        AND id != ALL(%s)
+        ORDER BY random()
+        LIMIT %s;
+        """
+        self.env.cr.execute(query, (other_period_start,
+                                    list(product_ids),
+                                    qty_to_check))
         result = self.env.cr.fetchall()
 
         other_product_ids = [x[0] for x in result]
 
-        if other_period_end == fields.Date.to_string(date_today):
-            qty_to_check = len(other_product_ids)
-        else:
-            qty_to_check = int(len(other_product_ids) /
-                               (days / other_period_nbr_year))
-
-        if qty_to_check >= other_product_ids:
-            product_ids.update(other_product_ids)
-        else:
-            product_sample_ids = random.sample(other_product_ids, qty_to_check)
-            product_ids.update(product_sample_ids)
+        product_ids.update(other_product_ids)
 
         return self.browse(product_ids)

@@ -36,4 +36,9 @@
         <field name="key">stock.delay_inventory_other_products</field>
         <field name="value">12</field>
     </record>
+
+    <record id="default_best_sellers_duration" model="ir.config_parameter">
+        <field name="key">stock.best_sellers_duration</field>
+        <field name="value">12</field>
+    </record>
 </odoo>

@@ -23,6 +23,9 @@ class StockConfigSettings(models.TransientModel):
     delay_inventory_other_products = fields.Integer(
         string='Delay between two inventory for other products',
     )
+    best_sellers_duration = fields.Integer(
+        string='Duration to compute best sellers (in months)',
+    )
 
     @api.model
     def default_get(self, fields):
@@ -65,6 +68,11 @@ class StockConfigSettings(models.TransientModel):
                 )
             )
             res['delay_inventory_other_products'] = nbr_months
+        if 'best_sellers_duration' in fields or not fields:
+            nbr_months = int(
+                config_param.get_param('stock.best_sellers_duration', 0)
+            )
+            res['best_sellers_duration'] = nbr_months
 
         return res
 
@@ -118,6 +126,14 @@ class StockConfigSettings(models.TransientModel):
         self.env['ir.config_parameter'] \
             .set_param('stock.delay_inventory_other_products',
                        self.delay_inventory_other_products or '0')
+
+    @api.multi
+    def set_best_sellers_duration(self):
+        self.ensure_one()
+
+        self.env['ir.config_parameter'] \
+            .set_param('stock.best_sellers_duration',
+                       self.best_sellers_duration or '0')
 
     @api.model
     def check_delay(self, delay):

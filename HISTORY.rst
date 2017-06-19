@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-840: Add a cron to create the daily inventory
 
 **Bugfixes**
 
@@ -39,7 +40,6 @@ Unreleased
 
 * ALCN-837: Allow to define a delivery round on delivery carrier
 * ALCN-844 : Add field Reference to helpdesk ticket
-* ALCN-840: Add a cron to create the daily inventory
 
 **Bugfixes**
 

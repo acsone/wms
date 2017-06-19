@@ -28,7 +28,7 @@ class StockInventory(models.Model):
         return result
 
     @api.model
-    def create_daily_inventory(self):
+    def create_daily_inventory(self, date_today_overwrite=None):
         """
         Create the daily inventory.
         This method is call by the cron.
@@ -37,7 +37,7 @@ class StockInventory(models.Model):
         :return:
         """
         # I'll no use fields.Date.today because I want to have the object
-        date_today = date.today()
+        date_today = date_today_overwrite or date.today()
 
         # If the current day is Saturday or Sunday we skip the inventory
         if date_today.isoweekday() in [6, 7]:
@@ -45,7 +45,7 @@ class StockInventory(models.Model):
 
         # If the current day is a bank holiday we skip the inventory
         bank_holiday = self.env['bank.holiday'].search([
-            ('date', '=', fields.Date.today())
+            ('date', '=', fields.Date.to_string(date_today))
         ])
         if bank_holiday:
             return
@@ -55,26 +55,32 @@ class StockInventory(models.Model):
             'filter': 'partial',
         })
         product_obj = self.env['product.product']
-        inventory_periods = self.compute_inventory_periods()
+        inventory_periods = self.compute_inventory_periods(
+            date_today_overwrite=date_today_overwrite
+        )
         products_inventory = product_obj.get_products_daily_inventory(
-            inventory_periods
+            inventory_periods, date_today_overwrite=date_today_overwrite
         )
 
         if not products_inventory:
             inventory.unlink()
             return
 
+        location = self.env.ref('stock.stock_location_stock').location_id
         for product in products_inventory:
             inventory.line_ids.create({
                 'inventory_id': inventory.id,
                 'product_id': product.id,
+                'location_id': location.id,
             })
 
+        return inventory
+
     @api.model
-    def compute_inventory_periods(self, date_now_overwrite=None):
+    def compute_inventory_periods(self, date_today_overwrite=None):
         config_param = self.env['ir.config_parameter']
 
-        date_now = date_now_overwrite or date.today()
+        date_now = date_today_overwrite or date.today()
         fiscal_year = \
             self.env.user.company_id.compute_fiscalyear_dates(date_now)
         fiscal_year_from = fiscal_year['date_from']
