@@ -509,6 +509,20 @@ class SaleOrderMapper(EntityMapper):
         xmlid = '__import__.%s_%s' % ('customer', ref)
         odoo_entity['partner_id/id'] = xmlid
 
+    def get_sql_joins(self):
+        return ("{} JOIN ("
+                "  SELECT dccsui, dccncl, dccsuc"
+                "  FROM sbdata.PDETCDCL WHERE"
+                "    dcccss = 20"
+                "    AND dcccaa = 17"
+                "    AND dcccmm = 5"
+                "    AND dccqul < dccquc"
+                "  GROUP BY dccsui, dccncl, dccsuc"
+                ") as lines "
+                "ON eccsui = dccsui "
+                "    AND ecccli=dccncl"
+                "    AND eccsuc=dccsuc")
+
     def get_sql_where(self):
         where = "eccncr = 0 AND "
         if not self.importer.full:
@@ -535,6 +549,27 @@ class SaleOrderMapper(EntityMapper):
         )
 
 
+class SaleOrderOpenMapper(SaleOrderMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    def __init__(self, importer):
+        res = super(SaleOrderOpenMapper, self).__init__(importer)
+        self.FIELDS_MAPPING.append(
+            FieldMapper('state', constant='draft'),
+        )
+        return res
+
+    def get_sql_joins(self):
+        joins = super(SaleOrderOpenMapper, self).get_sql_joins()
+        return joins.format("INNER")
+
+    def get_sql_where(self):
+        """ Add clause that any of the line is still open """
+        where = super(SaleOrderOpenMapper, self).get_sql_where()
+        where += ""
+        return where
+
 
 class SaleOrderClosedMapper(SaleOrderMapper):
     DB2_NAME = 'PENTCDCL'
@@ -547,37 +582,15 @@ class SaleOrderClosedMapper(SaleOrderMapper):
         )
         return res
 
+    def get_sql_joins(self):
+        joins = super(SaleOrderClosedMapper, self).get_sql_joins()
+        return joins.format("LEFT")
+
+
     def get_sql_where(self):
         """ Add clause that any of the line is still open """
         where = super(SaleOrderClosedMapper, self).get_sql_where()
-        where += (
-            " AND NOT EXISTS(SELECT dccsui FROM sbdata.PDETCDCL WHERE"
-                "    dccsui = eccsui"
-                "    AND ecccli=dccncl"
-                "    AND dccsuc=eccsuc"
-                "    AND dccquc > dccqul)")
-        return where
-
-class SaleOrderOpenMapper(SaleOrderMapper):
-    DB2_NAME = 'PENTCDCL'
-    DB2_SCHEMA = 'sbdata'
-
-    def __init__(self, importer):
-        res = super(SaleOrderOpenMapper, self).__init__(importer)
-        self.FIELDS_MAPPING.append(
-            FieldMapper('state', constant='draft'),
-        )
-        return res
-
-    def get_sql_where(self):
-        """ Add clause that any of the line is still open """
-        where = super(SaleOrderOpenMapper, self).get_sql_where()
-        where += (
-            " AND EXISTS(SELECT dccsui FROM sbdata.PDETCDCL WHERE"
-                "    dccsui = eccsui"
-                "    AND ecccli=dccncl"
-                "    AND dccsuc=eccsuc"
-                "    AND dccquc > dccqul)")
+        where += " AND lines.dccsui is NULL"
         return where
 
 
@@ -647,10 +660,10 @@ class SaleOrderLineMapper(EntityMapper):
 
 
 
-MAPPER_CLASSES = [LocationMapper, ProductMapper,
-                  CustomerMapper, SupplierMapper,
-                  CustomerAddressMapper,
+MAPPER_CLASSES = [#LocationMapper, ProductMapper,
+                  #CustomerMapper, SupplierMapper,
+                  #CustomerAddressMapper,
                   SaleOrderOpenMapper,
                   SaleOrderClosedMapper,
-                  SaleOrderLineMapper
+                  #SaleOrderLineMapper
                   ]
