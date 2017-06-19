@@ -195,7 +195,7 @@ class ProductProduct(models.Model):
         FROM (
             SELECT line.product_id, count(*) AS cnt
             FROM sale_order_line AS line
-              INNER JOIN product_product AS product 
+              INNER JOIN product_product AS product
                 ON line.product_id = product.id
             WHERE line.create_date > (NOW() - INTERVAL '%s MONTHS')
              AND (product.date_last_inventory < %s
