@@ -174,9 +174,7 @@ class ProductProduct(models.Model):
 
         # Best sellers
         # ------------------
-        # Products with a cost less than the limit price (see below)
-        # ordered by the number of output.
-        # We take only 20% (on the first part) to compute the qty to take.
+        # Take twenty percent of best sales
         best_sellers_period = inventory_periods.get('best_sellers')
         if not best_sellers_period:
             raise UserError(_('There is no period for best sellers products'))
@@ -222,7 +220,6 @@ class ProductProduct(models.Model):
         # Others
         # ------
         # Take all others products
-        # (ignore all other products selected previously)
         other_period = inventory_periods.get('other')
         if not other_period:
             raise UserError(_('There is no period for other products'))
