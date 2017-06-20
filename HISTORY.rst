@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-887: Hide confirmed sale order to quotation view
+
 **Bugfixes**
 
 **Build**
