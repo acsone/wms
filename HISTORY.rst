@@ -8,6 +8,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
 
 **Bugfixes**

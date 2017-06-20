@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 08:58+0000\n"
-"PO-Revision-Date: 2017-05-30 08:58+0000\n"
+"POT-Creation-Date: 2017-06-20 08:52+0000\n"
+"PO-Revision-Date: 2017-06-20 08:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,10 +21,20 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:153
+#: selection:sale.report,month:0
+msgid "April"
+msgstr "Avril"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:160
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "August"
+msgstr "Août"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -37,6 +47,11 @@ msgstr "Commande confirmée #"
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_current_product_qty_unavailable
 msgid "Current quantity unavailable"
 msgstr "Quantité actuellement non disponible"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "December"
+msgstr "Décembre"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -66,22 +81,42 @@ msgid "Fax"
 msgstr "Fax"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:130
+#: selection:sale.report,month:0
+msgid "February"
+msgstr "Février"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:137
 #, python-format
 msgid "Following human medicines ordered under your responsibility."
 msgstr "Médicaments humains commandés suivant la cascade ii sous votre responsabilité."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:144
+#: code:addons/specific_sale/models/sale.py:151
 #, python-format
 msgid "For any problems related to this command, please contact the pharmacist."
 msgstr "Pour tous problèmes relatifs à cette commande, veuillez prendre contact avec le pharmacien."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:162
+#: code:addons/specific_sale/models/sale.py:169
 #, python-format
 msgid "Imported medicines under your entire responsibility"
 msgstr "Médicaments importés en cascade ii sous votre entière responsabilité."
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "January"
+msgstr "Janvier"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "July"
+msgstr "Juillet"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "June"
+msgstr "Juin"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_minimum
@@ -117,6 +152,16 @@ msgid "Mail"
 msgstr "Email"
 
 #. module: specific_sale
+#: selection:sale.report,month:0
+msgid "March"
+msgstr "Mars"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "May"
+msgstr "Mai"
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.order_amount_material_maximum
 msgid "Montant maximum à 1000 euros (matériel)"
 msgstr "Montant maximum à 1000 euros (matériel)"
@@ -127,11 +172,26 @@ msgid "Montant minimum à 100 euros"
 msgstr "Montant minimum à 100 euros"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_report_month
+msgid "Month"
+msgstr "Mois"
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_additional_next_expected_date_for_receipt
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_original_next_expected_date_for_receipt
 msgid "Next expected date for receipt"
 msgstr "Prochaine date prévue de réception"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "November"
+msgstr "Novembre"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "October"
+msgstr "Octobre"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_res_partner
@@ -241,18 +301,28 @@ msgid "Sales Order Lines Unavailable"
 msgstr "Lignes de commande non disponibles"
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_report
+msgid "Sales Orders Statistics"
+msgstr "Statistiques sur les commandes de ventes"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "September"
+msgstr "Septembre"
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr "Taxes"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:139
+#: code:addons/specific_sale/models/sale.py:146
 #, python-format
 msgid "The medicines will be delivered to you by our care upon receipt of these from the pharmacy"
 msgstr "Les médicaments vous serons livrés par nos soins dès réception de ceux-ci en provenance de la pharmacie."
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:134
+#: code:addons/specific_sale/models/sale.py:141
 #, python-format
 msgid "This command is transferred on your behalf to the pharmacy which will ensure the delivery of medicines."
 msgstr "Cette commande est transférée en votre nom auprès de la pharmacie qui assurera la délivrance des médicaments."

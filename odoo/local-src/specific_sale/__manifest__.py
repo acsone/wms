@@ -28,6 +28,7 @@
         'views/product_template.xml',
         'views/res_partner.xml',
         'views/sale.xml',
+        'views/sale_report.xml',
     ],
     'installable': True,
 }
