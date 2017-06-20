@@ -474,6 +474,15 @@ class SaleOrderLine(models.Model):
         comodel_name='sale.order.line.additional',
     )
 
+    @api.multi
+    def _action_procurement_create(self):
+        # Because,
+        # we don't want create procurement for original and additional lines
+        if self._name != 'sale.order.line':
+            return False
+        else:
+            return super(SaleOrderLine, self)._action_procurement_create()
+
     @api.model
     def create(self, vals):
         context = self.env.context or {}

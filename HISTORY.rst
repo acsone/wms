@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-888: Fix add a sale order line into a confirmed sale order
+
 **Build**
 
 **Documentation**
