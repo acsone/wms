@@ -1,2 +1,2 @@
 from . import procurement
-from . import stock
+from . import sale
