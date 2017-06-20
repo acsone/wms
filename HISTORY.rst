@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* Remove override of anthem/marabunta version to use the default version of docker-odoo-project
+
 **Documentation**
 
 

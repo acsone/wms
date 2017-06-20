@@ -1,7 +1,5 @@
-anthem==0.6.0
 boto==2.42.0
 redis==2.10.5
 python-json-logger==0.1.5
 statsd==3.2.1
-marabunta==0.6.2
 unidecode==0.4.20
