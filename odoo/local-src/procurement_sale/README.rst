@@ -6,10 +6,12 @@
 procurement_sale
 ================
 
-Ensure that stock reservation is performed following procurement creation
-order.  In standard, reservation is performed according to the planned date.
-This module ensures that the first buyer will be the first server whatever the
-planned date is.
+Ensure that stock reservation is performed following sale order confirmation.
+In standard, reservation is performed by the scheduler according to the planned
+date.  This module ensures that the first buyer will be the first server
+whatever the planned date is.
+If the sale order is canceled, the reconfirmed, we keep the first confirmation
+date to ensure customer do not lost his priority after sale order adaptation.
 
 With procurement_jit, the reservation is performed as soon as a sale order is
 performed. However, sales orders performed while stock was not available are
