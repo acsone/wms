@@ -260,6 +260,11 @@ class TestStockInventory(TransactionCase):
         # Validate the inventory
         inventory.action_done()
 
+        # Rewrite the last_inventory_date
+        inventory_products.write({
+            'date_last_inventory': fields.Date.to_string(date_today_overwrite)
+        })
+
         # Create a inventory the next day month
         date_today_overwrite = date(year=today_year, month=7, day=20)
         self.env['bank.holiday'].search(
