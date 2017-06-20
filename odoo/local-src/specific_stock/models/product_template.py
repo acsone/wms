@@ -58,6 +58,11 @@ class ProductProduct(models.Model):
         Return the number of products by categories
         :return:
         """
+        config_param = self.env['ir.config_parameter']
+        best_sellers_percent = int(
+            config_param.get_param('stock.best_sellers_percent', 0)
+        )
+
         all_products_query = """
         SELECT count(*)
         FROM product_product
@@ -79,7 +84,11 @@ class ProductProduct(models.Model):
         self.env.cr.execute(expensive_products_query, (price,))
         nbr_expensive_products = self.env.cr.fetchone()[0]
 
-        nbr_best_sellers = int(nbr_products * 0.2)
+        # Take a percent of the number of products
+        # to compute the number of best sellers to take.
+        # To modify the percent of best sellers change the config
+        # "Quantity to take for best sellers (in percent)" in sock settings
+        nbr_best_sellers = int(nbr_products * (best_sellers_percent / 100.0))
         nbr_other_products = \
             nbr_products - nbr_expensive_products - nbr_best_sellers
 

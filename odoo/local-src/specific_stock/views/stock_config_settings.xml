@@ -13,6 +13,8 @@
                     <field name="delay_inventory_expensive_products"/>
                     <field name="delay_inventory_best_sellers_products"/>
                     <field name="delay_inventory_other_products"/>
+                    <field name="best_sellers_duration"/>
+                    <field name="best_sellers_percent"/>
                 </group>
             </xpath>
         </field>

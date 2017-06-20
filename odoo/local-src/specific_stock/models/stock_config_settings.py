@@ -26,6 +26,9 @@ class StockConfigSettings(models.TransientModel):
     best_sellers_duration = fields.Integer(
         string='Duration to compute best sellers (in months)',
     )
+    best_sellers_percent = fields.Integer(
+        string='Quantity to take for best sellers (in percent)',
+    )
 
     @api.model
     def default_get(self, fields):
@@ -73,6 +76,11 @@ class StockConfigSettings(models.TransientModel):
                 config_param.get_param('stock.best_sellers_duration', 0)
             )
             res['best_sellers_duration'] = nbr_months
+        if 'best_sellers_percent' in fields or not fields:
+            best_sellers_percent = int(
+                config_param.get_param('stock.best_sellers_percent', 0)
+            )
+            res['best_sellers_percent'] = best_sellers_percent
 
         return res
 
@@ -134,6 +142,14 @@ class StockConfigSettings(models.TransientModel):
         self.env['ir.config_parameter'] \
             .set_param('stock.best_sellers_duration',
                        self.best_sellers_duration or '0')
+
+    @api.multi
+    def set_best_sellers_percent(self):
+        self.ensure_one()
+
+        self.env['ir.config_parameter'] \
+            .set_param('stock.best_sellers_percent',
+                       self.best_sellers_percent or '0')
 
     @api.model
     def check_delay(self, delay):

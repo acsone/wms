@@ -41,4 +41,9 @@
         <field name="key">stock.best_sellers_duration</field>
         <field name="value">12</field>
     </record>
+
+    <record id="default_best_sellers_percent" model="ir.config_parameter">
+        <field name="key">stock.best_sellers_percent</field>
+        <field name="value">20</field>
+    </record>
 </odoo>
