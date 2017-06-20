@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict
 
 from base import EntityMapper, FieldMapper
+from datetime import datetime
 import checks
 import mappings
+
+from mapper import call, const, ref, concat, ppconcat, value
 
 # Sample data for 302 SO
 SO_MIN = 2691474
@@ -16,7 +19,6 @@ class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'default_code'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
@@ -141,7 +143,6 @@ class CustomerMapper(EntityMapper):
     DB2_SCHEMA = 'gendata'
 
     XMLID_FIELD = 'ref'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
@@ -389,7 +390,6 @@ class LocationMapper(EntityMapper):
     DB2_NAME = 'PSTOCK'
 
     XMLID_FIELD = 'computed'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         'name',
@@ -475,7 +475,6 @@ class SaleOrderMapper(EntityMapper):
     DB2_SCHEMA = 'sbdata'
 
     XMLID_FIELD = 'id'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('name', 'eccsui'),
@@ -599,7 +598,6 @@ class SaleOrderLineMapper(EntityMapper):
     DB2_SCHEMA = 'sbdata'
 
     XMLID_FIELD = 'id'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('sequence', 'dccnli'),
@@ -659,11 +657,90 @@ class SaleOrderLineMapper(EntityMapper):
         return "eccsui, ecccli, eccsuc"
 
 
+class ProductionLotMapper(EntityMapper):
+    DB2_NAME = 'PLOTS'
+
+    XMLID_FIELD = concat('lotnum', 'lotref', delimiter='_')
+
+    FIELDS_MAPPING = {
+        'name': 'lotnum',
+        'product_id/id': ref('product', 'lotref', '__import__', check=False),
+        'checksum':
+            lambda rec: rec['vloint'] and
+            ('000'+'{:.0f}'.format(rec['vloint']))[-3:] or '',
+        'life_date': lambda rec:
+            rec['vloech'] and
+            datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
+                    .strftime('%Y-%m-%d 00:00:00') or '',
+    }
+
+    def get_sql_select(self):
+        return "lotref,lotnum,v.vloint,v.vloech"
+
+    def get_sql_joins(self):
+        return ("""
+            LEFT JOIN sbdata.vplots v ON (lotref=v.vloart AND lotnum=v.vlolot)
+            LEFT OUTER JOIN sbdata.vplots v2 ON
+                (v.vloart=v2.vloart AND v.vlolot=v2.vlolot
+                AND v2.vloech>v.vloech)
+        """)
+
+    def get_sql_where(self):
+        # Warning: some lot are existing multiple times.
+        # Could be that the supplier re-emitted the lot with another life date,
+        # or there was encoding error at reception
+        # res=fetchall_dict("""
+        #   SELECT lotnum,lotref,lotdes||lotdea,count(vloech) FROM sbdata.PLOTS
+        #   LEFT JOIN sbdata.vplots ON lotnum=vlolot AND lotref=vloart
+        #   WHERE lotact !=0 group by lotnum, lotref,lotdes||lotdea
+        #   having count(vloech)>1  ORDER BY 1 asc""")
+        # We cannot use the date as key in the join between plots and vplots as
+        # 28% of dates cannot be matched and there is nothing to get last
+        # inserted/modified record.
+        # So, I apply the greatest-n-per-group on vplots to fetch the date and
+        # checksum.
+
+        where = "lotact !=0 AND lotsuc='1' and v2.vloech is null"
+        return where
+
+
+class StockInventoryMapper(EntityMapper):
+    DB2_NAME = 'PLOTS'
+
+    XMLID_FIELD = concat('lotnum', 'lotref', delimiter='_')
+
+    FIELDS_MAPPING = {
+        'lot_id/id':
+            ref('productionlot',
+                concat('lotnum', 'lotref', delimiter='_'),
+                '__import__', check=False),
+        'product_id/id': ref('product', 'lotref', '__import__', check=False),
+        'product_qty': lambda rec: int(rec['lotact']),
+        'location_id/id': ref('location',
+                              concat(const('loc'), 'stolop', delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_joins(self):
+        return ("""
+            LEFT JOIN sbdata.vplots v ON (lotref=v.vloart AND lotnum=v.vlolot)
+            LEFT JOIN sbdata.pstock ON (storef=lotref AND stosuc=lotsuc)
+            LEFT JOIN sbdata.pgestion ON gesart=lotref
+        """)
+
+    def get_sql_where(self):
+        where = "lotact !=0 AND lotsuc='1'"
+        if not self.importer.full:
+            where += " AND gesdem not like '|||%'"
+        return where
+
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
                   SaleOrderOpenMapper,
                   SaleOrderClosedMapper,
-                  SaleOrderLineMapper
+                  SaleOrderLineMapper,
+                  ProductionLotMapper,
+                  StockInventoryMapper
                   ]
