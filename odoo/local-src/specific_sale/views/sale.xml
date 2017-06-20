@@ -83,4 +83,9 @@
               parent="sales_team.menu_sale_report"
               sequence="200"/>
 
+    <record id="sale.action_quotations" model="ir.actions.act_window">
+        <field name="domain">[('state', 'not in', ('sale', 'done'))]</field>
+    </record>
+
+
 </odoo>
