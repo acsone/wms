@@ -45,7 +45,8 @@ class EntityMapper:
         assert self.DB2_NAME
         assert self.XMLID_FIELD
 
-        self.name = self.__class__.__name__.lower().replace('mapper', '')
+        name = convert_camel_case(self.__class__.__name__)
+        self.name = name.replace('_mapper', '')
         self.importer = importer
 
         self.file_cache_path = os.path.join(
@@ -147,7 +148,7 @@ class EntityMapper:
                 value = mapper.value(value)
             odoo_entity['id'] = mapper.ref(
                 self.name, value, self.XMLID_IMPORT_NAME, check=False)(
-                record)
+                odoo_entity)
             odoo_entities.append(odoo_entity)
 
         return odoo_entities
@@ -234,6 +235,7 @@ class EntityMapper:
             return list(csv.DictReader(csv_file))
 
     def process(self):
+        print 'Process %s' % self.__class__.__name__
         if self.cursor:
             db2_entities = self.get_db2_entities()
         else:

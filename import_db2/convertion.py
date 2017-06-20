@@ -8,7 +8,7 @@ from datetime import datetime
 import checks
 import mappings
 
-from mapper import call, const, ref, concat, ppconcat, value
+from mapper import const, ref, concat, call
 
 # Sample data for 302 SO
 SO_MIN = 2691474
@@ -398,11 +398,22 @@ class LocationMapper(EntityMapper):
     ]
 
     def get_sql_query(self):
-        query = ("select p1.stolos as location_name from sbdata.PSTOCK as p1"
-                 " UNION "
-                 "select p2.stolop as location_name from sbdata.PSTOCK as p2")
+        """
+        Some location don't have a control code.
+        We don't need the secondary location (stolos)
+        :return:
+        """
+        query = """
+        SELECT storef, stolop FROM sbdata.PSTOCK
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
         if not self.importer.full:
-            query += " FETCH FIRST 300 ROWS ONLY"
+            query += """
+            AND storef IN (SELECT dccart 
+                        FROM sbdata.PDETCDCL 
+                        WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
 
         return query, []
 
@@ -413,8 +424,8 @@ class LocationMapper(EntityMapper):
         locations = {}
 
         for db2_entity in db2_entities:
-            value = db2_entity['location_name'].strip()
-            if len(value) < 8:
+            value = db2_entity['stolop'].strip()
+            if len(value) < 6:
                 continue
 
             family = value[0]
@@ -426,7 +437,7 @@ class LocationMapper(EntityMapper):
             if family in ('A', 'P'):
                 rack = value[2:4]
                 lvl = value[4]
-                bin = '0' + value[5]
+                bin = value[5]
             elif family in ('Q', 'E'):
                 rack = value[2]
                 lvl = value[3]
@@ -657,12 +668,13 @@ class SaleOrderLineMapper(EntityMapper):
         return "eccsui, ecccli, eccsuc"
 
 
-class ProductionLotMapper(EntityMapper):
+class StockProductionLotMapper(EntityMapper):
     DB2_NAME = 'PLOTS'
 
-    XMLID_FIELD = concat('lotnum', 'lotref', delimiter='_')
+    XMLID_FIELD = "id"
 
     FIELDS_MAPPING = {
+        'id': concat('lotnum', 'lotref', delimiter='_'),
         'name': 'lotnum',
         'product_id/id': ref('product', 'lotref', '__import__', check=False),
         'checksum':
@@ -670,6 +682,7 @@ class ProductionLotMapper(EntityMapper):
             ('000'+'{:.0f}'.format(rec['vloint']))[-3:] or '',
         'life_date': lambda rec:
             rec['vloech'] and
+            int('{:.0f}'.format(rec['vloech'])) != 99999999 and
             datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
                     .strftime('%Y-%m-%d 00:00:00') or '',
     }
@@ -700,24 +713,37 @@ class ProductionLotMapper(EntityMapper):
         # So, I apply the greatest-n-per-group on vplots to fetch the date and
         # checksum.
 
-        where = "lotact !=0 AND lotsuc='1' and v2.vloech is null"
+        where = """
+        lotact !=0 
+        AND lotsuc='1' 
+        AND v2.vloech is null
+        """
+        if not self.importer.full:
+            where += """
+            AND lotref IN (SELECT dccart
+            FROM sbdata.PDETCDCL
+            WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
         return where
 
 
-class StockInventoryMapper(EntityMapper):
+class StockInventoryLineMapper(EntityMapper):
     DB2_NAME = 'PLOTS'
 
-    XMLID_FIELD = concat('lotnum', 'lotref', delimiter='_')
+    XMLID_FIELD = "id"
 
     FIELDS_MAPPING = {
-        'lot_id/id':
-            ref('productionlot',
+        'id': concat('lotnum', 'lotref', delimiter='_'),
+        'prod_lot_id/id':
+            ref('stock_production_lot',
                 concat('lotnum', 'lotref', delimiter='_'),
                 '__import__', check=False),
         'product_id/id': ref('product', 'lotref', '__import__', check=False),
         'product_qty': lambda rec: int(rec['lotact']),
         'location_id/id': ref('location',
-                              concat(const('loc'), 'stolop', delimiter='_'),
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
                               '__import__', check=False),
     }
 
@@ -731,8 +757,43 @@ class StockInventoryMapper(EntityMapper):
     def get_sql_where(self):
         where = "lotact !=0 AND lotsuc='1'"
         if not self.importer.full:
-            where += " AND gesdem not like '|||%'"
+            where += """ 
+            AND lotref IN (SELECT dccart
+                                    FROM sbdata.PDETCDCL
+                                    WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
         return where
+
+
+class ProductStockBinMapper(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = "id"
+
+    FIELDS_MAPPING = {
+        'id': concat('storef', 'location_name', delimiter='_'),
+        'product_id/id': ref('product', 'storef', '__import__', check=False),
+        'location_id/id': const('stock.stock_location_stock'),
+        'bin_location_id/id': ref('location',
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_query(self):
+        query = """
+        SELECT storef, stolop FROM sbdata.PSTOCK
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
+        if not self.importer.full:
+            query += """
+                    AND storef IN (SELECT dccart
+                                FROM sbdata.PDETCDCL
+                                WHERE dccsui >= %s AND dccsui <= %s)
+                    """ % (SO_MIN, SO_MAX)
+        return query, []
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
@@ -741,6 +802,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   SaleOrderOpenMapper,
                   SaleOrderClosedMapper,
                   SaleOrderLineMapper,
-                  ProductionLotMapper,
-                  StockInventoryMapper
+                  StockProductionLotMapper,
+                  StockInventoryLineMapper,
+                  ProductStockBinMapper
                   ]

@@ -36,14 +36,14 @@ price,product_code,name/id,id,product_tmpl_id/id
 18.73,,__import__.supplier_83300,__import__.supplierinfo_83300-0493288,__import__.product_0493288_product_template
 40.89,81529361,__import__.supplier_62600,__import__.supplierinfo_62600-0616300,__import__.product_0616300_product_template
 108.78,82351982,__import__.supplier_62600,__import__.supplierinfo_62600-0624825,__import__.product_0624825_product_template
-3.52,,__import__.supplier_71100,__import__.supplierinfo_71100-0660944,__import__.product_0660944_product_template
+3.68,,__import__.supplier_71100,__import__.supplierinfo_71100-0660944,__import__.product_0660944_product_template
 6.84,,__import__.supplier_71100,__import__.supplierinfo_71100-0660945,__import__.product_0660945_product_template
-15.81,,__import__.supplier_71100,__import__.supplierinfo_71100-0660946,__import__.product_0660946_product_template
+14.23,,__import__.supplier_71100,__import__.supplierinfo_71100-0660946,__import__.product_0660946_product_template
 25.35,82272365,__import__.supplier_62600,__import__.supplierinfo_62600-0661132,__import__.product_0661132_product_template
 7.85,0676023,__import__.supplier_74200,__import__.supplierinfo_74200-0676023,__import__.product_0676023_product_template
 4.23,,__import__.supplier_63195,__import__.supplierinfo_63195-0685313,__import__.product_0685313_product_template
 9.01,,__import__.supplier_83300,__import__.supplierinfo_83300-0685370,__import__.product_0685370_product_template
-3.51,,__import__.supplier_83300,__import__.supplierinfo_83300-0815761,__import__.product_0815761_product_template
+4.03,,__import__.supplier_83300,__import__.supplierinfo_83300-0815761,__import__.product_0815761_product_template
 33.61,,__import__.supplier_79201,__import__.supplierinfo_79201-0836627,__import__.product_0836627_product_template
 15.05,,__import__.supplier_71100,__import__.supplierinfo_71100-0837484,__import__.product_0837484_product_template
 23.57,,__import__.supplier_79201,__import__.supplierinfo_79201-0843136,__import__.product_0843136_product_template
@@ -69,8 +69,8 @@ price,product_code,name/id,id,product_tmpl_id/id
 32.24,,__import__.supplier_77602,__import__.supplierinfo_77602-1070499,__import__.product_1070499_product_template
 90.47,,__import__.supplier_79201,__import__.supplierinfo_79201-1073360,__import__.product_1073360_product_template
 10.71,480514,__import__.supplier_82595,__import__.supplierinfo_82595-1074269,__import__.product_1074269_product_template
-49.53,84440117,__import__.supplier_62600,__import__.supplierinfo_62600-1088897,__import__.product_1088897_product_template
-12.50,2200,__import__.supplier_77602,__import__.supplierinfo_77602-1112507,__import__.product_1112507_product_template
+51.59,84440117,__import__.supplier_62600,__import__.supplierinfo_62600-1088897,__import__.product_1088897_product_template
+12.39,2200,__import__.supplier_77602,__import__.supplierinfo_77602-1112507,__import__.product_1112507_product_template
 4.73,,__import__.supplier_83300,__import__.supplierinfo_83300-1112622,__import__.product_1112622_product_template
 8.52,1915,__import__.supplier_79105,__import__.supplierinfo_79105-1114099,__import__.product_1114099_product_template
 35.07,,__import__.supplier_77603,__import__.supplierinfo_77603-1115377,__import__.product_1115377_product_template
@@ -129,17 +129,17 @@ price,product_code,name/id,id,product_tmpl_id/id
 13.44,1397231,__import__.supplier_74200,__import__.supplierinfo_74200-1397231,__import__.product_1397231_product_template
 14.87,,__import__.supplier_79201,__import__.supplierinfo_79201-1416700,__import__.product_1416700_product_template
 9.09,20175,__import__.supplier_81200,__import__.supplierinfo_81200-1418367,__import__.product_1418367_product_template
-8.93,033974,__import__.supplier_60422,__import__.supplierinfo_60422-1421825,__import__.product_1421825_product_template
+8.66,033974,__import__.supplier_60422,__import__.supplierinfo_60422-1421825,__import__.product_1421825_product_template
 4.32,1726,__import__.supplier_79105,__import__.supplierinfo_79105-1423771,__import__.product_1423771_product_template
 13.69,,__import__.supplier_77603,__import__.supplierinfo_77603-1430297,__import__.product_1430297_product_template
 5.40,,__import__.supplier_83300,__import__.supplierinfo_83300-1457498,__import__.product_1457498_product_template
 10.81,,__import__.supplier_83300,__import__.supplierinfo_83300-1457506,__import__.product_1457506_product_template
 94.25,,__import__.supplier_77603,__import__.supplierinfo_77603-1483973,__import__.product_1483973_product_template
-43.12,2206,__import__.supplier_77602,__import__.supplierinfo_77602-1484047,__import__.product_1484047_product_template
+43.25,2206,__import__.supplier_77602,__import__.supplierinfo_77602-1484047,__import__.product_1484047_product_template
 95.59,2207,__import__.supplier_77602,__import__.supplierinfo_77602-1484054,__import__.product_1484054_product_template
 15.69,40250,__import__.supplier_81200,__import__.supplierinfo_81200-1509025,__import__.product_1509025_product_template
 20.07,40255,__import__.supplier_81200,__import__.supplierinfo_81200-1509033,__import__.product_1509033_product_template
-10.91,,__import__.supplier_79201,__import__.supplierinfo_79201-1510635,__import__.product_1510635_product_template
+11.59,,__import__.supplier_79201,__import__.supplierinfo_79201-1510635,__import__.product_1510635_product_template
 50.53,,__import__.supplier_79105,__import__.supplierinfo_79105-1515253,__import__.product_1515253_product_template
 89.75,1525461,__import__.supplier_66200,__import__.supplierinfo_66200-1525641,__import__.product_1525641_product_template
 10.65,20055,__import__.supplier_81200,__import__.supplierinfo_81200-1526680,__import__.product_1526680_product_template
@@ -149,7 +149,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 9.09,20020,__import__.supplier_81200,__import__.supplierinfo_81200-1596816,__import__.product_1596816_product_template
 10.00,1633163,__import__.supplier_66008,__import__.supplierinfo_66008-1633163,__import__.product_1633163_product_template
 53.37,1635598,__import__.supplier_66008,__import__.supplierinfo_66008-1635598,__import__.product_1635598_product_template
-15.00,1655828,__import__.supplier_79100,__import__.supplierinfo_79100-1655828,__import__.product_1655828_product_template
+13.50,1655828,__import__.supplier_79100,__import__.supplierinfo_79100-1655828,__import__.product_1655828_product_template
 2.32,1656941,__import__.supplier_63195,__import__.supplierinfo_63195-1656941,__import__.product_1656941_product_template
 4.50,1662873,__import__.supplier_66008,__import__.supplierinfo_66008-1662873,__import__.product_1662873_product_template
 4.50,1662881,__import__.supplier_66008,__import__.supplierinfo_66008-1662881,__import__.product_1662881_product_template
@@ -165,7 +165,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 5.30,1745041,__import__.supplier_66008,__import__.supplierinfo_66008-1745041,__import__.product_1745041_product_template
 5.30,1745058,__import__.supplier_66008,__import__.supplierinfo_66008-1745058,__import__.product_1745058_product_template
 2.10,1750132,__import__.supplier_63195,__import__.supplierinfo_63195-1750132,__import__.product_1750132_product_template
-45.19,,__import__.supplier_66906,__import__.supplierinfo_66906-1761832,__import__.product_1761832_product_template
+50.21,,__import__.supplier_66906,__import__.supplierinfo_66906-1761832,__import__.product_1761832_product_template
 4.77,1761865,__import__.supplier_66008,__import__.supplierinfo_66008-1761865,__import__.product_1761865_product_template
 13.12,82245619,__import__.supplier_62600,__import__.supplierinfo_62600-1770528,__import__.product_1770528_product_template
 20.01,,__import__.supplier_71100,__import__.supplierinfo_71100-1791698,__import__.product_1791698_product_template
@@ -186,7 +186,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 39.14,12171886,__import__.supplier_61800,__import__.supplierinfo_61800-2171886,__import__.product_2171886_product_template
 6.68,2176089,__import__.supplier_77602,__import__.supplierinfo_77602-2176089,__import__.product_2176089_product_template
 19.22,,__import__.supplier_79201,__import__.supplierinfo_79201-2186849,__import__.product_2186849_product_template
-44.34,033920,__import__.supplier_79201,__import__.supplierinfo_79201-2187078,__import__.product_2187078_product_template
+47.11,033920,__import__.supplier_79201,__import__.supplierinfo_79201-2187078,__import__.product_2187078_product_template
 117.69,10181,__import__.supplier_81200,__import__.supplierinfo_81200-2203164,__import__.product_2203164_product_template
 16.28,4322863,__import__.supplier_62600,__import__.supplierinfo_62600-2210987,__import__.product_2210987_product_template
 18.10,,__import__.supplier_66906,__import__.supplierinfo_66906-2249597,__import__.product_2249597_product_template
@@ -237,7 +237,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 9.85,2432821,__import__.supplier_66008,__import__.supplierinfo_66008-2432821,__import__.product_2432821_product_template
 22.33,,__import__.supplier_77602,__import__.supplierinfo_77602-2433795,__import__.product_2433795_product_template
 23.74,10275,__import__.supplier_81200,__import__.supplierinfo_81200-2433878,__import__.product_2433878_product_template
-14.86,2435873,__import__.supplier_79100,__import__.supplierinfo_79100-2435873,__import__.product_2435873_product_template
+16.51,2435873,__import__.supplier_79100,__import__.supplierinfo_79100-2435873,__import__.product_2435873_product_template
 7.15,2436905,__import__.supplier_66008,__import__.supplierinfo_66008-2436905,__import__.product_2436905_product_template
 8.40,2437325,__import__.supplier_66008,__import__.supplierinfo_66008-2437325,__import__.product_2437325_product_template
 14.18,2443059,__import__.supplier_79100,__import__.supplierinfo_79100-2443059,__import__.product_2443059_product_template
@@ -300,7 +300,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 6.60,,__import__.supplier_71100,__import__.supplierinfo_71100-2691384,__import__.product_2691384_product_template
 170.94,50067,__import__.supplier_81200,__import__.supplierinfo_81200-2691723,__import__.product_2691723_product_template
 513.56,50105,__import__.supplier_81200,__import__.supplierinfo_81200-2709707,__import__.product_2709707_product_template
-6.11,,__import__.supplier_83300,__import__.supplierinfo_83300-2710846,__import__.product_2710846_product_template
+7.02,,__import__.supplier_83300,__import__.supplierinfo_83300-2710846,__import__.product_2710846_product_template
 6.89,2716843,__import__.supplier_79100,__import__.supplierinfo_79100-2716843,__import__.product_2716843_product_template
 102.55,2717437,__import__.supplier_79100,__import__.supplierinfo_79100-2717437,__import__.product_2717437_product_template
 39.41,82960326,__import__.supplier_62600,__import__.supplierinfo_62600-2720704,__import__.product_2720704_product_template
@@ -330,14 +330,14 @@ price,product_code,name/id,id,product_tmpl_id/id
 23.28,,__import__.supplier_74320,__import__.supplierinfo_74320-2816452,__import__.product_2816452_product_template
 29.60,310169,__import__.supplier_79201,__import__.supplierinfo_79201-2829695,__import__.product_2829695_product_template
 25.56,310167,__import__.supplier_79201,__import__.supplierinfo_79201-2829703,__import__.product_2829703_product_template
-17.97,310166,__import__.supplier_79201,__import__.supplierinfo_79201-2829737,__import__.product_2829737_product_template
+19.10,310166,__import__.supplier_79201,__import__.supplierinfo_79201-2829737,__import__.product_2829737_product_template
 21.51,310168,__import__.supplier_79201,__import__.supplierinfo_79201-2829752,__import__.product_2829752_product_template
 17.96,2833929,__import__.supplier_66008,__import__.supplierinfo_66008-2833929,__import__.product_2833929_product_template
 27.76,,__import__.supplier_66906,__import__.supplierinfo_66906-2837243,__import__.product_2837243_product_template
 42.70,,__import__.supplier_66906,__import__.supplierinfo_66906-2837268,__import__.product_2837268_product_template
 94.44,IV 109539,__import__.supplier_71100,__import__.supplierinfo_71100-2837581,__import__.product_2837581_product_template
 21.40,,__import__.supplier_66906,__import__.supplierinfo_66906-2838886,__import__.product_2838886_product_template
-28.93,416089,__import__.supplier_77602,__import__.supplierinfo_77602-2849065,__import__.product_2849065_product_template
+29.19,416089,__import__.supplier_77602,__import__.supplierinfo_77602-2849065,__import__.product_2849065_product_template
 103.62,416090,__import__.supplier_77602,__import__.supplierinfo_77602-2849081,__import__.product_2849081_product_template
 58.66,416087,__import__.supplier_77602,__import__.supplierinfo_77602-2849354,__import__.product_2849354_product_template
 14.32,83005611,__import__.supplier_62600,__import__.supplierinfo_62600-2849891,__import__.product_2849891_product_template
@@ -353,8 +353,8 @@ price,product_code,name/id,id,product_tmpl_id/id
 13.05,033625,__import__.supplier_60422,__import__.supplierinfo_60422-2879526,__import__.product_2879526_product_template
 47.05,033955,__import__.supplier_60422,__import__.supplierinfo_60422-2879559,__import__.product_2879559_product_template
 28.09,034006,__import__.supplier_60422,__import__.supplierinfo_60422-2881548,__import__.product_2881548_product_template
-25.07,,__import__.supplier_82670,__import__.supplierinfo_82670-2882199,__import__.product_2882199_product_template
-5.56,83768194,__import__.supplier_62600,__import__.supplierinfo_62600-2886943,__import__.product_2886943_product_template
+23.80,,__import__.supplier_82670,__import__.supplierinfo_82670-2882199,__import__.product_2882199_product_template
+6.67,83768194,__import__.supplier_62600,__import__.supplierinfo_62600-2886943,__import__.product_2886943_product_template
 35.60,80762968,__import__.supplier_62600,__import__.supplierinfo_62600-2888980,__import__.product_2888980_product_template
 18.60,83894793,__import__.supplier_62600,__import__.supplierinfo_62600-2890184,__import__.product_2890184_product_template
 14.17,83894769,__import__.supplier_62600,__import__.supplierinfo_62600-2890192,__import__.product_2890192_product_template
@@ -376,7 +376,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 37.45,,__import__.supplier_77603,__import__.supplierinfo_77603-2932531,__import__.product_2932531_product_template
 4.94,,__import__.supplier_74320,__import__.supplierinfo_74320-2932754,__import__.product_2932754_product_template
 9.99,,__import__.supplier_74320,__import__.supplierinfo_74320-2933786,__import__.product_2933786_product_template
-19.46,417364,__import__.supplier_77602,__import__.supplierinfo_77602-2941086,__import__.product_2941086_product_template
+18.85,417364,__import__.supplier_77602,__import__.supplierinfo_77602-2941086,__import__.product_2941086_product_template
 7.88,417386,__import__.supplier_77602,__import__.supplierinfo_77602-2941094,__import__.product_2941094_product_template
 16.92,2947778,__import__.supplier_66008,__import__.supplierinfo_66008-2947778,__import__.product_2947778_product_template
 37.76,2947786,__import__.supplier_66008,__import__.supplierinfo_66008-2947786,__import__.product_2947786_product_template
@@ -387,12 +387,12 @@ price,product_code,name/id,id,product_tmpl_id/id
 40.90,2956209,__import__.supplier_66008,__import__.supplierinfo_66008-2956209,__import__.product_2956209_product_template
 17.73,70030,__import__.supplier_81200,__import__.supplierinfo_81200-2959773,__import__.product_2959773_product_template
 12.77,,__import__.supplier_83300,__import__.supplierinfo_83300-2960367,__import__.product_2960367_product_template
-24.93,,__import__.supplier_74320,__import__.supplierinfo_74320-2962645,__import__.product_2962645_product_template
+23.60,,__import__.supplier_74320,__import__.supplierinfo_74320-2962645,__import__.product_2962645_product_template
 6.05,70006,__import__.supplier_81200,__import__.supplierinfo_81200-2967107,__import__.product_2967107_product_template
 37.00,40510,__import__.supplier_81200,__import__.supplierinfo_81200-2970820,__import__.product_2970820_product_template
 37.00,40500,__import__.supplier_81200,__import__.supplierinfo_81200-2970838,__import__.product_2970838_product_template
 13.06,2972289,__import__.supplier_79100,__import__.supplierinfo_79100-2972289,__import__.product_2972289_product_template
-18.23,2972297,__import__.supplier_79100,__import__.supplierinfo_79100-2972297,__import__.product_2972297_product_template
+20.25,2972297,__import__.supplier_79100,__import__.supplierinfo_79100-2972297,__import__.product_2972297_product_template
 23.65,IV132010,__import__.supplier_71100,__import__.supplierinfo_71100-2976991,__import__.product_2976991_product_template
 71.80,,__import__.supplier_79105,__import__.supplierinfo_79105-2978187,__import__.product_2978187_product_template
 6.09,034009,__import__.supplier_60422,__import__.supplierinfo_60422-2987691,__import__.product_2987691_product_template
@@ -408,7 +408,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 3.85,UCTHONDS1,__import__.supplier_82702,__import__.supplierinfo_82702-3023561,__import__.product_3023561_product_template
 4.90,,__import__.supplier_83300,__import__.supplierinfo_83300-3025848,__import__.product_3025848_product_template
 10.80,,__import__.supplier_83300,__import__.supplierinfo_83300-3025855,__import__.product_3025855_product_template
-31.95,,__import__.supplier_82670,__import__.supplierinfo_82670-3028305,__import__.product_3028305_product_template
+30.30,,__import__.supplier_82670,__import__.supplierinfo_82670-3028305,__import__.product_3028305_product_template
 60.44,,__import__.supplier_82670,__import__.supplierinfo_82670-3028313,__import__.product_3028313_product_template
 9.44,,__import__.supplier_82670,__import__.supplierinfo_82670-3030269,__import__.product_3030269_product_template
 9.77,ESSHKU,__import__.supplier_82701,__import__.supplierinfo_82701-3031986,__import__.product_3031986_product_template
@@ -428,7 +428,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 115.76,3052115,__import__.supplier_74200,__import__.supplierinfo_74200-3052115,__import__.product_3052115_product_template
 22.95,3052990,__import__.supplier_66008,__import__.supplierinfo_66008-3052990,__import__.product_3052990_product_template
 32.84,,__import__.supplier_81699,__import__.supplierinfo_81699-3057213,__import__.product_3057213_product_template
-55.79,,__import__.supplier_82670,__import__.supplierinfo_82670-3073590,__import__.product_3073590_product_template
+53.00,,__import__.supplier_82670,__import__.supplierinfo_82670-3073590,__import__.product_3073590_product_template
 25.04,432570,__import__.supplier_77602,__import__.supplierinfo_77602-3074440,__import__.product_3074440_product_template
 15.81,,__import__.supplier_82670,__import__.supplierinfo_82670-3076619,__import__.product_3076619_product_template
 22.24,,__import__.supplier_83300,__import__.supplierinfo_83300-3079662,__import__.product_3079662_product_template
@@ -443,7 +443,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 15.47,3087343,__import__.supplier_74200,__import__.supplierinfo_74200-3087343,__import__.product_3087343_product_template
 12.26,3087368,__import__.supplier_74200,__import__.supplierinfo_74200-3087368,__import__.product_3087368_product_template
 20.93,3087392,__import__.supplier_74200,__import__.supplierinfo_74200-3087392,__import__.product_3087392_product_template
-22.33,3091048,__import__.supplier_79100,__import__.supplierinfo_79100-3091048,__import__.product_3091048_product_template
+15.70,3091048,__import__.supplier_79100,__import__.supplierinfo_79100-3091048,__import__.product_3091048_product_template
 50.11,310332,__import__.supplier_79201,__import__.supplierinfo_79201-3091576,__import__.product_3091576_product_template
 5.25,HEPATO250,__import__.supplier_82701,__import__.supplierinfo_82701-3094307,__import__.product_3094307_product_template
 26.49,IV144884,__import__.supplier_71100,__import__.supplierinfo_71100-3103801,__import__.product_3103801_product_template
@@ -457,7 +457,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 23.97,10225,__import__.supplier_81200,__import__.supplierinfo_81200-3109634,__import__.product_3109634_product_template
 16.76,,__import__.supplier_83300,__import__.supplierinfo_83300-3111622,__import__.product_3111622_product_template
 12.63,3113412,__import__.supplier_74200,__import__.supplierinfo_74200-3113412,__import__.product_3113412_product_template
-7.23,432966,__import__.supplier_77602,__import__.supplierinfo_77602-3113776,__import__.product_3113776_product_template
+7.31,432966,__import__.supplier_77602,__import__.supplierinfo_77602-3113776,__import__.product_3113776_product_template
 5.04,3116183,__import__.supplier_66008,__import__.supplierinfo_66008-3116183,__import__.product_3116183_product_template
 16.46,824617,__import__.supplier_66200,__import__.supplierinfo_66200-3120250,__import__.product_3120250_product_template
 66.28,10009969,__import__.supplier_79201,__import__.supplierinfo_79201-3123155,__import__.product_3123155_product_template
@@ -468,23 +468,23 @@ price,product_code,name/id,id,product_tmpl_id/id
 13.74,825148,__import__.supplier_66200,__import__.supplierinfo_66200-3127958,__import__.product_3127958_product_template
 0,,__import__.supplier_77666,__import__.supplierinfo_77666-3129178,__import__.product_3129178_product_template
 28.71,3129657,__import__.supplier_74200,__import__.supplierinfo_74200-3129657,__import__.product_3129657_product_template
-9.20,3129665,__import__.supplier_74200,__import__.supplierinfo_74200-3129665,__import__.product_3129665_product_template
+9.74,3129665,__import__.supplier_74200,__import__.supplierinfo_74200-3129665,__import__.product_3129665_product_template
 13.56,3129673,__import__.supplier_74200,__import__.supplierinfo_74200-3129673,__import__.product_3129673_product_template
 15.96,3129681,__import__.supplier_74200,__import__.supplierinfo_74200-3129681,__import__.product_3129681_product_template
-20.46,3129699,__import__.supplier_74200,__import__.supplierinfo_74200-3129699,__import__.product_3129699_product_template
+21.66,3129699,__import__.supplier_74200,__import__.supplierinfo_74200-3129699,__import__.product_3129699_product_template
 24.42,3129715,__import__.supplier_74200,__import__.supplierinfo_74200-3129715,__import__.product_3129715_product_template
 36.83,3129723,__import__.supplier_74200,__import__.supplierinfo_74200-3129723,__import__.product_3129723_product_template
-11.50,46345,__import__.supplier_83300,__import__.supplierinfo_83300-3138120,__import__.product_3138120_product_template
+9.20,46345,__import__.supplier_83300,__import__.supplierinfo_83300-3138120,__import__.product_3138120_product_template
 5.30,3142718,__import__.supplier_66008,__import__.supplierinfo_66008-3142718,__import__.product_3142718_product_template
 6.60,3142726,__import__.supplier_66008,__import__.supplierinfo_66008-3142726,__import__.product_3142726_product_template
 2.66,3265YT,__import__.supplier_68250,__import__.supplierinfo_68250-3145018,__import__.product_3145018_product_template
 1.57,3298K,__import__.supplier_68250,__import__.supplierinfo_68250-3145026,__import__.product_3145026_product_template
-30.95,3354R,__import__.supplier_68250,__import__.supplierinfo_68250-3145042,__import__.product_3145042_product_template
+25.69,3354R,__import__.supplier_68250,__import__.supplierinfo_68250-3145042,__import__.product_3145042_product_template
 7.90,30080,__import__.supplier_81200,__import__.supplierinfo_81200-3146362,__import__.product_3146362_product_template
 39.00,3154754,__import__.supplier_66008,__import__.supplierinfo_66008-3154754,__import__.product_3154754_product_template
-8.14,ESSATOP7S,__import__.supplier_82701,__import__.supplierinfo_82701-3159217,__import__.product_3159217_product_template
+6.96,ESSATOP7S,__import__.supplier_82701,__import__.supplierinfo_82701-3159217,__import__.product_3159217_product_template
 8.83,3164605,__import__.supplier_79100,__import__.supplierinfo_79100-3164605,__import__.product_3164605_product_template
-6.81,033426,__import__.supplier_60422,__import__.supplierinfo_60422-3166998,__import__.product_3166998_product_template
+6.13,033426,__import__.supplier_60422,__import__.supplierinfo_60422-3166998,__import__.product_3166998_product_template
 74.54,,__import__.supplier_79105,__import__.supplierinfo_79105-3187903,__import__.product_3187903_product_template
 62.80,,__import__.supplier_69611,__import__.supplierinfo_69611-3191616,__import__.product_3191616_product_template
 10.37,438395,__import__.supplier_77602,__import__.supplierinfo_77602-3204443,__import__.product_3204443_product_template
@@ -530,14 +530,14 @@ price,product_code,name/id,id,product_tmpl_id/id
 14.99,3289477,__import__.supplier_74200,__import__.supplierinfo_74200-3289477,__import__.product_3289477_product_template
 17.09,3289485,__import__.supplier_74200,__import__.supplierinfo_74200-3289485,__import__.product_3289485_product_template
 7.46,ESSATOP7HC,__import__.supplier_82701,__import__.supplierinfo_82701-3294238,__import__.product_3294238_product_template
-30.73,IV154960,__import__.supplier_71100,__import__.supplierinfo_71100-3294535,__import__.product_3294535_product_template
+43.90,IV154960,__import__.supplier_71100,__import__.supplierinfo_71100-3294535,__import__.product_3294535_product_template
 6.93,3296308,__import__.supplier_66008,__import__.supplierinfo_66008-3296308,__import__.product_3296308_product_template
 114.84,10011718,__import__.supplier_79201,__import__.supplierinfo_79201-3296415,__import__.product_3296415_product_template
 88.98,10011105,__import__.supplier_79201,__import__.supplierinfo_79201-3297744,__import__.product_3297744_product_template
 2.99,,__import__.supplier_83311,__import__.supplierinfo_83311-3308772,__import__.product_3308772_product_template
 19.00,,__import__.supplier_66906,__import__.supplierinfo_66906-3309192,__import__.product_3309192_product_template
 15.83,153542,__import__.supplier_71100,__import__.supplierinfo_71100-3317039,__import__.product_3317039_product_template
-9.16,439521,__import__.supplier_77602,__import__.supplierinfo_77602-3341849,__import__.product_3341849_product_template
+9.27,439521,__import__.supplier_77602,__import__.supplierinfo_77602-3341849,__import__.product_3341849_product_template
 13.51,439518,__import__.supplier_77602,__import__.supplierinfo_77602-3341864,__import__.product_3341864_product_template
 31.41,439514,__import__.supplier_77602,__import__.supplierinfo_77602-3341872,__import__.product_3341872_product_template
 17.57,,__import__.supplier_82593,__import__.supplierinfo_82593-3355815,__import__.product_3355815_product_template
@@ -546,12 +546,12 @@ price,product_code,name/id,id,product_tmpl_id/id
 10.75,40162,__import__.supplier_81200,__import__.supplierinfo_81200-3392750,__import__.product_3392750_product_template
 10.75,40166,__import__.supplier_81200,__import__.supplierinfo_81200-3392768,__import__.product_3392768_product_template
 8.12,10012530,__import__.supplier_79201,__import__.supplierinfo_79201-3410198,__import__.product_3410198_product_template
-10.06,10012534,__import__.supplier_79201,__import__.supplierinfo_79201-3410206,__import__.product_3410206_product_template
+10.69,10012534,__import__.supplier_79201,__import__.supplierinfo_79201-3410206,__import__.product_3410206_product_template
 13.37,10012540,__import__.supplier_79201,__import__.supplierinfo_79201-3410214,__import__.product_3410214_product_template
 14.91,10012541,__import__.supplier_79201,__import__.supplierinfo_79201-3410222,__import__.product_3410222_product_template
 13.50,,__import__.supplier_83300,__import__.supplierinfo_83300-3419736,__import__.product_3419736_product_template
 27.00,,__import__.supplier_83300,__import__.supplierinfo_83300-3419751,__import__.product_3419751_product_template
-57.87,,__import__.supplier_83300,__import__.supplierinfo_83300-3419769,__import__.product_3419769_product_template
+50.30,,__import__.supplier_83300,__import__.supplierinfo_83300-3419769,__import__.product_3419769_product_template
 10.65,3424371,__import__.supplier_74200,__import__.supplierinfo_74200-3424371,__import__.product_3424371_product_template
 39.94,3424389,__import__.supplier_74200,__import__.supplierinfo_74200-3424389,__import__.product_3424389_product_template
 43.98,3424397,__import__.supplier_74200,__import__.supplierinfo_74200-3424397,__import__.product_3424397_product_template
@@ -582,7 +582,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 20.05,17849,__import__.supplier_78650,__import__.supplierinfo_78650-4009014,__import__.product_4009014_product_template
 32.27,,__import__.supplier_78650,__import__.supplierinfo_78650-4009015,__import__.product_4009015_product_template
 11.42,17869,__import__.supplier_78650,__import__.supplierinfo_78650-4009091,__import__.product_4009091_product_template
-19.45,14186,__import__.supplier_78650,__import__.supplierinfo_78650-4110003,__import__.product_4110003_product_template
+18.97,14186,__import__.supplier_78650,__import__.supplierinfo_78650-4110003,__import__.product_4110003_product_template
 30.55,10712,__import__.supplier_78650,__import__.supplierinfo_78650-4110005,__import__.product_4110005_product_template
 4.64,15354,__import__.supplier_78650,__import__.supplierinfo_78650-4120101,__import__.product_4120101_product_template
 13.98,15355,__import__.supplier_78650,__import__.supplierinfo_78650-4120102,__import__.product_4120102_product_template
@@ -609,7 +609,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 47.43,,__import__.supplier_71100,__import__.supplierinfo_71100-4200130,__import__.product_4200130_product_template
 8.64,15037,__import__.supplier_78650,__import__.supplierinfo_78650-4210002,__import__.product_4210002_product_template
 22.15,15346,__import__.supplier_78650,__import__.supplierinfo_78650-4210102,__import__.product_4210102_product_template
-37.67,15347,__import__.supplier_78650,__import__.supplierinfo_78650-4210103,__import__.product_4210103_product_template
+36.73,15347,__import__.supplier_78650,__import__.supplierinfo_78650-4210103,__import__.product_4210103_product_template
 5.46,ABB85,__import__.supplier_78650,__import__.supplierinfo_78650-4210130,__import__.product_4210130_product_template
 7.25,16808,__import__.supplier_78650,__import__.supplierinfo_78650-4212005,__import__.product_4212005_product_template
 27.77,16809,__import__.supplier_78650,__import__.supplierinfo_78650-4212008,__import__.product_4212008_product_template
@@ -617,7 +617,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 0.82,* 421 833/4,__import__.supplier_68302,__import__.supplierinfo_68302-4218331,__import__.product_4218331_product_template
 9.60,63192,__import__.supplier_78650,__import__.supplierinfo_78650-4220002,__import__.product_4220002_product_template
 27.08,63280,__import__.supplier_78650,__import__.supplierinfo_78650-4220007,__import__.product_4220007_product_template
-47.62,63281,__import__.supplier_78650,__import__.supplierinfo_78650-4220014,__import__.product_4220014_product_template
+46.43,63281,__import__.supplier_78650,__import__.supplierinfo_78650-4220014,__import__.product_4220014_product_template
 7.25,17646,__import__.supplier_78650,__import__.supplierinfo_78650-4220102,__import__.product_4220102_product_template
 27.08,17647,__import__.supplier_78650,__import__.supplierinfo_78650-4220107,__import__.product_4220107_product_template
 46.43,17648,__import__.supplier_78650,__import__.supplierinfo_78650-4220114,__import__.product_4220114_product_template
@@ -638,7 +638,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 16.04,20625,__import__.supplier_78650,__import__.supplierinfo_78650-4250203,__import__.product_4250203_product_template
 8.64,63211,__import__.supplier_78650,__import__.supplierinfo_78650-4260002,__import__.product_4260002_product_template
 24.96,63286,__import__.supplier_78650,__import__.supplierinfo_78650-4260007,__import__.product_4260007_product_template
-8.64,18369,__import__.supplier_78650,__import__.supplierinfo_78650-4270002,__import__.product_4270002_product_template
+8.86,18369,__import__.supplier_78650,__import__.supplierinfo_78650-4270002,__import__.product_4270002_product_template
 27.06,18371,__import__.supplier_78650,__import__.supplierinfo_78650-4270007,__import__.product_4270007_product_template
 42.04,18372,__import__.supplier_78650,__import__.supplierinfo_78650-4270014,__import__.product_4270014_product_template
 6.78,16203,__import__.supplier_78650,__import__.supplierinfo_78650-4270131,__import__.product_4270131_product_template
@@ -657,7 +657,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 28.72,VCN JUNIOR DS29 10KG,__import__.supplier_78650,__import__.supplierinfo_78650-4500205,__import__.product_4500205_product_template
 26.01,14394,__import__.supplier_78650,__import__.supplierinfo_78650-4500225,__import__.product_4500225_product_template
 13.98,14398,__import__.supplier_78650,__import__.supplierinfo_78650-4500244,__import__.product_4500244_product_template
-39.13,14399,__import__.supplier_78650,__import__.supplierinfo_78650-4500245,__import__.product_4500245_product_template
+38.16,14399,__import__.supplier_78650,__import__.supplierinfo_78650-4500245,__import__.product_4500245_product_template
 34.77,VCN AD LD OD25 14KG,__import__.supplier_78650,__import__.supplierinfo_78650-4500265,__import__.product_4500265_product_template
 11.17,14519,__import__.supplier_78650,__import__.supplierinfo_78650-4500284,__import__.product_4500284_product_template
 23.02,VCN NEU AD SMDOG 8KG,__import__.supplier_78650,__import__.supplierinfo_78650-4500285,__import__.product_4500285_product_template
@@ -695,7 +695,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 1.50,83280,__import__.supplier_83322,__import__.supplierinfo_83322-5044792,__import__.product_5044792_product_template
 0,,__import__.supplier_77340,__import__.supplierinfo_77340-5047305,__import__.product_5047305_product_template
 7.57,464,__import__.supplier_77640,__import__.supplierinfo_77640-5064464,__import__.product_5064464_product_template
-66.19,65361,__import__.supplier_81200,__import__.supplierinfo_81200-5065361,__import__.product_5065361_product_template
+59.58,65361,__import__.supplier_81200,__import__.supplierinfo_81200-5065361,__import__.product_5065361_product_template
 12.96,13346 X12,__import__.supplier_77420,__import__.supplierinfo_77420-5074564,__import__.product_5074564_product_template
 146.25,PF10111,__import__.supplier_69106,__import__.supplierinfo_69106-5080402,__import__.product_5080402_product_template
 15.20,PF12209,__import__.supplier_69106,__import__.supplierinfo_69106-5080411,__import__.product_5080411_product_template
@@ -748,7 +748,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 45.28,31.1355.21,__import__.supplier_74215,__import__.supplierinfo_74215-5315522,__import__.product_5315522_product_template
 40.18,17929,__import__.supplier_73657,__import__.supplierinfo_73657-5317929,__import__.product_5317929_product_template
 7.50,,__import__.supplier_83300,__import__.supplierinfo_83300-5330000,__import__.product_5330000_product_template
-30.15,,__import__.supplier_83300,__import__.supplierinfo_83300-5330001,__import__.product_5330001_product_template
+27.76,,__import__.supplier_83300,__import__.supplierinfo_83300-5330001,__import__.product_5330001_product_template
 34.43,2476000,__import__.supplier_68234,__import__.supplierinfo_68234-5350302,__import__.product_5350302_product_template
 20.38,1772,__import__.supplier_73657,__import__.supplierinfo_73657-5361772,__import__.product_5361772_product_template
 0,,__import__.supplier_79201,__import__.supplierinfo_79201-5384023,__import__.product_5384023_product_template
@@ -757,9 +757,9 @@ price,product_code,name/id,id,product_tmpl_id/id
 33.20,2212983,__import__.supplier_74200,__import__.supplierinfo_74200-5420003,__import__.product_5420003_product_template
 12.00,,__import__.supplier_64275,__import__.supplierinfo_64275-5427505,__import__.product_5427505_product_template
 0,,__import__.supplier_71100,__import__.supplierinfo_71100-5430397,__import__.product_5430397_product_template
-0.83,HB07510,__import__.supplier_74312,__import__.supplierinfo_74312-5437510,__import__.product_5437510_product_template
+0.84,HB07510,__import__.supplier_74312,__import__.supplierinfo_74312-5437510,__import__.product_5437510_product_template
 9.94,MP08016,__import__.supplier_74312,__import__.supplierinfo_74312-5438016,__import__.product_5438016_product_template
-3.51,VB08805,__import__.supplier_74308,__import__.supplierinfo_74308-5438805,__import__.product_5438805_product_template
+3.44,VB08805,__import__.supplier_74308,__import__.supplierinfo_74308-5438805,__import__.product_5438805_product_template
 6.79,,__import__.supplier_74500,__import__.supplierinfo_74500-5450016,__import__.product_5450016_product_template
 8.49,,__import__.supplier_74500,__import__.supplierinfo_74500-5450017,__import__.product_5450017_product_template
 8.05,,__import__.supplier_74500,__import__.supplierinfo_74500-5450028,__import__.product_5450028_product_template
@@ -787,7 +787,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 26.39,1068R,__import__.supplier_68250,__import__.supplierinfo_68250-5801068,__import__.product_5801068_product_template
 20.60,2843RB,__import__.supplier_68250,__import__.supplierinfo_68250-5802843,__import__.product_5802843_product_template
 8.10,10469U,__import__.supplier_68250,__import__.supplierinfo_68250-5810469,__import__.product_5810469_product_template
-22.47,10470R,__import__.supplier_68250,__import__.supplierinfo_68250-5810470,__import__.product_5810470_product_template
+22.33,10470R,__import__.supplier_68250,__import__.supplierinfo_68250-5810470,__import__.product_5810470_product_template
 7.25,10543U,__import__.supplier_68250,__import__.supplierinfo_68250-5810543,__import__.product_5810543_product_template
 42.50,10560N,__import__.supplier_68250,__import__.supplierinfo_68250-5810560,__import__.product_5810560_product_template
 30.23,1368N,__import__.supplier_68250,__import__.supplierinfo_68250-5821368,__import__.product_5821368_product_template
@@ -809,9 +809,9 @@ price,product_code,name/id,id,product_tmpl_id/id
 25.43,2843R,__import__.supplier_68250,__import__.supplierinfo_68250-5822843,__import__.product_5822843_product_template
 39.36,2844R,__import__.supplier_68250,__import__.supplierinfo_68250-5822844,__import__.product_5822844_product_template
 33.11,3445N,__import__.supplier_68250,__import__.supplierinfo_68250-5823445,__import__.product_5823445_product_template
-28.50,3446N,__import__.supplier_68250,__import__.supplierinfo_68250-5823446,__import__.product_5823446_product_template
+27.83,3446N,__import__.supplier_68250,__import__.supplierinfo_68250-5823446,__import__.product_5823446_product_template
 7.85,3607U,__import__.supplier_68250,__import__.supplierinfo_68250-5823607,__import__.product_5823607_product_template
-49.72,3609N,__import__.supplier_68250,__import__.supplierinfo_68250-5823609,__import__.product_5823609_product_template
+41.27,3609N,__import__.supplier_68250,__import__.supplierinfo_68250-5823609,__import__.product_5823609_product_template
 21.32,8018U,__import__.supplier_68250,__import__.supplierinfo_68250-5825656,__import__.product_5825656_product_template
 27.25,5661G,__import__.supplier_68250,__import__.supplierinfo_68250-5825661,__import__.product_5825661_product_template
 21.45,8003M,__import__.supplier_68250,__import__.supplierinfo_68250-5825667,__import__.product_5825667_product_template
@@ -829,7 +829,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 30.23,7545M,__import__.supplier_68250,__import__.supplierinfo_68250-5827545,__import__.product_5827545_product_template
 24.73,7749R,__import__.supplier_68250,__import__.supplierinfo_68250-5827749,__import__.product_5827749_product_template
 21.85,8058R,__import__.supplier_68250,__import__.supplierinfo_68250-5828058,__import__.product_5828058_product_template
-24.99,8408U,__import__.supplier_68250,__import__.supplierinfo_68250-5828408,__import__.product_5828408_product_template
+20.75,8408U,__import__.supplier_68250,__import__.supplierinfo_68250-5828408,__import__.product_5828408_product_template
 17.53,8647U,__import__.supplier_68250,__import__.supplierinfo_68250-5828647,__import__.product_5828647_product_template
 17.53,8648U,__import__.supplier_68250,__import__.supplierinfo_68250-5828648,__import__.product_5828648_product_template
 27.83,8649N,__import__.supplier_68250,__import__.supplierinfo_68250-5828649,__import__.product_5828649_product_template
@@ -845,11 +845,11 @@ price,product_code,name/id,id,product_tmpl_id/id
 22.55,9002N,__import__.supplier_68250,__import__.supplierinfo_68250-5829002,__import__.product_5829002_product_template
 22.55,9003N,__import__.supplier_68250,__import__.supplierinfo_68250-5829003,__import__.product_5829003_product_template
 46.25,9176N,__import__.supplier_68250,__import__.supplierinfo_68250-5829176,__import__.product_5829176_product_template
-41.27,9178N,__import__.supplier_68250,__import__.supplierinfo_68250-5829178,__import__.product_5829178_product_template
+41.52,9178N,__import__.supplier_68250,__import__.supplierinfo_68250-5829178,__import__.product_5829178_product_template
 41.27,9179N,__import__.supplier_68250,__import__.supplierinfo_68250-5829179,__import__.product_5829179_product_template
 38.39,9181N,__import__.supplier_68250,__import__.supplierinfo_68250-5829181,__import__.product_5829181_product_template
 38.39,9182N,__import__.supplier_68250,__import__.supplierinfo_68250-5829182,__import__.product_5829182_product_template
-48.57,9183N,__import__.supplier_68250,__import__.supplierinfo_68250-5829183,__import__.product_5829183_product_template
+40.32,9183N,__import__.supplier_68250,__import__.supplierinfo_68250-5829183,__import__.product_5829183_product_template
 11.89,9186U,__import__.supplier_68250,__import__.supplierinfo_68250-5829186,__import__.product_5829186_product_template
 11.89,9188U,__import__.supplier_68250,__import__.supplierinfo_68250-5829188,__import__.product_5829188_product_template
 28.80,3276N,__import__.supplier_68250,__import__.supplierinfo_68250-5829266,__import__.product_5829266_product_template
@@ -910,7 +910,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 4.14,,__import__.supplier_95120,__import__.supplierinfo_95120-6869101,__import__.product_6869101_product_template
 11.44,8122139,__import__.supplier_79001,__import__.supplierinfo_79001-6891595,__import__.product_6891595_product_template
 6.65,6895133,__import__.supplier_79001,__import__.supplierinfo_79001-6895133,__import__.product_6895133_product_template
-10.49,,__import__.supplier_79001,__import__.supplierinfo_79001-6902577,__import__.product_6902577_product_template
+10.54,,__import__.supplier_79001,__import__.supplierinfo_79001-6902577,__import__.product_6902577_product_template
 11.90,,__import__.supplier_79001,__import__.supplierinfo_79001-6910430,__import__.product_6910430_product_template
 6.70,6913888,__import__.supplier_79001,__import__.supplierinfo_79001-6913888,__import__.product_6913888_product_template
 9.90,6913894,__import__.supplier_79001,__import__.supplierinfo_79001-6913894,__import__.product_6913894_product_template
@@ -932,7 +932,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 21.85,4215R,__import__.supplier_68250,__import__.supplierinfo_68250-7196650,__import__.product_7196650_product_template
 21.85,4364R,__import__.supplier_68250,__import__.supplierinfo_68250-7196704,__import__.product_7196704_product_template
 21.85,4378R,__import__.supplier_68250,__import__.supplierinfo_68250-7196822,__import__.product_7196822_product_template
-46.25,4027N,__import__.supplier_68250,__import__.supplierinfo_68250-7196880,__import__.product_7196880_product_template
+38.39,4027N,__import__.supplier_68250,__import__.supplierinfo_68250-7196880,__import__.product_7196880_product_template
 36.74,9043R,__import__.supplier_68250,__import__.supplierinfo_68250-7196934,__import__.product_7196934_product_template
 31.45,4308R,__import__.supplier_68250,__import__.supplierinfo_68250-7197017,__import__.product_7197017_product_template
 31.45,4318R,__import__.supplier_68250,__import__.supplierinfo_68250-7197069,__import__.product_7197069_product_template
@@ -949,7 +949,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 8.18,2250,__import__.supplier_77602,__import__.supplierinfo_77602-7760217,__import__.product_7760217_product_template
 104.74,2251,__import__.supplier_77602,__import__.supplierinfo_77602-7760218,__import__.product_7760218_product_template
 16.00,,__import__.supplier_77603,__import__.supplierinfo_77603-7760300,__import__.product_7760300_product_template
-17.93,,__import__.supplier_77603,__import__.supplierinfo_77603-7760333,__import__.product_7760333_product_template
+18.30,,__import__.supplier_77603,__import__.supplierinfo_77603-7760333,__import__.product_7760333_product_template
 14.62,2262,__import__.supplier_77602,__import__.supplierinfo_77602-7762262,__import__.product_7762262_product_template
 34.48,203,__import__.supplier_77640,__import__.supplierinfo_77640-7764022,__import__.product_7764022_product_template
 4.07,970,__import__.supplier_77640,__import__.supplierinfo_77640-7764040,__import__.product_7764040_product_template
@@ -957,7 +957,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 10.14,1357102,__import__.supplier_79100,__import__.supplierinfo_79100-7910010,__import__.product_7910010_product_template
 54.91,1357672,__import__.supplier_79100,__import__.supplierinfo_79100-7910011,__import__.product_7910011_product_template
 9.19,80322,__import__.supplier_81200,__import__.supplierinfo_81200-7910034,__import__.product_7910034_product_template
-18.94,2455426,__import__.supplier_79100,__import__.supplierinfo_79100-7910041,__import__.product_7910041_product_template
+18.00,2455426,__import__.supplier_79100,__import__.supplierinfo_79100-7910041,__import__.product_7910041_product_template
 4.69,2576239,__import__.supplier_79100,__import__.supplierinfo_79100-7910047,__import__.product_7910047_product_template
 6.01,2576254,__import__.supplier_79100,__import__.supplierinfo_79100-7910050,__import__.product_7910050_product_template
 6.38,,__import__.supplier_71100,__import__.supplierinfo_71100-7915000,__import__.product_7915000_product_template
@@ -1004,7 +1004,7 @@ price,product_code,name/id,id,product_tmpl_id/id
 1.62,8039415,__import__.supplier_79000,__import__.supplierinfo_79000-8039415,__import__.product_8039415_product_template
 0.91,*273320,__import__.supplier_77316,__import__.supplierinfo_77316-8043687,__import__.product_8043687_product_template
 2.04,*273360,__import__.supplier_77316,__import__.supplierinfo_77316-8043730,__import__.product_8043730_product_template
-3.94,*273280,__import__.supplier_77316,__import__.supplierinfo_77316-8044787,__import__.product_8044787_product_template
+4.05,*273280,__import__.supplier_77316,__import__.supplierinfo_77316-8044787,__import__.product_8044787_product_template
 31.20,GH703,__import__.supplier_79000,__import__.supplierinfo_79000-8045002,__import__.product_8045002_product_template
 192.40,GT104,__import__.supplier_79000,__import__.supplierinfo_79000-8045143,__import__.product_8045143_product_template
 0.53,01/2381,__import__.supplier_73657,__import__.supplierinfo_73657-8050256,__import__.product_8050256_product_template
@@ -1016,17 +1016,17 @@ price,product_code,name/id,id,product_tmpl_id/id
 3.53,CL823,__import__.supplier_79003,__import__.supplierinfo_79003-8062377,__import__.product_8062377_product_template
 2.23,8068598,__import__.supplier_79001,__import__.supplierinfo_79001-8068598,__import__.product_8068598_product_template
 15.48,8131,__import__.supplier_79152,__import__.supplierinfo_79152-8069250,__import__.product_8069250_product_template
-60.74,,__import__.supplier_76105,__import__.supplierinfo_76105-8090899,__import__.product_8090899_product_template
+64.08,,__import__.supplier_76105,__import__.supplierinfo_76105-8090899,__import__.product_8090899_product_template
 106.37,,__import__.supplier_76105,__import__.supplierinfo_76105-8090913,__import__.product_8090913_product_template
 16.45,14829,__import__.supplier_78650,__import__.supplierinfo_78650-8095224,__import__.product_8095224_product_template
 13.65,12274669,__import__.supplier_61800,__import__.supplierinfo_61800-8095595,__import__.product_8095595_product_template
-15.25,033661,__import__.supplier_60422,__import__.supplierinfo_60422-8097275,__import__.product_8097275_product_template
+12.20,033661,__import__.supplier_60422,__import__.supplierinfo_60422-8097275,__import__.product_8097275_product_template
 14.61,,__import__.supplier_76105,__import__.supplierinfo_76105-8101539,__import__.product_8101539_product_template
 88.98,,__import__.supplier_76105,__import__.supplierinfo_76105-8101545,__import__.product_8101545_product_template
 6.83,,__import__.supplier_79001,__import__.supplierinfo_79001-8112796,__import__.product_8112796_product_template
 1.81,*279399,__import__.supplier_77316,__import__.supplierinfo_77316-8165008,__import__.product_8165008_product_template
 0.56,4269102,__import__.supplier_62779,__import__.supplierinfo_62779-8189008,__import__.product_8189008_product_template
-2.46,470731,__import__.supplier_79000,__import__.supplierinfo_79000-8206043,__import__.product_8206043_product_template
+2.50,470731,__import__.supplier_79000,__import__.supplierinfo_79000-8206043,__import__.product_8206043_product_template
 2.34,227662,__import__.supplier_67530,__import__.supplierinfo_67530-8210062,__import__.product_8210062_product_template
 1.23,2400RD018,__import__.supplier_61593,__import__.supplierinfo_61593-8214195,__import__.product_8214195_product_template
 4.40,8300014579,__import__.supplier_68370,__import__.supplierinfo_68370-8219293,__import__.product_8219293_product_template
@@ -1039,9 +1039,9 @@ price,product_code,name/id,id,product_tmpl_id/id
 7.20,SS-02S21161,__import__.supplier_74158,__import__.supplierinfo_74158-8270066,__import__.product_8270066_product_template
 15.76,LRDKAT3,__import__.supplier_82702,__import__.supplierinfo_82702-8270089,__import__.product_8270089_product_template
 6.24,XYL,__import__.supplier_82701,__import__.supplierinfo_82701-8270095,__import__.product_8270095_product_template
-6.25,MYOGAS,__import__.supplier_82701,__import__.supplierinfo_82701-8270104,__import__.product_8270104_product_template
+5.71,MYOGAS,__import__.supplier_82701,__import__.supplierinfo_82701-8270104,__import__.product_8270104_product_template
 6.15,,__import__.supplier_82701,__import__.supplierinfo_82701-8270109,__import__.product_8270109_product_template
-10.03,ASCOPE,__import__.supplier_82701,__import__.supplierinfo_82701-8270123,__import__.product_8270123_product_template
+8.54,ASCOPE,__import__.supplier_82701,__import__.supplierinfo_82701-8270123,__import__.product_8270123_product_template
 0.19,SV-23BL,__import__.supplier_74158,__import__.supplierinfo_74158-8270156,__import__.product_8270156_product_template
 8.20,7930452,__import__.supplier_82701,__import__.supplierinfo_82701-8270281,__import__.product_8270281_product_template
 8.20,7930469,__import__.supplier_82701,__import__.supplierinfo_82701-8270282,__import__.product_8270282_product_template
