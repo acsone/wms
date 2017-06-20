@@ -5,7 +5,7 @@
 from pkg_resources import resource_stream
 
 import anthem
-from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
 from ..common import req
 
