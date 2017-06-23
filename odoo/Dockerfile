@@ -35,6 +35,8 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/bank-payment, \
   /opt/odoo/external-src/account-invoicing, \
   /opt/odoo/external-src/account-analytic, \
+  /opt/odoo/external-src/connector, \
+  /opt/odoo/external-src/queue, \
   /opt/odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \

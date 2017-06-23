@@ -34,3 +34,9 @@
 [submodule "odoo/external-src/stock-logistics-warehouse"]
 	path = odoo/external-src/stock-logistics-warehouse
 	url = git@github.com:OCA/stock-logistics-warehouse.git
+[submodule "odoo/external-src/connector"]
+	path = odoo/external-src/connector
+	url = git@github.com:oca/connector
+[submodule "odoo/external-src/queue"]
+	path = odoo/external-src/queue
+	url = git@github.com:oca/queue
