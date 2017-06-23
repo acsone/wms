@@ -32,5 +32,15 @@ services:
     ports:
       - 80:80
 
+  pissh:
+    image: camptocamp/alcyon_pissh
+    command: "ssh pi@194.78.105.88 -L 0.0.0.0:8471:10.2.2.3:8471 -N"
+    # environment:
+    #   SSH_ID_RSA: |
+    #     -----BEGIN RSA PRIVATE KEY-----
+    #     key's in lastpass (DB2 SSH Gateway access Raspberry PI)
+    #     -----END RSA PRIVATE KEY-----
+
+
 volumes:
   data-odoo-pytest-cache:
