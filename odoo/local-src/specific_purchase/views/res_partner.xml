@@ -8,8 +8,8 @@
         <field name="arch" type="xml">
 
             <xpath expr="//group[@name='purchase']/field[@name='supplier']" position="after">
-                <field name="supplier_responsible_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
-                <field name="supplier_substitute_responsible_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
+                <field name="purchase_manager_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
+                <field name="substitute_purchase_manager_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
                 <field name="supplier_discount"/>
                 <field name="is_back_order_accepted"/>
             </xpath>

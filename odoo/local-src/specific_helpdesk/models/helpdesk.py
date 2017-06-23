@@ -44,9 +44,9 @@ class HelpdeskTicket(models.Model):
             partners_to_add.append(
                 ticket.partner_id.user_id.partner_id.id
             )
-        if ticket.partner_id.supplier_responsible_id.partner_id:
+        if ticket.partner_id.purchase_manager_id.partner_id:
             partners_to_add.append(
-                ticket.partner_id.supplier_responsible_id.partner_id.id
+                ticket.partner_id.purchase_manager_id.partner_id.id
             )
         if partners_to_add:
             ticket.message_subscribe(partner_ids=partners_to_add)
