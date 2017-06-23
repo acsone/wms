@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ROOT>
+  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
+    <Row>
+      <Cplz05>XXX0001</Cplz05>
+      <Gesart>exportable001</Gesart>
+      <Gesdem>Export me pls</Gesdem>
+      <Gespnt>10.0</Gespnt>
+    </Row>
+    <Row>
+      <Cplz05>XXX0002</Cplz05>
+      <Gesart>exportable002</Gesart>
+      <Gesdem>Export me pls 2</Gesdem>
+      <Gespnt>5.0</Gespnt>
+    </Row>
+    <Row>
+      <Cplz05>XXX0003</Cplz05>
+      <Gesart>exportable003</Gesart>
+      <Gesdem>Export me pls 3</Gesdem>
+      <Gespnt>1.0</Gespnt>
+    </Row>
+  </Root>
+</ROOT>

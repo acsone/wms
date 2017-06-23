@@ -189,3 +189,4 @@ migration:
           - specific_helpdesk
           - specific_purchase
           - specific_sale
+          - specific_esb
