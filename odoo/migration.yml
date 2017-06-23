@@ -186,4 +186,5 @@ migration:
       addons:
         upgrade:
           # Specific modules
+          - specific_helpdesk
           - specific_sale

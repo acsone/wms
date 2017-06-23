@@ -10,6 +10,7 @@ Unreleased
 
 * ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
+* ALCN-892: Custom reference field on helpdesk ticket
 * Setup song: do not reset admin pwd for devs
 
 **Bugfixes**
