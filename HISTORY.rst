@@ -10,6 +10,7 @@ Unreleased
 
 * ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
+* Setup song: do not reset admin pwd for devs
 
 **Bugfixes**
 
@@ -19,6 +20,8 @@ Unreleased
 
 * Upgrade server-tools repository
 * Remove override of anthem/marabunta version to use the default version of docker-odoo-project
+* TMP use `enterprise` from c2c
+
 
 **Documentation**
 

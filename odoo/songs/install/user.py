@@ -2,6 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import os
 from pkg_resources import resource_stream
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
@@ -16,6 +17,9 @@ def change_admin_language(ctx):
 
 @anthem.log
 def admin_user_password(ctx):
+    if os.getenv('RUNNING_ENV') in ('dev', ):
+        ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
+        return
     # password for the test server,
     # the password must be changed in production
     ctx.env.user.password_crypt = (
