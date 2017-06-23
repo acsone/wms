@@ -25,6 +25,16 @@ class HelpdeskTicket(models.Model):
     stock_picking_id = fields.Many2one(comodel_name='stock.picking',
                                        string='Picking')
 
+    sale_order_id = fields.Many2one(
+        comodel_name='sale.order',
+        string='Sale order',
+    )
+
+    purchase_order_id = fields.Many2one(
+        comodel_name='purchase.order',
+        string='Purchase order',
+    )
+
     @api.model
     def default_get(self, fields):
         res = super(HelpdeskTicket, self).default_get(fields)
