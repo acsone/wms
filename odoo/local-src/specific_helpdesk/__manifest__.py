@@ -6,9 +6,13 @@
  'author': 'Camptocamp',
  'license': 'AGPL-3',
  'category': 'Helpdesk',
- 'depends': ['helpdesk',
-             'stock',
-             ],
+ 'depends': [
+     'account',
+     'helpdesk',
+     'mrp',
+     'product',
+     'stock',
+ ],
  'website': 'http://www.camptocamp.com',
  'data': [
      'data/helpdesk.xml',

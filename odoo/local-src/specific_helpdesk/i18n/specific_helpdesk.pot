@@ -18,128 +18,128 @@ msgstr ""
 #. module: specific_helpdesk
 #: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
 msgid "Click to create a new ticket reason."
-msgstr "Cliquer pour créer une nouvelle cause du ticket"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_display_name
 msgid "Display Name"
-msgstr "Afficher le nom"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_ticket_ids
 msgid "Helpdesk Tickets"
-msgstr "Tickets Helpdesk"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Invoice"
-msgstr "Facture"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:helpdesk.ticket.type,name:specific_helpdesk.type_logistics
 msgid "Logistics"
-msgstr "Logistique"
+msgstr ""
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Lot/Serial number"
-msgstr "Lot/Numéro de série"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_name
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
 msgid "Picking"
-msgstr "Opération de manutention"
+msgstr ""
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Product"
-msgstr "Produit"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
 #: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reasom_view_tree
 msgid "Reason"
-msgstr "Cause"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
 msgid "Reason allows to organize tickets."
-msgstr "La cause permet d'organiser les tickets"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_ref
 msgid "Reference"
-msgstr "Référence"
+msgstr ""
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Repair"
-msgstr "Réparation"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket
 msgid "Ticket"
-msgstr "Ticket"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.actions.act_window,name:specific_helpdesk.helpdesk_ticket_reason_action
 #: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket_reason
 #: model:ir.ui.menu,name:specific_helpdesk.helpdesk_ticket_reason_menu
 msgid "Ticket Reason"
-msgstr "Cause du ticket"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.ui.view,arch_db:specific_helpdesk.view_picking_form
 msgid "Tickets"
-msgstr "Tickets"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
 msgid "Tickets number"
-msgstr "Nombre de tickets"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_stock_picking
 msgid "Transfer"
-msgstr "Transfert"
+msgstr ""
 

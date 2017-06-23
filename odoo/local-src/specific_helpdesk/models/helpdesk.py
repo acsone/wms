@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api
-from odoo.addons.base.res.res_request import referenceable_models
 
 
 class HelpdeskTicket(models.Model):
@@ -14,7 +13,13 @@ class HelpdeskTicket(models.Model):
         comodel_name='helpdesk.ticket.reason', string='Reason')
 
     ref = fields.Reference(
-        selection=referenceable_models,
+        selection=[
+            ('res.partner', 'Partner'),
+            ('product.product', 'Product'),
+            ('account.invoice', 'Invoice'),
+            ('stock.production.lot', 'Lot/Serial number'),
+            ('mrp.repair', 'Repair'),
+        ],
         string='Reference')
 
     stock_picking_id = fields.Many2one(comodel_name='stock.picking',
