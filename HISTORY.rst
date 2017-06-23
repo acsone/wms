@@ -12,6 +12,7 @@ Unreleased
 * ALCN-887: Hide confirmed sale order to quotation view
 * ALCN-892: Custom reference field on helpdesk ticket
 * Setup song: do not reset admin pwd for devs
+* ALCN-889: Add supplier responsible on partner and as follower on helpdesk
 
 **Bugfixes**
 

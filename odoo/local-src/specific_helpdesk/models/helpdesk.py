@@ -38,10 +38,18 @@ class HelpdeskTicket(models.Model):
     @api.model
     def create(self, vals):
         ticket = super(HelpdeskTicket, self).create(vals)
+
+        partners_to_add = []
         if ticket.partner_id.user_id.partner_id:
-            ticket.message_subscribe(
-                partner_ids=ticket.partner_id.user_id.partner_id.ids
+            partners_to_add.append(
+                ticket.partner_id.user_id.partner_id.id
             )
+        if ticket.partner_id.supplier_responsible_id.partner_id:
+            partners_to_add.append(
+                ticket.partner_id.supplier_responsible_id.partner_id.id
+            )
+        if partners_to_add:
+            ticket.message_subscribe(partner_ids=partners_to_add)
 
         return ticket
 

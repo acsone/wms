@@ -11,6 +11,7 @@
      'helpdesk',
      'mrp',
      'product',
+     'specific_purchase',
      'stock',
  ],
  'website': 'http://www.camptocamp.com',
