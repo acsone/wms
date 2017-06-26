@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-840: Add a cron to create the daily inventory
 
 * ALCN-873: If no exception, hide exception group in sale order form view
 * ALCN-885: Add a month filter on sale report

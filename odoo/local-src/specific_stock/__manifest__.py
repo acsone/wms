@@ -16,6 +16,7 @@
         'stock_production_lot_expired_dates',
         'stock_reception_priority',
         'stock_receive_lot',
+        'specific_purchase',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -24,6 +25,7 @@
         'views/product_template.xml',
         'views/stock_location.xml',
         'views/stock_production_lot.xml',
+        'views/stock_config_settings.xml',
         'wizards/stock_receive_lot.xml',
 
         # Data
