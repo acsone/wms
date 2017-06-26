@@ -33,6 +33,14 @@ class PurchaseOrder(models.Model):
 
         return super(PurchaseOrder, self).button_confirm()
 
+    @api.multi
+    def _add_supplier_to_product(self):
+        """
+        Disable this feature
+        :return:
+        """
+        return
+
     last_date_done = fields.Datetime(
         string='Last date of Transfer',
         compute='_compute_last_date_done',

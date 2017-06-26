@@ -1,0 +1,38 @@
+CREATE OR REPLACE VIEW zelapro_export_suppliers AS
+  SELECT
+    supplier.ref AS FOUNUM,
+    '' AS FOULAN,
+    supplier.name AS FOUNOM,
+    '' AS FOUNOS,
+    '' AS FOUADR,
+    '' AS FOUCPO,
+    '' AS FOULOC,
+    '' AS FOUAPP,
+    '' AS FOUCEE,
+    '' AS FOUDIV,
+    '' AS LIBDIV,
+    '' AS FOUTIT,
+    '' AS FOUDEV,
+    '' AS LIBDEV,
+    '' AS FOUPRF,
+    categ.name AS LIBPRF,
+    '' AS FOUTEL,
+    '' AS FOUFAX,
+    '' AS PAACPT,
+    '' AS PAANBQ,
+    '' AS PAASWI,
+    supplier.delivery_lead_time AS FOUDLL,
+    '' AS FOURES,
+    '' AS LIBRES,
+    '' AS FOUJES,
+    '' AS LIBJES,
+    '' AS FOUPOU,
+    '' AS LIBPOU,
+    '' AS FOUGES,
+    '' AS LIBGES,
+    supplier.supplier_discount AS FOUREM
+  FROM res_partner AS supplier
+    LEFT JOIN partner_alcyon_category AS categ ON supplier.alcyon_category_id = categ.id
+  WHERE supplier.supplier = TRUE;
+
+SELECT * FROM partner_alcyon_category;

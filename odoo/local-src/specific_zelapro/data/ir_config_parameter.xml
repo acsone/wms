@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo noupdate="1">
+
+    <record id="default_delimiter" model="ir.config_parameter">
+        <field name="key">zelapro.delimiter</field>
+        <field name="value">;</field>
+    </record>
+</odoo>

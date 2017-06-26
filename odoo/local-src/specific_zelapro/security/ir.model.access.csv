@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zelapro_export,access_zelapro_export,model_zelapro_export,stock.group_stock_manager,1,0,0,0
+access_zelapro_export_line,access_zelapro_export_line,model_zelapro_export_line,stock.group_stock_manager,1,0,0,0
