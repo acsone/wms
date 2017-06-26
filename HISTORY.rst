@@ -11,6 +11,7 @@ Unreleased
 * ALCN-873: If no exception, hide exception group in sale order form view
 * ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
+* ALCN-890: Add sale order and purchase order fields on helpdesk ticket
 * ALCN-892: Custom reference field on helpdesk ticket
 * Setup song: do not reset admin pwd for devs
 
