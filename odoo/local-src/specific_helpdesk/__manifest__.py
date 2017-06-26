@@ -9,7 +9,7 @@
  'depends': [
      'account',
      'helpdesk',
-     'mrp',
+     'mrp_repair',
      'product',
      'specific_purchase',
      'stock',
