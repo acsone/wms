@@ -3,8 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import date, timedelta
 
-from odoo import fields, models, api, _
-from odoo.exceptions import UserError
+from odoo import fields, models, api
 import odoo.addons.decimal_precision as dp
 
 

@@ -17,8 +17,8 @@ class PurchaseConfigSettings(models.TransientModel):
 
     def set_lead_time(self):
         if not self.lead_time:
-            lead_time = 0
+            lead_time = '0'
         else:
-            lead_time = int(self.lead_time)
+            lead_time = str(self.lead_time)
         self.env['ir.config_parameter']\
             .set_param('purchase.lead_time', lead_time)
