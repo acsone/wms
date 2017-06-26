@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-13 13:45+0000\n"
-"PO-Revision-Date: 2017-06-13 13:45+0000\n"
+"POT-Creation-Date: 2017-06-23 09:46+0000\n"
+"PO-Revision-Date: 2017-06-23 09:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -185,6 +185,11 @@ msgid "Purchase Order Line"
 msgstr "Ligne de commande d'achat"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_purchase_manager_id
+msgid "Purchase manager"
+msgstr "Responsable d'achat"
+
+#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_remnant
 msgid "Remnant"
 msgstr "Débris"
@@ -203,6 +208,11 @@ msgstr "Séquence"
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
 msgid "State"
 msgstr "État"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
+msgid "Substitute purchase manager"
+msgstr "Responsable d'achat remplaçant"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount

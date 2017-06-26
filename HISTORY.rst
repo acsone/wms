@@ -14,6 +14,7 @@ Unreleased
 * ALCN-890: Add sale order and purchase order fields on helpdesk ticket
 * ALCN-892: Custom reference field on helpdesk ticket
 * Setup song: do not reset admin pwd for devs
+* ALCN-889: Add purchase manager on partner and as follower on helpdesk
 
 **Bugfixes**
 

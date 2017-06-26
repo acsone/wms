@@ -178,13 +178,14 @@ migration:
           - sale_product_additional
           - specific_helpdesk
           - specific_product
+          - specific_purchase
+          - specific_report
           - specific_sale
           - specific_shipping_costs
-          - specific_report
-          - specific_purchase
     - version: 10.4.0
       addons:
         upgrade:
           # Specific modules
           - specific_helpdesk
+          - specific_purchase
           - specific_sale
