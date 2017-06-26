@@ -148,17 +148,18 @@ class PurchaseOrderLine(models.Model):
         return result
 
     @api.model
-    def get_next_scheduled_date(self, date_order_str=None):
+    def get_next_scheduled_date(self, seller, date_order_str=None):
         """
         Return the scheduled date
         :return: datetime - the scheduled date
         """
-        lead_time = \
-            int(self.env['ir.config_parameter']
-                .get_param('purchase.lead_time', 0))
-        if not lead_time:
-            raise UserError(_('You need to define the lead time '
-                              'on purchase configuration'))
+
+        if seller:
+            lead_time = seller.delay
+        else:
+            lead_time = \
+                int(self.env['ir.config_parameter']
+                    .get_param('purchase.lead_time', 0))
 
         if date_order_str:
             date_planned = fields.Datetime.from_string(date_order_str)
@@ -198,6 +199,6 @@ class PurchaseOrderLine(models.Model):
         :return:
         """
         date_order_str = po.date_order if po else self.order_id.date_order
-        date_planned_str = self.get_next_scheduled_date(date_order_str)
+        date_planned_str = self.get_next_scheduled_date(seller, date_order_str)
 
         return fields.Datetime.from_string(date_planned_str)

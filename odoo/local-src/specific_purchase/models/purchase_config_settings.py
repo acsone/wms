@@ -7,7 +7,7 @@ from odoo import fields, models
 class PurchaseConfigSettings(models.TransientModel):
     _inherit = 'purchase.config.settings'
 
-    lead_time = fields.Integer('Lead time (in days)')
+    lead_time = fields.Integer('Default Lead time (in days)')
 
     def get_default_lead_time(self, fields):
         lead_time = \

@@ -21,8 +21,8 @@ class TestPurchaseOrder(common.TransactionCase):
         - 8 january 2017: Sunday
         :return:
         """
-        # Set the lead time to 3 days
-        self.env['ir.config_parameter'].set_param('purchase.lead_time', 3)
+        # Set the default lead time to 3 days
+        self.env['ir.config_parameter'].set_param('purchase.lead_time', '0')
 
         # Create a bank holiday
         bank_holiday = self.env['bank.holiday']
@@ -37,17 +37,33 @@ class TestPurchaseOrder(common.TransactionCase):
 
         pol = self.env['purchase.order.line']
 
-        date_planned = pol.get_next_scheduled_date('2016-12-31')
+        partner = self.env['res.partner'].create({
+            'name': 'Partner Test'
+        })
+        seller = self.env['product.supplierinfo'].create({
+            'name': partner.id,
+            'min_qty': 0,
+            'price': 100,
+            'delay': 3
+        })
+
+        # Try different date with a lead time of 3 days defined on the seller
+        date_planned = pol.get_next_scheduled_date(seller, '2016-12-31')
         self.assertEqual(date_planned, '2017-01-05 00:00:00')
 
-        date_planned = pol.get_next_scheduled_date('2017-01-02')
+        date_planned = pol.get_next_scheduled_date(seller, '2017-01-02')
         self.assertEqual(date_planned, '2017-01-05 00:00:00')
 
-        date_planned = pol.get_next_scheduled_date('2017-01-03')
+        date_planned = pol.get_next_scheduled_date(seller, '2017-01-03')
         self.assertEqual(date_planned, '2017-01-06 00:00:00')
 
-        date_planned = pol.get_next_scheduled_date('2017-01-06')
+        date_planned = pol.get_next_scheduled_date(seller, '2017-01-06')
         self.assertEqual(date_planned, '2017-01-12 00:00:00')
+
+        # Try with an empty seller and use the default lead time
+        empty_seller = self.env['product.supplierinfo']
+        date_planned = pol.get_next_scheduled_date(empty_seller, '2016-12-31')
+        self.assertEqual(date_planned, '2016-12-31 00:00:00')
 
     def test_unit_price(self):
         """
