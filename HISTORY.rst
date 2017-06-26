@@ -24,6 +24,7 @@ Unreleased
 * Upgrade server-tools repository
 * Remove override of anthem/marabunta version to use the default version of docker-odoo-project
 * TMP use `enterprise` from c2c
+* Add a ssh tunnel container for developpment
 
 
 **Documentation**
