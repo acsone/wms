@@ -8,6 +8,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-873: If no exception, hide exception group in sale order form view
 * ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
 * ALCN-892: Custom reference field on helpdesk ticket

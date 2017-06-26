@@ -6,6 +6,10 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
+            <xpath expr="//field[@name='main_exception_id']/parent::group" position="attributes">
+                <attribute name="attrs">{'invisible':[('main_exception_id','=', False)]}</attribute>
+            </xpath>
+
             <field name="team_id" position="after">
                 <field name="sale_channel_visible" invisible="1"/>
                 <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
