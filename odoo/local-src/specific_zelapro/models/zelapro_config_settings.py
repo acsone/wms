@@ -10,6 +10,8 @@ class ZelaproConfigSettings(models.TransientModel):
 
     delimiter = fields.Char('Delimiter', required=True, default=';')
     export_path = fields.Char('Export path', required=True)
+    ca_computation_delay = fields.Integer('CA computation delay (in months)',
+                                          required=True)
 
     @api.model
     def default_get(self, fields):
@@ -22,6 +24,10 @@ class ZelaproConfigSettings(models.TransientModel):
         if 'export_path' in fields or not fields:
             export_path = config_param.get_param('zelapro.export_path')
             res['export_path'] = export_path
+        if 'ca_computation_delay' in fields or not fields:
+            ca_computation_delay = \
+                int(config_param.get_param('zelapro.ca_computation_delay'))
+            res['ca_computation_delay'] = ca_computation_delay
 
         return res
 
@@ -38,3 +44,11 @@ class ZelaproConfigSettings(models.TransientModel):
 
         self.env['ir.config_parameter']\
             .set_param('zelapro.export_path', self.export_path)
+
+    @api.multi
+    def set_ca_computation_delay(self):
+        self.ensure_one()
+
+        self.env['ir.config_parameter']\
+            .set_param('zelapro.ca_computation_delay',
+                       str(self.ca_computation_delay))

@@ -13,6 +13,9 @@
                     <field name="delimiter"/>
                     <field name="export_path"/>
                 </group>
+                <group string="ABC">
+                    <field name="ca_computation_delay"/>
+                </group>
             </form>
         </field>
     </record>
