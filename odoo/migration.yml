@@ -183,6 +183,9 @@ migration:
           - specific_sale
           - specific_shipping_costs
     - version: 10.4.0
+      operations:
+        post:
+          - anthem songs.updates.update_10_4_0.update::main
       addons:
         upgrade:
           # Specific modules

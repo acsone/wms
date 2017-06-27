@@ -137,7 +137,12 @@ class PurchaseOrderLine(models.Model):
 
         date_order = self.order_id.date_order
 
-        date_planned = self.get_next_scheduled_date(date_order)
+        seller = self.product_id._select_seller(
+            partner_id=self.partner_id,
+            quantity=self.product_qty,
+            date=self.order_id.date_order and self.order_id.date_order[:10],
+            uom_id=self.product_uom)
+        date_planned = self.get_next_scheduled_date(seller, date_order)
         self.date_planned = date_planned
 
         if self.discount_global:
