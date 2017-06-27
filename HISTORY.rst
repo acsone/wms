@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-33 Sale order (demo only)
+* ALCN-721 Customer addresses (demo only)
+
 **Features and Improvements**
 * ALCN-840: Add a cron to create the daily inventory
 

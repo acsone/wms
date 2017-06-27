@@ -7,6 +7,10 @@ from base import EntityMapper, FieldMapper
 import checks
 import mappings
 
+# Sample data for 302 SO
+SO_MIN = 2691474
+SO_MAX = 2691777
+
 
 class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
@@ -49,19 +53,21 @@ class ProductMapper(EntityMapper):
         return "join sbdata.cplges on gesart=cplart "
 
     def get_sql_where(self):
-        # Filter deactivated products for demo data
         if not self.importer.full:
             # TODO: csv only when mode will be developed
-            return "gesdem not like '|||%'"
+            return ("gesart IN ("
+                    "    SELECT dccart FROM sbdata.PDETCDCL"
+                    "        WHERE dccsui >= %s AND dccsui <= %s"
+                    ")" % (SO_MIN, SO_MAX))
         return None
 
     def convert_name(self, odoo_entity, db2_entity):
-        """ Dans la base DB2, si le nom commence par |||, celà signifie que le
-        produit est inactif.
+        """ Dans la base DB2, si le nom commence par |||, || ou |,
+        celà signifie que le produit est inactif.
         """
         value = db2_entity['gesdem'].strip()
-        if value and value.startswith('|||'):
-            value = value.replace('||| ', '')
+        if value and value.startswith('|'):
+            value = value.replace('|', '').strip()
             odoo_entity['active'] = False
 
         else:
@@ -191,6 +197,16 @@ class CustomerMapper(EntityMapper):
             ")"
         )
 
+    def get_sql_where(self):
+        if self.importer.full:
+            return None
+        # Filter sample of customer by customers on last sale orders
+        return (
+            "clinum"
+            "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
+            "     WHERE eccsui >= %s AND eccsui <= %s)" % (SO_MIN, SO_MAX)
+            )
+
     @staticmethod
     def convert_company_type(odoo_entity, db2_entity):
         db2_title = db2_entity.get('clitit')
@@ -254,6 +270,76 @@ class CustomerMapper(EntityMapper):
             pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
         odoo_entity['property_account_position_id/id'] = pos
 
+
+class AddressMapper(EntityMapper):
+    DB2_NAME = 'ADRLIV'
+    DB2_REF_NAME = 'adlnum'
+
+    XMLID_FIELD = 'ref'
+    FIELDS_MAPPING = [
+        FieldMapper('name', 'adlnom'),
+        FieldMapper('street', 'adladr'),
+        FieldMapper('zip', 'adlcpo'),
+        FieldMapper('city', 'adlloc'),
+        FieldMapper('phone', 'adltel'),
+        FieldMapper('fax', 'adlfax'),
+        FieldMapper('customer', constant=False),
+        FieldMapper('supplier', constant=False),
+        FieldMapper('country_id/id', 'adlcpa',
+                    mapping=mappings.COUNTRY),
+        FieldMapper('lang', 'adllan',
+                    mapping=mappings.LANG),
+        'phone_numbers',
+        'type', 'ref', 'parent_id',
+    ]
+
+    @staticmethod
+    def convert_phone_numbers(odoo_entity, db2_entity):
+        odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
+            db2_entity.get('adltel'), db2_entity.get('adltlx')
+        )
+
+    @staticmethod
+    def convert_ref(odoo_entity, db2_entity):
+        ttype = odoo_entity['type']
+        parent = db2_entity['adlnum'].lstrip('0')
+        odoo_entity['ref'] = "%s_%s" % (ttype, parent)
+
+    @staticmethod
+    def convert_type(odoo_entity, db2_entity):
+        db2_type = db2_entity.get('adltyp')
+        odoo_entity['type'] = 'delivery' if db2_type == 0 else 'invoice'
+
+    @staticmethod
+    def convert_parent_id(odoo_entity, db2_entity):
+        db2_partner_type = db2_entity.get('adlcod')
+        ref = db2_entity.get('adlnum').lstrip('0')
+
+        if db2_partner_type == 1:
+            partner_type = 'customer'
+        elif db2_partner_type == 2:
+            partner_type = 'supplier'
+        # TODO type 3 == customer order addresses
+        # todo with for the last 300 sale order only
+        parent_xmlid = '__import__.%s_%s' % (partner_type, ref)
+        odoo_entity['parent_id/id'] = parent_xmlid
+
+
+class CustomerAddressMapper(AddressMapper):
+
+    def get_sql_where(self):
+        # Filter remove order delivery and invoicing adresses
+        where = "adlcod = 1"
+        if not self.importer.full:
+            where += (
+                # Filter num with wrong format with spaces in it
+                # such as "1   2000"
+                " AND NOT adlnum LIKE '%% %%' "
+                "AND CAST(adlnum AS decimal)"
+                "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
+                "     WHERE eccsui >= %s AND eccsui <= %s)" % (SO_MIN, SO_MAX)
+            )
+        return where
 
 class SupplierMapper(EntityMapper):
     DB2_NAME = 'FOURN'
@@ -384,4 +470,200 @@ class LocationMapper(EntityMapper):
         return odoo_entities
 
 
-MAPPER_CLASSES = [LocationMapper, ProductMapper, CustomerMapper, SupplierMapper]
+class SaleOrderMapper(EntityMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    XMLID_FIELD = 'id'
+    XMLID_IMPORT_NAME = '__import__'
+
+    FIELDS_MAPPING = [
+        FieldMapper('name', 'eccsui'),
+        FieldMapper('origin', 'eccrin'),
+        FieldMapper('client_order_ref', 'eccrcl'),
+        FieldMapper(
+            'user_id/id', 'eccrep',
+            mapping=mappings.USERS
+        ),
+        # BEF is used in old commands we won't import
+        FieldMapper('currency_id/id', constant="base.EUR"),
+        'id', 'date_order', 'partner_id',
+    ]
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Create a name from Suite No + Client No + User No
+        We use user to remove duplicates """
+        suite = db2_entity['eccsui']
+        client = db2_entity['ecccli']
+        store = db2_entity['eccsuc'].strip()
+        odoo_entity['id'] = "%s_%s_%s" % (suite, client, store)
+
+    def convert_date_order(self, odoo_entity, db2_entity):
+        dd = db2_entity['eccdjj']
+        mm = db2_entity['eccdmm']
+        Y = "%s%s" % (db2_entity['eccdss'], db2_entity['eccdaa'])
+        odoo_entity['date_order'] = "%s-%02i-%02i" % (Y, mm, dd)
+
+    def convert_partner_id(self, odoo_entity, db2_entity):
+        ref = db2_entity['ecccli']
+        xmlid = '__import__.%s_%s' % ('customer', ref)
+        odoo_entity['partner_id/id'] = xmlid
+
+    def get_sql_joins(self):
+        return ("{} JOIN ("
+                "  SELECT dccsui, dccncl, dccsuc"
+                "  FROM sbdata.PDETCDCL WHERE"
+                "    dcccss = 20"
+                "    AND dcccaa = 17"
+                "    AND dcccmm = 5"
+                "    AND dccqul < dccquc"
+                "  GROUP BY dccsui, dccncl, dccsuc"
+                ") as lines "
+                "ON eccsui = dccsui "
+                "    AND ecccli=dccncl"
+                "    AND eccsuc=dccsuc")
+
+    def get_sql_where(self):
+        where = "eccncr = 0 AND "
+        if not self.importer.full:
+            where = "eccsui >= %s AND eccsui <= %s" % (SO_MIN, SO_MAX)
+        else:
+            where = ("ecccss = 20 AND ecccaa = 17 AND ecccmm = 5")
+        return where
+
+    def get_order_by(self):
+        return "eccsui"
+
+    def get_xml_id(self, entity_name, code, prefix=None):
+        """ Force use of sale_order to avoid having
+        sale_order_closed and sale_order_open in xml ids """
+        assert entity_name and code
+
+        entity_name = "sale_order"
+
+        if prefix is None:
+            prefix = self.XMLID_IMPORT_NAME
+
+        return "%s.%s_%s" % (
+            prefix, entity_name, code
+        )
+
+
+class SaleOrderOpenMapper(SaleOrderMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    def __init__(self, importer):
+        res = super(SaleOrderOpenMapper, self).__init__(importer)
+        self.FIELDS_MAPPING.append(
+            FieldMapper('state', constant='draft'),
+        )
+        return res
+
+    def get_sql_joins(self):
+        joins = super(SaleOrderOpenMapper, self).get_sql_joins()
+        return joins.format("INNER")
+
+    def get_sql_where(self):
+        """ Add clause that any of the line is still open """
+        where = super(SaleOrderOpenMapper, self).get_sql_where()
+        where += ""
+        return where
+
+
+class SaleOrderClosedMapper(SaleOrderMapper):
+    DB2_NAME = 'PENTCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    def __init__(self, importer):
+        res = super(SaleOrderClosedMapper, self).__init__(importer)
+        self.FIELDS_MAPPING.append(
+            FieldMapper('state', constant='done'),
+        )
+        return res
+
+    def get_sql_joins(self):
+        joins = super(SaleOrderClosedMapper, self).get_sql_joins()
+        return joins.format("LEFT")
+
+
+    def get_sql_where(self):
+        """ Add clause that any of the line is still open """
+        where = super(SaleOrderClosedMapper, self).get_sql_where()
+        where += " AND lines.dccsui is NULL"
+        return where
+
+
+class SaleOrderLineMapper(EntityMapper):
+    DB2_NAME = 'PDETCDCL'
+    DB2_SCHEMA = 'sbdata'
+
+    XMLID_FIELD = 'id'
+    XMLID_IMPORT_NAME = '__import__'
+
+    FIELDS_MAPPING = [
+        FieldMapper('sequence', 'dccnli'),
+        FieldMapper('name', 'dcclib'),
+        FieldMapper('product_uom_qty', 'dccquc'),
+        FieldMapper('product_uom/id', constant='product.product_uom_unit'),
+        FieldMapper('qty_delivered', 'dccqul'),
+        FieldMapper('price_unit', 'dccpvd'),
+        FieldMapper('discount', 'dccrem'),
+        'id', 'product_id', 'order_id'
+        # TODO taxes ?
+    ]
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Create a name from Suite No + Client No + User No + Line numeber
+        We use user to remove duplicates
+        """
+        suite = db2_entity['dccsui']
+        client = db2_entity['dccncl']
+        store = db2_entity['dccsuc'].strip()
+        line_num = db2_entity['dccnli']
+        odoo_entity['id'] = "%s_%s_%s_%s" % (suite, client, store, line_num)
+
+    def convert_product_id(self, odoo_entity, db2_entity):
+
+        product = (db2_entity['dccart'] or '').strip()
+        if product:
+            xmlid = self.get_xml_id('product', product, '__import__')
+        else:
+            xmlid = '__setup__.product_other'
+            odoo_entity['name'] = "Divers"
+        odoo_entity['product_id/id'] = xmlid
+
+    def convert_order_id(self, odoo_entity, db2_entity):
+        suite = db2_entity['eccsui'] 
+        client = db2_entity['ecccli']
+        store = db2_entity['eccsuc'].strip()
+        code = "%s_%s_%s" % (suite, client, store)
+        xmlid = self.get_xml_id('sale_order', code, '__import__')
+        odoo_entity['order_id/id'] = xmlid
+
+    def get_sql_joins(self):
+        return ("join sbdata.PENTCDCL ON"
+                "    eccsui=dccsui"
+                "    AND ecccli=dccncl"
+                "    AND eccsuc=dccsuc ")
+
+    def get_sql_where(self):
+        where = None
+        if not self.importer.full:
+            where = "dccsui >= %s AND dccsui <= %s" % (SO_MIN, SO_MAX)
+        else:
+            where = "dcccss = 20 AND dcccaa = 17"
+        return where
+
+    def get_order_by(self):
+        return "eccsui, ecccli, eccsuc"
+
+
+
+MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  CustomerMapper, SupplierMapper,
+                  CustomerAddressMapper,
+                  SaleOrderOpenMapper,
+                  SaleOrderClosedMapper,
+                  SaleOrderLineMapper
+                  ]

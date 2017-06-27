@@ -6,6 +6,7 @@ from pkg_resources import resource_stream
 
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.records import create_or_update
 from ..common import req
 
 
@@ -22,12 +23,18 @@ def import_suppliers(ctx):
 @anthem.log
 def import_clients(ctx):
     """ Importing clients from csv"""
-    content = resource_stream(req, 'data/demo/customer.csv')
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing customers"):
+        content = resource_stream(req, 'data/demo/customer.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing customer addresses"):
+        content = resource_stream(req, 'data/demo/customer_address.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
@@ -60,6 +67,13 @@ def import_locations(ctx):
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
+    values = {
+        'name': "Divers",
+        'default_code': "DIVERS",
+        'list_price': 0.0
+    }
+    create_or_update(ctx, 'product.product',
+                     '__setup__.product_other', values)
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Product = ctx.env['product.product'].with_context(load_ctx)
@@ -102,12 +116,30 @@ def import_delivery_round_config(ctx):
 
 
 @anthem.log
+def import_sale_orders(ctx):
+    """ Importing sale orders from csv"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    SaleOrder = ctx.env['sale.order'].with_context(load_ctx)
+    content = resource_stream(req, 'data/demo/sale_order_open.csv')
+    load_csv_stream(ctx, SaleOrder, content, delimiter=',')
+
+    content = resource_stream(req, 'data/demo/sale_order_closed.csv')
+    load_csv_stream(ctx, SaleOrder, content, delimiter=',')
+
+    SaleOrderLine = ctx.env['sale.order.line'].with_context(load_ctx)
+    content = resource_stream(req, 'data/demo/sale_order_line.csv')
+    load_csv_stream(ctx, SaleOrderLine, content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Loading demo data """
     import_suppliers(ctx)
     import_clients(ctx)
     import_products(ctx)
     import_locations(ctx)
+    import_sale_orders(ctx)
     import_product_supplierinfo(ctx)
     import_pricelist_items(ctx)
     import_delivery_round_config(ctx)

@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016-2017 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-# -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
+import re
 import csv
 import os
 from collections import OrderedDict
+
+
+def convert_camel_case(name):
+    return re.sub('([a-z])([A-Z])', r'\1_\2', name).lower()
 
 
 class FieldMapper:
@@ -23,7 +24,7 @@ class FieldMapper:
         self.check = check
 
 
-class EntityMapper:
+class EntityMapper(object):
 
     DB2_NAME = None
     DB2_SCHEMA = 'sbdata'
@@ -39,7 +40,8 @@ class EntityMapper:
         assert self.DB2_NAME
         assert self.XMLID_FIELD
 
-        self.name = self.__class__.__name__.lower().replace('mapper', '')
+        name = convert_camel_case(self.__class__.__name__)
+        self.name = name.replace('_mapper', '')
         self.importer = importer
 
         self.file_cache_path = os.path.join(
@@ -133,6 +135,12 @@ class EntityMapper:
     def get_sql_where(self):
         return None
 
+    def get_order_by(self):
+        return None
+
+    def get_limit(self):
+        return ""
+
     def get_sql_query(self):
         needed_refs = self.importer.get_foreign_refs(self.DB2_NAME)
 
@@ -142,7 +150,7 @@ class EntityMapper:
 
         joins = self.get_sql_joins()
         if joins:
-            query += joins
+            query += joins + " "
 
         if not self.importer.full and needed_refs:
             assert self.DB2_REF_NAME, \
@@ -161,11 +169,15 @@ class EntityMapper:
             if not where_cond:
                 where_cond = '1=1'
 
-            query += "WHERE %s ORDER BY 1 asc "
-            placeholders += (where_cond,)
+            order_by = self.get_order_by()
+            if not order_by:
+                order_by = "1 asc"
+            query += "WHERE %s ORDER BY %s "
+            placeholders += (where_cond, order_by)
 
-            if not self.importer.full:
-                query += "FETCH FIRST 300 ROWS ONLY"
+
+            limit = self.get_limit()
+            query += limit
 
         return query % placeholders, params
 

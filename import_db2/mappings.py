@@ -420,7 +420,6 @@ CEE_COUNTRIES = {
     12: 'base.lu',
 }
 
-
 PRODUCT_SALE_VAT = {
     0: "l10n_be.1_attn_VAT-OUT-00-L",
     1: "l10n_be.1_attn_VAT-OUT-06-L",
