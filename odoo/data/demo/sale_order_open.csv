@@ -1,7 +1,7 @@
 id,name,origin,client_order_ref,user_id/id,currency_id/id,date_order,partner_id/id,state
-__import__.sale_order_2691475_2859_1  ,2691475,,1710321707056,__setup__.res_user_19,base.EUR,2017-05-15,__import__.customer_2859,draft
-__import__.sale_order_2691534_8522_1  ,2691534,,1710328400147,__setup__.res_user_2,base.EUR,2017-05-15,__import__.customer_8522,draft
-__import__.sale_order_2691646_1658_1  ,2691646,,1710292901278,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1658,draft
-__import__.sale_order_2691683_1197_1  ,2691683,,1710234300515,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1197,draft
-__import__.sale_order_2691754_1489_1  ,2691754,,1710229700040,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1489,draft
-__import__.sale_order_2691755_8694_1  ,2691755,,1710405402009,__setup__.res_user_2,base.EUR,2017-05-15,__import__.customer_8694,draft
+__import__.sale_order_2691475_2859_1,2691475,,1710321707056,__setup__.res_user_19,base.EUR,2017-05-15,__import__.customer_2859,draft
+__import__.sale_order_2691534_8522_1,2691534,,1710328400147,__setup__.res_user_2,base.EUR,2017-05-15,__import__.customer_8522,draft
+__import__.sale_order_2691646_1658_1,2691646,,1710292901278,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1658,draft
+__import__.sale_order_2691683_1197_1,2691683,,1710234300515,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1197,draft
+__import__.sale_order_2691754_1489_1,2691754,,1710229700040,__setup__.res_user_12,base.EUR,2017-05-15,__import__.customer_1489,draft
+__import__.sale_order_2691755_8694_1,2691755,,1710405402009,__setup__.res_user_2,base.EUR,2017-05-15,__import__.customer_8694,draft

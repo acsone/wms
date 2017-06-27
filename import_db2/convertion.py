@@ -493,9 +493,9 @@ class SaleOrderMapper(EntityMapper):
     def convert_id(self, odoo_entity, db2_entity):
         """ Create a name from Suite No + Client No + User No
         We use user to remove duplicates """
-        suite = db2_entity['eccsui'] 
+        suite = db2_entity['eccsui']
         client = db2_entity['ecccli']
-        store = db2_entity['eccsuc']
+        store = db2_entity['eccsuc'].strip()
         odoo_entity['id'] = "%s_%s_%s" % (suite, client, store)
 
     def convert_date_order(self, odoo_entity, db2_entity):
@@ -619,7 +619,7 @@ class SaleOrderLineMapper(EntityMapper):
         """
         suite = db2_entity['dccsui']
         client = db2_entity['dccncl']
-        store = db2_entity['dccsuc']
+        store = db2_entity['dccsuc'].strip()
         line_num = db2_entity['dccnli']
         odoo_entity['id'] = "%s_%s_%s_%s" % (suite, client, store, line_num)
 
@@ -636,7 +636,7 @@ class SaleOrderLineMapper(EntityMapper):
     def convert_order_id(self, odoo_entity, db2_entity):
         suite = db2_entity['eccsui'] 
         client = db2_entity['ecccli']
-        store = db2_entity['eccsuc']
+        store = db2_entity['eccsuc'].strip()
         code = "%s_%s_%s" % (suite, client, store)
         xmlid = self.get_xml_id('sale_order', code, '__import__')
         odoo_entity['order_id/id'] = xmlid
