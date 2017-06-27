@@ -50,9 +50,9 @@ class HelpdeskTicket(models.Model):
         ticket = super(HelpdeskTicket, self).create(vals)
 
         partners_to_add = []
-        if ticket.partner_id.user_id.partner_id:
+        if ticket.partner_id.commercial_partner_id.user_id.partner_id:
             partners_to_add.append(
-                ticket.partner_id.user_id.partner_id.id
+                ticket.partner_id.commercial_partner_id.user_id.partner_id.id
             )
         if ticket.partner_id.purchase_manager_id.partner_id:
             partners_to_add.append(

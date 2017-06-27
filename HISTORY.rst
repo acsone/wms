@@ -20,6 +20,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-888: Fix add a sale order line into a confirmed sale order
+* ALCN-901: Fix 'Add partner vendor on follower when create helpdesk ticket'
 
 **Build**
 
