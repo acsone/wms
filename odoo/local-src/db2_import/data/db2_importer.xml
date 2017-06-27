@@ -1,0 +1,16 @@
+<odoo>
+  <record model="db2.importer" id="db2_importer">
+  </record>
+
+  <record model="db2.importer.table" id="db2_table_pentcdcl">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PENTCDCL</field>
+    <field name="primary_key">eccsui,eccsuc</field>
+  </record>
+  <record model="db2.importer.table" id="db2_table_pdetcdcl">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PDETCDCL</field>
+  </record>
+</odoo>

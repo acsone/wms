@@ -3,14 +3,21 @@
   <record id="view_db2_import_config" model="ir.ui.view">
     <field name="model">db2.importer</field>
     <field name="arch" type="xml">
-      <form string="Configure DB2 import" class="oe_form_configuration">
+      <form string="Configure DB2 import">
         <header>
           <button string="Import" type="object" name="db2_import" class="oe_highlight"/>
         </header>
         <group>
           <group>
             <field name="last_import"/>
-            <field name="table_ids"/>
+            <field name="table_ids">
+              <tree>
+                <field name="schema"/>
+                <field name="table_name"/>
+                <field name="last_import"/>
+                <field name="table_prefix"/>
+              </tree>
+            </field>
           </group>
         </group>
       </form>
@@ -21,9 +28,8 @@
         <field name="name">DB2 Import</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">db2.importer</field>
-        <field name="view_id" ref="view_db2_import_config"/>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem id="menu_db2" name="DB2" parent="base.menu_custom"
