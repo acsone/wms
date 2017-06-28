@@ -16,7 +16,6 @@
  ],
  'website': 'http://www.camptocamp.com',
  'data': [
-     'data/helpdesk.xml',
      'security/ir.model.access.csv',
      'views/helpdesk.xml',
      'views/res_partner.xml',

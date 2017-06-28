@@ -7,20 +7,29 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
         <field name="arch" type="xml">
+
+            <field name="partner_id" position="attributes">
+                <attribute name="string">Partner</attribute>
+            </field>
+            <field name="partner_name" position="attributes">
+                <attribute name="string">Partner Name</attribute>
+            </field>
+            <field name="partner_email" position="attributes">
+                <attribute name="string">Partner Email</attribute>
+            </field>
+
             <field name="kanban_state" position="after">
-                <field name="sale_order_id" />
-                <field name="purchase_order_id" />
+                <field name="sale_order_id"
+                       context="{'default_partner_id': partner_id}"/>
+                <field name="purchase_order_id"
+                       context="{'default_partner_id': partner_id}"/>
             </field>
             <field name="tag_ids" position="after">
                 <field name="helpdesk_ticket_reason_id" />
-                <field name="ref" />
+                <field name="ref"
+                       context="{'default_partner_id': partner_id}"/>
             </field>
-            <field name="ticket_type_id" position="attributes">
-                <attribute name="attrs">{'readonly': [('stock_picking_id', '!=', False)]}</attribute>
-            </field>
-            <field name="ticket_type_id" position="after">
-                <field name="stock_picking_id" attrs="{'invisible': [('stock_picking_id', '=', False)], 'readonly': [('stock_picking_id', '!=', False)]}" />
-            </field>
+
         </field>
     </record>
 
@@ -41,16 +50,16 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-          <p class="oe_view_nocontent_create">
-            Click to create a new ticket reason.
-          </p><p>
+            <p class="oe_view_nocontent_create">
+                Click to create a new ticket reason.
+            </p><p>
             Reason allows to organize tickets.
-          </p>
+        </p>
         </field>
     </record>
 
     <menuitem id="helpdesk_ticket_reason_menu" action="helpdesk_ticket_reason_action"
-        sequence="1" parent="helpdesk.helpdesk_menu_config"
-        groups="base.group_no_one"/>
+              sequence="1" parent="helpdesk.helpdesk_menu_config"
+              groups="base.group_no_one"/>
 
 </odoo>

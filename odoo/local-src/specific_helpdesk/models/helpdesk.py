@@ -17,13 +17,11 @@ class HelpdeskTicket(models.Model):
             ('res.partner', 'Partner'),
             ('product.product', 'Product'),
             ('account.invoice', 'Invoice'),
+            ('stock.picking', 'Picking'),
             ('stock.production.lot', 'Lot/Serial number'),
             ('mrp.repair', 'Repair'),
         ],
         string='Reference')
-
-    stock_picking_id = fields.Many2one(comodel_name='stock.picking',
-                                       string='Picking')
 
     sale_order_id = fields.Many2one(
         comodel_name='sale.order',
@@ -34,16 +32,6 @@ class HelpdeskTicket(models.Model):
         comodel_name='purchase.order',
         string='Purchase order',
     )
-
-    @api.model
-    def default_get(self, fields):
-        res = super(HelpdeskTicket, self).default_get(fields)
-        logistics_type = self.env.ref('specific_helpdesk.type_logistics')
-        if (self._context.get('type') == logistics_type.id and
-                self._context.get('stock_picking')):
-            res['ticket_type_id'] = logistics_type.id
-            res['stock_picking_id'] = self._context.get('stock_picking')
-        return res
 
     @api.model
     def create(self, vals):

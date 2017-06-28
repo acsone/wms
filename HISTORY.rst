@@ -18,6 +18,7 @@ Unreleased
 * ALCN-889: Add purchase manager on partner and as follower on helpdesk
 * ALCN-900: Hide potential smartbutton on product template form view
 * ALCN-900: Add helpdesk ticket smartbutton on partner form view
+* ALCN-902: Redefine picking on helpdesk ticket with the reference field
 
 **Bugfixes**
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 06:42+0000\n"
-"PO-Revision-Date: 2017-06-28 06:42+0000\n"
+"POT-Creation-Date: 2017-06-28 08:11+0000\n"
+"PO-Revision-Date: 2017-06-28 08:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,17 +36,8 @@ msgid "Display Name"
 msgstr "Afficher le nom"
 
 #. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_ticket_ids
-msgid "Helpdesk Tickets"
-msgstr "Tickets Helpdesk"
-
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.partner_form_view_helpdesk_tickets_button
-msgid "Helpdesk tickets"
-msgstr "Tickets helpdesk"
-
-#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_res_partner_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
 msgid "Helpdesk tickets count"
 msgstr "Nombre de tickets helpdesk"
 
@@ -76,11 +67,6 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_helpdesk
-#: model:helpdesk.ticket.type,name:specific_helpdesk.type_logistics
-msgid "Logistics"
-msgstr "Logistique"
-
-#. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Lot/Serial number"
 msgstr "Lot/Numéro de série"
@@ -93,11 +79,22 @@ msgstr "Nom"
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 #: model:ir.model,name:specific_helpdesk.model_res_partner
+#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
+#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
+msgid "Partner Email"
+msgstr "Email du partenaire"
+
+#. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
+msgid "Partner Name"
+msgstr "Nom du partenaire"
+
+#. module: specific_helpdesk
+#: selection:helpdesk.ticket,ref:0
 msgid "Picking"
 msgstr "Opération de manutention"
 
@@ -150,14 +147,10 @@ msgid "Ticket Reason"
 msgstr "Cause du ticket"
 
 #. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.partner_form_view_helpdesk_tickets_button
 #: model:ir.ui.view,arch_db:specific_helpdesk.view_picking_form
 msgid "Tickets"
 msgstr "Tickets"
-
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
-msgid "Tickets number"
-msgstr "Nombre de tickets"
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_stock_picking
