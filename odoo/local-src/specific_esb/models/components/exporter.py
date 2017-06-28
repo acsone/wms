@@ -12,6 +12,32 @@ class ExportMapper(AbstractComponent):
     _inherit = ['base.export.mapper', 'esb.connector']
     _usage = 'export.mapper'
 
+    translatable_keys = {
+        # 'fr_FR': {
+        #     'odoo_field': 'ext_field',
+        # }
+    }
+
+    def translatable_langs(self):
+        return self.env['res.lang'].search([
+            ('translatable', '=', True)]).mapped('code')
+
+    def finalize(self, record, values):
+        values = super(ExportMapper, self).finalize(record, values)
+        self.handle_translations(record, values)
+        return values
+
+    def handle_translations(self, record, values):
+        """Collect and translate fields to be translated."""
+        for lang in self.translatable_langs():
+            if lang not in self.translatable_keys:
+                continue
+            translatable = self.translatable_keys[lang]
+            data = record.source.with_context(
+                lang=lang).read(translatable.keys())[0]
+            for fname, extname in translatable.iteritems():
+                values[extname] = data[fname]
+
 
 class ESBExporterMixin(AbstractComponent):
 

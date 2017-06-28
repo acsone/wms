@@ -37,22 +37,26 @@ class ExportProductTestCase(ESBXMLTestCase):
             'barcode': 'XXX0003',
             'weight': 1.0,
         })
+        # add some translation
+        for rec in self.all_records:
+            rec.with_context(lang='nl_BE').name = rec.name + ' (NL)'
+
         self.unexportable_records = self.model.browse()
-        x1 = self.model.create({
+        nx1 = self.model.create({
             'name': 'DO NOT Export me',
             # default_code starts with `8888`
             'default_code': '8888_not_exportable001',
         })
-        self.all_records |= x1
-        self.unexportable_records |= x1
-        x2 = self.model.create({
+        self.all_records |= nx1
+        self.unexportable_records |= nx1
+        nx2 = self.model.create({
             'name': 'DO NOT Export me 2',
             'default_code': 'not_exportable002',
         })
         # too old
-        self.force_create_date(x2.id, '2014-7-28 00:00:00')
-        self.all_records |= x2
-        self.unexportable_records |= x2
+        self.force_create_date(nx2.id, '2014-7-28 00:00:00')
+        self.all_records |= nx2
+        self.unexportable_records |= nx2
 
         # TODO: add 3rd condition based on "GESCHR!=’L’ (non livrables)"
         # self.all_records |= self.model.create({
@@ -82,6 +86,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gesart': 'exportable001',
             'Cplz05': 'XXX0001',
             'Gespnt': 10.0,
+            'Refdem': 'Export me pls (NL)',
         }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name) as work:
@@ -103,11 +108,8 @@ class ExportProductTestCase(ESBXMLTestCase):
             respath = exporter.run(records)
         with open(respath, 'r') as result_file:
             result = result_file.read()
-
-        self.assertXmlEquivalentOutputs(
-            self.flatten(result),
-            self.flatten(self.read_test_file('product_export_1.xml'))
-        )
+        self.assertXmlEquivalentData(
+            result, self.read_test_file('product_export_1.xml'))
 
     def test_record_cron_exporter(self):
         with self.backend.work_on(self.model._name) as work:

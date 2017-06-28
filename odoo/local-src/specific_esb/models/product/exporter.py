@@ -17,6 +17,12 @@ class ProductExportMapper(Component):
         ('weight', 'Gespnt'),
     ]
 
+    translatable_keys = {
+        'nl_BE': {
+            'name': 'Refdem',
+        }
+    }
+
 
 class ProductCronExporter(Component):
 
