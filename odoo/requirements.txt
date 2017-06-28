@@ -9,5 +9,4 @@ cachetools
 
 # esb connector
 dicttoxml
-xmltodict
 xmlunittest

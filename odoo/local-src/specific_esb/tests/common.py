@@ -5,7 +5,7 @@
 from openerp.tests.common import SavepointCase
 
 import xmlunittest
-import xmltodict
+from lxml import etree
 
 
 class ESBTestCase(SavepointCase):
@@ -39,14 +39,20 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
     def flatten(self, txt):
         return ''.join([x.strip() for x in txt.splitlines()])
 
-    def assertXmlEquivalentData(self, given, expected):
-        """Compare xml values."""
-        # xmlunittest.assertXmlEquivalentOutputs
-        # fails if the files are not identical
-        # so if the elements' order changes
-        # is going to raise an error.
-        import pdb; pdb.set_trace()
-        self.assertDictEqual(
-            xmltodict.parse(given),
-            xmltodict.parse(expected)
-        )
+    def assertXmlEquivalentData(self, given, expected, unique_key):
+        """Compare xml values.
+
+        Go through all items in `expected`, selected w/ `unique_key`
+        and check matching values in `given`.
+        """
+        gxml = etree.fromstring(given)
+        exml = etree.fromstring(expected)
+        for item in exml.xpath('//' + unique_key):
+            # `item` is the el w/ unique_key
+            # let's find its match in given xml and go up to the parent
+            parent = gxml.xpath(
+                '//{}[text()="{}"]/..'.format(unique_key, item.text))
+            assert parent
+            # then compare all the values there
+            for el in item.getparent().iterchildren():
+                self.assertEqual(el.text, parent[0].find(el.tag).text)

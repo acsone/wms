@@ -109,7 +109,11 @@ class ExportProductTestCase(ESBXMLTestCase):
         with open(respath, 'r') as result_file:
             result = result_file.read()
         self.assertXmlEquivalentData(
-            result, self.read_test_file('product_export_1.xml'))
+            result, self.read_test_file('product_export_1.xml'), 'Gesart')
+        # self.assertXmlEquivalentOutputs(
+        #     self.flatten(result),
+        #     self.flatten(self.read_test_file('product_export_1.xml'))
+        # )
 
     def test_record_cron_exporter(self):
         with self.backend.work_on(self.model._name) as work:
