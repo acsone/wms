@@ -19,6 +19,7 @@ Unreleased
 * ALCN-900: Hide potential smartbutton on product template form view
 * ALCN-900: Add helpdesk ticket smartbutton on partner form view
 * ALCN-902: Redefine picking on helpdesk ticket with the reference field
+* ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 
 **Bugfixes**
 
