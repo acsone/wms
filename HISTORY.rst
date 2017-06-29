@@ -26,6 +26,8 @@ Unreleased
 * ALCN-902: Redefine picking on helpdesk ticket with the reference field
 * ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 
+* ALCN-904: Custom purchase report (add new measures)
+
 **Bugfixes**
 
 * ALCN-888: Fix add a sale order line into a confirmed sale order
