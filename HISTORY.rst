@@ -17,6 +17,8 @@ Unreleased
 * Setup song: do not reset admin pwd for devs
 * ALCN-889: Add purchase manager on partner and as follower on helpdesk
 
+* ALCN-904: Custom purchase report (add new measures)
+
 **Bugfixes**
 
 * ALCN-888: Fix add a sale order line into a confirmed sale order
