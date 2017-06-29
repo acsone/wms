@@ -18,5 +18,5 @@ CREATE OR REPLACE VIEW zelapro_export_stock_moves AS
     LEFT JOIN product_product AS product ON move.product_id = product.id
   WHERE (picking.name LIKE 'WH/OUT/%' OR picking.name LIKE 'WH/IN/%s')
   AND move.state = 'done'
-  AND move.origin LIKE 'SO%'
+  AND (move.origin LIKE 'SO%' OR move.origin LIKE 'PO%')
   AND move.create_date > NOW() - INTERVAL '2 YEARS';
