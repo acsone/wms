@@ -4,8 +4,8 @@ CREATE OR REPLACE VIEW zelapro_export_promotions AS
     product.default_code AS ARTICLE,
     item.date_start      AS DATE_DEBUT,
     item.date_end        AS DATE_FIN,
-    item.percent_price   AS POURCENTAGE_1,
-    ''                   AS POURCENTAGE_2,
+    ''                   AS POURCENTAGE_1,
+    item.percent_price   AS POURCENTAGE_2,
     item.min_quantity    AS QUANTITE,
     ''                   AS GRATUIT
   FROM product_pricelist_item AS item
