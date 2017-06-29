@@ -21,10 +21,15 @@ Unreleased
 * ALCN-892: Custom reference field on helpdesk ticket
 * Setup song: do not reset admin pwd for devs
 * ALCN-889: Add purchase manager on partner and as follower on helpdesk
+* ALCN-900: Hide potential smartbutton on product template form view
+* ALCN-900: Add helpdesk ticket smartbutton on partner form view
+* ALCN-902: Redefine picking on helpdesk ticket with the reference field
+* ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 
 **Bugfixes**
 
 * ALCN-888: Fix add a sale order line into a confirmed sale order
+* ALCN-901: Fix 'Add partner vendor on follower when create helpdesk ticket'
 
 **Build**
 

@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# © 2017 Julien Coux (Camptocamp)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api
 
 
-class Picking(models.Model):
-
-    _inherit = "stock.picking"
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
 
     @api.multi
     def _compute_helpdesk_tickets_count(self):
-        for picking in self:
+        for partner in self:
             domain = [
-                ('ref', '=', 'stock.picking,%s' % picking.id)
+                ('partner_id', '=', partner.id)
             ]
 
-            picking.helpdesk_tickets_count = len(
+            partner.helpdesk_tickets_count = len(
                 self.env['helpdesk.ticket'].search(domain)
             )
 
@@ -32,7 +31,7 @@ class Picking(models.Model):
             'helpdesk.helpdesk_ticket_action_main_tree'
         ).read()[0]
         action_data['domain'] = [
-            ('ref', '=', 'stock.picking,%s' % self.id)
+            ('partner_id', '=', self.id)
         ]
 
         return action_data
