@@ -39,15 +39,6 @@
     # I created a single commit for these three modules because it's only data.
     # There no code in these modules.
     - oca refs/pull/45/head
-./external-src/report-print-send:
-  remotes:
-    oca: git@github.com:OCA/report-print-send.git
-    camptocamp: git@github.com:camptocamp/report-print-send.git
-  merges:
-    - oca 10.0
-    # mig base_report_to_printer
-    - oca refs/pull/68/head
-  target: *default_target
 ./external-src/stock-logistics-workflow:
   remotes:
     oca: git@github.com:OCA/stock-logistics-workflow.git
