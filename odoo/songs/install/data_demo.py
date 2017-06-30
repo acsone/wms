@@ -5,7 +5,7 @@
 from pkg_resources import resource_stream
 
 import anthem
-from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
 from ..common import req
 
@@ -105,6 +105,45 @@ def import_pricelist_items(ctx):
 
 
 @anthem.log
+def import_lots(ctx):
+    """ Importing lots from csv"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    content = resource_stream(req, 'data/demo/stock_production_lot.csv')
+    Lot = ctx.env['stock.production.lot'].with_context(load_ctx)
+    load_csv_stream(ctx, Lot, content, delimiter=',')
+
+
+@anthem.log
+def import_inventory(ctx):
+    """ Importing inventory from csv"""
+    inventory = ctx.env['stock.inventory'].create({
+        'name': 'Initial',
+        })
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    ctx.env.context = load_ctx
+
+    model = 'stock.inventory.line'
+    content = resource_stream(req, 'data/demo/stock_inventory_line.csv')
+    header, rows = read_csv(content)
+    header.append('inventory_id/.id')
+    new_rows = []
+    for row in rows:
+        row.append(inventory.id)
+        new_rows.append(row)
+    load_rows(ctx, model, header, list(new_rows))
+
+
+@anthem.log
+def import_stock_bins(ctx):
+    """ Importing Stock Bins"""
+    content = resource_stream(req, 'data/demo/product_stock_bin.csv')
+    load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
+
+
+@anthem.log
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
     content = resource_stream(req, 'data/demo/delivery_vehicle.csv')
@@ -142,4 +181,7 @@ def main(ctx):
     import_sale_orders(ctx)
     import_product_supplierinfo(ctx)
     import_pricelist_items(ctx)
+    import_lots(ctx)
+    import_inventory(ctx)
+    import_stock_bins(ctx)
     import_delivery_round_config(ctx)

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2017 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# © 2016 Camptocamp SA
+# © 2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import re
 import csv
 import os
 from collections import OrderedDict
+
+import mapper
 
 
 def convert_camel_case(name):
@@ -24,7 +27,7 @@ class FieldMapper:
         self.check = check
 
 
-class EntityMapper(object):
+class EntityMapper:
 
     DB2_NAME = None
     DB2_SCHEMA = 'sbdata'
@@ -35,6 +38,8 @@ class EntityMapper(object):
     XMLID_FIELD = None
 
     FIELDS_MAPPING = []
+
+    STRIP = True
 
     def __init__(self, importer):
         assert self.DB2_NAME
@@ -83,26 +88,42 @@ class EntityMapper(object):
 
     def convert_entities(self, db2_entities):
         odoo_entities = []
-        for db2_entity in db2_entities:
+        for record in db2_entities:
             odoo_entity = OrderedDict(id=None)
+
+            # trim all strings by default
+            if self.STRIP:
+                for field in record.keys():
+                    if isinstance(record[field], basestring):
+                        record[field] = record[field].strip()
+
+            # Convert to camptocamp's FieldMapper format
+            if isinstance(self.FIELDS_MAPPING, dict):
+                self.FIELDS_MAPPING = [
+                    FieldMapper(key, val)
+                    for key, val in self.FIELDS_MAPPING.items()]
+
             for field in self.FIELDS_MAPPING:
                 if isinstance(field, str):
                     field = FieldMapper(field)
 
                 if field.db2_name:
-                    value = db2_entity[field.db2_name]
+                    value = field.db2_name
+                    if isinstance(value, basestring):
+                        if field.mapping:
+                            value = mapper.map_val(
+                                value,
+                                field.mapping,
+                                default=field.default)
+                        else:
+                            value = mapper.value(
+                                value,
+                                default=field.default)
 
-                    if value and field.strip and isinstance(value, str):
-                        value = value.strip()
+                    value = value(record)
 
-                    if field.mapping:
-                        value = field.mapping.get(value)
-
-                    elif field.check and not field.check(value):
+                    if field.check and not field.check(value):
                         value = None
-
-                    if value is None and field.default:
-                        value = field.default
 
                     odoo_entity[field.odoo_name] = value
 
@@ -120,14 +141,20 @@ class EntityMapper(object):
                             "ni méthode de conversion définie."
                             % field.odoo_name
                         )
-                    convert_method(odoo_entity, db2_entity)
+                    convert_method(odoo_entity, record)
 
-            odoo_entity['id'] = self.get_xml_id(
-                self.name, odoo_entity[self.XMLID_FIELD]
-            )
+            value = self.XMLID_FIELD
+            if isinstance(value, basestring):
+                value = mapper.value(value)
+            odoo_entity['id'] = mapper.ref(
+                self.name, value, self.XMLID_IMPORT_NAME, check=False)(
+                odoo_entity)
             odoo_entities.append(odoo_entity)
 
         return odoo_entities
+
+    def get_sql_select(self):
+        return '*'
 
     def get_sql_joins(self):
         return None
@@ -144,7 +171,7 @@ class EntityMapper(object):
     def get_sql_query(self):
         needed_refs = self.importer.get_foreign_refs(self.DB2_NAME)
 
-        query = "SELECT * FROM %s.%s "
+        query = "SELECT " + self.get_sql_select() + " FROM %s.%s "
         placeholders = (self.DB2_SCHEMA, self.DB2_NAME)
         params = []
 
@@ -208,6 +235,7 @@ class EntityMapper(object):
             return list(csv.DictReader(csv_file))
 
     def process(self):
+        print 'Process %s' % self.__class__.__name__
         if self.cursor:
             db2_entities = self.get_db2_entities()
         else:

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict
 
 from base import EntityMapper, FieldMapper
+from datetime import datetime
 import checks
 import mappings
+
+from mapper import const, ref, concat, call
 
 # Sample data for 302 SO
 SO_MIN = 2691474
@@ -16,7 +19,6 @@ class ProductMapper(EntityMapper):
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'default_code'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
@@ -141,7 +143,6 @@ class CustomerMapper(EntityMapper):
     DB2_SCHEMA = 'gendata'
 
     XMLID_FIELD = 'ref'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
@@ -389,7 +390,6 @@ class LocationMapper(EntityMapper):
     DB2_NAME = 'PSTOCK'
 
     XMLID_FIELD = 'computed'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         'name',
@@ -398,11 +398,22 @@ class LocationMapper(EntityMapper):
     ]
 
     def get_sql_query(self):
-        query = ("select p1.stolos as location_name from sbdata.PSTOCK as p1"
-                 " UNION "
-                 "select p2.stolop as location_name from sbdata.PSTOCK as p2")
+        """
+        Some location don't have a control code.
+        We don't need the secondary location (stolos)
+        :return:
+        """
+        query = """
+        SELECT storef, stolop FROM sbdata.PSTOCK
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
         if not self.importer.full:
-            query += " FETCH FIRST 300 ROWS ONLY"
+            query += """
+            AND storef IN (SELECT dccart 
+                        FROM sbdata.PDETCDCL 
+                        WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
 
         return query, []
 
@@ -413,8 +424,8 @@ class LocationMapper(EntityMapper):
         locations = {}
 
         for db2_entity in db2_entities:
-            value = db2_entity['location_name'].strip()
-            if len(value) < 8:
+            value = db2_entity['stolop'].strip()
+            if len(value) < 6:
                 continue
 
             family = value[0]
@@ -426,7 +437,7 @@ class LocationMapper(EntityMapper):
             if family in ('A', 'P'):
                 rack = value[2:4]
                 lvl = value[4]
-                bin = '0' + value[5]
+                bin = value[5]
             elif family in ('Q', 'E'):
                 rack = value[2]
                 lvl = value[3]
@@ -475,7 +486,6 @@ class SaleOrderMapper(EntityMapper):
     DB2_SCHEMA = 'sbdata'
 
     XMLID_FIELD = 'id'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('name', 'eccsui'),
@@ -599,7 +609,6 @@ class SaleOrderLineMapper(EntityMapper):
     DB2_SCHEMA = 'sbdata'
 
     XMLID_FIELD = 'id'
-    XMLID_IMPORT_NAME = '__import__'
 
     FIELDS_MAPPING = [
         FieldMapper('sequence', 'dccnli'),
@@ -659,11 +668,141 @@ class SaleOrderLineMapper(EntityMapper):
         return "eccsui, ecccli, eccsuc"
 
 
+class StockProductionLotMapper(EntityMapper):
+    DB2_NAME = 'PLOTS'
+
+    XMLID_FIELD = "id"
+
+    FIELDS_MAPPING = {
+        'id': concat('lotnum', 'lotref', delimiter='_'),
+        'name': 'lotnum',
+        'product_id/id': ref('product', 'lotref', '__import__', check=False),
+        'checksum':
+            lambda rec: rec['vloint'] and
+            ('000'+'{:.0f}'.format(rec['vloint']))[-3:] or '',
+        'life_date': lambda rec:
+            rec['vloech'] and
+            int('{:.0f}'.format(rec['vloech'])) != 99999999 and
+            datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
+                    .strftime('%Y-%m-%d 00:00:00') or '',
+    }
+
+    def get_sql_select(self):
+        return "lotref,lotnum,v.vloint,v.vloech"
+
+    def get_sql_joins(self):
+        return ("""
+            LEFT JOIN sbdata.vplots v ON (lotref=v.vloart AND lotnum=v.vlolot)
+            LEFT OUTER JOIN sbdata.vplots v2 ON
+                (v.vloart=v2.vloart AND v.vlolot=v2.vlolot
+                AND v2.vloech>v.vloech)
+        """)
+
+    def get_sql_where(self):
+        # Warning: some lot are existing multiple times.
+        # Could be that the supplier re-emitted the lot with another life date,
+        # or there was encoding error at reception
+        # res=fetchall_dict("""
+        #   SELECT lotnum,lotref,lotdes||lotdea,count(vloech) FROM sbdata.PLOTS
+        #   LEFT JOIN sbdata.vplots ON lotnum=vlolot AND lotref=vloart
+        #   WHERE lotact !=0 group by lotnum, lotref,lotdes||lotdea
+        #   having count(vloech)>1  ORDER BY 1 asc""")
+        # We cannot use the date as key in the join between plots and vplots as
+        # 28% of dates cannot be matched and there is nothing to get last
+        # inserted/modified record.
+        # So, I apply the greatest-n-per-group on vplots to fetch the date and
+        # checksum.
+
+        where = """
+        lotact !=0 
+        AND lotsuc='1' 
+        AND v2.vloech is null
+        """
+        if not self.importer.full:
+            where += """
+            AND lotref IN (SELECT dccart
+            FROM sbdata.PDETCDCL
+            WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
+        return where
+
+
+class StockInventoryLineMapper(EntityMapper):
+    DB2_NAME = 'PLOTS'
+
+    XMLID_FIELD = "id"
+
+    FIELDS_MAPPING = {
+        'id': concat('lotnum', 'lotref', delimiter='_'),
+        'prod_lot_id/id':
+            ref('stock_production_lot',
+                concat('lotnum', 'lotref', delimiter='_'),
+                '__import__', check=False),
+        'product_id/id': ref('product', 'lotref', '__import__', check=False),
+        'product_qty': lambda rec: int(rec['lotact']),
+        'location_id/id': ref('location',
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_joins(self):
+        return ("""
+            LEFT JOIN sbdata.vplots v ON (lotref=v.vloart AND lotnum=v.vlolot)
+            LEFT JOIN sbdata.pstock ON (storef=lotref AND stosuc=lotsuc)
+            LEFT JOIN sbdata.pgestion ON gesart=lotref
+        """)
+
+    def get_sql_where(self):
+        where = "lotact !=0 AND lotsuc='1'"
+        if not self.importer.full:
+            where += """ 
+            AND lotref IN (SELECT dccart
+                                    FROM sbdata.PDETCDCL
+                                    WHERE dccsui >= %s AND dccsui <= %s)
+            """ % (SO_MIN, SO_MAX)
+        return where
+
+
+class ProductStockBinMapper(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = "id"
+
+    FIELDS_MAPPING = {
+        'id': concat('storef', 'location_name', delimiter='_'),
+        'product_id/id': ref('product', 'storef', '__import__', check=False),
+        'location_id/id': const('stock.stock_location_stock'),
+        'bin_location_id/id': ref('location',
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_query(self):
+        query = """
+        SELECT storef, stolop FROM sbdata.PSTOCK
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
+        if not self.importer.full:
+            query += """
+                    AND storef IN (SELECT dccart
+                                FROM sbdata.PDETCDCL
+                                WHERE dccsui >= %s AND dccsui <= %s)
+                    """ % (SO_MIN, SO_MAX)
+        return query, []
+
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
                   SaleOrderOpenMapper,
                   SaleOrderClosedMapper,
-                  SaleOrderLineMapper
+                  SaleOrderLineMapper,
+                  StockProductionLotMapper,
+                  StockInventoryLineMapper,
+                  ProductStockBinMapper
                   ]

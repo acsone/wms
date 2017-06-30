@@ -27,11 +27,12 @@ You need an odbc configuration file (path: ~/.odbc.ini) with Alcyon database con
 This file is available in Lastpass in Alcyon shared folder.
 
 ### Python client
-In python, you can use the pyodbc lib:
+In python, you can use the pyodbc v3. The version 4 is currently not compatible with DB2 and generate MemoryError:
+https://github.com/mkleehammer/pyodbc/issues/223
 
 ```bash
 sudo apt-get install unixodbc-dev
-pip install --user pyodbc
+pip install --user pyodbc==3.0.10
 ```
 
 If you get an error
@@ -100,6 +101,21 @@ Out[1]:
  {'clinom': 'EPC 001 *                     ', 'clinum': Decimal('6')}]
 ```
 
+List all columns of a table:
+```bash
+fetchall_dict("select table_name, column_name from qsys2.syscolumns WHERE table_name = 'PGESTION'")
+```
+
+Table for enumeration with translation: gendata.parame
+
+For instance, to obtain delivery methods:
+```bash
+    fetchall_dict("select * from gendata.parame WHERE pakey LIKE 'MDL%'")
+```
+In this table, the column pakey make the link with the type (MDL) id (01) and language.
+So we get a value containing MDL01FR
+
+
 ### DB2 queries
 
 * SQL limit: To limit a query you have to use `fetch first X rows only'
@@ -116,6 +132,7 @@ Out[1]:
  select table_schema, table_name, column_name from qsys2.syscolumns
  where table_schema in ('SBDATA', 'GENDATA') and table_name in ('PGESTION', 'CLIENT')
  ```
+
 
 ### CSV Files generation
 

@@ -1,6 +1,8 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import csv
 import os
 import pyodbc
@@ -89,7 +91,8 @@ class Importer:
             file_path = os.path.join(self.csv_path, '%s.csv' % name)
 
             # backup the file before overwriting it to make diff csv files
-            copyfile(file_path, file_path + '.former')
+            if os.path.isfile(file_path):
+                copyfile(file_path, file_path + '.former')
             with open(file_path, 'wb') as csvfile:
                 writer = csv.DictWriter(csvfile, headers, lineterminator='\n')
                 writer.writeheader()
