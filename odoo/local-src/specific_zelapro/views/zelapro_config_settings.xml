@@ -14,7 +14,7 @@
                     <field name="export_path"/>
                 </group>
                 <group string="ABC">
-                    <field name="ca_computation_delay"/>
+                    <field name="turnover_delay"/>
                 </group>
             </form>
         </field>

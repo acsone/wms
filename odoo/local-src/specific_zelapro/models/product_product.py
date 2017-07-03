@@ -8,162 +8,223 @@ from odoo.exceptions import UserError
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    year_ca = fields.Monetary('CA for 12 last months')
-    year_ca_nbr_lines = fields.Integer('CA ')
+    turnover = fields.Monetary('Turnover')
+    turnover_nbr_lines = fields.Integer('Turnover (nbr lines)')
     abc_id = fields.Many2one('activity.based.costing', string='ABC')
+    business_unit_id = fields.Many2one('product.category',
+                                       compute='_compute_business_unit_id',
+                                       readonly=True,
+                                       store=True)
+
+    @api.depends('categ_id')
+    def _compute_business_unit_id(self):
+        business_units = self.env['product.category']\
+            .search([('is_business_unit', '=', True)])
+
+        bu_by_categ = {}
+        for business_unit in business_units:
+            business_unit_id = business_unit.id
+            bu_by_categ[business_unit_id] = business_unit_id
+            children_categ_query = """
+            WITH RECURSIVE tree AS (
+              SELECT id, ARRAY[]::INTEGER[] AS ancestors
+              FROM product_category WHERE parent_id IS NULL
+
+              UNION ALL
+
+              SELECT 
+                product_category.id,
+                tree.ancestors || product_category.parent_id
+              FROM product_category, tree
+              WHERE product_category.parent_id = tree.id
+            ) SELECT id FROM tree WHERE %s = ANY(tree.ancestors);
+            """
+            self.env.cr.execute(children_categ_query, (business_unit.id, ))
+
+            for categ in self.env.cr.fetchall():
+                bu_by_categ[categ[0]] = business_unit_id
+
+        for product in self:
+            if not product.categ_id or product.categ_id.id not in bu_by_categ:
+                product.business_unit_id = None
+            else:
+                product.business_unit_id = bu_by_categ[product.categ_id.id]
 
     @api.model
-    def compute_ca_by_product(self):
+    def compute_turnover_by_product(self):
         """
-        Compute the CA for each products
+        Compute the turnover for each products, for each business unit and
+        the global turnover
         :return:
         """
         config_param = self.env['ir.config_parameter']
-        ca_computation_delay = \
-            int(config_param.get_param('zelapro.ca_computation_delay'))
+        turnover_delay = \
+            int(config_param.get_param('zelapro.turnover_delay'))
 
-        ca_by_products_query = """
-        SELECT product_id, sum(price_subtotal), count(*)
-        FROM account_invoice_line
-        WHERE create_date > NOW() - INTERVAL '%s months'
-        GROUP BY product_id;
-        """ % ca_computation_delay
-        self.env.cr.execute(ca_by_products_query)
-        ca_by_products = {}
+        turnover_by_products_query = """
+        SELECT
+          line.product_id,
+          product.business_unit_id,
+          sum(line.price_subtotal),
+          count(*)
+        FROM account_invoice_line AS line
+          INNER JOIN product_product AS product
+          ON line.product_id = product.id
+        WHERE line.create_date > NOW() - INTERVAL '%s months'
+        GROUP BY product.business_unit_id, line.product_id;
+        """
+        self.env.cr.execute(turnover_by_products_query, (turnover_delay, ))
+        turnover_by_products = {}
         for result in self.env.cr.fetchall():
-            ca_by_products[result[0]] = (result[1], result[2])
+            turnover_by_products[result[0]] = [result[1], result[2], result[3]]
 
         # Compute the CA for all products
-        ca_total = 0.0
+        turnover_by_bu = {}
+        total_turnover = 0
         products = self.env['product.product'].search([])
         for product in products:
-            if product.id not in ca_by_products:
-                year_ca = 0
-                year_ca_nbr_lines = 0
+            if product.id not in turnover_by_products:
+                bu_id = None
+                product_turnover_sum = nbr_lines = 0
             else:
-                year_ca = ca_by_products[product.id][0]
-                year_ca_nbr_lines = ca_by_products[product.id][1]
+                bu_id, product_turnover_sum, nbr_lines = \
+                    turnover_by_products[product.id]
 
             product.write({
-                'year_ca': year_ca,
-                'year_ca_nbr_lines': year_ca_nbr_lines,
+                'turnover': product_turnover_sum,
+                'turnover_nbr_lines': nbr_lines,
             })
-            ca_total += year_ca
 
-        return ca_total
+            business_unit_turnover = turnover_by_bu.get(bu_id, 0)
+            business_unit_turnover += product_turnover_sum
+            turnover_by_bu[bu_id] = business_unit_turnover
 
-    def compute_abc_rate(self, ca_total=0):
+            total_turnover += product_turnover_sum
+
+        business_units = self.env['product.category'] \
+            .search([('is_business_unit', '=', True)])
+        for business_unit in business_units:
+            if business_unit.id not in turnover_by_bu:
+                business_unit.turnover = 0
+            else:
+                business_unit.turnover = turnover_by_bu[business_unit.id]
+
+        config_param.set_param('zelapro.total_turnover', str(total_turnover))
+
+    def compute_abc_rate(self):
         """
         This method will compute the ABC rate for each products.
         For more information about the ABC method:
         https://en.wikipedia.org/wiki/Activity-based_costing
 
-        The idea is to compute this rate according the CA
-        of all products on one year (method compute_ca_by_product)
+        The idea is to compute this rate according the turnover
+        by business unit of all products on one year
+        (method compute_turnover_by_product)
 
         The ABC method is computed according several rates.
         Normally there are three rates A, B and C
         For example, the rate A can be 80%. This rate will contain
         all products where the sum of all CA is less or equal
-        than 80% of the glabel CA.
-        :param ca_total: the global ca. Use only for test
+        than 80% of the total turnover.
         :return:
         """
         product_obj = self.env['product.product']
 
         abc_rates = self.env['activity.based.costing'].search([])
-        abc_rates_lst = [(x.id, x.rate) for x in abc_rates]
 
-        if not abc_rates_lst:
+        if not abc_rates:
             raise UserError(_('Please define a least one ABC rate'))
 
-        if not ca_total:
-            ca_total = self.compute_ca_by_product()
+        business_units = self.env['product.category'].search(
+            [('is_business_unit', '=', True)]
+        )
+        for business_unit in business_units:
+            bu_turnover = business_unit.turnover
 
-        # Retrieve the first ABC rate
-        current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
-        current_abc_total_amount = (ca_total / 100.0) * current_abc_rate
-        current_abc_product_ids = []
+            # Retrieve the first ABC rate
+            abc_rates_lst = [(x.id, x.rate) for x in abc_rates]
+            current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
+            current_abc_total_amount = (bu_turnover / 100.0) * current_abc_rate
+            current_abc_product_ids = []
 
-        # Retrieve all products ordered by CA
-        # If there is several products with the same CA they need to take
-        # these products in one time
-        ordered_product_ids_query = """
-        SELECT year_ca, string_agg(id::TEXT, ',')
-        FROM product_product
-        WHERE active = TRUE
-        GROUP BY year_ca
-        ORDER BY year_ca DESC;
-        """
-        total_ca_amount = 0.0
-        self.env.cr.execute(ordered_product_ids_query)
-        product_ids_ordered_by_ca = self.env.cr.fetchall()
-        while product_ids_ordered_by_ca:
-            # If it is the last abc rate we don't need to compute the rest
-            # We can stop the process here and set the current abc rate
-            # to the rest of products.
-            if not abc_rates_lst:
-                product_remaining_ids = []
-                for x in product_ids_ordered_by_ca:
-                    product_remaining_ids += \
-                        [int(y) for y in x[1].split(',')]
-
-                products = product_obj.browse(product_remaining_ids)
-                products.write({
-                    'abc_id': current_abc_id
-                })
-                break
-
-            # Pop the product CA and the list of products
-            product_ca, product_ids_str = product_ids_ordered_by_ca.pop(0)
-            product_ids = [int(y) for y in product_ids_str.split(',')]
-
-            # Add these products ids in the list to update
-            current_abc_product_ids += product_ids
-            # Input the total CA amount
-            total_ca_amount += product_ca * len(product_ids)
-
-            # If the total CA amount is greater or equal than the total
-            # amount of the current rate it means
-            # that we need to the next rate.
-            if total_ca_amount >= current_abc_total_amount:
-                products = product_obj.browse(current_abc_product_ids)
-                products.write({
-                    'abc_id': current_abc_id,
-                })
-
-                # Switch to the next ABC rate and recompute the current rate
-                current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
-                current_abc_total_amount = \
-                    (ca_total / 100.0) * current_abc_rate
-                current_abc_product_ids = []
-
-                # If the new ABC rate is the last we continue the loop
-                # We don't need to check the next ABC rate
+            # Retrieve all products ordered by Turnover
+            # If there is several products with the same Turnover we need
+            # to take these products in one time
+            ordered_product_ids_query = """
+            SELECT turnover, string_agg(id::TEXT, ',')
+            FROM product_product
+            WHERE active = TRUE
+            AND business_unit_id = %s
+            GROUP BY turnover
+            ORDER BY turnover DESC;
+            """
+            total_turnover_amount = 0.0
+            self.env.cr.execute(ordered_product_ids_query, (business_unit.id,))
+            product_ids_ordered_by_turnover = self.env.cr.fetchall()
+            while product_ids_ordered_by_turnover:
+                # If it is the last abc rate we don't need to compute the rest
+                # We can stop the process here and set the current abc rate
+                # to the rest of products.
                 if not abc_rates_lst:
-                    continue
+                    product_remaining_ids = []
+                    for x in product_ids_ordered_by_turnover:
+                        product_remaining_ids += \
+                            [int(y) for y in x[1].split(',')]
 
-                # We need to check the next ABC rate to be sure that
-                # the next ABC rate is not lower than the current CA amount.
-                # In some extremely rare case a ABC rate can be skipped
-                # Eg:
-                # Rate A: 40€
-                # Rate B: 70€
-                # Rate C: 100€
-                # We have two products (Product 1 with total CA to 75€
-                # and product 2 with total CA to 10€)
-                # The product 1 should have the rate A and the product 2
-                # should have the rate C (and not B !!!)
-                next_abc_id, next_abc_rate = abc_rates_lst[0]
-                next_abc_total_amount = \
-                    (ca_total / 100.0) * next_abc_rate
-                while next_abc_total_amount < total_ca_amount:
+                    products = product_obj.browse(product_remaining_ids)
+                    products.write({
+                        'abc_id': current_abc_id
+                    })
+                    break
+
+                # Pop the product Turnover and the list of products
+                product_turnover, product_ids_str = \
+                    product_ids_ordered_by_turnover.pop(0)
+                product_ids = [int(y) for y in product_ids_str.split(',')]
+
+                # Add these products ids in the list to update
+                current_abc_product_ids += product_ids
+                # Input the total Turnover amount
+                total_turnover_amount += product_turnover * len(product_ids)
+
+                # If the total Turnover amount is greater or equal than
+                # the total amount of the current rate it means
+                # that we need to the next rate.
+                if total_turnover_amount >= current_abc_total_amount:
+                    products = product_obj.browse(current_abc_product_ids)
+                    products.write({
+                        'abc_id': current_abc_id,
+                    })
+
+                    # Switch to the next ABC rate and recompute
+                    # the current rate
                     current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
                     current_abc_total_amount = \
-                        (ca_total / 100.0) * current_abc_rate
+                        (bu_turnover / 100.0) * current_abc_rate
                     current_abc_product_ids = []
 
-                    if abc_rates_lst:
-                        next_abc_id, next_abc_rate = abc_rates_lst[0]
-                        next_abc_total_amount = \
-                            (ca_total / 100.0) * next_abc_rate
+                    # If the new ABC rate is the last we continue the loop
+                    # We don't need to check the next ABC rate
+                    if not abc_rates_lst:
+                        continue
+
+                    # We need to check the next ABC rate to be sure that
+                    # the next ABC rate is not lower than the current turnover.
+                    # In some extremely rare case a ABC rate can be skipped
+                    # Eg:
+                    # Rate A: 40€
+                    # Rate B: 70€
+                    # Rate C: 100€
+                    # We have two products (Product 1 with total
+                    # Turnover to 75€ and product 2 with total Turnover to 10€)
+                    # The product 1 should have the rate A and the product 2
+                    # should have the rate C (and not B !!!)
+                    while current_abc_total_amount <= total_turnover_amount:
+                        current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
+                        current_abc_total_amount = \
+                            (bu_turnover / 100.0) * current_abc_rate
+                        current_abc_product_ids = []
+
+                        if not abc_rates_lst:
+                            break
+

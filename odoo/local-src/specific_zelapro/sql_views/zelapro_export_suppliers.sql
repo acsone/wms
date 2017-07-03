@@ -34,5 +34,3 @@ CREATE OR REPLACE VIEW zelapro_export_suppliers AS
   FROM res_partner AS supplier
     LEFT JOIN partner_alcyon_category AS categ ON supplier.alcyon_category_id = categ.id
   WHERE supplier.supplier = TRUE;
-
-SELECT * FROM partner_alcyon_category;

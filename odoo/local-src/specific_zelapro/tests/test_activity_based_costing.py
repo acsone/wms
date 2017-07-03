@@ -7,22 +7,27 @@ from odoo import fields
 
 class TestActivityBasedCostring(common.TransactionCase):
 
-    INVOICES_BY_PRODUCTS = {
-        1: (1, 100), # CA 100
-        2: (2, 25), # CA 50
-        3: (8, 10), # CA 80
-        4: (15, 20), # CA 300
-        5: (0, 0), # CA 0,
-        6: (1, 50), # CA 50
-        7: (16, 5), # CA 80
-        8: (5, 20), # CA 100
-        9: (25, 8), # CA 200
-        10: (8, 5), # CA 40
-    }
+    def test_business_unit_id(self):
+        product_category = self.env['product.category']
+        business_unit = product_category.create({
+            'name': 'Business Unit',
+            'is_business_unit': True
+        })
 
-    def test_compute_ca_by_product(self):
+        sub_category = product_category.create({
+            'name': 'Test',
+            'parent_id': business_unit.id,
+        })
+
+        product = self.env['product.product'].create({
+            'name': 'Product',
+            'categ_id': sub_category.id,
+        })
+        self.assertEquals(product.business_unit_id, business_unit)
+
+    def test_compute_turnover_by_product(self):
         """
-        Compute the CA for all products and check the sum
+        Compute the turnover for all products and check the sum
         :return:
         """
 
@@ -40,14 +45,33 @@ class TestActivityBasedCostring(common.TransactionCase):
             'name': 'Partner'
         })
 
-        # Create all products (see INVOICES_BY_PRODUCTS)
-        for product_num in range(1, len(self.INVOICES_BY_PRODUCTS) + 1):
+        business_unit = self.env['product.category'].create({
+            'name': 'Business Unit',
+            'is_business_unit': True,
+        })
+
+        invoices_by_product = {
+            1: (1, 100),  # turnover 100
+            2: (2, 25),  # turnover 50
+            3: (8, 10),  # turnover 80
+            4: (15, 20),  # turnover 300
+            5: (0, 0),  # turnover 0,
+            6: (1, 50),  # turnover 50
+            7: (16, 5),  # turnover 80
+            8: (5, 20),  # turnover 100
+            9: (25, 8),  # turnover 200
+            10: (8, 5),  # turnover 40
+        }
+
+        # Create all products (see invoices_by_product)
+        for product_num in range(1, len(invoices_by_product) + 1):
             product = product_obj.create({
-                'name': 'Product %s' % product_num
+                'name': 'Product %s' % product_num,
+                'categ_id': business_unit.id,
             })
             setattr(self, 'product_%s' % product_num, product)
 
-            quantity, price_unit = self.INVOICES_BY_PRODUCTS[product_num]
+            quantity, price_unit = invoices_by_product[product_num]
             invoice_obj.create({
                 'partner_id': partner.id,
                 'journal_id': journal.id,
@@ -63,17 +87,20 @@ class TestActivityBasedCostring(common.TransactionCase):
                 ]
             })
 
-        ca_total = product_obj.compute_ca_by_product()
+        product_obj.compute_turnover_by_product()
 
-        self.assertEquals(ca_total, 1000.0)
-        self.assertEquals(getattr(self, 'product_1').year_ca, 100.0)
-        self.assertEquals(getattr(self, 'product_2').year_ca, 50.0)
-        self.assertEquals(getattr(self, 'product_3').year_ca, 80.0)
-        self.assertEquals(getattr(self, 'product_4').year_ca, 300.0)
-        self.assertEquals(getattr(self, 'product_5').year_ca, 0.0)
+        config_param = self.env['ir.config_parameter']
+        total_turnover = config_param.get_param('zelapro.total_turnover')
 
-        self.assertEquals(getattr(self, 'product_6').year_ca_nbr_lines, 1)
-        self.assertEquals(getattr(self, 'product_7').year_ca_nbr_lines, 1)
+        self.assertEquals(float(total_turnover), 1000.0)
+        self.assertEquals(getattr(self, 'product_1').turnover, 100.0)
+        self.assertEquals(getattr(self, 'product_2').turnover, 50.0)
+        self.assertEquals(getattr(self, 'product_3').turnover, 80.0)
+        self.assertEquals(getattr(self, 'product_4').turnover, 300.0)
+        self.assertEquals(getattr(self, 'product_5').turnover, 0.0)
+
+        self.assertEquals(getattr(self, 'product_6').turnover_nbr_lines, 1)
+        self.assertEquals(getattr(self, 'product_7').turnover_nbr_lines, 1)
 
         # Create ABC rate
         abc_obj = self.env['activity.based.costing']
@@ -92,9 +119,9 @@ class TestActivityBasedCostring(common.TransactionCase):
         })
 
         ir_config = self.env['ir.config_parameter']
-        ir_config.set_param('zelapro.ca_computation_delay', 12)
+        ir_config.set_param('zelapro.turnover_delay', 12)
 
-        product_obj.compute_abc_rate(ca_total=ca_total)
+        product_obj.compute_abc_rate()
 
         self.assertEqual(getattr(self, 'product_1').abc_id, rate_a)
         self.assertEqual(getattr(self, 'product_2').abc_id, rate_c)
@@ -106,3 +133,105 @@ class TestActivityBasedCostring(common.TransactionCase):
         self.assertEqual(getattr(self, 'product_8').abc_id, rate_a)
         self.assertEqual(getattr(self, 'product_9').abc_id, rate_a)
         self.assertEqual(getattr(self, 'product_10').abc_id, rate_c)
+
+    def test_multiple_business_unit(self):
+        """
+        Compute the ABC code with several business unit
+        Product 1, 2 and 3 are in the business unit 1 (turnover 200€)
+        Product 4 and 5 are in the business unit 2 (turnover 100€)
+        :return:
+        """
+
+        disable_products = "UPDATE product_product SET active = FALSE;"
+        self.env.cr.execute(disable_products)
+
+        product_obj = self.env['product.product']
+        invoice_obj = self.env['account.invoice']
+
+        journal = invoice_obj._default_journal()
+        account = self.env.ref('__setup__.account_400000')
+        account_line = self.env.ref('__setup__.account_701000')
+
+        partner = self.env['res.partner'].create({
+            'name': 'Partner'
+        })
+
+        business_unit_1 = self.env['product.category'].create({
+            'name': 'Business Unit 1',
+            'is_business_unit': True,
+        })
+
+        business_unit_2 = self.env['product.category'].create({
+            'name': 'Business Unit 2',
+            'is_business_unit': True,
+        })
+
+        # BU 1: turnover 200
+        # BU 2: turnover 100
+        invoices_by_product = {
+            1: (business_unit_1.id, 1, 140),  # BU1 - turnover 140
+            2: (business_unit_1.id, 4, 10),  # BU1 - turnover 40
+            3: (business_unit_1.id, 2, 10),  # BU1 - turnover 20
+            4: (business_unit_2.id, 3, 25),  # BU2 - turnover 75
+            5: (business_unit_2.id, 2, 12.5),  # BU2 - turnover 25,
+        }
+
+        # Create all products (see invoices_by_product)
+        for product_num in range(1, len(invoices_by_product) + 1):
+            categ_id, quantity, price_unit = invoices_by_product[product_num]
+            product = product_obj.create({
+                'name': 'Product %s' % product_num,
+                'categ_id': categ_id,
+            })
+            setattr(self, 'product_%s' % product_num, product)
+
+            invoice_obj.create({
+                'partner_id': partner.id,
+                'journal_id': journal.id,
+                'account_id': account.id,
+                'invoice_line_ids': [
+                    (0, 0, {
+                        'product_id': product.id,
+                        'name': 'Invoice Line %s' % product_num,
+                        'account_id': account_line.id,
+                        'quantity': quantity,
+                        'price_unit': price_unit
+                    })
+                ]
+            })
+
+        product_obj.compute_turnover_by_product()
+
+        config_param = self.env['ir.config_parameter']
+        total_turnover = config_param.get_param('zelapro.total_turnover')
+
+        self.assertEquals(float(total_turnover), 300.0)
+        self.assertEquals(float(business_unit_1.turnover), 200)
+        self.assertEquals(float(business_unit_2.turnover), 100)
+
+        # Create ABC rate
+        abc_obj = self.env['activity.based.costing']
+        abc_obj.search([]).unlink()
+        rate_a = abc_obj.create({
+            'code': 'A',
+            'rate': 60
+        })
+        rate_b = abc_obj.create({
+            'code': 'B',
+            'rate': 75
+        })
+        rate_c = abc_obj.create({
+            'code': 'C',
+            'rate': 100
+        })
+
+        ir_config = self.env['ir.config_parameter']
+        ir_config.set_param('zelapro.turnover_delay', 12)
+
+        product_obj.compute_abc_rate()
+
+        self.assertEqual(getattr(self, 'product_1').abc_id, rate_a)
+        self.assertEqual(getattr(self, 'product_2').abc_id, rate_b)
+        self.assertEqual(getattr(self, 'product_3').abc_id, rate_c)
+        self.assertEqual(getattr(self, 'product_4').abc_id, rate_a)
+        self.assertEqual(getattr(self, 'product_5').abc_id, rate_c)

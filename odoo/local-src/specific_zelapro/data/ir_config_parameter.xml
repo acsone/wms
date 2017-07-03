@@ -7,8 +7,8 @@
         <field name="value">;</field>
     </record>
 
-    <record id="default_ca_computation_delay" model="ir.config_parameter">
-        <field name="key">zelapro.ca_computation_delay</field>
+    <record id="default_turnover_delay" model="ir.config_parameter">
+        <field name="key">zelapro.turnover_delay</field>
         <field name="value">12</field>
     </record>
 </odoo>
