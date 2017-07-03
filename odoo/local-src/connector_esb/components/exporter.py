@@ -50,16 +50,15 @@ class ESBExporterMixin(AbstractComponent):
             '[{}:{}]'.format(self._usage, self.model._name))
 
     def run(self, items):
-        with self.collection.work_on(self.model._name) as work:
-            adapter = work.component(usage='xml.write')
-            prepared = []
-            # TODO: how many items could we have here?
-            # Shall we split this in chunks?
-            for item in items:
-                prepared.append(self.mapper.map_record(item).values())
-            path = adapter.write_file(prepared)
-            self.logger.info('File created: %s', path)
-            return path
+        adapter = self.work.component(usage='xml.write')
+        prepared = []
+        # TODO: how many items could we have here?
+        # Shall we split this in chunks?
+        for item in items:
+            prepared.append(self.mapper.map_record(item).values())
+        path = adapter.write_file(prepared)
+        self.logger.info('File created: %s', path)
+        return path
 
 
 class ESBExporter(Component):
