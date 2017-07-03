@@ -15,7 +15,7 @@ class Base(models.AbstractModel):
     @job(default_channel='root.esb')
     @related_action(action='related_action_unwrap_binding')
     @api.multi
-    def export_record(self, backend, fields=None):
+    def esb_export_record(self, backend, fields=None):
         with backend.work_on(self._name) as work:
             try:
                 exporter = work.component(usage='record.exporter')

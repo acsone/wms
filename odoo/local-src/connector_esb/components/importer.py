@@ -7,12 +7,12 @@ from odoo.addons.component.core import AbstractComponent
 
 class ImportMapper(AbstractComponent):
     _name = 'esb.import.mapper'
-    _inherit = ['esb.connector', 'base.import.mapper']
+    _inherit = ['esb.base', 'base.import.mapper']
     _usage = 'import.mapper'
 
 
 class ESBImporter(AbstractComponent):
 
     _name = 'esb.importer'
-    _inherit = ['base.importer', 'esb.connector']
+    _inherit = ['base.importer', 'esb.base']
     _usage = 'record.importer'

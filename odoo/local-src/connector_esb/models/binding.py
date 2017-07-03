@@ -6,7 +6,7 @@
 from odoo import models, fields, api
 from odoo.addons.queue_job.job import job, related_action
 
-from ...fields import AutoSetupMany2one
+from ..fields import AutoSetupMany2one
 
 
 class ESBBinding(models.AbstractModel):
@@ -30,7 +30,6 @@ class ESBBinding(models.AbstractModel):
     external_id = fields.Integer(string='External ID', index=True)
 
     @job(default_channel='root.esb')
-    @related_action(action='related_action_unwrap_binding')
     @api.model
     def import_record(self, backend, external_id, force=False):
         """Import an ESB record."""

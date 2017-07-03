@@ -21,7 +21,7 @@ for el, ns, attr in NAMESPACES:
 
 class ESBAdapter(AbstractComponent):
     _name = 'esb.adapter'
-    _inherit = 'base.backend.adapter'
+    _inherit = ['base.backend.adapter', 'esb.base']
 
 
 class ESBXMLAdapter(AbstractComponent):

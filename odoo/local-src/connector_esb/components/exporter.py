@@ -9,7 +9,7 @@ import logging
 
 class ExportMapper(AbstractComponent):
     _name = 'esb.export.mapper'
-    _inherit = ['base.export.mapper', 'esb.connector']
+    _inherit = ['base.export.mapper', 'esb.base']
     _usage = 'export.mapper'
 
     translatable_keys = {
@@ -42,7 +42,7 @@ class ExportMapper(AbstractComponent):
 class ESBExporterMixin(AbstractComponent):
 
     _name = 'esb.exporter.mixin'
-    _inherit = ['base.exporter', 'esb.connector']
+    _inherit = ['base.exporter', 'esb.base']
 
     @property
     def logger(self):

@@ -18,7 +18,7 @@ class AutoSetupMany2one(fields.Many2one):
         # instead of the model itself.
         # Eg:
         #  class ESBProductBinding(models.Model):
-        #     _name = 'esb.sale.order.binding'
+        #     _name = 'esb.sale.order'
         #     _inherit = 'esb.binding'
         #     _inherits = {'sale.order': 'odoo_id'}
         inherits_inv = {v: k for k, v in model._inherits.iteritems()}
