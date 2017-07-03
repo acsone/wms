@@ -27,6 +27,7 @@ Unreleased
 * ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 
 * ALCN-904: Custom purchase report (add new measures)
+* ALCN-838: Compute the scheduled date on the lead time of the supplier info
 
 **Bugfixes**
 
