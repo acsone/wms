@@ -9,7 +9,9 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     turnover = fields.Monetary('Turnover')
+    turnover_average = fields.Monetary('Turnover average')
     turnover_nbr_lines = fields.Integer('Turnover (nbr lines)')
+    turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)')
     abc_id = fields.Many2one('activity.based.costing', string='ABC')
     business_unit_id = fields.Many2one('product.category',
                                        compute='_compute_business_unit_id',
@@ -61,6 +63,32 @@ class ProductProduct(models.Model):
         turnover_delay = \
             int(config_param.get_param('zelapro.turnover_delay'))
 
+        #####################################
+        # Compute turnover by Business Unit #
+        #####################################
+        turnover_by_bu_query = """
+        SELECT
+          bu.id,
+          sum(line.price_subtotal),
+          count(*)
+        FROM account_invoice_line AS line
+          INNER JOIN product_product AS product ON line.product_id = product.id
+          LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id
+        WHERE line.create_date > NOW() - INTERVAL '%s months'
+        GROUP BY bu.id;
+        """
+        self.env.cr.execute(turnover_by_bu_query, (turnover_delay, ))
+        business_unit_obj = self.env['product.category']
+
+        turnover_by_bu = {}
+        for line in self.env.cr.fetchall():
+            bu = business_unit_obj.browse(line[0])
+            bu.turnover = line[1]
+            turnover_by_bu[line[0]] = (line[1], line[2])
+
+        ################################
+        # Compute turnover by products #
+        ################################
         turnover_by_products_query = """
         SELECT
           line.product_id,
@@ -78,38 +106,31 @@ class ProductProduct(models.Model):
         for result in self.env.cr.fetchall():
             turnover_by_products[result[0]] = [result[1], result[2], result[3]]
 
-        # Compute the CA for all products
-        turnover_by_bu = {}
-        total_turnover = 0
+        # Compute the turnover for all products
         products = self.env['product.product'].search([])
         for product in products:
             if product.id not in turnover_by_products:
-                bu_id = None
                 product_turnover_sum = nbr_lines = 0
+                turnover_average = turnover_average_nbr_lines = 0
             else:
                 bu_id, product_turnover_sum, nbr_lines = \
                     turnover_by_products[product.id]
 
+                if bu_id in turnover_by_bu:
+                    bu_turnover, bu_turnover_nbr_lines = turnover_by_bu[bu_id]
+                    turnover_average = \
+                        (bu_turnover / 100) * product_turnover_sum
+                    turnover_average_nbr_lines = \
+                        (bu_turnover_nbr_lines / 100) * nbr_lines
+                else:
+                    turnover_average = turnover_average_nbr_lines = 0
+
             product.write({
                 'turnover': product_turnover_sum,
                 'turnover_nbr_lines': nbr_lines,
+                'turnover_average': turnover_average,
+                'turnover_average_nbr_lines': turnover_average_nbr_lines
             })
-
-            business_unit_turnover = turnover_by_bu.get(bu_id, 0)
-            business_unit_turnover += product_turnover_sum
-            turnover_by_bu[bu_id] = business_unit_turnover
-
-            total_turnover += product_turnover_sum
-
-        business_units = self.env['product.category'] \
-            .search([('is_business_unit', '=', True)])
-        for business_unit in business_units:
-            if business_unit.id not in turnover_by_bu:
-                business_unit.turnover = 0
-            else:
-                business_unit.turnover = turnover_by_bu[business_unit.id]
-
-        config_param.set_param('zelapro.total_turnover', str(total_turnover))
 
     def compute_abc_rate(self):
         """

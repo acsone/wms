@@ -104,11 +104,11 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     product_add.default_code AS CP2Z22,
     product_add_rel.quantity AS CP2Z23,
     product_add_rel.quantity AS CP2Z24,
-    '' AS ABCCOD,
-    '' AS ABCVAV,
-    '' AS ABCPCV,
-    '' AS ABCNLI,
-    '' AS ABCPLI,
+    abc.code AS ABCCOD,
+    product.turnover AS ABCVAV,
+    product.turnover_average AS ABCPCV,
+    product.turnover_nbr_lines AS ABCNLI,
+    product.turnover_average_nbr_lines AS ABCPLI,
     '' AS ABCPSE
   FROM product_product AS product
     INNER JOIN product_template AS template ON product.product_tmpl_id = template.id
@@ -117,4 +117,6 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     LEFT JOIN product_supplierinfo AS supplierinfo ON supplierinfo.id = (SELECT min(id) FROM product_supplierinfo WHERE product_tmpl_id = template.id)
     LEFT JOIN res_partner AS supplier ON supplierinfo.name = supplier.id
     LEFT JOIN product_template_additional AS product_add_rel ON product_add_rel.id = (SELECT min(id) FROM product_template_additional WHERE original_product_id = template.id)
-    LEFT JOIN product_template AS product_add ON product_add_rel.product_id = product_add.id;
+    LEFT JOIN product_template AS product_add ON product_add_rel.product_id = product_add.id
+    LEFT JOIN activity_based_costing AS abc ON product.abc_id = abc.id
+    LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id;
