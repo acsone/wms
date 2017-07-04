@@ -11,7 +11,6 @@ import dicttoxml
 
 from odoo import fields
 from odoo.addons.component.core import Component
-from odoo.addons.component.core import AbstractComponent
 
 logging.getLogger('dicttoxml').setLevel(logging.WARN)
 
@@ -23,14 +22,10 @@ for el, ns, attr in NAMESPACES:
     etree.register_namespace(attr, ns)
 
 
-class ESBAdapter(AbstractComponent):
-    _name = 'esb.adapter'
-    _inherit = ['base.backend.adapter', 'esb.base']
-
-
-class ESBXMLAdapter(AbstractComponent):
-    _name = 'esb.adapter.xml'
-    _inherit = 'esb.adapter'
+class ESBXMLProducer(Component):
+    _name = 'esb.xml.producer'
+    _inherit = 'esb.base'
+    _usage = 'xml.producer'
 
     namespaces = NAMESPACES
     main_root_el = 'ROOT'
@@ -67,10 +62,10 @@ class ESBXMLAdapter(AbstractComponent):
         return self._produce(data, main_root, root)
 
 
-class ESBXMLWriterAdapter(Component):
+class ESBXMLWriterWriter(Component):
     _name = 'esb.adapter.xml.writer'
-    _inherit = 'esb.adapter.xml'
-    _usage = 'xml.write'
+    _inherit = 'esb.base'
+    _usage = 'xml.writer'
 
     def filename(self):
         timestamp = self.env['esb.backend.timestamp'].search(
@@ -88,8 +83,7 @@ class ESBXMLWriterAdapter(Component):
         return (self.env.context.get('xml_out_path') or
                 self.collection.sftp_location or '/tmp')
 
-    def write_file(self, data):
-        content = self.produce(data)
+    def write_file(self, content):
         fullpath = os.path.join(self.path(), self.filename())
         self._write_file(fullpath, content)
         return fullpath

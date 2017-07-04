@@ -4,6 +4,8 @@
 
 import os
 
+from contextlib import contextmanager
+
 from odoo import _, api, exceptions, fields, models
 
 
@@ -19,6 +21,12 @@ class ESBBackend(models.Model):
         inverse_name='backend_id',
         string='Synchronizations',
     )
+
+    @contextmanager
+    def work_on(self, model_name, kind=None, **kwargs):
+        _super = super(ESBBackend, self)
+        with _super.work_on(model_name, kind=kind, **kwargs) as work:
+            yield work
 
     @api.depends()
     def _compute_from_env(self):

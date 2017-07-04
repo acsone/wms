@@ -73,30 +73,30 @@ class XMLTestCase(ESBXMLTestCase):
 
     def test_path(self):
         with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.writer')
             self.assertEqual(writer.path(), '/tmp')
 
         self.backend.sftp_location = '/write/here/please'
         with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.writer')
             self.assertEqual(writer.path(), '/write/here/please')
 
         backend = self.backend.with_context(xml_out_path='/somewhere/else')
         with backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.writer')
             self.assertEqual(writer.path(), '/somewhere/else')
 
     def test_default_filename(self):
         today = fields.Date.today().replace('-', '')
-        with self.backend.work_on('res.partner') as work:
-            writer = work.component(usage='xml.write')
+        with self.backend.work_on('product.product') as work:
+            writer = work.component(usage='xml.writer')
             self.assertEqual(
-                writer.filename(), 'res_partner_{}.xml'.format(today))
+                writer.filename(), 'Product_{}.xml'.format(today))
 
     @tools.mute_logger('dicttoxml')
     def test_xml_base(self):
         with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.producer')
             result = writer.produce(TEST_DATA1)
             root = self.assertXmlDocument(result)
             paths = ('//Root', '//bar_out', '//foo_out', '//baz_out')
@@ -107,7 +107,7 @@ class XMLTestCase(ESBXMLTestCase):
     @tools.mute_logger('dicttoxml')
     def test_xml_multiple_lines(self):
         with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.producer')
             result = writer.produce(TEST_DATA2)
             root = self.assertXmlDocument(result)
             paths = (

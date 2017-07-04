@@ -2,16 +2,13 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import SavepointCase
+from odoo.addons.component.tests.common import SavepointComponentCase
 
 import xmlunittest
 from lxml import etree
 
 
-class ESBTestCase(SavepointCase):
-
-    at_install = False
-    post_install = True
+class ESBTestCase(SavepointComponentCase):
 
     @classmethod
     def setUpClass(cls):
@@ -30,7 +27,7 @@ class ESBTestCase(SavepointCase):
     def setUp(self):
         super(ESBTestCase, self).setUp()
         self.backend_model = self.env['esb.backend']
-        self.backend = self.backend_model.create({'name': 'ESB test'})
+        self.backend = self.backend_model.get_singleton()
 
 
 class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):

@@ -51,13 +51,15 @@ class ESBExporterMixin(AbstractComponent):
             '[{}:{}]'.format(self._usage, self.model._name))
 
     def run(self, items):
-        adapter = self.work.component(usage='xml.write')
+        producer = self.work.component(usage='xml.producer')
+        writer = self.work.component(usage='xml.writer')
         prepared = []
         # TODO: how many items could we have here?
         # Shall we split this in chunks?
         for item in items:
             prepared.append(self.mapper.map_record(item).values())
-        path = adapter.write_file(prepared)
+        content = producer.produce(prepared)
+        path = writer.write_file(content)
         self.logger.info('File created: %s', path)
         return path
 
@@ -78,12 +80,12 @@ class ESBCronExporter(AbstractComponent):
     def get_items_domain(self):
         return []
 
-    def get_items(self):
+    def get_items(self, export_since=None):
         domain = self.get_items_domain()
-        if self.export_since:
+        if export_since:
             # write_date is at the very least the same than create_date
             # so we don't need to search on create_date >= self.export_since
-            date_domain = [('write_date', '>=', self.export_since)]
+            date_domain = [('write_date', '>=', export_since)]
             domain = AND([domain, date_domain])
         return self.model.search(domain)
 
@@ -94,6 +96,5 @@ class ESBCronExporter(AbstractComponent):
         all the records that match the domain.
 
         """
-        self.export_since = export_since
-        records = self.get_items()
+        records = self.get_items(export_since=export_since)
         return super(ESBCronExporter, self).run(records)

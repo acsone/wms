@@ -96,7 +96,7 @@ class ExportProductTestCase(ESBXMLTestCase):
     def test_filename(self):
         today = fields.Date.today().replace('-', '')
         with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.write')
+            writer = work.component(usage='xml.writer')
             self.assertEqual(
                 writer.filename(), 'Product_{}.xml'.format(today))
 

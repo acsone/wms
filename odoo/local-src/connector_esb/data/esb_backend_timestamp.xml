@@ -6,7 +6,6 @@
     <field name="model">product.product</field>
     <field name="kind"></field>
     <field name="export_filename">Product_{date}.xml</field>
-    <field name="active" eval="True"/>
   </record>
 
 </odoo>
