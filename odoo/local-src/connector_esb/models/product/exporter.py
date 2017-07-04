@@ -29,6 +29,7 @@ class ProductCronExporter(Component):
     _name = 'esb.product.cron.exporter'
     _inherit = ['esb.cron.exporter', ]
     _usage = 'record.exporter.cron'
+    _apply_on = 'product.product'
 
     def get_items_domain(self):
         domain = [
