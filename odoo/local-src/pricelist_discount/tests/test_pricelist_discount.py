@@ -21,20 +21,31 @@ class TestPricelistDiscount(TransactionCase):
             'name': 'Unittest category'
         })
 
-        self.p1 = self.env['product.product'].create({
-            'name': 'Unittest P1',
-            'taxes_id': [(6, False, [self.tax.id])],
+        self.supplier = self.env['res.partner'].create({
+            'name': 'Unittest supplier',
+        })
+
+        self.supplierinfo1 = self.env['product.supplierinfo'].create({
+            'name': self.supplier.id,
+            'discount_sale': 10,
         })
 
         self.p1 = self.env['product.product'].create({
             'name': 'Unittest P1',
             'taxes_id': [(6, False, [self.tax.id])],
+            'seller_ids': [(6, 0, [self.supplierinfo1.id])],
+        })
+
+        self.supplierinfo2 = self.env['product.supplierinfo'].create({
+            'name': self.supplier.id,
+            'discount_sale': 10,
         })
 
         self.p2 = self.env['product.product'].create({
             'name': 'Unittest P2',
             'categ_id': self.product_category.id,
             'taxes_id': [(6, False, [self.tax.id])],
+            'seller_ids': [(6, 0, [self.supplierinfo2.id])],
         })
 
         self.main_pricelist = self.env['product.pricelist'].create({
@@ -55,17 +66,6 @@ class TestPricelistDiscount(TransactionCase):
             ],
         })
 
-        self.promotion_pricelist_id = self.env['product.pricelist'].create({
-            'name': 'Unittest Promotion Pricelist',
-            'item_ids': [
-                (0, False, {
-                    'applied_on': '3_global',
-                    'compute_price': 'percentage',
-                    'percent_price': 10,
-                })
-            ],
-        })
-
         self.discount_pricelist_id = self.env['product.pricelist'].create({
             'name': 'Unittest Discount Pricelist',
             'item_ids': [
@@ -81,7 +81,7 @@ class TestPricelistDiscount(TransactionCase):
         self.partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
             'property_product_pricelist': self.main_pricelist.id,
-            'promotion_pricelist_id': self.promotion_pricelist_id.id,
+            'supplier_promotion_sale_allowed': True,
             'discount_pricelist_id': self.discount_pricelist_id.id,
         })
 
@@ -102,6 +102,7 @@ class TestPricelistDiscount(TransactionCase):
                 }),
             ]
         })
+        self.sale.onchange_partner_id_discount_pricelist()
         self.sol_p1 = self.sale.order_line[0]
         self.sol_p2 = self.sale.order_line[1]
 
@@ -113,15 +114,13 @@ class TestPricelistDiscount(TransactionCase):
             'partner_id': partner.id
         })
 
-        self.assertFalse(sale.promotion_pricelist_id)
+        self.assertFalse(sale.supplier_promotion_allowed)
         self.assertFalse(sale.discount_pricelist_id)
 
         sale.partner_id = self.partner
         sale.onchange_partner_id_discount_pricelist()
 
-        self.assertEqual(
-            self.promotion_pricelist_id, sale.promotion_pricelist_id
-        )
+        self.assertTrue(sale.supplier_promotion_allowed)
         self.assertEqual(
             self.discount_pricelist_id, sale.discount_pricelist_id
         )
@@ -209,7 +208,7 @@ class TestPricelistDiscount(TransactionCase):
         self.assertEqual(432, self.sale.amount_total)
 
     def test_no_supplier_promotion(self):
-        self.sale.promotion_pricelist_id = False
+        self.sale.supplier_promotion_allowed = False
 
         for line in self.sale.order_line:
             line.product_id_change()
@@ -270,6 +269,9 @@ class TestPricelistDiscount(TransactionCase):
         self.assertEqual(342, self.sol_p2.price_subtotal)
 
         # Change supplier promotion
+        self.sol_p2 = self.sol_p2.with_context(
+            apply_onchange_promotion_discount=True
+        )
         self.sol_p2.supplier_promotion = 8.24
         self.sol_p2.onchange_promotion_discount()
 
@@ -379,7 +381,8 @@ class TestPricelistDiscount(TransactionCase):
         """
 
         # Supplier promotion 100%
-        self.promotion_pricelist_id.item_ids.percent_price = 100
+        self.supplierinfo1.discount_sale = 100
+        self.supplierinfo2.discount_sale = 100
         self.tax.amount = 20
 
         for line in self.sale.order_line:
@@ -411,18 +414,17 @@ class TestPricelistDiscount(TransactionCase):
         sub_partner = self.env['res.partner'].create({
             'parent_id': self.partner.id,
             'name': 'Unittest sub partner',
+            'supplier_promotion_sale_allowed': True,
         })
 
         self.sale.write({
-            'promotion_pricelist_id': False,
+            'supplier_promotion_allowed': False,
             'discount_pricelist_id': False,
             'partner_id': sub_partner.id,
         })
 
         self.sale.onchange_partner_id_discount_pricelist()
-        self.assertEqual(
-            self.promotion_pricelist_id, self.sale.promotion_pricelist_id
-        )
+        self.assertTrue(self.sale.supplier_promotion_allowed)
         self.assertEqual(
             self.discount_pricelist_id, self.sale.discount_pricelist_id
         )

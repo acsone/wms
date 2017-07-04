@@ -171,10 +171,6 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.CLIENT_DISCOUNT_PRICELIST
         ),
         FieldMapper(
-            'promotion_pricelist_id/id', 'clitrm',
-            mapping=mappings.CLIENT_PROMOTION_PRICELIST
-        ),
-        FieldMapper(
             'user_id/id', 'clirep',
             mapping=mappings.USERS
         ),

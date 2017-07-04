@@ -9,11 +9,12 @@ import odoo.addons.decimal_precision as dp
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    promotion_pricelist_id = fields.Many2one(
-        comodel_name='product.pricelist',
-        string='Supplier Promotion',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
+    supplier_promotion_allowed = fields.Boolean(
+        string='Supplier promotion allowed',
+        states={
+            'draft': [('readonly', False)],
+            'sent': [('readonly', False)]
+        },
     )
 
     discount_pricelist_id = fields.Many2one(
@@ -25,18 +26,16 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, vals):
-        """ Fills promotion and discount pricelist fields (if they are not)
+        """ Fills discount pricelist field (if it is not)
         based on partner configuration.
         """
-        pricelists = ('promotion_pricelist_id', 'discount_pricelist_id')
-        for pricelist_name in pricelists:
-            if pricelist_name not in vals:
-                partner_id = vals.get('partner_id')
-                if partner_id:
-                    partner = self.env['res.partner'].browse(partner_id)
-                    pricelist = partner[pricelist_name]
-                    if pricelist:
-                        vals[pricelist_name] = pricelist.id
+        if 'discount_pricelist_id' not in vals:
+            partner_id = vals.get('partner_id')
+            if partner_id:
+                partner = self.env['res.partner'].browse(partner_id)
+                pricelist = partner['discount_pricelist_id']
+                if pricelist:
+                    vals['discount_pricelist_id'] = pricelist.id
 
         return super(SaleOrder, self).create(vals)
 
@@ -45,7 +44,9 @@ class SaleOrder(models.Model):
         """ Update promotion and discount pricelist fields
         when partner_id is updated.
         """
-        self.promotion_pricelist_id = self.partner_id.promotion_pricelist_id
+        self.supplier_promotion_allowed = (
+            self.partner_id.supplier_promotion_sale_allowed
+        )
         self.discount_pricelist_id = self.partner_id.discount_pricelist_id
 
 
@@ -86,7 +87,7 @@ class SaleOrderLine(models.Model):
     @api.depends(
         'product_uom_qty', 'discount', 'price_unit', 'tax_id',
         'edited_supplier_promotion', 'edited_alcyon_discount',
-        'order_id.promotion_pricelist_id',
+        'order_id.supplier_promotion_allowed',
         'order_id.discount_pricelist_id'
     )
     def _compute_amount(self):
@@ -123,9 +124,24 @@ class SaleOrderLine(models.Model):
         """
         self.ensure_one()
 
-        price_supplier = self.apply_discount_pricelist(
-            self.product_id, self.order_id.promotion_pricelist_id, price
+        price_supplier = price
+        condition = (
+            self.product_id and
+            self.order_id.supplier_promotion_allowed
         )
+        if condition:
+
+            seller = self.product_id._select_seller_for_sale(
+                partner_id=False,
+                quantity=self.product_uom_qty,
+                date=(
+                    self.order_id.date_order and self.order_id.date_order[:10]
+                ),
+                uom_id=self.product_uom
+            )
+
+            if seller:
+                price_supplier = price * (1 - seller.discount_sale / 100)
 
         if not price_supplier:
             price_alcyon = price_supplier
@@ -167,39 +183,64 @@ class SaleOrderLine(models.Model):
         """
         for line in self:
             if line.edited_supplier_promotion or line.edited_alcyon_discount:
-                line.supplier_promotion = line.edited_supplier_promotion
-                line.alcyon_discount = line.edited_alcyon_discount
+                line.update({
+                    'supplier_promotion': line.edited_supplier_promotion,
+                    'alcyon_discount': line.edited_alcyon_discount,
+                })
 
             else:
                 if not line.price_unit:
-                    line.supplier_promotion = 0
-                    line.alcyon_discount = 0
+                    line.update({
+                        'supplier_promotion': 0,
+                        'alcyon_discount': 0,
+                    })
                 else:
                     price_unit = line.price_unit
                     price_supplier = line.price_unit_supplier
                     price_alcyon = line.price_unit_alcyon
 
                     if not price_supplier:
-                        line.supplier_promotion = 100
-                        line.alcyon_discount = 0
+                        line.update({
+                            'supplier_promotion': 100,
+                            'alcyon_discount': 0,
+                        })
 
                     else:
-                        line.supplier_promotion = (
-                            (1.0 - price_supplier / price_unit) * 100
-                        )
+                        line.update({
+                            'supplier_promotion': (
+                                (1.0 - price_supplier / price_unit) * 100
+                            ),
+                            'alcyon_discount': (
+                                (1.0 - price_alcyon / price_supplier) * 100
+                            ),
+                        })
 
-                        line.alcyon_discount = (
-                            (1.0 - price_alcyon / price_supplier) * 100
-                        )
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        new_context = self.env.context.copy() if self.env.context else {}
+        if isinstance(field_name, list):
+            condition = (
+                'supplier_promotion' in field_name or
+                'alcyon_discount' in field_name
+            )
+            if condition:
+                new_context['apply_onchange_promotion_discount'] = True
+        else:
+            if field_name in ['supplier_promotion', 'alcyon_discount']:
+                new_context['apply_onchange_promotion_discount'] = True
+        return super(SaleOrderLine, self.with_context(new_context)).onchange(
+            values, field_name, field_onchange
+        )
 
     @api.onchange('supplier_promotion', 'alcyon_discount')
     def onchange_promotion_discount(self):
         """ Force inverse call on discount to fill manual discounts.
         """
-        self.update({
-            'edited_supplier_promotion': self.supplier_promotion,
-            'edited_alcyon_discount': self.alcyon_discount
-        })
+        if self.env.context.get('apply_onchange_promotion_discount'):
+            self.update({
+                'edited_supplier_promotion': self.supplier_promotion,
+                'edited_alcyon_discount': self.alcyon_discount,
+            })
 
     @api.onchange('product_id')
     def onchange_product_id_reset_discount(self):

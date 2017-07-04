@@ -49,6 +49,11 @@ class PurchaseOrder(models.Model):
             else:
                 order.last_date_done = False
 
+    @api.onchange('supplier_promotion_allowed')
+    def onchange_supplier_promotion_allowed(self):
+        for line in self.order_line:
+            line.compute_promotion_supplier()
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
@@ -56,12 +61,23 @@ class PurchaseOrderLine(models.Model):
     price_unit_base = fields.Float('Unit Price',
                                    required=True,
                                    digits=dp.get_precision('Product Price'))
-    price_unit = fields.Float(string='Unit Price (discounted)')
+    price_unit = fields.Float(
+        string='Unit Price (discounted)',
+        compute='_compute_price_unit',
+        store=True,
+        readonly=False,
+    )
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
-    discount_pricelist = fields.Float()
+    promotion_supplier = fields.Float(
+        default=0.0
+    )
     product_ref = fields.Char('Product ref', related='product_id.default_code')
+
+    stop_constrains = fields.Boolean(
+        store=False,
+    )
 
     # By default there is no way to add a discounts in Purchase Lines.
     # To do that I added a new field "price_unit_base".
@@ -96,15 +112,31 @@ class PurchaseOrderLine(models.Model):
         To avoid infinite loop we need to not write the price_unit_base
         when we recompute the price_unit.
         """
-        if 'price_unit' in vals \
-                and 'price_unit_base' not in vals\
-                and not self.env.context.get('stop_constrains'):
-            vals['price_unit_base'] = vals['price_unit']
+
+        context = self.env.context or {}
+
+        write_from_view = (
+            context.get('params') and
+            isinstance(context['params'], dict) and
+            context['params'].get('view_type') and
+            context['params']['view_type'] == u'form'
+        )
+
+        condition = (
+            'price_unit' in vals and
+            'price_unit_base' not in vals and
+            not write_from_view
+        )
+        if condition:
+            for line in self:
+                if not line.stop_constrains:
+                    vals['price_unit_base'] = vals['price_unit']
+                super(PurchaseOrderLine, line).write(vals)
+            return True
 
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.constrains('price_unit_base', 'discount_global', 'discount_pricelist')
-    @api.onchange('price_unit_base', 'discount_global', 'discount_pricelist')
+    @api.depends('price_unit_base', 'discount_global', 'promotion_supplier')
     def _compute_price_unit(self):
         """
         This method will compute the price unit according
@@ -120,16 +152,37 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             price_unit = line.price_unit_base * \
                          (1 - (line.discount_global / 100)) * \
-                         (1 - (line.discount_pricelist / 100))
-            line.with_context(stop_constrains=True).price_unit = price_unit
+                         (1 - (line.promotion_supplier / 100))
+            line.stop_constrains = True
+            line.price_unit = price_unit
+            line.stop_constrains = False
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
         result = super(PurchaseOrderLine, self)._onchange_quantity()
         self.price_unit_base = self.price_unit
+        self.compute_promotion_supplier()
         self._compute_price_unit()
 
         return result
+
+    def compute_promotion_supplier(self):
+        if self.product_id:
+            date_order = self.order_id.date_order
+            order_date_str = date_order and date_order[:10]
+            seller = self.product_id._select_seller(
+                partner_id=self.partner_id,
+                quantity=self.product_qty,
+                date=order_date_str,
+                uom_id=self.product_uom)
+            self.promotion_supplier = (
+                seller.discount_purchase
+                if seller and self.order_id.supplier_promotion_allowed
+                else 0.0
+            )
+        else:
+            self.promotion_supplier = 0.0
+        self._compute_price_unit()
 
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -151,6 +204,8 @@ class PurchaseOrderLine(models.Model):
         if self.discount_global:
             return result
         self.discount_global = self.order_id.partner_id.supplier_discount
+
+        self.compute_promotion_supplier()
 
         return result
 

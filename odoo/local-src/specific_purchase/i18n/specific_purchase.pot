@@ -84,11 +84,6 @@ msgid "Discount global"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_pricelist
-msgid "Discount pricelist"
-msgstr ""
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_display_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
 msgid "Display Name"
@@ -204,6 +199,11 @@ msgid "Promotion Only"
 msgstr ""
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
+msgid "Promotion supplier"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr ""
@@ -239,6 +239,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_state_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
 msgid "State"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_stop_constrains
+msgid "Stop constrains"
 msgstr ""
 
 #. module: specific_purchase

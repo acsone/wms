@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_product_supplierinfo_specific_form">
+        <field name="name">product.supplierinfo.specific.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+
+            <label for="date_start" position="before">
+                <field name="discount_purchase"/>
+                <field name="min_qty_sale"/>
+                <field name="discount_sale"/>
+            </label>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_supplierinfo_specific_tree">
+        <field name="name">product.supplierinfo.specific.tree</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+        <field name="arch" type="xml">
+
+            <field name="date_start" position="before">
+                <field name="discount_purchase"/>
+                <field name="min_qty_sale"/>
+                <field name="discount_sale"/>
+            </field>
+
+        </field>
+    </record>
+
+
+</odoo>

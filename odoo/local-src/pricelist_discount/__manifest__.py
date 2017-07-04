@@ -9,12 +9,19 @@
     'license': 'AGPL-3',
     'category': 'Sales Management',
     'depends': [
+        'product',
+        'purchase',
+        'sale',
         'sale_stock',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        # Report
         'report/sale_order.xml',
+        # Views
         'views/account_invoice.xml',
+        'views/product_supplierinfo.xml',
+        'views/purchase_order.xml',
         'views/res_partner.xml',
         'views/sale_order.xml'
     ],

@@ -9,6 +9,7 @@
     'license': 'AGPL-3',
     'category': 'Purchases',
     'depends': [
+        'pricelist_discount',
         'purchase',
         'stock',
         'calendar',

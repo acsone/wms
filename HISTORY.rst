@@ -24,6 +24,7 @@ Unreleased
 
 * ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
 * ALCN-913: Add the unique supplier on the product form
+* ALCN-916: Manage supplier promotion
 
 **Bugfixes**
 
