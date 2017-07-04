@@ -379,6 +379,7 @@ class SaleOrderLine(models.Model):
             only_wh_stock_quants=True
         )
         for line in self:
+            production_lot_ids = None
             if line.product_id:
                 production_lot_ids = production_lot_model.search([
                     ('product_id', '=', line.product_id.id),
