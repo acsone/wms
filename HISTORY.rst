@@ -10,6 +10,7 @@ Unreleased
 
 * ALCN-33 Sale order (demo only)
 * ALCN-721 Customer addresses (demo only)
+* ALCN-912: Import sale orders (demo data) on mode full
 
 **Features and Improvements**
 * ALCN-840: Add a cron to create the daily inventory

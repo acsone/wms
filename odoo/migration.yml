@@ -186,6 +186,17 @@ migration:
       operations:
         post:
           - anthem songs.updates.update_10_4_0.update::main
+      modes:
+        full:
+          operations:
+            post:
+              # BEGIN: To be delete before reset integration instance
+              - anthem songs.install.user::import_users
+              - anthem songs.install.data_demo::import_suppliers
+              - anthem songs.install.data_demo::import_clients
+              - anthem songs.install.data_demo::import_products
+              - anthem songs.install.data_demo::import_sale_orders
+              # END: To be delete before reset integration instance
       addons:
         upgrade:
           # Specific modules
