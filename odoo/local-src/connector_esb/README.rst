@@ -8,6 +8,12 @@ Connector ESB
 
 TODO
 
+Configuration
+=============
+
+The URL of the sFTP must be set in an environment variable:
+``ODOO_ESB_SFTP_LOCATION``.
+
 Credits
 =======
 

@@ -2,6 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import os
 
 from odoo import _, api, exceptions, fields, models
 
@@ -11,12 +12,18 @@ class ESBBackend(models.Model):
     _description = 'ESB Backend'
     _inherit = 'connector.backend'
 
-    sftp_location = fields.Char(string='SFTP Location')
+    sftp_location = fields.Char(string='SFTP Location',
+                                compute='_compute_from_env')
     timestamp_ids = fields.One2many(
         comodel_name='esb.backend.timestamp',
         inverse_name='backend_id',
         string='Synchronizations',
     )
+
+    @api.depends()
+    def _compute_from_env(self):
+        for record in self:
+            record.sftp_location = os.getenv('ODOO_ESB_SFTP_LOCATION', '')
 
     @api.model
     def get_singleton(self):
