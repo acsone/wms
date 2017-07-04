@@ -399,6 +399,7 @@ class SaleOrderLine(models.Model):
     def _compute_next_expected_date_for_receipt(self):
         stock_move_model = self.env['stock.move']
         for line in self:
+            move = None
             if line.product_id:
                 move = stock_move_model.search([
                     ('product_id', '=', line.product_id.id),
