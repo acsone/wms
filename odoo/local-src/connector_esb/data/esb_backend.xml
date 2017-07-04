@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+  <record id="esb_backend_config" model="esb.backend">
+    <field name="name">WSO2</field>
+  </record>
+
+</odoo>

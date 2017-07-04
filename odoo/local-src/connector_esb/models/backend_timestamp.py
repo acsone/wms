@@ -2,7 +2,9 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+import psycopg2
+
+from odoo import _, api, exceptions, fields, models
 
 
 class ESBBackendTimestamp(models.Model):
@@ -24,3 +26,44 @@ class ESBBackendTimestamp(models.Model):
     last_export = fields.Datetime(
         string='Timestamp last export'
     )
+    export_filename = fields.Char(required=True,
+                                  default='{name}_{date}.xml')
+
+    _sql_constraints = [
+        ('model_kind_uniq', 'UNIQUE(model, kind)', _('Model must be unique')),
+    ]
+
+    @api.multi
+    def export(self):
+        """ Export a model from a cron """
+        self.ensure_one()
+        self._lock_timestamp()
+        next_last_export = fields.Datetime.now()
+        with self.backend_id.work_on(self.model, kind=self.kind) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            exporter.run(export_since=self.last_export)
+        self.last_export = next_last_export
+
+    @api.multi
+    def _lock_timestamp(self):
+        """ Lock the timestamp record
+
+        Prevent 2 synchros to be launched at the same time.
+        The lock is released at the commit of the transaction.
+
+        """
+        query = """
+               SELECT id FROM esb_backend_timestamp
+               WHERE id = %s
+               FOR UPDATE NOWAIT
+            """
+        try:
+            self.env.cr.execute(
+                query, (self.id,)
+            )
+        except psycopg2.OperationalError:
+            raise exceptions.UserError(
+                _("The synchronization timestamp (%s) is currently locked, "
+                  "probably due to an ongoing synchronization." %
+                  (' '.join([self.model, self.kind]),))
+            )

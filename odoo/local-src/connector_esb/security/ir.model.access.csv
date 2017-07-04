@@ -1,2 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_esb_backend","esb_backend connector manager","model_esb_backend","connector.group_connector_manager",1,1,1,1
+"access_esb_backend","esb_backend connector manager","model_esb_backend","connector.group_connector_manager",1,1,0,0
+"access_esb_backend_user","esb_backend user","model_esb_backend","base.group_user",1,0,0,0
+"access_esb_backend_timestamp","esb_backend_timestamp connector manager","model_esb_backend_timestamp","connector.group_connector_manager",1,1,0,0
+"access_esb_backend_timestamp_user","esb_backend_timestamp user","model_esb_backend_timestamp","base.group_user",1,0,0,0

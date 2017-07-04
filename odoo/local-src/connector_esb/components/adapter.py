@@ -2,14 +2,18 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+import os
+
+from lxml import etree
+
+import dicttoxml
+
 from odoo import fields
 from odoo.addons.component.core import Component
 from odoo.addons.component.core import AbstractComponent
 
-import dicttoxml
-from lxml import etree
-import os
-
+logging.getLogger('dicttoxml').setLevel(logging.WARN)
 
 NAMESPACES = (
     # el, ns, attr
@@ -36,7 +40,7 @@ class ESBXMLAdapter(AbstractComponent):
     def _apply_namespaces(self, xml):
         root = etree.XML(xml)
         for el, ns, attr in self.namespaces:
-            if root.find(el):
+            if len(root.find(el)):
                 # NOTE: this sets
                 #  `xmlns:dt="urn:schemas-microsoft-com:datatypes"`
                 # as well as an empty `dt:dt=""` attribute
@@ -68,14 +72,14 @@ class ESBXMLWriterAdapter(Component):
     _inherit = 'esb.adapter.xml'
     _usage = 'xml.write'
 
-    name_patterns = {
-        'default': u'{name}_{date}.xml',
-        'product.product': u'Product_{date}.xml',
-    }
-
     def filename(self):
-        pattern = self.name_patterns.get(
-            self.model._name, self.name_patterns['default'])
+        timestamp = self.env['esb.backend.timestamp'].search(
+            [('backend_id', '=', self.backend_record.id),
+             ('model', '=', self.work.model_name),
+             ('kind', '=', self.work.kind),
+             ]
+        )
+        pattern = timestamp.export_filename
         return pattern.format(
             name=self.model._name.replace('.', '_'),
             date=fields.Date.today().replace('-', ''))

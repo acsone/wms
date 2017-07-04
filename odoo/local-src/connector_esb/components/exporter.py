@@ -2,6 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.osv.expression import AND
 from odoo.addons.component.core import AbstractComponent, Component
 
 import logging
@@ -78,7 +79,21 @@ class ESBCronExporter(AbstractComponent):
         return []
 
     def get_items(self):
-        return self.model.search(self.get_items_domain())
+        domain = self.get_items_domain()
+        if self.export_since:
+            # write_date is at the very least the same than create_date
+            # so we don't need to search on create_date >= self.export_since
+            date_domain = [('write_date', '>=', self.export_since)]
+            domain = AND([domain, date_domain])
+        return self.model.search(domain)
 
-    def run(self):
-        super(ESBCronExporter, self).run(self.get_items())
+    def run(self, export_since=None):
+        """ Run the export on a domain
+
+        ``export_since`` can be omitted to ignore the date and export
+        all the records that match the domain.
+
+        """
+        self.export_since = export_since
+        records = self.get_items()
+        return super(ESBCronExporter, self).run(records)

@@ -5,7 +5,7 @@
 from odoo.addons.component.core import AbstractComponent
 
 
-class ESBase(AbstractComponent):
+class ESBBase(AbstractComponent):
 
     _name = 'esb.base'
     _inherit = 'base.connector'
