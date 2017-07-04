@@ -59,6 +59,12 @@ class Catchweight(DomainInterface):
         return result.format()
 
     def resu(self, params):
+        """
+        Set the quantity (Usf02) on the stock move (lineId)
+        Usf01 is the lot number
+        :param params:
+        :return:
+        """
         move_id = params.lineId
 
         if not move_id:

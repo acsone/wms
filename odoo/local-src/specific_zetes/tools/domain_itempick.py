@@ -60,6 +60,13 @@ class Itempick(DomainInterface):
             'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
 
     def requ(self, params):
+        """
+        Return a list of stock pack operation according the picking ID
+        Param: groupNum (picking_id)
+        :param params:
+        :return:
+        """
+        # If there is not Picking ID we cannot assign a stock move
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
@@ -79,6 +86,7 @@ class Itempick(DomainInterface):
             return result.format()
         picking_id = int(picking_id)
 
+        # Cri01 define the order (01 => from the end to the start)
         if params.Cri01 == '1':
             order_by = 'location_name DESC'
         else:
@@ -110,9 +118,15 @@ class Itempick(DomainInterface):
 
         sequence = 1
         result = []
+        # Search all pack operations for this picking
         lines = request.env['stock.pack.operation'].sudo(self._user)\
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
+        # Filter lines
+        # We want only operation with a quantity to to done different
+        # than the quantity done.
+        # The state of the line must be
+        # "OP_DEFAULT", "OP_SKIPPED" or "OP_CANCELED"
         lines = lines\
             .filtered(lambda line: int(line.qty_done) != int(line.product_qty)
                       and line.zetes_state in [OP_DEFAULT,
@@ -172,6 +186,9 @@ class Itempick(DomainInterface):
             else:
                 line_values.lotTrackingFlag = 0
 
+            # # To define the unit of measure only for unit
+            # # different than "Unit", uncomment following lines
+            # # and remove "UOMPrompt" in the line_values (above)
             # default_uom = request.env.ref('product.product_uom_unit')
             # if line.product_uom_id != default_uom:
             #     line_values.UOMPrompt = line.product_uom_id.name
@@ -186,6 +203,7 @@ class Itempick(DomainInterface):
                 result.append(line_values)
                 continue
 
+            # Set coordonates location of the bin
             line_values.update({
                 'sourceLC1': location.zone,
                 'sourceLC2': location.corridor,
@@ -195,6 +213,7 @@ class Itempick(DomainInterface):
                 'sourceLCCD': location.get_checksum(),
             })
 
+            # Send 5 first lots for this products (ordered by life date)
             lots = request.env['stock.production.lot'].sudo(self._user)\
                 .search([('product_id', '=', product.id),
                          ('is_archived', '=', False)
@@ -212,6 +231,12 @@ class Itempick(DomainInterface):
         return '\n'.join([line.format() for line in result])
 
     def resu(self, params):
+        """
+        Change the state of the current stock pack operation (pickLineId)
+        If the state is OP_CANCELED we remove all lots for this operation
+        :param params:
+        :return:
+        """
         if not params.pickLineId:
             return
         move_id = int(params.pickLineId)

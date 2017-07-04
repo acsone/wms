@@ -117,7 +117,7 @@ msgstr "Afficher le nom"
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_price_on_labels
 msgid "Display price on labels"
-msgstr "Afficher le prixu sur les étiquettes"
+msgstr "Afficher le prix sur les étiquettes"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_domain
@@ -231,7 +231,7 @@ msgstr "Partenaire"
 #: model:ir.model.fields,field_description:specific_zetes.field_res_partner_is_passport_required
 #: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_passport_required
 msgid "Passport required"
-msgstr "Passport requis"
+msgstr "Passeport requis"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -264,7 +264,7 @@ msgstr "Réponse"
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
 msgid "Shortpicked"
-msgstr "Shortpicked"
+msgstr "Prélèvement rapide"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -280,7 +280,7 @@ msgstr "Certains attributs sont invalides: {}"
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
 msgid "Staging"
-msgstr "Staging"
+msgstr "Rayonnage"
 
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
@@ -290,15 +290,15 @@ msgstr "Démarré"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_interface.py:185
 #, python-format
-msgid "The number of label doen't correspond to the example size"
-msgstr "Le nombre de label ne correspond pas à l'exemple"
+msgid "The number of attributes doen't correspond to the example size"
+msgstr "Le nombre d'attributs ne correspond pas à l'exemple"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/models/res_users.py:14
 #: sql_constraint:res.users:0
 #, python-format
 msgid "The operator ID should be unique."
-msgstr "Le ID de l'opérateur doit être unique."
+msgstr "L'ID de l'opérateur doit être unique."
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_picking_type
@@ -309,7 +309,7 @@ msgstr "Le type de préparation détermine la vue de préparation"
 #: code:addons/specific_zetes/tools/domain_usercontext.py:43
 #, python-format
 msgid "The user should be in the group Inventory"
-msgstr "Le user doit être dans le groupe d'inventaire"
+msgstr "L'utilisateur doit être dans le groupe d'inventaire"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/models/stock_picking.py:107
@@ -328,7 +328,7 @@ msgstr "Certaines valeurs obligatoires manquantes: {}"
 #: code:addons/specific_zetes/tools/domain_itempick.py:124
 #, python-format
 msgid "There is no lines for the picking {}"
-msgstr "Il n'y a pas d'opérations pour le l'enlèvement {}"
+msgstr "Il n'y a pas d'opérations pour l'enlèvement {}"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_traceback
@@ -356,7 +356,7 @@ msgstr "Utilisateur non trouvé"
 #. module: specific_zetes
 #: selection:zetes.logger,domain:0
 msgid "Usercontext"
-msgstr "Usercontext"
+msgstr "Context de l'utilisateur"
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_res_users
@@ -393,7 +393,7 @@ msgstr "Message d'erreur de Zetes"
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_zone_code
 msgid "Zone code"
-msgstr "Zone code"
+msgstr "Code de la zone"
 
 #. module: specific_zetes
 #: selection:zetes.logger,domain:0

@@ -6,7 +6,8 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.web.controllers.main import Home
 
-from ..tools.domain_interface import Parameters, HEADER_LABELS
+from ..tools.domain_interface import Parameters, HEADER_LABELS, \
+    METHOD_INDEX, ZETES_ACTIONS, ZETES_DOMAINS
 
 _logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ class Zetes(Home):
         # In this case the msgType is REQU_ITEMPICK
         # command: requ
         # domain: itempick
-        command, domain = header[3].split('_')
+        command, domain = header[METHOD_INDEX].split('_')
 
         # Create the handler
         # If the domain is itempick the module name will be
@@ -73,23 +74,40 @@ class Zetes(Home):
 
         return request.make_response(result, [('Content-Type', mimetype)])
 
+    # TODO This method is only for TESTS but don't remove it.
     @http.route('/display_values', type='http',
                 auth="public", website=True)
     def display_values(self, **kwargs):
+        """
+        This route will return the right format for one or more methods.
+        You can pass two parameters to your request:
+        - domains: Select one or more domain (assignment, catchweight, ...)
+        - actions: Select one or more actions (requ, resp, resu)
+
+        If there is not value for domain and/or actions all values
+        will be taken.
+
+        E.g: If I want to have all actions for the domain catchweight:
+        /display_values?domains=catchweight
+
+        If I want to have the action resp and resu for the domain itempick
+        /display_values?domains=itempick&actions=resp,resu
+        :param kwargs:
+        :return:
+        """
         result = ''
 
         domains_str = kwargs.get('domains')
         if domains_str:
             domains = domains_str.split(',')
         else:
-            domains = ['assignment', 'catchweight', 'itempick',
-                       'location', 'refdata', 'usercontext']
+            domains = [domain[0] for domain in ZETES_DOMAINS]
 
         actions_str = kwargs.get('actions')
         if actions_str:
             actions = actions_str.split(',')
         else:
-            actions = ['requ', 'resp', 'resu']
+            actions = [action[0] for action in ZETES_ACTIONS]
 
         for domain in domains:
             module_name = \

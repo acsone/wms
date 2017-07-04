@@ -26,6 +26,14 @@ class Usercontext(DomainInterface):
             'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
 
     def requ(self, params):
+        """
+        Return information about the picker (a picker is a res.user).
+        The code of the picker is send in the header
+        (treat by the _init_ of DomainInterface).
+        It's why we already have the attribute self._user with the picker.
+        :param params:
+        :return:
+        """
         result = Parameters(self, action='resp')
 
         user = self._user
@@ -37,6 +45,7 @@ class Usercontext(DomainInterface):
 
             return result.format()
 
+        # The picker should have the group "warehouse"
         if not user.has_group('stock.group_stock_user'):
             result.update({
                 'respCode': 10,
@@ -58,6 +67,8 @@ class Usercontext(DomainInterface):
                 'scenarioStatus': '01',
             })
 
+            # This query will check if the picker has an open picking.
+            # This can happen if the Zetes console crash
             picking_query = """
 SELECT picking.id
 FROM stock_picking AS picking

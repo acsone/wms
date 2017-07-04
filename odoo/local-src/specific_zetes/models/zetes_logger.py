@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, api
 
+from ..tools.domain_interface import ZETES_ACTIONS, ZETES_DOMAINS
+
 
 class ZetesLogger(models.Model):
     _name = 'zetes.logger'
 
-    action = fields.Selection([('requ', 'Request'),
-                               ('resp', 'Response'),
-                               ('resu', 'Action')],
+    action = fields.Selection(ZETES_ACTIONS,
                               string='Action',
                               required=True)
-    domain = fields.Selection([('assignment', 'Assignment'),
-                               ('catchweight', 'Catchweight'),
-                               ('itempick', 'Itempick'),
-                               ('location', 'Location'),
-                               ('print', 'Print'),
-                               ('refdata', 'refdata'),
-                               ('usercontext', 'Usercontext'),
-                               ],
+    domain = fields.Selection(ZETES_DOMAINS,
                               string='Domain',
                               required=True)
     command = fields.Char('Command',
@@ -35,11 +28,22 @@ class ZetesLogger(models.Model):
 
     @api.depends('action', 'domain', 'user_id')
     def _compute_name(self):
+        """
+        Compute a friendly name and the technical name of a command.
+        E.g:
+        action: requ
+        domain: assignment
+        user: Admin
+
+        This method will compute the name:
+        "Request on Assignement by Admin"
+        And the technical name:
+        "REQU_ASSIGNMENT"
+        :return:
+        """
         for log in self:
-            command_displayed = dict(self._fields['action'].selection)\
-                .get(log.action, log.action)
-            domain_displayed = dict(self._fields['domain'].selection)\
-                .get(log.domain, log.domain)
+            command_displayed = dict(ZETES_ACTIONS).get(log.action, log.action)
+            domain_displayed = dict(ZETES_DOMAINS).get(log.domain, log.domain)
 
             name = '{} on {} by {}'.format(command_displayed,
                                            domain_displayed,
@@ -51,8 +55,15 @@ class ZetesLogger(models.Model):
 
     @api.model
     def create(self, vals):
+        """
+        If we log an error linked to a picking
+        we will set the flag "is_zetes_error".
+        :param vals:
+        :return:
+        """
         log = super(ZetesLogger, self).create(vals)
 
+        # If the log is linked to a picking, set the flag on this picking
         if log.picking_id:
             log.picking_id.is_zetes_error = True
 
@@ -60,5 +71,11 @@ class ZetesLogger(models.Model):
 
     @api.multi
     def toggle_is_checked(self):
+        """
+        This method is used by the button "Checked" on the form view.
+        This method will only change the flag "is_checked".
+        is_checked == False => is_checked == True => is_checked == False ...
+        :return:
+        """
         for log in self:
             log.is_checked = not log.is_checked

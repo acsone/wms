@@ -43,7 +43,7 @@ msgstr "Code"
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_res_partner_is_price_on_labels
 msgid "Display price on labels"
-msgstr "Afficher le prixu sur les étiquettes"
+msgstr "Afficher le prix sur les étiquettes"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1

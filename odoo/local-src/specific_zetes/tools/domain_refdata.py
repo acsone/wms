@@ -24,6 +24,13 @@ class Refdata(DomainInterface):
     RESU = ()
 
     def requ(self, params):
+        """
+        Return a list of location (stock.picking.type).
+        A location is a specific zone in the warehouse (like Food, Fridge, ...)
+        Each location has a code
+        :param params:
+        :return:
+        """
         picking_types = request.env['stock.picking.type']\
             .sudo(self._user).search([('subcode', '=', 'PICK')])
         result = []

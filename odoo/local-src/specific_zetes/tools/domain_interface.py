@@ -9,6 +9,18 @@ _logger = logging.getLogger(__name__)
 
 HEADER_LABELS = ('serNum', 'verNum', 'appNum', 'msgType', 'operId', 'langId',
                  'msgDate', 'msgTime', 'packageId')
+METHOD_INDEX = 3
+ZETES_ACTIONS = [('requ', 'Request'),
+                 ('resp', 'Response'),
+                 ('resu', 'Action')]
+ZETES_DOMAINS = [('assignment', 'Assignment'),
+                 ('catchweight', 'Catchweight'),
+                 ('itempick', 'Itempick'),
+                 ('location', 'Location'),
+                 ('print', 'Print'),
+                 ('refdata', 'Refdata'),
+                 ('usercontext', 'Usercontext'),
+                 ]
 
 
 class DomainInterface:
@@ -45,7 +57,7 @@ class Parameters:
         new_header = list(domain._header)
         method = '{}_{}'.format(action.upper(),
                                 domain.__class__.__name__.upper())
-        new_header[3] = method
+        new_header[METHOD_INDEX] = method
 
         self.__dict__.update(dict(zip(HEADER_LABELS, new_header)))
         self._labels = labels
@@ -182,7 +194,7 @@ class Parameters:
 
         default_values = self.get_example()
         if len(default_values) != len(ordered_values):
-            _logger.error(_('The number of label doen\'t correspond '
+            _logger.error(_('The number of attributes doen\'t correspond '
                             'to the example size'))
 
         empty_mandatory_values = []

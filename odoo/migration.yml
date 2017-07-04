@@ -189,6 +189,7 @@ migration:
       operations:
         post:
           - anthem songs.updates.update_10_4_0.update::main
+          - anthem songs.install.logistics::create_picking_types
       modes:
         full:
           operations:
@@ -209,3 +210,6 @@ migration:
           - specific_sale
           - connector_esb
           - specific_zetes
+          - specific_print
+          - specific_report
+          - specific_product

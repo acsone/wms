@@ -13,4 +13,4 @@ class StockPackOperation(models.Model):
     @api.depends('location_id.name')
     def _compute_location_name(self):
         for operation in self:
-            operation.name = operation.location_id.name
+            operation.location_name = operation.location_id.name

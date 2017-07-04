@@ -40,7 +40,8 @@ class StockPicking(models.Model):
     @api.multi
     def print_products_label(self, printer=False):
         self.ensure_one()
-        self.pack_operation_ids.print_product_label(printer=printer)
+        if self.pack_operation_ids:
+            self.pack_operation_ids.print_product_label(printer=printer)
 
     @api.multi
     def print_packages_label(self, quantity=1, printer=False):

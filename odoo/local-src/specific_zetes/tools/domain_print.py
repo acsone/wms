@@ -32,6 +32,17 @@ class Print(DomainInterface):
     RESU = ()
 
     def requ(self, params):
+        """
+        Send a request to print a picking (groupNum) on a printer according
+        his number (printNum) and his type (printType).
+        There is two type of printing.
+        The standard printing (PRINT_LABELS) will print product labels
+        and package labels.
+        The second type (PRINT_PASSPORT) will print a A4 sheet with products.
+        This sheet will be used by a second picker to check the package.
+        :param params:
+        :return:
+        """
         result = Parameters(self, action='resp')
 
         picking_id = params.groupNum
@@ -60,6 +71,7 @@ class Print(DomainInterface):
         print_type = params.printType
         printer_num = params.printerNum
 
+        # Print the passport (see above)
         if print_type == PRINT_PASSPORT:
             # The passport is always printed on the printer 1
             printer = request.env['printing.printer'].sudo() \

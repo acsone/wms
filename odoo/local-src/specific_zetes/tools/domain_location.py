@@ -31,6 +31,13 @@ class Location(DomainInterface):
     RESU = ()
 
     def requ(self, params):
+        """
+        Return a list of existing lots for a stock pack operation (lineId).
+        This method is used by Zetes when the picker doesn't find the right
+        lot or we need quantity available.
+        :param params:
+        :return:
+        """
         result = Parameters(self, action='resp')
 
         move_id = params.lineId

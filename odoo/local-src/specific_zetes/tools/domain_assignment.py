@@ -41,8 +41,17 @@ class Assignment(DomainInterface):
         'Usf09', 'Usf10')
 
     def requ(self, params):
+        """
+        Return a picking to the picker according several rules:
+        - If the picker want to start a new picking (Cri02 is empty) or if
+        the picker continue a picking (Cri02 will contain the picking ID)
+        - If a location (
+        :param params:
+        :return:
+        """
         result = Parameters(self, action='resp')
 
+        # If the picker request a new picking (Cri02 is the picking ID)
         if not params.Cri02:
             picking_query = """
 SELECT picking.id
@@ -62,6 +71,7 @@ WHERE picking.delivery_round_state = 'open'
                 (OP_DEFAULT, OP_SKIPPED),
             ]
 
+            # Search a picking in a specific zone (like Food)
             zone_code = params.Cri01
             if zone_code:
                 zone = \
@@ -71,6 +81,8 @@ WHERE picking.delivery_round_state = 'open'
                 picking_query += "AND picking.picking_type_id = %s "
                 query_values.append(zone.id)
 
+            # If requestType is completed we looking
+            # for a picking without an operator
             if params.requestType:
                 picking_query += "AND picking.operator_id IS NULL "
             else:
@@ -90,7 +102,7 @@ WHERE picking.delivery_round_state = 'open'
                     .sudo(self._user).browse(picking_id)
             else:
                 picking = []
-
+        # If the picker want to continue a picking (Cri02 is not empty)
         else:
             picking_id = int(params.Cri02)
             picking = request.env['stock.picking']\
@@ -142,6 +154,8 @@ WHERE picking.delivery_round_state = 'open'
 
     def resu(self, params):
         """
+        Set the picking state (field zetes_state) according assignmentStatus
+        assignmentStatus is a number (see below).
         State:
         01/02: The operator start the picking.
                          We assign this picking to the operator.
@@ -170,13 +184,21 @@ WHERE picking.delivery_round_state = 'open'
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
                 if params.Usf01:
+                    # The method "do_new_transfer" is the method called when
+                    # an user click on "Validate" on a picking.
                     result = picking.sudo(self._user).do_new_transfer()
 
+                    # In Odoo this button will open a wizard in following case:
+                    # 1. A wizard if no quantity has been defined on lines
+                    #   (this wizard will set the quantity on each lines)
+                    # 2. A wizard if we need to create a back order
                     if isinstance(result, dict):
                         model = result.get('res_model')
                         wizard = request.env[model].sudo(self._user)\
                             .browse(int(result.get('res_id')))
 
+                        # Fortunately these wizards have the same
+                        # method "process" to execute the wizard
                         wizard.process()
             elif params.assignmentStatus == AS_CANCELED:
                 picking.sudo(self._user).interrupt_picking()
