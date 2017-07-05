@@ -15,6 +15,7 @@ CREATE OR REPLACE VIEW zelapro_export_contacts AS
     '' AS CCFTEL,
     '' AS CCFFAX,
     '' AS CCFTEX,
-    '' AS EMWADR
+    '' AS EMWADR,
+    partner.create_date AS create_date
   FROM res_partner AS partner
   WHERE partner.supplier = TRUE;

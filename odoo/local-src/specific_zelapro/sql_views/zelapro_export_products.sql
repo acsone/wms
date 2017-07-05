@@ -109,7 +109,8 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     product.turnover_average AS ABCPCV,
     product.turnover_nbr_lines AS ABCNLI,
     product.turnover_average_nbr_lines AS ABCPLI,
-    '' AS ABCPSE
+    '' AS ABCPSE,
+    product.create_date AS create_date
   FROM product_product AS product
     INNER JOIN product_template AS template ON product.product_tmpl_id = template.id
     LEFT JOIN product_uom AS purchase_uom ON template.uom_po_id = purchase_uom.id

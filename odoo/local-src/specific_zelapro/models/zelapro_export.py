@@ -5,6 +5,7 @@ import os
 import csv
 import time
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
@@ -20,6 +21,7 @@ class ZelaproExport(models.Model):
                             required=True)
     sql_view = fields.Char('SQL View')
     method = fields.Char('Method')
+    data_age = fields.Integer('Age of data in months (0 for unlimited)')
     file_name = fields.Char('File name', required=True)
     line_ids = fields.One2many('zelapro.export.line',
                                'zelapro_export_id',
@@ -63,6 +65,13 @@ class ZelaproExport(models.Model):
         AND table_name = %s;
         """
 
+        check_column_query = """
+        SELECT 1
+        FROM information_schema.columns 
+        WHERE table_name = %s 
+        AND column_name = 'create_date';
+        """
+
         for export in self:
             if not export.sql_view:
                 continue
@@ -72,6 +81,12 @@ class ZelaproExport(models.Model):
             if not result:
                 raise UserError(_('SQL view %s not found' % export.sql_view))
 
+            self.env.cr.execute(check_column_query, (export.sql_view, ))
+            result = self.env.cr.fetchone()
+            if not result:
+                raise UserError(_('The SQL view %s shoud contains the column '
+                                  'create_date' % export.sql_view))
+
     @api.model
     def execute_all_exports(self):
         exports = self.search([])
@@ -80,18 +95,30 @@ class ZelaproExport(models.Model):
 
     @api.multi
     def execute_exports(self):
+        """
+        Execute all exports
+        :return:
+        """
         config_param = self.env['ir.config_parameter']
-        delimiter = config_param.get_param('zelapro.delimiter')
-        export_path = config_param.get_param('zelapro.export_path')
 
+        # Retrieve the date of go live
+        date_go_live_str = config_param.get_param('zelapro.date_go_live')
+        date_go_live = fields.Date.from_string(date_go_live_str)
+        if not date_go_live_str:
+            raise UserError(_('Please define the date go live in the Zelapro '
+                              'configuration before execute exports'))
+
+        # Retrieve the path where files will be stored
+        export_path = config_param.get_param('zelapro.export_path')
         if not export_path:
             raise UserError(_('Please set the export path in Zelapro config'))
-
-        if not delimiter:
-            raise UserError(_('Please set a delimiter in Zelapro config'))
-
         if not os.path.isdir(export_path):
             os.makedirs(export_path)
+
+        # Retrieve the delimiter for CSV files
+        delimiter = config_param.get_param('zelapro.delimiter')
+        if not delimiter:
+            raise UserError(_('Please set a delimiter in Zelapro config'))
 
         for export in self:
             time_start = time.time()
@@ -106,10 +133,41 @@ class ZelaproExport(models.Model):
                 file_path = os.path.join(export_path, fname)
 
                 if export.type == 'sql':
-                    query = "SELECT * FROM %s;" % export.sql_view
+                    columns_query = """
+                    SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_name = %s
+                    ORDER BY ordinal_position;
+                    """
+                    self.env.cr.execute(columns_query, (export.sql_view, ))
+                    header = [x[0] for x in self.env.cr.fetchall()]
+                    # Each Zelapro export should have a column create_date
+                    # However we don't want to have this column in the CSV
+                    header.remove('create_date')
+
+                    query = "SELECT %s FROM %s" % \
+                            (','.join(header), export.sql_view)
+
+                    # If there is a data age on this export
+                    # we will add a where close on the query
+                    if export.data_age:
+                        min_creation_date = \
+                            date.today() - \
+                            relativedelta(months=export.data_age)
+                        min_creation_date_str = \
+                            fields.Date.to_string(min_creation_date)
+
+                        # By default we take only data after the Go live
+                        # It why if the date of the GO live is greater
+                        # than the minimum creation date we take the date of
+                        # the Go live
+                        if date_go_live > min_creation_date:
+                            min_creation_date_str = date_go_live_str
+
+                        query += " WHERE create_date > '%s'" % \
+                                 min_creation_date_str
                     self.env.cr.execute(query)
 
-                    header = [desc[0] for desc in self.env.cr.description]
                     rows = self.env.cr.fetchall()
                 elif export.type == 'method':
                     header, rows = getattr(self, export.method)

@@ -12,6 +12,7 @@
                 <group string="Exports">
                     <field name="delimiter"/>
                     <field name="export_path"/>
+                    <field name="date_go_live"/>
                 </group>
                 <group string="ABC">
                     <field name="turnover_delay"/>

@@ -12,9 +12,10 @@
                     <group>
                         <field name="name"/>
                         <field name="type"/>
-                        <field name="sql_view" attr="{'invisible': [('type', '!=', 'sql')], 'required': [('type', '=', 'sql')]}"/>
-                        <field name="method" attr="{'invisible': [('type', '!=', 'method')], 'required': [('type', '=', 'method')]}"/>
+                        <field name="sql_view" attrs="{'invisible': [('type', '!=', 'sql')], 'required': [('type', '=', 'sql')]}"/>
+                        <field name="method" attrs="{'invisible': [('type', '!=', 'method')], 'required': [('type', '=', 'method')]}"/>
                         <field name="file_name"/>
+                        <field name="data_age"/>
                         <field name="last_export"/>
                         <field name="active"/>
                     </group>

@@ -30,7 +30,8 @@ CREATE OR REPLACE VIEW zelapro_export_suppliers AS
     '' AS LIBPOU,
     '' AS FOUGES,
     '' AS LIBGES,
-    supplier.supplier_discount AS FOUREM
+    supplier.supplier_discount AS FOUREM,
+    supplier.create_date AS create_date
   FROM res_partner AS supplier
     LEFT JOIN partner_alcyon_category AS categ ON supplier.alcyon_category_id = categ.id
   WHERE supplier.supplier = TRUE;

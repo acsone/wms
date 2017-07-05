@@ -5,6 +5,7 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_contacts</field>
         <field name="file_name">contacts.csv</field>
+        <field name="data_age">0</field>
     </record>
 
     <record id="zelapro_export_lot_moves" model="zelapro.export">
@@ -12,6 +13,7 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_lot_moves</field>
         <field name="file_name">lot_moves.csv</field>
+        <field name="data_age">24</field>
     </record>
 
     <record id="zelapro_export_products" model="zelapro.export">
@@ -19,6 +21,7 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_products</field>
         <field name="file_name">products.csv</field>
+        <field name="data_age">0</field>
     </record>
 
     <record id="zelapro_export_promotions" model="zelapro.export">
@@ -26,6 +29,7 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_promotions</field>
         <field name="file_name">promotions.csv</field>
+        <field name="data_age">24</field>
     </record>
 
     <record id="zelapro_export_stock_moves" model="zelapro.export">
@@ -33,6 +37,7 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_stock_moves</field>
         <field name="file_name">stock_moves.csv</field>
+        <field name="data_age">24</field>
     </record>
 
     <record id="zelapro_export_suppliers" model="zelapro.export">
@@ -40,5 +45,6 @@
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_suppliers</field>
         <field name="file_name">suppliers.csv</field>
+        <field name="data_age">0</field>
     </record>
 </odoo>
