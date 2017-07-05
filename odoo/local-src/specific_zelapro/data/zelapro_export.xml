@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
+    <record id="zelapro_export_cadencier" model="zelapro.export">
+        <field name="name">Cadencier</field>
+        <field name="type">sql</field>
+        <field name="sql_view">zelapro_export_cadencier</field>
+        <field name="file_name">cadencier.csv</field>
+        <field name="data_age">0</field>
+    </record>
+
     <record id="zelapro_export_contacts" model="zelapro.export">
         <field name="name">Contacts</field>
         <field name="type">sql</field>

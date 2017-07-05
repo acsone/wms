@@ -140,7 +140,7 @@ class ZelaproExport(models.Model):
                     ORDER BY ordinal_position;
                     """
                     self.env.cr.execute(columns_query, (export.sql_view, ))
-                    header = [x[0] for x in self.env.cr.fetchall()]
+                    header = [x[0].upper() for x in self.env.cr.fetchall()]
                     # Each Zelapro export should have a column create_date
                     # However we don't want to have this column in the CSV
                     header.remove('create_date')

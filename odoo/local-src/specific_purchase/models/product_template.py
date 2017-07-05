@@ -35,6 +35,10 @@ class ProductTemplate(models.Model):
             else:
                 product.supplier_id = None
 
+    unit_in_pallet = fields.Integer('Unit in pallet')
+    unit_in_crate = fields.Integer('Unit in crate')
+    unit_in_box = fields.Integer('Unit in box')
+
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):
         """
