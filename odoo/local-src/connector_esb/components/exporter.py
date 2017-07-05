@@ -87,7 +87,7 @@ class ESBCronExporter(AbstractComponent):
             # so we don't need to search on create_date >= self.export_since
             date_domain = [('write_date', '>=', export_since)]
             domain = AND([domain, date_domain])
-        return self.model.search(domain)
+        return self.model.with_context(active_test=False).search(domain)
 
     def run(self, export_since=None):
         """ Run the export on a domain
