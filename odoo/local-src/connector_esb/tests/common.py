@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from collections import Counter
+from collections import defaultdict
 from odoo.addons.component.tests.common import SavepointComponentCase
 
 import xmlunittest
@@ -42,8 +42,8 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             p = c.getparent()
             p.remove(c)
 
-        missing_elems = Counter()
-        content_differs = Counter()
+        missing_elems = defaultdict(list)
+        content_differs = defaultdict(list)
         for item in exml.xpath('//' + unique_key):
             # `item` is the el w/ unique_key
             # let's find its match in given xml and go up to the parent
@@ -54,27 +54,36 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             for expected_elem in item.getparent().iterchildren():
                 elem = parent[0].find(expected_elem.tag)
                 if elem is None:
-                    missing_elems.update([expected_elem.tag])
+                    missing_elems[item.text].append(expected_elem.tag)
                 else:
                     if expected_elem.text != elem.text:
-                        content_differs.update(
-                            [(elem.tag, expected_elem.text, elem.text)]
+                        content_differs[item.text].append(
+                            (elem.tag, expected_elem.text, elem.text)
                         )
 
         if missing_elems or content_differs:
             message = []
-            if missing_elems:
-                message.append(u'Missing elements')
-            for tag, count in missing_elems.items():
-                message.append(u' - {} ({} times)'.format(tag, count))
-            if content_differs:
-                message.append(u'Wrong elements')
-            for (tag, expected, got), count in content_differs.items():
+            keys = set(list(missing_elems) + list(content_differs))
+            for key in keys:
                 message.append(
-                    u" - in '{}' expect {!r}, got {!r} ({} times)".format(
-                        tag, expected, got, count
-                    )
+                    u'Row with unique key: %s' % key
                 )
+
+                tags = missing_elems[key]
+                if tags:
+                    message.append(u'  Missing elements')
+                for tag in tags:
+                    message.append(u'   - {}'.format(tag))
+                elems = content_differs[key]
+                if elems:
+                    message.append(u'  Content differs')
+                for tag, expected, got in elems:
+                    message.append(
+                        u"   - {}: expect {!r}, got {!r}".format(
+                            tag, expected, got
+                        )
+                    )
+                message.append('')
 
             raise AssertionError(u'XML does not match:\n\n{}'.format(
                 '\n'.join(message)
