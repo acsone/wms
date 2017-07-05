@@ -28,6 +28,13 @@ class ESBBackendTimestamp(models.Model):
     )
     export_filename = fields.Char(required=True,
                                   default='{name}_{date}.xml')
+    path = fields.Char()
+    writer = fields.Selection(
+        selection=[('local', 'Local'),
+                   ('sftp', 'sFTP')],
+        default='sftp',
+        required=True,
+    )
 
     _sql_constraints = [
         ('model_kind_uniq', 'UNIQUE(model, kind)', _('Model must be unique')),
@@ -39,7 +46,7 @@ class ESBBackendTimestamp(models.Model):
         self.ensure_one()
         self._lock_timestamp()
         next_last_export = fields.Datetime.now()
-        with self.backend_id.work_on(self.model, kind=self.kind) as work:
+        with self.backend_id.work_on(self.model, timestamp=self) as work:
             exporter = work.component(usage='record.exporter.cron')
             exporter.run(export_since=self.last_export)
         self.last_export = next_last_export
@@ -65,5 +72,5 @@ class ESBBackendTimestamp(models.Model):
             raise exceptions.UserError(
                 _("The synchronization timestamp (%s) is currently locked, "
                   "probably due to an ongoing synchronization." %
-                  (' '.join([self.model, self.kind]),))
+                  (' '.join([self.model, self.timestamp.kind]),))
             )

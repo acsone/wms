@@ -5,14 +5,19 @@
 import logging
 import os
 
+from contextlib import contextmanager
+from io import StringIO
 from lxml import etree
 
 import dicttoxml
+import paramiko
 
-from odoo import fields
-from odoo.addons.component.core import Component
+from odoo import _, exceptions, fields
+from odoo.addons.component.core import AbstractComponent, Component
 
 logging.getLogger('dicttoxml').setLevel(logging.WARN)
+
+SFTP_TIMEOUT = 30
 
 NAMESPACES = (
     # el, ns, attr
@@ -62,32 +67,131 @@ class ESBXMLProducer(Component):
         return self._produce(data, main_root, root)
 
 
-class ESBXMLWriterWriter(Component):
-    _name = 'esb.adapter.xml.writer'
+class ESBXMLWriter(AbstractComponent):
+    _name = 'esb.xml.writer'
     _inherit = 'esb.base'
     _usage = 'xml.writer'
 
+    @property
+    def config(self):
+        assert self.work.timestamp, ("a esb.backend.timestamp record must "
+                                     "be passed in work_on")
+        return self.work.timestamp
+
     def filename(self):
-        timestamp = self.env['esb.backend.timestamp'].search(
-            [('backend_id', '=', self.backend_record.id),
-             ('model', '=', self.work.model_name),
-             ('kind', '=', self.work.kind),
-             ]
-        )
-        pattern = timestamp.export_filename
+        pattern = self.config.export_filename.strip()
         return pattern.format(
             name=self.model._name.replace('.', '_'),
             date=fields.Date.today().replace('-', ''))
 
     def path(self):
         return (self.env.context.get('xml_out_path') or
-                self.collection.sftp_location or '/tmp')
+                self.config.path or '')
 
     def write_file(self, content):
-        fullpath = os.path.join(self.path(), self.filename())
-        self._write_file(fullpath, content)
+        path = self.path()
+        filename = self.filename()
+        if self._already_exists(path, filename):
+            # if we overwrite a file, we might lose data as we are
+            # exporting a diff
+            raise exceptions.UserError(
+                _('File %s already exported.') % (filename,)
+            )
+        return self._write_file(path, filename, content)
+
+    def _already_exists(path, filename):
+        raise NotImplementedError
+
+    def _write_file(self, path, filename, content):
+        raise NotImplementedError
+
+
+class LocalESBXMLWriter(Component):
+    _name = 'local.esb.xml.writer'
+    _inherit = 'esb.xml.writer'
+    _usage = 'local.xml.writer'
+
+    def path(self):
+        path = super(LocalESBXMLWriter, self).path()
+        if not path:
+            path = '/tmp'
+        return path
+
+    def write_file(self, content):
+        path = self.path()
+        filename = self.filename()
+        if self._already_exists(path, filename):
+            # if we overwrite a file, we might lose data as we are
+            # exporting a diff
+            raise exceptions.UserError(
+                _('File %s already exported.') % (filename,)
+            )
+
+        return self._write_file(path, filename, content)
+
+    def _already_exists(self, path, filename):
+        return os.path.exists(os.path.join(path, filename))
+
+    def _write_file(self, path, filename, content):
+        fullpath = os.path.join(path, filename)
+        with open(fullpath, 'w') as thefile:
+            thefile.write(content)
         return fullpath
 
-    def _write_file(self, path, content):
-        with open(path, 'w') as thefile:
+
+class SFTPESBXMLWriter(Component):
+    _name = 'sftp.esb.xml.writer'
+    _inherit = 'esb.xml.writer'
+    _usage = 'sftp.xml.writer'
+
+    def __init__(self, work_context):
+        super(SFTPESBXMLWriter, self).__init__(work_context)
+        self._sftp = None
+
+    @contextmanager
+    def _sftp_client(self):
+        private_key = os.environ.get('ODOO_ESB_SFTP_PRIVATE_KEY')
+        assert private_key, "ODOO_ESB_SFTP_PRIVATE_KEY must be set in environ"
+        pkey = paramiko.RSAKey.from_private_key(
+            StringIO(private_key.decode('utf8'))
+        )
+        with paramiko.SSHClient() as ssh:
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
+            ssh.connect(self.backend_record.sftp_host,
+                        port=self.backend_record.sftp_port,
+                        username=self.backend_record.sftp_user,
+                        pkey=pkey,
+                        look_for_keys=False,
+                        timeout=SFTP_TIMEOUT)
+            with ssh.open_sftp() as sftp:
+                self._sftp = sftp
+                yield sftp
+        self._sftp = None
+
+    @property
+    def sftp(self):
+        if self._sftp is None:
+            raise ValueError('must be in _sftp_client() context to use sftp')
+        return self._sftp
+
+    def write_file(self, content):
+        with self._sftp_client():
+            return super(SFTPESBXMLWriter, self).write_file(content)
+
+    def _already_exists(self, path, filename):
+        try:
+            self.sftp.stat(os.path.join(path, filename))
+        except IOError:
+            return False
+        return True
+
+    def _write_file(self, path, filename, content):
+        # use a tmp file so the esb will not try to read
+        # a file during its written
+        if path:
+            self.sftp.chdir(path)
+        tmpfile = filename + '.tmp'
+        with self.sftp.open(tmpfile, 'w') as thefile:
             thefile.write(content)
+        self.sftp.posix_rename(tmpfile, filename)
+        return os.path.join(path, filename)

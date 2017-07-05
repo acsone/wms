@@ -66,30 +66,35 @@ class XMLTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(XMLTestCase, self).setUp()
+        self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
 
     @property
     def model(self):
         return self.env['product.product']
 
     def test_path(self):
-        with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.writer')
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/tmp')
 
-        self.backend.sftp_location = '/write/here/please'
-        with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.writer')
+        self.timestamp.path = '/write/here/please'
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/write/here/please')
 
         backend = self.backend.with_context(xml_out_path='/somewhere/else')
-        with backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.writer')
+        with backend.work_on(self.model._name,
+                             timestamp=self.timestamp) as work:
+            writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/somewhere/else')
 
     def test_default_filename(self):
         today = fields.Date.today().replace('-', '')
-        with self.backend.work_on('product.product') as work:
-            writer = work.component(usage='xml.writer')
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            writer = work.component_by_name('esb.xml.writer')
             self.assertEqual(
                 writer.filename(), 'Product_{}.xml'.format(today))
 

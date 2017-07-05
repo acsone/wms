@@ -12,6 +12,7 @@ class ExportProductTestCase(ESBXMLTestCase):
     def setUp(self):
         super(ExportProductTestCase, self).setUp()
         self.setup_records()
+        self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
 
     @property
     def model(self):
@@ -145,21 +146,29 @@ class ExportProductTestCase(ESBXMLTestCase):
             'IMP': '',
         }
         rec = self.all_records[0]
-        with self.backend.work_on(self.model._name) as work:
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_filename(self):
         today = fields.Date.today().replace('-', '')
-        with self.backend.work_on(self.model._name) as work:
-            writer = work.component(usage='xml.writer')
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            expected = 'Product_{}.xml'.format(today)
+            writer = work.component(usage='local.xml.writer')
             self.assertEqual(
-                writer.filename(), 'Product_{}.xml'.format(today))
+                writer.filename(), expected)
+            writer = work.component(usage='sftp.xml.writer')
+            self.assertEqual(
+                writer.filename(), expected)
 
     @tools.mute_logger('dicttoxml')
-    def test_record_exporter(self):
+    def test_record_exporter_local(self):
+        self.timestamp.writer = 'local'
         records = self.all_records - self.unexportable_records
-        with self.backend.work_on(self.model._name) as work:
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter')
             respath = exporter.run(records)
         with open(respath, 'r') as result_file:
@@ -172,7 +181,9 @@ class ExportProductTestCase(ESBXMLTestCase):
         # )
 
     def test_record_cron_exporter(self):
-        with self.backend.work_on(self.model._name) as work:
+        self.timestamp.writer = 'local'
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
 
         items = exporter.get_items()

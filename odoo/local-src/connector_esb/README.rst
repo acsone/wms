@@ -11,8 +11,62 @@ TODO
 Configuration
 =============
 
-The URL of the sFTP must be set in an environment variable:
-``ODOO_ESB_SFTP_LOCATION``.
+The configuration of the sFTP must be set in environment variables:
+* host: ``ODOO_ESB_SFTP_HOST``
+* port: ``ODOO_ESB_SFTP_PORT`` (default 22)
+* user: ``ODOO_ESB_SFTP_USER``
+* private key: ``ODOO_ESB_SFTP_PRIVATE_KEY``
+
+Manual SFTP Test
+================
+
+If you want to do manual testing with a local sftp server, you should:
+
+* Be sure to have this container in ``docker-compose.override.yml``::
+
+    esbsftp:
+      image: atmoz/sftp
+      # 1033 is the id of my user (id -u), so I own the files created
+      command: "foo::1033"
+      volumes:
+        - "./sftp/share:/home/foo/share"
+      - "./sftp/id_rsa.pub:/home/foo/.ssh/keys/id_rsa.pub:ro"
+
+* Configure the ``connector_esb`` module in ``docker-compose.override.yml``::
+
+    ODOO_ESB_SFTP_HOST: esbsftp
+    ODOO_ESB_SFTP_USER: foo
+    # test key from sftp/id_rsa
+    ODOO_ESB_SFTP_PRIVATE_KEY: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIICXQIBAAKBgQDNc0wBK+/GRNVgzutyNKbbVkCdGIsHLBc4atuLwZzka58l1UHR
+        9Py3tvNymcxX6oj9AXGDNkyMYg514VbxJlwxkU+zN5gUy/Oc18TahKaLFvcRySeP
+        KrXeQEzDBIqDhEUCX9ntteL8L+bYE55+AsvxS/oDmgn68mVrS2uo0Oh4GQIDAQAB
+        AoGATDpHLPgcUrgfY3fiq9EVR7RM7Py6OMMHKoubQdNoXuf/eI4Tic8YJSHgWdju
+        lIAUq6rpbwGqjTukmeAt3fOZqLARbE61XBMOvEy9sEYkwafC2WIzoSyfUxAvmAYj
+        9Gvx/L345J1uFx53+HxMZeVNZYf+d+/Q+2EB5OLLYZPzNAECQQDx1vsN0AhnhQIc
+        vgLym1IyUs9RvUQuRJbcvdnW/3splQwg9a3krtm1WdBrshFomw+AeRzxoRBHfuTU
+        PijhtJehAkEA2Xrc98bXCCJ464TfiA1qCFjzc/OLCT1GC+UR92MVU2svef/5VswR
+        1qjrT8X+q+15AVKpnPzdgfQ74Kp8G/WteQJAA+4TbFkKGeyOaTspPxoJDupLli92
+        MS5KKVIofRbvwHA8nzh+1+2Dei/4dBeTsth6OwM81ixg4FiOjWhpL6nIoQJBAItl
+        tDLhcb0WE3mqznhvWLKHCW0eAtVmP/qp1m1CRk4U2vaQ+yoGXbzAwyt71nQvH6uY
+        Z31nmzeL68FipXBqdckCQQCCURUp8lWdC5UPwArD5P22Mame0XdlAkbH3vOuFCav
+        5Dx0Zwm6sBJUrY64Qt/OvEk0nD+ttP7D+O65+IJ6gmCO
+        -----END RSA PRIVATE KEY-----
+
+* Start the sftp container::
+
+    docker-compose up -d esbsftp
+
+* Start Odoo::
+
+    docker-compose run --rm -p 80:8069 odoo odoo --workers=0
+
+* In Odoo > Connectors > ESB > Backend, in the Exports, configure the exports
+  with the sFTP writer, set ``share`` in the path
+* Click on export! In your local directory ``sftp/share/``, you should find the
+  exported file
+
 
 Credits
 =======
@@ -21,3 +75,5 @@ Contributors
 ------------
 
 * Simone Orsi <simone.orsi@camptocamp.com>
+* Guewen Baconnier <guewen.baconnier@camptocamp.com>
+* Thierry Ducrest <thierry.ducrest@camptocamp.com>

@@ -14,8 +14,9 @@ class ESBBackend(models.Model):
     _description = 'ESB Backend'
     _inherit = 'connector.backend'
 
-    sftp_location = fields.Char(string='SFTP Location',
-                                compute='_compute_from_env')
+    sftp_host = fields.Char(string='SFTP Host', compute='_compute_from_env')
+    sftp_port = fields.Integer(string='SFTP Port', compute='_compute_from_env')
+    sftp_user = fields.Char(string='SFTP User', compute='_compute_from_env')
     timestamp_ids = fields.One2many(
         comodel_name='esb.backend.timestamp',
         inverse_name='backend_id',
@@ -23,15 +24,17 @@ class ESBBackend(models.Model):
     )
 
     @contextmanager
-    def work_on(self, model_name, kind=None, **kwargs):
+    def work_on(self, model_name, timestamp=None, **kwargs):
         _super = super(ESBBackend, self)
-        with _super.work_on(model_name, kind=kind, **kwargs) as work:
+        with _super.work_on(model_name, timestamp=timestamp, **kwargs) as work:
             yield work
 
     @api.depends()
     def _compute_from_env(self):
         for record in self:
-            record.sftp_location = os.getenv('ODOO_ESB_SFTP_LOCATION', '')
+            record.sftp_host = os.getenv('ODOO_ESB_SFTP_HOST', '')
+            record.sftp_port = int(os.getenv('ODOO_ESB_SFTP_PORT', 22))
+            record.sftp_user = os.getenv('ODOO_ESB_SFTP_USER', '')
 
     @api.model
     def get_singleton(self):

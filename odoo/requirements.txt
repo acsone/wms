@@ -10,3 +10,5 @@ cachetools
 # esb connector
 dicttoxml
 xmlunittest
+Cryptography==1.9
+paramiko==2.2.1
