@@ -74,3 +74,16 @@ class ESBBackendTimestamp(models.Model):
                   "probably due to an ongoing synchronization." %
                   (' '.join([self.model, self.timestamp.kind]),))
             )
+
+    @api.model
+    def get_last_export_time(self, model_name, backend_id, kind):
+        """ Return timestamp of last export for a specific exporter """
+        last_export = self.search([
+            ('backend_id', '=', backend_id),
+            ('model', '=', model_name),
+            ('kind', '=', kind)  # Not dealing with this one yet
+        ])
+        if last_export:
+            return last_export.last_export
+        else:
+            return ''

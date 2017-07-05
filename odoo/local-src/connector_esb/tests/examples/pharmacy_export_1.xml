@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ROOT>
+  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
+    <Row>
+      <City>Lausanne</City>
+      <Fax>021121212</Fax>
+      <CountryId>CH</CountryId>
+      <Name>Joe</Name>
+      <Telephone>021123123</Telephone>
+      <Email>joe@ch.ch</Email>
+      <Street>Chemin des Pins, 23</Street>
+      <Postcode>1010</Postcode>
+      <Id>J</Id>
+    </Row>
+  </Root>
+</ROOT>

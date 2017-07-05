@@ -16,18 +16,21 @@ class PharmacyExportMapper(Component):
         ('name', 'Name'),
         ('zip', 'Postcode'),
         ('city', 'City'),
-        ('country_id', 'CountryId'),
         ('phone', 'Telephone'),
         ('fax', 'Fax'),
         ('email', 'Email')
     ]
 
     @mapping
+    def compute_country_id(self, record):
+        return {'CountryId': record.country_id.code}
+
+    @mapping
     def compute_street(self, record):
         street = record.street
         if record.street2:
-            street += '\r\n' + record.street2
-        return {'Street' : street}
+            street += '\r' + record.street2
+        return {'Street': street}
 
 
 class PharmacyCronExporter(Component):
@@ -38,7 +41,17 @@ class PharmacyCronExporter(Component):
     _apply_on = 'res.partner'
 
     def get_items_domain(self):
-        all_pharma = self.env['res.partner'].search([('pharmacist_id', '!=', False)])
+
+        # Get the timestamp of the last export executed
+        last_export_time = self.env['esb.backend.timestamp'].get_last_export_time(
+            self.model._name, self.collection.id, '')
+        # Get all the partner with a pharmacist
+        all_pharma = self.env['res.partner'].search(
+                [('pharmacist_id', '!=', False)])
+        # If exported before, keep the pharmacist that have changed since
+        if last_export_time:
+            all_pharma = all_pharma.filtered(
+                    lambda r: r.pharmacist_id.write_date > last_export_time)
         pharma = all_pharma.mapped('pharmacist_id')
         domain = [
             ('id', 'in', pharma.ids),
