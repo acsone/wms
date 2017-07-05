@@ -6,11 +6,5 @@ class StockPackOperation(models.Model):
     _order = 'location_name'
 
     location_name = fields.Char('Location name',
-                                compute='_compute_location_name',
+                                related='location_id.name',
                                 store=True)
-
-    @api.multi
-    @api.depends('location_id.name')
-    def _compute_location_name(self):
-        for operation in self:
-            operation.location_name = operation.location_id.name
