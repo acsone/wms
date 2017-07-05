@@ -18,24 +18,43 @@ class ExportProductTestCase(ESBXMLTestCase):
         return self.env['product.product']
 
     def setup_records(self):
+        supplier = self.env['res.partner'].create({
+            'name': 'Supplier',
+            'supplier': True,
+        })
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'name': 'Export me pls',
             'default_code': 'exportable001',
             'barcode': 'XXX0001',
             'weight': 10.0,
+            'seller_ids': [
+                (0, 0, {
+                    'name': supplier.id,
+                    'product_code': 'supplier001',
+                })],
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
             'default_code': 'exportable002',
             'barcode': 'XXX0002',
             'weight': 5.0,
+            'seller_ids': [
+                (0, 0, {
+                    'name': supplier.id,
+                    'product_code': 'supplier002',
+                })],
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 3',
             'default_code': 'exportable003',
             'barcode': 'XXX0003',
-            'weight': 1.0,
+            'weight': 2.5,
+            'seller_ids': [
+                (0, 0, {
+                    'name': supplier.id,
+                    'product_code': 'supplier003',
+                })],
         })
         # add some translation
         for rec in self.all_records:
@@ -87,6 +106,43 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Cplz05': 'XXX0001',
             'Gespnt': 10.0,
             'Refdem': 'Export me pls (NL)',
+            'Gesarc': 'supplier001',
+            # fixed values
+            'Cp2z22': '',
+            'Warceg': '',
+            'Warcfr': '',
+            'Warcnl': '',
+            'Gescsg': 0,
+            'Cp2z02': 0,
+            'Cp2z23': 0,
+            'Cp2z24': 0,
+            'Cplz29': 0,
+            'Cp2z17': 0,
+            'Cp2z19': 0,
+            # TODO
+            'Gesfou': '',
+            'Cplz25': '',
+            'Gesunv': '',
+            'Gescrt': '2017/07/04',
+            'Cplz19': '1',
+            'Gescde': '1',
+            'Cp2z08': '1.0',
+            'Gesctv': '',
+            'Gescsa': '1',
+            'LotEch': '2017/11/16',
+            'Cplz03': '',
+            'Gescge': '0',
+            'Gescov': '',
+            'Cplz07': '',
+            'Cplz14': '',
+            'Cp2z01': '2.0',
+            'Cp2z03': '2.5',
+            'Cp2z05': '3.0',
+            'GMA': '',
+            'ALI': '',
+            'ALG': '',
+            'ALH': '',
+            'IMP': '',
         }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name) as work:
