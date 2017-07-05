@@ -213,3 +213,4 @@ migration:
           - specific_print
           - specific_report
           - specific_product
+          - account_invoice_tax_required

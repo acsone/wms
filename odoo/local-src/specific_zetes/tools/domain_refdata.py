@@ -4,6 +4,7 @@ import logging
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from .. import constants
 
 _logger = logging.getLogger(__name__)
 
@@ -37,8 +38,8 @@ class Refdata(DomainInterface):
         for picking_type in picking_types:
             picking_values = Parameters(self)
             picking_values.update({
-                'respCode': 0,
-                'dataType': 2,
+                'respCode': constants.RESPONSE_CODE_OK,
+                'dataType': 2,  # Constant value
                 'operValue': picking_type.zone_code,
                 'promptInfo': picking_type.name
             })
@@ -46,4 +47,14 @@ class Refdata(DomainInterface):
         return '\n'.join([line.format() for line in result])
 
     def resu(self, params):
+        """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
+        There is no resu request for refdata
+        :param params:
+        :return:
+        """
         return

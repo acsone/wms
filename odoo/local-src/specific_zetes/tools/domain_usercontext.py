@@ -3,7 +3,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
-from ..models.stock_picking import AS_START, AS_ACTIVE
+from .. import constants
 
 
 class Usercontext(DomainInterface):
@@ -39,7 +39,7 @@ class Usercontext(DomainInterface):
         user = self._user
         if not user:
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('User not found')
             })
 
@@ -48,14 +48,14 @@ class Usercontext(DomainInterface):
         # The picker should have the group "warehouse"
         if not user.has_group('stock.group_stock_user'):
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('The user should be in the group Inventory')
             })
 
             return result.format()
 
         result.update({
-            'respCode': 0,
+            'respCode': constants.RESPONSE_CODE_OK,
             'assignmentType': 1,
             'operName': user.name,
         })
@@ -83,7 +83,8 @@ ORDER BY round.date, round.time, picking.sequence
 LIMIT 1;
             """
 
-            request.env.cr.execute(picking_query, ((AS_START, AS_ACTIVE),
+            request.env.cr.execute(picking_query, ((constants.AS_START,
+                                                    constants.AS_ACTIVE),
                                                    self._user.id, ))
             query_result = request.env.cr.fetchone()
 
@@ -114,6 +115,11 @@ LIMIT 1;
 
     def resu(self, params):
         """
-        Not used
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
+        There is no resu resquest for usercontext
         """
         return

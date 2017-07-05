@@ -5,8 +5,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
-from ..models.stock_picking import AS_DEFAULT, AS_START, AS_ACTIVE, AS_DONE, \
-    AS_CANCELED, AS_FINISHED, OP_DEFAULT, OP_SKIPPED
+from .. import constants
 
 _logger = logging.getLogger(__name__)
 
@@ -45,7 +44,10 @@ class Assignment(DomainInterface):
         Return a picking to the picker according several rules:
         - If the picker want to start a new picking (Cri02 is empty) or if
         the picker continue a picking (Cri02 will contain the picking ID)
-        - If a location (
+        - The location can be defined with Cri01
+        - If requestType equals 0, it means that we are looking for a picking
+        without an operator. If the requestType equals, it means that we want
+        a picking without an operator
         :param params:
         :return:
         """
@@ -67,8 +69,8 @@ WHERE picking.delivery_round_state = 'open'
                  AND operation.zetes_state IN %s)
             """
             query_values = [
-                (AS_DEFAULT, AS_CANCELED),
-                (OP_DEFAULT, OP_SKIPPED),
+                (constants.AS_DEFAULT, constants.AS_CANCELED),
+                (constants.OP_DEFAULT, constants.OP_SKIPPED),
             ]
 
             # Search a picking in a specific zone (like Food)
@@ -110,7 +112,7 @@ WHERE picking.delivery_round_state = 'open'
 
         if not len(picking):
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('Cannot found a picking')
             })
             return result.format()
@@ -123,13 +125,13 @@ WHERE picking.delivery_round_state = 'open'
             round_name = vehicle.zone_ids.code
 
         result.update({
-            'respCode': 0,
+            'respCode': constants.RESPONSE_CODE_OK,
             'assignmentType': 1,
             'groupNum': picking.id,
             'Usf02': partner.alcyon_category_id.name,
             'Usf03': round_name,
-            'Usf04': 0,
-            'Usf05': 0,
+            'Usf04': 0,  # Constant value
+            'Usf05': 0,  # Constant value
             'Usf07': partner.name,
             'Usf08': '{} {}'.format(partner.zip, partner.city),  # Zip + city
             'Usf09': len(picking.pack_operation_product_ids),
@@ -142,18 +144,23 @@ WHERE picking.delivery_round_state = 'open'
         else:
             result.Usf06 = 'E'  # Simple packaging
 
-        if picking.zetes_state == AS_CANCELED:
+        if picking.zetes_state == constants.AS_CANCELED:
             result.update({
-                'assignmentStatus': AS_START,
+                'assignmentStatus': constants.AS_START,
                 'Usf01': picking.checksum,
             })
         else:
-            result.assignmentStatus = AS_DEFAULT
+            result.assignmentStatus = constants.AS_DEFAULT
 
         return result.format()
 
     def resu(self, params):
         """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
         Set the picking state (field zetes_state) according assignmentStatus
         assignmentStatus is a number (see below).
         State:
@@ -177,9 +184,11 @@ WHERE picking.delivery_round_state = 'open'
         try:
             picking.sudo(self._user).zetes_state = params.assignmentStatus
             # The picking is done
-            if params.assignmentStatus in [AS_START, AS_ACTIVE]:
+            if params.assignmentStatus in [constants.AS_START,
+                                           constants.AS_ACTIVE]:
                 picking.sudo(self._user).assign_operator()
-            elif params.assignmentStatus in [AS_DONE, AS_FINISHED]:
+            elif params.assignmentStatus in [constants.AS_DONE,
+                                             constants.AS_FINISHED]:
                 # If the picking required a verification (passport)
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
@@ -200,7 +209,7 @@ WHERE picking.delivery_round_state = 'open'
                         # Fortunately these wizards have the same
                         # method "process" to execute the wizard
                         wizard.process()
-            elif params.assignmentStatus == AS_CANCELED:
+            elif params.assignmentStatus == constants.AS_CANCELED:
                 picking.sudo(self._user).interrupt_picking()
         except Exception as e:
             _logger.error(str(e))

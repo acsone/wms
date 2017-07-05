@@ -4,6 +4,7 @@ import logging
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from .. import constants
 
 _logger = logging.getLogger(__name__)
 
@@ -48,7 +49,7 @@ class Catchweight(DomainInterface):
         result = Parameters(self, action='resp')
 
         result.update({
-            'respCode': 0,
+            'respCode': constants.RESPONSE_CODE_OK,
             'groupNum': params.groupNum,
             'itemPickSeqNum': 1,
             'pickLineId': params.pickLineId,
@@ -60,6 +61,11 @@ class Catchweight(DomainInterface):
 
     def resu(self, params):
         """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
         Set the quantity (Usf02) on the stock move (lineId)
         Usf01 is the lot number
         :param params:
@@ -76,29 +82,42 @@ class Catchweight(DomainInterface):
             return
 
         try:
+            # Retrieve the quantity
             qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
 
+            # and the lot number
             lot_number = params.Usf01
+            # If there is no lot number, it means that we don't care about lot
+            # (tracking => without lot). We can simply add the new quantity.
             if not lot_number:
                 move.qty_done += qty_done_by_lot
             else:
+                # Otherwise we need to search for the lot in Odoo
                 lot = request.env['stock.production.lot'].sudo(self._user)\
                     .search([('product_id', '=', move.product_id.id),
                              ('checksum', '=', lot_number)])
                 if lot:
+                    # When we have the lot, we will check if there no existing
+                    # quantity for this lot.
                     pack_lot = \
                         move.pack_lot_ids\
                             .filtered(lambda line: line.lot_id.id == lot.id)
 
+                    # If there no existing line (quantity) for this lot
+                    # we will create a new line
                     if not len(pack_lot):
                         move.pack_lot_ids.create({
                             'operation_id': move.id,
                             'qty': qty_done_by_lot,
                             'lot_id': lot.id,
                         })
+                    # Otherwise we set the quantity for this lot
+                    # We don't need to add the new quantity to the lot
+                    # because Zetes send one request by lot
                     else:
                         pack_lot.write({'qty': qty_done_by_lot})
 
+                    # Set the final quantity on the move
                     qty_done = move.qty_done + qty_done_by_lot
                     move.write({
                         'qty_done': qty_done,

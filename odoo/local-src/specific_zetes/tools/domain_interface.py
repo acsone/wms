@@ -4,23 +4,9 @@ import logging
 from odoo import _
 from odoo.http import request
 
+from .. import constants
+
 _logger = logging.getLogger(__name__)
-
-
-HEADER_LABELS = ('serNum', 'verNum', 'appNum', 'msgType', 'operId', 'langId',
-                 'msgDate', 'msgTime', 'packageId')
-METHOD_INDEX = 3
-ZETES_ACTIONS = [('requ', 'Request'),
-                 ('resp', 'Response'),
-                 ('resu', 'Action')]
-ZETES_DOMAINS = [('assignment', 'Assignment'),
-                 ('catchweight', 'Catchweight'),
-                 ('itempick', 'Itempick'),
-                 ('location', 'Location'),
-                 ('print', 'Print'),
-                 ('refdata', 'Refdata'),
-                 ('usercontext', 'Usercontext'),
-                 ]
 
 
 class DomainInterface:
@@ -33,14 +19,34 @@ class DomainInterface:
 
     def __init__(self, header):
         self._header = header
-        operator_code = header[4]
+        # Retrieve the current user
+        operator_code = header[constants.USER_INDEX]
         self._user = request.env['res.users'].get_user(operator_code)
         _logger.debug('User: {}'.format(self._user.name or 'no user'))
 
     def requ(self, params):
+        """
+        A requ should always return something.
+        This kind of request will execute a method and return the result.
+        During the execution of the method, Zetes will wait.
+
+        This method must be implemented by each domain
+        :param params:
+        :return:
+        """
         raise NotImplementedError('Please implement this method')
 
     def resu(self, params):
+        """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
+        This method must be implemented by each domain.
+        :param params:
+        :return:
+        """
         raise NotImplementedError('Please implement this method')
 
 
@@ -57,9 +63,9 @@ class Parameters:
         new_header = list(domain._header)
         method = '{}_{}'.format(action.upper(),
                                 domain.__class__.__name__.upper())
-        new_header[METHOD_INDEX] = method
+        new_header[constants.METHOD_INDEX] = method
 
-        self.__dict__.update(dict(zip(HEADER_LABELS, new_header)))
+        self.__dict__.update(dict(zip(constants.HEADER_LABELS, new_header)))
         self._labels = labels
         self._action = action
         self._domain = domain
@@ -86,7 +92,7 @@ class Parameters:
         if not self._labels:
             return '{}\nNO VALUES'.format(title)
 
-        labels = HEADER_LABELS + self._labels
+        labels = constants.HEADER_LABELS + self._labels
         default_values = self.get_example()
 
         values = []
@@ -95,7 +101,7 @@ class Parameters:
 
             if not i:
                 values.append('----------- header -----------')
-            if i == len(HEADER_LABELS):
+            if i == len(constants.HEADER_LABELS):
                 values.append('----------- values -----------')
 
             value = getattr(self, key, '')
@@ -151,7 +157,7 @@ class Parameters:
         :return: Return a string
         """
         ordered_values = []
-        for label in HEADER_LABELS + self._labels:
+        for label in constants.HEADER_LABELS + self._labels:
             value = getattr(self, label, '')
             if value is not 0 and not value:
                 value = ''
@@ -183,7 +189,7 @@ class Parameters:
         :param ordered_values:
         :return: None
         """
-        labels = HEADER_LABELS + self._labels
+        labels = constants.HEADER_LABELS + self._labels
         current_labels = self.get_labels()
 
         bad_values = set(current_labels) - set(labels)

@@ -3,6 +3,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from .. import constants
 
 
 class Location(DomainInterface):
@@ -43,7 +44,7 @@ class Location(DomainInterface):
         move_id = params.lineId
         if not move_id:
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('No picking found')
             })
             return result.format()
@@ -52,7 +53,7 @@ class Location(DomainInterface):
             .browse(int(move_id))
         if not len(move):
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('No picking found')
             })
             return result.format()
@@ -60,7 +61,7 @@ class Location(DomainInterface):
         product = move.product_id
 
         result.update({
-            'respCode': 0,
+            'respCode': constants.RESPONSE_CODE_OK,
             'headerNum': None,
             'productCode': product.default_code,
             'productDescription': product.name,
@@ -102,4 +103,14 @@ class Location(DomainInterface):
         return result.format()
 
     def resu(self, params):
+        """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
+        There is no resu request for location
+        :param params:
+        :return:
+        """
         return

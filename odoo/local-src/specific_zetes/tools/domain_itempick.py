@@ -5,7 +5,7 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
-from ..models.stock_picking import OP_DEFAULT, OP_SKIPPED, OP_CANCELED
+from .. import constants
 
 _logger = logging.getLogger(__name__)
 
@@ -70,7 +70,7 @@ class Itempick(DomainInterface):
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': 'No picking found'
             })
             return result.format()
@@ -79,7 +79,7 @@ class Itempick(DomainInterface):
         if not picking_id:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('No picking found with the ID {}'
                              .format(picking_id))
             })
@@ -129,9 +129,9 @@ class Itempick(DomainInterface):
         # "OP_DEFAULT", "OP_SKIPPED" or "OP_CANCELED"
         lines = lines\
             .filtered(lambda line: int(line.qty_done) != int(line.product_qty)
-                      and line.zetes_state in [OP_DEFAULT,
-                                               OP_SKIPPED,
-                                               OP_CANCELED])
+                      and line.zetes_state in [constants.OP_DEFAULT,
+                                               constants.OP_SKIPPED,
+                                               constants.OP_CANCELED])
 
         if not lines:
             error_message = _('There is no lines for the picking {}'
@@ -143,7 +143,7 @@ class Itempick(DomainInterface):
 
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': error_message
             })
             return result.format()
@@ -156,7 +156,7 @@ class Itempick(DomainInterface):
                 'reqDestCarSeqNum': 1,
                 'reqQty': format(int(line.product_qty), '0%d' % 6),
                 'effQty': format(int(line.qty_done), '0%d' % 6),
-                'pickStatus': OP_DEFAULT,
+                'pickStatus': constants.OP_DEFAULT,
                 'tripCounter': 1,
             })
 
@@ -167,13 +167,13 @@ class Itempick(DomainInterface):
                 'productDescription': product.name,
                 'productProperty1': None,
                 'productProperty2': print_on_portable_printer,
-                'lessQtyAllowed': 1,
-                'moreQtyAllowed': 0,
-                'catchWeightFlag': 0,
-                'cycleCountFlag': 0,
-                'expiryDateCheckFlag': 0,
+                'lessQtyAllowed': 1,  # Constant value
+                'moreQtyAllowed': 0,  # Constant value
+                'catchWeightFlag': 0,  # Constant value
+                'cycleCountFlag': 0,  # Constant value
+                'expiryDateCheckFlag': 0,  # Constant value
                 'productBarcode': product.barcode,
-                'scanProductBarcode': 0,
+                'scanProductBarcode': 0,  # Constant value
                 'UOMPrompt': line.product_uom_id.name,
                 'itemPickSeqNum': sequence,
             })
@@ -196,7 +196,7 @@ class Itempick(DomainInterface):
             location = line.location_id
             if not location:
                 line_values.update({
-                    'respCode': 10,
+                    'respCode': constants.RESPONSE_CODE_KO,
                     'respMsg': _('Location not found for the product {}'
                                  .format(product.name)),
                 })
@@ -232,6 +232,11 @@ class Itempick(DomainInterface):
 
     def resu(self, params):
         """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
         Change the state of the current stock pack operation (pickLineId)
         If the state is OP_CANCELED we remove all lots for this operation
         :param params:
@@ -254,7 +259,7 @@ class Itempick(DomainInterface):
                 })
 
                 # If status == OP_CANCELED => remove all actions for this line
-                if status == OP_CANCELED:
+                if status == constants.OP_CANCELED:
                     move.pack_lot_ids.unlink()
                     move.save()
 

@@ -5,22 +5,7 @@ import random
 
 from odoo import models, fields, api, _
 
-# Zetes values for assignment (stock.picking) state
-AS_DEFAULT = '00'
-AS_START = '01'
-AS_ACTIVE = '02'
-AS_STAGING = '03'
-AS_DONE = '04'
-AS_CANCELED = '05'
-AS_FINISHED = '08'
-
-# Zetes values for picking (stock.pack.operation) state
-OP_DEFAULT = '00'
-OP_PICKED = '01'
-OP_SHORTPICKED = '02'
-OP_SKIPPED = '03'
-OP_CUT = '04'
-OP_CANCELED = '05'
+from .. import constants
 
 
 class StockPicking(models.Model):
@@ -29,16 +14,16 @@ class StockPicking(models.Model):
     operator_id = fields.Many2one(track_visibility='onchange')
     checksum = fields.Char('Checksum')
     zetes_state = fields.Selection([
-        (AS_DEFAULT, 'Default'),
-        (AS_START, 'Start'),
-        (AS_ACTIVE, 'Active'),
-        (AS_STAGING, 'Staging'),
-        (AS_DONE, 'Done'),
-        (AS_CANCELED, 'Canceled'),
-        (AS_FINISHED, 'Finished')
+        (constants.AS_DEFAULT, 'Default'),
+        (constants.AS_START, 'Start'),
+        (constants.AS_ACTIVE, 'Active'),
+        (constants.AS_STAGING, 'Staging'),
+        (constants.AS_DONE, 'Done'),
+        (constants.AS_CANCELED, 'Canceled'),
+        (constants.AS_FINISHED, 'Finished')
     ],
         string='Zetes state',
-        default=AS_DEFAULT,
+        default=constants.AS_DEFAULT,
         required=True)
     is_zetes_error = fields.Boolean('Zetes error', default=False)
     zetes_traceback = fields.Text('Zetes traceback')
@@ -83,15 +68,15 @@ class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
     zetes_state = fields.Selection([
-        (OP_DEFAULT, 'Default'),
-        (OP_PICKED, 'Picked'),
-        (OP_SHORTPICKED, 'Shortpicked'),
-        (OP_SKIPPED, 'Skipped'),
-        (OP_CUT, 'Cut'),
-        (OP_CANCELED, 'Canceled')
+        (constants.OP_DEFAULT, 'Default'),
+        (constants.OP_PICKED, 'Picked'),
+        (constants.OP_SHORTPICKED, 'Shortpicked'),
+        (constants.OP_SKIPPED, 'Skipped'),
+        (constants.OP_CUT, 'Cut'),
+        (constants.OP_CANCELED, 'Canceled')
     ],
         string='Zetes state',
-        default=OP_CANCELED,
+        default=constants.OP_CANCELED,
         required=True)
 
 

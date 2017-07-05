@@ -6,8 +6,8 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.web.controllers.main import Home
 
-from ..tools.domain_interface import Parameters, HEADER_LABELS, \
-    METHOD_INDEX, ZETES_ACTIONS, ZETES_DOMAINS
+from ..tools.domain_interface import Parameters
+from .. import constants
 
 _logger = logging.getLogger(__name__)
 
@@ -28,8 +28,8 @@ class Zetes(Home):
         # We need to remove this comma before split the request
         params = cmd[:-1].split(',')
         # Split the request in two parts (header and values)
-        header = params[:len(HEADER_LABELS)]
-        values = params[len(HEADER_LABELS):]
+        header = params[:len(constants.HEADER_LABELS)]
+        values = params[len(constants.HEADER_LABELS):]
 
         # Retrieve the command and the the domain
         # The msgType (command + domain) is always the fourth element
@@ -37,7 +37,7 @@ class Zetes(Home):
         # In this case the msgType is REQU_ITEMPICK
         # command: requ
         # domain: itempick
-        command, domain = header[METHOD_INDEX].split('_')
+        command, domain = header[constants.METHOD_INDEX].split('_')
 
         # Create the handler
         # If the domain is itempick the module name will be
@@ -79,6 +79,7 @@ class Zetes(Home):
                 auth="public", website=True)
     def display_values(self, **kwargs):
         """
+        !!! This method is only for development/test !!!
         This route will return the right format for one or more methods.
         You can pass two parameters to your request:
         - domains: Select one or more domain (assignment, catchweight, ...)
@@ -101,19 +102,31 @@ class Zetes(Home):
         if domains_str:
             domains = domains_str.split(',')
         else:
-            domains = [domain[0] for domain in ZETES_DOMAINS]
+            domains = [domain[0] for domain in constants.ZETES_DOMAINS]
 
         actions_str = kwargs.get('actions')
         if actions_str:
             actions = actions_str.split(',')
         else:
-            actions = [action[0] for action in ZETES_ACTIONS]
+            actions = [action[0] for action in constants.ZETES_ACTIONS]
 
         for domain in domains:
             module_name = \
                 'openerp.addons.specific_zetes.tools.domain_{}'.format(
                     domain.lower())
             module_obj = importlib.import_module(module_name)
+
+            # Create an instance of the domain and call the method _init_
+            # A domain (like Print) need a header to create an instance
+            # because the _init_ of the domain will try to retrieve
+            # the current user (=> picker).
+            #
+            # E.G.: My domain is print
+            # instance = getattr(module_obj, domain.title())
+            # => instance = getattr(domain_assignement, 'Print')[1,1,1,1,1]
+            # => instance = Print([1,1,1,1,1])
+            # In this case the system will try to retrive the user
+            # with the code 1 (see USER_INDEX)
             instance = getattr(module_obj, domain.title())([1, 1, 1, 1, 1])
 
             for action in actions:

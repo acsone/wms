@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, api
 
-from ..tools.domain_interface import ZETES_ACTIONS, ZETES_DOMAINS
+from .. import constants
 
 
 class ZetesLogger(models.Model):
     _name = 'zetes.logger'
 
-    action = fields.Selection(ZETES_ACTIONS,
+    action = fields.Selection(constants.ZETES_ACTIONS,
                               string='Action',
                               required=True)
-    domain = fields.Selection(ZETES_DOMAINS,
+    domain = fields.Selection(constants.ZETES_DOMAINS,
                               string='Domain',
                               required=True)
     command = fields.Char('Command',
@@ -42,8 +42,10 @@ class ZetesLogger(models.Model):
         :return:
         """
         for log in self:
-            command_displayed = dict(ZETES_ACTIONS).get(log.action, log.action)
-            domain_displayed = dict(ZETES_DOMAINS).get(log.domain, log.domain)
+            command_displayed = dict(constants.ZETES_ACTIONS)\
+                .get(log.action, log.action)
+            domain_displayed = dict(constants.ZETES_DOMAINS)\
+                .get(log.domain, log.domain)
 
             name = '{} on {} by {}'.format(command_displayed,
                                            domain_displayed,

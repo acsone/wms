@@ -5,11 +5,9 @@ from odoo import _
 from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
+from .. import constants
 
 _logger = logging.getLogger(__name__)
-
-PRINT_PASSPORT = '03'
-PRINT_LABELS = '04'
 
 
 class Print(DomainInterface):
@@ -49,7 +47,7 @@ class Print(DomainInterface):
         if not picking_id:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': 10,
+                'respCode': constants.RESPONSE_CODE_KO,
                 'respMsg': _('No picking found with the ID {}'
                              .format(picking_id))
             })
@@ -72,13 +70,13 @@ class Print(DomainInterface):
         printer_num = params.printerNum
 
         # Print the passport (see above)
-        if print_type == PRINT_PASSPORT:
+        if print_type == constants.PRINT_PASSPORT:
             # The passport is always printed on the printer 1
             printer = request.env['printing.printer'].sudo() \
                 .search([('code', '=', '1'), ('type', '=', 'pdf')])
             if not printer:
                 result.update({
-                    'respCode': 10,
+                    'respCode': constants.RESPONSE_CODE_KO,
                     'respMsg': _('Cannot found a printer'),
                     'labelCD': '00',
                 })
@@ -90,13 +88,13 @@ class Print(DomainInterface):
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
-                    'respCode': 10,
+                    'respCode': constants.RESPONSE_CODE_KO,
                     'respMsg': _('Error during printing'),
                     'labelCD': '00',  # Default code
                 })
                 return result.format()
 
-        elif print_type == PRINT_LABELS:
+        elif print_type == constants.PRINT_LABELS:
             printer_toshiba = request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
                                 ('type', '=', 'toshiba')])
@@ -106,7 +104,7 @@ class Print(DomainInterface):
 
             if not printer_toshiba or not printer_zebra:
                 result.update({
-                    'respCode': 10,
+                    'respCode': constants.RESPONSE_CODE_KO,
                     'respMsg': _('Cannot found a printer'),
                     'labelCD': '00',  # Default code
                 })
@@ -121,14 +119,14 @@ class Print(DomainInterface):
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
-                    'respCode': 10,
+                    'respCode': constants.RESPONSE_CODE_KO,
                     'respMsg': _('Error during printing'),
                     'labelCD': '00',  # Default code
                 })
                 return result.format()
 
         result.update({
-            'respCode': 0,
+            'respCode': constants.RESPONSE_CODE_OK,
             'groupNum': picking.id,
             'labelCD': picking.checksum or '00',
         })
@@ -136,4 +134,14 @@ class Print(DomainInterface):
         return result.format()
 
     def resu(self, params):
+        """
+        A resu request will never return something.
+        When zetes send this type of request, the system doesn't wait
+        for a response even if there is an error. We need to catch and manage
+        errors by yourself.
+
+        There is no resu request for print
+        :param params:
+        :return:
+        """
         return
