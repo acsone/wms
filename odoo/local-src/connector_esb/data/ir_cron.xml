@@ -27,4 +27,17 @@
     <field eval="'()'" name="args"/>
   </record>
 
+  <record forcecreate="True" id="ir_cron_esb_export_stock" model="ir.cron">
+    <field name="name">ESB - Export Stock</field>
+    <field eval="False" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">24</field>
+    <field name="interval_type">hours</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field eval="'esb.backend'" name="model"/>
+    <field eval="'cron_export_stock'" name="function"/>
+    <field eval="'()'" name="args"/>
+  </record>
+
 </odoo>

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ROOT>
+  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
+    <Row>
+      <Sku>E-COM09</Sku>
+      <ErpStockCode/>
+      <Stock>75.0</Stock>
+      <NextUseDate></NextUseDate>
+    </Row>
+  </Root>
+</ROOT>
