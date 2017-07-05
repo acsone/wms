@@ -42,7 +42,8 @@ Unreleased
 * Remove override of anthem/marabunta version to use the default version of docker-odoo-project
 * TMP use `enterprise` from c2c
 * Add a ssh tunnel container for developpment
-
+* Upgrade Docker image to 10.0-2.3.0
+* Update odoo/src to latest commit
 
 **Documentation**
 
