@@ -14,6 +14,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/install_lang.xml',
         'data/esb_backend.xml',
         'data/esb_backend_timestamp.xml',
         'data/ir_cron.xml',

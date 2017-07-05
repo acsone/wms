@@ -13,16 +13,6 @@ class ESBTestCase(SavepointComponentCase):
     @classmethod
     def setUpClass(cls):
         super(ESBTestCase, cls).setUpClass()
-        cls.setup_languages()
-
-    @classmethod
-    def setup_languages(cls):
-        installed = cls.env['res.lang'].search([
-            ('translatable', '=', True)]).mapped('code')
-        for code in ('fr_BE', 'nl_BE', 'de_DE'):
-            if code not in installed:
-                cls.env['base.language.install'].create(
-                    {'lang': code}).lang_install()
 
     def setUp(self):
         super(ESBTestCase, self).setUp()
