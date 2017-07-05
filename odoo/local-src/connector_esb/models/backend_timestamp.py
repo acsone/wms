@@ -15,13 +15,17 @@ class ESBBackendTimestamp(models.Model):
         comodel_name='esb.backend',
         string='Backend Id',
         required=True,
+        readonly=True,
     )
     model = fields.Char(
         string='Model name',
-        required=True
+        required=True,
+        readonly=True,
     )
-    kind = fields.Char(
-        string='Kind of export'
+    kind = fields.Selection(
+        selection=[('pharmacy', 'pharmacy')],
+        string='Kind of export',
+        readonly=True,
     )
     last_export = fields.Datetime(
         string='Timestamp last export'
@@ -74,16 +78,3 @@ class ESBBackendTimestamp(models.Model):
                   "probably due to an ongoing synchronization." %
                   (' '.join([self.model, self.timestamp.kind]),))
             )
-
-    @api.model
-    def get_last_export_time(self, model_name, backend_id, kind):
-        """ Return timestamp of last export for a specific exporter """
-        last_export = self.search([
-            ('backend_id', '=', backend_id),
-            ('model', '=', model_name),
-            ('kind', '=', kind)  # Not dealing with this one yet
-        ])
-        if last_export:
-            return last_export.last_export
-        else:
-            return ''

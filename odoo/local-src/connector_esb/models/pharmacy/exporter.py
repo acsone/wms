@@ -11,6 +11,10 @@ class PharmacyExportMapper(Component):
     _inherit = ['esb.export.mapper']
     _apply_on = 'res.partner'
 
+    @classmethod
+    def _component_match(cls, work):
+        return bool(work.timestamp and work.timestamp.kind == 'pharmacy')
+
     direct = [
         ('ref', 'Id'),
         ('name', 'Name'),
@@ -40,20 +44,10 @@ class PharmacyCronExporter(Component):
     _usage = 'record.exporter.cron'
     _apply_on = 'res.partner'
 
-    def get_items_domain(self):
+    @classmethod
+    def _component_match(cls, work):
+        return bool(work.timestamp and work.timestamp.kind == 'pharmacy')
 
-        # Get the timestamp of the last export executed
-        last_export_time = self.env['esb.backend.timestamp'].get_last_export_time(
-            self.model._name, self.collection.id, '')
-        # Get all the partner with a pharmacist
-        all_pharma = self.env['res.partner'].search(
-                [('pharmacist_id', '!=', False)])
-        # If exported before, keep the pharmacist that have changed since
-        if last_export_time:
-            all_pharma = all_pharma.filtered(
-                    lambda r: r.pharmacist_id.write_date > last_export_time)
-        pharma = all_pharma.mapped('pharmacist_id')
-        domain = [
-            ('id', 'in', pharma.ids),
-        ]
+    def get_items_domain(self):
+        domain = [('pharmacist_id', '!=', False)]
         return domain

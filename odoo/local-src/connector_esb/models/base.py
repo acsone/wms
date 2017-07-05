@@ -5,7 +5,6 @@
 from odoo import models, api
 from odoo.addons.queue_job.job import job, related_action
 from odoo.addons.component.exception import NoComponentError
-from odoo.addons.connector.components import mapper
 
 
 class Base(models.AbstractModel):

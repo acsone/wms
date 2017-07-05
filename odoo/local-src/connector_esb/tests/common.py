@@ -88,3 +88,12 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             raise AssertionError(u'XML does not match:\n\n{}'.format(
                 '\n'.join(message)
             ))
+
+    def read_test_file(self, filename):
+        path = os.path.join(
+            os.path.dirname(__file__),
+            'examples',
+            filename
+        )
+        with open(path, 'r') as thefile:
+            return thefile.read()

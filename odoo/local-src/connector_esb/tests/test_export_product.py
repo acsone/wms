@@ -91,15 +91,6 @@ class ExportProductTestCase(ESBXMLTestCase):
             (dt, item_id)
         )
 
-    def read_test_file(self, filename):
-        path = os.path.join(
-            os.path.dirname(__file__),
-            'examples',
-            filename
-        )
-        with open(path, 'r') as thefile:
-            return thefile.read()
-
     def test_mapper(self):
         expected = {
             'Gesdem': 'Export me pls',
