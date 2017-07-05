@@ -12,6 +12,7 @@
         'connector',
         'product',
         'sale',
+        'purchase',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
