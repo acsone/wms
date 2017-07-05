@@ -11,6 +11,7 @@
     'depends': [
         'connector',
         'product',
+        'sale',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
