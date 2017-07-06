@@ -12,13 +12,13 @@
 	url = git@github.com:camptocamp/stock-logistics-workflow.git
 [submodule "odoo/external-src/sale-workflow"]
 	path = odoo/external-src/sale-workflow
-	url = git@github.com:camptocamp/sale-workflow.git
+	url = git@github.com:OCA/sale-workflow.git
 [submodule "odoo/external-src/account-financial-tools"]
 	path = odoo/external-src/account-financial-tools
 	url = git@github.com:camptocamp/account-financial-tools.git
 [submodule "odoo/external-src/l10n-belgium"]
 	path = odoo/external-src/l10n-belgium
-	url = git@github.com:camptocamp/l10n-belgium.git
+	url = git@github.com:OCA/l10n-belgium.git
 [submodule "odoo/external-src/odoo-cloud-platform"]
 	path = odoo/external-src/odoo-cloud-platform
 	url = git@github.com:camptocamp/odoo-cloud-platform.git

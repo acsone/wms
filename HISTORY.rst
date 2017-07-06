@@ -50,6 +50,8 @@ Unreleased
 * Add a ssh tunnel container for developpment
 * Upgrade Docker image to 10.0-2.3.0
 * Update odoo/src to latest commit
+* Update odoo/enterprise to latest commit
+* Update OCA repositories to latest commits, rebuild pending-merges
 
 **Documentation**
 
