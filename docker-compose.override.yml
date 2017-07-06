@@ -20,9 +20,31 @@ services:
       - "./odoo/migration.yml:/opt/odoo/migration.yml"
       - "./odoo/data:/opt/odoo/data"
     environment:
-      - RUNNING_ENV=dev
-      - MARABUNTA_MODE=demo  # could be 'demo' for the minimal db or 'full' for the complete one
-      - MARABUNTA_ALLOW_SERIE=True  # should not be set in production
+      RUNNING_ENV: dev
+      # could be 'demo' for the minimal db or 'full' for the complete one
+      MARABUNTA_MODE: demo
+      # should not be set in production
+      MARABUNTA_ALLOW_SERIE: 'True'
+      # configuration to test exports to sftp (ESB)
+      ODOO_ESB_SFTP_HOST: esbsftp
+      ODOO_ESB_SFTP_USER: foo
+      # test key from sftp/id_rsa
+      ODOO_ESB_SFTP_PRIVATE_KEY: |
+          -----BEGIN RSA PRIVATE KEY-----
+          MIICXQIBAAKBgQDNc0wBK+/GRNVgzutyNKbbVkCdGIsHLBc4atuLwZzka58l1UHR
+          9Py3tvNymcxX6oj9AXGDNkyMYg514VbxJlwxkU+zN5gUy/Oc18TahKaLFvcRySeP
+          KrXeQEzDBIqDhEUCX9ntteL8L+bYE55+AsvxS/oDmgn68mVrS2uo0Oh4GQIDAQAB
+          AoGATDpHLPgcUrgfY3fiq9EVR7RM7Py6OMMHKoubQdNoXuf/eI4Tic8YJSHgWdju
+          lIAUq6rpbwGqjTukmeAt3fOZqLARbE61XBMOvEy9sEYkwafC2WIzoSyfUxAvmAYj
+          9Gvx/L345J1uFx53+HxMZeVNZYf+d+/Q+2EB5OLLYZPzNAECQQDx1vsN0AhnhQIc
+          vgLym1IyUs9RvUQuRJbcvdnW/3splQwg9a3krtm1WdBrshFomw+AeRzxoRBHfuTU
+          PijhtJehAkEA2Xrc98bXCCJ464TfiA1qCFjzc/OLCT1GC+UR92MVU2svef/5VswR
+          1qjrT8X+q+15AVKpnPzdgfQ74Kp8G/WteQJAA+4TbFkKGeyOaTspPxoJDupLli92
+          MS5KKVIofRbvwHA8nzh+1+2Dei/4dBeTsth6OwM81ixg4FiOjWhpL6nIoQJBAItl
+          tDLhcb0WE3mqznhvWLKHCW0eAtVmP/qp1m1CRk4U2vaQ+yoGXbzAwyt71nQvH6uY
+          Z31nmzeL68FipXBqdckCQQCCURUp8lWdC5UPwArD5P22Mame0XdlAkbH3vOuFCav
+          5Dx0Zwm6sBJUrY64Qt/OvEk0nD+ttP7D+O65+IJ6gmCO
+          -----END RSA PRIVATE KEY-----
 
   db:
     ports:
@@ -41,6 +63,13 @@ services:
     #     key's in lastpass (DB2 SSH Gateway access Raspberry PI)
     #     -----END RSA PRIVATE KEY-----
 
+  # to test exports to sftp (ESB)
+  esbsftp:
+    image: atmoz/sftp
+    command: "foo::1033"
+    volumes:
+      - "./sftp/share:/home/foo/share"
+      - "./sftp/id_rsa.pub:/home/foo/.ssh/keys/id_rsa.pub:ro"
 
 volumes:
   data-odoo-pytest-cache:

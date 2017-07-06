@@ -3,3 +3,12 @@ redis==2.10.5
 python-json-logger==0.1.5
 statsd==3.2.1
 unidecode==0.4.20
+
+# connector
+cachetools
+
+# esb connector
+dicttoxml
+xmlunittest
+Cryptography==1.9
+paramiko==2.2.1

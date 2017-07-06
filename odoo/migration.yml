@@ -204,3 +204,4 @@ migration:
           - specific_purchase
           - specific_purchase_report
           - specific_sale
+          - connector_esb

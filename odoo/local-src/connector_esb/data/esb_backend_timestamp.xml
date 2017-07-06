@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="esb_timestamp_product" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">product.product</field>
+    <field name="kind"></field>
+    <field name="export_filename">Product_{date}.xml</field>
+  </record>
+
+</odoo>

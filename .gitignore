@@ -54,3 +54,5 @@ rancher.env
 
 # backup files
 .~*#
+
+sftp/share/**/*
