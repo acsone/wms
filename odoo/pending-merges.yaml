@@ -38,3 +38,10 @@
     # 10.0 re-worked component registry
     - oca refs/pull/231/head
   target: *default_target
+./external-src/enterprise:
+  remotes:
+    odoo: git@github.com:odoo/enterprise.git
+    camptocamp: git@github.com:camptocamp/enterprise.git
+  merges:
+    - odoo 10.0
+  target: *default_target
