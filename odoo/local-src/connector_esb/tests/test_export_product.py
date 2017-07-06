@@ -4,7 +4,6 @@
 
 from odoo import tools, fields
 from .common import ESBXMLTestCase
-import os
 
 
 class ExportProductTestCase(ESBXMLTestCase):

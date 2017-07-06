@@ -43,8 +43,8 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'phone': '021123123',
             'fax': '021121212',
             'email': 'peter@ch.ch',
-            'pharmacist_id': self.env.ref('base.main_partner').id,
         })
+        self.env.ref('base.main_partner').pharmacist_id = self.all_records[1]
 
     def test_mapper(self):
         """ Generate dict with the mapper and compare with what is expected"""
@@ -123,8 +123,8 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'phone': '021123123',
             'fax': '021121212',
             'email': 'roland@ch.ch',
-            'pharmacist_id': self.env.ref('base.main_partner').id,
         })
+        self.env.ref('base.partner_root').pharmacist_id = record
         self.all_records |= record
         self.timestamp.last_export = False
         with self.backend.work_on(self.model._name,
