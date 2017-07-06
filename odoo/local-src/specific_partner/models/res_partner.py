@@ -25,6 +25,11 @@ class ResPartner(models.Model):
         comodel_name='res.partner',
         string='Associated pharmacist',
     )
+    pharmacist_of_ids = fields.One2many(
+        comodel_name='res.partner',
+        inverse_name='pharmacist_id',
+        string='Pharmacist associated to',
+    )
 
     @api.depends('alcyon_category_id')
     def _compute_depot_number_visible(self):
