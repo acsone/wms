@@ -76,6 +76,7 @@ migration:
           ## oca/bank-payment
           - account_banking_sepa_direct_debit
           - account_banking_sepa_credit_transfer
+          - account_invoice_tax_required
           ## oca/l10n-belgium
           #- l10n_be_antibiotic_tax
           #- l10n_be_apb_tax
@@ -102,12 +103,14 @@ migration:
           - specific_account
           - specific_base
           - specific_partner
+          - specific_print
           - specific_product
           - specific_report
           - specific_sale
           - specific_stock
           - specific_translations
           - specific_purchase
+          - specific_zetes
           - stock_barcode_fix
           - stock_expired
           - stock_grn
@@ -186,6 +189,7 @@ migration:
       operations:
         post:
           - anthem songs.updates.update_10_4_0.update::main
+          - anthem songs.install.logistics::create_picking_types
       modes:
         full:
           operations:
@@ -205,3 +209,9 @@ migration:
           - specific_purchase_report
           - specific_sale
           - connector_esb
+          - specific_zetes
+          - specific_print
+          - specific_report
+          - specific_product
+          - specific_stock
+          - account_invoice_tax_required

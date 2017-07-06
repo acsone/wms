@@ -18,7 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import fields, models
+from datetime import date
+
+from odoo import fields, models, api
 
 
 class StockLocation(models.Model):
@@ -27,3 +29,23 @@ class StockLocation(models.Model):
     bin_checksum_1 = fields.Char('Checksum 1')
     bin_checksum_2 = fields.Char('Checksum 2')
     bin_checksum_3 = fields.Char('Checksum 3')
+
+    @api.multi
+    def get_checksum(self):
+        """
+        Return the checksum according the following rule:
+        - even day : return checksum 1
+        - odd day: return checksum 2
+
+        The checksum 3 is not used but we need to keep it for the future
+
+        Eg: 1 january => odd day => use the checksum 2
+         2 january => even day => use the checksum 1
+        :return:
+        """
+
+        is_odd_day = date.today().day % 2
+        if is_odd_day:
+            return self.bin_checksum_2
+        else:
+            return self.bin_checksum_1

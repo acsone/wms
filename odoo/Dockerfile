@@ -7,6 +7,7 @@ RUN set -x; \
          apt-get update \
          && apt-get install -y --no-install-recommends \
          parallel \
+         python-cups \
          # needed to build Cryptography
          build-essential libssl-dev libffi-dev python-dev \
          && cd /opt/odoo \
@@ -39,6 +40,7 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/account-analytic, \
   /opt/odoo/external-src/connector, \
   /opt/odoo/external-src/queue, \
+  /opt/odoo/external-src/report-print-send, \
   /opt/odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \

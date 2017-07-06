@@ -29,6 +29,12 @@ Unreleased
 
 * ALCN-904: Custom purchase report (add new measures)
 * ALCN-838: Compute the scheduled date on the lead time of the supplier info
+* ALCN-187: Add the new module specific_zetes to manage the voice picker (read the README for more information about this module)
+* ALCN-187: Add the new module specific_print to manage labels printing
+* ALCN-187: Add the indicated price on product
+* ALCN-187: Update the deliveryslip report and add the passport report
+* ALCN-187: Retrieve the checksum on lot according the day of week
+* ALCN-187: Fix a bug with the test test_1_picking_transfer
 
 **Bugfixes**
 
@@ -116,6 +122,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-673: Fix some bugs on report due to v10 migration and add line on report invoice
+* ALCN-740: Add tools to integrate a voice picking (Zetes) in Odoo
 * ALCN-788: Set the reference with the supplier invoice number
 * ALCN-794: Set the flag "update_posted" on several journals and set the field check total required on vendor bills.
 * ALCN-817 / 821: Add logistics informations in sale order form view

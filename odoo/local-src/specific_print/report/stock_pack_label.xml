@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data noupdate="1">
+
+  <template id="stock_pick_packs_label_zebra_v1">
+   <div class="raw">
+    <t t-foreach="docs" t-as="pick">
+     <t t-foreach="pick.package_ids" t-as="pack">
+      <t t-set="nbr" t-value="pick.env.context['nbr']"/>
+      <t t-foreach="xrange(nbr)" t-as="nbridx">
+       ^XA
+       ^XFE:FORMAT.ZPL^FS
+       ^FN1^FD<t t-esc="pick.partner_id.name"/>^FS
+       ^FN2^FD<t t-if="len(pick.delivery_round_id.vehicle_id.zone_ids) == 1" t-esc="pick.delivery_round_id.vehicle_id.zone_ids.code"/>^FS
+       ^FN3^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
+       ^FN4^FD^FS
+       ^FN5<t t-esc="nbridx"/>/<t t-esc="nbr"/>^FD^FS
+       ^FN6^FD<t t-esc="pick.delivery_round_id.display_name"/>^FS
+       ^FN7^FD<t t-esc="pack.name"/>^FS
+       ^FN8^FD<t t-esc="pick.checksum"/>^FS
+       ^FN9^FD<t t-esc="pick.delivery_round_id.date"/>^FS
+       ^FN10^FD^FS
+       ^PQ1
+       ^XZ</t></t></t>
+   </div>
+  </template>
+
+  <report
+          id="report_stock_pick_packs_label"
+          string="Alcyon Pack Label"
+          model="stock.picking"
+          report_type="qweb-pdf"
+          file="specific_print.stock_pick_packs_label_zebra_v1"
+          name="specific_print.stock_pick_packs_label_zebra_v1"
+  />
+
+ </data>
+</openerp>

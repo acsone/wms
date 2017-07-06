@@ -40,3 +40,6 @@
 [submodule "odoo/external-src/queue"]
 	path = odoo/external-src/queue
 	url = git@github.com:oca/queue
+[submodule "odoo/external-src/report-print-send"]
+	path = odoo/external-src/report-print-send
+	url = git@github.com:OCA/report-print-send.git

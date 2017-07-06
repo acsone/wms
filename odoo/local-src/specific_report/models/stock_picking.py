@@ -130,8 +130,8 @@ class StockPicking(models.Model):
 
         if moves_witout_order:
             result.append((None,
-                           moves_witout_order,
-                           backorder_moves_without_order))
+                           (moves_witout_order, backorder_moves_without_order)
+                           ))
 
         result.extend(
             sorted(result_dict.items(),

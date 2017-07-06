@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <template id="stock_product_label_toshiba_v1">
+            <div class="raw">
+                <t t-foreach="docs" t-as="pack">
+                    <t t-foreach="pack.pack_lot_ids" t-as="lotline">
+                        <t t-foreach="range(int(lotline.qty))" t-as="idx">
+                            <t t-set="lot_id" t-value="lotline.lot_id"/>{U2;0120|}\r
+                            {D0275,0560,0250|}\r
+                            {C|}\r
+                            {PC001;0400,0040,05,05,J,00,B|}\r
+                            {RC001;ALCYON sa |}\r
+                            {PC004;0010,0040,05,05,J,00,B|}\r
+                            {RC004;<t t-esc="pack.picking_id.partner_id.display_name"/>|}\r
+                            {PC009;0010,0070,05,05,J,00,B|}\r
+                            {RC009;6/4420/0466|}\r
+                            {PC005;0010,0100,05,05,J,00,B|}\r
+                            {RC005;<t t-if="False">Doc.n : 1/01790 /</t>|}\r
+                            {PC002;0010,0130,05,05,J,00,B|}\r
+                            {RC002;<t t-esc="pack.product_id.name"/>|}\r
+                            <t t-if="pack.picking_id.partner_id.is_price_on_labels">
+                                {PC007;0350,0070,05,05,J,00,B|}\r
+                                {RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r
+                            </t>
+                            {XB01;0030,0150,9,1,02,0,0080|}\r
+                            {RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="'%12s' % lot_id.name[:12]"/><t t-esc="lot_id.life_date and time.strftime('%d%m%y', time.strptime(lot_id.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>|}\r
+                            {PC003;0030,0250,05,05,J,00,B|}\r
+                            {RC003;S-<t t-esc="'%7s' % pack.product_id.default_code[:7]"/>-<t t-esc="'%12s' % lot_id.name[:12]"/>-<t t-esc="lot_id.life_date and time.strftime('%d/%m/%y', time.strptime(lot_id.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>|}\r
+                            {XS;I,0001,0002C3200|}\r
+                            {U1;0120|}\r</t></t></t></div>
+        </template>
+
+        <report
+                id="report_stock_product_label"
+                string="Alcyon Product Label"
+                model="stock.pack.operation"
+                report_type="qweb-pdf"
+                file="specific_print.stock_product_label_toshiba_v1"
+                name="specific_print.stock_product_label_toshiba_v1"
+        />
+
+    </data>
+</openerp>

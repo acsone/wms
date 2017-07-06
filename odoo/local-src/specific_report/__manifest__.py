@@ -17,6 +17,7 @@
         'sale',
         'delivery_rounds',
         'specific_purchase',
+        'l10n_be_invoice_bba',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -25,6 +26,7 @@
         'views/report_invoice.xml',
         'views/report_delivery_round.xml',
         'views/report_purchase_order.xml',
+        'views/report_passport.xml',
         'data/paperformat.xml',
     ],
     'installable': True,

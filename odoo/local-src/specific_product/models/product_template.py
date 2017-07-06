@@ -23,6 +23,10 @@ class ProductTemplate(models.Model):
 
     cnk_code = fields.Char(string='CNK')
 
+    indicated_price = fields.Float(
+        string='Indicated price'
+    )
+
     def _compute_sale_price_2(self):
         for product in self:
             pricelist = self.env.ref('__setup__.product_pricelist_pb2')

@@ -57,13 +57,13 @@
                                     <span t-esc="int(line.product_qty)"/>
                                 </td>
                                 <td>
-                                    <t t-esc="first_quant and first_quant[0]"/>
+                                    <t t-esc="first_quant and first_quant[0] or ''"/>
                                 </td>
                                 <td>
-                                    <t t-esc="first_quant and int(first_quant[1])"/>
+                                    <t t-esc="first_quant and int(first_quant[1])  or ''"/>
                                 </td>
                                 <td>
-                                    <t t-esc="first_quant and first_quant[2] and first_quant[2][:10]"/>
+                                    <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
                                 </td>
                             </tr>
                             <tr t-foreach="quants" t-as="quant">
@@ -88,8 +88,8 @@
                             <tr>
                                 <td colspan="7" class="sale_separator">
                                     <div class="no_background">
-                                        <span>Balance to be delivered on order</span>
-                                        <span t-field="order.name"/>
+                                        <div t-if="order">Balance to be delivered on order <span t-field="order.name"/></div>
+                                        <div t-if="not order">Balance to be delivered</div>
                                         <table style="width: 50%;">
                                             <tbody>
                                                 <tr t-foreach="backorder_move_lines" t-as="line">

@@ -11,6 +11,23 @@
     text-transform: uppercase;
 }
 
+#passport_checksum {
+    float: right;
+    top: 50px;
+    width: 50px;
+    height: 50px;
+    border: solid black 2px;
+    border-radius: 1.1em;
+    vertical-align: middle;
+}
+
+#passport_checksum p {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .border_table, .round_table {
     border-collapse:separate;
     border:solid black 1px;
@@ -19,6 +36,7 @@
 .round_table {
     border-radius: 1.1em;
     -moz-border-radius: 1.1em;
+    overflow: hidden;
 }
 
 .border_table td, .border_table th {
@@ -53,6 +71,11 @@
 
 .no_background {
     background-color: transparent !important;
+}
+
+.black_background {
+    background-color: black;
+    color: white;
 }
 
 #left_header {
@@ -102,6 +125,10 @@
 #products_table th {
     text-align: center;
     vertical-align: middle;
+}
+
+#products_table td, #products_table th {
+    padding: 7px;
 }
 
 #products_table tr:nth-of-type(n + 1) td:nth-of-type(n + 3) {
