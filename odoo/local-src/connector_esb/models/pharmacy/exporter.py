@@ -33,7 +33,7 @@ class PharmacyExportMapper(Component):
     def compute_street(self, record):
         street = record.street
         if record.street2:
-            street += '\r' + record.street2
+            street += '\n' + record.street2
         return {'Street': street}
 
 

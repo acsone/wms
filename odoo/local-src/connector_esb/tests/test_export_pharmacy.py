@@ -75,7 +75,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'Telephone': '021123123',
             'Fax': '021121212',
             'Email': 'peter@ch.ch',
-            'Street': u'Chemin des Oies, 1\rA côté de la fontaine',
+            'Street': u'Chemin des Oies, 1\nA côté de la fontaine',
             'CountryId': 'CH',
             }
         rec = self.all_records[1]
