@@ -22,6 +22,7 @@
         'data/esb_backend_timestamp.xml',
         'data/ir_cron.xml',
         'views/esb_backend_views.xml',
+        'views/product_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

@@ -89,3 +89,21 @@ class ProductCronExporter(Component):
             ('create_date', '>', '2014-7-29 00:00:00'),
         ]
         return domain
+
+    def _export_items(self, items):
+        result = super(ProductCronExporter, self)._export_items(items)
+        new_exported = self.model.search(
+            [('id', 'in', items.ids), ('esb_exported', '=', False)],
+        )
+        # we flag the products as exported, bypassing the ORM
+        # otherwise the write_date would be modified and the records
+        # exported again...
+        self.env.cr.execute(
+            "UPDATE product_product SET esb_exported = true "
+            "WHERE id IN %s ", (tuple(new_exported.ids),)
+        )
+        self.model.invalidate_cache(
+            fnames=['esb_exported'],
+            ids=new_exported.ids
+        )
+        return result
