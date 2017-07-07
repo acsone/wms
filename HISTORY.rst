@@ -54,6 +54,7 @@ Unreleased
 * ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 * ALCN-904: Custom purchase report (add new measures)
 * Setup song: do not reset admin pwd for devs
+  ALCN-863: ESB export of customer and customer addresses
 
 **Bugfixes**
 

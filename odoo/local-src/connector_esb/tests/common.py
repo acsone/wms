@@ -99,3 +99,10 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
         )
         with open(path, 'r') as thefile:
             return thefile.read()
+
+    def delete_test_file(self):
+        folder = '/tmp'
+        for f in os.listdir(folder):
+            f_path = os.path.join(folder, f)
+            if os.path.isfile(f_path):
+                os.remove(f_path)
