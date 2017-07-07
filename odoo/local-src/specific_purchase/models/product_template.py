@@ -36,8 +36,8 @@ class ProductTemplate(models.Model):
                 product.supplier_id = None
 
     unit_in_pallet = fields.Integer('Unit in pallet')
-    unit_in_crate = fields.Integer('Unit in crate')
     unit_in_box = fields.Integer('Unit in box')
+    unit_in_fardage = fields.Integer('Unit in fardage')
 
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):

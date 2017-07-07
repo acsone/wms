@@ -19,8 +19,8 @@
             <xpath expr="//group[@name='inventory']/group[@name='group_lots_and_weight']" position="after">
                 <group name="product_conditioning">
                     <field name="unit_in_pallet"/>
-                    <field name="unit_in_crate"/>
                     <field name="unit_in_box"/>
+                    <field name="unit_in_fardage"/>
                 </group>
             </xpath>
 
