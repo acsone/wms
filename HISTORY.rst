@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.4.0 (2017-07-10)
++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-33 Sale order (demo only)
@@ -13,48 +25,45 @@ Unreleased
 * ALCN-912: Import sale orders (demo data) on mode full
 
 **Features and Improvements**
-* ALCN-840: Add a cron to create the daily inventory
 
+* ALCN-187: Add the indicated price on product
+* ALCN-187: Add the new module specific_print to manage labels printing
+* ALCN-187: Add the new module specific_zetes to manage the voice picker (read the README for more information about this module)
+* ALCN-187: Fix a bug with the test test_1_picking_transfer
+* ALCN-187: Retrieve the checksum on lot according the day of week
+* ALCN-187: Update the deliveryslip report and add the passport report
+* ALCN-838: Compute the scheduled date on the lead time of the supplier info
+* ALCN-840: Add a cron to create the daily inventory
 * ALCN-873: If no exception, hide exception group in sale order form view
 * ALCN-885: Add a month filter on sale report
 * ALCN-887: Hide confirmed sale order to quotation view
+* ALCN-889: Add purchase manager on partner and as follower on helpdesk
 * ALCN-890: Add sale order and purchase order fields on helpdesk ticket
 * ALCN-892: Custom reference field on helpdesk ticket
-* Setup song: do not reset admin pwd for devs
-* ALCN-889: Add purchase manager on partner and as follower on helpdesk
-* ALCN-900: Hide potential smartbutton on product template form view
 * ALCN-900: Add helpdesk ticket smartbutton on partner form view
+* ALCN-900: Hide potential smartbutton on product template form view
 * ALCN-902: Redefine picking on helpdesk ticket with the reference field
 * ALCN-903: Auto-fill fields when create helpdesk ticket from picking
-
 * ALCN-904: Custom purchase report (add new measures)
-* ALCN-838: Compute the scheduled date on the lead time of the supplier info
-* ALCN-187: Add the new module specific_zetes to manage the voice picker (read the README for more information about this module)
-* ALCN-187: Add the new module specific_print to manage labels printing
-* ALCN-187: Add the indicated price on product
-* ALCN-187: Update the deliveryslip report and add the passport report
-* ALCN-187: Retrieve the checksum on lot according the day of week
-* ALCN-187: Fix a bug with the test test_1_picking_transfer
+* Setup song: do not reset admin pwd for devs
 
 **Bugfixes**
 
 * ALCN-888: Fix add a sale order line into a confirmed sale order
 * ALCN-901: Fix 'Add partner vendor on follower when create helpdesk ticket'
-* HOTFIX: Fix a bug when a sale order line is not linked to a product
 * HOTFIX: Fix a bug when a purchase order line doesn't have a product
+* HOTFIX: Fix a bug when a sale order line is not linked to a product
 
 **Build**
 
-* Upgrade server-tools repository
+* Add a ssh tunnel container for developpment
 * Remove override of anthem/marabunta version to use the default version of docker-odoo-project
 * TMP use `enterprise` from c2c
-* Add a ssh tunnel container for developpment
-* Upgrade Docker image to 10.0-2.3.0
-* Update odoo/src to latest commit
-* Update odoo/enterprise to latest commit
 * Update OCA repositories to latest commits, rebuild pending-merges
-
-**Documentation**
+* Update odoo/enterprise to latest commit
+* Update odoo/src to latest commit
+* Upgrade Docker image to 10.0-2.3.0
+* Upgrade server-tools repository
 
 
 10.3.0 (2017-06-15)
