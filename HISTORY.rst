@@ -41,6 +41,7 @@ Unreleased
 * ALCN-888: Fix add a sale order line into a confirmed sale order
 * ALCN-901: Fix 'Add partner vendor on follower when create helpdesk ticket'
 * HOTFIX: Fix a bug when a sale order line is not linked to a product
+* HOTFIX: Fix a bug when a purchase order line doesn't have a product
 
 **Build**
 
