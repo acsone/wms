@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-756: Add the module [MIG][10.0]account_cutoff_accrual_picking, for testing purpose
 
 * ALCN-926 Install module Specific Data and remove references to __setup__
 
