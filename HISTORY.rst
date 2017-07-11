@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-926 Install module Specific Data and remove references to __setup__
+
 **Bugfixes**
 
 **Build**
