@@ -13,6 +13,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/partner.category.csv'
     ],
     'installable': True,
 }

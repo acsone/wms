@@ -11,6 +11,7 @@
     'depends': [
         'sale',
         'delivery_rounds',
+        'specific_data',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
