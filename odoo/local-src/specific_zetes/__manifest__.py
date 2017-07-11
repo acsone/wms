@@ -14,6 +14,7 @@
     'depends': [
         'stock',
         'specific_print',
+        'specific_data',
     ],
     'data': [
         # Views
