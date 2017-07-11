@@ -16,6 +16,7 @@
                 <field name="table_name"/>
                 <field name="last_import"/>
                 <field name="table_prefix"/>
+                <field name="eta"/>
               </tree>
             </field>
           </group>

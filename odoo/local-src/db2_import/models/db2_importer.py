@@ -3,12 +3,147 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import pyodbc
 import socket
+from datetime import datetime, timedelta
+
+from . import mappings
 
 from odoo import api, fields, models
+from odoo.addons.queue_job.job import job
 
 import logging
 
 _logger = logging.getLogger(__name__)
+
+
+def convert_date(prefix, db2_row):
+    dd = db2_row[prefix + 'jj']
+    mm = db2_row[prefix + 'mm']
+    Y = "%s%s" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
+    return "%s-%02i-%02i" % (Y, mm, dd)
+
+
+def convert_customer(ref):
+    return '__import__.customer_%s' % (ref)
+
+
+def add_xmlid(record, xmlid, noupdate=False):
+    """ Add a XMLID on an existing record """
+    try:
+        ref_id, __, __ = record.env['ir.model.data'].xmlid_lookup(xmlid)
+    except ValueError:
+        pass  # does not exist, we'll create a new one
+    else:
+        return record.env['ir.model.data'].browse(ref_id)
+    if '.' in xmlid:
+        module, name = xmlid.split('.')
+    else:
+        module = ''
+        name = xmlid
+    return record.env['ir.model.data'].create({
+        'name': name,
+        'module': module,
+        'model': record._name,
+        'res_id': record.id,
+        'noupdate': noupdate,
+    })
+
+
+def convert_product_id(product_code):
+
+    product = (product_code or '').strip()
+    if product:
+        xmlid = '__import__.product_%s' % product
+    else:
+        xmlid = '__setup__.product_other'
+    return xmlid
+
+
+def convert_coding(value):
+    if isinstance(value, str):
+        value = value.decode('latin1').encode('utf8')
+    return value
+
+
+class DB2MapperSaleOrder(object):
+
+    @classmethod
+    def process(cls, rec, db2_table, tmp_id):
+        cr = rec.env.cr
+        query = (
+            "SELECT id, eccsui, eccrin, eccrcl, eccrep, ecccli, eccsuc,"
+            "       eccdjj, eccdmm, eccdaa, eccdss,"
+            "       ecccjj, ecccmm, ecccaa, ecccss,"
+            "       eccmjj, eccmmm, eccmaa, eccmss"
+            " FROM db2_pentcdcl WHERE id = %s")
+        cr.execute(query, [tmp_id])
+        row = cr.fetchone()
+        assert row, "Nothing to process"
+        row = {c.lower(): convert_coding(row[idx])
+               for idx, c in enumerate(
+                   [d[0] for d in cr.description]
+               )}
+
+        values = {
+            'name': row['eccsui'],
+            'origin': row['eccrin'],
+            'client_order_ref': row['eccrcl'],
+            'user_id': rec.env.ref(mappings.USERS[row['eccrep']]).id,
+            'currency_id': rec.env.ref('base.EUR').id,
+            'date_order': convert_date('eccd', row),
+            'create_date': convert_date('eccc', row),
+            'write_date': convert_date('eccm', row),
+            'partner_id': rec.env.ref(convert_customer(int(row['ecccli']))).id,
+        }
+
+        new = rec.env['sale.order'].create(values)
+
+        xml_id = '__import__.sale_order_%s_%s_%s' % (
+            row['eccsui'], int(row['ecccli']), row['eccsuc'])
+        add_xmlid(new, xml_id.strip())
+
+        query = (
+            "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
+            "       dcccjj, dcccmm, dcccaa, dcccss,"
+            "       dccmjj, dccmmm, dccmaa, dccmss"
+            " FROM db2_pdetcdcl WHERE order_id = %s")
+        cr.execute(query, [row['id']])
+
+        lines = cr.fetchall()
+        assert lines, "No lines were found"
+        lines = [{c.lower(): convert_coding(line[idx])
+                 for idx, c in enumerate(
+                    [d[0] for d in cr.description]
+                 )} for line in lines]
+        is_delivered = True
+        for line in lines:
+            product_xmlid = convert_product_id(line['dccart'])
+            name = None
+            if product_xmlid == '__setup__.product_other':
+                name = "Divers"
+            product = rec.env.ref(product_xmlid)
+            values = {
+                'order_id': new.id,
+                'product_id': product.id,
+                'sequence': line['dccnli'],
+                'name': name or line['dcclib'],
+                'product_uom_qty': line['dccquc'],
+                'product_uom': rec.env.ref('product.product_uom_unit').id,
+                'qty_delivered': line['dccqul'],
+                'price_unit': line['dccpvd'],
+                'discount': line['dccrem'],
+                'create_date': convert_date('dccc', line),
+                'write_date': convert_date('dccm', line),
+            }
+
+            rec.env['sale.order.line'].create(values)
+            #copy the line on original lines
+            rec.env['sale.order.line.original'].create(values)
+            if line['dccquc'] > line['dccqul']:
+                is_delivered = False
+
+        if is_delivered:
+            # validate sale order
+            new.state = 'done'
 
 
 class DB2Importer(models.Model):
@@ -22,13 +157,22 @@ class DB2Importer(models.Model):
     table_prefix = fields.Char(
         help="3 firsts character on each db2 column")
 
-    primary_key = fields.Char()
-
     last_import = fields.Date()
 
     importer_id = fields.Many2one('db2.importer')
+    create_job = fields.Boolean()
+    eta = fields.Integer(
+        default=2,
+        help="Hour of the day when the db2 object will transformed to an odoo"
+             " object")
 
-    def _create_table(self, db2_cr):
+    def get_add_columns(self):
+        if self.table_name == 'PDETCDCL':
+            # create a field on object table to manage relation
+            return ', order_id integer references db2_pentcdcl(id)'
+        return ''
+
+    def _create_db2_table(self, db2_cr):
         cr = self.env.cr
         odoo_table_name = self._PREFIX + self.table_name.lower()
         query = (
@@ -43,42 +187,23 @@ class DB2Importer(models.Model):
             'NUMERIC': 'INTEGER',
             'CHAR': 'VARCHAR(50)',
             'DECIMAL': 'DOUBLE PRECISION',
-
         }
         columns = ",".join(["{} {}".format(col[0], type_mapping[col[1]])
                            for col in columns])
+
+        add_columns = self.get_add_columns()
 
         query = (
             "CREATE TABLE {} ("
             "id serial PRIMARY KEY,"
             "{}"
-            ")".format(odoo_table_name, columns))
+            "{}"
+            ")".format(odoo_table_name, columns, add_columns))
         cr.execute(query)
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
-    def get_from_db2(self, db2_cr, date_start, date_end):
-        cr = self.env.cr
-        odoo_table_name = self._PREFIX + self.table_name.lower()
+    def get_sql_query(self, date_start, date_end):
         get_updates = "get_updates" in self.env.context
-        cr.execute(
-            "SELECT 1 FROM information_schema.tables"
-            " WHERE table_name = '{}'".format(odoo_table_name))
-        table_exists = cr.fetchone()
-
-        if not table_exists:
-            self._create_table(db2_cr)
-        if not self.table_prefix:
-            query = (
-                "SELECT column_name"
-                " FROM information_schema.columns"
-                " WHERE table_name='{}'").format(odoo_table_name)
-            cr.execute(query)
-            cols = cr.fetchall()
-            for col in cols:
-                col = col[0]
-                if col != 'id':
-                    self.table_prefix = col[:3].lower()
-                    break
         query_kwargs = {
             'schema': self.schema,
             'table_name': self.table_name,
@@ -94,8 +219,9 @@ class DB2Importer(models.Model):
             'start_day': int(date_start[8:]),
         })
         if not date_end:
-            #date_end = fields.Date.today()
-            date_end = "2017-01-02"
+            start = fields.Date.from_string(date_start)
+            start += timedelta(days=1)
+            date_end = fields.Date.to_string(start)
 
         query_kwargs.update({
             'end_age': int(date_end[:2]),
@@ -127,7 +253,66 @@ class DB2Importer(models.Model):
                 " AND {prefix}mjj >= {start_day}"
                 " AND {prefix}mjj <= {end_day}"
             )
-        query = query.format(**query_kwargs)
+        return query.format(**query_kwargs)
+
+    def _setup_relations(self):
+        cr = self.env.cr
+        odoo_table_name = self._PREFIX + self.table_name.lower()
+        if self.table_name == 'PDETCDCL':
+            # assign foreign key on order_id when not set
+            query = (
+                "SELECT id, dccsui, dccncl, dccsuc"
+                " FROM {} WHERE order_id IS NULL"
+                ).format(odoo_table_name)
+            cr.execute(query)
+            rows = cr.fetchall()
+            for row in rows:
+                line_id = row[0]
+                query = (
+                    "SELECT id FROM db2_pentcdcl"
+                    " WHERE eccsui = %s"
+                    " AND ecccli = %s"
+                    " AND eccsuc = %s"
+                    )
+                cr.execute(query, (row[1], row[2], row[3]))
+                order_id = cr.fetchone()
+                if order_id:
+                    order_id = order_id[0]
+                    # TODO TypeError: 'NoneType' object has no attribute '__getitem__'
+                    query = "UPDATE {} SET order_id = %s WHERE id = %s".format(
+                        odoo_table_name)
+                    cr.execute(query, (order_id, line_id))
+
+    @api.multi
+    @job
+    def create_or_update_record(self, db2_id):
+        # TODO if
+        DB2MapperSaleOrder.process(self, self.table_name, db2_id)
+
+    def get_from_db2(self, db2_cr, date_start, date_end):
+        cr = self.env.cr
+        odoo_table_name = self._PREFIX + self.table_name.lower()
+        get_updates = "get_updates" in self.env.context
+        cr.execute(
+            "SELECT 1 FROM information_schema.tables"
+            " WHERE table_name = '{}'".format(odoo_table_name))
+        table_exists = cr.fetchone()
+
+        if not table_exists:
+            self._create_db2_table(db2_cr)
+        if not self.table_prefix:
+            query = (
+                "SELECT column_name"
+                " FROM information_schema.columns"
+                " WHERE table_name='{}'").format(odoo_table_name)
+            cr.execute(query)
+            cols = cr.fetchall()
+            for col in cols:
+                col = col[0]
+                if col != 'id':
+                    self.table_prefix = col[:3].lower()
+                    break
+        query = self.get_sql_query(date_start, date_end)
         db2_cr.execute(query, [])
 
         rows = db2_cr.fetchall()
@@ -138,18 +323,19 @@ class DB2Importer(models.Model):
 
         insert_query = (
             u"INSERT INTO {table_name} ({column_names})"
-             "VALUES ({placeholders})"
+             " VALUES ({placeholders}) RETURNING id"
         ).format(column_names=column_names,
                  table_name=odoo_table_name,
                  placeholders=','.join(['%s']*len(columns)))
+        eta = max(0, min(self.eta or 2, 23))
+        now = datetime.now()
+        next_eta = now.replace(hour=eta, minute=0, second=0, microsecond=0)
+        # make sure the next eta is in future
+        if next_eta < now:
+            next_eta += timedelta(days=1)
         for row in rows:
             to_update = False
-            values = []
-            for v in row:
-                if isinstance(v, str):
-                    v = v.decode('latin_1')
-                    v = v.encode('utf8')
-                values.append(v)
+            values = [convert_coding(v) for v in row]
             if get_updates:
                 # check if needed to be updated
                 # do a select with primary keys
@@ -161,7 +347,14 @@ class DB2Importer(models.Model):
                 query = insert_query
             # Using mogrify to transform DECIMAL in int
             cr.execute(cr.mogrify(query, values))
-            _logger.info('INSERT 1')
+            new_id = cr.fetchone()[0]
+            _logger.info('INSERT 1 %s' % self.table_name)
+
+            if self.create_job:
+                # Prepare a job to execute the creation
+                self.with_delay(eta=next_eta).create_or_update_record(new_id)
+
+        self._setup_relations()
 
         self.last_import = date_end
 
@@ -188,7 +381,7 @@ class DB2Importer(models.Model):
             uid=db_user, pwd=db_pwd)
         db2_cr = conn.cursor()
 
-
         # get data for each table
         for table in self.table_ids:
             table.get_from_db2(db2_cr, self.date_start, self.date_end)
+        conn.close()

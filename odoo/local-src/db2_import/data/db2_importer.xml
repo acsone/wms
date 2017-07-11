@@ -6,11 +6,14 @@
     <field name="importer_id" ref="db2_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDCL</field>
-    <field name="primary_key">eccsui,eccsuc</field>
+    <field name="table_prefix">ecc</field>
+    <field name="create_job" eval="True"/>
+    <field name="eta">2</field>
   </record>
   <record model="db2.importer.table" id="db2_table_pdetcdcl">
     <field name="importer_id" ref="db2_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDCL</field>
+    <field name="table_prefix">dcc</field>
   </record>
 </odoo>
