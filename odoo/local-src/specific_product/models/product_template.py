@@ -29,7 +29,7 @@ class ProductTemplate(models.Model):
 
     def _compute_sale_price_2(self):
         for product in self:
-            pricelist = self.env.ref('__setup__.product_pricelist_pb2')
+            pricelist = self.env.ref('specific_data.product_pricelist_pb2')
 
             item_count = self.env['product.pricelist.item'].search_count([
                 ('pricelist_id', '=', pricelist.id),

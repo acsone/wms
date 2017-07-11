@@ -12,6 +12,7 @@
         'product_price_category',
         'sale',
         'stock',
+        'specific_data',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
