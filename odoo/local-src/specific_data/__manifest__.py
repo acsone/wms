@@ -10,10 +10,12 @@
     'category': 'Base',
     'depends': [
         'base',
+        'product',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/partner.category.csv'
+        'data/partner.category.csv',
+        'data/product.category.csv'
     ],
     'installable': True,
 }

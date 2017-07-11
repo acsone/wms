@@ -49,7 +49,7 @@
                                     <span t-field="line.product_id.name"/>
                                 </td>
                                 <td style="text-align: center;">
-                                    <span t-if="line.product_id.categ_id == line.env.ref('__setup__.product_categ_frigo')">
+                                    <span t-if="line.product_id.categ_id == line.env.ref('specific_data.product_categ_frigo')">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </span>
                                 </td>

@@ -94,13 +94,14 @@ class Sale(models.Model):
         self.ensure_one()
         report_pages = super(Sale, self).order_lines_layouted()
 
-        pharmacy_category = self.env.ref('__setup__.product_categ_humain')
+        pharmacy_category = self.env.ref('specific_data.product_categ_humain')
         pharmacy_lines = self.env['sale.order.line'].search([
             ('order_id', '=', self.id),
             ('product_id.categ_id', 'child_of', pharmacy_category.id),
         ]).sorted()
 
-        cascade_category = self.env.ref('__setup__.product_categ_importation')
+        cascade_category = self.env.ref(
+            'specific_data.product_categ_importation')
         cascade_lines = self.env['sale.order.line'].search([
             ('order_id', '=', self.id),
             ('product_id.categ_id', 'child_of', cascade_category.id),

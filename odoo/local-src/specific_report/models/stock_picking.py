@@ -67,11 +67,13 @@ class StockPicking(models.Model):
 
                 main_categ = self.env.ref('product.product_category_all')
                 equipment_categ = \
-                    self.env.ref('__setup__.product_categ_materiel')
-                food_categ = self.env.ref('__setup__.product_categ_ali')
-                drug_categ = self.env.ref('__setup__.product_categ_medoc')
-                fridge_categ = self.env.ref('__setup__.product_categ_frigo')
-                human_categ = self.env.ref('__setup__.product_categ_humain')
+                    self.env.ref('specific_data.product_categ_materiel')
+                food_categ = self.env.ref('specific_data.product_categ_ali')
+                drug_categ = self.env.ref('specific_data.product_categ_medoc')
+                fridge_categ = self.env.ref(
+                    'specific_data.product_categ_frigo')
+                human_categ = self.env.ref(
+                    'specific_data.product_categ_humain')
 
                 # We need to have the main product category of the product
                 # Equipment, Food, Drug, Fridge, Human drug

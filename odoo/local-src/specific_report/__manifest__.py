@@ -18,6 +18,7 @@
         'delivery_rounds',
         'specific_purchase',
         'l10n_be_invoice_bba',
+        'specific_data',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
