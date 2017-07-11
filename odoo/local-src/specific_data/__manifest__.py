@@ -15,7 +15,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/partner.category.csv',
+        'data/res.partner.category.csv',
         'data/product.category.csv',
         'data/product.pricelist.csv'
     ],
