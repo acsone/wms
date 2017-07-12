@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ROOT>
+  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
+    <Row>
+      <Sku>0001</Sku>
+      <StartDate>20170712</StartDate>
+      <EndDate>20171231</EndDate>
+      <Action>Create</Action>
+      <Percent>5.00</Percent>
+      <CustomerId>joe</CustomerId>
+    </Row>
+    <Row>
+      <Sku>0002</Sku>
+      <StartDate>20170731</StartDate>
+      <EndDate>20170831</EndDate>
+      <Action>Create</Action>
+      <Percent>15.00</Percent>
+      <CustomerId>tom</CustomerId>
+    </Row>
+  </Root>
+</ROOT>

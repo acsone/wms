@@ -66,6 +66,7 @@ class ESBExporterMixin(AbstractComponent):
         assert writer_type
         writer_usage = writer_type + '.xml.writer'
         writer = self.work.component(usage=writer_usage)
+<<<<<<< HEAD
         # TODO: how many items could we have here?
         # Shall we split this in chunks?
         prepared = self._prepare_item(items)
