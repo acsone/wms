@@ -11,13 +11,6 @@ from ..common import req
 
 
 @anthem.log
-def create_partner_categories(ctx):
-    """ Creating partner categories """
-    content = resource_stream(req, 'data/install/partner.category.csv')
-    load_csv_stream(ctx, 'partner.alcyon_category', content, delimiter=',')
-
-
-@anthem.log
 def create_customer_category(ctx):
     """ Importing suppliers from csv """
     content = resource_stream(req, 'data/install/customer.category.csv')
@@ -27,5 +20,4 @@ def create_customer_category(ctx):
 @anthem.log
 def main(ctx):
     """ Configuring partner """
-    create_partner_categories(ctx)
     create_customer_category(ctx)
