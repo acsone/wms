@@ -217,6 +217,11 @@ migration:
           - specific_stock
           - account_invoice_tax_required
     - version: 10.5.0
+      modes:
+        full:
+          operations:
+            pre:
+              - psql -f /opt/odoo/songs/updates/update_10_5_0/update.sql
       addons:
         upgrade:
           # Specific modules
