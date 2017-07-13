@@ -376,7 +376,7 @@ def create_picking_types(ctx):
          'color': color_ali,
          'sequence': 5,
          'zone_code': '04',
-         'food_picking_type': True,
+         'food_type': True,
          },
         {'xmlid': '__setup__.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
