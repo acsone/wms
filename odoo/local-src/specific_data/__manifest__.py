@@ -16,7 +16,6 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/alcyon.partner_category.csv',
         'data/product.category.csv',
         'data/product.pricelist.csv'
     ],

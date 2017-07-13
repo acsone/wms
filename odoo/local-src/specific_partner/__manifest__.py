@@ -11,10 +11,10 @@
     'depends': [
         'sale',
         'delivery_rounds',
-        'specific_data',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/partner.alcyon_category.csv',
         'security/ir.model.access.csv',
         'views/res_partner.xml',
     ],
