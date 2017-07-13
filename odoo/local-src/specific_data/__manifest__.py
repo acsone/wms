@@ -12,10 +12,11 @@
         'base',
         'product',
         'stock',
+        'specific_partner'
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'data/res.partner.category.csv',
+        'data/alcyon.partner_category.csv',
         'data/product.category.csv',
         'data/product.pricelist.csv'
     ],

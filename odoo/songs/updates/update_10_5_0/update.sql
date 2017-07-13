@@ -8,7 +8,7 @@ AND model = 'product.category';
 UPDATE ir_model_data
 SET module = 'specific_data'
 WHERE module = '__setup__'
-AND model = 'res.partner.category';
+AND model = 'alcyon.partner_category';
 
 UPDATE ir_model_data
 SET module = 'specific_data'
