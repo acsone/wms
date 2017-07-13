@@ -58,5 +58,15 @@ def falsy2emptystring(field):
         if not value:
             return ''
         return value
+    return modifier
 
+
+def two_digits_fractional(field):
+    """ A modifier intended to be used on the ``direct`` mappings.
+
+        Convert a number so it always has 2 digits on the fractional part
+
+    """
+    def modifier(self, record, to_attr):
+        return '{0:.2f}'.format(record[field])
     return modifier
