@@ -22,20 +22,6 @@ def set_customer_lead_time(ctx):
 
 
 @anthem.log
-def import_product_categories(ctx):
-    """ Importing product.categories from csv"""
-
-    load_ctx = ctx.env.context.copy()
-    load_ctx.update({'defer_parent_store_computation': True})
-    Category = ctx.env['product.category'].with_context(load_ctx)
-    content = resource_stream(req, 'data/install/product.category.csv')
-    load_csv_stream(ctx, Category, content, delimiter=',')
-
-    with ctx.log(u"Compute parent_left, parent_right"):
-        ctx.env['product.category']._parent_store_compute()
-
-
-@anthem.log
 def import_accounting_products(ctx):
     """ Importing accounting products """
     content = resource_stream(req, 'data/install/accounting_products.csv')
@@ -46,5 +32,4 @@ def import_accounting_products(ctx):
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
-    import_product_categories(ctx)
     import_accounting_products(ctx)

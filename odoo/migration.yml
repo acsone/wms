@@ -102,6 +102,7 @@ migration:
           - sale_product_additional
           - specific_account
           - specific_base
+          - specific_data
           - specific_partner
           - specific_print
           - specific_product
@@ -215,3 +216,13 @@ migration:
           - specific_product
           - specific_stock
           - account_invoice_tax_required
+    - version: 10.5.0
+      modes:
+        full:
+          operations:
+            pre:
+              - psql -f /opt/odoo/songs/updates/update_10_5_0/update.sql
+      addons:
+        upgrade:
+          # Specific modules
+          - specific_data

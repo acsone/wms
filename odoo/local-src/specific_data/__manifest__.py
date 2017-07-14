@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Camptocamp SA
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Specific product for Alcyon',
+    'name': 'Specific datas for Alcyon',
     'version': '10.0.1.0.0',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
-    'category': 'Sales',
+    'category': 'Base',
     'depends': [
-        'product_price_category',
-        'sale',
+        'base',
+        'product',
         'stock',
-        'specific_data',
+        'specific_partner'
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        'views/product_pricelist.xml',
-        'views/product_template.xml',
-        'views/product_product.xml',
+        'data/product.category.csv',
+        'data/product.pricelist.csv'
     ],
+    'post_init_hook': 'post_init_hook',
     'installable': True,
 }

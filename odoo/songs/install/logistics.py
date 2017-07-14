@@ -246,16 +246,16 @@ def create_putaway(ctx):
 
     parking_strat = [
         ('__setup__.stock_putaway_strat_parking_medoc',
-         '__setup__.product_categ_medoc',
+         'specific_data.product_categ_medoc',
          '__setup__.stock_location_parking_medoc'),
         ('__setup__.stock_putaway_strat_parking_aliment',
-         '__setup__.product_categ_ali',
+         'specific_data.product_categ_ali',
          '__setup__.stock_location_parking_ali'),
         ('__setup__.stock_putaway_strat_parking_materiel',
-         '__setup__.product_categ_materiel',
+         'specific_data.product_categ_materiel',
          '__setup__.stock_location_parking_medoc'),
         ('__setup__.stock_putaway_strat_parking_materiel',
-         '__setup__.product_categ_frigo',
+         'specific_data.product_categ_frigo',
          '__setup__.stock_location_parking_frigo'),
         ]
     for xmlid, categ, loc in parking_strat:
@@ -280,16 +280,16 @@ def create_putaway(ctx):
         })
     onorders = [
         ('__setup__.stock_putaway_strat_onorder_ali',
-         '__setup__.product_categ_ali',
+         'specific_data.product_categ_ali',
          '__setup__.stock_location_order_ali'),
         ('__setup__.stock_putaway_strat_onorder_medoc',
-         '__setup__.product_categ_medoc',
+         'specific_data.product_categ_medoc',
          '__setup__.stock_location_order_medoc'),
         ('__setup__.stock_putaway_strat_onorder_frigo',
-         '__setup__.product_categ_frigo',
+         'specific_data.product_categ_frigo',
          '__setup__.stock_location_order_frigo'),
         ('__setup__.stock_putaway_strat_onorder_mat',
-         '__setup__.product_categ_materiel',
+         'specific_data.product_categ_materiel',
          '__setup__.stock_location_order_mat'),
     ]
     for xmlid, categ, loc in onorders:
@@ -376,6 +376,7 @@ def create_picking_types(ctx):
          'color': color_ali,
          'sequence': 5,
          'zone_code': '04',
+         'food_type': True,
          },
         {'xmlid': '__setup__.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
@@ -602,13 +603,13 @@ def create_routes(ctx):
 def assign_route_categories(ctx):
     """ Assigning routes to product categories """
     ref = ctx.env.ref
-    categs = [('__setup__.product_categ_materiel',
+    categs = [('specific_data.product_categ_materiel',
                '__setup__.stock_location_route_pick_materiel'),
-              ('__setup__.product_categ_ali',
+              ('specific_data.product_categ_ali',
                '__setup__.stock_location_route_pick_ali'),
-              ('__setup__.product_categ_medoc',
+              ('specific_data.product_categ_medoc',
                '__setup__.stock_location_route_pick_medoc'),
-              ('__setup__.product_categ_frigo',
+              ('specific_data.product_categ_frigo',
                '__setup__.stock_location_route_pick_froid'),
               ]
     for category_xmlid, route_xmlid in categs:

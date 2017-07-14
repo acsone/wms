@@ -9,7 +9,7 @@
             <field name="rule_group">sale</field>
             <field name="model">sale.order.line</field>
             <field name="code">
-veterinary = object.env.ref('__setup__.partner_category_veterinary')
+veterinary = object.env.ref('specific_partner.partner_category_veterinary')
 if object.order_id.partner_id.alcyon_category_id != veterinary:
     narcotic = object.env.ref('__init.product_categ_medoc')
     if object.product_id.categ_id == narcotic:
@@ -51,7 +51,7 @@ if object.amount_total &lt; 100:
             <field name="rule_group">sale</field>
             <field name="model">sale.order</field>
             <field name="code">
-material_category = object.env.ref('__setup__.product_categ_materiel')
+material_category = object.env.ref('specific_data.product_categ_materiel')
 material_categories = object.env['product.category'].search([('id', 'child_of', material_category.ids)])
 if sum([line.price_total for line in object.order_line.filtered(lambda l: l.product_id.categ_id.id in material_categories.ids)]) &gt; 1000:
     failed=True

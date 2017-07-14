@@ -1,6 +1,5 @@
 id,name
 __setup__.product_pricelist_pb1,Prix de vente brut 1
-__setup__.product_pricelist_pb2,Prix de vente brut 2
 __setup__.product_pricelist_supplier,Promotions fournisseurs
 __setup__.pricelist_5,5. Clients remise 5 %
 __setup__.pricelist_6,"6. Officine LIFE 6,4 %"

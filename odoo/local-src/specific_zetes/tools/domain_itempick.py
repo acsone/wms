@@ -110,8 +110,9 @@ class Itempick(DomainInterface):
         request.env.cr.execute(query, (picking_id, ))
         query_result = request.env.cr.fetchone()
 
-        type_food = request.env.ref('__setup__.stock_picking_type_ali')
-        if query_result and query_result[0] == type_food.id:
+        type_food = request.env['stock.picking.type'].search([
+            ('food_type', '=', True)])
+        if query_result and type_food and query_result[0] == type_food.id:
             print_on_portable_printer = '1'
         else:
             print_on_portable_printer = '0'

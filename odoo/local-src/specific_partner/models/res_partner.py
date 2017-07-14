@@ -28,7 +28,8 @@ class ResPartner(models.Model):
 
     @api.depends('alcyon_category_id')
     def _compute_depot_number_visible(self):
-        veterinary = self.env.ref('__setup__.partner_category_veterinary')
+        veterinary = self.env.ref(
+            'specific_partner.partner_category_veterinary')
         for partner in self:
             partner.depot_number_visible = (
                 partner.alcyon_category_id == veterinary
