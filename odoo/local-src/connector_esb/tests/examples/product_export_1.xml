@@ -15,15 +15,15 @@
       <!-- name in nl_BE -->
       <Refdem>Export me pls (NL)</Refdem>
       <!-- supplier -->
-      <Gesfou></Gesfou>
-      <!-- brand -->
-      <Cplz25></Cplz25>
+      <Gesfou>79001</Gesfou>
+      <!-- manufacturer -->
+      <Cplz25>79001</Cplz25>
       <!-- UoM -->
-      <Gesunv></Gesunv>
+      <Gesunv>0</Gesunv>
       <!-- always 0 (UOM 2) -->
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
-      <Gescrt>2017/07/04</Gescrt>
+      <Gescrt>2017/07/13</Gescrt>
       <!-- active -->
       <Cplz19>1</Cplz19>
       <!-- 1 if procurement on order -->
@@ -31,7 +31,7 @@
       <!-- weight -->
       <Gespnt>10.0</Gespnt>
       <!-- volume -->
-      <Cp2z08>1.0</Cp2z08>
+      <Cp2z08>0.01</Cp2z08>
       <!-- related to free accessory, always empty -->
       <Cp2z22></Cp2z22>
       <!-- related to free accessory, always 0 -->
@@ -45,43 +45,43 @@
       <!-- comment NL BE, always empty -->
       <Warcnl></Warcnl>
       <!-- VAT rate -->
-      <Gesctv></Gesctv>
+      <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
       <Gescsa>1</Gescsa>
       <!-- expiry date 0 if no expiry -->
-      <LotEch>2017/11/16</LotEch>
-      <!-- cnk_codk -->
-      <Cplz03></Cplz03>
-      <!-- product type, 0 = product, 1 = conso, 2/3 = service, 9 = various? -->
-      <Gescge>0</Gescge>
+      <LotEch>0</LotEch>
+      <!-- cnk_code -->
+      <Cplz03>CNK_001</Cplz03>
+      <!-- stockable -->
+      <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 1 if it can be deconditioned -->
-      <Gescov></Gescov>
+      <!-- 0 if it can be deconditioned -->
+      <Gescov>1</Gescov>
       <!-- always 0 -->
       <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
-      <Cplz07></Cplz07>
+      <Cplz07>BBB</Cplz07>
       <!-- always 0 -->
       <Cp2z17>0</Cp2z17>
       <!-- always 0 -->
       <Cp2z19>0</Cp2z19>
       <!-- height in cm -->
-      <Cp2z01>2.0</Cp2z01>
+      <Cp2z01>7.0</Cp2z01>
       <!-- length in cm -->
-      <Cp2z03>2.5</Cp2z03>
+      <Cp2z03>8.5</Cp2z03>
       <!-- width in cm -->
-      <Cp2z05>3.0</Cp2z05>
+      <Cp2z05>9.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA></GMA>
+      <GMA>0</GMA>
       <!-- price_categ_id -->
-      <ALI></ALI>
+      <ALI>1</ALI>
       <!-- price_categ_id -->
-      <ALG></ALG>
+      <ALG>0</ALG>
       <!-- price_categ_id -->
-      <ALH></ALH>
+      <ALH>0</ALH>
       <!-- price_categ_id -->
-      <IMP></IMP>
+      <IMP>0</IMP>
     </Row>
     <Row>
       <!-- barcode -->
@@ -97,23 +97,23 @@
       <!-- name in nl_BE -->
       <Refdem>Export me pls 2 (NL)</Refdem>
       <!-- supplier -->
-      <Gesfou></Gesfou>
-      <!-- brand -->
-      <Cplz25></Cplz25>
+      <Gesfou>65852</Gesfou>
+      <!-- manufacturer -->
+      <Cplz25>65852</Cplz25>
       <!-- UoM -->
-      <Gesunv></Gesunv>
+      <Gesunv>2</Gesunv>
       <!-- always 0 (UOM 2) -->
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
-      <Gescrt>2017/07/04</Gescrt>
+      <Gescrt>2017/07/13</Gescrt>
       <!-- active -->
       <Cplz19>1</Cplz19>
       <!-- 1 if procurement on order -->
-      <Gescde>1</Gescde>
+      <Gescde>0</Gescde>
       <!-- weight -->
       <Gespnt>5.0</Gespnt>
       <!-- volume -->
-      <Cp2z08>1.0</Cp2z08>
+      <Cp2z08>0.005</Cp2z08>
       <!-- related to free accessory, always empty -->
       <Cp2z22></Cp2z22>
       <!-- related to free accessory, always 0 -->
@@ -127,43 +127,43 @@
       <!-- comment NL BE, always empty -->
       <Warcnl></Warcnl>
       <!-- VAT rate -->
-      <Gesctv></Gesctv>
+      <Gesctv>009</Gesctv>
       <!-- lot tracking enabled -->
       <Gescsa>1</Gescsa>
       <!-- expiry date 0 if no expiry -->
-      <LotEch>2017/11/16</LotEch>
-      <!-- cnk_codk -->
-      <Cplz03></Cplz03>
-      <!-- product type, 0 = product, 1 = conso, 2/3 = service, 9 = various? -->
-      <Gescge>0</Gescge>
+      <LotEch>0</LotEch>
+      <!-- cnk_code -->
+      <Cplz03>CNK_002</Cplz03>
+      <!-- stockable -->
+      <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 1 if it can be deconditioned -->
-      <Gescov></Gescov>
+      <!-- 0 if it can be deconditioned -->
+      <Gescov>0</Gescov>
       <!-- always 0 -->
       <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
-      <Cplz07></Cplz07>
+      <Cplz07>CCC</Cplz07>
       <!-- always 0 -->
       <Cp2z17>0</Cp2z17>
       <!-- always 0 -->
       <Cp2z19>0</Cp2z19>
       <!-- height in cm -->
-      <Cp2z01>2.0</Cp2z01>
+      <Cp2z01>17.0</Cp2z01>
       <!-- length in cm -->
-      <Cp2z03>2.5</Cp2z03>
+      <Cp2z03>18.5</Cp2z03>
       <!-- width in cm -->
-      <Cp2z05>3.0</Cp2z05>
+      <Cp2z05>19.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA></GMA>
+      <GMA>0</GMA>
       <!-- price_categ_id -->
-      <ALI></ALI>
+      <ALI>0</ALI>
       <!-- price_categ_id -->
-      <ALG></ALG>
+      <ALG>1</ALG>
       <!-- price_categ_id -->
-      <ALH></ALH>
+      <ALH>0</ALH>
       <!-- price_categ_id -->
-      <IMP></IMP>
+      <IMP>0</IMP>
     </Row>
     <Row>
       <!-- barcode -->
@@ -179,17 +179,17 @@
       <!-- name in nl_BE -->
       <Refdem>Export me pls 3 (NL)</Refdem>
       <!-- supplier -->
-      <Gesfou></Gesfou>
-      <!-- brand -->
-      <Cplz25></Cplz25>
+      <Gesfou>79001</Gesfou>
+      <!-- manufacturer -->
+      <Cplz25>79001</Cplz25>
       <!-- UoM -->
-      <Gesunv></Gesunv>
+      <Gesunv>0</Gesunv>
       <!-- always 0 (UOM 2) -->
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
-      <Gescrt>2017/07/04</Gescrt>
+      <Gescrt>2017/07/13</Gescrt>
       <!-- active -->
-      <Cplz19>1</Cplz19>
+      <Cplz19>0</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>1</Gescde>
       <!-- weight -->
@@ -209,43 +209,43 @@
       <!-- comment NL BE, always empty -->
       <Warcnl></Warcnl>
       <!-- VAT rate -->
-      <Gesctv></Gesctv>
+      <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
-      <Gescsa>1</Gescsa>
+      <Gescsa>0</Gescsa>
       <!-- expiry date 0 if no expiry -->
-      <LotEch>2017/11/16</LotEch>
-      <!-- cnk_codk -->
-      <Cplz03></Cplz03>
-      <!-- product type, 0 = product, 1 = conso, 2/3 = service, 9 = various? -->
+      <LotEch>0</LotEch>
+      <!-- cnk_code -->
+      <Cplz03>CNK_003</Cplz03>
+      <!-- stockable -->
       <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 1 if it can be deconditioned -->
-      <Gescov></Gescov>
+      <!-- 0 if it can be deconditioned -->
+      <Gescov>1</Gescov>
       <!-- always 0 -->
       <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
-      <Cplz07></Cplz07>
+      <Cplz07>BBB</Cplz07>
       <!-- always 0 -->
       <Cp2z17>0</Cp2z17>
       <!-- always 0 -->
       <Cp2z19>0</Cp2z19>
       <!-- height in cm -->
-      <Cp2z01>2.0</Cp2z01>
+      <Cp2z01>27.0</Cp2z01>
       <!-- length in cm -->
-      <Cp2z03>2.5</Cp2z03>
+      <Cp2z03>28.5</Cp2z03>
       <!-- width in cm -->
-      <Cp2z05>3.0</Cp2z05>
+      <Cp2z05>29.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA></GMA>
+      <GMA>0</GMA>
       <!-- price_categ_id -->
-      <ALI></ALI>
+      <ALI>0</ALI>
       <!-- price_categ_id -->
-      <ALG></ALG>
+      <ALG>0</ALG>
       <!-- price_categ_id -->
-      <ALH></ALH>
+      <ALH>1</ALH>
       <!-- price_categ_id -->
-      <IMP></IMP>
+      <IMP>0</IMP>
     </Row>
   </Root>
 </ROOT>
