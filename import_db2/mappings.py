@@ -95,20 +95,20 @@ USERS = {
 }
 
 PARTNER_ALCYON_CATEGORY = {
-    1: '__setup__.partner_category_veterinary',
-    2: '__setup__.partner_category_pharmacy',
-    4: '__setup__.partner_category_callcenter',
-    5: '__setup__.partner_category_pharmacy',
-    6: '__setup__.partner_category_pharmacy',
-    7: '__setup__.partner_category_pharmacy',
-    9: '__setup__.partner_category_pharmacy',
-    10: '__setup__.partner_category_pharmacy',
-    15: '__setup__.partner_category_pharmacy',
-    16: '__setup__.partner_category_pharmacy',
-    17: '__setup__.partner_category_pharmacy',
-    18: '__setup__.partner_category_pharmacy',
-    19: '__setup__.partner_category_pharmacy',
-    20: '__setup__.partner_category_student',
+    1: 'specific_partner.partner_category_veterinary',
+    2: 'specific_partner.partner_category_pharmacy',
+    4: 'specific_partner.partner_category_callcenter',
+    5: 'specific_partner.partner_category_pharmacy',
+    6: 'specific_partner.partner_category_pharmacy',
+    7: 'specific_partner.partner_category_pharmacy',
+    9: 'specific_partner.partner_category_pharmacy',
+    10: 'specific_partner.partner_category_pharmacy',
+    15: 'specific_partner.partner_category_pharmacy',
+    16: 'specific_partner.partner_category_pharmacy',
+    17: 'specific_partner.partner_category_pharmacy',
+    18: 'specific_partner.partner_category_pharmacy',
+    19: 'specific_partner.partner_category_pharmacy',
+    20: 'specific_partner.partner_category_student',
 }
 
 CUSTOMER_CATEGORY = {
