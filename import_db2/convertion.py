@@ -81,7 +81,8 @@ class ProductMapper(EntityMapper):
         value = db2_entity['gescre'].strip()
         if value:
             value = self.get_xml_id(
-                'product_price_category', value.lower(), prefix='__setup__'
+                'product_price_category', value.lower(),
+                prefix='specific_product'
             )
         odoo_entity['price_category_id'] = OrderedDict(id=value)
 
