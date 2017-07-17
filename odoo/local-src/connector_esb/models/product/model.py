@@ -23,6 +23,14 @@ class ProductProduct(models.Model):
                     )
         return super(ProductProduct, self).write(vals)
 
+    def unlink(self):
+        for record in self:
+            if self.esb_exported:
+                raise exceptions.UserError(
+                    _("The client has already been exported, "
+                      "it can be archived but not deleted."))
+        return super(ProductProduct, self).unlink()
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
