@@ -93,6 +93,7 @@ migration:
           - stock_available_immediately
           ### local-src
           #- claim_from_reception
+          - connector_esb
           - delivery_rounds
           - delivery_rounds_assign
           - pricelist_discount
@@ -217,6 +218,9 @@ migration:
           - specific_stock
           - account_invoice_tax_required
     - version: 10.5.0
+      operations:
+        post:
+          - anthem songs.updates.update_10_5_0.update::main
       modes:
         full:
           operations:
@@ -230,4 +234,5 @@ migration:
           - specific_account
           - specific_data
           - specific_sale
+          - specific_product
           - connector_esb

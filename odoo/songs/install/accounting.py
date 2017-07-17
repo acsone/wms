@@ -338,6 +338,19 @@ def create_account_types(ctx):
 
 
 @anthem.log
+def set_esb_references(ctx):
+    """ Set ESB references """
+    refs = (
+        ('l10n_be.1_attn_VAT-IN-V81-00', '0'),
+        ('l10n_be.1_attn_VAT-IN-V81-06', '1'),
+        ('l10n_be.1_attn_VAT-IN-V81-12', '2'),
+        ('l10n_be.1_attn_VAT-IN-V81-21', '3'),
+    )
+    for xmlid, esb_ref in refs:
+        ctx.env.ref(xmlid).esb_ref = esb_ref
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -356,3 +369,4 @@ def main(ctx):
     settings(ctx)
     default_values(ctx)
     setup_sequences(ctx)
+    set_esb_references(ctx)
