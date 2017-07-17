@@ -408,3 +408,6 @@ class DB2Importer(models.Model):
         for table in self.table_ids:
             table.get_from_db2(db2_cr, self.date_start, self.date_end)
         conn.close()
+        self.last_import = fields.Datetime.now()
+        self.date_start = self.last_import
+        self.date_end = fields.datetime.now() + timedelta(days=10)
