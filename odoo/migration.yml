@@ -226,5 +226,6 @@ migration:
         upgrade:
           # Specific modules
           - specific_data
+          - specific_sale
           - connector_esb
           - account_cutoff_accrual_picking

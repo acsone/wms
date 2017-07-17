@@ -13,6 +13,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-929: Fix sale order report inherit
+
 **Build**
 
 **Documentation**
