@@ -17,6 +17,8 @@ _logger = logging.getLogger(__name__)
 
 def convert_date(prefix, db2_row):
     dd = db2_row[prefix + 'jj']
+    if dd == 0:
+        return False
     mm = db2_row[prefix + 'mm']
     Y = "%s%s" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
     return "%s-%02i-%02i" % (Y, mm, dd)
@@ -46,6 +48,17 @@ def add_xmlid(record, xmlid, noupdate=False):
         'res_id': record.id,
         'noupdate': noupdate,
     })
+
+
+def create_or_update(model, xmlid, values):
+    """ Create or update a record matching xmlid with values """
+    record = model.env.ref(xmlid, raise_if_not_found=False)
+    if record:
+        record.update(values)
+    else:
+        record = model.create(values)
+        add_xmlid(record, xmlid)
+    return record
 
 
 def convert_product_id(product_code):
@@ -83,6 +96,7 @@ class DB2MapperSaleOrder(object):
                    [d[0] for d in cr.description]
                )}
 
+        create_date = convert_date('eccc', row)
         values = {
             'name': row['eccsui'],
             'origin': row['eccrin'],
@@ -90,16 +104,16 @@ class DB2MapperSaleOrder(object):
             'user_id': rec.env.ref(mappings.USERS[row['eccrep']]).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
-            'create_date': convert_date('eccc', row),
-            'write_date': convert_date('eccm', row),
+            'create_date': create_date,
+            'write_date': convert_date('eccm', row) or create_date,
             'partner_id': rec.env.ref(convert_customer(int(row['ecccli']))).id,
         }
 
-        new = rec.env['sale.order'].create(values)
-
-        xml_id = '__import__.sale_order_%s_%s_%s' % (
-            row['eccsui'], int(row['ecccli']), row['eccsuc'])
-        add_xmlid(new, xml_id.strip())
+        # transform float and string to int to remove . and spaces
+        # while creating xmlid
+        xmlid = '__import__.sale_order_%s_%s_%s' % (
+            row['eccsui'], int(row['ecccli']), int(row['eccsuc']))
+        new = create_or_update(rec.env['sale.order'], xmlid.strip(), values)
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
@@ -121,6 +135,7 @@ class DB2MapperSaleOrder(object):
             if product_xmlid == '__setup__.product_other':
                 name = "Divers"
             product = rec.env.ref(product_xmlid)
+            create_date = convert_date('dccc', line)
             values = {
                 'order_id': new.id,
                 'product_id': product.id,
@@ -131,12 +146,16 @@ class DB2MapperSaleOrder(object):
                 'qty_delivered': line['dccqul'],
                 'price_unit': line['dccpvd'],
                 'discount': line['dccrem'],
-                'create_date': convert_date('dccc', line),
-                'write_date': convert_date('dccm', line),
+                'create_date': create_date,
+                'write_date': convert_date('dccm', line) or create_date,
             }
 
-            rec.env['sale.order.line'].with_context(
-                create_original_line_too=True).create(values)
+            SOLine = rec.env['sale.order.line'].with_context(
+                create_original_line_too=True)
+            xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
+                row['eccsui'], int(row['ecccli']),
+                int(row['eccsuc']), int(line['dccnli']))
+            create_or_update(SOLine, xmlid, values)
             if line['dccquc'] > line['dccqul']:
                 is_delivered = False
 
@@ -148,13 +167,13 @@ class DB2MapperSaleOrder(object):
 class DB2Importer(models.Model):
     _name = 'db2.importer.table'
 
-
     _PREFIX = 'db2_'
 
     schema = fields.Char(required=True)
     table_name = fields.Char(required=True)
     table_prefix = fields.Char(
         help="3 firsts character on each db2 column")
+    id_columns = fields.Char(required=True)
 
     last_import = fields.Date()
 
@@ -291,7 +310,6 @@ class DB2Importer(models.Model):
     def get_from_db2(self, db2_cr, date_start, date_end):
         cr = self.env.cr
         odoo_table_name = self._PREFIX + self.table_name.lower()
-        get_updates = "get_updates" in self.env.context
         cr.execute(
             "SELECT 1 FROM information_schema.tables"
             " WHERE table_name = '{}'".format(odoo_table_name))
