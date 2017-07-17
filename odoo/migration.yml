@@ -227,3 +227,4 @@ migration:
           # Specific modules
           - specific_data
           - connector_esb
+          - account_cutoff_accrual_picking

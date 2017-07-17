@@ -43,3 +43,6 @@
 [submodule "odoo/external-src/report-print-send"]
 	path = odoo/external-src/report-print-send
 	url = git@github.com:OCA/report-print-send.git
+[submodule "odoo/external-src/account-closing"]
+	path = odoo/external-src/account-closing
+	url = git@github.com:camptocamp/account-closing.git
