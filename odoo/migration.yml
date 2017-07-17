@@ -226,4 +226,5 @@ migration:
         upgrade:
           # Specific modules
           - specific_data
+          - specific_sale
           - connector_esb
