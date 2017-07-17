@@ -80,3 +80,9 @@ class ESBBackend(models.Model):
     def cron_export_customer_address(self):
         backend = self.get_singleton()
         backend._get_timestamp('res.partner', 'customer.address').export()
+
+    @api.model
+    def cron_export_promotion_alcyon(self):
+        backend = self.get_singleton()
+        backend._get_timestamp('product.pricelist.item',
+                               'promotion.alcyon').export()

@@ -36,4 +36,11 @@
     <field name="export_filename">CustomerAddress_{date}_{time}.xml</field>
   </record>
 
+  <record id="esb_timestamp_promotion_alcyon" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">product.pricelist.item</field>
+    <field name="kind">promotion.alcyon</field>
+    <field name="export_filename">AlcyonPromotion_{date}.xml</field>
+  </record>
+
 </odoo>

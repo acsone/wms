@@ -23,6 +23,7 @@
         'pricelist_discount',
         'delivery_rounds',
         'specific_print',
+        'product_price_category',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
