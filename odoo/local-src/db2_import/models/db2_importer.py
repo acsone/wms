@@ -216,7 +216,8 @@ class DB2Importer(models.Model):
             "id serial PRIMARY KEY,"
             "{}"
             "{}"
-            ")".format(odoo_table_name, columns, add_columns))
+            ",UNIQUE({})"
+            ")".format(odoo_table_name, columns, add_columns, self.id_columns))
         cr.execute(query)
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
@@ -338,12 +339,17 @@ class DB2Importer(models.Model):
         columns = rows[0].cursor_description
         column_names = ",".join([col[0] for col in columns])
 
-        insert_query = (
+        query = (
             u"INSERT INTO {table_name} ({column_names})"
-             " VALUES ({placeholders}) RETURNING id"
+             " VALUES ({placeholders})"
+             " ON CONFLICT ({id_columns}) DO UPDATE"
+             " SET {update_cols}"
+             " RETURNING id"
         ).format(column_names=column_names,
+                 id_columns=self.id_columns,
                  table_name=odoo_table_name,
-                 placeholders=','.join(['%s']*len(columns)))
+                 placeholders=','.join(['%s']*len(columns)),
+                 update_cols=','.join([col[0] + ' = %s' for col in columns]))
         eta = max(0, min(self.eta or 2, 23))
         now = datetime.now()
         next_eta = now.replace(hour=eta, minute=0, second=0, microsecond=0)
@@ -351,17 +357,8 @@ class DB2Importer(models.Model):
         if next_eta < now:
             next_eta += timedelta(days=1)
         for row in rows:
-            to_update = False
-            values = [convert_coding(v) for v in row]
-            if get_updates:
-                # check if needed to be updated
-                # do a select with primary keys
-                to_update = True
-            if to_update:
-                # TODO
-                query = "UPDATE"
-            else: # insert
-                query = insert_query
+            # Make list of values (x2) for insert and update placeholders
+            values = [convert_coding(v) for v in row] * 2
             # Using mogrify to transform DECIMAL in int
             cr.execute(cr.mogrify(query, values))
             new_id = cr.fetchone()[0]
