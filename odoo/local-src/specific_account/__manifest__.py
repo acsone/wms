@@ -23,12 +23,15 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        # Data
         'data/account_tax_group.xml',
+        # Views
+        'views/account_analytic_tag.xml',
+        'views/account_invoice_report.xml',
         'views/account_invoice_view.xml',
-        'views/res_config.xml',
         'views/ir_sequence.xml',
         'views/menu.xml',
-        'views/account_analytic_tag.xml',
+        'views/res_config.xml',
     ],
     'installable': True,
 }

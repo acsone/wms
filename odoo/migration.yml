@@ -224,7 +224,9 @@ migration:
               - psql -f /opt/odoo/songs/updates/update_10_5_0/update.sql
       addons:
         upgrade:
+          ## oca/account-closing
+          - account_cutoff_accrual_picking
           # Specific modules
+          - specific_account
           - specific_data
           - connector_esb
-          - account_cutoff_accrual_picking
