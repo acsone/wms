@@ -13,6 +13,7 @@
         'product',
         'sale',
         'purchase',
+        'specific_partner',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

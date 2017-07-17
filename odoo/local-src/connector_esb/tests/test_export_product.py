@@ -4,7 +4,6 @@
 
 from odoo import tools, fields
 from .common import ESBXMLTestCase
-import os
 
 
 class ExportProductTestCase(ESBXMLTestCase):
@@ -90,15 +89,6 @@ class ExportProductTestCase(ESBXMLTestCase):
             'WHERE id=%s'.format(self.model._table),
             (dt, item_id)
         )
-
-    def read_test_file(self, filename):
-        path = os.path.join(
-            os.path.dirname(__file__),
-            'examples',
-            filename
-        )
-        with open(path, 'r') as thefile:
-            return thefile.read()
 
     def test_mapper(self):
         expected = {

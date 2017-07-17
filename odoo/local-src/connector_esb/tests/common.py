@@ -2,6 +2,8 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import os
+
 from collections import defaultdict
 from odoo.addons.component.tests.common import SavepointComponentCase
 
@@ -88,3 +90,12 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             raise AssertionError(u'XML does not match:\n\n{}'.format(
                 '\n'.join(message)
             ))
+
+    def read_test_file(self, filename):
+        path = os.path.join(
+            os.path.dirname(__file__),
+            'examples',
+            filename
+        )
+        with open(path, 'r') as thefile:
+            return thefile.read()

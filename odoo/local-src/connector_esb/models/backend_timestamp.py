@@ -15,13 +15,17 @@ class ESBBackendTimestamp(models.Model):
         comodel_name='esb.backend',
         string='Backend Id',
         required=True,
+        readonly=True,
     )
     model = fields.Char(
         string='Model name',
-        required=True
+        required=True,
+        readonly=True,
     )
-    kind = fields.Char(
-        string='Kind of export'
+    kind = fields.Selection(
+        selection=[('pharmacy', 'pharmacy')],
+        string='Kind of export',
+        readonly=True,
     )
     last_export = fields.Datetime(
         string='Timestamp last export'
