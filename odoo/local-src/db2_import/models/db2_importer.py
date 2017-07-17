@@ -135,9 +135,8 @@ class DB2MapperSaleOrder(object):
                 'write_date': convert_date('dccm', line),
             }
 
-            rec.env['sale.order.line'].create(values)
-            #copy the line on original lines
-            rec.env['sale.order.line.original'].create(values)
+            rec.env['sale.order.line'].with_context(
+                create_original_line_too=True).create(values)
             if line['dccquc'] > line['dccqul']:
                 is_delivered = False
 
