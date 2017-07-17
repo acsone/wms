@@ -5,8 +5,6 @@ import pyodbc
 import socket
 from datetime import datetime, timedelta
 
-from . import mappings
-
 from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
 
@@ -97,11 +95,13 @@ class DB2MapperSaleOrder(object):
                )}
 
         create_date = convert_date('eccc', row)
+
+        user_xmlid =  '__setup__.res_user_%s' % row['eccrep']
         values = {
             'name': row['eccsui'],
             'origin': row['eccrin'],
             'client_order_ref': row['eccrcl'],
-            'user_id': rec.env.ref(mappings.USERS[row['eccrep']]).id,
+            'user_id': rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
             'create_date': create_date,
