@@ -366,6 +366,15 @@ class DB2Importer(models.Model):
 
             if self.create_job:
                 # Prepare a job to execute the creation
+                method_name = 'create_or_update_record'
+                model = repr(self)
+                func_string = "%s.%s(%s)" % (model, method_name, new_id)
+                count_job = self.env['queue.job'].search_count(
+                    [('model_name', '=', 'db2.importer.table'),
+                     ('func_string', '=', func_string),
+                     ('state', '!=', 'done')])
+                if count_job:
+                    continue
                 self.with_delay(eta=next_eta).create_or_update_record(new_id)
 
         self._setup_relations()
