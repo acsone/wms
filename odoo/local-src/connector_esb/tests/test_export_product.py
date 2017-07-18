@@ -249,7 +249,7 @@ class ExportProductTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
 
-        items = exporter.get_items()
+        items = exporter.get_items('')
         for unwanted in self.unexportable_records:
             self.assertNotIn(
                 unwanted, items,
