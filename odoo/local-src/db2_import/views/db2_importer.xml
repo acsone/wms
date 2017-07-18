@@ -12,6 +12,8 @@
             <field name="date_start"/>
             <field name="date_end"/>
             <field name="last_import"/>
+            <field name="mode"/>
+
             <field name="table_ids">
               <tree>
                 <field name="schema"/>
