@@ -22,6 +22,9 @@ class ExportStockTestCase(ESBXMLTestCase):
     def setup_records(self):
         # Use an existing product
         self.product_18 = self.env.ref('product.product_product_8')
+        # Set the esb_ref on the state to test
+        self.product_18.product_tmpl_id.state_id = 2
+        self.product_18.product_tmpl_id.state_id.esb_ref = 'tst'
         # Set existing quants to a very old date so they don't interfere
         self.env.cr.execute("update stock_quant set write_date='1900-01-01'")
         # Add a warehouses
@@ -78,7 +81,7 @@ class ExportStockTestCase(ESBXMLTestCase):
             'Stock': 75.0,
             'NextUseDate': self.use_date_2.strftime("%Y-%m-%d"),
             'SalesAverage': '0.000',
-            'ErpStockCode': '',
+            'ErpStockCode': 'tst',
             }
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

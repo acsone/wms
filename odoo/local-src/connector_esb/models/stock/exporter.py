@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 
@@ -40,7 +40,7 @@ class StockExportMapper(Component):
     def compute_sales_average(self, record):
         """ Compute the daily average quantity of sale on a year """
         sale_average = 0
-        # TODO : waiting for the correct formula to calculate this
+        # TODO : waiting for the correct formula to calculate this one
         # one_year_back = (datetime.today() -
         #                  timedelta(days=365)).strftime("%Y-%m-%d %H:%M:%S")
         # sol = self.env['sale.order.line'].search([
@@ -51,8 +51,8 @@ class StockExportMapper(Component):
 
     @mapping
     def compute_erpstockcode(self, record):
-        # The code field in product_state is not implemented yet [ALCN-912]
-        # return {'ErpStockCode': record.product_tmpl_id.state_id.code}
+        if record.product_tmpl_id.state_id:
+            return {'ErpStockCode': record.product_tmpl_id.state_id.esb_ref}
         return {'ErpStockCode': ''}
 
 
