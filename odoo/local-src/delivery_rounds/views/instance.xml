@@ -16,9 +16,11 @@
                         <div t-attf-class="#{kanban_color(record.color.raw_value)}">
                             <div class="o_kanban_card_header">
                                 <div class="o_kanban_card_header_title">
-                                    <div class="o_primary"><field name="vehicle_id"/></div>
+                                    <div class="o_primary"><field name="template_id"/></div>
                                     <div class="o_secondary">
-                                        <strong><field name="time" widget="float_time" class="oe_inline"/></strong>
+                                        <strong><field name="time_picking_planned" widget="float_time" class="oe_inline"/></strong>
+                                        |
+                                        <strong><field name="time_leave_planned" widget="float_time" class="oe_inline"/></strong>
                                         <!-- nodate is not transfered in the context from search view
                                         <field name="date" t-if="!user_context['nodate']"/>
                                         -->
@@ -56,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <field name="zone_ids"/>
+                                    <field name="itinerary_ids"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 o_kanban_primary_bottom" t-attf-style="#{(record.state.raw_value=='draft' and 'background-color: lightblue') or (record.state.raw_value=='open' and 'background-color: lightgreen') or ''}">
@@ -102,8 +104,9 @@
         <field name="arch" type="xml">
             <tree string="Delivery Rounds">
                 <field name="date" />
-                <field name="time" widget="float_time"/>
-                <field name="vehicle_id" />
+                <field name="time_picking_planned" widget="float_time"/>
+                <field name="time_leave_planned" widget="float_time"/>
+                <field name="template_id" />
                 <field name="name" />
                 <field name="state" />
             </tree>
@@ -122,20 +125,21 @@
                 </header>
                 <div class="oe_title">
                     <h1>
-                        <field name="vehicle_id" />
+                        <field name="template_id" />
                     </h1>
                 </div>
                 <group>
                     <group>
                         <field name="date" />
-                        <field name="time" widget="float_time"/>
+                        <field name="time_picking_planned" widget="float_time"/>
+                        <field name="time_leave_planned" widget="float_time"/>
                     </group>
                     <group>
                         <field name="name"/>
-                        <field name="zone_ids" widget="many2many_tags"/>
+                        <field name="itinerary_ids" widget="many2many_tags"/>
                     </group>
                 </group>
-                <button name="button_zone_import" type="object" string="Import from zone"/>
+                <button name="button_itinerary_import" type="object" string="Import from itinerary"/>
                 <notebook>
                     <page string="Deliveries">
                         <field name="shipping_ids" widget="many2many"
@@ -150,6 +154,10 @@
                             domain="[('picking_type_subcode', '=', 'PICK'), ('delivery_round_id', '=', False), ('state', 'in', ('partially_available', 'assigned'))]"
                             context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
                             />
+                    </page>
+                    <page string="Stat">
+                        <field name="stat_time_picking" widget="float_time"/>
+                        <field name="stat_time_leave" widget="float_time"/>
                     </page>
                 </notebook>
             </form>

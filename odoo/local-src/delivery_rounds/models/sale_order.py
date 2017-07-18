@@ -18,13 +18,13 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         result = super(SaleOrder, self).action_confirm()
         if self.carrier_id:
-            vehicle = self.carrier_id.delivery_vehicle_id
+            template = self.carrier_id.delivery_template_id
             delivery_round = self.env['round.instance'].search(
                 [
-                    ('vehicle_id', '=', vehicle.id),
+                    ('template_id', '=', template.id),
                     ('state', '!=', 'done')
                 ],
-                order='date asc, time asc',
+                order='date asc, time_leave_planned asc',
                 limit=1,
             )
             if delivery_round:

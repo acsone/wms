@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock.view_picking_internal_search"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <filter name="partner_delivery_zone_id" domain="[('partner_id.round_zone_ids', '=', False)]" string="Delivery Zone Missing"/>
+                <filter name="partner_delivery_itinerary_id" domain="[('partner_id.round_itinerary_ids', '=', False)]" string="Delivery Itinerary Missing"/>
             </field>
             <field name="picking_type_id" position="after">
                 <field name="delivery_round_id"/>
@@ -96,7 +96,7 @@
         <field name="search_view_id" ref="stock.view_picking_internal_search"/>
         <field name="help" type="html">
           <p>
-            List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a zone.
+            List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a itinerary.
           </p>
         </field>
     </record>

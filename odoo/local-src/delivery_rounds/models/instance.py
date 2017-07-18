@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import math
 
@@ -36,7 +19,7 @@ def float2time(value):
 
 class RoundInstance(models.Model):
     _name = 'round.instance'
-    _order = 'date desc, time asc'
+    _order = 'date desc, time_picking_planned asc'
     _rec_name = 'complete_name'
 
     name = fields.Char(
@@ -50,16 +33,27 @@ class RoundInstance(models.Model):
         required=True,
         states={'done': [('readonly', True)]},
         default=fields.Date.context_today)
-    time = fields.Float(
-        'Planned Time',
+
+    time_picking_planned = fields.Float(
+        'Planned Picking Start Time',
         states={'done': [('readonly', True)]},
         )
-    vehicle_id = fields.Many2one(
-        'round.vehicle', 'Vehicle',
+    time_leave_planned = fields.Float(
+        'Planned Vehicle Start Time',
+        states={'done': [('readonly', True)]},
+        )
+
+    stat_time_picking = fields.Float(
+        'Picking Start Time', readonly=True)
+    stat_time_leave = fields.Float(
+        'Vehicle Start Time', readonly=True)
+
+    template_id = fields.Many2one(
+        'round.template', 'Template',
         states={'done': [('readonly', True)]},
         ondelete='restrict')
     color = fields.Integer(
-        related='vehicle_id.color')
+        related='template_id.color')
     state = fields.Selection(
         [('draft', 'Draft'),
          ('open', 'Confirmed'),
@@ -67,9 +61,9 @@ class RoundInstance(models.Model):
         'State',
         default='draft')
 
-    zone_ids = fields.Many2many(
-        'round.zone',
-        string="Zones",
+    itinerary_ids = fields.Many2many(
+        'round.itinerary',
+        string="Itineraries",
         readonly=True)
 
     picking_ids = fields.One2many(
@@ -89,11 +83,11 @@ class RoundInstance(models.Model):
         compute='_get_complete_name', store=True)
 
     @api.multi
-    @api.depends('vehicle_id', 'date', 'time')
+    @api.depends('template_id', 'date', 'time_leave_planned')
     def _get_complete_name(self):
         for rec in self:
             rec.complete_name = '%s %s - %s' % (
-                rec.date, float2time(rec.time), rec.vehicle_id.display_name)
+                rec.date, float2time(rec.time_leave_planned), rec.template_id.display_name)
 
     @api.model
     def create(self, vals):
@@ -103,17 +97,17 @@ class RoundInstance(models.Model):
         return super(RoundInstance, self).create(vals)
 
     @api.multi
-    def button_zone_import(self):
+    def button_itinerary_import(self):
         return dict(self.env.ref(
-            'delivery_rounds.action_round_zone_import').read()[0])
+            'delivery_rounds.action_round_itinerary_import').read()[0])
 
     @api.multi
     def button_update(self):
-        for zone_id in self.zone_ids:
-            self._update_zone(zone_id)
+        for itinerary_id in self.itinerary_ids:
+            self._update_itinerary(itinerary_id)
 
-    def _update_zone(self, zone_id):
-        partner_ids = zone_id.partner_position_ids.mapped('partner_id.id')
+    def _update_itinerary(self, itinerary_id):
+        partner_ids = itinerary_id.partner_position_ids.mapped('partner_id.id')
         # call Try to reserve from stock the qty for confirmed pickings
         picking_confirmed = self.env['stock.picking'].search([
             ('partner_id', 'in', partner_ids),
@@ -138,20 +132,15 @@ class RoundInstance(models.Model):
 
     def find(self, partner_id):
         """ Find a delivery_round for this partner """
-        zone_ids = partner_id.round_zone_ids.mapped('zone_id.id')
+        itinerary_ids = partner_id.round_itinerary_ids.mapped(
+            'itinerary_id.id')
         instance = self.search([
             ('state', '=', 'draft'),
-            ('zone_ids', 'in', zone_ids),
+            ('itinerary_ids', 'in', itinerary_ids),
             ], limit=1)
         if instance:
             return instance[0]
-        return None  # do not automatically create new round instance
-        # zone_ids = list(set(zone.id + zone.vehicle_id.zone_ids.ids))
-        # instance = self.create({
-        #     'vehicle': zone.vehicle_id.id,
-        #     'zone_ids': zone_ids
-        #     })  # what date???
-        # return instance
+        return None
 
     count_picking_available_total = fields.Integer(
         'Picking Available Total',

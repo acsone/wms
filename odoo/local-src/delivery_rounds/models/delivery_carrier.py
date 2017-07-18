@@ -8,7 +8,7 @@ from odoo import models, fields
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_vehicle_id = fields.Many2one(
-        comodel_name='round.vehicle',
-        string='Delivery vehicle',
+    delivery_template_id = fields.Many2one(
+        comodel_name='round.template',
+        string='Delivery Template',
     )

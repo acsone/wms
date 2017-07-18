@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <record id="view_round_zone_import" model="ir.ui.view">
+        <record id="view_round_itinerary_import" model="ir.ui.view">
             <field name="name">Delivery Date</field>
-            <field name="model">round.zone.import</field>
+            <field name="model">round.itinerary.import</field>
             <field name="arch" type="xml">
-                <form string="Import Zone">
+                <form string="Import Itinerary">
                     <group>
-                        <field name="zone_id"/>
+                        <field name="itinerary_id"/>
                     </group>
                     <footer>
                         <button name="confirm"
@@ -20,13 +20,13 @@
             </field>
         </record>
 
-        <record id="action_round_zone_import" model="ir.actions.act_window">
-            <field name="name">Import Zone</field>
+        <record id="action_round_itinerary_import" model="ir.actions.act_window">
+            <field name="name">Import Itinerary</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">round.zone.import</field>
+            <field name="res_model">round.itinerary.import</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_round_zone_import"/>
+            <field name="view_id" ref="view_round_itinerary_import"/>
             <field name="target">new</field>
         </record>
 </odoo>

@@ -1,5 +1,5 @@
-from . import vehicle
-from . import zone
+from . import template
+from . import itinerary
 from . import instance
 from . import partner
 from . import picking

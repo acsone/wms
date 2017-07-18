@@ -89,7 +89,7 @@ msgstr "Assigner une tournée"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -99,21 +99,21 @@ msgid "Carrier"
 msgstr "Transporteur"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_code
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_code
 msgid "Code"
 msgstr "Code"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_color
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_color
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_color
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_color
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_color
 msgid "Color Index"
 msgstr "Couleur"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
 msgid "Confirm"
 msgstr "Confirmer"
 
@@ -125,22 +125,22 @@ msgstr "Confirmé"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_create_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_create_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_create_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_create_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_create_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_create_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_create_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_create_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_create_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_create_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_create_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_create_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_create_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_create_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_create_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_create_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_create_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_create_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_create_date
 msgid "Created on"
 msgstr "Créé le"
 
@@ -189,13 +189,13 @@ msgstr "Tournées"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_picking_internal_search
-msgid "Delivery Zone Missing"
-msgstr "Zone de livraison manquante"
+msgid "Delivery Itinerary Missing"
+msgstr "Itinéraire de livraison manquant"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_res_partner_round_zone_ids
-msgid "Delivery Zones"
-msgstr "Zones de livraison"
+#: model:ir.model.fields,field_description:delivery_rounds.field_res_partner_round_itinerary_ids
+msgid "Delivery Itineraries"
+msgstr "Itinéraires de livraison"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_sale_order_delivery_round_id
@@ -204,9 +204,9 @@ msgid "Delivery round"
 msgstr "Tournée"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_delivery_carrier_delivery_vehicle_id
-msgid "Delivery vehicle"
-msgstr "Véhicule"
+#: model:ir.model.fields,field_description:delivery_rounds.field_delivery_carrier_delivery_template_id
+msgid "Delivery Template"
+msgstr "Modèle de tournée"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -221,11 +221,11 @@ msgstr "Destinations"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_display_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_display_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_display_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_display_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_display_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_display_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_display_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_display_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
 
@@ -262,24 +262,24 @@ msgstr "Kilométrage à la fin"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_id
 msgid "ID"
 msgstr "Identifiant"
 
 #. module: delivery_rounds
-#: model:ir.actions.act_window,name:delivery_rounds.action_round_zone_import
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_import
-msgid "Import Zone"
-msgstr "Importer une zone"
+#: model:ir.actions.act_window,name:delivery_rounds.action_round_itinerary_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
+msgid "Import Itinerary"
+msgstr "Importer un itinéraire"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
-msgid "Import from zone"
-msgstr "Import depuis une zone"
+msgid "Import from itinerary"
+msgstr "Import depuis une itinerary"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
@@ -294,33 +294,33 @@ msgstr "Inclure dans une tournée"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance___last_update
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle___last_update
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan___last_update
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone___last_update
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import___last_update
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position___last_update
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary___last_update
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import___last_update
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_write_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_write_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_write_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_write_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_write_uid
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_write_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_write_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_write_uid
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_write_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_write_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_write_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_write_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_write_date
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_write_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_write_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_write_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
@@ -331,8 +331,8 @@ msgstr "Liste des pickings attachés à une tournée."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_noround
-msgid "List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a zone."
-msgstr "Liste des pickings qui ne sont pas assignés à une tournée. Assurez-vous que l'adresse de livraison fait partie d'une zone."
+msgid "List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a itinerary."
+msgstr "Liste des pickings qui ne sont pas assignés à une tournée. Assurez-vous que l'adresse de livraison fait partie d'une itineraire."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_round
@@ -358,8 +358,8 @@ msgstr "Plus <i class=\"fa fa-caret-down\"/>"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_name
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_name
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_name
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Name"
 msgstr "Nom"
@@ -371,13 +371,13 @@ msgstr "Notes"
 
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_res_partner
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_partner_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_partner_id
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_partner_position_ids
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_form
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_partner_position_ids
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
 msgid "Partners"
 msgstr "Partenaires"
 
@@ -416,15 +416,15 @@ msgstr "Préparations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_time
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_time
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_time
 msgid "Planned Time"
 msgstr "Heure plannifiée"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/wizards/make_today_delivery_plan.py:39
 #, python-format
-msgid "Please select the vehicles"
-msgstr "Veuillez sélectionner un véhicule"
+msgid "Please select the templates"
+msgstr "Veuillez sélectionner un modèle de tournée"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
@@ -437,7 +437,7 @@ msgid "Reference"
 msgstr "Référence"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_registration
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_registration
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Registration"
 msgstr "Immatriculation"
@@ -463,8 +463,8 @@ msgid "Seq."
 msgstr "Seq."
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_sequence
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_sequence
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_sequence
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_sequence
 msgid "Sequence"
 msgstr "Séquence"
 
@@ -527,20 +527,20 @@ msgid "Unassigned Pickings"
 msgstr "Bons de transfert non-assignés"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_vehicle_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_vehicle_ids
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_template_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_template_ids
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Vehicle"
-msgstr "Véhicule"
+msgid "Template"
+msgstr "Modèle"
 
 #. module: delivery_rounds
-#: model:ir.actions.act_window,name:delivery_rounds.action_round_vehicle_tree
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_vehicle_ids
-#: model:ir.ui.menu,name:delivery_rounds.menu_round_vehicle
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_vehicle_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_vehicle_tree
-msgid "Vehicles"
-msgstr "Véhicules"
+#: model:ir.actions.act_window,name:delivery_rounds.action_round_template_tree
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_template_ids
+#: model:ir.ui.menu,name:delivery_rounds.menu_round_template
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_tree
+msgid "Templates"
+msgstr "Modèles"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
@@ -548,21 +548,21 @@ msgid "Weight"
 msgstr "Poids"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_import_zone_id
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_zone_position_zone_id
-msgid "Zone"
-msgstr "Zone"
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_import_itinerary_id
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_itinerary_id
+msgid "Itinerary"
+msgstr "Itineraire"
 
 #. module: delivery_rounds
-#: model:ir.actions.act_window,name:delivery_rounds.action_round_zone_tree
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_zone_ids
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_vehicle_zone_ids
-#: model:ir.ui.menu,name:delivery_rounds.menu_round_zone
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_vehicle_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_tree
-msgid "Zones"
-msgstr "Zones"
+#: model:ir.actions.act_window,name:delivery_rounds.action_round_itinerary_tree
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_itinerary_ids
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_itinerary_ids
+#: model:ir.ui.menu,name:delivery_rounds.menu_round_itinerary
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_tree
+msgid "Itineraries"
+msgstr "Itinéraires"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
@@ -572,7 +572,7 @@ msgstr "kg"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_zone_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
 msgid "or"
 msgstr "ou"
 
@@ -587,9 +587,9 @@ msgid "round.instance"
 msgstr "round.instance"
 
 #. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_vehicle
-msgid "round.vehicle"
-msgstr "round.vehicle"
+#: model:ir.model,name:delivery_rounds.model_round_template
+msgid "round.template"
+msgstr "round.template"
 
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_round_wizard_makeplan
@@ -597,17 +597,17 @@ msgid "round.wizard.makeplan"
 msgstr "round.wizard.makeplan"
 
 #. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone
-msgid "round.zone"
-msgstr "round.zone"
+#: model:ir.model,name:delivery_rounds.model_round_itinerary
+msgid "round.itinerary"
+msgstr "round.itinerary"
 
 #. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone_import
-msgid "round.zone.import"
-msgstr "round.zone.import"
+#: model:ir.model,name:delivery_rounds.model_round_itinerary_import
+msgid "round.itinerary.import"
+msgstr "round.itinerary.import"
 
 #. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone_position
-msgid "round.zone.position"
-msgstr "round.zone.position"
+#: model:ir.model,name:delivery_rounds.model_round_itinerary_position
+msgid "round.itinerary.position"
+msgstr "round.itinerary.position"
 

@@ -26,19 +26,19 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'fixed_price': 10.0,
         })
 
-        self.delivery_vehicle = self.env['round.vehicle'].create({
-            'name': 'Unittest delivery vehicle',
+        self.delivery_template = self.env['round.template'].create({
+            'name': 'Unittest delivery template',
         })
 
         self.delivery_round_2 = self.env['round.instance'].create({
             'name': 'Unittest delivery round',
-            'vehicle_id': self.delivery_vehicle.id,
+            'template_id': self.delivery_template.id,
             'date': '2017-02-01',
         })
 
         self.delivery_round_1 = self.env['round.instance'].create({
             'name': 'Unittest delivery round',
-            'vehicle_id': self.delivery_vehicle.id,
+            'template_id': self.delivery_template.id,
             'date': '2017-01-01',
         })
 
@@ -62,8 +62,8 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
         self.assertFalse(sale.picking_ids.delivery_round_id)
 
     def test_02_with_delivery_round(self):
-        self.deliver_carrier_fixed.delivery_vehicle_id = (
-            self.delivery_vehicle.id
+        self.deliver_carrier_fixed.delivery_template_id = (
+            self.delivery_template.id
         )
         sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
