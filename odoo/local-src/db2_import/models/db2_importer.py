@@ -297,7 +297,6 @@ class DB2Importer(models.Model):
                 order_id = cr.fetchone()
                 if order_id:
                     order_id = order_id[0]
-                    # TODO TypeError: 'NoneType' object has no attribute '__getitem__'
                     query = "UPDATE {} SET order_id = %s WHERE id = %s".format(
                         odoo_table_name)
                     cr.execute(query, (order_id, line_id))
