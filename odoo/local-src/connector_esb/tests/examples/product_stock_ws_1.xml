@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<result>
+  <stockItem>
+    <sku>exportable001</sku>
+    <erpStockCode></erpStockCode>
+    <stock>20.0</stock>
+  </stockItem>
+  <stockItem>
+    <sku>exportable002</sku>
+    <erpStockCode></erpStockCode>
+    <stock>0.0</stock>
+  </stockItem>
+  <stockItem>
+    <sku>exportable003</sku>
+    <erpStockCode></erpStockCode>
+    <stock>15.0</stock>
+  </stockItem>
+</result>

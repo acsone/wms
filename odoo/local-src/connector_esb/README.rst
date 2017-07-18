@@ -11,6 +11,10 @@ Existing synchronizations:
 * Export pharmacies to the ESB (differential, once a day)
 * Export products to the ESB (differential, once a day)
 
+Webservices:
+
+ * ``/connector_esb/product/stock``: return stock levels of products
+
 Configuration
 =============
 

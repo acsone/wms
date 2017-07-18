@@ -6,6 +6,7 @@ import logging
 import os
 
 from contextlib import contextmanager
+from functools import partial
 from io import StringIO
 from lxml import etree
 
@@ -28,6 +29,8 @@ for el, ns, attr in NAMESPACES:
 
 
 class ESBXMLProducer(Component):
+    """ XML Producer for exports """
+
     _name = 'esb.xml.producer'
     _inherit = 'esb.base'
     _usage = 'xml.producer'
@@ -54,7 +57,7 @@ class ESBXMLProducer(Component):
         data = {root: data}
         xml = dicttoxml.dicttoxml(
             data, custom_root=main_root,
-            attr_type=0, item_func=self._dicttoxml_item_func)
+            attr_type=False, item_func=self._dicttoxml_item_func)
         xml = self._apply_namespaces(xml)
         return xml
 
@@ -65,6 +68,32 @@ class ESBXMLProducer(Component):
         main_root = main_root or self.main_root_el
         root = root or self.root_el
         return self._produce(data, main_root, root)
+
+
+class ESBWebServiceXMLProducer(Component):
+    """ XML Producer for WebServices """
+
+    _name = 'esb.xml.webservice.producer'
+    _inherit = 'esb.base'
+    _usage = 'xml.webservice.producer'
+
+    root_el = 'result'
+    list_item_el = 'resultItem'
+
+    def _produce(self, data, root, list_item):
+        item = partial(self._dicttoxml_item_func, list_item)
+        xml = dicttoxml.dicttoxml(
+            data, attr_type=False, custom_root=root, item_func=item,
+        )
+        return xml
+
+    def _dicttoxml_item_func(self, list_item, item):
+        return list_item
+
+    def produce(self, data, root=None, list_item_el=None):
+        root = root or self.root_el
+        list_item_el = list_item_el or self.list_item_el
+        return self._produce(data, root, list_item_el)
 
 
 class ESBXMLWriter(AbstractComponent):

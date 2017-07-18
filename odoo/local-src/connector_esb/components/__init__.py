@@ -7,3 +7,4 @@ from . import xml_writer
 from . import importer
 from . import exporter
 from . import events
+from . import webservice_message
