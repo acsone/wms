@@ -7,6 +7,7 @@ from pkg_resources import resource_stream
 import os
 import anthem
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
+from anthem.lyrics.records import create_or_update
 from ..common import req
 
 
@@ -49,6 +50,18 @@ def import_clients(ctx):
     Partner = ctx.env['res.partner'].with_context(load_ctx)
     for content in get_files(req, 'data/install/customer.csv'):
         load_csv_stream(ctx, Partner, content, delimiter=',')
+
+
+@anthem.log
+def create_product_other(ctx):
+    """ Create product 'Other' used when importing sale orders """
+    values = {
+        'name': "Divers",
+        'default_code': "DIVERS",
+        'list_price': 0.0
+    }
+    create_or_update(ctx, 'product.product',
+                     '__setup__.product_other', values)
 
 
 @anthem.log
@@ -185,5 +198,6 @@ def main(ctx):
     """ Loading full data (But in this function only small files,
     other files will be import by importer.sh)
     """
+    create_product_other(ctx)
     # Putting some demo data in full mode because we don't have yet real data
     import_delivery_round_config(ctx)
