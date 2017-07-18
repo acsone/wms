@@ -23,6 +23,9 @@ def bool2int(field):
 def dt2esbdate(field):
     """ A modifier intended to be used on the ``direct`` mappings.
 
+    The source format is odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT
+    The source must be a Datetime field.
+
     Convert '2017-07-13 00:00:00' to '2017/07/13'
 
     Example::
