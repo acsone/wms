@@ -75,6 +75,24 @@ def convert_coding(value):
     return value
 
 
+def do_partial_picking(pick, lines):
+    """ Do a partial picking using delivered qty from DB2 """
+    pick.action_confirm()
+    pick.force_assign()
+    for line in lines:
+        product_xmlid = convert_product_id(line['dccart'])
+        product = pick.env.ref(product_xmlid)
+        ope = pick.pack_operation_pack_ids.filtered(
+            lambda p: p.product_id == product)
+        if not ope:
+            continue
+        # += to make sure than we process all qty if there are
+        # more than one line with same product
+        ope.qty_done += line['dccqul']
+    # XXX don't validate because we don't have lot
+    #pick.do_new_transfer()
+
+
 class DB2MapperSaleOrder(object):
 
     @classmethod
@@ -129,6 +147,9 @@ class DB2MapperSaleOrder(object):
                     [d[0] for d in cr.description]
                  )} for line in lines]
         is_delivered = True
+        delivered_lines = []
+        partial_delivered_lines = []
+
         for line in lines:
             product_xmlid = convert_product_id(line['dccart'])
             name = None
@@ -156,15 +177,34 @@ class DB2MapperSaleOrder(object):
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))
             create_or_update(SOLine, xmlid, values)
-            if line['dccquc'] > line['dccqul']:
-                is_delivered = False
+            delivered_lines.append(line['dccquc'] <= line['dccqul'])
+            partial_delivered_lines.append(
+                line['dccqul'] and line['dccquc'] > line['dccqul'])
+        is_delivered = all(delivered_lines)
+        is_partially_delivered = not any(partial_delivered_lines)
 
         if is_delivered:
             # validate sale order
             new.state = 'done'
+        elif rec.importer_id.mode == 'final_update':
+            # This will need to be handled by hand if it was confirmed
+            # by hand
+            assert new.state == 'draft'
+            # Confirm the sale order to create the picking
+            new.action_confirm()
+            if is_partially_delivered:
+                # Validate partially the pickings creating backorders
+                picks = new.picking_ids
+                for pick in picks.filtered(lambda p: p.state == 'confirmed'):
+                    do_partial_picking(pick, lines)
+                # XXX cannot confirm the second step as first step cannot
+                # be validated without lots
+                # pick2 = picks.filtered(lambda p: p.state == 'waiting')
+                # do_partial_picking(pick2, lines)
 
 
-class DB2Importer(models.Model):
+
+class DB2ImporterTable(models.Model):
     _name = 'db2.importer.table'
 
     _PREFIX = 'db2_'
@@ -184,12 +224,14 @@ class DB2Importer(models.Model):
         help="Hour of the day when the db2 object will transformed to an odoo"
              " object")
 
+    @api.multi
     def get_add_columns(self):
         if self.table_name == 'PDETCDCL':
             # create a field on object table to manage relation
             return ', order_id integer references db2_pentcdcl(id)'
         return ''
 
+    @api.multi
     def _create_db2_table(self, db2_cr):
         cr = self.env.cr
         odoo_table_name = self._PREFIX + self.table_name.lower()
@@ -222,7 +264,6 @@ class DB2Importer(models.Model):
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
     def get_sql_query(self, date_start, date_end):
-        get_updates = "get_updates" in self.env.context
         query_kwargs = {
             'schema': self.schema,
             'table_name': self.table_name,
@@ -261,7 +302,7 @@ class DB2Importer(models.Model):
             " AND {prefix}cjj <= {end_day}"
         )
 
-        if get_updates:
+        if self.importer_id.mode == 'final_update':
             query += (
                 " OR {prefix}mss >= {start_age}"
                 " AND {prefix}mss <= {end_age}"
@@ -333,6 +374,8 @@ class DB2Importer(models.Model):
         db2_cr.execute(query, [])
 
         rows = db2_cr.fetchall()
+        if not rows:
+            raise "No data found please check your date range"
 
         # Save them locally
         columns = rows[0].cursor_description
@@ -387,6 +430,11 @@ class DB2Importer(models.Model):
     last_import = fields.Date()
     date_start = fields.Date()
     date_end = fields.Date()
+
+    mode = fields.Selection([
+        ('history', 'History'),
+        ('final_update', 'Final update')],
+        default='final_update')
 
     table_ids = fields.One2many('db2.importer.table', 'importer_id')
 
