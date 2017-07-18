@@ -74,10 +74,10 @@ class ExportStockTestCase(ESBXMLTestCase):
     def test_mapper(self):
         """ Generate dict with the mapper and compare with what is expected"""
         expected = {
-            'Sku': 'E-COM09',
+            'Sku': u'E-COM09',
             'Stock': 75.0,
             'NextUseDate': self.use_date_2.strftime("%Y-%m-%d"),
-            # 'SalesAverage': '',
+            'SalesAverage': '0.000',
             'ErpStockCode': '',
             }
         with self.backend.work_on(self.model._name,

@@ -2,6 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from datetime import datetime, timedelta
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 
@@ -17,7 +18,6 @@ class StockExportMapper(Component):
 
     direct = [
         ('default_code', 'Sku'),
-        # ('', 'SalesAverage'), #  Waiting for information...
     ]
 
     @mapping
@@ -25,7 +25,8 @@ class StockExportMapper(Component):
         next_use_date = ''
         quants = self.env['stock.quant'].search(
                 [('product_id', '=', record.id)])
-        total_stock = sum(quants.mapped('qty_available'))
+        total_stock = sum(quants.mapped('qty'))
+        total_stock = record.qty_available
         lots = quants.mapped('lot_id')
         if len(lots):
             lots.sorted(key=lambda r: r.use_date)
@@ -38,10 +39,16 @@ class StockExportMapper(Component):
 
     @mapping
     def compute_sales_average(self, record):
-        pass
-        # self.env['sale.order.line'].search([
-        #    ('product_id', '=', record.product_id),
-        #    ('create_date', '>=', '')])
+        """ Compute the daily average quantity of sale on a year """
+        sale_average = 0
+        # TODO : waiting for the correct formula to calculate this
+        # one_year_back = (datetime.today() -
+        #                  timedelta(days=365)).strftime("%Y-%m-%d %H:%M:%S")
+        # sol = self.env['sale.order.line'].search([
+        #     ('product_id', '=', record.id),
+        #     ('create_date', '>=', one_year_back)])
+        # sale_average = sum(line.product_uom_qty for line in sol) / 365
+        return {'SalesAverage': '{0:.3f}'.format(sale_average)}
 
     @mapping
     def compute_erpstockcode(self, record):

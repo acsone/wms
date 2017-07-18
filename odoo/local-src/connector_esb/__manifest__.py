@@ -17,6 +17,7 @@
         'specific_product',
         'specific_purchase',
         'sale_stock',
+        'product_expiry',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
