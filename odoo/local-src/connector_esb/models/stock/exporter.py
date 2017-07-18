@@ -23,10 +23,9 @@ class StockExportMapper(Component):
     @mapping
     def compute_stock_and_use_date(self, record):
         next_use_date = ''
+        total_stock = record.qty_available
         quants = self.env['stock.quant'].search(
                 [('product_id', '=', record.id)])
-        total_stock = sum(quants.mapped('qty'))
-        total_stock = record.qty_available
         lots = quants.mapped('lot_id')
         if len(lots):
             lots.sorted(key=lambda r: r.use_date)
