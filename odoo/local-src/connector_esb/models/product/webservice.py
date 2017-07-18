@@ -21,8 +21,7 @@ class ProductStockWebserviceMessage(Component):
             values = {
                 'sku': product.default_code,
                 'stock': product.qty_available,
-                # TODO: need more info
-                'erpStockCode': '',
+                'erpStockCode': product.state_id.esb_ref or '',
             }
             data.append(values)
         return self._produce_xml(data, list_item_el='stockItem')

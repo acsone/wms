@@ -22,17 +22,26 @@ class WSProductStockTestCase(ESBXMLTestCase):
         }).change_product_qty()
 
     def setup_records(self):
+        active = self.env.ref('specific_purchase.product_state_active')
+        active.esb_ref = 'A'
+        discontinued = self.env.ref(
+            'specific_purchase.product_state_discontinued'
+        )
+        discontinued.esb_ref = 'D'
         self.product1 = self.model.create({
             'name': 'Product1',
             'default_code': 'exportable001',
+            'state_id': active.id,
         })
         self.product2 = self.model.create({
             'name': 'Product2',
             'default_code': 'exportable002',
+            'state_id': discontinued.id,
         })
         self.product3 = self.model.create({
             'name': 'Product3',
             'default_code': 'exportable003',
+            'state_id': active.id,
         })
         self.all_records = self.product1 + self.product2 + self.product3
 

@@ -10,3 +10,4 @@ from . import backend_timestamp
 from . import pharmacy
 from . import product
 from . import product_uom
+from . import product_state
