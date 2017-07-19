@@ -11,6 +11,7 @@ Unreleased
 * ALCN-756: Add the module [MIG][10.0]account_cutoff_accrual_picking, for testing purpose
 * ALCN-917: Add a month filter on account invoice report
 * ALCN-926 Install module Specific Data and remove references to __setup__
+* ALCN-870: Add webservice for obtaining stock level for products in connector_esb
 
 **Bugfixes**
 

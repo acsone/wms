@@ -60,6 +60,56 @@ TEST_RESULT2 = """
         </Root>
     </ROOT>
 """
+TEST_RESULT3 = """
+    <?xml version="1.0" encoding="utf-8" ?>
+    <result>
+        <resultItem>
+            <baz_out>baz value</baz_out>
+            <foo_out>foo value</foo_out>
+            <bar_out>bar value</bar_out>
+        </resultItem>
+    </result>
+"""
+TEST_RESULT4 = """
+    <?xml version="1.0" encoding="utf-8" ?>
+    <result>
+        <resultItem>
+            <baz_out>baz value</baz_out>
+            <foo_out>foo value</foo_out>
+            <bar_out>bar value</bar_out>
+        </resultItem>
+        <resultItem>
+            <baz_out>baz value 2</baz_out>
+            <foo_out>foo value 2</foo_out>
+            <bar_out>bar value 2</bar_out>
+        </resultItem>
+        <resultItem>
+            <baz_out>baz value 3</baz_out>
+            <foo_out>foo value 3</foo_out>
+            <bar_out>bar value 3</bar_out>
+        </resultItem>
+    </result>
+"""
+TEST_RESULT5 = """
+    <?xml version="1.0" encoding="utf-8" ?>
+    <result>
+        <stockItem>
+            <baz_out>baz value</baz_out>
+            <foo_out>foo value</foo_out>
+            <bar_out>bar value</bar_out>
+        </stockItem>
+        <stockItem>
+            <baz_out>baz value 2</baz_out>
+            <foo_out>foo value 2</foo_out>
+            <bar_out>bar value 2</bar_out>
+        </stockItem>
+        <stockItem>
+            <baz_out>baz value 3</baz_out>
+            <foo_out>foo value 3</foo_out>
+            <bar_out>bar value 3</bar_out>
+        </stockItem>
+    </result>
+"""
 
 
 class XMLTestCase(ESBXMLTestCase):
@@ -120,3 +170,42 @@ class XMLTestCase(ESBXMLTestCase):
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
                 self.flatten(result), self.flatten(TEST_RESULT2))
+
+    @tools.mute_logger('dicttoxml')
+    def test_xml_webservice_base(self):
+        with self.backend.work_on(self.model._name) as work:
+            writer = work.component(usage='xml.webservice.producer')
+            result = writer.produce([TEST_DATA1])
+            root = self.assertXmlDocument(result)
+            paths = ('//resultItem', '//bar_out', '//foo_out', '//baz_out')
+            self.assertXpathsExist(root, paths)
+            self.assertXmlEquivalentOutputs(
+                self.flatten(result), self.flatten(TEST_RESULT3))
+
+    @tools.mute_logger('dicttoxml')
+    def test_xml_webservice_multiple_lines(self):
+        with self.backend.work_on(self.model._name) as work:
+            writer = work.component(usage='xml.webservice.producer')
+            result = writer.produce(TEST_DATA2)
+            root = self.assertXmlDocument(result)
+            paths = (
+                '//resultItem', '//resultItem/bar_out',
+                '//resultItem/foo_out', '//resultItem/baz_out',
+            )
+            self.assertXpathsExist(root, paths)
+            self.assertXmlEquivalentOutputs(
+                self.flatten(result), self.flatten(TEST_RESULT4))
+
+    @tools.mute_logger('dicttoxml')
+    def test_xml_webservice_different_list_item(self):
+        with self.backend.work_on(self.model._name) as work:
+            writer = work.component(usage='xml.webservice.producer')
+            result = writer.produce(TEST_DATA2, list_item_el='stockItem')
+            root = self.assertXmlDocument(result)
+            paths = (
+                '//stockItem', '//stockItem/bar_out',
+                '//stockItem/foo_out', '//stockItem/baz_out',
+            )
+            self.assertXpathsExist(root, paths)
+            self.assertXmlEquivalentOutputs(
+                self.flatten(result), self.flatten(TEST_RESULT5))
