@@ -24,13 +24,11 @@ class StockExportMapper(Component):
     def compute_stock_and_use_date(self, record):
         next_use_date = ''
         total_stock = record.qty_available
-        quants = self.env['stock.quant'].search(
-                [('product_id', '=', record.id)])
-        lots = quants.mapped('lot_id')
-        if len(lots):
-            lots.sorted(key=lambda r: r.use_date)
-            if lots[0].use_date:
-                next_use_date = lots[0].use_date.split(' ')[0]
+        lot = self.env['stock.production.lot'].search([
+            ('quant_ids.product_id', '=', record.id),
+            ('use_date', '!=', False)], order='use_date', limit=1)
+        if lot:
+                next_use_date = lot[0].use_date.split(' ')[0]
         return {
             'Stock': total_stock,
             # The name of this field is not decided yet...
