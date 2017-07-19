@@ -69,6 +69,14 @@ def convert_product_id(product_code):
     return xmlid
 
 
+def convert_user(resp_num):
+    """ return user xmlid from a responsible number """
+    if resp_num in (8, 9, 10):
+        return False
+    xmlid = '__setup__.res_user_%s' % resp_num
+    return xmlid
+
+
 def convert_coding(value):
     if isinstance(value, str):
         value = value.decode('latin1').encode('utf8')
@@ -114,12 +122,12 @@ class DB2MapperSaleOrder(object):
 
         create_date = convert_date('eccc', row)
 
-        user_xmlid =  '__setup__.res_user_%s' % row['eccrep']
+        user_xmlid = convert_user(row['eccrep'])
         values = {
             'name': row['eccsui'],
             'origin': row['eccrin'],
             'client_order_ref': row['eccrcl'],
-            'user_id': rec.env.ref(user_xmlid).id,
+            'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
             'create_date': create_date,
