@@ -9,6 +9,7 @@ Connector ESB
 Existing synchronizations:
 
 * Export pharmacies to the ESB (differential, once a day)
+* Export products to the ESB (differential, once a day)
 
 Configuration
 =============

@@ -21,41 +21,114 @@ class ExportProductTestCase(ESBXMLTestCase):
         supplier = self.env['res.partner'].create({
             'name': 'Supplier',
             'supplier': True,
+            'ref': '79001',
         })
+        supplier2 = self.env['res.partner'].create({
+            'name': 'Supplier2',
+            'supplier': True,
+            'ref': '65852',
+        })
+
+        tax = self.env['account.tax'].search(
+            [('type_tax_use', '=', 'sale')],
+            limit=1,
+        )
+        tax.esb_ref = '006'
+        tax.contrib_sku = 'BBB'
+        tax2 = tax.copy(default={'esb_ref': '009', 'contrib_sku': 'CCC'})
+
+        unit = self.env.ref('product.product_uom_unit')
+        unit.rounding = 1.0
+        unit.esb_ref = "0"
+        cm = self.env.ref('product.product_uom_cm')
+        cm.rounding = 0.001
+        cm.esb_ref = "2"
+
+        ali = self.env.ref('specific_product.product_price_category_ali')
+        alg = self.env.ref('specific_product.product_price_category_alg')
+        alh = self.env.ref('specific_product.product_price_category_alh')
+
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'name': 'Export me pls',
             'default_code': 'exportable001',
+            'type': 'product',
             'barcode': 'XXX0001',
+            'cnk_code': 'CNK_001',
             'weight': 10.0,
+            'depth': 7.0,
+            'length': 8.5,
+            'width': 9.0,
+            'volume': 0.01,
+            'tracking': 'lot',
+            'uom_id': unit.id,
+            'uom_po_id': unit.id,
+            'price_category_id': ali.id,
+            'taxes_id': [(4, tax.id)],
             'seller_ids': [
                 (0, 0, {
                     'name': supplier.id,
                     'product_code': 'supplier001',
                 })],
+            'route_ids': [
+                (4, self.env.ref('stock.route_warehouse0_mto').id),
+                ],
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
             'default_code': 'exportable002',
+            'type': 'product',
             'barcode': 'XXX0002',
+            'cnk_code': 'CNK_002',
             'weight': 5.0,
+            'depth': 17.0,
+            'length': 18.5,
+            'width': 19.0,
+            'volume': 0.005,
+            'tracking': 'serial',
+            'uom_id': cm.id,
+            'uom_po_id': cm.id,
+            'price_category_id': alg.id,
+            'taxes_id': [(4, tax2.id)],
             'seller_ids': [
                 (0, 0, {
-                    'name': supplier.id,
+                    'name': supplier2.id,
                     'product_code': 'supplier002',
                 })],
+            'route_ids': [
+                (4, self.env.ref('purchase.route_warehouse0_buy').id),
+                ],
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 3',
             'default_code': 'exportable003',
+            'type': 'consu',
             'barcode': 'XXX0003',
+            'cnk_code': 'CNK_003',
             'weight': 2.5,
+            'volume': 1.0,
+            'depth': 27.0,
+            'length': 28.5,
+            'width': 29.0,
+            'active': False,
+            'tracking': 'none',
+            'uom_id': unit.id,
+            'uom_po_id': unit.id,
+            'price_category_id': alh.id,
+            'taxes_id': [(4, tax.id)],
             'seller_ids': [
                 (0, 0, {
                     'name': supplier.id,
                     'product_code': 'supplier003',
                 })],
+            'route_ids': [
+                (4, self.env.ref('stock.route_warehouse0_mto').id),
+                (4, self.env.ref('purchase.route_warehouse0_buy').id),
+                ],
         })
+
+        self.force_create_date(self.all_records, '2017-07-13 00:00:00')
+
         # add some translation
         for rec in self.all_records:
             rec.with_context(lang='nl_BE').name = rec.name + ' (NL)'
@@ -73,7 +146,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'default_code': 'not_exportable002',
         })
         # too old
-        self.force_create_date(nx2.id, '2014-7-28 00:00:00')
+        self.force_create_date(nx2, '2014-07-28 00:00:00')
         self.all_records |= nx2
         self.unexportable_records |= nx2
 
@@ -83,11 +156,11 @@ class ExportProductTestCase(ESBXMLTestCase):
         #     'default_code': '8888_not_exportable003',
         # })
 
-    def force_create_date(self, item_id, dt):
+    def force_create_date(self, records, dt):
         self.env.cr.execute(
             'UPDATE {} SET create_date=%s '
-            'WHERE id=%s'.format(self.model._table),
-            (dt, item_id)
+            'WHERE id in %s'.format(self.model._table),
+            (dt, tuple(records.ids))
         )
 
     def test_mapper(self):
@@ -98,6 +171,27 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gespnt': 10.0,
             'Refdem': 'Export me pls (NL)',
             'Gesarc': 'supplier001',
+            'Gesfou': '79001',
+            'Cplz25': '79001',
+            'Gesunv': '0',
+            'Gescrt': '2017/07/13',
+            'Cplz19': 1,
+            'Gescde': 1,
+            'Cp2z08': 0.01,
+            'Gescsa': 1,
+            'Gesctv': '006',
+            'Cplz03': 'CNK_001',
+            'Gescge': 1,
+            'Gescov': 1,
+            'Cplz07': 'BBB',
+            'Cp2z01': 7.0,
+            'Cp2z03': 8.5,
+            'Cp2z05': 9.0,
+            'GMA': 0,
+            'ALI': 1,
+            'ALG': 0,
+            'ALH': 0,
+            'IMP': 0,
             # fixed values
             'Cp2z22': '',
             'Warceg': '',
@@ -110,30 +204,9 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Cplz29': 0,
             'Cp2z17': 0,
             'Cp2z19': 0,
+            'LotEch': 0,
             # TODO
-            'Gesfou': '',
-            'Cplz25': '',
-            'Gesunv': '',
-            'Gescrt': '2017/07/04',
-            'Cplz19': '1',
-            'Gescde': '1',
-            'Cp2z08': '1.0',
-            'Gesctv': '',
-            'Gescsa': '1',
-            'LotEch': '2017/11/16',
-            'Cplz03': '',
-            'Gescge': '0',
-            'Gescov': '',
-            'Cplz07': '',
             'Cplz14': '',
-            'Cp2z01': '2.0',
-            'Cp2z03': '2.5',
-            'Cp2z05': '3.0',
-            'GMA': '',
-            'ALI': '',
-            'ALG': '',
-            'ALH': '',
-            'IMP': '',
         }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name,

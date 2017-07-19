@@ -15,3 +15,8 @@ SET module = 'specific_data'
 WHERE module = '__setup__'
 AND model = 'product.pricelist'
 AND name = 'product_pricelist_pb2';
+
+UPDATE ir_model_data
+SET module = 'specific_product'
+WHERE module = '__setup__'
+AND model = 'product.price.category';

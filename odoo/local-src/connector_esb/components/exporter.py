@@ -50,7 +50,7 @@ class ESBExporterMixin(AbstractComponent):
         return logging.getLogger(
             '[{}:{}]'.format(self._usage, self.model._name))
 
-    def run(self, items):
+    def _export_items(self, items):
         producer = self.work.component(usage='xml.producer')
         writer_type = self.work.timestamp.writer
         assert writer_type
@@ -66,12 +66,18 @@ class ESBExporterMixin(AbstractComponent):
         self.logger.info('File created (%s) : %s', writer_type, path)
         return path
 
+    def run(self):
+        return NotImplementedError
+
 
 class ESBExporter(Component):
 
     _name = 'esb.exporter'
     _inherit = ['esb.exporter.mixin']
     _usage = 'record.exporter'
+
+    def run(self, records):
+        return self._export_items(records)
 
 
 class ESBCronExporter(AbstractComponent):
@@ -100,4 +106,4 @@ class ESBCronExporter(AbstractComponent):
 
         """
         records = self.get_items(export_since=export_since)
-        return super(ESBCronExporter, self).run(records)
+        return self._export_items(records)
