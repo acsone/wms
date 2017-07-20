@@ -75,23 +75,6 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'type': 'delivery'
         })
 
-    # This one is not needed anymore when merging
-    def read_test_file(self, filename):
-        path = os.path.join(
-            os.path.dirname(__file__),
-            'examples',
-            filename
-        )
-        with open(path, 'r') as thefile:
-            return thefile.read()
-
-    def delete_test_file(self):
-        folder = '/tmp'
-        for f in os.listdir(folder):
-            f_path = os.path.join(folder, f)
-            if os.path.isfile(f_path):
-                os.remove(f_path)
-
     def test_filename(self):
         today = fields.Date.today().replace('-', '')
         time = fields.Datetime.now().split(' ')[1].replace(':', '')
@@ -147,11 +130,11 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
     def test_export(self):
         """ Run export and compare with example file"""
         self.timestamp.writer = 'local'
-        self.delete_test_file()
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             respath = exporter.run()
+            self.addCleanup(os.remove, respath)
             with open(respath, 'r') as result_file:
                 result = result_file.read()
             self.assertXmlEquivalentData(
