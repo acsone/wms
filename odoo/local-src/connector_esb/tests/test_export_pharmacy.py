@@ -170,5 +170,5 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
                 model_name=self.model._name
             )
 
-        items = exporter.get_items()
+        items = exporter.get_items('')
         self.assertEqual(len(items), 1)
