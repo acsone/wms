@@ -4,7 +4,6 @@
 
 import os
 
-from odoo import fields
 from .common import ESBXMLTestCase
 
 
@@ -156,17 +155,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_filename(self):
-        today = fields.Date.today().replace('-', '')
-        time = fields.Datetime.now().split(' ')[1].replace(':', '')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            expected = 'Customer_{0}_{1}.xml'.format(today, time)
-            writer = work.component(usage='local.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
-            writer = work.component(usage='sftp.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
+        self.check_filename('Customer_{0}_{1}.xml')
 
     def test_only_customer_exported(self):
         """ Not all res_partner should be exported """

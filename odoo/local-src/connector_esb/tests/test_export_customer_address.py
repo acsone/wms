@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
-from odoo import fields
 from .common import ESBXMLTestCase
 
 
@@ -76,17 +75,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         })
 
     def test_filename(self):
-        today = fields.Date.today().replace('-', '')
-        time = fields.Datetime.now().split(' ')[1].replace(':', '')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            expected = 'CustomerAddress_{0}_{1}.xml'.format(today, time)
-            writer = work.component(usage='local.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
-            writer = work.component(usage='sftp.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
+        self.check_filename('CustomerAddress_{0}_{1}.xml')
 
     def test_mapper_customer_with_two_address(self):
         """ Generate dict with the mapper and compare with what is expected"""

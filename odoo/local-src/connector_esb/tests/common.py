@@ -6,6 +6,7 @@ import os
 
 from collections import defaultdict
 from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo import fields
 
 import xmlunittest
 from lxml import etree
@@ -99,3 +100,18 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
         )
         with open(path, 'r') as thefile:
             return thefile.read()
+
+    def check_filename(self, name_template):
+        """
+           Test the filename of the export, the name template can have a date
+           parameter or a date and time parameter
+        """
+        day = fields.Date.today().replace('-', '')
+        time = fields.Datetime.now().split(' ')[1].replace(':', '')
+        expected = name_template.format(day, time)
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            writer = work.component(usage='local.xml.writer')
+            self.assertEqual(writer.filename(), expected)
+            writer = work.component(usage='sftp.xml.writer')
+            self.assertEqual(writer.filename(), expected)
