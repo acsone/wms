@@ -89,12 +89,15 @@ class ESBCronExporter(AbstractComponent):
     def get_items_domain(self):
         return []
 
-    def get_items(self, export_since=None):
+    def domain_timestamp(self, export_since=None):
+        # write_date is at the very least the same than create_date
+        # so we don't need to search on create_date >= self.export_since
+        return [('write_date', '>=', export_since)]
+
+    def get_items(self, export_since):
         domain = self.get_items_domain()
         if export_since:
-            # write_date is at the very least the same than create_date
-            # so we don't need to search on create_date >= self.export_since
-            date_domain = [('write_date', '>=', export_since)]
+            date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
         return self.model.with_context(active_test=False).search(domain)
 

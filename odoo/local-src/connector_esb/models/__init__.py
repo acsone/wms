@@ -11,3 +11,6 @@ from . import pharmacy
 from . import product
 from . import product_uom
 from . import product_state
+from . import stock
+
+from . import product_state

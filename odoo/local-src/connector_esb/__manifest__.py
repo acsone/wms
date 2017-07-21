@@ -17,6 +17,9 @@
         'specific_product',
         'specific_purchase',
         'sale_stock',
+        'product_expiry',
+        'product',
+        'specific_purchase',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -28,6 +31,7 @@
         'views/account_tax_views.xml',
         'views/product_views.xml',
         'views/product_uom_views.xml',
+        'views/product_state_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

@@ -32,6 +32,10 @@ class ProductExportMapper(Component):
         }
     }
 
+    @classmethod
+    def _component_match(cls, work):
+        return bool(work.timestamp and work.timestamp.kind == 'product')
+
     @mapping
     def supplier(self, record):
         supplier_product_code = ''
@@ -116,6 +120,10 @@ class ProductCronExporter(Component):
     _inherit = ['esb.cron.exporter', ]
     _usage = 'record.exporter.cron'
     _apply_on = 'product.product'
+
+    @classmethod
+    def _component_match(cls, work):
+        return bool(work.timestamp and work.timestamp.kind == 'product')
 
     def get_items_domain(self):
         domain = [

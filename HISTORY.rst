@@ -12,6 +12,7 @@ Unreleased
 * ALCN-917: Add a month filter on account invoice report
 * ALCN-926 Install module Specific Data and remove references to __setup__
 * ALCN-870: Add webservice for obtaining stock level for products in connector_esb
+* ALCN-856 ESB export of stock
 
 **Bugfixes**
 

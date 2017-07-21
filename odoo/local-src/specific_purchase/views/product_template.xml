@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='default_code']" position="after">
-                <field name="state_id" widget="selection"/>
+                <field name="state_id"/>
             </xpath>
 
             <xpath expr="//group[@name='inventory']/group[@name='group_lots_and_weight']" position="after">

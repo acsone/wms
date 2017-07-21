@@ -23,7 +23,9 @@ class ESBBackendTimestamp(models.Model):
         readonly=True,
     )
     kind = fields.Selection(
-        selection=[('pharmacy', 'pharmacy')],
+        selection=[('pharmacy', 'pharmacy'),
+                   ('stock', 'stock'),
+                   ('product', 'product')],
         string='Kind of export',
         readonly=True,
     )
