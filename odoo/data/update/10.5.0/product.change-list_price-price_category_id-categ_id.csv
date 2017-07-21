@@ -1,0 +1,4 @@
+id,list_price,price_category_id/id,categ_id/id
+__import__.product_2087138,12.50,specific_product.product_price_category_gma,specific_data.product_categ__ali_comp
+__import__.product_2413615,0.01,,specific_data.product_categ__humain
+__import__.product_5478246,15.87,specific_product.product_price_category_gma,specific_data.product_categ__mat_equipement

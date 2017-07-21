@@ -1,0 +1,4 @@
+id,medical_device,tracking,categ_id/id
+__import__.product_5005215,,none,specific_data.product_categ__mat_conso
+__import__.product_5473651,,none,specific_data.product_categ__mat_conso
+__import__.product_5711200,True,lot,specific_data.product_categ__mat_instrumentation

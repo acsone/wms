@@ -1,0 +1,5 @@
+id,active,route_ids/id,categ_id/id
+__import__.product_5512005,False,purchase.route_warehouse0_buy,specific_data.product_categ__importation
+__import__.product_7829894,False,purchase.route_warehouse0_buy,specific_data.product_categ__divers_para
+__import__.product_8043569,False,purchase.route_warehouse0_buy,specific_data.product_categ__mat_equipement
+__import__.product_8270200,False,purchase.route_warehouse0_buy,specific_data.product_categ__antimicrobiens

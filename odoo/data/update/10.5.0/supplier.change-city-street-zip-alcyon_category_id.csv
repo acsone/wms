@@ -1,0 +1,3 @@
+id,city,street,zip,alcyon_category_id/id
+__import__.supplier_61851,FALLAIS,Rue Saint Sauveur 1,4260,__setup__.partner_category_supplier
+__import__.supplier_70295,VZ HOUTENT,Hofspoor 3,3994,__setup__.partner_category_supplier

@@ -1,0 +1,9 @@
+id,list_price,weight,categ_id/id
+__import__.product_5027956,10.58,0.270,specific_data.product_categ__mat_rurale
+__import__.product_5197004,19.00,0.100,specific_data.product_categ__ali_comp
+__import__.product_5197008,22.00,0.100,specific_data.product_categ__ali_comp
+__import__.product_5921120,7.95,0.350,specific_data.product_categ__mat_conso
+__import__.product_8025815,2.26,0.040,specific_data.product_categ__mat_conso
+__import__.product_8060562,2.63,0.110,specific_data.product_categ__mat_conso
+__import__.product_8427057,14.30,0.630,specific_data.product_categ__mat_equipement
+__import__.product_8485037,4.19,0.090,specific_data.product_categ__mat_rurale

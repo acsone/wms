@@ -1,0 +1,2 @@
+id,street,category_id/id,user_id/id
+__import__.customer_8793,rue des Comognes 3,"__setup__.customer_category_petits_animaux,__setup__.customer_category_equins",__setup__.res_user_20

@@ -1,0 +1,12 @@
+id,active,list_price,name,categ_id/id
+__import__.product_2496003,False,46.61,BLOUSE COL MAO ZIP FEMME BLEUE T L,specific_data.product_categ__mat_equipement
+__import__.product_5007840,True,18.42,IM3 FRAISE FG SURGICAL 701L (x5) C7015,specific_data.product_categ__mat_dentisterie
+__import__.product_5011601,False,49.33,BLOUSE FEMME 2POCHES CEINTREE NAVY XS,specific_data.product_categ__mat_equipement
+__import__.product_5142806,True,181.66,"PROLENE USP4/0 EP1,5 16C3/8 F2806/",specific_data.product_categ__mat_sutures
+__import__.product_5180038,True,70.00,MALLETTE ECO VIOLETTE L44xl24xH28,specific_data.product_categ__mat_equipement
+__import__.product_5280796,True,87.95,DISPLAY BALANCE SALTER (KRUUSE),specific_data.product_categ__mat_equipement
+__import__.product_5715061,False,30.40,OUSE UNISEXE COL V 2POCHES BORDEAUX M,specific_data.product_categ__mat_equipement
+__import__.product_5869001,True,124.60,MICROSC NOVEX:OBJECTIF 100X IMMER,specific_data.product_categ__mat_equipement
+__import__.product_6742145,False,23.00,"PENTORBARBITAL SODIQUE 5,5% 100ML",specific_data.product_categ__importation
+__import__.product_8003407,False,8.93,KIT LITTM CARDIO III PT MEMBRANE+BAGUE,specific_data.product_categ__mat_equipement
+__import__.product_8076474,True,11.98,BOTTE CHIEN GM  9cmx7cm,__temp__.product_categ_undefined

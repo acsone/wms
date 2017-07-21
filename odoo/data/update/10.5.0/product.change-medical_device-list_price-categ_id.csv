@@ -1,0 +1,4 @@
+id,medical_device,list_price,categ_id/id
+__import__.product_5010171,,28.60,specific_data.product_categ__mat_conso
+__import__.product_8031170,,71.30,specific_data.product_categ__mat_conso
+__import__.product_8031477,True,9.00,specific_data.product_categ__mat_conso

@@ -1,0 +1,5 @@
+id,route_ids/id,list_price,name,categ_id/id
+__import__.product_5001037,purchase.route_warehouse0_buy,5.86,"TTA VIS 2,4mm INOX HEXAG.30mm       1037",specific_data.product_categ__mat_ortho
+__import__.product_5246000,purchase.route_warehouse0_buy,144.00,BALANCE ELECTRONIQUE PA 20kg/5g RECHARG,specific_data.product_categ__mat_equipement
+__import__.product_5552614,purchase.route_warehouse0_buy,7.57,"TTA VIS 2,4mm INOX HEXAG. 8mm       2614",specific_data.product_categ__mat_ortho
+__import__.product_8262886,purchase.route_warehouse0_buy,189.20,ANGIO DETECT x20,specific_data.product_categ__mat_conso

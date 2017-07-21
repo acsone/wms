@@ -1,0 +1,2 @@
+id,discount_pricelist_id/id,property_product_pricelist/id
+__import__.customer_317,,__setup__.product_pricelist_pb2
