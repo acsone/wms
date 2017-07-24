@@ -1,3 +1,0 @@
-id,discount_pricelist_id/id,promotion_pricelist_id/id,email,property_product_pricelist/id
-__import__.customer_5456,__setup__.pricelist_100,__setup__.product_pricelist_supplier,Claire.Meurens@purina.nestle.com,__setup__.product_pricelist_pb2
-__import__.customer_6146,__setup__.pricelist_100,__setup__.product_pricelist_supplier,info.be@vetoquinol.com,__setup__.product_pricelist_pb2

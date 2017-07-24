@@ -1,2 +1,0 @@
-id,promotion_pricelist_id/id,discount_pricelist_id/id,pharmacist_id/id,active,email,property_product_pricelist/id
-__import__.customer_3785,__setup__.product_pricelist_supplier,__setup__.pricelist_100,__import__.supplier_77666,True,ines.puttaert@kelavet.be,__setup__.product_pricelist_pb2

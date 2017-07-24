@@ -1,3 +1,0 @@
-id,discount_pricelist_id/id,promotion_pricelist_id/id,property_product_pricelist/id
-__import__.customer_1375,__setup__.pricelist_100,__setup__.product_pricelist_supplier,__setup__.product_pricelist_pb2
-__import__.customer_5015,__setup__.pricelist_100,__setup__.product_pricelist_supplier,__setup__.product_pricelist_pb2

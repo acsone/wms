@@ -1,2 +1,0 @@
-id,phone,discount_pricelist_id/id,promotion_pricelist_id/id,email,property_product_pricelist/id
-__import__.customer_1523,02/7344821,__setup__.pricelist_100,__setup__.product_pricelist_supplier,mail@fendigo.com,__setup__.product_pricelist_pb2

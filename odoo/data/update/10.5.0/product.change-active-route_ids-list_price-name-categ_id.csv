@@ -1,3 +1,0 @@
-id,active,route_ids/id,list_price,name,categ_id/id
-__import__.product_8024170,True,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",165.00,SONDE COLLECTE EMBRYON EQUIN 120CM,specific_data.product_categ__mat_conso
-__import__.product_8076468,True,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",11.98,BOTTE CHIEN MM  7cmx6cm,specific_data.product_categ__mat_petshop

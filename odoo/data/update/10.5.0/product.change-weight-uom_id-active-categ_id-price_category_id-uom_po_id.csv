@@ -1,2 +1,0 @@
-id,weight,uom_id/id,active,categ_id/id,price_category_id/id,uom_po_id/id
-__import__.product_5193103,0,product.product_uom_unit,False,specific_data.product_categ__ali_dietetique,,product.product_uom_unit

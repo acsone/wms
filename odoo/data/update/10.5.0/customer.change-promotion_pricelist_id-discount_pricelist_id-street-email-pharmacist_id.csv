@@ -1,2 +1,0 @@
-id,promotion_pricelist_id/id,discount_pricelist_id/id,street,email,pharmacist_id/id
-__import__.customer_2526,__setup__.product_pricelist_supplier,__setup__.pricelist_100,Rue Chemin Salé 5,mercier.j-l@sfr.fr,__import__.supplier_77666

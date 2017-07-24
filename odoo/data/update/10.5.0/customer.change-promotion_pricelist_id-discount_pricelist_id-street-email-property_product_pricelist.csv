@@ -1,2 +1,0 @@
-id,promotion_pricelist_id/id,discount_pricelist_id/id,street,email,property_product_pricelist/id
-__import__.customer_7452,__setup__.product_pricelist_supplier,__setup__.pricelist_100,Rue H.J. Coenen 2,info@avsequine.be,__setup__.product_pricelist_pb2

@@ -1,4 +1,0 @@
-id,active,route_ids/id,name,categ_id/id
-__import__.product_1006360,False,purchase.route_warehouse0_buy,"MANCHE RECHARGEABLE BETA-TR 3,5V HE",specific_data.product_categ__mat_equipement
-__import__.product_5250250,True,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",FLACON VERRE BRUN ROND 250ml +CP x60,specific_data.product_categ__mat_conso
-__import__.product_8019890,True,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",PORTE AIGUILLE MAYO HEGAR 18cm QM,specific_data.product_categ__mat_instrumentation
