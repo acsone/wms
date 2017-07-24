@@ -133,11 +133,11 @@ def location_compute_parents(ctx):
 @anthem.log
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
-    content = resource_stream(req, 'data/demo/delivery_template.csv')
+    content = resource_stream(req, 'data/install/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/delivery_itinerary.csv')
+    content = resource_stream(req, 'data/install/delivery_itinerary.csv')
     load_csv_stream(ctx, 'round.itinerary', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/delivery_clients.csv')
+    content = resource_stream(req, 'data/install/delivery_clients.csv')
     load_csv_stream(ctx, 'round.itinerary.position', content, delimiter=',')
 
 
