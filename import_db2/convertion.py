@@ -132,7 +132,7 @@ class ProductMapper(EntityMapper):
         price2 = db2_entity.get('gespv2')
         if price2 and price2 != price1:
             self._pricelist_item_product_price(
-                '__setup__.product_pricelist_pb2',
+                'specific_data.product_pricelist_pb2',
                 odoo_entity['default_code'],
                 price2,
                 'pb2'
@@ -231,7 +231,7 @@ class CustomerMapper(EntityMapper):
             if code_remise < 50:
                 pricelist = '__setup__.product_pricelist_pb1'
             else:
-                pricelist = '__setup__.product_pricelist_pb2'
+                pricelist = 'specific_data.product_pricelist_pb2'
         else:
             pricelist = None
 
@@ -362,7 +362,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
         FieldMapper('alcyon_category_id/id',
-                    constant='__setup__.partner_category_supplier'),
+                    constant='specific_partner.partner_category_supplier'),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
