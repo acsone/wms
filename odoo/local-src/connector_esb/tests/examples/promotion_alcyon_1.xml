@@ -2,12 +2,12 @@
 <ROOT>
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
-      <AlcyonGroupId>ESB_1</AlcyonGroupId>
+      <AlcyonGroupId>Ref123</AlcyonGroupId>
       <Percent>5.00</Percent>
       <ProductType>ALI</ProductType>
     </Row>
     <Row>
-      <AlcyonGroupId>ESB_1</AlcyonGroupId>
+      <AlcyonGroupId>Ref123</AlcyonGroupId>
       <Percent>8.00</Percent>
       <ProductType>ALG</ProductType>
     </Row>

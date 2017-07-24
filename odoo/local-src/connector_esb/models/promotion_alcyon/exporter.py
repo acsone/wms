@@ -18,10 +18,7 @@ class PromotionAlcyonExportMapper(Component):
 
     @mapping
     def compute_alcyongroup(self, record):
-        group_id = ''
-        if record.pricelist_id:
-            group_id = (record.pricelist_id.esb_ref or '')
-        return {'AlcyonGroupId': group_id}
+        return {'AlcyonGroupId': record.pricelist_id.esb_ref}
 
     @mapping
     def compute_percent(self, record):

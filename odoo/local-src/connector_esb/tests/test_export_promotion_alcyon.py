@@ -20,12 +20,6 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
         return self.env['product.pricelist.item']
 
     def setup_records(self):
-        self.cat_vet = self.env.ref(
-                'specific_partner.partner_category_veterinary')
-        self.cat_vet.esb_ref = 'ESB_1'
-        self.cat_pharma = self.env.ref(
-                'specific_partner.partner_category_pharmacy')
-        self.cat_pharma.esb_ref = 'ESB_2'
         # Create 2 products
         self.p1 = self.env['product.product'].create({
             'name': 'Unittest P1',
@@ -45,7 +39,7 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
         # Create a new pricelist with percentage discount on the product 1
         self.discount_pricelist_1 = self.env['product.pricelist'].create({
             'name': 'Discount list 1',
-            'esb_ref': 'ESB_1',
+            'esb_ref': 'Ref123',
             'item_ids': [
                 (0, False, {
                     'applied_on': '2b_product_price_category',
@@ -63,12 +57,14 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
                 }),
             ],
         })
-        print self.discount_pricelist_1.item_ids
+
+    def test_filename(self):
+        self.check_filename('AlcyonPromotion_{0}.xml')
 
     def test_mapper(self):
         """ Testing mapper without id client """
         expected = {
-            'AlcyonGroupId': self.cat_vet.esb_ref,
+            'AlcyonGroupId': 'Ref123',
             'Percent': '5.00',
             'ProductType': 'ALI'
         }
