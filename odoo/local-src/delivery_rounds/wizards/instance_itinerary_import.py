@@ -47,14 +47,16 @@ class RoundItineraryImport(models.TransientModel):
 
         instance._update_itinerary(self.itinerary_id)
 
-        # set sequence on deliveries according to sequence defined in the itinerary
+        # set sequence on deliveries according to sequence defined in the
+        # itinerary
         shippings = instance.shipping_ids
         # last_seq = max([1] + shippings.mapped('sequence'))
         for shipping in shippings:
             if not shipping.sequence:
                 # shipping.sequence = last_seq + positions[
                 #   shipping.partner_id.id]
-                shipping.sequence = self.itinerary_id.sequence*10000 + positions[
-                    shipping.partner_id.id]
+                shipping.sequence = (
+                    self.itinerary_id.sequence*10000 +
+                    positions[shipping.partner_id.id])
 
         return act_close
