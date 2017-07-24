@@ -87,7 +87,9 @@ class RoundInstance(models.Model):
     def _get_complete_name(self):
         for rec in self:
             rec.complete_name = '%s %s - %s' % (
-                rec.date, float2time(rec.time_leave_planned), rec.template_id.display_name)
+                rec.date,
+                float2time(rec.time_leave_planned),
+                rec.template_id.display_name)
 
     @api.model
     def create(self, vals):
