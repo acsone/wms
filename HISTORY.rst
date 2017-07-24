@@ -20,6 +20,8 @@ Unreleased
 
 **Build**
 
+* Clean migration.yml because we reset integration instance
+
 **Documentation**
 
 
