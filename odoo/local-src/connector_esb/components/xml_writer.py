@@ -111,7 +111,9 @@ class ESBXMLWriter(AbstractComponent):
         pattern = self.config.export_filename.strip()
         return pattern.format(
             name=self.model._name.replace('.', '_'),
-            date=fields.Date.today().replace('-', ''))
+            date=fields.Date.today().replace('-', ''),
+            time=fields.Datetime.now().split(' ')[1].replace(':', '')
+        )
 
     def path(self):
         return (self.env.context.get('xml_out_path') or

@@ -85,16 +85,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_filename(self):
-        today = fields.Date.today().replace('-', '')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            expected = 'Pharmacy_{}.xml'.format(today)
-            writer = work.component(usage='local.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
-            writer = work.component(usage='sftp.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
+        self.check_filename('Pharmacy_{}.xml')
 
     @tools.mute_logger('dicttoxml')
     def test_record_exporter_local(self):

@@ -20,6 +20,9 @@
         'product_expiry',
         'product',
         'specific_purchase',
+        'pricelist_discount',
+        'delivery_rounds',
+        'specific_print',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -32,6 +35,8 @@
         'views/product_views.xml',
         'views/product_uom_views.xml',
         'views/product_state_views.xml',
+        'views/product_pricelist.xml',
+        'views/res_country.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

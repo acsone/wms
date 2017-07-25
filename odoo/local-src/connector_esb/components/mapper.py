@@ -41,3 +41,22 @@ def dt2esbdate(field):
             return ''
         return value[:10].replace('-', '/')
     return modifier
+
+
+def falsy2emptystring(field):
+    """ A modifier intended to be used on the ``direct`` mappings.
+
+    Turn falsy values into an empty string
+
+    Example::
+
+        direct = [(falsy2emptystring('source'), 'target')]
+
+    """
+    def modifier(self, record, to_attr):
+        value = record[field]
+        if not value:
+            return ''
+        return value
+
+    return modifier

@@ -22,4 +22,18 @@
     <field name="export_filename">ProductStock_{date}.xml</field>
   </record>
 
+  <record id="esb_timestamp_customer" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">res.partner</field>
+    <field name="kind">customer</field>
+    <field name="export_filename">Customer_{date}_{time}.xml</field>
+  </record>
+
+  <record id="esb_timestamp_customer_address" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">res.partner</field>
+    <field name="kind">customer.address</field>
+    <field name="export_filename">CustomerAddress_{date}_{time}.xml</field>
+  </record>
+
 </odoo>

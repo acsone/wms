@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ROOT>
+  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
+    <Row>
+      <IsDefaultShipping>False</IsDefaultShipping>
+      <City>Kloten</City>
+      <Street>Some streets in one line</Street>
+      <CountryId>ESB</CountryId>
+      <Postcode>xyz</Postcode>
+      <Firstname/>
+      <IsDefaultBilling>True</IsDefaultBilling>
+      <AddressId>ref-invoice</AddressId>
+      <Telephone>021123123</Telephone>
+      <CustomerId>refno</CustomerId>
+    </Row>
+    <Row>
+      <IsDefaultShipping>True</IsDefaultShipping>
+      <City>Bern</City>
+      <Fax>0123123123</Fax>
+      <Street>Some streets in two line
+Second line, here</Street>
+      <CountryId>ESB</CountryId>
+      <AddressId>ref-delivery</AddressId>
+      <Firstname/>
+      <IsDefaultBilling>False</IsDefaultBilling>
+      <CustomerId>refno</CustomerId>
+    </Row>
+    <Row>
+      <IsDefaultShipping>True</IsDefaultShipping>
+      <City>Genf</City>
+      <Street>Some streets in two line
+2nd line</Street>
+      <CountryId>ESB</CountryId>
+      <AddressId>ref-delivery</AddressId>
+      <Firstname>contact-name</Firstname>
+      <IsDefaultBilling>True</IsDefaultBilling>
+      <CustomerId>refno2</CustomerId>
+      <Postcode>xyz</Postcode>
+    </Row>
+  </Root>
+</ROOT>

@@ -12,5 +12,8 @@ from . import product
 from . import product_uom
 from . import product_state
 from . import stock
-
-from . import product_state
+from . import customer
+from . import customer_address
+from . import partner_alcyon_category
+from . import product_pricelist
+from . import res_country

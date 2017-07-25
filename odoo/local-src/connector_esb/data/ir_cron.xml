@@ -40,4 +40,56 @@
     <field eval="'()'" name="args"/>
   </record>
 
+  <record forcecreate="True" id="ir_cron_esb_export_customer_morning" model="ir.cron">
+    <field name="name">ESB - Morning Export Customer</field>
+    <field eval="False" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">24</field>
+    <field name="interval_type">hours</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field eval="'esb.backend'" name="model"/>
+    <field eval="'cron_export_customer'" name="function"/>
+    <field eval="'()'" name="args"/>
+  </record>
+
+  <record forcecreate="True" id="ir_cron_esb_export_customer_afternoon" model="ir.cron">
+    <field name="name">ESB - Afternoon Export Customer</field>
+    <field eval="False" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">24</field>
+    <field name="interval_type">hours</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field eval="'esb.backend'" name="model"/>
+    <field eval="'cron_export_customer'" name="function"/>
+    <field eval="'()'" name="args"/>
+  </record>
+
+  <record forcecreate="True" id="ir_cron_esb_export_customer_address_morning" model="ir.cron">
+    <field name="name">ESB - Morning Export Customer Address</field>
+    <field eval="False" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">24</field>
+    <field name="interval_type">hours</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field eval="'esb.backend'" name="model"/>
+    <field eval="'cron_export_customer_address'" name="function"/>
+    <field eval="'()'" name="args"/>
+  </record>
+
+  <record forcecreate="True" id="ir_cron_esb_export_customer_address_afternoon" model="ir.cron">
+    <field name="name">ESB - Afternoon Export Customer Address</field>
+    <field eval="False" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">24</field>
+    <field name="interval_type">hours</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field eval="'esb.backend'" name="model"/>
+    <field eval="'cron_export_customer_address'" name="function"/>
+    <field eval="'()'" name="args"/>
+  </record>
+
 </odoo>
