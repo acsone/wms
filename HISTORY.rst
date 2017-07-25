@@ -13,6 +13,7 @@ Unreleased
 * ALCN-926 Install module Specific Data and remove references to __setup__
 * ALCN-870: Add webservice for obtaining stock level for products in connector_esb
 * ALCN-856 ESB export of stock
+* ALCN-863: ESB export of customer and customer addresses
 
 **Bugfixes**
 
@@ -54,7 +55,6 @@ Unreleased
 * ALCN-903: Auto-fill fields when create helpdesk ticket from picking
 * ALCN-904: Custom purchase report (add new measures)
 * Setup song: do not reset admin pwd for devs
-  ALCN-863: ESB export of customer and customer addresses
 
 **Bugfixes**
 

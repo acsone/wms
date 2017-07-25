@@ -10,6 +10,8 @@ Existing synchronizations:
 
 * Export pharmacies to the ESB (differential, once a day)
 * Export products to the ESB (differential, once a day)
+* Export clients to the ESB (differential, twice a day)
+* Export clients addresses to the ESB (differential, twice a day)
 
 Webservices:
 
