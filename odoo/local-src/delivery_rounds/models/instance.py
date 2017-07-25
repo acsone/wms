@@ -115,7 +115,8 @@ class RoundInstance(models.Model):
             ('partner_id', 'in', partner_ids),
             ('state', '=', 'confirmed')])
         try:
-            picking_confirmed.action_assign()
+            if not self.env.context.get('skip_reservation'):
+                picking_confirmed.action_assign()
         except UserError:
             # if no moves
             pass
@@ -149,7 +150,7 @@ class RoundInstance(models.Model):
         compute='_get_count_picking',
         readonly=True)
     count_picking_done_total = fields.Integer(
-        'Picking Donee Total',
+        'Picking Done Total',
         compute='_get_count_picking',
         readonly=True)
     count_picking_available_partner = fields.Integer(

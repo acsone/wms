@@ -37,11 +37,6 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     def confirm(self):
         if not self.template_ids:
             raise Warning(_('Please select the templates'))
-        if self.assign_moves:
-            user = self.env['res.users'].browse(self._uid)
-            self.env['procurement.order'].run_scheduler(
-                company_id=user.company_id.id)
-
         templates = self.template_ids
         today = fields.Date.context_today(self)
         # deduct templates for which instance already exist
@@ -59,6 +54,13 @@ class MakeTodayDeliveryPlan(models.TransientModel):
             for itinerary in template.itinerary_ids:
                 rzi = self.env['round.itinerary.import'].create({
                     'itinerary_id': itinerary.id})
-                rzi.with_context(active_ids=[ri.id]).confirm()
+                rzi.with_context(
+                    active_ids=[ri.id],
+                    skip_reservation=True).confirm()
+
+        if self.assign_moves:
+            # run in background
+            self.env['procurement.order.compute.all'].procure_calculation()
+
         return dict(self.env.ref(
             'delivery_rounds.action_round_instance').read()[0])
