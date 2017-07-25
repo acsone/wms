@@ -90,7 +90,7 @@ def do_partial_picking(pick, lines):
     for line in lines:
         product_xmlid = convert_product_id(line['dccart'])
         product = pick.env.ref(product_xmlid)
-        ope = pick.pack_operation_pack_ids.filtered(
+        ope = pick.pack_operation_ids.filtered(
             lambda p: p.product_id == product)
         if not ope:
             continue
