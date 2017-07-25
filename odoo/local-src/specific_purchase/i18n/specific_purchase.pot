@@ -16,6 +16,25 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_purchase
+#: model:mail.template,body_html:specific_purchase.cancel_purchase_order
+msgid "\n"
+"            \n"
+"                <p>Hello,</p>\n"
+"                <p>We decided to cancel the purchase order ${object.partner_ref} (${object.amount_total}) from ${object.date_order} for the following reason:<br/>\n"
+"                ${object.cancel_reason_id.name}</p>\n"
+"                <p>Thank you for your understanding.</p>\n"
+"                <p>Best regards,</br>\n"
+"                Alcyon</p>\n"
+"            \n"
+"        "
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_purchase_order_cancel
+msgid " Ask a reason for the purchase order cancellation."
+msgstr ""
+
+#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_active
 msgid "Active"
 msgstr ""
@@ -217,6 +236,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_purchase_manager_id
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_purchase_manager_id
 msgid "Purchase manager"
+msgstr ""
+
+#. module: specific_purchase
+#: model:mail.template,subject:specific_purchase.cancel_purchase_order
+msgid "Purchase order ${object.partner_ref} canceled"
 msgstr ""
 
 #. module: specific_purchase

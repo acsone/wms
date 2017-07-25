@@ -25,6 +25,8 @@ Unreleased
 * ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
 * ALCN-913: Add the unique supplier on the product form
 * ALCN-857: Add esb export price
+* ALCN-922: Add the module purchase_cancel_reason
+* ALCN-923: Send an email when a purchase order is canceled
 
 **Bugfixes**
 
