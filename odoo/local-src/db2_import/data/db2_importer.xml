@@ -2,6 +2,7 @@
   <record model="db2.importer" id="db2_importer">
   </record>
 
+  <!-- sale order header table -->
   <record model="db2.importer.table" id="db2_table_pentcdcl">
     <field name="importer_id" ref="db2_importer"/>
     <field name="schema">SBDATA</field>
@@ -11,6 +12,8 @@
     <field name="create_job" eval="True"/>
     <field name="eta">2</field>
   </record>
+
+  <!-- sale order detail line table -->
   <record model="db2.importer.table" id="db2_table_pdetcdcl">
     <field name="importer_id" ref="db2_importer"/>
     <field name="schema">SBDATA</field>
@@ -18,4 +21,15 @@
     <field name="table_prefix">dcc</field>
     <field name="id_columns">dccsui,dcccli,dccsuc,dccnli</field>
   </record>
+
+  <!-- relation table between lot and move
+       containing reference to sale order -->
+  <record model="db2.importer.table" id="db2_table_mvtlot">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">MVTLOT</field>
+    <field name="table_prefix">mlt</field>
+    <field name="id_columns">mltlot,mltsui,mltcli,mltsuc,mltnli</field>
+  </record>
+
 </odoo>
