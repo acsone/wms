@@ -167,12 +167,12 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_create_date
 msgid "Created on"
-msgstr "Date"
+msgstr "Créé le"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_date
 msgid "Date"
-msgstr "Date "
+msgstr "Date"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
@@ -318,17 +318,13 @@ msgid "Include in a delivery round"
 msgstr "Inclure dans une tournée"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_itinerary_ids
-msgid "Intineraries"
-msgstr "Intineraries"
-
-#. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_itinerary_tree
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_itinerary_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_itinerary
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_tree
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_itinerary_ids
 msgid "Itineraries"
 msgstr "Itinéraires"
 
@@ -441,18 +437,18 @@ msgstr "Téléphone"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_partner
 msgid "Picking Available Partner"
-msgstr "Picking Available Partner"
+msgstr "Nombre de destinations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_total
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_weight
 msgid "Picking Available Total"
-msgstr "Picking Available Total"
+msgstr "Total de picking disponibles"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_done_total
 msgid "Picking Done Total"
-msgstr "Picking Done Total"
+msgstr "Total de picking réalisés"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_picking
@@ -671,26 +667,6 @@ msgid "round.template"
 msgstr "round.template"
 
 #. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_vehicle
-msgid "round.vehicle"
-msgstr "Modèle de Tournée"
-
-#. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_round_wizard_makeplan
 msgid "round.wizard.makeplan"
 msgstr "round.wizard.makeplan"
-
-#. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone
-msgid "round.zone"
-msgstr "Itinéraire"
-
-#. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone_import
-msgid "round.zone.import"
-msgstr "round.zone.import"
-
-#. module: delivery_rounds
-#: model:ir.model,name:delivery_rounds.model_round_zone_position
-msgid "round.zone.position"
-msgstr "round.zone.position"

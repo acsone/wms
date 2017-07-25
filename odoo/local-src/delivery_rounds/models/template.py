@@ -12,7 +12,7 @@ class RoundTemplate(models.Model):
     name = fields.Char('Name')
     itinerary_ids = fields.Many2many(
         'round.itinerary',
-        string="Intineraries")
+        string="Itineraries")
     color = fields.Integer('Color Index')
     time_picking_planned = fields.Float(
         'Planned Picking Start Time')
