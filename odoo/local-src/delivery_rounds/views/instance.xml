@@ -18,9 +18,9 @@
                                 <div class="o_kanban_card_header_title">
                                     <div class="o_primary"><field name="template_id"/></div>
                                     <div class="o_secondary">
-                                        <strong><field name="time_picking_planned" widget="float_time" class="oe_inline"/></strong>
-                                        |
-                                        <strong><field name="time_leave_planned" widget="float_time" class="oe_inline"/></strong>
+                                        <div style="display:inline-table"><strong><field name="time_picking_planned" widget="float_time"/></strong></div>
+                                        <div style="display:inline-table;white-space:pre"> | </div>
+                                        <div style="display:inline-table"><strong><field name="time_leave_planned" widget="float_time"/></strong></div>
                                         <!-- nodate is not transfered in the context from search view
                                         <field name="date" t-if="!user_context['nodate']"/>
                                         -->
