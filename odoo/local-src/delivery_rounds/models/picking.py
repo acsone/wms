@@ -77,9 +77,9 @@ class StockPicking(models.Model):
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
-        roundi = self.env['round.instance'].search(
+        instances = self.env['round.instance'].search(
             [('state', 'in', ('draft', ))]).name_get()
-        return roundi, None
+        return instances, None
 
     _group_by_full = {
         'delivery_round_id': _group_delivery_round,
