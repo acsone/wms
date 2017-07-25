@@ -57,18 +57,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="margin-top:-20px">
                                     <field name="itinerary_ids"/>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="margin-top:40px">
                                     <div class="col-xs-12 o_kanban_primary_bottom" t-attf-style="#{(record.state.raw_value=='draft' and 'background-color: lightblue') or (record.state.raw_value=='open' and 'background-color: lightgreen') or ''}">
                                         <field name="count_picking_done_total" widget="progress" title="Pickings" options="{'current_value': 'count_picking_done_total', 'max_value': 'count_picking_available_total'}"/>
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="container o_kanban_card_manage_pane o_invisible">
+                            </div><!--
+                            No space here
+                            --><div class="container o_kanban_card_manage_pane o_invisible">
+                                <div class="row">
+                                    <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                        <div class="o_kanban_card_manage_title">
+                                            <span>Actions</span>
+                                        </div>
+                                        <div><a name="button_confirm" type="object" states="draft">Launch Pickings</a></div>
+                                        <div><a name="button_deliver" type="object" states="open">Deliver</a></div>
+                                        <div><a name="print_all_deliveryslip" type="object" states="done">Print all deliveryslip</a></div>
+                                        <br/>
+                                    </div>
+                                </div>
                                 <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
                                     <div class="col-xs-8">
                                         <ul class="oe_kanban_colorpicker" data-field="color"/>
@@ -119,6 +129,7 @@
         <field name="arch" type="xml">
             <form string="Delivery Round">
                 <header>
+                    <button name="button_confirm" type="object" string="Launch Pickings" states="draft" class="oe_highlight"/>
                     <button name="button_deliver" type="object" string="Deliver" states="open" class="oe_highlight"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
                     <field name="state" widget="statusbar" clickable="True"/>
@@ -155,9 +166,11 @@
                             context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
                             />
                     </page>
-                    <page string="Stat">
-                        <field name="stat_time_picking" widget="float_time"/>
-                        <field name="stat_time_leave" widget="float_time"/>
+                    <page string="Statistics">
+                        <group>
+                            <field name="stat_time_picking" widget="float_time"/>
+                            <field name="stat_time_leave" widget="float_time"/>
+                        </group>
                     </page>
                 </notebook>
             </form>

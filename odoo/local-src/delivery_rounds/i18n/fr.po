@@ -252,12 +252,8 @@ msgstr "Destinations"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_complete_name
-msgid "Display name"
+msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: delivery_rounds

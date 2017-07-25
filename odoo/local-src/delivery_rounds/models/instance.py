@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import math
+from datetime import datetime
 
 from odoo import api, fields, models
 from odoo.exceptions import Warning as UserError
@@ -15,6 +16,19 @@ def float2time(value):
         minute = 0
         hour = hour + 1
     return '%d:%02d' % (hour, minute)
+
+
+def time2float(value):
+    return value.hour + value.minute / 60.0
+
+
+def time_now(record):
+    tz_name = record._context.get('tz') or record.env.user.tz
+    if not tz_name:
+        raise UserError(
+            "Please configure your timezone in your user preferences")
+    return time2float(fields.Datetime.context_timestamp(
+        record, datetime.now()))
 
 
 class RoundInstance(models.Model):
@@ -79,7 +93,7 @@ class RoundInstance(models.Model):
         )
 
     complete_name = fields.Char(
-        'Display name', readonly=True,
+        'Display Name', readonly=True,
         compute='_get_complete_name', store=True)
 
     @api.multi
@@ -183,6 +197,13 @@ class RoundInstance(models.Model):
             'delivery_rounds.action_picking_tree_available_round').read()[0])
 
     @api.one
+    def button_confirm(self):
+        """ Mark as confirmed. This launch the start of the pickings
+        """
+        self.state = 'open'
+        self.stat_time_picking = time_now(self)
+
+    @api.one
     def button_deliver(self):
         """ Validate all deliveries that are available. Mark as done and unlink
         other deliveries """
@@ -207,6 +228,7 @@ class RoundInstance(models.Model):
         for shipping in self.shipping_ids:
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
+        self.stat_time_leave = time_now(self)
 
     @api.multi
     def print_all_deliveryslip(self):
