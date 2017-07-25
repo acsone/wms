@@ -19,6 +19,7 @@ Unreleased
 * ALCN-870: Add webservice for obtaining stock level for products in connector_esb
 * ALCN-856 ESB export of stock
 * ALCN-863: ESB export of customer and customer addresses
+* IMP: Add the module web_sheet_full_width
 
 **Bugfixes**
 

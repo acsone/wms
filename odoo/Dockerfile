@@ -42,6 +42,7 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/queue, \
   /opt/odoo/external-src/report-print-send, \
   /opt/odoo/external-src/account-closing, \
+  /opt/odoo/external-src/web, \
   /opt/odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \
