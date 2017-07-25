@@ -25,6 +25,7 @@ Unreleased
 * ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
 * ALCN-913: Add the unique supplier on the product form
 * ALCN-857: Add esb export price
+* ALCN-924: Add a view to manage supplier promotions
 
 **Bugfixes**
 
