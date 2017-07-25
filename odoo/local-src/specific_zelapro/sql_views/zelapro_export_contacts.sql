@@ -16,6 +16,6 @@ CREATE OR REPLACE VIEW zelapro_export_contacts AS
     '' AS CCFFAX,
     '' AS CCFTEX,
     '' AS EMWADR,
-    partner.create_date AS create_date
+    partner.create_date AS create_date -- Mandatory field used to compute data to export
   FROM res_partner AS partner
   WHERE partner.supplier = TRUE;

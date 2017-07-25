@@ -18,6 +18,7 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         # SQL views
+        'sql_views/zelapro_export_cadencier_header.sql',
         'sql_views/zelapro_export_cadencier.sql',
         'sql_views/zelapro_export_contacts.sql',
         'sql_views/zelapro_export_lot_moves.sql',
@@ -30,6 +31,7 @@
         'views/zelapro_export.xml',
         'views/zelapro_config_settings.xml',
         'views/product_category.xml',
+        'views/product_template.xml',
         'wizard/zelapro_export_wizard.xml',
 
         # Data

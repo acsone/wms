@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW zelapro_export_stock_moves AS
       WHEN picking_type.code = 'outgoing' THEN ('-' || move.product_uom_qty)::NUMERIC
       ELSE move.product_uom_qty
     END AS MVTQUC,
-    move.create_date AS create_date
+    move.create_date AS create_date -- Mandatory field used to compute data to export
   FROM stock_move AS move
     LEFT JOIN stock_picking AS picking ON move.picking_id = picking.id
     LEFT JOIN stock_picking_type AS picking_type ON move.picking_type_id = picking_type.id

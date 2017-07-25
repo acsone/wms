@@ -8,7 +8,7 @@ CREATE OR REPLACE VIEW zelapro_export_promotions AS
     ''                         AS POURCENTAGE_2, -- When the PR #238 is merged use the field discount_purchase on item
     item.min_qty               AS QUANTITE,
     ''                         AS GRATUIT,
-    item.create_date           AS create_date
+    item.create_date           AS create_date -- Mandatory field used to compute data to export
   FROM product_supplierinfo AS item
     INNER JOIN product_product AS product ON item.product_id = product.id
     INNER JOIN res_partner AS supplier ON item.name = supplier.id;

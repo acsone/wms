@@ -8,12 +8,19 @@ from odoo.exceptions import UserError
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    turnover = fields.Monetary('Turnover')
-    turnover_average = fields.Monetary('Turnover average')
-    turnover_nbr_lines = fields.Integer('Turnover (nbr lines)')
-    turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)')
-    abc_id = fields.Many2one('activity.based.costing', string='ABC')
+    turnover = fields.Monetary('Turnover',
+                               readonly=True)
+    turnover_average = fields.Monetary('Turnover average',
+                                       readonly=True)
+    turnover_nbr_lines = fields.Integer('Turnover (nbr lines)',
+                                        readonly=True)
+    turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)',
+                                                readonly=True)
+    abc_id = fields.Many2one('activity.based.costing',
+                             string='ABC',
+                             readonly=True)
     business_unit_id = fields.Many2one('product.category',
+                                       string='Business unit',
                                        compute='_compute_business_unit_id',
                                        readonly=True,
                                        store=True)
@@ -249,3 +256,44 @@ class ProductProduct(models.Model):
                         if not abc_rates_lst:
                             break
 
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    turnover = fields.Monetary('Turnover',
+                               readonly=True,
+                               compute='_compute_abc_values')
+    turnover_average = fields.Monetary('Turnover average',
+                                       readonly=True,
+                                       compute='_compute_abc_values')
+    turnover_nbr_lines = fields.Integer('Turnover (nbr lines)',
+                                        readonly=True,
+                                        compute='_compute_abc_values')
+    turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)',
+                                                readonly=True,
+                                                compute='_compute_abc_values')
+    abc_id = fields.Many2one('activity.based.costing',
+                             string='ABC',
+                             readonly=True,
+                             compute='_compute_abc_values')
+    business_unit_id = fields.Many2one('product.category',
+                                       string='Business unit',
+                                       compute='_compute_abc_values',
+                                       readonly=True)
+
+    @api.multi
+    def _compute_abc_values(self):
+        for product in self:
+            if len(product.product_variant_ids) != 1:
+                continue
+
+            variant = product.product_variant_ids
+            product.update({
+                'turnover': variant.turnover,
+                'turnover_average': variant.turnover_average,
+                'turnover_nbr_lines': variant.turnover_nbr_lines,
+                'turnover_average_nbr_lines':
+                    variant.turnover_average_nbr_lines,
+                'abc_id': variant.abc_id,
+                'business_unit_id': variant.business_unit_id,
+            })

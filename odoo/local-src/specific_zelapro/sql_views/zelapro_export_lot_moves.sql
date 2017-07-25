@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW zelapro_export_lot_moves AS
     quant.qty AS QUANTITE,
     lot.name AS LOT,
     to_char(lot.life_date, 'DD/MM/YYYY') AS DATE_PEREMPTION,
-    move.create_date AS create_date
+    move.create_date AS create_date -- Mandatory field used to compute data to export
   FROM stock_quant_move_rel AS rel
     INNER JOIN stock_move AS move ON rel.move_id = move.id
     INNER JOIN stock_picking AS picking ON move.picking_id = picking.id
