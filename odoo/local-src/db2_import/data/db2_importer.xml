@@ -29,7 +29,8 @@
     <field name="schema">SBDATA</field>
     <field name="table_name">MVTLOT</field>
     <field name="table_prefix">mlt</field>
-    <field name="id_columns">mltlot,mltsui,mltcli,mltsuc,mltnli</field>
+    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
   </record>
+
 
 </odoo>
