@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
-from odoo import fields
 from .common import ESBXMLTestCase
 
 
@@ -22,7 +21,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
 
     def setup_records(self):
         # Set existing products to inactive
-        all_product = self.env['product.product'].search([(1, '=', 1)])
+        all_product = self.env['product.product'].search([])
         all_product.write({'active': False})
         # # Create 2 products
         self.p1 = self.env['product.product'].create({
@@ -58,14 +57,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
                 ]
 
     def test_filename(self):
-        """ Test the structure of the file name to export """
-        today = fields.Date.today().replace('-', '')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            expected = 'ProductPrice_{0}.xml'.format(today)
-            writer = work.component(usage='local.xml.writer')
-            self.assertEqual(
-                writer.filename(), expected)
+        self.check_filename('ProductPrice_{0}.xml')
 
     def test_mapper(self):
         """ Testing the mapper on one record"""
