@@ -8,6 +8,7 @@
             <tree string="Templates">
                 <field name="time_picking_planned" widget="float_time"/>
                 <field name="time_leave_planned" widget="float_time"/>
+                <field name="code" />
                 <field name="name" />
             </tree>
         </field>
@@ -18,6 +19,7 @@
         <field name="arch" type="xml">
             <form string="Templates">
                 <group>
+                    <field name="code" />
                     <field name="name" />
                     <field name="time_picking_planned" widget="float_time"/>
                     <field name="time_leave_planned" widget="float_time"/>
