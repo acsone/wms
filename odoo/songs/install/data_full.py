@@ -146,9 +146,9 @@ def import_lots(ctx):
     """ Importing lots from csv"""
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
-    content = resource_stream(req, 'data/install/stock_production_lot.csv')
     Lot = ctx.env['stock.production.lot'].with_context(load_ctx)
-    load_csv_stream(ctx, Lot, content, delimiter=',')
+    for content in get_files(req, 'data/install/stock_production_lot.csv'):
+        load_csv_stream(ctx, Lot, content, delimiter=',')
 
 
 @anthem.log
@@ -176,8 +176,8 @@ def import_inventory(ctx):
 @anthem.log
 def import_stock_bins(ctx):
     """ Importing Stock Bins"""
-    content = resource_stream(req, 'data/install/product_stock_bin.csv')
-    load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
+    for content in get_files(req, 'data/install/product_stock_bin.csv'):
+        load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
 
 
 @anthem.log

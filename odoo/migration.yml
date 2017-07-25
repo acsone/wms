@@ -48,8 +48,8 @@ migration:
               - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
               - anthem songs.install.data_full::main
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
-              - bin/importer.sh songs.install.data_full::import_inventory /opt/odoo/data/install/stock_inventory_line.csv
-              - bin/importer.sh songs.install.data_full::import_stock_bins /opt/odoo/data/install/product_stock_bin.csv
+              - anthem songs.install.data_full::import_inventory
+              - anthem songs.install.data_full::import_stock_bins
         demo:
           operations:
             post:

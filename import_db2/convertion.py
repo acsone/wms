@@ -685,7 +685,7 @@ class StockProductionLotMapper(EntityMapper):
             rec['vloech'] and
             int('{:.0f}'.format(rec['vloech'])) != 99999999 and
             datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
-                    .strftime('%Y-%m-%d 00:00:00') or '',
+                    .strftime('%Y-%m-%d 00:00:00') or '2000-01-01 00:00:00',
     }
 
     def get_sql_select(self):
@@ -756,7 +756,12 @@ class StockInventoryLineMapper(EntityMapper):
         """)
 
     def get_sql_where(self):
-        where = "lotact !=0 AND lotsuc='1'"
+        where = """
+            lotact !=0
+            AND lotsuc='1'
+            AND CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+            AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
         if not self.importer.full:
             where += """ 
             AND lotref IN (SELECT dccart
