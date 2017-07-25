@@ -131,6 +131,7 @@ class DB2MapperSaleOrder(object):
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
             'create_date': create_date,
+            'confirmation_date': convert_date('eccd', row),
             'write_date': convert_date('eccm', row) or create_date,
             'partner_id': rec.env.ref(convert_customer(int(row['ecccli']))).id,
         }
