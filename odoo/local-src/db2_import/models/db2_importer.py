@@ -198,6 +198,9 @@ class DB2MapperSaleOrder(object):
                 'state': 'done',
                 'invoice_status': 'invoiced'
             })
+            cr.execute(
+                "UPDATE sale_order set invoice_status = 'invoiced'"
+                " WHERE id = %s", [new.id])
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
