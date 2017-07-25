@@ -194,7 +194,10 @@ class DB2MapperSaleOrder(object):
 
         if is_delivered:
             # validate sale order
-            new.state = 'done'
+            new.write({
+                'state': 'done',
+                'invoice_status': 'invoiced'
+            })
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
