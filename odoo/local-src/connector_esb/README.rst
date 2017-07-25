@@ -22,6 +22,7 @@ Webservices:
    parameters sent using a form
  * ``/connector_esb/statistics/product/<sku>/<client_ref>`` :
         return for a product a client yearly purchase statistics
+ * ``/connector_esb/statistics/customer/<ref>``: return customer yearly statisctics
 
 Configuration
 =============

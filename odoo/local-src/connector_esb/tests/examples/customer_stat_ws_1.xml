@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<result>
+  <resultItem>
+    <productType>aliment</productType>
+    <purchaseYear>70.00</purchaseYear>
+    <purchaseLastYear>840.00</purchaseLastYear>
+  </resultItem>
+  <resultItem>
+    <productType>medicament</productType>
+    <purchaseYear>8995.00</purchaseYear>
+    <purchaseLastYear>8995.00</purchaseLastYear>
+  </resultItem>
+  <resultItem>
+    <productType>materiel</productType>
+    <purchaseYear>705.00</purchaseYear>
+    <purchaseLastYear>0.00</purchaseLastYear>
+  </resultItem>
+</result>
