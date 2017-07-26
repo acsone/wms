@@ -25,6 +25,11 @@ migration:
 
           - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
+          # To an unknown reason,
+          # ir_values created in 'default_values'
+          # doesn't take the good value
+          # when we execute the function from main function.
+          - anthem songs.install.accounting::default_values
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
           - anthem songs.install.sales::main

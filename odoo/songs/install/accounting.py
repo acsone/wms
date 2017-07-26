@@ -367,6 +367,5 @@ def main(ctx):
     create_financial_journals(ctx)
     add_xmlid_fiscal_position(ctx)
     settings(ctx)
-    default_values(ctx)
     setup_sequences(ctx)
     set_esb_references(ctx)
