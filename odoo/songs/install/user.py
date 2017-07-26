@@ -36,8 +36,22 @@ def import_users(ctx):
 
 
 @anthem.log
+def esb_user_password(ctx):
+    """ Change ESB User password """
+    if os.getenv('RUNNING_ENV') in ('dev', ):
+        ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
+        return
+    user = ctx.env.ref('__setup__.res_user_wso2')
+    user.password_crypt = (
+        '$pbkdf2-sha512$19000$VmotpRQixBgDwBjDGEMoxQ$xFRJGwx9lYflbRdfRQbgw'
+        'rXetTOkADQokLO3FWLOhaXhR0TRx.nqrm4gOOQIlmF5ppL3oZaCAYj3fRLfT/Fjmg'
+    )
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
     admin_user_password(ctx)
     import_users(ctx)
+    esb_user_password(ctx)
