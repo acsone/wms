@@ -10,6 +10,7 @@ Unreleased
 
 * Update all data files
 * ALCN-934: Add import for bin, inventory and lot (full mode)
+* ALCN-33: Module to import Sale orders
 
 **Features and Improvements**
 
