@@ -14,6 +14,26 @@ class ProductTemplate(models.Model):
     length = fields.Float('Length (cm)', help='Length in cm')
     width = fields.Float('Width (cm)', help='Width in cm')
     depth = fields.Float('Depth (cm)', help='Depth in cm')
+    supplier_id = fields.Many2one('res.partner',
+                                  string='Vendor',
+                                  readonly=True,
+                                  compute='_compute_supplier_id',
+                                  store=True)
+
+    @api.depends('seller_ids')
+    def _compute_supplier_id(self):
+        """
+        Compute the supplier for each product.
+        Alcyon cannot have more than one supplier per product.
+        This field will be used by filters
+        :return:
+        """
+        for product in self:
+            sellers = product.seller_ids.mapped('name')
+            if len(sellers) == 1:
+                product.supplier_id = sellers.id
+            else:
+                product.supplier_id = None
 
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):

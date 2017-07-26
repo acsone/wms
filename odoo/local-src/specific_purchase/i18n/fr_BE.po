@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 07:28+0000\n"
-"PO-Revision-Date: 2017-06-29 07:28+0000\n"
+"POT-Creation-Date: 2017-07-26 12:26+0000\n"
+"PO-Revision-Date: 2017-07-26 12:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,7 @@ msgstr "Active"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_back_order_accepted
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_back_order_accepted
 msgid "Back order accepted"
 msgstr "Reliquat accepté"
 
@@ -51,14 +52,23 @@ msgstr "Créé le"
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_date
 msgid "Date"
-msgstr "Date"
+msgstr "Date "
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_config_settings_lead_time
+msgid "Default Lead time (in days)"
+msgstr "Délai de livraison par défaut (en jours)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_depth
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_depth
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_depth
 msgid "Depth (cm)"
 msgstr "Profondeur (cm)"
 
 #. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_depth
+#: model:ir.model.fields,help:specific_purchase.field_product_product_depth
 #: model:ir.model.fields,help:specific_purchase.field_product_template_depth
 msgid "Depth in cm"
 msgstr "Profondeur en cm"
@@ -82,12 +92,19 @@ msgstr "Ristourne liste de prix"
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_display_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
 msgid "Display Name"
-msgstr "Afficher le nom"
+msgstr "Nom affiché"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_date_out_of_stock_expected
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_date_out_of_stock_expected
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_date_out_of_stock_expected
 msgid "Expected out of stock date"
 msgstr "Date escomptée de réapprovisionnement"
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
+msgid "Group By"
+msgstr "Grouper par"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_id
@@ -109,19 +126,19 @@ msgstr "Introduction"
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday___last_update
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_write_uid
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Derniere fois mis à jour par"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_write_date
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Dernière mis à jour le"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_last_date_done
@@ -129,16 +146,15 @@ msgid "Last date of Transfer"
 msgstr "Dernière date de transfert"
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_config_settings_lead_time
-msgid "Lead time (in days)"
-msgstr "Délai de livraison (en jours)"
-
-#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_length
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_length
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_length
 msgid "Length (cm)"
 msgstr "Longueur (cm)"
 
 #. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_length
+#: model:ir.model.fields,help:specific_purchase.field_product_product_length
 #: model:ir.model.fields,help:specific_purchase.field_product_template_length
 msgid "Length in cm"
 msgstr "Longueur en cm"
@@ -175,6 +191,14 @@ msgid "Product ref"
 msgstr "Référence produit"
 
 #. module: specific_purchase
+#: model:ir.actions.act_window,name:specific_purchase.product_state_action_form
+#: model:ir.ui.menu,name:specific_purchase.menu_product_state_config
+#: model:ir.ui.view,arch_db:specific_purchase.view_product_state_form_view
+#: model:ir.ui.view,arch_db:specific_purchase.view_product_state_tree_view
+msgid "Product state"
+msgstr "Etat du produit"
+
+#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_promotion_ony
 msgid "Promotion Only"
 msgstr "Promotion seulement"
@@ -191,13 +215,9 @@ msgstr "Ligne de commande d'achat"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_purchase_manager_id
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_purchase_manager_id
 msgid "Purchase manager"
 msgstr "Responsable d'achat"
-
-#. module: specific_purchase
-#: model:ir.model,name:specific_purchase.model_purchase_report
-msgid "Purchases Orders"
-msgstr "Ordres d'achat"
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_remnant
@@ -215,17 +235,21 @@ msgid "Sequence"
 msgstr "Séquence"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_state_id
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_state_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
 msgid "State"
 msgstr "État"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_substitute_purchase_manager_id
 msgid "Substitute purchase manager"
 msgstr "Responsable d'achat remplaçant"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
 msgid "Supplier discount %"
 msgstr "Ristourne fournisseur %"
 
@@ -250,20 +274,26 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_supplier_id
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_supplier_id
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_supplier_id
+#: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
+msgid "Vendor"
+msgstr "Fournisseur"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_width
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_width
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_width
 msgid "Width (cm)"
 msgstr "Largeur (cm)"
 
 #. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_width
+#: model:ir.model.fields,help:specific_purchase.field_product_product_width
 #: model:ir.model.fields,help:specific_purchase.field_product_template_width
 msgid "Width in cm"
 msgstr "Largeur en cm"
-
-#. module: specific_purchase
-#: code:addons/specific_purchase/models/purchase_order.py:160
-#, python-format
-msgid "You need to define the lead time on purchase configuration"
-msgstr "Vous devez configurer le délai de livraison dans la configuration des achats"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_bank_holiday
