@@ -83,10 +83,11 @@ def convert_coding(value):
     return value
 
 
-def do_partial_picking(pick, lines):
+def do_partial_picking(pick, lines, lots):
     """ Do a partial picking using delivered qty from DB2 """
     pick.action_confirm()
     pick.force_assign()
+    pick.do_prepare_partial()
     for line in lines:
         product_xmlid = convert_product_id(line['dccart'])
         product = pick.env.ref(product_xmlid)
@@ -97,8 +98,62 @@ def do_partial_picking(pick, lines):
         # += to make sure than we process all qty if there are
         # more than one line with same product
         ope.qty_done += line['dccqul']
-    # XXX don't validate because we don't have lot
-    #pick.do_new_transfer()
+
+        # pack operation requires serial num / lot
+        if (ope.qty_done and ope.product_id and
+                ope.product_id.tracking != 'none'):
+            # there can be multiple lot for one product
+            for db2_lot in lots:
+                if (line['dccnli'] == db2_lot['mltnli'] and
+                        line['dccart'].strip() == db2_lot['mltart'].strip()):
+                    odoo_lot = pick.env['stock.production.lot'].search(
+                        [('name', '=', db2_lot['mltlot'].strip())])
+                    OpeLot = pick.env['stock.pack.operation.lot']
+                    values = {
+                        'operation_id': ope.id,
+                        'qty': -db2_lot['mltquc'],
+                    }
+                    if odoo_lot:
+                        values['lot_id'] = odoo_lot.id
+                    else:
+                        values['lot_name'] = db2_lot['mltlot'].strip()
+                    OpeLot.create(values)
+
+    # in our case 0 on each operation means we don't want to transfer
+    # as oposited to odoo process
+    if any([op.qty_done for op in pick.pack_operation_ids]):
+        pick.do_new_transfer()
+
+
+def do_final_picking(pick, lines, lots):
+    """ Transfert the last picking operations and lots are ok
+    we need still to set quantities
+    """
+    for line in lines:
+        product_xmlid = convert_product_id(line['dccart'])
+        product = pick.env.ref(product_xmlid)
+        ope = pick.pack_operation_ids.filtered(
+            lambda p: p.product_id == product)
+        if not ope:
+            continue
+        # += to make sure than we process all qty if there are
+        # more than one line with same product
+        ope.qty_done += line['dccqul']
+
+        # pack operation requires serial num / lot
+        if (ope.qty_done and ope.product_id and
+                ope.product_id.tracking != 'none'):
+            for db2_lot in lots:
+                if (line['dccnli'] == db2_lot['mltnli'] and
+                        line['dccart'].strip() == db2_lot['mltart'].strip()):
+                    for pack_lot in ope.pack_lot_ids:
+                        if pack_lot.lot_id.name == db2_lot['mltlot'].strip():
+                            pack_lot.qty = -db2_lot['mltquc']
+                            break
+    # in our case 0 on each operation means we don't want to transfer
+    # as oposited to odoo process
+    if any([op.qty_done for op in pick.pack_operation_ids]):
+        pick.do_new_transfer()
 
 
 class DB2MapperSaleOrder(object):
@@ -157,7 +212,7 @@ class DB2MapperSaleOrder(object):
                  )} for line in lines]
         is_delivered = True
         delivered_lines = []
-        partial_delivered_lines = []
+        not_delivered_lines = []
 
         for line in lines:
             product_xmlid = convert_product_id(line['dccart'])
@@ -187,10 +242,15 @@ class DB2MapperSaleOrder(object):
                 int(row['eccsuc']), int(line['dccnli']))
             create_or_update(SOLine, xmlid, values)
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
-            partial_delivered_lines.append(
-                line['dccqul'] and line['dccquc'] > line['dccqul'])
+            not_delivered_lines.append(line['dccqul'] == 0)
         is_delivered = all(delivered_lines)
-        is_partially_delivered = not any(partial_delivered_lines)
+        # don't do partial delivery when:
+        # - everything is delivered (put the pick to done)
+        # - delivery has not been started (keep picking in draft)
+        is_partially_delivered = (
+            not is_delivered and
+            not all(not_delivered_lines)
+        )
 
         if is_delivered:
             # validate sale order
@@ -210,13 +270,32 @@ class DB2MapperSaleOrder(object):
             if is_partially_delivered:
                 # Validate partially the pickings creating backorders
                 picks = new.picking_ids
-                for pick in picks.filtered(lambda p: p.state == 'confirmed'):
-                    do_partial_picking(pick, lines)
-                # XXX cannot confirm the second step as first step cannot
-                # be validated without lots
-                # pick2 = picks.filtered(lambda p: p.state == 'waiting')
-                # do_partial_picking(pick2, lines)
-
+                loc_output = rec.env.ref('stock.stock_location_output')
+                loc_customers = rec.env.ref('stock.stock_location_customers')
+                picks1 = picks.filtered(
+                    lambda p: p.location_dest_id == loc_output)
+                pick2 = picks.filtered(
+                    lambda p: p.location_dest_id == loc_customers)
+                query = (
+                    "SELECT mltlot, mltart, mltnli, mltquc"
+                    " FROM db2_mvtlot"
+                    " WHERE mltsui = %s"
+                    " AND mltnum = %s"
+                    " AND TRIM(mltsuc) = '%s'")
+                cr.execute(
+                    query,
+                    (row['eccsui'], int(row['ecccli']),
+                     int(row['eccsuc'])))
+                lots = cr.fetchall()
+                lots = [{c.lower(): convert_coding(lot[idx])
+                         for idx, c in enumerate(
+                            [d[0] for d in cr.description]
+                         )} for lot in lots]
+                # Do internal picking to out location
+                for pick in picks1:
+                    do_partial_picking(pick, lines, lots)
+                # Do the deliver to customer
+                do_final_picking(pick2, lines, lots)
 
 
 class DB2ImporterTable(models.Model):
@@ -278,7 +357,8 @@ class DB2ImporterTable(models.Model):
         cr.execute(query)
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
-    def get_sql_query(self, date_start, date_end):
+    def get_sql_query(self, date_start, date_end, col_names):
+
         query_kwargs = {
             'schema': self.schema,
             'table_name': self.table_name,
@@ -305,28 +385,41 @@ class DB2ImporterTable(models.Model):
             'end_day': int(date_end[8:]),
         })
 
-        query = (
-            "SELECT * FROM {schema}.{table_name}"
-            " WHERE {prefix}css >= {start_age}"
-            " AND {prefix}css <= {end_age}"
-            " AND {prefix}caa >= {start_year}"
-            " AND {prefix}caa <= {end_year}"
-            " AND {prefix}cmm >= {start_month}"
-            " AND {prefix}cmm <= {end_month}"
-            " AND {prefix}cjj >= {start_day}"
-            " AND {prefix}cjj <= {end_day}"
-        )
+        if '{}css'.format(self.table_prefix) in col_names:
+            query = (
+                "SELECT * FROM {schema}.{table_name}"
+                " WHERE {prefix}css >= {start_age}"
+                " AND {prefix}css <= {end_age}"
+                " AND {prefix}caa >= {start_year}"
+                " AND {prefix}caa <= {end_year}"
+                " AND {prefix}cmm >= {start_month}"
+                " AND {prefix}cmm <= {end_month}"
+                " AND {prefix}cjj >= {start_day}"
+                " AND {prefix}cjj <= {end_day}"
+            )
 
-        if self.importer_id.mode == 'final_update':
-            query += (
-                " OR {prefix}mss >= {start_age}"
-                " AND {prefix}mss <= {end_age}"
-                " AND {prefix}maa >= {start_year}"
-                " AND {prefix}maa <= {end_year}"
-                " AND {prefix}mmm >= {start_month}"
-                " AND {prefix}mmm <= {end_month}"
-                " AND {prefix}mjj >= {start_day}"
-                " AND {prefix}mjj <= {end_day}"
+            if self.importer_id.mode == 'final_update':
+                query += (
+                    " OR {prefix}mss >= {start_age}"
+                    " AND {prefix}mss <= {end_age}"
+                    " AND {prefix}maa >= {start_year}"
+                    " AND {prefix}maa <= {end_year}"
+                    " AND {prefix}mmm >= {start_month}"
+                    " AND {prefix}mmm <= {end_month}"
+                    " AND {prefix}mjj >= {start_day}"
+                    " AND {prefix}mjj <= {end_day}"
+                )
+        else:
+            query = (
+                "SELECT * FROM {schema}.{table_name}"
+                " WHERE {prefix}dss >= {start_age}"
+                " AND {prefix}dss <= {end_age}"
+                " AND {prefix}daa >= {start_year}"
+                " AND {prefix}daa <= {end_year}"
+                " AND {prefix}dmm >= {start_month}"
+                " AND {prefix}dmm <= {end_month}"
+                " AND {prefix}djj >= {start_day}"
+                " AND {prefix}djj <= {end_day}"
             )
         return query.format(**query_kwargs)
 
@@ -373,19 +466,20 @@ class DB2ImporterTable(models.Model):
 
         if not table_exists:
             self._create_db2_table(db2_cr)
+        # get all columns (from local copy)
+        query = (
+            "SELECT column_name"
+            " FROM information_schema.columns"
+            " WHERE table_name='{}'").format(odoo_table_name)
+        cr.execute(query)
+        cols = cr.fetchall()
+        col_names = [col[0] for col in cols]
         if not self.table_prefix:
-            query = (
-                "SELECT column_name"
-                " FROM information_schema.columns"
-                " WHERE table_name='{}'").format(odoo_table_name)
-            cr.execute(query)
-            cols = cr.fetchall()
-            for col in cols:
-                col = col[0]
+            for col in col_names:
                 if col != 'id':
                     self.table_prefix = col[:3].lower()
                     break
-        query = self.get_sql_query(date_start, date_end)
+        query = self.get_sql_query(date_start, date_end, col_names)
         db2_cr.execute(query, [])
 
         rows = db2_cr.fetchall()
@@ -413,13 +507,17 @@ class DB2ImporterTable(models.Model):
         # make sure the next eta is in future
         if next_eta < now:
             next_eta += timedelta(days=1)
+        cpt = 0
         for row in rows:
             # Make list of values (x2) for insert and update placeholders
             values = [convert_coding(v) for v in row] * 2
             # Using mogrify to transform DECIMAL in int
             cr.execute(cr.mogrify(query, values))
             new_id = cr.fetchone()[0]
-            _logger.info('INSERT 1 %s' % self.table_name)
+            cpt += 1
+            if cpt % 10 == 0 or cpt == len(rows):
+                _logger.info(
+                    'INSERT %s %s on %s' % (self.table_name, cpt, len(rows)))
 
             if self.create_job:
                 # Prepare a job to execute the creation
