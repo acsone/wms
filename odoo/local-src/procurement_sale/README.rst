@@ -6,20 +6,26 @@
 procurement_sale
 ================
 
-Ensure that stock reservation is performed following sale order confirmation.
-In standard, reservation is performed by the scheduler according to the planned
-date.  This module ensures that the first buyer will be the first server
-whatever the planned date is.
-If the sale order is canceled, the reconfirmed, we keep the first confirmation
+Ensure that the stock reservation respects sale order confirmation date.
+The stock reservation of pickings analyse the stock on hands minus all
+deliveries still to process of previous sale orders.
+When a sale order is confirmed, the stock is not reserved. This allows you to
+move internally your stock between locations.
+When a reservation is performed, only available quantity according to you
+priority is reserved. This allows you to make deliveries in any order without
+having to reserve the stock related to previous sales orders.
+
+If the sale order is canceled and then reconfirmed, we keep the first confirmation
 date to ensure customer do not lost his priority after sale order adaptation.
+
+In standard, reservation is performed by the scheduler according to the planned
+date. This module ensures that the first buyer will be the first served (but
+not especially first delivered) whatever the planned date is.
 
 With procurement_jit, the reservation is performed as soon as a sale order is
 performed. However, sales orders performed while stock was not available are
 never reserved (so only new buyers are served). And having stock automatically
 reserved prevents to move stock inside the warehouse.
-
-Thanks to this module, you can control when you perform the reservation and
-lock your stock while ensuring first buyer will be first served.
 
 Installation
 ============

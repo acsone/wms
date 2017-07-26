@@ -29,11 +29,6 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     @api.multi
-    def _action_procurement_create(self):
-        return super(SaleOrderLine, self.with_context(recount=True)). \
-            _action_procurement_create()
-
-    @api.multi
     def _prepare_order_line_procurement(self, group_id):
         vals = super(SaleOrderLine, self)._prepare_order_line_procurement(
             group_id=group_id)
@@ -51,9 +46,20 @@ class StockQuant(models.Model):
     def quants_get_preferred_domain(self, qty, move, ops=False,
                                     lot_id=False, domain=None,
                                     preferred_domain_list=[]):
-        if self._context.get('recount'):
-            remaining = (move.product_id.qty_available -
-                         move.product_id.outgoing_qty)
+        if move.picking_id.picking_type_id.subcode == 'PICK':
+            # Do not reserve quantity that is from a previously confirmed SO
+            # This allows to reserve quantity in any order. So you can reserve
+            # and deliver a customer that has ordered after another one but
+            # without using the quantity that is virtually reserved for the
+            # first one.
+            # You still need to run the procurements in the right order to
+            # ensure the delivery orders exist when performing this check.
+            previous_moves = move.search([
+                ('product_id', '=', move.product_id.id),
+                ('state', 'in', ['waiting', 'confirmed', 'assigned']),
+                ('date', '<', move.date)])
+            blocked_qty = sum([x.product_qty for x in previous_moves])
+            remaining = move.product_id.qty_available - blocked_qty
             qty = min(qty, max(remaining, 0.0))
         return super(StockQuant, self).quants_get_preferred_domain(
             qty, move, ops=ops, lot_id=lot_id, domain=domain,
