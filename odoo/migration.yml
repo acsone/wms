@@ -101,6 +101,8 @@ migration:
           - stock_available_immediately
           # OCA/stock-logistics-workflow
           - stock_picking_invoice_link
+          # oca/web
+          - web_sheet_full_width
           ### local-src
           - account_invoice_tax_required
           - connector_esb

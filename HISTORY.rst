@@ -20,6 +20,8 @@ Unreleased
 * ALCN-856 ESB export of stock
 * ALCN-863: ESB export of customer and customer addresses
 * ALCN-860: Add esb export of promotions Alcyon
+* IMP: Add the module web_sheet_full_width
+
 
 **Bugfixes**
 
