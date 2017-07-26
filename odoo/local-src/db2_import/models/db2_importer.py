@@ -1,9 +1,11 @@
-# -*- coding: utf-8 -*-
+# -*: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+import os
 import pyodbc
 import socket
 from datetime import datetime, timedelta
+from calendar import monthrange
 
 from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
@@ -453,10 +455,26 @@ class DB2ImporterTable(models.Model):
     @api.multi
     @job
     def create_or_update_record(self, db2_id):
-        # TODO if
+        # TODO if in function of model
         DB2MapperSaleOrder.process(self, self.table_name, db2_id)
 
-    def get_from_db2(self, db2_cr, date_start, date_end):
+    @api.multi
+    @job
+    def get_from_db2(self, date_start, date_end):
+        # connect to DB2
+        # We can't use dns name in the DB2 odbc driver
+        # thus we need to get the ip
+        host = socket.gethostbyname('pissh')
+        db_user = os.environ.get('DB2USER')
+        if not db_user:
+            raise Exception("Env var DB2USER is not set")
+        db_pwd = os.environ.get('DB2PWD')
+        if not db_pwd:
+            raise Exception("Env var DB2PWD is not set")
+        conn = pyodbc.connect(
+            "DSN=Alcyon", system=host,
+            uid=db_user, pwd=db_pwd)
+        db2_cr = conn.cursor()
         cr = self.env.cr
         odoo_table_name = self._PREFIX + self.table_name.lower()
         cr.execute(
@@ -483,6 +501,7 @@ class DB2ImporterTable(models.Model):
         db2_cr.execute(query, [])
 
         rows = db2_cr.fetchall()
+        conn.close()
         if not rows:
             raise "No data found please check your date range"
 
@@ -547,27 +566,27 @@ class DB2Importer(models.Model):
     mode = fields.Selection([
         ('history', 'History'),
         ('final_update', 'Final update')],
-        default='final_update')
+        default='history')
 
     table_ids = fields.One2many('db2.importer.table', 'importer_id')
 
     @api.multi
     def db2_import(self):
 
-        # connect to DB2
-        # We can't use dns name in the DB2 odbc driver
-        # thus we need to get the ip
-        host = socket.gethostbyname('pissh')
-        # TODO get db user and password from env var
-        conn = pyodbc.connect(
-            "DSN=Alcyon", system=host,
-            uid=db_user, pwd=db_pwd)
-        db2_cr = conn.cursor()
-
-        # get data for each table
-        for table in self.table_ids:
-            table.get_from_db2(db2_cr, self.date_start, self.date_end)
-        conn.close()
+        # split date range per month basis
+        str_next_start = self.date_start
+        dt_next_end = False
+        dt_end = fields.Date.from_string(self.date_end)
+        while not dt_next_end or dt_next_end < dt_end:
+            dt_next_start = fields.Date.from_string(str_next_start)
+            month_end = monthrange(dt_next_start.year, dt_next_start.month)[1]
+            dt_next_end = min(dt_next_start.replace(day=month_end), dt_end)
+            str_next_end = fields.Date.to_string(dt_next_end)
+            # get data for each table
+            for table in self.table_ids:
+                table.with_delay().get_from_db2(str_next_start, str_next_end)
+            str_next_start = fields.Date.to_string(
+                dt_next_end + timedelta(days=1))
         self.last_import = fields.Datetime.now()
         self.date_start = self.last_import
         self.date_end = fields.datetime.now() + timedelta(days=10)

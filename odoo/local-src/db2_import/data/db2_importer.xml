@@ -1,6 +1,12 @@
 <odoo>
-  <record model="db2.importer" id="db2_importer">
-  </record>
+  <data noupdate="1">
+    <record model="db2.importer" id="db2_importer">
+      <field name="date_start">2016-01-01</field>
+      <field name="mode">history</field>
+    </record>
+  </data>
+
+  <data noupdate="0">
 
   <!-- sale order header table -->
   <record model="db2.importer.table" id="db2_table_pentcdcl">
@@ -32,5 +38,5 @@
     <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
   </record>
 
-
+  </data>
 </odoo>
