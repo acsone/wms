@@ -10,7 +10,6 @@ Unreleased
 
 * Update all data files
 * ALCN-934: Add import for bin, inventory and lot (full mode)
-* ALCN-913: Add the unique supplier on the product form
 
 **Features and Improvements**
 
@@ -20,6 +19,7 @@ Unreleased
 * ALCN-870: Add webservice for obtaining stock level for products in connector_esb
 * ALCN-856 ESB export of stock
 * ALCN-863: ESB export of customer and customer addresses
+* ALCN-913: Add the unique supplier on the product form
 
 **Bugfixes**
 
