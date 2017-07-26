@@ -19,7 +19,9 @@ Unreleased
 * ALCN-870: Add webservice for obtaining stock level for products in connector_esb
 * ALCN-856 ESB export of stock
 * ALCN-863: ESB export of customer and customer addresses
+* ALCN-860: Add esb export of promotions Alcyon
 * ALCN-796: Use the available quantity on product for the reception wizard
+
 
 **Bugfixes**
 
