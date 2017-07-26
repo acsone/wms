@@ -55,6 +55,9 @@ migration:
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_stock_bins
+          addons:
+            upgrade:
+              - db2_import
         demo:
           operations:
             post:
