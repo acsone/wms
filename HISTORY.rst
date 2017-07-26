@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Update all data files
+* ALCN-934: Add import for bin, inventory and lot (full mode)
+
 **Features and Improvements**
 
 * ALCN-756: Add the module [MIG][10.0]account_cutoff_accrual_picking, for testing purpose
@@ -20,6 +25,8 @@ Unreleased
 * ALCN-929: Fix sale order report inherit
 
 **Build**
+
+* Clean migration.yml because we reset integration instance
 
 **Documentation**
 

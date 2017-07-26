@@ -25,6 +25,11 @@ migration:
 
           - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
+          # To an unknown reason,
+          # ir_values created in 'default_values'
+          # doesn't take the good value
+          # when we execute the function from main function.
+          - anthem songs.install.accounting::default_values
           - anthem songs.install.product::main
           - anthem songs.install.logistics::main
           - anthem songs.install.sales::main
@@ -47,14 +52,17 @@ migration:
               - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
               - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
               - anthem songs.install.data_full::main
-
+              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - anthem songs.install.data_full::import_inventory
+              - anthem songs.install.data_full::import_stock_bins
         demo:
           operations:
             post:
               - anthem songs.install.data_demo::main
       addons:
         upgrade:
-          ### Odoo (src)
+          ### Odoo
+          # src
           - account
           - account_accountant
           - document
@@ -65,34 +73,36 @@ migration:
           - sale
           - sale_stock
           - stock
-          #- warning
-          #camptocamp/cloud-platform
+          # enterprise
+          - helpdesk
+          ### Camptocamp
+          # camptocamp/cloud-platform
           - cloud_platform
           ### OCA (external-src)
-          ## oca/account-financial-tools
-          #- account_chart_update
-          ## oca/account-invoicing
+          # oca/account-analytic
+          - account_analytic_required
+          # oca/account-closing
+          - account_cutoff_accrual_picking
+          # OCA/account-financial-tools
+          - account_credit_control
+          # oca/account-invoicing
           - account_invoice_check_total
-          ## oca/bank-payment
-          - account_banking_sepa_direct_debit
+          # oca/bank-payment
           - account_banking_sepa_credit_transfer
+          - account_banking_sepa_direct_debit
           - account_invoice_tax_required
-          ## oca/l10n-belgium
-          #- l10n_be_antibiotic_tax
-          #- l10n_be_apb_tax
-          #- l10n_be_eco_tax
-          ## oca/sale-workflow
+          # oca/sale-workflow
           - sale_exception
-          ## oca/server-tools
+          # oca/server-tools
           - base_exception
           - mail_environment
           - server_environment
-          ## oca/account-analytic
-          - account_analytic_required
-          ## oca/stock-logistics-warehouse
+          # oca/stock-logistics-warehouse
           - stock_available_immediately
+          # OCA/stock-logistics-workflow
+          - stock_picking_invoice_link
           ### local-src
-          #- claim_from_reception
+          - account_invoice_tax_required
           - connector_esb
           - delivery_rounds
           - delivery_rounds_assign
@@ -104,14 +114,17 @@ migration:
           - specific_account
           - specific_base
           - specific_data
+          - specific_helpdesk
           - specific_partner
           - specific_print
           - specific_product
+          - specific_purchase
+          - specific_purchase_report
           - specific_report
           - specific_sale
+          - specific_shipping_costs
           - specific_stock
           - specific_translations
-          - specific_purchase
           - specific_zetes
           - stock_barcode_fix
           - stock_expired
@@ -130,109 +143,11 @@ migration:
           - stock_putaway_route
           - stock_quant_bylocation
           - stock_receive_lot
+          - stock_reception_priority
           - stock_refill
           - web_autorefresh
     - version: 10.1.0
-      operations:
-        post:
-          - anthem songs.updates.update_10_1_0.update::main
-      addons:
-        upgrade:
-          # Specific modules
-          - delivery_rounds
-          - pricelist_discount
-          - specific_account
-          - specific_report
-          - specific_sale
-          - specific_stock
-          - stock_groupbypartner
-          - stock_picking_fillwithstock
-          - stock_picking_sequence
-          - stock_picking_subcode
-          - stock_putaway_defaultfixedlocation
-          - stock_putaway_route
-          - stock_quant_bylocation
-          - stock_receive_lot
-          - stock_reception_priority
-          - stock_refill
     - version: 10.2.0
-      addons:
-        upgrade:
-          # Specific modules
-          - pricelist_discount
-          - sale_product_additional
-          - specific_sale
     - version: 10.3.0
-      operations:
-        post:
-          - anthem songs.install.accounting::default_values
-          - anthem songs.install.accounting::create_account_types
-          - anthem songs.updates.update_10_3_0.update::main
-          - anthem songs.install.sales::sale_setup
-          - anthem songs.install.purchases::main
-      addons:
-        upgrade:
-          # Enterprise
-          - helpdesk
-          # OCA/stock-logistics-workflow
-          - stock_picking_invoice_link
-          # OCA/account-financial-tools
-          - account_credit_control
-          # Specific modules
-          - delivery_rounds
-          - sale_product_additional
-          - specific_helpdesk
-          - specific_product
-          - specific_purchase
-          - specific_report
-          - specific_sale
-          - specific_shipping_costs
     - version: 10.4.0
-      operations:
-        post:
-          - anthem songs.updates.update_10_4_0.update::main
-          - anthem songs.install.logistics::create_picking_types
-      modes:
-        full:
-          operations:
-            post:
-              # BEGIN: To be delete before reset integration instance
-              - anthem songs.install.user::import_users
-              - anthem songs.install.data_demo::import_suppliers
-              - anthem songs.install.data_demo::import_clients
-              - anthem songs.install.data_demo::import_products
-              - anthem songs.install.data_demo::import_sale_orders
-              # END: To be delete before reset integration instance
-      addons:
-        upgrade:
-          # Specific modules
-          - specific_helpdesk
-          - specific_purchase
-          - specific_purchase_report
-          - specific_sale
-          - connector_esb
-          - specific_zetes
-          - specific_print
-          - specific_report
-          - specific_product
-          - specific_stock
-          - account_invoice_tax_required
     - version: 10.5.0
-      operations:
-        post:
-          - anthem songs.updates.update_10_5_0.update::main
-      modes:
-        full:
-          operations:
-            pre:
-              - psql -f /opt/odoo/songs/updates/update_10_5_0/update.sql
-      addons:
-        upgrade:
-          ## oca/account-closing
-          - account_cutoff_accrual_picking
-          # Specific modules
-          - specific_account
-          - specific_data
-          - specific_sale
-          - specific_product
-          - connector_esb

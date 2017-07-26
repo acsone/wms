@@ -19,6 +19,16 @@ def settings(ctx):
 
 
 @anthem.log
+def change_default_lead_time(ctx):
+    """
+    Change the default lead time to 0 day
+    :param ctx:
+    :return:
+    """
+    ctx.env['ir.config_parameter'].set_param('purchase.lead_time', '0')
+
+
+@anthem.log
 def import_bank_holidays(ctx):
     """ Importing account analytic account """
     content = resource_stream(req, 'data/install/bank.holiday.csv')
@@ -29,4 +39,5 @@ def import_bank_holidays(ctx):
 def main(ctx):
     """ Configuring purchases """
     settings(ctx)
+    change_default_lead_time(ctx)
     import_bank_holidays(ctx)
