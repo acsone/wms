@@ -10,7 +10,7 @@
             <group name="purchase" position="after">
                 <group name="delivery" string="Delivery">
                     <field name="property_delivery_carrier_id"/>
-                    <field name="round_zone_ids" widget="many2many_tags"/>
+                    <field name="round_itinerary_ids" widget="many2many_tags"/>
                 </group>
             </group>
 

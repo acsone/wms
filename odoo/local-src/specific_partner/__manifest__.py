@@ -10,7 +10,6 @@
     'category': 'Sales',
     'depends': [
         'sale',
-        'delivery_rounds',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

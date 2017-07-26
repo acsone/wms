@@ -22,6 +22,7 @@ Unreleased
 * ALCN-860: Add esb export of promotions Alcyon
 * IMP: Add the module web_sheet_full_width
 
+* ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
 
 **Bugfixes**
 

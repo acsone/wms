@@ -7,7 +7,7 @@
                 <form string="Make Today's Delivery Plan">
                     <group>
                         <field name="assign_moves"/>
-                        <field name="vehicle_ids"/>
+                        <field name="template_ids"/>
                     </group>
                     <footer>
                         <button name="confirm"

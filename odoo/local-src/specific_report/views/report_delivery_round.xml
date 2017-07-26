@@ -52,11 +52,11 @@
                                     </tr>
                                     <tr>
                                         <td>Vehicle</td>
-                                        <td><span t-field="delivery.vehicle_id.name"/> </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Registration</td>
-                                        <td><span t-field="delivery.vehicle_id.registration"/> </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Start mileage</td>

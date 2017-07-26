@@ -1,9 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_round_vehicle,access_round_vehicle,model_round_vehicle,stock.group_stock_user,1,0,0,0
-access_round_vehicle_adm,access_round_vehicle,model_round_vehicle,stock.group_stock_manager,1,1,1,1
-access_round_zone,access_round_zone,model_round_zone,stock.group_stock_user,1,0,0,0
-access_round_zone_adm,access_round_zone,model_round_zone,stock.group_stock_manager,1,1,1,1
-access_round_zone_position,access_round_zone_position,model_round_zone_position,stock.group_stock_user,1,0,0,0
-access_round_zone_position_adm,access_round_zone_position,model_round_zone_position,stock.group_stock_manager,1,1,1,1
+access_round_template,access_round_template,model_round_template,stock.group_stock_user,1,0,0,0
+access_round_template_adm,access_round_template,model_round_template,stock.group_stock_manager,1,1,1,1
+access_round_itinerary,access_round_itinerary,model_round_itinerary,stock.group_stock_user,1,0,0,0
+access_round_itinerary_adm,access_round_itinerary,model_round_itinerary,stock.group_stock_manager,1,1,1,1
+access_round_itinerary_position,access_round_itinerary_position,model_round_itinerary_position,stock.group_stock_user,1,0,0,0
+access_round_itinerary_position_adm,access_round_itinerary_position,model_round_itinerary_position,stock.group_stock_manager,1,1,1,1
 access_round_instance,access_round_instance,model_round_instance,stock.group_stock_user,1,0,0,0
 access_round_instance_adm,access_round_instance_adm,model_round_instance,stock.group_stock_manager,1,1,1,1

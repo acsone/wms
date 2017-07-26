@@ -119,10 +119,7 @@ WHERE picking.delivery_round_state = 'open'
 
         partner = picking.partner_id
 
-        round_name = None
-        vehicle = picking.sudo().delivery_round_id.vehicle_id
-        if vehicle and len(vehicle.zone_ids) == 1:
-            round_name = vehicle.zone_ids.code
+        round_name = picking.sudo().delivery_round_id.template_id.code
 
         result.update({
             'respCode': constants.RESPONSE_CODE_OK,

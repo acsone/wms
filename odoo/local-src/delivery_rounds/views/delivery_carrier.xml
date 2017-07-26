@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
 
             <field name="delivery_type" position="after">
-                <field name="delivery_vehicle_id"/>
+                <field name="delivery_template_id"/>
             </field>
 
         </field>

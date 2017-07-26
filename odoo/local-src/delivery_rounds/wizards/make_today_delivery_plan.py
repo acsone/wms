@@ -27,37 +27,40 @@ from odoo.exceptions import Warning
 class MakeTodayDeliveryPlan(models.TransientModel):
     _name = 'round.wizard.makeplan'
 
-    vehicle_ids = fields.Many2many(
-        'round.vehicle', string='Vehicles',
+    template_ids = fields.Many2many(
+        'round.template', string='Templates',
         )
     assign_moves = fields.Boolean(
         'Reserve stock', default=True)
 
     @api.one
     def confirm(self):
-        if not self.vehicle_ids:
-            raise Warning(_('Please select the vehicles'))
-        if self.assign_moves:
-            user = self.env['res.users'].browse(self._uid)
-            self.env['procurement.order'].run_scheduler(
-                company_id=user.company_id.id)
-
-        vehicles = self.vehicle_ids
+        if not self.template_ids:
+            raise Warning(_('Please select the templates'))
+        templates = self.template_ids
         today = fields.Date.context_today(self)
-        # deduct vehicles for which instance already exist
+        # deduct templates for which instance already exist
         instances = self.env['round.instance'].search([
             ('date', '=', today)])
-        vehicles -= instances.mapped('vehicle_id')
-        # create instance for each vehicle
-        for vehicle in vehicles:
+        templates -= instances.mapped('template_id')
+        # create instance for each template
+        for template in templates:
             ri = self.env['round.instance'].create({
-                'vehicle_id': vehicle.id,
+                'template_id': template.id,
                 'date': today,
-                'time': vehicle.time,
+                'time_picking_planned': template.time_picking_planned,
+                'time_leave_planned': template.time_leave_planned,
                 })
-            for zone in vehicle.zone_ids:
-                rzi = self.env['round.zone.import'].create({
-                    'zone_id': zone.id})
-                rzi.with_context(active_ids=[ri.id]).confirm()
+            for itinerary in template.itinerary_ids:
+                rzi = self.env['round.itinerary.import'].create({
+                    'itinerary_id': itinerary.id})
+                rzi.with_context(
+                    active_ids=[ri.id],
+                    skip_reservation=True).confirm()
+
+        if self.assign_moves:
+            # run in background
+            self.env['procurement.order.compute.all'].procure_calculation()
+
         return dict(self.env.ref(
             'delivery_rounds.action_round_instance').read()[0])

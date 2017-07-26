@@ -27,15 +27,8 @@
             <group name="fiscal_information" position="inside">
                 <field name="legal_entity" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
             </group>
-        </field>
-    </record>
 
-    <!-- Need a second parter form because have to inherit another view -->
-    <record id="view_partner_form_delivery" model="ir.ui.view">
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="delivery_rounds.view_partner_form"/>
-        <field name="arch" type="xml">
-            <field name="round_zone_ids" position="after">
+            <field name="user_id" position="after">
                 <field name="pharmacist_id" attrs="{'invisible': [('customer', '=', False)]}"/>
             </field>
         </field>
