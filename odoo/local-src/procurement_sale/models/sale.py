@@ -54,13 +54,19 @@ class StockQuant(models.Model):
             # first one.
             # You still need to run the procurements in the right order to
             # ensure the delivery orders exist when performing this check.
+            locations = self.env['stock.location'].search(
+                [('usage', '=', 'customer')])
             previous_moves = move.search([
                 ('product_id', '=', move.product_id.id),
                 ('state', 'in', ['waiting', 'confirmed', 'assigned']),
-                ('date', '<', move.date)])
+                ('date', '<', move.date),
+                ('location_dest_id', 'in', locations.ids),
+                ])
             blocked_qty = sum([x.product_qty for x in previous_moves])
             remaining = move.product_id.qty_available - blocked_qty
             qty = min(qty, max(remaining, 0.0))
+            if not qty:
+                return self.browse()
         return super(StockQuant, self).quants_get_preferred_domain(
             qty, move, ops=ops, lot_id=lot_id, domain=domain,
             preferred_domain_list=[])
