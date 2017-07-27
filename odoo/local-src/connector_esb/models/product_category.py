@@ -19,6 +19,6 @@ class ProductCategory(models.Model):
     def _compute_alcyon_product_type(self):
         for record in self:
             category = record
-            while not category.esb_ref:
+            while not category.esb_ref and category.parent_id:
                 category = category.parent_id
             record.alcyon_product_type = category.esb_ref

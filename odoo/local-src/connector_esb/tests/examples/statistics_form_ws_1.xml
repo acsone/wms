@@ -1,0 +1,20 @@
+<result>
+  <resultItem>
+    <sku>1021906</sku>
+    <productName>KETOFEN 5MG 10CP</productName>
+    <productType>medicament</productType>
+    <manufacturer>GUERRA</manufacturer>
+    <qtyDelivered>1.0</qtyDelivered>
+    <totalPrice>171.84</totalPrice>
+    <taxRate>20.0</taxRate>
+  </resultItem>
+  <resultItem>
+    <sku>2970820</sku>
+    <productName>EASYPILL CAT 30x10GR</productName>
+    <productType>aliment</productType>
+    <manufacturer>GUERRA,FOO</manufacturer>
+    <qtyDelivered>123.0</qtyDelivered>
+    <totalPrice>90168.84</totalPrice>
+    <taxRate>20.0</taxRate>
+  </resultItem>
+</result>
