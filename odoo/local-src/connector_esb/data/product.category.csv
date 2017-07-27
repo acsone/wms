@@ -1,0 +1,5 @@
+id,esb_ref
+specific_data.product_categ_materiel,materiel
+specific_data.product_categ_ali,aliment
+specific_data.product_categ_medoc,medicament
+specific_data.product_categ_frigo,frigo
