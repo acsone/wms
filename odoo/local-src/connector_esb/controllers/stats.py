@@ -118,3 +118,22 @@ class StatsController(http.Controller):
             return work.component(
                 'ws.message.customer.stat'
             ).get_message(customer_ref)
+
+    @http.route('/connector_esb/totalorder/customer/<string:customer_ref>',
+                type='http', auth='public', csrf=False)
+    def customer_delivery_fee(self, customer_ref):
+        """ Return info to calculate a customer delivery fee
+
+        Expect a GET
+
+        $ curl http://localhost:8069/connector_esb/totalorder/customer/464
+
+        """
+        ensure_db()
+        request.uid = odoo.SUPERUSER_ID
+        env = request.env
+        backend = env['esb.backend'].get_singleton()
+
+        with backend.work_on('res.partner') as work:
+            return (work.component('ws.message.customer.delivery.fee')
+                    .get_message(customer_ref))

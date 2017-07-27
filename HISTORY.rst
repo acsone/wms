@@ -182,6 +182,7 @@ Unreleased
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
+* ALCN-869: Add webservice for a customer delivery fee
 
 **Bugfixes**
 
