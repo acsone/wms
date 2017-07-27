@@ -61,12 +61,7 @@ class PurchaseOrderLine(models.Model):
     price_unit_base = fields.Float('Unit Price',
                                    required=True,
                                    digits=dp.get_precision('Product Price'))
-    price_unit = fields.Float(
-        string='Unit Price (discounted)',
-        compute='_compute_price_unit',
-        store=True,
-        readonly=False,
-    )
+    price_unit = fields.Float(string='Unit Price (discounted)')
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
@@ -74,10 +69,6 @@ class PurchaseOrderLine(models.Model):
         default=0.0
     )
     product_ref = fields.Char('Product ref', related='product_id.default_code')
-
-    stop_constrains = fields.Boolean(
-        store=False,
-    )
 
     # By default there is no way to add a discounts in Purchase Lines.
     # To do that I added a new field "price_unit_base".
@@ -125,18 +116,16 @@ class PurchaseOrderLine(models.Model):
         condition = (
             'price_unit' in vals and
             'price_unit_base' not in vals and
-            not write_from_view
+            not write_from_view and
+            not self.env.context.get('stop_constrains')
         )
         if condition:
-            for line in self:
-                if not line.stop_constrains:
-                    vals['price_unit_base'] = vals['price_unit']
-                super(PurchaseOrderLine, line).write(vals)
-            return True
+            vals['price_unit_base'] = vals['price_unit']
 
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.depends('price_unit_base', 'discount_global', 'promotion_supplier')
+    @api.constrains('price_unit_base', 'discount_global', 'promotion_supplier')
+    @api.onchange('price_unit_base', 'discount_global', 'promotion_supplier')
     def _compute_price_unit(self):
         """
         This method will compute the price unit according
@@ -153,9 +142,22 @@ class PurchaseOrderLine(models.Model):
             price_unit = line.price_unit_base * \
                          (1 - (line.discount_global / 100)) * \
                          (1 - (line.promotion_supplier / 100))
-            line.stop_constrains = True
-            line.price_unit = price_unit
-            line.stop_constrains = False
+
+            # The method with_context will create a new environment.
+            # When an onchange method change a value on a draft record
+            # this value will set on the environment (=> cache).
+            # If we use the method with_context on a draft record, it will
+            # set the value on a new environment. It means that the value will
+            # never set on the current environment.
+            # Thus if we want to send a specific context for the method write
+            # if check the if the record is in draft mode or if the record
+            # doesn't have an ID.
+            if not self.env.in_draft and line.id:
+                # The record exist and we call the method write
+                line.with_context(stop_constrains=True).price_unit = price_unit
+            else:
+                # The record doesn't yet exit and the value will set in cache
+                line.price_unit = price_unit
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
