@@ -20,6 +20,8 @@ Webservices:
  * ``/connector_esb/product/stock``: return stock levels of products
  * ``/connector_esb/statistics/form``: return statistics from
    parameters sent using a form
+ * ``/connector_esb/statistics/product/<sku>/<client_ref>`` :
+        return for a product a client yearly purchase statistics
 
 Configuration
 =============
