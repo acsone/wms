@@ -77,7 +77,7 @@ class StatisticsFormWebserviceMessage(Component):
                     product=line.product_id,
                     partner=line.order_id.partner_shipping_id
                 )
-                total += taxes['total_included']
+                total += taxes['total_excluded']
 
             product = lines[0].product_id
             rate = lines[0].tax_id.amount if lines[0].tax_id else 0.0
@@ -89,7 +89,7 @@ class StatisticsFormWebserviceMessage(Component):
                 'productType': product.categ_id.alcyon_product_type,
                 'manufacturer': supplier,
                 'qtyDelivered': delivered,
-                'totalPrice': total,
+                'totalPrice': round(total, 3),
                 'taxRate': rate,
             }
             data.append(values)

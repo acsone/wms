@@ -5,7 +5,7 @@
     <productType>medicament</productType>
     <manufacturer>GUERRA</manufacturer>
     <qtyDelivered>1.0</qtyDelivered>
-    <totalPrice>171.84</totalPrice>
+    <totalPrice>143.2</totalPrice>
     <taxRate>20.0</taxRate>
   </resultItem>
   <resultItem>
@@ -14,7 +14,7 @@
     <productType>aliment</productType>
     <manufacturer>GUERRA,FOO</manufacturer>
     <qtyDelivered>123.0</qtyDelivered>
-    <totalPrice>90168.84</totalPrice>
+    <totalPrice>75140.7</totalPrice>
     <taxRate>20.0</taxRate>
   </resultItem>
 </result>

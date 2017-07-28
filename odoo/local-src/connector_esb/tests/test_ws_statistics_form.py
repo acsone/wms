@@ -150,7 +150,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'qtyDelivered': 10.0,
              'sku': u'2970820',
              'taxRate': 20.0,
-             'totalPrice': 72.0}
+             'totalPrice': 60.0}
         ]
         self.assertEqual(expected, data)
 
@@ -185,7 +185,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'qtyDelivered': 10.0,
              'sku': u'2970820',
              'taxRate': 20.0,
-             'totalPrice': 72.0}
+             'totalPrice': 60.0}
         ]
         self.assertEqual(expected, data)
 
@@ -229,14 +229,14 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'qtyDelivered': 1.0,
              'sku': u'1021906',
              'taxRate': 20.0,
-             'totalPrice': 171.84},
+             'totalPrice': 143.2},
             {'manufacturer': u'GUERRA',
              'productName': u'EASYPILL CAT 30x10GR',
              'productType': u'aliment',
              'qtyDelivered': 10.0,
              'sku': u'2970820',
              'taxRate': 20.0,
-             'totalPrice': 72.0}
+             'totalPrice': 60.0}
         ]
         self.assertEqual(sorted(expected), sorted(data))
 
@@ -267,6 +267,6 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'qtyDelivered': 1.0,
              'sku': u'1021906',
              'taxRate': 20.0,
-             'totalPrice': 171.84},
+             'totalPrice': 143.2},
         ]
         self.assertEqual(expected, data)
