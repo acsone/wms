@@ -17,6 +17,7 @@
         'stock_reception_priority',
         'stock_receive_lot',
         'specific_purchase',
+        'stock_available_immediately',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

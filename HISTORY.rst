@@ -29,6 +29,8 @@ Unreleased
 * ALCN-924: Add a view to manage supplier promotions
 * ALCN-922: Add the module purchase_cancel_reason
 * ALCN-923: Send an email when a purchase order is canceled
+* ALCN-796: Use the available quantity on product for the reception wizard
+
 
 **Bugfixes**
 
