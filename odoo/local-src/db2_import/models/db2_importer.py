@@ -171,7 +171,8 @@ class DB2MapperSaleOrder(object):
             " FROM db2_pentcdcl WHERE id = %s")
         cr.execute(query, [tmp_id])
         row = cr.fetchone()
-        assert row, "Nothing to process"
+        if not row:
+            raise Exception("Nothing to process")
         row = {c.lower(): convert_coding(row[idx])
                for idx, c in enumerate(
                    [d[0] for d in cr.description]
@@ -207,7 +208,8 @@ class DB2MapperSaleOrder(object):
         cr.execute(query, [row['id']])
 
         lines = cr.fetchall()
-        assert lines, "No lines were found"
+        if not lines:
+            raise Exception("No lines were found")
         lines = [{c.lower(): convert_coding(line[idx])
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
@@ -266,7 +268,10 @@ class DB2MapperSaleOrder(object):
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
-            assert new.state == 'draft'
+            if new.state != 'draft':
+                raise Exception(
+                    "Cannot do final update for sale order %s"
+                    " as not in draft state" % new.name)
             # Confirm the sale order to create the picking
             new.action_confirm()
             if is_partially_delivered:
@@ -503,7 +508,7 @@ class DB2ImporterTable(models.Model):
         rows = db2_cr.fetchall()
         conn.close()
         if not rows:
-            raise "No data found please check your date range"
+            raise Exception("No data found please check your date range")
 
         # Save them locally
         columns = rows[0].cursor_description
