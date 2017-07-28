@@ -17,3 +17,4 @@ __setup__.res_user_17,gkersemans,Gwen Kersemans,changeme,fr_BE,nomail@alcyonbelu
 __setup__.res_user_18,mhoeterickx,Miranda Hoeterickx,changeme,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
 __setup__.res_user_19,pderycke,Patricia Derycke,changeme,fr_BE,Patricia.DERYCKE@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
 __setup__.res_user_20,fheymann,Fabrice Heymann,changeme,fr_BE,Fabrice.Heymann@alcyonbelux.be,base.be,Europe/Brussels,base.group_user
+__setup__.res_user_wso2,wso2,WSO2,wso2,fr_BE,nomail@alcyonbelux.be,base.be,Europe/Brussels,"base.group_public"
