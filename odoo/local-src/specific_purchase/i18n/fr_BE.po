@@ -39,11 +39,6 @@ msgstr "\n"
 "        "
 
 #. module: specific_purchase
-#: model:ir.model,name:specific_purchase.model_purchase_order_cancel
-msgid " Ask a reason for the purchase order cancellation."
-msgstr " Ask a reason for the purchase order cancellation."
-
-#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_active
 msgid "Active"
 msgstr "Active"
