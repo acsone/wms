@@ -3,11 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 {'name': 'DB2 Import',
  'summary': "Import data from DB2",
- 'version': 'version',
+ 'version': '10.0.1.0.0',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
- 'category': 'category',
+ 'category': 'Misc',
  'depends': ['sale',
              'queue_job'],
  'website': 'www.camptocamp.com',
@@ -17,4 +17,3 @@
  'installable': True,
  'auto_install': False,
  }
-
