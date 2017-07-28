@@ -20,7 +20,7 @@
             <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                 <field name="price_unit_base"/>
                 <field name="discount_global"/>
-                <field name="discount_pricelist"/>
+                <field name="promotion_supplier"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="attributes">
@@ -30,8 +30,7 @@
             <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
                 <field name="price_unit_base"/>
                 <field name="discount_global"/>
-                <field name="discount_pricelist"/>
-                <field name="discount_pricelist"/>
+                <field name="promotion_supplier"/>
             </xpath>
         </field>
     </record>

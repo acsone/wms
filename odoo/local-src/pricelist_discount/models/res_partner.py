@@ -8,10 +8,12 @@ from odoo import fields, models, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    promotion_pricelist_id = fields.Many2one(
-        string='Supplier Promotion Pricelist',
-        comodel_name='product.pricelist',
-        company_dependent=True,
+    supplier_promotion_sale_allowed = fields.Boolean(
+        string='Supplier promotion allowed on sale',
+    )
+
+    supplier_promotion_purchase_allowed = fields.Boolean(
+        string='Supplier promotion allowed on purchase',
     )
 
     discount_pricelist_id = fields.Many2one(
@@ -22,10 +24,14 @@ class ResPartner(models.Model):
 
     @api.model
     def _commercial_fields(self):
-        """ Adds both new pricelists as commercial fields so
+        """ Adds fields as commercial fields so
         theirs values will be synced to children partners.
         """
         return (
             super(ResPartner, self)._commercial_fields() +
-            ['promotion_pricelist_id', 'discount_pricelist_id']
+            [
+                'supplier_promotion_sale_allowed',
+                'supplier_promotion_purchase_allowed',
+                'discount_pricelist_id'
+            ]
         )

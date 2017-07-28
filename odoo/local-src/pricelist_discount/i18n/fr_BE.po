@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 08:37+0000\n"
-"PO-Revision-Date: 2016-08-18 08:37+0000\n"
+"POT-Creation-Date: 2017-07-18 12:42+0000\n"
+"PO-Revision-Date: 2017-07-18 12:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,24 +22,41 @@ msgstr "Remise Alcyon"
 
 #. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_id
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_users_discount_pricelist_id
 msgid "Alcyon Discount Pricelist"
 msgstr "Liste Remises Alcyon"
 
 #. module: pricelist_discount
+#: model:ir.ui.view,arch_db:pricelist_discount.report_saleorder_specific_document
+msgid "Discount"
+msgstr "Remise"
+
+#. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_alcyon_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_alcyon_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_alcyon_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_alcyon_discount
 msgid "Discount (%)"
 msgstr "Remise (%)"
 
 #. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_edited_alcyon_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_edited_alcyon_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_edited_alcyon_discount
 msgid "Edited alcyon discount"
 msgstr "Edited alcyon discount"
 
 #. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_edited_supplier_promotion
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_edited_supplier_promotion
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_edited_supplier_promotion
 msgid "Edited supplier promotion"
 msgstr "Edited supplier promotion"
+
+#. module: pricelist_discount
+#: model:ir.model,name:pricelist_discount.model_product_supplierinfo
+msgid "Information about a product vendor"
+msgstr "Information sur le vendeur de l'article"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_account_invoice
@@ -58,15 +75,24 @@ msgstr "Partenaire"
 
 #. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_price_unit_alcyon
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_price_unit_alcyon
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_price_unit_alcyon
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_price_unit_alcyon
 msgid "Price unit alcyon"
 msgstr "Price unit alcyon"
 
 #. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_price_unit_supplier
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_price_unit_supplier
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_price_unit_supplier
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_price_unit_supplier
 msgid "Price unit supplier"
 msgstr "Price unit supplier"
+
+#. module: pricelist_discount
+#: model:ir.model,name:pricelist_discount.model_product_product
+msgid "Product"
+msgstr "Produit"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_product_template
@@ -74,10 +100,37 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: pricelist_discount
+#: model:ir.ui.view,arch_db:pricelist_discount.report_saleorder_specific_document
+msgid "Promotion"
+msgstr "Promotion"
+
+#. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_account_invoice_line_supplier_promotion
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_additional_supplier_promotion
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_original_supplier_promotion
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_supplier_promotion
 msgid "Promotion (%)"
 msgstr "Promotion (%)"
+
+#. module: pricelist_discount
+#: model:ir.model,name:pricelist_discount.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_product_supplierinfo_discount_purchase
+msgid "Purchase discount (%)"
+msgstr "Remise d'achat (%)"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_product_supplierinfo_discount_sale
+msgid "Sale discount (%)"
+msgstr "Remise de vente (%)"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_product_supplierinfo_min_qty_sale
+msgid "Sale minimal quantity"
+msgstr "Quantité minimale de vente"
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_sale_order
@@ -90,12 +143,20 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_promotion_pricelist_id
-msgid "Supplier Promotion"
-msgstr "Promotion fournisseur"
+#: model:ir.model.fields,field_description:pricelist_discount.field_purchase_order_supplier_promotion_allowed
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_supplier_promotion_allowed
+msgid "Supplier promotion allowed"
+msgstr "Droit à la promotion fournisseur"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_promotion_pricelist_id
-msgid "Supplier Promotion Pricelist"
-msgstr "Liste Promotions Fournisseur"
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_supplier_promotion_purchase_allowed
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_users_supplier_promotion_purchase_allowed
+msgid "Supplier promotion allowed on purchase"
+msgstr "Droit à la promotion fournisseur pour les achats"
+
+#. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_supplier_promotion_sale_allowed
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_users_supplier_promotion_sale_allowed
+msgid "Supplier promotion allowed on sale"
+msgstr "Droit à la promotion fournisseur pour les ventes"
 

@@ -84,11 +84,6 @@ msgid "Discount global"
 msgstr "Ristourne globale"
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_pricelist
-msgid "Discount pricelist"
-msgstr "Ristourne liste de prix"
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_display_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
 msgid "Display Name"
@@ -204,6 +199,11 @@ msgid "Promotion Only"
 msgstr "Promotion seulement"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
+msgid "Promotion supplier"
+msgstr "Promotion fournisseur"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
@@ -242,6 +242,11 @@ msgid "State"
 msgstr "État"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_stop_constrains
+msgid "Stop constrains"
+msgstr "Stop constrains"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_substitute_purchase_manager_id
 msgid "Substitute purchase manager"
@@ -251,7 +256,7 @@ msgstr "Responsable d'achat remplaçant"
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
 msgid "Supplier discount %"
-msgstr "Ristourne fournisseur %"
+msgstr "Remise fournisseur %"
 
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight

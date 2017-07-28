@@ -125,5 +125,86 @@ class TestPurchaseOrder(common.TransactionCase):
 
         # Add a pricelist discount of 10%
         # (this discount will be add to the discount of 50%)
-        line.discount_pricelist = 10
+        line.promotion_supplier = 10
         self.assertEquals(po.amount_total, 195)
+
+    def test_promotion_supplier(self):
+        supplier = self.env['res.partner'].create({
+            'name': 'Supplier',
+            'supplier': True,
+        })
+
+        supplierinfo = self.env['product.supplierinfo'].create({
+            'name': supplier.id,
+            'discount_purchase': 10,
+        })
+
+        product = self.env['product.product'].create({
+            'name': 'Product 1',
+        })
+
+        purchase = self.env['purchase.order'].create({
+            'partner_id': supplier.id,
+            'order_line': [
+                (0, False, {
+                    'name': product.name,
+                    'date_planned': fields.Datetime.now(),
+                    'product_id': product.id,
+                    'product_qty': 1,
+                    'product_uom': self.ref('product.product_uom_unit'),
+                    'price_unit_base': 100,
+                }),
+            ]
+        })
+
+        line = purchase.order_line
+
+        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
+        self.assertFalse(purchase.supplier_promotion_allowed)
+        self.assertEquals(line.promotion_supplier, 0)
+        self.assertEquals(line.price_unit_base, 100)
+        self.assertEquals(line.price_unit, 100)
+        self.assertEquals(purchase.amount_untaxed, 100)
+
+        product.write({
+            'seller_ids': [(6, 0, supplierinfo.ids)],
+        })
+        line.compute_promotion_supplier()
+
+        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
+        self.assertFalse(purchase.supplier_promotion_allowed)
+        self.assertEquals(line.promotion_supplier, 0)
+        self.assertEquals(line.price_unit_base, 100)
+        self.assertEquals(line.price_unit, 100)
+        self.assertEquals(purchase.amount_untaxed, 100)
+
+        purchase.supplier_promotion_allowed = True
+        line.compute_promotion_supplier()
+
+        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
+        self.assertTrue(purchase.supplier_promotion_allowed)
+        self.assertEquals(line.promotion_supplier, 10)
+        self.assertEquals(line.price_unit_base, 100)
+        self.assertEquals(line.price_unit, 90)
+        self.assertEquals(purchase.amount_untaxed, 90)
+
+        purchase.onchange_partner_id_supplier_promotion_purchase_allowed()
+        purchase.onchange_supplier_promotion_allowed()
+
+        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
+        self.assertFalse(purchase.supplier_promotion_allowed)
+        self.assertEquals(line.promotion_supplier, 0)
+        self.assertEquals(line.price_unit_base, 100)
+        self.assertEquals(line.price_unit, 100)
+        self.assertEquals(purchase.amount_untaxed, 100)
+
+        supplier.supplier_promotion_purchase_allowed = True
+        purchase.onchange_partner_id_supplier_promotion_purchase_allowed()
+        purchase.onchange_supplier_promotion_allowed()
+
+        self.assertTrue(supplier.supplier_promotion_purchase_allowed)
+        self.assertTrue(purchase.supplier_promotion_allowed)
+        self.assertEquals(line.promotion_supplier, 10)
+        self.assertEquals(line.price_unit_base, 100)
+        self.assertEquals(line.price_unit, 90)
+        self.assertEquals(purchase.amount_untaxed, 90)

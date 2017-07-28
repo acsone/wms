@@ -49,6 +49,11 @@ class PurchaseOrder(models.Model):
             else:
                 order.last_date_done = False
 
+    @api.onchange('supplier_promotion_allowed')
+    def onchange_supplier_promotion_allowed(self):
+        for line in self.order_line:
+            line.compute_promotion_supplier()
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
@@ -60,7 +65,9 @@ class PurchaseOrderLine(models.Model):
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
-    discount_pricelist = fields.Float()
+    promotion_supplier = fields.Float(
+        default=0.0
+    )
     product_ref = fields.Char('Product ref', related='product_id.default_code')
 
     # By default there is no way to add a discounts in Purchase Lines.
@@ -96,15 +103,38 @@ class PurchaseOrderLine(models.Model):
         To avoid infinite loop we need to not write the price_unit_base
         when we recompute the price_unit.
         """
-        if 'price_unit' in vals \
-                and 'price_unit_base' not in vals\
-                and not self.env.context.get('stop_constrains'):
+
+        context = self.env.context or {}
+
+        # When the write provides from a form view,
+        # we don't want to recompute the price unit base.
+        #
+        # Because in this case,
+        # the price unit base has already computed by onchange.
+        #
+        # Without that, if you change only a promotion by example on the view,
+        # the price unit changed but not the price unit base.
+        # And so, the price unit base if recomputed here (What we don't want).
+        write_from_view = (
+            context.get('params') and
+            isinstance(context['params'], dict) and
+            context['params'].get('view_type') and
+            context['params']['view_type'] == u'form'
+        )
+
+        condition = (
+            'price_unit' in vals and
+            'price_unit_base' not in vals and
+            not write_from_view and
+            not self.env.context.get('stop_constrains')
+        )
+        if condition:
             vals['price_unit_base'] = vals['price_unit']
 
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.constrains('price_unit_base', 'discount_global', 'discount_pricelist')
-    @api.onchange('price_unit_base', 'discount_global', 'discount_pricelist')
+    @api.constrains('price_unit_base', 'discount_global', 'promotion_supplier')
+    @api.onchange('price_unit_base', 'discount_global', 'promotion_supplier')
     def _compute_price_unit(self):
         """
         This method will compute the price unit according
@@ -120,16 +150,50 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             price_unit = line.price_unit_base * \
                          (1 - (line.discount_global / 100)) * \
-                         (1 - (line.discount_pricelist / 100))
-            line.with_context(stop_constrains=True).price_unit = price_unit
+                         (1 - (line.promotion_supplier / 100))
+
+            # The method with_context will create a new environment.
+            # When an onchange method change a value on a draft record
+            # this value will set on the environment (=> cache).
+            # If we use the method with_context on a draft record, it will
+            # set the value on a new environment. It means that the value will
+            # never set on the current environment.
+            # Thus if we want to send a specific context for the method write
+            # if check the if the record is in draft mode or if the record
+            # doesn't have an ID.
+            if not self.env.in_draft and line.id:
+                # The record exist and we call the method write
+                line.with_context(stop_constrains=True).price_unit = price_unit
+            else:
+                # The record doesn't yet exit and the value will set in cache
+                line.price_unit = price_unit
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
         result = super(PurchaseOrderLine, self)._onchange_quantity()
         self.price_unit_base = self.price_unit
+        self.compute_promotion_supplier()
         self._compute_price_unit()
 
         return result
+
+    def compute_promotion_supplier(self):
+        if self.product_id:
+            date_order = self.order_id.date_order
+            order_date_str = date_order and date_order[:10]
+            seller = self.product_id._select_seller(
+                partner_id=self.partner_id,
+                quantity=self.product_qty,
+                date=order_date_str,
+                uom_id=self.product_uom)
+            self.promotion_supplier = (
+                seller.discount_purchase
+                if seller and self.order_id.supplier_promotion_allowed
+                else 0.0
+            )
+        else:
+            self.promotion_supplier = 0.0
+        self._compute_price_unit()
 
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -151,6 +215,8 @@ class PurchaseOrderLine(models.Model):
         if self.discount_global:
             return result
         self.discount_global = self.order_id.partner_id.supplier_discount
+
+        self.compute_promotion_supplier()
 
         return result
 

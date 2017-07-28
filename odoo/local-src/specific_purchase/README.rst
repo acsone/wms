@@ -7,8 +7,8 @@ Specific Purchase
 =================
 
 This module adds Alcyon specific fields and logic for purchase:
-- Add two discounts on purchase order (discount global and discount pricelist)
-- Add a supplier discount on the partner form
+- Add two discounts on purchase order (discount global and promotion supplier)
+- Add a promotion supplier on the product supplierinfo form (On the partner and purchase, you can allow or not the computation)
 - Compute the total weight of a purchase order
 - On a supplier you can define if it support back order or not
 - If the supplier doesn't support "back order" a validated purchase order
@@ -24,3 +24,4 @@ Contributors
 ------------
 
 * Sylvain Van Hoof <sylvain@okia.be>
+* Julien Coux <julien.coux@camptocamp.com>
