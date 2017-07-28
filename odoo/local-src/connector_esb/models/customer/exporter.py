@@ -103,9 +103,11 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_language(self, record):
-        lang = 'FR' if record.lang[:2] == 'en' else record.lang[:2].upper()
+        lang = self.env['res.lang'].search([('code', '=', record.lang)],
+                                           limit=1)
         return {
-            'Language': lang,
+            # FR is the default value
+            'Language': lang.esb_ref or 'FR',
         }
 
     @mapping

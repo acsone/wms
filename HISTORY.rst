@@ -20,6 +20,8 @@ Unreleased
 * ALCN-856 ESB export of stock
 * ALCN-863: ESB export of customer and customer addresses
 * ALCN-860: Add esb export of promotions Alcyon
+* ALCN-868: Add webservice returning statistics for a customer
+  according to parameters passed using a form
 * IMP: Add the module web_sheet_full_width
 
 * ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup

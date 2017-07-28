@@ -18,6 +18,8 @@ Existing synchronizations:
 Webservices:
 
  * ``/connector_esb/product/stock``: return stock levels of products
+ * ``/connector_esb/statistics/form``: return statistics from
+   parameters sent using a form
 
 Configuration
 =============
