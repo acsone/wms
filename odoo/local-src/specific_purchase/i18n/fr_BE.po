@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 12:26+0000\n"
-"PO-Revision-Date: 2017-07-26 12:26+0000\n"
+"POT-Creation-Date: 2017-07-28 10:04+0000\n"
+"PO-Revision-Date: 2017-07-28 10:04+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -111,6 +111,11 @@ msgstr "ID"
 #: model:product.state,name:specific_purchase.product_state_inactive
 msgid "Inactive"
 msgstr "Inactive"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_product_supplierinfo
+msgid "Information about a product vendor"
+msgstr "Information sur le vendeur de l'article"
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_introduction
@@ -259,6 +264,11 @@ msgid "Supplier discount %"
 msgstr "Remise fournisseur %"
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Supplier info"
+msgstr "Informations sur le fournisseur"
+
+#. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
 msgid "Total weigh in Kg"
 msgstr "Poid totale en Kg"
@@ -285,6 +295,12 @@ msgstr "Prix unitaire"
 #: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Vendor"
 msgstr "Fournisseur"
+
+#. module: specific_purchase
+#: model:ir.actions.act_window,name:specific_purchase.action_product_supplierinfo
+#: model:ir.ui.menu,name:specific_purchase.menu_product_supplierinfo
+msgid "Vendor Promotions"
+msgstr "Promotion fournisseur"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_width

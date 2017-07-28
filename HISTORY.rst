@@ -26,6 +26,7 @@ Unreleased
 * ALCN-913: Add the unique supplier on the product form
 * ALCN-857: Add esb export price
 * ALCN-916: Manage supplier promotion
+* ALCN-924: Add a view to manage supplier promotions
 
 **Bugfixes**
 

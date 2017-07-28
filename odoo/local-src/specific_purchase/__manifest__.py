@@ -23,6 +23,7 @@
         "views/bank_holiday.xml",
         "views/purchase_config_settings.xml",
         "views/product_state.xml",
+        "views/product_supplierinfo.xml",
 
         # Data
         "data/product_state.xml",
