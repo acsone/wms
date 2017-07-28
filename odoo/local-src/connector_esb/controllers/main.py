@@ -84,3 +84,23 @@ class ESBController(http.Controller):
                 language=request.httprequest.form['language']
             )
             return component.get_message(options)
+
+    @http.route('/connector_esb/statistics/product/<string:sku>/'
+                '<string:customer_ref>', type='http',
+                auth='public', csrf=False)
+    def product_customer_stat(self, sku, customer_ref):
+        """ Return a customer purchase statistics for a specific product for
+            the last 12 months
+
+        Expect a GET
+
+        $ curl http://localhost/connector_esb/statistics/product/1322031/464
+
+        """
+        ensure_db()
+        request.uid = odoo.SUPERUSER_ID
+        env = request.env
+        backend = env['esb.backend'].get_singleton()
+        with backend.work_on('sale.order.line') as work:
+            return (work.component('ws.message.product.customer.stat')
+                        .get_message(customer_ref, sku))
