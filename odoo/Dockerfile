@@ -31,9 +31,9 @@ COPY ./requirements.txt /opt/odoo
 RUN cd /opt/odoo && pip install -r requirements.txt
 
 # Configure ODBC
-COPY ./archives/iseriesaccess_7.1.0-1.0_amd64.deb /opt/odoo
-RUN dpkg -i /opt/odoo/iseriesaccess_7.1.0-1.0_amd64.deb \
-    && rm /opt/odoo/iseriesaccess_7.1.0-1.0_amd64.deb \
+COPY ./archives/iseriesaccess_7.1.0-1.0_amd64.deb /tmp
+RUN dpkg -i /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
+    && rm /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
     && ln -s /opt/ibm/iSeriesAccess/lib64/libcwbcore.so /usr/lib/libcwbcore.so \
     && mkdir /home/odoo
 COPY ./.odbc.ini /home/odoo/.odbc.ini
