@@ -13,10 +13,11 @@ RUN set -x; \
          # needed to build Cryptography
          libssl-dev libffi-dev \
          # needed to build pyodbc
-         unixodbc-dev autoconf libtool pkg-config python-dev \
+         unixodbc-dev autoconf libtool pkg-config \
          && cd /opt/odoo \
          && pip install -r requirements.txt \
          && apt-get remove -y build-essential libssl-dev libffi-dev python-dev \
+         unixodbc-dev autoconf libtool pkg-config \
          && apt-get clean \
          && rm -rf /var/lib/apt/lists/*
 
