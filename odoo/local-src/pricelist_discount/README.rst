@@ -6,9 +6,12 @@
 Discount Pricelist
 ==================
 
-This module adds two pricelist on sale order:
-* Supplier promotion pricelist
+This module adds two promotion types on sale order:
+* Supplier promotion
 * Alcyon discount pricelist
+
+The supplier promotion is computed with promotion defined on supplierinfo.
+And on the partner and the sale order, you can allow or not this computation.
 
 So base pricelist contains crude price of products and Alcyon
 can applied two discounts on these prices.
@@ -35,3 +38,4 @@ Contributors
 ------------
 
 * Cyril Gaudin <cyril.gaudin@camptocamp.com>
+* Julien Coux <julien.coux@camptocamp.com>

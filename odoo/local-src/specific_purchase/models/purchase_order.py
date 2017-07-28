@@ -106,6 +106,15 @@ class PurchaseOrderLine(models.Model):
 
         context = self.env.context or {}
 
+        # When the write provides from a form view,
+        # we don't want to recompute the price unit base.
+        #
+        # Because in this case,
+        # the price unit base has already computed by onchange.
+        #
+        # Without that, if you change only a promotion by example on the view,
+        # the price unit changed but not the price unit base.
+        # And so, the price unit base if recomputed here (What we don't want).
         write_from_view = (
             context.get('params') and
             isinstance(context['params'], dict) and
