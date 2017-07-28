@@ -33,6 +33,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-929: Fix sale order report inherit
+* Sales Priority: First ordered, is first served
 
 **Build**
 
