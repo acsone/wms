@@ -30,7 +30,7 @@ Unreleased
 * ALCN-922: Add the module purchase_cancel_reason
 * ALCN-923: Send an email when a purchase order is canceled
 * ALCN-796: Use the available quantity on product for the reception wizard
-
+* Create an user with login WSO2 to allow Smile to use restricted controllers
 
 **Bugfixes**
 
