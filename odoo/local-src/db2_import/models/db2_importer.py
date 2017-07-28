@@ -479,34 +479,36 @@ class DB2ImporterTable(models.Model):
         conn = pyodbc.connect(
             "DSN=Alcyon", system=host,
             uid=db_user, pwd=db_pwd)
-        db2_cr = conn.cursor()
-        cr = self.env.cr
-        odoo_table_name = self._PREFIX + self.table_name.lower()
-        cr.execute(
-            "SELECT 1 FROM information_schema.tables"
-            " WHERE table_name = '{}'".format(odoo_table_name))
-        table_exists = cr.fetchone()
+        try:
+            db2_cr = conn.cursor()
+            cr = self.env.cr
+            odoo_table_name = self._PREFIX + self.table_name.lower()
+            cr.execute(
+                "SELECT 1 FROM information_schema.tables"
+                " WHERE table_name = '{}'".format(odoo_table_name))
+            table_exists = cr.fetchone()
 
-        if not table_exists:
-            self._create_db2_table(db2_cr)
-        # get all columns (from local copy)
-        query = (
-            "SELECT column_name"
-            " FROM information_schema.columns"
-            " WHERE table_name='{}'").format(odoo_table_name)
-        cr.execute(query)
-        cols = cr.fetchall()
-        col_names = [col[0] for col in cols]
-        if not self.table_prefix:
-            for col in col_names:
-                if col != 'id':
-                    self.table_prefix = col[:3].lower()
-                    break
-        query = self.get_sql_query(date_start, date_end, col_names)
-        db2_cr.execute(query, [])
+            if not table_exists:
+                self._create_db2_table(db2_cr)
+            # get all columns (from local copy)
+            query = (
+                "SELECT column_name"
+                " FROM information_schema.columns"
+                " WHERE table_name='{}'").format(odoo_table_name)
+            cr.execute(query)
+            cols = cr.fetchall()
+            col_names = [col[0] for col in cols]
+            if not self.table_prefix:
+                for col in col_names:
+                    if col != 'id':
+                        self.table_prefix = col[:3].lower()
+                        break
+            query = self.get_sql_query(date_start, date_end, col_names)
+            db2_cr.execute(query, [])
 
-        rows = db2_cr.fetchall()
-        conn.close()
+            rows = db2_cr.fetchall()
+        finally:
+            conn.close()
         if not rows:
             raise Exception("No data found please check your date range")
 
