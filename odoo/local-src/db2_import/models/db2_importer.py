@@ -346,7 +346,7 @@ class DB2ImporterTable(models.Model):
         columns = db2_cr.fetchall()
         type_mapping = {
             'NUMERIC': 'INTEGER',
-            'CHAR': 'VARCHAR(50)',
+            'CHAR': 'VARCHAR()',
             'DECIMAL': 'DOUBLE PRECISION',
         }
         columns = ",".join(["{} {}".format(col[0], type_mapping[col[1]])
