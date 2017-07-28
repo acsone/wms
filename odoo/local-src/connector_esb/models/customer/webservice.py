@@ -38,7 +38,8 @@ class StatisticsFormWebserviceMessage(Component):
             [('parent_id', 'child_of', partner.id)],
         )
 
-        domain = [('order_id.partner_id', 'in', partner_and_addresses.ids)]
+        domain = [('order_id.partner_id', 'in', partner_and_addresses.ids),
+                  ('invoice_status', '=', 'invoiced')]
         if options.start:
             domain_start = fields.Date.to_string(options.start)
             domain.append(('order_id.date_order', '>=', domain_start))

@@ -74,6 +74,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
                 'qty_delivered': qty_delivered,
                 'price_unit': price_unit,
                 'tax_id': [(6, 0, tax.ids)],
+                'invoice_status': 'invoiced',
             })
         sale = sale_model.create(
             {'partner_id': self.partner.id,
@@ -81,6 +82,13 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'order_line': [(0, 0, line) for line in lines],
              },
         )
+        # force the lines to invoiced, as we filter on invoiced lines, as this
+        # is a computed field, we can't set it with ORM
+        self.env.cr.execute('''
+            UPDATE sale_order_line
+            SET invoice_status = 'invoiced'
+            WHERE id IN %s
+        ''', (tuple(sale.order_line.ids),))
         return sale
 
     def test_message(self):
