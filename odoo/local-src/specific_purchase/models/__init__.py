@@ -7,3 +7,4 @@ from . import purchase_order
 from . import stock_picking
 from . import bank_holiday
 from . import purchase_config_settings
+from . import purchase_order_cancel

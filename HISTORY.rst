@@ -27,6 +27,8 @@ Unreleased
 * ALCN-857: Add esb export price
 * ALCN-916: Manage supplier promotion
 * ALCN-924: Add a view to manage supplier promotions
+* ALCN-922: Add the module purchase_cancel_reason
+* ALCN-923: Send an email when a purchase order is canceled
 
 **Bugfixes**
 

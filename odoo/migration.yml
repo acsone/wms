@@ -103,6 +103,8 @@ migration:
           - stock_picking_invoice_link
           # oca/web
           - web_sheet_full_width
+          # oca/purchase-workflow
+          - purchase_cancel_reason
           ### local-src
           - account_invoice_tax_required
           - connector_esb

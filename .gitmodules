@@ -49,3 +49,6 @@
 [submodule "odoo/external-src/web"]
 	path = odoo/external-src/web
 	url = https://github.com/OCA/web.git
+[submodule "odoo/external-src/purchase-workflow"]
+	path = odoo/external-src/purchase-workflow
+	url = https://github.com/camptocamp/purchase-workflow.git

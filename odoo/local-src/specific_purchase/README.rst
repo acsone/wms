@@ -15,6 +15,7 @@ This module adds Alcyon specific fields and logic for purchase:
 will never create a back oder
 - A purchase order is automatically validated
 - Add the unique supplier on the product form
+- Send an email to the supplier when a purchase order is canceled with the reason
 
 
 Credits

@@ -13,6 +13,7 @@
         'purchase',
         'stock',
         'calendar',
+        'purchase_cancel_reason',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -24,6 +25,7 @@
         "views/purchase_config_settings.xml",
         "views/product_state.xml",
         "views/product_supplierinfo.xml",
+        "views/email_template.xml",
 
         # Data
         "data/product_state.xml",
