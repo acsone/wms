@@ -34,6 +34,7 @@ Unreleased
 * ALCN-796: Use the available quantity on product for the reception wizard
 * Create an user with login WSO2 to allow Smile to use restricted controllers
 * ALCN-866: Add webservice for a product a client yearly purchase statistics
+* ALCN-867: Add webservice for customer yearly statistics
 
 **Bugfixes**
 

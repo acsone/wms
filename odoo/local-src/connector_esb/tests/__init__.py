@@ -7,3 +7,4 @@ from . import test_xml_writer
 from . import test_ws_stat_product_customer
 from . import test_export_customer_address
 from . import test_export_promotion_alcyon
+from . import test_ws_stat_customer
