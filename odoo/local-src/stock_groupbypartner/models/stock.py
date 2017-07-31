@@ -68,8 +68,9 @@ class StockMove(models.Model):
                         except UserError:
                             # in case of no quant available
                             pass
-                        # recompute pack op
-                        picking.do_prepare_partial()
+                        if picking.pack_operation_ids:
+                            # recompute pack op
+                            picking.do_prepare_partial()
                 else:
                     create = True
             else:

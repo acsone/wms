@@ -31,6 +31,7 @@ Unreleased
 * Mark customers exported to ESB as such ('esb_exported' field)
 
 **Bugfixes**
+* At SO confirmation, do not recompute pack operation for each line
 
 * Fix two mappings on client export esb
 * Fix an error when when a product export file for ESB was generated for no products
