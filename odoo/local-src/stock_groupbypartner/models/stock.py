@@ -2,7 +2,7 @@
 # Copyright 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -58,24 +58,17 @@ class StockMove(models.Model):
                 total_weight = 0.0
                 if move.picking_type_id.groupbypartner_maxweight:
                     total_weight = move.product_id.weight * move.product_qty
-                    for pmove in picking.move_lines:
+                    for pmove in picking.move_lines.filtered(
+                            lambda m: m.state != 'cancel'):
                         total_weight += (
                             pmove.product_id.weight * pmove.product_qty)
                 if (total_weight <=
                         move.picking_type_id.groupbypartner_maxweight):
                     # assign move to picking
                     move.picking_id = picking.id
-                    if picking.state in ('confirmed', 'assigned',
-                                         'partially_available'):
-                        # reserve available qty
-                        try:
-                            move.action_assign(no_prepare=True)
-                        except UserError:
-                            # in case of no quant available
-                            pass
-                        if picking.pack_operation_ids:
-                            # recompute pack op
-                            pickings_to_recompute |= picking
+                    if picking.pack_operation_ids:
+                        # recompute pack op
+                        pickings_to_recompute |= picking
                 else:
                     create = True
             else:
@@ -85,6 +78,7 @@ class StockMove(models.Model):
                 picking = pick_obj.create(values)
                 pickings[str(domain)] = picking
                 move.picking_id = picking.id
+                move.recompute()  # see std assign_picking for why this is called
 
         if pickings_to_recompute:
             # recompute pack op
@@ -97,7 +91,9 @@ class StockMove(models.Model):
         operations """
         res = super(StockMove, self).action_cancel()
         if self.filtered("picking_id.printed"):
-            raise UserError(_("You cannot cancel a move that is part of a started picking"))
+            raise UserError(_(
+                "You cannot cancel a move that is part of a started picking"))
         # recompute pack op
-        self.mapped('picking_id').do_prepare_partial()
+        self.mapped('picking_id').filtered(
+            lambda picking: picking.state != 'cancel').do_prepare_partial()
         return res
