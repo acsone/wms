@@ -76,7 +76,6 @@ class StockMove(models.Model):
                         if picking.pack_operation_ids:
                             # recompute pack op
                             pickings_to_recompute |= picking
-                            picking.do_prepare_partial()
                 else:
                     create = True
             else:
