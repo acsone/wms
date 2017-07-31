@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.5.0 (2017-07-31)
++++++++++++++++++++
+
 **Data Migration**
 
 * Update all data files
@@ -14,27 +26,26 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-756: Add the module [MIG][10.0]account_cutoff_accrual_picking, for testing purpose
-* ALCN-917: Add a month filter on account invoice report
-* ALCN-926 Install module Specific Data and remove references to __setup__
-* ALCN-870: Add webservice for obtaining stock level for products in connector_esb
-* ALCN-856 ESB export of stock
-* ALCN-863: ESB export of customer and customer addresses
-* ALCN-860: Add esb export of promotions Alcyon
-* ALCN-868: Add webservice returning statistics for a customer
-  according to parameters passed using a form
-* IMP: Add the module web_sheet_full_width
-
-* ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
-* ALCN-913: Add the unique supplier on the product form
-* ALCN-857: Add esb export price
-* ALCN-916: Manage supplier promotion
-* ALCN-924: Add a view to manage supplier promotions
-* ALCN-922: Add the module purchase_cancel_reason
-* ALCN-923: Send an email when a purchase order is canceled
 * ALCN-796: Use the available quantity on product for the reception wizard
-* Create an user with login WSO2 to allow Smile to use restricted controllers
+* ALCN-856 ESB export of stock
+* ALCN-857: Add esb export price
+* ALCN-860: Add esb export of promotions Alcyon
+* ALCN-863: ESB export of customer and customer addresses
 * ALCN-866: Add webservice for a product a client yearly purchase statistics
 * ALCN-867: Add webservice for customer yearly statistics
+* ALCN-868: Add webservice returning statistics for a customer
+  according to parameters passed using a form
+* ALCN-870: Add webservice for obtaining stock level for products in connector_esb
+* ALCN-909 Rename Delivery Rounds models and load new delivery rounds setup
+* ALCN-913: Add the unique supplier on the product form
+* ALCN-916: Manage supplier promotion
+* ALCN-917: Add a month filter on account invoice report
+* ALCN-922: Add the module purchase_cancel_reason
+* ALCN-923: Send an email when a purchase order is canceled
+* ALCN-924: Add a view to manage supplier promotions
+* ALCN-926 Install module Specific Data and remove references to __setup__
+* Create an user with login WSO2 to allow Smile to use restricted controllers
+* IMP: Add the module web_sheet_full_width
 
 **Bugfixes**
 
@@ -44,8 +55,6 @@ Unreleased
 **Build**
 
 * Clean migration.yml because we reset integration instance
-
-**Documentation**
 
 
 10.4.0 (2017-07-10)
