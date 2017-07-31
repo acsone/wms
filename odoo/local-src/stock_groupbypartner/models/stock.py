@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import UserError
 
 
 class StockPickingType(models.Model):
@@ -25,12 +25,17 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
+        moves_to_group = self.filtered("picking_type_id.groupbypartner")
+
+        moves_to_not_group = self - moves_to_group
+        if moves_to_not_group:
+            super(StockMove, moves_to_not_group).assign_picking()
+
         # FIXME TODO: does not work for MTO products.
         pick_obj = self.env["stock.picking"]
         pickings = {}
-        for move in self:
-            if not move.picking_type_id.groupbypartner:
-                return super(StockMove, self).assign_picking()
+        pickings_to_recompute = pick_obj.browse()
+        for move in moves_to_group:
             domain = [
                 ('partner_id', '=', move.group_id.partner_id.id),
                 ('location_id', '=', move.location_id.id),
@@ -70,6 +75,7 @@ class StockMove(models.Model):
                             pass
                         if picking.pack_operation_ids:
                             # recompute pack op
+                            pickings_to_recompute |= picking
                             picking.do_prepare_partial()
                 else:
                     create = True
@@ -80,4 +86,19 @@ class StockMove(models.Model):
                 picking = pick_obj.create(values)
                 pickings[str(domain)] = picking
                 move.picking_id = picking.id
+
+        if pickings_to_recompute:
+            # recompute pack op
+            pickings_to_recompute.do_prepare_partial()
         return True
+
+    @api.multi
+    def action_cancel(self):
+        """ Prevent to cancel a move from a printed picking and recompute pack
+        operations """
+        res = super(StockMove, self).action_cancel()
+        if self.filtered("picking_id.printed"):
+            raise UserError(_("You cannot cancel a move that is part of a started picking"))
+        # recompute pack op
+        self.mapped('picking_id').do_prepare_partial()
+        return res
