@@ -17,7 +17,7 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
 
     @property
     def model(self):
-        return self.env['product.pricelist.item']
+        return self.env['product.supplierinfo']
 
     def setup_records(self):
         # Create 2 products
@@ -29,52 +29,42 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             'name': 'Unittest P2',
             'default_code': '0002'
         })
-        # Create a new pricelist with percentage discount on the product 1
-        self.discount_pricelist_1 = self.env['product.pricelist'].create({
-            'name': 'Discount list 1',
-            'item_ids': [
-                (0, False, {
-                    'applied_on': '0_product_variant',
-                    'product_id': self.p1.id,
-                    'compute_price': 'percentage',
-                    'percent_price': 5,
-                    'date_start': '2017-07-12',
-                    'date_end': '2017-12-31'
-                }),
-            ],
-        })
-        # Create 1 clients with the the discount pricelist 1
-        self.client1 = self.env['res.partner'].create({
-            'email': 'joe@ch.ch',
+        # Create a supplier
+        self.supplier1 = self.env['res.partner'].create({
+            'ref': 'J',
             'name': 'Joe',
-            'lang': 'nl_BE',
-            'ref': 'joe',
-            'customer': True,
-            'discount_pricelist_id': self.discount_pricelist_1.id,
+            'street': 'Chemin des Pins, 23',
+            'street2': '',
+            'zip': '1010',
+            'city': 'Lausanne',
+            'country_id': 44,
+            'phone': '021123123',
+            'fax': '021121212',
+            'email': 'joe@ch.ch',
+            'supplier': True,
         })
-        # Create another pricelist with percentage discount on the 2 products
-        self.discount_pricelist_2 = self.env['product.pricelist'].create({
-            'name': 'Discount list 2',
-            'item_ids': [
-                (0, False, {
-                    'applied_on': '0_product_variant',
-                    'product_id': self.p2.id,
-                    'compute_price': 'percentage',
-                    'percent_price': 15,
-                    'date_start': '2017-07-31',
-                    'date_end': '2017-08-31',
-                })
-            ],
-        })
-        # Create another clients with the the discount pricelist 2
-        self.client2 = self.env['res.partner'].create({
-            'email': 'tom@ch.ch',
-            'name': 'Tom',
-            'lang': 'nl_BE',
-            'ref': 'tom',
-            'customer': True,
-            'discount_pricelist_id': self.discount_pricelist_2.id,
-        })
+        self.psi1 = self.model.create({
+            'delay': 3,
+            'currency_id': self.env.user.company_id.currency_id.id,
+            'name': self.supplier1.id,
+            'product_id': self.p1.id,
+            'discount_sale': 5,
+            'date_start': '2017-07-12',
+            'date_end': '2017-12-31',
+            'min_qty': 5,
+            'price': 123,
+            })
+        self.psi2 = self.model.create({
+            'delay': 4,
+            'currency_id': self.env.user.company_id.currency_id.id,
+            'name': self.supplier1.id,
+            'product_id': self.p2.id,
+            'discount_sale': 15,
+            'date_start': '2017-07-31',
+            'date_end': '2017-08-31',
+            'min_qty': 4,
+            'price': 321,
+            })
 
     def test_mapper(self):
         """ Testing mapper without id client """
@@ -83,13 +73,14 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             'Percent': '5.00',
             'StartDate': '20170712',
             'EndDate': '20171231',
-            'Action': 'Create'
+            'AlcyonGroupId': '',
+            'Action': 'Create',
         }
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
-            rec = self.discount_pricelist_1.item_ids[0]
+            rec = self.psi1
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_export(self):
@@ -104,4 +95,4 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
                 result = result_file.read()
             self.assertXmlEquivalentData(
                 result,
-                self.read_test_file('special_promotion_1.xml'), 'CustomerId')
+                self.read_test_file('special_promotion_1.xml'), 'Sku')

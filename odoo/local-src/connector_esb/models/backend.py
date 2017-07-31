@@ -97,5 +97,4 @@ class ESBBackend(models.Model):
     @api.model
     def cron_export_special_promotion(self):
         backend = self.get_singleton()
-        backend._get_timestamp('product.pricelist.item',
-                               'special.promotion').export()
+        backend._get_timestamp('product.supplierinfo').export()

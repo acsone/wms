@@ -7,7 +7,6 @@
       <EndDate>20171231</EndDate>
       <Action>Create</Action>
       <Percent>5.00</Percent>
-      <CustomerId>joe</CustomerId>
     </Row>
     <Row>
       <Sku>0002</Sku>
@@ -15,7 +14,6 @@
       <EndDate>20170831</EndDate>
       <Action>Create</Action>
       <Percent>15.00</Percent>
-      <CustomerId>tom</CustomerId>
     </Row>
   </Root>
 </ROOT>
