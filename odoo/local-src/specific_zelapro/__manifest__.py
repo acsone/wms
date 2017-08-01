@@ -22,6 +22,7 @@
         'sql_views/zelapro_export_cadencier.sql',
         'sql_views/zelapro_export_contacts.sql',
         'sql_views/zelapro_export_lot_moves.sql',
+        'sql_views/zelapro_export_lots.sql',
         'sql_views/zelapro_export_products.sql',
         'sql_views/zelapro_export_promotions.sql',
         'sql_views/zelapro_export_stock_moves.sql',
