@@ -62,7 +62,6 @@ __import__.location_loc_GE14C1,GE14C1,25,__import__.location_family_G,bin,G,E,1,
 __import__.location_loc_GBB203,GBB203,96,__import__.location_family_G,bin,G,B,B,2,03
 __import__.location_loc_QCB410,QCB410,81,__import__.location_family_Q,bin,Q,C,B,4,10
 __import__.location_loc_AI11B4,AI11B4,42,__import__.location_family_A,bin,A,I,11,B,4
-__import__.location_loc_QFD140,QFD140,80,__import__.location_family_Q,bin,Q,F,D,1,40
 __import__.location_loc_GI11B4,GI11B4,68,__import__.location_family_G,bin,G,I,1,1,B4
 __import__.location_loc_AD11B1,AD11B1,22,__import__.location_family_A,bin,A,D,11,B,1
 __import__.location_loc_GK05B5,GK05B5,01,__import__.location_family_G,bin,G,K,0,5,B5
@@ -109,7 +108,6 @@ __import__.location_loc_GBD313,GBD313,43,__import__.location_family_G,bin,G,B,D,
 __import__.location_loc_GI05B4,GI05B4,88,__import__.location_family_G,bin,G,I,0,5,B4
 __import__.location_loc_QMA110,QMA110,28,__import__.location_family_Q,bin,Q,M,A,1,10
 __import__.location_loc_QCA320,QCA320,41,__import__.location_family_Q,bin,Q,C,A,3,20
-__import__.location_loc_QAB410,QAB410,21,__import__.location_family_Q,bin,Q,A,B,4,10
 __import__.location_loc_QAB210,QAB210,76,__import__.location_family_Q,bin,Q,A,B,2,10
 __import__.location_loc_GBF504,GBF504,82,__import__.location_family_G,bin,G,B,F,5,04
 __import__.location_loc_GF14C3,GF14C3,05,__import__.location_family_G,bin,G,F,1,4,C3

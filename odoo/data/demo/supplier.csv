@@ -1,5 +1,5 @@
 id,ref,name,street,zip,city,phone,fax,email,vat,customer,supplier,alcyon_category_id/id,country_id/id,lang,mobile
-__import__.supplier_60422,60422,DECHRA VETERINARY PRODUCTS *,Achterstenhoek 48,2275,LILLE,011/231241,014443679,,BE0408216679,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_60422,60422,DECHRA VETERINARY PRODUCTS *,Achterstenhoek 48,2275,LILLE,014/443670,014443679,,BE0408216679,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_60425,60425,AGORA SANA SCRL,Rue Porte à Camp 10-12,7971,BASECLES,069/773854,069224028,commandes@agorasana.be,,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_61593,61593,"ANDOVER HEALTHCARE,INC",FANARAS DRIVE 9,MA01952,SALISBURY,0019784650044,0019784620003,,,False,True,specific_partner.partner_category_supplier,base.us,fr_BE,
 __import__.supplier_61645,61645,ASP INTERNATIONAL,Herentalsesteenweg 54,2270,HERENTHOUT,015/249846,015245458,info@asp-international.be,,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,

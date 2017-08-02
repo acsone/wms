@@ -54,6 +54,7 @@ Unreleased
 * Reduce demo data size
 * ALCN-735 Add delivery carrier on customers
 * ALCN-674 Fix VAT import for customer and suppliers
+* ALCN-886 Add CNK code on products
 
 **Features and Improvements**
 
