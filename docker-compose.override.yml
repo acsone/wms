@@ -6,7 +6,6 @@ version: '2'
 
 services:
   odoo:
-    command: odoo --load="web,queue_job"
     tty: true
     stdin_open: true
     ports:
@@ -57,6 +56,8 @@ services:
 
   pissh:
     image: camptocamp/alcyon_pissh
+    # PROD
+    # command: "ssh pi@194.78.105.88 -L 0.0.0.0:8471:10.2.2.3:8471 -N"
     command: "ssh pi@194.78.105.88 -L 0.0.0.0:8471:10.2.3.99:8471 -N"
     # environment:
     #   SSH_ID_RSA: |
