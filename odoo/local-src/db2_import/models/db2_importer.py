@@ -517,11 +517,11 @@ class DB2ImporterTable(models.Model):
         column_names = ",".join([col[0] for col in columns])
 
         query = (
-            u"INSERT INTO {table_name} ({column_names})"
-             " VALUES ({placeholders})"
-             " ON CONFLICT ({id_columns}) DO UPDATE"
-             " SET {update_cols}"
-             " RETURNING id"
+            "INSERT INTO {table_name} ({column_names})"
+            " VALUES ({placeholders})"
+            " ON CONFLICT ({id_columns}) DO UPDATE"
+            " SET {update_cols}"
+            " RETURNING id"
         ).format(column_names=column_names,
                  id_columns=self.id_columns,
                  table_name=odoo_table_name,
