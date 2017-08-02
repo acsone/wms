@@ -23,7 +23,6 @@
         'views/picking.xml',
         'views/partner.xml',
         'views/delivery_carrier.xml',
-        'views/sale_order.xml',
         # Data
         'data/sequence.xml',
         # Security

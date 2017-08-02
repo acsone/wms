@@ -1,24 +1,6 @@
-
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Jacques-Etienne Baudoux <je@bcim.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
@@ -47,19 +29,15 @@ class MakeTodayDeliveryPlan(models.TransientModel):
         for template in templates:
             ri = self.env['round.instance'].create({
                 'template_id': template.id,
+                'itinerary_ids': [(6, 0, template.itinerary_ids.ids)],
                 'date': today,
                 'time_picking_planned': template.time_picking_planned,
                 'time_leave_planned': template.time_leave_planned,
                 })
-            for itinerary in template.itinerary_ids:
-                rzi = self.env['round.itinerary.import'].create({
-                    'itinerary_id': itinerary.id})
-                rzi.with_context(
-                    active_ids=[ri.id],
-                    skip_reservation=True).confirm()
 
         if self.assign_moves:
-            # run in background
+            # Run stock reservations in background.  This process automatically
+            # assign pickings and shippings to available delivery rounds
             self.env['procurement.order.compute.all'].procure_calculation()
 
         return dict(self.env.ref(

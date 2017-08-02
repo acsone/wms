@@ -2,8 +2,10 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
-from odoo.exceptions import Warning
+from odoo import api, fields, models
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
@@ -16,7 +18,7 @@ class StockPicking(models.Model):
         store=True,
         string="Delivery Round State")
 
-    def _get_all_from_pickings(self):
+    def _get_all_src_pickings(self):
         res = set()
 
         def _rec_add(moves):
@@ -44,16 +46,34 @@ class StockPicking(models.Model):
         return self.env['stock.move'].browse(list(res)).mapped('picking_id')
 
     @api.multi
-    def write(self, vals):
-        if (self and 'delivery_round_id' in vals and
-                not self._context.get('noround_write')):
+    @api.constrains('delivery_round_id')
+    def _update_delivery_round(self):
+        if self.env.context.get('noround_write'):
+            return
+        delivery_round = self.mapped('delivery_round_id')
+        assert len(delivery_round) <= 1, \
+            'Max 1 delivery_round can ba written at a time'
+        if not delivery_round:
+            _logger.debug("Delivery round unset on pickings %s" % self.ids)
+            # unreserve quants when picking is disconnected from a delivery
+            # round
+            self.do_unreserve()
+        else:
+            _logger.debug(
+                "Delivery round %s set on pickings %s. Propagate "
+                "to group" % (delivery_round.id, self.ids))
+            if not self.env.context.get('round_assigned'):
+                _logger.warn(
+                    "Delivery round assigned to a picking without "
+                    "reservation. Method _assign_pickings on delivery.round "
+                    "should have been called.")
             # propagate to delivery when a picking is (un)assigned to a
             # delivery round
             shippings = self._get_all_dest_pickings().filtered(
                 lambda r: r.picking_type_code == 'outgoing')
             # ensure all related pickings are assigned to the same delivery
             # round
-            pickings = shippings._get_all_from_pickings()
+            pickings = shippings._get_all_src_pickings()
             # TODO: we should ensure a picking is not already done for another
             #       delivery round
             pickings = pickings
@@ -63,17 +83,41 @@ class StockPicking(models.Model):
                     'confirmed',
                     'partially_available',
                     'assigned') and
-                r.delivery_round_id.id != vals['delivery_round_id'])
+                r.delivery_round_id.id != delivery_round.id)
             # if not pickings:
             #     raise Warning(_(
             #         'No available picking to assign this delivery round'))
             if pickings:
                 pickings.with_context(noround_write=True).write(
-                    {'delivery_round_id': vals['delivery_round_id']})
-            del vals['delivery_round_id']
-        if not vals:
-            return True
-        return super(StockPicking, self).write(vals)
+                    {'delivery_round_id': delivery_round.id})
+            _logger.debug(
+                "Compute shippings delivery sequence on delivery round %s." %
+                delivery_round.id)
+            # FIXME TODO: set shipping sequence
+            # # partner_ids = self.itinerary_id.partner_position_ids.mapped(
+            # #   'partner_id.id')
+            # positions = {}
+            # for pos in self.itinerary_id.partner_position_ids:
+            #     positions[pos.partner_id.id] = pos.sequence
+
+            # # set sequence on deliveries according to sequence defined in the
+            # # itinerary
+            # shippings = instance.shipping_ids
+            # # last_seq = max([1] + shippings.mapped('sequence'))
+            # for shipping in shippings:
+            #     if not shipping.sequence:
+            #         # shipping.sequence = last_seq + positions[
+            #         #   shipping.partner_id.id]
+            #         shipping.sequence = (
+            #             self.itinerary_id.sequence*1000 +
+            #             positions[shipping.partner_id.id])
+
+            #     del vals['delivery_round_id']
+            # if not vals:
+            #     return True
+            _logger.debug(
+                "Delivery round %s set on pickings %s. Done." %
+                (delivery_round.id, self.ids))
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
@@ -102,28 +146,4 @@ class StockPickingType(models.Model):
         if self.subcode == 'PICK':
             res['context'] = res['context'].replace(
                 ',', ", 'search_default_delivery_round_state': 'open', ", 1)
-        return res
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    @api.multi
-    def write(self, vals):
-        res = super(StockMove, self).write(vals)
-        if vals.get('picking_id'):
-            # when a picking is assigned to a move, we have to ensure the whole
-            # group (all dest moves) has the same delivery round
-            # Check delivery round on orig moves as picking assignment is
-            # performed from pick to ship
-            orig_drs = self.mapped('move_orig_ids').mapped(
-                'picking_id.delivery_round_id')
-            if len(orig_drs) > 1:
-                raise Warning(_('Source moves have different delivery round. '
-                                'Please fix manually'))
-            for orig_dr in orig_drs:
-                picking = self.env['stock.picking'].browse(
-                    vals.get('picking_id'))
-                if picking.delivery_round_id != orig_dr:
-                    picking.delivery_round_id = orig_dr.id
         return res

@@ -37,26 +37,5 @@ class RoundItineraryImport(models.TransientModel):
             return act_close
         assert len(instance_ids) == 1, "Only 1 ID expected"
         instance = self.env['round.instance'].browse(instance_ids)
-        # partner_ids = self.itinerary_id.partner_position_ids.mapped(
-        #   'partner_id.id')
-        positions = {}
-        for pos in self.itinerary_id.partner_position_ids:
-            positions[pos.partner_id.id] = pos.sequence
-
-        instance.itinerary_ids += self.itinerary_id
-
-        instance._update_itinerary(self.itinerary_id)
-
-        # set sequence on deliveries according to sequence defined in the
-        # itinerary
-        shippings = instance.shipping_ids
-        # last_seq = max([1] + shippings.mapped('sequence'))
-        for shipping in shippings:
-            if not shipping.sequence:
-                # shipping.sequence = last_seq + positions[
-                #   shipping.partner_id.id]
-                shipping.sequence = (
-                    self.itinerary_id.sequence*10000 +
-                    positions[shipping.partner_id.id])
-
+        instance._include_itinerary(self.itinerary_id)
         return act_close

@@ -509,7 +509,7 @@ msgstr "Réserver le stock"
 #. module: delivery_rounds
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_picking
 msgid "Rounds' Pickings"
-msgstr "Bons de transfert de la tournée"
+msgstr "Bons de transfert libérés"
 
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_sale_order

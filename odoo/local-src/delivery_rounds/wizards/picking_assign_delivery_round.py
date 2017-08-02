@@ -28,22 +28,17 @@ class PickingAssignDeliveryRound(models.TransientModel):
     delivery_round_id = fields.Many2one(
         'round.instance', 'Delivery Round',
         domain="[('state', 'in', ('draft', 'open'))]",
-        required=True)
+        required=True,
+        ondelete="cascade")
 
     @api.one
     def confirm(self):
         act_close = {'type': 'ir.actions.act_window_close'}
-        shipping_ids = self._context.get('active_ids')
-        if shipping_ids is None:
+        shippings = self.env['stock.picking'].browse(
+            self._context.get('active_ids'))
+        if not shippings:
             return act_close
-        shipping = self.env['stock.picking'].browse(shipping_ids)
-        shipping.delivery_round_id = self.delivery_round_id
-        # make reservation
-        for picking in shipping._get_all_from_pickings().filtered(
-                lambda x: x.picking_type_subcode == 'PICK'):
-            if picking.state == 'confirmed' or (
-                    picking.state in ['partially_available', 'waiting'] and
-                    not picking.printed):
-                picking.do_unreserve()
-                picking.action_assign()
+        pickings = shippings._get_all_src_pickings().filtered(
+            lambda x: x.picking_type_subcode == 'PICK')
+        self.delivery_round_id._assign_pickings(pickings)
         return act_close
