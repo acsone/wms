@@ -78,7 +78,8 @@ class StockMove(models.Model):
                 picking = pick_obj.create(values)
                 pickings[str(domain)] = picking
                 move.picking_id = picking.id
-                move.recompute()  # see std assign_picking for why this is called
+                # see standard assign_picking for why recompute is called
+                move.recompute()
 
         if pickings_to_recompute:
             # recompute pack op
