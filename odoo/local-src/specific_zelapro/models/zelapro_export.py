@@ -13,8 +13,17 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
+# Cadencier export keys
 PRODUCT_ON_HAND_KEY = 'SFDTST'
+PRODUCT_BO_QTY_KEY = 'SFDTBO'
 PRODUCT_RESERVED_KEY = 'SFDTRE'
+ACCESSORY_SUPPLIER_KEY = 'SFASUA'
+ACCESSORY_LINE_NO_KEY = 'SFANLA'
+MAIN_PRODUCT_SUPPLIER_KEY = 'SFASUP'
+MAIN_PRODUCT_LINE_NO_KEY = 'SFANLP'
+
+# Lots export keys
+PRODUCT_QTY_ON_LOT_KEY = 'LOTACT'
 
 
 class ZelaproExport(models.Model):
@@ -180,7 +189,7 @@ class ZelaproExport(models.Model):
                     rows = self.env.cr.fetchall()
                 elif export.type == 'method':
                     header, rows = \
-                        getattr(self, export.method)(min_creation_date_str)
+                        getattr(export, export.method)(min_creation_date_str)
                 else:
                     raise NotImplementedError('The export type %s is '
                                               'not implemented' % export.type)
@@ -269,12 +278,14 @@ class ZelaproExport(models.Model):
         product_tmpl_ids = [x[0] for x in self.env.cr.fetchall()]
         product_tmpls = self.env['product.template'].browse(product_tmpl_ids)
         product_tmpl_values = product_tmpls.read(['qty_available',
-                                                   'virtual_available'])
+                                                   'virtual_available',
+                                                  'immediately_usable_qty'])
         values_by_product = {}
         for value in product_tmpl_values:
             values_by_product[value['id']] = {
                 'qty_available': value['qty_available'],
                 'virtual_available': value['virtual_available'],
+                'immediately_usable_qty': value['immediately_usable_qty'],
             }
 
         ################################################
@@ -282,7 +293,12 @@ class ZelaproExport(models.Model):
         ################################################
         header.remove('PRODUCT_TMPL_ID')
         product_on_hand_index = header.index(PRODUCT_ON_HAND_KEY)
+        product_bo_qty_index = header.index(PRODUCT_BO_QTY_KEY)
         product_reserved_index = header.index(PRODUCT_RESERVED_KEY)
+        accessory_supplier_index = header.index(ACCESSORY_SUPPLIER_KEY)
+        accessory_line_no_index = header.index(ACCESSORY_LINE_NO_KEY)
+        main_product_supplier_index = header.index(MAIN_PRODUCT_SUPPLIER_KEY)
+        main_product_line_no_index = header.index(MAIN_PRODUCT_LINE_NO_KEY)
 
         rows = []
         for line in result:
@@ -294,11 +310,104 @@ class ZelaproExport(models.Model):
                 qty_on_hand = value['qty_available']
                 # Qty reserved == Qty on hand - Qty Forecast
                 qty_reserved = qty_on_hand - value['virtual_available']
+
+                # Compute the qty in BO for this product
+                # Take the value of "Qty available"
+                # If the value is less than zero, it means that
+                qty_available = value['immediately_usable_qty']
+                if qty_available >= 0:
+                    qty_bo = 0
+                else:
+                    qty_bo = qty_available * -1
             else:
-                qty_on_hand = qty_reserved = 0
+                qty_on_hand = qty_reserved = qty_bo = 0
 
             row[product_on_hand_index] = qty_on_hand
             row[product_reserved_index] = qty_reserved
+            row[product_bo_qty_index] = qty_bo
+            rows.append(row)
+
+        return header, rows
+
+    @api.multi
+    def export_lots(self, min_creation_date_str=None):
+        """
+        Export lots.
+        This export need to retrieve some values from the ORM
+        (values not reachable from SQL).
+
+        Step 1:
+        To improve the execution time we will export all other values with
+        the view SQL 'zelapro_export_lots' (like other exports)
+
+        Step 2:
+        Retrieve all required values with the method read on lot
+
+        Step 3:
+        Replace these values (from step 2) in the result of the query (step 1)
+        :param min_creation_date_str:
+        :return:
+        """
+        self.ensure_one()
+
+        #############################
+        # Step 1 : Execute SQL view #
+        #############################
+        columns_query = """
+                SELECT column_name
+                FROM information_schema.columns
+                WHERE table_name = 'zelapro_export_lots'
+                ORDER BY ordinal_position;
+                """
+        self.env.cr.execute(columns_query)
+        header = [x[0].upper() for x in self.env.cr.fetchall()]
+        # Each Zelapro export should have a column create_date
+        # However we don't want to have this column in the CSV
+        header.remove('CREATE_DATE')
+
+        query = "SELECT %s FROM zelapro_export_lots" % (','.join(header))
+
+        if min_creation_date_str:
+            query += " WHERE create_date > '%s'" % \
+                     min_creation_date_str
+        self.env.cr.execute(query)
+
+        result = self.env.cr.fetchall()
+
+        ####################################
+        # Step 2 : Retrieve values on lots #
+        ####################################
+        domain = [('is_archived', '=', False)]
+
+        if min_creation_date_str:
+            domain.append(('creation_date', '>', min_creation_date_str))
+        lots = self.env['stock.production.lot'].search(domain)
+        lot_values = lots.read(['product_qty'])
+
+        values_by_lot = {}
+        for value in lot_values:
+            values_by_lot[value['id']] = {
+                'product_qty': value['product_qty'],
+            }
+
+        ################################################
+        # Step 3 : Insert result from step 2 in result #
+        ################################################
+        header.remove('LOT_ID')
+        product_qty_on_lot = header.index(PRODUCT_QTY_ON_LOT_KEY)
+
+        rows = []
+        for line in result:
+            row = list(line)
+            lot_id = int(row.pop())
+
+            if lot_id in values_by_lot:
+                value = values_by_lot[lot_id]
+                product_qty = value['product_qty']
+            else:
+                product_qty = 0
+
+            row[product_qty_on_lot] = product_qty
             rows.append(row)
 
         return header, rows

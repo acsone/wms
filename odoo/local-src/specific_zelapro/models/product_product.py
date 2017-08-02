@@ -280,6 +280,8 @@ class ProductTemplate(models.Model):
                                        string='Business unit',
                                        compute='_compute_abc_values',
                                        readonly=True)
+    stock_minimum = fields.Float('Minimum stock')
+    stock_maximum = fields.Float('Maximum stock')
 
     @api.multi
     def _compute_abc_values(self):

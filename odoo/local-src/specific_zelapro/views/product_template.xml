@@ -6,14 +6,18 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="ABC" name="abc">
-                    <group>
+                <page string="Zelapro" name="abc">
+                    <group string="ABC" name="zelapro_abc">
                         <field name="business_unit_id"/>
                         <field name="abc_id"/>
                         <field name="turnover"/>
                         <field name="turnover_nbr_lines"/>
                         <field name="turnover_average"/>
                         <field name="turnover_average_nbr_lines"/>
+                    </group>
+                    <group string="Inventory" name="zelapro_inventory">
+                        <field name="stock_minimum"/>
+                        <field name="stock_maximum"/>
                     </group>
                 </page>
             </xpath>

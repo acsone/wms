@@ -13,7 +13,8 @@
     ########################### 
     """,
     'depends': [
-        'specific_purchase'
+        'specific_purchase',
+        'specific_stock',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -16,22 +16,25 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     '' AS LIBDLI,
     '' AS SFDDMO,
     '' AS LIBDMO,
-    '' AS SFDDBO, -- TODO A se faire expliquer
+    CASE
+      WHEN supplier.is_back_order_accepted = TRUE THEN 1
+      ELSE 0
+    END AS SFDDBO,
     '' AS SFDDBM,
     '' AS SFDSTS,
-    '' AS SFDTMI, -- TODO Stock minimum total
-    '' AS SFDTMA, -- TODO Stock maximum total
-    '' AS SFDTST, -- This value will be change in the export
-    '' AS SFDTBO,
-    '' AS SFDTRE, -- This value will be change in the export
-    '' AS SFASUA,
-    '' AS SFANLA,
+    product_tmpl.stock_minimum AS SFDTMI,
+    product_tmpl.stock_maximum AS SFDTMA,
+    '' AS SFDTST, -- This value will be computed in the export
+    '' AS SFDTBO, -- This value will be computed in the export
+    '' AS SFDTRE, -- This value will be computed in the export
+    '' AS SFASUA, -- This value will be computed in the export
+    '' AS SFANLA, -- This value will be computed in the export
     '' AS SFAQTA,
-    '' AS SFASUP,
-    '' AS SFANLP,
+    '' AS SFASUP, -- This value will be computed in the export
+    '' AS SFANLP, -- This value will be computed in the export
     '' AS SFAQTP,
-    info.create_date AS create_date, -- Mandatory field used to compute data to export
-    product_tmpl.id AS product_tmpl_id
+    product_tmpl.id AS product_tmpl_id,
+    info.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_supplierinfo AS info
     INNER JOIN product_template AS product_tmpl ON info.product_tmpl_id = product_tmpl.id
     INNER JOIN res_partner AS supplier ON info.name = supplier.id;
