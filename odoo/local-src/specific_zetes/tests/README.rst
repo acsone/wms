@@ -14,7 +14,7 @@ Set up
 
 - A picker with the operator code 99
 - Three products:
-    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAA210
+    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAE210
     - Product 2: "Test medoc 2" with a stock of 10 unit in the lot 000001 with the location GAD515 (we will simulate an out of stock - only 6 units)
     - Product 2: "Test medoc 3" with a stock of 120 unit in two lots 0000001 (20 units) and 0000002 (100 units) with the location GAI110
 - A customer "Mr. Docteur Test" who accepts back order
@@ -57,7 +57,7 @@ Set up
 ======
 - A picker with the operator code 99
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAA210
+    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAE210
     - Product 2: "Test medoc 2" with a stock of 10 unit in the lot 000001 with the location GAD515
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
@@ -88,7 +88,7 @@ Set up
 - A picker with the operator code 99
 - An another picker with the operator code 98
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAA210
+    - Product 1: "Test medoc 1" with a stock of 100 unit in the lot 0000001 with the location GAE210
     - Product 2: "Test medoc 2" with a stock of 10 unit in the lot 000001 with the location GAD515
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day

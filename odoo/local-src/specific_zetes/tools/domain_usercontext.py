@@ -72,7 +72,7 @@ class Usercontext(DomainInterface):
 SELECT picking.id
 FROM stock_picking AS picking
   INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-              INNER JOIN round_instance AS round 
+              INNER JOIN round_instance AS round
               ON picking.delivery_round_id = round.id
 WHERE picking.delivery_round_state = 'open'
       AND type.subcode = 'PICK'

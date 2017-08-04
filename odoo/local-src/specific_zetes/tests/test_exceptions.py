@@ -5,15 +5,11 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, \
-    ROUND_CODE, PARTNER_NAME
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_itempick import Itempick
-from ..tools.domain_location import Location
-from ..tools.domain_print import Print
-from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
 
 
@@ -33,11 +29,19 @@ class TestExceptions(ZetesTest):
             'list_price': 40,
         })
 
-        self.location_product_2 = self.env.ref('__import__.location_loc_GAD515')
-        self.location_product_2.write({
+        self.location_product_2 = self.env['stock.location'].create({
+            'name': 'GAD515',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'A',
+            'shelf': 'D',
+            'height': '5',
+            'box': '15',
+            'location_id': self.parent_location.id,
             'bin_checksum_1': '456',
             'bin_checksum_2': '456',
         })
+        self.env['stock.location']._parent_store_compute()
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -146,6 +150,7 @@ class TestExceptions(ZetesTest):
 
         result_str = itempick_obj.requ(request_picking_line_params)
         result_lines = result_str.split('\n')
-        results = [self.format_result(result) for result in result_lines]
+        results = \
+            [self.format_result(result_line) for result_line in result_lines]
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].pickLineId, str(move_2.id))

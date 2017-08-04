@@ -77,11 +77,26 @@ class ZetesTest(TransactionCase):
             'list_price': 100,
         })
 
-        self.location_product_1 = self.env.ref('__import__.location_loc_GAA210')
-        self.location_product_1.write({
+        location_obj = self.env['stock.location']
+
+        self.parent_location = location_obj.create({
+            'name': 'G',
+            'location_id': self.env.ref('stock.stock_location_stock').id
+        })
+
+        self.location_product_1 = location_obj.create({
+            'name': 'GAA210',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'A',
+            'shelf': 'A',
+            'height': '2',
+            'box': '10',
+            'location_id': self.parent_location.id,
             'bin_checksum_1': '123',
             'bin_checksum_2': '123',
         })
+        self.env['stock.location']._parent_store_compute()
 
         one_year = datetime.now() + relativedelta(years=1)
         self.lot_product_1 = self.env['stock.production.lot'].create({
@@ -98,11 +113,34 @@ class ZetesTest(TransactionCase):
         })
         update_qty_wizard.change_product_qty()
 
+        # The picking type "Medoc" is create after test
+        # However I test if the database already contains this picking type
+        self.picking_type_medoc = \
+            self.env.ref('__setup__.stock_picking_type_medoc',
+                         raise_if_not_found=False)
+        if not self.picking_type_medoc:
+            wh = self.env.ref('stock.warehouse0')
+            picking_sequence = wh.pick_type_id.sequence_id
+            location_stock = self.env.ref('stock.stock_location_stock')
+            location_out = self.env.ref('stock.stock_location_output')
+            self.picking_type_medoc = self.env['stock.picking.type'].create({
+                'name': 'Pick Médicaments',
+                'code': 'internal',
+                'sequence_id': picking_sequence.id,
+                'default_location_src_id': location_stock.id,
+                'default_location_dest_id': location_out.id,
+                'use_create_lots': False,
+                'subcode': 'PICK',
+                'groupbypartner': True,
+                'color': 7,
+                'sequence': 4,
+                'zone_code': '01',
+            })
+
         tomorrow = datetime.now() + relativedelta(days=1)
         self.picking = self.env['stock.picking'].create({
             'partner_id': self.partner.id,
-            'picking_type_id':
-                self.env.ref('__setup__.stock_picking_type_medoc').id,
+            'picking_type_id': self.picking_type_medoc.id,
             'delivery_round_id': self.round.id,
             'location_id': self.env.ref('stock.stock_location_stock').id,
             'location_dest_id': self.env.ref('stock.stock_location_output').id,
