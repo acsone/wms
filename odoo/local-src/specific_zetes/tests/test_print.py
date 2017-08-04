@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+from .. import constants
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
+from ..tools.domain_interface import Parameters
+from ..tools.domain_print import Print
+
+
+class TestPrint(ZetesTest):
+
+    def test_requ_print(self):
+        """
+        :return:
+        """
+        printer = self.env['printing.printer']
+        printer.search([]).unlink()
+
+        logger = self.env['zetes.logger']
+        logger.search([]).unlink()
+
+        printer_server = self.env['printing.server'].create({
+            'name': 'Localhost',
+            'address': 'no_printing',
+            'port': '1234'
+        })
+
+        printer.create({
+            'name': 'Password Printer',
+            'system_name': 'password_printer',
+            'code': '1',
+            'type': 'pdf',
+            'server_id': printer_server.id,
+        })
+
+        printer.create({
+            'name': 'Toshiba printer',
+            'system_name': 'toshiba_printer',
+            'code': '20',
+            'type': 'toshiba',
+            'server_id': printer_server.id,
+        })
+
+        printer.create({
+            'name': 'Zebra printer',
+            'system_name': 'zebra_printer',
+            'code': '20',
+            'type': 'zebra',
+            'server_id': printer_server.id,
+        })
+
+        move = self.picking.pack_operation_product_ids
+        move.ensure_one()
+
+        # Print products labels and package labels
+        domain = Print(DEFAULT_HEADER, request_overwrite=self)
+        request_params = Parameters(domain, action='requ')
+        request_params.update({
+            'groupNum': self.picking.id,
+            'printType': constants.PRINT_LABELS,  # Type of printing
+            'printerNum': '20',  # Printer number
+            'Usf01': 1,  # Number of copy
+        })
+
+        # We cannot print a document !!!!
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+        self.assertEqual(result.labelCD, '00')
+        self.assertEqual(result.respMsg, 'Error during printing')
+
+        error_log = logger.search([('picking_id', '=', self.picking.id)])
+        self.assertEqual(len(error_log), 1)

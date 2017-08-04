@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import _
-from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
@@ -39,7 +38,7 @@ class Usercontext(DomainInterface):
         user = self._user
         if not user:
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('User not found')
             })
 
@@ -48,7 +47,7 @@ class Usercontext(DomainInterface):
         # The picker should have the group "warehouse"
         if not user.has_group('stock.group_stock_user'):
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('The user should be in the group Inventory')
             })
 
@@ -73,20 +72,21 @@ class Usercontext(DomainInterface):
 SELECT picking.id
 FROM stock_picking AS picking
   INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-  INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
+              INNER JOIN round_instance AS round 
+              ON picking.delivery_round_id = round.id
 WHERE picking.delivery_round_state = 'open'
       AND type.subcode = 'PICK'
       AND picking.zetes_state IN %s
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
       AND picking.operator_id = %s
-ORDER BY round.date, round.time, picking.sequence
+ORDER BY round.date, round.time_picking_planned, picking.sequence
 LIMIT 1;
             """
 
-            request.env.cr.execute(picking_query, ((constants.AS_START,
-                                                    constants.AS_ACTIVE),
-                                                   self._user.id, ))
-            query_result = request.env.cr.fetchone()
+            self.request.env.cr.execute(picking_query, ((constants.AS_START,
+                                                         constants.AS_ACTIVE),
+                                                        self._user.id, ))
+            query_result = self.request.env.cr.fetchone()
 
             # If the user has a assigned picking
             if query_result and query_result[0]:
@@ -99,17 +99,8 @@ LIMIT 1;
 
         # Do a sign out
         else:
+            # Nothing to do for a sign out
             result.contextType = 2
-
-            pickings = request.env['stock.picking'].sudo(self._user).search([
-                ('operator_id', '=', user.id),
-                ('state', 'in', ['assigned', 'partially_available'])
-            ])
-            for picking in pickings:
-                bos = request.env['stock.backorder.confirmation']\
-                    .sudo(self._user).create({'picking_id': picking.id})
-                for bo in bos:
-                    bo.process()
 
         return result.format()
 

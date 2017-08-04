@@ -163,7 +163,7 @@ def reset_picking_action(picking_id, move_id):
 picking_id = None
 move_id = None
 
-# identification()
+identification()
 # print_zones()
 # picking_id = assignment()
 # get_itempicks(picking_id)

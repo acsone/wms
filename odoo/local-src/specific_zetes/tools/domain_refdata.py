@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from odoo.http import request
-
 from domain_interface import DomainInterface, Parameters
 from .. import constants
 
@@ -32,7 +30,7 @@ class Refdata(DomainInterface):
         :param params:
         :return:
         """
-        picking_types = request.env['stock.picking.type']\
+        picking_types = self.request.env['stock.picking.type']\
             .sudo(self._user).search([('subcode', '=', 'PICK')])
         result = []
         for picking_type in picking_types:

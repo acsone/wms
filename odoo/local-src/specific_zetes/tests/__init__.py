@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+from . import zetes_test_classes
+from . import test_domain_interface
+from . import test_assignment
+from . import test_catchweight
+from . import test_itempick
+from . import test_location
+from . import test_print
+from . import test_refdata
+from . import test_usercontext
+from . import test_full
+from . import test_exceptions
+from . import test_interruption

@@ -2,7 +2,6 @@
 import logging
 
 from odoo import _
-from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
@@ -70,7 +69,7 @@ class Itempick(DomainInterface):
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': 'No picking found'
             })
             return result.format()
@@ -79,7 +78,7 @@ class Itempick(DomainInterface):
         if not picking_id:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found with the ID {}'
                              .format(picking_id))
             })
@@ -98,8 +97,8 @@ class Itempick(DomainInterface):
           INNER JOIN res_partner AS partner ON picking.partner_id = partner.id
         WHERE picking.id = %s;
         """
-        request.env.cr.execute(print_price_query, (picking_id, ))
-        print_price_result = request.env.cr.fetchone()
+        self.request.env.cr.execute(print_price_query, (picking_id, ))
+        print_price_result = self.request.env.cr.fetchone()
         if print_price_result and print_price_result[0]:
             is_print_price = True
         else:
@@ -107,10 +106,10 @@ class Itempick(DomainInterface):
 
         # If the picking type is 'Aliment' whe need to print on portable pinter
         query = "SELECT picking_type_id FROM stock_picking WHERE id = %s"
-        request.env.cr.execute(query, (picking_id, ))
-        query_result = request.env.cr.fetchone()
+        self.request.env.cr.execute(query, (picking_id, ))
+        query_result = self.request.env.cr.fetchone()
 
-        type_food = request.env['stock.picking.type'].search([
+        type_food = self.request.env['stock.picking.type'].search([
             ('food_type', '=', True)])
         if query_result and type_food and query_result[0] == type_food.id:
             print_on_portable_printer = '1'
@@ -120,7 +119,7 @@ class Itempick(DomainInterface):
         sequence = 1
         result = []
         # Search all pack operations for this picking
-        lines = request.env['stock.pack.operation'].sudo(self._user)\
+        lines = self.request.env['stock.pack.operation'].sudo(self._user)\
             .search([('picking_id', '=', picking_id)],
                     order=order_by)
         # Filter lines
@@ -138,13 +137,14 @@ class Itempick(DomainInterface):
             error_message = _('There is no lines for the picking {}'
                               .format(picking_id))
 
-            request.env['stock.picking'].sudo(self._user).browse(picking_id)\
-                .write({'is_zetes_error': True,
-                        'traceback': error_message})
+            self.request.env['stock.picking'].sudo(self._user)\
+                .browse(picking_id).write(
+                {'is_zetes_error': True,
+                 'traceback': error_message})
 
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': error_message
             })
             return result.format()
@@ -152,6 +152,7 @@ class Itempick(DomainInterface):
         for line in lines:
             line_values = Parameters(self)
             line_values.update({
+                'respCode': constants.RESPONSE_CODE_OK,
                 'groupNum': picking_id,
                 'pickLineId': line.id,
                 'reqDestCarSeqNum': 1,
@@ -197,7 +198,7 @@ class Itempick(DomainInterface):
             location = line.location_id
             if not location:
                 line_values.update({
-                    'respCode': constants.RESPONSE_CODE_KO,
+                    'respCode': constants.RESPONSE_CODE_ERROR,
                     'respMsg': _('Location not found for the product {}'
                                  .format(product.name)),
                 })
@@ -215,7 +216,7 @@ class Itempick(DomainInterface):
             })
 
             # Send 5 first lots for this products (ordered by life date)
-            lots = request.env['stock.production.lot'].sudo(self._user)\
+            lots = self.request.env['stock.production.lot'].sudo(self._user)\
                 .search([('product_id', '=', product.id),
                          ('is_archived', '=', False)
                          ],
@@ -247,7 +248,7 @@ class Itempick(DomainInterface):
             return
         move_id = int(params.pickLineId)
 
-        move = request.env['stock.pack.operation']\
+        move = self.request.env['stock.pack.operation']\
             .sudo(self._user).browse(move_id)
         if not len(move):
             return
