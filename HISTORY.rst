@@ -13,6 +13,7 @@ Unreleased
 
 **Features and Improvements**
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
+* ALCN-187: Add missing depends and set the type of product
 
 **Bugfixes**
 
