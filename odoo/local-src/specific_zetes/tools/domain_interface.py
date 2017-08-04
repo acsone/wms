@@ -17,11 +17,16 @@ class DomainInterface:
     RESP = ()
     RESU = ()
 
-    def __init__(self, header):
+    def __init__(self, header, request_overwrite=None):
+        if request_overwrite:
+            self.request = request_overwrite
+        else:
+            self.request = request
+
         self._header = header
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
-        self._user = request.env['res.users'].get_user(operator_code)
+        self._user = self.request.env['res.users'].get_user(operator_code)
         _logger.debug('User: {}'.format(self._user.name or 'no user'))
 
     def requ(self, params):
@@ -71,7 +76,8 @@ class Parameters:
         self._domain = domain
 
         if domain._user:
-            request.context = dict(request.context, lang=domain._user.lang)
+            domain.request.context = \
+                dict(domain.request.context, lang=domain._user.lang)
 
         if values:
             formatted_values = [value.strip() for value in values]
@@ -105,8 +111,9 @@ class Parameters:
                 values.append('----------- values -----------')
 
             value = getattr(self, key, '')
-            if isinstance(value, (str, unicode)):
+            if isinstance(value, unicode):
                 value = value.encode('utf-8').replace(',', ' ')
+
             elif isinstance(value, (int, float)):
                 value = str(value)
 
@@ -220,7 +227,7 @@ class Parameters:
         :param exception: An exception (the object himself)
         :return: None
         """
-        request.env['zetes.logger'].sudo().create({
+        self._domain.request.env['zetes.logger'].sudo().create({
             'domain': self._domain.__class__.__name__.lower(),
             'action': self._action.lower(),
             'request': self.format(),

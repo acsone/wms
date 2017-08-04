@@ -76,7 +76,7 @@ class StockPackOperation(models.Model):
         (constants.OP_CANCELED, 'Canceled')
     ],
         string='Zetes state',
-        default=constants.OP_CANCELED,
+        default=constants.OP_DEFAULT,
         required=True)
 
 
