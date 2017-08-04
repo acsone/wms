@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-187: Add missing depends and set the type of product
 
 **Bugfixes**
 
