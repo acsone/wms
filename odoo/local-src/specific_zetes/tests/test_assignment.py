@@ -34,7 +34,7 @@ class TestAssignemnt(ZetesTest):
 
         # Try with different parameters
         # Set a picking zone (Cri01)
-        picking_zone_drugs = self.env.ref('__setup__.stock_picking_type_medoc')
+        picking_zone_drugs = self.picking_type_medoc
         request_params.Cri01 = picking_zone_drugs.zone_code
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)

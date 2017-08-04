@@ -5,14 +5,11 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, OPERATOR_CODE
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_itempick import Itempick
-from ..tools.domain_location import Location
-from ..tools.domain_print import Print
-from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
 
 
@@ -42,11 +39,19 @@ class TestInterruption(ZetesTest):
             'list_price': 40,
         })
 
-        self.location_product_2 = self.env.ref('__import__.location_loc_GAD515')
-        self.location_product_2.write({
+        self.location_product_2 = self.env['stock.location'].create({
+            'name': 'GAD515',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'A',
+            'shelf': 'D',
+            'height': '5',
+            'box': '15',
+            'location_id': self.parent_location.id,
             'bin_checksum_1': '456',
             'bin_checksum_2': '456',
         })
+        self.env['stock.location']._parent_store_compute()
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -112,7 +117,6 @@ class TestInterruption(ZetesTest):
         catchweight_obj = Catchweight(DEFAULT_HEADER, request_overwrite=self)
         itempick_obj = Itempick(DEFAULT_HEADER, request_overwrite=self)
         usercontext_obj = Usercontext(DEFAULT_HEADER, request_overwrite=self)
-        print_obj = Print(DEFAULT_HEADER, request_overwrite=self)
 
         ##########
         # Step 1 #
@@ -166,7 +170,8 @@ class TestInterruption(ZetesTest):
         user_2_header = list(DEFAULT_HEADER)
         user_2_header[constants.USER_INDEX] = self.user_2.operator_code
 
-        new_usercontext_obj = Usercontext(user_2_header, request_overwrite=self)
+        new_usercontext_obj = \
+            Usercontext(user_2_header, request_overwrite=self)
         new_assignment_obj = Assignment(user_2_header, request_overwrite=self)
         new_itempick_obj = Itempick(user_2_header, request_overwrite=self)
 
@@ -178,7 +183,7 @@ class TestInterruption(ZetesTest):
         result = self.format_result(result_str)
         self.assertEqual(result.unitSlam, '0')
 
-        medic_picking_type = self.env.ref('__setup__.stock_picking_type_medoc')
+        medic_picking_type = self.picking_type_medoc
         medic_picking_code = medic_picking_type.zone_code
 
         request_assignment_params = Parameters(new_assignment_obj)

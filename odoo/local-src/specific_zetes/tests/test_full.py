@@ -5,8 +5,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, \
-    ROUND_CODE, PARTNER_NAME
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_catchweight import Catchweight
@@ -34,11 +33,19 @@ class TestFull(ZetesTest):
             'list_price': 40,
         })
 
-        self.location_product_2 = self.env.ref('__import__.location_loc_GAD515')
-        self.location_product_2.write({
+        self.location_product_2 = self.env['stock.location'].create({
+            'name': 'GAD515',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'A',
+            'shelf': 'D',
+            'height': '5',
+            'box': '15',
+            'location_id': self.parent_location.id,
             'bin_checksum_1': '456',
             'bin_checksum_2': '456',
         })
+        self.env['stock.location']._parent_store_compute()
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -79,11 +86,19 @@ class TestFull(ZetesTest):
             'list_price': 150,
         })
 
-        self.location_product_3 = self.env.ref('__import__.location_loc_GAI110')
-        self.location_product_3.write({
+        self.location_product_3 = self.env['stock.location'].create({
+            'name': 'GAI110',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'A',
+            'shelf': 'I',
+            'height': '1',
+            'box': '10',
+            'location_id': self.parent_location.id,
             'bin_checksum_1': '789',
             'bin_checksum_2': '789',
         })
+        self.env['stock.location']._parent_store_compute()
 
         two_months = datetime.now() + relativedelta(months=2)
         self.lot_product_3_1 = self.env['stock.production.lot'].create({
@@ -111,7 +126,7 @@ class TestFull(ZetesTest):
             'product_tmpl_id': self.product_1.product_tmpl_id.id,
             'new_quantity': 100,
             'lot_id': self.lot_product_3_2.id,
-            'location_id': self.env.ref('__import__.location_loc_GAI110').id
+            'location_id': self.location_product_3.id
         })
         update_qty_wizard.change_product_qty()
 
@@ -190,8 +205,9 @@ class TestFull(ZetesTest):
         result_lines = result_str.split('\n')
         results = \
             [self.format_result(result_line) for result_line in result_lines]
-        picking_codes = [result.operValue for result in results]
-        medic_picking_type = self.env.ref('__setup__.stock_picking_type_medoc')
+        picking_codes = \
+            [result_picking.operValue for result_picking in results]
+        medic_picking_type = self.picking_type_medoc
         medic_picking_code = medic_picking_type.zone_code
         self.assertIn(medic_picking_code, picking_codes)
 

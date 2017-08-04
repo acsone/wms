@@ -10,7 +10,7 @@ class TestDomainInterface(ZetesTest):
     def test_domain(self):
         """
         Create a simple domain without any values
-        :return: 
+        :return:
         """
         header_unknown_user = ['208030824', '2.2.3', '3iV_101',
                                'REQU_USERCONTEXT', '111', '1', '20170207',
@@ -26,7 +26,7 @@ class TestDomainInterface(ZetesTest):
     def test_params(self):
         """
         Create a parameters (from a usercontext domain)
-        :return: 
+        :return:
         """
         domain = Usercontext(DEFAULT_HEADER, request_overwrite=self)
         response_params = Parameters(domain)

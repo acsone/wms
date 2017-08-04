@@ -56,13 +56,13 @@ class TestItempick(ZetesTest):
         self.assertEqual(result.lotTrackingFlag, '1')
 
         # Check location
-        location = self.env.ref('__import__.location_loc_GAA210')
-        self.assertEqual(result.sourceLC1, location.zone)
-        self.assertEqual(result.sourceLC2, location.corridor)
-        self.assertEqual(result.sourceLC3, location.shelf)
-        self.assertEqual(result.sourceLC4, location.height)
-        self.assertEqual(result.sourceLC5, location.box)
-        self.assertEqual(result.sourceLCCD, location.get_checksum())
+        self.assertEqual(result.sourceLC1, self.location_product_1.zone)
+        self.assertEqual(result.sourceLC2, self.location_product_1.corridor)
+        self.assertEqual(result.sourceLC3, self.location_product_1.shelf)
+        self.assertEqual(result.sourceLC4, self.location_product_1.height)
+        self.assertEqual(result.sourceLC5, self.location_product_1.box)
+        self.assertEqual(result.sourceLCCD,
+                         self.location_product_1.get_checksum())
 
         # Check lot name
         self.assertEqual(result.Usf01, self.lot_product_1.checksum)

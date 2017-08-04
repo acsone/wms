@@ -31,12 +31,11 @@ class TestLocation(ZetesTest):
         self.assertEqual(result.Usf07, '100.0')
 
         # Check location
-        location = self.env.ref('__import__.location_loc_GAA210')
-        self.assertEqual(result.lC1, location.zone)
-        self.assertEqual(result.lC2, location.corridor)
-        self.assertEqual(result.lC3, location.shelf)
-        self.assertEqual(result.lC4, location.height)
-        self.assertEqual(result.lC5, location.box)
-        self.assertEqual(result.lCCD, location.get_checksum())
+        self.assertEqual(result.lC1, self.location_product_1.zone)
+        self.assertEqual(result.lC2, self.location_product_1.corridor)
+        self.assertEqual(result.lC3, self.location_product_1.shelf)
+        self.assertEqual(result.lC4, self.location_product_1.height)
+        self.assertEqual(result.lC5, self.location_product_1.box)
+        self.assertEqual(result.lCCD, self.location_product_1.get_checksum())
 
         self.assertEqual(result.Usf01, self.lot_product_1.checksum)
