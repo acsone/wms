@@ -24,6 +24,10 @@ class ZetesTest(TransactionCase):
     def setUp(self):
         super(ZetesTest, self).setUp()
 
+        self.env.user.write({
+            'tz': 'Europe/Brussels'
+        })
+
         # Set all picking as finished (to not interfere with tests)
         query = "UPDATE stock_picking SET zetes_state = %s"
         self.env.cr.execute(query, (constants.AS_FINISHED, ))
@@ -75,6 +79,7 @@ class ZetesTest(TransactionCase):
             'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
             'tracking': 'lot',
             'list_price': 100,
+            'type': 'product',
         })
 
         location_obj = self.env['stock.location']
