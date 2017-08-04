@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-674 Fix VAT import for customer and suppliers
+
 **Features and Improvements**
 
 **Bugfixes**
