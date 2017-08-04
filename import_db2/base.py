@@ -27,7 +27,7 @@ class FieldMapper:
         self.check = check
 
 
-class EntityMapper:
+class EntityMapper(object):
 
     DB2_NAME = None
     DB2_SCHEMA = 'sbdata'
