@@ -19,6 +19,7 @@ services:
       - DB_NAME=odoodb
       - ADMIN_PASSWD=mijaebohb8Thae1g
       - RUNNING_ENV=dev
+      - SERVER_WIDE_MODULES=web,queue_job
 
   db:
     image: camptocamp/postgresql:pg9.5-latest

@@ -1,0 +1,44 @@
+<odoo>
+
+  <record id="view_db2_import_config" model="ir.ui.view">
+    <field name="model">db2.importer</field>
+    <field name="arch" type="xml">
+      <form string="Configure DB2 import">
+        <header>
+          <button string="Import" type="object" name="db2_import" class="oe_highlight"/>
+        </header>
+        <group>
+          <group>
+            <field name="date_start"/>
+            <field name="date_end"/>
+            <field name="last_import"/>
+            <field name="mode"/>
+
+            <field name="table_ids">
+              <tree>
+                <field name="schema"/>
+                <field name="table_name"/>
+                <field name="last_import"/>
+                <field name="table_prefix"/>
+                <field name="eta"/>
+              </tree>
+            </field>
+          </group>
+        </group>
+      </form>
+    </field>
+  </record>
+
+    <record id="action_db2_import_config" model="ir.actions.act_window">
+        <field name="name">DB2 Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">db2.importer</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_db2" name="DB2" parent="base.menu_custom"
+        sequence="0" groups="base.group_system"/>
+    <menuitem id="menu_db2_settings" name="DB2 Import" parent="menu_db2"
+        sequence="0" action="action_db2_import_config" groups="base.group_system"/>
+</odoo>

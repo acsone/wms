@@ -8,11 +8,16 @@ RUN set -x; \
          && apt-get install -y --no-install-recommends \
          parallel \
          python-cups \
+         # common requirement for builds
+         build-essential python-dev \
          # needed to build Cryptography
-         build-essential libssl-dev libffi-dev python-dev \
+         libssl-dev libffi-dev \
+         # needed to build pyodbc
+         unixodbc-dev autoconf libtool pkg-config \
          && cd /opt/odoo \
          && pip install -r requirements.txt \
          && apt-get remove -y build-essential libssl-dev libffi-dev python-dev \
+         unixodbc-dev autoconf libtool pkg-config \
          && apt-get clean \
          && rm -rf /var/lib/apt/lists/*
 
@@ -20,6 +25,18 @@ COPY ./before-migrate-entrypoint.d/* odoo/before-migrate-entrypoint.d/
 COPY ./start-entrypoint.d/* odoo/start-entrypoint.d/
 RUN chmod +x odoo/before-migrate-entrypoint.d/* \
     && chmod +x odoo/start-entrypoint.d/*
+
+# Install additional python packages if needed
+COPY ./requirements.txt /opt/odoo
+RUN cd /opt/odoo && pip install -r requirements.txt
+
+# Configure ODBC
+COPY ./archives/iseriesaccess_7.1.0-1.0_amd64.deb /tmp
+RUN dpkg -i /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
+    && rm /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
+    && ln -s /opt/ibm/iSeriesAccess/lib64/libcwbcore.so /usr/lib/libcwbcore.so \
+    && mkdir /home/odoo
+COPY ./.odbc.ini /home/odoo/.odbc.ini
 
 COPY ./importer.sh bin/
 

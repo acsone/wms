@@ -1,0 +1,42 @@
+<odoo>
+  <data noupdate="1">
+    <record model="db2.importer" id="db2_importer">
+      <field name="date_start">2016-01-01</field>
+      <field name="mode">history</field>
+    </record>
+  </data>
+
+  <data noupdate="0">
+
+  <!-- sale order header table -->
+  <record model="db2.importer.table" id="db2_table_pentcdcl">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PENTCDCL</field>
+    <field name="table_prefix">ecc</field>
+    <field name="id_columns">eccsui,ecccli,eccsuc</field>
+    <field name="create_job" eval="True"/>
+    <field name="eta">2</field>
+  </record>
+
+  <!-- sale order detail line table -->
+  <record model="db2.importer.table" id="db2_table_pdetcdcl">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PDETCDCL</field>
+    <field name="table_prefix">dcc</field>
+    <field name="id_columns">dccsui,dcccli,dccsuc,dccnli</field>
+  </record>
+
+  <!-- relation table between lot and move
+       containing reference to sale order -->
+  <record model="db2.importer.table" id="db2_table_mvtlot">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">MVTLOT</field>
+    <field name="table_prefix">mlt</field>
+    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
+  </record>
+
+  </data>
+</odoo>
