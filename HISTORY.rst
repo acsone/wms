@@ -15,6 +15,14 @@ Unreleased
 **Documentation**
 
 
+10.6.0 (2017-08-04)
++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCN-33: Module to import Sale orders
+
+
 10.5.0 (2017-07-31)
 +++++++++++++++++++
 
@@ -22,7 +30,6 @@ Unreleased
 
 * Update all data files
 * ALCN-934: Add import for bin, inventory and lot (full mode)
-* ALCN-33: Module to import Sale orders
 
 **Features and Improvements**
 
