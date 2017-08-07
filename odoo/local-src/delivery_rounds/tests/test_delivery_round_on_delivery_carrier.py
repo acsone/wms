@@ -56,9 +56,8 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
                 }),
             ]
         })
-        self.assertFalse(sale.delivery_round_id)
+        self.assertFalse(sale.picking_ids.delivery_round_id)
         sale.action_confirm()
-        self.assertFalse(sale.delivery_round_id)
         self.assertFalse(sale.picking_ids.delivery_round_id)
 
     def test_02_with_delivery_round(self):
@@ -78,9 +77,8 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
                 }),
             ]
         })
-        self.assertFalse(sale.delivery_round_id)
+        self.assertFalse(sale.picking_ids.delivery_round_id)
         sale.action_confirm()
-        self.assertEqual(sale.delivery_round_id, self.delivery_round_1)
         self.assertEqual(
             sale.picking_ids.delivery_round_id,
             self.delivery_round_1
