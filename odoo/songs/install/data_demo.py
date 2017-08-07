@@ -15,6 +15,10 @@ def import_suppliers(ctx):
     """ Importing suppliers from csv """
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
+
+    # Deactivate VIES VAT Validation which is a second check on VAT
+    ctx.env['res.company'].search([]).write({'vat_check_vies': False})
+
     Partner = ctx.env['res.partner'].with_context(load_ctx)
     content = resource_stream(req, 'data/demo/supplier.csv')
     load_csv_stream(ctx, Partner, content, delimiter=',')
@@ -27,6 +31,9 @@ def import_clients(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
+
+    # Deactivate VIES VAT Validation which is a second check on VAT
+    ctx.env['res.company'].search([]).write({'vat_check_vies': False})
 
     with ctx.log(u"Importing customers"):
         content = resource_stream(req, 'data/demo/customer.csv')
