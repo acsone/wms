@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models, _
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -38,9 +38,10 @@ class StockMove(models.Model):
             super(StockMove, other_moves).action_assign(
                 no_prepare=no_prepare)
             has_assigned = True
-        # Thread not happy with this warning:
-        # if pick_moves and not has_assigned:
-        #     raise UserError(_("No delivery round instance found"))
+        if pick_moves and not has_assigned:
+            pass
+            # Thread not happy with this warning:
+            # raise UserError(_("No delivery round instance found"))
 
     @api.multi
     @api.constrains('picking_id')

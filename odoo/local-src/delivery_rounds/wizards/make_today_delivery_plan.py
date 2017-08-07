@@ -27,7 +27,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
         templates -= instances.mapped('template_id')
         # create instance for each template
         for template in templates:
-            ri = self.env['round.instance'].create({
+            self.env['round.instance'].create({
                 'template_id': template.id,
                 'itinerary_ids': [(6, 0, template.itinerary_ids.ids)],
                 'date': today,
