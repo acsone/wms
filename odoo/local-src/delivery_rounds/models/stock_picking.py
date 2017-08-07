@@ -99,11 +99,11 @@ class StockPicking(models.Model):
             # itinerary
             positions = False
             for shipping in shippings:
-                if shipping.sequence <= 0:
+                if shipping.sequence < 0:
                     other_shippings = delivery_round.shipping_ids.filtered(
                         lambda p: p.state != 'cancel' and
                         p.id != shipping.id and
-                        p.sequence > 0 and
+                        p.sequence >= 0 and
                         p.partner_id == shipping.partner_id)
                     sequences = other_shippings.mapped('sequence')
                     if sequences:
@@ -116,7 +116,7 @@ class StockPicking(models.Model):
                                     positions[pos.partner_id.id] = (
                                         itinerary.sequence*1000 +
                                         pos.sequence)
-                        shipping.sequence = positions[shipping.partner_id.id]
+                        shipping.sequence = positions.get(shipping.partner_id.id, 0)
 
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done." %

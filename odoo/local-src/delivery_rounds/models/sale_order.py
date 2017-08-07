@@ -53,11 +53,11 @@ class SaleOrder(models.Model):
                 order='date asc, time_leave_planned asc',
                 limit=1,
             )
-            if delivery_round:
-                if delivery_round != pickings.mapped('delivery_round_id'):
-                    raise ValidationError(_(
-                        "All pickings at destination of a same shipping must "
-                        "be in the same delivery round"))
+            if (delivery_round and pickings.mapped('delivery_round_id') and
+                    delivery_round != pickings.mapped('delivery_round_id')):
+                raise ValidationError(_(
+                    "All pickings at destination of a same shipping must "
+                    "be in the same delivery round"))
         else:
             delivery_round = pickings.mapped('delivery_round_id')
             if len(delivery_round) > 1:
