@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
 
 **Bugfixes**
 

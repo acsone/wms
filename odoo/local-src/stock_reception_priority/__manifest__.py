@@ -29,6 +29,7 @@
         'stock',
         'stock_grn',
         'stock_picking_sequence',
+        'stock_picking_subcode',
         ],
     'data': [
         'views/stock.xml',
