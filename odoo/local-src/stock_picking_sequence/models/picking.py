@@ -24,7 +24,7 @@ from odoo import api, fields, models
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-    _order = "priority desc, sequence desc, date asc, id desc"
+    _order = "priority desc, sequence asc, date asc, id desc"
 
     sequence = fields.Integer(
         'Seq.', default=-1,
