@@ -31,20 +31,5 @@ class StockPicking(models.Model):
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 
     @api.multi
-    def write(self, vals):
-        if 'sequence' in vals:
-            # when we set a sequence on a delivery, we copy that value on the
-            # pickings
-            shippings = self.filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            rounds = shippings.mapped('delivery_round_id')
-            for ri in rounds:
-                pickings = ri.picking_ids.filtered(
-                    lambda r: r.partner_id.id in shippings.mapped(
-                        'partner_id.id'))
-                pickings.write({'sequence': vals['sequence']})
-        return super(StockPicking, self).write(vals)
-
-    @api.multi
     def button_priority_recompute(self):
         pass

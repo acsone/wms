@@ -59,9 +59,6 @@ class StockPicking(models.Model):
             # round
             self.do_unreserve()
         else:
-            _logger.debug(
-                "Delivery round %s set on pickings %s. Propagate "
-                "to group" % (delivery_round.id, self.ids))
             if not self.env.context.get('round_assigned'):
                 _logger.warn(
                     "Delivery round assigned to a picking without "
@@ -88,36 +85,60 @@ class StockPicking(models.Model):
             #     raise Warning(_(
             #         'No available picking to assign this delivery round'))
             if pickings:
+                _logger.debug(
+                    "Delivery round %s set on pickings %s. Propagate "
+                    "to group %s" % (
+                        delivery_round.id, self.ids, pickings.ids))
                 pickings.with_context(noround_write=True).write(
                     {'delivery_round_id': delivery_round.id})
+
             _logger.debug(
                 "Compute shippings delivery sequence on delivery round %s." %
                 delivery_round.id)
-            # FIXME TODO: set shipping sequence
-            # # partner_ids = self.itinerary_id.partner_position_ids.mapped(
-            # #   'partner_id.id')
-            # positions = {}
-            # for pos in self.itinerary_id.partner_position_ids:
-            #     positions[pos.partner_id.id] = pos.sequence
+            # set sequence on deliveries according to sequence defined in the
+            # itinerary
+            positions = False
+            for shipping in shippings:
+                if shipping.sequence <= 0:
+                    other_shippings = delivery_round.shipping_ids.filtered(
+                        lambda p: p.state != 'cancel' and
+                        p.id != shipping.id and
+                        p.sequence > 0 and
+                        p.partner_id == shipping.partner_id)
+                    sequences = other_shippings.mapped('sequence')
+                    if sequences:
+                        shipping.sequence = sequences[0]
+                    else:
+                        if positions is False:
+                            positions = {}
+                            for itinerary in delivery_round.itinerary_ids:
+                                for pos in itinerary.partner_position_ids:
+                                    positions[pos.partner_id.id] = (
+                                        itinerary.sequence*1000 +
+                                        pos.sequence)
+                        shipping.sequence = positions[shipping.partner_id.id]
 
-            # # set sequence on deliveries according to sequence defined in the
-            # # itinerary
-            # shippings = instance.shipping_ids
-            # # last_seq = max([1] + shippings.mapped('sequence'))
-            # for shipping in shippings:
-            #     if not shipping.sequence:
-            #         # shipping.sequence = last_seq + positions[
-            #         #   shipping.partner_id.id]
-            #         shipping.sequence = (
-            #             self.itinerary_id.sequence*1000 +
-            #             positions[shipping.partner_id.id])
-
-            #     del vals['delivery_round_id']
-            # if not vals:
-            #     return True
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done." %
                 (delivery_round.id, self.ids))
+
+    @api.multi
+    @api.constrains('sequence')
+    def _update_sequence(self):
+        if self[0].sequence >= 0:
+            # when we set a sequence on a delivery, we copy that value on the
+            # pickings
+            shippings = self.filtered(
+                lambda r: r.picking_type_code == 'outgoing')
+            rounds = shippings.mapped('delivery_round_id')
+            for ri in rounds:
+                pickings = ri.picking_ids.filtered(
+                    lambda r: r.sequence < 0 and
+                    r.partner_id.id in shippings.mapped('partner_id.id'))
+                _logger.debug(
+                    "Sequence set on pickings %s. Propagate "
+                    "to group %s" % (self.ids, pickings.ids))
+                pickings.write({'sequence': self[0].sequence})
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
