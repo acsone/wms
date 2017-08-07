@@ -179,7 +179,9 @@ migration:
           - specific_sale
           - delivery_rounds
           - stock_groupbypartner
+          - stock_picking_assignment
           - stock_picking_sequence
+          - stock_picking_subcode
           - stock_reception_priority
         post:
           - anthem songs.install.logistics::main
