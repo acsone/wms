@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-735 Add delivery carrier on customers
+
 **Features and Improvements**
 
 **Bugfixes**
