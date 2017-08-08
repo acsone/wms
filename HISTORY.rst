@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-735 Add delivery carrier on customers
+* ALCN-674 Fix VAT import for customer and suppliers
 
 **Features and Improvements**
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders

@@ -11,7 +11,7 @@ def vat(value):
         return False
 
     country, number = value[:2], value[2:].replace(' ', '')
-    if country not in vatnumber.countries():
+    if country.upper() not in vatnumber.countries():
         return False
 
     return getattr(vatnumber, 'check_vat_' + country)(value)
