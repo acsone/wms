@@ -171,6 +171,10 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.CLIENT_DISCOUNT_PRICELIST
         ),
         FieldMapper(
+            'property_delivery_carrier_id/id', 'cliclv',
+            mapping=mappings.CLIENT_DELIVERY_METHODS
+        ),
+        FieldMapper(
             'user_id/id', 'clirep',
             mapping=mappings.USERS
         ),
