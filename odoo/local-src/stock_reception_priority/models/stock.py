@@ -2,7 +2,8 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 
 
 class StockPackOperation(models.Model):
@@ -96,15 +97,19 @@ class StockPicking(models.Model):
                         lambda r: r.qty_available <= 0))
 
     def _calc_priority(self):
-        return self.qty_backorder * 1000 + self.qty_outofstock
+        return -(self.qty_backorder * 1000 + self.qty_outofstock)
 
     @api.multi
     def write(self, vals):
-        if 'grn_id' in vals and 'priority' not in vals:
+        if 'grn_id' in vals and 'sequence' not in vals:
             if not vals['grn_id']:
                 vals['sequence'] = 0
             else:
                 vals['sequence'] = self._calc_priority()
+        elif 'sequence' in vals:
+            # do not allow drag/drop of reception orders
+            if self.picking_type_id.subcode == 'RECEIVE':
+                raise UserError(_('You cannot reorder reception orders'))
         return super(StockPicking, self).write(vals)
 
     @api.multi
