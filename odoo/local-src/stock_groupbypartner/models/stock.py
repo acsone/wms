@@ -25,7 +25,9 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
-        moves_to_group = self.filtered("picking_type_id.groupbypartner")
+        moves_to_group = self.filtered(
+            lambda x: x.picking_type_id.groupbypartner and
+            x.picking_type_id.groupbypartner_maxweight)
 
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:
@@ -33,7 +35,7 @@ class StockMove(models.Model):
 
         # FIXME TODO: does not work for MTO products.
         pick_obj = self.env["stock.picking"]
-        pickings = {}
+        pickings_cache = {}
         pickings_to_recompute = pick_obj.browse()
         for move in moves_to_group:
             domain = [
@@ -45,38 +47,30 @@ class StockMove(models.Model):
                 ('state', 'in', ['draft', 'confirmed', 'waiting',
                                  'partially_available', 'assigned'])
             ]
-            if str(domain) in pickings:
-                picking = pickings[str(domain)]
+            if str(domain) in pickings_cache:
+                pickings = pickings_cache[str(domain)]
             else:
-                picking = pick_obj.search(domain, limit=1)
-                picking = picking and picking[0]
-                pickings[str(domain)] = picking
+                pickings = pick_obj.search(domain, order="weight")
+                pickings_cache[str(domain)] = pickings
 
-            create = False
-            if picking:
-                # check weight
-                total_weight = 0.0
-                if move.picking_type_id.groupbypartner_maxweight:
-                    total_weight = move.product_id.weight * move.product_qty
-                    for pmove in picking.move_lines.filtered(
-                            lambda m: m.state != 'cancel'):
-                        total_weight += (
-                            pmove.product_id.weight * pmove.product_qty)
-                if (total_weight <=
-                        move.picking_type_id.groupbypartner_maxweight):
+            max_weight = (move.picking_type_id.groupbypartner_maxweight -
+                          move.product_id.weight * move.product_qty)
+            for picking in pickings:
+                if picking.weight <= max_weight:
                     # assign move to picking
                     move.picking_id = picking.id
                     if picking.pack_operation_ids:
                         # recompute pack op
                         pickings_to_recompute |= picking
-                else:
-                    create = True
+                    break
             else:
-                create = True
-            if create:
+                # create a new picking
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
-                pickings[str(domain)] = picking
+                if str(domain) not in pickings_cache:
+                    pickings_cache[str(domain)] = picking
+                else:
+                    pickings_cache[str(domain)] |= picking
                 move.picking_id = picking.id
                 # see standard assign_picking for why recompute is called
                 move.recompute()

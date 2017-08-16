@@ -27,6 +27,7 @@
     'category': 'Stock Management',
     'depends': [
         'sale_stock',
+        'delivery',
         ],
     'data': [
         'views/stock.xml',
