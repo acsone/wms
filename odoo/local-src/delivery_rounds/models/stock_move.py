@@ -24,15 +24,16 @@ class StockMove(models.Model):
             lambda m: m.picking_id.picking_type_subcode == 'PICK')
         has_assigned = False
         for picking in pick_moves.mapped('picking_id'):
-            _logger.debug(
-                "Searching a delivery round for picking %s to assign" %
-                picking.id)
-            if not picking.delivery_round_id:
+            delivery_round = picking.delivery_round_id
+            if not delivery_round:
+                _logger.debug(
+                    "Searching a delivery round for picking %s to assign" %
+                    picking.id)
                 delivery_round = self.env['round.instance'].find(
                     picking.partner_id)
-                if delivery_round:
-                    delivery_round._assign_pickings(picking)
-                    has_assigned = True
+            if delivery_round:
+                delivery_round._assign_pickings(picking)
+                has_assigned = True
         other_moves = self - pick_moves
         if other_moves:
             super(StockMove, other_moves).action_assign(

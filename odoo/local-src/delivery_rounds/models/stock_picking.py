@@ -124,7 +124,7 @@ class StockPicking(models.Model):
 
     @api.multi
     @api.constrains('sequence')
-    def _update_sequence(self):
+    def _propagate_sequence(self):
         if self[0].sequence >= 0:
             # when we set a sequence on a delivery, we copy that value on the
             # pickings
