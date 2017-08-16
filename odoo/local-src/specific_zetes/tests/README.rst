@@ -79,7 +79,7 @@ Interruption test
 Introduction
 ============
 
-Test the case when the picker stop a picking.
+Test the case when the picker stops a picking.
 A picker cannot stop a picking until he finish an item picks.
 This test will not execute a complete scenario.
 
