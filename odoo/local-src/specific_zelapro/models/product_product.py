@@ -41,7 +41,7 @@ class ProductProduct(models.Model):
 
               UNION ALL
 
-              SELECT 
+              SELECT
                 product_category.id,
                 tree.ancestors || product_category.parent_id
               FROM product_category, tree

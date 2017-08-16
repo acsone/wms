@@ -76,14 +76,14 @@ class ZelaproExport(models.Model):
         query = """
         SELECT table_name
         FROM INFORMATION_SCHEMA.views
-        WHERE table_schema = ANY (current_schemas(FALSE)) 
+        WHERE table_schema = ANY (current_schemas(FALSE))
         AND table_name = %s;
         """
 
         check_column_query = """
         SELECT 1
-        FROM information_schema.columns 
-        WHERE table_name = %s 
+        FROM information_schema.columns
+        WHERE table_name = %s
         AND column_name = 'create_date';
         """
 
@@ -278,7 +278,7 @@ class ZelaproExport(models.Model):
         product_tmpl_ids = [x[0] for x in self.env.cr.fetchall()]
         product_tmpls = self.env['product.template'].browse(product_tmpl_ids)
         product_tmpl_values = product_tmpls.read(['qty_available',
-                                                   'virtual_available',
+                                                  'virtual_available',
                                                   'immediately_usable_qty'])
         values_by_product = {}
         for value in product_tmpl_values:
@@ -295,10 +295,10 @@ class ZelaproExport(models.Model):
         product_on_hand_index = header.index(PRODUCT_ON_HAND_KEY)
         product_bo_qty_index = header.index(PRODUCT_BO_QTY_KEY)
         product_reserved_index = header.index(PRODUCT_RESERVED_KEY)
-        accessory_supplier_index = header.index(ACCESSORY_SUPPLIER_KEY)
-        accessory_line_no_index = header.index(ACCESSORY_LINE_NO_KEY)
-        main_product_supplier_index = header.index(MAIN_PRODUCT_SUPPLIER_KEY)
-        main_product_line_no_index = header.index(MAIN_PRODUCT_LINE_NO_KEY)
+        # accessory_supplier_index = header.index(ACCESSORY_SUPPLIER_KEY)
+        # accessory_line_no_index = header.index(ACCESSORY_LINE_NO_KEY)
+        # main_product_supplier_index = header.index(MAIN_PRODUCT_SUPPLIER_KEY)
+        # main_product_line_no_index = header.index(MAIN_PRODUCT_LINE_NO_KEY)
 
         rows = []
         for line in result:
