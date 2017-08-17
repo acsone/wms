@@ -5,6 +5,9 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class StockPackOperation(models.Model):
     _inherit = "stock.pack.operation"
@@ -100,17 +103,23 @@ class StockPicking(models.Model):
         return -(self.qty_backorder * 1000 + self.qty_outofstock)
 
     @api.multi
-    def write(self, vals):
-        if 'grn_id' in vals and 'sequence' not in vals:
-            if not vals['grn_id']:
-                vals['sequence'] = 0
-            else:
-                vals['sequence'] = self._calc_priority()
-        elif 'sequence' in vals:
+    @api.constrains('grn_id')
+    def _update_sequence_on_grn(self):
+        for rec in self:
+            if not rec.grn_id:
+                rec.with_context(allow_sequence=True).sequence = 0
+            elif not rec.sequence:
+                rec.with_context(allow_sequence=True).sequence = \
+                    self._calc_priority()
+
+    @api.multi
+    @api.constrains('sequence')
+    def _check_sequence_reception(self):
+        _logger.debug("Check sequence reception constrain for %s" % self.ids)
+        if not self.env.context.get('allow_sequence'):
             # do not allow drag/drop of reception orders
-            if self.picking_type_id.subcode == 'RECEIVE':
+            if 'RECEIVE' in self.mapped('picking_type_id.subcode'):
                 raise UserError(_('You cannot reorder reception orders'))
-        return super(StockPicking, self).write(vals)
 
     @api.multi
     def button_priority_recompute(self):
