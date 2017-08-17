@@ -2,7 +2,6 @@
 import logging
 
 from odoo import _
-from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
@@ -46,7 +45,7 @@ class Assignment(DomainInterface):
         the picker continue a picking (Cri02 will contain the picking ID)
         - The location can be defined with Cri01
         - If requestType equals 0, it means that we are looking for a picking
-        without an operator. If the requestType equals, it means that we want
+        with an operator. If the requestType equals, it means that we want
         a picking without an operator
         :param params:
         :return:
@@ -77,9 +76,8 @@ WHERE picking.delivery_round_state = 'open'
             zone_code = params.Cri01
             if zone_code:
                 zone = \
-                    request.env['stock.picking.type'].sudo(self._user).search([
-                        ('zone_code', '=', zone_code)
-                    ])
+                    self.request.env['stock.picking.type'].sudo(self._user)\
+                        .search([('zone_code', '=', zone_code)])
                 picking_query += "AND picking.picking_type_id = %s "
                 query_values.append(zone.id)
 
@@ -92,27 +90,27 @@ WHERE picking.delivery_round_state = 'open'
                 query_values.append(self._user.id)
 
             picking_query += "ORDER BY round.date, " \
-                             "round.time, " \
+                             "round.time_picking_planned, " \
                              "picking.sequence " \
                              "LIMIT 1;"
-            request.env.cr.execute(picking_query, tuple(query_values))
-            query_result = request.env.cr.fetchone()
+            self.request.env.cr.execute(picking_query, tuple(query_values))
+            query_result = self.request.env.cr.fetchone()
 
             if query_result and query_result[0]:
                 picking_id = query_result[0]
-                picking = request.env['stock.picking']\
+                picking = self.request.env['stock.picking']\
                     .sudo(self._user).browse(picking_id)
             else:
                 picking = []
         # If the picker want to continue a picking (Cri02 is not empty)
         else:
             picking_id = int(params.Cri02)
-            picking = request.env['stock.picking']\
+            picking = self.request.env['stock.picking']\
                 .sudo(self._user).browse(picking_id)
 
         if not len(picking):
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('Cannot found a picking')
             })
             return result.format()
@@ -174,8 +172,8 @@ WHERE picking.delivery_round_state = 'open'
         if not picking_id:
             return
 
-        picking = request.env['stock.picking'].browse(int(picking_id))
-        if not len(picking_id):
+        picking = self.request.env['stock.picking'].browse(int(picking_id))
+        if not len(picking):
             return
 
         try:
@@ -200,7 +198,7 @@ WHERE picking.delivery_round_state = 'open'
                     # 2. A wizard if we need to create a back order
                     if isinstance(result, dict):
                         model = result.get('res_model')
-                        wizard = request.env[model].sudo(self._user)\
+                        wizard = self.request.env[model].sudo(self._user)\
                             .browse(int(result.get('res_id')))
 
                         # Fortunately these wizards have the same

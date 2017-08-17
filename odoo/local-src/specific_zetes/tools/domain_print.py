@@ -2,7 +2,6 @@
 import logging
 
 from odoo import _
-from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
@@ -47,14 +46,14 @@ class Print(DomainInterface):
         if not picking_id:
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found with the ID {}'
                              .format(picking_id))
             })
             return result.format()
         picking_id = int(picking_id)
 
-        picking = request.env['stock.picking']\
+        picking = self.request.env['stock.picking']\
             .sudo(self._user).browse(picking_id)
 
         # Assign a checksum on the picking (print on the package label)
@@ -72,11 +71,11 @@ class Print(DomainInterface):
         # Print the passport (see above)
         if print_type == constants.PRINT_PASSPORT:
             # The passport is always printed on the printer 1
-            printer = request.env['printing.printer'].sudo() \
+            printer = self.request.env['printing.printer'].sudo() \
                 .search([('code', '=', '1'), ('type', '=', 'pdf')])
             if not printer:
                 result.update({
-                    'respCode': constants.RESPONSE_CODE_KO,
+                    'respCode': constants.RESPONSE_CODE_ERROR,
                     'respMsg': _('Cannot found a printer'),
                     'labelCD': '00',
                 })
@@ -88,23 +87,23 @@ class Print(DomainInterface):
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
-                    'respCode': constants.RESPONSE_CODE_KO,
+                    'respCode': constants.RESPONSE_CODE_ERROR,
                     'respMsg': _('Error during printing'),
                     'labelCD': '00',  # Default code
                 })
                 return result.format()
 
         elif print_type == constants.PRINT_LABELS:
-            printer_toshiba = request.env['printing.printer']\
+            printer_toshiba = self.request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
                                 ('type', '=', 'toshiba')])
-            printer_zebra = request.env['printing.printer']\
+            printer_zebra = self.request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
                                 ('type', '=', 'zebra')])
 
             if not printer_toshiba or not printer_zebra:
                 result.update({
-                    'respCode': constants.RESPONSE_CODE_KO,
+                    'respCode': constants.RESPONSE_CODE_ERROR,
                     'respMsg': _('Cannot found a printer'),
                     'labelCD': '00',  # Default code
                 })
@@ -119,7 +118,7 @@ class Print(DomainInterface):
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
-                    'respCode': constants.RESPONSE_CODE_KO,
+                    'respCode': constants.RESPONSE_CODE_ERROR,
                     'respMsg': _('Error during printing'),
                     'labelCD': '00',  # Default code
                 })

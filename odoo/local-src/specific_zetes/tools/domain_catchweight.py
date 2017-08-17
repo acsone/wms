@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from odoo.http import request
-
 from domain_interface import DomainInterface, Parameters
 from .. import constants
 
@@ -76,7 +74,7 @@ class Catchweight(DomainInterface):
         if not move_id:
             return
 
-        move = request.env['stock.pack.operation'].sudo(self._user)\
+        move = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(int(move_id))
         if not len(move):
             return
@@ -93,9 +91,10 @@ class Catchweight(DomainInterface):
                 move.qty_done += qty_done_by_lot
             else:
                 # Otherwise we need to search for the lot in Odoo
-                lot = request.env['stock.production.lot'].sudo(self._user)\
-                    .search([('product_id', '=', move.product_id.id),
-                             ('checksum', '=', lot_number)])
+                lot = self.request.env['stock.production.lot']\
+                    .sudo(self._user).search(
+                    [('product_id', '=', move.product_id.id),
+                     ('checksum', '=', lot_number)])
                 if lot:
                     # When we have the lot, we will check if there no existing
                     # quantity for this lot.

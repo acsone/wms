@@ -13,8 +13,13 @@
     """,
     'depends': [
         'stock',
+        'stock_refill',
         'specific_print',
         'specific_data',
+        'stock_location',
+        'stock_picking_assignment',
+        'specific_stock',
+        'stock_product_bin',
     ],
     'data': [
         # Views

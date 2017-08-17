@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import _
-from odoo.http import request
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
@@ -44,16 +43,16 @@ class Location(DomainInterface):
         move_id = params.lineId
         if not move_id:
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
 
-        move = request.env['stock.pack.operation'].sudo(self._user)\
+        move = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(int(move_id))
         if not len(move):
             result.update({
-                'respCode': constants.RESPONSE_CODE_KO,
+                'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
@@ -79,7 +78,7 @@ class Location(DomainInterface):
             'lCCD': location.get_checksum(),
         })
 
-        lots = request.env['stock.production.lot'].sudo(self._user) \
+        lots = self.request.env['stock.production.lot'].sudo(self._user) \
             .search([('product_id', '=', product.id),
                      ('is_archived', '=', False)
                      ],
@@ -93,10 +92,11 @@ class Location(DomainInterface):
             setattr(result, 'Usf0{}'.format(index), lot.checksum)
 
         # Search a specific lot
-        specific_lot = request.env['stock.production.lot'].sudo(self._user)\
-            .search([('checksum', '=', params.Cri07),
-                     ('product_id', '=', product.id),
-                     ('is_archived', '=', False)], limit=1)
+        specific_lot = self.request.env['stock.production.lot']\
+            .sudo(self._user).search([('checksum', '=', params.Cri07),
+                                      ('product_id', '=', product.id),
+                                      ('is_archived', '=', False)],
+                                     limit=1)
         if specific_lot:
             result.Usf06 = specific_lot.checksum
 
