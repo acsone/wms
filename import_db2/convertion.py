@@ -10,8 +10,8 @@ import mappings
 
 from mapper import const, ref, concat, call
 
-# Sample data for 302 SO
-SO_MIN = 2691474
+# Sample data for 100 SO
+SO_MIN = 2691678
 SO_MAX = 2691777
 
 
@@ -202,11 +202,18 @@ class CustomerMapper(EntityMapper):
     def get_sql_where(self):
         if self.importer.full:
             return None
-        # Filter sample of customer by customers on last sale orders
+        # Filter sample of customer by customers on subset of sale orders
+        # plus keep customers for delivery round
         return (
             "clinum"
             "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
-            "     WHERE eccsui >= %s AND eccsui <= %s)" % (SO_MIN, SO_MAX)
+            "     WHERE eccsui >= %s AND eccsui <= %s)"
+            " OR clinum in (1076, 1424, 148, 1658, 2112, 2139, 2141, 2151,"
+            "               2157, 2169, 2171, 25, 280, 3201, 3375, 351, 3753,"
+            "               3850, 4028, 4062, 4463, 4778, 5095, 5173, 5237,"
+            "               5340, 5465, 5488, 5543, 5780, 7127, 7262, 7325,"
+            "               7478, 7484, 8099, 8114, 8264, 8522, 8859,"
+            "               91)" % (SO_MIN, SO_MAX)
             )
 
     @staticmethod

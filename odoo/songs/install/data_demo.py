@@ -167,10 +167,7 @@ def import_sale_orders(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     SaleOrder = ctx.env['sale.order'].with_context(load_ctx)
-    content = resource_stream(req, 'data/demo/sale_order_open.csv')
-    load_csv_stream(ctx, SaleOrder, content, delimiter=',')
-
-    content = resource_stream(req, 'data/demo/sale_order_closed.csv')
+    content = resource_stream(req, 'data/demo/sale_order.csv')
     load_csv_stream(ctx, SaleOrder, content, delimiter=',')
 
     line_load_ctx = ctx.env.context.copy()
