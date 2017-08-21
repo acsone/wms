@@ -90,4 +90,6 @@ class StockMove(models.Model):
         # recompute pack op
         self.mapped('picking_id').filtered(
             lambda picking: picking.state != 'cancel').do_prepare_partial()
+        # Recompute the weight for each picking
+        self.mapped('picking_id')._cal_weight()
         return res
