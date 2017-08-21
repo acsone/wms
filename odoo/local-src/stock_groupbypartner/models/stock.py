@@ -26,9 +26,7 @@ class StockMove(models.Model):
         picking to Assign them to.
         """
         moves_to_group = self.filtered(
-            lambda x: x.picking_type_id.groupbypartner and
-            x.picking_type_id.groupbypartner_maxweight)
-
+            lambda x: x.picking_type_id.groupbypartner)
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:
             super(StockMove, moves_to_not_group).assign_picking()
@@ -56,7 +54,8 @@ class StockMove(models.Model):
             max_weight = (move.picking_type_id.groupbypartner_maxweight -
                           move.product_id.weight * move.product_qty)
             for picking in pickings:
-                if picking.weight <= max_weight:
+                if (not move.picking_type_id.groupbypartner_maxweight or
+                        picking.weight <= max_weight):
                     # assign move to picking
                     move.picking_id = picking.id
                     if picking.pack_operation_ids:
