@@ -52,7 +52,7 @@ class ZelaproExport(models.Model):
     last_export_state = fields.Selection(
         [('success', 'Success'),
          ('error', 'Error')],
-        'State last export',
+        'Last export state',
         related='last_export.state',
         readonly=True
     )
@@ -99,8 +99,8 @@ class ZelaproExport(models.Model):
             self.env.cr.execute(check_column_query, (export.sql_view, ))
             result = self.env.cr.fetchone()
             if not result:
-                raise UserError(_('The SQL view %s shoud contains the column '
-                                  'create_date' % export.sql_view))
+                raise UserError(_('The SQL view %s should contain the column '
+                                  'create_date') % export.sql_view)
 
     @api.model
     def execute_all_exports(self):
@@ -207,7 +207,7 @@ class ZelaproExport(models.Model):
                 logger.write({
                     'date_end': fields.Datetime.now(),
                     'nbr_lines': len(rows),
-                    'message': 'File save to %s' % file_path,
+                    'message': 'File saved to %s' % file_path,
                     'duration': duration,
                 })
             except Exception as e:

@@ -6,7 +6,7 @@ class ProductSupplierinfo(models.Model):
 
     @api.onchange('name')
     def onchange_name(self):
-        if not self.name or not self.name.delivery_lead_time:
+        if not self.name.delivery_lead_time:
             return
 
         delay = self.name.delivery_lead_time

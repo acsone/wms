@@ -21,17 +21,17 @@ class ZelaproConfigSettings(models.TransientModel):
         res = super(ZelaproConfigSettings, self).default_get(fields)
 
         config_param = self.env['ir.config_parameter']
-        if 'delimiter' in fields or not fields:
+        if not fields or 'delimiter' in fields:
             delimiter = config_param.get_param('zelapro.delimiter')
             res['delimiter'] = delimiter
-        if 'export_path' in fields or not fields:
+        if not fields or 'export_path' in fields:
             export_path = config_param.get_param('zelapro.export_path')
             res['export_path'] = export_path
-        if 'turnover_delay' in fields or not fields:
+        if not fields or 'turnover_delay' in fields:
             turnover_delay = \
                 int(config_param.get_param('zelapro.turnover_delay'))
             res['turnover_delay'] = turnover_delay
-        if 'date_go_live' in fields or not fields:
+        if not fields or 'date_go_live' in fields:
             date_go_live = config_param.get_param('zelapro.date_go_live')
             res['date_go_live'] = date_go_live
 

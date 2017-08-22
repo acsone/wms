@@ -37,8 +37,24 @@ class TestActivityBasedCostring(common.TransactionCase):
         invoice_obj = self.env['account.invoice']
 
         journal = invoice_obj._default_journal()
-        account = self.env.ref('__setup__.account_400000')
-        account_line = self.env.ref('__setup__.account_701000')
+        account_type_rec = \
+            self.env.ref('account.data_account_type_receivable')
+        account = self.env['account.account'].create({
+            'code': '400001',
+            'name': 'Clients (test)',
+            'user_type_id': account_type_rec.id,
+            'reconcile': True,
+        })
+
+        tag_operation = self.env.ref('account.account_tag_operating')
+        account_type_inc = self.env.ref('account.data_account_type_revenue')
+        account_line = self.env['account.account'].create({
+            'code': '701001',
+            'name': 'Ventes en Belgique (test)',
+            'user_type_id': account_type_inc.id,
+            'reconcile': True,
+            'tag_ids': [(6, 0, [tag_operation.id])]
+        })
 
         partner = self.env['res.partner'].create({
             'name': 'Partner'
@@ -144,8 +160,24 @@ class TestActivityBasedCostring(common.TransactionCase):
         invoice_obj = self.env['account.invoice']
 
         journal = invoice_obj._default_journal()
-        account = self.env.ref('__setup__.account_400000')
-        account_line = self.env.ref('__setup__.account_701000')
+        account_type_rec = \
+            self.env.ref('account.data_account_type_receivable')
+        account = self.env['account.account'].create({
+            'code': '400001',
+            'name': 'Clients (test)',
+            'user_type_id': account_type_rec.id,
+            'reconcile': True,
+        })
+
+        tag_operation = self.env.ref('account.account_tag_operating')
+        account_type_inc = self.env.ref('account.data_account_type_revenue')
+        account_line = self.env['account.account'].create({
+            'code': '701001',
+            'name': 'Ventes en Belgique (test)',
+            'user_type_id': account_type_inc.id,
+            'reconcile': True,
+            'tag_ids': [(6, 0, [tag_operation.id])]
+        })
 
         partner = self.env['res.partner'].create({
             'name': 'Partner'
