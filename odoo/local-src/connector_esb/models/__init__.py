@@ -21,3 +21,5 @@ from . import promotion_alcyon
 from . import product_price
 from . import res_lang
 from . import sale_order_line
+from . import res_users
+from . import partner_alcyon_category

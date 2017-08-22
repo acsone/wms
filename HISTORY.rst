@@ -19,6 +19,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix two mappings on client export esb
+
 **Build**
 
 **Documentation**

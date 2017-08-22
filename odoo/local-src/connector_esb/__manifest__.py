@@ -40,6 +40,8 @@
         'views/product_state_views.xml',
         'views/product_pricelist.xml',
         'views/product_category_views.xml',
+        'views/partner_alcyon_category.xml',
+        'views/res_users.xml',
         'views/res_country.xml',
         'views/res_lang_views.xml',
         'security/ir.model.access.csv',

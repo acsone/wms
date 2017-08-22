@@ -61,7 +61,7 @@ class CustomerExportMapper(Component):
     @mapping
     def compute_iddelegate(self, record):
         if record.user_id:
-            return {'IdDelegate': record.user_id.ref_esb}
+            return {'IdDelegate': record.user_id.esb_ref}
         else:
             return {'IdDelegate': ''}
 
