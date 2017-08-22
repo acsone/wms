@@ -14,6 +14,12 @@ Unreleased
 
 **Documentation**
 
+10.6.1 (2017-08-22)
++++++++++++++++++++
+
+**Bugfixes**
+
+* Fix table creation with VARCHAR for DB2 data
 
 10.6.0 (2017-08-04)
 +++++++++++++++++++
