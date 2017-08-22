@@ -1,16 +1,6 @@
 id,name,street,zip,city,phone,fax,customer,supplier,country_id/id,lang,mobile,type,ref,parent_id/id
-__import__.customer_address_delivery_3753,LUNSKENS-CRAHAY CLIN.VET.,"Chaussée Brunehaut, 387",4453,VILLERS SAINT SIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_3753,__import__.customer_3753
-__import__.customer_address_delivery_4152,DR HERBER PASCALE,"Chauveheid, 91",4987,STOUMONT,,,False,False,base.be,fr_BE,,delivery,delivery_4152,__import__.customer_4152
-__import__.customer_address_delivery_3850,DR BONGARTZ ALEXANDRE,"Rue Hoyoux, 114",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_3850,__import__.customer_3850
-__import__.customer_address_delivery_46,DEGOTTE JEAN-MARIE *,Rue Birven 6,4880,AUBEL (LA CLOUSE),,,False,False,base.be,fr_BE,,delivery,delivery_46,__import__.customer_46
-__import__.customer_address_delivery_941,POIRRIER BEATRICE,"THIER DU CORBEAU,8",6900,MARCHE,,,False,False,base.be,fr_BE,,delivery,delivery_941,__import__.customer_941
-__import__.customer_address_delivery_423,BADOT JEAN-LOUIS *,"Rue Warinaue, 94",6120,NALINNES,,,False,False,base.be,fr_BE,,delivery,delivery_423,__import__.customer_423
-__import__.customer_address_delivery_36,APC 012,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_36,__import__.customer_36
-__import__.customer_address_delivery_1463,BERTRAND VINCENT *,"Rue de L'institut, 2",4670,BLEGNY,,,False,False,base.be,fr_BE,,delivery,delivery_1463,__import__.customer_1463
-__import__.customer_address_delivery_3375,FOUBERT JEAN FRANÇOIS,Av. du Fief de Liège 7,1325,CHAUMONT GISTOUX,,,False,False,base.be,fr_BE,,delivery,delivery_3375,__import__.customer_3375
-__import__.customer_address_delivery_2339,EPC 090 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_2339,__import__.customer_2339
+__import__.customer_address_delivery_107,EPC 039,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_107,__import__.customer_107
 __import__.customer_address_delivery_1725,GAUQUIER ETIENNE *,"RUE DES FUSILLES,14",7020,NIMMY ST JEAN,,,False,False,base.be,fr_BE,,delivery,delivery_1725,__import__.customer_1725
+__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
 __import__.customer_address_delivery_3072,BOULANGERIE ALBERT,"Rue du Pommard, 210",4970,FRANCORCHAMPS,,,False,False,base.be,fr_BE,,delivery,delivery_3072,__import__.customer_3072
 __import__.customer_address_delivery_3814,BRACKMAN & CORNELLE,"Rue du Ry d'Argent, 17",5080,RHISNES,,,False,False,base.be,fr_BE,,delivery,delivery_3814,__import__.customer_3814
-__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
-__import__.customer_address_delivery_107,EPC 039,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_107,__import__.customer_107
