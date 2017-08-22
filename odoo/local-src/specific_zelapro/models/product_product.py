@@ -80,7 +80,7 @@ class ProductProduct(models.Model):
           count(*)
         FROM account_invoice_line AS line
           INNER JOIN product_product AS product ON line.product_id = product.id
-          LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id
+          INNER JOIN product_category AS bu ON product.business_unit_id = bu.id
         WHERE line.create_date > NOW() - INTERVAL '%s months'
         GROUP BY bu.id;
         """

@@ -229,10 +229,6 @@ class TestActivityBasedCostring(common.TransactionCase):
 
         product_obj.compute_turnover_by_product()
 
-        config_param = self.env['ir.config_parameter']
-        total_turnover = config_param.get_param('zelapro.total_turnover')
-
-        self.assertEquals(float(total_turnover), 300.0)
         self.assertEquals(float(business_unit_1.turnover), 200)
         self.assertEquals(float(business_unit_2.turnover), 100)
 
