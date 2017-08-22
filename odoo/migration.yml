@@ -160,7 +160,15 @@ migration:
     - version: 10.5.0
     - version: 10.6.0
     - version: 10.7.0
+      operations:
+        pre:
+          - odoo -u connector_esb --stop-after-init --workers=0
+          - anthem songs.updates.update_10_7_0.update_10_7_0::main
       addons:
         upgrade:
+          ### Odoo
+          # src
+          - mrp
           ### local-src
-          - connector_esb
+          - product_additional
+          - specific_sale

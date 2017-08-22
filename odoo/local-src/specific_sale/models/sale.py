@@ -36,59 +36,6 @@ class Sale(models.Model):
         elif not self.sale_channel_visible:
             self.sale_channel = False
 
-    @api.model
-    def get_values_for_additional_line(
-            self,
-            new_product,
-            new_quantity,
-            additional_product,
-            position,
-            line
-    ):
-        values = super(Sale, self).get_values_for_additional_line(
-            new_product,
-            new_quantity,
-            additional_product,
-            position,
-            line
-        )
-        line_model = self.env['sale.order.line']
-        qty_unavailable = line_model.get_product_qty_unavailable(
-            new_product,
-            values['product_uom_qty'],
-            line.state == 'sale',
-            line.id
-        )
-        values['product_qty_unavailable'] = qty_unavailable
-
-        return values
-
-    @api.model
-    def get_current_values_for_additional_line(self, current_line, line):
-        current_values = super(
-            Sale, self
-        ).get_current_values_for_additional_line(current_line, line)
-        qty_unavailable = current_line.product_qty_unavailable
-        current_values['product_qty_unavailable'] = qty_unavailable
-        return current_values
-
-    @api.model
-    def get_accepted_fields_for_order_line(self):
-        """
-            To define accepted fields
-            to copy original lines into final lines.
-        """
-        return super(Sale, self).get_accepted_fields_for_order_line() + [
-            'edited_supplier_promotion',
-            'edited_alcyon_discount',
-            'is_delivery',
-        ]
-
-    def _create_delivery_line(self, carrier, price_unit):
-        super(Sale, self.with_context(
-            create_original_line_too=True
-        ))._create_delivery_line(carrier, price_unit)
-
     @api.multi
     def order_lines_layouted(self):
         self.ensure_one()
@@ -412,17 +359,3 @@ class SaleOrderLine(models.Model):
                 line.next_expected_date_for_receipt = move.date_expected
             else:
                 line.next_expected_date_for_receipt = False
-
-
-# Override the inherit of sale_product_additional
-# to complete sale.order.line.original with new specific fields
-class SaleOrderLineOriginal(models.Model):
-    _name = 'sale.order.line.original'
-    _inherit = 'sale.order.line'
-
-
-# Override the inherit of sale_product_additional
-# to complete sale.order.line.additional with new specific fields
-class SaleOrderLineAdditional(models.Model):
-    _name = 'sale.order.line.additional'
-    _inherit = 'sale.order.line'

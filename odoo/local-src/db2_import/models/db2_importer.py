@@ -239,8 +239,7 @@ class DB2MapperSaleOrder(object):
                 'write_date': convert_date('dccm', line) or create_date,
             }
 
-            SOLine = rec.env['sale.order.line'].with_context(
-                create_original_line_too=True)
+            SOLine = rec.env['sale.order.line']
             xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))

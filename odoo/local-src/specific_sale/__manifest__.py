@@ -13,7 +13,6 @@
         'pricelist_discount',
         'sale',
         'sale_exception',
-        'sale_product_additional',
         'sales_team',
         'stock',
         'stock_available_immediately',
