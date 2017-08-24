@@ -29,7 +29,7 @@
                 <field name="delivery_round_id"/>
                 <field name="printed" invisible="1"/>
                 <button name="button_delivery_round" type="object"
-                    attrs="{'invisible': ['|', ('printed', '!=', False), ('picking_type_code', '!=', 'outgoing')]}"
+                    attrs="{'invisible': ['|', '|', ('printed', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ['draft', 'cancel', 'done'])]}"
                     icon="fa-pencil"
                     help="Include in a delivery round"/>
             </field>
