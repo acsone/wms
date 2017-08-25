@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.7.0 (2017-08-25)
++++++++++++++++++++
+
 **Data Migration**
 
 * Reduce demo data size
@@ -22,10 +34,6 @@ Unreleased
 
 * Fix two mappings on client export esb
 * Fix an error when when a product export file for ESB was generated for no products
-
-**Build**
-
-**Documentation**
 
 10.6.1 (2017-08-22)
 +++++++++++++++++++
