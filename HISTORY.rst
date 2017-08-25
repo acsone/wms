@@ -7,8 +7,10 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Recompute pack operation properly at SO confirmation/cancelation
 
 **Bugfixes**
+* At SO confirmation, do not recompute pack operation for each line
 
 **Build**
 
@@ -29,11 +31,8 @@ Unreleased
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
 * ALCN-187: Add missing depends and set the type of product
 * Mark customers exported to ESB as such ('esb_exported' field)
-* Recompute pack operation properly at SO confirmation/cancelation
 
 **Bugfixes**
-* At SO confirmation, do not recompute pack operation for each line
-
 * Fix two mappings on client export esb
 * Fix an error when when a product export file for ESB was generated for no products
 
