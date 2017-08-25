@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-143: Manage additional product by bill of material
+
 **Bugfixes**
 
 **Build**

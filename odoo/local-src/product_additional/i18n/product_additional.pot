@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_additional
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-22 14:55+0000\n"
+"PO-Revision-Date: 2017-08-22 14:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_additional
+#: code:addons/product_additional/models/mrp_bom.py:30
+#, python-format
+msgid "A bill of material with additional product must have 'kit' type and 2 components of which only one is an additional product."
+msgstr ""
+
+#. module: product_additional
+#: code:addons/product_additional/models/mrp_bom.py:41
+#, python-format
+msgid "A bill of material without additional product must only have non additional product components."
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_mrp_bom
+msgid "Bill of Material"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_bom_with_additional_product
+msgid "Bill of material with additional product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_line_is_additional_product
+msgid "Is additional product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_mrp_bom_line
+msgid "mrp.bom.line"
+msgstr ""
+
