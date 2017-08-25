@@ -13,35 +13,35 @@ class MrpBom(models.Model):
         string='Bill of material with additional product',
     )
 
-    @api.one
+    @api.multi
     @api.constrains('type', 'bom_with_additional_product', 'bom_line_ids')
     def _check_additional_product(self):
-        if self.bom_with_additional_product:
-            is_ok = (
-                self.type == 'phantom' and
-                len(self.bom_line_ids) == 2 and
-                self.bom_line_ids.mapped('is_additional_product') in [
-                    [False, True],
-                    [True, False]
-                ]
-            )
-            if not is_ok:
-                raise ValidationError(_(
-                    'A bill of material '
-                    'with additional product must have \'kit\' type and '
-                    '2 components of which only one is an additional product.'
-                ))
-        else:
-            is_ok = (
-                True not in self.bom_line_ids.mapped(
-                    'is_additional_product'
+        for bom in self:
+            if bom.bom_with_additional_product:
+                is_ok = (
+                    bom.type == 'phantom' and
+                    len(bom.bom_line_ids) == 2 and
+                    bom.bom_line_ids.mapped('is_additional_product') in [
+                        [False, True],
+                        [True, False]
+                    ]
                 )
-            )
-            if not is_ok:
-                raise ValidationError(_(
-                    'A bill of material without additional product '
-                    'must only have non additional product components.'
-                ))
+                if not is_ok:
+                    raise ValidationError(_(
+                        'A bill of material with additional product '
+                        'must have \'kit\' type and 2 components of '
+                        'which only one is an additional product.'
+                    ))
+            else:
+                is_ok = all(
+                    not line.is_additional_product
+                    for line in self.bom_line_ids
+                )
+                if not is_ok:
+                    raise ValidationError(_(
+                        'A bill of material without additional product '
+                        'must only have non additional product components.'
+                    ))
 
 
 class MrpBomLine(models.Model):

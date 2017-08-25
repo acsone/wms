@@ -8,6 +8,15 @@ Product Additional
 
 This module adds Alcyon specific fields and logic for product additional.
 
+A product additional is used on sale order to automatically additional product when you sell a product.
+
+Some case example:
+
+* add an additional product B when you sell a product A
+* add a free product C when you sell 10 other products C
+
+The implemented features is:
+
 * On bill of material, we can define a bom with product additional
 
 Credits

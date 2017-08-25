@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-143: Manage additional product by bill of material
+
 **Bugfixes**
 
 **Build**
@@ -27,7 +29,6 @@ Unreleased
 **Features and Improvements**
 
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
-* ALCN-143: Manage additional product by bill of material
 * ALCN-187: Add missing depends and set the type of product
 * Mark customers exported to ESB as such ('esb_exported' field)
 
