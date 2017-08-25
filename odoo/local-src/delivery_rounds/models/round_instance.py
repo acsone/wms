@@ -130,8 +130,7 @@ class RoundInstance(models.Model):
 
         self.itinerary_ids += itineraries
 
-        partner_ids = itineraries.mapped('partner_position_ids').mapped(
-            'partner_id.id')
+        partner_ids = itineraries.mapped('partner_position_ids.partner_id.id')
 
         picking_confirmed = self.env['stock.picking'].search([
             ('delivery_round_id', '=', False),

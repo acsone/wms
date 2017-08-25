@@ -19,31 +19,24 @@ class StockPicking(models.Model):
         string="Delivery Round State")
 
     def _get_all_src_pickings(self):
-        res = set()
+        def _descend_moves(lvl):
+            next_lvl = lvl.mapped('move_orig_ids')
+            if next_lvl:
+                lvl |= _descend_moves(next_lvl)
+            return lvl
 
-        def _rec_add(moves):
-            res.update([move.id for move in moves])
-            for move in moves:
-                _rec_add(move.move_orig_ids)
-
-        for picking in self:
-            moves = picking.move_lines
-            _rec_add(moves)
-        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
+        moves = _descend_moves(self.mapped('move_lines'))
+        return moves.mapped('picking_id')
 
     def _get_all_dest_pickings(self):
-        res = set()
+        def _descend_moves(lvl):
+            next_lvl = lvl.mapped('move_dest_id')
+            if next_lvl:
+                lvl |= _descend_moves(next_lvl)
+            return lvl
 
-        def _rec_add(moves):
-            res.update([move.id for move in moves])
-            for move in moves:
-                if move.move_dest_id:
-                    _rec_add([move.move_dest_id])
-
-        for picking in self:
-            moves = picking.move_lines
-            _rec_add(moves)
-        return self.env['stock.move'].browse(list(res)).mapped('picking_id')
+        moves = _descend_moves(self.mapped('move_lines'))
+        return moves.mapped('picking_id')
 
     @api.multi
     @api.constrains('delivery_round_id')
@@ -73,7 +66,6 @@ class StockPicking(models.Model):
             pickings = shippings._get_all_src_pickings()
             # TODO: we should ensure a picking is not already done for another
             #       delivery round
-            pickings = pickings
             pickings = pickings.filtered(
                 lambda r: r.state in (
                     'waiting',
@@ -91,33 +83,33 @@ class StockPicking(models.Model):
                         delivery_round.id, self.ids, pickings.ids))
                 pickings.with_context(noround_write=True).write(
                     {'delivery_round_id': delivery_round.id})
-
+            # set sequence on deliveries according to sequence defined in the
+            # itinerary
             _logger.debug(
                 "Compute shippings delivery sequence on delivery round %s." %
                 delivery_round.id)
-            # set sequence on deliveries according to sequence defined in the
-            # itinerary
             positions = False
             for shipping in shippings:
-                if shipping.sequence < 0:
-                    other_shippings = delivery_round.shipping_ids.filtered(
-                        lambda p: p.state != 'cancel' and
-                        p.id != shipping.id and
-                        p.sequence >= 0 and
-                        p.partner_id == shipping.partner_id)
-                    sequences = other_shippings.mapped('sequence')
-                    if sequences:
-                        shipping.sequence = sequences[0]
-                    else:
-                        if positions is False:
-                            positions = {}
-                            for itinerary in delivery_round.itinerary_ids:
-                                for pos in itinerary.partner_position_ids:
-                                    positions[pos.partner_id.id] = (
-                                        itinerary.sequence*1000 +
-                                        pos.sequence)
-                        shipping.sequence = positions.get(shipping.partner_id.id, 0)
-
+                if shipping.sequence >= 0:
+                    continue
+                other_shippings = delivery_round.shipping_ids.filtered(
+                    lambda p: p.state != 'cancel' and
+                    p.id != shipping.id and
+                    p.sequence >= 0 and
+                    p.partner_id == shipping.partner_id)
+                sequences = other_shippings.mapped('sequence')
+                if sequences:
+                    shipping.sequence = sequences[0]
+                else:
+                    if positions is False:
+                        positions = {}
+                        for itinerary in delivery_round.itinerary_ids:
+                            for pos in itinerary.partner_position_ids:
+                                positions[pos.partner_id.id] = (
+                                    itinerary.sequence*1000 +
+                                    pos.sequence)
+                    shipping.sequence = positions.get(
+                        shipping.partner_id.id, 0)
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done." %
                 (delivery_round.id, self.ids))
