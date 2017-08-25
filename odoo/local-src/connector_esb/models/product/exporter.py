@@ -121,6 +121,8 @@ class ProductCronExporter(Component):
     _usage = 'record.exporter.cron'
     _apply_on = 'product.product'
 
+    _mark_as_exported = True
+
     @classmethod
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'product')
@@ -136,20 +138,21 @@ class ProductCronExporter(Component):
         ]
         return domain
 
-    def _export_items(self, items):
-        result = super(ProductCronExporter, self)._export_items(items)
-        new_exported = self.model.search(
-            [('id', 'in', items.ids), ('esb_exported', '=', False)],
+    def _write_esb_exported_mark_on_records(self, records):
+        _super = super(ProductCronExporter, self)
+        _super._write_esb_exported_mark_on_records(records)
+        # product_template.esb_exported is a computed field based on
+        # product_product.esb_exported, but as we bypass the ORM to
+        # write in product_product, the computation won't be triggered
+        # do the same here. (it bypasses the ORM to avoid to update the
+        # write_date which would trigger a new update)
+        templates = records.mapped('product_tmpl_id')
+        query = (
+            "UPDATE %s SET esb_exported = true "
+            "WHERE id IN %%s " % (templates._table,)
         )
-        # we flag the products as exported, bypassing the ORM
-        # otherwise the write_date would be modified and the records
-        # exported again...
-        self.env.cr.execute(
-            "UPDATE product_product SET esb_exported = true "
-            "WHERE id IN %s ", (tuple(new_exported.ids),)
-        )
+        self.env.cr.execute(query, (tuple(templates.ids),))
         self.model.invalidate_cache(
             fnames=['esb_exported'],
-            ids=new_exported.ids
+            ids=templates.ids
         )
-        return result

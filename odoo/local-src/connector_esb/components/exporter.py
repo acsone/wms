@@ -45,6 +45,10 @@ class ESBExporterMixin(AbstractComponent):
     _name = 'esb.exporter.mixin'
     _inherit = ['base.exporter', 'esb.base']
 
+    # Set to True if the record must be marked as 'exported'
+    # The model must have a 'esb_exported' field
+    _mark_as_exported = False
+
     @property
     def logger(self):
         return logging.getLogger(
@@ -63,8 +67,39 @@ class ESBExporterMixin(AbstractComponent):
             prepared.append(self.mapper.map_record(item).values())
         content = producer.produce(prepared)
         path = writer.write_file(content)
+
         self.logger.info('File created (%s) : %s', writer_type, path)
+
+        if self._mark_as_exported:
+            self._mark_items_as_exported(items)
         return path
+
+    def _mark_items_as_exported(self, items):
+        """ Mark records as exported
+
+        It updates the fields 'esb_exported' to True on the records
+        which have been exported.
+
+        """
+        new_exported = self.model.search(
+            [('id', 'in', items.ids), ('esb_exported', '=', False)],
+        )
+        if new_exported:
+            self._write_esb_exported_mark_on_records(new_exported)
+
+    def _write_esb_exported_mark_on_records(self, records):
+        # we flag the products as exported, bypassing the ORM
+        # otherwise the write_date would be modified and the records
+        # exported again...
+        query = (
+            "UPDATE %s SET esb_exported = true "
+            "WHERE id IN %%s " % (self.model._table,)
+        )
+        self.env.cr.execute(query, (tuple(records.ids),))
+        self.model.invalidate_cache(
+            fnames=['esb_exported'],
+            ids=records.ids
+        )
 
     def run(self):
         return NotImplementedError

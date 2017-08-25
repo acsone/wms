@@ -16,10 +16,12 @@ Unreleased
 
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
 * ALCN-187: Add missing depends and set the type of product
+* Mark customers exported to ESB as such ('esb_exported' field)
 
 **Bugfixes**
 
 * Fix two mappings on client export esb
+* Fix an error when when a product export file for ESB was generated for no products
 
 **Build**
 

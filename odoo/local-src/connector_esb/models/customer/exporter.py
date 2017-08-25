@@ -124,6 +124,8 @@ class CustomerCronExporter(Component):
     _usage = 'record.exporter.cron'
     _apply_on = 'res.partner'
 
+    _mark_as_exported = True
+
     @classmethod
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'customer')
