@@ -2,8 +2,11 @@
 # Copyright 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class StockPickingType(models.Model):
@@ -25,12 +28,16 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
+        moves_to_group = self.filtered(
+            lambda x: x.picking_type_id.groupbypartner)
+        moves_to_not_group = self - moves_to_group
+        if moves_to_not_group:
+            super(StockMove, moves_to_not_group).assign_picking()
+
         # FIXME TODO: does not work for MTO products.
         pick_obj = self.env["stock.picking"]
-        pickings = {}
-        for move in self:
-            if not move.picking_type_id.groupbypartner:
-                return super(StockMove, self).assign_picking()
+        pickings_cache = {}
+        for move in moves_to_group:
             domain = [
                 ('partner_id', '=', move.group_id.partner_id.id),
                 ('location_id', '=', move.location_id.id),
@@ -40,43 +47,62 @@ class StockMove(models.Model):
                 ('state', 'in', ['draft', 'confirmed', 'waiting',
                                  'partially_available', 'assigned'])
             ]
-            if str(domain) in pickings:
-                picking = pickings[str(domain)]
+            if str(domain) in pickings_cache:
+                pickings = pickings_cache[str(domain)]
             else:
-                picking = pick_obj.search(domain, limit=1)
-                picking = picking and picking[0]
-                pickings[str(domain)] = picking
+                pickings = pick_obj.search(domain, order="weight")
+                pickings_cache[str(domain)] = pickings
 
-            create = False
-            if picking:
-                # check weight
-                total_weight = 0.0
-                if move.picking_type_id.groupbypartner_maxweight:
-                    total_weight = move.product_id.weight * move.product_qty
-                    for pmove in picking.move_lines:
-                        total_weight += (
-                            pmove.product_id.weight * pmove.product_qty)
-                if (total_weight <=
-                        move.picking_type_id.groupbypartner_maxweight):
+            max_weight = (move.picking_type_id.groupbypartner_maxweight -
+                          move.product_id.weight * move.product_qty)
+            for picking in pickings:
+                if (not move.picking_type_id.groupbypartner_maxweight or
+                        picking.weight <= max_weight):
                     # assign move to picking
+                    _logger.debug("Assign move %s to existing picking %s" %
+                                  (move.id, picking.id))
                     move.picking_id = picking.id
-                    if picking.state in ('confirmed', 'assigned',
-                                         'partially_available'):
-                        # reserve available qty
-                        try:
-                            move.action_assign(no_prepare=True)
-                        except UserError:
-                            # in case of no quant available
-                            pass
-                        # recompute pack op
-                        picking.do_prepare_partial()
-                else:
-                    create = True
+                    # unreserve moves having an operation for that product
+                    # Note: (re)check availability (action_assign) does not
+                    # work on added move where an operation already exists for
+                    # that product. To not recompute all the quants of the
+                    # picking, we delete only the pack operation to recompute.
+                    # No need to perform the assignment now (new pack operation
+                    # creation), it is performed later when the procurement is
+                    # run.
+                    operations_to_recompute = picking.pack_operation_ids. \
+                        filtered(lambda op: op.product_id == move.product_id)
+                    if operations_to_recompute:
+                        _logger.debug("Cleaning operations %s" %
+                                      operations_to_recompute.ids)
+                        operations_to_recompute.mapped(
+                            'linked_move_operation_ids.move_id').do_unreserve()
+                    break
             else:
-                create = True
-            if create:
+                # create a new picking
+                _logger.debug("Assign move %s to new picking" % move.id)
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
-                pickings[str(domain)] = picking
+                if str(domain) not in pickings_cache:
+                    pickings_cache[str(domain)] = picking
+                else:
+                    pickings_cache[str(domain)] |= picking
                 move.picking_id = picking.id
+                # see standard assign_picking for why recompute is called
+                move.recompute()
         return True
+
+    @api.multi
+    def action_cancel(self):
+        """ Prevent to cancel a move from a printed picking and recompute pack
+        operations """
+        res = super(StockMove, self).action_cancel()
+        if self.filtered("picking_id.printed"):
+            raise UserError(_(
+                "You cannot cancel a move that is part of a started picking"))
+        # recompute pack op
+        self.mapped('picking_id').filtered(
+            lambda picking: picking.state != 'cancel').do_prepare_partial()
+        # Recompute the weight for each picking
+        self.mapped('picking_id')._cal_weight()
+        return res

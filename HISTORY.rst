@@ -7,10 +7,12 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Recompute pack operation properly at SO confirmation/cancelation
 
 * ALCN-143: Manage additional product by bill of material
 
 **Bugfixes**
+* At SO confirmation, do not recompute pack operation for each line
 
 **Build**
 
@@ -33,7 +35,6 @@ Unreleased
 * Mark customers exported to ESB as such ('esb_exported' field)
 
 **Bugfixes**
-
 * Fix two mappings on client export esb
 * Fix an error when when a product export file for ESB was generated for no products
 
