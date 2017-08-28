@@ -13,6 +13,7 @@ Unreleased
 
 **Bugfixes**
 * At SO confirmation, do not recompute pack operation for each line
+* ALCN-945: On duplicate of sale order, confirmation date must not copied
 
 **Build**
 

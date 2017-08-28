@@ -8,6 +8,10 @@ from odoo import models, api, fields
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    confirmation_date = fields.Datetime(
+        copy=False,
+    )
+
     @api.multi
     def action_confirm(self):
         # Copy from sale module
