@@ -167,7 +167,7 @@ migration:
     - version: 10.8.0
       operations:
         pre:
-          - anthem songs.updates.update_10_7_0.update_10_7_0::main
+          - anthem songs.updates.update_10_8_0.update::main
       addons:
         upgrade:
           ### Odoo
