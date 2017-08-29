@@ -109,8 +109,8 @@ class Itempick(DomainInterface):
         self.request.env.cr.execute(query, (picking_id, ))
         query_result = self.request.env.cr.fetchone()
 
-        type_food = self.request.env['stock.picking.type'].search([
-            ('food_type', '=', True)])
+        type_food = self.request.env['stock.picking.type'].sudo(self._user)\
+            .search([('food_type', '=', True)])
         if query_result and type_food and query_result[0] == type_food.id:
             print_on_portable_printer = '1'
         else:

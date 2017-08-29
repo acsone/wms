@@ -14,6 +14,7 @@ Unreleased
 **Bugfixes**
 * At SO confirmation, do not recompute pack operation for each line
 * ALCN-945: On duplicate of sale order, confirmation date must not copied
+* ALCN-187: Fix a bug with Zetes
 
 **Build**
 
