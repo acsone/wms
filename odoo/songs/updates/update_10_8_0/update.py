@@ -14,5 +14,5 @@ def uninstall_sale_product_additional(ctx):
 
 @anthem.log
 def main(ctx):
-    """ Main: update 10.7.0 """
+    """ Main: update 10.8.0 """
     uninstall_sale_product_additional(ctx)
