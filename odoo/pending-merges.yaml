@@ -26,17 +26,8 @@
     camptocamp: git@github.com:camptocamp/stock-logistics-workflow.git
   merges:
     - oca 10.0
-    # 10.0 mig stock_picking_invoice_link
-    - oca refs/pull/322/head
-  target: *default_target
-./external-src/connector:
-  remotes:
-    oca: git@github.com:OCA/connector.git
-    camptocamp: git@github.com:camptocamp/connector.git
-  merges:
-    - oca 10.0
-    # 10.0 re-worked component registry
-    - oca refs/pull/231/head
+    # [10.0] porting stock_picking_invoice_link
+    - oca refs/pull/347/head
   target: *default_target
 ./external-src/enterprise:
   remotes:
