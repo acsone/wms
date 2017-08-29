@@ -20,12 +20,14 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'type': 'consu',
         })
 
-        inventory = self.env['stock.inventory'].create({'name': 'Test',
-                                        'product_id': self.p1.id,
-                                        'filter': 'product'})
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'product_id': self.p1.id,
+            'filter': 'product'})
         inventory.prepare_inventory()
-        self.assertFalse(inventory.line_ids, "Inventory line should not created.")
-        inventory_line = self.env['stock.inventory.line'].create({
+        self.assertFalse(inventory.line_ids,
+                         "Inventory line should not created.")
+        self.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
             'product_id': self.p1.id,
             'product_uom_id': self.ref('product.product_uom_unit'),
