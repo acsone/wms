@@ -71,6 +71,8 @@ class TestExceptions(ZetesTest):
         })
 
         self.picking.action_assign()
+        # Round to the picking
+        self.round.button_update()
 
     def test_exceptions(self):
         """

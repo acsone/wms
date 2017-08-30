@@ -128,7 +128,7 @@ class RoundInstance(models.Model):
     def _include_itinerary(self, itineraries):
         self.ensure_one()
 
-        self.itinerary_ids += itineraries
+        self.itinerary_ids |= itineraries
 
         partner_ids = itineraries.mapped('partner_position_ids.partner_id.id')
 
