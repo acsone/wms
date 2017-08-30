@@ -15,6 +15,7 @@
     'depends': [
         'specific_purchase',
         'specific_stock',
+        'product_additional',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
