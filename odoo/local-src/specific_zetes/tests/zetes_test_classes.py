@@ -62,12 +62,23 @@ class ZetesTest(TransactionCase):
             'time_picking_planned': 12.50,
         })
 
+        round_itinerary = self.env['round.itinerary'].create({
+            'sequence': 100,
+            'name': 'Test itinerary',
+            'template_ids': [(6, 0, [round_template.id])],
+            'partner_position_ids': [(0, 0, {
+                'sequence': 1,
+                'partner_id': self.partner.id,
+            })]
+        })
+
         self.round = self.env['round.instance'].create({
             'name': 'TOUR/20170101/01',
             'template_id': round_template.id,
             'date': fields.Date.today(),
             'time_leave_planned': 12.50,
             'time_picking_planned': 12.50,
+            'itinerary_ids': [(6, 0, [round_itinerary.id])],
         })
         self.round.button_confirm()
 
@@ -146,7 +157,6 @@ class ZetesTest(TransactionCase):
         self.picking = self.env['stock.picking'].create({
             'partner_id': self.partner.id,
             'picking_type_id': self.picking_type_medoc.id,
-            'delivery_round_id': self.round.id,
             'location_id': self.env.ref('stock.stock_location_stock').id,
             'location_dest_id': self.env.ref('stock.stock_location_output').id,
             'min_date': fields.Datetime.to_string(tomorrow),
@@ -161,6 +171,8 @@ class ZetesTest(TransactionCase):
 
         if not hasattr(self, 'disable_picking_validation'):
             self.picking.action_assign()
+            # Round to the picking
+            self.round.button_update()
 
         self.context = {}
 

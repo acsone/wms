@@ -168,6 +168,8 @@ migration:
       operations:
         pre:
           - anthem songs.updates.update_10_8_0.update::main
+        post:
+          - anthem songs.install.logistics::main
       addons:
         upgrade:
           ### Odoo
@@ -177,3 +179,9 @@ migration:
           ### local-src
           - product_additional
           - specific_sale
+          - delivery_rounds
+          - stock_groupbypartner
+          - stock_picking_assignment
+          - stock_picking_sequence
+          - stock_picking_subcode
+          - stock_reception_priority

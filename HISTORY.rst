@@ -11,11 +11,16 @@ Unreleased
 
 * ALCN-143: Manage additional product by bill of material
 
+* Recompute pack operation properly at SO confirmation/cancelation
+
 **Bugfixes**
 * At SO confirmation, do not recompute pack operation for each line
 * ALCN-945: On duplicate of sale order, confirmation date must not copied
 * ALCN-187: Fix a bug with Zetes
 * Fix missing mailtrap configuration
+
+* At SO confirmation, do not recompute pack operation for each line
+* Delivery round: stock reservation and assignment to delivery round
 
 **Build**
 
@@ -40,6 +45,7 @@ Unreleased
 * Mark customers exported to ESB as such ('esb_exported' field)
 
 **Bugfixes**
+
 * Fix two mappings on client export esb
 * Fix an error when when a product export file for ESB was generated for no products
 

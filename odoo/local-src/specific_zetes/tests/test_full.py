@@ -143,6 +143,8 @@ class TestFull(ZetesTest):
         })
 
         self.picking.action_assign()
+        # Round to the picking
+        self.round.button_update()
 
         logger = self.env['zetes.logger']
         logger.search([]).unlink()

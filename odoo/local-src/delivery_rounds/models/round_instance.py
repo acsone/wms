@@ -8,6 +8,9 @@ from datetime import datetime
 from odoo import api, fields, models
 from odoo.exceptions import Warning as UserError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 def float2time(value):
     hour = math.floor(value)
@@ -119,45 +122,61 @@ class RoundInstance(models.Model):
 
     @api.multi
     def button_update(self):
-        for itinerary_id in self.itinerary_ids:
-            self._update_itinerary(itinerary_id)
+        for record in self:
+            record._include_itinerary(self.itinerary_ids)
 
-    def _update_itinerary(self, itinerary_id):
-        partner_ids = itinerary_id.partner_position_ids.mapped('partner_id.id')
-        # call Try to reserve from stock the qty for confirmed pickings
+    def _include_itinerary(self, itineraries):
+        self.ensure_one()
+
+        self.itinerary_ids |= itineraries
+
+        partner_ids = itineraries.mapped('partner_position_ids.partner_id.id')
+
         picking_confirmed = self.env['stock.picking'].search([
+            ('delivery_round_id', '=', False),
             ('partner_id', 'in', partner_ids),
             ('state', '=', 'confirmed')])
+        self._assign_pickings(picking_confirmed)
+
+    def _assign_pickings(self, pickings):
+        _logger.debug("Assign to delivery round %s the pickings %s" % (
+            self.id, pickings.ids))
         try:
-            if not self.env.context.get('skip_reservation'):
-                picking_confirmed.action_assign()
+            # call Try to reserve from stock the qty for confirmed pickings
+            pickings.filtered(
+                lambda p: p.state in ['draft', 'confirmed']).with_context(
+                    round_autoset=False).action_assign()
         except UserError:
             # if no moves
             pass
+        else:
+            # retrieve all pickings (partially) available not yet bound to a
+            # delivery round
+            pickings_assigned = self.env['stock.picking'].search([
+                # We need to be able to assign to another round instance
+                # ('delivery_round_id', '=', False),
+                ('id', 'in', pickings.ids),
+                ('state', 'in', ('partially_available', 'assigned'))])
+            if pickings_assigned:
+                _logger.debug("Add to delivery round %s the pickings %s" % (
+                    self.id, pickings.ids))
+                pickings_assigned.with_context(round_assigned=True).write({
+                    'delivery_round_id': self.id})
 
-        # retrieve all pickings (partially) available not yet bound to a
-        # delivery round
-        pickings = self.env['stock.picking'].search([
-            ('delivery_round_id', '=', False),
-            ('partner_id', 'in', partner_ids),
-            ('state', 'in', (
-                # 'confirmed',
-                'partially_available',
-                'assigned'))])
-        if pickings:
-            pickings.write({'delivery_round_id': self.id})
-
-    def find(self, partner_id):
+    @api.model
+    def find(self, partner):
         """ Find a delivery_round for this partner """
-        itinerary_ids = partner_id.round_itinerary_ids.mapped(
+        _logger.debug("Search a round instance for partner %s" % partner.id)
+        # TODO: improve: take first delivery round having a shipping for that
+        # partner
+        itinerary_ids = partner.round_itinerary_ids.mapped(
             'itinerary_id.id')
-        instance = self.search([
+        if not itinerary_ids:
+            return self.browse()
+        return self.search([
             ('state', '=', 'draft'),
             ('itinerary_ids', 'in', itinerary_ids),
             ], limit=1)
-        if instance:
-            return instance[0]
-        return None
 
     count_picking_available_total = fields.Integer(
         'Picking Available Total',
@@ -234,3 +253,12 @@ class RoundInstance(models.Model):
     def print_all_deliveryslip(self):
         return self.env['report'].get_action(self.shipping_ids,
                                              'stock.report_deliveryslip')
+
+    @api.multi
+    def unlink(self):
+        pickings = self.mapped('picking_ids')
+        res = super(RoundInstance, self).unlink()
+        # @api.constrains is not triggered on source model when referenced
+        # record is deleted. So let's call it.
+        pickings._update_delivery_round()
+        return res

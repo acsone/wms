@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Rounds Assign',
+    'name': 'Delivery Rounds Assign - OBSOLETE',
     'version': '1.0',
     'author': "BCIM",
     'maintainer': 'Camptocamp',

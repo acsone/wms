@@ -14,11 +14,25 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'name': 'Unittest partner',
         })
 
-        self.p1 = self.env['product.template'].create({
+        self.p1 = self.env['product.product'].create({
             'name': 'Unittest P1',
             'uom_id': self.ref('product.product_uom_unit'),
             'type': 'consu',
         })
+
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'product_id': self.p1.id,
+            'filter': 'product'})
+        inventory.prepare_inventory()
+        self.assertFalse(inventory.line_ids,
+                         "Inventory line should not created.")
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': self.p1.id,
+            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_qty': 10,
+            'location_id': self.env.ref('stock.stock_location_stock').id})
 
         self.deliver_carrier_fixed = self.env['delivery.carrier'].create({
             'name': 'Unittest shipping costs',
@@ -42,6 +56,14 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'date': '2017-01-01',
         })
 
+        # Without play songs,
+        # picking types used for PICK like 'Pick Aliments' doesn't exists.
+        # So, to do test here,
+        # we define the 'Delivery Order' picking type with 'PICK' subcode.
+        self.env.ref('stock.picking_type_out').write({
+            'subcode': 'PICK',
+        })
+
     def test_01_without_delivery_round(self):
         sale = self.env['sale.order'].create({
             'partner_id': self.partner.id,
@@ -49,17 +71,17 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'order_line': [
                 (0, 0, {
                     'name': self.p1.name,
-                    'product_id': self.p1.product_variant_ids.id,
+                    'product_id': self.p1.id,
                     'product_uom': self.ref('product.product_uom_unit'),
                     'product_uom_qty': 1,
                     'price_unit': 200,
                 }),
             ]
         })
-        self.assertFalse(sale.delivery_round_id)
+        self.assertFalse(sale.picking_ids)
         sale.action_confirm()
-        self.assertFalse(sale.delivery_round_id)
-        self.assertFalse(sale.picking_ids.delivery_round_id)
+        for picking in sale.picking_ids:
+            self.assertFalse(picking.delivery_round_id)
 
     def test_02_with_delivery_round(self):
         self.deliver_carrier_fixed.delivery_template_id = (
@@ -71,17 +93,17 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'order_line': [
                 (0, 0, {
                     'name': self.p1.name,
-                    'product_id': self.p1.product_variant_ids.id,
+                    'product_id': self.p1.id,
                     'product_uom': self.ref('product.product_uom_unit'),
                     'product_uom_qty': 1,
                     'price_unit': 200,
                 }),
             ]
         })
-        self.assertFalse(sale.delivery_round_id)
+        self.assertFalse(sale.picking_ids)
         sale.action_confirm()
-        self.assertEqual(sale.delivery_round_id, self.delivery_round_1)
-        self.assertEqual(
-            sale.picking_ids.delivery_round_id,
-            self.delivery_round_1
-        )
+        for picking in sale.picking_ids:
+            self.assertEqual(
+                picking.delivery_round_id.id,
+                self.delivery_round_1.id
+            )
