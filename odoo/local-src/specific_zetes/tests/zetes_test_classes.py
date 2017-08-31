@@ -52,7 +52,7 @@ class ZetesTest(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': PARTNER_NAME,
-            'is_back_order_accepted': True,
+            'is_sale_back_order_accepted': True,
         })
 
         round_template = self.env['round.template'].create({

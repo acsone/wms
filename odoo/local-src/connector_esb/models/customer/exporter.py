@@ -35,7 +35,9 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_back_order(self, record):
-        return {'BackordersEnable': int(not record.is_back_order_accepted)}
+        return {
+            'BackordersEnable': int(not record.is_sale_back_order_accepted)
+        }
 
     @mapping
     def compute_activitytype(self, record):
