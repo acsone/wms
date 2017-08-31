@@ -117,7 +117,6 @@ migration:
           - procurement_sale
           - product_price_category
           - refund_invoice
-          - sale_product_additional
           - specific_account
           - specific_base
           - specific_data
@@ -166,8 +165,6 @@ migration:
           - connector_esb
     - version: 10.8.0
       operations:
-        pre:
-          - anthem songs.updates.update_10_8_0.update::main
         post:
           - anthem songs.install.logistics::main
       addons:

@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-143: Remove useless sale_product_additional module
+
 **Bugfixes**
 
 **Build**
