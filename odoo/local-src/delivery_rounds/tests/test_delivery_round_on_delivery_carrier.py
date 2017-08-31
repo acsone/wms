@@ -56,8 +56,13 @@ class TestDeliveryRoundOnDeliveryCarrier(TransactionCase):
             'date': '2017-01-01',
         })
 
-        self.env['stock.picking.type'].search(
-            [('name', 'ilike', 'Pick%')]).write({'subcode': 'PICK'})
+        # Without play songs,
+        # picking types used for PICK like 'Pick Aliments' doesn't exists.
+        # So, to do test here,
+        # we define the 'Delivery Order' picking type with 'PICK' subcode.
+        self.env.ref('stock.picking_type_out').write({
+            'subcode': 'PICK',
+        })
 
     def test_01_without_delivery_round(self):
         sale = self.env['sale.order'].create({
