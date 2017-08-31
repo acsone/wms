@@ -7,26 +7,33 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Recompute pack operation properly at SO confirmation/cancelation
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.8.0 (2017-08-31)
++++++++++++++++++++
+
+**Features and Improvements**
 
 * ALCN-143: Manage additional product by bill of material
-
 * Recompute pack operation properly at SO confirmation/cancelation
 
 **Bugfixes**
-* At SO confirmation, do not recompute pack operation for each line
-* ALCN-945: On duplicate of sale order, confirmation date must not copied
-* ALCN-187: Fix a bug with Zetes
-* Fix missing mailtrap configuration
 
+* ALCN-187: Fix a bug with Zetes
+* ALCN-945: On duplicate of sale order, confirmation date must not copied
+* Fix missing mailtrap configuration
 * At SO confirmation, do not recompute pack operation for each line
 * Delivery round: stock reservation and assignment to delivery round
 
 **Build**
 
 * Update all repositories
-
-**Documentation**
 
 
 10.7.0 (2017-08-25)
