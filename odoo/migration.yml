@@ -174,7 +174,8 @@ migration:
         upgrade:
           ### Odoo
           # src
-          - base  # Because we updated all repositories
+          # Commented after deployment of version 10.8.0 (to optimize build)
+          # - base  # Because we updated all repositories
           - mrp
           ### local-src
           - product_additional
