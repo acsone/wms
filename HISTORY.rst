@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* Optimize complete build in migration.yml file
+
 **Documentation**
 
 
