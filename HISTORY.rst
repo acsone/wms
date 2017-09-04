@@ -15,6 +15,7 @@ Unreleased
 **Build**
 
 * Optimize complete build in migration.yml file
+* Use module product_price_category from OCA instead of local sources
 
 **Documentation**
 
