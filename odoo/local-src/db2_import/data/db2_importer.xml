@@ -38,5 +38,24 @@
     <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
   </record>
 
+  <!-- purchase order header table -->
+  <record model="db2.importer.table" id="db2_table_pentcdfo">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PENTCDFO</field>
+    <field name="table_prefix">ecf</field>
+    <field name="id_columns">ecfsui,ecffou,ecfsuc</field>
+    <field name="create_job" eval="True"/>
+    <field name="eta">2</field>
+  </record>
+
+  <!-- purchase order detail line table -->
+  <record model="db2.importer.table" id="db2_table_pdetcdfo">
+    <field name="importer_id" ref="db2_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">PDETCDFO</field>
+    <field name="table_prefix">dcf</field>
+    <field name="id_columns">dcfsui,dcffou,dcfsuc,dcfnli</field>
+  </record>
   </data>
 </odoo>

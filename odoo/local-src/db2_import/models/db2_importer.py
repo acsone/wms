@@ -28,6 +28,10 @@ def convert_customer(ref):
     return '__import__.customer_%s' % (ref)
 
 
+def convert_supplier(ref):
+    return '__import__.supplier_%s' % (ref)
+
+
 def add_xmlid(record, xmlid, noupdate=False):
     """ Add a XMLID on an existing record """
     try:
@@ -156,6 +160,103 @@ def do_final_picking(pick, lines, lots):
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
         pick.do_new_transfer()
+
+
+class DB2MapperPurchaseOrder(object):
+
+    @classmethod
+    def process(cls, rec, db2_table, tmp_id):
+        cr = rec.env.cr
+        query = (
+            "SELECT id, ecfsui, ecfrin, ecfrcl, ecfuti, ecffou, ecfsuc,"
+            "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"
+            "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"
+            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"
+            " FROM db2_pentcdfo WHERE id = %s")
+        cr.execute(query, [tmp_id])
+        row = cr.fetchone()
+        if not row:
+            raise Exception("Nothing to process")
+        row = {c.lower(): convert_coding(row[idx])
+               for idx, c in enumerate(
+                   [d[0] for d in cr.description]
+               )}
+
+        create_date = convert_date('ecfc', row)
+
+        user_xmlid = convert_user(row['ecfuti'])
+        values = {
+            'name': row['ecfsui'],
+            'origin': row['ecfrin'],
+            'partner_ref': row['ecfrcl'],
+            'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
+            'currency_id': rec.env.ref('base.EUR').id,
+            'date_order': convert_date('ecfd', row),
+            'create_date': create_date,
+            'confirmation_date': convert_date('ecfd', row),
+            'write_date': convert_date('ecfm', row) or create_date,
+            'partner_id': rec.env.ref(convert_supplier(int(row['ecffou']))).id,
+        }
+
+        # transform float and string to int to remove . and spaces
+        # while creating xmlid
+        xmlid = '__import__.purchase_order_%s_%s_%s' % (
+            row['ecfsui'], int(row['ecffou']), int(row['ecfsuc']))
+        new = create_or_update(
+            rec.env['purchase.order'], xmlid.strip(), values)
+
+        query = (
+            "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, "
+            "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"
+            "       dcfmjj, dcfmmm, dcfmaa, dcfmss"
+            " FROM db2_pdetcdfo WHERE order_id = %s")
+        cr.execute(query, [row['id']])
+
+        lines = cr.fetchall()
+        if not lines:
+            raise Exception("No lines were found")
+        lines = [{c.lower(): convert_coding(line[idx])
+                 for idx, c in enumerate(
+                    [d[0] for d in cr.description]
+                 )} for line in lines]
+        is_received = True
+        received_lines = []
+
+        for line in lines:
+            product_xmlid = convert_product_id(line['dcfart'])
+            name = None
+            if product_xmlid == '__setup__.product_other':
+                name = "Divers"
+            product = rec.env.ref(product_xmlid)
+            create_date = convert_date('dcfc', line)
+            values = {
+                'order_id': new.id,
+                'product_id': product.id,
+                'sequence': line['dcfnli'],
+                'name': name or line['dcflib'],
+                'product_qty': line['dcfquc'],
+                'product_uom': rec.env.ref('product.product_uom_unit').id,
+                'qty_received': line['dcfqul'],
+                'price_unit': line['dcfpac'],
+                'promotion_supplier': line['dcfrem'],
+                'date_planned': create_date,
+                'create_date': create_date,
+                'write_date': convert_date('dcfm', line) or create_date,
+            }
+
+            POLine = rec.env['purchase.order.line']
+            xmlid = '__import__.purchase_order_line_%s_%s_%s_%s' % (
+                row['ecfsui'], int(row['ecffou']),
+                int(row['ecfsuc']), int(line['dcfnli']))
+            create_or_update(POLine, xmlid, values)
+            received_lines.append(line['dcfquc'] <= line['dcfqul'])
+        is_received = all(received_lines)
+
+        if is_received:
+            # validate purchase order
+            new.write({
+                'state': 'done',
+            })
 
 
 class DB2MapperSaleOrder(object):
@@ -304,6 +405,12 @@ class DB2MapperSaleOrder(object):
                 do_final_picking(pick2, lines, lots)
 
 
+mappers = {
+    'PENTCDFO': DB2MapperPurchaseOrder,
+    'PENTCDCL': DB2MapperSaleOrder,
+}
+
+
 class DB2ImporterTable(models.Model):
     _name = 'db2.importer.table'
 
@@ -329,6 +436,9 @@ class DB2ImporterTable(models.Model):
         if self.table_name == 'PDETCDCL':
             # create a field on object table to manage relation
             return ', order_id integer references db2_pentcdcl(id)'
+        elif self.table_name == 'PDETCDFO':
+            # create a field on object table to manage relation
+            return ', order_id integer references db2_pentcdfo(id)'
         return ''
 
     @api.multi
@@ -455,12 +565,34 @@ class DB2ImporterTable(models.Model):
                     query = "UPDATE {} SET order_id = %s WHERE id = %s".format(
                         odoo_table_name)
                     cr.execute(query, (order_id, line_id))
+        elif self.table_name == 'PDETCDFO':
+            # assign foreign key on order_id when not set
+            query = (
+                "SELECT id, dcfsui, dcffou, dcfsuc"
+                " FROM {} WHERE order_id IS NULL"
+                ).format(odoo_table_name)
+            cr.execute(query)
+            rows = cr.fetchall()
+            for row in rows:
+                line_id = row[0]
+                query = (
+                    "SELECT id FROM db2_pentcdfo"
+                    " WHERE ecfsui = %s"
+                    " AND ecffou = %s"
+                    " AND ecfsuc = %s"
+                    )
+                cr.execute(query, (row[1], row[2], row[3]))
+                order_id = cr.fetchone()
+                if order_id:
+                    order_id = order_id[0]
+                    query = "UPDATE {} SET order_id = %s WHERE id = %s".format(
+                        odoo_table_name)
+                    cr.execute(query, (order_id, line_id))
 
     @api.multi
     @job
     def create_or_update_record(self, db2_id):
-        # TODO if in function of model
-        DB2MapperSaleOrder.process(self, self.table_name, db2_id)
+        mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
     @job
