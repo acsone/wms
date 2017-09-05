@@ -115,7 +115,8 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     INNER JOIN product_template AS template ON product.product_tmpl_id = template.id
     LEFT JOIN product_uom AS purchase_uom ON template.uom_po_id = purchase_uom.id
     LEFT JOIN product_uom AS sale_uom ON template.uom_id = sale_uom.id
-    LEFT JOIN product_product AS product_add ON product.product_tmpl_id = product_add.id
+    LEFT JOIN product_template AS product_add_tmpl ON product_add_tmpl.product_additional_id = product_add_tmpl.id
+    LEFT JOIN product_product AS product_add ON product_add_tmpl.id = product_add.product_tmpl_id
     LEFT JOIN product_supplierinfo AS supplierinfo ON supplierinfo.id = (SELECT min(id) FROM product_supplierinfo WHERE product_tmpl_id = template.id)
     LEFT JOIN res_partner AS supplier ON supplierinfo.name = supplier.id
     LEFT JOIN activity_based_costing AS abc ON product.abc_id = abc.id

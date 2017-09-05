@@ -14,6 +14,7 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 # Cadencier export keys
+PRODUCT_INDEX_KEY = 'SFDNLI'
 PRODUCT_ON_HAND_KEY = 'SFDTST'
 PRODUCT_BO_QTY_KEY = 'SFDTBO'
 PRODUCT_RESERVED_KEY = 'SFDTRE'
@@ -279,37 +280,68 @@ class ZelaproExport(models.Model):
         product_tmpls = self.env['product.template'].browse(product_tmpl_ids)
         product_tmpl_values = product_tmpls.read(['qty_available',
                                                   'virtual_available',
-                                                  'immediately_usable_qty'])
+                                                  'immediately_usable_qty',
+                                                  'additional_product_id'])
         values_by_product = {}
         for value in product_tmpl_values:
             values_by_product[value['id']] = {
                 'qty_available': value['qty_available'],
                 'virtual_available': value['virtual_available'],
                 'immediately_usable_qty': value['immediately_usable_qty'],
+                'additional_product_id': value['additional_product_id'],
             }
 
         ################################################
         # Step 3 : Insert result from step 2 in result #
         ################################################
         header.remove('PRODUCT_TMPL_ID')
+        product_index_index = header.index(PRODUCT_INDEX_KEY)
         product_on_hand_index = header.index(PRODUCT_ON_HAND_KEY)
         product_bo_qty_index = header.index(PRODUCT_BO_QTY_KEY)
         product_reserved_index = header.index(PRODUCT_RESERVED_KEY)
-        # accessory_supplier_index = header.index(ACCESSORY_SUPPLIER_KEY)
-        # accessory_line_no_index = header.index(ACCESSORY_LINE_NO_KEY)
-        # main_product_supplier_index = header.index(MAIN_PRODUCT_SUPPLIER_KEY)
-        # main_product_line_no_index = header.index(MAIN_PRODUCT_LINE_NO_KEY)
+        accessory_supplier_index = header.index(ACCESSORY_SUPPLIER_KEY)
+        accessory_line_no_index = header.index(ACCESSORY_LINE_NO_KEY)
+        main_product_supplier_index = header.index(MAIN_PRODUCT_SUPPLIER_KEY)
+        main_product_line_no_index = header.index(MAIN_PRODUCT_LINE_NO_KEY)
 
         rows = []
+        previous_supplier = None
         for line in result:
             row = list(line)
             product_tmpl_id = int(row.pop())
 
+            # The product_index is a way to order products in the CSV file.
+            # The first column of the CSV is the supplier ID.
+            # It allow Zetes to order by supplier. Moreover we want to
+            # order products (by supplier) to have main product followed
+            # by his additional product (if needed).
+            # E.G:
+            # Supplier 42 with 3 products and 1 additional product
+            # for the product 2.
+            # 1 | 10 | Product 1
+            # 1 | 20 | Product 2
+            # 1 | 21 | Additional product <== Look the index 21
+            # 1 | 30 | Product 3
+            supplier_id = row[0]
+            if supplier_id != previous_supplier:
+                product_index = 10
+                previous_supplier = supplier_id
+            else:
+                product_index += 10
+
+            additional_product_id = None
+            qty_on_hand = qty_reserved = qty_bo = 0
+            additional_product_index = additional_product_supplier = 0
             if product_tmpl_id in values_by_product:
                 value = values_by_product[product_tmpl_id]
                 qty_on_hand = value['qty_available']
                 # Qty reserved == Qty on hand - Qty Forecast
                 qty_reserved = qty_on_hand - value['virtual_available']
+
+                additional_product_id = value['additional_product_id']
+                if additional_product_id:
+                    additional_product_index = product_index + 1
+                    additional_product_supplier = supplier_id
 
                 # Compute the qty in BO for this product
                 # Take the value of "Qty available"
@@ -319,13 +351,82 @@ class ZelaproExport(models.Model):
                     qty_bo = 0
                 else:
                     qty_bo = qty_available * -1
-            else:
-                qty_on_hand = qty_reserved = qty_bo = 0
 
+            row[product_index_index] = product_index
             row[product_on_hand_index] = qty_on_hand
             row[product_reserved_index] = qty_reserved
             row[product_bo_qty_index] = qty_bo
+            row[accessory_supplier_index] = additional_product_supplier
+            row[accessory_line_no_index] = additional_product_index
+            row[main_product_supplier_index] = 0  # Set this column only for
+            # Additional product
+            row[main_product_line_no_index] = 0  # Set this column only for
+            # Additional product
             rows.append(row)
+
+            # If this product has a additional product, we need to add a new
+            # list just after the main product.
+            # Steps:
+            # 3.1: Search if the
+            if additional_product_id:
+                data_query = """
+                SELECT *
+                FROM zelapro_export_cadencier
+                WHERE zelapro_export_cadencier.SFDART = (
+                    SELECT default_code
+                    FROM product_template
+                    WHERE id = %s
+                  )
+                AND zelapro_export_cadencier.SFDSUI = %s;
+                """
+                self.env.cr.execute(data_query, (additional_product_id,
+                                                 supplier_id))
+                result = self.env.cr.fetchone()
+
+                if result:
+                    add_row = list(line)
+                    # Remove create_date
+                    row.pop()
+                    add_product_tmpl_id = int(row.pop())
+
+                    add_product_index = product_index + 1
+
+                    add_product_tmpl = self.env['product.template'].browse(
+                        add_product_tmpl_id
+                    )
+                    add_product_tmpl_values = \
+                        add_product_tmpl.read(['qty_available',
+                                               'virtual_available',
+                                               'immediately_usable_qty',
+                                               'additional_product_id'])
+                    add_values = add_product_tmpl_values[0]
+
+                    add_qty_on_hand = add_values['qty_available']
+                    # Qty reserved == Qty on hand - Qty Forecast
+                    add_qty_reserved = \
+                        add_qty_on_hand - add_values['virtual_available']
+
+                    # Compute the qty in BO for this product
+                    # Take the value of "Qty available"
+                    # If the value is less than zero, it means that
+                    add_qty_available = add_values['immediately_usable_qty']
+                    if add_qty_available >= 0:
+                        add_qty_bo = 0
+                    else:
+                        add_qty_bo = add_qty_available * -1
+
+                    add_row[product_index_index] = add_product_index
+                    add_row[product_on_hand_index] = add_qty_on_hand
+                    add_row[product_reserved_index] = add_qty_reserved
+                    add_row[product_bo_qty_index] = add_qty_bo
+                    # Set this column only for main product
+                    add_row[accessory_supplier_index] = 0
+                    # Set this column only for main product
+                    add_row[accessory_line_no_index] = 0
+                    add_row[main_product_supplier_index] = supplier_id
+                    add_row[main_product_line_no_index] = product_index
+
+                    rows.append(add_row)
 
         return header, rows
 

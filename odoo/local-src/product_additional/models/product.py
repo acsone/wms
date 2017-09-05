@@ -5,24 +5,23 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
-class ProductProduct(models.Model):
-    _inherit = 'product.product'
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
-    product_additional_id = fields.Many2one('product.template',
+    additional_product_id = fields.Many2one('product.template',
                                             string='Additional product',
                                             compute='_compute_product_add',
                                             store=True,
                                             readonly=True)
 
-    @api.depends('product_tmpl_id.bom_ids',
-                 'product_tmpl_id.bom_ids.product_tmpl_id')
+    @api.depends('bom_ids', 'bom_ids.product_tmpl_id')
     def _compute_product_add(self):
         for product in self:
-            kits = product.product_tmpl_id.bom_ids\
+            kits = product.bom_ids\
                 .filtered(lambda bom: bom.bom_with_additional_product)
 
             if not kits:
-                product.product_additional_id = None
+                product.additional_product_id = None
                 continue
 
             # There is check on BOM who validate that the structure of all
@@ -42,4 +41,5 @@ class ProductProduct(models.Model):
                                                       product.id))
 
             additional_product = bom_additional_product.product_id
-            product.product_additional_id = additional_product.id
+            additional_product_tmpl = additional_product.product_tmpl_id
+            product.additional_product_id = additional_product_tmpl.id
