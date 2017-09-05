@@ -85,6 +85,10 @@
     vertical-align: top;
 }
 
+.remove_padding_top {
+    padding-top: 0 !important;
+}
+
 #company_header {
     line-height: 1.2;
     border: thin solid black;
@@ -112,6 +116,11 @@
     font-size: 0.8em;
     margin: 5mm 0;
     margin-top: 25mm;
+}
+
+.products_table_deliveryslip {
+    height:200mm !important;
+    margin-top: 5mm !important;
 }
 
 #products_table th {
