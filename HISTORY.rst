@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-143: Remove useless sale_product_additional module
+* [IMP] Don't overwrite the method action_confirm
 
 **Bugfixes**
 
