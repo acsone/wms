@@ -186,4 +186,4 @@ migration:
     - version: 10.9.0
       operations:
         post:
-          -anthem songs.install.logistics::activate_options
+          - anthem songs.install.logistics::activate_options
