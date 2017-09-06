@@ -38,7 +38,7 @@ def activate_options(ctx):
             [(4, ctx.env.ref('stock.group_production_lot').id),
              (4, ctx.env.ref('stock.group_stock_multi_locations').id),
              (4, ctx.env.ref('stock.group_adv_location').id),
-             (4, ctx.env.ref('stock.group_stock_tracking_lot').id)]
+             (4, ctx.env.ref('stock.group_tracking_lot').id)]
 
     })
 
