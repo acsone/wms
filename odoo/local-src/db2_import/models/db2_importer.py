@@ -197,6 +197,7 @@ class DB2MapperPurchaseOrder(object):
             'confirmation_date': convert_date('ecfd', row),
             'write_date': convert_date('ecfm', row) or create_date,
             'partner_id': rec.env.ref(convert_supplier(int(row['ecffou']))).id,
+            'state': 'purchase',
         }
 
         # transform float and string to int to remove . and spaces
