@@ -194,7 +194,6 @@ class DB2MapperPurchaseOrder(object):
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('ecfd', row),
             'create_date': create_date,
-            'confirmation_date': convert_date('ecfd', row),
             'write_date': convert_date('ecfm', row) or create_date,
             'partner_id': rec.env.ref(convert_supplier(int(row['ecffou']))).id,
             'state': 'purchase',
