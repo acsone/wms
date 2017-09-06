@@ -207,7 +207,7 @@ class DB2MapperPurchaseOrder(object):
             rec.env['purchase.order'], xmlid.strip(), values)
 
         query = (
-            "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, "
+            "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
             "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"
             "       dcfmjj, dcfmmm, dcfmaa, dcfmss"
             " FROM db2_pdetcdfo WHERE order_id = %s")
