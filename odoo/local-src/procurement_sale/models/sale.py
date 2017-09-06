@@ -17,7 +17,8 @@ class SaleOrder(models.Model):
         # Keep the confirmation date to avoid that Odoo overwrite this date
         confirmation_dates = {}
         for order in self:
-            confirmation_dates[order.id] = order.confirmation_date
+            if order.confirmation_date:
+                confirmation_dates[order.id] = order.confirmation_date
 
         result = super(SaleOrder, self).action_confirm()
 
