@@ -219,6 +219,8 @@ class DB2MapperPurchaseOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        POLine = rec.env['purchase.order.line']
+        po_lines = POLine
         is_received = True
         received_lines = []
 
@@ -244,19 +246,27 @@ class DB2MapperPurchaseOrder(object):
                 'write_date': convert_date('dcfm', line) or create_date,
             }
 
-            POLine = rec.env['purchase.order.line']
             xmlid = '__import__.purchase_order_line_%s_%s_%s_%s' % (
                 row['ecfsui'], int(row['ecffou']),
                 int(row['ecfsuc']), int(line['dcfnli']))
-            create_or_update(POLine, xmlid, values)
+            po_lines |= create_or_update(POLine, xmlid, values)
             received_lines.append(line['dcfquc'] <= line['dcfqul'])
         is_received = all(received_lines)
 
         if is_received:
+
             # validate purchase order
             new.write({
                 'state': 'done',
             })
+            # force received qty in database to avoid to have
+            # to create pickings, this needs to be done after state write
+            # or it would be recomputed
+            query = (
+                "UPDATE purchase_order_line SET qty_received = product_qty"
+                " WHERE id in ( %s )"
+            ) % ','.join(['%s'] * len(po_lines))
+            cr.execute(query, po_lines.ids)
         else:
             new.write({
                 'state': 'purchase',
