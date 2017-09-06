@@ -184,12 +184,13 @@ class DB2MapperPurchaseOrder(object):
 
         create_date = convert_date('ecfc', row)
 
-        user_xmlid = convert_user(row['ecfuti'])
+        # FIXME Don't take user for now as we don't have related users
+        # user_xmlid = convert_user(row['ecfuti'])
         values = {
             'name': row['ecfsui'],
             'origin': row['ecfrin'],
             'partner_ref': row['ecfrcl'],
-            'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
+            # 'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('ecfd', row),
             'create_date': create_date,
