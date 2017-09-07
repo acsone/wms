@@ -14,19 +14,19 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        # Copy from sale module
+        # Keep the confirmation date to avoid that Odoo overwrite this date
+        confirmation_dates = {}
         for order in self:
-            order.state = 'sale'
-            if not order.confirmation_date:
-                # Keep first confirmation date
-                order.confirmation_date = fields.Datetime.now()
-            if self.env.context.get('send_email'):
-                self.force_quotation_send()
-            order.order_line._action_procurement_create()
-        if self.env['ir.values'].get_default('sale.config.settings',
-                                             'auto_done_setting'):
-            self.action_done()
-        return True
+            if order.confirmation_date:
+                confirmation_dates[order.id] = order.confirmation_date
+
+        result = super(SaleOrder, self).action_confirm()
+
+        for order in self:
+            if order.id in confirmation_dates:
+                order.confirmation_date = confirmation_dates[order.id]
+
+        return result
 
 
 class SaleOrderLine(models.Model):
