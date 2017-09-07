@@ -187,3 +187,6 @@ migration:
       operations:
         post:
           - anthem songs.install.logistics::activate_options
+      addons:
+        upgrade:
+          - specific_report
