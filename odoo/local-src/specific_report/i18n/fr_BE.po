@@ -433,12 +433,12 @@ msgstr "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.action_passport_report
 msgid "Passport report"
-msgstr "Passport report"
+msgstr "Rapport passport"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport
 msgid "Passport verification"
-msgstr "Passport verification"
+msgstr "Vérification du passport"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
