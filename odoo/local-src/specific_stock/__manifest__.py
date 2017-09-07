@@ -27,6 +27,7 @@
         'views/stock_location.xml',
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
+        'views/stock_quant_package.xml',
         'wizards/stock_receive_lot.xml',
 
         # Data

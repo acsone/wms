@@ -28,6 +28,7 @@
         'views/report_delivery_round.xml',
         'views/report_purchase_order.xml',
         'views/report_passport.xml',
+        'views/round_instance.xml',
         'data/paperformat.xml',
     ],
     'installable': True,

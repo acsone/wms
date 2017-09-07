@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * specific_stock
+#	* specific_stock
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 12:13+0000\n"
-"PO-Revision-Date: 2017-03-07 12:13+0000\n"
+"POT-Creation-Date: 2017-09-07 12:35+0000\n"
+"PO-Revision-Date: 2017-09-07 12:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,157 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_lot_life_date
-msgid "End of Life Date"
-msgstr "Date limite de consommation"
+#: model:ir.model.fields,help:specific_stock.field_stock_config_settings_delay_inventory_expensive_products
+msgid "6 months means that it will be two inventory per year"
+msgstr "6 mois signifie qu'il y aura 2 inventaires par an"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_is_archived
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_lot_add_qty_backorder
+msgid "Backorder"
+msgstr "Reliquat"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
+msgid "Box"
+msgstr "Boite"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr "Changer la quantité d'articles"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_checksum
+msgid "Checksum"
+msgstr "Checksum"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
+msgid "Corridor"
+msgstr "Couloir"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
+msgid "Daily inventory"
+msgstr "Inventaire journalier"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_inventory.py:54
+#, python-format
+msgid "Daily inventory: %s"
+msgstr "Inventaire journalier: %s"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_best_sellers_products
+msgid "Delay between two inventory for best sellers products"
+msgstr "Delais entre deux inventaires pour les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_expensive_products
+msgid "Delay between two inventory for expensive products"
+msgstr "Delais entre deux inventaires pour les produits coûteux"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_other_products
+msgid "Delay between two inventory for other products"
+msgstr "Delais entre deux inventaires pour les autres produits"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_duration
+msgid "Duration to compute best sellers (in months)"
+msgstr "Durée (en mois) pour calculer les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_height
+msgid "Height"
+msgstr "Hauteur"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements de stock"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_date_last_inventory
+#: model:ir.model.fields,field_description:specific_stock.field_product_product_date_last_inventory
+msgid "Last inventory"
+msgstr "Dernier inventaire"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_location_form_inherit
+msgid "Localization"
+msgstr "Localisation"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_location_name
+msgid "Location name"
+msgstr "Nom de l'emplacement"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr "Lot/N° série"
+
+#. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_stock_pack_operation_lot_add_qty_backorder
+msgid "Missing quantity of products to pick"
+msgstr "Il n'y a pas assez de quantité à prendre"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_months_between_inventory
+msgid "Number of months between two inventory for a product"
+msgstr "Nombre de mois entre deux inventaires pour un produit"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_nbr_open_days
+msgid "Number of open days"
+msgstr "Nombre de jours ouvrés"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
+msgid "Number of packages"
+msgstr "Nombre de paquets"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_original_picking_type_id
+msgid "Original picking type"
+msgstr "Type de prélèvement original"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Colisage"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_quant_package
+msgid "Physical Packages"
+msgstr "Colis physiques"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/product_template.py:139
+#, python-format
+msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
+msgstr "Veuillez définir le prix limite pour les inventaires et/ou le nombre de jours ouvrés dans la configuration de l'inventaire"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_price_limit_for_inventory
+msgid "Price limit for inventory"
+msgstr "Prix limite pour les inventaires"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_product_product
+msgid "Product"
+msgstr "Article"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_alert_time
@@ -56,14 +199,62 @@ msgid "Product Use Time"
 msgstr "Délai d'utilisation optimale"
 
 #. module: specific_stock
-#: model:ir.model,name:specific_stock.model_stock_pack_operation_lot
-msgid "Specifies lot/serial number for pack operations that need it"
-msgstr "Spécifie le lot/numéro de série pour les colisage qui le nécessitent"
+#: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_percent
+msgid "Quantity to take for best sellers (in percent)"
+msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_shelf
+msgid "Shelf"
+msgstr "Etagère"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_config_settings.py:163
+#, python-format
+msgid "The delay can only be in the following list:\n"
+"(1, 2, 3, 4, 6 or 12 months)"
+msgstr "Le delais peut seulement être une valeur de la liste suivante:\n"
+"(1, 2, 3, 4, 6 ou 12 mois)"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_config_settings.py:160
+#, python-format
+msgid "The maximum delay is 12 months"
+msgstr "Le delais maximum est 12 mois"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_inventory.py:95
+#, python-format
+msgid "There is no delay for the inventory %s"
+msgstr "Il n'y a pas de delais pour l'inventaire %s"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/product_template.py:189
+#, python-format
+msgid "There is no period for best sellers products"
+msgstr "Il n'y a pas de période pour les produits les plus vendus"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/product_template.py:154
+#, python-format
+msgid "There is no period for expensive products"
+msgstr "Il n'y a pas de période pour les produits coûteux"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/product_template.py:234
+#, python-format
+msgid "There is no period for other products"
+msgstr "Il n'y a pas de période pour les autres produits"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
+msgid "Valid location"
+msgstr "Emplacement valide"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_alert_time
@@ -86,10 +277,25 @@ msgid "When a new a Serial Number is issued, this is the number of days before t
 msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:39
+#: code:addons/specific_stock/models/stock_picking.py:40
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
-"   - %s"
-msgstr "Vous ne pouvez pas transférer des lots avec une date de retrait expirée:\n"
-"   - %s"
+"	- %s"
+msgstr "Vous ne pouvez pas transférer un lot expiré:\n"
+"	- %s"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
+msgid "Zone"
+msgstr "Zone"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr "stock.config.settings"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
+msgid "stock.pack.operation.lot.add"
+msgstr "stock.pack.operation.lot.add"
 

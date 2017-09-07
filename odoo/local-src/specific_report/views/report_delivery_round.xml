@@ -2,44 +2,6 @@
     <template id="delivery_rounds.delivery_round_report">
         <t t-foreach="docs" t-as="delivery">
             <t t-call="report.html_container">
-                <t t-set="company" t-value="res_company"/>
-
-                <div class="header">
-                    <div class="row">
-                        <div class="col-xs-1"/>
-                        <div class="col-xs-10">
-                            <table class="table table-bordered table-condensed">
-                                <tbody>
-                                    <tr>
-                                        <td align="center" class="col-xs-3" style="vertical-align: middle;">
-                                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 70px;"/>
-                                        </td>
-                                        <td align="center" class="col-xs-6" style="vertical-align: middle;">
-                                            <span t-field="company.street"/>,
-                                            <span t-field="company.zip"/>
-                                            <span t-field="company.city"/>
-                                            -
-                                            <span t-field="company.country_id"/>
-                                            <br/>
-                                            <span>Phone:</span>
-                                            <span t-field="company.phone"/>
-                                            -
-                                            <span>Fax:</span>
-                                            <span t-field="company.fax"/>
-                                            <br/>
-                                            <span>Email:</span>
-                                            <span t-field="company.email"/>
-                                        </td>
-                                        <td align="center" class="col-xs-3" style="vertical-align: middle;">
-                                            Delivery round
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-xs-1"/>
-                    </div>
-                </div>
                 <div class="page">
                     <h2><span t-field="delivery.name"/></h2>
                     <div class="row" style="margin-top: 15px;">
@@ -81,7 +43,7 @@
                                     </tr>
                                     <tr>
                                         <td>Departure time</td>
-                                        <td></td>
+                                        <td><span t-esc="delivery.get_time_leave_planned()"/></td>
                                     </tr>
                                     <tr>
                                         <td>Arriving time</td>
@@ -96,18 +58,16 @@
                             <thead>
                                 <tr class="active">
                                     <th>Seq.</th>
-                                    <th>Reference</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
+                                    <th>Customer</th>
                                     <th>Mobile</th>
                                     <th>Phone</th>
-                                    <th>Notes</th>
                                     <th># Drug</th>
                                     <th># Cold</th>
                                     <th># Food</th>
                                     <th># Equip.</th>
                                     <th># Hum.</th>
                                     <th># Tot.</th>
+                                    <th>Notes</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,12 +76,7 @@
                                         <span t-field="shipping.sequence" />
                                     </td>
                                     <td>
-                                        <span t-field="shipping.name" />
-                                    </td>
-                                    <td>
                                         <span t-field="shipping.partner_id.name" />
-                                    </td>
-                                    <td>
                                         <address t-field="shipping.partner_id"
                                                  t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
                                     </td>
@@ -130,9 +85,6 @@
                                     </td>
                                     <td>
                                         <span t-field="shipping.partner_id.phone" />
-                                    </td>
-                                    <td>
-                                        <span t-field="shipping.note" />
                                     </td>
                                     <td>
                                         <span t-esc="int(shipping.number_of_drug)"/>
@@ -152,13 +104,16 @@
                                     <td>
                                         <span t-esc="int(shipping.number_total)"/>
                                     </td>
+                                    <td style="width: 33%;">
+                                        <strong>
+                                            <span t-field="shipping.note" />
+                                        </strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <t t-call="specific_report.page_number_footer"/>
             </t>
         </t>
     </template>

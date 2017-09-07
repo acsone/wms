@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_quant_package_form_save" model="ir.ui.view">
+        <field name="name">view.quant.package.form.save</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="delivery.view_quant_package_form_save"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <field name="nbr_packages"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
