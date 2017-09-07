@@ -152,6 +152,7 @@ migration:
           - stock_reception_priority
           - stock_refill
           - web_autorefresh
+          - specific_followup
     - version: 10.1.0
     - version: 10.2.0
     - version: 10.3.0
@@ -190,3 +191,4 @@ migration:
       addons:
         upgrade:
           - specific_report
+          - specific_followup
