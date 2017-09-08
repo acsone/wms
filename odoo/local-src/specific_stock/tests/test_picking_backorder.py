@@ -31,6 +31,7 @@ class TestPickingBackorder(TransactionCase):
 
         self.partner = self.partner_model.create({
             'name': 'Unittest supplier',
+            'is_sale_back_order_accepted': False,
         })
 
         self.supplier_location = self.location_model.browse(
