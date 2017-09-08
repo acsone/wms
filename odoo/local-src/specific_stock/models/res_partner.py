@@ -10,6 +10,7 @@ class ResPartner(models.Model):
 
     is_sale_back_order_accepted = fields.Boolean(
         string='Sale back order accepted',
+        default=True,
     )
     is_purchase_back_order_accepted = fields.Boolean(
         string='Purchase back order accepted',
