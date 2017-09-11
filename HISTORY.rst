@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Extend db2_import module to import purchase orders
+
 **Features and Improvements**
 
 * ALCN-143: Remove useless sale_product_additional module
