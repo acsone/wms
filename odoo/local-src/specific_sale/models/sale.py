@@ -124,6 +124,13 @@ class Sale(models.Model):
             })
         return new_report_pages
 
+    @api.multi
+    def action_confirm(self):
+        result = super(Sale, self.with_context(tracking_disable=True))\
+            .action_confirm()
+
+        return result
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
