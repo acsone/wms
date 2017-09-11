@@ -176,6 +176,7 @@ migration:
           # - base  # Because we updated all repositories
           - mrp
           ### local-src
+          - db2_import
           - product_additional
           - specific_sale
           - delivery_rounds
