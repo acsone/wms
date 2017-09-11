@@ -1,7 +1,57 @@
 <odoo>
     <template id="specific_report.report_deliveryslip_alcyon">
         <div class="page">
-            <table id="products_table" class="round_table">
+            <div id="left_header" class="remove_padding_top">
+                <table id="invoice_reference" class="border_table round_table">
+                    <tr>
+                        <td><span>Customer</span></td>
+                        <td><span>N° Document</span></td>
+                        <td><span>Scheduled date</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="partner.ref"/>
+                        </td>
+                        <td>
+                            <span t-field="deliveryslip.name"/>
+                        </td>
+                        <td>
+                            <span t-field="deliveryslip.date"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <span>Your VAT number:</span>
+                            <span t-field="partner.vat"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="partner_header" class="remove_padding_top">
+                <t t-if="partner.parent_id">
+                    <span t-field="partner.parent_id"/>
+                    <br/>
+                </t>
+                <t t-if="partner.title">
+                    <span t-field="partner.title"/>
+                </t>
+                <span t-field="partner.name"/>
+                <br/>
+                <t t-if="partner.street">
+                    <span t-field="partner.street"/>
+                    <br/>
+                </t>
+                <t t-if="partner.zip or partner.city">
+                    <span t-field="partner.zip"/>
+                    <span t-field="partner.city"/>
+                    <br/>
+                </t>
+                <t t-if="partner.country_id">
+                    <span t-field="partner.country_id"/>
+                </t>
+            </div>
+            <table id="products_table" class="round_table products_table_deliveryslip">
                 <thead>
                     <tr>
                         <th rowspan="2">Product<br/>reference</th>
@@ -120,7 +170,8 @@
                 <div class="col-xs-2">
                     <div class="border_table round_table summary_deliverslip">
                         <div style="text-align: center">
-                            Number of<br/>packages
+                            Number of<br/>packages<br/>
+                            <strong><span t-esc="len(deliveryslip.pack_operation_pack_ids)"/></strong>
                         </div>
                     </div>
                 </div>
@@ -141,7 +192,7 @@
                             PORT:
                         </div>
                         <div style="height: 50%">
-                            Weight:
+                            Weight:<br/><span t-field="deliveryslip.weight"/> Kg
                         </div>
                     </div>
                 </div>
@@ -176,86 +227,7 @@
                             Delivery slip
                         </div>
                     </div>
-                    <div id="left_header">
-                        <div id="company_header">
-                            <span t-field="company.street"/>,
-                            <span t-field="company.zip"/>
-                            <span t-field="company.city"/>
-                            -
-                            <span t-field="company.country_id"/>
-                            <br/>
-                            <span>Phone:</span>
-                            <span t-field="company.phone"/>
-                            -
-                            <span>Fax:</span>
-                            <span t-field="company.fax"/>
-                            <br/>
-                            <span>Email:</span>
-                            <span t-field="company.email"/>
-                            <br/>
-                            <span style="display: inline-block; vertical-align: top;">Order:
-                                <br/>
-                            </span>
-                            <span style="display: inline-block; vertical-align: top;">
-                                <span>Phone:</span>
-                                <span t-field="company.order_phone"/>
-                                <br/>
-                                <span>Fax:</span>
-                                <span t-field="company.order_fax"/>
-                            </span>
-                            <br/>
-                            <span>RPM Liège division Huy - TVA</span>
-                            <span t-field="company.vat"/>
-                        </div>
-                        <table id="invoice_reference" class="border_table round_table">
-                            <tr>
-                                <td><span>Customer</span></td>
-                                <td><span>N° Document</span></td>
-                                <td><span>Scheduled date</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span t-field="partner.ref"/>
-                                </td>
-                                <td>
-                                    <span t-field="deliveryslip.name"/>
-                                </td>
-                                <td>
-                                    <span t-field="deliveryslip.date"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <span>Your VAT number:</span>
-                                    <span t-field="partner.vat"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
 
-                    <div id="partner_header">
-                        <t t-if="partner.parent_id">
-                            <span t-field="partner.parent_id"/>
-                            <br/>
-                        </t>
-                        <t t-if="partner.title">
-                            <span t-field="partner.title"/>
-                        </t>
-                        <span t-field="partner.name"/>
-                        <br/>
-                        <t t-if="partner.street">
-                            <span t-field="partner.street"/>
-                            <br/>
-                        </t>
-                        <t t-if="partner.zip or partner.city">
-                            <span t-field="partner.zip"/>
-                            <span t-field="partner.city"/>
-                            <br/>
-                        </t>
-                        <t t-if="partner.country_id">
-                            <span t-field="partner.country_id"/>
-                        </t>
-                    </div>
                 </div>
 
                 <t t-call="specific_report.report_deliveryslip_alcyon" t-lang="partner.lang"/>

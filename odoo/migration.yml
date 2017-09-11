@@ -183,3 +183,10 @@ migration:
           - stock_picking_sequence
           - stock_picking_subcode
           - stock_reception_priority
+    - version: 10.9.0
+      operations:
+        post:
+          - anthem songs.install.logistics::activate_options
+      addons:
+        upgrade:
+          - specific_report
