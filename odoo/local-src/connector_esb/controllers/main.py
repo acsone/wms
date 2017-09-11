@@ -8,18 +8,15 @@ Respond to calls from the ESB.
 
 """
 
-import logging
-
 from datetime import datetime
 
 import werkzeug
 
 import odoo
-from odoo import http
+from odoo import http, _
 from odoo.http import request
 from odoo.addons.web.controllers.main import ensure_db
-
-_logger = logging.getLogger(__name__)
+from odoo.exceptions import UserError
 
 
 class ESBController(http.Controller):
@@ -122,3 +119,62 @@ class ESBController(http.Controller):
         with backend.work_on('sale.order.line') as work:
             return (work.component('ws.message.customer.stat')
                     .get_message(customer_ref))
+
+    @staticmethod
+    def create_sale_order_check_data(jsonrequest):
+        """Verify order data received  through json-rpc"""
+
+        required_keys = ['increment_id', 'customer_id', 'date', 'lines']
+        if 'params' not in jsonrequest:
+            return _('The params key is missing from request')
+        if 'data' not in jsonrequest['params']:
+            return _('The data key is missing from request')
+        data = jsonrequest['params']['data']
+
+        missing = [k for k in required_keys if k not in data]
+        if missing:
+            text = _('Required field(s) missing: %s')
+            return text % ', '.join(['`%s`' % x for x in missing])
+        return ''
+
+    @http.route('/connector_esb/sales_order/create',
+                type='json', auth='user', csrf=False)
+    def create_sale_order(self, **kw):
+        """ Create a sale order with data received on request (Magento)
+
+            Expect a POST as json-rpc
+
+            Example to test from bash without auth :
+
+            curl -i \
+                -H "Content-Type: application/json" \
+                -H "Accept:application/json" \
+                -X POST http://localhost/connector_esb/sales_order/create \
+                -d  @- << EOF
+                 {"jsonrpc":"3.0","id":"4321","method":"create", "params":
+                 {"data": {
+                  "increment_id": "INC-ID",
+                  "customer_id":138,
+                  "invoice_address_id":214,
+                  "shipping_address_id": 215,
+                  "date":"12-7-2017",
+                  "order_ref":"refClt",
+                  "order_amount":493,
+                  "tax_amount":43,
+                  "shipping_amount":21,
+                  "lines": [
+                      {"line_id": 1, "sku": "SER-700200", "quantity": 3}
+                   ]
+                 }}}
+                EOF
+
+        """
+        ensure_db()
+        request.uid = odoo.SUPERUSER_ID
+        env = request.env
+        error_txt = self.create_sale_order_check_data(request.jsonrequest)
+        if error_txt:
+            raise UserError(error_txt)
+        data = request.jsonrequest['params']['data']
+        delayable = env['sale.order'].with_delay()
+        delayable.ws_create_new(data)

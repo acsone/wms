@@ -23,6 +23,7 @@ Webservices:
  * ``/connector_esb/statistics/product/<sku>/<client_ref>`` :
         return for a product a client yearly purchase statistics
  * ``/connector_esb/statistics/customer/<ref>``: return customer yearly statisctics
+ * ``/connector_esb/sales_order/create``: create a new sale order
 
 Configuration
 =============
