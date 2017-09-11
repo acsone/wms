@@ -33,7 +33,7 @@
         ],
     'data': [
         'views/stock.xml',
-        'data.xml',
+        'data/data.xml',
     ],
     'installable': True,
     'auto_install': False,
