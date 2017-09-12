@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW zelapro_export_promotions AS
   SELECT
     ''                         AS CODE_REMISE,
-    product.default_code       AS ARTICLE,
+    product_tmpl.default_code  AS ARTICLE,
     item.date_start            AS DATE_DEBUT,
     item.date_end              AS DATE_FIN,
     supplier.supplier_discount AS POURCENTAGE_1,
@@ -10,5 +10,5 @@ CREATE OR REPLACE VIEW zelapro_export_promotions AS
     ''                         AS GRATUIT,
     item.create_date           AS create_date -- Mandatory field used to compute data to export
   FROM product_supplierinfo AS item
-    INNER JOIN product_product AS product ON item.product_id = product.id
+    INNER JOIN product_template AS product_tmpl ON item.product_tmpl_id = product_tmpl.id
     INNER JOIN res_partner AS supplier ON item.name = supplier.id;
