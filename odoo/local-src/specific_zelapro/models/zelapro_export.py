@@ -367,8 +367,16 @@ class ZelaproExport(models.Model):
             # If this product has a additional product, we need to add a new
             # list just after the main product.
             # Steps:
-            # 3.1: Search if the
+            # 3.1: If the product has an additional product, we will execute
+            # the view to search data about the additional product
+            # 3.2: If the additional product is linked to the supplier of the
+            # main product (it means that there is a line in supplier info),
+            # we will create a new line
+            # 3.3: Search in Odoo for additional information on
+            # the additional product
+            # 3.4: Add this new line in result
             if additional_product_id:
+                # Step 3.1
                 data_query = """
                 SELECT *
                 FROM zelapro_export_cadencier
@@ -384,6 +392,7 @@ class ZelaproExport(models.Model):
                 result = self.env.cr.fetchone()
 
                 if result:
+                    # Step 3.2
                     add_row = list(line)
                     # Remove create_date
                     row.pop()
@@ -391,6 +400,7 @@ class ZelaproExport(models.Model):
 
                     add_product_index = product_index + 1
 
+                    # Step 3.3
                     add_product_tmpl = self.env['product.template'].browse(
                         add_product_tmpl_id
                     )
@@ -426,6 +436,7 @@ class ZelaproExport(models.Model):
                     add_row[main_product_supplier_index] = supplier_id
                     add_row[main_product_line_no_index] = product_index
 
+                    # Step 3.4
                     rows.append(add_row)
 
         return header, rows
