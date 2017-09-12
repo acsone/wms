@@ -2,8 +2,7 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api, _
-from odoo.exceptions import UserError
+from odoo import fields, models, api
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -111,15 +110,6 @@ class StockPicking(models.Model):
             elif not rec.sequence:
                 rec.with_context(allow_sequence=True).sequence = \
                     self._calc_priority()
-
-    @api.multi
-    @api.constrains('sequence')
-    def _check_sequence_reception(self):
-        _logger.debug("Check sequence reception constrain for %s" % self.ids)
-        if not self.env.context.get('allow_sequence'):
-            # do not allow drag/drop of reception orders
-            if 'RECEIVE' in self.mapped('picking_type_id.subcode'):
-                raise UserError(_('You cannot reorder reception orders'))
 
     @api.multi
     def button_priority_recompute(self):
