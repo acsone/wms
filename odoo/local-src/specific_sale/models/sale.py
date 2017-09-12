@@ -126,8 +126,15 @@ class Sale(models.Model):
 
     @api.multi
     def action_confirm(self):
+        self.ensure_one()
+
+        # Disable tracking
         result = super(Sale, self.with_context(tracking_disable=True))\
             .action_confirm()
+
+        # Post the message "Quotation confirmed"
+        message = self.env.ref('sale.mt_order_confirmed')
+        self.message_post(body=message.description)
 
         return result
 
