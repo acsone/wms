@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="activity_based_costing_view_form" model="ir.ui.view">
+        <field name="name">activity.based.costing.view.form</field>
+        <field name="model">activity.based.costing</field>
+        <field name="arch" type="xml">
+            <form sring="Configure Zelapro">
+                <group>
+                    <field name="code"/>
+                    <field name="rate"/>
+                    <field name="nbr_products"/>
+                    <field name="nbr_products_prc"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="activity_based_costing_action" model="ir.actions.act_window">
+        <field name="name">ABC</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">activity.based.costing</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem id="menu_activity_based_costing" name="ABC" parent="main_menu_zelapro"
+            sequence="40" action="activity_based_costing_action"/>
+</odoo>

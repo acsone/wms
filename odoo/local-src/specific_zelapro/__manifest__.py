@@ -35,6 +35,7 @@
         'views/product_category.xml',
         'views/product_template.xml',
         'wizard/zelapro_export_wizard.xml',
+        'views/activity_base_testing.xml',
 
         # Data
         'data/ir_config_parameter.xml',

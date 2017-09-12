@@ -1,24 +1,24 @@
 CREATE OR REPLACE VIEW zelapro_export_products AS
   SELECT
-    product.default_code AS GESART,
-    template.name AS GESDEM,
-    product.weight AS GESPBR,
+    COALESCE(product.default_code, '') AS GESART,
+    product_tmpl.name AS GESDEM,
+    COALESCE(product.weight, 0) AS GESPBR,
     '' AS GESPNT,
     '' AS GESVOL,
-    supplier.ref AS GESFOU,
+    COALESCE(supplier.ref, '') AS GESFOU,
     '' AS GESCDE,
     '' AS LIBCDE,
     '' AS GESDOU,
     '' AS GESCRF,
     '' AS GESUNA,
-    purchase_uom.name AS LIBUNA,
-    1 AS GESCOA,
-    1 AS GESNBP,
-    supplierinfo.delay AS GESDEL,
+    COALESCE(purchase_uom.name, '') AS LIBUNA,
+    1  AS GESCOA,
+    '' AS GESNBP,
+    COALESCE(supplierinfo.delay, 0) AS GESDEL,
     '' AS GESECS,
     '' AS GESBPV,
     '' AS GESUNV,
-    sale_uom.name AS LIBUNV,
+    COALESCE(sale_uom.name, '') AS LIBUNV,
     1 AS GESCOV,
     '' AS GESCGE,
     '' AS LIBCGE,
@@ -29,9 +29,9 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS GESETI,
     '' AS LIBETI,
     '' AS GESCGR,
-    '' AS LIBCGR,
+    COALESCE(product_category.name, '') AS LIBCGR,
     '' AS GESCSG,
-    '' AS LIBCSG,
+    COALESCE(product_sub_category.name, '') AS LIBCSG,
     '' AS GESCTV,
     '' AS LIBCTV,
     '' AS GESCVA,
@@ -39,17 +39,20 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS GESCAN,
     '' AS GESCAV,
     '' AS GESCSA,
-    template.tracking AS LIBCSA,
+    CASE
+      WHEN product_tmpl.tracking = 'lot' THEN 'Suivi en lot'
+      ELSE 'Pas de suivi'
+    END AS LIBCSA,
     '' AS GESCRE,
     '' AS LIBCRE,
     '' AS GESCHR,
     '' AS LIBCHR,
-    (SELECT ir_property.value_float
+    COALESCE((SELECT ir_property.value_float
      FROM ir_property
-     WHERE ir_property.res_id = 'product.product,' || product.id) AS GESPAB,
-    supplierinfo.price AS GESPAN,
+     WHERE ir_property.res_id = 'product.product,' || product.id), 0) AS GESPAB,
+    COALESCE(supplierinfo.price, 0) AS GESPAN,
     '' AS GESPRR,
-    template.list_price AS GESPVR,
+    COALESCE(product_tmpl.list_price, 0) AS GESPVR,
     '' AS GESPRM,
     '' AS GESPMC,
     to_char(product.create_date, 'DD/MM/YYYY') AS DATE_CREATION,
@@ -71,16 +74,16 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CPLZ21,
     '' AS CPLZ24,
     '' AS CPLZ29,
-    template.unit_in_box AS CPLZ30,
+    COALESCE(product_tmpl.unit_in_box, 0) AS CPLZ30,
     '' AS CPLZ18,
     '' AS CPLZ19,
     '' AS CPLZ22,
     '' AS CPLZ23,
     '' AS CPLZ28,
     '' AS CP2Z01,
-    template.unit_in_fardage AS CP2Z02,
+    COALESCE(product_tmpl.unit_in_fardage, 0) AS CP2Z02,
     '' AS CP2Z03,
-    template.unit_in_box AS CP2Z04,
+    COALESCE(product_tmpl.unit_in_box, 0) AS CP2Z04,
     '' AS CP2Z05,
     '' AS CP2Z06,
     '' AS CP2Z08,
@@ -101,10 +104,10 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CP2Z20,
     '' AS CP2Z21,
     '' AS LIBZ21,
-    product_add.default_code AS CP2Z22,
-    '' AS CP2Z23,
-    '' AS CP2Z24,
-    abc.code AS ABCCOD,
+    COALESCE(product_add.default_code, '') AS CP2Z22,
+    COALESCE(bom_line.product_qty, 0) AS CP2Z23,
+    COALESCE(bom_line.product_qty, 0) AS CP2Z24,
+    COALESCE(abc.code, '') AS ABCCOD,
     product.turnover AS ABCVAV,
     product.turnover_average AS ABCPCV,
     product.turnover_nbr_lines AS ABCNLI,
@@ -112,12 +115,17 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS ABCPSE,
     product.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_product AS product
-    INNER JOIN product_template AS template ON product.product_tmpl_id = template.id
-    LEFT JOIN product_uom AS purchase_uom ON template.uom_po_id = purchase_uom.id
-    LEFT JOIN product_uom AS sale_uom ON template.uom_id = sale_uom.id
+    INNER JOIN product_template AS product_tmpl ON product.product_tmpl_id = product_tmpl.id
+    LEFT JOIN product_uom AS purchase_uom ON product_tmpl.uom_po_id = purchase_uom.id
+    LEFT JOIN product_uom AS sale_uom ON product_tmpl.uom_id = sale_uom.id
     LEFT JOIN product_template AS product_add_tmpl ON product_add_tmpl.additional_product_id = product_add_tmpl.id
     LEFT JOIN product_product AS product_add ON product_add_tmpl.id = product_add.product_tmpl_id
-    LEFT JOIN product_supplierinfo AS supplierinfo ON supplierinfo.id = (SELECT min(id) FROM product_supplierinfo WHERE product_tmpl_id = template.id)
+    LEFT JOIN product_supplierinfo AS supplierinfo ON supplierinfo.id = (SELECT min(id) FROM product_supplierinfo WHERE product_tmpl_id = product_tmpl.id)
     LEFT JOIN res_partner AS supplier ON supplierinfo.name = supplier.id
     LEFT JOIN activity_based_costing AS abc ON product.abc_id = abc.id
-    LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id;
+    LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id
+    LEFT JOIN mrp_bom AS bom ON bom.id = (SELECT min(id) FROM mrp_bom WHERE mrp_bom.product_tmpl_id = product_tmpl.id)
+    LEFT JOIN mrp_bom_line AS bom_line ON bom_line.id = (SELECT min(id) FROM mrp_bom_line WHERE mrp_bom_line.bom_id = bom.id AND mrp_bom_line.is_additional_product = TRUE)
+    LEFT JOIN product_category AS product_sub_category ON product_tmpl.categ_id = product_sub_category.id
+    LEFT JOIN product_category AS product_category ON product_sub_category.parent_id = product_category.id
+  WHERE product.active = TRUE;

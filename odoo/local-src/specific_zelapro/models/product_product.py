@@ -139,6 +139,7 @@ class ProductProduct(models.Model):
                 'turnover_average_nbr_lines': turnover_average_nbr_lines
             })
 
+    @api.model
     def compute_abc_rate(self):
         """
         This method will compute the ABC rate for each products.

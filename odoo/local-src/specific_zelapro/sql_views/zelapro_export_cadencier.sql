@@ -8,11 +8,11 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     '' AS SFDQMO,
     info.price AS SFDPAN,
     '' AS SFDPAM,
-    supplier.supplier_discount AS SFDR1O,
+    COALESCE(supplier.supplier_discount, 0) AS SFDR1O,
     '' AS SFDR1M,
-    info.discount_purchase AS SFDR2O,
+    COALESCE(info.discount_purchase, 0) AS SFDR2O,
     '' AS SFDR2M,
-    to_char(NOW() + format('%s days', COALESCE(info.delay, 0))::INTERVAL, 'DD/MM/YYYY') AS SFEDLI,
+    to_char(NOW() + format('%s days', COALESCE(info.delay, 0))::INTERVAL, 'YYYYMMDD') AS SFEDLI,
     '' AS LIBDLI,
     '' AS SFDDMO,
     '' AS LIBDMO,
@@ -22,8 +22,8 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     END AS SFDDBO,
     '' AS SFDDBM,
     '' AS SFDSTS,
-    product_tmpl.stock_minimum AS SFDTMI,
-    product_tmpl.stock_maximum AS SFDTMA,
+    COALESCE(product_tmpl.stock_minimum, 0) AS SFDTMI,
+    COALESCE(product_tmpl.stock_maximum, 0) AS SFDTMA,
     '' AS SFDTST, -- This value will be computed in the export
     '' AS SFDTBO, -- This value will be computed in the export
     '' AS SFDTRE, -- This value will be computed in the export
