@@ -191,4 +191,5 @@ migration:
       addons:
         upgrade:
           - specific_report
+          - specific_stock
           - specific_followup

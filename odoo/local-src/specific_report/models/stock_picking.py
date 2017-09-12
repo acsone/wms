@@ -20,7 +20,8 @@
 ##############################################################################
 from collections import defaultdict
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import Warning
 
 
 class StockPicking(models.Model):
@@ -49,6 +50,12 @@ class StockPicking(models.Model):
                  'move_lines.product_id',
                  'move_lines.product_uom_qty')
     def _compute_number_of_products(self):
+        type_human = self.env.ref('__setup__.stock_picking_type_humain')
+        type_cold = self.env.ref('__setup__.stock_picking_type_froid')
+        type_drug = self.env.ref('__setup__.stock_picking_type_medoc')
+        type_food = self.env.ref('__setup__.stock_picking_type_ali')
+        type_equipment = self.env.ref('__setup__.stock_picking_type_materiel')
+
         for picking in self:
             number_of_drug = 0
             number_of_cold = 0
@@ -57,42 +64,29 @@ class StockPicking(models.Model):
             number_of_equipment = 0
             number_total = 0
 
-            for line in picking.move_lines:
-                qty = line.product_uom_qty
+            for operation in picking.pack_operation_pack_ids:
+                if not operation.package_id.original_picking_type_id:
+                    raise Warning(_('There is no original picking type on '
+                                    'this operation.'))
+
+                picking_type = operation.package_id.original_picking_type_id
+
+                qty = operation.package_id.nbr_packages
                 number_total += qty
 
-                if not line.product_id or not line.product_id.categ_id:
-                    continue
-                categ = line.product_id.categ_id
-
-                main_categ = self.env.ref('product.product_category_all')
-                equipment_categ = \
-                    self.env.ref('specific_data.product_categ_materiel')
-                food_categ = self.env.ref('specific_data.product_categ_ali')
-                drug_categ = self.env.ref('specific_data.product_categ_medoc')
-                fridge_categ = self.env.ref(
-                    'specific_data.product_categ_frigo')
-                human_categ = self.env.ref(
-                    'specific_data.product_categ_humain')
-
-                # We need to have the main product category of the product
-                # Equipment, Food, Drug, Fridge, Human drug
-                while categ.parent_id and categ.parent_id != main_categ:
-                    # The human drug category is a sub category of drug.
-                    if categ == human_categ:
-                        break
-                    categ = categ.parent_id
-
-                if categ == drug_categ:
+                if picking_type == type_drug:
                     number_of_drug += qty
-                elif categ == fridge_categ:
+                elif picking_type == type_cold:
                     number_of_cold += qty
-                elif categ == food_categ:
+                elif picking_type == type_food:
                     number_of_food += qty
-                elif categ == equipment_categ:
+                elif picking_type == type_equipment:
                     number_of_equipment += qty
-                elif categ == human_categ:
+                elif picking_type == type_human:
                     number_of_human_food += qty
+                else:
+                    raise Warning(_('The picking type %s is not correct')
+                                  % picking_type.name)
 
             picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold

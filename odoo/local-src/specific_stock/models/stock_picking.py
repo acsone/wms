@@ -52,3 +52,14 @@ class StockPicking(models.Model):
                 .mapped('delivery_round_id.picking_ids')\
                 .with_context(stop_propagate_printed=True)\
                 .write({'printed': True})
+
+    @api.multi
+    def put_in_pack(self):
+        result = super(StockPicking, self).put_in_pack()
+
+        original_picking_type_id = self.mapped('picking_type_id')
+        if len(original_picking_type_id) == 1:
+            packages = self.mapped('pack_operation_ids.result_package_id')
+            packages.original_picking_type_id = original_picking_type_id.id
+
+        return result
