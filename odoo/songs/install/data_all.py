@@ -7,6 +7,7 @@ from pkg_resources import resource_stream
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
 from ..common import req, create_default_value
+from mappings import COUNTRY, PRODUCT_SALE_VAT, PRODUCT_PURCHASE_VAT
 
 
 @anthem.log
@@ -36,7 +37,26 @@ def default_values(ctx):
 
 
 @anthem.log
+def define_esb_ref_on_countries(ctx):
+    """ Define esb_res on countries """
+    for esb_ref, xmlid in COUNTRY.iteritems():
+        country = ctx.env.ref(xmlid)
+        country.esb_ref = esb_ref
+
+
+@anthem.log
+def define_esb_ref_on_taxes(ctx):
+    """ Define esb_res on taxes """
+    for taxes in [PRODUCT_SALE_VAT, PRODUCT_PURCHASE_VAT]:
+        for esb_ref, xmlid in taxes.iteritems():
+            tax = ctx.env.ref(xmlid)
+            tax.esb_ref = esb_ref
+
+
+@anthem.log
 def main(ctx):
     """ Loading data """
     default_values(ctx)
     import_delivery_carriers(ctx)
+    define_esb_ref_on_countries(ctx)
+    define_esb_ref_on_taxes(ctx)

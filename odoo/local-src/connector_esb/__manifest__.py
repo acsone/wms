@@ -30,6 +30,7 @@
         'data/install_lang.xml',
         'data/esb_backend.xml',
         'data/esb_backend_timestamp.xml',
+        'data/partner.alcyon_category.csv',
         'data/product.category.csv',
         'data/res_lang.xml',
         'data/ir_cron.xml',
