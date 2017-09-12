@@ -11,6 +11,9 @@ Unreleased
 * ALCN-143: Remove useless sale_product_additional module
 * [IMP] Don't overwrite the method action_confirm
 * ALCN-940: Improve the delivery slip and set a new logistic option
+* ALCN-881: Add the module specific followup to replace existing followup mails
+* ALCN-941: Update the round delivery
+* ALCN-964: Remove constrains on sequence
 * [IMP] Disable tracking for sale order validation and improve the code to avoid to recompute quantities when it's not needed
 
 **Bugfixes**

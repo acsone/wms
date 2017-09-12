@@ -59,9 +59,13 @@ class Print(DomainInterface):
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
 
+        quantity = int(params.Usf01)
+
         try:
             # Create a pack for this picking
-            picking.put_in_pack()
+            box = picking.put_in_pack()
+            # Set the number of packages for this picking
+            box.nbr_packages = quantity
         except Exception:
             pass
 
@@ -109,7 +113,6 @@ class Print(DomainInterface):
                 })
                 return result.format()
 
-            quantity = int(params.Usf01)
             try:
                 picking.sudo().print_products_label(printer=printer_toshiba)
                 picking.sudo().print_packages_label(quantity=quantity,

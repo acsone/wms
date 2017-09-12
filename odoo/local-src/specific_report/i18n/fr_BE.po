@@ -209,7 +209,7 @@ msgstr "Solde à livrer"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Balance to be delivered on order"
-msgstr "Solde à livrer sur commande"
+msgstr "Solde à livrer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -276,7 +276,7 @@ msgstr "Livraison:"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Credit Note"
-msgstr "Draft Credit Note"
+msgstr "Ebauche de note de crédit"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
@@ -443,7 +443,12 @@ msgstr "Vérification du passeport"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picked Quantity"
-msgstr "Quantité prévelée"
+msgstr "Quantité prélevée"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
+msgid "Print delivery round"
+msgstr "Imprimer la tournée"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -512,6 +517,18 @@ msgid "TVA"
 msgstr "TVA"
 
 #. module: specific_report
+#: code:addons/specific_report/models/stock_picking.py:88
+#, python-format
+msgid "The picking type %s is not correct"
+msgstr "Le type de prélèvement %s n'est pas correct"
+
+#. module: specific_report
+#: code:addons/specific_report/models/stock_picking.py:69
+#, python-format
+msgid "There is no original picking type on this operation."
+msgstr "Il n'y a pas de type de type de prélèvement original sur cette opération."
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Total net value"
 msgstr "Valeur nette total"
@@ -550,6 +567,11 @@ msgstr "Montant TVA"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Weight:<br/>"
 msgstr "Poids:<br/>"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_round_instance
+msgid "round.instance"
+msgstr "round.instance"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
