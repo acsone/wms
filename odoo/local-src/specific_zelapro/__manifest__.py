@@ -10,7 +10,6 @@
     'category': 'Other',
     'description': """
     Specific module for Zelapro
-    ###########################
     """,
     'depends': [
         'specific_purchase',
