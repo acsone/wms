@@ -13,6 +13,7 @@ Unreleased
 * ALCN-940: Improve the delivery slip and set a new logistic option
 * ALCN-881: Add the module specific followup to replace existing followup mails
 * ALCN-941: Update the round delivery
+* ALCN-964: Remove constrains on sequence
 
 **Bugfixes**
 
