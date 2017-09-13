@@ -14,10 +14,10 @@ env:
   global:
     - DOCKER_COMPOSE_VERSION="1.7.1"
     - TESTS="0" LINT_CHECK="0"
-    - ADDONS_DIR=${TRAVIS_BUILD_DIR}/odoo/local-src
-    - SONGS_DIR=${TRAVIS_BUILD_DIR}/odoo/songs
+    - ADDONS_DIR="${TRAVIS_BUILD_DIR}/odoo/local-src"
+    - SONGS_DIR="${TRAVIS_BUILD_DIR}/odoo/songs"
     - COMPOSE_PROJECT_NAME=alcyon
-    - GENERATED_IMAGE=${COMPOSE_PROJECT_NAME}_odoo
+    - GENERATED_IMAGE="${COMPOSE_PROJECT_NAME}_odoo"
     - DOCKER_HUB_REPO=camptocamp/alcyon_odoo
     - RANCHER_MINION_SERVER=https://alcyon.odoo-test.camptocamp.ch
     - secure: "atslypRS3lvPLWzcXYrr0Ir+dcxUP2nhE57AUQVD+gWg+OidOcY5EWKw8Sdqc6VCD8jQHpLqmEvSIgR41IdAosK8fSD5yY+d3nUVGpcbomfa0u3CtzQJvxzVnQ6yEomapl7tpqZBaheASOH/qMBunC6sl55pMRhOwecLJG9qluXwY25Xuobj3GaBJhk4qcigw0TvmxnvvCOknsuwIjrTg6AzXN6iO5KlFElr+tcHSVoFUYZfvIUR/ZuEm33crYWD3ZS1Utyvpv4HvCf0RlWZz7keW98tetsRO/re3CDmDtUJ+Hg+sO9OUnjmVBZ8U2No725AmIYv21oLEYZvarHsF7+i+miqZr4v8Ha5l/NGx5usgxJauFA0gmYUQQ/bBgFJ/xYeb4Gu0CGs3/9XmDl9XCxuV9O7E/UEDFQ4W2YVP1W5ipECgovUrT7yIcvk5mNtUVutQSaK80ZWHnKY0HUiB/wlTXyQYsJ5KGdkkfyxDyCK0+ud0YQszzaEZycRUfeTd3jRHpEoYd5929DJl3uT3CcvrmjF1ewIJiK+YKmY1ckJnF0fhV0aTuL0BzxHqsyfWlfVePH+uF7NmqHUD2E455lXM8fDHWYhEsNETcmowMW1ppPptQBNo4e9C4Qc9woSYOxUr6rGEkzHtiOrbxdsj7rr/bAVfL+W2Z496t9dws0="
