@@ -34,15 +34,11 @@ Unreleased
 * [IMP] Fix a bug with the travis.yml file
 * ALCN-886 Add CNK code on products
 
-**Bugfixes**
-
 **Build**
 
 * Optimize complete build in migration.yml file
 * Use module product_price_category from OCA instead of local sources
 * Add a update of module stock in migration.yml to avoid to have an error of updating view
-
-**Documentation**
 
 
 10.8.0 (2017-08-31)
