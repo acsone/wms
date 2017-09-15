@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.9.0 (2017-09-15)
++++++++++++++++++++
+
 **Data Migration**
 
 * Extend db2_import module to import purchase orders
