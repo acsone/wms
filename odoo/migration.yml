@@ -193,3 +193,4 @@ migration:
           - specific_report
           - specific_stock
           - specific_followup
+          - stock_refill
