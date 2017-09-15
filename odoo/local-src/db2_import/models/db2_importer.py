@@ -20,7 +20,7 @@ def convert_date(prefix, db2_row):
     if dd == 0:
         return False
     mm = db2_row[prefix + 'mm']
-    Y = "%s%s" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
+    Y = "%s%02i" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
     return "%s-%02i-%02i" % (Y, mm, dd)
 
 
