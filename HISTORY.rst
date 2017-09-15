@@ -20,6 +20,7 @@ Unreleased
 * ALCN-964: Remove constrains on sequence
 * [IMP] Disable tracking for sale order validation and improve the code to avoid to recompute quantities when it's not needed
 * [IMP] Fix a bug with the travis.yml file
+* ALCN-886 Add CNK code on products
 
 **Bugfixes**
 
