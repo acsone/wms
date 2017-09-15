@@ -444,6 +444,7 @@ class DB2ImporterTable(models.Model):
         default=2,
         help="Hour of the day when the db2 object will transformed to an odoo"
              " object")
+    where_clause = fields.Char()
 
     @api.multi
     def get_add_columns(self):
@@ -518,7 +519,7 @@ class DB2ImporterTable(models.Model):
         if '{}css'.format(self.table_prefix) in col_names:
             query = (
                 "SELECT * FROM {schema}.{table_name}"
-                " WHERE {prefix}css >= {start_age}"
+                " WHERE ({prefix}css >= {start_age}"
                 " AND {prefix}css <= {end_age}"
                 " AND {prefix}caa >= {start_year}"
                 " AND {prefix}caa <= {end_year}"
@@ -537,8 +538,10 @@ class DB2ImporterTable(models.Model):
                     " AND {prefix}mmm >= {start_month}"
                     " AND {prefix}mmm <= {end_month}"
                     " AND {prefix}mjj >= {start_day}"
-                    " AND {prefix}mjj <= {end_day}"
+                    " AND {prefix}mjj <= {end_day})"
                 )
+            else:
+                query += ")"
         else:
             query = (
                 "SELECT * FROM {schema}.{table_name}"
@@ -551,6 +554,8 @@ class DB2ImporterTable(models.Model):
                 " AND {prefix}djj >= {start_day}"
                 " AND {prefix}djj <= {end_day}"
             )
+        if self.where_clause:
+            query += " AND " + self.where_clause
         return query.format(**query_kwargs)
 
     def _setup_relations(self):
@@ -711,6 +716,7 @@ class DB2ImporterTable(models.Model):
 class DB2Importer(models.Model):
     _name = 'db2.importer'
 
+    name = fields.Char()
     last_import = fields.Date()
     date_start = fields.Date()
     date_end = fields.Date()
