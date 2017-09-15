@@ -191,6 +191,9 @@ migration:
           - anthem songs.install.logistics::activate_options
       addons:
         upgrade:
+          ### Odoo
+          # src
+          - stock
           ### local-src
           - db2_import
           - specific_report
