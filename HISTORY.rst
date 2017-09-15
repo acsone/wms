@@ -14,6 +14,7 @@ Unreleased
 * ALCN-881: Add the module specific followup to replace existing followup mails
 * ALCN-941: Update the round delivery
 * ALCN-964: Remove constrains on sequence
+* ALCN-886 Add CNK code on products
 
 **Bugfixes**
 
@@ -54,7 +55,6 @@ Unreleased
 * Reduce demo data size
 * ALCN-735 Add delivery carrier on customers
 * ALCN-674 Fix VAT import for customer and suppliers
-* ALCN-886 Add CNK code on products
 
 **Features and Improvements**
 
