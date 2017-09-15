@@ -12,6 +12,7 @@
                 <field name="substitute_purchase_manager_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
                 <field name="supplier_discount"/>
                 <field name="is_back_order_accepted"/>
+                <field name="delivery_lead_time"/>
             </xpath>
 
         </field>

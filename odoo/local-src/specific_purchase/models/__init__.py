@@ -8,3 +8,4 @@ from . import stock_picking
 from . import bank_holiday
 from . import purchase_config_settings
 from . import purchase_order_cancel
+from . import product_supplierinfo

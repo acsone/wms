@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="zelapro_export_view_form" model="ir.ui.view">
+        <field name="name">zelapro.export.view.form</field>
+        <field name="model">zelapro.export</field>
+        <field name="arch" type="xml">
+            <form string="Zelapro Export">
+                <header>
+                    <button name="execute_exports" string="Execute export" class="oe_highlight" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="sql_view" attrs="{'invisible': [('type', '!=', 'sql')], 'required': [('type', '=', 'sql')]}"/>
+                        <field name="method" attrs="{'invisible': [('type', '!=', 'method')], 'required': [('type', '=', 'method')]}"/>
+                        <field name="file_name"/>
+                        <field name="data_age"/>
+                        <field name="last_export"/>
+                        <field name="active"/>
+                    </group>
+                    <separator for="line_ids" string="Lines"/>
+                    <field name="line_ids">
+                        <tree>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="state"/>
+                            <field name="nbr_lines"/>
+                            <field name="duration"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="zelapro_export_view_tree" model="ir.ui.view">
+        <field name="name">zelapro.export.view.tree</field>
+        <field name="model">zelapro.export</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sql_view"/>
+                <field name="file_name"/>
+                <field name="last_export_datetime"/>
+                <field name="last_export_state"/>
+                <button name="execute_exports" string="Execute export" class="oe_highlight" type="object" icon="fa-play"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_zelapro_export" model="ir.actions.act_window">
+        <field name="name">Zelapro Exports</field>
+        <field name="res_model">zelapro.export</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="main_menu_zelapro" name="Zelapro" sequence="60" parent="stock.menu_stock_config_settings"/>
+    <menuitem id="menu_zelapro_export" name="Exports" sequence="5" parent="main_menu_zelapro" action="action_zelapro_export"/>
+
+    <act_window name="Execute exports"
+        res_model="zelapro.export.wizard"
+        src_model="zelapro.export"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="act_zelapro_execute_exports"
+        multi="True"/>
+
+    <record id="zelapro_export_line_view_form" model="ir.ui.view">
+        <field name="name">zelapro.export.line.view.form</field>
+        <field name="model">zelapro.export.line</field>
+        <field name="arch" type="xml">
+            <form string="Line">
+                <group>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="state"/>
+                    <field name="nbr_lines"/>
+                    <field name="duration"/>
+                </group>
+                <separator for="message" string="Message"/>
+                <field name="message"/>
+            </form>
+        </field>
+    </record>
+</odoo>

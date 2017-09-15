@@ -66,6 +66,7 @@ Unreleased
 * Reception/Picking: Hide some fields based on the context. Sequence must be asc. Prevent changing sequence for receive orders
 * ALCN-187: Add missing depends and set the type of product
 * Mark customers exported to ESB as such ('esb_exported' field)
+* ALCN-161: Add the module specific_zelapro to manage daily Zelapro exports
 
 **Bugfixes**
 

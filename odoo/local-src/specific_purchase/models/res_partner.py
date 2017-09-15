@@ -19,3 +19,4 @@ class ResPartner(models.Model):
         comodel_name='res.users',
         string='Substitute purchase manager',
     )
+    delivery_lead_time = fields.Integer('Delivery lead time')
