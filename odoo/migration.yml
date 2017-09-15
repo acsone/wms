@@ -191,6 +191,8 @@ migration:
           - anthem songs.install.logistics::activate_options
       addons:
         upgrade:
+          ### local-src
+          - db2_import
           - specific_report
           - specific_stock
           - specific_followup
