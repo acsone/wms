@@ -28,6 +28,9 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
+        if self._context.get('nogrouppicking'):
+            return super(StockMove, self).assign_picking()
+
         moves_to_group = self.filtered(
             lambda x: x.picking_type_id.groupbypartner)
         moves_to_not_group = self - moves_to_group
