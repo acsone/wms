@@ -145,9 +145,7 @@ class ZelaproExport(models.Model):
             })
 
             try:
-                fname = date.strftime(date.today(),
-                                      '%Y%m%d') + '_%s' % export.file_name
-                file_path = os.path.join(export_path, fname)
+                file_path = os.path.join(export_path, export.file_name)
 
                 # If there is a data age on this export
                 # we will compute the minimum creation date according
@@ -340,6 +338,7 @@ class ZelaproExport(models.Model):
 
                 additional_product_id = value['additional_product_id']
                 if additional_product_id:
+                    additional_product_id = additional_product_id[0]
                     additional_product_index = product_index + 1
                     additional_product_supplier = supplier_id
 
@@ -490,6 +489,89 @@ class ZelaproExport(models.Model):
         # Step 2 : Retrieve values on lots #
         ####################################
         domain = [('is_archived', '=', False)]
+
+        if min_creation_date_str:
+            domain.append(('creation_date', '>', min_creation_date_str))
+        lots = self.env['stock.production.lot'].search(domain)
+        lot_values = lots.read(['product_qty'])
+
+        values_by_lot = {}
+        for value in lot_values:
+            values_by_lot[value['id']] = {
+                'product_qty': value['product_qty'],
+            }
+
+        ################################################
+        # Step 3 : Insert result from step 2 in result #
+        ################################################
+        header.remove('LOT_ID')
+        product_qty_on_lot = header.index(PRODUCT_QTY_ON_LOT_KEY)
+
+        rows = []
+        for line in result:
+            row = list(line)
+            lot_id = int(row.pop())
+
+            if lot_id in values_by_lot:
+                value = values_by_lot[lot_id]
+                product_qty = value['product_qty']
+            else:
+                product_qty = 0
+
+            row[product_qty_on_lot] = product_qty
+            rows.append(row)
+
+        return header, rows
+
+    @api.multi
+    def export_stocks(self, min_creation_date_str=None):
+        """
+        Export stocks.
+        This export need to retrieve some values from the ORM
+        (values not reachable from SQL).
+
+        Step 1:
+        To improve the execution time we will export all other values with
+        the view SQL 'zelapro_export_stock' (like other exports)
+
+        Step 2:
+        Retrieve all required values with the method read on lot
+
+        Step 3:
+        Replace these values (from step 2) in the result of the query (step 1)
+        :param min_creation_date_str:
+        :return:
+        """
+        self.ensure_one()
+
+        #############################
+        # Step 1 : Execute SQL view #
+        #############################
+        columns_query = """
+                    SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_name = 'zelapro_export_stock'
+                    ORDER BY ordinal_position;
+                    """
+        self.env.cr.execute(columns_query)
+        header = [x[0].upper() for x in self.env.cr.fetchall()]
+        # Each Zelapro export should have a column create_date
+        # However we don't want to have this column in the CSV
+        header.remove('CREATE_DATE')
+
+        query = "SELECT %s FROM zelapro_export_stock" % (','.join(header))
+
+        if min_creation_date_str:
+            query += " WHERE create_date > '%s'" % \
+                     min_creation_date_str
+        self.env.cr.execute(query)
+
+        result = self.env.cr.fetchall()
+
+        ########################################
+        # Step 2 : Retrieve values on products #
+        ########################################
+        domain = []
 
         if min_creation_date_str:
             domain.append(('creation_date', '>', min_creation_date_str))

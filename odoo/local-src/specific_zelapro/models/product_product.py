@@ -164,6 +164,12 @@ class ProductProduct(models.Model):
         if not abc_rates:
             raise UserError(_('Please define a least one ABC rate'))
 
+        # We want to recompute the ABC code for all products
+        # Products without invoices or deactivated products must be have
+        # an empty ABC code
+        remove_abc_query = "UPDATE product_product SET abc_id = NULL;"
+        self.env.cr.execute(remove_abc_query)
+
         business_units = self.env['product.category'].search(
             [('is_business_unit', '=', True)]
         )
@@ -184,6 +190,7 @@ class ProductProduct(models.Model):
             FROM product_product
             WHERE active = TRUE
             AND business_unit_id = %s
+            AND turnover > 0
             GROUP BY turnover
             ORDER BY turnover DESC;
             """
@@ -256,6 +263,16 @@ class ProductProduct(models.Model):
 
                         if not abc_rates_lst:
                             break
+
+    @api.multi
+    def update_abc_code(self):
+        """
+        This method will update the turnover by product
+        and recompute the ABC code
+        :return:
+        """
+        self.compute_turnover_by_product()
+        self.compute_abc_rate()
 
 
 class ProductTemplate(models.Model):

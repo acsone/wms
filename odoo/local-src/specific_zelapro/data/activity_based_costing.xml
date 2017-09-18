@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="abc_a" model="activity.based.costing">
+        <field name="code">A</field>
+        <field name="rate">80</field>
+    </record>
+
+    <record id="abc_b" model="activity.based.costing">
+        <field name="code">B</field>
+        <field name="rate">95</field>
+    </record>
+
+    <record id="abc_c" model="activity.based.costing">
+        <field name="code">C</field>
+        <field name="rate">100</field>
+    </record>
+</odoo>

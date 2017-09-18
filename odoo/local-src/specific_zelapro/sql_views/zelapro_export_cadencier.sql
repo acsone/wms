@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
   SELECT
     info.name AS SFDSUI,
     '' AS SFDNLI, -- This value will be computed in the export
-    product_tmpl.default_code AS SFDART,
+    product.default_code AS SFDART,
     product_tmpl.name AS SFDDEN,
     '' AS SFDQTE,
     '' AS SFDQMO,
@@ -13,7 +13,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     COALESCE(info.discount_purchase, 0) AS SFDR2O,
     '' AS SFDR2M,
     to_char(NOW() + format('%s days', COALESCE(info.delay, 0))::INTERVAL, 'YYYYMMDD') AS SFEDLI,
-    '' AS LIBDLI,
+    to_char(NOW() + format('%s days', COALESCE(info.delay, 0))::INTERVAL, 'DD/MM/YYYY') AS LIBDLI,
     '' AS SFDDMO,
     '' AS LIBDMO,
     CASE
@@ -37,5 +37,6 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     info.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_supplierinfo AS info
     INNER JOIN product_template AS product_tmpl ON info.product_tmpl_id = product_tmpl.id
+    LEFT JOIN product_product AS product ON product.id = (SELECT min(id) FROM product_product WHERE product_tmpl_id = info.product_tmpl_id)
     INNER JOIN res_partner AS supplier ON info.name = supplier.id
   ORDER BY info.name, product_tmpl.default_code;

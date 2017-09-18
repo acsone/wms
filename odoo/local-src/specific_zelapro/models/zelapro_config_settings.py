@@ -58,3 +58,20 @@ class ZelaproConfigSettings(models.TransientModel):
         self.env['ir.config_parameter']\
             .set_param('zelapro.turnover_delay',
                        str(self.turnover_delay))
+
+    @api.multi
+    def recompute_all_business_unit_id(self):
+        """
+        Force Odoo to recompute the business unit on each product
+        :return:
+        """
+        products = self.env['product.product'].search([])
+        products._compute_business_unit_id()
+
+    @api.multi
+    def recompute_all_abc_code(self):
+        """
+        Update the Turnover and recompute the ABC code for all products
+        """
+        products = self.env['product.product'].search([])
+        products.update_abc_code()

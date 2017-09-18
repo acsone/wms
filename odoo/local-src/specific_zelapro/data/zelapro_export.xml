@@ -4,7 +4,7 @@
         <field name="name">Cadencier header</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_cadencier_header</field>
-        <field name="file_name">cadencier_header.csv</field>
+        <field name="file_name">Cadencier_Entête_All.csv</field>
         <field name="data_age">0</field>
     </record>
 
@@ -12,7 +12,7 @@
         <field name="name">Cadencier</field>
         <field name="type">method</field>
         <field name="method">export_cadencier</field>
-        <field name="file_name">cadencier.csv</field>
+        <field name="file_name">Cadencier_Détail_All.csv</field>
         <field name="data_age">0</field>
     </record>
 
@@ -20,7 +20,7 @@
         <field name="name">Contacts</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_contacts</field>
-        <field name="file_name">contacts.csv</field>
+        <field name="file_name">Contacts.csv</field>
         <field name="data_age">0</field>
     </record>
 
@@ -28,7 +28,7 @@
         <field name="name">Lot Moves</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_lot_moves</field>
-        <field name="file_name">lot_moves.csv</field>
+        <field name="file_name">Mouvements_Lots.csv</field>
         <field name="data_age">24</field>
     </record>
 
@@ -36,7 +36,7 @@
         <field name="name">Lots</field>
         <field name="type">method</field>
         <field name="method">export_lots</field>
-        <field name="file_name">lots.csv</field>
+        <field name="file_name">Lots.csv</field>
         <field name="data_age">0</field>
     </record>
 
@@ -44,7 +44,7 @@
         <field name="name">Products</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_products</field>
-        <field name="file_name">products.csv</field>
+        <field name="file_name">Articles.csv</field>
         <field name="data_age">0</field>
     </record>
 
@@ -52,7 +52,7 @@
         <field name="name">Promotions</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_promotions</field>
-        <field name="file_name">promotions.csv</field>
+        <field name="file_name">Promotions.csv</field>
         <field name="data_age">24</field>
     </record>
 
@@ -60,7 +60,7 @@
         <field name="name">Stock Moves</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_stock_moves</field>
-        <field name="file_name">stock_moves.csv</field>
+        <field name="file_name">Mouvements_Stock.csv</field>
         <field name="data_age">24</field>
     </record>
 
@@ -68,7 +68,15 @@
         <field name="name">Suppliers</field>
         <field name="type">sql</field>
         <field name="sql_view">zelapro_export_suppliers</field>
-        <field name="file_name">suppliers.csv</field>
+        <field name="file_name">Fournisseurs.csv</field>
+        <field name="data_age">0</field>
+    </record>
+
+    <record id="zelapro_export_stock" model="zelapro.export">
+        <field name="name">Stock</field>
+        <field name="type">method</field>
+        <field name="method">export_stocks</field>
+        <field name="file_name">Stocks.csv</field>
         <field name="data_age">0</field>
     </record>
 </odoo>

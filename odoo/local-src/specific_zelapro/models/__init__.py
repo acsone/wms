@@ -6,3 +6,4 @@ from . import zelapro_config_settings
 from . import activity_based_costing
 from . import product_product
 from . import product_category
+from . import import_cadencier

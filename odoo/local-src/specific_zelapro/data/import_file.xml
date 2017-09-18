@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="import_cadencier_header" model="import.file">
+        <field name="name">Import Cadencier Header</field>
+        <field name="importer">import.cadencier.header</field>
+        <field name="filename">Cadencier_Entête_All.csv</field>
+        <field name="file_type">csv</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="import_cadencier_details" model="import.file">
+        <field name="name">Import Cadencier Details</field>
+        <field name="importer">import.cadencier</field>
+        <field name="filename">Cadencier_Détail_All.csv</field>
+        <field name="file_type">csv</field>
+        <field name="sequence">20</field>
+    </record>
+</odoo>

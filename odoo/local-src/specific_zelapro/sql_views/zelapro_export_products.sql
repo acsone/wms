@@ -12,9 +12,9 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS GESCRF,
     '' AS GESUNA,
     COALESCE(purchase_uom.name, '') AS LIBUNA,
-    1  AS GESCOA,
+    1  AS GESCOA, -- A vérifier => Pas toujours 1
     '' AS GESNBP,
-    COALESCE(supplierinfo.delay, 0) AS GESDEL,
+    COALESCE(supplierinfo.delay, 0) AS GESDEL, -- Problème avec les valeurs
     '' AS GESECS,
     '' AS GESBPV,
     '' AS GESUNV,
@@ -46,10 +46,10 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS GESCRE,
     '' AS LIBCRE,
     '' AS GESCHR,
-    '' AS LIBCHR,
+    state.name AS LIBCHR, -- Pas alimenter par Odoo
     COALESCE((SELECT ir_property.value_float
      FROM ir_property
-     WHERE ir_property.res_id = 'product.product,' || product.id), 0) AS GESPAB,
+     WHERE ir_property.res_id = 'product.product,' || product.id), 0) AS GESPAB, -- N'est pas récupéré. A vérifier !!!!!
     COALESCE(supplierinfo.price, 0) AS GESPAN,
     '' AS GESPRR,
     COALESCE(product_tmpl.list_price, 0) AS GESPVR,
@@ -74,7 +74,7 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CPLZ21,
     '' AS CPLZ24,
     '' AS CPLZ29,
-    COALESCE(product_tmpl.unit_in_box, 0) AS CPLZ30,
+    COALESCE(product_tmpl.unit_in_box, 0) AS CPLZ30, -- A importer
     '' AS CPLZ18,
     '' AS CPLZ19,
     '' AS CPLZ22,
@@ -83,7 +83,7 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CP2Z01,
     COALESCE(product_tmpl.unit_in_shrink_wrap, 0) AS CP2Z02,
     '' AS CP2Z03,
-    COALESCE(product_tmpl.unit_in_box, 0) AS CP2Z04,
+    COALESCE(product_tmpl.unit_in_box, 0) AS CP2Z04, -- A importer
     '' AS CP2Z05,
     '' AS CP2Z06,
     '' AS CP2Z08,
@@ -104,14 +104,14 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CP2Z20,
     '' AS CP2Z21,
     '' AS LIBZ21,
-    COALESCE(product_add.default_code, '') AS CP2Z22,
-    COALESCE(bom_line.product_qty, 0) AS CP2Z23,
-    COALESCE(bom_line.product_qty, 0) AS CP2Z24,
-    COALESCE(abc.code, '') AS ABCCOD,
-    product.turnover AS ABCVAV,
-    product.turnover_average AS ABCPCV,
-    product.turnover_nbr_lines AS ABCNLI,
-    product.turnover_average_nbr_lines AS ABCPLI,
+    COALESCE(product_add.default_code, '') AS CP2Z22, -- A vérifier
+    COALESCE(bom_line.product_qty, 0) AS CP2Z23, -- A vérifier
+    COALESCE(bom_line.product_qty, 0) AS CP2Z24, -- A vérifier
+    COALESCE(abc.code, '') AS ABCCOD, -- A vérifier
+    product.turnover AS ABCVAV, -- A vérifier
+    product.turnover_average AS ABCPCV, -- A vérifier
+    product.turnover_nbr_lines AS ABCNLI, -- A vérifier
+    product.turnover_average_nbr_lines AS ABCPLI, -- A vérifier
     '' AS ABCPSE,
     product.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_product AS product
@@ -128,4 +128,5 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     LEFT JOIN mrp_bom_line AS bom_line ON bom_line.id = (SELECT min(id) FROM mrp_bom_line WHERE mrp_bom_line.bom_id = bom.id AND mrp_bom_line.is_additional_product = TRUE)
     LEFT JOIN product_category AS product_sub_category ON product_tmpl.categ_id = product_sub_category.id
     LEFT JOIN product_category AS product_category ON product_sub_category.parent_id = product_category.id
+    LEFT JOIN product_state AS state ON product_tmpl.state_id = state.id
   WHERE product.active = TRUE;
