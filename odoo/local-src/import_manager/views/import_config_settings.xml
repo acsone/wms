@@ -9,8 +9,10 @@
                     <button string="Apply" type="object" name="execute" class="oe_highlight"/>
                     <button string="Cancel" type="object" name="cancel" class="oe_link"/>
                 </header>
-                <group string="Imports">
-                    <field name="import_path"/>
+                <group string="Imports" name="import_configuration">
+                    <field name="import_in_path"/>
+                    <field name="import_out_path"/>
+                    <field name="import_failure_path"/>
                 </group>
             </form>
         </field>

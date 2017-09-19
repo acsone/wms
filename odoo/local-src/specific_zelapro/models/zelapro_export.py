@@ -23,8 +23,10 @@ ACCESSORY_LINE_NO_KEY = 'SFANLA'
 MAIN_PRODUCT_SUPPLIER_KEY = 'SFASUP'
 MAIN_PRODUCT_LINE_NO_KEY = 'SFANLP'
 
-# Lots export keys
-PRODUCT_QTY_ON_LOT_KEY = 'LOTACT'
+# Stock export keys
+STOCK_QTY_ON_HAND_KEY = 'STOSTO'
+STOCK_QTY_RESERVED_KEY = 'STORES'
+STOCK_QTY_AVAILABLE_KEY = 'STODIS'
 
 
 class ZelaproExport(models.Model):
@@ -441,89 +443,6 @@ class ZelaproExport(models.Model):
         return header, rows
 
     @api.multi
-    def export_lots(self, min_creation_date_str=None):
-        """
-        Export lots.
-        This export need to retrieve some values from the ORM
-        (values not reachable from SQL).
-
-        Step 1:
-        To improve the execution time we will export all other values with
-        the view SQL 'zelapro_export_lots' (like other exports)
-
-        Step 2:
-        Retrieve all required values with the method read on lot
-
-        Step 3:
-        Replace these values (from step 2) in the result of the query (step 1)
-        :param min_creation_date_str:
-        :return:
-        """
-        self.ensure_one()
-
-        #############################
-        # Step 1 : Execute SQL view #
-        #############################
-        columns_query = """
-                SELECT column_name
-                FROM information_schema.columns
-                WHERE table_name = 'zelapro_export_lots'
-                ORDER BY ordinal_position;
-                """
-        self.env.cr.execute(columns_query)
-        header = [x[0].upper() for x in self.env.cr.fetchall()]
-        # Each Zelapro export should have a column create_date
-        # However we don't want to have this column in the CSV
-        header.remove('CREATE_DATE')
-
-        query = "SELECT %s FROM zelapro_export_lots" % (','.join(header))
-
-        if min_creation_date_str:
-            query += " WHERE create_date > '%s'" % \
-                     min_creation_date_str
-        self.env.cr.execute(query)
-
-        result = self.env.cr.fetchall()
-
-        ####################################
-        # Step 2 : Retrieve values on lots #
-        ####################################
-        domain = [('is_archived', '=', False)]
-
-        if min_creation_date_str:
-            domain.append(('creation_date', '>', min_creation_date_str))
-        lots = self.env['stock.production.lot'].search(domain)
-        lot_values = lots.read(['product_qty'])
-
-        values_by_lot = {}
-        for value in lot_values:
-            values_by_lot[value['id']] = {
-                'product_qty': value['product_qty'],
-            }
-
-        ################################################
-        # Step 3 : Insert result from step 2 in result #
-        ################################################
-        header.remove('LOT_ID')
-        product_qty_on_lot = header.index(PRODUCT_QTY_ON_LOT_KEY)
-
-        rows = []
-        for line in result:
-            row = list(line)
-            lot_id = int(row.pop())
-
-            if lot_id in values_by_lot:
-                value = values_by_lot[lot_id]
-                product_qty = value['product_qty']
-            else:
-                product_qty = 0
-
-            row[product_qty_on_lot] = product_qty
-            rows.append(row)
-
-        return header, rows
-
-    @api.multi
     def export_stocks(self, min_creation_date_str=None):
         """
         Export stocks.
@@ -575,33 +494,44 @@ class ZelaproExport(models.Model):
 
         if min_creation_date_str:
             domain.append(('creation_date', '>', min_creation_date_str))
-        lots = self.env['stock.production.lot'].search(domain)
-        lot_values = lots.read(['product_qty'])
+        products = self.env['product.product'].search(domain)
 
-        values_by_lot = {}
-        for value in lot_values:
-            values_by_lot[value['id']] = {
-                'product_qty': value['product_qty'],
+        products_values = products.read(['qty_available',
+                                         'outgoing_qty',
+                                         'immediately_usable_qty'])
+        values_by_product_id = {}
+        for product_values in products_values:
+            values_by_product_id[product_values['id']] = {
+                'qty_available': product_values['qty_available'],
+                'outgoing_qty': product_values['outgoing_qty'],
+                'immediately_usable_qty':
+                    product_values['immediately_usable_qty'],
             }
 
         ################################################
         # Step 3 : Insert result from step 2 in result #
         ################################################
-        header.remove('LOT_ID')
-        product_qty_on_lot = header.index(PRODUCT_QTY_ON_LOT_KEY)
+        header.remove('PRODUCT_ID')
+        stock_qty_on_hand_index = header.index(STOCK_QTY_ON_HAND_KEY)
+        stock_qty_reserved_index = header.index(STOCK_QTY_RESERVED_KEY)
+        stock_qty_available_index = header.index(STOCK_QTY_AVAILABLE_KEY)
 
         rows = []
         for line in result:
             row = list(line)
-            lot_id = int(row.pop())
+            product_id = int(row.pop())
 
-            if lot_id in values_by_lot:
-                value = values_by_lot[lot_id]
-                product_qty = value['product_qty']
+            if product_id in values_by_product_id:
+                value = values_by_product_id[product_id]
+                qty_available = value['qty_available']
+                outgoing_qty = value['outgoing_qty']
+                immediately_usable_qty = value['immediately_usable_qty']
             else:
-                product_qty = 0
+                qty_available = outgoing_qty = immediately_usable_qty = 0
 
-            row[product_qty_on_lot] = product_qty
+            row[stock_qty_on_hand_index] = qty_available
+            row[stock_qty_reserved_index] = outgoing_qty
+            row[stock_qty_available_index] = immediately_usable_qty
             rows.append(row)
 
         return header, rows

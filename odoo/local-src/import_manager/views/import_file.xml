@@ -13,6 +13,7 @@
                     <field name="sequence"/>
                     <field name="importer"/>
                     <field name="filename"/>
+                    <field name="is_regex"/>
                     <field name="file_type"/>
                     <field name="active"/>
                     <field name="last_import"/>
@@ -38,6 +39,7 @@
                 <field name="sequence"/>
                 <field name="importer"/>
                 <field name="filename"/>
+                <field name="is_regex"/>
                 <field name="file_type"/>
                 <field name="active"/>
                 <field name="last_import"/>

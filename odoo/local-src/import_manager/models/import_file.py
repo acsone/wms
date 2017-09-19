@@ -4,6 +4,7 @@
 import logging
 import re
 import os
+import traceback
 from datetime import datetime
 
 from openerp import models, fields, api, _
@@ -41,6 +42,7 @@ class ImportFile(models.Model):
         help="The filename with extension. "
              "You can use datetime directives (like %Y, %m, ...)."
              "datetime.now() will be use to evaluate the filename.")
+    is_regex = fields.Boolean('Filename with regex')
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     last_import = fields.Datetime(compute='_compute_last_import',
@@ -53,10 +55,10 @@ class ImportFile(models.Model):
     @api.constrains('filename')
     def check_filename(self):
         for import_file in self:
-            import_file.get_filename()
+            import_file.get_filename_pattern()
 
     @api.multi
-    def get_filename(self):
+    def get_filename_pattern(self):
         """
         Format the filename to evaluate datetime directives.
         E.G: The current date is 2017-09-24
@@ -115,26 +117,51 @@ class ImportFile(models.Model):
                               'configuration before execute the first import')
                             )
 
-        filename = self.get_filename()
+        filename_pattern = self.get_filename_pattern()
+        files_to_import = []
+        for filename in os.listdir(import_path):
+            file_path = os.path.join(import_path, filename)
+            if self.is_regex and re.match(filename_pattern, filename):
+                files_to_import.append(file_path)
+            elif filename == filename_pattern:
+                files_to_import.append(file_path)
 
-        file_path = os.path.join(import_path, filename)
-        if not os.path.isfile(file_path):
-            self.env['import.logger'].create({
-                'name': import_model._description or import_model._name,
-                'file': file_path,
-                'state': 'skip',
-                'import_file_id': self.id,
-            })
+        if not files_to_import:
             return
 
-        if self.file_type == 'csv':
-            # Init the import
-            logger_id = import_model.init_csv_file(file_path, self.id)
-        else:
-            raise UserError(_('File type %s unknown') % self.file_type)
+        for file_to_import in files_to_import:
+            # Load the file in DB
+            if self.file_type == 'csv':
+                logger_id = \
+                    import_model.init_csv_file(file_to_import, self.id)
+            else:
+                raise UserError(_('File type %s unknown') % self.file_type)
 
-        if not logger_id:
-            return
+            if not logger_id:
+                return
+            logger = self.env['import.logger'].browse(logger_id)
 
-        # Execute the import
-        import_model.execute_import(logger_id)
+            try:
+                # Execute the import
+                result = import_model.execute_import(logger_id)
+                if result:
+                    self.env['import.logger'].browse(logger_id).write({
+                        'state': 'success',
+                        'date_end': fields.Datetime.now(),
+                    })
+                else:
+                    logger.write({
+                        'state': 'error',
+                        'date_end': fields.Datetime.now(),
+                    })
+            except:
+                logger.line_ids.create({
+                    'name': 'Not handled error during import execution',
+                    'level': 'error',
+                    'traceback': traceback.format_exc(),
+                    'logger_id': logger.id,
+                })
+                logger.write({
+                    'state': 'error',
+                    'date_end': fields.Datetime.now(),
+                })

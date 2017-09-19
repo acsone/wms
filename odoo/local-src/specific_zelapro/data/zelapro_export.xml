@@ -34,8 +34,8 @@
 
     <record id="zelapro_export_lots" model="zelapro.export">
         <field name="name">Lots</field>
-        <field name="type">method</field>
-        <field name="method">export_lots</field>
+        <field name="type">sql</field>
+        <field name="sql_view">zelapro_export_lots</field>
         <field name="file_name">Lots.csv</field>
         <field name="data_age">0</field>
     </record>

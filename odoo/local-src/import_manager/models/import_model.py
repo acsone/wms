@@ -16,6 +16,8 @@ class ImportModel(models.AbstractModel):
     _name = 'import.model'
     delimiter = ';'
 
+    columns_mapping = {}
+
     @api.multi
     def init_csv_file(self, file_path, import_file_id):
         """
@@ -47,10 +49,6 @@ class ImportModel(models.AbstractModel):
                 'level': 'error',
                 'traceback': traceback.format_exc()
             })
-            logger.write({
-                'state': 'error',
-                'date_end': fields.Datetime.now(),
-            })
             return False
 
         try:
@@ -63,21 +61,21 @@ class ImportModel(models.AbstractModel):
                 'level': 'error',
                 'traceback': traceback.format_exc()
             })
-            logger.write({
-                'state': 'error',
-                'date_end': fields.Datetime.now(),
-            })
             return False
 
         with open(file_path, 'r') as file:
             first_line = file.readline()
             first_line = first_line.replace('\r', '').replace('\n', '')
 
-            file_columns = [column.lower() for column
-                            in first_line.split(self.delimiter)]
-            model_columns = self._fields.keys()
+            file_columns = []
+            for column in first_line.split(self.delimiter):
+                # If the CSV contains text delimiter we need to remote it
+                if column[0] == '"' and column[-1] == '"':
+                    column = column[1:][:-1]
+                file_columns.append(column)
 
-            missing_columns = set(file_columns) - set(model_columns)
+            missing_columns = [column for column in file_columns if
+                               column not in self.columns_mapping]
             if missing_columns:
                 logger.line_ids.create({
                     'level': 'error',
@@ -85,17 +83,16 @@ class ImportModel(models.AbstractModel):
                             ', '.join(missing_columns),
                     'logger_id': logger.id
                 })
-                logger.write({
-                    'state': 'error',
-                    'date_end': fields.Datetime.now(),
-                })
                 return False
+
+            odoo_columns = [self.columns_mapping[column] for column in
+                            file_columns]
 
             copy_query = """
             COPY %s (%s)
             FROM STDIN
             WITH DELIMITER '%s' CSV;
-            """ % (self._table, ','.join(file_columns), self.delimiter)
+            """ % (self._table, ','.join(odoo_columns), self.delimiter)
 
             try:
                 # Copy the value of the file in the table
@@ -109,10 +106,6 @@ class ImportModel(models.AbstractModel):
                     'level': 'error',
                     'traceback': traceback.format_exc(),
                     'logger_id': logger.id,
-                })
-                logger.write({
-                    'state': 'error',
-                    'date_end': fields.Datetime.now(),
                 })
                 return False
 

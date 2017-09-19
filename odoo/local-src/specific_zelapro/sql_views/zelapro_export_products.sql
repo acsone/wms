@@ -104,14 +104,14 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CP2Z20,
     '' AS CP2Z21,
     '' AS LIBZ21,
-    COALESCE(product_add.default_code, '') AS CP2Z22, -- A vérifier
-    COALESCE(bom_line.product_qty, 0) AS CP2Z23, -- A vérifier
-    COALESCE(bom_line.product_qty, 0) AS CP2Z24, -- A vérifier
-    COALESCE(abc.code, '') AS ABCCOD, -- A vérifier
-    product.turnover AS ABCVAV, -- A vérifier
-    product.turnover_average AS ABCPCV, -- A vérifier
-    product.turnover_nbr_lines AS ABCNLI, -- A vérifier
-    product.turnover_average_nbr_lines AS ABCPLI, -- A vérifier
+    COALESCE(product_add.default_code, '') AS CP2Z22,
+    COALESCE(bom_line.product_qty, 0) AS CP2Z23,
+    COALESCE(bom_line.product_qty, 0) AS CP2Z24,
+    COALESCE(abc.code, '') AS ABCCOD,
+    product.turnover AS ABCVAV,
+    product.turnover_average AS ABCPCV,
+    product.turnover_nbr_lines AS ABCNLI,
+    product.turnover_average_nbr_lines AS ABCPLI,
     '' AS ABCPSE,
     product.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_product AS product

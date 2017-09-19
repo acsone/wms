@@ -8,7 +8,7 @@ def convert_to_uft_8(file_path):
         result = cchardet.detect(msg)
         encoding = result.get('encoding')
 
-        if encoding.lower() == 'utf-8':
+        if encoding == 'ASCII':
             return
 
         if not encoding:

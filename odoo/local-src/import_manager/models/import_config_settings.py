@@ -8,25 +8,44 @@ class ImportConfigSettings(models.TransientModel):
     _name = 'import.config.settings'
     _inherit = 'res.config.settings'
 
-    import_path = fields.Char('Export path', required=True)
-    export_encoding = fields.Char('Export encoding',
-                                  required=True,
-                                  default='utf-8')
+    import_in_path = fields.Char('Import IN path', required=True)
+    import_out_path = fields.Char('Import OUT path', required=True)
+    import_failure_path = fields.Char('Import FAILURE path', required=True)
 
     @api.model
     def default_get(self, fields):
         res = super(ImportConfigSettings, self).default_get(fields)
 
         config_param = self.env['ir.config_parameter']
-        if not fields or 'import_path' in fields:
-            export_path = config_param.get_param('import.import_path')
-            res['import_path'] = export_path
+        if not fields or 'import_in_path' in fields:
+            import_in_path = config_param.get_param('import.import_in_path')
+            res['import_in_path'] = import_in_path
+        if not fields or 'import_out_path' in fields:
+            import_out_path = config_param.get_param('import.import_out_path')
+            res['import_out_path'] = import_out_path
+        if not fields or 'import_failure_path' in fields:
+            import_failure_path = config_param.get_param('import.import_failure_path')
+            res['import_failure_path'] = import_failure_path
 
         return res
 
     @api.multi
-    def set_import_path(self):
+    def set_import_in_path(self):
         self.ensure_one()
 
         self.env['ir.config_parameter']\
-            .set_param('import.import_path', self.import_path)
+            .set_param('import.import_in_path', self.import_in_path)
+
+    @api.multi
+    def set_import_out_path(self):
+        self.ensure_one()
+
+        self.env['ir.config_parameter'] \
+            .set_param('import.import_out_path', self.import_out_path)
+
+    @api.multi
+    def set_import_failure_path(self):
+        self.ensure_one()
+
+        self.env['ir.config_parameter'] \
+            .set_param('import.import_failure_path', self.import_failure_path)

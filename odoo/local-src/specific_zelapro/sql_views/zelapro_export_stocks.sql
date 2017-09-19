@@ -3,15 +3,15 @@ CREATE OR REPLACE VIEW zelapro_export_stock AS
     '' AS STOSUC,
     '' AS STOLOP,
     product.default_code AS STOREF,
-    '' AS STOSTO,
-    '' AS STORES,
-    '' AS STODIS,
+    '' AS STOSTO, -- This value will be computed in the export
+    '' AS STORES, -- This value will be computed in the export
+    '' AS STODIS, -- This value will be computed in the export
     '' AS STOBOR,
-    product_tmpl.stock_minimum AS STOMIN,
-    product_tmpl.stock_maximum AS STOMAX,
+    COALESCE(product_tmpl.stock_minimum, 0) AS STOMIN,
+    COALESCE(product_tmpl.stock_maximum, 0) AS STOMAX,
     '' AS STOCMO,
-    '' AS DERNIERE_ENTREE,
-    '' AS DERNIERE_SORTIE,
+    COALESCE(to_char((SELECT max(in_date) FROM stock_quant WHERE product_id = product.id AND qty > 0), 'DD/MM/YYYY'), '') AS DERNIERE_ENTREE,
+    COALESCE(to_char((SELECT max(in_date) FROM stock_quant WHERE product_id = product.id AND qty < 0), 'DD/MM/YYYY'), '') AS DERNIERE_SORTIE,
     '' AS PLUS_ANCIEN_BO,
     '' AS STOCDE,
     product.id AS product_id,

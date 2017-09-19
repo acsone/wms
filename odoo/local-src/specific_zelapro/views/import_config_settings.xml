@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="import_config_settings_view_form" model="ir.ui.view">
+        <field name="name">import.config.settings.view.form</field>
+        <field name="model">import.config.settings</field>
+        <field name="inherit_id" ref="import_manager.import_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='import_configuration']" position="inside">
+                <field name="locale"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
