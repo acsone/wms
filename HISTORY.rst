@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* ALCN-959: Set esb_ref for some models
+
 **Documentation**
 
 

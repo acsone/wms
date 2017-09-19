@@ -200,3 +200,13 @@ migration:
           - specific_stock
           - specific_followup
           - stock_refill
+    - version: 10.10.0
+      operations:
+        post:
+          - anthem songs.install.sales::import_pricelist
+          - anthem songs.install.data_all::define_esb_ref_on_countries
+          - anthem songs.install.data_all::define_esb_ref_on_taxes
+      addons:
+        upgrade:
+          ### local-src
+          - connector_esb
