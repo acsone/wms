@@ -2,11 +2,12 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============
+==============
 Refund invoice
-=============
+==============
 
-* Create a supplier/customer refund invoice
+* Add sale/purchase refund type on account journal
+* Use these account journals on supplier/customer refund invoice
 
 Credits
 =======

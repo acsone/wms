@@ -8,8 +8,9 @@ Specific Product
 
 This module adds Alcyon specific fields and logic for products:
 
-* On product tree view, replace volume and weight columns by sale price 1 (list price) and sale price 2 (from price list)
-* Add a indicated price on product. This price will be displayed on product labels
+* On product template, add sale price 1 (list price) and sale price 2 (from price list)
+* Add a indicated price on product. This price will be displayed on product labels.
+* Add some fields on product.
 
 Credits
 =======

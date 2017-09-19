@@ -6,16 +6,20 @@
 Discount Pricelist
 ==================
 
-This module adds two promotion types on sale order:
+This module adds two promotion types on sale order and account invoice:
 
 * Supplier promotion
 * Alcyon discount pricelist
 
 The supplier promotion is computed with promotion defined on supplierinfo.
 And on the partner and the sale order, you can allow or not this computation.
+The default discount pricelist to use on sale order is defined on partner.
 
 So base pricelist contains crude price of products and Alcyon
 can applied two discounts on these prices.
+
+This module also allow to define a promotion on supplierinfo for purchase order.
+And on the partner and the purchase order, you can allow or not this promotion.
 
 
 Usage
