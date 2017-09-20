@@ -27,7 +27,7 @@ class StockMove(models.Model):
             delivery_round = picking.delivery_round_id
             if not delivery_round:
                 _logger.debug(
-                    "Searching a delivery round for picking %s to assign" %
+                    "Searching a delivery round for picking %s to assign",
                     picking.id)
                 delivery_round = self.env['round.instance'].find(
                     picking.partner_id)

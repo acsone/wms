@@ -137,7 +137,7 @@ class ZelaproExport(models.Model):
             raise UserError(_('Please set a delimiter in Zelapro config'))
 
         for export in self:
-            _logger.info('Start export %s' % export.name)
+            _logger.info('Start export %s', export.name)
             time_start = time.time()
             logger = export.line_ids.create({
                 'zelapro_export_id': export.id,

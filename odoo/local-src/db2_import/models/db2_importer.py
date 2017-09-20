@@ -688,7 +688,7 @@ class DB2ImporterTable(models.Model):
             cpt += 1
             if cpt % 10 == 0 or cpt == len(rows):
                 _logger.info(
-                    'INSERT %s %s on %s' % (self.table_name, cpt, len(rows)))
+                    'INSERT %s %s on %s', self.table_name, cpt, len(rows))
 
             if self.create_job:
                 # Prepare a job to execute the creation

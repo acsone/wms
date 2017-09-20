@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
         In all cases, a picking is associated to an round instance only if
         (partially) available
         """
-        _logger.debug("Searching a delivery round for SO %d" % self.id)
+        _logger.debug("Searching a delivery round for SO %d", self.id)
         template = self.carrier_id.delivery_template_id
         # 1 shipping is created
         # multiple pickings could be created, or inserted in existing pickings
@@ -44,7 +44,7 @@ class SaleOrder(models.Model):
 
         if template:
             _logger.debug("Associate SO %d to delivery instance matching "
-                          "carrier" % self.id)
+                          "carrier", self.id)
             delivery_round = self.env['round.instance'].search(
                 [
                     ('template_id', '=', template.id),
@@ -70,4 +70,4 @@ class SaleOrder(models.Model):
 
         if delivery_round:
             delivery_round._assign_pickings(pickings)
-        _logger.debug("Searching a delivery round for SO %d. Done." % self.id)
+        _logger.debug("Searching a delivery round for SO %d. Done.", self.id)
