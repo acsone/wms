@@ -34,4 +34,5 @@ CREATE OR REPLACE VIEW zelapro_export_suppliers AS
     supplier.create_date AS create_date -- Mandatory field used to compute data to export
   FROM res_partner AS supplier
     LEFT JOIN partner_alcyon_category AS categ ON supplier.alcyon_category_id = categ.id
-  WHERE supplier.supplier = TRUE;
+  WHERE supplier.supplier = TRUE
+    AND supplier.active = TRUE;

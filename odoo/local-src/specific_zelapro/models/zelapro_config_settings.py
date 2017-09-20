@@ -66,7 +66,8 @@ class ZelaproConfigSettings(models.TransientModel):
         :return:
         """
         products = self.env['product.product'].search([])
-        products._compute_business_unit_id()
+        products.with_context(tracking_disable=True)\
+            ._compute_business_unit_id()
 
     @api.multi
     def recompute_all_abc_code(self):
@@ -74,4 +75,4 @@ class ZelaproConfigSettings(models.TransientModel):
         Update the Turnover and recompute the ABC code for all products
         """
         products = self.env['product.product'].search([])
-        products.update_abc_code()
+        products.with_context(tracking_disable=True).update_abc_code()

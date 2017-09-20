@@ -29,6 +29,7 @@
         'sql_views/zelapro_export_promotions.sql',
         'sql_views/zelapro_export_stock_moves.sql',
         'sql_views/zelapro_export_suppliers.sql',
+        'sql_views/zelapro_export_stocks.sql',
 
         # Views
         'views/zelapro_export.xml',

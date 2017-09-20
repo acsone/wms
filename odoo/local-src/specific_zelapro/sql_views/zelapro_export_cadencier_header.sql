@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier_header AS
     COALESCE(to_char((SELECT min(stock_move.create_date) AS older_bo
      FROM stock_move
        INNER JOIN product_product ON stock_move.product_id = product_product.id
-     WHERE stock_move.state NOT IN ('cancel', 'done')
+     WHERE stock_move.state NOT IN ('cancel', 'done', 'draft')
       AND product_product.product_tmpl_id IN (
        SELECT DISTINCT supplierinfo.product_tmpl_id
        FROM product_supplierinfo AS supplierinfo
@@ -21,7 +21,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier_header AS
     COALESCE(to_char((SELECT min(stock_move.create_date) AS older_bo
      FROM stock_move
        INNER JOIN product_product ON stock_move.product_id = product_product.id
-     WHERE stock_move.state NOT IN ('cancel', 'done')
+     WHERE stock_move.state NOT IN ('cancel', 'done', 'draft')
       AND product_product.product_tmpl_id IN (
        SELECT DISTINCT supplierinfo.product_tmpl_id
        FROM product_supplierinfo AS supplierinfo

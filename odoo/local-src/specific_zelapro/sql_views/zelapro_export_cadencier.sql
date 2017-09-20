@@ -33,7 +33,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     '' AS SFASUP, -- This value will be computed in the export
     '' AS SFANLP, -- This value will be computed in the export
     '' AS SFAQTP,
-    product_tmpl.id AS product_tmpl_id,
+    product.id AS product_id,
     info.create_date AS create_date -- Mandatory field used to compute data to export
   FROM product_supplierinfo AS info
     INNER JOIN product_template AS product_tmpl ON info.product_tmpl_id = product_tmpl.id
