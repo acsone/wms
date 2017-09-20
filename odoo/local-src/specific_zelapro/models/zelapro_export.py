@@ -280,16 +280,12 @@ class ZelaproExport(models.Model):
 
         product_ids = [x[0] for x in self.env.cr.fetchall()]
         products = self.env['product.product'].browse(product_ids)
-        products_values = products.read(['qty_in_parking',
-                                        'qty_in_reserve',
-                                        'qty_in_bin',
+        products_values = products.read(['qty_available',
                                         'outgoing_qty',
                                         'additional_product_id'])
         values_by_product = {}
         for product_values in products_values:
-            qty_on_hand = product_values['qty_in_parking'] + \
-                          product_values['qty_in_reserve'] + \
-                          product_values['qty_in_bin']
+            qty_on_hand = product_values['qty_available']
             outgoing_qty = product_values['outgoing_qty']
             qty_available = qty_on_hand - outgoing_qty
 
@@ -411,25 +407,19 @@ class ZelaproExport(models.Model):
                     add_product = self.env['product.product'].browse(
                         add_product_id
                     )
-                    add_product_values = add_product.read(['qty_in_parking',
-                                                           'qty_in_reserve',
-                                                           'qty_in_bin',
+                    add_product_values = add_product.read(['qty_available',
                                                            'outgoing_qty'])
                     add_values = add_product_values[0]
 
                     add_qty_on_hand = add_values['qty_available']
                     # Qty reserved == Qty on hand - Qty Forecast
                     add_qty_reserved = \
-                        add_qty_on_hand - add_values['virtual_available']
+                        add_qty_on_hand - add_values['outgoing_qty']
 
-                    # Compute the qty in BO for this product
-                    # Take the value of "Qty available"
-                    # If the value is less than zero, it means that
-                    add_qty_available = add_values['immediately_usable_qty']
-                    if add_qty_available >= 0:
+                    if add_qty_reserved >= 0:
                         add_qty_bo = 0
                     else:
-                        add_qty_bo = add_qty_available * -1
+                        add_qty_bo = add_qty_reserved * -1
 
                     add_row[product_index_index] = add_product_index
                     add_row[product_on_hand_index] = add_qty_on_hand
@@ -507,15 +497,11 @@ class ZelaproExport(models.Model):
 
         product_ids = [x[0] for x in self.env.cr.fetchall()]
         products = self.env['product.product'].browse(product_ids)
-        products_values = products.read(['qty_in_parking',
-                                         'qty_in_reserve',
-                                         'qty_in_bin',
+        products_values = products.read(['qty_available',
                                          'outgoing_qty'])
         values_by_product_id = {}
         for product_values in products_values:
-            qty_on_hand = product_values['qty_in_parking'] + \
-                          product_values['qty_in_reserve'] + \
-                          product_values['qty_in_bin']
+            qty_on_hand = product_values['qty_available']
             outgoing_qty = product_values['outgoing_qty']
             qty_available = qty_on_hand - outgoing_qty
 
