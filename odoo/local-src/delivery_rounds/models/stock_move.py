@@ -89,11 +89,11 @@ class StockMove(models.Model):
         operations_to_recompute = pickings.pack_operation_ids. \
             filtered(lambda op: op.product_id in products)
         if operations_to_recompute:
-            _logger.debug("Cleaning operations %s" %
+            _logger.debug("Cleaning operations %s",
                           operations_to_recompute.ids)
             operations_to_recompute.mapped(
                 'linked_move_operation_ids.move_id').do_unreserve()
-        _logger.debug("Reserve corresponding moves %s" % moves_pickings)
+        _logger.debug("Reserve corresponding moves %s", moves_pickings)
         moves_pickings.action_assign()
         return res
 
