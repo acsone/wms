@@ -69,6 +69,9 @@ Unreleased
 * Update product categories with new categories
 
 **Features and Improvements**
+[IMP] Do not group pickings when a specific carrier is defined on sales order
+* ALCN-161: Add the module import_manager
+* ALCN-161: Add the export ZelAppro "Stock"
 
 * [IMP] Do not group pickings when a specific carrier is defined on sales order
 * ALCN-865: Web service create web sale order

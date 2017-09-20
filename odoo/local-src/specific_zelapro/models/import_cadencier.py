@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# © 2017 Okia SPRL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import traceback
 from datetime import datetime
 from babel import numbers
@@ -161,11 +164,11 @@ class ImportCadencier(models.Model):
               line.supplier_discount_2_mod AS supplier_discount_2,
               line.scheduled_date_mod_2 AS scheduled_date
             FROM import_cadencier AS line
-              LEFT JOIN import_cadencier_header 
+              LEFT JOIN import_cadencier_header
                 AS header ON header.suite_no = line.suite_no
-              LEFT JOIN res_partner 
+              LEFT JOIN res_partner
                 AS supplier ON header.supplier_ref = supplier.ref
-              LEFT JOIN product_product 
+              LEFT JOIN product_product
                 AS product ON line.product_ref = product.default_code
               LEFT JOIN product_template
                 AS product_tmpl ON product.product_tmpl_id = product_tmpl.id

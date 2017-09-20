@@ -127,7 +127,6 @@ class ImportFile(models.Model):
         if not os.path.isdir(import_failure_path):
             os.makedirs(import_failure_path)
 
-
         filename_pattern = self.get_filename_pattern()
         files_to_import = []
         for filename in os.listdir(import_path):

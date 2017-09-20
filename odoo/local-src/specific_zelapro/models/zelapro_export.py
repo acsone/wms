@@ -281,8 +281,8 @@ class ZelaproExport(models.Model):
         product_ids = [x[0] for x in self.env.cr.fetchall()]
         products = self.env['product.product'].browse(product_ids)
         products_values = products.read(['qty_available',
-                                        'outgoing_qty',
-                                        'additional_product_id'])
+                                         'outgoing_qty',
+                                         'additional_product_id'])
         values_by_product = {}
         for product_values in products_values:
             qty_on_hand = product_values['qty_available']

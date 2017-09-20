@@ -5,7 +5,7 @@ import psycopg2
 import logging
 import traceback
 
-from odoo import api, fields, models, _
+from odoo import api, models
 
 from ..tools import convert_tools
 
@@ -74,8 +74,8 @@ class ImportModel(models.AbstractModel):
                     column = column[1:][:-1]
                 file_columns.append(column)
 
-            missing_columns = [column for column in file_columns if
-                               column not in self.columns_mapping]
+            missing_columns = [mis_column for mis_column in file_columns if
+                               mis_column not in self.columns_mapping]
             if missing_columns:
                 logger.line_ids.create({
                     'level': 'error',
@@ -85,8 +85,8 @@ class ImportModel(models.AbstractModel):
                 })
                 return False
 
-            odoo_columns = [self.columns_mapping[column] for column in
-                            file_columns]
+            odoo_columns = [self.columns_mapping[odoo_column] for odoo_column
+                            in file_columns]
 
             copy_query = """
             COPY %s (%s)
@@ -99,10 +99,10 @@ class ImportModel(models.AbstractModel):
                 self.env.cr.copy_expert(copy_query, file=file)
             except psycopg2.Error as error:
                 _logger.exception('Cannot copy the file %s into %s\n%s' % (
-                file_path, self._table, error))
+                    file_path, self._table, error))
                 logger.line_ids.create({
                     'name': 'Cannot copy the file %s into %s' % (
-                    file_path, self._table),
+                        file_path, self._table),
                     'level': 'error',
                     'traceback': traceback.format_exc(),
                     'logger_id': logger.id,

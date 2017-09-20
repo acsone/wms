@@ -24,7 +24,8 @@ class ImportConfigSettings(models.TransientModel):
             import_out_path = config_param.get_param('import.import_out_path')
             res['import_out_path'] = import_out_path
         if not fields or 'import_failure_path' in fields:
-            import_failure_path = config_param.get_param('import.import_failure_path')
+            import_failure_path = \
+                config_param.get_param('import.import_failure_path')
             res['import_failure_path'] = import_failure_path
 
         return res
