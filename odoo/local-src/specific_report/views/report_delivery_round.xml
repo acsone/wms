@@ -71,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="delivery.shipping_ids" t-as="shipping">
+                                <tr t-foreach="delivery.shipping_ids.filtered(lambda x: x.state == 'done')" t-as="shipping">
                                     <td>
                                         <span t-field="shipping.sequence" />
                                     </td>
@@ -87,22 +87,70 @@
                                         <span t-field="shipping.partner_id.phone" />
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_of_drug)"/>
+                                        <t t-if="shipping.number_of_drug">
+                                            <span t-esc="int(shipping.number_of_drug)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_of_drug and shipping.item_number_of_drug"/>
+                                        <t t-if="shipping.item_number_of_drug">
+                                            <span t-esc="int(shipping.item_number_of_drug)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_of_cold)"/>
+                                        <t t-if="shipping.number_of_cold">
+                                            <span t-esc="int(shipping.number_of_cold)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_of_cold and shipping.item_number_of_cold"/>
+                                        <t t-if="shipping.item_number_of_cold">
+                                            <span t-esc="int(shipping.item_number_of_cold)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_of_food)"/>
+                                        <t t-if="shipping.number_of_food">
+                                            <span t-esc="int(shipping.number_of_food)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_of_food and shipping.item_number_of_food"/>
+                                        <t t-if="shipping.item_number_of_food">
+                                            <span t-esc="int(shipping.item_number_of_food)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_of_equipment)"/>
+                                        <t t-if="shipping.number_of_equipment">
+                                            <span t-esc="int(shipping.number_of_equipment)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_of_equipment and shipping.item_number_of_equipment"/>
+                                        <t t-if="shipping.item_number_of_equipment">
+                                            <span t-esc="int(shipping.item_number_of_equipment)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_of_human_food)"/>
+                                        <t t-if="shipping.number_of_human_food">
+                                            <span t-esc="int(shipping.number_of_human_food)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_of_human_food and shipping.item_number_of_human_food"/>
+                                        <t t-if="shipping.item_number_of_human_food">
+                                            <span t-esc="int(shipping.item_number_of_human_food)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td>
-                                        <span t-esc="int(shipping.number_total)"/>
+                                        <t t-if="shipping.number_total">
+                                            <span t-esc="int(shipping.number_total)"/>
+                                            box(es)
+                                        </t>
+                                        <br t-if="shipping.number_total and shipping.item_number_total"/>
+                                        <t t-if="shipping.item_number_total">
+                                            <span t-esc="int(shipping.item_number_total)"/>
+                                            unit(s)
+                                        </t>
                                     </td>
                                     <td style="width: 33%;">
                                         <strong>

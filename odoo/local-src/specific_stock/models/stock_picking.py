@@ -59,7 +59,11 @@ class StockPicking(models.Model):
 
         original_picking_type_id = self.mapped('picking_type_id')
         if len(original_picking_type_id) == 1:
-            packages = self.mapped('pack_operation_ids.result_package_id')
-            packages.original_picking_type_id = original_picking_type_id.id
+            packages = \
+                self.mapped('pack_operation_ids.result_package_id')\
+                .filtered(lambda package: not package.original_picking_type_id)
+            packages.write({
+                'original_picking_type_id': original_picking_type_id.id,
+            })
 
         return result
