@@ -349,11 +349,21 @@ class ZelaproExport(models.Model):
                 qty_reserved = value['outgoing_qty']
                 qty_bo = value['qty_bo']
 
-                additional_product_id = value['additional_product_id']
-                if additional_product_id:
-                    additional_product_id = additional_product_id[0]
-                    additional_product_index = product_index + 1
-                    additional_product_supplier = supplier_id
+                additional_product_tmpl_id = value['additional_product_id']
+                if additional_product_tmpl_id:
+                    additional_product_tmpl_id = additional_product_tmpl_id[0]
+                    add_product_id_query = """
+                    SELECT min(id)
+                    FROM product_product
+                    WHERE product_tmpl_id = %s
+                    """
+                    self.env.cr.execute(add_product_id_query,
+                                        (additional_product_tmpl_id, ))
+                    add_product_id_result = self.env.cr.fetchone()
+                    if add_product_id_result:
+                        additional_product_id = add_product_id_result[0]
+                        additional_product_index = product_index + 1
+                        additional_product_supplier = supplier_id
 
             row[product_index_index] = product_index
             row[product_on_hand_index] = qty_on_hand
@@ -396,12 +406,10 @@ class ZelaproExport(models.Model):
 
                 if result:
                     # Step 3.2
-                    add_row = list(line)
+                    add_row = list(result)
                     # Remove create_date
-                    row.pop()
-                    add_product_id = int(row.pop())
-
-                    add_product_index = product_index + 1
+                    add_row.pop()
+                    add_product_id = int(add_row.pop())
 
                     # Step 3.3
                     add_product = self.env['product.product'].browse(
@@ -409,6 +417,10 @@ class ZelaproExport(models.Model):
                     )
                     add_product_values = add_product.read(['qty_available',
                                                            'outgoing_qty'])
+                    if not add_product_values:
+                        _logger.error('Cannot find the add product with id %s'
+                                      % add_product_id)
+                        continue
                     add_values = add_product_values[0]
 
                     add_qty_on_hand = add_values['qty_available']
@@ -421,7 +433,7 @@ class ZelaproExport(models.Model):
                     else:
                         add_qty_bo = add_qty_reserved * -1
 
-                    add_row[product_index_index] = add_product_index
+                    add_row[product_index_index] = additional_product_index
                     add_row[product_on_hand_index] = add_qty_on_hand
                     add_row[product_reserved_index] = add_qty_reserved
                     add_row[product_bo_qty_index] = add_qty_bo
