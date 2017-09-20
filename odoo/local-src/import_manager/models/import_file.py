@@ -5,6 +5,7 @@ import logging
 import re
 import os
 import traceback
+import shutil
 from datetime import datetime
 
 from openerp import models, fields, api, _
@@ -111,11 +112,21 @@ class ImportFile(models.Model):
         config_obj = self.env['ir.config_parameter']
         import_model = self.env[self.importer]
 
-        import_path = config_obj.get_param('import.import_path')
+        import_path = config_obj.get_param('import.import_in_path')
         if not import_path:
             raise UserError(_('Please defines the import path in imports '
                               'configuration before execute the first import')
                             )
+
+        import_out_path = config_obj.get_param('import.import_out_path')
+        if not os.path.isdir(import_out_path):
+            os.makedirs(import_out_path)
+
+        import_failure_path = \
+            config_obj.get_param('import.import_failure_path')
+        if not os.path.isdir(import_failure_path):
+            os.makedirs(import_failure_path)
+
 
         filename_pattern = self.get_filename_pattern()
         files_to_import = []
@@ -129,15 +140,21 @@ class ImportFile(models.Model):
         if not files_to_import:
             return
 
+        # TODO Implement multiple imports
+        if len(files_to_import) > 1:
+            files_to_import = files_to_import[:1]
+
         for file_to_import in files_to_import:
             # Load the file in DB
             if self.file_type == 'csv':
                 logger_id = \
                     import_model.init_csv_file(file_to_import, self.id)
             else:
+                shutil.move(file_to_import, import_failure_path)
                 raise UserError(_('File type %s unknown') % self.file_type)
 
             if not logger_id:
+                shutil.move(file_to_import, import_failure_path)
                 return
             logger = self.env['import.logger'].browse(logger_id)
 
@@ -145,16 +162,19 @@ class ImportFile(models.Model):
                 # Execute the import
                 result = import_model.execute_import(logger_id)
                 if result:
+                    shutil.move(file_to_import, import_out_path)
                     self.env['import.logger'].browse(logger_id).write({
                         'state': 'success',
                         'date_end': fields.Datetime.now(),
                     })
                 else:
+                    shutil.move(file_to_import, import_failure_path)
                     logger.write({
                         'state': 'error',
                         'date_end': fields.Datetime.now(),
                     })
             except:
+                shutil.move(file_to_import, import_failure_path)
                 logger.line_ids.create({
                     'name': 'Not handled error during import execution',
                     'level': 'error',

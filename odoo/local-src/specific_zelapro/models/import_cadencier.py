@@ -1,3 +1,4 @@
+import traceback
 from datetime import datetime
 from babel import numbers
 
@@ -148,7 +149,7 @@ class ImportCadencier(models.Model):
                     'level': 'error',
                     'logger_id': logger_id
                 })
-                continue
+                return False
 
             lines_query = """
             SELECT
@@ -176,16 +177,15 @@ class ImportCadencier(models.Model):
 
             try:
                 scheduled_date = datetime.strptime(scheduled_date_str,
-                                                   '%d%m%Y')
+                                                   '%Y%m%d')
                 date_planned = fields.Date.to_string(scheduled_date)
             except:
                 logger.line_ids.create({
-                    'name': 'Supplier not found with the ref %s'
-                            % supplier_ref,
+                    'name': 'Cannot convert the date ' % scheduled_date_str,
                     'level': 'error',
                     'logger_id': logger_id
                 })
-                continue
+                return False
 
             # Create the sale order
             purchase_order = po_obj.create({
@@ -202,7 +202,7 @@ class ImportCadencier(models.Model):
                 discount_2 = numbers.parse_decimal(line[5], locale=locale)
 
                 line_date_str = line[6]
-                line_date = datetime.strptime(line_date_str, '%d%m%Y')
+                line_date = datetime.strptime(line_date_str, '%Y%m%d')
                 line_date_planned = fields.Date.to_string(line_date)
 
                 po_line = purchase_order.order_line.new({
@@ -216,6 +216,7 @@ class ImportCadencier(models.Model):
                     'price_unit_base': sale_price,
                     'discount_global': discount_1,
                     'promotion_supplier': discount_2,
+                    'order_id': purchase_order.id,
                 })
                 po_line._compute_price_unit()
 
@@ -227,8 +228,9 @@ class ImportCadencier(models.Model):
                         'name': 'Cannot create the purchase line (line %s)'
                                 % line_id,
                         'level': 'error',
-                        'logger_id': logger_id
+                        'logger_id': logger_id,
+                        'traceback': traceback.format_exc(),
                     })
-                    continue
+                    return False
 
         return True
