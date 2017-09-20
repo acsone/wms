@@ -76,6 +76,7 @@ class RoundInstance(models.Model):
          ('open', 'Confirmed'),
          ('done', 'Done')],
         'State',
+        readonly=True,
         default='draft')
 
     itinerary_ids = fields.Many2many(
