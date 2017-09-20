@@ -17,3 +17,4 @@ paramiko==2.2.1
 pyodbc==3.0.10
 
 iconv
+cchardet
