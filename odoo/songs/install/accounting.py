@@ -351,6 +351,17 @@ def set_esb_references(ctx):
 
 
 @anthem.log
+def import_account_payment_term(ctx):
+    """ Importing account payment term """
+    ctx.env.ref('account.account_payment_term_immediate').unlink()
+    ctx.env.ref('account.account_payment_term_15days').unlink()
+    ctx.env.ref('account.account_payment_term_net').unlink()
+
+    content = resource_stream(req, 'data/install/account.payment.term.csv')
+    load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -369,3 +380,4 @@ def main(ctx):
     settings(ctx)
     setup_sequences(ctx)
     set_esb_references(ctx)
+    import_account_payment_term(ctx)
