@@ -3,14 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import TransactionCase
-from odoo.addons.connector_esb.controllers.main import ESBController
+from odoo.addons.connector_esb.controllers.sale import SaleController
 from psycopg2 import IntegrityError
+from werkzeug.exceptions import BadRequest
 
 
 class WSCreateSaleOrderTestCase(TransactionCase):
 
     def setUp(self):
         super(WSCreateSaleOrderTestCase, self).setUp()
+        self.controller = SaleController()
         self.setup_records()
         self.order_data = {
             "increment_id": "INC-ID",
@@ -96,33 +98,34 @@ class WSCreateSaleOrderTestCase(TransactionCase):
 
     def test_request_data(self):
         """ Check for well formed data and some compulsory fields """
-        error = ESBController.create_sale_order_check_data(
-                self.request_data)
-        self.assertFalse(error)
+        data = self.request_data.copy()
+        data.pop('params')
+        with self.assertRaises(BadRequest):
+            self.controller._validate_request(data)
 
     def test_required_fields_1(self):
-        data = self.request_data
+        data = self.request_data.copy()
         data['params']['data'].pop('increment_id')
-        error = ESBController.create_sale_order_check_data(data)
-        self.assertTrue(error)
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
 
     def test_required_fields_2(self):
-        data = self.request_data
+        data = self.request_data.copy()
         data['params']['data'].pop('customer_id')
-        error = ESBController.create_sale_order_check_data(data)
-        self.assertTrue(error)
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
 
     def test_required_fields_3(self):
-        data = self.request_data
+        data = self.request_data.copy()
         data['params']['data'].pop('date')
-        error = ESBController.create_sale_order_check_data(data)
-        self.assertTrue(error)
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
 
     def test_required_fields_4(self):
-        data = self.request_data
+        data = self.request_data.copy()
         data['params']['data'].pop('lines')
-        error = ESBController.create_sale_order_check_data(data)
-        self.assertTrue(error)
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
 
     def test_integrity_error(self):
         data = self.order_data.copy()
