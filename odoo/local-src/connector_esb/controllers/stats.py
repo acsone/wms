@@ -8,44 +8,35 @@ Respond to calls from the ESB.
 
 """
 
-import logging
-
 from datetime import datetime
 
 import werkzeug
 
 import odoo
-from odoo import http
+from odoo import http, _
 from odoo.http import request
 from odoo.addons.web.controllers.main import ensure_db
 
-_logger = logging.getLogger(__name__)
+
+def strptime(val):
+    return datetime.strptime(val, '%Y-%m-%d').date()
 
 
-class ESBController(http.Controller):
+class StatsController(http.Controller):
 
-    @http.route('/connector_esb/stock/product',
-                type='http', auth='public', csrf=False)
-    def product_stock_level(self, **kw):
-        """ Return stock levels of products
-
-        Expect a POST with multipart/form-data.
-        The stock levels are returned for the SKUs passed in the
-        form field ``product[]``::
-
-            $ curl -X POST \
-                    http://localhost:8069/connector_esb/stock/product \
-                    -F "product[]=1750132" -F "product[]=0016188"
-
-        """
-        ensure_db()
-        request.uid = odoo.SUPERUSER_ID
-        env = request.env
-        skus = request.httprequest.form.getlist('product[]')
-        skus = [sku.strip() for sku in skus]
-        backend = env['esb.backend'].sudo().get_singleton()
-        with backend.work_on('product.product') as work:
-            return work.component('ws.message.product.stock').get_message(skus)
+    @staticmethod
+    def _validate_statistics_form(values):
+        errors = []
+        datefields = ('startDate', 'endDate', )
+        for key in datefields:
+            try:
+                strptime(values[key])
+            except ValueError:
+                errors.append(
+                    _('Bad date format for `%s`. Expected: YYYY-mm-dd') % key
+                )
+        if errors:
+            raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
     @http.route('/connector_esb/statistics/form',
                 type='http', auth='public', csrf=False)
@@ -66,22 +57,19 @@ class ESBController(http.Controller):
         request.uid = odoo.SUPERUSER_ID
         env = request.env
 
-        def strptime(value):
-            try:
-                return datetime.strptime(value, '%Y-%m-%d').date()
-            except ValueError:
-                raise werkzeug.BadRequest('Bad date format, expect YYYY-mm-dd')
+        values = request.httprequest.form
+        self._validate_statistics_form(values)
 
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref=request.httprequest.form['customerErpId'],
-                start=strptime(request.httprequest.form['startDate']),
-                end=strptime(request.httprequest.form['endDate']),
-                product_type=request.httprequest.form['productType'],
-                suppliers=request.httprequest.form['manufacturer'].split(','),
-                language=request.httprequest.form['language']
+                customer_ref=values['customerErpId'],
+                start=strptime(values['startDate']),
+                end=strptime(values['endDate']),
+                product_type=values['productType'],
+                suppliers=values['manufacturer'].split(','),
+                language=values['language']
             )
             return component.get_message(options)
 
@@ -102,8 +90,9 @@ class ESBController(http.Controller):
         env = request.env
         backend = env['esb.backend'].get_singleton()
         with backend.work_on('sale.order.line') as work:
-            return (work.component('ws.message.product.customer.stat')
-                        .get_message(customer_ref, sku))
+            return work.component(
+                'ws.message.product.customer.stat'
+            ).get_message(customer_ref, sku)
 
     @http.route('/connector_esb/statistics/customer/<string:customer_ref>',
                 type='http', auth='public', csrf=False)
@@ -120,5 +109,6 @@ class ESBController(http.Controller):
         env = request.env
         backend = env['esb.backend'].get_singleton()
         with backend.work_on('sale.order.line') as work:
-            return (work.component('ws.message.customer.stat')
-                    .get_message(customer_ref))
+            return work.component(
+                'ws.message.customer.stat'
+            ).get_message(customer_ref)
