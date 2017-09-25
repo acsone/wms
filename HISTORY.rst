@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-960: On picking form view, display 'Receive' button only for reception
+
 **Build**
 
 * ALCN-959: Set esb_ref for some models

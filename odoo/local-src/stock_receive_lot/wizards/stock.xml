@@ -25,7 +25,7 @@
                     <field name="operation_id" required="1" domain="[('picking_id','=',picking_id)]"/>
                     <label for="remaining_qty"/>
                     <span>
-                        <field name="remaining_qty" class="oe_inline" readonly="1"/> out of 
+                        <field name="remaining_qty" class="oe_inline" readonly="1"/> out of
                         <field name="product_qty" class="oe_inline" readonly="1"/>
                         <field name="product_uom_id" class="oe_inline" groups="product.group_uom" readonly="1"/>
                     </span>
@@ -74,9 +74,10 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <button name="do_new_transfer" position="before">
-                <button name="%(action_pack_operation_lot_add)d" states="assigned"
-                    string="Receive" type="action" class="oe_highlight" groups="base.group_user"
-                    context="{'default_picking_id':active_id}"/>
+                <button name="%(action_pack_operation_lot_add)d"
+                        string="Receive" type="action" class="oe_highlight" groups="base.group_user"
+                        context="{'default_picking_id':active_id}"
+                        attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', '!=', 'assigned')]}"/>
             </button>
         </field>
     </record>
