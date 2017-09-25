@@ -329,6 +329,8 @@ class DB2MapperSaleOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        SOLine = rec.env['sale.order.line']
+        so_lines = SOLine
         is_delivered = True
         delivered_lines = []
         not_delivered_lines = []
@@ -354,11 +356,10 @@ class DB2MapperSaleOrder(object):
                 'write_date': convert_date('dccm', line) or create_date,
             }
 
-            SOLine = rec.env['sale.order.line']
             xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))
-            create_or_update(SOLine, xmlid, values)
+            so_lines |= create_or_update(SOLine, xmlid, values)
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
         is_delivered = all(delivered_lines)
@@ -379,6 +380,16 @@ class DB2MapperSaleOrder(object):
             cr.execute(
                 "UPDATE sale_order set invoice_status = 'invoiced'"
                 " WHERE id = %s", [new.id])
+            # force invoiced qty in database to avoid to have
+            # this needs to be done after state write
+            # or it would be recomputed
+            query = (
+                "UPDATE sale_order_line"
+                " SET qty_received = product_uom_qty,"
+                "     qty_invoiced = product_uom_qty"
+                " WHERE id in ( %s )"
+            ) % ','.join(['%s'] * len(so_lines))
+            cr.execute(query, so_lines.ids)
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
