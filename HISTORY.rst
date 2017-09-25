@@ -13,6 +13,7 @@ Unreleased
 **Bugfixes**
 
 * Issue github 305: Replace string replacement in logger.* functions
+* ALCN-960: On picking form view, display 'Receive' button only for reception
 
 **Build**
 
