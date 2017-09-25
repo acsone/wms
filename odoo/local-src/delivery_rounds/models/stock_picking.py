@@ -47,7 +47,7 @@ class StockPicking(models.Model):
         assert len(delivery_round) <= 1, \
             'Max 1 delivery_round can ba written at a time'
         if not delivery_round:
-            _logger.debug("Delivery round unset on pickings %s" % self.ids)
+            _logger.debug("Delivery round unset on pickings %s", self.ids)
             # unreserve quants when picking is disconnected from a delivery
             # round
             self.do_unreserve()
@@ -79,14 +79,14 @@ class StockPicking(models.Model):
             if pickings:
                 _logger.debug(
                     "Delivery round %s set on pickings %s. Propagate "
-                    "to group %s" % (
-                        delivery_round.id, self.ids, pickings.ids))
+                    "to group %s",
+                    delivery_round.id, self.ids, pickings.ids)
                 pickings.with_context(noround_write=True).write(
                     {'delivery_round_id': delivery_round.id})
             # set sequence on deliveries according to sequence defined in the
             # itinerary
             _logger.debug(
-                "Compute shippings delivery sequence on delivery round %s." %
+                "Compute shippings delivery sequence on delivery round %s.",
                 delivery_round.id)
             positions = False
             for shipping in shippings:
@@ -111,8 +111,8 @@ class StockPicking(models.Model):
                     shipping.sequence = positions.get(
                         shipping.partner_id.id, 0)
             _logger.debug(
-                "Delivery round %s set on pickings %s. Done." %
-                (delivery_round.id, self.ids))
+                "Delivery round %s set on pickings %s. Done.",
+                delivery_round.id, self.ids)
 
     @api.multi
     @api.constrains('sequence')
@@ -129,7 +129,7 @@ class StockPicking(models.Model):
                     r.partner_id.id in shippings.mapped('partner_id.id'))
                 _logger.debug(
                     "Sequence set on pickings %s. Propagate "
-                    "to group %s" % (self.ids, pickings.ids))
+                    "to group %s", self.ids, pickings.ids)
                 pickings.write({'sequence': self[0].sequence})
 
     @api.model

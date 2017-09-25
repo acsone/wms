@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* Issue github 305: Replace string replacement in logger.* functions
+
 **Build**
 
 * ALCN-959: Set esb_ref for some models

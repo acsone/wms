@@ -139,8 +139,8 @@ class RoundInstance(models.Model):
         self._assign_pickings(picking_confirmed)
 
     def _assign_pickings(self, pickings):
-        _logger.debug("Assign to delivery round %s the pickings %s" % (
-            self.id, pickings.ids))
+        _logger.debug("Assign to delivery round %s the pickings %s",
+                      self.id, pickings.ids)
         try:
             # call Try to reserve from stock the qty for confirmed pickings
             pickings.filtered(
@@ -158,15 +158,15 @@ class RoundInstance(models.Model):
                 ('id', 'in', pickings.ids),
                 ('state', 'in', ('partially_available', 'assigned'))])
             if pickings_assigned:
-                _logger.debug("Add to delivery round %s the pickings %s" % (
-                    self.id, pickings.ids))
+                _logger.debug("Add to delivery round %s the pickings %s",
+                              self.id, pickings.ids)
                 pickings_assigned.with_context(round_assigned=True).write({
                     'delivery_round_id': self.id})
 
     @api.model
     def find(self, partner):
         """ Find a delivery_round for this partner """
-        _logger.debug("Search a round instance for partner %s" % partner.id)
+        _logger.debug("Search a round instance for partner %s", partner.id)
         # TODO: improve: take first delivery round having a shipping for that
         # partner
         itinerary_ids = partner.round_itinerary_ids.mapped(

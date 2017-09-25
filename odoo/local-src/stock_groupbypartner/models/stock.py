@@ -59,8 +59,8 @@ class StockMove(models.Model):
                 if (not move.picking_type_id.groupbypartner_maxweight or
                         picking.weight <= max_weight):
                     # assign move to picking
-                    _logger.debug("Assign move %s to existing picking %s" %
-                                  (move.id, picking.id))
+                    _logger.debug("Assign move %s to existing picking %s",
+                                  move.id, picking.id)
                     move.picking_id = picking.id
                     # unreserve moves having an operation for that product
                     # Note: (re)check availability (action_assign) does not
@@ -73,14 +73,14 @@ class StockMove(models.Model):
                     operations_to_recompute = picking.pack_operation_ids. \
                         filtered(lambda op: op.product_id == move.product_id)
                     if operations_to_recompute:
-                        _logger.debug("Cleaning operations %s" %
+                        _logger.debug("Cleaning operations %s",
                                       operations_to_recompute.ids)
                         operations_to_recompute.mapped(
                             'linked_move_operation_ids.move_id').do_unreserve()
                     break
             else:
                 # create a new picking
-                _logger.debug("Assign move %s to new picking" % move.id)
+                _logger.debug("Assign move %s to new picking", move.id)
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
                 if str(domain) not in pickings_cache:
