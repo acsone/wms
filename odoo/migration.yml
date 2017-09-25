@@ -211,3 +211,4 @@ migration:
           ### local-src
           - connector_esb
           - stock_receive_lot
+          - specific_report

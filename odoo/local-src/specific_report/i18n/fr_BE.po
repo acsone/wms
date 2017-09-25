@@ -351,37 +351,37 @@ msgstr "Numéro"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_cold
-msgid "Number item of cold products"
+msgid "Number of cold products"
 msgstr "Nombre de produits frais"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_equipment
-msgid "Number item of equipments"
+msgid "Number of equipments products"
 msgstr "Nombre de produits d'équipements"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_food
-msgid "Number item of food products"
+msgid "Number of food products"
 msgstr "Nombre de produits alimentaires"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_human_food
-msgid "Number item of human food"
+msgid "Number of human drug product"
 msgstr "Nombre de produits médicaments humain"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_drug
-msgid "Number item of medical products"
+msgid "Number of medical products"
 msgstr "Nombre de produits médicales"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_total
-msgid "Number item of products"
+msgid "Number of products"
 msgstr "Nombre de produits"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_cold
-msgid "Number of cold products"
+msgid "Number of cold"
 msgstr "Nombre de frais"
 
 #. module: specific_report
@@ -391,23 +391,23 @@ msgstr "Nombre d'équipements"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_food
-msgid "Number of food products"
+msgid "Number of food"
 msgstr "Nombre d'alimentaires"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_human_food
-msgid "Number of human food"
+msgid "Number of human drug"
 msgstr "Nombre de médicaments humain"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_drug
-msgid "Number of medical products"
+msgid "Number of medical"
 msgstr "Nombre de médicales"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_total
-msgid "Number of products"
-msgstr "Nombre de boites"
+msgid "Number of boxes"
+msgstr "Nombre de caisses"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon

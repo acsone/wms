@@ -28,41 +28,41 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     number_of_drug = fields.Float(
-        'Number of medical products',
+        'Number of medical',
         compute='_compute_number_of_products')
     number_of_cold = fields.Float(
-        'Number of cold products',
+        'Number of cold',
         compute='_compute_number_of_products')
     number_of_food = fields.Float(
-        'Number of food products',
+        'Number of food',
         compute='_compute_number_of_products')
-    number_of_human_food = fields.Float(
-        'Number of human food',
+    number_of_human_drug = fields.Float(
+        'Number of human drug',
         compute='_compute_number_of_products')
     number_of_equipment = fields.Float(
         'Number of equipments',
         compute='_compute_number_of_products')
     number_total = fields.Float(
-        'Number of products',
+        'Number of boxes',
         compute='_compute_number_of_products')
 
     item_number_of_drug = fields.Float(
-        'Number item of medical products',
+        'Number of medical products',
         compute='_compute_number_of_products')
     item_number_of_cold = fields.Float(
-        'Number item of cold products',
+        'Number of cold products',
         compute='_compute_number_of_products')
     item_number_of_food = fields.Float(
-        'Number item of food products',
+        'Number of food products',
         compute='_compute_number_of_products')
-    item_number_of_human_food = fields.Float(
-        'Number item of human food',
+    item_number_of_human_drug = fields.Float(
+        'Number of human drug products',
         compute='_compute_number_of_products')
     item_number_of_equipment = fields.Float(
-        'Number item of equipments',
+        'Number of equipments products',
         compute='_compute_number_of_products')
     item_number_total = fields.Float(
-        'Number item of products',
+        'Number of products',
         compute='_compute_number_of_products')
 
     @api.depends('move_lines',
@@ -87,7 +87,7 @@ class StockPicking(models.Model):
             number_of_drug = 0
             number_of_cold = 0
             number_of_food = 0
-            number_of_human_food = 0
+            number_of_human_drug = 0
             number_of_equipment = 0
             number_total = 0
 
@@ -110,7 +110,7 @@ class StockPicking(models.Model):
                 elif picking_type == type_equipment:
                     number_of_equipment += qty
                 elif picking_type == type_human:
-                    number_of_human_food += qty
+                    number_of_human_drug += qty
                 else:
                     raise Warning(_('The picking type %s is not correct')
                                   % picking_type.name)
@@ -118,14 +118,14 @@ class StockPicking(models.Model):
             picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold
             picking.number_of_food = number_of_food
-            picking.number_of_human_food = number_of_human_food
+            picking.number_of_human_drug = number_of_human_drug
             picking.number_of_equipment = number_of_equipment
             picking.number_total = number_total
 
             item_number_of_drug = 0
             item_number_of_cold = 0
             item_number_of_food = 0
-            item_number_of_human_food = 0
+            item_number_of_human_drug = 0
             item_number_of_equipment = 0
             item_number_total = 0
 
@@ -156,7 +156,7 @@ class StockPicking(models.Model):
                 elif categ == equipment_categ:
                     item_number_of_equipment += qty
                 elif categ == human_categ:
-                    item_number_of_human_food += qty
+                    item_number_of_human_drug += qty
                 else:
                     raise Warning(_('The category %s is not valid')
                                   % categ.name)
@@ -164,7 +164,7 @@ class StockPicking(models.Model):
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
             picking.item_number_of_food = item_number_of_food
-            picking.item_number_of_human_food = item_number_of_human_food
+            picking.item_number_of_human_drug = item_number_of_human_drug
             picking.item_number_of_equipment = item_number_of_equipment
             picking.item_number_total = item_number_total
 
