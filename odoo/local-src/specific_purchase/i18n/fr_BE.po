@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 10:04+0000\n"
-"PO-Revision-Date: 2017-07-28 10:04+0000\n"
+"POT-Creation-Date: 2017-09-25 09:17+0000\n"
+"PO-Revision-Date: 2017-09-25 09:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,28 +20,53 @@ msgstr ""
 msgid "\n"
 "            \n"
 "                <p>Hello,</p>\n"
-"                <p>We decided to cancel the purchase order ${object.partner_ref} (${object.amount_total}) from ${object.date_order} for the following reason:<br/>\n"
+"                <p>We decided to cancel the purchase order ${object.partner_ref or ''} (${object.amount_total} €) from ${object.date_order} for the following reason:<br/>\n"
 "                ${object.cancel_reason_id.name}</p>\n"
 "                <p>Thank you for your understanding.</p>\n"
-"                <p>Best regards,</br>\n"
+"                <p>Best regards,<br/>\n"
 "                Alcyon</p>\n"
 "            \n"
 "        "
 msgstr "\n"
 "            \n"
 "                <p>Bonjour,</p>\n"
-"                <p>Nous avons décidé d'annuler la commande ${object.partner_ref} (${object.amount_total}) du ${object.date_order} pour la cause suivante:<br/>\n"
+"                <p>Nous avons décidé d'annuler la commande ${object.partner_ref or ''} (${object.amount_total} €) du ${object.date_order} pour la cause suivante:<br/>\n"
 "                ${object.cancel_reason_id.name}</p>\n"
 "                <p>Nous vous remercions de votre compréhension.</p>\n"
-"                <p>Bien à vous,</br>\n"
+"                <p>Bien à vous,<br/>\n"
 "                Alcyon</p>\n"
 "            \n"
 "        "
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_active
-msgid "Active"
-msgstr "Active"
+#: model:ir.model,name:specific_purchase.model_purchase_order_cancel
+msgid " Ask a reason for the purchase order cancellation."
+msgstr " Demande une cause de l'annulation de la commande."
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_l
+msgid "Aricle retiré de la vente"
+msgstr "Aricle retiré de la vente"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_a
+msgid "Article de remplacement"
+msgstr "Article de remplacement"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_d
+msgid "Article déffectueux en attente du fournisseur"
+msgstr "Article déffectueux en attente du fournisseur"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_n
+msgid "Article non suivi par Alcyon"
+msgstr "Article non suivi par Alcyon"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_m
+msgid "Article retiré de la vente et remplacé"
+msgstr "Article retiré de la vente et remplacé"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_back_order_accepted
@@ -54,6 +79,11 @@ msgstr "Reliquat accepté"
 #: model:ir.ui.menu,name:specific_purchase.menu_bank_holiday_action
 msgid "Bank Holidays"
 msgstr "Jours Fériés"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_code
+msgid "Code"
+msgstr "Code"
 
 #. module: specific_purchase
 #: model:ir.ui.menu,name:specific_purchase.main_menu_calendar_config
@@ -75,12 +105,18 @@ msgstr "Créé le"
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_date
 msgid "Date"
-msgstr "Date "
+msgstr "Date"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_config_settings_lead_time
 msgid "Default Lead time (in days)"
 msgstr "Délai de livraison par défaut (en jours)"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_delivery_lead_time
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_delivery_lead_time
+msgid "Delivery lead time"
+msgstr "Délai de livraison"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_depth
@@ -95,11 +131,6 @@ msgstr "Profondeur (cm)"
 #: model:ir.model.fields,help:specific_purchase.field_product_template_depth
 msgid "Depth in cm"
 msgstr "Profondeur en cm"
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_discontinued
-msgid "Discontinued"
-msgstr "Discontinué"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_global
@@ -131,19 +162,9 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_inactive
-msgid "Inactive"
-msgstr "Inactive"
-
-#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_product_supplierinfo
 msgid "Information about a product vendor"
 msgstr "Information sur le vendeur de l'article"
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_introduction
-msgid "Introduction"
-msgstr "Introduction"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday___last_update
@@ -183,20 +204,15 @@ msgid "Length in cm"
 msgstr "Longueur en cm"
 
 #. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_i
+msgid "Médicaments humain avec importé équivalent"
+msgstr "Médicaments humain avec importé équivalent"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_name
 msgid "Name"
 msgstr "Nom"
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_new
-msgid "New"
-msgstr "Nouveau"
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_out_of_stock
-msgid "Out of stock"
-msgstr "Rupture de stock"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_res_partner
@@ -220,11 +236,6 @@ msgstr "Référence produit"
 #: model:ir.ui.view,arch_db:specific_purchase.view_product_state_tree_view
 msgid "Product state"
 msgstr "Etat du produit"
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_promotion_ony
-msgid "Promotion Only"
-msgstr "Promotion seulement"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
@@ -253,14 +264,14 @@ msgid "Purchase order ${object.partner_ref} canceled"
 msgstr "Bon de commande ${object.partner_ref} annulé"
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_remnant
-msgid "Remnant"
-msgstr "Débris"
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_responsible_id
 msgid "Responsible"
 msgstr "Responsable"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_h
+msgid "Rupture chez le founisseur"
+msgstr "Rupture chez le founisseur"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
@@ -273,11 +284,6 @@ msgstr "Séquence"
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
 msgid "State"
 msgstr "État"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_stop_constrains
-msgid "Stop constrains"
-msgstr "Stop constrains"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
@@ -315,6 +321,27 @@ msgstr "Transfert"
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_price_unit_base
 msgid "Unit Price"
 msgstr "Prix unitaire"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_box
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_box
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_box
+msgid "Unit in box"
+msgstr "Nombre d'unités par boite"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_fardage
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_fardage
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_fardage
+msgid "Unit in fardage"
+msgstr "Nombre d'unités par fardage"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_pallet
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_pallet
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_pallet
+msgid "Unit in pallet"
+msgstr "Nombre d'unités par palette"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_supplier_id
