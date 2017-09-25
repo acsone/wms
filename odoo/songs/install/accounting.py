@@ -359,6 +359,8 @@ def import_account_payment_term(ctx):
 
     content = resource_stream(req, 'data/install/account.payment.term.csv')
     load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
+    lines = resource_stream(req, 'data/install/account.payment.term.line.csv')
+    load_csv_stream(ctx, 'account.payment.term.line', lines, delimiter=',')
 
 
 @anthem.log
