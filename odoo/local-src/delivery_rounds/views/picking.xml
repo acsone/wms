@@ -42,7 +42,7 @@
         <field name="model">stock.picking</field>
         <field name="arch" type="xml">
             <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list" create="false" delete="false" edit="false" >
-                <field name="sequence"/>
+                <field name="rank"/>
                 <field name="name"/>
                 <field name="location_dest_id"/>
                 <field name="partner_id"/>

@@ -5,7 +5,7 @@
 import math
 from datetime import datetime
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import Warning as UserError
 
 import logging
@@ -262,3 +262,111 @@ class RoundInstance(models.Model):
         # record is deleted. So let's call it.
         pickings._update_delivery_round()
         return res
+
+    @api.multi
+    @api.depends('shipping_ids')
+    def _compute_shipping_count(self):
+        for shipping in self:
+            shipping.shipping_count = len(shipping.shipping_ids)
+
+    shipping_count = fields.Integer(
+        compute='_compute_shipping_count',
+    )
+
+    @api.multi
+    def action_view_shippings(self):
+        self.ensure_one()
+
+        action_data = self.env.ref(
+            'delivery_rounds.action_picking_tree_round'
+        ).read()[0]
+        action_data['domain'] = [
+            ('picking_type_code', '=', 'outgoing'),
+            ('delivery_round_id', '=', self.id),
+        ]
+        action_data['context'] = {
+            'default_picking_type_code': 'outgoing',
+            'default_delivery_round_id': self.id,
+        }
+
+        return action_data
+
+    @api.multi
+    @api.depends('picking_ids')
+    def _compute_picking_count(self):
+        for picking in self:
+            picking.picking_count = len(picking.picking_ids)
+
+    picking_count = fields.Integer(
+        compute='_compute_picking_count',
+    )
+
+    @api.multi
+    def action_view_pickings(self):
+        self.ensure_one()
+
+        action_data = self.env.ref(
+            'delivery_rounds.action_picking_tree_round'
+        ).read()[0]
+        action_data['domain'] = [
+            ('picking_type_subcode', '=', 'PICK'),
+            ('delivery_round_id', '=', self.id),
+        ]
+        action_data['context'] = {
+            'default_picking_type_subcode': 'PICK',
+            'default_delivery_round_id': self.id,
+        }
+
+        return action_data
+
+    instance_customer_ids = fields.One2many(
+        comodel_name='round.instance.customer',
+        inverse_name='delivery_round_id',
+        string='Customers',
+        states={'done': [('readonly', True)]},
+    )
+
+
+class RoundInstanceCustomer(models.Model):
+    _name = 'round.instance.customer'
+    _order = 'rank'
+
+    _sql_constraints = [
+        (
+            'unique_instance_customer',
+            'UNIQUE(delivery_round_id, res_partner_id)',
+            _('The customer must be unique in a delivery round.')
+        ),
+    ]
+
+    delivery_round_id = fields.Many2one(
+        comodel_name='round.instance',
+        string='Delivery Round',
+        required=True,
+    )
+
+    res_partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Customer',
+        required=True,
+    )
+
+    rank = fields.Integer(
+        string='Rank',
+    )
+
+    @api.multi
+    @api.constrains('rank')
+    def _propagate_rank(self):
+        for instance_customer in self:
+            if instance_customer.rank >= 0:
+                # when we set a rank on a round instance customer,
+                # we copy that value on the pickings
+                shippings = self.delivery_round_id.shipping_ids.filtered(
+                    lambda r: r.rank < 0 and
+                    r.partner_id == instance_customer.res_partner_id
+                )
+                _logger.debug(
+                    "Rank set on round instance customer %s. Propagate "
+                    "to group %s", self.ids, shippings.ids)
+                shippings.write({'rank': instance_customer.rank})

@@ -83,23 +83,21 @@ class StockPicking(models.Model):
                     delivery_round.id, self.ids, pickings.ids)
                 pickings.with_context(noround_write=True).write(
                     {'delivery_round_id': delivery_round.id})
-            # set sequence on deliveries according to sequence defined in the
+            # set rank on deliveries according to sequence defined in the
             # itinerary
             _logger.debug(
-                "Compute shippings delivery sequence on delivery round %s.",
+                "Compute shippings delivery rank on delivery round %s.",
                 delivery_round.id)
             positions = False
             for shipping in shippings:
-                if shipping.sequence >= 0:
+                if shipping.rank >= 0:
                     continue
-                other_shippings = delivery_round.shipping_ids.filtered(
-                    lambda p: p.state != 'cancel' and
-                    p.id != shipping.id and
-                    p.sequence >= 0 and
-                    p.partner_id == shipping.partner_id)
-                sequences = other_shippings.mapped('sequence')
-                if sequences:
-                    shipping.sequence = sequences[0]
+                ranks = delivery_round.instance_customer_ids.filtered(
+                    lambda p: p.rank >= 0 and
+                    p.partner_id == shipping.partner_id
+                ).mapped('rank')
+                if ranks:
+                    shipping.rank = ranks[0]
                 else:
                     if positions is False:
                         positions = {}
@@ -108,29 +106,28 @@ class StockPicking(models.Model):
                                 positions[pos.partner_id.id] = (
                                     itinerary.sequence*1000 +
                                     pos.sequence)
-                    shipping.sequence = positions.get(
-                        shipping.partner_id.id, 0)
+                    shipping.rank = positions.get(shipping.partner_id.id, 0)
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done.",
                 delivery_round.id, self.ids)
 
     @api.multi
-    @api.constrains('sequence')
-    def _propagate_sequence(self):
-        if self[0].sequence >= 0:
-            # when we set a sequence on a delivery, we copy that value on the
+    @api.constrains('rank')
+    def _propagate_rank(self):
+        if self[0].rank >= 0:
+            # when we set a rank on a delivery, we copy that value on the
             # pickings
             shippings = self.filtered(
                 lambda r: r.picking_type_code == 'outgoing')
             rounds = shippings.mapped('delivery_round_id')
             for ri in rounds:
                 pickings = ri.picking_ids.filtered(
-                    lambda r: r.sequence < 0 and
+                    lambda r: r.rank < 0 and
                     r.partner_id.id in shippings.mapped('partner_id.id'))
                 _logger.debug(
-                    "Sequence set on pickings %s. Propagate "
+                    "Rank set on pickings %s. Propagate "
                     "to group %s", self.ids, pickings.ids)
-                pickings.write({'sequence': self[0].sequence})
+                pickings.write({'rank': self[0].rank})
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):

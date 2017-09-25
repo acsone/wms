@@ -24,10 +24,10 @@ from odoo import api, fields, models
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-    _order = "priority desc, sequence asc, date asc, id desc"
+    _order = "priority desc, rank desc, date asc, id desc"
 
-    sequence = fields.Integer(
-        'Seq.', default=-1,
+    rank = fields.Integer(
+        'Rank', default=-1,
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 
     @api.multi

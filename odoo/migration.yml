@@ -226,3 +226,9 @@ migration:
         upgrade:
           ### local-src
           - specific_product
+          - delivery_rounds
+          - specific_report
+          - specific_zetes
+          - stock_picking_sequence
+          - stock_receive_lot
+          - stock_reception_priority

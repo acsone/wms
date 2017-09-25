@@ -44,6 +44,11 @@ Unreleased
 * ALCN-960: On picking form view, display 'Receive' button only for reception
 * ALCN-966: Add product quantities in delivery report
 * Add missing dependence on specific_sale module
+* ALCN-961: Changes on delivery rounds
+
+  * Replace sequence on picking by rank
+  * Add smartbutton for picking/shipping in delivery round instance form view
+  * Add a customer/rank list on delivery round instance
 
 **Build**
 

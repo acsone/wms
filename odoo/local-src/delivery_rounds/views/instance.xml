@@ -68,26 +68,26 @@
                             </div><!--
                             No space here
                             --><div class="container o_kanban_card_manage_pane o_invisible">
-                                <div class="row">
-                                    <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
-                                        <div class="o_kanban_card_manage_title">
-                                            <span>Actions</span>
-                                        </div>
-                                        <div><a name="button_confirm" type="object" states="draft">Launch Pickings</a></div>
-                                        <div><a name="button_deliver" type="object" states="open">Deliver</a></div>
-                                        <div><a name="print_all_deliveryslip" type="object" states="done">Print all deliveryslip</a></div>
-                                        <br/>
+                            <div class="row">
+                                <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <div class="o_kanban_card_manage_title">
+                                        <span>Actions</span>
                                     </div>
-                                </div>
-                                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
-                                    <div class="col-xs-8">
-                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
-                                    </div>
-                                    <div class="col-xs-4 text-right">
-                                        <a type="edit">Edit</a>
-                                    </div>
+                                    <div><a name="button_confirm" type="object" states="draft">Launch Pickings</a></div>
+                                    <div><a name="button_deliver" type="object" states="open">Deliver</a></div>
+                                    <div><a name="print_all_deliveryslip" type="object" states="done">Print all deliveryslip</a></div>
+                                    <br/>
                                 </div>
                             </div>
+                            <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                <div class="col-xs-8">
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <a type="edit">Edit</a>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </t>
                 </templates>
@@ -133,46 +133,59 @@
                     <button name="button_deliver" type="object" string="Deliver" states="open" class="oe_highlight"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
                     <field name="state" widget="statusbar" clickable="True"/>
+
                 </header>
-                <div class="oe_title">
-                    <h1>
-                        <field name="template_id" />
-                    </h1>
-                </div>
-                <group>
+                <sheet>
+
+                    <div class="oe_button_box" name="button_box">
+
+                        <button class="oe_stat_button" name="action_view_shippings"
+                                type="object" icon="fa-truck">
+                            <field string="Deliveries" name="shipping_count" widget="statinfo" />
+                        </button>
+
+                        <button class="oe_stat_button" name="action_view_pickings"
+                                type="object" icon="fa-truck">
+                            <field string="Pickings" name="picking_count" widget="statinfo" />
+                        </button>
+
+                    </div>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="template_id" />
+                        </h1>
+                    </div>
                     <group>
-                        <field name="date" />
-                        <field name="time_picking_planned" widget="float_time"/>
-                        <field name="time_leave_planned" widget="float_time"/>
-                    </group>
-                    <group>
-                        <field name="name"/>
-                        <field name="itinerary_ids" widget="many2many_tags"/>
-                    </group>
-                </group>
-                <button name="button_itinerary_import" type="object" string="Import from itinerary"/>
-                <notebook>
-                    <page string="Deliveries">
-                        <field name="shipping_ids" widget="many2many"
-                            options="{'no_create': True}"
-                            context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
-                            >
-                        </field>
-                    </page>
-                    <page string="Pickings">
-                        <field name="picking_ids" widget="many2many"
-                            options="{'no_create': True, 'not_delete': True}"
-                            domain="[('picking_type_subcode', '=', 'PICK'), ('delivery_round_id', '=', False), ('state', 'in', ('partially_available', 'assigned'))]"
-                            context="{'tree_view_ref': 'delivery_rounds.view_vpicktree_ro'}"
-                            />
-                    </page>
-                    <page string="Statistics">
                         <group>
-                            <field name="stat_time_picking" widget="float_time"/>
-                            <field name="stat_time_leave" widget="float_time"/>
+                            <field name="date" />
+                            <field name="time_picking_planned" widget="float_time"/>
+                            <field name="time_leave_planned" widget="float_time"/>
                         </group>
-                    </page>
-                </notebook>
+                        <group>
+                            <field name="name"/>
+                            <field name="itinerary_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <button name="button_itinerary_import" type="object" string="Import from itinerary"/>
+                    <notebook>
+                        <page string="Customers">
+                            <field name="instance_customer_ids">
+                                <tree editable="bottom">
+                                    <field name="res_partner_id"/>
+                                    <field name="rank"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Statistics">
+                            <group>
+                                <field name="stat_time_picking" widget="float_time"/>
+                                <field name="stat_time_leave" widget="float_time"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
             </form>
         </field>
     </record>

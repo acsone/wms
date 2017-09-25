@@ -91,7 +91,7 @@ WHERE picking.delivery_round_state = 'open'
 
             picking_query += "ORDER BY round.date, " \
                              "round.time_picking_planned, " \
-                             "picking.sequence " \
+                             "picking.rank DESC " \
                              "LIMIT 1;"
             self.request.env.cr.execute(picking_query, tuple(query_values))
             query_result = self.request.env.cr.fetchone()
