@@ -263,7 +263,9 @@ class DB2MapperPurchaseOrder(object):
             # to create pickings, this needs to be done after state write
             # or it would be recomputed
             query = (
-                "UPDATE purchase_order_line SET qty_received = product_qty"
+                "UPDATE purchase_order_line"
+                " SET qty_received = product_qty"
+                "     qty_invoiced = product_qty"
                 " WHERE id in ( %s )"
             ) % ','.join(['%s'] * len(po_lines))
             cr.execute(query, po_lines.ids)
