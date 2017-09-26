@@ -1,0 +1,838 @@
+id,name,street,zip,city,phone,fax,customer,supplier,country_id/id,lang,mobile,type,ref,parent_id/id
+__import__.customer_address_delivery_6,EPC 001 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_6,__import__.customer_6
+__import__.customer_address_delivery_7,EPC 002 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_7,__import__.customer_7
+__import__.customer_address_delivery_8,EPC 003 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_8,__import__.customer_8
+__import__.customer_address_delivery_9,EPC 004,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_9,__import__.customer_9
+__import__.customer_address_delivery_10,EPC 005,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_10,__import__.customer_10
+__import__.customer_address_delivery_11,EPC 006,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_11,__import__.customer_11
+__import__.customer_address_delivery_17,EPC 007,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_17,__import__.customer_17
+__import__.customer_address_delivery_18,EPC 008,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_18,__import__.customer_18
+__import__.customer_address_delivery_20,EPC 009,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_20,__import__.customer_20
+__import__.customer_address_delivery_23,DR HUYNEN KARINE,"RUE DU BARON D'OBIN,30",4319,AMBRESIN,081/85 50 25,,False,False,base.be,fr_BE,,delivery,delivery_23,__import__.customer_23
+__import__.customer_address_delivery_24,GODIN FABIENNE,Rue Mattez 28,6182,SOUVRET,,,False,False,base.be,fr_BE,,delivery,delivery_24,__import__.customer_24
+__import__.customer_address_delivery_34,EPC 011,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_34,__import__.customer_34
+__import__.customer_address_delivery_35,GROSJEAN CHRISTIAN,"RUE DES GRANDS-PRES,15",4120,NEUPRE,,,False,False,base.be,fr_BE,,delivery,delivery_35,__import__.customer_35
+__import__.customer_address_delivery_36,APC 012,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_36,__import__.customer_36
+__import__.customer_address_delivery_44,EPC 013,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_44,__import__.customer_44
+__import__.customer_address_delivery_46,DEGOTTE JEAN-MARIE *,Rue Birven 6,4880,AUBEL (LA CLOUSE),,,False,False,base.be,fr_BE,,delivery,delivery_46,__import__.customer_46
+__import__.customer_address_delivery_47,EPC 014,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_47,__import__.customer_47
+__import__.customer_address_delivery_48,EPC 015,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_48,__import__.customer_48
+__import__.customer_address_delivery_52,EPC 016,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_52,__import__.customer_52
+__import__.customer_address_delivery_54,EPC 017,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_54,__import__.customer_54
+__import__.customer_address_delivery_55,EPC 018,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_55,__import__.customer_55
+__import__.customer_address_delivery_57,EPC 019,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_57,__import__.customer_57
+__import__.customer_address_delivery_60,EPC 020,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_60,__import__.customer_60
+__import__.customer_address_delivery_63,EPC 021,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_63,__import__.customer_63
+__import__.customer_address_delivery_65,EPC 022,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_65,__import__.customer_65
+__import__.customer_address_delivery_67,EPC 023,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_67,__import__.customer_67
+__import__.customer_address_delivery_69,EPC 024,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_69,__import__.customer_69
+__import__.customer_address_delivery_73,EPC 025,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_73,__import__.customer_73
+__import__.customer_address_delivery_76,EPC 026,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_76,__import__.customer_76
+__import__.customer_address_delivery_77,EPC 027,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_77,__import__.customer_77
+__import__.customer_address_delivery_80,EPC 028,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_80,__import__.customer_80
+__import__.customer_address_delivery_84,EPC 029,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_84,__import__.customer_84
+__import__.customer_address_delivery_86,EPC 030,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_86,__import__.customer_86
+__import__.customer_address_delivery_88,EPC 031,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_88,__import__.customer_88
+__import__.customer_address_delivery_90,EPC 032,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_90,__import__.customer_90
+__import__.customer_address_delivery_92,EPC 033,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_92,__import__.customer_92
+__import__.customer_address_delivery_95,EPC 034,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_95,__import__.customer_95
+__import__.customer_address_delivery_98,EPC 035,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_98,__import__.customer_98
+__import__.customer_address_delivery_100,EPC 036,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_100,__import__.customer_100
+__import__.customer_address_delivery_101,DOCTEUR HUYNEN KARINE,"RUE DU BARON D'OBIN,30",4219,AMBRESIN,081/85 50 25,,False,False,base.be,fr_BE,,delivery,delivery_101,__import__.customer_101
+__import__.customer_address_delivery_102,DOCTEUR BONTEMPS PH.,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_102,__import__.customer_102
+__import__.customer_address_delivery_103,EPC 037,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_103,__import__.customer_103
+__import__.customer_address_delivery_106,EPC 038,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_106,__import__.customer_106
+__import__.customer_address_delivery_107,EPC 039,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_107,__import__.customer_107
+__import__.customer_address_delivery_112,EPC 040,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_112,__import__.customer_112
+__import__.customer_address_delivery_114,EPC 041,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_114,__import__.customer_114
+__import__.customer_address_delivery_117,EPC 042,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_117,__import__.customer_117
+__import__.customer_address_delivery_120,EPC 043,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_120,__import__.customer_120
+__import__.customer_address_delivery_123,EPC 044,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_123,__import__.customer_123
+__import__.customer_address_delivery_129,EPC 045,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_129,__import__.customer_129
+__import__.customer_address_delivery_130,EPC 046,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_130,__import__.customer_130
+__import__.customer_address_delivery_131,MINGUET ARNAUD,"AV DE LA LIBERATION,18",4920,AYWAILLE,,AVANT 17H,False,False,base.be,fr_BE,,delivery,delivery_131,__import__.customer_131
+__import__.customer_address_delivery_132,EPC 047,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_132,__import__.customer_132
+__import__.customer_address_delivery_134,EPC 048,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_134,__import__.customer_134
+__import__.customer_address_delivery_136,EPC 049,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_136,__import__.customer_136
+__import__.customer_address_delivery_139,EPC 050 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_139,__import__.customer_139
+__import__.customer_address_delivery_141,SC EPC 051,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_141,__import__.customer_141
+__import__.customer_address_delivery_144,EPC 052 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_144,__import__.customer_144
+__import__.customer_address_delivery_146,EPC 053,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_146,__import__.customer_146
+__import__.customer_address_delivery_150,EPC 054,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_150,__import__.customer_150
+__import__.customer_address_delivery_152,EPC 055,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_152,__import__.customer_152
+__import__.customer_address_delivery_155,EPC 056,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_155,__import__.customer_155
+__import__.customer_address_delivery_157,EPC 057,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_157,__import__.customer_157
+__import__.customer_address_delivery_159,DR HENE RAYMOND,"Route de la Florbecq, 377 B",7866,OLLIGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_159,__import__.customer_159
+__import__.customer_address_delivery_160,EPC 058,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_160,__import__.customer_160
+__import__.customer_address_delivery_165,EPC 060,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_165,__import__.customer_165
+__import__.customer_address_delivery_174,EPC 061,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_174,__import__.customer_174
+__import__.customer_address_delivery_177,EPC 062,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_177,__import__.customer_177
+__import__.customer_address_delivery_181,EPC 064,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_181,__import__.customer_181
+__import__.customer_address_delivery_182,HOC EDITH,"GRAND RUE,42",5020,GEMBLOUX,,,False,False,base.be,fr_BE,,delivery,delivery_182,__import__.customer_182
+__import__.customer_address_delivery_184,EPC 065,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_184,__import__.customer_184
+__import__.customer_address_delivery_186,NANNAN JEAN,"RUE DES COMBATTANTS,7",6880,BERTRIX,,,False,False,base.be,fr_BE,,delivery,delivery_186,__import__.customer_186
+__import__.customer_address_delivery_187,EPC100,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_187,__import__.customer_187
+__import__.customer_address_delivery_190,EPC 067,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_190,__import__.customer_190
+__import__.customer_address_delivery_200,EPC 068,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_200,__import__.customer_200
+__import__.customer_address_delivery_202,DOCTEUR STERNOTTE,LU PTE VOYE,6870,SAINT-HUBERT,,,False,False,base.be,fr_BE,,delivery,delivery_202,__import__.customer_202
+__import__.customer_address_delivery_203,EPC 069,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_203,__import__.customer_203
+__import__.customer_address_delivery_206,EPC 070,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_206,__import__.customer_206
+__import__.customer_address_delivery_207,EPC 071,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_207,__import__.customer_207
+__import__.customer_address_delivery_210,EPC 072,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_210,__import__.customer_210
+__import__.customer_address_delivery_222,DOCTEUR ANNE DEVRIESE,"RUE JEAN LORETTE,14 A",6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_222,__import__.customer_222
+__import__.customer_address_delivery_225,JOIE,"BVD DE LA SAUVENIERE,56",4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_225,__import__.customer_225
+__import__.customer_address_delivery_227,CLINIQUE VET DE LA BOVERIE,quai de la Boverie 49,4020,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_227,__import__.customer_227
+__import__.customer_address_delivery_230,JORET GUY *,"RUE DE L'ENSEIGNEMENT,59",6140,FONTAINE L'EVEQUE,,,False,False,base.be,fr_BE,,delivery,delivery_230,__import__.customer_230
+__import__.customer_address_delivery_232,KAKKERT ALAIN,"RUE A. DEFUISSEAUX,35",4340,AWANS,,,False,False,base.be,fr_BE,,delivery,delivery_232,__import__.customer_232
+__import__.customer_address_delivery_246,EPC 073,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_246,__import__.customer_246
+__import__.customer_address_delivery_248,EPC 074,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_248,__import__.customer_248
+__import__.customer_address_delivery_250,EPC 075,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_250,__import__.customer_250
+__import__.customer_address_delivery_252,EPC 076,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_252,__import__.customer_252
+__import__.customer_address_delivery_254,EPC 077,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_254,__import__.customer_254
+__import__.customer_address_delivery_256,EPC 078,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_256,__import__.customer_256
+__import__.customer_address_delivery_258,03C 079,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_258,__import__.customer_258
+__import__.customer_address_delivery_262,EPC 080,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_262,__import__.customer_262
+__import__.customer_address_delivery_265,EPC 081,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_265,__import__.customer_265
+__import__.customer_address_delivery_266,EPC 082,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_266,__import__.customer_266
+__import__.customer_address_delivery_267,LAMBERT KATIE,Rue Omer Thiriar 212,7100,LA LOUVIERE,,,False,False,base.be,fr_BE,,delivery,delivery_267,__import__.customer_267
+__import__.customer_address_delivery_268,EPC 083,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_268,__import__.customer_268
+__import__.customer_address_delivery_272,EPC 084,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_272,__import__.customer_272
+__import__.customer_address_delivery_276,EPC 085,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_276,__import__.customer_276
+__import__.customer_address_delivery_281,EPC 086,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_281,__import__.customer_281
+__import__.customer_address_delivery_284,EPC 087,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_284,__import__.customer_284
+__import__.customer_address_delivery_294,EPC 089/EX LALOUX SPRL,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_294,__import__.customer_294
+__import__.customer_address_delivery_298,EPC 091,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_298,__import__.customer_298
+__import__.customer_address_delivery_300,EPC 092,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_300,__import__.customer_300
+__import__.customer_address_delivery_303,EPC 093,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_303,__import__.customer_303
+__import__.customer_address_delivery_305,EPC 094,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_305,__import__.customer_305
+__import__.customer_address_delivery_307,EPC 095,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_307,__import__.customer_307
+__import__.customer_address_delivery_309,EPC 096,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_309,__import__.customer_309
+__import__.customer_address_delivery_345,DOCTEUR BONTEMPS PH.,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_345,__import__.customer_345
+__import__.customer_address_delivery_346,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_346,__import__.customer_346
+__import__.customer_address_delivery_348,DELBAEN FABIENNE,"AV P.PASTURE,247",6032,MONT SUR MARCHIENNE,,,False,False,base.be,fr_BE,,delivery,delivery_348,__import__.customer_348
+__import__.customer_address_delivery_358,AHN BENOIT,Rue Leopold 94,4820,DISON,,,False,False,base.be,fr_BE,,delivery,delivery_358,__import__.customer_358
+__import__.customer_address_delivery_378,DOCTEUR BONTEMPS PH,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_378,__import__.customer_378
+__import__.customer_address_delivery_386,LOUON GENEVIEVE  *,"THIER D'OUPEYE,138 OU 142",4683,VIVEGNIS,,,False,False,base.be,fr_BE,,delivery,delivery_386,__import__.customer_386
+__import__.customer_address_delivery_387,PPL+,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_387,__import__.customer_387
+__import__.customer_address_delivery_388,LOUVRIER VINCENT,"CHEE DE MONS,284",7800,ATH,,,False,False,base.be,fr_BE,,delivery,delivery_388,__import__.customer_388
+__import__.customer_address_delivery_403,SENGER-ARENDT,"Rue des Aguesses, 33",6940,PETIT HAN (DURBUY),086/213039,,False,False,base.be,fr_BE,,delivery,delivery_403,__import__.customer_403
+__import__.customer_address_delivery_423,BADOT JEAN-LOUIS *,"Rue Warinaue, 94",6120,NALINNES,,,False,False,base.be,fr_BE,,delivery,delivery_423,__import__.customer_423
+__import__.customer_address_delivery_424,DOCTEUR BAERT GUY,"AV J. DE LA HOESE,53",1080,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_424,__import__.customer_424
+__import__.customer_address_delivery_435,DR BELCOUR PATRICK *,"Chaussée de la Cense, 109",1410,WATERLOO,,,False,False,base.be,fr_BE,,delivery,delivery_435,__import__.customer_435
+__import__.customer_address_delivery_436,ROCOUR,"RUE J.GHUYSEN,3",4670,BLEGNY,,,False,False,base.be,fr_BE,,delivery,delivery_436,__import__.customer_436
+__import__.customer_address_delivery_437,BEDET FABIENNE *,"Chaussée de Tubize,234",1420,BRAINE-L'ALLEUD,,,False,False,base.be,fr_BE,,delivery,delivery_437,__import__.customer_437
+__import__.customer_address_delivery_467,DOCTEUR HUYNEN KARINE,"RUE DU BARON D'OBIN,30",4219,AMBRESIN,081/85 50 25,,False,False,base.be,fr_BE,,delivery,delivery_467,__import__.customer_467
+__import__.customer_address_delivery_494,DR SIMONIS SERGE *,"Rue des Français, 220",4430,ANS,,,False,False,base.be,fr_BE,,delivery,delivery_494,__import__.customer_494
+__import__.customer_address_delivery_496,SIMONS MARC  *,"AV DEZANGRE,32A",1950,KRAINEM,,,False,False,base.be,fr_BE,,delivery,delivery_496,__import__.customer_496
+__import__.customer_address_delivery_499,SNAPS CLAUDE,"RUE DE L'EGLISE,3",1320,BEAUVECHAIN,,,False,False,base.be,fr_BE,,delivery,delivery_499,__import__.customer_499
+__import__.customer_address_delivery_532,DR GUIOT JEAN-POL,"RUE P. JANSON, 1",4420,MONTEGNEE,,,False,False,base.be,fr_BE,,delivery,delivery_532,__import__.customer_532
+__import__.customer_address_delivery_533,BRUYERE DOMINIQUE,"RUE G. MOREAU,38",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_533,__import__.customer_533
+__import__.customer_address_delivery_534,MME MG RENARD WULFF,"Rue Guillaume Stocq, 54",1050,BRUXELLES,02/6405605,,False,False,base.be,fr_BE,,delivery,delivery_534,__import__.customer_534
+__import__.customer_address_delivery_540,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_540,__import__.customer_540
+__import__.customer_address_delivery_552,TEUCQ ANNE-MARGUERITE  *,"PLACE COMMUNALE,10",7170,MANAGE,,,False,False,base.be,fr_BE,,delivery,delivery_552,__import__.customer_552
+__import__.customer_address_delivery_565,THILS OLIVIER,"CHEE DE GILLY,149",6040,JUMET,,,False,False,base.be,fr_BE,,delivery,delivery_565,__import__.customer_565
+__import__.customer_address_delivery_565,THILS OLIVIER,"CHEE DE GILLY,149",6040,JUMET,,,False,False,base.be,fr_BE,,delivery,delivery_565,__import__.customer_565
+__import__.customer_address_delivery_578,DR BUYCK PASCAL,"Rue de Nazareth, 3",5630,SILENRIEUX,,,False,False,base.be,fr_BE,,delivery,delivery_578,__import__.customer_578
+__import__.customer_address_delivery_581,TIXHON SERGE  *,"RUE VILLE BASSE,32",6660,HOUFALIZE,,,False,False,base.be,fr_BE,,delivery,delivery_581,__import__.customer_581
+__import__.customer_address_delivery_596,CHAUVIAUX,"RUE DE GEDINNE,42",6929,DAVERDISSE,,,False,False,base.be,fr_BE,,delivery,delivery_596,__import__.customer_596
+__import__.customer_address_delivery_601,SERV. DE VIROLOGIE,"Route de Berleur, 2",4550,NANDRIN,,,False,False,base.be,fr_BE,,delivery,delivery_601,__import__.customer_601
+__import__.customer_address_delivery_629,DR VANDENHOVE G. *,"Strainchamps, 4",6637,FAUVILLERS,,,False,False,base.be,fr_BE,,delivery,delivery_629,__import__.customer_629
+__import__.customer_address_delivery_633,CLINIQUE VET. D'AUDERGHEM,"Avenue d'Auderghem, 240",1040,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_633,__import__.customer_633
+__import__.customer_address_delivery_642,NOIRFALISE ERIC,"Rue de Bourgogne, 24",4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_642,__import__.customer_642
+__import__.customer_address_delivery_700,DR CLOOT DOMINIQUE,"Rue Birven, 6",4880,LA CLOUSE,,,False,False,base.be,fr_BE,,delivery,delivery_700,__import__.customer_700
+__import__.customer_address_delivery_703,DOCTEUR WARNIER,"RUE V. HEPTIA,32",4340,VILLERS L'EVEQUE,04/257 46 80,,False,False,base.be,fr_BE,,delivery,delivery_703,__import__.customer_703
+__import__.customer_address_delivery_709,WERA ET GHYSEN *,"CHEE DE CHARLEROI,4",1471,GENAPPE,,,False,False,base.be,fr_BE,,delivery,delivery_709,__import__.customer_709
+__import__.customer_address_delivery_715,MME BRAY,Rue Hayeneux 167,4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_715,__import__.customer_715
+__import__.customer_address_delivery_719,WINTGENS BENOIT,"RUE J.MAISIER,68",4830,DOLHAIN,,,False,False,base.be,fr_BE,,delivery,delivery_719,__import__.customer_719
+__import__.customer_address_delivery_726,WILLEMART LUC *,"RUE DE LA CABINE,153",5774,PONDROME,,,False,False,base.be,fr_BE,,delivery,delivery_726,__import__.customer_726
+__import__.customer_address_delivery_740,CHRISTIAENS VINCENT *,"rue Bruyère-St-Jean, 28,",1410,WATERLOO,,,False,False,base.be,fr_BE,,delivery,delivery_740,__import__.customer_740
+__import__.customer_address_delivery_751,DOCTEUR DEBOUVRIES,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_751,__import__.customer_751
+__import__.customer_address_delivery_759,SOVELI,"RUE PAUL DUBOIS,102",6890,LIBIN,061/65 52 60,,False,False,base.be,fr_BE,,delivery,delivery_759,__import__.customer_759
+__import__.customer_address_delivery_774,CROLLA LUC,"RUE HUSSOMPONT,3",1390,JODOIGNE,,,False,False,base.be,fr_BE,,delivery,delivery_774,__import__.customer_774
+__import__.customer_address_delivery_776,DOCTEUR BERTHO,"RUE BASSE CAMPAGNE,1",4260,CIPLET,019/69 73 07,,False,False,base.be,fr_BE,,delivery,delivery_776,__import__.customer_776
+__import__.customer_address_delivery_818,DOCTEUR SOMERS L-M,"RUE DE FRAGNEE,109",4000,LIEGE,04/253 17 20,,False,False,base.be,fr_BE,,delivery,delivery_818,__import__.customer_818
+__import__.customer_address_delivery_821,PETIT JACQUES *,"CHEE SE ROLLY,25",5660,MARIEMBOURG,,,False,False,base.be,fr_BE,,delivery,delivery_821,__import__.customer_821
+__import__.customer_address_delivery_822,LACROSSE PH,"RUE LIOTTE,17",4170,COMBLAIN AU PONT,,,False,False,base.be,fr_BE,,delivery,delivery_822,__import__.customer_822
+__import__.customer_address_delivery_833,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_833,__import__.customer_833
+__import__.customer_address_delivery_837,DETHIER ANNE-MARIE,"Rue de Merdorp, 11",1350,ORP-LE-PETIT,,,False,False,base.be,fr_BE,,delivery,delivery_837,__import__.customer_837
+__import__.customer_address_delivery_843,DOCTEUR CORNET F.,"RUE DU LUXEMBOURG,78",6900,MARCHE,084/32 18 43,,False,False,base.be,fr_BE,,delivery,delivery_843,__import__.customer_843
+__import__.customer_address_delivery_863,DASSESSE ERIC *,"RUE A. FOSSANTS,18",1380,LASNE,,,False,False,base.be,fr_BE,,delivery,delivery_863,__import__.customer_863
+__import__.customer_address_delivery_870,PIRON ROSE-MARIE,"RUE SOUS LES HAIES,96",4041,VOTTEM,,,False,False,base.be,fr_BE,,delivery,delivery_870,__import__.customer_870
+__import__.customer_address_delivery_904,DOCTEUR BURON,"RUE DE LA DAMZELLE,5",6997,AMONINES,086/47 76 40,,False,False,base.be,fr_BE,,delivery,delivery_904,__import__.customer_904
+__import__.customer_address_delivery_924,DOCTEUR THAS AGNES,"Mechelsteenweg, 154",1933,STERREBEEK,02/731 73 83,,False,False,base.be,fr_BE,,delivery,delivery_924,__import__.customer_924
+__import__.customer_address_delivery_932,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_932,__import__.customer_932
+__import__.customer_address_delivery_933,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_933,__import__.customer_933
+__import__.customer_address_delivery_941,POIRRIER BEATRICE,"THIER DU CORBEAU,8",6900,MARCHE,,,False,False,base.be,fr_BE,,delivery,delivery_941,__import__.customer_941
+__import__.customer_address_delivery_949,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_949,__import__.customer_949
+__import__.customer_address_delivery_957,DOCTEUR PIRARD MAURICE,"RUE DE DAMRE,36",4140,SPRIMONT,04/382 16 43,,False,False,base.be,fr_BE,,delivery,delivery_957,__import__.customer_957
+__import__.customer_address_delivery_962,DEWIT SERGE *,"rue de l'eau sur elle, 116",6043,RANSART,,,False,False,base.be,fr_BE,,delivery,delivery_962,__import__.customer_962
+__import__.customer_address_delivery_986,DU JONCKAY,Rue du Jonckay 31,5380,FERNELMONT,085711199,,False,False,base.be,fr_BE,,delivery,delivery_986,__import__.customer_986
+__import__.customer_address_delivery_998,DEVRIESE ANNE *,"Rue du Moulin, 35",6181,GOUY LEZ PIETON,,,False,False,base.be,fr_BE,,delivery,delivery_998,__import__.customer_998
+__import__.customer_address_delivery_1025,RENETTE BRUNO,"RUE SAUVENIERE,281",4590,OUFFET,,,False,False,base.be,fr_BE,,delivery,delivery_1025,__import__.customer_1025
+__import__.customer_address_delivery_1030,DASTY ET DENIS,"ROUTE PROVINCIALE,38",1450,CHASTRE-VILLEROUX,,,False,False,base.be,fr_BE,,delivery,delivery_1030,__import__.customer_1030
+__import__.customer_address_delivery_1031,DOCTEUR BROUWERS,"RENEUBOIS,56",4652,XHENDELESSE,087/66 13 26,,False,False,base.be,fr_BE,,delivery,delivery_1031,__import__.customer_1031
+__import__.customer_address_delivery_1038,DOCTEUR MELCHIOR-LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_1038,__import__.customer_1038
+__import__.customer_address_delivery_1040,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1040,__import__.customer_1040
+__import__.customer_address_delivery_1044,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1044,__import__.customer_1044
+__import__.customer_address_delivery_1052,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,084/41 22 06,,False,False,base.be,fr_BE,,delivery,delivery_1052,__import__.customer_1052
+__import__.customer_address_delivery_1054,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1054,__import__.customer_1054
+__import__.customer_address_delivery_1055,DE TEMMERMAN FRANCOISE,"CHSEE DE TIRLEMONT,74",1370,JODOIGNE,,,False,False,base.be,fr_BE,,delivery,delivery_1055,__import__.customer_1055
+__import__.customer_address_delivery_1070,DOCTEUR VAN THEMSCHE PIERRE,"RUE DU THIER,10",4560,PAILHE,04/252 27 45,,False,False,base.be,fr_BE,,delivery,delivery_1070,__import__.customer_1070
+__import__.customer_address_delivery_1072,DOCTEUR HUSTIN ALAIN,RUE ROSIERE 11,6769,HOUDRIGNY,063/57 87 68,,False,False,base.be,fr_BE,,delivery,delivery_1072,__import__.customer_1072
+__import__.customer_address_delivery_1075,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1075,__import__.customer_1075
+__import__.customer_address_delivery_1100,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1100,__import__.customer_1100
+__import__.customer_address_delivery_1103,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1103,__import__.customer_1103
+__import__.customer_address_delivery_1105,MR WAUTERS,Rue du Griffon 29,7090,HENNUYERES,,,False,False,base.be,fr_BE,,delivery,delivery_1105,__import__.customer_1105
+__import__.customer_address_delivery_1107,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1107,__import__.customer_1107
+__import__.customer_address_delivery_1109,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1109,__import__.customer_1109
+__import__.customer_address_delivery_1110,COIFFURE MARIE-LOUISE,Rue MIDDELBOURG 25,1170,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_1110,__import__.customer_1110
+__import__.customer_address_delivery_1113,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1113,__import__.customer_1113
+__import__.customer_address_delivery_1116,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1116,__import__.customer_1116
+__import__.customer_address_delivery_1117,DR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1117,__import__.customer_1117
+__import__.customer_address_delivery_1119,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1119,__import__.customer_1119
+__import__.customer_address_delivery_1140,DOCTEUR ANTHEMUS,"RUE PACHI ZABETTE,14",5020,TEMPLOUX,081/566 381,,False,False,base.be,fr_BE,,delivery,delivery_1140,__import__.customer_1140
+__import__.customer_address_delivery_1142,DOCTEUR DEVRIES ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1142,__import__.customer_1142
+__import__.customer_address_delivery_1163,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1163,__import__.customer_1163
+__import__.customer_address_delivery_1166,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_1166,__import__.customer_1166
+__import__.customer_address_delivery_1170,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1170,__import__.customer_1170
+__import__.customer_address_delivery_1181,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1181,__import__.customer_1181
+__import__.customer_address_delivery_1186,DOCTEUR BATAILLE E,RUE DE FIZE 17,4537,CHAPON-SERAING,019/566272,,False,False,base.be,fr_BE,,delivery,delivery_1186,__import__.customer_1186
+__import__.customer_address_delivery_1212,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1212,__import__.customer_1212
+__import__.customer_address_delivery_1213,DR DEVEUX A.,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1213,__import__.customer_1213
+__import__.customer_address_delivery_1215,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1215,__import__.customer_1215
+__import__.customer_address_delivery_1216,DOCTEUR DEVRIES ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1216,__import__.customer_1216
+__import__.customer_address_delivery_1218,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1218,__import__.customer_1218
+__import__.customer_address_delivery_1228,DOCTEUR DEVRIES ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1228,__import__.customer_1228
+__import__.customer_address_delivery_1236,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1236,__import__.customer_1236
+__import__.customer_address_delivery_1238,DOCTEUR DEVRIES ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1238,__import__.customer_1238
+__import__.customer_address_delivery_1239,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1239,__import__.customer_1239
+__import__.customer_address_delivery_1240,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1240,__import__.customer_1240
+__import__.customer_address_delivery_1242,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1242,__import__.customer_1242
+__import__.customer_address_delivery_1243,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1243,__import__.customer_1243
+__import__.customer_address_delivery_1245,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1245,__import__.customer_1245
+__import__.customer_address_delivery_1248,MONSIEUR HERCK,CHAUSSEE DE VERVIERS 30,4910,THEUX,,,False,False,base.be,fr_BE,,delivery,delivery_1248,__import__.customer_1248
+__import__.customer_address_delivery_1259,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1259,__import__.customer_1259
+__import__.customer_address_delivery_1260,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1260,__import__.customer_1260
+__import__.customer_address_delivery_1263,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1263,__import__.customer_1263
+__import__.customer_address_delivery_1265,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1265,__import__.customer_1265
+__import__.customer_address_delivery_1268,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1268,__import__.customer_1268
+__import__.customer_address_delivery_1271,DOCTEUR DEVEUX A.,"RUE DU TRICHON,221",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1271,__import__.customer_1271
+__import__.customer_address_delivery_1273,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1273,__import__.customer_1273
+__import__.customer_address_delivery_1277,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1277,__import__.customer_1277
+__import__.customer_address_delivery_1279,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1279,__import__.customer_1279
+__import__.customer_address_delivery_1283,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1283,__import__.customer_1283
+__import__.customer_address_delivery_1290,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1290,__import__.customer_1290
+__import__.customer_address_delivery_1291,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1291,__import__.customer_1291
+__import__.customer_address_delivery_1292,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1292,__import__.customer_1292
+__import__.customer_address_delivery_1295,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1295,__import__.customer_1295
+__import__.customer_address_delivery_1297,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1297,__import__.customer_1297
+__import__.customer_address_delivery_1300,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1300,__import__.customer_1300
+__import__.customer_address_delivery_1302,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1302,__import__.customer_1302
+__import__.customer_address_delivery_1334,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1334,__import__.customer_1334
+__import__.customer_address_delivery_1344,PFIZER ANIMAL HEALTH/T.RICHARD,"MERCURIUSSTRAAT,20",1930,ZAVENTEM,,,False,False,base.be,fr_BE,,delivery,delivery_1344,__import__.customer_1344
+__import__.customer_address_delivery_1360,DOCTEUR FORGET,"RUE DE FRANCE,4",6730,TINTIGNY,063/44 42 55,,False,False,base.be,fr_BE,,delivery,delivery_1360,__import__.customer_1360
+__import__.customer_address_delivery_1365,DR MATHEISE THIERRY,"ROUTE DE GEMBLOUX,241",5310,AISCHE EN REFAIL,081/65 58 09,,False,False,base.be,fr_BE,,delivery,delivery_1365,__import__.customer_1365
+__import__.customer_address_delivery_1369,CHRISTIAENS V-COMPTOIR *,"rue Bruyere-St-Jean, 28,",1410,WATERLOO,,,False,False,base.be,fr_BE,,delivery,delivery_1369,__import__.customer_1369
+__import__.customer_address_delivery_1381,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1381,__import__.customer_1381
+__import__.customer_address_delivery_1391,ABBELOOS DAVID,Rue de Gerpinnes 210,5621,HANZINNE,,,False,False,base.be,fr_BE,,delivery,delivery_1391,__import__.customer_1391
+__import__.customer_address_delivery_1392,DR DELZANDRE,Rue du Patronnage 5,1476,HOUTAIN LE VAL,,,False,False,base.be,fr_BE,,delivery,delivery_1392,__import__.customer_1392
+__import__.customer_address_delivery_1401,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1401,__import__.customer_1401
+__import__.customer_address_delivery_1416,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1416,__import__.customer_1416
+__import__.customer_address_delivery_1418,DR MATHEISE THIERRY,"ROUTE DE GEMBLOUX,241",5310,AISCHE EN REFAIL,081/65 58 09,,False,False,base.be,fr_BE,,delivery,delivery_1418,__import__.customer_1418
+__import__.customer_address_delivery_1422,CHARLIER THIERRY,"AV CHARLES QUINT,124",1083,GANSHOREN,,,False,False,base.be,fr_BE,,delivery,delivery_1422,__import__.customer_1422
+__import__.customer_address_delivery_1423,B. THIBAUT,"Grand Route, 50",4400,FLEMALLE,,,False,False,base.be,fr_BE,,delivery,delivery_1423,__import__.customer_1423
+__import__.customer_address_delivery_1428,MONSIEUR JANSSENS,Rue Léon Doperé 22,1090,JETTE,,,False,False,base.be,fr_BE,,delivery,delivery_1428,__import__.customer_1428
+__import__.customer_address_delivery_1442,LAUWERS FRANÇOISE,FAC DE MEDECINE VET BTE44,4000,SART-TILMAN,,,False,False,base.be,fr_BE,,delivery,delivery_1442,__import__.customer_1442
+__import__.customer_address_delivery_1448,DOCTEUR DEVRIESE ANNE,Rue Jean Lorette 14a,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_1448,__import__.customer_1448
+__import__.customer_address_delivery_1449,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1449,__import__.customer_1449
+__import__.customer_address_delivery_1460,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1460,__import__.customer_1460
+__import__.customer_address_delivery_1461,PERE VAN BUNNEN,Rue Van Soust 191,1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_1461,__import__.customer_1461
+__import__.customer_address_delivery_1463,BERTRAND VINCENT *,"Rue de L'institut, 2",4670,BLEGNY,,,False,False,base.be,fr_BE,,delivery,delivery_1463,__import__.customer_1463
+__import__.customer_address_delivery_1467,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_1467,__import__.customer_1467
+__import__.customer_address_delivery_1473,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1473,__import__.customer_1473
+__import__.customer_address_delivery_1480,DOCTEUR REULIAUX,"RUE VAL D'ALVAU, 32",1457,NIL-ST-VINCENT,010/65 64 32,,False,False,base.be,fr_BE,,delivery,delivery_1480,__import__.customer_1480
+__import__.customer_address_delivery_1484,SCHUTTER-LIEVENS,"RUE DES NATIONS UNIES,10",4432,ALLEUR,,,False,False,base.be,fr_BE,,delivery,delivery_1484,__import__.customer_1484
+__import__.customer_address_delivery_1494,DOCTEUR MATHOT MARCEL,"RUE DE VIRELLES,20",5630,CERFONTAINE,071/64 42 42,,False,False,base.be,fr_BE,,delivery,delivery_1494,__import__.customer_1494
+__import__.customer_address_delivery_1495,DOCTEUR BROUWERS-DEMONTY,"RENEUBOIS,56",4652,XHENDELESSE,087/66 13 26,,False,False,base.be,fr_BE,,delivery,delivery_1495,__import__.customer_1495
+__import__.customer_address_delivery_1498,DOCTEUR MELCHIOR-LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_1498,__import__.customer_1498
+__import__.customer_address_delivery_1503,WERGIFOSSE FABIENNE,,5350,OHEY,,,False,False,base.be,fr_BE,,delivery,delivery_1503,__import__.customer_1503
+__import__.customer_address_delivery_1503,WERGIFOSSE FABIENNE,37 chaussée Marenne,6900,MARCHE EN FAMMENE,,,False,False,base.be,fr_BE,,delivery,delivery_1503,__import__.customer_1503
+__import__.customer_address_delivery_1506,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1506,__import__.customer_1506
+__import__.customer_address_delivery_1524,DE LEENER LAURE,Rue Van Kalck 22,1080,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_1524,__import__.customer_1524
+__import__.customer_address_delivery_1526,DOCTEUR ARNOULD C,"AV DE LA VICTOIRE,26",6840,NEUFCHATEAU,061/27 92 20,,False,False,base.be,fr_BE,,delivery,delivery_1526,__import__.customer_1526
+__import__.customer_address_delivery_1528,POTIE XAVIER,"RUE D'ARMENTIERRES,265",7783,LEBIZET,,,False,False,base.be,fr_BE,,delivery,delivery_1528,__import__.customer_1528
+__import__.customer_address_delivery_1530,DOCTEUR ARNOULD C,"AV DE LA VICTOIRE,26",6840,NEUFCHATEAU,061/27 92 20,,False,False,base.be,fr_BE,,delivery,delivery_1530,__import__.customer_1530
+__import__.customer_address_delivery_1535,DOCTEUR DEVRIES ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1535,__import__.customer_1535
+__import__.customer_address_delivery_1548,DRS DILE-BRAZIL-VAILLANT,Avenue de Paris,79230,MONCOUTANT,,,False,False,base.fr,fr_BE,,delivery,delivery_1548,__import__.customer_1548
+__import__.customer_address_delivery_1559,DOCTEUR DETHIER YVES,RUE LAVAUX 5,6987,RENDEUX,,,False,False,base.be,fr_BE,,delivery,delivery_1559,__import__.customer_1559
+__import__.customer_address_delivery_1560,DOCTEUR COUNIOT,"RUE E. DELTENRE,51",1495,SART DAME AVELINES,071/87 83 96,,False,False,base.be,fr_BE,,delivery,delivery_1560,__import__.customer_1560
+__import__.customer_address_delivery_1562,DOCTEUR REULIAUX,"RUE VAL D'ALVAU, 32",1457,NIL-ST-VINCENT,010/65 64 32,,False,False,base.be,fr_BE,,delivery,delivery_1562,__import__.customer_1562
+__import__.customer_address_delivery_1565,BERGE HARALD,"Place du Beau Site, 11",1330,RIXENSART,,,False,False,base.be,fr_BE,,delivery,delivery_1565,__import__.customer_1565
+__import__.customer_address_delivery_1573,DOCTEUR ARNOULD C,"AV DE LA VICTOIRE,26",6840,NEUFCHATEAU,061/27 92 20,,False,False,base.be,fr_BE,,delivery,delivery_1573,__import__.customer_1573
+__import__.customer_address_delivery_1576,DOCTEUR PIRARD MAURICE,"RUE DE DAMRE,36",4140,SPRIMONT,04/382 16 43,,False,False,base.be,fr_BE,,delivery,delivery_1576,__import__.customer_1576
+__import__.customer_address_delivery_1584,VANDERSMISSEN ANNE,Rue de Brandt 82,1140,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_1584,__import__.customer_1584
+__import__.customer_address_delivery_1588,DOCTEUR MELCHIOR-LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_1588,__import__.customer_1588
+__import__.customer_address_delivery_1597,DOCTEUR ESQUENET CHRISTOPHE,"HEUKELOMMERWEG,14",3770,RIEMST,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1597,__import__.customer_1597
+__import__.customer_address_delivery_1600,DOCTEUR PIRARD M,"RUE DE DAMRE,36",4140,SPRIMONT,04/382 16 43,,False,False,base.be,fr_BE,,delivery,delivery_1600,__import__.customer_1600
+__import__.customer_address_delivery_1605,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_1605,__import__.customer_1605
+__import__.customer_address_delivery_1612,TOUSSAINT FLORENCE,Chaussée de Neufchâteau 49A,6640,VAUX-SUR-SURE,061256203,,False,False,base.be,fr_BE,,delivery,delivery_1612,__import__.customer_1612
+__import__.customer_address_delivery_1638,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1638,__import__.customer_1638
+__import__.customer_address_delivery_1642,DEWIT SERGE,"rue de l'Eau sur Elle,116",6043,RANSART,,,False,False,base.be,fr_BE,,delivery,delivery_1642,__import__.customer_1642
+__import__.customer_address_delivery_1643,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,delivery_1643,__import__.customer_1643
+__import__.customer_address_delivery_1646,DOR JACQUES *,"QUAI BONAPARTE,52-53",4020,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_1646,__import__.customer_1646
+__import__.customer_address_delivery_1648,ERPICUM SUZANNE,"RUE JOSEPH II ,101",7110,HOUDENG EMERIES,,,False,False,base.be,fr_BE,,delivery,delivery_1648,__import__.customer_1648
+__import__.customer_address_delivery_1654,DOCTEUR DEVRIESE A.,RUE JEAN LORETTE 14A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_1654,__import__.customer_1654
+__import__.customer_address_delivery_1682,FRANSOLET MICHEL *,"Surister, 14",4845,JALHAY/SURISTER,,,False,False,base.be,fr_BE,,delivery,delivery_1682,__import__.customer_1682
+__import__.customer_address_delivery_1683,THAS AGNES,"MECHELSTEENWEG, 154",1933,STEEREBEEK,02/731 73 83,,False,False,base.be,fr_BE,,delivery,delivery_1683,__import__.customer_1683
+__import__.customer_address_delivery_1706,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1706,__import__.customer_1706
+__import__.customer_address_delivery_1707,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1707,__import__.customer_1707
+__import__.customer_address_delivery_1713,DOCTEUR DUROY J-P,"ROUTE D'ORVAL,76",6820,FLORENVILLE,061/31 31 79,,False,False,base.be,fr_BE,,delivery,delivery_1713,__import__.customer_1713
+__import__.customer_address_delivery_1717,DOCTEUR BONTEMPS PH.,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1717,__import__.customer_1717
+__import__.customer_address_delivery_1720,DR P. PIROTTE,"Route du Condroz, 443b",4031,Sart-Tilman (ANGLEUR),,,False,False,base.be,fr_BE,,delivery,delivery_1720,__import__.customer_1720
+__import__.customer_address_delivery_1725,GAUQUIER ETIENNE *,"RUE DES FUSILLES,14",7020,NIMMY ST JEAN,,,False,False,base.be,fr_BE,,delivery,delivery_1725,__import__.customer_1725
+__import__.customer_address_delivery_1730,CAPA,Rue de Montigny 22,4217,HERON,,,False,False,base.be,fr_BE,GSM:0495/571141,delivery,delivery_1730,__import__.customer_1730
+__import__.customer_address_delivery_1731,DOCTEUR DR ERPICUM,RUE JOSEPH II 101,7110,HOUDENG-AMERIE,,,False,False,base.be,fr_BE,,delivery,delivery_1731,__import__.customer_1731
+__import__.customer_address_delivery_1735,GERON YVES *,"Rue de Libersart, 69",1457,TOURINNES ST LAMBERT,,,False,False,base.be,fr_BE,,delivery,delivery_1735,__import__.customer_1735
+__import__.customer_address_delivery_1737,DR JEAN-MARIE HUBERT,"Rue de Fonteny, 9e",6673,CHERAIN,061/21 33 00,,False,False,base.be,fr_BE,,delivery,delivery_1737,__import__.customer_1737
+__import__.customer_address_delivery_1743,DR GEUSE OLIVIER *,"Rue des Pelissiers, 12",7130,Binche,,,False,False,base.be,fr_BE,,delivery,delivery_1743,__import__.customer_1743
+__import__.customer_address_delivery_1750,LEFEBVRE CLAUDINE *,"Rue de Fleignies, 1",7080,FRAMERIES,,,False,False,base.be,fr_BE,,delivery,delivery_1750,__import__.customer_1750
+__import__.customer_address_delivery_1752,DEVEUX ALAIN,Rue du Village 53,5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_1752,__import__.customer_1752
+__import__.customer_address_delivery_1753,GODFROI ERIC,"RUE JOSEPH II,101",7110,HOUDENG-AIMERIE,,,False,False,base.be,fr_BE,,delivery,delivery_1753,__import__.customer_1753
+__import__.customer_address_delivery_1755,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1755,__import__.customer_1755
+__import__.customer_address_delivery_1773,PROVOOST,Rue des COmbattants,6900,On,,,False,False,base.be,fr_BE,,delivery,delivery_1773,__import__.customer_1773
+__import__.customer_address_delivery_1786,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1786,__import__.customer_1786
+__import__.customer_address_delivery_1787,DOCTEUR MELCHIOR-LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_1787,__import__.customer_1787
+__import__.customer_address_delivery_1802,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1802,__import__.customer_1802
+__import__.customer_address_delivery_1804,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1804,__import__.customer_1804
+__import__.customer_address_delivery_1810,DOCTEUR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,071/34 01 34,,False,False,base.be,fr_BE,,delivery,delivery_1810,__import__.customer_1810
+__import__.customer_address_delivery_1814,DR MATHEISE THIERRY,"ROUTE DE GEMBLOUX,241",5310,AISCHE EN REFAIL,081/65 58 09,,False,False,base.be,fr_BE,,delivery,delivery_1814,__import__.customer_1814
+__import__.customer_address_delivery_1820,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1820,__import__.customer_1820
+__import__.customer_address_delivery_1823,DR CLAES ISABELLE,"Chaussée de la Cense, 109",1410,WATERLOO,,,False,False,base.be,fr_BE,,delivery,delivery_1823,__import__.customer_1823
+__import__.customer_address_delivery_1828,DE METZMACHER STEVE,"Rue Abbé Peters, 58",4960,MALMEDY,,,False,False,base.be,fr_BE,,delivery,delivery_1828,__import__.customer_1828
+__import__.customer_address_delivery_1836,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1836,__import__.customer_1836
+__import__.customer_address_delivery_1845,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1845,__import__.customer_1845
+__import__.customer_address_delivery_1848,DOCTEUR ESQUENET CHRISTOPHE,"BETSERBAAN,76",3545,HALEN,075/98 95 78,,False,False,base.be,fr_BE,,delivery,delivery_1848,__import__.customer_1848
+__import__.customer_address_delivery_1852,TIMMERMANS JEAN,Portlaan 23,3960,BREE,,,False,False,base.be,fr_BE,,delivery,delivery_1852,__import__.customer_1852
+__import__.customer_address_delivery_1854,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1854,__import__.customer_1854
+__import__.customer_address_delivery_1863,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1863,__import__.customer_1863
+__import__.customer_address_delivery_1864,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1864,__import__.customer_1864
+__import__.customer_address_delivery_1865,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1865,__import__.customer_1865
+__import__.customer_address_delivery_1867,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1867,__import__.customer_1867
+__import__.customer_address_delivery_1868,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1868,__import__.customer_1868
+__import__.customer_address_delivery_1885,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1885,__import__.customer_1885
+__import__.customer_address_delivery_1889,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1889,__import__.customer_1889
+__import__.customer_address_delivery_1894,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1894,__import__.customer_1894
+__import__.customer_address_delivery_1901,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1901,__import__.customer_1901
+__import__.customer_address_delivery_1919,DR DEVROEDE FRANÇOISE *,"Rue du Corbeau, 24",6200,CHATELINEAU,,,False,False,base.be,fr_BE,,delivery,delivery_1919,__import__.customer_1919
+__import__.customer_address_delivery_1923,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1923,__import__.customer_1923
+__import__.customer_address_delivery_1944,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1944,__import__.customer_1944
+__import__.customer_address_delivery_1958,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1958,__import__.customer_1958
+__import__.customer_address_delivery_1959,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1959,__import__.customer_1959
+__import__.customer_address_delivery_1975,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1975,__import__.customer_1975
+__import__.customer_address_delivery_1978,DOCTEUR MELCHIOR,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_1978,__import__.customer_1978
+__import__.customer_address_delivery_1980,DOCTEUR BONTEMPS,"GD HOUMART,13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/82 96 30,delivery,delivery_1980,__import__.customer_1980
+__import__.customer_address_delivery_1988,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1988,__import__.customer_1988
+__import__.customer_address_delivery_1989,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1989,__import__.customer_1989
+__import__.customer_address_delivery_1990,DOCTEUR GILLET PATRICK,"RUE DE LA BARRIERE,12",6970,TENNEVILLE,084/45 53 78,,False,False,base.be,fr_BE,,delivery,delivery_1990,__import__.customer_1990
+__import__.customer_address_delivery_1991,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1991,__import__.customer_1991
+__import__.customer_address_delivery_1994,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1994,__import__.customer_1994
+__import__.customer_address_delivery_1996,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_1996,__import__.customer_1996
+__import__.customer_address_delivery_2003,DOCTEUR GRAFF,"RUE JEAN-CHARLES DE HUGO,69",6730,BELLEFONTAINE,063/44 47 45,,False,False,base.be,fr_BE,,delivery,delivery_2003,__import__.customer_2003
+__import__.customer_address_delivery_2024,DOCTEUR LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_2024,__import__.customer_2024
+__import__.customer_address_delivery_2043,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2043,__import__.customer_2043
+__import__.customer_address_delivery_2051,NOLL PHILIPPE *,"RUE CHELVI,3",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2051,__import__.customer_2051
+__import__.customer_address_delivery_2065,DOCTEUR MELCHIOR,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,delivery_2065,__import__.customer_2065
+__import__.customer_address_delivery_2079,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2079,__import__.customer_2079
+__import__.customer_address_delivery_2097,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2097,__import__.customer_2097
+__import__.customer_address_delivery_2126,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2126,__import__.customer_2126
+__import__.customer_address_delivery_2137,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2137,__import__.customer_2137
+__import__.customer_address_delivery_2210,DOCTEUR DEVEUX B.,"RUE PERE HEUGENS,33",5600,VILLERS LE GAMBON,071/66 67 08,,False,False,base.be,fr_BE,,delivery,delivery_2210,__import__.customer_2210
+__import__.customer_address_delivery_2220,URBAIN GREGOIRE *,Ave du champ de bataille 431,7012,FLENU,,,False,False,base.be,fr_BE,,delivery,delivery_2220,__import__.customer_2220
+__import__.customer_address_delivery_2230,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,delivery_2230,__import__.customer_2230
+__import__.customer_address_delivery_2241,DOCTEUR BERIOT J-P,"RUE DU FAYT,33",7350,MONTROEUL S/HAINE,065/46 50 52,,False,False,base.be,fr_BE,,delivery,delivery_2241,__import__.customer_2241
+__import__.customer_address_delivery_2244,SCHOENEN CAROLINE,"RUE CLAWENNE,71",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_2244,__import__.customer_2244
+__import__.customer_address_delivery_2246,DUBOIS SEBASTIEN,"RUE LOUIS PIERARD,45",7040,BOUGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_2246,__import__.customer_2246
+__import__.customer_address_delivery_2259,DOCTEUR ARNOULD CHRISTIAN,Avenue de la Victoire 26,6840,NEUFCHATEAU,,,False,False,base.be,fr_BE,,delivery,delivery_2259,__import__.customer_2259
+__import__.customer_address_delivery_2265,DR VANDERHEYDEN,"RUE HALET,48",4860,PEPINSTER,,,False,False,base.be,fr_BE,,delivery,delivery_2265,__import__.customer_2265
+__import__.customer_address_delivery_2266,DOCTEUR DR DEVEUX BAUDHUIN,RUE PERE HEUGENS 33,5600,VILLERS LE GAMBON,,,False,False,base.be,fr_BE,,delivery,delivery_2266,__import__.customer_2266
+__import__.customer_address_delivery_2287,MALCOURANT VET,Rue du Paradis 18,5030,GEMBLOUX,,,False,False,base.be,fr_BE,,delivery,delivery_2287,__import__.customer_2287
+__import__.customer_address_delivery_2307,DOCTEUR JOSE HEINE,Route d'Houffalize 1A,6670,GOUVY,,,False,False,base.be,fr_BE,,delivery,delivery_2307,__import__.customer_2307
+__import__.customer_address_delivery_2308,DOCTEUR CLAUS CHRISTA,Chaussée de Waremme 4,4520,ANTHEIT,,,False,False,base.be,fr_BE,,delivery,delivery_2308,__import__.customer_2308
+__import__.customer_address_delivery_2309,DOCTEUR DR DEVRIESE ANNE,Rue Jean Lorette 1A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2309,__import__.customer_2309
+__import__.customer_address_delivery_2312,DOCTEUR DR ESQUENET,Betserbaan 76,3545,HALEN,075/989.578,,False,False,base.be,fr_BE,,delivery,delivery_2312,__import__.customer_2312
+__import__.customer_address_delivery_2313,DOCTEUR DR ESQUENET,Betserbaan 76,3545,HALEN,,,False,False,base.be,fr_BE,,delivery,delivery_2313,__import__.customer_2313
+__import__.customer_address_delivery_2314,DOCTEUR DR ESQUENET,Betserbaan 76,3545,HALEN,"075/989,578",,False,False,base.be,fr_BE,,delivery,delivery_2314,__import__.customer_2314
+__import__.customer_address_delivery_2323,D.D.M SA VETERINAIRE,Rue de la Burdinale 20,4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_2323,__import__.customer_2323
+__import__.customer_address_delivery_2331,DR VET. PIERRE BODRANGHIEN,Tiran rue 46,5640,BIESME,,,False,False,base.be,fr_BE,,delivery,delivery_2331,__import__.customer_2331
+__import__.customer_address_delivery_2334,ULG SERVICE OBSTETRIQUE P.A,Bd de Colonster 20/bât. B44,4000,SART-TILMAN,,,False,False,base.be,fr_BE,,delivery,delivery_2334,__import__.customer_2334
+__import__.customer_address_delivery_2339,EPC 090 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_2339,__import__.customer_2339
+__import__.customer_address_delivery_2341,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_2341,__import__.customer_2341
+__import__.customer_address_delivery_2350,DR LEMOINE OLIVIER,Rue Bourgemstre R. Bouchat 18,5340,GESVES,,,False,False,base.be,fr_BE,,delivery,delivery_2350,__import__.customer_2350
+__import__.customer_address_delivery_2351,SERV. OBSTETRIQUE PA,FAC.MED.VETERINAIRE BAT.44,4000,SART_TILMAN,,,False,False,base.be,fr_BE,,delivery,delivery_2351,__import__.customer_2351
+__import__.customer_address_delivery_2365,DR JOSE HEINE,Route d'Houffalize 1A,6670,GOUVY,,,False,False,base.be,fr_BE,,delivery,delivery_2365,__import__.customer_2365
+__import__.customer_address_delivery_2378,DR DEBOUVRIE,Rue du Coq 5,6230,ROSSEIGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_2378,__import__.customer_2378
+__import__.customer_address_delivery_2381,DE JAUCOT CHRISTINE,"Chaussée de Bruxelles, 51",7061,CASTEAU,,,False,False,base.be,fr_BE,,delivery,delivery_2381,__import__.customer_2381
+__import__.customer_address_delivery_2387,DOCTEUR ARNOULD CHRISTIAN,"Avenue de la Victoire, 26",6840,NEUFCHATEAU,,,False,False,base.be,fr_BE,,delivery,delivery_2387,__import__.customer_2387
+__import__.customer_address_delivery_2389,DR ESQUENET,vient emporter,0000,zzz,,,False,False,base.be,fr_BE,,delivery,delivery_2389,__import__.customer_2389
+__import__.customer_address_delivery_2390,DR DANLOIS FABIEN,Postweg 119,1602,VLEZEMBEEK,,,False,False,base.be,fr_BE,,delivery,delivery_2390,__import__.customer_2390
+__import__.customer_address_delivery_2393,DR LAMBY BERNARD,EN 125-Sitio Da Fronteira,CP535 A,8125-013 Quarteira-,,,False,False,base.pt,fr_BE,,delivery,delivery_2393,__import__.customer_2393
+__import__.customer_address_delivery_2395,DRS WAHLIN-WINCKEL,Rue Saulcy 8,6900,AYE,,,False,False,base.be,fr_BE,,delivery,delivery_2395,__import__.customer_2395
+__import__.customer_address_delivery_2396,JACOBS BRUNO *,"Rue Large Voie, 26 ou 24",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_2396,__import__.customer_2396
+__import__.customer_address_delivery_2397,DR DEVRIESE ANNE,Rue Jean Lorette 14A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2397,__import__.customer_2397
+__import__.customer_address_delivery_2400,DR SCHROEDER VINCENT,Rue Goza 2,4920,AYWAILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2400,__import__.customer_2400
+__import__.customer_address_delivery_2401,DR HUYNEN,rue du Baron d'Obin 30,4219,AMBRESIN,,,False,False,base.be,fr_BE,,delivery,delivery_2401,__import__.customer_2401
+__import__.customer_address_delivery_2409,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_2409,__import__.customer_2409
+__import__.customer_address_delivery_2416,VANDERWILT PHILIPPE,Rue des Cerisiers 24,6791,ATHUS,,,False,False,base.be,fr_BE,,delivery,delivery_2416,__import__.customer_2416
+__import__.customer_address_delivery_2431,DEVRIESE ANNE,"Rue Jean Lorette, 14 A",6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2431,__import__.customer_2431
+__import__.customer_address_delivery_2433,DR PIRARD M.,Rue de Damre 36,4140,SPRIMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2433,__import__.customer_2433
+__import__.customer_address_delivery_2436,DR BONTEMPS,Grand Houmart 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_2436,__import__.customer_2436
+__import__.customer_address_delivery_2445,SOVELI,Rue Paul Dubois 102,6890,LIBIN,,,False,False,base.be,fr_BE,,delivery,delivery_2445,__import__.customer_2445
+__import__.customer_address_delivery_2447,BABE MARIE-HELENE,"Rue du Vicinal, 22",4670,BLEGNY/TREMBLEUR,,,False,False,base.be,fr_BE,,delivery,delivery_2447,__import__.customer_2447
+__import__.customer_address_delivery_2449,DR VET. PIRONNET,Rue Formatin 18,4860,PEPINSTER,,,False,False,base.be,fr_BE,,delivery,delivery_2449,__import__.customer_2449
+__import__.customer_address_delivery_2450,DR ESQUENET,Vient chercher,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_2450,__import__.customer_2450
+__import__.customer_address_delivery_2461,DR VET.RODELET,Vient chercher,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_2461,__import__.customer_2461
+__import__.customer_address_delivery_2465,ASSOC.VET.HOUFFALIZE,Rue Saint Roch 72,6660,HOUFFALIZE,,,False,False,base.be,fr_BE,,delivery,delivery_2465,__import__.customer_2465
+__import__.customer_address_delivery_2467,QUALITY PARTNER - PR G.DAUBE,rue Ayeneux 62,4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_2467,__import__.customer_2467
+__import__.customer_address_delivery_2468,DR ESQUENET CHRISTOPHE,"heukelommerweg,14,",3770,RIEMST,075/989578,,False,False,base.be,fr_BE,,delivery,delivery_2468,__import__.customer_2468
+__import__.customer_address_delivery_2469,GRAFFART THIERRY,"VOIE DE L'AIR PUR, 165,",4052,BEAUFAYS,,,False,False,base.be,fr_BE,,delivery,delivery_2469,__import__.customer_2469
+__import__.customer_address_delivery_2471,DOCTEUR DAIGNEUX FABIENNE,"Chemin de la Sauvenière, 6,",4500,HUY,,,False,False,base.be,fr_BE,,delivery,delivery_2471,__import__.customer_2471
+__import__.customer_address_delivery_2477,BONGAERTS,Rue Hoyoux 129 (en face),4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_2477,__import__.customer_2477
+__import__.customer_address_delivery_2481,DR VET. MEERSSCHAERT CAROLE,"Blanche Fontaine,118",6692,PETIT THIER,,,False,False,base.be,fr_BE,,delivery,delivery_2481,__import__.customer_2481
+__import__.customer_address_delivery_2487,DR VET. DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2487,__import__.customer_2487
+__import__.customer_address_delivery_2489,DR DEGREZ LEON,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2489,__import__.customer_2489
+__import__.customer_address_delivery_2490,DR DOMINIQUE GILLARD,Chemin de soeret 1,6980,LA ROCHE,,,False,False,base.be,fr_BE,,delivery,delivery_2490,__import__.customer_2490
+__import__.customer_address_delivery_2497,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2497,__import__.customer_2497
+__import__.customer_address_delivery_2498,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2498,__import__.customer_2498
+__import__.customer_address_delivery_2499,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2499,__import__.customer_2499
+__import__.customer_address_delivery_2503,CLINIQUE DE JONCKAY,"Rue du Jonckay, 31",5380,FERNELMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2503,__import__.customer_2503
+__import__.customer_address_delivery_2504,MADAME COLLET,CHAUSSEE DE DINANT 1019,5100,WEPION,,,False,False,base.be,fr_BE,,delivery,delivery_2504,__import__.customer_2504
+__import__.customer_address_delivery_2505,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2505,__import__.customer_2505
+__import__.customer_address_delivery_2506,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2506,__import__.customer_2506
+__import__.customer_address_delivery_2507,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2507,__import__.customer_2507
+__import__.customer_address_delivery_2510,DR LÉON DEGREZ,Route d'Offagne 3,6890,GLAIREUSE,,,False,False,base.be,fr_BE,,delivery,delivery_2510,__import__.customer_2510
+__import__.customer_address_delivery_2513,DR VET. DEBOUVRIE,Rue Du Coq 5,6230,ROSSEIGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_2513,__import__.customer_2513
+__import__.customer_address_delivery_2514,DR HUYNEN KARINE,Rue du Baron d'Obin 30,4219,AMBRESIN,,,False,False,base.be,fr_BE,,delivery,delivery_2514,__import__.customer_2514
+__import__.customer_address_delivery_2517,ASSOC.VET.BEFF HAMES,Rue du 24 Août 6,6724,HOUDEMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2517,__import__.customer_2517
+__import__.customer_address_delivery_2518,ASSOC.VET. BEFF HAMES,Rue du 24 Août 6,6724,HOUDEMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2518,__import__.customer_2518
+__import__.customer_address_delivery_2519,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2519,__import__.customer_2519
+__import__.customer_address_delivery_2521,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2521,__import__.customer_2521
+__import__.customer_address_delivery_2522,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2522,__import__.customer_2522
+__import__.customer_address_delivery_2523,DR A. DEVRIESE,Rue Jean Lorette 14a,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2523,__import__.customer_2523
+__import__.customer_address_delivery_2524,DR VET.LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2524,__import__.customer_2524
+__import__.customer_address_delivery_2525,DR VET. LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2525,__import__.customer_2525
+__import__.customer_address_delivery_2527,DR ANNE DEVRIESE,Rue Jean Lorette 14a,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2527,__import__.customer_2527
+__import__.customer_address_delivery_2531,DR DEGREZ LÉON,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2531,__import__.customer_2531
+__import__.customer_address_delivery_2534,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2534,__import__.customer_2534
+__import__.customer_address_delivery_2536,SOVELI,Rue Paul Dubois 102,6890,LIBIN,061/655260,,False,False,base.be,fr_BE,,delivery,delivery_2536,__import__.customer_2536
+__import__.customer_address_delivery_2538,DR BROUWERS,Reneubois 56,4652,XHENDELESSE,,,False,False,base.be,fr_BE,,delivery,delivery_2538,__import__.customer_2538
+__import__.customer_address_delivery_2539,ASSOC.VET.MELCHIOR-LIGOT,Rue Lombiery 13,4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_2539,__import__.customer_2539
+__import__.customer_address_delivery_2540,DR DETRY,Vient chercher,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_2540,__import__.customer_2540
+__import__.customer_address_delivery_2544,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_2544,__import__.customer_2544
+__import__.customer_address_delivery_2548,DR JEAN MARIE HUBERT,Rue de Fonteny 9e,6673,CHERAIN,,,False,False,base.be,fr_BE,,delivery,delivery_2548,__import__.customer_2548
+__import__.customer_address_delivery_2551,EPC 097 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_2551,__import__.customer_2551
+__import__.customer_address_delivery_2555,CLIN.VET. MOSON LEGRAS,Rue de Mangonbroux 186,4800,VERVIERS,,,False,False,base.be,fr_BE,,delivery,delivery_2555,__import__.customer_2555
+__import__.customer_address_delivery_2562,DR MARCQ AGNES,Rue de la Pasture 25,6120,MARBAIX LA TOUR,,,False,False,base.be,fr_BE,,delivery,delivery_2562,__import__.customer_2562
+__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
+__import__.customer_address_delivery_2567,DRS BROUWERS DEMONTY,Reneubois 56,4652,HERVE,,,False,False,base.be,fr_BE,,delivery,delivery_2567,__import__.customer_2567
+__import__.customer_address_delivery_2568,DR PHILIPPE BONTEMPS,Grand Houmart 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_2568,__import__.customer_2568
+__import__.customer_address_delivery_2569,DR GUIOT (DR MASSART),Rue P. JANSON 1,4420,MONTEGNEE,,,False,False,base.be,fr_BE,,delivery,delivery_2569,__import__.customer_2569
+__import__.customer_address_delivery_2587,ARNOULD ROGER ET JEAN-MARC,Rue de la gare 77,6880,BERTRIX,,,False,False,base.be,fr_BE,,delivery,delivery_2587,__import__.customer_2587
+__import__.customer_address_delivery_2590,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2590,__import__.customer_2590
+__import__.customer_address_delivery_2591,DR LÉON DEGREZ,Route d'Offagne 3,6890,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2591,__import__.customer_2591
+__import__.customer_address_delivery_2594,DR LÉON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_2594,__import__.customer_2594
+__import__.customer_address_delivery_2595,DRS BEFF-HAMES,Rue du 24 Août 6,6724,HOUDEMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2595,__import__.customer_2595
+__import__.customer_address_delivery_2599,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2599,__import__.customer_2599
+__import__.customer_address_delivery_2602,DR DEWIT,Rue de l'Eau sur elle 116,6043,RANSART,,,False,False,base.be,fr_BE,,delivery,delivery_2602,__import__.customer_2602
+__import__.customer_address_delivery_2603,DR BONTEMPS,Grand Houmart 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_2603,__import__.customer_2603
+__import__.customer_address_delivery_2605,DR VET HUMBLET THIERRY,"Place Merlot, 14",4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_2605,__import__.customer_2605
+__import__.customer_address_delivery_2606,DR VET GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2606,__import__.customer_2606
+__import__.customer_address_delivery_2608,DR VET GILLET PATRICK,"rue de la Barrière, 12,",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2608,__import__.customer_2608
+__import__.customer_address_delivery_2610,DR DEVRIESE ANNE,Rue Jean Lorette 14a,6230,THIMEON,071340134,,False,False,base.be,fr_BE,,delivery,delivery_2610,__import__.customer_2610
+__import__.customer_address_delivery_2611,DR DEVRIESE ANNE,Rue Jean Lorette 14a,6230,THIMEON,071340134,,False,False,base.be,fr_BE,,delivery,delivery_2611,__import__.customer_2611
+__import__.customer_address_delivery_2612,MASURE SYLVIE,"Rue Hovemont, 137",4910,THEUX,,,False,False,base.be,fr_BE,,delivery,delivery_2612,__import__.customer_2612
+__import__.customer_address_delivery_2613,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2613,__import__.customer_2613
+__import__.customer_address_delivery_2614,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2614,__import__.customer_2614
+__import__.customer_address_delivery_2615,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2615,__import__.customer_2615
+__import__.customer_address_delivery_2617,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2617,__import__.customer_2617
+__import__.customer_address_delivery_2619,DR VET. ANTHEMUS,Rue Pachi Zabette 14,5020,TEMPLOUX,,,False,False,base.be,fr_BE,,delivery,delivery_2619,__import__.customer_2619
+__import__.customer_address_delivery_2622,SERVICE PHARMACOLOGIE,BATIMENT B41,4000,SART TILMAN,,,False,False,base.be,fr_BE,,delivery,delivery_2622,__import__.customer_2622
+__import__.customer_address_delivery_2623,DISTRIBUTION VET.DU VAL D'HONY,Parc du Monceau 13,4130,MERY,,,False,False,base.be,fr_BE,,delivery,delivery_2623,__import__.customer_2623
+__import__.customer_address_delivery_2624,DR PATRICK GILLET,Rue de la Barrière 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2624,__import__.customer_2624
+__import__.customer_address_delivery_2631,DR PIERRE FRANKINET,vient chercher,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_2631,__import__.customer_2631
+__import__.customer_address_delivery_2637,DR GAVAGE,Chaussée de Verviers 16,4910,THEUX,,,False,False,base.be,fr_BE,,delivery,delivery_2637,__import__.customer_2637
+__import__.customer_address_delivery_2639,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_2639,__import__.customer_2639
+__import__.customer_address_delivery_2649,DR MOREL DOMINIQUE,"Chaussée d'Audenaerde, 262",7742,HERINNES,,,False,False,base.be,fr_BE,,delivery,delivery_2649,__import__.customer_2649
+__import__.customer_address_delivery_2850,DR GUSTIN,Rue J. Wauters 12,4550,VILLERS LE BOUILLET,,,False,False,base.be,fr_BE,,delivery,delivery_2850,__import__.customer_2850
+__import__.customer_address_delivery_2851,DR VREBOS CORINE,"Rue Vander Elst, 14",1170,WATERMAEL-BOISFORT,,,False,False,base.be,fr_BE,,delivery,delivery_2851,__import__.customer_2851
+__import__.customer_address_delivery_2853,DRS BEFF-HAMES,"Rue du 24 Août,6",6724,HOUDEMONT,063/412042,,False,False,base.be,fr_BE,,delivery,delivery_2853,__import__.customer_2853
+__import__.customer_address_delivery_2855,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_2855,__import__.customer_2855
+__import__.customer_address_delivery_2858,DR VET GILLET PATRICK,"rue de la Barriere, 12,",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_2858,__import__.customer_2858
+__import__.customer_address_delivery_2864,DR PATRICK GILLET,RUE DE LA BARRIERE 12,6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2864,__import__.customer_2864
+__import__.customer_address_delivery_2866,PCB,Kanonstraat 26,8500,KORTRIJK,,,False,False,base.be,fr_BE,,delivery,delivery_2866,__import__.customer_2866
+__import__.customer_address_delivery_2867,DR ANNE DEVRIESE,RUE JEAN LORETTE 14A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_2867,__import__.customer_2867
+__import__.customer_address_delivery_2879,DR LEONARD PHILIPPE,Rue D'Almache,6851,PLAINEVAUX,,,False,False,base.be,fr_BE,,delivery,delivery_2879,__import__.customer_2879
+__import__.customer_address_delivery_2888,DR BONTEMPS,GRAND HOUMART 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_2888,__import__.customer_2888
+__import__.customer_address_delivery_2893,VANDERZANDE VANESSA,RUE TOUT VA BIEN 135,4310,SAINT-NICOLAS,,,False,False,base.be,fr_BE,,delivery,delivery_2893,__import__.customer_2893
+__import__.customer_address_delivery_2894,DR LINCE JOSEPH,"Rue de Hiettine, 35",5370,HAVELANGE,,,False,False,base.be,fr_BE,,delivery,delivery_2894,__import__.customer_2894
+__import__.customer_address_delivery_2895,DR PIERRET CHARLY,Virée du renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2895,__import__.customer_2895
+__import__.customer_address_delivery_2896,DR DEVEUX ALAIN,Rue du Village 53,5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_2896,__import__.customer_2896
+__import__.customer_address_delivery_2899,DR DOMINIQUE CASSART,"Rue du Pourrain, 65",5330,ASSESSE,,,False,False,base.be,fr_BE,,delivery,delivery_2899,__import__.customer_2899
+__import__.customer_address_delivery_2900,DR PIERRET CHARLY,VIREE DU RENARD 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2900,__import__.customer_2900
+__import__.customer_address_delivery_2902,DR PATRICK GILLET,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_2902,__import__.customer_2902
+__import__.customer_address_delivery_2903,ZAKAR'IN(DR VANDERMEEREN),Rue Griange 16,4500,HUY,,,False,False,base.be,fr_BE,,delivery,delivery_2903,__import__.customer_2903
+__import__.customer_address_delivery_2905,DR GUY FORGET,Rue de France 4,6730,TINTIGNY,,,False,False,base.be,fr_BE,,delivery,delivery_2905,__import__.customer_2905
+__import__.customer_address_delivery_2906,DR PIERRET CHARLY,VIREE DU RENARD 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2906,__import__.customer_2906
+__import__.customer_address_delivery_2907,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2907,__import__.customer_2907
+__import__.customer_address_delivery_2927,DR FLASSE,rue du Moulin 54,5575,VENCIMONT,,,False,False,base.be,fr_BE,,delivery,delivery_2927,__import__.customer_2927
+__import__.customer_address_delivery_2928,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,061266128,,False,False,base.be,fr_BE,,delivery,delivery_2928,__import__.customer_2928
+__import__.customer_address_delivery_2989,DR PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2989,__import__.customer_2989
+__import__.customer_address_delivery_2990,DR BIHAIN,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2990,__import__.customer_2990
+__import__.customer_address_delivery_2991,DR PIERRET CHARLY,"Virée de Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_2991,__import__.customer_2991
+__import__.customer_address_delivery_3069,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3069,__import__.customer_3069
+__import__.customer_address_delivery_3070,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3070,__import__.customer_3070
+__import__.customer_address_delivery_3071,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3071,__import__.customer_3071
+__import__.customer_address_delivery_3072,BOULANGERIE ALBERT,"Rue du Pommard, 210",4970,FRANCORCHAMPS,,,False,False,base.be,fr_BE,,delivery,delivery_3072,__import__.customer_3072
+__import__.customer_address_delivery_3073,DR VALLERY,Rue Chapelle Valentin 19,5140,SOMBREFFE,,,False,False,base.be,fr_BE,,delivery,delivery_3073,__import__.customer_3073
+__import__.customer_address_delivery_3074,DR VET ARNOULD CHRISTIAN,"Avenue de la Victoire, 26",6840,NEUFCHATEAU,,,False,False,base.be,fr_BE,,delivery,delivery_3074,__import__.customer_3074
+__import__.customer_address_delivery_3077,EPC 098*,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_3077,__import__.customer_3077
+__import__.customer_address_delivery_3087,DOCTEUR DECOSTER,Rue Lefèbvre 23,5380,HINGEON,,,False,False,base.be,fr_BE,,delivery,delivery_3087,__import__.customer_3087
+__import__.customer_address_delivery_3094,PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,061267044,,False,False,base.be,fr_BE,,delivery,delivery_3094,__import__.customer_3094
+__import__.customer_address_delivery_3097,PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3097,__import__.customer_3097
+__import__.customer_address_delivery_3098,DOCTEUR DUJACQUIER,Chaussée de Marche 6,7181,FELUY,,,False,False,base.be,fr_BE,,delivery,delivery_3098,__import__.customer_3098
+__import__.customer_address_delivery_3100,BRASSEUR GUY,Rue des Champs 5,7170,MANAGE,,,False,False,base.be,fr_BE,,delivery,delivery_3100,__import__.customer_3100
+__import__.customer_address_delivery_3101,MASSART LAURENT *,"Rue Justin Sauvenier, 27",4671,BARCHON,,,False,False,base.be,fr_BE,,delivery,delivery_3101,__import__.customer_3101
+__import__.customer_address_delivery_3102,GALDEROUX CLAUDINE,Rue des Alliés 67,6953,FORRIERES,,,False,False,base.be,fr_BE,,delivery,delivery_3102,__import__.customer_3102
+__import__.customer_address_delivery_3103,DEGREZ LÉON,Route d'Offagne 3,6850,PALISEUL,061533910,,False,False,base.be,fr_BE,0478375347,delivery,delivery_3103,__import__.customer_3103
+__import__.customer_address_delivery_3125,EPC 099 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_3125,__import__.customer_3125
+__import__.customer_address_delivery_3131,DR DEGREZ LEON,"route d'Offagne,3",6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3131,__import__.customer_3131
+__import__.customer_address_delivery_3152,DEGREZ LEON,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3152,__import__.customer_3152
+__import__.customer_address_delivery_3153,DEGREZ LEON,Route d'Offagne 3,6850,Paliseul,,,False,False,base.be,fr_BE,,delivery,delivery_3153,__import__.customer_3153
+__import__.customer_address_delivery_3157,DETHIER-WILLEM *,Rue Barras 2,5890,FERNELMONT,,,False,False,base.be,fr_BE,,delivery,delivery_3157,__import__.customer_3157
+__import__.customer_address_delivery_3159,DEGREZ LEON,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3159,__import__.customer_3159
+__import__.customer_address_delivery_3160,BONTEMPS PHILIPPE,GRAND HOUMART 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_3160,__import__.customer_3160
+__import__.customer_address_delivery_3166,DEVRIESE ANNE,Rue Jean Lorette 14a,6230,THIMEON,071340134,,False,False,base.be,fr_BE,,delivery,delivery_3166,__import__.customer_3166
+__import__.customer_address_delivery_3173,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3173,__import__.customer_3173
+__import__.customer_address_delivery_3177,ARNOULD CHRISTIAN,Avenue de la Victoire 18,6840,NEUFCHATEAU,061279220,,False,False,base.be,fr_BE,,delivery,delivery_3177,__import__.customer_3177
+__import__.customer_address_delivery_3178,MONAMI-MOSON-LEGRAS ASS.VÉT.,Rue de Mangonbroux 186,4800,VERVIERS,,,False,False,base.be,fr_BE,,delivery,delivery_3178,__import__.customer_3178
+__import__.customer_address_delivery_3180,PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,061/267044,,False,False,base.be,fr_BE,,delivery,delivery_3180,__import__.customer_3180
+__import__.customer_address_delivery_3181,GILLET PATRICK,"Rue de la Barrière,12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3181,__import__.customer_3181
+__import__.customer_address_delivery_3190,DOCTEUR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/53 39 10,,False,False,base.be,fr_BE,,delivery,delivery_3190,__import__.customer_3190
+__import__.customer_address_delivery_3192,DR GILLET PATRICK,Rue de la Barrière 12,6970,TENNEVILLE,084456161,,False,False,base.be,fr_BE,,delivery,delivery_3192,__import__.customer_3192
+__import__.customer_address_delivery_3194,DR DAIGNEUX FABIENNE,Chemin de la Sauvenière 6,4500,HUY,085234338,,False,False,base.be,fr_BE,,delivery,delivery_3194,__import__.customer_3194
+__import__.customer_address_delivery_3198,DR ALAIN DEVEUX,Rue du Village 53,5030,SAUVENIERE,081616116,,False,False,base.be,fr_BE,,delivery,delivery_3198,__import__.customer_3198
+__import__.customer_address_delivery_3199,FAC. MEDECINE VETERINAIRE,"Bvd de Colonster, 20 B44",4031,SART TILMAN,,,False,False,base.be,fr_BE,,delivery,delivery_3199,__import__.customer_3199
+__import__.customer_address_delivery_3204,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3204,__import__.customer_3204
+__import__.customer_address_delivery_3206,ASS. MELCHIOR-LIGOT,Rue Lombiery 13,4210,BURDINNE,085711030,,False,False,base.be,fr_BE,,delivery,delivery_3206,__import__.customer_3206
+__import__.customer_address_delivery_3208,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,061533910,,False,False,base.be,fr_BE,,delivery,delivery_3208,__import__.customer_3208
+__import__.customer_address_delivery_3209,DR PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,061267044,,False,False,base.be,fr_BE,,delivery,delivery_3209,__import__.customer_3209
+__import__.customer_address_delivery_3211,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,061533910,,False,False,base.be,fr_BE,,delivery,delivery_3211,__import__.customer_3211
+__import__.customer_address_delivery_3220,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,061 53 39 10,,False,False,base.be,fr_BE,,delivery,delivery_3220,__import__.customer_3220
+__import__.customer_address_delivery_3222,BEFF-HAMES,Rue du 24 Août 6,6724,HOUDEMONT,063412042,,False,False,base.be,fr_BE,,delivery,delivery_3222,__import__.customer_3222
+__import__.customer_address_delivery_3223,DR LEON DEGREZ,Route d'Offagne 3,6850,PALISEUL,061533910,,False,False,base.be,fr_BE,,delivery,delivery_3223,__import__.customer_3223
+__import__.customer_address_delivery_3230,DR BIHAIN,Virée du Renard 5,6640,SIBRET,061266128,,False,False,base.be,fr_BE,,delivery,delivery_3230,__import__.customer_3230
+__import__.customer_address_delivery_3232,SOVELI,Rue Paul Dubois 102,6890,LIBIN,061/65 52 60,,False,False,base.be,fr_BE,,delivery,delivery_3232,__import__.customer_3232
+__import__.customer_address_delivery_3233,DR DEVRIESE ANNE,RUE JEAN LORETTE 14A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_3233,__import__.customer_3233
+__import__.customer_address_delivery_3234,DR BONTEMPS,Grand Houmart 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_3234,__import__.customer_3234
+__import__.customer_address_delivery_3235,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3235,__import__.customer_3235
+__import__.customer_address_delivery_3237,BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,061266128,,False,False,base.be,fr_BE,,delivery,delivery_3237,__import__.customer_3237
+__import__.customer_address_delivery_3238,BEAUFAYS,"Rue de l'Athénée, 1A",4630,SOUMAGNE,,,False,False,base.be,fr_BE,,delivery,delivery_3238,__import__.customer_3238
+__import__.customer_address_delivery_3239,A,Avenue de Laon 301,51100,REIMS,,,False,False,base.be,fr_BE,,delivery,delivery_3239,__import__.customer_3239
+__import__.customer_address_delivery_3241,DEVRIESE ANNE,Rue J. Lorette 14A,6230,THIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_3241,__import__.customer_3241
+__import__.customer_address_delivery_3243,DR PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,061267044,,False,False,base.be,fr_BE,,delivery,delivery_3243,__import__.customer_3243
+__import__.customer_address_delivery_3245,DR DEGREZ LEON,Route d'Offagne 3,6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3245,__import__.customer_3245
+__import__.customer_address_delivery_3246,DR BIHAIN,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3246,__import__.customer_3246
+__import__.customer_address_delivery_3250,MICHAUX CHARLES,"Rue Simonis, 4",1060,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3250,__import__.customer_3250
+__import__.customer_address_delivery_3251,DRS HANOT-STIENNON,"Rue de Virelles, 61",6440,FROIDCHAPELLE,,,False,False,base.be,fr_BE,,delivery,delivery_3251,__import__.customer_3251
+__import__.customer_address_delivery_3260,DR BIHAIN,Virée du renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3260,__import__.customer_3260
+__import__.customer_address_delivery_3265,DR VAN THEMSCHE,avant préparation,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,delivery_3265,__import__.customer_3265
+__import__.customer_address_delivery_3266,BAUWENS N.- POLLET S.,rue du chardon 16,4260,FALLAIS,,,False,False,base.be,fr_BE,,delivery,delivery_3266,__import__.customer_3266
+__import__.customer_address_delivery_3270,DR BIHAIN,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3270,__import__.customer_3270
+__import__.customer_address_delivery_3275,DR BIHAIN,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3275,__import__.customer_3275
+__import__.customer_address_delivery_3280,DR BIHAIN,Virée du renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3280,__import__.customer_3280
+__import__.customer_address_delivery_3281,HAMOIR JULIEN,"Bois Madame, 4",4130,ESNEUX,,,False,False,base.be,fr_BE,,delivery,delivery_3281,__import__.customer_3281
+__import__.customer_address_delivery_3282,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3282,__import__.customer_3282
+__import__.customer_address_delivery_3285,DR BIHAIN MICHEL,"Virée du Renard,5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3285,__import__.customer_3285
+__import__.customer_address_delivery_3289,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3289,__import__.customer_3289
+__import__.customer_address_delivery_3290,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3290,__import__.customer_3290
+__import__.customer_address_delivery_3291,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3291,__import__.customer_3291
+__import__.customer_address_delivery_3292,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3292,__import__.customer_3292
+__import__.customer_address_delivery_3293,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3293,__import__.customer_3293
+__import__.customer_address_delivery_3294,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3294,__import__.customer_3294
+__import__.customer_address_delivery_3295,DR BIHAIN MICHEL,"Virée du Renard,5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3295,__import__.customer_3295
+__import__.customer_address_delivery_3296,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3296,__import__.customer_3296
+__import__.customer_address_delivery_3297,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3297,__import__.customer_3297
+__import__.customer_address_delivery_3298,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3298,__import__.customer_3298
+__import__.customer_address_delivery_3299,DR PIERRET,"Virée du Renard,48",6440,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3299,__import__.customer_3299
+__import__.customer_address_delivery_3300,DR PIERRET,"Virée du Renard, 48",6440,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3300,__import__.customer_3300
+__import__.customer_address_delivery_3303,DR BIHAIN,"Virée du Renard, 5,",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3303,__import__.customer_3303
+__import__.customer_address_delivery_3304,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3304,__import__.customer_3304
+__import__.customer_address_delivery_3309,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3309,__import__.customer_3309
+__import__.customer_address_delivery_3310,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3310,__import__.customer_3310
+__import__.customer_address_delivery_3311,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3311,__import__.customer_3311
+__import__.customer_address_delivery_3312,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3312,__import__.customer_3312
+__import__.customer_address_delivery_3315,DR PIERRET,"Rue Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3315,__import__.customer_3315
+__import__.customer_address_delivery_3316,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3316,__import__.customer_3316
+__import__.customer_address_delivery_3317,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3317,__import__.customer_3317
+__import__.customer_address_delivery_3318,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3318,__import__.customer_3318
+__import__.customer_address_delivery_3319,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3319,__import__.customer_3319
+__import__.customer_address_delivery_3321,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3321,__import__.customer_3321
+__import__.customer_address_delivery_3322,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3322,__import__.customer_3322
+__import__.customer_address_delivery_3323,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3323,__import__.customer_3323
+__import__.customer_address_delivery_3324,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3324,__import__.customer_3324
+__import__.customer_address_delivery_3325,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3325,__import__.customer_3325
+__import__.customer_address_delivery_3326,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3326,__import__.customer_3326
+__import__.customer_address_delivery_3327,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3327,__import__.customer_3327
+__import__.customer_address_delivery_3328,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3328,__import__.customer_3328
+__import__.customer_address_delivery_3329,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3329,__import__.customer_3329
+__import__.customer_address_delivery_3330,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3330,__import__.customer_3330
+__import__.customer_address_delivery_3331,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3331,__import__.customer_3331
+__import__.customer_address_delivery_3332,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3332,__import__.customer_3332
+__import__.customer_address_delivery_3333,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3333,__import__.customer_3333
+__import__.customer_address_delivery_3336,BATAILLE EMMANUEL,Rue de Fize 17,4337,VERLAINE,,,False,False,base.be,fr_BE,,delivery,delivery_3336,__import__.customer_3336
+__import__.customer_address_delivery_3338,DR BIHAIN MICHEL,"Virée du Renard,5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3338,__import__.customer_3338
+__import__.customer_address_delivery_3339,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3339,__import__.customer_3339
+__import__.customer_address_delivery_3340,DR ONCLINX CECILE,FMV SERV. PHARMACO   B41,4000,LIEGE,,,False,False,base.be,fr_BE,0474/414318,delivery,delivery_3340,__import__.customer_3340
+__import__.customer_address_delivery_3343,DR CAMBIER CAROLE,FMV  SERV. PHARMACOLOGIE,4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_3343,__import__.customer_3343
+__import__.customer_address_delivery_3368,DR VANDEWEERD JEAN-MICHEL,"Rue Verte, 208",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_3368,__import__.customer_3368
+__import__.customer_address_delivery_3375,FOUBERT JEAN FRANÇOIS,Av. du Fief de Liège 7,1325,CHAUMONT GISTOUX,,,False,False,base.be,fr_BE,,delivery,delivery_3375,__import__.customer_3375
+__import__.customer_address_delivery_3376,DR BIHAIN MICHEL,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3376,__import__.customer_3376
+__import__.customer_address_delivery_3378,DR PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3378,__import__.customer_3378
+__import__.customer_address_delivery_3379,DR PIERRET  CHARLY,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3379,__import__.customer_3379
+__import__.customer_address_delivery_3380,DR BIHAIN,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3380,__import__.customer_3380
+__import__.customer_address_delivery_3385,DR CHARLY PIERRET,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3385,__import__.customer_3385
+__import__.customer_address_delivery_3386,DR BIHAIN MICHEL,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3386,__import__.customer_3386
+__import__.customer_address_delivery_3388,DRS MELCHIOR-LIGOT,Rue Lombiery 13,4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_3388,__import__.customer_3388
+__import__.customer_address_delivery_3391,DR DEVEUX ALAIN,Rue du Village 53,5030,SAUVENIERE,,,False,False,base.be,fr_BE,,delivery,delivery_3391,__import__.customer_3391
+__import__.customer_address_delivery_3392,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3392,__import__.customer_3392
+__import__.customer_address_delivery_3399,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3399,__import__.customer_3399
+__import__.customer_address_delivery_3400,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3400,__import__.customer_3400
+__import__.customer_address_delivery_3415,DR DAIGNEUX  FABIENNE,"Chemin de la Sauvenière, 6",4500,HUY,,,False,False,base.be,fr_BE,,delivery,delivery_3415,__import__.customer_3415
+__import__.customer_address_delivery_3419,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3419,__import__.customer_3419
+__import__.customer_address_delivery_3420,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3420,__import__.customer_3420
+__import__.customer_address_delivery_3423,CLINIQUE PA BLOC OP,Fac Med Vet B44,4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,delivery_3423,__import__.customer_3423
+__import__.customer_address_delivery_3428,DR JAMOTTON,"Route de Neufchâteau,512",6700,HEINSCH,,,False,False,base.be,fr_BE,,delivery,delivery_3428,__import__.customer_3428
+__import__.customer_address_delivery_3432,LENAERS FLORENT,"Endepoelstraat, 91",3210,LINDE-LUBBEEK,016/623403,,False,False,base.be,nl_BE,,delivery,delivery_3432,__import__.customer_3432
+__import__.customer_address_delivery_3435,DR LEON DEGREZ,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3435,__import__.customer_3435
+__import__.customer_address_delivery_3437,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3437,__import__.customer_3437
+__import__.customer_address_delivery_3438,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3438,__import__.customer_3438
+__import__.customer_address_delivery_3440,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3440,__import__.customer_3440
+__import__.customer_address_delivery_3441,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3441,__import__.customer_3441
+__import__.customer_address_delivery_3446,DEBOUVRIE  PATRICK,"Rue du Coq, 5",6230,ROSSEIGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_3446,__import__.customer_3446
+__import__.customer_address_delivery_3447,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3447,__import__.customer_3447
+__import__.customer_address_delivery_3448,DR PIERRET,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3448,__import__.customer_3448
+__import__.customer_address_delivery_3456,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3456,__import__.customer_3456
+__import__.customer_address_delivery_3460,DR BURON PHILIPPE,"Rue de la Damzelle, 5",6997,AMONINES,,,False,False,base.be,fr_BE,,delivery,delivery_3460,__import__.customer_3460
+__import__.customer_address_delivery_3462,DR GILLET,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3462,__import__.customer_3462
+__import__.customer_address_delivery_3463,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3463,__import__.customer_3463
+__import__.customer_address_delivery_3464,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3464,__import__.customer_3464
+__import__.customer_address_delivery_3466,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3466,__import__.customer_3466
+__import__.customer_address_delivery_3470,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3470,__import__.customer_3470
+__import__.customer_address_delivery_3471,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3471,__import__.customer_3471
+__import__.customer_address_delivery_3472,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3472,__import__.customer_3472
+__import__.customer_address_delivery_3473,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3473,__import__.customer_3473
+__import__.customer_address_delivery_3475,DR HUBERT JEAN-MARIE,"Rue de Fonteny, 9e",6673,CHERAIN,061/21 33 00,,False,False,base.be,fr_BE,,delivery,delivery_3475,__import__.customer_3475
+__import__.customer_address_delivery_3479,DERKENNE FREDERIC,"Route de Maestricht, 202",4650,JULEMONT,,,False,False,base.be,fr_BE,,delivery,delivery_3479,__import__.customer_3479
+__import__.customer_address_delivery_3481,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/616116,,False,False,base.be,fr_BE,,delivery,delivery_3481,__import__.customer_3481
+__import__.customer_address_delivery_3482,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3482,__import__.customer_3482
+__import__.customer_address_delivery_3483,DR ANDRE GILLET,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3483,__import__.customer_3483
+__import__.customer_address_delivery_3484,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3484,__import__.customer_3484
+__import__.customer_address_delivery_3488,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3488,__import__.customer_3488
+__import__.customer_address_delivery_3489,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3489,__import__.customer_3489
+__import__.customer_address_delivery_3490,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3490,__import__.customer_3490
+__import__.customer_address_delivery_3491,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3491,__import__.customer_3491
+__import__.customer_address_delivery_3495,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3495,__import__.customer_3495
+__import__.customer_address_delivery_3496,DR BIHAIN,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3496,__import__.customer_3496
+__import__.customer_address_delivery_3500,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3500,__import__.customer_3500
+__import__.customer_address_delivery_3501,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3501,__import__.customer_3501
+__import__.customer_address_delivery_3502,LIBERT-MARLIER,"Faubourg St Germain, 12",5660,COUVIN,,,False,False,base.be,fr_BE,,delivery,delivery_3502,__import__.customer_3502
+__import__.customer_address_delivery_3503,DOZOT,"Faubourg St Germain, 12",5660,COUVIN,,,False,False,base.be,fr_BE,,delivery,delivery_3503,__import__.customer_3503
+__import__.customer_address_delivery_3510,ROYAL CANIN,Ave de la Petite Camargue  650,30470,AIMARGUES,,,False,False,base.fr,fr_BE,,delivery,delivery_3510,__import__.customer_3510
+__import__.customer_address_delivery_3514,GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3514,__import__.customer_3514
+__import__.customer_address_delivery_3515,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3515,__import__.customer_3515
+__import__.customer_address_delivery_3517,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3517,__import__.customer_3517
+__import__.customer_address_delivery_3518,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3518,__import__.customer_3518
+__import__.customer_address_delivery_3519,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3519,__import__.customer_3519
+__import__.customer_address_delivery_3520,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3520,__import__.customer_3520
+__import__.customer_address_delivery_3524,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3524,__import__.customer_3524
+__import__.customer_address_delivery_3532,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3532,__import__.customer_3532
+__import__.customer_address_delivery_3533,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3533,__import__.customer_3533
+__import__.customer_address_delivery_3534,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3534,__import__.customer_3534
+__import__.customer_address_delivery_3536,VANLANCKER ELS,"Radestraat, 12",8792,DESSELGEM,056/727259,,False,False,base.be,nl_BE,,delivery,delivery_3536,__import__.customer_3536
+__import__.customer_address_delivery_3537,GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3537,__import__.customer_3537
+__import__.customer_address_delivery_3541,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3541,__import__.customer_3541
+__import__.customer_address_delivery_3542,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3542,__import__.customer_3542
+__import__.customer_address_delivery_3549,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3549,__import__.customer_3549
+__import__.customer_address_delivery_3551,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3551,__import__.customer_3551
+__import__.customer_address_delivery_3554,DR GILLET ANDRÉ,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3554,__import__.customer_3554
+__import__.customer_address_delivery_3555,DR GILLET ANDRÉ,"Route de  Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3555,__import__.customer_3555
+__import__.customer_address_delivery_3556,DR GILLET ANDRÉ,"Route de Bastogne, 37",6970,TENNEVILLE,084/455378,,False,False,base.be,fr_BE,,delivery,delivery_3556,__import__.customer_3556
+__import__.customer_address_delivery_3558,DR DEMARCHE XAVIER,"Rue de Framboisiers, 16",6840,NEUFCHATEAU,,,False,False,base.be,fr_BE,,delivery,delivery_3558,__import__.customer_3558
+__import__.customer_address_delivery_3560,EPC 102 *,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_3560,__import__.customer_3560
+__import__.customer_address_delivery_3573,UNITE HORMONES ET METABOLISME,"Avenue Hippocrate,75 1er étage",1200,BRUXELLES,02/7647576,,False,False,base.be,fr_BE,,delivery,delivery_3573,__import__.customer_3573
+__import__.customer_address_delivery_3579,DR VANMANSART JEAN-PIERRE,"Rue de la Forêt, 39",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3579,__import__.customer_3579
+__import__.customer_address_delivery_3580,FED. DE LUTTE C/MALADIE,"Avenue Deponthiere, 40",4431,LONCIN,04/2399500,,False,False,base.be,fr_BE,,delivery,delivery_3580,__import__.customer_3580
+__import__.customer_address_delivery_3586,VANMANSART JEAN-PIERRE,"Rue de la Forêt, 39",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3586,__import__.customer_3586
+__import__.customer_address_delivery_3591,GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,084/45.61.61,,False,False,base.be,fr_BE,,delivery,delivery_3591,__import__.customer_3591
+__import__.customer_address_delivery_3599,DEBIEVE DAMIEN,"Rue Bourdon, 52",7386,ROISIN HONNELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3599,__import__.customer_3599
+__import__.customer_address_delivery_3612,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3612,__import__.customer_3612
+__import__.customer_address_delivery_3613,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3613,__import__.customer_3613
+__import__.customer_address_delivery_3614,PIRON REGINALD,"Rue Champ des Vignes, 30",1380,LASNE,,,False,False,base.be,fr_BE,,delivery,delivery_3614,__import__.customer_3614
+__import__.customer_address_delivery_3623,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3623,__import__.customer_3623
+__import__.customer_address_delivery_3624,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3624,__import__.customer_3624
+__import__.customer_address_delivery_3625,DR BONTEMPS PHILIPPE,"Gd Houmart, 13",6941,TOHOGNE,086/388290,,False,False,base.be,fr_BE,,delivery,delivery_3625,__import__.customer_3625
+__import__.customer_address_delivery_3630,BOULANGER MIREILLE,"Rue L. Dupuis, 33",7100,LA LOUVIERE,,,False,False,base.be,fr_BE,,delivery,delivery_3630,__import__.customer_3630
+__import__.customer_address_delivery_3636,DR HENRY ET PREVOT,"Route des Hayons, 5",6820,FLORENVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3636,__import__.customer_3636
+__import__.customer_address_delivery_3638,ZACCAI JULIE *,"Square Jacquet, 1 Bte 3",1050,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3638,__import__.customer_3638
+__import__.customer_address_delivery_3648,DR PLUNUS ARMAND,"Rue Vaux, 44",4633,MELEN,,,False,False,base.be,fr_BE,,delivery,delivery_3648,__import__.customer_3648
+__import__.customer_address_delivery_3649,DR PLUNUS ARMAND,"Rue Vaux, 44",4633,MELEN,,,False,False,base.be,fr_BE,,delivery,delivery_3649,__import__.customer_3649
+__import__.customer_address_delivery_3651,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3651,__import__.customer_3651
+__import__.customer_address_delivery_3652,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3652,__import__.customer_3652
+__import__.customer_address_delivery_3653,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3653,__import__.customer_3653
+__import__.customer_address_delivery_3655,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3655,__import__.customer_3655
+__import__.customer_address_delivery_3656,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3656,__import__.customer_3656
+__import__.customer_address_delivery_3660,CER - DIV.HORMONOLOGIE ANIMALE,"Rue du Point du Jour, 8",6900,MARLOIE,,,False,False,base.be,fr_BE,,delivery,delivery_3660,__import__.customer_3660
+__import__.customer_address_delivery_3664,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3664,__import__.customer_3664
+__import__.customer_address_delivery_3665,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3665,__import__.customer_3665
+__import__.customer_address_delivery_3668,DR BIHAIN MICHEL,"Virée du Renard, 5",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3668,__import__.customer_3668
+__import__.customer_address_delivery_3671,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,delivery_3671,__import__.customer_3671
+__import__.customer_address_delivery_3675,DRS MELCHIOR-LIGOT,"Rue Lombiery, 13",4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_3675,__import__.customer_3675
+__import__.customer_address_delivery_3704,FONTAINE - HUSTINX,"Route de Bastogne, 310",6700,ARLON,,,False,False,base.be,fr_BE,,delivery,delivery_3704,__import__.customer_3704
+__import__.customer_address_delivery_3721,RODEMERS GUIDO EPGMBH,"Manderfeld, 10",4760,BÜLLINGEN,,,False,False,base.be,fr_BE,,delivery,delivery_3721,__import__.customer_3721
+__import__.customer_address_delivery_3734,CLINIQUE DU JONCKAY,"Rue du Jonckay, 31",5380,FERNELMONT,,,False,False,base.be,fr_BE,,delivery,delivery_3734,__import__.customer_3734
+__import__.customer_address_delivery_3735,HANOSSET REGIS,Faculté Médecine Vétérinaire,4000,LIEGE,04/3664068,043364097,False,False,base.be,fr_BE,,delivery,delivery_3735,__import__.customer_3735
+__import__.customer_address_delivery_3738,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3738,__import__.customer_3738
+__import__.customer_address_delivery_3740,BOMAL FREDERIC,"Avenue du Chêne, 112",4802,HEUSY,,,False,False,base.be,fr_BE,,delivery,delivery_3740,__import__.customer_3740
+__import__.customer_address_delivery_3751,DR MAITREJEAN ANDRE,"Rue Grande, 130",6730,TINTIGNY,063/444877,,False,False,base.be,fr_BE,,delivery,delivery_3751,__import__.customer_3751
+__import__.customer_address_delivery_3753,LUNSKENS-CRAHAY CLIN.VET.,"Chaussée Brunehaut, 387",4453,VILLERS SAINT SIMEON,,,False,False,base.be,fr_BE,,delivery,delivery_3753,__import__.customer_3753
+__import__.customer_address_delivery_3754,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3754,__import__.customer_3754
+__import__.customer_address_delivery_3756,DR JUPRELLE POL,"Rue Mathieu de Lexhy, 152",4460,GRACE HOLLOGNE,,,False,False,base.be,fr_BE,,delivery,delivery_3756,__import__.customer_3756
+__import__.customer_address_delivery_3757,DRS MERLCHIOR-LIGOT,"Rue Lombiery, 13",4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_3757,__import__.customer_3757
+__import__.customer_address_delivery_3759,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3759,__import__.customer_3759
+__import__.customer_address_delivery_3760,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3760,__import__.customer_3760
+__import__.customer_address_delivery_3762,DR BURON PHILIPPE,"Rue de la Damzelle, 5",6997,AMONINES,,,False,False,base.be,fr_BE,,delivery,delivery_3762,__import__.customer_3762
+__import__.customer_address_delivery_3764,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3764,__import__.customer_3764
+__import__.customer_address_delivery_3765,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3765,__import__.customer_3765
+__import__.customer_address_delivery_3769,DR DEGREZ,"Route d'Offagne, 3",6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3769,__import__.customer_3769
+__import__.customer_address_delivery_3794,DRS SCHOFFENIELS-SCHOUBEN,Avenue des Martyrs 173,4620,FLERON,,,False,False,base.be,fr_BE,,delivery,delivery_3794,__import__.customer_3794
+__import__.customer_address_delivery_3797,DR DEGREZ LÉON,"Route d'Offagne, 3",6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3797,__import__.customer_3797
+__import__.customer_address_delivery_3807,1,"Place d'Alsace Lorraine, 6",08200,SEDAN,,,False,False,base.be,fr_BE,,delivery,delivery_3807,__import__.customer_3807
+__import__.customer_address_delivery_3807,DR LOUIS COLLINGE,"Chaussée Romaine, 1",4560,TERWAGNE,,,False,False,base.be,fr_BE,,delivery,delivery_3807,__import__.customer_3807
+__import__.customer_address_delivery_3811,BERKANS,"Rue de la Falize, 16",5080,RHISNES,,,False,False,base.be,fr_BE,,delivery,delivery_3811,__import__.customer_3811
+__import__.customer_address_delivery_3814,BRACKMAN & CORNELLE,"Rue du Ry d'Argent, 17",5080,RHISNES,,,False,False,base.be,fr_BE,,delivery,delivery_3814,__import__.customer_3814
+__import__.customer_address_delivery_3818,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3818,__import__.customer_3818
+__import__.customer_address_delivery_3820,DR FORGET GUY,"Rue de France, 4",6730,TINTIGNY,,,False,False,base.be,fr_BE,,delivery,delivery_3820,__import__.customer_3820
+__import__.customer_address_delivery_3829,DR BONTEMPS,"Gd Houmart, 13",6941,TOHOGNE,,,False,False,base.be,fr_BE,0477/829630,delivery,delivery_3829,__import__.customer_3829
+__import__.customer_address_delivery_3830,DR LADADE VALERIE,"Avenue Charles Madoux, 27",1160,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3830,__import__.customer_3830
+__import__.customer_address_delivery_3832,DR GILLET PATRICK,"Rue de la Barrière, 12",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3832,__import__.customer_3832
+__import__.customer_address_delivery_3842,DR JACOB JEAN-LUC,"Rue de Hedrée, 21",6900,MARCHE,,,False,False,base.be,fr_BE,,delivery,delivery_3842,__import__.customer_3842
+__import__.customer_address_delivery_3849,DR LISART FREDERIC,"Chaussée Hondzocht, 109",1480,TUBIZE,,,False,False,base.be,fr_BE,,delivery,delivery_3849,__import__.customer_3849
+__import__.customer_address_delivery_3850,DR BONGARTZ ALEXANDRE,"Rue Hoyoux, 114",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,delivery_3850,__import__.customer_3850
+__import__.customer_address_delivery_3853,DR FORGET GUY,"Rue de France, 4",6730,TINTIGNY,063/444255,,False,False,base.be,fr_BE,,delivery,delivery_3853,__import__.customer_3853
+__import__.customer_address_delivery_3856,EPC 059,"Rue Edouard d'Inot, 32",5590,GODINNE,,,False,False,base.be,fr_BE,,delivery,delivery_3856,__import__.customer_3856
+__import__.customer_address_delivery_3866,PPL+ 701,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3866,__import__.customer_3866
+__import__.customer_address_delivery_3867,PPL+ 702,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3867,__import__.customer_3867
+__import__.customer_address_delivery_3868,PPL+ 704,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3868,__import__.customer_3868
+__import__.customer_address_delivery_3869,PPL+ 707,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3869,__import__.customer_3869
+__import__.customer_address_delivery_3870,PPL+ 708,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3870,__import__.customer_3870
+__import__.customer_address_delivery_3871,PPL+ 709,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3871,__import__.customer_3871
+__import__.customer_address_delivery_3872,PPL+ 710,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3872,__import__.customer_3872
+__import__.customer_address_delivery_3873,PPL+ 713,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3873,__import__.customer_3873
+__import__.customer_address_delivery_3874,PPL+ 714,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3874,__import__.customer_3874
+__import__.customer_address_delivery_3875,PPL+ 715,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3875,__import__.customer_3875
+__import__.customer_address_delivery_3876,PPL+ 718,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3876,__import__.customer_3876
+__import__.customer_address_delivery_3877,PPL+ 720,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3877,__import__.customer_3877
+__import__.customer_address_delivery_3878,PPL+ 721,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3878,__import__.customer_3878
+__import__.customer_address_delivery_3879,PPL+ 722,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3879,__import__.customer_3879
+__import__.customer_address_delivery_3880,PPL+ 723,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3880,__import__.customer_3880
+__import__.customer_address_delivery_3881,PPL+ 725,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3881,__import__.customer_3881
+__import__.customer_address_delivery_3882,PPL+ 726,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3882,__import__.customer_3882
+__import__.customer_address_delivery_3883,PPL+ 727,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3883,__import__.customer_3883
+__import__.customer_address_delivery_3884,PPL+728,"Route Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3884,__import__.customer_3884
+__import__.customer_address_delivery_3885,PPL+ 730,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3885,__import__.customer_3885
+__import__.customer_address_delivery_3886,PPL+ 732,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3886,__import__.customer_3886
+__import__.customer_address_delivery_3887,PPL+ 733,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3887,__import__.customer_3887
+__import__.customer_address_delivery_3888,PPL+ 734,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3888,__import__.customer_3888
+__import__.customer_address_delivery_3889,PPL+ 735,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3889,__import__.customer_3889
+__import__.customer_address_delivery_3890,PPL+ 736,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3890,__import__.customer_3890
+__import__.customer_address_delivery_3891,PPL+ 737,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3891,__import__.customer_3891
+__import__.customer_address_delivery_3892,PPL+ 738,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3892,__import__.customer_3892
+__import__.customer_address_delivery_3893,PPL+ 739,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3893,__import__.customer_3893
+__import__.customer_address_delivery_3894,PPL+ 740,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3894,__import__.customer_3894
+__import__.customer_address_delivery_3895,PPL+ 741,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3895,__import__.customer_3895
+__import__.customer_address_delivery_3896,68274743,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3896,__import__.customer_3896
+__import__.customer_address_delivery_3897,PPL+744,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3897,__import__.customer_3897
+__import__.customer_address_delivery_3898,+ 745,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3898,__import__.customer_3898
+__import__.customer_address_delivery_3899,PPL+ 746,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3899,__import__.customer_3899
+__import__.customer_address_delivery_3900,PPL+ 747,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3900,__import__.customer_3900
+__import__.customer_address_delivery_3901,PPL+ 749,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3901,__import__.customer_3901
+__import__.customer_address_delivery_3904,PPL+ 751,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3904,__import__.customer_3904
+__import__.customer_address_delivery_3905,PPL+ 752,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3905,__import__.customer_3905
+__import__.customer_address_delivery_3906,PPL+ 753,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3906,__import__.customer_3906
+__import__.customer_address_delivery_3907,PPL+ 754,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3907,__import__.customer_3907
+__import__.customer_address_delivery_3908,PPL+ 755,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3908,__import__.customer_3908
+__import__.customer_address_delivery_3909,PPL+ 756,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3909,__import__.customer_3909
+__import__.customer_address_delivery_3910,6885166091,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3910,__import__.customer_3910
+__import__.customer_address_delivery_3911,PPL+ 760,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3911,__import__.customer_3911
+__import__.customer_address_delivery_3912,PPL+ 762,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3912,__import__.customer_3912
+__import__.customer_address_delivery_3913,6,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3913,__import__.customer_3913
+__import__.customer_address_delivery_3914,PPL+ 765,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3914,__import__.customer_3914
+__import__.customer_address_delivery_3915,PPL+ 766,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3915,__import__.customer_3915
+__import__.customer_address_delivery_3916,68851767,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3916,__import__.customer_3916
+__import__.customer_address_delivery_3917,PPL+ 768,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3917,__import__.customer_3917
+__import__.customer_address_delivery_3918,PPL+ 770,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3918,__import__.customer_3918
+__import__.customer_address_delivery_3919,PPL+ 771,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3919,__import__.customer_3919
+__import__.customer_address_delivery_3920,PPL+ 772,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3920,__import__.customer_3920
+__import__.customer_address_delivery_3921,PPL+ 773,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3921,__import__.customer_3921
+__import__.customer_address_delivery_3922,PPL+ 775,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3922,__import__.customer_3922
+__import__.customer_address_delivery_3923,PPL+ 776,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3923,__import__.customer_3923
+__import__.customer_address_delivery_3924,PPL+ 778,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3924,__import__.customer_3924
+__import__.customer_address_delivery_3926,PPL+ 779,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3926,__import__.customer_3926
+__import__.customer_address_delivery_3927,PPL+ 780,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3927,__import__.customer_3927
+__import__.customer_address_delivery_3928,PPL+ 781,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3928,__import__.customer_3928
+__import__.customer_address_delivery_3929,PPL+ 782,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3929,__import__.customer_3929
+__import__.customer_address_delivery_3930,PPL+ 783,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3930,__import__.customer_3930
+__import__.customer_address_delivery_3931,PPL+ 785,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3931,__import__.customer_3931
+__import__.customer_address_delivery_3932,PPL+ 786,"Route de Lennik, 900",1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,delivery_3932,__import__.customer_3932
+__import__.customer_address_delivery_3934,DR DEGREZ LÉON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3934,__import__.customer_3934
+__import__.customer_address_delivery_3950,DRS MELCHIOR-LIGOT,"Rue Lombiery, 13",4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_3950,__import__.customer_3950
+__import__.customer_address_delivery_3968,DR COX PHILIPPE,"Rue de la Station, 119",5370,HAVELANGE,,,False,False,base.be,fr_BE,,delivery,delivery_3968,__import__.customer_3968
+__import__.customer_address_delivery_3972,DR GILLET FRANÇOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_3972,__import__.customer_3972
+__import__.customer_address_delivery_3973,DR MAITREJEAN ANDRÉ,"Grand'Rue, 130",6730,TINTIGNY,,,False,False,base.be,fr_BE,,delivery,delivery_3973,__import__.customer_3973
+__import__.customer_address_delivery_3979,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3979,__import__.customer_3979
+__import__.customer_address_delivery_3980,DR BEDET FABIENNE,"Rue de la Fontaine, 1",1420,BRAINE-L'ALLEUD,,,False,False,base.be,fr_BE,,delivery,delivery_3980,__import__.customer_3980
+__import__.customer_address_delivery_3981,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,delivery_3981,__import__.customer_3981
+__import__.customer_address_delivery_3990,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_3990,__import__.customer_3990
+__import__.customer_address_delivery_3996,DR DEVRIESE ANNE,"Rue Jean Lorette, 14 A",6230,THIMEON,071/340134,,False,False,base.be,fr_BE,,delivery,delivery_3996,__import__.customer_3996
+__import__.customer_address_delivery_3997,DR LYBAERT PASCALE,"Rue Joseph Wauters, 17/19",1030,SCHAERBEEK,,,False,False,base.be,fr_BE,0477/436283,delivery,delivery_3997,__import__.customer_3997
+__import__.customer_address_delivery_4000,DRS MELCHIOR-LIGOT,"Rue Lombiery, 13",4210,BURDINNE,,,False,False,base.be,fr_BE,,delivery,delivery_4000,__import__.customer_4000
+__import__.customer_address_delivery_4004,DR DERASSE ALBERT,"Rue de la Croix Rouge, 30",1480,TUBIZE,02/3359121,,False,False,base.be,fr_BE,,delivery,delivery_4004,__import__.customer_4004
+__import__.customer_address_delivery_4005,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4005,__import__.customer_4005
+__import__.customer_address_delivery_4007,DR DEGREZ LEON,"Route d'Offagne, 3",6850,PALISEUL,,,False,False,base.be,fr_BE,,delivery,delivery_4007,__import__.customer_4007
+__import__.customer_address_delivery_4014,VANDERLINDEN THIERRY *,"Rue des Combattants, 67",1310,LA HULPE,,,False,False,base.be,fr_BE,,delivery,delivery_4014,__import__.customer_4014
+__import__.customer_address_delivery_4020,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4020,__import__.customer_4020
+__import__.customer_address_delivery_4022,DR MONTREUIL NATHALIE,"Place Roosevelt, 26",6180,COURCELLES,,,False,False,base.be,fr_BE,,delivery,delivery_4022,__import__.customer_4022
+__import__.customer_address_delivery_4023,LECOMTE DENIS VETERINAIRE,"Rue des Cloquettes, 5",5640,METTET,,,False,False,base.be,fr_BE,,delivery,delivery_4023,__import__.customer_4023
+__import__.customer_address_delivery_4030,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4030,__import__.customer_4030
+__import__.customer_address_delivery_4034,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4034,__import__.customer_4034
+__import__.customer_address_delivery_4048,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4048,__import__.customer_4048
+__import__.customer_address_delivery_4051,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4051,__import__.customer_4051
+__import__.customer_address_delivery_4052,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4052,__import__.customer_4052
+__import__.customer_address_delivery_4063,DR ROSTENNE ANDRE,"Rue de Dave, 121",5100,JAMBES,,,False,False,base.be,fr_BE,,delivery,delivery_4063,__import__.customer_4063
+__import__.customer_address_delivery_4074,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4074,__import__.customer_4074
+__import__.customer_address_delivery_4076,DR HEINEN ANDREAS,"Simarstrasse, 108 OU 115",4700,EUPEN,,,False,False,base.be,fr_BE,,delivery,delivery_4076,__import__.customer_4076
+__import__.customer_address_delivery_4089,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4089,__import__.customer_4089
+__import__.customer_address_delivery_4092,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4092,__import__.customer_4092
+__import__.customer_address_delivery_4093,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4093,__import__.customer_4093
+__import__.customer_address_delivery_4094,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4094,__import__.customer_4094
+__import__.customer_address_delivery_4097,CER,"Rue du Carmel, 1",6900,MARLOIE,,,False,False,base.be,fr_BE,,delivery,delivery_4097,__import__.customer_4097
+__import__.customer_address_delivery_4117,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4117,__import__.customer_4117
+__import__.customer_address_delivery_4129,DR DEBAILLEUL ALEX,Rue du Petit Briffoeil,7905,BAUGNIES,,,False,False,base.be,fr_BE,,delivery,delivery_4129,__import__.customer_4129
+__import__.customer_address_delivery_4132,DR  GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4132,__import__.customer_4132
+__import__.customer_address_delivery_4133,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4133,__import__.customer_4133
+__import__.customer_address_delivery_4146,DR DUQUESNE BRIGITTE,"Bd Sainctelette, 40",7000,MONS,,,False,False,base.be,fr_BE,,delivery,delivery_4146,__import__.customer_4146
+__import__.customer_address_delivery_4147,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4147,__import__.customer_4147
+__import__.customer_address_delivery_4151,DR LAMBOTTE JEAN-LOUIS,"Chauveheid, 91",4987,STOUMONT,,,False,False,base.be,fr_BE,,delivery,delivery_4151,__import__.customer_4151
+__import__.customer_address_delivery_4152,DR HERBER PASCALE,"Chauveheid, 91",4987,STOUMONT,,,False,False,base.be,fr_BE,,delivery,delivery_4152,__import__.customer_4152
+__import__.customer_address_delivery_4157,DR GILLET ANDRE,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4157,__import__.customer_4157
+__import__.customer_address_delivery_4195,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4195,__import__.customer_4195
+__import__.customer_address_delivery_4234,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,delivery_4234,__import__.customer_4234

@@ -56,10 +56,6 @@ def settings(ctx):
         'group_supplier_inv_check_total': True,
     }).execute()
 
-    ctx.env.ref('base.main_company').write({
-        'vat_check_vies': True,
-    })
-
 
 @anthem.log
 def default_values(ctx):
@@ -357,6 +353,17 @@ def import_account_payment_term(ctx):
     load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
     lines = resource_stream(req, 'data/install/account.payment.term.line.csv')
     load_csv_stream(ctx, 'account.payment.term.line', lines, delimiter=',')
+
+
+@anthem.log
+def activate_check_on_vat(ctx):
+    """ Activate check on vat """
+
+    # We want to activate this check after having import data
+    # to avoid to have an error on vat which became invalid on db2 database
+    ctx.env.ref('base.main_company').write({
+        'vat_check_vies': True,
+    })
 
 
 @anthem.log
