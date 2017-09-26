@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Set delivered and invoiced qty on sale order and purchase order which were imported and are in state done
+
 **Features and Improvements**
 
 * ALCN-865: Web service create web sale order
