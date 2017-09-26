@@ -219,6 +219,8 @@ class DB2MapperPurchaseOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        if any(l['dcfquc'] < 0 for l in lines):
+            raise Exception("Negative qty in lines")
         POLine = rec.env['purchase.order.line']
         po_lines = POLine
         is_received = True
@@ -331,6 +333,8 @@ class DB2MapperSaleOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        if any(l['dccquc'] < 0 for l in lines):
+            raise Exception("Negative qty in lines")
         SOLine = rec.env['sale.order.line']
         so_lines = SOLine
         is_delivered = True
