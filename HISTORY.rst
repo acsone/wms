@@ -15,6 +15,7 @@ Unreleased
 * Issue github 305: Replace string replacement in logger.* functions
 * ALCN-960: On picking form view, display 'Receive' button only for reception
 * ALCN-966: Add product quantities in delivery report
+* Add missing dependence on specific_sale module
 
 **Build**
 
