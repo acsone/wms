@@ -264,7 +264,7 @@ class DB2MapperPurchaseOrder(object):
             # or it would be recomputed
             query = (
                 "UPDATE purchase_order_line"
-                " SET qty_received = product_qty"
+                " SET qty_received = product_qty,"
                 "     qty_invoiced = product_qty"
                 " WHERE id in ( %s )"
             ) % ','.join(['%s'] * len(po_lines))
