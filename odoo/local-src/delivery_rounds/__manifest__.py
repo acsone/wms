@@ -17,6 +17,7 @@
     'data': [
         # Views
         'views/menu.xml',
+        'views/version.xml',
         'views/template.xml',
         'views/itinerary.xml',
         'views/instance.xml',

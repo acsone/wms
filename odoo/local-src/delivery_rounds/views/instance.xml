@@ -119,6 +119,7 @@
                 <field name="template_id" />
                 <field name="name" />
                 <field name="state" />
+                <field name="tag_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>

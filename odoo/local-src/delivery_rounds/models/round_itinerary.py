@@ -34,3 +34,13 @@ class RoundItineraryPosition(models.Model):
         required=True,
         ondelete='restrict',
         domain=[('customer', '=', True)])
+    partner_zip = fields.Char('Partner ZIP',
+                              related='partner_id.zip',
+                              readonly=True)
+    partner_city = fields.Char('Partner city',
+                               related='partner_id.city',
+                               readonly=True)
+    partner_street = fields.Char('Partner street',
+                                 related='partner_id.street',
+                                 readonly=True)
+    tag_ids = fields.Many2many('round.tag', string='Tags')

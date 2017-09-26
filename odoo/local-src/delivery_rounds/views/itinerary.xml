@@ -31,6 +31,10 @@
                     <tree string="Partners" editable="top">
                         <field name="sequence" />
                         <field name="partner_id" />
+                        <field name="partner_zip" />
+                        <field name="partner_city" />
+                        <field name="partner_street" />
+                        <field name="tag_ids" widget="many2many_tags"/>
                     </tree>
                 </field>
             </form>

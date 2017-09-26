@@ -2,7 +2,28 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+
+
+class RoundTemplateVersion(models.Model):
+    _name = 'round.template.version'
+
+    name = fields.Char('Name', required=True)
+    template_ids = fields.Many2many('round.template', string='Templates')
+    is_default_version = fields.Boolean('Default version')
+
+    @api.constrains('is_default_version')
+    def constrains_is_default_version(self):
+        for version in self:
+            if not version.is_default_version:
+                continue
+
+            default_version = self.search([('is_default_version', '=', True),
+                                           ('id', '!=', version.id)])
+            if default_version:
+                raise UserError(_('You cannot have more '
+                                  'than one default version at once.'))
 
 
 class RoundTemplate(models.Model):

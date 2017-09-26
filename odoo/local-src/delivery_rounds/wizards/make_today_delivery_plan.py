@@ -9,17 +9,19 @@ from odoo.exceptions import Warning
 class MakeTodayDeliveryPlan(models.TransientModel):
     _name = 'round.wizard.makeplan'
 
-    template_ids = fields.Many2many(
-        'round.template', string='Templates',
-        )
+    version_id = fields.Many2one(
+        'round.template.version',
+        required=True,
+        default=lambda x: x.env['round.template.version'].search(
+            [('is_default_version', '=', True)])
+    )
     assign_moves = fields.Boolean(
         'Reserve stock', default=True)
+    tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.one
     def confirm(self):
-        if not self.template_ids:
-            raise Warning(_('Please select the templates'))
-        templates = self.template_ids
+        templates = self.version_id.template_ids
         today = fields.Date.context_today(self)
         # deduct templates for which instance already exist
         instances = self.env['round.instance'].search([
@@ -33,6 +35,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
                 'date': today,
                 'time_picking_planned': template.time_picking_planned,
                 'time_leave_planned': template.time_leave_planned,
+                'tag_ids': [(6, 0, self.tag_ids.ids)]
                 })
 
         if self.assign_moves:

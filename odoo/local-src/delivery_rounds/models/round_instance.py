@@ -99,6 +99,7 @@ class RoundInstance(models.Model):
     complete_name = fields.Char(
         'Display Name', readonly=True,
         compute='_get_complete_name', store=True)
+    tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.multi
     @api.depends('template_id', 'date', 'time_leave_planned')
