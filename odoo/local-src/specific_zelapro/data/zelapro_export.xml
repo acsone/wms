@@ -76,7 +76,7 @@
         <field name="name">Stock</field>
         <field name="type">method</field>
         <field name="method">export_stocks</field>
-        <field name="file_name">Stocks.csv</field>
+        <field name="file_name">Stock.csv</field>
         <field name="data_age">0</field>
     </record>
 </odoo>
