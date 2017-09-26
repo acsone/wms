@@ -353,24 +353,6 @@ def set_esb_references(ctx):
 @anthem.log
 def import_account_payment_term(ctx):
     """ Importing account payment term """
-    terms_to_unlink = ctx.env['account.payment.term']
-    term_immediate = ctx.env.ref('account.account_payment_term_immediate',
-                                 raise_if_not_found=False)
-    if term_immediate:
-        terms_to_unlink |= term_immediate
-
-    term_15days = ctx.env.ref('account.account_payment_term_15days',
-                              raise_if_not_found=False)
-    if term_15days:
-        terms_to_unlink |= term_15days
-
-    term_net = ctx.env.ref('account.account_payment_term_net',
-                           raise_if_not_found=False)
-    if term_net:
-        terms_to_unlink |= term_net
-
-    terms_to_unlink.unlink()
-
     content = resource_stream(req, 'data/install/account.payment.term.csv')
     load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
     lines = resource_stream(req, 'data/install/account.payment.term.line.csv')
