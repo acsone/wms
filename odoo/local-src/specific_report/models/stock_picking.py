@@ -28,21 +28,40 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     number_of_drug = fields.Float(
-        'Number of medical products',
+        'Number of medical',
         compute='_compute_number_of_products')
     number_of_cold = fields.Float(
-        'Number of cold products',
+        'Number of cold',
         compute='_compute_number_of_products')
     number_of_food = fields.Float(
-        'Number of food products',
+        'Number of food',
         compute='_compute_number_of_products')
-    number_of_human_food = fields.Float(
-        'Number of human food',
+    number_of_human_drug = fields.Float(
+        'Number of human drug',
         compute='_compute_number_of_products')
     number_of_equipment = fields.Float(
         'Number of equipments',
         compute='_compute_number_of_products')
     number_total = fields.Float(
+        'Number of boxes',
+        compute='_compute_number_of_products')
+
+    item_number_of_drug = fields.Float(
+        'Number of medical products',
+        compute='_compute_number_of_products')
+    item_number_of_cold = fields.Float(
+        'Number of cold products',
+        compute='_compute_number_of_products')
+    item_number_of_food = fields.Float(
+        'Number of food products',
+        compute='_compute_number_of_products')
+    item_number_of_human_drug = fields.Float(
+        'Number of human drug products',
+        compute='_compute_number_of_products')
+    item_number_of_equipment = fields.Float(
+        'Number of equipments products',
+        compute='_compute_number_of_products')
+    item_number_total = fields.Float(
         'Number of products',
         compute='_compute_number_of_products')
 
@@ -56,11 +75,19 @@ class StockPicking(models.Model):
         type_food = self.env.ref('__setup__.stock_picking_type_ali')
         type_equipment = self.env.ref('__setup__.stock_picking_type_materiel')
 
+        main_categ = self.env.ref('product.product_category_all')
+        equipment_categ = self.env.ref('specific_data.product_categ_materiel')
+        food_categ = self.env.ref('specific_data.product_categ_ali')
+        drug_categ = self.env.ref('specific_data.product_categ_medoc')
+        fridge_categ = self.env.ref('specific_data.product_categ_frigo')
+        human_categ = self.env.ref('specific_data.product_categ_humain')
+
+        # Check quantities for packages
         for picking in self:
             number_of_drug = 0
             number_of_cold = 0
             number_of_food = 0
-            number_of_human_food = 0
+            number_of_human_drug = 0
             number_of_equipment = 0
             number_total = 0
 
@@ -83,7 +110,7 @@ class StockPicking(models.Model):
                 elif picking_type == type_equipment:
                     number_of_equipment += qty
                 elif picking_type == type_human:
-                    number_of_human_food += qty
+                    number_of_human_drug += qty
                 else:
                     raise Warning(_('The picking type %s is not correct')
                                   % picking_type.name)
@@ -91,9 +118,55 @@ class StockPicking(models.Model):
             picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold
             picking.number_of_food = number_of_food
-            picking.number_of_human_food = number_of_human_food
+            picking.number_of_human_drug = number_of_human_drug
             picking.number_of_equipment = number_of_equipment
             picking.number_total = number_total
+
+            item_number_of_drug = 0
+            item_number_of_cold = 0
+            item_number_of_food = 0
+            item_number_of_human_drug = 0
+            item_number_of_equipment = 0
+            item_number_total = 0
+
+            # Check quantities for products without pack
+            for operation in picking.pack_operation_product_ids:
+                if not operation.product_id.categ_id:
+                    raise Warning(_('There is no category on this product'))
+
+                categ = operation.product_id.categ_id
+
+                qty = operation.qty_done
+                item_number_total += qty
+
+                # We need to have the main product category of the product
+                # Equipment, Food, Drug, Fridge, Human drug
+                while categ.parent_id and categ.parent_id != main_categ:
+                    # The human drug category is a sub category of drug.
+                    if categ == human_categ:
+                        break
+                    categ = categ.parent_id
+
+                if categ == drug_categ:
+                    item_number_of_drug += qty
+                elif categ == fridge_categ:
+                    item_number_of_cold += qty
+                elif categ == food_categ:
+                    item_number_of_food += qty
+                elif categ == equipment_categ:
+                    item_number_of_equipment += qty
+                elif categ == human_categ:
+                    item_number_of_human_drug += qty
+                else:
+                    raise Warning(_('The category %s is not valid')
+                                  % categ.name)
+
+            picking.item_number_of_drug = item_number_of_drug
+            picking.item_number_of_cold = item_number_of_cold
+            picking.item_number_of_food = item_number_of_food
+            picking.item_number_of_human_drug = item_number_of_human_drug
+            picking.item_number_of_equipment = item_number_of_equipment
+            picking.item_number_total = item_number_total
 
     @api.multi
     def get_moves_by_order(self):
