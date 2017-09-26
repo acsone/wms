@@ -1,7 +1,7 @@
 <odoo>
   <data noupdate="1">
-    <record model="db2.importer" id="db2_importer">
-      <field name="name">Default importer</field>
+    <record model="db2.importer" id="db2_sale_importer">
+      <field name="name">Sale importer</field>
       <field name="date_start">2016-01-01</field>
       <field name="mode">history</field>
     </record>
@@ -11,7 +11,7 @@
 
   <!-- sale order header table -->
   <record model="db2.importer.table" id="db2_table_pentcdcl">
-    <field name="importer_id" ref="db2_importer"/>
+    <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDCL</field>
     <field name="table_prefix">ecc</field>
@@ -22,7 +22,7 @@
 
   <!-- sale order detail line table -->
   <record model="db2.importer.table" id="db2_table_pdetcdcl">
-    <field name="importer_id" ref="db2_importer"/>
+    <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDCL</field>
     <field name="table_prefix">dcc</field>
@@ -32,16 +32,26 @@
   <!-- relation table between lot and move
        containing reference to sale order -->
   <record model="db2.importer.table" id="db2_table_mvtlot">
-    <field name="importer_id" ref="db2_importer"/>
+    <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">MVTLOT</field>
     <field name="table_prefix">mlt</field>
     <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
   </record>
+  </data>
 
+  <data noupdate="1">
+    <record model="db2.importer" id="db2_purchase_importer">
+      <field name="name">Purchase importer</field>
+      <field name="date_start">2016-01-01</field>
+      <field name="mode">history</field>
+    </record>
+  </data>
+
+  <data noupdate="0">
   <!-- purchase order header table -->
   <record model="db2.importer.table" id="db2_table_pentcdfo">
-    <field name="importer_id" ref="db2_importer"/>
+    <field name="importer_id" ref="db2_purchase_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDFO</field>
     <field name="table_prefix">ecf</field>
@@ -52,7 +62,7 @@
 
   <!-- purchase order detail line table -->
   <record model="db2.importer.table" id="db2_table_pdetcdfo">
-    <field name="importer_id" ref="db2_importer"/>
+    <field name="importer_id" ref="db2_purchase_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDFO</field>
     <field name="table_prefix">dcf</field>
