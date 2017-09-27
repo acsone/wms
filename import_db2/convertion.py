@@ -367,6 +367,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('fax', 'foufax'),
         FieldMapper('email', 'emwadr'),
         FieldMapper('vat', 'foucee', check=checks.vat),
+        FieldMapper('delivery_lead_time', 'foudll'),
         FieldMapper('customer', constant=False),
         FieldMapper('supplier', constant=True),
         FieldMapper('alcyon_category_id/id',
