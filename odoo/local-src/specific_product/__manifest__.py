@@ -17,6 +17,7 @@
     'website': 'https://www.camptocamp.com',
     'data': [
         'data/product_price_category.xml',
+        'data/product_storage_temperature.xml',
         'views/product_pricelist.xml',
         'views/product_template.xml',
         'views/product_product.xml',

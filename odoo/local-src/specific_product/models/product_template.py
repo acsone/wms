@@ -27,6 +27,10 @@ class ProductTemplate(models.Model):
         string='Indicated price'
     )
 
+    storage_temperature_id = fields.Many2one(
+        'product.storage.temperature',
+        string="Storage temperature")
+
     def _compute_sale_price_2(self):
         for product in self:
             pricelist = self.env.ref('specific_data.product_pricelist_pb2')

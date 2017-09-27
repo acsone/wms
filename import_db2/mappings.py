@@ -80,6 +80,12 @@ PRODUCT_STATES = {
     'N': 'specific_purchase.product_state_n',
 }
 
+PRODUCT_STORAGE_TEMPERATURES = {
+    0: 'specific_product.product_storage_temperature_ambient',
+    2: 'specific_product.product_storage_temperature_minus_12',
+    5: 'specific_product.product_storage_temperature_15',
+    6: 'specific_product.product_storage_temperature_6',
+}
 
 # We could just prefix by __setup__.res_user_
 # but it will fail the import if user does not exist in Odoo.

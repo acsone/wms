@@ -52,12 +52,17 @@ class ProductMapper(EntityMapper):
             'state_id/id', 'geschr',
             mapping=mappings.PRODUCT_STATES
         ),
+        FieldMapper(
+            'storage_temperature_id/id', 'cp2z17',
+            mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
     def get_sql_joins(self):
-        return "join sbdata.cplges on gesart=cplart "
+        return ("join sbdata.cplges on gesart=cplart"
+                " join sbdata.cplge2 on gesart=cp2art")
 
     def get_sql_where(self):
         if not self.importer.full:
