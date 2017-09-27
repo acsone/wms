@@ -23,6 +23,7 @@ Unreleased
 
 * ALCN-959: Set esb_ref for some models
 * Refresh data full and data demo
+* ALCN-968: Update imported users file
 
 **Documentation**
 
