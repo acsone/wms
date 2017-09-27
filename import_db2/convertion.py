@@ -56,6 +56,10 @@ class ProductMapper(EntityMapper):
             'storage_temperature_id/id', 'cp2z17',
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
         ),
+        FieldMapper(
+            'web_published', 'cplz19',
+            mapping=mappings.PRODUCT_WEB_PUBLISHED
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]

@@ -31,6 +31,8 @@ class ProductTemplate(models.Model):
         'product.storage.temperature',
         string="Storage temperature")
 
+    web_published = fields.Boolean(string="Published on website")
+
     def _compute_sale_price_2(self):
         for product in self:
             pricelist = self.env.ref('specific_data.product_pricelist_pb2')

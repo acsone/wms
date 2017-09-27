@@ -87,6 +87,11 @@ PRODUCT_STORAGE_TEMPERATURES = {
     6: 'specific_product.product_storage_temperature_6',
 }
 
+PRODUCT_WEB_PUBLISHED = {
+    '0': False,
+    '1': True,
+}
+
 # We could just prefix by __setup__.res_user_
 # but it will fail the import if user does not exist in Odoo.
 USERS = {
