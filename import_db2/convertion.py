@@ -761,3 +761,12 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   StockInventoryLineMapper,
                   ProductStockBinMapper
                   ]
+
+
+MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
+                       CustomerMapper, SupplierMapper,
+                       CustomerAddressMapper,
+                       StockProductionLotMapper,
+                       StockInventoryLineMapper,
+                       ProductStockBinMapper
+                       ]

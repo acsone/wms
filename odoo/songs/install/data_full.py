@@ -53,6 +53,17 @@ def import_clients(ctx):
 
 
 @anthem.log
+def import_clients_addresses(ctx):
+    """ Importing clients addresses from csv"""
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
+    for content in get_files(req, 'data/install/customer_address.csv'):
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+
+@anthem.log
 def create_product_other(ctx):
     """ Create product 'Other' used when importing sale orders """
     values = {

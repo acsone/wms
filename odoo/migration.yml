@@ -43,6 +43,7 @@ migration:
             post:
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
               - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
+              - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
@@ -55,6 +56,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_stock_bins
+              - anthem songs.install.accounting::activate_check_on_vat
           addons:
             upgrade:
               - db2_import
@@ -62,6 +64,7 @@ migration:
           operations:
             post:
               - anthem songs.install.data_demo::main
+              - anthem songs.install.accounting::activate_check_on_vat
       addons:
         upgrade:
           ### Odoo

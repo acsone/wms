@@ -22,6 +22,7 @@ Unreleased
 **Build**
 
 * ALCN-959: Set esb_ref for some models
+* Refresh data full and data demo
 
 **Documentation**
 

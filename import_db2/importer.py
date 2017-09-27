@@ -10,7 +10,7 @@ import sys
 from shutil import copyfile
 from collections import defaultdict, OrderedDict
 
-from convertion import MAPPER_CLASSES
+from convertion import MAPPER_CLASSES, MAPPER_CLASSES_FULL
 
 
 def flatten_dict(nested_dict, prefix=None):
@@ -99,7 +99,8 @@ class Importer:
                 writer.writerows(rows)
 
     def process(self):
-        for class_ in MAPPER_CLASSES:
+        classes = MAPPER_CLASSES_FULL if self.full else MAPPER_CLASSES
+        for class_ in classes:
             mapper = class_(self)
             mapper.process()
 
