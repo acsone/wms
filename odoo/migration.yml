@@ -206,6 +206,7 @@ migration:
           - anthem songs.install.sales::import_pricelist
           - anthem songs.install.data_all::define_esb_ref_on_countries
           - anthem songs.install.data_all::define_esb_ref_on_taxes
+          - anthem songs.install.accounting::import_account_payment_term
       addons:
         upgrade:
           ### local-src

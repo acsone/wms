@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-865: Web service create web sale order
+* ALCN-965: Load payment terms
 
 **Bugfixes**
 

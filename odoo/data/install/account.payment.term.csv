@@ -1,0 +1,14 @@
+id,name,note
+__setup__.account_payment_term_01,01 - 30 jours date facture,Condition de paiement : 30 jours date facture
+__setup__.account_payment_term_02,02 - 60 jours date facture,60 jours date facture
+__setup__.account_payment_term_03,03 - 90 jours date facture,90 jours date facture
+__setup__.account_payment_term_04,04 - 30 jours fin de mois,Condition de paiement : 30 jours date facture
+__setup__.account_payment_term_05,05 - 60 jours fin de mois,60 jours fin de mois
+__setup__.account_payment_term_06,06 - 90 jours fin de mois,90 jours fin de mois
+__setup__.account_payment_term_07,07 - Contre Remboursement,Contre Remboursement
+__setup__.account_payment_term_08,08 - 10 jours date facture,Condition de paiement : 10 jours date facture
+__setup__.account_payment_term_10,10 - Comptant,Comptant
+__setup__.account_payment_term_19,19 - 15 jours date facture,Condition de paiement : 15 jours date facture
+__setup__.account_payment_term_23,23 - 7 jours date facture,Condition de paiement : 7 jours date facture
+__setup__.account_payment_term_32,32 - 27 jours date facture,Condition de paiement : 27 jours date facture
+__setup__.account_payment_term_33,33 - 45 jours date facture,Condition de paiement : 45 jours date facture
