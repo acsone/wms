@@ -70,6 +70,16 @@ PRODUCT_CATEGORY.update({
     75: 'specific_data.product_categ_importation',
 })
 
+PRODUCT_STATES = {
+    'A': 'specific_purchase.product_state_a',
+    'D': 'specific_purchase.product_state_d',
+    'H': 'specific_purchase.product_state_h',
+    'I': 'specific_purchase.product_state_i',
+    'L': 'specific_purchase.product_state_l',
+    'M': 'specific_purchase.product_state_m',
+    'N': 'specific_purchase.product_state_n',
+}
+
 
 # We could just prefix by __setup__.res_user_
 # but it will fail the import if user does not exist in Odoo.
