@@ -48,22 +48,10 @@ class StockPicking(models.Model):
         if not result or result['res_model'] != 'stock.backorder.confirmation':
             return result
 
-        customer_location = self.env.ref('stock.stock_location_customers')
-        output_location = self.env.ref('stock.stock_location_output')
         supplier_location = self.env.ref('stock.stock_location_suppliers')
 
-        # Case: Sale back order
-        if self.location_dest_id in [customer_location, output_location]:
-            wiz_id = result['res_id']
-            wiz = self.env['stock.backorder.confirmation'].browse(wiz_id)
-            if self.partner_id.is_sale_back_order_accepted:
-                wiz.process()
-            else:
-                wiz.process_cancel_backorder()
-            return
-
         # Case: Purchase back order
-        elif self.location_id == supplier_location:
+        if self.location_id == supplier_location:
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'stock.backorder.choice',

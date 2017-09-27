@@ -65,66 +65,7 @@ class TestPickingBackorder(TransactionCase):
 
     @post_install(True)
     @at_install(False)
-    def test_1_sale_picking_backorder(self):
-
-        # Test all cases
-        for dest_location in [self.customer_location, self.output_location]:
-            for backorder_accepted in [False, True]:
-
-                # Define the backorder behavior on partner
-                self.partner.is_sale_back_order_accepted = backorder_accepted
-
-                # Define product quantity at 3
-                self._define_product_qty(self.product, 3)
-
-                # Create picking
-                picking = self.stock_picking_model.create({
-                    'picking_type_id': self.ref('stock.picking_type_out'),
-                    'location_id': self.stock_location.id,
-                    'location_dest_id': dest_location.id,
-                    'partner_id': self.partner.id,
-                    'move_lines': [
-                        (0, 0, {
-                            'name': 'a move',
-                            'product_id': self.product.id,
-                            'product_uom_qty': 10,
-                            'product_uom': self.product.uom_id.id,
-                            'location_id': self.stock_location.id,
-                            'location_dest_id': dest_location.id,
-                        })
-                    ],
-                })
-
-                # Transfer picking partially
-                picking.action_assign()
-                pack_operation = picking.pack_operation_product_ids
-                pack_operation.write({
-                    'qty_done': 3,
-                })
-                picking.do_new_transfer()
-
-                # Search created backorder
-                backorder = self.stock_picking_model.search([
-                    ('backorder_id', '=', picking.id)
-                ])
-
-                # Check picking values
-                self.assertEqual(
-                    picking.pack_operation_product_ids.product_qty, 3
-                )
-                self.assertEqual(picking.state, 'done')
-
-                # Check backorder values
-                self.assertEqual(len(backorder), 1)
-                self.assertEqual(backorder.move_lines.product_uom_qty, 7)
-                self.assertEqual(
-                    backorder.state,
-                    'confirmed' if backorder_accepted else 'cancel'
-                )
-
-    @post_install(True)
-    @at_install(False)
-    def test_2_purchase_picking_backorder_create_backorder_no_helpdesk(self):
+    def test_1_purchase_picking_backorder_create_backorder_no_helpdesk(self):
 
         # Define helpdesk ticket values
         ticket_reason = self.helpdesk_ticket_reason_model.create({
@@ -235,9 +176,9 @@ class TestPickingBackorder(TransactionCase):
 
     @post_install(True)
     @at_install(False)
-    def test_3_other_picking_backorder(self):
+    def test_2_sale_and_other_picking_backorder(self):
         """
-        We take like other case a product return from customer.
+        We take like sale case and other case (a product return from customer).
         This case use the standard Odoo feature.
         """
 
@@ -245,71 +186,91 @@ class TestPickingBackorder(TransactionCase):
         for sale_backorder_accepted in [False, True]:
             for purchase_backorder_accepted in [False, True]:
                 for create_backorder in [False, True]:
-
-                    # Define the backorder behavior on partner
-                    self.partner.write({
-                        'is_sale_back_order_accepted': sale_backorder_accepted,
-                        'is_purchase_back_order_accepted':
-                            purchase_backorder_accepted,
-                    })
-
-                    # Create picking
-                    picking = self.stock_picking_model.create({
-                        'picking_type_id': self.ref('stock.picking_type_in'),
-                        'location_id': self.customer_location.id,
-                        'location_dest_id': self.stock_location.id,
-                        'partner_id': self.partner.id,
-                        'move_lines': [
-                            (0, 0, {
-                                'name': 'a move',
-                                'product_id': self.product.id,
-                                'product_uom_qty': 10,
-                                'product_uom': self.product.uom_id.id,
-                                'location_id': self.customer_location.id,
-                                'location_dest_id': self.stock_location.id,
-                            })
-                        ],
-                    })
-
-                    # Transfer picking partially
-                    picking.action_confirm()
-                    picking.force_assign()
-                    pack_operation = picking.pack_operation_product_ids
-                    pack_operation.write({
-                        'qty_done': 3,
-                    })
-                    result = picking.do_new_transfer()
-
-                    # Check that the transfer action return the good wizard
-                    self.assertEqual(
-                        result['res_model'],
-                        'stock.backorder.confirmation'
+                    sale_case_1 = (
+                        self.ref('stock.picking_type_out'),
+                        self.stock_location.id,
+                        self.customer_location.id
                     )
-
-                    # Create backorder confirmation wizard and execute it
-                    wizard = self.backorder_confirmation_model.create({
-                        'pick_id': picking.id
-                    })
-                    if create_backorder:
-                        wizard.process()
-                    else:
-                        wizard.process_cancel_backorder()
-
-                    # Search created backorder
-                    backorder = self.stock_picking_model.search([
-                        ('backorder_id', '=', picking.id)
-                    ])
-
-                    # Check picking values
-                    self.assertEqual(
-                        picking.pack_operation_product_ids.product_qty, 3
+                    sale_case_2 = (
+                        self.ref('stock.picking_type_out'),
+                        self.stock_location.id,
+                        self.output_location.id
                     )
-                    self.assertEqual(picking.state, 'done')
-
-                    # Check backorder values
-                    self.assertEqual(len(backorder), 1)
-                    self.assertEqual(backorder.move_lines.product_uom_qty, 7)
-                    self.assertEqual(
-                        backorder.state,
-                        'confirmed' if create_backorder else 'cancel'
+                    other_case = (
+                        self.ref('stock.picking_type_in'),
+                        self.customer_location.id,
+                        self.stock_location.id,
                     )
+                    for picking_type_id, location_id, location_dest_id in [
+                        sale_case_1, sale_case_2, other_case
+                    ]:
+                        # Define the backorder behavior on partner
+                        self.partner.write({
+                            'is_sale_back_order_accepted':
+                                sale_backorder_accepted,
+                            'is_purchase_back_order_accepted':
+                                purchase_backorder_accepted,
+                        })
+
+                        # Create picking
+                        picking = self.stock_picking_model.create({
+                            'picking_type_id': picking_type_id,
+                            'location_id': location_id,
+                            'location_dest_id': location_dest_id,
+                            'partner_id': self.partner.id,
+                            'move_lines': [
+                                (0, 0, {
+                                    'name': 'a move',
+                                    'product_id': self.product.id,
+                                    'product_uom_qty': 10,
+                                    'product_uom': self.product.uom_id.id,
+                                    'location_id': location_id,
+                                    'location_dest_id': location_dest_id,
+                                })
+                            ],
+                        })
+
+                        # Transfer picking partially
+                        picking.action_confirm()
+                        picking.force_assign()
+                        pack_operation = picking.pack_operation_product_ids
+                        pack_operation.write({
+                            'qty_done': 3,
+                        })
+                        result = picking.do_new_transfer()
+
+                        # Check that the transfer action return the good wizard
+                        self.assertEqual(
+                            result['res_model'],
+                            'stock.backorder.confirmation'
+                        )
+
+                        # Create backorder confirmation wizard and execute it
+                        wizard = self.backorder_confirmation_model.create({
+                            'pick_id': picking.id
+                        })
+                        if create_backorder:
+                            wizard.process()
+                        else:
+                            wizard.process_cancel_backorder()
+
+                        # Search created backorder
+                        backorder = self.stock_picking_model.search([
+                            ('backorder_id', '=', picking.id)
+                        ])
+
+                        # Check picking values
+                        self.assertEqual(
+                            picking.pack_operation_product_ids.product_qty, 3
+                        )
+                        self.assertEqual(picking.state, 'done')
+
+                        # Check backorder values
+                        self.assertEqual(len(backorder), 1)
+                        self.assertEqual(
+                            backorder.move_lines.product_uom_qty, 7
+                        )
+                        self.assertEqual(
+                            backorder.state,
+                            'confirmed' if create_backorder else 'cancel'
+                        )

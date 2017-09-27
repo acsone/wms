@@ -35,12 +35,6 @@ msgid "Active"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_back_order_accepted
-#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_back_order_accepted
-msgid "Back order accepted"
-msgstr ""
-
-#. module: specific_purchase
 #: model:ir.actions.act_window,name:specific_purchase.bank_holiday_action
 #: model:ir.ui.menu,name:specific_purchase.menu_bank_holiday_action
 msgid "Bank Holidays"

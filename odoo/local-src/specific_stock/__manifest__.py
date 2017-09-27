@@ -18,6 +18,7 @@
         'specific_purchase',
         'stock',
         'stock_available_immediately',
+        'stock_product_bin',
         'stock_production_lot_expired_dates',
         'stock_receive_lot',
         'stock_reception_priority',
