@@ -11,6 +11,9 @@ Unreleased
 * ALCN-972: Import delivery lead time on suppliers
 * Set delivered and invoiced qty on sale order and purchase order which were imported and are in state done
 * Extend db2_import module to import a subset of partner (10 by default) and their sale orders
+* Adds 4 fields to product exported csv from DB2
+  * product state, storage temperature, web published and barcode
+* Update product categories with new categories
 
 **Features and Improvements**
 [IMP] Do not group pickings when a specific carrier is defined on sales order
