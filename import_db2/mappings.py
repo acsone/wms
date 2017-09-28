@@ -56,6 +56,7 @@ PRODUCT_CATEGORY.update({
     35: 'specific_data.product_categ_mat_equins',
     36: 'specific_data.product_categ_mat_rurale',
     44: 'specific_data.product_categ_topiques',
+    52: 'specific_data.product_categ_mat_sav',
     55: 'specific_data.product_categ_mat_ortho',
     56: 'specific_data.product_categ_mat_sut_bobine',
     58: 'specific_data.product_categ_mat_equipement',
@@ -68,6 +69,15 @@ PRODUCT_CATEGORY.update({
     68: 'specific_data.product_categ_mat_conso',
     71: 'specific_data.product_categ_mat_petshop',
     75: 'specific_data.product_categ_importation',
+    91: 'specific_data.product_categ_finance_frais',
+    92: 'specific_data.product_categ_finance_remises_fournisseurs',
+    93: 'specific_data.product_categ_mat_marge',
+    94: 'specific_data.product_categ_finance_bonus_actionnaires',
+    95: 'specific_data.product_categ_finance_cheques_clients',
+    96: 'specific_data.product_categ_ali_divers',
+    97: 'specific_data.product_categ_finance_remises_partenariat',
+    98: 'specific_data.product_categ_finance_remises_geste_commercial',
+    99: 'specific_data.product_categ_finance_divers_divers',
 })
 
 PRODUCT_STATES = {
