@@ -35,6 +35,11 @@ class ProductMapper(EntityMapper):
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
         FieldMapper('cnk_code', 'cplz03'),
+        FieldMapper(
+            'web_published', 'cplz19',
+            mapping=mappings.PRODUCT_WEB_PUBLISHED
+        ),
+        FieldMapper('barcode', 'cplz05'),
         FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
         FieldMapper(
             'taxes_id/id', 'gesctv',
@@ -55,10 +60,6 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'storage_temperature_id/id', 'cp2z17',
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
-        ),
-        FieldMapper(
-            'web_published', 'cplz19',
-            mapping=mappings.PRODUCT_WEB_PUBLISHED
         ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
