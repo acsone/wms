@@ -10,7 +10,8 @@ Try to assign the moves to an existing picking
 that has not been reserved yet and that does not have the same
 procurement group but the same partner, locations and picking type
 (moves should already have them identical). Otherwise, create a new
-picking to Assign them to.
+picking to Assign them to. This module will not group pickings
+having a dedicated carrier.
 
 Installation
 ============
