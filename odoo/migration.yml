@@ -220,3 +220,4 @@ migration:
           - specific_report
           - specific_stock
           - stock_receive_lot
+          - db2_import
