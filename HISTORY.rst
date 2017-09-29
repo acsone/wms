@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-972: Import delivery lead time on suppliers
+* Set delivered and invoiced qty on sale order and purchase order which were imported and are in state done
 
 **Features and Improvements**
 

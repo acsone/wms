@@ -7,6 +7,9 @@
         <header>
           <button string="Import" type="object" name="db2_import" class="oe_highlight"/>
         </header>
+        <h2>
+          <field name="name"/>
+        </h2>
         <group>
           <group>
             <field name="date_start"/>

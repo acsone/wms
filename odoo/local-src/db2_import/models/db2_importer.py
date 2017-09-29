@@ -20,7 +20,7 @@ def convert_date(prefix, db2_row):
     if dd == 0:
         return False
     mm = db2_row[prefix + 'mm']
-    Y = "%s%s" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
+    Y = "%s%02i" % (db2_row[prefix + 'ss'], db2_row[prefix + 'aa'])
     return "%s-%02i-%02i" % (Y, mm, dd)
 
 
@@ -219,6 +219,8 @@ class DB2MapperPurchaseOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        if any(l['dcfquc'] < 0 for l in lines):
+            raise Exception("Negative qty in lines")
         POLine = rec.env['purchase.order.line']
         po_lines = POLine
         is_received = True
@@ -263,7 +265,9 @@ class DB2MapperPurchaseOrder(object):
             # to create pickings, this needs to be done after state write
             # or it would be recomputed
             query = (
-                "UPDATE purchase_order_line SET qty_received = product_qty"
+                "UPDATE purchase_order_line"
+                " SET qty_received = product_qty,"
+                "     qty_invoiced = product_qty"
                 " WHERE id in ( %s )"
             ) % ','.join(['%s'] * len(po_lines))
             cr.execute(query, po_lines.ids)
@@ -329,6 +333,10 @@ class DB2MapperSaleOrder(object):
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
+        if any(l['dccquc'] < 0 for l in lines):
+            raise Exception("Negative qty in lines")
+        SOLine = rec.env['sale.order.line']
+        so_lines = SOLine
         is_delivered = True
         delivered_lines = []
         not_delivered_lines = []
@@ -354,11 +362,10 @@ class DB2MapperSaleOrder(object):
                 'write_date': convert_date('dccm', line) or create_date,
             }
 
-            SOLine = rec.env['sale.order.line']
             xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))
-            create_or_update(SOLine, xmlid, values)
+            so_lines |= create_or_update(SOLine, xmlid, values)
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
         is_delivered = all(delivered_lines)
@@ -379,6 +386,16 @@ class DB2MapperSaleOrder(object):
             cr.execute(
                 "UPDATE sale_order set invoice_status = 'invoiced'"
                 " WHERE id = %s", [new.id])
+            # force invoiced qty in database to avoid to have
+            # this needs to be done after state write
+            # or it would be recomputed
+            query = (
+                "UPDATE sale_order_line"
+                " SET qty_received = product_uom_qty,"
+                "     qty_invoiced = product_uom_qty"
+                " WHERE id in ( %s )"
+            ) % ','.join(['%s'] * len(so_lines))
+            cr.execute(query, so_lines.ids)
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
@@ -444,6 +461,7 @@ class DB2ImporterTable(models.Model):
         default=2,
         help="Hour of the day when the db2 object will transformed to an odoo"
              " object")
+    where_clause = fields.Char()
 
     @api.multi
     def get_add_columns(self):
@@ -518,7 +536,7 @@ class DB2ImporterTable(models.Model):
         if '{}css'.format(self.table_prefix) in col_names:
             query = (
                 "SELECT * FROM {schema}.{table_name}"
-                " WHERE {prefix}css >= {start_age}"
+                " WHERE ({prefix}css >= {start_age}"
                 " AND {prefix}css <= {end_age}"
                 " AND {prefix}caa >= {start_year}"
                 " AND {prefix}caa <= {end_year}"
@@ -537,8 +555,10 @@ class DB2ImporterTable(models.Model):
                     " AND {prefix}mmm >= {start_month}"
                     " AND {prefix}mmm <= {end_month}"
                     " AND {prefix}mjj >= {start_day}"
-                    " AND {prefix}mjj <= {end_day}"
+                    " AND {prefix}mjj <= {end_day})"
                 )
+            else:
+                query += ")"
         else:
             query = (
                 "SELECT * FROM {schema}.{table_name}"
@@ -551,6 +571,8 @@ class DB2ImporterTable(models.Model):
                 " AND {prefix}djj >= {start_day}"
                 " AND {prefix}djj <= {end_day}"
             )
+        if self.where_clause:
+            query += " AND " + self.where_clause
         return query.format(**query_kwargs)
 
     def _setup_relations(self):
@@ -711,6 +733,7 @@ class DB2ImporterTable(models.Model):
 class DB2Importer(models.Model):
     _name = 'db2.importer'
 
+    name = fields.Char()
     last_import = fields.Date()
     date_start = fields.Date()
     date_end = fields.Date()
