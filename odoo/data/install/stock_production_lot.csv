@@ -152,7 +152,6 @@ __import__.stock_production_lot_A255A02_0660945,2019-09-30 00:00:00,173,__import
 __import__.stock_production_lot_A266A01_0660945,2020-02-28 00:00:00,533,__import__.product_0660945,A266A01
 __import__.stock_production_lot_E365A02_0660946,2019-07-31 00:00:00,816,__import__.product_0660946,E365A02
 __import__.stock_production_lot_KP0BH7N_0661132,2020-03-31 00:00:00,656,__import__.product_0661132,KP0BH7N
-__import__.stock_production_lot_KP0B11S_0661132,2019-10-31 00:00:00,770,__import__.product_0661132,KP0B11S
 __import__.stock_production_lot_698992007_0661702,2021-11-30 00:00:00,703,__import__.product_0661702,698992007
 __import__.stock_production_lot_KP0BJ0K_0663054,2020-09-30 00:00:00,895,__import__.product_0663054,KP0BJ0K
 __import__.stock_production_lot_700209178_0671230,2020-02-28 00:00:00,686,__import__.product_0671230,700209178
@@ -251,7 +250,6 @@ __import__.stock_production_lot_ACP0112AB_1021914,2019-03-31 00:00:00,576,__impo
 __import__.stock_production_lot_ACP0112FB_1021914,2019-02-28 00:00:00,346,__import__.product_1021914,ACP0112FB
 __import__.stock_production_lot_15001704_1023027,2019-04-30 00:00:00,349,__import__.product_1023027,15001704
 __import__.stock_production_lot_PO0829_1027515,2018-05-31 00:00:00,275,__import__.product_1027515,PO0829
-__import__.stock_production_lot_PO829_1027515,2018-05-31 00:00:00,900,__import__.product_1027515,PO829
 __import__.stock_production_lot_170800876_1035724,2019-08-31 00:00:00,707,__import__.product_1035724,170800876
 __import__.stock_production_lot_14H12_1036706,2019-08-31 00:00:00,104,__import__.product_1036706,14H12
 __import__.stock_production_lot_117083_1048236,2022-02-22 00:00:00,272,__import__.product_1048236,117083
@@ -353,7 +351,6 @@ __import__.stock_production_lot_310818_1190302,2018-08-31 00:00:00,219,__import_
 __import__.stock_production_lot_311018_1190302,2018-10-31 00:00:00,219,__import__.product_1190302,311018
 __import__.stock_production_lot_300418_1190308,2018-04-30 00:00:00,220,__import__.product_1190308,300418
 __import__.stock_production_lot_310519_1190310,2019-05-31 00:00:00,279,__import__.product_1190310,310519
-__import__.stock_production_lot_310718_1190340,2018-07-31 00:00:00,934,__import__.product_1190340,310718
 __import__.stock_production_lot_310818_1190340,2018-08-31 00:00:00,386,__import__.product_1190340,310818
 __import__.stock_production_lot_176203_1193457,2021-02-28 00:00:00,206,__import__.product_1193457,176203
 __import__.stock_production_lot_0151592_1193515,2019-04-30 00:00:00,141,__import__.product_1193515,0151592
@@ -743,7 +740,6 @@ __import__.stock_production_lot_1404484_1510635,2019-01-31 00:00:00,526,__import
 __import__.stock_production_lot_1522614_1510635,2019-03-31 00:00:00,401,__import__.product_1510635,1522614
 __import__.stock_production_lot_1410962_1510643,2019-01-31 00:00:00,213,__import__.product_1510643,1410962
 __import__.stock_production_lot_1404471_1510650,2019-01-31 00:00:00,250,__import__.product_1510650,1404471
-__import__.stock_production_lot_1558737_1510650,2019-03-31 00:00:00,555,__import__.product_1510650,1558737
 __import__.stock_production_lot_1185791_1510668,2018-08-31 00:00:00,389,__import__.product_1510668,1185791
 __import__.stock_production_lot_1439744_1510668,2019-02-28 00:00:00,748,__import__.product_1510668,1439744
 __import__.stock_production_lot_1361934_1510676,2018-12-31 00:00:00,509,__import__.product_1510676,1361934
@@ -774,7 +770,6 @@ __import__.stock_production_lot_160350_1589977,2019-08-31 00:00:00,971,__import_
 __import__.stock_production_lot_6594_1596808,2018-07-31 00:00:00,301,__import__.product_1596808,6594
 __import__.stock_production_lot_1601064_1623776,2019-01-31 00:00:00,408,__import__.product_1623776,1601064
 __import__.stock_production_lot_1704066_1623776,2020-04-30 00:00:00,402,__import__.product_1623776,1704066
-__import__.stock_production_lot_093946_1623818,2019-01-31 00:00:00,219,__import__.product_1623818,093946
 __import__.stock_production_lot_095535_1623818,2019-02-28 00:00:00,609,__import__.product_1623818,095535
 __import__.stock_production_lot_105135_1632389,2019-01-31 00:00:00,569,__import__.product_1632389,105135
 __import__.stock_production_lot_17F26188_1633163,2019-06-30 00:00:00,460,__import__.product_1633163,17F26188
@@ -2109,7 +2104,6 @@ __import__.stock_production_lot_311218_3145026,2018-12-31 00:00:00,526,__import_
 __import__.stock_production_lot_280219_3145034,2019-02-28 00:00:00,361,__import__.product_3145034,280219
 __import__.stock_production_lot_310319_3145042,2019-03-31 00:00:00,918,__import__.product_3145042,310319
 __import__.stock_production_lot_207553_3145117,2018-12-16 00:00:00,621,__import__.product_3145117,207553
-__import__.stock_production_lot_195209_3145125,2018-11-09 00:00:00,559,__import__.product_3145125,195209
 __import__.stock_production_lot_224216_3145125,2019-03-07 00:00:00,589,__import__.product_3145125,224216
 __import__.stock_production_lot_459532_3146362,2019-03-31 00:00:00,208,__import__.product_3146362,459532
 __import__.stock_production_lot_600512_3150869,2018-05-31 00:00:00,515,__import__.product_3150869,600512
@@ -2748,7 +2742,6 @@ __import__.stock_production_lot_310319_4140004,2019-03-31 00:00:00,921,__import_
 __import__.stock_production_lot_311218_4140004,2018-12-31 00:00:00,511,__import__.product_4140004,311218
 __import__.stock_production_lot_311218_4140006,2018-12-31 00:00:00,820,__import__.product_4140006,311218
 __import__.stock_production_lot_310718_4140102,2018-07-31 00:00:00,188,__import__.product_4140102,310718
-__import__.stock_production_lot_311218_4140111,2018-12-31 00:00:00,763,__import__.product_4140111,311218
 __import__.stock_production_lot_310319_4140112,2019-03-31 00:00:00,515,__import__.product_4140112,310319
 __import__.stock_production_lot_310319_4140113,2019-03-31 00:00:00,182,__import__.product_4140113,310319
 __import__.stock_production_lot_311218_4140113,2018-12-31 00:00:00,172,__import__.product_4140113,311218
@@ -2763,7 +2756,6 @@ __import__.stock_production_lot_311218_4150102,2018-12-31 00:00:00,649,__import_
 __import__.stock_production_lot_280219_4150104,2019-02-28 00:00:00,371,__import__.product_4150104,280219
 __import__.stock_production_lot_311218_4150201,2018-12-31 00:00:00,165,__import__.product_4150201,311218
 __import__.stock_production_lot_310319_4150202,2019-03-31 00:00:00,724,__import__.product_4150202,310319
-__import__.stock_production_lot_311218_4150202,2018-12-31 00:00:00,414,__import__.product_4150202,311218
 __import__.stock_production_lot_310319_4150203,2019-03-31 00:00:00,177,__import__.product_4150203,310319
 __import__.stock_production_lot_300918_4160102,2018-09-30 00:00:00,728,__import__.product_4160102,300918
 __import__.stock_production_lot_280219_4160103,2019-02-28 00:00:00,340,__import__.product_4160103,280219
@@ -2778,8 +2770,6 @@ __import__.stock_production_lot_311218_4160122,2018-12-31 00:00:00,448,__import_
 __import__.stock_production_lot_311218_4160123,2018-12-31 00:00:00,301,__import__.product_4160123,311218
 __import__.stock_production_lot_310319_4160125,2019-03-31 00:00:00,609,__import__.product_4160125,310319
 __import__.stock_production_lot_310319_4160126,2019-03-31 00:00:00,269,__import__.product_4160126,310319
-__import__.stock_production_lot_310818_4170007,2018-08-31 00:00:00,728,__import__.product_4170007,310818
-__import__.stock_production_lot_311018_4170007,2018-10-31 00:00:00,249,__import__.product_4170007,311018
 __import__.stock_production_lot_311218_4170007,2018-12-31 00:00:00,749,__import__.product_4170007,311218
 __import__.stock_production_lot_310119_4170008,2019-01-31 00:00:00,515,__import__.product_4170008,310119
 __import__.stock_production_lot_311217_4175100,2017-12-31 00:00:00,827,__import__.product_4175100,311217
@@ -2807,7 +2797,6 @@ __import__.stock_production_lot_310319_4210133,2019-03-31 00:00:00,219,__import_
 __import__.stock_production_lot_311218_4210133,2018-12-31 00:00:00,792,__import__.product_4210133,311218
 __import__.stock_production_lot_310119_4212005,2019-01-31 00:00:00,680,__import__.product_4212005,310119
 __import__.stock_production_lot_280219_4212008,2019-02-28 00:00:00,241,__import__.product_4212008,280219
-__import__.stock_production_lot_310818_4212008,2018-08-31 00:00:00,142,__import__.product_4212008,310818
 __import__.stock_production_lot_310818_4212009,2018-08-31 00:00:00,688,__import__.product_4212009,310818
 __import__.stock_production_lot_310818_4213002,2018-08-31 00:00:00,260,__import__.product_4213002,310818
 __import__.stock_production_lot_311018_4213002,2018-10-31 00:00:00,560,__import__.product_4213002,311018
@@ -2850,7 +2839,6 @@ __import__.stock_production_lot_280219_4220143,2019-02-28 00:00:00,278,__import_
 __import__.stock_production_lot_311018_4220151,2018-10-31 00:00:00,361,__import__.product_4220151,311018
 __import__.stock_production_lot_311218_4220151,2018-12-31 00:00:00,668,__import__.product_4220151,311218
 __import__.stock_production_lot_280219_4220152,2019-02-28 00:00:00,723,__import__.product_4220152,280219
-__import__.stock_production_lot_301118_4220152,2018-11-30 00:00:00,318,__import__.product_4220152,301118
 __import__.stock_production_lot_301118_4220171,2018-11-30 00:00:00,669,__import__.product_4220171,301118
 __import__.stock_production_lot_300618_4220173,2018-06-30 00:00:00,009,__import__.product_4220173,300618
 __import__.stock_production_lot_300918_4220173,2018-09-30 00:00:00,557,__import__.product_4220173,300918
@@ -2868,7 +2856,6 @@ __import__.stock_production_lot_311218_4230111,2018-12-31 00:00:00,888,__import_
 __import__.stock_production_lot_310119_4230112,2019-01-31 00:00:00,347,__import__.product_4230112,310119
 __import__.stock_production_lot_280219_4230121,2019-02-28 00:00:00,435,__import__.product_4230121,280219
 __import__.stock_production_lot_311218_4230121,2018-12-31 00:00:00,929,__import__.product_4230121,311218
-__import__.stock_production_lot_301118_4230122,2018-11-30 00:00:00,576,__import__.product_4230122,301118
 __import__.stock_production_lot_310119_4230122,2019-01-31 00:00:00,478,__import__.product_4230122,310119
 __import__.stock_production_lot_300618_4230123,2018-06-30 00:00:00,763,__import__.product_4230123,300618
 __import__.stock_production_lot_300918_4230123,2018-09-30 00:00:00,918,__import__.product_4230123,300918
@@ -2998,7 +2985,6 @@ __import__.stock_production_lot_311218_4500324,2018-12-31 00:00:00,389,__import_
 __import__.stock_production_lot_310319_4500325,2019-03-31 00:00:00,755,__import__.product_4500325,310319
 __import__.stock_production_lot_310318_4500344,2018-03-31 00:00:00,909,__import__.product_4500344,310318
 __import__.stock_production_lot_310318_4500345,2018-03-31 00:00:00,155,__import__.product_4500345,310318
-__import__.stock_production_lot_310718_4500345,2018-07-31 00:00:00,769,__import__.product_4500345,310718
 __import__.stock_production_lot_300918_4500364,2018-09-30 00:00:00,183,__import__.product_4500364,300918
 __import__.stock_production_lot_300918_4500365,2018-09-30 00:00:00,918,__import__.product_4500365,300918
 __import__.stock_production_lot_301118_4500381,2018-11-30 00:00:00,214,__import__.product_4500381,301118
@@ -3080,7 +3066,7 @@ __import__.stock_production_lot_300619_4910100,2019-06-30 00:00:00,146,__import_
 __import__.stock_production_lot_310719_4910100,2019-07-31 00:00:00,145,__import__.product_4910100,310719
 __import__.stock_production_lot_300419_4910101,2019-04-30 00:00:00,592,__import__.product_4910101,300419
 __import__.stock_production_lot_310719_4922543,2019-07-31 00:00:00,128,__import__.product_4922543,310719
-__import__.stock_production_lot_280219_4930040,2019-02-28 00:00:00,418,__import__.product_4930040,280219
+__import__.stock_production_lot_300619_4930040,2019-06-30 00:00:00,772,__import__.product_4930040,300619
 __import__.stock_production_lot_310719_4930040,2019-07-31 00:00:00,650,__import__.product_4930040,310719
 __import__.stock_production_lot_310719_4930043,2019-07-31 00:00:00,908,__import__.product_4930043,310719
 __import__.stock_production_lot_300918_4950043,2018-09-30 00:00:00,459,__import__.product_4950043,300918
@@ -3093,9 +3079,7 @@ __import__.stock_production_lot_310719_4970037,2019-07-31 00:00:00,546,__import_
 __import__.stock_production_lot_300419_4970038,2019-04-30 00:00:00,424,__import__.product_4970038,300419
 __import__.stock_production_lot_300619_4970038,2019-06-30 00:00:00,407,__import__.product_4970038,300619
 __import__.stock_production_lot_300619_4970041,2019-06-30 00:00:00,858,__import__.product_4970041,300619
-__import__.stock_production_lot_300419_4970044,2019-04-30 00:00:00,216,__import__.product_4970044,300419
 __import__.stock_production_lot_300919_4970044,2019-09-30 00:00:00,546,__import__.product_4970044,300919
-__import__.stock_production_lot_310119_4970044,2019-01-31 00:00:00,508,__import__.product_4970044,310119
 __import__.stock_production_lot_300419_4970045,2019-04-30 00:00:00,583,__import__.product_4970045,300419
 __import__.stock_production_lot_300619_4970045,2019-06-30 00:00:00,683,__import__.product_4970045,300619
 __import__.stock_production_lot_310719_4980040,2019-07-31 00:00:00,610,__import__.product_4980040,310719
@@ -4400,7 +4384,6 @@ __import__.stock_production_lot_310319_5810228,2019-03-31 00:00:00,566,__import_
 __import__.stock_production_lot_311218_5810229,2018-12-31 00:00:00,527,__import__.product_5810229,311218
 __import__.stock_production_lot_280219_5810467,2019-02-28 00:00:00,459,__import__.product_5810467,280219
 __import__.stock_production_lot_280219_5810469,2019-02-28 00:00:00,538,__import__.product_5810469,280219
-__import__.stock_production_lot_311218_5810469,2018-12-31 00:00:00,833,__import__.product_5810469,311218
 __import__.stock_production_lot_280219_5810470,2019-02-28 00:00:00,458,__import__.product_5810470,280219
 __import__.stock_production_lot_310119_5810543,2019-01-31 00:00:00,478,__import__.product_5810543,310119
 __import__.stock_production_lot_280219_5810544,2019-02-28 00:00:00,487,__import__.product_5810544,280219
@@ -5202,7 +5185,6 @@ __import__.stock_production_lot_KG8BWTP0_7149518,2021-11-30 00:00:00,980,__impor
 __import__.stock_production_lot_280219_7196348,2019-02-28 00:00:00,618,__import__.product_7196348,280219
 __import__.stock_production_lot_280219_7196443,2019-02-28 00:00:00,209,__import__.product_7196443,280219
 __import__.stock_production_lot_311218_7196466,2018-12-31 00:00:00,472,__import__.product_7196466,311218
-__import__.stock_production_lot_280219_7196549,2019-02-28 00:00:00,601,__import__.product_7196549,280219
 __import__.stock_production_lot_310319_7196549,2019-03-31 00:00:00,219,__import__.product_7196549,310319
 __import__.stock_production_lot_280219_7196555,2019-02-28 00:00:00,228,__import__.product_7196555,280219
 __import__.stock_production_lot_280219_7196621,2019-02-28 00:00:00,456,__import__.product_7196621,280219
@@ -5999,7 +5981,6 @@ __import__.stock_production_lot_15040103_8211400,2020-03-31 00:00:00,179,__impor
 __import__.stock_production_lot_04628_8212718,2020-04-30 00:00:00,357,__import__.product_8212718,04628
 __import__.stock_production_lot_6216C25QX_8219005,2021-08-01 00:00:00,159,__import__.product_8219005,6216C25QX
 __import__.stock_production_lot_6H30088_8219293,2021-08-29 00:00:00,766,__import__.product_8219293,6H30088
-__import__.stock_production_lot_7C12088_8219293,2022-03-11 00:00:00,204,__import__.product_8219293,7C12088
 __import__.stock_production_lot_16M04F00H2_8219637,2021-11-30 00:00:00,276,__import__.product_8219637,16M04F00H2
 __import__.stock_production_lot_20161120_8223432,2019-11-30 00:00:00,621,__import__.product_8223432,20161120
 __import__.stock_production_lot_20170701_8223432,2020-06-30 00:00:00,531,__import__.product_8223432,20170701
