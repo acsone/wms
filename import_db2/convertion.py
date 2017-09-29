@@ -185,6 +185,10 @@ class CustomerMapper(EntityMapper):
         ),
 
         FieldMapper(
+            'is_backorder_accepted', 'clibor',
+        ),
+
+        FieldMapper(
             'property_payment_term_id/id',
             'clidel',
             mapping=mappings.CLIENT_PAYMENT_TERMS,
