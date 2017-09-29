@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-972: Import delivery lead time on suppliers
+
 **Features and Improvements**
 
 * ALCN-865: Web service create web sale order
