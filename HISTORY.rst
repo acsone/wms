@@ -13,6 +13,7 @@ Unreleased
 * Extend db2_import module to import a subset of partner (10 by default) and their sale orders
 
 **Features and Improvements**
+[IMP] Do not group pickings when a specific carrier is defined on sales order
 
 * ALCN-865: Web service create web sale order
 * ALCN-965: Load payment terms
