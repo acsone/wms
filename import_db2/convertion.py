@@ -199,7 +199,7 @@ class CustomerMapper(EntityMapper):
         ),
 
         FieldMapper(
-            'is_backorder_accepted', 'clibor',
+            'is_sale_back_order_accepted', 'clibor',
         ),
 
         FieldMapper(
