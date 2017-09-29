@@ -21,6 +21,7 @@
         'views/product_pricelist.xml',
         'views/product_template.xml',
         'views/product_product.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
 }
