@@ -256,6 +256,35 @@ CLIENT_DELIVERY_METHODS = {
     89: '__setup__.deliver_carrier_invoice',
 }
 
+CLIENT_PAYMENT_TERMS = {
+    1: '__setup__.account_payment_term_01',
+    2: '__setup__.account_payment_term_02',
+    3: '__setup__.account_payment_term_03',
+    4: '__setup__.account_payment_term_04',
+    5: '__setup__.account_payment_term_05',
+    6: '__setup__.account_payment_term_06',
+    7: '__setup__.account_payment_term_07',
+    8: '__setup__.account_payment_term_08',
+    10: '__setup__.account_payment_term_10',
+    11: '__setup__.account_payment_term_01',
+    12: '__setup__.account_payment_term_02',
+    17: '__setup__.account_payment_term_23',
+    19: '__setup__.account_payment_term_19',
+    23: '__setup__.account_payment_term_23',
+    32: '__setup__.account_payment_term_32',
+    33: '__setup__.account_payment_term_33',
+}
+
+CLIENT_PAYMENT_MODES = {
+    # FIXME
+    # account_payment_mode_1 does not exist
+    #11: '__setup__.account_payment_mode_1',
+    #12: '__setup__.account_payment_mode_1',
+    #17: '__setup__.account_payment_mode_1',
+    #32: '__setup__.account_payment_mode_1',
+    'not_empty': False,
+}
+
 PRODUCT_TRACKING = {
     0: 'none',
     1: 'lot',

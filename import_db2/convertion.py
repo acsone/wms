@@ -198,6 +198,22 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.LANG
         ),
 
+        FieldMapper(
+            'is_backorder_accepted', 'clibor',
+        ),
+
+        FieldMapper(
+            'property_payment_term_id/id',
+            'clidel',
+            mapping=mappings.CLIENT_PAYMENT_TERMS,
+        ),
+        FieldMapper(
+            'customer_payment_mode_id/id',
+            'clidel',
+            mapping=mappings.CLIENT_PAYMENT_MODES,
+            default=None
+        ),
+
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',
         'property_account_position_id',
