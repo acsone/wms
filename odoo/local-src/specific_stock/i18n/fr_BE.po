@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:35+0000\n"
-"PO-Revision-Date: 2017-09-07 12:35+0000\n"
+"POT-Creation-Date: 2017-09-06 06:35+0000\n"
+"PO-Revision-Date: 2017-09-06 06:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgid "6 months means that it will be two inventory per year"
 msgstr "6 mois signifie qu'il y aura 2 inventaires par an"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Apply"
+msgstr "Appliquer"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_is_archived
 msgid "Archived"
 msgstr "Archivé"
@@ -31,9 +36,56 @@ msgid "Backorder"
 msgstr "Reliquat"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Backorder action"
+msgstr "Action pour le reliquat"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_backorder_action_to_do
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_backorder_action_to_do
+msgid "Backorder action to do"
+msgstr "Action à faire pour le reliquat"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Backorder choice"
+msgstr "Choix du reliquat"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_backorder_confirmation_id
+msgid "Backorder confirmation"
+msgstr "Confirmation du reliquat"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
+msgid "Backorder options"
+msgstr "Options du reliquat"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_reason_id
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
+msgid "Backorder reason"
+msgstr "Cause du reliquat"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Backorder reason choice"
+msgstr "Choix de la cause du reliquat"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
 msgid "Box"
 msgstr "Boite"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: specific_stock
+#: selection:stock.backorder.reason,backorder_action_to_do:0
+msgid "Cancel backorder"
+msgstr "Annuler reliquat"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_change_product_qty
@@ -49,6 +101,23 @@ msgstr "Checksum"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr "Couloir"
+
+#. module: specific_stock
+#: selection:stock.backorder.reason,backorder_action_to_do:0
+msgid "Create backorder"
+msgstr "Créer reliquat"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_date
+msgid "Created on"
+msgstr "Date"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
@@ -77,6 +146,12 @@ msgid "Delay between two inventory for other products"
 msgstr "Delais entre deux inventaires pour les autres produits"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_duration
 msgid "Duration to compute best sellers (in months)"
 msgstr "Durée (en mois) pour calculer les produits les plus vendus"
@@ -87,6 +162,38 @@ msgid "Height"
 msgstr "Hauteur"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Helpdesk informations"
+msgstr "Informations helpdesk"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
+msgid "Helpdesk options"
+msgstr "Options helpdesk"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_helpdesk_ticket_default_name
+msgid "Helpdesk ticket defaut name"
+msgstr "Nom par défaut du ticket helpdesk"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_helpdesk_ticket_name
+msgid "Helpdesk ticket name"
+msgstr "Nom du ticket helpdesk"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_helpdesk_ticket_reason_id
+msgid "Helpdesk ticket reason"
+msgstr "Cause du ticket helpdesk"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_id
+msgid "ID"
+msgstr "ID"
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventaire"
@@ -95,6 +202,30 @@ msgstr "Inventaire"
 #: model:ir.model,name:specific_stock.model_stock_location
 msgid "Inventory Locations"
 msgstr "Emplacements de stock"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_is_helpdesk_ticket_to_create
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_is_helpdesk_ticket_to_create
+msgid "Is helpdesk ticket to create?"
+msgstr "Ticket helpdesk à créer ?"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_date
+msgid "Last Updated on"
+msgstr "Modifié le"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_date_last_inventory
@@ -121,6 +252,11 @@ msgstr "Lot/N° série"
 #: model:ir.model.fields,help:specific_stock.field_stock_pack_operation_lot_add_qty_backorder
 msgid "Missing quantity of products to pick"
 msgstr "Il n'y a pas assez de quantité à prendre"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_name
+msgid "Name"
+msgstr "Nom"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_months_between_inventory
@@ -151,6 +287,17 @@ msgstr "Colisage"
 #: model:ir.model,name:specific_stock.model_stock_quant_package
 msgid "Physical Packages"
 msgstr "Colis physiques"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_picking_id
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+msgid "Picking"
+msgstr "Opération de manutention"
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/product_template.py:139
@@ -199,9 +346,22 @@ msgid "Product Use Time"
 msgstr "Délai d'utilisation optimale"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_res_partner_is_purchase_back_order_accepted
+#: model:ir.model.fields,field_description:specific_stock.field_res_users_is_purchase_back_order_accepted
+#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_is_purchase_back_order_accepted
+msgid "Purchase back order accepted"
+msgstr "Reliquat pour les achats accepté"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_percent
 msgid "Quantity to take for best sellers (in percent)"
 msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_res_partner_is_sale_back_order_accepted
+#: model:ir.model.fields,field_description:specific_stock.field_res_users_is_sale_back_order_accepted
+msgid "Sale back order accepted"
+msgstr "Reliquat pour les ventes accepté"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_shelf
@@ -209,18 +369,35 @@ msgid "Shelf"
 msgstr "Etagère"
 
 #. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.action_stock_backorder_reason
+#: model:ir.ui.menu,name:specific_stock.menu_stock_backorder_reason
+#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_tree_view
+msgid "Stock backorder reasons"
+msgstr "Cause des reliquats de stock"
+
+#. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_stock_backorder_reason_helpdesk_ticket_default_name
+msgid "The default name to use for create a helpdesk ticket."
+msgstr "Le nom par défaut à utiliser pour créer un ticket helpdesk."
+
+#. module: specific_stock
 #: code:addons/specific_stock/models/stock_config_settings.py:163
 #, python-format
 msgid "The delay can only be in the following list:\n"
 "(1, 2, 3, 4, 6 or 12 months)"
-msgstr "Le delais peut seulement être une valeur de la liste suivante:\n"
+msgstr "Le delai peut seulement être une valeur de la liste suivante:\n"
 "(1, 2, 3, 4, 6 ou 12 mois)"
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/stock_config_settings.py:160
 #, python-format
 msgid "The maximum delay is 12 months"
-msgstr "Le delais maximum est 12 mois"
+msgstr "Le délai maximum est 12 mois"
+
+#. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_stock_backorder_choice_helpdesk_ticket_name
+msgid "The name to use for create a helpdesk ticket."
+msgstr "Le nom à utiliser pour créer le ticket helpdesk."
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/stock_inventory.py:95
@@ -252,6 +429,11 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: specific_stock
+#: selection:stock.backorder.reason,backorder_action_to_do:0
+msgid "Use partner option (Purchase back order accepted)"
+msgstr "Utiliser l'option sur les partenaires (Reliquat sur les achats accepté)"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
 msgid "Valid location"
 msgstr "Emplacement valide"
@@ -277,7 +459,7 @@ msgid "When a new a Serial Number is issued, this is the number of days before t
 msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:40
+#: code:addons/specific_stock/models/stock_picking.py:39
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
@@ -288,6 +470,16 @@ msgstr "Vous ne pouvez pas transférer un lot expiré:\n"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
 msgid "Zone"
 msgstr "Zone"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_backorder_choice
+msgid "stock.backorder.choice"
+msgstr "stock.backorder.choice"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_backorder_reason
+msgid "stock.backorder.reason"
+msgstr "stock.backorder.reason"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_config_settings

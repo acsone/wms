@@ -17,7 +17,7 @@ CREATE OR REPLACE VIEW zelapro_export_cadencier AS
     '' AS SFDDMO,
     '' AS LIBDMO,
     CASE
-      WHEN supplier.is_back_order_accepted = TRUE THEN 1
+      WHEN supplier.is_purchase_back_order_accepted = TRUE THEN 1
       ELSE 0
     END AS SFDDBO,
     '' AS SFDDBM,

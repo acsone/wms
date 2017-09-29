@@ -21,8 +21,7 @@ class StockPicking(models.Model):
         ))._create_lots_for_picking()
 
     @api.multi
-    def do_new_transfer(self):
-        result = super(StockPicking, self).do_new_transfer()
+    def check_removal_date_on_transfer(self):
 
         for picking in self:
             bad_lots = []
@@ -38,6 +37,45 @@ class StockPicking(models.Model):
                 raise Warning(_('You cannot transfer lots with an expired '
                                 'removal date:\n\t- %s' %
                                 ('\n\t- '.join(bad_lots))))
+
+    @api.multi
+    def do_new_transfer_with_back_order(self, result):
+        self.ensure_one()
+
+        # In this case, we don't have back order
+        # => we can ignore back order variants
+
+        if not result or result['res_model'] != 'stock.backorder.confirmation':
+            return result
+
+        supplier_location = self.env.ref('stock.stock_location_suppliers')
+
+        # Case: Purchase back order
+        if self.location_id == supplier_location:
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'stock.backorder.choice',
+                'views': [[False, 'form']],
+                'context': {
+                    'default_picking_id': self.id,
+                    'default_backorder_confirmation_id': result['res_id'],
+                },
+                'target': 'new',
+            }
+
+        # Other cases
+        else:
+            return result
+
+    @api.multi
+    def do_new_transfer(self):
+        self.ensure_one()
+
+        result = super(StockPicking, self).do_new_transfer()
+
+        result = self.do_new_transfer_with_back_order(result)
+
+        self.check_removal_date_on_transfer()
 
         return result
 

@@ -215,6 +215,8 @@ migration:
         upgrade:
           ### local-src
           - connector_esb
-          - stock_receive_lot
-          - specific_report
+          - specific_helpdesk
           - specific_purchase
+          - specific_report
+          - specific_stock
+          - stock_receive_lot
