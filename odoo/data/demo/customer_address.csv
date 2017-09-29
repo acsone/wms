@@ -1,6 +1,6 @@
 id,name,street,zip,city,phone,fax,customer,supplier,country_id/id,lang,mobile,type,ref,parent_id/id
-__import__.customer_address_delivery_1725,GAUQUIER ETIENNE *,"RUE DES FUSILLES,14",7020,NIMMY ST JEAN,,,False,False,base.be,fr_BE,,delivery,delivery_1725,__import__.customer_1725
 __import__.customer_address_delivery_107,EPC 039,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,delivery_107,__import__.customer_107
+__import__.customer_address_delivery_1725,GAUQUIER ETIENNE *,"RUE DES FUSILLES,14",7020,NIMMY ST JEAN,,,False,False,base.be,fr_BE,,delivery,delivery_1725,__import__.customer_1725
+__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
 __import__.customer_address_delivery_3072,BOULANGERIE ALBERT,"Rue du Pommard, 210",4970,FRANCORCHAMPS,,,False,False,base.be,fr_BE,,delivery,delivery_3072,__import__.customer_3072
 __import__.customer_address_delivery_3814,BRACKMAN & CORNELLE,"Rue du Ry d'Argent, 17",5080,RHISNES,,,False,False,base.be,fr_BE,,delivery,delivery_3814,__import__.customer_3814
-__import__.customer_address_delivery_2563,DR BECO LUC,"Avenue Reine Astrid, 104",4900,SPA,,,False,False,base.be,fr_BE,,delivery,delivery_2563,__import__.customer_2563
