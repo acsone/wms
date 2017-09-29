@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-20 15:24+0000\n"
-"PO-Revision-Date: 2017-09-20 15:24+0000\n"
+"POT-Creation-Date: 2017-09-29 14:20+0000\n"
+"PO-Revision-Date: 2017-09-29 14:20+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,41 @@ msgstr "CSV"
 #: model:ir.ui.view,arch_db:import_manager.import_config_settings_view_form
 msgid "Cancel"
 msgstr "Annuler"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:58
+#: code:addons/import_manager/models/import_model.py:60
+#, python-format
+msgid "Cannot convert the file to UTF-8"
+msgstr "Impossible de convertir le fichier vers du UTF-8"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:104
+#, python-format
+msgid "Cannot copy the file %s into %s"
+msgstr "Impossible de copier le fichier %s vers %s"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:101
+#, python-format
+msgid "Cannot copy the file %s into %s\n"
+"%s"
+msgstr "Impossible de copier le fichier %s vers %s\n"
+"%s"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:48
+#, python-format
+msgid "Cannot truncate the table %s"
+msgstr "Impossible d'effacer la table %s"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:46
+#, python-format
+msgid "Cannot truncate the table %s\n"
+"%s"
+msgstr "Impossible d'effacer la table %s\n"
+"%s"
 
 #. module: import_manager
 #: model:ir.ui.menu,name:import_manager.menu_import_config_settings
@@ -103,7 +138,7 @@ msgid "File type"
 msgstr "Type de fichier"
 
 #. module: import_manager
-#: code:addons/import_manager/models/import_file.py:153
+#: code:addons/import_manager/models/import_file.py:182
 #, python-format
 msgid "File type %s unknown"
 msgstr "Type de fichier %s inconnu"
@@ -259,10 +294,22 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: import_manager
-#: code:addons/import_manager/models/import_file.py:117
+#: code:addons/import_manager/models/import_file.py:207
+#, python-format
+msgid "Not handled error during import execution"
+msgstr "Erreur non catchée durant l'import"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_file.py:146
 #, python-format
 msgid "Please defines the import path in imports configuration before execute the first import"
 msgstr "Veuillez définir le chemin des fichiers à importer dans la configuration avant le premier import"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_model.py:117
+#, python-format
+msgid "Please implement this method"
+msgstr "Veuillez implémenter cette méthode"
 
 #. module: import_manager
 #: model:ir.model.fields,field_description:import_manager.field_import_file_sequence
@@ -273,6 +320,12 @@ msgstr "Séquence"
 #: selection:import.logger,state:0
 msgid "Skipped"
 msgstr "Ignoré"
+
+#. module: import_manager
+#: code:addons/import_manager/models/import_file.py:139
+#, python-format
+msgid "Start the import %s"
+msgstr "Démarrer l'import %s"
 
 #. module: import_manager
 #: selection:import.logger.line,level:0
@@ -290,13 +343,13 @@ msgid "Success"
 msgstr "Succès"
 
 #. module: import_manager
-#: code:addons/import_manager/models/import_file.py:87
+#: code:addons/import_manager/models/import_file.py:114
 #, python-format
 msgid "The filename is not valid.Please check the part \"%s\""
 msgstr "Le nom du fichier n'est pas valide. Veuillez vérifier la partie \"%s\""
 
 #. module: import_manager
-#: code:addons/import_manager/models/import_file.py:74
+#: code:addons/import_manager/models/import_file.py:91
 #, python-format
 msgid "The filename must contain the extension"
 msgstr "Le nom du fichier doit contenir l'extension"
@@ -307,15 +360,21 @@ msgid "The filename with extension. You can use datetime directives (like %Y, %m
 msgstr "Le nom du fichier avec extension. Vous pouvez utiliser les directives datetimes (eg: %Y, %m). datetime.now() sera utiliser pour évaluer le nom du fichier."
 
 #. module: import_manager
-#: code:addons/import_manager/models/import_file.py:100
+#: code:addons/import_manager/models/import_file.py:127
 #, python-format
 msgid "The importer (model name) \"%s\" doesn't exist"
 msgstr "Le modèle %s n'existe pas"
 
 #. module: import_manager
+#: code:addons/import_manager/models/import_model.py:82
+#, python-format
+msgid "There are new columns in the file: %s"
+msgstr "Il y une nouvelle colonne dans le fichier: %s"
+
+#. module: import_manager
 #: model:ir.model.fields,help:import_manager.field_import_file_importer
 msgid "This is the name of the class. This class must inherit the abstract class import.model"
-msgstr "Le nom de la class. Cette class doit hériter de la class abstract import.model"
+msgstr "Le nom de la classe. Cette classe doit hériter de la classe abstract import.model"
 
 #. module: import_manager
 #: model:ir.model.fields,field_description:import_manager.field_import_logger_line_traceback

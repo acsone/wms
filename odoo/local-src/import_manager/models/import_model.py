@@ -5,7 +5,7 @@ import psycopg2
 import logging
 import traceback
 
-from odoo import api, models
+from odoo import api, models, _
 
 from ..tools import convert_tools
 
@@ -43,9 +43,9 @@ class ImportModel(models.AbstractModel):
                                 (self._table, self._table + '_id_seq'))
         except psycopg2.Error as error:
             _logger.exception(
-                'Cannot truncate the table %s\n%s' % (self._table, error))
+                _('Cannot truncate the table %s\n%s') % (self._table, error))
             logger.line_ids.create({
-                'name': 'Cannot truncate the table %s' % self._table,
+                'name': _('Cannot truncate the table %s') % self._table,
                 'level': 'error',
                 'traceback': traceback.format_exc()
             })
@@ -55,9 +55,9 @@ class ImportModel(models.AbstractModel):
             convert_tools.convert_to_uft_8(file_path)
         except:
             _logger.exception(
-                'Cannot convert the file to UTF-8')
+                _('Cannot convert the file to UTF-8'))
             logger.line_ids.create({
-                'name': 'Cannot convert the file to UTF-8' % self._table,
+                'name': _('Cannot convert the file to UTF-8') % self._table,
                 'level': 'error',
                 'traceback': traceback.format_exc()
             })
@@ -79,8 +79,8 @@ class ImportModel(models.AbstractModel):
             if missing_columns:
                 logger.line_ids.create({
                     'level': 'error',
-                    'name': 'There are new columns in the file: %s' %
-                            ', '.join(missing_columns),
+                    'name': _('There are new columns in '
+                              'the file: %s') % ', '.join(missing_columns),
                     'logger_id': logger.id
                 })
                 return False
@@ -98,10 +98,10 @@ class ImportModel(models.AbstractModel):
                 # Copy the value of the file in the table
                 self.env.cr.copy_expert(copy_query, file=file)
             except psycopg2.Error as error:
-                _logger.exception('Cannot copy the file %s into %s\n%s' % (
+                _logger.exception(_('Cannot copy the file %s into %s\n%s') % (
                     file_path, self._table, error))
                 logger.line_ids.create({
-                    'name': 'Cannot copy the file %s into %s' % (
+                    'name': _('Cannot copy the file %s into %s') % (
                         file_path, self._table),
                     'level': 'error',
                     'traceback': traceback.format_exc(),
@@ -114,4 +114,4 @@ class ImportModel(models.AbstractModel):
 
     @api.multi
     def execute_import(self, logger_id):
-        raise NotImplementedError('Please implement this method')
+        raise NotImplementedError(_('Please implement this method'))

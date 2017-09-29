@@ -56,58 +56,87 @@ class ImportFile(models.Model):
     @api.constrains('filename')
     def check_filename(self):
         for import_file in self:
-            import_file.get_filename_pattern()
+            import_file.get_filename_pattern(self.filename)
 
-    @api.multi
-    def get_filename_pattern(self):
+    @api.model
+    def get_filename_pattern(self, filename, now_overwrite=None):
         """
-        Format the filename to evaluate datetime directives.
-        E.G: The current date is 2017-09-24
-        and the filename is %Y%m%d_MyFile.csv
-        The method will return 20170924_MyFile.csv
+        This method will return the filename of the file to import.
+        Often files to import have a structured format.
+
+        ######## With a date ########
+        The file to import is "20170924_Customers.csv"
+            - 20170924 is the date of today
+            - _Customers.csv is the fixed part
+        To use the date in the filename you can use datetime directive.
+        (https://docs.python.org/2/library/datetime
+        .html#strftime-and-strptime-behavior)
+
+        By default, the datetime of "now" will be used to format datetime
+        directives. You can overwrite the datetime of now with
+        the param "now_overwrite"
+        In this example, the filename will be "%Y%m%d_Customers.csv"
+
+        ######## Simple filename ########
+        The file to import is "ImportCustomer.csv"
+            - ImportCustomer is the fixed part
+        In this example, the filename will be "ImportCustomer.csv"
+        :param filename: The filename
+        :param now_overwrite: To overwrite the datetime of now (used in tests)
         :return:
         """
-        self.ensure_one()
 
-        filename = self.filename
-        if not len(filename.split('.')):
+        # Check if the filename contains the extension
+        if '.' not in filename:
             raise UserError(_('The filename must contain the extension'))
 
-        now = datetime.now()
+        # Use the datetime send in params or "now" (datetime)
+        now = now_overwrite or datetime.now()
 
-        date_regex = r'(%[a-zA-Z])'
-        result = re.match(date_regex, filename)
+        # Datetime directives contain only "%" with a letter (eg: %Y, %m, ...)
+        date_directive_regex = r'(%[a-zA-Z])'
+        # To format date we will extract these directives
+        result = re.findall(date_directive_regex, filename)
+        # If the filename doesn't contain datetime directives
+        # we can directly return the filename
         if not result:
             return filename
 
+        # For each datetime directive (eg: %Y, %m, %d, ...), retrieve the value
+        # and replace the directive by the value
+        # Eg: the filename is %Y%m%d_customers.csv
+        # The regex will return ['%Y', '%m', '%d']
+        # First iteration: evaluation of %Y => 2017; replace %Y by 2017
         for date_format in result:
             try:
                 value = now.strftime(date_format)
             except:
                 raise UserError(_('The filename is not valid.'
-                                  'Please check the part "%s"' % date_format))
+                                  'Please check the part "%s"') % date_format)
 
-            filename.replace(date_format, value)
+            filename = filename.replace(date_format, value)
 
         return filename
 
     @api.constrains('importer')
-    @api.one
     def check_importer(self):
-        try:
-            self.env[self.importer]
-        except:
-            raise UserError(_('The importer (model name) '
-                              '"%s" doesn\'t exist' % self.importer))
+        for import_file in self:
+            try:
+                self.env[import_file.importer]
+            except:
+                raise UserError(_('The importer (model name) "%s" '
+                                  'doesn\'t exist') % import_file.importer)
 
     @api.model
     def execute_all_import(self):
         files = self.search([], order="sequence")
         files.execute_import()
 
-    @api.one
+    @api.multi
     def execute_import(self):
-        _logger.info('Start the import %s' % self.name)
+        self.ensure_one()
+
+        _logger.info(_('Start the import %s') % self.name)
 
         config_obj = self.env['ir.config_parameter']
         import_model = self.env[self.importer]
@@ -127,7 +156,7 @@ class ImportFile(models.Model):
         if not os.path.isdir(import_failure_path):
             os.makedirs(import_failure_path)
 
-        filename_pattern = self.get_filename_pattern()
+        filename_pattern = self.get_filename_pattern(self.filename)
         files_to_import = []
         for filename in os.listdir(import_path):
             file_path = os.path.join(import_path, filename)
@@ -175,7 +204,7 @@ class ImportFile(models.Model):
             except:
                 shutil.move(file_to_import, import_failure_path)
                 logger.line_ids.create({
-                    'name': 'Not handled error during import execution',
+                    'name': _('Not handled error during import execution'),
                     'level': 'error',
                     'traceback': traceback.format_exc(),
                     'logger_id': logger.id,

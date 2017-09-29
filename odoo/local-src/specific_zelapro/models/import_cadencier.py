@@ -5,7 +5,7 @@ import traceback
 from datetime import datetime
 from babel import numbers
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class ImportCadencierHeader(models.Model):
@@ -147,8 +147,8 @@ class ImportCadencier(models.Model):
 
             if not supplier_id:
                 logger.line_ids.create({
-                    'name': 'Supplier not found with the ref %s'
-                            % supplier_ref,
+                    'name': _('Supplier not found with '
+                              'the ref %s') % supplier_ref,
                     'level': 'error',
                     'logger_id': logger_id
                 })
@@ -184,7 +184,7 @@ class ImportCadencier(models.Model):
                 date_planned = fields.Date.to_string(scheduled_date)
             except:
                 logger.line_ids.create({
-                    'name': 'Cannot convert the date ' % scheduled_date_str,
+                    'name': _('Cannot convert the date ') % scheduled_date_str,
                     'level': 'error',
                     'logger_id': logger_id
                 })
@@ -228,8 +228,8 @@ class ImportCadencier(models.Model):
                     po_line.create(po_line._convert_to_write(po_line._cache))
                 except:
                     logger.line_ids.create({
-                        'name': 'Cannot create the purchase line (line %s)'
-                                % line_id,
+                        'name': _('Cannot create the purchase line '
+                                  '(line %s)') % line_id,
                         'level': 'error',
                         'logger_id': logger_id,
                         'traceback': traceback.format_exc(),
