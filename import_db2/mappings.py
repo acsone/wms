@@ -56,6 +56,7 @@ PRODUCT_CATEGORY.update({
     35: 'specific_data.product_categ_mat_equins',
     36: 'specific_data.product_categ_mat_rurale',
     44: 'specific_data.product_categ_topiques',
+    52: 'specific_data.product_categ_mat_sav',
     55: 'specific_data.product_categ_mat_ortho',
     56: 'specific_data.product_categ_mat_sut_bobine',
     58: 'specific_data.product_categ_mat_equipement',
@@ -68,8 +69,38 @@ PRODUCT_CATEGORY.update({
     68: 'specific_data.product_categ_mat_conso',
     71: 'specific_data.product_categ_mat_petshop',
     75: 'specific_data.product_categ_importation',
+    91: 'specific_data.product_categ_finance_frais',
+    92: 'specific_data.product_categ_finance_remises_fournisseurs',
+    93: 'specific_data.product_categ_mat_marge',
+    94: 'specific_data.product_categ_finance_bonus_actionnaires',
+    95: 'specific_data.product_categ_finance_cheques_clients',
+    96: 'specific_data.product_categ_ali_divers',
+    97: 'specific_data.product_categ_finance_remises_partenariat',
+    98: 'specific_data.product_categ_finance_remises_geste_commercial',
+    99: 'specific_data.product_categ_finance_divers_divers',
 })
 
+PRODUCT_STATES = {
+    'A': 'specific_purchase.product_state_a',
+    'D': 'specific_purchase.product_state_d',
+    'H': 'specific_purchase.product_state_h',
+    'I': 'specific_purchase.product_state_i',
+    'L': 'specific_purchase.product_state_l',
+    'M': 'specific_purchase.product_state_m',
+    'N': 'specific_purchase.product_state_n',
+}
+
+PRODUCT_STORAGE_TEMPERATURES = {
+    0: 'specific_product.product_storage_temperature_ambient',
+    2: 'specific_product.product_storage_temperature_minus_12',
+    5: 'specific_product.product_storage_temperature_15',
+    6: 'specific_product.product_storage_temperature_6',
+}
+
+PRODUCT_WEB_PUBLISHED = {
+    '0': False,
+    '1': True,
+}
 
 # We could just prefix by __setup__.res_user_
 # but it will fail the import if user does not exist in Odoo.
@@ -223,6 +254,35 @@ CLIENT_DELIVERY_METHODS = {
     4: '__setup__.deliver_carrier_delegated',
     9: '__setup__.deliver_carrier_by_client',
     89: '__setup__.deliver_carrier_invoice',
+}
+
+CLIENT_PAYMENT_TERMS = {
+    1: '__setup__.account_payment_term_01',
+    2: '__setup__.account_payment_term_02',
+    3: '__setup__.account_payment_term_03',
+    4: '__setup__.account_payment_term_04',
+    5: '__setup__.account_payment_term_05',
+    6: '__setup__.account_payment_term_06',
+    7: '__setup__.account_payment_term_07',
+    8: '__setup__.account_payment_term_08',
+    10: '__setup__.account_payment_term_10',
+    11: '__setup__.account_payment_term_01',
+    12: '__setup__.account_payment_term_02',
+    17: '__setup__.account_payment_term_23',
+    19: '__setup__.account_payment_term_19',
+    23: '__setup__.account_payment_term_23',
+    32: '__setup__.account_payment_term_32',
+    33: '__setup__.account_payment_term_33',
+}
+
+CLIENT_PAYMENT_MODES = {
+    # FIXME
+    # account_payment_mode_1 does not exist
+    #11: '__setup__.account_payment_mode_1',
+    #12: '__setup__.account_payment_mode_1',
+    #17: '__setup__.account_payment_mode_1',
+    #32: '__setup__.account_payment_mode_1',
+    'not_empty': False,
 }
 
 PRODUCT_TRACKING = {

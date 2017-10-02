@@ -35,6 +35,11 @@ class ProductMapper(EntityMapper):
         ),
         FieldMapper('medical_device', 'cplz20', mapping=mappings.STR_BOOL),
         FieldMapper('cnk_code', 'cplz03'),
+        FieldMapper(
+            'web_published', 'cplz19',
+            mapping=mappings.PRODUCT_WEB_PUBLISHED
+        ),
+        FieldMapper('barcode', 'cplz05'),
         FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
         FieldMapper(
             'taxes_id/id', 'gesctv',
@@ -48,12 +53,21 @@ class ProductMapper(EntityMapper):
             'categ_id/id', 'gescsg',
             mapping=mappings.PRODUCT_CATEGORY
         ),
+        FieldMapper(
+            'state_id/id', 'geschr',
+            mapping=mappings.PRODUCT_STATES
+        ),
+        FieldMapper(
+            'storage_temperature_id/id', 'cp2z17',
+            mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'seller_ids', 'pb2'
     ]
 
     def get_sql_joins(self):
-        return "join sbdata.cplges on gesart=cplart "
+        return ("join sbdata.cplges on gesart=cplart"
+                " left join sbdata.cplge2 on gesart=cp2art")
 
     def get_sql_where(self):
         if not self.importer.full:
@@ -182,6 +196,22 @@ class CustomerMapper(EntityMapper):
         FieldMapper(
             'lang', 'clilan',
             mapping=mappings.LANG
+        ),
+
+        FieldMapper(
+            'is_sale_back_order_accepted', 'clibor',
+        ),
+
+        FieldMapper(
+            'property_payment_term_id/id',
+            'clidel',
+            mapping=mappings.CLIENT_PAYMENT_TERMS,
+        ),
+        FieldMapper(
+            'customer_payment_mode_id/id',
+            'clidel',
+            mapping=mappings.CLIENT_PAYMENT_MODES,
+            default=None
         ),
 
         'company_type', 'phone_numbers', 'product_pricelist',

@@ -24,7 +24,31 @@
             <xpath expr="//field[@name='list_price']" position="after">
                 <field name="indicated_price"/>
             </xpath>
+        </field>
+    </record>
 
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='volume']/.." position="after">
+                <label for="storage_temperature_id" attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"/>
+                <div class="o_row" name="storage_temperature" attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}">
+                    <field name="storage_temperature_id" string="Storage Temperature"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="web_published"/>
+            </field>
         </field>
     </record>
 
