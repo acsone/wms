@@ -67,7 +67,7 @@ class ProductMapper(EntityMapper):
 
     def get_sql_joins(self):
         return ("join sbdata.cplges on gesart=cplart"
-                " join sbdata.cplge2 on gesart=cp2art")
+                " left join sbdata.cplge2 on gesart=cp2art")
 
     def get_sql_where(self):
         if not self.importer.full:
