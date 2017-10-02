@@ -6,18 +6,32 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.10.0 (2017-10-02)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-972: Import delivery lead time on suppliers
 * Set delivered and invoiced qty on sale order and purchase order which were imported and are in state done
 * Extend db2_import module to import a subset of partner (10 by default) and their sale orders
 * Adds 4 fields to product exported csv from DB2
+
   * product state, storage temperature, web published and barcode
+
 * Update product categories with new categories
 
 **Features and Improvements**
-[IMP] Do not group pickings when a specific carrier is defined on sales order
 
+* [IMP] Do not group pickings when a specific carrier is defined on sales order
 * ALCN-865: Web service create web sale order
 * ALCN-965: Load payment terms
 * ALCN-963: Update translations for the module specific_purchase
@@ -34,8 +48,6 @@ Unreleased
 * ALCN-959: Set esb_ref for some models
 * Refresh data full and data demo
 * ALCN-968: Update imported users file
-
-**Documentation**
 
 
 10.9.0 (2017-09-15)
