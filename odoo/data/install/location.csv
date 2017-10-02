@@ -5212,6 +5212,7 @@ __import__.location_loc_GE13G3,GE13G3,94,__import__.location_family_G,bin,G,E,1,
 __import__.location_loc_GE13G4,GE13G4,14,__import__.location_family_G,bin,G,E,1,3,G4
 __import__.location_loc_GE13G5,GE13G5,72,__import__.location_family_G,bin,G,E,1,3,G5
 __import__.location_loc_GE13G7,GE13G7,11,__import__.location_family_G,bin,G,E,1,3,G7
+__import__.location_loc_GE13G8,GE13G8,30,__import__.location_family_G,bin,G,E,1,3,G8
 __import__.location_loc_GE14A1,GE14A1,90,__import__.location_family_G,bin,G,E,1,4,A1
 __import__.location_loc_GE14A2,GE14A2,59,__import__.location_family_G,bin,G,E,1,4,A2
 __import__.location_loc_GE14A3,GE14A3,07,__import__.location_family_G,bin,G,E,1,4,A3
@@ -7316,7 +7317,7 @@ __import__.location_loc_GZZ416,GZZ416,10,__import__.location_family_G,bin,G,Z,Z,
 __import__.location_loc_GZZ417,GZZ417,01,__import__.location_family_G,bin,G,Z,Z,4,17
 __import__.location_loc_GZZ418,GZZ418,93,__import__.location_family_G,bin,G,Z,Z,4,18
 __import__.location_loc_GZZ501,GZZ501,67,__import__.location_family_G,bin,G,Z,Z,5,01
-__import__.location_loc_GZZ502,GZZ502,90,__import__.location_family_G,bin,G,Z,Z,5,02
+__import__.location_loc_GZZ502,GZZ502,29,__import__.location_family_G,bin,G,Z,Z,5,02
 __import__.location_loc_GZZ503,GZZ503,98,__import__.location_family_G,bin,G,Z,Z,5,03
 __import__.location_loc_GZZ504,GZZ504,36,__import__.location_family_G,bin,G,Z,Z,5,04
 __import__.location_loc_GZZ505,GZZ505,58,__import__.location_family_G,bin,G,Z,Z,5,05
