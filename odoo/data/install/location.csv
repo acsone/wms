@@ -2659,6 +2659,7 @@ __import__.location_loc_EXZ000,EXZ000,,__import__.location_family_E,bin,E,X,Z,0,
 __import__.location_loc_EXZ100,EXZ100,,__import__.location_family_E,bin,E,X,Z,1,00
 __import__.location_loc_EZZ004,EZZ004,,__import__.location_family_E,bin,E,Z,Z,0,04
 __import__.location_loc_EZZ012,EZZ012,,__import__.location_family_E,bin,E,Z,Z,0,12
+__import__.location_loc_EZZ018,EZZ018,,__import__.location_family_E,bin,E,Z,Z,0,18
 __import__.location_loc_EZZ019,EZZ019,,__import__.location_family_E,bin,E,Z,Z,0,19
 __import__.location_loc_EZZ020,EZZ020,,__import__.location_family_E,bin,E,Z,Z,0,20
 __import__.location_loc_EZZ033,EZZ033,,__import__.location_family_E,bin,E,Z,Z,0,33
@@ -2695,6 +2696,7 @@ __import__.location_loc_EZZ336,EZZ336,,__import__.location_family_E,bin,E,Z,Z,3,
 __import__.location_loc_EZZ350,EZZ350,,__import__.location_family_E,bin,E,Z,Z,3,50
 __import__.location_loc_EZZ384,EZZ384,,__import__.location_family_E,bin,E,Z,Z,3,84
 __import__.location_loc_EZZ391,EZZ391,,__import__.location_family_E,bin,E,Z,Z,3,91
+__import__.location_loc_EZZ395,EZZ395,,__import__.location_family_E,bin,E,Z,Z,3,95
 __import__.location_loc_EZZ426,EZZ426,,__import__.location_family_E,bin,E,Z,Z,4,26
 __import__.location_loc_EZZ440,EZZ440,,__import__.location_family_E,bin,E,Z,Z,4,40
 __import__.location_loc_EZZ470,EZZ470,,__import__.location_family_E,bin,E,Z,Z,4,70
@@ -7261,7 +7263,9 @@ __import__.location_loc_GZZ124,GZZ124,34,__import__.location_family_G,bin,G,Z,Z,
 __import__.location_loc_GZZ143,GZZ143,15,__import__.location_family_G,bin,G,Z,Z,1,43
 __import__.location_loc_GZZ146,GZZ146,84,__import__.location_family_G,bin,G,Z,Z,1,46
 __import__.location_loc_GZZ156,GZZ156,45,__import__.location_family_G,bin,G,Z,Z,1,56
+__import__.location_loc_GZZ180,GZZ180,29,__import__.location_family_G,bin,G,Z,Z,1,80
 __import__.location_loc_GZZ186,GZZ186,38,__import__.location_family_G,bin,G,Z,Z,1,86
+__import__.location_loc_GZZ190,GZZ190,21,__import__.location_family_G,bin,G,Z,Z,1,90
 __import__.location_loc_GZZ191,GZZ191,26,__import__.location_family_G,bin,G,Z,Z,1,91
 __import__.location_loc_GZZ203,GZZ203,40,__import__.location_family_G,bin,G,Z,Z,2,03
 __import__.location_loc_GZZ205,GZZ205,54,__import__.location_family_G,bin,G,Z,Z,2,05
@@ -7276,6 +7280,7 @@ __import__.location_loc_GZZ235,GZZ235,20,__import__.location_family_G,bin,G,Z,Z,
 __import__.location_loc_GZZ240,GZZ240,32,__import__.location_family_G,bin,G,Z,Z,2,40
 __import__.location_loc_GZZ242,GZZ242,42,__import__.location_family_G,bin,G,Z,Z,2,42
 __import__.location_loc_GZZ244,GZZ244,10,__import__.location_family_G,bin,G,Z,Z,2,44
+__import__.location_loc_GZZ245,GZZ245,64,__import__.location_family_G,bin,G,Z,Z,2,45
 __import__.location_loc_GZZ250,GZZ250,02,__import__.location_family_G,bin,G,Z,Z,2,50
 __import__.location_loc_GZZ254,GZZ254,83,__import__.location_family_G,bin,G,Z,Z,2,54
 __import__.location_loc_GZZ259,GZZ259,59,__import__.location_family_G,bin,G,Z,Z,2,59
