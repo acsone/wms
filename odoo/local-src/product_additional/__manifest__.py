@@ -7,14 +7,16 @@
     'version': '10.0.1.0.0',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
-    'category': 'Mrp',
+    'category': 'Product',
     'depends': [
-        'mrp',
+        'product',
+        'sale'
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
         # Views
-        'views/mrp_bom.xml',
+        "views/product_template.xml",
+        "views/product_supplierinfo.xml",
     ],
     'installable': True,
 }
