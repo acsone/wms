@@ -190,16 +190,18 @@ class RoundInstance(models.Model):
 
     @api.multi
     def _remove_customer(self, customer):
-        for rec in self:
-            if not self.env['stock.picking'].search([
-                    ('delivery_round_id', '=', self.id),
-                    ('res_partner_id', '=', customer.id)]):
-                ric = self.env['round.instance.customer'].search({
-                    'delivery_round_id': self.id,
-                    'res_partner_id': customer.id,
-                    })
-                if ric:
-                    ric.unlink()
+        self.ensure_one()
+        if not self.env['stock.picking'].search([
+                ('delivery_round_id', '=', self.id),
+                ('partner_id', '=', customer.id),
+                ('state', '!=', 'cancel'),
+                ]):
+            ric = self.env['round.instance.customer'].search([
+                ('delivery_round_id', '=', self.id),
+                ('partner_id', '=', customer.id),
+                ])
+            if ric:
+                ric.unlink()
 
     @api.model
     def find(self, partner):
@@ -370,8 +372,8 @@ class RoundInstanceCustomer(models.Model):
 
     _sql_constraints = [
         (
-            'unique_instance_customer',
-            'UNIQUE(delivery_round_id, res_partner_id)',
+            'unique_instance_partner',
+            'UNIQUE(delivery_round_id, partner_id)',
             _('The customer must be unique in a delivery round.')
         ),
     ]
@@ -383,11 +385,12 @@ class RoundInstanceCustomer(models.Model):
         ondelete='cascade',
     )
 
-    res_partner_id = fields.Many2one(
+    partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Customer',
         required=True,
         ondelete='restrict',
+        oldname='res_partner_id',
     )
 
     rank = fields.Integer(

@@ -45,6 +45,23 @@ class StockMove(models.Model):
             # raise UserError(_("No delivery round instance found"))
 
     @api.multi
+    def action_cancel(self):
+        res = super(StockMove, self).action_cancel()
+        delivery_round_partner = {}
+        for picking in self.mapped('picking_id'):
+            if (not picking.partner_id or
+                    not picking.delivery_round_id or
+                    picking.state != 'cancel'):
+                continue
+            delivery_round_partner.setdefault(
+                picking.delivery_round_id, set()).\
+                add(picking.partner_id)
+        for delivery_round, partners in delivery_round_partner.iteritems():
+            for partner in partners:
+                delivery_round._remove_customer(partner)
+        return res
+
+    @api.multi
     @api.constrains('picking_id')
     def _check_round(self):
         if not self.mapped('picking_id.delivery_round_id'):

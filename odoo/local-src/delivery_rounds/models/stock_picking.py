@@ -40,15 +40,18 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        delivery_rounds = False
-        partners = False
+        delivery_round_partner = {}
+        partners = []
         if not vals.get('delivery_round', True):
             # Delivery round unset on picking
-            delivery_rounds = self.mapped('delivery_round')
-            partners = self.mapped('partner_id')
+            for picking in self:
+                delivery_round_partner.setdefault(
+                    picking.delivery_round_id, set()).\
+                    add(picking.partner_id)
         res = super(StockPicking, self).write(vals)
-        for partner in partners:
-            delivery_rounds._remove_customer(partner)
+        for delivery_round, partners in delivery_round_partner.iteritems():
+            for partner in partners:
+                delivery_round._remove_customer(partner)
         return res
 
     @api.multi
