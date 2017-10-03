@@ -178,7 +178,7 @@ class RoundInstance(models.Model):
                 ('itinerary_id', 'in', self.itinerary_ids.ids),
                 ('partner_id', '=', customer.id)])
             if pos:
-                rank = pos + pos.itinerary_id*1000
+                rank = pos.sequence + pos.itinerary_id.sequence*1000
             ric = self.env['round.instance.customer'].create({
                 'delivery_round_id': self.id,
                 'res_partner_id': customer.id,
@@ -341,7 +341,6 @@ class RoundInstance(models.Model):
             'default_picking_type_subcode': 'PICK',
             'default_delivery_round_id': self.id,
         }
-
         return action_data
 
     instance_customer_ids = fields.One2many(
@@ -386,14 +385,19 @@ class RoundInstanceCustomer(models.Model):
     @api.constrains('rank')
     def _propagate_rank(self):
         for instance_customer in self:
-            if instance_customer.rank >= 0:
-                # when we set a rank on a round instance customer,
-                # we copy that value on the pickings
-                shippings = self.delivery_round_id.shipping_ids.filtered(
-                    lambda r: r.rank < 0 and
-                    r.partner_id == instance_customer.res_partner_id
-                )
-                _logger.debug(
-                    "Rank set on round instance customer %s. Propagate "
-                    "to group %s", self.ids, shippings.ids)
-                shippings.write({'rank': instance_customer.rank})
+            rank = instance_customer.rank
+            # when we set a rank on a round instance customer,
+            # we copy that value on the pickings
+            pickings = self.delivery_round_id.shipping_ids.filtered(
+                lambda p: p.partner_id == instance_customer.res_partner_id
+                and p.rank != rank
+            )
+            pickings += self.delivery_round_id.picking_ids.filtered(
+                lambda p: p.partner_id == instance_customer.res_partner_id
+                and p.rank != rank
+            )
+            _logger.debug(
+                "Rank set on round instance customer %s. Propagate to "
+                "pickings and shippings %s",
+                self.ids, pickings.ids)
+            pickings.write({'rank': rank})
