@@ -39,6 +39,19 @@ class StockPicking(models.Model):
         return moves.mapped('picking_id')
 
     @api.multi
+    def write(self, vals):
+        delivery_rounds = False
+        partners = False
+        if not vals.get('delivery_round', True):
+            # Delivery round unset on picking
+            delivery_rounds = self.mapped('delivery_round')
+            partners = self.mapped('partner_id')
+        res = super(StockPicking, self).write(vals)
+        for partner in partners:
+            delivery_rounds._remove_customer(partner)
+        return res
+
+    @api.multi
     @api.constrains('delivery_round_id')
     def _update_delivery_round(self):
         if self.env.context.get('noround_write'):
@@ -81,29 +94,14 @@ class StockPicking(models.Model):
                     "Delivery round %s set on pickings %s. Propagate "
                     "to group %s",
                     delivery_round.id, self.ids, pickings.ids)
-                pickings.with_context(noround_write=True).write(
-                    {'delivery_round_id': delivery_round.id})
+                for partner in self.mapped('partner_id'):
+                    rank = delivery_round._add_customer(partner)
+                    pickings.with_context(noround_write=True).write({
+                        'delivery_round_id': delivery_round.id,
+                        'rank': rank})
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done.",
                 delivery_round.id, self.ids)
-
-    # @api.multi
-    # @api.constrains('rank')
-    # def _propagate_rank(self):
-    #     if self[0].rank >= 0:
-    #         # when we set a rank on a delivery, we copy that value on the
-    #         # pickings
-    #         shippings = self.filtered(
-    #             lambda r: r.picking_type_code == 'outgoing')
-    #         rounds = shippings.mapped('delivery_round_id')
-    #         for ri in rounds:
-    #             pickings = ri.picking_ids.filtered(
-    #                 lambda r: r.rank < 0 and
-    #                 r.partner_id.id in shippings.mapped('partner_id.id'))
-    #             _logger.debug(
-    #                 "Rank set on pickings %s. Propagate "
-    #                 "to group %s", self.ids, pickings.ids)
-    #             pickings.write({'rank': self[0].rank})
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):

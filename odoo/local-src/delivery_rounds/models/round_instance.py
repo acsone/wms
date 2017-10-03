@@ -188,6 +188,19 @@ class RoundInstance(models.Model):
             rank = ric.rank
         return rank
 
+    @api.multi
+    def _remove_customer(self, customer):
+        for rec in self:
+            if not self.env['stock.picking'].search([
+                    ('delivery_round_id', '=', self.id),
+                    ('res_partner_id', '=', customer.id)]):
+                ric = self.env['round.instance.customer'].search({
+                    'delivery_round_id': self.id,
+                    'res_partner_id': customer.id,
+                    })
+                if ric:
+                    ric.unlink()
+
     @api.model
     def find(self, partner):
         """ Find a delivery_round for this partner """
@@ -389,12 +402,14 @@ class RoundInstanceCustomer(models.Model):
             # when we set a rank on a round instance customer,
             # we copy that value on the pickings
             pickings = self.delivery_round_id.shipping_ids.filtered(
-                lambda p: p.partner_id == instance_customer.res_partner_id
-                and p.rank != rank
+                lambda p:
+                p.partner_id == instance_customer.res_partner_id and
+                p.rank != rank
             )
             pickings += self.delivery_round_id.picking_ids.filtered(
-                lambda p: p.partner_id == instance_customer.res_partner_id
-                and p.rank != rank
+                lambda p:
+                p.partner_id == instance_customer.res_partner_id and
+                p.rank != rank
             )
             _logger.debug(
                 "Rank set on round instance customer %s. Propagate to "
