@@ -221,3 +221,8 @@ migration:
           - specific_stock
           - stock_receive_lot
           - db2_import
+    - version: 10.11.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_product

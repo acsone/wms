@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix access righs product storage temperature
+
 **Build**
 
 **Documentation**
