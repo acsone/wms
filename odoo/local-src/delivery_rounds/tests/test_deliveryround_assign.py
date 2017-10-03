@@ -51,7 +51,7 @@ class TestDeliveryRoundAssign(TransactionCase):
         })
 
         self.env['stock.picking.type'].search([('name', '=', 'Pick')]).write({
-            'subcode': 'PICK' })
+            'subcode': 'PICK'})
 
     def test_deliveryround_carrier(self):
         delivery_template = self.env['round.template'].create({
@@ -162,4 +162,5 @@ class TestDeliveryRoundAssign(TransactionCase):
             )
 
         self.assertEqual(pick.state, 'assigned')
-        self.assertEqual(set(pick.pack_operation_ids.mapped('product_id')), set([self.p1, self.p2]))
+        self.assertEqual(set(pick.pack_operation_ids.mapped('product_id')),
+                         set([self.p1, self.p2]))
