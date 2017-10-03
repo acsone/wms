@@ -160,8 +160,33 @@ class RoundInstance(models.Model):
             if pickings_assigned:
                 _logger.debug("Add to delivery round %s the pickings %s",
                               self.id, pickings.ids)
+                partner = pickings_assigned.mapped('partner_id')
+                rank = self._add_customer(partner)
                 pickings_assigned.with_context(round_assigned=True).write({
-                    'delivery_round_id': self.id})
+                    'delivery_round_id': self.id,
+                    'rank': rank})
+
+    @api.multi
+    def _add_customer(self, customer):
+        self.ensure_one()
+        ric = self.env['round.instance.customer'].search([
+            ('delivery_round_id', '=', self.id),
+            ('res_partner_id', '=', customer.id)])
+        rank = 0
+        if not ric:
+            pos = self.env['round.itinerary.position'].search([
+                ('itinerary_id', 'in', self.itinerary_ids.ids),
+                ('partner_id', '=', customer.id)])
+            if pos:
+                rank = pos + pos.itinerary_id*1000
+            ric = self.env['round.instance.customer'].create({
+                'delivery_round_id': self.id,
+                'res_partner_id': customer.id,
+                'rank': rank,
+                })
+        else:
+            rank = ric.rank
+        return rank
 
     @api.model
     def find(self, partner):
@@ -343,12 +368,14 @@ class RoundInstanceCustomer(models.Model):
         comodel_name='round.instance',
         string='Delivery Round',
         required=True,
+        ondelete='cascade',
     )
 
     res_partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Customer',
         required=True,
+        ondelete='restrict',
     )
 
     rank = fields.Integer(

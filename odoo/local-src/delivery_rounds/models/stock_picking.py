@@ -45,7 +45,7 @@ class StockPicking(models.Model):
             return
         delivery_round = self.mapped('delivery_round_id')
         assert len(delivery_round) <= 1, \
-            'Max 1 delivery_round can ba written at a time'
+            'Max 1 delivery_round can be written at a time'
         if not delivery_round:
             _logger.debug("Delivery round unset on pickings %s", self.ids)
             # unreserve quants when picking is disconnected from a delivery
@@ -83,51 +83,27 @@ class StockPicking(models.Model):
                     delivery_round.id, self.ids, pickings.ids)
                 pickings.with_context(noround_write=True).write(
                     {'delivery_round_id': delivery_round.id})
-            # set rank on deliveries according to sequence defined in the
-            # itinerary
-            _logger.debug(
-                "Compute shippings delivery rank on delivery round %s.",
-                delivery_round.id)
-            positions = False
-            for shipping in shippings:
-                if shipping.rank >= 0:
-                    continue
-                ranks = delivery_round.instance_customer_ids.filtered(
-                    lambda p: p.rank >= 0 and
-                    p.partner_id == shipping.partner_id
-                ).mapped('rank')
-                if ranks:
-                    shipping.rank = ranks[0]
-                else:
-                    if positions is False:
-                        positions = {}
-                        for itinerary in delivery_round.itinerary_ids:
-                            for pos in itinerary.partner_position_ids:
-                                positions[pos.partner_id.id] = (
-                                    itinerary.sequence*1000 +
-                                    pos.sequence)
-                    shipping.rank = positions.get(shipping.partner_id.id, 0)
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done.",
                 delivery_round.id, self.ids)
 
-    @api.multi
-    @api.constrains('rank')
-    def _propagate_rank(self):
-        if self[0].rank >= 0:
-            # when we set a rank on a delivery, we copy that value on the
-            # pickings
-            shippings = self.filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            rounds = shippings.mapped('delivery_round_id')
-            for ri in rounds:
-                pickings = ri.picking_ids.filtered(
-                    lambda r: r.rank < 0 and
-                    r.partner_id.id in shippings.mapped('partner_id.id'))
-                _logger.debug(
-                    "Rank set on pickings %s. Propagate "
-                    "to group %s", self.ids, pickings.ids)
-                pickings.write({'rank': self[0].rank})
+    # @api.multi
+    # @api.constrains('rank')
+    # def _propagate_rank(self):
+    #     if self[0].rank >= 0:
+    #         # when we set a rank on a delivery, we copy that value on the
+    #         # pickings
+    #         shippings = self.filtered(
+    #             lambda r: r.picking_type_code == 'outgoing')
+    #         rounds = shippings.mapped('delivery_round_id')
+    #         for ri in rounds:
+    #             pickings = ri.picking_ids.filtered(
+    #                 lambda r: r.rank < 0 and
+    #                 r.partner_id.id in shippings.mapped('partner_id.id'))
+    #             _logger.debug(
+    #                 "Rank set on pickings %s. Propagate "
+    #                 "to group %s", self.ids, pickings.ids)
+    #             pickings.write({'rank': self[0].rank})
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
