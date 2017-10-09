@@ -50,8 +50,12 @@ class TestDeliveryRoundAssign(TransactionCase):
             'date': '2017-01-01',
         })
 
-        self.env['stock.picking.type'].search([('name', '=', 'Pick')]).write({
-            'subcode': 'PICK'})
+        # pick/ship
+        pick = self.env['stock.picking.type'].search([('name', '=', 'Pick')])
+        if not pick:
+            pick = self.env['stock.picking.type'].search([
+                ('name', '=', 'Delivery Orders')])
+        pick.write({'subcode': 'PICK'})
 
     def test_deliveryround_carrier(self):
         delivery_template = self.env['round.template'].create({

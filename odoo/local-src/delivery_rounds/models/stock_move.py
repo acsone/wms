@@ -70,9 +70,8 @@ class StockMove(models.Model):
             return res
         products = received.mapped('product_id')
         # Find pickings and relaunch reservation
-        output = self.env.ref('stock.stock_location_output')
         moves_pickings = self.search([
-            ('location_dest_id', '=', output.id),
+            ('picking_id.picking_type_subcode', '=', 'PICK'),
             ('state', '=', 'confirmed'),
             ('product_id', 'in', products.ids),
             ('picking_id.printed', '!=', True)])
