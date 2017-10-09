@@ -171,7 +171,7 @@ class RoundInstance(models.Model):
         self.ensure_one()
         ric = self.env['round.instance.customer'].search([
             ('delivery_round_id', '=', self.id),
-            ('res_partner_id', '=', customer.id)])
+            ('partner_id', '=', customer.id)])
         rank = 0
         if not ric:
             pos = self.env['round.itinerary.position'].search([
@@ -181,7 +181,7 @@ class RoundInstance(models.Model):
                 rank = pos.sequence + pos.itinerary_id.sequence*1000
             ric = self.env['round.instance.customer'].create({
                 'delivery_round_id': self.id,
-                'res_partner_id': customer.id,
+                'partner_id': customer.id,
                 'rank': rank,
                 })
         else:
@@ -406,12 +406,12 @@ class RoundInstanceCustomer(models.Model):
             # we copy that value on the pickings
             pickings = self.delivery_round_id.shipping_ids.filtered(
                 lambda p:
-                p.partner_id == instance_customer.res_partner_id and
+                p.partner_id == instance_customer.partner_id and
                 p.rank != rank
             )
             pickings += self.delivery_round_id.picking_ids.filtered(
                 lambda p:
-                p.partner_id == instance_customer.res_partner_id and
+                p.partner_id == instance_customer.partner_id and
                 p.rank != rank
             )
             _logger.debug(
