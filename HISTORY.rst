@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * Fix access righs product storage temperature
+* Fix db2_importer for sales import
 
 **Build**
 
