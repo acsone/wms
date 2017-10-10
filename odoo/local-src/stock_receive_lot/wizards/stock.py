@@ -82,7 +82,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.location_op_dest_id = loc.id
 
     location_dest_id = fields.Many2one(
-        'stock.location', 'Destination Location', required=True)
+        'stock.location', 'Destination Location')
 
     lot_required = fields.Boolean('Lot Required', compute='_get_lot_required')
 
@@ -181,18 +181,18 @@ class StockPackOperationLotAdd(models.TransientModel):
         # So while the destination stay the same, we can fill lines, otherwise
         # we need to split the pack operation and adjust the processed and
         # remaining quantities
-        if self.location_dest_id != self.operation_id.location_dest_id:
-            if self.operation_id.pack_lot_ids:
-                # Location changed - split pack
-                pack = self.operation_id
+        pack = self.operation_id
+        if self.location_dest_id != pack.location_dest_id:  # Location changed
+            if pack.qty_done:  # split pack
                 pack2 = pack.copy(default={
                     'qty_done': 0.0,
                     'product_qty': pack.product_qty - pack.qty_done,
                     })
                 pack.product_qty = pack.qty_done
-                pack._copy_remaining_pack_lot_ids(pack2.id)
-                self.operation_id = pack2
-            self.operation_id.location_dest_id = self.location_dest_id
+                if self.operation_id.pack_lot_ids:
+                    pack._copy_remaining_pack_lot_ids(pack2.id)
+                pack = self.operation_id = pack2
+            pack.location_dest_id = self.location_dest_id
 
         if self.lot_id:
             for lot in self.operation_id.pack_lot_ids:
@@ -205,7 +205,9 @@ class StockPackOperationLotAdd(models.TransientModel):
                     'lot_name': self.lot_id.name,
                     'lot_id': self.lot_id.id,
                     })]
-        self.operation_id.save()
+            self.operation_id.save()
+        else:
+            self.operation_id.write({'qty_done': self.qty})
 
     @api.multi
     def button_nextop(self):
