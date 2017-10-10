@@ -10,7 +10,10 @@
     'category': 'Product',
     'depends': [
         'product',
-        'sale'
+        'sale',
+        'stock',
+        'purchase',  # Only for SQL dependency
+        'specific_stock',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

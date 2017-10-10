@@ -19,10 +19,10 @@ class SaleOrder(models.Model):
         WHERE ratio_promotional_product > 0
           AND (date_start IS NULL or date_start <= NOW())
           AND (date_end IS NULL or date_end >= NOW())
-          AND (min_qty_sale = 0 OR min_qty_sale IS NULL OR min_qty_sale >= %s)
+          AND (min_qty_sale = 0 OR min_qty_sale IS NULL OR min_qty_sale <= %s)
           AND product_tmpl_id = %s
         ORDER BY sequence, min_qty_sale desc, price
-        LIMIT 1
+        LIMIT 1;
         """
 
         for order in self:

@@ -19,7 +19,7 @@ class ProductSupplierinfo(models.Model):
             if not supplierinfo.ratio_promotional_product \
                     or not supplierinfo.ratio_main_product:
                 continue
-            display_name = _('For %s products, %s free') % \
-                           (supplierinfo.ratio_main_product,
-                            supplierinfo.ratio_promotional_product)
+            display_name = _('For %s products, %s free') % (
+                supplierinfo.ratio_main_product,
+                supplierinfo.ratio_promotional_product)
             supplierinfo.ratio_display_name = display_name
