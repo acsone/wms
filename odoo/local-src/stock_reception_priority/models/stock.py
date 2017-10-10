@@ -99,17 +99,16 @@ class StockPicking(models.Model):
                         lambda r: r.qty_available <= 0))
 
     def _calc_priority(self):
-        return -(self.qty_backorder * 1000 + self.qty_outofstock)
+        return self.qty_backorder * 1000 + self.qty_outofstock
 
     @api.multi
     @api.constrains('grn_id')
-    def _update_sequence_on_grn(self):
+    def _update_rank_on_grn(self):
         for rec in self:
             if not rec.grn_id:
-                rec.with_context(allow_sequence=True).sequence = 0
-            elif not rec.sequence:
-                rec.with_context(allow_sequence=True).sequence = \
-                    self._calc_priority()
+                rec.rank = 0
+            elif not rec.rank:
+                rec.rank = self._calc_priority()
 
     @api.multi
     def button_priority_recompute(self):
@@ -123,5 +122,5 @@ class StockPicking(models.Model):
             ('state', 'in', ('assigned', 'partially_available'))]
         for picking in self.search(domain):
             priority = picking._calc_priority()
-            if picking.sequence != priority:
-                picking.sequence = priority
+            if picking.rank != priority:
+                picking.rank = priority

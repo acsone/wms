@@ -79,7 +79,7 @@ WHERE picking.delivery_round_state = 'open'
       AND picking.zetes_state IN %s
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
       AND picking.operator_id = %s
-ORDER BY round.date, round.time_picking_planned, picking.sequence
+ORDER BY round.date, round.time_picking_planned, picking.rank DESC
 LIMIT 1;
             """
 

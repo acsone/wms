@@ -6,13 +6,13 @@
 Stock Picking Sequence
 ======================
 
-Add a sequence field on the picking to be able to (re)order them. The sort
+Add a rank field on the picking to be able to (re)order them. The sort
 order of the pickings is also modified to sort first by priority, then by
-sequence.
+rank.
 
 The operator is supposed to process the pickings according to the order.
 
-You could develop/install a module than compute the sequence based on some
+You could develop/install a module than compute the rank based on some
 rules.
 
 Installation

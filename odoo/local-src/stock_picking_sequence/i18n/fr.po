@@ -17,8 +17,8 @@ msgstr ""
 
 #. module: stock_picking_sequence
 #: model:ir.model.fields,field_description:stock_picking_sequence.field_stock_picking_sequence
-msgid "Seq."
-msgstr "Séq."
+msgid "Rank"
+msgstr "Rang"
 
 #. module: stock_picking_sequence
 #: model:ir.model,name:stock_picking_sequence.model_stock_picking

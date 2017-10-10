@@ -5,7 +5,7 @@
 import math
 from datetime import datetime
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import Warning as UserError
 
 import logging
@@ -160,8 +160,48 @@ class RoundInstance(models.Model):
             if pickings_assigned:
                 _logger.debug("Add to delivery round %s the pickings %s",
                               self.id, pickings.ids)
+                partner = pickings_assigned.mapped('partner_id')
+                rank = self._add_customer(partner)
                 pickings_assigned.with_context(round_assigned=True).write({
-                    'delivery_round_id': self.id})
+                    'delivery_round_id': self.id,
+                    'rank': rank})
+
+    @api.multi
+    def _add_customer(self, customer):
+        self.ensure_one()
+        ric = self.env['round.instance.customer'].search([
+            ('delivery_round_id', '=', self.id),
+            ('partner_id', '=', customer.id)])
+        rank = 0
+        if not ric:
+            pos = self.env['round.itinerary.position'].search([
+                ('itinerary_id', 'in', self.itinerary_ids.ids),
+                ('partner_id', '=', customer.id)])
+            if pos:
+                rank = pos.sequence + pos.itinerary_id.sequence*1000
+            ric = self.env['round.instance.customer'].create({
+                'delivery_round_id': self.id,
+                'partner_id': customer.id,
+                'rank': rank,
+                })
+        else:
+            rank = ric.rank
+        return rank
+
+    @api.multi
+    def _remove_customer(self, customer):
+        self.ensure_one()
+        if not self.env['stock.picking'].search([
+                ('delivery_round_id', '=', self.id),
+                ('partner_id', '=', customer.id),
+                ('state', '!=', 'cancel'),
+                ]):
+            ric = self.env['round.instance.customer'].search([
+                ('delivery_round_id', '=', self.id),
+                ('partner_id', '=', customer.id),
+                ])
+            if ric:
+                ric.unlink()
 
     @api.model
     def find(self, partner):
@@ -262,3 +302,120 @@ class RoundInstance(models.Model):
         # record is deleted. So let's call it.
         pickings._update_delivery_round()
         return res
+
+    @api.multi
+    @api.depends('shipping_ids')
+    def _compute_shipping_count(self):
+        for shipping in self:
+            shipping.shipping_count = len(shipping.shipping_ids)
+
+    shipping_count = fields.Integer(
+        compute='_compute_shipping_count',
+    )
+
+    @api.multi
+    def action_view_shippings(self):
+        self.ensure_one()
+
+        action_data = self.env.ref(
+            'delivery_rounds.action_picking_tree_round'
+        ).read()[0]
+        action_data['domain'] = [
+            ('picking_type_code', '=', 'outgoing'),
+            ('delivery_round_id', '=', self.id),
+        ]
+        action_data['context'] = {
+            'default_picking_type_code': 'outgoing',
+            'default_delivery_round_id': self.id,
+        }
+
+        return action_data
+
+    @api.multi
+    @api.depends('picking_ids')
+    def _compute_picking_count(self):
+        for picking in self:
+            picking.picking_count = len(picking.picking_ids)
+
+    picking_count = fields.Integer(
+        compute='_compute_picking_count',
+    )
+
+    @api.multi
+    def action_view_pickings(self):
+        self.ensure_one()
+
+        action_data = self.env.ref(
+            'delivery_rounds.action_picking_tree_round'
+        ).read()[0]
+        action_data['domain'] = [
+            ('picking_type_subcode', '=', 'PICK'),
+            ('delivery_round_id', '=', self.id),
+        ]
+        action_data['context'] = {
+            'default_picking_type_subcode': 'PICK',
+            'default_delivery_round_id': self.id,
+        }
+        return action_data
+
+    instance_customer_ids = fields.One2many(
+        comodel_name='round.instance.customer',
+        inverse_name='delivery_round_id',
+        string='Customers',
+        states={'done': [('readonly', True)]},
+    )
+
+
+class RoundInstanceCustomer(models.Model):
+    _name = 'round.instance.customer'
+    _order = 'rank'
+
+    _sql_constraints = [
+        (
+            'unique_instance_partner',
+            'UNIQUE(delivery_round_id, partner_id)',
+            _('The customer must be unique in a delivery round.')
+        ),
+    ]
+
+    delivery_round_id = fields.Many2one(
+        comodel_name='round.instance',
+        string='Delivery Round',
+        required=True,
+        ondelete='cascade',
+    )
+
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Customer',
+        required=True,
+        ondelete='restrict',
+        oldname='res_partner_id',
+    )
+
+    rank = fields.Integer(
+        string='Rank',
+    )
+
+    @api.multi
+    @api.constrains('rank')
+    def _propagate_rank(self):
+        for instance_customer in self:
+            rank = instance_customer.rank
+            # when we set a rank on a round instance customer,
+            # we copy that value on the pickings
+            pickings = self.delivery_round_id.shipping_ids.filtered(
+                lambda p:
+                p.partner_id == instance_customer.partner_id and
+                p.rank != rank
+            )
+            pickings += self.delivery_round_id.picking_ids.filtered(
+                lambda p:
+                p.partner_id == instance_customer.partner_id and
+                p.rank != rank
+            )
+            _logger.debug(
+                "Rank set on round instance customer %s. Propagate to "
+                "pickings and shippings %s",
+                self.ids, pickings.ids)
+            pickings.write({'rank': rank})
