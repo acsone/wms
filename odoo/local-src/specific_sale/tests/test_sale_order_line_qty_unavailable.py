@@ -175,7 +175,7 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         self.p1.refresh()
 
         # After the stock increase (qty = 2),
-        # the product immediately usable quantity is -15
+        # the product immediately usable quantity is -13
         self.assertEqual(
             self.p1.product_variant_ids[0].immediately_usable_qty,
             -13

@@ -2,4 +2,4 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from . import test_delivery_round_on_delivery_carrier
+from . import test_deliveryround_assign

@@ -76,6 +76,7 @@ class RoundInstance(models.Model):
          ('open', 'Confirmed'),
          ('done', 'Done')],
         'State',
+        readonly=True,
         default='draft')
 
     itinerary_ids = fields.Many2many(
@@ -143,8 +144,8 @@ class RoundInstance(models.Model):
                       self.id, pickings.ids)
         try:
             # call Try to reserve from stock the qty for confirmed pickings
-            pickings.filtered(
-                lambda p: p.state in ['draft', 'confirmed']).with_context(
+            pickings.filtered(lambda p: p.state in [
+                'draft', 'confirmed', 'partially_available']).with_context(
                     round_autoset=False).action_assign()
         except UserError:
             # if no moves

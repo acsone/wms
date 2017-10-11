@@ -41,6 +41,7 @@ Unreleased
 * ALCN-865: Web service create web sale order
 * ALCN-965: Load payment terms
 * ALCN-963: Update translations for the module specific_purchase
+* [IMP] Re-reserve corresponding pickings in backorder when goods are received in stock
 
 **Bugfixes**
 
