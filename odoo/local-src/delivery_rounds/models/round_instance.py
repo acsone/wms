@@ -181,7 +181,7 @@ class RoundInstance(models.Model):
                 ('partner_id', '=', customer.id)])
             if pos:
                 rank = pos.sequence + pos.itinerary_id.sequence*1000
-            ric = self.env['round.instance.customer'].create({
+            self.env['round.instance.customer'].create({
                 'delivery_round_id': self.id,
                 'partner_id': customer.id,
                 'rank': rank,
@@ -211,14 +211,39 @@ class RoundInstance(models.Model):
         _logger.debug("Search a round instance for partner %s", partner.id)
         # TODO: improve: take first delivery round having a shipping for that
         # partner
-        itinerary_ids = partner.round_itinerary_ids.mapped(
-            'itinerary_id.id')
-        if not itinerary_ids:
-            return self.browse()
-        return self.search([
-            ('state', '=', 'draft'),
-            ('itinerary_ids', 'in', itinerary_ids),
+        itinerary_positions = partner.round_itinerary_ids
+        if not itinerary_positions:
+            return False
+
+        itinerary_positions.sort(lambda line: line.itinerary_id.sequence)
+        for itinerary_position in itinerary_positions:
+            tags = itinerary_position.tag_ids
+            itinerary = itinerary_position.itinerary_id
+
+            round_instance = self.search([
+                ('state', '=', 'draft'),
+                ('itinerary_ids', 'in', [itinerary.id]),
             ], limit=1)
+            # Cannot find the instance
+            if not round_instance:
+                continue
+            round_instance_tags = round_instance.tag_ids
+
+            # If the customer doesn't have tags means that we can take him
+            # in any case
+            if not tags:
+                return round_instance
+            # The customer has a tag but the instance doesn't have a tag
+            # In this case we cannot take this instance
+            if round_instance.tag_ids:
+                continue
+            # Check if round instance tags contains at least one tag
+            # of customer tags
+            tags_intersection = set(round_instance_tags.ids) & set(tags.ids)
+            if tags_intersection:
+                return round_instance
+
+        return False
 
     count_picking_available_total = fields.Integer(
         'Picking Available Total',
