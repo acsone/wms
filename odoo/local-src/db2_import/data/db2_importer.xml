@@ -26,7 +26,7 @@
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDCL</field>
     <field name="table_prefix">dcc</field>
-    <field name="id_columns">dccsui,dcccli,dccsuc,dccnli</field>
+    <field name="id_columns">dccsui,dccncl,dccsuc,dccnli</field>
   </record>
 
   <!-- relation table between lot and move
