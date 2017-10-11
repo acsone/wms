@@ -12,6 +12,7 @@ Unreleased
 
 * Fix access righs product storage temperature
 * Fix db2_importer for sales import
+* Fix db2_importer tables xmlid
 * Fix reception of products without lot
 * Fix migration to v10: fix call to read that always returns a list since v10
 

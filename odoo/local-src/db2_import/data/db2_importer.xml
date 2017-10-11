@@ -10,7 +10,7 @@
   <data noupdate="0">
 
   <!-- sale order header table -->
-  <record model="db2.importer.table" id="db2_table_pentcdcl">
+  <record model="db2.importer.table" id="db2_table_pentcdcl_for_sale">
     <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDCL</field>
@@ -21,7 +21,7 @@
   </record>
 
   <!-- sale order detail line table -->
-  <record model="db2.importer.table" id="db2_table_pdetcdcl">
+  <record model="db2.importer.table" id="db2_table_pdetcdcl_for_sale">
     <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDCL</field>
@@ -31,7 +31,7 @@
 
   <!-- relation table between lot and move
        containing reference to sale order -->
-  <record model="db2.importer.table" id="db2_table_mvtlot">
+  <record model="db2.importer.table" id="db2_table_mvtlot_for_sale">
     <field name="importer_id" ref="db2_sale_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">MVTLOT</field>
@@ -50,7 +50,7 @@
 
   <data noupdate="0">
   <!-- purchase order header table -->
-  <record model="db2.importer.table" id="db2_table_pentcdfo">
+  <record model="db2.importer.table" id="db2_table_pentcdfo_for_purchase">
     <field name="importer_id" ref="db2_purchase_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDFO</field>
@@ -61,7 +61,7 @@
   </record>
 
   <!-- purchase order detail line table -->
-  <record model="db2.importer.table" id="db2_table_pdetcdfo">
+  <record model="db2.importer.table" id="db2_table_pdetcdfo_for_purchase">
     <field name="importer_id" ref="db2_purchase_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDFO</field>
@@ -94,7 +94,7 @@
 
   <data noupdate="0">
   <!-- sale order header table -->
-  <record model="db2.importer.table" id="db2_table_pentcdcl">
+  <record model="db2.importer.table" id="db2_table_pentcdcl_for_10_customers">
     <field name="importer_id" ref="db2_importer_10_clients"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PENTCDCL</field>
@@ -106,7 +106,7 @@
   </record>
 
   <!-- sale order detail line table -->
-  <record model="db2.importer.table" id="db2_table_pdetcdcl">
+  <record model="db2.importer.table" id="db2_table_pdetcdcl_for_10_customers">
     <field name="importer_id" ref="db2_importer_10_clients"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">PDETCDCL</field>
@@ -117,7 +117,7 @@
 
   <!-- relation table between lot and move
        containing reference to sale order -->
-  <record model="db2.importer.table" id="db2_table_mvtlot">
+  <record model="db2.importer.table" id="db2_table_mvtlot_for_10_customers">
     <field name="importer_id" ref="db2_importer_10_clients"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">MVTLOT</field>
