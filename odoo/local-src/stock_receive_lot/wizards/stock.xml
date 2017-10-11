@@ -48,7 +48,7 @@
                         <label for="location_dest_id"/>
                         <h2>
                             <field name="location_op_dest_id"/>
-                            <field name="location_dest_id" domain="[('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id)]"/>
+                            <field name="location_dest_id" domain="[('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id)]" required="1"/>
                         </h2>
                     </group>
                 </group>

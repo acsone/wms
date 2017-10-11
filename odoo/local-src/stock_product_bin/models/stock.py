@@ -35,8 +35,7 @@ class StockLocation(models.Model):
             ('location_id', '=', dest_location_id)],
             limit=1)
         if lbin:
-            return lbin.read(['bin_location_id'],
-                             load='_classic_write')['bin_location_id']
+            return lbin.bin_location_id.id
         if dest_location_id != location.id:
             # case Input under Stock and fixed putaway strat. No bin found
             # under that fixed location
@@ -50,6 +49,5 @@ class StockLocation(models.Model):
                 ('location_id', '=', location.id)],
                 limit=1)
             if lbin:
-                return lbin.read(['bin_location_id'],
-                                 load='_classic_write')['bin_location_id']
+                return lbin.bin_location_id.id
         return dest_location_id
