@@ -222,9 +222,13 @@ migration:
           - stock_receive_lot
           - db2_import
     - version: 10.11.0
+      operations:
+        pre:
+          - anthem songs.update.update_10_11_0_pre::main
       addons:
         upgrade:
           ### local-src
+          - db2_import
           - specific_product
           - delivery_rounds
           - specific_report
