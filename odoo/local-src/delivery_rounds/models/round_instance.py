@@ -207,7 +207,19 @@ class RoundInstance(models.Model):
 
     @api.model
     def find(self, partner):
-        """ Find a delivery_round for this partner """
+        """
+        Find a delivery_round for this partner according tags defined
+        on customer position or round instance.
+        Round instance are sorted according the sequence of the itinerary.
+
+        There is the rule for take or not a round instance:
+        - If you define one (or more) tag on the instance, only customer
+        containing this tag will be taken
+        - A customer without tag will be taken in any case
+
+        :param partner:
+        :return:
+        """
         _logger.debug("Search a round instance for partner %s", partner.id)
         # TODO: improve: take first delivery round having a shipping for that
         # partner
@@ -215,9 +227,10 @@ class RoundInstance(models.Model):
         if not itinerary_positions:
             return False
 
-        itinerary_positions.sort(lambda line: line.itinerary_id.sequence)
+        itinerary_positions = \
+            itinerary_positions.sorted(lambda line: line.itinerary_id.sequence)
         for itinerary_position in itinerary_positions:
-            tags = itinerary_position.tag_ids
+            customer_tags = itinerary_position.tag_ids
             itinerary = itinerary_position.itinerary_id
 
             round_instance = self.search([
@@ -229,17 +242,14 @@ class RoundInstance(models.Model):
                 continue
             round_instance_tags = round_instance.tag_ids
 
-            # If the customer doesn't have tags means that we can take him
-            # in any case
-            if not tags:
+            # If the customer or/and the round instance doesn't have tags
+            # means that we can use this round instance
+            if not customer_tags or not round_instance.tag_ids:
                 return round_instance
-            # The customer has a tag but the instance doesn't have a tag
-            # In this case we cannot take this instance
-            if round_instance.tag_ids:
-                continue
             # Check if round instance tags contains at least one tag
             # of customer tags
-            tags_intersection = set(round_instance_tags.ids) & set(tags.ids)
+            tags_intersection = \
+                set(round_instance_tags.ids) & set(customer_tags.ids)
             if tags_intersection:
                 return round_instance
 

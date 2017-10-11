@@ -14,6 +14,7 @@ Unreleased
 * ALCN-973: add mapping for packaging quantities (box, pallet, shrink wrapping)
 
 **Features and Improvements**
+* ALCN-946: Add tags on itinerary to easily target customers
 
 **Bugfixes**
 

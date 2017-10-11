@@ -3,3 +3,4 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from . import test_deliveryround_assign
+from . import test_round_tags
