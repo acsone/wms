@@ -59,6 +59,8 @@ class StockMove(models.Model):
         for delivery_round, partners in delivery_round_partner.iteritems():
             for partner in partners:
                 delivery_round._remove_customer(partner)
+        return res
+
     @api.multi
     def action_done(self):
         """ Trigger re-reserve on pickings """
