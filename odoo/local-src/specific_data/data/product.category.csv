@@ -1,7 +1,6 @@
 id,name,parent_id/id
 product_categ_materiel,Matériel,product.product_category_all
 product_categ_ali,Aliments,product.product_category_all
-product_categ_frigo,Frigo,product.product_category_all
 product_categ_medoc,Médicaments,product.product_category_all
 product_categ_finance,Finance,product.product_category_all
 product_categ_vet_belges,Médicaments vétérinaires belges,specific_data.product_categ_medoc

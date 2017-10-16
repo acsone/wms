@@ -244,6 +244,16 @@ def create_putaway(ctx):
                 '__setup__.stock_location_onorder').id,
         }
     )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_froid',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_pick_froid').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_parking_frigo').id,
+        }
+    )
 
     parking_strat = [
         ('__setup__.stock_putaway_strat_parking_medoc',
@@ -255,9 +265,6 @@ def create_putaway(ctx):
         ('__setup__.stock_putaway_strat_parking_materiel',
          'specific_data.product_categ_materiel',
          '__setup__.stock_location_parking_medoc'),
-        ('__setup__.stock_putaway_strat_parking_materiel',
-         'specific_data.product_categ_frigo',
-         '__setup__.stock_location_parking_frigo'),
         ]
     for xmlid, categ, loc in parking_strat:
         create_or_update(
@@ -286,9 +293,6 @@ def create_putaway(ctx):
         ('__setup__.stock_putaway_strat_onorder_medoc',
          'specific_data.product_categ_medoc',
          '__setup__.stock_location_order_medoc'),
-        ('__setup__.stock_putaway_strat_onorder_frigo',
-         'specific_data.product_categ_frigo',
-         '__setup__.stock_location_order_frigo'),
         ('__setup__.stock_putaway_strat_onorder_mat',
          'specific_data.product_categ_materiel',
          '__setup__.stock_location_order_mat'),
@@ -577,18 +581,22 @@ def create_routes(ctx):
         {'xmlid': '__setup__.stock_location_route_pick_materiel',
          'name': 'Alcyon Belux SA: Pick (MAT)',
          'pull_ids': [(6, 0, ref('__setup__.procurement_rule_materiel').ids)],
+         'product_selectable': False,
          },
         {'xmlid': '__setup__.stock_location_route_pick_ali',
          'name': 'Alcyon Belux SA: Pick (ALI)',
          'pull_ids': [(6, 0, ref('__setup__.procurement_rule_ali').ids)],
+         'product_selectable': False,
          },
         {'xmlid': '__setup__.stock_location_route_pick_medoc',
          'name': 'Alcyon Belux SA: Pick (MED)',
          'pull_ids': [(6, 0, ref('__setup__.procurement_rule_medoc').ids)],
+         'product_selectable': False,
          },
         {'xmlid': '__setup__.stock_location_route_pick_froid',
-         'name': 'Alcyon Belux SA: Pick (FROID)',
+         'name': 'FROID / FRIGO',
          'pull_ids': [(6, 0, ref('__setup__.procurement_rule_froid').ids)],
+         'product_selectable': True,
          },
     ]
     for record in types:
@@ -596,7 +604,6 @@ def create_routes(ctx):
         record.update({
          'sequence': 20,
          'product_categ_selectable': True,
-         'product_selectable': False,
         })
         create_or_update(ctx, 'stock.location.route', xmlid, record)
 
@@ -611,8 +618,6 @@ def assign_route_categories(ctx):
                '__setup__.stock_location_route_pick_ali'),
               ('specific_data.product_categ_medoc',
                '__setup__.stock_location_route_pick_medoc'),
-              ('specific_data.product_categ_frigo',
-               '__setup__.stock_location_route_pick_froid'),
               ]
     for category_xmlid, route_xmlid in categs:
         ref(category_xmlid).route_ids = [(6, 0, ref(route_xmlid).ids)]
@@ -625,8 +630,8 @@ def main(ctx):
     activate_options(ctx)
     set_delivery_pick_ship(ctx)
     create_locations(ctx)
-    create_putaway(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
     create_routes(ctx)
+    create_putaway(ctx)
     assign_route_categories(ctx)

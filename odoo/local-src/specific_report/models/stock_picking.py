@@ -79,7 +79,7 @@ class StockPicking(models.Model):
         equipment_categ = self.env.ref('specific_data.product_categ_materiel')
         food_categ = self.env.ref('specific_data.product_categ_ali')
         drug_categ = self.env.ref('specific_data.product_categ_medoc')
-        fridge_categ = self.env.ref('specific_data.product_categ_frigo')
+        fridge_categ = self.env.ref('specific_data.product_categ_medoc')  # TO FIX: no fridge category, it's a route
         human_categ = self.env.ref('specific_data.product_categ_humain')
 
         # Check quantities for packages
