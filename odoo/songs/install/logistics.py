@@ -44,9 +44,13 @@ def activate_options(ctx):
 
 
 @anthem.log
-def set_delivery_pick_ship(ctx):
-    """ Setting pick-ship on the warehouse """
-    ctx.env.ref('stock.warehouse0').delivery_steps = 'pick_ship'
+def warehouse_settings(ctx):
+    wh_vlb = ctx.env.ref('stock.warehouse0')
+    wh_vlb.write({
+        'name': 'Villers-Le-Bouillet',
+        'code': 'VLB',
+        'delivery_steps': 'pick_ship',
+    })
 
 
 @anthem.log
@@ -628,7 +632,7 @@ def main(ctx):
     """ Configuring logistics """
     company_settings(ctx)
     activate_options(ctx)
-    set_delivery_pick_ship(ctx)
+    warehouse_settings(ctx)
     create_locations(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
