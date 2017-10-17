@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Add antibiotic contributions lines as sale order line taxes
+
 **Features and Improvements**
 
 **Bugfixes**
