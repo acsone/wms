@@ -268,7 +268,7 @@ def create_putaway(ctx):
          '__setup__.stock_location_parking_ali'),
         ('__setup__.stock_putaway_strat_parking_materiel',
          'specific_data.product_categ_materiel',
-         '__setup__.stock_location_parking_medoc'),
+         '__setup__.stock_location_parking_materiel'),
         ]
     for xmlid, categ, loc in parking_strat:
         create_or_update(
