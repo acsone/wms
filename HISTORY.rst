@@ -9,8 +9,6 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
-
-* Fix access righs product storage temperature
 * Allow to create a lot at reception with standard interface
 
 **Build**
