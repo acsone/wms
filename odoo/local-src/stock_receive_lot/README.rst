@@ -12,6 +12,8 @@ Also improve the standard lot reception wizard to allow to set life date.
 
 Check if the removal date is not expired when we receive a lot.
 
+Disable standard check that prevent to create a lot at reception.
+
 Credits
 =======
 
