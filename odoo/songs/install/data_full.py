@@ -205,6 +205,22 @@ def import_stock_bins(ctx):
 
 
 @anthem.log
+def post_import_stock_bins(ctx):
+    """ Add fridge route on product stocked in 'Q' category """
+    StockBin = ctx.env['product.stock.bin']
+
+    familyQ = ctx.env.ref('__import__.location_family_Q')
+    fridge_route = ctx.env.ref('__setup__.stock_location_route_pick_froid')
+
+    domain = [('bin_location_id', 'child_of', familyQ.id)]
+    product_bins = StockBin.search(domain)
+    products = product_bins.mapped('product_id')
+    for product in products:
+        if fridge_route not in product.route_ids:
+            product.route_ids |= fridge_route
+
+
+@anthem.log
 def main(ctx):
     """ Loading full data (But in this function only small files,
     other files will be import by importer.sh)
@@ -212,3 +228,4 @@ def main(ctx):
     create_product_other(ctx)
     # Putting some demo data in full mode because we don't have yet real data
     import_delivery_round_config(ctx)
+    post_import_stock_bins(ctx)

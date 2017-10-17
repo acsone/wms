@@ -12,6 +12,7 @@ Unreleased
 * Add antibiotic contributions lines as sale order line taxes
 * ALCN-967: add payment mode "Domiciliation" and do the mapping
 * ALCN-973: add mapping for packaging quantities (box, pallet, shrink wrapping)
+* ALCN-981 - Set fridge route on product stocked in Q sector
 
 **Features and Improvements**
 * ALCN-946: Add tags on itinerary to easily target customers
