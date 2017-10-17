@@ -2,7 +2,7 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class RoundItinerary(models.Model):
@@ -18,11 +18,35 @@ class RoundItinerary(models.Model):
     template_ids = fields.Many2many(
         'round.template',
         string='Vehicle')
+    partner_ids = fields.Many2many('res.partner',
+                                   string='Partners',
+                                   compute='_compute_partner_ids',
+                                   search='_search_partner_ids',
+                                   readonly=True)
+
+    @api.multi
+    def _compute_partner_ids(self):
+        for itinerary in self:
+            partners = itinerary.mapped('partner_position_ids.partner_id')
+            itinerary.partner_ids = [(6, 0, partners.ids)]
+
+    def _search_partner_ids(self, operator, value):
+        """
+        Search for itinerary containing the customer name
+        :param operator:
+        :param value:
+        :return:
+        """
+
+        partners = self.env['res.partner'].search([('name', operator, value)])
+        positions = self.env['round.itinerary.position']\
+            .search([('partner_id', 'in', partners.ids)])
+
+        return [('partner_position_ids', 'in', positions.ids)]
 
 
 class RoundItineraryPosition(models.Model):
     _name = 'round.itinerary.position'
-    _rec_name = 'itinerary_id'
     _order = 'sequence'
 
     itinerary_id = fields.Many2one(
@@ -33,7 +57,8 @@ class RoundItineraryPosition(models.Model):
         'res.partner', 'Partner',
         required=True,
         ondelete='restrict',
-        domain=[('customer', '=', True)])
+        domain=[('customer', '=', True)],
+        index=True)
     partner_zip = fields.Char('Partner ZIP',
                               related='partner_id.zip',
                               readonly=True)
@@ -44,3 +69,12 @@ class RoundItineraryPosition(models.Model):
                                  related='partner_id.street',
                                  readonly=True)
     tag_ids = fields.Many2many('round.tag', string='Tags')
+
+    @api.multi
+    @api.depends('itinerary_id')
+    def name_get(self):
+        result = []
+        for rec in self:
+            code = rec.itinerary_id.code
+            result.append((rec.id, code))
+        return result

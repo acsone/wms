@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-11 16:52+0000\n"
-"PO-Revision-Date: 2017-10-11 16:52+0000\n"
+"POT-Creation-Date: 2017-10-17 15:01+0000\n"
+"PO-Revision-Date: 2017-10-17 15:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Actions"
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/sale_order.py:58
 #: code:addons/delivery_rounds/models/sale_order.py:64
-#: code:addons/delivery_rounds/models/stock_move.py:75
+#: code:addons/delivery_rounds/models/stock_move.py:112
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr "Tous les pickings ayant le même distinataire doivent se trouver dans la même tournée"
@@ -142,6 +142,7 @@ msgstr "Créé le"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_partner_id
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
 msgid "Customer"
 msgstr "Client"
 
@@ -181,6 +182,7 @@ msgstr "Livraison"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_partner_round_itinerary_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_users_round_itinerary_ids
+#: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
 msgid "Delivery Itineraries"
 msgstr "Itinéraires de livraison"
 
@@ -436,6 +438,7 @@ msgid "Partner street"
 msgstr "Rue du client"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_partner_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_partner_position_ids
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
 msgid "Partners"
@@ -580,9 +583,11 @@ msgid "Stops"
 msgstr "Arrêts"
 
 #. module: delivery_rounds
+#: model:ir.actions.act_window,name:delivery_rounds.action_round_tag
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_tag_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_tag_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_tag_ids
+#: model:ir.ui.menu,name:delivery_rounds.menu_round_tag
 msgid "Tags"
 msgstr "Étiquettes"
 
@@ -602,7 +607,7 @@ msgid "Templates"
 msgstr "Modèles"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:413
+#: code:addons/delivery_rounds/models/round_instance.py:423
 #: sql_constraint:round.instance.customer:0
 #, python-format
 msgid "The customer must be unique in a delivery round."
@@ -642,8 +647,8 @@ msgstr "Heure effective de départ du véhicule"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_version_id
-msgid "Version id"
-msgstr "ID de la version"
+msgid "Version"
+msgstr "Version"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_template_version

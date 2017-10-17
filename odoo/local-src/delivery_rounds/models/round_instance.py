@@ -210,7 +210,7 @@ class RoundInstance(models.Model):
         """
         Find a delivery_round for this partner according tags defined
         on customer position or round instance.
-        Round instance are sorted according the sequence of the itinerary.
+        Round instance are sorted according the date and the time of picking
 
         There is the rule for take or not a round instance:
         - If you define one (or more) tag on the instance, only customer
@@ -221,37 +221,46 @@ class RoundInstance(models.Model):
         :return:
         """
         _logger.debug("Search a round instance for partner %s", partner.id)
-        # TODO: improve: take first delivery round having a shipping for that
-        # partner
-        itinerary_positions = partner.round_itinerary_ids
-        if not itinerary_positions:
-            return False
 
-        itinerary_positions = \
-            itinerary_positions.sorted(lambda line: line.itinerary_id.sequence)
-        for itinerary_position in itinerary_positions:
-            customer_tags = itinerary_position.tag_ids
-            itinerary = itinerary_position.itinerary_id
+        # The following query will search for the best itinerary instance.
+        # First, the query will search for all open instance (state = draft)
+        # The itinerary linked to this instance must contains the partner
+        # (round_instance_round_itinerary_rel).
+        # In this case, we will check tags on the customer (customer_tag)
+        # and the instance tag (instance_tag).
+        # Info: A customer and/or instance can have several tags.
+        # In this case the query will return several lines.
+        #
+        # Tags rules:
+        # - The customer tag must be equal to the instance tag
+        # - The customer tag is empty
+        # - The instance tag is empty
+        best_instance_query = """
+        SELECT instance.id
+        FROM round_instance_round_itinerary_rel AS rel
+          INNER JOIN round_instance AS instance
+            ON rel.round_instance_id = instance.id
+          INNER JOIN round_itinerary_position AS position
+            ON position.itinerary_id = rel.round_itinerary_id
+          LEFT JOIN round_instance_round_tag_rel AS instance_tag
+            ON instance.id = instance_tag.round_instance_id
+          LEFT JOIN round_itinerary_position_round_tag_rel AS customer_tag
+            ON position.id = customer_tag.round_itinerary_position_id
+        WHERE instance.state = 'draft'
+          AND (instance_tag.round_tag_id = customer_tag.round_tag_id
+              OR customer_tag IS NULL
+              OR instance_tag IS NULL)
+          AND position.partner_id = %s
+        ORDER BY instance.date DESC, instance.time_picking_planned ASC
+        LIMIT 1;
+        """
 
-            round_instance = self.search([
-                ('state', '=', 'draft'),
-                ('itinerary_ids', 'in', [itinerary.id]),
-            ], limit=1)
-            # Cannot find the instance
-            if not round_instance:
-                continue
-            round_instance_tags = round_instance.tag_ids
+        self.env.cr.execute(best_instance_query, (partner.id, ))
+        result = self.env.cr.fetchone()
 
-            # If the customer or/and the round instance doesn't have tags
-            # means that we can use this round instance
-            if not customer_tags or not round_instance.tag_ids:
-                return round_instance
-            # Check if round instance tags contains at least one tag
-            # of customer tags
-            tags_intersection = \
-                set(round_instance_tags.ids) & set(customer_tags.ids)
-            if tags_intersection:
-                return round_instance
+        if result:
+            _logger.debug("Instance found with ID %s", result[0])
+            return self.browse(result[0])
 
         return False
 

@@ -10,6 +10,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
 
     version_id = fields.Many2one(
         'round.template.version',
+        string='Version',
         required=True,
         default=lambda x: x.env['round.template.version'].search(
             [('is_default_version', '=', True)])

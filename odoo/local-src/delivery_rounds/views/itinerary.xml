@@ -23,7 +23,6 @@
                         <field name="code" />
                     </group>
                     <group>
-                        <field name="sequence" />
                         <field name="template_ids" widget="many2many_tags"/>
                     </group>
                 </group>
@@ -34,10 +33,23 @@
                         <field name="partner_zip" />
                         <field name="partner_city" />
                         <field name="partner_street" />
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
                     </tree>
                 </field>
             </form>
+        </field>
+    </record>
+
+    <record id="round_itinerary_view_search" model="ir.ui.view">
+        <field name="name">round.itinerary.view.search</field>
+        <field name="model">round.itinerary</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Itineraries">
+                <field name="name"/>
+                <field name="code"/>
+                <separator/>
+                <field name="partner_ids" string="Customer"/>
+            </search>
         </field>
     </record>
 

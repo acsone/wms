@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -31,7 +33,7 @@ class TestRoundTags(TransactionCase):
         self.itinerary = self.env['round.itinerary'].create({
             'name': 'Itinerary test',
             'code': 'test',
-            'sequence': 10,
+            'sequence': 1,
         })
         self.position = self.env['round.itinerary.position'].create({
             'itinerary_id': self.itinerary.id,
@@ -43,10 +45,12 @@ class TestRoundTags(TransactionCase):
             'name': 'Test template',
             'itinerary_ids': [(6, 0, [self.itinerary.id])]
         })
+
+        picking_planned = datetime.now() + relativedelta(hours=3)
         self.instance = self.env['round.instance'].create({
             'template_id': self.template.id,
-            'date': fields.Date.today(),
-            'time_picking_planned': 8,
+            'date': fields.Date.to_string(picking_planned),
+            'time_picking_planned': picking_planned.hour,
             'time_leave_planned': 10,
             'name': 'Instance test',
             'state': 'draft',
@@ -95,12 +99,13 @@ class TestRoundTags(TransactionCase):
         """
         instance_obj = self.env['round.instance']
 
-        # Create the best itinerary (sequence 5)
+        # Create the best itinerary (picking planned = now + 1 hours)
         # By default this itinerary must be taken
+        picking_planned = datetime.now() + relativedelta(hours=1)
         best_itinerary = self.env['round.itinerary'].create({
             'name': 'Best itinerary',
             'code': 'best',
-            'sequence': 5,
+            'sequence': 1,
         })
         best_position = self.env['round.itinerary.position'].create({
             'itinerary_id': best_itinerary.id,
@@ -112,19 +117,19 @@ class TestRoundTags(TransactionCase):
         })
         best_instance = self.env['round.instance'].create({
             'template_id': self.template.id,
-            'date': fields.Date.today(),
-            'time_picking_planned': 6,
+            'date': fields.Date.to_string(picking_planned),
+            'time_picking_planned': picking_planned.hour,
             'time_leave_planned': 7,
             'name': 'Best instance',
             'state': 'draft',
             'itinerary_ids': [(6, 0, [best_itinerary.id])]
         })
 
-        # Create the worst itinerary (sequence 50)
+        # Create the worst itinerary (picking planned = now + 5 hours)
         worst_itinerary = self.env['round.itinerary'].create({
             'name': 'Worst itinerary',
             'code': 'worst',
-            'sequence': 50,
+            'sequence': 1,
         })
         worst_position = self.env['round.itinerary.position'].create({
             'itinerary_id': worst_itinerary.id,
@@ -134,17 +139,19 @@ class TestRoundTags(TransactionCase):
         self.template.write({
             'itinerary_ids': [(4, worst_itinerary.id, 0)]
         })
+        picking_planned = datetime.now() + relativedelta(hours=5)
         worst_instance = self.env['round.instance'].create({
             'template_id': self.template.id,
-            'date': fields.Date.today(),
-            'time_picking_planned': 10,
+            'date': fields.Date.to_string(picking_planned),
+            'time_picking_planned': picking_planned.hour,
             'time_leave_planned': 11,
             'name': 'Worst instance',
             'state': 'draft',
             'itinerary_ids': [(6, 0, [worst_itinerary.id])]
         })
 
-        # The "best itinerary" has the best sequence
+        # The "best itinerary" has a better picking time
+        # (picking planned = now + 1 hours)
         instance = instance_obj.find(self.partner)
         self.assertEqual(instance, best_instance)
 
