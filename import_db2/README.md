@@ -8,8 +8,12 @@ A raspberry has been installed at Alcyon as a proxy to DB2 database.
 So you have to connect to this raspberry with port forwarding to the DB2 server.
 
  ```bash
- ssh pi@194.78.105.88 -L 8471:10.2.2.3:8471
+ ssh pi@194.78.105.88 -L 8471:10.2.3.91:8471
  ```
+
+This command allows to connect on "duplicated" database.
+
+The IP for real production database is `10.2.2.3`, but we don't want to connect directly in production for the moment..
 
 Password and this command line are available in Lastpass in Alcyon shared fo
 
