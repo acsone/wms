@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-983: db2_importer module creates sale/purchase without tracking
+* ALCN-973: add mapping for packaging quantities (box, pallet, shrink wrapping)
 
 **Features and Improvements**
 
