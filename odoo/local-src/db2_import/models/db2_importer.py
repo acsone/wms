@@ -202,8 +202,11 @@ class DB2MapperPurchaseOrder(object):
         # while creating xmlid
         xmlid = '__import__.purchase_order_%s_%s_%s' % (
             row['ecfsui'], int(row['ecffou']), int(row['ecfsuc']))
+        purchase_model = rec.env['purchase.order'].with_context(
+            tracking_disable=True
+        )
         new = create_or_update(
-            rec.env['purchase.order'], xmlid.strip(), values)
+            purchase_model, xmlid.strip(), values)
 
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
@@ -221,7 +224,9 @@ class DB2MapperPurchaseOrder(object):
                  )} for line in lines]
         if any(l['dcfquc'] < 0 for l in lines):
             raise Exception("Negative qty in lines")
-        POLine = rec.env['purchase.order.line']
+        POLine = rec.env['purchase.order.line'].with_context(
+            tracking_disable=True
+        )
         po_lines = POLine
         is_received = True
         received_lines = []
@@ -317,7 +322,8 @@ class DB2MapperSaleOrder(object):
         # while creating xmlid
         xmlid = '__import__.sale_order_%s_%s_%s' % (
             row['eccsui'], int(row['ecccli']), int(row['eccsuc']))
-        new = create_or_update(rec.env['sale.order'], xmlid.strip(), values)
+        so_model = rec.env['sale.order'].with_context(tracking_disable=True)
+        new = create_or_update(so_model, xmlid.strip(), values)
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
@@ -335,7 +341,7 @@ class DB2MapperSaleOrder(object):
                  )} for line in lines]
         if any(l['dccquc'] < 0 for l in lines):
             raise Exception("Negative qty in lines")
-        SOLine = rec.env['sale.order.line']
+        SOLine = rec.env['sale.order.line'].with_context(tracking_disable=True)
         so_lines = SOLine
         is_delivered = True
         delivered_lines = []

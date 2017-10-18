@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-983: db2_importer module creates sale/purchase without tracking
+
 **Features and Improvements**
 
 **Bugfixes**
