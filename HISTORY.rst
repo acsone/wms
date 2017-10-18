@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-983: db2_importer module creates sale/purchase without tracking
+* ALCN-967: add payment mode "Domiciliation" and do the mapping
 
 **Features and Improvements**
 
