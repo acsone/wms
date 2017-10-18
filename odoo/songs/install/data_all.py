@@ -54,9 +54,17 @@ def define_esb_ref_on_taxes(ctx):
 
 
 @anthem.log
+def import_payment_modes(ctx):
+    """ Importing payment modes from csv"""
+    content = resource_stream(req, 'data/install/account.payment.mode.csv')
+    load_csv_stream(ctx, 'account.payment.mode', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Loading data """
     default_values(ctx)
     import_delivery_carriers(ctx)
     define_esb_ref_on_countries(ctx)
     define_esb_ref_on_taxes(ctx)
+    import_payment_modes(ctx)
