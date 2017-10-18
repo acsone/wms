@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file has been generated with 'invoke project.sync'.
 # Do not modify. Any manual change will be lost.
+# Please propose your modification on
+# https://github.com/camptocamp/odoo-template instead.
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 from __future__ import print_function
@@ -45,10 +47,16 @@ def generate(ctx, addon_path, update_po=True):
     # mv .po to .pot
     source = os.path.join(i18n_dir, '%s.po' % addon)
     pot_file = source + 't'
+    # dirty hack to remove duplicated entries for paths
+    ctx.run('sed -i "/local-src\|external-src/d" %(pot)s' %
+            {'pot': pot_file, })
     ctx.run('mv %s %s' % (source, pot_file))
 
     if update_po:
         for po_file in glob.glob('%s/*.po' % i18n_dir):
             ctx.run('msgmerge %(po)s %(pot)s -o %(po)s' %
                     {'po': po_file, 'pot': pot_file})
+            # dirty hack to remove duplicated entries for paths
+            ctx.run('sed -i "/local-src\|external-src/d" %(po)s' %
+                    {'po': po_file, })
     print('%s.pot generated' % addon)
