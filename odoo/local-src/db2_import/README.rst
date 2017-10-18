@@ -61,7 +61,7 @@ To configure the connection, you need to set the following environment variables
 
 Plus to be able to use the queue_job you have to load the `queue_job` module
 
-Here is a minimal docker-compose.override.yml config:
+Here is a minimal docker-compose.override.yml config::
 
     services:
       odoo:
@@ -94,7 +94,7 @@ of the ssh connection with the RaspberryPI.
 For this you need to add the private key in file `docker-compose.yml` to grant you access to the
 RasberryPI
 
-Example of docker-compose.override.yml
+Example of docker-compose.override.yml::
 
   pissh:
     image: camptocamp/alcyon_pissh
