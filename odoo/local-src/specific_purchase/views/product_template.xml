@@ -20,7 +20,7 @@
                 <group name="product_conditioning">
                     <field name="unit_in_pallet"/>
                     <field name="unit_in_box"/>
-                    <field name="unit_in_fardage"/>
+                    <field name="unit_in_shrink_wrap"/>
                 </group>
             </xpath>
 
