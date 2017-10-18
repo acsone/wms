@@ -19,6 +19,8 @@ Unreleased
 
 **Documentation**
 
+* ALCN-984: Update readme for import_db2 scripts (update ssh command line)
+
 
 10.11.0 (2017-10-13)
 ++++++++++++++++++++
