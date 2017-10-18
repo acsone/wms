@@ -231,6 +231,7 @@ migration:
           - db2_import
           - specific_product
           - delivery_rounds
+          - specific_purchase
           - specific_report
           - specific_zetes
           - stock_picking_sequence
