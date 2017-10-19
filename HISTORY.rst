@@ -20,6 +20,7 @@ Unreleased
 **Documentation**
 
 * ALCN-984: Update readme for import_db2 scripts (update ssh command line)
+* DB2 Import - Improve module doc
 
 
 10.11.0 (2017-10-13)
