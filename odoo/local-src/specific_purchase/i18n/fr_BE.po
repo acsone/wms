@@ -324,11 +324,11 @@ msgid "Unit in box"
 msgstr "Nombre d'unités par boite"
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_fardage
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_fardage
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_fardage
-msgid "Unit in fardage"
-msgstr "Nombre d'unités par fardage"
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_shrink_wrap
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_shrink_wrap
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_shrink_wrap
+msgid "Unit in shrink-wrap"
+msgstr "Nombre d'unités par fardelage"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_pallet

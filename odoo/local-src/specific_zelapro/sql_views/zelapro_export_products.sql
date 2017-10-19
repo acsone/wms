@@ -81,7 +81,7 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CPLZ23,
     '' AS CPLZ28,
     '' AS CP2Z01,
-    COALESCE(product_tmpl.unit_in_fardage, 0) AS CP2Z02,
+    COALESCE(product_tmpl.unit_in_shrink_wrap, 0) AS CP2Z02,
     '' AS CP2Z03,
     COALESCE(product_tmpl.unit_in_box, 0) AS CP2Z04,
     '' AS CP2Z05,

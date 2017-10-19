@@ -58,6 +58,15 @@ class ProductMapper(EntityMapper):
             mapping=mappings.PRODUCT_STATES
         ),
         FieldMapper(
+            'unit_in_shrink_wrap', 'cp2z02',
+        ),
+        FieldMapper(
+            'unit_in_box', 'cp2z04',
+        ),
+        FieldMapper(
+            'unit_in_pallet', 'cp2z06',
+        ),
+        FieldMapper(
             'storage_temperature_id/id', 'cp2z17',
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
         ),
