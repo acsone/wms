@@ -285,6 +285,17 @@ class DB2MapperPurchaseOrder(object):
 class DB2MapperSaleOrder(object):
 
     @classmethod
+    def add_contrib_tax(cls, rec, tax_line, line):
+        # check that quantity matches
+        amount = tax_line['dccpvd']
+        tax_domain = [
+            ('type_tax_use', '=', 'sale'),
+            ('amount', '=', amount),
+            ('name', '=like', 'ANTIBIO%')]
+        tax = rec.env['account.tax'].search(tax_domain)
+        line.tax_id |= tax
+
+    @classmethod
     def process(cls, rec, db2_table, tmp_id):
         cr = rec.env.cr
         query = (
@@ -347,7 +358,12 @@ class DB2MapperSaleOrder(object):
         delivered_lines = []
         not_delivered_lines = []
 
+        previous_line = None
         for line in lines:
+            if line['dccart'].startswith('8888'):
+                # For tax lines add them as tax to previous line
+                cls.add_contrib_tax(rec, line, previous_line)
+                continue
             product_xmlid = convert_product_id(line['dccart'])
             name = None
             if product_xmlid == '__setup__.product_other':
@@ -371,7 +387,9 @@ class DB2MapperSaleOrder(object):
             xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))
-            so_lines |= create_or_update(SOLine, xmlid, values)
+            so_line = create_or_update(SOLine, xmlid, values)
+            so_lines |= so_line
+            previous_line = so_line
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
         is_delivered = all(delivered_lines)

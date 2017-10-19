@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-983: db2_importer module creates sale/purchase without tracking
+* Add antibiotic contributions lines as sale order line taxes
 
 **Features and Improvements**
 
