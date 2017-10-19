@@ -264,6 +264,12 @@ def setup_sequences(ctx):
         lambda a: a.name == 'Customer Invoices'
     )
 
+    add_xmlid(
+        ctx, customer_journal,
+        '__setup__.account_journal_customer_invoices',
+        noupdate=True
+    )
+
     customer_journal.sequence_id.write({
         'prefix': 'FV/17/',
         'padding': 5,

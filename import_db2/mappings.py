@@ -276,13 +276,10 @@ CLIENT_PAYMENT_TERMS = {
 }
 
 CLIENT_PAYMENT_MODES = {
-    # FIXME
-    # account_payment_mode_1 does not exist
-    #11: '__setup__.account_payment_mode_1',
-    #12: '__setup__.account_payment_mode_1',
-    #17: '__setup__.account_payment_mode_1',
-    #32: '__setup__.account_payment_mode_1',
-    'not_empty': False,
+    11: '__setup__.account_payment_mode_1',
+    12: '__setup__.account_payment_mode_1',
+    17: '__setup__.account_payment_mode_1',
+    32: '__setup__.account_payment_mode_1',
 }
 
 PRODUCT_TRACKING = {
