@@ -712,21 +712,6 @@ msgid "activity.based.costing"
 msgstr "activity.based.costing"
 
 #. module: specific_zelapro
-#: model:ir.model,name:specific_zelapro.model_import_cadencier
-msgid "import.cadencier"
-msgstr "import.cadencier"
-
-#. module: specific_zelapro
-#: model:ir.model,name:specific_zelapro.model_import_cadencier_header
-msgid "import.cadencier.header"
-msgstr "import.cadencier.header"
-
-#. module: specific_zelapro
-#: model:ir.model,name:specific_zelapro.model_import_config_settings
-msgid "import.config.settings"
-msgstr "import.config.settings"
-
-#. module: specific_zelapro
 #: model:ir.model,name:specific_zelapro.model_zelapro_config_settings
 msgid "zelapro.config.settings"
 msgstr "zelapro.config.settings"

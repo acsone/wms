@@ -15,7 +15,6 @@
         'specific_purchase',
         'specific_stock',
         'product_additional',
-        'import_manager',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -38,14 +37,12 @@
         'views/product_template.xml',
         'wizard/zelapro_export_wizard.xml',
         'views/activity_base_testing.xml',
-        'views/import_config_settings.xml',
 
         # Data
         'data/ir_config_parameter.xml',
         'data/zelapro_export.xml',
         'data/ir_cron.xml',
         'data/activity_based_costing.xml',
-        'data/import_file.xml',
 
         # Security
         'security/ir.model.access.csv',
