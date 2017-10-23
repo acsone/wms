@@ -419,7 +419,7 @@ class ZelaproExport(models.Model):
                                                            'outgoing_qty'])
                     if not add_product_values:
                         _logger.error(_('Cannot find the add product '
-                                        'with id %s') % add_product_id)
+                                        'with id %s'), add_product_id)
                         continue
                     add_values = add_product_values[0]
 

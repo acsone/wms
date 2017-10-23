@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-29 14:35+0000\n"
-"PO-Revision-Date: 2017-09-29 14:35+0000\n"
+"POT-Creation-Date: 2017-10-23 13:59+0000\n"
+"PO-Revision-Date: 2017-10-23 13:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,27 +30,6 @@ msgstr "ABC"
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_active
 msgid "Active"
 msgstr "Actif"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_add_product_line_index
-msgid "Add product line index"
-msgstr "Ajouter un numéro de suivi sur le produit"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_add_product_qty
-msgid "Add product qty"
-msgstr "Ajouter une quantité sur le produit"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_add_product_supplier_id
-msgid "Add product supplier id"
-msgstr "Ajouter le fournisseur du produit"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_additional_product_id
-#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_additional_product_id
-msgid "Additional product"
-msgstr "Produit additionnel"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_data_age
@@ -87,18 +66,6 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: specific_zelapro
-#: code:addons/specific_zelapro/models/import_cadencier.py:187
-#, python-format
-msgid "Cannot convert the date "
-msgstr "Impossible de convertir la date "
-
-#. module: specific_zelapro
-#: code:addons/specific_zelapro/models/import_cadencier.py:231
-#, python-format
-msgid "Cannot create the purchase line (line %s)"
-msgstr "Impossible de créer la ligne du bon d'achat (ligne %s)"
-
-#. module: specific_zelapro
 #: code:addons/specific_zelapro/models/zelapro_export.py:421
 #, python-format
 msgid "Cannot find the add product with id %s"
@@ -108,16 +75,6 @@ msgstr "Impossible de trouver le produit additionnel avec l'ID %s"
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_code
 msgid "Code"
 msgstr "Code"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_code_delete_bo
-msgid "Code delete bo"
-msgstr "Delete code BO"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_code_delete_bo_mod
-msgid "Code delete bo mod"
-msgstr "Delete code BO (mod)"
 
 #. module: specific_zelapro
 #: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
@@ -132,8 +89,6 @@ msgstr "Configurer Zelapro"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_create_uid
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_create_uid
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_create_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_create_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_create_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_create_uid
@@ -143,8 +98,6 @@ msgstr "Créé par"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_create_date
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_create_date
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_create_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_create_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_create_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_create_date
@@ -179,8 +132,6 @@ msgstr "Délimiteur"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_display_name
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_display_name
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_display_name
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_display_name
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_display_name
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_display_name
@@ -235,8 +186,6 @@ msgstr "Nom du fichier"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_id
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_id
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_id
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_id
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_id
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_id
@@ -251,8 +200,6 @@ msgstr "Inventaire"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing___last_update
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier___last_update
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header___last_update
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings___last_update
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export___last_update
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line___last_update
@@ -262,8 +209,6 @@ msgstr "Dernière modification le"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_write_uid
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_write_uid
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_write_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_write_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_write_uid
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_write_uid
@@ -273,8 +218,6 @@ msgstr "Derniere fois mis à jour par"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_write_date
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_write_date
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_write_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_write_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_write_date
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_write_date
@@ -298,35 +241,10 @@ msgid "Line"
 msgstr "Ligne"
 
 #. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_line_index
-msgid "Line index"
-msgstr "Numéro de suite"
-
-#. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_ids
 #: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_view_form
 msgid "Lines"
 msgstr "Lignes"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_config_settings_locale
-msgid "Locale to format float"
-msgstr "Locale pour le formatage des chiffres"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_main_product_line_index
-msgid "Main product line index"
-msgstr "Index du produit principal"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_main_product_qty
-msgid "Main product qty"
-msgstr "Quantité produit principal"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_main_product_supplier_id
-msgid "Main product supplier id"
-msgstr "Fournisseur produit principal"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_stock_maximum
@@ -375,16 +293,6 @@ msgid "Number of products in percent"
 msgstr "Nombre de produits en %"
 
 #. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_older_bo_date
-msgid "Older bo date"
-msgstr "Date du plus vieux BO"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_older_bo_date_2
-msgid "Older bo date 2"
-msgstr "Date du plus vieux 2"
-
-#. module: specific_zelapro
 #: code:addons/specific_zelapro/models/product_product.py:165
 #, python-format
 msgid "Please define a least one ABC rate"
@@ -417,7 +325,7 @@ msgstr "Veuillez définir le chemin d'export dans la configuration de ZelAppro"
 #. module: specific_zelapro
 #: model:ir.model,name:specific_zelapro.model_product_product
 msgid "Product"
-msgstr "Produit"
+msgstr "Article"
 
 #. module: specific_zelapro
 #: model:ir.model,name:specific_zelapro.model_product_category
@@ -428,26 +336,6 @@ msgstr "Catégorie d'articles"
 #: model:ir.model,name:specific_zelapro.model_product_template
 msgid "Product Template"
 msgstr "Modèle d'article"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_product_name
-msgid "Product name"
-msgstr "Nom du produit"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_product_ref
-msgid "Product ref"
-msgstr "Référence produit"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_qty_ordered
-msgid "Qty ordered"
-msgstr "Quantité commandée"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_qty_ordered_mod
-msgid "Qty ordered mod"
-msgstr "Quantité commandée (mod)"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_rate
@@ -471,42 +359,6 @@ msgid "SQL view %s not found"
 msgstr "Vue SQL %s non trouvée"
 
 #. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_sale_price
-msgid "Sale price"
-msgstr "Prix de vente"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_sale_price_mod
-msgid "Sale price mod"
-msgstr "Prix de vente (mod)"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_scheduled_date
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_scheduled_date
-msgid "Scheduled date"
-msgstr "Date de livraison"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_scheduled_date_2
-msgid "Scheduled date 2"
-msgstr "Date de livraison 2"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_scheduled_date_mod
-msgid "Scheduled date mod"
-msgstr "Date de livraison (mod)"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_scheduled_date_mod_2
-msgid "Scheduled date mod 2"
-msgstr "Date de livraison 2 (mod)"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_scheduled_date_mod_3
-msgid "Scheduled date mod 3"
-msgstr "Date de livraison 3 (mod)"
-
-#. module: specific_zelapro
 #: model:ir.ui.menu,name:specific_zelapro.menu_zelapro_config_settings
 msgid "Settings"
 msgstr "Configuration"
@@ -517,87 +369,9 @@ msgid "State"
 msgstr "État"
 
 #. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_status
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_status
-msgid "Status"
-msgstr "Statut"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_stock_bo_total
-msgid "Stock bo total"
-msgstr "Stock BO"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_stock_max_total
-msgid "Stock max total"
-msgstr "Stock maximum"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_stock_min_total
-msgid "Stock min total"
-msgstr "Stock minimum"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_stock_reserved_total
-msgid "Stock reserved total"
-msgstr "Stock réservé"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_stock_total
-msgid "Stock total"
-msgstr "Stock total"
-
-#. module: specific_zelapro
 #: selection:zelapro.export.line,state:0
 msgid "Success"
 msgstr "Succès"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_suggested_amount
-msgid "Suggested amount"
-msgstr "Montant suggéré"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_suite_no
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_suite_no
-msgid "Suite no"
-msgstr "Numéro de suite"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_supplier_discount
-msgid "Supplier discount"
-msgstr "Ristourne fournisseur"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_supplier_discount_2
-msgid "Supplier discount 2"
-msgstr "Ristourne fournisseur 2"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_supplier_discount_2_mod
-msgid "Supplier discount 2 mod"
-msgstr "Ristourne fournisseur 2 (mod)"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_supplier_discount_mod
-msgid "Supplier discount mod"
-msgstr "Ristourne fournisseur (mod)"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_supplier_name
-msgid "Supplier name"
-msgstr "Nom du fournisseur"
-
-#. module: specific_zelapro
-#: code:addons/specific_zelapro/models/import_cadencier.py:150
-#, python-format
-msgid "Supplier not found with the ref %s"
-msgstr "Fournisseur non trouvé avec la référence %s"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_supplier_ref
-msgid "Supplier ref"
-msgstr "Référence du fournisseur"
 
 #. module: specific_zelapro
 #: code:addons/specific_zelapro/models/zelapro_export.py:107
@@ -617,21 +391,6 @@ msgstr "Le nom du fichier doit être unique."
 #, python-format
 msgid "The rate must be unique"
 msgstr "Le taux doit être unique"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_total_amount
-msgid "Total amount"
-msgstr "Montant total"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_total_weight
-msgid "Total weight"
-msgstr "Poid totale"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_import_cadencier_header_traite
-msgid "Traite"
-msgstr "Traite"
 
 #. module: specific_zelapro
 #: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_turnover
@@ -666,24 +425,6 @@ msgstr "Moyenne du chiffre d'affaire (nombre de lignes)"
 #: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_type
 msgid "Type"
 msgstr "Type"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_unit_in_box
-#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_unit_in_box
-msgid "Unit in box"
-msgstr "Nombre d'unités par boite"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_unit_in_fardage
-#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_unit_in_fardage
-msgid "Unit in fardage"
-msgstr "Nombre d'unités par fardage"
-
-#. module: specific_zelapro
-#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_unit_in_pallet
-#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_unit_in_pallet
-msgid "Unit in pallet"
-msgstr "Nombre d'unités par palette"
 
 #. module: specific_zelapro
 #: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form

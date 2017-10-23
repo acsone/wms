@@ -14,6 +14,7 @@ Unreleased
 * ALCN-973: add mapping for packaging quantities (box, pallet, shrink wrapping)
 * ALCN-989: automatize hot DB2 data import for INT and PROD
 * ALCN-981 - Set fridge route on product stocked in Q sector
+* ALCN-161: Add the export ZelAppro "Stock" and improve exports
 
 **Features and Improvements**
 * ALCN-946: Add tags on itinerary to easily target customers
@@ -70,8 +71,6 @@ Unreleased
 
 **Features and Improvements**
 [IMP] Do not group pickings when a specific carrier is defined on sales order
-* ALCN-161: Add the module import_manager
-* ALCN-161: Add the export ZelAppro "Stock"
 
 * [IMP] Do not group pickings when a specific carrier is defined on sales order
 * ALCN-865: Web service create web sale order

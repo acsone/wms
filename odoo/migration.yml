@@ -251,3 +251,4 @@ migration:
       addons:
         upgrade:
           - specific_stock
+          - specific_zelapro
