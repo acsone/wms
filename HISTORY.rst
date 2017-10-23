@@ -20,6 +20,8 @@ Unreleased
 
 **Build**
 
+* ALCN-985: Update all repositories
+
 **Documentation**
 
 * ALCN-984: Update readme for import_db2 scripts (update ssh command line)
