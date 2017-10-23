@@ -38,9 +38,8 @@ class RoundItinerary(models.Model):
         :return:
         """
 
-        partners = self.env['res.partner'].search([('name', operator, value)])
-        positions = self.env['round.itinerary.position']\
-            .search([('partner_id', 'in', partners.ids)])
+        positions = self.env['round.itinerary.position'].search(
+            [('partner_id.name', operator, value)])
 
         return [('partner_position_ids', 'in', positions.ids)]
 

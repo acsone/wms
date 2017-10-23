@@ -61,7 +61,7 @@ msgstr "Actions"
 #: code:addons/delivery_rounds/models/stock_move.py:112
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
-msgstr "Tous les pickings ayant le même distinataire doivent se trouver dans la même tournée"
+msgstr "Tous les prélèvements ayant le même distinataire doivent se trouver dans la même tournée"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -155,7 +155,7 @@ msgstr "Clients"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_date
 msgid "Date"
-msgstr "Date "
+msgstr "Date"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_is_default_version
@@ -348,7 +348,7 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_write_uid
 msgid "Last Updated by"
-msgstr "Derniere fois mis à jour par"
+msgstr "Denière mise à jour par"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_write_date
@@ -362,28 +362,28 @@ msgstr "Derniere fois mis à jour par"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Launch Pickings"
-msgstr "Démarrer les pickings"
+msgstr "Démarrer les prélèvements"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_available_round
 msgid "List of pickings attached to a delivery round."
-msgstr "Liste des pickings attachés à une tournée."
+msgstr "Liste des prélèvements attachés à une tournée."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_noround
 msgid "List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a itinerary."
-msgstr "Liste des pickings qui ne sont pas assignés à une tournée. Assurez-vous que l'adresse de livraison fait partie d'une zone."
+msgstr "Liste des prélèvements qui ne sont pas assignés à une tournée. Assurez-vous que l'adresse de livraison fait partie d'une zone."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_round
 msgid "List of pickings to process. Only pickings linked to confirmed delivery rounds are displayed."
-msgstr "Liste des pickings à processer. Uniquement les pickings liés à des tournées confirmées sont affichés."
+msgstr "Liste des prélèvements à processer. Uniquement les prélèvements liés à des tournées confirmées sont affichés."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_wizard_makeplan
@@ -458,22 +458,22 @@ msgstr "Nombre de destinations"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_total
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_weight
 msgid "Picking Available Total"
-msgstr "Total de picking disponibles"
+msgstr "Total de prélèvements disponibles"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_done_total
 msgid "Picking Done Total"
-msgstr "Total de picking réalisés"
+msgstr "Total de prélèvements réalisés"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_picking
 msgid "Picking Start Time"
-msgstr "Heure effective de lancement du picking"
+msgstr "Heure effective de lancement du prélèvement"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_picking_count
 msgid "Picking count"
-msgstr "Nombre de pickings"
+msgstr "Nombre de prélèvements"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_vpicktree_ro
@@ -485,13 +485,13 @@ msgstr "Bon de transfert"
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Pickings"
-msgstr "Préparations"
+msgstr "Prélèvements"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_time_picking_planned
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_time_picking_planned
 msgid "Planned Picking Start Time"
-msgstr "Heure prévue de lancement du picking"
+msgstr "Heure prévue de lancement du prélèvement"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_time_leave_planned
@@ -616,7 +616,7 @@ msgstr "Le client doit être unique dans une tournée"
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_stock_picking_type
 msgid "The picking type determines the picking view"
-msgstr "Le type de préparation détermine la vue de préparation"
+msgstr "Le type de prélèvement détermine la vue de prélèvement"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
@@ -667,7 +667,7 @@ msgstr "Poids"
 #: code:addons/delivery_rounds/models/round_template.py:25
 #, python-format
 msgid "You cannot have more than one default version at once."
-msgstr "Vous ne pouvez pas avoir plus de une version par défaut à la fois"
+msgstr "Vous ne pouvez pas avoir plus d'une version par défaut à la fois"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report

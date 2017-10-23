@@ -25,7 +25,7 @@
         'views/partner.xml',
         'views/delivery_carrier.xml',
         'views/sale_order.xml',  # kept for update - TODO: del in next release
-        'views/tag.xml',  # kept for update - TODO: del in next release
+        'views/tag.xml',
         # Data
         'data/sequence.xml',
         # Security

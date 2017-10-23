@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Julien Coux (Camptocamp)
+# Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -15,6 +15,8 @@ class TestRoundTags(TransactionCase):
     def setUp(self):
         super(TestRoundTags, self).setUp()
 
+        # Set all round instance to done to be sure that
+        # there are no other active instance
         self.env['round.instance'].search([]).write({
             'state': 'done',
         })
