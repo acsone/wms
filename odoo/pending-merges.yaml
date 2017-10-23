@@ -3,10 +3,19 @@
 #
 ./src:
   remotes:
+    odoo: git@github.com:odoo/odoo.git
     oca: git@github.com:OCA/OCB.git
     camptocamp: git@github.com:camptocamp/odoo.git
   merges:
     - oca 10.0
+    # [FIX] preserve prefetch
+    # for sudo switch in name_get compute on product_product
+    #
+    # Not sure that this PR is necessary,
+    # but maybe with it, we will increase performance.
+    # In all case, this PR can't hurt
+    #
+    - odoo refs/pull/19198/head
     # [FIX] allow defering of parent computation after load call
     - oca refs/pull/601/head
     # [FIX] Return the result of super in the method put_in_pack
