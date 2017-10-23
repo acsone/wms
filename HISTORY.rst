@@ -21,6 +21,7 @@ Unreleased
 **Build**
 
 * ALCN-985: Update all repositories
+* ALCN-985: Install cloud_platform_exoscale module after update repositories
 
 **Documentation**
 
