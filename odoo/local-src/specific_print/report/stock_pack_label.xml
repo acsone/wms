@@ -5,23 +5,20 @@
   <template id="stock_pick_packs_label_zebra_v1">
    <div class="raw">
     <t t-foreach="docs" t-as="pick">
-     <t t-foreach="pick.package_ids" t-as="pack">
-      <t t-set="nbr" t-value="pick.env.context['nbr']"/>
-      <t t-foreach="xrange(nbr)" t-as="nbridx">
+     <t t-set="packages" t-value="pick.mapped('pack_operation_ids.result_package_id')"/>
+     <t t-foreach="packages" t-as="package">
+      <t t-foreach="xrange(package.nbr_packages)" t-as="index">
        ^XA
        ^XFE:FORMAT.ZPL^FS
-       ^FN1^FD<t t-esc="pick.partner_id.name"/>^FS
-       ^FN2^FD<t t-esc="pick.delivery_round_id.template_id.code"/>^FS
-       ^FN3^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
-       ^FN4^FD^FS
-       ^FN5<t t-esc="nbridx"/>/<t t-esc="nbr"/>^FD^FS
-       ^FN6^FD<t t-esc="pick.delivery_round_id.display_name"/>^FS
-       ^FN7^FD<t t-esc="pack.name"/>^FS
-       ^FN8^FD<t t-esc="pick.checksum"/>^FS
-       ^FN9^FD<t t-esc="pick.delivery_round_id.date"/>^FS
-       ^FN10^FD^FS
-       ^PQ1
-       ^XZ</t></t></t>
+       ^FN1^FD<t t-esc="pick.delivery_round_id.template_id.code"/>^FS
+       ^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
+       ^FN3^FD<t t-esc="pick.partner_id.name[:29]"/>^FS
+       ^FN4^FD<t t-esc="package.name"/>^FS
+       ^FN5^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS
+       ^XZ
+      </t>
+     </t>
+    </t>
    </div>
   </template>
 

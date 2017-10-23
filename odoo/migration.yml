@@ -237,3 +237,5 @@ migration:
           - stock_picking_sequence
           - stock_receive_lot
           - stock_reception_priority
+          - specific_stock
+          - specific_print

@@ -21,6 +21,7 @@
         'views/printer.xml',
         'views/res_partner.xml',
         'wizards/stock_receive.xml',
+        'wizards/print_label.xml',
         'report/stock_product_label.xml',
         'report/stock_pack_label.xml',
         'report/stock_lot_label.xml',

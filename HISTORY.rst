@@ -15,6 +15,7 @@ Unreleased
 
 **Features and Improvements**
 * ALCN-946: Add tags on itinerary to easily target customers
+* ALCN-705: Update labels and improve the way to print labels (add printer code)
 
 **Bugfixes**
 

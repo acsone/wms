@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.print</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button class="oe_link oe_right"
+                    name="%(put_in_pack_helper_action)d" type="action"
+                    string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -64,8 +64,9 @@ class Print(DomainInterface):
         try:
             # Create a pack for this picking
             box = picking.put_in_pack()
-            # Set the number of packages for this picking
-            box.nbr_packages = quantity
+            if box:
+                # Set the number of packages for this picking
+                box.nbr_packages = quantity
         except Exception:
             pass
 
