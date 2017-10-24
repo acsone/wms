@@ -211,29 +211,6 @@ def activate_multicurrency(ctx):
 
 
 @anthem.log
-def create_financial_journals(ctx):
-    """ Creating financial journals """
-    records = [
-        {'xmlid': '__setup__.expense_journal',
-         'name': 'Expenses',
-         'code': 'EXP',
-         'type': 'purchase',
-         },
-        {'xmlid': '__setup__.wage_journal',
-         'name': 'Wage',
-         'code': 'WAG',
-         'type': 'purchase',
-         },
-    ]
-    for record in records:
-        xmlid = record.pop('xmlid')
-        record.update({
-            'company_id': ctx.env.ref('base.main_company').id,
-        })
-        create_or_update(ctx, 'account.journal', xmlid, record)
-
-
-@anthem.log
 def add_xmlid_account(ctx):
     accounts = ctx.env['account.account'].search([])
     for account in accounts:
@@ -405,7 +382,6 @@ def main(ctx):
     company_settings(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
-    create_financial_journals(ctx)
     add_xmlid_fiscal_position(ctx)
     settings(ctx)
     setup_sequences(ctx)
