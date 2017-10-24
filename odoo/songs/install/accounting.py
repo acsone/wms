@@ -148,6 +148,17 @@ def import_account_journal(ctx):
     default_bank = ctx.env['account.journal'].search([('name', '=', 'Bank')])
     default_bank.unlink()
 
+    # The journal "Miscellaneous Operations" doesn't have a XML ID
+    # and therefore cannot be exported in a PO file.
+    # We will write the journal with the language FR to translate it.
+    # Note: The write with an another language WILL NOT change
+    # the original journal name but only translate the name in French.
+    miscellaneous_operations = ctx.env['account.journal'].search(
+        [('name', '=', 'Miscellaneous Operations')])
+    miscellaneous_operations.with_context(lang='fr_BE').write({
+        'name': 'Opérations diverses'
+    })
+
     content = resource_stream(req, 'data/install/account.journal.csv')
     load_csv_stream(ctx, 'account.journal', content, delimiter=',')
 
