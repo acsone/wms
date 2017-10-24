@@ -225,6 +225,7 @@ migration:
       operations:
         pre:
           - anthem songs.update.update_10_11_0_pre::main
+          - anthem songs.install.accounting::import_account_journal
       addons:
         upgrade:
           ### local-src
