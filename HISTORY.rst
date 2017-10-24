@@ -22,6 +22,8 @@ Unreleased
 
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 
+* ALCN-161: Add the export ZelAppro "Stock" and improve exports
+
 **Bugfixes**
 * There is no fridge product category. This is a route selectable on the product.
 * Setup warehouse name, shorten picking type name (use warehouse code instead of name)
