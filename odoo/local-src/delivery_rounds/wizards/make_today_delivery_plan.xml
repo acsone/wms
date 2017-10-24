@@ -7,7 +7,8 @@
                 <form string="Make Today's Delivery Plan">
                     <group>
                         <field name="assign_moves"/>
-                        <field name="template_ids"/>
+                        <field name="version_id"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
                     </group>
                     <footer>
                         <button name="confirm"

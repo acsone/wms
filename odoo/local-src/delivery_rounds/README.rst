@@ -36,6 +36,10 @@ When confirmed, no new clients are added but existing clients that are not yet
 picked can add more pickings. When it's done, documents are printed and the
 truck leaves.
 
+You are able to assign tags to customers in an itinerary.
+If you use the wizard to create the daily round instance, you can also choose one or several tags.
+These tags will filter customers and allow you to create specific round.
+
 
 Installation
 ============

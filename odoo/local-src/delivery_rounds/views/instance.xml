@@ -119,6 +119,7 @@
                 <field name="template_id" />
                 <field name="name" />
                 <field name="state" />
+                <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
             </tree>
         </field>
     </record>
@@ -165,6 +166,7 @@
                         <group>
                             <field name="name"/>
                             <field name="itinerary_ids" widget="many2many_tags"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
                         </group>
                     </group>
                     <button name="button_itinerary_import" type="object" string="Import from itinerary"/>
