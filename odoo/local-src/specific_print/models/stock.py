@@ -18,7 +18,7 @@ def hw_print(self, report_xmlid, printer=False):
         printer.print_document(report, document, 'text')
     except UnicodeEncodeError as e:
         raise e
-    except:
+    except Exception:
         raise Warning(_('Printer unavailable'))
 
 
