@@ -16,7 +16,9 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+
 * Allow to create a lot at reception with standard interface
+* Fix new flake8 errors
 
 **Build**
 

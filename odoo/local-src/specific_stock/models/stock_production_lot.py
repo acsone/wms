@@ -129,7 +129,7 @@ class StockProductionLot(models.Model):
                 try:
                     shelf_code = int(shelf)
                     is_letter = False
-                except:
+                except Exception:
                     shelf_code = ord(shelf)
                     is_letter = True
 
