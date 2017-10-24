@@ -22,6 +22,7 @@ Unreleased
 
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 
+* ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
 
 **Bugfixes**
@@ -72,7 +73,6 @@ Unreleased
 * Update product categories with new categories
 
 **Features and Improvements**
-[IMP] Do not group pickings when a specific carrier is defined on sales order
 
 * [IMP] Do not group pickings when a specific carrier is defined on sales order
 * ALCN-865: Web service create web sale order
