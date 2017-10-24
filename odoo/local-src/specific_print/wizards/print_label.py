@@ -13,7 +13,9 @@ class PrintLabel(models.TransientModel):
                                   string='Label type',
                                   required=True)
     printer_number = fields.Char('Printer number')
-    picking_id = fields.Many2one('stock.picking', required=True)
+    picking_id = fields.Many2one('stock.picking',
+                                 string='Picking',
+                                 required=True)
 
     @api.multi
     def print_label(self):

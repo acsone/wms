@@ -94,7 +94,7 @@ msgstr "Derniere fois mis à jour par"
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: specific_print
 #: code:addons/specific_print/wizards/stock_receive.py:29

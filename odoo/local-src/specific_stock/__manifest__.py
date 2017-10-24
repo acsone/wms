@@ -40,6 +40,7 @@
         'wizards/stock_backorder_choice.xml',
         'wizards/put_in_pack_helper.xml',
 
+        # Views (loaded after wizards)
         'views/stock_picking.xml',
 
         # Security
