@@ -8,28 +8,58 @@ from datetime import date
 import anthem
 from odoo import fields
 
+"""
+Songs to start the DB2 data importers to avoid the manual operation
 
-PROD_IMPORTER_REFS = [
-    'db2_import.db2_sale_importer',
-    'db2_import.db2_purchase_importer',
+Different importers will be launched depending on environment:
+
+    PROD:
+    + 2 years of sales
+    + 2 years of purchases
+    INT:
+    + 3 months of sales
+    + 3 months of purchases
+    + 2 years of sales for 10 clients
+
+"""
+
+# importer refs with number of years, number of months
+PROD_IMPORTER = [
+    {'ref': 'db2_import.db2_sale_importer',
+     'years': 2,
+     'months': 0},
+    {'ref': 'db2_import.db2_purchase_importer',
+     'years': 2,
+     'months': 0},
 ]
 
-INT_IMPORTER_REFS = [
-    'db2_import.db2_importer_10_clients'
+INT_IMPORTER = [
+    {'ref': 'db2_import.db2_sale_importer',
+     'years': 0,
+     'months': 3},
+    {'ref': 'db2_import.db2_purchase_importer',
+     'years': 0,
+     'months': 3},
+    {'ref': 'db2_import.db2_importer_10_clients',
+     'years': 2,
+     'months': 0},
 ]
 
 
-def add_years(d, years):
+def add_years(d, years, months):
     """ Return a new date with added x years
 
     Take care of unexisting 29th February and replace it by 1st March
 
     """
     try:
-        return d.replace(year=d.year + years)
+        return d.replace(year=d.year + years, month=d.month + months)
     except Exception:
         # (just in case of unexisting 29th February take 1rst March)
-        return d.replace(year=d.years + years, month=d.month + 1, day=1)
+        return d.replace(
+            year=d.years + years,
+            month=d.month + months + 1,
+            day=1)
 
 
 @anthem.log
@@ -41,31 +71,24 @@ def main(ctx):
 
     We have a different behavior between integration and production database
 
-    Production: all sales and purchases for 2 years
-    Integration: sales for 10 clients for 2 years
-
-
     """
 
     env = os.environ.get("RUNNING_ENV")
     if env == 'production':
-        years = 2
-        importers = [ctx.env.ref(ref) for ref in PROD_IMPORTER_REFS]
+        importers = PROD_IMPORTER
     elif env == 'integration':
-        years = 2
-        importers = [ctx.env.ref(ref) for ref in INT_IMPORTER_REFS]
+        importers = INT_IMPORTER
     else:
         # Don't automatically launch in dev/test env
         return
 
     today = date.today()
     end_date_str = fields.Date.to_string(today)
-    __import__('pdb').set_trace()
-    # x years ago
-    start_date = add_years(today, -years)
-    start_date_str = fields.Date.to_string(start_date)
 
-    for rec in importers:
+    for data in importers:
+        rec = ctx.env.ref(data['ref'])
+        start_date = add_years(today, -data['years'], -data['months'])
+        start_date_str = fields.Date.to_string(start_date)
         rec.write({
             'mode': 'history',
             'date_start': start_date_str,
