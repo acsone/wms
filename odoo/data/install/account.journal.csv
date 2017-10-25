@@ -11,4 +11,5 @@ __setup__.account_journal_nc_supplier,,,Note de Crédit Fournisseur,1,0,1,Purcha
 __setup__.account_journal_nc_customer,,,Note de Crédit Client,1,0,1,Sale refund,,__setup__.account_400000,__setup__.account_400000,False,NCV
 __setup__.account_journal_nc_cd,,,Note de Crédit sur VD,1,0,1,Sale refund,,__setup__.account_400000,__setup__.account_400000,False,NCVD
 __setup__.account_journal_ventes_diverses,,,Ventes Diverses,1,0,1,Sale,,__setup__.account_400000,__setup__.account_400000,False,VD
-__setup__.account_journal_op_diverses,,,Opérations Diverses,1,0,1,Miscellaneous,,,,False,OD
+__setup__.expense_journal,,,Expenses,,,,purchase,,,,,EXP
+__setup__.wage_journal,,,Wage,,,,purchase,,,,,WAG

@@ -148,8 +148,27 @@ def import_account_journal(ctx):
     default_bank = ctx.env['account.journal'].search([('name', '=', 'Bank')])
     default_bank.unlink()
 
+    # The journal "Miscellaneous Operations" doesn't have a XML ID
+    # and therefore cannot be exported in a PO file.
+    # We will write the journal with the language FR to translate it.
+    # Note: The write with an another language WILL NOT change
+    # the original journal name but only translate the name in French.
+    miscellaneous_operations = ctx.env['account.journal'].search(
+        [('name', '=', 'Miscellaneous Operations')])
+    miscellaneous_operations.with_context(lang='fr_BE').write({
+        'name': 'Opérations Diverses'
+    })
+
     content = resource_stream(req, 'data/install/account.journal.csv')
     load_csv_stream(ctx, 'account.journal', content, delimiter=',')
+
+    # Odoo will load this journal and create an translation in French
+    # However even if you load the extra_i18n file, Odoo will not
+    # overwrite the translation.
+    wage_journal = ctx.env.ref('__setup__.wage_journal')
+    wage_journal.with_context(lang='fr_BE').write({
+        'name': 'Salaire'
+    })
 
     # Set the flag "update_posted" on following journals
     # These journals have no XMLid
@@ -189,29 +208,6 @@ def activate_multicurrency(ctx):
     employee_group.write({
         'implied_ids': [(4, ctx.env.ref('base.group_multi_currency').id)]
     })
-
-
-@anthem.log
-def create_financial_journals(ctx):
-    """ Creating financial journals """
-    records = [
-        {'xmlid': '__setup__.expense_journal',
-         'name': 'Expenses',
-         'code': 'EXP',
-         'type': 'purchase',
-         },
-        {'xmlid': '__setup__.wage_journal',
-         'name': 'Wage',
-         'code': 'WAG',
-         'type': 'purchase',
-         },
-    ]
-    for record in records:
-        xmlid = record.pop('xmlid')
-        record.update({
-            'company_id': ctx.env.ref('base.main_company').id,
-        })
-        create_or_update(ctx, 'account.journal', xmlid, record)
 
 
 @anthem.log
@@ -386,7 +382,6 @@ def main(ctx):
     company_settings(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
-    create_financial_journals(ctx)
     add_xmlid_fiscal_position(ctx)
     settings(ctx)
     setup_sequences(ctx)

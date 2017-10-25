@@ -16,6 +16,8 @@ Unreleased
 **Features and Improvements**
 * ALCN-946: Add tags on itinerary to easily target customers
 
+* ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
+
 **Bugfixes**
 
 * Allow to create a lot at reception with standard interface
