@@ -37,6 +37,7 @@ migration:
           - anthem songs.install.partner::main
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
+          - anthem songs.install.db2_import::main
       modes:
         full:
           operations:
