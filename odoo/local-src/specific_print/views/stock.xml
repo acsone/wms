@@ -9,11 +9,11 @@
         <field name="arch" type="xml">
             <button name="put_in_pack" position="after">
                 <button class="oe_link oe_right"
-                    name="print_packages_label" type="object"
-                    string="&#128438;Print Packs" />
+                    name="%(print_label_action)d" type="action"
+                    string="&#128438;Print Packs" context="{'default_label_type': 'package', 'default_picking_id': active_id}"/>
                 <button class="oe_link oe_right"
-                    name="print_products_label" type="object"
-                    string="&#128438;Print Products" />
+                    name="%(print_label_action)d" type="action"
+                    string="&#128438;Print Products" context="{'default_label_type': 'product', 'default_picking_id': active_id}"/>
             </button>
         </field>
     </record>

@@ -6,7 +6,9 @@
 Stock Print
 ===========
 
-Print stock labels and package labels
+Print stock labels and package labels.
+* Add a wizard to easily print product labels and package labels.
+
 
 Installation
 ============

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-06 06:35+0000\n"
-"PO-Revision-Date: 2017-09-06 06:35+0000\n"
+"POT-Creation-Date: 2017-10-17 09:26+0000\n"
+"PO-Revision-Date: 2017-10-17 09:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,7 @@ msgid "Box"
 msgstr "Boite"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 #: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
 msgid "Cancel"
 msgstr "Annuler"
@@ -108,16 +109,18 @@ msgid "Create backorder"
 msgstr "Créer reliquat"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_date
 msgid "Created on"
-msgstr "Date"
+msgstr "Créé le"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
@@ -146,6 +149,7 @@ msgid "Delay between two inventory for other products"
 msgstr "Delais entre deux inventaires pour les autres produits"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_display_name
 msgid "Display Name"
@@ -188,6 +192,7 @@ msgid "Helpdesk ticket reason"
 msgstr "Cause du ticket helpdesk"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_id
 msgid "ID"
@@ -210,22 +215,25 @@ msgid "Is helpdesk ticket to create?"
 msgstr "Ticket helpdesk à créer ?"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Derniere fois mis à jour par"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_date
 msgid "Last Updated on"
-msgstr "Modifié le"
+msgstr "Dernière mise à jour le"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_date_last_inventory
@@ -269,6 +277,7 @@ msgid "Number of open days"
 msgstr "Nombre de jours ouvrés"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_nbr_packages
 #: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
 msgid "Number of packages"
 msgstr "Nombre de paquets"
@@ -284,16 +293,17 @@ msgid "Packing Operation"
 msgstr "Colisage"
 
 #. module: specific_stock
-#: model:ir.model,name:specific_stock.model_stock_quant_package
-msgid "Physical Packages"
-msgstr "Colis physiques"
-
-#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_quant_package
+msgid "Physical Packages"
+msgstr "Colis physiques"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_picking_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_picking_id
 #: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
 msgid "Picking"
@@ -351,6 +361,17 @@ msgstr "Délai d'utilisation optimale"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_is_purchase_back_order_accepted
 msgid "Purchase back order accepted"
 msgstr "Reliquat pour les achats accepté"
+
+#. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.put_in_pack_helper_action
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+msgid "Put in Pack"
+msgstr "Ajouter au colis"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+msgid "Put in Pack helper"
+msgstr "Aide pour l'ajout au colis"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_percent
@@ -472,6 +493,11 @@ msgid "Zone"
 msgstr "Zone"
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_put_in_pack_helper
+msgid "put.in.pack.helper"
+msgstr "put.in.pack.helper"
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_backorder_choice
 msgid "stock.backorder.choice"
 msgstr "stock.backorder.choice"
@@ -490,4 +516,9 @@ msgstr "stock.config.settings"
 #: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
+msgid "↳Put in Pack"
+msgstr "↳Ajouter au colis"
 

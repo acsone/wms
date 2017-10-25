@@ -33,6 +33,25 @@ class StockPackOperation(models.Model):
         hw_print(self, 'specific_print.report_stock_product_label',
                  printer=printer)
 
+    @api.multi
+    def get_qty_by_lot(self):
+        """
+        This method will return the quantity by lot.
+        If the product is not track by lot
+        we return the quantity done without lot
+        :return:
+        """
+        self.ensure_one()
+
+        if not self.pack_lot_ids:
+            return [(int(self.qty_done), None)]
+
+        result = []
+        for pack in self.pack_lot_ids:
+            result.append((int(pack.qty), pack.lot_id))
+
+        return result
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'

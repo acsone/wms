@@ -239,3 +239,5 @@ migration:
           - stock_receive_lot
           - stock_reception_priority
           - specific_account
+          - specific_stock
+          - specific_print

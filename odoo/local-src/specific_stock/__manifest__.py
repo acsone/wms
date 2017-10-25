@@ -34,10 +34,14 @@
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
-        'wizards/stock_receive_lot.xml',
 
         # Wizards
+        'wizards/stock_receive_lot.xml',
         'wizards/stock_backorder_choice.xml',
+        'wizards/put_in_pack_helper.xml',
+
+        # Views (loaded after wizards)
+        'views/stock_picking.xml',
 
         # Security
         'security/ir.model.access.csv',

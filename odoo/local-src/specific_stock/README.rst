@@ -18,6 +18,8 @@ This module adds Alcyon specific fields and logic for stock.
 * Allow to manage backorders with helpedsk
   * On sale order picking, use a checkbox on partner to decide if we want backorder or not (That checkbox will be used directly in the sale order to raise (or not) an exception)
   * On purchase order picking, use a new wizard when picking is validated to know what we want (helpdesk creation or not? keep backorder or not?)
+* Move the button "Put in Pack" in the form's header
+
 
 Credits
 =======
