@@ -8,6 +8,7 @@ import anthem
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
 from ..common import req
+from data_full import post_import_stock_bins
 
 
 @anthem.log
@@ -193,3 +194,4 @@ def main(ctx):
     import_inventory(ctx)
     import_stock_bins(ctx)
     import_delivery_round_config(ctx)
+    post_import_stock_bins(ctx)
