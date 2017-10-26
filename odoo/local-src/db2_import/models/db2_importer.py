@@ -183,6 +183,8 @@ class DB2MapperPurchaseOrder(object):
                )}
 
         create_date = convert_date('ecfc', row)
+        supplier = rec.env.ref(convert_supplier(int(row['ecffou'])))
+        promo_purchase = supplier.supplier_promotion_purchase_allowed
 
         # FIXME Don't take user for now as we don't have related users
         # user_xmlid = convert_user(row['ecfuti'])
@@ -195,7 +197,8 @@ class DB2MapperPurchaseOrder(object):
             'date_order': convert_date('ecfd', row),
             'create_date': create_date,
             'write_date': convert_date('ecfm', row) or create_date,
-            'partner_id': rec.env.ref(convert_supplier(int(row['ecffou']))).id,
+            'partner_id': supplier.id,
+            'supplier_promotion_allowed ': promo_purchase,
         }
 
         # transform float and string to int to remove . and spaces
@@ -314,6 +317,8 @@ class DB2MapperSaleOrder(object):
                )}
 
         create_date = convert_date('eccc', row)
+        customer = rec.env.ref(convert_customer(int(row['ecccli'])))
+        promo_sale = customer.supplier_promotion_sale_allowed
 
         user_xmlid = convert_user(row['eccrep'])
         values = {
@@ -326,7 +331,8 @@ class DB2MapperSaleOrder(object):
             'create_date': create_date,
             'confirmation_date': convert_date('eccd', row),
             'write_date': convert_date('eccm', row) or create_date,
-            'partner_id': rec.env.ref(convert_customer(int(row['ecccli']))).id,
+            'partner_id': customer.id,
+            'supplier_promotion_allowed': promo_sale,
         }
 
         # transform float and string to int to remove . and spaces
