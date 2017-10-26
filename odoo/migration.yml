@@ -37,7 +37,6 @@ migration:
           - anthem songs.install.partner::main
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
-          - anthem songs.install.db2_import::main
       modes:
         full:
           operations:
@@ -58,6 +57,7 @@ migration:
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
+              - anthem songs.install.db2_import::main
           addons:
             upgrade:
               - db2_import
