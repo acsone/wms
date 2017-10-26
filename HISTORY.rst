@@ -14,12 +14,16 @@ Unreleased
 * ALCN-973: add mapping for packaging quantities (box, pallet, shrink wrapping)
 * ALCN-989: automatize hot DB2 data import for INT and PROD
 * ALCN-981 - Set fridge route on product stocked in Q sector
+* ALCN-161: Add the export ZelAppro "Stock" and improve exports
 
 **Features and Improvements**
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-705: Update labels and improve the way to print labels (add printer code)
 
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
+
+* ALCN-946: Add tags on itinerary to easily target customers
+* ALCN-161: Add the export ZelAppro "Stock" and improve exports
 
 **Bugfixes**
 * There is no fridge product category. This is a route selectable on the product.

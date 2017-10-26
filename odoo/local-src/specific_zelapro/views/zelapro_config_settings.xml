@@ -16,6 +16,10 @@
                 </group>
                 <group string="ABC">
                     <field name="turnover_delay"/>
+                    <button string="Update all ABC code" type="object" name="recompute_all_business_unit_id"/>
+                </group>
+                <group string="Business Unit">
+                    <button string="Compute all Business Unit" type="object" name="recompute_all_abc_code"/>
                 </group>
             </form>
         </field>

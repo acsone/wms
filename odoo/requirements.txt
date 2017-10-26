@@ -15,3 +15,6 @@ paramiko==2.2.1
 
 # db2 odbc
 pyodbc==3.0.10
+
+iconv
+cchardet

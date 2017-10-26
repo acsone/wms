@@ -23,8 +23,12 @@ ACCESSORY_LINE_NO_KEY = 'SFANLA'
 MAIN_PRODUCT_SUPPLIER_KEY = 'SFASUP'
 MAIN_PRODUCT_LINE_NO_KEY = 'SFANLP'
 
-# Lots export keys
-PRODUCT_QTY_ON_LOT_KEY = 'LOTACT'
+# Stock export keys
+STOCK_QTY_ON_HAND_KEY = 'STOSTO'
+STOCK_QTY_RESERVED_KEY = 'STORES'
+STOCK_QTY_AVAILABLE_KEY = 'STODIS'
+STOCK_QTY_BO_KEY = 'STOBOR'
+STOCK_OLDER_BO_KEY = 'PLUS_ANCIEN_BO'
 
 
 class ZelaproExport(models.Model):
@@ -145,9 +149,7 @@ class ZelaproExport(models.Model):
             })
 
             try:
-                fname = date.strftime(date.today(),
-                                      '%Y%m%d') + '_%s' % export.file_name
-                file_path = os.path.join(export_path, fname)
+                file_path = os.path.join(export_path, export.file_name)
 
                 # If there is a data age on this export
                 # we will compute the minimum creation date according
@@ -195,7 +197,7 @@ class ZelaproExport(models.Model):
                     raise NotImplementedError('The export type %s is '
                                               'not implemented' % export.type)
 
-                with open(file_path, 'wb+') as csv_file:
+                with open(file_path, 'wb') as csv_file:
                     writer = csv.writer(csv_file, delimiter=str(delimiter))
                     writer.writerow(header)
                     for row in rows:
@@ -230,7 +232,7 @@ class ZelaproExport(models.Model):
         the view SQL 'zelapro_export_cadencier' (like other exports)
 
         Step 2:
-        Retrieve all required values with the method read on product templates
+        Retrieve all required values with the method read on product
 
         Step 3:
         Replace these values (from step 2) in the result of the query (step 1)
@@ -266,35 +268,44 @@ class ZelaproExport(models.Model):
         ########################################
         # Step 2 : Retrieve values on products #
         ########################################
-        product_tmpl_ids_query = """
-        SELECT DISTINCT product_tmpl_id
-        FROM product_supplierinfo
+        product_ids_query = """
+        SELECT DISTINCT product_id
+        FROM zelapro_export_cadencier
         """
 
         if min_creation_date_str:
-            product_tmpl_ids_query += " WHERE create_date > '%s'" % \
+            product_ids_query += " WHERE create_date > '%s'" % \
                                       (min_creation_date_str)
-        self.env.cr.execute(product_tmpl_ids_query)
+        self.env.cr.execute(product_ids_query)
 
-        product_tmpl_ids = [x[0] for x in self.env.cr.fetchall()]
-        product_tmpls = self.env['product.template'].browse(product_tmpl_ids)
-        product_tmpl_values = product_tmpls.read(['qty_available',
-                                                  'virtual_available',
-                                                  'immediately_usable_qty',
-                                                  'additional_product_id'])
+        product_ids = [x[0] for x in self.env.cr.fetchall()]
+        products = self.env['product.product'].browse(product_ids)
+        products_values = products.read(['qty_available',
+                                         'outgoing_qty',
+                                         'additional_product_id'])
         values_by_product = {}
-        for value in product_tmpl_values:
-            values_by_product[value['id']] = {
-                'qty_available': value['qty_available'],
-                'virtual_available': value['virtual_available'],
-                'immediately_usable_qty': value['immediately_usable_qty'],
-                'additional_product_id': value['additional_product_id'],
+        for product_values in products_values:
+            qty_on_hand = product_values['qty_available']
+            outgoing_qty = product_values['outgoing_qty']
+            qty_available = qty_on_hand - outgoing_qty
+
+            if qty_available < 0:
+                qty_bo = -1 * qty_available
+            else:
+                qty_bo = 0
+
+            values_by_product[product_values['id']] = {
+                'qty_on_hand': qty_on_hand,
+                'outgoing_qty': outgoing_qty,
+                'qty_bo': qty_bo,
+                'additional_product_id':
+                    product_values['additional_product_id'],
             }
 
         ################################################
         # Step 3 : Insert result from step 2 in result #
         ################################################
-        header.remove('PRODUCT_TMPL_ID')
+        header.remove('PRODUCT_ID')
         product_index_index = header.index(PRODUCT_INDEX_KEY)
         product_on_hand_index = header.index(PRODUCT_ON_HAND_KEY)
         product_bo_qty_index = header.index(PRODUCT_BO_QTY_KEY)
@@ -308,7 +319,7 @@ class ZelaproExport(models.Model):
         previous_supplier = None
         for line in result:
             row = list(line)
-            product_tmpl_id = int(row.pop())
+            product_id = int(row.pop())
 
             # The product_index is a way to order products in the CSV file.
             # The first column of the CSV is the supplier ID.
@@ -332,25 +343,27 @@ class ZelaproExport(models.Model):
             additional_product_id = None
             qty_on_hand = qty_reserved = qty_bo = 0
             additional_product_index = additional_product_supplier = 0
-            if product_tmpl_id in values_by_product:
-                value = values_by_product[product_tmpl_id]
-                qty_on_hand = value['qty_available']
-                # Qty reserved == Qty on hand - Qty Forecast
-                qty_reserved = qty_on_hand - value['virtual_available']
+            if product_id in values_by_product:
+                value = values_by_product[product_id]
+                qty_on_hand = value['qty_on_hand']
+                qty_reserved = value['outgoing_qty']
+                qty_bo = value['qty_bo']
 
-                additional_product_id = value['additional_product_id']
-                if additional_product_id:
-                    additional_product_index = product_index + 1
-                    additional_product_supplier = supplier_id
-
-                # Compute the qty in BO for this product
-                # Take the value of "Qty available"
-                # If the value is less than zero, it means that
-                qty_available = value['immediately_usable_qty']
-                if qty_available >= 0:
-                    qty_bo = 0
-                else:
-                    qty_bo = qty_available * -1
+                additional_product_tmpl_id = value['additional_product_id']
+                if additional_product_tmpl_id:
+                    additional_product_tmpl_id = additional_product_tmpl_id[0]
+                    add_product_id_query = """
+                    SELECT min(id)
+                    FROM product_product
+                    WHERE product_tmpl_id = %s
+                    """
+                    self.env.cr.execute(add_product_id_query,
+                                        (additional_product_tmpl_id, ))
+                    add_product_id_result = self.env.cr.fetchone()
+                    if add_product_id_result:
+                        additional_product_id = add_product_id_result[0]
+                        additional_product_index = product_index + 1
+                        additional_product_supplier = supplier_id
 
             row[product_index_index] = product_index
             row[product_on_hand_index] = qty_on_hand
@@ -382,7 +395,7 @@ class ZelaproExport(models.Model):
                 FROM zelapro_export_cadencier
                 WHERE zelapro_export_cadencier.SFDART = (
                     SELECT default_code
-                    FROM product_template
+                    FROM product_product
                     WHERE id = %s
                   )
                 AND zelapro_export_cadencier.SFDSUI = %s;
@@ -393,39 +406,34 @@ class ZelaproExport(models.Model):
 
                 if result:
                     # Step 3.2
-                    add_row = list(line)
+                    add_row = list(result)
                     # Remove create_date
-                    row.pop()
-                    add_product_tmpl_id = int(row.pop())
-
-                    add_product_index = product_index + 1
+                    add_row.pop()
+                    add_product_id = int(add_row.pop())
 
                     # Step 3.3
-                    add_product_tmpl = self.env['product.template'].browse(
-                        add_product_tmpl_id
+                    add_product = self.env['product.product'].browse(
+                        add_product_id
                     )
-                    add_product_tmpl_values = \
-                        add_product_tmpl.read(['qty_available',
-                                               'virtual_available',
-                                               'immediately_usable_qty',
-                                               'additional_product_id'])
-                    add_values = add_product_tmpl_values[0]
+                    add_product_values = add_product.read(['qty_available',
+                                                           'outgoing_qty'])
+                    if not add_product_values:
+                        _logger.error('Cannot find the add product with id %s',
+                                      add_product_id)
+                        continue
+                    add_values = add_product_values[0]
 
                     add_qty_on_hand = add_values['qty_available']
                     # Qty reserved == Qty on hand - Qty Forecast
                     add_qty_reserved = \
-                        add_qty_on_hand - add_values['virtual_available']
+                        add_qty_on_hand - add_values['outgoing_qty']
 
-                    # Compute the qty in BO for this product
-                    # Take the value of "Qty available"
-                    # If the value is less than zero, it means that
-                    add_qty_available = add_values['immediately_usable_qty']
-                    if add_qty_available >= 0:
+                    if add_qty_reserved >= 0:
                         add_qty_bo = 0
                     else:
-                        add_qty_bo = add_qty_available * -1
+                        add_qty_bo = add_qty_reserved * -1
 
-                    add_row[product_index_index] = add_product_index
+                    add_row[product_index_index] = additional_product_index
                     add_row[product_on_hand_index] = add_qty_on_hand
                     add_row[product_reserved_index] = add_qty_reserved
                     add_row[product_bo_qty_index] = add_qty_bo
@@ -442,15 +450,15 @@ class ZelaproExport(models.Model):
         return header, rows
 
     @api.multi
-    def export_lots(self, min_creation_date_str=None):
+    def export_stocks(self, min_creation_date_str=None):
         """
-        Export lots.
+        Export stocks.
         This export need to retrieve some values from the ORM
         (values not reachable from SQL).
 
         Step 1:
         To improve the execution time we will export all other values with
-        the view SQL 'zelapro_export_lots' (like other exports)
+        the view SQL 'zelapro_export_stock' (like other exports)
 
         Step 2:
         Retrieve all required values with the method read on lot
@@ -466,18 +474,18 @@ class ZelaproExport(models.Model):
         # Step 1 : Execute SQL view #
         #############################
         columns_query = """
-                SELECT column_name
-                FROM information_schema.columns
-                WHERE table_name = 'zelapro_export_lots'
-                ORDER BY ordinal_position;
-                """
+                    SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_name = 'zelapro_export_stock'
+                    ORDER BY ordinal_position;
+                    """
         self.env.cr.execute(columns_query)
         header = [x[0].upper() for x in self.env.cr.fetchall()]
         # Each Zelapro export should have a column create_date
         # However we don't want to have this column in the CSV
         header.remove('CREATE_DATE')
 
-        query = "SELECT %s FROM zelapro_export_lots" % (','.join(header))
+        query = "SELECT %s FROM zelapro_export_stock" % (','.join(header))
 
         if min_creation_date_str:
             query += " WHERE create_date > '%s'" % \
@@ -486,40 +494,72 @@ class ZelaproExport(models.Model):
 
         result = self.env.cr.fetchall()
 
-        ####################################
-        # Step 2 : Retrieve values on lots #
-        ####################################
-        domain = [('is_archived', '=', False)]
+        ########################################
+        # Step 2 : Retrieve values on products #
+        ########################################
+        product_ids_query = """
+        SELECT DISTINCT product_id FROM zelapro_export_stock
+        """
 
         if min_creation_date_str:
-            domain.append(('creation_date', '>', min_creation_date_str))
-        lots = self.env['stock.production.lot'].search(domain)
-        lot_values = lots.read(['product_qty'])
+            product_ids_query += " WHERE create_date > '%s'" % \
+                                 (min_creation_date_str)
 
-        values_by_lot = {}
-        for value in lot_values:
-            values_by_lot[value['id']] = {
-                'product_qty': value['product_qty'],
+        self.env.cr.execute(product_ids_query)
+
+        product_ids = [x[0] for x in self.env.cr.fetchall()]
+        products = self.env['product.product'].browse(product_ids)
+        products_values = products.read(['qty_available',
+                                         'outgoing_qty'])
+        values_by_product_id = {}
+        for product_values in products_values:
+            qty_on_hand = product_values['qty_available']
+            outgoing_qty = product_values['outgoing_qty']
+            qty_available = qty_on_hand - outgoing_qty
+
+            if qty_available < 0:
+                qty_bo = -1 * qty_available
+            else:
+                qty_bo = 0
+
+            values_by_product_id[product_values['id']] = {
+                'qty_on_hand': qty_on_hand,
+                'outgoing_qty': outgoing_qty,
+                'qty_available': qty_available,
+                'qty_bo': qty_bo,
             }
 
         ################################################
         # Step 3 : Insert result from step 2 in result #
         ################################################
-        header.remove('LOT_ID')
-        product_qty_on_lot = header.index(PRODUCT_QTY_ON_LOT_KEY)
+        header.remove('PRODUCT_ID')
+        stock_qty_on_hand_index = header.index(STOCK_QTY_ON_HAND_KEY)
+        stock_qty_reserved_index = header.index(STOCK_QTY_RESERVED_KEY)
+        stock_qty_available_index = header.index(STOCK_QTY_AVAILABLE_KEY)
+        stock_qty_bo_index = header.index(STOCK_QTY_BO_KEY)
+        stock_older_bo_index = header.index(STOCK_OLDER_BO_KEY)
 
         rows = []
         for line in result:
             row = list(line)
-            lot_id = int(row.pop())
+            product_id = int(row.pop())
 
-            if lot_id in values_by_lot:
-                value = values_by_lot[lot_id]
-                product_qty = value['product_qty']
+            if product_id in values_by_product_id:
+                value = values_by_product_id[product_id]
+                qty_on_hand = value['qty_on_hand']
+                outgoing_qty = value['outgoing_qty']
+                qty_available = value['qty_available']
+                qty_bo = value['qty_bo']
             else:
-                product_qty = 0
+                qty_on_hand = outgoing_qty = qty_available = qty_bo = 0
 
-            row[product_qty_on_lot] = product_qty
+            if not qty_bo:
+                row[stock_older_bo_index] = ''
+
+            row[stock_qty_on_hand_index] = qty_on_hand
+            row[stock_qty_reserved_index] = outgoing_qty
+            row[stock_qty_available_index] = qty_available
+            row[stock_qty_bo_index] = qty_bo
             rows.append(row)
 
         return header, rows

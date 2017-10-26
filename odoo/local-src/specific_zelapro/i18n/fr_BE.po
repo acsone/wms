@@ -1,0 +1,474 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* specific_zelapro
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-23 13:59+0000\n"
+"PO-Revision-Date: 2017-10-23 13:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_zelapro
+#: model:ir.actions.act_window,name:specific_zelapro.activity_based_costing_action
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_abc_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_abc_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_abc_id
+#: model:ir.ui.menu,name:specific_zelapro.menu_activity_based_costing
+#: model:ir.ui.view,arch_db:specific_zelapro.product_template_form_view
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "ABC"
+msgstr "ABC"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_active
+msgid "Active"
+msgstr "Actif"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_data_age
+msgid "Age of data in months (0 for unlimited)"
+msgstr "Age des données en mois (0 pour illimité)"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "Apply"
+msgstr "Appliquer"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_category_is_business_unit
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "Business Unit"
+msgstr "Business Unit"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_business_unit_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_business_unit_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_business_unit_id
+msgid "Business unit"
+msgstr "Business unit"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_turnover_delay
+msgid "CA computation delay (in months)"
+msgstr "Durée pour le calcul du chiffre d'affaire (en mois)"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_wizard_view_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:421
+#, python-format
+msgid "Cannot find the add product with id %s"
+msgstr "Impossible de trouver le produit additionnel avec l'ID %s"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_code
+msgid "Code"
+msgstr "Code"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "Compute all Business Unit"
+msgstr "Calculer toutes les Business Unit"
+
+#. module: specific_zelapro
+#: model:ir.actions.act_window,name:specific_zelapro.action_zelapro_config_settings
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "Configure Zelapro"
+msgstr "Configurer Zelapro"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_create_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_create_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_create_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_create_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_create_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_create_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_create_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_create_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_date_go_live
+msgid "Date GO live"
+msgstr "Date du GO live"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_date_end
+msgid "Date end"
+msgstr "Date de fin"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_last_export_datetime
+msgid "Date last export"
+msgstr "Date du dernier export"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_date_start
+msgid "Date start"
+msgstr "Date de début"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_delimiter
+msgid "Delimiter"
+msgstr "Délimiteur"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_display_name
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_display_name
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_display_name
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_display_name
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_duration
+msgid "Duration"
+msgstr "Durée"
+
+#. module: specific_zelapro
+#: selection:zelapro.export.line,state:0
+msgid "Error"
+msgstr "Erreur"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_view_form
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_view_tree
+msgid "Execute export"
+msgstr "Exécuter l'export"
+
+#. module: specific_zelapro
+#: model:ir.actions.act_window,name:specific_zelapro.act_zelapro_execute_exports
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_wizard_view_form
+msgid "Execute exports"
+msgstr "Exécuter les exports"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_zelapro_export_id
+msgid "Export"
+msgstr "Exporter"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_export_path
+msgid "Export path"
+msgstr "Chemin d'export"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_export_ids
+#: model:ir.ui.menu,name:specific_zelapro.menu_zelapro_export
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_wizard_view_form
+msgid "Exports"
+msgstr "Exports"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_file_name
+msgid "File name"
+msgstr "Nom du fichier"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_id
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.product_template_form_view
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing___last_update
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings___last_update
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export___last_update
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line___last_update
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_write_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_write_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_write_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_write_uid
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_write_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_config_settings_write_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_write_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_wizard_write_date
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_last_export
+msgid "Last export"
+msgstr "Dernier export"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_last_export_state
+msgid "Last export state"
+msgstr "Etat du dernier export"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_line_view_form
+msgid "Line"
+msgstr "Ligne"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_ids
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_view_form
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_stock_maximum
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_stock_maximum
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_stock_maximum
+msgid "Maximum stock"
+msgstr "Stock maximum"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_message
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_line_view_form
+msgid "Message"
+msgstr "Message"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_method
+#: selection:zelapro.export,type:0
+msgid "Method"
+msgstr "Méthode"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_stock_minimum
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_stock_minimum
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_stock_minimum
+msgid "Minimum stock"
+msgstr "Stock minimum"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_nbr_lines
+msgid "Number of lines"
+msgstr "Nombre de lignes"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_nbr_products
+msgid "Number of products"
+msgstr "Nombre de produits"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_nbr_products_prc
+msgid "Number of products in percent"
+msgstr "Nombre de produits en %"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/product_product.py:165
+#, python-format
+msgid "Please define a least one ABC rate"
+msgstr "Veuillez définir au moins un taux ABC"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:128
+#, python-format
+msgid "Please define the date go live in the Zelapro configuration before execute exports"
+msgstr "Veuillez définir la date du GO live dans la configuration de ZelAppro avant d'exécuter les exports"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/wizard/zelapro_export_wizard.py:26
+#, python-format
+msgid "Please select at least one export"
+msgstr "Veuillez sélectioner au moins un export"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:141
+#, python-format
+msgid "Please set a delimiter in Zelapro config"
+msgstr "Veuillez définir le délimiteur dans la configuration de ZelAppro"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:134
+#, python-format
+msgid "Please set the export path in Zelapro config"
+msgstr "Veuillez définir le chemin d'export dans la configuration de ZelAppro"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'articles"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_activity_based_costing_rate
+msgid "Rate"
+msgstr "Taux"
+
+#. module: specific_zelapro
+#: selection:zelapro.export,type:0
+msgid "SQL"
+msgstr "SQL"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_sql_view
+msgid "SQL View"
+msgstr "Vue SQL"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:102
+#, python-format
+msgid "SQL view %s not found"
+msgstr "Vue SQL %s non trouvée"
+
+#. module: specific_zelapro
+#: model:ir.ui.menu,name:specific_zelapro.menu_zelapro_config_settings
+msgid "Settings"
+msgstr "Configuration"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_line_state
+msgid "State"
+msgstr "État"
+
+#. module: specific_zelapro
+#: selection:zelapro.export.line,state:0
+msgid "Success"
+msgstr "Succès"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:107
+#, python-format
+msgid "The SQL view %s should contain the column create_date"
+msgstr "La vue SQL %s doit contenir la colonne create_date"
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/zelapro_export.py:69
+#: sql_constraint:zelapro.export:0
+#, python-format
+msgid "The file name must be unique."
+msgstr "Le nom du fichier doit être unique."
+
+#. module: specific_zelapro
+#: code:addons/specific_zelapro/models/activity_based_costing.py:24
+#, python-format
+msgid "The rate must be unique"
+msgstr "Le taux doit être unique"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_turnover
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_category_turnover
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_turnover
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_turnover
+msgid "Turnover"
+msgstr "Chiffre d'affaire"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_turnover_nbr_lines
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_turnover_nbr_lines
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_turnover_nbr_lines
+msgid "Turnover (nbr lines)"
+msgstr "Chiffre d'afffaire (nombre de lignes)"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_turnover_average
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_turnover_average
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_turnover_average
+msgid "Turnover average"
+msgstr "Moyenne du chiffre d'affaire"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_delivery_carrier_turnover_average_nbr_lines
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_product_turnover_average_nbr_lines
+#: model:ir.model.fields,field_description:specific_zelapro.field_product_template_turnover_average_nbr_lines
+msgid "Turnover average (nbr lines)"
+msgstr "Moyenne du chiffre d'affaire (nombre de lignes)"
+
+#. module: specific_zelapro
+#: model:ir.model.fields,field_description:specific_zelapro.field_zelapro_export_type
+msgid "Type"
+msgstr "Type"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_config_settings_view_form
+msgid "Update all ABC code"
+msgstr "Mettre à jour les codes ABC"
+
+#. module: specific_zelapro
+#: model:ir.ui.menu,name:specific_zelapro.main_menu_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.product_template_form_view
+msgid "Zelapro"
+msgstr "ZelAppro"
+
+#. module: specific_zelapro
+#: model:ir.ui.view,arch_db:specific_zelapro.zelapro_export_view_form
+msgid "Zelapro Export"
+msgstr "Export ZelAppro"
+
+#. module: specific_zelapro
+#: model:ir.actions.act_window,name:specific_zelapro.action_zelapro_export
+msgid "Zelapro Exports"
+msgstr "Exports ZelAppro"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_activity_based_costing
+msgid "activity.based.costing"
+msgstr "activity.based.costing"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_zelapro_config_settings
+msgid "zelapro.config.settings"
+msgstr "zelapro.config.settings"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_zelapro_export
+msgid "zelapro.export"
+msgstr "zelapro.export"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_zelapro_export_line
+msgid "zelapro.export.line"
+msgstr "zelapro.export.line"
+
+#. module: specific_zelapro
+#: model:ir.model,name:specific_zelapro.model_zelapro_export_wizard
+msgid "zelapro.export.wizard"
+msgstr "zelapro.export.wizard"
+

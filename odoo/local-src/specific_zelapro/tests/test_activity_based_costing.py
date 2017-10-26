@@ -65,6 +65,8 @@ class TestActivityBasedCostring(common.TransactionCase):
             'is_business_unit': True,
         })
 
+        # The product 5 doesn't have invoices. The turnover for this product
+        # is equal to 0 and the ABC code must be empty !!!
         invoices_by_product = {
             1: (1, 100),  # turnover 100
             2: (2, 25),  # turnover 50
@@ -138,7 +140,7 @@ class TestActivityBasedCostring(common.TransactionCase):
         self.assertEqual(getattr(self, 'product_2').abc_id, rate_c)
         self.assertEqual(getattr(self, 'product_3').abc_id, rate_b)
         self.assertEqual(getattr(self, 'product_4').abc_id, rate_a)
-        self.assertEqual(getattr(self, 'product_5').abc_id, rate_c)
+        self.assertEqual(getattr(self, 'product_5').abc_id, abc_obj)
         self.assertEqual(getattr(self, 'product_6').abc_id, rate_c)
         self.assertEqual(getattr(self, 'product_7').abc_id, rate_b)
         self.assertEqual(getattr(self, 'product_8').abc_id, rate_a)

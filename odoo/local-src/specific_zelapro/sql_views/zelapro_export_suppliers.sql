@@ -21,7 +21,7 @@ CREATE OR REPLACE VIEW zelapro_export_suppliers AS
     '' AS PAACPT,
     '' AS PAANBQ,
     '' AS PAASWI,
-    COALESCE(supplier.delivery_lead_time, 0) AS FOUDLL,
+    COALESCE(supplier.delivery_lead_time, 0) AS FOUDLL, -- TODO A charger !!!
     '' AS FOURES,
     '' AS LIBRES,
     '' AS FOUJES,
@@ -30,8 +30,9 @@ CREATE OR REPLACE VIEW zelapro_export_suppliers AS
     '' AS LIBPOU,
     '' AS FOUGES,
     '' AS LIBGES,
-    COALESCE(supplier.supplier_discount, 0) AS FOUREM,
+    COALESCE(supplier.supplier_discount, 0) AS FOUREM, -- TODO A charger !!!
     supplier.create_date AS create_date -- Mandatory field used to compute data to export
   FROM res_partner AS supplier
     LEFT JOIN partner_alcyon_category AS categ ON supplier.alcyon_category_id = categ.id
-  WHERE supplier.supplier = TRUE;
+  WHERE supplier.supplier = TRUE
+    AND supplier.active = TRUE;
