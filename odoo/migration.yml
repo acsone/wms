@@ -241,3 +241,12 @@ migration:
           - specific_account
           - specific_stock
           - specific_print
+    - version: 10.12.0
+      operations:
+        pre:
+          - anthem songs.install.logistics::warehouse_settings
+          - anthem songs.install.logistics::create_routes
+          - anthem songs.install.logistics::create_putaway
+      addons:
+        upgrade:
+          - specific_stock

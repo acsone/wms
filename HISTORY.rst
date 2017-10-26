@@ -20,6 +20,9 @@ Unreleased
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 
 **Bugfixes**
+* There is no fridge product category. This is a route selectable on the product.
+* Setup warehouse name, shorten picking type name (use warehouse code instead of name)
+* Allow to select "Zone Médicament" logistic route on products.
 
 * Allow to create a lot at reception with standard interface
 * Fix new flake8 errors

@@ -11,6 +11,24 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 DATE_LENGTH = len(date.today().strftime(DATE_FORMAT))
 
 
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
+
+    @api.multi
+    def name_get(self):
+        """ Display 'Warehouse code: PickingType_name' """
+        res = []
+        for picking_type in self:
+            if picking_type.warehouse_id:
+                name = '%s: %s' % (
+                    picking_type.warehouse_id.code,
+                    picking_type.name)
+            else:
+                name = picking_type.name
+            res.append((picking_type.id, name))
+        return res
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
