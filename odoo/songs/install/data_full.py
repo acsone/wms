@@ -206,7 +206,11 @@ def import_stock_bins(ctx):
 
 @anthem.log
 def post_import_stock_bins(ctx):
-    """ Add fridge route on product stocked in 'Q' category """
+    """ Add fridge route on product stocked in 'Q' category
+    This is a post correction of the csv file product_stock_bin.csv
+    for both demo and full data modes.
+
+    """
     StockBin = ctx.env['product.stock.bin']
 
     familyQ = ctx.env.ref('__import__.location_family_Q')
