@@ -199,6 +199,10 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.CLIENT_DELIVERY_METHODS
         ),
         FieldMapper(
+            'supplier_promotion_sale_allowed', 'clitrm',
+            mapping=mappings.CLIENT_PROMOTION_PRICELIST
+        ),
+        FieldMapper(
             'user_id/id', 'clirep',
             mapping=mappings.USERS
         ),
