@@ -170,6 +170,8 @@ class ProductProduct(models.Model):
         remove_abc_query = "UPDATE product_product SET abc_id = NULL;"
         self.env.cr.execute(remove_abc_query)
 
+        self.invalidate_cache(['abc_id'])
+
         business_units = self.env['product.category'].search(
             [('is_business_unit', '=', True)]
         )
