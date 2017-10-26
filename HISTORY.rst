@@ -23,6 +23,7 @@ Unreleased
 
 * Allow to create a lot at reception with standard interface
 * Fix new flake8 errors
+* ALCN-979: Fix import from DB2 assignation of bin to products
 
 **Build**
 

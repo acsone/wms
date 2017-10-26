@@ -768,7 +768,9 @@ class ProductStockBinMapper(EntityMapper):
 
     FIELDS_MAPPING = {
         'id': concat('storef', 'location_name', delimiter='_'),
-        'product_id/id': ref('product', 'storef', '__import__', check=False),
+        'product_id/id': lambda rec:
+            ref('product', 'storef', '__import__', check=False)(rec) +
+            '_product_template',
         'location_id/id': const('stock.stock_location_stock'),
         'bin_location_id/id': ref('location',
                               concat(const('loc'),
