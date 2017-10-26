@@ -7,6 +7,7 @@ Discount Pricelist
 ==================
 
 This module adds two promotion types on sale order:
+
 * Supplier promotion
 * Alcyon discount pricelist
 
