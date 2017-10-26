@@ -31,7 +31,6 @@
         'views/res_partner.xml',
         'views/stock_backorder_reason.xml',
         'views/stock_location.xml',
-        'views/stock_picking.xml',
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
