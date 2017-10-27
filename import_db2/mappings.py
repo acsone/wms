@@ -2,6 +2,7 @@
 # Copyright 2016-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
+from datetime import date
 
 STR_BOOL = {
     'Y': True
@@ -505,6 +506,7 @@ PRODUCT_ROUTES = {
     1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
 }
 
+
 def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
     """
@@ -522,3 +524,13 @@ def phone_converter(*values):
             values.remove(value)
 
     return phone, mobile
+
+
+def date_converter(db2_entity, db2_name, default=None):
+    dd = db2_entity[db2_name + 'jj']
+    if not dd:
+        return ''
+    mm = db2_entity[db2_name + 'mm']
+    Y = db2_entity[db2_name + 'ss'] * 100 + db2_entity[db2_name + 'aa']
+    d = date(Y, mm, dd)
+    return "{:%Y-%m-%d}".format(d)

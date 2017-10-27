@@ -9,6 +9,7 @@ import os
 from collections import OrderedDict
 
 import mapper
+import mappings
 
 
 def convert_camel_case(name):
@@ -17,11 +18,13 @@ def convert_camel_case(name):
 
 class FieldMapper:
     def __init__(self, odoo_name, db2_name=None, strip=True,
-                 constant=None, mapping=None, default=None, check=None):
+                 constant=None, is_date=None, mapping=None, default=None,
+                 check=None):
         self.odoo_name = odoo_name
         self.db2_name = db2_name
         self.strip = strip
         self.constant = constant
+        self.is_date = is_date
         self.mapping = mapping
         self.default = default
         self.check = check
@@ -115,6 +118,14 @@ class EntityMapper(object):
                                 value,
                                 field.mapping,
                                 default=field.default)
+
+                        elif field.is_date:
+                            value = mapper.call(
+                                mappings.date_converter,
+                                field.db2_name,
+                                field.default,
+                            )
+
                         else:
                             value = mapper.value(
                                 value,
@@ -165,6 +176,9 @@ class EntityMapper(object):
     def get_order_by(self):
         return None
 
+    def get_group_by(self):
+        return None
+
     def get_limit(self):
         return ""
 
@@ -196,11 +210,16 @@ class EntityMapper(object):
             if not where_cond:
                 where_cond = '1=1'
 
+            group_by = self.get_group_by()
+            if not group_by:
+                group_by = ""
+            else:
+                group_by = "GROUP BY " + group_by
             order_by = self.get_order_by()
             if not order_by:
                 order_by = "1 asc"
-            query += "WHERE %s ORDER BY %s "
-            placeholders += (where_cond, order_by)
+            query += "WHERE %s %s ORDER BY %s "
+            placeholders += (where_cond, group_by, order_by)
 
 
             limit = self.get_limit()
