@@ -58,9 +58,6 @@ migration:
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               - anthem songs.install.db2_import::main
-          addons:
-            upgrade:
-              - db2_import
         demo:
           operations:
             post:
@@ -75,6 +72,7 @@ migration:
           - document
           - l10n_be_intrastat
           - l10n_be_invoice_bba
+          - mrp
           - product_expiry
           - purchase
           - sale
@@ -115,15 +113,18 @@ migration:
           ### local-src
           - account_invoice_tax_required
           - connector_esb
+          - db2_import
           - delivery_rounds
           - delivery_rounds_assign
           - pricelist_discount
           - procurement_sale
+          - product_additional
           - product_price_category
           - refund_invoice
           - specific_account
           - specific_base
           - specific_data
+          - specific_followup
           - specific_helpdesk
           - specific_partner
           - specific_print
@@ -135,6 +136,7 @@ migration:
           - specific_shipping_costs
           - specific_stock
           - specific_translations
+          - specific_zelapro
           - specific_zetes
           - stock_barcode_fix
           - stock_expired
@@ -156,7 +158,6 @@ migration:
           - stock_reception_priority
           - stock_refill
           - web_autorefresh
-          - specific_followup
     - version: 10.1.0
     - version: 10.2.0
     - version: 10.3.0
@@ -164,91 +165,8 @@ migration:
     - version: 10.5.0
     - version: 10.6.0
     - version: 10.7.0
-      addons:
-        upgrade:
-          ### local-src
-          - connector_esb
     - version: 10.8.0
-      operations:
-        post:
-          - anthem songs.install.logistics::main
-      addons:
-        upgrade:
-          ### Odoo
-          # src
-          # Commented after deployment of version 10.8.0 (to optimize build)
-          # - base  # Because we updated all repositories
-          - mrp
-          ### local-src
-          - db2_import
-          - product_additional
-          - specific_sale
-          - delivery_rounds
-          - stock_groupbypartner
-          - stock_picking_assignment
-          - stock_picking_sequence
-          - stock_picking_subcode
-          - stock_reception_priority
     - version: 10.9.0
-      operations:
-        post:
-          - anthem songs.install.logistics::activate_options
-      addons:
-        upgrade:
-          ### Odoo
-          # src
-          - stock
-          ### local-src
-          - db2_import
-          - specific_report
-          - specific_stock
-          - specific_followup
-          - stock_refill
     - version: 10.10.0
-      operations:
-        post:
-          - anthem songs.install.sales::import_pricelist
-          - anthem songs.install.data_all::define_esb_ref_on_countries
-          - anthem songs.install.data_all::define_esb_ref_on_taxes
-          - anthem songs.install.accounting::import_account_payment_term
-          - anthem songs.install.user::import_users
-      addons:
-        upgrade:
-          ### local-src
-          - connector_esb
-          - specific_helpdesk
-          - specific_purchase
-          - specific_report
-          - specific_stock
-          - stock_receive_lot
-          - db2_import
     - version: 10.11.0
-      operations:
-        pre:
-          - anthem songs.update.update_10_11_0_pre::main
-          - anthem songs.install.accounting::import_account_journal
-      addons:
-        upgrade:
-          ### local-src
-          - db2_import
-          - specific_product
-          - delivery_rounds
-          - specific_purchase
-          - specific_report
-          - specific_zetes
-          - stock_picking_sequence
-          - stock_receive_lot
-          - stock_reception_priority
-          - specific_account
-          - specific_stock
-          - specific_print
     - version: 10.12.0
-      operations:
-        pre:
-          - anthem songs.install.logistics::warehouse_settings
-          - anthem songs.install.logistics::create_routes
-          - anthem songs.install.logistics::create_putaway
-      addons:
-        upgrade:
-          - specific_stock
-          - specific_zelapro

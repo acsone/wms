@@ -15,27 +15,28 @@ Unreleased
 * ALCN-989: automatize hot DB2 data import for INT and PROD
 * ALCN-981 - Set fridge route on product stocked in Q sector
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
+* Refresh cold data
 
 **Features and Improvements**
+
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-705: Update labels and improve the way to print labels (add printer code)
-
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
-
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
 
 **Bugfixes**
+
 * There is no fridge product category. This is a route selectable on the product.
 * Setup warehouse name, shorten picking type name (use warehouse code instead of name)
 * Allow to select "Zone Médicament" logistic route on products.
-
 * Allow to create a lot at reception with standard interface
 * Fix new flake8 errors
 * ALCN-979: Fix import from DB2 assignation of bin to products
 
 **Build**
 
+* Clean migration.yml file
 * ALCN-985: Update all repositories
 * ALCN-985: Install cloud_platform_exoscale module after update repositories
 * ALCN-985: Add a pull request to (maybe) increase performance
