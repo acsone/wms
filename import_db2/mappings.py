@@ -2,6 +2,7 @@
 # Copyright 2016-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
+from datetime import date
 
 STR_BOOL = {
     'Y': True
@@ -239,6 +240,14 @@ CLIENT_DISCOUNT_PRICELIST = {
     411: '__setup__.pricelist_411',
     412: '__setup__.pricelist_412',
     600: '__setup__.pricelist_600',
+}
+
+CLIENT_PROMOTION_PRICELIST = {
+    db2_id: True for db2_id in
+    (100, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 210, 211, 212,
+     213, 214, 301, 302, 303, 304, 308, 310, 311, 312, 314, 315, 316, 317,
+     318, 319, 320, 321, 322, 323, 401, 402, 403, 404, 405, 406, 407, 410,
+     411, 412, 600)
 }
 
 CLIENT_FISCAL_POSITION = {
@@ -497,6 +506,7 @@ PRODUCT_ROUTES = {
     1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
 }
 
+
 def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.
     """
@@ -514,3 +524,13 @@ def phone_converter(*values):
             values.remove(value)
 
     return phone, mobile
+
+
+def date_converter(db2_entity, db2_name, default=None):
+    dd = db2_entity[db2_name + 'jj']
+    if not dd:
+        return ''
+    mm = db2_entity[db2_name + 'mm']
+    Y = db2_entity[db2_name + 'ss'] * 100 + db2_entity[db2_name + 'aa']
+    d = date(Y, mm, dd)
+    return "{:%Y-%m-%d}".format(d)

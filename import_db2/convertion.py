@@ -71,7 +71,7 @@ class ProductMapper(EntityMapper):
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
         ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
-        'name', 'price_category_id', 'seller_ids', 'pb2'
+        'name', 'price_category_id', 'pb2'
     ]
 
     def get_sql_joins(self):
@@ -110,30 +110,6 @@ class ProductMapper(EntityMapper):
             )
         odoo_entity['price_category_id'] = OrderedDict(id=value)
 
-    def convert_seller_ids(self, odoo_entity, db2_entity):
-        ref = db2_entity['gesfou']
-        if ref:
-            self.importer.add_foreign_ref('FOURN', ref)
-            xml_id = self.get_xml_id(
-                'supplierinfo', '%s-%s' % (ref, db2_entity['gesart'].strip())
-            )
-            supplier_xml_id = self.get_xml_id(
-                'supplier', str(ref), '__import__')
-
-            price = db2_entity['gespan']
-            vendor_code = db2_entity['gesarc'].strip()
-
-            self.importer.add_entity('supplierinfo', {
-                'id': xml_id,
-                'name/id': supplier_xml_id,
-                'product_code': vendor_code,
-                'price': price,
-                'product_tmpl_id/id': self.get_xml_id(
-                    'product',
-                    '%s_product_template' % odoo_entity['default_code']
-                )
-            })
-
     def _pricelist_item_product_price(
             self, pricelist_id, product_code, price, price_name
     ):
@@ -161,6 +137,94 @@ class ProductMapper(EntityMapper):
                 price2,
                 'pb2'
             )
+
+
+class Supplierinfo(EntityMapper):
+    """ supplier info and promotions """
+    DB2_NAME = 'PGESTION'
+
+    XMLID_FIELD = 'id'
+
+    # Doing a grouping to remove client column that creates duplicates
+    GROUP_BY_COL = [
+        'gesfou', 'gesart', 'gesarc', 'gespan', 'cclrem', 'cclref',
+        'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
+        'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
+
+    FIELDS_MAPPING = [
+        'id',
+        'name',
+        FieldMapper('product_code', 'gesarc'),
+        FieldMapper('price', 'gespan'),
+        FieldMapper('discount_sale', 'cclrem'),
+        FieldMapper('min_qty_sale', constant=1),
+        FieldMapper('date_start', 'ccld', is_date=True),
+        FieldMapper('date_end', 'cclf', is_date=True),
+        'product_tmpl_id',
+    ]
+
+    def get_sql_select(self):
+        return ','.join(self.GROUP_BY_COL)
+
+    def get_sql_joins(self):
+        """ Filter old promotions on the join and not promo from table condcf
+
+        This way we either get one or more supplier info with promotion
+        or we get a single supplier info without promotion
+
+        """
+        join = ("left join sbdata.condcf ON gesart=cclref"
+                " AND cclqu1 = 0 AND cclpro = 1 AND cclrem <> 0")
+        if not self.importer.full:
+            join += (" AND cclfss = 20 AND cclfaa >= 17"
+                     " AND cclfmm >= 3 AND cclfmm <= 5")
+        else:
+            join += " AND cclfss = 20 AND cclfaa >= 16"
+        return join
+
+    def get_sql_where(self):
+        # get only 2 years of promotions
+        where = "gesfou IS NOT NULL"
+        if not self.importer.full:
+            # TODO: csv only when mode will be developed
+            where += (
+                      " AND gesart IN ("
+                      "    SELECT dccart FROM sbdata.PDETCDCL"
+                      "        WHERE dccsui >= %s AND dccsui <= %s"
+                      ")" % (SO_MIN, SO_MAX))
+        return where
+
+    def get_group_by(self):
+        """ We want to get rid of promotion per client, only one promotion
+        is valid
+
+        """
+        return ','.join(self.GROUP_BY_COL)
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Create a name from Suite No + Client No + User No + Line numeber
+        We use user to remove duplicates
+        """
+        supplier = db2_entity['gesfou']
+        product = db2_entity['gesart'].strip()
+        ref = '%s-%s' % (supplier, product)
+        if db2_entity['cclref']:
+            year = db2_entity['ccldss'] * 100 + db2_entity['ccldaa']
+            month = db2_entity['ccldmm']
+            ref += '-%s%02i' % (year, month)
+        odoo_entity['id'] = ref
+
+    def convert_name(self, odoo_entity, db2_entity):
+        ref = db2_entity['gesfou']
+        self.importer.add_foreign_ref('FOURN', ref)
+        supplier_xml_id = self.get_xml_id(
+            'supplier', str(ref), '__import__')
+        odoo_entity['name/id'] = supplier_xml_id
+
+    def convert_product_tmpl_id(self, odoo_entity, db2_entity):
+        product = (db2_entity['gesart'] or '').strip()
+        xmlid = self.get_xml_id('product', '%s_product_template' % product)
+        odoo_entity['product_tmpl_id/id'] = xmlid
 
 
 class CustomerMapper(EntityMapper):
@@ -197,6 +261,10 @@ class CustomerMapper(EntityMapper):
         FieldMapper(
             'property_delivery_carrier_id/id', 'cliclv',
             mapping=mappings.CLIENT_DELIVERY_METHODS
+        ),
+        FieldMapper(
+            'supplier_promotion_sale_allowed', 'clitrm',
+            mapping=mappings.CLIENT_PROMOTION_PRICELIST
         ),
         FieldMapper(
             'user_id/id', 'clirep',
@@ -390,6 +458,7 @@ class CustomerAddressMapper(AddressMapper):
             )
         return where
 
+
 class SupplierMapper(EntityMapper):
     DB2_NAME = 'FOURN'
     DB2_REF_NAME = 'founum'
@@ -547,6 +616,7 @@ class SaleOrderMapper(EntityMapper):
         FieldMapper('state', constant='draft'),
         # BEF is used in old commands we won't import
         FieldMapper('currency_id/id', constant="base.EUR"),
+        FieldMapper('date_order', 'eccd', is_date=True),
         'id', 'date_order', 'partner_id',
     ]
 
@@ -557,12 +627,6 @@ class SaleOrderMapper(EntityMapper):
         client = db2_entity['ecccli']
         store = db2_entity['eccsuc'].strip()
         odoo_entity['id'] = "%s_%s_%s" % (suite, client, store)
-
-    def convert_date_order(self, odoo_entity, db2_entity):
-        dd = db2_entity['eccdjj']
-        mm = db2_entity['eccdmm']
-        Y = "%s%s" % (db2_entity['eccdss'], db2_entity['eccdaa'])
-        odoo_entity['date_order'] = "%s-%02i-%02i" % (Y, mm, dd)
 
     def convert_partner_id(self, odoo_entity, db2_entity):
         ref = db2_entity['ecccli']
@@ -795,6 +859,7 @@ class ProductStockBinMapper(EntityMapper):
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  Supplierinfo,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
                   SaleOrderMapper,
@@ -806,6 +871,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
 
 
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
+                       Supplierinfo,
                        CustomerMapper, SupplierMapper,
                        CustomerAddressMapper,
                        StockProductionLotMapper,
