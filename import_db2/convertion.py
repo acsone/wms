@@ -294,17 +294,18 @@ class CustomerMapper(EntityMapper):
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',
         'property_account_position_id',
+        'comment',
     ]
 
     def get_sql_joins(self):
         return (
             "left join gendata.cplcli on clinum=cpcnum "
             # Email table (inspired by smile query, cf google drive)
-            "left join gendata.emaweb "
-            "on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E' "
-            "and emwnli = (select min(emwnli) from gendata.emaweb "
-            "where clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
-            ")"
+            " left join gendata.emaweb "
+            " on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
+            " and emwnli = (select min(emwnli) from gendata.emaweb"
+            "   where clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
+            " )"
         )
 
     def get_sql_where(self):
@@ -386,6 +387,15 @@ class CustomerMapper(EntityMapper):
         else:
             pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
         odoo_entity['property_account_position_id/id'] = pos
+
+    @staticmethod
+    def convert_comment(odoo_entity, db2_entity):
+        # 4 lines of delivery notes
+        lines = [
+            db2_entity['cpcl29'].strip(), db2_entity['cpcl30'].strip(),
+            db2_entity['cpcl31'].strip(), db2_entity['cpcl32'].strip()
+        ]
+        odoo_entity['comment'] = '\n'.join([l for l in lines if l])
 
 
 class AddressMapper(EntityMapper):
@@ -566,7 +576,7 @@ class LocationMapper(EntityMapper):
                 lvl = value[3]
                 bin = value[4:6]
                 # TODO not found in PSTOCK non dynamic racks
-            else: # skip V, W and other unknown
+            else:  # skip V, W and other unknown
                 continue
 
             control_code = value[6:8]
