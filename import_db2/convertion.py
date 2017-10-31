@@ -627,7 +627,7 @@ class SaleOrderMapper(EntityMapper):
         # BEF is used in old commands we won't import
         FieldMapper('currency_id/id', constant="base.EUR"),
         FieldMapper('date_order', 'eccd', is_date=True),
-        'id', 'date_order', 'partner_id',
+        'id', 'partner_id',
     ]
 
     def convert_id(self, odoo_entity, db2_entity):
