@@ -528,8 +528,8 @@ class LocationMapper(EntityMapper):
         """
         if not self.importer.full:
             query += """
-            AND storef IN (SELECT dccart 
-                        FROM sbdata.PDETCDCL 
+            AND storef IN (SELECT dccart
+                        FROM sbdata.PDETCDCL
                         WHERE dccsui >= %s AND dccsui <= %s)
             """ % (SO_MIN, SO_MAX)
 
@@ -698,7 +698,7 @@ class SaleOrderLineMapper(EntityMapper):
         odoo_entity['product_id/id'] = xmlid
 
     def convert_order_id(self, odoo_entity, db2_entity):
-        suite = db2_entity['eccsui'] 
+        suite = db2_entity['eccsui']
         client = db2_entity['ecccli']
         store = db2_entity['eccsuc'].strip()
         code = "%s_%s_%s" % (suite, client, store)
@@ -769,8 +769,8 @@ class StockProductionLotMapper(EntityMapper):
         # checksum.
 
         where = """
-        lotact !=0 
-        AND lotsuc='1' 
+        lotact !=0
+        AND lotsuc='1'
         AND v2.vloech is null
         """
         if not self.importer.full:
@@ -817,7 +817,7 @@ class StockInventoryLineMapper(EntityMapper):
             AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
         """
         if not self.importer.full:
-            where += """ 
+            where += """
             AND lotref IN (SELECT dccart
                                     FROM sbdata.PDETCDCL
                                     WHERE dccsui >= %s AND dccsui <= %s)
@@ -837,10 +837,10 @@ class ProductStockBinMapper(EntityMapper):
             '_product_template',
         'location_id/id': const('stock.stock_location_stock'),
         'bin_location_id/id': ref('location',
-                              concat(const('loc'),
-                                     call(lambda rec: rec['stolop'][:6]),
-                                     delimiter='_'),
-                              '__import__', check=False),
+                                  concat(const('loc'),
+                                         call(lambda rec: rec['stolop'][:6]),
+                                         delimiter='_'),
+                                  '__import__', check=False),
     }
 
     def get_sql_query(self):
