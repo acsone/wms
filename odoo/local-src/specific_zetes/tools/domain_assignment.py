@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import date
 import logging
 
 from odoo import _
@@ -52,67 +53,43 @@ class Assignment(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        # If the picker request a new picking (Cri02 is the picking ID)
-        if not params.Cri02:
-            picking_query = """
-SELECT picking.id
-FROM stock_picking AS picking
-  INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-  LEFT JOIN picking_zone AS picking_zone
-    ON type.picking_zone_id = picking_zone.id
-  INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
-WHERE picking.delivery_round_state = 'open'
-      AND type.subcode = 'PICK'
-      AND picking.zetes_state IN %s
-      AND EXISTS(SELECT 1
-                 FROM stock_pack_operation AS operation
-                 WHERE operation.picking_id = picking.id
-                 AND operation.zetes_state IN %s)
-            """
-            query_values = [
-                (constants.AS_DEFAULT, constants.AS_CANCELED),
-                (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            ]
-
-            # Search a picking in a specific zone (like Food)
-            zone_code = params.Cri01
-            if zone_code:
-                picking_query += "AND picking_zone.code = %s "
-                query_values.append(zone_code)
-
-            # If requestType is completed we looking
-            # for a picking without an operator
-            if params.requestType:
-                picking_query += "AND picking.operator_id IS NULL "
-            else:
-                picking_query += "AND picking.operator_id = %s"
-                query_values.append(self._user.id)
-
-            picking_query += "ORDER BY round.date, " \
-                             "round.time_picking_planned, " \
-                             "picking.rank DESC " \
-                             "LIMIT 1;"
-            self.request.env.cr.execute(picking_query, tuple(query_values))
-            query_result = self.request.env.cr.fetchone()
-
-            if query_result and query_result[0]:
-                picking_id = query_result[0]
-                picking = self.request.env['stock.picking']\
-                    .sudo(self._user).browse(picking_id)
-            else:
-                picking = []
-        # If the picker want to continue a picking (Cri02 is not empty)
+        assignment_type = params.assignmentType
+        # Search for a standard picking
+        if assignment_type == constants.PICKING_ASSIGNMENT:
+            picking = self.get_picking(params)
+            result.assignmentType = constants.PICKING_ASSIGNMENT
+        # Search for a picking assignment
+        elif assignment_type == constants.PARKING_ASSIGNMENT:
+            picking = self.get_picking_parking(params)
+            result.assignmentType = constants.PARKING_ASSIGNMENT
+        # Search for a picking in reserve
+        elif assignment_type == constants.RESERVE_ASSIGNMENT:
+            picking = self.get_picking_reserve(params)
+            result.assignmentType = constants.RESERVE_ASSIGNMENT
         else:
-            picking_id = int(params.Cri02)
-            picking = self.request.env['stock.picking']\
-                .sudo(self._user).browse(picking_id)
+            result.update({
+                'respCode': constants.RESPONSE_CODE_ERROR,
+                'respMsg': _('Unknown assignment type')
+            })
+            return result.format()
 
-        if not len(picking):
+        if not picking:
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('Cannot found a picking')
             })
             return result.format()
+
+        # There are two bin checksum on location
+        # According the day of the month, the picking have to use the "Right"
+        # or "Left" checkum. For the even day, the picking take the checksum
+        # on the right (=> bin_checksum_1) and for the odoo day, the picker
+        # take the checksum on the left (=> bin_checksum_2)
+        is_odd_day = date.today().day % 2
+        if is_odd_day:
+            result.Usf07 = _('Left')
+        else:
+            result.Usf07 = _('Right')
 
         partner = picking.partner_id
 
@@ -120,17 +97,11 @@ WHERE picking.delivery_round_state = 'open'
 
         result.update({
             'respCode': constants.RESPONSE_CODE_OK,
-            'assignmentType': 1,
             'groupNum': picking.id,
             'Usf02': partner.alcyon_category_id.name,
             'Usf03': round_name,
             'Usf04': 0,  # Constant value
             'Usf05': 0,  # Constant value
-            'Usf07': partner.name,
-            'Usf08': '{} {}'.format(partner.zip, partner.city),  # Zip + city
-            'Usf09': len(picking.pack_operation_product_ids),
-            # Nbr of operation
-            'Usf10': None,
         })
 
         if partner.is_passport_required:
@@ -208,3 +179,225 @@ WHERE picking.delivery_round_state = 'open'
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=picking_id, exception=e)
+
+    def get_picking(self, params):
+        """
+        Return a picking
+        :param params:
+        :return:
+        """
+        # If the picker request a new picking (Cri02 is the picking ID)
+        if not params.Cri02:
+            picking_query = """
+            SELECT picking.id
+            FROM stock_picking AS picking
+              INNER JOIN stock_picking_type AS type
+                ON picking.picking_type_id = type.id
+              INNER JOIN round_instance AS round
+                ON picking.delivery_round_id = round.id
+            WHERE picking.delivery_round_state = 'open'
+                  AND type.subcode = 'PICK'
+                  AND picking.zetes_state IN %s
+                  AND picking.zetes_picking_type = %s
+                  AND EXISTS(SELECT 1
+                             FROM stock_pack_operation AS operation
+                             WHERE operation.picking_id = picking.id
+                             AND operation.zetes_state IN %S)
+                    """
+            query_values = [
+                (constants.AS_DEFAULT, constants.AS_CANCELED),
+                (constants.OP_DEFAULT, constants.OP_SKIPPED),
+                constants.PICKING_ASSIGNMENT
+            ]
+
+            # Search a picking in a specific zone (like Food)
+            zone_code = params.Cri01
+            if zone_code:
+                zone = \
+                    self.request.env['stock.picking.type'].sudo(self._user) \
+                        .search([('zone_code', '=', zone_code)])
+                picking_query += "AND picking.picking_type_id = %s "
+                query_values.append(zone.id)
+
+            # If requestType is completed we looking
+            # for a picking without an operator
+            if params.requestType:
+                picking_query += "AND picking.operator_id IS NULL "
+            else:
+                picking_query += "AND picking.operator_id = %s"
+                query_values.append(self._user.id)
+
+            picking_query += "ORDER BY round.date, " \
+                             "round.time_picking_planned, " \
+                             "picking.rank DESC " \
+                             "LIMIT 1;"
+            self.request.env.cr.execute(picking_query, tuple(query_values))
+            query_result = self.request.env.cr.fetchone()
+
+            if query_result and query_result[0]:
+                picking_id = query_result[0]
+                picking = self.request.env['stock.picking'] \
+                    .sudo(self._user).browse(picking_id)
+            else:
+                return False
+        # If the picker want to continue a picking (Cri02 is not empty)
+        else:
+            picking_id = int(params.Cri02)
+            picking = self.request.env['stock.picking'] \
+                .sudo(self._user).browse(picking_id)
+
+        return picking
+
+    def get_picking_parking(self, params):
+        """
+        Return parking
+        :param params:
+        :return:
+        """
+
+        picking_query = """
+        SELECT picking.id
+        FROM stock_picking AS picking
+          INNER JOIN stock_picking_type AS type
+            ON picking.picking_type_id = type.id
+          INNER JOIN round_instance AS round
+            ON picking.delivery_round_id = round.id
+        WHERE picking.zetes_state IN %s
+          AND picking.zetes_picking_type = %s
+          AND EXISTS(SELECT 1
+                     FROM stock_pack_operation AS operation
+                     WHERE operation.picking_id = picking.id
+                     AND operation.zetes_state IN %S)
+                """
+        query_values = [
+            (constants.AS_DEFAULT, constants.AS_CANCELED),
+            (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            constants.PARKING_ASSIGNMENT
+        ]
+
+        # Search a picking in a specific zone (like Food)
+        zone_code = params.Cri01
+        if zone_code:
+            zone = \
+                self.request.env['stock.picking.type'].sudo(self._user) \
+                    .search([('zone_code', '=', zone_code)])
+            picking_query += "AND picking.picking_type_id = %s "
+            query_values.append(zone.id)
+
+        # If requestType is completed we looking
+        # for a picking without an operator
+        if params.requestType:
+            picking_query += "AND picking.operator_id IS NULL "
+        else:
+            picking_query += "AND picking.operator_id = %s"
+            query_values.append(self._user.id)
+
+        picking_query += "ORDER BY picking.rank DESC " \
+                         "LIMIT 1;"
+
+        self.request.env.cr.execute(picking_query, tuple(query_values))
+        query_result = self.request.env.cr.fetchone()
+
+        if query_result and query_result[0]:
+            picking_id = query_result[0]
+            picking = self.request.env['stock.picking'] \
+                .sudo(self._user).browse(picking_id)
+            return picking
+
+        # Picking not found. Try to create a new one.
+        domain = [('reservation_id', '=', False),
+                  ('location_id', 'child_of', 'Parking')]
+        zone_code = params.Cri01
+        if zone_code:
+            # TODO Manage Zone Code
+            pass
+
+        model_name = 'report.stock.quant.bylocation'
+        report = self.request.sudo(self._user).env[model_name].search(
+            domain,
+            limit=1,
+            order='refill_priority'
+        )
+
+        if not report:
+            return False
+
+        # Create the picking
+        picking = report.sudo(self._user).create_picking()
+        return picking
+
+    def get_picking_reserve(self, params):
+        """
+        Return reserve
+        :param params:
+        :return:
+        """
+        picking_query = """
+                SELECT picking.id
+                FROM stock_picking AS picking
+                  INNER JOIN stock_picking_type AS type
+                    ON picking.picking_type_id = type.id
+                  INNER JOIN round_instance AS round
+                    ON picking.delivery_round_id = round.id
+                WHERE picking.zetes_state IN %s
+                  AND picking.zetes_picking_type = %s
+                  AND EXISTS(SELECT 1
+                             FROM stock_pack_operation AS operation
+                             WHERE operation.picking_id = picking.id
+                             AND operation.zetes_state IN %S)
+                        """
+        query_values = [
+            (constants.AS_DEFAULT, constants.AS_CANCELED),
+            (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            constants.RESERVE_ASSIGNMENT
+        ]
+
+        # Search a picking in a specific zone (like Food)
+        zone_code = params.Cri01
+        if zone_code:
+            zone = \
+                self.request.env['stock.picking.type'].sudo(self._user) \
+                    .search([('zone_code', '=', zone_code)])
+            picking_query += "AND picking.picking_type_id = %s "
+            query_values.append(zone.id)
+
+        # If requestType is completed we looking
+        # for a picking without an operator
+        if params.requestType:
+            picking_query += "AND picking.operator_id IS NULL "
+        else:
+            picking_query += "AND picking.operator_id = %s"
+            query_values.append(self._user.id)
+
+        picking_query += "ORDER BY picking.rank DESC " \
+                         "LIMIT 1;"
+
+        self.request.env.cr.execute(picking_query, tuple(query_values))
+        query_result = self.request.env.cr.fetchone()
+
+        if query_result and query_result[0]:
+            picking_id = query_result[0]
+            picking = self.request.env['stock.picking'] \
+                .sudo(self._user).browse(picking_id)
+            return picking
+
+        # Picking not found. Try to create a new one.
+        domain = []
+        zone_code = params.Cri01
+        if zone_code:
+            # TODO Manage Zone Code
+            pass
+
+        model_name = 'report.stock.quant.bylocation.reserve'
+        report = self.request.sudo(self._user).env[model_name].search(
+            domain,
+            limit=1,
+            order='refill_priority'
+        )
+
+        if not report:
+            return False
+
+        # Create the picking
+        picking = report.sudo(self._user).create_picking()
+        return picking

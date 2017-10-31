@@ -27,6 +27,14 @@ class StockPicking(models.Model):
         required=True)
     is_zetes_error = fields.Boolean('Zetes error', default=False)
     zetes_traceback = fields.Text('Zetes traceback')
+    zetes_picking_type = fields.Selection([
+        (constants.PICKING_ASSIGNMENT, 'Customer'),
+        (constants.PARKING_ASSIGNMENT, 'Parking'),
+        (constants.RESERVE_ASSIGNMENT, 'Reserve')],
+        string="Picking type",
+        default=constants.PICKING_ASSIGNMENT,
+        required=True
+    )
 
     @api.multi
     def assign_picking_checksum(self):
@@ -73,7 +81,7 @@ class StockPackOperation(models.Model):
         (constants.OP_SHORTPICKED, 'Shortpicked'),
         (constants.OP_SKIPPED, 'Skipped'),
         (constants.OP_CUT, 'Cut'),
-        (constants.OP_CANCELED, 'Canceled')
+        (constants.OP_CANCELED, 'Canceled / Full')
     ],
         string='Zetes state',
         default=constants.OP_DEFAULT,
