@@ -392,10 +392,10 @@ class CustomerMapper(EntityMapper):
     def convert_comment(odoo_entity, db2_entity):
         # 4 lines of delivery notes
         lines = [
-            db2_entity['cpcl29'].strip(), db2_entity['cpcl30'].strip(),
-            db2_entity['cpcl31'].strip(), db2_entity['cpcl32'].strip()
+            db2_entity['cpcl29'], db2_entity['cpcl30'],
+            db2_entity['cpcl31'], db2_entity['cpcl32']
         ]
-        odoo_entity['comment'] = '\n'.join([l for l in lines if l])
+        odoo_entity['comment'] = '\n'.join([l.strip() for l in lines if l])
 
 
 class AddressMapper(EntityMapper):
