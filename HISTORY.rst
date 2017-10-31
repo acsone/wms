@@ -19,6 +19,7 @@ Unreleased
 * ALCN-918: Restore old mapping on promotion_pricelist_id to set it up on supplier_promotion_allowed as boolean
 * ALCN-918: make sure sale order import will copy the value from partner_id.supplier_promotion_sale_allowed
 * ALCN-918: Rewrite supplierinfo to include promotio
+* ALCN-891: add mapping for delivery notes as comment on partner
 
 **Features and Improvements**
 

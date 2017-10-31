@@ -294,17 +294,18 @@ class CustomerMapper(EntityMapper):
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',
         'property_account_position_id',
+        'comment',
     ]
 
     def get_sql_joins(self):
         return (
             "left join gendata.cplcli on clinum=cpcnum "
             # Email table (inspired by smile query, cf google drive)
-            "left join gendata.emaweb "
-            "on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E' "
-            "and emwnli = (select min(emwnli) from gendata.emaweb "
-            "where clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
-            ")"
+            " left join gendata.emaweb "
+            " on clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
+            " and emwnli = (select min(emwnli) from gendata.emaweb"
+            "   where clinum=emwnum and emwcod=0 and emwcon=0 and emwtyp='E'"
+            " )"
         )
 
     def get_sql_where(self):
@@ -386,6 +387,15 @@ class CustomerMapper(EntityMapper):
         else:
             pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
         odoo_entity['property_account_position_id/id'] = pos
+
+    @staticmethod
+    def convert_comment(odoo_entity, db2_entity):
+        # 4 lines of delivery notes
+        lines = [
+            db2_entity['cpcl29'].strip(), db2_entity['cpcl30'].strip(),
+            db2_entity['cpcl31'].strip(), db2_entity['cpcl32'].strip()
+        ]
+        odoo_entity['comment'] = '\n'.join([l for l in lines if l])
 
 
 class AddressMapper(EntityMapper):
@@ -528,8 +538,8 @@ class LocationMapper(EntityMapper):
         """
         if not self.importer.full:
             query += """
-            AND storef IN (SELECT dccart 
-                        FROM sbdata.PDETCDCL 
+            AND storef IN (SELECT dccart
+                        FROM sbdata.PDETCDCL
                         WHERE dccsui >= %s AND dccsui <= %s)
             """ % (SO_MIN, SO_MAX)
 
@@ -566,7 +576,7 @@ class LocationMapper(EntityMapper):
                 lvl = value[3]
                 bin = value[4:6]
                 # TODO not found in PSTOCK non dynamic racks
-            else: # skip V, W and other unknown
+            else:  # skip V, W and other unknown
                 continue
 
             control_code = value[6:8]
@@ -698,7 +708,7 @@ class SaleOrderLineMapper(EntityMapper):
         odoo_entity['product_id/id'] = xmlid
 
     def convert_order_id(self, odoo_entity, db2_entity):
-        suite = db2_entity['eccsui'] 
+        suite = db2_entity['eccsui']
         client = db2_entity['ecccli']
         store = db2_entity['eccsuc'].strip()
         code = "%s_%s_%s" % (suite, client, store)
@@ -769,8 +779,8 @@ class StockProductionLotMapper(EntityMapper):
         # checksum.
 
         where = """
-        lotact !=0 
-        AND lotsuc='1' 
+        lotact !=0
+        AND lotsuc='1'
         AND v2.vloech is null
         """
         if not self.importer.full:
@@ -817,7 +827,7 @@ class StockInventoryLineMapper(EntityMapper):
             AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
         """
         if not self.importer.full:
-            where += """ 
+            where += """
             AND lotref IN (SELECT dccart
                                     FROM sbdata.PDETCDCL
                                     WHERE dccsui >= %s AND dccsui <= %s)
@@ -837,10 +847,10 @@ class ProductStockBinMapper(EntityMapper):
             '_product_template',
         'location_id/id': const('stock.stock_location_stock'),
         'bin_location_id/id': ref('location',
-                              concat(const('loc'),
-                                     call(lambda rec: rec['stolop'][:6]),
-                                     delimiter='_'),
-                              '__import__', check=False),
+                                  concat(const('loc'),
+                                         call(lambda rec: rec['stolop'][:6]),
+                                         delimiter='_'),
+                                  '__import__', check=False),
     }
 
     def get_sql_query(self):
