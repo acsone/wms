@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.12.0 (2017-10-31)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-983: db2_importer module creates sale/purchase without tracking
