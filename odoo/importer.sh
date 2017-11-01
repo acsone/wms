@@ -47,7 +47,7 @@ for file in `find ${SPLIT_DIR} -type f`; do
     # Split in smaller chunks of 500 maximum
     SUB_SPLIT_DIR=${file}_split
     mkdir $SUB_SPLIT_DIR
-    python /opt/bin/csv-split.py -f  ${file} -n 500 -d ${SUB_SPLIT_DIR}/
+    python /opt/bin/csv-split.py -f ${file} -n 500 -d ${SUB_SPLIT_DIR}
     rm $file
     for sub_file in `find ${file}_split -type f`; do
         if [ $CSV_HEADER != "`sed 1q $sub_file`" ]; then

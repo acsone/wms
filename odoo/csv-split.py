@@ -57,13 +57,15 @@ with open(csv_path) as csv_file:
 if not file_size:
     file_size = nb_rows / nb_split
 else:
-    nb_split = nb_rows / file_size
+    # ceil division to have minimum 1 split
+    nb_split = (nb_rows / file_size) + 1
 
 
 with open(csv_path) as csv_file:
     reader = csv.DictReader(csv_file)
     fieldnames = reader.fieldnames
 
+    rejected_row = None
     for split_no in range(nb_split):
 
         line_counter = 0
@@ -76,9 +78,9 @@ with open(csv_path) as csv_file:
 
             # write row rejected from previous file
             # in the newly opened file
-            if current_row:
-                writer.writerow(current_row)
-                last_row = current_row
+            if rejected_row:
+                writer.writerow(rejected_row)
+                rejected_row = None
                 line_counter += 1
 
             current_key = None
@@ -95,6 +97,7 @@ with open(csv_path) as csv_file:
                 if (line_counter >= file_size and
                         split_no != nb_split - 1 and
                         (current_key != last_key or not key_group)):
+                    rejected_row = current_row
                     break
                 writer.writerow(current_row)
                 line_counter += 1
