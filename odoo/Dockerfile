@@ -39,6 +39,7 @@ RUN dpkg -i /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
 COPY ./.odbc.ini /home/odoo/.odbc.ini
 
 COPY ./importer.sh bin/
+COPY ./csv-split.py bin/
 
 # Copy custom runtests file
 COPY ./bin/runtests odoo/bin/
