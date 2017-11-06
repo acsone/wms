@@ -15,7 +15,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">round.tag</field>
         <field name="view_type">form</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree</field>
     </record>
 
     <menuitem id="menu_round_tag" action="action_round_tag" parent="menu_delivery_round_settings" sequence="100"/>

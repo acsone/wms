@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
+* ALCN-999: Fix some small bugs with the module delivery_rounds
 
 **Bugfixes**
 

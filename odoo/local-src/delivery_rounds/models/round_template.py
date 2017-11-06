@@ -40,6 +40,8 @@ class RoundTemplate(models.Model):
         'Planned Picking Start Time')
     time_leave_planned = fields.Float(
         'Planned Vehicle Start Time')
+    version_ids = fields.Many2many('round.template.version',
+                                   string='Versions')
 
     @api.multi
     @api.depends('name', 'code')
