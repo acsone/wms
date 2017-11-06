@@ -324,6 +324,7 @@ class Assignment(DomainInterface):
 
         # Create the picking
         picking = report.sudo(self._user).create_picking()
+        picking.button_fillwithstock()
         return picking
 
     def get_picking_reserve(self, params):
@@ -400,4 +401,5 @@ class Assignment(DomainInterface):
 
         # Create the picking
         picking = report.sudo(self._user).create_picking()
+        picking.button_fillwithstock()
         return picking

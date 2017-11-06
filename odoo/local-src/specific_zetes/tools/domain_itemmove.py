@@ -104,10 +104,19 @@ class Itemmove(DomainInterface):
             location_dest_id = line.location_dest_id
             product = line.product_id
 
+            # For load and unload, Zetes will always send a RESU_CATCHWEIGHT
+            # with the quantity. However we don't want to impute Odoo for
+            # unload picking. The only way to ignore all RESU_CATCHWEIGHT
+            # for unload picking is to send a false line ID (0)
+            if load_or_unload == constants.MOVE_UNLOAD:
+                line_id = 0
+            else:
+                line_id = line.id
+
             line_values.update({
                 'respCode': constants.RESPONSE_CODE_OK,
                 'groupNum': picking_id,
-                'moveLineId': line.id,
+                'moveLineId': line_id,
                 'itemMoveSeqNum': sequence,
                 'itemMoveType': move_type,
                 'reqQty': format(int(qty), '0%d' % 6),
@@ -147,9 +156,6 @@ class Itemmove(DomainInterface):
             # Set the type of load (load or unload) move type "Load"
             if move_type == constants.MOVE_TYPE_LOAD:
                 line.Usf02 = load_or_unload
-            elif move_type == constants.MOVE_TYPE_PUT:
-                # The move type put request only one line at once
-                return line.format()
 
             result.append(line_values)
             sequence += 1
