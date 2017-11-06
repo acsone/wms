@@ -154,6 +154,9 @@ def import_stock_bins(ctx):
 @anthem.log
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
+    content = \
+        resource_stream(req, 'data/install/delivery.template.version.csv')
+    load_csv_stream(ctx, 'delivery.template.version', content, delimiter=',')
     content = resource_stream(req, 'data/demo/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
     content = resource_stream(req, 'data/demo/delivery_itinerary.csv')
