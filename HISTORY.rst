@@ -18,6 +18,7 @@ Unreleased
 
 * Complete readme on modules
 * Udpdate README for module specific_print and specific_purchase
+* README of stock modules updated
 
 
 10.12.0 (2017-10-31)
