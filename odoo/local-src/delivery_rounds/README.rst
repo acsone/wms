@@ -11,7 +11,7 @@ Manage delivery rounds.
 Each day, you must make your delivery plan listing all delivery rounds.  In
 order to perform this, you must create template of delivery rounds and
 instanciate them through the wizard "Generate delivery plan".  You can manage
-tags on delivery rounds templates to maintain multiple list of templates and
+version of delivery rounds templates to maintain multiple list of templates and
 select the one you want to instanciate.
 
 A delivery round template contains an ordered list of itineraries. An itinerary
@@ -36,9 +36,10 @@ When confirmed, no new clients are added but existing clients that are not yet
 picked can add more pickings. When it's done, documents are printed and the
 truck leaves.
 
-You are able to assign tags to customers in an itinerary.
-If you use the wizard to create the daily round instance, you can also choose one or several tags.
-These tags will filter customers and allow you to create specific round.
+The generation of the delivery round daily plan can be automated in the
+configuration. During the night, a cron job will then automatically generate
+the plan and reserve the stock. You can manage exceptions for exact specific
+days.
 
 
 Installation
