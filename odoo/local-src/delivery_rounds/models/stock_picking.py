@@ -12,7 +12,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     delivery_round_id = fields.Many2one(
-        'round.instance', 'Delivery Round')
+        'round.instance', 'Delivery Round', copy=False)
     delivery_round_state = fields.Selection(
         related='delivery_round_id.state',
         store=True,
