@@ -180,3 +180,8 @@ migration:
           - specific_helpdesk
           - specific_product
           - delivery_rounds
+          - specific_zetes
+          - specific_data
+      operations:
+        post:
+          - anthem songs.install.logistics::create_picking_types
