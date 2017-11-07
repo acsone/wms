@@ -37,9 +37,12 @@ picked can add more pickings. When it's done, documents are printed and the
 truck leaves.
 
 You are able to assign tags to customers in an itinerary.
-If you use the wizard to create the daily round instance, you can also choose one or several tags.
+If you use the wizard to create the daily round instance, you can also choose
+one or several tags.
 These tags will filter customers and allow you to create specific round.
 
+This module will create a cron (automatic job) to create delivery daily plan.
+You have to configure delivery day in Delivery configuration
 
 Installation
 ============
@@ -51,6 +54,7 @@ Configuration
 =============
 
 You must make itineraries and round templates.
+Please configure delivery days in Delivery configuration.
 
 
 Known issues / Roadmap
