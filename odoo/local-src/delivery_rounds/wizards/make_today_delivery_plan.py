@@ -18,21 +18,28 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     assign_moves = fields.Boolean(
         'Reserve stock', default=True)
     tag_ids = fields.Many2many('round.tag', string='Tags')
+    execution_date = fields.Date(
+        'Date',
+        default=lambda self: fields.Date.context_today(),
+        required=True
+    )
 
-    @api.one
+    @api.multi
     def confirm(self):
+        self.ensure_one()
+
         templates = self.version_id.template_ids
-        today = fields.Date.context_today(self)
+        execution_date = self.execution_date
         # deduct templates for which instance already exist
         instances = self.env['round.instance'].search([
-            ('date', '=', today)])
+            ('date', '=', execution_date)])
         templates -= instances.mapped('template_id')
         # create instance for each template
         for template in templates:
             self.env['round.instance'].create({
                 'template_id': template.id,
                 'itinerary_ids': [(6, 0, template.itinerary_ids.ids)],
-                'date': today,
+                'date': execution_date,
                 'time_picking_planned': template.time_picking_planned,
                 'time_leave_planned': template.time_leave_planned,
                 'tag_ids': [(6, 0, self.tag_ids.ids)]
@@ -43,5 +50,5 @@ class MakeTodayDeliveryPlan(models.TransientModel):
             # assign pickings and shippings to available delivery rounds
             self.env['procurement.order.compute.all'].procure_calculation()
 
-        return dict(self.env.ref(
-            'delivery_rounds.action_round_instance').read()[0])
+        return self.env['ir.actions.act_window']\
+            .for_xml_id('delivery_rounds', 'action_round_instance')

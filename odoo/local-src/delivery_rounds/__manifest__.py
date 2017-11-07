@@ -25,8 +25,10 @@
         'views/partner.xml',
         'views/delivery_carrier.xml',
         'views/tag.xml',
+        'views/cron_delivery_plan.xml',
         # Data
         'data/sequence.xml',
+        'data/ir_cron.xml',
         # Security
         'security/ir.model.access.csv',
         # Wizards
