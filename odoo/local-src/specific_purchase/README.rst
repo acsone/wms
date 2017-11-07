@@ -16,6 +16,8 @@ will never create a back oder
 - A purchase order is automatically validated
 - Add the unique supplier on the product form
 - Send an email to the supplier when a purchase order is canceled with the reason
+- Add some attributes (like weight, depth, unit_in_box, ...) on the product
+- Allow to manager bank holidays (used to compute the scheduled date)
 
 
 Credits

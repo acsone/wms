@@ -13,7 +13,7 @@ Unreleased
 **Build**
 
 **Documentation**
-
+* Udpdate README for module specific_print and specific_purchase
 
 10.12.0 (2017-10-31)
 ++++++++++++++++++++
