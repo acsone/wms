@@ -383,7 +383,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_mat,
          'sequence': 6,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_02'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_02'),
          },
         {'xmlid': '__setup__.stock_picking_type_ali',
          'name': 'Pick Aliments',
@@ -396,7 +396,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_ali,
          'sequence': 5,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_04'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_04'),
          'is_portable_printer': True,
          },
         {'xmlid': '__setup__.stock_picking_type_medoc',
@@ -410,7 +410,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_medoc,
          'sequence': 4,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_01'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_01'),
          },
         {'xmlid': '__setup__.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -423,7 +423,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_froid,
          'sequence': 7,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_03'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_03'),
          },
         {'xmlid': '__setup__.stock_picking_type_humain',
          'name': 'Pick Humain',
@@ -436,7 +436,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_mat,
          'sequence': 8,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_05'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_05'),
          },
 
         {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
@@ -448,7 +448,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 9,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_01'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_01'),
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_ali',
          'name': 'Rangement Aliments',
@@ -459,7 +459,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_ali,
          'sequence': 9,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_04'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_04'),
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
          'name': 'Rangement Matériel',
@@ -470,7 +470,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_mat,
          'sequence': 9,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_02'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_02'),
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
          'name': 'Rangement Frigo',
@@ -481,7 +481,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_froid,
          'sequence': 9,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_03'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_03'),
          },
 
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
@@ -493,7 +493,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 10,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_01'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_01'),
          },
         {'xmlid': '__setup__.stock_picking_type_reassort_ali',
          'name': 'Reassort Aliments',
@@ -504,7 +504,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_ali,
          'sequence': 11,
-         'picking_zone': ctx.env.ref('__setup__.picking_zone_04'),
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_04'),
          },
         {'xmlid': '__setup__.stock_picking_type_return',
          'name': 'Retours',
@@ -659,12 +659,12 @@ def set_picking_zone(ctx):
     }
     for main_location_xmlid, picking_zone_xml_id in \
             main_locations_picking_zone_mapping.iteritems():
-        main_location = ctx.env.ref(main_location)
-        picking_zone = ctx.env.ref(picking_zone_xml_id)
+        main_location = ctx.env.ref(main_location_xmlid)
+        picking_zone_id = ctx.env.ref(picking_zone_xml_id)
         children = ctx.env['stock.location'].search([
             ('id', 'child_of', main_location.id)])
         (main_location | children).write({
-            'picking_zone_id': picking_zone.id
+            'picking_zone_id': picking_zone_id.id
         })
 
     # Recompute the picking zone on each products
