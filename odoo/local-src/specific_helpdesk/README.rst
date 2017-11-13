@@ -31,7 +31,12 @@ Add a link to define the linked sale/purchase order on the helpdesk ticket
 Helpdesk ticket smartbuttons
 ============================
 
-On partner/picking, add smartbutton to access quickly to all linked helpdesk ticket
+On following models, add smartbutton to access quickly to all linked helpdesk ticket:
+
+* Partner
+* Picking
+* Sale order
+* Purchase order
 
 
 Credits

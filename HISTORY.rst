@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
+
 **Bugfixes**
 
 **Build**
