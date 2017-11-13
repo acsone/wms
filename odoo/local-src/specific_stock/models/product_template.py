@@ -27,6 +27,28 @@ class ProductTemplate(models.Model):
         related='categ_id.alert_time',
     )
 
+    picking_zone_id = fields.Many2one('picking.zone',
+                                      string='Picking zone',
+                                      compute='_compute_picking_zone_id',
+                                      readonly=True,
+                                      store=True)
+
+    @api.depends('route_ids', 'route_from_categ_ids')
+    def _compute_picking_zone_id(self):
+        Pull = self.env['procurement.rule']
+        stock_location = self.env.ref('stock.stock_location_stock')
+
+        for product in self:
+            product_routes = \
+                product.route_ids | product.categ_id.total_route_ids
+            res = Pull.search(
+                [('route_id', 'in', product_routes.ids),
+                 ('picking_type_id.default_location_src_id', 'child_of', stock_location.id)],
+                order='route_sequence, sequence', limit=1)
+            if res:
+                product.picking_zone_id = \
+                    res.picking_type_id.picking_zone_id.id
+
 
 # Due to a bug in odoo 10 we need to redefine the fields
 class ProductProduct(models.Model):

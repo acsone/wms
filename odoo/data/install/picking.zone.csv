@@ -1,0 +1,6 @@
+id,code,name
+__setup__.picking_zone_01,01,Médicaments
+__setup__.picking_zone_02,02,Matériel
+__setup__.picking_zone_03,03,Frigo
+__setup__.picking_zone_04,04,Aliments
+__setup__.picking_zone_05,05,Humain
