@@ -145,8 +145,8 @@
 }
 
 #products_table tr:not(:last-child) {
-    line-height: 4mm;
-    height: 4mm;
+    line-height: 3mm;
+    height: 3mm;
 }
 
 #products_table tr:last-child {

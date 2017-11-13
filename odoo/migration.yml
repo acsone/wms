@@ -183,6 +183,7 @@ migration:
           - specific_zetes
           - specific_data
           - specific_stock
+          - specific_report
       operations:
         post:
           - anthem songs.install.logistics::main

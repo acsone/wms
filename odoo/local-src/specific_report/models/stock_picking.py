@@ -69,19 +69,11 @@ class StockPicking(models.Model):
                  'move_lines.product_id',
                  'move_lines.product_uom_qty')
     def _compute_number_of_products(self):
-        type_human = self.env.ref('__setup__.stock_picking_type_humain')
-        type_cold = self.env.ref('__setup__.stock_picking_type_froid')
-        type_drug = self.env.ref('__setup__.stock_picking_type_medoc')
-        type_food = self.env.ref('__setup__.stock_picking_type_ali')
-        type_equipment = self.env.ref('__setup__.stock_picking_type_materiel')
-
-        main_categ = self.env.ref('product.product_category_all')
-        equipment_categ = self.env.ref('specific_data.product_categ_materiel')
-        food_categ = self.env.ref('specific_data.product_categ_ali')
-        drug_categ = self.env.ref('specific_data.product_categ_medoc')
-        # TO FIX: no fridge category, it's a route
-        fridge_categ = self.env.ref('specific_data.product_categ_medoc')
-        human_categ = self.env.ref('specific_data.product_categ_humain')
+        zone_drug = self.env.ref('__setup__.picking_zone_medicament')
+        zone_equipment = self.env.ref('__setup__.picking_zone_materiel')
+        zone_cold = self.env.ref('__setup__.picking_zone_frigo')
+        zone_food = self.env.ref('__setup__.picking_zone_aliments')
+        zone_human = self.env.ref('__setup__.picking_zone_humain')
 
         # Check quantities for packages
         for picking in self:
@@ -93,28 +85,28 @@ class StockPicking(models.Model):
             number_total = 0
 
             for operation in picking.pack_operation_pack_ids:
-                if not operation.package_id.original_picking_type_id:
-                    raise Warning(_('There is no original picking type on '
+                if not operation.package_id.original_picking_zone_id:
+                    raise Warning(_('There is no original picking zone on '
                                     'this operation.'))
 
-                picking_type = operation.package_id.original_picking_type_id
+                picking_zone = operation.package_id.original_picking_zone_id
 
                 qty = operation.package_id.nbr_packages
                 number_total += qty
 
-                if picking_type == type_drug:
+                if picking_zone == zone_drug:
                     number_of_drug += qty
-                elif picking_type == type_cold:
-                    number_of_cold += qty
-                elif picking_type == type_food:
-                    number_of_food += qty
-                elif picking_type == type_equipment:
+                elif picking_zone == zone_equipment:
                     number_of_equipment += qty
-                elif picking_type == type_human:
+                elif picking_zone == zone_cold:
+                    number_of_cold += qty
+                elif picking_zone == zone_food:
+                    number_of_food += qty
+                elif picking_zone == zone_human:
                     number_of_human_drug += qty
                 else:
-                    raise Warning(_('The picking type %s is not correct')
-                                  % picking_type.name)
+                    raise Warning(_('The picking zone %s is not correct')
+                                  % picking_zone.name)
 
             picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold
@@ -135,32 +127,24 @@ class StockPicking(models.Model):
                 if not operation.product_id.categ_id:
                     raise Warning(_('There is no category on this product'))
 
-                categ = operation.product_id.categ_id
+                picking_zone = operation.product_id.picking_zone_id
 
                 qty = operation.qty_done
                 item_number_total += qty
 
-                # We need to have the main product category of the product
-                # Equipment, Food, Drug, Fridge, Human drug
-                while categ.parent_id and categ.parent_id != main_categ:
-                    # The human drug category is a sub category of drug.
-                    if categ == human_categ:
-                        break
-                    categ = categ.parent_id
-
-                if categ == drug_categ:
+                if picking_zone == zone_drug:
                     item_number_of_drug += qty
-                elif categ == fridge_categ:
+                elif picking_zone == zone_cold:
                     item_number_of_cold += qty
-                elif categ == food_categ:
+                elif picking_zone == zone_food:
                     item_number_of_food += qty
-                elif categ == equipment_categ:
+                elif picking_zone == zone_equipment:
                     item_number_of_equipment += qty
-                elif categ == human_categ:
+                elif picking_zone == zone_human:
                     item_number_of_human_drug += qty
                 else:
-                    raise Warning(_('The category %s is not valid')
-                                  % categ.name)
+                    raise Warning(_('The picking zone %s is not correct')
+                                  % picking_zone.name)
 
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
@@ -178,7 +162,9 @@ class StockPicking(models.Model):
         result = []
         moves_witout_order = []
         backorder_moves_without_order = []
-        for line in self.move_lines:
+        lines_done = \
+            self.move_lines.filtered(lambda line: line.state == 'done')
+        for line in lines_done:
             if not line.order_id:
                 moves_witout_order.append(line)
             else:
