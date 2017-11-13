@@ -19,6 +19,5 @@
         'data/product.category.csv',
         'data/product.pricelist.csv'
     ],
-    'post_init_hook': 'post_init_hook',
     'installable': True,
 }

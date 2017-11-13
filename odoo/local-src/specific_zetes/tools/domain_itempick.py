@@ -108,7 +108,7 @@ class Itempick(DomainInterface):
         is_portable_printer_result_query = """
         SELECT picking_type.is_portable_printer
         FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS picking_type 
+          INNER JOIN stock_picking_type AS picking_type
           ON picking.picking_type_id = picking_type.id
         WHERE picking.id = %s"""
         self.request.env.cr.execute(is_portable_printer_result_query,
