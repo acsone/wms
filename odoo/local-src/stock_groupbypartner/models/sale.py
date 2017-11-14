@@ -16,14 +16,3 @@ class SaleOrder(models.Model):
                 ('group_id', '=', order.procurement_group_id.id)
                 ]).mapped('picking_id') if order.procurement_group_id else []
             order.delivery_count = len(order.picking_ids)
-
-    @api.multi
-    def action_confirm(self):
-        """ Do not group pickings having a dedicated carrier """
-        self_carrier = self.filtered('carrier_id')
-        if self_carrier:
-            super(SaleOrder, self_carrier.with_context(
-                nogrouppicking=True)).action_confirm()
-        self_nocarrier = self - self_carrier
-        if self_nocarrier:
-            super(SaleOrder, self_nocarrier).action_confirm()
