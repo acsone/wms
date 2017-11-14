@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Removed obsolete modules
 
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
 
