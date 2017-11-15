@@ -20,11 +20,6 @@ Installation
 
 There is no specific installation procedure for this module.
 
-Configuration
-=============
-
-/
-
 Usage
 =====
 
@@ -37,11 +32,6 @@ Usage
 For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
-
-Known issues / Roadmap
-======================
-
-/
 
 Bug Tracker
 ===========

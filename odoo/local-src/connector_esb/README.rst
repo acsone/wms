@@ -14,6 +14,7 @@ Existing synchronizations:
 * Export clients addresses to the ESB (differential, twice a day)
 * Export promotion alcyon to the ESB (differential, once a day)
 * Export products price to the ESB (differenctial, once a day)
+* Export stock to the ESB (differenctial, once a day)
 
 Webservices:
 

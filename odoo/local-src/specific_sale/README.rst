@@ -11,7 +11,7 @@ This module adds Alcyon specific fields and logic for sale order:
 * On sale order form view :
 
   * add onchange to check rule exception without wait the order confirmation
-  * add product quantity unavailable
+  * add product quantity unavailable (model, view, report)
   * on sub-form view for sale order lines
 
     * add product quantity unavailable

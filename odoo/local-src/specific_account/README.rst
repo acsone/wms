@@ -8,13 +8,15 @@ Specific Account
 
 This module adds Alcyon specific fields and logic for accounting.
 
-* Alcyon invoice report.
+* Add invoice/due month on account invoice report
 * Display 'Accounting Entries' menu for Accountants
 * Change the sequence to display the year of the end date
 * Add a new tax group APB to flag all APB tax
 * Display the vendor reference on supplier invoice
 * Set the reference of the supplier invoice with the supplier invoice number
 * Set the field "check total" required on vendor bills
+* Define invoice terms and conditions on company
+* Add a short order date on sale order
 
 Credits
 =======

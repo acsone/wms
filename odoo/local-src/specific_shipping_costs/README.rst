@@ -10,6 +10,9 @@ This module adds Alcyon specific fields and logic for shipping costs.
 
 * A new method for shipping costs calculation is available which allows to compute shipping costs on invoice.
 
+The new method allow to define for carrier/round a amount limit to have free shipping costs.
+In the negative, for each carrier/round we add shipping costs directly on invoice.
+
 Credits
 =======
 
