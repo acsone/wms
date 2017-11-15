@@ -172,3 +172,8 @@ migration:
     - version: 10.10.0
     - version: 10.11.0
     - version: 10.12.0
+    - version: 10.13.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_helpdesk

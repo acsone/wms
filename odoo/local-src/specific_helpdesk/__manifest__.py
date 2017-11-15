@@ -11,6 +11,8 @@
      'helpdesk',
      'mrp_repair',
      'product',
+     'purchase',
+     'sale',
      'specific_purchase',
      'stock',
  ],
@@ -18,7 +20,9 @@
  'data': [
      'security/ir.model.access.csv',
      'views/helpdesk.xml',
+     'views/purchase_order.xml',
      'views/res_partner.xml',
+     'views/sale_order.xml',
      'views/stock_picking.xml',
  ],
  'installable': True,
