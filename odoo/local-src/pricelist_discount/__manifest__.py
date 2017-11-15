@@ -9,10 +9,13 @@
     'license': 'AGPL-3',
     'category': 'Sales Management',
     'depends': [
+        'account_invoice_triple_discount',
         'product',
+        'product_price_category',
         'purchase',
         'sale',
         'sale_stock',
+        'sale_triple_discount',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -53,8 +53,8 @@ class AccountInvoice(models.Model):
         'invoice_line_ids',
         'invoice_line_ids.quantity',
         'invoice_line_ids.price_unit',
-        'invoice_line_ids.price_unit_supplier',
-        'invoice_line_ids.price_unit_alcyon',
+        'invoice_line_ids.discount2',
+        'invoice_line_ids.discount3',
         'tax_line_ids',
     )
     def _compute_total_amounts(self):
@@ -62,12 +62,18 @@ class AccountInvoice(models.Model):
 
         for inv in self:
             inv.amount_supplier_discount = sum([
-                (l.price_unit - l.price_unit_supplier) * l.quantity
+                (l.price_unit * l.discount2 / 100.0) * l.quantity
                 for l in inv.invoice_line_ids
             ])
 
             inv.amount_alcyon_discount = sum([
-                (l.price_unit_supplier - l.price_unit_alcyon) * l.quantity
+                (
+                    (
+                        (
+                            l.price_unit * (1 - (l.discount2 or 0.0) / 100.0)
+                        ) * l.discount3 / 100.0
+                    ) * l.quantity
+                )
                 for l in inv.invoice_line_ids
             ])
 

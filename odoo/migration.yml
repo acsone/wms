@@ -176,9 +176,15 @@ migration:
     - version: 10.13.0
       addons:
         upgrade:
+          # oca/account-invoicing
+          - account_invoice_triple_discount
+          # oca/sale-workflow
+          - sale_triple_discount
           ### local-src
+          - pricelist_discount
           - specific_helpdesk
           - specific_product
+          - specific_report
           - delivery_rounds
           - specific_zetes
           - specific_data

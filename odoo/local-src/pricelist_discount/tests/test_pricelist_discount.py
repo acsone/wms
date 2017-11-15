@@ -128,20 +128,17 @@ class TestPricelistDiscount(TransactionCase):
     def test_sale_discounts(self):
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
-        self.assertEqual(90, self.sol_p1.price_unit_supplier)
-        self.assertEqual(90, self.sol_p1.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p1.supplier_promotion)
-        self.assertEqual(0, self.sol_p1.alcyon_discount)
+        self.assertEqual(10, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
 
         self.assertEqual(90, self.sol_p1.price_subtotal)
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(180, self.sol_p2.price_unit_supplier)
-        self.assertEqual(171, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(342, self.sol_p2.price_subtotal)
@@ -153,22 +150,19 @@ class TestPricelistDiscount(TransactionCase):
 
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
-        self.assertEqual(90, self.sol_p1.price_unit_supplier)
-        self.assertEqual(90, self.sol_p1.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p1.supplier_promotion)
-        self.assertEqual(0, self.sol_p1.alcyon_discount)
+        self.assertEqual(10, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
 
         self.assertEqual(90, self.sol_p1.price_subtotal)
         self.assertEqual(18, self.sol_p1.price_tax)
         self.assertAlmostEqual(108, self.sol_p1.price_total)
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(180, self.sol_p2.price_unit_supplier)
-        self.assertEqual(171, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(342, self.sol_p2.price_subtotal)
@@ -183,22 +177,19 @@ class TestPricelistDiscount(TransactionCase):
 
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
-        self.assertEqual(90, self.sol_p1.price_unit_supplier)
-        self.assertEqual(90, self.sol_p1.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p1.supplier_promotion)
-        self.assertEqual(0, self.sol_p1.alcyon_discount)
+        self.assertEqual(10, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
 
         self.assertEqual(75, self.sol_p1.price_subtotal)
         self.assertEqual(15, self.sol_p1.price_tax)
         self.assertAlmostEqual(90, self.sol_p1.price_total)
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(180, self.sol_p2.price_unit_supplier)
-        self.assertEqual(171, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(285, self.sol_p2.price_subtotal)
@@ -212,20 +203,17 @@ class TestPricelistDiscount(TransactionCase):
 
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
-        self.assertEqual(100, self.sol_p1.price_unit_supplier)
-        self.assertEqual(100, self.sol_p1.price_unit_alcyon)
-        self.assertEqual(0, self.sol_p1.supplier_promotion)
-        self.assertEqual(0, self.sol_p1.alcyon_discount)
+        self.assertEqual(0, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
 
         self.assertEqual(100, self.sol_p1.price_subtotal)
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(200, self.sol_p2.price_unit_supplier)
-        self.assertEqual(190, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(0, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(0, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 190 * 2
         self.assertEqual(380, self.sol_p2.price_subtotal)
@@ -234,12 +222,11 @@ class TestPricelistDiscount(TransactionCase):
 
     def test_manually_change_unit_price(self):
         self.sol_p2.product_id_change()
+        self.sol_p2.onchange_product_id_reset_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(180, self.sol_p2.price_unit_supplier)
-        self.assertEqual(171, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(342, self.sol_p2.price_subtotal)
@@ -248,65 +235,53 @@ class TestPricelistDiscount(TransactionCase):
         self.sol_p2.price_unit = 150
 
         self.assertEqual(150, self.sol_p2.price_unit)
-        self.assertEqual(135, self.sol_p2.price_unit_supplier)
-        self.assertEqual(128.25, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(256.5, self.sol_p2.price_subtotal)
 
     def test_manually_change_discount(self):
         self.sol_p2.product_id_change()
+        self.sol_p2.onchange_product_id_reset_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(180, self.sol_p2.price_unit_supplier)
-        self.assertEqual(171, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(10, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(10, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 171 * 2
         self.assertEqual(342, self.sol_p2.price_subtotal)
 
         # Change supplier promotion
-        self.sol_p2 = self.sol_p2.with_context(
-            apply_onchange_promotion_discount=True
-        )
-        self.sol_p2.supplier_promotion = 8.24
-        self.sol_p2.onchange_promotion_discount()
+        self.sol_p2.discount2 = 8.24
+        self.sol_p2._compute_amount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(183.52, self.sol_p2.price_unit_supplier)
-        self.assertEqual(174.34, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(8.24, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(8.24, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
         self.assertEqual(348.68, self.sol_p2.price_subtotal)
 
         # Change alcyon discount
-        self.sol_p2.alcyon_discount = 3.83
-        self.sol_p2.onchange_promotion_discount()
+        self.sol_p2.discount3 = 3.83
+        self.sol_p2._compute_amount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(183.52, self.sol_p2.price_unit_supplier)
-        self.assertEqual(176.49, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(8.24, self.sol_p2.supplier_promotion)
-        self.assertEqual(3.83, self.sol_p2.alcyon_discount)
+        self.assertEqual(8.24, self.sol_p2.discount2)
+        self.assertEqual(3.83, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
         self.assertEqual(352.98, self.sol_p2.price_subtotal)
 
         # Change both
-        self.sol_p2.supplier_promotion = 20
-        self.sol_p2.alcyon_discount = 10
-        self.sol_p2.onchange_promotion_discount()
+        self.sol_p2.discount2 = 20
+        self.sol_p2.discount3 = 10
+        self.sol_p2._compute_amount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(160, self.sol_p2.price_unit_supplier)
-        self.assertEqual(144, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(20, self.sol_p2.supplier_promotion)
-        self.assertEqual(10, self.sol_p2.alcyon_discount)
+        self.assertEqual(20, self.sol_p2.discount2)
+        self.assertEqual(10, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
         self.assertEqual(288, self.sol_p2.price_subtotal)
@@ -315,25 +290,21 @@ class TestPricelistDiscount(TransactionCase):
         self.sol_p2.product_uom_qty = 1
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(160, self.sol_p2.price_unit_supplier)
-        self.assertEqual(144, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(20, self.sol_p2.supplier_promotion)
-        self.assertEqual(10, self.sol_p2.alcyon_discount)
+        self.assertEqual(20, self.sol_p2.discount2)
+        self.assertEqual(10, self.sol_p2.discount3)
 
         self.assertEqual(144, self.sol_p2.price_subtotal)
 
         # Bug when only alcyon was filled
-        # (And alcyon_discount should not be recompute)
+        # (And discount3 should not be recompute)
         self.sol_p2.price_unit = 0.46
-        self.sol_p2.supplier_promotion = 0
-        self.sol_p2.alcyon_discount = 5
-        self.sol_p2.onchange_promotion_discount()
+        self.sol_p2.discount2 = 0
+        self.sol_p2.discount3 = 5
+        self.sol_p2._compute_amount()
 
         self.assertEqual(0.46, self.sol_p2.price_unit)
-        self.assertEqual(0.46, self.sol_p2.price_unit_supplier)
-        self.assertEqual(0.44, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(0, self.sol_p2.supplier_promotion)
-        self.assertEqual(5, self.sol_p2.alcyon_discount)
+        self.assertEqual(0, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         self.assertEqual(0.44, self.sol_p2.price_subtotal)
 
@@ -342,6 +313,7 @@ class TestPricelistDiscount(TransactionCase):
 
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.sale.action_confirm()
 
@@ -360,16 +332,16 @@ class TestPricelistDiscount(TransactionCase):
             lambda l: l.product_id == self.p1
         )
         self.assertEqual(100, line1.price_unit)
-        self.assertEqual(10, line1.supplier_promotion)
-        self.assertEqual(0, line1.alcyon_discount)
+        self.assertEqual(10, line1.discount2)
+        self.assertEqual(0, line1.discount3)
         self.assertEqual(90, line1.price_subtotal)
 
         line2 = invoice.invoice_line_ids.filtered(
             lambda l: l.product_id == self.p2
         )
         self.assertEqual(200, line2.price_unit)
-        self.assertEqual(10, line2.supplier_promotion)
-        self.assertEqual(5, line2.alcyon_discount)
+        self.assertEqual(10, line2.discount2)
+        self.assertEqual(5, line2.discount3)
         self.assertEqual(342, line2.price_subtotal)
 
         # Check taxes
@@ -387,22 +359,19 @@ class TestPricelistDiscount(TransactionCase):
 
         for line in self.sale.order_line:
             line.product_id_change()
+            line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
-        self.assertEqual(0, self.sol_p1.price_unit_supplier)
-        self.assertEqual(0, self.sol_p1.price_unit_alcyon)
-        self.assertEqual(100, self.sol_p1.supplier_promotion)
-        self.assertEqual(0, self.sol_p1.alcyon_discount)
+        self.assertEqual(100, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
 
         self.assertEqual(0, self.sol_p1.price_subtotal)
         self.assertEqual(0, self.sol_p1.price_tax)
         self.assertAlmostEqual(0, self.sol_p1.price_total)
 
         self.assertEqual(200, self.sol_p2.price_unit)
-        self.assertEqual(0, self.sol_p2.price_unit_supplier)
-        self.assertEqual(0, self.sol_p2.price_unit_alcyon)
-        self.assertEqual(100, self.sol_p2.supplier_promotion)
-        self.assertEqual(0, self.sol_p2.alcyon_discount)
+        self.assertEqual(100, self.sol_p2.discount2)
+        self.assertEqual(5, self.sol_p2.discount3)
 
         self.assertEqual(0, self.sol_p2.price_subtotal)
         self.assertEqual(0, self.sol_p2.price_tax)
