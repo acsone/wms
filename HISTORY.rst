@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-991: Fix display of 'sale price 2' on product form view
+
 **Build**
 
 **Documentation**

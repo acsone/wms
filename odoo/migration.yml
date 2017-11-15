@@ -177,3 +177,4 @@ migration:
         upgrade:
           ### local-src
           - specific_helpdesk
+          - specific_product
