@@ -15,6 +15,15 @@ Unreleased
 **Documentation**
 
 
+10.12.1 (2017-11-17)
+++++++++++++++++++++
+
+**Build**
+
+* Make attachment_s3 compatible with AWS
+
+
+
 10.12.0 (2017-10-31)
 ++++++++++++++++++++
 
