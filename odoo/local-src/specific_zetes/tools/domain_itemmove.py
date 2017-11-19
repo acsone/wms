@@ -5,6 +5,7 @@ from odoo import _
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
+from .domain_catchweight import Catchweight
 
 _logger = logging.getLogger(__name__)
 
@@ -191,13 +192,13 @@ class Itemmove(DomainInterface):
                     'zetes_state': status
                 })
 
-            if status == constants.MOVE_DEFAULT or \
-                    (move_type == constants.MOVE_TYPE_PUT
-                     and status == constants.MOVE_FULL):
-                self.complete_operation(params)
+            # Retrieve the quantity
+            quantity = params.quantity and float(params.quantity) or 0
 
+            # and the lot number
+            lot_number = params.lotNumber
 
-
+            Catchweight.add_quantity(move, quantity, lot_number)
 
         except Exception as e:
             _logger.error(str(e))
