@@ -60,18 +60,18 @@ class ReportStockQuantBylocation(models.Model):
             'location_id': self.location_id.id,
             'location_dest_id': picking_type.default_location_dest_id.id,
         })
-        self.env['stock.move'].create({
-            'name': self.product_id.display_name,
-            'picking_id': picking.id,
-            'product_id': self.product_id.id,
-            'product_uom': self.product_id.uom_id.id,
-            'product_uom_qty': self.qty,
-            'location_id': self.location_id.id,
-            'location_dest_id': picking_type.default_location_dest_id.id,
-        })
+        # self.env['stock.move'].create({
+        #     'name': self.product_id.display_name,
+        #     'picking_id': picking.id,
+        #     'product_id': self.product_id.id,
+        #     'product_uom': self.product_id.uom_id.id,
+        #     'product_uom_qty': self.qty,
+        #     'location_id': self.location_id.id,
+        #     'location_dest_id': picking_type.default_location_dest_id.id,
+        # })
         # TODO If the "Reserve" flow don't use the RESU_ASSIGNMENT to start
         # the picking, we need to assign the picking manually
-        picking.action_assign()
+        # picking.action_assign()
 
         return picking
 

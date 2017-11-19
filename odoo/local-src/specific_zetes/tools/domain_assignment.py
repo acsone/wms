@@ -262,6 +262,7 @@ class Assignment(DomainInterface):
         FROM stock_picking AS picking
           INNER JOIN stock_picking_type AS type
             ON picking.picking_type_id = type.id
+          LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
           INNER JOIN round_instance AS round
             ON picking.delivery_round_id = round.id
         WHERE picking.zetes_state IN %s
@@ -280,11 +281,8 @@ class Assignment(DomainInterface):
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            zone = \
-                self.request.env['stock.picking.type'].sudo(self._user) \
-                    .search([('zone_code', '=', zone_code)])
-            picking_query += "AND picking.picking_type_id = %s "
-            query_values.append(zone.id)
+            picking_query += "AND picking_zone.code = %s "
+            query_values.append(zone_code)
 
         # If requestType is completed we looking
         # for a picking without an operator
@@ -307,23 +305,40 @@ class Assignment(DomainInterface):
             return picking
 
         # Picking not found. Try to create a new one.
-        domain = [('reservation_id', '=', False),
-                  ('location_id', 'child_of', 'Parking')]
+        parking_query = """
+        SELECT stock_location.id
+        FROM stock_location
+          LEFT JOIN picking_zone 
+            ON stock_location.picking_zone_id = picking_zone.id
+        WHERE stock_location.kind = 'parking'
+        """
+        parking_query_values = []
+
         zone_code = params.Cri01
         if zone_code:
-            # TODO Manage Zone Code
-            pass
+            parking_query += "AND picking_zone.code = %s "
+            parking_query_values.append(zone_code)
+        self.request.env.cr.execute(parking_query, tuple(parking_query_values))
+        location_ids = [x[0] for x in self.request.env.cr.fetchall()]
+
+        report_query = """
+        SELECT id
+        FROM report_stock_quant_bylocation
+        WHERE reservation_id IS NULL
+        AND location_id IN %s
+        ORDER BY refill_priority
+        LIMIT 1
+        """
+        self.request.env.cr.execute(report_query, (tuple(location_ids), ))
+        query_result = self.request.env.cr.fetchone()
+
+        if not query_result:
+            return False
+        report_id = query_result[0]
 
         model_name = 'report.stock.quant.bylocation'
-        report = self.request.sudo(self._user).env[model_name].search(
-            domain,
-            limit=1,
-            order='refill_priority'
-        )
-
-        if not report:
-            return False
-
+        report = \
+            self.request.env[model_name].sudo(self._user).browse(report_id)
         # Create the picking
         picking = report.sudo(self._user).create_picking()
         picking.button_fillwithstock()
@@ -340,6 +355,8 @@ class Assignment(DomainInterface):
                 FROM stock_picking AS picking
                   INNER JOIN stock_picking_type AS type
                     ON picking.picking_type_id = type.id
+                  LEFT JOIN picking_zone
+                    ON type.picking_zone_id = picking_zone.id
                   INNER JOIN round_instance AS round
                     ON picking.delivery_round_id = round.id
                 WHERE picking.zetes_state IN %s
@@ -358,11 +375,8 @@ class Assignment(DomainInterface):
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            zone = \
-                self.request.env['stock.picking.type'].sudo(self._user) \
-                    .search([('zone_code', '=', zone_code)])
-            picking_query += "AND picking.picking_type_id = %s "
-            query_values.append(zone.id)
+            picking_query += "AND picking_zone.code = %s "
+            query_values.append(zone_code)
 
         # If requestType is completed we looking
         # for a picking without an operator
@@ -385,21 +399,40 @@ class Assignment(DomainInterface):
             return picking
 
         # Picking not found. Try to create a new one.
-        domain = []
+        reserve_query = """
+        SELECT stock_location.id
+        FROM stock_location
+          LEFT JOIN picking_zone 
+            ON stock_location.picking_zone_id = picking_zone.id
+        WHERE stock_location.kind = 'reserve'
+        """
+        reserve_query_values = []
+
         zone_code = params.Cri01
         if zone_code:
-            # TODO Manage Zone Code
-            pass
+            reserve_query += "AND picking_zone.code = %s "
+            reserve_query_values.append(zone_code)
+        self.request.env.cr.execute(reserve_query,
+                                    tuple(reserve_query_values))
+        location_ids = [x[0] for x in self.request.env.cr.fetchall()]
+
+        report_query = """
+            SELECT id
+            FROM report_stock_quant_bylocation_reserve
+            WHERE location_id IN %s
+            ORDER BY refill_priority
+            LIMIT 1
+            """
+        self.request.env.cr.execute(report_query, (tuple(location_ids), ))
+        query_result = self.request.env.cr.fetchone()
+
+        if not query_result:
+            return False
+        report_id = query_result[0]
 
         model_name = 'report.stock.quant.bylocation.reserve'
-        report = self.request.sudo(self._user).env[model_name].search(
-            domain,
-            limit=1,
-            order='refill_priority'
-        )
-
-        if not report:
-            return False
+        report = \
+            self.request.env[model_name].sudo(self._user).browse(report_id)
 
         # Create the picking
         picking = report.sudo(self._user).create_picking()

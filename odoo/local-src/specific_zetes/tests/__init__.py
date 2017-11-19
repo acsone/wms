@@ -11,3 +11,5 @@ from . import test_usercontext
 from . import test_full
 from . import test_exceptions
 from . import test_interruption
+from . import test_assignment_parking
+from . import test_assignment_reserve

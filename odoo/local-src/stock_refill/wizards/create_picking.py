@@ -29,7 +29,7 @@ class StockWizardReassort(models.TransientModel):
     @api.multi
     def confirm(self):
         model = self._context['active_model']
-        assert model.startswith('report.stock.quant.bylocation.reserve'), \
+        assert model.startswith('report.stock.quant.bylocation'), \
             "Invalid Model"
 
         pickings = self.env['stock.picking']
