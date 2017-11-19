@@ -410,7 +410,8 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_medoc,
          'sequence': 4,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_medicament').id,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -448,7 +449,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 9,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_medicament').id,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_ali',
          'name': 'Rangement Aliments',
@@ -493,7 +495,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 10,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_medicament').id,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_reassort_ali',
          'name': 'Reassort Aliments',
