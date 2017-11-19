@@ -43,7 +43,8 @@ class ProductTemplate(models.Model):
                 product.route_ids | product.categ_id.total_route_ids
             res = Pull.search(
                 [('route_id', 'in', product_routes.ids),
-                 ('picking_type_id.default_location_src_id', 'child_of', stock_location.id)],
+                 ('picking_type_id.default_location_src_id',
+                  'child_of', stock_location.id)],
                 order='route_sequence, sequence', limit=1)
             if res:
                 product.picking_zone_id = \
