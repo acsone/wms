@@ -210,7 +210,7 @@ class TestFull(ZetesTest):
         picking_codes = \
             [result_picking.operValue for result_picking in results]
         medic_picking_type = self.picking_type_medoc
-        medic_picking_code = medic_picking_type.zone_code
+        medic_picking_code = medic_picking_type.picking_zone_id.code
         self.assertIn(medic_picking_code, picking_codes)
 
         ##########

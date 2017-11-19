@@ -38,7 +38,7 @@ class Refdata(DomainInterface):
             picking_values.update({
                 'respCode': constants.RESPONSE_CODE_OK,
                 'dataType': 2,  # Constant value
-                'operValue': picking_type.zone_code,
+                'operValue': picking_type.picking_zone_id.code,
                 'promptInfo': picking_type.name
             })
             result.append(picking_values)

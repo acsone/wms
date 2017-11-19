@@ -19,7 +19,8 @@ class TestRefdata(ZetesTest):
 
         picking_types = self.env['stock.picking.type']\
             .search([('subcode', '=', 'PICK')])
-        picking_codes = [pick_type.zone_code for pick_type in picking_types]
+        picking_codes = [pick_type.picking_zone_id.code
+                         for pick_type in picking_types]
 
         results = []
         for result_line in result_lines:

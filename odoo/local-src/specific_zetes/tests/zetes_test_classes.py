@@ -129,6 +129,14 @@ class ZetesTest(TransactionCase):
         })
         update_qty_wizard.change_product_qty()
 
+        self.picking_zone_medoc = self.env.ref(
+            '__setup__.picking_zone_medicament', raise_if_not_found=False)
+        if not self.picking_zone_medoc:
+            self.picking_zone_medoc = self.env['picking.zone'].create({
+                'code': '01',
+                'name': 'Medicament',
+            })
+
         # The picking type "Medoc" is create after test
         # However I test if the database already contains this picking type
         self.picking_type_medoc = \
@@ -150,7 +158,7 @@ class ZetesTest(TransactionCase):
                 'groupbypartner': True,
                 'color': 7,
                 'sequence': 4,
-                'zone_code': '01',
+                'picking_zone_id': self.picking_zone_medoc.id,
             })
 
         tomorrow = datetime.now() + relativedelta(days=1)

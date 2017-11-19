@@ -186,7 +186,7 @@ class TestInterruption(ZetesTest):
         self.assertEqual(result.unitSlam, '0')
 
         medic_picking_type = self.picking_type_medoc
-        medic_picking_code = medic_picking_type.zone_code
+        medic_picking_code = medic_picking_type.picking_zone_id.code
 
         request_assignment_params = Parameters(new_assignment_obj)
         request_assignment_params.update({
