@@ -15,6 +15,7 @@ class TestAssignemnt(ZetesTest):
         request_params.update({
             'Cri01': None,
             'Cri02': None,
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
         })
 
@@ -29,7 +30,6 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.groupNum, str(self.picking.id))
         self.assertEqual(result.Usf03, str(ROUND_CODE))  # Round code
         self.assertEqual(result.Usf06, 'C')
-        self.assertEqual(result.Usf07, PARTNER_NAME)  # Name of partner
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
         # Try with different parameters

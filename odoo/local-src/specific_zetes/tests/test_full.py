@@ -218,7 +218,7 @@ class TestFull(ZetesTest):
         ##########
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': '1',
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,
@@ -481,7 +481,7 @@ class TestFull(ZetesTest):
         ###########
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': '1',
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,

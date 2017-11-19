@@ -192,6 +192,7 @@ class TestInterruption(ZetesTest):
         request_assignment_params.update({
             'Cri02': None,
             'Cri01': medic_picking_code,
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': 1
         })
         result_str = assignement_obj.requ(request_assignment_params)

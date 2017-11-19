@@ -53,7 +53,7 @@ class Assignment(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        assignment_type = params.assignmentType
+        assignment_type = params.assignmentType and int(params.assignmentType)
         # Search for a standard picking
         if assignment_type == constants.PICKING_ASSIGNMENT:
             picking = self.get_picking(params)
@@ -102,6 +102,10 @@ class Assignment(DomainInterface):
             'Usf03': round_name,
             'Usf04': 0,  # Constant value
             'Usf05': 0,  # Constant value
+            'Usf08': '{} {}'.format(partner.zip, partner.city),  # Zip + city
+            'Usf09': len(picking.pack_operation_product_ids),
+            # Nbr of operation
+            'Usf10': None,
         })
 
         if partner.is_passport_required:
@@ -193,6 +197,7 @@ class Assignment(DomainInterface):
             FROM stock_picking AS picking
               INNER JOIN stock_picking_type AS type
                 ON picking.picking_type_id = type.id
+              LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
               INNER JOIN round_instance AS round
                 ON picking.delivery_round_id = round.id
             WHERE picking.delivery_round_state = 'open'
@@ -202,22 +207,19 @@ class Assignment(DomainInterface):
                   AND EXISTS(SELECT 1
                              FROM stock_pack_operation AS operation
                              WHERE operation.picking_id = picking.id
-                             AND operation.zetes_state IN %S)
+                             AND operation.zetes_state in %s)
                     """
             query_values = [
                 (constants.AS_DEFAULT, constants.AS_CANCELED),
+                constants.PICKING_ASSIGNMENT,
                 (constants.OP_DEFAULT, constants.OP_SKIPPED),
-                constants.PICKING_ASSIGNMENT
             ]
 
             # Search a picking in a specific zone (like Food)
             zone_code = params.Cri01
             if zone_code:
-                zone = \
-                    self.request.env['stock.picking.type'].sudo(self._user) \
-                        .search([('zone_code', '=', zone_code)])
-                picking_query += "AND picking.picking_type_id = %s "
-                query_values.append(zone.id)
+                picking_query += "AND picking_zone.code = %s "
+                query_values.append(zone_code)
 
             # If requestType is completed we looking
             # for a picking without an operator
@@ -267,12 +269,12 @@ class Assignment(DomainInterface):
           AND EXISTS(SELECT 1
                      FROM stock_pack_operation AS operation
                      WHERE operation.picking_id = picking.id
-                     AND operation.zetes_state IN %S)
+                     AND operation.zetes_state IN %s)
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
+            constants.PARKING_ASSIGNMENT,
             (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            constants.PARKING_ASSIGNMENT
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -345,12 +347,12 @@ class Assignment(DomainInterface):
                   AND EXISTS(SELECT 1
                              FROM stock_pack_operation AS operation
                              WHERE operation.picking_id = picking.id
-                             AND operation.zetes_state IN %S)
+                             AND operation.zetes_state IN %s)
                         """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
+            constants.RESERVE_ASSIGNMENT,
             (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            constants.RESERVE_ASSIGNMENT
         ]
 
         # Search a picking in a specific zone (like Food)

@@ -85,7 +85,7 @@ class Catchweight(DomainInterface):
         lot_number = params.Usf01
 
         try:
-            self.add_quantity(move_id, quantity, lot_number)
+            self.add_quantity(move, quantity, lot_number)
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
