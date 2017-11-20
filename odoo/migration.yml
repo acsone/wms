@@ -191,6 +191,7 @@ migration:
           - specific_stock
           - specific_report
           - specific_sale
+          - stock_groupbypartner
       operations:
         post:
           - anthem songs.install.logistics::main

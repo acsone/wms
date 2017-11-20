@@ -16,6 +16,7 @@ Unreleased
 * ALCN-997: Rewrite entirely sale order line discounts
 * ALCN-982: Add a picking zone on picking type, product and location
 * Stock: Enable internal transfer
+* Allow to define a carrier having no round template and still group pickings
 
 **Bugfixes**
 * Delivery Round: stock move action_done: singleton expected error
