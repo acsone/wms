@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-1001: Don't copy the delivery round when we create a back order of a picking
 
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
 * ALCN-999: Fix some small bugs with the module delivery_rounds
