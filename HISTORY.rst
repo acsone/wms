@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Delivery Round: stock move action_done: singleton expected error
 
 **Build**
 

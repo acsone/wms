@@ -87,7 +87,7 @@ class StockMove(models.Model):
         # No need to perform the assignment now (new pack operation
         # creation), it is performed later when the procurement is
         # run.
-        operations_to_recompute = pickings.pack_operation_ids. \
+        operations_to_recompute = pickings.mapped('pack_operation_ids'). \
             filtered(lambda op: op.product_id in products)
         if operations_to_recompute:
             _logger.debug("Cleaning operations %s",
