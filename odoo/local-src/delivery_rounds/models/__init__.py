@@ -7,3 +7,4 @@ from . import stock_move
 from . import delivery_carrier
 from . import sale_order
 from . import round_tag
+from . import cron_delivery_plan

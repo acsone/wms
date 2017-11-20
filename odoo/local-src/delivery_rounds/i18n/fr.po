@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-17 15:01+0000\n"
-"PO-Revision-Date: 2017-10-17 15:01+0000\n"
+"POT-Creation-Date: 2017-11-18 14:45+0000\n"
+"PO-Revision-Date: 2017-11-18 14:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,11 @@ msgstr "<span>Actions</span>"
 #: model:ir.ui.menu,name:delivery_rounds.menu_delivery_round_actions
 msgid "Actions"
 msgstr "Actions"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_active
+msgid "Active"
+msgstr "Actif"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/sale_order.py:58
@@ -112,6 +117,7 @@ msgid "Confirmed"
 msgstr "Confirmé"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_create_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_create_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_create_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_create_uid
@@ -126,6 +132,7 @@ msgid "Created by"
 msgstr "Créé par"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_create_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_create_date
@@ -138,6 +145,12 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_create_date
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: delivery_rounds
+#: model:ir.actions.act_window,name:delivery_rounds.action_cron_delivery_plan
+#: model:ir.ui.menu,name:delivery_rounds.menu_cron_delivery_plan
+msgid "Cron delivery plan"
+msgstr "Plan automatique de tournée"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_partner_id
@@ -154,8 +167,14 @@ msgstr "Clients"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_date
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_execution_date
 msgid "Date"
 msgstr "Date"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_date_overwrite
+msgid "Date overwrite"
+msgstr "Date spécifique"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_is_default_version
@@ -231,6 +250,7 @@ msgid "Destinations"
 msgstr "Destinations"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_display_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_complete_name
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_display_name
@@ -271,6 +291,12 @@ msgid "End mileage"
 msgstr "Kilométrage à la fin"
 
 #. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Friday"
+msgstr "Vendredi"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_id
@@ -323,6 +349,7 @@ msgid "Itinerary"
 msgstr "Itinéraire"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer___last_update
@@ -337,6 +364,7 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_write_uid
@@ -351,6 +379,7 @@ msgid "Last Updated by"
 msgstr "Denière mise à jour par"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_write_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_write_date
@@ -398,6 +427,11 @@ msgid "Mobile"
 msgstr "GSM"
 
 #. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Monday"
+msgstr "Lundi"
+
+#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "More <i class=\"fa fa-caret-down\"/>"
 msgstr "Plus <i class=\"fa fa-caret-down\"/>"
@@ -410,6 +444,11 @@ msgstr "Plus <i class=\"fa fa-caret-down\"/>"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_name
 msgid "Name"
 msgstr "Nom"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_next_execution
+msgid "Next execution"
+msgstr "Exécution suivante"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -485,7 +524,7 @@ msgstr "Bon de transfert"
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Pickings"
-msgstr "Pickings"
+msgstr "Préparations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_time_picking_planned
@@ -531,6 +570,11 @@ msgid "Sales Order"
 msgstr "Bon de commande"
 
 #. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Saturday"
+msgstr "Samedi"
+
+#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Seq."
 msgstr "Seq."
@@ -540,6 +584,16 @@ msgstr "Seq."
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_sequence
 msgid "Sequence"
 msgstr "Séquence"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,help:delivery_rounds.field_cron_delivery_plan_date_overwrite
+msgid "Set a date to execute the plan only once time"
+msgstr "Définissez une date pour exécuter le job une seule fois"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,help:delivery_rounds.field_cron_delivery_plan_week_day
+msgid "Set the day to execute the plan each week"
+msgstr "Définissez le jour pour exécuter le job toutes les semaines"
 
 #. module: delivery_rounds
 #: model:ir.ui.menu,name:delivery_rounds.menu_delivery_round_settings
@@ -583,7 +637,13 @@ msgid "Stops"
 msgstr "Arrêts"
 
 #. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Sunday"
+msgstr "Dimanche"
+
+#. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_tag
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_tag_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_tag_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_position_tag_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_tag_ids
@@ -616,7 +676,12 @@ msgstr "Le client doit être unique dans une tournée"
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_stock_picking_type
 msgid "The picking type determines the picking view"
-msgstr "Le type de picking détermine la vue des picking"
+msgstr "Le type de préparation détermine la vue de préparation"
+
+#. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Thursday"
+msgstr "Jeudi"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
@@ -627,6 +692,11 @@ msgstr "Aujourd'hui"
 #: model:ir.model,name:delivery_rounds.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Tuesday"
+msgstr "Mardi"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_picking_tree_noround
@@ -646,17 +716,29 @@ msgid "Vehicle Start Time"
 msgstr "Heure effective de départ du véhicule"
 
 #. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_version_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_version_id
 msgid "Version"
 msgstr "Version"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_template_version
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_template_version
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_tree
 msgid "Versions"
 msgstr "Versions"
+
+#. module: delivery_rounds
+#: selection:cron.delivery.plan,week_day:0
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_week_day
+msgid "Week day"
+msgstr "Jour de la semaine"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
@@ -670,9 +752,26 @@ msgid "You cannot have more than one default version at once."
 msgstr "Vous ne pouvez pas avoir plus d'une version par défaut à la fois"
 
 #. module: delivery_rounds
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:56
+#, python-format
+msgid "You cannot set a week day and a date overwrite in the same time."
+msgstr "Vous ne pouvez pas définir une date spécifique et un jour de la semaine en même temps."
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:53
+#, python-format
+msgid "You have to set the week day or the date overwrite"
+msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
+
+#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "box(es)"
 msgstr "Boite(s)"
+
+#. module: delivery_rounds
+#: model:ir.model,name:delivery_rounds.model_cron_delivery_plan
+msgid "cron.delivery.plan"
+msgstr "cron.delivery.plan"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban

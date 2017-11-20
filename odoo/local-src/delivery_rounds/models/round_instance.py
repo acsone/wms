@@ -181,7 +181,7 @@ class RoundInstance(models.Model):
                 ('partner_id', '=', customer.id)])
             if pos:
                 rank = pos.sequence + pos.itinerary_id.sequence*1000
-            self.env['round.instance.customer'].create({
+            self.env['round.instance.customer'].sudo().create({
                 'delivery_round_id': self.id,
                 'partner_id': customer.id,
                 'rank': rank,
@@ -203,7 +203,7 @@ class RoundInstance(models.Model):
                 ('partner_id', '=', customer.id),
                 ])
             if ric:
-                ric.unlink()
+                ric.sudo().unlink()
 
     @api.model
     def find(self, partner):
