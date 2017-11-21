@@ -392,17 +392,17 @@ msgstr "Nombre de médicaments humain"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_human_drug
 msgid "Number of human drug products"
-msgstr "Nombre de produits médicales humain"
+msgstr "Nombre de produits médicaux humain"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_drug
 msgid "Number of medical"
-msgstr "Nombre de médicales"
+msgstr "Nombre de médicale"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_drug
 msgid "Number of medical products"
-msgstr "Nombre de produits médicales"
+msgstr "Nombre de produits médicaux"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_total

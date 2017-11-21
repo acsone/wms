@@ -35,13 +35,13 @@ class ProductTemplate(models.Model):
 
     @api.depends('route_ids', 'route_from_categ_ids')
     def _compute_picking_zone_id(self):
-        Pull = self.env['procurement.rule']
+        Rule = self.env['procurement.rule']
         stock_location = self.env.ref('stock.stock_location_stock')
 
         for product in self:
             product_routes = \
                 product.route_ids | product.categ_id.total_route_ids
-            res = Pull.search(
+            res = Rule.search(
                 [('route_id', 'in', product_routes.ids),
                  ('picking_type_id.default_location_src_id',
                   'child_of', stock_location.id)],
