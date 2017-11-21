@@ -11,6 +11,7 @@ This specific module offers tools to integrate a voice picking (Zetes) in Odoo:
 - A controller to communicate with Zetes
 - A error handler to catch all errors during communication
 - An interface to easily expands existing tools
+- Define on picking type if we need to print labels on a portable printer
 
 Glossary
 ========

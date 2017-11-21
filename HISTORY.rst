@@ -12,6 +12,7 @@ Unreleased
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
 * ALCN-999: Fix some small bugs with the module delivery_rounds
 * ALCN-999: Fix some small bugs with the module delivery_rounds and add a cron to create delivery daily plan
+* ALCN-1002: Move the field food_type to specific_zetes and rename it with is_portable_printer
 
 **Bugfixes**
 * Delivery Round: stock move action_done: singleton expected error

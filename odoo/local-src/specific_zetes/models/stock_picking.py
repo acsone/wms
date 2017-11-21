@@ -84,6 +84,7 @@ class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
     zone_code = fields.Char('Zone code')
+    is_portable_printer = fields.Boolean('Portable printer', default=False)
 
     _sql_constraints = [
         (

@@ -104,14 +104,18 @@ class Itempick(DomainInterface):
         else:
             is_print_price = False
 
-        # If the picking type is 'Aliment' whe need to print on portable pinter
-        query = "SELECT picking_type_id FROM stock_picking WHERE id = %s"
-        self.request.env.cr.execute(query, (picking_id, ))
-        query_result = self.request.env.cr.fetchone()
+        # Check if we need to print on a portable printer
+        is_portable_printer_result_query = """
+        SELECT picking_type.is_portable_printer
+        FROM stock_picking AS picking
+          INNER JOIN stock_picking_type AS picking_type
+          ON picking.picking_type_id = picking_type.id
+        WHERE picking.id = %s"""
+        self.request.env.cr.execute(is_portable_printer_result_query,
+                                    (picking_id, ))
+        is_portable_printer_result = self.request.env.cr.fetchone()
 
-        type_food = self.request.env['stock.picking.type'].sudo(self._user)\
-            .search([('food_type', '=', True)])
-        if query_result and type_food and query_result[0] == type_food.id:
+        if is_portable_printer_result and is_portable_printer_result[0]:
             print_on_portable_printer = '1'
         else:
             print_on_portable_printer = '0'
