@@ -291,6 +291,7 @@ __import__.supplier_62798,62798,BRUNEEL PRODUCTS,Lieven Bauwensstraat 21C,8200,B
 __import__.supplier_62799,62799,BUSINESS & DECISION BENELUX,Sint Lambertusstraat 141,1200,St Lambrecht Woluwe,027741100,027741198,,BE0453257244,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_62800,62800,BUSINESS CENTER WALLONIE,"rue de Herve, 252",4030,GRIVEGNEE,,,,BE0447743288,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_62801,62801,BUSONI VALERIA,rue Frerissart 12,4550,VILLERS LE TEMPLE,,,,,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,0493630734
+__import__.supplier_62802,62802,BRUYERE MICHEL,52B L.A Schockaertstraat,1600,SINT PEETERS LEEUW,,,,BE0660870797,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,0479252901
 __import__.supplier_62850,62850,BURTONS MEDICAL EQUIP LTD,Pattenden Lane,TN12 9QD,"MARDEN,KENT",0044/1622834300,,,GB445840146,15,False,True,specific_partner.partner_category_supplier,base.uk,fr_BE,
 __import__.supplier_62900,62900,BECTON DICKINSON BENELUX,POB13 - Erembodegem-Dorp 86,9320,EREMBODEGEM-AALST,053/720211,053720549 *,order@europe.bd.com,BE0400292967,10,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_62910,62910,RAMADA PLAZA,Quai Saint Léonard 36,4000,LIEGE,04/2288111,04/2274575,,BE0448361318,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
@@ -494,6 +495,7 @@ __import__.supplier_63948,63948,DIDACTIC,Route des Bleuets 1800,76430,ETAINHUS,0
 __import__.supplier_63950,63950,DIMAVET,Zoning Biron 5,5590,CINEY,083/215757,083211721,,BE0425267794,7,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_63953,63953,DIMEX TECHNICS,rue de l'Eglise 42,4710,LONTZEN,09/2454888,09/2453888,,BE0452786595,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_63955,63955,DION,Route d'Offagne 17,6850,PALISEUL,061/533248,,,BE0418652394,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
+__import__.supplier_63956,63956,DIRECT LEASE NV,Noordersongel 19,2140,ANTWERPEN,035442910,035442906,,BE0866670452,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_63958,63958,DIRK DE TURCK,Limburg Stirumlaan 293,1780,WEMMEL,,051/570625,,BE571741259,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,0475/436772
 __import__.supplier_63960,63960,DISTRIBAL,Adm. de Boisotstraat 19-21,2000,ANTWERPEN,03/2384315,032160686,,,7,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_63961,63961,DISTRIFARM BVBA,Waregemstraat 456,8540,DEERLIJK,056/753170,056753169,,BE0867025788,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
@@ -826,7 +828,7 @@ __import__.supplier_68410,68410,HORMANN,Woudstraat 2B,3600,GENK,089/840222,089/8
 __import__.supplier_68500,68500,L'AIR DU TEMPS,"Rue d.Cyclistes frontières, 30",4600,VISE,04/3798000,043794800,joellenizet269@hotmail.be,,0,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68600,68600,HOECHST MARION ROUSSEL,Rue Colonel Bourg 155,1140,BRUXELLES,02/7197777,027197649,,,0,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_68630,68630,HUBERT CLAUDE,Rue de la Poste 10,4939,BASCHARAGE- GD LUXEMBOURG,352-502295,352-505445,,,15,False,True,specific_partner.partner_category_supplier,base.lu,fr_BE,
-__import__.supplier_69000,69000,HOSPITHERA,Rue de la petite île 3,1070,BRUXELLES,02/5350202,025350489,,,2,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,0477/491144
+__import__.supplier_69000,69000,HOSPITHERA,Rue de la petite île 3,1070,BRUXELLES,02/5350202,025350489 *,,,2,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,0477/491144
 __import__.supplier_69005,69005,HOSPIRA BENELUX,Stallestraat 63,1180,BRUXELLES,"03/231,90,09",080080243,anne.verstuyven@hospira.com,,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_69010,69010,HOTEL RESTAURANT DU PARC,Esplanade 13,7800,ATH,068/285485,068/285763,,BE0867509996,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_69011,69011,HOTEL PREMIERE CLASSE,33 rue de l'arbre courte joie,4000,LIEGE,042474751,042474543,,BE0426821675,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
@@ -1433,7 +1435,7 @@ __import__.supplier_79211,79211,SITECH,Chemin Saint-Pierre 40,7030,SAINT SYMPHOR
 __import__.supplier_79212,79212,SKYNET BELGACOM,"rue Colonel Bourg, 124",1140,EVERE,0800/23451,02/7061312,,BE0460102672,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_79213,79213,SIMON ANNICK,rue des Boletes 24,5310,LEUZE,,,,BE0692314536,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_79214,79214,HIPRA LABORATORIOS SA,Avda la Selva 135,17170,AMER(GIRONA),0034/972430660,0034972430661,,,15,False,True,specific_partner.partner_category_supplier,base.es,fr_BE,
-__import__.supplier_79215,79215,SEXMOOR LABORATOIRES,Zone Industrielle Massane,13210,ST REMY DE PROVENCE,0033/490921779,0033040925487,,FR49784132557,7,False,True,specific_partner.partner_category_supplier,base.fr,fr_BE,
+__import__.supplier_79215,79215,LEXMOOR LABORATOIRES,Zone Industrielle Massane,13210,ST REMY DE PROVENCE,0033/490921779,0033040925487,,FR49784132557,7,False,True,specific_partner.partner_category_supplier,base.fr,fr_BE,
 __import__.supplier_79216,79216,SOBELVIN,"Rue Diguette, 18",4031,ANGLEUR,04 366 66 66,04 366 00 76,,BE0407166804,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,
 __import__.supplier_79217,79217,SHIRLEY ALDRED & CO LIMITED,Hope Valley,S33 9HG,SHEFFIELD,00441433620003,00441433620388,,GB458189113,15,False,True,specific_partner.partner_category_supplier,base.uk,fr_BE,
 __import__.supplier_79218,79218,SELEKT,,,,,,,,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,

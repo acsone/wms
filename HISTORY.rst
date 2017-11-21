@@ -25,6 +25,8 @@ Unreleased
 
 **Build**
 
+* ALCN-1028: Refresh all data (demo and full data)
+
 **Documentation**
 
 * Complete readme on modules
