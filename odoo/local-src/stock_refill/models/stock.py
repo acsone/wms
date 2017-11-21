@@ -69,9 +69,6 @@ class ReportStockQuantBylocation(models.Model):
         #     'location_id': self.location_id.id,
         #     'location_dest_id': picking_type.default_location_dest_id.id,
         # })
-        # TODO If the "Reserve" flow don't use the RESU_ASSIGNMENT to start
-        # the picking, we need to assign the picking manually
-        # picking.action_assign()
 
         return picking
 

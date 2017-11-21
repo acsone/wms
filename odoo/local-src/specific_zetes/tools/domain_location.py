@@ -40,6 +40,9 @@ class Location(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
+        location = self.request.env['stock.location'].sudo(self._user)\
+            .search([])
+
         move_id = params.lineId
         if not move_id:
             result.update({

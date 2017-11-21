@@ -66,17 +66,21 @@ class Usercontext(DomainInterface):
                 'scenarioStatus': '01',
             })
 
+            # TODO Manage parking and reserve
+            # AND picking.delivery_round_state = 'open'
+            # AND type.subcode = 'PICK'
+
             # This query will check if the picker has an open picking.
             # This can happen if the Zetes console crash
             picking_query = """
-SELECT picking.id
+SELECT picking.id,
+  picking_zone.code,
+  picking.zetes_picking_type
 FROM stock_picking AS picking
-  INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-              INNER JOIN round_instance AS round
-              ON picking.delivery_round_id = round.id
-WHERE picking.delivery_round_state = 'open'
-      AND type.subcode = 'PICK'
-      AND picking.zetes_state IN %s
+  LEFT JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
+  LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
+  LEFT JOIN round_instance AS round ON picking.delivery_round_id = round.id
+WHERE picking.zetes_state IN %s
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
       AND picking.operator_id = %s
 ORDER BY round.date, round.time_picking_planned, picking.rank DESC
@@ -93,6 +97,8 @@ LIMIT 1;
                 result.update({
                     'unitSlam': 1,
                     'Usf01': query_result[0],
+                    'Usf02': query_result[1],
+                    'Usf03': query_result[2],
                 })
             else:
                 result.unitSlam = 0

@@ -87,7 +87,7 @@ class Itemmove(DomainInterface):
             self.request.env['stock.picking'].sudo(self._user) \
                 .browse(picking_id).write(
                 {'is_zetes_error': True,
-                 'traceback': error_message})
+                 'zetes_traceback': error_message})
 
             result = Parameters(self, action='resp')
             result.update({
@@ -115,6 +115,7 @@ class Itemmove(DomainInterface):
                 line_id = line.id
 
             line_values.update({
+                'moveStatus': '00',  # Constant value (new line)
                 'respCode': constants.RESPONSE_CODE_OK,
                 'groupNum': picking_id,
                 'moveLineId': line_id,
@@ -149,6 +150,13 @@ class Itemmove(DomainInterface):
                 'destLCCD': location_dest_id.get_checksum(),
             })
 
+            if line.zetes_state == constants.MOVE_FULL:
+                line_values.update({
+                    'destLC4': None,
+                    'destLC5': None,
+                    'destLCCD': None,
+                })
+
             if lot:
                 line_values.Usf01 = lot.checksum
             else:
@@ -156,7 +164,7 @@ class Itemmove(DomainInterface):
 
             # Set the type of load (load or unload) move type "Load"
             if move_type == constants.MOVE_TYPE_LOAD:
-                line.Usf02 = load_or_unload
+                line_values.Usf02 = load_or_unload
 
             result.append(line_values)
             sequence += 1
@@ -192,14 +200,6 @@ class Itemmove(DomainInterface):
                     'zetes_state': status
                 })
 
-            # Retrieve the quantity
-            quantity = params.quantity and float(params.quantity) or 0
-
-            # and the lot number
-            lot_number = params.lotNumber
-
-            Catchweight.add_quantity(move, quantity, lot_number)
-
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
@@ -216,12 +216,12 @@ class Itemmove(DomainInterface):
 
         # Search all pack operations for this picking
         # The state of the line must be
-        # "OP_DEFAULT", "OP_SKIPPED" or "OP_CANCELED"
+        # "MOVE_DEFAULT", "MOVE_SKIPPED" or "MOVE_FULL"
         lines = self.request.env['stock.pack.operation'].sudo(self._user) \
             .search([('picking_id', '=', picking_id),
-                     ('zetes_state', 'in', [constants.OP_DEFAULT,
-                                            constants.OP_SKIPPED,
-                                            constants.OP_CANCELED])],
+                     ('zetes_state', 'in', [constants.MOVE_DEFAULT,
+                                            constants.MOVE_SKIPPED,
+                                            constants.MOVE_FULL])],
                     order=order_by)
         # Filter lines
         # We want only operation with a quantity to to done different
@@ -232,9 +232,11 @@ class Itemmove(DomainInterface):
         reserved_quants_query = """
         SELECT sum(quant.qty)
         FROM stock_quant AS quant 
-        WHERE quant.location_id = %
+        WHERE quant.location_id = %s
         AND quant.product_id = %s
-        AND quant.reservation_id IS NOT NULL;
+        AND quant.reservation_id IS NOT NULL
+        AND quant.reservation_id NOT IN (
+          SELECT move.id FROM stock_move AS move WHERE move.picking_id = %s);
         """
 
         reserved_lines = []
@@ -245,9 +247,10 @@ class Itemmove(DomainInterface):
             # Check if there are some reserved quantities
             self.request.env.cr.execute(
                 reserved_quants_query, (line.location_id.id,
-                                        line.product_id.id))
+                                        line.product_id.id,
+                                        picking_id))
             query_result = self.request.env.cr.fetchone()
-            if query_result:
+            if query_result and query_result[0]:
                 reserved_qty = query_result[0]
                 put_away_qty = line_qty - reserved_qty
 
@@ -262,10 +265,11 @@ class Itemmove(DomainInterface):
                     lambda lot: lot.qty < lot.qty_todo
                 )
                 for pack_lot in pack_lots:
-                    put_away_lines.append(
-                        (line, pack_lot.lot_id,
-                         pack_lot.qty, constants.MOVE_LOAD)
-                    )
+                    if pack_lot.qty_todo:
+                        put_away_lines.append(
+                            (line, pack_lot.lot_id,
+                             pack_lot.qty_todo, constants.MOVE_LOAD)
+                        )
 
         return reserved_lines + put_away_lines
 

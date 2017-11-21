@@ -144,7 +144,7 @@ class Itempick(DomainInterface):
             self.request.env['stock.picking'].sudo(self._user)\
                 .browse(picking_id).write(
                 {'is_zetes_error': True,
-                 'traceback': error_message})
+                 'zetes_traceback': error_message})
 
             result = Parameters(self, action='resp')
             result.update({
@@ -230,6 +230,11 @@ class Itempick(DomainInterface):
             for lot in lots:
                 index += 1
                 setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
+
+            # If the available quantity in this bin is less than ?
+            # set the ZERO Flag check
+            if True:
+                line_values.cycleCountFlag = 1
 
             result.append(line_values)
             sequence += 1

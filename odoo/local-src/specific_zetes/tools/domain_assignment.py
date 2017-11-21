@@ -53,32 +53,39 @@ class Assignment(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        assignment_type = params.assignmentType and int(params.assignmentType)
-        # Search for a standard picking
-        if assignment_type == constants.PICKING_ASSIGNMENT:
-            picking = self.get_picking(params)
-            result.assignmentType = constants.PICKING_ASSIGNMENT
-        # Search for a picking assignment
-        elif assignment_type == constants.PARKING_ASSIGNMENT:
-            picking = self.get_picking_parking(params)
-            result.assignmentType = constants.PARKING_ASSIGNMENT
-        # Search for a picking in reserve
-        elif assignment_type == constants.RESERVE_ASSIGNMENT:
-            picking = self.get_picking_reserve(params)
-            result.assignmentType = constants.RESERVE_ASSIGNMENT
-        else:
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('Unknown assignment type')
-            })
-            return result.format()
+        # If the picker request a new picking (Cri02 is the picking ID)
+        if not params.Cri02:
+            assignment_type = params.assignmentType
+            # Search for a standard picking
+            if assignment_type == constants.PICKING_ASSIGNMENT:
+                picking = self.get_picking(params)
+                result.assignmentType = constants.PICKING_ASSIGNMENT
+            # Search for a picking assignment
+            elif assignment_type == constants.PARKING_ASSIGNMENT:
+                picking = self.get_picking_parking(params)
+                result.assignmentType = constants.PARKING_ASSIGNMENT
+            # Search for a picking in reserve
+            elif assignment_type == constants.RESERVE_ASSIGNMENT:
+                picking = self.get_picking_reserve(params)
+                result.assignmentType = constants.RESERVE_ASSIGNMENT
+            else:
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('Unknown assignment type')
+                })
+                return result.format()
 
-        if not picking:
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('Cannot found a picking')
-            })
-            return result.format()
+            if not picking:
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('Cannot found a picking')
+                })
+                return result.format()
+        # If the picker want to continue a picking (Cri02 is not empty)
+        else:
+            picking_id = int(params.Cri02)
+            picking = self.request.env['stock.picking'] \
+                .sudo(self._user).browse(picking_id)
 
         # There are two bin checksum on location
         # According the day of the month, the picking have to use the "Right"
@@ -102,7 +109,7 @@ class Assignment(DomainInterface):
             'Usf03': round_name,
             'Usf04': 0,  # Constant value
             'Usf05': 0,  # Constant value
-            'Usf08': '{} {}'.format(partner.zip, partner.city),  # Zip + city
+            'Usf08': '{} {}'.format(partner.zip or '', partner.city or ''),  # Zip + city
             'Usf09': len(picking.pack_operation_product_ids),
             # Nbr of operation
             'Usf10': None,
@@ -190,63 +197,56 @@ class Assignment(DomainInterface):
         :param params:
         :return:
         """
-        # If the picker request a new picking (Cri02 is the picking ID)
-        if not params.Cri02:
-            picking_query = """
-            SELECT picking.id
-            FROM stock_picking AS picking
-              INNER JOIN stock_picking_type AS type
-                ON picking.picking_type_id = type.id
-              LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
-              INNER JOIN round_instance AS round
-                ON picking.delivery_round_id = round.id
-            WHERE picking.delivery_round_state = 'open'
-                  AND type.subcode = 'PICK'
-                  AND picking.zetes_state IN %s
-                  AND picking.zetes_picking_type = %s
-                  AND EXISTS(SELECT 1
-                             FROM stock_pack_operation AS operation
-                             WHERE operation.picking_id = picking.id
-                             AND operation.zetes_state in %s)
-                    """
-            query_values = [
-                (constants.AS_DEFAULT, constants.AS_CANCELED),
-                constants.PICKING_ASSIGNMENT,
-                (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            ]
+        picking_query = """
+        SELECT picking.id
+        FROM stock_picking AS picking
+          INNER JOIN stock_picking_type AS type
+            ON picking.picking_type_id = type.id
+          LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
+          INNER JOIN round_instance AS round
+            ON picking.delivery_round_id = round.id
+        WHERE picking.delivery_round_state = 'open'
+              AND type.subcode = 'PICK'
+              AND picking.zetes_state IN %s
+              AND picking.zetes_picking_type = %s
+              AND EXISTS(SELECT 1
+                         FROM stock_pack_operation AS operation
+                         WHERE operation.picking_id = picking.id
+                         AND operation.zetes_state in %s)
+                """
+        query_values = [
+            (constants.AS_DEFAULT, constants.AS_CANCELED),
+            constants.PICKING_ASSIGNMENT,
+            (constants.OP_DEFAULT, constants.OP_SKIPPED),
+        ]
 
-            # Search a picking in a specific zone (like Food)
-            zone_code = params.Cri01
-            if zone_code:
-                picking_query += "AND picking_zone.code = %s "
-                query_values.append(zone_code)
+        # Search a picking in a specific zone (like Food)
+        zone_code = params.Cri01
+        if zone_code:
+            picking_query += "AND picking_zone.code = %s "
+            query_values.append(zone_code)
 
-            # If requestType is completed we looking
-            # for a picking without an operator
-            if params.requestType:
-                picking_query += "AND picking.operator_id IS NULL "
-            else:
-                picking_query += "AND picking.operator_id = %s"
-                query_values.append(self._user.id)
-
-            picking_query += "ORDER BY round.date, " \
-                             "round.time_picking_planned, " \
-                             "picking.rank DESC " \
-                             "LIMIT 1;"
-            self.request.env.cr.execute(picking_query, tuple(query_values))
-            query_result = self.request.env.cr.fetchone()
-
-            if query_result and query_result[0]:
-                picking_id = query_result[0]
-                picking = self.request.env['stock.picking'] \
-                    .sudo(self._user).browse(picking_id)
-            else:
-                return False
-        # If the picker want to continue a picking (Cri02 is not empty)
+        # If requestType is completed we looking
+        # for a picking without an operator
+        if params.requestType:
+            picking_query += "AND picking.operator_id IS NULL "
         else:
-            picking_id = int(params.Cri02)
+            picking_query += "AND picking.operator_id = %s"
+            query_values.append(self._user.id)
+
+        picking_query += "ORDER BY round.date, " \
+                         "round.time_picking_planned, " \
+                         "picking.rank DESC " \
+                         "LIMIT 1;"
+        self.request.env.cr.execute(picking_query, tuple(query_values))
+        query_result = self.request.env.cr.fetchone()
+
+        if query_result and query_result[0]:
+            picking_id = query_result[0]
             picking = self.request.env['stock.picking'] \
                 .sudo(self._user).browse(picking_id)
+        else:
+            return False
 
         return picking
 
@@ -275,7 +275,7 @@ class Assignment(DomainInterface):
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.PARKING_ASSIGNMENT,
-            (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -342,6 +342,11 @@ class Assignment(DomainInterface):
         # Create the picking
         picking = report.sudo(self._user).create_picking()
         picking.button_fillwithstock()
+
+        picking.write({
+            'zetes_picking_type': constants.PARKING_ASSIGNMENT
+        })
+
         return picking
 
     def get_picking_reserve(self, params):
@@ -369,7 +374,7 @@ class Assignment(DomainInterface):
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.RESERVE_ASSIGNMENT,
-            (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -437,4 +442,9 @@ class Assignment(DomainInterface):
         # Create the picking
         picking = report.sudo(self._user).create_picking()
         picking.button_fillwithstock()
+
+        picking.write({
+            'zetes_picking_type': constants.RESERVE_ASSIGNMENT
+        })
+
         return picking

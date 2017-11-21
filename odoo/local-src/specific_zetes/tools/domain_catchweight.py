@@ -70,63 +70,63 @@ class Catchweight(DomainInterface):
         :return:
         """
         move_id = params.lineId
+
         if not move_id:
             return
 
-        move = self.request.env['stock.pack.operation'].sudo(self._user) \
+        move = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(int(move_id))
         if not len(move):
             return
 
-        # Retrieve the quantity
-        quantity = params.Usf02 and float(params.Usf02) or 0
-
-        # and the lot number
-        lot_number = params.Usf01
-
         try:
-            self.add_quantity(move, quantity, lot_number)
+            if params.Usf03 or params.Usf03 == 0:
+                print "======> Set values"
+                return
+
+            # Retrieve the quantity
+            qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
+
+            # and the lot number
+            lot_number = params.Usf01
+            # If there is no lot number, it means that we don't care about lot
+            # (tracking => without lot). We can simply add the new quantity.
+            if not lot_number:
+                move.qty_done += qty_done_by_lot
+            else:
+                # Otherwise we need to search for the lot in Odoo
+                lot = self.request.env['stock.production.lot']\
+                    .sudo(self._user).search(
+                    [('product_id', '=', move.product_id.id),
+                     ('checksum', '=', lot_number)])
+                if lot:
+                    # When we have the lot, we will check if there no existing
+                    # quantity for this lot.
+                    pack_lot = \
+                        move.pack_lot_ids\
+                            .filtered(lambda line: line.lot_id.id == lot.id)
+
+                    # If there no existing line (quantity) for this lot
+                    # we will create a new line
+                    if not len(pack_lot):
+                        move.pack_lot_ids.create({
+                            'operation_id': move.id,
+                            'qty': qty_done_by_lot,
+                            'lot_id': lot.id,
+                        })
+                    # Otherwise we set the quantity for this lot
+                    # We don't need to add the new quantity to the lot
+                    # because Zetes send one request by lot
+                    else:
+                        pack_lot.write({'qty': qty_done_by_lot})
+
+                    # Set the final quantity on the move
+                    qty_done = move.qty_done + qty_done_by_lot
+                    move.write({
+                        'qty_done': qty_done,
+                    })
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
                        operation_id=move_id,
                        exception=e)
-
-    def add_quantity(self, move, quantity, lot_number=None):
-        # If there is no lot number, it means that we don't care about lot
-        # (tracking => without lot). We can simply add the new quantity.
-        if not lot_number:
-            move.qty_done += quantity
-        else:
-            # Otherwise we need to search for the lot in Odoo
-            lot = self.request.env['stock.production.lot']\
-                .sudo(self._user).search(
-                [('product_id', '=', move.product_id.id),
-                 ('checksum', '=', lot_number)])
-            if lot:
-                # When we have the lot, we will check if there no existing
-                # quantity for this lot.
-                pack_lot = \
-                    move.pack_lot_ids\
-                        .filtered(lambda line: line.lot_id.id == lot.id)
-
-                # If there no existing line (quantity) for this lot
-                # we will create a new line
-                if not len(pack_lot):
-                    move.pack_lot_ids.create({
-                        'operation_id': move.id,
-                        'qty': quantity,
-                        'lot_id': lot.id,
-                    })
-                # Otherwise we set the quantity for this lot
-                # We don't need to add the new quantity to the lot
-                # because Zetes send one request by lot
-                else:
-                    pack_lot.write({'qty': quantity})
-
-                # Set the final quantity on the move
-                qty_done = move.qty_done + quantity
-                move.write({
-                    'qty_done': qty_done,
-                })
-
