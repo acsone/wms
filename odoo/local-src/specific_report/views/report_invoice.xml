@@ -103,10 +103,10 @@
                                     <span t-field="line.price_unit" />
                                 </td>
                                 <td>
-                                    <span t-field="line.alcyon_discount"/>
+                                    <span t-field="line.discount3"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.supplier_promotion"/>
+                                    <span t-field="line.discount2"/>
                                 </td>
                                 <td>
                                     <span t-field="line.price_subtotal" />

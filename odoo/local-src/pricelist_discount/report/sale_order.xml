@@ -10,10 +10,10 @@
 
         <xpath expr="//span[@t-field='l.price_subtotal']/parent::td" position="before">
             <td class="text-right">
-                <span t-field="l.supplier_promotion"/>
+                <span t-field="l.discount2"/>
             </td>
             <td class="text-right">
-                <span t-field="l.alcyon_discount"/>
+                <span t-field="l.discount3"/>
             </td>
         </xpath>
 

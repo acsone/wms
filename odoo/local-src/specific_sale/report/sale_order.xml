@@ -98,10 +98,10 @@
 
                     <!-- BEGIN: Provide from pricelist_discount module (add t-if) -->
                     <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.supplier_promotion"/>
+                        <span t-field="l.discount2"/>
                     </td>
                     <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.alcyon_discount"/>
+                        <span t-field="l.discount3"/>
                     </td>
                     <!-- END: Provide from pricelist_discount module (add t-if) -->
 
