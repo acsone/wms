@@ -3,7 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import anthem
+from pkg_resources import resource_stream
 from anthem.lyrics.records import create_or_update
+from anthem.lyrics.loaders import load_csv_stream
+
+from ..common import req
 
 
 @anthem.log
@@ -51,6 +55,13 @@ def warehouse_settings(ctx):
         'code': 'VLB',
         'delivery_steps': 'pick_ship',
     })
+
+
+@anthem.log
+def create_picking_zones(ctx):
+    """ Creating picking zones """
+    content = resource_stream(req, 'data/install/picking.zone.csv')
+    load_csv_stream(ctx, 'picking.zone', content, delimiter=',')
 
 
 @anthem.log
@@ -372,7 +383,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_mat,
          'sequence': 6,
-         'zone_code': '02',
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
          },
         {'xmlid': '__setup__.stock_picking_type_ali',
          'name': 'Pick Aliments',
@@ -385,7 +396,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_ali,
          'sequence': 5,
-         'zone_code': '04',
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
          'is_portable_printer': True,
          },
         {'xmlid': '__setup__.stock_picking_type_medoc',
@@ -399,7 +410,8 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_medoc,
          'sequence': 4,
-         'zone_code': '01',
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -412,7 +424,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_froid,
          'sequence': 7,
-         'zone_code': '03',
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
          },
         {'xmlid': '__setup__.stock_picking_type_humain',
          'name': 'Pick Humain',
@@ -425,7 +437,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_mat,
          'sequence': 8,
-         'zone_code': '05',
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_humain').id,
          },
 
         {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
@@ -437,6 +449,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 9,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_ali',
          'name': 'Rangement Aliments',
@@ -447,6 +461,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_ali,
          'sequence': 9,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
          'name': 'Rangement Matériel',
@@ -457,6 +472,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_mat,
          'sequence': 9,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
          'name': 'Rangement Frigo',
@@ -467,6 +483,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_froid,
          'sequence': 9,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
          },
 
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
@@ -478,6 +495,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_medoc,
          'sequence': 10,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
          },
         {'xmlid': '__setup__.stock_picking_type_reassort_ali',
          'name': 'Reassort Aliments',
@@ -488,6 +507,7 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'color': color_ali,
          'sequence': 11,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
          },
         {'xmlid': '__setup__.stock_picking_type_return',
          'name': 'Retours',
@@ -550,7 +570,7 @@ def create_procurement_rules(ctx):
          'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_medoc',
-         'sequence': 15,
+         'sequence': 12,
          'name': 'WH: Stock -> Output (MED)',
          'action': 'move',
          'location_id': location_out.id,
@@ -561,7 +581,7 @@ def create_procurement_rules(ctx):
          'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_froid',
-         'sequence': 15,
+         'sequence': 10,
          'name': 'WH: Stock -> Output (FRIGO)',
          'action': 'move',
          'location_id': location_out.id,
@@ -628,14 +648,43 @@ def assign_route_categories(ctx):
 
 
 @anthem.log
+def set_picking_zone(ctx):
+    """
+    Set the picking zone on all picking locations and on products
+    :param ctx:
+    :return:
+    """
+    main_locations_picking_zone_mapping = {
+        '__setup__.stock_location_ali': '__setup__.picking_zone_aliments',
+        '__setup__.stock_location_froid': '__setup__.picking_zone_frigo',
+        '__setup__.stock_location_materiel': '__setup__.picking_zone_materiel',
+        '__setup__.stock_location_medoc': '__setup__.picking_zone_medicament',
+    }
+    for main_location_xmlid, picking_zone_xml_id in \
+            main_locations_picking_zone_mapping.iteritems():
+        main_location = ctx.env.ref(main_location_xmlid)
+        picking_zone_id = ctx.env.ref(picking_zone_xml_id)
+        children = ctx.env['stock.location'].search([
+            ('id', 'child_of', main_location.id)])
+        (main_location | children).write({
+            'picking_zone_id': picking_zone_id.id
+        })
+
+    # Recompute the picking zone on each products
+    ctx.env['product.template'].search([])._compute_picking_zone_id()
+
+
+@anthem.log
 def main(ctx):
     """ Configuring logistics """
     company_settings(ctx)
     activate_options(ctx)
     warehouse_settings(ctx)
+    create_picking_zones(ctx)
     create_locations(ctx)
     create_picking_types(ctx)
     create_procurement_rules(ctx)
     create_routes(ctx)
     create_putaway(ctx)
     assign_route_categories(ctx)
+    set_picking_zone(ctx)

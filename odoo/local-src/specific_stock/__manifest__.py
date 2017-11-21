@@ -34,6 +34,8 @@
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
+        'views/stock_picking_type.xml',
+        'views/picking_zone.xml',
 
         # Wizards
         'wizards/stock_receive_lot.xml',

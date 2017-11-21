@@ -58,6 +58,8 @@ class Assignment(DomainInterface):
 SELECT picking.id
 FROM stock_picking AS picking
   INNER JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
+  LEFT JOIN picking_zone AS picking_zone
+    ON type.picking_zone_id = picking_zone.id
   INNER JOIN round_instance AS round ON picking.delivery_round_id = round.id
 WHERE picking.delivery_round_state = 'open'
       AND type.subcode = 'PICK'
@@ -75,11 +77,8 @@ WHERE picking.delivery_round_state = 'open'
             # Search a picking in a specific zone (like Food)
             zone_code = params.Cri01
             if zone_code:
-                zone = \
-                    self.request.env['stock.picking.type'].sudo(self._user)\
-                        .search([('zone_code', '=', zone_code)])
-                picking_query += "AND picking.picking_type_id = %s "
-                query_values.append(zone.id)
+                picking_query += "AND picking_zone.code = %s "
+                query_values.append(zone_code)
 
             # If requestType is completed we looking
             # for a picking without an operator

@@ -99,7 +99,7 @@
                                     <span t-field="line.product_id.name"/>
                                 </td>
                                 <td style="text-align: center;">
-                                    <span t-if="line.product_id.categ_id == line.env.ref('specific_data.product_categ_frigo')">
+                                    <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </span>
                                 </td>
@@ -137,8 +137,8 @@
                             <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
                                 <td colspan="7" class="sale_separator">
-                                    <div class="no_background">
-                                        <div t-if="order">Balance to be delivered on order <span t-field="order.name"/></div>
+                                    <div class="no_background" style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm">
+                                        <div t-if="order" style="padding-left: 2mm; padding-right: 2mm;">Balance to be delivered on order <span t-field="order.name"/></div>
                                         <div t-if="not order">Balance to be delivered</div>
                                         <table style="width: 50%;">
                                             <tbody>

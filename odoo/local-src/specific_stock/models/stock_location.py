@@ -8,6 +8,7 @@ from odoo import models, fields, api
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
+    picking_zone_id = fields.Many2one('picking.zone', string='Picking zone')
     zone = fields.Char('Zone')
     corridor = fields.Char('Corridor')
     shelf = fields.Char('Shelf')

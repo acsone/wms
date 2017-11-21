@@ -4,7 +4,7 @@
 
 from datetime import date
 
-from odoo import models, api, _
+from odoo import models, api, _, fields
 from odoo.exceptions import Warning
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 
@@ -13,6 +13,8 @@ DATE_LENGTH = len(date.today().strftime(DATE_FORMAT))
 
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
+
+    picking_zone_id = fields.Many2one('picking.zone', string='Picking zone')
 
     @api.multi
     def name_get(self):
@@ -113,13 +115,14 @@ class StockPicking(models.Model):
     def put_in_pack(self):
         result = super(StockPicking, self).put_in_pack()
 
-        original_picking_type_id = self.mapped('picking_type_id')
-        if len(original_picking_type_id) == 1:
+        original_picking_zone_id = \
+            self.mapped('picking_type_id.picking_zone_id')
+        if len(original_picking_zone_id) == 1:
             packages = \
                 self.mapped('pack_operation_ids.result_package_id')\
-                .filtered(lambda package: not package.original_picking_type_id)
+                .filtered(lambda package: not package.original_picking_zone_id)
             packages.write({
-                'original_picking_type_id': original_picking_type_id.id,
+                'original_picking_zone_id': original_picking_zone_id.id,
             })
 
         return result

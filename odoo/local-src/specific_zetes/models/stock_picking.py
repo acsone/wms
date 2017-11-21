@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import random
 
-from odoo import models, fields, api, _
+from odoo import models, fields, api
 
 from .. import constants
 
@@ -83,13 +83,4 @@ class StockPackOperation(models.Model):
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    zone_code = fields.Char('Zone code')
     is_portable_printer = fields.Boolean('Portable printer', default=False)
-
-    _sql_constraints = [
-        (
-            'unique_zone_code',
-            'unique(zone_code)',
-            _('The zone picking type code should be unique.')
-        ),
-    ]

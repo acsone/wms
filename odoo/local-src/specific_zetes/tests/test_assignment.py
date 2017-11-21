@@ -35,7 +35,7 @@ class TestAssignemnt(ZetesTest):
         # Try with different parameters
         # Set a picking zone (Cri01)
         picking_zone_drugs = self.picking_type_medoc
-        request_params.Cri01 = picking_zone_drugs.zone_code
+        request_params.Cri01 = picking_zone_drugs.picking_zone_id.code
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))

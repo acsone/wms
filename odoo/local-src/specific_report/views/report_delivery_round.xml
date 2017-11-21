@@ -2,6 +2,7 @@
     <template id="delivery_rounds.delivery_round_report">
         <t t-foreach="docs" t-as="delivery">
             <t t-call="report.html_container">
+                <t t-set="index" t-as="1"/>
                 <div class="page">
                     <h2><span t-field="delivery.name"/></h2>
                     <div class="row" style="margin-top: 15px;">
@@ -73,7 +74,7 @@
                             <tbody>
                                 <tr t-foreach="delivery.shipping_ids.filtered(lambda x: x.state == 'done')" t-as="shipping">
                                     <td>
-                                        <span t-field="shipping.sequence" />
+                                        <span t-esc="index" />
                                     </td>
                                     <td>
                                         <span t-field="shipping.partner_id.name" />
@@ -131,13 +132,13 @@
                                         </t>
                                     </td>
                                     <td>
-                                        <t t-if="shipping.number_of_human_food">
-                                            <span t-esc="int(shipping.number_of_human_food)"/>
+                                        <t t-if="shipping.number_of_human_drug">
+                                            <span t-esc="int(shipping.number_of_human_drug)"/>
                                             box(es)
                                         </t>
-                                        <br t-if="shipping.number_of_human_food and shipping.item_number_of_human_food"/>
-                                        <t t-if="shipping.item_number_of_human_food">
-                                            <span t-esc="int(shipping.item_number_of_human_food)"/>
+                                        <br t-if="shipping.number_of_human_drug and shipping.item_number_of_human_drug"/>
+                                        <t t-if="shipping.item_number_of_human_drug">
+                                            <span t-esc="int(shipping.item_number_of_human_drug)"/>
                                             unit(s)
                                         </t>
                                     </td>
@@ -158,6 +159,7 @@
                                         </strong>
                                     </td>
                                 </tr>
+                                <t t-set="index + 1" t-as="index"/>
                             </tbody>
                         </table>
                     </div>
