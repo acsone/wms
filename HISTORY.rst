@@ -14,6 +14,7 @@ Unreleased
 * ALCN-999: Fix some small bugs with the module delivery_rounds and add a cron to create delivery daily plan
 
 **Bugfixes**
+* Delivery Round: stock move action_done: singleton expected error
 
 * ALCN-988: Fix compute_price_rule in product price category module
 * ALCN-991: Fix display of 'sale price 2' on product form view
