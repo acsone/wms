@@ -190,6 +190,7 @@ migration:
           - specific_data
           - specific_stock
           - specific_report
+          - specific_sale
       operations:
         post:
           - anthem songs.install.logistics::main

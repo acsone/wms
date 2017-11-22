@@ -22,6 +22,7 @@ Unreleased
 * ALCN-988: Fix compute_price_rule in product price category module
 * ALCN-991: Fix display of 'sale price 2' on product form view
 * Import DB2: Fix a bug with the location parser
+* ALCN-1026: Fix custom sale exceptions
 
 **Build**
 

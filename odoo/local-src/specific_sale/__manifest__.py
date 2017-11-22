@@ -22,6 +22,7 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         # Data
+        'data/base_override.yml',  # To remove all base exception rules
         'data/exception_rule.xml',
         # Report
         'report/sale_order.xml',
