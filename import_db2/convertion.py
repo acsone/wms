@@ -2,6 +2,7 @@
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from collections import OrderedDict
+import re
 
 from base import EntityMapper, FieldMapper
 from datetime import datetime
@@ -562,22 +563,19 @@ class LocationMapper(EntityMapper):
             )
             avenue = value[1]
 
-            if family in ('A', 'P'):
-                rack = value[2:4]
+            # If the third and fourth characters is a number, it means
+            # that it is a standard location (eg: GC28C3).
+            # Otherwise, it's a dynamic location (eg: GAE200).
+            rack = value[2:4]
+            if re.match(r'[0-9]{2}', rack):
+                # Standard rack
                 lvl = value[4]
                 bin = value[5]
-            elif family in ('Q', 'E'):
-                rack = value[2]
-                lvl = value[3]
-                bin = value[4:6]
-            elif family == 'G':
+            else:
                 # dynamic racks
                 rack = value[2]
                 lvl = value[3]
                 bin = value[4:6]
-                # TODO not found in PSTOCK non dynamic racks
-            else:  # skip V, W and other unknown
-                continue
 
             control_code = value[6:8]
 
