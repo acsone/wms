@@ -11,7 +11,7 @@
             <field name="code">
 veterinary = object.env.ref('specific_partner.partner_category_veterinary')
 if object.order_id.partner_id.alcyon_category_id != veterinary:
-    narcotic = object.env.ref('__init.product_categ_medoc')
+    narcotic = object.env.ref('specific_data.product_categ_medoc')
     if object.product_id.categ_id == narcotic:
         failed=True
             </field>
