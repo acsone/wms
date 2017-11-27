@@ -231,9 +231,23 @@ class Itempick(DomainInterface):
                 index += 1
                 setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
 
-            # If the available quantity in this bin is less than ?
-            # set the ZERO Flag check
-            if True:
+            # If the bin is empty we need to send the flag ZeroCheck
+            # to ask to the picker to check if the bin is really empty
+            available_qty_query = """
+            SELECT sum(quant.qty)
+            FROM stock_quant AS quant
+            WHERE quant.product_id = %s
+            AND quant.location_id = %s
+            AND quant.reservation_id IS NULL
+            """
+            self.request.env.cr.execute(available_qty_query,
+                                        (line.product_id.id,
+                                         line.location_id.id))
+            query_result = self.request.env.cr.fetchone()
+            available_qty = query_result and query_result[0] or 0
+
+            diff_quantity = available_qty - line.product_qty
+            if diff_quantity <= 0:
                 line_values.cycleCountFlag = 1
 
             result.append(line_values)

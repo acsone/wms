@@ -18,6 +18,11 @@ class TestLocation(ZetesTest):
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'lineId': move.id,
+            'Cri01': self.location_product_1.zone,
+            'Cri02': self.location_product_1.corridor,
+            'Cri03': self.location_product_1.shelf,
+            'Cri04': self.location_product_1.height,
+            'Cri05': self.location_product_1.box,
             'Cri07': None,
         })
 

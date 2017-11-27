@@ -109,7 +109,8 @@ class Assignment(DomainInterface):
             'Usf03': round_name,
             'Usf04': 0,  # Constant value
             'Usf05': 0,  # Constant value
-            'Usf08': '{} {}'.format(partner.zip or '', partner.city or ''),  # Zip + city
+            # Zip + city
+            'Usf08': '{} {}'.format(partner.zip or '', partner.city or ''),
             'Usf09': len(picking.pack_operation_product_ids),
             # Nbr of operation
             'Usf10': None,
@@ -263,8 +264,6 @@ class Assignment(DomainInterface):
           INNER JOIN stock_picking_type AS type
             ON picking.picking_type_id = type.id
           LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
-          INNER JOIN round_instance AS round
-            ON picking.delivery_round_id = round.id
         WHERE picking.zetes_state IN %s
           AND picking.zetes_picking_type = %s
           AND EXISTS(SELECT 1
@@ -308,7 +307,7 @@ class Assignment(DomainInterface):
         parking_query = """
         SELECT stock_location.id
         FROM stock_location
-          LEFT JOIN picking_zone 
+          LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         WHERE stock_location.kind = 'parking'
         """
@@ -340,12 +339,7 @@ class Assignment(DomainInterface):
         report = \
             self.request.env[model_name].sudo(self._user).browse(report_id)
         # Create the picking
-        picking = report.sudo(self._user).create_picking()
-        picking.button_fillwithstock()
-
-        picking.write({
-            'zetes_picking_type': constants.PARKING_ASSIGNMENT
-        })
+        picking = report.sudo(self._user).create_parking_picking()
 
         return picking
 
@@ -362,8 +356,6 @@ class Assignment(DomainInterface):
                     ON picking.picking_type_id = type.id
                   LEFT JOIN picking_zone
                     ON type.picking_zone_id = picking_zone.id
-                  INNER JOIN round_instance AS round
-                    ON picking.delivery_round_id = round.id
                 WHERE picking.zetes_state IN %s
                   AND picking.zetes_picking_type = %s
                   AND EXISTS(SELECT 1
@@ -407,7 +399,7 @@ class Assignment(DomainInterface):
         reserve_query = """
         SELECT stock_location.id
         FROM stock_location
-          LEFT JOIN picking_zone 
+          LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         WHERE stock_location.kind = 'reserve'
         """
@@ -424,7 +416,8 @@ class Assignment(DomainInterface):
         report_query = """
             SELECT id
             FROM report_stock_quant_bylocation_reserve
-            WHERE location_id IN %s
+            WHERE reservation_id IS NULL
+            AND location_id IN %s
             ORDER BY refill_priority
             LIMIT 1
             """
@@ -440,11 +433,6 @@ class Assignment(DomainInterface):
             self.request.env[model_name].sudo(self._user).browse(report_id)
 
         # Create the picking
-        picking = report.sudo(self._user).create_picking()
-        picking.button_fillwithstock()
-
-        picking.write({
-            'zetes_picking_type': constants.RESERVE_ASSIGNMENT
-        })
+        picking = report.sudo(self._user).create_reserve_picking()
 
         return picking

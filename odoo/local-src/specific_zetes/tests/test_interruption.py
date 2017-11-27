@@ -40,13 +40,13 @@ class TestInterruption(ZetesTest):
         })
 
         self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GAD515',
+            'name': 'GD03B2',
             'kind': 'bin',
             'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'D',
-            'height': '5',
-            'box': '15',
+            'corridor': 'D',
+            'shelf': '02',
+            'height': 'B',
+            'box': '2',
             'location_id': self.parent_location.id,
             'bin_checksum_1': '456',
             'bin_checksum_2': '456',
@@ -145,6 +145,7 @@ class TestInterruption(ZetesTest):
             'lineId': move_1.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 10,  # Pick 10 items
+            'Usf03': None,
         })
         catchweight_obj.resu(request_pick_items_params)
 

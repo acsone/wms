@@ -45,7 +45,7 @@ class ReportStockQuantBylocation(models.Model):
         'Refill Priority', readonly=True)
 
     @api.multi
-    def create_picking(self):
+    def create_parking_picking(self):
         self.ensure_one()
 
         picking_type = self.location_id.barcode_picking_type_id
@@ -60,15 +60,7 @@ class ReportStockQuantBylocation(models.Model):
             'location_id': self.location_id.id,
             'location_dest_id': picking_type.default_location_dest_id.id,
         })
-        # self.env['stock.move'].create({
-        #     'name': self.product_id.display_name,
-        #     'picking_id': picking.id,
-        #     'product_id': self.product_id.id,
-        #     'product_uom': self.product_id.uom_id.id,
-        #     'product_uom_qty': self.qty,
-        #     'location_id': self.location_id.id,
-        #     'location_dest_id': picking_type.default_location_dest_id.id,
-        # })
+        picking.button_fillwithstock()
 
         return picking
 
@@ -100,3 +92,32 @@ class ReportStockQuantBylocationReserve(models.Model):
         'Removal Date',
         help="This is the date on which the goods with this Serial Number "
              "should be removed from the stock.")
+
+    @api.multi
+    def create_reserve_picking(self):
+        self.ensure_one()
+
+        picking_type = self.location_id.barcode_picking_type_id
+        if not picking_type:
+            raise Warning(_('Missing Operation Type on Location %s') %
+                          self.location_id.display_name)
+        picking = self.env['stock.picking'].create({
+            'move_type': 'direct',
+            'company_id': self.location_id.company_id.id,
+            'picking_type_id': picking_type.id,
+            'origin': 'reassort',
+            'location_id': self.location_id.id,
+            'location_dest_id': picking_type.default_location_dest_id.id,
+        })
+        self.env['stock.move'].create({
+            'name': self.product_id.display_name,
+            'picking_id': picking.id,
+            'product_id': self.product_id.id,
+            'product_uom': self.product_id.uom_id.id,
+            'product_uom_qty': self.qty,
+            'location_id': self.location_id.id,
+            'location_dest_id': picking_type.default_location_dest_id.id,
+        })
+        picking.action_assign()
+
+        return picking

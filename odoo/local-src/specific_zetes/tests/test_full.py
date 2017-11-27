@@ -34,13 +34,13 @@ class TestFull(ZetesTest):
         })
 
         self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GAD515',
+            'name': 'GD03B2',
             'kind': 'bin',
             'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'D',
-            'height': '5',
-            'box': '15',
+            'corridor': 'D',
+            'shelf': '03',
+            'height': 'B',
+            'box': '2',
             'location_id': self.parent_location.id,
             'bin_checksum_1': '456',
             'bin_checksum_2': '456',
@@ -87,13 +87,13 @@ class TestFull(ZetesTest):
         })
 
         self.location_product_3 = self.env['stock.location'].create({
-            'name': 'GAI110',
+            'name': 'GD15E8',
             'kind': 'bin',
             'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'I',
-            'height': '1',
-            'box': '10',
+            'corridor': 'D',
+            'shelf': '15',
+            'height': 'E',
+            'box': '8',
             'location_id': self.parent_location.id,
             'bin_checksum_1': '789',
             'bin_checksum_2': '789',
@@ -267,10 +267,10 @@ class TestFull(ZetesTest):
         # Check the location only for the first line.
         # It's not useful to test on each line
         self.assertEqual(line_product_1.sourceLC1, 'G')
-        self.assertEqual(line_product_1.sourceLC2, 'A')
-        self.assertEqual(line_product_1.sourceLC3, 'A')
-        self.assertEqual(line_product_1.sourceLC4, '2')
-        self.assertEqual(line_product_1.sourceLC5, '10')
+        self.assertEqual(line_product_1.sourceLC2, 'D')
+        self.assertEqual(line_product_1.sourceLC3, '01')
+        self.assertEqual(line_product_1.sourceLC4, 'B')
+        self.assertEqual(line_product_1.sourceLC5, '1')
         self.assertEqual(line_product_1.sourceLCCD, '123')
         self.assertEqual(line_product_1.Usf01, self.lot_product_1.checksum)
 
@@ -314,6 +314,7 @@ class TestFull(ZetesTest):
             'lineId': move_1.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 10,  # Pick 10 items
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)
@@ -355,7 +356,8 @@ class TestFull(ZetesTest):
             'groupNum': self.picking.id,
             'lineId': move_2.id,
             'Usf01': self.lot_product_2.checksum,
-            'Usf02': 6,  # Pick 6 items
+            'Usf02': 6,  # Pick 6 items,
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)
@@ -398,12 +400,18 @@ class TestFull(ZetesTest):
             'lineId': move_3.id,
             'Usf01': self.lot_product_3_1.checksum,
             'Usf02': 20,
+            'Usf03': None,
         })
 
         # The lot 20 is empty now. The picker will ask for other lots
         request_location_params = Parameters(location_obj)
         request_location_params.update({
             'lineId': move_3.id,
+            'Cri01': None,
+            'Cri02': None,
+            'Cri03': None,
+            'Cri04': None,
+            'Cri05': None,
             'Cri07': None,
         })
 
@@ -424,6 +432,7 @@ class TestFull(ZetesTest):
             'lineId': move_3.id,
             'Usf01': self.lot_product_3_2.checksum,
             'Usf02': 30,
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)

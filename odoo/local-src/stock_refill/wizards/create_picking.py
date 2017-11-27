@@ -19,8 +19,7 @@
 #
 ##############################################################################
 
-from odoo import api, models, _
-from odoo.exceptions import Warning
+from odoo import api, models
 
 
 class StockWizardReassort(models.TransientModel):
@@ -29,12 +28,16 @@ class StockWizardReassort(models.TransientModel):
     @api.multi
     def confirm(self):
         model = self._context['active_model']
-        assert model.startswith('report.stock.quant.bylocation'), \
+        assert model in ('report.stock.quant.bylocation',
+                         'report.stock.quant.bylocation.reserve'), \
             "Invalid Model"
 
         pickings = self.env['stock.picking']
         for report in self.env[model].browse(self._context['active_ids']):
-            picking = report.create_picking()
+            if model == 'report.stock.quant.bylocation':
+                picking = report.create_parking_picking()
+            else:
+                picking = report.create_reserve_picking()
             pickings |= picking
 
         if len(pickings) == 1:

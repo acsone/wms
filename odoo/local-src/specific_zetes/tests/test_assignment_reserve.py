@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo.tests.common import TransactionCase
 
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, \
-    ROUND_CODE, PARTNER_NAME
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 

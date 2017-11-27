@@ -51,7 +51,8 @@ class TestCatchweight(ZetesTest):
         request_params.update({
             'lineId': move.id,
             'Usf01': self.lot_product_1.checksum,
-            'Usf02': 5,  # Pick 5 unit
+            'Usf02': 5,  # Pick 5 unit,
+            'Usf03': None,
         })
         domain.resu(request_params)
 
@@ -71,7 +72,8 @@ class TestCatchweight(ZetesTest):
         second_request_params.update({
             'lineId': move.id,
             'Usf01': second_lot.checksum,
-            'Usf02': 5,  # Pick 5 unit in a second lot
+            'Usf02': 5,  # Pick 5 unit in a second lot,
+            'Usf03': None,
         })
         domain.resu(second_request_params)
 
@@ -99,7 +101,8 @@ class TestCatchweight(ZetesTest):
         request_params.update({
             'lineId': move.id,
             'Usf01': None,
-            'Usf02': 5,  # Pick 5 unit
+            'Usf02': 5,  # Pick 5 unit,
+            'Usf03': None,
         })
         domain.resu(request_params)
 

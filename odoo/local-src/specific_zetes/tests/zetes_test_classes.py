@@ -101,13 +101,13 @@ class ZetesTest(TransactionCase):
         })
 
         self.location_product_1 = location_obj.create({
-            'name': 'GAA210',
+            'name': 'GD01B1',
             'kind': 'bin',
             'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'A',
-            'height': '2',
-            'box': '10',
+            'corridor': 'D',
+            'shelf': '01',
+            'height': 'B',
+            'box': '1',
             'location_id': self.parent_location.id,
             'bin_checksum_1': '123',
             'bin_checksum_2': '123',
@@ -218,3 +218,56 @@ class ZetesTest(TransactionCase):
                                       values=result_values)
 
         return result_parameter
+
+
+class ZetesParkingTest(ZetesTest):
+    def setUp(self):
+        super(ZetesParkingTest, self).setUp()
+
+        self.picking_zone_medoc = self.env.ref(
+            '__setup__.picking_zone_medicament', raise_if_not_found=False)
+        if not self.picking_zone_medoc:
+            self.picking_zone_medoc = self.env['picking.zone'].create({
+                'code': '01',
+                'name': 'Medicament',
+            })
+
+        # Create a parking Medoc
+        self.parking_medoc = self.env['stock.location'].create({
+            'name': 'Parking Medoc',
+            'kind': 'parking',
+            'usage': 'internal',
+            'location_id': self.env.ref('stock.stock_location_company').id,
+            'picking_zone_id': self.picking_zone_medoc.id,
+        })
+        self.env['stock.location']._parent_store_compute()
+
+        # Set a quantity in this parking
+        update_qty_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.product_1.id,
+            'product_tmpl_id': self.product_1.product_tmpl_id.id,
+            'new_quantity': 100,
+            'location_id': self.parking_medoc.id
+        })
+        update_qty_wizard.change_product_qty()
+
+        self.picking_type_medoc = self.env.ref(
+            '__setup__.stock_picking_type_rangement_medoc',
+            raise_if_not_found=False)
+        if not self.picking_type_medoc:
+            wh = self.env.ref('stock.warehouse0')
+            internal_sequence = wh.int_type_id.sequence_id
+            location_medoc = self.env.ref('__setup__.stock_location_medoc')
+            self.picking_type_medoc = self.env['stock.picking.type'].create({
+                'name': 'Rangement Medicaments',
+                'code': 'internal',
+                'sequence_id': internal_sequence.id,
+                'default_location_src_id': self.parking_medoc.id,
+                'default_location_dest_id': location_medoc.id,
+                'use_create_lots': False,
+                'sequence': 9,
+                'picking_zone_id': self.picking_zone_medoc.id,
+            })
+        self.parking_medoc.write({
+            'barcode_picking_type_id': self.picking_type_medoc.id,
+        })

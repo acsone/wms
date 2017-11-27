@@ -40,9 +40,6 @@ class Location(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        location = self.request.env['stock.location'].sudo(self._user)\
-            .search([])
-
         move_id = params.lineId
         if not move_id:
             result.update({
@@ -71,7 +68,25 @@ class Location(DomainInterface):
             'Usf07': product.virtual_available,  # Stock available
         })
 
-        location = move.location_id
+        location = self.request.env['stock.location'].sudo(self._user) \
+            .search([('zone', '=', params.Cri01),
+                     ('corridor', '=', params.Cri02),
+                     ('shelf', '=', params.Cri03),
+                     ('height', '=', params.Cri04),
+                     ('box', '=', params.Cri05)],
+                    limit=1)
+
+        if not location:
+            result.update({
+                'respCode': constants.RESPONSE_CODE_ERROR,
+                'respMsg': _('Location %s%s%s%s%s not found' % (params.Cri01,
+                                                                params.Cri02,
+                                                                params.Cri03,
+                                                                params.Cri04,
+                                                                params.Cri05))
+            })
+            return result.format()
+
         result.update({
             'lC1': location.zone,
             'lC2': location.corridor,

@@ -80,19 +80,24 @@ class Catchweight(DomainInterface):
             return
 
         try:
-            if params.Usf03 or params.Usf03 == 0:
-                print "======> Set values"
+            # If we receive a value for Usf03, it means that we have to
+            # check if the available quantity (in Odoo) is the same than
+            # the real quantity (say by the picker).
+            actual_stock = params.Usf03
+            if actual_stock or actual_stock == 0:
+                self.check_actual_stock(params, move, actual_stock)
                 return
 
             # Retrieve the quantity
-            qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
+            real_qty = params.Usf02 and float(params.Usf02) or 0
+            virtual_qty = self.check_picked_quantity(params, move, real_qty)
 
             # and the lot number
             lot_number = params.Usf01
             # If there is no lot number, it means that we don't care about lot
             # (tracking => without lot). We can simply add the new quantity.
             if not lot_number:
-                move.qty_done += qty_done_by_lot
+                move.qty_done += virtual_qty
             else:
                 # Otherwise we need to search for the lot in Odoo
                 lot = self.request.env['stock.production.lot']\
@@ -111,17 +116,17 @@ class Catchweight(DomainInterface):
                     if not len(pack_lot):
                         move.pack_lot_ids.create({
                             'operation_id': move.id,
-                            'qty': qty_done_by_lot,
+                            'qty': virtual_qty,
                             'lot_id': lot.id,
                         })
                     # Otherwise we set the quantity for this lot
                     # We don't need to add the new quantity to the lot
                     # because Zetes send one request by lot
                     else:
-                        pack_lot.write({'qty': qty_done_by_lot})
+                        pack_lot.write({'qty': virtual_qty})
 
                     # Set the final quantity on the move
-                    qty_done = move.qty_done + qty_done_by_lot
+                    qty_done = move.qty_done + virtual_qty
                     move.write({
                         'qty_done': qty_done,
                     })
@@ -130,3 +135,66 @@ class Catchweight(DomainInterface):
             params.log(picking_id=move.picking_id.id,
                        operation_id=move_id,
                        exception=e)
+
+    def check_actual_stock(self, params, move, actual_stock):
+        """
+        Check if the actual quantity in stock equals the available quantity
+        in Odoo.
+        :param params:
+        :param move:
+        :param actual_stock:
+        :return:
+        """
+        available_qty_query = """
+        SELECT sum(quant.qty)
+        FROM stock_quant AS quant
+        WHERE quant.product_id = %s
+        AND quant.location_id = %s
+        AND quant.reservation_id IS NULL
+        """
+        self.request.env.cr.execute(available_qty_query,
+                                    (move.product_id.id,
+                                     move.location_id.id))
+        query_result = self.request.env.cr.fetchone()
+        available_qty = query_result and query_result[0] or 0
+
+        if available_qty != actual_stock:
+            error_message = "The theoretical stock (%s) is different" \
+                            " from the actual stock (%s) for" \
+                            " the product %s in the location %s" % \
+                            (available_qty,
+                             actual_stock,
+                             move.product_id.display_name,
+                             move.location_id.display_name)
+            _logger.error(error_message)
+            params.log(exception=error_message)
+
+    def check_picked_quantity(self, params, move, picked_quantity):
+        """
+        Zetes allows (only for Parking and Reserve) to take a quantity
+        greater than the requested quantity. However Odoo refuse this case.
+        If the picked quantity is greater than the requested quantity we need
+        to virtually change the picked quantity with the requested quantity
+        and send an email to warm the manager.
+        :param move:
+        :param picked_quantity:
+        :return:
+        """
+        total_picked_quantity = move.qty_done + picked_quantity
+        max_allowed_quantity = move.product_qty
+
+        if total_picked_quantity > max_allowed_quantity:
+            error_message = "The total picked quantity (%s) is greater than" \
+                            " the requested quantity (%s) for the product " \
+                            "%s (Operation ID %s)" % \
+                            (total_picked_quantity,
+                             max_allowed_quantity,
+                             move.product_id.display_name,
+                             move.id)
+            _logger.error(error_message)
+            params.log(picking_id=move.picking_id.id,
+                       operation_id=move.id,
+                       exception=error_message)
+            return move.product_qty - move.qty_done
+
+        return picked_quantity

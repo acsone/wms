@@ -5,7 +5,6 @@ from odoo import _
 
 from domain_interface import DomainInterface, Parameters
 from .. import constants
-from .domain_catchweight import Catchweight
 
 _logger = logging.getLogger(__name__)
 
@@ -138,17 +137,15 @@ class Itemmove(DomainInterface):
             # TODO Please confirm this
             # If it is a reserved quantity the location destination
             # is the same than the current location
-            if move_type == constants.MOVE_TYPE_PUT:
-                location_dest_id = location
-
-            line_values.update({
-                'destLC1': location_dest_id.zone,
-                'destLC2': location_dest_id.corridor,
-                'destLC3': location_dest_id.shelf,
-                'destLC4': location_dest_id.height,
-                'destLC5': location_dest_id.box,
-                'destLCCD': location_dest_id.get_checksum(),
-            })
+            if move_type == constants.MOVE_TYPE_LOAD:
+                line_values.update({
+                    'destLC1': location_dest_id.zone,
+                    'destLC2': location_dest_id.corridor,
+                    'destLC3': location_dest_id.shelf,
+                    'destLC4': location_dest_id.height,
+                    'destLC5': location_dest_id.box,
+                    'destLCCD': location_dest_id.get_checksum(),
+                })
 
             if line.zetes_state == constants.MOVE_FULL:
                 line_values.update({
@@ -182,8 +179,6 @@ class Itemmove(DomainInterface):
         :param params:
         :return:
         """
-        move_type = params.itemMoveType
-
         if not params.moveLineId:
             return
         move_id = int(params.moveLineId)
@@ -231,7 +226,7 @@ class Itemmove(DomainInterface):
 
         reserved_quants_query = """
         SELECT sum(quant.qty)
-        FROM stock_quant AS quant 
+        FROM stock_quant AS quant
         WHERE quant.location_id = %s
         AND quant.product_id = %s
         AND quant.reservation_id IS NOT NULL
