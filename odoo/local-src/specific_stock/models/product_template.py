@@ -37,14 +37,15 @@ class ProductTemplate(models.Model):
     def _compute_picking_zone_id(self):
         Rule = self.env['procurement.rule']
         stock_location = self.env.ref('stock.stock_location_stock')
+        picking_types = self.env['stock.picking.type'].search([
+            ('default_location_src_id', 'child_of', stock_location.id)])
 
         for product in self:
             product_routes = \
                 product.route_ids | product.categ_id.total_route_ids
             res = Rule.search(
                 [('route_id', 'in', product_routes.ids),
-                 ('picking_type_id.default_location_src_id',
-                  'child_of', stock_location.id)],
+                 ('picking_type_id', 'in', picking_types.ids)],
                 order='route_sequence, sequence', limit=1)
             if res:
                 product.picking_zone_id = \
