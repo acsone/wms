@@ -20,7 +20,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     tag_ids = fields.Many2many('round.tag', string='Tags')
     execution_date = fields.Date(
         'Date',
-        default=lambda self: fields.Date.context_today(),
+        default=fields.Date.context_today,
         required=True
     )
 
