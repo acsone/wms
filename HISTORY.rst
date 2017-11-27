@@ -25,6 +25,7 @@ Unreleased
 * ALCN-1026: Fix custom sale exceptions
 * ALCN-1023: Fix email in imported users file
 * Fix zetes view inheritance, speed-up product zone computation
+* Fix delivery_rounds: generate plan wizard: fix execution date
 
 **Build**
 
