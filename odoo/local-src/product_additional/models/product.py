@@ -7,10 +7,12 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    additional_product_id = fields.Many2one('product.template',
-                                            string='Additional product')
-    ratio_main_product = fields.Integer('Ratio main product')
-    ratio_additional_product = fields.Integer('Ration additional product')
+    additional_product_id = fields.Many2one(
+        'product.template',
+        string='Additional Product',
+        ondelete='restrict')
+    ratio_main_product = fields.Integer('Ratio Main Product')
+    ratio_additional_product = fields.Integer('Ratio Additional Product')
 
     @api.multi
     def get_qty_additional_product(self, ordered_qty):

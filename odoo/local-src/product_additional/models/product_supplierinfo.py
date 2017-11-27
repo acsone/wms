@@ -7,8 +7,8 @@ from odoo import fields, api, models, _
 class ProductSupplierinfo(models.Model):
     _inherit = 'product.supplierinfo'
 
-    ratio_main_product = fields.Integer('Ratio main product')
-    ratio_promotional_product = fields.Integer('Ration free product')
+    ratio_main_product = fields.Integer('Ratio Main Product')
+    ratio_promotional_product = fields.Integer('Ratio Free Product')
     ratio_display_name = fields.Char('Promotion',
                                      compute='_compute_ratio_display_name',
                                      readonly=True)
