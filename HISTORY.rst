@@ -24,6 +24,7 @@ Unreleased
 * Import DB2: Fix a bug with the location parser
 * ALCN-1026: Fix custom sale exceptions
 * ALCN-1023: Fix email in imported users file
+* Fix zetes view inheritance, speed-up product zone computation
 
 **Build**
 
