@@ -15,6 +15,7 @@ Unreleased
 * ALCN-1002: Move the field food_type to specific_zetes and rename it with is_portable_printer
 * ALCN-997: Rewrite entirely sale order line discounts
 * ALCN-982: Add a picking zone on picking type, product and location
+* Stock: Enable internal transfer
 
 **Bugfixes**
 * Delivery Round: stock move action_done: singleton expected error

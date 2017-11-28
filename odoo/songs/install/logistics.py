@@ -367,6 +367,9 @@ def create_picking_types(ctx):
     color_back = 8
 
     types = [
+        {'xmlid': 'stock.picking_type_internal',
+         'active': True,
+         },
         {'xmlid': 'stock.picking_type_in',
          'use_create_lots': False,
          'use_existing_lots': True,
