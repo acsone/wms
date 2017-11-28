@@ -9,6 +9,7 @@
                         <field name="assign_moves"/>
                         <field name="version_id"/>
                         <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="execution_date"/>
                     </group>
                     <footer>
                         <button name="confirm"
