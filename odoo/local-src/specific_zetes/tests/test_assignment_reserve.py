@@ -15,18 +15,6 @@ class TestAssignemnt(ZetesTest):
     def setUp(self):
         super(TestAssignemnt, self).setUp()
 
-        self.env.user.write({
-            'tz': 'Europe/Brussels'
-        })
-
-        self.picking_zone_medoc = self.env.ref(
-            '__setup__.picking_zone_medicament', raise_if_not_found=False)
-        if not self.picking_zone_medoc:
-            self.picking_zone_medoc = self.env['picking.zone'].create({
-                'code': '01',
-                'name': 'Medicament',
-            })
-
         # Create a parking Medoc
         reserve_medoc = self.env['stock.location'].create({
             'name': 'Parking Medoc',
@@ -38,6 +26,10 @@ class TestAssignemnt(ZetesTest):
         })
         self.env['stock.location']._parent_store_compute()
 
+        self.location_product_1.write({
+            'reserve_location_id': reserve_medoc.id,
+        })
+
         # Set a quantity in this parking
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_1.id,
@@ -48,14 +40,14 @@ class TestAssignemnt(ZetesTest):
         update_qty_wizard.change_product_qty()
 
         self.picking_type_medoc = self.env.ref(
-            '__setup__.stock_picking_type_rangement_medoc',
+            '__setup__.stock_picking_type_reassort_medoc',
             raise_if_not_found=False)
         if not self.picking_type_medoc:
             wh = self.env.ref('stock.warehouse0')
             internal_sequence = wh.int_type_id.sequence_id
             location_medoc = self.env.ref('__setup__.stock_location_medoc')
             self.picking_type_medoc = self.env['stock.picking.type'].create({
-                'name': 'Rangement Medicaments',
+                'name': 'Reassort Medicaments',
                 'code': 'internal',
                 'sequence_id': internal_sequence.id,
                 'default_location_src_id': reserve_medoc.id,

@@ -189,6 +189,9 @@ class Itemmove(DomainInterface):
         if not move_id:
             return
 
+        if isinstance(move_id, int):
+            move_id = str(move_id)
+
         pack_operation_id = int(move_id.split('_')[0])
 
         move = self.request.env['stock.pack.operation']\

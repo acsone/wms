@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import zetes_test_classes
+# from . import zetes_test_classes
 # from . import test_domain_interface
 # from . import test_assignment
 # from . import test_catchweight
@@ -13,5 +13,5 @@ from . import zetes_test_classes
 # from . import test_interruption
 # from . import test_assignment_parking
 # from . import test_assignment_reserve
-from . import test_full_parking
-
+# from . import test_full_parking
+from . import test_full_reserve

@@ -104,9 +104,9 @@ Scenario
 3. The picker stops the picking
 4. A new picker takes this picking
 
-=========
-Full test
-=========
+=================
+Full test parking
+=================
 
 Introduction
 ============
@@ -118,7 +118,7 @@ Set up
 ======
 
 - A picker with the operator code 99
-- Three products:
+- Two products:
     - Product 1: "Test medoc 1" with 100 units in parking PARKING001
     - Product 2: "Test medoc 2" with 20 units in parking PARKING001
 
@@ -135,3 +135,29 @@ Scenario
 8. The picker put 25 items of product 1 in the reserve and goes to the next picking line (REQU_/RESP_CATCHWEIGHT) (RESU_ITEMMOVE)
 9. The picker takes 15 units of product 2 (REQU_/RESP_CATCHWEIGHT + RESU_CATCHWEIGHT) and validates the picking line (RESU_ITEMPICK)
 10. The picking is now completely finished. Zetes asks for the next picking (REQU_/RESP_ASSIGNMENT)
+
+=================
+Full test reserve
+=================
+
+Introduction
+============
+
+This test will execute a full scenario for a picker in reserve.
+Please read following explanation to understand this test
+
+Set up
+======
+
+- A picker with the operator code 99
+- One product:
+    - Product 1: "Test medoc 1" with 20 units in the reserve
+
+Scenario
+========
+
+1. The user will log in (REQU_/RESP_USERCONTEXT)
+2. Zetes requests all picking zones (REQU_/RESP_REFDATA)
+3. Zetes requests a picking and start the picking (REQU_/RESP_ASSIGNMENT + RESU_ASSIGNMENT)
+4. Zetes requests a picking line (REQU_/RESP_ITEMMOVE)
+5. The picker takes 15 units of product 1 (the bin is full) and put it in the stock (RESU_CATCHWEIGHT) (RESU_ITEMMOVE)

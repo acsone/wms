@@ -73,6 +73,9 @@ class Catchweight(DomainInterface):
         if not move_id:
             return
 
+        if isinstance(move_id, int):
+            move_id = str(move_id)
+
         move_id_list = move_id.split('_')
         if len(move_id_list) == 2:
             pack_operation_id = int(move_id_list[0])
