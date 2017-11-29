@@ -2,7 +2,7 @@
 # © 2017 Sylvain Van Hoof <svh@sylvainvh.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class StockLocation(models.Model):
@@ -16,6 +16,10 @@ class StockLocation(models.Model):
     box = fields.Char('Box')
     is_valid_location = fields.Boolean('Valid location',
                                        compute='_compute_is_valid_location')
+
+    _sql_constraints = [('unique_location_coordinates',
+                         'UNIQUE(zone, corridor, shelf, height, box)',
+                         _('The location coordinate must be unique'))]
 
     @api.multi
     @api.depends('zone', 'corridor', 'shelf', 'height', 'box')

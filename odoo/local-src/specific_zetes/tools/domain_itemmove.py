@@ -111,7 +111,13 @@ class Itemmove(DomainInterface):
             if load_or_unload == constants.MOVE_UNLOAD:
                 line_id = 0
             else:
-                line_id = line.id
+                # REQU_ITEMMOVE will return a list of move by product AND
+                # by lot. In some case we need to know on which lot we are
+                # working.
+                if lot:
+                    line_id = "%s_%s" % (line.id, lot.id)
+                else:
+                    line_id = line.id
 
             line_values.update({
                 'moveStatus': '00',  # Constant value (new line)
@@ -179,12 +185,14 @@ class Itemmove(DomainInterface):
         :param params:
         :return:
         """
-        if not params.moveLineId:
+        move_id = params.moveLineId
+        if not move_id:
             return
-        move_id = int(params.moveLineId)
+
+        pack_operation_id = int(move_id.split('_')[0])
 
         move = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(move_id)
+            .sudo(self._user).browse(pack_operation_id)
         if not len(move):
             return
 
@@ -225,36 +233,31 @@ class Itemmove(DomainInterface):
             .filtered(lambda line: int(line.qty_done) < int(line.product_qty))
 
         reserved_quants_query = """
-        SELECT sum(quant.qty)
+        SELECT quant.lot_id, SUM(quant.qty)
         FROM stock_quant AS quant
         WHERE quant.location_id = %s
         AND quant.product_id = %s
         AND quant.reservation_id IS NOT NULL
         AND quant.reservation_id NOT IN (
-          SELECT move.id FROM stock_move AS move WHERE move.picking_id = %s);
+          SELECT move.id FROM stock_move AS move WHERE move.picking_id = %s)
+        GROUP BY quant.lot_id;
         """
 
         reserved_lines = []
         put_away_lines = []
         for line in lines:
-            line_qty = put_away_qty = line.product_qty
-
-            # Check if there are some reserved quantities
             self.request.env.cr.execute(
                 reserved_quants_query, (line.location_id.id,
                                         line.product_id.id,
                                         picking_id))
-            query_result = self.request.env.cr.fetchone()
-            if query_result and query_result[0]:
-                reserved_qty = query_result[0]
-                put_away_qty = line_qty - reserved_qty
-
+            query_result = self.request.env.cr.fetchall()
+            for quant in query_result:
                 reserved_lines.append(
-                    (line, None, reserved_qty, constants.MOVE_UNLOAD))
+                    (line, quant[0], quant[1], constants.MOVE_UNLOAD))
 
             if not line.pack_lot_ids:
                 put_away_lines.append(
-                    (line, None, put_away_qty, constants.MOVE_LOAD))
+                    (line, None, line.product_qty, constants.MOVE_LOAD))
             else:
                 pack_lots = line.pack_lot_ids.filtered(
                     lambda lot: lot.qty < lot.qty_todo

@@ -129,6 +129,14 @@ class ZetesTest(TransactionCase):
         })
         update_qty_wizard.change_product_qty()
 
+        self.product_1.write({
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.env.ref('stock.stock_location_stock').id,
+                'bin_location_id': self.location_product_1.id,
+            })]
+        })
+
         self.picking_zone_medoc = self.env.ref(
             '__setup__.picking_zone_medicament', raise_if_not_found=False)
         if not self.picking_zone_medoc:
@@ -223,14 +231,6 @@ class ZetesTest(TransactionCase):
 class ZetesParkingTest(ZetesTest):
     def setUp(self):
         super(ZetesParkingTest, self).setUp()
-
-        self.picking_zone_medoc = self.env.ref(
-            '__setup__.picking_zone_medicament', raise_if_not_found=False)
-        if not self.picking_zone_medoc:
-            self.picking_zone_medoc = self.env['picking.zone'].create({
-                'code': '01',
-                'name': 'Medicament',
-            })
 
         # Create a parking Medoc
         self.parking_medoc = self.env['stock.location'].create({

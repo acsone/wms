@@ -48,8 +48,16 @@ class Location(DomainInterface):
             })
             return result.format()
 
+        move_id_list = move_id.split('_')
+        if len(move_id_list) == 2:
+            pack_operation_id = int(move_id_list[0])
+            lot_id = int(move_id_list[1])
+        else:
+            pack_operation_id = int(move_id)
+            lot_id = None
+
         move = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .browse(int(move_id))
+            .browse(pack_operation_id)
         if not len(move):
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
@@ -86,6 +94,14 @@ class Location(DomainInterface):
                                                                 params.Cri05))
             })
             return result.format()
+
+        if move.picking_id.zetes_picking_type == constants.PARKING_ASSIGNMENT:
+            self.request.env['pack.operation.reserve.rel'].sudo(self._user)\
+                .create({
+                    'pack_operation_id': move.id,
+                    'reserve_location_id': location.id,
+                    'lot_id': lot_id
+                })
 
         result.update({
             'lC1': location.zone,

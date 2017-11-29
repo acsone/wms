@@ -304,31 +304,24 @@ class Assignment(DomainInterface):
             return picking
 
         # Picking not found. Try to create a new one.
-        parking_query = """
-        SELECT stock_location.id
-        FROM stock_location
-          LEFT JOIN picking_zone
-            ON stock_location.picking_zone_id = picking_zone.id
-        WHERE stock_location.kind = 'parking'
-        """
-        parking_query_values = []
-
         zone_code = params.Cri01
+        zone_condition = ""
+        query_values = []
         if zone_code:
-            parking_query += "AND picking_zone.code = %s "
-            parking_query_values.append(zone_code)
-        self.request.env.cr.execute(parking_query, tuple(parking_query_values))
-        location_ids = [x[0] for x in self.request.env.cr.fetchall()]
+            zone_condition = "WHERE picking_zone.code = %s"
+            query_values.append(zone_code)
 
         report_query = """
-        SELECT id
-        FROM report_stock_quant_bylocation
-        WHERE reservation_id IS NULL
-        AND location_id IN %s
-        ORDER BY refill_priority
+        SELECT report.id
+        FROM report_stock_quant_bylocation AS report
+          LEFT JOIN stock_location ON stock_location.id = report.location_id
+          LEFT JOIN picking_zone
+            ON stock_location.picking_zone_id = picking_zone.id
+        %s
+        ORDER BY report.refill_priority
         LIMIT 1
-        """
-        self.request.env.cr.execute(report_query, (tuple(location_ids), ))
+        """ % zone_condition
+        self.request.env.cr.execute(report_query, tuple(query_values))
         query_result = self.request.env.cr.fetchone()
 
         if not query_result:
@@ -350,19 +343,19 @@ class Assignment(DomainInterface):
         :return:
         """
         picking_query = """
-                SELECT picking.id
-                FROM stock_picking AS picking
-                  INNER JOIN stock_picking_type AS type
-                    ON picking.picking_type_id = type.id
-                  LEFT JOIN picking_zone
-                    ON type.picking_zone_id = picking_zone.id
-                WHERE picking.zetes_state IN %s
-                  AND picking.zetes_picking_type = %s
-                  AND EXISTS(SELECT 1
-                             FROM stock_pack_operation AS operation
-                             WHERE operation.picking_id = picking.id
-                             AND operation.zetes_state IN %s)
-                        """
+        SELECT picking.id
+        FROM stock_picking AS picking
+          INNER JOIN stock_picking_type AS type
+            ON picking.picking_type_id = type.id
+          LEFT JOIN picking_zone
+            ON type.picking_zone_id = picking_zone.id
+        WHERE picking.zetes_state IN %s
+          AND picking.zetes_picking_type = %s
+          AND EXISTS(SELECT 1
+                     FROM stock_pack_operation AS operation
+                     WHERE operation.picking_id = picking.id
+                     AND operation.zetes_state IN %s)
+                """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.RESERVE_ASSIGNMENT,
@@ -396,32 +389,24 @@ class Assignment(DomainInterface):
             return picking
 
         # Picking not found. Try to create a new one.
-        reserve_query = """
-        SELECT stock_location.id
-        FROM stock_location
-          LEFT JOIN picking_zone
-            ON stock_location.picking_zone_id = picking_zone.id
-        WHERE stock_location.kind = 'reserve'
-        """
-        reserve_query_values = []
-
         zone_code = params.Cri01
+        zone_condition = ""
+        query_values = []
         if zone_code:
-            reserve_query += "AND picking_zone.code = %s "
-            reserve_query_values.append(zone_code)
-        self.request.env.cr.execute(reserve_query,
-                                    tuple(reserve_query_values))
-        location_ids = [x[0] for x in self.request.env.cr.fetchall()]
+            zone_condition = "WHERE picking_zone.code = %s"
+            query_values.append(zone_code)
 
         report_query = """
-            SELECT id
-            FROM report_stock_quant_bylocation_reserve
-            WHERE reservation_id IS NULL
-            AND location_id IN %s
-            ORDER BY refill_priority
-            LIMIT 1
-            """
-        self.request.env.cr.execute(report_query, (tuple(location_ids), ))
+        SELECT report.id
+        FROM report_stock_quant_bylocation_reserve AS report
+          LEFT JOIN stock_location ON stock_location.id = report.location_id
+          LEFT JOIN picking_zone
+            ON stock_location.picking_zone_id = picking_zone.id
+        %s
+        ORDER BY refill_priority
+        LIMIT 1
+        """ % zone_condition
+        self.request.env.cr.execute(report_query, tuple(query_values))
         query_result = self.request.env.cr.fetchone()
 
         if not query_result:

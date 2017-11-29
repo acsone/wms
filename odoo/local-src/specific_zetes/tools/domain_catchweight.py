@@ -70,12 +70,19 @@ class Catchweight(DomainInterface):
         :return:
         """
         move_id = params.lineId
-
         if not move_id:
             return
 
+        move_id_list = move_id.split('_')
+        if len(move_id_list) == 2:
+            pack_operation_id = int(move_id_list[0])
+            lot_id = int(move_id_list[1])
+        else:
+            pack_operation_id = int(move_id)
+            lot_id = None
+
         move = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .browse(int(move_id))
+            .browse(pack_operation_id)
         if not len(move):
             return
 
@@ -91,6 +98,9 @@ class Catchweight(DomainInterface):
             # Retrieve the quantity
             real_qty = params.Usf02 and float(params.Usf02) or 0
             virtual_qty = self.check_picked_quantity(params, move, real_qty)
+
+            if move.zetes_state == constants.MOVE_FULL:
+                move = move.create_reserve_pack_operation(virtual_qty, lot_id)
 
             # and the lot number
             lot_number = params.Usf01
@@ -133,7 +143,7 @@ class Catchweight(DomainInterface):
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
-                       operation_id=move_id,
+                       operation_id=pack_operation_id,
                        exception=e)
 
     def check_actual_stock(self, params, move, actual_stock):

@@ -42,8 +42,8 @@ class TestFull(ZetesTest):
             'height': 'B',
             'box': '2',
             'location_id': self.parent_location.id,
-            'bin_checksum_1': '456',
-            'bin_checksum_2': '456',
+            'bin_checksum_1': '45',
+            'bin_checksum_2': '45',
         })
         self.env['stock.location']._parent_store_compute()
 

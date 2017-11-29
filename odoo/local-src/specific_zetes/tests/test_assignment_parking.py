@@ -30,6 +30,29 @@ class TestAssignemnt(ZetesParkingTest):
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
     def test_01_requ_assignment(self):
+        report_query = """
+        SELECT report.id
+        FROM report_stock_quant_bylocation AS report
+          LEFT JOIN stock_location ON stock_location.id = report.location_id
+          LEFT JOIN picking_zone
+            ON stock_location.picking_zone_id = picking_zone.id
+        WHERE report.product_id = %s
+          AND picking_zone.code = %s
+        ORDER BY report.refill_priority
+        LIMIT 1
+        """
+        self.env.cr.execute(report_query, (self.product_1.id,
+                                           self.picking_zone_medoc.code))
+        result = self.env.cr.fetchone()
+
+        self.assertTrue(result)
+        report_id = result[0]
+
+        model_name = 'report.stock.quant.bylocation'
+        report = self.env[model_name].browse(report_id)
+        # Create the picking
+        picking = report.create_parking_picking()
+
         # Check with no current picking
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='requ')
@@ -45,3 +68,4 @@ class TestAssignemnt(ZetesParkingTest):
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
+        self.assertEqual(result.groupNum, str(picking.id))

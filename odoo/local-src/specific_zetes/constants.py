@@ -56,3 +56,6 @@ MOVE_TYPE_LOADPUT = '3'  # not used
 # Type of load (load or unload)
 MOVE_UNLOAD = '1'
 MOVE_LOAD = '2'
+
+# Zero Check Limit
+ZERO_CHECK_LIMIT = 0

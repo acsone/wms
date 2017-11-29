@@ -180,3 +180,10 @@ migration:
     - version: 10.13.0
     - version: 10.14.0
     - version: 10.14.1
+    - version: 10.15.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_zetes
+          - specific_stock
+          - specific_report
