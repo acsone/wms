@@ -7,27 +7,27 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* ALCN-1001: Don't copy the delivery round when we create a back order of a picking
 
+* ALCN-982: Add a picking zone on picking type, product and location
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
+* ALCN-997: Rewrite entirely sale order line discounts
 * ALCN-999: Fix some small bugs with the module delivery_rounds
 * ALCN-999: Fix some small bugs with the module delivery_rounds and add a cron to create delivery daily plan
+* ALCN-1001: Don't copy the delivery round when we create a back order of a picking
 * ALCN-1002: Move the field food_type to specific_zetes and rename it with is_portable_printer
-* ALCN-997: Rewrite entirely sale order line discounts
-* ALCN-982: Add a picking zone on picking type, product and location
 * Stock: Enable internal transfer
 * Allow to define a carrier having no round template and still group pickings
 
 **Bugfixes**
-* Delivery Round: stock move action_done: singleton expected error
 
 * ALCN-988: Fix compute_price_rule in product price category module
 * ALCN-991: Fix display of 'sale price 2' on product form view
-* Import DB2: Fix a bug with the location parser
-* ALCN-1026: Fix custom sale exceptions
 * ALCN-1023: Fix email in imported users file
-* Fix zetes view inheritance, speed-up product zone computation
+* ALCN-1026: Fix custom sale exceptions
+* Delivery Round: stock move action_done: singleton expected error
 * Fix delivery_rounds: generate plan wizard: fix execution date
+* Fix zetes view inheritance, speed-up product zone computation
+* Import DB2: Fix a bug with the location parser
 
 **Build**
 
@@ -45,7 +45,6 @@ Unreleased
 **Build**
 
 * Make attachment_s3 compatible with AWS
-
 
 
 10.12.0 (2017-10-31)
