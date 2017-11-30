@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.13.0 (2017-11-30)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-982: Add a picking zone on picking type, product and location
 * ALCN-994: Add smartbutton for helpdesk tickets on sale and purchase
 * ALCN-997: Rewrite entirely sale order line discounts
