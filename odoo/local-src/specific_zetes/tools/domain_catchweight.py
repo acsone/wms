@@ -101,48 +101,48 @@ class Catchweight(DomainInterface):
             # Retrieve the quantity
             real_qty = params.Usf02 and float(params.Usf02) or 0
             virtual_qty = self.check_picked_quantity(params, move, real_qty)
-
-            if move.zetes_state == constants.MOVE_FULL:
-                move = move.create_reserve_pack_operation(virtual_qty, lot_id)
-
             # and the lot number
             lot_number = params.Usf01
-            # If there is no lot number, it means that we don't care about lot
-            # (tracking => without lot). We can simply add the new quantity.
-            if not lot_number:
-                move.qty_done += virtual_qty
-            else:
-                # Otherwise we need to search for the lot in Odoo
-                lot = self.request.env['stock.production.lot']\
+
+            lot_id = None
+            if lot_number:
+                lot = self.request.env['stock.production.lot'] \
                     .sudo(self._user).search(
                     [('product_id', '=', move.product_id.id),
-                     ('checksum', '=', lot_number)])
+                     ('checksum', '=', lot_number)], limit=1)
                 if lot:
-                    # When we have the lot, we will check if there no existing
-                    # quantity for this lot.
-                    pack_lot = \
-                        move.pack_lot_ids\
-                            .filtered(lambda line: line.lot_id.id == lot.id)
+                    lot_id = lot.id
 
-                    # If there no existing line (quantity) for this lot
-                    # we will create a new line
-                    if not len(pack_lot):
-                        move.pack_lot_ids.create({
-                            'operation_id': move.id,
-                            'qty': virtual_qty,
-                            'lot_id': lot.id,
-                        })
-                    # Otherwise we set the quantity for this lot
-                    # We don't need to add the new quantity to the lot
-                    # because Zetes send one request by lot
-                    else:
-                        pack_lot.write({'qty': virtual_qty})
+            picking = move.picking_id
+            if move.zetes_state == constants.MOVE_FULL:
+                reserve_rel_obj = \
+                    self.request.env['pack.operation.reserve.rel']
+                reserve_rel = reserve_rel_obj.sudo(self._user).search([
+                    ('pack_operation_id', '=', move.id),
+                    ('lot_id', '=', lot_id)
+                ], limit=1, order="id DESC")
 
-                    # Set the final quantity on the move
-                    qty_done = move.qty_done + virtual_qty
-                    move.write({
-                        'qty_done': qty_done,
-                    })
+                if not reserve_rel:
+                    error_message = "Reserve not found for move %s (lot %s)" \
+                                    % (move.id, lot_id)
+                    _logger.error(error_message)
+                    params.log(picking_id=move.picking_id.id,
+                               operation_id=pack_operation_id,
+                               exception=error_message)
+                    return
+
+                reserve = reserve_rel.reserve_location_id
+                move = move.split_pack_op(virtual_qty, reserve.id, lot_id)
+            elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
+                    and move.product_qty > virtual_qty:
+                location_dest_id = move.location_id.id
+                new_qty = move.product_qty - virtual_qty
+                new_move = \
+                    move.split_pack_op(new_qty, location_dest_id, lot_id)
+                new_move.add_qty(new_qty, lot_id)
+
+            move.add_qty(virtual_qty, lot_id)
+
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,

@@ -170,22 +170,8 @@ class Assignment(DomainInterface):
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
                 if params.Usf01:
-                    # The method "do_new_transfer" is the method called when
-                    # an user click on "Validate" on a picking.
-                    result = picking.sudo(self._user).do_new_transfer()
+                    picking.validate_picking()
 
-                    # In Odoo this button will open a wizard in following case:
-                    # 1. A wizard if no quantity has been defined on lines
-                    #   (this wizard will set the quantity on each lines)
-                    # 2. A wizard if we need to create a back order
-                    if isinstance(result, dict):
-                        model = result.get('res_model')
-                        wizard = self.request.env[model].sudo(self._user)\
-                            .browse(int(result.get('res_id')))
-
-                        # Fortunately these wizards have the same
-                        # method "process" to execute the wizard
-                        wizard.process()
             elif params.assignmentStatus == constants.AS_CANCELED:
                 picking.sudo(self._user).interrupt_picking()
         except Exception as e:

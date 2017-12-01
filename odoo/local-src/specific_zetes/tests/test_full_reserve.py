@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from .. import constants
-from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
+from .zetes_test_classes import ZetesReserveTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_catchweight import Catchweight
@@ -11,21 +11,11 @@ from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
 
 
-class TestFullReserve(ZetesParkingTest):
+class TestFullReserve(ZetesReserveTest):
 
     def setUp(self):
         self.disable_picking_validation = True
         super(TestFullReserve, self).setUp()
-
-        # Product 2
-        # Location: GAD515
-        self.product_2 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
-            'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
-            'tracking': 'none',
-            'list_price': 5,
-        })
 
         self.location_product_2 = self.env['stock.location'].create({
             'name': 'GD03B2',
@@ -41,16 +31,14 @@ class TestFullReserve(ZetesParkingTest):
         })
         self.env['stock.location']._parent_store_compute()
 
-        # Set a quantity in this parking
-        update_qty_wizard = self.env['stock.change.product.qty'].create({
-            'product_id': self.product_2.id,
-            'product_tmpl_id': self.product_2.product_tmpl_id.id,
-            'new_quantity': 20,
-            'location_id': self.parking_medoc.id
-        })
-        update_qty_wizard.change_product_qty()
-
-        self.product_2.write({
+        # Product 2
+        # Location: GAD515
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Test medoc 2',
+            'default_code': '587502',
+            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'tracking': 'none',
+            'list_price': 5,
             'stock_bin_ids': [(0, 0, {
                 'sequence': 1,
                 'location_id': self.env.ref('stock.stock_location_stock').id,
@@ -58,35 +46,14 @@ class TestFullReserve(ZetesParkingTest):
             })]
         })
 
-        self.reserve_medicament = self.env['stock.location'].create({
-            'name': 'GD01F4',
-            'kind': 'reserve',
-            'zone': 'G',
-            'corridor': 'D',
-            'shelf': '01',
-            'height': 'F',
-            'box': '4',
-            'location_id': self.parent_location.id,
-            'bin_checksum_1': '45',
-            'bin_checksum_2': '45',
+        # Set a quantity in the reserve
+        update_qty_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.product_2.id,
+            'product_tmpl_id': self.product_2.product_tmpl_id.id,
+            'new_quantity': 100,
+            'location_id': self.reserve_medoc.id
         })
-
-        self.picking.write({
-            'move_lines': [(0, 0, {
-                'name': 'Test medoc 2',
-                'product_id': self.product_2.id,
-                'product_uom_qty': 5,
-                'product_uom': self.env.ref('product.product_uom_unit').id,
-                'location_id': self.env.ref('stock.stock_location_stock').id,
-                'location_dest_id': self.env.ref(
-                    'stock.stock_location_output').id,
-            })]
-        })
-
-        self.picking.action_confirm()
-        self.picking.action_assign()
-        # Round to the picking
-        self.round.button_update()
+        update_qty_wizard.change_product_qty()
 
     def test_full(self):
         assignement_obj = Assignment(DEFAULT_HEADER, request_overwrite=self)
@@ -133,6 +100,7 @@ class TestFullReserve(ZetesParkingTest):
 
         picking = report.create_reserve_picking()
         self.assertEqual(len(picking.pack_operation_product_ids), 1)
+        pack_op = picking.pack_operation_product_ids
 
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
@@ -175,134 +143,137 @@ class TestFullReserve(ZetesParkingTest):
         line_product_1 = results[0]
 
         # One line:
-        # 15 units of product 1 to move from reserve to stock
+        # 20 units of product 1 to move from reserve to stock
+
+        # Test line 1
+        self.assertFalse(line_product_1.Usf02)
+        self.assertEqual(line_product_1.productCode,
+                         self.product_1.default_code)
+        self.assertEqual(int(line_product_1.reqQty), 20)
+        self.assertEqual(line_product_1.moveLineId,
+                         '%s_%s' % (pack_op.id, self.lot_product_1.id))
+
+        ##########
+        # Step 5 #
+        ##########
+        validate_pick_items_params = Parameters(catchweight_obj)
+        validate_pick_items_params.update({
+            'groupNum': picking.id,
+            'lineId': line_product_1.moveLineId,
+            'Usf01': self.lot_product_1.checksum,
+            'Usf02': 20,  # Pick 20 items
+            'Usf03': None,
+        })
+
+        catchweight_obj.resu(validate_pick_items_params)
+        self.assertEqual(pack_op.qty_done, 20)
+
+        request_validate_picking_line_request = Parameters(itemmove_obj)
+        request_validate_picking_line_request.update({
+            'groupNum': picking.id,
+            'moveLineId': line_product_1.moveLineId,
+            'moveStatus': constants.MOVE_FULL,
+            'itemMoveType': constants.MOVE_TYPE_PUT,
+        })
+
+        itemmove_obj.resu(request_validate_picking_line_request)
+        self.assertEqual(pack_op.zetes_state, constants.MOVE_FULL)
+        self.assertEqual(picking.state, 'done')
+
+        ##########
+        # Step 6 #
+        ##########
+        model_name = 'report.stock.quant.bylocation.reserve'
+        report = self.env[model_name].search(
+            [('product_id', '=', self.product_2.id)],
+            limit=1
+        )
+        self.assertTrue(len(report))
+
+        picking_2 = report.create_reserve_picking()
+        self.assertEqual(len(picking.pack_operation_product_ids), 1)
+
+        request_picking_params = Parameters(assignement_obj)
+        request_picking_params.update({
+            'assignmentType': constants.RESERVE_ASSIGNMENT,
+            'requestType': '1',
+            'tripCounter': '1',
+            'Cri01': medic_picking_code,
+            'Cri02': None,
+        })
+        result_str = assignement_obj.requ(request_picking_params)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
+        self.assertEqual(result.Usf09, '1')
+
+        pack_op_picking_2 = picking_2.pack_operation_product_ids
+
+        start_picking_params = Parameters(assignement_obj)
+        start_picking_params.update({
+            'groupNum': picking_2.id,
+            'assignmentStatus': constants.AS_START,
+
+        })
+        assignement_obj.resu(start_picking_params)
+        self.assertEqual(picking_2.operator_id.id, self.user.id)
+
+        ##########
+        # Step 7 #
+        ##########
+        itemmove_params = Parameters(itemmove_obj)
+        itemmove_params.update({
+            'groupNum': picking_2.id,
+            'itemMoveType': constants.MOVE_TYPE_PUT,
+            'Cri01': '0',
+        })
+        result_str = itemmove_obj.requ(itemmove_params)
+        result_lines = result_str.split('\n')
+        results = \
+            [self.format_result(result_line) for result_line in result_lines]
+        self.assertEqual(len(results), 1)
+        line_product_1 = results[0]
+
+        # One line:
+        # 100 units of product 2 to move from reserve to stock
 
         # Test line 1
         self.assertFalse(line_product_1.Usf02)
         self.assertEqual(line_product_1.productCode,
                          self.product_2.default_code)
-        self.assertEqual(int(line_product_1.reqQty), 20)
-        self.assertFalse(int(line_product_1.moveLineId))
-
-        validate_pick_items_params = Parameters(catchweight_obj)
-        validate_pick_items_params.update({
-            'groupNum': picking.id,
-            'lineId': line_product_2.moveLineId,
-            'Usf01': self.lot_product_1.checksum,
-            'Usf02': 75,  # Pick 75 items
-            'Usf03': None,
-        })
-
-        catchweight_obj.resu(validate_pick_items_params)
-        self.assertEqual(pack_op_1.qty_done, 75)
-
-        request_validate_picking_line_request = Parameters(itemmove_obj)
-        request_validate_picking_line_request.update({
-            'groupNum': picking.id,
-            'moveLineId': line_product_2.moveLineId,
-            'moveStatus': constants.MOVE_FULL,
-        })
-
-        itemmove_obj.resu(request_validate_picking_line_request)
-        self.assertEqual(pack_op_1.zetes_state, constants.MOVE_FULL)
-
-        ##########
-        # Step 7 #
-        ##########
-        # Now the picker have to go to the reserve
-        request_location_param = Parameters(location_obj)
-        request_location_param.update({
-            'lineId': line_product_2.moveLineId,
-            'Cri01': self.reserve_medicament.zone,
-            'Cri02': self.reserve_medicament.corridor,
-            'Cri03': self.reserve_medicament.shelf,
-            'Cri04': self.reserve_medicament.height,
-            'Cri05': self.reserve_medicament.box,
-            'Cri07': None,
-        })
-        result_str = location_obj.requ(request_location_param)
-        result = self.format_result(result_str)
-
-        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.lC1, str(self.reserve_medicament.zone))
+        self.assertEqual(int(line_product_1.reqQty), 100)
+        self.assertTrue(int(line_product_1.moveLineId))
 
         ##########
         # Step 8 #
         ##########
-        # The picker put 25 units of product 1 in the reserve
-        validate_reserve_qty_params = Parameters(catchweight_obj)
-        validate_reserve_qty_params.update({
-            'groupNum': picking.id,
-            'lineId': line_product_2.moveLineId,
-            'Usf01': self.lot_product_1.checksum,
-            'Usf02': 25,  # Pick 25 items
-            'Usf03': None,
-        })
-        catchweight_obj.resu(validate_reserve_qty_params)
-
-        self.assertEqual(len(picking.pack_operation_product_ids), 3)
-        self.assertEqual(pack_op_1.product_qty, 75)
-        self.assertEqual(pack_op_1.qty_done, 75)
-        new_pack_op = picking.pack_operation_product_ids.filtered(
-            lambda line:
-            line.product_id.id == self.product_1.id and
-            line.location_dest_id.id == self.reserve_medicament.id)
-        self.assertEqual(len(new_pack_op), 1)
-        self.assertEqual(new_pack_op.product_qty, 25)
-        self.assertEqual(new_pack_op.qty_done, 25)
-
-        validate_line_params = Parameters(itemmove_obj)
-        validate_line_params.update({
-            'moveLineId': line_product_2.moveLineId,
-            'moveStatus': constants.MOVE_DONE,
-        })
-        itemmove_obj.resu(validate_line_params)
-
-        ##########
-        # Step 9 #
-        ##########
-        # The picker put 15 units of product 2 in the stock
         validate_pick_items_params = Parameters(catchweight_obj)
         validate_pick_items_params.update({
-            'groupNum': picking.id,
-            'lineId': line_product_3.moveLineId,
+            'groupNum': picking_2.id,
+            'lineId': line_product_1.moveLineId,
             'Usf01': None,
-            'Usf02': 15,  # Pick 15 items
+            'Usf02': 80,  # Pick 80 items
             'Usf03': None,
         })
 
         catchweight_obj.resu(validate_pick_items_params)
-        self.assertEqual(pack_op_2.qty_done, 15)
+        self.assertEqual(len(picking_2.pack_operation_product_ids), 2)
+        self.assertEqual(pack_op_picking_2.qty_done, 80)
+        pack_op_2_picking_2 = picking_2.pack_operation_product_ids\
+            .filtered(lambda line: line.qty_done == 20)
+        self.assertEqual(len(pack_op_2_picking_2), 1)
+        self.assertEqual(pack_op_2_picking_2.qty_done, 20)
+        self.assertEqual(pack_op_2_picking_2.product_qty, 20)
+        self.assertEqual(pack_op_2_picking_2.location_id.id,
+                         pack_op_2_picking_2.location_dest_id.id)
 
         request_validate_picking_line_request = Parameters(itemmove_obj)
         request_validate_picking_line_request.update({
-            'groupNum': picking.id,
-            'moveLineId': line_product_3.moveLineId,
-            'moveStatus': constants.MOVE_DONE,
+            'groupNum': picking_2.id,
+            'moveLineId': line_product_1.moveLineId,
+            'moveStatus': constants.MOVE_FULL,
+            'itemMoveType': constants.MOVE_TYPE_PUT,
         })
 
         itemmove_obj.resu(request_validate_picking_line_request)
-        self.assertEqual(pack_op_2.zetes_state, constants.MOVE_DONE)
-        self.assertEqual(pack_op_2.product_qty, 15)
-        self.assertEqual(pack_op_2.qty_done, 15)
-
-        validate_line_params = Parameters(itemmove_obj)
-        validate_line_params.update({
-            'moveLineId': line_product_3.moveLineId,
-            'moveStatus': constants.MOVE_DONE,
-        })
-        itemmove_obj.resu(validate_line_params)
-
-        ###########
-        # Step 10 #
-        ###########
-        # The picking is now finished and validated
-        request_finish_picking_params = Parameters(assignement_obj)
-        request_finish_picking_params.update({
-            'groupNum': picking.id,
-            'assignmentStatus': constants.AS_DONE,
-            'Usf01': 1
-        })
-
-        assignement_obj.resu(request_finish_picking_params)
-        self.assertEqual(picking.state, 'done')
+        self.assertEqual(pack_op_picking_2.zetes_state, constants.MOVE_FULL)
+        self.assertEqual(picking_2.state, 'done')

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import api, models
+from odoo import api, models, _
 
 
 class StockWizardReassort(models.TransientModel):
@@ -40,11 +40,27 @@ class StockWizardReassort(models.TransientModel):
                 picking = report.create_reserve_picking()
             pickings |= picking
 
+        if model == 'report.stock.quant.bylocation':
+            name = _('Parking')
+        else:
+            name = _('Reserve')
+
+        action = {
+            'name': name,
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.picking',
+            'view_type': 'form',
+        }
+
         if len(pickings) == 1:
-            action = self.env['ir.actions.act_window']\
-                .for_xml_id('stock',
-                            'action_picking_tree_ready')
-            action['res_id'] = pickings.id
-            action['target'] = 'current'
-            action['context'] = {}
-            return action
+            action.update({
+                'view_mode': 'form',
+                'res_id': picking.id
+            })
+        else:
+            action.update({
+                'view_mode': 'tree,form',
+                'domain': [('id', 'in', pickings.ids)]
+            })
+
+        return action

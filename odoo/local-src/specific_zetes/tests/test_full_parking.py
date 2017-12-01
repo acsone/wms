@@ -17,16 +17,6 @@ class TestFullParking(ZetesParkingTest):
         self.disable_picking_validation = True
         super(TestFullParking, self).setUp()
 
-        # Product 2
-        # Location: GAD515
-        self.product_2 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
-            'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
-            'tracking': 'none',
-            'list_price': 5,
-        })
-
         self.location_product_2 = self.env['stock.location'].create({
             'name': 'GD03B2',
             'kind': 'bin',
@@ -41,6 +31,21 @@ class TestFullParking(ZetesParkingTest):
         })
         self.env['stock.location']._parent_store_compute()
 
+        # Product 2
+        # Location: GAD515
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Test medoc 2',
+            'default_code': '587502',
+            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'tracking': 'none',
+            'list_price': 5,
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.env.ref('stock.stock_location_stock').id,
+                'bin_location_id': self.location_product_2.id,
+            })]
+        })
+
         # Set a quantity in this parking
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_2.id,
@@ -49,14 +54,6 @@ class TestFullParking(ZetesParkingTest):
             'location_id': self.parking_medoc.id
         })
         update_qty_wizard.change_product_qty()
-
-        self.product_2.write({
-            'stock_bin_ids': [(0, 0, {
-                'sequence': 1,
-                'location_id': self.env.ref('stock.stock_location_stock').id,
-                'bin_location_id': self.location_product_2.id,
-            })]
-        })
 
         self.reserve_medicament = self.env['stock.location'].create({
             'name': 'GD01F4',
@@ -194,7 +191,8 @@ class TestFullParking(ZetesParkingTest):
         self.assertEqual(line_product_2.productCode,
                          self.product_1.default_code)
         self.assertEqual(int(line_product_2.reqQty), 100)
-        self.assertEqual(int(line_product_2.moveLineId), pack_op_1.id)
+        self.assertEqual(line_product_2.moveLineId,
+                         "%s_%s" % (pack_op_1.id, self.lot_product_1.id))
 
         # Test line 3
         pack_op_2 = picking.pack_operation_product_ids[1]
@@ -236,6 +234,7 @@ class TestFullParking(ZetesParkingTest):
             'groupNum': picking.id,
             'moveLineId': line_product_2.moveLineId,
             'moveStatus': constants.MOVE_FULL,
+            'itemMoveType': constants.MOVE_TYPE_LOAD,
         })
 
         itemmove_obj.resu(request_validate_picking_line_request)
@@ -290,6 +289,7 @@ class TestFullParking(ZetesParkingTest):
         validate_line_params.update({
             'moveLineId': line_product_2.moveLineId,
             'moveStatus': constants.MOVE_DONE,
+            'itemMoveType': constants.MOVE_TYPE_LOAD,
         })
         itemmove_obj.resu(validate_line_params)
 
@@ -314,6 +314,7 @@ class TestFullParking(ZetesParkingTest):
             'groupNum': picking.id,
             'moveLineId': line_product_3.moveLineId,
             'moveStatus': constants.MOVE_DONE,
+            'itemMoveType': constants.MOVE_TYPE_LOAD,
         })
 
         itemmove_obj.resu(request_validate_picking_line_request)
@@ -325,6 +326,7 @@ class TestFullParking(ZetesParkingTest):
         validate_line_params.update({
             'moveLineId': line_product_3.moveLineId,
             'moveStatus': constants.MOVE_DONE,
+            'itemMoveType': constants.MOVE_TYPE_LOAD,
         })
         itemmove_obj.resu(validate_line_params)
 

@@ -22,6 +22,9 @@ class TestAssignemnt(ZetesTest):
             'is_passport_required': True,
         })
 
+        self.assertEqual(self.picking.zetes_picking_type,
+                         constants.PICKING_ASSIGNMENT)
+
         # Search for a picking
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)

@@ -4,6 +4,7 @@ import logging
 from odoo import _
 
 from domain_interface import DomainInterface, Parameters
+from domain_assignment import Assignment
 from .. import constants
 
 _logger = logging.getLogger(__name__)
@@ -206,6 +207,13 @@ class Itemmove(DomainInterface):
                     'zetes_state': status
                 })
 
+                # For a picking from the reserve (itemMoveType = MOVE_TYPE_PUT)
+                # Zetes doesn't send a RESU_ASSIGNMENT with the status
+                # done. It means that we have to validate the picking
+                # in any case.
+                if params.itemMoveType == constants.MOVE_TYPE_PUT:
+                    move.picking_id.validate_picking()
+
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
@@ -293,9 +301,9 @@ class Itemmove(DomainInterface):
             return []
 
         # Take the first line
-        line = lines.pop(0)
+        line = lines[0]
         if not line.pack_lot_ids:
-            return [line, None, line.product_qty, None]
+            return [[line, None, line.product_qty, None]]
 
         pack_lots = \
             line.pack_lot_ids.filtered(lambda lot: lot.qty < lot.qty_todo)
@@ -305,4 +313,4 @@ class Itemmove(DomainInterface):
             return []
         pack_lot = pack_lots[0]
 
-        return [line, pack_lot.lot_id, pack_lot.qty, None]
+        return [[line, pack_lot.lot_id, pack_lot.qty_todo, None]]

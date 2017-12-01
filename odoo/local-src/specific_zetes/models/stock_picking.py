@@ -82,6 +82,25 @@ class StockPicking(models.Model):
             'operator_id': None,
         })
 
+    @api.multi
+    def validate_picking(self):
+        for picking in self:
+            # The method "do_new_transfer" is the method called when
+            # an user click on "Validate" on a picking.
+            result = picking.do_new_transfer()
+
+            # In Odoo this button will open a wizard in following case:
+            # 1. A wizard if no quantity has been defined on lines
+            #   (this wizard will set the quantity on each lines)
+            # 2. A wizard if we need to create a back order
+            if isinstance(result, dict):
+                model = result.get('res_model')
+                wizard = self.env[model].browse(int(result.get('res_id')))
+
+                # Fortunately these wizards have the same
+                # method "process" to execute the wizard
+                wizard.process()
+
 
 class PackOperationReserveRel(models.Model):
     _name = 'pack.operation.reserve.rel'
@@ -112,29 +131,21 @@ class StockPackOperation(models.Model):
         required=True)
 
     @api.multi
-    def create_reserve_pack_operation(self, reserve_quantity, lot_id=None):
+    def split_pack_op(self, new_qty, location_dest_id, lot_id=None):
         self.ensure_one()
 
         quantity_available = self.product_qty - self.qty_done
-        if reserve_quantity > quantity_available:
+        if new_qty > quantity_available:
             raise UserError(
                 _('You cannot split this pack operation because '
                   'the new quantity (%s) is geater than '
                   'the available quantity (%s)') %
-                (reserve_quantity, quantity_available))
-
-        reserve_rel_obj = self.env['pack.operation.reserve.rel']
-        reserve_rel = reserve_rel_obj.search([
-            ('pack_operation_id', '=', self.id),
-            ('lot_id', '=', lot_id)
-        ], limit=1, order="id DESC")
-        if not reserve_rel:
-            raise UserError(_('Reserve not found'))
+                (new_qty, quantity_available))
 
         new_pack = self.copy({
             'qty_done': 0.0,
-            'product_qty': reserve_quantity,
-            'location_dest_id': reserve_rel.reserve_location_id.id,
+            'product_qty': new_qty,
+            'location_dest_id': location_dest_id,
         })
 
         if lot_id:
@@ -147,28 +158,64 @@ class StockPackOperation(models.Model):
                     _('No pack operation found with ID %s' % lot_id))
 
             lot_quantity_available = pack_lot.qty_todo - pack_lot.qty
-            if reserve_quantity > lot_quantity_available:
+            if new_qty > lot_quantity_available:
                 raise UserError(
                     _('You cannot split this pack operation lot because '
                       'the new quantity (%s) is greater than '
                       'the available quantity (%s)') %
-                    (reserve_quantity, lot_quantity_available))
+                    (new_qty, lot_quantity_available))
 
             pack_lot.copy({
                 'operation_id': new_pack.id,
-                'qty_todo': reserve_quantity,
+                'qty_todo': new_qty,
                 'qty': 0
             })
 
             pack_lot.write({
-                'qty_todo': pack_lot.qty_todo - reserve_quantity
+                'qty_todo': pack_lot.qty_todo - new_qty
             })
 
         self.write({
-            'product_qty': self.product_qty - reserve_quantity
+            'product_qty': self.product_qty - new_qty
         })
 
         return new_pack
+
+    @api.multi
+    def add_qty(self, qty, lot_id=None):
+        """
+        Add a qty on the pack operation
+        :param qty: int - the qty to add
+        :param lot_id: int - the ID of the lot
+        :return:
+        """
+        self.ensure_one()
+
+        self.qty_done += qty
+
+        if not lot_id:
+            return
+
+        # When we have the lot, we will check if there no existing
+        # quantity for this lot.
+        pack_lot = \
+            self.pack_lot_ids.filtered(lambda line: line.lot_id.id == lot_id)
+
+        # If there no existing line (quantity) for this lot
+        # we will create a new line
+        if not len(pack_lot):
+            self.pack_lot_ids.create({
+                'operation_id': self.id,
+                'qty': qty,
+                'lot_id': lot_id,
+            })
+        # Otherwise we set the quantity for this lot
+        # We don't need to add the new quantity to the lot
+        # because Zetes send one request by lot
+        else:
+            pack_lot.write({'qty': qty})
+
+
 
 
 class StockPickingType(models.Model):

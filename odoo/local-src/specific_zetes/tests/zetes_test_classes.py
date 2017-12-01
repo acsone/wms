@@ -247,7 +247,8 @@ class ZetesParkingTest(ZetesTest):
             'product_id': self.product_1.id,
             'product_tmpl_id': self.product_1.product_tmpl_id.id,
             'new_quantity': 100,
-            'location_id': self.parking_medoc.id
+            'location_id': self.parking_medoc.id,
+            'lot_id': self.lot_product_1.id,
         })
         update_qty_wizard.change_product_qty()
 
@@ -269,5 +270,56 @@ class ZetesParkingTest(ZetesTest):
                 'picking_zone_id': self.picking_zone_medoc.id,
             })
         self.parking_medoc.write({
+            'barcode_picking_type_id': self.picking_type_medoc.id,
+        })
+
+
+class ZetesReserveTest(ZetesTest):
+    def setUp(self):
+        super(ZetesReserveTest, self).setUp()
+
+        # Create a parking Medoc
+        self.reserve_medoc = self.env['stock.location'].create({
+            'name': 'Parking Medoc',
+            'kind': 'reserve',
+            'usage': 'internal',
+            'location_id': self.env.ref(
+                '__setup__.stock_location_reserve_medoc').id,
+            'picking_zone_id': self.picking_zone_medoc.id,
+        })
+        self.env['stock.location']._parent_store_compute()
+
+        # Set a quantity in this reserve
+        update_qty_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.product_1.id,
+            'product_tmpl_id': self.product_1.product_tmpl_id.id,
+            'new_quantity': 20,
+            'location_id': self.reserve_medoc.id,
+            'lot_id': self.lot_product_1.id,
+        })
+        update_qty_wizard.change_product_qty()
+
+        self.location_product_1.write({
+            'reserve_location_id': self.reserve_medoc.id,
+        })
+
+        self.picking_type_medoc = self.env.ref(
+            '__setup__.stock_picking_type_reassort_medoc',
+            raise_if_not_found=False)
+        if not self.picking_type_medoc:
+            wh = self.env.ref('stock.warehouse0')
+            internal_sequence = wh.int_type_id.sequence_id
+            location_medoc = self.env.ref('__setup__.stock_location_medoc')
+            self.picking_type_medoc = self.env['stock.picking.type'].create({
+                'name': 'Reassort Medicaments',
+                'code': 'internal',
+                'sequence_id': internal_sequence.id,
+                'default_location_src_id': self.reserve_medoc.id,
+                'default_location_dest_id': location_medoc.id,
+                'use_create_lots': False,
+                'sequence': 9,
+                'picking_zone_id': self.picking_zone_medoc.id,
+            })
+        self.reserve_medoc.write({
             'barcode_picking_type_id': self.picking_type_medoc.id,
         })

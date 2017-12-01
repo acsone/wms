@@ -12,7 +12,7 @@ class TestAssignemnt(ZetesParkingTest):
     post_install = True
     at_install = False
 
-    def test_requ_assignment(self):
+    def test_01_requ_assignment(self):
         # Check with no current picking
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='requ')
@@ -29,7 +29,7 @@ class TestAssignemnt(ZetesParkingTest):
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
-    def test_01_requ_assignment(self):
+    def test_02_requ_assignment(self):
         report_query = """
         SELECT report.id
         FROM report_stock_quant_bylocation AS report
@@ -52,6 +52,9 @@ class TestAssignemnt(ZetesParkingTest):
         report = self.env[model_name].browse(report_id)
         # Create the picking
         picking = report.create_parking_picking()
+
+        self.assertEqual(picking.zetes_picking_type,
+                         constants.PARKING_ASSIGNMENT)
 
         # Check with no current picking
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)

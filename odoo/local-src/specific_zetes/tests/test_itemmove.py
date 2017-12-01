@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
+from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
-from ..tools.domain_itempick import Itempick
+from ..tools.domain_itemmove import Itemmove
 
 
-class TestItemmove(ZetesTest):
+class TestItemmove():
 
-    def test_requ_itempick(self):
+    def test_requ_itemmove(self):
         """
-        The method requ on catchweight is not used.
+        The method requ on itemmove is not used.
         :return:
         """
-        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itemmove(DEFAULT_HEADER, request_overwrite=self)
 
         # Set the flag is_price_on_labels
         self.partner.write({
