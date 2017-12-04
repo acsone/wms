@@ -39,3 +39,4 @@ Contributors
 
 * Julien Coux <julien.coux@camptocamp.com>
 * Sylvain Van Hoof <sylvain@okia.be>
+* Jacques-Etienne Baudoux <je@bcim.be>
