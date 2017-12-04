@@ -101,14 +101,25 @@ class StockMove(models.Model):
     def action_cancel(self):
         """ Prevent to cancel a move from a printed picking and recompute pack
         operations """
+        _logger.debug("Canceling moves %s", self.ids)
         res = super(StockMove, self).action_cancel()
         if self.filtered("picking_id.printed"):
             raise UserError(_(
                 "You cannot cancel a move that is part of a started picking"))
-        if not self.env.context.get('no_recompute'):
+        if not self.env.context.get('no_recompute_pack'):
+            pickings = self.mapped('picking_id').filtered(
+                lambda picking: picking.state != 'cancel')
+            moves = pickings.mapped('move_lines').filtered(
+                lambda move: move.state == 'confirmed' and
+                move.product_id in self.mapped('product_id'))
+            if moves:
+                # action_assign requires to clean existing pack operation
+                moves.mapped('linked_move_operation_ids.operation_id').unlink()
+                _logger.debug("Re-check availability for moves %s", moves.ids)
+                moves.action_assign(no_prepare=True)
             # recompute pack op
-            self.mapped('picking_id').filtered(
-                lambda picking: picking.state != 'cancel').do_prepare_partial()
+            _logger.debug("Recompute pack operations")
+            pickings.do_prepare_partial()
             # Recompute the weight for each picking
             self.mapped('picking_id')._cal_weight()
         return res

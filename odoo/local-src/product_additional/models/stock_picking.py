@@ -5,6 +5,9 @@
 
 from odoo import api, models
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -75,6 +78,9 @@ class StockPicking(models.Model):
                 'origin': picking.name,
             }
             move_add = self.env['stock.move'].create(move_vals)
+            _logger.debug(
+                "Created additional move %s (qty=%s) in the pickings %s",
+                move_add.id, qty_add, picking.id)
             for packop in packops:
                 packop['additional_move'] = move_add.id
             additional_moves |= move_add

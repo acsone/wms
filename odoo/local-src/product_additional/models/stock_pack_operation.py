@@ -4,6 +4,9 @@
 
 from odoo import api, fields, models
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
@@ -15,13 +18,13 @@ class StockPackOperation(models.Model):
 
     @api.multi
     def unlink(self):
-        moves = self.mapped('additional_move')
-        res = super(StockPackOperation, self).unlink()
-        if moves:
-            op = moves.mapped('linked_move_operation_ids.operation_id')
-            op -= self
-            if op:
-                op.unlink()
-            moves.with_context(no_recompute=True).action_cancel()
-            moves.unlink()
+        additional_moves = self.mapped('additional_move')
+        op = additional_moves.mapped('linked_move_operation_ids.operation_id')
+        res = super(StockPackOperation, self | op).unlink()
+        if additional_moves:
+            _logger.debug("Canceling additional moves %s",
+                          additional_moves.ids)
+            additional_moves.with_context(
+                no_recompute_pack=True).action_cancel()
+            additional_moves.unlink()
         return res
