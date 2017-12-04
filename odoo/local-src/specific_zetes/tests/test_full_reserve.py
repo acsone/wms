@@ -6,7 +6,6 @@ from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_itemmove import Itemmove
-from ..tools.domain_location import Location
 from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
 
@@ -59,7 +58,6 @@ class TestFullReserve(ZetesReserveTest):
         assignement_obj = Assignment(DEFAULT_HEADER, request_overwrite=self)
         catchweight_obj = Catchweight(DEFAULT_HEADER, request_overwrite=self)
         itemmove_obj = Itemmove(DEFAULT_HEADER, request_overwrite=self)
-        location_obj = Location(DEFAULT_HEADER, request_overwrite=self)
         refdata_obj = Refdata(DEFAULT_HEADER, request_overwrite=self)
         usercontext_obj = Usercontext(DEFAULT_HEADER, request_overwrite=self)
 

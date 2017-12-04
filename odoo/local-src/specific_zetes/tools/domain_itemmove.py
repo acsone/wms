@@ -4,7 +4,6 @@ import logging
 from odoo import _
 
 from domain_interface import DomainInterface, Parameters
-from domain_assignment import Assignment
 from .. import constants
 
 _logger = logging.getLogger(__name__)

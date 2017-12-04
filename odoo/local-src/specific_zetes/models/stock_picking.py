@@ -216,8 +216,6 @@ class StockPackOperation(models.Model):
             pack_lot.write({'qty': qty})
 
 
-
-
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 

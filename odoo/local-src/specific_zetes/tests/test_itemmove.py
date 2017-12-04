@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .. import constants
-from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
+from .zetes_test_classes import DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itemmove import Itemmove
 
@@ -84,7 +84,7 @@ class TestItemmove():
 
         self.assertEqual(move.qty_done, 10)
 
-        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itemmove(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'pickLineId': move.id,
