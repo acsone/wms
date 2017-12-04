@@ -183,3 +183,4 @@ migration:
         upgrade:
           ### local-src
           - specific_sale
+          - product_additional
