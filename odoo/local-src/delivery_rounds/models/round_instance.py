@@ -140,33 +140,32 @@ class RoundInstance(models.Model):
             ('state', '=', 'confirmed')])
         self._assign_pickings(picking_confirmed)
 
-    def _assign_pickings(self, pickings):
+    def _assign_pickings(self, pickings, no_prepare=False):
+        self.ensure_one()
         _logger.debug("Assign to delivery round %s the pickings %s",
                       self.id, pickings.ids)
-        try:
-            # call Try to reserve from stock the qty for confirmed pickings
-            pickings.filtered(lambda p: p.state in [
-                'draft', 'confirmed', 'partially_available']).with_context(
-                    round_autoset=False).action_assign()
-        except UserError:
-            # if no moves
-            pass
-        else:
-            # retrieve all pickings (partially) available not yet bound to a
-            # delivery round
-            pickings_assigned = self.env['stock.picking'].search([
-                # We need to be able to assign to another round instance
-                # ('delivery_round_id', '=', False),
-                ('id', 'in', pickings.ids),
-                ('state', 'in', ('partially_available', 'assigned'))])
-            if pickings_assigned:
-                _logger.debug("Add to delivery round %s the pickings %s",
-                              self.id, pickings.ids)
-                partner = pickings_assigned.mapped('partner_id')
-                rank = self._add_customer(partner)
-                pickings_assigned.with_context(round_assigned=True).write({
-                    'delivery_round_id': self.id,
-                    'rank': rank})
+
+        pickings.filtered(lambda picking: picking.state == 'draft')\
+            .action_confirm()
+        moves = pickings.mapped('move_lines').filtered(
+            lambda move: move.state == 'confirmed' and
+            not move.linked_move_operation_ids)
+        if moves:
+            moves.with_context(round_autoset=False).action_assign(
+                no_prepare=no_prepare)
+
+        # retrieve all pickings (partially) available
+        pickings_assigned = self.env['stock.picking'].search([
+            ('id', 'in', pickings.ids),
+            ('state', 'in', ('partially_available', 'assigned'))])
+        if pickings_assigned:
+            _logger.debug("Add/Propagate to delivery round %s the pickings %s",
+                          self.id, pickings.ids)
+            partner = pickings_assigned.mapped('partner_id')
+            rank = self._add_customer(partner)
+            pickings_assigned.with_context(round_assigned=True).write({
+                'delivery_round_id': self.id,
+                'rank': rank})
 
     @api.multi
     def _add_customer(self, customer):
