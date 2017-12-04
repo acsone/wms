@@ -23,25 +23,25 @@ class TestFull(ZetesTest):
         super(TestFull, self).setUp()
 
         # Product 2
-        # Location: GAD515
+        # Location: GD80B1
         # Specificity: Out of stock (10 requested - 6 in stock)
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 40,
         })
 
         self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GD03B2',
+            'name': 'GD80B2',
             'kind': 'bin',
             'zone': 'G',
             'corridor': 'D',
-            'shelf': '03',
+            'shelf': '80',
             'height': 'B',
             'box': '2',
-            'location_id': self.parent_location.id,
+            'location_id': self.zone_gustave.id,
             'bin_checksum_1': '45',
             'bin_checksum_2': '45',
         })
@@ -75,28 +75,28 @@ class TestFull(ZetesTest):
         })
 
         # Product 3
-        # Location: GAI110
+        # Location: GD80E8
         # Specificity: Split in two lot (20 in lot 000000001
         # and 30 in lot 000000002)
         self.product_3 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '025784',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 150,
         })
 
         self.location_product_3 = self.env['stock.location'].create({
-            'name': 'GD15E8',
+            'name': 'GD80E8',
             'kind': 'bin',
             'zone': 'G',
             'corridor': 'D',
-            'shelf': '15',
+            'shelf': '80',
             'height': 'E',
             'box': '8',
-            'location_id': self.parent_location.id,
-            'bin_checksum_1': '789',
-            'bin_checksum_2': '789',
+            'location_id': self.zone_gustave.id,
+            'bin_checksum_1': '89',
+            'bin_checksum_2': '89',
         })
         self.env['stock.location']._parent_store_compute()
 
@@ -268,10 +268,10 @@ class TestFull(ZetesTest):
         # It's not useful to test on each line
         self.assertEqual(line_product_1.sourceLC1, 'G')
         self.assertEqual(line_product_1.sourceLC2, 'D')
-        self.assertEqual(line_product_1.sourceLC3, '01')
+        self.assertEqual(line_product_1.sourceLC3, '80')
         self.assertEqual(line_product_1.sourceLC4, 'B')
         self.assertEqual(line_product_1.sourceLC5, '1')
-        self.assertEqual(line_product_1.sourceLCCD, '123')
+        self.assertEqual(line_product_1.sourceLCCD, '12')
         self.assertEqual(line_product_1.Usf01, self.lot_product_1.checksum)
 
         # Test line 2

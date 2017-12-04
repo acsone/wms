@@ -18,14 +18,14 @@ class TestFullParking(ZetesParkingTest):
         super(TestFullParking, self).setUp()
 
         self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GD03B2',
+            'name': 'GD80B2',
             'kind': 'bin',
             'zone': 'G',
             'corridor': 'D',
-            'shelf': '03',
+            'shelf': '80',
             'height': 'B',
             'box': '2',
-            'location_id': self.parent_location.id,
+            'location_id': self.zone_gustave.id,
             'bin_checksum_1': '45',
             'bin_checksum_2': '45',
         })
@@ -36,12 +36,12 @@ class TestFullParking(ZetesParkingTest):
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'none',
             'list_price': 5,
             'stock_bin_ids': [(0, 0, {
                 'sequence': 1,
-                'location_id': self.env.ref('stock.stock_location_stock').id,
+                'location_id': self.stock_location.id,
                 'bin_location_id': self.location_product_2.id,
             })]
         })
@@ -56,14 +56,14 @@ class TestFullParking(ZetesParkingTest):
         update_qty_wizard.change_product_qty()
 
         self.reserve_medicament = self.env['stock.location'].create({
-            'name': 'GD01F4',
+            'name': 'GD80F4',
             'kind': 'reserve',
             'zone': 'G',
             'corridor': 'D',
-            'shelf': '01',
+            'shelf': '80',
             'height': 'F',
             'box': '4',
-            'location_id': self.parent_location.id,
+            'location_id': self.zone_gustave.id,
             'bin_checksum_1': '45',
             'bin_checksum_2': '45',
         })

@@ -14,9 +14,9 @@ Set up
 
 - A picker with the operator code 99
 - Three products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515 (we will simulate an out of stock - only 6 units)
-    - Product 2: "Test medoc 3" with a stock of 120 units in two lots 0000001 (20 units) and 0000002 (100 units) at the location GAI110
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2 (we will simulate an out of stock - only 6 units)
+    - Product 2: "Test medoc 3" with a stock of 120 units in two lots 0000001 (20 units) and 0000002 (100 units) at the location GD80E8
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:
@@ -57,8 +57,8 @@ Set up
 ======
 - A picker with the operator code 99
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:
@@ -88,8 +88,8 @@ Set up
 - A picker with the operator code 99
 - An another picker with the operator code 98
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:

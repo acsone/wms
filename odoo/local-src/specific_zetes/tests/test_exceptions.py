@@ -20,24 +20,24 @@ class TestExceptions(ZetesTest):
         super(TestExceptions, self).setUp()
 
         # Product 2
-        # Location: GAD515
+        # Location: GD80B1
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 40,
         })
 
         self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GD03B2',
+            'name': 'GD80B2',
             'kind': 'bin',
             'zone': 'G',
             'corridor': 'D',
-            'shelf': '03',
+            'shelf': '80',
             'height': 'B',
             'box': '2',
-            'location_id': self.parent_location.id,
+            'location_id': self.zone_gustave.id,
             'bin_checksum_1': '45',
             'bin_checksum_2': '45',
         })

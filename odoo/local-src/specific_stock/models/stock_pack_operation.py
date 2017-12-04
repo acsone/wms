@@ -7,7 +7,8 @@ class StockPackOperation(models.Model):
 
     location_name = fields.Char('Location name',
                                 related='location_id.name',
-                                store=True)
+                                store=True,
+                                readonly=True)
     operator_id = fields.Many2one('res.users',
                                   related='picking_id.operator_id',
                                   readonly=True)
