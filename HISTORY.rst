@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1031: Add narcotic filter on sale report
+
 **Bugfixes**
 
 **Build**

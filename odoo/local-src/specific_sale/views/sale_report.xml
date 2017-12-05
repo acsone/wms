@@ -11,6 +11,11 @@
                 <field name="month"/>
             </field>
 
+            <filter name="Sales" position="after">
+                <separator/>
+                <filter name="only_narcotic" string="Only narcotics" domain="[('only_narcotic', '=', True)]"/>
+            </filter>
+
         </field>
     </record>
 
