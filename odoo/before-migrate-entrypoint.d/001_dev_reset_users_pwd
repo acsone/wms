@@ -17,7 +17,6 @@ if [ "$RUNNING_ENV" = "dev" ] ; then
         exit 0
     fi
 
-
     echo "Setting users' passwords to their usernames."
 
     psql << EOF

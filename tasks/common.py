@@ -12,6 +12,7 @@ import shutil
 import tempfile
 import yaml
 
+import fileinput
 from contextlib import contextmanager
 from invoke import exceptions
 
@@ -34,10 +35,11 @@ def build_path(path, from_root=True, from_file=None):
 VERSION_FILE = build_path('odoo/VERSION')
 HISTORY_FILE = build_path('HISTORY.rst')
 PENDING_MERGES = build_path('odoo/pending-merges.yaml')
-GIT_REMOTE_NAME = 'camptocamp'
 MIGRATION_FILE = build_path('odoo/migration.yml')
-TEMPLATE_GIT = 'git@github.com:camptocamp/odoo-template.git'
 COOKIECUTTER_CONTEXT = build_path('.cookiecutter.context.yml')
+
+GIT_REMOTE_NAME = 'camptocamp'
+TEMPLATE_GIT = 'git@github.com:camptocamp/odoo-template.git'
 
 
 def cookiecutter_context():
@@ -91,3 +93,12 @@ def tempdir():
             # already deleted
             if e.errno != errno.ENOENT:
                 raise
+
+
+def search_replace(file_path, old, new):
+    """ Replace a text in a file on each lines """
+    shutil.move(file_path, file_path + '.bak')
+    with open(file_path + '.bak', 'r') as f_r:
+        with open(file_path, 'w') as f_w:
+            for line in f_r:
+                f_w.write(line.replace(old, new))

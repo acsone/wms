@@ -96,3 +96,27 @@ a new section of the file (no pre-existing pending-merge branch).
 2. If you are working on another branch than `master`, you'll want to use a
    different name for the consolidation branch (the name of the consolidation
    branch is the `target` attribute in `pending-merges.yaml`).
+
+## Merging only one distinct commit (cherry-pick)
+
+Sometimes you only want to merge one commit into the consolidated branch (after
+merging pull requests or not). To do so you have to add a `shell_command_after` block
+in the corresponding section. Here is an example :
+
+  ```yaml
+  ./external-src/enterprise:
+    remotes:
+      odoo: git@github.com:odoo/enterprise.git
+      camptocamp: git@github.com:camptocamp/enterprise.git
+    merges:
+      - odoo <branch-name or initial commit>
+    target: *default_target
+    shell_command_after:
+      # Commit from ? Doing what ?
+      -  git am "$(git format-patch -1 6563606f066792682a16936f704d0bdf4bc8429f -o ../patches)"
+  ```
+
+In the previous example the commit numbered 6563606... is searched in all the remotes of the section,
+then a patch file is made and apply to the consolidated branch.
+A file containing the patch will be saved in the patches directory and needs to be added in the commit
+of the project.

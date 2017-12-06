@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* ALCN-1032: Update project from odoo-template
+
 **Documentation**
 
 

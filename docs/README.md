@@ -30,6 +30,7 @@ https://github.com/camptocamp/odoo-template instead.
 * [How to backup and restore volumes](./how-to-backup-and-restore-volumes.md)
 * [How to use a PROD DB dump in DEV mode](./how-to-use-a-prod-db-in-dev.md)
 * [How to pgBadger](./how-to-pgbadger.md)
+* [How to test CUPS printing](../cups-test-server/README.md)
 
 ## Local Documentation
 
