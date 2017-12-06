@@ -13,6 +13,7 @@ Unreleased
 **Build**
 
 * ALCN-1032: Update project from odoo-template
+* ALCN-1032: Apply depreciation of demo in favor of sample
 
 **Documentation**
 

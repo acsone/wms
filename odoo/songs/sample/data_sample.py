@@ -8,7 +8,7 @@ import anthem
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
 from ..common import req
-from data_full import post_import_stock_bins
+from ..install.data_full import post_import_stock_bins
 
 
 @anthem.log
@@ -21,7 +21,7 @@ def import_suppliers(ctx):
     ctx.env['res.company'].search([]).write({'vat_check_vies': False})
 
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    content = resource_stream(req, 'data/demo/supplier.csv')
+    content = resource_stream(req, 'data/sample/supplier.csv')
     load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
@@ -37,11 +37,11 @@ def import_clients(ctx):
     ctx.env['res.company'].search([]).write({'vat_check_vies': False})
 
     with ctx.log(u"Importing customers"):
-        content = resource_stream(req, 'data/demo/customer.csv')
+        content = resource_stream(req, 'data/sample/customer.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
     with ctx.log(u"Importing customer addresses"):
-        content = resource_stream(req, 'data/demo/customer_address.csv')
+        content = resource_stream(req, 'data/sample/customer_address.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
@@ -56,16 +56,16 @@ def import_locations(ctx):
         content = resource_stream(req, 'data/install/location_family.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing warehouse locations"):
-        content = resource_stream(req, 'data/demo/location.csv')
+        content = resource_stream(req, 'data/sample/location.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing reserve locations"):
-        content = resource_stream(req, 'data/demo/locators_reserve.csv')
+        content = resource_stream(req, 'data/sample/locators_reserve.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing parking locations"):
-        content = resource_stream(req, 'data/demo/locators_parking.csv')
+        content = resource_stream(req, 'data/sample/locators_parking.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing output locations"):
-        content = resource_stream(req, 'data/demo/chariots.csv')
+        content = resource_stream(req, 'data/sample/chariots.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
 
     with ctx.log(u"Compute parent_left, parent_right"):
@@ -85,9 +85,9 @@ def import_products(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Product = ctx.env['product.product'].with_context(load_ctx)
-    content = resource_stream(req, 'data/demo/product.csv')
+    content = resource_stream(req, 'data/sample/product.csv')
     load_csv_stream(ctx, Product, content, delimiter=',')
-    content = resource_stream(req, 'data/demo/logistics_product.csv')
+    content = resource_stream(req, 'data/sample/logistics_product.csv')
     load_csv_stream(ctx, Product, content, delimiter=';')
     ctx.env.cr.execute("""
         UPDATE product_template
@@ -101,14 +101,14 @@ def import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
-    content = resource_stream(req, 'data/demo/supplierinfo.csv')
+    content = resource_stream(req, 'data/sample/supplierinfo.csv')
     load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
 @anthem.log
 def import_pricelist_items(ctx):
     """ Importing pricelists from csv"""
-    content = resource_stream(req, 'data/demo/pricelist_items.csv')
+    content = resource_stream(req, 'data/sample/pricelist_items.csv')
     load_csv_stream(ctx, 'product.pricelist.item', content, delimiter=',')
 
 
@@ -117,7 +117,7 @@ def import_lots(ctx):
     """ Importing lots from csv"""
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
-    content = resource_stream(req, 'data/demo/stock_production_lot.csv')
+    content = resource_stream(req, 'data/sample/stock_production_lot.csv')
     Lot = ctx.env['stock.production.lot'].with_context(load_ctx)
     load_csv_stream(ctx, Lot, content, delimiter=',')
 
@@ -134,7 +134,7 @@ def import_inventory(ctx):
     ctx.env.context = load_ctx
 
     model = 'stock.inventory.line'
-    content = resource_stream(req, 'data/demo/stock_inventory_line.csv')
+    content = resource_stream(req, 'data/sample/stock_inventory_line.csv')
     header, rows = read_csv(content)
     header.append('inventory_id/.id')
     new_rows = []
@@ -147,7 +147,7 @@ def import_inventory(ctx):
 @anthem.log
 def import_stock_bins(ctx):
     """ Importing Stock Bins"""
-    content = resource_stream(req, 'data/demo/product_stock_bin.csv')
+    content = resource_stream(req, 'data/sample/product_stock_bin.csv')
     load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
 
 
@@ -157,11 +157,11 @@ def import_delivery_round_config(ctx):
     content = \
         resource_stream(req, 'data/install/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/delivery_template.csv')
+    content = resource_stream(req, 'data/sample/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/delivery_itinerary.csv')
+    content = resource_stream(req, 'data/sample/delivery_itinerary.csv')
     load_csv_stream(ctx, 'round.itinerary', content, delimiter=',')
-    content = resource_stream(req, 'data/demo/delivery_clients.csv')
+    content = resource_stream(req, 'data/sample/delivery_clients.csv')
     load_csv_stream(ctx, 'round.itinerary.position', content, delimiter=',')
 
 
@@ -171,7 +171,7 @@ def import_sale_orders(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     SaleOrder = ctx.env['sale.order'].with_context(load_ctx)
-    content = resource_stream(req, 'data/demo/sale_order.csv')
+    content = resource_stream(req, 'data/sample/sale_order.csv')
     load_csv_stream(ctx, SaleOrder, content, delimiter=',')
 
     line_load_ctx = ctx.env.context.copy()
@@ -179,7 +179,7 @@ def import_sale_orders(ctx):
         'tracking_disable': True,
     })
     SaleOrderLine = ctx.env['sale.order.line'].with_context(line_load_ctx)
-    content = resource_stream(req, 'data/demo/sale_order_line.csv')
+    content = resource_stream(req, 'data/sample/sale_order_line.csv')
     load_csv_stream(ctx, SaleOrderLine, content, delimiter=',')
 
 

@@ -60,10 +60,10 @@ migration:
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               - anthem songs.install.db2_import::main
-        demo:
+        sample:
           operations:
             post:
-              - anthem songs.install.data_demo::main
+              - anthem songs.sample.data_sample::main
               - anthem songs.install.accounting::activate_check_on_vat
       addons:
         upgrade:
