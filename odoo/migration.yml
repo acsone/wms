@@ -104,6 +104,7 @@ migration:
           - sale_triple_discount
           # oca/server-tools
           - base_exception
+          - base_technical_features
           - mail_environment
           - server_environment
           # oca/stock-logistics-warehouse
@@ -111,6 +112,7 @@ migration:
           # OCA/stock-logistics-workflow
           - stock_picking_invoice_link
           # oca/web
+          - web_environment_ribbon
           - web_sheet_full_width
           # oca/purchase-workflow
           - purchase_cancel_reason

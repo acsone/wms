@@ -18,6 +18,7 @@ Unreleased
  * Apply depreciation of demo in favor of sample
  * Clean empty data directories
  * Fix import_db2 scripts with sample data
+ * Install base_technical_features and web_environment_ribbon modules
 
 **Documentation**
 
