@@ -62,7 +62,7 @@ class Importer:
         self.csv_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
             '..', 'odoo', 'data',
-            'install' if self.full else 'demo'
+            'install' if self.full else 'sample'
         )
 
     def add_entity(self, name, entity):

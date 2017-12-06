@@ -12,8 +12,12 @@ Unreleased
 
 **Build**
 
-* ALCN-1032: Update project from odoo-template
-* ALCN-1032: Apply depreciation of demo in favor of sample
+* ALCN-1032:
+
+ * Update project from odoo-template
+ * Apply depreciation of demo in favor of sample
+ * Clean empty data directories
+ * Fix import_db2 scripts with sample data
 
 **Documentation**
 
