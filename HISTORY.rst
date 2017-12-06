@@ -22,6 +22,11 @@ Unreleased
 * Complete readme on modules
 * Udpdate README for module specific_print and specific_purchase
 
+**Build**
+
+* Disable lang install on CI to reduce travis build time
+* Remove unused PO files to reduce docker image size
+
 
 10.12.1 (2017-11-17)
 ++++++++++++++++++++
