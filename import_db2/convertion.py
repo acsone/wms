@@ -203,8 +203,7 @@ class Supplierinfo(EntityMapper):
         return ','.join(self.GROUP_BY_COL)
 
     def convert_id(self, odoo_entity, db2_entity):
-        """ Create a name from Suite No + Client No + User No + Line numeber
-        We use user to remove duplicates
+        """ Create a name from Supplier No + Product No + date
         """
         supplier = db2_entity['gesfou']
         product = db2_entity['gesart'].strip()
