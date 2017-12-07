@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-09 13:55+0000\n"
-"PO-Revision-Date: 2016-11-09 13:55+0000\n"
+"POT-Creation-Date: 2017-12-07 12:13+0000\n"
+"PO-Revision-Date: 2017-12-07 12:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,13 @@ msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_alcyon_category_id
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_alcyon_category_id
 msgid "Alcyon category"
 msgstr "Catégorie Alcyon"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_pharmacist_id
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_pharmacist_id
 msgid "Associated pharmacist"
 msgstr "Pharmacien associé"
 
@@ -37,23 +39,25 @@ msgstr "Créé le"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_depot_number
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_depot_number
 msgid "Depot number"
 msgstr "Numéro de dépôt"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_depot_number_visible
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_depot_number_visible
 msgid "Depot number visible"
 msgstr "Depot number visible"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_display_name
 msgid "Display Name"
-msgstr "Afficher le nom"
+msgstr "Nom affiché"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
-msgstr "Identifiant"
+msgstr "ID"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category___last_update
@@ -63,7 +67,7 @@ msgstr "Dernière modification le"
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Derniere fois mis à jour par"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_date
@@ -72,6 +76,7 @@ msgstr "Dernière mise à jour le"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_legal_entity
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_legal_entity
 msgid "Legal entity"
 msgstr "Entité juridique"
 
@@ -84,6 +89,18 @@ msgstr "Nom"
 #: model:ir.model,name:specific_partner.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_pharmacist_of_ids
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_pharmacist_of_ids
+msgid "Pharmacist associated to"
+msgstr "Pharmacien associé à"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_suite
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_suite
+msgid "Suite Name"
+msgstr "Nom de suite"
 
 #. module: specific_partner
 #: sql_constraint:partner.alcyon_category:0
