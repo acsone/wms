@@ -12,3 +12,7 @@ class StockPackOperation(models.Model):
     operator_id = fields.Many2one('res.users',
                                   related='picking_id.operator_id',
                                   readonly=True)
+    location_dest_name = fields.Char('Location dest name',
+                                     related='location_dest_id.name',
+                                     store=True,
+                                     readonly=True)

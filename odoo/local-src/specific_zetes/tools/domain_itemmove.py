@@ -140,7 +140,6 @@ class Itemmove(DomainInterface):
                 'sourceLCCD': location.get_checksum(),
             })
 
-            # TODO Please confirm this
             # If it is a reserved quantity the location destination
             # is the same than the current location
             if move_type == constants.MOVE_TYPE_LOAD:
@@ -216,16 +215,16 @@ class Itemmove(DomainInterface):
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=move.picking_id.id,
-                       operation_id=move_id,
+                       operation_id=pack_operation_id,
                        exception=e)
 
     def get_load_lines(self, params, picking_id):
 
         # Cri01 define the order (01 => from the end to the start)
         if params.Cri01 == '1':
-            order_by = 'location_name DESC'
+            order_by = 'location_dest_name DESC'
         else:
-            order_by = 'location_name ASC'
+            order_by = 'location_dest_name ASC'
 
         # Search all pack operations for this picking
         # The state of the line must be

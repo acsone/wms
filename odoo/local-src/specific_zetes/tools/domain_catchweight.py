@@ -76,13 +76,7 @@ class Catchweight(DomainInterface):
         if isinstance(move_id, int):
             move_id = str(move_id)
 
-        move_id_list = move_id.split('_')
-        if len(move_id_list) == 2:
-            pack_operation_id = int(move_id_list[0])
-            lot_id = int(move_id_list[1])
-        else:
-            pack_operation_id = int(move_id)
-            lot_id = None
+        pack_operation_id = int(move_id.split('_')[0])
 
         move = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(pack_operation_id)
@@ -90,14 +84,6 @@ class Catchweight(DomainInterface):
             return
 
         try:
-            # If we receive a value for Usf03, it means that we have to
-            # check if the available quantity (in Odoo) is the same than
-            # the real quantity (say by the picker).
-            actual_stock = params.Usf03
-            if actual_stock or actual_stock == 0:
-                self.check_actual_stock(params, move, actual_stock)
-                return
-
             # Retrieve the quantity
             real_qty = params.Usf02 and float(params.Usf02) or 0
             virtual_qty = self.check_picked_quantity(params, move, real_qty)
@@ -112,6 +98,14 @@ class Catchweight(DomainInterface):
                      ('checksum', '=', lot_number)], limit=1)
                 if lot:
                     lot_id = lot.id
+
+            # If we receive a value for Usf03, it means that we have to
+            # check if the available quantity (in Odoo) is the same than
+            # the real quantity (say by the picker).
+            actual_stock = params.Usf03
+            if actual_stock or actual_stock == 0:
+                self.check_actual_stock(params, move, actual_stock, lot_id)
+                return
 
             picking = move.picking_id
             if move.zetes_state == constants.MOVE_FULL:
@@ -149,13 +143,14 @@ class Catchweight(DomainInterface):
                        operation_id=pack_operation_id,
                        exception=e)
 
-    def check_actual_stock(self, params, move, actual_stock):
+    def check_actual_stock(self, params, move, actual_stock, lot_id=None):
         """
         Check if the actual quantity in stock equals the available quantity
         in Odoo.
         :param params:
         :param move:
         :param actual_stock:
+        :param lot_id:
         :return:
         """
         available_qty_query = """
@@ -165,9 +160,16 @@ class Catchweight(DomainInterface):
         AND quant.location_id = %s
         AND quant.reservation_id IS NULL
         """
-        self.request.env.cr.execute(available_qty_query,
-                                    (move.product_id.id,
-                                     move.location_id.id))
+        query_values = [move.product_id.id, move.location_id.id]
+
+        # We cannot handle ZeroCheck with lot
+        # if lot_id:
+        #     available_qty_query += " AND quant.lot_id = %s"
+        #     query_values.append(lot_id)
+        # else:
+        #     available_qty_query += " AND quant.lot_id IS NULL"
+
+        self.request.env.cr.execute(available_qty_query, tuple(query_values))
         query_result = self.request.env.cr.fetchone()
         available_qty = query_result and query_result[0] or 0
 
@@ -179,8 +181,15 @@ class Catchweight(DomainInterface):
                              actual_stock,
                              move.product_id.display_name,
                              move.location_id.display_name)
+            if lot_id:
+                lot = self.request.env['stock.production.lot']\
+                    .sudo(self._user).browse(lot_id)
+                error_message += " (lot %s)" % lot.name
+
             _logger.error(error_message)
-            params.log(exception=error_message)
+            params.log(picking_id=move.picking_id.id,
+                       operation_id=move.id,
+                       exception=error_message)
 
     def check_picked_quantity(self, params, move, picked_quantity):
         """

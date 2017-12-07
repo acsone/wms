@@ -93,7 +93,6 @@ class ZetesTest(TransactionCase):
             self.picking_zone_medoc = self.env['picking.zone'].create({
                 'code': '01',
                 'name': 'Medicament',
-                'usage': 'internal',
             })
 
         location_obj = self.env['stock.location']
@@ -131,7 +130,7 @@ class ZetesTest(TransactionCase):
         location_obj._parent_store_compute()
 
         # Product 1
-        # Location: GAA210
+        # Location: GD80B1
         self.product_1 = self.env['product.product'].create({
             'name': 'Test medoc 1',
             'default_code': '1234567',
@@ -254,13 +253,20 @@ class ZetesParkingTest(ZetesTest):
             'location_id': entree_location.id,
         })
 
-        # Create a parking T99
+        # Create a parking T99 (GF80E3)
         self.parking_medoc = self.env['stock.location'].create({
             'name': 'T99',
             'kind': 'parking',
             'usage': 'internal',
             'location_id': parking_medoc_root.id,
             'picking_zone_id': self.picking_zone_medoc.id,
+            'zone': 'G',
+            'corridor': 'F',
+            'shelf': '80',
+            'height': 'E',
+            'box': '3',
+            'bin_checksum_1': '12',
+            'bin_checksum_2': '12',
         })
         self.env['stock.location']._parent_store_compute()
 
@@ -303,13 +309,20 @@ class ZetesReserveTest(ZetesTest):
             'kind': 'reserve'
         })
 
-        # Create the reserve RM99
+        # Create the reserve RM99 (GD80X1)
         self.reserve_medoc = self.env['stock.location'].create({
             'name': 'RM99',
             'kind': 'reserve',
             'usage': 'internal',
             'location_id': reserve_medoc_root.id,
             'picking_zone_id': self.picking_zone_medoc.id,
+            'zone': 'G',
+            'corridor': 'D',
+            'shelf': '80',
+            'height': 'X',
+            'box': '1',
+            'bin_checksum_1': '12',
+            'bin_checksum_2': '12',
         })
         self.env['stock.location']._parent_store_compute()
 

@@ -32,13 +32,14 @@ class TestFullParking(ZetesParkingTest):
         self.env['stock.location']._parent_store_compute()
 
         # Product 2
-        # Location: GAD515
+        # Location: GD80B2
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
             'categ_id': self.product_categ_medoc.id,
             'tracking': 'none',
             'list_price': 5,
+            'type': 'product',
             'stock_bin_ids': [(0, 0, {
                 'sequence': 1,
                 'location_id': self.stock_location.id,

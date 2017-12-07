@@ -176,7 +176,6 @@ class Itempick(DomainInterface):
                 'lessQtyAllowed': 1,  # Constant value
                 'moreQtyAllowed': 0,  # Constant value
                 'catchWeightFlag': 0,  # Constant value
-                'cycleCountFlag': 0,  # Constant value
                 'expiryDateCheckFlag': 0,  # Constant value
                 'productBarcode': product.barcode,
                 'scanProductBarcode': 0,  # Constant value
@@ -249,6 +248,8 @@ class Itempick(DomainInterface):
             forcast_available_qty = available_qty - line.product_qty
             if forcast_available_qty <= constants.ZERO_CHECK_LIMIT:
                 line_values.cycleCountFlag = 1
+            else:
+                line_values.cycleCountFlag = 0
 
             result.append(line_values)
             sequence += 1
