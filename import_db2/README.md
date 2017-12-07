@@ -146,7 +146,7 @@ To generate import csv files for Odoo, use the importer.py script
  python import_db2/importer.py
  ```
 
-This command will generate CSV files for the demo mode (subset of data, files are saved in odoo/data/demo/)
+This command will generate CSV files for the sample mode (subset of data, files are saved in odoo/data/sample/)
 
 
  ```bash

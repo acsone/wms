@@ -21,8 +21,8 @@ services:
       - "./odoo/data:/opt/odoo/data"
     environment:
       RUNNING_ENV: dev
-      # could be 'demo' for the minimal db or 'full' for the complete one
-      MARABUNTA_MODE: demo
+      # could be 'sample' for the minimal db or 'full' for the complete one
+      MARABUNTA_MODE: sample
       # should not be set in production
       MARABUNTA_ALLOW_SERIE: 'True'
       # configuration to test exports to sftp (ESB)

@@ -31,7 +31,7 @@ def generate(ctx, addon_path, update_po=True):
     if not os.path.exists(i18n_dir):
         os.mkdir(i18n_dir)
     container_po_path = os.path.join(container_path, '%s.po' % addon)
-    user_id = ctx.run(['id --user'], hide='both').stdout.strip()
+    user_id = ctx.run('id --user', hide='both').stdout.strip()
     cmd = ('docker-compose run --rm  -e LOCAL_USER_ID=%(user)s '
            '-e DEMO=False -e MIGRATE=False odoo odoo '
            '--log-level=warn --workers=0 '
