@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-957 Import suite name on partners
+
 **Features and Improvements**
 
 * ALCN-957 Add field suite name on partners

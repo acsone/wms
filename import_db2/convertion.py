@@ -236,6 +236,7 @@ class CustomerMapper(EntityMapper):
     FIELDS_MAPPING = [
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
         FieldMapper('ref', 'clinum'),
+        FieldMapper('suite', 'clinos'),
         FieldMapper('name', 'clinom'),
         FieldMapper('street', 'cliadr'),
         FieldMapper('zip', 'clicpo'),
