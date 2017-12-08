@@ -78,12 +78,25 @@ class SaleOrder(models.Model):
         :return:
         """
         result = super(SaleOrder, self).action_draft()
+        self._remove_promotional_lines()
+        return result
 
+    @api.multi
+    def _remove_promotional_lines(self):
         lines_to_remove = self.mapped('order_line')\
             .filtered(lambda line: line.is_promotional_product)
         lines_to_remove.unlink()
 
-        return result
+    @api.multi
+    @api.returns(None, lambda value: value[0])
+    def copy_data(self, default=None):
+        res = super(SaleOrder, self).copy_data(default=default)
+        # Skip promotional lines on duplicate
+        if 'order_line' in res[0]:
+            for i, line in enumerate(res[0]['order_line']):
+                if line[0] == 0 and line[2].get('is_promotional_product'):
+                    res[0]['order_line'].pop(i)
+        return res
 
 
 class SaleOrderLine(models.Model):
