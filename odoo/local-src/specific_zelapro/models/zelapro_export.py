@@ -317,6 +317,7 @@ class ZelaproExport(models.Model):
 
         rows = []
         previous_supplier = None
+        product_index = 0
         for line in result:
             row = list(line)
             product_id = int(row.pop())

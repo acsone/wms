@@ -105,8 +105,8 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     '' AS CP2Z21,
     '' AS LIBZ21,
     COALESCE(product_add.default_code, '') AS CP2Z22,
-    COALESCE(bom_line.product_qty, 0) AS CP2Z23,
-    COALESCE(bom_line.product_qty, 0) AS CP2Z24,
+    COALESCE(product_tmpl.ratio_additional_product, 0) AS CP2Z23,
+    COALESCE(product_tmpl.ratio_additional_product, 0) AS CP2Z24,
     COALESCE(abc.code, '') AS ABCCOD,
     product.turnover AS ABCVAV,
     product.turnover_average AS ABCPCV,
@@ -124,8 +124,6 @@ CREATE OR REPLACE VIEW zelapro_export_products AS
     LEFT JOIN res_partner AS supplier ON supplierinfo.name = supplier.id
     LEFT JOIN activity_based_costing AS abc ON product.abc_id = abc.id
     LEFT JOIN product_category AS bu ON product.business_unit_id = bu.id
-    LEFT JOIN mrp_bom AS bom ON bom.id = (SELECT min(id) FROM mrp_bom WHERE mrp_bom.product_tmpl_id = product_tmpl.id)
-    LEFT JOIN mrp_bom_line AS bom_line ON bom_line.id = (SELECT min(id) FROM mrp_bom_line WHERE mrp_bom_line.bom_id = bom.id AND mrp_bom_line.is_additional_product = TRUE)
     LEFT JOIN product_category AS product_sub_category ON product_tmpl.categ_id = product_sub_category.id
     LEFT JOIN product_category AS product_category ON product_sub_category.parent_id = product_category.id
     LEFT JOIN product_state AS state ON product_tmpl.state_id = state.id
