@@ -30,6 +30,7 @@ Unreleased
 * ALCN-1035: Allow to import supplier info with CNK code to link product
 
 **Bugfixes**
+* Stock: launch BO wizard for any reception + allow to generate BO even if no line processed
 
 
 **Build**
