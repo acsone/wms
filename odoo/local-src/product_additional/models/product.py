@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     additional_product_id = fields.Many2one(
-        'product.template',
+        'product.product',
         string='Additional Product',
         ondelete='restrict')
     ratio_main_product = fields.Integer('Ratio Main Product')
