@@ -7,6 +7,7 @@ from datetime import date
 from odoo import models, api, _, fields
 from odoo.exceptions import Warning
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
+from odoo.exceptions import UserError
 
 DATE_LENGTH = len(date.today().strftime(DATE_FORMAT))
 
@@ -68,10 +69,8 @@ class StockPicking(models.Model):
         if not result or result['res_model'] != 'stock.backorder.confirmation':
             return result
 
-        supplier_location = self.env.ref('stock.stock_location_suppliers')
-
         # Case: Purchase back order
-        if self.location_id == supplier_location:
+        if self.picking_type_code == 'incoming':
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'stock.backorder.choice',
@@ -91,13 +90,60 @@ class StockPicking(models.Model):
     def do_new_transfer(self):
         self.ensure_one()
 
-        result = super(StockPicking, self).do_new_transfer()
+        if (self.picking_type_code == 'incoming' and not self.grn_id):
+            raise UserError(_(
+                'The reception must be linked to a Goods Received Note'))
+
+        pick = self
+        if ((pick.state == 'draft' or all([x.qty_done == 0.0 for x
+                                           in pick.pack_operation_ids])) and
+                pick.check_backorder()):
+            # allow to receive and create backorder even if no line processed
+            view = self.env.ref('stock.view_backorder_confirmation')
+            wiz = self.env['stock.backorder.confirmation'].create({
+                'pick_id': pick.id})
+            result = {
+                'name': _('Create Backorder?'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'stock.backorder.confirmation',
+                'views': [(view.id, 'form')],
+                'view_id': view.id,
+                'target': 'new',
+                'res_id': wiz.id,
+                'context': self.env.context,
+            }
+        else:
+            result = super(StockPicking, self).do_new_transfer()
 
         result = self.do_new_transfer_with_back_order(result)
 
         self.check_removal_date_on_transfer()
 
         return result
+
+    @api.multi
+    def do_transfer(self):
+        for pick in self:
+            if ((pick.state == 'draft' or all([
+                    x.qty_done == 0.0 for x in pick.pack_operation_ids])) and
+                    pick.check_backorder()):
+                # allow to receive and create backorder even if no line
+                # processed
+                pick._create_backorder()
+            else:
+                super(StockPicking, self).do_transfer()
+        return True
+
+    @api.depends('move_type', 'launch_pack_operations', 'move_lines.state',
+                 'move_lines.picking_id', 'move_lines.partially_available')
+    @api.one
+    def _compute_state(self):
+        if not self.move_lines and self.grn_id:
+            self.state = 'done'
+        else:
+            super(StockPicking, self)._compute_state()
 
     @api.multi
     @api.constrains('printed')
