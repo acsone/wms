@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS zelapro_export_products CASCADE;
+
 CREATE OR REPLACE VIEW zelapro_export_products AS
   SELECT
     COALESCE(product.default_code, '') AS GESART,
