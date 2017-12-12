@@ -19,6 +19,8 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
         return self.env['res.partner']
 
     def setup_records(self):
+        self.country_ch = self.env['res.country'].search(
+                [('code', '=', 'CH')])[0]
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'ref': 'J',
@@ -27,7 +29,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'street2': '',
             'zip': '1010',
             'city': 'Lausanne',
-            'country_id': 44,
+            'country_id': self.country_ch.id,
             'phone': '021123123',
             'fax': '021121212',
             'email': 'joe@ch.ch',
@@ -39,12 +41,13 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'street2': u'A côté de la fontaine',
             'zip': '1010',
             'city': 'Lausanne',
-            'country_id': 44,
+            'country_id': self.country_ch.id,
             'phone': '021123123',
             'fax': '021121212',
             'email': 'peter@ch.ch',
         })
         self.env.ref('base.main_partner').pharmacist_id = self.all_records[1]
+        self.country_ch.esb_ref = 'HOP'
 
     def test_mapper(self):
         """ Generate dict with the mapper and compare with what is expected"""
@@ -57,7 +60,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'Fax': '021121212',
             'Email': 'joe@ch.ch',
             'Street': 'Chemin des Pins, 23',
-            'CountryId': 'CH',
+            'CountryId': self.country_ch.esb_ref,
             }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name,
@@ -76,7 +79,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'Fax': '021121212',
             'Email': 'peter@ch.ch',
             'Street': u'Chemin des Oies, 1\nA côté de la fontaine',
-            'CountryId': 'CH',
+            'CountryId': self.country_ch.esb_ref,
             }
         rec = self.all_records[1]
         with self.backend.work_on(self.model._name,
@@ -110,7 +113,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'street2': u'De l\'autre côté de la fontaine',
             'zip': '1010',
             'city': 'Lausanne',
-            'country_id': 44,
+            'country_id': self.country_ch.id,
             'phone': '021123123',
             'fax': '021121212',
             'email': 'roland@ch.ch',

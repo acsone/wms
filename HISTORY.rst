@@ -14,6 +14,7 @@ Unreleased
 
 * ALCN-957 Add field suite name on partners
 * ALCN-1031: Add narcotic filter on sale report
+* ALCN-1019: Fix mapping for country in Pharmacy export
 
 **Bugfixes**
 
