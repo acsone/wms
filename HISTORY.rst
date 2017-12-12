@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
 
 **Bugfixes**
 

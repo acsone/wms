@@ -64,10 +64,15 @@ class StockMove(models.Model):
     @api.multi
     def action_done(self):
         """ Trigger re-reserve on pickings """
+        if not self:
+            return True
         res = super(StockMove, self).action_done()
+        stock = self.env.ref('stock.stock_location_stock')
         received = self.filtered(lambda m: (
-            m.location_id.usage not in ('view', 'internal') and
-            m.location_dest_id.usage in ('view', 'internal')))
+            m.location_dest_id.parent_left >= stock.parent_left and
+            m.location_dest_id.parent_right <= stock.parent_right and
+            not (m.location_id.parent_left >= stock.parent_left and
+                 m.location_id.parent_right <= stock.parent_right)))
         if not received:
             return res
         products = received.mapped('product_id')
