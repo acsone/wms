@@ -77,7 +77,7 @@ class CustomerExportMapper(Component):
     @mapping
     def compute_optional(self, record):
         """Compute direct but optional value"""
-        return {'DepositNumber': record.depot_number or ''}
+        return {'DepositNumber': record.vet_depot_number or ''}
 
     @mapping
     def compute_taxcode(self, record):

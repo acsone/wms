@@ -47,7 +47,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'lang': 'nl_BE',
             'vat': 'BE0477472701',
             'user_id': '',
-            'depot_number': '2/1234/1234',
+            'vet_depot_number': '2/1234/1234',
             'ref': '3162',
             'street': 'Chemin des Pins, 23',
             'street2': '',

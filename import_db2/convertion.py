@@ -244,7 +244,8 @@ class CustomerMapper(EntityMapper):
         FieldMapper('fax', 'clifax'),
         FieldMapper('email', 'emwadr'),
         FieldMapper('vat', 'clicee', check=checks.vat),
-        FieldMapper('depot_number', 'clirch'),
+        FieldMapper('vet_depot_number', 'clirch'),
+        FieldMapper('vet_subscription_number', 'clirea'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
             mapping=mappings.PARTNER_ALCYON_CATEGORY,

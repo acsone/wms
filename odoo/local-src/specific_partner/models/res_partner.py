@@ -13,10 +13,11 @@ class ResPartner(models.Model):
         string='Alcyon category',
     )
 
-    depot_number = fields.Char(string='Depot number')
+    vet_depot_number = fields.Char(string='Depot number')
+    vet_subscription_number = fields.Char(string='Subscription number')
 
-    depot_number_visible = fields.Boolean(
-        compute='_compute_depot_number_visible'
+    is_veterinary = fields.Boolean(
+        compute='_compute_is_veterinary'
     )
 
     legal_entity = fields.Char(string='Legal entity')
@@ -39,10 +40,10 @@ class ResPartner(models.Model):
     )
 
     @api.depends('alcyon_category_id')
-    def _compute_depot_number_visible(self):
+    def _compute_is_veterinary(self):
         veterinary = self.env.ref(
             'specific_partner.partner_category_veterinary')
         for partner in self:
-            partner.depot_number_visible = (
+            partner.is_veterinary = (
                 partner.alcyon_category_id == veterinary
             )
