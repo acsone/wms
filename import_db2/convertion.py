@@ -24,6 +24,7 @@ class ProductMapper(EntityMapper):
     FIELDS_MAPPING = [
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
+        FieldMapper('standard_price', 'gespan'),
         FieldMapper('sale_delay', constant=0),
         FieldMapper('weight', 'gespbr'),
         FieldMapper(
