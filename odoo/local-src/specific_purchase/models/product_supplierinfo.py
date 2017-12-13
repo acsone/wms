@@ -1,8 +1,11 @@
-from odoo import models, api
+from odoo import models, api, fields
 
 
 class ProductSupplierinfo(models.Model):
     _inherit = 'product.supplierinfo'
+
+    product_cnk_code = fields.Char(related='product_tmpl_id.cnk_code',
+                                   readonly=True)
 
     @api.onchange('name')
     def onchange_name(self):
