@@ -15,6 +15,18 @@ class ProductSupplierinfo(models.Model):
         delay = self.name.delivery_lead_time
         self.delay = delay
 
+        if self.name and self.product_tmpl_id:
+            self._onchange_update_price_and_ref()
+
+    @api.onchange('product_tmpl_id')
+    def onchange_product_tmpl_id(self):
+        if self.name and self.product_tmpl_id:
+            self._onchange_update_price_and_ref()
+
+    def _onchange_update_price_and_ref(self):
+        # TODO Use base purchase price instead of sale
+        self.price = self.product_tmpl_id.list_price
+
     @api.multi
     def open_form_view(self):
         self.ensure_one()
