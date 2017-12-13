@@ -65,7 +65,28 @@ class Catchweight(DomainInterface):
         errors by yourself.
 
         Set the quantity (Usf02) on the stock move (lineId)
-        Usf01 is the lot number
+        Usf01 is the lot number.
+        With the process "Parking" and "Reserve" the quantity (Usf02) can
+        be more or less than the requested quantity. However Odoo
+        doesn't allow to pick more than the requested quantity.
+        It's why we check if the picked quantity is greater than the requested
+        quantity. In this case, we look an error and we set the quantity
+        to the requested quantity.
+
+        If the param Usf03 (Zero Check) is filled we need to compare
+        the virtual quantity in stock with the real (say by the picker)
+        quantity in stock. If Usf03 is filled we have to stop to process
+        and only check the quantity in stock.
+
+        For the process Parking, if the stock if full, the picker will go to
+        the reserve. In this case we need to split the pack operation
+        (one operation for the stock and one operation for the reserve).
+
+        For the process Reserve, if the stock if ull, the picker will return
+        some quantity to the reserve. In this case we need to split the pack
+        operation (one operation for the stock and one operation for the
+        reserve). The operation for this reserve will have the same
+        location for the source and the destination.
         :param params:
         :return:
         """
@@ -107,8 +128,12 @@ class Catchweight(DomainInterface):
                 self.check_actual_stock(params, move, actual_stock, lot_id)
                 return
 
+            move.add_qty(virtual_qty, lot_id)
+
             picking = move.picking_id
-            if move.zetes_state == constants.MOVE_FULL:
+            # The stock is full and the picker need to go to the reserve
+            if picking.zetes_picking_type == constants.PARKING_ASSIGNMENT \
+                    and move.zetes_state == constants.MOVE_FULL:
                 reserve_rel_obj = \
                     self.request.env['pack.operation.reserve.rel']
                 reserve_rel = reserve_rel_obj.sudo(self._user).search([
@@ -126,7 +151,9 @@ class Catchweight(DomainInterface):
                     return
 
                 reserve = reserve_rel.reserve_location_id
-                move = move.split_pack_op(virtual_qty, reserve.id, lot_id)
+                move.put_in_reserve(reserve.id)
+            # Only for "Reserve". The stock is full and the picker will return
+            # some quantity to the reserve
             elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
                     and move.product_qty > virtual_qty:
                 location_dest_id = move.location_id.id
@@ -134,8 +161,6 @@ class Catchweight(DomainInterface):
                 new_move = \
                     move.split_pack_op(new_qty, location_dest_id, lot_id)
                 new_move.add_qty(new_qty, lot_id)
-
-            move.add_qty(virtual_qty, lot_id)
 
         except Exception as e:
             _logger.error(str(e))
@@ -161,13 +186,6 @@ class Catchweight(DomainInterface):
         AND quant.reservation_id IS NULL
         """
         query_values = [move.product_id.id, move.location_id.id]
-
-        # We cannot handle ZeroCheck with lot
-        # if lot_id:
-        #     available_qty_query += " AND quant.lot_id = %s"
-        #     query_values.append(lot_id)
-        # else:
-        #     available_qty_query += " AND quant.lot_id IS NULL"
 
         self.request.env.cr.execute(available_qty_query, tuple(query_values))
         query_result = self.request.env.cr.fetchone()

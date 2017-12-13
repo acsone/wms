@@ -119,8 +119,13 @@ class Itemmove(DomainInterface):
                 else:
                     line_id = line.id
 
+            # TODO Please remove me
+            shelf_source = location.shelf
+            if len(str(shelf_source)) == 1:
+                shelf_source = '0%s' % shelf_source
+
             line_values.update({
-                'moveStatus': '00',  # Constant value (new line)
+                'moveStatus': constants.MOVE_DEFAULT,
                 'respCode': constants.RESPONSE_CODE_OK,
                 'groupNum': picking_id,
                 'moveLineId': line_id,
@@ -134,11 +139,16 @@ class Itemmove(DomainInterface):
                 'scanProductBarcode': 0,  # Constant value
                 'sourceLC1': location.zone,
                 'sourceLC2': location.corridor,
-                'sourceLC3': location.shelf,
+                'sourceLC3': shelf_source,
                 'sourceLC4': location.height,
                 'sourceLC5': location.box,
                 'sourceLCCD': location.get_checksum(),
             })
+
+            # TODO Please remove me
+            shelf_dest = location_dest_id.shelf
+            if len(str(shelf_dest)) == 1:
+                shelf_dest = '0%s' % shelf_dest
 
             # If it is a reserved quantity the location destination
             # is the same than the current location
@@ -146,7 +156,7 @@ class Itemmove(DomainInterface):
                 line_values.update({
                     'destLC1': location_dest_id.zone,
                     'destLC2': location_dest_id.corridor,
-                    'destLC3': location_dest_id.shelf,
+                    'destLC3': shelf_dest,
                     'destLC4': location_dest_id.height,
                     'destLC5': location_dest_id.box,
                     'destLCCD': location_dest_id.get_checksum(),
@@ -154,6 +164,7 @@ class Itemmove(DomainInterface):
 
             if line.zetes_state == constants.MOVE_FULL:
                 line_values.update({
+                    'destLC3': None,
                     'destLC4': None,
                     'destLC5': None,
                     'destLCCD': None,
@@ -181,6 +192,9 @@ class Itemmove(DomainInterface):
         errors by yourself.
 
         Change the state of the current stock pack operation (moveLineId)
+
+        This method will validate the picking for the process Reserve (Zetes
+        doesn't send a RESU_ASSIGNMENT for the process Reserve)
         :param params:
         :return:
         """
@@ -219,6 +233,12 @@ class Itemmove(DomainInterface):
                        exception=e)
 
     def get_load_lines(self, params, picking_id):
+        """
+        Return a list of lines for the process Parking
+        :param params:
+        :param picking_id:
+        :return:
+        """
 
         # Cri01 define the order (01 => from the end to the start)
         if params.Cri01 == '1':
@@ -252,6 +272,7 @@ class Itemmove(DomainInterface):
         GROUP BY quant.lot_id;
         """
 
+        production_lot_obj = self.request.env['stock.production.lot']
         reserved_lines = []
         put_away_lines = []
         for line in lines:
@@ -261,8 +282,9 @@ class Itemmove(DomainInterface):
                                         picking_id))
             query_result = self.request.env.cr.fetchall()
             for quant in query_result:
+                lot = production_lot_obj.sudo(self._user).browse(quant[0])
                 reserved_lines.append(
-                    (line, quant[0], quant[1], constants.MOVE_UNLOAD))
+                    (line, lot, quant[1], constants.MOVE_UNLOAD))
 
             if not line.pack_lot_ids:
                 put_away_lines.append(
@@ -281,6 +303,12 @@ class Itemmove(DomainInterface):
         return reserved_lines + put_away_lines
 
     def get_put_lines(self, params, picking_id):
+        """
+        Return a list with only one line for the process Reserve
+        :param params:
+        :param picking_id:
+        :return:
+        """
         # Search ONLY ONE pack operations for this picking
         # The state of this line must be
         # "MOVE_DEFAULT" or "MOVE_SKIPPED"

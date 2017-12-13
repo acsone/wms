@@ -208,11 +208,16 @@ class Itempick(DomainInterface):
                 result.append(line_values)
                 continue
 
+            # TODO Please remove me
+            shelf_source = location.shelf
+            if len(str(shelf_source)) == 1:
+                shelf_source = '0%s' % shelf_source
+
             # Set coordonates location of the bin
             line_values.update({
                 'sourceLC1': location.zone,
                 'sourceLC2': location.corridor,
-                'sourceLC3': location.shelf,
+                'sourceLC3': shelf_source,
                 'sourceLC4': location.height,
                 'sourceLC5': location.box,
                 'sourceLCCD': location.get_checksum(),

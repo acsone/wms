@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 from odoo import _
 
 from domain_interface import DomainInterface, Parameters
@@ -32,6 +34,8 @@ class Location(DomainInterface):
 
     def requ(self, params):
         """
+        Check if the location sent in params exist in Odoo.
+
         Return a list of existing lots for a stock pack operation (lineId).
         This method is used by Zetes when the picker doesn't find the right
         lot or we need quantity available.
@@ -79,10 +83,17 @@ class Location(DomainInterface):
             'Usf07': product.virtual_available,  # Stock available
         })
 
+        # TODO Please remove me
+        shelf = params.Cri03
+        special_shelf_regex = r'0([A-Z])'
+        regex_result = re.match(special_shelf_regex, shelf)
+        if regex_result:
+            shelf = regex_result.group(1)
+
         location = self.request.env['stock.location'].sudo(self._user) \
             .search([('zone', '=', params.Cri01),
                      ('corridor', '=', params.Cri02),
-                     ('shelf', '=', params.Cri03),
+                     ('shelf', '=', shelf),
                      ('height', '=', params.Cri04),
                      ('box', '=', params.Cri05)],
                     limit=1)
@@ -106,10 +117,15 @@ class Location(DomainInterface):
                     'lot_id': lot_id
                 })
 
+        # TODO Please remove me
+        shelf_source = location.shelf
+        if len(str(shelf_source)) == 1:
+            shelf_source = '0%s' % shelf_source
+
         result.update({
             'lC1': location.zone,
             'lC2': location.corridor,
-            'lC3': location.shelf,
+            'lC3': shelf_source,
             'lC4': location.height,
             'lC5': location.box,
             'lCCD': location.get_checksum(),

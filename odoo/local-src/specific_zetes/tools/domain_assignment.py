@@ -94,9 +94,9 @@ class Assignment(DomainInterface):
         # take the checksum on the left (=> bin_checksum_2)
         is_odd_day = date.today().day % 2
         if is_odd_day:
-            result.Usf07 = _('Left')
+            result.Usf10 = _('left')
         else:
-            result.Usf07 = _('Right')
+            result.Usf10 = _('right')
 
         partner = picking.partner_id
 
@@ -109,11 +109,11 @@ class Assignment(DomainInterface):
             'Usf03': round_name,
             'Usf04': 0,  # Constant value
             'Usf05': 0,  # Constant value
+            'Usf07': partner.name,  # Partner name
             # Zip + city
             'Usf08': '{} {}'.format(partner.zip or '', partner.city or ''),
             'Usf09': len(picking.pack_operation_product_ids),
             # Nbr of operation
-            'Usf10': None,
         })
 
         if partner.is_passport_required:
@@ -170,7 +170,7 @@ class Assignment(DomainInterface):
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
                 if params.Usf01:
-                    picking.validate_picking()
+                    picking.sudo(self._user).validate_picking()
 
             elif params.assignmentStatus == constants.AS_CANCELED:
                 picking.sudo(self._user).interrupt_picking()
@@ -180,7 +180,7 @@ class Assignment(DomainInterface):
 
     def get_picking(self, params):
         """
-        Return a picking
+        Return a standard picking
         :param params:
         :return:
         """
@@ -239,7 +239,10 @@ class Assignment(DomainInterface):
 
     def get_picking_parking(self, params):
         """
-        Return parking
+        Return a picking from the parking.
+        First the method will search for an existing picking.
+        Otherwise the method will search in the report Parking and create
+        a new picking.
         :param params:
         :return:
         """
@@ -324,10 +327,14 @@ class Assignment(DomainInterface):
 
     def get_picking_reserve(self, params):
         """
-        Return reserve
+        Return a picking from the reserve.
+        First the method will search for an existing picking.
+        Otherwise the method will search in the report reserve and create
+        a new picking.
         :param params:
         :return:
         """
+        # Search for an existing picking
         picking_query = """
         SELECT picking.id
         FROM stock_picking AS picking

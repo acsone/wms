@@ -191,6 +191,9 @@ class StockPackOperation(models.Model):
         """
         self.ensure_one()
 
+        if not qty:
+            return
+
         self.qty_done += qty
 
         if not lot_id:
@@ -214,6 +217,46 @@ class StockPackOperation(models.Model):
         # because Zetes send one request by lot
         else:
             pack_lot.write({'qty': qty})
+
+    @api.multi
+    def put_in_reserve(self, reserve_id):
+
+        quantity_remaining = self.product_qty - self.qty_done
+
+        new_pack = self.copy({
+            'qty_done': quantity_remaining,
+            'product_qty': quantity_remaining,
+            'location_dest_id': reserve_id
+        })
+
+        self.write({
+            'product_qty': self.qty_done,
+        })
+
+        pack_lot_to_unlink = self.env['stock.pack.operation.lot']
+        pack_lot_obj = self.env['stock.pack.operation.lot']
+        for pack_lot in self.pack_lot_ids:
+            if pack_lot.qty_todo == pack_lot.qty:
+                continue
+            qty = pack_lot.qty
+            qty_todo = pack_lot.qty_todo
+
+            qty_remaining = qty_todo - qty
+            pack_lot_obj.create({
+                'operation_id': new_pack.id,
+                'qty': qty_remaining,
+                'qty_todo': qty_remaining,
+                'lot_id': pack_lot.lot_id.id,
+            })
+
+            if not pack_lot.qty:
+                pack_lot_to_unlink |= pack_lot
+            else:
+                pack_lot.write({
+                    'qty_todo': pack_lot.qty
+                })
+
+        pack_lot_to_unlink.unlink()
 
 
 class StockPickingType(models.Model):

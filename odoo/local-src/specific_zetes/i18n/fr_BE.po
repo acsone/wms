@@ -186,8 +186,8 @@ msgstr "Dernière mise à jour le"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_assignment.py:97
 #, python-format
-msgid "Left"
-msgstr "Gauche"
+msgid "left"
+msgstr "gauche"
 
 #. module: specific_zetes
 #: selection:zetes.logger,domain:0
@@ -342,8 +342,8 @@ msgstr "Réponse"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_assignment.py:99
 #, python-format
-msgid "Right"
-msgstr "Droite"
+msgid "right"
+msgstr "droite"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
