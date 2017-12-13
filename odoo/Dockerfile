@@ -8,6 +8,8 @@ RUN set -x; \
          && apt-get install -y --no-install-recommends \
          parallel \
          python-cups \
+         # needed by pyodbc
+         unixodbc \
          # common requirement for builds
          build-essential python-dev \
          # needed to build Cryptography
@@ -18,6 +20,7 @@ RUN set -x; \
          && pip install -r requirements.txt \
          && apt-get remove -y build-essential libssl-dev libffi-dev python-dev \
          unixodbc-dev autoconf libtool pkg-config \
+         && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false \
          && apt-get clean \
          && rm -rf /var/lib/apt/lists/*
 
