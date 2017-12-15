@@ -31,6 +31,13 @@ class ResPartner(models.Model):
         string='Pharmacist associated to',
     )
 
+    # temporary field to get the data and make it
+    # possible to create contacts by hand in Odoo
+    suite = fields.Char(
+        "Suite Name",
+        readonly=True,
+    )
+
     @api.depends('alcyon_category_id')
     def _compute_depot_number_visible(self):
         veterinary = self.env.ref(
