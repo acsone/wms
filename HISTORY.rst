@@ -25,6 +25,7 @@ Unreleased
  * Clean empty data directories
  * Fix import_db2 scripts with sample data
  * Install base_technical_features and web_environment_ribbon modules
+ * Upgrade docker-compose to 1.17.1
 
 **Documentation**
 
