@@ -46,6 +46,9 @@ class TestPickingTransfer(TransactionCase):
         self.stock_location = self.location_model.browse(
             self.ref('stock.stock_location_stock')
         )
+        self.grn = self.env['stock.grn'].create({
+            'carrier_id': self.supplier.id,
+            })
 
     @post_install(True)
     @at_install(False)
@@ -65,6 +68,7 @@ class TestPickingTransfer(TransactionCase):
                     'location_dest_id': self.stock_location.id,
                 })
             ],
+            'grn_id': self.grn.id,
         })
         picking.action_assign()
         pack_operation = picking.pack_operation_product_ids

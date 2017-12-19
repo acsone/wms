@@ -91,8 +91,9 @@ class StockPicking(models.Model):
         self.ensure_one()
 
         if (self.picking_type_code == 'incoming' and not self.grn_id):
-            raise UserError(_(
-                'The reception must be linked to a Goods Received Note'))
+            if not self.env.context.get('test_mode'):
+                raise UserError(_(
+                    'The reception must be linked to a Goods Received Note'))
 
         pick = self
         if ((pick.state == 'draft' or all([x.qty_done == 0.0 for x
