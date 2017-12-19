@@ -24,8 +24,15 @@ class ProductSupplierinfo(models.Model):
             self._onchange_update_price_and_ref()
 
     def _onchange_update_price_and_ref(self):
-        # TODO Use base purchase price instead of sale
-        self.price = self.product_tmpl_id.list_price
+        base_info = self.search([
+            ('name', '=', self.name.id),
+            ('product_tmpl_id', '=', self.product_tmpl_id.id)],
+            limit=1, order='min_qty ASC')
+        if base_info:
+            self.update({
+                'price': base_info.price,
+                'product_code': base_info.product_code
+            })
 
     @api.multi
     def open_form_view(self):
