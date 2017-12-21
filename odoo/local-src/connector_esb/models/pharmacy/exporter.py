@@ -27,7 +27,7 @@ class PharmacyExportMapper(Component):
 
     @mapping
     def compute_country_id(self, record):
-        return {'CountryId': record.country_id.code}
+        return {'CountryId': record.country_id.esb_ref}
 
     @mapping
     def compute_street(self, record):

@@ -4,7 +4,7 @@
     <Row>
       <City>Lausanne</City>
       <Fax>021121212</Fax>
-      <CountryId>CH</CountryId>
+      <CountryId>HOP</CountryId>
       <Name>Joe</Name>
       <Telephone>021123123</Telephone>
       <Email>joe@ch.ch</Email>
