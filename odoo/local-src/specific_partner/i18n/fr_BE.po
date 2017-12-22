@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 12:13+0000\n"
-"PO-Revision-Date: 2017-12-07 12:13+0000\n"
+"POT-Creation-Date: 2017-12-12 16:52+0000\n"
+"PO-Revision-Date: 2017-12-12 16:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,16 +38,10 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_depot_number
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_depot_number
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_vet_depot_number
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_vet_depot_number
 msgid "Depot number"
 msgstr "Numéro de dépôt"
-
-#. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_depot_number_visible
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_depot_number_visible
-msgid "Depot number visible"
-msgstr "Depot number visible"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_display_name
@@ -58,6 +52,12 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
 msgstr "ID"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_is_veterinary
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_is_veterinary
+msgid "Is veterinary"
+msgstr "Est un vétérinaire"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category___last_update
@@ -95,6 +95,12 @@ msgstr "Partenaire"
 #: model:ir.model.fields,field_description:specific_partner.field_res_users_pharmacist_of_ids
 msgid "Pharmacist associated to"
 msgstr "Pharmacien associé à"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_vet_subscription_number
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_vet_subscription_number
+msgid "Subscription number"
+msgstr "Numéro d'inscription"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_suite
