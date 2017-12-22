@@ -10,17 +10,16 @@ Unreleased
 
 * ALCN-957 Import suite name on partners
 * ALCN-986: Import standard price from AS400
+* ALCN-1005: Fix active and default_code values on product.template copied from product.product
+
 
 **Features and Improvements**
-* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
 
+* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
 * ALCN-957 Add field suite name on partners
 * ALCN-1031: Add narcotic filter on sale report
 * ALCN-1019: Fix mapping for country in Pharmacy export
 * ALCN-1006: Import vet_subscription_number from AS400
-
-**Features and Improvements**
-
 * ALCN-1006: Add field vet_subscription_number
 * ALCN-1006: rename field depot_number to vet_depot_number
 * ALCN-1006: rename field depot_number_visible to is_veterinary
@@ -30,9 +29,8 @@ Unreleased
 * ALCN-1035: Use purchase base price on supplier info onchange instead of list price
 * ALCN-1035: Allow to import supplier info with CNK code to link product
 
-
-
 **Bugfixes**
+
 
 **Build**
 
