@@ -11,6 +11,7 @@ Unreleased
 * ALCN-957 Import suite name on partners
 
 **Features and Improvements**
+* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
 
 * ALCN-957 Add field suite name on partners
 * ALCN-1031: Add narcotic filter on sale report
