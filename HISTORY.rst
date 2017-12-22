@@ -25,6 +25,8 @@ Unreleased
 * ALCN-1006: rename field depot_number_visible to is_veterinary
 
 
+* ALCN-1034: On product search, filter partner proposition with only suppliers
+
 **Bugfixes**
 
 **Build**

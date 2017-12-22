@@ -17,6 +17,7 @@ class ProductTemplate(models.Model):
     supplier_id = fields.Many2one('res.partner',
                                   string='Vendor',
                                   readonly=True,
+                                  domain=[('supplier', '=', True)],
                                   compute='_compute_supplier_id',
                                   store=True)
 
