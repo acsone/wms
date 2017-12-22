@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-957 Import suite name on partners
+* ALCN-986: Import standard price from AS400
 
 **Features and Improvements**
 * ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
