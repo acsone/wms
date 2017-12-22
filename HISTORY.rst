@@ -24,9 +24,13 @@ Unreleased
 * ALCN-1006: Add field vet_subscription_number
 * ALCN-1006: rename field depot_number to vet_depot_number
 * ALCN-1006: rename field depot_number_visible to is_veterinary
-
-
 * ALCN-1034: On product search, filter partner proposition with only suppliers
+* ALCN-1035: Improvements of supplier info list view
+* ALCN-1035: Open supplier promotion in form with a button from editable list view
+* ALCN-1035: Use purchase base price on supplier info onchange instead of list price
+* ALCN-1035: Allow to import supplier info with CNK code to link product
+
+
 
 **Bugfixes**
 
