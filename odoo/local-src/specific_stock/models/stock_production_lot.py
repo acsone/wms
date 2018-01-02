@@ -4,8 +4,8 @@
 
 import random
 
-from odoo import models, fields, api
-from odoo.exceptions import Warning
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class StockProductionLot(models.Model):
@@ -136,14 +136,13 @@ class StockProductionLot(models.Model):
                 min_shelf_code = shelf_code - same_lot_checksum_range
                 max_shelf_code = shelf_code + same_lot_checksum_range
                 for code in (min_shelf_code, shelf_code, max_shelf_code):
-                    if code < 1 \
-                            or (9 < code < ord('A')) \
-                            or code > ord('Z'):
-                        continue
-
                     if is_letter:
+                        if code < ord('A') or code > ord('Z'):
+                            continue
                         code = unichr(code)
                     else:
+                        if code < 1:
+                            continue
                         code = format(code, '0%d' % 2)
 
                     range_of_shelves.append(code)
@@ -184,7 +183,7 @@ class StockProductionLot(models.Model):
             picklist = list(set(formated_checksum) -
                             set(checksum_not_available))
             if not picklist:
-                raise Warning('There is no checksum available')
+                raise UserError(_('There is no checksum available'))
 
             # Step 4: Generate an available checksum
             checksum = random.choice(picklist)
