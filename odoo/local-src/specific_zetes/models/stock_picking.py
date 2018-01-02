@@ -122,8 +122,24 @@ class StockPackOperation(models.Model):
 
     @api.multi
     def split_pack_op(self, new_qty, location_dest_id, lot_id=None):
+        """
+        Split the current pack operation in two pack operation.
+        One with the previous destination and a new one with the new
+        destination (location_dest_id) and the a specific quantity (new_qty).
+
+        1. Check the quantity (the new quantity cannot be greater than
+        the available quantity)
+        2. Create the new pack operation
+        3. (Optional) Reduce the quantity on the pack operation lot
+        4. Reduce the quantity on the pack operation
+        :param new_qty:
+        :param location_dest_id:
+        :param lot_id:
+        :return:
+        """
         self.ensure_one()
 
+        # Step 1
         quantity_available = self.product_qty - self.qty_done
         if new_qty > quantity_available:
             raise UserError(
@@ -132,12 +148,14 @@ class StockPackOperation(models.Model):
                   'the available quantity (%s)') %
                 (new_qty, quantity_available))
 
+        # Step 2
         new_pack = self.copy({
             'qty_done': 0.0,
             'product_qty': new_qty,
             'location_dest_id': location_dest_id,
         })
 
+        # Step 3
         if lot_id:
             if not self.pack_lot_ids:
                 raise UserError(_('No pack operation found'))
@@ -165,6 +183,7 @@ class StockPackOperation(models.Model):
                 'qty_todo': pack_lot.qty_todo - new_qty
             })
 
+        # Step 4
         self.write({
             'product_qty': self.product_qty - new_qty
         })
@@ -210,19 +229,30 @@ class StockPackOperation(models.Model):
 
     @api.multi
     def put_in_reserve(self, reserve_id):
-
+        """
+        Put the remaining quantity in the reserve
+        1. Split the pack operation to create the operation to the reserve
+        2. Reduce the quantity to do to the quantity done
+        3. (Optional) Reduce the quantity to do on the pack log to
+        the quantity done and remove empty pack operation lot
+        :param reserve_id:
+        :return:
+        """
         quantity_remaining = self.product_qty - self.qty_done
 
+        # Step 1
         new_pack = self.copy({
             'qty_done': quantity_remaining,
             'product_qty': quantity_remaining,
             'location_dest_id': reserve_id
         })
 
+        # Step 2
         self.write({
             'product_qty': self.qty_done,
         })
 
+        # Step 3
         pack_lot_to_unlink = self.env['stock.pack.operation.lot']
         pack_lot_obj = self.env['stock.pack.operation.lot']
         for pack_lot in self.pack_lot_ids:

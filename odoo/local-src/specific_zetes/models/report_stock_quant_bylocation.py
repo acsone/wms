@@ -11,6 +11,10 @@ class ReportStockQuantBylocation(models.Model):
 
     @api.multi
     def create_parking_picking(self):
+        """
+        Overwrite this method to set the zetes_picking_type
+        :return:
+        """
         picking = super(ReportStockQuantBylocation, self)\
             .create_parking_picking()
 
@@ -26,6 +30,10 @@ class ReportStockQuantBylocationReserve(models.Model):
 
     @api.multi
     def create_reserve_picking(self):
+        """
+        Overwrite this method to set the zetes_picking_type
+        :return:
+        """
         picking = super(ReportStockQuantBylocationReserve, self)\
             .create_reserve_picking()
 
