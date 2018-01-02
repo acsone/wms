@@ -47,8 +47,8 @@ class TestPrint(ZetesTest):
             'server_id': printer_server.id,
         })
 
-        move = self.picking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
         # Print products labels and package labels
         domain = Print(DEFAULT_HEADER, request_overwrite=self)

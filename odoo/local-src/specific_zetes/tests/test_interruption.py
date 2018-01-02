@@ -132,8 +132,8 @@ class TestInterruption(ZetesTest):
         })
         assignement_obj.resu(start_picking_params)
 
-        move_1 = self.picking.pack_operation_product_ids[0]
-        move_2 = self.picking.pack_operation_product_ids[1]
+        pack_op_1 = self.picking.pack_operation_product_ids[0]
+        pack_op_2 = self.picking.pack_operation_product_ids[1]
 
         ##########
         # Step 2 #
@@ -142,7 +142,7 @@ class TestInterruption(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_1.id,
+            'lineId': pack_op_1.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 10,  # Pick 10 items
             'Usf03': None,
@@ -152,7 +152,7 @@ class TestInterruption(ZetesTest):
         request_validate_picking_line_params = Parameters(itempick_obj)
         request_validate_picking_line_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_1.id,
+            'pickLineId': pack_op_1.id,
             'pickStatus': constants.OP_PICKED,
         })
         itempick_obj.resu(request_validate_picking_line_params)

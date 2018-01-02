@@ -68,11 +68,11 @@ class TestAssignemnt(ZetesTest):
             'Usf01': '1',
         })
 
-        move = self.picking.pack_operation_product_ids[0]
-        move.pack_lot_ids.write({
+        pack_op = self.picking.pack_operation_product_ids[0]
+        pack_op.pack_lot_ids.write({
             'qty': 10,
         })
-        move.write({
+        pack_op.write({
             'qty_done': 10,
         })
         domain.resu(request_params)

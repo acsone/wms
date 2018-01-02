@@ -54,25 +54,25 @@ class TestCatchweightParking(ZetesParkingTest):
 
         domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
 
-        move = self.picking_parking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking_parking.pack_operation_product_ids
+        pack_op.ensure_one()
 
-        self.assertEqual(move.qty_done, 0)
-        self.assertEqual(move.pack_lot_ids.qty, 0)
+        self.assertEqual(pack_op.qty_done, 0)
+        self.assertEqual(pack_op.pack_lot_ids.qty, 0)
 
         # Try with a lot
         request_params = Parameters(domain, action='resu')
         request_params.update({
-            'lineId': move.id,
+            'lineId': pack_op.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 100,  # Pick 100 unit,
             'Usf03': None,
         })
         domain.resu(request_params)
 
-        self.assertEqual(move.qty_done, 100)
-        self.assertEqual(len(move.pack_lot_ids), 1)
-        self.assertEqual(move.pack_lot_ids[0].qty, 100)
+        self.assertEqual(pack_op.qty_done, 100)
+        self.assertEqual(len(pack_op.pack_lot_ids), 1)
+        self.assertEqual(pack_op.pack_lot_ids[0].qty, 100)
 
     def test_02_resu_catchweight(self):
         """
@@ -82,16 +82,16 @@ class TestCatchweightParking(ZetesParkingTest):
 
         domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
 
-        move = self.picking_parking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking_parking.pack_operation_product_ids
+        pack_op.ensure_one()
 
-        self.assertEqual(move.qty_done, 0)
-        self.assertEqual(move.pack_lot_ids.qty, 0)
+        self.assertEqual(pack_op.qty_done, 0)
+        self.assertEqual(pack_op.pack_lot_ids.qty, 0)
 
         # Take 80 units
         request_params = Parameters(domain, action='resu')
         request_params.update({
-            'lineId': move.id,
+            'lineId': pack_op.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 80,  # Pick 80 unit,
             'Usf03': None,
@@ -104,12 +104,12 @@ class TestCatchweightParking(ZetesParkingTest):
         self.assertEqual(pack_op.qty_done, 80)
 
         # Change the state of the move (done by a resu_itemmove)
-        move.write({
+        pack_op.write({
             'zetes_state': constants.MOVE_FULL
         })
 
         self.env['pack.operation.reserve.rel'].create({
-            'pack_operation_id': move.id,
+            'pack_operation_id': pack_op.id,
             'lot_id': self.lot_product_1.id,
             'reserve_location_id': self.reserve_medicament.id,
         })
@@ -117,7 +117,7 @@ class TestCatchweightParking(ZetesParkingTest):
         # Put 20 units in the reserve
         request_params = Parameters(domain, action='resu')
         request_params.update({
-            'lineId': move.id,
+            'lineId': pack_op.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 20,  # Pick 20 unit,
             'Usf03': None,

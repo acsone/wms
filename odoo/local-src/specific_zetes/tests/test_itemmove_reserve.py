@@ -49,13 +49,13 @@ class TestItemmoveReserve(ZetesReserveTest):
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
 
-        move = self.picking_reserve.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking_reserve.pack_operation_product_ids
+        pack_op.ensure_one()
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking_reserve.id))
         self.assertEqual(result.moveLineId,
-                         '%s_%s' % (move.id, self.lot_product_1.id))
+                         '%s_%s' % (pack_op.id, self.lot_product_1.id))
         self.assertEqual(int(result.reqQty), 20)
         self.assertEqual(int(result.effQty), 0)
         self.assertEqual(result.moveStatus, str(constants.MOVE_DEFAULT))
@@ -93,28 +93,28 @@ class TestItemmoveReserve(ZetesReserveTest):
         Take all 20 units of product 1
         :return:
         """
-        move = self.picking_reserve.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking_reserve.pack_operation_product_ids
+        pack_op.ensure_one()
 
-        move.pack_lot_ids.write({
+        pack_op.pack_lot_ids.write({
             'qty': 20,
         })
-        move.write({
+        pack_op.write({
             'qty_done': 20,
         })
 
-        self.assertEqual(move.qty_done, 20)
+        self.assertEqual(pack_op.qty_done, 20)
 
         domain = Itemmove(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         request_params.update({
-            'moveLineId': move.id,
+            'moveLineId': pack_op.id,
             'moveStatus': constants.MOVE_DONE,
             'itemMoveType': constants.MOVE_TYPE_PUT,
         })
 
         domain.resu(request_params)
-        self.assertEqual(move.zetes_state, constants.MOVE_DONE)
-        self.assertEqual(move.qty_done, 20)
-        self.assertEqual(len(move.pack_lot_ids), 1)
+        self.assertEqual(pack_op.zetes_state, constants.MOVE_DONE)
+        self.assertEqual(pack_op.qty_done, 20)
+        self.assertEqual(len(pack_op.pack_lot_ids), 1)
         self.assertEqual(self.picking_reserve.state, 'done')
