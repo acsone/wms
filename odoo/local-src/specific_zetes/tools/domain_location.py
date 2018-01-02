@@ -44,35 +44,35 @@ class Location(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        move_id = params.lineId
-        if not move_id:
+        line_id = params.lineId
+        if not line_id:
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
 
-        if isinstance(move_id, int):
-            move_id = str(move_id)
+        if isinstance(line_id, int):
+            line_id = str(line_id)
 
-        move_id_list = move_id.split('_')
-        if len(move_id_list) == 2:
-            pack_operation_id = int(move_id_list[0])
-            lot_id = int(move_id_list[1])
+        line_id_list = line_id.split('_')
+        if len(line_id_list) == 2:
+            pack_operation_id = int(line_id_list[0])
+            lot_id = int(line_id_list[1])
         else:
-            pack_operation_id = int(move_id)
+            pack_operation_id = int(line_id)
             lot_id = None
 
-        move = self.request.env['stock.pack.operation'].sudo(self._user)\
+        pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(pack_operation_id)
-        if not len(move):
+        if not len(pack_op):
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
 
-        product = move.product_id
+        product = pack_op.product_id
 
         result.update({
             'respCode': constants.RESPONSE_CODE_OK,
@@ -84,7 +84,7 @@ class Location(DomainInterface):
         })
 
         # TODO Please remove me
-        shelf = params.Cri03
+        shelf = params.Cri03 or ''
         special_shelf_regex = r'0([A-Z])'
         regex_result = re.match(special_shelf_regex, shelf)
         if regex_result:
@@ -109,10 +109,11 @@ class Location(DomainInterface):
             })
             return result.format()
 
-        if move.picking_id.zetes_picking_type == constants.PARKING_ASSIGNMENT:
+        if pack_op.picking_id.zetes_picking_type == \
+                constants.PARKING_ASSIGNMENT:
             self.request.env['pack.operation.reserve.rel'].sudo(self._user)\
                 .create({
-                    'pack_operation_id': move.id,
+                    'pack_operation_id': pack_op.id,
                     'reserve_location_id': location.id,
                     'lot_id': lot_id
                 })

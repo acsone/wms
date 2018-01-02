@@ -64,7 +64,7 @@ class Catchweight(DomainInterface):
         for a response even if there is an error. We need to catch and manage
         errors by yourself.
 
-        Set the quantity (Usf02) on the stock move (lineId)
+        Set the quantity (Usf02) on the stock pack operation (lineId)
         Usf01 is the lot number.
         With the process "Parking" and "Reserve" the quantity (Usf02) can
         be more or less than the requested quantity. However Odoo
@@ -90,24 +90,24 @@ class Catchweight(DomainInterface):
         :param params:
         :return:
         """
-        move_id = params.lineId
-        if not move_id:
+        line_id = params.lineId
+        if not line_id:
             return
 
-        if isinstance(move_id, int):
-            move_id = str(move_id)
+        if isinstance(line_id, int):
+            line_id = str(line_id)
 
-        pack_operation_id = int(move_id.split('_')[0])
+        pack_operation_id = int(line_id.split('_')[0])
 
-        move = self.request.env['stock.pack.operation'].sudo(self._user)\
+        pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(pack_operation_id)
-        if not len(move):
+        if not len(pack_op):
             return
 
         try:
             # Retrieve the quantity
             real_qty = params.Usf02 and float(params.Usf02) or 0
-            virtual_qty = self.check_picked_quantity(params, move, real_qty)
+            virtual_qty = self.check_picked_quantity(params, pack_op, real_qty)
             # and the lot number
             lot_number = params.Usf01
 
@@ -115,7 +115,7 @@ class Catchweight(DomainInterface):
             if lot_number:
                 lot = self.request.env['stock.production.lot'] \
                     .sudo(self._user).search(
-                    [('product_id', '=', move.product_id.id),
+                    [('product_id', '=', pack_op.product_id.id),
                      ('checksum', '=', lot_number)], limit=1)
                 if lot:
                     lot_id = lot.id
@@ -125,55 +125,55 @@ class Catchweight(DomainInterface):
             # the real quantity (say by the picker).
             actual_stock = params.Usf03
             if actual_stock or actual_stock == 0:
-                self.check_actual_stock(params, move, actual_stock, lot_id)
+                self.check_actual_stock(params, pack_op, actual_stock, lot_id)
                 return
 
-            move.add_qty(virtual_qty, lot_id)
+            pack_op.add_qty(virtual_qty, lot_id)
 
-            picking = move.picking_id
+            picking = pack_op.picking_id
             # The stock is full and the picker need to go to the reserve
             if picking.zetes_picking_type == constants.PARKING_ASSIGNMENT \
-                    and move.zetes_state == constants.MOVE_FULL:
+                    and pack_op.zetes_state == constants.MOVE_FULL:
                 reserve_rel_obj = \
                     self.request.env['pack.operation.reserve.rel']
                 reserve_rel = reserve_rel_obj.sudo(self._user).search([
-                    ('pack_operation_id', '=', move.id),
+                    ('pack_operation_id', '=', pack_op.id),
                     ('lot_id', '=', lot_id)
                 ], limit=1, order="id DESC")
 
                 if not reserve_rel:
-                    error_message = "Reserve not found for move %s (lot %s)" \
-                                    % (move.id, lot_id)
+                    error_message = "Reserve not found for pack_op %s " \
+                                    "(lot %s)" % (pack_op.id, lot_id)
                     _logger.error(error_message)
-                    params.log(picking_id=move.picking_id.id,
+                    params.log(picking_id=pack_op.picking_id.id,
                                operation_id=pack_operation_id,
                                exception=error_message)
                     return
 
                 reserve = reserve_rel.reserve_location_id
-                move.put_in_reserve(reserve.id)
+                pack_op.put_in_reserve(reserve.id)
             # Only for "Reserve". The stock is full and the picker will return
             # some quantity to the reserve
             elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
-                    and move.product_qty > virtual_qty:
-                location_dest_id = move.location_id.id
-                new_qty = move.product_qty - virtual_qty
-                new_move = \
-                    move.split_pack_op(new_qty, location_dest_id, lot_id)
-                new_move.add_qty(new_qty, lot_id)
+                    and pack_op.product_qty > virtual_qty:
+                location_dest_id = pack_op.location_id.id
+                new_qty = pack_op.product_qty - virtual_qty
+                pack_op_move = \
+                    pack_op.split_pack_op(new_qty, location_dest_id, lot_id)
+                pack_op_move.add_qty(new_qty, lot_id)
 
         except Exception as e:
             _logger.error(str(e))
-            params.log(picking_id=move.picking_id.id,
+            params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_operation_id,
                        exception=e)
 
-    def check_actual_stock(self, params, move, actual_stock, lot_id=None):
+    def check_actual_stock(self, params, pack_op, actual_stock, lot_id=None):
         """
         Check if the actual quantity in stock equals the available quantity
         in Odoo.
         :param params:
-        :param move:
+        :param pack_op:
         :param actual_stock:
         :param lot_id:
         :return:
@@ -182,10 +182,10 @@ class Catchweight(DomainInterface):
         SELECT sum(quant.qty)
         FROM stock_quant AS quant
         WHERE quant.product_id = %s
-        AND quant.location_id = %s
-        AND quant.reservation_id IS NULL
+          AND quant.location_id = %s
+          AND quant.reservation_id IS NULL
         """
-        query_values = [move.product_id.id, move.location_id.id]
+        query_values = [pack_op.product_id.id, pack_op.location_id.id]
 
         self.request.env.cr.execute(available_qty_query, tuple(query_values))
         query_result = self.request.env.cr.fetchone()
@@ -197,31 +197,31 @@ class Catchweight(DomainInterface):
                             " the product %s in the location %s" % \
                             (available_qty,
                              actual_stock,
-                             move.product_id.display_name,
-                             move.location_id.display_name)
+                             pack_op.product_id.display_name,
+                             pack_op.location_id.display_name)
             if lot_id:
                 lot = self.request.env['stock.production.lot']\
                     .sudo(self._user).browse(lot_id)
                 error_message += " (lot %s)" % lot.name
 
             _logger.error(error_message)
-            params.log(picking_id=move.picking_id.id,
-                       operation_id=move.id,
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=pack_op.id,
                        exception=error_message)
 
-    def check_picked_quantity(self, params, move, picked_quantity):
+    def check_picked_quantity(self, params, pack_op, picked_quantity):
         """
         Zetes allows (only for Parking and Reserve) to take a quantity
         greater than the requested quantity. However Odoo refuse this case.
         If the picked quantity is greater than the requested quantity we need
         to virtually change the picked quantity with the requested quantity
         and send an email to warm the manager.
-        :param move:
+        :param pack_op:
         :param picked_quantity:
         :return:
         """
-        total_picked_quantity = move.qty_done + picked_quantity
-        max_allowed_quantity = move.product_qty
+        total_picked_quantity = pack_op.qty_done + picked_quantity
+        max_allowed_quantity = pack_op.product_qty
 
         if total_picked_quantity > max_allowed_quantity:
             error_message = "The total picked quantity (%s) is greater than" \
@@ -229,12 +229,12 @@ class Catchweight(DomainInterface):
                             "%s (Operation ID %s)" % \
                             (total_picked_quantity,
                              max_allowed_quantity,
-                             move.product_id.display_name,
-                             move.id)
+                             pack_op.product_id.display_name,
+                             pack_op.id)
             _logger.error(error_message)
-            params.log(picking_id=move.picking_id.id,
-                       operation_id=move.id,
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=pack_op.id,
                        exception=error_message)
-            return move.product_qty - move.qty_done
+            return pack_op.product_qty - pack_op.qty_done
 
         return picked_quantity

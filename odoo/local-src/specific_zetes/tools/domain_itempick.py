@@ -65,7 +65,7 @@ class Itempick(DomainInterface):
         :param params:
         :return:
         """
-        # If there is not Picking ID we cannot assign a stock move
+        # If there is no Picking ID we cannot assign a pack operation
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
@@ -275,27 +275,27 @@ class Itempick(DomainInterface):
         """
         if not params.pickLineId:
             return
-        move_id = int(params.pickLineId)
+        line_id = int(params.pickLineId)
 
-        move = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(move_id)
-        if not len(move):
+        pack_op = self.request.env['stock.pack.operation']\
+            .sudo(self._user).browse(line_id)
+        if not len(pack_op):
             return
 
         try:
             status = params.pickStatus
             if status:
-                move.sudo(self._user).write({
+                pack_op.sudo(self._user).write({
                     'zetes_state': status
                 })
 
                 # If status == OP_CANCELED => remove all actions for this line
                 if status == constants.OP_CANCELED:
-                    move.pack_lot_ids.unlink()
-                    move.save()
+                    pack_op.pack_lot_ids.unlink()
+                    pack_op.save()
 
         except Exception as e:
             _logger.error(str(e))
-            params.log(picking_id=move.picking_id.id,
-                       operation_id=move_id,
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=line_id,
                        exception=e)

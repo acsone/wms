@@ -66,16 +66,6 @@ class StockPicking(models.Model):
             picking.checksum = checksum
 
     @api.multi
-    def reset_picking(self):
-        """
-        Reset
-        :return:
-        """
-
-        for picking in self:
-            print
-
-    @api.multi
     def interrupt_picking(self):
         self.assign_picking_checksum()
         self.write({

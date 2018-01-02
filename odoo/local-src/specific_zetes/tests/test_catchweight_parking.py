@@ -119,7 +119,7 @@ class TestCatchweightParking(ZetesParkingTest):
         request_params.update({
             'lineId': move.id,
             'Usf01': self.lot_product_1.checksum,
-            'Usf02': 20,  # Pick 80 unit,
+            'Usf02': 20,  # Pick 20 unit,
             'Usf03': None,
         })
         domain.resu(request_params)

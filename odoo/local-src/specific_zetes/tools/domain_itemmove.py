@@ -51,12 +51,12 @@ class Itemmove(DomainInterface):
         """
         move_type = params.itemMoveType
 
-        # If there is not Picking ID we cannot assign a stock move
+        # If there is no Picking ID we cannot assign a pack operation
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': 'No picking found'
+                'respMsg': _('No picking found')
             })
             return result.format()
 
@@ -65,8 +65,7 @@ class Itemmove(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID {}'
-                             .format(picking_id))
+                'respMsg': _('No picking found with the ID %s') % picking_id
             })
             return result.format()
         picking_id = int(picking_id)
@@ -80,8 +79,8 @@ class Itemmove(DomainInterface):
             lines = []
 
         if not lines:
-            error_message = _('There is no lines for the picking {}'
-                              .format(picking_id))
+            error_message = _('There is no lines for the picking %s') \
+                            % picking_id
 
             self.request.env['stock.picking'].sudo(self._user) \
                 .browse(picking_id).write(
@@ -198,24 +197,24 @@ class Itemmove(DomainInterface):
         :param params:
         :return:
         """
-        move_id = params.moveLineId
-        if not move_id:
+        line_id = params.moveLineId
+        if not line_id:
             return
 
-        if isinstance(move_id, int):
-            move_id = str(move_id)
+        if isinstance(line_id, int):
+            line_id = str(line_id)
 
-        pack_operation_id = int(move_id.split('_')[0])
+        pack_operation_id = int(line_id.split('_')[0])
 
-        move = self.request.env['stock.pack.operation']\
+        pack_op = self.request.env['stock.pack.operation']\
             .sudo(self._user).browse(pack_operation_id)
-        if not len(move):
+        if not len(pack_op):
             return
 
         try:
             status = params.moveStatus
             if status:
-                move.sudo(self._user).write({
+                pack_op.sudo(self._user).write({
                     'zetes_state': status
                 })
 
@@ -224,11 +223,11 @@ class Itemmove(DomainInterface):
                 # done. It means that we have to validate the picking
                 # in any case.
                 if params.itemMoveType == constants.MOVE_TYPE_PUT:
-                    move.picking_id.validate_picking()
+                    pack_op.picking_id.validate_picking()
 
         except Exception as e:
             _logger.error(str(e))
-            params.log(picking_id=move.picking_id.id,
+            params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_operation_id,
                        exception=e)
 
