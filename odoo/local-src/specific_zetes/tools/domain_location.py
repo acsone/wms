@@ -138,6 +138,9 @@ class Location(DomainInterface):
                      ],
                     order='life_date',
                     limit=5)
+        lots = lots.filtered(
+            lambda lot: location.id in lot.mapped('quant_ids.location_id').ids
+        )
 
         # Lots are stored in the value Usf0#LOT_NUMBER (eg: Usf01)
         index = 0
@@ -146,13 +149,14 @@ class Location(DomainInterface):
             setattr(result, 'Usf0{}'.format(index), lot.checksum)
 
         # Search a specific lot
-        specific_lot = self.request.env['stock.production.lot']\
-            .sudo(self._user).search([('checksum', '=', params.Cri07),
-                                      ('product_id', '=', product.id),
-                                      ('is_archived', '=', False)],
-                                     limit=1)
-        if specific_lot:
-            result.Usf06 = specific_lot.checksum
+        if params.Cri07:
+            specific_lot = self.request.env['stock.production.lot']\
+                .sudo(self._user).search([('checksum', '=', params.Cri07),
+                                          ('product_id', '=', product.id),
+                                          ('is_archived', '=', False)],
+                                         limit=1)
+            if specific_lot:
+                result.Usf06 = specific_lot.checksum
 
         return result.format()
 

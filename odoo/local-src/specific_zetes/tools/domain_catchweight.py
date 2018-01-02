@@ -128,8 +128,6 @@ class Catchweight(DomainInterface):
                 self.check_actual_stock(params, pack_op, actual_stock, lot_id)
                 return
 
-            pack_op.add_qty(virtual_qty, lot_id)
-
             picking = pack_op.picking_id
             # The stock is full and the picker need to go to the reserve
             if picking.zetes_picking_type == constants.PARKING_ASSIGNMENT \
@@ -156,11 +154,18 @@ class Catchweight(DomainInterface):
             # some quantity to the reserve
             elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
                     and pack_op.product_qty > virtual_qty:
+                # Add the new quantity to the current pack op
+                pack_op.add_qty(virtual_qty, lot_id)
                 location_dest_id = pack_op.location_id.id
                 new_qty = pack_op.product_qty - virtual_qty
+
+                # Create the pack op for the quantity left in the reserve
                 pack_op_move = \
                     pack_op.split_pack_op(new_qty, location_dest_id, lot_id)
                 pack_op_move.add_qty(new_qty, lot_id)
+            # Otherwise simple add the new quantity to the current pack op
+            else:
+                pack_op.add_qty(virtual_qty, lot_id)
 
         except Exception as e:
             _logger.error(str(e))

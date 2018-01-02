@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
+from odoo.tools import mute_logger
 
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
@@ -108,6 +109,7 @@ class TestCatchweight(ZetesTest):
 
         self.assertEqual(pack_op.qty_done, 5)
 
+    @mute_logger('odoo.addons.specific_zetes.tools.domain_catchweight')
     def test_resu_catchweight_check_picked_quantity(self):
         """
         Pick 15 units (the max allowed is 10 units)
@@ -141,6 +143,7 @@ class TestCatchweight(ZetesTest):
             ('operation_id', '=', pack_op.id)])
         self.assertEqual(len(log), 1)
 
+    @mute_logger('odoo.addons.specific_zetes.tools.domain_catchweight')
     def test_resu_catchweight_check_actual_stock(self):
         """
         Change the picked quantity on the pack operation

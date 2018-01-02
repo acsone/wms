@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
+from odoo.tools import mute_logger
 
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
@@ -174,6 +175,8 @@ class TestFull(ZetesTest):
             'server_id': printer_server.id,
         })
 
+    @mute_logger('odoo.addons.base_report_to_printer.models.printing_server',
+                 'odoo.addons.specific_zetes.tools.domain_print')
     def test_full(self):
         """
         Please read the README file to understand the test
@@ -407,11 +410,11 @@ class TestFull(ZetesTest):
         request_location_params = Parameters(location_obj)
         request_location_params.update({
             'lineId': pack_op_3.id,
-            'Cri01': None,
-            'Cri02': None,
-            'Cri03': None,
-            'Cri04': None,
-            'Cri05': None,
+            'Cri01': self.location_product_3.zone,
+            'Cri02': self.location_product_3.corridor,
+            'Cri03': self.location_product_3.shelf,
+            'Cri04': self.location_product_3.height,
+            'Cri05': self.location_product_3.box,
             'Cri07': None,
         })
 
@@ -436,7 +439,7 @@ class TestFull(ZetesTest):
         })
 
         catchweight_obj.resu(request_pick_items_params)
-        self.assertEqual(move_3.qty_done, 50)
+        self.assertEqual(pack_op_3.qty_done, 50)
 
         ###########
         # Step 10 #

@@ -212,4 +212,4 @@ class TestInterruption(ZetesTest):
         results = \
             [self.format_result(result_line) for result_line in result_lines]
         self.assertEqual(len(results), 1)
-        self.assertEqual(results[0].pickLineId, str(move_2.id))
+        self.assertEqual(results[0].pickLineId, str(pack_op_2.id))
