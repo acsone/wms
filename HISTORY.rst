@@ -34,6 +34,7 @@ Unreleased
 * ALCN-1014: The user must first start the picking to validate after
 * ALCN-1012: Add filters on round instances and round templates
 * ALCN-1011: When the delivery address is used on a picking, search the itinerary with the company
+* ALCN-1010: Don't display canceled picking when the view daily delivery rounds
 
 **Bugfixes**
 

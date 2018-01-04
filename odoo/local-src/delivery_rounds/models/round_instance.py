@@ -2,6 +2,7 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from ast import literal_eval
 import math
 from datetime import datetime
 
@@ -347,8 +348,17 @@ class RoundInstance(models.Model):
 
     @api.multi
     def action_picking_tree_available(self):
-        return dict(self.env.ref(
-            'delivery_rounds.action_picking_tree_available_round').read()[0])
+        action = self.env['ir.actions.act_window'].for_xml_id(
+            'delivery_rounds', 'action_picking_tree_available_round'
+        )
+
+        domain_str = action.get('domain', "[]")
+        domain = literal_eval(domain_str)
+
+        domain += [('state', '!=', 'cancel')]
+        action['domain'] = domain
+
+        return action
 
     @api.one
     def button_confirm(self):
