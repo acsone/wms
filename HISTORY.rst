@@ -32,6 +32,7 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1033: Fix a bug when the shelf number is greater than 9
 
 **Build**
 
