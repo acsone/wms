@@ -112,6 +112,37 @@ class RoundInstance(models.Model):
         'Display Name', readonly=True,
         compute='_get_complete_name', store=True)
     tag_ids = fields.Many2many('round.tag', string='Tags')
+    partner_ids = fields.Many2many(
+        'res.partner',
+        string='Partners',
+        readonly=True,
+        compute='_compute_partner_ids',
+        search='_search_partner_ids'
+    )
+
+    @api.multi
+    def _compute_partner_ids(self):
+        for instance in self:
+            partners = instance.mapped(
+                'itinerary_ids.partner_position_ids.partner_id'
+            )
+            instance.partner_ids = [(6, 0, partners.ids)]
+
+    def _search_partner_ids(self, operator, value):
+        """
+        Search for template containing the customer name
+        :param operator:
+        :param value:
+        :return:
+        """
+
+        positions = self.env['round.itinerary.position'].search(
+            [('partner_id.name', operator, value)])
+        itineraries = self.env['round.itinerary'].search(
+            [('partner_position_ids', 'in', positions.ids)]
+        )
+
+        return [('itinerary_ids', 'in', itineraries.ids)]
 
     @api.multi
     @api.depends('template_id', 'date', 'time_leave_planned')
@@ -254,6 +285,8 @@ class RoundInstance(models.Model):
             ON rel.round_instance_id = instance.id
           INNER JOIN round_itinerary_position AS position
             ON position.itinerary_id = rel.round_itinerary_id
+          INNER JOIN res_partner AS customer
+            ON position.partner_id = customer.id
           LEFT JOIN round_instance_round_tag_rel AS instance_tag
             ON instance.id = instance_tag.round_instance_id
           LEFT JOIN round_itinerary_position_round_tag_rel AS customer_tag
@@ -262,12 +295,16 @@ class RoundInstance(models.Model):
           AND (instance_tag.round_tag_id = customer_tag.round_tag_id
               OR customer_tag IS NULL
               OR instance_tag IS NULL)
-          AND position.partner_id = %s
+          AND (customer.id = %s
+            OR EXISTS (SELECT 1 
+                        FROM res_partner
+                        WHERE res_partner.id = %s
+                        AND res_partner.parent_id = customer.id))
         ORDER BY instance.date DESC, instance.time_picking_planned ASC
         LIMIT 1;
         """
 
-        self.env.cr.execute(best_instance_query, (partner.id, ))
+        self.env.cr.execute(best_instance_query, (partner.id, partner.id))
         result = self.env.cr.fetchone()
 
         if result:
