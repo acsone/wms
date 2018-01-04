@@ -30,6 +30,7 @@ Unreleased
 * ALCN-1035: Allow to import supplier info with CNK code to link product
 * ALCN-966: Merge same shipping (same partner) in the delivery report
 * ALCN-1024: Fix wrong translation
+* ALCN-1018: Display quants moved in the stock.move form view
 
 **Bugfixes**
 
