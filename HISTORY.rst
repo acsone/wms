@@ -32,6 +32,7 @@ Unreleased
 * ALCN-1024: Fix wrong translation
 * ALCN-1018: Display quants moved in the stock.move form view
 * ALCN-1014: The user must first start the picking to validate after
+* ALCN-1012: Add filters on round instances and round templates
 
 **Bugfixes**
 

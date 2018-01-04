@@ -42,6 +42,36 @@ class RoundTemplate(models.Model):
         'Planned Vehicle Start Time')
     version_ids = fields.Many2many('round.template.version',
                                    string='Versions')
+    partner_ids = fields.Many2many('res.partner',
+                                   string='Partners',
+                                   readonly=True,
+                                   compute='_compute_partner_ids',
+                                   search='_search_partner_ids')
+
+    @api.multi
+    def _compute_partner_ids(self):
+        for template in self:
+            partners = template.mapped(
+                'itinerary_ids.partner_position_ids.partner_id'
+            )
+
+            template.partner_ids = [(6, 0, partners.ids)]
+
+    def _search_partner_ids(self, operator, value):
+        """
+        Search for template containing the customer name
+        :param operator:
+        :param value:
+        :return:
+        """
+
+        positions = self.env['round.itinerary.position'].search(
+            [('partner_id.name', operator, value)])
+        itineraries = self.env['round.itinerary'].search(
+            [('partner_position_ids', 'in', positions.ids)]
+        )
+
+        return [('itinerary_ids', 'in', itineraries.ids)]
 
     @api.multi
     @api.depends('name', 'code')

@@ -69,6 +69,18 @@ class RoundInstance(models.Model):
         'round.template', 'Template',
         states={'done': [('readonly', True)]},
         ondelete='restrict')
+    template_code = fields.Char(
+        'Code',
+        related='template_id.code',
+        store=True,
+        readonly=True
+    )
+    template_name = fields.Char(
+        'Name',
+        related='template_id.name',
+        store=True,
+        readonly=True
+    )
     color = fields.Integer(
         related='template_id.color')
     state = fields.Selection(
@@ -412,6 +424,26 @@ class RoundInstance(models.Model):
         string='Customers',
         states={'done': [('readonly', True)]},
     )
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        domain = []
+        if name:
+            vals = name.split('-', 1)
+            if len(vals) > 1:
+                code = vals[0].strip()
+                text = vals[1].strip()
+                comb = operator.startswith('not ') and '|' or '&'
+            else:
+                code = text = name.strip()
+                comb = operator.startswith('not ') and '&' or '|'
+            domain = [
+                comb,
+                ('template_code', operator, code),
+                ('template_name', operator, text)]
+        records = self.search(domain + args, limit=limit)
+        return records.name_get()
 
 
 class RoundInstanceCustomer(models.Model):
