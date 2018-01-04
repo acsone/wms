@@ -337,7 +337,9 @@ class RoundInstance(models.Model):
 
     @api.multi
     def print_all_deliveryslip(self):
-        return self.env['report'].get_action(self.shipping_ids,
+        shipping_done = self.shipping_ids.filtered(
+            lambda shipping: shipping.state == 'done')
+        return self.env['report'].get_action(shipping_done,
                                              'stock.report_deliveryslip')
 
     @api.multi

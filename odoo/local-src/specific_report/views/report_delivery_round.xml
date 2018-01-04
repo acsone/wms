@@ -39,7 +39,7 @@
                                     <tr>
                                         <td class="col-ws-4">Stops</td>
                                         <td class="col-ws-8">
-                                            <span t-esc="len(delivery.shipping_ids)" />
+                                            <span t-esc="len(delivery.shipping_ids.filtered(lambda x: x.state == 'done'))" />
                                         </td>
                                     </tr>
                                     <tr>
