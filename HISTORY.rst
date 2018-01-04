@@ -29,6 +29,7 @@ Unreleased
 * ALCN-1035: Use purchase base price on supplier info onchange instead of list price
 * ALCN-1035: Allow to import supplier info with CNK code to link product
 * ALCN-966: Merge same shipping (same partner) in the delivery report
+* ALCN-1024: Fix wrong translation
 
 **Bugfixes**
 

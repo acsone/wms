@@ -298,13 +298,13 @@ msgstr "Informations sur le fournisseur"
 
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
-msgid "Total weigh in Kg"
-msgstr "Poid totale en Kg"
+msgid "Total weight in Kg"
+msgstr "Poids total en Kg"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_total_weight
 msgid "Total weight"
-msgstr "Poid totale"
+msgstr "Poids total"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_stock_picking
