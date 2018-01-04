@@ -22,6 +22,7 @@
         'stock_production_lot_expired_dates',
         'stock_receive_lot',
         'stock_reception_priority',
+        'stock_picking_assignment',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

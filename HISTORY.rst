@@ -31,6 +31,7 @@ Unreleased
 * ALCN-966: Merge same shipping (same partner) in the delivery report
 * ALCN-1024: Fix wrong translation
 * ALCN-1018: Display quants moved in the stock.move form view
+* ALCN-1014: The user must first start the picking to validate after
 
 **Bugfixes**
 

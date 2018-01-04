@@ -16,6 +16,8 @@
             <xpath expr="//group[@name='moved_quants_grp']" position="attributes">
                 <attribute name="groups"/>
             </xpath>
+
+
         </field>
     </record>
 </odoo>
