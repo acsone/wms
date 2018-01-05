@@ -293,6 +293,11 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.CLIENT_PAYMENT_MODES,
             default=None
         ),
+        FieldMapper(
+            'is_passport_required',
+            'cpcl07',
+            mapping=mappings.STR_BOOL
+        ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',
