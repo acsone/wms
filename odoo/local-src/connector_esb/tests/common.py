@@ -115,3 +115,14 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             self.assertEqual(writer.filename(), expected)
             writer = work.component(usage='sftp.xml.writer')
             self.assertEqual(writer.filename(), expected)
+
+    def activate_lang(self):
+        """ Create a fictive language to use in tests """
+        self.env['res.lang'].create({
+            'name': 'Klingon',
+            'code': 'tlh_TLH',
+            'iso_code': 'tlh',
+            'active': True,
+            'translatable': True,
+            'esb_ref': 'TLH',
+        })

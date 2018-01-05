@@ -11,6 +11,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(ExportCustomerTestCase, self).setUp()
+        self.activate_lang()
         self.setup_records()
         self.maxDiff = None
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_customer')
@@ -120,7 +121,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'Email': u'joe@ch.ch',
             'Username': '',
             'Firstname': u'Joe',
-            'Language': u'NL',
+            'Language': u'TLH',
             'GroupId': self.alcyon_category.esb_ref,
             'Taxvat': u'BE0477472701',
             'IdRound': '',

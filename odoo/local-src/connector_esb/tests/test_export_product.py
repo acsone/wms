@@ -10,6 +10,7 @@ class ExportProductTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(ExportProductTestCase, self).setUp()
+        self.activate_lang()
         self.setup_records()
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
 
@@ -131,7 +132,7 @@ class ExportProductTestCase(ESBXMLTestCase):
 
         # add some translation
         for rec in self.all_records:
-            rec.with_context(lang='nl_BE').name = rec.name + ' (NL)'
+            rec.with_context(lang='tlh_TLH').name = rec.name + ' (TLH)'
 
         self.unexportable_records = self.model.browse()
         nx1 = self.model.create({
@@ -169,7 +170,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gesart': 'exportable001',
             'Cplz05': 'XXX0001',
             'Gespnt': 10.0,
-            'Refdem': 'Export me pls (NL)',
+            'Refdem': 'Export me pls (TLH)',
             'Gesarc': 'supplier001',
             'Gesfou': '79001',
             'Cplz25': '79001',

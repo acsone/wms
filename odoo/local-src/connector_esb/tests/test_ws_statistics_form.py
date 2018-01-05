@@ -11,6 +11,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(WSStatisticsFormTestCase, self).setUp()
+        self.activate_lang()
         self.setup_records()
 
     def setup_records(self):
@@ -243,7 +244,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
     def test_language(self):
         # add some translation
         product = self.product1
-        product.with_context(lang='nl_BE').name = product.name + ' (NL)'
+        product.with_context(lang='tlh_TLH').name = product.name + ' (TLH)'
 
         self.create_sale(
             '2017-07-20',
@@ -255,14 +256,14 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
                 customer_ref='ABC',
-                language='NL',
+                language='TLH',
             )
             data = component._data_for_message(options)
 
         # only the sale of 2017-07-26 is considered
         expected = [
             {'manufacturer': u'GUERRA',
-             'productName': u'KETOFEN 5MG 10CP (NL)',
+             'productName': u'KETOFEN 5MG 10CP (TLH)',
              'productType': u'medicament',
              'qtyDelivered': 1.0,
              'sku': u'1021906',
