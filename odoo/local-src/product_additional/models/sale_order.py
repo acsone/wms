@@ -93,9 +93,9 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).copy_data(default=default)
         # Skip promotional lines on duplicate
         if 'order_line' in res[0]:
-            for i, line in enumerate(res[0]['order_line']):
+            for i, line in reversed(list(enumerate(res[0]['order_line']))):
                 if line[0] == 0 and line[2].get('is_promotional_product'):
-                    res[0]['order_line'].pop(i)
+                    del res[0]['order_line'][i]
         return res
 
 

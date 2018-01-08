@@ -6,37 +6,50 @@
 Product Additional
 ==================
 
-This module adds Alcyon specific fields and logic for product additional.
+Manage free additional products in sales.
 
-There are two type of additional product:
-- The promotional product (define on the supplier info): For a specific quantity you offer the same product free
-- The additional product (define on the product): You link a product to his additional product
+There are two types of additional product: promotional and accessory.
 
-The promotional product will be add when you confirm the sale order.
-If a product need a promotional product, the module will create a new will without price.
 
-The additional product will be add only when the picking is reserved (stock moves and pack operation).
-The quantity of additional product is compute with the "real" reserved quantity for the main product (see example bellow).
+The promotional free product
+----------------------------
+It is defined on the supplier info. For a specific quantity you offer a product
+for free (e.g. 3+1).
 
-Promotional product example:
-* On supplier info, create (or modify) a line and add a promotional product (ratio 2/1) (the ratio 2/1 means that if you sold 2 products you give 1 product)
-* Create a sale order and add the main product
-* Confirm the sale order
+The promotional product is added in the sales order at confirmation just before
+processing the generation of stock moves for delivery.
 
-Additional product example:
-You have 100 units of main products and 15 units of additional product
+That free promotional product is added in the sales order with a price of 0.
 
-* Set the additional product on your main product with a ratio of 2/1
-* Create and confirm a sale order with this product (quantity 40)
-* When you will reserve quantity on the picking, the module will try to take 20 units of additional product.
-But you have only 15 units in stock. In this case, the module will only append 15 units of additional product in the pack operation
+In case of sales order cancellation, the promotional product is removed from
+the sales order when it is reset to draft.
+
+
+The accessory free product
+--------------------------
+It is defined on the product. Is is an other product that is offered when the
+main product is sold. (e.g. buy 3 productA and get a free productB).
+
+The accessory product is managed at pack operation. This ensures that you
+deliver the quantity of accessories based on the delivered quantity of the
+main product.
+This ensures that you never deliver an accessory when the main product is not
+available.
+
+Technical note: The algorithm looks at the total quantity of the main product
+in the created pack operation (could be computed from the aggregation of
+multiple stock moves). Then it creates an additional stock move for the
+accessory product and reserve it in order to create the corresponding pack
+operation for the accessory product. When the main product's pack operation is
+deleted, the accessory related move is also cancelled and so it's pack
+operation is also deleted.
+
 
 Credits
 =======
 
 Contributors
 ------------
-
-* Julien Coux <julien.coux@camptocamp.com>
-* Sylvain Van Hoof <sylvain@okia.be>
 * Jacques-Etienne Baudoux <je@bcim.be>
+* Sylvain Van Hoof <sylvain@okia.be>
+* Julien Coux <julien.coux@camptocamp.com>

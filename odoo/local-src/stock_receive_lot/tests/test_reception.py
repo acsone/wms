@@ -138,7 +138,7 @@ class TestReception(TransactionCase):
         wiz.button_nextop()
 
         # validate
-        picking.do_new_transfer()
+        picking.with_context(test_mode=True).do_new_transfer()
         self.assertEqual(picking.state, 'done')
         self.assertEqual(len(picking.move_lines), len(self.products))
         self.assertEqual(len(picking.pack_operation_product_ids),

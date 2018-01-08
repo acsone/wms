@@ -109,9 +109,10 @@ class StockMove(models.Model):
         if not self.env.context.get('no_recompute_pack'):
             pickings = self.mapped('picking_id').filtered(
                 lambda picking: picking.state != 'cancel')
+            products = self.mapped('product_id')
             moves = pickings.mapped('move_lines').filtered(
                 lambda move: move.state == 'confirmed' and
-                move.product_id in self.mapped('product_id'))
+                move.product_id in products)
             if moves:
                 # action_assign requires to clean existing pack operation
                 moves.mapped('linked_move_operation_ids.operation_id').unlink()

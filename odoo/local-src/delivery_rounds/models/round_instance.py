@@ -145,8 +145,8 @@ class RoundInstance(models.Model):
         _logger.debug("Assign to delivery round %s the pickings %s",
                       self.id, pickings.ids)
 
-        pickings.filtered(lambda picking: picking.state == 'draft')\
-            .action_confirm()
+        pickings.filtered(
+            lambda picking: picking.state == 'draft').action_confirm()
         moves = pickings.mapped('move_lines').filtered(
             lambda move: move.state == 'confirmed' and
             not move.linked_move_operation_ids)
