@@ -137,8 +137,6 @@ class StockPicking(models.Model):
                 super(StockPicking, self).do_transfer()
         return True
 
-    @api.depends('move_type', 'launch_pack_operations', 'move_lines.state',
-                 'move_lines.picking_id', 'move_lines.partially_available')
     @api.one
     def _compute_state(self):
         if not self.move_lines and self.grn_id:
