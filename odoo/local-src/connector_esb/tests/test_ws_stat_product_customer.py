@@ -41,7 +41,7 @@ class WSStatProductCustomerTestCase(ESBXMLTestCase):
         today = datetime.now()
         self.env['sale.order'].create({
             'partner_id': self.customer.id,
-            'date_order': today - relativedelta(month=1),
+            'date_order': today - relativedelta(months=1),
             'order_line': [(0, 0,
                             {'name': self.p1.name,
                              'product_id': self.p1.id,
@@ -65,7 +65,7 @@ class WSStatProductCustomerTestCase(ESBXMLTestCase):
         # One sale order for two month ago
         self.env['sale.order'].create({
             'partner_id': self.customer.id,
-            'date_order': today - relativedelta(month=2),
+            'date_order': today - relativedelta(months=2),
             'order_line': [(0, 0,
                             {'name': self.p1.name,
                              'product_id': self.p1.id,
@@ -96,7 +96,7 @@ class WSStatProductCustomerTestCase(ESBXMLTestCase):
         self.env['sale.order'].create({
             'partner_id': self.customer.id,
             'date_order': (datetime(today.year - 1, today.month, 1)
-                           - relativedelta(month=1)),
+                           - relativedelta(months=1)),
             'order_line': [(0, 0,
                             {'name': self.p1.name,
                              'product_id': self.p1.id,

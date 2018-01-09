@@ -43,6 +43,8 @@ Unreleased
  * Install base_technical_features and web_environment_ribbon modules
  * Upgrade docker-compose to 1.17.1
 
+* Fix connector_esb tests with incorect relative delta
+
 **Documentation**
 
 
