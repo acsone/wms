@@ -24,11 +24,11 @@
 ./external-src/account-invoicing:
   remotes:
     oca: git@github.com:OCA/account-invoicing.git
-    jbaudoux: git@github.com:jbaudoux/account-invoicing.git
+    camptocamp: git@github.com:camptocamp/account-invoicing.git
   merges:
     - oca 10.0
       # [10.0] account_invoice_line_default_account
-    - jbaudoux refs/pull/351/head
+    - oca refs/pull/351/head
   target: *default_target
 ./external-src/account-closing:
   remotes:
