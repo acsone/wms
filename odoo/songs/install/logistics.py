@@ -179,6 +179,27 @@ def create_locations(ctx):
             'usage': 'internal',
         })
 
+    # Nouveautés is under Input (part of stock)
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_new',
+        {
+            'name': 'Nouveautés',
+            'location_id': ctx.env.ref('stock.stock_location_company').id,
+            'usage': 'view',
+        })
+    news = [
+        ('__setup__.stock_location_new_ali', 'Nouveautés Aliments'),
+        ('__setup__.stock_location_new_medoc', 'Nouveautés Médicaments'),
+        ('__setup__.stock_location_new_frigo', 'Nouveautés Frigo'),
+        ('__setup__.stock_location_new_mat', 'Nouveautés Matériel'),
+    ]
+    for xmlid, name in news:
+        create_or_update(ctx, 'stock.location', xmlid, {
+            'name': name,
+            'location_id': ctx.env.ref('__setup__.stock_location_new').id,
+            'usage': 'internal',
+        })
+
     # Returns = Products unavailable => not under WH but under physical loc.
     create_or_update(
         ctx, 'stock.location', '__setup__.stock_location_return',
@@ -243,20 +264,72 @@ def create_putaway(ctx):
 
     loc_stock_id = ref('stock.stock_location_stock').id
 
-    # Input - Manage Parking and Achetés-vendus
+    # PUTAWAY INPUT
+    # -------------
     create_or_update(ctx, 'product.putaway', '__setup__.stock_putaway_input', {
         'name': 'Input',
         'method': 'fixed',
         'fixed_location_id': loc_stock_id,
     })
+    # Fixed Locations Per Routes
     create_or_update(
         ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_input_onorder',
+        '__setup__.stock_putaway_input_mto',
         {
             'putaway_id': ref('__setup__.stock_putaway_input').id,
             'route_id': ref('stock.route_warehouse0_mto').id,
             'fixed_location_id': ref(
                 '__setup__.stock_location_onorder').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_onorder',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_onorder').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_onorder').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_new',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_new').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_new').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_ali',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_pick_ali').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_parking_ali').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_med',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_pick_medoc').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_parking_medoc').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_mat',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_input').id,
+            'route_id': ref('__setup__.stock_location_route_pick_materiel').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_parking_materiel').id,
         }
     )
     create_or_update(
@@ -269,7 +342,7 @@ def create_putaway(ctx):
                 '__setup__.stock_location_parking_frigo').id,
         }
     )
-
+    # Fixed Locations Per Categories
     parking_strat = [
         ('__setup__.stock_putaway_strat_parking_medoc',
          'specific_data.product_categ_medoc',
@@ -290,17 +363,62 @@ def create_putaway(ctx):
                 'fixed_location_id': ref(loc).id,
             }
         )
+    # Assign putaway to Input location
     create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
         'location_id': loc_stock_id,
         'putaway_strategy_id': ref('__setup__.stock_putaway_input').id
     })
 
-    # Input - Manage Achetés-vendus destination by category
+
+    # PUTAWAY ACHETES-VENDUS
+    # ----------------------
     create_or_update(
         ctx, 'product.putaway', '__setup__.stock_putaway_onorder', {
             'name': 'Achetés-Vendus',
             'method': 'fixed',
         })
+    # Fixed Locations Per Routes
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_onorder_ali',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+            'route_id': ref('__setup__.stock_location_route_pick_ali').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_order_ali').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_onorder_med',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+            'route_id': ref('__setup__.stock_location_route_pick_medoc').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_order_medoc').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_onorder_mat',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+            'route_id': ref('__setup__.stock_location_route_pick_materiel').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_order_mat').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_onorder_froid',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_onorder').id,
+            'route_id': ref('__setup__.stock_location_route_pick_froid').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_order_frigo').id,
+        }
+    )
+    # Fixed Locations Per Categories
     onorders = [
         ('__setup__.stock_putaway_strat_onorder_ali',
          'specific_data.product_categ_ali',
@@ -321,10 +439,87 @@ def create_putaway(ctx):
                 'fixed_location_id': ref(loc).id,
             }
         )
+    # Assign putaway to Achetés-Vendus location
     create_or_update(
         ctx, 'stock.location', '__setup__.stock_location_onorder',
         {
             'putaway_strategy_id': ref('__setup__.stock_putaway_onorder').id
+        })
+
+    # PUTAWAY NOUVEAUTES
+    # ------------------
+    create_or_update(
+        ctx, 'product.putaway', '__setup__.stock_putaway_new', {
+            'name': 'Nouveautés',
+            'method': 'fixed',
+        })
+    # Fixed Locations Per Routes
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_ali',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_new').id,
+            'route_id': ref('__setup__.stock_location_route_pick_ali').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_new_ali').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_med',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_new').id,
+            'route_id': ref('__setup__.stock_location_route_pick_medoc').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_new_medoc').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_input_mat',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_new').id,
+            'route_id': ref('__setup__.stock_location_route_pick_materiel').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_new_mat').id,
+        }
+    )
+    create_or_update(
+        ctx, 'stock.fixed.putaway.route.strat',
+        '__setup__.stock_putaway_new_froid',
+        {
+            'putaway_id': ref('__setup__.stock_putaway_new').id,
+            'route_id': ref('__setup__.stock_location_route_pick_froid').id,
+            'fixed_location_id': ref(
+                '__setup__.stock_location_new_frigo').id,
+        }
+    )
+    # Fixed Locations Per Categories
+    news = [
+        ('__setup__.stock_putaway_strat_new_ali',
+         'specific_data.product_categ_ali',
+         '__setup__.stock_location_new_ali'),
+        ('__setup__.stock_putaway_strat_new_medoc',
+         'specific_data.product_categ_medoc',
+         '__setup__.stock_location_new_medoc'),
+        ('__setup__.stock_putaway_strat_new_mat',
+         'specific_data.product_categ_materiel',
+         '__setup__.stock_location_new_mat'),
+    ]
+    for xmlid, categ, loc in news:
+        create_or_update(
+            ctx, 'stock.fixed.putaway.strat', xmlid,
+            {
+                'putaway_id': ref('__setup__.stock_putaway_new').id,
+                'category_id': ref(categ).id,
+                'fixed_location_id': ref(loc).id,
+            }
+        )
+    # Assign putaway to Nouveautés location
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_new',
+        {
+            'putaway_strategy_id': ref('__setup__.stock_putaway_new').id
         })
 
 
@@ -551,29 +746,29 @@ def create_procurement_rules(ctx):
     warehouse = ctx.env.ref('stock.warehouse0')
     types = [
         {'xmlid': '__setup__.procurement_rule_materiel',
-         'sequence': 15,
+         'type': ['categ', 'prod'],
          'name': 'WH: Stock -> Output (MAT)',
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_materiel').id,
+         'location_src_id': ref('stock.stock_location_stock').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
          'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_ali',
-         'sequence': 15,
+         'type': ['categ', 'prod'],
          'name': 'WH: Stock -> Output (ALI)',
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_ali').id,
+         'location_src_id': ref('stock.stock_location_stock').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
          'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_medoc',
-         'sequence': 12,
+         'type': ['categ', 'prod'],
          'name': 'WH: Stock -> Output (MED)',
          'action': 'move',
          'location_id': location_out.id,
@@ -584,12 +779,12 @@ def create_procurement_rules(ctx):
          'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_froid',
-         'sequence': 10,
+         'type': ['prod'],
          'name': 'WH: Stock -> Output (FRIGO)',
          'action': 'move',
          'location_id': location_out.id,
          'warehouse_id': warehouse.id,
-         'location_src_id': ref('__setup__.stock_location_froid').id,
+         'location_src_id': ref('stock.stock_location_stock').id,
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
          'group_propagation_option': 'propagate',
@@ -597,7 +792,12 @@ def create_procurement_rules(ctx):
     ]
     for record in types:
         xmlid = record.pop('xmlid')
-        create_or_update(ctx, 'procurement.rule', xmlid, record)
+        types = record.pop('type')
+        sequences = {'categ': 15, 'prod': 10}
+        for t in types:
+            record['sequence'] = sequences[t]
+            create_or_update(ctx, 'procurement.rule',
+                             '%s_%s' % (xmlid, t), record)
 
 
 @anthem.log
@@ -605,24 +805,66 @@ def create_routes(ctx):
     """ Creating routes """
     ref = ctx.env.ref
     types = [
+        {'xmlid': '__setup__.stock_location_route_pick_materiel_categ',
+         'name': 'Zone Matériel (Categ)',
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_materiel_categ').ids)],
+         'product_categ_selectable': True,
+         'product_selectable': False,
+         },
         {'xmlid': '__setup__.stock_location_route_pick_materiel',
          'name': 'Zone Matériel',
-         'pull_ids': [(6, 0, ref('__setup__.procurement_rule_materiel').ids)],
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_materiel_prod').ids)],
+         'product_categ_selectable': False,
+         'product_selectable': True,
+         },
+
+        {'xmlid': '__setup__.stock_location_route_pick_ali_categ',
+         'name': 'Zone Aliments (Categ)',
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_ali_categ').ids)],
+         'product_categ_selectable': True,
          'product_selectable': False,
          },
         {'xmlid': '__setup__.stock_location_route_pick_ali',
          'name': 'Zone Aliments',
-         'pull_ids': [(6, 0, ref('__setup__.procurement_rule_ali').ids)],
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_ali_prod').ids)],
+         'product_categ_selectable': False,
+         'product_selectable': True,
+         },
+
+        {'xmlid': '__setup__.stock_location_route_pick_medoc_categ',
+         'name': 'Zone Médicaments (Categ)',
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_medoc_categ').ids)],
+         'product_categ_selectable': True,
          'product_selectable': False,
          },
         {'xmlid': '__setup__.stock_location_route_pick_medoc',
          'name': 'Zone Médicaments',
-         'pull_ids': [(6, 0, ref('__setup__.procurement_rule_medoc').ids)],
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_medoc_prod').ids)],
+         'product_categ_selectable': False,
          'product_selectable': True,
          },
+
         {'xmlid': '__setup__.stock_location_route_pick_froid',
          'name': 'Zone FROID / FRIGO',
-         'pull_ids': [(6, 0, ref('__setup__.procurement_rule_froid').ids)],
+         'pull_ids': [
+             (6, 0, ref('__setup__.procurement_rule_froid_prod').ids)],
+         'product_selectable': True,
+         },
+
+        {'xmlid': '__setup__.stock_location_route_new',
+         'name': 'Nouveauté',
+         'product_categ_selectable': False,
+         'product_selectable': True,
+         },
+        {'xmlid': '__setup__.stock_location_route_onorder',
+         'name': 'Acheté-Vendu',
+         'product_categ_selectable': False,
          'product_selectable': True,
          },
     ]
@@ -630,9 +872,11 @@ def create_routes(ctx):
         xmlid = record.pop('xmlid')
         record.update({
          'sequence': 20,
-         'product_categ_selectable': True,
         })
         create_or_update(ctx, 'stock.location.route', xmlid, record)
+    create_or_update(ctx, 'stock.location.route',
+                     'stock.route_warehouse0_mto',
+                     {'product_selectable': False})
 
 
 @anthem.log
@@ -640,11 +884,11 @@ def assign_route_categories(ctx):
     """ Assigning routes to product categories """
     ref = ctx.env.ref
     categs = [('specific_data.product_categ_materiel',
-               '__setup__.stock_location_route_pick_materiel'),
+               '__setup__.stock_location_route_pick_materiel_categ'),
               ('specific_data.product_categ_ali',
-               '__setup__.stock_location_route_pick_ali'),
+               '__setup__.stock_location_route_pick_ali_categ'),
               ('specific_data.product_categ_medoc',
-               '__setup__.stock_location_route_pick_medoc'),
+               '__setup__.stock_location_route_pick_medoc_categ'),
               ]
     for category_xmlid, route_xmlid in categs:
         ref(category_xmlid).route_ids = [(6, 0, ref(route_xmlid).ids)]
