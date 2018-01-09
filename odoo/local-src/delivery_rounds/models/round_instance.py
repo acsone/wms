@@ -297,7 +297,7 @@ class RoundInstance(models.Model):
               OR customer_tag IS NULL
               OR instance_tag IS NULL)
           AND (customer.id = %s
-            OR EXISTS (SELECT 1 
+            OR EXISTS (SELECT 1
                         FROM res_partner
                         WHERE res_partner.id = %s
                         AND res_partner.parent_id = customer.id))
