@@ -198,7 +198,7 @@ class DB2MapperPurchaseOrder(object):
             'create_date': create_date,
             'write_date': convert_date('ecfm', row) or create_date,
             'partner_id': supplier.id,
-            'supplier_promotion_allowed ': promo_purchase,
+            'supplier_promotion_allowed': promo_purchase,
         }
 
         # transform float and string to int to remove . and spaces
