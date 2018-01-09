@@ -187,3 +187,4 @@ migration:
           - specific_zetes
           - specific_stock
           - specific_report
+          - specific_print
