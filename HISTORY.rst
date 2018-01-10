@@ -11,41 +11,47 @@ Unreleased
 * Update imported data on 2018-01-06
 * ALCN-957 Import suite name on partners
 * ALCN-986: Import standard price from AS400
-* ALCN-1004: Import passport requirement on customers from AS400
+* ALCN-1003: Adapt mapping of tracking to use serial type
 * ALCN-1005: Fix active and default_code values on product.template copied from product.product
+* ALCN-1040: Import passport requirement on customers from AS400
 * ALCN-1042: Fix key in dict of values that made the import of purchases fail
 
-* ALCN-1003: Adapt mapping of tracking to use serial type
-
 **Features and Improvements**
-* Removed obsolete modules
 
-* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
+* Removed obsolete modules
+* ALCN-560: Default account per supplier on vendor bills
 * ALCN-957 Add field suite name on partners
-* ALCN-1031: Add narcotic filter on sale report
-* ALCN-1019: Fix mapping for country in Pharmacy export
-* ALCN-1006: Import vet_subscription_number from AS400
+* ALCN-966: Merge same shipping (same partner) in the delivery report
+* ALCN-974: Promotions (free extra product) and free accessories (free other product)
+* ALCN-982: Add a picking zone on picking type, product and location
+* ALCN-997: Rewrite entirely sale order line discounts
 * ALCN-1006: Add field vet_subscription_number
+* ALCN-1006: Import vet_subscription_number from AS400
 * ALCN-1006: rename field depot_number to vet_depot_number
 * ALCN-1006: rename field depot_number_visible to is_veterinary
+* ALCN-1010: Don't display canceled picking when the view daily delivery rounds
+* ALCN-1011: When the delivery address is used on a picking, search the itinerary with the company
+* ALCN-1012: Add filters on round instances and round templates
+* ALCN-1014: The user must first start the picking to validate after
+* ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
+* ALCN-1018: Display quants moved in the stock.move form view
+* ALCN-1019: Fix mapping for country in Pharmacy export
+* ALCN-1024: Fix wrong translation
+* ALCN-1025: Add route for onorder to fridge, add routes for products, add routes per zone for nouveautés and achetés-vendus
+* ALCN-1031: Add narcotic filter on sale report
 * ALCN-1034: On product search, filter partner proposition with only suppliers
+* ALCN-1035: Allow to import supplier info with CNK code to link product
 * ALCN-1035: Improvements of supplier info list view
 * ALCN-1035: Open supplier promotion in form with a button from editable list view
 * ALCN-1035: Use purchase base price on supplier info onchange instead of list price
-* ALCN-1035: Allow to import supplier info with CNK code to link product
-* ALCN-966: Merge same shipping (same partner) in the delivery report
-* ALCN-1024: Fix wrong translation
-* ALCN-1018: Display quants moved in the stock.move form view
-* ALCN-1014: The user must first start the picking to validate after
-* ALCN-1012: Add filters on round instances and round templates
-* ALCN-1011: When the delivery address is used on a picking, search the itinerary with the company
-* ALCN-1010: Don't display canceled picking when the view daily delivery rounds
-* ALCN-560: Default account per supplier on vendor bills
-* ALCN-1025: Add route for onorder to fridge, add routes for products, add routes per zone for nouveautés and achetés-vendus
+* Delivery rounds: when trying to set delivery round, only assign moves that are not yet assigned.
+* Delivery rounds: when assigning moves, do not set again the delivery round if it is already part of it.
+* Picking grouping: when cleaning operations, we really need to delete them before unreserving the moves.
+* Picking grouping: at cancelation, before recomputing pack operation, we need to check if there are no other moves that could be reserved.
 
 **Bugfixes**
-* Stock: launch BO wizard for any reception + allow to generate BO even if no line processed
 
+* Stock: launch BO wizard for any reception + allow to generate BO even if no line processed
 * ALCN-1033: Fix a bug when the shelf number is greater than 9
 
 **Build**
@@ -63,6 +69,12 @@ Unreleased
 
 **Documentation**
 
+* README of stock modules updated
+
+**Build**
+
+* Disable lang install on CI to reduce travis build time
+* Remove unused PO files to reduce docker image size
 
 10.13.0 (2017-11-30)
 ++++++++++++++++++++
@@ -78,14 +90,6 @@ Unreleased
 * ALCN-1002: Move the field food_type to specific_zetes and rename it with is_portable_printer
 * Stock: Enable internal transfer
 * Allow to define a carrier having no round template and still group pickings
-* ALCN-997: Rewrite entirely sale order line discounts
-* ALCN-982: Add a picking zone on picking type, product and location
-* ALCN-974: Promotions (free extra product) and free accessories (free other product)
-* Delivery rounds: when trying to set delivery round, only assign moves that are not yet assigned.
-* Delivery rounds: when assigning moves, do not set again the delivery round if it is already part of it.
-* Picking grouping: when cleaning operations, we really need to delete them before unreserving the moves.
-* Picking grouping: at cancelation, before recomputing pack operation, we need to check if there are no other moves that could be reserved.
-
 
 **Bugfixes**
 
@@ -106,12 +110,6 @@ Unreleased
 
 * Complete readme on modules
 * Udpdate README for module specific_print and specific_purchase
-* README of stock modules updated
-
-**Build**
-
-* Disable lang install on CI to reduce travis build time
-* Remove unused PO files to reduce docker image size
 
 
 10.12.1 (2017-11-17)
