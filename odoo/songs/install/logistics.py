@@ -369,7 +369,6 @@ def create_putaway(ctx):
         'putaway_strategy_id': ref('__setup__.stock_putaway_input').id
     })
 
-
     # PUTAWAY ACHETES-VENDUS
     # ----------------------
     create_or_update(
