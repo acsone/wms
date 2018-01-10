@@ -178,6 +178,9 @@ migration:
     - version: 10.12.1
     - version: 10.13.0
     - version: 10.14.0
+      operations:
+        pre:
+          - anthem songs.install.logistics::main
       addons:
         upgrade:
           # oca/account-invoicing
