@@ -183,8 +183,9 @@ migration:
           # oca/account-invoicing
           - account_invoice_line_default_account
           ### local-src
-          - specific_sale
-          - specific_report
           - delivery_rounds
+          - product_additional
           - specific_purchase
+          - specific_report
+          - specific_sale
           - specific_stock

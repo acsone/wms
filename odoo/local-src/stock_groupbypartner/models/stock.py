@@ -78,8 +78,10 @@ class StockMove(models.Model):
                     if operations_to_recompute:
                         _logger.debug("Cleaning operations %s",
                                       operations_to_recompute.ids)
-                        operations_to_recompute.mapped(
-                            'linked_move_operation_ids.move_id').do_unreserve()
+                        op_linked_moves = operations_to_recompute.mapped(
+                            'linked_move_operation_ids.move_id')
+                        operations_to_recompute.unlink()
+                        op_linked_moves.do_unreserve()
                     break
             else:
                 # create a new picking
@@ -99,13 +101,26 @@ class StockMove(models.Model):
     def action_cancel(self):
         """ Prevent to cancel a move from a printed picking and recompute pack
         operations """
+        _logger.debug("Canceling moves %s", self.ids)
         res = super(StockMove, self).action_cancel()
         if self.filtered("picking_id.printed"):
             raise UserError(_(
                 "You cannot cancel a move that is part of a started picking"))
-        # recompute pack op
-        self.mapped('picking_id').filtered(
-            lambda picking: picking.state != 'cancel').do_prepare_partial()
-        # Recompute the weight for each picking
-        self.mapped('picking_id')._cal_weight()
+        if not self.env.context.get('no_recompute_pack'):
+            pickings = self.mapped('picking_id').filtered(
+                lambda picking: picking.state != 'cancel')
+            products = self.mapped('product_id')
+            moves = pickings.mapped('move_lines').filtered(
+                lambda move: move.state == 'confirmed' and
+                move.product_id in products)
+            if moves:
+                # action_assign requires to clean existing pack operation
+                moves.mapped('linked_move_operation_ids.operation_id').unlink()
+                _logger.debug("Re-check availability for moves %s", moves.ids)
+                moves.action_assign(no_prepare=True)
+            # recompute pack op
+            _logger.debug("Recompute pack operations")
+            pickings.do_prepare_partial()
+            # Recompute the weight for each picking
+            self.mapped('picking_id')._cal_weight()
         return res

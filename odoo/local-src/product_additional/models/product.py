@@ -1,45 +1,29 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    additional_product_id = fields.Many2one('product.template',
-                                            string='Additional product',
-                                            compute='_compute_product_add',
-                                            store=True,
-                                            readonly=True)
+    additional_product_id = fields.Many2one(
+        'product.product',
+        string='Additional Product',
+        ondelete='restrict')
+    ratio_main_product = fields.Integer('Ratio Main Product')
+    ratio_additional_product = fields.Integer('Ratio Additional Product')
 
-    @api.depends('bom_ids', 'bom_ids.product_tmpl_id')
-    def _compute_product_add(self):
-        for product in self:
-            kits = product.bom_ids\
-                .filtered(lambda bom: bom.bom_with_additional_product)
+    @api.multi
+    def get_qty_additional_product(self, ordered_qty):
+        self.ensure_one()
 
-            if not kits:
-                product.additional_product_id = None
-                continue
+        if not self.additional_product_id \
+                or not self.ratio_main_product \
+                or not self.ratio_additional_product:
+            return 0
 
-            # There is check on BOM who validate that the structure of all
-            # BOM for a product is the same. It means that we can take
-            # the first BOM.
-            bom_additional_product = kits[0].bom_line_ids\
-                .filtered(lambda line: line.is_additional_product)
-            if not bom_additional_product:
-                raise UserError(_('There is not additional product for '
-                                  'this BOM. Please contact your manager. '
-                                  '(BOM %s (%s)') % (product.name,
-                                                     product.id))
-            elif len(bom_additional_product) > 1:
-                raise UserError(_('There are more than one additional product'
-                                  ' on this BOM. Please contact your manager.'
-                                  ' (BOM %s (%s)') % (product.name,
-                                                      product.id))
+        coefficient = self.ratio_main_product / ordered_qty
+        qty_additional_product = coefficient * self.ratio_additional_product
 
-            additional_product = bom_additional_product.product_id
-            additional_product_tmpl = additional_product.product_tmpl_id
-            product.additional_product_id = additional_product_tmpl.id
+        return qty_additional_product

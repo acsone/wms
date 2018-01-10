@@ -74,6 +74,14 @@ Unreleased
 * ALCN-1002: Move the field food_type to specific_zetes and rename it with is_portable_printer
 * Stock: Enable internal transfer
 * Allow to define a carrier having no round template and still group pickings
+* ALCN-997: Rewrite entirely sale order line discounts
+* ALCN-982: Add a picking zone on picking type, product and location
+* ALCN-974: Promotions (free extra product) and free accessories (free other product)
+* Delivery rounds: when trying to set delivery round, only assign moves that are not yet assigned.
+* Delivery rounds: when assigning moves, do not set again the delivery round if it is already part of it.
+* Picking grouping: when cleaning operations, we really need to delete them before unreserving the moves.
+* Picking grouping: at cancelation, before recomputing pack operation, we need to check if there are no other moves that could be reserved.
+
 
 **Bugfixes**
 
