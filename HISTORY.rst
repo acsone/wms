@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1005: Fix active and default_code values on product.template copied from product.product
 * ALCN-1042: Fix key in dict of values that made the import of purchases fail
 
+* ALCN-1003: Adapt mapping of tracking to use serial type
 
 **Features and Improvements**
 * Removed obsolete modules
