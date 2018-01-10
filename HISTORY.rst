@@ -15,6 +15,7 @@ Unreleased
 
 
 **Features and Improvements**
+* Removed obsolete modules
 
 * ALCN-1017: re-reserve stock when goods are put in stock (not only at reception)
 * ALCN-957 Add field suite name on partners
@@ -93,6 +94,7 @@ Unreleased
 
 * Complete readme on modules
 * Udpdate README for module specific_print and specific_purchase
+* README of stock modules updated
 
 **Build**
 
