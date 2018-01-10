@@ -6,8 +6,19 @@
 Stock Reception Priority
 ========================
 
-Compute the sequence field used to sort the incoming shipments based on
+Compute the priority (rank) used to sort the incoming shipments based on
 backorders and out of stock.
+The rank is a weight computed as "self.qty_backorder * 1000 + self.qty_outofstock"
+
+Where:
+- qty_backorder = Quantity of deliveries waiting for availability. We take all
+  deliveries waiting any of the products listed in the pack operations of the
+  incoming shipment and we count each distinct delivery address
+- qty_outofstock = Quantity of operations having a product where the current
+  stock is <= 0
+
+The rank is computed when the GRN is associated to the incoming shipment. A
+cron job recomputes the rank regularly.
 
 
 Installation

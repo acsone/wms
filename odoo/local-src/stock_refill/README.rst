@@ -6,9 +6,16 @@
 Stock Refill
 ============
 
-If you manage stock reserve where you store products in case the bin is full,
-this module add a report showing bins that needs to be refilled. The importance
-is computed based on out of stock risk.
+Compute the priority to:
+- arrange a product (move from reception parking to bin)
+- reassort a product (move from reserve to bin)
+
+We consider the fact of being out of stock as urgent, the risk of being out of
+stock in the coming days as medium.
+
+The risk is computed based on an amount of days to cover with current stock and
+a mean consumption on the last 6 months.
+
 
 Installation
 ============
