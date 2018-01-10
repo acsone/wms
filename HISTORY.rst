@@ -11,6 +11,7 @@ Unreleased
 * ALCN-957 Import suite name on partners
 * ALCN-986: Import standard price from AS400
 * ALCN-1005: Fix active and default_code values on product.template copied from product.product
+* ALCN-1042: Fix key in dict of values that made the import of purchases fail
 
 
 **Features and Improvements**
