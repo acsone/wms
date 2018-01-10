@@ -22,6 +22,7 @@
         'stock_production_lot_expired_dates',
         'stock_receive_lot',
         'stock_reception_priority',
+        'stock_picking_assignment',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -36,6 +37,7 @@
         'views/stock_quant_package.xml',
         'views/stock_picking_type.xml',
         'views/picking_zone.xml',
+        'views/stock_move.xml',
 
         # Wizards
         'wizards/stock_receive_lot.xml',

@@ -13,7 +13,7 @@ class PurchaseOrder(models.Model):
     total_weight = fields.Float('Total weight',
                                 compute='_compute_total_weight',
                                 readonly=True,
-                                help='Total weigh in Kg')
+                                help='Total weight in Kg')
     responsible_id = fields.Many2one('res.users',
                                      string='Responsible',
                                      track_visibility='onchange')

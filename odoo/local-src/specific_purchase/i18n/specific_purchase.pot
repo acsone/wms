@@ -283,7 +283,7 @@ msgstr ""
 
 #. module: specific_purchase
 #: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
-msgid "Total weigh in Kg"
+msgid "Total weight in Kg"
 msgstr ""
 
 #. module: specific_purchase

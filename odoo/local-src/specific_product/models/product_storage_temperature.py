@@ -8,4 +8,4 @@ class StorageTemperatures(models.Model):
     _name = 'product.storage.temperature'
 
     name = fields.Char(required=True)
-    temperature = fields.Float('Temperature (°C)')
+    temperature = fields.Float(u'Temperature (°C)')

@@ -2,6 +2,7 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from ast import literal_eval
 import math
 from datetime import datetime
 
@@ -69,6 +70,18 @@ class RoundInstance(models.Model):
         'round.template', 'Template',
         states={'done': [('readonly', True)]},
         ondelete='restrict')
+    template_code = fields.Char(
+        'Code',
+        related='template_id.code',
+        store=True,
+        readonly=True
+    )
+    template_name = fields.Char(
+        'Name',
+        related='template_id.name',
+        store=True,
+        readonly=True
+    )
     color = fields.Integer(
         related='template_id.color')
     state = fields.Selection(
@@ -100,6 +113,37 @@ class RoundInstance(models.Model):
         'Display Name', readonly=True,
         compute='_get_complete_name', store=True)
     tag_ids = fields.Many2many('round.tag', string='Tags')
+    partner_ids = fields.Many2many(
+        'res.partner',
+        string='Partners',
+        readonly=True,
+        compute='_compute_partner_ids',
+        search='_search_partner_ids'
+    )
+
+    @api.multi
+    def _compute_partner_ids(self):
+        for instance in self:
+            partners = instance.mapped(
+                'itinerary_ids.partner_position_ids.partner_id'
+            )
+            instance.partner_ids = [(6, 0, partners.ids)]
+
+    def _search_partner_ids(self, operator, value):
+        """
+        Search for template containing the customer name
+        :param operator:
+        :param value:
+        :return:
+        """
+
+        positions = self.env['round.itinerary.position'].search(
+            [('partner_id.name', operator, value)])
+        itineraries = self.env['round.itinerary'].search(
+            [('partner_position_ids', 'in', positions.ids)]
+        )
+
+        return [('itinerary_ids', 'in', itineraries.ids)]
 
     @api.multi
     @api.depends('template_id', 'date', 'time_leave_planned')
@@ -242,6 +286,8 @@ class RoundInstance(models.Model):
             ON rel.round_instance_id = instance.id
           INNER JOIN round_itinerary_position AS position
             ON position.itinerary_id = rel.round_itinerary_id
+          INNER JOIN res_partner AS customer
+            ON position.partner_id = customer.id
           LEFT JOIN round_instance_round_tag_rel AS instance_tag
             ON instance.id = instance_tag.round_instance_id
           LEFT JOIN round_itinerary_position_round_tag_rel AS customer_tag
@@ -250,12 +296,16 @@ class RoundInstance(models.Model):
           AND (instance_tag.round_tag_id = customer_tag.round_tag_id
               OR customer_tag IS NULL
               OR instance_tag IS NULL)
-          AND position.partner_id = %s
+          AND (customer.id = %s
+            OR EXISTS (SELECT 1
+                        FROM res_partner
+                        WHERE res_partner.id = %s
+                        AND res_partner.parent_id = customer.id))
         ORDER BY instance.date DESC, instance.time_picking_planned ASC
         LIMIT 1;
         """
 
-        self.env.cr.execute(best_instance_query, (partner.id, ))
+        self.env.cr.execute(best_instance_query, (partner.id, partner.id))
         result = self.env.cr.fetchone()
 
         if result:
@@ -298,8 +348,17 @@ class RoundInstance(models.Model):
 
     @api.multi
     def action_picking_tree_available(self):
-        return dict(self.env.ref(
-            'delivery_rounds.action_picking_tree_available_round').read()[0])
+        action = self.env['ir.actions.act_window'].for_xml_id(
+            'delivery_rounds', 'action_picking_tree_available_round'
+        )
+
+        domain_str = action.get('domain', "[]")
+        domain = literal_eval(domain_str)
+
+        domain += [('state', '!=', 'cancel')]
+        action['domain'] = domain
+
+        return action
 
     @api.one
     def button_confirm(self):
@@ -337,7 +396,9 @@ class RoundInstance(models.Model):
 
     @api.multi
     def print_all_deliveryslip(self):
-        return self.env['report'].get_action(self.shipping_ids,
+        shipping_done = self.shipping_ids.filtered(
+            lambda shipping: shipping.state == 'done')
+        return self.env['report'].get_action(shipping_done,
                                              'stock.report_deliveryslip')
 
     @api.multi
@@ -410,6 +471,26 @@ class RoundInstance(models.Model):
         string='Customers',
         states={'done': [('readonly', True)]},
     )
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        domain = []
+        if name:
+            vals = name.split('-', 1)
+            if len(vals) > 1:
+                code = vals[0].strip()
+                text = vals[1].strip()
+                comb = operator.startswith('not ') and '|' or '&'
+            else:
+                code = text = name.strip()
+                comb = operator.startswith('not ') and '&' or '|'
+            domain = [
+                comb,
+                ('template_code', operator, code),
+                ('template_name', operator, text)]
+        records = self.search(domain + args, limit=limit)
+        return records.name_get()
 
 
 class RoundInstanceCustomer(models.Model):

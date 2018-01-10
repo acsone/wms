@@ -29,9 +29,17 @@ Unreleased
 * ALCN-1035: Open supplier promotion in form with a button from editable list view
 * ALCN-1035: Use purchase base price on supplier info onchange instead of list price
 * ALCN-1035: Allow to import supplier info with CNK code to link product
+* ALCN-966: Merge same shipping (same partner) in the delivery report
+* ALCN-1024: Fix wrong translation
+* ALCN-1018: Display quants moved in the stock.move form view
+* ALCN-1014: The user must first start the picking to validate after
+* ALCN-1012: Add filters on round instances and round templates
+* ALCN-1011: When the delivery address is used on a picking, search the itinerary with the company
+* ALCN-1010: Don't display canceled picking when the view daily delivery rounds
 
 **Bugfixes**
 
+* ALCN-1033: Fix a bug when the shelf number is greater than 9
 
 **Build**
 

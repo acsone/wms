@@ -9,6 +9,8 @@
                 <field name="code" />
                 <field name="name" />
                 <field name="version_ids" />
+                <separator/>
+                <field name="partner_ids" string="Customer"/>
             </search>
         </field>
     </record>

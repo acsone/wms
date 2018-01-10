@@ -183,3 +183,7 @@ migration:
         upgrade:
           ### local-src
           - specific_sale
+          - specific_report
+          - delivery_rounds
+          - specific_purchase
+          - specific_stock
