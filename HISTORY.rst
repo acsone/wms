@@ -39,6 +39,7 @@ Unreleased
 * ALCN-1011: When the delivery address is used on a picking, search the itinerary with the company
 * ALCN-1010: Don't display canceled picking when the view daily delivery rounds
 * ALCN-560: Default account per supplier on vendor bills
+* ALCN-1025: Add route for onorder to fridge, add routes for products, add routes per zone for nouveautés and achetés-vendus
 
 **Bugfixes**
 * Stock: launch BO wizard for any reception + allow to generate BO even if no line processed
