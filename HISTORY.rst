@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* Update imported data on 2018-01-06
 * ALCN-957 Import suite name on partners
 * ALCN-986: Import standard price from AS400
 * ALCN-1004: Import passport requirement on customers from AS400
