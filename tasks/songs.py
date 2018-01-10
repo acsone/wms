@@ -13,7 +13,10 @@ from StringIO import StringIO
 import urllib2
 import zipfile
 from urlparse import urlparse
-from requests import Request, Session
+try:
+    from requests import Request, Session
+except ImportError:
+    print('Please install requests')
 import json
 
 from invoke import task

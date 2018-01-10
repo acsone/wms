@@ -24,6 +24,7 @@ https://github.com/camptocamp/odoo-template instead.
 
 * [How to add a new addons repository](./how-to-add-repo.md)
 * [How to add a Python or Debian dependency](./how-to-add-dependency.md)
+* [How to add a language in Odoo](./how-to-add-odoo-language.md)
 * [How to integrate an open pull request of an external repository](./how-to-integrate-pull-request.md)
 * [How to connect to psql in Docker](./how-to-connect-to-docker-psql.md)
 * [How to change Odoo configuration values](./how-to-set-odoo-configuration-values.md)

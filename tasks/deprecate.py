@@ -9,7 +9,10 @@ from __future__ import print_function
 
 import os
 
-from ruamel.yaml import YAML
+try:
+    from ruamel.yaml import YAML
+except ImportError:
+    print('Please install ruamel.yaml')
 
 from invoke import task
 from .common import (
