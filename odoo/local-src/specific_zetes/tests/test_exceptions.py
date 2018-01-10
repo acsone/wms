@@ -19,16 +19,6 @@ class TestExceptions(ZetesTest):
         self.disable_picking_validation = True
         super(TestExceptions, self).setUp()
 
-        # Product 2
-        # Location: GD80B1
-        self.product_2 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
-            'default_code': '587502',
-            'categ_id': self.product_categ_medoc.id,
-            'tracking': 'lot',
-            'list_price': 40,
-        })
-
         self.location_product_2 = self.env['stock.location'].create({
             'name': 'GD80B2',
             'kind': 'bin',
@@ -42,6 +32,22 @@ class TestExceptions(ZetesTest):
             'bin_checksum_2': '45',
         })
         self.env['stock.location']._parent_store_compute()
+
+        # Product 2
+        # Location: GD80B1
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Test medoc 2',
+            'default_code': '587502',
+            'categ_id': self.product_categ_medoc.id,
+            'tracking': 'lot',
+            'list_price': 40,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
+        })
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({

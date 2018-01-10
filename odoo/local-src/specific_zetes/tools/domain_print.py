@@ -47,8 +47,7 @@ class Print(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID {}'
-                             .format(picking_id))
+                'respMsg': _('No picking found with the ID %s') % picking_id
             })
             return result.format()
         picking_id = int(picking_id)

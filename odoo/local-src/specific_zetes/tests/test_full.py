@@ -23,17 +23,6 @@ class TestFull(ZetesTest):
         self.disable_picking_validation = True
         super(TestFull, self).setUp()
 
-        # Product 2
-        # Location: GD80B1
-        # Specificity: Out of stock (10 requested - 6 in stock)
-        self.product_2 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
-            'default_code': '587502',
-            'categ_id': self.product_categ_medoc.id,
-            'tracking': 'lot',
-            'list_price': 40,
-        })
-
         self.location_product_2 = self.env['stock.location'].create({
             'name': 'GD80B2',
             'kind': 'bin',
@@ -47,6 +36,23 @@ class TestFull(ZetesTest):
             'bin_checksum_2': '45',
         })
         self.env['stock.location']._parent_store_compute()
+
+        # Product 2
+        # Location: GD80B1
+        # Specificity: Out of stock (10 requested - 6 in stock)
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Test medoc 2',
+            'default_code': '587502',
+            'categ_id': self.product_categ_medoc.id,
+            'tracking': 'lot',
+            'list_price': 40,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
+        })
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -75,18 +81,6 @@ class TestFull(ZetesTest):
             })]
         })
 
-        # Product 3
-        # Location: GD80E8
-        # Specificity: Split in two lot (20 in lot 000000001
-        # and 30 in lot 000000002)
-        self.product_3 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
-            'default_code': '025784',
-            'categ_id': self.product_categ_medoc.id,
-            'tracking': 'lot',
-            'list_price': 150,
-        })
-
         self.location_product_3 = self.env['stock.location'].create({
             'name': 'GD80E8',
             'kind': 'bin',
@@ -100,6 +94,24 @@ class TestFull(ZetesTest):
             'bin_checksum_2': '89',
         })
         self.env['stock.location']._parent_store_compute()
+
+        # Product 3
+        # Location: GD80E8
+        # Specificity: Split in two lot (20 in lot 000000001
+        # and 30 in lot 000000002)
+        self.product_3 = self.env['product.product'].create({
+            'name': 'Test medoc 2',
+            'default_code': '025784',
+            'categ_id': self.product_categ_medoc.id,
+            'tracking': 'lot',
+            'list_price': 150,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
+        })
 
         two_months = datetime.now() + relativedelta(months=2)
         self.lot_product_3_1 = self.env['stock.production.lot'].create({

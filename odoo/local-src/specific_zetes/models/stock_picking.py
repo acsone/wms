@@ -27,7 +27,6 @@ class StockPicking(models.Model):
         default=constants.AS_DEFAULT,
         required=True)
     is_zetes_error = fields.Boolean('Zetes error', default=False)
-    zetes_traceback = fields.Text('Zetes traceback')
     zetes_picking_type = fields.Selection([
         (constants.PICKING_ASSIGNMENT, 'Customer'),
         (constants.PARKING_ASSIGNMENT, 'Parking'),
@@ -238,6 +237,21 @@ class StockPackOperation(models.Model):
         :param reserve_id:
         :return:
         """
+        # If no quantity has been taken, we simply change the destination
+        # of the current pack operation and set the quantity on the pack
+        # operation and pack operation lots
+        if not self.qty_done:
+            self.write({
+                'qty_done': self.product_qty,
+                'location_dest_id': reserve_id
+            })
+
+            for pack_lot in self.pack_lot_ids:
+                pack_lot.write({
+                    'qty': pack_lot.qty_todo,
+                })
+            return
+
         quantity_remaining = self.product_qty - self.qty_done
 
         # Step 1

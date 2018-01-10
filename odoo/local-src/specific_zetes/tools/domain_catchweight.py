@@ -130,8 +130,10 @@ class Catchweight(DomainInterface):
 
             picking = pack_op.picking_id
             # The stock is full and the picker need to go to the reserve
-            if picking.zetes_picking_type == constants.PARKING_ASSIGNMENT \
-                    and pack_op.zetes_state == constants.MOVE_FULL:
+            if (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+                and pack_op.zetes_state == constants.MOVE_FULL) or \
+                (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+                 and not virtual_qty):
                 reserve_rel_obj = \
                     self.request.env['pack.operation.reserve.rel']
                 reserve_rel = reserve_rel_obj.sudo(self._user).search([

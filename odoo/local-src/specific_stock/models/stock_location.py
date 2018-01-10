@@ -15,7 +15,9 @@ class StockLocation(models.Model):
     height = fields.Char('Height')
     box = fields.Char('Box')
     is_valid_location = fields.Boolean('Valid location',
-                                       compute='_compute_is_valid_location')
+                                       compute='_compute_is_valid_location',
+                                       store=True,
+                                       readonly=True)
 
     _sql_constraints = [('unique_location_coordinates',
                          'UNIQUE(zone, corridor, shelf, height, box)',

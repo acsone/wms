@@ -79,8 +79,7 @@ class Itempick(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID {}'
-                             .format(picking_id))
+                'respMsg': _('No picking found with the ID %s') % picking_id
             })
             return result.format()
         picking_id = int(picking_id)
@@ -138,13 +137,13 @@ class Itempick(DomainInterface):
                                                constants.OP_CANCELED])
 
         if not lines:
-            error_message = _('There is no lines for the picking {}'
-                              .format(picking_id))
+            error_message = _('There is no lines for the picking %s') \
+                            % picking_id
 
-            self.request.env['stock.picking'].sudo(self._user)\
-                .browse(picking_id).write(
-                {'is_zetes_error': True,
-                 'zetes_traceback': error_message})
+            params.log(
+                picking_id=picking_id,
+                exception=error_message
+            )
 
             result = Parameters(self, action='resp')
             result.update({
@@ -208,7 +207,7 @@ class Itempick(DomainInterface):
                 result.append(line_values)
                 continue
 
-            # TODO Please remove me
+            # TODO Please remove me later (when dynamic locations will removed)
             shelf_source = location.shelf
             if len(str(shelf_source)) == 1:
                 shelf_source = '0%s' % shelf_source

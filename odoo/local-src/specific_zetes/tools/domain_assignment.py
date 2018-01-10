@@ -200,6 +200,13 @@ class Assignment(DomainInterface):
                          FROM stock_pack_operation AS operation
                          WHERE operation.picking_id = picking.id
                          AND operation.zetes_state in %s)
+              AND NOT EXISTS (SELECT 1
+                              FROM stock_pack_operation AS pack_op
+                                INNER JOIN stock_location l
+                                  ON pack_op.location_id = l.id
+                              WHERE pack_op.picking_id = picking.id
+                                AND l.is_valid_location = FALSE
+                              )
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
@@ -255,10 +262,18 @@ class Assignment(DomainInterface):
           LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
         WHERE picking.zetes_state IN %s
           AND picking.zetes_picking_type = %s
+          AND picking.is_zetes_error = FALSE
           AND EXISTS(SELECT 1
                      FROM stock_pack_operation AS operation
                      WHERE operation.picking_id = picking.id
                      AND operation.zetes_state IN %s)
+          AND NOT EXISTS (SELECT 1
+                          FROM stock_pack_operation AS pack_op
+                            INNER JOIN stock_location
+                              ON pack_op.location_dest_id = stock_location.id
+                          WHERE pack_op.picking_id = picking.id
+                            AND (stock_location.zone IS NULL
+                                 OR stock_location.corridor IS NULL))
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
@@ -308,22 +323,39 @@ class Assignment(DomainInterface):
             ON stock_location.picking_zone_id = picking_zone.id
         %s
         ORDER BY report.refill_priority
-        LIMIT 1
         """ % zone_condition
         self.request.env.cr.execute(report_query, tuple(query_values))
-        query_result = self.request.env.cr.fetchone()
+        report_ids = [x[0] for x in self.request.env.cr.fetchall()]
 
-        if not query_result:
+        if not report_ids:
             return False
-        report_id = query_result[0]
 
-        model_name = 'report.stock.quant.bylocation'
-        report = \
-            self.request.env[model_name].sudo(self._user).browse(report_id)
-        # Create the picking
-        picking = report.sudo(self._user).create_parking_picking()
+        while report_ids:
+            report_id = report_ids.pop(0)
 
-        return picking
+            model_name = 'report.stock.quant.bylocation'
+            report = \
+                self.request.env[model_name].sudo(self._user).browse(report_id)
+            # Create the picking
+            picking = report.sudo(self._user).create_parking_picking()
+            is_valid_location = True
+            for pack_op in picking.pack_operation_product_ids:
+                if not pack_op.location_dest_id.zone \
+                        or not pack_op.location_dest_id.corridor:
+                    is_valid_location = False
+                    break
+
+            if is_valid_location:
+                return picking
+            else:
+                error_message = 'The picking %s contains one or more ' \
+                                'invalid location'
+                params.log(
+                    picking_id=picking.id,
+                    exception=error_message
+                )
+
+        return False
 
     def get_picking_reserve(self, params):
         """
@@ -344,10 +376,18 @@ class Assignment(DomainInterface):
             ON type.picking_zone_id = picking_zone.id
         WHERE picking.zetes_state IN %s
           AND picking.zetes_picking_type = %s
+          AND picking.is_zetes_error = FALSE
           AND EXISTS(SELECT 1
                      FROM stock_pack_operation AS operation
                      WHERE operation.picking_id = picking.id
                      AND operation.zetes_state IN %s)
+          AND NOT EXISTS (SELECT 1
+                              FROM stock_pack_operation AS pack_op
+                                INNER JOIN stock_location l
+                                  ON pack_op.location_dest_id = l.id
+                              WHERE pack_op.picking_id = picking.id
+                                AND l.is_valid_location = FALSE
+                              )
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
@@ -396,21 +436,37 @@ class Assignment(DomainInterface):
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         %s
-        ORDER BY refill_priority
-        LIMIT 1
+        ORDER BY refill_priority;
         """ % zone_condition
         self.request.env.cr.execute(report_query, tuple(query_values))
-        query_result = self.request.env.cr.fetchone()
+        report_ids = [x[0] for x in self.request.env.cr.fetchall()]
 
-        if not query_result:
+        if not report_ids:
             return False
-        report_id = query_result[0]
 
-        model_name = 'report.stock.quant.bylocation.reserve'
-        report = \
-            self.request.env[model_name].sudo(self._user).browse(report_id)
+        while report_ids:
+            report_id = report_ids.pop(0)
 
-        # Create the picking
-        picking = report.sudo(self._user).create_reserve_picking()
+            model_name = 'report.stock.quant.bylocation.reserve'
+            report = \
+                self.request.env[model_name].sudo(self._user).browse(report_id)
 
-        return picking
+            # Create the picking
+            picking = report.sudo(self._user).create_reserve_picking()
+            is_valid_location = True
+            for pack_op in picking.pack_operation_product_ids:
+                if not pack_op.location_dest_id.is_valid_location:
+                    is_valid_location = False
+                    break
+
+            if is_valid_location:
+                return picking
+            else:
+                error_message = 'The picking %s contains one or more ' \
+                                'invalid location'
+                params.log(
+                    picking_id=picking.id,
+                    exception=error_message
+                )
+
+        return False

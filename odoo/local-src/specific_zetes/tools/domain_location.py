@@ -83,7 +83,7 @@ class Location(DomainInterface):
             'Usf07': product.virtual_available,  # Stock available
         })
 
-        # TODO Please remove me
+        # TODO Please remove me later (when dynamic locations will removed)
         shelf = params.Cri03 or ''
         special_shelf_regex = r'0([A-Z])'
         regex_result = re.match(special_shelf_regex, shelf)
@@ -111,6 +111,13 @@ class Location(DomainInterface):
 
         if pack_op.picking_id.zetes_picking_type == \
                 constants.PARKING_ASSIGNMENT:
+            if location.kind != 'reserve':
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('This location is not a reserve')
+                })
+                return result.format()
+
             self.request.env['pack.operation.reserve.rel'].sudo(self._user)\
                 .create({
                     'pack_operation_id': pack_op.id,
@@ -118,7 +125,7 @@ class Location(DomainInterface):
                     'lot_id': lot_id
                 })
 
-        # TODO Please remove me
+        # TODO Please remove me later (when dynamic locations will removed)
         shelf_source = location.shelf
         if len(str(shelf_source)) == 1:
             shelf_source = '0%s' % shelf_source

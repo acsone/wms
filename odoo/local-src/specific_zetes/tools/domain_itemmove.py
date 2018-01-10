@@ -10,6 +10,15 @@ _logger = logging.getLogger(__name__)
 
 
 class Itemmove(DomainInterface):
+    EXAMPLE_REQU = '200294543,2.2.3,3iV_101,REQU_ITEMMOVE,02,1,20171120,' \
+                   '102754,02430594358406,2,,,,1,123456789,,,,,,,,,,,,,,,,,,,'
+    EXAMPLE_RESP = '200294543,2.2.3,3iV_101,RESP_ITEMMOVE,02,1,20171120,' \
+                   '102839,02430594364298,0,,2,,,,1,0,1,2,,,,,,,,,,,,,,,' \
+                   '000100,000000,,,,1799881,ADERMA EXOMEGA HUILE DOUCHE ' \
+                   '500ml,,,,,,0,179,,,,,,,,,'
+    EXAMPLE_RESU = '200294543,2.2.3,3iV_101,RESU_ItemMove,02,1,20171120,' \
+                   '113111,02430594800116,6,,,,1,4,,000002,000020,01,' \
+                   ',,,,,,,,,0,,,,,,,,,,,,,,,,,,,'
     REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
             'itemMoveType', 'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05',
             'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Usf01', 'Usf02',
@@ -82,10 +91,10 @@ class Itemmove(DomainInterface):
             error_message = _('There is no lines for the picking %s') \
                             % picking_id
 
-            self.request.env['stock.picking'].sudo(self._user) \
-                .browse(picking_id).write(
-                {'is_zetes_error': True,
-                 'zetes_traceback': error_message})
+            params.log(
+                picking_id=picking_id,
+                exception=error_message
+            )
 
             result = Parameters(self, action='resp')
             result.update({
@@ -118,7 +127,7 @@ class Itemmove(DomainInterface):
                 else:
                     line_id = line.id
 
-            # TODO Please remove me
+            # TODO Please remove me later (when dynamic locations will removed)
             shelf_source = location.shelf
             if len(str(shelf_source)) == 1:
                 shelf_source = '0%s' % shelf_source
@@ -144,7 +153,7 @@ class Itemmove(DomainInterface):
                 'sourceLCCD': location.get_checksum(),
             })
 
-            # TODO Please remove me
+            # TODO Please remove me later (when dynamic locations will removed)
             shelf_dest = location_dest_id.shelf
             if len(str(shelf_dest)) == 1:
                 shelf_dest = '0%s' % shelf_dest
