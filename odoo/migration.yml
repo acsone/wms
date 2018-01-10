@@ -181,6 +181,8 @@ migration:
     - version: 10.14.0
       addons:
         upgrade:
+          # oca/account-invoicing
+          - account_invoice_line_default_account
           ### local-src
           - specific_sale
           - specific_report
