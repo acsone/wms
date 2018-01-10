@@ -58,21 +58,9 @@
 ./external-src/sale-workflow:
   remotes:
     oca: git@github.com:OCA/sale-workflow.git
-    grindtildeath: git@github.com:grindtildeath/sale-workflow.git
     camptocamp: git@github.com:camptocamp/sale-workflow.git
   merges:
     - oca 10.0
       # [10.0][add] Module product price category
     - oca refs/pull/517/head
-      # [FIX] Module product price category
-    - grindtildeath refs/pull/1/head
-  target: *default_target
-./external-src/stock-logistics-workflow:
-  remotes:
-    oca: git@github.com:OCA/stock-logistics-workflow.git
-    camptocamp: git@github.com:camptocamp/stock-logistics-workflow.git
-  merges:
-    - oca 10.0
-    # [10.0] porting stock_picking_invoice_link
-    - oca refs/pull/347/head
   target: *default_target

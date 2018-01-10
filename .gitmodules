@@ -9,10 +9,10 @@
 	url = git@github.com:camptocamp/enterprise
 [submodule "odoo/external-src/stock-logistics-workflow"]
 	path = odoo/external-src/stock-logistics-workflow
-	url = git@github.com:camptocamp/stock-logistics-workflow.git
+	url = git@github.com:oca/stock-logistics-workflow.git
 [submodule "odoo/external-src/sale-workflow"]
 	path = odoo/external-src/sale-workflow
-	url = git@github.com:camptocamp/sale-workflow.git
+	url = git@github.com:oca/sale-workflow.git
 [submodule "odoo/external-src/account-financial-tools"]
 	path = odoo/external-src/account-financial-tools
 	url = git@github.com:OCA/account-financial-tools.git
