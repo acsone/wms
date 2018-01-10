@@ -39,6 +39,7 @@ Unreleased
 * ALCN-560: Default account per supplier on vendor bills
 
 **Bugfixes**
+* Stock: launch BO wizard for any reception + allow to generate BO even if no line processed
 
 * ALCN-1033: Fix a bug when the shelf number is greater than 9
 

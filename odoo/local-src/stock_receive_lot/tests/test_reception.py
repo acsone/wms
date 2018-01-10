@@ -66,6 +66,7 @@ class TestReception(TransactionCase):
                 }) for product in self.products
             ],
         })
+        picking = picking.with_context(test_mode=1)
         picking.action_assign()
 
         # launch wizard
