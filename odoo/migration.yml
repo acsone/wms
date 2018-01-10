@@ -94,6 +94,7 @@ migration:
           - account_credit_control
           # oca/account-invoicing
           - account_invoice_check_total
+          - account_invoice_line_default_account
           - account_invoice_triple_discount
           # oca/bank-payment
           - account_banking_sepa_credit_transfer
@@ -178,17 +179,3 @@ migration:
     - version: 10.12.1
     - version: 10.13.0
     - version: 10.14.0
-      operations:
-        pre:
-          - anthem songs.install.logistics::main
-      addons:
-        upgrade:
-          # oca/account-invoicing
-          - account_invoice_line_default_account
-          ### local-src
-          - delivery_rounds
-          - product_additional
-          - specific_purchase
-          - specific_report
-          - specific_sale
-          - specific_stock

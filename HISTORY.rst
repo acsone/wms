@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.14.0 (2018-01-10)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update imported data on 2018-01-06
