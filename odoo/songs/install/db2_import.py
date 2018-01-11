@@ -57,7 +57,7 @@ def add_years(d, years, months):
     except Exception:
         # (just in case of unexisting 29th February take 1rst March)
         return d.replace(
-            year=d.years + years,
+            year=d.year + years,
             month=d.month + months + 1,
             day=1)
 
