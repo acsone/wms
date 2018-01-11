@@ -52,7 +52,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
               - anthem songs.install.data_full::location_compute_parents
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv
+              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv product_tmpl_id/id
               - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
               - anthem songs.install.data_full::main
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
