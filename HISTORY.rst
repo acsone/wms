@@ -14,6 +14,12 @@ Unreleased
 
 **Documentation**
 
+10.14.1 (2018-01-10)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Fix parallel import of supplierinfo csv by grouping entries by product template
 
 10.14.0 (2018-01-10)
 ++++++++++++++++++++
