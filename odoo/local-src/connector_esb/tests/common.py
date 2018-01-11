@@ -118,11 +118,13 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
 
     def activate_lang(self):
         """ Create a fictive language to use in tests """
-        self.env['res.lang'].create({
-            'name': 'Klingon',
-            'code': 'tlh_TLH',
-            'iso_code': 'tlh',
-            'active': True,
-            'translatable': True,
-            'esb_ref': 'TLH',
-        })
+        Lang = self.env['res.lang']
+        if not Lang.search([('iso_code', '=', 'tlh')], limit=1):
+            self.env['res.lang'].create({
+                'name': 'Klingon',
+                'code': 'tlh_TLH',
+                'iso_code': 'tlh',
+                'active': True,
+                'translatable': True,
+                'esb_ref': 'TLH',
+            })

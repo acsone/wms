@@ -12,7 +12,7 @@
       <Gescsg>0</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls</Gesdem>
-      <!-- name in nl_BE -->
+      <!-- name in tlh_TLH -->
       <Refdem>Export me pls (TLH)</Refdem>
       <!-- supplier -->
       <Gesfou>79001</Gesfou>
@@ -94,7 +94,7 @@
       <Gescsg>0</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls 2</Gesdem>
-      <!-- name in nl_BE -->
+      <!-- name in tlh_TLH -->
       <Refdem>Export me pls 2 (TLH)</Refdem>
       <!-- supplier -->
       <Gesfou>65852</Gesfou>
@@ -176,7 +176,7 @@
       <Gescsg>0</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls 3</Gesdem>
-      <!-- name in nl_BE -->
+      <!-- name in tlh_TLH -->
       <Refdem>Export me pls 3 (TLH)</Refdem>
       <!-- supplier -->
       <Gesfou>79001</Gesfou>

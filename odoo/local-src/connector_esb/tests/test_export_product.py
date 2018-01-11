@@ -5,12 +5,21 @@
 from odoo import tools
 from .common import ESBXMLTestCase
 
+from odoo.addons.connector_esb.models.product.exporter import (
+    ProductExportMapper
+)
+
 
 class ExportProductTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(ExportProductTestCase, self).setUp()
         self.activate_lang()
+        ProductExportMapper.translatable_keys = {
+            'tlh_TLH': {
+                'name': 'Refdem',
+            }
+        }
         self.setup_records()
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
 
