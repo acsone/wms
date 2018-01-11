@@ -188,3 +188,4 @@ migration:
           - specific_stock
           - specific_report
           - specific_print
+          - stock_barcode_fix
