@@ -12,6 +12,9 @@ from ..common import req
 @anthem.log
 def change_admin_language(ctx):
     """ Changing admin language """
+    if os.environ.get('CI'):
+        ctx.log_line('CI=True => skip admin lang settings.')
+        return
     ctx.env.ref('base.user_root').lang = 'fr_BE'
 
 
