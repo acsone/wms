@@ -142,6 +142,7 @@ class TestCatchweight(ZetesTest):
             ('picking_id', '=', self.picking.id),
             ('operation_id', '=', pack_op.id)])
         self.assertEqual(len(log), 1)
+        self.assertEqual(log.error_type, 'human')
 
     @mute_logger('odoo.addons.specific_zetes.tools.domain_catchweight')
     def test_resu_catchweight_check_actual_stock(self):
@@ -184,3 +185,4 @@ class TestCatchweight(ZetesTest):
             ('picking_id', '=', self.picking.id),
             ('operation_id', '=', pack_op.id)])
         self.assertEqual(len(log), 1)
+        self.assertEqual(log.error_type, 'human')

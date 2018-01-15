@@ -349,7 +349,8 @@ class Assignment(DomainInterface):
                 return picking
             else:
                 error_message = 'The picking %s contains one or more ' \
-                                'invalid location'
+                                'invalid location' % picking.display_name
+                _logger.error(error_message)
                 params.log(
                     picking_id=picking.id,
                     exception=error_message
@@ -463,7 +464,8 @@ class Assignment(DomainInterface):
                 return picking
             else:
                 error_message = 'The picking %s contains one or more ' \
-                                'invalid location'
+                                'invalid location' % picking.display_name
+                _logger.error(error_message)
                 params.log(
                     picking_id=picking.id,
                     exception=error_message

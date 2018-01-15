@@ -214,7 +214,8 @@ class Catchweight(DomainInterface):
             _logger.error(error_message)
             params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_op.id,
-                       exception=error_message)
+                       exception=error_message,
+                       error_type='human')
 
     def check_picked_quantity(self, params, pack_op, picked_quantity):
         """
@@ -241,7 +242,8 @@ class Catchweight(DomainInterface):
             _logger.error(error_message)
             params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_op.id,
-                       exception=error_message)
+                       exception=error_message,
+                       error_type='human')
             return pack_op.product_qty - pack_op.qty_done
 
         return picked_quantity
