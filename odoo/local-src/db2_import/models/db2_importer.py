@@ -113,7 +113,8 @@ def do_partial_picking(pick, lines, lots):
                 if (line['dccnli'] == db2_lot['mltnli'] and
                         line['dccart'].strip() == db2_lot['mltart'].strip()):
                     odoo_lot = pick.env['stock.production.lot'].search(
-                        [('name', '=', db2_lot['mltlot'].strip())])
+                        [('name', '=', db2_lot['mltlot'].strip()),
+                         ('product_id', '=', ope.product_id.id)])
                     OpeLot = pick.env['stock.pack.operation.lot']
                     values = {
                         'operation_id': ope.id,

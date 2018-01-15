@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Fix creation of picking and match of lot by filtering by products
+
 **Bugfixes**
 
 **Build**
