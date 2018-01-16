@@ -71,6 +71,7 @@
                 <field name="current_product_qty_unavailable" string="Quantity unavailable at now"/>
                 <field name="qty_delivered"/>
                 <field name="product_qty_remains_to_deliver"/>
+                <button name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d" type="action" icon="fa-ban" attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
             </tree>
         </field>
     </record>

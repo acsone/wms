@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-898: Add the module sale_cancel_remaining
+
 **Bugfixes**
 
 **Build**
