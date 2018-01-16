@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1037 Set ESF ref on product states data
+
 **Bugfixes**
 
 **Build**
