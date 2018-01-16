@@ -75,6 +75,12 @@ class ProductMapper(EntityMapper):
             'storage_temperature_id/id', 'cp2z17',
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
         ),
+        FieldMapper(
+            'ratio_main_product', 'cp2z23',
+        ),
+        FieldMapper(
+            'ratio_additional_product', 'cp2z24',
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'pb2'
     ]
@@ -142,6 +148,48 @@ class ProductMapper(EntityMapper):
                 price2,
                 'pb2'
             )
+
+
+class AdditionalProductMapper(EntityMapper):
+    # Create a second file to set additional_product_id
+    # in order to have the product already existing
+    DB2_NAME = 'PGESTION'
+
+    XMLID_FIELD = 'id'
+    # don't use additional_product
+    XMLID_MODEL = 'product'
+
+    FIELDS_MAPPING = [
+        'id',
+        'additional_product_id',
+    ]
+
+    def get_sql_joins(self):
+        return (" left join sbdata.cplge2 on gesart=cp2art")
+
+    def get_sql_where(self):
+        where = "cp2z22 <> ''"
+        if not self.importer.full:
+            # TODO: csv only when mode will be developed
+            where += (" AND gesart IN ("
+                      "    SELECT dccart FROM sbdata.PDETCDCL"
+                      "        WHERE dccsui >= %s AND dccsui <= %s"
+                      ")"
+                      " AND cp2z22 IN ("
+                      "    SELECT dccart FROM sbdata.PDETCDCL"
+                      "        WHERE dccsui >= %s AND dccsui <= %s"
+                      ")" % (SO_MIN, SO_MAX, SO_MIN, SO_MAX))
+        return where
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Get product xmlid
+        """
+        odoo_entity['id'] = db2_entity['gesart']
+
+    def convert_additional_product_id(self, odoo_entity, db2_entity):
+        product = (db2_entity['cp2z22'] or '').strip()
+        xmlid = self.get_xml_id('product', product, '__import__')
+        odoo_entity['additional_product_id/id'] = xmlid
 
 
 class Supplierinfo(EntityMapper):
@@ -881,6 +929,7 @@ class ProductStockBinMapper(EntityMapper):
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  AdditionalProductMapper,
                   Supplierinfo,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
@@ -893,6 +942,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
 
 
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
+                       AdditionalProductMapper,
                        Supplierinfo,
                        CustomerMapper, SupplierMapper,
                        CustomerAddressMapper,

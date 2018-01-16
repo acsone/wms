@@ -87,6 +87,8 @@ def import_products(ctx):
     Product = ctx.env['product.product'].with_context(load_ctx)
     content = resource_stream(req, 'data/sample/product.csv')
     load_csv_stream(ctx, Product, content, delimiter=',')
+    content = resource_stream(req, 'data/sample/additional_product.csv')
+    load_csv_stream(ctx, Product, content, delimiter=',')
     content = resource_stream(req, 'data/sample/logistics_product.csv')
     load_csv_stream(ctx, Product, content, delimiter=';')
     # Computed fields on product.template are not set for archived product
