@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
 
 **Bugfixes**
 

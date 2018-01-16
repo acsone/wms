@@ -371,7 +371,7 @@ class RoundInstance(models.Model):
         """ Validate all deliveries that are available. Mark as done and unlink
         other deliveries """
         for shipping in self.shipping_ids:
-            if shipping.state in ('assigned', 'partially_available'):
+            if shipping.state == 'assigned':
                 for pack in shipping.pack_operation_ids:
                     if pack.product_qty > 0:
                         pack.qty_done = pack.product_qty
@@ -381,6 +381,11 @@ class RoundInstance(models.Model):
                     else:
                         pack.unlink()
                 shipping.do_transfer()
+            elif shipping.state == 'partially_available':
+                raise UserError(
+                    _('There are still partially available pickings'))
+            elif shipping.state == 'confirmed':
+                shipping.delivery_round_id = None
         self.button_done()
 
     @api.one
