@@ -294,6 +294,11 @@ class CustomerMapper(EntityMapper):
             default=None
         ),
         FieldMapper(
+            'is_price_on_labels',
+            'cpcl05',
+            mapping=mappings.STR_BOOL
+        ),
+        FieldMapper(
             'is_passport_required',
             'cpcl07',
             mapping=mappings.STR_BOOL

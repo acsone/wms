@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1041 Import customer option to print sale price on their labels
+
 **Features and Improvements**
 
 **Bugfixes**
