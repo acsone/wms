@@ -184,3 +184,7 @@ migration:
     - version: 10.14.1
     - version: 10.15.0
     - version: 10.15.1
+      addons:
+        upgrade:
+          ### local-src
+          - stock_receive_lot
