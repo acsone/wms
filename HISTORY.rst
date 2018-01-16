@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1038 Import product indicated price
+
 **Features and Improvements**
 
 **Bugfixes**
