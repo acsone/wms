@@ -12,6 +12,7 @@
     'depends': [
         'stock',
         'stock_expired',
+        'stock_picking_assignment',
     ],
     'data': [
         'views/stock_pack_operation.xml',

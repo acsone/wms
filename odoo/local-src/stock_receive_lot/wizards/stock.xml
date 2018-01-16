@@ -10,6 +10,7 @@
                   <button name="button_nextlot" type="object" string="Next Lot" class="oe_highlight" attrs="{'invisible': [('lot_required', '!=', True)]}"/>
                   <button name="button_nextop" type="object" string="Next Operation" class="oe_highlight"/>
                   <button name="button_nextdestloc" type="object" string="Next Destination" class="oe_highlight"/>
+                  <button name="button_transfer" type="object" string="Transfer"/>
               </header>
               <sheet>
                 <group>
@@ -74,8 +75,8 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <button name="do_new_transfer" position="before">
-                <button name="%(action_pack_operation_lot_add)d"
-                        string="Receive" type="action" class="oe_highlight" groups="base.group_user"
+                <button name="button_receive"
+                        string="Receive" type="object" class="oe_highlight" groups="base.group_user"
                         context="{'default_picking_id':active_id}"
                         attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', '!=', 'assigned')]}"/>
             </button>
