@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix filter in statistics/form webservice ALCN-1047
+
 **Build**
 
 **Documentation**
