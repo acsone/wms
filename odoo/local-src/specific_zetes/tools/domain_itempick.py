@@ -201,8 +201,8 @@ class Itempick(DomainInterface):
             if not location:
                 line_values.update({
                     'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('Location not found for the product {}'
-                                 .format(product.name)),
+                    'respMsg': _('Location not found for the product %s'
+                                 ) % product.name,
                 })
                 result.append(line_values)
                 continue

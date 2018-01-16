@@ -173,8 +173,8 @@ class Parameters:
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
-                raise Exception(_('Cannot format the value {} with type {}'
-                                .format(value, type(value))))
+                raise Exception(_('Cannot format the value %s with type %s'
+                                  ) % (value, type(value)))
 
             ordered_values.append(value)
 
