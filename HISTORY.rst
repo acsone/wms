@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* Update odoo-cloud-platform (BIZ-1093)
+
 **Documentation**
 
 10.14.1 (2018-01-10)
