@@ -21,6 +21,8 @@ Unreleased
 * ALCN-1039: Add suite_name remove invoice_address_id on webservice sale order web
 * ALCN-1039: Add esb_ref on deliver_carrier and update import data
 
+* ALCN-1050: Add the time limit of order on the partner
+
 **Bugfixes**
 
 * ALCN-1053 : Add change requested on customer adresses xml export
