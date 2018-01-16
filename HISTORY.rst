@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Add user authentication to webservices from connector_esb ALCN-1044
+
 **Bugfixes**
 
 **Build**

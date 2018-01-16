@@ -10,7 +10,7 @@ from odoo.addons.web.controllers.main import ensure_db
 class StockController(http.Controller):
 
     @http.route('/connector_esb/stock/product',
-                type='http', auth='public', csrf=False)
+                type='http', auth='user', csrf=False)
     def product_stock_level(self, **kw):
         """ Return stock levels of products
 
