@@ -113,9 +113,11 @@ class StockPackOperationLotAdd(models.TransientModel):
     @api.onchange('qty')
     def _onchange_qty(self):
         if self.qty > self.remaining_qty:
-            raise UserError(_(
-                'You cannot receive more than the '
-                'expected remaining quantity'))
+            return {'warning': {
+                'title': _("Warning"),
+                'message': _(
+                    'You cannot receive more than the '
+                    'expected remaining quantity')}}
 
     life_date = fields.Datetime(
         string='End of Life Date')
