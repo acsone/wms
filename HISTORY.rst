@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1048: Import additional_products and quantities on product
+* ALCN-1048: Import promotional products on supplier info
+
 **Features and Improvements**
 
 **Bugfixes**
