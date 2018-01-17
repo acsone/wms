@@ -201,6 +201,7 @@ class Supplierinfo(EntityMapper):
     # Doing a grouping to remove client column that creates duplicates
     GROUP_BY_COL = [
         'gesfou', 'gesart', 'gesarc', 'gespan', 'cclrem', 'cclref',
+        'cclqu1', 'cclgr1',
         'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
         'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
 
@@ -227,7 +228,7 @@ class Supplierinfo(EntityMapper):
 
         """
         join = ("left join sbdata.condcf ON gesart=cclref"
-                " AND cclqu1 = 0 AND cclpro = 1 AND cclrem <> 0")
+                " AND cclpro = 1")
         if not self.importer.full:
             join += (" AND cclfss = 20 AND cclfaa >= 17"
                      " AND cclfmm >= 3 AND cclfmm <= 5")
@@ -263,7 +264,9 @@ class Supplierinfo(EntityMapper):
         if db2_entity['cclref']:
             year = db2_entity['ccldss'] * 100 + db2_entity['ccldaa']
             month = db2_entity['ccldmm']
-            ref += '-%s%02i' % (year, month)
+            day = db2_entity['ccldjj']
+            ref += '-%s%02i%02i' % (year, month, day)
+
         odoo_entity['id'] = ref
 
     def convert_name(self, odoo_entity, db2_entity):
@@ -272,6 +275,14 @@ class Supplierinfo(EntityMapper):
         supplier_xml_id = self.get_xml_id(
             'supplier', str(ref), '__import__')
         odoo_entity['name/id'] = supplier_xml_id
+
+    def convert_ratio_main_product(self, odoo_entity, db2_entity):
+        qty = db2_entity['cclqu1'] or 0
+        odoo_entity['ratio_main_product'] = int(qty)
+
+    def convert_ratio_promotional_product(self, odoo_entity, db2_entity):
+        qty = db2_entity['cclgr1'] or 0
+        odoo_entity['ratio_promotional_product'] = int(qty)
 
     def convert_product_tmpl_id(self, odoo_entity, db2_entity):
         product = (db2_entity['gesart'] or '').strip()
