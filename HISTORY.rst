@@ -9,6 +9,8 @@ Unreleased
 **Features and Improvements**
 * ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
 
+* Add user authentication to webservices from connector_esb ALCN-1044
+
 **Bugfixes**
 
 **Build**

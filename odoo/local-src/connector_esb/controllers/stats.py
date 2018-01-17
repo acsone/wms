@@ -39,7 +39,7 @@ class StatsController(http.Controller):
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
     @http.route('/connector_esb/statistics/form',
-                type='http', auth='public', csrf=False)
+                type='http', auth='user', csrf=False)
     def statistics_form(self, **kw):
         """ Return statistics for customers according to filters
 
@@ -75,7 +75,7 @@ class StatsController(http.Controller):
 
     @http.route('/connector_esb/statistics/product/<string:sku>/'
                 '<string:customer_ref>', type='http',
-                auth='public', csrf=False)
+                auth='user', csrf=False)
     def product_customer_stat(self, sku, customer_ref):
         """ Return a customer purchase statistics for a specific product for
             the last 12 months
@@ -95,7 +95,7 @@ class StatsController(http.Controller):
             ).get_message(customer_ref, sku)
 
     @http.route('/connector_esb/statistics/customer/<string:customer_ref>',
-                type='http', auth='public', csrf=False)
+                type='http', auth='user', csrf=False)
     def customer_purchase_statistic(self, customer_ref):
         """ Return a customer 2 years purchase statistics by category
 
