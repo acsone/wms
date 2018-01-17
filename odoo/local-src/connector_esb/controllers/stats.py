@@ -30,6 +30,8 @@ class StatsController(http.Controller):
         datefields = ('startDate', 'endDate', )
         for key in datefields:
             try:
+                if values.get(key) == u'':
+                    continue
                 strptime(values[key])
             except ValueError:
                 errors.append(
@@ -60,15 +62,19 @@ class StatsController(http.Controller):
         values = request.httprequest.form
         self._validate_statistics_form(values)
 
+        start = values.get('startDate')
+        end = values.get('endDate')
+        supplier = values.get('manufacturer')
+
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
                 customer_ref=values['customerErpId'],
-                start=strptime(values['startDate']),
-                end=strptime(values['endDate']),
+                start=strptime(start) if start else False,
+                end=strptime(end) if end else False,
                 product_type=values['productType'],
-                suppliers=values['manufacturer'].split(','),
+                suppliers=supplier.split(',') if supplier.strip() else False,
                 language=values['language']
             )
             return component.get_message(options)

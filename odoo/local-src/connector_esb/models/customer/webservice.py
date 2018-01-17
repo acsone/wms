@@ -51,9 +51,7 @@ class StatisticsFormWebserviceMessage(Component):
                 ('product_id.categ_id.alcyon_product_type', '=',
                  options.product_type)
             )
-        # as this is list "if [u'']" check returns true
-        # and as a result this filter messes up search
-        if any(options.suppliers):
+        if options.suppliers:
             domain.append(
                 ('product_id.seller_ids.name.ref', 'in', options.suppliers)
             )
