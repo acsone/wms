@@ -270,3 +270,52 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
              'totalPrice': 143.2},
         ]
         self.assertEqual(expected, data)
+
+    def test_domain_generation(self):
+        backend = self.env['esb.backend'].get_singleton()
+        partner_and_addresses = self.env['res.partner'].search(
+            [('parent_id', 'child_of', self.partner.id)],
+        )
+        expected_domain_base = [
+            ('order_id.partner_id', 'in', partner_and_addresses.ids),
+            ('invoice_status', '=', 'invoiced'),
+        ]
+        with backend.work_on('res.partner') as work:
+            component = work.component('ws.message.statistics.form')
+            options = component.options_for_form(
+                customer_ref='ABC',
+                suppliers=['GUERRA', 'FOO'],
+                start=False,
+                end=False,
+                product_type=False,
+            )
+            domain = component._generate_domain(options)
+            expected_domain = expected_domain_base[:]
+            expected_domain.append(
+                    ('product_id.seller_ids.name.ref', 'in', options.suppliers)
+                )
+            self.assertEqual(
+                domain,
+                expected_domain,
+            )
+            options2 = component.options_for_form(
+                customer_ref='ABC',
+                suppliers=[],
+                start=date(1994, 10, 3),
+                end=date(2018, 1, 17),
+                product_type='aliment',
+            )
+            domain = component._generate_domain(options2)
+            domain_start = options2.start.strftime('%Y-%m-%d')
+            domain_end = options2.end.strftime('%Y-%m-%d')
+            expected_domain = expected_domain_base[:]
+            expected_domain.extend([
+                ('order_id.date_order', '>=', domain_start),
+                ('order_id.date_order', '<=', domain_end),
+                ('product_id.categ_id.alcyon_product_type', '=',
+                 options2.product_type)
+            ])
+            self.assertEqual(
+                domain,
+                expected_domain,
+            )
