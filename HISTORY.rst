@@ -11,6 +11,8 @@ Unreleased
 
 * Add user authentication to webservices from connector_esb ALCN-1044
 
+* Fix creation of picking and match of lot by filtering by products
+
 **Bugfixes**
 
 **Build**
