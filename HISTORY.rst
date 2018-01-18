@@ -10,13 +10,12 @@ Unreleased
 
 * ALCN-1041 Import customer option to print sale price on their labels
 * Fix import of sale order when assigning tax to last product line. The sequence was not respected.
+* Fix creation of picking and match of lot by filtering by products
 
 **Features and Improvements**
+
 * ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
-
 * Add user authentication to webservices from connector_esb ALCN-1044
-
-* Fix creation of picking and match of lot by filtering by products
 
 **Bugfixes**
 
