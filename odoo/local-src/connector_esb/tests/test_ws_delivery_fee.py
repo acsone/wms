@@ -21,10 +21,10 @@ class WSCustomerDeliveryFeeTestCase(ESBXMLTestCase):
         self.customer_1 = self.model.create({
             'email': 'joe@ch.ch',
             'name': 'Joe',
-            'lang': 'nl_BE',
+            'lang': 'tlh_TLH',
             'vat': 'BE0477472701',
             'user_id': '',
-            'depot_number': '2/1234/1234',
+            'vet_depot_number': '2/1234/1234',
             'ref': '3162',
             'street': 'Chemin des Pins, 23',
             'street2': '',
@@ -38,10 +38,10 @@ class WSCustomerDeliveryFeeTestCase(ESBXMLTestCase):
         self.customer_2 = self.model.create({
             'email': 'deux@ch.ch',
             'name': 'Deux',
-            'lang': 'nl_BE',
+            'lang': 'tlh_TLH',
             'vat': 'BE0477472701',
             'user_id': '',
-            'depot_number': '2/1234/1234',
+            'vet_depot_number': '2/1234/1234',
             'ref': '0002',
             'street': 'Chemin des Pins, 23',
             'street2': '',
@@ -94,8 +94,8 @@ class WSCustomerDeliveryFeeTestCase(ESBXMLTestCase):
                            ]
             })
 
-    def test_bypass_true(self):
-        """ Test a customer that does not need to pay delivery fee """
+    def test_fix_value(self):
+        """This web service returns always the same value"""
         backend = self.env['esb.backend'].get_singleton()
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.customer.delivery.fee')
@@ -104,13 +104,3 @@ class WSCustomerDeliveryFeeTestCase(ESBXMLTestCase):
             message,
             self.read_test_file('delivery_fee_ws_1.xml'),
             'totalOrderAmount')
-
-    def test_bypass_false(self):
-        """ Test a customer that needs to pay delivery fee """
-        backend = self.env['esb.backend'].get_singleton()
-        with backend.work_on('res.partner') as work:
-            component = work.component('ws.message.customer.delivery.fee')
-            message = component.get_message(self.customer_2.ref)
-        self.assertXmlEquivalentData(
-            message,
-            self.read_test_file('delivery_fee_ws_2.xml'), 'totalOrderAmount')

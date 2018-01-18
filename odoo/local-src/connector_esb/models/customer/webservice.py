@@ -111,18 +111,8 @@ class CustomerDeliveryFeeWebserviceMessage(Component):
     _usage = 'ws.message.customer.delivery.fee'
 
     def get_message(self, customer_ref):
-        data = []
-        by_pass = False
-
-        current_orders = self.env['sale.order'].search([
-            ('state', 'in', ['sent', 'sale']),
-            ('partner_id.ref', '=', customer_ref)])
-        total_amount = sum(current_orders.mapped('amount_total'))
-        if total_amount > 125:
-            by_pass = True
-        values = {
-                'totalOrderAmount': '{0:.2f}'.format(total_amount),
-                'byPassTestAmount': by_pass
-                }
-        data.append(values)
+        data = [{
+            'totalOrderAmount': '9999.00',
+            'byPassTestAmount': True,
+        }]
         return self._produce_xml(data, list_item_el='result')

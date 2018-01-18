@@ -183,6 +183,8 @@ Unreleased
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
 * ALCN-869: Add webservice for a customer delivery fee
+  * as of 19.01.18 customer wanted this webservice
+    to always return a static message
 
 **Bugfixes**
 
