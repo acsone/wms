@@ -11,7 +11,6 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(WSStatisticsFormTestCase, self).setUp()
-        self.activate_lang()
         self.setup_records()
 
     def setup_records(self):

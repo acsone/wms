@@ -11,7 +11,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(ExportCustomerTestCase, self).setUp()
-        self.activate_lang()
         self.setup_records()
         self.maxDiff = None
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_customer')

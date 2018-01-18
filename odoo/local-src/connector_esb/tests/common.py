@@ -17,11 +17,26 @@ class ESBTestCase(SavepointComponentCase):
     @classmethod
     def setUpClass(cls):
         super(ESBTestCase, cls).setUpClass()
+        cls.activate_lang()
 
     def setUp(self):
         super(ESBTestCase, self).setUp()
         self.backend_model = self.env['esb.backend']
         self.backend = self.backend_model.get_singleton()
+
+    @classmethod
+    def activate_lang(cls):
+        """Create a fictive language to use in tests."""
+        Lang = cls.env['res.lang']
+        if not Lang.search([('iso_code', '=', 'tlh')], limit=1):
+            cls.env['res.lang'].create({
+                'name': 'Klingon',
+                'code': 'tlh_TLH',
+                'iso_code': 'tlh',
+                'active': True,
+                'translatable': True,
+                'esb_ref': 'TLH',
+            })
 
 
 class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
@@ -115,16 +130,3 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             self.assertEqual(writer.filename(), expected)
             writer = work.component(usage='sftp.xml.writer')
             self.assertEqual(writer.filename(), expected)
-
-    def activate_lang(self):
-        """ Create a fictive language to use in tests """
-        Lang = self.env['res.lang']
-        if not Lang.search([('iso_code', '=', 'tlh')], limit=1):
-            self.env['res.lang'].create({
-                'name': 'Klingon',
-                'code': 'tlh_TLH',
-                'iso_code': 'tlh',
-                'active': True,
-                'translatable': True,
-                'esb_ref': 'TLH',
-            })

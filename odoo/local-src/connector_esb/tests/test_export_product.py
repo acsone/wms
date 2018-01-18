@@ -14,7 +14,6 @@ class ExportProductTestCase(ESBXMLTestCase):
 
     def setUp(self):
         super(ExportProductTestCase, self).setUp()
-        self.activate_lang()
         ProductExportMapper.translatable_keys = {
             'tlh_TLH': {
                 'name': 'Refdem',
