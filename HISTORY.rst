@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1041 Import customer option to print sale price on their labels
+* Fix import of sale order when assigning tax to last product line. The sequence was not respected.
 
 **Features and Improvements**
 * ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings

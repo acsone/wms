@@ -347,7 +347,8 @@ class DB2MapperSaleOrder(object):
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
             "       dcccjj, dcccmm, dcccaa, dcccss,"
             "       dccmjj, dccmmm, dccmaa, dccmss"
-            " FROM db2_pdetcdcl WHERE order_id = %s")
+            " FROM db2_pdetcdcl WHERE order_id = %s"
+            " ORDER BY dccnli")
         cr.execute(query, [row['id']])
 
         lines = cr.fetchall()
@@ -368,6 +369,11 @@ class DB2MapperSaleOrder(object):
         previous_line = None
         for line in lines:
             if line['dccart'].startswith('8888'):
+                if not previous_line:
+                    raise Exception(
+                        "Cannot assign contribution tax on sale order %s\n"
+                        " Tax cannot be the first line as we want to assign it"
+                        " to previous line" % new.name)
                 # For tax lines add them as tax to previous line
                 cls.add_contrib_tax(rec, line, previous_line)
                 continue
