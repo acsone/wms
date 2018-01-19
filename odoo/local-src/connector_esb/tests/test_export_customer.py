@@ -9,6 +9,14 @@ from .common import ESBXMLTestCase
 
 class ExportCustomerTestCase(ESBXMLTestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        super(ExportCustomerTestCase, cls).setUpClass()
+        cls.alcyon_category = cls.env['partner.alcyon_category'].create({
+            'name': 'Test partner alcyon category',
+            'esb_ref': 'TST'
+        })
+
     def setUp(self):
         super(ExportCustomerTestCase, self).setUp()
         self.setup_records()
@@ -20,10 +28,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         return self.env['res.partner']
 
     def setup_records(self):
-        self.alcyon_category = self.env['partner.alcyon_category'].create({
-            'name': 'Test partner alcyon category',
-            'esb_ref': 'TST'
-        })
         self.discount_pricelist = self.env['product.pricelist'].create({
             'name': 'Special price',
             'esb_ref': 'REF_ESB'
@@ -59,7 +63,8 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'customer': True,
             'alcyon_category_id': self.alcyon_category.id,
             'discount_pricelist_id': self.discount_pricelist_2.id,
-            'property_product_pricelist': self.discount_pricelist.id,
+            'property_product_pricelist': self.env.ref(
+                '__setup__.product_pricelist_pb1'),
             'category_id': [(4, self.partner_category.id, 0)]
         })
         self.all_records |= self.model.create({
@@ -127,17 +132,15 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'IdDelegate': '',
             'IdPharmacy': '',
             'TaxCode': 1,
-            # OnlinePayment
-            # FreeShipping,
+            'OnlinePayment': 0,
             'DepositNumber': u'2/1234/1234',
-            # ContactName
             'ErpId': u'3162',
             'AlcyonGroupId': self.discount_pricelist_2.esb_ref,
             'BackordersEnable': 1,
             'Lapsing': False,
             'LapsingDuration': 0,
             u'Petits_animaux': 'Y',
-            'StatisticCode': self.discount_pricelist.esb_ref,
+            'StatisticCode': '10',
             'IsActive': '',
             'Password': '',
             'SerialNo': '',
