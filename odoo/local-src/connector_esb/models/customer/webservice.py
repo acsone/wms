@@ -29,7 +29,7 @@ class StatisticsFormWebserviceMessage(Component):
 
     options_for_form = StatsFormOptions
 
-    def _data_for_message(self, options):
+    def _generate_domain(self, options):
         partner = self.env['res.partner'].search(
             [('ref', '=', options.customer_ref)],
             limit=1,
@@ -55,6 +55,10 @@ class StatisticsFormWebserviceMessage(Component):
             domain.append(
                 ('product_id.seller_ids.name.ref', 'in', options.suppliers)
             )
+        return domain
+
+    def _data_for_message(self, options):
+        domain = self._generate_domain(options)
 
         lang_code = options.language or 'FR'
         lang = self.env['res.lang'].search([('esb_ref', '=', lang_code)])
