@@ -31,6 +31,7 @@
         'data/esb_backend_timestamp.xml',
         'data/partner.alcyon_category.csv',
         'data/product.category.csv',
+        'data/product_state.xml',
         'data/res_lang.xml',
         'data/ir_cron.xml',
         'views/esb_backend_views.xml',
