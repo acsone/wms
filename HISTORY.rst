@@ -19,6 +19,7 @@ Unreleased
 * Add user authentication to webservices from connector_esb ALCN-1044
 * ALCN-898: Add the module sale_cancel_remaining
 * ALCN-831: Remove blank in the invoice report
+* ALCN-1037 Set ESF ref on product states data
 
 **Bugfixes**
 
