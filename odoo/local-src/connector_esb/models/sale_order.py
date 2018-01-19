@@ -40,8 +40,7 @@ class SaleOrder(models.Model):
         order_data['partner_id'] = data['customer_id']
         order_data['date_order'] = data['date']
         order_data['client_order_ref'] = data['order_ref']
-        if 'invoice_address_id' in data:
-            order_data['partner_invoice_id'] = data['invoice_address_id']
+        order_data['partner_invoice_id'] = data['customer_id']
         if 'shipping_address_id' in data:
             order_data['partner_shipping_id'] = data['shipping_address_id']
         if 'shipping_method' in data:
