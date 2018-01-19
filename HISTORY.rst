@@ -25,6 +25,8 @@ Unreleased
 
 * Fix filter in statistics/form webservice ALCN-1047
 
+* Fix statistic webservice returning 500 error ALCN-1045
+
 **Build**
 
 * Update odoo-cloud-platform (BIZ-1093)

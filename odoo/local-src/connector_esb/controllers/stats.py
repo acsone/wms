@@ -103,8 +103,12 @@ class StatsController(http.Controller):
     @http.route('/connector_esb/statistics/customer/<string:customer_ref>',
                 type='http', auth='user', csrf=False)
     def customer_purchase_statistic(self, customer_ref):
-        """ Return a customer 2 years purchase statistics by category
+        """ Return a customer 2 years purchase statistics by base category.
 
+        Base categories are:
+            specific_data.product_categ_ali
+            specific_data.product_categ_medoc
+            specific_data.product_categ_materiel
         Expect a GET : connector_esb/statistics/customer/<customer_ref>
 
             $ curl http://localhost:8069/connector_esb/statistics/customer/469
