@@ -9,7 +9,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 import io
 import zipfile
-from urllib.parse import urlparse
+
+try:
+    # Python 2
+    from urlparse import urlparse
+except ImportError:
+    # Python 3
+    from urllib.parse import urlparse
 try:
     import requests
 except ImportError:
