@@ -128,6 +128,7 @@ migration:
           - product_additional
           - product_price_category
           - refund_invoice
+          - sale_cancel_remaining
           - specific_account
           - specific_base
           - specific_data
@@ -182,6 +183,3 @@ migration:
     - version: 10.14.0
     - version: 10.14.1
     - version: 10.15.0
-      addons:
-        upgrade:
-          - sale_cancel_remaining
