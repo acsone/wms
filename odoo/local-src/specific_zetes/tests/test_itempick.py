@@ -28,12 +28,12 @@ class TestItempick(ZetesTest):
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
 
-        move = self.picking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking.id))
-        self.assertEqual(result.pickLineId, str(move.id))
+        self.assertEqual(result.pickLineId, str(pack_op.id))
         self.assertEqual(result.reqDestCarSeqNum, '1')
         self.assertEqual(int(result.reqQty), 10)
         self.assertEqual(int(result.effQty), 0)
@@ -72,26 +72,73 @@ class TestItempick(ZetesTest):
         Cancel the move
         :return:
         """
-        move = self.picking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
-        move.pack_lot_ids.write({
+        pack_op.pack_lot_ids.write({
             'qty': 10,
         })
-        move.write({
+        pack_op.write({
             'qty_done': 10,
         })
 
-        self.assertEqual(move.qty_done, 10)
+        self.assertEqual(pack_op.qty_done, 10)
 
         domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         request_params.update({
-            'pickLineId': move.id,
+            'pickLineId': pack_op.id,
             'pickStatus': constants.OP_CANCELED
         })
 
         domain.resu(request_params)
-        self.assertEqual(move.zetes_state, constants.OP_CANCELED)
-        self.assertEqual(move.qty_done, 0)
-        self.assertEqual(len(move.pack_lot_ids), 0)
+        self.assertEqual(pack_op.zetes_state, constants.OP_CANCELED)
+        self.assertEqual(pack_op.qty_done, 0)
+        self.assertEqual(len(pack_op.pack_lot_ids), 0)
+
+    def test_requ_itempick_zero_check(self):
+        """
+        Test the ZeroCheck flag
+        :return:
+        """
+        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+
+        request_params = Parameters(domain, action='requ')
+        request_params.update({
+            'groupNum': self.picking.id,
+            'Cri01': None,
+        })
+
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
+        self.assertEqual(result.cycleCountFlag, '0')
+
+        # Empty the stock
+        update_qty_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.product_1.id,
+            'product_tmpl_id': self.product_1.product_tmpl_id.id,
+            'new_quantity': 10,
+            'lot_id': self.lot_product_1.id,
+            'location_id': self.location_product_1.id
+        })
+        update_qty_wizard.change_product_qty()
+
+        request_params = Parameters(domain, action='requ')
+        request_params.update({
+            'groupNum': self.picking.id,
+            'Cri01': None,
+        })
+
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
+        self.assertEqual(result.cycleCountFlag, '1')

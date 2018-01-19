@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
+from odoo.tools import mute_logger
 
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
@@ -22,30 +23,36 @@ class TestFull(ZetesTest):
         self.disable_picking_validation = True
         super(TestFull, self).setUp()
 
+        self.location_product_2 = self.env['stock.location'].create({
+            'name': 'GD80B2',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'D',
+            'shelf': '80',
+            'height': 'B',
+            'box': '2',
+            'location_id': self.zone_gustave.id,
+            'bin_checksum_1': '45',
+            'bin_checksum_2': '45',
+        })
+        self.env['stock.location']._parent_store_compute()
+
         # Product 2
-        # Location: GAD515
+        # Location: GD80B1
         # Specificity: Out of stock (10 requested - 6 in stock)
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 40,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
         })
-
-        self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GAD515',
-            'kind': 'bin',
-            'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'D',
-            'height': '5',
-            'box': '15',
-            'location_id': self.parent_location.id,
-            'bin_checksum_1': '456',
-            'bin_checksum_2': '456',
-        })
-        self.env['stock.location']._parent_store_compute()
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -74,31 +81,37 @@ class TestFull(ZetesTest):
             })]
         })
 
+        self.location_product_3 = self.env['stock.location'].create({
+            'name': 'GD80E8',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'D',
+            'shelf': '80',
+            'height': 'E',
+            'box': '8',
+            'location_id': self.zone_gustave.id,
+            'bin_checksum_1': '89',
+            'bin_checksum_2': '89',
+        })
+        self.env['stock.location']._parent_store_compute()
+
         # Product 3
-        # Location: GAI110
+        # Location: GD80E8
         # Specificity: Split in two lot (20 in lot 000000001
         # and 30 in lot 000000002)
         self.product_3 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '025784',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 150,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
         })
-
-        self.location_product_3 = self.env['stock.location'].create({
-            'name': 'GAI110',
-            'kind': 'bin',
-            'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'I',
-            'height': '1',
-            'box': '10',
-            'location_id': self.parent_location.id,
-            'bin_checksum_1': '789',
-            'bin_checksum_2': '789',
-        })
-        self.env['stock.location']._parent_store_compute()
 
         two_months = datetime.now() + relativedelta(months=2)
         self.lot_product_3_1 = self.env['stock.production.lot'].create({
@@ -174,6 +187,8 @@ class TestFull(ZetesTest):
             'server_id': printer_server.id,
         })
 
+    @mute_logger('odoo.addons.base_report_to_printer.models.printing_server',
+                 'odoo.addons.specific_zetes.tools.domain_print')
     def test_full(self):
         """
         Please read the README file to understand the test
@@ -218,7 +233,7 @@ class TestFull(ZetesTest):
         ##########
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': '1',
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,
@@ -259,32 +274,32 @@ class TestFull(ZetesTest):
         line_product_3 = results[2]
 
         # Test line 1
-        move_1 = self.picking.pack_operation_product_ids[0]
-        self.assertEqual(line_product_1.pickLineId, str(move_1.id))
+        pack_op_1 = self.picking.pack_operation_product_ids[0]
+        self.assertEqual(line_product_1.pickLineId, str(pack_op_1.id))
         self.assertEqual(line_product_1.productCode,
                          self.product_1.default_code)
         self.assertEqual(int(line_product_1.reqQty), 10)
         # Check the location only for the first line.
         # It's not useful to test on each line
         self.assertEqual(line_product_1.sourceLC1, 'G')
-        self.assertEqual(line_product_1.sourceLC2, 'A')
-        self.assertEqual(line_product_1.sourceLC3, 'A')
-        self.assertEqual(line_product_1.sourceLC4, '2')
-        self.assertEqual(line_product_1.sourceLC5, '10')
-        self.assertEqual(line_product_1.sourceLCCD, '123')
+        self.assertEqual(line_product_1.sourceLC2, 'D')
+        self.assertEqual(line_product_1.sourceLC3, '80')
+        self.assertEqual(line_product_1.sourceLC4, 'B')
+        self.assertEqual(line_product_1.sourceLC5, '1')
+        self.assertEqual(line_product_1.sourceLCCD, '12')
         self.assertEqual(line_product_1.Usf01, self.lot_product_1.checksum)
 
         # Test line 2
-        move_2 = self.picking.pack_operation_product_ids[1]
-        self.assertEqual(line_product_2.pickLineId, str(move_2.id))
+        pack_op_2 = self.picking.pack_operation_product_ids[1]
+        self.assertEqual(line_product_2.pickLineId, str(pack_op_2.id))
         self.assertEqual(line_product_2.productCode,
                          self.product_2.default_code)
         self.assertEqual(int(line_product_2.reqQty), 10)
         self.assertEqual(line_product_2.Usf01, self.lot_product_2.checksum)
 
         # Test line 3
-        move_3 = self.picking.pack_operation_product_ids[2]
-        self.assertEqual(line_product_3.pickLineId, str(move_3.id))
+        pack_op_3 = self.picking.pack_operation_product_ids[2]
+        self.assertEqual(line_product_3.pickLineId, str(pack_op_3.id))
         self.assertEqual(line_product_3.productCode,
                          self.product_3.default_code)
         self.assertEqual(int(line_product_3.reqQty), 50)
@@ -297,7 +312,7 @@ class TestFull(ZetesTest):
         request_catchweight_params = Parameters(catchweight_obj)
         request_catchweight_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_1.id,
+            'pickLineId': pack_op_1.id,
             'productCode': self.product_1.default_code,
             'lotNumber': self.lot_product_1.checksum,
             'effQty': None,
@@ -311,13 +326,14 @@ class TestFull(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_1.id,
+            'lineId': pack_op_1.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 10,  # Pick 10 items
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)
-        self.assertEqual(move_1.qty_done, 10)
+        self.assertEqual(pack_op_1.qty_done, 10)
 
         ##########
         # Step 6 #
@@ -325,12 +341,12 @@ class TestFull(ZetesTest):
         request_validate_picking_line_request = Parameters(itempick_obj)
         request_validate_picking_line_request.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_1.id,
+            'pickLineId': pack_op_1.id,
             'pickStatus': constants.OP_PICKED,
         })
 
         itempick_obj.resu(request_validate_picking_line_request)
-        self.assertEqual(move_1.zetes_state, constants.OP_PICKED)
+        self.assertEqual(pack_op_1.zetes_state, constants.OP_PICKED)
 
         ##########
         # Step 7 #
@@ -338,7 +354,7 @@ class TestFull(ZetesTest):
         request_catchweight_params = Parameters(catchweight_obj)
         request_catchweight_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_2.id,
+            'pickLineId': pack_op_2.id,
             'productCode': self.product_2.default_code,
             'lotNumber': self.lot_product_2.checksum,
             'effQty': None,
@@ -353,13 +369,14 @@ class TestFull(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_2.id,
+            'lineId': pack_op_2.id,
             'Usf01': self.lot_product_2.checksum,
-            'Usf02': 6,  # Pick 6 items
+            'Usf02': 6,  # Pick 6 items,
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)
-        self.assertEqual(move_2.qty_done, 6)
+        self.assertEqual(pack_op_2.qty_done, 6)
 
         ##########
         # Step 8 #
@@ -367,12 +384,12 @@ class TestFull(ZetesTest):
         request_validate_picking_line_params = Parameters(itempick_obj)
         request_validate_picking_line_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_2.id,
+            'pickLineId': pack_op_2.id,
             'pickStatus': constants.OP_PICKED,
         })
 
         itempick_obj.resu(request_validate_picking_line_params)
-        self.assertEqual(move_2.zetes_state, constants.OP_PICKED)
+        self.assertEqual(pack_op_2.zetes_state, constants.OP_PICKED)
 
         ##########
         # Step 9 #
@@ -380,7 +397,7 @@ class TestFull(ZetesTest):
         request_catchweight_params = Parameters(catchweight_obj)
         request_catchweight_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_3.id,
+            'pickLineId': pack_op_3.id,
             'productCode': self.product_3.default_code,
             'lotNumber': self.lot_product_3_1.checksum,
             'effQty': None,
@@ -395,15 +412,21 @@ class TestFull(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_3.id,
+            'lineId': pack_op_3.id,
             'Usf01': self.lot_product_3_1.checksum,
             'Usf02': 20,
+            'Usf03': None,
         })
 
         # The lot 20 is empty now. The picker will ask for other lots
         request_location_params = Parameters(location_obj)
         request_location_params.update({
-            'lineId': move_3.id,
+            'lineId': pack_op_3.id,
+            'Cri01': self.location_product_3.zone,
+            'Cri02': self.location_product_3.corridor,
+            'Cri03': self.location_product_3.shelf,
+            'Cri04': self.location_product_3.height,
+            'Cri05': self.location_product_3.box,
             'Cri07': None,
         })
 
@@ -415,19 +438,20 @@ class TestFull(ZetesTest):
         self.assertFalse(result.Usf03)
 
         catchweight_obj.resu(request_pick_items_params)
-        self.assertEqual(move_3.qty_done, 20)
+        self.assertEqual(pack_op_3.qty_done, 20)
 
         # Take 30 items in the second lot
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_3.id,
+            'lineId': pack_op_3.id,
             'Usf01': self.lot_product_3_2.checksum,
             'Usf02': 30,
+            'Usf03': None,
         })
 
         catchweight_obj.resu(request_pick_items_params)
-        self.assertEqual(move_3.qty_done, 50)
+        self.assertEqual(pack_op_3.qty_done, 50)
 
         ###########
         # Step 10 #
@@ -435,12 +459,12 @@ class TestFull(ZetesTest):
         request_validate_picking_line_params = Parameters(itempick_obj)
         request_validate_picking_line_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_3.id,
+            'pickLineId': pack_op_3.id,
             'pickStatus': constants.OP_PICKED,
         })
 
         itempick_obj.resu(request_validate_picking_line_params)
-        self.assertEqual(move_3.zetes_state, constants.OP_PICKED)
+        self.assertEqual(pack_op_3.zetes_state, constants.OP_PICKED)
 
         ###########
         # Step 11 #
@@ -481,7 +505,7 @@ class TestFull(ZetesTest):
         ###########
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': '1',
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,

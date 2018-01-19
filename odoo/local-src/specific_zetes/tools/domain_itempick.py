@@ -65,7 +65,7 @@ class Itempick(DomainInterface):
         :param params:
         :return:
         """
-        # If there is not Picking ID we cannot assign a stock move
+        # If there is no Picking ID we cannot assign a pack operation
         if not params.groupNum:
             result = Parameters(self, action='resp')
             result.update({
@@ -79,8 +79,7 @@ class Itempick(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID {}'
-                             .format(picking_id))
+                'respMsg': _('No picking found with the ID %s') % picking_id
             })
             return result.format()
         picking_id = int(picking_id)
@@ -138,13 +137,13 @@ class Itempick(DomainInterface):
                                                constants.OP_CANCELED])
 
         if not lines:
-            error_message = _('There is no lines for the picking {}'
-                              .format(picking_id))
+            error_message = _('There is no lines for the picking %s') \
+                            % picking_id
 
-            self.request.env['stock.picking'].sudo(self._user)\
-                .browse(picking_id).write(
-                {'is_zetes_error': True,
-                 'traceback': error_message})
+            params.log(
+                picking_id=picking_id,
+                exception=error_message
+            )
 
             result = Parameters(self, action='resp')
             result.update({
@@ -176,7 +175,6 @@ class Itempick(DomainInterface):
                 'lessQtyAllowed': 1,  # Constant value
                 'moreQtyAllowed': 0,  # Constant value
                 'catchWeightFlag': 0,  # Constant value
-                'cycleCountFlag': 0,  # Constant value
                 'expiryDateCheckFlag': 0,  # Constant value
                 'productBarcode': product.barcode,
                 'scanProductBarcode': 0,  # Constant value
@@ -203,17 +201,22 @@ class Itempick(DomainInterface):
             if not location:
                 line_values.update({
                     'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('Location not found for the product {}'
-                                 .format(product.name)),
+                    'respMsg': _('Location not found for the product %s'
+                                 ) % product.name,
                 })
                 result.append(line_values)
                 continue
+
+            # TODO Please remove me later (when dynamic locations will removed)
+            shelf_source = location.shelf
+            if len(str(shelf_source)) == 1:
+                shelf_source = '0%s' % shelf_source
 
             # Set coordonates location of the bin
             line_values.update({
                 'sourceLC1': location.zone,
                 'sourceLC2': location.corridor,
-                'sourceLC3': location.shelf,
+                'sourceLC3': shelf_source,
                 'sourceLC4': location.height,
                 'sourceLC5': location.box,
                 'sourceLCCD': location.get_checksum(),
@@ -230,6 +233,27 @@ class Itempick(DomainInterface):
             for lot in lots:
                 index += 1
                 setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
+
+            # If the available quantity for this location is less than
+            # the zero check limit, it means that we have to ask a zero check.
+            available_qty_query = """
+            SELECT sum(quant.qty)
+            FROM stock_quant AS quant
+            WHERE quant.product_id = %s
+            AND quant.location_id = %s
+            AND quant.reservation_id IS NULL
+            """
+            self.request.env.cr.execute(available_qty_query,
+                                        (line.product_id.id,
+                                         line.location_id.id))
+            query_result = self.request.env.cr.fetchone()
+            available_qty = query_result and query_result[0] or 0
+
+            forcast_available_qty = available_qty - line.product_qty
+            if forcast_available_qty <= constants.ZERO_CHECK_LIMIT:
+                line_values.cycleCountFlag = 1
+            else:
+                line_values.cycleCountFlag = 0
 
             result.append(line_values)
             sequence += 1
@@ -250,27 +274,27 @@ class Itempick(DomainInterface):
         """
         if not params.pickLineId:
             return
-        move_id = int(params.pickLineId)
+        line_id = int(params.pickLineId)
 
-        move = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(move_id)
-        if not len(move):
+        pack_op = self.request.env['stock.pack.operation']\
+            .sudo(self._user).browse(line_id)
+        if not len(pack_op):
             return
 
         try:
             status = params.pickStatus
             if status:
-                move.sudo(self._user).write({
+                pack_op.sudo(self._user).write({
                     'zetes_state': status
                 })
 
                 # If status == OP_CANCELED => remove all actions for this line
                 if status == constants.OP_CANCELED:
-                    move.pack_lot_ids.unlink()
-                    move.save()
+                    pack_op.pack_lot_ids.unlink()
+                    pack_op.save()
 
         except Exception as e:
             _logger.error(str(e))
-            params.log(picking_id=move.picking_id.id,
-                       operation_id=move_id,
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=line_id,
                        exception=e)

@@ -14,9 +14,9 @@ Set up
 
 - A picker with the operator code 99
 - Three products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515 (we will simulate an out of stock - only 6 units)
-    - Product 2: "Test medoc 3" with a stock of 120 units in two lots 0000001 (20 units) and 0000002 (100 units) at the location GAI110
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2 (we will simulate an out of stock - only 6 units)
+    - Product 2: "Test medoc 3" with a stock of 120 units in two lots 0000001 (20 units) and 0000002 (100 units) at the location GD80E8
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:
@@ -57,8 +57,8 @@ Set up
 ======
 - A picker with the operator code 99
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:
@@ -88,8 +88,8 @@ Set up
 - A picker with the operator code 99
 - An another picker with the operator code 98
 - Two products:
-    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GAE210
-    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GAD515
+    - Product 1: "Test medoc 1" with a stock of 100 units in the lot 0000001 at the location GD80B1
+    - Product 2: "Test medoc 2" with a stock of 10 units in the lot 000001 at the location GD80B2
 - A customer "Mr. Docteur Test" who accepts back order
 - An open delivery round "TOUR/20170101/01" for the day
 - A validated picking with the following configuration:
@@ -103,3 +103,65 @@ Scenario
 2. The picker picks the first line
 3. The picker stops the picking
 4. A new picker takes this picking
+
+=================
+Full test parking
+=================
+
+Introduction
+============
+
+This test will execute a full scenario for a picker in parking.
+Please read following explanation to understand this test
+
+Set up
+======
+
+- A picker with the operator code 99
+- Two products:
+    - Product 1: "Test medoc 1" with 100 units in parking PARKING001
+    - Product 2: "Test medoc 2" with 20 units in parking PARKING001
+
+Scenario
+========
+
+1. The user will log in (REQU_/RESP_USERCONTEXT)
+2. Zetes requests all picking zones (REQU_/RESP_REFDATA)
+3. Zetes requests a picking and start the picking (REQU_/RESP_ASSIGNMENT + RESU_ASSIGNMENT)
+4. Zetes requests all picking lines for this picking (REQU_/RESP_ITEMMOVE)
+5. The picker unload 5 items of product 2 (RESU_CATCHWEIGHT)
+6. The picker picks 75 items (REQU_/RESP_CATCHWEIGHT + RESU_CATCHWEIGHT) and validates the picking line (RESU_ITEMPICK)
+7. The picker goes to the reserve (for the remaining products) (REQU_/RESP_LOCATION)
+8. The picker put 25 items of product 1 in the reserve and goes to the next picking line (REQU_/RESP_CATCHWEIGHT) (RESU_ITEMMOVE)
+9. The picker takes 15 units of product 2 (REQU_/RESP_CATCHWEIGHT + RESU_CATCHWEIGHT) and validates the picking line (RESU_ITEMPICK)
+10. The picking is now completely finished. Zetes asks for the next picking (REQU_/RESP_ASSIGNMENT)
+
+=================
+Full test reserve
+=================
+
+Introduction
+============
+
+This test will execute a full scenario for a picker in reserve.
+Please read following explanation to understand this test.
+
+Set up
+======
+
+- A picker with the operator code 99
+- Two products:
+    - Product 1: "Test medoc 1" with 20 units in the reserve
+    - Product 2: "Test medoc 2" with 100 units in the reserve
+
+Scenario
+========
+
+1. The user will log in (REQU_/RESP_USERCONTEXT)
+2. Zetes requests all picking zones (REQU_/RESP_REFDATA)
+3. Zetes requests a picking and start the picking for product 1 (REQU_/RESP_ASSIGNMENT + RESU_ASSIGNMENT)
+4. Zetes requests a picking line (REQU_/RESP_ITEMMOVE)
+5. The picker takes 20 units of product 1 and put it in the stock (RESU_CATCHWEIGHT) (RESU_ITEMMOVE)
+6. Zetes requests a picking and start the picking for product 2 (REQU_/RESP_ASSIGNMENT + RESU_ASSIGNMENT)
+7. Zetes requests a picking line (REQU_/RESP_ITEMMOVE)
+8. The picker takes 80 units of product 1 (the bin is full) and put it in the stock (RESU_CATCHWEIGHT) (RESU_ITEMMOVE)

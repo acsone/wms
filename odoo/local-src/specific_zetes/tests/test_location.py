@@ -11,13 +11,18 @@ class TestLocation(ZetesTest):
         """
         :return:
         """
-        move = self.picking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
         domain = Location(DEFAULT_HEADER, request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
-            'lineId': move.id,
+            'lineId': pack_op.id,
+            'Cri01': self.location_product_1.zone,
+            'Cri02': self.location_product_1.corridor,
+            'Cri03': self.location_product_1.shelf,
+            'Cri04': self.location_product_1.height,
+            'Cri05': self.location_product_1.box,
             'Cri07': None,
         })
 

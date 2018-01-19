@@ -11,8 +11,11 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
+            <xpath expr="//group[@name='localization']//field[@name='barcode']" position="replace"/>
+
             <xpath expr="//group[@name='localization']" position="after">
                 <group string="Localization">
+                    <field name="barcode"/>
                     <field name="picking_zone_id" options="{'no_create': True, 'no_open': True}"/>
                     <field name="zone" />
                     <field name="corridor" />

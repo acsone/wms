@@ -32,13 +32,30 @@ AS_CANCELED = '05'
 AS_FINISHED = '08'
 
 # Zetes values for picking (stock.pack.operation) state
-OP_DEFAULT = '00'
-OP_PICKED = '01'
-OP_SHORTPICKED = '02'
-OP_SKIPPED = '03'
-OP_CUT = '04'
-OP_CANCELED = '05'
+OP_DEFAULT = MOVE_DEFAULT = '00'
+OP_PICKED = MOVE_DONE = '01'
+OP_SHORTPICKED = MOVE_SHORTPICKED = '02'
+OP_SKIPPED = MOVE_SKIPPED = '03'
+OP_CUT = MOVE_CUT = '04'
+OP_CANCELED = MOVE_FULL = '05'
 
 # Print
 PRINT_PASSPORT = '03'
 PRINT_LABELS = '04'
+
+# Assignment types
+PICKING_ASSIGNMENT = '1'
+PARKING_ASSIGNMENT = '2'
+RESERVE_ASSIGNMENT = '3'
+
+# Move type (load, put, load & put)
+MOVE_TYPE_LOAD = '1'
+MOVE_TYPE_PUT = '2'
+MOVE_TYPE_LOADPUT = '3'  # not used
+
+# Type of load (load or unload)
+MOVE_UNLOAD = '1'
+MOVE_LOAD = '2'
+
+# Zero Check Limit
+ZERO_CHECK_LIMIT = 0

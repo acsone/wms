@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 from odoo import _
 
 from domain_interface import DomainInterface, Parameters
@@ -32,6 +34,8 @@ class Location(DomainInterface):
 
     def requ(self, params):
         """
+        Check if the location sent in params exist in Odoo.
+
         Return a list of existing lots for a stock pack operation (lineId).
         This method is used by Zetes when the picker doesn't find the right
         lot or we need quantity available.
@@ -40,24 +44,35 @@ class Location(DomainInterface):
         """
         result = Parameters(self, action='resp')
 
-        move_id = params.lineId
-        if not move_id:
+        line_id = params.lineId
+        if not line_id:
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
 
-        move = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .browse(int(move_id))
-        if not len(move):
+        if isinstance(line_id, int):
+            line_id = str(line_id)
+
+        line_id_list = line_id.split('_')
+        if len(line_id_list) == 2:
+            pack_operation_id = int(line_id_list[0])
+            lot_id = int(line_id_list[1])
+        else:
+            pack_operation_id = int(line_id)
+            lot_id = None
+
+        pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
+            .browse(pack_operation_id)
+        if not len(pack_op):
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
                 'respMsg': _('No picking found')
             })
             return result.format()
 
-        product = move.product_id
+        product = pack_op.product_id
 
         result.update({
             'respCode': constants.RESPONSE_CODE_OK,
@@ -68,11 +83,57 @@ class Location(DomainInterface):
             'Usf07': product.virtual_available,  # Stock available
         })
 
-        location = move.location_id
+        # TODO Please remove me later (when dynamic locations will removed)
+        shelf = params.Cri03 or ''
+        special_shelf_regex = r'0([A-Z])'
+        regex_result = re.match(special_shelf_regex, shelf)
+        if regex_result:
+            shelf = regex_result.group(1)
+
+        location = self.request.env['stock.location'].sudo(self._user) \
+            .search([('zone', '=', params.Cri01),
+                     ('corridor', '=', params.Cri02),
+                     ('shelf', '=', shelf),
+                     ('height', '=', params.Cri04),
+                     ('box', '=', params.Cri05)],
+                    limit=1)
+
+        if not location:
+            result.update({
+                'respCode': constants.RESPONSE_CODE_ERROR,
+                'respMsg': _('Location %s%s%s%s%s not found' % (params.Cri01,
+                                                                params.Cri02,
+                                                                params.Cri03,
+                                                                params.Cri04,
+                                                                params.Cri05))
+            })
+            return result.format()
+
+        if pack_op.picking_id.zetes_picking_type == \
+                constants.PARKING_ASSIGNMENT:
+            if location.kind != 'reserve':
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('This location is not a reserve')
+                })
+                return result.format()
+
+            self.request.env['pack.operation.reserve.rel'].sudo(self._user)\
+                .create({
+                    'pack_operation_id': pack_op.id,
+                    'reserve_location_id': location.id,
+                    'lot_id': lot_id
+                })
+
+        # TODO Please remove me later (when dynamic locations will removed)
+        shelf_source = location.shelf
+        if len(str(shelf_source)) == 1:
+            shelf_source = '0%s' % shelf_source
+
         result.update({
             'lC1': location.zone,
             'lC2': location.corridor,
-            'lC3': location.shelf,
+            'lC3': shelf_source,
             'lC4': location.height,
             'lC5': location.box,
             'lCCD': location.get_checksum(),
@@ -84,6 +145,9 @@ class Location(DomainInterface):
                      ],
                     order='life_date',
                     limit=5)
+        lots = lots.filtered(
+            lambda lot: location.id in lot.mapped('quant_ids.location_id').ids
+        )
 
         # Lots are stored in the value Usf0#LOT_NUMBER (eg: Usf01)
         index = 0
@@ -92,13 +156,14 @@ class Location(DomainInterface):
             setattr(result, 'Usf0{}'.format(index), lot.checksum)
 
         # Search a specific lot
-        specific_lot = self.request.env['stock.production.lot']\
-            .sudo(self._user).search([('checksum', '=', params.Cri07),
-                                      ('product_id', '=', product.id),
-                                      ('is_archived', '=', False)],
-                                     limit=1)
-        if specific_lot:
-            result.Usf06 = specific_lot.checksum
+        if params.Cri07:
+            specific_lot = self.request.env['stock.production.lot']\
+                .sudo(self._user).search([('checksum', '=', params.Cri07),
+                                          ('product_id', '=', product.id),
+                                          ('is_archived', '=', False)],
+                                         limit=1)
+            if specific_lot:
+                result.Usf06 = specific_lot.checksum
 
         return result.format()
 

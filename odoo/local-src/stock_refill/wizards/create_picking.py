@@ -20,7 +20,6 @@
 ##############################################################################
 
 from odoo import api, models, _
-from odoo.exceptions import Warning
 
 
 class StockWizardReassort(models.TransientModel):
@@ -29,28 +28,39 @@ class StockWizardReassort(models.TransientModel):
     @api.multi
     def confirm(self):
         model = self._context['active_model']
-        assert model == 'report.stock.quant.bylocation.reserve', \
+        assert model in ('report.stock.quant.bylocation',
+                         'report.stock.quant.bylocation.reserve'), \
             "Invalid Model"
+
+        pickings = self.env['stock.picking']
         for report in self.env[model].browse(self._context['active_ids']):
-            picking_type = report.location_id.barcode_picking_type_id
-            if not picking_type:
-                raise Warning(_('Missing Operation Type on Location %s') %
-                              report.location_id.display_name)
-            picking = self.env['stock.picking'].create({
-                'move_type': 'direct',
-                'company_id': report.location_id.company_id.id,
-                'picking_type_id': picking_type.id,
-                'origin': 'reassort',
-                'location_id': report.location_id.id,
-                'location_dest_id': picking_type.default_location_dest_id.id,
-                })
-            self.env['stock.move'].create({
-                'name': report.product_id.display_name,
-                'picking_id': picking.id,
-                'product_id': report.product_id.id,
-                'product_uom': report.product_id.uom_id.id,
-                'product_uom_qty': report.qty,
-                'location_id': report.location_id.id,
-                'location_dest_id': picking_type.default_location_dest_id.id,
-                })
-            picking.action_assign()
+            if model == 'report.stock.quant.bylocation':
+                picking = report.create_parking_picking()
+            else:
+                picking = report.create_reserve_picking()
+            pickings |= picking
+
+        if model == 'report.stock.quant.bylocation':
+            name = _('Parking')
+        else:
+            name = _('Reserve')
+
+        action = {
+            'name': name,
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.picking',
+            'view_type': 'form',
+        }
+
+        if len(pickings) == 1:
+            action.update({
+                'view_mode': 'form',
+                'res_id': picking.id
+            })
+        else:
+            action.update({
+                'view_mode': 'tree,form',
+                'domain': [('id', 'in', pickings.ids)]
+            })
+
+        return action

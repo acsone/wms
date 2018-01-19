@@ -35,7 +35,7 @@ class StockPicking(models.Model):
             raise Warning(_('Moves lines already exsits'))
         quants = self.env['stock.quant'].search([
             ('location_id', 'child_of', self.location_id.id),
-            # ('reservation_id', '=', False),
+            ('reservation_id', '=', False),
             ('qty', '>', 0.0)])
         products = {}
         available = False

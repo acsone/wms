@@ -79,6 +79,8 @@ Unreleased
 * Delivery rounds: when assigning moves, do not set again the delivery round if it is already part of it.
 * Picking grouping: when cleaning operations, we really need to delete them before unreserving the moves.
 * Picking grouping: at cancelation, before recomputing pack operation, we need to check if there are no other moves that could be reserved.
+* ALCN-1035: Allow to import supplier info with CNK code to link product
+* ALCN-187: Add the parking and reserve feature
 
 **Bugfixes**
 
