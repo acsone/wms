@@ -6,31 +6,42 @@ Release History
 Unreleased
 ++++++++++
 
-**Data Migration**
-
-* Update imported data on 2018-01-19
-* ALCN-1041 Import customer option to print sale price on their labels
-* Fix import of sale order when assigning tax to last product line. The sequence was not respected.
-* Fix creation of picking and match of lot by filtering by products
-* ALCN-1038 Import product indicated price
-
 **Features and Improvements**
-
-* ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
-* Add user authentication to webservices from connector_esb ALCN-1044
-* ALCN-898: Add the module sale_cancel_remaining
-* ALCN-831: Remove blank in the invoice report
-* ALCN-1037 Set ESF ref on product states data
 
 **Bugfixes**
 
-* Fix filter in statistics/form webservice ALCN-1047
+**Build**
+
+**Documentation**
+
+
+10.15.0 (2018-01-19)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Update imported data on 2018-01-19
+* Fix import of sale order when assigning tax to last product line. The sequence was not respected.
+* Fix creation of picking and match of lot by filtering by products
+* ALCN-1038 Import product indicated price
+* ALCN-1041 Import customer option to print sale price on their labels
+
+**Features and Improvements**
+
+* ALCN-831: Remove blank in the invoice report
+* ALCN-898: Add the module sale_cancel_remaining
+* ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
+* ALCN-1037 Set ESF ref on product states data
+* ALCN-1044 Add user authentication to webservices from connector_esb
+
+**Bugfixes**
+
+* ALCN-1047 Fix filter in statistics/form webservice
 
 **Build**
 
-* Update odoo-cloud-platform (BIZ-1093)
+* BIZ-1093 Update odoo-cloud-platform
 
-**Documentation**
 
 10.14.1 (2018-01-10)
 ++++++++++++++++++++
