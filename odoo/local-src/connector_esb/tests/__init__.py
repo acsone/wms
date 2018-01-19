@@ -10,3 +10,4 @@ from . import test_export_customer
 from . import test_export_promotion_alcyon
 from . import test_ws_stat_customer
 from . import test_ws_create_saleorder
+from . import test_ws_delivery_fee

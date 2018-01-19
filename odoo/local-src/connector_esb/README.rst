@@ -10,8 +10,8 @@ Existing synchronizations:
 
 * Export pharmacies to the ESB (differential, once a day)
 * Export products to the ESB (differential, once a day)
-* Export clients to the ESB (differential, twice a day)
-* Export clients addresses to the ESB (differential, twice a day)
+* Export customers to the ESB (differential, twice a day)
+* Export customers addresses to the ESB (differential, twice a day)
 * Export promotion alcyon to the ESB (differential, once a day)
 * Export products price to the ESB (differential, once a day)
 * Export stock to the ESB (differential, once a day)
@@ -21,10 +21,13 @@ Webservices:
  * ``/connector_esb/product/stock``: return stock levels of products
  * ``/connector_esb/statistics/form``: return statistics from
    parameters sent using a form
- * ``/connector_esb/statistics/product/<sku>/<client_ref>`` :
-        return for a product a client yearly purchase statistics
+ * ``/connector_esb/statistics/product/<sku>/<customer_ref>`` :
+        return for a product a customer yearly purchase statistics
  * ``/connector_esb/statistics/customer/<ref>``: return customer yearly statisctics
  * ``/connector_esb/sales_order/create``: create a new sale order
+ * ``/connector_esb/totalorder/customer/<customer_ref>``:
+        return total of ongoing orders and a flag if the customer must pay
+        delivery fees
 
 Configuration
 =============
