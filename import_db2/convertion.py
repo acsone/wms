@@ -25,6 +25,9 @@ class ProductMapper(EntityMapper):
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
         FieldMapper('standard_price', 'gespan'),
+        FieldMapper(
+            'indicated_price', 'cplz23',
+        ),
         FieldMapper('sale_delay', constant=0),
         FieldMapper('weight', 'gespbr'),
         FieldMapper(

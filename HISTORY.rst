@@ -11,6 +11,7 @@ Unreleased
 * ALCN-1041 Import customer option to print sale price on their labels
 * Fix import of sale order when assigning tax to last product line. The sequence was not respected.
 * Fix creation of picking and match of lot by filtering by products
+* ALCN-1038 Import product indicated price
 
 **Features and Improvements**
 
