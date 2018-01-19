@@ -44,7 +44,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         self.all_records |= self.model.create({
             'email': 'joe@ch.ch',
             'name': 'Joe',
-            'lang': 'nl_BE',
+            'lang': 'tlh_TLH',
             'vat': 'BE0477472701',
             'user_id': '',
             'vet_depot_number': '2/1234/1234',
@@ -120,7 +120,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'Email': u'joe@ch.ch',
             'Username': '',
             'Firstname': u'Joe',
-            'Language': u'NL',
+            'Language': u'TLH',
             'GroupId': self.alcyon_category.esb_ref,
             'Taxvat': u'BE0477472701',
             'IdRound': '',

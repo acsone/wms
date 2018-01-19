@@ -53,7 +53,9 @@ def setup_company(ctx):
 def setup_language(ctx):
     """ Installing language and configuring locale formatting """
     # Skiping time-consuming installation language on CI
-    if not os.environ.get('CI'):
+    if os.environ.get('CI'):
+        ctx.log_line('CI=True => skip lang_install.')
+    else:
         for code in ('fr_BE', 'nl_BE', 'de_DE'):
             ctx.env['base.language.install'].create(
                 {'lang': code}).lang_install()
