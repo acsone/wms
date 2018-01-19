@@ -22,17 +22,8 @@
         <field name="name">Stock in Parking</field>
         <field name="res_model">report.stock.quant.bylocation</field>
         <field name="view_mode">tree</field>
-        <field name="context">{'search_default_available':True}</field>
-        <field name="auto_refresh">60</field>
+        <field name="context">{}</field>
     </record>
-    <record id="filter_parking" model="ir.filters">
-        <field name="name">Parking</field>
-        <field name="model_id">report.stock.quant.bylocation</field>
-        <field name="action_id" ref="action_report_stock_quant_bylocation"/>
-        <field name="domain">[[u'reservation_id', u'=', False], [u'location_id', u'child_of', u'Parking']]</field>
-        <field name="is_default">1</field>
-    </record>
-
 
     <menuitem id="menu_report_stock_bylocation"
         name="Stock in Parking"

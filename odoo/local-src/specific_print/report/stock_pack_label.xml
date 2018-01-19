@@ -11,9 +11,9 @@
        ^XA
        ^XFE:FORMAT.ZPL^FS
        ^FN1^FD<t t-esc="pick.delivery_round_id.template_id.code"/>^FS
-       ^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="pick.partner_id.city"/>^FS
-       ^FN3^FD<t t-esc="pick.partner_id.name[:29]"/>^FS
-       ^FN4^FD<t t-esc="package.name"/>^FS
+       ^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="res_company.convert_to_ascii(pick.partner_id.city)"/>^FS
+       ^FN3^FD<t t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or '')"/>^FS
+       ^FN4^FD<t t-esc="res_company.convert_to_ascii(package.name)"/>^FS
        ^FN5^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS
        ^XZ
       </t>

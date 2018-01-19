@@ -185,4 +185,10 @@ migration:
     - version: 10.15.0
       addons:
         upgrade:
+          ### local-src
+          - specific_print
           - specific_report
+          - specific_report
+          - specific_stock
+          - specific_zetes
+          - stock_barcode_fix

@@ -19,6 +19,7 @@
                         <field name="user_id"/>
                         <field name="picking_id"/>
                         <field name="operation_id"/>
+                        <field name="error_type"/>
                     </group>
                     <separator for="request" string="Request"/>
                     <field name="request"/>
@@ -42,6 +43,7 @@
                 <field name="user_id"/>
                 <field name="picking_id"/>
                 <field name="operation_id"/>
+                <field name="error_type"/>
                 <field name="is_checked"/>
             </tree>
         </field>
@@ -58,8 +60,11 @@
                 <field name="picking_id" />
                 <field name="operation_id" />
                 <field name="user_id" />
+                <field name="error_type" />
                 <separator/>
                 <filter name="need_to_be_check" string="Need to be check" domain="[('is_checked', '=', False)]"/>
+                <separator/>
+                <filter name="human_error" string="Human errors" domain="[('error_type', '=', 'human')]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_by_command" string="Command" context="{'group_by':'command'}"/>
                     <filter name="group_by_domain" string="Domain" context="{'group_by':'domain'}"/>
@@ -76,7 +81,7 @@
         <field name="res_model">zetes.logger</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_need_to_be_check': 1}</field>
+        <field name="context">{'search_default_need_to_be_check': 1, 'search_default_human_error': 1}</field>
     </record>
 
     <menuitem action="action_zetes_logger" id="menu_zetes_logger" parent="stock.menu_stock_config_settings" sequence="60" groups="stock.group_stock_manager"/>

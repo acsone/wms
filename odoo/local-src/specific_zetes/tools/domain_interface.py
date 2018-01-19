@@ -173,8 +173,8 @@ class Parameters:
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
-                raise Exception(_('Cannot format the value {} with type {}'
-                                .format(value, type(value))))
+                raise Exception(_('Cannot format the value %s with type %s'
+                                  ) % (value, type(value)))
 
             ordered_values.append(value)
 
@@ -219,12 +219,14 @@ class Parameters:
             _logger.warning(_('There are some missing mandatory values: {}'
                             .format(', '.join(empty_mandatory_values))))
 
-    def log(self, picking_id=None, operation_id=None, exception=None):
+    def log(self, picking_id=None, operation_id=None,
+            exception=None, error_type=None):
         """
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
         :param operation_id: The operation ID (stock.pack.operation)
         :param exception: An exception (the object himself)
+        :param error_type: The type of error (technical or human)
         :return: None
         """
         self._domain.request.env['zetes.logger'].sudo().create({
@@ -233,6 +235,7 @@ class Parameters:
             'request': self.format(),
             'formatted_request': str(self),
             'user_id': self._domain._user and self._domain._user.id,
+            'error_type': error_type or 'technical',
             'picking_id': picking_id,
             'operation_id': operation_id,
             'traceback': exception and str(exception) or None,

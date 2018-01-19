@@ -20,6 +20,10 @@
         'stock_picking_assignment',
         'specific_stock',
         'stock_product_bin',
+        'stock_barcode_fix',
+        'stock_picking_fillwithstock',
+        'stock_groupbypartner',
+        'procurement_sale'
     ],
     'data': [
         # Views

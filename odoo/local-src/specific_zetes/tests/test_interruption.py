@@ -29,29 +29,35 @@ class TestInterruption(ZetesTest):
             'email': 'hello2@world.com',
         })
 
+        self.location_product_2 = self.env['stock.location'].create({
+            'name': 'GD80B2',
+            'kind': 'bin',
+            'zone': 'G',
+            'corridor': 'D',
+            'shelf': '80',
+            'height': 'B',
+            'box': '2',
+            'location_id': self.zone_gustave.id,
+            'bin_checksum_1': '45',
+            'bin_checksum_2': '45',
+        })
+        self.env['stock.location']._parent_store_compute()
+
         # Product 2
-        # Location: GAD515
+        # Location: GD80B1
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
-            'categ_id': self.env.ref('specific_data.product_categ_medoc').id,
+            'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 40,
+            'type': 'product',
+            'stock_bin_ids': [(0, 0, {
+                'sequence': 1,
+                'location_id': self.stock_location.id,
+                'bin_location_id': self.location_product_2.id,
+            })]
         })
-
-        self.location_product_2 = self.env['stock.location'].create({
-            'name': 'GAD515',
-            'kind': 'bin',
-            'zone': 'G',
-            'corridor': 'A',
-            'shelf': 'D',
-            'height': '5',
-            'box': '15',
-            'location_id': self.parent_location.id,
-            'bin_checksum_1': '456',
-            'bin_checksum_2': '456',
-        })
-        self.env['stock.location']._parent_store_compute()
 
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env['stock.production.lot'].create({
@@ -132,8 +138,8 @@ class TestInterruption(ZetesTest):
         })
         assignement_obj.resu(start_picking_params)
 
-        move_1 = self.picking.pack_operation_product_ids[0]
-        move_2 = self.picking.pack_operation_product_ids[1]
+        pack_op_1 = self.picking.pack_operation_product_ids[0]
+        pack_op_2 = self.picking.pack_operation_product_ids[1]
 
         ##########
         # Step 2 #
@@ -142,16 +148,17 @@ class TestInterruption(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update({
             'groupNum': self.picking.id,
-            'lineId': move_1.id,
+            'lineId': pack_op_1.id,
             'Usf01': self.lot_product_1.checksum,
             'Usf02': 10,  # Pick 10 items
+            'Usf03': None,
         })
         catchweight_obj.resu(request_pick_items_params)
 
         request_validate_picking_line_params = Parameters(itempick_obj)
         request_validate_picking_line_params.update({
             'groupNum': self.picking.id,
-            'pickLineId': move_1.id,
+            'pickLineId': pack_op_1.id,
             'pickStatus': constants.OP_PICKED,
         })
         itempick_obj.resu(request_validate_picking_line_params)
@@ -192,6 +199,7 @@ class TestInterruption(ZetesTest):
         request_assignment_params.update({
             'Cri02': None,
             'Cri01': medic_picking_code,
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': 1
         })
         result_str = assignement_obj.requ(request_assignment_params)
@@ -210,4 +218,4 @@ class TestInterruption(ZetesTest):
         results = \
             [self.format_result(result_line) for result_line in result_lines]
         self.assertEqual(len(results), 1)
-        self.assertEqual(results[0].pickLineId, str(move_2.id))
+        self.assertEqual(results[0].pickLineId, str(pack_op_2.id))

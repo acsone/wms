@@ -47,8 +47,7 @@ class Print(DomainInterface):
             result = Parameters(self, action='resp')
             result.update({
                 'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID {}'
-                             .format(picking_id))
+                'respMsg': _('No picking found with the ID %s') % picking_id
             })
             return result.format()
         picking_id = int(picking_id)
@@ -59,7 +58,7 @@ class Print(DomainInterface):
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
 
-        quantity = int(params.Usf01)
+        quantity = int(params.Usf01 or 0)
 
         try:
             # Create a pack for this picking
@@ -116,8 +115,8 @@ class Print(DomainInterface):
 
             try:
                 picking.sudo().print_products_label(printer=printer_toshiba)
-                picking.sudo().print_packages_label(quantity=quantity,
-                                                    printer=printer_zebra)
+                # picking.sudo().print_packages_label(quantity=quantity,
+                #                                     printer=printer_zebra)
             except Exception as e:
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)

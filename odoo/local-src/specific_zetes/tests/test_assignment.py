@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, \
-    ROUND_CODE, PARTNER_NAME
+from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, ROUND_CODE
 from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
 
@@ -15,12 +14,16 @@ class TestAssignemnt(ZetesTest):
         request_params.update({
             'Cri01': None,
             'Cri02': None,
+            'assignmentType': constants.PICKING_ASSIGNMENT,
             'requestType': '1',
         })
 
         self.partner.write({
             'is_passport_required': True,
         })
+
+        self.assertEqual(self.picking.zetes_picking_type,
+                         constants.PICKING_ASSIGNMENT)
 
         # Search for a picking
         result_str = domain.requ(request_params)
@@ -29,7 +32,6 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.groupNum, str(self.picking.id))
         self.assertEqual(result.Usf03, str(ROUND_CODE))  # Round code
         self.assertEqual(result.Usf06, 'C')
-        self.assertEqual(result.Usf07, PARTNER_NAME)  # Name of partner
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
         # Try with different parameters
@@ -66,11 +68,11 @@ class TestAssignemnt(ZetesTest):
             'Usf01': '1',
         })
 
-        move = self.picking.pack_operation_product_ids[0]
-        move.pack_lot_ids.write({
+        pack_op = self.picking.pack_operation_product_ids[0]
+        pack_op.pack_lot_ids.write({
             'qty': 10,
         })
-        move.write({
+        pack_op.write({
             'qty_done': 10,
         })
         domain.resu(request_params)

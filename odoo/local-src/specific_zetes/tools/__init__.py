@@ -9,3 +9,4 @@ from . import domain_catchweight
 from . import domain_refdata
 from . import domain_location
 from . import domain_print
+from . import domain_itemmove

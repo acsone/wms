@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-19 18:05+0000\n"
-"PO-Revision-Date: 2017-11-19 18:05+0000\n"
+"POT-Creation-Date: 2018-01-16 08:22+0000\n"
+"PO-Revision-Date: 2018-01-16 08:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,26 +32,30 @@ msgid "Assignment"
 msgstr "Assignement"
 
 #. module: specific_zetes
-#: selection:stock.pack.operation,zetes_state:0
 #: selection:stock.picking,zetes_state:0
 msgid "Canceled"
 msgstr "Annulé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:177
-#, python-format
-msgid "Cannot format the value {} with type {}"
-msgstr "Impossible de formater la valeur {} du type {}"
+#: selection:stock.pack.operation,zetes_state:0
+msgid "Canceled / Full"
+msgstr "Annulé / Plein"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:113
+#: code:addons/specific_zetes/tools/domain_interface.py:177
+#, python-format
+msgid "Cannot format the value %s with type %s"
+msgstr "Impossible de formater la valeur %s du type %s"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_assignment.py:81
 #, python-format
 msgid "Cannot found a picking"
 msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:84
-#: code:addons/specific_zetes/tools/domain_print.py:112
+#: code:addons/specific_zetes/tools/domain_print.py:83
+#: code:addons/specific_zetes/tools/domain_print.py:111
 #, python-format
 msgid "Cannot found a printer"
 msgstr "Aucune imprimante trouvée"
@@ -83,14 +87,21 @@ msgid "Complete command"
 msgstr "Commande complète"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_date
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: specific_zetes
+#: selection:stock.picking,zetes_picking_type:0
+msgid "Customer"
+msgstr "Client"
 
 #. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
@@ -110,14 +121,10 @@ msgid "Define if pickings for this partner need to be verify by an another picke
 msgstr "Indique si les enlèvements pour ce client doivent être vérifiés par un autre pickeur."
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_display_name
 msgid "Display Name"
-msgstr "Afficher le nom"
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_price_on_labels
-msgid "Display price on labels"
-msgstr "Afficher le prix sur les étiquettes"
+msgstr "Nom affiché"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_domain
@@ -131,11 +138,16 @@ msgid "Done"
 msgstr "Fait"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:96
-#: code:addons/specific_zetes/tools/domain_print.py:126
+#: code:addons/specific_zetes/tools/domain_print.py:95
+#: code:addons/specific_zetes/tools/domain_print.py:125
 #, python-format
 msgid "Error during printing"
 msgstr "Erreur durant l'impression"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_error_type
+msgid "Error type"
+msgstr "Type d'erreur"
 
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
@@ -148,6 +160,17 @@ msgid "Group By"
 msgstr "Grouper par"
 
 #. module: specific_zetes
+#: selection:zetes.logger,error_type:0
+msgid "Human"
+msgstr "Humaine"
+
+#. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_search
+msgid "Human errors"
+msgstr "Erreurs humaine"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
 msgstr "ID"
@@ -158,16 +181,19 @@ msgid "Itempick"
 msgstr "Elément à enlever"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger___last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
@@ -178,10 +204,21 @@ msgid "Location"
 msgstr "Localisation"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:203
+#: code:addons/specific_zetes/tools/domain_location.py:104
 #, python-format
-msgid "Location not found for the product {}"
-msgstr "Localisation non trouvé pour le produit {}"
+msgid "Location %s%s%s%s%s not found"
+msgstr "Emplacement %s%s%s%s%s non trouvé"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_itempick.py:205
+#, python-format
+msgid "Location not found for the product %s"
+msgstr "Localisation non trouvé pour le produit %s"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_lot_id
+msgid "Lot"
+msgstr "Lot"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_name
@@ -194,18 +231,32 @@ msgid "Need to be check"
 msgstr "Doit être vérifié"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:47
-#: code:addons/specific_zetes/tools/domain_location.py:56
+#: code:addons/specific_zetes/models/stock_picking.py:160
+#, python-format
+msgid "No pack operation found"
+msgstr "Aucune opération trouvée"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/models/stock_picking.py:165
+#, python-format
+msgid "No pack operation found with ID %s"
+msgstr "Aucune opération trouvée avec l'ID %s"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_itemmove.py:68
+#: code:addons/specific_zetes/tools/domain_location.py:51
+#: code:addons/specific_zetes/tools/domain_location.py:71
 #, python-format
 msgid "No picking found"
 msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:83
-#: code:addons/specific_zetes/tools/domain_print.py:51
+#: code:addons/specific_zetes/tools/domain_itemmove.py:77
+#: code:addons/specific_zetes/tools/domain_itempick.py:82
+#: code:addons/specific_zetes/tools/domain_print.py:50
 #, python-format
-msgid "No picking found with the ID {}"
-msgstr "Aucun UOP trouvé avec l'ID {}"
+msgid "No picking found with the ID %s"
+msgstr "Aucun UOP trouvé avec l'ID %s"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_operation_id
@@ -218,9 +269,19 @@ msgid "Operator ID"
 msgstr "Opérateur ID"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_pack_operation_id
+msgid "Pack operation"
+msgstr "Opération"
+
+#. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_pack_operation
 msgid "Packing Operation"
 msgstr "Colisage"
+
+#. module: specific_zetes
+#: selection:stock.picking,zetes_picking_type:0
+msgid "Parking"
+msgstr "Parking"
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_res_partner
@@ -244,6 +305,16 @@ msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_picking_type
+msgid "Picking type"
+msgstr "Type de picking"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_is_portable_printer
+msgid "Portable printer"
+msgstr "Imprimante portable"
+
+#. module: specific_zetes
 #: selection:zetes.logger,domain:0
 msgid "Print"
 msgstr "Imprimer"
@@ -260,6 +331,12 @@ msgstr "Refdata"
 #: selection:zetes.logger,action:0
 msgid "Request"
 msgstr "Requête"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_reserve_location_id
+#: selection:stock.picking,zetes_picking_type:0
+msgid "Reserve"
+msgstr "Réserve"
 
 #. module: specific_zetes
 #: selection:zetes.logger,action:0
@@ -293,6 +370,11 @@ msgid "Start"
 msgstr "Démarré"
 
 #. module: specific_zetes
+#: selection:zetes.logger,error_type:0
+msgid "Technical"
+msgstr "Technique"
+
+#. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_interface.py:210
 #, python-format
 msgid "The number of attributes doen't correspond to the example size"
@@ -323,10 +405,17 @@ msgid "There are some missing mandatory values: {}"
 msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:138
+#: code:addons/specific_zetes/tools/domain_itemmove.py:91
+#: code:addons/specific_zetes/tools/domain_itempick.py:140
 #, python-format
-msgid "There is no lines for the picking {}"
-msgstr "Il n'y a pas d'opérations pour l'enlèvement {}"
+msgid "There is no lines for the picking %s"
+msgstr "There is no lines for the picking %s"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_location.py:117
+#, python-format
+msgid "This location is not a reserve"
+msgstr "This location is not a reserve"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_traceback
@@ -338,6 +427,12 @@ msgstr "Message d'erreur"
 #: model:ir.model,name:specific_zetes.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_assignment.py:74
+#, python-format
+msgid "Unknown assignment type"
+msgstr "Type d'affectation inconnu"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_user_id
@@ -362,6 +457,18 @@ msgid "Users"
 msgstr "Utilisateurs"
 
 #. module: specific_zetes
+#: code:addons/specific_zetes/models/stock_picking.py:145
+#, python-format
+msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
+msgstr "Vous ne pouvez pas diviser cette opération parce que la nouvelle quantité (%s) est supérieure à la quantité disponible (%s)"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/models/stock_picking.py:170
+#, python-format
+msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
+msgstr "Vous ne pouvez pas diviser ce lot parce que la nouvelle quantité (%s) est supérieure à la quantité disponible (%s)"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_is_zetes_error
 msgid "Zetes error"
 msgstr "Erreur zetes"
@@ -384,19 +491,31 @@ msgid "Zetes state"
 msgstr "Etat de Zetes"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_traceback
-msgid "Zetes traceback"
-msgstr "Message d'erreur de Zetes"
+#: code:addons/specific_zetes/tools/domain_assignment.py:97
+#, python-format
+msgid "left"
+msgstr "gauche"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_zone_code
-msgid "Zone code"
-msgstr "Code de la zone"
+#: model:ir.model,name:specific_zetes.model_pack_operation_reserve_rel
+msgid "pack.operation.reserve.rel"
+msgstr "pack.operation.reserve.rel"
 
 #. module: specific_zetes
-#: selection:zetes.logger,domain:0
-msgid "refdata"
-msgstr "refdata"
+#: model:ir.model,name:specific_zetes.model_report_stock_quant_bylocation
+msgid "report.stock.quant.bylocation"
+msgstr "report.stock.quant.bylocation"
+
+#. module: specific_zetes
+#: model:ir.model,name:specific_zetes.model_report_stock_quant_bylocation_reserve
+msgid "report.stock.quant.bylocation.reserve"
+msgstr "report.stock.quant.bylocation.reserve"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_assignment.py:99
+#, python-format
+msgid "right"
+msgstr "droite"
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_zetes_logger

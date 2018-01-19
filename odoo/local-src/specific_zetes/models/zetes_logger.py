@@ -25,6 +25,11 @@ class ZetesLogger(models.Model):
     formatted_request = fields.Text('Request')
     is_checked = fields.Boolean('Checked')
     traceback = fields.Text('Traceback')
+    error_type = fields.Selection([('technical', 'Technical'),
+                                   ('human', 'Human')],
+                                  string='Error type',
+                                  default='technical',
+                                  required=True)
 
     @api.depends('action', 'domain', 'user_id')
     def _compute_name(self):

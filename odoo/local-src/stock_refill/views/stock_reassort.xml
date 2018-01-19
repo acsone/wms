@@ -27,9 +27,7 @@
         <field name="name">Stock to Reassort</field>
         <field name="res_model">report.stock.quant.bylocation.reserve</field>
         <field name="view_mode">tree</field>
-        <!--field name="context">{'search_default_available':True}</field-->
         <field name="context">{}</field>
-        <field name="auto_refresh">60</field>
     </record>
 
 

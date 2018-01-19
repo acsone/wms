@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from odoo.tools import mute_logger
+
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -7,6 +9,8 @@ from ..tools.domain_print import Print
 
 class TestPrint(ZetesTest):
 
+    @mute_logger('odoo.addons.base_report_to_printer.models.printing_server',
+                 'odoo.addons.specific_zetes.tools.domain_print')
     def test_requ_print(self):
         """
         :return:
@@ -47,8 +51,8 @@ class TestPrint(ZetesTest):
             'server_id': printer_server.id,
         })
 
-        move = self.picking.pack_operation_product_ids
-        move.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
         # Print products labels and package labels
         domain = Print(DEFAULT_HEADER, request_overwrite=self)

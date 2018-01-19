@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import fields, models
+from odoo import api, fields, models, _
 
 
 class ReportStockQuantBylocation(models.Model):
@@ -38,11 +38,35 @@ class ReportStockQuantBylocation(models.Model):
     def _prepare_init(self):
         d = super(ReportStockQuantBylocation, self)._prepare_init()
         d['select'] += ", product.priority_arrangement as refill_priority"
+        d['join'] += (" LEFT JOIN stock_location as location "
+                      " ON quant.location_id = location.id ")
+        d['where'] += " AND location.kind = 'parking'" \
+                      " AND quant.reservation_id IS NULL "
         d['groupby'] += ",priority_arrangement"
         return d
 
     refill_priority = fields.Integer(
         'Refill Priority', readonly=True)
+
+    @api.multi
+    def create_parking_picking(self):
+        self.ensure_one()
+
+        picking_type = self.location_id.barcode_picking_type_id
+        if not picking_type:
+            raise Warning(_('Missing Operation Type on Location %s') %
+                          self.location_id.display_name)
+        picking = self.env['stock.picking'].create({
+            'move_type': 'direct',
+            'company_id': self.location_id.company_id.id,
+            'picking_type_id': picking_type.id,
+            'origin': 'reassort',
+            'location_id': self.location_id.id,
+            'location_dest_id': picking_type.default_location_dest_id.id,
+        })
+        picking.button_fillwithstock()
+
+        return picking
 
 
 class ReportStockQuantBylocationReserve(models.Model):
@@ -62,7 +86,8 @@ class ReportStockQuantBylocationReserve(models.Model):
                       " ON quant.location_id = location.id "
                       " LEFT JOIN stock_production_lot as lot "
                       " ON quant.lot_id = lot.id ")
-        d['where'] += " AND location.kind = 'reserve' "
+        d['where'] += " AND location.kind = 'reserve'" \
+                      " AND quant.reservation_id IS NULL "
         d['groupby'] += ", product.priority_reassort, lot.removal_date"
         return d
 
@@ -72,3 +97,32 @@ class ReportStockQuantBylocationReserve(models.Model):
         'Removal Date',
         help="This is the date on which the goods with this Serial Number "
              "should be removed from the stock.")
+
+    @api.multi
+    def create_reserve_picking(self):
+        self.ensure_one()
+
+        picking_type = self.location_id.barcode_picking_type_id
+        if not picking_type:
+            raise Warning(_('Missing Operation Type on Location %s') %
+                          self.location_id.display_name)
+        picking = self.env['stock.picking'].create({
+            'move_type': 'direct',
+            'company_id': self.location_id.company_id.id,
+            'picking_type_id': picking_type.id,
+            'origin': 'reassort',
+            'location_id': self.location_id.id,
+            'location_dest_id': picking_type.default_location_dest_id.id,
+        })
+        self.env['stock.move'].create({
+            'name': self.product_id.display_name,
+            'picking_id': picking.id,
+            'product_id': self.product_id.id,
+            'product_uom': self.product_id.uom_id.id,
+            'product_uom_qty': self.qty,
+            'location_id': self.location_id.id,
+            'location_dest_id': picking_type.default_location_dest_id.id,
+        })
+        picking.action_assign()
+
+        return picking

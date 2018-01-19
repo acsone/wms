@@ -64,65 +64,186 @@ class Catchweight(DomainInterface):
         for a response even if there is an error. We need to catch and manage
         errors by yourself.
 
-        Set the quantity (Usf02) on the stock move (lineId)
-        Usf01 is the lot number
+        Set the quantity (Usf02) on the stock pack operation (lineId)
+        Usf01 is the lot number.
+        With the process "Parking" and "Reserve" the quantity (Usf02) can
+        be more or less than the requested quantity. However Odoo
+        doesn't allow to pick more than the requested quantity.
+        It's why we check if the picked quantity is greater than the requested
+        quantity. In this case, we look an error and we set the quantity
+        to the requested quantity.
+
+        If the param Usf03 (Zero Check) is filled we need to compare
+        the virtual quantity in stock with the real (say by the picker)
+        quantity in stock. If Usf03 is filled we have to stop to process
+        and only check the quantity in stock.
+
+        For the process Parking, if the stock if full, the picker will go to
+        the reserve. In this case we need to split the pack operation
+        (one operation for the stock and one operation for the reserve).
+
+        For the process Reserve, if the stock if ull, the picker will return
+        some quantity to the reserve. In this case we need to split the pack
+        operation (one operation for the stock and one operation for the
+        reserve). The operation for this reserve will have the same
+        location for the source and the destination.
         :param params:
         :return:
         """
-        move_id = params.lineId
-
-        if not move_id:
+        line_id = params.lineId
+        if not line_id:
             return
 
-        move = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .browse(int(move_id))
-        if not len(move):
+        if isinstance(line_id, int):
+            line_id = str(line_id)
+
+        pack_operation_id = int(line_id.split('_')[0])
+
+        pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
+            .browse(pack_operation_id)
+        if not len(pack_op):
             return
 
         try:
             # Retrieve the quantity
-            qty_done_by_lot = params.Usf02 and float(params.Usf02) or 0
-
+            real_qty = params.Usf02 and float(params.Usf02) or 0
+            virtual_qty = self.check_picked_quantity(params, pack_op, real_qty)
             # and the lot number
             lot_number = params.Usf01
-            # If there is no lot number, it means that we don't care about lot
-            # (tracking => without lot). We can simply add the new quantity.
-            if not lot_number:
-                move.qty_done += qty_done_by_lot
-            else:
-                # Otherwise we need to search for the lot in Odoo
-                lot = self.request.env['stock.production.lot']\
+
+            lot_id = None
+            if lot_number:
+                lot = self.request.env['stock.production.lot'] \
                     .sudo(self._user).search(
-                    [('product_id', '=', move.product_id.id),
-                     ('checksum', '=', lot_number)])
+                    [('product_id', '=', pack_op.product_id.id),
+                     ('checksum', '=', lot_number)], limit=1)
                 if lot:
-                    # When we have the lot, we will check if there no existing
-                    # quantity for this lot.
-                    pack_lot = \
-                        move.pack_lot_ids\
-                            .filtered(lambda line: line.lot_id.id == lot.id)
+                    lot_id = lot.id
 
-                    # If there no existing line (quantity) for this lot
-                    # we will create a new line
-                    if not len(pack_lot):
-                        move.pack_lot_ids.create({
-                            'operation_id': move.id,
-                            'qty': qty_done_by_lot,
-                            'lot_id': lot.id,
-                        })
-                    # Otherwise we set the quantity for this lot
-                    # We don't need to add the new quantity to the lot
-                    # because Zetes send one request by lot
-                    else:
-                        pack_lot.write({'qty': qty_done_by_lot})
+            # If we receive a value for Usf03, it means that we have to
+            # check if the available quantity (in Odoo) is the same than
+            # the real quantity (say by the picker).
+            actual_stock = params.Usf03
+            if actual_stock or actual_stock == 0:
+                self.check_actual_stock(params, pack_op, actual_stock, lot_id)
+                return
 
-                    # Set the final quantity on the move
-                    qty_done = move.qty_done + qty_done_by_lot
-                    move.write({
-                        'qty_done': qty_done,
-                    })
+            picking = pack_op.picking_id
+            # The stock is full and the picker need to go to the reserve
+            if (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+                and pack_op.zetes_state == constants.MOVE_FULL) or \
+                (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+                 and not virtual_qty):
+                reserve_rel_obj = \
+                    self.request.env['pack.operation.reserve.rel']
+                reserve_rel = reserve_rel_obj.sudo(self._user).search([
+                    ('pack_operation_id', '=', pack_op.id),
+                    ('lot_id', '=', lot_id)
+                ], limit=1, order="id DESC")
+
+                if not reserve_rel:
+                    error_message = "Reserve not found for pack_op %s " \
+                                    "(lot %s)" % (pack_op.id, lot_id)
+                    _logger.error(error_message)
+                    params.log(picking_id=pack_op.picking_id.id,
+                               operation_id=pack_operation_id,
+                               exception=error_message)
+                    return
+
+                reserve = reserve_rel.reserve_location_id
+                pack_op.put_in_reserve(reserve.id)
+            # Only for "Reserve". The stock is full and the picker will return
+            # some quantity to the reserve
+            elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
+                    and pack_op.product_qty > virtual_qty:
+                # Add the new quantity to the current pack op
+                pack_op.add_qty(virtual_qty, lot_id)
+                location_dest_id = pack_op.location_id.id
+                new_qty = pack_op.product_qty - virtual_qty
+
+                # Create the pack op for the quantity left in the reserve
+                pack_op_move = \
+                    pack_op.split_pack_op(new_qty, location_dest_id, lot_id)
+                pack_op_move.add_qty(new_qty, lot_id)
+            # Otherwise simple add the new quantity to the current pack op
+            else:
+                pack_op.add_qty(virtual_qty, lot_id)
+
         except Exception as e:
             _logger.error(str(e))
-            params.log(picking_id=move.picking_id.id,
-                       operation_id=move_id,
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=pack_operation_id,
                        exception=e)
+
+    def check_actual_stock(self, params, pack_op, actual_stock, lot_id=None):
+        """
+        Check if the actual quantity in stock equals the available quantity
+        in Odoo.
+        :param params:
+        :param pack_op:
+        :param actual_stock:
+        :param lot_id:
+        :return:
+        """
+        available_qty_query = """
+        SELECT sum(quant.qty)
+        FROM stock_quant AS quant
+        WHERE quant.product_id = %s
+          AND quant.location_id = %s
+          AND quant.reservation_id IS NULL
+        """
+        query_values = [pack_op.product_id.id, pack_op.location_id.id]
+
+        self.request.env.cr.execute(available_qty_query, tuple(query_values))
+        query_result = self.request.env.cr.fetchone()
+        available_qty = query_result and query_result[0] or 0
+
+        if available_qty != actual_stock:
+            error_message = "The theoretical stock (%s) is different" \
+                            " from the actual stock (%s) for" \
+                            " the product %s in the location %s" % \
+                            (available_qty,
+                             actual_stock,
+                             pack_op.product_id.display_name,
+                             pack_op.location_id.display_name)
+            if lot_id:
+                lot = self.request.env['stock.production.lot']\
+                    .sudo(self._user).browse(lot_id)
+                error_message += " (lot %s)" % lot.name
+
+            _logger.error(error_message)
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=pack_op.id,
+                       exception=error_message,
+                       error_type='human')
+
+    def check_picked_quantity(self, params, pack_op, picked_quantity):
+        """
+        Zetes allows (only for Parking and Reserve) to take a quantity
+        greater than the requested quantity. However Odoo refuse this case.
+        If the picked quantity is greater than the requested quantity we need
+        to virtually change the picked quantity with the requested quantity
+        and send an email to warm the manager.
+        :param pack_op:
+        :param picked_quantity:
+        :return:
+        """
+        total_picked_quantity = pack_op.qty_done + picked_quantity
+        max_allowed_quantity = pack_op.product_qty
+
+        if total_picked_quantity > max_allowed_quantity:
+            error_message = "The total picked quantity (%s) is greater than" \
+                            " the requested quantity (%s) for the product " \
+                            "%s (Operation ID %s)" % \
+                            (total_picked_quantity,
+                             max_allowed_quantity,
+                             pack_op.product_id.display_name,
+                             pack_op.id)
+            _logger.error(error_message)
+            params.log(picking_id=pack_op.picking_id.id,
+                       operation_id=pack_op.id,
+                       exception=error_message,
+                       error_type='human')
+            return pack_op.product_qty - pack_op.qty_done
+
+        return picked_quantity
