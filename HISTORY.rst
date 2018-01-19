@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* Update imported data on 2018-01-19
 * ALCN-1041 Import customer option to print sale price on their labels
 * Fix import of sale order when assigning tax to last product line. The sequence was not respected.
 * Fix creation of picking and match of lot by filtering by products
