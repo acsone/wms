@@ -18,6 +18,7 @@
         'stock_available_immediately',
         'specific_data',
         'stock_lot_track',
+        'sale_cancel_remaining',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
