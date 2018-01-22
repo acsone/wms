@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1053 : Add change requested on customer adresses xml export
+
 **Build**
 
 **Documentation**

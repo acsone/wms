@@ -3,39 +3,26 @@
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
       <IsDefaultShipping>False</IsDefaultShipping>
-      <City>Kloten</City>
+      <City>Somewhere very far away</City>
       <Street>Some streets in one line</Street>
       <CountryId>ESB</CountryId>
       <Postcode>xyz</Postcode>
-      <Firstname/>
+      <Firstname>invoicing-address</Firstname>
       <IsDefaultBilling>True</IsDefaultBilling>
       <AddressId>ref-invoice</AddressId>
       <Telephone>021123123</Telephone>
-      <CustomerId>refno</CustomerId>
+      <CustomerId>refclient</CustomerId>
     </Row>
     <Row>
       <IsDefaultShipping>True</IsDefaultShipping>
-      <City>Bern</City>
-      <Fax>0123123123</Fax>
-      <Street>Some streets in two line
-Second line, here</Street>
+      <City>Armagedon</City>
+      <Street>Main Street, 2</Street>
       <CountryId>ESB</CountryId>
-      <AddressId>ref-delivery</AddressId>
-      <Firstname/>
+      <AddressId>refclient</AddressId>
+      <Firstname>Company 1</Firstname>
       <IsDefaultBilling>False</IsDefaultBilling>
-      <CustomerId>refno</CustomerId>
-    </Row>
-    <Row>
-      <IsDefaultShipping>True</IsDefaultShipping>
-      <City>Genf</City>
-      <Street>Some streets in two line
-2nd line</Street>
-      <CountryId>ESB</CountryId>
-      <AddressId>ref-delivery</AddressId>
-      <Firstname>contact-name</Firstname>
-      <IsDefaultBilling>True</IsDefaultBilling>
-      <CustomerId>refno2</CustomerId>
-      <Postcode>xyz</Postcode>
+      <CustomerId>refclient</CustomerId>
+      <Postcode>999888</Postcode>
     </Row>
   </Root>
 </ROOT>
