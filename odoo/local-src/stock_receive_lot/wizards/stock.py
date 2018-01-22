@@ -102,7 +102,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         'Qty Remaining',
         compute='_get_remaining_qty')
 
-    @api.depends('operation_id')
+    @api.depends('operation_id.qty_done')
     @api.one
     def _get_remaining_qty(self):
         self.remaining_qty = (

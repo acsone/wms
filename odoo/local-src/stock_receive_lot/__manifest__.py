@@ -11,8 +11,8 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
-        'stock_expired',
         'stock_picking_assignment',
+        'stock_production_lot_expired_dates',
     ],
     'data': [
         'views/stock_pack_operation.xml',
