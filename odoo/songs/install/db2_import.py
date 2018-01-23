@@ -4,6 +4,7 @@
 
 import os
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 import anthem
 from odoo import fields
@@ -46,22 +47,6 @@ INT_IMPORTER = [
 ]
 
 
-def add_years(d, years, months):
-    """ Return a new date with added x years
-
-    Take care of unexisting 29th February and replace it by 1st March
-
-    """
-    try:
-        return d.replace(year=d.year + years, month=d.month + months)
-    except Exception:
-        # (just in case of unexisting 29th February take 1rst March)
-        return d.replace(
-            year=d.year + years,
-            month=d.month + months + 1,
-            day=1)
-
-
 @anthem.log
 def main(ctx):
     """ Setup and launch DB2 import tools
@@ -87,10 +72,11 @@ def main(ctx):
 
     for data in importers:
         rec = ctx.env.ref(data['ref'])
-        start_date = add_years(today, -data['years'], -data['months'])
+        start_date = today + relativedelta(years=-data['years'],
+                                           months=-data['months'])
         start_date_str = fields.Date.to_string(start_date)
         rec.write({
-            'mode': 'history',
+            'mode': 'final_update',
             'date_start': start_date_str,
             'date_end': end_date_str,
         })
