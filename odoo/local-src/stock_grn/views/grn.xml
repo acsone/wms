@@ -56,7 +56,10 @@
                             </group>
                         </group>
                         <group>
-                            <field name="picking_ids" widget="many2many" context="{'search_default_available':1,'search_default_nogrn':1}"/>
+                            <field name="picking_ids"
+                                widget="many2many" options="{'not_delete':1}"
+                                context="{'search_default_available':1,'search_default_nogrn':1}"
+                                />
                         </group>
                     </sheet>
                 </form>

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models, api
@@ -13,6 +13,8 @@ class StockPackOperation(models.Model):
 
     qty_backorder = fields.Integer(
         'Nbr Backorder',
+        help="Quantity of customers having a picking waiting for the "
+             "availability of product",
         readonly=True)
 
 
@@ -21,49 +23,42 @@ class StockPicking(models.Model):
 
     qty_outofstock = fields.Integer(
         'Nbr Out of Stock',
-        compute='_get_qty_backorder',
-        help="Quantity of operations having a product where the current stock "
-             "is <= 0")
+        help="Quantity of products where the available stock is < 0")
 
     qty_backorder = fields.Integer(
         'Nbr Backorder',
-        compute='_get_qty_backorder',
-        help="Quantity of deliveries waiting for availability. We take all "
-             "deliveries waiting any of the products listed in the operations "
-             "and we count each distinct delivery address")
+        help="Quantity of deliveries part of a delivery round waiting for "
+             "availability. For each product of the reception order, we "
+             "count the customers (delivery address) waiting for the goods "
+             "and we sum those quantities")
 
     @api.multi
-    def _get_qty_backorder(self):
+    def _compute_qty_backorder(self):
         """ Amount of move lines having a backorder """
         # The computation is performed with 1 query per warehouse
         receptions = {}  # receptions grouped by warehouse stock location
-        supplier_locs = [
-            self.env.ref('stock.stock_location_suppliers'),
-            # what about transit inter-warehouse?
-        ]
         for record in self:
-            if record.location_id not in supplier_locs:
-                # restrict this computation to receptions only (moves from
-                # suppliers)
+            if record.location_id.usage != 'supplier':
+                # restrict this computation to receptions only
                 record.qty_backorder = 0
-                record.qty_outofstock = 0
             else:
-                receptions.setdefault(
-                    record.picking_type_id.warehouse_id.lot_stock_id.id,
-                    self.browse())
-                receptions[record.picking_type_id.warehouse_id
-                           .lot_stock_id.id] += record
+                stock_loc = record.picking_type_id.warehouse_id.lot_stock_id
+                receptions.setdefault(stock_loc.id, self.browse())
+                receptions[stock_loc.id] += record
         # Now compute the qty
         for stock_id, pickings in receptions.iteritems():
+            # We count the number of moves from stock in
+            # state == confirmed("Waiting Availability")
+            # for each product
+            # part of a delivery round
+            # Each delivery address count for 1
+            _logger.debug('Computing qty_backorder')
+
             packs = pickings.mapped('pack_operation_product_ids')
             all_products = packs.mapped('product_id')
             if not all_products:
                 continue
 
-            # We count the number of moves from stock in
-            #   - "Waiting Availability" (MTS)
-            # for each product
-            # Each delivery address count for 1
             self._cr.execute("""
                 WITH moves AS (
                     SELECT distinct move.partner_id, move.product_id
@@ -72,31 +67,51 @@ class StockPicking(models.Model):
                         ON move.location_id = loc.id
                     JOIN stock_location p ON p.parent_left<=loc.parent_left
                         AND p.parent_right>=loc.parent_right
+                    JOIN stock_picking AS picking
+                        ON picking.id = move.picking_id
                     WHERE move.state = 'confirmed'
-                    -- AND move.partner_id IS NOT NULL
+                    AND picking.delivery_round_id IS NOT NULL
                     AND move.product_id in %s
                     AND p.id = %s
+                ),
+                quantity AS (
+                    SELECT product_id, count(*) as count
+                    FROM moves
+                    GROUP BY product_id
                 )
-                SELECT product_id, count(*)
-                FROM moves
-                GROUP BY product_id
-                """, (tuple(all_products.ids), stock_id))
-            backorders = dict(self._cr.fetchall())
+                UPDATE stock_pack_operation SET qty_backorder = (
+                    SELECT count FROM quantity
+                    WHERE stock_pack_operation.product_id=quantity.product_id
+                    )
+                WHERE id in %s
+                """, (tuple(all_products.ids), stock_id, tuple(packs.ids)))
+
+            # self._cr.execute("""
+            #     UPDATE stock_picking SET qty_backorder = (
+            #         SELECT sum(qty_backorder)
+            #         FROM stock_pack_operation
+            #         WHERE stock_pack_operation.picking_id = stock_picking.id
+            #         )
+            #     WHERE id in %s
+            #     """, (tuple(pickings.ids), ))
 
             for record in pickings:
-                for packop in record.pack_operation_product_ids:
-                    qty_backorder = backorders.get(packop.product_id.id, 0)
-                    if packop.qty_backorder != qty_backorder:
-                        packop.write({
-                            'qty_backorder': backorders.get(
-                                packop.product_id.id, 0),
-                        })
-                products = record.mapped('pack_operation_product_ids') \
-                    .mapped('product_id')
-                record.qty_backorder = sum([backorders.get(prod_id, 0)
-                                           for prod_id in products.ids])
-                record.qty_outofstock = len(products.filtered(
-                        lambda r: r.qty_available <= 0))
+                record.qty_backorder = sum(
+                    record.mapped('pack_operation_product_ids.qty_backorder'))
+            _logger.debug('Computing qty_backorder - done')
+
+    @api.multi
+    def _compute_qty_outofstock(self):
+        _logger.debug('Computing qty_outofstock')
+        all_products = self.mapped('pack_operation_product_ids.product_id')
+        products_unavailable_ids = set(all_products.filtered(
+            lambda r: r.immediately_usable_qty < 0).ids)
+        for record in self:
+            product_ids = set(record.mapped('pack_operation_product_ids')
+                              .mapped('product_id').ids)
+            record.qty_outofstock = len(
+                product_ids.intersection(products_unavailable_ids))
+        _logger.debug('Computing qty_outofstock - done')
 
     def _calc_priority(self):
         return self.qty_backorder * 1000 + self.qty_outofstock
@@ -104,23 +119,27 @@ class StockPicking(models.Model):
     @api.multi
     @api.constrains('grn_id')
     def _update_rank_on_grn(self):
-        for rec in self:
-            if not rec.grn_id:
-                rec.rank = 0
-            elif not rec.rank:
-                rec.rank = self._calc_priority()
+        self.button_priority_recompute()
 
     @api.multi
     def button_priority_recompute(self):
         super(StockPicking, self).button_priority_recompute()
-        self._cron_priority_recompute()
+        receptions = self.filtered(
+            lambda r: r.location_id.usage == 'supplier')
+        receptions._compute_qty_backorder()
+        receptions._compute_qty_outofstock()
+        for record in receptions:
+            record.rank = record._calc_priority()
 
     @api.model
     def _cron_priority_recompute(self):
         domain = [
             ('grn_id', '!=', False),
             ('state', 'in', ('assigned', 'partially_available'))]
-        for picking in self.search(domain):
+        receptions = self.search(domain)
+        receptions._compute_qty_backorder()
+        receptions._compute_qty_outofstock()
+        for picking in receptions:
             priority = picking._calc_priority()
             if picking.rank != priority:
                 picking.rank = priority

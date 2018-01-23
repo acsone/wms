@@ -184,3 +184,9 @@ migration:
     - version: 10.14.1
     - version: 10.15.0
     - version: 10.15.1
+    - version: 10.15.2
+      addons:
+        upgrade:
+          ### local-src
+          - stock_reception_priority
+          - stock_grn
