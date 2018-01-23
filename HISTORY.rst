@@ -16,20 +16,19 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1008: Raise an error when a user try to "deliver" a round with partially available pickings
-* Add user authentication to webservices from connector_esb ALCN-1044
+* ALCN-1044: Add user authentication to webservices from connector_esb
 * ALCN-898: Add the module sale_cancel_remaining
 * ALCN-831: Remove blank in the invoice report
 * ALCN-1037 Set ESF ref on product states data
 
 **Bugfixes**
 
-* Fix filter in statistics/form webservice ALCN-1047
-
-* Fix statistic webservice returning 500 error ALCN-1045
+* ALCN-1047: Fix filter in statistics/form webservice
+* ALCN-1045: Fix statistic webservice returning 500 error
 
 **Build**
 
-* Update odoo-cloud-platform (BIZ-1093)
+* BIZ-1093: Update odoo-cloud-platform
 
 **Documentation**
 
