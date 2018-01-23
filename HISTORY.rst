@@ -7,14 +7,23 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* At reception, automatically assign operator when receiving + do not allow to receive more than the expected remaining quantity
 
 **Bugfixes**
-* Do not copy picking printed and operator_id field (important for backorder creation)
 
 **Build**
 
 **Documentation**
+
+
+10.15.1 (2018-01-23)
+++++++++++++++++++++
+
+**Features and Improvements**
+* At reception, automatically assign operator when receiving + do not allow to receive more than the expected remaining quantity
+
+**Bugfixes**
+* Do not copy picking printed and operator_id field (important for backorder creation)
+* Fix db2 importer songs setup failing on date computation
 
 
 10.15.0 (2018-01-19)
