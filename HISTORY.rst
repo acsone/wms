@@ -15,6 +15,17 @@ Unreleased
 **Documentation**
 
 
+10.15.2 (2018-01-23)
+++++++++++++++++++++
+
+**Features and Improvements**
+* Reception screen priority computation optimization
+* In reception wizard, allow to transfer. Process current operation before making transfer
+
+**Bugfixes**
+* GRN PO unlinking
+
+
 10.15.1 (2018-01-23)
 ++++++++++++++++++++
 
