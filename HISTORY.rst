@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1055: add last suite name on the partner
+
 **Bugfixes**
 
 **Build**
