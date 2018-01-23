@@ -880,23 +880,23 @@ class ProductStockBinMapper(EntityMapper):
         return query, []
 
 
-MAPPER_CLASSES = [#LocationMapper, ProductMapper,
-                  #Supplierinfo,
-                  #CustomerMapper, SupplierMapper,
-                  #CustomerAddressMapper,
-                  #SaleOrderMapper,
-                  #SaleOrderLineMapper,
+MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  Supplierinfo,
+                  CustomerMapper, SupplierMapper,
+                  CustomerAddressMapper,
+                  SaleOrderMapper,
+                  SaleOrderLineMapper,
                   StockProductionLotMapper,
                   StockInventoryLineMapper,
-                  #ProductStockBinMapper
+                  ProductStockBinMapper
                   ]
 
 
-MAPPER_CLASSES_FULL = [#LocationMapper, ProductMapper,
-                       #Supplierinfo,
-                       #CustomerMapper, SupplierMapper,
-                       #CustomerAddressMapper,
+MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
+                       Supplierinfo,
+                       CustomerMapper, SupplierMapper,
+                       CustomerAddressMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
-                       #ProductStockBinMapper
+                       ProductStockBinMapper
                        ]
