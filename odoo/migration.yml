@@ -102,6 +102,8 @@ migration:
           - account_banking_sepa_credit_transfer
           - account_banking_sepa_direct_debit
           - account_invoice_tax_required
+          # oca/product-attribute
+          - product_manufacturer
           # oca/sale-workflow
           - sale_exception
           - sale_triple_discount
