@@ -242,4 +242,5 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.location_dest_id = False
 
     def button_transfer(self):
+        self.button_nextop()
         return self.picking_id.do_new_transfer()
