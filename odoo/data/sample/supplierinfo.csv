@@ -1,20 +1,20 @@
 id,name/id,product_code,price,discount_sale,min_qty_sale,date_start,date_end,product_tmpl_id/id
-__import__.supplierinfo_60422-1421825-201703,__import__.supplier_60422,033974,8.93,20.00,1,2017-03-01,2017-03-31,__import__.product_1421825_product_template
-__import__.supplierinfo_60422-1421825-201705,__import__.supplier_60422,033974,8.93,20.00,1,2017-05-01,2017-05-31,__import__.product_1421825_product_template
+__import__.supplierinfo_60422-1421825-201703,__import__.supplier_60422,033974,11.38,20.00,1,2017-03-01,2017-03-31,__import__.product_1421825_product_template
+__import__.supplierinfo_60422-1421825-201705,__import__.supplier_60422,033974,11.38,20.00,1,2017-05-01,2017-05-31,__import__.product_1421825_product_template
 __import__.supplierinfo_60422-2081784-201703,__import__.supplier_60422,033978,6.41,30.00,1,2017-03-01,2017-03-31,__import__.product_2081784_product_template
-__import__.supplierinfo_60422-2314425,__import__.supplier_60422,40043,39.58,,1,,,__import__.product_2314425_product_template
-__import__.supplierinfo_60422-5260006,__import__.supplier_60422,31097,38.97,,1,,,__import__.product_5260006_product_template
+__import__.supplierinfo_60422-2314425,__import__.supplier_60422,40043,39.98,,1,,,__import__.product_2314425_product_template
+__import__.supplierinfo_60422-5260006,__import__.supplier_60422,31097,40.76,,1,,,__import__.product_5260006_product_template
 __import__.supplierinfo_60422-5260008,__import__.supplier_60422,031130,13.28,,1,,,__import__.product_5260008_product_template
 __import__.supplierinfo_60422-2382729,__import__.supplier_60422,033080,7.14,,1,,,__import__.product_2382729_product_template
 __import__.supplierinfo_60422-2730984-201704,__import__.supplier_60422,034011,19.84,15.00,1,2017-04-01,2017-04-30,__import__.product_2730984_product_template
 __import__.supplierinfo_60422-2879526-201703,__import__.supplier_60422,033625,13.05,20.00,1,2017-03-01,2017-03-31,__import__.product_2879526_product_template
 __import__.supplierinfo_60422-2879526-201704,__import__.supplier_60422,033625,13.05,10.00,1,2017-04-01,2017-05-31,__import__.product_2879526_product_template
 __import__.supplierinfo_60422-2892545,__import__.supplier_60422,032097,8.94,,1,,,__import__.product_2892545_product_template
-__import__.supplierinfo_60422-2923670,__import__.supplier_60422,032077,4.24,,1,,,__import__.product_2923670_product_template
-__import__.supplierinfo_60422-2954444,__import__.supplier_60422,033588,41.85,,1,,,__import__.product_2954444_product_template
-__import__.supplierinfo_60422-3033123-201705,__import__.supplier_60422,033950,4.19,20.00,1,2017-05-01,2017-05-31,__import__.product_3033123_product_template
-__import__.supplierinfo_60422-3033123-201703,__import__.supplier_60422,033950,4.19,20.00,1,2017-03-01,2017-03-31,__import__.product_3033123_product_template
-__import__.supplierinfo_60422-5090362-201703,__import__.supplier_60422,033533,18.95,30.00,1,2017-03-01,2017-03-31,__import__.product_5090362_product_template
+__import__.supplierinfo_60422-2923670,__import__.supplier_60422,032077,4.43,,1,,,__import__.product_2923670_product_template
+__import__.supplierinfo_60422-2954444,__import__.supplier_60422,033588,38.42,,1,,,__import__.product_2954444_product_template
+__import__.supplierinfo_60422-3033123-201705,__import__.supplier_60422,033950,5.62,20.00,1,2017-05-01,2017-05-31,__import__.product_3033123_product_template
+__import__.supplierinfo_60422-3033123-201703,__import__.supplier_60422,033950,5.62,20.00,1,2017-03-01,2017-03-31,__import__.product_3033123_product_template
+__import__.supplierinfo_60422-5090362-201703,__import__.supplier_60422,033533,42.10,30.00,1,2017-03-01,2017-03-31,__import__.product_5090362_product_template
 __import__.supplierinfo_60425-5259805,__import__.supplier_60425,VDGREQ4,32.80,,1,,,__import__.product_5259805_product_template
 __import__.supplierinfo_61593-8214195,__import__.supplier_61593,2400RD018,1.23,,1,,,__import__.product_8214195_product_template
 __import__.supplierinfo_61645-5164542,__import__.supplier_61645,PSEN-4,15.47,,1,,,__import__.product_5164542_product_template
@@ -24,13 +24,13 @@ __import__.supplierinfo_61800-3288000,__import__.supplier_61800,12274680,24.57,,
 __import__.supplierinfo_61800-2171886,__import__.supplier_61800,12171886,37.12,,1,,,__import__.product_2171886_product_template
 __import__.supplierinfo_61920-5192007,__import__.supplier_61920,E116,5.64,,1,,,__import__.product_5192007_product_template
 __import__.supplierinfo_61920-5192761,__import__.supplier_61920,E761,38.49,,1,,,__import__.product_5192761_product_template
-__import__.supplierinfo_62600-1088897,__import__.supplier_62600,84440117,51.59,,1,,,__import__.product_1088897_product_template
+__import__.supplierinfo_62600-1088897,__import__.supplier_62600,84440117,43.19,,1,,,__import__.product_1088897_product_template
 __import__.supplierinfo_62600-1154590,__import__.supplier_62600,82352245,12.56,,1,,,__import__.product_1154590_product_template
 __import__.supplierinfo_62600-1124940,__import__.supplier_62600,80371633,14.39,,1,,,__import__.product_1124940_product_template
 __import__.supplierinfo_62600-1122118,__import__.supplier_62600,84288323,14.83,,1,,,__import__.product_1122118_product_template
-__import__.supplierinfo_62600-1357201-201703,__import__.supplier_62600,84228214,11.26,15.00,1,2017-03-01,2017-03-31,__import__.product_1357201_product_template
-__import__.supplierinfo_62600-1357219-201703,__import__.supplier_62600,84229822,12.79,15.00,1,2017-03-01,2017-03-31,__import__.product_1357219_product_template
-__import__.supplierinfo_62600-0029132,__import__.supplier_62600,82854712,15.86,,1,,,__import__.product_0029132_product_template
+__import__.supplierinfo_62600-1357201-201703,__import__.supplier_62600,84228214,8.29,15.00,1,2017-03-01,2017-03-31,__import__.product_1357201_product_template
+__import__.supplierinfo_62600-1357219-201703,__import__.supplier_62600,84229822,9.41,15.00,1,2017-03-01,2017-03-31,__import__.product_1357219_product_template
+__import__.supplierinfo_62600-0029132,__import__.supplier_62600,82854712,13.50,,1,,,__import__.product_0029132_product_template
 __import__.supplierinfo_62600-0616300,__import__.supplier_62600,81529361,44.98,,1,,,__import__.product_0616300_product_template
 __import__.supplierinfo_62600-2065688,__import__.supplier_62600,82351923,14.33,,1,,,__import__.product_2065688_product_template
 __import__.supplierinfo_62600-2087088-201703,__import__.supplier_62600,84193658,23.32,20.00,1,2017-03-01,2017-03-31,__import__.product_2087088_product_template
@@ -65,12 +65,12 @@ __import__.supplierinfo_66200-3038825-201705,__import__.supplier_66200,823930,36
 __import__.supplierinfo_66200-3127958,__import__.supplier_66200,825148,16.64,,1,,,__import__.product_3127958_product_template
 __import__.supplierinfo_66200-5620095,__import__.supplier_66200,,0,,1,,,__import__.product_5620095_product_template
 __import__.supplierinfo_66200-5620096,__import__.supplier_66200,,0,,1,,,__import__.product_5620096_product_template
-__import__.supplierinfo_66906-2249621,__import__.supplier_66906,,15.78,,1,,,__import__.product_2249621_product_template
-__import__.supplierinfo_66906-2281046,__import__.supplier_66906,,27.10,,1,,,__import__.product_2281046_product_template
-__import__.supplierinfo_66906-2518835,__import__.supplier_66906,,59.68,,1,,,__import__.product_2518835_product_template
-__import__.supplierinfo_66906-2604965,__import__.supplier_66906,,2.32,,1,,,__import__.product_2604965_product_template
-__import__.supplierinfo_66906-2837268,__import__.supplier_66906,,37.11,,1,,,__import__.product_2837268_product_template
-__import__.supplierinfo_66906-2997674,__import__.supplier_66906,,28.83,,1,,,__import__.product_2997674_product_template
+__import__.supplierinfo_66906-2249621,__import__.supplier_66906,,21.02,,1,,,__import__.product_2249621_product_template
+__import__.supplierinfo_66906-2281046,__import__.supplier_66906,,32.32,,1,,,__import__.product_2281046_product_template
+__import__.supplierinfo_66906-2518835,__import__.supplier_66906,,79.57,,1,,,__import__.product_2518835_product_template
+__import__.supplierinfo_66906-2604965,__import__.supplier_66906,,2.69,,1,,,__import__.product_2604965_product_template
+__import__.supplierinfo_66906-2837268,__import__.supplier_66906,,53.01,,1,,,__import__.product_2837268_product_template
+__import__.supplierinfo_66906-2997674,__import__.supplier_66906,,27.93,,1,,,__import__.product_2997674_product_template
 __import__.supplierinfo_67530-8003788,__import__.supplier_67530,100012 EXCENTREE,35.39,,1,,,__import__.product_8003788_product_template
 __import__.supplierinfo_67530-8003736,__import__.supplier_67530,100008,28.52,,1,,,__import__.product_8003736_product_template
 __import__.supplierinfo_67530-7924351,__import__.supplier_67530,227844,5.51,,1,,,__import__.product_7924351_product_template
@@ -174,7 +174,7 @@ __import__.supplierinfo_77340-5623627,__import__.supplier_77340,,0,,1,,,__import
 __import__.supplierinfo_77602-1484054,__import__.supplier_77602,2207,95.59,,1,,,__import__.product_1484054_product_template
 __import__.supplierinfo_77602-1484047,__import__.supplier_77602,2206,43.12,,1,,,__import__.product_1484047_product_template
 __import__.supplierinfo_77602-7760200,__import__.supplier_77602,2208,29.01,,1,,,__import__.product_7760200_product_template
-__import__.supplierinfo_77602-4373726-201703,__import__.supplier_77602,,10.83,15.00,1,2017-03-01,2017-03-31,__import__.product_4373726_product_template
+__import__.supplierinfo_77602-4373726-201703,__import__.supplier_77602,,8.90,15.00,1,2017-03-01,2017-03-31,__import__.product_4373726_product_template
 __import__.supplierinfo_77602-2941086,__import__.supplier_77602,417364,18.79,,1,,,__import__.product_2941086_product_template
 __import__.supplierinfo_77602-3074440-201703,__import__.supplier_77602,432570,25.04,15.00,1,2017-03-01,2017-03-31,__import__.product_3074440_product_template
 __import__.supplierinfo_77602-3074440-201705,__import__.supplier_77602,432570,25.04,15.00,1,2017-05-01,2017-05-31,__import__.product_3074440_product_template
@@ -197,11 +197,11 @@ __import__.supplierinfo_78650-4150104,__import__.supplier_78650,13281,24.35,,1,,
 __import__.supplierinfo_78650-4220107,__import__.supplier_78650,17647,27.08,,1,,,__import__.product_4220107_product_template
 __import__.supplierinfo_78650-1190340,__import__.supplier_78650,1190305,9.16,,1,,,__import__.product_1190340_product_template
 __import__.supplierinfo_78650-4500365,__import__.supplier_78650,VCN NEUT AD LD WO28,30.85,,1,,,__import__.product_4500365_product_template
-__import__.supplierinfo_78650-4500284,__import__.supplier_78650,14519,11.45,,1,,,__import__.product_4500284_product_template
+__import__.supplierinfo_78650-4500284,__import__.supplier_78650,14519,11.17,,1,,,__import__.product_4500284_product_template
 __import__.supplierinfo_78650-4500285,__import__.supplier_78650,VCN NEU AD SMDOG 8KG,23.02,,1,,,__import__.product_4500285_product_template
 __import__.supplierinfo_78650-4500382,__import__.supplier_78650,14385,13.64,,1,,,__import__.product_4500382_product_template
 __import__.supplierinfo_78650-4230103,__import__.supplier_78650,15337,42.04,,1,,,__import__.product_4230103_product_template
-__import__.supplierinfo_78650-4210103,__import__.supplier_78650,15347,36.73,,1,,,__import__.product_4210103_product_template
+__import__.supplierinfo_78650-4210103,__import__.supplier_78650,15347,37.67,,1,,,__import__.product_4210103_product_template
 __import__.supplierinfo_78650-4930043,__import__.supplier_78650,XH001,15.22,,1,,,__import__.product_4930043_product_template
 __import__.supplierinfo_78650-4120182,__import__.supplier_78650,15363,14.33,,1,,,__import__.product_4120182_product_template
 __import__.supplierinfo_78650-4500404,__import__.supplier_78650,16317,12.45,,1,,,__import__.product_4500404_product_template
@@ -242,7 +242,7 @@ __import__.supplierinfo_79100-7910041-201705,__import__.supplier_79100,C07850B,1
 __import__.supplierinfo_79100-7910047-201612,__import__.supplier_79100,D44410R,4.69,25.00,1,2016-12-01,2017-04-30,__import__.product_7910047_product_template
 __import__.supplierinfo_79100-7910050-201611,__import__.supplier_79100,D44430K,6.01,25.00,1,2016-11-01,2017-04-30,__import__.product_7910050_product_template
 __import__.supplierinfo_79100-2379758-201703,__import__.supplier_79100,C53121,6.13,15.00,1,2017-03-01,2017-04-30,__import__.product_2379758_product_template
-__import__.supplierinfo_79100-2446532,__import__.supplier_79100,836730H,35.49,,1,,,__import__.product_2446532_product_template
+__import__.supplierinfo_79100-2446532,__import__.supplier_79100,836730H,30.17,,1,,,__import__.product_2446532_product_template
 __import__.supplierinfo_79100-2488740,__import__.supplier_79100,C54320C,9.61,,1,,,__import__.product_2488740_product_template
 __import__.supplierinfo_79100-2488757,__import__.supplier_79100,C54330C,14.10,,1,,,__import__.product_2488757_product_template
 __import__.supplierinfo_79100-2761435,__import__.supplier_79100,C66460E,13.20,,1,,,__import__.product_2761435_product_template
@@ -278,7 +278,7 @@ __import__.supplierinfo_79201-0843136-201612,__import__.supplier_79201,,26.70,10
 __import__.supplierinfo_79201-1322031,__import__.supplier_79201,,16.11,,1,,,__import__.product_1322031_product_template
 __import__.supplierinfo_79201-1198068-201702,__import__.supplier_79201,,8.16,15.00,1,2017-02-03,2017-04-30,__import__.product_1198068_product_template
 __import__.supplierinfo_79201-0045666-201703,__import__.supplier_79201,,77.21,15.00,1,2017-03-01,2017-04-30,__import__.product_0045666_product_template
-__import__.supplierinfo_79201-1013192-201701,__import__.supplier_79201,1013192,52.87,10.00,1,2017-01-01,2017-04-30,__import__.product_1013192_product_template
+__import__.supplierinfo_79201-1013192-201701,__import__.supplier_79201,1013192,46.65,10.00,1,2017-01-01,2017-04-30,__import__.product_1013192_product_template
 __import__.supplierinfo_79201-1510635-201703,__import__.supplier_79201,,13.90,15.00,1,2017-03-01,2017-05-31,__import__.product_1510635_product_template
 __import__.supplierinfo_79201-6420010-201611,__import__.supplier_79201,2177590,511.34,25.00,1,2016-11-01,2017-03-05,__import__.product_6420010_product_template
 __import__.supplierinfo_79201-6420010-201703,__import__.supplier_79201,2177590,511.34,32.00,1,2017-03-06,2017-03-10,__import__.product_6420010_product_template
@@ -294,8 +294,8 @@ __import__.supplierinfo_79201-2853299,__import__.supplier_79201,310198,21.93,,1,
 __import__.supplierinfo_79201-3091576,__import__.supplier_79201,310332,51.61,,1,,,__import__.product_3091576_product_template
 __import__.supplierinfo_79201-3410222-201701,__import__.supplier_79201,10012541,17.88,20.00,1,2017-01-01,2017-03-31,__import__.product_3410222_product_template
 __import__.supplierinfo_79245-6795006,__import__.supplier_79245,66047112,8.61,,1,,,__import__.product_6795006_product_template
-__import__.supplierinfo_80300-8051623,__import__.supplier_80300,1410Z100,1.29,,1,,,__import__.product_8051623_product_template
-__import__.supplierinfo_80300-8051586,__import__.supplier_80300,1404B200,1.37,,1,,,__import__.product_8051586_product_template
+__import__.supplierinfo_80300-8051623,__import__.supplier_80300,1410Z100,1.31,,1,,,__import__.product_8051623_product_template
+__import__.supplierinfo_80300-8051586,__import__.supplier_80300,1404B200,1.39,,1,,,__import__.product_8051586_product_template
 __import__.supplierinfo_81200-1013465,__import__.supplier_81200,50125,80.34,,1,,,__import__.product_1013465_product_template
 __import__.supplierinfo_81200-2203164,__import__.supplier_81200,10181,117.69,,1,,,__import__.product_2203164_product_template
 __import__.supplierinfo_81200-2410959,__import__.supplier_81200,20200,13.17,,1,,,__import__.product_2410959_product_template
@@ -318,7 +318,7 @@ __import__.supplierinfo_81201-3265709,__import__.supplier_81201,96026,29.66,,1,,
 __import__.supplierinfo_81201-3265725,__import__.supplier_81201,96027,34.86,,1,,,__import__.product_3265725_product_template
 __import__.supplierinfo_81201-3265295,__import__.supplier_81201,96060,15.60,,1,,,__import__.product_3265295_product_template
 __import__.supplierinfo_82595-1384726,__import__.supplier_82595,,16.38,,1,,,__import__.product_1384726_product_template
-__import__.supplierinfo_82670-2882199,__import__.supplier_82670,,27.25,,1,,,__import__.product_2882199_product_template
+__import__.supplierinfo_82670-2882199,__import__.supplier_82670,,27.74,,1,,,__import__.product_2882199_product_template
 __import__.supplierinfo_82701-8270053-201704,__import__.supplier_82701,GENTA51,6.17,10.00,1,2017-04-01,2017-04-30,__import__.product_8270053_product_template
 __import__.supplierinfo_82701-8270095-201704,__import__.supplier_82701,XYL,5.93,15.00,1,2017-04-01,2017-04-30,__import__.product_8270095_product_template
 __import__.supplierinfo_82701-8270104,__import__.supplier_82701,MYOGAS,5.71,,1,,,__import__.product_8270104_product_template

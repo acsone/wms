@@ -6,12 +6,25 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.15.0 (2018-01-19)
+++++++++++++++++++++
+
 **Data Migration**
 
-* ALCN-1041 Import customer option to print sale price on their labels
+* Update imported data on 2018-01-19
 * Fix import of sale order when assigning tax to last product line. The sequence was not respected.
 * Fix creation of picking and match of lot by filtering by products
 * ALCN-1038 Import product indicated price
+* ALCN-1041 Import customer option to print sale price on their labels
 
 **Features and Improvements**
 
@@ -29,8 +42,6 @@ Unreleased
 **Build**
 
 * BIZ-1093: Update odoo-cloud-platform
-
-**Documentation**
 
 10.14.1 (2018-01-10)
 ++++++++++++++++++++
@@ -183,6 +194,9 @@ Unreleased
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
+* ALCN-869: Add webservice for a customer delivery fee
+  * as of 19.01.18 customer wanted this webservice
+    to always return a static message
 
 **Bugfixes**
 

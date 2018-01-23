@@ -101,3 +101,18 @@ class StatisticsFormWebserviceMessage(Component):
 
     def get_message(self, options):
         return self._produce_xml(self._data_for_message(options))
+
+
+class CustomerDeliveryFeeWebserviceMessage(Component):
+
+    _name = 'esb.webservice.message.customer.delivery.fee'
+    _inherit = ['esb.webservice.message.base']
+    _apply_on = ['res.partner']
+    _usage = 'ws.message.customer.delivery.fee'
+
+    def get_message(self, customer_ref):
+        data = [{
+            'totalOrderAmount': '9999.00',
+            'byPassTestAmount': True,
+        }]
+        return self._produce_xml(data, list_item_el='result')

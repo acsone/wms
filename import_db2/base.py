@@ -66,6 +66,9 @@ class EntityMapper(object):
         if prefix is None:
             prefix = self.XMLID_IMPORT_NAME
 
+        if isinstance(code, str):
+            code = code.replace('.', '')
+
         return "%s.%s_%s" % (
             prefix, entity_name, code
         )

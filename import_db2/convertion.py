@@ -764,7 +764,6 @@ class StockProductionLotMapper(EntityMapper):
             datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
                     .strftime('%Y-%m-%d 00:00:00') or '2000-01-01 00:00:00',
     }
-
     def get_sql_select(self):
         return "lotref,lotnum,v.vloint,v.vloech"
 
@@ -881,23 +880,23 @@ class ProductStockBinMapper(EntityMapper):
         return query, []
 
 
-MAPPER_CLASSES = [LocationMapper, ProductMapper,
-                  Supplierinfo,
-                  CustomerMapper, SupplierMapper,
-                  CustomerAddressMapper,
-                  SaleOrderMapper,
-                  SaleOrderLineMapper,
+MAPPER_CLASSES = [#LocationMapper, ProductMapper,
+                  #Supplierinfo,
+                  #CustomerMapper, SupplierMapper,
+                  #CustomerAddressMapper,
+                  #SaleOrderMapper,
+                  #SaleOrderLineMapper,
                   StockProductionLotMapper,
                   StockInventoryLineMapper,
-                  ProductStockBinMapper
+                  #ProductStockBinMapper
                   ]
 
 
-MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
-                       Supplierinfo,
-                       CustomerMapper, SupplierMapper,
-                       CustomerAddressMapper,
+MAPPER_CLASSES_FULL = [#LocationMapper, ProductMapper,
+                       #Supplierinfo,
+                       #CustomerMapper, SupplierMapper,
+                       #CustomerAddressMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
-                       ProductStockBinMapper
+                       #ProductStockBinMapper
                        ]

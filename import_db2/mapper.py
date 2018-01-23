@@ -180,6 +180,9 @@ class ref(dbmapper):
         if not val:
             return False
 
+        if isinstance(val, str):
+            val = val.replace('.', '')
+
         if not self.check:
             return "%s.%s_%s" % (self.module, self.table, val)
 
