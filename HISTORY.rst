@@ -7,8 +7,10 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* At reception, automatically assign operator when receiving + do not allow to receive more than the expected remaining quantity
 
 **Bugfixes**
+* Do not copy picking printed and operator_id field (important for backorder creation)
 
 **Build**
 

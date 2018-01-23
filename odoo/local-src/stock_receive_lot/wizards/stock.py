@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2017 Jacques-Etienne Baudoux (BCIM)
+# © 2017 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, fields
-from odoo.exceptions import Warning
+from odoo import api, models, fields, _
+from odoo.exceptions import UserError
 
 
 class StockPackOperation(models.Model):
@@ -102,13 +102,22 @@ class StockPackOperationLotAdd(models.TransientModel):
         'Qty Remaining',
         compute='_get_remaining_qty')
 
-    @api.depends('operation_id')
+    @api.depends('operation_id.qty_done')
     @api.one
     def _get_remaining_qty(self):
         self.remaining_qty = (
             self.operation_id.product_qty - self.operation_id.qty_done)
 
     qty = fields.Float('Qty Done')
+
+    @api.onchange('qty')
+    def _onchange_qty(self):
+        if self.qty > self.remaining_qty:
+            return {'warning': {
+                'title': _("Warning"),
+                'message': _(
+                    'You cannot receive more than the '
+                    'expected remaining quantity')}}
 
     life_date = fields.Datetime(
         string='End of Life Date')
@@ -173,7 +182,11 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     def _add(self):
         if self.qty <= 0:
-            raise Warning('Quantity must be greater than 0')
+            raise UserError(_('Quantity must be greater than 0'))
+        if self.qty > self.remaining_qty:
+            raise UserError(_(
+                'You cannot receive more than the '
+                'expected remaining quantity'))
 
         # A pack operation is for a destination and can have multiple lot lines
         # (pack_lot_ids) with the constraint that you cannot have 2 lot lines
@@ -227,3 +240,6 @@ class StockPackOperationLotAdd(models.TransientModel):
         self._add()
         self.qty = False
         self.location_dest_id = False
+
+    def button_transfer(self):
+        return self.picking_id.do_new_transfer()
