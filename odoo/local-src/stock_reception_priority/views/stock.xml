@@ -22,8 +22,13 @@
                 <field name="qty_backorder" widget="boolean" string="BO" />
             </xpath>
             <field name="origin" position="after">
-                <field name="qty_backorder" attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}"/>
-                <field name="qty_outofstock" attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}"/>
+                <label for="qty_backorder" attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}"/>
+                <div attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}">
+                    <field name="qty_backorder"/>
+                    ;
+                    <field name="qty_outofstock"/>
+                    <button name="button_priority_recompute" class="oe_link" string="recompute" type="object"/>
+                </div>
             </field>
         </field>
     </record>
