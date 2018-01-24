@@ -153,6 +153,7 @@ class ProductMapper(EntityMapper):
         """ Take manufacturer from imported suppliers """
         supplier_ref = db2_entity.get('cplz25')
         if supplier_ref:
+            self.importer.add_foreign_ref('FOURN', supplier_ref)
             supplier_xml_id = self.get_xml_id(
                 'supplier', str(int(supplier_ref)), '__import__')
             odoo_entity['manufacturer/id'] = supplier_xml_id
