@@ -2,10 +2,17 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+import psycopg2
+
+import odoo
+
+from odoo import _
 from odoo.osv.expression import AND
 from odoo.addons.component.core import AbstractComponent, Component
+from odoo.addons.connector.exception import RetryableJobError
 
-import logging
+_logger = logging.getLogger(__name__)
 
 
 class ExportMapper(AbstractComponent):
@@ -38,6 +45,129 @@ class ExportMapper(AbstractComponent):
                 lang=lang).read(translatable.keys())[0]
             for fname, extname in translatable.iteritems():
                 values[extname] = data[fname]
+
+
+class ESBWebServiceExporter(AbstractComponent):
+    _name = 'esb.webservice.exporter'
+    _inherit = ['base.exporter', 'esb.base']
+    _usage = 'record.exporter'
+
+    def __init__(self, working_context):
+        super(ESBWebServiceExporter, self).__init__(working_context)
+        self.record = None
+        self.external_id = None
+
+    def _get_external_id(self):
+        """Return the id for the export
+
+        To implement in subclasses. For instance for a sales order, the
+        external id is sale.esb_ref.
+        """
+        raise NotImplementedError
+
+    def run(self, record, *args, **kwargs):
+        """Export ``record``
+
+        :param record: record to export
+
+        """
+        self.record = record
+        self.external_id = self._get_external_id()
+
+        result = self._run(*args, **kwargs)
+
+        # Commit so we keep the external ID when we do something in
+        # _after_export and it fails. The commit will also release the lock
+        # acquired on the record
+        if not odoo.tools.config['test_enable']:
+            self.env.cr.commit()  # noqa
+
+        self._after_export()
+        return result
+
+    def _run(self):
+        """Flow of the synchronization, implemented in inherited classes"""
+        assert self.record
+
+        if self._has_to_skip():
+            return
+
+        # prevent other jobs to export the same record
+        # will be released on commit (or rollback)
+        self._lock()
+
+        map_record = self._map_data()
+
+        if self.external_id:
+            record = self._update_data(map_record)
+            if not record:
+                return _('Nothing to export.')
+            self._update(record)
+        else:
+            record = self._create_data(map_record)
+            if not record:
+                return _('Nothing to export.')
+            result = self._create(record)
+            self._postprocess_create_result(result)
+        return _('Record exported')
+
+    def _postprocess_create_result(self, result):
+        raise NotImplementedError
+
+    def _map_data(self):
+        """ Returns an instance of
+        :py:class:`~odoo.addons.connector.components.mapper.MapRecord`
+        """
+        return self.mapper.map_record(self.record)
+
+    def _create_data(self, map_record, fields=None, **kwargs):
+        """ Get the data to pass to :py:meth:`_create` """
+        return map_record.values(for_create=True, fields=fields, **kwargs)
+
+    def _create(self, data):
+        """ Create the External record """
+        return self.backend_adapter.create(data)
+
+    def _update_data(self, map_record, fields=None, **kwargs):
+        """ Get the data to pass to :py:meth:`_update` """
+        return map_record.values(fields=fields, **kwargs)
+
+    def _update(self, data):
+        """ Update an External record """
+        assert self.external_id
+        self.backend_adapter.write(self.external_id, data)
+
+    def _after_export(self):
+        """Can do several actions after exporting a record on the backend"""
+        pass
+
+    def _lock(self):
+        """Lock the record.
+
+        Lock the record so we are sure that only one export
+        job is running for this record if concurrent jobs have to export the
+        same record.
+        When concurrent jobs try to export the same record, the first one
+        will lock and proceed, the others will fail to lock and will be
+        retried later.
+        """
+        sql = ("SELECT id FROM %s WHERE ID = %%s FOR UPDATE NOWAIT" %
+               self.model._table)
+        try:
+            self.env.cr.execute(sql, (self.record.id, ),
+                                log_exceptions=False)
+        except psycopg2.OperationalError:
+            _logger.info('A concurrent job is already exporting the same '
+                         'record (%s with id %s). Job delayed later.',
+                         self.model._name, self.record.id)
+            raise RetryableJobError(
+                'A concurrent job is already exporting the same record '
+                '(%s with id %s). The job will be retried later.' %
+                (self.model._name, self.record.id))
+
+    def _has_to_skip(self):
+        """ Return True if the export can be skipped """
+        return False
 
 
 class ESBExporterMixin(AbstractComponent):
