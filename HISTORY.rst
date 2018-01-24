@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-978: Floor to 0 imported inventory quantities
+* ALCN-933: Set default value to supplier backorder acceptance
 * ALCN-1048: Import additional_products and quantities on product
 * ALCN-1048: Import promotional products on supplier info
 * ALCN-1064: Assign taxes on imported purchase order lines
