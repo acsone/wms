@@ -15,6 +15,7 @@ Unreleased
 
 * ALCN-1055: add last suite name on the partner
 * ALCN-1054: Add tag OnlinePayment and change rule StatisticCode on customer xml export
+* Enable discount on sale order lines
 
 **Bugfixes**
 
