@@ -1,54 +1,57 @@
 [submodule "odoo/src"]
 	path = odoo/src
 	url = git@github.com:camptocamp/odoo.git
-[submodule "odoo/external-src/server-tools"]
-	path = odoo/external-src/server-tools
-	url = git@github.com:oca/server-tools.git
 [submodule "odoo/external-src/enterprise"]
 	path = odoo/external-src/enterprise
 	url = git@github.com:camptocamp/enterprise
-[submodule "odoo/external-src/stock-logistics-workflow"]
-	path = odoo/external-src/stock-logistics-workflow
-	url = git@github.com:oca/stock-logistics-workflow.git
-[submodule "odoo/external-src/sale-workflow"]
-	path = odoo/external-src/sale-workflow
-	url = git@github.com:oca/sale-workflow.git
+[submodule "odoo/external-src/account-analytic"]
+	path = odoo/external-src/account-analytic
+	url = git@github.com:oca/account-analytic.git
+[submodule "odoo/external-src/account-closing"]
+	path = odoo/external-src/account-closing
+	url = git@github.com:camptocamp/account-closing.git
 [submodule "odoo/external-src/account-financial-tools"]
 	path = odoo/external-src/account-financial-tools
-	url = git@github.com:OCA/account-financial-tools.git
-[submodule "odoo/external-src/l10n-belgium"]
-	path = odoo/external-src/l10n-belgium
-	url = git@github.com:OCA/l10n-belgium.git
-[submodule "odoo/external-src/odoo-cloud-platform"]
-	path = odoo/external-src/odoo-cloud-platform
-	url = git@github.com:yvaucher/odoo-cloud-platform.git
-[submodule "odoo/external-src/bank-payment"]
-	path = odoo/external-src/bank-payment
-	url = git@github.com:OCA/bank-payment.git
+	url = git@github.com:oca/account-financial-tools.git
 [submodule "odoo/external-src/account-invoicing"]
 	path = odoo/external-src/account-invoicing
 	url = git@github.com:camptocamp/account-invoicing.git
-[submodule "odoo/external-src/account-analytic"]
-	path = odoo/external-src/account-analytic
-	url = git@github.com:OCA/account-analytic.git
-[submodule "odoo/external-src/stock-logistics-warehouse"]
-	path = odoo/external-src/stock-logistics-warehouse
-	url = git@github.com:OCA/stock-logistics-warehouse.git
+[submodule "odoo/external-src/bank-payment"]
+	path = odoo/external-src/bank-payment
+	url = git@github.com:oca/bank-payment.git
 [submodule "odoo/external-src/connector"]
 	path = odoo/external-src/connector
-	url = git@github.com:OCA/connector
+	url = git@github.com:oca/connector
+[submodule "odoo/external-src/l10n-belgium"]
+	path = odoo/external-src/l10n-belgium
+	url = git@github.com:oca/l10n-belgium.git
+[submodule "odoo/external-src/product-attribute"]
+	path = odoo/external-src/product-attribute
+	url = git@github.com:oca/product-attribute.git
+[submodule "odoo/external-src/purchase-workflow"]
+	path = odoo/external-src/purchase-workflow
+	url = git@github.com:camptocamp/purchase-workflow.git
 [submodule "odoo/external-src/queue"]
 	path = odoo/external-src/queue
 	url = git@github.com:oca/queue
 [submodule "odoo/external-src/report-print-send"]
 	path = odoo/external-src/report-print-send
-	url = git@github.com:OCA/report-print-send.git
-[submodule "odoo/external-src/account-closing"]
-	path = odoo/external-src/account-closing
-	url = git@github.com:camptocamp/account-closing.git
+	url = git@github.com:oca/report-print-send.git
+[submodule "odoo/external-src/sale-workflow"]
+	path = odoo/external-src/sale-workflow
+	url = git@github.com:oca/sale-workflow.git
+[submodule "odoo/external-src/server-tools"]
+	path = odoo/external-src/server-tools
+	url = git@github.com:oca/server-tools.git
+[submodule "odoo/external-src/stock-logistics-warehouse"]
+	path = odoo/external-src/stock-logistics-warehouse
+	url = git@github.com:oca/stock-logistics-warehouse.git
+[submodule "odoo/external-src/stock-logistics-workflow"]
+	path = odoo/external-src/stock-logistics-workflow
+	url = git@github.com:oca/stock-logistics-workflow.git
 [submodule "odoo/external-src/web"]
 	path = odoo/external-src/web
-	url = https://github.com/OCA/web.git
-[submodule "odoo/external-src/purchase-workflow"]
-	path = odoo/external-src/purchase-workflow
-	url = https://github.com/camptocamp/purchase-workflow.git
+	url = git@github.com:oca/web.git
+[submodule "odoo/external-src/odoo-cloud-platform"]
+	path = odoo/external-src/odoo-cloud-platform
+	url = git@github.com:yvaucher/odoo-cloud-platform.git

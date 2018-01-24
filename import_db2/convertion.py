@@ -82,7 +82,7 @@ class ProductMapper(EntityMapper):
             'ratio_additional_product', 'cp2z24',
         ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
-        'name', 'price_category_id', 'pb2'
+        'name', 'price_category_id', 'pb2', 'manufacturer',
     ]
 
     def get_sql_joins(self):
@@ -148,6 +148,15 @@ class ProductMapper(EntityMapper):
                 price2,
                 'pb2'
             )
+
+    def convert_manufacturer(self, odoo_entity, db2_entity):
+        """ Take manufacturer from imported suppliers """
+        supplier_ref = db2_entity.get('cplz25')
+        if supplier_ref:
+            self.importer.add_foreign_ref('FOURN', supplier_ref)
+            supplier_xml_id = self.get_xml_id(
+                'supplier', str(int(supplier_ref)), '__import__')
+            odoo_entity['manufacturer/id'] = supplier_xml_id
 
 
 class AdditionalProductMapper(EntityMapper):
