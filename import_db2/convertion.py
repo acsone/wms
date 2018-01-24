@@ -75,6 +75,12 @@ class ProductMapper(EntityMapper):
             'storage_temperature_id/id', 'cp2z17',
             mapping=mappings.PRODUCT_STORAGE_TEMPERATURES,
         ),
+        FieldMapper(
+            'ratio_main_product', 'cp2z23',
+        ),
+        FieldMapper(
+            'ratio_additional_product', 'cp2z24',
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'pb2'
     ]
@@ -144,6 +150,48 @@ class ProductMapper(EntityMapper):
             )
 
 
+class AdditionalProductMapper(EntityMapper):
+    # Create a second file to set additional_product_id
+    # in order to have the product already existing
+    DB2_NAME = 'PGESTION'
+
+    XMLID_FIELD = 'id'
+    # don't use additional_product
+    XMLID_MODEL = 'product'
+
+    FIELDS_MAPPING = [
+        'id',
+        'additional_product_id',
+    ]
+
+    def get_sql_joins(self):
+        return (" left join sbdata.cplge2 on gesart=cp2art")
+
+    def get_sql_where(self):
+        where = "cp2z22 <> ''"
+        if not self.importer.full:
+            # TODO: csv only when mode will be developed
+            where += (" AND gesart IN ("
+                      "    SELECT dccart FROM sbdata.PDETCDCL"
+                      "        WHERE dccsui >= %s AND dccsui <= %s"
+                      ")"
+                      " AND cp2z22 IN ("
+                      "    SELECT dccart FROM sbdata.PDETCDCL"
+                      "        WHERE dccsui >= %s AND dccsui <= %s"
+                      ")" % (SO_MIN, SO_MAX, SO_MIN, SO_MAX))
+        return where
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Get product xmlid
+        """
+        odoo_entity['id'] = db2_entity['gesart']
+
+    def convert_additional_product_id(self, odoo_entity, db2_entity):
+        product = (db2_entity['cp2z22'] or '').strip()
+        xmlid = self.get_xml_id('product', product, '__import__')
+        odoo_entity['additional_product_id/id'] = xmlid
+
+
 class Supplierinfo(EntityMapper):
     """ supplier info and promotions """
     DB2_NAME = 'PGESTION'
@@ -153,6 +201,7 @@ class Supplierinfo(EntityMapper):
     # Doing a grouping to remove client column that creates duplicates
     GROUP_BY_COL = [
         'gesfou', 'gesart', 'gesarc', 'gespan', 'cclrem', 'cclref',
+        'cclqu1', 'cclgr1',
         'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
         'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
 
@@ -179,7 +228,7 @@ class Supplierinfo(EntityMapper):
 
         """
         join = ("left join sbdata.condcf ON gesart=cclref"
-                " AND cclqu1 = 0 AND cclpro = 1 AND cclrem <> 0")
+                " AND cclpro = 1")
         if not self.importer.full:
             join += (" AND cclfss = 20 AND cclfaa >= 17"
                      " AND cclfmm >= 3 AND cclfmm <= 5")
@@ -215,7 +264,9 @@ class Supplierinfo(EntityMapper):
         if db2_entity['cclref']:
             year = db2_entity['ccldss'] * 100 + db2_entity['ccldaa']
             month = db2_entity['ccldmm']
-            ref += '-%s%02i' % (year, month)
+            day = db2_entity['ccldjj']
+            ref += '-%s%02i%02i' % (year, month, day)
+
         odoo_entity['id'] = ref
 
     def convert_name(self, odoo_entity, db2_entity):
@@ -224,6 +275,14 @@ class Supplierinfo(EntityMapper):
         supplier_xml_id = self.get_xml_id(
             'supplier', str(ref), '__import__')
         odoo_entity['name/id'] = supplier_xml_id
+
+    def convert_ratio_main_product(self, odoo_entity, db2_entity):
+        qty = db2_entity['cclqu1'] or 0
+        odoo_entity['ratio_main_product'] = int(qty)
+
+    def convert_ratio_promotional_product(self, odoo_entity, db2_entity):
+        qty = db2_entity['cclgr1'] or 0
+        odoo_entity['ratio_promotional_product'] = int(qty)
 
     def convert_product_tmpl_id(self, odoo_entity, db2_entity):
         product = (db2_entity['gesart'] or '').strip()
@@ -881,6 +940,7 @@ class ProductStockBinMapper(EntityMapper):
 
 
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
+                  AdditionalProductMapper,
                   Supplierinfo,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
@@ -893,6 +953,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
 
 
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
+                       AdditionalProductMapper,
                        Supplierinfo,
                        CustomerMapper, SupplierMapper,
                        CustomerAddressMapper,

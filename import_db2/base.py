@@ -37,7 +37,18 @@ class EntityMapper(object):
 
     DB2_REF_NAME = None
 
+    '''
+    xmlid is defined by
+    XMLID_IMPORT_NAME.XMLID_MODEL_<value>
+
+    value can be either odoo_entity[XMLID_FIELD]
+    or a function
+    ex:
+    __import__.product_123
+
+    '''
     XMLID_IMPORT_NAME = '__import__'
+    XMLID_MODEL = None
     XMLID_FIELD = None
 
     FIELDS_MAPPING = []
@@ -160,8 +171,11 @@ class EntityMapper(object):
             value = self.XMLID_FIELD
             if isinstance(value, basestring):
                 value = mapper.value(value)
+            xmlid_prefix = self.XMLID_MODEL
+            if not xmlid_prefix:
+                xmlid_prefix = self.name
             odoo_entity['id'] = mapper.ref(
-                self.name, value, self.XMLID_IMPORT_NAME, check=False)(
+                xmlid_prefix, value, self.XMLID_IMPORT_NAME, check=False)(
                 odoo_entity)
             odoo_entities.append(odoo_entity)
 
