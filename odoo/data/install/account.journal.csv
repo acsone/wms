@@ -13,3 +13,4 @@ __setup__.account_journal_nc_cd,,,Note de Crédit sur VD,1,0,1,Sale refund,,__se
 __setup__.account_journal_ventes_diverses,,,Ventes Diverses,1,0,1,Sale,,__setup__.account_400000,__setup__.account_400000,False,VD
 __setup__.expense_journal,,,Expenses,,,,purchase,,,,,EXP
 __setup__.wage_journal,,,Wage,,,,purchase,,,,,WAG
+__setup__.accrual_journal,,,Provisions (Accrual),,,,general,,,,,PROV
