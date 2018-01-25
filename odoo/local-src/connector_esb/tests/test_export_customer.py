@@ -64,7 +64,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'alcyon_category_id': self.alcyon_category.id,
             'discount_pricelist_id': self.discount_pricelist_2.id,
             'property_product_pricelist': self.env.ref(
-                '__setup__.product_pricelist_pb1'),
+                'specific_data.product_pricelist_pb1'),
             'category_id': [(4, self.partner_category.id, 0)]
         })
         self.all_records |= self.model.create({

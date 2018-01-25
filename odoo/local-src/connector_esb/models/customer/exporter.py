@@ -26,7 +26,7 @@ class CustomerExportMapper(Component):
     def compute_statistic_code(self, record):
         code = ''
         pricelist = record.property_product_pricelist
-        if pricelist == self.env.ref('__setup__.product_pricelist_pb1'):
+        if pricelist == self.env.ref('specific_data.product_pricelist_pb1'):
             code = '10'
         elif pricelist == self.env.ref('specific_data.product_pricelist_pb2'):
             code = '60'
