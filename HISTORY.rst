@@ -34,10 +34,12 @@ Unreleased
 ++++++++++++++++++++
 
 **Features and Improvements**
+
 * Reception screen priority computation optimization
 * In reception wizard, allow to transfer. Process current operation before making transfer
 
 **Bugfixes**
+
 * GRN PO unlinking
 
 
@@ -45,9 +47,11 @@ Unreleased
 ++++++++++++++++++++
 
 **Features and Improvements**
+
 * At reception, automatically assign operator when receiving + do not allow to receive more than the expected remaining quantity
 
 **Bugfixes**
+
 * Do not copy picking printed and operator_id field (important for backorder creation)
 * Fix db2 importer songs setup failing on date computation
 
@@ -70,6 +74,10 @@ Unreleased
 * ALCN-898: Add the module sale_cancel_remaining
 * ALCN-831: Remove blank in the invoice report
 * ALCN-1037 Set ESF ref on product states data
+* ALCN-187: Add the parking and reserve feature
+* ALCN-869: Add webservice for a customer delivery fee
+  * as of 19.01.18 customer wanted this webservice
+    to always return a static message
 
 **Bugfixes**
 
@@ -132,8 +140,6 @@ Unreleased
 * Delivery rounds: when assigning moves, do not set again the delivery round if it is already part of it.
 * Picking grouping: when cleaning operations, we really need to delete them before unreserving the moves.
 * Picking grouping: at cancelation, before recomputing pack operation, we need to check if there are no other moves that could be reserved.
-* ALCN-1035: Allow to import supplier info with CNK code to link product
-* ALCN-187: Add the parking and reserve feature
 
 **Bugfixes**
 
@@ -231,9 +237,6 @@ Unreleased
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
-* ALCN-869: Add webservice for a customer delivery fee
-  * as of 19.01.18 customer wanted this webservice
-    to always return a static message
 
 **Bugfixes**
 
