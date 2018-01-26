@@ -884,7 +884,7 @@ class StockInventoryLineMapper(EntityMapper):
                 concat('lotnum', 'lotref', delimiter='_'),
                 '__import__', check=False),
         'product_id/id': ref('product', 'lotref', '__import__', check=False),
-        'product_qty': lambda rec: int(rec['lotact']),
+        'product_qty': lambda rec: max(int(rec['lotact']), 0),
         'location_id/id': ref('location',
                               concat(const('loc'),
                                      call(lambda rec: rec['stolop'][:6]),
