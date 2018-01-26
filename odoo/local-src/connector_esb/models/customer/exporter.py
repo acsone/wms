@@ -20,17 +20,16 @@ class CustomerExportMapper(Component):
         ('name', 'Firstname'),
         ('is_price_on_labels', 'MsrpSticker'),
         ('ref', 'ErpId'),
-        # ContactName, ? Only for contact of company ?
-        #                But then on the card Jira only company ?
-        # OnlinePayment, Delai payement in table ?
-        # FreeShipping -> PR coming
     ]
 
     @mapping
     def compute_statistic_code(self, record):
         code = ''
-        if record.property_product_pricelist:
-            code = record.property_product_pricelist.esb_ref or ''
+        pricelist = record.property_product_pricelist
+        if pricelist == self.env.ref('specific_data.product_pricelist_pb1'):
+            code = '10'
+        elif pricelist == self.env.ref('specific_data.product_pricelist_pb2'):
+            code = '60'
         return {'StatisticCode': code}
 
     @mapping
@@ -117,6 +116,10 @@ class CustomerExportMapper(Component):
         #  Not implemented yet ?
         # return {'IdRound': record.round_zone_ids.vehicule_ids[0].time}
         return {'IdRound': ''}
+
+    @mapping
+    def compute_onlinepayment(self, record):
+        return {'OnlinePayment': 0}
 
 
 class CustomerCronExporter(Component):
