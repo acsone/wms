@@ -35,6 +35,12 @@ def sale_setup(ctx):
                     'sale.config.settings',
                     {'default_invoice_policy': 'delivery'})
 
+    # Quotations & Sales
+    # Discount
+    employee_group.write({
+        'implied_ids': [(4, ctx.env.ref('sale.group_discount_per_so_line').id)]
+    })
+
 
 @anthem.log
 def import_uom(ctx):
