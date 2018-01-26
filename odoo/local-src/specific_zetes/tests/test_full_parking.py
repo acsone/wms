@@ -187,7 +187,8 @@ class TestFullParking(ZetesParkingTest):
         self.assertFalse(int(line_product_1.moveLineId))
 
         # Test line 2
-        pack_op_1 = picking.pack_operation_product_ids[0]
+        pack_op_1 = picking.pack_operation_product_ids.filtered(
+            lambda rec: rec.product_id == self.product_1)
         self.assertEqual(line_product_2.Usf02, constants.MOVE_LOAD)
         self.assertEqual(line_product_2.productCode,
                          self.product_1.default_code)
@@ -196,7 +197,8 @@ class TestFullParking(ZetesParkingTest):
                          "%s_%s" % (pack_op_1.id, self.lot_product_1.id))
 
         # Test line 3
-        pack_op_2 = picking.pack_operation_product_ids[1]
+        pack_op_2 = picking.pack_operation_product_ids.filtered(
+            lambda rec: rec.product_id == self.product_2)
         self.assertEqual(line_product_3.Usf02, constants.MOVE_LOAD)
         self.assertEqual(line_product_3.productCode,
                          self.product_2.default_code)
