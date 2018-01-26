@@ -1,7 +1,7 @@
-id,name
-__setup__.deliver_carrier_alcyon,Alcyon
-__setup__.deliver_carrier_transporter,Transporteur
-__setup__.deliver_carrier_post_pack,Colis Postal
-__setup__.deliver_carrier_delegated,Enlèvement délégué
-__setup__.deliver_carrier_by_client,Enlevé par client
-__setup__.deliver_carrier_invoice,Une facturation
+id,name,esb_ref
+__setup__.deliver_carrier_alcyon,Alcyon,1
+__setup__.deliver_carrier_transporter,Transporteur,2
+__setup__.deliver_carrier_post_pack,Colis Postal,3
+__setup__.deliver_carrier_delegated,Enlèvement délégué,4
+__setup__.deliver_carrier_by_client,Enlevé par client,9
+__setup__.deliver_carrier_invoice,Une facturation,89

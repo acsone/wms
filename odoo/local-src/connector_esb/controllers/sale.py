@@ -59,7 +59,6 @@ class SaleController(http.Controller):
                  {"data": {
                   "increment_id": "INC-ID",
                   "customer_id":138,
-                  "invoice_address_id":214,
                   "shipping_address_id": 215,
                   "date":"12-7-2017",
                   "order_ref":"refClt",
