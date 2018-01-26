@@ -9,6 +9,7 @@
 
             <field name="delivery_type" position="after">
                 <field name="compute_shipping_costs_on_invoice"/>
+                <field name="esb_ref"/>
             </field>
 
             <label for="margin" position="attributes">

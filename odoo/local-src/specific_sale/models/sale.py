@@ -19,6 +19,9 @@ class Sale(models.Model):
     sale_channel_visible = fields.Boolean(
         compute='_compute_sale_channel_required'
     )
+    suite_name = fields.Char(
+        string='Suite Id'
+    )
 
     @api.depends('team_id')
     def _compute_sale_channel_required(self):

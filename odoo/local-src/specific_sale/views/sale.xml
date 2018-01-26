@@ -19,6 +19,7 @@
 
             <field name="partner_id" position="after">
                 <field name="client_order_ref"/>
+                <field name="suite_name"/>
             </field>
 
             <xpath expr="//field[@name='order_line']/form//label[@for='qty_delivered']" position="before">

@@ -11,3 +11,6 @@ class DeliveryCarrier(models.Model):
     compute_shipping_costs_on_invoice = fields.Boolean(
         string='Compute shipping costs on invoice',
     )
+    esb_ref = fields.Char(
+        string='Reference for ESB'
+    )

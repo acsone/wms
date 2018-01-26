@@ -17,7 +17,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.order_data = {
             "increment_id": "INC-ID",
             "customer_id": self.partner.id,
-            "invoice_address_id": self.partner_invoice.id,
+            "invoice_address_id": self.partner.id,
             "shipping_address_id": self.partner_shipping.id,
             "date": "2017-09-18",
             "order_ref": "refClt",
@@ -52,11 +52,6 @@ class WSCreateSaleOrderTestCase(TransactionCase):
             'list_price': 10.0,
         })
         self.partner = self.env['res.partner'].create({'name': 'John Doe'})
-        self.partner_invoice = self.env['res.partner'].create({
-            'name': 'John Doe (inv)',
-            'type': 'invoice',
-            'parent_id': self.partner.id,
-        })
         self.partner_shipping = self.env['res.partner'].create({
             'name': 'John Doe (ship)',
             'type': 'delivery',
@@ -71,7 +66,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
             'client_order_ref': 'refClt',
             'date_order': '2017-09-18 00:00:00',
             'partner_id': self.partner,
-            'partner_invoice_id': self.partner_invoice,
+            'partner_invoice_id': self.partner,
             'partner_shipping_id': self.partner_shipping,
             'amount_total': self.p1.list_price * 3 * (1 + tax_rate),
             'amount_tax': self.p1.list_price * 3 * tax_rate,
@@ -130,7 +125,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
     def test_integrity_error(self):
         data = self.order_data.copy()
         # set inexisting partner
-        data['invoice_address_id'] = 999999
+        data['shipping_address_id'] = 999999
         # internal api will raise IntegrityError
         with self.assertRaises(IntegrityError):
             self.env['sale.order']._ws_create_new(data)
@@ -139,7 +134,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         """ Data not correct, no exception but log added """
         data = self.order_data.copy()
         # set inexisting partner
-        data['invoice_address_id'] = 999999
+        data['shipping_address_id'] = 999999
         # public webservice call will just log errors
         order = self.env['sale.order'].ws_create_new(data)
         self.assertEqual(order, None)
