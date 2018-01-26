@@ -54,17 +54,21 @@ class ESBExporterMixin(AbstractComponent):
         return logging.getLogger(
             '[{}:{}]'.format(self._usage, self.model._name))
 
+    def _prepare_item(self, items):
+        prepared = []
+        for item in items:
+            prepared.append(self.mapper.map_record(item).values())
+        return prepared
+
     def _export_items(self, items):
         producer = self.work.component(usage='xml.producer')
         writer_type = self.work.timestamp.writer
         assert writer_type
         writer_usage = writer_type + '.xml.writer'
         writer = self.work.component(usage=writer_usage)
-        prepared = []
         # TODO: how many items could we have here?
         # Shall we split this in chunks?
-        for item in items:
-            prepared.append(self.mapper.map_record(item).values())
+        prepared = self._prepare_item(items)
         content = producer.produce(prepared)
         path = writer.write_file(content)
 
