@@ -12,6 +12,7 @@ Unreleased
 * ALCN-1048: Import promotional products on supplier info
 
 **Features and Improvements**
+* ALCN-970: Stock Inventory Valuation
 
 * ALCN-1055: add last suite name on the partner
 * ALCN-1054: Add tag OnlinePayment and change rule StatisticCode on customer xml export

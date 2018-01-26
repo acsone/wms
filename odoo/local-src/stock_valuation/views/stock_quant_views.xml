@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="stock.quantsact">
+        <field name="name">Inventory Valuation</field>
+        <field name="res_model">stock.quant</field>
+        <field name="context">{'search_default_internal_loc': 1}</field>
+    </record>
+
+</odoo>
