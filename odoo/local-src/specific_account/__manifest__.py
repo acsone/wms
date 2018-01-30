@@ -25,6 +25,7 @@
     'data': [
         # Data
         'data/account_tax_group.xml',
+        'data/cron.xml',
         # Views
         'views/account_analytic_tag.xml',
         'views/account_invoice_report.xml',
