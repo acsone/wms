@@ -17,7 +17,7 @@ class ResPartner(models.Model):
     )
 
     time_limit_order = fields.Float(
-        'Time limit of order',
+        'Deadline for ordering',
         compute='_compute_time_limit_order',
         readonly=True,
     )
