@@ -26,6 +26,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1053 : Add change requested on customer adresses xml export
+* Fix the method get_product_qty_unavailable in the module specific_sale (search stock.move whit a product)
 
 **Build**
 

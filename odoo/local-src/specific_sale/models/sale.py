@@ -222,6 +222,7 @@ class SaleOrderLine(models.Model):
                     )
 
                     next_stock_moves = self.env['stock.move'].search([
+                        ('product_id', '=', product.id),
                         ('procurement_id.sale_line_id', '!=', line_id),
                         ('state', 'not in', ['draft', 'cancel', 'done']),
                         '|',
