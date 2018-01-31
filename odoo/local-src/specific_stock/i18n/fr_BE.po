@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-29 16:43+0000\n"
-"PO-Revision-Date: 2017-11-29 16:43+0000\n"
+"POT-Creation-Date: 2018-01-16 16:33+0000\n"
+"PO-Revision-Date: 2018-01-16 16:33+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -107,6 +107,12 @@ msgstr "Code"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr "Couloir"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_picking.py:107
+#, python-format
+msgid "Create Backorder?"
+msgstr "Créer Backorder?"
 
 #. module: specific_stock
 #: selection:stock.backorder.reason,backorder_action_to_do:0
@@ -296,6 +302,11 @@ msgid "Number of packages"
 msgstr "Nombre de paquets"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_operator_id
+msgid "Operator"
+msgstr "Opérateur"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_original_picking_zone_id
 msgid "Original picking zone"
 msgstr "Zone de picking d'origine"
@@ -467,6 +478,18 @@ msgid "The picking zone code must be unique"
 msgstr "La zone de picking doit être unique"
 
 #. module: specific_stock
+#: code:addons/specific_stock/models/stock_picking.py:95
+#, python-format
+msgid "The reception must be linked to a Goods Received Note"
+msgstr "La réception doit être liée à un accusé de réception"
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_production_lot.py:186
+#, python-format
+msgid "There is no checksum available"
+msgstr "Il n'y a pas de checksum disponnible"
+
+#. module: specific_stock
 #: code:addons/specific_stock/models/stock_inventory.py:95
 #, python-format
 msgid "There is no delay for the inventory %s"
@@ -489,6 +512,12 @@ msgstr "Il n'y a pas de période pour les produits coûteux"
 #, python-format
 msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
+#: model:ir.model.fields,field_description:specific_stock.field_res_users_time_limit_order
+msgid "Deadline for ordering"
+msgstr "Heure limite pour commander"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
@@ -526,7 +555,7 @@ msgid "When a new a Serial Number is issued, this is the number of days before t
 msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:59
+#: code:addons/specific_stock/models/stock_picking.py:60
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
