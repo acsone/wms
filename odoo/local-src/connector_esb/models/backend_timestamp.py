@@ -29,7 +29,8 @@ class ESBBackendTimestamp(models.Model):
                    ('customer', 'customer'),
                    ('customer.address', 'customer.address'),
                    ('product.price', 'product.price'),
-                   ('promotion.alcyon', 'promotion.alcyon'), ],
+                   ('promotion.alcyon', 'promotion.alcyon'),
+                   ('special.promotion', 'sepcial.promotion')],
         string='Kind of export',
         readonly=True,
     )

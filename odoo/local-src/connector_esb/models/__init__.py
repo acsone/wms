@@ -24,5 +24,4 @@ from . import sale_order_line
 from . import res_users
 from . import partner_alcyon_category
 from . import sale_order
-from . import special_promotion
 from . import product_supplierinfo

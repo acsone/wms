@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Camptocamp SA
+# Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import md5
 import os
 from .common import ESBXMLTestCase
 
@@ -76,6 +77,11 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             'AlcyonGroupId': '',
             'Action': 'Create',
         }
+        # Add the checksum to expected values
+        data = expected.values()
+        data.sort()
+        key = ''.join(data)
+        expected['CheckSum'] = md5.new(key).hexdigest()
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
