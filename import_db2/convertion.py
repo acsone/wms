@@ -429,7 +429,7 @@ class CustomerMapper(EntityMapper):
         code_remise = db2_entity.get('clista')
         if code_remise:
             if code_remise < 50:
-                pricelist = '__setup__.product_pricelist_pb1'
+                pricelist = 'specific_data.product_pricelist_pb1'
             else:
                 pricelist = 'specific_data.product_pricelist_pb2'
         else:

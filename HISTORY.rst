@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* Update imported data on 2018-01-31
 * ALCN-978: Floor to 0 imported inventory quantities
 * ALCN-933: Set default value to supplier backorder acceptance
 * ALCN-1048: Import additional_products and quantities on product
