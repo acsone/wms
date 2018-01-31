@@ -21,6 +21,7 @@ Unreleased
 * Enable discount on sale order lines
 * ALCN-1039: Add suite_name remove invoice_address_id on webservice sale order web
 * ALCN-1039: Add esb_ref on deliver_carrier and update import data
+* Setup Cutoff Accrual
 
 **Bugfixes**
 
