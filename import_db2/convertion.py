@@ -578,6 +578,7 @@ class SupplierMapper(EntityMapper):
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
                     mapping=mappings.LANG),
+        FieldMapper('is_purchase_back_order_accepted', constant=True),
         'phone_numbers',
     ]
 
