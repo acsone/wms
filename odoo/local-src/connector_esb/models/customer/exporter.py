@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from ...components.mapper import falsy2zero
 
 
 class CustomerExportMapper(Component):
@@ -20,6 +21,7 @@ class CustomerExportMapper(Component):
         ('name', 'Firstname'),
         ('is_price_on_labels', 'MsrpSticker'),
         ('ref', 'ErpId'),
+        (falsy2zero('time_limit_order'), 'IdRound')
     ]
 
     @mapping
@@ -110,12 +112,6 @@ class CustomerExportMapper(Component):
             # FR is the default value
             'Language': lang.esb_ref or 'FR',
         }
-
-    @mapping
-    def compute_id_round(self, record):
-        #  Not implemented yet ?
-        # return {'IdRound': record.round_zone_ids.vehicule_ids[0].time}
-        return {'IdRound': ''}
 
     @mapping
     def compute_onlinepayment(self, record):

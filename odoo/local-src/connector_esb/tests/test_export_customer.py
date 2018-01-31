@@ -128,7 +128,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'Language': u'TLH',
             'GroupId': self.alcyon_category.esb_ref,
             'Taxvat': u'BE0477472701',
-            'IdRound': '',
+            'IdRound': 0,
             'IdDelegate': '',
             'IdPharmacy': '',
             'TaxCode': 1,
