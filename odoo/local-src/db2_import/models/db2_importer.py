@@ -242,6 +242,8 @@ class DB2MapperPurchaseOrder(object):
                 name = "Divers"
             product = rec.env.ref(product_xmlid)
             create_date = convert_date('dcfc', line)
+            taxes = product.supplier_taxes_id.filtered(
+                lambda r: r.company_id == rec.env.user.company_id)
             values = {
                 'order_id': new.id,
                 'product_id': product.id,
@@ -255,6 +257,7 @@ class DB2MapperPurchaseOrder(object):
                 'date_planned': create_date,
                 'create_date': create_date,
                 'write_date': convert_date('dcfm', line) or create_date,
+                'taxes_id': [(4, tax.id) for tax in taxes],
             }
 
             xmlid = '__import__.purchase_order_line_%s_%s_%s_%s' % (

@@ -11,6 +11,7 @@ Unreleased
 * ALCN-978: Floor to 0 imported inventory quantities
 * ALCN-1048: Import additional_products and quantities on product
 * ALCN-1048: Import promotional products on supplier info
+* ALCN-1064: Assign taxes on imported purchase order lines
 
 **Features and Improvements**
 * ALCN-970: Stock Inventory Valuation
