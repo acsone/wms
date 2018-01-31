@@ -369,6 +369,17 @@ def activate_check_on_vat(ctx):
 
 
 @anthem.log
+def setup_cutoff(ctx):
+    company = ctx.env.ref('base.main_company')
+    journal = ctx.env.ref('__setup__.accrual_journal')
+    company.write({
+        'default_cutoff_journal_id': journal.id,
+        'default_accrued_revenue_account_id': ctx.env.ref('l10n_be.1_a404').id,
+        'default_accrued_expense_account_id': ctx.env.ref('l10n_be.1_a444').id,
+        })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -387,3 +398,4 @@ def main(ctx):
     setup_sequences(ctx)
     set_esb_references(ctx)
     import_account_payment_term(ctx)
+    setup_cutoff(ctx)
