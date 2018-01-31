@@ -149,13 +149,29 @@ class ProductMapper(EntityMapper):
                 'pb2'
             )
 
+    MISSING_MANUFACTURERS = [
+        '6452',
+        '7411',
+        '77319',
+        '77411',
+        '7953',
+        '94502',
+        '95550',
+        '744115150',
+    ]
+
     def convert_manufacturer(self, odoo_entity, db2_entity):
         """ Take manufacturer from imported suppliers """
         supplier_ref = db2_entity.get('cplz25')
         if supplier_ref:
+            supplier_ref = str(int(supplier_ref))
+            if supplier_ref in self.MISSING_MANUFACTURERS:
+                print('skip manufacturer ref %s' % db2_entity.get('cplz25'))
+                return
+
             self.importer.add_foreign_ref('FOURN', supplier_ref)
             supplier_xml_id = self.get_xml_id(
-                'supplier', str(int(supplier_ref)), '__import__')
+                'supplier', supplier_ref, '__import__')
             odoo_entity['manufacturer/id'] = supplier_xml_id
 
 
