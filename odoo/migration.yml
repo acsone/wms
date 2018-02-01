@@ -168,6 +168,7 @@ migration:
           - stock_receive_lot
           - stock_reception_priority
           - stock_refill
+          - stock_valuation
           - web_autorefresh
     - version: 10.1.0
     - version: 10.2.0
@@ -189,8 +190,3 @@ migration:
     - version: 10.15.1
     - version: 10.15.2
     - version: 10.16.0
-      addons:
-        upgrade:
-          ### local-src
-          - stock_valuation
-

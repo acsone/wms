@@ -6,37 +6,46 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.16.0 (2018-02-01)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update imported data on 2018-01-31
-* ALCN-978: Floor to 0 imported inventory quantities
 * ALCN-933: Set default value to supplier backorder acceptance
+* ALCN-978: Floor to 0 imported inventory quantities
 * ALCN-1048: Import additional_products and quantities on product
 * ALCN-1048: Import promotional products on supplier info
-* ALCN-1064: Assign taxes on imported purchase order lines
 * ALCN-1049: Create channel to ease paralelization of import jobs
 * ALCN-1049: Update queue branch and apply patch for retries
+* ALCN-1064: Assign taxes on imported purchase order lines
 
 **Features and Improvements**
-* ALCN-970: Stock Inventory Valuation
 
-* ALCN-1055: add last suite name on the partner
-* ALCN-1054: Add tag OnlinePayment and change rule StatisticCode on customer xml export
-* Enable discount on sale order lines
-* ALCN-1039: Add suite_name remove invoice_address_id on webservice sale order web
+* ALCN-859: ESB export special promotions
+* ALCN-970: Stock Inventory Valuation
 * ALCN-1039: Add esb_ref on deliver_carrier and update import data
-* Setup Cutoff Accrual
+* ALCN-1039: Add suite_name remove invoice_address_id on webservice sale order web
 * ALCN-1050: Add the time limit of order on the partner
+* ALCN-1054: Add tag OnlinePayment and change rule StatisticCode on customer xml export
+* ALCN-1055: add last suite name on the partner
 * ALCN-1057: Add IdRound in Customer XML export
+* Enable discount on sale order lines
+* Setup Cutoff Accrual
 
 **Bugfixes**
 
 * ALCN-1053 : Add change requested on customer adresses xml export
 * Fix the method get_product_qty_unavailable in the module specific_sale (search stock.move whit a product)
-
-**Build**
-
-**Documentation**
 
 
 10.15.2 (2018-01-23)
@@ -246,7 +255,6 @@ Unreleased
 * ALCN-980: Translate journal "Wage" and "Miscellaneous Operations" and remove duplicate journal
 * ALCN-946: Add tags on itinerary to easily target customers
 * ALCN-161: Add the export ZelAppro "Stock" and improve exports
-* ALCN-859: ESB export special promotions
 
 **Bugfixes**
 
