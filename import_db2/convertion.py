@@ -1075,6 +1075,41 @@ class StockInventoryLineWithSerial(EntityMapper):
         return query, []
 
 
+class ProductNewRouteInfo(EntityMapper):
+    """Get data for locator with 1 letter A, E, G, P and Q
+
+    Write field description_picking on product to assign
+    routes on post-process."""
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = "id"
+    XMLID_MODEL = 'product'
+
+    FIELDS_MAPPING = [
+        'id',
+        FieldMapper('description_picking', 'stolop'),
+    ]
+
+    def get_sql_query(self):
+        query = """
+        SELECT storef, stolop FROM sbdata.PSTOCK
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) = 1
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        """
+        if not self.importer.full:
+            query += """
+                    AND storef IN (SELECT dccart
+                                FROM sbdata.PDETCDCL
+                                WHERE dccsui >= %s AND dccsui <= %s)
+                    """ % (SO_MIN, SO_MAX)
+        return query, []
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """ Get product xmlid
+        """
+        odoo_entity['id'] = db2_entity['storef']
+
+
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   AdditionalProductMapper,
                   Supplierinfo,
@@ -1086,7 +1121,8 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   StockInventoryLineMapper,
                   ProductStockBinMapper,
                   StockInventoryLineWithoutLot,
-                  StockInventoryLineWithSerial
+                  StockInventoryLineWithSerial,
+                  ProductNewRouteInfo,
                   ]
 
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
@@ -1098,5 +1134,6 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        StockInventoryLineMapper,
                        ProductStockBinMapper,
                        StockInventoryLineWithoutLot,
-                       StockInventoryLineWithSerial
+                       StockInventoryLineWithSerial,
+                       ProductNewRouteInfo,
                        ]
