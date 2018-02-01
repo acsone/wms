@@ -289,32 +289,34 @@ def post_import_stock_bins(ctx):
         ('G', med_route),
     ]
 
+    cr = ctx.env.cr
+
     for family_letter, route in family_map:
         family = ctx.env.ref('__import__.location_family_%s' % family_letter)
         domain = [('bin_location_id', 'child_of', family.id)]
         product_bins = StockBin.search(domain)
+        if not product_bins:
+            continue
         products = product_bins.mapped('product_id')
 
-        for product in products:
-            if route not in product.route_ids:
-                product.route_ids |= route
-
-    cr = ctx.env.cr
+        cr.execute(
+            "INSERT INTO stock_route_product (product_id, route_id)"
+            "  SELECT id, %s FROM product_template"
+            "  WHERE id in %s"
+            "    AND id NOT IN ("
+            "      SELECT product_id FROM stock_route_product"
+            "      WHERE route_id = %s)",
+            (route.id, tuple(products.ids), route.id))
 
     def sql_create_routes(letter, route):
         cr.execute(
-            "SELECT id FROM product_template"
-            " WHERE description_picking = %s"
-            "   AND id NOT IN ("
-            "     SELECT product_id FROM stock_route_product"
+            "INSERT INTO stock_route_product (product_id, route_id)"
+            "  SELECT id, %s FROM product_template"
+            "  WHERE description_picking = %s"
+            "    AND id NOT IN ("
+            "      SELECT product_id FROM stock_route_product"
             "      WHERE route_id = %s)",
-            (family_letter, route.id))
-        rows = cr.fetchall()
-        for r in rows:
-            product_id = r[0]
-            cr.execute(
-                "INSERT INTO stock_route_product (product_id, route_id)"
-                " VALUES (%s, %s)", (product_id, route.id))
+            (route.id, family_letter, route.id))
 
     for family_letter, route in family_map:
         sql_create_routes(family_letter, route)
