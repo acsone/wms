@@ -55,3 +55,12 @@
       # Add the module purchase_cancel_reason
     - oca refs/pull/438/head
   target: *default_target
+./external-src/queue:
+  remotes:
+    oca: git@github.com:OCA/queue.git
+    camptocamp: git@github.com:camptocamp/queue.git
+  merges:
+    - oca 10.0
+      # [10.0] retry_postpone using new cursor
+    - oca refs/pull/41/head
+  target: *default_target
