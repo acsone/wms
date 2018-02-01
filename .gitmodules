@@ -33,7 +33,7 @@
 	url = git@github.com:camptocamp/purchase-workflow.git
 [submodule "odoo/external-src/queue"]
 	path = odoo/external-src/queue
-	url = git@github.com:oca/queue
+	url = git@github.com:camptocamp/queue
 [submodule "odoo/external-src/report-print-send"]
 	path = odoo/external-src/report-print-send
 	url = git@github.com:oca/report-print-send.git

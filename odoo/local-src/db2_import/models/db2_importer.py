@@ -666,12 +666,12 @@ class DB2ImporterTable(models.Model):
                     cr.execute(query, (order_id, line_id))
 
     @api.multi
-    @job
+    @job(default_channel='root.db2.create_or_update')
     def create_or_update_record(self, db2_id):
         mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
-    @job
+    @job(default_channel='root.db2.fetch')
     def get_from_db2(self, date_start, date_end):
         # connect to DB2
         # We can't use dns name in the DB2 odbc driver
