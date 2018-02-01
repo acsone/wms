@@ -14,6 +14,8 @@ Unreleased
 * ALCN-1048: Import additional_products and quantities on product
 * ALCN-1048: Import promotional products on supplier info
 * ALCN-1064: Assign taxes on imported purchase order lines
+* ALCN-1049: Create channel to ease paralelization of import jobs
+* ALCN-1049: Update queue branch and apply patch for retries
 
 **Features and Improvements**
 * ALCN-970: Stock Inventory Valuation
