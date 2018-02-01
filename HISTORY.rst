@@ -1,4 +1,5 @@
 .. :changelog:
+* ALCN-1049: Setup routes on product based on locator informations
 
 Release History
 ---------------
