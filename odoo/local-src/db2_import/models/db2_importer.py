@@ -2,6 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import os
+import psycopg2
 import pyodbc
 import socket
 from datetime import datetime, timedelta
@@ -9,6 +10,7 @@ from calendar import monthrange
 
 from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.exception import RetryableJobError
 
 import logging
 
@@ -668,7 +670,17 @@ class DB2ImporterTable(models.Model):
     @api.multi
     @job(default_channel='root.db2.create_or_update')
     def create_or_update_record(self, db2_id):
-        mappers[self.table_name].process(self, self.table_name, db2_id)
+        try:
+            mappers[self.table_name].process(self, self.table_name, db2_id)
+        except psycopg2.InternalError as e:
+            msg = str(e)
+            concurency_error = ("current transaction is aborted, commands"
+                                " ignored until end of transaction block")
+            if msg.find(concurency_error) != -1:
+                _logger.warning('Concurrecy error, will retry job')
+                raise RetryableJobError(msg)
+            else:
+                raise
 
     @api.multi
     @job(default_channel='root.db2.fetch')
