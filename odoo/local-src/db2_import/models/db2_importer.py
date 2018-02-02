@@ -325,7 +325,7 @@ class DB2MapperSaleOrder(object):
         pricelist = customer.property_product_pricelist
         pay_term = customer.property_payment_term_id
         addr = customer.address_get(['delivery', 'invoice'])
-        fp = rec.env['account.fiscal.position'].get_fiscal_position(
+        fpos = rec.env['account.fiscal.position'].get_fiscal_position(
             customer.id, addr['delivery'])
         promo_sale = customer.supplier_promotion_sale_allowed
 
@@ -345,7 +345,7 @@ class DB2MapperSaleOrder(object):
             'payment_term_id': pay_term.id,
             'partner_invoice_id': addr['invoice'],
             'partner_shipping_id': addr['delivery'],
-            'fiscal_position_id': fp.id,
+            'fiscal_position_id': fpos.id,
             'supplier_promotion_allowed': promo_sale,
         }
 
@@ -395,6 +395,13 @@ class DB2MapperSaleOrder(object):
             if product_xmlid == '__setup__.product_other':
                 name = "Divers"
             product = rec.env.ref(product_xmlid)
+            # While odoo could do it for us on create
+            # in _prepare_add_missing_fields
+            # Do it ourselves to avoid call to onchange
+            taxes = product.taxes_id.filtered(
+                lambda r: r.company_id == rec.env.user.company_id)
+            taxes = fpos.map_tax(
+                taxes, product, new.partner_shipping_id) if fpos else taxes
             create_date = convert_date('dccc', line)
             values = {
                 'order_id': new.id,
@@ -405,6 +412,7 @@ class DB2MapperSaleOrder(object):
                 'product_uom': rec.env.ref('product.product_uom_unit').id,
                 'qty_delivered': line['dccqul'],
                 'price_unit': line['dccpvd'],
+                'tax_id': [(4, tax.id) for tax in taxes],
                 'discount': line['dccrem'],
                 'create_date': create_date,
                 'write_date': convert_date('dccm', line) or create_date,
