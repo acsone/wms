@@ -322,6 +322,11 @@ class DB2MapperSaleOrder(object):
 
         create_date = convert_date('eccc', row)
         customer = rec.env.ref(convert_customer(int(row['ecccli'])))
+        pricelist = customer.property_product_pricelist
+        pay_term = customer.property_payment_term_id
+        addr = customer.address_get(['delivery', 'invoice'])
+        fp = rec.env['account.fiscal.position'].get_fiscal_position(
+            customer.id, addr['delivery'])
         promo_sale = customer.supplier_promotion_sale_allowed
 
         user_xmlid = convert_user(row['eccrep'])
@@ -336,6 +341,11 @@ class DB2MapperSaleOrder(object):
             'confirmation_date': convert_date('eccd', row),
             'write_date': convert_date('eccm', row) or create_date,
             'partner_id': customer.id,
+            'pricelist_id': pricelist.id,
+            'payment_term_id': pay_term.id,
+            'partner_invoice_id': addr['invoice'],
+            'partner_shipping_id': addr['delivery'],
+            'fiscal_position_id': fp.id,
             'supplier_promotion_allowed': promo_sale,
         }
 
