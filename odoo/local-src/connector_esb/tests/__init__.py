@@ -13,3 +13,4 @@ from . import test_ws_create_saleorder
 from . import test_ws_delivery_fee
 from . import test_export_special_promotion
 from . import test_export_product_price
+from . import test_export_buyx_gety

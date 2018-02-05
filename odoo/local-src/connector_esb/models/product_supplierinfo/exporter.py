@@ -81,7 +81,8 @@ class SpecialPromotionCronExporter(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp)
+        return bool(work.timestamp
+                    and work.timestamp.kind == 'special.promotion')
 
     def get_items_domain(self):
         return []

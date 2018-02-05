@@ -43,6 +43,29 @@ def dt2esbdate(field):
     return modifier
 
 
+def dt2nakeddate(field):
+    """ A modifier intended to be used on the ``direct`` mappings.
+
+    The source format is odoo.tools.DEFAULT_SERVER_DATETIME_FORMAT
+    The source must be a Datetime field.
+
+    Convert '2017-07-13 00:00:00' to '20170713'
+
+    Example::
+
+        direct = [(dt2nakeddate('source'), 'target')]
+
+    :param field: name of the source field in the record
+    :param binding: True if the relation is a binding record
+    """
+    def modifier(self, record, to_attr):
+        value = record[field]
+        if not value:
+            return ''
+        return value[:10].replace('-', '')
+    return modifier
+
+
 def falsy2emptystring(field):
     """ A modifier intended to be used on the ``direct`` mappings.
 

@@ -196,3 +196,7 @@ migration:
         upgrade:
           ### local-src
           - account_move_productcateg
+    - version: 10.16.2
+      addons:
+        upgrade:
+          - connector_esb
