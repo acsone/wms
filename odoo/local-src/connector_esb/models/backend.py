@@ -91,7 +91,6 @@ class ESBBackend(models.Model):
     def cron_export_product_price(self):
         backend = self.get_singleton()
         exporter = backend._get_timestamp('product.product', 'product.price')
-        exporter.update_saleprice_2()
         exporter.export()
 
     @api.model
