@@ -21,8 +21,6 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
 
     def setup_records(self):
         # Set existing products to inactive
-        all_product = self.env['product.product'].search([])
-        all_product.write({'active': False})
         # # Create 2 products
         self.p1 = self.env['product.product'].create({
             'name': 'Unittest P1',
@@ -67,7 +65,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
             'Msrp': '11.00',
             'PharmacyPrice': '33.240'
         }
-        self.p1.sale_price_2_export = 33.24
+        self.p1.sale_price_2_export = 33.240
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

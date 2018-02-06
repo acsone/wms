@@ -10,6 +10,9 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1085: Fix export PharmacyPrice in ProductPrice XML.
+  * Make the method that update the related computed field called on all export not only cron jobs.
+
 **Build**
 
 * Upgrade nginx container to 1.2.1 - adding cache improvements
