@@ -25,7 +25,9 @@ class PromotionAlcyonExportMapper(Component):
         percent = '0.00'
         if record.percent_price:
             percent = '{0:.2f}'.format(record.percent_price)
-        return {'Percent': percent}
+        return {'Percent1': percent,
+                'Percent2': '0',
+                }
 
     @mapping
     def compute_action(self, record):

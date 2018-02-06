@@ -8,6 +8,10 @@ Unreleased
 
 **Features and Improvements**
 
+ * ALCN-1092: Changes in Promotion Alcyon XML export
+   * Rename Percent in Percent1
+   * Add Percent2 with fixed value zero
+
 **Bugfixes**
 
 * ALCN-1085: Fix export PharmacyPrice in ProductPrice XML.
