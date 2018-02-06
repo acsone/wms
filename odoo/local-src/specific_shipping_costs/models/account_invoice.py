@@ -15,7 +15,6 @@ class AccountInvoice(models.Model):
 
     allow_compute_shipping_costs = fields.Boolean(
         compute='_compute_allow_compute_shipping_costs',
-        strore=False,
     )
 
     @api.depends('invoice_line_ids')

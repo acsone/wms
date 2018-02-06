@@ -20,6 +20,7 @@
         'analytic',
         'account_cancel',
         'account_invoice_check_total',
+        'specific_shipping_costs',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
