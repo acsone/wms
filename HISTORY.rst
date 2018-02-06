@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.16.1 (2018-02-06)
+++++++++++++++++++++
+
+**Features and Improvements**
+
  * ALCN-1092: Changes in Promotion Alcyon XML export
    * Rename Percent in Percent1
    * Add Percent2 with fixed value zero
@@ -22,8 +34,6 @@ Unreleased
 **Build**
 
 * Upgrade nginx container to 1.2.1 - adding cache improvements
-
-**Documentation**
 
 
 10.16.0 (2018-02-01)
