@@ -13,7 +13,8 @@ _logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _name = 'sale.order'
+    _inherit = ['sale.order', 'esb.exportable']
 
     esb_ref = fields.Char(string='Reference for ESB')
 
@@ -21,7 +22,9 @@ class SaleOrder(models.Model):
     def ws_create_new(self, data):
         """Create a sale order with data coming from webservices."""
         try:
-            return self._ws_create_new(data)
+            return self.with_context(
+                no_connector_export=True
+            )._ws_create_new(data)
         except IntegrityError as error:
             self.env.cr.rollback()
             _logger.error('Webservice create saleorder, integrity error : %s',

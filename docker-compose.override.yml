@@ -45,6 +45,9 @@ services:
           Z31nmzeL68FipXBqdckCQQCCURUp8lWdC5UPwArD5P22Mame0XdlAkbH3vOuFCav
           5Dx0Zwm6sBJUrY64Qt/OvEk0nD+ttP7D+O65+IJ6gmCO
           -----END RSA PRIVATE KEY-----
+      ODOO_ESB_WS_BASE_URL: https://api-pp3.alcyonbelux.be/magento-erp-api
+      ODOO_ESB_WS_USER: test_odoo
+      ODOO_ESB_WS_PWD: magent0
 
   db:
     ports:

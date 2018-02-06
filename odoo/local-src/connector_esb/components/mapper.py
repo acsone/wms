@@ -75,11 +75,11 @@ def two_digits_fractional(field):
 def falsy2zero(field):
     """ A modifier intended to be used on the ``direct` mappings.
 
-        Turn falsy values into zero 0
+    Turn falsy values into zero 0
 
-        Example::
+    Example::
 
-            direct = [(falsy2zero('source'), 'target')]
+        direct = [(falsy2zero('source'), 'target')]
 
     """
     def modifier(self, record, to_attr):

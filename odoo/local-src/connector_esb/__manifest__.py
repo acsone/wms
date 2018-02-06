@@ -25,6 +25,7 @@
         'specific_purchase',
         'specific_stock',
         'specific_data',
+        'specific_sale',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

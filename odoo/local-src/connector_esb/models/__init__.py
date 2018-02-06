@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from . import binding
+from . import esb_exportable
 
 from . import account_tax
 from . import backend
@@ -20,8 +20,10 @@ from . import res_country
 from . import promotion_alcyon
 from . import product_price
 from . import res_lang
+from . import sale_order
 from . import sale_order_line
 from . import res_users
 from . import partner_alcyon_category
 from . import sale_order
 from . import product_supplierinfo
+from . import queue_job
