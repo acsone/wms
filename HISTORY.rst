@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* Upgrade nginx container to 1.2.1 - adding cache improvements
+
 **Documentation**
 
 
