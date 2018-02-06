@@ -123,6 +123,7 @@ migration:
           - purchase_cancel_reason
           ### local-src
           - account_invoice_tax_required
+          - account_move_productcateg
           - connector_esb
           - db2_import
           - delivery_rounds
@@ -190,3 +191,8 @@ migration:
     - version: 10.15.1
     - version: 10.15.2
     - version: 10.16.0
+    - version: 10.16.1
+      addons:
+        upgrade:
+          ### local-src
+          - account_move_productcateg
