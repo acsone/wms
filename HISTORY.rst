@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Setup Cutoff Accrual - Do not make accrual of taxes
 
 **Bugfixes**
 
