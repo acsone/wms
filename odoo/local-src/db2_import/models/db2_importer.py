@@ -325,8 +325,29 @@ class DB2MapperSaleOrder(object):
         pricelist = customer.property_product_pricelist
         pay_term = customer.property_payment_term_id
         addr = customer.address_get(['delivery', 'invoice'])
-        fpos = rec.env['account.fiscal.position'].get_fiscal_position(
-            customer.id, addr['delivery'])
+
+        delivery = rec.env['res.partner'].browse(addr['delivery'])
+        # take fiscal posistion to work with a record
+        # partner manually set fiscal position always win
+        fpos = (delivery.property_account_position_id or
+                customer.property_account_position_id)
+        if not fpos:
+            fp_obj = rec.env['account.fiscal.position']
+            # First search only matching VAT positions
+            vat_required = bool(customer.vat)
+            fpos = fp_obj._get_fpos_by_region(
+                delivery.country_id.id,
+                delivery.state_id.id,
+                delivery.zip,
+                vat_required)
+
+            # Then if VAT required found no match, try positions that do not
+            # require it
+            if not fpos and vat_required:
+                fpos = fp_obj._get_fpos_by_region(
+                    delivery.country_id.id,
+                    delivery.state_id.id, delivery.zip, False)
+
         promo_sale = customer.supplier_promotion_sale_allowed
 
         user_xmlid = convert_user(row['eccrep'])
@@ -344,7 +365,7 @@ class DB2MapperSaleOrder(object):
             'pricelist_id': pricelist.id,
             'payment_term_id': pay_term.id,
             'partner_invoice_id': addr['invoice'],
-            'partner_shipping_id': addr['delivery'],
+            'partner_shipping_id': delivery.id,
             'fiscal_position_id': fpos.id,
             'supplier_promotion_allowed': promo_sale,
         }
