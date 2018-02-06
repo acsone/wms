@@ -65,7 +65,8 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
         """ Testing mapper without id client """
         expected = {
             'AlcyonGroupId': 'Ref123',
-            'Percent': '5.00',
+            'Percent1': '5.00',
+            'Percent2': '0',
             'ProductType': 'ALI'
         }
         self.timestamp.writer = 'local'
