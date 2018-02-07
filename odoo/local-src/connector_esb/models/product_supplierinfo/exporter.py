@@ -32,7 +32,9 @@ class SpecialPromotionExportMapper(Component):
         percent = 0
         if record.discount_sale:
             percent = record.discount_sale
-        return {'Percent': '{0:.2f}'.format(percent)}
+        return {'Percent1': '{0:.2f}'.format(percent),
+                'Percent2': '0'
+                }
 
     @mapping
     def compute_startdate(self, record):

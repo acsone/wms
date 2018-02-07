@@ -8,6 +8,10 @@ Unreleased
 
 **Features and Improvements**
 
+ * ALCN-1093: Changes in Special Promotion XML export
+   * Rename Percent in Percent1
+   * Add Percent2 with fixed value zero
+
 **Bugfixes**
 
 **Build**
