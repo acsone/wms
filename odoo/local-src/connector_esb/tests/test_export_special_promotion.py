@@ -71,7 +71,8 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
         """ Testing mapper without id client """
         expected = {
             'Sku': u'0001',
-            'Percent': '5.00',
+            'Percent1': '5.00',
+            'Percent2': '0',
             'StartDate': '20170712',
             'EndDate': '20171231',
             'AlcyonGroupId': '',

@@ -6,14 +6,16 @@
       <StartDate>20170712</StartDate>
       <EndDate>20171231</EndDate>
       <Action>Create</Action>
-      <Percent>5.00</Percent>
+      <Percent1>5.00</Percent1>
+      <Percent2>0</Percent2>
     </Row>
     <Row>
       <Sku>0002</Sku>
       <StartDate>20170731</StartDate>
       <EndDate>20170831</EndDate>
       <Action>Create</Action>
-      <Percent>15.00</Percent>
+      <Percent1>15.00</Percent1>
+      <Percent2>0</Percent2>
     </Row>
   </Root>
 </ROOT>
