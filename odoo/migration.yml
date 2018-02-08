@@ -199,4 +199,5 @@ migration:
     - version: 10.16.2
       addons:
         upgrade:
+          ### local-src
           - connector_esb
