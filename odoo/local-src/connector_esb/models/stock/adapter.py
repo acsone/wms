@@ -10,3 +10,4 @@ class ESBWebServiceAdapterStockUpdate(ESBWebServiceAdapter):
     _name = 'esb.stockupdate.webservice.adapter'
     _inherit = ['esb.webservice.adapter']
     _endpoint = 'product_stock/'
+    _usage = 'backend.adapter.stockupdate'
