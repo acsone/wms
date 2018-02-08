@@ -11,6 +11,7 @@ Unreleased
  * ALCN-1093: Changes in Special Promotion XML export
    * Rename Percent in Percent1
    * Add Percent2 with fixed value zero
+* ALCN-858: Add XML export to WSO2 for Buy X Get Y on products
 
 **Bugfixes**
 

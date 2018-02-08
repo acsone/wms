@@ -23,14 +23,16 @@ class ESBBackendTimestamp(models.Model):
         readonly=True,
     )
     kind = fields.Selection(
-        selection=[('pharmacy', 'pharmacy'),
-                   ('stock', 'stock'),
-                   ('product', 'product'),
-                   ('customer', 'customer'),
-                   ('customer.address', 'customer.address'),
-                   ('product.price', 'product.price'),
-                   ('promotion.alcyon', 'promotion.alcyon'),
-                   ('special.promotion', 'sepcial.promotion')],
+        selection=[(opt,) * 2 for opt in
+                   ['pharmacy',
+                    'stock',
+                    'product',
+                    'customer',
+                    'customer.address',
+                    'product.price',
+                    'promotion.alcyon',
+                    'special.promotion',
+                    'buyx.gety']],
         string='Kind of export',
         readonly=True,
     )
