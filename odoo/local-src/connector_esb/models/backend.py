@@ -17,6 +17,18 @@ class ESBBackend(models.Model):
     sftp_host = fields.Char(string='SFTP Host', compute='_compute_from_env')
     sftp_port = fields.Integer(string='SFTP Port', compute='_compute_from_env')
     sftp_user = fields.Char(string='SFTP User', compute='_compute_from_env')
+    ws_url = fields.Char(
+        string='Web Service Base URL',
+        compute='_compute_from_env'
+    )
+    ws_user = fields.Char(
+        string='Web Service User',
+        compute='_compute_from_env'
+    )
+    ws_pwd = fields.Char(
+        string='Web Service password',
+        compute='_compute_from_env'
+    )
     timestamp_ids = fields.One2many(
         comodel_name='esb.backend.timestamp',
         inverse_name='backend_id',
@@ -35,6 +47,9 @@ class ESBBackend(models.Model):
             record.sftp_host = os.getenv('ODOO_ESB_SFTP_HOST', '')
             record.sftp_port = int(os.getenv('ODOO_ESB_SFTP_PORT', 22))
             record.sftp_user = os.getenv('ODOO_ESB_SFTP_USER', '')
+            record.ws_user = os.getenv('ODOO_ESB_WS_USER', '')
+            record.ws_pwd = os.getenv('ODOO_ESB_WS_PWD', '')
+            record.ws_url = os.getenv('ODOO_ESB_WS_BASE_URL', '')
 
     @api.model
     def get_singleton(self):
@@ -104,3 +119,9 @@ class ESBBackend(models.Model):
         backend = self.get_singleton()
         backend._get_timestamp('product.supplierinfo',
                                'product.buyxgety').export()
+
+    @api.model
+    def cron_export_stock_update(self):
+        backend = self.get_singleton()
+        exporter = backend._get_timestamp('product.product', 'stock.update')
+        exporter.export()

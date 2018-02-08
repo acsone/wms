@@ -14,3 +14,4 @@ from . import test_ws_delivery_fee
 from . import test_export_special_promotion
 from . import test_export_product_price
 from . import test_export_buyx_gety
+from . import test_export_stock_update

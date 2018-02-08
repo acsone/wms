@@ -201,3 +201,11 @@ migration:
         upgrade:
           ### local-src
           - connector_esb
+    - version: 10.16.3
+      addons:
+        upgrade:
+          ### local-src
+          - connector_esb
+      operations:
+        post:
+          - anthem songs.upgrade.10_16_3_update::main

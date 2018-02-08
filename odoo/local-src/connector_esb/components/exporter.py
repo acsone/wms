@@ -279,3 +279,28 @@ class ESBCronExporter(AbstractComponent):
         """
         records = self.get_items(export_since=export_since)
         return self._export_items(records)
+
+
+class ESBWebServiceCronExporter(AbstractComponent):
+    _name = 'esb.webservice.cron.exporter'
+    _inherit = ['esb.webservice.exporter', 'esb.cron.exporter']
+    _usage = 'record.exporter.cron'
+
+    def run(self, export_since=None):
+        """ Run the export on a domain
+
+        ``export_since`` can be omitted to ignore the date and export
+        all the records that match the domain.
+
+        """
+        records = self.get_items(export_since=export_since)
+        data = []
+        for r in records:
+            mapped_record = self.mapper.map_record(r)
+            data.append(self._update_data(mapped_record))
+        if data:
+            data = {'lines': data}
+        else:
+            return _('Nothing to export.')
+        self._create(data)
+        return _('Records exported.')
