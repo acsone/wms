@@ -514,9 +514,8 @@ class DB2ImporterTable(models.Model):
         return ''
 
     @api.multi
-    def _create_db2_table(self, db2_cr):
-        cr = self.env.cr
-        odoo_table_name = self._PREFIX + self.table_name.lower()
+    def _get_db2_columns(self, db2_cr):
+        """ Returns string containing definition of columns """
         query = (
             "SELECT column_name, data_type FROM qsys2.syscolumns"
             " WHERE table_schema = '{schema}'"
@@ -530,18 +529,23 @@ class DB2ImporterTable(models.Model):
             'CHAR': 'VARCHAR',
             'DECIMAL': 'DOUBLE PRECISION',
         }
-        columns = ",".join(["{} {}".format(col[0], type_mapping[col[1]])
-                           for col in columns])
+        _logger.debug('GET COLUMNS FROM DB2 %s', columns)
+        return ",".join(["{} {}".format(col[0], type_mapping[col[1]])
+                         for col in columns])
 
+    @api.multi
+    def _create_db2_table(self, db2_columns):
+        cr = self.env.cr
+        odoo_table_name = self._PREFIX + self.table_name.lower()
         add_columns = self.get_add_columns()
-
         query = (
             "CREATE TABLE {} ("
             "id serial PRIMARY KEY,"
             "{}"
             "{}"
             ",UNIQUE({})"
-            ")".format(odoo_table_name, columns, add_columns, self.id_columns))
+            ")".format(odoo_table_name, db2_columns,
+                       add_columns, self.id_columns))
         cr.execute(query)
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
@@ -700,7 +704,8 @@ class DB2ImporterTable(models.Model):
             table_exists = cr.fetchone()
 
             if not table_exists:
-                self._create_db2_table(db2_cr)
+                db2_columns = self._get_db2_columns(db2_cr)
+                self._create_db2_table(db2_columns)
             # get all columns (from local copy)
             query = (
                 "SELECT column_name"

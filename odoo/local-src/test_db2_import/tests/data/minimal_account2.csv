@@ -1,0 +1,9 @@
+id,code,name,company_id/id,user_type_id/id,tag_ids/id
+__setup__.account_400000,400000,Clients,base.main_company,account.data_account_type_receivable,
+__setup__.account_440000,440000,Fournisseurs marchandises,base.main_company,account.data_account_type_payable,
+__setup__.account_550002,550002,CBC Banque - CC,base.main_company,account.data_account_type_liquidity,
+__setup__.account_550003,550003,ING Belgium - CC,base.main_company,account.data_account_type_liquidity,
+__setup__.account_550004,550004,BELFIUS - CC,base.main_company,account.data_account_type_liquidity,
+__setup__.account_550005,550005,ING livret vert,base.main_company,account.data_account_type_liquidity,
+__setup__.account_550006,550006,ING Belgium - CE,base.main_company,account.data_account_type_liquidity,
+__setup__.account_550007,550007,BELFIUS - CE,base.main_company,account.data_account_type_liquidity,

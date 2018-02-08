@@ -9,6 +9,7 @@
  'license': 'AGPL-3',
  'category': 'Misc',
  'depends': ['sale',
+             'pricelist_discount',
              'queue_job'],
  'website': 'www.camptocamp.com',
  'data': ['views/db2_importer.xml',
