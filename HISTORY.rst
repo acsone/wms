@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1091 : Add product stock update through calls to WSO2 web service
+
 **Bugfixes**
 
 **Build**

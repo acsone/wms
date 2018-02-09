@@ -9,4 +9,3 @@ from . import importer
 from . import exporter
 from . import events
 from . import webservice_message
-from . import adapters

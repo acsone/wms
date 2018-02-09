@@ -2,7 +2,6 @@ from . import test_export_pharmacy
 from . import test_export_product
 from . import test_ws_product_stock
 from . import test_ws_statistics_form
-from . import test_export_stock
 from . import test_xml_writer
 from . import test_ws_stat_product_customer
 from . import test_export_customer_address
@@ -14,3 +13,4 @@ from . import test_ws_delivery_fee
 from . import test_export_special_promotion
 from . import test_export_product_price
 from . import test_export_buyx_gety
+from . import test_export_stock_update

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from ..adapter import ESBWebServiceAdapter
+from ...components.adapter import ESBWebServiceAdapter
 
 
 class ESBWebServiceAdapterSaleOrder(ESBWebServiceAdapter):

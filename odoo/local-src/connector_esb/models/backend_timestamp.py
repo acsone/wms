@@ -32,7 +32,8 @@ class ESBBackendTimestamp(models.Model):
                     'product.price',
                     'promotion.alcyon',
                     'special.promotion',
-                    'buyx.gety']],
+                    'buyx.gety',
+                    'stock.update']],
         string='Kind of export',
         readonly=True,
     )
@@ -44,7 +45,8 @@ class ESBBackendTimestamp(models.Model):
     path = fields.Char()
     writer = fields.Selection(
         selection=[('local', 'Local'),
-                   ('sftp', 'sFTP')],
+                   ('sftp', 'sFTP'),
+                   ('webservice', 'WebService')],
         default='sftp',
         required=True,
     )

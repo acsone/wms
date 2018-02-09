@@ -2,7 +2,6 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import os
 import json
 import logging
 import requests
@@ -21,16 +20,15 @@ class ESBWebServiceAdapter(Component):
     """
     _name = 'esb.webservice.adapter'
     _inherit = ['base.backend.adapter.crud', 'esb.base']
-    _url = os.getenv('ODOO_ESB_WS_BASE_URL', '')
     _endpoint = ''
-    _user = os.getenv('ODOO_ESB_WS_USER', '')
-    _pwd = os.getenv('ODOO_ESB_WS_PWD', '')
 
     def _get_url(self):
         """ Construct the url for an HTTP request """
-        if not self._url or not self._user:
+        if not(self.backend_record.ws_url and self.backend_record.ws_user):
             raise ConnectorException('Url or username not defined on adapter')
-        return self._url + '/' + self._user + '/' + self._endpoint
+        return (self.backend_record.ws_url + '/'
+                + self.backend_record.ws_user + '/'
+                + self._endpoint)
 
     def _get_headers(self):
         return {'Content-Type': 'application/json',
@@ -45,7 +43,8 @@ class ESBWebServiceAdapter(Component):
         res = requests.post(url,
                             data=data,
                             headers=self._get_headers(),
-                            auth=(self._user, self._pwd))
+                            auth=(self.backend_record.ws_user,
+                                  self.backend_record.ws_pwd))
         if res.status_code == 202:
             raise ConnectorException('Error %s on POST' % (res.status_code))
         elif res.status_code == 200:
@@ -64,7 +63,8 @@ class ESBWebServiceAdapter(Component):
         res = requests.put(url,
                            data=data,
                            headers=self._get_headers(),
-                           auth=(self._user, self._pwd))
+                           auth=(self.backend_record.ws_user,
+                                 self.backend_record.ws_pwd))
         if res.status_code == 202:
             raise ConnectorException('Error %s on PUT' % (res.status_code))
         elif res.status_code == 200:
