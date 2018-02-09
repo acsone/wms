@@ -21,7 +21,7 @@ migration:
         post:
           # Because this module is auto-install when sale_stock is installed.
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
-          - anthem songs.install.unistall_procurement_jit_module::main
+          - anthem songs.install.uninstall_procurement_jit_module::main
           - anthem songs.install.post::main
 
           # platform is on AWS not on exoscale but it is mostly the same config
