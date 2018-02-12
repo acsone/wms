@@ -127,7 +127,6 @@ __setup__.account_550002,FALSE,550002,CBC Banque - CC,base.main_company,account.
 __setup__.account_550003,FALSE,550003,ING Belgium - CC,base.main_company,account.data_account_type_liquidity,
 __setup__.account_550004,FALSE,550004,BELFIUS - CC,base.main_company,account.data_account_type_liquidity,
 __setup__.account_550005,FALSE,550005,ING livret vert,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550005,FALSE,550005,ING livret vert,base.main_company,account.data_account_type_liquidity,
 __setup__.account_550006,FALSE,550006,ING Belgium - CE,base.main_company,account.data_account_type_liquidity,
 __setup__.account_550007,FALSE,550007,BELFIUS - CE,base.main_company,account.data_account_type_liquidity,
 __setup__.account_550010,FALSE,550010,Business account,base.main_company,account.data_account_type_liquidity,
