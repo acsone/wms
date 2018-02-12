@@ -18,15 +18,14 @@ migration:
           - odoo -i l10n_be_eco_tax        --stop-after-init --workers=0
           - anthem songs.install.accounting::no_coa_instance_unlock
           - anthem songs.install.pre::setup_company
+          # Install cloud platform if $C2C_PLATFORM == 'True'
+          - bin/install_cloud_platform.sh
         post:
           # Because this module is auto-install when sale_stock is installed.
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
           - anthem songs.install.uninstall_procurement_jit_module::main
           - anthem songs.install.post::main
 
-          # platform is on AWS not on exoscale but it is mostly the same config
-          # we will use exoscale one as we don't know yet if it will be the final config
-          - anthem openerp.addons.cloud_platform.songs::install_exoscale
           - anthem songs.install.accounting::main
           # To an unknown reason,
           # ir_values created in 'default_values'
@@ -84,9 +83,6 @@ migration:
           - stock
           # enterprise
           - helpdesk
-          ### Camptocamp
-          # camptocamp/cloud-platform
-          - cloud_platform_exoscale
           ### OCA (external-src)
           # oca/account-analytic
           - account_analytic_required
