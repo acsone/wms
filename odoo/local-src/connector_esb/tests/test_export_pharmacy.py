@@ -46,6 +46,16 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'fax': '021121212',
             'email': 'peter@ch.ch',
         })
+        self.all_records |= self.model.create({
+            'ref': 'O',
+            'name': 'Olson',
+            'street': 'Chemin des Canards, 1',
+            'zip': '1003',
+            'city': 'Geneve',
+            'country_id': self.country_ch.id,
+            'phone': '021123123',
+            'fax': '021121212',
+        })
         self.env.ref('base.main_partner').pharmacist_id = self.all_records[1]
         self.country_ch.esb_ref = 'HOP'
 
@@ -82,6 +92,24 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'CountryId': self.country_ch.esb_ref,
             }
         rec = self.all_records[1]
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            self.assertDictEqual(mapper.map_record(rec).values(), expected)
+
+    def test_mapper_empty_email(self):
+        """ Generate dict with the mapper and compare with what is expected"""
+        expected = {
+            'Id': 'O',
+            'Name': 'Olson',
+            'Postcode': '1003',
+            'City': 'Geneve',
+            'Telephone': '021123123',
+            'Fax': '021121212',
+            'Street': 'Chemin des Canards, 1',
+            'CountryId': self.country_ch.esb_ref,
+            }
+        rec = self.all_records[2]
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')

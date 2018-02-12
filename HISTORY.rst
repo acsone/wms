@@ -10,6 +10,10 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1097: Fix XML Pharmacy, node e-mail contains False if email not referenced
+   * Also fix that the XML nodes (fax, phone, city, zip) would contain False if
+     their respective field is empty 
+
 **Build**
 
 * ALCN-1087: Disable Camptocamp platform specifics by default
