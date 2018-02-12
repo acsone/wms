@@ -18,6 +18,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1141: Do the missing load of free products information of supplierinfo
+* Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone
 
 **Build**
 
