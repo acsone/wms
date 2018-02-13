@@ -27,6 +27,7 @@ services:
       MARABUNTA_ALLOW_SERIE: 'True'
       # configuration to test exports to sftp (ESB)
       ODOO_ESB_SFTP_HOST: esbsftp
+      ODOO_ESB_SFTP_PATH: share
       ODOO_ESB_SFTP_USER: foo
       # test key from sftp/id_rsa
       ODOO_ESB_SFTP_PRIVATE_KEY: |

@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1094: Add default sftp directory in env variables
+
 **Bugfixes**
 
 **Build**

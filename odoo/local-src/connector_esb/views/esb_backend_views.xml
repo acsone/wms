@@ -17,6 +17,7 @@
             <group name="sftp_configuration">
               <field name="sftp_host"/>
               <field name="sftp_port"/>
+              <field name="sftp_path"/>
               <field name="sftp_user"/>
             </group>
             <group name="webservice_configuration">
