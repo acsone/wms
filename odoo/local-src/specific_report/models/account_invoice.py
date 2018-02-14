@@ -165,6 +165,56 @@ class AccountInvoice(models.Model):
 
         return values
 
+    @api.multi
+    def get_report_name(self):
+        """Generate a specific name for the report save in ir.attachment"""
+        self.ensure_one()
+        if self.type in ['in_invoice', 'in_refund']:
+            # Only generate for client invoice and credit notes
+            return None
+        type_doc = ''
+        if self.type == 'out_invoice':
+            type_doc = 'cf'
+        elif self.type == 'out_refund':
+            type_doc = 'nc'
+        return '_'.join([
+            type_doc,
+            self.partner_id.ref,
+            str(self.id),
+            ''.join(self.create_date[:10].split('-')),
+            ''.join(self.create_date[-8:].split(':')),
+            ]) + '.pdf'
+
+    @api.multi
+    def action_invoice_open(self):
+        """Generate the invoice pdf and save it to ir.attachment """
+        res = super(AccountInvoice, self).action_invoice_open()
+        for invoice in self:
+            filename = self.get_report_name()
+            if not filename:
+                continue
+            # Default_type in the context breaks the pdf generation
+            ctx = self.env.context.copy()
+            ctx.pop('default_type', False)
+            data = self.env['report'].with_context(ctx).get_pdf(
+                [invoice.id], 'account.report_invoice')
+            existing = self.env['ir.attachment'].search([
+                ('name', '=', filename),
+                ('res_model', '=', 'account.invoice')])
+            if len(existing):
+                existing[0].db_datas = data.encode('base_64')
+            else:
+                self.env['ir.attachment'].create({
+                    'type': 'binary',
+                    'res_model': 'account.invoice',
+                    'res_id': self.id,
+                    'name': filename,
+                    'datas_fname': filename,
+                    'mimetype': 'application/pdf',
+                    'db_datas': data.encode('base_64'),
+                    })
+        return res
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'

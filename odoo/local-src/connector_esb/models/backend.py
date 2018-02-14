@@ -127,3 +127,9 @@ class ESBBackend(models.Model):
         backend = self.get_singleton()
         exporter = backend._get_timestamp('product.product', 'stock.update')
         exporter.export()
+
+    @api.model
+    def cron_export_document_zip(self):
+        backend = self.get_singleton()
+        exporter = backend._get_timestamp('ir.attachment', '')
+        exporter.export()

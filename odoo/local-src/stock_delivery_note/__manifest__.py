@@ -1,0 +1,19 @@
+{
+    'name': 'Stock Delivery Note',
+    'summary': 'Creates a specific delivery note in csv format',
+    'version': '10.0.1.0.0',
+    'author': 'Camptocamp',
+    'maintainer': 'Camptocamp',
+    'license': 'AGPL-3',
+    'category': 'Stock',
+    'depends': [
+        'stock',
+        'specific_stock',
+        'product_expiry',
+        'stock_expired',
+        ],
+    'website': 'www.camptocamp.com',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

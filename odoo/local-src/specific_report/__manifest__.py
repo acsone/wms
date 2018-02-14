@@ -30,6 +30,7 @@
         'views/report_passport.xml',
         'views/round_instance.xml',
         'data/paperformat.xml',
+        'data/report_filename.xml',
     ],
     'installable': True,
 }

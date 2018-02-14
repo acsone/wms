@@ -38,3 +38,42 @@ class SaleOrderLine(models.Model):
             line.contribution_ids = contribution_ids
             line.apb_ids = apb_ids
             line.amount_contribution = amount_contribution
+
+
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    @api.multi
+    def get_report_name(self):
+        """Generate a specific name for the report save in ir.attachment"""
+        self.ensure_one()
+        return '_'.join([
+            'cf',
+            self.partner_id.ref,
+            str(self.id),
+            ''.join(self.create_date[:10].split('-')),
+            ''.join(self.create_date[-8:].split(':')),
+            ]) + '.pdf'
+
+    @api.multi
+    def action_confirm(self):
+        """ Generate the sale order pdf and save it in ir.attachment"""
+        res = super(SaleOrder, self).action_confirm()
+        for order in self:
+            filename = self.get_report_name()
+            data = self.env['report'].get_pdf([order.id], 'sale.report_saleorder')
+            existing = self.env['ir.attachment'].search([
+                ('name', '=', filename), ('res_model', '=', 'sale.order')])
+            if len(existing):
+                existing[0].db_datas = data.encode('base_64')
+            else:
+                self.env['ir.attachment'].create({
+                    'type': 'binary',
+                    'res_model': 'sale.order',
+                    'res_id': self.id,
+                    'name': filename,
+                    'datas_fname': filename,
+                    'mimetype': 'application/pdf',
+                    'db_datas': data.encode('base_64'),
+                    })
+        return res
