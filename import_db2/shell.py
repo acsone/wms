@@ -9,32 +9,60 @@ import sys
 
 cursor = None
 
+def write_csv_file(csvfile, rows, add_headers=True):
+    writer = csv.writer(csvfile)
+    writer.writerow([i[0] for i in cursor.description])  # headers
+    i = 0
+    nb = len(rows)
+    for r in rows:
+        i += 1
+        progress = float(i) / nb
+        print "\r[ {0:40s} ] {1:.1f}%".format(
+            '#' * int(progress * 40),
+            progress * 100),
+        sys.stdout.flush()
+        # automatically trim each field
+        r = [col.strip() if isinstance(col, str) else col for col in r]
+        writer.writerow(r)
+    print  # add newline
+
+
 def create_csv_file(rows, filename):
-    print "Start generating csvfile"
+    print "Creating a csvfile"
     with open(filename, 'w') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([i[0] for i in cursor.description])  # headers
-        i = 0
-        nb = len(rows)
-        for r in rows:
-            i += 1
-            progress = float(i) / nb
-            print "\r[ {0:40s} ] {1:.1f}%".format(
-                '#' * int(progress * 40),
-                progress * 100),
-            sys.stdout.flush()
-            writer.writerow(r)
-        print  # add newline
+        write_csv_file(csvfile, rows)
+    nb = len(rows)
     return "%s rows saved in %s" % (nb, filename)
 
 
-def fetchall_dict(query, copy_to=None):
+def chunk_query(query, copy_to, chunk_size):
+    nb = 0
+    i = 1
+    with open(copy_to, 'w') as csvfile:
+        cursor.execute(query)
+        while True:
+            rows = cursor.fetchmany(chunk_size)
+            if not rows:
+                break
+            print "Chunk %s: from %s to %s" % (i, nb + 1, nb + len(rows))
+            nb = nb + len(rows)
+            write_csv_file(csvfile, rows, add_headers=(i == 1))
+            i = i + 1
+    return "%s rows saved in %s" % (nb, copy_to)
+
+
+def fetchall_dict(query, copy_to=None, chunk_size=None):
     """ Execute the *query* on db2 database and transform the results in
     a list of dict [{'column_name': value, ...}]
 
-    copy_to: allows to export in a csv file.
+    copy_to: file path, if provided export result of query in a csv file.
+    chunk_size: for big queries split the fetch by chunk to save memory space
     """
     global cursor
+    if chunk_size:
+        if not copy_to:
+            return "chunk query is only avalaible with copy to csv"
+        return chunk_query(query, copy_to, chunk_size)
     cursor.execute(query)
     rows = cursor.fetchall()
     if rows:
