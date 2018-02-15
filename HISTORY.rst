@@ -16,8 +16,11 @@ Unreleased
 * ALCN-1087: Disable Camptocamp platform specifics by default
   plus add an opt-in with a new environment variable C2C_PLATFORM
 * Generate invoices automatically every 10 days
+* Add
 
 **Documentation**
+
+* Document new option to enable platform mode (by default disabled)
 
 
 10.16.3 (2018-02-09)
