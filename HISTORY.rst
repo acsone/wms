@@ -9,6 +9,8 @@ Unreleased
 **Features and Improvements**
 * Setup Cutoff Accrual - Do not make accrual of taxes
 
+* ALCN-1094: Add default sftp directory in env variables
+
 **Bugfixes**
 
 * ALCN-1097: Fix XML Pharmacy, node e-mail contains False if email not referenced

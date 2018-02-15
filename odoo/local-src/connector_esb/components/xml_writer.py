@@ -205,6 +205,15 @@ class SFTPESBXMLWriter(Component):
             raise ValueError('must be in _sftp_client() context to use sftp')
         return self._sftp
 
+    def path(self):
+        """ Construct a path with default sftp path and specific file path """
+        file_path = super(SFTPESBXMLWriter, self).path()
+        sftp_path = self.backend_record.sftp_path
+        if file_path and sftp_path:
+            if not sftp_path.endswith('/') and not file_path.startswith('/'):
+                return sftp_path + "/" + file_path
+        return sftp_path + file_path
+
     def write_file(self, content):
         with self._sftp_client():
             return super(SFTPESBXMLWriter, self).write_file(content)
