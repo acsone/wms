@@ -377,6 +377,11 @@ def setup_cutoff(ctx):
         'default_accrued_revenue_account_id': ctx.env.ref('l10n_be.1_a404').id,
         'default_accrued_expense_account_id': ctx.env.ref('l10n_be.1_a444').id,
         })
+    taxes = ctx.env['account.tax'].search([])
+    taxes.write({
+        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        })
 
 
 @anthem.log
