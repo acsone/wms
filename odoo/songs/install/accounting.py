@@ -38,6 +38,9 @@ def settings(ctx):
     tax_21 = ctx.env['account.tax'].search([('name', '=', '21%')])
     assert len(tax_21) == 1, "Unable to find tax"
 
+    # Define the default chunk size
+    ctx.env['ir.config_parameter'].set_param('account.chunk_size', 10)
+
     ctx.env['account.config.settings'].create({
         'fiscalyear_last_month': 9,
         'fiscalyear_last_day': 30,

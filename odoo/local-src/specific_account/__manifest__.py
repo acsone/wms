@@ -20,11 +20,13 @@
         'analytic',
         'account_cancel',
         'account_invoice_check_total',
+        'specific_shipping_costs',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
         # Data
         'data/account_tax_group.xml',
+        'data/cron.xml',
         # Views
         'views/account_analytic_tag.xml',
         'views/account_invoice_report.xml',
