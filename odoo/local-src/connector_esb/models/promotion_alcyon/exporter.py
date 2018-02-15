@@ -30,9 +30,16 @@ class PromotionAlcyonExportMapper(Component):
                 }
 
     @mapping
-    def compute_action(self, record):
+    def compute_product_type(self, record):
+        """ Compute product type.
+
+        For a promotion on all product the price_category_id is empty
+        But the content of the node in xml is a single <space>
+        """
+        product_type = ' '
         if record.price_category_id:
-            return {'ProductType': record.price_category_id.name}
+            product_type = record.price_category_id.name
+        return {'ProductType': product_type}
 
 
 class SpecialPromotionCronExporter(Component):
@@ -48,4 +55,8 @@ class SpecialPromotionCronExporter(Component):
                     and work.timestamp.kind == 'promotion.alcyon')
 
     def get_items_domain(self):
-        return [('applied_on', '=', '2b_product_price_category')]
+
+        return [
+            ('applied_on', 'in', ['2b_product_price_category', '3_global']),
+            ('percent_price', '!=', 0)
+        ]

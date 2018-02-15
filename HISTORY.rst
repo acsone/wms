@@ -12,6 +12,9 @@ Unreleased
 * ALCN-1094: Add default sftp directory in env variables
 
 **Bugfixes**
+* ALCN-1096: Change XML Promotions Alcyon
+   * If both percent are zero do not include the entry
+   * Add the promotions on all products contained in the price list.
 
 * ALCN-1097: Fix XML Pharmacy, node e-mail contains False if email not referenced
    * Also fix that the XML nodes (fax, phone, city, zip) would contain False if
