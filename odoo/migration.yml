@@ -205,3 +205,8 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_16_3_update::main
+    - version: 10.16.4
+      addons:
+        upgrade:
+          ### local-src
+          - connector_esb

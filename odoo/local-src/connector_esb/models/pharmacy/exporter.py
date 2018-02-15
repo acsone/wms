@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from ...components.mapper import falsy2emptystring
 
 
 class PharmacyExportMapper(Component):
@@ -18,11 +19,10 @@ class PharmacyExportMapper(Component):
     direct = [
         ('ref', 'Id'),
         ('name', 'Name'),
-        ('zip', 'Postcode'),
-        ('city', 'City'),
-        ('phone', 'Telephone'),
-        ('fax', 'Fax'),
-        ('email', 'Email')
+        (falsy2emptystring('zip'), 'Postcode'),
+        (falsy2emptystring('city'), 'City'),
+        (falsy2emptystring('phone'), 'Telephone'),
+        (falsy2emptystring('fax'), 'Fax'),
     ]
 
     @mapping
@@ -35,6 +35,11 @@ class PharmacyExportMapper(Component):
         if record.street2:
             street += '\n' + record.street2
         return {'Street': street}
+
+    @mapping
+    def compute_email(self, record):
+        if record.email:
+            return {'Email': record.email}
 
 
 class PharmacyCronExporter(Component):
