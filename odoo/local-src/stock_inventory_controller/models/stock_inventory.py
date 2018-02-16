@@ -57,7 +57,6 @@ class StockInventory(models.Model):
                     'is_line_failed': True,
                     'fail_message': 'MissingError: ' + str(me)
                 })
-                pass
             except UserError as ue:
                 _logger.error('UserError: ' + str(ue))
                 line = self.line_ids.search(
@@ -66,34 +65,3 @@ class StockInventory(models.Model):
                     'is_line_failed': True,
                     'fail_message': 'UserError: ' + str(ue)
                 })
-                pass
-            except Exception:
-                raise Exception
-
-    @api.multi
-    def _generate_moves(self):
-        """
-        This method has the api multi but this method is called for each line.
-        :return:
-        """
-        result = None
-        try:
-            result = super(StockInventoryLine, self)._generate_moves()
-        except MissingError as me:
-            _logger.error('MissingError: ' + str(me))
-            self.write({
-                'is_line_failed': True,
-                'fail_message': 'MissingError: ' + str(me)
-            })
-            pass
-        except UserError as ue:
-            _logger.error('UserError: ' + str(ue))
-            self.write({
-                'is_line_failed': True,
-                'fail_message': 'UserError: ' + str(ue)
-            })
-            pass
-        except Exception:
-            raise Exception
-
-        return result
