@@ -7,11 +7,24 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Setup Cutoff Accrual - Do not make accrual of taxes
-
-* ALCN-1094: Add default sftp directory in env variables
 
 **Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.16.4 (2018-02-16)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCN-1094: Add default sftp directory in env variables
+* Setup Cutoff Accrual - Do not make accrual of taxes
+
+**Bugfixes**
+
 * ALCN-1096: Change XML Promotions Alcyon
    * If both percent are zero do not include the entry
    * Add the promotions on all products contained in the price list.
@@ -24,10 +37,10 @@ Unreleased
 
 **Build**
 
+* ALCN-1087: Add option to select DB2HOST without using tunnel via rasberryPi
 * ALCN-1087: Disable Camptocamp platform specifics by default
   plus add an opt-in with a new environment variable C2C_PLATFORM
 * Generate invoices automatically every 10 days
-* ALCN-1087: Add option to select DB2HOST without using tunnel via rasberryPi
 
 **Documentation**
 

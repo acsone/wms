@@ -210,3 +210,9 @@ migration:
         upgrade:
           ### local-src
           - connector_esb
+          - specific_account
+          - specific_shipping_costs
+      operations:
+        post:
+          - anthem songs.upgrade.10_16_4_update::main
+          - anthem songs.install.accounting::setup_cutoff
