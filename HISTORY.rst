@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* New module stock_inventory_controller: Add a failsafe way to validate inventory logging errors.
+
 **Bugfixes**
 
 **Build**
