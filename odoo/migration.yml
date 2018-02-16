@@ -216,3 +216,8 @@ migration:
         post:
           - anthem songs.upgrade.10_16_4_update::main
           - anthem songs.install.accounting::setup_cutoff
+    - version: 10.16.5
+      addons:
+        upgrade:
+          ### local-src
+          - stock_inventory_controller
