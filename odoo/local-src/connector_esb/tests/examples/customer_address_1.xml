@@ -18,7 +18,7 @@
       <City>Armagedon</City>
       <Street>Main Street, 2</Street>
       <CountryId>ESB</CountryId>
-      <AddressId>refclient</AddressId>
+      <AddressId>0</AddressId>
       <Firstname>Company 1</Firstname>
       <IsDefaultBilling>False</IsDefaultBilling>
       <CustomerId>refclient</CustomerId>

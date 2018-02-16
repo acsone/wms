@@ -19,7 +19,6 @@ class CustomerAddressExportMapper(Component):
                     work.timestamp.kind == 'customer.address')
 
     direct = [
-        (falsy2emptystring('ref'), 'AddressId'),
         (falsy2emptystring('city'), 'City'),
         (falsy2emptystring('name'), 'Firstname'),
     ]
@@ -42,6 +41,25 @@ class CustomerAddressExportMapper(Component):
             return {'CustomerId': record.parent_id.ref}
         else:
             return {'CustomerId': record.ref}
+
+    @mapping
+    def compute_addressid(self, record):
+        """ Map the address id
+
+        The address id for an export should be the ref of the record.
+        But if for a customer no specific address exist for invoicing and
+        shipping, in the file there would be a duplicate for
+        CustomerId/AddressId wich would be a problem for the ESB.
+        So for shipping if we do not have a specific address we set it to zero
+        """
+        address_id = ''
+        if record.parent_id:
+            address_id = record.ref
+        elif self.options.address_kind == 'delivery':
+            address_id = '0'
+        else:
+            address_id = record.ref
+        return {'AddressId': address_id}
 
     @mapping
     def compute_street(self, record):

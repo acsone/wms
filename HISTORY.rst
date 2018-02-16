@@ -20,6 +20,8 @@ Unreleased
    * Also fix that the XML nodes (fax, phone, city, zip) would contain False if
      their respective field is empty 
 
+* ALCN-1103: XML Customer Address, set AddressId for shipping to zero if it is not a specific address
+
 **Build**
 
 * ALCN-1087: Disable Camptocamp platform specifics by default

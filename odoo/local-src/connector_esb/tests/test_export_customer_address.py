@@ -47,6 +47,26 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'type': 'invoice'
         })
         self.all_records |= self.main_partner_invoice
+        # Create a customer with a delivery address
+        self.partner_2 = self.model.create({
+            'name': 'Company 2',
+            'street': 'Main Street, 2',
+            'ref': 'client_2',
+            'zip': '123123',
+            'city': 'Paradise',
+            'country_id': 44,
+        })
+        self.partner_2_delivery = self.model.create({
+            'ref': 'ref-delivery',
+            'name': 'delivery-address',
+            'street': 'street 1',
+            'street2': '',
+            'zip': 'zip',
+            'city': 'TheCity',
+            'country_id': 44,
+            'parent_id': self.partner_2.id,
+            'type': 'delivery'
+        })
 
     def test_filename(self):
         self.check_filename('CustomerAddress_{0}_{1}.xml')
@@ -71,6 +91,56 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
                 mapper.map_record(rec).values(address_kind='invoice'),
+                expected)
+
+    def test_mapper_for_shipping_address_without(self):
+        """ Generate dict with the mapper and compare with what is expected
+
+        No specific shipping address so use the client default
+        """
+        expected = {
+            'CustomerId': self.main_partner.ref,
+            # If shipping address does not exist !
+            'AddressId': '0',
+            'City': self.main_partner.city,
+            'CountryId': self.country44.esb_ref,
+            'Firstname': self.main_partner.name,
+            'Postcode': self.main_partner.zip,
+            'Street': self.main_partner.street,
+            'IsDefaultBilling': False,
+            'IsDefaultShipping': True,
+        }
+        rec = self.main_partner
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            self.assertDictEqual(
+                mapper.map_record(rec).values(address_kind='delivery'),
+                expected)
+
+    def test_mapper_for_shipping_address_with(self):
+        """ Generate dict with the mapper and compare with what is expected
+
+        A specific shipping address is set for the client
+        """
+        expected = {
+            'CustomerId': self.partner_2.ref,
+            # Shipping address exists !
+            'AddressId': 'ref-delivery',
+            'City': self.partner_2_delivery.city,
+            'CountryId': self.country44.esb_ref,
+            'Firstname': self.partner_2_delivery.name,
+            'Postcode': self.partner_2_delivery.zip,
+            'Street': self.partner_2_delivery.street,
+            'IsDefaultBilling': False,
+            'IsDefaultShipping': True,
+        }
+        rec = self.partner_2_delivery
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            self.assertDictEqual(
+                mapper.map_record(rec).values(address_kind='delivery'),
                 expected)
 
     def test_export(self):
