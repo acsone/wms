@@ -8,13 +8,19 @@ Unreleased
 
 **Features and Improvements**
 
-* New module stock_inventory_controller: Add a failsafe way to validate inventory logging errors.
-
 **Bugfixes**
 
 **Build**
 
 **Documentation**
+
+
+10.16.5 (2018-02-16)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* New temporary module stock_inventory_controller: Add a failsafe way to validate inventory logging errors.
 
 
 10.16.4 (2018-02-16)
