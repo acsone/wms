@@ -6,6 +6,7 @@ version: '2'
 
 services:
   odoo:
+    command: odoo --load="web,queue_job"
     tty: true
     stdin_open: true
     ports:
@@ -25,6 +26,9 @@ services:
       MARABUNTA_MODE: sample
       # should not be set in production
       MARABUNTA_ALLOW_SERIE: 'True'
+      DB2HOST: pissh
+      DB2USER: lpass DB2 Alcyon
+      DB2PWD: lpass DB2 Alcyon
       # configuration to test exports to sftp (ESB)
       ODOO_ESB_SFTP_HOST: esbsftp
       ODOO_ESB_SFTP_PATH: share
@@ -49,6 +53,8 @@ services:
       ODOO_ESB_WS_BASE_URL: https://api-pp3.alcyonbelux.be/magento-erp-api
       ODOO_ESB_WS_USER: test_odoo
       ODOO_ESB_WS_PWD: magent0
+      WORKERS: 8
+      ODOO_QUEUE_JOB_CHANNELS: root:8,root.db2.fetch:1,root.db2.create_or_update:8
 
   db:
     ports:
