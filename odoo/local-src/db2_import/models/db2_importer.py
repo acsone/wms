@@ -327,8 +327,8 @@ class DB2MapperSaleOrder(object):
         user_xmlid = convert_user(row['eccrep'])
         values = {
             'name': row['eccsui'],
-            'origin': row['eccrin'],
-            'client_order_ref': row['eccrcl'],
+            'origin': row['eccrin'].strip(),
+            'client_order_ref': row['eccrcl'].strip(),
             'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
