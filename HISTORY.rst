@@ -27,11 +27,12 @@ Unreleased
 * ALCN-1087: Disable Camptocamp platform specifics by default
   plus add an opt-in with a new environment variable C2C_PLATFORM
 * Generate invoices automatically every 10 days
-* Add
+* ALCN-1087: Add option to select DB2HOST without using tunnel via rasberryPi
 
 **Documentation**
 
 * Document new option to enable platform mode (by default disabled)
+* Document DB2 options to connect importer to AS400 database
 
 
 10.16.3 (2018-02-09)

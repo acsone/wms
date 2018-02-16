@@ -674,9 +674,13 @@ class DB2ImporterTable(models.Model):
     @job(default_channel='root.db2.fetch')
     def get_from_db2(self, date_start, date_end):
         # connect to DB2
-        # We can't use dns name in the DB2 odbc driver
-        # thus we need to get the ip
-        host = socket.gethostbyname('pissh')
+        db2_host = os.environ.get('DB2HOST')
+        if db2_host == 'pissh':
+            # if DB2HOST is 'pissh' we use the container to
+            # tunnel to internal network
+            # We can't use DNS name in the DB2 odbc driver
+            # thus we need to get the ip
+            db2_host = socket.gethostbyname('pissh')
         db_user = os.environ.get('DB2USER')
         if not db_user:
             raise Exception("Env var DB2USER is not set")
@@ -684,7 +688,7 @@ class DB2ImporterTable(models.Model):
         if not db_pwd:
             raise Exception("Env var DB2PWD is not set")
         conn = pyodbc.connect(
-            "DSN=Alcyon", system=host,
+            "DSN=Alcyon", system=db2_host,
             uid=db_user, pwd=db_pwd)
         try:
             db2_cr = conn.cursor()
