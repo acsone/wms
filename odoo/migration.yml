@@ -221,3 +221,8 @@ migration:
         upgrade:
           ### local-src
           - stock_inventory_controller
+    - version: 10.16.6
+      addons:
+        upgrade:
+          ### local-src
+          - sale_cancel_remaining

@@ -7,7 +7,13 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='order_line']/form/group/group/div[field[@name='qty_delivered']]" position="after">
                 <field name="product_qty_remains_to_deliver" invisible="1"/>
-                <button nane="%(action_cancel_remaining_wizard)d" type="action" icon="fa-ban" string="Cancel remaining qty" attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
+                <button name="%(action_cancel_remaining_wizard)d"
+                        type="action"
+                        icon="fa-ban"
+                        colspan="2"
+                        string="Cancel remaining qty"
+                        style="margin-bottom: 1em;margin-top: 1em"
+                        attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">
