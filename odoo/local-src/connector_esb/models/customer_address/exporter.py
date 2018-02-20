@@ -37,10 +37,12 @@ class CustomerAddressExportMapper(Component):
 
     @mapping
     def compute_customerid(self, record):
+        ref_esb = ''
         if record.parent_id:
-            return {'CustomerId': record.parent_id.ref}
+            ref_esb = record.parent_id.ref
         else:
-            return {'CustomerId': record.ref}
+            ref_esb = record.ref
+        return {'CustomerId': ref_esb or ''}
 
     @mapping
     def compute_addressid(self, record):
@@ -59,14 +61,14 @@ class CustomerAddressExportMapper(Component):
             address_id = '0'
         else:
             address_id = record.ref
-        return {'AddressId': address_id}
+        return {'AddressId': address_id or ''}
 
     @mapping
     def compute_street(self, record):
-        street = record.street
+        street = record.street or ''
         if record.street2:
             street += '\n' + record.street2
-        return {'Street': street}
+        return {'Street': street or ''}
 
     @mapping
     def compute_country_id(self, record):
