@@ -25,7 +25,7 @@ class SpecialPromotionExportMapper(Component):
             sku = record.product_tmpl_id.default_code
         elif record.product_id:
             sku = record.product_id.default_code
-        return {'Sku': sku}
+        return {'Sku': sku or ''}
 
     @mapping
     def compute_percent(self, record):

@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from ...components.mapper import falsy2emptystring
 
 _logger = logging.getLogger(__name__)
 
@@ -22,7 +23,7 @@ class StockUpdateMapper(Component):
         return bool(work.timestamp and work.timestamp.kind == 'stock.update')
 
     direct = [
-        ('default_code', 'sku'),
+        (falsy2emptystring('default_code'), 'sku'),
         ('qty_available', 'qty')
     ]
 
@@ -30,7 +31,7 @@ class StockUpdateMapper(Component):
     def compute_erpstockcode(self, record):
         value = ''
         if record.product_tmpl_id.state_id:
-            value = record.product_tmpl_id.state_id.esb_ref
+            value = record.product_tmpl_id.state_id.esb_ref or ''
         return {'erp_stock_code': value}
 
     @mapping

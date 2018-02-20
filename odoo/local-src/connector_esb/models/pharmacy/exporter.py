@@ -17,8 +17,8 @@ class PharmacyExportMapper(Component):
         return bool(work.timestamp and work.timestamp.kind == 'pharmacy')
 
     direct = [
-        ('ref', 'Id'),
-        ('name', 'Name'),
+        (falsy2emptystring('ref'), 'Id'),
+        (falsy2emptystring('name'), 'Name'),
         (falsy2emptystring('zip'), 'Postcode'),
         (falsy2emptystring('city'), 'City'),
         (falsy2emptystring('phone'), 'Telephone'),
@@ -27,11 +27,11 @@ class PharmacyExportMapper(Component):
 
     @mapping
     def compute_country_id(self, record):
-        return {'CountryId': record.country_id.esb_ref}
+        return {'CountryId': record.country_id.esb_ref or ''}
 
     @mapping
     def compute_street(self, record):
-        street = record.street
+        street = record.street or ''
         if record.street2:
             street += '\n' + record.street2
         return {'Street': street}

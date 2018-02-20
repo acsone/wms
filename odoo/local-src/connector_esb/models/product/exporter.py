@@ -4,7 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import bool2int, dt2esbdate
+from ...components.mapper import bool2int, dt2esbdate, falsy2emptystring
 
 
 class ProductExportMapper(Component):
@@ -14,13 +14,13 @@ class ProductExportMapper(Component):
 
     direct = [
         ('name', 'Gesdem'),
-        ('default_code', 'Gesart'),
-        ('barcode', 'Cplz05'),
+        (falsy2emptystring('default_code'), 'Gesart'),
+        (falsy2emptystring('barcode'), 'Cplz05'),
         ('weight', 'Gespnt'),
         (bool2int('active'), 'Cplz19'),
         (dt2esbdate('create_date'), 'Gescrt'),
         ('volume', 'Cp2z08'),
-        ('cnk_code', 'Cplz03'),
+        (falsy2emptystring('cnk_code'), 'Cplz03'),
         ('depth', 'Cp2z01'),
         ('length', 'Cp2z03'),
         ('width', 'Cp2z05'),
@@ -43,8 +43,8 @@ class ProductExportMapper(Component):
         suppliers = record.seller_ids
         if suppliers:
             supplier = suppliers[0]
-            supplier_product_code = supplier.product_code
-            supplier_ref = supplier.name.ref
+            supplier_product_code = supplier.product_code or ''
+            supplier_ref = supplier.name.ref or ''
         return {'Gesarc': supplier_product_code,
                 'Gesfou': supplier_ref,
                 # "fabricant" could maybe be removed

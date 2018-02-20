@@ -18,7 +18,7 @@ class PromotionAlcyonExportMapper(Component):
 
     @mapping
     def compute_alcyongroup(self, record):
-        return {'AlcyonGroupId': record.pricelist_id.esb_ref}
+        return {'AlcyonGroupId': record.pricelist_id.esb_ref or ''}
 
     @mapping
     def compute_percent(self, record):
@@ -38,7 +38,7 @@ class PromotionAlcyonExportMapper(Component):
         """
         product_type = ' '
         if record.price_category_id:
-            product_type = record.price_category_id.name
+            product_type = record.price_category_id.name or ''
         return {'ProductType': product_type}
 
 

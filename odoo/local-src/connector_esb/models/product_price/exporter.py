@@ -4,7 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import two_digits_fractional
+from ...components.mapper import two_digits_fractional, falsy2emptystring
 
 
 class ProductPriceExportMapper(Component):
@@ -17,7 +17,7 @@ class ProductPriceExportMapper(Component):
         return bool(work.timestamp and work.timestamp.kind == 'product.price')
 
     direct = [
-        ('default_code', 'Sku'),
+        (falsy2emptystring('default_code'), 'Sku'),
         (two_digits_fractional('list_price'), 'Price'),
     ]
 
