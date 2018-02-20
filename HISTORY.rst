@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1118 : Fix Customer Address export when esb_ref is empty
+* ALCN-1106: Fix display alignment columns on sale order line detail form.
 
 **Build**
 
