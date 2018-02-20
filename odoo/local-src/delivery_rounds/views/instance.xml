@@ -140,7 +140,7 @@
                     <button name="button_confirm" type="object" string="Launch Pickings" states="draft" class="oe_highlight"/>
                     <button name="button_deliver" type="object" string="Deliver" states="open" class="oe_highlight"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" clickable="True"/>
+                    <field name="state" widget="statusbar" clickable="False"/>
 
                 </header>
                 <sheet>

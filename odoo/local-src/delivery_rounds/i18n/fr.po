@@ -846,3 +846,8 @@ msgstr "round.wizard.makeplan"
 msgid "unit(s)"
 msgstr "unit(s)"
 
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_instance.py:430
+#, python-format
+msgid "You cannot delete a delivery round that has been started"
+msgstr "You cannot delete a delivery round that has been started"

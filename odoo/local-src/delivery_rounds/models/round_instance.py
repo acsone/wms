@@ -426,6 +426,9 @@ class RoundInstance(models.Model):
 
     @api.multi
     def unlink(self):
+        if self.mapped('state') != ['draft']:
+            raise UserError(_(
+                'You cannot delete a delivery round that has been started'))
         pickings = self.mapped('picking_ids')
         res = super(RoundInstance, self).unlink()
         # @api.constrains is not triggered on source model when referenced
