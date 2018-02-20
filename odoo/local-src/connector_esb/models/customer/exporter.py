@@ -91,6 +91,10 @@ class CustomerExportMapper(Component):
             return {'Taxvat': record.vat.replace('.', '').replace(' ', '')}
 
     @mapping
+    def compute_serialno(self, record):
+        return {'SerialNo': record.last_suite_name or 0}
+
+    @mapping
     def compute_empty_ones_or_default(self, record):
         return {
                 'Username': '',
@@ -98,7 +102,6 @@ class CustomerExportMapper(Component):
                 'WebsiteId': '',
                 'StoreId': '',
                 'IsActive': '',
-                'SerialNo': '',
                 'ShowTimer': True,
                 'Lapsing': False,
                 'LapsingDuration': 0,

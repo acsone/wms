@@ -45,7 +45,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         existing_customers.write({'customer': False})
         # Create new customer to test
         self.all_records = self.model.browse()
-        self.all_records |= self.model.create({
+        self.customer1 = self.model.create({
             'email': 'joe@ch.ch',
             'name': 'Joe',
             'lang': 'tlh_TLH',
@@ -67,6 +67,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 'specific_data.product_pricelist_pb1'),
             'category_id': [(4, self.partner_category.id, 0)]
         })
+        self.all_records |= self.customer1
         self.all_records |= self.model.create({
             'ref': 'P',
             'name': 'Peter',
@@ -118,6 +119,11 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'customer': True,
             'parent_id': self.all_records[0].id
         })
+        # A sale order to test SerialNo
+        self.so = self.env['sale.order'].create({
+            'partner_id': self.customer1.id,
+            'suite_name': '321123'
+        })
 
     def test_mapper(self):
         """ Generate dict with the mapper and compare with what is expected"""
@@ -143,7 +149,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'StatisticCode': '10',
             'IsActive': '',
             'Password': '',
-            'SerialNo': '',
+            'SerialNo': '321123',
             'StoreId': '',
             'ShowTimer': True,
             'WebsiteId': '',

@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1122 Add SerialNo implementation in customer export
+
 **Bugfixes**
 
 **Build**
