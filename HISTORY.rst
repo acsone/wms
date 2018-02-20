@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1122 Add SerialNo implementation in customer export
+
 **Bugfixes**
 
 * ALCN-1118 : Fix Customer Address export when esb_ref is empty
