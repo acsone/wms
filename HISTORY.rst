@@ -13,6 +13,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1122 Add SerialNo implementation in customer export
+* ALCN-1123 : Remove unnecessary fields in customer export
 
 **Bugfixes**
 

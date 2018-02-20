@@ -19,7 +19,6 @@ class CustomerExportMapper(Component):
     direct = [
         ('email', 'Email'),
         ('name', 'Firstname'),
-        ('is_price_on_labels', 'MsrpSticker'),
         ('ref', 'ErpId'),
         (falsy2zero('time_limit_order'), 'IdRound')
     ]
@@ -33,12 +32,6 @@ class CustomerExportMapper(Component):
         elif pricelist == self.env.ref('specific_data.product_pricelist_pb2'):
             code = '60'
         return {'StatisticCode': code}
-
-    @mapping
-    def compute_back_order(self, record):
-        return {
-            'BackordersEnable': int(record.is_sale_back_order_accepted)
-        }
 
     @mapping
     def compute_activitytype(self, record):
@@ -97,14 +90,7 @@ class CustomerExportMapper(Component):
     @mapping
     def compute_empty_ones_or_default(self, record):
         return {
-                'Username': '',
-                'Password': '',
-                'WebsiteId': '',
-                'StoreId': '',
-                'IsActive': '',
                 'ShowTimer': True,
-                'Lapsing': False,
-                'LapsingDuration': 0,
                 }
 
     @mapping
