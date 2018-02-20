@@ -4,7 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import falsy2zero
+from ...components.mapper import falsy2zero, falsy2emptystring
 
 
 class CustomerExportMapper(Component):
@@ -19,7 +19,7 @@ class CustomerExportMapper(Component):
     direct = [
         ('email', 'Email'),
         ('name', 'Firstname'),
-        ('ref', 'ErpId'),
+        (falsy2emptystring('ref'), 'ErpId'),
         (falsy2zero('time_limit_order'), 'IdRound')
     ]
 
@@ -42,29 +42,29 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_alcyongroupid(self, record):
+        esb_ref = ''
         if record.discount_pricelist_id:
-            return {'AlcyonGroupId': record.discount_pricelist_id.esb_ref}
-        else:
-            return {'AlcyonGroupId': ''}
+            esb_ref = record.discount_pricelist_id.esb_ref
+        return {'AlcyonGroupId': esb_ref or ''}
 
     @mapping
     def compute_groupid(self, record):
+        esb_ref = ''
         if record.alcyon_category_id:
-            return {'GroupId': record.alcyon_category_id.esb_ref}
-        else:
-            return {'GroupId': ''}
+            esb_ref = record.alcyon_category_id.esb_ref
+        return {'GroupId': esb_ref or ''}
 
     @mapping
     def compute_iddelegate(self, record):
+        esb_ref = ''
         if record.user_id:
-            return {'IdDelegate': record.user_id.esb_ref}
-        else:
-            return {'IdDelegate': ''}
+            esb_ref = record.user_id.esb_ref
+        return {'IdDelegate': esb_ref or ''}
 
     @mapping
     def compute_pharmacy(self, record):
         if record.pharmacist_id:
-            return {'IdPharmacy': record.pharmacist_id.ref}
+            return {'IdPharmacy': record.pharmacist_id.ref or ''}
         else:
             return {'IdPharmacy': ''}
 
@@ -104,7 +104,7 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_onlinepayment(self, record):
-        return {'OnlinePayment': 0}
+        return {'OnlinePayment': False}
 
 
 class CustomerCronExporter(Component):
