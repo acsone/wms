@@ -133,7 +133,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'Language': u'TLH',
             'GroupId': self.alcyon_category.esb_ref,
             'Taxvat': u'BE0477472701',
-            'IdRound': 0,
+            'IdRound': '0000',
             'IdDelegate': '',
             'IdPharmacy': '',
             'TaxCode': 1,
@@ -147,11 +147,35 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'ShowTimer': True,
             }
         self.timestamp.writer = 'local'
-        rec = self.all_records[0]
+        rec = self.customer1
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
+
+    def test_IdRound_mapper(self):
+        """ Testing the mapper of IdRound
+
+        Easier to fake the model than trying to set up the data in the db with
+        values.
+        """
+        class FakeModel(object):
+            def __init__(self, tlo):
+                self.time_limit_order = tlo
+
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            result = mapper.compute_idround(FakeModel(1.25))
+            self.assertEqual(result['IdRound'], '0115')
+            result = mapper.compute_idround(FakeModel(0.50))
+            self.assertEqual(result['IdRound'], '0030')
+            result = mapper.compute_idround(FakeModel(4.75))
+            self.assertEqual(result['IdRound'], '0445')
+            result = mapper.compute_idround(FakeModel(2))
+            self.assertEqual(result['IdRound'], '0200')
+            result = mapper.compute_idround(FakeModel(0))
+            self.assertEqual(result['IdRound'], '0000')
 
     def test_filename(self):
         self.check_filename('Customer_{0}_{1}.xml')
