@@ -2,8 +2,6 @@
 <ROOT>
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
-      <Username/>
-      <LapsingDuration>0</LapsingDuration>
       <Taxvat>BE0477472701</Taxvat>
       <TaxCode>1</TaxCode>
       <Firstname>Joe</Firstname>
@@ -15,11 +13,8 @@
       <ErpId>3162</ErpId>
       <DepositNumber>2/1234/1234</DepositNumber>
       <Email>joe@ch.ch</Email>
-      <Lapsing>False</Lapsing>
     </Row>
     <Row>
-      <Username/>
-      <LapsingDuration>0</LapsingDuration>
       <TaxCode>0</TaxCode>
       <Firstname>Peter</Firstname>
       <Language>FR</Language>
@@ -28,7 +23,6 @@
       <AlcyonGroupId>REF_ESB</AlcyonGroupId>
       <ErpId>P</ErpId>
       <Email>peter@ch.ch</Email>
-      <Lapsing>False</Lapsing>
     </Row>
   </Root>
 </ROOT>

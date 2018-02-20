@@ -129,7 +129,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         """ Generate dict with the mapper and compare with what is expected"""
         expected = {
             'Email': u'joe@ch.ch',
-            'Username': '',
             'Firstname': u'Joe',
             'Language': u'TLH',
             'GroupId': self.alcyon_category.esb_ref,
@@ -142,19 +141,10 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'DepositNumber': u'2/1234/1234',
             'ErpId': u'3162',
             'AlcyonGroupId': self.discount_pricelist_2.esb_ref,
-            'BackordersEnable': 1,
-            'Lapsing': False,
-            'LapsingDuration': 0,
             u'Petits_animaux': 'Y',
             'StatisticCode': '10',
-            'IsActive': '',
-            'Password': '',
             'SerialNo': '321123',
-            'StoreId': '',
             'ShowTimer': True,
-            'WebsiteId': '',
-            'MsrpSticker': False,
-
             }
         self.timestamp.writer = 'local'
         rec = self.all_records[0]
