@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1118 : Fix Customer Address export when esb_ref is empty
+
 **Build**
 
 **Documentation**

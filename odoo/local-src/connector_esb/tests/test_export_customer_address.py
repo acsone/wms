@@ -51,7 +51,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         self.partner_2 = self.model.create({
             'name': 'Company 2',
             'street': 'Main Street, 2',
-            'ref': 'client_2',
+            'ref': None,
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
@@ -124,7 +124,8 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         A specific shipping address is set for the client
         """
         expected = {
-            'CustomerId': self.partner_2.ref,
+            # Testing empty ref should not be false but empty string
+            'CustomerId': '',
             # Shipping address exists !
             'AddressId': 'ref-delivery',
             'City': self.partner_2_delivery.city,
