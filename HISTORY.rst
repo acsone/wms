@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Improve import_db2 dev tool to export SELECT query as csv file
+
 **Features and Improvements**
 
 * ALCN-1122 Add SerialNo implementation in customer export
