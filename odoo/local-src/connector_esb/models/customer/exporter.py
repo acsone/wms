@@ -4,7 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import falsy2zero, falsy2emptystring
+from ...components.mapper import falsy2emptystring
 
 
 class CustomerExportMapper(Component):
@@ -20,7 +20,6 @@ class CustomerExportMapper(Component):
         ('email', 'Email'),
         ('name', 'Firstname'),
         (falsy2emptystring('ref'), 'ErpId'),
-        (falsy2zero('time_limit_order'), 'IdRound')
     ]
 
     @mapping
@@ -32,6 +31,18 @@ class CustomerExportMapper(Component):
         elif pricelist == self.env.ref('specific_data.product_pricelist_pb2'):
             code = '60'
         return {'StatisticCode': code}
+
+    @mapping
+    def compute_idround(self, record):
+        """ Adapt the value of time_limit_order.
+
+        The value is in float format but the minutes on a base of 100
+        """
+        tlo = record.time_limit_order
+        hours = int(tlo)
+        minutes = int((tlo - hours) * 100) * 60 / 100
+        value = '{:02d}{:02d}'.format(hours, minutes)
+        return {'IdRound': value}
 
     @mapping
     def compute_activitytype(self, record):

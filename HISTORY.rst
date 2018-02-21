@@ -22,6 +22,7 @@ Unreleased
 * ALCN-1106: Fix display alignment columns on sale order line detail form.
 * ALCN-1121: Fix OnlinePayment and False in string values on customer export
 * ALCN-1119: Fix emtpry string to False in XML export
+* ALCN-1120 : Change format IdRound in customer export
 
 **Build**
 
