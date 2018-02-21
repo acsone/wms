@@ -5,6 +5,12 @@
 from odoo import tools, fields
 from .common import ESBXMLTestCase
 
+TEST_DATA0 = {
+}
+TEST_RESULT0 = """
+    <ROOT>
+    </ROOT>
+"""
 
 TEST_DATA1 = {
     'baz_out': 'baz value',
@@ -12,7 +18,6 @@ TEST_DATA1 = {
     'bar_out': 'bar value',
 }
 TEST_RESULT1 = """
-    <?xml version="1.0" encoding="utf-8" ?>
     <ROOT>
         <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
             <baz_out>baz value</baz_out>
@@ -39,7 +44,6 @@ TEST_DATA2 = [
     },
 ]
 TEST_RESULT2 = """
-    <?xml version="1.0" encoding="utf-8" ?>
     <ROOT>
         <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
             <Row>
@@ -61,7 +65,6 @@ TEST_RESULT2 = """
     </ROOT>
 """
 TEST_RESULT3 = """
-    <?xml version="1.0" encoding="utf-8" ?>
     <result>
         <resultItem>
             <baz_out>baz value</baz_out>
@@ -71,7 +74,6 @@ TEST_RESULT3 = """
     </result>
 """
 TEST_RESULT4 = """
-    <?xml version="1.0" encoding="utf-8" ?>
     <result>
         <resultItem>
             <baz_out>baz value</baz_out>
@@ -91,7 +93,6 @@ TEST_RESULT4 = """
     </result>
 """
 TEST_RESULT5 = """
-    <?xml version="1.0" encoding="utf-8" ?>
     <result>
         <stockItem>
             <baz_out>baz value</baz_out>
@@ -209,3 +210,22 @@ class XMLTestCase(ESBXMLTestCase):
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
                 self.flatten(result), self.flatten(TEST_RESULT5))
+
+    @tools.mute_logger('dicttoxml')
+    def test_xml_base_empty(self):
+        with self.backend.work_on(self.model._name) as work:
+            writer = work.component(usage='xml.producer')
+            result = writer.produce(TEST_DATA0)
+            root = self.assertXmlDocument(result)
+            paths = ()
+            self.assertXpathsExist(root, paths)
+            self.assertXmlEquivalentOutputs(
+                self.flatten(result), self.flatten(TEST_RESULT0))
+
+    @tools.mute_logger('dicttoxml')
+    def test_no_xml_version(self):
+        with self.backend.work_on(self.model._name) as work:
+            writer = work.component(usage='xml.producer')
+            result = writer.produce(TEST_DATA0)
+            result = self.flatten(result)
+            self.assertEqual(result.find('version'), -1)
