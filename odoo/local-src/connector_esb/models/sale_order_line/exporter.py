@@ -24,7 +24,7 @@ class SaleOrderLineExportMapper(Component):
 
     @mapping
     def compute_sku(self, record):
-        return {'sku': record.product_id.default_code}
+        return {'sku': record.product_id.default_code or ''}
 
     @mapping
     def compute_price_inc_tax(self, record):

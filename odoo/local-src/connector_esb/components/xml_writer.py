@@ -53,12 +53,16 @@ class ESBXMLProducer(Component):
             encoding='utf-8', pretty_print=True)
 
     def _produce(self, data, main_root, root):
-        # wrap into root
-        data = {root: data}
+        # Wrap into root
+        if data:
+            data = {root: data}
         xml = dicttoxml.dicttoxml(
             data, custom_root=main_root,
             attr_type=False, item_func=self._dicttoxml_item_func)
-        xml = self._apply_namespaces(xml)
+        if data:
+            xml = self._apply_namespaces(xml)
+        # Remove the xml version node
+        xml = xml[xml.find('?>')+2:]
         return xml
 
     def _dicttoxml_item_func(self, item):

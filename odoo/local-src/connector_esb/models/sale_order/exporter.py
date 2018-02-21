@@ -57,12 +57,12 @@ class SaleExportMapper(Component):
 
     @mapping
     def compute_shipping_method(self, record):
-        return {'shipping_method': record.carrier_id.esb_ref}
+        return {'shipping_method': record.carrier_id.esb_ref or ''}
 
     @mapping
     def compute_order_ref(self, record):
         if record.client_order_ref:
-            return {'order_ref': record.client_order_ref}
+            return {'order_ref': record.client_order_ref or ''}
         return {}
 
     @mapping
@@ -88,7 +88,7 @@ class SaleExportMapper(Component):
     def compute_increment_id(self, record):
         """ If an esb_ref exists, it is an update, so lets add it """
         if record.esb_ref:
-            return {'increment_id': record.esb_ref}
+            return {'increment_id': record.esb_ref or ''}
 
 
 class SaleWebServiceExporter(Component):

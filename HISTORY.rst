@@ -12,14 +12,16 @@ Unreleased
 
 **Features and Improvements**
 
-* ALCN-1122 Add SerialNo implementation in customer export
-* ALCN-1123 : Remove unnecessary fields in customer export
+* ALCN-1122: Add SerialNo implementation in customer export
+* ALCN-1123: Remove unnecessary fields in customer export
+* ALCN-1119: Remove xml version node and ROOT node if no data present in XML export
 
 **Bugfixes**
 
-* ALCN-1118 : Fix Customer Address export when esb_ref is empty
+* ALCN-1118: Fix Customer Address export when esb_ref is empty
 * ALCN-1106: Fix display alignment columns on sale order line detail form.
- * ALCN-1121 Fix OnlinePayment and False in string values on customer export
+* ALCN-1121: Fix OnlinePayment and False in string values on customer export
+* ALCN-1119: Fix emtpry string to False in XML export
 
 **Build**
 

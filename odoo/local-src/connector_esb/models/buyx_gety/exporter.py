@@ -29,7 +29,7 @@ class BuyXGetYExportMapper(Component):
 
     @mapping
     def compute_sku(self, record):
-        return {'Sku': record.product_tmpl_id.default_code}
+        return {'Sku': record.product_tmpl_id.default_code or ''}
 
     @mapping
     def compute_alcyongroup(self, record):
