@@ -4,6 +4,7 @@
 from collections import defaultdict
 
 from odoo import api, fields, models
+from odoo.tools import config
 
 
 class AccountInvoice(models.Model):
@@ -179,7 +180,7 @@ class AccountInvoice(models.Model):
             type_doc = 'nc'
         return '_'.join([
             type_doc,
-            self.partner_id.ref,
+            self.partner_id.ref or '',
             str(self.id),
             ''.join(self.create_date[:10].split('-')),
             ''.join(self.create_date[-8:].split(':')),
@@ -190,7 +191,7 @@ class AccountInvoice(models.Model):
         """Generate the invoice pdf and save it to ir.attachment """
         res = super(AccountInvoice, self).action_invoice_open()
         for invoice in self:
-            filename = self.get_report_name()
+            filename = invoice.get_report_name()
             if not filename:
                 continue
             # Default_type in the context breaks the pdf generation
@@ -213,6 +214,21 @@ class AccountInvoice(models.Model):
                     'mimetype': 'application/pdf',
                     'db_datas': data.encode('base_64'),
                     })
+        return res
+
+    @api.multi
+    def invoice_print(self):
+        """Only keep one invoice with the same name"""
+        self.ensure_one()
+        res = super(AccountInvoice, self).invoice_print()
+        if config['test_enable']:
+            # Do not generate the report during test
+            return res
+        filename = self.get_report_name()
+        existing = self.env['ir.attachment'].search([
+            ('name', '=', filename),
+            ('res_model', '=', 'account.invoice')])
+        existing.unlink()
         return res
 
 
