@@ -253,6 +253,7 @@ class DB2MapperPurchaseOrder(object):
                 'product_uom': rec.env.ref('product.product_uom_unit').id,
                 'qty_received': line['dcfqul'],
                 'price_unit': line['dcfpac'],
+                'discount_global': line['dcfres'],
                 'promotion_supplier': line['dcfrem'],
                 'date_planned': create_date,
                 'create_date': create_date,

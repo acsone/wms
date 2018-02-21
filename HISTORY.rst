@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1113: get discount_global from AS400 on purchase order lines.
+
 **Features and Improvements**
 
 **Bugfixes**
