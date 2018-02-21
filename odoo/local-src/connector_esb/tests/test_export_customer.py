@@ -137,7 +137,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'IdDelegate': '',
             'IdPharmacy': '',
             'TaxCode': 1,
-            'OnlinePayment': 0,
+            'OnlinePayment': False,
             'DepositNumber': u'2/1234/1234',
             'ErpId': u'3162',
             'AlcyonGroupId': self.discount_pricelist_2.esb_ref,
