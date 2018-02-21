@@ -324,8 +324,7 @@ class TestPricelistDiscount(TransactionCase):
         self.assertEqual(518.4, self.sale.amount_total)
         self.assertEqual(86.4, self.sale.amount_tax)
 
-        self.assertEqual(518.4, invoice.amount_total)
-        self.assertEqual(86.4, invoice.amount_tax)
+        # Check invoice
 
         # Check lines
         line1 = invoice.invoice_line_ids.filtered(
@@ -347,6 +346,10 @@ class TestPricelistDiscount(TransactionCase):
         # Check taxes
         self.assertEqual(1, len(invoice.tax_line_ids))
         self.assertEqual(86.4, invoice.tax_line_ids[0].amount)
+
+        # Check totals
+        self.assertEqual(518.4, invoice.amount_total)
+        self.assertEqual(86.4, invoice.amount_tax)
 
     def test_coverage(self):
         """ Test special cases for coverage.
