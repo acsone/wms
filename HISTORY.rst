@@ -6,33 +6,40 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.16.6 (2018-02-21)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Improve import_db2 dev tool to export SELECT query as csv file
 
 **Features and Improvements**
 
-* ALCN-1122: Add SerialNo implementation in customer export
-* ALCN-1123: Remove unnecessary fields in customer export
-* ALCN-1119: Remove xml version node and ROOT node if no data present in XML export
-* ALCN-1122 Add SerialNo implementation in customer export
-* ALCN-1123 : Remove unnecessary fields in customer export
- * ALCN-864 Add an export of document zip to Magento
+* ALCN-864: Add an export of document zip to Magento
     Store in ir.attachment the order confirmation, invoice, credit note and
     a specific delivery note generated in a csv file.
     Export all documents generated during the day in a zip file to Magento
+* ALCN-1119: Remove XML version node and ROOT node if no data present in XML export
+* ALCN-1122: Add SerialNo implementation in customer export
+* ALCN-1123: Remove unnecessary fields in customer export
+    (MsrpSticker, BackorderEnable, plus empty fields)
 
 **Bugfixes**
 
-* ALCN-1118: Fix Customer Address export when esb_ref is empty
 * ALCN-1106: Fix display alignment columns on sale order line detail form.
+* ALCN-1118: Fix Customer Address export when esb_ref is empty
+* ALCN-1119: Return empty string instead of False in XML export
+* ALCN-1120: Change format IdRound in customer export
 * ALCN-1121: Fix OnlinePayment and False in string values on customer export
-* ALCN-1119: Fix emtpry string to False in XML export
-* ALCN-1120 : Change format IdRound in customer export
-
-**Build**
-
-**Documentation**
 
 
 10.16.5 (2018-02-16)

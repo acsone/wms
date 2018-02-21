@@ -147,6 +147,7 @@ migration:
           - specific_zelapro
           - specific_zetes
           - stock_barcode_fix
+          - stock_delivery_note
           - stock_expired
           - stock_grn
           - stock_groupbypartner
@@ -212,7 +213,6 @@ migration:
           - connector_esb
           - specific_account
           - specific_shipping_costs
-          - stock_delivery_note
       operations:
         post:
           - anthem songs.upgrade.10_16_4_update::main
@@ -227,3 +227,5 @@ migration:
         upgrade:
           ### local-src
           - sale_cancel_remaining
+          - specific_report
+          - stock_delivery_note
