@@ -28,3 +28,4 @@ from . import sale_order
 from . import product_supplierinfo
 from . import queue_job
 from . import buyx_gety
+from . import ir_attachment

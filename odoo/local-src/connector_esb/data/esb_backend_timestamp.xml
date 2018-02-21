@@ -65,4 +65,10 @@
     <field name="export_filename">none</field>
   </record>
 
+  <record id="esb_timestamp_document_zip" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">ir.attachment</field>
+    <field name="export_filename">Document_{date}.zip</field>
+  </record>
+
 </odoo>

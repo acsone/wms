@@ -212,6 +212,7 @@ migration:
           - connector_esb
           - specific_account
           - specific_shipping_costs
+          - stock_delivery_note
       operations:
         post:
           - anthem songs.upgrade.10_16_4_update::main

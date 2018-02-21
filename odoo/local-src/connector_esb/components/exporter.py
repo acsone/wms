@@ -190,8 +190,11 @@ class ESBExporterMixin(AbstractComponent):
             prepared.append(self.mapper.map_record(item).values())
         return prepared
 
+    def _get_producer(self):
+        return self.work.component(usage='xml.producer')
+
     def _export_items(self, items):
-        producer = self.work.component(usage='xml.producer')
+        producer = self._get_producer()
         writer_type = self.work.timestamp.writer
         assert writer_type
         writer_usage = writer_type + '.xml.writer'

@@ -15,6 +15,12 @@ Unreleased
 * ALCN-1122: Add SerialNo implementation in customer export
 * ALCN-1123: Remove unnecessary fields in customer export
 * ALCN-1119: Remove xml version node and ROOT node if no data present in XML export
+* ALCN-1122 Add SerialNo implementation in customer export
+* ALCN-1123 : Remove unnecessary fields in customer export
+ * ALCN-864 Add an export of document zip to Magento
+    Store in ir.attachment the order confirmation, invoice, credit note and
+    a specific delivery note generated in a csv file.
+    Export all documents generated during the day in a zip file to Magento
 
 **Bugfixes**
 
