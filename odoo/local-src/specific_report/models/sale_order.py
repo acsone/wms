@@ -2,6 +2,7 @@
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
+from odoo.tools import config
 
 
 class SaleOrderLine(models.Model):
@@ -59,9 +60,13 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         """ Generate the sale order pdf and save it in ir.attachment"""
         res = super(SaleOrder, self).action_confirm()
+        if config['test_enable']:
+            # Do not generate the report during test
+            return res
         for order in self:
             filename = self.get_report_name()
-            data = self.env['report'].get_pdf([order.id], 'sale.report_saleorder')
+            data = self.env['report'].get_pdf(
+                [order.id], 'sale.report_saleorder')
             existing = self.env['ir.attachment'].search([
                 ('name', '=', filename), ('res_model', '=', 'sale.order')])
             if len(existing):
@@ -76,4 +81,16 @@ class SaleOrder(models.Model):
                     'mimetype': 'application/pdf',
                     'db_datas': data.encode('base_64'),
                     })
+        return res
+
+    @api.multi
+    def print_quotation(self):
+        """Only keep one sale order with the same name in ir.attachment"""
+        res = super(SaleOrder, self).print_quotation()
+        for so in self:
+            filename = so.get_report_name()
+            existing = self.env['ir.attachment'].search([
+                ('name', '=', filename),
+                ('res_model', '=', 'sale.order')])
+            existing.unlink()
         return res
