@@ -96,7 +96,7 @@ def do_partial_picking(pick, lines, lots):
     pick.force_assign()
     pick.do_prepare_partial()
     for line in lines:
-        product_xmlid = convert_product_id(line['dccart'])
+        product_xmlid = convert_product_id(line['product'])
         product = pick.env.ref(product_xmlid)
         ope = pick.pack_operation_ids.filtered(
             lambda p: p.product_id == product)
@@ -104,22 +104,22 @@ def do_partial_picking(pick, lines, lots):
             continue
         # += to make sure than we process all qty if there are
         # more than one line with same product
-        ope.qty_done += line['dccqul']
+        ope.qty_done += line['qty_done']
 
         # pack operation requires serial num / lot
         if (ope.qty_done and ope.product_id and
                 ope.product_id.tracking != 'none'):
             # there can be multiple lot for one product
             for db2_lot in lots:
-                if (line['dccnli'] == db2_lot['mltnli'] and
-                        line['dccart'] == db2_lot['mltart']):
+                if (line['line_no'] == db2_lot['mltnli'] and
+                        line['product'] == db2_lot['mltart']):
                     odoo_lot = pick.env['stock.production.lot'].search(
                         [('name', '=', db2_lot['mltlot']),
                          ('product_id', '=', ope.product_id.id)])
                     OpeLot = pick.env['stock.pack.operation.lot']
                     values = {
                         'operation_id': ope.id,
-                        'qty': -db2_lot['mltquc'],
+                        'qty': abs(db2_lot['mltquc']),
                     }
                     if odoo_lot:
                         values['lot_id'] = odoo_lot.id
@@ -130,7 +130,21 @@ def do_partial_picking(pick, lines, lots):
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
-        pick.do_new_transfer()
+        if pick.picking_type_code == 'incoming':
+            # disable check on receive note for receptions
+            # and skip backorder creation
+            pick = pick.with_context(
+                __no_pick_receive_note_check=True,
+                __no_specific_stock_backorder=True)
+        result = pick.do_new_transfer()
+        if result['res_model'] == 'stock.backorder.confirmation':
+            # Accept backorder creation
+            operations_to_delete = pick.pack_operation_ids.filtered(
+                lambda o: o.qty_done <= 0)
+            for pack in pick.pack_operation_ids - operations_to_delete:
+                pack.product_qty = pack.qty_done
+            operations_to_delete.unlink()
+            pick.do_transfer()
 
 
 def do_final_picking(pick, lines, lots):
@@ -138,7 +152,7 @@ def do_final_picking(pick, lines, lots):
     we need still to set quantities
     """
     for line in lines:
-        product_xmlid = convert_product_id(line['dccart'])
+        product_xmlid = convert_product_id(line['product'])
         product = pick.env.ref(product_xmlid)
         ope = pick.pack_operation_ids.filtered(
             lambda p: p.product_id == product)
@@ -146,17 +160,17 @@ def do_final_picking(pick, lines, lots):
             continue
         # += to make sure than we process all qty if there are
         # more than one line with same product
-        ope.qty_done += line['dccqul']
+        ope.qty_done += line['qty_done']
 
         # pack operation requires serial num / lot
         if (ope.qty_done and ope.product_id and
                 ope.product_id.tracking != 'none'):
             for db2_lot in lots:
-                if (line['dccnli'] == db2_lot['mltnli'] and
-                        line['dccart'] == db2_lot['mltart']):
+                if (line['line_no'] == db2_lot['mltnli'] and
+                        line['product'] == db2_lot['mltart']):
                     for pack_lot in ope.pack_lot_ids:
                         if pack_lot.lot_id.name == db2_lot['mltlot']:
-                            pack_lot.qty = -db2_lot['mltquc']
+                            pack_lot.qty = abs(db2_lot['mltquc'])
                             break
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
@@ -167,23 +181,7 @@ def do_final_picking(pick, lines, lots):
 class DB2MapperPurchaseOrder(object):
 
     @classmethod
-    def process(cls, rec, db2_table, tmp_id):
-        cr = rec.env.cr
-        query = (
-            "SELECT id, ecfsui, ecfrin, ecfrcl, ecfuti, ecffou, ecfsuc,"
-            "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"
-            "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"
-            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"
-            " FROM db2_pentcdfo WHERE id = %s")
-        cr.execute(query, [tmp_id])
-        row = cr.fetchone()
-        if not row:
-            raise Exception("Nothing to process")
-        row = {c.lower(): row[idx]
-               for idx, c in enumerate(
-                   [d[0] for d in cr.description]
-               )}
-
+    def prepare_purchase_values(cls, rec, row):
         create_date = convert_date('ecfc', row)
         supplier = rec.env.ref(convert_supplier(int(row['ecffou'])))
         promo_purchase = supplier.supplier_promotion_purchase_allowed
@@ -202,6 +200,36 @@ class DB2MapperPurchaseOrder(object):
             'partner_id': supplier.id,
             'supplier_promotion_allowed': promo_purchase,
         }
+        return values
+
+    @classmethod
+    def map_orderline2move(cls, lines):
+        mapping = [
+            ('product', 'dcfart'),
+            ('qty_done', 'dcfqul'),
+            ('line_no', 'dcfnli'),
+        ]
+        pick_lines = [{src: l[dest] for src, dest in mapping} for l in lines]
+        return pick_lines
+
+    @classmethod
+    def process(cls, rec, db2_table, tmp_id):
+        cr = rec.env.cr
+        query = (
+            "SELECT id, ecfsui, ecfrin, ecfrcl, ecfuti, ecffou, ecfsuc,"
+            "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"
+            "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"
+            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"
+            " FROM db2_pentcdfo WHERE id = %s")
+        cr.execute(query, [tmp_id])
+        row = cr.fetchone()
+        if not row:
+            raise Exception("Nothing to process")
+        row = {c.lower(): row[idx]
+               for idx, c in enumerate(
+                   [d[0] for d in cr.description]
+               )}
+        values = cls.prepare_purchase_values(rec, row)
 
         # transform float and string to int to remove . and spaces
         # while creating xmlid
@@ -236,6 +264,7 @@ class DB2MapperPurchaseOrder(object):
         po_lines = POLine
         is_received = True
         received_lines = []
+        not_received_lines = []
 
         for line in lines:
             product_xmlid = convert_product_id(line['dcfart'])
@@ -268,14 +297,21 @@ class DB2MapperPurchaseOrder(object):
                 int(row['ecfsuc']), int(line['dcfnli']))
             po_lines |= create_or_update(POLine, xmlid, values)
             received_lines.append(line['dcfquc'] <= line['dcfqul'])
+            not_received_lines.append(line['dcfqul'] == 0)
         is_received = all(received_lines)
+        # don't do partial delivery when:
+        # - everything is received (put the pick to done)
+        # - reception has not been started (keep picking in draft)
+        is_partially_received = (
+            not is_received and
+            not all(not_received_lines)
+        )
 
+        state = 'done' if is_received else 'purchase'
+        new.write({
+            'state': state,
+        })
         if is_received:
-
-            # validate purchase order
-            new.write({
-                'state': 'done',
-            })
             # force received qty in database to avoid to have
             # to create pickings, this needs to be done after state write
             # or it would be recomputed
@@ -286,10 +322,31 @@ class DB2MapperPurchaseOrder(object):
                 " WHERE id in ( %s )"
             ) % ','.join(['%s'] * len(po_lines))
             cr.execute(query, po_lines.ids)
-        else:
-            new.write({
-                'state': 'purchase',
-            })
+        elif rec.importer_id.mode == 'final_update':
+            new._create_picking()
+            if is_partially_received:
+                # if partially received create a backorder with
+                # received quantities
+                pick = new.picking_ids
+                pick_lines = cls.map_orderline2move(lines)
+                query = (
+                    "SELECT mltlot, mltart, mltnli, mltquc"
+                    " FROM db2_mvtlot"
+                    " WHERE mltsui = %s"
+                    " AND mltnum = %s"
+                    " AND TRIM(mltsuc) = '%s'"
+                    # positive qty are incoming
+                    " AND mltquc > 0")
+                cr.execute(
+                    query,
+                    (row['ecfsui'], int(row['ecffou']),
+                     int(row['ecfsuc'])))
+                lots = cr.fetchall()
+                lots = [{c.lower(): lot[idx]
+                         for idx, c in enumerate(
+                            [d[0] for d in cr.description]
+                         )} for lot in lots]
+                do_partial_picking(pick, pick_lines, lots)
 
 
 class DB2MapperSaleOrder(object):
@@ -304,6 +361,16 @@ class DB2MapperSaleOrder(object):
             ('name', '=like', 'ANTIBIO%')]
         tax = rec.env['account.tax'].search(tax_domain)
         line.tax_id |= tax
+
+    @classmethod
+    def map_orderline2move(cls, lines):
+        mapping = [
+            ('product', 'dccart'),
+            ('qty_done', 'dccqul'),
+            ('line_no', 'dccnli'),
+        ]
+        pick_lines = [{src: l[dest] for src, dest in mapping} for l in lines]
+        return pick_lines
 
     @classmethod
     def process(cls, rec, db2_table, tmp_id):
@@ -514,7 +581,9 @@ class DB2MapperSaleOrder(object):
                     " FROM db2_mvtlot"
                     " WHERE mltsui = %s"
                     " AND mltnum = %s"
-                    " AND TRIM(mltsuc) = '%s'")
+                    " AND TRIM(mltsuc) = '%s'"
+                    # negative qty are outgoing
+                    " AND mltquc < 0")
                 cr.execute(
                     query,
                     (row['eccsui'], int(row['ecccli']),
@@ -524,11 +593,12 @@ class DB2MapperSaleOrder(object):
                          for idx, c in enumerate(
                             [d[0] for d in cr.description]
                          )} for lot in lots]
+                pick_lines = cls.map_orderline2move(lines)
                 # Do internal picking to out location
                 for pick in picks1:
-                    do_partial_picking(pick, lines, lots)
+                    do_partial_picking(pick, pick_lines, lots)
                 # Do the deliver to customer
-                do_final_picking(pick2, lines, lots)
+                do_final_picking(pick2, pick_lines, lots)
 
 
 mappers = {
