@@ -369,6 +369,7 @@ class CustomerMapper(EntityMapper):
 
         FieldMapper(
             'is_sale_back_order_accepted', 'clibor',
+            mapping=mappings.BACKORDER_ACCEPTED
         ),
 
         FieldMapper(

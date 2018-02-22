@@ -137,6 +137,8 @@ So we get a value containing MDL01FR
  where table_schema in ('SBDATA', 'GENDATA') and table_name in ('PGESTION', 'CLIENT')
  ```
 
+And a very usefull field in `qsys2.syscolumns` is `column_text`, which might contain a coherent description of the field.
+
 
 ### CSV Files generation
 
