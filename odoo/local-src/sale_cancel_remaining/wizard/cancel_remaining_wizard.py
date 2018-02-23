@@ -6,7 +6,7 @@ from odoo import api, models, _
 from odoo.exceptions import UserError
 
 
-class CancelRemainingWizard(models.Model):
+class CancelRemainingWizard(models.TransientModel):
     _name = 'cancel.remaining.wizard'
 
     @api.multi
