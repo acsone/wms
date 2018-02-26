@@ -29,7 +29,17 @@ def import_accounting_products(ctx):
 
 
 @anthem.log
+def zero_digits_for_uom(ctx):
+    """Set digits of Decimal Accuracy for product uom to 0.
+    """
+    ctx.env.ref('product.decimal_product_uom').write({
+        'digits': 0,
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
     import_accounting_products(ctx)
+    zero_digits_for_uom(ctx)

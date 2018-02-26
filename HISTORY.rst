@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1100: Set digits precision for product uom to 0
+
 **Bugfixes**
 
 **Build**
@@ -66,7 +68,7 @@ Unreleased
 
 * ALCN-1097: Fix XML Pharmacy, node e-mail contains False if email not referenced
    * Also fix that the XML nodes (fax, phone, city, zip) would contain False if
-     their respective field is empty 
+     their respective field is empty
 
 * ALCN-1103: XML Customer Address, set AddressId for shipping to zero if it is not a specific address
 
