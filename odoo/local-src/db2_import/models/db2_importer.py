@@ -66,10 +66,8 @@ def create_or_update(model, xmlid, values):
 
 
 def convert_product_id(product_code):
-
-    product = (product_code or '').strip()
-    if product:
-        xmlid = '__import__.product_%s' % product
+    if product_code:
+        xmlid = '__import__.product_%s' % product_code
     else:
         xmlid = '__setup__.product_other'
     return xmlid
@@ -84,8 +82,9 @@ def convert_user(resp_num):
 
 
 def convert_coding(value):
-    if isinstance(value, str):
-        value = value.decode('latin1').encode('utf8')
+    """Convert to utf8 and strip all DB2 messy strings"""
+    if isinstance(value, basestring):
+        value = value.decode('latin1').encode('utf8').strip()
     return value
 
 
@@ -111,9 +110,9 @@ def do_partial_picking(pick, lines, lots):
             # there can be multiple lot for one product
             for db2_lot in lots:
                 if (line['dccnli'] == db2_lot['mltnli'] and
-                        line['dccart'].strip() == db2_lot['mltart'].strip()):
+                        line['dccart'] == db2_lot['mltart']):
                     odoo_lot = pick.env['stock.production.lot'].search(
-                        [('name', '=', db2_lot['mltlot'].strip()),
+                        [('name', '=', db2_lot['mltlot']),
                          ('product_id', '=', ope.product_id.id)])
                     OpeLot = pick.env['stock.pack.operation.lot']
                     values = {
@@ -123,7 +122,7 @@ def do_partial_picking(pick, lines, lots):
                     if odoo_lot:
                         values['lot_id'] = odoo_lot.id
                     else:
-                        values['lot_name'] = db2_lot['mltlot'].strip()
+                        values['lot_name'] = db2_lot['mltlot']
                     OpeLot.create(values)
 
     # in our case 0 on each operation means we don't want to transfer
@@ -152,9 +151,9 @@ def do_final_picking(pick, lines, lots):
                 ope.product_id.tracking != 'none'):
             for db2_lot in lots:
                 if (line['dccnli'] == db2_lot['mltnli'] and
-                        line['dccart'].strip() == db2_lot['mltart'].strip()):
+                        line['dccart'] == db2_lot['mltart']):
                     for pack_lot in ope.pack_lot_ids:
-                        if pack_lot.lot_id.name == db2_lot['mltlot'].strip():
+                        if pack_lot.lot_id.name == db2_lot['mltlot']:
                             pack_lot.qty = -db2_lot['mltquc']
                             break
     # in our case 0 on each operation means we don't want to transfer
@@ -178,7 +177,7 @@ class DB2MapperPurchaseOrder(object):
         row = cr.fetchone()
         if not row:
             raise Exception("Nothing to process")
-        row = {c.lower(): convert_coding(row[idx])
+        row = {c.lower(): row[idx]
                for idx, c in enumerate(
                    [d[0] for d in cr.description]
                )}
@@ -210,7 +209,7 @@ class DB2MapperPurchaseOrder(object):
             tracking_disable=True
         )
         new = create_or_update(
-            purchase_model, xmlid.strip(), values)
+            purchase_model, xmlid, values)
 
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
@@ -222,7 +221,7 @@ class DB2MapperPurchaseOrder(object):
         lines = cr.fetchall()
         if not lines:
             raise Exception("No lines were found")
-        lines = [{c.lower(): convert_coding(line[idx])
+        lines = [{c.lower(): line[idx]
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
@@ -315,7 +314,7 @@ class DB2MapperSaleOrder(object):
         row = cr.fetchone()
         if not row:
             raise Exception("Nothing to process")
-        row = {c.lower(): convert_coding(row[idx])
+        row = {c.lower(): row[idx]
                for idx, c in enumerate(
                    [d[0] for d in cr.description]
                )}
@@ -327,8 +326,8 @@ class DB2MapperSaleOrder(object):
         user_xmlid = convert_user(row['eccrep'])
         values = {
             'name': row['eccsui'],
-            'origin': row['eccrin'].strip(),
-            'client_order_ref': row['eccrcl'].strip(),
+            'origin': row['eccrin'],
+            'client_order_ref': row['eccrcl'],
             'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),
@@ -344,7 +343,7 @@ class DB2MapperSaleOrder(object):
         xmlid = '__import__.sale_order_%s_%s_%s' % (
             row['eccsui'], int(row['ecccli']), int(row['eccsuc']))
         so_model = rec.env['sale.order'].with_context(tracking_disable=True)
-        new = create_or_update(so_model, xmlid.strip(), values)
+        new = create_or_update(so_model, xmlid, values)
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
@@ -357,7 +356,7 @@ class DB2MapperSaleOrder(object):
         lines = cr.fetchall()
         if not lines:
             raise Exception("No lines were found")
-        lines = [{c.lower(): convert_coding(line[idx])
+        lines = [{c.lower(): line[idx]
                  for idx, c in enumerate(
                     [d[0] for d in cr.description]
                  )} for line in lines]
@@ -465,7 +464,7 @@ class DB2MapperSaleOrder(object):
                     (row['eccsui'], int(row['ecccli']),
                      int(row['eccsuc'])))
                 lots = cr.fetchall()
-                lots = [{c.lower(): convert_coding(lot[idx])
+                lots = [{c.lower(): lot[idx]
                          for idx, c in enumerate(
                             [d[0] for d in cr.description]
                          )} for lot in lots]
