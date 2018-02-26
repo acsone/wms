@@ -6,8 +6,14 @@ import odoo.addons.decimal_precision as dp
 from odoo import fields, models
 
 
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+    _order = 'default_code'
+
+
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
+    _order = 'default_code'
 
     medical_device = fields.Boolean(
         string='Medical Device',
