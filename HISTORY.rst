@@ -22,6 +22,7 @@ Unreleased
 * ALCN-1114: Performance: Product form view loading and sort order
   (sort by internal reference and not by name otherwise the ORM creates
   a subselect on the translations in many requests)
+* ALCN-136: Setup locations for scrap, return to supplier, return from customer
 
 **Bugfixes**
 

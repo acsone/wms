@@ -100,9 +100,9 @@ class StockQuant(models.Model):
         ]
         quants = self.env['stock.quant'].search(domain)
         if len(quants) > 0:
-            picking_type = self.env.ref('stock.picking_type_internal')
-            location_src = self.env.ref('stock.stock_location_stock')
-            location_dest = self.env.ref('stock.stock_location_scrapped')
+            picking_type = self.env.ref('stock_expired.picking_type_scrap')
+            location_src = picking_type.default_location_src_id
+            location_dest = picking_type.default_location_dest_id
             move_lines = []
             for product, product_quants in itertools.groupby(
                 quants,
