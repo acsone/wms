@@ -9,6 +9,8 @@ Unreleased
 **Data Migration**
 
 * ALCN-1067: Improve Sale order import to set fiscal position and pricelist and limit the api calls.
+* ALCN-1088: Change db2 import of sale order accessory products
+    Sale order line for product which are free and an additional product are not imported
 * ALCN-1105: Inverse imported value from DB2 of customer acceptance of backorder
 * ALCN-1112: Import unit of mesures on purchase orders from DB2
 * ALCN-1113: get discount_global from AS400 on purchase order lines.

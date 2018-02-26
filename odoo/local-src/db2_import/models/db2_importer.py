@@ -386,7 +386,8 @@ class DB2MapperSaleOrder(object):
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
             "       dcccjj, dcccmm, dcccaa, dcccss,"
-            "       dccmjj, dccmmm, dccmaa, dccmss"
+            "       dccmjj, dccmmm, dccmaa, dccmss,"
+            "       dccsgr, dcccgr"
             " FROM db2_pdetcdcl WHERE order_id = %s"
             " ORDER BY dccnli")
         cr.execute(query, [row['id']])
@@ -425,6 +426,12 @@ class DB2MapperSaleOrder(object):
             if product_xmlid == '__setup__.product_other':
                 name = "Divers"
             product = rec.env.ref(product_xmlid)
+            if line['dcccgr'] == 1 and line['dccsgr'] != 15:
+                # Free accessory, in odoo are inserted in the picking
+                # But check that it is not human (15) ?!
+                if product.product_tmpl_id.is_an_additional_product():
+                    # And if it is an accessory of another product, skip it
+                    continue
             # While odoo could do it for us on create
             # in _prepare_add_missing_fields
             # Do it ourselves to avoid call to onchange

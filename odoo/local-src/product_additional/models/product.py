@@ -27,3 +27,12 @@ class ProductTemplate(models.Model):
         qty_additional_product = coefficient * self.ratio_additional_product
 
         return qty_additional_product
+
+    @api.multi
+    def is_an_additional_product(self):
+        self.ensure_one()
+        return bool(len(
+            self.env['product.template'].search([
+                ('additional_product_id', '=', self.id)])
+            )
+        )
