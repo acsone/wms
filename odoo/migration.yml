@@ -58,6 +58,7 @@ migration:
               - anthem songs.install.data_full::main
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
               - anthem songs.install.data_full::import_inventory
+              - anthem songs.install.data_full::import_inventory_without_lot
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               - anthem songs.install.db2_import::main
