@@ -506,7 +506,7 @@ PRODUCT_ROUTES = {
     1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
 }
 
-BACK_ORDER_ACCEPTED = {
+BACKORDER_ACCEPTED = {
     0: True,
     1: False,
 }
