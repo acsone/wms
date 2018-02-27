@@ -1,15 +1,14 @@
-<?xml version='1.0' encoding='utf-8'?>
 <ROOT>
-  <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
-    <Row>
+  <Prix>
+    <PriceInfo>
       <Sku>0001</Sku>
       <Price>12.70</Price>
       <PharmacyPrice>33.240</PharmacyPrice>
-    </Row>
-    <Row>
+    </PriceInfo>
+    <PriceInfo>
       <Sku>0002</Sku>
       <Price>82.70</Price>
       <PharmacyPrice>18.880</PharmacyPrice>
-    </Row>
-  </Root>
+    </PriceInfo>
+  </Prix>
 </ROOT>
