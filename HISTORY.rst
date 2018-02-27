@@ -36,6 +36,7 @@ Unreleased
 * ALCN-1163: Fix Error 500 in wso2 flux form Magento
     Due to multiple line of tax on the sale order line.
     Also change the quantity used to compute the total.
+* ALCN-1164: Fix generation error of the sale order report for NL customers
 
 **Build**
 
