@@ -15,6 +15,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1100: Set digits precision for product uom to 0
+* ALCN-1061: Set the default purchase tax
 
 **Bugfixes**
 
