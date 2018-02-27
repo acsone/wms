@@ -11,7 +11,7 @@ class RoundItinerary(models.Model):
 
     sequence = fields.Integer('Sequence')
     name = fields.Char('Name', required=True)
-    code = fields.Char('Code')
+    code = fields.Char('Code', required=True)
     color = fields.Integer('Color Index')
     partner_position_ids = fields.One2many(
         'round.itinerary.position', 'itinerary_id', 'Partners')
