@@ -28,6 +28,7 @@ Unreleased
 
 * ALCN-1141: Do the missing load of free products information of supplierinfo
 * Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone
+* Fix reservation of expired product (migration to v10 issue).
 
 **Build**
 

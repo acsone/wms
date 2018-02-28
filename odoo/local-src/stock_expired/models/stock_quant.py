@@ -34,18 +34,8 @@ class StockQuant(models.Model):
         company_id=False, initial_domain=None
     ):
         deny_reservation_for_quants_expired = True
-
-        context = self.env.context or {}
-        if (
-            context.get('params') and
-            context.get('params').get('model') == 'stock.picking' and
-            context.get('params').get('id')
-        ):
-            picking = self.env['stock.picking'].browse(
-                context['params']['id']
-            )
-            if picking and picking.to_process_quant_expired:
-                deny_reservation_for_quants_expired = False
+        if move.picking_id.to_process_quant_expired:
+            deny_reservation_for_quants_expired = False
 
         new_domain = initial_domain or []
         if deny_reservation_for_quants_expired:
