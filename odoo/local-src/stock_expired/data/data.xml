@@ -9,7 +9,6 @@
             <field name="sequence_id" ref="stock.seq_picking_internal"/>
             <field name="warehouse_id" eval="0"/>
             <field name="code">internal</field>
-            <field name="default_location_src_id" ref="stock.stock_location_locations"/>
             <field name="default_location_dest_id" ref="stock.stock_location_scrapped"/>
         </record>
 

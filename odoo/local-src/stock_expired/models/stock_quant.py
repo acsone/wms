@@ -89,13 +89,15 @@ class StockQuant(models.Model):
             ('id', 'not in', quants_already_processed.ids)
         ]
         quants = self.env['stock.quant'].search(domain)
-        if len(quants) > 0:
-            picking_type = self.env.ref('stock_expired.picking_type_scrap')
-            location_src = picking_type.default_location_src_id
-            location_dest = picking_type.default_location_dest_id
+        picking_type = self.env.ref('stock_expired.picking_type_scrap')
+        location_dest = picking_type.default_location_dest_id
+        for location_src, quants_bylocation in itertools.groupby(
+            quants,
+            lambda q: q.location_id,
+        ):
             move_lines = []
             for product, product_quants in itertools.groupby(
-                quants,
+                quants_bylocation,
                 lambda q: q.product_id,
             ):
                 quantity = 0
@@ -122,3 +124,4 @@ class StockQuant(models.Model):
                 'move_lines': move_lines,
             })
             picking.action_confirm()
+            picking.action_assign()
