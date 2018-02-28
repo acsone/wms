@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1152: Fix sale order report name bug, for client without reference
+
 **Build**
 
 **Documentation**
