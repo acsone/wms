@@ -81,7 +81,8 @@ def create_locations(ctx):
         ctx, 'stock.location', '__setup__.stock_location_in_return', {
             'name': 'Retours client',
             'location_id': loc_stock.id,
-            'usage': 'internal',
+            'usage': 'customer',
+            'ignore_quants_expiration': True,
         })
     # Note: Do not request quality to make stock moves
     # return_in = [
@@ -237,6 +238,7 @@ def create_locations(ctx):
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_scrapped').id,
             'usage': 'internal',
+            'ignore_quants_expiration': True,
         })
 
     loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
