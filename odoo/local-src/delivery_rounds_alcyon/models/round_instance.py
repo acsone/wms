@@ -54,37 +54,58 @@ class RoundInstance(models.Model):
 
     @api.depends('picking_ids')
     def _get_count_picking(self):
-        _logger.debug('_get_count_picking - start')
-        keys = ('01', '02', '03', '04', '05')
+        query = """
+            SELECT p.delivery_round_id, z.code,
+            count(*) AS total,
+            count(*) FILTER (WHERE p.state='done') AS done
+            FROM stock_picking p
+            LEFT JOIN stock_picking_type t ON p.picking_type_id = t.id
+            LEFT JOIN picking_zone z ON t.picking_zone_id = z.id
+            WHERE p.state in ('partially_available',
+                                'assigned', 'done')
+            AND p.delivery_round_id in %s
+            GROUP BY p.delivery_round_id, z.code
+        """
+        self._cr.execute(query, (tuple(self.ids), ))
+
+        picking_total = {}.fromkeys(self.ids, 0)
+        picking_done = {}.fromkeys(self.ids, 0)
+
+        for delivery_round_id, code, total, done in self._cr.fetchall():
+            rec = self.browse(delivery_round_id)
+
+            if code == '01':
+                rec.count_picking_available_total_med = total
+                rec.count_picking_done_total_med = done
+            elif code == '02':
+                rec.count_picking_available_total_mat = total
+                rec.count_picking_done_total_mat = done
+            elif code == '03':
+                rec.count_picking_available_total_frigo = total
+                rec.count_picking_done_total_frigo = done
+            elif code == '04':
+                rec.count_picking_available_total_ali = total
+                rec.count_picking_done_total_ali = done
+            elif code == '05':
+                rec.count_picking_available_total_pharm = total
+                rec.count_picking_done_total_pharm = done
+
+            picking_total[rec.id] += total
+            picking_done[rec.id] += done
+
         for rec in self:
-            picking_total = {}.fromkeys(keys, 0)
-            picking_done = {}.fromkeys(keys, 0)
-            pickings = rec.picking_ids.filtered(
-                lambda r: r.state in ('partially_available', 'assigned',
-                                      'done'))
-            for picking in pickings:
-                key = picking.picking_type_id.picking_zone_id.code
-                picking_total[key] += 1
-                if picking.state == 'done':
-                    picking_done[key] += 1
+            rec.count_picking_available_total = picking_total[rec.id]
+            rec.count_picking_done_total = picking_done[rec.id]
 
-            rec.count_picking_available_total_med = picking_total.get('01', 0)
-            rec.count_picking_available_total_mat = picking_total.get('02', 0)
-            rec.count_picking_available_total_frigo = \
-                picking_total.get('03', 0)
-            rec.count_picking_available_total_ali = picking_total.get('04', 0)
-            rec.count_picking_available_total_pharm = \
-                picking_total.get('05', 0)
-
-            rec.count_picking_done_total_med = picking_done.get('01', 0)
-            rec.count_picking_done_total_mat = picking_done.get('02', 0)
-            rec.count_picking_done_total_frigo = picking_done.get('03', 0)
-            rec.count_picking_done_total_ali = picking_done.get('04', 0)
-            rec.count_picking_done_total_pharm = picking_done.get('05', 0)
-
-            rec.count_picking_available_total = sum(picking_total.values())
-            rec.count_picking_done_total = sum(picking_done.values())
-
-            rec.count_picking_available_partner = \
-                len(pickings.mapped('partner_id'))
-        _logger.debug('_get_count_picking - done')
+        query = """
+            SELECT p.delivery_round_id, count(*)
+            FROM stock_picking p
+            WHERE p.state in ('partially_available',
+                                'assigned', 'done')
+            AND p.delivery_round_id in %s
+            GROUP BY p.delivery_round_id, p.partner_id
+        """
+        self._cr.execute(query, (tuple(self.ids), ))
+        for delivery_round_id, count in self._cr.fetchall():
+            rec = self.browse(delivery_round_id)
+            rec.count_picking_available_partner = count

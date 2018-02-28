@@ -353,16 +353,17 @@ class RoundInstance(models.Model):
         for r in self._cr.fetchall():
             self.browse(r[0]).count_picking_available_weight = r[1]
 
-    @api.one
     @api.depends('picking_ids')
     def _get_count_picking(self):
-        self.count_picking_done_total = len(self.picking_ids.filtered(
-            lambda r: r.state == ('done')))
-        pickings = self.picking_ids.filtered(
-            lambda r: r.state in ('partially_available', 'assigned', 'done'))
-        self.count_picking_available_total = len(pickings)
-        self.count_picking_available_partner = \
-            len(pickings.mapped('partner_id'))
+        for rec in self:
+            rec.count_picking_done_total = len(rec.picking_ids.filtered(
+                lambda r: r.state == ('done')))
+            pickings = rec.picking_ids.filtered(
+                lambda r: r.state in ('partially_available', 'assigned',
+                                      'done'))
+            rec.count_picking_available_total = len(pickings)
+            rec.count_picking_available_partner = \
+                len(pickings.mapped('partner_id'))
 
     @api.multi
     def action_picking_tree_available(self):
