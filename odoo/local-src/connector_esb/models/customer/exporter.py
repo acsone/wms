@@ -86,7 +86,13 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_taxcode(self, record):
-        value = 1 if record.vat else 0
+        value = 1
+        if record.vat:
+            country = record.vat[:2]
+            if country == 'BE':
+                value = 0
+            else:
+                value = 3
         return {'TaxCode': value}
 
     @mapping
