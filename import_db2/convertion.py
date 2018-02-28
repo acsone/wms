@@ -81,13 +81,21 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'ratio_additional_product', 'cp2z24',
         ),
+        FieldMapper(
+            'orderpoint_min', 'stomin'
+        ),
+        FieldMapper(
+            'orderpoint_max', 'stomax'
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'pb2', 'manufacturer',
+        'orderpoint_qty_multiple'
     ]
 
     def get_sql_joins(self):
         return ("join sbdata.cplges on gesart=cplart"
-                " left join sbdata.cplge2 on gesart=cp2art")
+                " left join sbdata.cplge2 on gesart=cp2art"
+                " LEFT JOIN sbdata.PSTOCK ON (storef = GESART AND stosuc = 1)")
 
     def get_sql_where(self):
         if not self.importer.full:
@@ -106,11 +114,26 @@ class ProductMapper(EntityMapper):
         if value and value.startswith('|'):
             value = value.replace('|', '').strip()
             odoo_entity['active'] = False
+            odoo_entity['orderpoint_active'] = False
 
         else:
             odoo_entity['active'] = True
+            odoo_entity['orderpoint_active'] = True
 
         odoo_entity['name'] = value
+
+    def convert_orderpoint_qty_multiple(self, odoo_entity, db2_entity):
+        """
+        Set the oderpoint qty multiple only if there is a stock max
+        :param odoo_entity:
+        :param db2_entity:
+        :return:
+        """
+        if db2_entity['stomax']:
+            odoo_entity['orderpoint_qty_multiple'] = \
+                db2_entity['cp2z02'] or 1
+        else:
+            odoo_entity['orderpoint_qty_multiple'] = 0
 
     def convert_price_category_id(self, odoo_entity, db2_entity):
         value = db2_entity['gescre'].strip()
