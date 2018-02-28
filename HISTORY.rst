@@ -14,6 +14,7 @@ Unreleased
 * ALCN-1156: Fix product price xml export, wong node name and type of export
     Change node <Root> in <Prix> and <Row> into <PriceInfo>
     Make the export not differential but always full
+* ALCN-1157: WS02 Do no export pharmacist whose all clients are inactive
 
 **Build**
 
