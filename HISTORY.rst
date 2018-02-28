@@ -11,6 +11,9 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1152: Fix sale order report name bug, for client without reference
+* ALCN-1156: Fix product price xml export, wong node name and type of export
+    Change node <Root> in <Prix> and <Row> into <PriceInfo>
+    Make the export not differential but always full
 
 **Build**
 

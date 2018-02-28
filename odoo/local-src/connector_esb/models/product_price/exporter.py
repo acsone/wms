@@ -46,9 +46,17 @@ class ProductPriceCronExporter(Component):
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'product.price')
 
+    def _get_producer(self):
+        producer = super(ProductPriceCronExporter, self)._get_producer()
+        producer.list_item_el = 'PriceInfo'
+        producer.root_el = 'Prix'
+        producer.namespaces = ()
+        return producer
+
     def get_items(self, export_since):
+        """All items are exported each time"""
         self.update_saleprice_2()
-        return super(ProductPriceCronExporter, self).get_items(export_since)
+        return super(ProductPriceCronExporter, self).get_items(None)
 
     def update_saleprice_2(self):
         products = self.env['product.product'].search(self.get_items_domain())
