@@ -506,6 +506,11 @@ PRODUCT_ROUTES = {
     1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
 }
 
+BACKORDER_ACCEPTED = {
+    0: True,
+    1: False,
+}
+
 
 def phone_converter(*values):
     """ Try to guess landline and mobile phone numbers from a list of numbers.

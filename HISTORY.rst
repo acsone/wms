@@ -6,9 +6,20 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1105: Inverse imported value from DB2 of customer acceptance of backorder
+* ALCN-1113: get discount_global from AS400 on purchase order lines.
+* TODO update sample and full data on new release
+
 **Features and Improvements**
 
+* ALCN-1100: Set digits precision for product uom to 0
+* ALCN-1061: Set the default purchase tax
+
 **Bugfixes**
+
+* ALCN-1141: Do the missing load of free products information of supplierinfo
 
 **Build**
 
@@ -85,7 +96,7 @@ Unreleased
 
 * ALCN-1097: Fix XML Pharmacy, node e-mail contains False if email not referenced
    * Also fix that the XML nodes (fax, phone, city, zip) would contain False if
-     their respective field is empty 
+     their respective field is empty
 
 * ALCN-1103: XML Customer Address, set AddressId for shipping to zero if it is not a specific address
 

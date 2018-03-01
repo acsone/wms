@@ -239,6 +239,8 @@ class Supplierinfo(EntityMapper):
         FieldMapper('min_qty_sale', constant=1),
         FieldMapper('date_start', 'ccld', is_date=True),
         FieldMapper('date_end', 'cclf', is_date=True),
+        'ratio_main_product',
+        'ratio_promotional_product',
         'product_tmpl_id',
     ]
 
@@ -367,6 +369,7 @@ class CustomerMapper(EntityMapper):
 
         FieldMapper(
             'is_sale_back_order_accepted', 'clibor',
+            mapping=mappings.BACKORDER_ACCEPTED
         ),
 
         FieldMapper(

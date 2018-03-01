@@ -40,6 +40,8 @@ def settings(ctx):
 
     # Define the default chunk size
     ctx.env['ir.config_parameter'].set_param('account.chunk_size', 10)
+    # Default purchase tax
+    purchase_tax_21 = ctx.env.ref('l10n_be.1_attn_VAT-IN-V81-21')
 
     ctx.env['account.config.settings'].create({
         'fiscalyear_last_month': 9,
@@ -53,6 +55,7 @@ def settings(ctx):
         'group_proforma_invoices': True,
         'module_account_reports_followup': True,
         'default_sale_tax_id': tax_21.id,
+        'default_purchase_tax_id': purchase_tax_21.id,
         'module_payment_transfer': False,
         'group_analytic_account_for_sales': True,
         'group_analytic_account_for_purchases': True,
