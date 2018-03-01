@@ -26,6 +26,25 @@ Unreleased
 **Documentation**
 
 
+10.16.7 (2018-03-01)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCN-1170: Change TaxCode in wso2 customer export
+    0 is Belgium VAT number
+    1 is no VAT number
+    3 VAT number out of Belgium
+
+**Bugfixes**
+
+* ALCN-1152: Fix sale order report name bug, for client without reference
+* ALCN-1156: Fix product price xml export, wong node name and type of export
+    Change node <Root> in <Prix> and <Row> into <PriceInfo>
+    Make the export not differential but always full
+* ALCN-1157: WS02 Do no export pharmacist whose all clients are inactive
+
+
 10.16.6 (2018-02-21)
 ++++++++++++++++++++
 

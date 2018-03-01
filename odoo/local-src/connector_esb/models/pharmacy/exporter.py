@@ -54,4 +54,4 @@ class PharmacyCronExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'pharmacy')
 
     def get_items_domain(self):
-        return [('pharmacist_of_ids', '!=', False)]
+        return [('pharmacist_of_ids.active', '=', True)]

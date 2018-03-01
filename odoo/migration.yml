@@ -230,6 +230,7 @@ migration:
           - specific_report
           - stock_delivery_note
     - version: 10.16.7
+    - version: 10.17.0
       operations:
         post:
           - anthem songs.install.product::zero_digits_for_uom

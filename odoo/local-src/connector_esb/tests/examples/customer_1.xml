@@ -3,7 +3,7 @@
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
       <Taxvat>BE0477472701</Taxvat>
-      <TaxCode>1</TaxCode>
+      <TaxCode>0</TaxCode>
       <Firstname>Joe</Firstname>
       <Language>TLH</Language>
       <Petits_animaux>Y</Petits_animaux>
@@ -15,7 +15,7 @@
       <Email>joe@ch.ch</Email>
     </Row>
     <Row>
-      <TaxCode>0</TaxCode>
+      <TaxCode>1</TaxCode>
       <Firstname>Peter</Firstname>
       <Language>FR</Language>
       <IdDelegate/>

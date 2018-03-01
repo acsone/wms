@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 from odoo.tools import config
 
 
@@ -48,6 +49,12 @@ class SaleOrder(models.Model):
     def get_report_name(self):
         """Generate a specific name for the report save in ir.attachment"""
         self.ensure_one()
+        if not self.partner_id.ref:
+            raise UserError(_(
+                'The Quotation can not be printed the client {} ({}) \
+                 has no reference assigned.')
+                .format(self.partner_id.name, self.partner_id.id)
+            )
         return '_'.join([
             'cf',
             self.partner_id.ref,
