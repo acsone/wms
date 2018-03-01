@@ -229,3 +229,4 @@ migration:
           - sale_cancel_remaining
           - specific_report
           - stock_delivery_note
+    - version: 10.16.7
