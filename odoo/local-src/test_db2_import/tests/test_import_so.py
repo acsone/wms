@@ -130,7 +130,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 8.66,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'invoiced',
 
             'user_id': False,
@@ -173,7 +174,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 8.37,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'invoiced',
 
             'user_id': ref('__setup__.res_user_20'),  # Fabrice
@@ -218,7 +220,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 8.82,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'invoiced',
 
             'user_id': ref('__setup__.res_user_12'),  # Muriel
@@ -262,7 +265,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 503.73,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'invoiced',
 
             'user_id': ref('__setup__.res_user_19'),  # Patricia
@@ -310,7 +314,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 9.30,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'invoiced',
 
             'user_id': ref('__setup__.res_user_19'),  # Patricia
@@ -356,7 +361,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 85.28,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'to invoice',
 
             'user_id': ref('__setup__.res_user_12'),  # Muriel
@@ -402,7 +408,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 26.62,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'to invoice',
 
             'user_id': ref('__setup__.res_user_19'),  # Patricia
@@ -449,7 +456,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 10.47,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'to invoice',
 
             'user_id': ref('__setup__.res_user_2'),  # Raymond
@@ -495,7 +503,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 865.64,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime Intra-Communautaire
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_3'),
             'invoice_status': u'to invoice',
 
             'user_id': False,
@@ -539,7 +548,8 @@ class TestImportSO(DB2ImportTestCase):
             'amount_total': 55.01,
             'currency_id': ref('base.EUR'),
 
-            'fiscal_position_id': False,  # FIXME
+            # Régime National
+            'fiscal_position_id': ref('l10n_be.1_fiscal_position_template_1'),
             'invoice_status': u'to invoice',
 
             'user_id': ref('__setup__.res_user_12'),  # Muriel
