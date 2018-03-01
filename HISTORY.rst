@@ -8,6 +8,11 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1170: Change TaxCode in wso2 customer export
+    0 is Belgium VAT number
+    1 is no VAT number
+    3 VAT number out of Belgium
+
 **Bugfixes**
 
 * ALCN-1152: Fix sale order report name bug, for client without reference

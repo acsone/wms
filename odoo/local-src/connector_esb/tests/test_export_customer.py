@@ -136,7 +136,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'IdRound': '0000',
             'IdDelegate': '',
             'IdPharmacy': '',
-            'TaxCode': 1,
+            'TaxCode': 0,
             'OnlinePayment': False,
             'DepositNumber': u'2/1234/1234',
             'ErpId': u'3162',
