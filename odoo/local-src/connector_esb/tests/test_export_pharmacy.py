@@ -34,7 +34,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'fax': '021121212',
             'email': 'joe@ch.ch',
         })
-        self.all_records |= self.model.create({
+        self.pharmacist_1 = self.model.create({
             'ref': 'P',
             'name': 'Peter',
             'street': 'Chemin des Oies, 1',
@@ -46,6 +46,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'fax': '021121212',
             'email': 'peter@ch.ch',
         })
+        self.all_records |= self.pharmacist_1
         self.all_records |= self.model.create({
             'ref': 'O',
             'name': 'Olson',
@@ -56,7 +57,15 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'phone': '021123123',
             'fax': '021121212',
         })
-        self.env.ref('base.main_partner').pharmacist_id = self.all_records[1]
+        self.client_1 = self.env.ref('base.main_partner')
+        self.client_2 = self.model.create({
+            'ref': 'client_1',
+            'name': 'Yoyo',
+            'country_id': self.country_ch.id,
+        })
+        # Affect to the clients the pharmacist
+        self.client_1.pharmacist_id = self.pharmacist_1
+        self.client_2.pharmacist_id = self.pharmacist_1
         self.country_ch.esb_ref = 'HOP'
 
     def test_mapper(self):
@@ -185,6 +194,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             self.assertEqual(len(items), 1)
 
     def test_record_cron_exporter(self):
+        """Test that our pharmacist who has two clients get exported"""
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(
@@ -194,3 +204,30 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
 
         items = exporter.get_items('')
         self.assertEqual(len(items), 1)
+
+    def test_record_cron_exporter_2(self):
+        """Pharmacist with one client active and one not, should be exported"""
+        # So lets set one client of our pharmacist to inactive
+        self.client_1.active = False
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(
+                usage='record.exporter.cron',
+                model_name=self.model._name
+            )
+        items = exporter.get_items('')
+        self.assertEqual(len(items), 1)
+
+    def test_record_cron_exporter_3(self):
+        """Pharmacist whose all clients are inactive should not be exported"""
+        # So lets set the client of our pharmacist to inactive
+        self.client_1.active = False
+        self.client_2.active = False
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(
+                usage='record.exporter.cron',
+                model_name=self.model._name
+            )
+        items = exporter.get_items('')
+        self.assertEqual(len(items), 0)
