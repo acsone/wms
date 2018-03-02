@@ -6,42 +6,51 @@ Release History
 Unreleased
 ++++++++++
 
-**Data Migration**
-
-* ALCN-1067: Improve Sale order import to set fiscal position and pricelist and limit the api calls.
-* ALCN-1088: Change db2 import of sale order accessory products
-    Sale order line for product which are free and an additional product are not imported
-* ALCN-1105: Inverse imported value from DB2 of customer acceptance of backorder
-* ALCN-1112: Import unit of mesures on purchase orders from DB2
-* ALCN-1113: get discount_global from AS400 on purchase order lines.
-* ALCN-1016: Add inventory for products without lot
-* TODO update sample and full data on new release
-
 **Features and Improvements**
 
-* ALCN-1100: Set digits precision for product uom to 0
-* ALCN-1061: Set the default purchase tax
-* ALCN-1114: Performance: Product form view loading and sort order
-  (sort by internal reference and not by name otherwise the ORM creates
-  a subselect on the translations in many requests)
-* ALCN-136: Setup locations for scrap, return to supplier, return from customer
-
 **Bugfixes**
-
-* ALCN-1141: Do the missing load of free products information of supplierinfo
-* Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone
-* Fix reservation of expired product (migration to v10 issue).
-* Fix expired product removal. Make one operation per expired quant location.
-
-* ALCN-1163: Fix Error 500 in wso2 flux form Magento
-    Due to multiple line of tax on the sale order line.
-    Also change the quantity used to compute the total.
-* ALCN-1164: Fix generation error of the sale order report for NL customers
-* ALCN-1145: The code on round itinerary must be required
 
 **Build**
 
 **Documentation**
+
+
+10.17.0 (2018-03-02)
+++++++++++++++++++++
+
+**Data Migration**
+
+* ALCN-1016: Add inventory for products without lot.
+* ALCN-1067: Improve Sale order import to set fiscal position and pricelist and limit the api calls.
+* ALCN-1088: Change db2 import of sale order accessory products.
+    Sale order line for product which are free and an additional product are not imported.
+* ALCN-1105: Inverse imported value from DB2 of customer acceptance of backorder.
+* ALCN-1112: Import unit of mesures on purchase orders from DB2.
+* ALCN-1113: get discount_global from AS400 on purchase order lines.
+
+**Features and Improvements**
+
+* ALCN-136: Setup locations for scrap, return to supplier, return from customer.
+* ALCN-1061: Set the default purchase tax.
+* ALCN-1100: Set digits precision for product uom to 0.
+* ALCN-1114: Performance: Product form view loading and sort order.
+  (sort by internal reference and not by name otherwise the ORM creates
+  a subselect on the translations in many requests)
+
+**Bugfixes**
+
+* ALCN-1141: Do the missing load of free products information of supplierinfo.
+* ALCN-1145: The code on round itinerary must be required.
+
+* ALCN-1163: Fix Error 500 in wso2 flux form Magento.
+    Due to multiple line of tax on the sale order line.
+    Also change the quantity used to compute the total.
+
+* ALCN-1164: Fix generation error of the sale order report for NL customers.
+
+* Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone.
+* Fix reservation of expired product (migration to v10 issue).
+* Fix expired product removal. Make one operation per expired quant location.
 
 
 10.16.7 (2018-03-01)
