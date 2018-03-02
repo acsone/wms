@@ -84,6 +84,7 @@ def create_locations(ctx):
             'usage': 'customer',
             'ignore_quants_expiration': True,
         })
+    # FIXME to remove if agreed with customer
     # Note: Do not request quality to make stock moves
     # return_in = [
     #     ('__setup__.stock_location_in_return_new', 'Nouveau retour'),
@@ -754,6 +755,7 @@ def create_picking_types(ctx):
          'color': color_quality,
          'sequence': 80,
          },
+        # FIXME to remove if agreed with customer
         # {'xmlid': '__setup__.stock_scrap_quality',
         #  'name': 'Qualité Retours client',
         #  'code': 'internal',
