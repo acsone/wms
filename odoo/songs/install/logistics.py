@@ -68,13 +68,35 @@ def create_picking_zones(ctx):
 def create_locations(ctx):
     """ Creating stock locations """
     loc_stock = ctx.env.ref('stock.stock_location_stock')
-    root = ctx.env.ref('stock.stock_location_locations')
+    # root = ctx.env.ref('stock.stock_location_locations')
 
     # Input
     create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
         'usage': 'view',
         'active': True,
     })
+
+    # Retours Client
+    create_or_update(
+        ctx, 'stock.location', '__setup__.stock_location_in_return', {
+            'name': 'Retours client',
+            'location_id': loc_stock.id,
+            'usage': 'customer',
+            'ignore_quants_expiration': True,
+        })
+    # FIXME to remove if agreed with customer
+    # Note: Do not request quality to make stock moves
+    # return_in = [
+    #     ('__setup__.stock_location_in_return_new', 'Nouveau retour'),
+    #     ('__setup__.stock_location_in_return_tostore', 'A ranger'),
+    #     ]
+    # for xmlid, name in return_in:
+    #     create_or_update(ctx, 'stock.location', xmlid, {
+    #         'name': name,
+    #         'location_id': ctx.env.ref(
+    #           '__setup__.stock_location_in_return').id,
+    #         'usage': 'internal',
+    #     })
 
     # Reserves = Products available => under WH, above Stock
     reserves = [
@@ -200,50 +222,32 @@ def create_locations(ctx):
             'usage': 'internal',
         })
 
-    # Returns = Products unavailable => not under WH but under physical loc.
+    # Casse = Products unavailable => not under physical locations
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_return',
-        {
-            'name': 'Retours',
-            'location_id': root.id,
+        ctx, 'stock.location', 'stock.stock_location_scrapped', {
+            'name': 'Scrap',
+            'location_id': False,
             'usage': 'view',
         })
-    returns = [
-        ('__setup__.stock_location_return_ali', 'Retours Aliments'),
-        ('__setup__.stock_location_return_medoc', 'Retours Médicaments'),
-        ('__setup__.stock_location_return_frigo', 'Retours Frigo'),
-        ('__setup__.stock_location_return_mat', 'Retours Matériel'),
+    scrap = [
+        ('__setup__.stock_location_scrap_destroy', 'A détruire'),
+        ('__setup__.stock_location_scrap_quality', 'Problème Qualité'),
+        ('__setup__.stock_location_scrap_return', 'Retours Fournisseur'),
         ]
-    for xmlid, name in returns:
+    for xmlid, name in scrap:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
-            'location_id': ctx.env.ref('__setup__.stock_location_return').id,
+            'location_id': ctx.env.ref('stock.stock_location_scrapped').id,
             'usage': 'internal',
+            'ignore_quants_expiration': True,
         })
 
-    # Casse = Products unavailable => not under WH but under physical locations
     loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
     create_or_update(
         ctx, 'stock.location', '__setup__.stock_location_destroyed', {
             'name': 'Détruit',
             'location_id': loc_partner.id,
             'usage': 'customer',
-        })
-    create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_destroy',
-        {
-            'name': 'Casse',
-            'location_id': root.id,
-            'usage': 'view',
-        })
-    destroy = [
-        ('__setup__.stock_location_destroy_all', 'A détruire'),
-        ]
-    for xmlid, name in destroy:
-        create_or_update(ctx, 'stock.location', xmlid, {
-            'name': name,
-            'location_id': ctx.env.ref('__setup__.stock_location_destroy').id,
-            'usage': 'internal',
         })
 
     # Pharma
@@ -526,6 +530,7 @@ def create_putaway(ctx):
 def create_picking_types(ctx):
     """ Creating picking types """
     wh = ctx.env.ref('stock.warehouse0')
+    reception_sequence = wh.in_type_id.sequence_id
     picking_sequence = wh.pick_type_id.sequence_id
     delivery_sequence = wh.out_type_id.sequence_id
     internal_sequence = wh.int_type_id.sequence_id
@@ -548,27 +553,125 @@ def create_picking_types(ctx):
     location_reserve_medoc = ctx.env.ref(
         '__setup__.stock_location_reserve_medoc')
     location_reserve_ali = ctx.env.ref('__setup__.stock_location_reserve_ali')
-    location_retours = ctx.env.ref('__setup__.stock_location_return')
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
-    location_casse = ctx.env.ref('__setup__.stock_location_destroy')
+    location_customers = ctx.env.ref('stock.stock_location_customers')
     location_pharma = ctx.env.ref('__setup__.stock_location_pharma')
-    location_detruit = ctx.env.ref('__setup__.stock_location_destroyed')
+    location_in_return = ctx.env.ref('__setup__.stock_location_in_return')
+    location_scrap = ctx.env.ref('stock.stock_location_scrapped')
+    location_scrap_quality = ctx.env.ref(
+        '__setup__.stock_location_scrap_quality')
+    location_scrap_return = ctx.env.ref(
+        '__setup__.stock_location_scrap_return')
+    location_destroyed = ctx.env.ref('__setup__.stock_location_destroyed')
 
-    color_ali = 2
-    color_mat = 4
-    color_froid = 6
-    color_medoc = 7
-    color_back = 8
+    color_mrp = 0
+    color_in = 1
+    color_rangement = 2
+    color_reassort = 3
+    color_internal = 4
+    color_pick = 5
+    color_scrap = 6
+    color_quality = 7
+    color_out = 8
 
     types = [
-        {'xmlid': 'stock.picking_type_internal',
-         'active': True,
-         },
         {'xmlid': 'stock.picking_type_in',
+         'name': u'Réception des achats',
          'use_create_lots': False,
          'use_existing_lots': True,
          'subcode': 'RECEIVE',
+         'color': color_in,
+         'sequence': 10,
          },
+        {'xmlid': '__setup__.picking_type_in_return',
+         'name': 'Retours Client',
+         'code': 'incoming',
+         'sequence_id': reception_sequence.id,
+         'default_location_src_id': location_customers.id,
+         'default_location_dest_id': location_in_return.id,
+         'use_create_lots': False,
+         'use_existing_lots': True,
+         'subcode': 'RECEIVE',
+         'color': color_in,
+         'sequence': 20,
+         },
+
+        {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
+         'name': 'Rangement Medicaments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_medoc.id,
+         'default_location_dest_id': location_medoc.id,
+         'use_create_lots': False,
+         'color': color_rangement,
+         'sequence': 30,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_ali',
+         'name': 'Rangement Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_ali.id,
+         'default_location_dest_id': location_ali.id,
+         'use_create_lots': False,
+         'color': color_rangement,
+         'sequence': 31,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
+         'name': 'Rangement Matériel',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_materiel.id,
+         'default_location_dest_id': location_mat.id,
+         'use_create_lots': False,
+         'color': color_rangement,
+         'sequence': 32,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
+         },
+        {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
+         'name': 'Rangement Frigo',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_parking_frigo.id,
+         'default_location_dest_id': location_frigo.id,
+         'use_create_lots': False,
+         'color': color_rangement,
+         'sequence': 33,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
+         },
+
+        {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
+         'name': 'Reassort Medicaments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_medoc.id,
+         'default_location_dest_id': location_medoc.id,
+         'use_create_lots': False,
+         'color': color_reassort,
+         'sequence': 40,
+         'picking_zone_id': ctx.env.ref(
+             '__setup__.picking_zone_medicament').id,
+         },
+        {'xmlid': '__setup__.stock_picking_type_reassort_ali',
+         'name': 'Reassort Aliments',
+         'code': 'internal',
+         'sequence_id': internal_sequence.id,
+         'default_location_src_id': location_reserve_ali.id,
+         'default_location_dest_id': location_ali.id,
+         'use_create_lots': False,
+         'color': color_reassort,
+         'sequence': 41,
+         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
+         },
+
+        {'xmlid': 'stock.picking_type_internal',
+         'active': True,
+         'sequence': 50,
+         'color': color_internal,
+         },
+
         {'xmlid': '__setup__.stock_picking_type_materiel',
          'name': 'Pick Matériel',
          'code': 'internal',
@@ -578,8 +681,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
-         'color': color_mat,
-         'sequence': 6,
+         'color': color_pick,
+         'sequence': 60,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
          },
         {'xmlid': '__setup__.stock_picking_type_ali',
@@ -591,8 +694,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
-         'color': color_ali,
-         'sequence': 5,
+         'color': color_pick,
+         'sequence': 61,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
          'is_portable_printer': True,
          },
@@ -605,8 +708,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
-         'color': color_medoc,
-         'sequence': 4,
+         'color': color_pick,
+         'sequence': 62,
          'picking_zone_id': ctx.env.ref(
              '__setup__.picking_zone_medicament').id,
          },
@@ -619,8 +722,8 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
-         'color': color_froid,
-         'sequence': 7,
+         'color': color_pick,
+         'sequence': 63,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
          },
         {'xmlid': '__setup__.stock_picking_type_humain',
@@ -632,99 +735,64 @@ def create_picking_types(ctx):
          'use_create_lots': False,
          'subcode': 'PICK',
          'groupbypartner': True,
-         'color': color_mat,
-         'sequence': 8,
+         'color': color_pick,
+         'sequence': 64,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_humain').id,
          },
 
-        {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
-         'name': 'Rangement Medicaments',
-         'code': 'internal',
-         'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_parking_medoc.id,
-         'default_location_dest_id': location_medoc.id,
-         'use_create_lots': False,
-         'color': color_medoc,
-         'sequence': 9,
-         'picking_zone_id': ctx.env.ref(
-             '__setup__.picking_zone_medicament').id,
-         },
-        {'xmlid': '__setup__.stock_picking_type_rangement_ali',
-         'name': 'Rangement Aliments',
-         'code': 'internal',
-         'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_parking_ali.id,
-         'default_location_dest_id': location_ali.id,
-         'use_create_lots': False,
-         'color': color_ali,
-         'sequence': 9,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
-         },
-        {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
-         'name': 'Rangement Matériel',
-         'code': 'internal',
-         'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_parking_materiel.id,
-         'default_location_dest_id': location_mat.id,
-         'use_create_lots': False,
-         'color': color_mat,
-         'sequence': 9,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
-         },
-        {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
-         'name': 'Rangement Frigo',
-         'code': 'internal',
-         'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_parking_frigo.id,
-         'default_location_dest_id': location_frigo.id,
-         'use_create_lots': False,
-         'color': color_froid,
-         'sequence': 9,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
+        {'xmlid': 'stock_expired.picking_type_scrap',
+         'color': color_scrap,
+         'sequence': 70,
          },
 
-        {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
-         'name': 'Reassort Medicaments',
+        {'xmlid': '__setup__.stock_scrap_quality',
+         'name': 'Qualité Scrap - Casse',
          'code': 'internal',
          'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_reserve_medoc.id,
-         'default_location_dest_id': location_medoc.id,
+         'default_location_src_id': location_scrap_quality.id,
+         'default_location_dest_id': location_scrap.id,
          'use_create_lots': False,
-         'color': color_medoc,
-         'sequence': 10,
-         'picking_zone_id': ctx.env.ref(
-             '__setup__.picking_zone_medicament').id,
+         'color': color_quality,
+         'sequence': 80,
          },
-        {'xmlid': '__setup__.stock_picking_type_reassort_ali',
-         'name': 'Reassort Aliments',
-         'code': 'internal',
-         'sequence_id': internal_sequence.id,
-         'default_location_src_id': location_reserve_ali.id,
-         'default_location_dest_id': location_ali.id,
-         'use_create_lots': False,
-         'color': color_ali,
-         'sequence': 11,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
+        # FIXME to remove if agreed with customer
+        # {'xmlid': '__setup__.stock_scrap_quality',
+        #  'name': 'Qualité Retours client',
+        #  'code': 'internal',
+        #  'sequence_id': internal_sequence.id,
+        #  'default_location_src_id': ctx.env.ref(
+        #       '__setup__.stock_location_in_return_new').id,
+        #  'default_location_dest_id': ctx.env.ref(
+        #       '__setup__.stock_location_in_return_tostore').id,
+        #  'use_create_lots': False,
+        #  'color': color_quality,
+        #  'sequence': 81,
+        #  },
+
+        {'xmlid': 'stock.picking_type_out',
+         'active': True,
+         'color': color_out,
+         'sequence': 90,
          },
         {'xmlid': '__setup__.stock_picking_type_return',
-         'name': 'Retours',
+         'name': 'Retours fournisseur',
          'code': 'outgoing',
          'sequence_id': delivery_sequence.id,
-         'default_location_src_id': location_retours.id,
+         'default_location_src_id': location_scrap_return.id,
          'default_location_dest_id': location_supplier.id,
          'use_create_lots': False,
-         'color': color_back,
-         'sequence': 12,
+         'color': color_out,
+         'sequence': 91,
          },
         {'xmlid': '__setup__.stock_picking_type_destroy',
          'name': 'Destructions',
          'code': 'outgoing',
          'sequence_id': delivery_sequence.id,
-         'default_location_src_id': location_casse.id,
-         'default_location_dest_id': location_detruit.id,
+         'default_location_src_id': location_scrap.id,
+         'default_location_dest_id': location_destroyed.id,
          'use_create_lots': False,
-         'color': color_back,
-         'sequence': 13,
+         'color': color_out,
+         'sequence': 92,
          },
     ]
     for record in types:
@@ -735,6 +803,16 @@ def create_picking_types(ctx):
         'default_location_dest_id': ctx.env.ref(
             'stock.stock_location_company').id
     })
+    ctx.env['stock.picking.type'].search([('name', '=', 'Pick')]).write({
+        'subcode': 'PICK',
+        'sequence': 59,
+        'color': color_pick,
+        })
+    ctx.env['stock.picking.type'].search([('code', '=', 'mrp_operation')])\
+        .write({
+            'sequence': 89,
+            'color': color_mrp,
+            })
 
 
 @anthem.log

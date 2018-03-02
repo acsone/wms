@@ -24,11 +24,14 @@ Unreleased
 * ALCN-1114: Performance: Product form view loading and sort order
   (sort by internal reference and not by name otherwise the ORM creates
   a subselect on the translations in many requests)
+* ALCN-136: Setup locations for scrap, return to supplier, return from customer
 
 **Bugfixes**
 
 * ALCN-1141: Do the missing load of free products information of supplierinfo
 * Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone
+* Fix reservation of expired product (migration to v10 issue).
+* Fix expired product removal. Make one operation per expired quant location.
 
 * ALCN-1163: Fix Error 500 in wso2 flux form Magento
     Due to multiple line of tax on the sale order line.

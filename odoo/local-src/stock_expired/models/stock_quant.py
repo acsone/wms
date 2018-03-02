@@ -34,18 +34,8 @@ class StockQuant(models.Model):
         company_id=False, initial_domain=None
     ):
         deny_reservation_for_quants_expired = True
-
-        context = self.env.context or {}
-        if (
-            context.get('params') and
-            context.get('params').get('model') == 'stock.picking' and
-            context.get('params').get('id')
-        ):
-            picking = self.env['stock.picking'].browse(
-                context['params']['id']
-            )
-            if picking and picking.to_process_quant_expired:
-                deny_reservation_for_quants_expired = False
+        if move.picking_id.to_process_quant_expired:
+            deny_reservation_for_quants_expired = False
 
         new_domain = initial_domain or []
         if deny_reservation_for_quants_expired:
@@ -99,13 +89,15 @@ class StockQuant(models.Model):
             ('id', 'not in', quants_already_processed.ids)
         ]
         quants = self.env['stock.quant'].search(domain)
-        if len(quants) > 0:
-            picking_type = self.env.ref('stock.picking_type_internal')
-            location_src = self.env.ref('stock.stock_location_stock')
-            location_dest = self.env.ref('stock.stock_location_scrapped')
+        picking_type = self.env.ref('stock_expired.picking_type_scrap')
+        location_dest = picking_type.default_location_dest_id
+        for location_src, quants_bylocation in itertools.groupby(
+            quants,
+            lambda q: q.location_id,
+        ):
             move_lines = []
             for product, product_quants in itertools.groupby(
-                quants,
+                quants_bylocation,
                 lambda q: q.product_id,
             ):
                 quantity = 0
@@ -132,3 +124,4 @@ class StockQuant(models.Model):
                 'move_lines': move_lines,
             })
             picking.action_confirm()
+            picking.action_assign()
