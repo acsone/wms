@@ -10,6 +10,8 @@ from calendar import monthrange
 from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
 
+from .. import mappings
+
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -214,7 +216,8 @@ class DB2MapperPurchaseOrder(object):
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
             "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"
-            "       dcfmjj, dcfmmm, dcfmaa, dcfmss"
+            "       dcfmjj, dcfmmm, dcfmaa, dcfmss,"
+            "       dcfunv"
             " FROM db2_pdetcdfo WHERE order_id = %s")
         cr.execute(query, [row['id']])
 
@@ -249,7 +252,7 @@ class DB2MapperPurchaseOrder(object):
                 'sequence': line['dcfnli'],
                 'name': name or line['dcflib'],
                 'product_qty': line['dcfquc'],
-                'product_uom': rec.env.ref('product.product_uom_unit').id,
+                'product_uom': rec.env.ref(mappings.UOM[line['dcfunv']]).id,
                 'qty_received': line['dcfqul'],
                 'price_unit': line['dcfpac'],
                 'discount_global': line['dcfres'],
