@@ -52,6 +52,10 @@ Unreleased
 * Fix reservation of expired product (migration to v10 issue).
 * Fix expired product removal. Make one operation per expired quant location.
 
+**Build**
+
+* Update submodules
+
 
 10.16.7 (2018-03-01)
 ++++++++++++++++++++

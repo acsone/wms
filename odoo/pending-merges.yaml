@@ -46,15 +46,6 @@
   merges:
     - odoo 10.0
   target: *default_target
-./external-src/purchase-workflow:
-  remotes:
-    oca: git@github.com:OCA/purchase-workflow.git
-    camptocamp: git@github.com:camptocamp/purchase-workflow.git
-  merges:
-    - oca 10.0
-      # Add the module purchase_cancel_reason
-    - oca refs/pull/438/head
-  target: *default_target
 ./external-src/queue:
   remotes:
     oca: git@github.com:OCA/queue.git
