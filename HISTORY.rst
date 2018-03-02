@@ -19,6 +19,7 @@ Unreleased
 
 * ALCN-1100: Set digits precision for product uom to 0
 * ALCN-1061: Set the default purchase tax
+* Performance: Product form view loading and sort order (sort by internal reference and not by name otherwise the ORM creates a subselect on the translations in many requests)
 
 **Bugfixes**
 
