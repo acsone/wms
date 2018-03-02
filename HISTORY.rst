@@ -30,6 +30,10 @@ Unreleased
 * ALCN-1141: Do the missing load of free products information of supplierinfo
 * Delivery rounds: Do not allow to delete a started delivery round. Display a progress by picking zone
 
+* ALCN-1163: Fix Error 500 in wso2 flux form Magento
+    Due to multiple line of tax on the sale order line.
+    Also change the quantity used to compute the total.
+
 **Build**
 
 **Documentation**

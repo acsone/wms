@@ -77,14 +77,14 @@ class StatisticsFormWebserviceMessage(Component):
                 # compute total price only for delivered items
                 price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
                 taxes = line.tax_id.compute_all(
-                    price, line.order_id.currency_id, delivered,
+                    price, line.order_id.currency_id, line.qty_delivered,
                     product=line.product_id,
                     partner=line.order_id.partner_shipping_id
                 )
                 total += taxes['total_excluded']
 
             product = lines[0].product_id
-            rate = lines[0].tax_id.amount if lines[0].tax_id else 0.0
+            rate = sum(lines[0].tax_id.mapped('amount'))
             supplier = (','.join(product.mapped('seller_ids.name.ref'))
                         if product.seller_ids else '')
             values = {
