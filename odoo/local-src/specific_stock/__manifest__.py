@@ -23,6 +23,7 @@
         'stock_receive_lot',
         'stock_reception_priority',
         'stock_picking_assignment',
+        'stock_picking_zone',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
@@ -35,8 +36,6 @@
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
-        'views/stock_picking_type.xml',
-        'views/picking_zone.xml',
         'views/stock_move.xml',
 
         # Wizards

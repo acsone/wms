@@ -23,7 +23,8 @@
         'stock_barcode_fix',
         'stock_picking_fillwithstock',
         'stock_groupbypartner',
-        'procurement_sale'
+        'procurement_sale',
+        'stock_picking_zone',
     ],
     'data': [
         # Views

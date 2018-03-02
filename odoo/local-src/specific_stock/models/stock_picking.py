@@ -4,7 +4,7 @@
 
 from datetime import date
 
-from odoo import models, api, _, fields
+from odoo import models, api, _
 from odoo.exceptions import Warning
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.exceptions import UserError
@@ -14,8 +14,6 @@ DATE_LENGTH = len(date.today().strftime(DATE_FORMAT))
 
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
-
-    picking_zone_id = fields.Many2one('picking.zone', string='Picking zone')
 
     @api.multi
     def name_get(self):

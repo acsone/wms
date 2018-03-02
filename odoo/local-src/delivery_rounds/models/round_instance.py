@@ -327,23 +327,43 @@ class RoundInstance(models.Model):
         readonly=True)
     count_picking_available_weight = fields.Integer(
         'Picking Available Total',
-        compute='_get_count_picking',
+        compute='_get_count_weight',
         readonly=True)
 
-    @api.one
+    @api.depends('picking_ids')
+    def _get_count_weight(self):
+        self._cr.execute("""
+            SELECT picking.delivery_round_id,
+            sum(coalesce(product_template.weight, 0) *
+                coalesce(stock_pack_operation.product_qty, 0))
+            FROM stock_picking picking
+            LEFT JOIN stock_picking_type
+                ON picking.picking_type_id = stock_picking_type.id
+            LEFT JOIN stock_pack_operation
+                ON stock_pack_operation.picking_id = picking.id
+            LEFT JOIN product_product
+                ON stock_pack_operation.product_id = product_product.id
+            LEFT JOIN product_template
+                ON product_product.product_tmpl_id = product_template.id
+            WHERE picking.state IN ('partially_available', 'assigned', 'done')
+            AND stock_picking_type.subcode = 'PICK'
+            AND picking.delivery_round_id in %s
+            GROUP BY picking.delivery_round_id
+            """, (tuple(self.ids), ))
+        for r in self._cr.fetchall():
+            self.browse(r[0]).count_picking_available_weight = r[1]
+
     @api.depends('picking_ids')
     def _get_count_picking(self):
-        self.count_picking_done_total = len(self.picking_ids.filtered(
-            lambda r: r.state == ('done')))
-        pickings = self.picking_ids.filtered(
-            lambda r: r.state in ('partially_available', 'assigned', 'done'))
-        self.count_picking_available_total = len(pickings)
-        self.count_picking_available_partner = \
-            len(pickings.mapped('partner_id'))
-        weight = 0.0
-        for pack in pickings.mapped('pack_operation_ids'):
-            weight += pack.product_id.weight * pack.product_qty
-        self.count_picking_available_weight = weight
+        for rec in self:
+            rec.count_picking_done_total = len(rec.picking_ids.filtered(
+                lambda r: r.state == ('done')))
+            pickings = rec.picking_ids.filtered(
+                lambda r: r.state in ('partially_available', 'assigned',
+                                      'done'))
+            rec.count_picking_available_total = len(pickings)
+            rec.count_picking_available_partner = \
+                len(pickings.mapped('partner_id'))
 
     @api.multi
     def action_picking_tree_available(self):
@@ -407,6 +427,9 @@ class RoundInstance(models.Model):
 
     @api.multi
     def unlink(self):
+        if self.mapped('state') != ['draft']:
+            raise UserError(_(
+                'You cannot delete a delivery round that has been started'))
         pickings = self.mapped('picking_ids')
         res = super(RoundInstance, self).unlink()
         # @api.constrains is not triggered on source model when referenced
