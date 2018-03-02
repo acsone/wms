@@ -968,6 +968,92 @@ class ProductStockBinMapper(EntityMapper):
         return query, []
 
 
+class StockInventoryLineWithoutLot(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = "id"
+
+    PRODUCT_WITHOUT_LOT_KEY = [key for key, value
+                               in mappings.PRODUCT_TRACKING.iteritems()
+                               if value == 'none']
+
+    FIELDS_MAPPING = {
+        'id': concat('storef', delimiter='_'),
+        'product_id/id': ref('product', 'storef', '__import__', check=False),
+        'product_qty': lambda rec: max(int(rec['stosto']), 0),
+        'location_id/id': ref('location',
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_query(self):
+        """
+        Take only stock from depot 1 (PSTOCK.stosuc = 1)
+        and products without lot (PGESTION.gesca = 0)
+        :return:
+        """
+        query = """
+        SELECT storef, stolop, stosto FROM sbdata.PSTOCK
+          INNER JOIN SBDATA.PGESTION ON GESART = STOREF
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        AND stosuc = '1'
+        AND gescsa = '0'
+        """
+        if not self.importer.full:
+            query += """
+                    AND storef IN (SELECT dccart
+                                FROM sbdata.PDETCDCL
+                                WHERE dccsui >= %s AND dccsui <= %s)
+                    """ % (SO_MIN, SO_MAX)
+        return query, []
+
+
+class StockInventoryLineWithSerial(EntityMapper):
+    DB2_NAME = 'PSTOCK'
+
+    XMLID_FIELD = "id"
+
+    PRODUCT_WITHOUT_LOT_KEY = [key for key, value
+                               in mappings.PRODUCT_TRACKING.iteritems()
+                               if value == 'none']
+
+    FIELDS_MAPPING = {
+        'id': concat('storef', delimiter='_'),
+        'product_id/id': ref('product', 'storef', '__import__', check=False),
+        'product_qty': lambda rec: max(int(rec['stosto']), 0),
+        'location_id/id': ref('location',
+                              concat(const('loc'),
+                                     call(lambda rec: rec['stolop'][:6]),
+                                     delimiter='_'),
+                              '__import__', check=False),
+    }
+
+    def get_sql_query(self):
+        """
+        Take only stock from depot 1 (PSTOCK.stosuc = 1)
+        and products with serial number (PGESTION.gesca = 4)
+        :return:
+        """
+        query = """
+        SELECT storef, stolop, stosto FROM sbdata.PSTOCK
+          INNER JOIN SBDATA.PGESTION ON GESART = STOREF
+        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
+        AND stosuc = '1'
+        AND gescsa = '4'
+        """
+        if not self.importer.full:
+            query += """
+                    AND storef IN (SELECT dccart
+                                FROM sbdata.PDETCDCL
+                                WHERE dccsui >= %s AND dccsui <= %s)
+                    """ % (SO_MIN, SO_MAX)
+        return query, []
+
+
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   AdditionalProductMapper,
                   Supplierinfo,
@@ -977,9 +1063,10 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   SaleOrderLineMapper,
                   StockProductionLotMapper,
                   StockInventoryLineMapper,
-                  ProductStockBinMapper
+                  ProductStockBinMapper,
+                  StockInventoryLineWithoutLot,
+                  StockInventoryLineWithSerial
                   ]
-
 
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        AdditionalProductMapper,
@@ -988,5 +1075,7 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        CustomerAddressMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
-                       ProductStockBinMapper
+                       ProductStockBinMapper,
+                       StockInventoryLineWithoutLot,
+                       StockInventoryLineWithSerial
                        ]

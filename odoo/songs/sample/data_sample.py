@@ -148,6 +148,29 @@ def import_inventory(ctx):
 
 
 @anthem.log
+def import_inventory_without_lot(ctx):
+    """ Importing inventory from csv"""
+    inventory = ctx.env['stock.inventory'].create({
+        'name': 'Initial (products without lot)',
+        })
+
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    ctx.env.context = load_ctx
+
+    model = 'stock.inventory.line'
+    content = resource_stream(
+        req, 'data/sample/stock_inventory_line_without_lot.csv')
+    header, rows = read_csv(content)
+    header.append('inventory_id/.id')
+    new_rows = []
+    for row in rows:
+        row.append(inventory.id)
+        new_rows.append(row)
+    load_rows(ctx, model, header, list(new_rows))
+
+
+@anthem.log
 def import_stock_bins(ctx):
     """ Importing Stock Bins"""
     content = resource_stream(req, 'data/sample/product_stock_bin.csv')
@@ -198,6 +221,7 @@ def main(ctx):
     import_pricelist_items(ctx)
     import_lots(ctx)
     import_inventory(ctx)
+    import_inventory_without_lot(ctx)
     import_stock_bins(ctx)
     import_delivery_round_config(ctx)
     post_import_stock_bins(ctx)

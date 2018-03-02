@@ -12,6 +12,7 @@ Unreleased
 * ALCN-1105: Inverse imported value from DB2 of customer acceptance of backorder
 * ALCN-1112: Import unit of mesures on purchase orders from DB2
 * ALCN-1113: get discount_global from AS400 on purchase order lines.
+* ALCN-1016: Add inventory for products without lot
 * TODO update sample and full data on new release
 
 **Features and Improvements**
