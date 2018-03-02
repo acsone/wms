@@ -36,6 +36,7 @@ class TestStockPicking(common.TransactionCase):
         round_itinerary = self.env['round.itinerary'].create({
             'sequence': 100,
             'name': 'Test itinerary',
+            'code': 'TEST1',
             'template_ids': [(6, 0, [round_template.id])],
             'partner_position_ids': [(0, 0, {
                 'sequence': 1,

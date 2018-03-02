@@ -235,3 +235,6 @@ migration:
       operations:
         post:
           - anthem songs.install.product::zero_digits_for_uom
+      addons:
+        upgrade:
+          - delivery_rounds

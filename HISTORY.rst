@@ -37,6 +37,7 @@ Unreleased
     Due to multiple line of tax on the sale order line.
     Also change the quantity used to compute the total.
 * ALCN-1164: Fix generation error of the sale order report for NL customers
+* ALCN-1145: The code on round itinerary must be required
 
 **Build**
 
