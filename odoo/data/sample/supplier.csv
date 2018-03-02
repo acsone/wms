@@ -1,6 +1,7 @@
 id,ref,name,street,zip,city,phone,fax,email,vat,delivery_lead_time,customer,supplier,alcyon_category_id/id,country_id/id,lang,is_purchase_back_order_accepted,mobile
 __import__.supplier_60422,60422,DECHRA VETERINARY PRODUCTS *,Achterstenhoek 48,2275,LILLE,014/443670,014443679,,BE0408216679,7,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
 __import__.supplier_60425,60425,AGORA SANA SCRL,Rue Porte à Camp 10-12,7971,BASECLES,069/773854,069224028,commandes@agorasana.be,,3,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
+__import__.supplier_61520,61520,CAREFUSION,Erembodegem-Dorp 86,9320,EREMBODEGEM,053/720211,053720549 *,,BE0455334925,10,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
 __import__.supplier_61582,61582,ALANINE LABORATORY,Route de Wallonie 138 boîte 1,7011,GHLIN,065/450560,065450564,info@alanine.be,BE0426265015,1,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
 __import__.supplier_61593,61593,"ANDOVER HEALTHCARE,INC",FANARAS DRIVE 9,MA01952,SALISBURY,0019784650044,0019784620003,,,30,False,True,specific_partner.partner_category_supplier,base.us,fr_BE,True,
 __import__.supplier_61645,61645,ASP INTERNATIONAL,Herentalsesteenweg 54,2270,HERENTHOUT,015/249846,015245458,info@asp-international.be,,3,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
@@ -50,6 +51,7 @@ __import__.supplier_77603,77603,PRODIVET PHARMACEUTICALS SA,Hagbenden 39C,4731,E
 __import__.supplier_77614,77614,POLYSEM SAS,Rue Jean Moulin,78120,RAMBOUILLET,0033/233346439,0033233341198*,,FR19639804889,42,False,True,specific_partner.partner_category_supplier,base.fr,fr_BE,True,
 __import__.supplier_77640,77640,PHYTOVET ANIMAL HEALTH,Leuvensebaan 164,2580,PUTTE,015/753347,015760905,,BE0464339493,7,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
 __import__.supplier_77666,77666,PHARMACIE DU SOUVERAIN,Boulevard du Souverain 264,1160,BRUXELLES(AUDERGHEM),02/6728249,,orders.alcyon@pharmaciesouverain.be,BE0885751837,15,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
+__import__.supplier_77690,77690,PROPHAC SARL,BP 2063,L-1020,LUXEMBOURG,003524824821,00352482482482,contact@prophac.lu,LU11714218,4,False,True,specific_partner.partner_category_supplier,base.lu,fr_BE,True,
 __import__.supplier_77800,77800,VETOQUINOL FRANCE,Rue des Jeûneurs 31,75002,PARIS,,,,,15,False,True,specific_partner.partner_category_supplier,base.fr,fr_BE,True,
 __import__.supplier_78650,78650,ROYAL CANIN  *,Kleine Kloosterstraat 8,1932,Zaventem,02/4215337,080095124,,BE0418907861,9,False,True,specific_partner.partner_category_supplier,base.be,fr_BE,True,
 __import__.supplier_79000,79000,ALCYON SITE ARRAS MATERIEL.,Boulevard Jules César BP3,62051,ST LAURENT BLANGY CEDEX,0033321246563,0033321242934,,FR05409166691,5,False,True,specific_partner.partner_category_supplier,base.fr,fr_BE,True,
