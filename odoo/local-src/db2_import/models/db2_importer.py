@@ -215,9 +215,9 @@ class DB2MapperPurchaseOrder(object):
 
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
+            "       dcfres, dcfunv,"
             "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"
-            "       dcfmjj, dcfmmm, dcfmaa, dcfmss,"
-            "       dcfunv"
+            "       dcfmjj, dcfmmm, dcfmaa, dcfmss"
             " FROM db2_pdetcdfo WHERE order_id = %s")
         cr.execute(query, [row['id']])
 
