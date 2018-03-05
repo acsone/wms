@@ -67,6 +67,7 @@ ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/stock-logistics-warehouse, \
   /opt/odoo/external-src/stock-logistics-workflow, \
   /opt/odoo/external-src/web, \
+  /opt/odoo/external-src/partner-contact, \
   /opt/odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \
