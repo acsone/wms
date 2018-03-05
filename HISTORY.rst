@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1109: Create partial receptions on imported in progress purchases
+* ALCN-1109: Set invoiced quantities by creating an invoice on imported in progress purchases
 
 **Features and Improvements**
 

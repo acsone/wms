@@ -178,6 +178,54 @@ def do_final_picking(pick, lines, lots):
         pick.do_new_transfer()
 
 
+def create_supplier_invoice(order, lines):
+
+    # nfa is a reference to an invoice qul is received qty
+    invoiced_lines = [l for l in lines if l['dcfnfa'] and l['dcfqul'] > 0]
+    if not invoiced_lines:
+        return
+    invoiced_lines_no = [l['dcfnli'] for l in invoiced_lines]
+
+    journal_domain = [
+        ('type', '=', 'purchase'),
+        ('company_id', '=', order.company_id.id),
+        ('currency_id', '=', order.currency_id.id),
+    ]
+    journal = order.env['account.journal'].search(journal_domain, limit=1)
+    if not journal:
+        journal_domain = [
+            ('type', '=', 'purchase'),
+            ('company_id', '=', order.company_id.id),
+        ]
+        journal = order.env['account.journal'].search(journal_domain, limit=1)
+    partner = order.partner_id
+    pay_account = partner.property_account_payable_id
+    payment_term = partner.property_supplier_payment_term_id
+    delivery_partner_id = partner.address_get(['delivery'])['delivery']
+    fp_id = order.env['account.fiscal.position'].get_fiscal_position(
+        partner.id, delivery_id=delivery_partner_id)
+
+    vals = {'purchase_id': order.id,
+            'type': 'in_invoice',
+            'partner_id': partner.id,
+            'journal_id': journal.id,
+            'account_id': pay_account.id,
+            'payment_term_id': payment_term.id,
+            'fiscal_position_id': fp_id,
+            }
+    invoice = order.env['account.invoice'].create(vals)
+
+    new_lines = order.env['account.invoice.line']
+    for line in order.order_line:
+        if line.sequence in invoiced_lines_no:
+            data = invoice._prepare_invoice_line_from_po_line(line)
+            new_line = new_lines.create(data)
+            new_line._set_additional_fields(invoice)
+            new_lines += new_line
+    invoice.invoice_line_ids = new_lines
+    invoice.state = 'paid'
+
+
 class DB2MapperPurchaseOrder(object):
 
     @classmethod
@@ -347,6 +395,8 @@ class DB2MapperPurchaseOrder(object):
                             [d[0] for d in cr.description]
                          )} for lot in lots]
                 do_partial_picking(pick, pick_lines, lots)
+                # create invoice for invoiced lines
+                create_supplier_invoice(new, lines)
 
 
 class DB2MapperSaleOrder(object):
