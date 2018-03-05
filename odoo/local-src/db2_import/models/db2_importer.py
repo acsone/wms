@@ -98,8 +98,20 @@ def do_partial_picking(pick, lines, lots):
     for line in lines:
         product_xmlid = convert_product_id(line['product'])
         product = pick.env.ref(product_xmlid)
+        move = pick.move_lines.filtered(
+            lambda p: p.product_id == product)
+        move_update_vals = {}
+        if line.get('date'):
+            move_update_vals['date'] = line['date']
+        if line.get('date_expected'):
+            move_update_vals['date_expected'] = line['date_expected']
+
+        if move_update_vals:
+            move.write(move_update_vals)
+
         ope = pick.pack_operation_ids.filtered(
             lambda p: p.product_id == product)
+
         if not ope:
             continue
         # += to make sure than we process all qty if there are
@@ -253,11 +265,14 @@ class DB2MapperPurchaseOrder(object):
     @classmethod
     def map_orderline2move(cls, lines):
         mapping = [
-            ('product', 'dcfart'),
-            ('qty_done', 'dcfqul'),
-            ('line_no', 'dcfnli'),
+            ('product', 'dcfart', False),
+            ('qty_done', 'dcfqul', False),
+            ('line_no', 'dcfnli', False),
+            ('date', 'dcfc', convert_date),
+            ('date_expected', 'dcfl', convert_date),
         ]
-        pick_lines = [{src: l[dest] for src, dest in mapping} for l in lines]
+        pick_lines = [{src: fct(dest, l) if fct else l[dest]
+                       for src, dest, fct in mapping} for l in lines]
         return pick_lines
 
     @classmethod
@@ -265,9 +280,9 @@ class DB2MapperPurchaseOrder(object):
         cr = rec.env.cr
         query = (
             "SELECT id, ecfsui, ecfrin, ecfrcl, ecfuti, ecffou, ecfsuc,"
-            "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"
-            "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"
-            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"
+            "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"  # order date
+            "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"  # create date
+            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"   # modification date
             " FROM db2_pentcdfo WHERE id = %s")
         cr.execute(query, [tmp_id])
         row = cr.fetchone()
@@ -291,9 +306,11 @@ class DB2MapperPurchaseOrder(object):
 
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
-            "       dcfres, dcfunv,"
-            "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"
-            "       dcfmjj, dcfmmm, dcfmaa, dcfmss"
+            "       dcfres, dcfunv, dcfnfa,"
+            "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"  # creation date
+            "       dcfmjj, dcfmmm, dcfmaa, dcfmss,"  # modification date
+            "       dcfljj, dcflmm, dcflaa, dcflss,"  # delivery date
+            "       dcffjj, dcffmm, dcffaa, dcffss"   # done date
             " FROM db2_pdetcdfo WHERE order_id = %s")
         cr.execute(query, [row['id']])
 
@@ -378,6 +395,16 @@ class DB2MapperPurchaseOrder(object):
                 # if partially received create a backorder with
                 # received quantities
                 pick = new.picking_ids
+                picking_date = convert_date('ecfc', row)
+                # as we do only one picking take the max date
+                # from lines for scheduled and receival dates
+                min_date = max(convert_date('dcfl', l) for l in lines)
+                date_done = max(convert_date('dcff', l) for l in lines)
+                pick.write({
+                    'date': picking_date,
+                    'min_date': min_date,
+                    'date_done': date_done,
+                })
                 pick_lines = cls.map_orderline2move(lines)
                 query = (
                     "SELECT mltlot, mltart, mltnli, mltquc"
