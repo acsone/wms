@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix failing purchase db2 import missing a column for discount global
+
 **Build**
 
 **Documentation**
