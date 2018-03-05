@@ -230,16 +230,17 @@ def create_locations(ctx):
             'usage': 'view',
         })
     scrap = [
-        ('__setup__.stock_location_scrap_destroy', 'A détruire'),
-        ('__setup__.stock_location_scrap_quality', 'Problème Qualité'),
-        ('__setup__.stock_location_scrap_return', 'Retours Fournisseur'),
+        ('__setup__.stock_location_scrap_destroy', 'A détruire', 0),
+        ('__setup__.stock_location_scrap_quality', 'Problème Qualité', 0),
+        ('__setup__.stock_location_scrap_return', 'Retours Fournisseur', 1),
         ]
-    for xmlid, name in scrap:
+    for xmlid, name, accrued_supplier_return in scrap:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_scrapped').id,
             'usage': 'internal',
             'ignore_quants_expiration': True,
+            'accrued_supplier_return': accrued_supplier_return,
         })
 
     loc_partner = ctx.env.ref('stock.stock_location_locations_partner')

@@ -376,17 +376,22 @@ def activate_check_on_vat(ctx):
 
 @anthem.log
 def setup_cutoff(ctx):
+    ref = ctx.env.ref
     company = ctx.env.ref('base.main_company')
     journal = ctx.env.ref('__setup__.accrual_journal')
     company.write({
         'default_cutoff_journal_id': journal.id,
-        'default_accrued_revenue_account_id': ctx.env.ref('l10n_be.1_a404').id,
-        'default_accrued_expense_account_id': ctx.env.ref('l10n_be.1_a444').id,
+        'default_accrued_revenue_account_id': ref('l10n_be.1_a404').id,
+        'default_accrued_expense_account_id': ref('l10n_be.1_a444').id,
+        'default_accrued_revenue_return_account_id':
+            ref('__setup__.account_404100').id,
+        'default_accrued_expense_return_account_id':
+            ref('__setup__.account_444100').id,
         })
     taxes = ctx.env['account.tax'].search([])
     taxes.write({
-        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
-        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'account_accrued_revenue_id': ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ref('l10n_be.1_a444').id,
         })
 
 
