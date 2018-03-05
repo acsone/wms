@@ -6,20 +6,26 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.17.1 (2018-03-05)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1109: Create partial receptions on imported in progress purchases
 * ALCN-1109: Set invoiced quantities by creating an invoice on imported in progress purchases
 
-**Features and Improvements**
-
 **Bugfixes**
 
 * Fix failing purchase db2 import missing a column for discount global
-
-**Build**
-
-**Documentation**
 
 
 10.17.0 (2018-03-02)
