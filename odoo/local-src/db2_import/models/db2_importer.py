@@ -320,7 +320,9 @@ class DB2MapperPurchaseOrder(object):
             if product_xmlid == '__setup__.product_other':
                 name = "Divers"
             product = rec.env.ref(product_xmlid)
+
             create_date = convert_date('dcfc', line)
+            delivery_date = convert_date('dcfl', line)
             taxes = product.supplier_taxes_id.filtered(
                 lambda r: r.company_id == rec.env.user.company_id)
             values = {
@@ -334,7 +336,7 @@ class DB2MapperPurchaseOrder(object):
                 'price_unit': line['dcfpac'],
                 'discount_global': line['dcfres'],
                 'promotion_supplier': line['dcfrem'],
-                'date_planned': create_date,
+                'date_planned': delivery_date or create_date,
                 'create_date': create_date,
                 'write_date': convert_date('dcfm', line) or create_date,
                 'taxes_id': [(4, tax.id) for tax in taxes],
