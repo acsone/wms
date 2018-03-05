@@ -37,6 +37,7 @@
     <field name="table_name">MVTLOT</field>
     <field name="table_prefix">mlt</field>
     <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
+    <field name="where_clause">mltquc &lt; 0</field>
   </record>
   </data>
 
@@ -58,6 +59,17 @@
     <field name="id_columns">ecfsui,ecffou,ecfsuc</field>
     <field name="create_job" eval="True"/>
     <field name="eta">2</field>
+  </record>
+
+  <!-- relation table between lot and move
+       containing reference to sale order -->
+  <record model="db2.importer.table" id="db2_table_mvtlot_for_purchase">
+    <field name="importer_id" ref="db2_sale_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">MVTLOT</field>
+    <field name="table_prefix">mlt</field>
+    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
+    <field name="where_clause">mltquc &gt; 0</field>
   </record>
 
   <!-- purchase order detail line table -->

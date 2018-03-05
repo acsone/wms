@@ -89,7 +89,8 @@ class StockPicking(models.Model):
         self.ensure_one()
 
         if (self.picking_type_code == 'incoming' and not self.grn_id):
-            if not self.env.context.get('test_mode'):
+            if (not self.env.context.get('__no_pick_receive_note_check') and
+                    not self.env.context.get('test_mode')):
                 raise UserError(_(
                     'The reception must be linked to a Goods Received Note'))
 
@@ -116,9 +117,9 @@ class StockPicking(models.Model):
         else:
             result = super(StockPicking, self).do_new_transfer()
 
-        result = self.do_new_transfer_with_back_order(result)
-
-        self.check_removal_date_on_transfer()
+        if not self.env.context.get('__no_specific_stock_backorder'):
+            result = self.do_new_transfer_with_back_order(result)
+            self.check_removal_date_on_transfer()
 
         return result
 
