@@ -62,9 +62,9 @@
   </record>
 
   <!-- relation table between lot and move
-       containing reference to sale order -->
+       containing reference to purchase order -->
   <record model="db2.importer.table" id="db2_table_mvtlot_for_purchase">
-    <field name="importer_id" ref="db2_sale_importer"/>
+    <field name="importer_id" ref="db2_purchase_importer"/>
     <field name="schema">SBDATA</field>
     <field name="table_name">MVTLOT</field>
     <field name="table_prefix">mlt</field>
