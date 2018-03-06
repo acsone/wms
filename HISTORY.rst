@@ -29,6 +29,7 @@ Unreleased
 * ALCN-1197: Change checksum calculation (use ids) for special promotions XML (wso2)
 * ALCN-1150: Set minimum access rules for user roles
 * Fix test on delivery rounds that was failing after 19h due to overlap on next day.
+* ALCN-1166: Change checksum calculation for buyx gety xml (wso2)
 
 **Build**
 

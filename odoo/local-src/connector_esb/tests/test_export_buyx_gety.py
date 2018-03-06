@@ -2,7 +2,6 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import md5
 from datetime import datetime, timedelta
 from .common import ESBXMLTestCase
 
@@ -69,15 +68,9 @@ class ExportBuyXGetY(ESBXMLTestCase):
             'QtyGet6': 0,
             'StartDate': '19710201',
             'EndDate': '19710228',
-            'CheckSum': '',
+            'CheckSum': ''.join([str(rec.id), '100']),
             'Action': 'Create',
         }
-        # Add the checksum to expected values
-        data = expected.values()
-        data = [str(d) for d in data]
-        data.sort()
-        key = ''.join(data)
-        expected['CheckSum'] = md5.new(key).hexdigest()
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
