@@ -199,3 +199,11 @@ migration:
     - version: 10.16.7
     - version: 10.17.0
     - version: 10.17.1
+      operations:
+        post:
+          - anthem songs.install.user::add_printing_groups_to_employee
+      addons:
+        upgrade:
+          - delivery_rounds
+          - specific_helpdesk
+          - specific_purchase
