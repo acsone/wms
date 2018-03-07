@@ -197,9 +197,11 @@ def import_lots(ctx):
 @anthem.log
 def import_inventory(ctx):
     """ Importing inventory from csv"""
-    inventory = ctx.env['stock.inventory'].create({
+    values = {
         'name': 'Initial',
-        })
+        }
+    inventory = create_or_update(ctx, 'stock.inventory',
+                                 '__setup__.initial_inventory', values)
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
@@ -218,10 +220,12 @@ def import_inventory(ctx):
 
 @anthem.log
 def import_inventory_without_lot(ctx):
-    """ Importing inventory from csv"""
-    inventory = ctx.env['stock.inventory'].create({
+    """ Importing second inventory without lots from csv"""
+    values = {
         'name': 'Initial (products without lot)',
-        })
+    }
+    inventory = create_or_update(ctx, 'stock.inventory',
+                                 '__setup__.initial_inventory_no_lot', values)
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
