@@ -88,10 +88,10 @@ class ProductExportMapper(Component):
     @mapping
     def price_categs(self, record):
         categs = ('GMA', 'ALI', 'ALG', 'ALH', 'IMP')
-        values = dict.fromkeys(categs, 0)
+        values = dict.fromkeys(categs, False)
         categ = record.price_category_id.name
         if categ:
-            values[categ] = 1
+            values[categ] = True
         return values
 
     @mapping

@@ -8,6 +8,9 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1201: Change format of some fields in product xml (wso2).
+    For five fields instead of 0/1 use False/True.
+
 **Bugfixes**
 
 **Build**
