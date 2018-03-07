@@ -73,15 +73,15 @@
       <!-- width in cm -->
       <Cp2z05>9.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA>0</GMA>
+      <GMA>False</GMA>
       <!-- price_categ_id -->
-      <ALI>1</ALI>
+      <ALI>True</ALI>
       <!-- price_categ_id -->
-      <ALG>0</ALG>
+      <ALG>False</ALG>
       <!-- price_categ_id -->
-      <ALH>0</ALH>
+      <ALH>False</ALH>
       <!-- price_categ_id -->
-      <IMP>0</IMP>
+      <IMP>False</IMP>
     </Row>
     <Row>
       <!-- barcode -->
@@ -155,15 +155,15 @@
       <!-- width in cm -->
       <Cp2z05>19.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA>0</GMA>
+      <GMA>False</GMA>
       <!-- price_categ_id -->
-      <ALI>0</ALI>
+      <ALI>False</ALI>
       <!-- price_categ_id -->
-      <ALG>1</ALG>
+      <ALG>True</ALG>
       <!-- price_categ_id -->
-      <ALH>0</ALH>
+      <ALH>False</ALH>
       <!-- price_categ_id -->
-      <IMP>0</IMP>
+      <IMP>False</IMP>
     </Row>
     <Row>
       <!-- barcode -->
@@ -237,15 +237,15 @@
       <!-- width in cm -->
       <Cp2z05>29.0</Cp2z05>
       <!-- price_categ_id -->
-      <GMA>0</GMA>
+      <GMA>False</GMA>
       <!-- price_categ_id -->
-      <ALI>0</ALI>
+      <ALI>False</ALI>
       <!-- price_categ_id -->
-      <ALG>0</ALG>
+      <ALG>False</ALG>
       <!-- price_categ_id -->
-      <ALH>1</ALH>
+      <ALH>True</ALH>
       <!-- price_categ_id -->
-      <IMP>0</IMP>
+      <IMP>False</IMP>
     </Row>
   </Root>
 </ROOT>
