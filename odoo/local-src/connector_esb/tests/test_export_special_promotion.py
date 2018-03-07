@@ -2,8 +2,6 @@
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import md5
-import os
 from .common import ESBXMLTestCase
 
 
@@ -69,37 +67,21 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
 
     def test_mapper(self):
         """ Testing mapper without id client """
+        rec = self.psi1
         expected = {
             'Sku': u'0001',
             'Percent1': '5.00',
             'Percent2': '0',
             'StartDate': '20170712',
             'EndDate': '20171231',
-            'AlcyonGroupId': '',
+            'AlcyonGroupId': '100',
             'Action': 'Create',
+            'CheckSum': ''.join([str(rec.id), '100'])
         }
-        # Add the checksum to expected values
-        data = expected.values()
-        data.sort()
-        key = ''.join(data)
-        expected['CheckSum'] = md5.new(key).hexdigest()
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
-            rec = self.psi1
-            self.assertDictEqual(mapper.map_record(rec).values(), expected)
-
-    def test_export(self):
-        """ Make a full export check with existing xml file"""
-        self.timestamp.writer = 'local'
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            exporter = work.component(usage='record.exporter.cron')
-            respath = exporter.run()
-            self.addCleanup(os.remove, respath)
-            with open(respath, 'r') as result_file:
-                result = result_file.read()
-            self.assertXmlEquivalentData(
-                result,
-                self.read_test_file('special_promotion_1.xml'), 'Sku')
+            self.assertDictEqual(
+                    mapper.map_record(rec).values(alcyon_group_id='100'),
+                    expected)
