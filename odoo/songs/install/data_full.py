@@ -161,12 +161,27 @@ def import_delivery_round_config(ctx):
     content = \
         resource_stream(req, 'data/install/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
+
     content = resource_stream(req, 'data/install/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
+    content = resource_stream(
+        req, 'data/install/delivery.carrier.template.csv')
+    load_csv_stream(ctx, 'round.template', content, delimiter=',')
+
     content = resource_stream(req, 'data/install/delivery_itinerary.csv')
     load_csv_stream(ctx, 'round.itinerary', content, delimiter=',')
     content = resource_stream(req, 'data/install/delivery_clients.csv')
     load_csv_stream(ctx, 'round.itinerary.position', content, delimiter=',')
+
+
+@anthem.log
+def import_delivery_carriers_round(ctx):
+    """ Importing carriers - delivery round mapping from csv """
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Carrier = ctx.env['delivery.carrier'].with_context(load_ctx)
+    content = resource_stream(req, 'data/install/delivery.carrier.round.csv')
+    load_csv_stream(ctx, Carrier, content, delimiter=',')
 
 
 @anthem.log
@@ -259,4 +274,5 @@ def main(ctx):
     create_product_other(ctx)
     # Putting some demo data in full mode because we don't have yet real data
     import_delivery_round_config(ctx)
+    import_delivery_carriers_round(ctx)
     post_import_stock_bins(ctx)
