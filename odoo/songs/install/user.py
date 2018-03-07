@@ -29,6 +29,33 @@ def admin_user_password(ctx):
 
 
 @anthem.log
+def set_implied_groups(ctx):
+    """
+    Define some implied groups
+    :return:
+    """
+    group_printing = ctx.env.ref('base_report_to_printer.printing_group_user')
+    group_helpdesk = ctx.env.ref('helpdesk.group_helpdesk_user')
+    ctx.env.ref('base.group_user').write({
+        'implied_ids': [(4, group_printing.id), (4, group_helpdesk.id)]
+    })
+
+    group_payment = ctx.env.ref('account_payment_order.group_account_payment')
+    ctx.env.ref('account.group_account_user').write({
+        'implied_ids': [(4, group_payment.id)],
+    })
+
+    # Set
+    group_inventory = ctx.env.ref('stock.group_stock_user')
+    ctx.env.ref('purchase.group_purchase_user').write({
+        'implied_ids': [(4, group_inventory.id)],
+    })
+    ctx.env.ref('sales_team.group_sale_salesman').write({
+        'implied_ids': [(4, group_inventory.id)],
+    })
+
+
+@anthem.log
 def import_users(ctx):
     """ Import users """
     content = resource_stream(req, 'data/install/res.users.csv')
@@ -53,5 +80,6 @@ def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
     admin_user_password(ctx)
+    set_implied_groups(ctx)
     import_users(ctx)
     esb_user_password(ctx)
