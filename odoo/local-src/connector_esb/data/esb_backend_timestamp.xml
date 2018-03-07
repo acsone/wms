@@ -45,14 +45,14 @@
 
   <record id="esb_timestamp_special_promotion" model="esb.backend.timestamp">
     <field name="backend_id" ref="esb_backend_config"/>
-    <field name="model">product.supplierinfo</field>
+    <field name="model">product.supplierinfo.esbflux</field>
     <field name="kind">special.promotion</field>
     <field name="export_filename">SpecialPromotion_{date}.xml</field>
   </record>
 
   <record id="esb_timestamp_buyx_gety" model="esb.backend.timestamp">
     <field name="backend_id" ref="esb_backend_config"/>
-    <field name="model">product.supplierinfo</field>
+    <field name="model">product.supplierinfo.esbflux</field>
     <field name="kind">buyx.gety</field>
     <field name="export_filename">BuyXGetY_{date}.xml</field>
   </record>

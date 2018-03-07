@@ -62,6 +62,7 @@ Unreleased
 * ALCN-161: Add module website_purchase_review
 * ALCN-1202: Add accessories in product XLM (wso2)
 * ALCN-1195: Do not export incomplete client addresses (wso2)
+* ALCN-1194/ALCN-1193: Implement XML Action tag with Create Delete on product.supplierinfo (wso2)
 
 **Bugfixes**
 

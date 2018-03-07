@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime, timedelta
+from odoo import fields
 from .common import ESBXMLTestCase
 
 
@@ -17,36 +18,54 @@ class ExportBuyXGetY(ESBXMLTestCase):
 
     @property
     def model(self):
-        return self.env['product.supplierinfo']
+        return self.env['product.supplierinfo.esbflux']
 
     def setup_records(self):
+        self.partner = self.env.ref('base.res_partner_1')
+        self.prod_1 = self.env.ref(
+                'product.product_product_1_product_template')
+        self.prod_1.default_code = 'TST',
+        self.date_start = fields.Datetime.to_string(
+                datetime.now() - timedelta(days=365))
+        self.date_end = fields.Datetime.to_string(
+                datetime.now() + timedelta(days=365))
         self.sis = self.model.browse()
         # Promotion without start/end date
-        self.si1 = self.env.ref('product.product_supplierinfo_1')
-        self.si1.ratio_main_product = 6
-        self.si1.ratio_promotional_product = 1
+        self.si1 = self.model.create({
+            'product_tmpl_id': self.prod_1.id,
+            'name': self.partner.id,
+            'ratio_main_product': 6,
+            'ratio_promotional_product': 1,
+            'date_start': None,
+            'date_end': None,
+            'flux': 'buyxgety',
+            'action': 'create',
+        })
         self.sis |= self.si1
         # Promotion actual
-        self.si2 = self.env.ref('product.product_supplierinfo_2')
-        self.si2.ratio_main_product = 3
-        self.si2.ratio_promotional_product = 1
-        date_start = datetime.today() - timedelta(days=10)
-        date_stop = datetime.today() + timedelta(days=10)
-        self.si2.date_start = date_start
-        self.si2.date_end = date_stop
+        self.si2 = self.model.create({
+            'product_tmpl_id': self.prod_1.id,
+            'name': self.partner.id,
+            'ratio_main_product': 3,
+            'ratio_promotional_product': 1,
+            'date_start': datetime.today() - timedelta(days=10),
+            'date_end': datetime.today() + timedelta(days=10),
+            'flux': 'buyxgety',
+            'action': 'create',
+        })
         self.sis |= self.si2
         # Promotion out of date
-        self.si3 = self.env.ref('product.product_supplierinfo_3')
-        self.si3.ratio_main_product = 5
-        self.si3.ratio_promotional_product = 2
-        self.si3.date_start = '1971-02-01'
-        self.si3.date_end = '1971-02-28'
+        self.si3 = self.model.create({
+            'product_tmpl_id': self.prod_1.id,
+            'name': self.partner.id,
+            'ratio_main_product': 3,
+            'ratio_promotional_product': 1,
+            'date_start': '1971-02-01',
+            'date_end': '1971-02-28',
+            'flux': 'buyxgety',
+            'action': 'create',
+        })
         self.sis |= self.si3
-        # Promotion without ratio
-        self.si1 = self.env.ref('product.product_supplierinfo_4')
-        self.si1.ratio_main_product = False
-        self.si1.ratio_promotional_product = False
-        self.sis |= self.si1
 
     def test_mapper(self):
         """ Testing the mapper """
@@ -54,8 +73,8 @@ class ExportBuyXGetY(ESBXMLTestCase):
         expected = {
             'Sku': rec.product_tmpl_id.default_code,
             'AlcyonGroupId': '100',
-            'QtyBuy1': 5,
-            'QtyGet1': 2,
+            'QtyBuy1': 3,
+            'QtyGet1': 1,
             'QtyBuy2': 0,
             'QtyGet2': 0,
             'QtyBuy3': 0,
