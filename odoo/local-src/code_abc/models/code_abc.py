@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2017 Okia SPRL
+# © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models, api, _
 
 
-class ActivityBasedCosting(models.Model):
-    _name = 'activity.based.costing'
+class CodeABC(models.Model):
+    _name = 'code.abc'
     _rec_name = 'code'
     _order = 'rate'
 

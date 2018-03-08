@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2017 Okia SPRL
+# © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 
 
-class TestActivityBasedCostring(common.TransactionCase):
+class TestCodeABC(common.TransactionCase):
 
     def test_business_unit_id(self):
         product_category = self.env['product.category']
@@ -65,6 +65,9 @@ class TestActivityBasedCostring(common.TransactionCase):
             'is_business_unit': True,
         })
 
+        ir_config = self.env['ir.config_parameter']
+        ir_config.set_param('abc.turnover_delay', 12)
+
         # The product 5 doesn't have invoices. The turnover for this product
         # is equal to 0 and the ABC code must be empty !!!
         invoices_by_product = {
@@ -116,7 +119,7 @@ class TestActivityBasedCostring(common.TransactionCase):
         self.assertEquals(getattr(self, 'product_7').turnover_nbr_lines, 1)
 
         # Create ABC rate
-        abc_obj = self.env['activity.based.costing']
+        abc_obj = self.env['code.abc']
         abc_obj.search([]).unlink()
         rate_a = abc_obj.create({
             'code': 'A',
@@ -130,9 +133,6 @@ class TestActivityBasedCostring(common.TransactionCase):
             'code': 'C',
             'rate': 100
         })
-
-        ir_config = self.env['ir.config_parameter']
-        ir_config.set_param('zelapro.turnover_delay', 12)
 
         product_obj.compute_abc_rate()
 
@@ -195,6 +195,9 @@ class TestActivityBasedCostring(common.TransactionCase):
             'is_business_unit': True,
         })
 
+        ir_config = self.env['ir.config_parameter']
+        ir_config.set_param('abc.turnover_delay', 12)
+
         # BU 1: turnover 200
         # BU 2: turnover 100
         invoices_by_product = {
@@ -235,7 +238,7 @@ class TestActivityBasedCostring(common.TransactionCase):
         self.assertEquals(float(business_unit_2.turnover), 100)
 
         # Create ABC rate
-        abc_obj = self.env['activity.based.costing']
+        abc_obj = self.env['code.abc']
         abc_obj.search([]).unlink()
         rate_a = abc_obj.create({
             'code': 'A',
@@ -249,9 +252,6 @@ class TestActivityBasedCostring(common.TransactionCase):
             'code': 'C',
             'rate': 100
         })
-
-        ir_config = self.env['ir.config_parameter']
-        ir_config.set_param('zelapro.turnover_delay', 12)
 
         product_obj.compute_abc_rate()
 
