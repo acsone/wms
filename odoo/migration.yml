@@ -203,6 +203,8 @@ migration:
       operations:
         post:
           - anthem songs.install.user::set_implied_groups
+          - anthem songs.install.data_full::import_delivery_round_config
+          - anthem songs.install.data_full::import_delivery_carriers_round
       addons:
         upgrade:
           - delivery_rounds
