@@ -14,6 +14,7 @@ Unreleased
 * Data: Configure delivery round template on delivery carrier
 
 * ALCN-1135: Add auto sequence on client ref field
+* ALCN-1153: Set standard buying price in product cost field
 
 **Bugfixes**
 
