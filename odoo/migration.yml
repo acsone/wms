@@ -209,11 +209,15 @@ migration:
       operations:
         post:
           - anthem songs.install.user::set_implied_groups
-          - anthem songs.install.data_full::import_delivery_round_config
-          - anthem songs.install.data_full::import_delivery_carriers_round
           # This module needs to be installed after the db2 data import
           - odoo -i base_partner_sequence --stop-after-init --workers=0
           - anthem songs.install.partner::setup_customer_ref
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::import_delivery_round_config
+              - anthem songs.install.data_full::import_delivery_carriers_round
       addons:
         upgrade:
           - delivery_rounds
