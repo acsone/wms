@@ -13,6 +13,7 @@ Unreleased
 
 * Data: Configure delivery round template on delivery carrier
 
+* ALCN-1135: Add auto sequence on client ref field
 
 **Bugfixes**
 

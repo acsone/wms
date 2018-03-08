@@ -18,6 +18,22 @@ def create_customer_category(ctx):
 
 
 @anthem.log
+def setup_customer_ref(ctx):
+    """ Setup partner ref sequence
+
+    Start with 100'000 because the highest value for supplier ref is 
+    around 95'000 in the imported data
+    """
+    sequence_start = 100000
+    ref_seq = ctx.env.ref('base_partner_sequence.seq_res_partner')
+    ref_seq.prefix = ''
+    # Change the starting sequence in postgres
+    seq_name = 'ir_sequence_%03d' % ref_seq.id
+    sql = ('ALTER SEQUENCE %s RESTART WITH %d;' % (seq_name, sequence_start))
+    ctx.env.cr.execute(sql)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring partner """
     create_customer_category(ctx)
