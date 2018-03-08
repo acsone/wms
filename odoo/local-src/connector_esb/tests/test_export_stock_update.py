@@ -22,22 +22,60 @@ class ExportStockUpdateTestCase(SavepointCase):
         return self.env['product.product']
 
     def setup_records(self):
+        # Remove all product from sale so they do not interfere
+        products = self.env['stock.quant'].search([]).mapped('product_id')
+        products.write({'sale_ok': False})
         self.partner = self.env.ref('base.res_partner_1')
         self.location = self.env.ref('stock.stock_location_stock').id
-        self.prod1 = self.env.ref('product.product_product_1')
+        # Two products that should be picked up for export
+        self.prod1 = self.env.ref('product.product_product_20')
         self.prod1.default_code = 'ref1'
+        self.prod1.type = 'product'
+        self.prod1.sale_ok = True
         self.prod1.state_id = self.env.ref('specific_purchase.product_state_a')
-        self.prod2 = self.env.ref('product.product_product_2')
-        self.prod2.default_code = 'ref2'
-
-        # Keep only one sale order line with a quantity for product 1 so
-        # we can test the sale_average on the mapper
-        one_year_back = (datetime.today() - timedelta(days=365))
-        sol = self.env['sale.order.line'].search([
-            ('product_id', '=', self.prod1.id),
-            ('create_date', '>', one_year_back.strftime("%Y-%m-%d"))])
-        sol.write({'product_uom_qty': 0})
-        sol[0].write({'product_uom_qty': 55})
+        self.prod2 = self.env['product.product'].create({
+            'name': 'test prod 2',
+            'default_code': 'test prod 2',
+            'type': 'product',
+            'sale_ok': True,
+            })
+        # And product without Sku, not to be exported
+        self.prod3 = self.env['product.product'].create({
+            'name': 'test prod 3',
+            'default_code': '',
+            'type': 'product',
+            'sale_ok': True,
+            })
+        # Product service not to be exported
+        self.prod4 = self.env['product.product'].create({
+            'name': 'test prod 4',
+            'default_code': 'ref4',
+            'type': 'service',
+            'sale_ok': True,
+            })
+        # Product not ok for sale, not to be exported
+        self.prod5 = self.env['product.product'].create({
+            'name': 'test prod 5',
+            'default_code': 'ref5',
+            'type': 'product',
+            'sale_ok': False,
+            })
+        # Add a sale order to test the sale_average
+        self.so0 = self.env['sale.order'].create({
+            'esb_ref': 'ref_123',
+            'partner_id': self.partner.id,
+            'sale_channel': 'fax',
+            'client_order_ref': 'whatever the client want',
+            'delivery_price': 23.5,
+            'suite_name': '0123434234',
+            'order_line': [
+                (0, 0, {
+                    'sequence': 1,
+                    'name': 'prod 1',
+                    'product_id': self.prod1.id,
+                    'product_uom_qty': 55,
+                })],
+        })
         # And add a canceled sale order that should not be part of the
         # sales_average computation
         self.so1 = self.env['sale.order'].create({
@@ -56,7 +94,6 @@ class ExportStockUpdateTestCase(SavepointCase):
                     'product_uom_qty': 7,
                 })],
         })
-
         # Lets add some stock
         self.use_date_1 = datetime.today() + timedelta(weeks=40)
         self.use_date_2 = datetime.today() + timedelta(weeks=1)
@@ -104,7 +141,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         product = self.prod1
         expected = {'sku': u'ref1',
                     'qty': 50 + 25,
-                    'sales_average': '{0:.3f}'.format(55.0/365),
+                    'sales_average': round(55.0/365, 1),
                     'erp_stock_code': u'A',
                     'date_peremption': self.use_date_2.strftime("%Y-%m-%d"),
                     }
@@ -113,3 +150,53 @@ class ExportStockUpdateTestCase(SavepointCase):
             mapper = work.component(usage='export.mapper')
             values = mapper.map_record(product).values()
         self.assertDictEqual(values, expected)
+
+    def test_product_pickedup(self):
+        """Check the exporter takes the two product with changed stock """
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        self.assertEqual(len(items), 2)
+
+    def test_product_no_sku(self):
+        """Product without Sku should not be picked up."""
+        inventory_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.prod3.id,
+            'new_quantity': 4325.0,
+            'location_id': self.location,
+        })
+        inventory_wizard.change_product_qty()
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        self.assertEqual(len(items), 2)
+
+    def test_product_type_service(self):
+        """Product of type other than product should not be picked up."""
+        inventory_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.prod4.id,
+            'new_quantity': 9945.0,
+            'location_id': self.location,
+        })
+        inventory_wizard.change_product_qty()
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        self.assertEqual(len(items), 2)
+
+    def test_product_not_ok_for_sale(self):
+        """Product not for sale should not be picked up"""
+        inventory_wizard = self.env['stock.change.product.qty'].create({
+            'product_id': self.prod5.id,
+            'new_quantity': 2395.0,
+            'location_id': self.location,
+        })
+        inventory_wizard.change_product_qty()
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        self.assertEqual(len(items), 2)
