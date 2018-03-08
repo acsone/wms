@@ -3,10 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
-from pkg_resources import resource_stream
 import anthem
-from anthem.lyrics.loaders import load_csv_stream
-from ..common import req, load_users_csv
+from ..common import load_users_csv
 
 
 @anthem.log

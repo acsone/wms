@@ -54,4 +54,3 @@ def create_default_value(ctx, model, field, value, company_id):
           'company_id': company_id,
           'pickled': pickle.dumps(value),
           })
-
