@@ -39,18 +39,14 @@ def import_bank_holidays(ctx):
 
 @anthem.log()
 def set_abc_rate(ctx):
-    """
-    Set ABC rates (80, 95 and 100 percent)
-    :param ctx:
-    :return:
-    """
+    """Set ABC rates (80, 95 and 100 percent)"""
     rates = [
         ('__setup__.abc_rate_80', 'A', 80),
         ('__setup__.abc_rate_95', 'B', 95),
         ('__setup__.abc_rate_100', 'C', 100),
     ]
     for xmlid, code, rate in rates:
-        create_or_update(ctx, 'activity.based.costing', xmlid, {
+        create_or_update(ctx, 'code.abc', xmlid, {
             'code': code,
             'rate': rate,
         })
@@ -58,11 +54,7 @@ def set_abc_rate(ctx):
 
 @anthem.log()
 def set_business_unit(ctx):
-    """
-    Set business unit and recompute ABC code
-    :param ctx:
-    :return:
-    """
+    """Set business unit and recompute ABC code"""
 
     business_units = ctx.env.ref('specific_data.product_categ_materiel')
     business_units |= ctx.env.ref('specific_data.product_categ_ali')
