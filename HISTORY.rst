@@ -11,6 +11,9 @@ Unreleased
 * ALCN-1201: Change format of some fields in product xml (wso2).
     For five fields instead of 0/1 use False/True.
 
+* Data: Configure delivery round template on delivery carrier
+
+
 **Bugfixes**
 
 * ALCN-1196: Repeat each promotion fo Alcyon Group Id >= 100 in special promotions XML (ws02)
