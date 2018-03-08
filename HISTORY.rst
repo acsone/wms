@@ -23,6 +23,7 @@ Unreleased
 * ALCN-161: Remove the module specific_zelapro and add the module code ABC (code extracted from zelapro)
 * ALCN-161: Modify the procurement wizard to allow the user to select a specific day or a supplier
 * ALCN-161: Add module stock_orderpoint_product
+* ALCN-1069: Add import min/max
 
 **Bugfixes**
 
