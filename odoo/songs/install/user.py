@@ -77,6 +77,6 @@ def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
     admin_user_password(ctx)
-    set_implied_groups(ctx)
     import_users(ctx)
+    set_implied_groups(ctx)
     esb_user_password(ctx)
