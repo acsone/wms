@@ -44,6 +44,7 @@ migration:
           operations:
             post:
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
+              - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
               - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
@@ -218,6 +219,7 @@ migration:
             post:
               - anthem songs.install.data_full::import_delivery_round_config
               - anthem songs.install.data_full::import_delivery_carriers_round
+              - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
       addons:
         upgrade:
           - delivery_rounds
