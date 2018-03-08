@@ -6,7 +6,7 @@ import os
 from pkg_resources import resource_stream
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
-from ..common import req
+from ..common import req, load_users_csv
 
 
 @anthem.log
@@ -55,8 +55,7 @@ def set_implied_groups(ctx):
 @anthem.log
 def import_users(ctx):
     """ Import users """
-    content = resource_stream(req, 'data/install/res.users.csv')
-    load_csv_stream(ctx, 'res.users', content, delimiter=',')
+    load_users_csv(ctx, 'data/install/res.users.csv')
 
 
 @anthem.log
@@ -77,6 +76,6 @@ def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
     admin_user_password(ctx)
-    import_users(ctx)
     set_implied_groups(ctx)
+    import_users(ctx)
     esb_user_password(ctx)
