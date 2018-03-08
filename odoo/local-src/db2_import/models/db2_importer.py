@@ -743,8 +743,6 @@ class DB2ImporterTable(models.Model):
         help="3 firsts character on each db2 column")
     id_columns = fields.Char(required=True)
 
-    last_import = fields.Date()
-
     importer_id = fields.Many2one('db2.importer')
     create_job = fields.Boolean()
     eta = fields.Integer(
@@ -807,8 +805,6 @@ class DB2ImporterTable(models.Model):
             'prefix': self.table_prefix,
         }
 
-        if not date_start:
-            date_start = self.last_import or "2017-01-01"
         query_kwargs.update({
             'start_age': int(date_start[:2]),
             'start_year': int(date_start[2:4]),
@@ -1026,14 +1022,11 @@ class DB2ImporterTable(models.Model):
 
         self._setup_relations()
 
-        self.last_import = date_end
-
 
 class DB2Importer(models.Model):
     _name = 'db2.importer'
 
     name = fields.Char()
-    last_import = fields.Date()
     date_start = fields.Date()
     date_end = fields.Date()
 
@@ -1061,6 +1054,3 @@ class DB2Importer(models.Model):
                 table.with_delay().get_from_db2(str_next_start, str_next_end)
             str_next_start = fields.Date.to_string(
                 dt_next_end + timedelta(days=1))
-        self.last_import = fields.Datetime.now()
-        self.date_start = self.last_import
-        self.date_end = fields.datetime.now() + timedelta(days=10)
