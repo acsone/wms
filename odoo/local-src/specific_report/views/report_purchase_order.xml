@@ -58,7 +58,7 @@
                             <th class="text-right"><strong>Qty</strong></th>
                             <th class="text-right"><strong>Unit Price</strong></th>
                             <th class="text-right"><strong>Discount global</strong></th>
-                            <th class="text-right"><strong>Discount pricelist</strong></th>
+                            <th class="text-right"><strong>Promotion supplier</strong></th>
                             <th class="text-right"><strong>Net Price</strong></th>
                         </tr>
                     </thead>
@@ -87,7 +87,7 @@
                                 <span t-field="line.discount_global"/>
                             </td>
                             <td class="text-right">
-                                <span t-field="line.discount_pricelist"/>
+                                <span t-field="line.promotion_supplier"/>
                             </td>
                             <td class="text-right">
                                 <span t-field="line.price_subtotal"
