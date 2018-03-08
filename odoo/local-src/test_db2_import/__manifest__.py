@@ -66,7 +66,6 @@
      'specific_sale',
      'specific_shipping_costs',
      'specific_stock',
-     'specific_zelapro',
      'specific_zetes',
      'stock_barcode_fix',
      'stock_expired',
