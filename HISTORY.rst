@@ -20,6 +20,7 @@ Unreleased
 * ALCN-1135: Add auto sequence on client ref field
 * ALCN-1153: Set standard buying price in product cost field
 * ALCN-161: Remove the module specific_zelapro and add the module code ABC (code extracted from zelapro)
+* ALCN-161: Modify the procurement wizard to allow the user to select a specific day or a supplier
 
 **Bugfixes**
 

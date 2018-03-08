@@ -19,6 +19,17 @@ will never create a back oder
 - Add some attributes (like weight, depth, unit_in_box, ...) on the product
 - Allow to manager bank holidays (used to compute the scheduled date)
 
+Procurement order
+=================
+
+This module contains a cron to generate procurement orders each day.
+To avoid to create to much procurement orders, Alcyon manage only a subset of suppliers per day.
+The day of management is set on the supplier (field is_manage_day_#WEEKDAY).
+When the cron will run, we will only take suppliers with the current current day (monday == 1; sunday == 7).
+
+The user has the possibility to execute this cron manually.
+In this case, he can chose to select a specific day (to create procurement orders for the next day for example)
+or he can select a specific supplier.
 
 Credits
 =======

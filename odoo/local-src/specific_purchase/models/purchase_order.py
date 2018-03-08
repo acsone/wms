@@ -17,6 +17,40 @@ class PurchaseOrder(models.Model):
     responsible_id = fields.Many2one('res.users',
                                      string='Responsible',
                                      track_visibility='onchange')
+    nbr_lines = fields.Integer('Nbr lines',
+                               compute='_compute_nbr_lines',
+                               readonly=True
+                               )
+    nbr_lines_bo = fields.Integer('Nbr lines BO',
+                                  compute='_compute_nbr_lines',
+                                  readonly=True
+                                  )
+
+    @api.multi
+    def _compute_nbr_lines(self):
+        """
+        Compute the number of lines and number of lines with back order
+        by purchase order.
+        :return:
+        """
+        for po in self:
+            po.nbr_lines = len(po.order_line)
+            po.nbr_lines_bo = len(po.order_line.filtered(
+                lambda line: line.product_id.immediately_usable_qty < 0))
+
+    @api.model
+    def create(self, vals):
+        """
+        Set the default responsible on a purchase order
+        :param vals:
+        :return:
+        """
+        if not vals.get('responsible_id') and vals.get('partner_id'):
+            partner = self.env['res.partner'].browse(vals['partner_id'])
+            if partner.purchase_manager_id:
+                vals['responsible_id'] = partner.purchase_manager_id.id
+
+        return super(PurchaseOrder, self).create(vals)
 
     @api.multi
     def _compute_total_weight(self):
@@ -228,19 +262,22 @@ class PurchaseOrderLine(models.Model):
 
         return result
 
-    @api.model
+    @api.multi
     def get_next_scheduled_date(self, seller, date_order_str=None):
         """
         Return the scheduled date
         :return: datetime - the scheduled date
         """
 
+        # By default, take the delivery lead time on the supplier info
         if seller:
             lead_time = seller.delay
+        # If there is no supplier info for this product, we take
+        # the delivery lead time on the supplier
+        elif len(self) == 1:
+            lead_time = self.order_id.partner_id.delivery_lead_time
         else:
-            lead_time = \
-                int(self.env['ir.config_parameter']
-                    .get_param('purchase.lead_time', 0))
+            lead_time = 0
 
         if date_order_str:
             date_planned = fields.Datetime.from_string(date_order_str)
