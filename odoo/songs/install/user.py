@@ -30,10 +30,7 @@ def admin_user_password(ctx):
 
 @anthem.log
 def set_implied_groups(ctx):
-    """
-    Define some implied groups
-    :return:
-    """
+    """ Define some implied groups """
     group_printing = ctx.env.ref('base_report_to_printer.printing_group_user')
     group_helpdesk = ctx.env.ref('helpdesk.group_helpdesk_user')
     ctx.env.ref('base.group_user').write({
