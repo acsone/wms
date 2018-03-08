@@ -21,7 +21,7 @@ def create_customer_category(ctx):
 def setup_customer_ref(ctx):
     """ Setup partner ref sequence
 
-    Start with 100'000 because the highest value for supplier ref is 
+    Start with 100'000 because the highest value for supplier ref is
     around 95'000 in the imported data
     """
     sequence_start = 100000
