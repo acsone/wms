@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1089 Automate initial stock inventory launch after transactional data import
+
 **Features and Improvements**
 
 * ALCN-1201: Change format of some fields in product xml (wso2).
