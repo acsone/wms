@@ -31,6 +31,10 @@
         # Data
         "data/product_state.xml",
         "data/ir_config_parameter.xml",
+        "data/ir_cron.xml",
+
+        # Wizards
+        "wizards/procurement_orderpoint_compute_views.xml",
 
         # Security
         "security/ir.model.access.csv",

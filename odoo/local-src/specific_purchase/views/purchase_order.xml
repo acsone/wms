@@ -5,6 +5,15 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="nbr_lines"/>
+                <field name="nbr_lines_bo"/>
+            </xpath>
+
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="responsible_id"/>
             </xpath>
@@ -34,4 +43,37 @@
             </xpath>
         </field>
     </record>
+
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase_order_tree inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="nbr_lines"/>
+                <field name="nbr_lines_bo"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">view.purchase.order.filter inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="before">
+                <filter name="my_orders" string="My Orders" domain="[('responsible_id', '=', uid)]" />
+                <filter name="without_responsible" string="Without responsible" domain="[('responsible_id', '=', False)]" />
+                <separtor/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+        <field name="context">{'search_default_without_responsible':1, 'search_default_my_orders': 1}</field>
+    </record>
+
 </odoo>
