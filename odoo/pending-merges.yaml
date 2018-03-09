@@ -38,6 +38,8 @@
     - oca 10.0
       # [MIG][10.0] account_cutoff_accrual_picking
     - oca refs/pull/52/head
+      # [ADD] account_cutoff_accrual_return
+    - oca refs/pull/70/head
   target: *default_target
 ./external-src/enterprise:
   remotes:

@@ -126,6 +126,7 @@ migration:
           # oca/purchase-workflow
           - purchase_cancel_reason
           ### local-src
+          - account_cutoff_accrual_return
           - account_invoice_tax_required
           - account_move_productcateg
           - connector_esb
@@ -210,6 +211,7 @@ migration:
       operations:
         post:
           - anthem songs.install.user::set_implied_groups
+          - anthem songs.install.accounting::setup_cutoff
           # This module needs to be installed after the db2 data import
           - odoo -i base_partner_sequence --stop-after-init --workers=0
           - anthem songs.install.partner::setup_customer_ref
@@ -222,6 +224,10 @@ migration:
               - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
       addons:
         upgrade:
+          ### OCA
+          # account-closing
+          - account_cutoff_accrual_return
+          ### local-src
           - delivery_rounds
           - specific_helpdesk
           - specific_purchase

@@ -15,6 +15,7 @@ Unreleased
 * ALCN-1201: Change format of some fields in product xml (wso2).
     For five fields instead of 0/1 use False/True.
 
+* Accrual of returned products
 * Data: Configure delivery round template on delivery carrier
 
 * ALCN-1135: Add auto sequence on client ref field
