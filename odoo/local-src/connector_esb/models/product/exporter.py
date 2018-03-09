@@ -57,8 +57,8 @@ class ProductExportMapper(Component):
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
         empty = ('Cp2z22', 'Warceg', 'Warcfr', 'Warcnl')
-        zero = ('Gescsg', 'Cp2z23', 'Cp2z24', 'Cplz29',
-                'Cp2z17', 'Cp2z19', 'LotEch')
+        zero = ('Gescsg', 'Cp2z23', 'Cp2z24',
+                'Cp2z17', 'Cp2z19')
         values = {f: '' for f in empty}
         values.update({f: 0 for f in zero})
         return values
@@ -81,11 +81,6 @@ class ProductExportMapper(Component):
     @mapping
     def stockable(self, record):
         return {'Gescge': 1 if record.type == 'product' else 0}
-
-    @mapping
-    def splittable(self, record):
-        # 1 when we sell units, 0 when we decimals of a unit are possible
-        return {'Gescov': 0 if record.uom_id.rounding < 1.0 else 1}
 
     @mapping
     def price_categs(self, record):
