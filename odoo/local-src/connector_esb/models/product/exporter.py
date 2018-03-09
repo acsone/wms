@@ -25,7 +25,9 @@ class ProductExportMapper(Component):
         ('depth', 'Cp2z01'),
         ('length', 'Cp2z03'),
         ('width', 'Cp2z05'),
-        (falsy2zero('unit_in_shrink_wrap'), 'Cp2z02')
+        (falsy2zero('unit_in_shrink_wrap'), 'Cp2z02'),
+        (falsy2zero('ratio_main_product'), 'Cp2z23'),
+        (falsy2zero('ratio_additional_product'), 'Cp2z24'),
     ]
 
     translatable_keys = {
@@ -56,9 +58,8 @@ class ProductExportMapper(Component):
     @mapping
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
-        empty = ('Cp2z22', 'Warceg', 'Warcfr', 'Warcnl')
-        zero = ('Gescsg', 'Cp2z23', 'Cp2z24',
-                'Cp2z17', 'Cp2z19')
+        empty = ('Warceg', 'Warcfr', 'Warcnl')
+        zero = ('Gescsg', 'Cp2z17', 'Cp2z19')
         values = {f: '' for f in empty}
         values.update({f: 0 for f in zero})
         return values
@@ -102,6 +103,10 @@ class ProductExportMapper(Component):
         routes = record.route_ids
         is_mto = 1 if set(routes.ids).intersection(mto_routes.ids) else 0
         return {'Gescde': is_mto}
+
+    @mapping
+    def product_given(self, record):
+        return {'Cp2z22': record.additional_product_id.default_code or ''}
 
     @mapping
     def todo(self, record):

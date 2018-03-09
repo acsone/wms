@@ -33,6 +33,7 @@ Unreleased
 * ALCN-1208: Remove tags in product xml (wso2)
     Date péremption 1er lot (LotEch), Fractionnement (Cplz29), Déconditionnable (ges.cov)
 * ALCN-161: Add module website_purchase_review
+* ALCN-1202: Add accessories in product XLM (wso2)
 
 **Bugfixes**
 
