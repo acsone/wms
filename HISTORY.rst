@@ -21,6 +21,7 @@ Unreleased
 * ALCN-1196: Repeat each promotion fo Alcyon Group Id >= 100 in special promotions XML (ws02)
 * ALCN-1197: Change checksum calculation (use ids) for special promotions XML (wso2)
 * ALCN-1150: Set minimum access rules for user roles
+* Fix test on delivery rounds that was failing after 19h due to overlap on next day.
 
 **Build**
 
