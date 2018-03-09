@@ -31,10 +31,12 @@ class ProductProduct(models.Model):
             rules = product.with_context(active_test=False).orderpoint_ids\
                 .filtered(lambda r: r.company_id == self.env.user.company_id)
             if rules:
-                product.orderpoint_min = rules[0].product_min_qty
-                product.orderpoint_max = rules[0].product_max_qty
-                product.orderpoint_id = rules[0].id
-                product.orderpoint_qty_multiple = rules[0].qty_multiple
+                product.write({
+                    'orderpoint_min': rules[0].product_min_qty,
+                    'orderpoint_max': rules[0].product_max_qty,
+                    'orderpoint_id': rules[0].id,
+                    'orderpoint_qty_multiple': rules[0].qty_multiple,
+                })
 
     @api.multi
     def _set_orderpoint(self):
@@ -46,10 +48,11 @@ class ProductProduct(models.Model):
         # can be set
         # We cannot read for self otherwise _get_orderpoint will be called
         # and erase the values
-        rules = self.with_context(active_test=False).orderpoint_ids.filtered(
-            lambda r: r.company_id == self.env.user.company_id)
-
         for product in self:
+            rules = product.with_context(
+                active_test=False).orderpoint_ids.filtered(
+                lambda r: r.company_id == self.env.user.company_id)
+
             # reading a value that is not set will erase the values that are
             # set as the _get_orderpoint method computes min, max.
             # So we need to retrieve the set values from cache
@@ -116,9 +119,11 @@ class ProductTemplate(models.Model):
             rules = product.with_context(active_test=False).orderpoint_ids \
                 .filtered(lambda r: r.company_id == self.env.user.company_id)
             if rules:
-                product_tmpl.orderpoint_min = rules[0].product_min_qty
-                product_tmpl.orderpoint_max = rules[0].product_max_qty
-                product_tmpl.orderpoint_qty_multiple = rules[0].qty_multiple
+                product_tmpl.write({
+                    'orderpoint_min': rules[0].product_min_qty,
+                    'orderpoint_max': rules[0].product_max_qty,
+                    'orderpoint_qty_multiple': rules[0].qty_multiple,
+                })
 
     @api.multi
     def _set_orderpoint(self):
