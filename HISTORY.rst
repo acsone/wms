@@ -13,6 +13,9 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1200: Filter product in price XML (wso2)
+        Export only of type product, for sale and with a Sku
+
 * ALCN-1201: Change format of some fields in product xml (wso2).
     For five fields instead of 0/1 use False/True.
 * ALCN-1199: Change esb_ref on Alcyon Group Id for customer and add some more (wso2)

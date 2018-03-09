@@ -20,21 +20,25 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
         return self.env['product.product']
 
     def setup_records(self):
-        # Set existing products to inactive
-        # # Create 2 products
+        # Set existing products to not for sale, as to not bother the tests
+        self.env['product.product'].search([]).write({'sale_ok': False})
+        # # Create 2 good products
         self.p1 = self.env['product.product'].create({
             'name': 'Unittest P1',
             'default_code': '0001',
             'list_price': '12.7',
+            'type': 'product',
+            'sale_ok': True,
         })
         self.p1.indicated_price = 11
         self.p2 = self.env['product.product'].create({
             'name': 'Unittest P2',
             'default_code': '0002',
             'list_price': '82.7',
+            'type': 'product',
+            'sale_ok': True,
         })
         self.p2.indicated_price = 12
-
         self.pricelist_pb2 = self.env.ref(
                 'specific_data.product_pricelist_pb2')
         self.pricelist_pb2.item_ids = [
@@ -53,6 +57,16 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
                     'product_tmpl_id': self.p2.product_tmpl_id.id,
                 }),
                 ]
+        # And product without Sku, not to be exported
+        self.p3 = self.env.ref('product.product_product_3')
+        self.p3.type = 'product'
+        self.p3.default_code = ''
+        self.p3.sale_ok = True
+        # Product service not to be exported
+        self.p4 = self.env.ref('product.product_product_4')
+        self.p4.type = 'service'
+        self.p4.default_code = 'ref4'
+        self.p4.sale_ok = True
 
     def test_filename(self):
         self.check_filename('ProductPrice_{0}.xml')
@@ -87,3 +101,11 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
         self.assertXmlEquivalentData(
             result,
             self.read_test_file('product_price_export_1.xml'), 'Sku')
+
+    def test_product_pickedup(self):
+        """Check the exporter takes the two product only"""
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        self.assertEqual(len(items), 2)

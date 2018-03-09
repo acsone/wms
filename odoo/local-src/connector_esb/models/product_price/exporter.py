@@ -66,4 +66,8 @@ class ProductPriceCronExporter(Component):
                 product.write({'sale_price_2_export': sale_price_2})
 
     def get_items_domain(self):
-        return [('active', '=', True)]
+        return [('active', '=', True),
+                ('sale_ok', '=', True),
+                ('default_code', '!=', ''),
+                ('type', '=', 'product'),
+                ]
