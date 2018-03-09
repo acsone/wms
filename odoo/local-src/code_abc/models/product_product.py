@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Okia SPRL
+# © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
@@ -16,7 +16,7 @@ class ProductProduct(models.Model):
                                         readonly=True)
     turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)',
                                                 readonly=True)
-    abc_id = fields.Many2one('activity.based.costing',
+    abc_id = fields.Many2one('code.abc',
                              string='ABC',
                              readonly=True)
     business_unit_id = fields.Many2one('product.category',
@@ -68,7 +68,7 @@ class ProductProduct(models.Model):
         """
         config_param = self.env['ir.config_parameter']
         turnover_delay = \
-            int(config_param.get_param('zelapro.turnover_delay'))
+            int(config_param.get_param('abc.turnover_delay', 0))
 
         #####################################
         # Compute turnover by Business Unit #
@@ -159,7 +159,7 @@ class ProductProduct(models.Model):
         """
         product_obj = self.env['product.product']
 
-        abc_rates = self.env['activity.based.costing'].search([])
+        abc_rates = self.env['code.abc'].search([])
 
         if not abc_rates:
             raise UserError(_('Please define a least one ABC rate'))
@@ -292,7 +292,7 @@ class ProductTemplate(models.Model):
     turnover_average_nbr_lines = fields.Integer('Turnover average (nbr lines)',
                                                 readonly=True,
                                                 compute='_compute_abc_values')
-    abc_id = fields.Many2one('activity.based.costing',
+    abc_id = fields.Many2one('code.abc',
                              string='ABC',
                              readonly=True,
                              compute='_compute_abc_values')
@@ -300,8 +300,6 @@ class ProductTemplate(models.Model):
                                        string='Business unit',
                                        compute='_compute_abc_values',
                                        readonly=True)
-    stock_minimum = fields.Float('Minimum stock')
-    stock_maximum = fields.Float('Maximum stock')
 
     @api.multi
     def _compute_abc_values(self):

@@ -151,7 +151,6 @@ migration:
           - specific_shipping_costs
           - specific_stock
           - specific_translations
-          - specific_zelapro
           - specific_zetes
           - stock_barcode_fix
           - stock_delivery_note
@@ -176,6 +175,7 @@ migration:
           - stock_refill
           - stock_valuation
           - web_autorefresh
+          - code_abc
     - version: 10.1.0
     - version: 10.2.0
     - version: 10.3.0
@@ -223,3 +223,4 @@ migration:
           - delivery_rounds
           - specific_helpdesk
           - specific_purchase
+          - code_abc
