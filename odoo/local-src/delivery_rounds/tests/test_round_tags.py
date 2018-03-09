@@ -101,9 +101,13 @@ class TestRoundTags(TransactionCase):
         """
         instance_obj = self.env['round.instance']
 
+        # delivery rounds shouldn't overlap on the next day
+        # so to have consistent tests we will have round instances
+        # at 1 hour and 5 hours from 7 hour in the morning
+        virtual_now = datetime.now().replace(hour=7)
         # Create the best itinerary (picking planned = now + 1 hours)
         # By default this itinerary must be taken
-        picking_planned = datetime.now() + relativedelta(hours=1)
+        picking_planned = virtual_now + relativedelta(hours=1)
         best_itinerary = self.env['round.itinerary'].create({
             'name': 'Best itinerary',
             'code': 'best',
@@ -141,7 +145,7 @@ class TestRoundTags(TransactionCase):
         self.template.write({
             'itinerary_ids': [(4, worst_itinerary.id, 0)]
         })
-        picking_planned = datetime.now() + relativedelta(hours=5)
+        picking_planned = virtual_now + relativedelta(hours=5)
         worst_instance = self.env['round.instance'].create({
             'template_id': self.template.id,
             'date': fields.Date.to_string(picking_planned),
