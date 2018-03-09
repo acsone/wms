@@ -225,6 +225,8 @@ migration:
               - anthem songs.install.data_full::import_delivery_round_config
               - anthem songs.install.data_full::import_delivery_carriers_round
               - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - anthem songs.install.data_full::post_import_stock_bins
       addons:
         upgrade:
           ### OCA
