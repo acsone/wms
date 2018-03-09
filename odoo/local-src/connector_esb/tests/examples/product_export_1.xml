@@ -20,7 +20,7 @@
       <Cplz25>79001</Cplz25>
       <!-- UoM -->
       <Gesunv>0</Gesunv>
-      <!-- always 0 (UOM 2) -->
+      <!-- unit_in_shrink_wrap -->
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
@@ -102,8 +102,8 @@
       <Cplz25>65852</Cplz25>
       <!-- UoM -->
       <Gesunv>2</Gesunv>
-      <!-- always 0 (UOM 2) -->
-      <Cp2z02>0</Cp2z02>
+      <!-- unit_in_shrink_wrap -->
+      <Cp2z02>4</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
       <!-- active -->
@@ -184,7 +184,7 @@
       <Cplz25>79001</Cplz25>
       <!-- UoM -->
       <Gesunv>0</Gesunv>
-      <!-- always 0 (UOM 2) -->
+      <!-- unit_in_shrink_wrap -->
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>

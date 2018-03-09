@@ -5,6 +5,7 @@
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from ...components.mapper import bool2int, dt2esbdate, falsy2emptystring
+from ...components.mapper import falsy2zero
 
 
 class ProductExportMapper(Component):
@@ -24,6 +25,7 @@ class ProductExportMapper(Component):
         ('depth', 'Cp2z01'),
         ('length', 'Cp2z03'),
         ('width', 'Cp2z05'),
+        (falsy2zero('unit_in_shrink_wrap'), 'Cp2z02')
     ]
 
     translatable_keys = {
@@ -55,7 +57,7 @@ class ProductExportMapper(Component):
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
         empty = ('Cp2z22', 'Warceg', 'Warcfr', 'Warcnl')
-        zero = ('Gescsg', 'Cp2z02', 'Cp2z23', 'Cp2z24', 'Cplz29',
+        zero = ('Gescsg', 'Cp2z23', 'Cp2z24', 'Cplz29',
                 'Cp2z17', 'Cp2z19', 'LotEch')
         values = {f: '' for f in empty}
         values.update({f: 0 for f in zero})

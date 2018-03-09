@@ -95,6 +95,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'width': 19.0,
             'volume': 0.005,
             'tracking': 'serial',
+            'unit_in_shrink_wrap': 4,
             'uom_id': cm.id,
             'uom_po_id': cm.id,
             'price_category_id': alg.id,
