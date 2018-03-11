@@ -181,6 +181,7 @@ migration:
           - web_autorefresh
           - code_abc
           - stock_orderpoint_product
+          - website_purchase_review
     - version: 10.1.0
     - version: 10.2.0
     - version: 10.3.0
@@ -241,3 +242,4 @@ migration:
           - specific_purchase
           - specific_report
           - stock_orderpoint_product
+          - website_purchase_review

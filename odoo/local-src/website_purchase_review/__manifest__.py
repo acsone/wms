@@ -3,24 +3,23 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Code ABC',
+    'name': 'Website purchase review',
     'version': '10.0.1.0.0',
     'author': 'Okia SPRL',
     'license': 'AGPL-3',
     'category': 'Others',
     'description': """
-    Code ABC
+    Website purchase review
     """,
     'depends': [
-        'product',
         'purchase',
+        'stock',
+        'stock_orderpoint_product',
+        'code_abc'
     ],
     'data': [
-        "views/code_abc.xml",
-        "views/product_category.xml",
-        "views/product_template.xml",
-        "views/purchase_config_settings.xml",
-        "security/ir.model.access.csv",
+        "views/purchase_order.xml",
+        "views/templates.xml"
     ],
     'website': 'http://www.camptocamp.com',
     'installable': True,
