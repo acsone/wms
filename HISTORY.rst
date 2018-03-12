@@ -38,6 +38,8 @@ Unreleased
 
 **Build**
 
+* Change mailtrap host to smtp.mailtrap.io as mailtrap.io is now closed.
+
 **Documentation**
 
 
