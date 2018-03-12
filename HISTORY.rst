@@ -33,6 +33,7 @@ Unreleased
 * ALCN-1196: Repeat each promotion fo Alcyon Group Id >= 100 in special promotions XML (ws02)
 * ALCN-1197: Change checksum calculation (use ids) for special promotions XML (wso2)
 * ALCN-1150: Set minimum access rules for user roles
+* ALCN-1154: Missing removal of discount_pricelist from purchase line in purchase report replaced by promotion_supplier
 * Fix test on delivery rounds that was failing after 19h due to overlap on next day.
 * ALCN-1166: Change checksum calculation for buyx gety xml (wso2)
 * ALCN-1206: Filter product in stock XML (wso2)
