@@ -6,6 +6,7 @@ import logging
 
 from datetime import datetime, timedelta
 
+from odoo.osv.expression import AND
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from ...components.mapper import falsy2emptystring
@@ -54,7 +55,7 @@ class StockUpdateMapper(Component):
             ('order_id.state', '!=', 'cancel'),
         ])
         sale_average = sum(line.product_uom_qty for line in sol) / 365
-        return {'sales_average': '{0:.3f}'.format(sale_average)}
+        return {'sales_average': round(sale_average, 1)}
 
 
 class StockUpdateExporter(Component):
@@ -67,8 +68,17 @@ class StockUpdateExporter(Component):
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'stock.update')
 
-    def domain_timestamp(self, export_since):
-        all_quants = self.env['stock.quant'].search(
-            [('write_date', '>', export_since)])
+    def get_items(self, export_since):
+        """Find the products to export based on quants."""
+        domain = [
+             ('product_id.default_code', '!=', ''),
+             ('product_id.default_code', '!=', False),
+             ('product_id.type', '=', 'product'),
+             ('product_id.sale_ok', '=', True),
+             ]
+        if export_since:
+            date_domain = self.domain_timestamp(export_since)
+            domain = AND([domain, date_domain])
+        all_quants = self.env['stock.quant'].search(domain)
         products = all_quants.mapped('product_id')
-        return [('id', 'in', products.ids)]
+        return products

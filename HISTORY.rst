@@ -33,6 +33,8 @@ Unreleased
 * ALCN-1150: Set minimum access rules for user roles
 * Fix test on delivery rounds that was failing after 19h due to overlap on next day.
 * ALCN-1166: Change checksum calculation for buyx gety xml (wso2)
+* ALCN-1206: Filter product in stock XML (wso2)
+    Export only product stockable, which are for sale and the Sku is defined
 
 **Build**
 
