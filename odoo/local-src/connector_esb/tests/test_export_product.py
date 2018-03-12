@@ -192,7 +192,6 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gesctv': '006',
             'Cplz03': 'CNK_001',
             'Gescge': 1,
-            'Gescov': 1,
             'Cplz07': 'BBB',
             'Cp2z01': 7.0,
             'Cp2z03': 8.5,
@@ -211,10 +210,8 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Cp2z02': 0,
             'Cp2z23': 0,
             'Cp2z24': 0,
-            'Cplz29': 0,
             'Cp2z17': 0,
             'Cp2z19': 0,
-            'LotEch': 0,
             # TODO
             'Cplz14': '',
         }

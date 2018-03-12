@@ -48,18 +48,12 @@
       <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
       <Gescsa>1</Gescsa>
-      <!-- expiry date 0 if no expiry -->
-      <LotEch>0</LotEch>
       <!-- cnk_code -->
       <Cplz03>CNK_001</Cplz03>
       <!-- stockable -->
       <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 0 if it can be deconditioned -->
-      <Gescov>1</Gescov>
-      <!-- always 0 -->
-      <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
       <Cplz07>BBB</Cplz07>
       <!-- always 0 -->
@@ -130,18 +124,12 @@
       <Gesctv>009</Gesctv>
       <!-- lot tracking enabled -->
       <Gescsa>1</Gescsa>
-      <!-- expiry date 0 if no expiry -->
-      <LotEch>0</LotEch>
       <!-- cnk_code -->
       <Cplz03>CNK_002</Cplz03>
       <!-- stockable -->
       <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 0 if it can be deconditioned -->
-      <Gescov>0</Gescov>
-      <!-- always 0 -->
-      <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
       <Cplz07>CCC</Cplz07>
       <!-- always 0 -->
@@ -212,18 +200,12 @@
       <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
       <Gescsa>0</Gescsa>
-      <!-- expiry date 0 if no expiry -->
-      <LotEch>0</LotEch>
       <!-- cnk_code -->
       <Cplz03>CNK_003</Cplz03>
       <!-- stockable -->
       <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
-      <!-- 0 if it can be deconditioned -->
-      <Gescov>1</Gescov>
-      <!-- always 0 -->
-      <Cplz29>0</Cplz29>
       <!-- SKU of the tax -->
       <Cplz07>BBB</Cplz07>
       <!-- always 0 -->

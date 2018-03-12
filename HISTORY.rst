@@ -30,6 +30,8 @@ Unreleased
 * ALCN-161: Add module stock_orderpoint_product
 * ALCN-1069: Add import min/max
 * ALCN-1204: Add Cp2z02 (fardelage) in product xml (wso2)
+* ALCN-1208: Remove tags in product xml (wso2)
+    Date péremption 1er lot (LotEch), Fractionnement (Cplz29), Déconditionnable (ges.cov)
 
 **Bugfixes**
 
