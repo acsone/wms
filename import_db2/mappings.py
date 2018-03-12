@@ -129,18 +129,27 @@ USERS = {
 PARTNER_ALCYON_CATEGORY = {
     1: 'specific_partner.partner_category_veterinary',
     2: 'specific_partner.partner_category_pharmacy',
+    3: 'specific_partner.partner_category_veto',
     4: 'specific_partner.partner_category_callcenter',
-    5: 'specific_partner.partner_category_pharmacy',
-    6: 'specific_partner.partner_category_pharmacy',
-    7: 'specific_partner.partner_category_pharmacy',
-    9: 'specific_partner.partner_category_pharmacy',
-    10: 'specific_partner.partner_category_pharmacy',
-    15: 'specific_partner.partner_category_pharmacy',
-    16: 'specific_partner.partner_category_pharmacy',
-    17: 'specific_partner.partner_category_pharmacy',
-    18: 'specific_partner.partner_category_pharmacy',
-    19: 'specific_partner.partner_category_pharmacy',
+    5: 'specific_partner.partner_category_small_whoesaler',
+    6: 'specific_partner.partner_category_epece',
+    7: 'specific_partner.partner_category_pharma_health',
+    8: 'specific_partner.partner_category_university',
+    9: 'specific_partner.partner_category_pharma_belgium',
+    10: 'specific_partner.partner_category_human_pasteur',
+    11: 'specific_partner.partner_category_customerexport',
+    12: 'specific_partner.partner_category_fund_alcyon',
+    13: 'specific_partner.partner_category_fund_pasteur',
+    14: 'specific_partner.partner_category_other',
+    15: 'specific_partner.partner_category_life',
+    16: 'specific_partner.partner_category_multipharma',
+    17: 'specific_partner.partner_category_backup',
+    18: 'specific_partner.partner_category_alpharepartition',
+    19: 'specific_partner.partner_category_vpharma',
     20: 'specific_partner.partner_category_student',
+    # 97: specific_partner.partner_category_user'
+    # 98: 'specific_partner.partner_category_supplier'
+    99: 'specific_partner.partner_category_various',
 }
 
 CUSTOMER_CATEGORY = {

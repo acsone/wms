@@ -234,3 +234,5 @@ migration:
           - specific_purchase
           - code_abc
           - stock_orderpoint_product
+          - specific_partner
+          - connector_esb

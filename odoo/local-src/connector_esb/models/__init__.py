@@ -23,7 +23,6 @@ from . import res_lang
 from . import sale_order
 from . import sale_order_line
 from . import res_users
-from . import partner_alcyon_category
 from . import sale_order
 from . import product_supplierinfo
 from . import queue_job

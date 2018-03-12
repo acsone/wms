@@ -14,6 +14,7 @@ Unreleased
 
 * ALCN-1201: Change format of some fields in product xml (wso2).
     For five fields instead of 0/1 use False/True.
+* ALCN-1199: Change esb_ref on Alcyon Group Id for customer and add some more (wso2)
 
 * Accrual of returned products
 * Data: Configure delivery round template on delivery carrier
