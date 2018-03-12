@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.17.2 (2018-03-12)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1089 Automate initial stock inventory launch after transactional data import
@@ -48,8 +60,6 @@ Unreleased
 **Build**
 
 * Change mailtrap host to smtp.mailtrap.io as mailtrap.io is now closed.
-
-**Documentation**
 
 
 10.17.1 (2018-03-05)
