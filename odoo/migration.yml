@@ -233,10 +233,11 @@ migration:
           # account-closing
           - account_cutoff_accrual_return
           ### local-src
+          - code_abc
+          - connector_esb
           - delivery_rounds
           - specific_helpdesk
-          - specific_purchase
-          - code_abc
-          - stock_orderpoint_product
           - specific_partner
-          - connector_esb
+          - specific_purchase
+          - specific_report
+          - stock_orderpoint_product
