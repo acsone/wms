@@ -31,12 +31,14 @@ class ProductProduct(models.Model):
             rules = product.with_context(active_test=False).orderpoint_ids\
                 .filtered(lambda r: r.company_id == self.env.user.company_id)
             if rules:
-                product.write({
-                    'orderpoint_min': rules[0].product_min_qty,
-                    'orderpoint_max': rules[0].product_max_qty,
-                    'orderpoint_id': rules[0].id,
-                    'orderpoint_qty_multiple': rules[0].qty_multiple,
-                })
+                # We cannot use product.write because the method write
+                # will not correctly write values in cache.
+                # When Odoo will render the template and try to read these
+                # values, it will raise an error if we use the method write
+                product.orderpoint_min = rules[0].product_min_qty
+                product.orderpoint_max = rules[0].product_max_qty
+                product.orderpoint_id = rules[0].id
+                product.orderpoint_qty_multiple = rules[0].qty_multiple
 
     @api.multi
     def _set_orderpoint(self):
