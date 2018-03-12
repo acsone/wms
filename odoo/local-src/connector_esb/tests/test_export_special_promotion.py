@@ -30,7 +30,7 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
         })
         # Create a supplier
         self.supplier1 = self.env['res.partner'].create({
-            'ref': 'J',
+            'ref': '110',
             'name': 'Joe',
             'street': 'Chemin des Pins, 23',
             'street2': '',

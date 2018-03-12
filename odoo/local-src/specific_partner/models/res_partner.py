@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class ResPartner(models.Model):
@@ -47,3 +47,10 @@ class ResPartner(models.Model):
             partner.is_veterinary = (
                 partner.alcyon_category_id == veterinary
             )
+
+    _sql_constraints = [
+            ('ref_digit_only',
+             "CHECK (ref SIMILAR TO '[[:digit:]]*')",
+             _('The reference must be numeric or empty')
+             )
+    ]

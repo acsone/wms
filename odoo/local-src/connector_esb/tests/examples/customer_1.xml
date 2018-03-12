@@ -21,7 +21,7 @@
       <IdDelegate/>
       <GroupId>TST</GroupId>
       <AlcyonGroupId>REF_ESB</AlcyonGroupId>
-      <ErpId>P</ErpId>
+      <ErpId>100</ErpId>
       <Email>peter@ch.ch</Email>
     </Row>
   </Root>

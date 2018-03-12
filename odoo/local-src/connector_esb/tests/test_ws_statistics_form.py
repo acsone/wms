@@ -15,12 +15,12 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
     def setup_records(self):
         self.partner = self.env['res.partner'].create(
-            {'name': 'Foo', 'ref': 'ABC'}
+            {'name': 'Foo', 'ref': '123'}
         )
         self.supplier = self.env['res.partner'].create({
             'name': 'Guerra',
             'supplier': True,
-            'ref': 'GUERRA',
+            'ref': '987654321',
         })
         categ_med = self.env.ref('specific_data.product_categ_medoc')
         categ_ali = self.env.ref('specific_data.product_categ_ali')
@@ -93,7 +93,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
     def test_message(self):
         supplier_foo = self.env['res.partner'].create({
-            'name': 'Foo', 'supplier': True, 'ref': 'FOO',
+            'name': 'Foo', 'supplier': True, 'ref': '10',
         })
         self.product2.seller_ids = [
             (0, 0, {'name': supplier_foo.id, 'sequence': 30})
@@ -111,7 +111,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
+                customer_ref='123',
             )
             message = component.get_message(options)
 
@@ -136,7 +136,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
+                customer_ref='123',
                 start=date(2017, 7, 22),
                 end=date(2017, 7, 28),
             )
@@ -144,7 +144,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
         # only the sale of 2017-07-26 is considered
         expected = [
-            {'manufacturer': u'GUERRA',
+            {'manufacturer': u'987654321',
              'productName': u'EASYPILL CAT 30x10GR',
              'productType': u'aliment',
              'qtyDelivered': 10.0,
@@ -172,14 +172,14 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
+                customer_ref='123',
                 product_type='aliment',
             )
             data = component._data_for_message(options)
 
         # only the sale of product2 (type aliment) is considered
         expected = [
-            {'manufacturer': u'GUERRA',
+            {'manufacturer': u'987654321',
              'productName': u'EASYPILL CAT 30x10GR',
              'productType': u'aliment',
              'qtyDelivered': 10.0,
@@ -191,10 +191,10 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
 
     def test_filter_supplier(self):
         supplier_foo = self.env['res.partner'].create({
-            'name': 'Foo', 'supplier': True, 'ref': 'FOO',
+            'name': 'Foo', 'supplier': True, 'ref': '10',
         })
         supplier_bar = self.env['res.partner'].create({
-            'name': 'Bar', 'supplier': True, 'ref': 'BAR',
+            'name': 'Bar', 'supplier': True, 'ref': '11',
         })
         self.product1.seller_ids = [(5, 0), (0, 0, {'name': supplier_foo.id})]
         self.product3.seller_ids = [(5, 0), (0, 0, {'name': supplier_bar.id})]
@@ -215,22 +215,22 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
-                suppliers=['GUERRA', 'FOO'],
+                customer_ref='123',
+                suppliers=['987654321', '10'],
             )
             data = component._data_for_message(options)
 
         # we should have product1 and product2 which are sold by the
         # suppliers we asked
         expected = [
-            {'manufacturer': u'FOO',
+            {'manufacturer': u'10',
              'productName': u'KETOFEN 5MG 10CP',
              'productType': u'medicament',
              'qtyDelivered': 1.0,
              'sku': u'1021906',
              'taxRate': 20.0,
              'totalPrice': 143.2},
-            {'manufacturer': u'GUERRA',
+            {'manufacturer': u'987654321',
              'productName': u'EASYPILL CAT 30x10GR',
              'productType': u'aliment',
              'qtyDelivered': 10.0,
@@ -254,14 +254,14 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
+                customer_ref='123',
                 language='TLH',
             )
             data = component._data_for_message(options)
 
         # only the sale of 2017-07-26 is considered
         expected = [
-            {'manufacturer': u'GUERRA',
+            {'manufacturer': u'987654321',
              'productName': u'KETOFEN 5MG 10CP (TLH)',
              'productType': u'medicament',
              'qtyDelivered': 1.0,
@@ -283,8 +283,8 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         with backend.work_on('res.partner') as work:
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
-                customer_ref='ABC',
-                suppliers=['GUERRA', 'FOO'],
+                customer_ref='123',
+                suppliers=['987654321', '10'],
                 start=False,
                 end=False,
                 product_type=False,
@@ -299,7 +299,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
                 expected_domain,
             )
             options2 = component.options_for_form(
-                customer_ref='ABC',
+                customer_ref='123',
                 suppliers=[],
                 start=date(1994, 10, 3),
                 end=date(2018, 1, 17),

@@ -20,21 +20,25 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         return self.env['res.partner']
 
     def setup_records(self):
+        # Hiding all existing customer from the tests
+        self.model.search([(1, '=', 1)]).write({'customer': False})
         self.country44 = self.env['res.country'].search([('id', '=', 44)])
         self.country44.esb_ref = 'ESB'
+        self.country_no_ref = self.env['res.country'].search([('id', '=', 33)])
+        self.country_no_ref.esb_ref = ''
         self.all_records = self.model.browse()
         # Create a customer with an invoicing address but no delivery address
         self.main_partner = self.model.create({
             'name': 'Company 1',
             'street': 'Main Street, 2',
-            'ref': 'refclient',
+            'ref': '1231',
             'zip': '999888',
             'city': 'Armagedon',
             'country_id': 44,
         })
         self.all_records |= self.main_partner
         self.main_partner_invoice = self.model.create({
-            'ref': 'ref-invoice',
+            'ref': '1232',
             'name': 'invoicing-address',
             'street': 'Some streets in one line',
             'street2': '',
@@ -57,7 +61,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'country_id': 44,
         })
         self.partner_2_delivery = self.model.create({
-            'ref': 'ref-delivery',
+            'ref': '1233',
             'name': 'delivery-address',
             'street': 'street 1',
             'street2': '',
@@ -127,7 +131,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             # Testing empty ref should not be false but empty string
             'CustomerId': '',
             # Shipping address exists !
-            'AddressId': 'ref-delivery',
+            'AddressId': self.partner_2_delivery.ref,
             'City': self.partner_2_delivery.city,
             'CountryId': self.country44.esb_ref,
             'Firstname': self.partner_2_delivery.name,
@@ -158,3 +162,66 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                 result,
                 self.read_test_file('customer_address_1.xml'),
                 'City')
+
+    def test_address_incomplete(self):
+        """Check that customer with incomplete address are not exported"""
+        # Partner with no name
+        self.model.create({
+            'name': '',
+            'street': 'Main Street, 2',
+            'ref': '991',
+            'zip': '123123',
+            'city': 'Paradise',
+            'country_id': 44,
+        })
+        # Partner with no street
+        self.model.create({
+            'name': 'no street',
+            'street': '',
+            'ref': '992',
+            'zip': '123123',
+            'city': 'Paradise',
+            'country_id': 44,
+        })
+        # Partner with no zip
+        self.model.create({
+            'name': 'no zip',
+            'street': 'street',
+            'ref': '993',
+            'zip': None,
+            'city': 'Paradise',
+            'country_id': 44,
+        })
+        # Partner with no city
+        self.model.create({
+            'name': 'no zip',
+            'street': 'street',
+            'ref': '994',
+            'zip': '2342342',
+            'city': '',
+            'country_id': 44,
+        })
+        # Partner with no country
+        self.model.create({
+            'name': 'no zip',
+            'street': 'street',
+            'ref': '995',
+            'zip': '2342342',
+            'city': 'Ville',
+        })
+        # Partner with country without esb_ref
+        self.model.create({
+            'name': 'no zip',
+            'street': 'street',
+            'ref': '996',
+            'zip': '2342342',
+            'city': 'CiTy',
+            'country_id': self.country_no_ref.id
+        })
+
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+        # Two partners with two addresses is four
+        self.assertEqual(len(items), 4)
