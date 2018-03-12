@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1089 Automate initial stock inventory launch after transactional data import
+* ALCN-1049: Setup routes on product based on locator informations
 
 **Features and Improvements**
 
@@ -236,8 +237,8 @@ Unreleased
 * ALCN-978: Floor to 0 imported inventory quantities
 * ALCN-1048: Import additional_products and quantities on product
 * ALCN-1048: Import promotional products on supplier info
-* ALCN-1049: Create channel to ease paralelization of import jobs
-* ALCN-1049: Update queue branch and apply patch for retries
+* ALCN-1081: Create channel to ease paralelization of import jobs
+* ALCN-1081: Update queue branch and apply patch for retries
 * ALCN-1064: Assign taxes on imported purchase order lines
 
 **Features and Improvements**

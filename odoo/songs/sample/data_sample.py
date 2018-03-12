@@ -91,6 +91,9 @@ def import_products(ctx):
     load_csv_stream(ctx, Product, content, delimiter=',')
     content = resource_stream(req, 'data/sample/logistics_product.csv')
     load_csv_stream(ctx, Product, content, delimiter=';')
+    # Importing data on product about 'Nouveauté' route
+    content = resource_stream(req, 'data/sample/product_new_route_info.csv')
+    load_csv_stream(ctx, Product, content, delimiter=',')
     # Computed fields on product.template are not set for archived product
     # copy the values from product.product
     ctx.env.cr.execute("""

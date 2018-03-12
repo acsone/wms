@@ -49,6 +49,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
@@ -61,6 +62,7 @@ migration:
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_inventory_without_lot
               - anthem songs.install.data_full::import_stock_bins
+              - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               - anthem songs.install.db2_import::main
               # This module needs to be installed after the db2 data import
@@ -223,6 +225,8 @@ migration:
               - anthem songs.install.data_full::import_delivery_round_config
               - anthem songs.install.data_full::import_delivery_carriers_round
               - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - anthem songs.install.data_full::post_import_stock_bins
       addons:
         upgrade:
           ### OCA

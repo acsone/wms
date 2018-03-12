@@ -262,22 +262,65 @@ def import_stock_bins(ctx):
 
 @anthem.log
 def post_import_stock_bins(ctx):
-    """ Add fridge route on product stocked in 'Q' category
+    """ Add route on product stocked depending on locators.
+
     This is a post correction of the csv file product_stock_bin.csv
     for both demo and full data modes.
+
+    Plus add "Nouveauté" route if the former locator has only one letter
+    and has route purchase.route_warehouse0_buy.
+    As locator with 1 letter is not imported we take and clean this information
+    from description_picking field on the product.
 
     """
     StockBin = ctx.env['product.stock.bin']
 
-    familyQ = ctx.env.ref('__import__.location_family_Q')
+    food_route = ctx.env.ref('__setup__.stock_location_route_pick_ali')
     fridge_route = ctx.env.ref('__setup__.stock_location_route_pick_froid')
+    mat_route = ctx.env.ref('__setup__.stock_location_route_pick_materiel')
+    med_route = ctx.env.ref('__setup__.stock_location_route_pick_medoc')
+    new_route = ctx.env.ref('__setup__.stock_location_route_new')
 
-    domain = [('bin_location_id', 'child_of', familyQ.id)]
-    product_bins = StockBin.search(domain)
-    products = product_bins.mapped('product_id')
-    for product in products:
-        if fridge_route not in product.route_ids:
-            product.route_ids |= fridge_route
+    family_map = [
+        ('A', food_route),
+        ('Q', fridge_route),
+        ('E', mat_route),
+        ('P', mat_route),
+        ('G', med_route),
+    ]
+
+    cr = ctx.env.cr
+
+    for family_letter, route in family_map:
+        family = ctx.env.ref('__import__.location_family_%s' % family_letter)
+        domain = [('bin_location_id', 'child_of', family.id)]
+        product_bins = StockBin.search(domain)
+        if not product_bins:
+            continue
+        products = product_bins.mapped('product_id')
+
+        cr.execute(
+            "INSERT INTO stock_route_product (product_id, route_id)"
+            "  SELECT id, %s FROM product_template"
+            "  WHERE id in %s"
+            "    AND id NOT IN ("
+            "      SELECT product_id FROM stock_route_product"
+            "      WHERE route_id = %s)",
+            (route.id, tuple(products.ids), route.id))
+
+    def sql_create_routes(letter, route):
+        cr.execute(
+            "INSERT INTO stock_route_product (product_id, route_id)"
+            "  SELECT id, %s FROM product_template"
+            "  WHERE description_picking = %s"
+            "    AND id NOT IN ("
+            "      SELECT product_id FROM stock_route_product"
+            "      WHERE route_id = %s)",
+            (route.id, family_letter, route.id))
+
+    for family_letter, route in family_map:
+        sql_create_routes(family_letter, route)
+        sql_create_routes(family_letter, new_route)
 
 
 @anthem.log
@@ -289,4 +332,3 @@ def main(ctx):
     # Putting some demo data in full mode because we don't have yet real data
     import_delivery_round_config(ctx)
     import_delivery_carriers_round(ctx)
-    post_import_stock_bins(ctx)
