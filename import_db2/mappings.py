@@ -164,6 +164,11 @@ CUSTOMER_CATEGORY = {
     'cpcl25': '__setup__.customer_category_enseignant',
 }
 
+SUPPLIER_CATEGORY = {
+    '1': '__setup__.supplier_category_marchandise',
+    '2': '__setup__.supplier_category_frais_generaux',
+}
+
 CUSTOMER_ACTIVE = {
     # In AS400, 1 means customer blocked => so inactive.
     1: False,

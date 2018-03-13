@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1155: import supplier categories, goods and general expenses
+
 **Features and Improvements**
 
 **Bugfixes**
