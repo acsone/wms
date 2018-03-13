@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1213: Set Reference field on Customer/Supplier to readonly
+
 **Bugfixes**
 
 **Build**
