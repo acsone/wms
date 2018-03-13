@@ -309,7 +309,7 @@ PRODUCT_TRACKING = {
     0: 'none',
     1: 'lot',
     2: 'lot',
-    4: 'serial',
+    4: 'lot',
 }
 
 COUNTRY = {
