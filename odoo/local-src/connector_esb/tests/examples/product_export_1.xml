@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <ROOT>
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
@@ -38,12 +37,12 @@
       <Cp2z23>0</Cp2z23>
       <!-- Quantity of free product you get -->
       <Cp2z24>0</Cp2z24>
-      <!-- comment DE, always empty -->
-      <Warceg></Warceg>
-      <!-- comment FR, always empty -->
-      <Warcfr></Warcfr>
-      <!-- comment NL BE, always empty -->
-      <Warcnl></Warcnl>
+      <!-- comment DE -->
+      <Warceg>Aufmerksam</Warceg>
+      <!-- comment FR -->
+      <Warcfr>Attention</Warcfr>
+      <!-- comment NL BE -->
+      <Warcnl>Aandacht</Warcnl>
       <!-- VAT rate -->
       <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
@@ -114,11 +113,11 @@
       <Cp2z23>0</Cp2z23>
       <!-- Quantity of free product you get -->
       <Cp2z24>0</Cp2z24>
-      <!-- comment DE, always empty -->
+      <!-- comment DE -->
       <Warceg></Warceg>
-      <!-- comment FR, always empty -->
+      <!-- comment FR -->
       <Warcfr></Warcfr>
-      <!-- comment NL BE, always empty -->
+      <!-- comment NL BE -->
       <Warcnl></Warcnl>
       <!-- VAT rate -->
       <Gesctv>009</Gesctv>
@@ -190,11 +189,11 @@
       <Cp2z23>5</Cp2z23>
       <!-- Quantity of free product you get -->
       <Cp2z24>1</Cp2z24>
-      <!-- comment DE, always empty -->
+      <!-- comment DE -->
       <Warceg></Warceg>
-      <!-- comment FR, always empty -->
+      <!-- comment FR -->
       <Warcfr></Warcfr>
-      <!-- comment NL BE, always empty -->
+      <!-- comment NL BE -->
       <Warcnl></Warcnl>
       <!-- VAT rate -->
       <Gesctv>006</Gesctv>

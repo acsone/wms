@@ -35,3 +35,9 @@ class ProductCategory(models.Model):
         help='When a new a Serial Number is issued, '
              'this is the number of days before an alert should be notified.'
     )
+
+    warning_info = fields.Char(
+        string='Warning information',
+        help='Additional information communicated to the customer',
+        translate=True,
+    )

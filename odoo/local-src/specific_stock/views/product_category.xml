@@ -14,6 +14,12 @@
                 <field name="alert_time" />
             </field>
 
+            <group name="first" position="after">
+              <group>
+                <field name="warning_info"/>
+              </group>
+            </group>
+
         </field>
     </record>
 

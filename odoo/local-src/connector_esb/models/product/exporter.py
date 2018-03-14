@@ -56,12 +56,19 @@ class ProductExportMapper(Component):
                 }
 
     @mapping
+    def category_warnings(self, record):
+        cat = record.categ_id
+        return {
+            'Warceg': cat.with_context({'lang': 'de_DE'}).warning_info or '',
+            'Warcfr': cat.with_context({'lang': 'fr_BE'}).warning_info or '',
+            'Warcnl': cat.with_context({'lang': 'nl_BE'}).warning_info or '',
+            }
+
+    @mapping
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
-        empty = ('Warceg', 'Warcfr', 'Warcnl')
         zero = ('Gescsg', 'Cp2z17', 'Cp2z19')
-        values = {f: '' for f in empty}
-        values.update({f: 0 for f in zero})
+        values = {f: 0 for f in zero}
         return values
 
     @mapping

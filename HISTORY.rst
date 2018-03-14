@@ -13,6 +13,10 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1213: Set Reference field on Customer/Supplier to readonly
+* ALCN-1207: Add warning information on product category
+    * On product category add multi language warning
+    * On sale order confirmation add warning if category present
+    * Add message in product xml (wso2)
 
 **Bugfixes**
 
