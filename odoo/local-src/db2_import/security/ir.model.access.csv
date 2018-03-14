@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_db2_importer_table,access_db2_importer_table,model_db2_importer_table,,1,1,1,1
+access_db2_importer,access_db2_importer,model_db2_importer,,1,1,1,1
+
