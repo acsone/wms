@@ -8,26 +8,14 @@ from odoo import fields, models, api
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    supplier_invoice_number = fields.Char('Vendor reference', copy=False)
+    def _onchange_partner_id(self):
+        """ Fix puchase module that override journal for unknown reason """
+        journal = self.journal_id
+        res = super(AccountInvoice, self)._onchange_partner_id()
+        if self.journal_id != journal:
+            self.journal_id = journal
+        return res
 
-    _sql_constraints = [
-        ('unique_invoice_number_by_supplier',
-         'unique (partner_id,supplier_invoice_number)',
-         'The supplier invoice number must be unique by supplier')
-    ]
-
-    @api.onchange('supplier_invoice_number', 'reference_type')
-    def onchange_supplier_invoice_number(self):
-        """
-        Set the reference with the supplier invoice number
-        if the reference is empty
-        and the reference type is "Free Communication"
-        :return:
-        """
-        self.ensure_one()
-
-        if not self.supplier_invoice_number:
-            return
-
-        if self.reference_type == 'none' and not self.reference:
-            self.reference = self.supplier_invoice_number
+    @api.onchange('partner_id')
+    def _onchange_intrastat_country(self):
+        self.intrastat_country_id = self.partner_id.country_id

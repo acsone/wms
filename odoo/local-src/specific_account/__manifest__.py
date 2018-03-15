@@ -31,7 +31,6 @@
         'views/account_analytic_tag.xml',
         'views/account_invoice_report.xml',
         'views/account_invoice_view.xml',
-        'views/ir_sequence.xml',
         'views/menu.xml',
         'views/res_config.xml',
     ],

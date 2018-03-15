@@ -177,11 +177,6 @@ msgid "Use the end date of the range"
 msgstr "Utiliser la date de fin de l'intervalle"
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_account_invoice_supplier_invoice_number
-msgid "Vendor reference"
-msgstr "Référence fournisseur"
-
-#. module: specific_account
 #: model:ir.model,name:specific_account.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"

@@ -144,6 +144,8 @@ migration:
           - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
+          - ir_sequence_period
+          - l10n_be_bba_fix
           - pricelist_discount
           - procurement_sale
           - product_additional

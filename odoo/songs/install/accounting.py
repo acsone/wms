@@ -67,6 +67,11 @@ def settings(ctx):
 def default_values(ctx):
     """ Set some default values.
     """
+    expense_account = ctx.env.ref('l10n_be.1_a604')
+    ctx.env['ir.values'].search([
+        ('name', '=', 'property_account_expense_categ_id')]).write({
+            'value_reference': 'account.account,%d' % expense_account.id})
+
     create_or_update(ctx, 'ir.values', '__setup__.res_partner_default_bba', {
         'key': 'default',
         'name': 'out_inv_comm_type',
@@ -78,7 +83,7 @@ def default_values(ctx):
         'key': 'default',
         'name': 'out_inv_comm_algorithm',
         'model': 'res.partner',
-        'value_unpickle': 'random',
+        'value_unpickle': 'partner_ref',
         'key2': None,
     })
 
@@ -252,6 +257,9 @@ def adapt_chart_of_account(ctx):
     """ Adapt chart of account """
     content = resource_stream(req, 'data/install/account.account.csv')
     load_csv_stream(ctx, 'account.account', content, delimiter=',')
+    model = 'account.fiscal.position.account'
+    content = resource_stream(req, 'data/install/%s.csv' % model)
+    load_csv_stream(ctx, model, content, delimiter=',')
 
 
 @anthem.log
@@ -273,17 +281,17 @@ def setup_sequences(ctx):
     )
 
     customer_journal.sequence_id.write({
-        'prefix': 'FV/17/',
+        'prefix': 'FV/%(range_year)s/',
         'padding': 5,
-        'use_date_range': False,
+        'use_date_range': True,
     })
 
     refund_seq = create_or_update(
         ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
-            'prefix': 'NCV/17/',
+            'prefix': 'NCV/%(range_year)s/',
             'padding': 5,
-            'use_date_range': False,
+            'use_date_range': True,
             'implementation': 'no_gap',
         }
     )
@@ -291,6 +299,15 @@ def setup_sequences(ctx):
         'refund_sequence': True,
         'refund_sequence_id': refund_seq.id,
     })
+
+    ctx.env['ir.sequence'].search([
+        ('prefix', 'ilike', 'range_year'),
+        ('prefix', 'not ilike', 'range_month'),
+        ]).write({'use_end_date': True})
+
+    ctx.env['ir.sequence'].search([
+        ('prefix', 'ilike', 'MISC'),
+        ]).write({'prefix': 'OD/%(range_year)s/%(range_month)s/'})
 
 
 @anthem.log
@@ -357,8 +374,13 @@ def set_esb_references(ctx):
 @anthem.log
 def import_account_payment_term(ctx):
     """ Importing account payment term """
+    # Delete default payment terms
+    ctx.env['account.payment.term'].search([
+        ('name', 'not ilike', '-')]).unlink()
     content = resource_stream(req, 'data/install/account.payment.term.csv')
     load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
+    # A default line is created. Delete them before import.
+    ctx.env['account.payment.term.line'].search([]).unlink()
     lines = resource_stream(req, 'data/install/account.payment.term.line.csv')
     load_csv_stream(ctx, 'account.payment.term.line', lines, delimiter=',')
 
@@ -396,6 +418,12 @@ def setup_cutoff(ctx):
 
 
 @anthem.log
+def setup_intrastat(ctx):
+    # Do not declare goods inside country
+    ctx.env.ref('base.be').intrastat = False
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -406,6 +434,7 @@ def main(ctx):
     import_account_journal(ctx)
     import_account_analytic_tag(ctx)
     import_account_analytic_account(ctx)
+    default_values(ctx)
     company_settings(ctx)
     company_currency(ctx)
     activate_multicurrency(ctx)
@@ -415,3 +444,4 @@ def main(ctx):
     set_esb_references(ctx)
     import_account_payment_term(ctx)
     setup_cutoff(ctx)
+    setup_intrastat(ctx)
