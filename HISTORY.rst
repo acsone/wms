@@ -15,6 +15,7 @@ Unreleased
 * ALCN-1205: import create_date on products
 
 **Features and Improvements**
+* Revert Belgium Taxes names and codes to v8 setup (before F.P. messed them all) + add missing Belgian standard taxes
 
 **Bugfixes**
 

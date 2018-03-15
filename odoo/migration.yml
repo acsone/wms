@@ -16,6 +16,7 @@ migration:
           - odoo -i l10n_be_antibiotic_tax --stop-after-init --workers=0
           - odoo -i l10n_be_apb_tax        --stop-after-init --workers=0
           - odoo -i l10n_be_eco_tax        --stop-after-init --workers=0
+          - odoo -i l10n_be_vat            --stop-after-init --workers=0
           - anthem songs.install.accounting::no_coa_instance_unlock
           - anthem songs.install.pre::setup_company
           # Install cloud platform if $C2C_PLATFORM == 'True'
