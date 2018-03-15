@@ -22,6 +22,7 @@ class ProductMapper(EntityMapper):
     XMLID_FIELD = 'default_code'
 
     FIELDS_MAPPING = [
+        FieldMapper('create_date', 'gesc', is_date=True),
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
         FieldMapper('standard_price', 'gespan'),
