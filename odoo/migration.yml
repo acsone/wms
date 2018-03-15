@@ -71,6 +71,8 @@ migration:
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
+              # TODO: This has to be executed after all import jobs on PROD
+              # - anthem songs.install.connector::main
         sample:
           operations:
             post:
@@ -261,7 +263,7 @@ migration:
             post:
               # already done by hand on integration
               # - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/product-min-max.csv
-              - echo
+              - anthem songs.install.connector::main
       addons:
         upgrade:
           ### local-src
