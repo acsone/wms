@@ -243,3 +243,9 @@ migration:
           - specific_report
           - stock_orderpoint_product
           - website_purchase_review
+    - version: 10.17.3
+      modes:
+        full:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/product-min-max.csv

@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Update min and max stock rules on products
+
 **Features and Improvements**
 
 * ALCN-1213: Set Reference field on Customer/Supplier to readonly
