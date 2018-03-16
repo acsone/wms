@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Delivery Rounds (Alcyon specific): add missing README and module auto install in migration.yml
 
 **Build**
 
