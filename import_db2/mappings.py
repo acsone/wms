@@ -197,6 +197,10 @@ PARTNER_LEGAL_ENTITY = {
     16: 'S.C.R.L.',
 }
 
+PARTNER_IS_COMPANY = {
+    k: True for k in [2, 3, 4, 5, 6, 8, 9, 13, 14, 15, 16]
+}
+
 CLIENT_DISCOUNT_PRICELIST = {
     5: '__setup__.pricelist_5',
     6: '__setup__.pricelist_6',
