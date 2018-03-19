@@ -22,6 +22,7 @@ Unreleased
 * ALCN-1192: Activate auto export of Pharmacy and Promotions Alcyon (wso2)
 
 **Bugfixes**
+* Delivery Rounds (Alcyon specific): add missing README and module auto install in migration.yml
 
 * ALCN-1228: Fix a bug with orderpoint on product template
 

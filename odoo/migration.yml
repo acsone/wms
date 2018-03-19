@@ -141,6 +141,7 @@ migration:
           - connector_esb
           - db2_import
           - delivery_rounds
+          - delivery_rounds_alcyon
           - pricelist_discount
           - procurement_sale
           - product_additional
