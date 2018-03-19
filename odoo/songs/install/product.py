@@ -38,6 +38,22 @@ def zero_digits_for_uom(ctx):
 
 
 @anthem.log
+def setup_product_default_code_sequence(ctx):
+    """ Initialize sequence for default_code on product
+
+    The highest numeric id in db2 is 9999999.
+    But the last created ids at the time of writting this are
+    5840422, 5840504, 5062001, 8286585, 5311165, 5151528
+    """
+    sequence_start = 10000000
+    ref_seq = ctx.env.ref('product_sequence.seq_product_auto')
+    ref_seq.prefix = ''
+    seq_name = 'ir_sequence_%03d' % ref_seq.id
+    sql = ('ALTER SEQUENCE %s RESTART WITH %d;' % (seq_name, sequence_start))
+    ctx.env.cr.execute(sql)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
