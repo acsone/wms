@@ -11,7 +11,7 @@ from ...components.mapper import falsy2zero, dt2nakeddate
 class BuyXGetYExportMapper(Component):
     _name = 'esb..buyx.gety.mapper'
     _inherit = ['esb.export.mapper']
-    _apply_on = 'product.supplierinfo'
+    _apply_on = 'product.supplierinfo.esbflux'
 
     @classmethod
     def _component_match(cls, work):
@@ -34,6 +34,10 @@ class BuyXGetYExportMapper(Component):
         return {'AlcyonGroupId': self.options.alcyon_group_id}
 
     @mapping
+    def compute_action(self, record):
+        return {'Action': record.action.capitalize()}
+
+    @mapping
     def compute_fixed_value(self, record):
         return {'QtyBuy2': 0,
                 'QtyGet2': 0,
@@ -45,7 +49,6 @@ class BuyXGetYExportMapper(Component):
                 'QtyGet5': 0,
                 'QtyBuy6': 0,
                 'QtyGet6': 0,
-                'Action': 'Create',
                 }
 
     @mapping
@@ -62,7 +65,7 @@ class BuyXGetYCronExporter(Component):
     _name = 'esb.buyx.gety.cron.exporter'
     _inherit = ['esb.cron.exporter', ]
     _usage = 'record.exporter.cron'
-    _apply_on = 'product.supplierinfo'
+    _apply_on = 'product.supplierinfo.esbflux'
 
     @classmethod
     def _component_match(cls, work):
@@ -75,6 +78,7 @@ class BuyXGetYCronExporter(Component):
         One item for each Alyon Group with an esb_ref equal or higher to 100
         """
         prepared = []
+        items = items.remove_duplicate_actions()
         price_list = self.env['product.pricelist'].search(
                 [('esb_ref', '!=', '')])
         price_list = price_list.filtered(lambda r: len(r.esb_ref) > 2)
@@ -92,4 +96,5 @@ class BuyXGetYCronExporter(Component):
                 ('date_end', '>=', today),
                 ('ratio_main_product', '!=', False),
                 ('ratio_promotional_product', '!=', False),
+                ('flux', '=', 'buyxgety'),
                 ]

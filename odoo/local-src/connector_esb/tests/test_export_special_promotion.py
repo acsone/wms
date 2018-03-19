@@ -2,6 +2,8 @@
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from datetime import datetime, timedelta
+
 from .common import ESBXMLTestCase
 
 
@@ -16,21 +18,22 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
 
     @property
     def model(self):
-        return self.env['product.supplierinfo']
+        return self.env['product.supplierinfo.esbflux']
 
     def setup_records(self):
+        self.model.search([(1, '=', 1)]).unlink()
         # Create 2 products
-        self.p1 = self.env['product.product'].create({
+        self.p1 = self.env['product.template'].create({
             'name': 'Unittest P1',
             'default_code': '0001'
         })
-        self.p2 = self.env['product.product'].create({
+        self.p2 = self.env['product.template'].create({
             'name': 'Unittest P2',
             'default_code': '0002'
         })
         # Create a supplier
         self.supplier1 = self.env['res.partner'].create({
-            'ref': '110',
+            'ref': '123123',
             'name': 'Joe',
             'street': 'Chemin des Pins, 23',
             'street2': '',
@@ -42,38 +45,45 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             'email': 'joe@ch.ch',
             'supplier': True,
         })
+        self.weeks_ago = datetime.today() - timedelta(weeks=3)
+        self.weeks_fromnow = datetime.today() + timedelta(weeks=3)
+        # Current promotion
         self.psi1 = self.model.create({
-            'delay': 3,
-            'currency_id': self.env.user.company_id.currency_id.id,
-            'name': self.supplier1.id,
-            'product_id': self.p1.id,
+            'product_tmpl_id': self.p1.id,
             'discount_sale': 5,
-            'date_start': '2017-07-12',
-            'date_end': '2017-12-31',
-            'min_qty': 5,
-            'price': 123,
+            'date_start': self.weeks_ago.strftime('%Y-%m-%d'),
+            'date_end': self.weeks_fromnow.strftime('%Y-%m-%d'),
+            'flux': 'specialpromotion',
+            'action': 'create',
             })
+        # Obsolete promotion, it is in the past
         self.psi2 = self.model.create({
-            'delay': 4,
-            'currency_id': self.env.user.company_id.currency_id.id,
-            'name': self.supplier1.id,
-            'product_id': self.p2.id,
+            'product_tmpl_id': self.p2.id,
             'discount_sale': 15,
             'date_start': '2017-07-31',
             'date_end': '2017-08-31',
-            'min_qty': 4,
-            'price': 321,
+            'flux': 'specialpromotion',
+            'action': 'create',
+            })
+        # Bad promotion no discount
+        self.psi3 = self.model.create({
+            'product_tmpl_id': self.p1.id,
+            'discount_sale': 0,
+            'date_start': self.weeks_ago.strftime('%Y-%m-%d'),
+            'date_end': self.weeks_fromnow.strftime('%Y-%m-%d'),
+            'flux': 'specialpromotion',
+            'action': 'create',
             })
 
     def test_mapper(self):
-        """ Testing mapper without id client """
+        """ Testing mapper"""
         rec = self.psi1
         expected = {
             'Sku': u'0001',
             'Percent1': '5.00',
             'Percent2': '0',
-            'StartDate': '20170712',
-            'EndDate': '20171231',
+            'StartDate': self.weeks_ago.strftime('%Y%m%d'),
+            'EndDate': self.weeks_fromnow.strftime('%Y%m%d'),
             'AlcyonGroupId': '100',
             'Action': 'Create',
             'CheckSum': ''.join([str(rec.id), '100'])
@@ -85,3 +95,11 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             self.assertDictEqual(
                     mapper.map_record(rec).values(alcyon_group_id='100'),
                     expected)
+
+    def test_domain(self):
+        """Test we get the correct items"""
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            items = exporter.get_items(None)
+            self.assertEqual(len(items), 1)

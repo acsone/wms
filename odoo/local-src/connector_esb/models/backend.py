@@ -114,12 +114,12 @@ class ESBBackend(models.Model):
     def cron_export_special_promotion(self):
         backend = self.get_singleton()
         backend._get_timestamp('product.supplierinfo',
-                               'special.promotion').export()
+                               'special.promotion.esbflux').export()
 
     @api.model
     def cron_export_buy_x_get_y(self):
         backend = self.get_singleton()
-        backend._get_timestamp('product.supplierinfo',
+        backend._get_timestamp('product.supplierinfo.esbflux',
                                'product.buyxgety').export()
 
     @api.model

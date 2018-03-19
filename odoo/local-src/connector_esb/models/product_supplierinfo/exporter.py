@@ -10,7 +10,7 @@ from odoo.addons.connector.components.mapper import mapping
 class SpecialPromotionExportMapper(Component):
     _name = 'esb.special.promotion.mapper'
     _inherit = ['esb.export.mapper']
-    _apply_on = 'product.supplierinfo'
+    _apply_on = 'product.supplierinfo.esbflux'
 
     @classmethod
     def _component_match(cls, work):
@@ -54,8 +54,8 @@ class SpecialPromotionExportMapper(Component):
         return {'AlcyonGroupId': self.options.alcyon_group_id}
 
     @mapping
-    def compute_fixed_values(self, record):
-        return {'Action': 'Create'}
+    def compute_action(self, record):
+        return {'Action': record.action.capitalize()}
 
     @mapping
     def compute_checksum(self, record):
@@ -71,7 +71,7 @@ class SpecialPromotionCronExporter(Component):
     _name = 'esb.special.promotion.cron.exporter'
     _inherit = ['esb.cron.exporter', ]
     _usage = 'record.exporter.cron'
-    _apply_on = 'product.supplierinfo'
+    _apply_on = 'product.supplierinfo.esbflux'
 
     @classmethod
     def _component_match(cls, work):
@@ -84,6 +84,7 @@ class SpecialPromotionCronExporter(Component):
         One item for each Alyon Group with an esb_ref equal or higher to 100
         """
         prepared = []
+        items = items.remove_duplicate_actions()
         price_list = self.env['product.pricelist'].search(
                 [('esb_ref', '!=', '')])
         price_list = price_list.filtered(lambda r: len(r.esb_ref) > 2)
@@ -100,4 +101,5 @@ class SpecialPromotionCronExporter(Component):
         return [('date_start', '!=', False),
                 ('date_end', '>=', today),
                 ('discount_sale', '>', 0),
+                ('flux', '=', 'specialpromotion'),
                 ]

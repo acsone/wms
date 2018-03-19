@@ -7,6 +7,19 @@ from odoo import fields, api, models, _
 class ProductSupplierinfo(models.Model):
     _inherit = 'product.supplierinfo'
 
+    _sql_constraints = [
+        (
+            'valid_promotion_buyx_gety',
+            '''CHECK ((ratio_main_product > 0 and ratio_promotional_product > 0) or
+               ((ratio_main_product is NULL or ratio_main_product = 0) and
+                (ratio_promotional_product is NULL or
+                 ratio_promotional_product = 0)))
+            ''',
+            _('''A valid promotion on quantity must have both value higher than
+                 zero''')
+        ),
+    ]
+
     ratio_main_product = fields.Integer('Ratio Main Product')
     ratio_promotional_product = fields.Integer('Ratio Free Product')
     ratio_display_name = fields.Char('Promotion',

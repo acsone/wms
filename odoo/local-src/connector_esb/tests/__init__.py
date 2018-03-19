@@ -15,3 +15,5 @@ from . import test_export_product_price
 from . import test_export_buyx_gety
 from . import test_export_stock_update
 from . import test_export_document_zip
+from . import test_product_supplierinfo_esbflux
+from . import test_product_supplierinfo_esbflux_purge
