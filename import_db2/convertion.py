@@ -526,7 +526,7 @@ class AddressMapper(EntityMapper):
     DB2_NAME = 'ADRLIV'
     DB2_REF_NAME = 'adlnum'
 
-    XMLID_FIELD = 'ref'
+    XMLID_FIELD = 'id'
     FIELDS_MAPPING = [
         FieldMapper('name', 'adlnom'),
         FieldMapper('street', 'adladr'),
@@ -541,7 +541,7 @@ class AddressMapper(EntityMapper):
         FieldMapper('lang', 'adllan',
                     mapping=mappings.LANG),
         'phone_numbers',
-        'type', 'ref', 'parent_id',
+        'type', 'id', 'parent_id',
     ]
 
     @staticmethod
@@ -551,10 +551,10 @@ class AddressMapper(EntityMapper):
         )
 
     @staticmethod
-    def convert_ref(odoo_entity, db2_entity):
+    def convert_id(odoo_entity, db2_entity):
         ttype = odoo_entity['type']
         parent = db2_entity['adlnum'].lstrip('0')
-        odoo_entity['ref'] = "%s_%s" % (ttype, parent)
+        odoo_entity['id'] = "%s_%s" % (ttype, parent)
 
     @staticmethod
     def convert_type(odoo_entity, db2_entity):

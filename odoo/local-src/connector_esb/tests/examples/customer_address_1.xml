@@ -9,9 +9,9 @@
       <Postcode>xyz</Postcode>
       <Firstname>invoicing-address</Firstname>
       <IsDefaultBilling>True</IsDefaultBilling>
-      <AddressId>ref-invoice</AddressId>
+      <AddressId>1232</AddressId>
       <Telephone>021123123</Telephone>
-      <CustomerId>refclient</CustomerId>
+      <CustomerId>1231</CustomerId>
     </Row>
     <Row>
       <IsDefaultShipping>True</IsDefaultShipping>
@@ -21,7 +21,7 @@
       <AddressId>0</AddressId>
       <Firstname>Company 1</Firstname>
       <IsDefaultBilling>False</IsDefaultBilling>
-      <CustomerId>refclient</CustomerId>
+      <CustomerId>1231</CustomerId>
       <Postcode>999888</Postcode>
     </Row>
   </Root>

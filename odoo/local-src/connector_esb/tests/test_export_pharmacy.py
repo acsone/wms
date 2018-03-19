@@ -23,7 +23,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
                 [('code', '=', 'CH')])[0]
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
-            'ref': 'J',
+            'ref': '110',
             'name': 'Joe',
             'street': 'Chemin des Pins, 23',
             'street2': '',
@@ -35,7 +35,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'email': 'joe@ch.ch',
         })
         self.pharmacist_1 = self.model.create({
-            'ref': 'P',
+            'ref': '116',
             'name': 'Peter',
             'street': 'Chemin des Oies, 1',
             'street2': u'A côté de la fontaine',
@@ -48,7 +48,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.pharmacist_1
         self.all_records |= self.model.create({
-            'ref': 'O',
+            'ref': '115',
             'name': 'Olson',
             'street': 'Chemin des Canards, 1',
             'zip': '1003',
@@ -59,7 +59,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
         })
         self.client_1 = self.env.ref('base.main_partner')
         self.client_2 = self.model.create({
-            'ref': 'client_1',
+            'ref': '1',
             'name': 'Yoyo',
             'country_id': self.country_ch.id,
         })
@@ -71,7 +71,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
     def test_mapper(self):
         """ Generate dict with the mapper and compare with what is expected"""
         expected = {
-            'Id': 'J',
+            'Id': '110',
             'Name': 'Joe',
             'Postcode': '1010',
             'City': 'Lausanne',
@@ -90,7 +90,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
     def test_mapper_street_multi_line(self):
         """ Test the mapper with multi line for street """
         expected = {
-            'Id': 'P',
+            'Id': '116',
             'Name': 'Peter',
             'Postcode': '1010',
             'City': 'Lausanne',
@@ -109,7 +109,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
     def test_mapper_empty_email(self):
         """ Generate dict with the mapper and compare with what is expected"""
         expected = {
-            'Id': 'O',
+            'Id': '115',
             'Name': 'Olson',
             'Postcode': '1003',
             'City': 'Geneve',
@@ -144,7 +144,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
     def test_no_update_since_last_export(self):
         """ Test timestamp should return no records"""
         record = self.model.create({
-            'ref': 'R',
+            'ref': '118',
             'name': 'Roland',
             'street': 'Chemin des Canards, 1',
             'street2': u'De l\'autre côté de la fontaine',

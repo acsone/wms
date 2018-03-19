@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from odoo.osv.expression import AND
 
 from ...components.mapper import falsy2emptystring
 
@@ -106,6 +107,16 @@ class CustomerAddressCronExporter(Component):
                 self.mapper.map_record(item).values(address_kind=kind))
         return prepared
 
+    def _valid_address_domain(self):
+        """All address that are sent must be valid."""
+        return [
+            ('city', '!=', ''),
+            ('name', '!=', ''),
+            ('zip', '!=', ''),
+            ('street', '!=', ''),
+            ('country_id.esb_ref', '!=', '')
+        ]
+
     def get_items(self, export_since):
         """Get customer addresses and add type of address to export
 
@@ -122,12 +133,13 @@ class CustomerAddressCronExporter(Component):
         # the pair (invoice, delivery), even if they have not been modified.
         # The following search extend the items with the children addresses
         # or the parent.
+        domain = ['|',
+                  ('id', 'child_of', items.ids),
+                  ('child_ids', 'in', items.ids),
+                  ('type', 'in', ('delivery', 'invoice', 'contact')),
+                  ]
         items = self.env['res.partner'].search(
-                ['|',
-                 ('id', 'child_of', items.ids),
-                 ('child_ids', 'in', items.ids),
-                 ('type', 'in', ('delivery', 'invoice', 'contact')),
-                 ],
+                AND([domain, self._valid_address_domain()]),
                 order='create_date DESC'
                 )
         # group the records by kind of address in dictionaries for fast lookups
@@ -166,4 +178,8 @@ class CustomerAddressCronExporter(Component):
         return items2export
 
     def get_items_domain(self):
-        return [('customer', '=', 1)]
+        domain = ['|',
+                  ('customer', '=', 1),
+                  ('parent_id.customer', '=', 1)
+                  ]
+        return AND([domain, self._valid_address_domain()])

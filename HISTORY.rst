@@ -60,6 +60,7 @@ Unreleased
     Date péremption 1er lot (LotEch), Fractionnement (Cplz29), Déconditionnable (ges.cov)
 * ALCN-161: Add module website_purchase_review
 * ALCN-1202: Add accessories in product XLM (wso2)
+* ALCN-1195: Do not export incomplete client addresses (wso2)
 
 **Bugfixes**
 

@@ -69,7 +69,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.customer1
         self.all_records |= self.model.create({
-            'ref': 'P',
+            'ref': '100',
             'name': 'Peter',
             'lang': 'en_US',
             'street': 'Chemin des Oies, 1',
@@ -87,7 +87,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         })
         # This one should not be processed because not a customer type
         self.all_records |= self.model.create({
-            'ref': 'P',
+            'ref': '101',
             'name': 'Peter',
             'lang': 'en_US',
             'street': 'Chemin des Oies, 1',
@@ -104,7 +104,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         })
         # This one should not be processed because it has a parent
         self.all_records |= self.model.create({
-            'ref': 'P',
+            'ref': '102',
             'name': 'Peter',
             'lang': 'en_US',
             'street': 'Chemin des Oies, 1',
