@@ -248,4 +248,5 @@ migration:
         full:
           operations:
             post:
+              # TODO comment on releasing, as done by hand on integration
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/product-min-max.csv
