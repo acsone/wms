@@ -16,7 +16,7 @@ Unreleased
 
 **Bugfixes**
 
-* Fix a bug with orderpoint on product template
+* ALCN-1228: Fix a bug with orderpoint on product template
 
 **Build**
 
