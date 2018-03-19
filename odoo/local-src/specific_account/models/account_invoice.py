@@ -8,6 +8,7 @@ from odoo import models, api
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    @api.onchange('partner_id', 'company_id')
     def _onchange_partner_id(self):
         """ Fix puchase module that override journal for unknown reason """
         journal = self.journal_id
