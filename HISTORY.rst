@@ -26,6 +26,9 @@ Unreleased
 
 * ALCN-1177: Set unique and automatic default_code on product
 * ALCN-1192: Activate auto export of Pharmacy and Promotions Alcyon (wso2)
+* ALCN-1194/ALCN-1193: Implement XML Action tag with Create Delete on product.supplierinfo (wso2)
+* ALCN-1195: Do not export incomplete client addresses (wso2)
+* ALCN-1202: Add accessories in product XLM (wso2)
 * ALCN-1207: Add warning information on product category
     * On product category add multi language warning
     * On sale order confirmation add warning if category present
@@ -69,9 +72,6 @@ Unreleased
 * ALCN-1208: Remove tags in product xml (wso2)
     Date péremption 1er lot (LotEch), Fractionnement (Cplz29), Déconditionnable (ges.cov)
 * ALCN-161: Add module website_purchase_review
-* ALCN-1202: Add accessories in product XLM (wso2)
-* ALCN-1195: Do not export incomplete client addresses (wso2)
-* ALCN-1194/ALCN-1193: Implement XML Action tag with Create Delete on product.supplierinfo (wso2)
 
 **Bugfixes**
 
