@@ -6,29 +6,37 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.17.3 (2018-03-19)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update min and max stock rules on products
 
 **Features and Improvements**
 
-* ALCN-1213: Set Reference field on Customer/Supplier to readonly
+* ALCN-1177: Set unique and automatic default_code on product
+* ALCN-1192: Activate auto export of Pharmacy and Promotions Alcyon (wso2)
 * ALCN-1207: Add warning information on product category
     * On product category add multi language warning
     * On sale order confirmation add warning if category present
     * Add message in product xml (wso2)
-* ALCN-1177: Set unique and automatic default_code on product
+* ALCN-1213: Set Reference field on Customer/Supplier to readonly
 * ALCN-1218: Changes to a sale order line must activate the process of the sale order by the connector
-* ALCN-1192: Activate auto export of Pharmacy and Promotions Alcyon (wso2)
 
 **Bugfixes**
-* Delivery Rounds (Alcyon specific): add missing README and module auto install in migration.yml
 
 * ALCN-1228: Fix a bug with orderpoint on product template
-
-**Build**
-
-**Documentation**
+* Delivery Rounds (Alcyon specific): add missing README and module auto install in migration.yml
 
 
 10.17.2 (2018-03-12)
