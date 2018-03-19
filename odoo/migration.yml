@@ -249,18 +249,22 @@ migration:
           - stock_orderpoint_product
           - website_purchase_review
     - version: 10.17.3
+      operations:
+        post:
+          - anthem songs.install.product_category::main
+          - anthem songs.install.product::setup_product_default_code_sequence
       modes:
         full:
           operations:
+            pre:
+              - anthem songs.upgrade.10_17_3_update::pre
             post:
               # already done by hand on integration
               # - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/product-min-max.csv
               - echo
       addons:
         upgrade:
-          - specific_stock
+          ### local-src
           - product_sequence
-      operations:
-        post:
-          - anthem songs.install.product_category::main
-          - anthem songs.install.product::setup_product_default_code_sequence
+          - specific_partner
+          - specific_stock
