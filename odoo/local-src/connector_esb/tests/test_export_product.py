@@ -21,6 +21,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         }
         self.setup_records()
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
+        self.maxDiff = None
 
     @property
     def model(self):
@@ -56,6 +57,9 @@ class ExportProductTestCase(ESBXMLTestCase):
         ali = self.env.ref('specific_product.product_price_category_ali')
         alg = self.env.ref('specific_product.product_price_category_alg')
         alh = self.env.ref('specific_product.product_price_category_alh')
+
+        self.additional_product = self.env.ref('product.product_product_4')
+        self.additional_product.default_code = 'SKU_FREE'
 
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
@@ -124,6 +128,9 @@ class ExportProductTestCase(ESBXMLTestCase):
             'tracking': 'none',
             'uom_id': unit.id,
             'uom_po_id': unit.id,
+            'ratio_main_product': 5,
+            'ratio_additional_product': 1,
+            'additional_product_id': self.additional_product.id,
             'price_category_id': alh.id,
             'taxes_id': [(4, tax.id)],
             'seller_ids': [

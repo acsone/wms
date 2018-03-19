@@ -32,11 +32,11 @@
       <Gespnt>10.0</Gespnt>
       <!-- volume -->
       <Cp2z08>0.01</Cp2z08>
-      <!-- related to free accessory, always empty -->
+      <!-- Free product you get -->
       <Cp2z22></Cp2z22>
-      <!-- related to free accessory, always 0 -->
+      <!-- Qantity needed to get free product -->
       <Cp2z23>0</Cp2z23>
-      <!-- related to free accessory, always 0 -->
+      <!-- Quantity of free product you get -->
       <Cp2z24>0</Cp2z24>
       <!-- comment DE, always empty -->
       <Warceg></Warceg>
@@ -108,11 +108,11 @@
       <Gespnt>5.0</Gespnt>
       <!-- volume -->
       <Cp2z08>0.005</Cp2z08>
-      <!-- related to free accessory, always empty -->
+      <!-- Free product you get -->
       <Cp2z22></Cp2z22>
-      <!-- related to free accessory, always 0 -->
+      <!-- Qantity needed to get free product -->
       <Cp2z23>0</Cp2z23>
-      <!-- related to free accessory, always 0 -->
+      <!-- Quantity of free product you get -->
       <Cp2z24>0</Cp2z24>
       <!-- comment DE, always empty -->
       <Warceg></Warceg>
@@ -184,12 +184,12 @@
       <Gespnt>2.5</Gespnt>
       <!-- volume -->
       <Cp2z08>1.0</Cp2z08>
-      <!-- related to free accessory, always empty -->
-      <Cp2z22></Cp2z22>
-      <!-- related to free accessory, always 0 -->
-      <Cp2z23>0</Cp2z23>
-      <!-- related to free accessory, always 0 -->
-      <Cp2z24>0</Cp2z24>
+      <!-- Free product you get -->
+      <Cp2z22>SKU_FREE</Cp2z22>
+      <!-- Qantity needed to get free product -->
+      <Cp2z23>5</Cp2z23>
+      <!-- Quantity of free product you get -->
+      <Cp2z24>1</Cp2z24>
       <!-- comment DE, always empty -->
       <Warceg></Warceg>
       <!-- comment FR, always empty -->
