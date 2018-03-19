@@ -52,6 +52,7 @@
         # Data
         'data/ir_cron.xml',
         'data/ir_config_parameter.xml',
+        'data/product.category.csv',
     ],
     'installable': True,
 }

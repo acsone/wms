@@ -38,6 +38,10 @@ class ExportProductTestCase(ESBXMLTestCase):
             'supplier': True,
             'ref': '65852',
         })
+        self.p_cat = self.env.ref('specific_data.product_categ_humain')
+        self.p_cat.with_context({'lang': 'nl_BE'}).warning_info = 'Aandacht'
+        self.p_cat.with_context({'lang': 'fr_BE'}).warning_info = 'Attention'
+        self.p_cat.with_context({'lang': 'de_DE'}).warning_info = 'Aufmerksam'
 
         tax = self.env['account.tax'].search(
             [('type_tax_use', '=', 'sale')],
@@ -64,6 +68,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'name': 'Export me pls',
+            'categ_id': self.p_cat.id,
             'default_code': 'exportable001',
             'type': 'product',
             'barcode': 'XXX0001',
@@ -210,9 +215,9 @@ class ExportProductTestCase(ESBXMLTestCase):
             'IMP': False,
             # fixed values
             'Cp2z22': '',
-            'Warceg': '',
-            'Warcfr': '',
-            'Warcnl': '',
+            'Warceg': 'Aufmerksam',
+            'Warcfr': 'Attention',
+            'Warcnl': 'Aandacht',
             'Gescsg': 0,
             'Cp2z02': 0,
             'Cp2z23': 0,

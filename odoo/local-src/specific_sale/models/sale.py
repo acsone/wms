@@ -44,27 +44,29 @@ class Sale(models.Model):
         self.ensure_one()
         report_pages = super(Sale, self).order_lines_layouted()
 
-        pharmacy_category = self.env.ref('specific_data.product_categ_humain')
-        pharmacy_lines = self.env['sale.order.line'].search([
-            ('order_id', '=', self.id),
-            ('product_id.categ_id', 'child_of', pharmacy_category.id),
-        ]).sorted()
-
-        cascade_category = self.env.ref(
-            'specific_data.product_categ_importation')
-        cascade_lines = self.env['sale.order.line'].search([
-            ('order_id', '=', self.id),
-            ('product_id.categ_id', 'child_of', cascade_category.id),
-        ]).sorted()
+        # Get the product categories in the sale order that contains a warning
+        categories = self.order_line.mapped(
+                'product_id.categ_id').filtered('warning_info')
+        # Group the lines by categories (with warning)
+        warn_lines = {}
+        for category in categories:
+            warn_lines[category] = self.env['sale.order.line'].search([
+                ('order_id', '=', self.id),
+                ('product_id.categ_id', 'child_of', category.id),
+                ]).sorted()
+        # Get all the line ids that belong to a category with warning
+        warn_line_ids = sum([l.ids for c, l in warn_lines.iteritems()], [])
+        # Categories with specific display
+        pharmacy_cat = self.env.ref('specific_data.product_categ_humain')
 
         new_report_pages = []
         for report_page_category in report_pages:
             new_values = []
             for report_page in report_page_category:
+                # Filter out the lines whose categories have a warning message
                 new_lines = [
-                    line
-                    for line in report_page['lines']
-                    if line.id not in pharmacy_lines.ids + cascade_lines.ids
+                    line for line in report_page['lines']
+                    if line.id not in warn_line_ids
                 ]
                 if new_lines:
                     new_values.append({
@@ -77,54 +79,23 @@ class Sale(models.Model):
                 new_report_pages.append(new_values)
             else:
                 new_report_pages.append([])
-        if pharmacy_lines:
-            pharmacist_name = (
-                pharmacy_lines[0].order_id.partner_id.pharmacist_id.name
-                if pharmacy_lines[0].order_id.partner_id.pharmacist_id
-                else ''
-            )
-            new_report_pages[-1].append({
-                'name_list': [
-                    _(
-                        u'Following human medicines ordered '
-                        u'under your responsibility.'
-                    ),
-                    _(
-                        u'This command is transferred on your behalf '
-                        u'to the pharmacy '
-                        u'which will ensure the delivery of medicines.'
-                    ),
-                    _(
-                        u'The medicines will be delivered '
-                        u'to you by our care upon receipt of these '
-                        u'from the pharmacy'
-                    ),
-                    _(
-                        u'For any problems related to this command, '
-                        u'please contact the pharmacist.'
-                    ),
-                ],
+
+        # Add the lines with a warning message and the warning with it
+        for category, lines in warn_lines.iteritems():
+            new_page = {
+                'name_list': [category.warning_info],
                 'subtotal': False,
                 'pagebreak': False,
-                'only_quantity': True,
-                'line_additional_text':
-                    _(
-                        u'Article transferred to dispensing pharmacy: '
-                        u'%s'
-                    ) % pharmacist_name,
-                'lines': pharmacy_lines
-            })
-        if cascade_lines:
-            new_report_pages[-1].append({
-                'name_list': [
-                    _(
-                        u'Imported medicines under your entire responsibility'
-                    ),
-                ],
-                'subtotal': False,
-                'pagebreak': False,
-                'lines': cascade_lines
-            })
+                'lines': lines,
+            }
+            if category == pharmacy_cat:
+                new_page['only_quantity'] = True
+                pharmacist_name = (self.partner_id.pharmacist_id.name or '')
+                new_page['line_additional_text'] = (
+                        _(u'Article transferred to dispensing pharmacy: %s') %
+                        pharmacist_name)
+            new_report_pages[-1].append(new_page)
+
         return new_report_pages
 
     @api.multi
