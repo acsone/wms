@@ -268,8 +268,8 @@ migration:
       addons:
         upgrade:
           ### local-src
-      - connector_esb
-      - product_additional
-      - product_sequence
-      - specific_partner
-      - specific_stock
+          - connector_esb
+          - product_additional
+          - product_sequence
+          - specific_partner
+          - specific_stock
