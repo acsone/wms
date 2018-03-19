@@ -121,11 +121,9 @@ class ProductTemplate(models.Model):
             rules = product.with_context(active_test=False).orderpoint_ids \
                 .filtered(lambda r: r.company_id == self.env.user.company_id)
             if rules:
-                product_tmpl.write({
-                    'orderpoint_min': rules[0].product_min_qty,
-                    'orderpoint_max': rules[0].product_max_qty,
-                    'orderpoint_qty_multiple': rules[0].qty_multiple,
-                })
+                product_tmpl.orderpoint_min = rules[0].product_min_qty
+                product_tmpl.orderpoint_max = rules[0].product_max_qty
+                product_tmpl.orderpoint_qty_multiple = rules[0].qty_multiple
 
     @api.multi
     def _set_orderpoint(self):
