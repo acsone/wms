@@ -19,6 +19,7 @@ Unreleased
     * Add message in product xml (wso2)
 * ALCN-1177: Set unique and automatic default_code on product
 * ALCN-1218: Changes to a sale order line must activate the process of the sale order by the connector
+* ALCN-1192: Activate auto export of Pharmacy and Promotions Alcyon (wso2)
 
 **Bugfixes**
 
