@@ -82,6 +82,9 @@
             <field name="default_code" position="after">
                 <field name="cnk_code" />
             </field>
+            <field name="default_code" position="attributes">
+              <attribute name="attrs">{'readonly': True}</attribute>
+            </field>
         </field>
     </record>
 

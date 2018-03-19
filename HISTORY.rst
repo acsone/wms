@@ -17,6 +17,7 @@ Unreleased
     * On product category add multi language warning
     * On sale order confirmation add warning if category present
     * Add message in product xml (wso2)
+* ALCN-1177: Set unique and automatic default_code on product
 
 **Bugfixes**
 
