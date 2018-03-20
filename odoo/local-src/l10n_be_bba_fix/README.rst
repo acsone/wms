@@ -6,8 +6,10 @@
 Account Belgium BBA Fix
 =======================
 
-Properly set the paiement communication type on the invoice based on the partner.
+Properly set the payment communication type on the invoice based on the partner.
 Generate the BBA if necessary.
+
+For vendor bills, separate the invoice vendor reference and payment communication.
 
 Installation
 ============

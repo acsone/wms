@@ -8,13 +8,20 @@ from odoo import api, fields, models
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    reference = fields.Char('Payment Communication')
-    supplier_invoice_number = fields.Char('Vendor Reference', copy=False)
+    # Split vendor invoice number and payment communication
+    # Use reference for the communication as it is used in the SEPA payment and
+    # reconciliation
+    reference = fields.Char('Payment Communication', copy=False)
+    supplier_invoice_number = fields.Char(
+        'Vendor Reference',
+        readonly=True, states={'draft': [('readonly', False)]},
+        copy=False)
 
     _sql_constraints = [
         ('unique_invoice_number_by_supplier',
-         'unique (partner_id,supplier_invoice_number)',
-         'The supplier invoice number must be unique by supplier')
+         'unique (type, company_id, commercial_partner_id, '
+            'supplier_invoice_number)',
+         'The supplier invoice number must be unique per supplier')
     ]
 
     @api.onchange('supplier_invoice_number', 'reference_type')
@@ -47,3 +54,9 @@ class AccountInvoice(models.Model):
                     self.type, self.reference_type, self.partner_id.id,
                     '')['value']['reference']
         self.reference = reference
+
+    def invoice_validate(self):
+        # Do not check uniqueness on reference
+        # We require uniqueness on supplier_invoice_number through the
+        # sql_constraint
+        return self.write({'state': 'open'})
