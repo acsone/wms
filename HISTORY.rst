@@ -144,6 +144,8 @@ Unreleased
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
 
+* Limit multiple job creation for the same update on a sale order.
+
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field
 

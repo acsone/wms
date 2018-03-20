@@ -49,6 +49,8 @@
     - oca 10.0
       # [10.0] retry_postpone using new cursor
     - oca refs/pull/41/head
+      # [10.0] Add identity key on job to allow limiting redundant execution
+    - oca refs/pull/66/head
   target: *default_target
 ./external-src/web:
   remotes:
