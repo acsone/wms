@@ -133,6 +133,7 @@ migration:
           # oca/web
           - web_environment_ribbon
           - web_sheet_full_width
+          - web_decimal_numpad_dot
           # oca/purchase-workflow
           - purchase_cancel_reason
           ### local-src
