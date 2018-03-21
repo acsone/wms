@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Delivery round: remove useless name sequence (TOUR/XXXX). Only use already existing complete_name
 
 **Bugfixes**
 

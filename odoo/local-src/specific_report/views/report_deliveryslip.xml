@@ -179,7 +179,7 @@
                     <div class="border_table round_table summary_deliverslip">
                         <div style="height: 50%; border-bottom: 1px solid black">
                             Round: <br/>
-                            <span t-if="deliveryslip.delivery_round_id" t-field="deliveryslip.delivery_round_id.name" />
+                            <span t-if="deliveryslip.delivery_round_id" t-field="deliveryslip.delivery_round_id.display_name" />
                         </div>
                         <div style="height: 50%">
                             Delivery:

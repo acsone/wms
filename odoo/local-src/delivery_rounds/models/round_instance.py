@@ -155,11 +155,24 @@ class RoundInstance(models.Model):
                 rec.template_id.display_name)
 
     @api.model
-    def create(self, vals):
-        if vals.get('name', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'round.instance') or '/'
-        return super(RoundInstance, self).create(vals)
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        domain = []
+        if name:
+            vals = name.split('-', 1)
+            if len(vals) > 1:
+                code = vals[0].strip()
+                text = vals[1].strip()
+                comb = operator.startswith('not ') and '|' or '&'
+            else:
+                code = text = name.strip()
+                comb = operator.startswith('not ') and '&' or '|'
+            domain = [
+                comb,
+                ('template_code', operator, code),
+                ('template_name', operator, text)]
+        records = self.search(domain + args, limit=limit)
+        return records.name_get()
 
     @api.multi
     def button_itinerary_import(self):
@@ -498,26 +511,6 @@ class RoundInstance(models.Model):
         string='Customers',
         states={'done': [('readonly', True)]},
     )
-
-    @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
-        args = args or []
-        domain = []
-        if name:
-            vals = name.split('-', 1)
-            if len(vals) > 1:
-                code = vals[0].strip()
-                text = vals[1].strip()
-                comb = operator.startswith('not ') and '|' or '&'
-            else:
-                code = text = name.strip()
-                comb = operator.startswith('not ') and '&' or '|'
-            domain = [
-                comb,
-                ('template_code', operator, code),
-                ('template_name', operator, text)]
-        records = self.search(domain + args, limit=limit)
-        return records.name_get()
 
 
 class RoundInstanceCustomer(models.Model):
