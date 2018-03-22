@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!--Helpdesk Ticket-->
-    <record id="helpdesk_ticket_view_form" model="ir.ui.view">
-        <field name="name">helpdesk.ticket.form</field>
-        <field name="model">helpdesk.ticket</field>
-        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
-        <field name="arch" type="xml">
+  <!--Helpdesk Ticket-->
+  <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.form</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+    <field name="arch" type="xml">
 
-            <field name="partner_id" position="attributes">
-                <attribute name="string">Partner</attribute>
-            </field>
-            <field name="partner_name" position="attributes">
-                <attribute name="string">Partner Name</attribute>
-            </field>
-            <field name="partner_email" position="attributes">
-                <attribute name="string">Partner Email</attribute>
-            </field>
+      <field name="partner_email" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="name" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
 
-            <field name="kanban_state" position="after">
-                <field name="sale_order_id"
-                       context="{'default_partner_id': partner_id}"/>
-                <field name="purchase_order_id"
-                       context="{'default_partner_id': partner_id}"/>
-            </field>
-            <field name="tag_ids" position="after">
-                <field name="helpdesk_ticket_reason_id" />
-                <field name="ref"
-                       context="{'default_partner_id': partner_id}"/>
-            </field>
+      <xpath expr="//h1" position="inside">
+        <field name="id"/>
+      </xpath>
 
-        </field>
-    </record>
+      <xpath expr="//group" position="replace">
+        <group>
+          <group>
+            <field name="partner_id"/>
+            <field name="partner_name"/>
+            <field name="ticket_type_id"/>
+            <field name="helpdesk_ticket_reason_id"/>
+            <field name="user_id"/>
+            <field name="team_id"/>
+          </group>
+          <group>
+            <field name="priority"/>
+            <field name="kanban_state"/>
+            <field name="sale_order_id" context="{'default_partner_id': partner_id}"/>
+            <field name="purchase_order_id" context="{'default_partner_id': partner_id}"/>
+            <field name="ref"/>
+          </group>
+        </group>
+      </xpath>
 
-    <!--Helpdesk Ticket Reason-->
-    <record id="helpdesk_ticket_reasom_view_tree" model="ir.ui.view">
-        <field name="name">helpdesk.ticket.reason.tree</field>
-        <field name="model">helpdesk.ticket.reason</field>
-        <field name="arch" type="xml">
-            <tree editable="top" string="Reason">
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
+      <field name="partner_id" position="attributes">
+        <attribute name="string">Partner</attribute>
+      </field>
+      <field name="partner_name" position="attributes">
+        <attribute name="string">Partner Name</attribute>
+      </field>
 
-    <record id="helpdesk_ticket_reason_action" model="ir.actions.act_window">
-        <field name="name">Ticket Reason</field>
-        <field name="res_model">helpdesk.ticket.reason</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Click to create a new ticket reason.
-            </p><p>
-            Reason allows to organize tickets.
-        </p>
-        </field>
-    </record>
+    </field>
+  </record>
 
-    <menuitem id="helpdesk_ticket_reason_menu" action="helpdesk_ticket_reason_action"
-              sequence="1" parent="helpdesk.helpdesk_menu_config"
-              groups="base.group_no_one"/>
+  <!--Helpdesk Ticket Reason-->
+  <record id="helpdesk_ticket_reasom_view_tree" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.reason.tree</field>
+    <field name="model">helpdesk.ticket.reason</field>
+    <field name="arch" type="xml">
+      <tree editable="top" string="Reason">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="helpdesk_ticket_reason_action" model="ir.actions.act_window">
+    <field name="name">Ticket Reason</field>
+    <field name="res_model">helpdesk.ticket.reason</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
+        Click to create a new ticket reason.
+        </p><p>
+        Reason allows to organize tickets.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="helpdesk_ticket_reason_menu" action="helpdesk_ticket_reason_action"
+    sequence="1" parent="helpdesk.helpdesk_menu_config"
+    groups="base.group_no_one"/>
 
 </odoo>

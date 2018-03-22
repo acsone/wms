@@ -277,3 +277,4 @@ migration:
       addons:
         upgrade:
           - specific_sale
+          - specific_helpdesk
