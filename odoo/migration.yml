@@ -273,3 +273,7 @@ migration:
           - product_sequence
           - specific_partner
           - specific_stock
+    - version: 10.17.4
+      addons:
+        upgrade:
+          - specific_sale

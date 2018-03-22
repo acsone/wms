@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1215: Remove "Analytic tags" field from sale order line
+
 **Bugfixes**
 
 **Build**
