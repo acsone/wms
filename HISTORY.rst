@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1221: Change helpdesk ticket view, reordering field and replacing id with the name field.
 * ALCN-1203: Set is_business_unit on 2nd level categories
 * Delivery round: remove useless name sequence (TOUR/XXXX). Only use already existing complete_name
+* ALCN-1188: Move sale_channel field in the header of sale order
 
 **Bugfixes**
 

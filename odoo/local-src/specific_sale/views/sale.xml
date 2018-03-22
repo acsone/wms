@@ -10,16 +10,16 @@
                 <attribute name="attrs">{'invisible':[('main_exception_id','=', False)]}</attribute>
             </xpath>
 
-            <field name="team_id" position="after">
-                <field name="sale_channel_visible" invisible="1"/>
-                <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
-            </field>
-
             <field name="client_order_ref" position="replace"/>
 
             <field name="partner_id" position="after">
                 <field name="client_order_ref"/>
                 <field name="suite_name"/>
+            </field>
+
+            <field name="client_order_ref" position="after">
+                <field name="sale_channel_visible" invisible="1"/>
+                <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
             </field>
 
             <xpath expr="//field[@name='order_line']/form//label[@for='qty_delivered']" position="before">
