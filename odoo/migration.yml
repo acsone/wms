@@ -276,5 +276,7 @@ migration:
     - version: 10.17.4
       addons:
         upgrade:
-          - specific_sale
+          ### local-src
+          - delivery_rounds
           - specific_helpdesk
+          - specific_sale
