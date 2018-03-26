@@ -148,6 +148,7 @@ migration:
           - product_price_category
           - refund_invoice
           - sale_cancel_remaining
+          - sale_consignment
           - specific_account
           - specific_base
           - specific_data
@@ -278,6 +279,7 @@ migration:
         upgrade:
           ### local-src
           - delivery_rounds
+          - sale_consignment
           - specific_data
           - specific_helpdesk
           - specific_sale
