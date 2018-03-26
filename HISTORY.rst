@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Delivery round: remove useless name sequence (TOUR/XXXX). Only use already existing complete_name
 
 * ALCN-1215: Remove "Analytic tags" field from sale order line
 * ALCN-1221: Change helpdesk ticket view, reordering field and replacing id with the name field.

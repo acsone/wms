@@ -5,7 +5,7 @@
                 <t t-set="index" t-value="1"/>
                 <t t-set="lines" t-value="delivery.get_merged_shippings()"/>
                 <div class="page">
-                    <h2><span t-field="delivery.name"/></h2>
+                    <h2><span t-field="delivery.display_name"/></h2>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-xs-5">
                             <table class="table">
