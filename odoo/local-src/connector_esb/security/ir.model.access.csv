@@ -3,3 +3,7 @@
 "access_esb_backend_user","esb_backend user","model_esb_backend","base.group_user",1,0,0,0
 "access_esb_backend_timestamp","esb_backend_timestamp connector manager","model_esb_backend_timestamp","connector.group_connector_manager",1,1,0,0
 "access_esb_backend_timestamp_user","esb_backend_timestamp user","model_esb_backend_timestamp","base.group_user",1,0,0,0
+"access_esb_exportable","esb_exportable connector manager","model_esb_exportable","connector.group_connector_manager",1,1,0,0
+"access_esb_exportable_user","esb_exportable user","model_esb_exportable","base.group_user",1,0,0,0
+"access_product_supplierinfo_esbflux","product_supplierinfo_esbflux connector manager","model_product_supplierinfo_esbflux","connector.group_connector_manager",1,1,0,0
+"access_product_supplierinfo_esbflux_user","product_supplierinfo_esbflux user","model_product_supplierinfo_esbflux","base.group_user",1,0,0,0
