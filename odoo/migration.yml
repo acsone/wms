@@ -275,6 +275,9 @@ migration:
           - specific_partner
           - specific_stock
     - version: 10.17.4
+      operations:
+        pre:
+          - anthem songs.upgrade.10_17_4_update::pre
       addons:
         upgrade:
           ### local-src

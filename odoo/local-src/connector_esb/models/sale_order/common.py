@@ -39,6 +39,8 @@ class SaleOrder(models.Model):
 
     def _ws_create_order_data(self, data):
         order_data = {}
+        order_data['team_id'] = self.env.ref(
+                'sales_team.salesteam_website_sales').id
         order_data['esb_ref'] = data['increment_id']
         order_data['partner_id'] = data['customer_id']
         order_data['date_order'] = data['date']
