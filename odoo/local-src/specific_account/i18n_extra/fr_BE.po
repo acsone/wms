@@ -19,3 +19,18 @@ msgstr ""
 #: model:account.journal,name:__setup__.wage_journal
 msgid "Wage"
 msgstr "Salaire"
+
+#. module: account_invoice_check_total
+#: code:addons/account_invoice_check_total/models/account_invoice.py:31
+#, python-format
+msgid ""
+"Please verify the price of the invoice!\n"
+"                        The encoded total does not match the computed total."
+msgstr ""
+"Veuillez vérifier le prix de la facture!\n"
+"                        Le montant introduit ne correspond pas au montant calculé."
+
+#. module: account_invoice_check_total
+#: model:ir.model.fields,field_description:account_invoice_check_total.field_account_invoice_check_total
+msgid "Verification Total"
+msgstr "Vérification Total"
