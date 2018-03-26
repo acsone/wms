@@ -7,19 +7,25 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Sale Consignement: Allow to make a SO for consignment. Goods are send to dedicated customer consignment location.
-
-* ALCN-1215: Remove "Analytic tags" field from sale order line
-* ALCN-1221: Change helpdesk ticket view, reordering field and replacing id with the name field.
-* ALCN-1203: Set is_business_unit on 2nd level categories
-* Delivery round: remove useless name sequence (TOUR/XXXX). Only use already existing complete_name
-* ALCN-1188: Move sale_channel field in the header of sale order
 
 **Bugfixes**
 
 **Build**
 
 **Documentation**
+
+
+10.17.4 (2018-03-26)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCN-1188: Move sale_channel field in the header of sale order
+* ALCN-1203: Set is_business_unit on 2nd level categories
+* ALCN-1215: Remove "Analytic tags" field from sale order line
+* ALCN-1221: Change helpdesk ticket view, reordering field and replacing id with the name field.
+* Delivery round: remove useless name sequence (TOUR/XXXX). Only use already existing complete_name
+* Sale Consignement: Allow to make a SO for consignment. Goods are send to dedicated customer consignment location.
 
 
 10.17.3 (2018-03-19)
