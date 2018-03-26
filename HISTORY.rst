@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Sale Consignement: Allow to make a SO for consignment. Goods are send to dedicated customer consignment location.
 
 * ALCN-1215: Remove "Analytic tags" field from sale order line
 * ALCN-1221: Change helpdesk ticket view, reordering field and replacing id with the name field.
