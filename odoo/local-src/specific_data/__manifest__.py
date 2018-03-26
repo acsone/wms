@@ -12,6 +12,7 @@
         'base',
         'product',
         'stock',
+        'code_abc',
         'specific_partner'
     ],
     'website': 'http://www.camptocamp.com',

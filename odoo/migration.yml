@@ -278,5 +278,6 @@ migration:
         upgrade:
           ### local-src
           - delivery_rounds
+          - specific_data
           - specific_helpdesk
           - specific_sale
