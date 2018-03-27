@@ -12,6 +12,7 @@ Unreleased
 * TODO: Update imported data on 2018-03-xx
 * ALCN-1108: Remove mapping adaptation of tracking using serial type
 * ALCN-1065: Fix creation of backorders on sale import
+* ALCN-1205: import create_date on products
 
 **Features and Improvements**
 
