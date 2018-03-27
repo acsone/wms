@@ -149,7 +149,7 @@ def do_partial_picking(pick, lines, lots):
                 __no_pick_receive_note_check=True,
                 __no_specific_stock_backorder=True)
         result = pick.do_new_transfer()
-        if result['res_model'] == 'stock.backorder.confirmation':
+        if result and result['res_model'] == 'stock.backorder.confirmation':
             # Accept backorder creation
             operations_to_delete = pick.pack_operation_ids.filtered(
                 lambda o: o.qty_done <= 0)
@@ -160,9 +160,18 @@ def do_partial_picking(pick, lines, lots):
 
 
 def do_final_picking(pick, lines, lots):
-    """ Transfert the last picking operations and lots are ok
-    we need still to set quantities
+    """ Transfert the last picking
+
+    operations and lots are mostly ok
+
+    this does set the quantities and adds lot
+    if missing
+
+    Remainings goes in a backorder
     """
+    pick.action_confirm()
+    pick.force_assign()
+    pick.do_prepare_partial()
     for line in lines:
         product_xmlid = convert_product_id(line['product'])
         product = pick.env.ref(product_xmlid)
@@ -177,17 +186,43 @@ def do_final_picking(pick, lines, lots):
         # pack operation requires serial num / lot
         if (ope.qty_done and ope.product_id and
                 ope.product_id.tracking != 'none'):
+            # there can be multiple lot for one product
             for db2_lot in lots:
                 if (line['line_no'] == db2_lot['mltnli'] and
                         line['product'] == db2_lot['mltart']):
-                    for pack_lot in ope.pack_lot_ids:
-                        if pack_lot.lot_id.name == db2_lot['mltlot']:
-                            pack_lot.qty = abs(db2_lot['mltquc'])
-                            break
+                    odoo_lot = pick.env['stock.production.lot'].search(
+                        [('name', '=', db2_lot['mltlot']),
+                         ('product_id', '=', ope.product_id.id)])
+                    # Operation lot should already exist,
+                    # but create it if missing
+                    if not ope.pack_lot_ids:
+                        OpeLot = pick.env['stock.pack.operation.lot']
+                        values = {
+                            'operation_id': ope.id,
+                            'qty': abs(db2_lot['mltquc']),
+                        }
+                        if odoo_lot:
+                            values['lot_id'] = odoo_lot.id
+                        else:
+                            values['lot_name'] = db2_lot['mltlot']
+                        OpeLot.create(values)
+                    else:
+                        for pack_lot in ope.pack_lot_ids:
+                            if pack_lot.lot_id.name == db2_lot['mltlot']:
+                                pack_lot.qty = abs(db2_lot['mltquc'])
+                                break
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
-        pick.do_new_transfer()
+        result = pick.do_new_transfer()
+        if result and result['res_model'] == 'stock.backorder.confirmation':
+            # Accept backorder creation
+            operations_to_delete = pick.pack_operation_ids.filtered(
+                lambda o: o.qty_done <= 0)
+            for pack in pick.pack_operation_ids - operations_to_delete:
+                pack.product_qty = pack.qty_done
+            operations_to_delete.unlink()
+            pick.do_transfer()
 
 
 def create_supplier_invoice(order, lines):
@@ -673,7 +708,7 @@ class DB2MapperSaleOrder(object):
                             [d[0] for d in cr.description]
                          )} for lot in lots]
                 pick_lines = cls.map_orderline2move(lines)
-                # Do internal picking to out location
+                # Do internal pickings to output location
                 for pick in picks1:
                     do_partial_picking(pick, pick_lines, lots)
                 # Do the deliver to customer

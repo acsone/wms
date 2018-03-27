@@ -95,7 +95,7 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 4)
-        # self.assertEqual(len(self.so.picking_ids), 3)  # FIXME 4 on int
+        self.assertEqual(len(self.so.picking_ids), 5)
 
     def test_import_so_2798516(self):
         """Import SO 2798516.
@@ -368,7 +368,19 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 7)
-        # self.assertEqual(len(self.so.picking_ids), 2)  # FIXME 4 on int
+        # 7 pickings
+        # Aliment -> Output state: done
+        # Frigo -> Output state: done
+        # Mat -> Output state: done
+        # Med -> Output state: done
+        # Med -> Output state: assigned (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 7)
+        states = [p.state for p in self.so.picking_ids]
+        self.assertEqual(
+            sorted(states),
+            ['assigned'] * 2 + ['done'] * 5)
 
     def test_import_so_2835952(self):
         """Import SO 2835952.
@@ -414,7 +426,17 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 2)
-        # self.assertEqual(len(self.so.picking_ids), 3)  # FIXME
+
+        # 4 pickings
+        # Med -> Output state: done
+        # Mat -> Output state: assigned
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 4)
+        states = [p.state for p in self.so.picking_ids]
+        self.assertEqual(
+            sorted(states),
+            ['assigned'] * 2 + ['done'] * 2)
 
     def test_import_so_2835987(self):
         """Import SO 2835987.
@@ -461,7 +483,16 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 2)
-        # self.assertEqual(len(self.so.picking_ids), 2)  # FIXME 3 on int
+        # 4 pickings
+        # Mat -> Output state: assigned
+        # Med -> Output state: done
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 4)
+        states = [p.state for p in self.so.picking_ids]
+        self.assertEqual(
+            sorted(states),
+            ['assigned'] * 2 + ['done'] * 2)
 
     def test_import_so_2842972(self):
         """Import SO 2842972.
@@ -508,13 +539,28 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 10)
-        # self.assertEqual(len(self.so.picking_ids), 3)  # FIXME 5 on int
+        # 5 pickings
+        # Aliment -> Output state: done
+        # Med -> Output state: done
+        # Med -> Output state: assigned (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 5)
+        states = [p.state for p in self.so.picking_ids]
+        self.assertEqual(
+            sorted(states),
+            ['assigned'] * 2 + ['done'] * 3)
 
     def test_import_so_2844358(self):
         """Import SO 2844358.
 
         partial delivery with one line partially delivered
 
+        product | ordered | delivered
+        2248800 |       5 |         3
+        3563038 |       1 |         1
+        2430205 |       1 |         1
+        8072683 |       1 |         1
         """
         ref = self.env.ref
         suite = 2844358
@@ -553,4 +599,57 @@ class TestImportSO(DB2ImportTestCase):
         }
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 4)
-        # self.assertEqual(len(self.so.picking_ids), 3)  # FIXME 4 on int
+        # 5 pickings
+        # Aliment -> Output state: done
+        # Aliment -> Output state: confirmed (Backorder)
+        # Med -> Output state: done
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 5)
+        states = [p.state for p in self.so.picking_ids]
+        self.assertEqual(
+            sorted(states),
+            ['assigned', 'confirmed'] + ['done'] * 3)
+        ptype_ali = ref('__setup__.stock_picking_type_ali')
+        ptype_customer = ref('stock.picking_type_out')
+
+        # Check partial qty on picking
+        expected_values = {
+            ('done', ptype_ali):
+                {'2248800': {'ordered_qty': 5, 'delivered_qty': 3}},
+            ('done', ptype_customer):
+                {'2248800': {'ordered_qty': 5, 'delivered_qty': 3}},
+            ('confirmed', ptype_ali):
+                {'2248800': {'ordered_qty': 2, 'delivered_qty': 2}},
+            ('assigned', ptype_customer):
+                {'2248800': {'ordered_qty': 2, 'delivered_qty': 2}},
+        }
+        for pick in self.so.picking_ids:
+            expected_line = expected_values.get(
+                (pick.state, pick.picking_type_id))
+            if expected_line:
+                for line in pick.move_lines:
+                    expected_qty = expected_line.get(
+                        line.product_id.default_code)
+                    if expected_qty:
+                        self.assertEqual(
+                            expected_qty['ordered_qty'], line.ordered_qty)
+                        self.assertEqual(
+                            expected_qty['delivered_qty'], line.product_uom_qty
+                            )
+
+        # Check delivered qty on the sale order
+        expected_values = {
+            '2248800': {'ordered_qty': 5, 'delivered_qty': 3},
+            '3563038': {'ordered_qty': 1, 'delivered_qty': 1},
+            '2430205': {'ordered_qty': 1, 'delivered_qty': 1},
+            '8072683': {'ordered_qty': 1, 'delivered_qty': 1},
+        }
+        for line in self.so.order_line:
+            expected_qty = expected_values.get(
+                line.product_id.default_code)
+            if expected_qty:
+                self.assertEqual(
+                    expected_qty['ordered_qty'], line.product_uom_qty)
+                self.assertEqual(
+                    expected_qty['delivered_qty'], line.qty_delivered)

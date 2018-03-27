@@ -203,13 +203,15 @@ class DB2ImportTestCase(SavepointCase):
         cls.load_users()
         cls.load_partner_title()
         cls.load_suppliers()
+        cls.create_locations()
+        cls.setup_warehouse()
+        cls.create_picking_types()
+        cls.create_procurement_rules()
+        cls.create_routes()
         cls.load_products()
         cls.load_pricelists()
         cls.load_customer_categories()
         cls.load_customers()
-        cls.create_locations()
-        cls.setup_warehouse()
-        cls.create_picking_types()
 
     @classmethod
     def add_xmlid(cls, record, xmlid):
@@ -543,12 +545,13 @@ class DB2ImportTestCase(SavepointCase):
                 'stock.stock_location_company').id
         })
 
+    @classmethod
     def create_procurement_rules(cls):
         """ Creating procurement rules """
         ref = cls.env.ref
         location_out = ref('stock.stock_location_output')
         warehouse = cls.env.ref('stock.warehouse0')
-        types = [
+        rules = [
             {'xmlid': '__setup__.procurement_rule_materiel',
              'type': ['categ', 'prod'],
              'name': 'WH: Stock -> Output (MAT)',
@@ -595,12 +598,69 @@ class DB2ImportTestCase(SavepointCase):
              'group_propagation_option': 'propagate',
              },
         ]
-        for record in types:
-            xmlid = record.pop('xmlid')
+        for record in rules:
+            base_xmlid = record.pop('xmlid')
             types = record.pop('type')
             sequences = {'categ': 15, 'prod': 10}
             for t in types:
                 record['sequence'] = sequences[t]
                 rule = cls.env['procurement.rule'].create(record)
-                xmlid = '%s_%s' % (xmlid, t)
+                xmlid = '%s_%s' % (base_xmlid, t)
                 cls.add_xmlid(rule, xmlid)
+
+    @classmethod
+    def create_routes(cls):
+        """ Creating routes """
+        ref = cls.env.ref
+        routes = [
+            {'xmlid': '__setup__.stock_location_route_pick_materiel_categ',
+             'name': 'Zone Matériel (Categ)',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_materiel_categ').ids)],
+             'product_categ_selectable': True,
+             'product_selectable': False,
+             },
+            {'xmlid': '__setup__.stock_location_route_pick_materiel',
+             'name': 'Zone Matériel',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_materiel_prod').ids)],
+             'product_categ_selectable': False,
+             'product_selectable': True,
+             },
+
+            {'xmlid': '__setup__.stock_location_route_pick_ali_categ',
+             'name': 'Zone Aliments (Categ)',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_ali_categ').ids)],
+             'product_categ_selectable': True,
+             'product_selectable': False,
+             },
+            {'xmlid': '__setup__.stock_location_route_pick_ali',
+             'name': 'Zone Aliments',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_ali_prod').ids)],
+             'product_categ_selectable': False,
+             'product_selectable': True,
+             },
+
+            {'xmlid': '__setup__.stock_location_route_pick_medoc',
+             'name': 'Zone Médicaments',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_medoc_prod').ids)],
+             'product_categ_selectable': False,
+             'product_selectable': True,
+             },
+
+            {'xmlid': '__setup__.stock_location_route_pick_froid',
+             'name': 'Zone FROID / FRIGO',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_froid_prod').ids)],
+             'product_selectable': True,
+             },
+
+        ]
+        for record in routes:
+            xmlid = record.pop('xmlid')
+            record['sequence'] = 20
+            route = cls.env['stock.location.route'].create(record)
+            cls.add_xmlid(route, xmlid)

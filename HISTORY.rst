@@ -11,6 +11,7 @@ Unreleased
 * ALCN-1155: import supplier categories, goods and general expenses
 * TODO: Update imported data on 2018-03-xx
 * ALCN-1108: Remove mapping adaptation of tracking using serial type
+* ALCN-1065: Fix creation of backorders on sale import
 
 **Features and Improvements**
 
