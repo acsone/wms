@@ -78,9 +78,9 @@ msgid "Backorder reason choice"
 msgstr "Choix de la cause du reliquat"
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.iew_location_search
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Bin"
-msgstr "Bin"
+msgstr "Bac"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
@@ -122,7 +122,7 @@ msgstr "Couloir"
 #: code:addons/specific_stock/models/stock_picking.py:106
 #, python-format
 msgid "Create Backorder?"
-msgstr "Créer Backorder?"
+msgstr "Créer Reliquat?"
 
 #. module: specific_stock
 #: selection:stock.backorder.reason,backorder_action_to_do:0
@@ -341,7 +341,7 @@ msgid "Packing Operation"
 msgstr "Colisage"
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.iew_location_search
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Parking"
 msgstr "Parking"
 
@@ -445,7 +445,7 @@ msgid "Quantity to take for best sellers (in percent)"
 msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.iew_location_search
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Reserve"
 msgstr "Réserve"
 

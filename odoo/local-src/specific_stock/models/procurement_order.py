@@ -14,7 +14,7 @@ class ProcurementOrder(models.Model):
         The MTO route contains several rules (one for each picking zone).
         If the product uses the MTO route, we need to force the picking
         zone.
-        :param domain:
+        :param domain: list - Odoo Domain (eg: [('location_id', 'in', [1, 2])])
         :return:
         """
         self.ensure_one()
