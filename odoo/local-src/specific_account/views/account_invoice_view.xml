@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-        <!-- Adapt Supplier Invoices to support bba structured communication -->
-        <record id="supplier_invoice_bbacomm_form" model="ir.ui.view">
-            <field name="name">account.invoice.form.inherit</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
-            <field name="priority">20</field>
-            <field name="arch" type="xml">
-                <xpath expr="//group/field[@name='reference']" position="replace">
-                    <field name="supplier_invoice_number" required="True"/>
-                </xpath>
-
-                <xpath expr="//field[@name='check_total']" position="attributes">
-                    <attribute name="required">1</attribute>
-                </xpath>
-
-                <xpath expr="//group[field[@name='partner_id']]" position="inside">
-                    <!--
-                    TODO: To reactivate after migration V10 of l10n_be_apb_tax module
-                    -->
-                    <!--<field name="reference_type" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"-->
-                           <!--on_change="generate_bbacomm(type,reference_type, partner_id,reference)"/>-->
-                    <field name="reference" nolabel="1"  attrs="{'readonly':[('state','!=','draft')]}"/>
-                </xpath>
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="name">account.invoice.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <field name="date" position="replace"/>
+            <field name="date_invoice" position="after">
+                <field name="date" domain="[('state', '=', 'draft'), ('company_id', '=', company_id)]" groups="account.group_account_user"/>
             </field>
-
-
-        </record>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="replace"/>
+        </field>
+    </record>
 
 </odoo>

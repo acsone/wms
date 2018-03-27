@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Sylvain Van Hoof
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from dateutil.relativedelta import relativedelta
+
 from odoo import models, fields
 
 
@@ -21,6 +24,27 @@ class IrSequence(models.Model):
                                   with the flag
                                   %(range_year)s => 2017
                                   """)
+
+    def _create_date_range_seq(self, date_string):
+        user = self.env.user
+        date = fields.Date.from_string(date_string)
+        if 'range_month' in self.prefix:
+            start = date.replace(day=1)
+            end = start + relativedelta(months=+1, days=-1)
+        elif 'range_year' in self.prefix:
+            ld = user.company_id.fiscalyear_last_day
+            lm = user.company_id.fiscalyear_last_month
+            start = end = date.replace(day=ld, month=lm)
+            start += relativedelta(days=+1)
+            if start <= date:
+                end += relativedelta(years=+1)
+            else:
+                start -= relativedelta(years=+1)
+        return self.env['ir.sequence.date_range'].sudo().create({
+            'date_from': fields.Date.to_string(start),
+            'date_to': fields.Date.to_string(end),
+            'sequence_id': self.id,
+        })
 
 
 class IrSequenceDateRange(models.Model):

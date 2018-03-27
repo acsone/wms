@@ -23,6 +23,8 @@ Unreleased
 * ALCN-1140: Add 2 missing fr_BE translations for module account_invoice_check_total
 
 **Bugfixes**
+* Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
+
 
 * Add missing basic access rights on 2 models of the ESB connector
 
