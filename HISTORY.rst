@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Add missing basic access rights on 2 models of the ESB connector
+
 **Build**
 
 **Documentation**
