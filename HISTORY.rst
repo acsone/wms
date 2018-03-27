@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1155: import supplier categories, goods and general expenses
+* TODO: Update imported data on 2018-03-xx
 
 **Features and Improvements**
 
