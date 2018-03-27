@@ -994,7 +994,8 @@ def create_procurement_rules_mto_mts(ctx):
          'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
          'group_propagation_option': 'propagate',
-         'mts_rule_id': ctx.env.ref('__setup__.procurement_rule_medoc_prod').id,
+         'mts_rule_id':
+             ctx.env.ref('__setup__.procurement_rule_medoc_prod').id,
          'mto_rule_id': ctx.env.ref('__setup__.procurement_rule_medoc_mto').id,
          },
         {'xmlid': '__setup__.procurement_rule_froid_mto_mtu',
