@@ -26,7 +26,7 @@ class IrSequence(models.Model):
                                   """)
 
     def _create_date_range_seq(self, date_string):
-        user = self.env['res.users'].browse(self._uid)
+        user = self.env.user
         date = fields.Date.from_string(date_string)
         if 'range_month' in self.prefix:
             start = date.replace(day=1)

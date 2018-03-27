@@ -6,7 +6,11 @@
 IR Sequence Period
 ==================
 
-Fix the computation of next period in ir.sequence
+Fix the computation of next period in ir.sequence :
+
+* Allow yearly period to not start on 1st Jan
+* Allow to use end date of the period
+* Support monthly period
 
 Installation
 ============
