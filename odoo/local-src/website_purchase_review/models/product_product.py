@@ -26,11 +26,6 @@ class ProductProduct(models.Model):
         readonly=True,
         compute='_compute_average_consumption'
     )
-    is_mto_product = fields.Boolean(
-        'On order',
-        readonly=True,
-        compute='_compute_is_mto_product'
-    )
 
     @api.multi
     def _compute_advised_qty(self):
@@ -177,13 +172,6 @@ class ProductProduct(models.Model):
                 av_three_months_consumption = 0
             product.average_three_months_consumption = \
                 av_three_months_consumption
-
-    @api.multi
-    def _compute_is_mto_product(self):
-        route_mto = self.env.ref('stock.route_warehouse0_mto')
-
-        for product in self:
-            product.is_mto_product = route_mto in product.route_ids
 
     @api.multi
     def get_lots(self):
