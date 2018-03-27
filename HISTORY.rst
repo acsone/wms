@@ -20,6 +20,7 @@ Unreleased
 * Revert Belgium Taxes names and codes to v8 setup (before F.P. messed them all) + add missing Belgian standard taxes
 * Allow to use numpad point in float numbers
 * Add in Stock Valution Report last in/out dates for stock depreciation
+* ALCN-1140: Add 2 missing fr_BE translations for module account_invoice_check_total
 
 **Bugfixes**
 
