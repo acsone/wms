@@ -10,7 +10,10 @@ class AccountInvoice(models.Model):
 
     @api.onchange('partner_id', 'company_id')
     def _onchange_partner_id(self):
-        """ Fix puchase module that override journal for unknown reason """
+        """ Fix puchase module that override journal based on currency.
+        On the screen, the journal is first selected, then the supplier
+        and it's not expected to have the journal changed back automatically
+        """
         journal = self.journal_id
         res = super(AccountInvoice, self)._onchange_partner_id()
         if self.journal_id != journal:
