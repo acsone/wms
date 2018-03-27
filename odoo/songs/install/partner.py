@@ -12,8 +12,15 @@ from ..common import req
 
 @anthem.log
 def create_customer_category(ctx):
-    """ Importing suppliers from csv """
+    """ Importing customer categories from csv """
     content = resource_stream(req, 'data/install/customer.category.csv')
+    load_csv_stream(ctx, 'res.partner.category', content, delimiter=',')
+
+
+@anthem.log
+def create_supplier_category(ctx):
+    """ Importing supplier categories from csv """
+    content = resource_stream(req, 'data/install/supplier.category.csv')
     load_csv_stream(ctx, 'res.partner.category', content, delimiter=',')
 
 
@@ -37,3 +44,4 @@ def setup_customer_ref(ctx):
 def main(ctx):
     """ Configuring partner """
     create_customer_category(ctx)
+    create_supplier_category(ctx)
