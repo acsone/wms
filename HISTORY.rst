@@ -16,6 +16,7 @@ Unreleased
 
 **Features and Improvements**
 * Revert Belgium Taxes names and codes to v8 setup (before F.P. messed them all) + add missing Belgian standard taxes
+* Allow to use numpad point in float numbers
 
 **Bugfixes**
 
