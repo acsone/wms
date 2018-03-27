@@ -41,6 +41,7 @@
       # [ADD] account_cutoff_accrual_return
     - oca refs/pull/70/head
   target: *default_target
+# We keep this to manage a sharable and updatable fork of enterprise branch
 ./external-src/enterprise:
   remotes:
     odoo: git@github.com:odoo/enterprise.git

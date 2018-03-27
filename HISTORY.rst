@@ -28,6 +28,9 @@ Unreleased
 
 **Build**
 
+* Update odoo/enterprise to latest commit
+* Update odoo/src to latest commit
+
 **Documentation**
 
 
