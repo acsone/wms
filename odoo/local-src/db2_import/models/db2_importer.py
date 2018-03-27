@@ -252,7 +252,9 @@ def create_supplier_invoice(order, lines):
     fp_id = order.env['account.fiscal.position'].get_fiscal_position(
         partner.id, delivery_id=delivery_partner_id)
 
-    vals = {'purchase_id': order.id,
+    vals = {'name': '[MIGRATION] PO %s' % order.name,
+            'date_invoice': order.date_order,
+            'purchase_id': order.id,
             'type': 'in_invoice',
             'partner_id': partner.id,
             'journal_id': journal.id,

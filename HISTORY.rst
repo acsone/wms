@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* ALCN-1234: Add name and date on history invoices on purchases
 * ALCN-1128: Set customer as company when having a legal entity defined
 * ALCN-1155: import supplier categories, goods and general expenses
 * TODO: Update imported data on 2018-03-xx
