@@ -20,12 +20,7 @@
                             {PC005;0010,0100,05,05,J,00,B|}\r
                             {RC005;<t t-if="False">Doc.n : 1/01790 /</t>|}\r
                             {PC002;0010,0130,05,05,J,00,B|}\r
-                            {RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name)"/>|}\r
-                            <t t-if="pack.picking_id.partner_id.is_price_on_labels">
-                                {PC007;0350,0070,05,05,J,00,B|}\r
-                                {RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r
-                            </t>{XB01;0030,0150,9,1,02,0,0080|}\r
-                            {RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
+                            {RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name)"/>|}\r<t t-if="pack.picking_id.partner_id.is_price_on_labels">{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
                             {PC003;0030,0280,05,05,J,00,B|}\r
                             {RC003;S-<t t-esc="'%7s' % pack.product_id.default_code[:7]"/>-<t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
                             {XS;I,0001,0002C3200|}\r

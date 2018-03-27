@@ -115,8 +115,8 @@ class Print(DomainInterface):
 
             try:
                 picking.sudo().print_products_label(printer=printer_toshiba)
-                # picking.sudo().print_packages_label(quantity=quantity,
-                #                                     printer=printer_zebra)
+                picking.sudo().print_packages_label(quantity=quantity,
+                                                    printer=printer_zebra)
             except Exception as e:
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)

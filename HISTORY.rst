@@ -27,6 +27,7 @@ Unreleased
 * ALCN-760: Create the product category "Service" and modify the file accounting_product to add missing accounting service products
 
 * ALCN-808: Add MTO/MTS procurement rules
+* ALCN-187: Modify templates for labels (add the checksum on package label)
 
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
@@ -34,6 +35,7 @@ Unreleased
 
 * Add missing basic access rights on 2 models of the ESB connector
 * Fix default_code import on inactive products
+* ALCN-187: Fix the method to search the best picking (reserve and parking) with Zetes and uncomment the package label printing in domain print
 
 **Build**
 

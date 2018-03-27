@@ -225,10 +225,14 @@ class Parameters:
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
         :param operation_id: The operation ID (stock.pack.operation)
-        :param exception: An exception (the object himself)
+        :param exception: An exception (the object himself or a string)
         :param error_type: The type of error (technical or human)
         :return: None
         """
+
+        if exception and not isinstance(exception, (str, unicode)):
+            exception = str(exception)
+
         self._domain.request.env['zetes.logger'].sudo().create({
             'domain': self._domain.__class__.__name__.lower(),
             'action': self._action.lower(),
@@ -238,5 +242,5 @@ class Parameters:
             'error_type': error_type or 'technical',
             'picking_id': picking_id,
             'operation_id': operation_id,
-            'traceback': exception and str(exception) or None,
+            'traceback': exception,
         })

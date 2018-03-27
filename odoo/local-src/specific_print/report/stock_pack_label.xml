@@ -14,7 +14,8 @@
        ^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="res_company.convert_to_ascii(pick.partner_id.city)"/>^FS
        ^FN3^FD<t t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or '')"/>^FS
        ^FN4^FD<t t-esc="res_company.convert_to_ascii(package.name)"/>^FS
-       ^FN5^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS
+       ^FN5^FD<t t-esc="pick.checksum"/>^FS
+       ^FN6^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS
        ^XZ
       </t>
      </t>
