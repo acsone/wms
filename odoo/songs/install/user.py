@@ -70,6 +70,20 @@ def esb_user_password(ctx):
 
 
 @anthem.log
+def smile_user_password(ctx):
+    if os.getenv('RUNNING_ENV') in ('dev', ):
+        ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
+        return
+    # password for the test server,
+    # the password must be changed in production
+    user = ctx.env.ref('__setup__.res_user_smile')
+    user.password_crypt = (
+        '$pbkdf2-sha512$19000$qdW6lzLm/H/POWfMGYPQ.g$o7/kBlAd920ibiMh35ylH'
+        'fndiu5y.m1axR.FiQuO/iXcKIUus1gMaTPVVtAE.KtxQw9BUHcfTZjO3zQV/Yc8Yw'
+    )
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
@@ -77,3 +91,4 @@ def main(ctx):
     set_implied_groups(ctx)
     import_users(ctx)
     esb_user_password(ctx)
+    smile_user_password(ctx)
