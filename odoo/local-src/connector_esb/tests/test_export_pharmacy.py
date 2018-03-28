@@ -115,6 +115,7 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'City': 'Geneve',
             'Telephone': '021123123',
             'Fax': '021121212',
+            'Email': '',
             'Street': 'Chemin des Canards, 1',
             'CountryId': self.country_ch.esb_ref,
             }
