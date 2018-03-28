@@ -84,6 +84,20 @@ def smile_user_password(ctx):
 
 
 @anthem.log
+def limelogic_user_password(ctx):
+    if os.getenv('RUNNING_ENV') in ('dev', ):
+        ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
+        return
+    # password for the test server,
+    # the password must be changed in production
+    user = ctx.env.ref('__setup__.res_user_limelogic')
+    user.password_crypt = (
+        '$pbkdf2-sha512$19000$2ts7J8S4t1YKwVgrRSiFUA$Mi6P6YALbwmZuFAB1P6qq'
+        'yuY4IbLZFGFRDJSfktCHu9c6.7baU7F94wjvWQ.UgJw1XRf25qng2wLMIyKnHAPuw'
+    )
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     change_admin_language(ctx)
@@ -92,3 +106,4 @@ def main(ctx):
     import_users(ctx)
     esb_user_password(ctx)
     smile_user_password(ctx)
+    limelogic_user_password(ctx)

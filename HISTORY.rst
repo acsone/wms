@@ -22,6 +22,7 @@ Unreleased
 * Add in Stock Valution Report last in/out dates for stock depreciation
 * ALCN-1140: Add 2 missing fr_BE translations for module account_invoice_check_total
 * ALCN-1249: Add user Smile
+* ALCN-1236: Add user Limelogic
 
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
