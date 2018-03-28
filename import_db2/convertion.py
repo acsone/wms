@@ -358,6 +358,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('vat', 'clicee', check=checks.vat),
         FieldMapper('vet_depot_number', 'clirch'),
         FieldMapper('vet_subscription_number', 'clirea'),
+        FieldMapper('help_with_fee', 'cliimc'),
         FieldMapper(
             'alcyon_category_id/id', 'clista',
             mapping=mappings.PARTNER_ALCYON_CATEGORY,
