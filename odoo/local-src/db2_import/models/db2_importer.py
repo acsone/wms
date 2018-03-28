@@ -335,6 +335,11 @@ class DB2MapperPurchaseOrder(object):
         # while creating xmlid
         xmlid = '__import__.purchase_order_%s_%s_%s' % (
             row['ecfsui'], int(row['ecffou']), int(row['ecfsuc']))
+        purchase = rec.env.ref(xmlid, raise_if_not_found=False)
+        # Do not update an already done purchase order
+        if purchase and purchase.state == 'done':
+            return
+
         purchase_model = rec.env['purchase.order'].with_context(
             tracking_disable=True,
         )
@@ -505,6 +510,14 @@ class DB2MapperSaleOrder(object):
                for idx, c in enumerate(
                    [d[0] for d in cr.description]
                )}
+        # transform float and string to int to remove . and spaces
+        # while creating xmlid
+        xmlid = '__import__.sale_order_%s_%s_%s' % (
+            row['eccsui'], int(row['ecccli']), int(row['eccsuc']))
+        sale = rec.env.ref(xmlid, raise_if_not_found=False)
+        # Do not update an already done sale order
+        if sale and sale.state == 'done':
+            return
 
         create_date = convert_date('eccc', row)
         customer = rec.env.ref(convert_customer(int(row['ecccli'])))
@@ -556,10 +569,6 @@ class DB2MapperSaleOrder(object):
             'supplier_promotion_allowed': promo_sale,
         }
 
-        # transform float and string to int to remove . and spaces
-        # while creating xmlid
-        xmlid = '__import__.sale_order_%s_%s_%s' % (
-            row['eccsui'], int(row['ecccli']), int(row['eccsuc']))
         so_model = rec.env['sale.order'].with_context(
             tracking_disable=True,
             no_connector_export=True,
