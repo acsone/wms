@@ -104,7 +104,7 @@ def post_import_products(ctx):
         UPDATE product_template as tmpl
         SET active=prod.active, default_code=prod.default_code
         FROM product_product as prod
-        WHERE tmpl.id = prod.id AND prod.active=False
+        WHERE tmpl.id = prod.product_tmpl_id AND prod.active=False
     """)
 
 

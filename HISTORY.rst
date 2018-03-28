@@ -25,6 +25,7 @@ Unreleased
 **Bugfixes**
 
 * Add missing basic access rights on 2 models of the ESB connector
+* Fix default_code import on inactive products
 
 **Build**
 
