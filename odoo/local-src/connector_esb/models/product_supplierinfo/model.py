@@ -53,7 +53,7 @@ class ProductSupplierInfo(models.Model):
             for record in self:
                 if record._is_promotion_buyx_gety():
                     record._update_flux('create', 'buyxgety')
-                elif record._is_promotion_special():
+                if record._is_promotion_special():
                     record._update_flux('create', 'specialpromotion')
 
         return res

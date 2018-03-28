@@ -24,6 +24,7 @@ Unreleased
 
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
+* ALCN-1248: Fix both promotion changed on a product and only one is updated by connector (ws02)
 
 
 * Add missing basic access rights on 2 models of the ESB connector
