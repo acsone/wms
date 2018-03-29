@@ -291,3 +291,4 @@ migration:
           - specific_data
           - specific_helpdesk
           - specific_sale
+    - version: 10.18.0

@@ -6,46 +6,56 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.0 (2018-03-29)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update imported data on 2018-03-29
-* ALCN-1234: Add name and date on history invoices on purchases
+* ALCN-1065: Fix creation of backorders on sale import
+* ALCN-1108: Remove mapping adaptation of tracking using serial type
 * ALCN-1128: Set customer as company when having a legal entity defined
 * ALCN-1155: import supplier categories, goods and general expenses
-* ALCN-1108: Remove mapping adaptation of tracking using serial type
-* ALCN-1065: Fix creation of backorders on sale import
 * ALCN-1205: import create_date on products
+* ALCN-1234: Add name and date on history invoices on purchases
 
 **Features and Improvements**
+
+* ALCN-187: Modify templates for labels (add the checksum on package label)
+* ALCN-760: Create the product category "Service" and modify the file accounting_product to add missing accounting service products
+* ALCN-808: Add MTO/MTS procurement rules
+* ALCN-1140: Add 2 missing fr_BE translations for module account_invoice_check_total
+* ALCN-1236: Add user Limelogic
+* ALCN-1247: Add Email node in pharmacy xml also when empty (wso2)
+* ALCN-1249: Add user Smile
 * Revert Belgium Taxes names and codes to v8 setup (before F.P. messed them all) + add missing Belgian standard taxes
 * Allow to use numpad point in float numbers
 * Add in Stock Valution Report last in/out dates for stock depreciation
-* ALCN-1140: Add 2 missing fr_BE translations for module account_invoice_check_total
-* ALCN-1249: Add user Smile
-* ALCN-1236: Add user Limelogic
-
-* ALCN-760: Create the product category "Service" and modify the file accounting_product to add missing accounting service products
-
-* ALCN-808: Add MTO/MTS procurement rules
-* ALCN-187: Modify templates for labels (add the checksum on package label)
-* ALCN-1247: Add Email node in pharmacy xml also when empty (wso2)
+* Launch import of 3 years of order on C2C_PLATFORM
 
 **Bugfixes**
-* Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
+
+* ALCN-187: Fix the method to search the best picking (reserve and parking) with Zetes and uncomment the package label printing in domain print
 * ALCN-1248: Fix both promotion changed on a product and only one is updated by connector (ws02)
 * ALCN-1250: Fix bug creation helpdesk ticket and add automatic sequence in name field.
-
-
+* Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
 * Add missing basic access rights on 2 models of the ESB connector
 * Fix default_code import on inactive products
-* ALCN-187: Fix the method to search the best picking (reserve and parking) with Zetes and uncomment the package label printing in domain print
 
 **Build**
 
 * Update odoo/enterprise to latest commit
 * Update odoo/src to latest commit
-
-**Documentation**
+* Sync with project template
 
 
 10.17.4 (2018-03-26)
