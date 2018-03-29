@@ -12,7 +12,7 @@ First, install it with:
 
 ```bash
 
-$ sudo pip install invoke
+$ pip install -r tasks/requirements.txt
 
 ```
 

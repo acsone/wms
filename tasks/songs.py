@@ -50,7 +50,7 @@ def odoo_login(base_url, login, password, db):
 
 @task(name='rip')
 def rip(ctx, location, login='admin', password='admin',
-        db='odoodb', dryrun=False):
+        db='odoodb', dryrun=False, data_path='./odoo/data'):
     """Open or download a zipfile containing songs.
 
     Unzip and copy the files into current project path.
@@ -83,11 +83,11 @@ def rip(ctx, location, login='admin', password='admin',
         zipdata = io.BytesIO()
         zipdata.write(resp.content)
     else:
-        zipdata = open(location)
-    handle_zip_data(zipdata, dryrun=dryrun)
+        zipdata = location
+    handle_zip_data(zipdata, dryrun=dryrun, data_path=data_path)
 
 
-def handle_zip_data(zipdata, dryrun=False):
+def handle_zip_data(zipdata, dryrun=False, data_path='./odoo/data'):
     if dryrun:
         print("Dry-run mode activated: no file will be extracted.")
     zf = zipfile.ZipFile(zipdata)
@@ -104,9 +104,16 @@ def handle_zip_data(zipdata, dryrun=False):
             readme_path = path
         else:
             if not dryrun:
-                print("Extracting ./odoo/%s" % path)
-                zf.extract(path, './odoo')
+                dest_path = data_path[:]
+                if path.startswith('songs'):
+                    # TODO: we assume songs path
+                    # is on the same level of data path
+                    dest_path = '/'.join(data_path.split('/')[:2])
+                print("Extracting %s/%s" % (dest_path, path))
+                zf.extract(path, dest_path)
 
     print('-' * 79)
     # Print README file
-    print(zf.open(readme_path).read())
+    readme_content = zf.open(readme_path).read()
+    readme_content = readme_content.decode('utf-8')
+    print(readme_content)
