@@ -24,6 +24,7 @@
      'views/res_partner.xml',
      'views/sale_order.xml',
      'views/stock_picking.xml',
+     'data/ticket_sequence.xml',
  ],
  'installable': True,
  }

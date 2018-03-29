@@ -9,6 +9,9 @@ class HelpdeskTicket(models.Model):
 
     _inherit = 'helpdesk.ticket'
 
+    name = fields.Char(
+        default='/'
+    )
     helpdesk_ticket_reason_id = fields.Many2one(
         comodel_name='helpdesk.ticket.reason', string='Reason')
 
@@ -35,6 +38,9 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def create(self, vals):
+        if vals.get('name', '/') == '/':
+            sequence = self.env.ref('specific_helpdesk.seq_ticket_auto')
+            vals['name'] = sequence.next_by_id()
         ticket = super(HelpdeskTicket, self).create(vals)
 
         partners_to_add = []
