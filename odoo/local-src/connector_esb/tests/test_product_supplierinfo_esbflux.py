@@ -120,3 +120,25 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
                                          ('flux', '=', 'buyxgety')])
         # Should not add rows
         self.assertEqual(qty, 3)
+
+    def test_both_promtion_updated_same_time(self):
+        """Create and update both promotion at the same time"""
+        r = self.supinfo.create({
+            'name': self.partner.id,
+            'product_tmpl_id': self.prod_1.id,
+            'ratio_main_product': 5,
+            'ratio_promotional_product': 1,
+            'discount_sale': 4,
+            'date_start': self.date_start,
+            'date_end': self.date_end,
+            })
+        qty = self.esbflux.search_count([('real_id', '=', r.id)])
+        self.assertEqual(qty, 2)
+        # Lets be generous and give more free products and better discount
+        # Changing both promotion at the same time
+        r.write({
+            'ratio_promotional_product': 2,
+            'discount_sale': 6,
+            })
+        qty = self.esbflux.search_count([('real_id', '=', r.id)])
+        self.assertEqual(qty, 6)
