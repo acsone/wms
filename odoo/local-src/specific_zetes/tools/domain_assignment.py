@@ -9,6 +9,8 @@ from .. import constants
 
 _logger = logging.getLogger(__name__)
 
+MAX_RETRY = 10
+
 
 class Assignment(DomainInterface):
     EXAMPLE_REQU = '208030828,2.2.3,3iV_101,REQU_ASSIGNMENT,30,1,20170207,' \
@@ -323,15 +325,17 @@ class Assignment(DomainInterface):
             ON stock_location.picking_zone_id = picking_zone.id
         %s
         ORDER BY report.refill_priority
+        LIMIT 1
         """ % zone_condition
-        self.request.env.cr.execute(report_query, tuple(query_values))
-        report_ids = [x[0] for x in self.request.env.cr.fetchall()]
 
-        if not report_ids:
-            return False
+        counter = 0
+        while counter < MAX_RETRY:
+            self.request.env.cr.execute(report_query, tuple(query_values))
+            report_id = self.request.env.cr.fetchone()
+            if not report_id:
+                break
 
-        while report_ids:
-            report_id = report_ids.pop(0)
+            report_id = report_id[0]
 
             model_name = 'report.stock.quant.bylocation'
             report = \
@@ -355,6 +359,8 @@ class Assignment(DomainInterface):
                     picking_id=picking.id,
                     exception=error_message
                 )
+
+            counter += 1
 
         return False
 
@@ -437,16 +443,17 @@ class Assignment(DomainInterface):
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         %s
-        ORDER BY refill_priority;
+        ORDER BY refill_priority
+        LIMIT 1;
         """ % zone_condition
-        self.request.env.cr.execute(report_query, tuple(query_values))
-        report_ids = [x[0] for x in self.request.env.cr.fetchall()]
 
-        if not report_ids:
-            return False
-
-        while report_ids:
-            report_id = report_ids.pop(0)
+        counter = 0
+        while counter < MAX_RETRY:
+            self.request.env.cr.execute(report_query, tuple(query_values))
+            report_id = self.request.env.cr.fetchone()
+            if not report_id:
+                break
+            report_id = report_id[0]
 
             model_name = 'report.stock.quant.bylocation.reserve'
             report = \
