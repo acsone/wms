@@ -70,6 +70,11 @@ def create_locations(ctx):
     loc_stock = ctx.env.ref('stock.stock_location_stock')
     # root = ctx.env.ref('stock.stock_location_locations')
 
+    # Change the parent of the location Output (VLB to Physical Locations)
+    ctx.env.ref('stock.stock_location_output').write({
+        'location_id': ctx.env.ref('stock.stock_location_locations').id
+    })
+
     # Input
     create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
         'usage': 'view',
@@ -283,16 +288,6 @@ def create_putaway(ctx):
         {
             'putaway_id': ref('__setup__.stock_putaway_input').id,
             'route_id': ref('stock.route_warehouse0_mto').id,
-            'fixed_location_id': ref(
-                '__setup__.stock_location_onorder').id,
-        }
-    )
-    create_or_update(
-        ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_input_onorder',
-        {
-            'putaway_id': ref('__setup__.stock_putaway_input').id,
-            'route_id': ref('__setup__.stock_location_route_onorder').id,
             'fixed_location_id': ref(
                 '__setup__.stock_location_onorder').id,
         }
@@ -817,6 +812,23 @@ def create_picking_types(ctx):
 
 
 @anthem.log
+def configure_procurement_rules(ctx):
+    """
+    Change the procurement location (VLB Stock -> VLB) for the BUY rules
+    :param ctx:
+    :return:
+    """
+    location_vlb_stock = ctx.env.ref('stock.stock_location_stock')
+    # The location VLB doesn't have a XML ID
+    location_vlb = location_vlb_stock.location_id
+
+    rulesBuy = ctx.env['procurement.rule'].search([('action', '=', 'buy')])
+    rulesBuy.write({
+        'location_id': location_vlb.id
+    })
+
+
+@anthem.log
 def create_procurement_rules(ctx):
     """ Creating procurement rules """
     ref = ctx.env.ref
@@ -871,11 +883,139 @@ def create_procurement_rules(ctx):
     for record in types:
         xmlid = record.pop('xmlid')
         types = record.pop('type')
+        default_name = record.pop('name')
         sequences = {'categ': 15, 'prod': 10}
         for t in types:
+            record['name'] = default_name[:-1] + " - " + t.upper() + ")"
             record['sequence'] = sequences[t]
             create_or_update(ctx, 'procurement.rule',
                              '%s_%s' % (xmlid, t), record)
+
+
+@anthem.log
+def create_procurement_rules_mto(ctx):
+    """ Creating procurement rules MTO """
+    ref = ctx.env.ref
+    location_out = ref('stock.stock_location_output')
+    warehouse = ctx.env.ref('stock.warehouse0')
+    types = [
+        {'xmlid': '__setup__.procurement_rule_materiel_mto',
+         'name': 'WH: Stock -> Output MTO (MAT)',
+         'action': 'move',
+         'sequence': 25,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_order',
+         'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
+         'group_propagation_option': 'propagate',
+         },
+        {'xmlid': '__setup__.procurement_rule_ali_mto',
+         'name': 'WH: Stock -> Output MTO (ALI)',
+         'action': 'move',
+         'sequence': 25,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_order',
+         'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
+         'group_propagation_option': 'propagate',
+         },
+        {'xmlid': '__setup__.procurement_rule_medoc_mto',
+         'name': 'WH: Stock -> Output MTO (MED)',
+         'action': 'move',
+         'sequence': 25,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_order',
+         'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
+         'group_propagation_option': 'propagate',
+         },
+        {'xmlid': '__setup__.procurement_rule_froid_mto',
+         'name': 'WH: Stock -> Output MTO (FRIGO)',
+         'action': 'move',
+         'sequence': 25,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_order',
+         'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
+         'group_propagation_option': 'propagate',
+         },
+    ]
+    for record in types:
+        xmlid = record.pop('xmlid')
+        create_or_update(ctx, 'procurement.rule', xmlid, record)
+
+
+@anthem.log
+def create_procurement_rules_mto_mts(ctx):
+    """ Creating procurement rules MTO+MTS """
+    ref = ctx.env.ref
+    location_out = ref('stock.stock_location_output')
+    warehouse = ctx.env.ref('stock.warehouse0')
+    types = [
+        {'xmlid': '__setup__.procurement_rule_materiel_mto_mtu',
+         'name': 'WH: Stock -> Output MTO+MTS (MAT)',
+         'action': 'split_procurement',
+         'sequence': 30,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_stock',
+         'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
+         'group_propagation_option': 'propagate',
+         'mts_rule_id':
+             ctx.env.ref('__setup__.procurement_rule_materiel_prod').id,
+         'mto_rule_id':
+             ctx.env.ref('__setup__.procurement_rule_materiel_mto').id,
+         },
+        {'xmlid': '__setup__.procurement_rule_ali_mto_mtu',
+         'name': 'WH: Stock -> Output MTO+MTS (ALI)',
+         'action': 'split_procurement',
+         'sequence': 30,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_stock',
+         'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
+         'group_propagation_option': 'propagate',
+         'mts_rule_id': ctx.env.ref('__setup__.procurement_rule_ali_prod').id,
+         'mto_rule_id': ctx.env.ref('__setup__.procurement_rule_ali_mto').id,
+         },
+        {'xmlid': '__setup__.procurement_rule_medoc_mto_mtu',
+         'name': 'WH: Stock -> Output MTO+MTS (MED)',
+         'action': 'split_procurement',
+         'sequence': 30,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_stock',
+         'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
+         'group_propagation_option': 'propagate',
+         'mts_rule_id':
+             ctx.env.ref('__setup__.procurement_rule_medoc_prod').id,
+         'mto_rule_id': ctx.env.ref('__setup__.procurement_rule_medoc_mto').id,
+         },
+        {'xmlid': '__setup__.procurement_rule_froid_mto_mtu',
+         'name': 'WH: Stock -> Output MTO+MTS (FRIGO)',
+         'action': 'split_procurement',
+         'sequence': 30,
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'location_src_id': ref('stock.stock_location_stock').id,
+         'procure_method': 'make_to_stock',
+         'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
+         'group_propagation_option': 'propagate',
+         'mts_rule_id':
+             ctx.env.ref('__setup__.procurement_rule_froid_prod').id,
+         'mto_rule_id': ctx.env.ref('__setup__.procurement_rule_froid_mto').id,
+         },
+    ]
+    for record in types:
+        xmlid = record.pop('xmlid')
+        create_or_update(ctx, 'procurement.rule', xmlid, record)
 
 
 @anthem.log
@@ -940,20 +1080,29 @@ def create_routes(ctx):
          'product_categ_selectable': False,
          'product_selectable': True,
          },
-        {'xmlid': '__setup__.stock_location_route_onorder',
-         'name': 'Acheté-Vendu',
-         'product_categ_selectable': False,
-         'product_selectable': True,
-         },
     ]
     for record in types:
         xmlid = record.pop('xmlid')
-        record.update({
-         'sequence': 20,
-        })
+        record.update({'sequence': 20})
         create_or_update(ctx, 'stock.location.route', xmlid, record)
+
+    route_mto_values = {
+        'pull_ids': [
+            (6, 0, [ref('__setup__.procurement_rule_materiel_mto_mtu').id,
+                    ref('__setup__.procurement_rule_ali_mto_mtu').id,
+                    ref('__setup__.procurement_rule_medoc_mto_mtu').id,
+                    ref('__setup__.procurement_rule_froid_mto_mtu').id])
+        ]
+    }
+
+    create_or_update(
+        ctx, 'stock.location.route',
+        'stock.route_warehouse0_mto', route_mto_values
+    )
+
+    # Disable the route MTO+MTS
     create_or_update(ctx, 'stock.location.route',
-                     'stock.route_warehouse0_mto',
+                     'stock_mts_mto_rule.route_mto_mts',
                      {'product_selectable': False})
 
 
@@ -1008,7 +1157,10 @@ def main(ctx):
     create_picking_zones(ctx)
     create_locations(ctx)
     create_picking_types(ctx)
+    configure_procurement_rules(ctx)
     create_procurement_rules(ctx)
+    create_procurement_rules_mto(ctx)
+    create_procurement_rules_mto_mts(ctx)
     create_routes(ctx)
     create_putaway(ctx)
     assign_route_categories(ctx)

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-04 17:03+0000\n"
-"PO-Revision-Date: 2018-03-04 17:03+0000\n"
+"POT-Creation-Date: 2018-03-26 08:53+0000\n"
+"PO-Revision-Date: 2018-03-26 08:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -258,18 +258,28 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_nbr_lines
+msgid "Nbr lines"
+msgstr "Nbr lignes"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_nbr_lines_bo
+msgid "Nbr lines BO"
+msgstr "Nbr lignes BO"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:57
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:60
 #, python-format
 msgid "Please select at least one day"
 msgstr "Veuillez sélectionner au moins un jour"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:63
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:66
 #, python-format
 msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"

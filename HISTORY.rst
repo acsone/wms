@@ -26,6 +26,8 @@ Unreleased
 
 * ALCN-760: Create the product category "Service" and modify the file accounting_product to add missing accounting service products
 
+* ALCN-808: Add MTO/MTS procurement rules
+
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
 

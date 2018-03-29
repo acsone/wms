@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-16 16:33+0000\n"
-"PO-Revision-Date: 2018-01-16 16:33+0000\n"
+"POT-Creation-Date: 2018-03-26 08:52+0000\n"
+"PO-Revision-Date: 2018-03-26 08:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,11 @@ msgstr ""
 #: model:ir.model.fields,help:specific_stock.field_stock_config_settings_delay_inventory_expensive_products
 msgid "6 months means that it will be two inventory per year"
 msgstr "6 mois signifie qu'il y aura 2 inventaires par an"
+
+#. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_product_category_warning_info
+msgid "Additional information communicated to the customer"
+msgstr "Informations complémentaires communiquées au client"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
@@ -73,6 +78,11 @@ msgid "Backorder reason choice"
 msgstr "Choix de la cause du reliquat"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Bin"
+msgstr "Bac"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
 msgid "Box"
 msgstr "Boite"
@@ -89,6 +99,11 @@ msgid "Cancel backorder"
 msgstr "Annuler reliquat"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_change_product_qty
 msgid "Change Product Quantity"
 msgstr "Changer la quantité d'articles"
@@ -99,20 +114,15 @@ msgid "Checksum"
 msgstr "Checksum"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_code
-msgid "Code"
-msgstr "Code"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr "Couloir"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:107
+#: code:addons/specific_stock/models/stock_picking.py:106
 #, python-format
 msgid "Create Backorder?"
-msgstr "Créer Backorder?"
+msgstr "Créer Reliquat?"
 
 #. module: specific_stock
 #: selection:stock.backorder.reason,backorder_action_to_do:0
@@ -120,7 +130,6 @@ msgid "Create backorder"
 msgstr "Créer reliquat"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_uid
@@ -128,7 +137,6 @@ msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_date
@@ -147,6 +155,12 @@ msgid "Daily inventory: %s"
 msgstr "Inventaire journalier: %s"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
+#: model:ir.model.fields,field_description:specific_stock.field_res_users_time_limit_order
+msgid "Deadline for ordering"
+msgstr "Heure limite pour commander"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_best_sellers_products
 msgid "Delay between two inventory for best sellers products"
 msgstr "Delais entre deux inventaires pour les produits les plus vendus"
@@ -162,7 +176,6 @@ msgid "Delay between two inventory for other products"
 msgstr "Delais entre deux inventaires pour les autres produits"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_display_name
@@ -206,7 +219,6 @@ msgid "Helpdesk ticket reason"
 msgstr "Cause du ticket helpdesk"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_id
@@ -230,7 +242,6 @@ msgid "Is helpdesk ticket to create?"
 msgstr "Ticket helpdesk à créer ?"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason___last_update
@@ -238,7 +249,6 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_uid
@@ -246,7 +256,6 @@ msgid "Last Updated by"
 msgstr "Derniere fois mis à jour par"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_date
@@ -265,6 +274,11 @@ msgid "Localization"
 msgstr "Localisation"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_location_dest_name
+msgid "Location dest name"
+msgstr "Nom de l'emplacement de destination"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_location_name
 msgid "Location name"
 msgstr "Nom de l'emplacement"
@@ -280,10 +294,14 @@ msgid "Missing quantity of products to pick"
 msgstr "Il n'y a pas assez de quantité à prendre"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_picking_zone_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_name
 msgid "Name"
 msgstr "Nom"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+msgid "Normal product"
+msgstr "Produit normal"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_months_between_inventory
@@ -302,6 +320,12 @@ msgid "Number of packages"
 msgstr "Nombre de paquets"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+#: model:ir.model.fields,field_description:specific_stock.field_product_template_is_mto_product
+msgid "On Order"
+msgstr "A la commande"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_operator_id
 msgid "Operator"
 msgstr "Opérateur"
@@ -315,6 +339,11 @@ msgstr "Zone de picking d'origine"
 #: model:ir.model,name:specific_stock.model_stock_pack_operation
 msgid "Packing Operation"
 msgstr "Colisage"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Parking"
+msgstr "Parking"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_res_partner
@@ -334,23 +363,15 @@ msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: specific_stock
-#: model:ir.actions.act_window,name:specific_stock.picking_zone_action
-#: model:ir.ui.menu,name:specific_stock.picking_zone_menu
-msgid "Picking Zones"
-msgstr "Zones de picking"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_product_product_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_product_template_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_picking_zone_id
-#: model:ir.model.fields,field_description:specific_stock.field_stock_picking_type_picking_zone_id
-#: model:ir.ui.view,arch_db:specific_stock.picking_zone_view_tree
 msgid "Picking zone"
 msgstr "Zone de picking"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:163
+#: code:addons/specific_stock/models/product_template.py:177
 #, python-format
 msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
 msgstr "Veuillez définir le prix limite pour les inventaires et/ou le nombre de jours ouvrés dans la configuration de l'inventaire"
@@ -359,6 +380,11 @@ msgstr "Veuillez définir le prix limite pour les inventaires et/ou le nombre de
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_price_limit_for_inventory
 msgid "Price limit for inventory"
 msgstr "Prix limite pour les inventaires"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_product_product
@@ -419,6 +445,11 @@ msgid "Quantity to take for best sellers (in percent)"
 msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Reserve"
+msgstr "Réserve"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_res_partner_is_sale_back_order_accepted
 #: model:ir.model.fields,field_description:specific_stock.field_res_users_is_sale_back_order_accepted
 msgid "Sale back order accepted"
@@ -450,7 +481,7 @@ msgstr "Le delai peut seulement être une valeur de la liste suivante:\n"
 "(1, 2, 3, 4, 6 ou 12 mois)"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:22
+#: code:addons/specific_stock/models/stock_location.py:24
 #: sql_constraint:stock.location:0
 #, python-format
 msgid "The location coordinate must be unique"
@@ -473,12 +504,7 @@ msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
 
 #. module: specific_stock
-#: sql_constraint:picking.zone:0
-msgid "The picking zone code must be unique"
-msgstr "La zone de picking doit être unique"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:95
+#: code:addons/specific_stock/models/stock_picking.py:94
 #, python-format
 msgid "The reception must be linked to a Goods Received Note"
 msgstr "La réception doit être liée à un accusé de réception"
@@ -496,28 +522,22 @@ msgid "There is no delay for the inventory %s"
 msgstr "Il n'y a pas de delais pour l'inventaire %s"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:213
+#: code:addons/specific_stock/models/product_template.py:227
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr "Il n'y a pas de période pour les produits les plus vendus"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:178
+#: code:addons/specific_stock/models/product_template.py:192
 #, python-format
 msgid "There is no period for expensive products"
 msgstr "Il n'y a pas de période pour les produits coûteux"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:258
+#: code:addons/specific_stock/models/product_template.py:272
 #, python-format
 msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
-#: model:ir.model.fields,field_description:specific_stock.field_res_users_time_limit_order
-msgid "Deadline for ordering"
-msgstr "Heure limite pour commander"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
@@ -533,6 +553,11 @@ msgstr "Utiliser l'option sur les partenaires (Reliquat sur les achats accepté)
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
 msgid "Valid location"
 msgstr "Emplacement valide"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_product_category_warning_info
+msgid "Warning information"
+msgstr "Informations d'avertissement"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_alert_time
@@ -555,7 +580,7 @@ msgid "When a new a Serial Number is issued, this is the number of days before t
 msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:60
+#: code:addons/specific_stock/models/stock_picking.py:58
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
@@ -566,11 +591,6 @@ msgstr "Vous ne pouvez pas transférer un lot expiré:\n"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
 msgid "Zone"
 msgstr "Zone"
-
-#. module: specific_stock
-#: model:ir.model,name:specific_stock.model_picking_zone
-msgid "picking.zone"
-msgstr "picking.zone"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_put_in_pack_helper
