@@ -61,8 +61,14 @@ def main(ctx):
     env = os.environ.get("RUNNING_ENV")
     if env == 'production':
         importers = PROD_IMPORTER
+        mode = 'history'
     elif env == 'integration':
         importers = INT_IMPORTER
+        # For 10.18.0 we want to do a full scale test of the import
+        # but only on the c2c_platform
+        if os.environ.get('C2C_PLATFORM') == 'True':
+            importers = PROD_IMPORTER
+        mode = 'final_update'
     else:
         # Don't automatically launch in dev/test env
         return
@@ -76,7 +82,7 @@ def main(ctx):
                                            months=-data['months'])
         start_date_str = fields.Date.to_string(start_date)
         rec.write({
-            'mode': 'final_update',
+            'mode': mode,
             'date_start': start_date_str,
             'date_end': end_date_str,
         })
