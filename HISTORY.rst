@@ -24,6 +24,8 @@ Unreleased
 * ALCN-1249: Add user Smile
 * ALCN-1236: Add user Limelogic
 
+* ALCN-760: Create the product category "Service" and modify the file accounting_product to add missing accounting service products
+
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
 
