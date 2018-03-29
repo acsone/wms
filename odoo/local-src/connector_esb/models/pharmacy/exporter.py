@@ -38,8 +38,7 @@ class PharmacyExportMapper(Component):
 
     @mapping
     def compute_email(self, record):
-        if record.email:
-            return {'Email': record.email}
+        return {'Email': record.email or ''}
 
 
 class PharmacyCronExporter(Component):

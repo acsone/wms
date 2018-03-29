@@ -28,6 +28,7 @@ Unreleased
 
 * ALCN-808: Add MTO/MTS procurement rules
 * ALCN-187: Modify templates for labels (add the checksum on package label)
+* ALCN-1247: Add Email node in pharmacy xml also when empty (wso2)
 
 **Bugfixes**
 * Accounting: Fix invoice encoding, setup journal sequences (numbering per year or per month) and config, setup intrastat, configure fiscal positions for Alcyon accounts
