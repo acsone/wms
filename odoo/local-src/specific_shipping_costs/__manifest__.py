@@ -18,10 +18,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        # Views
-        'views/account_invoice.xml',
         'views/delivery_carrier.xml',
-        'views/sale_order.xml',
     ],
     'installable': True,
 }
