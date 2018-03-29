@@ -131,7 +131,7 @@ PARTNER_ALCYON_CATEGORY = {
     2: 'specific_partner.partner_category_pharmacy',
     3: 'specific_partner.partner_category_veto',
     4: 'specific_partner.partner_category_callcenter',
-    5: 'specific_partner.partner_category_small_whoesaler',
+    5: 'specific_partner.partner_category_small_wholesaler',
     6: 'specific_partner.partner_category_epece',
     7: 'specific_partner.partner_category_pharma_health',
     8: 'specific_partner.partner_category_university',

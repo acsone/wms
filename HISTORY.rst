@@ -8,10 +8,10 @@ Unreleased
 
 **Data Migration**
 
+* Update imported data on 2018-03-29
 * ALCN-1234: Add name and date on history invoices on purchases
 * ALCN-1128: Set customer as company when having a legal entity defined
 * ALCN-1155: import supplier categories, goods and general expenses
-* TODO: Update imported data on 2018-03-xx
 * ALCN-1108: Remove mapping adaptation of tracking using serial type
 * ALCN-1065: Fix creation of backorders on sale import
 * ALCN-1205: import create_date on products
