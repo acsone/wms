@@ -283,6 +283,10 @@ migration:
           - specific_sale
           - web_tree_dynamic_colored_field
           - specific_zetes
+          - connector_esb
+          - specific_shipping_costs
       operations:
         post:
           - anthem songs.install.logistics::create_picking_types
+        pre:
+          - anthem songs.upgrade.10_18_7_update::pre

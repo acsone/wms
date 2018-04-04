@@ -37,12 +37,6 @@ msgid "Compute Shipping Costs"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_compute_shipping_costs_on_invoice
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_compute_shipping_costs_on_invoice
-msgid "Compute shipping costs on invoice"
-msgstr ""
-
-#. module: specific_shipping_costs
 #: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_intrastat_id
 msgid "Intrastat code"
 msgstr ""
