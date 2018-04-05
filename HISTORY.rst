@@ -15,6 +15,18 @@ Unreleased
 **Documentation**
 
 
+10.18.1 (2018-04-05)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* Fix session on camptocamp platform due to change in Odoo core [1]
+
+
+[1] https://github.com/odoo/odoo/pull/22612
+
+
+
 10.18.0 (2018-03-29)
 ++++++++++++++++++++
 
