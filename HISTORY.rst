@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.1 (2018-04-05)
+++++++++++++++++++++
+
 **Bugfixes**
 
 * Fix session on camptocamp platform due to change in Odoo core [1]
