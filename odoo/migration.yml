@@ -72,6 +72,17 @@ migration:
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
+              # Create db2 tables and fill them with history data
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_mvtlot_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_mvtlot.sql $DB_NAME'"
         sample:
           operations:
             post:
@@ -235,60 +246,4 @@ migration:
     # - version: 10.18.4
     # - version: 10.18.5
     - version: 10.18.6
-      operations:
-        post:
-          - anthem songs.upgrade.10_18_6_update::post
-          - anthem songs.install.accounting::set_fiscal_position_mention
-          - anthem songs.install.logistics::set_product_expiry
-      modes:
-        full:
-          operations:
-            post:
-              - anthem songs.upgrade.10_18_6_update::deactivate_check_on_vat
-              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
-              - anthem songs.install.accounting::import_banks
-              - anthem songs.install.data_full::import_banks
-              - anthem songs.install.data_full::import_bank_accounts
-              - anthem songs.install.data_full::import_bank_mandates
-              - anthem songs.install.data_full::import_delivery_round_config
-              - anthem songs.install.accounting::activate_check_on_vat
-      addons:
-        upgrade:
-          - delivery_rounds
-          - specific_account
-          - specific_helpdesk
-          - specific_partner
-          - specific_product
-          - specific_purchase
-          - specific_report
-          - specific_sale
-          - specific_security
-          - specific_stock
-          - specific_zetes
-          - stock_disable_force_availability_button
-          - stock_product_bin
     - version: 10.18.7
-      modes:
-        full:
-          operations:
-            post:
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
-        sample:
-          operations:
-            post:
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/sample/products_only_belgium.csv
-      addons:
-        upgrade:
-          - specific_sale
-          - specific_partner
-          - specific_sale
-          - specific_report
-          - web_tree_dynamic_colored_field
-          - specific_zetes
-          - connector_esb
-          - specific_shipping_costs
-      operations:
-        pre:
-          - sh -c 'psql -f odoo/songs/upgrade/10_18_7_update.sql'
-        post:
-          - anthem songs.install.logistics::create_picking_types

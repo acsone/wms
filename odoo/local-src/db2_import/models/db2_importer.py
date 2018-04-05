@@ -1,9 +1,10 @@
-# -*: utf-8 -*-
+# -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import os
 import pyodbc
 import socket
+import uuid
 from datetime import datetime, timedelta
 from calendar import monthrange
 
@@ -750,6 +751,9 @@ class DB2ImporterTable(models.Model):
         help="Hour of the day when the db2 object will transformed to an odoo"
              " object")
     where_clause = fields.Char()
+    csv_until = fields.Date(
+        help="If a csv was injected into database, put here the lasted date of"
+             " of its data.")
 
     @api.multi
     def get_add_columns(self):
@@ -797,19 +801,24 @@ class DB2ImporterTable(models.Model):
         cr.execute(query)
         _logger.info('CREATE TABLE %s', odoo_table_name)
 
-    def get_sql_query(self, date_start, date_end, col_names):
+    def _get_sql_where_date(self, date_start, date_end, col_names=None):
+        """In DB2 dates are splitted through 4 fields:
+        - age (century)
+        - year (2 digits)
+        - month
+        - day
+
+        Here we construct a request by converting them in a single integer
+        this operation is thus cross compatible in DB2 and psql.
+
+        """
 
         query_kwargs = {
-            'schema': self.schema,
-            'table_name': self.table_name,
             'prefix': self.table_prefix,
         }
 
         query_kwargs.update({
-            'start_age': int(date_start[:2]),
-            'start_year': int(date_start[2:4]),
-            'start_month': int(date_start[5:7]),
-            'start_day': int(date_start[8:]),
+            'start_date': int(date_start.replace('-', ''))
         })
         if not date_end:
             start = fields.Date.from_string(date_start)
@@ -817,50 +826,63 @@ class DB2ImporterTable(models.Model):
             date_end = fields.Date.to_string(start)
 
         query_kwargs.update({
-            'end_age': int(date_end[:2]),
-            'end_year': int(date_end[2:4]),
-            'end_month': int(date_end[5:7]),
-            'end_day': int(date_end[8:]),
+            'end_date': int(date_end.replace('-', ''))
         })
 
-        if '{}css'.format(self.table_prefix) in col_names:
-            query = (
-                "SELECT * FROM {schema}.{table_name}"
-                " WHERE ({prefix}css >= {start_age}"
-                " AND {prefix}css <= {end_age}"
-                " AND {prefix}caa >= {start_year}"
-                " AND {prefix}caa <= {end_year}"
-                " AND {prefix}cmm >= {start_month}"
-                " AND {prefix}cmm <= {end_month}"
-                " AND {prefix}cjj >= {start_day}"
-                " AND {prefix}cjj <= {end_day}"
+        if not col_names or '{}css'.format(self.table_prefix) in col_names:
+            where = (
+                " ("
+                "  {prefix}css * 1000000 +"
+                "  {prefix}caa * 10000 +"
+                "  {prefix}cmm * 100 +"
+                "  {prefix}cjj >= {start_date}"
+                " AND {prefix}css * 1000000 +"
+                "  {prefix}caa * 10000 +"
+                "  {prefix}cmm * 100 +"
+                "  {prefix}cjj <= {end_date}"
             )
 
             if self.importer_id.mode == 'final_update':
-                query += (
-                    " OR {prefix}mss >= {start_age}"
-                    " AND {prefix}mss <= {end_age}"
-                    " AND {prefix}maa >= {start_year}"
-                    " AND {prefix}maa <= {end_year}"
-                    " AND {prefix}mmm >= {start_month}"
-                    " AND {prefix}mmm <= {end_month}"
-                    " AND {prefix}mjj >= {start_day}"
-                    " AND {prefix}mjj <= {end_day})"
+                where += (
+                    " OR {prefix}mss * 1000000 +"
+                    "  {prefix}maa * 10000 +"
+                    "  {prefix}mmm * 100 +"
+                    "  {prefix}mjj >= {start_date}"
+                    " AND {prefix}mss * 1000000 +"
+                    "  {prefix}maa * 10000 +"
+                    "  {prefix}mmm * 100 +"
+                    "  {prefix}mjj <= {end_date}"
+                    ")"
                 )
             else:
-                query += ")"
+                where += ")"
         else:
-            query = (
-                "SELECT * FROM {schema}.{table_name}"
-                " WHERE {prefix}dss >= {start_age}"
-                " AND {prefix}dss <= {end_age}"
-                " AND {prefix}daa >= {start_year}"
-                " AND {prefix}daa <= {end_year}"
-                " AND {prefix}dmm >= {start_month}"
-                " AND {prefix}dmm <= {end_month}"
-                " AND {prefix}djj >= {start_day}"
-                " AND {prefix}djj <= {end_day}"
+            where = (
+                " {prefix}dss * 1000000 +"
+                "  {prefix}daa * 10000 +"
+                "  {prefix}dmm * 100 +"
+                "  {prefix}djj >= {start_date}"
+                " AND {prefix}dss * 1000000 +"
+                "  {prefix}daa * 10000 +"
+                "  {prefix}dmm * 100 +"
+                "  {prefix}djj <= {end_date}"
             )
+        return where.format(**query_kwargs)
+
+    def _get_sql_query(self, date_start, date_end, col_names):
+
+        query_kwargs = {
+            'schema': self.schema,
+            'table_name': self.table_name,
+            'prefix': self.table_prefix,
+        }
+
+        query = "SELECT * FROM {schema}.{table_name}"
+
+        where = self._get_sql_where_date(date_start, date_end, col_names)
+        query += ' WHERE ' + where
+        if self.where_clause:
+            query += " AND " + self.where_clause
         if self.where_clause:
             query += " AND " + self.where_clause
         return query.format(**query_kwargs)
@@ -915,14 +937,105 @@ class DB2ImporterTable(models.Model):
                         odoo_table_name)
                     cr.execute(query, (order_id, line_id))
 
+    def _local_table_exists(self):
+        cr = self.env.cr
+        odoo_table_name = self._PREFIX + self.table_name.lower()
+        cr.execute(
+            "SELECT 1 FROM information_schema.tables"
+            " WHERE table_name = '{}'".format(odoo_table_name))
+        return cr.fetchone()
+
     @api.multi
     @job(default_channel='root.db2.create_or_update')
     def create_or_update_record(self, db2_id):
         mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
-    @job(default_channel='root.db2.fetch')
-    def get_from_db2(self, date_start, date_end):
+    @job(default_channel='root.db2.generate_jobs')
+    def create_convertion_jobs(self, date_start, date_end):
+        """Create jobs from rows in local copy for a range of dates"""
+        eta = max(0, min(self.eta or 2, 23))
+        now = datetime.now()
+        next_eta = now.replace(hour=eta, minute=0, second=0, microsecond=0)
+        # make sure the next eta is in future
+        if next_eta < now:
+            next_eta += timedelta(days=1)
+
+        cr = self.env.cr
+        odoo_table_name = self._PREFIX + self.table_name.lower()
+
+        query = (
+            "SELECT id FROM %s"
+            " WHERE ") % odoo_table_name
+        # No need to pass colname list as we always have
+        # a create and modify date on purchase and on sale order
+        # unless the model is MVTLOT as css doesn't exist there.
+        colname = None
+        if self.table_name == 'MVTLOT':
+            colname = ['mvtdss']
+        query += self._get_sql_where_date(date_start, date_end, colname)
+        if self.where_clause:
+            query += " AND " + self.where_clause
+        cr.execute(query)
+        rows = cr.fetchall()
+
+        mode = self.importer_id.mode
+
+        # Use a sql query to speed up insert of jobs
+        # (we have ~440k jobs to create)
+        create_job_query = (
+            "INSERT INTO queue_job ("
+            "func_string,priority,retry,user_id,uuid,record_ids,company_id,"
+            "method_name,state,kwargs,channel_method_name,channel,args,"
+            "job_function_id,max_retries,date_created,name,model_name,eta)"
+            " VALUES ("
+            "'db2.importer.table({table_id},)"
+            ".create_or_update_record({{record_id}})',10,0,1,"
+            "'{{uuid}}','[1]',1,'create_or_update_record','pending',"
+            # escape 2 levels to get {}. {{{{}}}} -> {{}} -> {}
+            "'{{{{}}}}','<db2.importer.table>.create_or_update_record',"
+            "'root.db2.create_or_update','[{{record_id}}]',2,5,"
+            "'{date_created}','db2.importer.table.create_or_update_record',"
+            "'db2.importer.table','{eta}')"
+        ).format(
+            table_id=self.id,
+            date_created=fields.Datetime.to_string(now),
+            eta=fields.Datetime.to_string(next_eta),
+        )
+
+        cpt = 0
+        for row in rows:
+            cpt += 1
+            db_id = row[0]
+            # Prepare a job to execute the creation
+            method_name = 'create_or_update_record'
+            model = repr(self)
+            func_string = "%s.%s(%s)" % (model, method_name, db_id)
+            # skip check of existing job if in history mode
+            # for large import of data this creates one extra
+            # query useless most of the time.
+            if mode != 'history':
+                count_job = self.env['queue.job'].search_count(
+                    [('model_name', '=', 'db2.importer.table'),
+                     ('func_string', '=', func_string),
+                     ('state', '!=', 'done')])
+                if count_job:
+                    continue
+
+            job_id = unicode(uuid.uuid4())
+            # self.with_delay(eta=next_eta).create_or_update_record(db_id)
+            query = create_job_query.format(
+                record_id=db_id,
+                uuid=job_id)
+            cr.execute(query)
+
+            if cpt % 100 == 0 or cpt == len(rows):
+                _logger.info(
+                    'Job created for %s %s on %s',
+                    self.table_name, cpt, len(rows))
+
+    def _get_from_db2(self, date_start, date_end):
+        """ fetch table from DB2 on a range of dates """
         # connect to DB2
         db2_host = os.environ.get('DB2HOST')
         if db2_host == 'pissh':
@@ -941,15 +1054,12 @@ class DB2ImporterTable(models.Model):
             "DSN=Alcyon", system=db2_host,
             uid=db_user, pwd=db_pwd)
         try:
+            odoo_table_name = self._PREFIX + self.table_name.lower()
+
             db2_cr = conn.cursor()
             cr = self.env.cr
-            odoo_table_name = self._PREFIX + self.table_name.lower()
-            cr.execute(
-                "SELECT 1 FROM information_schema.tables"
-                " WHERE table_name = '{}'".format(odoo_table_name))
-            table_exists = cr.fetchone()
 
-            if not table_exists:
+            if not self._local_table_exists():
                 db2_columns = self._get_db2_columns(db2_cr)
                 self._create_db2_table(db2_columns)
             # get all columns (from local copy)
@@ -965,7 +1075,7 @@ class DB2ImporterTable(models.Model):
                     if col != 'id':
                         self.table_prefix = col[:3].lower()
                         break
-            query = self.get_sql_query(date_start, date_end, col_names)
+            query = self._get_sql_query(date_start, date_end, col_names)
             db2_cr.execute(query, [])
 
             rows = db2_cr.fetchall()
@@ -989,38 +1099,41 @@ class DB2ImporterTable(models.Model):
                  table_name=odoo_table_name,
                  placeholders=','.join(['%s']*len(columns)),
                  update_cols=','.join([col[0] + ' = %s' for col in columns]))
-        eta = max(0, min(self.eta or 2, 23))
-        now = datetime.now()
-        next_eta = now.replace(hour=eta, minute=0, second=0, microsecond=0)
-        # make sure the next eta is in future
-        if next_eta < now:
-            next_eta += timedelta(days=1)
         cpt = 0
         for row in rows:
             # Make list of values (x2) for insert and update placeholders
             values = [convert_coding(v) for v in row] * 2
             # Using mogrify to transform DECIMAL in int
             cr.execute(cr.mogrify(query, values))
-            new_id = cr.fetchone()[0]
+            cr.fetchone()[0]
             cpt += 1
             if cpt % 10 == 0 or cpt == len(rows):
                 _logger.info(
                     'INSERT %s %s on %s', self.table_name, cpt, len(rows))
-
-            if self.create_job:
-                # Prepare a job to execute the creation
-                method_name = 'create_or_update_record'
-                model = repr(self)
-                func_string = "%s.%s(%s)" % (model, method_name, new_id)
-                count_job = self.env['queue.job'].search_count(
-                    [('model_name', '=', 'db2.importer.table'),
-                     ('func_string', '=', func_string),
-                     ('state', '!=', 'done')])
-                if count_job:
-                    continue
-                self.with_delay(eta=next_eta).create_or_update_record(new_id)
-
         self._setup_relations()
+
+    @api.multi
+    @job(default_channel='root.db2.fetch')
+    def fetch_data(self, date_start, date_end, table_name=None):
+        """Fetch data from DB2 and save them as a local copy"""
+        csv_date_end = self.csv_until
+        # csv doesn't cover the whole fetching
+        # considering we won't fetch anything before csv import
+        # csv |--------|
+        # range1 |---|         fetch nothing
+        # range2     |---|     fetch from csv_end to range_end
+        # range3         |---| fetch whole range3
+        if csv_date_end and csv_date_end > date_end:
+            return
+
+        db2_date_start = date_start
+        db2_date_end = date_end
+        if csv_date_end and csv_date_end > date_start:
+            db2_date_start = csv_date_end
+
+        self._get_from_db2(db2_date_start, db2_date_end)
+        if self.create_job:
+            self.create_convertion_jobs(db2_date_start, db2_date_end)
 
 
 class DB2Importer(models.Model):
@@ -1040,8 +1153,21 @@ class DB2Importer(models.Model):
     @api.multi
     def db2_import(self):
 
-        # split date range per month basis
         str_next_start = self.date_start
+
+        # Create jobs for data imported by csv
+        for table in self.table_ids:
+            if table.create_job:
+                if table.csv_until:
+                    table.with_delay().create_convertion_jobs(
+                        str_next_start, table.csv_until)
+            # here we don't alter start date
+            # to let the possibility to have
+            # different dates on different models
+            # while keeping the jobs creating by dates range
+            # by date range instead of model by model
+
+        # split date range per month basis
         dt_next_end = False
         dt_end = fields.Date.from_string(self.date_end)
         while not dt_next_end or dt_next_end < dt_end:
@@ -1051,6 +1177,8 @@ class DB2Importer(models.Model):
             str_next_end = fields.Date.to_string(dt_next_end)
             # get data for each table
             for table in self.table_ids:
-                table.with_delay().get_from_db2(str_next_start, str_next_end)
+                table.with_delay().fetch_data(
+                    str_next_start, str_next_end,
+                    table.table_name)  # table_name is only added for display
             str_next_start = fields.Date.to_string(
                 dt_next_end + timedelta(days=1))

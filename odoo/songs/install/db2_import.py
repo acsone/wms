@@ -28,22 +28,27 @@ Different importers will be launched depending on environment:
 PROD_IMPORTER = [
     {'ref': 'db2_import.db2_sale_importer',
      'years': 2,
-     'months': 0},
+     'months': 0,
+     'csv_until': '2018-04-01'},
     {'ref': 'db2_import.db2_purchase_importer',
      'years': 2,
-     'months': 0},
+     'months': 0,
+     'csv_until': '2018-04-01'},
 ]
 
 INT_IMPORTER = [
     {'ref': 'db2_import.db2_sale_importer',
      'years': 0,
-     'months': 3},
+     'months': 3,
+     'csv_until': '2018-04-01'},
     {'ref': 'db2_import.db2_purchase_importer',
      'years': 0,
-     'months': 3},
+     'months': 3,
+     'csv_until': '2018-04-01'},
     {'ref': 'db2_import.db2_importer_10_clients',
      'years': 2,
-     'months': 0},
+     'months': 0,
+     'csv_until': '2018-04-01'},
 ]
 
 
@@ -64,10 +69,12 @@ def main(ctx):
         mode = 'history'
     elif env == 'integration':
         importers = INT_IMPORTER
-        # For 10.18.0 we want to do a full scale test of the import
+        # To uncomment when we want to do a full scale test of the import
         # but only on the c2c_platform
-        if os.environ.get('C2C_PLATFORM') == 'True':
-            importers = PROD_IMPORTER
+        # last time done on:
+        # - 10.18.0
+        # if os.environ.get('C2C_PLATFORM') == 'True':
+        #     importers = PROD_IMPORTER
         mode = 'final_update'
     else:
         # Don't automatically launch in dev/test env
@@ -81,9 +88,14 @@ def main(ctx):
         start_date = today + relativedelta(years=-data['years'],
                                            months=-data['months'])
         start_date_str = fields.Date.to_string(start_date)
-        rec.write({
+        csv_until = data.get('csv_until')
+        values = {
             'mode': mode,
             'date_start': start_date_str,
             'date_end': end_date_str,
-        })
+        }
+        rec.write(values)
+        if csv_until:
+            for table in rec.table_ids:
+                table.csv_until = csv_until
         rec.db2_import()

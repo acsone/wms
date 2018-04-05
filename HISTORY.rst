@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* db2_import: get sale/purchase history from pre-generated csv files to limit number of querries to DB2
+
 **Documentation**
 
 
