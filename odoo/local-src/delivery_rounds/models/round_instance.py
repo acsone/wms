@@ -223,6 +223,7 @@ class RoundInstance(models.Model):
             pickings_assigned.with_context(round_assigned=True).write({
                 'delivery_round_id': self.id,
                 'rank': rank})
+        return pickings_assigned
 
     @api.multi
     def _add_customer(self, customer):

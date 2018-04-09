@@ -230,3 +230,8 @@ migration:
     - version: 10.17.4
     - version: 10.18.0
     - version: 10.18.1
+      addons:
+        upgrade:
+          - specific_partner
+          - specific_product
+          - delivery_rounds

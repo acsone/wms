@@ -59,4 +59,19 @@
       </field>
     </record>
 
+    <!--Display the view tree in first time-->
+    <record id="base.action_partner_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <record id="base.action_partner_customer_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <record id="base.action_partner_supplier_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <record id="base.action_partner_form_view1" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+    </record>
+
 </odoo>
