@@ -230,17 +230,20 @@ migration:
     - version: 10.18.0
     - version: 10.18.1
     - version: 10.18.2
-      addons:
-        upgrade:
-          - specific_partner
-          - specific_product
-          - delivery_rounds
-          - specific_security
-          - specific_account
-          - specific_purchase
-          - specific_sale
-          - specific_stock
-          - stock_product_bin
       operations:
+        pre:
+          - anthem songs.upgrade.10_18_2_update::pre
         post:
           - anthem songs.upgrade.10_18_2_update::post
+      addons:
+        upgrade:
+          - delivery_rounds
+          - specific_account
+          - specific_helpdesk
+          - specific_partner
+          - specific_product
+          - specific_purchase
+          - specific_sale
+          - specific_security
+          - specific_stock
+          - stock_product_bin

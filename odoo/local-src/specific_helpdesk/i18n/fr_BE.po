@@ -1,19 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_helpdesk
+# 	* specific_helpdesk
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 08:11+0000\n"
+"POT-Creation-Date: 2018-04-09 08:58+0000\n"
 "PO-Revision-Date: 2017-06-28 08:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: specific_helpdesk
+#: model:helpdesk.team,name:specific_helpdesk.accounting_team
+msgid "Accounting"
+msgstr "Comptabilité"
+
+#. module: specific_helpdesk
+#: model:helpdesk.team,name:specific_helpdesk.aftersales_team
+msgid "After Sale Service"
+msgstr "SAV - Matériel"
 
 #. module: specific_helpdesk
 #: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
@@ -31,12 +42,20 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: specific_helpdesk
+#: model:helpdesk.team,name:specific_helpdesk.customer_team
+msgid "Customer"
+msgstr "Clients"
+
+#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_purchase_order_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_res_partner_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:specific_helpdesk.field_res_users_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:specific_helpdesk.field_sale_order_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
 msgid "Helpdesk tickets count"
 msgstr "Nombre de tickets helpdesk"
@@ -84,16 +103,6 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
-msgid "Partner Email"
-msgstr "Email du partenaire"
-
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
-msgid "Partner Name"
-msgstr "Nom du partenaire"
-
-#. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
 msgid "Picking"
 msgstr "Opération de manutention"
@@ -102,6 +111,12 @@ msgstr "Opération de manutention"
 #: selection:helpdesk.ticket,ref:0
 msgid "Product"
 msgstr "Produit"
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_purchase_order
+#, fuzzy
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_purchase_order_id
@@ -135,6 +150,17 @@ msgid "Sale order"
 msgstr "Commande client"
 
 #. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_sale_order
+#, fuzzy
+msgid "Sales Order"
+msgstr "Commande client"
+
+#. module: specific_helpdesk
+#: model:helpdesk.team,name:specific_helpdesk.supplier_team
+msgid "Supplier"
+msgstr "Fournisseurs"
+
+#. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket
 msgid "Ticket"
 msgstr "Ticket"
@@ -148,6 +174,8 @@ msgstr "Cause du ticket"
 
 #. module: specific_helpdesk
 #: model:ir.ui.view,arch_db:specific_helpdesk.partner_form_view_helpdesk_tickets_button
+#: model:ir.ui.view,arch_db:specific_helpdesk.purchase_order_specific_form
+#: model:ir.ui.view,arch_db:specific_helpdesk.sale_order_specific_form
 #: model:ir.ui.view,arch_db:specific_helpdesk.view_picking_form
 msgid "Tickets"
 msgstr "Tickets"
@@ -157,3 +185,8 @@ msgstr "Tickets"
 msgid "Transfer"
 msgstr "Transfert"
 
+#~ msgid "Partner Email"
+#~ msgstr "Email du partenaire"
+
+#~ msgid "Partner Name"
+#~ msgstr "Nom du partenaire"
