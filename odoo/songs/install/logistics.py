@@ -74,6 +74,7 @@ def create_locations(ctx):
     """ Creating stock locations """
     loc_stock = ctx.env.ref('stock.stock_location_stock')
     # root = ctx.env.ref('stock.stock_location_locations')
+    loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
 
     # Change the parent of the location Output (VLB to Physical Locations)
     ctx.env.ref('stock.stock_location_output').write({
@@ -88,25 +89,11 @@ def create_locations(ctx):
 
     # Retours Client
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_in_return', {
-            'name': 'Retours client',
-            'location_id': loc_stock.id,
-            'usage': 'customer',
-            'ignore_quants_expiration': True,
+        ctx, 'stock.location', '__setup__.stock_location_customers_return', {
+            'name': 'Clients (retours)',
+            'location_id': loc_partner.id,
+            'usage': 'supplier',
         })
-    # FIXME to remove if agreed with customer
-    # Note: Do not request quality to make stock moves
-    # return_in = [
-    #     ('__setup__.stock_location_in_return_new', 'Nouveau retour'),
-    #     ('__setup__.stock_location_in_return_tostore', 'A ranger'),
-    #     ]
-    # for xmlid, name in return_in:
-    #     create_or_update(ctx, 'stock.location', xmlid, {
-    #         'name': name,
-    #         'location_id': ctx.env.ref(
-    #           '__setup__.stock_location_in_return').id,
-    #         'usage': 'internal',
-    #     })
 
     # Reserves = Products available => under WH, above Stock
     reserves = [
@@ -553,9 +540,10 @@ def create_picking_types(ctx):
         '__setup__.stock_location_reserve_medoc')
     location_reserve_ali = ctx.env.ref('__setup__.stock_location_reserve_ali')
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
-    location_customers = ctx.env.ref('stock.stock_location_customers')
+    location_customers_return = ctx.env.ref(
+        '__setup__.stock_location_customers_return')
     location_pharma = ctx.env.ref('__setup__.stock_location_pharma')
-    location_in_return = ctx.env.ref('__setup__.stock_location_in_return')
+    location_in_return = ctx.env.ref('stock.stock_location_company')
     location_scrap = ctx.env.ref('stock.stock_location_scrapped')
     location_scrap_quality = ctx.env.ref(
         '__setup__.stock_location_scrap_quality')
@@ -586,7 +574,7 @@ def create_picking_types(ctx):
          'name': 'Retours Client',
          'code': 'incoming',
          'sequence_id': reception_sequence.id,
-         'default_location_src_id': location_customers.id,
+         'default_location_src_id': location_customers_return.id,
          'default_location_dest_id': location_in_return.id,
          'use_create_lots': False,
          'use_existing_lots': True,
@@ -765,19 +753,6 @@ def create_picking_types(ctx):
          'color': color_quality,
          'sequence': 80,
          },
-        # FIXME to remove if agreed with customer
-        # {'xmlid': '__setup__.stock_scrap_quality',
-        #  'name': 'Qualité Retours client',
-        #  'code': 'internal',
-        #  'sequence_id': internal_sequence.id,
-        #  'default_location_src_id': ctx.env.ref(
-        #       '__setup__.stock_location_in_return_new').id,
-        #  'default_location_dest_id': ctx.env.ref(
-        #       '__setup__.stock_location_in_return_tostore').id,
-        #  'use_create_lots': False,
-        #  'color': color_quality,
-        #  'sequence': 81,
-        #  },
 
         {'xmlid': 'stock.picking_type_out',
          'active': True,

@@ -15,6 +15,7 @@ Unreleased
 **Features and Improvements**
 
 * Allow to send to scrap location at reception
+* Align customer return process to reception process. Removed fixme in data setup.
 
 **Bugfixes**
 
