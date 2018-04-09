@@ -11,8 +11,11 @@ Unreleased
 * Small improvements: don't compute Business Rate when there is no business unit defined
 * Small improvements: display a warning message when we cannot assign a round to a picking
 * Small improvements: Remove the view kanban for products and change the display order for partners
+* ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
 
 **Bugfixes**
+
+* ALCN-1167: Add some missing access rules to have a minimum access for all employees.
 
 **Build**
 

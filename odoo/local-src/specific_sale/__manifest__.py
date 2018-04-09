@@ -33,6 +33,9 @@
         'views/res_partner.xml',
         'views/sale.xml',
         'views/sale_report.xml',
+        # Security
+        'security/ir.model.access.csv',
+        'security/ir_ui_menu.xml',
     ],
     'installable': True,
 }
