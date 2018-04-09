@@ -18,9 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import decimal
 
 
 def ustr(value, hint_encoding='utf-8', errors='strict'):
+    # If the value is a Decimal, we have to cast the value
+    # to avoid an error with join
+    if isinstance(value, decimal.Decimal):
+        return str(value)
     return value
 
 

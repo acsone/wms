@@ -254,6 +254,63 @@ def import_inventory_without_lot(ctx):
 
 
 @anthem.log
+def import_banks(ctx):
+    """ Importing banks """
+    content_supplier = \
+        resource_stream(req, 'data/install/res_bank_supplier.csv')
+    load_csv_stream(ctx, 'res.bank', content_supplier, delimiter=',')
+
+    content_customer = \
+        resource_stream(req, 'data/install/res_bank_customer.csv')
+    load_csv_stream(ctx, 'res.bank', content_customer, delimiter=',')
+
+
+@anthem.log
+def import_bank_accounts(ctx):
+    """ Import banks accounts """
+
+    # By default, Odoo add a constraint on res_partner_bank to have only one
+    # bank account by company. However Alcyon uses the same bank account
+    # for one or several customers. We need to remove this constrains
+    # before importing bank accounts
+    drop_constraint_query = """
+    ALTER TABLE res_partner_bank
+    DROP CONSTRAINT IF EXISTS res_partner_bank_unique_number;
+    """
+    ctx.env.cr.execute(drop_constraint_query)
+
+    content_supplier = resource_stream(
+        req, 'data/install/res_partner_bank_supplier.csv')
+    load_csv_stream(ctx, 'res.partner.bank', content_supplier, delimiter=',')
+
+    content_customer = resource_stream(
+        req, 'data/install/res_partner_bank_customer.csv')
+    load_csv_stream(ctx, 'res.partner.bank', content_customer, delimiter=',')
+
+
+@anthem.log
+def import_bank_mandates(ctx):
+    """ Import banks mandates """
+
+    # By default, Odoo add a constraint on res_partner_bank to have only one
+    # bank account by company. However Alcyon uses the same bank account
+    # for one or several customers. We need to remove this constrains
+    # before importing bank accounts
+    drop_constraint_query = """
+    ALTER TABLE account_banking_mandate
+    DROP CONSTRAINT IF EXISTS account_banking_mandate_mandate_ref_company_uniq;
+    """
+    ctx.env.cr.execute(drop_constraint_query)
+
+    content = resource_stream(
+        req, 'data/install/account.banking.mandate.csv')
+    load_csv_stream(ctx, 'account.banking.mandate', content, delimiter=',')
+
+    ctx.env['account.banking.mandate'].search(
+        [('state', '=', 'draft')]).validate()
+
+
+@anthem.log
 def import_stock_bins(ctx):
     """ Importing Stock Bins"""
     for content in get_files(req, 'data/install/product_stock_bin.csv'):
@@ -332,3 +389,6 @@ def main(ctx):
     # Putting some demo data in full mode because we don't have yet real data
     import_delivery_round_config(ctx)
     import_delivery_carriers_round(ctx)
+    import_banks(ctx)
+    import_bank_accounts(ctx)
+    import_bank_mandates(ctx)
