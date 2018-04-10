@@ -16,6 +16,9 @@ Unreleased
 
 **Build**
 
+* db2_import: Remove last_date from db2_import
+* db2_import: Do not auto update start_date and end_date on db2_import
+
 **Documentation**
 
 
