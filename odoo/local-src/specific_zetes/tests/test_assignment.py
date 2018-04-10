@@ -43,10 +43,10 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.groupNum, str(self.picking.id))
 
         # Search for a picking with an operator
-        request_params.requestType = None
+        self.picking.operator_id = self.user.id
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
-        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+        self.assertEqual(result.groupNum, str(self.picking.id))
 
     def test_resu_assignement(self):
         self.assertFalse(self.picking.operator_id)

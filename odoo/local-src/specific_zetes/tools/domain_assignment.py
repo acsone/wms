@@ -209,11 +209,13 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
+              AND (picking.operator_id = %s OR picking.operator_id IS NULL)
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.PICKING_ASSIGNMENT,
             (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            self._user.id
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -222,15 +224,8 @@ class Assignment(DomainInterface):
             picking_query += "AND picking_zone.code = %s "
             query_values.append(zone_code)
 
-        # If requestType is completed we looking
-        # for a picking without an operator
-        if params.requestType:
-            picking_query += "AND picking.operator_id IS NULL "
-        else:
-            picking_query += "AND picking.operator_id = %s"
-            query_values.append(self._user.id)
-
-        picking_query += "ORDER BY round.date, " \
+        picking_query += "ORDER BY picking.operator_id, " \
+                         "round.date, " \
                          "round.time_picking_planned, " \
                          "picking.rank DESC " \
                          "LIMIT 1;"
@@ -276,11 +271,13 @@ class Assignment(DomainInterface):
                           WHERE pack_op.picking_id = picking.id
                             AND (stock_location.zone IS NULL
                                  OR stock_location.corridor IS NULL))
+          AND (picking.operator_id = %s OR picking.operator_id IS NULL)
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.PARKING_ASSIGNMENT,
             (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
+            self._user.id
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -289,15 +286,8 @@ class Assignment(DomainInterface):
             picking_query += "AND picking_zone.code = %s "
             query_values.append(zone_code)
 
-        # If requestType is completed we looking
-        # for a picking without an operator
-        if params.requestType:
-            picking_query += "AND picking.operator_id IS NULL "
-        else:
-            picking_query += "AND picking.operator_id = %s"
-            query_values.append(self._user.id)
-
-        picking_query += "ORDER BY picking.rank DESC " \
+        picking_query += "ORDER BY picking.operator_id, " \
+                         "picking.rank DESC " \
                          "LIMIT 1;"
 
         self.request.env.cr.execute(picking_query, tuple(query_values))
@@ -395,11 +385,13 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
+          AND (picking.operator_id = %s OR picking.operator_id IS NULL)
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
             constants.RESERVE_ASSIGNMENT,
             (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
+            self._user.id
         ]
 
         # Search a picking in a specific zone (like Food)
@@ -408,15 +400,8 @@ class Assignment(DomainInterface):
             picking_query += "AND picking_zone.code = %s "
             query_values.append(zone_code)
 
-        # If requestType is completed we looking
-        # for a picking without an operator
-        if params.requestType:
-            picking_query += "AND picking.operator_id IS NULL "
-        else:
-            picking_query += "AND picking.operator_id = %s"
-            query_values.append(self._user.id)
-
-        picking_query += "ORDER BY picking.rank DESC " \
+        picking_query += "ORDER BY picking.operator_id, " \
+                         "picking.rank DESC " \
                          "LIMIT 1;"
 
         self.request.env.cr.execute(picking_query, tuple(query_values))
