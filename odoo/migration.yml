@@ -236,6 +236,7 @@ migration:
         post:
           - anthem songs.upgrade.10_18_2_update::post
           - anthem songs.install.accounting::set_fiscal_position_mention
+          - anthem songs.install.logistics::set_product_expiry
       modes:
         full:
           operations:
