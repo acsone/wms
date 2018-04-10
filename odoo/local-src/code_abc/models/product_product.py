@@ -30,6 +30,11 @@ class ProductProduct(models.Model):
         business_units = self.env['product.category']\
             .search([('is_business_unit', '=', True)])
 
+        # If there is business units, we can stop this method now
+        # to avoid to loop on each product for nothing
+        if not business_units:
+            return
+
         bu_by_categ = {}
         for business_unit in business_units:
             business_unit_id = business_unit.id

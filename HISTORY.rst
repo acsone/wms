@@ -8,6 +8,10 @@ Unreleased
 
 **Features and Improvements**
 
+* Small improvements: don't compute Business Rate when there is no business unit defined
+* Small improvements: display a warning message when we cannot assign a round to a picking
+* Small improvements: Remove the view kanban for products and change the display order for partners
+
 **Bugfixes**
 
 **Build**

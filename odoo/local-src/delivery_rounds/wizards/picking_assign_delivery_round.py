@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class PickingAssignDeliveryRound(models.TransientModel):
@@ -40,5 +41,9 @@ class PickingAssignDeliveryRound(models.TransientModel):
             return act_close
         pickings = shippings._get_all_src_pickings().filtered(
             lambda x: x.picking_type_subcode == 'PICK')
-        self.delivery_round_id._assign_pickings(pickings)
+        pickings_assigned = self.delivery_round_id._assign_pickings(pickings)
+        if not pickings_assigned:
+            raise UserError(
+                _('No products available.\n'
+                  'Cannot assign the delivery round to the picking'))
         return act_close

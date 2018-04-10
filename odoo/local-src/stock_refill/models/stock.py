@@ -20,6 +20,7 @@
 ##############################################################################
 
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class ReportStockQuantBylocation(models.Model):
@@ -54,8 +55,8 @@ class ReportStockQuantBylocation(models.Model):
 
         picking_type = self.location_id.barcode_picking_type_id
         if not picking_type:
-            raise Warning(_('Missing Operation Type on Location %s') %
-                          self.location_id.display_name)
+            raise UserError(_('Missing Operation Type on Location %s') %
+                            self.location_id.display_name)
         picking = self.env['stock.picking'].create({
             'move_type': 'direct',
             'company_id': self.location_id.company_id.id,
