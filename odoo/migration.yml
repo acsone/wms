@@ -235,6 +235,7 @@ migration:
           - anthem songs.upgrade.10_18_2_update::pre
         post:
           - anthem songs.upgrade.10_18_2_update::post
+          - anthem songs.install.accounting::set_fiscal_position_mention
       modes:
         full:
           operations:
@@ -251,6 +252,7 @@ migration:
           - specific_partner
           - specific_product
           - specific_purchase
+          - specific_report
           - specific_sale
           - specific_security
           - specific_stock
