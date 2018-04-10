@@ -480,11 +480,6 @@ class RoundInstance(models.Model):
             ('picking_type_code', '=', 'outgoing'),
             ('delivery_round_id', '=', self.id),
         ]
-        action_data['context'] = {
-            'default_picking_type_code': 'outgoing',
-            'default_delivery_round_id': self.id,
-        }
-
         return action_data
 
     @api.multi
@@ -508,10 +503,6 @@ class RoundInstance(models.Model):
             ('picking_type_subcode', '=', 'PICK'),
             ('delivery_round_id', '=', self.id),
         ]
-        action_data['context'] = {
-            'default_picking_type_subcode': 'PICK',
-            'default_delivery_round_id': self.id,
-        }
         return action_data
 
     instance_customer_ids = fields.One2many(

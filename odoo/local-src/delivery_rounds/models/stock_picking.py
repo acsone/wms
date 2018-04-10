@@ -13,6 +13,18 @@ class StockPicking(models.Model):
 
     delivery_round_id = fields.Many2one(
         'round.instance', 'Delivery Round', copy=False)
+
+    @api.model
+    def default_get(self, fields_list):
+        # Prevent any default value to be set for delivery round.
+        # If you search in the view, then searched value is given as default
+        # value in the context. Without doing this, the backorder (created by
+        # copy) will get the value no matter of copy=False
+
+        if 'delivery_round_id' in fields_list:
+            fields_list.remove('delivery_round_id')
+        return super(StockPicking, self).default_get(fields_list)
+
     delivery_round_state = fields.Selection(
         related='delivery_round_id.state',
         store=True,
