@@ -128,6 +128,7 @@ migration:
           - stock_available_immediately
           - stock_mts_mto_rule
           # OCA/stock-logistics-workflow
+          - stock_disable_force_availability_button
           - stock_picking_invoice_link
           # oca/web
           - web_environment_ribbon
@@ -256,4 +257,5 @@ migration:
           - specific_sale
           - specific_security
           - specific_stock
+          - stock_disable_force_availability_button
           - stock_product_bin

@@ -11,6 +11,7 @@ Unreleased
 * Small improvements: don't compute Business Rate when there is no business unit defined
 * Small improvements: display a warning message when we cannot assign a round to a picking
 * Small improvements: Remove the view kanban for products and change the display order for partners
+* Stock reservation: Disable force availability
 * ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
 * ALCN-1173: Use a job to initialize and start esb connector
 * ALCN-1251: Add for customer the information if he will help with shipping fee and import data from db2
