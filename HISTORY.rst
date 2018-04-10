@@ -36,6 +36,9 @@ Unreleased
              Removed fields are : shipping_address_id, shipping_method, amount_total, amount_tax, amount_untaxed
 * Picking's delivery round cannot be propagated to backorder
 * Zetes tech data must not be propagated to backorder
+* Logistics: Remove backorder popup at transfer. Manage properly reception, customer return and internal transfer for backorders. Do not manage claim at that stage
+* ALCN-1147: Set state to done for transfered internal transfer without any line processed
+
 
 **Build**
 

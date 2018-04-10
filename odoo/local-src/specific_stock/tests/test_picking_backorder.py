@@ -13,6 +13,7 @@ class TestPickingBackorder(TransactionCase):
         self.partner_model = self.env['res.partner']
         self.location_model = self.env['stock.location']
         self.stock_picking_model = self.env['stock.picking']
+        self.stock_picking_type_model = self.env['stock.picking.type']
         self.backorder_reason_model = self.env['stock.backorder.reason']
         self.backorder_choice_model = self.env['stock.backorder.choice']
         self.backorder_confirmation_model = (
@@ -51,26 +52,12 @@ class TestPickingBackorder(TransactionCase):
     @post_install(True)
     @at_install(False)
     def test_1_purchase_picking_backorder_create_backorder_no_helpdesk(self):
-        # Define helpdesk ticket values
-        ticket_reason = self.helpdesk_ticket_reason_model.create({
-            'name': 'Unittest helpdesk ticket reason',
-        })
-        ticket_default_name = 'Ticket default name'
 
         def test():
             # Define the backorder behavior on partner
             self.partner.is_purchase_back_order_accepted = (
                 backorder_accepted
             )
-
-            # Define backorder reason
-            backorder_reason = self.backorder_reason_model.create({
-                'name': 'Unittest backorder',
-                'backorder_action_to_do': backorder_action,
-                'is_helpdesk_ticket_to_create': helpdesk_needed,
-                'helpdesk_ticket_reason_id': ticket_reason.id,
-                'helpdesk_ticket_default_name': ticket_default_name,
-            })
 
             # Create picking
             picking = self.stock_picking_model.create({
@@ -101,20 +88,8 @@ class TestPickingBackorder(TransactionCase):
             })
             result = picking.do_new_transfer()
 
-            # Check that the transfer action return the good wizard
-            self.assertEqual(
-                result['res_model'],
-                'stock.backorder.choice'
-            )
-
-            # Create backorder choice wizard and execute it
-            wizard = self.backorder_choice_model.with_context(
-                result['context']
-            ).create({
-                'reason_id': backorder_reason.id,
-            })
-            wizard.onchange_type()
-            wizard.apply()
+            # Check that the transfer action return no wizard
+            self.assertEqual(result, {})
 
             # Search created backorder
             backorder = self.stock_picking_model.search([
@@ -131,51 +106,17 @@ class TestPickingBackorder(TransactionCase):
             # Check backorder values
             self.assertEqual(len(backorder), 1)
             self.assertEqual(backorder.move_lines.product_uom_qty, 7)
-            keep_backorder = (
-                backorder_action == 'create' or
-                (
-                    backorder_action == 'use_partner_option' and
-                    backorder_accepted
-                )
-            )
             self.assertEqual(
                 backorder.state,
-                'confirmed' if keep_backorder else 'cancel'
-            )
-
-            # Check helpdesk ticket creation
-            ticket = self.helpdesk_ticket_model.search([
-                ('stock_picking_id', '=', picking.id),
-            ])
-            if helpdesk_needed:
-                self.assertEqual(len(ticket), 1)
-                self.assertEqual(ticket.partner_id, self.partner)
-                self.assertEqual(
-                    ticket.helpdesk_ticket_reason_id,
-                    ticket_reason
+                'confirmed' if backorder_accepted else 'cancel'
                 )
-                self.assertEqual(ticket.name, ticket_default_name)
-            else:
-                self.assertEqual(len(ticket), 0)
 
         # Test all cases
-        purchase_case = (
-            self.ref('stock.picking_type_in'),
-            self.customer_location.id,
-            self.stock_location.id,
-        )
-        customer_return_case = (
-            self.ref('stock.picking_type_in'),
-            self.customer_location.id,
-            self.stock_location.id,
-        )
-        for backorder_action in ['create', 'cancel', 'use_partner_option']:
-            for backorder_accepted in [False, True]:
-                for helpdesk_needed in [False, True]:
-                    for picking_type_id, location_id, location_dest_id in [
-                        purchase_case, customer_return_case
-                    ]:
-                        test()
+        picking_type_id = self.ref('stock.picking_type_in')
+        location_id = self.ref('stock.stock_location_customers')
+        location_dest_id = self.stock_location.id
+        for backorder_accepted in [False, True]:
+            test()
 
     @post_install(True)
     @at_install(False)
@@ -198,7 +139,6 @@ class TestPickingBackorder(TransactionCase):
         )
         for sale_backorder_accepted in [False, True]:
             for purchase_backorder_accepted in [False, True]:
-                for create_backorder in [False, True]:
                     for picking_type_id, location_id, location_dest_id in [
                         sale_case_1, sale_case_2
                     ]:
@@ -238,20 +178,8 @@ class TestPickingBackorder(TransactionCase):
                         })
                         result = picking.do_new_transfer()
 
-                        # Check that the transfer action return the good wizard
-                        self.assertEqual(
-                            result['res_model'],
-                            'stock.backorder.confirmation'
-                        )
-
-                        # Create backorder confirmation wizard and execute it
-                        wizard = self.backorder_confirmation_model.create({
-                            'pick_id': picking.id
-                        })
-                        if create_backorder:
-                            wizard.process()
-                        else:
-                            wizard.process_cancel_backorder()
+                        # Check that the transfer action return no wizard
+                        self.assertEqual(result, {})
 
                         # Search created backorder
                         backorder = self.stock_picking_model.search([
@@ -271,5 +199,5 @@ class TestPickingBackorder(TransactionCase):
                         )
                         self.assertEqual(
                             backorder.state,
-                            'confirmed' if create_backorder else 'cancel'
+                            'confirmed'  # always a backorder for Sales
                         )
