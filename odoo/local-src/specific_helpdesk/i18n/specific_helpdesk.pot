@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 08:58+0000\n"
-"PO-Revision-Date: 2018-04-09 08:58+0000\n"
+"POT-Creation-Date: 2018-04-11 07:26+0000\n"
+"PO-Revision-Date: 2018-04-11 07:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_account_invoice_id
 msgid "Invoice"
 msgstr ""
 
@@ -85,17 +85,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
-msgid "Lot/Serial number"
-msgstr ""
-
-#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_name
 msgid "Name"
 msgstr ""
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
 #: model:ir.model,name:specific_helpdesk.model_res_partner
 #: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
@@ -106,9 +100,13 @@ msgstr ""
 msgid "Picking"
 msgstr ""
 
-#. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_product_id
 msgid "Product"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_purchase_order
+msgid "Purchase Order"
 msgstr ""
 
 #. module: specific_helpdesk
@@ -133,18 +131,18 @@ msgid "Reason allows to organize tickets."
 msgstr ""
 
 #. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_ref
-msgid "Reference"
-msgstr ""
-
-#. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
-msgid "Repair"
-msgstr ""
-
-#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_sale_order_id
 msgid "Sale order"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
+msgid "Stock picking"
 msgstr ""
 
 #. module: specific_helpdesk
