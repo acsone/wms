@@ -41,19 +41,6 @@ def set_implied_groups(ctx):
     })
 
 
-def remove_implied_groups(ctx):
-    """ Remove implied groups """
-    # This method method should only be executed once.
-    # Please don't add this method in the main method
-    group_inventory = ctx.env.ref('stock.group_stock_user')
-    ctx.env.ref('purchase.group_purchase_user').write({
-        'implied_ids': [(3, group_inventory.id)],
-    })
-    ctx.env.ref('sales_team.group_sale_salesman').write({
-        'implied_ids': [(3, group_inventory.id)],
-    })
-
-
 @anthem.log
 def import_users(ctx):
     """ Import users """

@@ -244,4 +244,4 @@ migration:
           - stock_product_bin
       operations:
         post:
-          - anthem songs.install.user::remove_implied_groups
+          - anthem songs.upgrade.10_18_1_update::post
