@@ -163,29 +163,25 @@ def create_locations(ctx):
         (
             '__setup__.stock_location_parking_medoc',
             'Parking Medicaments',
-            'view'
         ),
         (
             '__setup__.stock_location_parking_ali',
             'Parking Aliments',
-            'internal'
         ),
         (
             '__setup__.stock_location_parking_materiel',
             'Parking Matériel',
-            'internal'
         ),
         (
             '__setup__.stock_location_parking_frigo',
             'Parking Frigo',
-            'internal'
         ),
     ]
-    for xmlid, name, usage in parkings:
+    for xmlid, name in parkings:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_company').id,
-            'usage': usage,
+            'usage': 'view',
             'kind': 'parking',
         })
 
@@ -208,7 +204,7 @@ def create_locations(ctx):
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('__setup__.stock_location_onorder').id,
-            'usage': 'internal',
+            'usage': 'view',
         })
 
     # Nouveautés is under Input (part of stock)
@@ -229,7 +225,7 @@ def create_locations(ctx):
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('__setup__.stock_location_new').id,
-            'usage': 'internal',
+            'usage': 'view',
         })
 
     # Casse = Products unavailable => not under physical locations
@@ -238,18 +234,20 @@ def create_locations(ctx):
             'name': 'Scrap',
             'location_id': False,
             'usage': 'view',
+            'scrap_location': False,
         })
     scrap = [
-        ('__setup__.stock_location_scrap_destroy', 'A détruire', 0),
-        ('__setup__.stock_location_scrap_quality', 'Problème Qualité', 0),
-        ('__setup__.stock_location_scrap_return', 'Retours Fournisseur', 1),
+        ('__setup__.stock_location_scrap_destroy', 'A détruire', 0, 0),
+        ('__setup__.stock_location_scrap_quality', 'Problème Qualité', 0, 1),
+        ('__setup__.stock_location_scrap_return', 'Retours Fournisseur', 1, 0),
         ]
-    for xmlid, name, accrued_supplier_return in scrap:
+    for xmlid, name, accrued_supplier_return, is_scrap in scrap:
         create_or_update(ctx, 'stock.location', xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_scrapped').id,
             'usage': 'internal',
             'ignore_quants_expiration': True,
+            'scrap_location': is_scrap,
             'accrued_supplier_return': accrued_supplier_return,
         })
 

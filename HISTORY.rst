@@ -13,6 +13,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Allow to send to scrap location at reception
+
 **Bugfixes**
 
 **Build**

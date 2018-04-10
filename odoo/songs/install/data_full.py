@@ -152,10 +152,10 @@ def import_other_locations(ctx):
     load_ctx.update({'defer_parent_store_computation': 'manually'})
     Location = ctx.env['stock.location'].with_context(load_ctx)
     with ctx.log(u"Importing reserve locations"):
-        content = resource_stream(req, 'data/sample/locators_reserve.csv')
+        content = resource_stream(req, 'data/install/locators_reserve.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
     with ctx.log(u"Importing parking locations"):
-        content = resource_stream(req, 'data/sample/locators_parking.csv')
+        content = resource_stream(req, 'data/install/locators_parking.csv')
         load_csv_stream(ctx, Location, content, delimiter=',')
 
 
