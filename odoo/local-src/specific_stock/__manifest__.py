@@ -49,6 +49,7 @@
 
         # Security
         'security/ir.model.access.csv',
+        'security/ir_ui_menu.xml',
 
         # Data
         'data/ir_cron.xml',

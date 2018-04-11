@@ -40,15 +40,6 @@ def set_implied_groups(ctx):
         'implied_ids': [(4, group_payment.id)],
     })
 
-    # Set
-    group_inventory = ctx.env.ref('stock.group_stock_user')
-    ctx.env.ref('purchase.group_purchase_user').write({
-        'implied_ids': [(4, group_inventory.id)],
-    })
-    ctx.env.ref('sales_team.group_sale_salesman').write({
-        'implied_ids': [(4, group_inventory.id)],
-    })
-
 
 @anthem.log
 def import_users(ctx):

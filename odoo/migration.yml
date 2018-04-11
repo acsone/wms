@@ -170,6 +170,7 @@ migration:
           - specific_stock
           - specific_translations
           - specific_zetes
+          - specific_security
           - stock_barcode_fix
           - stock_delivery_note
           - stock_expired
@@ -235,3 +236,12 @@ migration:
           - specific_partner
           - specific_product
           - delivery_rounds
+          - specific_security
+          - specific_account
+          - specific_purchase
+          - specific_sale
+          - specific_stock
+          - stock_product_bin
+      operations:
+        post:
+          - anthem songs.upgrade.10_18_1_update::post

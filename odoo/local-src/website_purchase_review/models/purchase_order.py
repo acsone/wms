@@ -151,7 +151,7 @@ class PurchaseOrder(models.Model):
             orderpoint_qty_multiple = \
                 orderpoint_qty_multiple and float(orderpoint_qty_multiple) \
                 or 0.0
-            product.write({
+            product.sudo().write({
                 'orderpoint_min': orderpoint_min,
                 'orderpoint_max': orderpoint_max,
                 'orderpoint_qty_multiple': orderpoint_qty_multiple,

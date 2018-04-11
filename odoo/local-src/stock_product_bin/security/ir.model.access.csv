@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 user_001,user_001,model_product_stock_bin,stock.group_stock_user,1,0,0,0
 manager_001,manager_001,model_product_stock_bin,stock.group_stock_manager,1,1,1,1
+access_product_stock_bin_group_user,access_product_stock_bin,model_product_stock_bin,base.group_user,1,0,0,0
