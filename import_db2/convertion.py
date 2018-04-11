@@ -259,7 +259,7 @@ class Supplierinfo(EntityMapper):
 
     # Doing a grouping to remove client column that creates duplicates
     GROUP_BY_COL = [
-        'gesfou', 'gesart', 'gesarc', 'gespan', 'cclrem', 'cclref',
+        'gesfou', 'gesart', 'gesarc', 'gespab', 'cclrem', 'cclref',
         'cclqu1', 'cclgr1',
         'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
         'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
@@ -268,7 +268,7 @@ class Supplierinfo(EntityMapper):
         'id',
         'name',
         FieldMapper('product_code', 'gesarc'),
-        FieldMapper('price', 'gespan'),
+        FieldMapper('price', 'gespab'),
         FieldMapper('discount_sale', 'cclrem'),
         FieldMapper('min_qty_sale', constant=1),
         FieldMapper('date_start', 'ccld', is_date=True),
