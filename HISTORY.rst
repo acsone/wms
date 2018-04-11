@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
+
+
 **Features and Improvements**
 
 **Bugfixes**

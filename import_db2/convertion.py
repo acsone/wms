@@ -506,18 +506,24 @@ class CustomerMapper(EntityMapper):
 
     @staticmethod
     def convert_property_account_position_id(odoo_entity, db2_entity):
-        db2_vat_code = db2_entity.get('clictv')
 
-        if db2_vat_code == 3:
-            db2_country = db2_entity.get('clicpa')
-            # See mappings.CEE_COUNTRIES
-            if db2_country <= 12:
-                code = 'intra'
-            else:
-                code = 'extra'
-            pos = '__setup__.fiscal_position_' + code
+        clista = odoo_entity.get('clista')
+        # specific use case for wholesalers
+        if clista == 4:  # Grossistes vétérinaires et Callcenter
+            pos = 'l10n_be_apb_tax.1_fiscal_position_template_wholesaler'
         else:
-            pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
+            db2_vat_code = db2_entity.get('clictv')
+
+            if db2_vat_code == 3:
+                db2_country = db2_entity.get('clicpa')
+                # See mappings.CEE_COUNTRIES
+                if db2_country <= 12:
+                    code = 'intra'
+                else:
+                    code = 'extra'
+                pos = '__setup__.fiscal_position_' + code
+            else:
+                pos = mappings.CLIENT_FISCAL_POSITION[db2_vat_code]
         odoo_entity['property_account_position_id/id'] = pos
 
     @staticmethod
