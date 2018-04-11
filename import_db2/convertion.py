@@ -636,7 +636,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('lang', 'foulan',
                     mapping=mappings.LANG),
         FieldMapper('is_purchase_back_order_accepted', constant=True),
-        'phone_numbers',
+        'phone_numbers', 'property_account_position_id',
     ]
 
     def get_sql_joins(self):
@@ -654,6 +654,21 @@ class SupplierMapper(EntityMapper):
         odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
             db2_entity.get('foutel'), db2_entity.get('foutlx')
         )
+
+    @staticmethod
+    def convert_property_account_position_id(odoo_entity, db2_entity):
+        db2_country = db2_entity.get('foucpa')
+
+        # set Belgium suppliers as National
+        if db2_country == 2:
+            code = 'nat'
+        # See mappings.CEE_COUNTRIES
+        elif db2_country <= 12:
+            code = 'intra'
+        else:
+            code = 'extra'
+        pos = '__setup__.fiscal_position_' + code
+        odoo_entity['property_account_position_id/id'] = pos
 
 
 class LocationMapper(EntityMapper):
