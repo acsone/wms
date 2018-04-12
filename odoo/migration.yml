@@ -229,6 +229,7 @@ migration:
     - version: 10.17.4
     - version: 10.18.0
     - version: 10.18.1
+    - version: 10.18.2
       addons:
         upgrade:
           - specific_partner
@@ -242,4 +243,4 @@ migration:
           - stock_product_bin
       operations:
         post:
-          - anthem songs.upgrade.10_18_1_update::post
+          - anthem songs.upgrade.10_18_2_update::post
