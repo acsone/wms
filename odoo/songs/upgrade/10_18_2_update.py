@@ -6,8 +6,21 @@ import anthem
 
 
 @anthem.log
+def pre(ctx):
+    remove_helpdesk_team(ctx)
+
+
+@anthem.log
 def post(ctx):
     remove_implied_groups(ctx)
+
+
+@anthem.log
+def remove_helpdesk_team(ctx):
+    """Remove preconfigured helpdesk team."""
+    r_id = ctx.env.ref('helpdesk.helpdesk_team1', raise_if_not_found=False)
+    if r_id:
+        r_id.unlink()
 
 
 @anthem.log

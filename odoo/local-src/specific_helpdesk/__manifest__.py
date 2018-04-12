@@ -18,6 +18,9 @@
  ],
  'website': 'http://www.camptocamp.com',
  'data': [
+     'data/helpdesk.stage.csv',
+     'data/helpdesk.team.csv',
+     'data/helpdesk.ticket.reason.csv',
      'security/ir.model.access.csv',
      'views/helpdesk.xml',
      'views/purchase_order.xml',

@@ -14,7 +14,7 @@ Unreleased
 * ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
 * ALCN-1173: Use a job to initialize and start esb connector
 * ALCN-1253: Add Group, Subgroup and  Business Unit in XML product export (ws02)
-
+* ALCN-1258: Configuration helpdesk (claims), add default Team, Reason, Stage
 
 **Bugfixes**
 
