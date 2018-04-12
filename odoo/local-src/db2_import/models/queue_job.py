@@ -31,4 +31,6 @@ class QueueJob(models.Model):
                 if count_jobs_todo == 0:
                     # launch inventory
                     self.env['stock.inventory'].initial_inventory()
+                    self.env['esb.backend.timestamp'].reset_timestamp()
+                    self.env['ir.cron'].activate_connector()
         return res
