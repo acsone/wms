@@ -67,9 +67,39 @@ class ProductExportMapper(Component):
     @mapping
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
-        zero = ('Gescsg', 'Cp2z17', 'Cp2z19')
+        zero = ('Cp2z17', 'Cp2z19')
         values = {f: 0 for f in zero}
         return values
+
+    @mapping
+    def group_and_subgroup(self, record):
+        """The group and sub group of the product.
+
+        The sub group is the group in which the product is.
+        The group is the parent group of the sub group
+
+        """
+        sub_grp = record.categ_id
+        if sub_grp.is_business_unit or not sub_grp.parent_id:
+            grp = sub_grp
+        else:
+            grp = sub_grp.parent_id
+        return {
+            'Gescgr': grp.esb_ref or '0',
+            'Gescsg': sub_grp.esb_ref or '0',
+            }
+
+    @mapping
+    def business_unit(self, record):
+        unit_ref = ''
+        category = record.categ_id
+        while category:
+            if category.is_business_unit:
+                unit_ref = category.esb_ref
+                break
+            else:
+                category = category.parent_id
+        return {'Cplz14': unit_ref or ''}
 
     @mapping
     def taxes(self, record):
@@ -114,13 +144,6 @@ class ProductExportMapper(Component):
     @mapping
     def product_given(self, record):
         return {'Cp2z22': record.additional_product_id.default_code or ''}
-
-    @mapping
-    def todo(self, record):
-        """ TODO: fields to map, hardcoded for now """
-        return {
-            'Cplz14': '',
-        }
 
 
 class ProductCronExporter(Component):

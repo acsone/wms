@@ -38,7 +38,10 @@ class ExportProductTestCase(ESBXMLTestCase):
             'supplier': True,
             'ref': '65852',
         })
+        self.p_cat_all = self.env.ref('product.product_category_all')
         self.p_cat = self.env.ref('specific_data.product_categ_humain')
+        # Set the esb_ref of the business unit
+        self.p_cat.parent_id.esb_ref = 'medicament'
         self.p_cat.with_context({'lang': 'nl_BE'}).warning_info = 'Aandacht'
         self.p_cat.with_context({'lang': 'fr_BE'}).warning_info = 'Attention'
         self.p_cat.with_context({'lang': 'de_DE'}).warning_info = 'Aufmerksam'
@@ -94,6 +97,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
+            'categ_id': self.p_cat_all.id,
             'default_code': 'exportable002',
             'type': 'product',
             'barcode': 'XXX0002',
@@ -193,6 +197,8 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gespnt': 10.0,
             'Refdem': 'Export me pls (TLH)',
             'Gesarc': 'supplier001',
+            'Gescgr': 'medicament',
+            'Gescsg': '15',
             'Gesfou': '79001',
             'Cplz25': '79001',
             'Gesunv': '0',
@@ -218,14 +224,12 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Warceg': 'Aufmerksam',
             'Warcfr': 'Attention',
             'Warcnl': 'Aandacht',
-            'Gescsg': 0,
             'Cp2z02': 0,
             'Cp2z23': 0,
             'Cp2z24': 0,
             'Cp2z17': 0,
             'Cp2z19': 0,
-            # TODO
-            'Cplz14': '',
+            'Cplz14': 'medicament',
         }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name,

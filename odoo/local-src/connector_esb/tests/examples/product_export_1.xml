@@ -7,8 +7,10 @@
       <Gesart>exportable001</Gesart>
       <!-- supplier code -->
       <Gesarc>supplier001</Gesarc>
-      <!-- always 0 -->
-      <Gescsg>0</Gescsg>
+      <!-- Code groupe ERP -->
+      <Gescgr>medicament</Gescgr>
+      <!-- Code sous-groupe ERP -->
+      <Gescsg>15</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls</Gesdem>
       <!-- name in tlh_TLH -->
@@ -52,7 +54,7 @@
       <!-- stockable -->
       <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
-      <Cplz14></Cplz14>
+      <Cplz14>medicament</Cplz14>
       <!-- SKU of the tax -->
       <Cplz07>BBB</Cplz07>
       <!-- always 0 -->
@@ -83,7 +85,9 @@
       <Gesart>exportable002</Gesart>
       <!-- supplier code -->
       <Gesarc>supplier002</Gesarc>
-      <!-- always 0 -->
+      <!-- Code groupe ERP -->
+      <Gescgr>0</Gescgr>
+      <!-- Code sous-groupe ERP -->
       <Gescsg>0</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls 2</Gesdem>
@@ -159,7 +163,9 @@
       <Gesart>exportable003</Gesart>
       <!-- supplier code -->
       <Gesarc>supplier003</Gesarc>
-      <!-- always 0 -->
+      <!-- Code groupe ERP -->
+      <Gescgr>0</Gescgr>
+      <!-- Code sous-groupe ERP -->
       <Gescsg>0</Gescsg>
       <!-- name -->
       <Gesdem>Export me pls 3</Gesdem>
