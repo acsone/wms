@@ -34,7 +34,6 @@ class SaleOrder(models.Model):
         order_data = self._ws_create_order_data(data)
         order_data['order_line'] = self._ws_create_order_line_data(data)
         order = self.create(order_data)
-        self._ws_post_create(order, data)
         return order
 
     def _ws_create_order_data(self, data):
@@ -46,16 +45,15 @@ class SaleOrder(models.Model):
         order_data['date_order'] = data['date']
         order_data['client_order_ref'] = data['order_ref']
         order_data['partner_invoice_id'] = data['customer_id']
-        if 'shipping_address_id' in data:
-            order_data['partner_shipping_id'] = data['shipping_address_id']
-        if 'shipping_method' in data:
-            order_data['carrier_id'] = data['shipping_method']
-        # May not have to be implemented
-        order_data['amount_total'] = data['order_amount']
-        order_data['amount_tax'] = data['tax_amount']
-        order_data['amount_untaxed'] = \
-            data['order_amount'] - data['tax_amount']
         order_data['state'] = 'sale'
+        if 'carrier_id' in data:
+            carrier = self.env['delivery.carrier'].search([
+                ('esb_ref', '=', data['carrier_id'])]).exists()
+            if len(carrier):
+                order_data['carrier_id'] = carrier.id
+            else:
+                _logger.error('Webservice new saleorder, carrier %s not found',
+                              data['carrier_id'])
         return order_data
 
     def _ws_create_order_line_data(self, data):
@@ -79,12 +77,3 @@ class SaleOrder(models.Model):
                 _logger.error('Webservice new saleorder, product %s not found',
                               line['sku'])
         return lines
-
-    def _ws_post_create(self, order, data):
-        if order.carrier_id:
-            # when we have a carrier_id, even with a 0.0 price,
-            # Odoo will add a shipping line in the SO when the picking
-            # is done, so we better add the line directly
-            # even when the price is 0.0.
-            order._create_delivery_line(
-                order.carrier_id, data.get('shipping_amount', 0.0))

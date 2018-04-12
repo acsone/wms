@@ -2,12 +2,16 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from pkg_resources import resource_stream
 import anthem
+from anthem.lyrics.loaders import load_csv_stream
+from ..common import req
 
 
 @anthem.log
 def pre(ctx):
     remove_helpdesk_team(ctx)
+    reload_delivery_carrier(ctx)
 
 
 @anthem.log
@@ -21,6 +25,16 @@ def remove_helpdesk_team(ctx):
     r_id = ctx.env.ref('helpdesk.helpdesk_team1', raise_if_not_found=False)
     if r_id:
         r_id.unlink()
+
+
+@anthem.log
+def reload_delivery_carrier(ctx):
+    """ Reload the delivery carrier csv, some esb_ref have changed"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Carrier = ctx.env['delivery.carrier'].with_context(load_ctx)
+    content = resource_stream(req, 'data/install/delivery.carrier.csv')
+    load_csv_stream(ctx, Carrier, content, delimiter=',')
 
 
 @anthem.log

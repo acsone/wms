@@ -59,12 +59,8 @@ class SaleController(http.Controller):
                  {"data": {
                   "increment_id": "INC-ID",
                   "customer_id":138,
-                  "shipping_address_id": 215,
                   "date":"12-7-2017",
                   "order_ref":"refClt",
-                  "order_amount":493,
-                  "tax_amount":43,
-                  "shipping_amount":21,
                   "lines": [
                       {"line_id": 1, "sku": "SER-700200", "quantity": 3}
                    ]

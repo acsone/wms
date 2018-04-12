@@ -4,7 +4,7 @@
 
 from odoo.tests.common import TransactionCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
-from psycopg2 import IntegrityError
+from odoo.exceptions import MissingError
 from werkzeug.exceptions import BadRequest
 
 
@@ -17,13 +17,8 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.order_data = {
             "increment_id": "INC-ID",
             "customer_id": self.partner.id,
-            "invoice_address_id": self.partner.id,
-            "shipping_address_id": self.partner_shipping.id,
             "date": "2017-09-18",
             "order_ref": "refClt",
-            "order_amount": 493,
-            "tax_amount": 43,
-            "shipping_amount": 21,
             "lines": [{
                 'line_id': '1',
                 'sku': '0001',
@@ -81,15 +76,12 @@ class WSCreateSaleOrderTestCase(TransactionCase):
 
     def test_create_saleorder_shipping(self):
         carrier = self.env['delivery.carrier'].search([], limit=1)
+        carrier.esb_ref = '95'
         data = self.order_data.copy()
-        data['shipping_amount'] = 10.0
-        data['shipping_method'] = carrier.id
+        data['carrier_id'] = carrier.esb_ref
         order = self.env['sale.order']._ws_create_new(data)
-        self.assertEqual(len(order.order_line), 2)
-        shipping_line = order.order_line.filtered(
-            lambda x: x.product_id == carrier.product_id)
-        self.assertTrue(shipping_line)
-        self.assertEqual(shipping_line.price_unit, 10.0)
+        self.assertEqual(len(order.order_line), 1)
+        self.assertEqual(order.carrier_id, carrier)
 
     def test_request_data(self):
         """ Check for well formed data and some compulsory fields """
@@ -125,16 +117,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
     def test_integrity_error(self):
         data = self.order_data.copy()
         # set inexisting partner
-        data['shipping_address_id'] = 999999
+        data['customer_id'] = 999999
         # internal api will raise IntegrityError
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(MissingError):
             self.env['sale.order']._ws_create_new(data)
-
-    def test_integrity_error_just_log(self):
-        """ Data not correct, no exception but log added """
-        data = self.order_data.copy()
-        # set inexisting partner
-        data['shipping_address_id'] = 999999
-        # public webservice call will just log errors
-        order = self.env['sale.order'].ws_create_new(data)
-        self.assertEqual(order, None)
