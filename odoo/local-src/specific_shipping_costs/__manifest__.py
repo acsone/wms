@@ -14,6 +14,7 @@
         'sale',
         'sale_stock',
         'stock_picking_invoice_link',
+        'specific_sale',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -116,9 +116,15 @@ class Sale(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    exception = fields.Char(
-        compute='_compute_exception',
-    )
+    supplier_break = fields.Boolean(compute='_compute_supplier_break')
+    exception = fields.Char(compute='_compute_exception')
+
+    @api.depends('product_id')
+    def _compute_supplier_break(self):
+        """Product out of stock at the supplier level"""
+        supplier_nostock = self.env.ref('specific_purchase.product_state_h')
+        for line in self:
+            line.supplier_break = line.product_id.state_id == supplier_nostock
 
     @api.depends('product_id', 'price_unit', 'price_subtotal')
     def _compute_exception(self):
@@ -246,6 +252,13 @@ class SaleOrderLine(models.Model):
                         None
                     )
                 )
+
+    @api.onchange('product_id')
+    def product_id_change(self):
+        result = super(SaleOrderLine, self).product_id_change()
+        if self.supplier_break:
+            self.name = self.name + '\r' + _('Out of stock at supplier level')
+        return result
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):

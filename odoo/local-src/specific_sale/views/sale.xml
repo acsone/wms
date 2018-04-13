@@ -32,10 +32,12 @@
 
             <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
                 <field name="exception"/>
+                <field name="supplier_break" invisible="1"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree" position="attributes">
                 <attribute name="decoration-warning">exception</attribute>
+                <attribute name="colors">red:supplier_break==True</attribute>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/form//field[@name='analytic_tag_ids']/parent::div" position="after">
