@@ -25,6 +25,7 @@ Unreleased
 * Configure product expiry delays
 * ALCN-1268: Display the zetes state on picking and allow inventory manager to edit this value + search picking with or without an operator for zetes
 * ALCN-1243: Improve claim ticket creation, add link to picking, product, invoice; remove reference, add default values
+* ALCN-1259: Add new helpdesk button on account invoice
 
 
 **Bugfixes**

@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+# Copyright 2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+from odoo import api, fields, models
+
+
+class AccountInvoice(models.Model):
+
+    _inherit = 'account.invoice'
+
+    helpdesk_tickets_count = fields.Integer(
+        compute='_compute_helpdesk_tickets_count'
+    )
+
+    @api.multi
+    def _compute_helpdesk_tickets_count(self):
+        for invoice in self:
+            domain = [('account_invoice_id', '=', invoice.id)]
+            invoice.helpdesk_tickets_count = len(
+                self.env['helpdesk.ticket'].search(domain)
+            )
+
+    @api.multi
+    def action_view_helpdesk_tickets(self):
+        self.ensure_one()
+        action_data = self.env.ref(
+            'helpdesk.helpdesk_ticket_action_main_tree'
+        ).read()[0]
+        context = "{'search_default_is_open': True, 'default_team_id': %s}"
+        action_data['domain'] = [('account_invoice_id', '=', self.id)]
+        action_data['context'] = context % self.env.ref(
+                'specific_helpdesk.accounting_team').id
+        return action_data
