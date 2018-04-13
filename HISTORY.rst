@@ -82,6 +82,7 @@ Unreleased
 * Small improvements: Remove the view kanban for products and change the display order for partners
 * Stock reservation: Disable force availability
 
+* ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
 
 **Bugfixes**
 

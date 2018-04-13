@@ -13,8 +13,9 @@
 
             <xpath expr="//field[@name='name']/parent::h1" position="after">
                 <group>
-                    <field name="ref"/>
                     <field name="suite"/>
+                    <field name="call_name"/>
+                    <field name="ref"/>
                 </group>
             </xpath>
 
@@ -37,14 +38,26 @@
         </field>
     </record>
 
+    <record id="view_res_partner_specific_tree" model="ir.ui.view">
+      <field name="name">res.partner.specific.tree</field>
+      <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+              <field name="suite"/>
+                <field name="call_name"/>
+            </field>
+        </field>
+    </record>
+
     <record id="view_res_partner_specific_filter" model="ir.ui.view">
         <field name="name">res.partner.specific.select</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
             <field name="category_id" position="before">
+                <field name="call_name"/>
                 <field name="city"/>
-                <field name="suite"/>
             </field>
         </field>
     </record>

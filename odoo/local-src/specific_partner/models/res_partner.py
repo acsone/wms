@@ -36,7 +36,9 @@ class ResPartner(models.Model):
     # possible to create contacts by hand in Odoo
     suite = fields.Char(
         "Suite Name",
-        readonly=True,
+    )
+    call_name = fields.Char(
+        string='Nickname'
     )
 
     @api.depends('alcyon_category_id')
