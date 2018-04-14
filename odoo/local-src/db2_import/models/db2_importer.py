@@ -947,7 +947,12 @@ class DB2ImporterTable(models.Model):
 
     @api.multi
     @job(default_channel='root.db2.create_or_update')
-    def create_or_update_record(self, db2_id):
+    def create_or_update_record(self, db2_id, ref=None):
+        """Create or update a record from the DB2 data local copy.
+
+        db2_id: row id to read and convert
+        ref: is not used but is there for verification
+        """
         mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
@@ -964,9 +969,11 @@ class DB2ImporterTable(models.Model):
         cr = self.env.cr
         odoo_table_name = self._PREFIX + self.table_name.lower()
 
+        ref_col = self.table_prefix + 'sui'
+
         query = (
-            "SELECT id FROM %s"
-            " WHERE ") % odoo_table_name
+            "SELECT id, %s FROM %s"
+            " WHERE ") % (ref_col, odoo_table_name)
         # No need to pass colname list as we always have
         # a create and modify date on purchase and on sale order
         # unless the model is MVTLOT as css doesn't exist there.
@@ -990,7 +997,7 @@ class DB2ImporterTable(models.Model):
             "job_function_id,max_retries,date_created,name,model_name,eta)"
             " VALUES ("
             "'db2.importer.table({table_id},)"
-            ".create_or_update_record({{record_id}})',10,0,1,"
+            ".create_or_update_record({{record_id}}, {{ref}})',10,0,1,"
             "'{{uuid}}','[1]',1,'create_or_update_record','pending',"
             # escape 2 levels to get {}. {{{{}}}} -> {{}} -> {}
             "'{{{{}}}}','<db2.importer.table>.create_or_update_record',"
@@ -1007,10 +1014,11 @@ class DB2ImporterTable(models.Model):
         for row in rows:
             cpt += 1
             db_id = row[0]
+            ref = row[1]
             # Prepare a job to execute the creation
             method_name = 'create_or_update_record'
             model = repr(self)
-            func_string = "%s.%s(%s)" % (model, method_name, db_id)
+            func_string = "%s.%s(%s, %s)" % (model, method_name, db_id, ref)
             # skip check of existing job if in history mode
             # for large import of data this creates one extra
             # query useless most of the time.
@@ -1023,10 +1031,11 @@ class DB2ImporterTable(models.Model):
                     continue
 
             job_id = unicode(uuid.uuid4())
-            # self.with_delay(eta=next_eta).create_or_update_record(db_id)
+            # self.with_delay(eta=next_eta).create_or_update_record(db_id, ref)
             query = create_job_query.format(
                 record_id=db_id,
-                uuid=job_id)
+                uuid=job_id,
+                ref=ref)
             cr.execute(query)
 
             if cpt % 100 == 0 or cpt == len(rows):
