@@ -605,7 +605,7 @@ class DB2MapperSaleOrder(object):
 
         previous_line = None
         for line in lines:
-            if line['dccart'].startswith('8888'):
+            if line['dccart'] and line['dccart'].startswith('8888'):
                 if not previous_line:
                     raise Exception(
                         "Cannot assign contribution tax on sale order %s\n"
