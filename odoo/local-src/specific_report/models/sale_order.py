@@ -67,8 +67,9 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         """ Generate the sale order pdf and save it in ir.attachment"""
         res = super(SaleOrder, self).action_confirm()
-        if config['test_enable']:
-            # Do not generate the report during test
+        if (config['test_enable'] or
+                self.env.context.get('skip_pdf_gen')):
+            # Do not generate the report during test or during import
             return res
         for order in self:
             filename = self.get_report_name()
