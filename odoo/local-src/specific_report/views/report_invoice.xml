@@ -199,11 +199,12 @@
                 <div>
                     <table id="summary_table" class="round_table">
                         <tr>
-                            <td colspan="4">
+                            <td colspan="4" style="padding-left: 5px;">
                                 <span>SUMMARY</span>
                                 <br/>
                                 <span>Total discount:</span>
-                                <span t-field="invoice.amount_discount_total"/>
+                                <span t-field="invoice.amount_discount_total"/><br/>
+                                <span style="font-size:xx-small;" t-field="invoice.fiscal_position_id.note"/>
                             </td>
                         </tr>
                         <tr>
@@ -212,7 +213,7 @@
                             <td>VAT Amount</td>
                         </tr>
                         <t t-if="len(invoice.invoice_only_tax_ids) &lt; 4">
-                            <t t-foreach="range(4 - len(invoice.invoice_only_tax_ids))" t-as="idx">
+                            <t t-foreach="range(3 - len(invoice.invoice_only_tax_ids))" t-as="idx">
                                 <tr>
                                     <td/>
                                     <td/>

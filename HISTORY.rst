@@ -19,6 +19,7 @@ Unreleased
 * ALCN-1241: Import a list of banks (European Banks)
 * ALCN-1241: Import a list of bank accounts for supplier (DB2) and customer (Generate from a Excel file)
 * ALCN-1241: Import a list of mandates
+* ALCN-1030: Add legal mention on fiscal position and display this mention on the invoice report
 
 **Bugfixes**
 

@@ -253,6 +253,17 @@ def add_xmlid_fiscal_position(ctx):
 
 
 @anthem.log
+def set_fiscal_position_mention(ctx):
+    """ Set legal mention on fiscal position """
+    ctx.env.ref('__setup__.fiscal_position_extra').write({
+        'note': 'Article 39 – exportation de biens'
+    })
+    ctx.env.ref('__setup__.fiscal_position_intra').write({
+        'note': 'Autoliquidation Art 39 bis – livraison intracommunautaire'
+    })
+
+
+@anthem.log
 def adapt_chart_of_account(ctx):
     """ Adapt chart of account """
     content = resource_stream(req, 'data/install/account.account.csv')
@@ -439,6 +450,7 @@ def main(ctx):
     company_currency(ctx)
     activate_multicurrency(ctx)
     add_xmlid_fiscal_position(ctx)
+    set_fiscal_position_mention(ctx)
     settings(ctx)
     setup_sequences(ctx)
     set_esb_references(ctx)
