@@ -13,6 +13,7 @@ Unreleased
 * Small improvements: Remove the view kanban for products and change the display order for partners
 * ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
 * ALCN-1173: Use a job to initialize and start esb connector
+* ALCN-1251: Add for customer the information if he will help with shipping fee and import data from db2
 * ALCN-1253: Add Group, Subgroup and  Business Unit in XML product export (ws02)
 * ALCN-1258: Configuration helpdesk (claims), add default Team, Reason, Stage
 

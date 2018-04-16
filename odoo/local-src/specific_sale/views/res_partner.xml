@@ -27,4 +27,16 @@
             </field>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="view_partner_product_group">
+        <field name="name">res.partner.product.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="product.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <group name="sale" position="inside">
+                <field name="help_with_fee"/>
+            </group>
+        </field>
+    </record>
+
 </odoo>

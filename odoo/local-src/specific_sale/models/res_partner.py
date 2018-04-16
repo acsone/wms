@@ -13,6 +13,9 @@ class ResPartner(models.Model):
         string='Last Suite Name',
         compute='_compute_last_suite_name'
     )
+    help_with_fee = fields.Boolean(
+        string='Helps with fees'
+    )
 
     def _compute_last_suite_name(self):
         """ Compute the last suite name used for this customer.
