@@ -58,33 +58,6 @@ class StockPicking(models.Model):
                                 ('\n\t- '.join(bad_lots))))
 
     @api.multi
-    def do_new_transfer_with_back_order(self, result):
-        self.ensure_one()
-
-        # In this case, we don't have back order
-        # => we can ignore back order variants
-
-        if not result or result['res_model'] != 'stock.backorder.confirmation':
-            return result
-
-        # Case: Purchase back order
-        if self.picking_type_code == 'incoming':
-            return {
-                'type': 'ir.actions.act_window',
-                'res_model': 'stock.backorder.choice',
-                'views': [[False, 'form']],
-                'context': {
-                    'default_picking_id': self.id,
-                    'default_backorder_confirmation_id': result['res_id'],
-                },
-                'target': 'new',
-            }
-
-        # Other cases
-        else:
-            return result
-
-    @api.multi
     def do_new_transfer(self):
         self.ensure_one()
 
@@ -94,31 +67,32 @@ class StockPicking(models.Model):
                 raise UserError(_(
                     'The reception must be linked to a Goods Received Note'))
 
-        pick = self
-        if ((pick.state == 'draft' or all([x.qty_done == 0.0 for x
-                                           in pick.pack_operation_ids])) and
-                pick.check_backorder()):
-            # allow to receive and create backorder even if no line processed
-            view = self.env.ref('stock.view_backorder_confirmation')
-            wiz = self.env['stock.backorder.confirmation'].create({
-                'pick_id': pick.id})
-            result = {
-                'name': _('Create Backorder?'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'stock.backorder.confirmation',
-                'views': [(view.id, 'form')],
-                'view_id': view.id,
-                'target': 'new',
-                'res_id': wiz.id,
-                'context': self.env.context,
-            }
+        result = {}
+
+        if self.picking_type_code == 'incoming':
+            # At reception
+            if self.location_id.usage == 'customer' and self.check_backorder():
+                # From a PO (not a return) and backorder to make
+                wiz = self.env['stock.backorder.confirmation'].create({
+                    'pick_id': self.id})
+                if not self.partner_id.is_purchase_back_order_accepted:
+                    wiz.process_cancel_backorder()
+                else:
+                    wiz.process()
+                    # Ticket to create for missing products?
+            else:
+                result = super(StockPicking, self).do_new_transfer()
         else:
-            result = super(StockPicking, self).do_new_transfer()
+            if self.check_backorder():
+                # allow to process and create backorder even if no line
+                # processed
+                wiz = self.env['stock.backorder.confirmation'].create({
+                    'pick_id': self.id})
+                wiz.process()
+            else:
+                result = super(StockPicking, self).do_new_transfer()
 
         if not self.env.context.get('__no_specific_stock_backorder'):
-            result = self.do_new_transfer_with_back_order(result)
             self.check_removal_date_on_transfer()
 
         return result
@@ -129,7 +103,7 @@ class StockPicking(models.Model):
             if ((pick.state == 'draft' or all([
                     x.qty_done == 0.0 for x in pick.pack_operation_ids])) and
                     pick.check_backorder()):
-                # allow to receive and create backorder even if no line
+                # allow to transfer and create backorder even if no line
                 # processed
                 pick._create_backorder()
             else:
@@ -138,7 +112,8 @@ class StockPicking(models.Model):
 
     @api.one
     def _compute_state(self):
-        if not self.move_lines and self.grn_id:
+        # Mark as done picking transfered without any line
+        if not self.move_lines and self.printed:
             self.state = 'done'
         else:
             super(StockPicking, self)._compute_state()
