@@ -16,6 +16,9 @@ Unreleased
 * ALCN-1251: Add for customer the information if he will help with shipping fee and import data from db2
 * ALCN-1253: Add Group, Subgroup and  Business Unit in XML product export (ws02)
 * ALCN-1258: Configuration helpdesk (claims), add default Team, Reason, Stage
+* ALCN-1241: Import a list of banks (European Banks)
+* ALCN-1241: Import a list of bank accounts for supplier (DB2) and customer (Generate from a Excel file)
+* ALCN-1241: Import a list of mandates
 
 **Bugfixes**
 

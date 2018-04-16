@@ -1117,6 +1117,45 @@ class ProductNewRouteInfo(EntityMapper):
         odoo_entity['id'] = db2_entity['storef']
 
 
+class ResBankSupplier(EntityMapper):
+    DB2_NAME = 'PAIAUT3'
+
+    XMLID_FIELD = "id"
+    XMLID_MODEL = "bank"
+
+    FIELDS_MAPPING = {
+        'id': 'paaswi',
+        'name': 'paabnq',
+        'bic': 'paaswi',
+    }
+
+    def get_sql_select(self):
+        return 'DISTINCT paaswi, paabnq'
+
+    def get_sql_where(self):
+        return 'LENGTH(paaswi) IN (8, 11)'
+
+
+class ResPartnerBankSupplier(EntityMapper):
+    DB2_NAME = 'PAIAUT3'
+
+    XMLID_FIELD = "id"
+    XMLID_MODEL = "bank_account"
+
+    FIELDS_MAPPING = {
+        'id': concat('paanum', 'paaswi', delimiter='_'),
+        'partner_id/id': ref('supplier', 'paanum', '__import__', check=False),
+        'bank_id/id': ref('bank', 'paaswi', '__import__', check=False),
+        'acc_number': 'paacpt'
+    }
+
+    def get_sql_select(self):
+        return 'paanum, paaswi, paacpt'
+
+    def get_sql_where(self):
+        return 'LENGTH(paaswi) IN (8, 11)'
+
+
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   AdditionalProductMapper,
                   Supplierinfo,
@@ -1143,4 +1182,6 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        StockInventoryLineWithoutLot,
                        StockInventoryLineWithSerial,
                        ProductNewRouteInfo,
+                       ResBankSupplier,
+                       ResPartnerBankSupplier
                        ]

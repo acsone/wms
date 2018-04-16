@@ -235,6 +235,14 @@ migration:
           - anthem songs.upgrade.10_18_2_update::pre
         post:
           - anthem songs.upgrade.10_18_2_update::post
+      modes:
+        full:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
+              - songs.install.data_full::import_banks
+              - songs.install.data_full::import_bank_accounts
+              - songs.install.data_full::import_bank_mandates
       addons:
         upgrade:
           - delivery_rounds
