@@ -272,3 +272,4 @@ migration:
         upgrade:
           - specific_sale
           - specific_partner
+          - web_tree_dynamic_colored_field

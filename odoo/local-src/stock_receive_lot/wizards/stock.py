@@ -38,6 +38,14 @@ class StockPackOperationLotAdd(models.TransientModel):
         string="Operation",
         domain=[('state', '=', 'assigned')])
 
+    helpdesk_ticket_reason_id = fields.Many2one(
+        comodel_name='helpdesk.ticket.reason',
+        string='Reason',
+    )
+    helpdesk_ticket_description = fields.Char(
+        string='Description'
+    )
+
     def _is_parent_child(self, parent, child):
         if child.parent_left and child.parent_right:
             if parent.parent_left > child.parent_left:
@@ -160,11 +168,29 @@ class StockPackOperationLotAdd(models.TransientModel):
             lot.onchange_life_date()
         vals['lot_id'] = lot.id
 
+    @api.multi
+    def _create_helpdesk_ticket(self):
+        """Create helpdesk ticket if required."""
+        self.ensure_one()
+        if self.helpdesk_ticket_reason_id:
+            ticket = {
+                'helpdesk_ticket_reason_id': self.helpdesk_ticket_reason_id.id,
+                'name': self.helpdesk_ticket_description,
+                'partner_id': self.partner_id.id,
+                'stock_picking_id': self.picking_id.id,
+                'product_id': self.operation_id.product_id.id,
+                'team_id': self.env.ref('specific_helpdesk.supplier_team').id,
+                }
+            if self.operation_id.picking_id.purchase_id:
+                ticket['purchase_order_id'] = self.picking_id.purchase_id.id
+            self.env['helpdesk.ticket'].create(ticket)
+
     @api.model
     def create(self, vals):
         if vals.get('lot_name'):
             self._convert_lot_name2id(vals)
         wiz = super(StockPackOperationLotAdd, self).create(vals)
+        wiz._create_helpdesk_ticket()
         return wiz
 
     @api.multi
@@ -178,6 +204,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                     rec.lot_id.life_date != rec.life_date):
                 rec.lot_id.life_date = rec.life_date
                 rec.lot_id.onchange_life_date()
+            self._create_helpdesk_ticket()
         return res
 
     def _add(self):

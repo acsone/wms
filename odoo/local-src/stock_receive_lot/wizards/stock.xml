@@ -53,6 +53,11 @@
                         </h2>
                     </group>
                 </group>
+                <h3>Create a helpdesk ticket</h3>
+                <group>
+                    <field name="helpdesk_ticket_description" attrs="{'required': [('helpdesk_ticket_reason_id', '!=', False)]}"/>
+                    <field name="helpdesk_ticket_reason_id"  attrs="{'required': [('helpdesk_ticket_description', '!=', False)]}"/>
+                </group>
                 <footer>
                 </footer>
               </sheet>
