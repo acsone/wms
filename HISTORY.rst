@@ -34,6 +34,7 @@ Unreleased
 * ALCN-1261: Fix carrier_id and remove some fields in the data on create web sale order web service.
              For carrier_id use the esb_ref.
              Removed fields are : shipping_address_id, shipping_method, amount_total, amount_tax, amount_untaxed
+* Picking's delivery round cannot be propagated to backorder
 
 **Build**
 
