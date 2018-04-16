@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="model">stock.picking</field>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='priority']" position="after">
+                <field name="zetes_state" readonly="1"/>
+                <field name="is_zetes_error" readonly="1"/>
+                <field name="zetes_picking_type" readonly="1"/>
+                <field name="checksum" readonly="1"/>
+                <field name="printed" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--The field printed and zetes_state must be writable for the inventory manager (but not for other users)-->
+    <record id="view_picking_form_inventory_manager" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit for inventory manager</field>
+        <field name="inherit_id" ref="specific_zetes.view_picking_form"/>
+        <field name="model">stock.picking</field>
+        <field name="priority" eval="22"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='printed']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zetes_state']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

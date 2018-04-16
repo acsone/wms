@@ -259,5 +259,6 @@ migration:
           - specific_sale
           - specific_security
           - specific_stock
+          - specific_zetes
           - stock_disable_force_availability_button
           - stock_product_bin

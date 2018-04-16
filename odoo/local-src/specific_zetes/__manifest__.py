@@ -32,6 +32,7 @@
         'views/res_partner.xml',
         'views/zetes_logger.xml',
         'views/stock_picking_type.xml',
+        'views/stock_picking.xml',
 
         # Security
         'security/ir.model.access.csv',

@@ -23,6 +23,7 @@ Unreleased
 * ALCN-1241: Import a list of mandates
 * ALCN-1030: Add legal mention on fiscal position and display this mention on the invoice report
 * Configure product expiry delays
+* ALCN-1268: Display the zetes state on picking and allow inventory manager to edit this value + search picking with or without an operator for zetes
 
 **Bugfixes**
 * Delivery Rounds: Fix delivery round import itinerary
