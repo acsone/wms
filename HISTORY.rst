@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Delivery Rounds: Load tags lundi,mardi,mercredi,jeudi,vendredi
 
 * Small improvements: don't compute Business Rate when there is no business unit defined
 * Small improvements: display a warning message when we cannot assign a round to a picking
@@ -24,6 +25,7 @@ Unreleased
 * Configure product expiry delays
 
 **Bugfixes**
+* Delivery Rounds: Fix delivery round import itinerary
 
 * ALCN-1167: Add some missing access rules to have a minimum access for all employees.
 * ALCN-1261: Fix carrier_id and remove some fields in the data on create web sale order web service.

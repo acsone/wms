@@ -246,6 +246,7 @@ migration:
               - songs.install.data_full::import_banks
               - songs.install.data_full::import_bank_accounts
               - songs.install.data_full::import_bank_mandates
+              - anthem songs.install.data_full::import_delivery_round_config
       addons:
         upgrade:
           - delivery_rounds

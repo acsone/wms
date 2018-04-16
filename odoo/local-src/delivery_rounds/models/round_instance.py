@@ -5,6 +5,7 @@
 from ast import literal_eval
 import math
 from datetime import datetime
+from itertools import groupby
 
 from odoo import api, fields, models, _
 from odoo.exceptions import Warning as UserError
@@ -218,16 +219,23 @@ class RoundInstance(models.Model):
         if pickings_assigned:
             _logger.debug("Add/Propagate to delivery round %s the pickings %s",
                           self.id, pickings.ids)
-            partner = pickings_assigned.mapped('partner_id')
-            rank = self._add_customer(partner)
-            pickings_assigned.with_context(round_assigned=True).write({
-                'delivery_round_id': self.id,
-                'rank': rank})
+
+            def key(r):
+                return r.partner_id
+            for partner, pickings_bypartner_iter in groupby(
+                    pickings_assigned.sorted(key=key), key=key):
+                rank = self._add_customer(partner)
+                pickings_bypartner = reduce(
+                    lambda x, y: x | y, pickings_bypartner_iter)
+                pickings_bypartner.with_context(round_assigned=True).write({
+                    'delivery_round_id': self.id,
+                    'rank': rank})
         return pickings_assigned
 
     @api.multi
     def _add_customer(self, customer):
         self.ensure_one()
+        customer.ensure_one()
         ric = self.env['round.instance.customer'].search([
             ('delivery_round_id', '=', self.id),
             ('partner_id', '=', customer.id)])
