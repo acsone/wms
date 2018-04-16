@@ -1149,6 +1149,16 @@ def set_picking_zone(ctx):
 
 
 @anthem.log
+def set_product_expiry(ctx):
+    """ Set the expiry delay on product categories """
+    ctx.env['product.category'].search([]).write({
+        'alert_time': 1,
+        'removal_time': 91,
+        'life_time': 121,
+        })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring logistics """
     company_settings(ctx)
@@ -1165,3 +1175,4 @@ def main(ctx):
     create_putaway(ctx)
     assign_route_categories(ctx)
     set_picking_zone(ctx)
+    set_product_expiry(ctx)
