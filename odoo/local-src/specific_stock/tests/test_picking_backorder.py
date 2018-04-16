@@ -145,7 +145,7 @@ class TestPickingBackorder(TransactionCase):
 
             # Check helpdesk ticket creation
             ticket = self.helpdesk_ticket_model.search([
-                ('ref', '=', 'stock.picking,%s' % picking.id),
+                ('stock_picking_id', '=', picking.id),
             ])
             if helpdesk_needed:
                 self.assertEqual(len(ticket), 1)

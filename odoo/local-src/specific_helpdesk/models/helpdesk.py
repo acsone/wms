@@ -12,28 +12,32 @@ class HelpdeskTicket(models.Model):
     name = fields.Char(
         default='/'
     )
+    ticket_type_id = fields.Many2one(
+            default=lambda self: self.env.ref('helpdesk.type_incident')
+    )
     helpdesk_ticket_reason_id = fields.Many2one(
-        comodel_name='helpdesk.ticket.reason', string='Reason')
-
-    ref = fields.Reference(
-        selection=[
-            ('res.partner', 'Partner'),
-            ('product.product', 'Product'),
-            ('account.invoice', 'Invoice'),
-            ('stock.picking', 'Picking'),
-            ('stock.production.lot', 'Lot/Serial number'),
-            ('mrp.repair', 'Repair'),
-        ],
-        string='Reference')
-
+        comodel_name='helpdesk.ticket.reason', string='Reason',
+        required=True,
+    )
+    stock_picking_id = fields.Many2one(
+        comodel_name='stock.picking',
+        string='Stock picking',
+    )
     sale_order_id = fields.Many2one(
         comodel_name='sale.order',
         string='Sale order',
     )
-
     purchase_order_id = fields.Many2one(
         comodel_name='purchase.order',
         string='Purchase order',
+    )
+    account_invoice_id = fields.Many2one(
+        comodel_name='account.invoice',
+        string='Invoice',
+    )
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string='Product',
     )
 
     @api.model

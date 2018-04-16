@@ -252,6 +252,7 @@ migration:
           - delivery_rounds
           - specific_account
           - specific_helpdesk
+          - specific_helpdesk
           - specific_partner
           - specific_product
           - specific_purchase

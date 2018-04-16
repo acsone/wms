@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 08:58+0000\n"
+"POT-Creation-Date: 2018-04-11 07:26+0000\n"
 "PO-Revision-Date: 2017-06-28 08:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -66,7 +66,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_account_invoice_id
 msgid "Invoice"
 msgstr "Facture"
 
@@ -86,17 +86,11 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
-msgid "Lot/Serial number"
-msgstr "Lot/Numéro de série"
-
-#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_name
 msgid "Name"
 msgstr "Nom"
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
 #: model:ir.model,name:specific_helpdesk.model_res_partner
 #: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
@@ -109,6 +103,7 @@ msgstr "Opération de manutention"
 
 #. module: specific_helpdesk
 #: selection:helpdesk.ticket,ref:0
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_product_id
 msgid "Product"
 msgstr "Produit"
 
@@ -135,19 +130,19 @@ msgid "Reason allows to organize tickets."
 msgstr "La cause permet d'organiser les tickets"
 
 #. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_ref
-msgid "Reference"
-msgstr "Référence"
-
-#. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
-msgid "Repair"
-msgstr "Réparation"
-
-#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_sale_order_id
 msgid "Sale order"
 msgstr "Commande client"
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_sale_order
+msgid "Sales Order"
+msgstr "Commande client"
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
+msgid "Stock picking"
+msgstr "Opération de manutention"
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_sale_order
@@ -185,8 +180,17 @@ msgstr "Tickets"
 msgid "Transfer"
 msgstr "Transfert"
 
+#~ msgid "Lot/Serial number"
+#~ msgstr "Lot/Numéro de série"
+
 #~ msgid "Partner Email"
 #~ msgstr "Email du partenaire"
 
 #~ msgid "Partner Name"
 #~ msgstr "Nom du partenaire"
+
+#~ msgid "Reference"
+#~ msgstr "Référence"
+
+#~ msgid "Repair"
+#~ msgstr "Réparation"

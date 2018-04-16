@@ -23,13 +23,15 @@
             <field name="helpdesk_ticket_reason_id"/>
             <field name="user_id"/>
             <field name="team_id"/>
-          </group>
-          <group>
             <field name="priority"/>
             <field name="kanban_state"/>
+          </group>
+          <group>
             <field name="sale_order_id" context="{'default_partner_id': partner_id}"/>
             <field name="purchase_order_id" context="{'default_partner_id': partner_id}"/>
-            <field name="ref"/>
+            <field name="stock_picking_id" context="{'default_partner_id': partner_id}"/>
+            <field name="account_invoice_id" context="{'default_partner_id': partner_id}"/>
+            <field name="product_id"/>
           </group>
         </group>
       </xpath>

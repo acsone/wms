@@ -59,7 +59,7 @@ class StockBackorderChoice(models.TransientModel):
         return {
             'name': self.helpdesk_ticket_name,
             'helpdesk_ticket_reason_id': self.helpdesk_ticket_reason_id.id,
-            'ref': 'stock.picking,%s' % self.picking_id.id,
+            'stock_picking_id': self.picking_id.id,
             'partner_id': self.picking_id.partner_id.id,
         }
 
