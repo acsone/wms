@@ -35,6 +35,7 @@ Unreleased
              For carrier_id use the esb_ref.
              Removed fields are : shipping_address_id, shipping_method, amount_total, amount_tax, amount_untaxed
 * Picking's delivery round cannot be propagated to backorder
+* Zetes tech data must not be propagated to backorder
 
 **Build**
 

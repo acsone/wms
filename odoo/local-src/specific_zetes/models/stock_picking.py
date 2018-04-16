@@ -13,7 +13,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     operator_id = fields.Many2one(track_visibility='onchange')
-    checksum = fields.Char('Checksum')
+    checksum = fields.Char('Checksum', copy=False)
     zetes_state = fields.Selection([
         (constants.AS_DEFAULT, 'Default'),
         (constants.AS_START, 'Start'),
@@ -21,20 +21,36 @@ class StockPicking(models.Model):
         (constants.AS_STAGING, 'Staging'),
         (constants.AS_DONE, 'Done'),
         (constants.AS_CANCELED, 'Canceled'),
-        (constants.AS_FINISHED, 'Finished')
-    ],
+        (constants.AS_FINISHED, 'Finished'),
+        ],
         string='Zetes state',
         default=constants.AS_DEFAULT,
+        copy=False,
         required=True)
-    is_zetes_error = fields.Boolean('Zetes error', default=False)
+    is_zetes_error = fields.Boolean('Zetes error', copy=False)
     zetes_picking_type = fields.Selection([
         (constants.PICKING_ASSIGNMENT, 'Customer'),
         (constants.PARKING_ASSIGNMENT, 'Parking'),
         (constants.RESERVE_ASSIGNMENT, 'Reserve')],
         string="Picking type",
         default=constants.PICKING_ASSIGNMENT,
-        required=True
+        required=True,
     )
+
+    @api.model
+    def default_get(self, fields_list):
+        # Prevent any default value to be set for zetes technical data.
+        # If you search in the view, then searched value is given as default
+        # value in the context. Without doing this, the backorder (created by
+        # copy) will get the value no matter of copy=False
+        res = super(StockPicking, self).default_get(fields_list)
+        if 'zetes_state' in res:
+            res['zetes_state'] = constants.AS_DEFAULT
+        if 'checksum' in res:
+            del res['checksum']
+        if 'is_zetes_error' in res:
+            del res['is_zetes_error']
+        return res
 
     @api.multi
     def assign_picking_checksum(self):
