@@ -231,10 +231,11 @@ migration:
     - version: 10.18.0
     - version: 10.18.1
     # - version: 10.18.2
-    - version: 10.18.3
+    # - version: 10.18.3
+    - version: 10.18.4
       operations:
         post:
-          - anthem songs.upgrade.10_18_3_update::post
+          - anthem songs.upgrade.10_18_4_update::post
           - anthem songs.install.accounting::set_fiscal_position_mention
           - anthem songs.install.logistics::set_product_expiry
       modes:
@@ -242,15 +243,14 @@ migration:
           operations:
             post:
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
-              - songs.install.data_full::import_banks
-              - songs.install.data_full::import_bank_accounts
-              - songs.install.data_full::import_bank_mandates
+              - anthem songs.install.data_full::import_banks
+              - anthem songs.install.data_full::import_bank_accounts
+              - anthem songs.install.data_full::import_bank_mandates
               - anthem songs.install.data_full::import_delivery_round_config
       addons:
         upgrade:
           - delivery_rounds
           - specific_account
-          - specific_helpdesk
           - specific_helpdesk
           - specific_partner
           - specific_product

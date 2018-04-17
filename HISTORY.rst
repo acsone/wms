@@ -6,14 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
-**Features and Improvements**
-
-**Bugfixes**
-
 **Build**
 
-**Documentation**
-
+* Fix migration steps of 10.18.2
+  miscalled step of import for banks data on full mode only
 
 10.18.3 (2018-04-17)
 ++++++++++++++++++++
