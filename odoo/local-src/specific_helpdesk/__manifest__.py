@@ -26,6 +26,7 @@
      'views/purchase_order.xml',
      'views/res_partner.xml',
      'views/sale_order.xml',
+     'views/account_invoice.xml',
      'views/stock_picking.xml',
      'data/ticket_sequence.xml',
  ],
