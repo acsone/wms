@@ -6,13 +6,12 @@ Release History
 Unreleased
 ++++++++++
 
-**Features and Improvements**
-
-**Bugfixes**
-
 **Build**
 
-**Documentation**
+* Fix migration steps of 10.18.2
+  A module adding some field made the migration steps failed because of inconsistency between
+  database schema and code.
+  This is fixed by playing the migration steps after the update of the modules.
 
 
 10.18.2 (2018-04-17)

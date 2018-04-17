@@ -9,13 +9,9 @@ from ..common import req
 
 
 @anthem.log
-def pre(ctx):
+def post(ctx):
     remove_helpdesk_team(ctx)
     reload_delivery_carrier(ctx)
-
-
-@anthem.log
-def post(ctx):
     remove_implied_groups(ctx)
 
 

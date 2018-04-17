@@ -230,12 +230,11 @@ migration:
     - version: 10.17.4
     - version: 10.18.0
     - version: 10.18.1
-    - version: 10.18.2
+    # - version: 10.18.2
+    - version: 10.18.3
       operations:
-        pre:
-          - anthem songs.upgrade.10_18_2_update::pre
         post:
-          - anthem songs.upgrade.10_18_2_update::post
+          - anthem songs.upgrade.10_18_3_update::post
           - anthem songs.install.accounting::set_fiscal_position_mention
           - anthem songs.install.logistics::set_product_expiry
       modes:
