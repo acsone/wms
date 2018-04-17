@@ -7,46 +7,56 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Delivery Rounds: Load tags lundi,mardi,mercredi,jeudi,vendredi
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.2 (2018-04-17)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCN-1030: Add legal mention on fiscal position and display this mention on the invoice report
+* ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
+* ALCN-1173: Use a job to initialize and start esb connector
+* ALCN-1241: Import a list of bank accounts for supplier (DB2) and customer (Generate from a Excel file)
+* ALCN-1241: Import a list of banks (European Banks)
+* ALCN-1241: Import a list of mandates
+* ALCN-1243: Improve claim ticket creation, add link to picking, product, invoice; remove reference, add default values
+* ALCN-1251: Add for customer the information if he will help with shipping fee and import data from db2
+* ALCN-1253: Add Group, Subgroup and  Business Unit in XML product export (ws02)
+* ALCN-1258: Configuration helpdesk (claims), add default Team, Reason, Stage
+* ALCN-1259: Add new helpdesk button on account invoice
+* ALCN-1268: Display the zetes state on picking and allow inventory manager to edit this value + search picking with or without an operator for zetes
+* Configure product expiry delays
+* Delivery Rounds: Load tags lundi,mardi,mercredi,jeudi,vendredi
 * Small improvements: don't compute Business Rate when there is no business unit defined
 * Small improvements: display a warning message when we cannot assign a round to a picking
 * Small improvements: Remove the view kanban for products and change the display order for partners
 * Stock reservation: Disable force availability
-* ALCN-1167: Add the module specific_security to fit with Alcyon requirement (please read the attached document in module specific_security)
-* ALCN-1173: Use a job to initialize and start esb connector
-* ALCN-1251: Add for customer the information if he will help with shipping fee and import data from db2
-* ALCN-1253: Add Group, Subgroup and  Business Unit in XML product export (ws02)
-* ALCN-1258: Configuration helpdesk (claims), add default Team, Reason, Stage
-* ALCN-1241: Import a list of banks (European Banks)
-* ALCN-1241: Import a list of bank accounts for supplier (DB2) and customer (Generate from a Excel file)
-* ALCN-1241: Import a list of mandates
-* ALCN-1030: Add legal mention on fiscal position and display this mention on the invoice report
-* Configure product expiry delays
-* ALCN-1268: Display the zetes state on picking and allow inventory manager to edit this value + search picking with or without an operator for zetes
-* ALCN-1243: Improve claim ticket creation, add link to picking, product, invoice; remove reference, add default values
-* ALCN-1259: Add new helpdesk button on account invoice
 
 
 **Bugfixes**
-* Delivery Rounds: Fix delivery round import itinerary
 
+* ALCN-1147: Set state to done for transfered internal transfer without any line processed
 * ALCN-1167: Add some missing access rules to have a minimum access for all employees.
 * ALCN-1261: Fix carrier_id and remove some fields in the data on create web sale order web service.
              For carrier_id use the esb_ref.
              Removed fields are : shipping_address_id, shipping_method, amount_total, amount_tax, amount_untaxed
+* Delivery Rounds: Fix delivery round import itinerary
 * Picking's delivery round cannot be propagated to backorder
-* Zetes tech data must not be propagated to backorder
 * Logistics: Remove backorder popup at transfer. Manage properly reception, customer return and internal transfer for backorders. Do not manage claim at that stage
-* ALCN-1147: Set state to done for transfered internal transfer without any line processed
+* Zetes tech data must not be propagated to backorder
 
 
 **Build**
 
 * db2_import: Remove last_date from db2_import
 * db2_import: Do not auto update start_date and end_date on db2_import
-
-**Documentation**
 
 
 10.18.1 (2018-04-05)
