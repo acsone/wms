@@ -19,6 +19,7 @@ Unreleased
   called "[MIGRATION] Réception des achats"
 * ALCN-1286: Set purchase with uom from dcfunv with value "1" as "Pièces" for the few cases that were failing
 * ALCN-1223: Load and Migrate Suppliers Payment Terms. Modify Client Payment Term 'Immediate Payment' to '7 days' during migration.
+  ALCN-1223: Load and Migrate Suppliers Payment Modes.
 
 **Features and Improvements**
 * Fix Belgium Chart of taxes. Code and name have been inverted in v10.

@@ -680,6 +680,11 @@ class SupplierMapper(EntityMapper):
             'foudlp',
             mapping=mappings.PAYMENT_TERMS,
         ),
+        FieldMapper(
+            'supplier_payment_mode_id/id',
+            'foupai',
+            mapping=mappings.SUPPLIER_PAYMENT_MODES,
+        ),
     ]
 
     def get_sql_joins(self):

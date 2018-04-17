@@ -178,6 +178,7 @@ class DB2ImportTestCase(SavepointCase):
         cls.load_carriers()
         cls.load_account_journals()
         cls.add_xmlid_journal()
+        cls.load_account_payment_methods()
         cls.load_account_payment_modes()
         cls.load_account_payment_terms()
         cls.load_users()
@@ -353,6 +354,11 @@ class DB2ImportTestCase(SavepointCase):
             'padding': 5,
             'use_date_range': False,
         })
+
+    @classmethod
+    def load_account_payment_methods(cls):
+        with open(INSTALL_CSV_PATH % 'account.payment.method') as csv_file:
+            load_csv(cls.env['account.payment.method'], csv_file)
 
     @classmethod
     def load_account_payment_modes(cls):
