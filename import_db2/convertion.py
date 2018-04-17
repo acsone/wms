@@ -675,6 +675,11 @@ class SupplierMapper(EntityMapper):
                     mapping=mappings.LANG),
         FieldMapper('is_purchase_back_order_accepted', constant=True),
         'phone_numbers', 'property_account_position_id',
+        FieldMapper(
+            'property_supplier_payment_term_id/id',
+            'foudlp',
+            mapping=mappings.PAYMENT_TERMS,
+        ),
     ]
 
     def get_sql_joins(self):

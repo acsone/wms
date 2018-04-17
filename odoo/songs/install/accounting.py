@@ -399,14 +399,10 @@ def set_esb_references(ctx):
 
 @anthem.log
 def import_account_payment_term(ctx):
-    """ Importing account payment term """
-    # Delete default payment terms
-    ctx.env['account.payment.term'].search([
-        ('name', 'not ilike', '-')]).unlink()
+    """ Importing account payment term. Do not load translations, the note is
+    not displayed on the invoice, only the due date """
     content = resource_stream(req, 'data/install/account.payment.term.csv')
     load_csv_stream(ctx, 'account.payment.term', content, delimiter=',')
-    # A default line is created. Delete them before import.
-    ctx.env['account.payment.term.line'].search([]).unlink()
     lines = resource_stream(req, 'data/install/account.payment.term.line.csv')
     load_csv_stream(ctx, 'account.payment.term.line', lines, delimiter=',')
 
