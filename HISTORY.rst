@@ -6,9 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
-**Bugfixes**
+**Build**
 
-* Fix xmlids in bank csv data
+* Fix migration steps of 10.18.2
+  Fix xmlids in bank csv data
+  Deactivate VIES check on vat while reimporting supplier in full mode
 
 
 10.18.4 (2018-04-17)

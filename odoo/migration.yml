@@ -243,11 +243,13 @@ migration:
         full:
           operations:
             post:
+              - anthem songs.upgrade.10_18_5_update::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
               - anthem songs.install.data_full::import_banks
               - anthem songs.install.data_full::import_bank_accounts
               - anthem songs.install.data_full::import_bank_mandates
               - anthem songs.install.data_full::import_delivery_round_config
+              - anthem songs.install.accounting::activate_check_on_vat
       addons:
         upgrade:
           - delivery_rounds

@@ -16,6 +16,17 @@ def post(ctx):
 
 
 @anthem.log
+def deactivate_check_on_vat(ctx):
+    """ Deactivate check on vat """
+
+    # We want to activate this check after having import data
+    # to avoid to have an error on vat which became invalid on db2 database
+    ctx.env.ref('base.main_company').write({
+        'vat_check_vies': False,
+    })
+
+
+@anthem.log
 def remove_helpdesk_team(ctx):
     """Remove preconfigured helpdesk team."""
     r_id = ctx.env.ref('helpdesk.helpdesk_team1', raise_if_not_found=False)
