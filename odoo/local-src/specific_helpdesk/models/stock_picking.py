@@ -13,7 +13,7 @@ class Picking(models.Model):
     def _compute_helpdesk_tickets_count(self):
         for picking in self:
             domain = [
-                ('ref', '=', 'stock.picking,%s' % picking.id)
+                ('stock_picking_id', '=', self.id)
             ]
 
             picking.helpdesk_tickets_count = len(
@@ -32,7 +32,7 @@ class Picking(models.Model):
             'helpdesk.helpdesk_ticket_action_main_tree'
         ).read()[0]
         action_data['domain'] = [
-            ('ref', '=', 'stock.picking,%s' % self.id)
+            ('stock_picking_id', '=', self.id)
         ]
 
         return action_data
