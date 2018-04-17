@@ -6,13 +6,9 @@ Release History
 Unreleased
 ++++++++++
 
-**Features and Improvements**
-
 **Bugfixes**
 
-**Build**
-
-**Documentation**
+* Fix xmlids in bank csv data
 
 
 10.18.4 (2018-04-17)
