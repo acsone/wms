@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.4 (2018-04-17)
+++++++++++++++++++++
+
 **Build**
 
 * Fix migration steps of 10.18.2
