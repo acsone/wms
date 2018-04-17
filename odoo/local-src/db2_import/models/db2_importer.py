@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Camptocamp SA
+# Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import os
 import pyodbc
@@ -91,7 +91,7 @@ def convert_coding(value):
     return value
 
 
-def do_partial_picking(pick, lines, lots):
+def do_partial_picking(pick, lines):
     """ Do a partial picking using delivered qty from DB2 """
     pick.action_confirm()
     pick.force_assign()
@@ -119,30 +119,10 @@ def do_partial_picking(pick, lines, lots):
         # more than one line with same product
         ope.qty_done += line['qty_done']
 
-        # pack operation requires serial num / lot
-        if (ope.qty_done and ope.product_id and
-                ope.product_id.tracking != 'none'):
-            # there can be multiple lot for one product
-            for db2_lot in lots:
-                if (line['line_no'] == db2_lot['mltnli'] and
-                        line['product'] == db2_lot['mltart']):
-                    odoo_lot = pick.env['stock.production.lot'].search(
-                        [('name', '=', db2_lot['mltlot']),
-                         ('product_id', '=', ope.product_id.id)])
-                    OpeLot = pick.env['stock.pack.operation.lot']
-                    values = {
-                        'operation_id': ope.id,
-                        'qty': abs(db2_lot['mltquc']),
-                    }
-                    if odoo_lot:
-                        values['lot_id'] = odoo_lot.id
-                    else:
-                        values['lot_name'] = db2_lot['mltlot']
-                    OpeLot.create(values)
-
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
+        pick = pick.with_context(__skip_check_tracking=True)
         if pick.picking_type_code == 'incoming':
             # disable check on receive note for receptions
             # and skip backorder creation
@@ -160,13 +140,12 @@ def do_partial_picking(pick, lines, lots):
             pick.do_transfer()
 
 
-def do_final_picking(pick, lines, lots):
+def do_final_picking(pick, lines):
     """ Transfert the last picking
 
-    operations and lots are mostly ok
+    operations are mostly ok
 
-    this does set the quantities and adds lot
-    if missing
+    this does set the quantities
 
     Remainings goes in a backorder
     """
@@ -184,37 +163,11 @@ def do_final_picking(pick, lines, lots):
         # more than one line with same product
         ope.qty_done += line['qty_done']
 
-        # pack operation requires serial num / lot
-        if (ope.qty_done and ope.product_id and
-                ope.product_id.tracking != 'none'):
-            # there can be multiple lot for one product
-            for db2_lot in lots:
-                if (line['line_no'] == db2_lot['mltnli'] and
-                        line['product'] == db2_lot['mltart']):
-                    odoo_lot = pick.env['stock.production.lot'].search(
-                        [('name', '=', db2_lot['mltlot']),
-                         ('product_id', '=', ope.product_id.id)])
-                    # Operation lot should already exist,
-                    # but create it if missing
-                    if not ope.pack_lot_ids:
-                        OpeLot = pick.env['stock.pack.operation.lot']
-                        values = {
-                            'operation_id': ope.id,
-                            'qty': abs(db2_lot['mltquc']),
-                        }
-                        if odoo_lot:
-                            values['lot_id'] = odoo_lot.id
-                        else:
-                            values['lot_name'] = db2_lot['mltlot']
-                        OpeLot.create(values)
-                    else:
-                        for pack_lot in ope.pack_lot_ids:
-                            if pack_lot.lot_id.name == db2_lot['mltlot']:
-                                pack_lot.qty = abs(db2_lot['mltquc'])
-                                break
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
+        pick = pick.with_context(
+                __skip_check_tracking=True)
         result = pick.do_new_transfer()
         if result and result['res_model'] == 'stock.backorder.confirmation':
             # Accept backorder creation
@@ -438,6 +391,7 @@ class DB2MapperPurchaseOrder(object):
                 # if partially received create a backorder with
                 # received quantities
                 pick = new.picking_ids
+
                 picking_date = convert_date('ecfc', row)
                 # as we do only one picking take the max date
                 # from lines for scheduled and receival dates
@@ -449,24 +403,8 @@ class DB2MapperPurchaseOrder(object):
                     'date_done': date_done,
                 })
                 pick_lines = cls.map_orderline2move(lines)
-                query = (
-                    "SELECT mltlot, mltart, mltnli, mltquc"
-                    " FROM db2_mvtlot"
-                    " WHERE mltsui = %s"
-                    " AND mltnum = %s"
-                    " AND TRIM(mltsuc) = '%s'"
-                    # positive qty are incoming
-                    " AND mltquc > 0")
-                cr.execute(
-                    query,
-                    (row['ecfsui'], int(row['ecffou']),
-                     int(row['ecfsuc'])))
-                lots = cr.fetchall()
-                lots = [{c.lower(): lot[idx]
-                         for idx, c in enumerate(
-                            [d[0] for d in cr.description]
-                         )} for lot in lots]
-                do_partial_picking(pick, pick_lines, lots)
+                do_partial_picking(pick, pick_lines)
+
                 # create invoice for invoiced lines
                 create_supplier_invoice(new, lines)
 
@@ -702,29 +640,12 @@ class DB2MapperSaleOrder(object):
                     lambda p: p.location_dest_id == loc_output)
                 pick2 = picks.filtered(
                     lambda p: p.location_dest_id == loc_customers)
-                query = (
-                    "SELECT mltlot, mltart, mltnli, mltquc"
-                    " FROM db2_mvtlot"
-                    " WHERE mltsui = %s"
-                    " AND mltnum = %s"
-                    " AND TRIM(mltsuc) = '%s'"
-                    # negative qty are outgoing
-                    " AND mltquc < 0")
-                cr.execute(
-                    query,
-                    (row['eccsui'], int(row['ecccli']),
-                     int(row['eccsuc'])))
-                lots = cr.fetchall()
-                lots = [{c.lower(): lot[idx]
-                         for idx, c in enumerate(
-                            [d[0] for d in cr.description]
-                         )} for lot in lots]
                 pick_lines = cls.map_orderline2move(lines)
                 # Do internal pickings to output location
                 for pick in picks1:
-                    do_partial_picking(pick, pick_lines, lots)
+                    do_partial_picking(pick, pick_lines)
                 # Do the deliver to customer
-                do_final_picking(pick2, pick_lines, lots)
+                do_final_picking(pick2, pick_lines)
 
 
 mappers = {

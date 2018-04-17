@@ -29,16 +29,6 @@
     <field name="id_columns">dccsui,dccncl,dccsuc,dccnli</field>
   </record>
 
-  <!-- relation table between lot and move
-       containing reference to sale order -->
-  <record model="db2.importer.table" id="db2_table_mvtlot_for_sale">
-    <field name="importer_id" ref="db2_sale_importer"/>
-    <field name="schema">SBDATA</field>
-    <field name="table_name">MVTLOT</field>
-    <field name="table_prefix">mlt</field>
-    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
-    <field name="where_clause">mltquc &lt; 0</field>
-  </record>
   </data>
 
   <data noupdate="1">
@@ -59,17 +49,6 @@
     <field name="id_columns">ecfsui,ecffou,ecfsuc</field>
     <field name="create_job" eval="True"/>
     <field name="eta">2</field>
-  </record>
-
-  <!-- relation table between lot and move
-       containing reference to purchase order -->
-  <record model="db2.importer.table" id="db2_table_mvtlot_for_purchase">
-    <field name="importer_id" ref="db2_purchase_importer"/>
-    <field name="schema">SBDATA</field>
-    <field name="table_name">MVTLOT</field>
-    <field name="table_prefix">mlt</field>
-    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
-    <field name="where_clause">mltquc &gt; 0</field>
   </record>
 
   <!-- purchase order detail line table -->
@@ -127,15 +106,5 @@
     <field name="where_clause">dccncl IN (354, 6891, 379, 8657, 8264, 8585, 3993, 560, 600)</field>
   </record>
 
-  <!-- relation table between lot and move
-       containing reference to sale order -->
-  <record model="db2.importer.table" id="db2_table_mvtlot_for_10_customers">
-    <field name="importer_id" ref="db2_importer_10_clients"/>
-    <field name="schema">SBDATA</field>
-    <field name="table_name">MVTLOT</field>
-    <field name="table_prefix">mlt</field>
-    <field name="id_columns">mltart,mltlot,mltnum,mltsuc,mltsui,mltnli</field>
-    <field name="where_clause">mltnum IN (354, 6891, 379, 8657, 8264, 8585, 3993, 560, 600)</field>
-  </record>
   </data>
 </odoo>

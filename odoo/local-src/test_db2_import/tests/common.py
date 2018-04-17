@@ -140,26 +140,6 @@ SOL_COLS = (
  "dccarc VARCHAR,"
  "dccre  VARCHAR")
 
-LOT_COLS = (
- "mltart VARCHAR,"
- "mltlot VARCHAR,"
- "mltnum DOUBLE PRECISION,"
- "mltsuc VARCHAR,"
- "mltssu VARCHAR,"
- "mltctr VARCHAR,"
- "mltsui DOUBLE PRECISION,"
- "mltnli DOUBLE PRECISION,"
- "mltlig DOUBLE PRECISION,"
- "mltnne DOUBLE PRECISION,"
- "mltnfa DOUBLE PRECISION,"
- "mltnff VARCHAR,"
- "mltdss DOUBLE PRECISION,"
- "mltdaa DOUBLE PRECISION,"
- "mltdmm DOUBLE PRECISION,"
- "mltdjj DOUBLE PRECISION,"
- "mltquc DOUBLE PRECISION,"
- "mltcnr VARCHAR,"
- "mltlll DOUBLE PRECISION")
 
 SQL_PATH = path.join(path.dirname(__file__), "sql", "%s.sql")
 CSV_PATH = path.join(path.dirname(__file__), "data", "%s.csv")
@@ -231,17 +211,15 @@ class DB2ImportTestCase(SavepointCase):
 
         db2_so_table = cls.env.ref('db2_import.db2_table_pentcdcl_for_sale')
         db2_sol_table = cls.env.ref('db2_import.db2_table_pdetcdcl_for_sale')
-        db2_lot_table = cls.env.ref('db2_import.db2_table_mvtlot_for_sale')
 
         db2_so_table._create_db2_table(SO_COLS)
         db2_sol_table._create_db2_table(SOL_COLS)
-        db2_lot_table._create_db2_table(LOT_COLS)
 
     @classmethod
     def insert_db2_records(cls):
         """Insert records to use in tests."""
         cr = cls.env.cr
-        for table in ['db2_pentcdcl', 'db2_pdetcdcl', 'db2_mvtlot']:
+        for table in ['db2_pentcdcl', 'db2_pdetcdcl']:
             with open(SQL_PATH % table) as sql_file:
                 sql = sql_file.read()
                 cr.execute(sql)
