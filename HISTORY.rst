@@ -6,10 +6,28 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.6 (2018-04-18)
+++++++++++++++++++++
+
 **Build**
 
 * Fix migration steps of 10.18.2
   Add missing update of res.bank.csv file
+  Fix bank customer account and banking madate csv files
+  by removing XXX on some xmlids to avoid mismatch and
+  by removing mandates that links to unexisting bank account
+
+
+
 
 10.18.5 (2018-04-18)
 ++++++++++++++++++++
