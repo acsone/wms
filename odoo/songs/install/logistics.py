@@ -72,6 +72,9 @@ def create_picking_zones(ctx):
 @anthem.log
 def create_locations(ctx):
     """ Creating stock locations """
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'defer_parent_store_computation': 'manually'})
+    Location = ctx.env['stock.location'].with_context(load_ctx)
     loc_stock = ctx.env.ref('stock.stock_location_stock')
     # root = ctx.env.ref('stock.stock_location_locations')
     loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
@@ -82,14 +85,14 @@ def create_locations(ctx):
     })
 
     # Input
-    create_or_update(ctx, 'stock.location', 'stock.stock_location_company', {
-        'usage': 'view',
+    create_or_update(ctx, Location, 'stock.stock_location_company', {
+        'usage': 'internal',
         'active': True,
     })
 
     # Retours Client
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_customers_return', {
+        ctx, Location, '__setup__.stock_location_customers_return', {
             'name': 'Clients (retours)',
             'location_id': loc_partner.id,
             'usage': 'supplier',
@@ -103,7 +106,7 @@ def create_locations(ctx):
          loc_stock.location_id.id),
     ]
     for xmlid, name, location_id in reserves:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': location_id,
             'usage': 'view',
@@ -126,7 +129,7 @@ def create_locations(ctx):
          loc_stock.id),
     ]
     for xmlid, name, reserve_id, location_id in locations:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': location_id,
             'reserve_location_id': reserve_id,
@@ -138,7 +141,7 @@ def create_locations(ctx):
          ctx.env.ref('__setup__.stock_location_froid').id),
     ]
     for xmlid, name, reserve_id, location_id in locations:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': location_id,
             'reserve_location_id': reserve_id,
@@ -165,7 +168,7 @@ def create_locations(ctx):
         ),
     ]
     for xmlid, name in parkings:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_company').id,
             'usage': 'view',
@@ -174,7 +177,7 @@ def create_locations(ctx):
 
     # Achetés-Vendus is under Input (part of stock)
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_onorder',
+        ctx, Location, '__setup__.stock_location_onorder',
         {
             'name': 'Achetés-Vendus',
             'location_id': ctx.env.ref('stock.stock_location_company').id,
@@ -188,7 +191,7 @@ def create_locations(ctx):
         ('__setup__.stock_location_order_mat', 'Achetés-Vendus Matériel'),
     ]
     for xmlid, name in onorders:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': ctx.env.ref('__setup__.stock_location_onorder').id,
             'usage': 'view',
@@ -196,7 +199,7 @@ def create_locations(ctx):
 
     # Nouveautés is under Input (part of stock)
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_new',
+        ctx, Location, '__setup__.stock_location_new',
         {
             'name': 'Nouveautés',
             'location_id': ctx.env.ref('stock.stock_location_company').id,
@@ -209,7 +212,7 @@ def create_locations(ctx):
         ('__setup__.stock_location_new_mat', 'Nouveautés Matériel'),
     ]
     for xmlid, name in news:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': ctx.env.ref('__setup__.stock_location_new').id,
             'usage': 'view',
@@ -217,7 +220,7 @@ def create_locations(ctx):
 
     # Casse = Products unavailable => not under physical locations
     create_or_update(
-        ctx, 'stock.location', 'stock.stock_location_scrapped', {
+        ctx, Location, 'stock.stock_location_scrapped', {
             'name': 'Scrap',
             'location_id': False,
             'usage': 'view',
@@ -229,7 +232,7 @@ def create_locations(ctx):
         ('__setup__.stock_location_scrap_return', 'Retours Fournisseur', 1, 0),
         ]
     for xmlid, name, accrued_supplier_return, is_scrap in scrap:
-        create_or_update(ctx, 'stock.location', xmlid, {
+        create_or_update(ctx, Location, xmlid, {
             'name': name,
             'location_id': ctx.env.ref('stock.stock_location_scrapped').id,
             'usage': 'internal',
@@ -240,7 +243,7 @@ def create_locations(ctx):
 
     loc_partner = ctx.env.ref('stock.stock_location_locations_partner')
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_destroyed', {
+        ctx, Location, '__setup__.stock_location_destroyed', {
             'name': 'Détruit',
             'location_id': loc_partner.id,
             'usage': 'customer',
@@ -248,12 +251,22 @@ def create_locations(ctx):
 
     # Pharma
     create_or_update(
-        ctx, 'stock.location', '__setup__.stock_location_pharma',
+        ctx, Location, '__setup__.stock_location_pharma',
         {
             'name': 'Pharma',
             'location_id': loc_partner.id,
             'usage': 'customer',
         })
+
+    # Create a location for migrated Purchases
+    create_or_update(
+        ctx, Location, '__setup__.mig_purchase_reception',
+        {
+            'name': '[MIGRATION] Réception achats',
+            'usage': 'supplier',
+            'active': True,
+        })
+    Location._parent_store_compute()
 
 
 @anthem.log

@@ -11,6 +11,8 @@ Unreleased
 * ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
 * ALCN-1233: Set fiscal position on suppliers
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
+* ALCN-1266: all operations created by in progress pickings now goes to a specific location
+  called "[MIGRATION] Réception des achats"
 
 **Features and Improvements**
 * Fix Belgium Chart of taxes. Code and name have been inverted in v10.

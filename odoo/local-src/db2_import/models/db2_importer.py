@@ -129,6 +129,13 @@ def do_partial_picking(pick, lines):
             pick = pick.with_context(
                 __no_pick_receive_note_check=True,
                 __no_specific_stock_backorder=True)
+            # set destination to location dedicated for migration
+            # in order to not mess with the parking inventory
+            mig_location = pick.env.ref('__setup__.mig_purchase_reception')
+            for ope in pick.pack_operation_ids:
+                if op.qty_done:
+                    ope.location_dest_id = mig_location
+
         result = pick.do_new_transfer()
         if result and result['res_model'] == 'stock.backorder.confirmation':
             # Accept backorder creation
@@ -136,6 +143,9 @@ def do_partial_picking(pick, lines):
                 lambda o: o.qty_done <= 0)
             for pack in pick.pack_operation_ids - operations_to_delete:
                 pack.product_qty = pack.qty_done
+                if pick.picking_type_code == 'incoming':
+                    if pack.qty_done:
+                        pack.location_dest_id = mig_location
             operations_to_delete.unlink()
             pick.do_transfer()
 
