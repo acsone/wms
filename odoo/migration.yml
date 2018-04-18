@@ -233,10 +233,11 @@ migration:
     # - version: 10.18.2
     # - version: 10.18.3
     # - version: 10.18.4
-    - version: 10.18.5
+    # - version: 10.18.5
+    - version: 10.18.6
       operations:
         post:
-          - anthem songs.upgrade.10_18_5_update::post
+          - anthem songs.upgrade.10_18_6_update::post
           - anthem songs.install.accounting::set_fiscal_position_mention
           - anthem songs.install.logistics::set_product_expiry
       modes:
@@ -245,6 +246,7 @@ migration:
             post:
               - anthem songs.upgrade.10_18_5_update::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
+              - anthem songs.install.accounting::import_banks
               - anthem songs.install.data_full::import_banks
               - anthem songs.install.data_full::import_bank_accounts
               - anthem songs.install.data_full::import_bank_mandates

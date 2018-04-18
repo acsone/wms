@@ -6,14 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
-**Features and Improvements**
-
-**Bugfixes**
-
 **Build**
 
-**Documentation**
-
+* Fix migration steps of 10.18.2
+  Add missing update of res.bank.csv file
 
 10.18.5 (2018-04-18)
 ++++++++++++++++++++
