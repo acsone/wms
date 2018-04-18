@@ -1118,6 +1118,7 @@ class ProductNewRouteInfo(EntityMapper):
 
 
 class ResBankSupplier(EntityMapper):
+    # FIXME remove optional XXX from BIC/SWIFT
     DB2_NAME = 'PAIAUT3'
 
     XMLID_FIELD = "id"
@@ -1137,6 +1138,7 @@ class ResBankSupplier(EntityMapper):
 
 
 class ResPartnerBankSupplier(EntityMapper):
+    # FIXME remove optional XXX from BIC/SWIFT
     DB2_NAME = 'PAIAUT3'
 
     XMLID_FIELD = "id"
