@@ -47,10 +47,7 @@ class ProductMapper(EntityMapper):
         ),
         FieldMapper('barcode', 'cplz05'),
         FieldMapper('tracking', 'gescsa', mapping=mappings.PRODUCT_TRACKING),
-        FieldMapper(
-            'taxes_id/id', 'gesctv',
-            mapping=mappings.PRODUCT_SALE_VAT
-        ),
+        'taxes_id',
         FieldMapper(
             'supplier_taxes_id/id', 'gesctv',
             mapping=mappings.PRODUCT_PURCHASE_VAT
@@ -109,6 +106,18 @@ class ProductMapper(EntityMapper):
                     "        WHERE dccsui >= %s AND dccsui <= %s"
                     ")" % (SO_MIN, SO_MAX))
         return None
+
+    def convert_taxes_id(self, odoo_entity, db2_entity):
+        """ Map VAT and add APB taxes on drugs products """
+        db2_vat_id = db2_entity.get('gesctv')
+        taxes = [
+            mappings.PRODUCT_SALE_VAT.get(db2_vat_id, 'ERR_vat_not_found')
+        ]
+        db2_product_categ = db2_entity.get('gescsg')
+        if db2_product_categ in mappings.PRODUCT_WITH_APB_TAX_CATEG:
+            taxes.append('l10n_be_apb_tax.1_apb_01_out')
+        odoo_entity['taxes_id/id'] = ','.join(taxes)
+
 
     def convert_name(self, odoo_entity, db2_entity):
         """ Dans la base DB2, si le nom commence par |||, || ou |,

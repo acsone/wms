@@ -83,6 +83,26 @@ PRODUCT_CATEGORY.update({
     99: 'specific_data.product_categ_finance_divers_divers',
 })
 
+PRODUCT_WITH_APB_TAX_CATEG = [
+    # Products Belgian VET, specific_data.product_categ_vet_belges
+    3,  # specific_data.product_categ_antimicrobiens
+    4,  # specific_data.product_categ_pis
+    6,  # specific_data.product_categ_oeil_oreille
+    7,  # specific_data.product_categ_antiparasite
+    9,  # specific_data.product_categ_sys_nerveux
+    10,  # specific_data.product_categ_vasculo
+    11,  # specific_data.product_categ_vitamines
+    12,  # specific_data.product_categ_vaccins
+    14,  # specific_data.product_categ_divers_veto
+    23,  # specific_data.product_categ_hormones
+    30,  # specific_data.product_categ_psychotropes_25
+    31,  # specific_data.product_categ_stupefiant
+    44,  # specific_data.product_categ_topiques
+    62,  # specific_data.product_categ_psychotropes_38
+    # Products importation
+    75,  # specific_data.product_categ_importation
+]
+
 PRODUCT_STATES = {
     'A': 'specific_purchase.product_state_a',
     'D': 'specific_purchase.product_state_d',
