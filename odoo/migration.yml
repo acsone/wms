@@ -267,3 +267,8 @@ migration:
           - specific_zetes
           - stock_disable_force_availability_button
           - stock_product_bin
+    - version: 10.18.7
+      addons:
+        upgrade:
+          - specific_sale
+          - specific_partner

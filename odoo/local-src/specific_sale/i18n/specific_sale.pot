@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-05 13:57+0000\n"
-"PO-Revision-Date: 2017-12-05 13:57+0000\n"
+"POT-Creation-Date: 2018-04-19 11:41+0000\n"
+"PO-Revision-Date: 2018-04-19 11:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:108
+#: code:addons/specific_sale/models/sale.py:95
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -82,21 +82,9 @@ msgid "February"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:85
-#, python-format
-msgid "Following human medicines ordered under your responsibility."
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:99
-#, python-format
-msgid "For any problems related to this command, please contact the pharmacist."
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:117
-#, python-format
-msgid "Imported medicines under your entire responsibility"
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fee
+msgid "Helps with fees"
 msgstr ""
 
 #. module: specific_sale
@@ -112,6 +100,12 @@ msgstr ""
 #. module: specific_sale
 #: selection:sale.report,month:0
 msgid "June"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_last_suite_name
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_last_suite_name
+msgid "Last Suite Name"
 msgstr ""
 
 #. module: specific_sale
@@ -212,6 +206,11 @@ msgid "Price"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr ""
@@ -250,11 +249,6 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
 msgid "Quantity unavailable at order line save"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_remains_to_deliver
-msgid "Remains to deliver"
 msgstr ""
 
 #. module: specific_sale
@@ -308,20 +302,13 @@ msgid "September"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_suite_name
+msgid "Suite Id"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:94
-#, python-format
-msgid "The medicines will be delivered to you by our care upon receipt of these from the pharmacy"
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:89
-#, python-format
-msgid "This command is transferred on your behalf to the pharmacy which will ensure the delivery of medicines."
 msgstr ""
 
 #. module: specific_sale

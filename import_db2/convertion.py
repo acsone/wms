@@ -349,6 +349,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('active', 'cliblf', mapping=mappings.CUSTOMER_ACTIVE),
         FieldMapper('ref', 'clinum'),
         FieldMapper('suite', 'clinos'),
+        FieldMapper('call_name', 'cliapp'),
         FieldMapper('name', 'clinom'),
         FieldMapper('street', 'cliadr'),
         FieldMapper('zip', 'clicpo'),

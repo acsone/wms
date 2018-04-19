@@ -22,9 +22,10 @@
         <field name="inherit_id" ref="specific_partner.view_partner_simple_form"/>
         <field name="arch" type="xml">
 
-            <field name="suite" position="after">
+            <field name="call_name" position="after">
                 <field name="last_suite_name"/>
             </field>
+
         </field>
     </record>
 
