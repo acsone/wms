@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
 
 **Features and Improvements**
+* Fix Belgium Chart of taxes. Code and name have been inverted in v10.
 
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
