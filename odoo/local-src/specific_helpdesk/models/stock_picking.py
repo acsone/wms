@@ -13,7 +13,7 @@ class Picking(models.Model):
     def _compute_helpdesk_tickets_count(self):
         for picking in self:
             domain = [
-                ('stock_picking_id', '=', self.id)
+                ('stock_picking_id', '=', picking.id)
             ]
 
             picking.helpdesk_tickets_count = len(
