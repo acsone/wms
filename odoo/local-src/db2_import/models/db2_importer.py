@@ -929,7 +929,7 @@ class DB2ImporterTable(models.Model):
             " VALUES ("
             "'db2.importer.table({table_id},)"
             ".create_or_update_record({{record_id}}, {{ref}})',10,0,1,"
-            "'{{uuid}}','[1]',1,'create_or_update_record','pending',"
+            "'{{uuid}}','[{table_id}]',1,'create_or_update_record','pending',"
             # escape 2 levels to get {}. {{{{}}}} -> {{}} -> {}
             "'{{{{}}}}','<db2.importer.table>.create_or_update_record',"
             "'root.db2.create_or_update','[{{record_id}}]',2,5,"
