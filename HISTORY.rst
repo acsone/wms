@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1285: Fix crash on opening stock picking
+
 **Build**
 
 **Documentation**
