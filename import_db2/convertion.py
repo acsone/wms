@@ -270,6 +270,7 @@ class Supplierinfo(EntityMapper):
         FieldMapper('product_code', 'gesarc'),
         FieldMapper('price', 'gespab'),
         FieldMapper('discount_sale', 'cclrem'),
+        FieldMapper('discount_purchase', 'cclrem'),
         FieldMapper('min_qty_sale', constant=1),
         FieldMapper('date_start', 'ccld', is_date=True),
         FieldMapper('date_end', 'cclf', is_date=True),

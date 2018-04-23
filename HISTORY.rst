@@ -14,6 +14,7 @@ Unreleased
 * ALCN-1036: invert import mapping of discount_global and promotion_supplier
 * ALCN-1036: set purchase picking date from DB2 header instead of line
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
+* ALCN-1070: Set purchase discount on supplier info, take the same value as sale discount for migration
 * ALCN-1266: all operations created by in progress pickings now goes to a specific location
   called "[MIGRATION] Réception des achats"
 
