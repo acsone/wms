@@ -860,56 +860,45 @@ def create_procurement_rules(ctx):
     warehouse = ctx.env.ref('stock.warehouse0')
     types = [
         {'xmlid': '__setup__.procurement_rule_materiel',
-         'type': ['categ', 'prod'],
+         'type': ['categ', 'prod', 'sale'],
          'name': 'WH: Stock -> Output (MAT)',
-         'action': 'move',
-         'location_id': location_out.id,
-         'warehouse_id': warehouse.id,
-         'location_src_id': ref('stock.stock_location_stock').id,
-         'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
-         'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_ali',
-         'type': ['categ', 'prod'],
+         'type': ['categ', 'prod', 'sale'],
          'name': 'WH: Stock -> Output (ALI)',
-         'action': 'move',
-         'location_id': location_out.id,
-         'warehouse_id': warehouse.id,
-         'location_src_id': ref('stock.stock_location_stock').id,
-         'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
-         'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_medoc',
-         'type': ['categ', 'prod'],
+         'type': ['categ', 'prod', 'sale'],
          'name': 'WH: Stock -> Output (MED)',
-         'action': 'move',
-         'location_id': location_out.id,
-         'warehouse_id': warehouse.id,
-         'location_src_id': ref('stock.stock_location_stock').id,
-         'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
-         'group_propagation_option': 'propagate',
          },
         {'xmlid': '__setup__.procurement_rule_froid',
-         'type': ['prod'],
+         'type': ['prod', 'sale'],
          'name': 'WH: Stock -> Output (FRIGO)',
-         'action': 'move',
-         'location_id': location_out.id,
-         'warehouse_id': warehouse.id,
-         'location_src_id': ref('stock.stock_location_stock').id,
-         'procure_method': 'make_to_stock',
          'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
-         'group_propagation_option': 'propagate',
          },
     ]
     for record in types:
         xmlid = record.pop('xmlid')
         types = record.pop('type')
         default_name = record.pop('name')
-        sequences = {'categ': 15, 'prod': 10}
+        record.update({
+         'action': 'move',
+         'location_id': location_out.id,
+         'warehouse_id': warehouse.id,
+         'procure_method': 'make_to_stock',
+         'group_propagation_option': 'propagate',
+        })
+        sequences = {'categ': 15, 'prod': 10, 'sale': 0}
         for t in types:
+            if t == 'sale':
+                record['location_src_id'] = ref(
+                    'stock.stock_location_company').id
+            else:
+                record['location_src_id'] = ref(
+                    'stock.stock_location_stock').id
             record['name'] = default_name[:-1] + " - " + t.upper() + ")"
             record['sequence'] = sequences[t]
             create_or_update(ctx, 'procurement.rule',
@@ -1128,6 +1117,23 @@ def create_routes(ctx):
     create_or_update(ctx, 'stock.location.route',
                      'stock_mts_mto_rule.route_mto_mts',
                      {'product_selectable': False})
+
+    # Create Sales BO route
+    create_or_update(
+        ctx, 'stock.location.route',
+        '__setup__.stock_location_route_sale_bo',
+        {'name': 'BO',
+         'sequence': 0,
+         'priority': 0,
+         'product_categ_selectable': False,
+         'product_selectable': False,
+         'sale_selectable': True,
+         'pull_ids': [
+             (6, 0, [ref('__setup__.procurement_rule_ali_sale').id,
+                     ref('__setup__.procurement_rule_medoc_sale').id,
+                     ref('__setup__.procurement_rule_materiel_sale').id,
+                     ref('__setup__.procurement_rule_froid_sale').id])],
+         })
 
 
 @anthem.log

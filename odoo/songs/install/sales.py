@@ -41,6 +41,11 @@ def sale_setup(ctx):
         'implied_ids': [(4, ctx.env.ref('sale.group_discount_per_so_line').id)]
     })
 
+    # Activate route on SO
+    employee_group.write({
+        'implied_ids': [(4, ctx.env.ref('sale_stock.group_route_so_lines').id)]
+    })
+
 
 @anthem.log
 def import_uom(ctx):
