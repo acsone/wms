@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1285: Fix crash on opening stock picking
+* Fix rights on esbflux when managing promotions
 
 **Build**
 
