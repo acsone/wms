@@ -109,6 +109,8 @@ def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
     content = resource_stream(req, 'data/sample/supplierinfo.csv')
     load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
+    content = resource_stream(req, 'data/sample/supplierinfo_promo.csv')
+    load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
 
 
 @anthem.log

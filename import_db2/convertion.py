@@ -25,7 +25,9 @@ class ProductMapper(EntityMapper):
         FieldMapper('create_date', 'gesc', is_date=True),
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
-        FieldMapper('standard_price', 'gespan'),
+        # standard_price is redefined as a computed field in specific_product
+        # thus the price is dealt with in supplierinfo
+        # FieldMapper('standard_price', 'gespan'),
         FieldMapper(
             'indicated_price', 'cplz23',
         ),
@@ -251,56 +253,31 @@ class AdditionalProductMapper(EntityMapper):
         odoo_entity['additional_product_id/id'] = xmlid
 
 
-class Supplierinfo(EntityMapper):
+class BaseSupplierinfo(EntityMapper):
     """ supplier info and promotions """
     DB2_NAME = 'PGESTION'
 
     XMLID_FIELD = 'id'
 
     # Doing a grouping to remove client column that creates duplicates
-    GROUP_BY_COL = [
-        'gesfou', 'gesart', 'gesarc', 'gespab', 'cclrem', 'cclref',
-        'cclqu1', 'cclgr1',
-        'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
-        'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
+    GROUP_BY_COL = []
 
     FIELDS_MAPPING = [
         'id',
         'name',
         FieldMapper('product_code', 'gesarc'),
         FieldMapper('price', 'gespab'),
-        FieldMapper('discount_sale', 'cclrem'),
-        FieldMapper('discount_purchase', 'cclrem'),
         FieldMapper('min_qty_sale', constant=1),
-        FieldMapper('date_start', 'ccld', is_date=True),
-        FieldMapper('date_end', 'cclf', is_date=True),
-        'ratio_main_product',
-        'ratio_promotional_product',
         'product_tmpl_id',
     ]
 
     def get_sql_select(self):
         return ','.join(self.GROUP_BY_COL)
 
-    def get_sql_joins(self):
-        """ Filter old promotions on the join and not promo from table condcf
-
-        This way we either get one or more supplier info with promotion
-        or we get a single supplier info without promotion
-
-        """
-        join = ("left join sbdata.condcf ON gesart=cclref"
-                " AND cclpro = 1")
-        if not self.importer.full:
-            join += (" AND cclfss = 20 AND cclfaa >= 17"
-                     " AND cclfmm >= 3 AND cclfmm <= 5")
-        else:
-            join += " AND cclfss = 20 AND cclfaa >= 16"
-        return join
-
     def get_sql_where(self):
-        # get only 2 years of promotions
+        # get only promo
         where = "gesfou IS NOT NULL"
+
         if not self.importer.full:
             # TODO: csv only when mode will be developed
             where += (
@@ -323,7 +300,7 @@ class Supplierinfo(EntityMapper):
         supplier = db2_entity['gesfou']
         product = db2_entity['gesart'].strip()
         ref = '%s-%s' % (supplier, product)
-        if db2_entity['cclref']:
+        if db2_entity.get('cclref'):
             year = db2_entity['ccldss'] * 100 + db2_entity['ccldaa']
             month = db2_entity['ccldmm']
             day = db2_entity['ccldjj']
@@ -338,6 +315,62 @@ class Supplierinfo(EntityMapper):
             'supplier', str(ref), '__import__')
         odoo_entity['name/id'] = supplier_xml_id
 
+    def convert_product_tmpl_id(self, odoo_entity, db2_entity):
+        product = (db2_entity['gesart'] or '').strip()
+        xmlid = self.get_xml_id('product', '%s_product_template' % product)
+        odoo_entity['product_tmpl_id/id'] = xmlid
+
+
+class Supplierinfo(BaseSupplierinfo):
+    """Add 1 supplierinfo per standard_price."""
+
+    # Doing a grouping to remove client column that creates duplicates
+    # Here we don't care about dates
+    GROUP_BY_COL = ['gesfou', 'gesart', 'gesarc', 'gespab']
+
+    def get_order_by(self):
+        return "gesfou, gesart"
+
+
+class SupplierinfoPromo(BaseSupplierinfo):
+    """Promotion only supplier info"""
+
+    FIELDS_MAPPING = BaseSupplierinfo.FIELDS_MAPPING + [
+        FieldMapper('discount_sale', 'cclrem'),
+        FieldMapper('discount_purchase', 'cclrem'),
+        FieldMapper('date_start', 'ccld', is_date=True),
+        FieldMapper('date_end', 'cclf', is_date=True),
+        'ratio_main_product',
+        'ratio_promotional_product',
+    ]
+
+    # Doing a grouping to remove client column that creates duplicates
+    GROUP_BY_COL = [
+        'gesfou', 'gesart', 'gesarc', 'gespab', 'cclrem', 'cclref',
+        'cclqu1', 'cclgr1',
+        'ccldss', 'ccldaa', 'ccldmm', 'ccldjj',
+        'cclfss', 'cclfaa', 'cclfmm', 'cclfjj']
+
+    def get_sql_joins(self):
+        """ Filter old promotions on the join and not promo from table condcf
+
+        This way we either get one or more supplier info with promotion
+        or we get a single supplier info without promotion
+
+        """
+        join = ("inner join sbdata.condcf ON gesart=cclref"
+                " AND cclpro = 1")
+        if self.importer.full:
+            # get only 2 years of promotions in full mode
+            join += " AND cclfss = 20 AND cclfaa >= 16"
+        else:
+            join += (" AND cclfss = 20 AND cclfaa >= 17"
+                     " AND cclfmm >= 3 AND cclfmm <= 5")
+        return join
+
+    def get_order_by(self):
+        return "gesfou, gesart, ccldss, ccldaa, ccldmm, ccldjj"
+
     def convert_ratio_main_product(self, odoo_entity, db2_entity):
         qty = db2_entity['cclqu1'] or 0
         odoo_entity['ratio_main_product'] = int(qty)
@@ -345,11 +378,6 @@ class Supplierinfo(EntityMapper):
     def convert_ratio_promotional_product(self, odoo_entity, db2_entity):
         qty = db2_entity['cclgr1'] or 0
         odoo_entity['ratio_promotional_product'] = int(qty)
-
-    def convert_product_tmpl_id(self, odoo_entity, db2_entity):
-        product = (db2_entity['gesart'] or '').strip()
-        xmlid = self.get_xml_id('product', '%s_product_template' % product)
-        odoo_entity['product_tmpl_id/id'] = xmlid
 
 
 class CustomerMapper(EntityMapper):
@@ -1196,6 +1224,7 @@ class ResPartnerBankSupplier(EntityMapper):
 MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   AdditionalProductMapper,
                   Supplierinfo,
+                  SupplierinfoPromo,
                   CustomerMapper, SupplierMapper,
                   CustomerAddressMapper,
                   SaleOrderMapper,
@@ -1211,6 +1240,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
 MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        AdditionalProductMapper,
                        Supplierinfo,
+                       SupplierinfoPromo,
                        CustomerMapper, SupplierMapper,
                        CustomerAddressMapper,
                        StockProductionLotMapper,
