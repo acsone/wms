@@ -20,6 +20,7 @@ Unreleased
 
 **Features and Improvements**
 * Fix Belgium Chart of taxes. Code and name have been inverted in v10.
+* ALCN-1288: Compute fiscal position based on country
 
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.

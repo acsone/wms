@@ -253,6 +253,21 @@ def add_xmlid_fiscal_position(ctx):
 
 
 @anthem.log
+def set_fiscal_position_country(ctx):
+    ctx.env.ref('__setup__.fiscal_position_nat').write({
+        'auto_apply': 1,
+        'country_id': ctx.env.ref('base.be').id,
+    })
+    ctx.env.ref('__setup__.fiscal_position_intra').write({
+        'auto_apply': 1,
+        'country_group_id': ctx.env.ref('base.europe').id,
+    })
+    ctx.env.ref('__setup__.fiscal_position_extra').write({
+        'auto_apply': 1,
+    })
+
+
+@anthem.log
 def set_fiscal_position_mention(ctx):
     """ Set legal mention on fiscal position """
     ctx.env.ref('__setup__.fiscal_position_extra').write({
@@ -450,6 +465,7 @@ def main(ctx):
     company_currency(ctx)
     activate_multicurrency(ctx)
     add_xmlid_fiscal_position(ctx)
+    set_fiscal_position_country(ctx)
     set_fiscal_position_mention(ctx)
     settings(ctx)
     setup_sequences(ctx)
