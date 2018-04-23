@@ -2,7 +2,7 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, at_install, post_install
 
 
 class TestDeliveryRoundAssign(TransactionCase):
@@ -57,6 +57,8 @@ class TestDeliveryRoundAssign(TransactionCase):
                 ('name', '=', 'Delivery Orders')])
         pick.write({'subcode': 'PICK'})
 
+    @post_install(True)
+    @at_install(False)
     def test_deliveryround_carrier(self):
         delivery_template = self.env['round.template'].create({
             'name': 'Unittest delivery template',
@@ -94,6 +96,8 @@ class TestDeliveryRoundAssign(TransactionCase):
                 delivery_round.id
             )
 
+    @post_install(True)
+    @at_install(False)
     def test_force_deliveryround_partially_available(self):
         self.assertEqual(self.p1.qty_available, 100)
         self.assertEqual(self.p2.qty_available, 0)
@@ -138,6 +142,8 @@ class TestDeliveryRoundAssign(TransactionCase):
 
         return sale
 
+    @post_install(True)
+    @at_install(False)
     def test_reassign_on_reception(self):
         sale = self.test_force_deliveryround_partially_available()
         pick = sale.picking_ids.filtered(
