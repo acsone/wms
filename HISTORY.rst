@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
+
 **Bugfixes**
 
 * ALCN-1285: Fix crash on opening stock picking

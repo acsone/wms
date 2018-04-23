@@ -20,6 +20,7 @@
         'specific_partner',
         'stock_lot_track',
         'sale_cancel_remaining',
+        'specific_purchase',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
