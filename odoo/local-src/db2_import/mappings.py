@@ -4,6 +4,7 @@
 
 UOM = {
     0: 'product.product_uom_unit',
+    1: 'product.product_uom_unit',
     2: 'product.product_uom_meter',
     7: '__setup__.product_uom_sac',
     8: '__setup__.product_uom_boite',

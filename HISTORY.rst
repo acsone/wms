@@ -17,6 +17,7 @@ Unreleased
 * ALCN-1070: Set purchase discount on supplier info, take the same value as sale discount for migration
 * ALCN-1266: all operations created by in progress pickings now goes to a specific location
   called "[MIGRATION] Réception des achats"
+* ALCN-1286: Set purchase with uom from dcfunv with value "1" as "Pièces" for the few cases that were failing
 
 **Features and Improvements**
 * Fix Belgium Chart of taxes. Code and name have been inverted in v10.
