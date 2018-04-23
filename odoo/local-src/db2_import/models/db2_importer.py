@@ -403,13 +403,13 @@ class DB2MapperPurchaseOrder(object):
                 pick = new.picking_ids
 
                 picking_date = convert_date('ecfc', row)
+                scheduled_date = convert_date('ecfl', row)
                 # as we do only one picking take the max date
-                # from lines for scheduled and receival dates
-                min_date = max(convert_date('dcfl', l) for l in lines)
+                # from lines for receival dates
                 date_done = max(convert_date('dcff', l) for l in lines)
                 pick.write({
                     'date': picking_date,
-                    'min_date': min_date,
+                    'min_date': scheduled_date,
                     'date_done': date_done,
                 })
                 pick_lines = cls.map_orderline2move(lines)

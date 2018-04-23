@@ -12,6 +12,7 @@ Unreleased
 * ALCN-1233: Set fiscal position on suppliers
 * ALCN-1036: import supplier raw price instead of net price in supplierinfo
 * ALCN-1036: invert import mapping of discount_global and promotion_supplier
+* ALCN-1036: set purchase picking date from DB2 header instead of line
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
 * ALCN-1266: all operations created by in progress pickings now goes to a specific location
   called "[MIGRATION] Réception des achats"
