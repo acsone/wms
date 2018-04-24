@@ -34,6 +34,7 @@ Unreleased
 **Build**
 
 * db2_import: get sale/purchase history from pre-generated csv files to limit number of querries to DB2
+* ALCN-1297: db2_import: Add environment variables DB2IMPORT_* to control the db2 importer setup
 
 **Documentation**
 

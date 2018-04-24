@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
+from distutils.util import strtobool
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
@@ -12,7 +13,7 @@ from odoo import fields
 """
 Songs to start the DB2 data importers to avoid the manual operation
 
-Different importers will be launched depending on environment:
+By default different importers will be launched depending on environment:
 
     PROD:
     + 2 years of sales
@@ -25,29 +26,17 @@ Different importers will be launched depending on environment:
 """
 
 # importer refs with number of years, number of months
-PROD_IMPORTER = [
+BASE_IMPORTER = [
     {'ref': 'db2_import.db2_sale_importer',
-     'years': 2,
-     'months': 0,
-     'csv_until': '2018-04-01'},
+     'csv_until': '2018-04-01'},  # csv_until is excluded date
     {'ref': 'db2_import.db2_purchase_importer',
-     'years': 2,
-     'months': 0,
      'csv_until': '2018-04-01'},
 ]
 
-INT_IMPORTER = [
-    {'ref': 'db2_import.db2_sale_importer',
-     'years': 0,
-     'months': 3,
-     'csv_until': '2018-04-01'},
-    {'ref': 'db2_import.db2_purchase_importer',
-     'years': 0,
-     'months': 3,
-     'csv_until': '2018-04-01'},
+# importer for selection of 10 clients
+EXT_IMPORTER = [
     {'ref': 'db2_import.db2_importer_10_clients',
-     'years': 2,
-     'months': 0,
+     'is_ext': True,
      'csv_until': '2018-04-01'},
 ]
 
@@ -63,31 +52,85 @@ def main(ctx):
 
     """
 
+    importers = BASE_IMPORTER
+
     env = os.environ.get("RUNNING_ENV")
-    if env == 'production':
-        importers = PROD_IMPORTER
-        mode = 'history'
+    mode = os.environ.get("DB2IMPORT_MODE")
+    years = os.environ.get("DB2IMPORT_YEARS")
+    months = os.environ.get("DB2IMPORT_MONTHS")
+    use_ext = os.environ.get("DB2IMPORT_10CLI")
+    ext_years = os.environ.get("DB2IMPORT_10CLI_YEARS")
+    ext_months = os.environ.get("DB2IMPORT_10CLI_MONTHS")
+
+    if years:
+        years = int(years)
+    else:
+        years = 0
+    if months:
+        months = int(months)
+    else:
+        months = 0
+    if ext_years:
+        ext_years = int(ext_years)
+    else:
+        ext_years = 0
+    if ext_months:
+        ext_months = int(ext_months)
+    else:
+        ext_months = 0
+
+    # redefine default values depending on environment
+    if env == 'prod':
+        if not mode:
+            mode = 'history'
+        if not years and not months:
+            # default to full scale import
+            years = 2
+            months = 0
+        # Never use ext in PROD
+        use_ext = False
     elif env == 'integration':
-        importers = INT_IMPORTER
-        # To uncomment when we want to do a full scale test of the import
-        # but only on the c2c_platform
-        # last time done on:
-        # - 10.18.0
-        # if os.environ.get('C2C_PLATFORM') == 'True':
-        #     importers = PROD_IMPORTER
-        mode = 'final_update'
+        if not mode:
+            mode = 'final_update'
+        if not years and not months:
+            # default to reduced import
+            years = 0
+            months = 3
+        if use_ext is None:
+            use_ext = True
+        else:
+            use_ext = strtobool(use_ext)
+        if not ext_years and not ext_months:
+            ext_years = 2
+            ext_months = 0
+
     else:
         # Don't automatically launch in dev/test env
         return
 
+    if use_ext:
+        if (ext_years > years
+                or ext_years == years and ext_months > months):
+            importers.extend(EXT_IMPORTER)
+        else:
+            # no need for extension if it extends nothing
+            use_ext = False
+
     today = date.today()
     end_date_str = fields.Date.to_string(today)
+    start_date = today + relativedelta(years=-years,
+                                       months=-months)
+    start_date_str = fields.Date.to_string(start_date)
 
     for data in importers:
         rec = ctx.env.ref(data['ref'])
-        start_date = today + relativedelta(years=-data['years'],
-                                           months=-data['months'])
-        start_date_str = fields.Date.to_string(start_date)
+        # reduce the range to what is already imported in main
+        if use_ext and data.get('is_ext'):
+            end_date = start_date + relativedelta(days=-1)
+            end_date_str = fields.Date.to_string(end_date)
+            start_date = today + relativedelta(years=-ext_years,
+                                               months=-ext_months)
+            start_date_str = fields.Date.to_string(start_date)
         csv_until = data.get('csv_until')
         values = {
             'mode': mode,
