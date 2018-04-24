@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
+from collections import defaultdict
 
 from odoo import api, fields, models
 
-import logging
+from odoo.addons.queue_job.job import job
+
 _logger = logging.getLogger(__name__)
 
 
@@ -132,6 +135,28 @@ class StockPicking(models.Model):
     def button_delivery_round(self):
         return dict(self.env.ref(
             'delivery_rounds.action_picking_assign_delivery_round').read()[0])
+
+    @api.multi
+    def _delay_jobs_action_assign(self):
+        # Group picking by partner
+        pickings_by_partner = defaultdict(lambda: self.env['stock.picking'])
+        for picking in self.search([('state', '=', 'confirmed')]):
+            pickings_by_partner[picking.partner_id.id] |= picking
+
+        for pickings in pickings_by_partner.values():
+            pickings.with_delay()._job_action_assign()
+
+    @api.multi
+    @job(default_channel='root.action_assign')
+    def _job_action_assign(self):
+        moves = self.env['stock.move'].search(
+            [('picking_id', 'in', self.ids),
+             ('state', '=', 'confirmed'),
+             ('product_uom_qty', '!=', 0.0)],
+            limit=None,
+            order='priority desc, date_expected asc'
+        )
+        moves.action_assign()
 
 
 class StockPickingType(models.Model):

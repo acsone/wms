@@ -45,10 +45,11 @@ class MakeTodayDeliveryPlan(models.TransientModel):
                 'tag_ids': [(6, 0, self.tag_ids.ids)]
                 })
 
-        if self.assign_moves:
+        if templates and self.assign_moves:
             # Run stock reservations in background.  This process automatically
             # assign pickings and shippings to available delivery rounds
-            self.env['procurement.order.compute.all'].procure_calculation()
+            StockPicking = self.env['stock.picking']
+            StockPicking._delay_jobs_action_assign()
 
         return self.env['ir.actions.act_window']\
             .for_xml_id('delivery_rounds', 'action_round_instance')
