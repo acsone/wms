@@ -674,6 +674,7 @@ class SupplierMapper(EntityMapper):
         FieldMapper('lang', 'foulan',
                     mapping=mappings.LANG),
         FieldMapper('is_purchase_back_order_accepted', constant=True),
+        FieldMapper('supplier_discount', 'cforem'),
         'phone_numbers', 'property_account_position_id',
         FieldMapper(
             'property_supplier_payment_term_id/id',
@@ -695,6 +696,9 @@ class SupplierMapper(EntityMapper):
             "and emwnli = (select min(emwnli) from gendata.emaweb "
             "where founum=emwnum and emwcod=1 and emwcon=0 and emwtyp='E'"
             ")"
+            # Supplier global discount are stored in CONFOU
+            "left join sbdata.confou"
+            " on founum=cfonum and cfocde=0"
         )
 
     @staticmethod
