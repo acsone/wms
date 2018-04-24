@@ -22,7 +22,6 @@ class StockQuant(models.Model):
             # ensure the delivery orders exist when performing this check.
             locations = self.env['stock.location'].search(
                 [('usage', '=', 'customer')])
-            import pdb;pdb.set_trace()
             previous_moves = move.search([
                 ('product_id', '=', move.product_id.id),
                 ('state', 'in', ['waiting', 'confirmed', 'assigned']),
