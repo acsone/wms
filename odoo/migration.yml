@@ -286,7 +286,7 @@ migration:
           - connector_esb
           - specific_shipping_costs
       operations:
+        pre:
+          - sh -c 'psql -f odoo/songs/upgrade/10_18_7_update.sql'
         post:
           - anthem songs.install.logistics::create_picking_types
-        pre:
-          - anthem songs.upgrade.10_18_7_update::pre
