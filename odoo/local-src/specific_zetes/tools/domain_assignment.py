@@ -63,13 +63,13 @@ class Assignment(DomainInterface):
                 picking = self.get_picking(params)
                 result.assignmentType = constants.PICKING_ASSIGNMENT
             # Search for a picking assignment
-            elif assignment_type == constants.PARKING_ASSIGNMENT:
+            elif assignment_type == constants.RANGEMENT_ASSIGNMENT:
                 picking = self.get_picking_parking(params)
-                result.assignmentType = constants.PARKING_ASSIGNMENT
+                result.assignmentType = constants.RANGEMENT_ASSIGNMENT
             # Search for a picking in reserve
-            elif assignment_type == constants.RESERVE_ASSIGNMENT:
+            elif assignment_type == constants.REASSORT_ASSIGNMENT:
                 picking = self.get_picking_reserve(params)
-                result.assignmentType = constants.RESERVE_ASSIGNMENT
+                result.assignmentType = constants.REASSORT_ASSIGNMENT
             else:
                 result.update({
                     'respCode': constants.RESPONSE_CODE_ERROR,
@@ -189,15 +189,15 @@ class Assignment(DomainInterface):
         picking_query = """
         SELECT picking.id
         FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS type
-            ON picking.picking_type_id = type.id
-          LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
+          INNER JOIN stock_picking_type AS pick_type
+            ON picking.picking_type_id = pick_type.id
+          LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
           INNER JOIN round_instance AS round
             ON picking.delivery_round_id = round.id
         WHERE picking.delivery_round_state = 'open'
-              AND type.subcode = 'PICK'
+              AND pick_type.subcode = 'PICK'
               AND picking.zetes_state IN %s
-              AND picking.zetes_picking_type = %s
+              AND pick_type.zetes_picking_type = %s
               AND EXISTS(SELECT 1
                          FROM stock_pack_operation AS operation
                          WHERE operation.picking_id = picking.id
@@ -254,11 +254,11 @@ class Assignment(DomainInterface):
         picking_query = """
         SELECT picking.id
         FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS type
-            ON picking.picking_type_id = type.id
-          LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
+          INNER JOIN stock_picking_type AS pick_type
+            ON picking.picking_type_id = pick_type.id
+          LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
         WHERE picking.zetes_state IN %s
-          AND picking.zetes_picking_type = %s
+          AND pick_type.zetes_picking_type = %s
           AND picking.is_zetes_error = FALSE
           AND EXISTS(SELECT 1
                      FROM stock_pack_operation AS operation
@@ -275,7 +275,7 @@ class Assignment(DomainInterface):
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
-            constants.PARKING_ASSIGNMENT,
+            constants.RANGEMENT_ASSIGNMENT,
             (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
             self._user.id
         ]
@@ -367,12 +367,12 @@ class Assignment(DomainInterface):
         picking_query = """
         SELECT picking.id
         FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS type
-            ON picking.picking_type_id = type.id
+          INNER JOIN stock_picking_type AS pick_type
+            ON picking.picking_type_id = pick_type.id
           LEFT JOIN picking_zone
-            ON type.picking_zone_id = picking_zone.id
+            ON pick_type.picking_zone_id = picking_zone.id
         WHERE picking.zetes_state IN %s
-          AND picking.zetes_picking_type = %s
+          AND pick_type.zetes_picking_type = %s
           AND picking.is_zetes_error = FALSE
           AND EXISTS(SELECT 1
                      FROM stock_pack_operation AS operation
@@ -389,7 +389,7 @@ class Assignment(DomainInterface):
                 """
         query_values = [
             (constants.AS_DEFAULT, constants.AS_CANCELED),
-            constants.RESERVE_ASSIGNMENT,
+            constants.REASSORT_ASSIGNMENT,
             (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
             self._user.id
         ]

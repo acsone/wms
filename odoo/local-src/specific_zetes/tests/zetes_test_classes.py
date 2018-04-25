@@ -176,6 +176,7 @@ class ZetesTest(TransactionCase):
             'color': 7,
             'sequence': 4,
             'picking_zone_id': self.picking_zone_medoc.id,
+            'zetes_picking_type': constants.PICKING_ASSIGNMENT,
         })
 
         tomorrow = datetime.now() + relativedelta(days=1)
@@ -292,6 +293,7 @@ class ZetesParkingTest(ZetesTest):
             'use_create_lots': False,
             'sequence': 9,
             'picking_zone_id': self.picking_zone_medoc.id,
+            'zetes_picking_type': constants.RANGEMENT_ASSIGNMENT,
         })
 
         self.parking_medoc.write({
@@ -352,6 +354,7 @@ class ZetesReserveTest(ZetesTest):
             'use_create_lots': False,
             'sequence': 9,
             'picking_zone_id': self.picking_zone_medoc.id,
+            'zetes_picking_type': constants.REASSORT_ASSIGNMENT,
         })
 
         self.reserve_medoc.write({

@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
+* ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
 
 **Bugfixes**
 

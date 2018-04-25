@@ -75,10 +75,11 @@ class Usercontext(DomainInterface):
             picking_query = """
 SELECT picking.id,
   picking_zone.code,
-  picking.zetes_picking_type
+  pick_type.zetes_picking_type
 FROM stock_picking AS picking
-  LEFT JOIN stock_picking_type AS type ON picking.picking_type_id = type.id
-  LEFT JOIN picking_zone ON type.picking_zone_id = picking_zone.id
+  LEFT JOIN stock_picking_type AS pick_type
+    ON picking.picking_type_id = pick_type.id
+  LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
   LEFT JOIN round_instance AS round ON picking.delivery_round_id = round.id
 WHERE picking.zetes_state IN %s
       AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)

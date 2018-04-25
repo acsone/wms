@@ -273,3 +273,7 @@ migration:
           - specific_sale
           - specific_partner
           - web_tree_dynamic_colored_field
+          - specific_zetes
+      operations:
+        post:
+          - anthem songs.install.logistics::create_picking_types

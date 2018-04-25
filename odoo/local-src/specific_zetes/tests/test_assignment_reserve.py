@@ -19,7 +19,7 @@ class TestAssignemnt(ZetesReserveTest):
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,
             'Cri02': None,
-            'assignmentType': constants.RESERVE_ASSIGNMENT,
+            'assignmentType': constants.REASSORT_ASSIGNMENT,
             'requestType': '1',
         })
 
@@ -53,8 +53,8 @@ class TestAssignemnt(ZetesReserveTest):
         # Create the picking
         picking = report.create_reserve_picking()
 
-        self.assertEqual(picking.zetes_picking_type,
-                         constants.RESERVE_ASSIGNMENT)
+        self.assertEqual(picking.picking_type_id.zetes_picking_type,
+                         constants.REASSORT_ASSIGNMENT)
 
         # Check with no current picking
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
@@ -62,12 +62,12 @@ class TestAssignemnt(ZetesReserveTest):
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,
             'Cri02': None,
-            'assignmentType': constants.RESERVE_ASSIGNMENT,
+            'assignmentType': constants.REASSORT_ASSIGNMENT,
             'requestType': '1',
         })
 
-        self.assertEqual(picking.zetes_picking_type,
-                         constants.RESERVE_ASSIGNMENT)
+        self.assertEqual(picking.picking_type_id.zetes_picking_type,
+                         constants.REASSORT_ASSIGNMENT)
 
         # Search for a picking
         result_str = domain.requ(request_params)

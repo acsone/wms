@@ -45,8 +45,8 @@ PRINT_LABELS = '04'
 
 # Assignment types
 PICKING_ASSIGNMENT = '1'
-PARKING_ASSIGNMENT = '2'
-RESERVE_ASSIGNMENT = '3'
+RANGEMENT_ASSIGNMENT = '2'
+REASSORT_ASSIGNMENT = '3'
 
 # Move type (load, put, load & put)
 MOVE_TYPE_LOAD = '1'

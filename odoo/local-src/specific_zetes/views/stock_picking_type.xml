@@ -19,6 +19,10 @@
             <xpath expr="//field[@name='code']" position="after">
                 <field name="is_portable_printer" />
             </xpath>
+
+            <xpath expr="//field[@name='picking_zone_id']" position="after">
+                <field name="zetes_picking_type"/>
+            </xpath>
         </field>
     </record>
 </odoo>

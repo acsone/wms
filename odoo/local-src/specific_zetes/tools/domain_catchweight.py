@@ -130,9 +130,11 @@ class Catchweight(DomainInterface):
 
             picking = pack_op.picking_id
             # The stock is full and the picker need to go to the reserve
-            if (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+            if (picking.picking_type_id.zetes_picking_type ==
+                constants.RANGEMENT_ASSIGNMENT
                 and pack_op.zetes_state == constants.MOVE_FULL) or \
-                (picking.zetes_picking_type == constants.PARKING_ASSIGNMENT
+                (picking.picking_type_id.zetes_picking_type ==
+                 constants.RANGEMENT_ASSIGNMENT
                  and not virtual_qty):
                 reserve_rel_obj = \
                     self.request.env['pack.operation.reserve.rel']
@@ -154,7 +156,8 @@ class Catchweight(DomainInterface):
                 pack_op.put_in_reserve(reserve.id)
             # Only for "Reserve". The stock is full and the picker will return
             # some quantity to the reserve
-            elif picking.zetes_picking_type == constants.RESERVE_ASSIGNMENT \
+            elif picking.picking_type_id.zetes_picking_type == \
+                    constants.REASSORT_ASSIGNMENT \
                     and pack_op.product_qty > virtual_qty:
                 # Add the new quantity to the current pack op
                 pack_op.add_qty(virtual_qty, lot_id)

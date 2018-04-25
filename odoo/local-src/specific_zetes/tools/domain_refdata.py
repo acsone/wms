@@ -31,7 +31,8 @@ class Refdata(DomainInterface):
         :return:
         """
         picking_types = self.request.env['stock.picking.type']\
-            .sudo(self._user).search([('subcode', '=', 'PICK')])
+            .sudo(self._user).search([('subcode', '=', 'PICK'),
+                                      ('picking_zone_id', '!=', False)])
         result = []
         for picking_type in picking_types:
             picking_values = Parameters(self)

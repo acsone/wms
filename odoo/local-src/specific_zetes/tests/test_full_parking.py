@@ -134,7 +134,7 @@ class TestFullParking(ZetesParkingTest):
 
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': constants.PARKING_ASSIGNMENT,
+            'assignmentType': constants.RANGEMENT_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,

@@ -102,7 +102,7 @@ class TestFullReserve(ZetesReserveTest):
 
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': constants.RESERVE_ASSIGNMENT,
+            'assignmentType': constants.REASSORT_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,
@@ -193,7 +193,7 @@ class TestFullReserve(ZetesReserveTest):
 
         request_picking_params = Parameters(assignement_obj)
         request_picking_params.update({
-            'assignmentType': constants.RESERVE_ASSIGNMENT,
+            'assignmentType': constants.REASSORT_ASSIGNMENT,
             'requestType': '1',
             'tripCounter': '1',
             'Cri01': medic_picking_code,

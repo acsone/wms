@@ -9,7 +9,6 @@
             <xpath expr="//field[@name='priority']" position="after">
                 <field name="zetes_state" readonly="1"/>
                 <field name="is_zetes_error" readonly="1"/>
-                <field name="zetes_picking_type" readonly="1"/>
                 <field name="checksum" readonly="1"/>
                 <field name="printed" readonly="1"/>
             </xpath>

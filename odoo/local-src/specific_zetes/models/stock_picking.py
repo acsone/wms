@@ -28,14 +28,6 @@ class StockPicking(models.Model):
         copy=False,
         required=True)
     is_zetes_error = fields.Boolean('Zetes error', copy=False)
-    zetes_picking_type = fields.Selection([
-        (constants.PICKING_ASSIGNMENT, 'Customer'),
-        (constants.PARKING_ASSIGNMENT, 'Parking'),
-        (constants.RESERVE_ASSIGNMENT, 'Reserve')],
-        string="Picking type",
-        default=constants.PICKING_ASSIGNMENT,
-        required=True,
-    )
 
     @api.model
     def default_get(self, fields_list):

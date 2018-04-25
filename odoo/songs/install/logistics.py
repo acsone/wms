@@ -9,6 +9,11 @@ from anthem.lyrics.loaders import load_csv_stream
 
 from ..common import req
 
+# Assignment types
+PICKING_ASSIGNMENT = '1'
+RANGEMENT_ASSIGNMENT = '2'
+REASSORT_ASSIGNMENT = '3'
+
 
 @anthem.log
 def company_settings(ctx):
@@ -603,6 +608,7 @@ def create_picking_types(ctx):
          'sequence': 30,
          'picking_zone_id': ctx.env.ref(
              '__setup__.picking_zone_medicament').id,
+         'zetes_picking_type': RANGEMENT_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_ali',
          'name': 'Rangement Aliments',
@@ -614,6 +620,7 @@ def create_picking_types(ctx):
          'color': color_rangement,
          'sequence': 31,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
+         'zetes_picking_type': RANGEMENT_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_materiel',
          'name': 'Rangement Matériel',
@@ -625,6 +632,7 @@ def create_picking_types(ctx):
          'color': color_rangement,
          'sequence': 32,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
+         'zetes_picking_type': RANGEMENT_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_rangement_frigo',
          'name': 'Rangement Frigo',
@@ -636,6 +644,7 @@ def create_picking_types(ctx):
          'color': color_rangement,
          'sequence': 33,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
+         'zetes_picking_type': RANGEMENT_ASSIGNMENT,
          },
 
         {'xmlid': '__setup__.stock_picking_type_reassort_medoc',
@@ -649,6 +658,7 @@ def create_picking_types(ctx):
          'sequence': 40,
          'picking_zone_id': ctx.env.ref(
              '__setup__.picking_zone_medicament').id,
+         'zetes_picking_type': REASSORT_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_reassort_ali',
          'name': 'Reassort Aliments',
@@ -660,6 +670,7 @@ def create_picking_types(ctx):
          'color': color_reassort,
          'sequence': 41,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
+         'zetes_picking_type': REASSORT_ASSIGNMENT,
          },
 
         {'xmlid': 'stock.picking_type_internal',
@@ -680,6 +691,7 @@ def create_picking_types(ctx):
          'color': color_pick,
          'sequence': 60,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_materiel').id,
+         'zetes_picking_type': PICKING_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_ali',
          'name': 'Pick Aliments',
@@ -694,6 +706,7 @@ def create_picking_types(ctx):
          'sequence': 61,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_aliments').id,
          'is_portable_printer': True,
+         'zetes_picking_type': PICKING_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_medoc',
          'name': 'Pick Médicaments',
@@ -708,6 +721,7 @@ def create_picking_types(ctx):
          'sequence': 62,
          'picking_zone_id': ctx.env.ref(
              '__setup__.picking_zone_medicament').id,
+         'zetes_picking_type': PICKING_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_froid',
          'name': 'Pick Frigo',
@@ -721,6 +735,7 @@ def create_picking_types(ctx):
          'color': color_pick,
          'sequence': 63,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
+         'zetes_picking_type': PICKING_ASSIGNMENT,
          },
         {'xmlid': '__setup__.stock_picking_type_humain',
          'name': 'Pick Humain',
@@ -734,6 +749,7 @@ def create_picking_types(ctx):
          'color': color_pick,
          'sequence': 64,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_humain').id,
+         'zetes_picking_type': PICKING_ASSIGNMENT,
          },
 
         {'xmlid': 'stock_expired.picking_type_scrap',

@@ -19,7 +19,7 @@ class TestAssignemnt(ZetesParkingTest):
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,
             'Cri02': None,
-            'assignmentType': constants.PARKING_ASSIGNMENT,
+            'assignmentType': constants.RANGEMENT_ASSIGNMENT,
             'requestType': '1',
         })
 
@@ -53,8 +53,8 @@ class TestAssignemnt(ZetesParkingTest):
         # Create the picking
         picking = report.create_parking_picking()
 
-        self.assertEqual(picking.zetes_picking_type,
-                         constants.PARKING_ASSIGNMENT)
+        self.assertEqual(picking.picking_type_id.zetes_picking_type,
+                         constants.RANGEMENT_ASSIGNMENT)
 
         # Check with no current picking
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
@@ -62,7 +62,7 @@ class TestAssignemnt(ZetesParkingTest):
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,
             'Cri02': None,
-            'assignmentType': constants.PARKING_ASSIGNMENT,
+            'assignmentType': constants.RANGEMENT_ASSIGNMENT,
             'requestType': '1',
         })
 

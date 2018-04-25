@@ -109,8 +109,8 @@ class Location(DomainInterface):
             })
             return result.format()
 
-        if pack_op.picking_id.zetes_picking_type == \
-                constants.PARKING_ASSIGNMENT:
+        if pack_op.picking_id.picking_type_id.zetes_picking_type == \
+                constants.RANGEMENT_ASSIGNMENT:
             if location.kind != 'reserve':
                 result.update({
                     'respCode': constants.RESPONSE_CODE_ERROR,
