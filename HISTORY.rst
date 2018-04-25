@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Invoice: show description and comment if any. Add a column on the SO report to display the product code (to align with invoice display behavior). As there is a column with product code on the SO/invoice, do not put internal code prefix on the line description.
 
 * ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier

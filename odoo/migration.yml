@@ -279,8 +279,10 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/sample/products_only_belgium.csv
       addons:
         upgrade:
+          - specific_sale
           - specific_partner
           - specific_sale
+          - specific_report
           - web_tree_dynamic_colored_field
           - specific_zetes
           - connector_esb

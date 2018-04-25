@@ -17,6 +17,7 @@
 
             <thead>
                 <tr>
+                    <th>Product reference</th>
                     <th>Description</th>
                     <th class="text-right">Quantity</th>
 
@@ -78,6 +79,7 @@
 
                 <!-- BEGIN: Replace entirely -->
                 <tr>
+                    <td><span t-field="l.product_id.default_code"/></td>
                     <td><span t-field="l.name"/></td>
                     <td class="text-right">
                         <span t-field="l.product_uom_qty"/>

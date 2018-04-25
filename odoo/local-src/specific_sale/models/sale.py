@@ -264,8 +264,27 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id')
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
+
+        # As there is a column with product code on the SO/invoice, do not put
+        # internal code prefix on the line description. This rule applies for
+        # SO and Invoice at product onchange as invoice line description is
+        # copied from SO line description.
+        product = self.product_id.with_context(
+            lang=self.order_id.partner_id.lang,
+            partner=self.order_id.partner_id.id,
+            quantity=self.product_uom_qty,
+            date=self.order_id.date_order,
+            pricelist=self.order_id.pricelist_id.id,
+            uom=self.product_uom.id
+        )
+        name = product.name
+        if product.description_sale:
+            name += '\n' + product.description_sale
+
         if self.supplier_break:
-            self.name = self.name + '\r' + _('Out of stock at supplier level')
+            name = name + '\r' + _('Out of stock at supplier level')
+
+        self.name = name
         return result
 
     @api.multi

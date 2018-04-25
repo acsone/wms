@@ -94,7 +94,7 @@
                                     <span t-field="line.product_id.default_code"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.product_id.name"/>
+                                    <span t-field="line.name"/>
                                 </td>
                                 <td>
                                     <span t-esc="int(line.quantity)"/>
@@ -138,6 +138,9 @@
                         </t>
                     </t>
                     <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+                    <t t-if="invoice.comment">
+                        <tr><td colspan="8" style="white-space: pre-wrap; border-top:1px solid black"><span t-esc="invoice.comment"/></td></tr>
+                    </t>
                 </tbody>
             </table>
             <div t-if="invoice.partner_id.country_id and invoice.partner_id.country_id.intrastat and invoice.partner_id.country_id != invoice.env.ref('base.be')">

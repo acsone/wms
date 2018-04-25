@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, at_install, post_install
 
 
 class TestCreateTicketWizard(TransactionCase):
@@ -33,6 +33,8 @@ class TestCreateTicketWizard(TransactionCase):
         self.so1.action_confirm()
         self.picking = self.so1.picking_ids[0]
 
+    @at_install(False)
+    @post_install(True)
     def test_get_wizard_to_create_ticket(self):
         """Test we get the wizard to create tickets."""
         r = self.env['create.helpdesk.ticket'].create({
@@ -41,6 +43,8 @@ class TestCreateTicketWizard(TransactionCase):
         w = self.env['helpdesk.ticket'].new_one(r)
         self.assertEqual(w['res_id'], r.id)
 
+    @at_install(False)
+    @post_install(True)
     def test_create_ticket_for_stock_picking(self):
         """Create a new ticket for a picking with the wizard model"""
         r = self.env['create.helpdesk.ticket'].create({
