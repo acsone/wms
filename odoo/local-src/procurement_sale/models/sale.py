@@ -4,6 +4,7 @@
 
 from odoo import models, api, fields, _
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class SaleOrder(models.Model):
@@ -32,6 +33,28 @@ class SaleOrder(models.Model):
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
+
+    @api.multi
+    def write(self, values):
+        """ If the route has changed, we need to adapt the procurement. Cancel
+        it and recreate it """
+        changed_lines = False
+        if 'route_id' in values:
+            changed_lines = self.filtered(lambda r: r.state == 'sale')
+            if changed_lines:
+                changed_lines.mapped('procurement_ids').cancel()
+                if 'product_uom_qty' in values:
+                    # then procurement is already recreated in standard
+                    precision = self.env['decimal.precision'].precision_get(
+                        'Product Unit of Measure')
+                    changed_lines -= self.filtered(
+                        lambda r: r.state == 'sale' and float_compare(
+                            r.product_uom_qty, values['product_uom_qty'],
+                            precision_digits=precision) == -1)
+        result = super(SaleOrderLine, self).write(values)
+        if changed_lines:
+            changed_lines._action_procurement_create()
+        return result
 
     @api.multi
     def _prepare_order_line_procurement(self, group_id):
