@@ -170,16 +170,14 @@ def import_account_journal(ctx):
         'name': 'Opérations Diverses'
     })
 
+    # Cash journal must be of type Miscellaneous as entries are encoded
+    # manually
+    cash = ctx.env['account.journal'].search(
+        [('name', '=', 'Cash')])
+    cash.write({'type': 'general'})
+
     content = resource_stream(req, 'data/install/account.journal.csv')
     load_csv_stream(ctx, 'account.journal', content, delimiter=',')
-
-    # Odoo will load this journal and create an translation in French
-    # However even if you load the extra_i18n file, Odoo will not
-    # overwrite the translation.
-    wage_journal = ctx.env.ref('__setup__.wage_journal')
-    wage_journal.with_context(lang='fr_BE').write({
-        'name': 'Salaire'
-    })
 
     # Set the flag "update_posted" on following journals
     # These journals have no XMLid
