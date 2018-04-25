@@ -384,8 +384,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_food(self):
         """Disallow all products from food categories."""
-        target_groups = ['specific_partner.partner_category_other',
-                         'specific_partner.partner_category_only_material',
+        target_groups = ['specific_partner.partner_category_only_material',
                          ]
         food = self.env.ref('specific_data.product_categ_ali')
         if not self.product_id.categ_id.has_for_parent(food.id):
@@ -399,8 +398,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc(self):
         """Disallow all products from medicines categories."""
-        target_groups = ['specific_partner.partner_category_other',
-                         'specific_partner.partner_category_only_material',
+        target_groups = ['specific_partner.partner_category_only_material',
                          ]
         medoc = self.env.ref('specific_data.product_categ_medoc')
         if not self.product_id.categ_id.has_for_parent(medoc.id):
