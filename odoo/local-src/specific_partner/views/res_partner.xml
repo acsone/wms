@@ -16,6 +16,7 @@
                     <field name="suite"/>
                     <field name="call_name"/>
                     <field name="ref"/>
+                    <field name="master_partner_id"/>
                 </group>
             </xpath>
 

@@ -32,6 +32,11 @@ class ResPartner(models.Model):
         string='Pharmacist associated to',
     )
 
+    master_partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Customer master'
+    )
+
     # temporary field to get the data and make it
     # possible to create contacts by hand in Odoo
     suite = fields.Char(
