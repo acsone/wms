@@ -7,7 +7,18 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Invoice: show description and comment if any. Add a column on the SO report to display the product code (to align with invoice display behavior). As there is a column with product code on the SO/invoice, do not put internal code prefix on the line description.
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.18.7 (2018-04-25)
+++++++++++++++++++++
+
+**Features and Improvements**
 
 * ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
@@ -15,15 +26,12 @@ Unreleased
 * ALCN-1216: Add quantity canceled on sale order line
 * ALCN-1262: Add create helpdesk ticket from picking operation line
 * ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
+* Invoice: show description and comment if any. Add a column on the SO report to display the product code (to align with invoice display behavior). As there is a column with product code on the SO/invoice, do not put internal code prefix on the line description.
 
 **Bugfixes**
 
 * ALCN-1285: Fix crash on opening stock picking
 * Fix rights on esbflux when managing promotions
-
-**Build**
-
-**Documentation**
 
 
 10.18.6 (2018-04-18)
