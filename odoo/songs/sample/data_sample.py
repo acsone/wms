@@ -200,7 +200,8 @@ def import_delivery_round_config(ctx):
 def import_sale_orders(ctx):
     """ Importing sale orders from csv"""
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
+    load_ctx.update({'tracking_disable': True,
+                     'no_connector_export': True})
     SaleOrder = ctx.env['sale.order'].with_context(load_ctx)
     content = resource_stream(req, 'data/sample/sale_order.csv')
     load_csv_stream(ctx, SaleOrder, content, delimiter=',')
