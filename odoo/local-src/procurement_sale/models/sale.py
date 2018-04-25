@@ -2,7 +2,8 @@
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, fields
+from odoo import models, api, fields, _
+from odoo.exceptions import UserError
 
 
 class SaleOrder(models.Model):
@@ -36,6 +37,10 @@ class SaleOrderLine(models.Model):
     def _prepare_order_line_procurement(self, group_id):
         vals = super(SaleOrderLine, self)._prepare_order_line_procurement(
             group_id=group_id)
+        if not self.order_id.confirmation_date:
+            raise UserError(_(
+                'Missing sale order confirmation date. '
+                'Cannot plan delivery procurement order'))
         vals['date_planned'] = self.order_id.confirmation_date
         if self.route_id.priority:
             vals['priority'] = self.route_id.priority
