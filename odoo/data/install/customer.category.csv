@@ -8,3 +8,9 @@ __setup__.customer_category_fonctionnaire,Fonctionnaire
 __setup__.customer_category_inseminateur,Inseminateur
 __setup__.customer_category_comportementaliste,comportementaliste
 __setup__.customer_category_enseignant,Enseignant Université
+__setup__.customer_category_sous_veto,Organisme sous resp. véto
+__setup__.customer_category_universite,Université
+__setup__.customer_category_caisse_alcyon,Caisse Alcyon
+__setup__.customer_category_caisse_pasteur,Caisse Pasteur
+__setup__.customer_category_autres,Autres
+__setup__.customer_category_divers,Divers

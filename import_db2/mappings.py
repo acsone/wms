@@ -151,18 +151,13 @@ USERS = {
 PARTNER_ALCYON_CATEGORY = {
     1: 'specific_partner.partner_category_veterinary',
     2: 'specific_partner.partner_category_pharmacy',
-    3: 'specific_partner.partner_category_veto',
     4: 'specific_partner.partner_category_callcenter',
     5: 'specific_partner.partner_category_small_wholesaler',
     6: 'specific_partner.partner_category_epece',
     7: 'specific_partner.partner_category_pharma_health',
-    8: 'specific_partner.partner_category_university',
     9: 'specific_partner.partner_category_pharma_belgium',
     10: 'specific_partner.partner_category_human_pasteur',
     11: 'specific_partner.partner_category_customerexport',
-    12: 'specific_partner.partner_category_fund_alcyon',
-    13: 'specific_partner.partner_category_fund_pasteur',
-    14: 'specific_partner.partner_category_other',
     15: 'specific_partner.partner_category_life',
     16: 'specific_partner.partner_category_multipharma',
     17: 'specific_partner.partner_category_backup',
@@ -176,7 +171,13 @@ PARTNER_ALCYON_CATEGORY = {
     #
     # 97: specific_partner.partner_category_user'
     # 98: 'specific_partner.partner_category_supplier'
-    99: 'specific_partner.partner_category_various',
+    # Those become Customer Tags see below
+    # 3: 'specific_partner.partner_category_veto',
+    # 8: 'specific_partner.partner_category_university',
+    # 12: 'specific_partner.partner_category_fund_alcyon',
+    # 13: 'specific_partner.partner_category_fund_pasteur',
+    # 14: 'specific_partner.partner_category_other',
+    # 99: 'specific_partner.partner_category_various',
 }
 
 CUSTOMER_CATEGORY = {
@@ -189,6 +190,16 @@ CUSTOMER_CATEGORY = {
     'cpcl23': '__setup__.customer_category_inseminateur',
     'cpcl24': '__setup__.customer_category_comportementaliste',
     'cpcl25': '__setup__.customer_category_enseignant',
+}
+
+# Some Alcyon Category are not imported but set as Tags on the customer in Odoo
+ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY = {
+    3: '__setup__.customer_category_sous_veto',
+    8: '__setup__.customer_category_universite',
+    12: '__setup__.customer_category_caisse_alcyon',
+    13: '__setup__.customer_category_caisse_pasteur',
+    14: '__setup__.customer_category_autres',
+    99: '__setup__.customer_category_divers',
 }
 
 SUPPLIER_CATEGORY = {

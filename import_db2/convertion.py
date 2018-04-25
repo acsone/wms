@@ -529,7 +529,12 @@ class CustomerMapper(EntityMapper):
             mappings.CUSTOMER_CATEGORY[field_name]
             for field_name in mappings.CUSTOMER_CATEGORY.keys()
             if db2_entity[field_name] == 'Y'
-        ]) or None
+        ] + [
+            mappings.ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY[cat]
+            for cat in [db2_entity.get('clista')]
+            if cat in mappings.ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY.keys()
+            ]
+        ) or None
 
     def convert_pharmacist(self, odoo_entity, db2_entity):
         db2_id = db2_entity.get('cpcpha')

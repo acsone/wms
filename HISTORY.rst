@@ -56,6 +56,7 @@ Unreleased
 * ALCN-1262: Add create helpdesk ticket from picking operation line
 * ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
 * Invoice: show description and comment if any. Add a column on the SO report to display the product code (to align with invoice display behavior). As there is a column with product code on the SO/invoice, do not put internal code prefix on the line description.
+* ALCN-1256: Change import customer, some Alcyon category become a Tags on customer
 
 **Bugfixes**
 
