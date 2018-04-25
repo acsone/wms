@@ -13,6 +13,7 @@
         'stock',
         'stock_picking_assignment',
         'stock_production_lot_expired_dates',
+        'specific_helpdesk',
     ],
     'data': [
         'views/stock_pack_operation.xml',

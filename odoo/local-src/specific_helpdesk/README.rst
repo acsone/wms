@@ -1,9 +1,8 @@
-
 ===========================
 Specifc Helpdesk for Alcyon
 ===========================
 
-This module adds Alcyon specific models, fields and logic for helpdesk module.
+This module improve the helpdesk module to manage the claims in Alcyon.
 
 
 Helpdesk Ticket Reason
@@ -39,10 +38,8 @@ On following models, add smartbutton to access quickly to all linked helpdesk ti
 * Purchase order
 
 
-Credits
-=======
-
 Contributors
 ------------
 
 * Akim Juillerat <akim.juillerat@camptocamp.com>
+* Thierry Ducrest <thierry.ducrest@camptocamp.com>

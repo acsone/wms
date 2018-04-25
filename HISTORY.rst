@@ -88,6 +88,7 @@ Unreleased
 * Stock reservation: Disable force availability
 
 * ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
+* ALCN-1262: Add create helpdesk ticket from picking operation line
 
 **Bugfixes**
 

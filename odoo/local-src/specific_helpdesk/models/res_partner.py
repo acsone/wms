@@ -26,12 +26,8 @@ class ResPartner(models.Model):
     @api.multi
     def action_view_helpdesk_tickets(self):
         self.ensure_one()
-
         action_data = self.env.ref(
             'helpdesk.helpdesk_ticket_action_main_tree'
         ).read()[0]
-        action_data['domain'] = [
-            ('partner_id', '=', self.id)
-        ]
-
+        action_data['domain'] = [('partner_id', '=', self.id)]
         return action_data
