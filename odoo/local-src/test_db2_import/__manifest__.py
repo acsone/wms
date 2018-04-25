@@ -50,7 +50,6 @@
      'pricelist_discount',
      'procurement_sale',
      'product_additional',
-     'refund_invoice',
      'sale_cancel_remaining',
      'specific_account',
      'specific_base',
