@@ -268,10 +268,19 @@ migration:
           - stock_disable_force_availability_button
           - stock_product_bin
     - version: 10.18.7
+      modes:
+        full:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
+        sample:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/sample/products_only_belgium.csv
       addons:
         upgrade:
-          - specific_sale
           - specific_partner
+          - specific_sale
           - web_tree_dynamic_colored_field
           - specific_zetes
       operations:

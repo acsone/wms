@@ -5,6 +5,7 @@
 import odoo.addons.decimal_precision as dp
 
 from odoo import api, fields, models, _
+# from odoo.exceptions import ValidationError
 
 
 class Sale(models.Model):
@@ -112,6 +113,13 @@ class Sale(models.Model):
 
         return result
 
+    # @api.constrains('ignore_exception', 'order_line', 'state')
+    # def sale_check_exception(self):
+    #     try:
+    #         super(Sale, self).sale_check_exception()
+    #     except ValidationError:
+    #         print('Validation Exception !!!')
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -135,13 +143,13 @@ class SaleOrderLine(models.Model):
             ],
             order='id'
         )
-
         for line in self:
             exception = ''
             if line.product_id:
                 for rule in line_exceptions:
                     if self.env['sale.order']._rule_eval(rule, 'line', line):
                         exception = rule.description
+                        line.order_id.main_exception_id = rule
                         break
             line.exception = exception
 
@@ -349,3 +357,146 @@ class SaleOrderLine(models.Model):
                 line.next_expected_date_for_receipt = move.date_expected
             else:
                 line.next_expected_date_for_receipt = False
+
+    # Vallidation rules for sale order lines, used by the sale_exception module
+    # It works by restrictions, so any client alcyon categories not referenced
+    # in here would have all the rights !
+    #
+    @api.multi
+    def validate_no_food(self):
+        """Disallow all products from food categories."""
+        target_groups = ['specific_partner.partner_category_other',
+                         'specific_partner.partner_category_only_material',
+                         ]
+        food = self.env.ref('specific_data.product_categ_ali')
+        if not self.product_id.categ_id.has_for_parent(food.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    @api.multi
+    def validate_no_medoc(self):
+        """Disallow all products from medicines categories."""
+        target_groups = ['specific_partner.partner_category_other',
+                         'specific_partner.partner_category_only_material',
+                         ]
+        medoc = self.env.ref('specific_data.product_categ_medoc')
+        if not self.product_id.categ_id.has_for_parent(medoc.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    # Disallow only some sub category of medicines
+    @api.multi
+    def validate_no_medoc_cascade_import(self):
+        """Disallow all products from medicines cascade importation."""
+        target_groups = ['specific_partner.partner_category_customerexport',
+                         'specific_partner.partner_category_student',
+                         'specific_partner.partner_category_med_export',
+                         ]
+        base_category = self.env.ref('specific_data.product_categ_importation')
+        if not self.product_id.categ_id.has_for_parent(base_category.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    @api.multi
+    def validate_no_medoc_veterinary_belge(self):
+        """Disallow all products from medicines veterinary belge."""
+        target_groups = ['specific_partner.partner_category_customerexport',
+                         'specific_partner.partner_category_student',
+                         ]
+        base_category = self.env.ref('specific_data.product_categ_vet_belges')
+        if not self.product_id.categ_id.has_for_parent(base_category.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    @api.multi
+    def validate_no_medoc_human(self):
+        """Disallow all products from medicines human."""
+        target_groups = ['specific_partner.partner_category_customerexport',
+                         'specific_partner.partner_category_callcenter',
+                         'specific_partner.partner_category_pharmacy',
+                         'specific_partner.partner_category_student',
+                         'specific_partner.partner_category_med_export',
+                         ]
+        base_category = self.env.ref('specific_data.product_categ_humain')
+        if not self.product_id.categ_id.has_for_parent(base_category.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    # Dissallow sub sub category of medicines
+    @api.multi
+    def validate_no_medoc_vet_stupefiant(self):
+        """Disallow all products from medicines stupefiants."""
+        target_groups = ['specific_partner.partner_category_veterinary',
+                         'specific_partner.partner_category_alcyonaire',
+                         'specific_partner.partner_category_med_export',
+                         ]
+        base_category = self.env.ref('specific_data.product_categ_stupefiant')
+        if not self.product_id.categ_id.has_for_parent(base_category.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    @api.multi
+    def validate_no_medoc_vet_psychoIII(self):
+        """Disallow all products from medicines psycho III."""
+        target_groups = ['specific_partner.partner_category_med_export',
+                         ]
+        base_category = self.env.ref(
+            'specific_data.product_categ_psychotropes_25')
+        if not self.product_id.categ_id.has_for_parent(base_category.id):
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    @api.multi
+    def validate_no_medoc_belgium_only(self):
+        """Disallow products which are for Belgium only"""
+        target_groups = ['specific_partner.partner_category_customerexport',
+                         'specific_partner.partner_category_med_export',
+                         ]
+        if not self.product_id.belgium_only:
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False
+
+    def validate_no_veterinary_product(self):
+        """Disallow products which are only for veterinary"""
+        target_groups = ['specific_partner.partner_category_customerexport',
+                         'specific_partner.partner_category_pharmacy',
+                         ]
+        if not self.product_id.veterinary_only:
+            return False
+        for group_xmlid in target_groups:
+            group = self.env.ref(group_xmlid)
+            if self.order_id.partner_id.alcyon_category_id == group:
+                return True
+        return False

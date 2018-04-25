@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, post_install, at_install
 
 
 class TestPricelistDiscount(TransactionCase):
@@ -106,6 +106,8 @@ class TestPricelistDiscount(TransactionCase):
         self.sol_p1 = self.sale.order_line[0]
         self.sol_p2 = self.sale.order_line[1]
 
+    @post_install(True)
+    @at_install(False)
     def test_onchange_partner(self):
         partner = self.env['res.partner'].create({
             'name': 'Unittest other partner',
@@ -125,6 +127,8 @@ class TestPricelistDiscount(TransactionCase):
             self.discount_pricelist_id, sale.discount_pricelist_id
         )
 
+    @post_install(True)
+    @at_install(False)
     def test_sale_discounts(self):
         for line in self.sale.order_line:
             line.product_id_change()
@@ -145,6 +149,8 @@ class TestPricelistDiscount(TransactionCase):
 
         self.assertEqual(432, self.sale.amount_total)
 
+    @post_install(True)
+    @at_install(False)
     def test_sale_discounts_tax_excluded(self):
         self.tax.amount = 20
 
@@ -171,6 +177,8 @@ class TestPricelistDiscount(TransactionCase):
 
         self.assertEqual(518.4, self.sale.amount_total)
 
+    @post_install(True)
+    @at_install(False)
     def test_sale_discounts_tax_included(self):
         self.tax.amount = 20
         self.tax.price_include = True
@@ -198,6 +206,8 @@ class TestPricelistDiscount(TransactionCase):
 
         self.assertEqual(432, self.sale.amount_total)
 
+    @post_install(True)
+    @at_install(False)
     def test_no_supplier_promotion(self):
         self.sale.supplier_promotion_allowed = False
 
@@ -308,6 +318,8 @@ class TestPricelistDiscount(TransactionCase):
 
         self.assertEqual(0.44, self.sol_p2.price_subtotal)
 
+    @post_install(True)
+    @at_install(False)
     def test_create_invoice(self):
         self.tax.amount = 20
 

@@ -148,6 +148,7 @@ Unreleased
 * Allow to use numpad point in float numbers
 * Add in Stock Valution Report last in/out dates for stock depreciation
 * Launch import of 3 years of order on C2C_PLATFORM
+* ALCN-1214: Add restriction rules on sale order lines
 
 **Bugfixes**
 

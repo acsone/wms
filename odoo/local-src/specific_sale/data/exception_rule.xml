@@ -1,21 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">
+<odoo noupdate="0">
 
-        <record id="narcotic_forbidden" model="exception.rule">
-            <field name="name">Produits stupéfiants interdits</field>
-            <field name="description">Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT</field>
-            <!--<field name="active">True</field>-->
+        <!-- Main category restrictions -->
+        <record id="no_food_allowed" model="exception.rule">
+            <field name="name">No Food Product Allowed</field>
+            <field name="description">Catégorie aliments pas autorisée</field>
+            <field name="active">True</field>
             <field name="sequence">10</field>
             <field name="rule_group">sale</field>
             <field name="model">sale.order.line</field>
             <field name="code">
-veterinary = object.env.ref('specific_partner.partner_category_veterinary')
-if object.order_id.partner_id.alcyon_category_id != veterinary:
-    narcotic = object.env.ref('specific_data.product_categ_medoc')
-    if object.product_id.categ_id == narcotic:
-        failed=True
+failed = object.validate_no_food()
             </field>
         </record>
+
+        <record id="no_medoc_allowed" model="exception.rule">
+            <field name="name">No Medoc Product Allowed</field>
+            <field name="description">Catégorie médicaments pas autorisée</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc()
+            </field>
+        </record>
+
+        <!-- Sub category medicines restrictions -->
+        <record id="no_medoc_cascade_import" model="exception.rule">
+            <field name="name">No Medoc Cacade Import</field>
+            <field name="description">Médicaments cascade import pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_cascade_import()
+            </field>
+        </record>
+
+        <record id="no_medoc_veterinary_belge" model="exception.rule">
+            <field name="name">No Medoc Veterinary Belges</field>
+            <field name="description">Médicaments vétérinaire belge pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_veterinary_belge()
+            </field>
+        </record>
+
+        <record id="no_medoc_human" model="exception.rule">
+            <field name="name">No Medoc Human</field>
+            <field name="description">Médicaments humains pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_human()
+            </field>
+        </record>
+
+        <!-- Sub sub category medicines restrictions -->
+        <record id="no_medoc_vet_stup" model="exception.rule">
+            <field name="name">No Medoc Veterinary Belge Stupéfiant</field>
+            <field name="description">Médicaments stupéfiants pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_vet_stupefiant()
+            </field>
+        </record>
+
+        <record id="no_medoc_vet_stupIII" model="exception.rule">
+            <field name="name">No Medoc Psycho III</field>
+            <field name="description">Médicaments psychotropes pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_vet_psychoIII()
+            </field>
+        </record>
+
+        <record id="no_medoc_belgium_only" model="exception.rule">
+            <field name="name">No Belgium Only Medoc</field>
+            <field name="description">Médicaments seulement pour la Belgique pas autorisés</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_medoc_belgium_only()
+            </field>
+        </record>
+
+        <record id="no_veterinary_product" model="exception.rule">
+            <field name="name">No Veterinary Only Product</field>
+            <field name="description">Produits seulement pour les vétérinaires</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_veterinary_product()
+            </field>
+        </record>
+
+
+      <!-- General exceptions not enabled, test only or ? Should keep ? -->
 
         <record id="no_line_at_zero" model="exception.rule">
             <field name="name">Pas de ligne à zéro</field>

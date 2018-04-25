@@ -43,6 +43,9 @@ class ProductTemplate(models.Model):
 
     web_published = fields.Boolean(string="Published on website")
 
+    veterinary_only = fields.Boolean(string='Veterinary only')
+    belgium_only = fields.Boolean(string='Belgium only')
+
     def _compute_sale_price_2(self):
         for product in self:
             pricelist = self.env.ref('specific_data.product_pricelist_pb2')

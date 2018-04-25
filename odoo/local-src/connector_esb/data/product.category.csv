@@ -15,12 +15,10 @@ specific_data.product_categ_vasculo,10
 specific_data.product_categ_vitamines,11
 specific_data.product_categ_vaccins,12
 specific_data.product_categ_divers_veto,14
-specific_data.product_categ_ketamine,16
 specific_data.product_categ_hormones,23
 specific_data.product_categ_psychotropes_25,30
 specific_data.product_categ_stupefiant,31
 specific_data.product_categ_topiques,44
-specific_data.product_categ_psychotropes_38,62
 specific_data.product_categ_phytosanitaires,18
 specific_data.product_categ_homeo,20
 specific_data.product_categ_chimiques,29

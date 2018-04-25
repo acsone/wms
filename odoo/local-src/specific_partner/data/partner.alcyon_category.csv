@@ -2,7 +2,7 @@ id,name,esb_ref
 partner_category_veterinary,Vétérinaires avec dépôt,01 - Vétérinaires
 partner_category_pharmacy,Pharmaciens et Grossistes humains,02 - Pharmacies
 partner_category_veto,Organisme sous resp. véto,03 - Organisme sous resp. véto
-partner_category_callcenter,Grossistes vétérinaires et Callcenter,04 - Pharmaciens répartiteurs
+partner_category_callcenter,Grossistes vétérinaires,04 - Pharmaciens répartiteurs
 partner_category_small_wholesaler,Petits grossistes,05 - Petits grossistes
 partner_category_epece,Epécé,06 - Epécé
 partner_category_pharma_health,Pharma Santé,07 - Pharma Santé
@@ -19,6 +19,9 @@ partner_category_backup,Sauvegarde,17 - Sauvegarde
 partner_category_alpharepartition,Alpha-Répartition,18 - Alpha-Répartition
 partner_category_vpharma,V Pharma,19 - V Pharma
 partner_category_student,Etudiants et assimilés sans dépôt,20 - Etudiants
+partner_category_alcyonaire,Alcyonnaire,21 - Alcyonnaire
+partner_category_med_export,Médicament export,22 - Médicament export
+partner_category_only_material,Exclusif matériel,23 - Exclusif matériel
 partner_category_user,Utilisateurs,97 - Utilisateurs
 partner_category_supplier,Fournisseurs,98 - Fournisseurs
 partner_category_various,Divers,99 - Divers

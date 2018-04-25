@@ -43,7 +43,9 @@ PRODUCT_CATEGORY.update({
     13: 'specific_data.product_categ_mat_sutures',
     14: 'specific_data.product_categ_divers_veto',
     15: 'specific_data.product_categ_humain',
-    16: 'specific_data.product_categ_ketamine',
+    # All product from this go to stupefiant
+    # 16: 'specific_data.product_categ_ketamine',
+    16: 'specific_data.product_categ_stupefiant',
     18: 'specific_data.product_categ_phytosanitaires',
     20: 'specific_data.product_categ_homeo',
     23: 'specific_data.product_categ_hormones',
@@ -64,7 +66,7 @@ PRODUCT_CATEGORY.update({
     59: 'specific_data.product_categ_mat_instrumentation',
     60: 'specific_data.product_categ_mat_img_echo',
     61: 'specific_data.product_categ_mat_img_radio',
-    62: 'specific_data.product_categ_psychotropes_38',
+#    62: 'specific_data.product_categ_psychotropes_38', # empty category
     63: 'specific_data.product_categ_mat_img_endo',
     66: 'specific_data.product_categ_mat_occasion',
     68: 'specific_data.product_categ_mat_conso',
@@ -147,6 +149,11 @@ PARTNER_ALCYON_CATEGORY = {
     18: 'specific_partner.partner_category_alpharepartition',
     19: 'specific_partner.partner_category_vpharma',
     20: 'specific_partner.partner_category_student',
+    # Have been added in odoo
+    # 21: 'specific_partner.partner_category_alcyonaire'
+    # 22: 'specific_partner.partner_category_med_export',
+    # 23: 'specific_partner.partner_category_only_material',
+    #
     # 97: specific_partner.partner_category_user'
     # 98: 'specific_partner.partner_category_supplier'
     99: 'specific_partner.partner_category_various',

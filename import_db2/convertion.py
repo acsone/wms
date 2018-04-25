@@ -88,6 +88,9 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'orderpoint_max', 'stomax'
         ),
+        FieldMapper(
+            'veterinary_only', 'cplz22'
+        ),
         FieldMapper('route_ids/id', 'gescde', mapping=mappings.PRODUCT_ROUTES),
         'name', 'price_category_id', 'pb2', 'manufacturer',
         'orderpoint_qty_multiple'

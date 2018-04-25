@@ -19,12 +19,10 @@ product_categ_vasculo,Médicaments du système vasculo-circ,,specific_data.produ
 product_categ_vitamines,Vitamines,,specific_data.product_categ_vet_belges,average
 product_categ_vaccins,"Vaccins, sérums",,specific_data.product_categ_vet_belges,average
 product_categ_divers_veto,Médicaments Vétérinaire Divers,,specific_data.product_categ_vet_belges,average
-product_categ_ketamine,Kétamine,,specific_data.product_categ_vet_belges,average
 product_categ_hormones,Hormones,,specific_data.product_categ_vet_belges,average
-product_categ_psychotropes_25,Psychotropes ART. 25,,specific_data.product_categ_vet_belges,average
+product_categ_psychotropes_25,Psychotropes Annexe III,,specific_data.product_categ_vet_belges,average
 product_categ_stupefiant,Stupéfiants,,specific_data.product_categ_vet_belges,average
 product_categ_topiques,Topiques,,specific_data.product_categ_vet_belges,average
-product_categ_psychotropes_38,Psychotrope ART.38,,specific_data.product_categ_vet_belges,average
 product_categ_phytosanitaires,Phytosanitaires,,specific_data.product_categ_parapharmacie,average
 product_categ_homeo,"Homéopathie, Phytotérapie",,specific_data.product_categ_parapharmacie,average
 product_categ_chimiques,Chimiques (pas d'APB),,specific_data.product_categ_parapharmacie,average

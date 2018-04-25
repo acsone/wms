@@ -49,6 +49,12 @@
             <field name="categ_id" position="after">
                 <field name="web_published"/>
             </field>
+            <xpath expr="//page[@name='sales']" position="inside">
+                <group name="sales_restriction">
+                    <field name="veterinary_only"/>
+                    <field name="belgium_only"/>
+                </group>
+            </xpath>
         </field>
     </record>
 
