@@ -329,7 +329,7 @@ PAYMENT_TERMS = {
     16: '__setup__.account_payment_term_f90',
     17: '__setup__.account_payment_term_d7',
     18: '__setup__.account_payment_term_f0',
-    19: '__setup__.account_payment_term_d15',
+    19: 'account.account_payment_term_15days',
     20: 'account.account_payment_term_immediate',
     21: '__setup__.account_payment_term_d8',
     22: '__setup__.account_payment_term_f15',
