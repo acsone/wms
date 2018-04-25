@@ -338,10 +338,13 @@ class DB2MapperPurchaseOrder(object):
         not_received_lines = []
 
         for line in lines:
-            product_xmlid = convert_product_id(line['dcfart'])
-            name = None
-            if product_xmlid == '__setup__.product_other':
-                name = "Divers"
+            product_code = line['dcfart']
+            if not product_code:
+                # skip lines without product reference
+                # those lines are replaced products
+                # we won't import replacements in history
+                continue
+            product_xmlid = convert_product_id(product_code)
             product = rec.env.ref(product_xmlid)
 
             create_date = convert_date('dcfc', line)
@@ -352,7 +355,7 @@ class DB2MapperPurchaseOrder(object):
                 'order_id': new.id,
                 'product_id': product.id,
                 'sequence': line['dcfnli'],
-                'name': name or line['dcflib'],
+                'name': line['dcflib'],
                 'product_qty': line['dcfquc'],
                 'product_uom': rec.env.ref(mappings.UOM[line['dcfunv']]).id,
                 'qty_received': line['dcfqul'],
@@ -553,7 +556,13 @@ class DB2MapperSaleOrder(object):
 
         previous_line = None
         for line in lines:
-            if line['dccart'] and line['dccart'].startswith('8888'):
+            product_code = line['dccart']
+            if not product_code:
+                # skip lines without product reference
+                # those lines are replaced products
+                # we won't import replacements in history
+                continue
+            elif product_code.startswith('8888'):
                 if not previous_line:
                     raise Exception(
                         "Cannot assign contribution tax on sale order %s\n"
@@ -562,10 +571,7 @@ class DB2MapperSaleOrder(object):
                 # For tax lines add them as tax to previous line
                 cls.add_contrib_tax(rec, line, previous_line)
                 continue
-            product_xmlid = convert_product_id(line['dccart'])
-            name = None
-            if product_xmlid == '__setup__.product_other':
-                name = "Divers"
+            product_xmlid = convert_product_id(product_code)
             product = rec.env.ref(product_xmlid)
             if line['dcccgr'] == 1 and line['dccsgr'] != 15:
                 # Free accessory, in odoo are inserted in the picking
@@ -585,7 +591,7 @@ class DB2MapperSaleOrder(object):
                 'order_id': new.id,
                 'product_id': product.id,
                 'sequence': line['dccnli'],
-                'name': name or line['dcclib'],
+                'name': line['dcclib'],
                 'product_uom_qty': line['dccquc'],
                 'product_uom': rec.env.ref('product.product_uom_unit').id,
                 'qty_delivered': line['dccqul'],

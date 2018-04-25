@@ -328,7 +328,9 @@ class TestImportSO(DB2ImportTestCase):
         """Import SO 2833868.
 
         partial delivery with Ali, Med, Mat and Fridge products
+
         one line not delivered
+        one line with no product reference (to skip)
 
         """
         ref = self.env.ref
@@ -367,7 +369,7 @@ class TestImportSO(DB2ImportTestCase):
             'origin': False,
         }
         self.check_so_values(expected_values)
-        self.assertEqual(len(self.so.order_line), 7)
+        self.assertEqual(len(self.so.order_line), 6)
         # 7 pickings
         # Aliment -> Output state: done
         # Frigo -> Output state: done
