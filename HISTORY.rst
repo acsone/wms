@@ -8,9 +8,12 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
-* ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
+* ALCN-1214: Add restriction rules on sale order lines
 * ALCN-1216: Add quantity canceled on sale order line
+* ALCN-1262: Add create helpdesk ticket from picking operation line
+* ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
 
 **Bugfixes**
 
@@ -89,9 +92,6 @@ Unreleased
 * Small improvements: Remove the view kanban for products and change the display order for partners
 * Stock reservation: Disable force availability
 
-* ALCN-1183: Add and import from db2 call_name for customer and add nom_suite in view tree
-* ALCN-1262: Add create helpdesk ticket from picking operation line
-
 **Bugfixes**
 
 * ALCN-1147: Set state to done for transfered internal transfer without any line processed
@@ -149,7 +149,6 @@ Unreleased
 * Allow to use numpad point in float numbers
 * Add in Stock Valution Report last in/out dates for stock depreciation
 * Launch import of 3 years of order on C2C_PLATFORM
-* ALCN-1214: Add restriction rules on sale order lines
 
 **Bugfixes**
 
