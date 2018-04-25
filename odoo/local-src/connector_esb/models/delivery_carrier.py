@@ -8,6 +8,6 @@ from odoo import fields, models
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    use_specific_cost_calculation = fields.Boolean(
-        string='Alcyon specific cost'
+    esb_ref = fields.Char(
+        string='Reference for ESB'
     )

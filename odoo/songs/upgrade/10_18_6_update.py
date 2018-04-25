@@ -13,6 +13,7 @@ def post(ctx):
     remove_helpdesk_team(ctx)
     reload_delivery_carrier(ctx)
     remove_implied_groups(ctx)
+    change_alcyon_delivery_carrier(ctx)
 
 
 @anthem.log
@@ -54,3 +55,15 @@ def remove_implied_groups(ctx):
     ctx.env.ref('sales_team.group_sale_salesman').write({
         'implied_ids': [(3, group_inventory.id)],
     })
+
+
+@anthem.log
+def change_alcyon_delivery_carrier(ctx):
+    """"""
+    r_id = ctx.env.ref('__setup__.deliver_carrier_alcyon',
+                       raise_if_not_found=False)
+    if r_id:
+        r_id.write({
+            'fixed_price': 0,
+            'delivery_type': 'fixed'
+        })

@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Julien Coux (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-
-from odoo import models, fields
+from odoo import fields, models
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    compute_shipping_costs_on_invoice = fields.Boolean(
-        related='carrier_id.compute_shipping_costs_on_invoice',
-        readonly=True,
+    used_for_delivery_fee = fields.Boolean(
+        'Has been used for delivery fee calculation'
     )
-
-    def _create_delivery_line(self, carrier, price_unit):
-        if not self.compute_shipping_costs_on_invoice:
-            super(SaleOrder, self)._create_delivery_line(carrier, price_unit)

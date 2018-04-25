@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Julien Coux (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2017-2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 {
     'name': 'Specific shipping costs for Alcyon',
@@ -11,17 +11,13 @@
     'depends': [
         'delivery',
         'delivery_rounds',
-        'sale',
-        'sale_stock',
-        'stock_picking_invoice_link',
+        'mrp',
         'specific_sale',
+        'specific_stock',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
-        # Views
-        'views/account_invoice.xml',
         'views/delivery_carrier.xml',
-        'views/sale_order.xml',
     ],
     'installable': True,
 }
