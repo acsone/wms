@@ -30,6 +30,7 @@ Unreleased
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
+* ALCN-1198: Delay jobs to reserve stock when the daily delivery plan is created
 * ALCN-1222: Display master customer on partner form
 * Accounting: Do not use refund journals in odoo v10. Drop Wage journal. Fix type of cash journal.
 
