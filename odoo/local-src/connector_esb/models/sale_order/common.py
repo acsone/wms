@@ -34,6 +34,8 @@ class SaleOrder(models.Model):
         order_data = self._ws_create_order_data(data)
         order_data['order_line'] = self._ws_create_order_line_data(data)
         order = self.create(order_data)
+        order.action_confirm()
+        order.confirmation_date = order.date_order
         return order
 
     def _ws_create_order_data(self, data):
@@ -43,9 +45,10 @@ class SaleOrder(models.Model):
         order_data['esb_ref'] = data['increment_id']
         order_data['partner_id'] = data['customer_id']
         order_data['date_order'] = data['date']
+        order_data['confirmation_date'] = data['date']
         order_data['client_order_ref'] = data['order_ref']
         order_data['partner_invoice_id'] = data['customer_id']
-        order_data['state'] = 'sale'
+        order_data['state'] = 'draft'
         if 'carrier_id' in data:
             carrier = self.env['delivery.carrier'].search([
                 ('esb_ref', '=', data['carrier_id'])]).exists()

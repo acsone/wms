@@ -32,6 +32,7 @@ Unreleased
 **Bugfixes**
 
 * Fix Belgium Chart of taxes. Code and name have been inverted in v10.
+* ALCN-1298: Fix sale order state and confirmation date on creation by web service.
 
 **Build**
 

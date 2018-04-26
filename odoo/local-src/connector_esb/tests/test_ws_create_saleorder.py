@@ -73,6 +73,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
                 self.assertEqual(order[k], v)
         # free line: to be skipped
         self.assertEqual(len(order.order_line), 1)
+        self.assertEqual(order.confirmation_date, '2017-09-18 00:00:00')
 
     def test_create_saleorder_shipping(self):
         carrier = self.env['delivery.carrier'].search([], limit=1)
