@@ -482,7 +482,7 @@ class CustomerMapper(EntityMapper):
         if self.importer.full:
             return None
         # Filter sample of customer by customers on subset of sale orders
-        # plus keep customers for delivery round
+        # plus keep customers for delivery round and master customers
         return (
             "clinum"
             "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
@@ -492,7 +492,12 @@ class CustomerMapper(EntityMapper):
             "               3850, 4028, 4062, 4463, 4778, 5095, 5173, 5237,"
             "               5340, 5465, 5488, 5543, 5780, 7127, 7262, 7325,"
             "               7478, 7484, 8099, 8114, 8264, 8522, 8859,"
-            "               91)" % (SO_MIN, SO_MAX)
+            "               91)"
+            # master clients (we don't use foreign key as we need to select
+            # more than only the foreign keys)
+            " OR clinum in (91, 97, 317, 351, 466, 2323, 2363, 3389, 3954,"
+            "               5026, 5446, 5522, 7967, 8114, 8865, 9052, 9242,"
+            "               9243)" % (SO_MIN, SO_MAX)
             )
 
     @staticmethod
@@ -577,6 +582,55 @@ class CustomerMapper(EntityMapper):
             db2_entity['cpcl31'], db2_entity['cpcl32']
         ]
         odoo_entity['comment'] = '\n'.join([l.strip() for l in lines if l])
+
+class MasterCustomerMapper(CustomerMapper):
+
+    XMLID_FIELD = 'id'
+    XMLID_MODEL = 'customer'
+
+    FIELDS_MAPPING = [
+        'id',
+        'master_partner_id'
+    ]
+
+    def convert_id(self, odoo_entity, db2_entity):
+        """Get customer xmlid"""
+        odoo_entity['id'] = db2_entity['clinum']
+
+    def convert_master_partner_id(self, odoo_entity, db2_entity):
+        db2_id = db2_entity.get('cpcl01')
+
+        if db2_id:
+            xml_id = self.get_xml_id('customer', db2_id, prefix='__import__')
+        else:
+            xml_id = None
+
+        odoo_entity['master_partner_id/id'] = xml_id
+
+    def get_sql_joins(self):
+        """Join with CPLCLI table and filter only client that aren't
+        master of their own.
+        """
+        return (
+            "inner join gendata.cplcli on clinum=cpcnum and clinum <> cpcl01"
+        )
+
+    def get_sql_where(self):
+        if self.importer.full:
+            return None
+        # Filter sample of customer by customers on subset of sale orders
+        # plus keep customers for delivery round
+        return (
+            "clinum"
+            "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
+            "     WHERE eccsui >= %s AND eccsui <= %s)"
+            " OR clinum in (1076, 1424, 148, 1658, 2112, 2139, 2141, 2151,"
+            "               2157, 2169, 2171, 25, 280, 3201, 3375, 351, 3753,"
+            "               3850, 4028, 4062, 4463, 4778, 5095, 5173, 5237,"
+            "               5340, 5465, 5488, 5543, 5780, 7127, 7262, 7325,"
+            "               7478, 7484, 8099, 8114, 8264, 8522, 8859,"
+            "               91)" % (SO_MIN, SO_MAX)
+        )
 
 
 class AddressMapper(EntityMapper):

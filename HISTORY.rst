@@ -14,6 +14,7 @@ Unreleased
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
 * ALCN-1070: Set purchase discount on supplier info, take the same value as sale discount for migration
 * ALCN-1102: import supplier global discount from DB2
+* ALCN-1222: Import customer relation to master customer
 * ALCN-1223: Load and Migrate Suppliers Payment Terms. Modify Client Payment Term 'Immediate Payment' to '7 days' during migration.
   ALCN-1223: Load and Migrate Suppliers Payment Modes.
 * ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
@@ -29,6 +30,7 @@ Unreleased
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
+* ALCN-1222: Display master customer on partner form
 * Accounting: Do not use refund journals in odoo v10. Drop Wage journal. Fix type of cash journal.
 
 **Bugfixes**
