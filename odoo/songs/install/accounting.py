@@ -170,16 +170,14 @@ def import_account_journal(ctx):
         'name': 'Opérations Diverses'
     })
 
+    # Cash journal must be of type Miscellaneous as entries are encoded
+    # manually
+    cash = ctx.env['account.journal'].search(
+        [('name', '=', 'Cash')])
+    cash.write({'type': 'general'})
+
     content = resource_stream(req, 'data/install/account.journal.csv')
     load_csv_stream(ctx, 'account.journal', content, delimiter=',')
-
-    # Odoo will load this journal and create an translation in French
-    # However even if you load the extra_i18n file, Odoo will not
-    # overwrite the translation.
-    wage_journal = ctx.env.ref('__setup__.wage_journal')
-    wage_journal.with_context(lang='fr_BE').write({
-        'name': 'Salaire'
-    })
 
     # Set the flag "update_posted" on following journals
     # These journals have no XMLid
@@ -299,19 +297,16 @@ def setup_sequences(ctx):
     customer_journal = journals.filtered(
         lambda a: a.name == 'Customer Invoices'
     )
-
     add_xmlid(
         ctx, customer_journal,
         '__setup__.account_journal_customer_invoices',
         noupdate=True
     )
-
     customer_journal.sequence_id.write({
         'prefix': 'FV/%(range_year)s/',
         'padding': 5,
         'use_date_range': True,
     })
-
     refund_seq = create_or_update(
         ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
             'name': 'Customer Invoices Refund',
@@ -327,13 +322,19 @@ def setup_sequences(ctx):
     })
 
     ctx.env['ir.sequence'].search([
+        ('prefix', 'ilike', 'MISC'),
+        ]).write({'prefix': 'OD/%(range_year)s/%(range_month)s/'})
+
+    purchase_journals = journals.filtered(lambda r: r.type == 'purchase')
+    for seq in (purchase_journals.mapped('sequence_id') |
+                purchase_journals.mapped('refund_sequence_id')):
+        if 'range_month' not in seq.prefix:
+            seq.prefix = seq.prefix + '%(range_month)s/'
+
+    ctx.env['ir.sequence'].search([
         ('prefix', 'ilike', 'range_year'),
         ('prefix', 'not ilike', 'range_month'),
         ]).write({'use_end_date': True})
-
-    ctx.env['ir.sequence'].search([
-        ('prefix', 'ilike', 'MISC'),
-        ]).write({'prefix': 'OD/%(range_year)s/%(range_month)s/'})
 
 
 @anthem.log

@@ -28,6 +28,8 @@ Unreleased
 * ALCN-1288: Compute fiscal position based on country
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
+* ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
+* Accounting: Do not use refund journals in odoo v10. Drop Wage journal. Fix type of cash journal.
 
 **Bugfixes**
 

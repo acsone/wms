@@ -160,7 +160,6 @@ migration:
           - procurement_sale
           - product_additional
           - product_price_category
-          - refund_invoice
           - sale_cancel_remaining
           - sale_consignment
           - specific_account
