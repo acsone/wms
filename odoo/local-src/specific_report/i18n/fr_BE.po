@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_report
+#	* specific_report
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-26 15:39+0000\n"
-"PO-Revision-Date: 2017-11-19 18:10+0000\n"
+"POT-Creation-Date: 2018-04-26 14:03+0000\n"
+"PO-Revision-Date: 2018-04-26 14:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -28,29 +27,23 @@ msgstr "%<br/>Remise<br/>fournisseur"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
-msgid ""
-"-\n"
+msgid "-\n"
 "                    <span>Fax:</span>"
-msgstr ""
-"-\n"
+msgstr "-\n"
 "                    <span>Fax:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid ""
-"<br/>\n"
+msgid "<br/>\n"
 "                                BIC:"
-msgstr ""
-"<br/>\n"
+msgstr "<br/>\n"
 "                                BIC:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
-msgid ""
-"<br/>\n"
+msgid "<br/>\n"
 "                    <span>Email:</span>"
-msgstr ""
-"<br/>\n"
+msgstr "<br/>\n"
 "                    <span>Email:</span>"
 
 #. module: specific_report
@@ -107,12 +100,10 @@ msgstr "<span>RPM Liège division Huy - TVA</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid ""
-"<span>SUMMARY</span>\n"
+msgid "<span>SUMMARY</span>\n"
 "                                <br/>\n"
 "                                <span>Total discount:</span>"
-msgstr ""
-"<span>Résumé</span>\n"
+msgstr "<span>Résumé</span>\n"
 "                            <br/>\n"
 "                            <span>Remise totale:</span>"
 
@@ -253,7 +244,7 @@ msgid "Contribution ids"
 msgstr "Contribution ids"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr "Client"
 
@@ -263,7 +254,7 @@ msgid "DEXIA:"
 msgstr "DEXIA:"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Date"
 msgstr "Date"
 
@@ -430,7 +421,7 @@ msgid "Only tax ids"
 msgstr "Taxes seules IDs"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Operator"
 msgstr "Opérateur"
 
@@ -475,7 +466,7 @@ msgid "Passport report"
 msgstr "Rapport du passeport"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Passport verification"
 msgstr "Vérification du passeport"
 
@@ -504,23 +495,15 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:53
-#, python-format
-msgid "Quotation can not be printed the client has no reference."
-msgstr "Le bon de commande ne peut être imprimé, le client n'a pas de référence"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Rate"
 msgstr "Taux"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid ""
-"Received the:<br/>\n"
+msgid "Received the:<br/>\n"
 "                            Signature:"
-msgstr ""
-"Reçu le:<br/>\n"
+msgstr "Reçu le:<br/>\n"
 "                            Signature:"
 
 #. module: specific_report
@@ -534,7 +517,7 @@ msgid "Refund"
 msgstr "Note de crédit"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Round"
 msgstr "Tournée"
 
@@ -545,9 +528,8 @@ msgstr "Tournée: <br/>"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_sale_order
-#, fuzzy
 msgid "Sales Order"
-msgstr "Ligne du bon de commande"
+msgstr "Bon de commande"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_sale_order_line
@@ -568,6 +550,12 @@ msgstr "Sous-total<br/>price"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "TVA"
 msgstr "TVA"
+
+#. module: specific_report
+#: code:addons/specific_report/models/sale_order.py:53
+#, python-format
+msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
+msgstr "Le devis ne peut pas être imprimé car le client {} ({})                  n'a pas de référence."
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:108
@@ -609,7 +597,7 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "UOP"
 msgstr "UOP"
 
@@ -635,29 +623,24 @@ msgstr "round.instance"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
-msgid ""
-"|\n"
+msgid "|\n"
 "                    <span>Fax:</span>"
-msgstr ""
-"|\n"
+msgstr "|\n"
 "                    <span>Fax:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
-msgid ""
-"|\n"
+msgid "|\n"
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
-msgstr ""
-"|\n"
+msgstr "|\n"
 "                <span>Pour les commandes;</span>\n"
 "                <span>Téléphone:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
-msgid ""
-"|\n"
+msgid "|\n"
 "                    <span>Phone:</span>"
-msgstr ""
-"|\n"
+msgstr "|\n"
 "                <span>Téléphone:</span>"
+
