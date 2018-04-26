@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.19.0 (2018-04-26)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1036: import supplier raw price instead of net price in supplierinfo
@@ -19,6 +31,7 @@ Unreleased
   ALCN-1223: Load and Migrate Suppliers Payment Modes.
 * ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
 * ALCN-1233: Set fiscal position on suppliers
+* ALCN-1256: Change import customer, some Alcyon category become a Tags on customer
 * ALCN-1266: all operations created by in progress pickings now goes to a specific location
   called "[MIGRATION] Réception des achats"
 * ALCN-1274: Skip order lines with no product ref as those lines are replaced products
@@ -26,26 +39,28 @@ Unreleased
 
 **Features and Improvements**
 
-* ALCN-1271: NL tranlation of warning message of category human drug products.
-* ALCN-1288: Compute fiscal position based on country
-* Allow to send to scrap location at reception
-* Align customer return process to reception process. Removed fixme in data setup.
 * ALCN-1187: Add warning (in description and colored line) on sale order line when product out of stock at the supplier
 * ALCN-1198: Delay jobs to reserve stock when the daily delivery plan is created
 * ALCN-1222: Display master customer on partner form
+* ALCN-1271: NL tranlation of warning message of category human drug products.
+* ALCN-1288: Compute fiscal position based on country
 * Accounting: Do not use refund journals in odoo v10. Drop Wage journal. Fix type of cash journal.
+* Allow to send to scrap location at reception
+* Align customer return process to reception process. Removed fixme in data setup.
 
 **Bugfixes**
 
-* Fix Belgium Chart of taxes. Code and name have been inverted in v10.
 * ALCN-1298: Fix sale order state and confirmation date on creation by web service.
+* Fix Belgium Chart of taxes. Code and name have been inverted in v10.
 
 **Build**
 
-* db2_import: get sale/purchase history from pre-generated csv files to limit number of querries to DB2
 * ALCN-1297: db2_import: Add environment variables DB2IMPORT_* to control the db2 importer setup
+* db2_import: get sale/purchase history from pre-generated csv files to limit number of querries to DB2
 
 **Documentation**
+
+* ALCN-1297: Document DB2IMPORT_* environment variables
 
 
 10.18.7 (2018-04-25)
@@ -60,7 +75,6 @@ Unreleased
 * ALCN-1262: Add create helpdesk ticket from picking operation line
 * ALCN-1273: Set the Zetes picking type on the picking type himselft and not on the picking
 * Invoice: show description and comment if any. Add a column on the SO report to display the product code (to align with invoice display behavior). As there is a column with product code on the SO/invoice, do not put internal code prefix on the line description.
-* ALCN-1256: Change import customer, some Alcyon category become a Tags on customer
 
 **Bugfixes**
 
