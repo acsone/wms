@@ -151,23 +151,18 @@ USERS = {
 PARTNER_ALCYON_CATEGORY = {
     1: 'specific_partner.partner_category_veterinary',
     2: 'specific_partner.partner_category_pharmacy',
-    3: 'specific_partner.partner_category_veto',
     4: 'specific_partner.partner_category_callcenter',
-    5: 'specific_partner.partner_category_small_wholesaler',
-    6: 'specific_partner.partner_category_epece',
-    7: 'specific_partner.partner_category_pharma_health',
-    8: 'specific_partner.partner_category_university',
-    9: 'specific_partner.partner_category_pharma_belgium',
-    10: 'specific_partner.partner_category_human_pasteur',
+    5: 'specific_partner.partner_category_pharmacy',
+    6: 'specific_partner.partner_category_pharmacy',
+    7: 'specific_partner.partner_category_pharmacy',
+    9: 'specific_partner.partner_category_pharmacy',
+    10: 'specific_partner.partner_category_pharmacy',
     11: 'specific_partner.partner_category_customerexport',
-    12: 'specific_partner.partner_category_fund_alcyon',
-    13: 'specific_partner.partner_category_fund_pasteur',
-    14: 'specific_partner.partner_category_other',
-    15: 'specific_partner.partner_category_life',
-    16: 'specific_partner.partner_category_multipharma',
-    17: 'specific_partner.partner_category_backup',
-    18: 'specific_partner.partner_category_alpharepartition',
-    19: 'specific_partner.partner_category_vpharma',
+    15: 'specific_partner.partner_category_pharmacy',
+    16: 'specific_partner.partner_category_pharmacy',
+    17: 'specific_partner.partner_category_pharmacy',
+    18: 'specific_partner.partner_category_pharmacy',
+    19: 'specific_partner.partner_category_pharmacy',
     20: 'specific_partner.partner_category_student',
     # Have been added in odoo
     # 21: 'specific_partner.partner_category_alcyonaire'
@@ -176,7 +171,14 @@ PARTNER_ALCYON_CATEGORY = {
     #
     # 97: specific_partner.partner_category_user'
     # 98: 'specific_partner.partner_category_supplier'
-    99: 'specific_partner.partner_category_various',
+    # Those became Customer Tags see below
+    # 3: 'specific_partner.partner_category_veto',
+    # 8: 'specific_partner.partner_category_university',
+    # 12: 'specific_partner.partner_category_fund_alcyon',
+    # 13: 'specific_partner.partner_category_fund_pasteur',
+    # 14: 'specific_partner.partner_category_other',
+    # 99: 'specific_partner.partner_category_various',
+    # And others are transform to pharmacy so adding them in tags as well
 }
 
 CUSTOMER_CATEGORY = {
@@ -189,6 +191,28 @@ CUSTOMER_CATEGORY = {
     'cpcl23': '__setup__.customer_category_inseminateur',
     'cpcl24': '__setup__.customer_category_comportementaliste',
     'cpcl25': '__setup__.customer_category_enseignant',
+}
+
+# Some Alcyon Category are not imported but set as Tags on the customer in Odoo
+ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY = {
+    3: '__setup__.customer_category_sous_veto',
+    # Those are the Alcyon Category that are transform to another Alcyon Category
+    5: '__setup__.customer_category_petit_grossiste',
+    6: '__setup__.customer_category_epece',
+    7: '__setup__.customer_category_pharma_sante',
+    9: '__setup__.customer_category_pharma_belge',
+    10: '__setup__.customer_category_pasteur_humain',
+    15: '__setup__.customer_category_life',
+    16: '__setup__.customer_category_multipharma',
+    17: '__setup__.customer_category_backup',
+    18: '__setup__.customer_category_alpharepartition',
+    19: '__setup__.customer_category_vpharma',
+
+    8: '__setup__.customer_category_universite',
+    12: '__setup__.customer_category_caisse_alcyon',
+    13: '__setup__.customer_category_caisse_pasteur',
+    14: '__setup__.customer_category_autres',
+    99: '__setup__.customer_category_divers',
 }
 
 SUPPLIER_CATEGORY = {
