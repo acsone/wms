@@ -2,7 +2,7 @@
 # © 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, at_install, post_install
 
 
 class TestSaleOrderLineQtyUnavailable(TransactionCase):
@@ -51,6 +51,8 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         })
         self.inventory.action_done()
 
+    @at_install(False)
+    @post_install(True)
     def test_01_basic(self):
         # At test beginning, the product immediately usable quantity is 0
         self.assertEqual(
