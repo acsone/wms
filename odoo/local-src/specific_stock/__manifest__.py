@@ -25,6 +25,7 @@
         'stock_picking_assignment',
         'stock_picking_zone',
         'stock_mts_mto_rule',
+        'mrp',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
