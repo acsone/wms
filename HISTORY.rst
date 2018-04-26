@@ -25,6 +25,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1271: NL tranlation of warning message of category human drug products.
 * ALCN-1288: Compute fiscal position based on country
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
