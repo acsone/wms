@@ -8,29 +8,30 @@ Unreleased
 
 **Data Migration**
 
-* ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
-* ALCN-1233: Set fiscal position on suppliers
 * ALCN-1036: import supplier raw price instead of net price in supplierinfo
 * ALCN-1036: invert import mapping of discount_global and promotion_supplier
 * ALCN-1036: set purchase picking date from DB2 header instead of line
 * ALCN-1066: Set APB tax on product in categories "Médicament vétérinaire belge" et "Cascade importation"
 * ALCN-1070: Set purchase discount on supplier info, take the same value as sale discount for migration
 * ALCN-1102: import supplier global discount from DB2
-* ALCN-1266: all operations created by in progress pickings now goes to a specific location
-  called "[MIGRATION] Réception des achats"
-* ALCN-1286: Set purchase with uom from dcfunv with value "1" as "Pièces" for the few cases that were failing
 * ALCN-1223: Load and Migrate Suppliers Payment Terms. Modify Client Payment Term 'Immediate Payment' to '7 days' during migration.
   ALCN-1223: Load and Migrate Suppliers Payment Modes.
+* ALCN-1224: set fiscal position to "Wholesaler without APB" to customer in category "Grossistes vétérinaires et Callcenter"
+* ALCN-1233: Set fiscal position on suppliers
+* ALCN-1266: all operations created by in progress pickings now goes to a specific location
+  called "[MIGRATION] Réception des achats"
 * ALCN-1274: Skip order lines with no product ref as those lines are replaced products
+* ALCN-1286: Set purchase with uom from dcfunv with value "1" as "Pièces" for the few cases that were failing
 
 **Features and Improvements**
-* Fix Belgium Chart of taxes. Code and name have been inverted in v10.
-* ALCN-1288: Compute fiscal position based on country
 
+* ALCN-1288: Compute fiscal position based on country
 * Allow to send to scrap location at reception
 * Align customer return process to reception process. Removed fixme in data setup.
 
 **Bugfixes**
+
+* Fix Belgium Chart of taxes. Code and name have been inverted in v10.
 
 **Build**
 
