@@ -74,14 +74,14 @@ migration:
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
               # Create db2 tables and fill them with history data
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h db -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
         sample:
           operations:
             post:
@@ -206,3 +206,17 @@ migration:
           - stock_orderpoint_product
           - website_purchase_review
     - version: 10.19.0
+    - version: 10.19.1
+      modes:
+        full:
+          operations:
+            post:
+              # Create db2 tables and fill them with history data
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
