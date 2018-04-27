@@ -12,10 +12,22 @@ Unreleased
 
 **Build**
 
+**Documentation**
+
+
+10.19.1 (2018-04-28)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* Replace hardcoded db host by env var in migration steps on copy tables.
+
+**Build**
+
 * Add environment variable validity checks on start of build in order to avoid
   failure at end of build only when environment variables are not set properly.
-
-**Documentation**
+* Delay tests of specific_sale to avoid random failure depending on the order
+  of module loading.
 
 
 10.19.0 (2018-04-26)
