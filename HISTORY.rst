@@ -12,6 +12,9 @@ Unreleased
 
 **Build**
 
+* Add environment variable validity checks on start of build in order to avoid
+  failure at end of build only when environment variables are not set properly.
+
 **Documentation**
 
 
