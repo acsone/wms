@@ -85,6 +85,8 @@ class TestSaleOrderException(TransactionCase):
         })
 
     def test_client_alcyonnaire(self):
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         # Need the correct category for this one ?
         self.partner.alcyon_category_id = self.env.ref(
            'specific_partner.partner_category_alcyonaire')
@@ -107,8 +109,11 @@ class TestSaleOrderException(TransactionCase):
         # But not stup
         line.product_id = self.prod_stup
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_client_veterinary_with_depot(self):
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
            'specific_partner.partner_category_veterinary')
         # Everything is allowed
@@ -130,8 +135,11 @@ class TestSaleOrderException(TransactionCase):
         # But no stup
         line.product_id = self.prod_stup
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_client_students(self):
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         "Test customer students"
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_student')
@@ -152,9 +160,12 @@ class TestSaleOrderException(TransactionCase):
         # And vet only product as well, I guess
         line.product_id = self.prod_vet_only
         self.assertFalse(line.exception)
+        rules.write({'active': 0})
 
     def test_client_pharmacist_wholesale_human(self):
         """ """
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_pharmacy')
         # Food and gear and medoc are allowed
@@ -171,9 +182,12 @@ class TestSaleOrderException(TransactionCase):
         # And no product for vet only either
         line.product_id = self.prod_vet_only
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_client_veterinary_wholesale(self):
         """ """
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_callcenter')
         # Food and gear and medoc are allowed
@@ -190,9 +204,12 @@ class TestSaleOrderException(TransactionCase):
         # But not human medoc
         line.product_id = self.prod_medoc_human
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_client_export(self):
         """Test client export sale order limitations."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_customerexport')
         # Food and gear is allowed
@@ -215,9 +232,12 @@ class TestSaleOrderException(TransactionCase):
         # And no product for vet only either
         line.product_id = self.prod_vet_only
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_med_export(self):
         """Test client medicament export sale order limitations."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_med_export')
         # Food and gear is allowed
@@ -244,9 +264,12 @@ class TestSaleOrderException(TransactionCase):
         # And no stup
         line.product_id = self.prod_stup
         self.assertTrue(line.exception)
+        rules.write({'active': 0})
 
     def test_customer_only_material(self):
         """Test customer only materials."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_only_material')
         line = self.so1.order_line[0]
@@ -277,3 +300,4 @@ class TestSaleOrderException(TransactionCase):
         # And no stup
         line.product_id = self.prod_stup
         self.assertTrue(line.exception)
+        rules.write({'active': 0})

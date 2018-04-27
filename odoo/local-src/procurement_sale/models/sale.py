@@ -43,6 +43,8 @@ class SaleOrderLine(models.Model):
             changed_lines = self.filtered(lambda r: r.state == 'sale')
             if changed_lines:
                 changed_lines.mapped('procurement_ids').cancel()
+                changed_lines.mapped('procurement_ids').write({
+                    'sale_line_id': False})
                 if 'product_uom_qty' in values:
                     # then procurement is already recreated in standard
                     precision = self.env['decimal.precision'].precision_get(
