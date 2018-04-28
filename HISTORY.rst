@@ -10,14 +10,18 @@ Unreleased
 
 **Bugfixes**
 
-* Fix environment variable DB2IMPORT_10CLI validity check, it was never valid due
-  to wrong boolean operators in test.
-
 **Build**
-
 
 **Documentation**
 
+
+10.19.3 (2018-04-28)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* Fix environment variable DB2IMPORT_10CLI validity check, it was never valid due
+  to wrong boolean operators in test.
 
 10.19.2 (2018-04-28)
 ++++++++++++++++++++
