@@ -16,7 +16,7 @@ if [ -n "$DB2IMPORT_MODE" ] ; then
     fi
 fi
 if [ -n "$DB2IMPORT_10CLI" ] ; then
-    if [ "$DB2IMPORT_10CLI" != "False" -o "$DB2IMPORT_10CLI" != "no" -o "$DB2IMPORT_10CLI" != "True" -o "$DB2IMPORT_10CLI" != "yes" ] ; then
+    if [ "$DB2IMPORT_10CLI" != "False" -a "$DB2IMPORT_10CLI" != "no" -a "$DB2IMPORT_10CLI" != "True" -a "$DB2IMPORT_10CLI" != "yes" ] ; then
         echo -e "\033[0:31mERROR\033[0m: DB2IMPORT_10CLI value '$DB2IMPORT_10CLI' is not valid"
         echo -e "       must be 'True', 'False, 'yes' or 'no'"
         exit 1
