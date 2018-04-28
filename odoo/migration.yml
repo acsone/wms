@@ -206,17 +206,5 @@ migration:
           - stock_orderpoint_product
           - website_purchase_review
     - version: 10.19.0
-    - version: 10.19.1
-      modes:
-        full:
-          operations:
-            post:
-              # Create db2 tables and fill them with history data
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
+    # - version: 10.19.1 Fix version on top of 10.19.0, do not use
+    - version: 10.19.2

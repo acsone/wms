@@ -15,8 +15,19 @@ Unreleased
 **Documentation**
 
 
+10.19.2 (2018-04-28)
+++++++++++++++++++++
+
+**Build**
+
+* Release for a fresh start with fixes from 10.19.1
+
+
 10.19.1 (2018-04-28)
 ++++++++++++++++++++
+
+This release can only be applied on top of a failed release 10.19.0, use the 10.19.2 instead.
+
 
 **Bugfixes**
 
