@@ -83,6 +83,10 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
+* ALCN-1225: Add a serial number on stock move and display this serial number in the delivery slip
+
+**Bugfixes**
+* Revert ALCN-1153: Set standard buying price in product cost field
 
 **Bugfixes**
 

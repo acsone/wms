@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 14:03+0000\n"
-"PO-Revision-Date: 2018-04-26 14:03+0000\n"
+"POT-Creation-Date: 2018-05-02 10:47+0000\n"
+"PO-Revision-Date: 2018-05-02 10:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,11 @@ msgstr "%<br/>Remise<br/>Alcyon"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Supplier<br/>discount"
 msgstr "%<br/>Remise<br/>fournisseur"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "(S/N:"
+msgstr "(S/N:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
@@ -197,6 +202,11 @@ msgid "Apb ids"
 msgstr "APD IDs"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
+msgid "Apply"
+msgstr "Appliquer"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "BNP PARIBAS FORTIS :"
 msgstr "BNP PARIBAS FORTIS :"
@@ -226,6 +236,11 @@ msgstr "Par lot"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "CBC:"
 msgstr "CBC:"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
@@ -342,6 +357,12 @@ msgstr "Kg"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Name"
 msgstr "Nom"
+
+#. module: specific_report
+#: code:addons/specific_report/wizard/modify_serial_number.py:28
+#, python-format
+msgid "No active id found"
+msgstr "Aucun ID actif trouvé"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -537,6 +558,12 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_serial_number
+#: model:ir.model.fields,field_description:specific_report.field_stock_move_serial_number
+msgid "Serial number"
+msgstr "Numéro de série"
+
+#. module: specific_report
 #: model:ir.model,name:specific_report.model_stock_move
 msgid "Stock Move"
 msgstr "Mouvement de stock"
@@ -615,6 +642,11 @@ msgstr "Montant TVA"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Weight:<br/>"
 msgstr "Poids:<br/>"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_modify_serial_number
+msgid "modify.serial.number"
+msgstr "modify.serial.number"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_round_instance

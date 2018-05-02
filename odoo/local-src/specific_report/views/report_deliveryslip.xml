@@ -97,6 +97,7 @@
                                 </td>
                                 <td>
                                     <span t-field="line.product_id.name"/>
+                                    <div t-if="line.serial_number"> (S/N: <span t-field="line.serial_number"/>)</div>
                                 </td>
                                 <td style="text-align: center;">
                                     <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">

@@ -23,6 +23,7 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         # Views
+        'wizard/modify_serial_number.xml',
         'views/report_template.xml',
         'views/report_deliveryslip.xml',
         'views/report_invoice.xml',
@@ -32,6 +33,7 @@
         'views/round_instance.xml',
         'views/report_saleorder_document.xml',
         # Data
+        'views/stock_move.xml',
         'data/paperformat.xml',
         'data/report_filename.xml',
     ],

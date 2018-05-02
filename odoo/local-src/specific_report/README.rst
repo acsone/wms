@@ -13,6 +13,9 @@ This module add some report for Alcyon:
 - Purchase Order
 - Passport report
 
+The module will add a serial number on stock.move
+This serial number is only used on the delivery slip.
+
 
 Credits
 =======
@@ -20,4 +23,4 @@ Credits
 Contributors
 ------------
 
-* Sylvain Van Hoof <svh@sylvainvh.be>
+* Sylvain Van Hoof <sylvain@okia.be>

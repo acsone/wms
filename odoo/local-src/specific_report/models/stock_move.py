@@ -30,6 +30,9 @@ class StockMove(models.Model):
                                     store=True)
     order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
 
+    # This field is only used for information
+    serial_number = fields.Char('Serial number')
+
     @api.multi
     def get_lots(self):
         """
