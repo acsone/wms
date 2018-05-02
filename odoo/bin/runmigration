@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# Run marabunta steps
+#
+# mainly used from Travis,
+# if a cached dump of previous version is found, restore it.
+# otherwise install from scratch
+#
+# Notes:
+# New tag to be faster will also check for previous tag cached database.
+# However to ensure a build is done on each version from scratch we don't
+# check for a cached Database on commit release on master.
+#
+# Thus on each release both upgrade step and install from scratch are tested.
+# (if cache exists)
+# TODO: store cache on S3 to store one DB per version
+#
+set -e
+
+BASEDIR=$(dirname $0)
+$BASEDIR/wait_postgres.sh
+ROOT_DIR=$BASEDIR/..
+CACHE_DIR=$ROOT_DIR/.cache/db
+
+# VERSION is:
+# - release commit: New version
+#   It will start from scratch as it won't match any cached file.
+# - tag: release number
+#   It will find last version smaller than release and build on top of it.
+# - other: base VERSION to run the migration on top of it
+VERSION=$(cat $ROOT_DIR/VERSION)
+
+CACHED_DUMP="$CACHE_DIR/odoo_sample_$VERSION.dmp"
+
+# If we want to create a new cached dump we also check that odoo/VERSION was edited
+if [ ! -z "$NEW_MIG_DUMP" -a "$NEW_MIG_DUMP" == "$VERSION" ]; then
+    echo "New version - Searching for previous version dump"
+    if [ -d "$CACHE_DIR"]; then
+        # Filter dumps of higher releases
+        MAX_DUMP="odoo_sample_${VERSION}.dmp"
+        CACHED_DUMP=$(ls odoo_sample_*.dmp | awk '$0 < ENVIRON["MAX_DUMP"]' | tail -n1)
+    else
+        echo "No cached migration sample dump found"
+    fi
+fi
+
+if [[ -f "$CACHED_DUMP" ]]; then
+    echo "Database dump ${CACHED_DUMP} found"
+    echo "Restore Database dump from cache"
+    PGPASSWORD=$DB_PASSWORD createdb -h $DB_HOST -U $DB_USER -O $DB_USER $DB_NAME
+    PGPASSWORD=$DB_PASSWORD psql -q -o /dev/null -h $DB_HOST -U $DB_USER -d $DB_NAME -f "$CACHED_DUMP"
+    echo "Do migration on top of restored dump"
+else
+    echo "Do migration from scratch"
+fi
+
+migrate
+
+# For tags that are new release, create a cached Database dump
+if [ ! -z "$NEW_MIG_DUMP" -a "$NEW_MIG_DUMP" == "$VERSION" ]; then
+    echo "Save DB to cache $CACHED_DUMP"
+    mkdir -p "$CACHE_DIR"
+    PGPASSWORD=$DB_PASSWORD pg_dump -Fp -h $DB_HOST -U $DB_USER -O -d $DB_NAME -f "$CACHED_DUMP"
+fi

@@ -1,0 +1,14 @@
+# used for development
+# docker-compose.override.yml is automatically used by docker-compose when no
+# option -f is provided
+
+version: '2'
+
+services:
+  odoo:
+    volumes:
+      - "$HOME/.cache/db:/opt/odoo/.cache/db"
+
+    environment:
+      ODOO_CLOUD_PLATFORM_UNSAFE: 1
+      CI: 'True'
