@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
+
 **Bugfixes**
 
 * ALCN-1322 Fix a typo on "Article retiré de la vente" in french
