@@ -1,0 +1,3 @@
+id,state_id/id,orderpoint_min,orderpoint_qty_multiple,active,orderpoint_max
+__import__.product_5065717,specific_purchase.product_state_l,0,0,False,0
+__import__.product_8231503,specific_purchase.product_state_l,0,0,False,0

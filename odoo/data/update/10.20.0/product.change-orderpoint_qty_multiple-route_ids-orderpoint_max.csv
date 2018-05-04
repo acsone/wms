@@ -1,0 +1,11 @@
+id,orderpoint_qty_multiple,route_ids/id,orderpoint_max
+__import__.product_1010820,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5031044,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5045130,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5045132,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5222006,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5310324,1,purchase.route_warehouse0_buy,1.000
+__import__.product_5764215,1,purchase.route_warehouse0_buy,1.000
+__import__.product_8173552,1,purchase.route_warehouse0_buy,1.000
+__import__.product_8258264,1,purchase.route_warehouse0_buy,1.000
+__import__.product_8379950,1,purchase.route_warehouse0_buy,1.000

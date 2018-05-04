@@ -1,0 +1,4 @@
+id,state_id/id,active,route_ids/id,web_published
+__import__.product_8367438,specific_purchase.product_state_l,False,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",False
+__import__.product_8367444,specific_purchase.product_state_l,False,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",False
+__import__.product_8367467,specific_purchase.product_state_l,False,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",False
