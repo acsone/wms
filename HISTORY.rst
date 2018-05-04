@@ -15,6 +15,19 @@ Unreleased
 **Documentation**
 
 
+10.20.0 (2018-05-04)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Update full csv data from DB2 Production server
+
+**Build**
+
+* Disable automatic launch of inventory in final_update mode
+* May the 4th be with you
+
+
 10.19.3 (2018-04-28)
 ++++++++++++++++++++
 
