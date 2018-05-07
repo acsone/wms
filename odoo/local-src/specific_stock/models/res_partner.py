@@ -8,14 +8,6 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    is_sale_back_order_accepted = fields.Boolean(
-        string='Sale back order accepted',
-        default=True,
-    )
-    is_purchase_back_order_accepted = fields.Boolean(
-        string='Purchase back order accepted',
-    )
-
     time_limit_order = fields.Float(
         'Deadline for ordering',
         compute='_compute_time_limit_order',

@@ -67,56 +67,12 @@ class StockPicking(models.Model):
                 raise UserError(_(
                     'The reception must be linked to a Goods Received Note'))
 
-        result = {}
-
-        if self.picking_type_code == 'incoming':
-            # At reception
-            if self.location_id.usage == 'customer' and self.check_backorder():
-                # From a PO (not a return) and backorder to make
-                wiz = self.env['stock.backorder.confirmation'].create({
-                    'pick_id': self.id})
-                if not self.partner_id.is_purchase_back_order_accepted:
-                    wiz.process_cancel_backorder()
-                else:
-                    wiz.process()
-                    # Ticket to create for missing products?
-            else:
-                result = super(StockPicking, self).do_new_transfer()
-        else:
-            if self.check_backorder():
-                # allow to process and create backorder even if no line
-                # processed
-                wiz = self.env['stock.backorder.confirmation'].create({
-                    'pick_id': self.id})
-                wiz.process()
-            else:
-                result = super(StockPicking, self).do_new_transfer()
+        result = super(StockPicking, self).do_new_transfer()
 
         if not self.env.context.get('__no_specific_stock_backorder'):
             self.check_removal_date_on_transfer()
 
         return result
-
-    @api.multi
-    def do_transfer(self):
-        for pick in self:
-            if ((pick.state == 'draft' or all([
-                    x.qty_done == 0.0 for x in pick.pack_operation_ids])) and
-                    pick.check_backorder()):
-                # allow to transfer and create backorder even if no line
-                # processed
-                pick._create_backorder()
-            else:
-                super(StockPicking, self).do_transfer()
-        return True
-
-    @api.one
-    def _compute_state(self):
-        # Mark as done picking transfered without any line
-        if not self.move_lines and self.printed:
-            self.state = 'done'
-        else:
-            super(StockPicking, self)._compute_state()
 
     @api.multi
     @api.constrains('printed')

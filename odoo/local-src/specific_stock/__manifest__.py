@@ -24,6 +24,7 @@
         'stock_reception_priority',
         'stock_picking_assignment',
         'stock_picking_zone',
+        'stock_picking_backorder',
         'stock_mts_mto_rule',
         'mrp',
     ],
@@ -33,7 +34,6 @@
         'views/product_category.xml',
         'views/product_template.xml',
         'views/res_partner.xml',
-        'views/stock_backorder_reason.xml',
         'views/stock_location.xml',
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
@@ -42,7 +42,6 @@
 
         # Wizards
         'wizards/stock_receive_lot.xml',
-        'wizards/stock_backorder_choice.xml',
         'wizards/put_in_pack_helper.xml',
 
         # Views (loaded after wizards)
