@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Fix labels printing (raw data cannot be indented). Send quantity to printer.
 
 * ALCN-1322 Fix a typo on "Article retiré de la vente" in french
 
