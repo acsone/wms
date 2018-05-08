@@ -27,6 +27,7 @@ migration:
           - anthem songs.install.uninstall_procurement_jit_module::main
           - anthem songs.install.post::main
 
+          - anthem songs.install.cron::deactivate_all
           - anthem songs.install.accounting::main
           # To an unknown reason,
           # ir_values created in 'default_values'
@@ -48,6 +49,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
               - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
               - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/master_customer.csv
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
@@ -62,6 +64,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
               - anthem songs.install.data_full::main
               - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_inventory_without_lot
               - anthem songs.install.data_full::import_stock_bins
@@ -124,6 +127,8 @@ migration:
           - account_banking_sepa_credit_transfer
           - account_banking_sepa_direct_debit
           - account_invoice_tax_required
+          # oca/l10n-belgium
+          - l10n_be_iso20022_pain
           # oca/product-attribute
           - product_manufacturer
           # oca/sale-workflow
@@ -189,6 +194,7 @@ migration:
           - stock_lot_update
           - stock_inventory_controller
           - stock_picking_assignment
+          - stock_picking_backorder
           - stock_picking_fillwithstock
           - stock_picking_sequence
           - stock_picking_subcode
@@ -205,108 +211,33 @@ migration:
           - code_abc
           - stock_orderpoint_product
           - website_purchase_review
+          - web_widget_inputmask
     - version: 10.19.0
-    # - version: 10.19.1 Fix version on top of 10.19.0, do not use
-    - version: 10.19.2
     - version: 10.20.0
-      modes:
-        full:
-          operations:
-            post:
-              ### Update data
-              # reuse step
-              - anthem songs.upgrade.common::deactivate_check_on_vat
-              # supplier
-              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/update/10.20.0/supplier.new.csv
-              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/update/10.20.0/supplier.change-supplier_payment_mode_id.csv
-              # customer
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.new.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-comment.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-name-discount_pricelist_id-property_delivery_carrier_id-call_name-active-email.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-street-call_name.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-active-call_name.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-active.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-street.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-company_type-name-is_company-legal_entity.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-city-street-zip.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-vet_depot_number.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-user_id.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-discount_pricelist_id-street.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-comment-help_with_fee-street.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-street-name-vat.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.0/customer.change-vat.csv
-              # products
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.new.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-active-web_published.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_min-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-indicated_price.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_qty_multiple-route_ids-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_min-orderpoint_qty_multiple-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_min.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_qty_multiple-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-route_ids.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-list_price.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-indicated_price-list_price.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-web_published-orderpoint_max-orderpoint_qty_multiple-state_id-orderpoint_min-active.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-indicated_price-list_price-name.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_qty_multiple-indicated_price-route_ids-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_min-indicated_price-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-web_published-name-orderpoint_max-orderpoint_qty_multiple-state_id-orderpoint_min-active.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-name.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_qty_multiple-unit_in_shrink_wrap-unit_in_box.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_min-orderpoint_qty_multiple-route_ids-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-list_price-name.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-ratio_main_product-unit_in_shrink_wrap-unit_in_box-ratio_additional_product-unit_in_pallet-storage_temperature_id-state_id-list_price.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-uom_id-route_ids-uom_po_id.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-orderpoint_min-orderpoint_qty_multiple-active-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-ratio_main_product-indicated_price-unit_in_shrink_wrap-unit_in_box-ratio_additional_product-unit_in_pallet-storage_temperature_id-list_price.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-ratio_main_product-unit_in_shrink_wrap-unit_in_box-web_published-ratio_additional_product-unit_in_pallet-storage_temperature_id-categ_id.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-medical_device-manufacturer-tracking.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-list_price-price_category_id.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-web_published.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-orderpoint_qty_multiple-route_ids-list_price-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-ratio_main_product-unit_in_shrink_wrap-unit_in_box-ratio_additional_product-unit_in_pallet-storage_temperature_id-list_price-route_ids.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-price_category_id.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-indicated_price-web_published.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-active-web_published-name.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-active-indicated_price-web_published.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product.change-state_id-active-route_ids-web_published.csv
-              # Product new route
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product_new_route_info.new.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.0/product_new_route_info.change-description_picking.csv
-              - anthem songs.install.data_full::post_import_products
-              # location
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/update/10.20.0/location.new.csv
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/update/10.20.0/location.change-bin_checksum_1.csv
-              - anthem songs.install.data_full::location_compute_parents
-              # supplierinfo
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo.new.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo.change-product_code.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo.change-price.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo.change-price-product_code.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo_promo.new.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo_promo.change-product_code.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo_promo.change-date_end.csv
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.20.0/supplierinfo_promo.change-price.csv
-              # pricelist
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/update/10.20.0/pricelist_items.new.csv
-              # product stock bins
-              - bin/importer.sh songs.install.data_full::import_stock_bins /opt/odoo/data/update/10.20.0/product_stock_bin.new.csv
-              - bin/importer.sh songs.install.data_full::import_stock_bins /opt/odoo/data/update/10.20.0/product_stock_bin.change-bin_location_id.csv
-              - anthem songs.install.data_full::post_import_stock_bins
-              - anthem songs.install.accounting::activate_check_on_vat
-    - version: 10.20.0
-      modes:
-        full:
-          operations:
-            post:
-              ### Update mandates
-              - anthem songs.install.data_full::import_customer_banks_and_mandats
-
+    - version: 10.21.0
+      addons:
+        upgrade:
+          # oca/l10n-belgium
+          - l10n_be_iso20022_pain
+          ### local-src
+          - specific_partner
+          - stock_delivery_note
+          - stock_orderpoint_product
+      operations:
+        post:
+          - anthem songs.install.partner::create_legal_entity
+          - anthem songs.upgrade.10_21_0_update::post
+          - anthem songs.install.pre::disable_module_account_sepa
+          - anthem songs.install.data_all::import_delivery_carriers
     - version: 10.21.1
+      addons:
+        upgrade:
+          ### local-src
+          - specific_report
+          - specific_sale
+      operations:
+        post:
+          - anthem songs.upgrade.10_21_1_update::post
       modes:
         full:
           operations:

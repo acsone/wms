@@ -336,9 +336,6 @@ def import_customer_banks_and_mandats(ctx):
     check_bank_account_query = \
         "SELECT id FROM res_partner_bank WHERE " + \
         "sanitized_acc_number = %s AND partner_id = %s;"
-    check_mandat_query = \
-        "SELECT 1 FROM account_banking_mandate WHERE " + \
-        "unique_mandate_reference = %s AND partner_id = %s;"
 
     mandats = ctx.env['account.banking.mandate']
 
