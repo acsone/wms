@@ -3,25 +3,25 @@
  <data noupdate="1">
 
   <template id="stock_lot_label_zebra_v1">
-   <div class="raw">
-    <t t-foreach="docs" t-as="lot">
-     ^XA
-     ^PRC
-     ^LH0,0^FS
-     ^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum"/>^FS
-     ^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS
-     ^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS
-     ^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS
-     ^FO90,45^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS
-     ^FO90,100^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().name"/>^FS
-     ^FO190,180^A0N,60,50^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d-%m-%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS
-     ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS
-     ^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS
-     ^FO35,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS
-     ^PQ1,0,0,N
-     ^XZ
-    </t>
-   </div>
+      <div class="raw">
+<t t-foreach="docs" t-as="lot">
+^XA
+^PRC
+^LH0,0^FS
+^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum"/>^FS
+^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS
+^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS
+^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS
+^FO90,45^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS
+^FO90,100^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().name"/>^FS
+^FO190,180^A0N,60,50^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d-%m-%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS
+^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS
+^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS
+^FO35,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS
+^PQ<t t-esc="qty"/>,0,0,N
+^XZ
+</t>
+</div>
   </template>
 
   <report
@@ -34,20 +34,20 @@
   />
 
   <template id="stock_lot_nolot_label_zebra_v1">
-   <div class="raw">
-    <t t-foreach="docs" t-as="product_id">
-     ^XA
-     ^PRC
-     ^LH0,0^FS
-     ^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().name"/>^FS
-     ^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS
-     ^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS
-     ^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS
-     ^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS
-     ^PQ1,0,0,N
-     ^XZ
-    </t>
-   </div>
+      <div class="raw">
+<t t-foreach="docs" t-as="product_id">
+^XA
+^PRC
+^LH0,0^FS
+^FO32,16^A0N,32,28^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().name"/>^FS
+^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS
+^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS
+^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS
+^FO60,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS
+^PQ<t t-esc="qty"/>,0,0,N
+^XZ
+</t>
+</div>
   </template>
 
   <report
