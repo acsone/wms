@@ -23,6 +23,6 @@ Credits
 
 Contributors
 ------------
-
+
 * Julien Coux <julien.coux@camptocamp.com>
 * Jacques-Etienne Baudoux <je@bcim.be>

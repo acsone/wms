@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Reactivate backorder reasons at reception and helpdesk ticket generation
 
 **Bugfixes**
 
