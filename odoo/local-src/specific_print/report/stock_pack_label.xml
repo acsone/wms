@@ -9,13 +9,13 @@
 <t t-foreach="packages" t-as="package">
 <t t-foreach="xrange(package.nbr_packages)" t-as="index">
 ^XA
-^XFE:FORMAT.ZPL^FS
-^FN1^FD<t t-esc="pick.delivery_round_id.template_id.code"/>^FS
-^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="res_company.convert_to_ascii(pick.partner_id.city)"/>^FS
-^FN3^FD<t t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or '')"/>^FS
-^FN4^FD<t t-esc="res_company.convert_to_ascii(package.name)"/>^FS
-^FN5^FD<t t-esc="pick.checksum"/>^FS
-^FN6^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS
+^XFE:FORMAT.ZPL^FS\r
+^FN1^FD<t t-esc="pick.delivery_round_id.template_id.code"/>^FS\r
+^FN2^FD<t t-esc="pick.partner_id.zip"/> <t t-esc="res_company.convert_to_ascii(pick.partner_id.city)"/>^FS\r
+^FN3^FD<t t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or '')"/>^FS\r
+^FN4^FD<t t-esc="res_company.convert_to_ascii(package.name)"/>^FS\r
+^FN5^FD<t t-esc="pick.checksum"/>^FS\r
+^FN6^FD<t t-esc="index + 1"/> / <t t-esc="package.nbr_packages"/>^FS\r
 ^XZ
 </t>
 </t>
