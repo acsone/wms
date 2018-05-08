@@ -6,9 +6,13 @@ from pkg_resources import resource_stream
 
 import os
 import anthem
+import logging
+from datetime import datetime
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
 from ..common import req
+
+_logger = logging.getLogger(__name__)
 
 
 def get_files(req, default_file):
@@ -262,10 +266,6 @@ def import_banks(ctx):
         resource_stream(req, 'data/install/res_bank_supplier.csv')
     load_csv_stream(ctx, 'res.bank', content_supplier, delimiter=',')
 
-    content_customer = \
-        resource_stream(req, 'data/install/res_bank_customer.csv')
-    load_csv_stream(ctx, 'res.bank', content_customer, delimiter=',')
-
 
 @anthem.log
 def import_bank_accounts(ctx):
@@ -285,14 +285,14 @@ def import_bank_accounts(ctx):
         req, 'data/install/res_partner_bank_supplier.csv')
     load_csv_stream(ctx, 'res.partner.bank', content_supplier, delimiter=',')
 
-    content_customer = resource_stream(
-        req, 'data/install/res_partner_bank_customer.csv')
-    load_csv_stream(ctx, 'res.partner.bank', content_customer, delimiter=',')
-
 
 @anthem.log
-def import_bank_mandates(ctx):
-    """ Import banks mandates """
+def import_customer_banks_and_mandats(ctx):
+    """
+    Import customer banks and customers mandat from a file manually generated
+    :param ctx:
+    :return:
+    """
 
     # By default, Odoo add a constraint on res_partner_bank to have only one
     # bank account by company. However Alcyon uses the same bank account
@@ -304,12 +304,142 @@ def import_bank_mandates(ctx):
     """
     ctx.env.cr.execute(drop_constraint_query)
 
-    content = resource_stream(
-        req, 'data/install/account.banking.mandate.csv')
-    load_csv_stream(ctx, 'account.banking.mandate', content, delimiter=',')
+    # Delete the constraint on res_partner_bank (see comment above)
+    drop_constraint_query = """
+        ALTER TABLE res_partner_bank
+        DROP CONSTRAINT IF EXISTS res_partner_bank_unique_number;
+        """
+    ctx.env.cr.execute(drop_constraint_query)
 
-    ctx.env['account.banking.mandate'].search(
-        [('state', '=', 'draft')]).validate()
+    content = resource_stream(req, 'data/source/mandats.csv')
+    header, rows = read_csv(content)
+
+    # Check the header of the file
+    try:
+        index_ref_customer = header.index('X0014')
+        index_ref_mandat = header.index('Ref_Mandat')
+        index_signature_date = header.index('Date_Signature')
+        index_sequence = header.index('Sequence')
+        index_prefix_bank = header.index('Cle_IBAN')
+        index_bank_account = header.index('Compte_Bancaire')
+        index_bic = header.index('BIC')
+        index_date_last_run = header.index('Last_Run')
+    except Exception:
+        _logger.error(
+            'Invalid mandat file. The header must be: X0015,X0011,X0014,'
+            'Ref_Mandat,Date_Signature,Siecle,Sequence,Cle_IBAN,'
+            'Compte_Bancaire,BIC,Last_Run')
+        return
+
+    check_customer_query = "SELECT id FROM res_partner WHERE ref = %s;"
+    check_bank_query = "SELECT id FROM res_bank WHERE bic = %s;"
+    check_bank_account_query = \
+        "SELECT id FROM res_partner_bank WHERE " + \
+        "sanitized_acc_number = %s AND partner_id = %s;"
+    check_mandat_query = \
+        "SELECT 1 FROM account_banking_mandate WHERE " + \
+        "unique_mandate_reference = %s AND partner_id = %s;"
+
+    mandats = ctx.env['account.banking.mandate']
+
+    index = 1
+    for row in rows:
+        try:
+            # Verify the customer
+            ref_customer = str(int(row[index_ref_customer]))
+            ctx.env.cr.execute(check_customer_query, (ref_customer,))
+            result = ctx.env.cr.fetchone()
+
+            if not result:
+                _logger.error('Customer not found with ref %s' % ref_customer)
+                continue
+            partner_id = result[0]
+
+            # Check and create the Bank if needed
+            bic = row[index_bic]
+            ctx.env.cr.execute(check_bank_query, (bic,))
+            result = ctx.env.cr.fetchone()
+
+            if not result:
+                xmlid = '__import__.bank_%s' % bic
+                bank_value = {
+                    'name': bic,
+                    'bic': bic,
+                }
+                bank = create_or_update(ctx, 'res.bank', xmlid, bank_value)
+                bank_id = bank.id
+            else:
+                bank_id = result[0]
+
+            # Check and create the bank account if needed
+            iban = row[index_prefix_bank] + row[index_bank_account]
+            ctx.env.cr.execute(check_bank_account_query, (iban, partner_id))
+            result = ctx.env.cr.fetchone()
+
+            if not result:
+                xmlid = '__import__.bank_account_%s_%s' % (ref_customer, iban)
+                bank_account_value = {
+                    'acc_number': iban,
+                    'partner_id': partner_id,
+                    'bank_id': bank_id,
+                }
+                bank_account = create_or_update(ctx, 'res.partner.bank',
+                                                xmlid, bank_account_value)
+                bank_account_id = bank_account.id
+            else:
+                bank_account_id = result[0]
+
+            ref_mandat = row[index_ref_mandat]
+
+            # Create the mandat
+            if row[index_sequence] == 'F':
+                recurrent_sequence_type = 'first'
+            else:
+                recurrent_sequence_type = 'recurring'
+
+            xmlid = '__import__.mandate_%s_%s' % (ref_customer, ref_mandat)
+
+            signature_date_str = row[index_signature_date]
+            signature_date = datetime.strptime(signature_date_str, '%d/%m/%Y')
+            signature_date_str = signature_date.strftime('%Y-%m-%d')
+
+            mandat_value = {
+                'unique_mandate_reference': ref_mandat,
+                'format': 'sepa',
+                'partner_bank_id': bank_account_id,
+                'partner_id': partner_id,
+                'type': 'recurrent',
+                'recurrent_sequence_type': recurrent_sequence_type,
+                'signature_date': signature_date_str,
+            }
+
+            if row[index_date_last_run]:
+                last_run_str = row[index_date_last_run]
+                last_run = datetime.strptime(last_run_str, '%d/%m/%Y')
+
+                # In some case (for old customer), the last action date
+                # is less than the signature date.
+                # In this case, we set the last action like the signature
+                # date
+                if last_run < signature_date:
+                    last_run = signature_date
+
+                last_run_str = last_run.strftime('%Y-%m-%d')
+                mandat_value['last_debit_date'] = last_run_str
+
+            mandat = create_or_update(ctx, 'account.banking.mandate',
+                                      xmlid, mandat_value)
+            mandats |= mandat
+
+            index += 1
+        except Exception as e:
+            _logger.error('Cannot import the line %s: %s' %
+                          (index, ', '.join(row)))
+            _logger.error(str(e))
+            pass
+
+        # Validate all created mandats
+    mandats.write({'state': 'valid'})
 
 
 @anthem.log
@@ -393,4 +523,4 @@ def main(ctx):
     import_delivery_carriers_round(ctx)
     import_banks(ctx)
     import_bank_accounts(ctx)
-    import_bank_mandates(ctx)
+    import_customer_banks_and_mandats(ctx)

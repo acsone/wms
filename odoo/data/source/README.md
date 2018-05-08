@@ -20,3 +20,9 @@ Replace the existing file by your new file
 ### How to execute this script ?
 Simply execute the "convert_fournisseur_utilisateur.py" file.
 This script will generate a new file in ../install/supplier_add_data.csv
+
+## Mandats.csv
+
+### What is it ?
+This file is exported by an employee directly from ASF and it contains
+all mandats for customers.
