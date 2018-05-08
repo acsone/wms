@@ -17,6 +17,51 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.product_defect
+msgid "01-Poduct defect"
+msgstr "01-Article défecteux"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.missing_quantity
+msgid "02-Missing quantity"
+msgstr "02-Quantité manquante"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.cold_chain_broken
+msgid "03-Cold chain broken"
+msgstr "03-Chaine du froid non respectée"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.short_lapsing
+msgid "04-Short lapsing"
+msgstr "04-Date d'expiration proche"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.expired_product
+msgid "05-Expired product"
+msgstr "05-Article périmé"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.non_ordered_product
+msgid "06-Non ordered product"
+msgstr "06-Article non commandé"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.higher_quantity
+msgid "07-Higher quantity"
+msgstr "07-Quantité supérieure"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.product_switch
+msgid "08-Product error (A for B)"
+msgstr "08-Mauvais article (A pour B)"
+
+#. module: specific_helpdesk
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.delivery_error
+msgid "09-Delivery error"
+msgstr "09-Erreur de livraison"
+
+#. module: specific_helpdesk
 #: model:helpdesk.team,name:specific_helpdesk.accounting_team
 msgid "Accounting"
 msgstr "Comptabilité"
@@ -119,10 +164,16 @@ msgid "Purchase order"
 msgstr "Commande fournisseur"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reasom_view_tree
+#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_form
 msgid "Reason"
 msgstr "Cause"
+
+#. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_tree
+msgid "Reasons"
+msgstr "Causes"
 
 #. module: specific_helpdesk
 #: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
@@ -194,3 +245,4 @@ msgstr "Transfert"
 
 #~ msgid "Repair"
 #~ msgstr "Réparation"
+

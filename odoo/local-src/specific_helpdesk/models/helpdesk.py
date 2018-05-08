@@ -97,4 +97,13 @@ class HelpdeskTicketReason(models.Model):
     _name = 'helpdesk.ticket.reason'
     _description = 'Ticket Reason'
 
-    name = fields.Char(string='Name')
+    name = fields.Char(
+        string='Name',
+        translate=True,
+        required=True)
+    visible_reception_wizard = fields.Boolean(
+        'Visible on Reception Wizard?')
+    location_dest_id = fields.Many2one(
+        'stock.location',
+        'Destination Location',
+        ondelete='restrict')

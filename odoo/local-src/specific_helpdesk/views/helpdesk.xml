@@ -45,13 +45,24 @@
   </record>
 
   <!--Helpdesk Ticket Reason-->
-  <record id="helpdesk_ticket_reasom_view_tree" model="ir.ui.view">
+  <record id="helpdesk_ticket_reason_view_tree" model="ir.ui.view">
     <field name="name">helpdesk.ticket.reason.tree</field>
     <field name="model">helpdesk.ticket.reason</field>
     <field name="arch" type="xml">
-      <tree editable="top" string="Reason">
+      <tree editable="top" string="Reasons">
         <field name="name"/>
+        <field name="visible_reception_wizard"/>
+        <field name="location_dest_id"/>
       </tree>
+    </field>
+  </record>
+  <record id="helpdesk_ticket_reason_view_form" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.reason.form</field>
+    <field name="model">helpdesk.ticket.reason</field>
+    <field name="arch" type="xml">
+      <form string="Reason">
+        <field name="name"/>
+      </form>
     </field>
   </record>
 
