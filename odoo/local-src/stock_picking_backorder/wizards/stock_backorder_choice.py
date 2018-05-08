@@ -42,11 +42,14 @@ class StockBackorderChoice(models.TransientModel):
     )
 
     def _get_helpdesk_ticket_values(self):
+        po = self.env['purchase.order'].search(
+            [('name', '=', self.origin)], limit=1)
         return {
             'name': self.helpdesk_ticket_description,
             'helpdesk_ticket_reason_id': self.helpdesk_ticket_reason_id.id,
             'stock_picking_id': self.picking_id.id,
             'partner_id': self.picking_id.partner_id.id,
+            'purchase_order_id': po and po.id or False,
         }
 
     def apply(self):
