@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * Force update of all existing draft orders on final mode
+* ALCN-1327 Change mapping for partner categories to get the value from cliact instead of clista
 
 **Features and Improvements**
 

@@ -402,7 +402,7 @@ class CustomerMapper(EntityMapper):
         FieldMapper('vet_subscription_number', 'clirea'),
         FieldMapper('help_with_fee', 'cliimc'),
         FieldMapper(
-            'alcyon_category_id/id', 'clista',
+            'alcyon_category_id/id', 'cliact',
             mapping=mappings.PARTNER_ALCYON_CATEGORY,
         ),
         FieldMapper('country_id/id', 'clicpa',
@@ -517,7 +517,7 @@ class CustomerMapper(EntityMapper):
 
     @staticmethod
     def convert_product_pricelist(odoo_entity, db2_entity):
-        code_remise = db2_entity.get('clista')
+        code_remise = db2_entity.get('cliact')
         if code_remise:
             if code_remise < 50:
                 pricelist = 'specific_data.product_pricelist_pb1'
@@ -536,7 +536,7 @@ class CustomerMapper(EntityMapper):
             if db2_entity[field_name] == 'Y'
         ] + [
             mappings.ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY[cat]
-            for cat in [db2_entity.get('clista')]
+            for cat in [db2_entity.get('cliact')]
             if cat in mappings.ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY.keys()
             ]
         ) or None
@@ -555,9 +555,9 @@ class CustomerMapper(EntityMapper):
     @staticmethod
     def convert_property_account_position_id(odoo_entity, db2_entity):
 
-        clista = odoo_entity.get('clista')
+        activity = odoo_entity.get('cliact')
         # specific use case for wholesalers
-        if clista == 4:  # Grossistes vétérinaires et Callcenter
+        if activity == 4:  # Grossistes vétérinaires et Callcenter
             pos = 'l10n_be_apb_tax.1_fiscal_position_template_wholesaler'
         else:
             db2_vat_code = db2_entity.get('clictv')
