@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1322 Fix a typo on "Article retiré de la vente" in french
+
 **Build**
 
 **Documentation**
