@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Force update of all existing draft orders on final mode
+
 **Features and Improvements**
 
 * ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
