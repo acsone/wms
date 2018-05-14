@@ -34,7 +34,7 @@ class ProductProduct(models.Model):
         than the value computed by reordering rules
         :return:
         """
-        orderpoints = self.mapped('orderpoint_id')
+        orderpoints = self.mapped('orderpoint_ids')
 
         # Compute quantities to subtract
         if orderpoints:
@@ -45,7 +45,7 @@ class ProductProduct(models.Model):
 
         for product in self:
             virtual_available = product.virtual_available
-            orderpoint = product.orderpoint_id
+            orderpoint = product.orderpoint_ids and product.orderpoint_ids[0]
 
             # If there are some products in stock and if there are no
             # min/max (orderpoint), we don't need to compute a value

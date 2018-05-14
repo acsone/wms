@@ -220,6 +220,7 @@ migration:
           - l10n_be_iso20022_pain
           ### local-src
           - specific_partner
+          - stock_orderpoint_product
       operations:
         post:
           - anthem songs.install.partner::create_legal_entity

@@ -13,6 +13,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1321: Replace orderpoint computed fields on product by a simpler field and update the order point by a constrains
+
 **Bugfixes**
 
 **Build**
