@@ -25,6 +25,7 @@ Unreleased
 * ALCN-1299: Fix crash of smartbutton "Tickets" on invoices. A context wasn't closed properly.
 * ALCN-1377: Improve connector esb, catching malformed json response
 * ALCN-1384: ESB sale order creation route now expect ref instead of DB id
+* ALCN-1333: Remove the account number in the name of banks (ING, Belfius, CBC, BNP)
 
 **Build**
 
