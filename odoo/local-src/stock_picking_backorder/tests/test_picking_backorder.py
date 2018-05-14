@@ -57,7 +57,6 @@ class TestPickingBackorder(TransactionCase):
         ticket_reason = self.helpdesk_ticket_reason_model.create({
             'name': 'Unittest helpdesk ticket reason',
         })
-        ticket_default_name = 'Ticket default name'
 
         def test():
             # Define the backorder behavior on partner
@@ -71,7 +70,6 @@ class TestPickingBackorder(TransactionCase):
                 'backorder_action_to_do': backorder_action,
                 'is_helpdesk_ticket_to_create': helpdesk_needed,
                 'helpdesk_ticket_reason_id': ticket_reason.id,
-                'helpdesk_ticket_default_description': ticket_default_name,
             })
 
             # Create picking
@@ -86,8 +84,8 @@ class TestPickingBackorder(TransactionCase):
                         'product_id': self.product.id,
                         'product_uom_qty': 10,
                         'product_uom': self.product.uom_id.id,
-                        'location_id': self.supplier_location.id,
-                        'location_dest_id': self.stock_location.id,
+                        'location_id': location_id,
+                        'location_dest_id': location_dest_id,
                     })
                 ],
                 'grn_id': self.grn.id,
@@ -114,8 +112,8 @@ class TestPickingBackorder(TransactionCase):
                 result['context']
             ).create({
                 'reason_id': backorder_reason.id,
+                'helpdesk_ticket_description': 'test',
             })
-            wizard.onchange_type()
             wizard.apply()
 
             # Search created backorder
@@ -142,7 +140,7 @@ class TestPickingBackorder(TransactionCase):
             )
             self.assertEqual(
                 backorder.state,
-                'confirmed' if keep_backorder else 'cancel'
+                'assigned' if keep_backorder else 'cancel'
             )
 
             # Check helpdesk ticket creation
@@ -156,13 +154,12 @@ class TestPickingBackorder(TransactionCase):
                     ticket.helpdesk_ticket_reason_id,
                     ticket_reason
                 )
-                self.assertEqual(ticket.name, ticket_default_name)
             else:
                 self.assertEqual(len(ticket), 0)
 
         # Test all cases
         picking_type_id = self.ref('stock.picking_type_in')
-        location_id = self.ref('stock.stock_location_customers')
+        location_id = self.supplier_location.id
         location_dest_id = self.stock_location.id
         for backorder_action in ['create', 'cancel', 'use_partner_option']:
             for backorder_accepted in [False, True]:

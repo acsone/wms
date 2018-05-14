@@ -39,11 +39,12 @@ class StockBackorderChoice(models.TransientModel):
     )
     helpdesk_ticket_description = fields.Char(
         string='Helpdesk ticket description',
+        required=True,
     )
 
     def _get_helpdesk_ticket_values(self):
         po = self.env['purchase.order'].search(
-            [('name', '=', self.origin)], limit=1)
+            [('name', '=', self.picking_id.origin)], limit=1)
         return {
             'name': self.helpdesk_ticket_description,
             'helpdesk_ticket_reason_id': self.helpdesk_ticket_reason_id.id,
