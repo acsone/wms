@@ -45,8 +45,8 @@ msgstr " Demande une cause de l'annulation de la commande."
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_l
-msgid "Aricle retiré de la vente"
-msgstr "Aricle retiré de la vente"
+msgid "Article retiré de la vente"
+msgstr "Article retiré de la vente"
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_a

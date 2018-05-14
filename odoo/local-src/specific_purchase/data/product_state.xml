@@ -21,7 +21,7 @@
         <field name="sequence">4</field>
     </record>
     <record id="product_state_l" model="product.state">
-        <field name="name">Aricle retiré de la vente</field>
+        <field name="name">Article retiré de la vente</field>
         <field name="code">L</field>
         <field name="sequence">5</field>
     </record>
