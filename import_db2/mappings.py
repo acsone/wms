@@ -215,9 +215,9 @@ ALCYON_CATEGORY_TO_CUSTOMER_CATEGORY = {
     99: '__setup__.customer_category_divers',
 }
 
-SUPPLIER_CATEGORY = {
-    '1': '__setup__.supplier_category_marchandise',
-    '2': '__setup__.supplier_category_frais_generaux',
+ACCOUNT_PAYABLE = {
+    1: '__setup__.account_440000',
+    2: '__setup__.account_440100',
 }
 
 CUSTOMER_ACTIVE = {
