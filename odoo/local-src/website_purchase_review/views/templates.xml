@@ -159,7 +159,7 @@
                                             <table class="spacing_table_5">
                                                 <tr>
                                                     <td>Advised qty</td>
-                                                    <td><strong><span t-field="current_product.advised_qty" /></strong></td>
+                                                    <td><strong><span t-esc="int(current_product.advised_qty + product_qty)" /></strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Ordered qty</td>
@@ -167,17 +167,17 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Stock min</td>
-                                                    <td><input type="number" name="orderpoint_min" id="orderpoint_min" t-att-value="current_product.orderpoint_min"/></td>
+                                                    <td><input type="number" name="orderpoint_min" id="orderpoint_min" t-att-value="current_product.orderpoint_min" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Stock max</td>
-                                                    <td><input type="number" name="orderpoint_max" id="orderpoint_max" t-att-value="current_product.orderpoint_max"/></td>
+                                                    <td><input type="number" name="orderpoint_max" id="orderpoint_max" t-att-value="current_product.orderpoint_max" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Qty multiple</td>
-                                                    <td><input type="number" name="orderpoint_qty_multiple" id="orderpoint_qty_multiple" t-att-value="current_product.orderpoint_qty_multiple"/></td>
+                                                    <td><input type="number" name="orderpoint_qty_multiple" id="orderpoint_qty_multiple" t-att-value="current_product.orderpoint_qty_multiple" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
                                                 </tr>
 
                                                 <tr>
