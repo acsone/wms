@@ -11,6 +11,8 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1322 Fix a typo on "Article retiré de la vente" in french
+* Fix labels printing (raw text data cannot be to long on 1 line). Send quantity to printer. Fix product label (no lot) at reception
+
 
 **Build**
 

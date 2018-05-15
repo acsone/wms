@@ -6,8 +6,8 @@ from odoo import models, api, _
 from odoo.exceptions import Warning
 
 
-def hw_print(self, report_xmlid, printer=False):
-    document = self.env['report']._get_raw(self._ids, report_xmlid)
+def hw_print(self, report_xmlid, printer=False, qty=1):
+    document = self.env['report']._get_raw(self._ids, report_xmlid, qty=qty)
     report = self.env.ref(report_xmlid)
     behaviour = report.behaviour()[report.id]
     if not printer:
@@ -67,9 +67,10 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not self.partner_id:
             raise Warning(_('No destination partner defined'))
-        hw_print(self.with_context(nbr=int(quantity)),
+        hw_print(self,
                  'specific_print.report_stock_pick_packs_label',
-                 printer=printer)
+                 printer=printer,
+                 qty=quantity)
 
     @api.multi
     def print_passport_report(self, printer):
@@ -79,14 +80,22 @@ class StockPicking(models.Model):
         printer.print_document('', pdf, '')
 
 
+class StockPackOperationLot(models.Model):
+    _inherit = 'stock.pack.operation.lot'
+
+    @api.multi
+    def print_lot_label(self, quantity=1):
+        self.ensure_one()
+        self.lot_id.print_lot_label()
+
+
 class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     @api.multi
     def print_lot_label(self, quantity=1):
         self.ensure_one()
-        hw_print(self.with_context(nbr=int(quantity)),
-                 'specific_print.report_lot_label')
+        hw_print(self, 'specific_print.report_lot_label', qty=quantity)
 
 
 class ProductProduct(models.Model):
@@ -95,5 +104,4 @@ class ProductProduct(models.Model):
     @api.multi
     def print_lot_label(self, quantity=1):
         self.ensure_one()
-        hw_print(self.with_context(nbr=int(quantity)),
-                 'specific_print.report_lot_nolot_label')
+        hw_print(self, 'specific_print.report_lot_nolot_label', qty=quantity)

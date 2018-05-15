@@ -20,6 +20,7 @@ class Report(models.Model):
             'doc_model': report.model,
             'docs': docs,
             'report': report,
+            'qty': qty,
         }
         template = report.report_name
         html = self.render(template, docargs)
