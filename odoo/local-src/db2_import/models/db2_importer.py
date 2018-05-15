@@ -893,8 +893,7 @@ class DB2ImporterTable(models.Model):
         mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
-    @job(default_channel='root.db2.generate_jobs')
-    def create_convertion_jobs(self, date_start, date_end):
+    def create_convertion_jobs(self, where_clause):
         """Create jobs from rows in local copy for a range of dates"""
         eta = max(0, min(self.eta or 2, 23))
         now = datetime.now()
@@ -911,13 +910,7 @@ class DB2ImporterTable(models.Model):
         query = (
             "SELECT id, %s FROM %s"
             " WHERE ") % (ref_col, odoo_table_name)
-        # No need to pass colname list as we always have
-        # a create and modify date on purchase and on sale order
-        # unless the model is MVTLOT as css doesn't exist there.
-        colname = None
-        if self.table_name == 'MVTLOT':
-            colname = ['mvtdss']
-        query += self._get_sql_where_date(date_start, date_end, colname)
+        query += where_clause
         if self.where_clause:
             query += " AND " + self.where_clause
         cr.execute(query)
@@ -979,6 +972,36 @@ class DB2ImporterTable(models.Model):
                 _logger.info(
                     'Job created for %s %s on %s',
                     self.table_name, cpt, len(rows))
+
+    @api.multi
+    @job(default_channel='root.db2.generate_jobs')
+    def create_convertion_jobs_by_dates(self, date_start, date_end):
+        """Create conversion jobs for a range of dates"""
+        # No need to pass colname list as we always have
+        # a create and modify date on purchase and on sale order
+        # unless the model is MVTLOT as css doesn't exist there.
+        # but we don't import MVTLOT anymore
+        colname = None
+        where = self._get_sql_where_date(date_start, date_end, colname)
+        self.create_convertion_jobs(where)
+
+    @api.multi
+    @job(default_channel='root.db2.generate_jobs')
+    def create_convertion_jobs_for_draft(self):
+        """Create conversion jobs all orders in a draft state"""
+        if self.table_name == 'PENTCDFO':
+            model = 'purchase.order'
+        elif self.table_name == 'PENTCDCL':
+            model = 'sale.order'
+        orders = self.env[model].search([('state', '=', 'draft')])
+        suite_names = orders.mapped('name')
+
+        # filter order name containing non digits
+        suite_names = [sn for sn in suite_names if sn and sn.isdigit()]
+        suite_names = ','.join(suite_names)
+
+        where = "%ssui IN (%s)" % (self.table_prefix, suite_names)
+        self.create_convertion_jobs(where)
 
     def _get_from_db2(self, date_start, date_end):
         """ fetch table from DB2 on a range of dates """
@@ -1079,7 +1102,7 @@ class DB2ImporterTable(models.Model):
 
         self._get_from_db2(db2_date_start, db2_date_end)
         if self.create_job:
-            self.create_convertion_jobs(db2_date_start, db2_date_end)
+            self.create_convertion_jobs_by_dates(db2_date_start, db2_date_end)
 
 
 class DB2Importer(models.Model):
@@ -1093,6 +1116,13 @@ class DB2Importer(models.Model):
         ('history', 'History'),
         ('final_update', 'Final update')],
         default='history')
+    update_draft = fields.Boolean(
+        default=True,
+        help="Only for final update"
+        )
+    fetch = fields.Boolean(
+        default=True,
+        help="Disable to play only with local copy of data")
 
     table_ids = fields.One2many('db2.importer.table', 'importer_id')
 
@@ -1101,17 +1131,24 @@ class DB2Importer(models.Model):
 
         str_next_start = self.date_start
 
-        # Create jobs for data imported by csv
         for table in self.table_ids:
             if table.create_job:
+                # Create jobs for data imported by csv
                 if table.csv_until:
-                    table.with_delay().create_convertion_jobs(
+                    # here we don't alter start date
+                    # to let the possibility to have
+                    # different dates on different models
+                    # while keeping the jobs creating by dates range
+                    # by date range instead of model by model
+                    table.with_delay().create_convertion_jobs_by_dates(
                         str_next_start, table.csv_until)
-            # here we don't alter start date
-            # to let the possibility to have
-            # different dates on different models
-            # while keeping the jobs creating by dates range
-            # by date range instead of model by model
+
+                # Create jobs for history orders to update in final mode
+                if self.update_draft and self.mode == 'final_update':
+                    table.with_delay().create_convertion_jobs_for_draft()
+
+        if not self.fetch:
+            return
 
         # split date range per month basis
         dt_next_end = False
