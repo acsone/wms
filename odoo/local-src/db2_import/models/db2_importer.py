@@ -1116,6 +1116,13 @@ class DB2Importer(models.Model):
         ('history', 'History'),
         ('final_update', 'Final update')],
         default='history')
+    update_draft = fields.Boolean(
+        default=True,
+        help="Only for final update"
+        )
+    fetch = fields.Boolean(
+        default=True,
+        help="Disable to play only with local copy of data")
 
     table_ids = fields.One2many('db2.importer.table', 'importer_id')
 
@@ -1137,8 +1144,11 @@ class DB2Importer(models.Model):
                         str_next_start, table.csv_until)
 
                 # Create jobs for history orders to update in final mode
-                if self.mode == 'final_update':
+                if self.update_draft and self.mode == 'final_update':
                     table.with_delay().create_convertion_jobs_for_draft()
+
+        if not self.fetch:
+            return
 
         # split date range per month basis
         dt_next_end = False
