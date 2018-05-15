@@ -116,6 +116,7 @@ Unreleased
 
 **Features and Improvements**
 * Make stock inventory menu entry available (was hidden to users)
+* Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
 
 * ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
 
