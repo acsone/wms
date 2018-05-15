@@ -8,11 +8,14 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
+
 **Bugfixes**
 
 * ALCN-1322 Fix a typo on "Article retiré de la vente" in french
 * Fix labels printing (raw text data cannot be to long on 1 line). Send quantity to printer. Fix product label (no lot) at reception
 
+* ALCN-1299: Fix crash of smartbutton "Tickets" on invoices. A context wasn't closed properly.
 
 **Build**
 

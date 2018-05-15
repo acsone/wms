@@ -208,6 +208,7 @@ migration:
     - version: 10.19.0
     # - version: 10.19.1 Fix version on top of 10.19.0, do not use
     - version: 10.19.2
+<<<<<<< HEAD
     - version: 10.20.0
       modes:
         full:
@@ -303,3 +304,4 @@ migration:
         upgrade:
           ### local-src
           - specific_print
+          - specific_helpdesk
