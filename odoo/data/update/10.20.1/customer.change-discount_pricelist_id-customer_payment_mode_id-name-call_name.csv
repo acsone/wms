@@ -1,0 +1,7 @@
+id,discount_pricelist_id/id,customer_payment_mode_id/id,name,call_name
+__import__.customer_1696,__setup__.pricelist_100,,FOCQUET CARINE,FOCQUETCARINE
+__import__.customer_175,__setup__.pricelist_100,,NARDELLOTTO PASCAL,BL NARDELLOTTOPASCAL
+__import__.customer_2320,__setup__.pricelist_100,,DESMET ISABELLE,BL DESMETISABELLE
+__import__.customer_4003,__setup__.pricelist_100,,SCHOUKENS PATRICK,BL SCHOUKENSPATRICK
+__import__.customer_4150,__setup__.pricelist_100,,DE BOURNONVILLE THIERRY,DEBOURNONVILLETHIERRY
+__import__.customer_856,__setup__.pricelist_100,,PEETERS ETIENNE,BL PEETERSETIENNE

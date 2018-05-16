@@ -299,6 +299,33 @@ migration:
               - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
     - version: 10.20.1
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.upgrade.common::deactivate_check_on_vat
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.new.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-alcyon_category_id-category_id-property_product_pricelist.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-property_product_pricelist-category_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-alcyon_category_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-property_product_pricelist-alcyon_category_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-alcyon_category_id-category_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-discount_pricelist_id-customer_payment_mode_id-name-call_name.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-category_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-customer_payment_mode_id-alcyon_category_id-category_id-property_product_pricelist.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-property_product_pricelist-alcyon_category_id-category_id-name.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-email.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-call_name-customer_payment_mode_id-name.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-fax-email.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-street-email.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-active-call_name.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-comment.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-name-customer_payment_mode_id-street-active-call_name-user_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-active-street-call_name-user_id.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-mobile.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-street-alcyon_category_id-category_id-property_product_pricelist.csv
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/update/10.20.1/customer.change-call_name-customer_payment_mode_id-email-name.csv
+              - anthem songs.install.accounting::activate_check_on_vat
       addons:
         upgrade:
           ### local-src

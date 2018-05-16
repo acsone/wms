@@ -9,7 +9,8 @@ Unreleased
 **Data Migration**
 
 * Force update of all existing draft orders on final mode
-* ALCN-1327 Change mapping for partner categories to get the value from cliact instead of clista
+* ALCN-1327: Fix mapping on clients affecting multiple values, mapping was based on "Statistique" instead of "Activité"
+  Changes mapping for promotions, partner categories, alcyon categories and fiscal positions.
 
 **Features and Improvements**
 
