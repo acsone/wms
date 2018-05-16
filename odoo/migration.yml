@@ -548,6 +548,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
       addons:
         upgrade:
+          - delivery_rounds
           - specific_stock
           - stock_picking_backorder
-          - delivery_rounds
+          - stock_valuation
