@@ -336,6 +336,7 @@ migration:
       addons:
         upgrade:
           ### local-src
+          - specific_account
           - specific_print
           - specific_helpdesk
     - version: 10.20.2

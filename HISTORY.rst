@@ -28,6 +28,7 @@ Unreleased
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field
 * ALCN-1000: Add missing ir.model.access for stock.move.lots and round.instance
+* Recover journal selection at top of invoice form view.
 
 **Build**
 
