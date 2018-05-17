@@ -284,9 +284,9 @@ def create_locations(ctx):
 def set_helpdesk_reason_location(ctx):
     ref = ctx.env.ref
     scrap = ref('__setup__.stock_location_scrap_quality')
-    ref('product_defect').location_dest_id = scrap.id
-    ref('cold_chain_broken').location_dest_id = scrap.id
-    ref('expired_product').location_dest_id = scrap.id
+    ref('specific_helpdesk.product_defect').location_dest_id = scrap.id
+    ref('specific_helpdesk.cold_chain_broken').location_dest_id = scrap.id
+    ref('specific_helpdesk.expired_product').location_dest_id = scrap.id
 
 
 @anthem.log
