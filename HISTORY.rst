@@ -22,6 +22,7 @@ Unreleased
 * Fix labels printing (raw text data cannot be to long on 1 line). Send quantity to printer. Fix product label (no lot) at reception
 
 * ALCN-1299: Fix crash of smartbutton "Tickets" on invoices. A context wasn't closed properly.
+* ALCN-1377: Improve connector esb, catching malformed json response
 
 **Build**
 
