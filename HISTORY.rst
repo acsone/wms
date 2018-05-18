@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.20.1 (2018-05-18)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Force update of all existing draft orders on final mode
@@ -19,17 +31,12 @@ Unreleased
 
 **Bugfixes**
 
-* ALCN-1322 Fix a typo on "Article retiré de la vente" in french
-* Fix labels printing (raw text data cannot be to long on 1 line). Send quantity to printer. Fix product label (no lot) at reception
-
 * ALCN-1299: Fix crash of smartbutton "Tickets" on invoices. A context wasn't closed properly.
+* ALCN-1322: Fix a typo on "Article retiré de la vente" in french
+* ALCN-1333: Remove the account number in the name of banks (ING, Belfius, CBC, BNP)
 * ALCN-1377: Improve connector esb, catching malformed json response
 * ALCN-1384: ESB sale order creation route now expect ref instead of DB id
-* ALCN-1333: Remove the account number in the name of banks (ING, Belfius, CBC, BNP)
-
-**Build**
-
-**Documentation**
+* Fix labels printing (raw text data cannot be to long on 1 line). Send quantity to printer. Fix product label (no lot) at reception
 
 
 10.20.0 (2018-05-04)
