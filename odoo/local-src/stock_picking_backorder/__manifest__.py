@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 {
     'name': 'Stock Picking Backorder',
     'version': '10.0.1.0.0',
     'author': 'BCIM, Camptocamp',
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'category': 'Warehouse',
     'depends': [
-        'specific_helpdesk',
+        'specific_helpdesk',  # requires LGPL
         'stock_grn',
         'stock_receive_lot',
     ],
