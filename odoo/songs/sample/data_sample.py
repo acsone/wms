@@ -40,6 +40,10 @@ def import_clients(ctx):
         content = resource_stream(req, 'data/sample/customer.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
+    with ctx.log(u"Importing customer relations to master customer"):
+        content = resource_stream(req, 'data/sample/master_customer.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
     with ctx.log(u"Importing customer addresses"):
         content = resource_stream(req, 'data/sample/customer_address.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')

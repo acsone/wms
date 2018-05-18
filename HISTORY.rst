@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * Force update of all existing draft orders on final mode
+* ALCN-1324: Add missing csv files for relation between customer and master partner.
 * ALCN-1327: Fix mapping on clients affecting multiple values, mapping was based on "Statistique" instead of "Activité"
   Changes mapping for promotions, partner categories, alcyon categories and fiscal positions.
 

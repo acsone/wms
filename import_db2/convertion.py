@@ -616,12 +616,17 @@ class MasterCustomerMapper(CustomerMapper):
         )
 
     def get_sql_where(self):
+        # Filter probably relation to removed customer
+        # only one occurence was found
+        # check with :
+        # fetchall_dict("select cpcnum, cpcl01, clinum FROM GENDATA.cplcli LEFT JOIN GENDATA.client ON cpcl01 = clinum WHERE clinum IS NULL fetch first 10 rows only")  # noqa
+        where = "cpcl01 != '8895'"
         if self.importer.full:
-            return None
+            return where
         # Filter sample of customer by customers on subset of sale orders
         # plus keep customers for delivery round
-        return (
-            "clinum"
+        where += (
+            " AND clinum"
             "  IN(SELECT ecccli FROM sbdata.PENTCDCL"
             "     WHERE eccsui >= %s AND eccsui <= %s)"
             " OR clinum in (1076, 1424, 148, 1658, 2112, 2139, 2141, 2151,"
@@ -631,6 +636,7 @@ class MasterCustomerMapper(CustomerMapper):
             "               7478, 7484, 8099, 8114, 8264, 8522, 8859,"
             "               91)" % (SO_MIN, SO_MAX)
         )
+        return where
 
 
 class AddressMapper(EntityMapper):
@@ -1299,6 +1305,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   Supplierinfo,
                   SupplierinfoPromo,
                   CustomerMapper, SupplierMapper,
+                  MasterCustomerMapper,
                   CustomerAddressMapper,
                   SaleOrderMapper,
                   SaleOrderLineMapper,
@@ -1315,6 +1322,7 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        Supplierinfo,
                        SupplierinfoPromo,
                        CustomerMapper, SupplierMapper,
+                       MasterCustomerMapper,
                        CustomerAddressMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
