@@ -6,6 +6,8 @@ import json
 import logging
 import requests
 
+from simplejson.decoder import JSONDecodeError
+
 from odoo.addons.component.core import Component
 from odoo.addons.connector.exception import ConnectorException
 
@@ -48,7 +50,11 @@ class ESBWebServiceAdapter(Component):
         if res.status_code == 202:
             raise ConnectorException('Error %s on POST' % (res.status_code))
         elif res.status_code == 200:
-            res_data = res.json()
+            try:
+                res_data = res.json()
+            except JSONDecodeError:
+                raise ConnectorException(
+                    'Error decoding json response : %s' % (res.text))
             if 'error' in res_data:
                 raise ConnectorException('Error on POST %s' % (res_data))
         else:
@@ -68,7 +74,11 @@ class ESBWebServiceAdapter(Component):
         if res.status_code == 202:
             raise ConnectorException('Error %s on PUT' % (res.status_code))
         elif res.status_code == 200:
-            res_data = res.json()
+            try:
+                res_data = res.json()
+            except JSONDecodeError:
+                raise ConnectorException(
+                    'Error decoding json response : %s' % (res.text))
             if 'error' in res_data:
                 raise ConnectorException('Error on PUT %s' % (res_data))
         else:

@@ -18,7 +18,7 @@ class SaleOrder(models.Model):
 
     esb_ref = fields.Char(string='Reference for ESB')
 
-    @job()
+    @job(default_channel='root.esb')
     def ws_create_new(self, data):
         """Create a sale order with data coming from webservices."""
         try:
