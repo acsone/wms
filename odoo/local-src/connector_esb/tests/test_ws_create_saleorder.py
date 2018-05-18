@@ -119,6 +119,13 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
+    def test_required_fields_5(self):
+        """Check lines is a list"""
+        data = self.request_data.copy()
+        data['params']['data']['lines'] = data['params']['data']['lines'][0]
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
+
     def test_integrity_error(self):
         data = self.order_data.copy()
         # set inexisting partner

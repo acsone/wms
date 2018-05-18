@@ -38,6 +38,9 @@ class SaleController(http.Controller):
         if missing:
             text = _('Required field(s) missing: %s')
             errors.append(text % ', '.join(['`%s`' % x for x in missing]))
+        if 'lines' in values and not isinstance(values['lines'], list):
+            text = _("Field 'lines' must be a <type 'list'> got %s.")
+            errors.append(text % type(values['lines']))
         if errors:
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
