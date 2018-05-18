@@ -240,6 +240,8 @@ migration:
           - specific_report
           - specific_sale
           - connector_esb
+          - stock_receive_lot
+          - specific_helpdesk
           # oca/connector-interfaces
           - base_import_async
           - split_coda
@@ -249,6 +251,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post
+          - anthem songs.install.logistics::set_helpdesk_reason_location
       modes:
         full:
           operations:

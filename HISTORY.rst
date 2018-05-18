@@ -16,6 +16,7 @@ Unreleased
 * ALCN-1116: Add the module CSV File (this is a generic module)
 * ALCN-1404: Update followup letter and update translations
 * Purchase review: Add the ordered quantity in the advised quantity and disallow to edit the min/max for MTO product
+* ALCN-1427: Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
 
 **Bugfixes**
 * ALCN-1426: Add missing Inputmask library
@@ -116,7 +117,6 @@ Unreleased
 
 **Features and Improvements**
 * Make stock inventory menu entry available (was hidden to users)
-* Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
 
 * ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
 
