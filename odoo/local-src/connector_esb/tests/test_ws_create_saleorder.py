@@ -16,7 +16,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.setup_records()
         self.order_data = {
             "increment_id": "INC-ID",
-            "customer_id": self.partner.id,
+            "customer_id": self.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
             "lines": [{
@@ -46,7 +46,11 @@ class WSCreateSaleOrderTestCase(TransactionCase):
             'default_code': '0001',
             'list_price': 10.0,
         })
-        self.partner = self.env['res.partner'].create({'name': 'John Doe'})
+        self.partner = self.env['res.partner'].create(
+            {'name': 'John Doe',
+             'ref': '111111',
+             }
+        )
         self.partner_shipping = self.env['res.partner'].create({
             'name': 'John Doe (ship)',
             'type': 'delivery',
@@ -112,6 +116,13 @@ class WSCreateSaleOrderTestCase(TransactionCase):
     def test_required_fields_4(self):
         data = self.request_data.copy()
         data['params']['data'].pop('lines')
+        with self.assertRaises(BadRequest):
+            self.controller._validate_create_sale_order(data)
+
+    def test_required_fields_5(self):
+        """Check lines is a list"""
+        data = self.request_data.copy()
+        data['params']['data']['lines'] = data['params']['data']['lines'][0]
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
