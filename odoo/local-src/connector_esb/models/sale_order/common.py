@@ -6,7 +6,7 @@
 import logging
 
 from psycopg2 import IntegrityError
-from odoo import fields, models
+from odoo import exceptions, fields, models
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -40,14 +40,22 @@ class SaleOrder(models.Model):
 
     def _ws_create_order_data(self, data):
         order_data = {}
+        partner_ref = data['customer_id']
+        partner = self.env['res.partner'].search(
+            [('ref', '=', partner_ref)]
+        )
+        if not partner:
+            raise exceptions.MissingError(
+                "No match found for customer_id: %s" % partner_ref
+            )
         order_data['team_id'] = self.env.ref(
                 'sales_team.salesteam_website_sales').id
         order_data['esb_ref'] = data['increment_id']
-        order_data['partner_id'] = data['customer_id']
+        order_data['partner_id'] = partner.id
         order_data['date_order'] = data['date']
         order_data['confirmation_date'] = data['date']
         order_data['client_order_ref'] = data['order_ref']
-        order_data['partner_invoice_id'] = data['customer_id']
+        order_data['partner_invoice_id'] = partner.id
         order_data['state'] = 'draft'
         if 'carrier_id' in data:
             carrier = self.env['delivery.carrier'].search([

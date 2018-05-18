@@ -16,7 +16,7 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.setup_records()
         self.order_data = {
             "increment_id": "INC-ID",
-            "customer_id": self.partner.id,
+            "customer_id": self.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
             "lines": [{
@@ -46,7 +46,11 @@ class WSCreateSaleOrderTestCase(TransactionCase):
             'default_code': '0001',
             'list_price': 10.0,
         })
-        self.partner = self.env['res.partner'].create({'name': 'John Doe'})
+        self.partner = self.env['res.partner'].create(
+            {'name': 'John Doe',
+             'ref': '111111',
+             }
+        )
         self.partner_shipping = self.env['res.partner'].create({
             'name': 'John Doe (ship)',
             'type': 'delivery',
