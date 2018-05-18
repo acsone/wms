@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
 {'name': 'Specific Helpdesk for Alcyon',
  'version': '10.0.1.0.0',
  'author': 'Camptocamp',
@@ -8,7 +9,7 @@
  'category': 'Helpdesk',
  'depends': [
      'account',
-     'helpdesk',
+     'helpdesk',  # Odoo enterprise module requires LGPL
      'mrp_repair',
      'product',
      'purchase',

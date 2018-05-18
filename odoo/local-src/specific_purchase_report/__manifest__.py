@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Julien Coux (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 {
     'name': 'Specific purchase report for Alcyon',
     'version': '10.0.1.0.0',
     'author': 'Camptocamp',
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'category': 'Report',
     'depends': [
         'specific_helpdesk',
