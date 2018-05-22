@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Revert ALCN-1153: Set standard buying price in product cost field
 
 **Build**
 
