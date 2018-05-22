@@ -283,7 +283,8 @@ class DB2MapperPurchaseOrder(object):
             "SELECT id, ecfsui, ecfrin, ecfrcl, ecfuti, ecffou, ecfsuc,"
             "       ecfdjj, ecfdmm, ecfdaa, ecfdss,"  # order date
             "       ecfcjj, ecfcmm, ecfcaa, ecfcss,"  # create date
-            "       ecfmjj, ecfmmm, ecfmaa, ecfmss"   # modification date
+            "       ecfmjj, ecfmmm, ecfmaa, ecfmss,"   # modification date
+            "       ecfljj, ecflmm, ecflaa, ecflss"   # delivery date
             " FROM db2_pentcdfo WHERE id = %s")
         cr.execute(query, [tmp_id])
         row = cr.fetchone()
