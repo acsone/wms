@@ -60,6 +60,8 @@ Unreleased
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
 
+* ALCN-1319: Replace the legal entity by a relation field and create the new model legal.entity
+
 **Bugfixes**
 
 * ALCN-1000: Add missing ir.model.access for stock.move.lots and round.instance

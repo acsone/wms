@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_partner_alcyon_category,access_partner_alcyon_category,model_partner_alcyon_category,,1,0,0,0
+access_legal_entity,access_legal_entity,model_legal_entity,base.group_user,1,0,0,0
+access_legal_entity_sale_manager,access_legal_entity_sale_manager,model_legal_entity,sales_team.group_sale_manager,1,1,1,1

@@ -296,17 +296,17 @@ PARTNER_TITLE = {
 }
 
 PARTNER_LEGAL_ENTITY = {
-    2: 'Org.Resp.V10',
-    3: 'Clinique Vétérinaire',
-    4: 'SPRLU',
-    5: 'SPRL',
-    6: 'S.A.',
-    8: 'S.C.',
-    9: 'Pharmacie',
-    13: 'ASBL',
-    14: 'A.D.F.',
-    15: 'S.A.R.L.',
-    16: 'S.C.R.L.',
+    2: '__setup__.legal_entity_2',
+    3: '__setup__.legal_entity_3',
+    4: '__setup__.legal_entity_4',
+    5: '__setup__.legal_entity_5',
+    6: '__setup__.legal_entity_6',
+    8: '__setup__.legal_entity_8',
+    9: '__setup__.legal_entity_9',
+    13: '__setup__.legal_entity_13',
+    14: '__setup__.legal_entity_14',
+    15: '__setup__.legal_entity_15',
+    16: '__setup__.legal_entity_16',
 }
 
 PARTNER_IS_COMPANY = {

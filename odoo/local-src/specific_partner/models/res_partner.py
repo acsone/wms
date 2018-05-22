@@ -20,7 +20,10 @@ class ResPartner(models.Model):
         compute='_compute_is_veterinary'
     )
 
-    legal_entity = fields.Char(string='Legal entity')
+    legal_entity_id = fields.Many2one(
+        'legal.entity',
+        string='Legal entity'
+    )
 
     pharmacist_id = fields.Many2one(
         comodel_name='res.partner',

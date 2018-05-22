@@ -460,7 +460,7 @@ class CustomerMapper(EntityMapper):
                     mapping=mappings.COUNTRY),
         FieldMapper('title/id', 'clitit',
                     mapping=mappings.PARTNER_TITLE),
-        FieldMapper('legal_entity', 'clitit',
+        FieldMapper('legal_entity_id/id', 'clitit',
                     mapping=mappings.PARTNER_LEGAL_ENTITY),
         FieldMapper('is_company', 'clitit',
                     mapping=mappings.PARTNER_IS_COMPANY),

@@ -212,3 +212,10 @@ migration:
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_partner
+      operations:
+        post:
+          - anthem songs.install.partner::create_legal_entity
