@@ -988,12 +988,17 @@ class DB2ImporterTable(models.Model):
     @api.multi
     @job(default_channel='root.db2.generate_jobs')
     def create_convertion_jobs_for_draft(self):
-        """Create conversion jobs all orders in a draft state"""
+        """Create conversion jobs all orders in a draft state
+        By draft state we mean the states in which the orders
+        are incomplete, thus it is 'purchase' for purchase orders.
+        """
         if self.table_name == 'PENTCDFO':
             model = 'purchase.order'
+            state = 'purchase'
         elif self.table_name == 'PENTCDCL':
             model = 'sale.order'
-        orders = self.env[model].search([('state', '=', 'draft')])
+            state = 'draft'
+        orders = self.env[model].search([('state', '=', state)])
         suite_names = orders.mapped('name')
 
         # filter order name containing non digits
