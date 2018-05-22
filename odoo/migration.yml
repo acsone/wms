@@ -214,6 +214,7 @@ migration:
           - stock_orderpoint_product
           - website_purchase_review
           - web_widget_inputmask
+          - split_coda
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
@@ -239,6 +240,7 @@ migration:
           - specific_sale
           # oca/connector-interfaces
           - base_import_async
+          - split_coda
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post

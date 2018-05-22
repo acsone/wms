@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2018 Okia SPRL (sylvain@okia.be)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
 
@@ -23,11 +23,10 @@ class AccountBankStatementImport(models.TransientModel):
         The bank ING send a CODA file with several account numbers.
         However Odoo can only manage one account number per CODA.
 
-        To allows Alcyon to import ING CODA we need to split the CODA file
+        To import this kind of CODA we need to split the CODA file
         and import statement by statement.
-        Alcyon receives a mandat for some other bank account.
-        These bank account are included in the CODA
-        but they must not be imported.
+        Moreover the bank can send several bank statement in the same file.
+        It's why we need to check if the bank account is in Odoo.
         :return:
         """
         self.ensure_one()
