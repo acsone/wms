@@ -421,6 +421,7 @@ class DB2MapperPurchaseOrder(object):
 
                 # create invoice for invoiced lines
                 create_supplier_invoice(new, lines)
+        return new
 
 
 class DB2MapperSaleOrder(object):
@@ -663,6 +664,7 @@ class DB2MapperSaleOrder(object):
                     do_partial_picking(pick, pick_lines)
                 # Do the deliver to customer
                 do_final_picking(pick2, pick_lines)
+        return new
 
 
 mappers = {
@@ -891,7 +893,7 @@ class DB2ImporterTable(models.Model):
         db2_id: row id to read and convert
         ref: is not used but is there for verification
         """
-        mappers[self.table_name].process(self, self.table_name, db2_id)
+        return mappers[self.table_name].process(self, self.table_name, db2_id)
 
     @api.multi
     def create_convertion_jobs(self, where_clause):
