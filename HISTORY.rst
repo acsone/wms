@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1305: Add importation product of length, width, depth
+* ALCN-1326: Fix mapping of product weight
+
 **Features and Improvements**
 
 **Bugfixes**
