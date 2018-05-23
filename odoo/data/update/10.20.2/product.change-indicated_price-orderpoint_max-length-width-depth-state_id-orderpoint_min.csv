@@ -1,0 +1,7 @@
+id,indicated_price,orderpoint_max,length,width,depth,state_id/id,orderpoint_min
+__import__.product_1411375,27.20,20.000,7.50,7.50,11.50,,8.000
+__import__.product_1413013,38.00,20.000,10.50,10.50,11.00,,8.000
+__import__.product_1413020,38.00,20.000,10.50,10.50,11.00,,8.000
+__import__.product_1413082,27.20,20.000,7.50,7.50,11.50,,8.000
+__import__.product_2503845,29.81,35.000,3.40,3.40,10.50,specific_purchase.product_state_h,10.000
+__import__.product_7420028,75.18,7.000,5.70,5.70,10.50,specific_purchase.product_state_h,4.000

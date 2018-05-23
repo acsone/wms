@@ -1,0 +1,3 @@
+id,list_price,length,width,depth,state_id/id,web_published,active
+__import__.product_5175621,151.20,0,0,0,specific_purchase.product_state_l,False,False
+__import__.product_5611831,184.00,0,0,0,specific_purchase.product_state_l,False,False

@@ -1,0 +1,2 @@
+id,indicated_price,weight,width,orderpoint_max,length,orderpoint_qty_multiple,depth,route_ids/id
+__import__.product_5042511,85.00,3.50,20.00,1.000,20.00,1,16.00,purchase.route_warehouse0_buy

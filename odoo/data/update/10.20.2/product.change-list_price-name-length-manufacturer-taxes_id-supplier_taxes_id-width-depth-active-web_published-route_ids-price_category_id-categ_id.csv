@@ -1,0 +1,2 @@
+id,list_price,name,length,manufacturer/id,taxes_id/id,supplier_taxes_id/id,width,depth,active,web_published,route_ids/id,price_category_id/id,categ_id/id
+__import__.product_5244020,187.50,OPTION CK : EXTENSION DENTAIRE PL PLAT,0,__import__.supplier_95150,l10n_be.1_attn_VAT-OUT-21-L,l10n_be.1_attn_VAT-IN-V81-21,0,0,True,True,purchase.route_warehouse0_buy,specific_product.product_price_category_gma,specific_data.product_categ_mat_equipement

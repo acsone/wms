@@ -1,0 +1,3 @@
+id,ratio_main_product,unit_in_shrink_wrap,unit_in_box,ratio_additional_product,length,unit_in_pallet,width,depth,storage_temperature_id/id,list_price,name
+__import__.product_5035300,0,0,0,0,0,0,0,0,specific_product.product_storage_temperature_ambient,30.00,MELAG SAV EUROKLAV 23V EVACUATION+EMBOUT
+__import__.product_5180485,0,0,0,0,0,0,0,0,specific_product.product_storage_temperature_ambient,880.00,AGRAFES AUTOSUTURE GIA8048L RECHARGE x6

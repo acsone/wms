@@ -1,0 +1,2 @@
+id,ratio_main_product,unit_in_shrink_wrap,unit_in_box,orderpoint_max,ratio_additional_product,length,unit_in_pallet,width,depth,orderpoint_min,storage_temperature_id/id
+__import__.product_5156510,0,0,0,4.000,0,0,0,0,0,2.000,specific_product.product_storage_temperature_ambient
