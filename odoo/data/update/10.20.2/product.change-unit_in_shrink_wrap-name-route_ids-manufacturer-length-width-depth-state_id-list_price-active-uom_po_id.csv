@@ -1,0 +1,2 @@
+id,unit_in_shrink_wrap,name,route_ids/id,manufacturer/id,length,width,depth,state_id/id,list_price,active,uom_po_id/id
+__import__.product_5017925,10,"SONDE ENDOTRACH TRANSP SANS BALLON 2,5mm","stock.route_warehouse0_mto,purchase.route_warehouse0_buy",__import__.supplier_71212,0,0,0,,4.47,True,__setup__.product_uom_boite

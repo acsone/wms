@@ -1,0 +1,4 @@
+id,indicated_price,weight,length,width,depth,route_ids/id
+__import__.product_5161910,22.90,3.00,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
+__import__.product_5165200,32.50,2.50,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
+__import__.product_5166200,22.90,2.50,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"

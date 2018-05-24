@@ -1,0 +1,2 @@
+id,ratio_main_product,tracking,unit_in_shrink_wrap,unit_in_box,medical_device,ratio_additional_product,length,unit_in_pallet,width,depth,storage_temperature_id/id,route_ids/id
+__import__.product_5010636,0,lot,0,0,,0,0,0,0,0,specific_product.product_storage_temperature_ambient,purchase.route_warehouse0_buy

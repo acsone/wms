@@ -1,0 +1,14 @@
+id,weight,orderpoint_max,length,width,depth,state_id/id,orderpoint_min
+__import__.product_1015390,0,2.000,0,0,0,specific_purchase.product_state_h,2.000
+__import__.product_3585825,0.20,20.000,0,0,0,specific_purchase.product_state_h,10.000
+__import__.product_4008021,1.50,79.000,25.00,19.00,8.50,,32.000
+__import__.product_4150104,4.00,109.000,32.00,25.00,12.00,specific_purchase.product_state_h,53.000
+__import__.product_4500265,14.00,160.000,70.00,38.00,12.00,specific_purchase.product_state_h,80.000
+__import__.product_4500405,8.00,64.000,56.00,38.00,8.00,,26.000
+__import__.product_5090321,10.00,70.000,0,0,0,specific_purchase.product_state_h,40.000
+__import__.product_5828692,2.00,131.000,29.00,19.00,6.00,,52.000
+__import__.product_6828887,3.00,210.000,37.00,29.00,9.00,,70.000
+__import__.product_8043606,0,30.000,0,0,0,specific_purchase.product_state_h,15.000
+__import__.product_8091479,0.70,18.000,10.50,16.00,23.00,specific_purchase.product_state_h,10.000
+__import__.product_8130529,10.00,20.000,0,0,0,specific_purchase.product_state_h,10.000
+__import__.product_8239887,0,10.000,0,0,0,,5.000

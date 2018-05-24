@@ -32,7 +32,10 @@ class ProductMapper(EntityMapper):
             'indicated_price', 'cplz23',
         ),
         FieldMapper('sale_delay', constant=0),
-        FieldMapper('weight', 'gespbr'),
+        FieldMapper('weight', 'cp2z07'),
+        FieldMapper('length', 'cp2z03'),
+        FieldMapper('width', 'cp2z05'),
+        FieldMapper('depth', 'cp2z01'),
         FieldMapper(
             'uom_po_id/id', 'gesuna',
             mapping=mappings.UOM, default='product.product_uom_unit'

@@ -1,0 +1,5 @@
+id,width,depth,route_ids/id,length,weight
+__import__.product_5163310,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",0,3.00
+__import__.product_8190425,0,0,purchase.route_warehouse0_buy,0,0
+__import__.product_8342674,0,0,purchase.route_warehouse0_buy,0,0
+__import__.product_8369710,0,0,purchase.route_warehouse0_buy,0,0

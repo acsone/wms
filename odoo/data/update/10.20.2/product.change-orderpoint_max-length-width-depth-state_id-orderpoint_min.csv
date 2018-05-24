@@ -1,0 +1,12 @@
+id,orderpoint_max,length,width,depth,state_id/id,orderpoint_min
+__import__.product_1065440,10.000,0,0,0,specific_purchase.product_state_h,5.000
+__import__.product_1400903,25.000,10.20,10.20,17.70,,8.000
+__import__.product_2710796,50.000,4.90,14.50,10.40,specific_purchase.product_state_h,20.000
+__import__.product_2717445,12.000,6.60,2.00,9.50,specific_purchase.product_state_h,6.000
+__import__.product_2908986,87.000,0,0,0,,24.000
+__import__.product_2992816,5.000,7.60,11.50,3.10,specific_purchase.product_state_h,2.000
+__import__.product_3004488,15.000,0,0,0,specific_purchase.product_state_h,7.000
+__import__.product_3085859,30.000,0,0,0,,15.000
+__import__.product_3116837,44.000,0,0,0,,20.000
+__import__.product_5822119,20.000,0,0,0,specific_purchase.product_state_h,10.000
+__import__.product_7379592,17.000,5.10,5.10,18.00,,6.000
