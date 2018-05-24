@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ProductProduct(models.Model):
@@ -25,10 +25,6 @@ class ProductTemplate(models.Model):
         readonly=True,
         store=False,
         string='Sale Price 2',
-    )
-
-    standard_price = fields.Float(
-        compute='_compute_standard_price',
     )
 
     cnk_code = fields.Char(string='CNK')
@@ -63,18 +59,3 @@ class ProductTemplate(models.Model):
                     qty=1
                 )
                 product.sale_price_2 = price.get(pricelist.id, 0.0)
-
-    @api.depends('seller_ids')
-    def _compute_standard_price(self):
-        """Find current highest price offered by suppliers."""
-        today = fields.Date.today()
-        for record in self:
-            supply = record.seller_ids.filtered(
-                lambda r: ((r.date_end >= today or not r.date_end) and
-                           (r.date_start <= today or not r.date_start))
-            )
-            if supply:
-                supply = supply.sorted(key=lambda r: (r.price), reverse=True)
-                record.standard_price = supply[0].price
-            else:
-                record.standard_price = 0
