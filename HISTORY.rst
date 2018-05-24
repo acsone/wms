@@ -10,6 +10,8 @@ Unreleased
 
 * ALCN-1305: Add importation product of length, width, depth
 * ALCN-1326: Fix mapping of product weight
+* ALCN-1385: Fix broken update of Purchase order in final mode for in progress states
+* Add created or update record id in "Results" of importer queue jobs
 
 **Features and Improvements**
 
