@@ -8,6 +8,7 @@ from anthem.lyrics.records import create_or_update
 from anthem.lyrics.loaders import load_csv_stream
 
 from ..common import req
+from ..common import define_settings
 
 # Assignment types
 PICKING_ASSIGNMENT = '1'
@@ -36,6 +37,16 @@ def company_settings(ctx):
             "ou pas email <b>qualite@alcyonbelux.be</b> "
             "ou par fax <b>04/338.84.35</b>.</p>"
     })
+
+
+@anthem.log
+def settings_lot_base_date(ctx):
+    """ Set product life date as base date """
+
+    # Default invoice
+    define_settings(ctx,
+                    'stock.config.settings',
+                    {'product_lot_base_date': 'life'})
 
 
 @anthem.log
@@ -1164,6 +1175,7 @@ def set_product_expiry(ctx):
 def main(ctx):
     """ Configuring logistics """
     company_settings(ctx)
+    settings_lot_base_date(ctx)
     activate_options(ctx)
     warehouse_settings(ctx)
     create_picking_zones(ctx)

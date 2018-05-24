@@ -11,9 +11,13 @@ Unreleased
 * ALCN-1305: Add importation product of length, width, depth
 * ALCN-1326: Fix mapping of product weight
 * ALCN-1385: Fix broken update of Purchase order in final mode for in progress states
+* ALCN-1340: Recompute alert and removal dates on lots based on life date
 * Add created or update record id in "Results" of importer queue jobs
 
 **Features and Improvements**
+
+* ALCN-1340: Set setting 'base date for product lot' to 'life date'
+
 
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field
