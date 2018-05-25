@@ -47,6 +47,8 @@ COPY ./bin/csv-split.py bin/
 
 # Copy custom runtests file
 COPY ./bin/runtests odoo/bin/
+COPY ./bin/runmigration odoo/bin/
+COPY ./bin/list_dependencies.py odoo/bin/
 
 ENV ADDONS_PATH="/opt/odoo/local-src, \
   /opt/odoo/external-src/enterprise, \
