@@ -11,6 +11,7 @@ Unreleased
 * ALCN-1291: In sale report remove header payment_term and vendor
   and add NL translations
 * ALCN-1332: Add a script to import customer banks accounts and madats
+* ALCN-1225: Add a serial number on stock move and display this serial number in the delivery slip
 
 **Bugfixes**
 
@@ -83,7 +84,6 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
-* ALCN-1225: Add a serial number on stock move and display this serial number in the delivery slip
 
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field
