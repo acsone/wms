@@ -39,3 +39,11 @@ msgstr "<strong>%<br/>Remise<br/>globale</strong>"
 #: model:ir.ui.view,arch_db:purchase.report_purchaseorder_document
 msgid "<strong>%<br/>Additional<br/>discount</strong>"
 msgstr "<strong>%<br/>Remise<br/>supplémentaire</strong>"
+
+
+#. module: purchase
+#: model:ir.ui.view,arch_db:purchase.report_purchaseorder_document
+msgid "Please send us by email a copy of the mailing note and confirm the delivery date. Please contact us before any delivery if a price is wrong, if one of the articles has an expiry date inferior to 6 months or if it is out of stock.<br/>\n"
+"                        In any case, unsold items delivered with a validity of less than 6 months must be credited or replaced."
+msgstr "Merci de nous envoyer par email une copie de la note d'envoi et de nous confirmer la date de livraison. Veuillez nous contacter avant toute livraison si un prix est erroné, si un des articles a une date péremption inférieure à 6 mois ou s'il est en rupture de stock.<br/>"
+"                        Dans tous les cas, les articles invendus livrés avec une validité inférieure à 6 mois devront être crédites ou remplacés.</p>"
