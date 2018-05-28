@@ -18,6 +18,9 @@ Unreleased
 * ALCN-1340: Recompute alert and removal dates on lots based on life date
 * ALCN-1402: Import products with category Human as services
 * ALCN-1357: Import antibiotic taxes on products
+* ALCN-1341: Raise sequence on unbounded supplierinfo to give them a lower priority
+             We usually want current seller prices which are bounded in time.
+* ALCN-1341: Compute promotions in importer sale order lines
 * Add created or update record id in "Results" of importer queue jobs
 * TODO update suppliers for ALCN-1310
 * TODO update products for ALCN-1402 and ALCN-1357 to introduce types and antibiotic taxes
