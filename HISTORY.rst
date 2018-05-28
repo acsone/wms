@@ -17,6 +17,8 @@ Unreleased
 
 **Build**
 
+* ALCN-1394: Disable the module account_sepa (enterprise) and install the module l10n_be_iso20022_pain
+
 **Documentation**
 
 

@@ -126,6 +126,8 @@ migration:
           - account_banking_sepa_credit_transfer
           - account_banking_sepa_direct_debit
           - account_invoice_tax_required
+          # oca/l10n-belgium
+          - l10n_be_iso20022_pain
           # oca/product-attribute
           - product_manufacturer
           # oca/sale-workflow
@@ -214,8 +216,11 @@ migration:
     - version: 10.21.0
       addons:
         upgrade:
+          # oca/l10n-belgium
+          - l10n_be_iso20022_pain
           ### local-src
           - specific_partner
       operations:
         post:
           - anthem songs.install.partner::create_legal_entity
+          - anthem songs.install.pre::disable_module_account_sepa

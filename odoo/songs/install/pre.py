@@ -79,8 +79,21 @@ def change_config_parameters(ctx):
 
 
 @anthem.log
+def disable_module_account_sepa(ctx):
+    """ Disable the module account_sepa """
+
+    # The module account will automatically install l10n modules
+    # however we don't want to install the module account_sepa (this module
+    # is in conflict with the module account_banking_sepa_direct_debit)
+    ctx.env.ref('base.module_account_sepa').write({
+        'state': 'uninstallable'
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Executing main entry point called before upgrade of addons """
     setup_language(ctx)
     setup_company_minimal(ctx)
     change_config_parameters(ctx)
+    disable_module_account_sepa(ctx)
