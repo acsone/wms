@@ -541,3 +541,5 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-web_published-unit_in_shrink_wrap-unit_in_box-orderpoint_max-length-width-depth-state_id-orderpoint_min-orderpoint_qty_multiple-active-name.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-list_price-weight-orderpoint_max-length-width-depth-orderpoint_min-orderpoint_qty_multiple-route_ids.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-state_id-width-depth-length-weight.csv
+              # update addresses to add missing ones
+              - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
