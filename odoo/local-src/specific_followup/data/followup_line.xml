@@ -16,25 +16,23 @@
             <field name="followup_id" ref="alcyon_followup"/>
             <field name="send_email">True</field>
             <field name="description"><![CDATA[
-  Cher(e) Docteur,
-  Madame, Monsieur,
-  <br/>
-  Nous vous prions de trouver ci-dessous un relevé de factures échues.
-  <br/>
-  Nous vous serions reconnaissants de vérifier que vous les avez bien reçues et de procéder au paiement dans les meilleurs délais, ou de nous contacter en cas de contestation.
-  <br/>
-  Si vous venez d’effectuer votre paiement, veuillez nous excuser pour ce rappel.
-  <br/>
-  Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-  <br/>
-  <br/>
-  <div style="text-align: right">
-  Pour le service comptabilité
-  <br/>
-  JF MARECHAL
-  Jf.marechal@alcyonbelux.be
-  04/338 84 34
-  </div>
+Cher(e) Docteur,
+Madame, Monsieur,
+
+Nous vous prions de trouver ci-dessous un relevé de factures échues.
+
+Nous vous serions reconnaissants de vérifier que vous les avez bien reçues et de procéder au paiement dans les meilleurs délais, ou de nous contacter en cas de contestation.
+
+Si vous venez d’effectuer votre paiement, veuillez nous excuser pour ce rappel.
+
+Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
+
+
+Pour le service comptabilité
+
+JF MARECHAL
+Jf.marechal@alcyonbelux.be
+04/338 84 34
   ]]></field>
         </record>
         <record id="alcyon_followup_line2" model="account_followup.followup.line">
@@ -45,25 +43,23 @@
             <field name="send_email">True</field>
             <field name="send_letter">True</field>
             <field name="description"><![CDATA[
-  Cher(e) Docteur,
-  Madame, Monsieur,
-  <br/>
-  Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
-  <br/>
-  Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
-  <br/>
-   Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
-  <br/>
-  Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-  <br/>
-  <br/>
-  <div style="text-align: right">
-  Pour le service comptabilité
-  <br/>
-  JF MARECHAL
-  Jf.marechal@alcyonbelux.be
-  04/338 84 34
-  </div>
+Cher(e) Docteur,
+Madame, Monsieur,
+
+Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
+
+Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
+
+Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
+
+Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
+
+
+Pour le service comptabilité
+
+JF MARECHAL
+Jf.marechal@alcyonbelux.be
+04/338 84 34
   ]]></field>
         </record>
 
@@ -76,25 +72,23 @@
             <field name="manual_action">True</field>
             <field name="manual_action_note">Call the customer on the phone! </field>
             <field name="description"><![CDATA[
-  Cher(e) Docteur,
-  Madame, Monsieur,
-  <br/>
-  Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
-  <br/>
-  Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
-  <br/>
-   Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
-  <br/>
-  Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-  <br/>
-  <br/>
-  <div style="text-align: right">
-  Pour le service comptabilité
-  <br/>
-  JF MARECHAL
-  Jf.marechal@alcyonbelux.be
-  04/338 84 34
-  </div>
+Cher(e) Docteur,
+Madame, Monsieur,
+
+Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
+
+Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
+
+Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
+
+Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
+
+
+Pour le service comptabilité
+
+JF MARECHAL
+Jf.marechal@alcyonbelux.be
+04/338 84 34
   ]]></field>
         </record>
     </data>
