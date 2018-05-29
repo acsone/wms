@@ -4,6 +4,10 @@
 
 from odoo.tests.common import TransactionCase, at_install, post_install
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class TestSaleOrderLineQtyUnavailable(TransactionCase):
 
@@ -184,11 +188,24 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
         # After the stock increase (qty = 2),
         # the unavailable quantity on first order is already 10
+        # FIXME randomly get 10 instead of 8
+        _logger.info("======== Start debug info for unit test =========")
+        _logger.info("count lines: %s", len(self.sale_1.order_line[0]))
+        line = self.sale_1.order_line[0]
+        _logger.info("product_id: %s", line.product_id)
+        _logger.info("product_uom_qty: %s",
+                     line.product_uom_qty)
+        _logger.info("state: %s", line.state)
+        _logger.info("id: %s", line.id)
+        _logger.info("product.immediately_usable_qty: %s",
+                     line.product_id.immediately_usable_qty)
+        _logger.info("======== End debug info for unit test =========")
         self.assertEqual(
             self.sale_1.order_line[0].product_qty_unavailable,
             10
         )
         # the current unavailable quantity on first order is now 8
+
         self.assertEqual(
             self.sale_1.order_line[0].current_product_qty_unavailable,
             8
