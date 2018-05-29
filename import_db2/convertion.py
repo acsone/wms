@@ -645,6 +645,7 @@ class MasterCustomerMapper(CustomerMapper):
 class AddressMapper(EntityMapper):
     DB2_NAME = 'ADRLIV'
     DB2_REF_NAME = 'adlnum'
+    DB2_SCHEMA = 'gendata'
 
     XMLID_FIELD = 'id'
     FIELDS_MAPPING = [
