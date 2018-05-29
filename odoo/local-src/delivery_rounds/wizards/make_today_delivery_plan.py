@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api
+from itertools import groupby
 
 
 class MakeTodayDeliveryPlan(models.TransientModel):
@@ -27,23 +28,35 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     @api.multi
     def confirm(self):
         self.ensure_one()
-
+        round_instance = self.env['round.instance']
         templates = self.version_id.template_ids
         execution_date = self.execution_date
-        # deduct templates for which instance already exist
-        instances = self.env['round.instance'].search([
-            ('date', '=', execution_date)])
-        templates -= instances.mapped('template_id')
-        # create instance for each template
+        instances = round_instance.search([
+            ('date', '=', execution_date)],
+            order='template_id')
+        instances_by_template = groupby(
+            instances, key=lambda r: r.template_id)
         for template in templates:
-            self.env['round.instance'].create({
-                'template_id': template.id,
-                'itinerary_ids': [(6, 0, template.itinerary_ids.ids)],
-                'date': execution_date,
-                'time_picking_planned': template.time_picking_planned,
-                'time_leave_planned': template.time_leave_planned,
-                'tag_ids': [(6, 0, self.tag_ids.ids)]
-                })
+            if template in instances_by_template:
+                instance = instances_by_template.pop(template)
+                if instance.state == 'pending':
+                    instance.state = 'draft'
+                if (not instance.time_picking_planned or
+                        not instance.time_leave_planned):
+                    instance.write({
+                        'time_picking_planned': template.time_picking_planned,
+                        'time_leave_planned': template.time_leave_planned,
+                        })
+            else:
+                round_instance.create({
+                    'template_id': template.id,
+                    'state': 'draft',
+                    'itinerary_ids': [(6, 0, template.itinerary_ids.ids)],
+                    'date': execution_date,
+                    'time_picking_planned': template.time_picking_planned,
+                    'time_leave_planned': template.time_leave_planned,
+                    'tag_ids': [(6, 0, self.tag_ids.ids)]
+                    })
 
         if templates and self.assign_moves:
             # Run stock reservations in background.  This process automatically

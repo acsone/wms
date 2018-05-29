@@ -54,7 +54,7 @@
                 <field name="state"/>
                 <field name="delivery_round_id"/>
                 <field name="priority" invisible="1"/>
-                <field name="picking_type_id" invisible="1"/>
+                <field name="picking_type_id" invisible="0"/>
             </tree>
         </field>
     </record>

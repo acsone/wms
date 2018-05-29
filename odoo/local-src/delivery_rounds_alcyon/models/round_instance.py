@@ -98,12 +98,12 @@ class RoundInstance(models.Model):
             rec.count_picking_done_total = picking_done[rec.id]
 
         query = """
-            SELECT p.delivery_round_id, count(*)
+            SELECT p.delivery_round_id, count(distinct partner_id)
             FROM stock_picking p
             WHERE p.state in ('partially_available',
                                 'assigned', 'done')
             AND p.delivery_round_id in %s
-            GROUP BY p.delivery_round_id, p.partner_id
+            GROUP BY p.delivery_round_id
         """
         self._cr.execute(query, (tuple(self.ids), ))
         for delivery_round_id, count in self._cr.fetchall():

@@ -41,12 +41,6 @@ class RoundInstance(models.Model):
     _order = 'date desc, time_picking_planned asc'
     _rec_name = 'complete_name'
 
-    name = fields.Char(
-        'Name',
-        required=True,
-        # default=lambda *a: datetime.now().strftime('%y%m%d')
-        default='New',
-        )
     date = fields.Date(
         'Date',
         required=True,
@@ -70,6 +64,7 @@ class RoundInstance(models.Model):
     template_id = fields.Many2one(
         'round.template', 'Template',
         states={'done': [('readonly', True)]},
+        required=True,
         ondelete='restrict')
     template_code = fields.Char(
         'Code',
@@ -86,12 +81,13 @@ class RoundInstance(models.Model):
     color = fields.Integer(
         related='template_id.color')
     state = fields.Selection(
-        [('draft', 'Draft'),
+        [('pending', 'Anticipated'),
+         ('draft', 'Draft'),
          ('open', 'Confirmed'),
          ('done', 'Done')],
         'State',
         readonly=True,
-        default='draft')
+        default='pending')
 
     itinerary_ids = fields.Many2many(
         'round.itinerary',
@@ -273,11 +269,12 @@ class RoundInstance(models.Model):
     @api.model
     def find(self, partner):
         """
-        Find a delivery_round for this partner according tags defined
+        Find a delivery_round for this partner according to tags defined
         on customer position or round instance.
-        Round instance are sorted according the date and the time of picking
+        Round instances are sorted according to the date and the time of
+        the picking.
 
-        There is the rule for take or not a round instance:
+        Here is the rule for taking or not a round instance:
         - If you define one (or more) tag on the instance, only customer
         containing this tag will be taken
         - A customer without tag will be taken in any case
