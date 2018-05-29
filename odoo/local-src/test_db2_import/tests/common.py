@@ -171,6 +171,7 @@ class DB2ImportTestCase(SavepointCase):
         cls.create_db2_tables()
         cls.insert_db2_records()
         cls.load_uom()
+        cls.load_legal_entities()
         cls.update_chart_of_account()
         cls.add_xmlid_fiscal_position()
         cls.load_accounts()
@@ -287,6 +288,11 @@ class DB2ImportTestCase(SavepointCase):
     def load_uom(cls):
         with open(INSTALL_CSV_PATH % 'product.uom') as csv_file:
             load_csv(cls.env['product.uom'], csv_file)
+
+    @classmethod
+    def load_legal_entities(cls):
+        with open(INSTALL_CSV_PATH % 'legal.entity') as csv_file:
+            load_csv(cls.env['legal.entity'], csv_file)
 
     @classmethod
     def load_accounts(cls):

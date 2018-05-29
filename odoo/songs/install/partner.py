@@ -52,3 +52,4 @@ def main(ctx):
     """ Configuring partner """
     create_customer_category(ctx)
     create_supplier_category(ctx)
+    create_legal_entity(ctx)
