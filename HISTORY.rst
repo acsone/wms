@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1332: Add a script to import customer banks accounts and madats
 * ALCN-1225: Add a serial number on stock move and display this serial number in the delivery slip
 * ALCN-1350: Split a CODA file by statement and ignore statements with an account not managed by Alcyon.
+* ALCN-1116: Add the module CSV File (this is a generic module)
 
 **Bugfixes**
 * ALCN-1426: Add missing Inputmask library
