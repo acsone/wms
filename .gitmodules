@@ -58,3 +58,6 @@
 [submodule "odoo/external-src/partner-contact"]
 	path = odoo/external-src/partner-contact
 	url = git@github.com:OCA/partner-contact
+[submodule "odoo/external-src/connector-interfaces"]
+	path = odoo/external-src/connector-interfaces
+	url = git@github.com:OCA/connector-interfaces.git

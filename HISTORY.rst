@@ -85,6 +85,7 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
+* Add the repo connector-interfaces from OCA and install the module base_import_async
 
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field

@@ -151,6 +151,8 @@ migration:
           - web_decimal_numpad_dot
           # oca/purchase-workflow
           - purchase_cancel_reason
+          # oca/connector-interfaces
+          - base_import_async
           ### local-src
           - account_cutoff_accrual_return
           - account_invoice_tax_required
@@ -235,6 +237,8 @@ migration:
           ### local-src
           - specific_report
           - specific_sale
+          # oca/connector-interfaces
+          - base_import_async
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post
