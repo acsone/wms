@@ -199,6 +199,41 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         _logger.info("id: %s", line.id)
         _logger.info("product.immediately_usable_qty: %s",
                      line.product_id.immediately_usable_qty)
+        order_line_stock_move = self.env['stock.move'].search([
+            ('procurement_id.sale_line_id', '=', line.id),
+            ('state', 'not in', ['draft', 'cancel', 'done'])
+        ])
+        _logger.info("order_line_stock_move: %s",
+                     order_line_stock_move)
+        stock_move_date_expected = (
+            order_line_stock_move.date_expected
+        )
+        _logger.info("stock_move_date_expected: %s",
+                     stock_move_date_expected)
+        next_stock_moves = self.env['stock.move'].search([
+            ('product_id', '=', line.product_id.id),
+            ('procurement_id.sale_line_id', '!=', line.id),
+            ('state', 'not in', ['draft', 'cancel', 'done']),
+            '|',
+            ('priority', '<',  order_line_stock_move.priority),
+            '&',
+            ('priority', '=', order_line_stock_move.priority),
+            ('date_expected', '>', stock_move_date_expected),
+        ])
+        _logger.info("next_stock_moves: %s",
+                     next_stock_moves)
+        next_quantities = sum(
+            move.product_uom_qty for move in next_stock_moves
+        )
+        for move in next_stock_moves:
+            _logger.info("move %s qty: %s",
+                         move.id, move.product_uom_qty)
+
+        good_immediately_usable_qty = (
+            line.product_id.immediately_usable_qty + next_quantities
+        )
+        _logger.info("good_immediately_usable_qty: %s",
+                     good_immediately_usable_qty)
         _logger.info("======== End debug info for unit test =========")
         self.assertEqual(
             self.sale_1.order_line[0].product_qty_unavailable,
