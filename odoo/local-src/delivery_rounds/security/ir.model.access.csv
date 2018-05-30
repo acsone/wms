@@ -12,3 +12,4 @@ access_round_template_version,access_round_template_version,model_round_template
 access_round_tag,access_round_tag,model_round_tag,stock.group_stock_user,1,0,0,0
 access_round_instance_customer,access_round_instance_customer,model_round_instance_customer,stock.group_stock_user,1,0,0,0
 access_cron_delivery_plan,access_cron_delivery_plan,model_cron_delivery_plan,stock.group_stock_manager,1,0,0,0
+access_round_instance,access_round_instance,model_round_instance,base.group_user,1,0,0,0
