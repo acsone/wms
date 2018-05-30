@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1305: Add importation product of length, width, depth
+* ALCN-1306: Set received quantities on purchase lines, take the value from actually received qty instead of ordered
 * ALCN-1310: Import the payable account on suppliers (this replaces the mapping for categories)
 * ALCN-1317: Add missing delivery addresses which were only in schema GENDATA in DB2
 * ALCN-1326: Fix mapping of product weight
