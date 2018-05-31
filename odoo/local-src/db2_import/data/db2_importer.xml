@@ -16,6 +16,7 @@
     <field name="table_name">PENTCDCL</field>
     <field name="table_prefix">ecc</field>
     <field name="id_columns">eccsui,ecccli,eccsuc</field>
+    <field name="where_clause">ecctyc &lt;&gt; 2</field>
     <field name="create_job" eval="True"/>
     <field name="eta">2</field>
   </record>
@@ -93,7 +94,7 @@
     <field name="id_columns">eccsui,ecccli,eccsuc</field>
     <field name="create_job" eval="True"/>
     <field name="eta">2</field>
-    <field name="where_clause">ecccli IN (354, 6891, 379, 8657, 8264, 8585, 3993, 560, 600)</field>
+    <field name="where_clause">ecctyc &lt;&gt; 2 AND ecccli IN (354, 6891, 379, 8657, 8264, 8585, 3993, 560, 600)</field>
   </record>
 
   <!-- sale order detail line table -->
