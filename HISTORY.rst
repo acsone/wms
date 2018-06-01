@@ -21,6 +21,7 @@ Unreleased
 * ALCN-1341: Raise sequence on unbounded supplierinfo to give them a lower priority
              We usually want current seller prices which are bounded in time.
 * ALCN-1341: Compute promotions in importer sale order lines
+* ALCN-1341: Fix mapping of discount on sale order lines
 * Add created or update record id in "Results" of importer queue jobs
 * TODO update suppliers for ALCN-1310
 * TODO update products for ALCN-1402 and ALCN-1357 to introduce types and antibiotic taxes
