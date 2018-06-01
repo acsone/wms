@@ -25,9 +25,7 @@ class ProductMapper(EntityMapper):
         FieldMapper('create_date', 'gesc', is_date=True),
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
-        # standard_price is redefined as a computed field in specific_product
-        # thus the price is dealt with in supplierinfo
-        # FieldMapper('standard_price', 'gespan'),
+        FieldMapper('standard_price', 'gespan'),
         FieldMapper(
             'indicated_price', 'cplz23',
         ),
