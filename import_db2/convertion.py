@@ -734,8 +734,8 @@ class SupplierMapper(EntityMapper):
         FieldMapper('alcyon_category_id/id',
                     constant='specific_partner.partner_category_supplier'),
         # foucol: code collectif
-        FieldMapper('category_id/id', 'foucol',
-                    mapping=mappings.SUPPLIER_CATEGORY),
+        FieldMapper('property_account_payable_id/id', 'foucol',
+                    mapping=mappings.ACCOUNT_PAYABLE),
         FieldMapper('country_id/id', 'foucpa',
                     mapping=mappings.COUNTRY),
         FieldMapper('lang', 'foulan',
