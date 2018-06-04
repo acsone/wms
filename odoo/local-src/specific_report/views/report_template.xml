@@ -1,5 +1,18 @@
 <odoo>
 
+    <template id="specific_report.alcyon_header">
+        <div class="header">
+            <div style="position: fixed; left: 0; top: 420px;">_</div>
+            <div style="position: fixed; right: 0; top: 420px;">_</div>
+
+            <div id="logo">
+                <img t-if="company.logo"
+                         t-att-src="'data:image/png;base64,%s' % company.logo"
+                         style="max-height: 70px;"/>
+            </div>
+        </div>
+    </template>
+
     <!-- footer with only page numbering -->
     <template id="specific_report.page_number_footer">
         <div class="footer">
@@ -45,4 +58,20 @@
         </xpath>
     </template>
 
+    <template id="report.external_layout">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+
+        <t t-call="specific_report.alcyon_header" />
+        <t t-raw="0" />
+        <t t-call="specific_report.page_number_footer" />
+    </template>
 </odoo>
