@@ -26,6 +26,7 @@ Unreleased
 * ALCN-1413: On client: name_get itinerary: include tags + align colors between tags and kanban
 * ALCN-1461: In product price xml send Msrp node even when equal to zero (ESB).
 * ALCN-1455: Fix new sale order exported with status empty in xml (ESB)
+* ALCN-1406: Internal Transfer: Do not compute product putaway on fixed location otherwise destination is always product's locator
 
 **Build**
 
