@@ -2,6 +2,8 @@
 # © 2017 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from datetime import datetime
+
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
 
@@ -126,6 +128,24 @@ class StockPackOperationLotAdd(models.TransientModel):
                 'message': _(
                     'You cannot receive more than the '
                     'expected remaining quantity')}}
+
+    life_date_char = fields.Char(
+        string='End of Life Date (input)')
+
+    @api.onchange('life_date_char')
+    def _onchange_life_date_char(self):
+        if not self.life_date_char:
+            self.life_date = False
+        else:
+            try:
+                life_date = fields.Datetime.to_string(
+                    datetime.strptime(self.life_date_char, '%d/%m/%Y'))
+                self.life_date = life_date
+            except Exception:
+                self.life_date = False
+        methods = self._onchange_methods.get('life_date', ())
+        for method in methods:
+            method(self)
 
     life_date = fields.Datetime(
         string='End of Life Date')

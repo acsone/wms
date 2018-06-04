@@ -21,6 +21,7 @@ Unreleased
 
 * ALCN-1340: Set setting 'base date for product lot' to 'life date'
 * ALCN-1132: Reactivate the Unit Of Measure "liter"
+* Change date widget in reception screen (remove calendar popup and apply mask)
 
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field

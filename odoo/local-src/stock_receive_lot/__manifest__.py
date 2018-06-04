@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Jacques-Etienne Baudoux (BCIM)
+# Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -14,6 +14,7 @@
         'stock_picking_assignment',
         'stock_production_lot_expired_dates',
         'specific_helpdesk',
+        'web_widget_inputmask',
     ],
     'data': [
         'views/stock_pack_operation.xml',

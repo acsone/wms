@@ -208,6 +208,7 @@ migration:
           - code_abc
           - stock_orderpoint_product
           - website_purchase_review
+          - web_widget_inputmask
     - version: 10.19.0
     # - version: 10.19.1 Fix version on top of 10.19.0, do not use
     - version: 10.19.2
