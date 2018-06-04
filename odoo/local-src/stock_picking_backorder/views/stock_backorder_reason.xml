@@ -7,17 +7,12 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group string="Backorder reason">
+                    <group>
                         <field name="name"/>
-                    </group>
-                    <group string="Backorder options">
                         <field name="backorder_action_to_do"/>
-                    </group>
-                    <group string="Helpdesk options">
+                        <field name="keep_grn"/>
                         <field name="is_helpdesk_ticket_to_create"/>
                         <field name="helpdesk_ticket_reason_id"
-                               attrs="{'invisible': [('is_helpdesk_ticket_to_create', '=', False)], 'required': [('is_helpdesk_ticket_to_create', '=', True)]}"/>
-                        <field name="helpdesk_ticket_default_name"
                                attrs="{'invisible': [('is_helpdesk_ticket_to_create', '=', False)], 'required': [('is_helpdesk_ticket_to_create', '=', True)]}"/>
                     </group>
                 </sheet>
@@ -32,9 +27,9 @@
             <tree string="Stock backorder reasons">
                 <field name="name" />
                 <field name="backorder_action_to_do"/>
+                <field name="keep_grn"/>
                 <field name="is_helpdesk_ticket_to_create"/>
                 <field name="helpdesk_ticket_reason_id"/>
-                <field name="helpdesk_ticket_default_name"/>
             </tree>
         </field>
     </record>

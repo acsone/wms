@@ -191,6 +191,7 @@ migration:
           - stock_lot_update
           - stock_inventory_controller
           - stock_picking_assignment
+          - stock_picking_backorder
           - stock_picking_fillwithstock
           - stock_picking_sequence
           - stock_picking_subcode

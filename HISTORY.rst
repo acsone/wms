@@ -17,6 +17,7 @@ Unreleased
 * Add created or update record id in "Results" of importer queue jobs
 
 **Features and Improvements**
+* Reactivate backorder reasons at reception and helpdesk ticket generation
 
 * ALCN-1340: Set setting 'base date for product lot' to 'life date'
 * ALCN-1132: Reactivate the Unit Of Measure "liter"

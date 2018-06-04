@@ -6,15 +6,6 @@
         <field name="inherit_id" ref="delivery_rounds.view_partner_form" />
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='customer']/parent::group" position="inside">
-                <field name="is_sale_back_order_accepted"/>
-            </xpath>
-
-            <xpath expr="//field[@name='supplier']/parent::group" position="inside">
-                <field name="is_purchase_back_order_accepted"/>
-            </xpath>
-
             <xpath expr="//field[@name='round_itinerary_ids']" position="after">
                 <field name="time_limit_order" widget="float_time"/>
             </xpath>

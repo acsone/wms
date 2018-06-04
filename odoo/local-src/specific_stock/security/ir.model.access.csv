@@ -1,6 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_stock_backorder_reason_manager,access_stock_backorder_reason_manager,model_stock_backorder_reason,stock.group_stock_manager,1,1,1,1
-access_stock_backorder_reason_all,access_stock_backorder_reason_all,model_stock_backorder_reason,base.group_user,1,0,0,0
 access_stock_move_group_user,access_stock_move_group_user,stock.model_stock_move,base.group_user,1,0,0,0
 access_stock_warehouse_orderpoint_group_user,access_stock_warehouse_orderpoint_group_user,stock.model_stock_warehouse_orderpoint,base.group_user,1,0,0,0
 access_stock_picking_group_user,access_stock_picking_group_user,stock.model_stock_picking,base.group_user,1,0,0,0
