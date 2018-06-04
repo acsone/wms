@@ -42,6 +42,7 @@ Unreleased
   Changes mapping for promotions, partner categories, alcyon categories and fiscal positions.
 
 **Features and Improvements**
+* Make stock inventory menu entry available (was hidden to users)
 
 * ALCN-1299: Add smartbutton "Tickets" on supplier invoices.
 

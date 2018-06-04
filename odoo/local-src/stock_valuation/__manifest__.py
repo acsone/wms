@@ -14,6 +14,7 @@
     'data': [
         'wizards/stock_valuation_history_view.xml',
         'views/stock_quant_views.xml',
+        'security/menu.xml',
         ],
     'installable': True,
     'active': False,
