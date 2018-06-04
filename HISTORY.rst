@@ -31,6 +31,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1392: Delay only one export job when creating / modifying a sales order
+* ALCN-1406: Internal Transfer: Do not compute product putaway otherwise destnation is always product's locator
 
 **Build**
 
@@ -129,12 +130,9 @@ Unreleased
 * Reactivate backorder reasons at reception and helpdesk ticket generation
 
 **Bugfixes**
+
 * Revert ALCN-1153: Set standard buying price in product cost field
-
-**Bugfixes**
-
 * ALCN-1000: Add missing ir.model.access for stock.move.lots and round.instance
-* Revert ALCN-1153: Set standard buying price in product cost field
 * Recover journal selection at top of invoice form view.
 
 
