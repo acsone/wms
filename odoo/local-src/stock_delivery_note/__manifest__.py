@@ -13,6 +13,9 @@
         'product_expiry',
         'stock_expired',
         ],
+    'data': [
+        'data/email_template.xml',
+    ],
     'website': 'www.camptocamp.com',
     'installable': True,
     'auto_install': False,
