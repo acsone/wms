@@ -83,6 +83,10 @@ PRODUCT_CATEGORY.update({
     99: 'specific_data.product_categ_finance_divers_divers',
 })
 
+PRODUCT_TYPE = {
+    15: 'service',  # specific_data.product_categ_humain
+}
+
 PRODUCT_WITH_APB_TAX_CATEG = [
     # Products Belgian VET, specific_data.product_categ_vet_belges
     3,  # specific_data.product_categ_antimicrobiens

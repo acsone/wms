@@ -60,6 +60,11 @@ class ProductMapper(EntityMapper):
             mapping=mappings.PRODUCT_CATEGORY
         ),
         FieldMapper(
+            'type', 'gescsg',
+            mapping=mappings.PRODUCT_TYPE,
+            default='product'
+        ),
+        FieldMapper(
             'state_id/id', 'geschr',
             mapping=mappings.PRODUCT_STATES
         ),
