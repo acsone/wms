@@ -17,6 +17,7 @@ Unreleased
 * ALCN-1385: Fix broken update of Purchase order in final mode for in progress states
 * ALCN-1340: Recompute alert and removal dates on lots based on life date
 * ALCN-1402: Import products with category Human as services
+* ALCN-1357: Import antibiotic taxes on products
 * Add created or update record id in "Results" of importer queue jobs
 * TODO update suppliers for ALCN-1310
 * TODO update products for ALCN-1402 to introduce types

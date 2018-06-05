@@ -116,7 +116,11 @@ class ProductMapper(EntityMapper):
         return None
 
     def convert_taxes_id(self, odoo_entity, db2_entity):
-        """ Map VAT and add APB taxes on drugs products """
+        """ Define product taxes mapping
+
+        Map VAT and APB taxes on drugs products,
+        Map ANTIBIOTIC tax
+        """
         db2_vat_id = db2_entity.get('gesctv')
         taxes = [
             mappings.PRODUCT_SALE_VAT.get(db2_vat_id, 'ERR_vat_not_found')
@@ -124,6 +128,19 @@ class ProductMapper(EntityMapper):
         db2_product_categ = db2_entity.get('gescsg')
         if db2_product_categ in mappings.PRODUCT_WITH_APB_TAX_CATEG:
             taxes.append('l10n_be_apb_tax.1_apb_01_out')
+
+        if db2_entity.get('cplz07').startswith('8888'):
+            tax_rate = mappings.PRODUCT_ANTIBIO_TAX.get(
+                db2_entity.get('cplz07')
+            )
+
+            xmlid = 'l10n_be_antibiotic_tax.1_antibiotic_%s_%s'
+            purchase_antibio_tax = xmlid % (tax_rate, 'in')
+            sale_antibio_tax = xmlid % (tax_rate, 'out')
+
+            taxes.append(purchase_antibio_tax)
+            taxes.append(sale_antibio_tax)
+
         odoo_entity['taxes_id/id'] = ','.join(taxes)
 
 
