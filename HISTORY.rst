@@ -20,7 +20,7 @@ Unreleased
 * ALCN-1357: Import antibiotic taxes on products
 * Add created or update record id in "Results" of importer queue jobs
 * TODO update suppliers for ALCN-1310
-* TODO update products for ALCN-1402 to introduce types
+* TODO update products for ALCN-1402 and ALCN-1357 to introduce types and antibiotic taxes
 
 **Features and Improvements**
 * Reactivate backorder reasons at reception and helpdesk ticket generation
