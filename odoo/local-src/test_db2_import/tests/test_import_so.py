@@ -21,17 +21,36 @@ class TestImportSO(DB2ImportTestCase):
         # We want history mode to generate the back orders
         self.importer_table_so.importer_id.mode = 'final_update'
 
-    def check_so_values(self, expected_values):
+    def check_values(self, record, expected_values):
         for k, expect in expected_values.iteritems():
             if expect is False:
-                self.assertFalse(self.so[k],
-                                 msg="Field %s must be false" % k)
+                self.assertFalse(record[k],
+                                 msg="Field %s must be false in %s"
+                                 % (k, record.name))
             elif isinstance(expect, float):
-                self.assertAlmostEqual(self.so[k], expect,
-                                       msg="Wrong value on field %s" % k)
+                self.assertAlmostEqual(record[k], expect,
+                                       msg="Wrong value on field %s in %s"
+                                       % (k, record.name))
             else:
-                self.assertEqual(self.so[k], expect,
-                                 msg="Wrong value on field %s" % k)
+                self.assertEqual(record[k], expect,
+                                 msg="Wrong value on field %s in %s"
+                                 % (k, record.name))
+
+    def check_so_values(self, expected_values):
+        self.check_values(self.so, expected_values)
+
+    def check_sol_values(self, expected_values):
+        for line in self.so.order_line:
+            expected_line_values = None
+            for exp in expected_values:
+                if exp['sequence'] == line.sequence:
+                    expected_line_values = exp
+                    break
+
+            self.assertTrue(expected_line_values,
+                            msg="Sale line %s not found" % line.sequence)
+
+            self.check_values(line, expected_line_values)
 
     def test_import_history_to_final_update_done(self):
         suite = 2798516
@@ -102,6 +121,7 @@ class TestImportSO(DB2ImportTestCase):
 
         1 line with 1 qty SO fully delivered
         no promotion
+
         """
         ref = self.env.ref
         suite = 2798516
@@ -110,6 +130,17 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_1203181'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'done',
 
@@ -154,6 +185,7 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
         expected_values = {
             'name': str(suite), 'state': u'done',
 
@@ -200,6 +232,18 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_0676023'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # tax 6
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'done',
 
@@ -215,7 +259,7 @@ class TestImportSO(DB2ImportTestCase):
             'supplier_promotion_allowed': True,
             'discount_pricelist_id': ref('__setup__.pricelist_312'),
 
-            'amount_untaxed': 8.31,
+            'amount_untaxed': 8.31,  # 8.32 - 0.01 of antibiotic tax
             'amount_tax': 0.51,
             'amount_total': 8.82,
             'currency_id': ref('base.EUR'),
@@ -244,6 +288,102 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 120,
+                'product_id': ref('__import__.product_4290213'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # taxes ANTIBIOTIC, 21%
+            },
+            {
+                'sequence': 50,
+                'product_id': ref('__import__.product_1232014'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # taxes ANTIBIOTIC, 21%
+            },
+            {
+                'sequence': 80,
+                'product_id': ref('__import__.product_2816395'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # taxes 21%
+            },
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2276574'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # taxes 21%
+            },
+            {
+                'sequence': 101,
+                'product_id': ref('__import__.product_5130475'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 60,
+                'product_id': ref('__import__.product_6868745'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 100,
+                'product_id': ref('__import__.product_3237765'),
+                'discount2': 8.5,  # Res
+                'discount3': 25.0,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 110,
+                'product_id': ref('__import__.product_3130663'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # taxes 21%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_2436905'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 70,
+                'product_id': ref('__import__.product_2879559'),
+                'discount2': 8.5,  # Res
+                'discount3': 10.0,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 90,
+                'product_id': ref('__import__.product_3074440'),
+                'discount2': 8.5,  # Res
+                'discount3': 15.0,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_2087062'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # taxes 6%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_7745016'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # taxes 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'done',
 
@@ -259,9 +399,9 @@ class TestImportSO(DB2ImportTestCase):
             'supplier_promotion_allowed': True,
             'discount_pricelist_id': ref('__setup__.pricelist_312'),
 
-            'amount_untaxed': 449.20,
-            'amount_tax': 54.53,
-            'amount_total': 503.73,
+            'amount_untaxed': 430.12,
+            'amount_tax': 53.39,
+            'amount_total': 483.51,
             'currency_id': ref('base.EUR'),
 
             # Régime National
@@ -292,6 +432,17 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_8250006'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'done',
 
@@ -340,6 +491,53 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_0064725'),
+                'discount2': 0.0,  # Res
+                'discount3': 5.0,  # Rem
+                # tax Antibio + 6%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_8270167'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 60,
+                'product_id': ref('__import__.product_5164507'),
+                'discount2': 0.0,  # Res
+                'discount3': 5.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_5039033'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_1155748'),
+                'discount2': 0.0,  # Res
+                'discount3': 5.0,  # Rem
+                # tax 21%
+            },
+            {   # This line was removed since in AS400
+                'sequence': 50,
+                'product_id': ref('__import__.product_5026762'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'sale',
 
@@ -398,6 +596,25 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_5110014'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # tax 6%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_8381852'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'sale',
 
@@ -445,7 +662,6 @@ class TestImportSO(DB2ImportTestCase):
 
         partial delivery with Med products
         one line not delivered
-        TODO: probably accessories
 
         """
         ref = self.env.ref
@@ -455,6 +671,25 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_7924351'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {   # This line was removed since in AS400
+                'sequence': 20,
+                'product_id': ref('__import__.product_7929999'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'sale',
 
@@ -511,6 +746,81 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_3563129'),
+                'discount2': 0.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2933786'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_8058683'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 70,
+                'product_id': ref('__import__.product_2680544'),
+                'discount2': 0.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 6%
+            },
+            {   # This line was removed since in AS400
+                'sequence': 71,
+                'product_id': ref('__import__.product_5620095'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 6%
+            },
+            {
+                'sequence': 90,
+                'product_id': ref('__import__.product_3094307'),
+                'discount2': 10.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 6%
+            },
+            {
+                'sequence': 60,
+                'product_id': ref('__import__.product_8165009'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 80,
+                'product_id': ref('__import__.product_2382729'),
+                'discount2': 0.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_2407110'),
+                'discount2': 10.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 50,
+                'product_id': ref('__import__.product_1013192'),
+                'discount2': 10.0,  # Res
+                'discount3': 10.0,  # Rem
+                # tax 6%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'sale',
 
@@ -526,9 +836,9 @@ class TestImportSO(DB2ImportTestCase):
             'supplier_promotion_allowed': True,
             'discount_pricelist_id': ref('__setup__.pricelist_210'),
 
-            'amount_untaxed': 865.64,
+            'amount_untaxed': 808.14,
             'amount_tax': 0,
-            'amount_total': 865.64,
+            'amount_total': 808.14,
             'currency_id': ref('base.EUR'),
 
             # Régime Intra-Communautaire
@@ -571,6 +881,39 @@ class TestImportSO(DB2ImportTestCase):
             self.importer_table_so, self.table_name, db2_id)
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2430205'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_8072683'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_2248800'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_3563038'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
         expected_values = {
             'name': str(suite), 'state': u'sale',
 

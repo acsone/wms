@@ -626,11 +626,6 @@ class DB2MapperSaleOrder(object):
             previous_line = so_line
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
-        # Update promotions
-        # Play onchange to get promotion
-        if new.supplier_promotion_allowed:
-            new.order_line.compute_supplier_promotion()
-        new.order_line.compute_alcyon_discount()
 
         is_delivered = all(delivered_lines)
         # don't do partial delivery when:
