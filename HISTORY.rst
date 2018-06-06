@@ -18,6 +18,7 @@ Unreleased
 * ALCN-1402: Import products with category Human as services
 * Add created or update record id in "Results" of importer queue jobs
 * TODO update suppliers for ALCN-1310
+* TODO update products for ALCN-1402 to introduce types
 
 **Features and Improvements**
 * Reactivate backorder reasons at reception and helpdesk ticket generation
