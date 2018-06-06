@@ -548,6 +548,8 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.reload-standard_price.csv
               # define product types for human drugs
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-type.csv
+              # import antibiotic taxes
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-taxes_id.csv
               # update addresses to add missing ones
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
       addons:
