@@ -671,7 +671,9 @@ class DB2MapperSaleOrder(object):
                     "Cannot do final update for sale order %s"
                     " as not in draft state" % new.name)
             # Confirm the sale order to create the picking
-            new.with_context(skip_pdf_gen=True).action_confirm()
+            new.with_context(skip_pdf_gen=True,
+                             __no_promotional_product=True).action_confirm()
+
             if is_partially_delivered:
                 # Validate partially the pickings creating backorders
                 picks = new.picking_ids

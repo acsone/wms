@@ -29,6 +29,9 @@ class SaleOrder(models.Model):
         LIMIT 1;
         """
 
+        if self.env.context.get('__no_promotional_product'):
+            return super(SaleOrder, self).action_confirm()
+
         for order in self:
             for line in order.order_line:
                 line_uom = line.product_uom

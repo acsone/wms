@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1287: Filter taxes by fiscal position on purchase orders
+* ALCN-1366: Disable computation of promotional products on confirm imported SO
 
 **Features and Improvements**
 
