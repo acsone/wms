@@ -546,6 +546,8 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-list_price-weight-orderpoint_max-length-width-depth-orderpoint_min-orderpoint_qty_multiple-route_ids.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-state_id-width-depth-length-weight.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.reload-standard_price.csv
+              # define product types for human drugs
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-type.csv
               # update addresses to add missing ones
               - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
       addons:
