@@ -8,6 +8,7 @@ from anthem.lyrics.modules import uninstall
 
 @anthem.log
 def post(ctx):
+    """ Applying post 10.21.0 """
     uninstall_module_account_sepa(ctx)
     restore_min_max(ctx)
 

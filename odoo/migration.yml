@@ -229,3 +229,12 @@ migration:
           - anthem songs.upgrade.10_21_0_update::post
           - anthem songs.install.pre::disable_module_account_sepa
           - anthem songs.install.data_all::import_delivery_carriers
+    - version: 10.22.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_report
+          - specific_sale
+      operations:
+        post:
+          - anthem songs.upgrade.10_22_0_update::post

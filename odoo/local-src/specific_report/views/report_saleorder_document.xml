@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_document_inherit" priority="100" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//span[@t-field='doc.name']" position="after">
+            <span> n° </span>
+            <span t-field="doc.suite_name"/>
+        </xpath>
+
+        <xpath expr="//div[@t-if='doc.user_id.name']" position="replace"/>
+
+        <xpath expr="//div[@name='payment_term']" position="replace"/>
+
+    </template>
+
+</odoo>

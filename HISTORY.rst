@@ -8,6 +8,9 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1291: In sale report remove header payment_term and vendor
+  and add NL translations
+
 **Bugfixes**
 
 **Build**

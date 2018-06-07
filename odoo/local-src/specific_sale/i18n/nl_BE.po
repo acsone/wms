@@ -1,0 +1,428 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* specific_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-13 09:12+0000\n"
+"PO-Revision-Date: 2018-06-13 09:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "&amp;bull;"
+msgstr "&amp;bull;"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "April"
+msgstr "April"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:96
+#, python-format
+msgid "Article transferred to dispensing pharmacy: %s"
+msgstr "Article transferred to dispensing pharmacy: %s"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "August"
+msgstr "August"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_food_allowed
+msgid "Catégorie aliments pas autorisée"
+msgstr "Catégorie aliments pas autorisée"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_allowed
+msgid "Catégorie médicaments pas autorisée"
+msgstr "Catégorie médicaments pas autorisée"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Confirmed order #"
+msgstr "Bestelling #"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_current_product_qty_unavailable
+msgid "Current quantity unavailable"
+msgstr "Current quantity unavailable"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "December"
+msgstr "December"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Description"
+msgstr "Omschrijving"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Disc.(%)"
+msgstr "Korting(%)"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Discount"
+msgstr "Korting"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_exception
+msgid "Exception"
+msgstr "Exception"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Fax"
+msgstr "Fax"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "February"
+msgstr "February"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fee
+msgid "Helps with fees"
+msgstr "Helps with fees"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "January"
+msgstr "January"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "July"
+msgstr "July"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "June"
+msgstr "June"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_last_suite_name
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_last_suite_name
+msgid "Last Suite Name"
+msgstr "Last Suite Name"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.order_amount_minimum
+msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
+msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euros"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.order_amount_material_maximum
+msgid "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+msgstr "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
+#: model:ir.ui.view,arch_db:specific_sale.product_template_form_view_sale_lines_unavailable_button
+msgid "Lines unavailable"
+msgstr "Lines unavailable"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Partij"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
+msgid "Lots/Serial Numbers"
+msgstr "Partij/Serienummer"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Mail"
+msgstr "Mail"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "March"
+msgstr "March"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "May"
+msgstr "May"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.order_amount_material_maximum
+msgid "Montant maximum à 1000 euros (matériel)"
+msgstr "Montant maximum à 1000 euros (matériel)"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.order_amount_minimum
+msgid "Montant minimum à 100 euros"
+msgstr "Montant minimum à 100 euros"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_report_month
+msgid "Month"
+msgstr "Maand"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_cascade_import
+msgid "Médicaments cascade import pas autorisés"
+msgstr "Médicaments cascade import pas autorisés"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_human
+msgid "Médicaments humains pas autorisés"
+msgstr "Médicaments humains pas autorisés"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_vet_stupIII
+msgid "Médicaments psychotropes pas autorisés"
+msgstr "Médicaments psychotropes pas autorisés"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_belgium_only
+msgid "Médicaments seulement pour la Belgique pas autorisés"
+msgstr "Médicaments seulement pour la Belgique pas autorisés"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_vet_stup
+msgid "Médicaments stupéfiants pas autorisés"
+msgstr "Médicaments stupéfiants pas autorisés"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_veterinary_belge
+msgid "Médicaments vétérinaire belge pas autorisés"
+msgstr "Médicaments vétérinaire belge pas autorisés"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
+msgid "Next expected date for receipt"
+msgstr "Next expected date for receipt"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_belgium_only
+msgid "No Belgium Only Medoc"
+msgstr "No Belgium Only Medoc"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_food_allowed
+msgid "No Food Product Allowed"
+msgstr "No Food Product Allowed"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_cascade_import
+msgid "No Medoc Cacade Import"
+msgstr "No Medoc Cacade Import"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_human
+msgid "No Medoc Human"
+msgstr "No Medoc Human"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_allowed
+msgid "No Medoc Product Allowed"
+msgstr "No Medoc Product Allowed"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_vet_stupIII
+msgid "No Medoc Psycho III"
+msgstr "No Medoc Psycho III"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_vet_stup
+msgid "No Medoc Veterinary Belge Stupéfiant"
+msgstr "No Medoc Veterinary Belge Stupéfiant"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
+msgid "No Medoc Veterinary Belges"
+msgstr "No Medoc Veterinary Belges"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_veterinary_product
+msgid "No Veterinary Only Product"
+msgstr "No Veterinary Only Product"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "November"
+msgstr "November"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "October"
+msgstr "October"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_report_only_narcotic
+#: model:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
+msgid "Only narcotics"
+msgstr "Only narcotics"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:285
+#, python-format
+msgid "Out of stock at supplier level"
+msgstr "Out of stock at supplier level"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_res_partner
+msgid "Partner"
+msgstr "Relatie"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_line_at_zero
+msgid "Pas de ligne à zéro"
+msgstr "Pas de ligne à zéro"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Phone"
+msgstr "Phone"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Price"
+msgstr "Prijs"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_category
+msgid "Product Category"
+msgstr "Productcategorie"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_template
+msgid "Product Template"
+msgstr "Productsjabloon"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Product reference"
+msgstr "Referentie"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_veterinary_product
+msgid "Produits seulement pour les vétérinaires"
+msgstr "Produits seulement pour les vétérinaires"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Promotion"
+msgstr "Promotie"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Quantity"
+msgstr "Hoeveelheid"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_unavailable
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Quantity unavailable"
+msgstr "Niet beschikbare hoeveelheid"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Quantity unavailable at now"
+msgstr "Quantity unavailable at now"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Quantity unavailable at order line save"
+msgstr "Quantity unavailable at order line save"
+
+#. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+#: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
+msgid "Sale Order Lines Unavailable"
+msgstr "Sale Order Lines Unavailable"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
+msgid "Sale channel"
+msgstr "Sale channel"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel_visible
+msgid "Sale channel visible"
+msgstr "Sale channel visible"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_product_product_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_product_template_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_sale_lines_count
+msgid "Sale lines count"
+msgstr "Sale lines count"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Verkooporder"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Verkooporderlijn"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+msgid "Sales Order Lines Unavailable"
+msgstr "Sales Order Lines Unavailable"
+
+#. module: specific_sale
+#: model:ir.model,name:specific_sale.model_sale_report
+msgid "Sales Orders Statistics"
+msgstr "Verkooporderstatistieken"
+
+#. module: specific_sale
+#: selection:sale.report,month:0
+msgid "September"
+msgstr "September"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_suite_name
+msgid "Suite Id"
+msgstr "Suite Id"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_supplier_break
+msgid "Supplier break"
+msgstr "Supplier break"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Taxes"
+msgstr "Belastingen"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Total Price"
+msgstr "Totaalprijs"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_line_at_zero
+msgid "Une ligne de vente ne peut pas être à zéro"
+msgstr "Une ligne de vente ne peut pas être à zéro"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Unit Price"
+msgstr "Eenheidsprijs"
