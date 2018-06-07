@@ -540,6 +540,7 @@ class DB2MapperSaleOrder(object):
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
+            "       dccres,"
             "       dcccjj, dcccmm, dcccaa, dcccss,"
             "       dccmjj, dccmmm, dccmaa, dccmss,"
             "       dccsgr, dcccgr"
@@ -608,7 +609,11 @@ class DB2MapperSaleOrder(object):
                 'qty_delivered': line['dccqul'],
                 'price_unit': line['dccpvd'],
                 'tax_id': [(4, tax.id) for tax in taxes],
-                'discount': line['dccrem'],
+                # discount field is hidden and replaced by
+                # discount2 and discount3
+                'discount': 0,
+                'discount2': line['dccres'],
+                'discount3': line['dccrem'],
                 'create_date': create_date,
                 'write_date': convert_date('dccm', line) or create_date,
             }
@@ -621,6 +626,7 @@ class DB2MapperSaleOrder(object):
             previous_line = so_line
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
+
         is_delivered = all(delivered_lines)
         # don't do partial delivery when:
         # - everything is delivered (put the pick to done)

@@ -347,6 +347,10 @@ class BaseSupplierinfo(EntityMapper):
 class Supplierinfo(BaseSupplierinfo):
     """Add 1 supplierinfo per standard_price."""
 
+    FIELDS_MAPPING = BaseSupplierinfo.FIELDS_MAPPING + [
+        FieldMapper('sequence', constant=100),
+    ]
+
     # Doing a grouping to remove client column that creates duplicates
     # Here we don't care about dates
     GROUP_BY_COL = ['gesfou', 'gesart', 'gesarc', 'gespab']
@@ -363,6 +367,7 @@ class SupplierinfoPromo(BaseSupplierinfo):
         FieldMapper('discount_purchase', 'cclrem'),
         FieldMapper('date_start', 'ccld', is_date=True),
         FieldMapper('date_end', 'cclf', is_date=True),
+        FieldMapper('sequence', constant=1),
         'ratio_main_product',
         'ratio_promotional_product',
     ]
