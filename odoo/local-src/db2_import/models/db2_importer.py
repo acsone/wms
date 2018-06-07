@@ -838,8 +838,6 @@ class DB2ImporterTable(models.Model):
         query += ' WHERE ' + where
         if self.where_clause:
             query += " AND " + self.where_clause
-        if self.where_clause:
-            query += " AND " + self.where_clause
         return query.format(**query_kwargs)
 
     def _setup_relations(self):

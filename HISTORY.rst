@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* ALCN-1303: Filter sale order of type 2 which are credit notes (remove already imported one which are 'draft' or 'done')
 * ALCN-1305: Add importation product of length, width, depth
 * ALCN-1306: Set received quantities on purchase lines, take the value from actually received qty instead of ordered
 * ALCN-1310: Import the payable account on suppliers (this replaces the mapping for categories)
