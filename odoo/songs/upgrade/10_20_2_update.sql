@@ -10,8 +10,6 @@ UPDATE product_supplierinfo SET sequence = 100 WHERE date_end IS NULL;
 UPDATE sale_order_line SET discount3 = discount WHERE discount > 0 and discount <= 100;
 UPDATE sale_order_line SET discount = 0 WHERE discount > 0;
 
-DELETE FROM sale_order WHERE
-
 -- remove sale orders of type 2
 -- do this only if db2_pentcdcl is present as we need to read from it
 -- we let the sale order in 'sale' state as they created pickings and
