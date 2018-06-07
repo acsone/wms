@@ -1,0 +1,2 @@
+id,indicated_price,web_published,taxes_id/id,depth,width,length,state_id/id,active
+__import__.product_2933935,96.6,False,"l10n_be.1_attn_VAT-OUT-06-L,l10n_be_apb_tax.1_apb_01_out,l10n_be_antibiotic_tax.1_antibiotic_003_in,l10n_be_antibiotic_tax.1_antibiotic_003_out",10.6,5.8,5.8,specific_purchase.product_state_l,False

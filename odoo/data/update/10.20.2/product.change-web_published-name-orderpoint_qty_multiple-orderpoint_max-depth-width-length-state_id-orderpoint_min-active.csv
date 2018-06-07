@@ -1,0 +1,8 @@
+id,web_published,name,orderpoint_qty_multiple,orderpoint_max,depth,width,length,state_id/id,orderpoint_min,active
+__import__.product_2736080,False,TROVET GHF COBAYE 275GR,0,0,20,7,13,specific_purchase.product_state_l,0,False
+__import__.product_2877967,False,SPECIFIC FCD CRYSTAL PREVENTION,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_3004116,False,"SPECIFIC FOD OMEGA PLUS SUPPORT 2,5K",0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_3020880,False,CAZITEL PLUS XL CHIEN 50CP,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_5361796,False,EUKANUBA VDIET INTESTINAL DOG 12x400,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_5823125,False,IDEAL BALANCE CANINE ADULT LARGE 12K,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_5823133,False,IDEAL BALANCE FELINE ADULT NO GRAIN,0,0,0,0,0,specific_purchase.product_state_l,0,False

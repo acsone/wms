@@ -1,6 +1,0 @@
-id,indicated_price,weight,orderpoint_max,length,width,depth,state_id/id,orderpoint_min
-__import__.product_2700680,53.05,0.10,65.000,5.20,5.20,10.40,specific_purchase.product_state_h,16.000
-__import__.product_4007024,42.00,3.50,507.000,33.00,25.00,0,,200.000
-__import__.product_4270133,82.10,12.00,100.000,70.00,39.00,12.00,specific_purchase.product_state_h,49.000
-__import__.product_5603571,15.00,1.00,40.000,0,0,0,,20.000
-__import__.product_5810179,56.50,6.00,60.000,0,0,0,specific_purchase.product_state_h,30.000

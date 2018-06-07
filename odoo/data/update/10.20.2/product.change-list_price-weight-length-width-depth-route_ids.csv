@@ -1,8 +1,0 @@
-id,list_price,weight,length,width,depth,route_ids/id
-__import__.product_5163010,11.40,3.00,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
-__import__.product_5232647,9.50,0,0,0,0,purchase.route_warehouse0_buy
-__import__.product_8257419,140.00,0,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
-__import__.product_8257460,145.00,0,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
-__import__.product_8257483,145.00,0,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
-__import__.product_8257508,145.00,0,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"
-__import__.product_8257537,96.00,0,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"

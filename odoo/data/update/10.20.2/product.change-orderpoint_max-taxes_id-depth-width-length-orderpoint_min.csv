@@ -1,0 +1,4 @@
+id,orderpoint_max,taxes_id/id,depth,width,length,orderpoint_min
+__import__.product_1300573,3,"l10n_be.1_attn_VAT-OUT-06-L,l10n_be_apb_tax.1_apb_01_out,l10n_be_antibiotic_tax.1_antibiotic_131_in,l10n_be_antibiotic_tax.1_antibiotic_131_out",13.9,20,21.8,2
+__import__.product_2626893,20,"l10n_be.1_attn_VAT-OUT-06-L,l10n_be_apb_tax.1_apb_01_out,l10n_be_antibiotic_tax.1_antibiotic_013_in,l10n_be_antibiotic_tax.1_antibiotic_013_out",8.7,10.8,5.3,10
+__import__.product_2979870,10,"l10n_be.1_attn_VAT-OUT-06-L,l10n_be_apb_tax.1_apb_01_out,l10n_be_antibiotic_tax.1_antibiotic_003_in,l10n_be_antibiotic_tax.1_antibiotic_003_out",0,0,0,5

@@ -1,0 +1,2 @@
+id,web_published,name,orderpoint_qty_multiple,route_ids/id,orderpoint_max,depth,width,length,state_id/id,active
+__import__.product_6401001,True,FLACON VERRE BRUN ROND 200ml +CP x65,1,purchase.route_warehouse0_buy,1,56,13.7,35,,True

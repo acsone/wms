@@ -1,2 +1,0 @@
-id,indicated_price,list_price,weight,depth,width,length,route_ids/id
-__import__.product_5272564,41.90,20.70,7.00,0,0,0,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"

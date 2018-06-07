@@ -1,3 +1,0 @@
-id,web_published,weight,orderpoint_max,length,width,depth,state_id/id,orderpoint_min,orderpoint_qty_multiple,active
-__import__.product_2385995,False,1.12,0,9.10,9.10,22.80,specific_purchase.product_state_l,0,0,False
-__import__.product_5823127,False,12.00,0,0,0,0,specific_purchase.product_state_l,0,0,False

@@ -1,0 +1,13 @@
+id,web_published,orderpoint_qty_multiple,orderpoint_max,depth,width,length,state_id/id,orderpoint_min,active
+__import__.product_2488583,False,0,0,9.5,23,31,specific_purchase.product_state_l,0,False
+__import__.product_2488609,False,0,0,9.5,23,30,specific_purchase.product_state_l,0,False
+__import__.product_2877900,False,0,0,7,17,28,specific_purchase.product_state_l,0,False
+__import__.product_2877983,False,0,0,9,23,25,specific_purchase.product_state_l,0,False
+__import__.product_5260005,False,0,0,9,29,37,specific_purchase.product_state_l,0,False
+__import__.product_5260008,False,0,0,11.5,23.5,24.5,specific_purchase.product_state_l,0,False
+__import__.product_5260035,False,0,0,11.5,23.5,24.5,specific_purchase.product_state_l,0,False
+__import__.product_5260042,False,0,0,9,29,37,specific_purchase.product_state_l,0,False
+__import__.product_5822310,False,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_5823127,False,0,0,0,0,0,specific_purchase.product_state_l,0,False
+__import__.product_6260001,False,0,0,9.5,23.5,30,specific_purchase.product_state_l,0,False
+__import__.product_6828812,False,0,0,9,29,37,specific_purchase.product_state_l,0,False
