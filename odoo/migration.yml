@@ -351,7 +351,6 @@ migration:
           operations:
             post:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_20_2_update.sql $DB_NAME'"
-              - anthem songs.upgrade.post::main
               # update suppliers
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/update/10.20.2/supplier.new.csv
               - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/update/10.20.2/supplier.change-property_account_payable_id.csv
