@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.20.2 (2018-06-08)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1303: Filter sale order of type 2 which are credit notes (remove already imported one which are 'draft' or 'done')
@@ -15,36 +27,32 @@ Unreleased
 * ALCN-1317: Add missing delivery addresses which were only in schema GENDATA in DB2
 * ALCN-1326: Fix mapping of product weight
 * ALCN-1330: Following Revert of ALCN-1153 restore importation of standard_price
-* ALCN-1385: Fix broken update of Purchase order in final mode for in progress states
 * ALCN-1340: Recompute alert and removal dates on lots based on life date
-* ALCN-1402: Import products with category Human as services
+* ALCN-1385: Fix broken update of Purchase order in final mode for in progress states
 * ALCN-1357: Import antibiotic taxes on products
 * ALCN-1341: Raise sequence on unbounded supplierinfo to give them a lower priority
              We usually want current seller prices which are bounded in time.
 * ALCN-1341: Compute promotions in importer sale order lines
 * ALCN-1341: Fix mapping of discount on sale order lines
+* ALCN-1402: Import products with category Human as services
 * Add created or update record id in "Results" of importer queue jobs
-* TODO update suppliers for ALCN-1310
-* TODO update products for ALCN-1402 and ALCN-1357 to introduce types and antibiotic taxes
+* update suppliers
+* update products to introduce types and antibiotic taxes
 
 **Features and Improvements**
-* Reactivate backorder reasons at reception and helpdesk ticket generation
 
-* ALCN-1340: Set setting 'base date for product lot' to 'life date'
 * ALCN-1132: Reactivate the Unit Of Measure "liter"
 * ALCN-1295: Define the default header/footer for all reports and make some improvements (translations, layout) for the purchase report
-* Change date widget in reception screen (remove calendar popup and apply mask)
+* ALCN-1340: Set setting 'base date for product lot' to 'life date'
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
-
+* Change date widget in reception screen (remove calendar popup and apply mask)
+* Reactivate backorder reasons at reception and helpdesk ticket generation
 
 **Bugfixes**
-* Revert ALCN-1153: Set standard buying price in product cost field
+
 * ALCN-1000: Add missing ir.model.access for stock.move.lots and round.instance
+* Revert ALCN-1153: Set standard buying price in product cost field
 * Recover journal selection at top of invoice form view.
-
-**Build**
-
-**Documentation**
 
 
 10.20.1 (2018-05-18)
