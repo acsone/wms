@@ -376,7 +376,6 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-unit_in_shrink_wrap-depth-orderpoint_qty_multiple.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-depth-cnk_code-name.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-taxes_id-depth-orderpoint_max.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-weight.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-depth-indicated_price.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-route_ids-depth.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-weight-orderpoint_max-depth-width-length-orderpoint_min.csv
