@@ -34,6 +34,7 @@ Unreleased
 * ALCN-1132: Reactivate the Unit Of Measure "liter"
 * ALCN-1295: Define the default header/footer for all reports and make some improvements (translations, layout) for the purchase report
 * Change date widget in reception screen (remove calendar popup and apply mask)
+* ALCN-1364: Add exception rule to prevent SO lines with negative value
 
 
 **Bugfixes**

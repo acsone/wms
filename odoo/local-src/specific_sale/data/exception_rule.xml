@@ -4,7 +4,7 @@
         <!-- Main category restrictions -->
         <record id="no_food_allowed" model="exception.rule">
             <field name="name">No Food Product Allowed</field>
-            <field name="description">Catégorie aliments pas autorisée</field>
+            <field name="description">Food Product Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">10</field>
             <field name="rule_group">sale</field>
@@ -15,8 +15,8 @@ failed = object.validate_no_food()
         </record>
 
         <record id="no_medoc_allowed" model="exception.rule">
-            <field name="name">No Medoc Product Allowed</field>
-            <field name="description">Catégorie médicaments pas autorisée</field>
+            <field name="name">No Medicine Allowed</field>
+            <field name="description">Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">10</field>
             <field name="rule_group">sale</field>
@@ -28,8 +28,8 @@ failed = object.validate_no_medoc()
 
         <!-- Sub category medicines restrictions -->
         <record id="no_medoc_cascade_import" model="exception.rule">
-            <field name="name">No Medoc Cacade Import</field>
-            <field name="description">Médicaments cascade import pas autorisés</field>
+            <field name="name">No Medicine Cascade Import</field>
+            <field name="description">Medicine Cascade Import Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">20</field>
             <field name="rule_group">sale</field>
@@ -40,8 +40,8 @@ failed = object.validate_no_medoc_cascade_import()
         </record>
 
         <record id="no_medoc_veterinary_belge" model="exception.rule">
-            <field name="name">No Medoc Veterinary Belges</field>
-            <field name="description">Médicaments vétérinaire belge pas autorisés</field>
+            <field name="name">No Belgian Veterinary Medicine</field>
+            <field name="description">Belgian Veterinary Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">20</field>
             <field name="rule_group">sale</field>
@@ -52,8 +52,8 @@ failed = object.validate_no_medoc_veterinary_belge()
         </record>
 
         <record id="no_medoc_human" model="exception.rule">
-            <field name="name">No Medoc Human</field>
-            <field name="description">Médicaments humains pas autorisés</field>
+            <field name="name">No Human Medicine</field>
+            <field name="description">Human Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">20</field>
             <field name="rule_group">sale</field>
@@ -65,8 +65,8 @@ failed = object.validate_no_medoc_human()
 
         <!-- Sub sub category medicines restrictions -->
         <record id="no_medoc_vet_stup" model="exception.rule">
-            <field name="name">No Medoc Veterinary Belge Stupéfiant</field>
-            <field name="description">Médicaments stupéfiants pas autorisés</field>
+            <field name="name">No Narcotic Veterinary Medicine</field>
+            <field name="description">Narcotic Veterinary Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">30</field>
             <field name="rule_group">sale</field>
@@ -77,8 +77,8 @@ failed = object.validate_no_medoc_vet_stupefiant()
         </record>
 
         <record id="no_medoc_vet_stupIII" model="exception.rule">
-            <field name="name">No Medoc Psycho III</field>
-            <field name="description">Médicaments psychotropes pas autorisés</field>
+            <field name="name">No Cat.III Medicine</field>
+            <field name="description">Category III (psychotropic) Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">30</field>
             <field name="rule_group">sale</field>
@@ -89,8 +89,8 @@ failed = object.validate_no_medoc_vet_psychoIII()
         </record>
 
         <record id="no_medoc_belgium_only" model="exception.rule">
-            <field name="name">No Belgium Only Medoc</field>
-            <field name="description">Médicaments seulement pour la Belgique pas autorisés</field>
+            <field name="name">No Belgium Only Medicine</field>
+            <field name="description">Belgium Only Medicine Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">10</field>
             <field name="rule_group">sale</field>
@@ -101,14 +101,26 @@ failed = object.validate_no_medoc_belgium_only()
         </record>
 
         <record id="no_veterinary_product" model="exception.rule">
-            <field name="name">No Veterinary Only Product</field>
-            <field name="description">Produits seulement pour les vétérinaires</field>
+            <field name="name">No Veterinary Product</field>
+            <field name="description">Veterinary Product Not Allowed</field>
             <field name="active">True</field>
             <field name="sequence">10</field>
             <field name="rule_group">sale</field>
             <field name="model">sale.order.line</field>
             <field name="code">
 failed = object.validate_no_veterinary_product()
+            </field>
+        </record>
+
+        <record id="no_line_under_0" model="exception.rule">
+            <field name="name">No line under 0</field>
+            <field name="description">Negative Sale Order Line Not Allowed</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.price_subtotal &lt; 0
             </field>
         </record>
 

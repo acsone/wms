@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-20 12:46+0000\n"
-"PO-Revision-Date: 2018-04-20 12:46+0000\n"
+"POT-Creation-Date: 2018-06-07 13:19+0000\n"
+"PO-Revision-Date: 2018-06-07 13:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:95
+#: code:addons/specific_sale/models/sale.py:96
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -34,6 +34,21 @@ msgstr ""
 #. module: specific_sale
 #: selection:sale.report,month:0
 msgid "August"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_veterinary_belge
+msgid "Belgian Veterinary Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_belgium_only
+msgid "Belgium Only Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_vet_stupIII
+msgid "Category III (psychotropic) Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
@@ -82,9 +97,19 @@ msgid "February"
 msgstr ""
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_food_allowed
+msgid "Food Product Not Allowed"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fee
 msgid "Helps with fees"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_human
+msgid "Human Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
@@ -150,6 +175,16 @@ msgid "May"
 msgstr ""
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_cascade_import
+msgid "Medicine Cascade Import Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_allowed
+msgid "Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.order_amount_material_maximum
 msgid "Montant maximum à 1000 euros (matériel)"
 msgstr ""
@@ -165,8 +200,68 @@ msgid "Month"
 msgstr ""
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_medoc_vet_stup
+msgid "Narcotic Veterinary Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_line_under_0
+msgid "Negative Sale Order Line Not Allowed"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
 msgid "Next expected date for receipt"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
+msgid "No Belgian Veterinary Medicine"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_belgium_only
+msgid "No Belgium Only Medicine"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_vet_stupIII
+msgid "No Cat.III Medicine"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_food_allowed
+msgid "No Food Product Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_human
+msgid "No Human Medicine"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_allowed
+msgid "No Medicine Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_cascade_import
+msgid "No Medicine Cascade Import"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_medoc_vet_stup
+msgid "No Narcotic Veterinary Medicine"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_veterinary_product
+msgid "No Veterinary Product"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_line_under_0
+msgid "No line under 0"
 msgstr ""
 
 #. module: specific_sale
@@ -186,7 +281,7 @@ msgid "Only narcotics"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:260
+#: code:addons/specific_sale/models/sale.py:285
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr ""
@@ -217,18 +312,18 @@ msgid "Product"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr ""
 
 #. module: specific_sale
-#: model:exception.rule,description:specific_sale.narcotic_forbidden
-msgid "Produits de type stupéfiants interdits à la vente pour tout client qui n'est pas un VT"
-msgstr ""
-
-#. module: specific_sale
-#: model:exception.rule,name:specific_sale.narcotic_forbidden
-msgid "Produits stupéfiants interdits"
+#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+msgid "Product reference"
 msgstr ""
 
 #. module: specific_sale
@@ -335,5 +430,10 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Unit Price"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_veterinary_product
+msgid "Veterinary Product Not Allowed"
 msgstr ""
 

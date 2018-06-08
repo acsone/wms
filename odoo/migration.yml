@@ -558,6 +558,7 @@ migration:
         upgrade:
           - delivery_rounds
           - specific_report
+          - specific_sale
           - specific_stock
           - stock_picking_backorder
           - stock_valuation
