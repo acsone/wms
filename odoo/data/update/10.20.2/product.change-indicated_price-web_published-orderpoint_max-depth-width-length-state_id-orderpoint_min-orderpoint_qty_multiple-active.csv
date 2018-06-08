@@ -1,0 +1,4 @@
+id,indicated_price,web_published,orderpoint_max,depth,width,length,state_id/id,orderpoint_min,orderpoint_qty_multiple,active
+__import__.product_1418276,28.82,False,0,14.4,4.4,4.4,specific_purchase.product_state_l,0,0,False
+__import__.product_3272457,150.33,False,0,0,0,0,specific_purchase.product_state_l,0,0,False
+__import__.product_3429065,31.53,False,0,15,12,10,specific_purchase.product_state_l,0,0,False

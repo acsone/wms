@@ -1,0 +1,2 @@
+id,indicated_price,list_price,name,route_ids/id,depth,width,length,state_id/id,active,categ_id/id
+__import__.product_6450022,9999999999.99,1500,TABLE OPERATION HYDRAU BASCIC 130x60,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy",0,0,0,,True,specific_data.product_categ_mat_equipement

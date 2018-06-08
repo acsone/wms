@@ -1,0 +1,2 @@
+id,list_price,name,manufacturer/id,depth,width,length,state_id/id,web_published,active,categ_id/id
+__import__.product_5290500,591.71,"FRIGO MOBILE CFX28 26L 62x42,5x34,2cm",__import__.supplier_82905,0,0,0,,True,True,specific_data.product_categ_mat_equipement

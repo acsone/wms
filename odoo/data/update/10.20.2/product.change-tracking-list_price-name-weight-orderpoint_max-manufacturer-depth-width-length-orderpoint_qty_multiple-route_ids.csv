@@ -1,0 +1,2 @@
+id,tracking,list_price,name,weight,orderpoint_max,manufacturer/id,depth,width,length,orderpoint_qty_multiple,route_ids/id
+__import__.product_7628486,lot,20.8,TROUSSE PERF.HELICOIDAL STAT EQUIN 430cm,0,1,__import__.supplier_62900,0,0,0,10,purchase.route_warehouse0_buy

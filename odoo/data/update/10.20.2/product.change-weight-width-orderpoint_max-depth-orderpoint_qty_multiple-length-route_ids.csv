@@ -1,0 +1,6 @@
+id,weight,width,orderpoint_max,depth,orderpoint_qty_multiple,length,route_ids/id
+__import__.product_5042511,3.5,20,1,16,1,20,purchase.route_warehouse0_buy
+__import__.product_5112278,0,0,1,0,25,0,purchase.route_warehouse0_buy
+__import__.product_8020404,0,0,1,0,1,0,purchase.route_warehouse0_buy
+__import__.product_8035788,0,0,1,0,1,0,purchase.route_warehouse0_buy
+__import__.product_8168495,0,0,1,0,1,0,purchase.route_warehouse0_buy

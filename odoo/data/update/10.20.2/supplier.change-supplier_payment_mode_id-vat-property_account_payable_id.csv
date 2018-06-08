@@ -1,0 +1,2 @@
+id,supplier_payment_mode_id/id,vat,property_account_payable_id/id
+__import__.supplier_82749,__setup__.account_payment_mode_out_sep,DE186764062,__setup__.account_440000

@@ -1389,4 +1389,3 @@ __import__.customer_address_delivery_9264,PHARMACIE SENEFFE CENTRE SPRL,Rue des 
 __import__.customer_address_delivery_9274,S/LWW_DIEREN OVERLAST BEHEER,Lindenlei 66,2180,EKEREN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9274
 __import__.customer_address_delivery_9279,SPW DGO3 - DPC - DGARNE,Avenue Prince de Liège 7,5100,JAMBES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9279
 __import__.customer_address_delivery_9282,CAB VET DR LACREMANS AURELIE,Rue Albert et Louis Curvers 1,4053,EMBOURG,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9282
-__import__.customer_address_delivery_9301,CLINIVET,"Rue Pont à Migneloux, 39",6041,GOSSELIES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9301

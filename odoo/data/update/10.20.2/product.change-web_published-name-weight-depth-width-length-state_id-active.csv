@@ -1,0 +1,6 @@
+id,web_published,name,weight,depth,width,length,state_id/id,active
+__import__.product_8372497,False,"TTA VIS 5,5mm INOX AUTOT.64mm    2020",0,0,0,0,specific_purchase.product_state_l,False
+__import__.product_8376615,False,"TTA VIS 5,5mm INOX AUTOT.66mm   2022",0,0,0,0,specific_purchase.product_state_l,False
+__import__.product_8376638,False,"TTA VIS 5,5mm INOX AUTOT.74mm   2026",0,0,0,0,specific_purchase.product_state_l,False
+__import__.product_8376644,False,"TTA VIS 5,5mm INOX AUTOT.76mm   2028",0,0,0,0,specific_purchase.product_state_l,False
+__import__.product_8376650,False,"TTA VIS 5,5mm INOX AUTOT.85mm   2030",0,0,0,0,specific_purchase.product_state_l,False
