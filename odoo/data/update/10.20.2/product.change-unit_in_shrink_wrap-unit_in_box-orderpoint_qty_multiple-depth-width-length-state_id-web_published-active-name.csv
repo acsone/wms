@@ -1,2 +1,2 @@
-id,unit_in_shrink_wrap,unit_in_box,orderpoint_qty_multiple,depth,width,length,state_id/id,web_published,active,name
-__import__.product_8357291,36,0,36,12.5,7,10,specific_purchase.product_state_m,False,False,CROCHET A TIQUES O TOM COLOR x20
+id,unit_in_shrink_wrap,unit_in_box,orderpoint_qty_multiple,depth,width,length,state_id/id,web_published,active,name,orderpoint_min,orderpoint_max
+__import__.product_8357291,36,0,36,12.5,7,10,specific_purchase.product_state_m,False,False,CROCHET A TIQUES O TOM COLOR x20,0,0
