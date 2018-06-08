@@ -1,6 +1,6 @@
-id,web_published,name,depth,width,length,state_id/id,active
-__import__.product_0019778,False,ANAFRANIL 30DR 10MG,0,0,0,specific_purchase.product_state_l,False
-__import__.product_2600765,False,DETTOL COSMETIC 250ml (GEL LAVANT P,0,0,0,specific_purchase.product_state_l,False
-__import__.product_4004132,False,VCN CAT NEUTERED WEIGHT 3x12x100GR,0,0,0,specific_purchase.product_state_l,False
-__import__.product_5452450,False,MANCHE BOUCLE DE PYRONIUM ÖSE 26cm,0,0,0,specific_purchase.product_state_l,False
-__import__.product_5823225,False,IDEAL BALANCE FELINE ADULT NO GRAIN,0,0,0,specific_purchase.product_state_l,False
+id,web_published,name,depth,width,length,state_id/id,active,orderpoint_min,orderpoint_max,orderpoint_qty_multiple
+__import__.product_0019778,False,ANAFRANIL 30DR 10MG,0,0,0,specific_purchase.product_state_l,False,0,0,0
+__import__.product_2600765,False,DETTOL COSMETIC 250ml (GEL LAVANT P,0,0,0,specific_purchase.product_state_l,False,0,0,0
+__import__.product_4004132,False,VCN CAT NEUTERED WEIGHT 3x12x100GR,0,0,0,specific_purchase.product_state_l,False,0,0,0
+__import__.product_5452450,False,MANCHE BOUCLE DE PYRONIUM ÖSE 26cm,0,0,0,specific_purchase.product_state_l,False,0,0,0
+__import__.product_5823225,False,IDEAL BALANCE FELINE ADULT NO GRAIN,0,0,0,specific_purchase.product_state_l,False,0,0,0

@@ -87,12 +87,8 @@ class ProductMapper(EntityMapper):
         FieldMapper(
             'ratio_additional_product', 'cp2z24',
         ),
-        FieldMapper(
-            'orderpoint_min', 'stomin'
-        ),
-        FieldMapper(
-            'orderpoint_max', 'stomax'
-        ),
+        'orderpoint_min',
+        'orderpoint_max',
         FieldMapper(
             'veterinary_only', 'cplz22'
         ),
@@ -157,6 +153,33 @@ class ProductMapper(EntityMapper):
             odoo_entity['active'] = True
 
         odoo_entity['name'] = value
+
+
+    def convert_orderpoint_min(self, odoo_entity, db2_entity):
+        """
+        Set the oderpoint min only if product is active
+        :param odoo_entity:
+        :param db2_entity:
+        :return:
+        """
+        value = db2_entity['gesdem'].strip()
+        is_active = not (value and value.startswith('|'))
+        op_min = db2_entity['stomin'] if is_active else 0
+        odoo_entity['orderpoint_min'] = op_min
+
+
+    def convert_orderpoint_max(self, odoo_entity, db2_entity):
+        """
+        Set the oderpoint max only if the product is active
+        :param odoo_entity:
+        :param db2_entity:
+        :return:
+        """
+        value = db2_entity['gesdem'].strip()
+        is_active = not (value and value.startswith('|'))
+        op_max = db2_entity['stomax'] if is_active else 0
+        odoo_entity['orderpoint_max'] = op_max
+
 
     def convert_orderpoint_qty_multiple(self, odoo_entity, db2_entity):
         """
