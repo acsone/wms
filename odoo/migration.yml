@@ -475,6 +475,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-width-length-depth-price_category_id.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-indicated_price-list_price-depth-width-length-state_id.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-indicated_price-list_price-depth-width-length-price_category_id.csv
+              # modified because uom cannot be changed afterward
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-uom_id-width-length-depth-uom_po_id.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-tracking-list_price-name-weight-orderpoint_max-manufacturer-depth-width-length-orderpoint_qty_multiple-route_ids.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.20.2/product.change-orderpoint_qty_multiple-orderpoint_max-depth-width-length-state_id.csv
