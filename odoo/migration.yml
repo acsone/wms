@@ -258,3 +258,8 @@ migration:
             post:
               ### Update mandates
               - anthem songs.install.data_full::import_customer_banks_and_mandats
+    - version: 10.22.0
+      addons:
+        upgrade:
+          ### local-src
+          - delivery_rounds
