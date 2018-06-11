@@ -583,6 +583,7 @@ def create_picking_types(ctx):
     location_scrap_return = ctx.env.ref(
         '__setup__.stock_location_scrap_return')
     location_destroyed = ctx.env.ref('__setup__.stock_location_destroyed')
+    location_to_destroy = ctx.env.ref('__setup__.stock_location_scrap_destroy')
 
     color_mrp = 0
     color_in = 1
@@ -774,6 +775,7 @@ def create_picking_types(ctx):
         {'xmlid': 'stock_expired.picking_type_scrap',
          'color': color_scrap,
          'sequence': 70,
+         'default_location_dest_id': location_scrap_quality.id,
          },
 
         {'xmlid': '__setup__.stock_scrap_quality',
@@ -806,7 +808,7 @@ def create_picking_types(ctx):
          'name': 'Destructions',
          'code': 'outgoing',
          'sequence_id': delivery_sequence.id,
-         'default_location_src_id': location_scrap.id,
+         'default_location_src_id': location_to_destroy.id,
          'default_location_dest_id': location_destroyed.id,
          'use_create_lots': False,
          'color': color_out,
