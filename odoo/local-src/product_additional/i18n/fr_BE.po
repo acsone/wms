@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 14:55+0000\n"
-"PO-Revision-Date: 2017-08-22 14:55+0000\n"
+"POT-Creation-Date: 2018-06-11 11:26+0000\n"
+"PO-Revision-Date: 2018-06-11 11:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,34 +16,115 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_additional
-#: code:addons/product_additional/models/mrp_bom.py:30
+#: code:addons/product_additional/models/product_supplierinfo.py:18
+#: sql_constraint:product.supplierinfo:0
 #, python-format
-msgid "A bill of material with additional product must have 'kit' type and 2 components of which only one is an additional product."
-msgstr "Une nomenclature avec produit additionnel doit être de type 'kit' et avoir 2 composants dont seulement l'un est un produit additionnel."
+msgid "A valid promotion on quantity must have both value higher than\n"
+"                 zero"
+msgstr "La promotion doit contenir une valeur supérieur à zéro pour les deux champs"
 
 #. module: product_additional
-#: code:addons/product_additional/models/mrp_bom.py:41
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_product_product_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_product_template_additional_product_id
+msgid "Additional Product"
+msgstr "Produit Additionnel"
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_stock_pack_operation_additional_move
+msgid "Additional Product Move"
+msgstr "Mouvement Produit Additionnel"
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "Additional product"
+msgstr "Produit additionnel"
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "For"
+msgstr "Pour"
+
+#. module: product_additional
+#: code:addons/product_additional/models/product_supplierinfo.py:35
 #, python-format
-msgid "A bill of material without additional product must only have non additional product components."
-msgstr "Une nomenclature sans produit additionnel ne doit avoir que des composants de produits non additionnels."
+msgid "For %s products, %s free"
+msgstr "Pour %s produits, %s gratuits"
 
 #. module: product_additional
-#: model:ir.model,name:product_additional.model_mrp_bom
-msgid "Bill of Material"
-msgstr "Nomenclature"
+#: model:ir.model,name:product_additional.model_product_supplierinfo
+msgid "Information about a product vendor"
+msgstr "Information sur le vendeur de l'article"
 
 #. module: product_additional
-#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_bom_with_additional_product
-msgid "Bill of material with additional product"
-msgstr "Nomenclature avec produit additionnel"
+#: model:ir.model,name:product_additional.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Colisage"
 
 #. module: product_additional
-#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_line_is_additional_product
-msgid "Is additional product"
-msgstr "Est un produit additionnel"
+#: model:ir.model,name:product_additional.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
 
 #. module: product_additional
-#: model:ir.model,name:product_additional.model_mrp_bom_line
-msgid "mrp.bom.line"
-msgstr "mrp.bom.line"
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_display_name
+msgid "Promotion"
+msgstr "Promotion"
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_sale_order_line_is_promotional_product
+msgid "Promotional product"
+msgstr "Produit promotionnel"
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_additional_product
+msgid "Ratio Additional Product"
+msgstr "Ratio Produit Additionnel"
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_promotional_product
+msgid "Ratio Free Product"
+msgstr "Ratio Produit Gratuit"
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_main_product
+msgid "Ratio Main Product"
+msgstr "Ratio Produit Principal"
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne du bon de commande"
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+msgid "free."
+msgstr "gratuit."
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "given"
+msgstr "donnés"
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "products,"
+msgstr "produits,"
 

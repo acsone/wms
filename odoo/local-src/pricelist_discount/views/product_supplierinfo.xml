@@ -5,13 +5,19 @@
         <field name="name">product.supplierinfo.specific.form</field>
         <field name="model">product.supplierinfo</field>
         <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="priority">16</field>
         <field name="arch" type="xml">
 
-            <label for="date_start" position="before">
+            <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
                 <field name="discount_purchase"/>
-                <field name="min_qty_sale"/>
-                <field name="discount_sale"/>
-            </label>
+            </xpath>
+
+            <xpath expr="//group[field[@name='product_tmpl_id']]" position="after">
+                <group string="Sale" name="sale">
+                    <field name="min_qty_sale"/>
+                    <field name="discount_sale"/>
+                </group>
+            </xpath>
 
         </field>
     </record>

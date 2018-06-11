@@ -263,3 +263,6 @@ migration:
         upgrade:
           ### local-src
           - delivery_rounds
+          - pricelist_discount
+          - product_additional
+          - specific_purchase

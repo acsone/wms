@@ -14,6 +14,7 @@
         'stock',
         'purchase',  # Only for SQL dependency
         'specific_stock',
+        'pricelist_discount',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

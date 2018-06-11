@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-26 08:53+0000\n"
-"PO-Revision-Date: 2018-03-26 08:53+0000\n"
+"POT-Creation-Date: 2018-06-11 11:33+0000\n"
+"PO-Revision-Date: 2018-06-11 11:33+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -44,11 +44,6 @@ msgid " Ask a reason for the purchase order cancellation."
 msgstr " Demande une cause de l'annulation de la commande."
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_l
-msgid "Article retiré de la vente"
-msgstr "Article retiré de la vente"
-
-#. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_a
 msgid "Article de remplacement"
 msgstr "Article de remplacement"
@@ -62,6 +57,11 @@ msgstr "Article déffectueux en attente du fournisseur"
 #: model:product.state,name:specific_purchase.product_state_n
 msgid "Article non suivi par Alcyon"
 msgstr "Article non suivi par Alcyon"
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_l
+msgid "Article retiré de la vente"
+msgstr "Article retiré de la vente"
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_m
@@ -273,26 +273,26 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:60
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:57
 #, python-format
 msgid "Please select at least one day"
 msgstr "Veuillez sélectionner au moins un jour"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:66
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:63
 #, python-format
 msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Price List"
+msgstr "Liste de prix"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_procurement_order
 msgid "Procurement"
 msgstr "Approvisionnement"
-
-#. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
-msgid "Product"
-msgstr "Article"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_product_template
@@ -316,6 +316,11 @@ msgstr "Etat du produit"
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
 msgid "Promotion supplier"
 msgstr "Promotion fournisseur"
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Purchase"
+msgstr "Achat"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_purchase_order
@@ -381,11 +386,6 @@ msgid "Sunday"
 msgstr "Dimanche"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
-msgid "Supplier"
-msgstr "Fournisseur"
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
 msgid "Supplier discount %"
@@ -393,8 +393,6 @@ msgstr "Remise fournisseur %"
 
 #. module: specific_purchase
 #: code:addons/specific_purchase/models/product_supplierinfo.py:42
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_tree
 #, python-format
 msgid "Supplier info"
 msgstr "Informations sur le fournisseur"
@@ -466,18 +464,17 @@ msgid "Unit in shrink-wrap"
 msgstr "Nombre d'unités par fardelage"
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Validity"
+msgstr "Validité"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_supplier_id
 #: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Vendor"
 msgstr "Fournisseur"
-
-#. module: specific_purchase
-#: model:ir.actions.act_window,name:specific_purchase.action_product_supplierinfo
-#: model:ir.ui.menu,name:specific_purchase.menu_product_supplierinfo
-msgid "Vendor Promotions"
-msgstr "Promotion fournisseur"
 
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
@@ -524,4 +521,9 @@ msgstr "product.state"
 #: model:ir.model,name:specific_purchase.model_purchase_config_settings
 msgid "purchase.config.settings"
 msgstr "purchase.config.settings"
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "to"
+msgstr "au"
 
