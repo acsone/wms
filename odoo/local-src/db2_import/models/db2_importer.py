@@ -350,8 +350,16 @@ class DB2MapperPurchaseOrder(object):
 
             create_date = convert_date('dcfc', line)
             delivery_date = convert_date('dcfl', line)
+            # If company_id is set, always filter taxes by the company
             taxes = product.supplier_taxes_id.filtered(
-                lambda r: r.company_id == rec.env.user.company_id)
+                lambda r: not new.company_id or r.company_id == new.company_id
+            )
+            fpos = (new.fiscal_position_id
+                    or new.partner_id.property_account_position_id)
+            taxes = (
+                fpos.map_tax(
+                    taxes, product, new.partner_id) if fpos
+                else taxes)
             values = {
                 'order_id': new.id,
                 'product_id': product.id,

@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1287: Filter taxes by fiscal position on purchase orders
+
 **Features and Improvements**
 
 **Bugfixes**
