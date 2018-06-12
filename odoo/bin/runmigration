@@ -35,7 +35,7 @@ CACHED_DUMP="$CACHE_DIR/odoo_sample_$VERSION.dmp"
 # If we want to create a new cached dump we also check that odoo/VERSION was edited
 if [ ! -z "$NEW_MIG_DUMP" -a "$NEW_MIG_DUMP" == "$VERSION" ]; then
     echo "New version - Searching for previous version dump"
-    if [ -d "$CACHE_DIR"]; then
+    if [ -d "$CACHE_DIR" ]; then
         # Filter dumps of higher releases
         MAX_DUMP="odoo_sample_${VERSION}.dmp"
         CACHED_DUMP=$(ls odoo_sample_*.dmp | awk '$0 < ENVIRON["MAX_DUMP"]' | tail -n1)
