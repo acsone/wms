@@ -519,3 +519,5 @@ migration:
           - specific_stock
           - stock_picking_backorder
           - stock_valuation
+    - version: 10.20.3
+    - version: 10.20.4
