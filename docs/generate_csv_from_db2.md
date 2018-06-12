@@ -1,18 +1,49 @@
-## csv files from DB2
+# csv files from DB2
 
-# Requirements
+## Requirements
 
 Install git-lfs: https://github.com/git-lfs/git-lfs/wiki/Installation
 
-# Connect to db2
+## Connect to db2
 
     ssh pi@194.78.105.88 -L 0.0.0.0:8471:10.2.2.3:8471 -i ~/.ssh/ssh_alcyon_rsa -o ServerAliveInterval=30
 
-# Launch shell to connect to DB2 through pyodbc
+# Cold data (product, partners, ...)
+
+Most data don't move much, but there are always few changes between 2 releases. Thus we need to update the data.
+For each data release you will need to update them.
+
+Generate files:
+
+    python import_db2/import_db2.py --full
+
+For more details see [Importing Alcyon DB2 data](../import_db2/README.rst)
+
+# Cold data (product, partners, ...) - Diff
+
+Sometimes you don't want to reload all the data for a single change.
+In such case you might prefer to load only the actual changes.
+
+You can use the following invoke task for this:
+
+[invoke data.make-csv-diff](./invoke.local.md)
+
+
+# Transactional data (sale orders, purchase orders)
+
+This action is rarely required. Last generation was done until end of March 2018.
+A couple of months is not much compared to 2 years. To refresh eventually on last data import from scratch.
+
+For those data as the volume of data to pull from DB2 history is massive we do a local copy of the DB2 tables.
+To do so we compile some csv files which will be later used by jobs to convert objects 1 by 1.
+
+Then the importer will catch up with the remaining data to import.
+
+Launch shell to connect to DB2 through pyodbc:
 
     python import_db2/shell.py
 
-# Generate files
+Generate files:
 
 Here we take all rows from 2016-01-01 to 2018-03-31
 
