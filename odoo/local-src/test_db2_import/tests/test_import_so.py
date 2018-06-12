@@ -116,6 +116,25 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 4)
         self.assertEqual(len(self.so.picking_ids), 5)
 
+    def test_import_no_additional_product(self):
+        """Check we don't add unwanted additional products
+
+        Odoo will automatically add additional products
+        when confirming the sale order.
+
+        Make sure this is disabled when importing on final_update.
+
+        """
+        suite = 2835987
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_so.importer_id.mode = 'final_update'
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+        self.assertEqual(len(self.so.order_line), 2)
+
     def test_import_so_2798516(self):
         """Import SO 2798516.
 

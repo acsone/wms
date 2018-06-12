@@ -190,6 +190,7 @@ class DB2ImportTestCase(SavepointCase):
         cls.create_procurement_rules()
         cls.create_routes()
         cls.load_products()
+        cls.load_supplierinfo()
         cls.load_pricelists()
         cls.load_customer_categories()
         cls.load_customers()
@@ -394,6 +395,13 @@ class DB2ImportTestCase(SavepointCase):
     def load_products(cls):
         with open(CSV_PATH % 'product') as csv_file:
             load_csv(cls.env['product.product'], csv_file)
+        with open(CSV_PATH % 'additional_product') as csv_file:
+            load_csv(cls.env['product.product'], csv_file)
+
+    @classmethod
+    def load_supplierinfo(cls):
+        with open(CSV_PATH % 'supplierinfo_promo') as csv_file:
+            load_csv(cls.env['product.supplierinfo'], csv_file)
 
     @classmethod
     def load_pricelists(cls):

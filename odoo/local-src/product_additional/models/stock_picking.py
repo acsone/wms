@@ -53,6 +53,9 @@ class StockPicking(models.Model):
             for packop in packops:
                 qty_main += packop['product_qty']
 
+            if not product.ratio_main_product:
+                continue
+
             coefficient = int(qty_main / product.ratio_main_product)
             qty_add = coefficient * product.ratio_additional_product
             if not qty_add:

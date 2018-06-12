@@ -21,6 +21,7 @@ class SaleOrder(models.Model):
         SELECT ratio_main_product, ratio_promotional_product
         FROM product_supplierinfo
         WHERE ratio_promotional_product > 0
+          AND ratio_main_product > 0
           AND (date_start IS NULL or date_start <= NOW())
           AND (date_end IS NULL or date_end >= NOW())
           AND (min_qty_sale = 0 OR min_qty_sale IS NULL OR min_qty_sale <= %s)
@@ -29,13 +30,16 @@ class SaleOrder(models.Model):
         LIMIT 1;
         """
 
+        if self.env.context.get('__no_promotional_product'):
+            return super(SaleOrder, self).action_confirm()
+
         for order in self:
             for line in order.order_line:
                 line_uom = line.product_uom
                 product_uom = line.product_id.uom_id
                 product_qty = line.product_uom_qty
 
-                # If the unit of measure is different than the product' UOM
+                # If the unit of measure is different than the product's UOM
                 # we need to adapt the quantity
                 if line_uom != product_uom:
                     product_qty = line_uom._compute_quantity(
