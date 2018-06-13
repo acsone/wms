@@ -1143,7 +1143,7 @@ __import__.customer_address_delivery_7576,MERZ ANNE-SOPHIE *,rue de la Flèche 3
 __import__.customer_address_delivery_7577,RAULIER ANNICK,Nv Chemin de Saint-Marc 39,5002,SAINT-SERVAIS,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7577
 __import__.customer_address_delivery_7579,DISPENSARIUM GENT,"Dampoortstraat, 39",9000,GENT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7579
 __import__.customer_address_delivery_7590,EPC085,"Chaussée de Marche, 951",5100,WIERDE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7590
-__import__.customer_address_delivery_7591,DISPENSARIUM GENT,Dampoortstraat 39,9000,GENT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7591
+__import__.customer_address_delivery_7591,DISPENSARIUM GENT,Vogelenzangpark 9,9000,GENT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7591
 __import__.customer_address_delivery_7598,MONFORT ODILE,Rue du Fond de Bois 10,4560,LES AVINS CLAVIER,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7598
 __import__.customer_address_delivery_7599,DAP FENIKS,"Streekstraat, 63",3080,TERVUREN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7599
 __import__.customer_address_delivery_7605,DR BUYSSE OLIVIER,"Tragelstraat, 5",9190,STEKENE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7605
@@ -1389,3 +1389,8 @@ __import__.customer_address_delivery_9264,PHARMACIE SENEFFE CENTRE SPRL,Rue des 
 __import__.customer_address_delivery_9274,S/LWW_DIEREN OVERLAST BEHEER,Lindenlei 66,2180,EKEREN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9274
 __import__.customer_address_delivery_9279,SPW DGO3 - DPC - DGARNE,Avenue Prince de Liège 7,5100,JAMBES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9279
 __import__.customer_address_delivery_9282,CAB VET DR LACREMANS AURELIE,Rue Albert et Louis Curvers 1,4053,EMBOURG,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9282
+__import__.customer_address_delivery_9301,CLINIVET,"Rue Pont à Migneloux, 39",6041,GOSSELIES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9301
+__import__.customer_address_delivery_9307,BROCACEF BV/ VETINA-AACOFARMA,Industrieweg 7,5281,RW BOXSTEL,,,False,False,base.nl,nl_BE,,delivery,__import__.customer_9307
+__import__.customer_address_delivery_9308,GOOSSENS KARL,Boekweithofstraat 20,9120,HAASDONK,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9308
+__import__.customer_address_delivery_9313,PHARMASANTE DEPOT,rue de le Boverie 379,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9313
+__import__.customer_address_delivery_9314,PHARMASANTE DEPOT,rue de la Boverie 379,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9314

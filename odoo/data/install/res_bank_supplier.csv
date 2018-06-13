@@ -37,6 +37,7 @@ __import__.bank_BCVLCH2LXXX,BCVLCH2LXXX,Banque Cantonale Vaudoise
 __import__.bank_BDCHBE22,BDCHBE22,Deutsche Bank
 __import__.bank_BGLLLULL,BGLLLULL,BGL BNP Paribas S.A.
 __import__.bank_BILLLULL,BILLLULL,Bil Bank
+__import__.bank_BKBKESMMXXX,BKBKESMMXXX,BANKINTER (Vigo Branch)
 __import__.bank_BKCPBEB1BKB,BKCPBEB1BKB,BKCP
 __import__.bank_BLOPIT22,BLOPIT22,UBI BANCA
 __import__.bank_BNAGBEBB,BNAGBEBB,Delta Lloyd Bank
@@ -68,7 +69,7 @@ __import__.bank_BYLADEM1EGF,BYLADEM1EGF,Sparkasse Rottal
 __import__.bank_BYLADEM1NEA,BYLADEM1NEA,Sparkasse Neustadt a.d. Aisch
 __import__.bank_CAIXESBBXXX,CAIXESBBXXX,LA CAIXA
 __import__.bank_CCBPFRPPBDX,CCBPFRPPBDX,Banque pop centre Atlantique
-__import__.bank_CCBPFRPPCFD,CCBPFRPPCFD,Banque populaire
+__import__.bank_CCBPFRPPGRE,CCBPFRPPGRE,Banque populaire
 __import__.bank_CCBPFRPPLYO,CCBPFRPPLYO,Banque Populaire
 __import__.bank_CCBPFRPPMAR,CCBPFRPPMAR,Banque populaire méditerranée
 __import__.bank_CCBPFRPPMTG,CCBPFRPPMTG,Banque Populaire
