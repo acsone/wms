@@ -91,3 +91,8 @@ msgstr "Frais de livraison calculés"
 msgid "sale.config.settings"
 msgstr "sale.config.settings"
 
+#. module: specific_shipping_costs
+#: code:addons/specific_shipping_costs/models/delivery_carrier.py:21
+#, python-format
+msgid "You cannot delete a record linked from a partner"
+msgstr "Vous ne pouvez pas supprimer une méthode de livraison définie sur un partenaire"

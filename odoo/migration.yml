@@ -226,3 +226,4 @@ migration:
           - anthem songs.install.partner::create_legal_entity
           - anthem songs.upgrade.10_21_0_update::post
           - anthem songs.install.pre::disable_module_account_sepa
+          - anthem songs.install.data_all::import_delivery_carriers
