@@ -7,6 +7,7 @@
     'license': 'AGPL-3',
     'category': 'Stock',
     'depends': [
+        'specific_sale',
         'stock',
         'specific_stock',
         'product_expiry',
