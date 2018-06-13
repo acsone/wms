@@ -6,6 +6,7 @@ git:
   # we don't want travis to pull them for the lint build,
   # so we pull them manually in the tests build
   submodules: false
+  lfs_skip_smudge: true
 
 cache:
   directories:
@@ -37,6 +38,8 @@ before_install:
 
 install:
   - if [ "$LINT_CHECK" == "0" ] ; then python ./travis/git_submodule_update.py ; fi
+  # include large csv files in tag image only
+  - if [ "$TESTS" == "1" -a ! -z "$TRAVIS_TAG" ]; then git lfs pull ; fi
     # we always specify '-f docker-compose.yml' so 'docker-compose.override.yml'
     # is not used and so the volumes are not shared with the host
   - if [ "$LINT_CHECK" == "0" ] ; then docker-compose -f docker-compose.yml build --pull ; fi

@@ -25,8 +25,6 @@ function deploy {
 }
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  # include large csv files in image
-  git lfs pull
 
   docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
   docker_tag=r-$TRAVIS_BRANCH-$TRAVIS_COMMIT
