@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.21.0 (2018-06-13)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1287: Filter taxes by fiscal position on purchase orders
@@ -25,8 +37,6 @@ Unreleased
 
 * ALCN-1394: Disable the module account_sepa (enterprise) and install the module l10n_be_iso20022_pain
 * Deactivate all crons jobs
-
-**Documentation**
 
 
 10.20.3 (2018-06-12)
