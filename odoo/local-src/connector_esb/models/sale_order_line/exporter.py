@@ -16,8 +16,8 @@ class SaleOrderLineExportMapper(Component):
         ('sequence', 'line_number'),
         ('product_uom_qty', 'qty_ordered'),
         (falsy2zero('qty_delivered'), 'qty_delivered'),
-        ('price_unit', 'price'),
-        ('price_total', 'price_inc_tax'),
+        (falsy2zero('price_unit'), 'price'),
+        (falsy2zero('price_total'), 'price_inc_tax'),
         (falsy2zero('product_qty_canceled'), 'qty_cancelled'),
         (falsy2zero('product_qty_unavailable'), 'qty_backorder')
     ]

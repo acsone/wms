@@ -392,7 +392,8 @@ CLIENT_DELIVERY_METHODS = {
     3: '__setup__.deliver_carrier_post_pack',
     4: '__setup__.deliver_carrier_delegated',
     9: '__setup__.deliver_carrier_by_client',
-    89: '__setup__.deliver_carrier_invoice',
+    # Was deliver_carrier_invoice, but has been removed
+    89: '__setup__.deliver_carrier_alcyon',
 }
 
 PAYMENT_TERMS = {
