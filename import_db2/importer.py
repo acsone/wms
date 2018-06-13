@@ -91,7 +91,7 @@ class Importer:
             file_path = os.path.join(self.csv_path, '%s.csv' % name)
 
             # backup the file before overwriting it to make diff csv files
-            if os.path.isfile(file_path):
+            if self.full and os.path.isfile(file_path):
                 copyfile(file_path, file_path + '.former')
             with open(file_path, 'wb') as csvfile:
                 writer = csv.DictWriter(csvfile, headers, lineterminator='\n')
