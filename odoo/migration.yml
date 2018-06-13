@@ -27,6 +27,7 @@ migration:
           - anthem songs.install.uninstall_procurement_jit_module::main
           - anthem songs.install.post::main
 
+          - anthem songs.install.cron::deactivate_all
           - anthem songs.install.accounting::main
           # To an unknown reason,
           # ir_values created in 'default_values'
