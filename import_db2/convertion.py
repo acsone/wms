@@ -129,13 +129,13 @@ class ProductMapper(EntityMapper):
             tax_rate = mappings.PRODUCT_ANTIBIO_TAX.get(
                 db2_entity.get('cplz07')
             )
+            if tax_rate:
+                xmlid = 'l10n_be_antibiotic_tax.1_antibiotic_%s_%s'
+                purchase_antibio_tax = xmlid % (tax_rate, 'in')
+                sale_antibio_tax = xmlid % (tax_rate, 'out')
 
-            xmlid = 'l10n_be_antibiotic_tax.1_antibiotic_%s_%s'
-            purchase_antibio_tax = xmlid % (tax_rate, 'in')
-            sale_antibio_tax = xmlid % (tax_rate, 'out')
-
-            taxes.append(purchase_antibio_tax)
-            taxes.append(sale_antibio_tax)
+                taxes.append(purchase_antibio_tax)
+                taxes.append(sale_antibio_tax)
 
         odoo_entity['taxes_id/id'] = ','.join(taxes)
 
