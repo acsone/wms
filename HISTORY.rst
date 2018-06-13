@@ -13,6 +13,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1319: Replace the legal entity by a relation field and create the new model legal.entity
 * ALCN-1321: Replace orderpoint computed fields on product by a simpler field and update the order point by a constrains
 * ALCN-1408: Setup delivery carriers fees
 
@@ -65,8 +66,6 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
-
-* ALCN-1319: Replace the legal entity by a relation field and create the new model legal.entity
 
 **Bugfixes**
 
