@@ -136,6 +136,9 @@ class ProductMapper(EntityMapper):
 
                 taxes.append(purchase_antibio_tax)
                 taxes.append(sale_antibio_tax)
+            else:
+                print('WARNING product %s antibiotic tax for %s does not exists'
+                      % (db2_entity['gesdem'], db2_entity.get('cplz07')))
 
         odoo_entity['taxes_id/id'] = ','.join(taxes)
 
@@ -248,7 +251,8 @@ class ProductMapper(EntityMapper):
         if supplier_ref:
             supplier_ref = str(int(supplier_ref))
             if supplier_ref in self.MISSING_MANUFACTURERS:
-                print('skip manufacturer ref %s' % db2_entity.get('cplz25'))
+                print('WARNING product %s: skip manufacturer ref %s'
+                      % (db2_entity['gesdem'], db2_entity.get('cplz25')))
                 return
 
             self.importer.add_foreign_ref('FOURN', supplier_ref)
