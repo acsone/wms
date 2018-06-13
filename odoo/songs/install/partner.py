@@ -41,7 +41,15 @@ def setup_customer_ref(ctx):
 
 
 @anthem.log
+def create_legal_entity(ctx):
+    """ Importing legal entities from csv """
+    content = resource_stream(req, 'data/install/legal.entity.csv')
+    load_csv_stream(ctx, 'legal.entity', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring partner """
     create_customer_category(ctx)
     create_supplier_category(ctx)
+    create_legal_entity(ctx)

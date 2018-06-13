@@ -30,7 +30,7 @@
             </field>
 
             <group name="fiscal_information" position="inside">
-                <field name="legal_entity" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                <field name="legal_entity_id" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
             </group>
 
             <field name="user_id" position="after">

@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_partner
+#	* specific_partner
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-19 11:25+0000\n"
-"PO-Revision-Date: 2017-12-12 16:52+0000\n"
+"POT-Creation-Date: 2018-05-22 15:01+0000\n"
+"PO-Revision-Date: 2018-05-22 15:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -29,14 +28,22 @@ msgid "Associated pharmacist"
 msgstr "Pharmacien associé"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_create_uid
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_create_date
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_create_date
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_master_partner_id
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_master_partner_id
+msgid "Customer master"
+msgstr "Customer master"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_vet_depot_number
@@ -45,11 +52,13 @@ msgid "Depot number"
 msgstr "Numéro de dépôt"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_display_name
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_id
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
 msgstr "ID"
@@ -61,27 +70,37 @@ msgid "Is veterinary"
 msgstr "Est un vétérinaire"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity___last_update
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_uid
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_uid
 msgid "Last Updated by"
 msgstr "Derniere fois mis à jour par"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_date
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_legal_entity
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_legal_entity
+#: model:ir.actions.act_window,name:specific_partner.action_legal_entity
+#: model:ir.ui.menu,name:specific_partner.menu_legal_entity
+msgid "Legal Entities"
+msgstr "Entités juridiques"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_legal_entity_id
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_legal_entity_id
 msgid "Legal entity"
 msgstr "Entité juridique"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_name
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_name
 msgid "Name"
 msgstr "Nom"
@@ -121,7 +140,7 @@ msgid "Suite Name"
 msgstr "Nom de suite"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:56
+#: code:addons/specific_partner/models/res_partner.py:64
 #: sql_constraint:res.partner:0
 #, python-format
 msgid "The reference must be numeric or empty"
@@ -135,11 +154,23 @@ msgid "This category name already exists"
 msgstr "Cette catégorie existe déjà"
 
 #. module: specific_partner
+#: code:addons/specific_partner/models/legal_entity.py:14
+#: sql_constraint:legal.entity:0
+#, python-format
+msgid "This legal entity already exists"
+msgstr "Cette entité juridique existe déjà"
+
+#. module: specific_partner
 #: code:addons/specific_partner/models/partner_alcyon_category.py:23
 #: sql_constraint:partner.alcyon_category:0
-#, fuzzy, python-format
+#, python-format
 msgid "This reference esb already exists"
 msgstr "Cette catégorie existe déjà"
+
+#. module: specific_partner
+#: model:ir.model,name:specific_partner.model_legal_entity
+msgid "legal.entity"
+msgstr "legal.entity"
 
 #. module: specific_partner
 #: model:ir.model,name:specific_partner.model_partner_alcyon_category
