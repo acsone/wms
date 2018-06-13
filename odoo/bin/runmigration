@@ -56,9 +56,11 @@ fi
 
 migrate
 
-# For tags that are new release, create a cached Database dump
-if [ ! -z "$NEW_MIG_DUMP" -a "$NEW_MIG_DUMP" == "$VERSION" ]; then
+# For master commit that are new release, create a cached Database dump
+# We assume that if the dump file do not exist, it is a new release
+if [ "$TRAVIS_PULL_REQUEST" == "false" -a ! -f "$CACHED_DUMP" ]; then
     echo "Save DB to cache $CACHED_DUMP"
     mkdir -p "$CACHE_DIR"
     PGPASSWORD=$DB_PASSWORD pg_dump -Fp -h $DB_HOST -U $DB_USER -O -d $DB_NAME -f "$CACHED_DUMP"
+    ls -l $CACHED_DUMP
 fi
