@@ -22,6 +22,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        # Views
         'views/report_template.xml',
         'views/report_deliveryslip.xml',
         'views/report_invoice.xml',
@@ -29,6 +30,8 @@
         'views/report_purchase_order.xml',
         'views/report_passport.xml',
         'views/round_instance.xml',
+        'views/report_saleorder_document.xml',
+        # Data
         'data/paperformat.xml',
         'data/report_filename.xml',
     ],
