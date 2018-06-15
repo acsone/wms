@@ -46,11 +46,12 @@ migration:
         full:
           operations:
             post:
-              - bin/importer.sh songs.install.data_full::import_suppliers /opt/odoo/data/install/supplier.csv
-              - bin/importer.sh songs.install.data_full::import_additional_suppliers_data /opt/odoo/data/install/supplier_add_data.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
-              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/master_customer.csv
-              - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_add_data.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
@@ -274,3 +275,6 @@ migration:
               - anthem songs.install.data_full::purge_inventory
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_inventory_without_lot
+              - anthem songs.upgrade.common::deactivate_check_on_vat
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
+              - anthem songs.install.accounting::activate_check_on_vat

@@ -15,7 +15,7 @@ from ..common import req
 _logger = logging.getLogger(__name__)
 
 
-def get_files(req, default_file):
+def get_files(req, default_file=None):
     """ Check if there is a DATA_DIR in environment else open default_file.
 
     DATA_DIR is passed by importer.sh when importing splitted file in parallel
@@ -35,45 +35,11 @@ def get_files(req, default_file):
 
 
 @anthem.log
-def import_suppliers(ctx):
-    """ Importing suppliers from csv """
-
+def import_partner(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    for content in get_files(req, 'data/install/supplier.csv'):
-        load_csv_stream(ctx, Partner, content, delimiter=',')
-
-
-def import_additional_suppliers_data(ctx):
-    """ Importing additional supplier data from csv """
-
-    load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
-    Partner = ctx.env['res.partner'].with_context(load_ctx)
-    for content in get_files(req, 'data/install/supplier_add_data.csv.csv'):
-        load_csv_stream(ctx, Partner, content, delimiter=',')
-
-
-@anthem.log
-def import_clients(ctx):
-    """ Importing clients from csv"""
-
-    load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
-    Partner = ctx.env['res.partner'].with_context(load_ctx)
-    for content in get_files(req, 'data/install/customer.csv'):
-        load_csv_stream(ctx, Partner, content, delimiter=',')
-
-
-@anthem.log
-def import_clients_addresses(ctx):
-    """ Importing clients addresses from csv"""
-
-    load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
-    Partner = ctx.env['res.partner'].with_context(load_ctx)
-    for content in get_files(req, 'data/install/customer_address.csv'):
+    for content in get_files(req):
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
 

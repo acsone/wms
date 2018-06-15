@@ -768,6 +768,8 @@ class CustomerAddressMapper(AddressMapper):
 
 class SupplierMapper(EntityMapper):
     DB2_NAME = 'FOURN'
+    # Sample mode foreign key set by
+    # product and supplierinfo
     DB2_REF_NAME = 'founum'
 
     XMLID_FIELD = 'ref'
@@ -807,6 +809,7 @@ class SupplierMapper(EntityMapper):
             'foupai',
             mapping=mappings.SUPPLIER_PAYMENT_MODES,
         ),
+        'contacts',
     ]
 
     def get_sql_joins(self):
@@ -842,6 +845,74 @@ class SupplierMapper(EntityMapper):
             code = 'extra'
         pos = '__setup__.fiscal_position_' + code
         odoo_entity['property_account_position_id/id'] = pos
+
+    def convert_contacts(self, odoo_entity, db2_entity):
+        """Used to filter contacts in sample mode"""
+        if not self.importer.full:
+            supplier_ref = db2_entity['founum']
+            self.importer.add_foreign_ref('CONTCF', supplier_ref)
+
+
+class ContactMapper(EntityMapper):
+
+    DB2_NAME = 'CONTCF'
+    # Sample mode foreign key set by
+    # supplier
+    DB2_REF_NAME = 'ccfnum'
+    DB2_SCHEMA = 'gendata'
+
+    XMLID_FIELD = 'id'
+    FIELDS_MAPPING = [
+        FieldMapper('type', constant='contact'),
+        FieldMapper('name', 'ccfnom'),
+        FieldMapper('function', 'ccffon'),
+        FieldMapper('phone', 'ccftlp'),
+        FieldMapper('fax', 'ccffax'),
+        FieldMapper('customer', constant=False),
+        FieldMapper('supplier', constant=False),
+        FieldMapper('lang', 'ccflan',
+                    mapping=mappings.LANG),
+        FieldMapper('comment', 'ccftex'),
+        'phone_numbers',
+        'id', 'parent_id',
+        # ignore ccfadr (Adresse) as it is always 0
+        # ignore ccfsrv (Nom du service) no Odoo field matches
+        # ignore ccfmai (Mailing) as it is always 0, 1 or 99
+        #        we don't have a matching field for this in Odoo
+    ]
+
+    @staticmethod
+    def convert_phone_numbers(odoo_entity, db2_entity):
+        odoo_entity['phone'], odoo_entity['mobile'] = mappings.phone_converter(
+            db2_entity.get('ccftlp'), db2_entity.get('ccftel')
+        )
+
+    @staticmethod
+    def convert_id(odoo_entity, db2_entity):
+        parent = db2_entity['ccfnum']
+        contact_num = db2_entity['ccfcon']
+        odoo_entity['id'] = "%s_%s" % (parent, contact_num)
+
+    @staticmethod
+    def convert_parent_id(odoo_entity, db2_entity):
+        db2_partner_type = db2_entity.get('ccfcod')
+        ref = db2_entity.get('ccfnum')
+
+        if db2_partner_type == 0:
+            partner_type = 'customer'
+        elif db2_partner_type == 1:
+            partner_type = 'supplier'
+        parent_xmlid = '__import__.%s_%s' % (partner_type, ref)
+        odoo_entity['parent_id/id'] = parent_xmlid
+
+
+class SupplierContactMapper(ContactMapper):
+    """Supplier's contacts"""
+
+    def get_sql_where(self):
+        # Filter remove order customer contacts
+        where = "ccfcod = 1"
+        return where
 
 
 class LocationMapper(EntityMapper):
@@ -1363,6 +1434,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   CustomerMapper, SupplierMapper,
                   MasterCustomerMapper,
                   CustomerAddressMapper,
+                  SupplierContactMapper,
                   SaleOrderMapper,
                   SaleOrderLineMapper,
                   StockProductionLotMapper,
@@ -1380,6 +1452,7 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        CustomerMapper, SupplierMapper,
                        MasterCustomerMapper,
                        CustomerAddressMapper,
+                       SupplierContactMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
                        ProductStockBinMapper,
