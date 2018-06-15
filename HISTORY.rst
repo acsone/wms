@@ -12,6 +12,8 @@ Unreleased
              Creation date of product is imported already but the value needs to be available not
              only on variant but also on product templates. Because all used views are product template,
              exporting products to a csv file would give you only the wrong date.
+* ALCN-1309: reset inventory line
+* TODO generate new inventory lines
 
 **Features and Improvements**
 
