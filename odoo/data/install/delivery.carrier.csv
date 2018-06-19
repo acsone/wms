@@ -1,7 +1,6 @@
 id,name,esb_ref,use_specific_cost_calculation,fixed_price,free_if_more_than
-__setup__.deliver_carrier_alcyon,Alcyon,1,True,7.50,125
-__setup__.deliver_carrier_transporter,Transporteur,2,False,0,
-__setup__.deliver_carrier_post_pack,Colis Postal,3,False,0,
-__setup__.deliver_carrier_delegated,Enlèvement délégué,4,False,0,
-__setup__.deliver_carrier_by_client,Enlevé par client,95,False,0,
-__setup__.deliver_carrier_invoice,Une facturation,89,False,0,
+__setup__.deliver_carrier_alcyon,Alcyon,01,True,7.50,125
+__setup__.deliver_carrier_transporter,Transporteur,02,False,0,
+__setup__.deliver_carrier_post_pack,Colis Postal,03,False,0,
+__setup__.deliver_carrier_delegated,Enlèvement délégué,04,False,0,
+__setup__.deliver_carrier_by_client,Enlevé par client,09,False,0,

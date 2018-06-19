@@ -18,7 +18,6 @@ class SaleExportMapper(Component):
 
     direct = [
         ('id', 'erp_id'),
-        ('amount_tax', 'tax_amount'),
         (falsy2zero('amount_total'), 'order_amount'),
         (falsy2zero('amount_tax'), 'tax_amount'),
         (falsy2zero('delivery_price'), 'shipping_amount'),
@@ -47,17 +46,19 @@ class SaleExportMapper(Component):
 
     @mapping
     def compute_channel(self, record):
-        if record.sale_channel == 'phone':
-            return {'channel': '01'}
-        elif record.sale_channel == 'fax':
-            return {'channel': '03'}
+        # Phone channel '01' is the default
+        channel = '01'
+        if record.sale_channel == 'fax':
+            channel = '03'
         elif record.sale_channel == 'mail':
-            return {'channel': '08'}
-        return {}
+            channel = '08'
+        return {'channel': channel}
 
     @mapping
     def compute_shipping_method(self, record):
-        return {'shipping_method': record.carrier_id.esb_ref or ''}
+        return {'shipping_method': record.carrier_id.esb_ref or
+                self.env.ref('__setup__.deliver_carrier_alcyon')
+                }
 
     @mapping
     def compute_order_ref(self, record):
