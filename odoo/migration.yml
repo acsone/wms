@@ -238,3 +238,9 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post
+      modes:
+        full:
+          operations:
+            post:
+              ### Update mandates
+              - anthem songs.install.data_full::import_customer_banks_and_mandats

@@ -10,6 +10,7 @@ Unreleased
 
 * ALCN-1291: In sale report remove header payment_term and vendor
   and add NL translations
+* ALCN-1332: Add a script to import customer banks accounts and madats
 
 **Bugfixes**
 
