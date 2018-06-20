@@ -244,6 +244,7 @@ migration:
           - split_coda
           - csv_file
           - specific_followup
+          - website_purchase_review
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post

@@ -15,6 +15,7 @@ Unreleased
 * ALCN-1350: Split a CODA file by statement and ignore statements with an account not managed by Alcyon.
 * ALCN-1116: Add the module CSV File (this is a generic module)
 * ALCN-1404: Update followup letter and update translations
+* Purchase review: Add the ordered quantity in the advised quantity and disallow to edit the min/max for MTO product
 
 **Bugfixes**
 * ALCN-1426: Add missing Inputmask library
