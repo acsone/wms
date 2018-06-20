@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.21.1 (2018-06-20)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-1291: In sale report remove header payment_term and vendor
   and add NL translations
 * ALCN-1332: Add a script to import customer banks accounts and madats
@@ -19,14 +31,13 @@ Unreleased
 * ALCN-1427: Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
 
 **Bugfixes**
+
 * ALCN-1426: Add missing Inputmask library
 * ALCN-1424: Fix filename for esb export product and fix invalid esb_ref in product category (business unit)
 
 **Build**
 
 * Add the repo connector-interfaces from OCA and install the module base_import_async
-
-**Documentation**
 
 
 10.21.0 (2018-06-13)
