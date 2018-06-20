@@ -52,6 +52,8 @@ Unreleased
 * ALCN-1404: Update followup letter and update translations
 * Purchase review: Add the ordered quantity in the advised quantity and disallow to edit the min/max for MTO product
 * ALCN-1427: Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
+* ALCN-1358: generate sales order report in a background job to reduce the time required for the confirmation of a sales order
+* ALCN-1358: Add indexes and optimizations for faster operations
 
 **Bugfixes**
 

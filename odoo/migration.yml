@@ -188,6 +188,7 @@ migration:
           - specific_translations
           - specific_zetes
           - specific_security
+          - speedy_views
           - stock_barcode_fix
           - stock_delivery_note
           - stock_expired
@@ -271,6 +272,7 @@ migration:
           - specific_purchase
           - stock_inventory_products
           - specific_stock
+          - speedy_views
       modes:
         full:
           operations:
