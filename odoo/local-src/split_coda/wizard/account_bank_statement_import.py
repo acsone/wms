@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2018 Okia SPRL (sylvain@okia.be)
+# Copyright 2018 Okia SPRL (sylvain@okia.be)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
@@ -109,7 +109,13 @@ class AccountBankStatementImport(models.TransientModel):
     @api.multi
     def split_codas(self, data):
         """
-        Split the CODA file by statements
+        Split the CODA file by statements. A CODA file is a formatted file
+        who contains a list of statements grouped by account number.
+
+        In a CODA file, each line starts with a code (a number).
+        Each grouped statements starts with the code 0 and ends with the
+        code 9. Thus if we want to split a CODA file, we simply need
+        to cut each blocks starting with 0 and ending with 9.
         :param data:
         :return:
         """
@@ -121,11 +127,13 @@ class AccountBankStatementImport(models.TransientModel):
             if not line:
                 continue
 
+            # Code 0 => the beginning of the statement
             if line[0] == '0':
                 current_coda = []
 
             current_coda.append(line)
 
+            # Code 9 => the end of the statement
             if line[0] == '9':
                 splitted_codas.append(current_coda)
 
