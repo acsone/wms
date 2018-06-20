@@ -158,6 +158,7 @@ migration:
           - account_invoice_tax_required
           - account_move_productcateg
           - connector_esb
+          - csv_file
           - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
@@ -241,6 +242,7 @@ migration:
           # oca/connector-interfaces
           - base_import_async
           - split_coda
+          - csv_file
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post
