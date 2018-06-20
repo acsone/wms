@@ -13,7 +13,6 @@
         'stock',
         'stock_picking_assignment',
         'stock_production_lot_expired_dates',
-        'specific_helpdesk',
         'web_widget_inputmask',
     ],
     'data': [

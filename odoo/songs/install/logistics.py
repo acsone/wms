@@ -281,6 +281,15 @@ def create_locations(ctx):
 
 
 @anthem.log
+def set_helpdesk_reason_location(ctx):
+    ref = ctx.env.ref
+    scrap = ref('__setup__.stock_location_scrap_quality')
+    ref('specific_helpdesk.product_defect').location_dest_id = scrap.id
+    ref('specific_helpdesk.cold_chain_broken').location_dest_id = scrap.id
+    ref('specific_helpdesk.expired_product').location_dest_id = scrap.id
+
+
+@anthem.log
 def create_putaway(ctx):
     """ Create putaway and putaway strat
     """
@@ -1180,6 +1189,7 @@ def main(ctx):
     warehouse_settings(ctx)
     create_picking_zones(ctx)
     create_locations(ctx)
+    set_helpdesk_reason_location(ctx)
     create_picking_types(ctx)
     configure_procurement_rules(ctx)
     create_procurement_rules(ctx)

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
+
 {'name': 'Tests for DB2 Import',
  'version': '10.0.1.0.0',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
- 'license': 'AGPL-3',
+ 'license': 'LGPL-3',
  'category': 'Testing',
  'depends': [
      # Install all related addons to apply import test on them
@@ -55,12 +56,12 @@
      'specific_base',
      'specific_data',
      'specific_followup',
-     'specific_helpdesk',
+     'specific_helpdesk',  # requires LGPL
      'specific_partner',
      'specific_print',
      'specific_product',
      'specific_purchase',
-     'specific_purchase_report',
+     'specific_purchase_report',  # requires LGPL
      'specific_report',
      'specific_sale',
      'specific_shipping_costs',
