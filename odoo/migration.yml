@@ -243,6 +243,7 @@ migration:
           - base_import_async
           - split_coda
           - csv_file
+          - specific_followup
       operations:
         post:
           - anthem songs.upgrade.10_21_1_update::post
