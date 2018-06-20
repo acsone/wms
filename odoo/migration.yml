@@ -239,6 +239,7 @@ migration:
           ### local-src
           - specific_report
           - specific_sale
+          - connector_esb
           # oca/connector-interfaces
           - base_import_async
           - split_coda

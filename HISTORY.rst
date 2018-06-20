@@ -19,6 +19,7 @@ Unreleased
 
 **Bugfixes**
 * ALCN-1426: Add missing Inputmask library
+* ALCN-1424: Fix filename for esb export product and fix invalid esb_ref in product category (business unit)
 
 **Build**
 
@@ -45,7 +46,6 @@ Unreleased
 
 * ALCN-864: Fixing the csv document generated as a delivery note by improving float number format and adding no suite, lot name, tax amount.
 * ALCN-1420: Fix sale order export to esb: Verify prices default to 0, fix delivery carrier esb_ref, communication channel default to phone
-* ALCN-1424: Fix esb export product: change xml filename
 
 **Build**
 

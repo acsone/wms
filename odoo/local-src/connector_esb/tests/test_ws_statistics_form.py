@@ -23,8 +23,11 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             'ref': '987654321',
         })
         categ_med = self.env.ref('specific_data.product_categ_medoc')
+        categ_med.esb_ref = 'medicament'
         categ_ali = self.env.ref('specific_data.product_categ_ali')
+        categ_ali.esb_ref = 'aliment'
         categ_mat = self.env.ref('specific_data.product_categ_materiel')
+        categ_mat.esb_ref = 'material'
         product_model = self.env['product.product']
         self.product1 = product_model.create({
             'name': 'KETOFEN 5MG 10CP',

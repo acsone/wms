@@ -1,7 +1,7 @@
 id,esb_ref
-specific_data.product_categ_materiel,materiel
-specific_data.product_categ_ali,aliment
-specific_data.product_categ_medoc,medicament
+specific_data.product_categ_materiel,MAT
+specific_data.product_categ_ali,ALI
+specific_data.product_categ_medoc,MED
 specific_data.product_categ_vet_belges,
 specific_data.product_categ_importation,75
 specific_data.product_categ_humain,15
