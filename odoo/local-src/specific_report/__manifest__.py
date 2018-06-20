@@ -19,6 +19,7 @@
         'specific_purchase',
         'l10n_be_invoice_bba',
         'specific_data',
+        'queue_job',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
