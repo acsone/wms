@@ -18,6 +18,8 @@ Unreleased
 
 **Build**
 
+* Add the repo connector-interfaces from OCA and install the module base_import_async
+
 **Documentation**
 
 
