@@ -14,7 +14,7 @@ Unreleased
 * ALCN-1225: Add a serial number on stock move and display this serial number in the delivery slip
 
 **Bugfixes**
-* Add missing Inputmask library
+* ALCN-1426: Add missing Inputmask library
 
 **Build**
 
