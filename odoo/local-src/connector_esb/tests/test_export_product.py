@@ -238,7 +238,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_filename(self):
-        self.check_filename('Product_{}.xml')
+        self.check_filename('Products_{}.xml')
 
     @tools.mute_logger('dicttoxml')
     def test_record_exporter_local(self):

@@ -147,7 +147,7 @@ class XMLTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             writer = work.component_by_name('esb.xml.writer')
             self.assertEqual(
-                writer.filename(), 'Product_{}.xml'.format(today))
+                writer.filename(), 'Products_{}.xml'.format(today))
 
     @tools.mute_logger('dicttoxml')
     def test_xml_base(self):

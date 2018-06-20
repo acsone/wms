@@ -5,7 +5,7 @@
     <field name="backend_id" ref="esb_backend_config"/>
     <field name="model">product.product</field>
     <field name="kind">product</field>
-    <field name="export_filename">Product_{date}.xml</field>
+    <field name="export_filename">Products_{date}.xml</field>
   </record>
 
   <record id="esb_timestamp_pharmacy" model="esb.backend.timestamp">

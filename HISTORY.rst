@@ -19,6 +19,7 @@ Unreleased
 
 **Bugfixes**
 * ALCN-1426: Add missing Inputmask library
+* ALCN-1424: Fix filename for esb export product and fix invalid esb_ref in product category (business unit)
 
 **Build**
 
