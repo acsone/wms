@@ -74,7 +74,6 @@ class ZetesTest(TransactionCase):
         })
 
         self.round = self.env['round.instance'].create({
-            'name': 'TOUR/20170101/01',
             'template_id': round_template.id,
             'date': fields.Date.today(),
             'time_leave_planned': 12.50,
