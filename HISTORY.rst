@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
+
 **Bugfixes**
 
 **Build**
