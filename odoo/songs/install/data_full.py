@@ -100,8 +100,7 @@ def import_products(ctx):
         load_csv_stream(ctx, Product, content, delimiter=',')
 
 
-@anthem.log
-def post_import_products(ctx):
+def product_copy_on_unactive(ctx):
     # Computed fields on product.template are not set for archived product
     # copy the values from product.product
     ctx.env.cr.execute("""
@@ -110,6 +109,24 @@ def post_import_products(ctx):
         FROM product_product as prod
         WHERE tmpl.id = prod.product_tmpl_id AND prod.active=False
     """)
+
+
+def product_template_set_create_date(ctx):
+    # Update create_date on all products
+    # The hack in db2_import on create_date
+    # doesn't work with parent objects of inherits
+    ctx.env.cr.execute("""
+        UPDATE product_template as tmpl
+        SET create_date=prod.create_date
+        FROM product_product as prod
+        WHERE tmpl.id = prod.product_tmpl_id
+    """)
+
+
+@anthem.log
+def post_import_products(ctx):
+    product_copy_on_unactive(ctx)
+    product_template_set_create_date(ctx)
 
 
 @anthem.log
