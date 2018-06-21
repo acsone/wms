@@ -671,6 +671,18 @@ PRODUCT_ROUTES = {
     1: "stock.route_warehouse0_mto,purchase.route_warehouse0_buy",
 }
 
+PARTNER_INVOICING_FREQUENCY = {
+    0: '10_days',
+    1: '10_days',
+    9: '1_month'
+}
+
+PARTNER_INVOICING_TYPE = {
+    0: 'by_delivery',
+    1: 'in_one_time',
+    9: 'in_one_time'
+}
+
 BACKORDER_ACCEPTED = {
     0: True,
     1: False,

@@ -62,6 +62,8 @@ Unreleased
              exporting products to a csv file would give you only the wrong date.
 * ALCN-1309: reset inventory line
 * ALCN-1363: import suppliers contacts
+* **TODO DATA** generate full supplier contacts
+* ALCN-1277: Import invoice frequency and invoice type from DB2
 
 **Features and Improvements**
 
