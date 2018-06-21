@@ -28,8 +28,9 @@
     camptocamp: git@github.com:camptocamp/account-closing.git
   merges:
     - oca 10.0
-      # [MIG][10.0] account_cutoff_accrual_picking
-    - oca refs/pull/52/head
+      # [MIG][10.0] account_cutoff_accrual_picking (PR73) + [MIG][10.0] account_invoice_accrual migration (PR45)
+      # PR 74 is a merge of the 2 PR + solve of conflicts
+    - oca refs/pull/74/head
       # [ADD] account_cutoff_accrual_return
     - oca refs/pull/70/head
   target: *default_target
