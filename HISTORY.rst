@@ -9,6 +9,9 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
+* ALCN-1372:
+  * Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
+  * add additional lines when a purchase order is validated
 
 **Bugfixes**
 

@@ -35,6 +35,10 @@
                     <field name="supplier_id" />
                 </group>
             </xpath>
+
+            <xpath expr="//field[@name='seller_ids']" position="attributes">
+                <attribute name="context">{'default_product_tmpl_id': context.get('product_tmpl_id', active_id), 'default_name': supplier_id}</attribute>
+            </xpath>
         </field>
     </record>
 
