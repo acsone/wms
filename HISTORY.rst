@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1392: Delay only one export job when creating / modifying a sales order
+
 **Build**
 
 **Documentation**
