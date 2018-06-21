@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1116: Add the module CSV File Export and CSV File Import
+* ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
 
 **Bugfixes**
 
@@ -65,7 +66,6 @@ Unreleased
 * ALCN-1404: Update followup letter and update translations
 * Purchase review: Add the ordered quantity in the advised quantity and disallow to edit the min/max for MTO product
 * ALCN-1427: Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
-* ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
 
 **Bugfixes**
 
