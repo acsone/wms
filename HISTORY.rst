@@ -15,6 +15,7 @@ Unreleased
 * Install monitoring_status. Previously it has been manually installed and we want to keep it
 * ALCN-1379: Remove taxes from SER-705008 accounting products
 * ALCN-1403: Zetes: ignore pickings who contain inventoried products
+* ALCN-1421: Add missing Antibiotic taxes in the external module l10n_be_antibiotic_tax
 
 **Bugfixes**
 

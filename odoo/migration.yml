@@ -365,6 +365,8 @@ migration:
           - sale_confirm_background
           ### OCA external-src/queue
           - queue_job
+          ### OCA external/l10n-belgium
+          - l10n_be_antibiotic_tax
           ### Camptocamp external-src/odoo-cloud-platform
           - monitoring_status
       operations:
