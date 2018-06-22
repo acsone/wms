@@ -10,6 +10,8 @@ Unreleased
 
 * ALCN-1073: import claims from DB2
 * ALCN-1417: moved sale line unavailable functionality to the basic sale lines view
+* ALCN-1277: Import invoice frequency and invoice type from DB2
+* ALCN-1400: Delay a job to create when a picking is validated (only for partner invoiced by delivery)
 
 **Features and Improvements**
 
@@ -21,6 +23,7 @@ Unreleased
 * ALCN-1440: Add some required fields for customer invoicing and delivery addresses, so they can be sent to the ESB.
 * ALCN-1409: For invoice do not save pdf in ir.attachment table if invoice in 'draft'
 * ALCN-1441: On newly created sale order received by the web service, set the current time as the confirmation_date.
+* ALCN-1245: Import the initial customer and supplier balance
 
 **Bugfixes**
 
@@ -62,9 +65,6 @@ Unreleased
              exporting products to a csv file would give you only the wrong date.
 * ALCN-1309: reset inventory line
 * ALCN-1363: import suppliers contacts
-* **TODO DATA** generate full supplier contacts
-* ALCN-1277: Import invoice frequency and invoice type from DB2
-* ALCN-1400: Delay a job to create when a picking is validated (only for partner invoiced by delivery)
 
 **Features and Improvements**
 
@@ -77,7 +77,7 @@ Unreleased
              add additional lines when a purchase order is validated
 * ALCN-1401: Add the module stock_inventory_products to allows to create an inventory from a list of products and automatically create inventory lines with lots
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
-* ALCN-1245: Import the initial customer and supplier balance
+
 
 **Bugfixes**
 

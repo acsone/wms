@@ -19,6 +19,9 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     date_order_short = fields.Date(compute='_compute_date_order_short')
+    is_unique_invoice = fields.Boolean(
+        'Unique invoice',
+        help='Create an unique invoice for this sale order')
 
     @api.depends('date_order')
     def _compute_date_order_short(self):
@@ -98,11 +101,14 @@ class SaleOrder(models.Model):
                     continue
 
                 if invoice_grouping == 'all_at_once':
-                    sales = self.search([('invoice_status', '=', 'to invoice'),
-                                         ('partner_id', 'in', partner_ids)])
-                    sales = \
-                        sales.with_context(mail_auto_subscribe_no_notify=True)
-                    invoice_ids = sales.action_invoice_create(final=True)
+                    sales_to_merge = self.search(
+                        [('invoice_status', '=', 'to invoice'),
+                         ('partner_id', 'in', partner_ids),
+                         ('is_unique_invoice', '=', False)])
+                    sales_to_merge = sales_to_merge\
+                        .with_context(mail_auto_subscribe_no_notify=True)
+                    invoice_ids = \
+                        sales_to_merge.action_invoice_create(final=True)
                     invoices = AccountInvoice.browse(invoice_ids)
                 elif invoice_grouping == 'by_delivery':
                     invoices = AccountInvoice.search([
@@ -111,6 +117,19 @@ class SaleOrder(models.Model):
                     ])
                 else:
                     raise UserError(_('Unknown invoice type'))
+
+                sales_to_invoice = self.search(
+                    [('invoice_status', '=', 'to invoice'),
+                     ('partner_id', 'in', partner_ids),
+                     ('is_unique_invoice', '=', True)])
+
+                invoice_ids = []
+                for sale_to_invoice in sales_to_invoice:
+                    invoice_ids.append(
+                        sale_to_invoice.action_invoice_create(final=True))
+
+                if invoice_ids:
+                    invoices |= AccountInvoice.browse(invoice_ids)
 
                 cr.commit()
 
