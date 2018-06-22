@@ -14,6 +14,8 @@ Unreleased
              exporting products to a csv file would give you only the wrong date.
 * ALCN-1309: reset inventory line
 * TODO generate new inventory lines
+* ALCN-1363: import suppliers contacts
+* **TODO DATA** generate full supplier contacts
 
 **Features and Improvements**
 

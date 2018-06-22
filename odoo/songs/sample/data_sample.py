@@ -21,8 +21,14 @@ def import_suppliers(ctx):
     ctx.env['res.company'].search([]).write({'vat_check_vies': False})
 
     Partner = ctx.env['res.partner'].with_context(load_ctx)
-    content = resource_stream(req, 'data/sample/supplier.csv')
-    load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing suppliers"):
+        content = resource_stream(req, 'data/sample/supplier.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+    with ctx.log(u"Importing supplier contacts"):
+        content = resource_stream(req, 'data/sample/supplier_contact.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
