@@ -6,6 +6,13 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1205: copy create_date from product_product to parent object product_template to be coherent.
+             Creation date of product is imported already but the value needs to be available not
+             only on variant but also on product templates. Because all used views are product template,
+             exporting products to a csv file would give you only the wrong date.
+
 **Features and Improvements**
 
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag

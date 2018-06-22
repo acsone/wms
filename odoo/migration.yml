@@ -266,3 +266,8 @@ migration:
           - pricelist_discount
           - product_additional
           - specific_purchase
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::product_template_set_create_date
