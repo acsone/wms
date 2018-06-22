@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo.addons.db2_import.models.db2_importer import DB2MapperSaleOrder
+from odoo.addons.db2_import.converter.sale import DB2MapperSaleOrder
 
 from .common import DB2ImportTestCase
 
