@@ -271,3 +271,6 @@ migration:
           operations:
             post:
               - anthem songs.install.data_full::product_template_set_create_date
+              - anthem songs.install.data_full::purge_inventory
+              - anthem songs.install.data_full::import_inventory
+              - anthem songs.install.data_full::import_inventory_without_lot

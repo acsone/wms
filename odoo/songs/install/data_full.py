@@ -228,6 +228,20 @@ def import_lots(ctx):
 
 
 @anthem.log
+def purge_inventory(ctx):
+    """ Remove all inventory lines.
+
+    Not removing lines would mean we have the risk that
+    some lots have dupplicates (ALCN-1309)
+
+    """
+    inv1 = ctx.env.ref('__setup__.initial_inventory')
+    inv2 = ctx.env.ref('__setup__.initial_inventory_no_lot')
+    domain = [('inventory_id', 'in', (inv1.id, inv2.id))]
+    ctx.env['stock.inventory.line'].search(domain).unlink()
+
+
+@anthem.log
 def import_inventory(ctx):
     """ Importing inventory from csv"""
     values = {
