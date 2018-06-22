@@ -6,7 +6,7 @@
 import logging
 
 from psycopg2 import IntegrityError
-from odoo import exceptions, fields, models
+from odoo import api, exceptions, fields, models
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -17,6 +17,16 @@ class SaleOrder(models.Model):
     _inherit = ['sale.order', 'esb.exportable']
 
     esb_ref = fields.Char(string='Reference for ESB')
+
+    @api.model
+    def create(self, vals):
+        self_ctx = self.with_context(_sale_order_create=True)
+        return super(SaleOrder, self_ctx).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        self_ctx = self.with_context(_sale_order_write=True)
+        return super(SaleOrder, self_ctx).write(vals)
 
     @job(default_channel='root.esb')
     def ws_create_new(self, data):
