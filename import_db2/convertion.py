@@ -522,7 +522,7 @@ class CustomerMapper(EntityMapper):
             mapping=mappings.PARTNER_INVOICING_FREQUENCY
         ),
         FieldMapper(
-            'invoice_type',
+            'invoice_grouping',
             'clireg',
             mapping=mappings.PARTNER_INVOICING_TYPE
         ),

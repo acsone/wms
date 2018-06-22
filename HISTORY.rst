@@ -64,6 +64,7 @@ Unreleased
 * ALCN-1363: import suppliers contacts
 * **TODO DATA** generate full supplier contacts
 * ALCN-1277: Import invoice frequency and invoice type from DB2
+* ALCN-1400: Delay a job to create when a picking is validated (only for partner invoiced by delivery)
 
 **Features and Improvements**
 

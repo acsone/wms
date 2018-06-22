@@ -14,9 +14,9 @@ class ResPartner(models.Model):
         string='Invoice frequency',
         default='10_days',
     )
-    invoice_type = fields.Selection(
-        [('in_one_time', 'In one time'),
+    invoice_grouping = fields.Selection(
+        [('all_at_once', 'All at once'),
          ('by_delivery', 'By delivery')],
-        string='Invoice type',
-        default='in_one_time'
+        string='Invoice grouping',
+        default='all_at_once'
     )

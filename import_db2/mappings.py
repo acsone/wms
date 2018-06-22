@@ -679,8 +679,8 @@ PARTNER_INVOICING_FREQUENCY = {
 
 PARTNER_INVOICING_TYPE = {
     0: 'by_delivery',
-    1: 'in_one_time',
-    9: 'in_one_time'
+    1: 'all_at_once',
+    9: 'all_at_once'
 }
 
 BACKORDER_ACCEPTED = {

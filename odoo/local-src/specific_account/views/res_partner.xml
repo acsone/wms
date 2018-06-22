@@ -8,7 +8,7 @@
             <xpath expr="//page[@name='accounting']/group" position="inside">
                 <group>
                     <field name="invoice_frequency"/>
-                    <field name="invoice_type"/>
+                    <field name="invoice_grouping"/>
                 </group>
             </xpath>
         </field>

@@ -44,17 +44,30 @@ class SaleOrder(models.Model):
                 date += relativedelta(months=1)
             date = date.replace(day=1)
             date -= relativedelta(days=1)
+            invoice_frequency = ['10_days', '1_month']
         else:
             date = datetime.today()
             date = date.replace(day=day)
+            invoice_frequency = ['10_days']
         date_invoice = date.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
         query = """
-        SELECT DISTINCT partner_id
-        FROM sale_order
-        WHERE invoice_status = 'to invoice';
+        SELECT DISTINCT so.partner_id
+        FROM sale_order AS so
+          INNER JOIN res_partner AS partner ON partner.id = so.partner_id
+        WHERE so.invoice_status = 'to invoice'
+        AND partner.invoice_grouping = 'all_at_once'
+        AND partner.invoice_frequency IN %s
+        UNION ALL
+        SELECT DISTINCT invoice.partner_id
+        FROM account_invoice AS invoice
+          INNER JOIN res_partner AS partner ON invoice.partner_id = partner.id
+        WHERE partner.invoice_grouping = 'by_delivery'
+        AND partner.invoice_frequency IN %s
+        AND invoice.state = 'draft'
         """
-        self.env.cr.execute(query)
+        self.env.cr.execute(query, (tuple(invoice_frequency),
+                                    tuple(invoice_frequency)))
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
         index = 0
@@ -65,34 +78,56 @@ class SaleOrder(models.Model):
 
     @api.multi
     @job(default_channel='root.invoices_creation')
+    def _job_create_draft_invoice(self):
+
+        self.with_context(mail_auto_subscribe_no_notify=True)\
+            .action_invoice_create(final=True)
+
+    @api.multi
+    @job(default_channel='root.invoices_creation')
     def _job_invoices_by_partners(self, partner_ids, date_invoice):
-        try:
-            cr = registry(self._cr.dbname).cursor()
-            self = self.with_env(self.env(cr=cr))
-            sales = self.search([('invoice_status', '=', 'to invoice'),
-                                 ('partner_id', 'in', partner_ids)])
-            sales = sales.with_context(mail_auto_subscribe_no_notify=True)
-            invoice_ids = sales.action_invoice_create(final=True)
-            invoices = self.env['account.invoice'].browse(invoice_ids)
-            cr.commit()
-
-            # Set date
-            invoices.write({
-                'date_invoice': date_invoice})
-            cr.commit()
-
-            # Compute shipping costs
-            inv_withcosts = invoices.filtered('allow_compute_shipping_costs')
-            inv_withcosts.compute_shipping_costs()
-            cr.commit()
-
-            # Validate invoices
-            invoices.action_invoice_open()
-            cr.commit()
-        except Exception as e:
-            _logger.error("Invoice Generation Cron Error: %s" % e)
-        finally:
+        for partner in self.env['res.partner'].browse(partner_ids):
             try:
-                cr.close()
-            except Exception:
-                pass
+                cr = registry(self._cr.dbname).cursor()
+                self = self.with_env(self.env(cr=cr))
+                AccountInvoice = self.env['account.invoice']
+
+                invoice_grouping = partner.invoice_grouping
+
+                if not invoice_grouping:
+                    continue
+
+                if invoice_grouping == 'all_at_once':
+                    sales = self.search([('invoice_status', '=', 'to invoice'),
+                                         ('partner_id', 'in', partner_ids)])
+                    sales = \
+                        sales.with_context(mail_auto_subscribe_no_notify=True)
+                    invoice_ids = sales.action_invoice_create(final=True)
+                    invoices = AccountInvoice.browse(invoice_ids)
+                elif invoice_grouping == 'by_delivery':
+                    invoices = AccountInvoice.search([
+                        ('partner_id', '=', partner.id),
+                        ('state', '=', 'draft')
+                    ])
+                else:
+                    raise UserError(_('Unknown invoice type'))
+
+                cr.commit()
+
+                # Set date
+                invoices.write({
+                    'date_invoice': date_invoice})
+                cr.commit()
+
+                # Validate invoices
+                invoices.action_invoice_open()
+                cr.commit()
+            except Exception as e:
+                _logger.error(
+                    "Invoice Generation Cron Error with partner %s: %s" %
+                    (partner.id, e))
+            finally:
+                try:
+                    cr.close()
+                except Exception:
+                    pass
