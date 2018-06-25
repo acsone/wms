@@ -1,6 +1,23 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+##############################################################################
+#
+#    Author: Jacques-Etienne Baudoux <je@bcim.be>
+#    Copyright 2016-2017 BCIM sprl, DPHI sprl, Camptocamp
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
 
 from odoo import models
 
@@ -23,6 +40,14 @@ class StockLocation(models.Model):
             # case Input under Stock and fixed putaway strat. No bin found
             # under that fixed location
             return dest_location_id
-        # Do not search on parent locations, otherwise we cannot move between
-        # sub-locations
+        # Search on parent location (case we are in Input under Stock and we
+        # want to apply stock bin mapping)
+        while location.location_id:
+            location = location.location_id
+            lbin = bin_obj.search([
+                ('product_id', '=', product.product_tmpl_id.id),
+                ('location_id', '=', location.id)],
+                limit=1)
+            if lbin:
+                return lbin.bin_location_id.id
         return dest_location_id
