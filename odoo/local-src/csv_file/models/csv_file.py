@@ -258,29 +258,3 @@ class CSVFileLogger(models.Model):
                               ('partial', 'Partial'),
                               ('error', 'Error')],
                              default='success')
-
-
-class CSVFileExportLogger(models.Model):
-    _name = 'csv.file.export.logger'
-    _inherit = 'csv.file.logger'
-    _order = 'create_date DESC'
-    _rec_name = 'date_start'
-
-    file_id = fields.Many2one(
-        'csv.file.export',
-        required=True,
-        string='File'
-    )
-
-
-class CSVFileImportLogger(models.Model):
-    _name = 'csv.file.import.logger'
-    _inherit = 'csv.file.logger'
-    _order = 'create_date DESC'
-    _rec_name = 'date_start'
-
-    file_id = fields.Many2one(
-        'csv.file.import',
-        required=True,
-        string='File'
-    )
