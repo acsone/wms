@@ -12,6 +12,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1104: Add missing translations and remove the module specific_translations
+
 **Bugfixes**
 
 **Build**

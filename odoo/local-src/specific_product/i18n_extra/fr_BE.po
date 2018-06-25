@@ -20,3 +20,11 @@ msgstr ""
 #: selection:product.pricelist.item,base:0
 msgid "Sale Price 1"
 msgstr "Prix de vente 1"
+
+#. module: product_price_category
+#: model:ir.model.fields,field_description:product_price_category.field_delivery_carrier_price_category_id
+#: model:ir.model.fields,field_description:product_price_category.field_product_pricelist_item_price_category_id
+#: model:ir.model.fields,field_description:product_price_category.field_product_product_price_category_id
+#: model:ir.model.fields,field_description:product_price_category.field_product_template_price_category_id
+msgid "Price Category"
+msgstr "Catégorie de prix"

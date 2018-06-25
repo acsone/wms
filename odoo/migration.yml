@@ -188,7 +188,6 @@ migration:
           - specific_sale
           - specific_shipping_costs
           - specific_stock
-          - specific_translations
           - specific_zetes
           - specific_security
           - speedy_views
@@ -377,3 +376,7 @@ migration:
         upgrade:
           ### local-src
           - db2_import
+          - specific_product
+      operations:
+        post:
+          - anthem songs.upgrade.10_22_0_update::post
