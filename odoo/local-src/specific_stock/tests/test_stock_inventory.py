@@ -207,6 +207,7 @@ class TestStockInventory(TransactionCase):
                 'name': product_name,
                 'uom_id': uom_id,
                 'list_price': product_prices.get(product_name, default_price),
+                'type': 'product',
             })
             setattr(self, product_name, product)
 
@@ -235,6 +236,7 @@ class TestStockInventory(TransactionCase):
         inventory = stock_obj.create_daily_inventory(
             date_today_overwrite=date_today_overwrite,
         )
+        inventory.prepare_inventory()
         inventory_products = inventory.line_ids.mapped('product_id')
 
         # I must have 8 products in this inventory
@@ -274,7 +276,7 @@ class TestStockInventory(TransactionCase):
         inventory = stock_obj.create_daily_inventory(
             date_today_overwrite=date_today_overwrite,
         )
-        inventory_products = inventory.mapped('line_ids.product_id')
+        inventory_products = inventory.product_ids
 
         # This inventory will contains 4 products
         # - 0 expensive products
@@ -291,7 +293,7 @@ class TestStockInventory(TransactionCase):
         inventory = stock_obj.create_daily_inventory(
             date_today_overwrite=date_today_overwrite,
         )
-        inventory_products = inventory.mapped('line_ids.product_id')
+        inventory_products = inventory.product_ids
         # This inventory will contains 8 products
         # - 2 expensive product
         # - 2 best seller

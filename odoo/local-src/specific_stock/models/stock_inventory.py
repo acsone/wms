@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Sylvain Van Hoof (Okia SPRL)
+# Copyright 2018 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
+
+from odoo.addons.specific_zetes import constants
 
 
 class StockInventory(models.Model):
@@ -27,6 +29,39 @@ class StockInventory(models.Model):
 
         return result
 
+    @api.multi
+    def prepare_inventory(self):
+        result = super(StockInventory, self).prepare_inventory()
+
+        check_query = """
+            SELECT DISTINCT picking.name
+            FROM stock_pack_operation pack_op
+              INNER JOIN stock_picking picking
+                ON pack_op.picking_id = picking.id
+            WHERE pack_op.product_id IN %s
+            AND picking.zetes_state IN %s
+        """
+
+        for inventory in self:
+            products = inventory.line_ids.mapped('product_id')
+
+            if not products:
+                continue
+
+            self.env.cr.execute(
+                check_query,
+                (tuple(products.ids),
+                 (constants.AS_START, constants.AS_ACTIVE))
+            )
+            query_result = [x[0] for x in self.env.cr.fetchall()]
+            if query_result:
+                raise UserError(
+                    _('You cannot start an inventory of a product having an '
+                      'ongoing stock operation. Please retry later. '
+                      'Blocking operations:\n%s') % '\n'.join(query_result))
+
+        return result
+
     @api.model
     def create_daily_inventory(self, date_today_overwrite=None):
         """
@@ -43,6 +78,9 @@ class StockInventory(models.Model):
         if date_today.isoweekday() in [6, 7]:
             return
 
+        vlb_stock_location = self.env.ref('stock.stock_location_stock')
+        vlb_location = vlb_stock_location.location_id
+
         # If the current day is a bank holiday we skip the inventory
         bank_holiday = self.env['bank.holiday'].search([
             ('date', '=', fields.Date.to_string(date_today))
@@ -52,7 +90,8 @@ class StockInventory(models.Model):
 
         inventory = self.create({
             'name': _('Daily inventory: %s') % fields.Date.today(),
-            'filter': 'partial',
+            'filter': 'products_selected',
+            'location_id': vlb_location.id,
         })
         product_obj = self.env['product.product']
         inventory_periods = self.compute_inventory_periods(
@@ -66,13 +105,9 @@ class StockInventory(models.Model):
             inventory.unlink()
             return
 
-        location = self.env.ref('stock.stock_location_stock').location_id
-        for product in products_inventory:
-            inventory.line_ids.create({
-                'inventory_id': inventory.id,
-                'product_id': product.id,
-                'location_id': location.id,
-            })
+        inventory.write({
+            'product_ids': [(6, 0, products_inventory.ids)]
+        })
 
         return inventory
 
@@ -115,6 +150,28 @@ class StockInventory(models.Model):
             }
 
         return periods
+
+    @api.multi
+    def _get_empty_product_bin(self, products, quant_products):
+        self.ensure_one()
+        vals = []
+        if products:
+            exhausted_products = products - quant_products
+            exhausted_domain = [('id', 'in', exhausted_products.ids)]
+        else:
+            exhausted_domain = [('id', 'not in', quant_products.ids)]
+        exhausted_products = \
+            self.env['product.product'].search(exhausted_domain)
+        for product in exhausted_products:
+            bins = product.stock_bin_ids.mapped('bin_location_id')
+            location_id = bins and bins[0].id or self.location_id.id
+
+            vals.append({
+                'inventory_id': self.id,
+                'product_id': product.id,
+                'location_id': location_id,
+            })
+        return vals
 
 
 class ProductChangeQuantity(models.TransientModel):

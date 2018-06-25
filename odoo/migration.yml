@@ -217,6 +217,7 @@ migration:
           - website_purchase_review
           - web_widget_inputmask
           - split_coda
+          - stock_inventory_products
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
@@ -268,6 +269,8 @@ migration:
           - pricelist_discount
           - product_additional
           - specific_purchase
+          - stock_inventory_products
+          - specific_stock
       modes:
         full:
           operations:
