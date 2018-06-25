@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_csv_file_import_logger,access_csv_file_import_logger,model_csv_file_import_logger,base.group_user,1,0,0,0
+access_csv_file_import,access_csv_file_import,model_csv_file_import,base.group_user,1,0,0,0
