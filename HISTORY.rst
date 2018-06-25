@@ -40,6 +40,7 @@ Unreleased
              add additional lines when a purchase order is validated
 * ALCN-1401: Add the module stock_inventory_products to allows to create an inventory from a list of products and automatically create inventory lines with lots
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
+* ALCN-1116: Add the module CSV File Export (to manage CSV Exports)
 
 **Bugfixes**
 
