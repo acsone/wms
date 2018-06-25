@@ -127,11 +127,17 @@ class TestShippingCosts(TransactionCase):
             ]
         })
         # Finally create 2 delivery round
+        self.delivery_template1 = self.env['round.template'].create({
+            'name': 'Unittest delivery template',
+        })
         self.dr1 = self.env['round.instance'].create({
-            'name': 'Unittest delivery round',
+            'template_id': self.delivery_template1.id,
+        })
+        self.delivery_template2 = self.env['round.template'].create({
+            'name': 'Unittest delivery template',
         })
         self.dr2 = self.env['round.instance'].create({
-            'name': 'Unittest delivery round 2',
+            'template_id': self.delivery_template2.id,
         })
 
     def get_shipping_cost(self, so):

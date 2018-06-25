@@ -45,7 +45,6 @@ class TestDeliveryRoundAssign(TransactionCase):
         })
 
         self.delivery_round_1 = self.env['round.instance'].create({
-            'name': 'Unittest delivery round',
             'template_id': self.delivery_template.id,
             'date': '2017-01-01',
         })

@@ -194,14 +194,13 @@ class Assignment(DomainInterface):
           LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
           INNER JOIN round_instance AS round
             ON picking.delivery_round_id = round.id
-        WHERE picking.delivery_round_state = 'open'
-              AND pick_type.subcode = 'PICK'
-              AND picking.zetes_state IN %s
-              AND pick_type.zetes_picking_type = %s
+        WHERE pick_type.subcode = 'PICK'
+              AND picking.zetes_state IN %(picking_zetes_state)s
+              AND pick_type.zetes_picking_type = %(picking_type)s
               AND EXISTS(SELECT 1
                          FROM stock_pack_operation AS operation
                          WHERE operation.picking_id = picking.id
-                         AND operation.zetes_state in %s)
+                         AND operation.zetes_state in %(op_zetes_state)s)
               AND NOT EXISTS (SELECT 1
                               FROM stock_pack_operation AS pack_op
                                 INNER JOIN stock_location l
@@ -209,27 +208,33 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
-              AND (picking.operator_id = %s OR picking.operator_id IS NULL)
+              AND (
+               (picking.delivery_round_state = 'open'
+                  AND picking.operator_id IS NULL)
+               OR (picking.delivery_round_state in ('draft', 'pending', 'open')
+                  AND picking.operator_id = %(operator)s))
+
                 """
-        query_values = [
-            (constants.AS_DEFAULT, constants.AS_CANCELED),
-            constants.PICKING_ASSIGNMENT,
-            (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            self._user.id
-        ]
+        query_values = {
+            'picking_zetes_state': (constants.AS_DEFAULT,
+                                    constants.AS_CANCELED),
+            'picking_type': constants.PICKING_ASSIGNMENT,
+            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            'operator': self._user.id,
+        }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            picking_query += "AND picking_zone.code = %s "
-            query_values.append(zone_code)
+            picking_query += "AND picking_zone.code = %(zone)s "
+            query_values['zone'] = zone_code
 
         picking_query += "ORDER BY picking.operator_id, " \
                          "round.date, " \
                          "round.time_picking_planned, " \
                          "picking.rank DESC " \
                          "LIMIT 1;"
-        self.request.env.cr.execute(picking_query, tuple(query_values))
+        self.request.env.cr.execute(picking_query, query_values)
         query_result = self.request.env.cr.fetchone()
 
         if query_result and query_result[0]:

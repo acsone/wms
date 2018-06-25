@@ -32,7 +32,7 @@ class SaleOrder(models.Model):
           template, then we try to find a matching instance
         - or if there is an existing instance matching the shipping address we
           insert the associate the new pickings/shipping to that round instance
-        In all cases, a picking is associated to an round instance only if
+        In all cases, a picking is associated to a round instance only if
         (partially) available
         """
         _logger.debug("Searching a delivery round for SO %d", self.id)

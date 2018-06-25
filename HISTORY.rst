@@ -21,8 +21,9 @@ Unreleased
 
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
 * ALCN-1372:
-  * Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
-  * add additional lines when a purchase order is validated
+* Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
+* add additional lines when a purchase order is validated
+* ALCN-1232: Anticipated picking. In delivery rounds, add pending state, remove obsolete name field. On delivery rounds' pickings, display picking type. Zetes: Allow to assign a picking to an operator and send to voice even if delivery round is not started
 
 **Bugfixes**
 

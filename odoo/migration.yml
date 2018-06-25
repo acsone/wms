@@ -238,6 +238,7 @@ migration:
       addons:
         upgrade:
           ### local-src
+          - delivery_rounds
           - specific_report
           - specific_sale
           - connector_esb
