@@ -103,8 +103,11 @@ class ProductProduct(models.Model):
 
         all_products_query = """
         SELECT count(*)
-        FROM product_product
-        WHERE active = TRUE;
+        FROM product_product AS product
+          INNER JOIN product_template AS product_tmpl
+            ON product.product_tmpl_id = product_tmpl.id
+        WHERE product.active = TRUE
+        AND product_tmpl.type = 'product';
         """
         self.env.cr.execute(all_products_query)
         nbr_products = self.env.cr.fetchone()[0]
@@ -114,10 +117,11 @@ class ProductProduct(models.Model):
         expensive_products_query = """
         SELECT count(*)
         FROM product_product AS product
-          INNER JOIN product_template AS template
-            ON product.product_tmpl_id = template.id
-        WHERE template.list_price >= %s
-        AND product.active = TRUE;
+          INNER JOIN product_template AS product_tmpl
+            ON product.product_tmpl_id = product_tmpl.id
+        WHERE product_tmpl.list_price >= %s
+        AND product.active = TRUE
+        AND product_tmpl.type = 'product';
         """
         self.env.cr.execute(expensive_products_query, (price,))
         nbr_expensive_products = self.env.cr.fetchone()[0]
@@ -180,6 +184,21 @@ class ProductProduct(models.Model):
 
         product_ids = set()
 
+        product_ids_in_open_inventory_query = """
+        SELECT DISTINCT sil.product_id
+        FROM stock_inventory_line AS sil
+            INNER JOIN stock_inventory AS si
+                ON sil.inventory_id = si.id
+        WHERE si.state = 'confirm';
+        """
+        self.env.cr.execute(product_ids_in_open_inventory_query)
+        product_ids_in_open_inventory = \
+            set([x[0] for x in self.env.cr.fetchall()])
+        # Psycopg2 doesn't allow to create a request with an empty list.
+        # To avoid to overcomplicate the code, I prefer to add a fake ID
+        # in the list.
+        product_ids_in_open_inventory.add(0)
+
         nbr_expensive_products, nbr_best_sellers, nbr_other = \
             self.get_number_of_products_by_category()
 
@@ -202,16 +221,20 @@ class ProductProduct(models.Model):
         query = """
         SELECT product.id
         FROM product_product AS product
-          INNER JOIN product_template AS template
-            ON product.product_tmpl_id = template.id
-        WHERE template.list_price >= %s
+          INNER JOIN product_template AS product_tmpl
+            ON product.product_tmpl_id = product_tmpl.id
+        WHERE product_tmpl.list_price >= %s
         AND (product.date_last_inventory < %s
              OR product.date_last_inventory IS NULL)
+        AND product_tmpl.is_mto_product = FALSE
         AND product.active = TRUE
+        AND product_tmpl.type = 'product'
+        AND product.id NOT IN %s
         ORDER BY random()
         LIMIT %s;
         """
-        query_args = [price, expensive_period_start, qty_to_check]
+        query_args = [price, expensive_period_start,
+                      tuple(product_ids_in_open_inventory), qty_to_check]
 
         self.env.cr.execute(query, tuple(query_args))
         result = self.env.cr.fetchall()
@@ -242,11 +265,15 @@ class ProductProduct(models.Model):
             FROM sale_order_line AS line
               INNER JOIN product_product AS product
                 ON line.product_id = product.id
+              INNER JOIN product_template AS product_tmpl
+                ON product.product_tmpl_id = product_tmpl.id
             WHERE line.create_date > (NOW() - INTERVAL '%s MONTHS')
              AND (product.date_last_inventory < %s
                   OR product.date_last_inventory IS NULL)
              AND product.active = TRUE
-             AND product.id != ALL(%s)
+             AND product_tmpl.type = 'product'
+             AND product.id NOT IN %s
+             AND product_tmpl.is_mto_product = FALSE
             GROUP BY line.product_id
             ORDER BY cnt DESC
             LIMIT %s
@@ -256,7 +283,7 @@ class ProductProduct(models.Model):
         """
         query_args = [best_sellers_duration,
                       best_sellers_period_start,
-                      list(product_ids),
+                      tuple(product_ids | product_ids_in_open_inventory),
                       nbr_best_sellers,
                       qty_to_check]
         self.env.cr.execute(query, tuple(query_args))
@@ -279,17 +306,24 @@ class ProductProduct(models.Model):
         qty_to_check = int(nbr_other / (days / other_period_nbr_year))
 
         query = """
-        SELECT id
-        FROM product_product
-        WHERE (date_last_inventory < %s OR date_last_inventory IS NULL)
-        AND active = TRUE
-        AND id != ALL(%s)
+        SELECT product.id
+        FROM product_product AS product
+          INNER JOIN product_template AS product_tmpl
+            ON product.product_tmpl_id = product_tmpl.id
+        WHERE (product.date_last_inventory < %s
+          OR product.date_last_inventory IS NULL)
+        AND product.active = TRUE
+        AND product_tmpl.type = 'product'
+        AND product.id NOT IN %s
+        AND product_tmpl.is_mto_product = FALSE
         ORDER BY random()
         LIMIT %s;
         """
-        self.env.cr.execute(query, (other_period_start,
-                                    list(product_ids),
-                                    qty_to_check))
+        self.env.cr.execute(
+            query,
+            (other_period_start,
+             tuple(product_ids | product_ids_in_open_inventory),
+             qty_to_check))
         result = self.env.cr.fetchall()
 
         other_product_ids = [x[0] for x in result]

@@ -24,6 +24,9 @@ Unreleased
 * Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
 * add additional lines when a purchase order is validated
 * ALCN-1232: Anticipated picking. In delivery rounds, add pending state, remove obsolete name field. On delivery rounds' pickings, display picking type. Zetes: Allow to assign a picking to an operator and send to voice even if delivery round is not started
+  * Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
+  * add additional lines when a purchase order is validated
+* ALCN-1401: Add the module stock_inventory_products to allows to create an inventory from a list of products and automatically create inventory lines with lots
 
 **Bugfixes**
 
