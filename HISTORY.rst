@@ -13,9 +13,9 @@ Unreleased
              only on variant but also on product templates. Because all used views are product template,
              exporting products to a csv file would give you only the wrong date.
 * ALCN-1309: reset inventory line
-* TODO generate new inventory lines
+* generate new inventory lines
 * ALCN-1363: import suppliers contacts
-* **TODO DATA** generate full supplier contacts
+* generate full supplier contacts
 
 **Features and Improvements**
 
@@ -34,6 +34,8 @@ Unreleased
 * Fix erroneous backend timestamp and kind
 
 **Build**
+
+* Refresh full data
 
 **Documentation**
 

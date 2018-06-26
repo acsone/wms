@@ -124,7 +124,6 @@ __import__.customer_address_delivery_494,DR SIMONIS SERGE *,"Rue des Français, 
 __import__.customer_address_delivery_499,SNAPS CLAUDE,"RUE DE L'EGLISE, 1",1320,BEAUVECHAIN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_499
 __import__.customer_address_delivery_503,CLINIQUE VETERINAIRE DE VISE,Rue de Berneau 93,4600,VISE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_503
 __import__.customer_address_delivery_509,DR SIBILLE JEAN *,"Rue Verte,",4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_509
-__import__.customer_address_delivery_533,BRUYERE MICHEL,52B L.A. Schockaertstraat,1600,Sint-Pieters-Leeuw,,,False,False,base.be,fr_BE,,delivery,__import__.customer_533
 __import__.customer_address_delivery_534,MME MG RENARD WULFF,"Rue Guillaume Stocq, 54",1050,BRUXELLES,02/6405605,,False,False,base.be,fr_BE,,delivery,__import__.customer_534
 __import__.customer_address_delivery_540,DOCTEUR DEBOUVRIE,"RUE DU COQ,5",6230,ROSSEIGNIES,067/87 94 00,,False,False,base.be,fr_BE,,delivery,__import__.customer_540
 __import__.customer_address_delivery_581,TIXHON SERGE  *,"RUE VILLE BASSE,32",6660,HOUFALIZE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_581
@@ -164,7 +163,6 @@ __import__.customer_address_delivery_962,DR DEWIT SERGE,"Rue de l'eau sur elle, 
 __import__.customer_address_delivery_986,DU JONCKAY,Rue du Jonckay 31,5380,FERNELMONT,085711199,,False,False,base.be,fr_BE,,delivery,__import__.customer_986
 __import__.customer_address_delivery_998,DEVRIESE ANNE *,"Rue du Moulin, 35",6181,GOUY LEZ PIETON,,,False,False,base.be,fr_BE,,delivery,__import__.customer_998
 __import__.customer_address_delivery_1023,BOUCHERIE J-F. RENARD,Rue du Centre 16,1460,VIRGINAL,,,False,False,base.be,fr_BE,,delivery,__import__.customer_1023
-__import__.customer_address_delivery_1030,DASTY ET DENIS,"ROUTE PROVINCIALE,38",1450,CHASTRE-VILLEROUX,,,False,False,base.be,fr_BE,,delivery,__import__.customer_1030
 __import__.customer_address_delivery_1031,DOCTEUR BROUWERS,"RENEUBOIS,56",4652,XHENDELESSE,087/66 13 26,,False,False,base.be,fr_BE,,delivery,__import__.customer_1031
 __import__.customer_address_delivery_1038,DOCTEUR MELCHIOR-LIGOT,"RUE LOMBIERY,13",4210,BURDINNE,085/71 10 30,,False,False,base.be,fr_BE,,delivery,__import__.customer_1038
 __import__.customer_address_delivery_1040,DR DEVEUX ALAIN,"Rue du Village, 53",5030,SAUVENIERE,081/61 61 16,,False,False,base.be,fr_BE,,delivery,__import__.customer_1040
@@ -1111,6 +1109,7 @@ __import__.customer_address_delivery_7388,ADM. COMMUNALE FERRIERES,"Rue de Logno
 __import__.customer_address_delivery_7392,DR GUERRIAT ETIENNE,rue de la Station 16,6150,ANDERLUES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7392
 __import__.customer_address_delivery_7396,DEGAND-PATZ-GHILAIN-LOMBARD,Rue du Ry de Potte 26,5580,ROCHEFORT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7396
 __import__.customer_address_delivery_7402,DR ANTOINE AMELIE,"Chaussée d'Arlon, 65",6600,BASTOGNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7402
+__import__.customer_address_delivery_7427,BROES KIM,Kerkstraat 215,1851,Humbeek,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7427
 __import__.customer_address_delivery_7429,DR GROSJEAN CHRISTIAN,Rue de la Bouteille 56/2,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7429
 __import__.customer_address_delivery_7446,STATION EXPERIMENTALE F.M.V.,"Chemin de la Ferme, 6 bte 39",4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7446
 __import__.customer_address_delivery_7453,DR PHILIPPOT JEAN-FRANCOIS,"Rue de l'Armistice, 4",6044,ROUX,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7453
@@ -1394,3 +1393,5 @@ __import__.customer_address_delivery_9307,BROCACEF BV/ VETINA-AACOFARMA,Industri
 __import__.customer_address_delivery_9308,GOOSSENS KARL,Boekweithofstraat 20,9120,HAASDONK,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9308
 __import__.customer_address_delivery_9313,PHARMASANTE DEPOT,rue de le Boverie 379,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9313
 __import__.customer_address_delivery_9314,PHARMASANTE DEPOT,rue de la Boverie 379,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9314
+__import__.customer_address_delivery_9316,ONGENA NIKOLAI,Sasstraat 8,8870,IZEGEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9316
+__import__.customer_address_delivery_9331,DE VRIESE LUC,rue des Canadiens 24,7180,SENEFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9331
