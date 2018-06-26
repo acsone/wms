@@ -86,6 +86,9 @@ migration:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
+              - anthem songs.install.data_full::create_journals
+              - anthem songs.install.data_full::import_customer_journal_items
+              - anthem songs.install.data_full::import_supplier_journal_items
         sample:
           operations:
             post:
@@ -382,3 +385,10 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_22_2_update::main
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::create_journals
+              - anthem songs.install.data_full::import_customer_journal_items
+              - anthem songs.install.data_full::import_supplier_journal_items
