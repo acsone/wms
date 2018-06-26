@@ -282,3 +282,4 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
               - anthem songs.install.accounting::activate_check_on_vat
+              - anthem songs.upgrade.10_22_0_update::post
