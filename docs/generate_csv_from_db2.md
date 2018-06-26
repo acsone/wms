@@ -15,9 +15,9 @@ For each data release you will need to update them.
 
 Generate files:
 
-    python import_db2/import_db2.py --full
+    python import_db2/importer.py --full
 
-For more details see [Importing Alcyon DB2 data](../import_db2/README.rst)
+For more details see [Importing Alcyon DB2 data](../import_db2/README.md)
 
 # Cold data (product, partners, ...) - Diff
 

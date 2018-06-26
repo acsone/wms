@@ -37,6 +37,7 @@ https://github.com/mkleehammer/pyodbc/issues/223
 ```bash
 sudo apt-get install unixodbc-dev
 pip install --user pyodbc==3.0.10
+pip install --user vatnumber
 ```
 
 If you get an error
