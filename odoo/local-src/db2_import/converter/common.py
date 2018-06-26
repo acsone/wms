@@ -12,6 +12,14 @@ def convert_date(prefix, db2_row):
     return "%s-%02i-%02i" % (Y, mm, dd)
 
 
+def convert_int_date(idate):
+    str_date = str(idate)
+    Y = str_date[:4]
+    mm = str_date[4:6]
+    dd = str_date[6:]
+    return "%s-%02i-%02i" % (Y, mm, dd)
+
+
 def convert_customer(ref):
     return '__import__.customer_%s' % (ref)
 

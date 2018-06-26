@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCN-1073: import claims from DB2
+
 **Features and Improvements**
 
 **Bugfixes**

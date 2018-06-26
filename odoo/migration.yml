@@ -372,3 +372,8 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_22_1_update::post
+    - version: 10.22.2
+      addons:
+        upgrade:
+          ### local-src
+          - db2_import

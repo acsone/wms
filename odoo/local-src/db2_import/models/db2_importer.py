@@ -11,7 +11,8 @@ from calendar import monthrange
 from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
 
-from ..converter import sale, purchase
+from ..converter import sale, purchase, ticket
+from ..converter.common import convert_coding
 
 import logging
 
@@ -21,6 +22,7 @@ _logger = logging.getLogger(__name__)
 mappers = {
     'PENTCDFO': purchase.DB2MapperPurchaseOrder,
     'PENTCDCL': sale.DB2MapperSaleOrder,
+    'HISPRB': ticket.DB2MapperHelpdeskTicket,
 }
 
 
@@ -102,14 +104,28 @@ class DB2ImporterTable(models.Model):
         Here we construct a request by converting them in a single integer
         this operation is thus cross compatible in DB2 and psql.
 
+        DRECEP table is an exception with a single date column containing
+        an integer.
+
         """
+        date_start = int(date_start.replace('-', ''))
+        date_end = int(date_end.replace('-', ''))
+
+        # Claims have no create or modification date
+        # there is a single date in int format
+        if self.table_name == 'DRECEP':
+            return "drpdat >= %s AND drpdat <= %s" % (date_start, date_end)
+        elif self.table_name == 'HISPRB':
+            return "hpbdat >= %s AND hpbdat <= %s" % (date_start, date_end)
+        elif self.table_name == 'HISSPR':
+            return "hpsdat >= %s AND hpsdat <= %s" % (date_start, date_end)
 
         query_kwargs = {
             'prefix': self.table_prefix,
         }
 
         query_kwargs.update({
-            'start_date': int(date_start.replace('-', ''))
+            'start_date': date_start
         })
         if not date_end:
             start = fields.Date.from_string(date_start)
@@ -117,7 +133,7 @@ class DB2ImporterTable(models.Model):
             date_end = fields.Date.to_string(start)
 
         query_kwargs.update({
-            'end_date': int(date_end.replace('-', ''))
+            'end_date': date_end,
         })
 
         if not col_names or '{}css'.format(self.table_prefix) in col_names:
@@ -350,8 +366,8 @@ class DB2ImporterTable(models.Model):
         elif self.table_name == 'PENTCDCL':
             model = 'sale.order'
             state = 'draft'
-        orders = self.env[model].search([('state', '=', state)])
-        suite_names = orders.mapped('name')
+        records = self.env[model].search([('state', '=', state)])
+        suite_names = records.mapped('name')
 
         # filter order name containing non digits
         suite_names = [sn for sn in suite_names if sn and sn.isdigit()]

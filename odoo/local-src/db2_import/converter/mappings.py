@@ -13,3 +13,29 @@ UOM = {
     55: '__setup__.product_uom_liasse',
     56: '__setup__.product_uom_flacon',
 }
+
+
+ISSUE_CODE = {
+    '001': 'specific_helpdesk.missing_quantity',
+    '002': 'specific_helpdesk.misc',
+    '003': 'specific_helpdesk.product_defect',
+    '004': 'specific_helpdesk.product_defect',
+    '005': 'specific_helpdesk.cold_chain_broken',
+    '006': 'specific_helpdesk.cold_chain_broken',
+    '100': 'specific_helpdesk.product_defect',
+    '101': 'specific_helpdesk.product_defect',
+    '102': 'specific_helpdesk.product_defect',
+    '103': 'specific_helpdesk.product_defect',
+    '104': 'specific_helpdesk.missing_quantity',
+    '105': 'specific_helpdesk.misc',
+    '106': 'specific_helpdesk.misc',
+    '107': 'specific_helpdesk.cold_chain_broken',
+    '108': 'specific_helpdesk.short_lapsing',
+    '109': 'specific_helpdesk.short_lapsing',
+    '110': 'specific_helpdesk.non_ordered_product',
+    '111': 'specific_helpdesk.non_ordered_product',
+    '112': 'specific_helpdesk.higher_quantity',
+    '007': 'specific_helpdesk.misc',
+    '113': 'specific_helpdesk.price_issue',
+    '114': 'specific_helpdesk.higher_quantity',
+}

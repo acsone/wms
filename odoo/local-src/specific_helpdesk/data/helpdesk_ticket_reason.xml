@@ -34,5 +34,11 @@
     <record id="delivery_error" model="helpdesk.ticket.reason">
         <field name="name">09-Delivery error</field>
     </record>
+    <record id="misc" model="helpdesk.ticket.reason">
+        <field name="name">10-Miscalenious</field>
+    </record>
+    <record id="price_issue" model="helpdesk.ticket.reason">
+        <field name="name">11-Price issue</field>
+    </record>
 
 </odoo>
