@@ -131,5 +131,5 @@ class ESBBackend(models.Model):
     @api.model
     def cron_export_document_zip(self):
         backend = self.get_singleton()
-        exporter = backend._get_timestamp('ir.attachment', '')
+        exporter = backend._get_timestamp('ir.attachment', 'documents')
         exporter.export()
