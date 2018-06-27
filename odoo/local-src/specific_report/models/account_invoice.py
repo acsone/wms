@@ -8,7 +8,8 @@ from odoo.tools import config
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _name = 'account.invoice'
+    _inherit = ['account.invoice', 'report.async']
 
     amount_without_discount = fields.Monetary(
         compute='_compute_total_amounts',
@@ -191,29 +192,7 @@ class AccountInvoice(models.Model):
         """Generate the invoice pdf and save it to ir.attachment """
         res = super(AccountInvoice, self).action_invoice_open()
         for invoice in self:
-            filename = invoice.get_report_name()
-            if not filename:
-                continue
-            # Default_type in the context breaks the pdf generation
-            ctx = self.env.context.copy()
-            ctx.pop('default_type', False)
-            data = self.env['report'].with_context(ctx).get_pdf(
-                [invoice.id], 'account.report_invoice')
-            existing = self.env['ir.attachment'].search([
-                ('name', '=', filename),
-                ('res_model', '=', 'account.invoice')])
-            if len(existing):
-                existing[0].db_datas = data.encode('base_64')
-            else:
-                self.env['ir.attachment'].create({
-                    'type': 'binary',
-                    'res_model': 'account.invoice',
-                    'res_id': self.id,
-                    'name': filename,
-                    'datas_fname': filename,
-                    'mimetype': 'application/pdf',
-                    'db_datas': data.encode('base_64'),
-                    })
+            self.with_delay().print_and_attach_report('account.report_invoice')
         return res
 
     @api.multi

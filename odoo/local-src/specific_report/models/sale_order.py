@@ -43,7 +43,8 @@ class SaleOrderLine(models.Model):
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _name = 'sale.order'
+    _inherit = ['sale.order', 'report.async']
 
     @api.multi
     def get_report_name(self):
@@ -72,23 +73,7 @@ class SaleOrder(models.Model):
             # Do not generate the report during test or during import
             return res
         for order in self:
-            filename = self.get_report_name()
-            data = self.env['report'].get_pdf(
-                [order.id], 'sale.report_saleorder')
-            existing = self.env['ir.attachment'].search([
-                ('name', '=', filename), ('res_model', '=', 'sale.order')])
-            if len(existing):
-                existing[0].db_datas = data.encode('base_64')
-            else:
-                self.env['ir.attachment'].create({
-                    'type': 'binary',
-                    'res_model': 'sale.order',
-                    'res_id': self.id,
-                    'name': filename,
-                    'datas_fname': filename,
-                    'mimetype': 'application/pdf',
-                    'db_datas': data.encode('base_64'),
-                    })
+            self.with_delay().print_and_attach_report('sale.report_saleorder')
         return res
 
     @api.multi
