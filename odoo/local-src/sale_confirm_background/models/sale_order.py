@@ -33,6 +33,10 @@ class Sale(models.Model):
         )
 
     def action_confirm_background(self):
+        # compatibility with sale_exception
+        # we want to raise interactively, not in background
+        if self.detect_exceptions():
+            return self._popup_exceptions()
         self.write({
             'state': 'confirm_background',
         })

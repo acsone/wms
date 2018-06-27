@@ -12,6 +12,7 @@
         'sale',
         'queue_job',
         'web_notify',
+        'sale_exception',
     ],
     'website': 'https://www.camptocamp.com',
     'data': [
