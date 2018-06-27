@@ -146,6 +146,11 @@ class CustomerAddressCronExporter(Component):
         customers = []
         invoice_addresses = {}
         delivery_addresses = {}
+        # As this method does not return a recordset like other get_items
+        # but a list of tuples. The lock on the exported items happens
+        # here instead of in the run method.
+        self._lock(items)
+
         for item in items:
             parent_id = item.parent_id.id
             if item.type == 'invoice':
@@ -183,3 +188,13 @@ class CustomerAddressCronExporter(Component):
                   ('parent_id.customer', '=', 1)
                   ]
         return AND([domain, self._valid_address_domain()])
+
+    def run(self, export_since=None):
+        """ Run the export.
+
+        Redefined because the get_items does not return a simple
+        recordset but a list of tuples, and can not be handled by the _lock.
+
+        """
+        items = self.get_items(export_since=export_since)
+        return self._export_items(items)

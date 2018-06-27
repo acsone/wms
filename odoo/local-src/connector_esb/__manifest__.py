@@ -27,6 +27,7 @@
         'specific_data',
         'specific_sale',
         'product_additional',
+        'queue_job_cron',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
