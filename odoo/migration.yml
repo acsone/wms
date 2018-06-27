@@ -221,6 +221,7 @@ migration:
           - web_widget_inputmask
           - split_coda
           - stock_inventory_products
+          - sale_confirm_background
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
@@ -275,6 +276,7 @@ migration:
           - stock_inventory_products
           - specific_stock
           - speedy_views
+          - sale_confirm_background
       modes:
         full:
           operations:
