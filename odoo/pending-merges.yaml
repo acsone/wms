@@ -50,3 +50,12 @@
       # [10.0] retry_postpone using new cursor
     - oca refs/pull/41/head
   target: *default_target
+./external-src/web:
+  remotes:
+    oca: git@github.com:OCA/web.git
+    camptocamp: git@github.com:camptocamp/web.git
+  merges:
+    - oca 10.0
+    # [10.0] web_notify: interactive notifications
+    - oca refs/pull/970/head
+  target: *default_target
