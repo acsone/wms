@@ -11,6 +11,7 @@ Unreleased
 * ALCN-1116: Add the module CSV File Export and CSV File Import
 * ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
 * ALCN-1358: process confirmation of sales order in background
+* Limit multiple job creation for the same update on a sale order.
 
 **Bugfixes**
 
@@ -143,8 +144,6 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
-
-* Limit multiple job creation for the same update on a sale order.
 
 **Bugfixes**
 * Revert ALCN-1153: Set standard buying price in product cost field
