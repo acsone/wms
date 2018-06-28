@@ -2,8 +2,6 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-
-import hashlib
 import logging
 
 from psycopg2 import IntegrityError
@@ -28,11 +26,6 @@ class SaleOrder(models.Model):
     def write(self, vals):
         self_ctx = self.with_context(_sale_order_write=True)
         return super(SaleOrder, self_ctx).write(vals)
-
-    @api.multi
-    def generate_identity(self):
-        """The hash to avoid duplicate in queue job."""
-        return hashlib.md5(self._name + str(self.id)).hexdigest()
 
     @job(default_channel='root.esb')
     def ws_create_new(self, data):
