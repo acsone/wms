@@ -10,6 +10,7 @@ Unreleased
 
 * ALCN-1116: Add the module CSV File Export and CSV File Import
 * ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
+* ALCN-1358: process confirmation of sales order in background
 
 **Bugfixes**
 
@@ -41,7 +42,6 @@ Unreleased
              add additional lines when a purchase order is validated
 * ALCN-1401: Add the module stock_inventory_products to allows to create an inventory from a list of products and automatically create inventory lines with lots
 * ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
-* ALCN-1358: process confirmation of sales order in background
 
 **Bugfixes**
 

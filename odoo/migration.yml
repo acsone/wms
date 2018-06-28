@@ -276,7 +276,6 @@ migration:
           - stock_inventory_products
           - specific_stock
           - speedy_views
-          - sale_confirm_background
       modes:
         full:
           operations:
@@ -362,3 +361,4 @@ migration:
           - csv_file_export
           - csv_file_import
           - specific_stock
+          - sale_confirm_background
