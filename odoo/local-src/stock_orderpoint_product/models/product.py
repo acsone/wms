@@ -56,6 +56,22 @@ class ProductTemplate(models.Model):
                     'active': product.active,
                 })
 
+    def write(self, values):
+        """If a product has been changed to a type service
+        you can archive the orderpoints with context.
+
+        Used only for import.
+        """
+        if (self._context.get('force_archive_orderpoint') and
+                'type' in values and values['type'] != 'product' and
+                sum(self.mapped('nbr_reordering_rules')) != 0):
+            ops = self.mapped('product_variant_ids.orderpoint_ids').filtered(
+                lambda r: r.active)
+            ops.write({'active': False})
+            # recompute value of `nbr_reordering_rules`
+            self.invalidate_cache()
+        return super(ProductTemplate, self).write(values)
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -83,3 +99,15 @@ class ProductProduct(models.Model):
             })
 
         return result
+
+    def write(self, values):
+        """If a product is archived you can propagate
+        archiving to orderpoints with context.
+
+        Used only for import.
+        """
+        if (self._context.get('force_archive_orderpoint') and
+                'active' in values and not values['active']):
+            ops = self.mapped('orderpoint_ids').filtered(lambda r: r.active)
+            ops.write({'active': False})
+        return super(ProductProduct, self).write(values)

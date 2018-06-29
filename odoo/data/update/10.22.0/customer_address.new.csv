@@ -1,0 +1,4 @@
+id,customer,city,fax,name,zip,mobile,parent_id/id,country_id/id,phone,street,supplier,type,lang
+__import__.customer_address_delivery_7427,False,Humbeek,,BROES KIM,1851,,__import__.customer_7427,base.be,,Kerkstraat 215,False,delivery,nl_BE
+__import__.customer_address_delivery_9316,False,IZEGEM,,ONGENA NIKOLAI,8870,,__import__.customer_9316,base.be,,Sasstraat 8,False,delivery,nl_BE
+__import__.customer_address_delivery_9331,False,SENEFFE,,DE VRIESE LUC,7180,,__import__.customer_9331,base.be,,rue des Canadiens 24,False,delivery,fr_BE
