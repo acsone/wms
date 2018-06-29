@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.0 (2018-06-29)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1205: copy create_date from product_product to parent object product_template to be coherent.
@@ -13,20 +25,19 @@ Unreleased
              only on variant but also on product templates. Because all used views are product template,
              exporting products to a csv file would give you only the wrong date.
 * ALCN-1309: reset inventory line
-* generate new inventory lines
 * ALCN-1363: import suppliers contacts
-* generate full supplier contacts
 
 **Features and Improvements**
 
-* ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
-* ALCN-1372:
-* Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
-* add additional lines when a purchase order is validated
+* ALCN-1171: generate sales order and invoice reports in background jobs to reduce the user's time taken at confirmation
 * ALCN-1232: Anticipated picking. In delivery rounds, add pending state, remove obsolete name field. On delivery rounds' pickings, display picking type. Zetes: Allow to assign a picking to an operator and send to voice even if delivery round is not started
   * Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
   * add additional lines when a purchase order is validated
+* ALCN-1358: Add indexes and optimizations for faster operations
+* ALCN-1372: Reorganize the view supplier info to group fields by domains (sale, purchase, ...)
+             add additional lines when a purchase order is validated
 * ALCN-1401: Add the module stock_inventory_products to allows to create an inventory from a list of products and automatically create inventory lines with lots
+* ALCN-1411: Add missing security rules for cron.delivery.plan and round.tag
 
 **Bugfixes**
 
@@ -36,8 +47,6 @@ Unreleased
 **Build**
 
 * Refresh full data
-
-**Documentation**
 
 
 10.21.1 (2018-06-20)
@@ -54,8 +63,6 @@ Unreleased
 * ALCN-1404: Update followup letter and update translations
 * Purchase review: Add the ordered quantity in the advised quantity and disallow to edit the min/max for MTO product
 * ALCN-1427: Refactor reception wizard helpdesk (moved code to specific_helpdesk), filter reasons in reception wizard, allow to set scrap location on reception wizard, translate reasons
-* ALCN-1171: generate sales order and invoice reports in background jobs to reduce the user's time taken at confirmation
-* ALCN-1358: Add indexes and optimizations for faster operations
 
 **Bugfixes**
 
