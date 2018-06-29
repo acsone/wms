@@ -331,10 +331,6 @@ migration:
               - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.22.0/supplierinfo_promo.change-price.csv
               - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.22.0/supplierinfo_promo.change-product_code.csv
               - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/update/10.22.0/supplierinfo_promo.change-price-product_code.csv
-              # import res_partner_bank_supplier
-              - bin/importer.sh songs.install.data_full:: /opt/odoo/data/update/10.22.0/res_partner_bank_supplier.new.csv
-              # activation of VIES check after partner import
-              - anthem songs.install.accounting::activate_check_on_vat
               # import additional products
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               # import locations
@@ -342,15 +338,16 @@ migration:
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/update/10.22.0/location.change-bin_checksum_1.csv
               - anthem songs.install.data_full::location_compute_parents
               # import pricelist_items
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/update/10.22.0/pricelist_items.csv
+              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/update/10.22.0/pricelist_items.new.csv
 
               # import product_new_route_info
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.22.0/product_new_route_info.new.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.22.0/product_new_route_info.change-description_picking.csv
               # import product_stock_bin
-              - bin/importer.sh songs.install.data_full:: /opt/odoo/data/update/10.22.0/product_stock_bin.new.csv
-              - bin/importer.sh songs.install.data_full:: /opt/odoo/data/update/10.22.0/product_stock_bin.change-bin_location_id.csv
+              - bin/importer.sh songs.install.data_full::import_stock_bins /opt/odoo/data/update/10.22.0/product_stock_bin.change-bin_location_id.csv
               # post product import
               - anthem songs.install.data_full::post_import_products
-              # import banks
               - anthem songs.install.data_full::import_banks
+              - anthem songs.install.data_full::import_bank_accounts
+              # activation of VIES check after partner import
+              - anthem songs.install.accounting::activate_check_on_vat
