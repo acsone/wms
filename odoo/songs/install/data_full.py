@@ -59,11 +59,20 @@ def create_product_other(ctx):
 def import_products(ctx):
     """ Importing products from csv"""
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
+    load_ctx.update({
+        'tracking_disable': True,
+        'force_archive_orderpoint': True,
+        'disable_constrains_orderpoint': True})
+
     Product = ctx.env['product.product'].with_context(load_ctx)
     file_csv = 'data/install/product.csv'
     for content in get_files(req, file_csv):
-        load_csv_stream(ctx, Product, content, delimiter=',')
+        try:
+            load_csv_stream(ctx, Product, content, delimiter=',')
+        except anthem.exceptions.AnthemError as e:
+            # Append filename in exception message
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
 
 
 def product_copy_on_unactive(ctx):
