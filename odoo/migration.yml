@@ -288,9 +288,7 @@ migration:
               # import product
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               # import stock_production_lot
-              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/update/10.22.0/stock_production_lot.new.csv              # inventory
-              - anthem songs.install.data_full::import_inventory
-              - anthem songs.install.data_full::import_inventory_without_lot
+              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/update/10.22.0/stock_production_lot.new.csv
               # deactivation of VIES check before partner import
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
