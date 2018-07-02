@@ -15,7 +15,7 @@ Unreleased
 **Documentation**
 
 
-10.22.0 (2018-06-29)
+10.22.0 (2018-07-02)
 ++++++++++++++++++++
 
 **Data Migration**
