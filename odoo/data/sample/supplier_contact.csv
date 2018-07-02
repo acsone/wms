@@ -43,7 +43,7 @@ __import__.supplier_contact_68302_3,contact,MME FEREMANS,,023914481,023914484,Fa
 __import__.supplier_contact_68302_4,contact,MAD. LAETICIA BAUDET,,,,False,False,fr_BE,Laeticia.baudet@hartmann.info,,__import__.supplier_68302
 __import__.supplier_contact_68302_5,contact,COMMANDES,,,,False,False,fr_BE,Kristel.portenart@hartmann.info,,__import__.supplier_68302
 __import__.supplier_contact_68302_6,contact,MR. RUDY LEVEQUE,"RUDY.LEVEQUE@HARTMANN,INFO",,,False,False,fr_BE,,0496 24 00 39,__import__.supplier_68302
-__import__.supplier_contact_68370_1,contact,DENNIS SAUTER,,,,False,False,de_DE,,,__import__.supplier_68370
+__import__.supplier_contact_68370_1,contact,DENNIS SAUTER,,,,False,False,fr_BE,,,__import__.supplier_68370
 __import__.supplier_contact_71100_1,contact,CLOTUCHE GUY,RESPONSABLE DELEGUES WAL.,083.212563,083.212876,False,False,fr_BE,QUAI DE L'INDUSTRIE 12 5590 CINEY,0475949666,__import__.supplier_71100
 __import__.supplier_contact_71100_2,contact,M. CLEMENT,DELEGUE,081/444349,0478/335510,False,False,fr_BE,Petit Babin 88 5120 Malonne,,__import__.supplier_71100
 __import__.supplier_contact_71100_4,contact,C HOFMANS,,02/6635538,,False,False,fr_BE,,,__import__.supplier_71100
