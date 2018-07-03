@@ -96,7 +96,9 @@ class PurchaseOrder(models.Model):
             if product.additional_product_id:
                 all_products.append(product.additional_product_id)
 
-        ordered_products = self.order_line.mapped('product_id')
+        # Don't set empty line (qty == 0) as ordered product
+        ordered_products = self.order_line\
+            .filtered(lambda line: line.product_qty).mapped('product_id')
         partner = self.partner_id
 
         result = []
@@ -109,6 +111,8 @@ class PurchaseOrder(models.Model):
                 is_with_promo = seller.discount_purchase > 0
                 is_without_promo = not is_with_promo
 
+            is_in_bo = product.immediately_usable_qty < 0
+
             result.append({
                 'id': product.id,
                 'name': product.name,
@@ -117,6 +121,7 @@ class PurchaseOrder(models.Model):
                 'ordered_product': product in ordered_products,
                 'with_promo': is_with_promo,
                 'without_promo': is_without_promo,
+                'is_in_bo': is_in_bo,
             })
         return result
 

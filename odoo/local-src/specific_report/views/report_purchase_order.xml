@@ -128,7 +128,9 @@
                         In any case, unsold items delivered with a validity of less than 6 months must be credited or replaced.</p>
                 </div>
 
-                <p t-field="o.notes"/>
+                <div t-if="o.notes" class="row">
+                    <p><strong><span t-field="o.notes"/></strong></p>
+                </div>
                 <div class="oe_structure"/>
             </div>
         </t>

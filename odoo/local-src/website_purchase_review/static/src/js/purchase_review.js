@@ -116,7 +116,8 @@ odoo.define('website_purchase_review.main_page', function (require) {
                     ref: result[index]['ref'],
                     ordered_products: result[index]['ordered_product'],
                     with_promo: result[index]['with_promo'],
-                    without_promo: result[index]['without_promo']
+                    without_promo: result[index]['without_promo'],
+                    is_in_bo: result[index]['is_in_bo']
                 });
             });
 
@@ -183,6 +184,10 @@ odoo.define('website_purchase_review.main_page', function (require) {
                 product_tag.attr('checked', 'checked');
             } else {
                 product_name = $("<span/>").text(current_products_list[index].display_name);
+            }
+
+            if (current_products_list[index].is_in_bo) {
+                product_container.attr('class', 'text-warning');
             }
 
             product_container.append(product_name);

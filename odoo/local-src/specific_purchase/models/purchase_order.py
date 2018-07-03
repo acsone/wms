@@ -111,6 +111,18 @@ class PurchaseOrderLine(models.Model):
         default=0.0
     )
     product_ref = fields.Char('Product ref', related='product_id.default_code')
+    is_bo_line = fields.Boolean('BO Line',
+                                compute='_compute_is_bo_line',
+                                readonly=True)
+
+    @api.multi
+    def _compute_is_bo_line(self):
+        """
+        Compute if the PO line is contains a product in BO.
+        :return:
+        """
+        for line in self:
+            line.is_bo_line = line.product_id.immediately_usable_qty < 0
 
     # By default there is no way to add a discounts in Purchase Lines.
     # To do that I added a new field "price_unit_base".
