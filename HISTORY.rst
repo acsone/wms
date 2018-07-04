@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.1 (2018-07-04)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-1116: Add the module CSV File Export and CSV File Import
 * ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
 * ALCN-1358: process confirmation of sales order in background
@@ -16,12 +28,6 @@ Unreleased
 * ALCN-1379: Remove taxes from SER-705008 accounting products
 * ALCN-1403: Zetes: ignore pickings who contain inventoried products
 * ALCN-1421: Add missing Antibiotic taxes in the external module l10n_be_antibiotic_tax
-
-**Bugfixes**
-
-**Build**
-
-**Documentation**
 
 
 10.22.0 (2018-07-02)
