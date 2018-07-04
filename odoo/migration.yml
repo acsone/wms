@@ -161,6 +161,7 @@ migration:
           - connector_esb
           - csv_file
           - csv_file_export
+          - csv_file_import
           - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
@@ -357,3 +358,4 @@ migration:
         upgrade:
           ### local-src
           - csv_file_export
+          - csv_file_import
