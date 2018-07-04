@@ -362,3 +362,4 @@ migration:
           - csv_file_import
           - specific_stock
           - sale_confirm_background
+          - queue_job

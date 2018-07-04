@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.component_event import skip_if
+from odoo.addons.queue_job.job import identity_exact
 
 
 class SaleExportListener(Component):
@@ -16,7 +17,8 @@ class SaleExportListener(Component):
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_create(self, record, fields=None):
         record.with_delay(
-            description=self.EXPORT_DESCRIPTION.format(record.name or '')
+            description=self.EXPORT_DESCRIPTION.format(record.name or ''),
+            identity_key=identity_exact,
         ).esb_export_record()
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
@@ -25,7 +27,8 @@ class SaleExportListener(Component):
             # export already triggered by the sale order create
             return
         record.with_delay(
-            description=self.EXPORT_DESCRIPTION.format(record.name)
+            description=self.EXPORT_DESCRIPTION.format(record.name),
+            identity_key=identity_exact,
         ).esb_export_record()
 
 
@@ -45,5 +48,6 @@ class SaleLineExportListener(Component):
         if set(fields) & set(['qty_delivered', 'product_qty_unavailable']):
             so = record.order_id
             so.with_delay(
-                description=self.EXPORT_DESCRIPTION.format(so.name or '')
+                description=self.EXPORT_DESCRIPTION.format(so.name or ''),
+                identity_key=identity_exact,
             ).esb_export_record()
