@@ -363,5 +363,10 @@ migration:
           - csv_file_import
           - specific_stock
           - sale_confirm_background
+          ### OCA external-src/queue
           - queue_job
+          ### Camptocamp external-src/odoo-cloud-platform
           - monitoring_status
+      operations:
+        post:
+          - anthem songs.upgrade.10_22_1_update::post

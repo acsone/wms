@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1358: process confirmation of sales order in background
 * Limit multiple job creation for the same update on a sale order.
 * Install monitoring_status. Previously it has been manually installed and we want to keep it
+* ALCN-1379: Remove taxes from SER-705008 accounting products
 
 **Bugfixes**
 
