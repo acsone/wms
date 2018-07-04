@@ -213,7 +213,14 @@ class Assignment(DomainInterface):
                   AND picking.operator_id IS NULL)
                OR (picking.delivery_round_state in ('draft', 'pending', 'open')
                   AND picking.operator_id = %(operator)s))
-
+               AND NOT EXISTS (SELECT 1
+                               FROM stock_pack_operation AS operation
+                                 INNER JOIN stock_inventory_line AS sil
+                                   ON sil.product_id = operation.product_id
+                                 INNER JOIN stock_inventory AS si
+                                   ON sil.inventory_id = si.id
+                               WHERE operation.picking_id = picking.id
+                               AND si.state = 'confirm')
                 """
         query_values = {
             'picking_zetes_state': (constants.AS_DEFAULT,
@@ -276,6 +283,14 @@ class Assignment(DomainInterface):
                           WHERE pack_op.picking_id = picking.id
                             AND (stock_location.zone IS NULL
                                  OR stock_location.corridor IS NULL))
+          AND NOT EXISTS (SELECT 1
+                          FROM stock_pack_operation AS operation
+                            INNER JOIN stock_inventory_line AS sil
+                              ON sil.product_id = operation.product_id
+                            INNER JOIN stock_inventory AS si
+                              ON sil.inventory_id = si.id
+                          WHERE operation.picking_id = picking.id
+                          AND si.state = 'confirm')
           AND (picking.operator_id = %s OR picking.operator_id IS NULL)
                 """
         query_values = [
@@ -309,7 +324,7 @@ class Assignment(DomainInterface):
         zone_condition = ""
         query_values = []
         if zone_code:
-            zone_condition = "WHERE picking_zone.code = %s"
+            zone_condition = "AND picking_zone.code = %s"
             query_values.append(zone_code)
 
         report_query = """
@@ -318,6 +333,12 @@ class Assignment(DomainInterface):
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
+        WHERE NOT EXISTS (SELECT 1
+                          FROM stock_inventory_line AS sil
+                            INNER JOIN stock_inventory AS si
+                              ON sil.inventory_id = si.id
+                          WHERE si.state = 'confirm'
+                          AND sil.location_id = report.location_id)
         %s
         ORDER BY report.refill_priority
         LIMIT 1
@@ -390,6 +411,14 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
+          AND NOT EXISTS (SELECT 1
+                              FROM stock_pack_operation AS operation
+                                INNER JOIN stock_inventory_line AS sil
+                                  ON sil.product_id = operation.product_id
+                                INNER JOIN stock_inventory AS si
+                                  ON sil.inventory_id = si.id
+                              WHERE operation.picking_id = picking.id
+                              AND si.state = 'confirm')
           AND (picking.operator_id = %s OR picking.operator_id IS NULL)
                 """
         query_values = [
@@ -423,7 +452,7 @@ class Assignment(DomainInterface):
         zone_condition = ""
         query_values = []
         if zone_code:
-            zone_condition = "WHERE picking_zone.code = %s"
+            zone_condition = "AND picking_zone.code = %s"
             query_values.append(zone_code)
 
         report_query = """
@@ -432,6 +461,12 @@ class Assignment(DomainInterface):
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
+        WHERE NOT EXISTS (SELECT 1
+                          FROM stock_inventory_line AS sil
+                            INNER JOIN stock_inventory AS si
+                              ON sil.inventory_id = si.id
+                          WHERE si.state = 'confirm'
+                          AND sil.product_id = report.product_id)
         %s
         ORDER BY refill_priority
         LIMIT 1;
