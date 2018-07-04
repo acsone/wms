@@ -16,6 +16,8 @@ Unreleased
 
 **Build**
 
+* Upgrade Dockerimage to 2.6.1
+
 **Documentation**
 
 
