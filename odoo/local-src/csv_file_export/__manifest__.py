@@ -3,20 +3,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'FTP Connector',
+    'name': 'CSV File Export',
     'version': '10.0.1.0.0',
     'author': 'Okia SPRL',
     'license': 'AGPL-3',
     'category': 'Others',
     'description': """
-    FTP Manager
+    Module to manage CSV exports
     """,
     'depends': [
-        'base',
+        'csv_file',
     ],
     'data': [
-        "views/ftp_connector.xml",
-        "views/csv_file_logger.xml",
+        "views/csv_file_export.xml",
+        "wizard/csv_file_export_wizard.xml",
         "security/ir.model.access.csv",
     ],
     'website': 'http://www.camptocamp.com',

@@ -160,6 +160,7 @@ migration:
           - account_move_productcateg
           - connector_esb
           - csv_file
+          - csv_file_export
           - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
@@ -351,3 +352,8 @@ migration:
               - anthem songs.install.data_full::import_bank_accounts
               # activation of VIES check after partner import
               - anthem songs.install.accounting::activate_check_on_vat
+    - version: 10.22.1
+      addons:
+        upgrade:
+          ### local-src
+          - csv_file_export

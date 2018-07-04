@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_csv_file,access_csv_file,model_csv_file,base.group_user,1,0,0,0
+access_csv_file_logger,access_csv_file_logger,model_csv_file_logger,base.group_user,1,0,0,0
+access_ftp_connector,access_ftp_connector,model_ftp_connector,base.group_user,1,0,0,0

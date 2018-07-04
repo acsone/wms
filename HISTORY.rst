@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1116: Add the module CSV File Export (to manage CSV Exports)
+
 **Bugfixes**
 
 **Build**
