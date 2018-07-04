@@ -167,6 +167,7 @@ migration:
           - delivery_rounds_alcyon
           - ir_sequence_period
           - l10n_be_bba_fix
+          - monitoring_status
           - pricelist_discount
           - procurement_sale
           - product_additional
@@ -363,3 +364,4 @@ migration:
           - specific_stock
           - sale_confirm_background
           - queue_job
+          - monitoring_status
