@@ -359,3 +359,4 @@ migration:
           ### local-src
           - csv_file_export
           - csv_file_import
+          - specific_stock

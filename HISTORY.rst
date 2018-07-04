@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1116: Add the module CSV File Export and CSV File Import
+* ALCN-1428: Stock: Do some small improvements from J.-E. Feedback: Set the right default location on scrap locations and define the location on the scrap model
 
 **Bugfixes**
 
