@@ -21,9 +21,3 @@ cchardet
 
 # stock_devlivery_note
 unicodecsv
-
-# last version of pytest-odoo
-pytest-odoo==0.4.0
-
-# last version of anthem
-anthem==0.11.0
