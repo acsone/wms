@@ -106,6 +106,56 @@
     <field name="id_columns">dccsui,dccncl,dccsuc,dccnli</field>
     <field name="where_clause">dccncl IN (354, 6891, 379, 8657, 8264, 8585, 3993, 560, 600)</field>
   </record>
+  </data>
+
+
+  <data noupdate="1">
+    <record model="db2.importer" id="db2_ticket_importer">
+      <field name="name">Helpdesk ticket importer</field>
+      <field name="date_start">2018-06-22</field>
+      <field name="mode">history</field>
+    </record>
+  </data>
+
+  <data noupdate="0">
+  <!-- helpdesk ticket detail line table -->
+  <!-- DRECEP for "Détail réception" -->
+  <record model="db2.importer.table" id="db2_table_drecep_for_ticket">
+    <field name="importer_id" ref="db2_ticket_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">DRECEP</field>
+    <field name="table_prefix">drp</field>
+    <field name="id_columns">drpsui,drpseq</field>
+    <field name="where_clause">drpprb &lt;&gt; ''</field>
+    <field name="create_job" eval="False"/>
+  </record>
+
+  <!-- helpdesk ticket detail line table -->
+  <!-- HISPRB for "Code problème" (for description)-->
+  <!-- we create jobs with based on the number of entry of this table
+       as DRECEP - o2m -> HISPRB - o2o -> HISSPR
+       -->
+  <record model="db2.importer.table" id="db2_table_hisprb_for_ticket">
+    <field name="importer_id" ref="db2_ticket_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">HISPRB</field>
+    <field name="table_prefix">hpb</field>
+    <field name="id_columns">hpbsui,hpbnli,hpbcpb</field>
+    <field name="create_job" eval="True"/>
+    <field name="eta">2</field>
+  </record>
+
+  <!-- helpdesk ticket detail line table -->
+  <!-- HISSPR for "Code problème" (for state) -->
+  <record model="db2.importer.table" id="db2_table_hisspr_for_ticket">
+    <field name="importer_id" ref="db2_ticket_importer"/>
+    <field name="schema">SBDATA</field>
+    <field name="table_name">HISSPR</field>
+    <field name="table_prefix">hps</field>
+    <field name="id_columns">hpssui,hpsnli,hpscpb</field>
+    <field name="create_job" eval="False"/>
+  </record>
 
   </data>
+
 </odoo>

@@ -7,6 +7,9 @@ from os import path
 
 from odoo.tests.common import SavepointCase
 
+
+# Cols name and type created quickly with \d and replacing types
+
 SO_COLS = (
     "eccctr VARCHAR,"
     "eccsui INTEGER,"
@@ -140,6 +143,81 @@ SOL_COLS = (
  "dccarc VARCHAR,"
  "dccre  VARCHAR")
 
+DRECEP_COLS = (
+ "drpsuc VARCHAR,"
+ "drpctr VARCHAR,"
+ "drpsui INTEGER,"
+ "drpnfa VARCHAR,"
+ "drpdat INTEGER,"
+ "drpnli INTEGER,"
+ "drpnfo INTEGER,"
+ "drpseq INTEGER,"
+ "drpart VARCHAR,"
+ "drpdem VARCHAR,"
+ "drplot VARCHAR,"
+ "drpdpr INTEGER,"
+ "drpqtn INTEGER,"
+ "drpqre INTEGER,"
+ "drpqra INTEGER,"
+ "drpqrf INTEGER,"
+ "drpgng INTEGER,"
+ "drpprb VARCHAR,"
+ "drplll INTEGER,"
+ "drpscp INTEGER,"
+ "drpscd INTEGER,"
+ "drpeap INTEGER,"
+ "drpead INTEGER,"
+ "drpara VARCHAR,"
+ "drpora INTEGER,"
+ "drporf INTEGER,"
+ "drpong INTEGER,"
+ "drpapr VARCHAR,"
+ "drpsta INTEGER,"
+ "drpstb INTEGER,"
+ "drpstc INTEGER,"
+ "drpstf INTEGER")
+
+
+HISPRB_COLS = (
+ "hpbsuc VARCHAR,"
+ "hpbctr VARCHAR,"
+ "hpbsui DOUBLE PRECISION,"
+ "hpbnli DOUBLE PRECISION,"
+ "hpbnfo DOUBLE PRECISION,"
+ "hpbnfa VARCHAR,"
+ "hpbdat DOUBLE PRECISION,"
+ "hpbcpb VARCHAR,"
+ "hpbccd VARCHAR,"
+ "hpbccl VARCHAR,"
+ "hpbde1 VARCHAR,"
+ "hpbde2 VARCHAR,"
+ "hpbde3 VARCHAR,"
+ "hpbde4 VARCHAR,"
+ "hpbde5 VARCHAR,"
+ "hpbaus VARCHAR,"
+ "hpbada DOUBLE PRECISION,"
+ "hpbsid VARCHAR,"
+ "hpbsda DOUBLE PRECISION,"
+ "hpbsco VARCHAR,"
+ "hpblll DOUBLE PRECISION")
+
+
+HISSPR_COLS = (
+ "hpssuc VARCHAR,"
+ "hpsctr VARCHAR,"
+ "hpssui DOUBLE PRECISION,"
+ "hpsnli DOUBLE PRECISION,"
+ "hpssli DOUBLE PRECISION,"
+ "hpsnfo DOUBLE PRECISION,"
+ "hpsnfa VARCHAR,"
+ "hpsdat DOUBLE PRECISION,"
+ "hpscpb VARCHAR,"
+ "hpsccd VARCHAR,"
+ "hpsccl VARCHAR,"
+ "hpssid VARCHAR,"
+ "hpssda DOUBLE PRECISION,"
+ "hpssco VARCHAR,"
+ "hpssts VARCHAR")
 
 SQL_PATH = path.join(path.dirname(__file__), "sql", "%s.sql")
 CSV_PATH = path.join(path.dirname(__file__), "data", "%s.csv")
@@ -210,7 +288,8 @@ class DB2ImportTestCase(SavepointCase):
 
     @classmethod
     def create_db2_tables(cls):
-        """Create tables to use in tests."""
+        """Create tables to use in tests.
+        """
 
         db2_so_table = cls.env.ref('db2_import.db2_table_pentcdcl_for_sale')
         db2_sol_table = cls.env.ref('db2_import.db2_table_pdetcdcl_for_sale')
@@ -222,7 +301,8 @@ class DB2ImportTestCase(SavepointCase):
     def insert_db2_records(cls):
         """Insert records to use in tests."""
         cr = cls.env.cr
-        for table in ['db2_pentcdcl', 'db2_pdetcdcl']:
+        for table in ['db2_pentcdcl', 'db2_pdetcdcl',
+                      'db2_drecep', 'db2_hisprb', 'db2_hisspr']:
             with open(SQL_PATH % table) as sql_file:
                 sql = sql_file.read()
                 cr.execute(sql)
