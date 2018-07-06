@@ -17,6 +17,8 @@ Unreleased
 **Build**
 
 * Upgrade Dockerimage to 2.6.1
+* Update from odoo-template
+* Upgrade nginx to X-1.3.0
 
 **Documentation**
 
