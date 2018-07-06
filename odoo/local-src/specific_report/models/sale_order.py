@@ -50,6 +50,9 @@ class SaleOrder(models.Model):
     def get_report_name(self):
         """Generate a specific name for the report save in ir.attachment"""
         self.ensure_one()
+        if self.state == 'draft':
+            # Not saving in ir.attachment when in draft state
+            return None
         if not self.partner_id.ref:
             raise UserError(_(
                 'The Quotation can not be printed the client {} ({}) \

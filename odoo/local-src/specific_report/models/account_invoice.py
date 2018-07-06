@@ -169,10 +169,14 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def get_report_name(self):
-        """Generate a specific name for the report save in ir.attachment"""
+        """Generate a specific name for the report save in ir.attachment.
+
+        If no name is returned, the file is not saved.
+        """
         self.ensure_one()
-        if self.type in ['in_invoice', 'in_refund']:
+        if self.type in ['in_invoice', 'in_refund'] or self.state == 'draft':
             # Only generate for client invoice and credit notes
+            # And not for invoice in draft state
             return None
         type_doc = ''
         if self.type == 'out_invoice':
