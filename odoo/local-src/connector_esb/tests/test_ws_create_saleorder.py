@@ -4,6 +4,7 @@
 
 from mock import patch
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
@@ -66,12 +67,12 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         })
 
     def test_create_saleorder(self):
+        starting_date = fields.Datetime().now()
         order = self.env['sale.order']._ws_create_new(self.order_data)
         tax_rate = self.p1.taxes_id.amount / 100.0
         expected = {
             'esb_ref': 'INC-ID',
             'client_order_ref': 'refClt',
-            'date_order': '2017-09-18 00:00:00',
             'partner_id': self.partner,
             'partner_invoice_id': self.partner,
             'partner_shipping_id': self.partner_shipping,
@@ -85,7 +86,11 @@ class WSCreateSaleOrderTestCase(TransactionCase):
                 self.assertEqual(order[k], v)
         # free line: to be skipped
         self.assertEqual(len(order.order_line), 1)
-        self.assertEqual(order.confirmation_date, '2017-09-18 00:00:00')
+        # Confirmtation/order date are the time of creation in Odoo by the ws
+        self.assertTrue(starting_date <= order.confirmation_date <=
+                        fields.Datetime.now())
+        self.assertTrue(starting_date <= order.date_order <=
+                        fields.Datetime.now())
 
     def test_create_saleorder_shipping(self):
         carrier = self.env['delivery.carrier'].search([], limit=1)
