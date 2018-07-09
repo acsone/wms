@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1189: Add fax service and send sale order confirmation through it, if sale channel is fax.
+
 **Bugfixes**
 
 **Build**
