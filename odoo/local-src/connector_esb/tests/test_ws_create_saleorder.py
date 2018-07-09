@@ -2,6 +2,8 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from mock import patch
+
 from odoo.tests.common import TransactionCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
@@ -133,3 +135,27 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         # internal api will raise IntegrityError
         with self.assertRaises(MissingError):
             self.env['sale.order']._ws_create_new(data)
+
+    def test_draft_invoice_is_not_exported(self):
+        """Check that invoices in state draft are not exported."""
+        data = {
+            'esb_ref': 'ref_01',
+            'partner_id': self.partner.id,
+            'date_order': '2018-01-29',
+            'sale_channel': 'fax',
+            'state': 'draft',
+            'order_line': [
+                (0, 0, {
+                    'sequence': 1,
+                    'name': self.p1.name,
+                    'product_id': self.p1.id,
+                    'product_uom_qty': 7,
+                })],
+        }
+        # Could not get to patch esb_export_record, so doing it differentely
+        # with patch('odoo.addons.connector_esb.models.esb_exportable.'
+        #            'ESBExportable.esb_export_record') as export_record:
+        with patch('odoo.addons.queue_job.job.DelayableRecordset.__init__',
+                   return_value=None) as export_record:
+            self.env['sale.order'].create(data)
+            export_record.assert_not_called()

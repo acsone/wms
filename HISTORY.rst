@@ -17,6 +17,7 @@ Unreleased
 * ALCN-1452: Add sale order esb_ref (Magento order n°) to the view
 * ALCN-1415: Improve esb export so records being updated while an export is running will not be missed on next export.
              The scheduled exports to the esb are run with queue_job.
+* ALCN-1442: Sale order in draft state are not to be exported to esb/magento.
 
 **Bugfixes**
 
