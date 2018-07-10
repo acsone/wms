@@ -9,7 +9,7 @@
       <Postcode>xyz</Postcode>
       <Firstname>invoicing-address</Firstname>
       <IsDefaultBilling>True</IsDefaultBilling>
-      <AddressId>1232</AddressId>
+      <AddressId>5</AddressId>
       <Telephone>021123123</Telephone>
       <CustomerId>1231</CustomerId>
     </Row>

@@ -53,11 +53,23 @@ class CustomerAddressExportMapper(Component):
         But if for a customer no specific address exist for invoicing and
         shipping, in the file there would be a duplicate for
         CustomerId/AddressId wich would be a problem for the ESB.
-        So for shipping if we do not have a specific address we set it to zero
+        So for shipping if we do not have a specific address we set it to zero.
+
+        The ref value on a customer record and a specific address for that
+        customer is always the same (see module base_partner_sequence).
+        So for specific invoice and delivery address instead of using the ref
+        field we use constants value which are not used in ref.
+
         """
-        address_id = ''
+
+        INVOICE_REF = '5'
+        DELIVERY_REF = '12'
+
         if record.parent_id:
-            address_id = record.ref
+            if self.options.address_kind == 'delivery':
+                address_id = DELIVERY_REF
+            elif self.options.address_kind == 'invoice':
+                address_id = INVOICE_REF
         elif self.options.address_kind == 'delivery':
             address_id = '0'
         else:

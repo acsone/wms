@@ -79,7 +79,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         """ Generate dict with the mapper and compare with what is expected"""
         expected = {
             'CustomerId': self.main_partner.ref,
-            'AddressId': self.main_partner_invoice.ref,
+            'AddressId': '5',
             'City': self.main_partner_invoice.city,
             'CountryId': self.country44.esb_ref,
             'Firstname': self.main_partner_invoice.name,
@@ -131,7 +131,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             # Testing empty ref should not be false but empty string
             'CustomerId': '',
             # Shipping address exists !
-            'AddressId': self.partner_2_delivery.ref,
+            'AddressId': '12',
             'City': self.partner_2_delivery.city,
             'CountryId': self.country44.esb_ref,
             'Firstname': self.partner_2_delivery.name,

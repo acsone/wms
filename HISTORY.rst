@@ -19,6 +19,7 @@ Unreleased
 **Bugfixes**
 
 * Fix for the infamous 10 != 8 bug in tests
+* ALCN-1452: Fix bug with AddressId in customer address export
 
 **Build**
 
