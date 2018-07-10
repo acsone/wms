@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCN-1073: import claims from DB2
+* ALCN-1417: moved sale line unavailable functionality to the basic sale lines view
 
 **Features and Improvements**
 

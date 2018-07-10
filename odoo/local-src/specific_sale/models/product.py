@@ -3,6 +3,7 @@
 # © 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import ast
 from odoo import models, api, fields
 
 
@@ -66,3 +67,18 @@ class ProductTemplate(models.Model):
         ]
 
         return action_data
+
+    @api.multi
+    def action_view_sales(self):
+        res = super(ProductTemplate, self).action_view_sales()
+        if res['context']:
+            action_context = ast.literal_eval(res['context'])
+            action_context[
+                'search_default_remains_to_deliver'
+            ] = 1
+            res['context'] = str(action_context)
+        else:
+            res['context'] = "{"\
+                "'search_default_remains_to_deliver': 1," \
+                "}"
+        return res
