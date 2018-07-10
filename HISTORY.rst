@@ -14,6 +14,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1104: Add missing translations and remove the module specific_translations
+* ALCN-1452: Add sale order esb_ref (Magento order n°) to the view
 
 **Bugfixes**
 
