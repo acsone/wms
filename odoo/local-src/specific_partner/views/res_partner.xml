@@ -70,6 +70,23 @@
         <field name="ref" position="attributes">
           <attribute name="attrs">{'readonly': True}</attribute>
         </field>
+        <!-- Set required fields for client address of type invoicing and delivery -->
+        <!-- As to have coherent data to export to the esb -->
+        <xpath expr="//div[@name='div_address']/field[@name='street']" position="attributes">
+          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+        </xpath>
+        <xpath expr="//div[@name='div_address']/field[@name='zip']" position="attributes">
+          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+        </xpath>
+        <xpath expr="//div[@name='div_address']/field[@name='country_id']" position="attributes">
+          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+        </xpath>
+        <xpath expr="//div[@name='div_address']/field[@name='city']" position="attributes">
+          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+        </xpath>
+        <xpath expr="//notebook//form//field[@name='name']" position="attributes">
+          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+        </xpath>
       </field>
     </record>
 
