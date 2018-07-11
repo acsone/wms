@@ -17,6 +17,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix for the infamous 10 != 8 bug in tests
+
 **Build**
 
 * Upgrade Dockerimage to 2.6.1
