@@ -9,12 +9,15 @@ Unreleased
 **Data Migration**
 
 * ALCN-1073: import claims from DB2
+* ALCN-1417: moved sale line unavailable functionality to the basic sale lines view
 
 **Features and Improvements**
 
 * ALCN-1104: Add missing translations and remove the module specific_translations
 
 **Bugfixes**
+
+* Fix for the infamous 10 != 8 bug in tests
 
 **Build**
 

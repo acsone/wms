@@ -126,6 +126,7 @@ class SaleOrderLine(models.Model):
 
     supplier_break = fields.Boolean(compute='_compute_supplier_break')
     exception = fields.Char(compute='_compute_exception')
+    date_order = fields.Datetime(related="order_id.date_order")
 
     @api.depends('product_id')
     def _compute_supplier_break(self):

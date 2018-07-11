@@ -15,5 +15,14 @@ def uninstall_module_specific_translations(ctx):
 
 
 @anthem.log
-def post(ctx):
+def _recompute_sale_order_line(ctx):
+    """Recompute quantity remains to deliver as it is now a stored field"""
+    ctx.env["sale.order.line"].search([
+        ('state', 'in', ['sale'])
+    ])._compute_product_qty_remains_to_deliver()
+
+
+@anthem.log
+def main(ctx):
+    _recompute_sale_order_line(ctx)
     uninstall_module_specific_translations(ctx)

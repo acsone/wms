@@ -376,7 +376,8 @@ migration:
         upgrade:
           ### local-src
           - db2_import
+          - specific_sale
           - specific_product
       operations:
         post:
-          - anthem songs.upgrade.10_22_0_update::post
+          - anthem songs.upgrade.10_22_2_update::main

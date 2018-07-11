@@ -18,9 +18,11 @@ class SaleOrderLine(models.Model):
         string='Remains to deliver',
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_compute_product_qty_remains_to_deliver',
+        store=True,
     )
 
     @api.multi
+    @api.depends('product_uom_qty', 'qty_delivered', 'product_qty_canceled')
     def _compute_product_qty_remains_to_deliver(self):
         for line in self:
             remaining_to_deliver = line.product_uom_qty \
