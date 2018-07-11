@@ -378,6 +378,7 @@ migration:
           - db2_import
           - specific_sale
           - specific_product
+          - connector_esb
       operations:
         post:
           - anthem songs.upgrade.10_22_2_update::main

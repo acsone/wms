@@ -48,6 +48,7 @@
         'views/res_country.xml',
         'views/res_lang_views.xml',
         'views/delivery_carrier.xml',
+        'views/sale_order.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
