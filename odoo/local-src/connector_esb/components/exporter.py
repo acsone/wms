@@ -141,6 +141,30 @@ class ESBWebServiceExporter(AbstractComponent):
         """Can do several actions after exporting a record on the backend"""
         pass
 
+    def _lock(self):
+        """Lock the record.
+
+        Lock the record so we are sure that only one export
+        job is running for this record if concurrent jobs have to export the
+        same record.
+        When concurrent jobs try to export the same record, the first one
+        will lock and proceed, the others will fail to lock and will be
+        retried later.
+        """
+        sql = ("SELECT id FROM %s WHERE ID = %%s FOR UPDATE NOWAIT" %
+               self.model._table)
+        try:
+            self.env.cr.execute(sql, (self.record.id, ),
+                                log_exceptions=False)
+        except psycopg2.OperationalError:
+            _logger.info('A concurrent job is already exporting the same '
+                         'record (%s with id %s). Job delayed later.',
+                         self.model._name, self.record.id)
+            raise RetryableJobError(
+                    'A concurrent job is already exporting the same record '
+                    '(%s with id %s). The job will be retried later.' %
+                    (self.model._name, self.record.id))
+
     def _has_to_skip(self):
         """ Return True if the export can be skipped """
         return False

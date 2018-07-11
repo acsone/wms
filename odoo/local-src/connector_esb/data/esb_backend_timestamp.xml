@@ -65,6 +65,14 @@
     <field name="export_filename">none</field>
   </record>
 
+  <record id="esb_timestamp_stock_update_single" model="esb.backend.timestamp">
+    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="model">product.product</field>
+    <field name="kind">stock.update.single</field>
+    <field name="writer">webservice</field>
+    <field name="export_filename">none</field>
+  </record>
+
   <record id="esb_timestamp_document_zip" model="esb.backend.timestamp">
     <field name="backend_id" ref="esb_backend_config"/>
     <field name="model">ir.attachment</field>

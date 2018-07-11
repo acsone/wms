@@ -13,9 +13,9 @@ class ESBExportable(models.Model):
     @api.multi
     @job(default_channel='root.esb')
     @related_action(action='related_action_open_record')
-    def esb_export_record(self):
+    def esb_export_record(self, timestamp=None):
         """Export a record"""
         backend = self.env['esb.backend'].sudo().get_singleton()
-        with backend.work_on(self._name) as work:
+        with backend.work_on(self._name, timestamp=timestamp) as work:
             exporter = work.component('record.exporter')
             return exporter.run(self)

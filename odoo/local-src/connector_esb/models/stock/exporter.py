@@ -21,7 +21,9 @@ class StockUpdateMapper(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and work.timestamp.kind == 'stock.update')
+        return bool(work.timestamp and
+                    work.timestamp.kind in ['stock.update',
+                                            'stock.update.single'])
 
     direct = [
         (falsy2emptystring('default_code'), 'sku'),
@@ -59,6 +61,7 @@ class StockUpdateMapper(Component):
 
 
 class StockUpdateExporter(Component):
+    """Multiple product stock status exporter, scheduled by cron."""
     _name = 'esb.stock.update.webservice.exporter'
     _inherit = 'esb.webservice.cron.exporter'
     _apply_on = 'product.product'
@@ -82,3 +85,23 @@ class StockUpdateExporter(Component):
         all_quants = self.env['stock.quant'].search(domain)
         products = all_quants.mapped('product_id')
         return products
+
+
+class StockUpdateServiceExporter(Component):
+    """Single product stock status exporter."""
+    _name = 'esb.stock.update.webservice.exporter.single'
+    _inherit = 'esb.webservice.exporter'
+    _apply_on = 'product.product'
+    _base_backend_adapter_usage = 'backend.adapter.stockupdate'
+
+    @classmethod
+    def _component_match(cls, work):
+        return bool(work.timestamp and
+                    work.timestamp.kind == 'stock.update.single')
+
+    def _get_external_id(self):
+        """Always send a POST request, so no external id."""
+        return None
+
+    def _postprocess_create_result(self, result):
+        return

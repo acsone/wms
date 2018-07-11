@@ -34,7 +34,9 @@ class ESBBackendTimestamp(models.Model):
                     'special.promotion',
                     'buyx.gety',
                     'documents',
-                    'stock.update']],
+                    'stock.update',
+                    'stock.update.single',
+                    ]],
         string='Kind of export',
         readonly=True,
     )

@@ -9,6 +9,11 @@ Unreleased
 **Features and Improvements**
 
 * ALCN-1355: Block product quick create
+* ALCN-1407: Add product stock synchronization when state is changed (ESB).
+             The export of stock status to the ESB is scheduled by cron and based on
+             the stock_quants. But in the data the state of the product is sent
+             as well and then not always updated. Here we add a realtime export when
+             a product state has been changed.
 
 **Bugfixes**
 

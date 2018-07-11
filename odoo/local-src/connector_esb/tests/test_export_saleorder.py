@@ -2,6 +2,10 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import mock
+import os
+import requests
+
 from odoo.tests.common import SavepointCase
 
 
@@ -9,6 +13,10 @@ class ExportSaleOrderTestCase(SavepointCase):
 
     def setUp(self):
         super(ExportSaleOrderTestCase, self).setUp()
+
+        os.environ['ODOO_ESB_WS_USER'] = 'ws_user'
+        os.environ['ODOO_ESB_WS_BASE_URL'] = 'https://test.com'
+        os.environ['ODOO_ESB_WS_PWD'] = 'pwd'
 
         self.backend_model = self.env['esb.backend']
         self.backend = self.backend_model.get_singleton()
@@ -155,3 +163,17 @@ class ExportSaleOrderTestCase(SavepointCase):
                          result['increment_id'])
         self.assertEqual(self.so1.order_line[0].esb_ref,
                          result['lines'][0]['created_id'])
+
+    def post_ret_status(url, data, headers, auth):
+        resp = requests.Response()
+        resp.status_code = 200
+        resp.json = lambda: '{"erp_id" : "42", “increment_id” : “1000000348”}'
+        return resp
+
+    @mock.patch('requests.put', side_effect=post_ret_status)
+    def test_record_exporter(self, post):
+        """Test export of a sale order catching the post request."""
+        with self.backend.work_on(self.model._name) as work:
+            exporter = work.component(usage='record.exporter')
+            exporter.run(self.so1)
+        post.assert_called_once()
