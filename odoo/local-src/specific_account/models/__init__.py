@@ -10,3 +10,5 @@ from . import res_config
 from . import sale_order
 from . import product_product
 from . import account_move_line
+from . import res_partner
+from . import stock_picking

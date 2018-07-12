@@ -33,6 +33,8 @@
         'views/account_invoice_view.xml',
         'views/menu.xml',
         'views/res_config.xml',
+        'views/res_partner.xml',
+        'views/sale_order.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

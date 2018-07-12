@@ -386,6 +386,8 @@ migration:
           - specific_product
           - specific_sale
           - queue_job_cron
+          - connector_esb
+          - specific_account
       operations:
         post:
           - anthem songs.upgrade.10_22_2_update::main
@@ -396,3 +398,6 @@ migration:
               - anthem songs.install.data_full::create_journals
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
+              - anthem songs.upgrade.common::deactivate_check_on_vat
+              - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
+              - anthem songs.install.accounting::activate_check_on_vat

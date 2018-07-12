@@ -516,6 +516,16 @@ class CustomerMapper(EntityMapper):
             'cpcl07',
             mapping=mappings.STR_BOOL
         ),
+        FieldMapper(
+            'invoice_frequency',
+            'clireg',
+            mapping=mappings.PARTNER_INVOICING_FREQUENCY
+        ),
+        FieldMapper(
+            'invoice_grouping',
+            'clireg',
+            mapping=mappings.PARTNER_INVOICING_TYPE
+        ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',
