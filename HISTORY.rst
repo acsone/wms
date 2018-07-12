@@ -19,6 +19,7 @@ Unreleased
              The scheduled exports to the esb are run with queue_job.
 * ALCN-1442: Sale order in draft state are not to be exported to esb/magento.
 * ALCN-1440: Add some required fields for customer invoicing and delivery addresses, so they can be sent to the ESB.
+* ALCN-1409: For invoice do not save pdf in ir.attachment table if invoice in 'draft'
 
 **Bugfixes**
 
