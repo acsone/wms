@@ -4,12 +4,13 @@
 
 from pkg_resources import resource_stream
 
+import logging
 import os
 import anthem
-import logging
 from datetime import datetime
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
+from anthem.exceptions import AnthemError
 from ..common import req
 
 _logger = logging.getLogger(__name__)
@@ -513,6 +514,164 @@ def post_import_stock_bins(ctx):
     for family_letter, route in family_map:
         sql_create_routes(family_letter, route)
         sql_create_routes(family_letter, new_route)
+
+
+@anthem.log
+def create_journals(ctx):
+    """ Create the balance' journals """
+    journal = ctx.env['account.journal'].search([
+        ('code', '=', 'MISC')
+    ], limit=1)
+    if not journal:
+        _logger.error('MISC journal not found')
+        return
+
+    supplier_xml_id = '__setup__.account_move_balance_supplier'
+    create_or_update(ctx, 'account.move', supplier_xml_id, {
+        'name': 'Balance fournisseur',
+        'journal_id': journal.id,
+    })
+
+    customer_xml_id = '__setup__.account_move_balance_customer'
+    create_or_update(ctx, 'account.move', customer_xml_id, {
+        'name': 'Balance clients',  # In french for Catherine
+        'journal_id': journal.id,
+    })
+
+
+@anthem.log
+def import_customer_journal_items(ctx):
+    """ Import customer journal items """
+    import_journal_items(ctx, customer=True)
+
+
+@anthem.log
+def import_supplier_journal_items(ctx):
+    """ Import supplier journal items """
+    import_journal_items(ctx, supplier=True)
+
+
+@anthem.log
+def import_journal_items(ctx, customer=False, supplier=False):
+    """ Import Journal Items """
+
+    if customer:
+        file_path = 'data/source/BALclients.csv'
+        move = ctx.env.ref('__setup__.account_move_balance_customer')
+    elif supplier:
+        file_path = 'data/source/BALfournisseurs.csv'
+        move = ctx.env.ref('__setup__.account_move_balance_supplier')
+    else:
+        raise Exception('You cannot start this method without specifying '
+                        'the type of import')
+
+    # This import cannot be executed twice. In this case we skip this import
+    # without raise an error
+    if move.line_ids:
+        _logger.error('This import can only be executed once.'
+                      'Lines are not empty')
+        return
+
+    ctx.env.cr.execute("SELECT code, id FROM account_account")
+    accounts = dict(ctx.env.cr.fetchall())
+
+    check_customer_ref_query = "SELECT id FROM res_partner WHERE ref = %s"
+
+    AccountMoveLine = ctx.env['account.move.line']
+
+    new_header = [
+        'name',
+        'partner_id/.id',
+        'date_maturity',
+        'account_id/.id',
+        'debit',
+        'credit',
+        'move_id/.id'
+    ]
+
+    for content in get_files(req, file_path):
+        header, rows = read_csv(content)
+
+        index_account = header.index('Cpt gen.')
+        index_customer_ref = header.index('Auxiliaire')
+        index_deadline = header.index('Echeance')
+        index_credit = header.index('Credit')
+        index_debit = header.index('Debit')
+        index_num_piece = header.index('n[piece')
+        index_journal = header.index('Jrn')
+
+        new_rows = []
+        for row in rows:
+            customer_ref = row[index_customer_ref]
+            ctx.env.cr.execute(check_customer_ref_query, (customer_ref,))
+            result = ctx.env.cr.fetchone()
+
+            if not result:
+                _logger.error('Customer not found with ref %s' % customer_ref)
+                continue
+            partner_id = result[0]
+
+            # Account
+            account = row[index_account]
+            account_id = accounts[account]
+
+            try:
+                # Deadline
+                deadline_str = row[index_deadline]
+                deadline = datetime.strptime(deadline_str, '%d/%m/%Y')
+                deadline_str = deadline.strftime('%Y-%m-%d')
+            except Exception:
+                deadline_str = datetime.now().strftime('%Y-%m-%d')
+
+            # Debit
+            debit_str = row[index_debit].replace(',', '.')
+            debit = debit_str and float(debit_str) or 0
+
+            # Credit
+            credit_str = row[index_credit].replace(',', '.')
+            credit = credit_str and float(credit_str) or 0
+
+            if (credit * debit != 0) or (credit + debit < 0):
+                _logger.error('Invalid value for credit (%s) and debit (%s)' %
+                              (credit, debit))
+                continue
+
+            num_piece = row[index_num_piece]
+            original_journal = row[index_journal]
+            name = "%s - %s" % (original_journal, num_piece)
+
+            new_rows.append(
+                [name,
+                 partner_id,
+                 deadline_str,
+                 account_id,
+                 debit,
+                 credit,
+                 move.id])
+
+        # Load rows without the method load_rows (we want to set the context)
+        result = AccountMoveLine\
+            .with_context(check_move_validity=False,
+                          tracking_disable=True,
+                          active_test=False,
+                          import_initial_balance=True)\
+            .load(new_header, new_rows)
+        ids = result['ids']
+        if not ids:
+            messages = u'\n'.join(
+                u'- %s' % msg for msg in result['messages']
+            )
+            ctx.log_line(u"Failed to load CSV "
+                         u"in '%s'. Details:\n%s" %
+                         (AccountMoveLine._name, messages))
+            raise AnthemError(u'Could not import CSV. See the logs')
+        else:
+            ctx.log_line(u"Imported %d records in '%s'" %
+                         (len(ids), AccountMoveLine._name))
+
+        # Recompute matched percentage and amount
+        move._compute_matched_percentage()
+        move._amount_compute()
 
 
 @anthem.log

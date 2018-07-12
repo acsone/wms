@@ -9,3 +9,4 @@ from . import res_company
 from . import res_config
 from . import sale_order
 from . import product_product
+from . import account_move_line
