@@ -157,6 +157,8 @@ migration:
           - purchase_cancel_reason
           # oca/connector-interfaces
           - base_import_async
+          #oca/queue
+          - queue_job_cron
           ### local-src
           - account_cutoff_accrual_return
           - account_invoice_tax_required
@@ -381,6 +383,7 @@ migration:
           - db2_import
           - specific_sale
           - specific_product
+          - queue_job_cron
           - connector_esb
       operations:
         post:

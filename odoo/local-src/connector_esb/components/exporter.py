@@ -141,30 +141,6 @@ class ESBWebServiceExporter(AbstractComponent):
         """Can do several actions after exporting a record on the backend"""
         pass
 
-    def _lock(self):
-        """Lock the record.
-
-        Lock the record so we are sure that only one export
-        job is running for this record if concurrent jobs have to export the
-        same record.
-        When concurrent jobs try to export the same record, the first one
-        will lock and proceed, the others will fail to lock and will be
-        retried later.
-        """
-        sql = ("SELECT id FROM %s WHERE ID = %%s FOR UPDATE NOWAIT" %
-               self.model._table)
-        try:
-            self.env.cr.execute(sql, (self.record.id, ),
-                                log_exceptions=False)
-        except psycopg2.OperationalError:
-            _logger.info('A concurrent job is already exporting the same '
-                         'record (%s with id %s). Job delayed later.',
-                         self.model._name, self.record.id)
-            raise RetryableJobError(
-                'A concurrent job is already exporting the same record '
-                '(%s with id %s). The job will be retried later.' %
-                (self.model._name, self.record.id))
-
     def _has_to_skip(self):
         """ Return True if the export can be skipped """
         return False
@@ -238,6 +214,31 @@ class ESBExporterMixin(AbstractComponent):
             ids=records.ids
         )
 
+    def _lock(self, records):
+        """Lock the records.
+
+        Records being modified in a transaction starting before an export and
+        finishing after; may not be picked up by the next export as their
+        write_date (start time of the transaction) would be anterior to the
+        timestamp last export.
+
+        """
+        if not records:
+            return
+        sql = ("SELECT id FROM %s WHERE id in %%s FOR UPDATE NOWAIT" %
+               self.model._table)
+        try:
+            self.env.cr.execute(sql, (tuple(records.ids),),
+                                log_exceptions=False)
+        except psycopg2.OperationalError:
+            _logger.info('The export on (%s with ids %s) could not be done.'
+                         'some locked records prevented the execution.',
+                         self.model._name, records.ids)
+            raise RetryableJobError(
+                'Concurrent access prevented the job to export the records '
+                '(%s with id %s). The job will be retried later.' %
+                (self.model._name, records.ids))
+
     def run(self):
         return NotImplementedError
 
@@ -271,7 +272,8 @@ class ESBCronExporter(AbstractComponent):
         if export_since:
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
-        return self.model.with_context(active_test=False).search(domain)
+        items = self.model.with_context(active_test=False).search(domain)
+        return items
 
     def run(self, export_since=None):
         """ Run the export on a domain
@@ -281,6 +283,7 @@ class ESBCronExporter(AbstractComponent):
 
         """
         records = self.get_items(export_since=export_since)
+        self._lock(records)
         return self._export_items(records)
 
 
@@ -297,6 +300,7 @@ class ESBWebServiceCronExporter(AbstractComponent):
 
         """
         records = self.get_items(export_since=export_since)
+        self._lock(records)
         data = []
         for r in records:
             mapped_record = self.mapper.map_record(r)

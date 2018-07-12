@@ -15,6 +15,8 @@ Unreleased
 
 * ALCN-1104: Add missing translations and remove the module specific_translations
 * ALCN-1452: Add sale order esb_ref (Magento order n°) to the view
+* ALCN-1415: Improve esb export so records being updated while an export is running will not be missed on next export.
+             The scheduled exports to the esb are run with queue_job.
 
 **Bugfixes**
 
