@@ -15,6 +15,8 @@ class WSCreateSaleOrderTestCase(TransactionCase):
     def setUp(self):
         super(WSCreateSaleOrderTestCase, self).setUp()
         self.controller = SaleController()
+        self.fiji = self.env.ref('base.fj')
+        self.fiji.esb_ref = 'fj'
         self.setup_records()
         self.order_data = {
             "increment_id": "INC-ID",
@@ -56,6 +58,10 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.partner_shipping = self.env['res.partner'].create({
             'name': 'John Doe (ship)',
             'type': 'delivery',
+            'street': 'Middle street 2',
+            'city': 'Some Island',
+            'zip': '7492125',
+            'country_id': self.fiji.id,
             'parent_id': self.partner.id,
         })
 

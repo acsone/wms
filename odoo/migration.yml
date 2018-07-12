@@ -380,11 +380,12 @@ migration:
       addons:
         upgrade:
           ### local-src
-          - db2_import
-          - specific_sale
-          - specific_product
-          - queue_job_cron
           - connector_esb
+          - db2_import
+          - specific_partner
+          - specific_product
+          - specific_sale
+          - queue_job_cron
       operations:
         post:
           - anthem songs.upgrade.10_22_2_update::main
