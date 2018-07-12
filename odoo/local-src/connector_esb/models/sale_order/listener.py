@@ -16,6 +16,8 @@ class SaleExportListener(Component):
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_create(self, record, fields=None):
+        if record.state == 'draft':
+            return
         record.with_delay(
             description=self.EXPORT_DESCRIPTION.format(record.name or ''),
             identity_key=identity_exact,
@@ -23,6 +25,8 @@ class SaleExportListener(Component):
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):
+        if record.state == 'draft':
+            return
         if record.env.context.get('_sale_order_create'):
             # export already triggered by the sale order create
             return
@@ -41,6 +45,8 @@ class SaleLineExportListener(Component):
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):
+        if record.order_id.state == 'draft':
+            return
         if (record.env.context.get('_sale_order_create') or
                 record.env.context.get('_sale_order_write')):
             # export already triggered by the sale order write/create
