@@ -44,7 +44,7 @@ class SaleOrder(models.Model):
         order_data['order_line'] = self._ws_create_order_line_data(data)
         order = self.create(order_data)
         order.action_confirm()
-        order.confirmation_date = order.date_order
+        order.confirmation_date = fields.datetime.now()
         return order
 
     def _ws_create_order_data(self, data):
@@ -61,8 +61,9 @@ class SaleOrder(models.Model):
                 'sales_team.salesteam_website_sales').id
         order_data['esb_ref'] = data['increment_id']
         order_data['partner_id'] = partner.id
-        order_data['date_order'] = data['date']
-        order_data['confirmation_date'] = data['date']
+        # We do not use the date coming from the web service because
+        # it does not have a time part
+        order_data['date_order'] = fields.datetime.now()
         order_data['client_order_ref'] = data['order_ref']
         order_data['partner_invoice_id'] = partner.id
         order_data['state'] = 'draft'

@@ -20,6 +20,7 @@ Unreleased
 * ALCN-1442: Sale order in draft state are not to be exported to esb/magento.
 * ALCN-1440: Add some required fields for customer invoicing and delivery addresses, so they can be sent to the ESB.
 * ALCN-1409: For invoice do not save pdf in ir.attachment table if invoice in 'draft'
+* ALCN-1441: On newly created sale order received by the web service, set the current time as the confirmation_date.
 
 **Bugfixes**
 
