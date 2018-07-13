@@ -4,6 +4,10 @@
 
 from odoo.tests.common import TransactionCase, post_install, at_install
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class TestPricelistDiscount(TransactionCase):
 
@@ -345,6 +349,25 @@ class TestPricelistDiscount(TransactionCase):
         self.assertEqual(100, line1.price_unit)
         self.assertEqual(10, line1.discount2)
         self.assertEqual(0, line1.discount3)
+        if line1.price_subtotal != 90:
+            _logger.info(
+                """=======Mythic bug is back this is a debug info======="""
+            )
+            _logger.info(
+                """price_unit: {}
+                price_subtotal: {}
+                price_total: {},
+                discount: {}
+                discount2: {},
+                discount3: {}""".format(
+                    line1.price_unit,
+                    line1.price_subtotal,
+                    line1.price_total,
+                    line1.discount,
+                    line1.discount2,
+                    line1.discount3,
+                ))
+            _logger.info("""=======End of debug info=======""")
         self.assertEqual(90, line1.price_subtotal)
 
         line2 = invoice.invoice_line_ids.filtered(
