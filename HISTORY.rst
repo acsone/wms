@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.2 (2018-07-16)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCN-1073: import claims from DB2
@@ -35,8 +47,6 @@ Unreleased
 * Upgrade Dockerimage to 2.6.1
 * Update from odoo-template
 * Upgrade nginx to X-1.3.0
-
-**Documentation**
 
 
 10.22.1 (2018-07-04)
