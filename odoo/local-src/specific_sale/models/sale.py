@@ -215,7 +215,7 @@ class SaleOrderLine(models.Model):
                         ('priority', '<',  order_line_stock_move.priority),
                         '&',
                         ('priority', '=', order_line_stock_move.priority),
-                        ('date_expected', '>', stock_move_date_expected),
+                        ('date_expected', '>=', stock_move_date_expected),
                     ])
                     next_quantities = sum(
                         move.product_uom_qty for move in next_stock_moves
