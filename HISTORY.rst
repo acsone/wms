@@ -13,6 +13,7 @@ Unreleased
 **Bugfixes**
 
 * ALCN-1454: Fix delivery rounds plan generation error
+* ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
 
 **Build**
 
