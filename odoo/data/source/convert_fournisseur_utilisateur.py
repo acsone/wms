@@ -5,6 +5,7 @@ FILE_NAME_IN = 'FOURNISSEUR_UTILISATEUR.csv'
 FILE_NAME_OUT = '../install/supplier_add_data.csv'
 DELIMITER = ','
 QUOTECHAR = '"'
+BACKUP_RESPONSIBLE = '__setup__.res_user_fmichiels'
 
 ODOO_FIELD_PURCHASE_MANAGER = 'purchase_manager_id'
 
@@ -50,7 +51,8 @@ class Converter:
                     supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = \
                         USERS_MAPPING[purchase_manager]
                 else:
-                    supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = None
+                    supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = \
+                        BACKUP_RESPONSIBLE
 
                 for field_day in DAYS_MAPPING.values():
                     day_value = line[getattr(self, field_day)]

@@ -417,3 +417,8 @@ migration:
       operations:
         post:
           - anthem songs.install.product::disable_quickcreate
+      modes:
+        full:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_add_data.csv
