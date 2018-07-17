@@ -14,6 +14,7 @@ Unreleased
 
 * ALCN-1454: Fix delivery rounds plan generation error
 * ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
+* ALCN-1458: Reception: cannot process products without lot + life date is not reset
 
 **Build**
 

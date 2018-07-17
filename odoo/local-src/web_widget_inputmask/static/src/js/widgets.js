@@ -40,7 +40,10 @@ odoo.define('web.inputmask_widgets', function (require) {
                 this.$el.inputmask(this.maskType);
         },
         is_syntax_valid: function() {
-            return !_.contains(this.$input.val(), '_');
+            if (this.$input) {
+                return !_.contains(this.$input.val(), '_');
+            }
+            return true;
         },
     };
 
