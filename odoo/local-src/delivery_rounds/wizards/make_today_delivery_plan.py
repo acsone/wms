@@ -34,19 +34,21 @@ class MakeTodayDeliveryPlan(models.TransientModel):
         instances = round_instance.search([
             ('date', '=', execution_date)],
             order='template_id')
-        instances_by_template = groupby(
-            instances, key=lambda r: r.template_id)
+        instances_by_template = dict(groupby(
+            instances, key=lambda r: r.template_id))
         for template in templates:
             if template in instances_by_template:
-                instance = instances_by_template.pop(template)
-                if instance.state == 'pending':
-                    instance.state = 'draft'
-                if (not instance.time_picking_planned or
-                        not instance.time_leave_planned):
-                    instance.write({
-                        'time_picking_planned': template.time_picking_planned,
-                        'time_leave_planned': template.time_leave_planned,
-                        })
+                for instance in instances_by_template.pop(template):
+                    if instance.state == 'pending':
+                        instance.state = 'draft'
+                    if (not instance.time_picking_planned or
+                            not instance.time_leave_planned):
+                        instance.write({
+                            'time_picking_planned':
+                                template.time_picking_planned,
+                            'time_leave_planned':
+                                template.time_leave_planned,
+                            })
             else:
                 round_instance.create({
                     'template_id': template.id,
