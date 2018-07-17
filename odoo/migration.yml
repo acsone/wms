@@ -412,13 +412,13 @@ migration:
           - delivery_rounds
           - specific_purchase
           - specific_report
-          - stock_picking_backorder
-          - website_purchase_review
           - specific_sale
           - specific_stock
           - stock_expired
+          - stock_picking_backorder
           - stock_production_lot_expired_dates
           - stock_receive_lot
+          - website_purchase_review
       operations:
         post:
           - anthem songs.install.product::disable_quickcreate

@@ -9,6 +9,7 @@
                 <group>
                     <field name="type"/>
                     <field name="supplier_ids" attrs="{'invisible': [('type', '!=', 'by_suppliers')]}" widget="many2many_tags" options="{'no_create':True}"/>
+                    <field name="is_not_recompute_promos"/>
                 </group>
                 <div attrs="{'invisible': [('type', '!=', 'by_days')]}">
                     <h3>WARNING - You will generate procurement order by days. This process can take a very long time.</h3>

@@ -27,6 +27,7 @@
         "views/product_state.xml",
         "views/product_supplierinfo.xml",
         "views/email_template.xml",
+        "views/ir_ui_menu.xml",
 
         # Data
         "data/product_state.xml",
