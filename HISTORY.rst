@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCN-1355: Block product quick create
+
 **Bugfixes**
 
 **Build**

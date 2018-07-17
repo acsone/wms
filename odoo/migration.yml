@@ -401,3 +401,11 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_clients /opt/odoo/data/install/customer.csv
               - anthem songs.install.accounting::activate_check_on_vat
+    - version: 10.22.3
+      addons:
+        upgrade:
+          ### OCA external-src/server-tools
+          - base_optional_quick_create
+      operations:
+        post:
+          - anthem songs.install.product::disable_quickcreate
