@@ -280,6 +280,14 @@ $ docker-compose run --rm odoo psql -l
 And you can work as you want on any of them by changing the `DB_NAME`.
 
 
+### Extra dev docker composition
+
+You might want to customize your docker composition like adding a container or setting specific ports.
+For this use `docker-compose.override.yml` file which will always be loaded unless `-f` option of docker-compose
+is used.
+
+
+
 ### Extra dev packages
 
 You might want to use additional python packages while developing (eg: pdbpp, ipdb, etc).
