@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCN-1454: Fix delivery rounds plan generation error
+
 **Build**
 
 **Documentation**
