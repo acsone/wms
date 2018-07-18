@@ -54,8 +54,15 @@ def setup_product_default_code_sequence(ctx):
 
 
 @anthem.log
+def disable_quickcreate(ctx):
+    """ Prevent quick create of product """
+    ctx.env.ref('product.model_product_product').avoid_quick_create = True
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
     import_accounting_products(ctx)
     zero_digits_for_uom(ctx)
+    disable_quickcreate(ctx)
