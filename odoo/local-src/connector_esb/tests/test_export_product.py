@@ -2,6 +2,8 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import os
+
 from odoo import tools
 from .common import ESBXMLTestCase
 
@@ -248,6 +250,7 @@ class ExportProductTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter')
             respath = exporter.run(records)
+            self.addCleanup(os.remove, respath)
         with open(respath, 'r') as result_file:
             result = result_file.read()
         self.assertXmlEquivalentData(
