@@ -2,6 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import os
 import zipfile
 
 from .common import ESBXMLTestCase
@@ -50,6 +51,7 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             respath = exporter.run()
+            self.addCleanup(os.remove, respath)
         self.assertTrue(zipfile.is_zipfile(respath))
         with zipfile.ZipFile(respath, 'r') as zf:
             namelist = zf.namelist()
