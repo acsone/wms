@@ -15,6 +15,7 @@ Unreleased
 * ALCN-1454: Fix delivery rounds plan generation error
 * ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
 * ALCN-1458: Reception: cannot process products without lot + life date is not reset
+* ALCN-1413: On client: name_get itinerary: include tags + align colors between tags and kanban
 
 **Build**
 
@@ -195,9 +196,6 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
-
-**Bugfixes**
-* Revert ALCN-1153: Set standard buying price in product cost field
 
 **Bugfixes**
 

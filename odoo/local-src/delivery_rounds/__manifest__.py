@@ -34,6 +34,8 @@
         'wizards/instance_itinerary_import.xml',
         'wizards/make_today_delivery_plan.xml',
         'wizards/picking_assign_delivery_round.xml',
+        # Static
+        'views/style.xml',
     ],
     'installable': True,
     'auto_install': False,

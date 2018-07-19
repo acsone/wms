@@ -406,6 +406,7 @@ migration:
           ### OCA external-src/server-tools
           - base_optional_quick_create
           ### local-src
+          - delivery_rounds
           - stock_picking_backorder
       operations:
         post:

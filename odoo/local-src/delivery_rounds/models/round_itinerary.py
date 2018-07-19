@@ -75,5 +75,8 @@ class RoundItineraryPosition(models.Model):
         result = []
         for rec in self:
             code = rec.itinerary_id.code
+            tags = ','.join(rec.tag_ids.mapped('name'))
+            if tags:
+                code += ' (%s)' % tags
             result.append((rec.id, code))
         return result
