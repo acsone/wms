@@ -69,6 +69,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.location_dest_id = False
         if not self.lot_required:
             self.life_date = False
+            self.life_date_char = False
             self.lot_name = False
 
     location_op_dest_id = fields.Many2one(
@@ -253,6 +254,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.qty = False
         self.lot_id = False  # ensure we don't modify lot on next lines
         self.life_date = False
+        self.life_date_char = False
         self.lot_name = False
 
     @api.multi
