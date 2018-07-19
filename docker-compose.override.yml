@@ -7,11 +7,6 @@ version: '2'
 services:
   odoo:
     command: odoo --load="web,queue_job"
-    tty: true
-    stdin_open: true
-    ports:
-      - 8069
-      - 8072
     volumes:
       - "data-odoo-db-cache:/opt/odoo/.cache/db"
       - "data-odoo-pytest-cache:/opt/odoo/.cache/pytest"

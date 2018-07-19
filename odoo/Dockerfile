@@ -45,7 +45,7 @@ COPY ./bin/importer.sh bin/
 COPY ./bin/install_cloud_platform.sh bin/
 COPY ./bin/csv-split.py bin/
 
-# Copy custom runtests file
+# Custom runtests and migration
 COPY ./bin/runtests odoo/bin/
 COPY ./bin/runmigration odoo/bin/
 COPY ./bin/list_dependencies.py odoo/bin/
