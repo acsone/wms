@@ -48,6 +48,8 @@ Unreleased
 
 * ALCN-1418: Fix for the infamous 10 != 8 bug in tests
 * ALCN-1452: Fix bug with AddressId in customer address export
+* ALCN-1419: potential fix for the 90 != 100 bug,
+  if returns i added  debug info to test
 
 **Build**
 

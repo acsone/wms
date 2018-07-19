@@ -39,7 +39,7 @@
 	url = git@github.com:oca/report-print-send.git
 [submodule "odoo/external-src/sale-workflow"]
 	path = odoo/external-src/sale-workflow
-	url = git@github.com:oca/sale-workflow.git
+	url = git@github.com:camptocamp/sale-workflow.git
 [submodule "odoo/external-src/server-tools"]
 	path = odoo/external-src/server-tools
 	url = git@github.com:oca/server-tools.git

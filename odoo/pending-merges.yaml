@@ -59,3 +59,12 @@
     # [10.0] web_notify: interactive notifications
     - oca refs/pull/970/head
   target: *default_target
+./external-src/sale-workflow:
+  remotes:
+    oca: git@github.com:oca/sale-workflow.git
+    camptocamp: git@github.com:camptocamp/sale-workflow.git
+  merges:
+    - oca 10.0
+      # potential fix for 90 != 100 bug in tests
+    - oca refs/pull/671/head
+  target: *default_target

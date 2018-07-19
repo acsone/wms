@@ -403,6 +403,9 @@ migration:
     - version: 10.22.3
       addons:
         upgrade:
+          ### OCA external-src/sale-workflow
+          - sale_exception
+          - sale_triple_discount
           ### OCA external-src/server-tools
           - base_optional_quick_create
           ### local-src
