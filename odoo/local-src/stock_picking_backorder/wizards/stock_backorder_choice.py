@@ -38,8 +38,7 @@ class StockBackorderChoice(models.TransientModel):
         ondelete='cascade',
     )
     helpdesk_ticket_description = fields.Char(
-        string='Helpdesk ticket description',
-        required=True,
+        string='Helpdesk ticket description'
     )
 
     def _get_helpdesk_ticket_values(self):

@@ -405,6 +405,8 @@ migration:
         upgrade:
           ### OCA external-src/server-tools
           - base_optional_quick_create
+          ### local-src
+          - stock_picking_backorder
       operations:
         post:
           - anthem songs.install.product::disable_quickcreate
