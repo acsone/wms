@@ -177,3 +177,12 @@ class ExportSaleOrderTestCase(SavepointCase):
             exporter = work.component(usage='record.exporter')
             exporter.run(self.so1)
         post.assert_called_once()
+
+    def test_mapper_state_in_confirm_background(self):
+        """ Check status sent for sale order being confirmed in background."""
+        so = self.so1
+        so.state = 'confirm_background'
+        with self.backend.work_on(self.model._name) as work:
+            mapper = work.component(usage='export.mapper')
+            values = mapper.map_record(so).values()
+        self.assertEqual(values['status'], 'processing')

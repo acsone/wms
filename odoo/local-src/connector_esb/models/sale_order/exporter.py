@@ -71,7 +71,7 @@ class SaleExportMapper(Component):
         status = ''
         if record.state == 'cancel':
             status = 'canceled'
-        elif record.state in ['draft', 'sale', 'sent']:
+        elif record.state in ['draft', 'sale', 'sent', 'confirm_background']:
             status = 'processing'
             partial = record.order_line.filtered(lambda r: r.qty_delivered > 0)
             if len(partial) > 0:
