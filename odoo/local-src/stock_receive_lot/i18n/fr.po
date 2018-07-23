@@ -42,8 +42,8 @@ msgstr "Afficher le nom"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_life_date
-msgid "End of Life Date"
-msgstr "Date limite de consommation"
+msgid "Expiration date"
+msgstr "Date de péremption"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_id

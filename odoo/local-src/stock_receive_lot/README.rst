@@ -6,9 +6,9 @@
 Stock Receive Lot
 =================
 
-Add a new reception wizard to more easily encode destination, lot and life date.
+Add a new reception wizard to more easily encode destination, lot and expiration date.
 
-Also improve the standard lot reception wizard to allow to set life date.
+Also improve the standard lot reception wizard to allow to set expiration date.
 
 Check if the removal date is not expired when we receive a lot.
 

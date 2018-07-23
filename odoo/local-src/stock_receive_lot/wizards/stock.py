@@ -123,7 +123,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                     'expected remaining quantity')}}
 
     life_date_char = fields.Char(
-        string='End of Life Date (input)')
+        string='Expiration date (input)')
 
     @api.onchange('life_date_char')
     def _onchange_life_date_char(self):
@@ -141,7 +141,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             method(self)
 
     life_date = fields.Datetime(
-        string='End of Life Date')
+        string='Expiration date')
 
     @api.onchange('life_date')
     def _onchange_life_date(self):

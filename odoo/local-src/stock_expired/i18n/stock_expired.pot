@@ -44,7 +44,7 @@ msgstr ""
 
 #. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_quant_life_date
-msgid "End of Life Date"
+msgid "Expiration date"
 msgstr ""
 
 #. module: stock_expired

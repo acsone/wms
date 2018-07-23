@@ -222,7 +222,7 @@ class Itempick(DomainInterface):
                 'sourceLCCD': location.get_checksum(),
             })
 
-            # Send 5 first lots for this products (ordered by life date)
+            # Send 5 first lots for this products (ordered by expiration date)
             lots = self.request.env['stock.production.lot'].sudo(self._user)\
                 .search([('product_id', '=', product.id),
                          ('is_archived', '=', False)

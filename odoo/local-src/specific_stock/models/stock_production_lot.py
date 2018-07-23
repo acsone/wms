@@ -12,7 +12,7 @@ class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     life_date = fields.Datetime(
-        string='End of Life Date',
+        string='Expiration Date',
         required=True,
     )
     is_archived = fields.Boolean('Archived', default=False, readonly=True)
@@ -200,7 +200,7 @@ class StockProductionLot(models.Model):
 
         We archive a lot if and only if:
         - There are no more products in this lot
-        - There is a new lot (with a higher life date) for this product
+        - There is a new lot (with a higher expiration date) for this product
         :return:
         """
         location_customers = self.env.ref('stock.stock_location_customers')

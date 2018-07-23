@@ -56,8 +56,8 @@ msgstr "Date limite d'utilisation optimale"
 
 #. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_quant_life_date
-msgid "End of Life Date"
-msgstr "Date limite de consommation"
+msgid "Expiration date"
+msgstr "Date de péremption"
 
 #. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_location_ignore_quants_expiration

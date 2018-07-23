@@ -17,7 +17,7 @@ class StockConfig(models.TransientModel):
     def _selection_production_lot_base_date(self):
         return [
             ('use', _('Use date')),
-            ('life', _('Life date')),
+            ('life', _('Expiration date')),
             ('alert', _('Alert date')),
             ('removal', _('Removal date')),
         ]
