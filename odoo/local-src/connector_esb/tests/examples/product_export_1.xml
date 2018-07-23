@@ -77,6 +77,8 @@
       <ALH>False</ALH>
       <!-- price_categ_id -->
       <IMP>False</IMP>
+      <!-- Prodcut deconditionable -->
+      <Gescov>0</Gescov>
     </Row>
     <Row>
       <!-- barcode -->
@@ -155,6 +157,8 @@
       <ALH>False</ALH>
       <!-- price_categ_id -->
       <IMP>False</IMP>
+      <!-- Prodcut deconditionable -->
+      <Gescov>0</Gescov>
     </Row>
     <Row>
       <!-- barcode -->
@@ -233,6 +237,7 @@
       <ALH>True</ALH>
       <!-- price_categ_id -->
       <IMP>False</IMP>
+      <Gescov>0</Gescov>
     </Row>
   </Root>
 </ROOT>

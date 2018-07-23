@@ -72,6 +72,11 @@ class ProductExportMapper(Component):
         return values
 
     @mapping
+    def temporary_fixed_field(self, record):
+        """ This is to help testing before resolution of ALCN-1456."""
+        return {'Gescov': 0}
+
+    @mapping
     def group_and_subgroup(self, record):
         """The group and sub group of the product.
 

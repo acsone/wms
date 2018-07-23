@@ -17,6 +17,7 @@ Unreleased
 * ALCN-1435: Change the color for product in BO in the view tree of purchase order and in the view purchase review
 * Update users list with new groups assignment
 * Define the default purchase manager for ZelAppro import
+* ALCN-1456: Add field Gescov with a fixed value to allow for testing while waiting for a resolution for this issue (product ESB).
 
 **Bugfixes**
 

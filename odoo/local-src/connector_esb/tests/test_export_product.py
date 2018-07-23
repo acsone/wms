@@ -232,6 +232,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Cp2z17': 0,
             'Cp2z19': 0,
             'Cplz14': 'medicament',
+            'Gescov': 0,
         }
         rec = self.all_records[0]
         with self.backend.work_on(self.model._name,
