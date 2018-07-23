@@ -339,7 +339,8 @@ class Assignment(DomainInterface):
                               ON sil.inventory_id = si.id
                           WHERE si.state = 'confirm'
                           AND sil.location_id = report.location_id)
-        %s
+            AND report.reservation_id IS NULL
+            %s
         ORDER BY report.refill_priority
         LIMIT 1
         """ % zone_condition
@@ -467,7 +468,8 @@ class Assignment(DomainInterface):
                               ON sil.inventory_id = si.id
                           WHERE si.state = 'confirm'
                           AND sil.product_id = report.product_id)
-        %s
+            AND report.reservation_id IS NULL
+            %s
         ORDER BY refill_priority
         LIMIT 1;
         """ % zone_condition

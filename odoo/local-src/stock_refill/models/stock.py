@@ -41,8 +41,7 @@ class ReportStockQuantBylocation(models.Model):
         d['select'] += ", product.priority_arrangement as refill_priority"
         d['join'] += (" LEFT JOIN stock_location as location "
                       " ON quant.location_id = location.id ")
-        d['where'] += " AND location.kind = 'parking'" \
-                      " AND quant.reservation_id IS NULL "
+        d['where'] += " AND location.kind = 'parking'"
         d['groupby'] += ",priority_arrangement"
         return d
 
@@ -87,8 +86,7 @@ class ReportStockQuantBylocationReserve(models.Model):
                       " ON quant.location_id = location.id "
                       " LEFT JOIN stock_production_lot as lot "
                       " ON quant.lot_id = lot.id ")
-        d['where'] += " AND location.kind = 'reserve'" \
-                      " AND quant.reservation_id IS NULL "
+        d['where'] += " AND location.kind = 'reserve'"
         d['groupby'] += ", product.priority_reassort, lot.removal_date"
         return d
 

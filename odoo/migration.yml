@@ -418,6 +418,7 @@ migration:
           - stock_picking_backorder
           - stock_production_lot_expired_dates
           - stock_receive_lot
+          - stock_refill
           - website_purchase_review
       operations:
         post:

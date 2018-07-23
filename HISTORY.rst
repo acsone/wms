@@ -29,6 +29,7 @@ Unreleased
 * ALCN-1406: Internal Transfer: Do not compute product putaway on fixed location otherwise destination is always product's locator
 * ALCN-1448: Rename "End of Life" by "Expiration date" and display lots in a product
 * ALCN-1444: Compute promotion when the procurement is running
+* ALCN-827: Do not exclude reserved quants from views. Exclude in Zetes.
 
 **Build**
 
@@ -211,6 +212,9 @@ Unreleased
 * ALCN-1364: Add exception rule to prevent SO lines with negative value
 * Change date widget in reception screen (remove calendar popup and apply mask)
 * Reactivate backorder reasons at reception and helpdesk ticket generation
+
+**Bugfixes**
+* Revert ALCN-1153: Set standard buying price in product cost field
 
 **Bugfixes**
 
