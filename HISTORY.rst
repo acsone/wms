@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.3 (2018-07-23)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCN-1355: Block product quick create
 * ALCN-1407: Add product stock synchronization when state is changed (ESB).
              The export of stock status to the ESB is scheduled by cron and based on
@@ -15,26 +27,22 @@ Unreleased
              as well and then not always updated. Here we add a realtime export when
              a product state has been changed.
 * ALCN-1435: Change the color for product in BO in the view tree of purchase order and in the view purchase review
+* ALCN-1456: Add field Gescov with a fixed value to allow for testing while waiting for a resolution for this issue (product ESB).
 * Update users list with new groups assignment
 * Define the default purchase manager for ZelAppro import
-* ALCN-1456: Add field Gescov with a fixed value to allow for testing while waiting for a resolution for this issue (product ESB).
 
 **Bugfixes**
 
-* ALCN-1454: Fix delivery rounds plan generation error
-* ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
-* ALCN-1458: Reception: cannot process products without lot + life date is not reset
-* ALCN-1413: On client: name_get itinerary: include tags + align colors between tags and kanban
-* ALCN-1461: In product price xml send Msrp node even when equal to zero (ESB).
-* ALCN-1455: Fix new sale order exported with status empty in xml (ESB)
-* ALCN-1406: Internal Transfer: Do not compute product putaway on fixed location otherwise destination is always product's locator
-* ALCN-1448: Rename "End of Life" by "Expiration date" and display lots in a product
-* ALCN-1444: Compute promotion when the procurement is running
 * ALCN-827: Do not exclude reserved quants from views. Exclude in Zetes.
-
-**Build**
-
-**Documentation**
+* ALCN-1406: Internal Transfer: Do not compute product putaway on fixed location otherwise destination is always product's locator
+* ALCN-1413: On client: name_get itinerary: include tags + align colors between tags and kanban
+* ALCN-1444: Compute promotion when the procurement is running
+* ALCN-1448: Rename "End of Life" by "Expiration date" and display lots in a product
+* ALCN-1454: Fix delivery rounds plan generation error
+* ALCN-1455: Fix new sale order exported with status empty in xml (ESB)
+* ALCN-1458: Reception: cannot process products without lot + life date is not reset
+* ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
+* ALCN-1461: In product price xml send Msrp node even when equal to zero (ESB).
 
 
 10.22.2 (2018-07-17)
