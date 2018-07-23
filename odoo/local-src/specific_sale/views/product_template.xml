@@ -6,11 +6,22 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="priority">25</field>
         <field name="arch" type="xml">
 
             <button name="%(stock.product_open_quants)d" position="attributes">
                 <attribute name="invisible">True</attribute>
             </button>
+
+            <xpath expr="//group[@name='stock_bins']/field[@name='stock_bin_ids']" position="before">
+                <field name="lot_ids" attrs="{'invisible': [('tracking', '!=', 'lot')]}" nolabel="1">
+                    <tree>
+                        <field name="name"/>
+                        <field name="ref"/>
+                        <field name="life_date"/>
+                    </tree>
+                </field>
+            </xpath>
 
         </field>
     </record>

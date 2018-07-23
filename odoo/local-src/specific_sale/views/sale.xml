@@ -22,6 +22,10 @@
                 <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
             </field>
 
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="after">
+                <field name="older_lot_life_date"/>
+            </xpath>
+
             <xpath expr="//field[@name='order_line']/form//label[@for='qty_delivered']" position="before">
                 <field name="product_qty_unavailable"/>
             </xpath>

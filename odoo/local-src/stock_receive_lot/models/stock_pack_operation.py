@@ -11,7 +11,7 @@ class StockPackOperationLot(models.Model):
     _inherit = 'stock.pack.operation.lot'
 
     life_date = fields.Datetime(
-        string='End of Life Date')
+        string='Expiration date')
     is_removal_date_expired = fields.Boolean(
         'Removal date', compute='_get_is_removal_date_expired')
 

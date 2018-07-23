@@ -39,6 +39,32 @@ class ProductProduct(models.Model):
         compute='_sales_count'
     )
 
+    older_lot_id = fields.Many2one(
+        'stock.production.lot',
+        string='Older lot',
+        compute='_compute_older_lot_id'
+    )
+
+    def _compute_older_lot_id(self):
+        get_lot_query = """
+        SELECT lot.id
+        FROM stock_production_lot AS lot
+        WHERE lot.product_id = %s
+        AND lot.is_archived = FALSE
+        AND EXISTS (SELECT 1 FROM stock_quant AS quant
+                    WHERE quant.lot_id = lot.id
+                    AND quant.qty > 0)
+        ORDER BY lot.life_date
+        LIMIT 1;
+        """
+
+        for product in self:
+            self.env.cr.execute(get_lot_query, (product.id, ))
+            result = self.env.cr.fetchone()
+
+            if result:
+                product.older_lot_id = result[0]
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
@@ -46,6 +72,25 @@ class ProductTemplate(models.Model):
     sale_lines_count = fields.Integer(
         compute='_compute_sale_lines_count'
     )
+
+    lot_ids = fields.Many2many(
+        'stock.production.lot',
+        string='Lots',
+        compute='_compute_lot_ids',
+        readonly=True
+    )
+
+    def _compute_lot_ids(self):
+        StockProductionLot = self.env['stock.production.lot']
+
+        for product_tmpl in self:
+            products = product_tmpl.product_variant_ids
+            lots = StockProductionLot.search([
+                ('product_id', 'in', products.ids),
+                ('is_archived', '=', False)],
+                order='life_date'
+            )
+            product_tmpl.lot_ids = [(6, 0, lots.ids)]
 
     @api.multi
     @api.depends('product_variant_ids.sales_count')

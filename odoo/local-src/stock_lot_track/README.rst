@@ -6,7 +6,7 @@ Track change on following fields:
 - Product
 - Best before Date
 - Removal Date
-- End of Life Date
+- Expiration date
 - Alert Date
 
 Installation

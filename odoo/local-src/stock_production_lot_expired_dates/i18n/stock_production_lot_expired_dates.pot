@@ -29,7 +29,7 @@ msgstr ""
 #. module: stock_production_lot_expired_dates
 #: code:addons/stock_production_lot_expired_dates/models/stock_config.py:20
 #, python-format
-msgid "Life date"
+msgid "Expiration date"
 msgstr ""
 
 #. module: stock_production_lot_expired_dates
