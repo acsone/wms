@@ -526,6 +526,11 @@ class CustomerMapper(EntityMapper):
             'clireg',
             mapping=mappings.PARTNER_INVOICING_TYPE
         ),
+        FieldMapper(
+            'invoice_sending_method',
+            'cpcl10',
+            mapping=mappings.CLIENT_SENDING_METHOD,
+        ),
 
         'company_type', 'phone_numbers', 'product_pricelist',
         'customer_categories', 'pharmacist',

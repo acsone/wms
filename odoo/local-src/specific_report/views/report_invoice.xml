@@ -303,6 +303,7 @@
                 <t t-set="invoice" t-value="invoice.with_context({'lang': invoice.partner_id.lang})"/>
                 <t t-set="partner" t-value="invoice.partner_id"/>
 
+                <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
                 <div class="header">
                     <div style="position: fixed; left: 0; top: 420px;">_</div>
 	                <div style="position: fixed; right: 0; top: 420px;">_</div>
@@ -330,6 +331,7 @@
                                 <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
                                 <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
                             </div>
+                            <div t-if="duplicata">DUPLICATA</div>
                         </div>
                     </div>
                 </div>
@@ -337,6 +339,7 @@
                 <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
 
                 <t t-call="specific_report.page_number_footer"/>
+                </t>
             </t>
         </t>
     </template>

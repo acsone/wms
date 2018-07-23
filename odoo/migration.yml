@@ -380,6 +380,7 @@ migration:
       addons:
         upgrade:
           ### local-src
+          - account_invoice_sent
           - connector_esb
           - db2_import
           - specific_partner
@@ -388,6 +389,7 @@ migration:
           - queue_job_cron
           - connector_esb
           - specific_account
+          - specific_report
       operations:
         post:
           - anthem songs.upgrade.10_22_2_update::main
@@ -427,4 +429,7 @@ migration:
         full:
           operations:
             post:
+              - anthem songs.upgrade.common::deactivate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_add_data.csv
+              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
+              - anthem songs.install.accounting::activate_check_on_vat

@@ -45,8 +45,11 @@ Unreleased
 * ALCN-1417: moved sale line unavailable functionality to the basic sale lines view
 * ALCN-1277: Import invoice frequency and invoice type from DB2
 * ALCN-1400: Delay a job to create when a picking is validated (only for partner invoiced by delivery)
+* ALCN-1278: Import customer invoice sending method
 
 **Features and Improvements**
+* ALCN-1278: Invoice sending method
+* ALCN-1400: Invoice copies. Allow to generate multiple copies of the invoice in the pdf.
 
 * ALCN-1104: Add missing translations and remove the module specific_translations
 * ALCN-1452: Add sale order esb_ref (Magento order n°) to the view

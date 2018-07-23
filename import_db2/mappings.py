@@ -456,6 +456,11 @@ CLIENT_PAYMENT_MODES = {
     32: '__setup__.account_payment_mode_1',
 }
 
+CLIENT_SENDING_METHOD = {
+    'Y': 'email',
+    'N': 'letter',
+}
+
 PRODUCT_TRACKING = {
     0: 'none',
     1: 'lot',

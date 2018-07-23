@@ -20,6 +20,7 @@
         'l10n_be_invoice_bba',
         'specific_data',
         'queue_job',
+        'account_invoice_sent',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

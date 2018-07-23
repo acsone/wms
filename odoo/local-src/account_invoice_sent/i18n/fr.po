@@ -1,0 +1,192 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * account_invoice_sent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-05 15:22+0000\n"
+"PO-Revision-Date: 2018-06-05 15:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "<strong>Please select operation...</strong>"
+msgstr "<strong>Veuillez choisir l'opération...</strong>"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Based on partner invoice sending method, either print or send by email. Also mark as sent"
+msgstr "Basé sur la méthode d'envoi définie sur le partenaire, soit imprimer ou email. Marque aussi comme envoyé"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_email
+msgid "By email"
+msgstr "Par email"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: selection:res.partner,invoice_sending_method:0
+msgid "Email"
+msgstr "Courriel"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_email_missing
+msgid "Email address missing"
+msgstr "Adresse email manquante"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,help:account_invoice_sent.field_account_invoice_sent_email_copy
+msgid "For printed documents"
+msgstr "Pour les document imprimés"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_invoice_sent
+#: model:ir.model,name:account_invoice_sent.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner_invoice_sending_method
+#: model:ir.model.fields,field_description:account_invoice_sent.field_res_users_invoice_sending_method
+msgid "Invoice sending method"
+msgstr "Méthode d'envoi de facture"
+
+#. module: account_invoice_sent
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:67
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:94
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:115
+#, python-format
+msgid "Invoice sent"
+msgstr "Facture envoyée"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Invoices Mass Sending"
+msgstr "Envoi en masse de factures"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_invoice_sent
+#: selection:res.partner,invoice_sending_method:0
+msgid "Letter"
+msgstr "Lettre"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Mark as sent"
+msgstr "Marquer comme envoyé"
+
+#. module: account_invoice_sent
+#: model:ir.actions.act_window,name:account_invoice_sent.action_account_invoice_sent
+msgid "Mass Sending"
+msgstr "Envoi de masse"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Only mark as sent without sending anything"
+msgstr "Uniquement marquer comme envoyé sans rien envoyer"
+
+#. module: account_invoice_sent
+#: model:ir.model,name:account_invoice_sent.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Print + Email"
+msgstr "Imprimer + Email"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Print invoices for partners having an invoice sending method 'letter'. Also mark as sent"
+msgstr "Imprimer les factures des partenaires ayant 'Lettre' comme méthode d'envoi. Marque aussi comme envoyé"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "Send by email invoices for partners having an invoice sending method 'email'. Also mark as sent"
+msgstr "Envoie par email les factures des partenaires ayant 'Email' comme méthode d'envoi. Marque aussi comme envoyé"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_email_copy
+msgid "Send copy by email"
+msgstr "Envoyer une copie par email"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sending_method
+msgid "Sending Method"
+msgstr "Métode d'envoi"
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_print
+msgid "To print"
+msgstr "A imprimer"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
+msgid "Unsent"
+msgstr "Non-Envoyé"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
+msgid "Unsent Proforma/Open/Paid Invoices"
+msgstr "Non-Envoyé Proforma/Ouvert/Payé"
+
+#. module: account_invoice_sent
+#: model:ir.model,name:account_invoice_sent.model_account_invoice_sent
+msgid "account.invoice.sent"
+msgstr "account.invoice.sent"
+
+#. module: account_invoice_sent
+#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid "or"
+msgstr "ou"
+
