@@ -6,6 +6,8 @@ import psycopg2
 
 from odoo import _, api, exceptions, fields, models
 
+from odoo.addons.component.exception import NoComponentError
+
 
 class ESBBackendTimestamp(models.Model):
     _name = 'esb.backend.timestamp'
@@ -34,7 +36,9 @@ class ESBBackendTimestamp(models.Model):
                     'special.promotion',
                     'buyx.gety',
                     'documents',
-                    'stock.update']],
+                    'stock.update',
+                    'stock.update.single',
+                    ]],
         string='Kind of export',
         readonly=True,
     )
@@ -63,7 +67,11 @@ class ESBBackendTimestamp(models.Model):
         self._lock_timestamp()
         next_last_export = fields.Datetime.now()
         with self.backend_id.work_on(self.model, timestamp=self) as work:
-            exporter = work.component(usage='record.exporter.cron')
+            try:
+                exporter = work.component(usage='record.exporter.cron')
+            except NoComponentError:
+                raise exceptions.UserError(
+                    _('This export can not be triggered manually.'))
             exporter.run(export_since=self.last_export)
         self.last_export = next_last_export
 
