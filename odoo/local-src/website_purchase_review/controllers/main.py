@@ -64,6 +64,7 @@ class PurchaseReview(Home):
             'amount_untaxed': po.amount_untaxed,
             'is_confirmed_line': False,
             'is_existing_line': False,
+            'return_url': po.get_url(),
         }
 
         if po.date_planned_overwrite:
@@ -100,7 +101,6 @@ class PurchaseReview(Home):
                 'date_planned': fields.Date.to_string(date_planned),
                 'is_existing_line': True,
                 'is_confirmed_line': po_line.is_confirmed_line,
-                'return_url': po.get_url(),
             })
         else:
             seller = product._select_seller(partner_id=po.partner_id)

@@ -41,6 +41,14 @@
                 <field name="discount_global"/>
                 <field name="promotion_supplier"/>
             </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="is_bo_line" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="decoration-warning">is_bo_line</attribute>
+            </xpath>
         </field>
     </record>
 

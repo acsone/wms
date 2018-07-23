@@ -14,6 +14,7 @@ Unreleased
              the stock_quants. But in the data the state of the product is sent
              as well and then not always updated. Here we add a realtime export when
              a product state has been changed.
+* ALCN-1435: Change the color for product in BO in the view tree of purchase order and in the view purchase review
 
 **Bugfixes**
 

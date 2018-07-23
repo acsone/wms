@@ -410,7 +410,10 @@ migration:
           - base_optional_quick_create
           ### local-src
           - delivery_rounds
+          - specific_purchase
+          - specific_report
           - stock_picking_backorder
+          - website_purchase_review
       operations:
         post:
           - anthem songs.install.product::disable_quickcreate
