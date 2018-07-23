@@ -31,8 +31,7 @@ class ProductPriceExportMapper(Component):
         price = 0
         if record.product_tmpl_id:
             price = record.product_tmpl_id.indicated_price
-        if price:
-            return {'Msrp': '{0:.2f}'.format(price)}
+        return {'Msrp': '{0:.2f}'.format(price)}
 
 
 class ProductPriceCronExporter(Component):

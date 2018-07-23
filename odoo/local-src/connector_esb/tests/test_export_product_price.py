@@ -30,7 +30,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
             'type': 'product',
             'sale_ok': True,
         })
-        self.p1.indicated_price = 11
+        self.p1.indicated_price = 0
         self.p2 = self.env['product.product'].create({
             'name': 'Unittest P2',
             'default_code': '0002',
@@ -76,7 +76,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
         expected = {
             'Sku': u'0001',
             'Price': '12.70',
-            'Msrp': '11.00',
+            'Msrp': '0.00',
             'PharmacyPrice': '33.240'
         }
         self.p1.sale_price_2_export = 33.240

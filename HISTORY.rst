@@ -16,6 +16,7 @@ Unreleased
 * ALCN-1460: Fix a bug when a picking is partially received which was blocking validation of picking
 * ALCN-1458: Reception: cannot process products without lot + life date is not reset
 * ALCN-1413: On client: name_get itinerary: include tags + align colors between tags and kanban
+* ALCN-1461: In product price xml send Msrp node even when equal to zero (ESB).
 
 **Build**
 
