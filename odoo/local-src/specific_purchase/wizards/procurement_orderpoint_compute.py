@@ -20,6 +20,7 @@ class ProcurementOrderpointCompute(models.TransientModel):
     is_manage_day_5 = fields.Boolean('Friday')
     is_manage_day_6 = fields.Boolean('Saturday')
     is_manage_day_7 = fields.Boolean('Sunday')
+    is_not_recompute_promos = fields.Boolean('Not Recompute Promotions')
 
     type = fields.Selection(
         [('by_suppliers', 'By suppliers'),
@@ -44,7 +45,9 @@ class ProcurementOrderpointCompute(models.TransientModel):
     def procure_calculation(self):
         self.ensure_one()
 
-        kwargs = {}
+        kwargs = {
+            'is_not_recompute_promos': self.is_not_recompute_promos
+        }
         if self.type == 'by_days':
             kwargs['type'] = self.type
             is_day_selected = False

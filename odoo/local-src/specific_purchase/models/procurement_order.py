@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # 2018 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
 from datetime import datetime
 
-from odoo import models, _
+from odoo import api, models, _
 
 MANAGE_DAY_PREFIX = 'is_manage_day_'
+
+_logger = logging.getLogger(__name__)
 
 
 class ProcurementOrder(models.Model):
@@ -62,3 +65,31 @@ class ProcurementOrder(models.Model):
                     ('product_id.supplier_id.id', 'in', partners.ids))
 
         return result + domain
+
+    @api.model
+    def _procure_orderpoint_confirm(
+            self, use_new_cursor=False, company_id=False):
+        """ Run the procurement and recompute promotions if not disabled """
+
+        _logger.info('Run the procurement')
+        result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
+            use_new_cursor=use_new_cursor, company_id=company_id)
+        _logger.info('Procurement finished')
+
+        # By default we recompute promotions
+        if self._context.get('is_not_recompute_promos'):
+            return result
+
+        # Procurement is running in a new cursor. If we want to access
+        # to purchase orders created by the procurement we need to
+        # open a new cursor
+        with api.Environment.manage():
+            context = self._context.copy()
+            new_cr = self.pool.cursor()
+            self = self.with_env(self.env(cr=new_cr, context=context))
+
+            _logger.info('Update values for open puchase orders')
+            self.env['purchase.order'].update_values_for_open_po()
+            _logger.info('Update done')
+
+        return result

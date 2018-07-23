@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 11:33+0000\n"
-"PO-Revision-Date: 2018-06-11 11:33+0000\n"
+"POT-Creation-Date: 2018-07-17 08:15+0000\n"
+"PO-Revision-Date: 2018-07-17 08:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -273,13 +273,13 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:57
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:60
 #, python-format
 msgid "Please select at least one day"
 msgstr "Veuillez sélectionner au moins un jour"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:63
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:66
 #, python-format
 msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"
@@ -320,7 +320,7 @@ msgstr "Promotion fournisseur"
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "Purchase"
-msgstr "Achat"
+msgstr "Achats"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_purchase_order
@@ -342,6 +342,11 @@ msgstr "Responsable d'achat"
 #: model:mail.template,subject:specific_purchase.cancel_purchase_order
 msgid "Purchase order ${object.partner_ref or ''} canceled"
 msgstr "Bon de commande ${object.partner_ref or ''} annulé"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_not_recompute_promos
+msgid "Not Recompute Promotions"
+msgstr "Ne pas recalculer les promotions"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_responsible_id

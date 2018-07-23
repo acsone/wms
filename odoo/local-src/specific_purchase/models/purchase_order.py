@@ -96,6 +96,17 @@ class PurchaseOrder(models.Model):
         for line in self.order_line:
             line.compute_promotion_supplier()
 
+    @api.model
+    def update_values_for_open_po(self):
+        """ Call the method _onchange_quantity on each lines of all open PO """
+
+        open_pos = self.search([('state', '=', 'draft')])
+
+        # Call the method _onchange_quantity on each lines to recompute
+        # the promotion
+        for line in open_pos.mapped('order_line'):
+            line._onchange_quantity()
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
@@ -233,12 +244,9 @@ class PurchaseOrderLine(models.Model):
 
     def compute_promotion_supplier(self):
         if self.product_id:
-            date_order = self.order_id.date_order
-            order_date_str = date_order and date_order[:10]
             seller = self.product_id._select_seller(
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
-                date=order_date_str,
                 uom_id=self.product_uom)
             self.promotion_supplier = (
                 seller.discount_purchase
