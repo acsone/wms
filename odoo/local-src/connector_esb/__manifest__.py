@@ -28,6 +28,7 @@
         'specific_sale',
         'product_additional',
         'queue_job_cron',
+        'sale_confirm_background',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
