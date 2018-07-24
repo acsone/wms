@@ -442,7 +442,7 @@ CLIENT_PAYMENT_TERMS = PAYMENT_TERMS.copy()
 CLIENT_PAYMENT_TERMS[10] = '__setup__.account_payment_term_d7'
 
 SUPPLIER_PAYMENT_MODES = {
-    1: '__setup__.account_payment_mode_out_man',
+    1: '__setup__.account_payment_mode_out_dom',
     2: '__setup__.account_payment_mode_out_dom',
     3: '__setup__.account_payment_mode_out_man',
     4: '__setup__.account_payment_mode_out_man',

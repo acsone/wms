@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-83: Change supplier payment mode mapping, value 1 from AS400 is for "Domiciliation"
+
 **Features and Improvements**
 
 **Bugfixes**
