@@ -50,6 +50,13 @@ class ResPartner(models.Model):
         string='Nickname'
     )
 
+    @api.multi
+    def _display_address(self, without_company=False):
+        res = super(ResPartner, self)._display_address(without_company)
+        if self.env.context.get('show_suite') and self.suite:
+            res = "%s\n%s" % (self.suite, res)
+        return res
+
     @api.depends('alcyon_category_id')
     def _compute_is_veterinary(self):
         veterinary = self.env.ref(

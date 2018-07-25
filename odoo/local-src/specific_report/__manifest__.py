@@ -26,6 +26,7 @@
     'data': [
         # Views
         'wizard/modify_serial_number.xml',
+        'views/base_contact.xml',
         'views/report_template.xml',
         'views/report_deliveryslip.xml',
         'views/report_invoice.xml',
