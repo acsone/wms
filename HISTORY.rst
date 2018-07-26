@@ -18,6 +18,13 @@ Unreleased
 * ALCYN-120: Fix error when locking multiple records on ESB stock export
 * ALCYN-115: Fix saleorder creation when address has ref from partner
 * ALCYN-127: Fix document zip export when ir_attachment has no data.
+* ALCYN-123: Process sale order confirmations jobs sequentially. Need this configuration in the deployment:
+             ``root.background.sale_confirm:1:sequential`` to add in ODOO_QUEUE_JOB_CHANNELS
+             The ODOO_QUEUE_JOB_CHANNELS configuration must set the channel for
+             this job as "sequential", so they are processed in order of
+             creation, even if jobs are retried.  If a job fails, the others
+             jobs will wait.
+
 
 **Build**
 

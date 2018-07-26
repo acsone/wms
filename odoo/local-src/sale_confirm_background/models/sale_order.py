@@ -13,10 +13,18 @@ class Sale(models.Model):
         selection_add=[('confirm_background', 'Confirm in Background')]
     )
 
-    @job(default_channel='root.background.process')
+    @job(default_channel='root.background.sale_confirm')
     @api.multi
     def confirm_in_background(self):
-        """Confirm sales order in background"""
+        """Confirm sales order in background
+
+        The ODOO_QUEUE_JOB_CHANNELS configuration must configure the
+        channel for this job as "sequential", so they are processed
+        in order of creation, even if jobs are retried.
+        If a job fails, the others jobs will wait.
+
+        Configuration: ``root.background.sale_confirm:1:sequential``
+        """
         self.ensure_one()
         if self.state != 'confirm_background':
             return

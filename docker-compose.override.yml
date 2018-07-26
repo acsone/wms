@@ -50,7 +50,7 @@ services:
       ODOO_ESB_WS_USER: odoo_test
       ODOO_ESB_WS_PWD: 0X5avy9C137ssfDy
       WORKERS: 8
-      ODOO_QUEUE_JOB_CHANNELS: root:8,root.db2.fetch:1,root.db2.create_or_update:8,root.esb:2,root.action_assign:8
+      ODOO_QUEUE_JOB_CHANNELS: root:8,root.db2.fetch:1,root.db2.create_or_update:8,root.esb:2,root.action_assign:8,root.background.sale_confirm:1:sequential
 
   db:
     ports:
