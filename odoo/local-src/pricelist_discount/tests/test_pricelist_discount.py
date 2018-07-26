@@ -356,13 +356,11 @@ class TestPricelistDiscount(TransactionCase):
             _logger.info(
                 """price_unit: {}
                 price_subtotal: {}
-                price_total: {},
                 discount: {}
                 discount2: {},
                 discount3: {}""".format(
                     line1.price_unit,
                     line1.price_subtotal,
-                    line1.price_total,
                     line1.discount,
                     line1.discount2,
                     line1.discount3,
