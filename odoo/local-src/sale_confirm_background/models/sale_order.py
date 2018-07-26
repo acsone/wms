@@ -47,6 +47,7 @@ class Sale(models.Model):
             return self._popup_exceptions()
         self.write({
             'state': 'confirm_background',
+            'confirmation_date': fields.Datetime.now(),
         })
         for order in self:
             self.env.user.notify_info(

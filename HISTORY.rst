@@ -24,6 +24,7 @@ Unreleased
              this job as "sequential", so they are processed in order of
              creation, even if jobs are retried.  If a job fails, the others
              jobs will wait.
+* ALCYN-124: Store the original sales order confirmation date when confirmed in background
 
 
 **Build**
