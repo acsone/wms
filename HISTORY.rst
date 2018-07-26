@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-120: Fix missing timestamp kind on export of product when running from cron ESB
+
 **Build**
 
 **Documentation**
