@@ -3,25 +3,27 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from mock import patch
+from copy import deepcopy
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
 from werkzeug.exceptions import BadRequest
 
 
-class WSCreateSaleOrderTestCase(TransactionCase):
+class WSCreateSaleOrderTestCase(SavepointCase):
 
-    def setUp(self):
-        super(WSCreateSaleOrderTestCase, self).setUp()
-        self.controller = SaleController()
-        self.fiji = self.env.ref('base.fj')
-        self.fiji.esb_ref = 'fj'
-        self.setup_records()
-        self.order_data = {
+    @classmethod
+    def setUpClass(cls):
+        super(WSCreateSaleOrderTestCase, cls).setUpClass()
+        cls.controller = SaleController()
+        cls.fiji = cls.env.ref('base.fj')
+        cls.fiji.esb_ref = 'fj'
+        cls.setup_records()
+        cls.order_data = {
             "increment_id": "INC-ID",
-            "customer_id": self.partner.ref,
+            "customer_id": cls.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
             "lines": [{
@@ -37,38 +39,40 @@ class WSCreateSaleOrderTestCase(TransactionCase):
                 'free': True,
             }, ]
         }
-        self.request_data = {
+        cls.request_data = {
             "jsonrpc": "3.0", "id": "4321",
             "method": "create",
             "params": {
-                "data": self.order_data
+                "data": cls.order_data
             }
         }
 
-    def setup_records(self):
-        self.p1 = self.env['product.product'].create({
+    @classmethod
+    def setup_records(cls):
+        cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
             'default_code': '0001',
             'list_price': 10.0,
         })
-        self.partner = self.env['res.partner'].create(
+        cls.partner = cls.env['res.partner'].create(
             {'name': 'John Doe',
              'ref': '111111',
              }
         )
-        self.partner_shipping = self.env['res.partner'].create({
+        cls.partner_shipping = cls.env['res.partner'].create({
             'name': 'John Doe (ship)',
             'type': 'delivery',
             'street': 'Middle street 2',
             'city': 'Some Island',
             'zip': '7492125',
-            'country_id': self.fiji.id,
-            'parent_id': self.partner.id,
+            'country_id': cls.fiji.id,
+            'parent_id': cls.partner.id,
         })
 
     def test_create_saleorder(self):
         starting_date = fields.Datetime().now()
-        order = self.env['sale.order']._ws_create_new(self.order_data)
+        data = deepcopy(self.order_data)
+        order = self.env['sale.order']._ws_create_new(data)
         tax_rate = self.p1.taxes_id.amount / 100.0
         expected = {
             'esb_ref': 'INC-ID',
@@ -92,10 +96,14 @@ class WSCreateSaleOrderTestCase(TransactionCase):
         self.assertTrue(starting_date <= order.date_order <=
                         fields.Datetime.now())
 
+    def test_create_saleorder_multiple_ref(self):
+        self.partner_shipping.ref = self.partner.ref
+        self.test_create_saleorder()
+
     def test_create_saleorder_shipping(self):
         carrier = self.env['delivery.carrier'].search([], limit=1)
         carrier.esb_ref = '95'
-        data = self.order_data.copy()
+        data = deepcopy(self.order_data)
         data['carrier_id'] = carrier.esb_ref
         order = self.env['sale.order']._ws_create_new(data)
         self.assertEqual(len(order.order_line), 1)
@@ -103,44 +111,44 @@ class WSCreateSaleOrderTestCase(TransactionCase):
 
     def test_request_data(self):
         """ Check for well formed data and some compulsory fields """
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data.pop('params')
         with self.assertRaises(BadRequest):
             self.controller._validate_request(data)
 
     def test_required_fields_1(self):
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data['params']['data'].pop('increment_id')
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_fields_2(self):
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data['params']['data'].pop('customer_id')
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_fields_3(self):
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data['params']['data'].pop('date')
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_fields_4(self):
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data['params']['data'].pop('lines')
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_fields_5(self):
         """Check lines is a list"""
-        data = self.request_data.copy()
+        data = deepcopy(self.request_data)
         data['params']['data']['lines'] = data['params']['data']['lines'][0]
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_integrity_error(self):
-        data = self.order_data.copy()
+        data = deepcopy(self.order_data)
         # set inexisting partner
         data['customer_id'] = 999999
         # internal api will raise IntegrityError
