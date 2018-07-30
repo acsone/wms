@@ -21,6 +21,7 @@ Unreleased
 * ALCYN-489: Add debugging log for stock and sale order web service (ESB)
 * ALCYN-120: Fix missing timestamp kind on export of product when running from cron ESB
 * ALCYN-378: Fix delivery round picking counter
+* ALCYN-380: Allow to deliver even if all pickings are not available'
 
 **Build**
 
