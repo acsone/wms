@@ -15,6 +15,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-120: Fix missing timestamp kind on export of product when running from cron ESB
+* ALCYN-120: Fix error when locking multiple records on ESB stock export
 
 **Build**
 
