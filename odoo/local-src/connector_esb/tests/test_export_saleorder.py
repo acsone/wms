@@ -36,6 +36,43 @@ class ExportSaleOrderTestCase(SavepointCase):
         self.delivery.esb_ref = '03'
         self.prod1.default_code = 'SKU01'
         self.prod1.default_code = 'SKU02'
+        # Create the abp tax and it's corresponding xmlid on account.tax
+        # As the l10n_be module installs it in account_tax_template
+        # And it is created in account.tax by the chart of account module
+        self.apb_tax = self.env['account.tax'].create({
+            'desription': 'APB-OUT',
+            'company_id': 1,
+            'include_base_amount': False,
+            'analytic': False,
+            'tax_adjustment': False,
+            'type_tax_use': 'sale',
+            'active': True,
+            'name': 'APB Out',
+            'amount': 0.0224,
+            })
+        self.env['ir.model.data'].create({
+            'module': 'l10n_be_apb_tax',
+            'name': '1_apb_01_out',
+            'model': 'account.tax',
+            'res_id': self.apb_tax.id,
+            })
+        # And also add a vat tax of 6%
+        self.vat_tax = self.env['account.tax'].create({
+            'desription': '6percent',
+            'company_id': 1,
+            'include_base_amount': False,
+            'analytic': False,
+            'tax_adjustment': False,
+            'type_tax_use': 'sale',
+            'active': True,
+            'name': '6percent',
+            'amount_type': 'percent',
+            'amount': 6.0000,
+            })
+        self.prod1.taxes_id = [
+            (4, self.apb_tax.id, False),
+            (4, self.vat_tax.id, False),
+            ]
         self.so1 = self.model.create({
             'esb_ref': 'ref_01',
             'partner_id': self.partner.id,
@@ -67,7 +104,7 @@ class ExportSaleOrderTestCase(SavepointCase):
                     'sequence': 1,
                     'name': self.prod1.name,
                     'product_id': self.prod1.id,
-                    'product_uom_qty': 7,
+                    'product_uom_qty': 1,
                 })],
         })
 
@@ -82,20 +119,20 @@ class ExportSaleOrderTestCase(SavepointCase):
             'order_ref': so.client_order_ref,
             'status': 'processing',
             'shipping_method': so.carrier_id.esb_ref,
-            'apb_tax_amount': 0,
+            'apb_tax_amount': 0.16,
             'order_amount': so.amount_total,
-            'tax_amount': int(so.amount_tax),
+            'tax_amount': round(so.amount_tax - 0.1568, 2),
             'shipping_amount': so.delivery_price,
             'serial_no': int(so.suite_name),
             'increment_id': so.esb_ref,
             'lines': [{
                 'line_number': so.order_line[0].sequence,
                 'price': so.order_line[0].price_unit,
-                'price_inc_tax': (
+                'price_inc_tax': round(
                     so.order_line[0].price_unit
                     + so.order_line[0].price_reduce_taxinc
-                    - so.order_line[0].price_reduce
-                    ),
+                    - so.order_line[0].price_reduce,
+                    2),
                 'qty_ordered': so.order_line[0].product_uom_qty,
                 'qty_delivered': so.order_line[0].qty_delivered,
                 'qty_cancelled': so.order_line[0].product_qty_canceled,
@@ -120,19 +157,20 @@ class ExportSaleOrderTestCase(SavepointCase):
             'order_ref': so.client_order_ref,
             'status': 'processing',
             'shipping_method': so.carrier_id.esb_ref,
-            'apb_tax_amount': 0,
+            'apb_tax_amount': 0.02,
             'order_amount': so.amount_total,
-            'tax_amount': int(so.amount_tax),
+            'tax_amount': round(so.amount_tax - 0.02, 2),
             'shipping_amount': so.delivery_price,
             'serial_no': int(so.suite_name),
             'increment_id': so.esb_ref,
             'lines': [{
                 'line_number': so.order_line[0].sequence,
                 'price': so.order_line[0].price_unit,
-                'price_inc_tax': (
+                'price_inc_tax': round(
                     so.order_line[0].price_unit
                     + so.order_line[0].price_reduce_taxinc
-                    - so.order_line[0].price_reduce
+                    - so.order_line[0].price_reduce,
+                    2
                     ),
                 'qty_ordered': so.order_line[0].product_uom_qty,
                 'qty_delivered': so.order_line[0].qty_delivered,
