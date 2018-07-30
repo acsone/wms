@@ -63,6 +63,7 @@ class RoundInstance(models.Model):
             LEFT JOIN picking_zone z ON t.picking_zone_id = z.id
             WHERE p.state in ('partially_available',
                                 'assigned', 'done')
+            AND t.subcode='PICK'
             AND p.delivery_round_id in %s
             GROUP BY p.delivery_round_id, z.code
         """
