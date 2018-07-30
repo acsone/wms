@@ -508,6 +508,7 @@ __import__.customer_address_delivery_3181,GILLET PATRICK,"Rue de la Barrière,12
 __import__.customer_address_delivery_3190,DOCTEUR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/53 39 10,,False,False,base.be,fr_BE,,delivery,__import__.customer_3190
 __import__.customer_address_delivery_3192,DR GILLET PATRICK,Rue de la Barrière 12,6970,TENNEVILLE,084456161,,False,False,base.be,fr_BE,,delivery,__import__.customer_3192
 __import__.customer_address_delivery_3194,DR DAIGNEUX FABIENNE,Chemin de la Sauvenière 6,4500,HUY,085234338,,False,False,base.be,fr_BE,,delivery,__import__.customer_3194
+__import__.customer_address_delivery_3195,MASSART NATHALIE *,rue René Delhaize 13,6043,RANSART,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3195
 __import__.customer_address_delivery_3198,DR ALAIN DEVEUX,Rue du Village 53,5030,SAUVENIERE,081616116,,False,False,base.be,fr_BE,,delivery,__import__.customer_3198
 __import__.customer_address_delivery_3199,FAC. MEDECINE VETERINAIRE,"Bvd de Colonster, 20 B44",4031,SART TILMAN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3199
 __import__.customer_address_delivery_3204,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,__import__.customer_3204
@@ -817,7 +818,7 @@ __import__.customer_address_delivery_4407,DR GILLET FRANCOIS,"Route de Bastogne,
 __import__.customer_address_delivery_4410,DR LANDTMETERS BAUDOUIN,"Rue du Moulin, 21",6230,PONT-A-CELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4410
 __import__.customer_address_delivery_4412,DR GILLET FRANCOIS,"Route de Bastogne, 37",6970,TENNEVILLE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4412
 __import__.customer_address_delivery_4413,DR BLAISE ROGER,"Chemin de Ster, 17",4970,STAVELOT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4413
-__import__.customer_address_delivery_4416,MAUROY ETS,"Avenue de l'Europe, 3",7080,FRAMERIES,,,False,False,base.be,nl_BE,,delivery,__import__.customer_4416
+__import__.customer_address_delivery_4416,FEBELCO SINT-NIKLAAS,Pachtgoedstraat 10,9100,SINT-NIKLAAS,,,False,False,base.be,nl_BE,,delivery,__import__.customer_4416
 __import__.customer_address_delivery_4417,DR BOCHNER RENNIE,"Square Jacquet, 1 Bte 3",1050,IXELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4417
 __import__.customer_address_delivery_4419,DR DECOSTER MARIE-PAULE,"Rue Lefèbvre, 23",5380,HINGEON,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4419
 __import__.customer_address_delivery_4426,DR BLAISE ROGER,"Chemin de Ster, 17",4970,STAVELOT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_4426
@@ -1075,7 +1076,7 @@ __import__.customer_address_delivery_7181,EPC 79,"Rue Edouard d'Inot, 32",5590,C
 __import__.customer_address_delivery_7197,DRS LEFEBVRE & BERTHOLET,Rue de l'Eglise 4,5580,ROCHEFORT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7197
 __import__.customer_address_delivery_7203,DR MATHEYS PIERRE,"Drève de la Chapelle, 19",1430,BIERGHES-REBECQ,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7203
 __import__.customer_address_delivery_7217,DR THOMAS BERNARD,Rue Jules Monoyer 7,7110,HOUDENG-AIMERIES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7217
-__import__.customer_address_delivery_7232,DR NOEL CHRISTIAN,rue de Gembloux 294,5002,SAINT-SERVAIS,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7232
+__import__.customer_address_delivery_7232,PHILIPPETTE LAURE,rue de Gembloux 294,5002,SAINT-SERVAIS,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7232
 __import__.customer_address_delivery_7237,SCHYNS FRANCOISE,Place Sainte Gertrude 39,4670,BLEGNY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7237
 __import__.customer_address_delivery_7239,DR THOMAS ALPHONSE,"Rue Celestin Denis, 102",5660,PESCHE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7239
 __import__.customer_address_delivery_7242,VANHAY MARIE *,Grande Place 57,1400,NIVELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7242
@@ -1083,6 +1084,7 @@ __import__.customer_address_delivery_7244,ARSIA,"Allée des Artisans, 2",5590,CI
 __import__.customer_address_delivery_7246,DRS AWOUTERS & MUZIEK,"Guldenbodemlaan, 57",3840,BORGLOON,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7246
 __import__.customer_address_delivery_7249,PHARMAMED AGP DISTRIBUTION,Rue de Houtaing 27,7812,HOUTAING,068/646045,,False,False,base.be,nl_BE,,delivery,__import__.customer_7249
 __import__.customer_address_delivery_7251,DIVE-MASSON-DOCHAIN,Rue du Commerce 70,5590,CINEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7251
+__import__.customer_address_delivery_7272,SWAELUS PHILIPPE VETERINAIRE *,"Chaussée de Bruxelles, 148",1190,FOREST,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7272
 __import__.customer_address_delivery_7279,SC DEVI - DR DE VRIESE ANNE,"Rue du Moulin, 35",6181,GOUY-LEZ-PIETON,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7279
 __import__.customer_address_delivery_7281,DR THEVES MURIEL,"Clos du Verger, 46",4300,WAREMME,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7281
 __import__.customer_address_delivery_7284,CAB VETERINAIRE MARITIME,Rue de Lorrain 2,1080,MOLENBEEK-ST-JEAN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7284
@@ -1097,7 +1099,7 @@ __import__.customer_address_delivery_7330,DR CARMICHAEL MARTINE,"Korte Achteroms
 __import__.customer_address_delivery_7334,DR GILLIEAUX OLIVIA,"Rue Edith Cavell, 123",1180,UCCLE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7334
 __import__.customer_address_delivery_7342,DAP ANIMO,"Damse Vaart Zuid, 75",8310,SINT-KRUIS (BRUGGE),,,False,False,base.be,nl_BE,,delivery,__import__.customer_7342
 __import__.customer_address_delivery_7343,DAP TORVET,"Bruggestraat, 163 A",8820,TORHOUT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7343
-__import__.customer_address_delivery_7348,DR MASSCHELEIN,"Avenue des Chateaux, 17",7780,COMINES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7348
+__import__.customer_address_delivery_7348,S.P.A. COMINES,"Avenue des Chateaux, 17",7780,COMINES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7348
 __import__.customer_address_delivery_7356,DR EYQUEM-BOTTARD GUILLAUME,"Route de Dinant, 12",4550,NANDRIN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7356
 __import__.customer_address_delivery_7357,HENNAU JEAN-ELIE,"Georges Huynenstraat, 19",1560,HOEILAART,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7357
 __import__.customer_address_delivery_7368,DR BRASSEL ALEXANDRE,"Roche Percée Radelange, 3",6630,MARTELANGE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7368
@@ -1120,6 +1122,7 @@ __import__.customer_address_delivery_7461,DR GENIN CORALIE,"Rue Hector Trigallez
 __import__.customer_address_delivery_7466,HOUBOTTE CHARLES *,rue d'Otreppe 62,5380,BIERWART,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7466
 __import__.customer_address_delivery_7480,INCIA-UMR 5287 HOMEOSTASIE,"Rue Léo Saignat, 146",33076,BORDEAUX CEDEX,,,False,False,base.fr,fr_BE,,delivery,__import__.customer_7480
 __import__.customer_address_delivery_7487,MW AFRITEC,"Route des Poids Lourds, 4",8697,KINSHASA,,,False,False,,fr_BE,,delivery,__import__.customer_7487
+__import__.customer_address_delivery_7502,DIERENARTS AUDREY VAN NESTE,Haie 31D,7890,Ellezelles,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7502
 __import__.customer_address_delivery_7503,DR RIGAUX GOULVEN,"Rue des Morts, 6",7522,LAMAIN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7503
 __import__.customer_address_delivery_7508,SPRL CREVITS - FISENNE,Chaussée de Ciney 16,5350,OHEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7508
 __import__.customer_address_delivery_7515,VETRIA,"Parkstraat, 2",8730,BEERNEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_7515
@@ -1199,7 +1202,6 @@ __import__.customer_address_delivery_7982,CLINIQUE DE L'IRIS,rue Caspar-Mathias 
 __import__.customer_address_delivery_7992,DR VAN DESSEL DIRK,Lintsesteenweg 130,2500,LIER,03/4804051,,False,False,base.be,nl_BE,,delivery,__import__.customer_7992
 __import__.customer_address_delivery_7995,DR DEWAELS STEPHANE,"Chaussée de Jodoigne, 22",1390,GREZ-DOICEAU,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7995
 __import__.customer_address_delivery_7997,DR DE VRIES LUC,Rue des Canadiens 24,7180,SENEFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_7997
-__import__.customer_address_delivery_8002,DAP POLDERVET,Cathilleweg 151,8490,STALHILLE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8002
 __import__.customer_address_delivery_8003,BLAIRON MICHELE (LUXEMBOURG),Avenue de la Liberation 11,6791,ATHUS,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8003
 __import__.customer_address_delivery_8008,VAN GOETHEM MAXIMILIEN,Kerkhove 2a,1547,BEVER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8008
 __import__.customer_address_delivery_8012,DR DENIS GEORGES,"Rue Goutrielle, 53",7387,MONTIGNIES-SUR-ROC,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8012
@@ -1299,6 +1301,7 @@ __import__.customer_address_delivery_8701,SCHOUKENS TRAINING CENTER,Pollepelstra
 __import__.customer_address_delivery_8702,VANNESTE STEPHANE,"Chemin des Rogations, 27",6800,LANEUVILLE (LIBRAMONT),,,False,False,base.be,fr_BE,,delivery,__import__.customer_8702
 __import__.customer_address_delivery_8705,VETGAUME - PLOMTEUX,Rue de Breuvanne 72,6730,BREUVANNE (Tintigny),,,False,False,base.be,fr_BE,,delivery,__import__.customer_8705
 __import__.customer_address_delivery_8719,DE KEYSER GENEVIÈVE,Zandstraat 61,9900,EEKLO,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8719
+__import__.customer_address_delivery_8720,DR BURY PHILIPPE,rue de Gozée 569,6110,Montigny-Le-Tilleul,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8720
 __import__.customer_address_delivery_8727,DAP TWEESTROMENLAND,Hundelgemsesteenweg 1022,9820,MERELBEKE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8727
 __import__.customer_address_delivery_8731,CLIN. VÉTÉRINAIRE SAINT-JEAN,rue Alexandre Patte 20,7370,DOUR,065/652544,,False,False,base.be,fr_BE,,delivery,__import__.customer_8731
 __import__.customer_address_delivery_8737,CENTRE DES TECHNO. AGRONOM.,rue de la Charmille 16,4577,MODAVE (STREE),,,False,False,base.be,fr_BE,,delivery,__import__.customer_8737
@@ -1309,11 +1312,11 @@ __import__.customer_address_delivery_8748,ULG,Boulevard Conlonster 20 bat.43,400
 __import__.customer_address_delivery_8766,TARPATAKI FRANÇOIS - VET&CIE,rue Camus 64,5300,ANDENNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8766
 __import__.customer_address_delivery_8794,BEDET FABIENNE,"Chaussée de Tubize, 234",1420,BRAINE-L'ALLEUD,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8794
 __import__.customer_address_delivery_8795,BEDET FABIENNE,"Chaussée de Tubize, 234",1420,BRAINE-L'ALLEUD,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8795
-__import__.customer_address_delivery_8800,DR DESMET FLORIS,Basculestraat 11,8900,IEPER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8800
+__import__.customer_address_delivery_8800,DR DESMET FLORIS,Maloulaan 16,8900,IEPER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8800
 __import__.customer_address_delivery_8801,VERMEIRE LYNN,Basculestraat 11,8900,IEPER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8801
 __import__.customer_address_delivery_8811,MIEVIS PETER,Meir 25,1840,LONDERZEEL (Steenhuffel),,,False,False,base.be,nl_BE,,delivery,__import__.customer_8811
 __import__.customer_address_delivery_8817,GOOSSENS MARIE,Place Saint Roch 26,6200,CHATELET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8817
-__import__.customer_address_delivery_8818,ARTEM CURANDI,Basculestraat 11,8900,IEPER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8818
+__import__.customer_address_delivery_8818,ARTEM CURANDI,Nieuwstraat 62 A,8690,ALVERINGEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_8818
 __import__.customer_address_delivery_8831,FAC. MED. VETER. - DPA DMP B42,Avenue de Cureghem 7 B,4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8831
 __import__.customer_address_delivery_8835,TOM & CO,Bergensteenweg 65,1600,Sint-Pieters-Leeuw,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8835
 __import__.customer_address_delivery_8841,MR NICOLAS GERONNEZ,rue de la Forge 3,1380,LASNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8841
@@ -1357,11 +1360,10 @@ __import__.customer_address_delivery_9081,ADM. COMMUN. COMINES WARNETON,Place Sa
 __import__.customer_address_delivery_9086,VETERIN. ALEXANDRE ROMEDENNE,rue Ry d'Août 66,5530,SPONTIN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9086
 __import__.customer_address_delivery_9090,INSTITUT PROVINCIAL D'ENSEIGNE,rue du Canada 157,4910,THEUX,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9090
 __import__.customer_address_delivery_9095,EVERY'CAT,"Avenue de Mars, 66",1200,WOLUWE-SAINT-LAMBERT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9095
-__import__.customer_address_delivery_9097,WEEGSCHAELLE SANDY,Rue de la Mouchelotte 13,5190,MORNIMONT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9097
 __import__.customer_address_delivery_9106,DUCARMOIS NATHALIE,rue de Foucaumont 113,7812,VILLERS-SAINT-AMAND (Ath),,,False,False,base.be,fr_BE,,delivery,__import__.customer_9106
 __import__.customer_address_delivery_9115,ULB - LABO PHYSIOLOGIE ET,Route de Lennik 909 CP604,1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9115
 __import__.customer_address_delivery_9133,UCL - PEDI,"Av. Mounier 52, Vesale étage 3",1200,WOLUWE-SAINT-LAMBERT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9133
-__import__.customer_address_delivery_9134,SIMON ANNE-FRANCOISE,"Rue de la Mouchelotte,13",5190,MORNIMONT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9134
+__import__.customer_address_delivery_9134,ANYMALIS,Chaussée de Gembloux 30,5140,SOMBREFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9134
 __import__.customer_address_delivery_9138,MICHEL BRUYERE,L.A. Schockaertstraat 52 B,1600,SINT-PIETERS-LEEUW,,,False,False,base.be,fr_BE,0479/25 29 01,delivery,__import__.customer_9138
 __import__.customer_address_delivery_9145,EPC 106,rue Edouard d'Inot 32,5590,CINEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9145
 __import__.customer_address_delivery_9150,DR VET HERMANNS LAURA,rue Pierre-Curie 26,4630,SOUMAGNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9150
@@ -1395,3 +1397,10 @@ __import__.customer_address_delivery_9313,PHARMASANTE DEPOT,rue de le Boverie 37
 __import__.customer_address_delivery_9314,PHARMASANTE DEPOT,rue de la Boverie 379,4100,SERAING,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9314
 __import__.customer_address_delivery_9316,ONGENA NIKOLAI,Sasstraat 8,8870,IZEGEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9316
 __import__.customer_address_delivery_9331,DE VRIESE LUC,rue des Canadiens 24,7180,SENEFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9331
+__import__.customer_address_delivery_9336,UNIVERSITÉ LIBRE DE BRUXELLES,Avenue P. Heger Acces 2,1000,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9336
+__import__.customer_address_delivery_9337,VETOPLUS,rue de l'Ourthe 38,5377,NOISEUX,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9337
+__import__.customer_address_delivery_9345,ELISA SCOHY VETERINAIRE SCS,rue de l'Arbalète 5,5600,NEUVILLE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9345
+__import__.customer_address_delivery_9357,DAP 'T RIET,"Waasmunsterbaan, 26",9160,LOKEREN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9357
+__import__.customer_address_delivery_9369,LUDES RAPHAELA,Buchenweg 13,4780,SAINT-VITH,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9369
+__import__.customer_address_delivery_9370,BODEÜS LAURE-ANNE,rue Elvaux 88,4680,OUPEYE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9370
+__import__.customer_address_delivery_9371,EPC 107,rue Edouard Inot 32,5590,CINEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9371
