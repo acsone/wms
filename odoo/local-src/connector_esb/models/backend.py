@@ -76,7 +76,7 @@ class ESBBackend(models.Model):
     @api.model
     def cron_export_product(self):
         backend = self.get_singleton()
-        backend._get_timestamp('product.product').export()
+        backend._get_timestamp('product.product', 'product').export()
 
     @api.model
     def cron_export_pharmacy(self):
