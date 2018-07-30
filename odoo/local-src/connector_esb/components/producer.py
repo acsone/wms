@@ -18,6 +18,9 @@ class ESBZIPProducer(Component):
         zipdata = StringIO.StringIO()
         with zipfile.ZipFile(zipdata, "a", zipfile.ZIP_DEFLATED, False) as zf:
             for item in data:
-                zf.writestr(item['filename'], item['data'].decode('base64'))
+                zf.writestr(
+                    item['filename'] or '',
+                    item['data'].decode('base64') if item['data'] else ''
+                )
         zipdata.seek(0)
         return zipdata.read()

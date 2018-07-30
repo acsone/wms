@@ -17,6 +17,7 @@ Unreleased
 * ALCYN-120: Fix missing timestamp kind on export of product when running from cron ESB
 * ALCYN-120: Fix error when locking multiple records on ESB stock export
 * ALCYN-115: Fix saleorder creation when address has ref from partner
+* ALCYN-127: Fix document zip export when ir_attachment has no data.
 
 **Build**
 

@@ -24,6 +24,8 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
         self.all_records = self.model.browse()
         self.filedata_1 = 'this is a test file'
         self.filename_1 = 'NE_alsfja.csv'
+        self.filename_2 = 'CM_alkdsjf.pdf'
+        # Creating a good looking attachment
         self.all_records |= self.model.create({
                 'type': 'binary',
                 'res_model': 'stock.picking',
@@ -31,6 +33,15 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
                 'datas_fname': self.filename_1,
                 'mimetype': 'text/plain',
                 'db_datas': self.filedata_1.encode('base_64')
+            })
+        # Creating an attachment with no data
+        self.all_records |= self.model.create({
+                'type': 'binary',
+                'res_model': 'stock.picking',
+                'name': self.filename_2,
+                'datas_fname': self.filename_2,
+                'mimetype': 'text/pdf',
+                # no 'db_datas' to check it does not fail
             })
 
     def test_mapper(self):
