@@ -79,8 +79,8 @@ class RoundInstance(models.Model):
             item_number_total += shipping.item_number_total
 
             note = partner_value.get('note', '')
-            if shipping.note:
-                note += " - %s" % shipping.note
+            if shipping.partner_id.comment:
+                note = shipping.partner_id.comment
 
             partner_value.update({
                 'number_of_drug': number_of_drug,
