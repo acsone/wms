@@ -433,3 +433,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_add_data.csv
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
               - anthem songs.install.accounting::activate_check_on_vat
+    - version: 10.22.4
+      addons:
+        upgrade:
+          - connector_esb
