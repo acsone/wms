@@ -30,6 +30,7 @@
         'queue_job_cron',
         'sale_confirm_background',
         'l10n_be_apb_tax',
+        'delivery',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

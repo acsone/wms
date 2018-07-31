@@ -84,6 +84,8 @@ class SaleOrder(models.Model):
             else:
                 _logger.error('Webservice new saleorder, carrier %s not found',
                               data['carrier_id'])
+        elif partner.property_delivery_carrier_id:
+            order_data['carrier_id'] = partner.property_delivery_carrier_id.id
         return order_data
 
     def _ws_create_order_line_data(self, data):

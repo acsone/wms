@@ -54,9 +54,15 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'default_code': '0001',
             'list_price': 10.0,
         })
+        cls.delivery_1 = cls.env['delivery.carrier'].create({
+            'delivery_type': 'fixed',
+            'name': 'delivery carrier 1',
+            'esb_ref': '031',
+            })
         cls.partner = cls.env['res.partner'].create(
             {'name': 'John Doe',
              'ref': '111111',
+             'property_delivery_carrier_id': cls.delivery_1.id,
              }
         )
         cls.partner_shipping = cls.env['res.partner'].create({
@@ -108,6 +114,16 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         order = self.env['sale.order']._ws_create_new(data)
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, carrier)
+
+    def test_create_saleorder_shipping_use_default_from_partner(self):
+        """Check the use of default delivery carrier from partner.
+
+        When not specified in the data
+        """
+        data = deepcopy(self.order_data)
+        order = self.env['sale.order']._ws_create_new(data)
+        self.assertEqual(len(order.order_line), 1)
+        self.assertEqual(order.carrier_id, self.delivery_1)
 
     def test_request_data(self):
         """ Check for well formed data and some compulsory fields """
