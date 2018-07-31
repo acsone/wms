@@ -12,6 +12,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-188: Improve apb tax calculation on sale order export ESB, by using the tax set on products and not the value set in the invoice.
+
 **Bugfixes**
 
 * ALCYN-120: Fix missing timestamp kind on export of product when running from cron ESB

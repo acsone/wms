@@ -19,7 +19,6 @@ class SaleExportMapper(Component):
     direct = [
         ('id', 'erp_id'),
         (falsy2zero('amount_total'), 'order_amount'),
-        (falsy2zero('amount_tax'), 'tax_amount'),
         (falsy2zero('delivery_price'), 'shipping_amount'),
     ]
 
@@ -57,7 +56,7 @@ class SaleExportMapper(Component):
     @mapping
     def compute_shipping_method(self, record):
         return {'shipping_method': record.carrier_id.esb_ref or
-                self.env.ref('__setup__.deliver_carrier_alcyon')
+                self.env.ref('__setup__.deliver_carrier_alcyon').esb_ref
                 }
 
     @mapping
@@ -81,9 +80,25 @@ class SaleExportMapper(Component):
         return {'status': status}
 
     @mapping
-    def compute_apb_tax_amount(self, record):
-        taxes = record.invoice_ids.mapped(lambda r: r.amount_apb)
-        return {'apb_tax_amount': sum(taxes)}
+    def compute_taxe_amounts(self, record):
+        """Compute the taxes existing on the sale order.
+
+        The apb tax needs to be separated from the other ones. It is a fixed
+        amount calculated on the quantity of a product.
+        And needs to be subtracted from the total of taxes
+        """
+        apb_tax = self.env.ref('l10n_be_apb_tax.1_apb_01_out')
+        total_amount = record.amount_tax or 0
+        lines_with_apb = record.mapped('order_line').filtered(
+                lambda r: apb_tax in r.product_id.taxes_id)
+        total_apb = round(sum(lines_with_apb.mapped(
+                            lambda r: r.product_uom_qty * apb_tax.amount
+                        )), 2)
+        total_amount = round(total_amount, 2) - total_apb
+        return {
+            'apb_tax_amount': total_apb,
+            'tax_amount': total_amount if total_amount > 0 else 0
+            }
 
     @mapping
     def compute_increment_id(self, record):
