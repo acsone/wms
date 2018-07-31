@@ -56,7 +56,7 @@ class SaleExportMapper(Component):
     @mapping
     def compute_shipping_method(self, record):
         return {'shipping_method': record.carrier_id.esb_ref or
-                self.env.ref('__setup__.deliver_carrier_alcyon')
+                self.env.ref('__setup__.deliver_carrier_alcyon').esb_ref
                 }
 
     @mapping
