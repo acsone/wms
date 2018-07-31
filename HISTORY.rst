@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.4 (2018-07-31)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-83: Change supplier payment mode mapping, value 1 from AS400 is for "Domiciliation"
@@ -28,11 +40,6 @@ Unreleased
              creation, even if jobs are retried.  If a job fails, the others
              jobs will wait.
 * ALCYN-124: Store the original sales order confirmation date when confirmed in background
-
-
-**Build**
-
-**Documentation**
 
 
 10.22.3 (2018-07-23)
