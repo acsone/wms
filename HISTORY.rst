@@ -13,6 +13,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-188: Improve apb tax calculation on sale order export ESB, by using the tax set on products and not the value set in the invoice.
+* ALCYN-130: Set the partner default delivery carrier on web service create sale order if it is not specificed in data (ESB)
 
 **Bugfixes**
 
