@@ -18,6 +18,7 @@ Unreleased
 * ALCYN-396: Fix error on deleting multiple partners (customer)
 * ALCYN-414: Fix account_invoice report filename, being exported. The two first letter are 'fc' for an invoice 'nc' for credit note and 'cf' confirmation order.
 * ALCYN-395: Change lock mechanism when exporting records (ESB)
+* ALCYN-401: Fix customer_id in export of sale order to Magento
 
 **Build**
 
