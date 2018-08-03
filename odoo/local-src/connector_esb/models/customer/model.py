@@ -13,8 +13,8 @@ class ResPartner(models.Model):
     @api.multi
     def unlink(self):
         for record in self:
-            if self.esb_exported:
+            if record.esb_exported:
                 raise exceptions.UserError(
-                    _("The customer has already been exported, it can be "
-                      "archived  but not deleted."))
+                    _("The customer {} has already been exported, it can be "
+                      "archived  but not deleted.").format(record.name))
             return super(ResPartner, self).unlink()
