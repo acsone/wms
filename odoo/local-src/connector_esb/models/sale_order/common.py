@@ -43,6 +43,7 @@ class SaleOrder(models.Model):
             self.env.cr.rollback()
             _logger.error('Webservice create saleorder, integrity error : %s',
                           error)
+            raise
 
     def _ws_create_new(self, data):
         order_data = self._ws_create_order_data(data)
