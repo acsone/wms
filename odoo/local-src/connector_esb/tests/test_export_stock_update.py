@@ -86,7 +86,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         # And add a canceled sale order that should not be part of the
         # sales_average computation
         self.so1 = self.env['sale.order'].create({
-            'esb_ref': 'ref_123',
+            'esb_ref': 'ref_124',
             'partner_id': self.partner.id,
             'sale_channel': 'fax',
             'client_order_ref': 'whatever the client want',
