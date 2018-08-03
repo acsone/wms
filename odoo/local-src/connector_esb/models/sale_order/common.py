@@ -112,6 +112,8 @@ class SaleOrder(models.Model):
                 sol['sequence'] = line.pop('line_id')
                 lines.append((0, 0, sol))
             else:
-                _logger.error('Webservice new saleorder, product %s not found',
+                message = 'Webservice new saleorder, product %s not found'
+                _logger.error(message,
                               line['sku'])
+                raise exceptions.UserError(_(message) % line['sku'])
         return lines
