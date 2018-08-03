@@ -17,6 +17,11 @@ class SaleOrder(models.Model):
 
     esb_ref = fields.Char(string='Reference for ESB')
 
+    _sql_constraints = [
+        ('esb_ref_unique', 'unique(esb_ref)',
+         _('This reference esb already exists'))
+    ]
+
     @api.model
     def create(self, vals):
         self_ctx = self.with_context(_sale_order_create=True)
