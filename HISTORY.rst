@@ -9,6 +9,9 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-80: Display suite name on SO view and report
+* ALCYN-416: Allow to set type on partner without opening master and editing contacts'
+
+**Bugfixes**
 
 **Bugfixes**
 
