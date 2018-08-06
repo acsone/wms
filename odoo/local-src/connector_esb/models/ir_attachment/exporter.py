@@ -12,7 +12,7 @@ class IrAttachmentMapper(Component):
 
     direct = [
         ('datas_fname', 'filename'),
-        ('db_datas', 'data')
+        ('datas', 'data')
     ]
 
 

@@ -32,7 +32,7 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
                 'name': self.filename_1,
                 'datas_fname': self.filename_1,
                 'mimetype': 'text/plain',
-                'db_datas': self.filedata_1.encode('base_64')
+                'datas': self.filedata_1.encode('base_64')
             })
         # Creating an attachment with no data
         self.all_records |= self.model.create({
@@ -41,7 +41,7 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
                 'name': self.filename_2,
                 'datas_fname': self.filename_2,
                 'mimetype': 'text/pdf',
-                # no 'db_datas' to check it does not fail
+                # no 'datas' to check it does not fail
             })
 
     def test_mapper(self):

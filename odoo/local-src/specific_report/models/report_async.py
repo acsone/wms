@@ -23,7 +23,7 @@ class ReportAsync(models.AbstractModel):
         existing = self.env['ir.attachment'].search([
             ('name', '=', filename), ('res_model', '=', self._name)])
         if len(existing):
-            existing[0].db_datas = data.encode('base_64')
+            existing[0].datas = data.encode('base_64')
         else:
             self.env['ir.attachment'].create({
                 'type': 'binary',
@@ -32,5 +32,5 @@ class ReportAsync(models.AbstractModel):
                 'name': filename,
                 'datas_fname': filename,
                 'mimetype': 'application/pdf',
-                'db_datas': data.encode('base_64'),
+                'datas': data.encode('base_64'),
                 })
