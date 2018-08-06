@@ -22,6 +22,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         self.backend = self.backend_model.get_singleton()
 
         self.partner = self.env.ref('base.res_partner_1')
+        self.partner.ref = '123321'
         self.prod1 = self.env.ref('product.product_product_1')
         self.prod2 = self.env.ref('product.product_product_2')
         self.setup_records()
@@ -113,7 +114,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         so = self.so1
         expected = {
             'erp_id': so.id,
-            'customer_id': so.partner_id.id,
+            'customer_id': so.partner_id.ref,
             'date': so.date_order.split(' ')[0],
             'channel':  '03',  # the code for fax
             'order_ref': so.client_order_ref,
@@ -151,7 +152,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         so = self.so2
         expected = {
             'erp_id': so.id,
-            'customer_id': so.partner_id.id,
+            'customer_id': so.partner_id.ref,
             'date': so.date_order.split(' ')[0],
             'channel':  '01',  # Default is phone
             'order_ref': so.client_order_ref,

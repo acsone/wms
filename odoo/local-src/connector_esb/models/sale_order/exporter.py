@@ -25,8 +25,8 @@ class SaleExportMapper(Component):
     children = [('order_line', 'lines', 'sale.order.line')]
 
     @mapping
-    def compute_customer_id(self, record):
-        return {'customer_id': record.partner_id.id}
+    def compute_customer_esbref(self, record):
+        return {'customer_id': record.partner_id.ref or ''}
 
     @mapping
     def compute_date(self, record):
