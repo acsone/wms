@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 from collections import defaultdict
+from itertools import groupby
 
 from odoo import api, fields, models
 
@@ -60,9 +61,13 @@ class StockPicking(models.Model):
         if not vals.get('delivery_round', True):
             # Delivery round unset on picking
             for picking in self:
+                partner = picking.partner_id
+                # If delivery address is a contact, take parent
+                if partner.type == 'contact' and partner.parent_id:
+                    partner = partner.parent_id
                 delivery_round_partner.setdefault(
                     picking.delivery_round_id, set()).\
-                    add(picking.partner_id)
+                    add(partner)
         res = super(StockPicking, self).write(vals)
         for delivery_round, partners in delivery_round_partner.iteritems():
             for partner in partners:
@@ -112,11 +117,24 @@ class StockPicking(models.Model):
                     "Delivery round %s set on pickings %s. Propagate "
                     "to group %s",
                     delivery_round.id, self.ids, pickings.ids)
-                for partner in self.mapped('partner_id'):
+
+                # Set rank
+                def key(r):
+                    partner = r.partner_id
+                    # If delivery address is a contact, take parent
+                    if partner.type == 'contact' and partner.parent_id:
+                        partner = partner.parent_id
+                    return partner
+
+                for partner, pickings_bypartner_iter in groupby(
+                        pickings.sorted(key=key), key=key):
                     rank = delivery_round._add_customer(partner)
-                    pickings.with_context(noround_write=True).write({
+                    pickings_bypartner = reduce(
+                        lambda x, y: x | y, pickings_bypartner_iter)
+                    pickings_bypartner.with_context(noround_write=True).write({
                         'delivery_round_id': delivery_round.id,
                         'rank': rank})
+
             _logger.debug(
                 "Delivery round %s set on pickings %s. Done.",
                 delivery_round.id, self.ids)
