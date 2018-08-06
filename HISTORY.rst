@@ -22,6 +22,7 @@ Unreleased
 * ALCYN-378: Fix delivery round picking counter
 * ALCYN-380: Allow to deliver even if all pickings are not available
 * ALCYN-382: Print partner note on delivery round document + add button in kanban
+* ALCYN-415: Cannot make invoice for customers having a ref <100
 
 **Build**
 
