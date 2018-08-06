@@ -8,6 +8,9 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-383: Add unicity constraint on sale order esb reference. This prevents duplicates of sale order when web
+  service is stressed with multiple create call for the same sale order.
+
 **Bugfixes**
 
 **Build**

@@ -17,6 +17,11 @@ class SaleOrder(models.Model):
 
     esb_ref = fields.Char(string='Reference for ESB')
 
+    _sql_constraints = [
+        ('esb_ref_unique', 'unique(esb_ref)',
+         _('This reference esb already exists'))
+    ]
+
     @api.model
     def create(self, vals):
         self_ctx = self.with_context(_sale_order_create=True)
@@ -38,6 +43,7 @@ class SaleOrder(models.Model):
             self.env.cr.rollback()
             _logger.error('Webservice create saleorder, integrity error : %s',
                           error)
+            raise
 
     def _ws_create_new(self, data):
         order_data = self._ws_create_order_data(data)
@@ -106,6 +112,8 @@ class SaleOrder(models.Model):
                 sol['sequence'] = line.pop('line_id')
                 lines.append((0, 0, sol))
             else:
-                _logger.error('Webservice new saleorder, product %s not found',
+                message = 'Webservice new saleorder, product %s not found'
+                _logger.error(message,
                               line['sku'])
+                raise exceptions.UserError(_(message) % line['sku'])
         return lines
