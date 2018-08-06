@@ -8,9 +8,11 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-384: Track who forced the delivery round on a shipping
+
 **Bugfixes**
 
- * ALCYN-435: Fix random error in test on connector_esb when testing filename
+* ALCYN-435: Fix random error in test on connector_esb when testing filename
 
 **Build**
 
