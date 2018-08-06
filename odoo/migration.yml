@@ -285,3 +285,7 @@ migration:
           - anthem songs.upgrade.10_23_0_update::pre
         post:
           - anthem songs.install.user::import_users
+    - version: 10.23.1
+      operations:
+        post:
+          - anthem songs.upgrade.10_23_1_update::post
