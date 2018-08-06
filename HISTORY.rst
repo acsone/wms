@@ -17,6 +17,7 @@ Unreleased
 * ALCYN-400: Fix empty file on export documents.zip ESB
 * ALCYN-396: Fix error on deleting multiple partners (customer)
 * ALCYN-414: Fix account_invoice report filename, being exported. The two first letter are 'fc' for an invoice 'nc' for credit note and 'cf' confirmation order.
+* ALCYN-395: Change lock mechanism when exporting records (ESB)
 
 **Build**
 

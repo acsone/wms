@@ -2,12 +2,13 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import datetime
 import logging
 import psycopg2
 
 import odoo
 
-from odoo import _
+from odoo import fields, _
 from odoo.osv.expression import AND
 from odoo.addons.component.core import AbstractComponent, Component
 from odoo.addons.connector.exception import RetryableJobError
@@ -94,7 +95,7 @@ class ESBWebServiceExporter(AbstractComponent):
 
         # prevent other jobs to export the same record
         # will be released on commit (or rollback)
-        self._lock()
+        # self._lock()
 
         map_record = self._map_data()
 
@@ -290,8 +291,22 @@ class ESBCronExporter(AbstractComponent):
         return []
 
     def domain_timestamp(self, export_since=None):
-        # write_date is at the very least the same than create_date
-        # so we don't need to search on create_date >= self.export_since
+        """ Create a search domain for a timestamp
+
+        To export only the changes since last export
+        As write_date is at the very least the same than create_date
+        no need to search on create_date >= self.export_since.
+
+        To be sure that we don't miss a record that was updated during
+        the last export 5 minutes are subtracted from the timestamp.
+        Yes poor man locking system !
+        But the FOR UPDATE NO WAIT did not seem to succeed at all on the
+        product.product table when addressing many records.
+        """
+        if export_since:
+            export_date = fields.Datetime.from_string(export_since)
+            export_date = export_date - datetime.timedelta(minutes=5)
+            export_since = fields.Datetime.to_string(export_date)
         return [('write_date', '>=', export_since)]
 
     def get_items(self, export_since):
@@ -310,7 +325,6 @@ class ESBCronExporter(AbstractComponent):
 
         """
         records = self.get_items(export_since=export_since)
-        self._lock(records)
         return self._export_items(records)
 
 
@@ -327,7 +341,6 @@ class ESBWebServiceCronExporter(AbstractComponent):
 
         """
         records = self.get_items(export_since=export_since)
-        self._lock(records)
         data = []
         for r in records:
             mapped_record = self.mapper.map_record(r)
