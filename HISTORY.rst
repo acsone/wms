@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-403: ungroup picking created on final confirmation of imported sale orders from DB2
+
 **Features and Improvements**
 
 **Bugfixes**
