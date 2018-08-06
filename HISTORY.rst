@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.22.5 (2018-08-06)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-383: Add unicity constraint on sale order esb reference. This prevents duplicates of sale order when web
   service is stressed with multiple create call for the same sale order.
 
@@ -19,10 +31,6 @@ Unreleased
 * ALCYN-414: Fix account_invoice report filename, being exported. The two first letter are 'fc' for an invoice 'nc' for credit note and 'cf' confirmation order.
 * ALCYN-395: Change lock mechanism when exporting records (ESB)
 * ALCYN-401: Fix customer_id in export of sale order to Magento
-
-**Build**
-
-**Documentation**
 
 
 10.22.4 (2018-07-31)
