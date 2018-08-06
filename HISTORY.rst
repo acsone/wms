@@ -16,6 +16,7 @@ Unreleased
 * ALCYN-393: Fix write_date not getting changed on partner, when discount_pricelist_id is changed
 * ALCYN-400: Fix empty file on export documents.zip ESB
 * ALCYN-396: Fix error on deleting multiple partners (customer)
+* ALCYN-414: Fix account_invoice report filename, being exported. The two first letter are 'fc' for an invoice 'nc' for credit note and 'cf' confirmation order.
 
 **Build**
 

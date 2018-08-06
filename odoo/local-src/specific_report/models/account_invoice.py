@@ -180,7 +180,7 @@ class AccountInvoice(models.Model):
             return None
         type_doc = ''
         if self.type == 'out_invoice':
-            type_doc = 'cf'
+            type_doc = 'fc'
         elif self.type == 'out_refund':
             type_doc = 'nc'
         return '_'.join([
