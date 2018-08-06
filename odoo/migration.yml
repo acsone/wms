@@ -437,3 +437,10 @@ migration:
       addons:
         upgrade:
           - connector_esb
+    - version: 10.22.5
+      operations:
+        post:
+          - anthem songs.upgrade.10_22_5_update::main
+      addons:
+        upgrade:
+          - pricelist_discount

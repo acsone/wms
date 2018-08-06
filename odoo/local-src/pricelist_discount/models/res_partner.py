@@ -19,7 +19,6 @@ class ResPartner(models.Model):
     discount_pricelist_id = fields.Many2one(
         string='Alcyon Discount Pricelist',
         comodel_name='product.pricelist',
-        company_dependent=True,
     )
 
     @api.model
