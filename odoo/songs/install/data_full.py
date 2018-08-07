@@ -45,6 +45,40 @@ def import_partner(ctx):
 
 
 @anthem.log
+def import_partner_link(ctx):
+    """Redefine some parent_id on partners affiliates.
+
+    Plus adapt names and types to fit this change.
+    """
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
+    with ctx.log(u"Create main customers"):
+        content = resource_stream(req, 'data/install/0-partner.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+    with ctx.log(u"Define invoice type on main partners"):
+        content = resource_stream(req, 'data/install/1-invoice.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+    with ctx.log(u"Define delivery, contact and other type on main partners"):
+        content = resource_stream(req, 'data/install/2-delivery.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+    with ctx.log(u"Rename main partners"):
+        content = resource_stream(req, 'data/install/3-rename.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+    with ctx.log(u"Change parent_id on partner to group them"):
+        content = resource_stream(req, 'data/install/4-parent.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+    with ctx.log(u"Small change on supplier which is also a customer"):
+        content = resource_stream(req, 'data/install/5-supplier-client.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+
+@anthem.log
+def post_import_partner(ctx):
+    import_partner_link(ctx)
+
+
+@anthem.log
 def create_product_other(ctx):
     """ Create product 'Other' used when importing sale orders """
     values = {
