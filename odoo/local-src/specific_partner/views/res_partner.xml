@@ -23,10 +23,11 @@
             <field name="function" position="before">
                 <field name="alcyon_category_id"/>
                 <field name="is_veterinary" invisible="1"/>
+                <field name="is_students" invisible="1"/>
                 <field name="vet_depot_number"
                        attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"/>
                 <field name="vet_subscription_number"
-                       attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"/>
+                       attrs="{'invisible': [('is_veterinary', '=', False),('is_students', '=', False)], 'required': ['|',('is_veterinary', '=', True),('is_students', '=', True)]}"/>
             </field>
 
             <group name="fiscal_information" position="inside">

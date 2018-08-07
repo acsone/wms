@@ -18,7 +18,10 @@ class ResPartner(models.Model):
     vet_subscription_number = fields.Char(string='Subscription number')
 
     is_veterinary = fields.Boolean(
-        compute='_compute_is_veterinary'
+        compute='_compute_is_veterinary_or_students'
+    )
+    is_students = fields.Boolean(
+        compute='_compute_is_veterinary_or_students'
     )
 
     legal_entity_id = fields.Many2one(
@@ -58,12 +61,17 @@ class ResPartner(models.Model):
         return res
 
     @api.depends('alcyon_category_id')
-    def _compute_is_veterinary(self):
+    def _compute_is_veterinary_or_students(self):
         veterinary = self.env.ref(
             'specific_partner.partner_category_veterinary')
+        students = self.env.ref(
+            'specific_partner.partner_category_student')
         for partner in self:
             partner.is_veterinary = (
                 partner.alcyon_category_id == veterinary
+            )
+            partner.is_students = (
+                    partner.alcyon_category_id == students
             )
 
     @api.one

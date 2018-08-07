@@ -12,6 +12,8 @@ Unreleased
 * ALCYN-416: Allow to set type on partner without opening master and editing contacts'
 
 **Bugfixes**
+* ALCYN-405: Display `Numéro d'inscription`(`Subscription number`) field for
+  Alcyon category = `Etudiants et assimilés sans dépôt`
 
 **Bugfixes**
 * ALCYN-418: Fix CSV delivery note not generated when delivery round is delivered
