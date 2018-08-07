@@ -14,6 +14,7 @@ Unreleased
 **Bugfixes**
 
 **Bugfixes**
+* ALCYN-418: Fix CSV delivery note not generated when delivery round is delivered
 
 **Build**
 

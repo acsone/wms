@@ -12,8 +12,8 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def do_new_transfer(self):
-        result = super(StockPicking, self).do_new_transfer()
+    def do_transfer(self):
+        result = super(StockPicking, self).do_transfer()
         picking_type_out = self.env.ref('stock.picking_type_out')
         for r in self:
             if r.picking_type_id == picking_type_out:
