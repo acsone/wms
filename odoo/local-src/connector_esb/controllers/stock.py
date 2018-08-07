@@ -30,4 +30,6 @@ class StockController(http.Controller):
         skus = [sku.strip() for sku in skus]
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('product.product') as work:
-            return work.component('ws.message.product.stock').get_message(skus)
+            res = work.component('ws.message.product.stock').get_message(skus)
+            headers = [('Content-Type', 'text/xml')]
+            return request.make_response(res, headers)
