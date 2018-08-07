@@ -606,7 +606,7 @@ msgstr "Il n'y a pas de zone de picking d'origine sur cette opération."
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Total net value"
-msgstr "Valeur nette total"
+msgstr "Valeur nette totale"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon

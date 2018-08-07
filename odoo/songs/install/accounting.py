@@ -386,6 +386,15 @@ def create_account_types(ctx):
 
 
 @anthem.log
+def set_tax_group(ctx):
+    """ Set Tax Group ABP """
+    apb = ctx.env.ref('l10n_be_apb_tax.1_apb_01_out')
+    apb_group = ctx.env.ref('specific_account.tax_group_apb')
+    if apb and apb_group:
+        apb.tax_group_id = apb_group
+
+
+@anthem.log
 def set_esb_references(ctx):
     """ Set ESB references """
     refs = (
@@ -454,6 +463,7 @@ def main(ctx):
     add_xmlid_account(ctx)
     create_account_types(ctx)
     adapt_chart_of_account(ctx)
+    set_tax_group(ctx)
     import_account_journal(ctx)
     import_account_analytic_tag(ctx)
     import_account_analytic_account(ctx)
