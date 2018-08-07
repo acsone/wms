@@ -70,8 +70,16 @@
             <t t-set="company" t-value="res_company"></t>
         </t>
 
+        <!--Avoid problem with xpath in other module
+            We want to get rid of them. Given that we already did it (and) the
+            xmlid of this template, we need to put them back as 'invisible'
+        -->
+        <!--Tag invisible will call the original header. It's why I prefer to use a t-if tag-->
+        <t t-call="report.external_layout_header" t-if="1 == 0"/>
         <t t-call="specific_report.alcyon_header" />
         <t t-raw="0" />
         <t t-call="specific_report.page_number_footer" />
+        <!--Avoid problem with xpath in other module-->
+        <t t-call="report.external_layout_footer" t-if="1 == 0"/>
     </template>
 </odoo>
