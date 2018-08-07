@@ -20,6 +20,7 @@ Unreleased
 * ALCYN-428: On web service returning xml data, set the content-type to text/xml (ESB)
 
 **Bugfixes**
+* ALCYN-431: User mciolii must be mciolli
 
 * ALCYN-405: Display `Numéro d'inscription`(`Subscription number`) field for
   Alcyon category = `Etudiants et assimilés sans dépôt`
