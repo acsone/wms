@@ -444,3 +444,9 @@ migration:
       addons:
         upgrade:
           - pricelist_discount
+    - version: 10.23.0
+      addons:
+        upgrade:
+        ### local-src
+        - specific_report
+        - specific_sale

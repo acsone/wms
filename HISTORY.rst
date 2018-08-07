@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-80: Display suite name on SO view and report
+
 **Bugfixes**
 
 **Build**

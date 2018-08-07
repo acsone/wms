@@ -17,6 +17,10 @@
                 <field name="suite_name"/>
             </field>
 
+            <field name="partner_id" position="attributes">
+                <attribute name="context">{'search_default_customer': 1, 'show_address': 1, 'show_suite': 1}</attribute>
+            </field>
+
             <field name="client_order_ref" position="after">
                 <field name="sale_channel_visible" invisible="1"/>
                 <field name="sale_channel" attrs="{'invisible': [('sale_channel_visible', '=', False)]}"/>
