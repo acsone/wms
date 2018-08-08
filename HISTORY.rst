@@ -25,6 +25,7 @@ Unreleased
 * ALCYN-418: Fix CSV delivery note not generated when delivery round is delivered
 * ALCYN-121: Fix a bug when the user try to print the reception report
 * ALCN-1418: Final fix for the infamous 10 != 8 bug in tests
+* ALCYN-437: Fix concurent access on sale order export (ESB)
 
 **Build**
 

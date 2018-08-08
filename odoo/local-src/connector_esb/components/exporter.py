@@ -95,7 +95,7 @@ class ESBWebServiceExporter(AbstractComponent):
 
         # prevent other jobs to export the same record
         # will be released on commit (or rollback)
-        # self._lock()
+        self._lock()
 
         map_record = self._map_data()
 
