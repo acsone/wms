@@ -28,6 +28,7 @@ Unreleased
 * ALCN-1418: Final fix for the infamous 10 != 8 bug in tests
 * ALCYN-437: Fix concurent access on sale order export (ESB)
 * ALCYN-398: Fix zip document filename being exported (ESB)
+* ALCYN-433: Fix document filename "note d'envoi" by changing res_partner.ref instead of id
 
 **Build**
 
