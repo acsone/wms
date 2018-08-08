@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-403: ungroup picking created on final confirmation of imported sale orders from DB2
+
 **Features and Improvements**
 
 * ALCYN-80: Display suite name on SO view and report

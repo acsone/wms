@@ -1017,3 +1017,47 @@ class TestImportSO(DB2ImportTestCase):
                     expected_qty['ordered_qty'], line.product_uom_qty)
                 self.assertEqual(
                     expected_qty['delivered_qty'], line.qty_delivered)
+
+    def test_picking_nogrouping_by_partner(self):
+        """Non regression test for picking group by partner
+        introduced by module stock_groupbypartner
+
+        Check don't have a same picking linked to 2 different sale orders.
+
+        """
+        self.importer_table_so.importer_id.mode = 'final_update'
+
+        suite1 = 2844358
+        suite2 = 2844359  # fake additional order by same customer
+
+        db2_id = self.get_row_from_suite(suite1)
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        db2_id = self.get_row_from_suite(suite2)
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so1 = self.env['sale.order'].search([('name', '=', str(suite1))])
+        self.so2 = self.env['sale.order'].search([('name', '=', str(suite2))])
+
+        self.assertNotEqual(
+            self.so1.procurement_group_id,
+            self.so2.procurement_group_id)
+
+        # 5 pickings
+        # Aliment -> Output state: done
+        # Aliment -> Output state: confirmed (Backorder)
+        # Med -> Output state: done
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so1.picking_ids), 5)
+
+        # 5 pickings
+        # Aliment -> Output state: done
+        # Aliment -> Output state: confirmed (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: assigned (Backorder)
+        self.assertEqual(len(self.so2.picking_ids), 4)
+
+        # check that no picking is linked to both sale order
+        # intersection must be empty
+        self.assertFalse(self.so1.picking_ids & self.so2.picking_ids)
