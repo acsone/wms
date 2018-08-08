@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-403: ungroup picking created on final confirmation of imported sale orders from DB2
+* ALCYN-166: Set "Belgium Only" on products for given list
 
 **Features and Improvements**
 
