@@ -15,6 +15,7 @@ Unreleased
 * ALCYN-80: Display suite name on SO view and report
 * ALCYN-416: Allow to set type on partner without opening master and editing contacts'
 * ALCYN-416: Link affiliate to partners and change types of partners.
+* ALCYN-434: Create 3 Reception users. These users will be assigned later to a specific printer.
 
 **Bugfixes**
 
