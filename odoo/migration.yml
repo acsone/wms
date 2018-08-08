@@ -463,5 +463,7 @@ migration:
               - anthem songs.install.accounting::activate_check_on_vat
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
       operations:
+        pre:
+          - anthem songs.upgrade.10_23_0_update::pre
         post:
           - anthem songs.install.user::import_users
