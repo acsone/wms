@@ -1,2 +1,0 @@
-id,ratio_main_product,unit_in_shrink_wrap,unit_in_box,ratio_additional_product,unit_in_pallet,storage_temperature_id/id,list_price,route_ids/id
-__import__.product_5910038,0,0,0,0,0,specific_product.product_storage_temperature_ambient,96.53,"stock.route_warehouse0_mto,purchase.route_warehouse0_buy"

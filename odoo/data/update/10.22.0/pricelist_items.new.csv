@@ -1,3 +1,0 @@
-pricelist_id/id,fixed_price,product_tmpl_id/id,compute_price,applied_on,id
-specific_data.product_pricelist_pb2,30.53,__import__.product_5010545_product_template,fixed,1_product,__import__.pricelist_item_product_5010545_pb2
-specific_data.product_pricelist_pb2,27.02,__import__.product_5802843_product_template,fixed,1_product,__import__.pricelist_item_product_5802843_pb2

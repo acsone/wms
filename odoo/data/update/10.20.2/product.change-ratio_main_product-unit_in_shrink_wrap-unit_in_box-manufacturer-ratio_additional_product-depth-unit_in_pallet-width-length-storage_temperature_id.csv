@@ -1,4 +1,0 @@
-id,ratio_main_product,unit_in_shrink_wrap,unit_in_box,manufacturer/id,ratio_additional_product,depth,unit_in_pallet,width,length,storage_temperature_id/id
-__import__.product_5973628,0,0,0,__import__.supplier_74140,0,0,0,0,0,specific_product.product_storage_temperature_ambient
-__import__.product_5973629,0,0,0,__import__.supplier_74140,0,0,0,0,0,specific_product.product_storage_temperature_ambient
-__import__.product_9973623,0,0,0,__import__.supplier_74140,0,0,0,0,0,specific_product.product_storage_temperature_ambient

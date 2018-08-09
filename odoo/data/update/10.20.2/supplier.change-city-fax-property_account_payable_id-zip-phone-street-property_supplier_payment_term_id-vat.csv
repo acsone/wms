@@ -1,2 +1,0 @@
-id,city,fax,property_account_payable_id/id,zip,phone,street,property_supplier_payment_term_id/id,vat
-__import__.supplier_67537,DROGENBOS,02/5566212,__setup__.account_440100,1620,02/5566211,Boulevard de l'Humanité 233,__setup__.account_payment_term_cr,BE0479101608

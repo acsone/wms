@@ -1,2 +1,0 @@
-id,mobile,property_delivery_carrier_id/id,company_type,legal_entity_id/id,phone,title/id,email,is_company,user_id/id
-__import__.customer_1030,0475/415375,__setup__.deliver_carrier_alcyon,person,,,base.res_partner_title_dctveter,veterinaire.denis@gmail.com,,__setup__.res_user_20

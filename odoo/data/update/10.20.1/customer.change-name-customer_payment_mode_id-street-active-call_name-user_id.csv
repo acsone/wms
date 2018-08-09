@@ -1,2 +1,0 @@
-id,name,customer_payment_mode_id/id,street,active,call_name,user_id/id
-__import__.customer_7660,SCHOBYN PIERRE ALIMENTATION*,__setup__.account_payment_mode_1,Chaussée de Dinant 1193,True,SCHOBYNP.ALIMENTATION*,__setup__.res_user_20
