@@ -161,13 +161,12 @@ class DB2MapperPurchaseOrder(object):
         received_lines = []
         not_received_lines = []
 
+        # skip lines without product reference
+        # those lines are replaced products
+        # we won't import replacements in history
+        lines = [l for l in lines if line['dcfart']]
         for line in lines:
             product_code = line['dcfart']
-            if not product_code:
-                # skip lines without product reference
-                # those lines are replaced products
-                # we won't import replacements in history
-                continue
             product_xmlid = convert_product_id(product_code)
             product = rec.env.ref(product_xmlid)
 
