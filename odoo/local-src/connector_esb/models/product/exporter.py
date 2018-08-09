@@ -43,12 +43,12 @@ class ProductExportMapper(Component):
     @mapping
     def supplier(self, record):
         supplier_product_code = ''
-        supplier_ref = ''
+        supplier_ref = '0'
         suppliers = record.seller_ids
         if suppliers:
             supplier = suppliers[0]
             supplier_product_code = supplier.product_code or ''
-            supplier_ref = supplier.name.ref or ''
+            supplier_ref = supplier.name.ref or '0'
         return {'Gesarc': supplier_product_code,
                 'Gesfou': supplier_ref,
                 # "fabricant" could maybe be removed
@@ -89,9 +89,11 @@ class ProductExportMapper(Component):
             grp = sub_grp
         else:
             grp = sub_grp.parent_id
+        grp_ref = grp.esb_ref or '0'
+        subgrp_ref = sub_grp.esb_ref or '0'
         return {
-            'Gescgr': grp.esb_ref or '0',
-            'Gescsg': sub_grp.esb_ref or '0',
+            'Gescgr': grp_ref if grp_ref.isdigit() else '0',
+            'Gescsg': subgrp_ref if subgrp_ref.isdigit() else '0',
             }
 
     @mapping

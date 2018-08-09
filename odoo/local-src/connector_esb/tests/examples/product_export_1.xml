@@ -8,7 +8,7 @@
       <!-- supplier code -->
       <Gesarc>supplier001</Gesarc>
       <!-- Code groupe ERP -->
-      <Gescgr>medicament</Gescgr>
+      <Gescgr>0</Gescgr>
       <!-- Code sous-groupe ERP -->
       <Gescsg>15</Gescsg>
       <!-- name -->
