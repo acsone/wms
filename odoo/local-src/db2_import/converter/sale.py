@@ -146,6 +146,9 @@ class DB2MapperSaleOrder(object):
         delivered_lines = []
         not_delivered_lines = []
 
+        # register non skipped lines
+        valid_lines = []
+
         previous_line = None
         for line in lines:
             product_code = line['dccart']
@@ -171,6 +174,7 @@ class DB2MapperSaleOrder(object):
                 if product.product_tmpl_id.is_an_additional_product():
                     # And if it is an accessory of another product, skip it
                     continue
+            valid_lines.append(line)
             # While odoo could do it for us on create
             # in _prepare_add_missing_fields
             # Do it ourselves to avoid call to onchange
@@ -258,7 +262,7 @@ class DB2MapperSaleOrder(object):
                     lambda p: p.location_dest_id == loc_output)
                 pick2 = picks.filtered(
                     lambda p: p.location_dest_id == loc_customers)
-                pick_lines = cls.map_orderline2move(lines)
+                pick_lines = cls.map_orderline2move(valid_lines)
                 # Do internal pickings to output location
                 for pick in picks1:
                     do_partial_picking(pick, pick_lines)
