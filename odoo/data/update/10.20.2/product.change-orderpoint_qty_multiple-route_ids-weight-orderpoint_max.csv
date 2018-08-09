@@ -1,6 +1,0 @@
-id,orderpoint_qty_multiple,route_ids/id,weight,orderpoint_max
-__import__.product_5005048,1,purchase.route_warehouse0_buy,,1
-__import__.product_5132126,1,purchase.route_warehouse0_buy,,1
-__import__.product_5156514,1,purchase.route_warehouse0_buy,,1
-__import__.product_5161512,1,purchase.route_warehouse0_buy,,1
-__import__.product_5260571,1,purchase.route_warehouse0_buy,,1

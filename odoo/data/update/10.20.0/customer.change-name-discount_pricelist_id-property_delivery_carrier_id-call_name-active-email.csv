@@ -1,2 +1,0 @@
-id,name,discount_pricelist_id/id,property_delivery_carrier_id/id,call_name,active,email
-__import__.customer_5463,LIFE OFFICINE 3119 VIA CERP,,__setup__.deliver_carrier_alcyon,LIFE OFF 3119,True,commandes.cerpwallonie@cerp.be

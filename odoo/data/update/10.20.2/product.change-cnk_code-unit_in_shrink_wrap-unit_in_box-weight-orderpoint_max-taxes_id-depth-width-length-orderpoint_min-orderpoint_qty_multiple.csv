@@ -1,2 +1,0 @@
-id,cnk_code,unit_in_shrink_wrap,unit_in_box,weight,orderpoint_max,taxes_id/id,depth,width,length,orderpoint_min,orderpoint_qty_multiple
-__import__.product_8270105,3759917,4,4,1.6,15,"l10n_be.1_attn_VAT-OUT-06-L,l10n_be_apb_tax.1_apb_01_out,l10n_be_antibiotic_tax.1_antibiotic_003_in,l10n_be_antibiotic_tax.1_antibiotic_003_out",16,11,28.5,6,4

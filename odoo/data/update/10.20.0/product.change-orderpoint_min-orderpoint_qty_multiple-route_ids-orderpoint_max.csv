@@ -1,4 +1,0 @@
-id,orderpoint_min,orderpoint_qty_multiple,route_ids/id,orderpoint_max
-__import__.product_3275617,1.000,1,purchase.route_warehouse0_buy,2.000
-__import__.product_5611509,2.000,1,purchase.route_warehouse0_buy,5.000
-__import__.product_5611520,1.000,1,purchase.route_warehouse0_buy,2.000

@@ -1,2 +1,0 @@
-id,uom_id/id,route_ids/id,uom_po_id/id
-__import__.product_5045133,__setup__.product_uom_boite,purchase.route_warehouse0_buy,__setup__.product_uom_boite

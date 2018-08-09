@@ -1,2 +1,0 @@
-id,list_price,name,manufacturer/id,depth,width,length,active,web_published,route_ids/id,categ_id/id
-__import__.product_5107000,465,MICROSCOPE  DE BASE (BINOCULAIR) BA81,__import__.supplier_74411,0,0,0,True,True,purchase.route_warehouse0_buy,specific_data.product_categ_mat_equipement
