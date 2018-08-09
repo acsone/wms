@@ -90,6 +90,7 @@ migration:
               - anthem songs.install.data_full::create_journals
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/products_only_belgium.csv
         sample:
           operations:
             post:
@@ -100,6 +101,7 @@ migration:
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/sample/products_only_belgium.csv
       addons:
         upgrade:
           ### Odoo
@@ -459,6 +461,7 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - anthem songs.install.data_full::post_import_partner
               - anthem songs.install.accounting::activate_check_on_vat
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
       operations:
         post:
           - anthem songs.install.user::import_users
