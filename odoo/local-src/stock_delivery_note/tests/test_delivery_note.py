@@ -65,6 +65,7 @@ class TestStockDeliveryNote(TransactionCase):
             'title': self.env.ref('base.res_partner_title_prof').id,
             'name':  'HOENS OLIVIERé',
             'email': 'tester@pytest.com',
+            'ref': '123456789',
             'street':  'Rue Polisart 2 A',
             'zip': '5300',
             'city': 'ANDENNE',
@@ -100,6 +101,18 @@ class TestStockDeliveryNote(TransactionCase):
             'qty_done': 10,
         })
         self.picking.do_new_transfer()
+
+    def test_delivery_note_filename(self):
+        """Check the correct generation of the filename"""
+        expected_filename = '_'.join([
+                'NE',
+                '123456789',
+                str(self.picking.id),
+                ''.join(self.picking.create_date[:10].split('-')),
+                ''.join(self.picking.create_date[-8:].split(':')),
+                ]) + '.csv'
+        filename = self.picking._get_delivery_note_filename()
+        self.assertEqual(filename, expected_filename)
 
     def test_creation_note_on_validate_picking(self):
         """Check that the csv document is in the store."""

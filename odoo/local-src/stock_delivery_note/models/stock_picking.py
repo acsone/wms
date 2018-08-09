@@ -21,6 +21,18 @@ class StockPicking(models.Model):
         return result
 
     @api.multi
+    def _get_delivery_note_filename(self):
+        """Return the delivery note filename."""
+        self.ensure_one()
+        return '_'.join([
+            'NE',
+            self.partner_id.ref,
+            str(self.id),
+            ''.join(self.create_date[:10].split('-')),
+            ''.join(self.create_date[-8:].split(':')),
+            ]) + '.csv'
+
+    @api.multi
     def _save_delivery_note(self, lines):
         """Save the delivery note in csv format in ir.attachment"""
         self.ensure_one()
@@ -29,13 +41,7 @@ class StockPicking(models.Model):
         for line in lines:
             w.writerow(line)
         data = file_data.getvalue()
-        filename = '_'.join([
-            'NE',
-            str(self.partner_id.id),
-            str(self.id),
-            ''.join(self.create_date[:10].split('-')),
-            ''.join(self.create_date[-8:].split(':')),
-            ]) + '.csv'
+        filename = self._get_delivery_note_filename()
         existing = self.env['ir.attachment'].search([('name', '=', filename)])
         if len(existing):
             existing[0].datas = data.encode('base_64')
