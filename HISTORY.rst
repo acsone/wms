@@ -17,6 +17,7 @@ Unreleased
 * ALCYN-416: Allow to set type on partner without opening master and editing contacts'
 * ALCYN-416: Link affiliate to partners and change types of partners.
 * ALCYN-434: Create 3 Reception users. These users will be assigned later to a specific printer.
+* ALCYN-428: On web service returning xml data, set the content-type to text/xml (ESB)
 
 **Bugfixes**
 

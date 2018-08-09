@@ -77,7 +77,9 @@ class StatsController(http.Controller):
                 suppliers=supplier.split(',') if supplier.strip() else False,
                 language=values['language']
             )
-            return component.get_message(options)
+            res = component.get_message(options)
+            headers = [('Content-Type', 'text/xml')]
+            return request.make_response(res, headers)
 
     @http.route('/connector_esb/statistics/product/<string:sku>/'
                 '<string:customer_ref>', type='http',
@@ -96,9 +98,11 @@ class StatsController(http.Controller):
         env = request.env
         backend = env['esb.backend'].get_singleton()
         with backend.work_on('sale.order.line') as work:
-            return work.component(
+            res = work.component(
                 'ws.message.product.customer.stat'
             ).get_message(customer_ref, sku)
+            headers = [('Content-Type', 'text/xml')]
+            return request.make_response(res, headers)
 
     @http.route('/connector_esb/statistics/customer/<string:customer_ref>',
                 type='http', auth='user', csrf=False)
@@ -119,9 +123,11 @@ class StatsController(http.Controller):
         env = request.env
         backend = env['esb.backend'].get_singleton()
         with backend.work_on('sale.order.line') as work:
-            return work.component(
+            res = work.component(
                 'ws.message.customer.stat'
             ).get_message(customer_ref)
+            headers = [('Content-Type', 'text/xml')]
+            return request.make_response(res, headers)
 
     @http.route('/connector_esb/totalorder/customer/<string:customer_ref>',
                 type='http', auth='public', csrf=False)
@@ -139,5 +145,7 @@ class StatsController(http.Controller):
         backend = env['esb.backend'].get_singleton()
 
         with backend.work_on('res.partner') as work:
-            return (work.component('ws.message.customer.delivery.fee')
-                    .get_message(customer_ref))
+            res = (work.component('ws.message.customer.delivery.fee')
+                   .get_message(customer_ref))
+            headers = [('Content-Type', 'text/xml')]
+            return request.make_response(res, headers)
