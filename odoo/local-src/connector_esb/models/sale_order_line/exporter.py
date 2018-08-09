@@ -16,8 +16,8 @@ class SaleOrderLineExportMapper(Component):
         ('sequence', 'line_number'),
         ('product_uom_qty', 'qty_ordered'),
         (falsy2zero('qty_delivered'), 'qty_delivered'),
-        (falsy2zero('price_unit'), 'price'),
-        (falsy2zero('price_total'), 'price_inc_tax'),
+        (falsy2zero('price_reduce_taxexcl'), 'price'),
+        (falsy2zero('price_reduce_taxinc'), 'price_inc_tax'),
         (falsy2zero('product_qty_canceled'), 'qty_cancelled'),
         (falsy2zero('product_qty_unavailable'), 'qty_backorder')
     ]
@@ -25,9 +25,3 @@ class SaleOrderLineExportMapper(Component):
     @mapping
     def compute_sku(self, record):
         return {'sku': record.product_id.default_code or ''}
-
-    @mapping
-    def compute_price_inc_tax(self, record):
-        unit_tax = record.price_reduce_taxinc - record.price_reduce
-        unit_price_with_tax = record.price_unit + unit_tax
-        return {'price_inc_tax': unit_price_with_tax}

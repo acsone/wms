@@ -29,6 +29,7 @@ Unreleased
 * ALCYN-437: Fix concurent access on sale order export (ESB)
 * ALCYN-398: Fix zip document filename being exported (ESB)
 * ALCYN-433: Fix document filename "note d'envoi" by changing res_partner.ref instead of id
+* ALCYN-441: Fix prices with/without tax on sale order line send to web service (ESB)
 
 **Build**
 
