@@ -459,3 +459,6 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - anthem songs.install.data_full::post_import_partner
               - anthem songs.install.accounting::activate_check_on_vat
+      operations:
+        post:
+          - anthem songs.install.user::import_users
