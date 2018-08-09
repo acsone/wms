@@ -10,6 +10,8 @@ Unreleased
 
 * ALCYN-403: ungroup picking created on final confirmation of imported sale orders from DB2
 * ALCYN-166: Set "Belgium Only" on products for given list
+* ALCYN-446: Fix KeyError 'odoo_id' in purchase import jobs, purchase lines without product code
+             weren't fully skipped.
 
 **Features and Improvements**
 
