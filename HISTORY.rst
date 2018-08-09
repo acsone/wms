@@ -31,6 +31,9 @@ Unreleased
 * ALCYN-433: Fix document filename "note d'envoi" by changing res_partner.ref instead of id
 * ALCYN-441: Fix prices with/without tax on sale order line send to web service (ESB)
 * ALCYN-430: Fix delivery fee web service remove an xml node.
+* ALCYN-161: Fix product export (ESB)
+    * Make sure that gesfou is nerver empty but as zero by default.
+    * Make sure that gescgr and gescsg are always an integer.
 
 **Build**
 
