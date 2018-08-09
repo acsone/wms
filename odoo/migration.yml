@@ -52,6 +52,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
+              - anthem songs.install.data_full::post_import_partner
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
@@ -451,3 +452,10 @@ migration:
           - specific_report
           - specific_sale
           - specific_partner
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.upgrade.common::deactivate_check_on_vat
+              - anthem songs.install.data_full::post_import_partner
+              - anthem songs.install.accounting::activate_check_on_vat
