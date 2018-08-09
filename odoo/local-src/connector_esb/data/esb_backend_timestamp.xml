@@ -77,7 +77,7 @@
     <field name="backend_id" ref="esb_backend_config"/>
     <field name="model">ir.attachment</field>
     <field name="kind">documents</field>
-    <field name="export_filename">Document_{date}.zip</field>
+    <field name="export_filename">Documents_{date}.zip</field>
   </record>
 
 </odoo>
