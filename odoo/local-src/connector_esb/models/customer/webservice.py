@@ -111,8 +111,14 @@ class CustomerDeliveryFeeWebserviceMessage(Component):
     _usage = 'ws.message.customer.delivery.fee'
 
     def get_message(self, customer_ref):
-        data = [{
-            'totalOrderAmount': '9999.00',
-            'byPassTestAmount': True,
-        }]
-        return self._produce_xml(data, list_item_el='result')
+        """Always sending the same result !? so no need to call produce.
+
+           As well the structure of the xml without the wrapping
+           element makes it difficult to generate with the producer as it is.
+           So easier and faster to return what is expected.
+        """
+        return ('<?xml version="1.0" encoding="UTF-8" ?>'
+                '<result>'
+                '<byPassTestAmount>True</byPassTestAmount>'
+                '<totalOrderAmount>9999.00</totalOrderAmount>'
+                '</result>')
