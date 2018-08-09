@@ -208,6 +208,11 @@ class SaleOrderLine(models.Model):
                         ('procurement_id.sale_line_id', '=', line_id),
                         ('state', 'not in', ['draft', 'cancel', 'done'])
                     ], limit=1)
+                    if not order_line_stock_move:
+                        return min(
+                            abs(immediately_usable_qty),
+                            product_uom_qty,
+                        )
                     stock_move_date_expected = (
                         order_line_stock_move.date_expected
                     )
@@ -217,10 +222,17 @@ class SaleOrderLine(models.Model):
                         ('procurement_id.sale_line_id', '!=', line_id),
                         ('state', 'not in', ['draft', 'cancel', 'done']),
                         '|',
-                        ('priority', '<',  order_line_stock_move.priority),
+                        '|',
+                        ('priority', '<', order_line_stock_move.priority),
                         '&',
                         ('priority', '=', order_line_stock_move.priority),
-                        ('date_expected', '>=', stock_move_date_expected),
+                        ('date_expected', '>', stock_move_date_expected),
+                        # in rare case of same date_expected,
+                        # use id to sort the moves
+                        '&', '&',
+                        ('priority', '=', order_line_stock_move.priority),
+                        ('date_expected', '=', stock_move_date_expected),
+                        ('id', '>', order_line_stock_move.id),
                     ])
                     next_quantities = sum(
                         move.product_uom_qty for move in next_stock_moves
