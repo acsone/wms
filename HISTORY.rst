@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.23.0 (2018-08-10)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-403: ungroup picking created on final confirmation of imported sale orders from DB2
@@ -37,10 +49,6 @@ Unreleased
 * ALCYN-161: Fix product export (ESB)
     * Make sure that gesfou is nerver empty but as zero by default.
     * Make sure that gescgr and gescsg are always an integer.
-
-**Build**
-
-**Documentation**
 
 
 10.22.5 (2018-08-06)
