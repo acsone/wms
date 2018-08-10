@@ -37,6 +37,7 @@ __import__.supplier_contact_61700_1,contact,DERASSE ALBERT,,02/3553285,,False,Fa
 __import__.supplier_contact_61700_2,contact,MME CARLA VAN DER STEEN,,02/463.23.90,,False,False,fr_BE,,,__import__.supplier_61700
 __import__.supplier_contact_61700_3,contact,JENNY CORTEN,,,,False,False,nl_BE,,0477/22 08 53,__import__.supplier_61700
 __import__.supplier_contact_61740_1,contact,MAD. APRIL FAY,,,,False,False,fr_BE,afay@midmark.com,,__import__.supplier_61740
+__import__.supplier_contact_61780_1,contact,MAD. MELISSA VANHUYSE,,,,False,False,fr_BE,melissa.vanhuyse@cidlines.com,,__import__.supplier_61780
 __import__.supplier_contact_61851_1,contact,MR. PIERRE BUTTIENS,,,,False,False,fr_BE,p.buttiens@outlook.fr,,__import__.supplier_61851
 __import__.supplier_contact_61920_1,contact,MONSIEUR THIERRY POIGNON,DIRECTEUR GENERAL,,,False,False,fr_BE,,,__import__.supplier_61920
 __import__.supplier_contact_61922_1,contact,MR PAUL VAN DER REE,MANAGER OPERATIONELE INKOOP,0031/610427803,,False,False,nl_BE,,,__import__.supplier_61922
@@ -111,6 +112,7 @@ __import__.supplier_contact_63896_1,contact,DR TEUCQ,,,,False,False,fr_BE,,,__im
 __import__.supplier_contact_63900_1,contact,MME DUTOIT,,054/410622,054/410622,False,False,fr_BE,,,__import__.supplier_63900
 __import__.supplier_contact_63900_2,contact,MME DEPECENNIER,,,,False,False,fr_BE,,,__import__.supplier_63900
 __import__.supplier_contact_63908_1,contact,SANDRA SAVOIE,,,,False,False,fr_BE,,,__import__.supplier_63908
+__import__.supplier_contact_63935_1,contact,CONTACT,,,,False,False,nl_BE,info@dialexbiomedica.be,,__import__.supplier_63935
 __import__.supplier_contact_63960_1,contact,VERA DAEMS,,,,False,False,fr_BE,,,__import__.supplier_63960
 __import__.supplier_contact_63960_2,contact,MR TERSAGO,,,,False,False,fr_BE,,,__import__.supplier_63960
 __import__.supplier_contact_63965_1,contact,MONSIEUR FRANCOIS HEMBERG,,,,False,False,fr_BE,,0474/494035,__import__.supplier_63965
@@ -128,7 +130,7 @@ __import__.supplier_contact_64350_2,contact,MAD. SABINE WEBER,,,,False,False,fr_
 __import__.supplier_contact_64355_1,contact,MR. RAPHAEL ELLEBOUDT,,,,False,False,fr_BE,raphael.elleboudt@digatrading.be,,__import__.supplier_64355
 __import__.supplier_contact_64400_1,contact,MR CARREE,,,,False,False,fr_BE,,,__import__.supplier_64400
 __import__.supplier_contact_64450_1,contact,MR DE HOUCK,,,,False,False,fr_BE,,,__import__.supplier_64450
-__import__.supplier_contact_64460_1,contact,MICHEL FRERE,,,,False,False,fr_BE,,0476492378,__import__.supplier_64460
+__import__.supplier_contact_64460_1,contact,MICHEL FRERE,,,,False,False,fr_BE,info@michelfrere.com,0476492378,__import__.supplier_64460
 __import__.supplier_contact_64502_1,contact,MAD CHRIS CARIS,,,,False,False,nl_BE,info@instruma.be,,__import__.supplier_64502
 __import__.supplier_contact_65000_1,contact,BARBARA ESCR,,,,False,False,fr_BE,,,__import__.supplier_65000
 __import__.supplier_contact_65100_1,contact,GERALDINE ROUME,,,,False,False,fr_BE,,,__import__.supplier_65100
@@ -266,12 +268,14 @@ __import__.supplier_contact_74141_1,contact,MME APRIL JAMES,,0044/7785524773,,Fa
 __import__.supplier_contact_74146_1,contact,BROOTHAERS DANI,,,,False,False,fr_BE,,,__import__.supplier_74146
 __import__.supplier_contact_74146_2,contact,MR DOMINIQUE BODSON,,,,False,False,fr_BE,,,__import__.supplier_74146
 __import__.supplier_contact_74146_3,contact,ADRESSE GENERALE-COMMANDES,,,,False,False,fr_BE,,,__import__.supplier_74146
+__import__.supplier_contact_74147_1,contact,COMMANDES,,,,False,False,fr_BE,ventes@medipost.be,,__import__.supplier_74147
 __import__.supplier_contact_74148_1,contact,PAUL MACORS,,,,False,False,fr_BE,,,__import__.supplier_74148
 __import__.supplier_contact_74148_2,contact,HENRI DECLOUX,,,,False,False,fr_BE,,,__import__.supplier_74148
 __import__.supplier_contact_74151_1,contact,MARIE PAULE DENAYER,,02/686.07.82,,False,False,fr_BE,,,__import__.supplier_74151
 __import__.supplier_contact_74154_1,contact,MR. HARALD GREINER,,,,False,False,de_DE,greiner@medvet.de,,__import__.supplier_74154
 __import__.supplier_contact_74154_2,contact,MR. ROSS WATT,,,,False,False,fr_BE,watt@medvet.de,,__import__.supplier_74154
 __import__.supplier_contact_74157_1,contact,MEDICAMENTS,,,,False,False,nl_BE,,,__import__.supplier_74157
+__import__.supplier_contact_74158_1,contact,MR. NICOLAS MULS,,,,False,False,fr_BE,muls@medical-promotion.be,,__import__.supplier_74158
 __import__.supplier_contact_74160_1,contact,MAURICE THOMPSON,,,,False,False,fr_BE,,,__import__.supplier_74160
 __import__.supplier_contact_74160_2,contact,MAURICE,,,,False,False,fr_BE,mssmedical@fsbdial.co.uk,,__import__.supplier_74160
 __import__.supplier_contact_74161_1,contact,MONSIEUR PHILIPPE HERRENT,SALES MANAGER,,,False,False,fr_BE,,,__import__.supplier_74161
@@ -310,7 +314,6 @@ __import__.supplier_contact_74312_1,contact,MAD. MIA DEPESTEL,,,,False,False,nl_
 __import__.supplier_contact_74342_1,contact,MADAME  ELS BLIECK,RESPONSABLE DE REGION,056/236601,,False,False,fr_BE,adresse mail : els@mls.be,,__import__.supplier_74342
 __import__.supplier_contact_74411_1,contact,MAD. LAURA CRISTALDI,,,,False,False,fr_BE,laura.cristaldi@moticeurope.com,,__import__.supplier_74411
 __import__.supplier_contact_74435_1,contact,MONSIEUR JEAN DE GRAVE,GÉRANT,,,False,False,fr_BE,,,__import__.supplier_74435
-__import__.supplier_contact_74520_1,contact,NICO GORTER,,0031/653794282,,False,False,nl_BE,,,__import__.supplier_74520
 __import__.supplier_contact_74520_2,contact,ALEX BERENDS,,0031/651828117,,False,False,nl_BE,,,__import__.supplier_74520
 __import__.supplier_contact_74520_3,contact,COMMANDES,,,,False,False,nl_BE,info@mxr.nl,,__import__.supplier_74520
 __import__.supplier_contact_74565_1,contact,MONSIEUR STEPHANE RANELY,CHEF DE PROJETS,0033143741167,,False,False,fr_BE,,,__import__.supplier_74565
@@ -362,6 +365,7 @@ __import__.supplier_contact_77612_2,contact,FRANCOIS LATOUR,INGÉNIEUR SYSTEME,0
 __import__.supplier_contact_77612_3,contact,STEPHANE DEVILLERS,,02/723 91 36,,False,False,fr_BE,,,__import__.supplier_77612
 __import__.supplier_contact_77614_1,contact,MR. BENOIT CAYREL,,,,False,False,fr_BE,benoit.cayrel@imv-technologies.com,,__import__.supplier_77614
 __import__.supplier_contact_77614_2,contact,MAD. SANDRINE LUCAS,,,,False,False,fr_BE,sandrine.lucas@imv-technologies.com,,__import__.supplier_77614
+__import__.supplier_contact_77618_1,contact,COMMANDES,,,,False,False,fr_BE,sales@prodivet.com,,__import__.supplier_77618
 __import__.supplier_contact_77642_1,contact,MARTIN SCHOONBROODT,BUSINESS DEVELOPMENT DIRECTOR,,,False,False,fr_BE,,,__import__.supplier_77642
 __import__.supplier_contact_77850_1,contact,JOSIANE VAN INGELGOM,RÉVISEUR D'ENTREPRISES,,,False,False,fr_BE,liege@pvmd.be,,__import__.supplier_77850
 __import__.supplier_contact_78500_1,contact,MONSIEUR CARLOS CREMERS,,,,False,False,fr_BE,,,__import__.supplier_78500
@@ -422,6 +426,7 @@ __import__.supplier_contact_79244_1,contact,KATHI FEES,,,,False,False,fr_BE,kfee
 __import__.supplier_contact_79244_2,contact,COMMANDES,,,,False,False,fr_BE,petwholesale@smartpractice.com,,__import__.supplier_79244
 __import__.supplier_contact_79245_1,contact,COMMANDES,,,,False,False,fr_BE,ordersbe@smith-nephew.com,,__import__.supplier_79245
 __import__.supplier_contact_79245_2,contact,MR. THIBAULT LEBBE,,,,False,False,nl_BE,,,__import__.supplier_79245
+__import__.supplier_contact_79248_1,contact,COMMANDES,,,,False,False,fr_BE,belgium@smiths-medical.com,,__import__.supplier_79248
 __import__.supplier_contact_79250_1,contact,COMPTA,,04/2301154,,False,False,fr_BE,,,__import__.supplier_79250
 __import__.supplier_contact_79301_1,contact,MR BERNARD MATHOT,,,,False,False,fr_BE,,0477/406 303,__import__.supplier_79301
 __import__.supplier_contact_79405_1,contact,MARTINE VAN OREN,,095/211962,,False,False,fr_BE,,,__import__.supplier_79405
@@ -473,6 +478,7 @@ __import__.supplier_contact_82395_1,contact,PIETER DE BAERDEMAKER,,,,False,False
 __import__.supplier_contact_82400_1,contact,COMMANDES + RETOURS,,,,False,False,fr_BE,vygonbe@vygon.com,,__import__.supplier_82400
 __import__.supplier_contact_82450_1,contact,MR MICHIELS,,,,False,False,fr_BE,,,__import__.supplier_82450
 __import__.supplier_contact_82520_1,contact,MONSIEUR AYMERIC DE HEMPTINNE,ADMINISTRATEUR DELEGUE,,,False,False,fr_BE,,,__import__.supplier_82520
+__import__.supplier_contact_82540_1,contact,MR. PINEAU,,,,False,False,fr_BE,vetinox@orange.fr,,__import__.supplier_82540
 __import__.supplier_contact_82550_1,contact,MR. PIETER DRUIF,,,,False,False,nl_BE,pieter.druif@vetipharma.nl,,__import__.supplier_82550
 __import__.supplier_contact_82593_1,contact,J BUYSE,,,,False,False,fr_BE,,,__import__.supplier_82593
 __import__.supplier_contact_82593_2,contact,MARC WAGEMAUS,,,,False,False,fr_BE,,,__import__.supplier_82593

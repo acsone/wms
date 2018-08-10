@@ -72,6 +72,7 @@ __import__.bank_CCBPFRPPBDX,CCBPFRPPBDX,Banque pop centre Atlantique
 __import__.bank_CCBPFRPPGRE,CCBPFRPPGRE,Banque populaire
 __import__.bank_CCBPFRPPGRE,CCBPFRPPGRE,Banque Populaire Auvergne
 __import__.bank_CCBPFRPPMAR,CCBPFRPPMAR,Banque populaire méditerranée
+__import__.bank_CCBPFRPPMAR,CCBPFRPPMAR,BPMED CAE ALPES MARITIMES
 __import__.bank_CCBPFRPPMTG,CCBPFRPPMTG,Banque Populaire
 __import__.bank_CCBPFRPPMTG,CCBPFRPPMTG,Banque Populaire Rives de Paris
 __import__.bank_CCBPFRPPMTG,CCBPFRPPMTG,BANQUE POPULAIRE RIVE DE PARIS
@@ -94,6 +95,7 @@ __import__.bank_CITIGB2L,CITIGB2L,CITIBANK
 __import__.bank_CMBRFR2BCME,CMBRFR2BCME,Credit mutuel Arkea
 __import__.bank_CMBRFR2BCME,CMBRFR2BCME,Credit Mutuel Arkea
 __import__.bank_CMBRFR2BXXX,CMBRFR2BXXX,Crédit Mutuel de Bretagne
+__import__.bank_CMCIFRPP,CMCIFRPP,Crédit industriel et commercial
 __import__.bank_CMCIFRPP,CMCIFRPP,CC LYONNAISE DE BANQUE
 __import__.bank_CMCIFRPP,CMCIFRPP,CIC Banque
 __import__.bank_CMCIFRPP,CMCIFRPP,CIC HAUTE-SAVOIE ENTREPRISES
@@ -173,6 +175,7 @@ __import__.bank_GKCCBEBB,GKCCBEBB,Dexia Banque Belgique
 __import__.bank_GOPSDE6GXXX,GOPSDE6GXXX,KSK GÖPPINGEN
 __import__.bank_HBKABE22,HBKABE22,Record Bank
 __import__.bank_HBKABE22,HBKABE22,Recordbank
+__import__.bank_HBUKGB4B,HBUKGB4B,HSBC Bank
 __import__.bank_HBUKGB4144A,HBUKGB4144A,HSBC BANK
 __import__.bank_HSBCBEBB,HSBCBEBB,HSBC Bank
 __import__.bank_HSBCBEBB,HSBCBEBB,HSBC BANK PLC
@@ -187,6 +190,7 @@ __import__.bank_INGBNL2A,INGBNL2A,ING BANK NV
 __import__.bank_JVBABE22,JVBABE22,Bank J. Van Breda & C°
 __import__.bank_JVBABE22,JVBABE22,J VAN BREDA & C°
 __import__.bank_KREDBEBB,KREDBEBB,cbc Banque
+__import__.bank_KREDBEBB,KREDBEBB,kbc
 __import__.bank_KREDBEBB,KREDBEBB,KBC
 __import__.bank_KREDBEBB,KREDBEBB,KBC Bank
 __import__.bank_KREDBEBB,KREDBEBB,KBC Banque
@@ -249,6 +253,7 @@ __import__.bank_UBSWCHZH30A,UBSWCHZH30A,UBS AG
 __import__.bank_UNCRITB1Q45,UNCRITB1Q45,UNICREDIT BANCA SPA
 __import__.bank_UNCRITMM,UNCRITMM,UNICREDIT BANCA SPA - LANGHIRANO
 __import__.bank_UNCRITM1PN9,UNCRITM1PN9,UNICREDIT SPA
+__import__.bank_VBOEATWWSAL,VBOEATWWSAL,VOLKSBANK SEEKIRCHEN
 __import__.bank_VEBHIT2M,VEBHIT2M,VENETO BANCA HOLDING
 __import__.bank_VOHADE2HXXX,VOHADE2HXXX,HANNOVERSCHE VOLKSBANK
 __import__.bank_VOLODE66XXX,VOLODE66XXX,Volksbank Dreiländereck eG
