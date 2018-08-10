@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+ * ALCYN-435: Fix random error in test on connector_esb when testing filename
+
 **Build**
 
 **Documentation**

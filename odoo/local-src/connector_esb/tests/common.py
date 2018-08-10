@@ -10,6 +10,7 @@ from odoo import fields
 
 import xmlunittest
 from lxml import etree
+from freezegun import freeze_time
 
 
 class ESBTestCase(SavepointComponentCase):
@@ -116,6 +117,7 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
         with open(path, 'r') as thefile:
             return thefile.read()
 
+    @freeze_time("2018-08-10 17:10:00")
     def check_filename(self, name_template):
         """
            Test the filename of the export, the name template can have a date
