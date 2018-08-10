@@ -1008,6 +1008,7 @@ class LocationMapper(EntityMapper):
             odoo_entity = OrderedDict(id=None)
             odoo_entity['name'] = family + avenue + rack + lvl + bin
             odoo_entity['bin_checksum_1'] = control_code
+            odoo_entity['bin_checksum_2'] = control_code
             odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'

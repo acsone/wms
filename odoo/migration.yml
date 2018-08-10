@@ -315,9 +315,15 @@ migration:
           - specific_sale
           - specific_helpdesk
           - website_purchase_review
+          - stock_location
           ### server-tools
           - onchange_helper
       operations:
         post:
           - anthem songs.install.logistics::create_routes
           - anthem songs.upgrade.10_23_2_update::post
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::import_other_locations
