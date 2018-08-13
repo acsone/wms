@@ -49,8 +49,7 @@ class SaleOrder(models.Model):
         order_data = self._ws_create_order_data(data)
         order_data['order_line'] = self._ws_create_order_line_data(data)
         order = self.create(order_data)
-        order.action_confirm()
-        order.confirmation_date = fields.datetime.now()
+        order.action_confirm_background()
         return order
 
     def _ws_get_partner(self, ref):

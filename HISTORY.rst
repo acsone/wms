@@ -12,6 +12,7 @@ Unreleased
 * ALCYN-385: Set SO sequence padding to 7 digits
 * ALCN-1386: Confirmation par email de la livraison client
 * ALCN-1226: Push product on sales order in backorder
+* ALCYN-436: Improve web service new sale order from Magento, splitting job using confirm in background job.
 
 **Bugfixes**
 
