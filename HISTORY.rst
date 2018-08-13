@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-243: Serial number must be encoded/visible only on delivery orders
 
 **Build**
 

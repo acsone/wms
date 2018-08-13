@@ -329,3 +329,8 @@ migration:
           operations:
             post:
               - anthem songs.install.data_full::import_other_locations
+    - version: 10.23.3
+      addons:
+        upgrade:
+          ### local-src
+          - specific_report
