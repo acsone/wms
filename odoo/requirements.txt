@@ -12,6 +12,7 @@ dicttoxml
 xmlunittest
 Cryptography==1.9
 paramiko==2.2.1
+freezegun
 
 # db2 odbc
 pyodbc==3.0.10
@@ -21,3 +22,4 @@ cchardet
 
 # stock_devlivery_note
 unicodecsv
+
