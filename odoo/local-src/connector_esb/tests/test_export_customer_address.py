@@ -20,8 +20,6 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         return self.env['res.partner']
 
     def setup_records(self):
-        # Hiding all existing customer from the tests
-        self.model.search([(1, '=', 1)]).write({'customer': False})
         self.country44 = self.env['res.country'].search([('id', '=', 44)])
         self.country44.esb_ref = 'ESB'
         self.country_no_ref = self.env['res.country'].search([('id', '=', 33)])
@@ -55,7 +53,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         self.partner_2 = self.model.create({
             'name': 'Company 2',
             'street': 'Main Street, 2',
-            'ref': None,
+            'ref': '999888',
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
@@ -129,7 +127,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         """
         expected = {
             # Testing empty ref should not be false but empty string
-            'CustomerId': '',
+            'CustomerId': self.partner_2.ref,
             # Shipping address exists !
             'AddressId': '12',
             'City': self.partner_2_delivery.city,

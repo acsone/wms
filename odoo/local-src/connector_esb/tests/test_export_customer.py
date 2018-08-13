@@ -39,11 +39,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         self.partner_category = self.env['res.partner.category'].create({
             'name': 'Petits animaux'
         })
-        # Make all existing customer not interfere with the test
-        existing_customers = self.env['res.partner'].search(
-                [('customer', '=', True)])
-        existing_customers.write({'customer': False})
-        # Create new customer to test
         self.all_records = self.model.browse()
         self.customer1 = self.model.create({
             'email': 'joe@ch.ch',
@@ -154,27 +149,24 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             self.assertDictEqual(mapper.map_record(rec).values(), expected)
 
     def test_IdRound_mapper(self):
-        """ Testing the mapper of IdRound
-
-        Easier to fake the model than trying to set up the data in the db with
-        values.
-        """
-        class FakeModel(object):
-            def __init__(self, tlo):
-                self.time_limit_order = tlo
-
+        """ Testing the mapper of IdRound """
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
-            result = mapper.compute_idround(FakeModel(1.25))
+            self.customer1.time_limit_order = 1.25
+            result = mapper.compute_idround(self.customer1)
             self.assertEqual(result['IdRound'], '0115')
-            result = mapper.compute_idround(FakeModel(0.50))
+            self.customer1.time_limit_order = 0.50
+            result = mapper.compute_idround(self.customer1)
             self.assertEqual(result['IdRound'], '0030')
-            result = mapper.compute_idround(FakeModel(4.75))
+            self.customer1.time_limit_order = 4.75
+            result = mapper.compute_idround(self.customer1)
             self.assertEqual(result['IdRound'], '0445')
-            result = mapper.compute_idround(FakeModel(2))
+            self.customer1.time_limit_order = 2
+            result = mapper.compute_idround(self.customer1)
             self.assertEqual(result['IdRound'], '0200')
-            result = mapper.compute_idround(FakeModel(0))
+            self.customer1.time_limit_order = 0
+            result = mapper.compute_idround(self.customer1)
             self.assertEqual(result['IdRound'], '0000')
 
     def test_filename(self):

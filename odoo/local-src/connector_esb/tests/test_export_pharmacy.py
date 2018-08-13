@@ -61,8 +61,9 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'fax': '021121212',
         })
         self.client_1 = self.env.ref('base.main_partner')
+        self.client_1.ref = '9858839948'
         self.client_2 = self.model.create({
-            'ref': '1',
+            'ref': '2342341',
             'name': 'Yoyo',
             'country_id': self.country_ch.id,
         })
@@ -160,7 +161,10 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             'fax': '021121212',
             'email': 'roland@ch.ch',
         })
-        self.env.ref('base.partner_root').pharmacist_id = record
+        self.env.ref('base.partner_root').write({
+            'pharmacist_id': record.id,
+            'ref': '889853945345',
+            })
         self.all_records |= record
         self.timestamp.last_export = False
         with self.backend.work_on(self.model._name,
