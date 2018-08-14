@@ -38,5 +38,8 @@
         'security/ir.model.access.csv',
         'security/ir_ui_menu.xml',
     ],
+    'demo': [
+        'demo/exception_rule.xml',
+    ],
     'installable': True,
 }

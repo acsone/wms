@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2017 Jacques-Etienne Baudoux <je@bcim.be> (BCIM)
+# Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, fields
+from odoo import models, api, fields, _
+from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class SaleOrder(models.Model):
@@ -33,44 +35,38 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     @api.multi
+    def write(self, values):
+        """ If the route has changed, we need to adapt the procurement. Cancel
+        it and recreate it """
+        changed_lines = False
+        if 'route_id' in values:
+            changed_lines = self.filtered(lambda r: r.state == 'sale')
+            if changed_lines:
+                changed_lines.mapped('procurement_ids').cancel()
+                changed_lines.mapped('procurement_ids').write({
+                    'sale_line_id': False})
+                if 'product_uom_qty' in values:
+                    # then procurement is already recreated in standard
+                    precision = self.env['decimal.precision'].precision_get(
+                        'Product Unit of Measure')
+                    changed_lines -= self.filtered(
+                        lambda r: r.state == 'sale' and float_compare(
+                            r.product_uom_qty, values['product_uom_qty'],
+                            precision_digits=precision) == -1)
+        result = super(SaleOrderLine, self).write(values)
+        if changed_lines:
+            changed_lines._action_procurement_create()
+        return result
+
+    @api.multi
     def _prepare_order_line_procurement(self, group_id):
         vals = super(SaleOrderLine, self)._prepare_order_line_procurement(
             group_id=group_id)
-        for line in self.filtered("order_id.confirmation_date"):
-            vals.update({
-                'date_planned': line.order_id.confirmation_date,
-            })
+        if not self.order_id.confirmation_date:
+            raise UserError(_(
+                'Missing sale order confirmation date. '
+                'Cannot plan delivery procurement order'))
+        vals['date_planned'] = self.order_id.confirmation_date
+        if self.route_id.priority:
+            vals['priority'] = self.route_id.priority
         return vals
-
-
-class StockQuant(models.Model):
-    _inherit = 'stock.quant'
-
-    @api.model
-    def quants_get_preferred_domain(self, qty, move, ops=False,
-                                    lot_id=False, domain=None,
-                                    preferred_domain_list=[]):
-        if move.picking_id.picking_type_id.subcode == 'PICK':
-            # Do not reserve quantity that is from a previously confirmed SO
-            # This allows to reserve quantity in any order. So you can reserve
-            # and deliver a customer that has ordered after another one but
-            # without using the quantity that is virtually reserved for the
-            # first one.
-            # You still need to run the procurements in the right order to
-            # ensure the delivery orders exist when performing this check.
-            locations = self.env['stock.location'].search(
-                [('usage', '=', 'customer')])
-            previous_moves = move.search([
-                ('product_id', '=', move.product_id.id),
-                ('state', 'in', ['waiting', 'confirmed', 'assigned']),
-                ('date', '<', move.date),
-                ('location_dest_id', 'in', locations.ids),
-                ])
-            blocked_qty = sum([x.product_qty for x in previous_moves])
-            remaining = move.product_id.qty_available - blocked_qty
-            qty = min(qty, max(remaining, 0.0))
-            if not qty:
-                return self.browse()
-        return super(StockQuant, self).quants_get_preferred_domain(
-            qty, move, ops=ops, lot_id=lot_id, domain=domain,
-            preferred_domain_list=[])

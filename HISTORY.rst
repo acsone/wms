@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-384: Track who forced the delivery round on a shipping
 * ALCYN-385: Set SO sequence padding to 7 digits
 * ALCN-1386: Confirmation par email de la livraison client
+* ALCN-1226: Push product on sales order in backorder
 
 **Bugfixes**
 

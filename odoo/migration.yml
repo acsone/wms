@@ -289,7 +289,10 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_23_1_update::post
+          - anthem songs.install.sales::sale_setup
+          - anthem songs.install.logistics::create_procurement_rules
       addons:
         upgrade:
           ### local-src
           - stock_delivery_note
+          - procurement_sale
