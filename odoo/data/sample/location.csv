@@ -119,7 +119,6 @@ __import__.location_loc_GH09B6,GH09B6,38,__import__.location_family_G,bin,G,H,09
 __import__.location_loc_GB21C3,GB21C3,13,__import__.location_family_G,bin,G,B,21,C,3
 __import__.location_loc_GB29A9,GB29A9,16,__import__.location_family_G,bin,G,B,29,A,9
 __import__.location_loc_AC14B4,AC14B4,21,__import__.location_family_A,bin,A,C,14,B,4
-__import__.location_loc_AE14B2,AE14B2,07,__import__.location_family_A,bin,A,E,14,B,2
 __import__.location_loc_GB30B5,GB30B5,61,__import__.location_family_G,bin,G,B,30,B,5
 __import__.location_loc_GB13A3,GB13A3,44,__import__.location_family_G,bin,G,B,13,A,3
 __import__.location_loc_GD14C5,GD14C5,45,__import__.location_family_G,bin,G,D,14,C,5
@@ -237,6 +236,7 @@ __import__.location_loc_GG09A2,GG09A2,09,__import__.location_family_G,bin,G,G,09
 __import__.location_loc_GB28C1,GB28C1,09,__import__.location_family_G,bin,G,B,28,C,1
 __import__.location_loc_GD02F2,GD02F2,23,__import__.location_family_G,bin,G,D,02,F,2
 __import__.location_loc_GB05C1,GB05C1,58,__import__.location_family_G,bin,G,B,05,C,1
+__import__.location_loc_AG10B8,AG10B8,45,__import__.location_family_A,bin,A,G,10,B,8
 __import__.location_loc_AC07A1,AC07A1,06,__import__.location_family_A,bin,A,C,07,A,1
 __import__.location_loc_GK09B4,GK09B4,68,__import__.location_family_G,bin,G,K,09,B,4
 __import__.location_loc_GC10C1,GC10C1,01,__import__.location_family_G,bin,G,C,10,C,1
@@ -312,7 +312,7 @@ __import__.location_loc_GB25D3,GB25D3,68,__import__.location_family_G,bin,G,B,25
 __import__.location_loc_AD11B2,AD11B2,40,__import__.location_family_A,bin,A,D,11,B,2
 __import__.location_loc_QE12D1,QE12D1,10,__import__.location_family_Q,bin,Q,E,12,D,1
 __import__.location_loc_QA03B2,QA03B2,16,__import__.location_family_Q,bin,Q,A,03,B,2
-__import__.location_loc_GF12B1,GF12B1,46,__import__.location_family_G,bin,G,F,12,B,1
+__import__.location_loc_GC32B2,GC32B2,46,__import__.location_family_G,bin,G,C,32,B,2
 __import__.location_loc_GL10A2,GL10A2,62,__import__.location_family_G,bin,G,L,10,A,2
 __import__.location_loc_GD03B3,GD03B3,14,__import__.location_family_G,bin,G,D,03,B,3
 __import__.location_loc_GD01B3,GD01B3,33,__import__.location_family_G,bin,G,D,01,B,3

@@ -18,6 +18,7 @@ Unreleased
     * Fix the situation with more than one sale order confirmation being saved in ir attachment
     * Fix an error when printing multiple invoice (see error in queue jobs logs)
 * ALCYN-411: Add new search fields for helpdesk.ticket
+* ALCYN-482: Format order min/max on the import of products to avoid incorrect min/max value (eg: 500.000 must be 500 and not 500K)
 
 **Build**
 
