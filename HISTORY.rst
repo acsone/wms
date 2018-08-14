@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-384: Track who forced the delivery round on a shipping
+* ALCYN-385: Set SO sequence padding to 7 digits
 
 **Bugfixes**
 
