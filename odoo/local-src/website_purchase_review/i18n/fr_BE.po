@@ -323,7 +323,7 @@ msgstr "Qté BO Client"
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Stock Customer"
-msgstr "Stock clients"
+msgstr "Réservé clients"
 
 #. module: website_purchase_review
 #: model:ir.model,name:website_purchase_review.model_stock_move
@@ -348,7 +348,7 @@ msgstr "Stock min"
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Stock supplier"
-msgstr "Stock fournisseurs"
+msgstr "Encours fournisseurs"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
