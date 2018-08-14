@@ -56,6 +56,8 @@ Unreleased
 * ALCYN-436: Improve web service new sale order from Magento, splitting job using confirm in background job.
 * ALCN-757: Accounting cut-off
 
+* ALCYN-448: Fix duplicating sequences in sale_order lines on additional products
+
 **Bugfixes**
 
 * ALCYN-435: Fix random error in test on connector_esb when testing filename

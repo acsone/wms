@@ -317,6 +317,7 @@ migration:
           - website_purchase_review
           - stock_location
           - pricelist_discount
+          - product_additional
           ### server-tools
           - onchange_helper
       operations:
