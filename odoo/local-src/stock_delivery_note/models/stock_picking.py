@@ -6,6 +6,7 @@ import unicodecsv as csv
 
 from io import BytesIO
 from odoo import api, models
+from odoo.tools import config
 
 
 class StockPicking(models.Model):
@@ -15,9 +16,11 @@ class StockPicking(models.Model):
     def do_transfer(self):
         result = super(StockPicking, self).do_transfer()
         picking_type_out = self.env.ref('stock.picking_type_out')
+        if self.env.context.get('skip_pdf_gen'):
+            return result
         for r in self:
             if r.picking_type_id == picking_type_out:
-                r._save_delivery_note(r._generate_delivery_note())
+                r._save_delivery_note()
         return result
 
     @api.multi
@@ -32,21 +35,21 @@ class StockPicking(models.Model):
             ''.join(self.create_date[-8:].split(':')),
             ]) + '.csv'
 
-    @api.multi
-    def _save_delivery_note(self, lines):
+    def _save_delivery_note(self):
         """Save the delivery note in csv format in ir.attachment"""
         self.ensure_one()
         file_data = BytesIO()
         w = csv.writer(file_data, delimiter=';', encoding='utf-8')
-        for line in lines:
+        for line in self._generate_delivery_note():
             w.writerow(line)
         data = file_data.getvalue()
+
         filename = self._get_delivery_note_filename()
         existing = self.env['ir.attachment'].search([('name', '=', filename)])
         if len(existing):
             existing[0].datas = data.encode('base_64')
         else:
-            self.env['ir.attachment'].create({
+            existing = self.env['ir.attachment'].create({
                 'type': 'binary',
                 'res_model': 'stock.picking',
                 'res_id': self.id,
@@ -55,6 +58,19 @@ class StockPicking(models.Model):
                 'mimetype': 'text/csv',
                 'datas': data.encode('base_64')
             })
+
+        # send by email
+        if config['test_enable']:
+            return
+        template = self.env.ref('stock_delivery_note.delivery_note_csv')
+        values = template.generate_email(self.id)
+        values['recipient_ids'] = [
+            (4, pid) for pid in values.get('partner_ids', list())]
+        if 'email_from' in values and not values.get('email_from'):
+            values.pop('email_from')
+        values['attachment_ids'] = [(6, 0, existing[0].ids)]
+        mail = self.env['mail.mail'].create(values)
+        mail.send(raise_exception=True)
 
     @api.multi
     def _generate_delivery_note(self):
@@ -135,4 +151,4 @@ class StockPicking(models.Model):
                 sol.order_id.suite_name or '',
                 ]
             )
-            return lines
+        return lines

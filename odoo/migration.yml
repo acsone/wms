@@ -289,3 +289,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_23_1_update::post
+      addons:
+        upgrade:
+          ### local-src
+          - stock_delivery_note

@@ -116,7 +116,8 @@ class DB2MapperSaleOrder(object):
             tracking_disable=True,
             no_connector_export=True,
         )
-        new = create_or_update(so_model, xmlid, values)
+        new = create_or_update(so_model, xmlid, values)\
+            .with_context(skip_pdf_gen=True)
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
