@@ -246,7 +246,7 @@
                         <t t-set="bank_dexia" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK3')])"/>
                         <t t-set="bank_bnp" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK4')])"/>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" t-if="invoice.type == 'out_invoice'">
                                 <t>Reference for your payment</t>
                                 <br/>
                                 <strong t-field="invoice.reference"/>
@@ -285,10 +285,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <span>Due date</span>
+                            <td colspan="2" t-if="invoice.type == 'out_invoice'">
+                                <span>Due date</span> <strong t-field="invoice.date_due"/>
                             </td>
-                            <td><span t-field="invoice.date_due"/></td>
                         </tr>
                     </table>
                 </div>
