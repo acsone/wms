@@ -32,6 +32,7 @@ Unreleased
 * ALCN-1226: Push product on sales order in backorder
 * ALCYN-436: Improve web service new sale order from Magento, splitting job using confirm in background job.
 * ALCN-757: Accounting cut-off
+* ALCYN-184: Add `web` to sale_channel. Remove sale_channel_invisible.
 
 **Bugfixes**
 
