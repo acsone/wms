@@ -2,7 +2,6 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from operator import itemgetter
 from odoo import api, fields, models
 
 
@@ -52,6 +51,7 @@ class SaleOrder(models.Model):
                         ("min_qty_sale", "<=", product_qty),
                         ("product_tmpl_id", "=", product_tmpl_id)
                     ],
+                    order="sequence, min_qty_sale desc, price",
                     limit=1,
                 )
                 if not result:
@@ -79,9 +79,9 @@ class SaleOrder(models.Model):
         # recompute lines sequences
         for order in self:
             lines = self.env["sale.order.line"].search(
-                [("order_id", "=", order.id),],
+                [("order_id", "=", order.id)],
+                order="sequence, id",
             )
-            lines = sorted(lines, key=itemgetter("sequence", "id"))
             for rec in enumerate(lines, 1):
                 rec[1].sequence = rec[0]
         return res
