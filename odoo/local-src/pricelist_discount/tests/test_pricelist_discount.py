@@ -27,6 +27,7 @@ class TestPricelistDiscount(TransactionCase):
 
         self.supplier = self.env['res.partner'].create({
             'name': 'Unittest supplier',
+            'ref': '749248',
         })
 
         self.supplierinfo1 = self.env['product.supplierinfo'].create({
@@ -84,6 +85,7 @@ class TestPricelistDiscount(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
+            'ref': '8893294',
             'property_product_pricelist': self.main_pricelist.id,
             'supplier_promotion_sale_allowed': True,
             'discount_pricelist_id': self.discount_pricelist_id.id,
@@ -115,6 +117,7 @@ class TestPricelistDiscount(TransactionCase):
     def test_onchange_partner(self):
         partner = self.env['res.partner'].create({
             'name': 'Unittest other partner',
+            'ref': '99584783994',
         })
         sale = self.env['sale.order'].create({
             'partner_id': partner.id
@@ -418,6 +421,7 @@ class TestPricelistDiscount(TransactionCase):
     def test_commercial_fields(self):
         sub_partner = self.env['res.partner'].create({
             'parent_id': self.partner.id,
+            'ref': '234788894934',
             'name': 'Unittest sub partner',
             'supplier_promotion_sale_allowed': True,
         })
