@@ -299,3 +299,8 @@ migration:
           - procurement_sale
           - specific_report
           - delivery_rounds
+          - account_cutoff_accrual_picking
+          - account_cutoff_accrual_return
+          - account_invoice_accrual
+          - purchase_prepaid
+          - specific_cutoff

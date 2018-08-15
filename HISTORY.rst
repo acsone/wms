@@ -13,6 +13,7 @@ Unreleased
 * ALCN-1386: Confirmation par email de la livraison client
 * ALCN-1226: Push product on sales order in backorder
 * ALCYN-436: Improve web service new sale order from Magento, splitting job using confirm in background job.
+* ALCN-757: Accounting cut-off
 
 **Bugfixes**
 
