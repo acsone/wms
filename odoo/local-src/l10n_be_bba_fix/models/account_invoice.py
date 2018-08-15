@@ -2,7 +2,10 @@
 # © 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+import re
+
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class AccountInvoice(models.Model):
@@ -60,3 +63,50 @@ class AccountInvoice(models.Model):
         # We require uniqueness on supplier_invoice_number through the
         # sql_constraint
         return self.write({'state': 'open'})
+
+    @api.multi
+    def generate_bbacomm(self, type, reference_type, partner_id, reference):
+        """ Support 1-6 digit partner reference number (instead of 3-7)
+        Left pad with 0 on 6 digits (instead of right pad with 0 on 7 digits).
+        Extend sequence to 9999 (instead of 999)"""
+        reference = reference or ''
+        algorithm = False
+        if partner_id:
+            partner = self.env['res.partner'].browse(partner_id)
+            algorithm = partner.out_inv_comm_algorithm
+        algorithm = algorithm or 'random'
+        if (type != 'out_invoice' or reference_type != 'bba' or
+                algorithm != 'partner_ref' or self.check_bbacomm(reference)):
+            return super(AccountInvoice, self).generate_bbacomm(
+                type, reference_type, partner_id, reference)
+
+        partner_ref = self.env['res.partner'].browse(partner_id).ref
+        partner_ref_nr = re.sub('\D', '', partner_ref or '')
+        if (len(partner_ref_nr) > 6):
+            raise UserError(_(
+                'The partner reference cannot exceed 6 digits for the '
+                'generation of BBA Structured Communication!'))
+
+        partner_ref_nr = partner_ref_nr.rjust(6, '0')
+        seq = '0001'
+        invoice = self.search([
+            ('type', '=', 'out_invoice'), ('reference_type', '=', 'bba'),
+            ('reference', 'like', '+++%s/%s%%' % (partner_ref_nr[:3],
+                                                  partner_ref_nr[3:]))
+            ], order='reference desc', limit=1)
+        if invoice:
+            prev_seq = int(invoice.reference[10:15].replace('/', ''))
+            if prev_seq == 9999:
+                raise UserError(_(
+                    'The maximum of outgoing invoices for this partner '
+                    'reference has been reached'))
+
+            seq = '%04d' % (prev_seq + 1)
+
+        bbacomm = partner_ref_nr + seq
+        base = int(bbacomm)
+        mod = base % 97 or 97
+        bbacomm += '%02d' % mod
+        reference = '+++%s/%s/%s+++' % (
+            bbacomm[0:3], bbacomm[3:8], bbacomm[8:])
+        return {'value': {'reference': reference}}
