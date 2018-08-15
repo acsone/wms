@@ -518,7 +518,7 @@ class RoundInstanceCustomer(models.Model):
         string='Delivery Round',
         required=True,
         readonly=True,
-        select=True,
+        index=True,
         ondelete='cascade',
     )
 
@@ -527,7 +527,7 @@ class RoundInstanceCustomer(models.Model):
         string='Customer',
         required=True,
         readonly=True,
-        select=True,
+        index=True,
         ondelete='restrict',
         oldname='res_partner_id',
     )
