@@ -30,7 +30,10 @@
     - oca 10.0
       # [MIG][10.0] account_cutoff_accrual_picking (PR73) + [MIG][10.0] account_invoice_accrual migration (PR45)
       # PR 74 is a merge of the 2 PR + solve of conflicts
-    - oca refs/pull/74/head
+    # - oca refs/pull/74/head
+    # PR 74 on the OCA is closed so I suspect that a closed PR is not updated when the corresponding branch is.
+    # So directely targeting the branch on camptocamp to have the latest changes
+    - camptocamp 10-accrual-all
       # [ADD] account_cutoff_accrual_return
     - oca refs/pull/70/head
   target: *default_target
