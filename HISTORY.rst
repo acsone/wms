@@ -19,6 +19,9 @@ Unreleased
 * ALCYN-435: Fix random error in test on connector_esb when testing filename
 * ALCYN-420: Fix rapport Invoice/Credit note: apb, layout, ref payment
 * ALCYN-489: Add debugging log for stock and sale order web service (ESB)
+* ALCYN-378: Fix delivery round picking counter
+* ALCYN-380: Allow to deliver even if all pickings are not available
+* ALCYN-382: Print partner note on delivery round document + add button in kanban
 
 **Build**
 

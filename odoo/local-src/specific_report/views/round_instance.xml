@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="view_round_instance_kanban" model="ir.ui.view">
+        <field name="name">view.round.instance.kanban</field>
+        <field name="model">round.instance</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[a[@name='print_all_deliveryslip']]" position="after">
+                <div><a name="print_delivery_round" type="object" states="done">Print delivery round</a></div>
+            </xpath>
+        </field>
+    </record>
     <record id="view_round_instance_form" model="ir.ui.view">
         <field name="name">view.round.instance.form</field>
         <field name="model">round.instance</field>
