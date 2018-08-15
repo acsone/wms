@@ -5,7 +5,6 @@
 from ast import literal_eval
 import math
 from datetime import datetime
-from itertools import groupby
 
 from odoo import api, fields, models, _
 from odoo.exceptions import Warning as UserError
@@ -215,17 +214,10 @@ class RoundInstance(models.Model):
         if pickings_assigned:
             _logger.debug("Add/Propagate to delivery round %s the pickings %s",
                           self.id, pickings.ids)
-
-            def key(r):
-                return r.partner_id
-            for partner, pickings_bypartner_iter in groupby(
-                    pickings_assigned.sorted(key=key), key=key):
-                rank = self._add_customer(partner)
-                pickings_bypartner = reduce(
-                    lambda x, y: x | y, pickings_bypartner_iter)
-                pickings_bypartner.with_context(round_assigned=True).write({
-                    'delivery_round_id': self.id,
-                    'rank': rank})
+            # Note: a constrain on picking.delivery_round_id will propagate to
+            # group and set the rank
+            pickings_assigned.with_context(round_assigned=True).write({
+                'delivery_round_id': self.id})
         return pickings_assigned
 
     @api.multi
@@ -297,6 +289,11 @@ class RoundInstance(models.Model):
         # - The customer tag must be equal to the instance tag
         # - The customer tag is empty
         # - The instance tag is empty
+
+        # If delivery address is a contact, take parent
+        if partner.type == 'contact' and partner.parent_id:
+            partner = partner.parent_id
+
         best_instance_query = """
         SELECT instance.id
         FROM round_instance_round_itinerary_rel AS rel
@@ -314,16 +311,12 @@ class RoundInstance(models.Model):
           AND (instance_tag.round_tag_id = customer_tag.round_tag_id
               OR customer_tag IS NULL
               OR instance_tag IS NULL)
-          AND (customer.id = %s
-            OR EXISTS (SELECT 1
-                        FROM res_partner
-                        WHERE res_partner.id = %s
-                        AND res_partner.parent_id = customer.id))
+          AND customer.id = %s
         ORDER BY instance.date DESC, instance.time_picking_planned ASC
         LIMIT 1;
         """
 
-        self.env.cr.execute(best_instance_query, (partner.id, partner.id))
+        self.env.cr.execute(best_instance_query, (partner.id, ))
         result = self.env.cr.fetchone()
 
         if result:
@@ -510,6 +503,7 @@ class RoundInstance(models.Model):
 class RoundInstanceCustomer(models.Model):
     _name = 'round.instance.customer'
     _order = 'rank'
+    _rec_name = 'partner_id'
 
     _sql_constraints = [
         (
@@ -523,6 +517,8 @@ class RoundInstanceCustomer(models.Model):
         comodel_name='round.instance',
         string='Delivery Round',
         required=True,
+        readonly=True,
+        index=True,
         ondelete='cascade',
     )
 
@@ -530,6 +526,8 @@ class RoundInstanceCustomer(models.Model):
         comodel_name='res.partner',
         string='Customer',
         required=True,
+        readonly=True,
+        index=True,
         ondelete='restrict',
         oldname='res_partner_id',
     )

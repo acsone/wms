@@ -110,7 +110,8 @@
                 <field name="template_code"/>
                 <field name="date" context="{'nodate':1}"/>
                 <separator/>
-                <field name="partner_ids" string="Customer"/>
+                <field name="partner_ids" string="Potential Customer"/>
+                <field name="instance_customer_ids" string="Effective Customer"/>
                 <filter name="today" string="Today" domain="[('date','=',time.strftime('%%Y-%%m-%%d'))]" context="{'nodate':1}"/>
             </search>
         </field>
@@ -180,8 +181,8 @@
                         <page string="Customers">
                             <field name="instance_customer_ids">
                                 <tree editable="bottom" create="0" delete="0">
-                                    <field name="partner_id"/>
                                     <field name="rank"/>
+                                    <field name="partner_id"/>
                                 </tree>
                             </field>
                         </page>
