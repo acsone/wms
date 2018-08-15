@@ -298,4 +298,3 @@ migration:
           - stock_delivery_note
           - procurement_sale
           - specific_report
-          - delivery_rounds
