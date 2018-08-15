@@ -18,6 +18,7 @@ Unreleased
 
 * ALCYN-435: Fix random error in test on connector_esb when testing filename
 * ALCYN-420: Fix rapport Invoice/Credit note: apb, layout, ref payment
+* ALCYN-489: Add debugging log for stock and sale order web service (ESB)
 
 **Build**
 

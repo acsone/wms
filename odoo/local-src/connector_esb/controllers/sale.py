@@ -8,12 +8,15 @@ Respond to calls from the ESB.
 
 """
 
+import logging
 import werkzeug
 
 import odoo
 from odoo import http, _
 from odoo.http import request
 from odoo.addons.web.controllers.main import ensure_db
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleController(http.Controller):
@@ -74,6 +77,8 @@ class SaleController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
+        _logger.debug('Calling sales_order/create with data : %s',
+                      request.jsonrequest)
         self._validate_request(request.jsonrequest)
         values = request.jsonrequest['params']['data']
         self._validate_create_sale_order(values)

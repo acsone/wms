@@ -2,9 +2,13 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
+
 from odoo import http, SUPERUSER_ID
 from odoo.http import request
 from odoo.addons.web.controllers.main import ensure_db
+
+_logger = logging.getLogger(__name__)
 
 
 class StockController(http.Controller):
@@ -26,6 +30,8 @@ class StockController(http.Controller):
         ensure_db()
         request.uid = SUPERUSER_ID
         env = request.env
+        _logger.debug('Calling stock/product with data : %s',
+                      request.httprequest.form)
         skus = request.httprequest.form.getlist('product[]')
         skus = [sku.strip() for sku in skus]
         backend = env['esb.backend'].sudo().get_singleton()
