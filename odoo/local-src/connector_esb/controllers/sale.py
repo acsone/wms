@@ -48,7 +48,7 @@ class SaleController(http.Controller):
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
     @http.route('/connector_esb/sales_order/create',
-                type='json', auth='public', csrf=False)
+                type='json', auth='user', csrf=False)
     def create_sale_order(self, **kw):
         """ Create a sale order with data received on request (Magento)
 
