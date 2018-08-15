@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.23.1 (2018-08-15)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-384: Track who forced the delivery round on a shipping
 * ALCYN-385: Set SO sequence padding to 7 digits
 * ALCN-1386: Confirmation par email de la livraison client
@@ -25,10 +37,6 @@ Unreleased
 * ALCYN-382: Print partner note on delivery round document + add button in kanban
 * ALCYN-415: Cannot make invoice for customers having a ref <100
 * ALCYN-419: Fix Delivery round delivery address and rank
-
-**Build**
-
-**Documentation**
 
 
 10.23.0 (2018-08-10)
