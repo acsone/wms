@@ -8,13 +8,15 @@ Unreleased
 
 **Features and Improvements**
 
-* ALCN-1189: Add fax service and send sale order confirmation through it, if sale channel is fax.
+* ALCN-1189/ALCYN-338: Add fax service and send sale order confirmation through it, if sale channel is fax.
+* ALCYN-184: Add `web` to sale_channel. Remove sale_channel_invisible.
 
 **Bugfixes**
-* ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
 
-* ALCYN-399: Fix the situation with more than one sale order confirmation being saved in ir attachment
-             Fix an error when printing multiple invoice (see error in queue jobs logs)
+* ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
+* ALCYN-399:
+    * Fix the situation with more than one sale order confirmation being saved in ir attachment
+    * Fix an error when printing multiple invoice (see error in queue jobs logs)
 
 **Build**
 
@@ -32,7 +34,6 @@ Unreleased
 * ALCN-1226: Push product on sales order in backorder
 * ALCYN-436: Improve web service new sale order from Magento, splitting job using confirm in background job.
 * ALCN-757: Accounting cut-off
-* ALCYN-184: Add `web` to sale_channel. Remove sale_channel_invisible.
 
 **Bugfixes**
 
