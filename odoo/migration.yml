@@ -304,3 +304,8 @@ migration:
           - account_invoice_accrual
           - purchase_prepaid
           - specific_cutoff
+    - version: 10.23.2
+      addons:
+        upgrade:
+          - external_fax
+          - specific_report

@@ -21,6 +21,7 @@
         'specific_data',
         'queue_job',
         'account_invoice_sent',
+        'external_fax',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
