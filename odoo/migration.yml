@@ -307,5 +307,7 @@ migration:
     - version: 10.23.2
       addons:
         upgrade:
+          ### local-src
           - external_fax
           - specific_report
+          - specific_partner

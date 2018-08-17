@@ -11,6 +11,7 @@ Unreleased
 * ALCN-1189: Add fax service and send sale order confirmation through it, if sale channel is fax.
 
 **Bugfixes**
+* ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
 
 **Build**
 
