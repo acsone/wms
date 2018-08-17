@@ -15,30 +15,21 @@ class Sale(models.Model):
         ('phone', 'Phone'),
         ('mail', 'Mail'),
         ('fax', 'Fax'),
+        ('web', 'Web'),
     ])
 
-    sale_channel_visible = fields.Boolean(
-        compute='_compute_sale_channel_required'
-    )
     suite_name = fields.Char(
         string='Suite Id'
     )
 
-    @api.depends('team_id')
-    def _compute_sale_channel_required(self):
-        direct_team = self.env.ref('sales_team.team_sales_department')
-        for record in self:
-            if direct_team and record.team_id == direct_team:
-                record.sale_channel_visible = True
-            else:
-                record.sale_channel_visible = False
-
     @api.onchange('team_id')
     def onchange_team_id(self):
-        if self.sale_channel_visible and not self.sale_channel:
+        if not self.sale_channel:
             self.sale_channel = 'phone'
-        elif not self.sale_channel_visible:
-            self.sale_channel = False
+
+        team_sales = self.env.ref('sales_team.team_sales_department')
+        if self.team_id == team_sales:
+            self.sale_channel = 'web'
 
     @api.multi
     def order_lines_layouted(self):
