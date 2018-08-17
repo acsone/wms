@@ -311,3 +311,6 @@ migration:
           - external_fax
           - specific_report
           - specific_partner
+      operations:
+        post:
+          - anthem songs.upgrade.10_23_2_update::post

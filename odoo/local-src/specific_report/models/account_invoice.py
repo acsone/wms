@@ -196,7 +196,8 @@ class AccountInvoice(models.Model):
         """Generate the invoice pdf and save it to ir.attachment """
         res = super(AccountInvoice, self).action_invoice_open()
         for invoice in self:
-            self.with_delay().print_and_attach_report('account.report_invoice')
+            invoice.with_delay().print_and_attach_report(
+                'account.report_invoice')
         return res
 
     @api.multi

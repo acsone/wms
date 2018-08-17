@@ -13,6 +13,9 @@ Unreleased
 **Bugfixes**
 * ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
 
+* ALCYN-399: Fix the situation with more than one sale order confirmation being saved in ir attachment
+             Fix an error when printing multiple invoice (see error in queue jobs logs)
+
 **Build**
 
 **Documentation**
