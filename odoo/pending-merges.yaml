@@ -72,3 +72,12 @@
       # potential fix for 90 != 100 bug in tests
     - oca refs/pull/671/head
   target: *default_target
+./external-src/server-tools:
+  remotes:
+    oca: git@github.com:oca/server-tools.git
+    camptocamp: git@github.com:camptocamp/server-tools.git
+  merges:
+    - oca 10.0
+      # fix onchange_helper when more than 3 chained fields in onchange_specs
+    - oca refs/pull/1343/head
+  target: *default_target
