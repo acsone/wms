@@ -12,7 +12,6 @@
         'account_invoice_triple_discount',
         'product',
         'product_price_category',
-        'purchase',
         'sale',
         'sale_stock',
         'sale_triple_discount',
@@ -24,7 +23,6 @@
         # Views
         'views/account_invoice.xml',
         'views/product_supplierinfo.xml',
-        'views/purchase_order.xml',
         'views/res_partner.xml',
         'views/sale_order.xml'
     ],

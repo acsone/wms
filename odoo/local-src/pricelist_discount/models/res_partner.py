@@ -12,10 +12,6 @@ class ResPartner(models.Model):
         string='Supplier promotion allowed on sale',
     )
 
-    supplier_promotion_purchase_allowed = fields.Boolean(
-        string='Supplier promotion allowed on purchase',
-    )
-
     discount_pricelist_id = fields.Many2one(
         string='Alcyon Discount Pricelist',
         comodel_name='product.pricelist',
@@ -30,7 +26,6 @@ class ResPartner(models.Model):
             super(ResPartner, self)._commercial_fields() +
             [
                 'supplier_promotion_sale_allowed',
-                'supplier_promotion_purchase_allowed',
                 'discount_pricelist_id'
             ]
         )

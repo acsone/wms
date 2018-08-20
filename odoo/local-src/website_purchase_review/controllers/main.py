@@ -131,9 +131,7 @@ class PurchaseReview(Home):
                 promotion_supplier = \
                     render_values['promotion_supplier_overwrite']
             elif seller:
-                promotion_supplier = \
-                    po.supplier_promotion_allowed and \
-                    seller.discount_purchase or 0
+                promotion_supplier = seller.discount_purchase or 0
             else:
                 promotion_supplier = 0
 

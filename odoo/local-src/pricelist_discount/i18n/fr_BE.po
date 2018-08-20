@@ -116,7 +116,6 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_purchase_order_supplier_promotion_allowed
 #: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_supplier_promotion_allowed
 msgid "Supplier promotion allowed"
 msgstr "Droit à la promotion fournisseur"
@@ -132,4 +131,3 @@ msgstr "Droit à la promotion fournisseur pour les achats"
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_users_supplier_promotion_sale_allowed
 msgid "Supplier promotion allowed on sale"
 msgstr "Droit à la promotion fournisseur pour les ventes"
-
