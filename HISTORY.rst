@@ -9,6 +9,8 @@ Unreleased
 **Data Migration**
 
 * ALCYN-1412: Imported sale orders are considered done is older than 120 days even if partially delivered.
+* ALCYN-457: Fix TypeError in purchase import jobs
++ ALCYN-457: Add non regression tests on purchase import
 
 **Features and Improvements**
 
