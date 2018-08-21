@@ -213,8 +213,7 @@ class StockProductionLot(models.Model):
                           FROM stock_production_lot AS next_lot
                           WHERE next_lot.product_id = lot.product_id
                           AND next_lot.life_date >= lot.life_date
-                          AND next_lot.id <> lot.id
-                          AND next_lot.active = TRUE)
+                          AND next_lot.id <> lot.id)
             AND NOT EXISTS (SELECT 1
                             FROM stock_quant AS quant
                             WHERE quant.lot_id = lot.id

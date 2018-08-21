@@ -13,11 +13,21 @@
                 <attribute name="invisible">True</attribute>
             </button>
 
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_product_template_stock_bin_form">
+        <field name="name">view.product.template.stock.bin.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock_product_bin.view_product_template_stock_bin_form"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+
             <xpath expr="//group[@name='stock_bins']/field[@name='stock_bin_ids']" position="before">
                 <field name="lot_ids" attrs="{'invisible': [('tracking', '!=', 'lot')]}" nolabel="1">
                     <tree>
                         <field name="name"/>
-                        <field name="ref"/>
+                        <field name="product_qty"/>
                         <field name="life_date"/>
                     </tree>
                 </field>
