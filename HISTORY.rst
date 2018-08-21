@@ -19,6 +19,7 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-348: Add missing sales BO route to push a line in BO from SO
 * ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
 * ALCYN-399:
 
