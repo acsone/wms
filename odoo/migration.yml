@@ -312,6 +312,7 @@ migration:
           - specific_report
           - specific_partner
           - specific_sale
+          - specific_helpdesk
       operations:
         post:
           - anthem songs.upgrade.10_23_2_update::post

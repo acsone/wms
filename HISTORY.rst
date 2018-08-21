@@ -17,6 +17,7 @@ Unreleased
 * ALCYN-399:
     * Fix the situation with more than one sale order confirmation being saved in ir attachment
     * Fix an error when printing multiple invoice (see error in queue jobs logs)
+* ALCYN-411: Add new search fields for helpdesk.ticket
 
 **Build**
 
