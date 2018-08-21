@@ -168,7 +168,7 @@ class ProductMapper(EntityMapper):
         value = db2_entity['gesdem'].strip()
         is_active = not (value and value.startswith('|'))
         op_min = db2_entity['stomin'] if is_active else 0
-        odoo_entity['orderpoint_min'] = op_min
+        odoo_entity['orderpoint_min'] = float(op_min)
 
 
     def convert_orderpoint_max(self, odoo_entity, db2_entity):
@@ -181,7 +181,7 @@ class ProductMapper(EntityMapper):
         value = db2_entity['gesdem'].strip()
         is_active = not (value and value.startswith('|'))
         op_max = db2_entity['stomax'] if is_active else 0
-        odoo_entity['orderpoint_max'] = op_max
+        odoo_entity['orderpoint_max'] = float(op_max)
 
 
     def convert_orderpoint_qty_multiple(self, odoo_entity, db2_entity):
