@@ -15,14 +15,16 @@ Unreleased
 
 * ALCYN-484: Customer/Suppliers with parent company cannot be searched as customer/supplier
 * ALCYN-399:
-    * Fix the situation with more than one sale order confirmation being saved in ir attachment
-    * Fix an error when printing multiple invoice (see error in queue jobs logs)
+
+  * Fix the situation with more than one sale order confirmation being saved in ir attachment
+  * Fix an error when printing multiple invoice (see error in queue jobs logs)
 * ALCYN-411: Add new search fields for helpdesk.ticket
 * ALCYN-482: Format order min/max on the import of products to avoid incorrect min/max value (eg: 500.000 must be 500 and not 500K)
 * ALCYN-488:
-    * Display lots on product.product and product.template
-    * Fix a bug on the query to compute lot to archive. No lots was archived
-    * On lots change ref to product quantity
+
+  * Display lots on product.product and product.template
+  * Fix a bug on the query to compute lot to archive. No lots was archived
+  * On lots change ref to product quantity
 
 **Build**
 
