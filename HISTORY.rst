@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1412: Imported sale orders are considered done is older than 120 days even if partially delivered.
+
 **Features and Improvements**
 
 * ALCN-1189/ALCYN-338: Add fax service and send sale order confirmation through it, if sale channel is fax.

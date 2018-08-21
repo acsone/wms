@@ -2,6 +2,8 @@
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from datetime import datetime, timedelta
+
 from .common import (
     convert_customer,
     convert_date,
@@ -63,6 +65,11 @@ class DB2MapperSaleOrder(object):
             return
 
         create_date = convert_date('eccc', row)
+        # a sale order becomes unactive after 120 days
+        # (AS400 doesn't has a proper done state)
+        date_120d_old = (datetime.today().date() - timedelta(days=120))
+        date_120d_old = datetime.strftime(date_120d_old, "%Y-%m-%d")
+        expired = create_date < date_120d_old
         customer = rec.env.ref(convert_customer(int(row['ecccli'])))
         pricelist = customer.property_product_pricelist
         pay_term = customer.property_payment_term_id
@@ -143,13 +150,13 @@ class DB2MapperSaleOrder(object):
             no_connector_export=True,
         )
         so_lines = SOLine
-        is_delivered = True
+        is_done = True
         delivered_lines = []
         not_delivered_lines = []
+        expired_adjustments = []
 
         # register non skipped lines
         valid_lines = []
-
         previous_line = None
         for line in lines:
             product_code = line['dccart']
@@ -208,20 +215,24 @@ class DB2MapperSaleOrder(object):
                 int(row['eccsuc']), int(line['dccnli']))
             so_line = create_or_update(SOLine, xmlid, values)
             so_lines |= so_line
+            if expired and line['dccquc'] != line['dccqul']:
+                expired_adjustments.append((so_line, line['dccqul']))
             previous_line = so_line
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
 
-        is_delivered = all(delivered_lines)
+        # fully delivered order and orders older than 120 days are done
+        is_done = all(delivered_lines) or expired
+
         # don't do partial delivery when:
         # - everything is delivered (put the pick to done)
         # - delivery has not been started (keep picking in draft)
         is_partially_delivered = (
-            not is_delivered and
+            not is_done and
             not all(not_delivered_lines)
         )
 
-        if is_delivered:
+        if is_done:
             # validate sale order
             new.write({
                 'state': 'done',
@@ -233,13 +244,34 @@ class DB2MapperSaleOrder(object):
             # force invoiced qty in database to avoid to have
             # this needs to be done after state write
             # or it would be recomputed
-            query = (
-                "UPDATE sale_order_line"
-                " SET qty_delivered = product_uom_qty,"
-                "     qty_invoiced = product_uom_qty"
-                " WHERE id in ( %s )"
-            ) % ','.join(['%s'] * len(so_lines))
-            cr.execute(query, so_lines.ids)
+
+            sol_ids = so_lines.ids
+            if expired_adjustments:
+                for (sol, _) in expired_adjustments:
+                    if sol.id in sol_ids:
+                        sol_ids.remove(sol.id)
+
+            if sol_ids:
+                # main fast case: ordered = delivered
+                query = (
+                    "UPDATE sale_order_line"
+                    " SET qty_delivered = product_uom_qty,"
+                    "     qty_invoiced = product_uom_qty"
+                    " WHERE id in ( %s )"
+                ) % ','.join(['%s'] * len(sol_ids))
+                cr.execute(query, sol_ids)
+            if not expired_adjustments:
+                # set delivered quantities for old orders we closed without
+                # everything delivered
+                for (sol, qty) in expired_adjustments:
+                    query = (
+                        "UPDATE sale_order_line"
+                        " SET qty_delivered = %s,"
+                        "     qty_invoiced = %s"
+                        " WHERE id = %s"
+                    )
+                    cr.execute(query, sol.id, qty, qty)
+
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
             # by hand
