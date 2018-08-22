@@ -14,21 +14,6 @@ class SaleOrder(models.Model):
         Add promotional product in sale order
         :return:
         """
-        # Performance for the method action_confirm is crucial !
-        # It's why I used a query to retrieve the same information than
-        # the method _select_seller_for_sale
-        promotional_product_query = """
-        SELECT ratio_main_product, ratio_promotional_product
-        FROM product_supplierinfo
-        WHERE ratio_promotional_product > 0
-          AND ratio_main_product > 0
-          AND (date_start IS NULL or date_start <= NOW())
-          AND (date_end IS NULL or date_end >= NOW())
-          AND (min_qty_sale = 0 OR min_qty_sale IS NULL OR min_qty_sale <= %s)
-          AND product_tmpl_id = %s
-        ORDER BY sequence, min_qty_sale desc, price
-        LIMIT 1;
-        """
 
         if self.env.context.get('__no_promotional_product'):
             return super(SaleOrder, self).action_confirm()
@@ -48,15 +33,33 @@ class SaleOrder(models.Model):
 
                 product_tmpl_id = line.product_id.product_tmpl_id.id
 
-                self.env.cr.execute(promotional_product_query,
-                                    (product_qty, product_tmpl_id))
-                result = self.env.cr.fetchone()
+                # As sale orders are now confirmed in background,
+                # action_confirm performance is not such an issue as before -
+                # we can switch back from raw sql to orm
+                result = self.env["product.supplierinfo"].search(
+                    [
+                        ("ratio_promotional_product", ">", 0),
+                        ("ratio_main_product", ">", 0),
+                        "|",
+                        ("date_start", "=", False),
+                        ("date_start", "<=", fields.Date.today()),
+                        "|",
+                        ("date_end", "=", False),
+                        ("date_end", ">=", fields.Date.today()),
+                        "|",
+                        ("min_qty_sale", "=", False),
+                        ("min_qty_sale", "<=", product_qty),
+                        ("product_tmpl_id", "=", product_tmpl_id)
+                    ],
+                    order="sequence, min_qty_sale desc, price",
+                    limit=1,
+                )
                 if not result:
                     continue
 
                 # Compute the coefficient
-                ratio_main_product = result[0]
-                ratio_promotional_product = result[1]
+                ratio_main_product = result.ratio_main_product
+                ratio_promotional_product = result.ratio_promotional_product
 
                 coefficient = int(product_qty / ratio_main_product)
                 promotional_product_qty = \
@@ -72,8 +75,13 @@ class SaleOrder(models.Model):
                     'product_uom_qty': promotional_product_qty,
                     'is_promotional_product': True,
                 })
-
-        return super(SaleOrder, self).action_confirm()
+        res = super(SaleOrder, self).action_confirm()
+        # recompute lines sequences
+        for order in self:
+            lines = order.order_line.sorted(key=lambda x: (x.sequence, x.id))
+            for i, rec in enumerate(lines, 1):
+                rec.sequence = i
+        return res
 
     @api.multi
     def action_draft(self):
