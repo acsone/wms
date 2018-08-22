@@ -24,6 +24,7 @@ class TestComputeDiscountAmount(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
+            'ref': '84023435243',
         })
 
         self.account_type = self.env['account.account.type'].create({
