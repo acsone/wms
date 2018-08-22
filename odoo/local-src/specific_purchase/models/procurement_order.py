@@ -88,8 +88,13 @@ class ProcurementOrder(models.Model):
             new_cr = self.pool.cursor()
             self = self.with_env(self.env(cr=new_cr, context=context))
 
-            _logger.info('Update values for open puchase orders')
-            self.env['purchase.order'].update_values_for_open_po()
-            _logger.info('Update done')
+            try:
+                # Delay jobs to update values on open purchase orders
+                self.env['purchase.order'].delay_update_for_open_po()
+                new_cr.commit()
+            except Exception:
+                new_cr.rollback()
+            finally:
+                new_cr.close()
 
         return result

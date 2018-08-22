@@ -103,7 +103,7 @@ class ProcurementOrderpointCompute(models.TransientModel):
 
             try:
                 self.env['procurement.order']._procure_orderpoint_confirm(
-                    use_new_cursor=new_cr.dbname,
+                    use_new_cursor=True,
                     company_id=self.env.user.company_id.id)
             finally:
                 new_cr.close()

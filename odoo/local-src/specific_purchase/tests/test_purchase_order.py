@@ -178,29 +178,8 @@ class TestPurchaseOrder(common.TransactionCase):
         self.assertEquals(line.price_unit, 100)
         self.assertEquals(purchase.amount_untaxed, 100)
 
-        purchase.supplier_promotion_allowed = True
-        line.compute_promotion_supplier()
-
-        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
-        self.assertTrue(purchase.supplier_promotion_allowed)
-        self.assertEquals(line.promotion_supplier, 10)
-        self.assertEquals(line.price_unit_base, 100)
-        self.assertEquals(line.price_unit, 90)
-        self.assertEquals(purchase.amount_untaxed, 90)
-
-        purchase.onchange_partner_id_supplier_promotion_purchase_allowed()
-        purchase.onchange_supplier_promotion_allowed()
-
-        self.assertFalse(supplier.supplier_promotion_purchase_allowed)
-        self.assertFalse(purchase.supplier_promotion_allowed)
-        self.assertEquals(line.promotion_supplier, 0)
-        self.assertEquals(line.price_unit_base, 100)
-        self.assertEquals(line.price_unit, 100)
-        self.assertEquals(purchase.amount_untaxed, 100)
-
         supplier.supplier_promotion_purchase_allowed = True
-        purchase.onchange_partner_id_supplier_promotion_purchase_allowed()
-        purchase.onchange_supplier_promotion_allowed()
+        line.compute_promotion_supplier()
 
         self.assertTrue(supplier.supplier_promotion_purchase_allowed)
         self.assertTrue(purchase.supplier_promotion_allowed)
