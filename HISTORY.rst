@@ -22,7 +22,7 @@ Unreleased
 
 * ALCYN-1412: Imported sale orders are considered done is older than 120 days even if partially delivered.
 * ALCYN-457: Fix TypeError in purchase import jobs
-+ ALCYN-457: Add non regression tests on purchase import
+* ALCYN-457: Add non regression tests on purchase import
 
 **Features and Improvements**
 
@@ -30,7 +30,7 @@ Unreleased
 * ALCYN-184: Add `web` to sale_channel. Remove sale_channel_invisible.
 * ALCYN-449: Set a default bin_checksum, set the bin_checksum_2 and update parking locators
 * ALCYN-448: Fix duplicating sequences in sale_order lines on additional products
-* Update sample data
+* Update sample data: bis repetita placent
 
 **Bugfixes**
 
