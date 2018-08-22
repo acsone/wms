@@ -721,3 +721,29 @@ def date_converter(db2_entity, db2_name, default=None):
     Y = db2_entity[db2_name + 'ss'] * 100 + db2_entity[db2_name + 'aa']
     d = date(Y, mm, dd)
     return "{:%Y-%m-%d}".format(d)
+
+
+def is_nine_filled_ish(number):
+    """Check if a float is a value filled with 9
+    We take in account all values with at least 6x 9.
+    there can be a 0 on the last digit before the decimals.
+    decimals can be filled with 0s or 9s.
+
+    examples:
+
+    999999.99
+    99999999.99
+    999999999.99
+    9999999990.00
+    9999999999.00
+    9999999999.90
+    9999999999.99
+    99999999999.90
+    99999999999.99
+    """
+    if number <= 999999.0:
+        return False
+    number = str(number)
+    if re.match('^9{5}9*0+(.[0,9]*)?$', number):
+        return True
+    return False

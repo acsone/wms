@@ -26,9 +26,7 @@ class ProductMapper(EntityMapper):
         FieldMapper('default_code', 'gesart'),
         FieldMapper('list_price', 'gespvr'),
         FieldMapper('standard_price', 'gespan'),
-        FieldMapper(
-            'indicated_price', 'cplz23',
-        ),
+        'indicated_price',
         FieldMapper('sale_delay', constant=0),
         FieldMapper('weight', 'cp2z07'),
         FieldMapper('length', 'cp2z03'),
@@ -110,6 +108,16 @@ class ProductMapper(EntityMapper):
                     "        WHERE dccsui >= %s AND dccsui <= %s"
                     ")" % (SO_MIN, SO_MAX))
         return None
+
+    def convert_indicated_price(self, odoo_entity, db2_entity):
+        """ Define indicated_price
+
+        Filter prices filled with 9
+        """
+        price = db2_entity.get('cplz23')
+        if mappings.is_nine_filled_ish(price):
+            price = 0
+        odoo_entity['indicated_price'] = price
 
     def convert_taxes_id(self, odoo_entity, db2_entity):
         """ Define product taxes mapping
