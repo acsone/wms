@@ -10,6 +10,7 @@ class TestSaleOrderException(TransactionCase):
     def setUp(self):
         super(TestSaleOrderException, self).setUp()
         self.partner = self.env.ref('base.res_partner_1')
+        self.partner.ref = '888534954'
         self.prod1 = self.env.ref('product.product_product_1')
         self.prod1.categ_id = self.env.ref(
             'specific_data.product_categ_materiel')
