@@ -18,13 +18,13 @@ class StockController(http.Controller):
     def product_stock_level(self, **kw):
         """ Return stock levels of products
 
-        Expect a POST with multipart/form-data.
+        Expect a POST with multipart/x-www-form-urlencoded
         The stock levels are returned for the SKUs passed in the
         form field ``product[]``::
 
             $ curl -X POST \
                     http://localhost:8069/connector_esb/stock/product \
-                    -F "product[]=1750132" -F "product[]=0016188"
+                    -F "product[0]=1750132" -F "product[1]=0016188"
 
         """
         ensure_db()
@@ -32,8 +32,11 @@ class StockController(http.Controller):
         env = request.env
         _logger.debug('Calling stock/product with data : %s',
                       request.httprequest.form)
-        skus = request.httprequest.form.getlist('product[]')
-        skus = [sku.strip() for sku in skus]
+        params = request.httprequest.form.iterlists()
+        # Keep only parameters whose key start by product
+        skus = [param[1] for param in params if param[0].startswith('product')]
+        # Flatten the list of skus and keep only the valid ones
+        skus = [sku for sku_grp in skus for sku in sku_grp if sku.isdigit()]
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('product.product') as work:
             res = work.component('ws.message.product.stock').get_message(skus)

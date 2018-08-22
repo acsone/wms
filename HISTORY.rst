@@ -32,6 +32,7 @@ Unreleased
   * Fix a bug on the query to compute lot to archive. No lots was archived
   * On lots change ref to product quantity
 * ALCYN-486: When creating a new sale order coming from the web service, make sure it is set with the appropriate default values (calling the existing onchange methods)
+* ALCYN-489: Change web service stock/product so it understand array how skus are sent in parameters
 
 **Build**
 
