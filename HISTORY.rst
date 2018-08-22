@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.23.2 (2018-08-22)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1412: Imported sale orders are considered done is older than 120 days even if partially delivered.
@@ -39,10 +51,6 @@ Unreleased
 * ALCYN-489: Change web service stock/product so it understand array how skus are sent in parameters
 * ALCYN-467: Use jobs to update promotion on purchase orders when the procurement is running
 * ALCYN-480: Fix sale exceptions, improve restriction on ordering medicine and veterinary products for customer with undefined Alcyon category
-
-**Build**
-
-**Documentation**
 
 
 10.23.1 (2018-08-15)
