@@ -56,7 +56,7 @@ class RoundItineraryPosition(models.Model):
         'res.partner', 'Partner',
         required=True,
         ondelete='restrict',
-        domain=[('customer', '=', True)],
+        domain=['|', ('customer', '=', True), ('type', '=', 'delivery')],
         index=True)
     partner_zip = fields.Char('Partner ZIP',
                               related='partner_id.zip',

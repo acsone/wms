@@ -274,6 +274,11 @@ class RoundInstance(models.Model):
         :param partner:
         :return:
         """
+        if not partner:
+            # This should not happen unless a picking without partner has been
+            # manually created
+            return False
+
         _logger.debug("Search a round instance for partner %s", partner.id)
 
         # The following query will search for the best itinerary instance.
