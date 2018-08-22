@@ -5,25 +5,32 @@
 from odoo.tests import common
 
 
-class TestStockPicking(common.TransactionCase):
+class TestSaleOrder(common.SavepointCase):
     post_install = True
     at_install = False
 
-    def setUp(self):
-        super(TestStockPicking, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestSaleOrder, cls).setUpClass()
+
+        context = dict(cls.env.context)
+        context.update({
+            "tracking_disable": True,
+        })
+        cls.env = cls.env(context=context)
 
         # Create partner
-        self.partner = self.env['res.partner'].create({
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Hello World',
         })
 
-        self.supplier = self.env['res.partner'].create({
+        cls.supplier = cls.env['res.partner'].create({
             'name': 'Supplier',
             'supplier': True,
         })
 
         # Create the main product
-        self.main_product = self.env['product.product'].create({
+        cls.main_product = cls.env['product.product'].create({
             'name': 'Main product',
             'default_code': '1234567',
             'tracking': 'lot',
@@ -32,13 +39,13 @@ class TestStockPicking(common.TransactionCase):
         })
 
         # Create the sale order
-        self.sale_order = self.env['sale.order'].create({
-            'partner_id': self.partner.id,
+        cls.sale_order = cls.env['sale.order'].create({
+            'partner_id': cls.partner.id,
             'order_line': [
                 (0, 0, {
-                    'name': self.main_product.name,
-                    'product_id': self.main_product.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'name': cls.main_product.name,
+                    'product_id': cls.main_product.id,
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                     'product_uom_qty': 10,
                     'sequence': 1,
                 }),
@@ -70,6 +77,9 @@ class TestStockPicking(common.TransactionCase):
         promotional_line = self.sale_order.order_line.filtered(
             lambda line: line.product_uom_qty == 3.0)
         self.assertEqual(len(promotional_line), 1)
+        # check that sequences are correct
+        self.assertEqual(main_line.sequence, 1)
+        self.assertEqual(promotional_line.sequence, 2)
 
     def test_action_confirm_2(self):
         """
@@ -106,6 +116,9 @@ class TestStockPicking(common.TransactionCase):
         promotional_line = self.sale_order.order_line.filtered(
             lambda line: line.product_uom_qty == 5.0)
         self.assertEqual(len(promotional_line), 1)
+        # check that sequences are correct
+        self.assertEqual(main_line.sequence, 1)
+        self.assertEqual(promotional_line.sequence, 2)
 
     def test_action_confirm_3(self):
         """

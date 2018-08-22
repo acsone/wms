@@ -78,12 +78,9 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).action_confirm()
         # recompute lines sequences
         for order in self:
-            lines = self.env["sale.order.line"].search(
-                [("order_id", "=", order.id)],
-                order="sequence, id",
-            )
-            for rec in enumerate(lines, 1):
-                rec[1].sequence = rec[0]
+            lines = order.order_line.sorted(key=lambda x: (x.sequence, x.id))
+            for i, rec in enumerate(lines, 1):
+                rec.sequence = i
         return res
 
     @api.multi
