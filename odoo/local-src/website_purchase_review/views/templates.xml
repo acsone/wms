@@ -224,11 +224,11 @@
                                     </tr>
                                     <tr>
                                         <td>Stock</td>
-                                        <td><span t-field="current_product.virtual_available"/></td>
+                                        <td><span t-field="current_product.qty_available"/></td>
                                     </tr>
                                     <tr>
                                         <td>Stock available</td>
-                                        <td><span t-field="current_product.qty_available"/></td>
+                                        <td><span t-field="current_product.virtual_available"/></td>
                                     </tr>
                                     <tr>
                                         <td>Stock Customer</td>

@@ -314,6 +314,7 @@ migration:
           - specific_partner
           - specific_sale
           - specific_helpdesk
+          - website_purchase_review
           ### server-tools
           - onchange_helper
       operations:
