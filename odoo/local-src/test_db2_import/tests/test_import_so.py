@@ -22,21 +22,6 @@ class TestImportSO(DB2ImportTestCase):
         # We want history mode to generate the back orders
         self.importer_table_so.importer_id.mode = 'final_update'
 
-    def check_values(self, record, expected_values):
-        for k, expect in expected_values.iteritems():
-            if expect is False:
-                self.assertFalse(record[k],
-                                 msg="Field %s must be false in %s"
-                                 % (k, record.name))
-            elif isinstance(expect, float):
-                self.assertAlmostEqual(record[k], expect,
-                                       msg="Wrong value on field %s in %s"
-                                       % (k, record.name))
-            else:
-                self.assertEqual(record[k], expect,
-                                 msg="Wrong value on field %s in %s"
-                                 % (k, record.name))
-
     def check_so_values(self, expected_values):
         self.check_values(self.so, expected_values)
 

@@ -143,6 +143,109 @@ SOL_COLS = (
  "dccarc VARCHAR,"
  "dccre  VARCHAR")
 
+PO_COLS = (
+ "ecfctr VARCHAR,"
+ "ecfsui INTEGER,"
+ "ecfuti INTEGER,"
+ "ecftyc INTEGER,"
+ "ecfsuc VARCHAR,"
+ "ecfssu VARCHAR,"
+ "ecfdss INTEGER,"
+ "ecfdaa INTEGER,"
+ "ecfdmm INTEGER,"
+ "ecfdjj INTEGER,"
+ "ecfdiv DOUBLE PRECISION,"
+ "ecffou DOUBLE PRECISION,"
+ "ecfrin VARCHAR,"
+ "ecfrcl VARCHAR,"
+ "ecflss INTEGER,"
+ "ecflaa INTEGER,"
+ "ecflmm INTEGER,"
+ "ecfljj INTEGER,"
+ "ecfmdl INTEGER,"
+ "ecfrem DOUBLE PRECISION,"
+ "ecfrms DOUBLE PRECISION,"
+ "ecfdev DOUBLE PRECISION,"
+ "ecftau DOUBLE PRECISION,"
+ "ecfdel INTEGER,"
+ "ecfnal INTEGER,"
+ "ecfqua DOUBLE PRECISION,"
+ "ecfed1 DOUBLE PRECISION,"
+ "ecfcom DOUBLE PRECISION,"
+ "ecfedc DOUBLE PRECISION,"
+ "ecfncd DOUBLE PRECISION,"
+ "ecfjes DOUBLE PRECISION,"
+ "ecftes DOUBLE PRECISION,"
+ "ecfnof VARCHAR,"
+ "ecffss INTEGER,"
+ "ecffaa INTEGER,"
+ "ecffmm INTEGER,"
+ "ecffjj INTEGER,"
+ "ecfcss INTEGER,"
+ "ecfcaa INTEGER,"
+ "ecfcmm INTEGER,"
+ "ecfcjj INTEGER,"
+ "ecfmss INTEGER,"
+ "ecfmaa INTEGER,"
+ "ecfmmm INTEGER,"
+ "ecfmjj INTEGER,"
+ "ecfpss INTEGER,"
+ "ecfpaa INTEGER,"
+ "ecfpmm INTEGER,"
+ "ecfpjj INTEGER,"
+ "ecfana VARCHAR,"
+ "ecfdnl DOUBLE PRECISION,"
+ "ecfmto DOUBLE PRECISION,"
+ "ecfsts DOUBLE PRECISION,"
+ "ecfres VARCHAR")
+
+POL_COLS = (
+ "dcfctr VARCHAR,"
+ "dcfsui INTEGER,"
+ "dcfuti INTEGER,"
+ "dcfnli DOUBLE PRECISION,"
+ "dcfsuc VARCHAR,"
+ "dcfssu VARCHAR,"
+ "dcffou DOUBLE PRECISION,"
+ "dcfcli DOUBLE PRECISION,"
+ "dcfart VARCHAR,"
+ "dcflib VARCHAR,"
+ "dcfquc DOUBLE PRECISION,"
+ "dcfqur DOUBLE PRECISION,"
+ "dcfqul DOUBLE PRECISION,"
+ "dcflss INTEGER,"
+ "dcflaa INTEGER,"
+ "dcflmm INTEGER,"
+ "dcfljj INTEGER,"
+ "dcfpac DOUBLE PRECISION,"
+ "dcfprv DOUBLE PRECISION,"
+ "dcfrem DOUBLE PRECISION,"
+ "dcfres DOUBLE PRECISION,"
+ "dcfunv DOUBLE PRECISION,"
+ "dcfgro DOUBLE PRECISION,"
+ "dcfsgr DOUBLE PRECISION,"
+ "dcfcva DOUBLE PRECISION,"
+ "dcfcan DOUBLE PRECISION,"
+ "dcfsta DOUBLE PRECISION,"
+ "dcfstb DOUBLE PRECISION,"
+ "dcfstc DOUBLE PRECISION,"
+ "dcfstf DOUBLE PRECISION,"
+ "dcfpsp DOUBLE PRECISION,"
+ "dcfnfa VARCHAR,"
+ "dcffss INTEGER,"
+ "dcffaa INTEGER,"
+ "dcffmm INTEGER,"
+ "dcffjj INTEGER,"
+ "dcfcss INTEGER,"
+ "dcfcaa INTEGER,"
+ "dcfcmm INTEGER,"
+ "dcfcjj INTEGER,"
+ "dcfmss INTEGER,"
+ "dcfmaa INTEGER,"
+ "dcfmmm INTEGER,"
+ "dcfmjj INTEGER,"
+ "dcfre  VARCHAR")
+
 DRECEP_COLS = (
  "drpsuc VARCHAR,"
  "drpctr VARCHAR,"
@@ -291,17 +394,26 @@ class DB2ImportTestCase(SavepointCase):
         """Create tables to use in tests.
         """
 
-        db2_so_table = cls.env.ref('db2_import.db2_table_pentcdcl_for_sale')
-        db2_sol_table = cls.env.ref('db2_import.db2_table_pdetcdcl_for_sale')
+        ref = cls.env.ref
+
+        db2_so_table = ref('db2_import.db2_table_pentcdcl_for_sale')
+        db2_sol_table = ref('db2_import.db2_table_pdetcdcl_for_sale')
 
         db2_so_table._create_db2_table(SO_COLS)
         db2_sol_table._create_db2_table(SOL_COLS)
+
+        db2_po_table = ref('db2_import.db2_table_pentcdfo_for_purchase')
+        db2_pol_table = ref('db2_import.db2_table_pdetcdfo_for_purchase')
+
+        db2_po_table._create_db2_table(PO_COLS)
+        db2_pol_table._create_db2_table(POL_COLS)
 
     @classmethod
     def insert_db2_records(cls):
         """Insert records to use in tests."""
         cr = cls.env.cr
         for table in ['db2_pentcdcl', 'db2_pdetcdcl',
+                      'db2_pentcdfo', 'db2_pdetcdfo',
                       'db2_drecep', 'db2_hisprb', 'db2_hisspr']:
             with open(SQL_PATH % table) as sql_file:
                 sql = sql_file.read()
@@ -742,3 +854,18 @@ class DB2ImportTestCase(SavepointCase):
             record['sequence'] = 20
             route = cls.env['stock.location.route'].create(record)
             cls.add_xmlid(route, xmlid)
+
+    def check_values(self, record, expected_values):
+        for k, expect in expected_values.iteritems():
+            if expect is False:
+                self.assertFalse(record[k],
+                                 msg="Field %s must be false in %s"
+                                 % (k, record.name))
+            elif isinstance(expect, float):
+                self.assertAlmostEqual(record[k], expect,
+                                       msg="Wrong value on field %s in %s"
+                                       % (k, record.name))
+            else:
+                self.assertEqual(record[k], expect,
+                                 msg="Wrong value on field %s in %s"
+                                 % (k, record.name))
