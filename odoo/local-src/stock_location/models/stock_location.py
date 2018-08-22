@@ -22,12 +22,14 @@ from datetime import date
 
 from odoo import fields, models, api
 
+DEFAULT_BIN_CHECKSUM = '12'
+
 
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    bin_checksum_1 = fields.Char('Checksum 1')
-    bin_checksum_2 = fields.Char('Checksum 2')
+    bin_checksum_1 = fields.Char('Checksum 1', default=DEFAULT_BIN_CHECKSUM)
+    bin_checksum_2 = fields.Char('Checksum 2', default=DEFAULT_BIN_CHECKSUM)
     bin_checksum_3 = fields.Char('Checksum 3')
 
     @api.multi
