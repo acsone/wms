@@ -30,6 +30,7 @@ Unreleased
 * ALCYN-184: Add `web` to sale_channel. Remove sale_channel_invisible.
 * ALCYN-449: Set a default bin_checksum, set the bin_checksum_2 and update parking locators
 * ALCYN-448: Fix duplicating sequences in sale_order lines on additional products
+* Update sample data
 
 **Bugfixes**
 
