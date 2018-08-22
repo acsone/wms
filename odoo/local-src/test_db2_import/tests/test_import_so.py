@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 from odoo.addons.db2_import.converter.sale import DB2MapperSaleOrder
+from freezegun import freeze_time
 
 from .common import DB2ImportTestCase
 
@@ -52,6 +53,7 @@ class TestImportSO(DB2ImportTestCase):
 
             self.check_values(line, expected_line_values)
 
+    @freeze_time("2018-02-01")
     def test_import_history_to_final_update_done(self):
         suite = 2798516
         db2_id = self.get_row_from_suite(suite)
@@ -85,6 +87,7 @@ class TestImportSO(DB2ImportTestCase):
 
         self.importer_table_so.importer_id.mode = 'final_update'
 
+    @freeze_time("2018-02-01")
     def test_import_history_to_final_update_partial(self):
         suite = 2844358
         db2_id = self.get_row_from_suite(suite)
@@ -116,6 +119,44 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 4)
         self.assertEqual(len(self.so.picking_ids), 5)
 
+    @freeze_time("2018-08-21")
+    def test_import_history_expired(self):
+        suite = 2844358
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_so.importer_id.mode = 'history'
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+        expected_values = {
+            'name': str(suite), 'state': u'done',
+            'invoice_status': u'invoiced',
+        }
+        self.check_so_values(expected_values)
+        self.assertEqual(len(self.so.order_line), 4)
+        self.assertEqual(len(self.so.picking_ids), 0)
+
+    @freeze_time("2018-08-21")
+    def test_import_final_expired(self):
+        suite = 2844358
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_so.importer_id.mode = 'final_update'
+
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+        expected_values = {
+            'name': str(suite), 'state': u'done',
+            'invoice_status': u'invoiced',
+        }
+        self.check_so_values(expected_values)
+        self.assertEqual(len(self.so.order_line), 4)
+        self.assertEqual(len(self.so.picking_ids), 0)
+
+    @freeze_time("2018-02-01")
     def test_import_no_additional_product(self):
         """Check we don't add unwanted additional products
 
@@ -135,6 +176,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so), 1)
         self.assertEqual(len(self.so.order_line), 2)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2798516(self):
         """Import SO 2798516.
 
@@ -192,6 +234,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 1)
         self.assertEqual(len(self.so.picking_ids), 0)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2814640(self):
         """Import SO 2814640,
          1 line with 4 qty SO fully delivered
@@ -237,6 +280,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 1)
         self.assertEqual(len(self.so.picking_ids), 0)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2835999(self):
         """Import SO 2835999.
 
@@ -295,6 +339,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 1)
         self.assertEqual(len(self.so.picking_ids), 0)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2797926(self):
         """Import SO 2797926.
 
@@ -435,6 +480,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 13)
         self.assertEqual(len(self.so.picking_ids), 0)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2842879(self):
         """Import SO 2842879.
 
@@ -494,6 +540,7 @@ class TestImportSO(DB2ImportTestCase):
         self.assertEqual(len(self.so.order_line), 1)
         self.assertEqual(len(self.so.picking_ids), 0)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2833868(self):
         """Import SO 2833868.
 
@@ -601,6 +648,7 @@ class TestImportSO(DB2ImportTestCase):
             sorted(states),
             ['assigned'] * 2 + ['done'] * 5)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2835952(self):
         """Import SO 2835952.
 
@@ -676,6 +724,7 @@ class TestImportSO(DB2ImportTestCase):
             sorted(states),
             ['assigned'] * 2 + ['done'] * 2)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2835987(self):
         """Import SO 2835987.
 
@@ -750,6 +799,7 @@ class TestImportSO(DB2ImportTestCase):
             sorted(states),
             ['assigned'] * 2 + ['done'] * 2)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2842972(self):
         """Import SO 2842972.
 
@@ -882,6 +932,7 @@ class TestImportSO(DB2ImportTestCase):
             sorted(states),
             ['assigned'] * 2 + ['done'] * 3)
 
+    @freeze_time("2018-02-01")
     def test_import_so_2844358(self):
         """Import SO 2844358.
 
@@ -1018,6 +1069,7 @@ class TestImportSO(DB2ImportTestCase):
                 self.assertEqual(
                     expected_qty['delivered_qty'], line.qty_delivered)
 
+    @freeze_time("2018-02-01")
     def test_picking_nogrouping_by_partner(self):
         """Non regression test for picking group by partner
         introduced by module stock_groupbypartner
