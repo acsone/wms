@@ -115,7 +115,7 @@ class PurchaseOrder(models.Model):
     @job(default_channel='root.update_po')
     def job_update_open_po(self):
         """
-        For each lines, we call the method onchange_quantity to update
+        For each lines, we call the method onchange_product_id to update
         promotion, global promotion and scheduled date
         """
         _logger.info(
