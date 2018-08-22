@@ -49,10 +49,12 @@ class TestShippingCosts(TransactionCase):
         # Lets create 2 customers
         self.partner1 = self.env['res.partner'].create({
             'name': 'Partner One',
+            'ref': '89328492342',
             'help_with_fee': True,
         })
         self.partner2 = self.env['res.partner'].create({
             'name': 'Partner Two',
+            'ref': '498298349283',
             'help_with_fee': True,
         })
         # Create a couple of products
