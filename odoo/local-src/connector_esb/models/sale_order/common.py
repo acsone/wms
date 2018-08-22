@@ -48,6 +48,12 @@ class SaleOrder(models.Model):
     def _ws_create_new(self, data):
         order_data = self._ws_create_order_data(data)
         order_data['order_line'] = self._ws_create_order_line_data(data)
+        order_data = self.env['sale.order'].play_onchanges(
+            order_data,
+            ['discount_pricelist_id',
+             'supplier_promotion_allowed',
+             'partner_id'],
+            )
         order = self.create(order_data)
         order.action_confirm_background()
         return order
@@ -109,6 +115,7 @@ class SaleOrder(models.Model):
                 sol['product_uom_qty'] = line.pop('quantity')
                 sol['price_unit'] = product.list_price
                 sol['sequence'] = line.pop('line_id')
+                sol['discounting_type'] = 'multiplicative'
                 lines.append((0, 0, sol))
             else:
                 message = 'Webservice new saleorder, product %s not found'

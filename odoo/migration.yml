@@ -146,6 +146,7 @@ migration:
           - base_technical_features
           - mail_environment
           - server_environment
+          - onchange_helper
           # oca/stock-logistics-warehouse
           - stock_available_immediately
           - stock_mts_mto_rule
@@ -313,6 +314,8 @@ migration:
           - specific_partner
           - specific_sale
           - specific_helpdesk
+          ### server-tools
+          - onchange_helper
       operations:
         post:
           - anthem songs.upgrade.10_23_2_update::post

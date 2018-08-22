@@ -11,6 +11,7 @@
     'depends': [
         'connector',
         'delivery_rounds',
+        'onchange_helper',
         'pricelist_discount',
         'product',
         'product',

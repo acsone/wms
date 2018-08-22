@@ -59,10 +59,13 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'name': 'delivery carrier 1',
             'esb_ref': '031',
             })
+        cls.payment_30_net = cls.env.ref('account.account_payment_term_net')
         cls.partner = cls.env['res.partner'].create(
             {'name': 'John Doe',
              'ref': '111111',
              'property_delivery_carrier_id': cls.delivery_1.id,
+             'supplier_promotion_sale_allowed': True,
+             'property_payment_term_id': cls.payment_30_net.id,
              }
         )
         cls.partner_shipping = cls.env['res.partner'].create({
@@ -88,6 +91,8 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'partner_shipping_id': self.partner_shipping,
             'amount_total': self.p1.list_price * 3 * (1 + tax_rate),
             'amount_tax': self.p1.list_price * 3 * tax_rate,
+            'supplier_promotion_allowed': True,
+            'payment_term_id': self.payment_30_net,
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
