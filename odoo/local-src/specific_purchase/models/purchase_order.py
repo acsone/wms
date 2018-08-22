@@ -2,9 +2,14 @@
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import date, timedelta
+import logging
 
 from odoo import fields, models, api
 import odoo.addons.decimal_precision as dp
+
+from odoo.addons.queue_job.job import job
+
+_logger = logging.getLogger(__name__)
 
 
 class PurchaseOrder(models.Model):
@@ -97,15 +102,26 @@ class PurchaseOrder(models.Model):
             line.compute_promotion_supplier()
 
     @api.model
-    def update_values_for_open_po(self):
-        """ Call the method _onchange_quantity on each lines of all open PO """
+    def delay_update_for_open_po(self):
+        """ Delay jobs to update values on all open purchase orders """
 
         open_pos = self.search([('state', '=', 'draft')])
+        for open_po in open_pos:
+            open_po.with_delay(
+                description='Update values for %s' % open_po.name)\
+                .job_update_open_po()
 
-        # Call the method _onchange_quantity on each lines to recompute
-        # the promotion
-        for line in open_pos.mapped('order_line'):
-            line._onchange_quantity()
+    @api.multi
+    @job(default_channel='root.update_po')
+    def job_update_open_po(self):
+        """
+        For each lines, we call the method onchange_quantity to update
+        promotion, global promotion and scheduled date
+        """
+        _logger.info(
+            'Update values for %s' % ', '.join([x.name for x in self]))
+        for line in self.mapped('order_line'):
+            line.onchange_product_id()
 
 
 class PurchaseOrderLine(models.Model):
@@ -274,9 +290,8 @@ class PurchaseOrderLine(models.Model):
             date_planned = self.get_next_scheduled_date(seller, date_order)
             self.date_planned = date_planned
 
-        if self.discount_global:
-            return result
-        self.discount_global = self.order_id.partner_id.supplier_discount
+        if not self.discount_global:
+            self.discount_global = self.order_id.partner_id.supplier_discount
 
         self.compute_promotion_supplier()
 
