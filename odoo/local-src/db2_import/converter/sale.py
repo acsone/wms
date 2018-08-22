@@ -117,6 +117,7 @@ class DB2MapperSaleOrder(object):
             'partner_shipping_id': delivery.id,
             'fiscal_position_id': fpos.id,
             'supplier_promotion_allowed': promo_sale,
+            'ignore_exception': True,
         }
 
         so_model = rec.env['sale.order'].with_context(
