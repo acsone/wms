@@ -37,6 +37,7 @@ Unreleased
 * ALCYN-486: When creating a new sale order coming from the web service, make sure it is set with the appropriate default values (calling the existing onchange methods)
 * ALCYN-489: Change web service stock/product so it understand array how skus are sent in parameters
 * ALCYN-467: Use jobs to update promotion on purchase orders when the procurement is running
+* ALCYN-480: Fix sale exceptions, improve restriction on ordering medicine and veterinary products for customer with undefined Alcyon category
 
 **Build**
 

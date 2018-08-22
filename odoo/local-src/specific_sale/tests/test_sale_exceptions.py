@@ -84,6 +84,32 @@ class TestSaleOrderException(TransactionCase):
                 })],
         })
 
+    def test_customer_with_unknown_category(self):
+        """Check exceptions for a customer with no Alcyon Category set."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
+        self.partner.alcyon_category_id = None
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_food
+        self.assertFalse(line.exception)
+        line.product_id = self.prod_matos
+        self.assertFalse(line.exception)
+        # Medoc are not allowed
+        line.product_id = self.prod_medoc_pharma
+        self.assertTrue(line.exception)
+        line.product_id = self.prod_medoc_human
+        self.assertTrue(line.exception)
+        line.product_id = self.prod_medoc_vet_belge
+        self.assertTrue(line.exception)
+        line.product_id = self.prod_medoc_belge_only
+        self.assertTrue(line.exception)
+        line.product_id = self.prod_vet_only
+        self.assertTrue(line.exception)
+        # No stup
+        line.product_id = self.prod_stup
+        self.assertTrue(line.exception)
+        rules.write({'active': 0})
+
     def test_client_alcyonnaire(self):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})

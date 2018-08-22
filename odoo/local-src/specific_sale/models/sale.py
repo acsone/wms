@@ -412,6 +412,9 @@ class SaleOrderLine(models.Model):
         medoc = self.env.ref('specific_data.product_categ_medoc')
         if not self.product_id.categ_id.has_for_parent(medoc.id):
             return False
+        if not self.order_id.partner_id.alcyon_category_id:
+            # Customer with undefined category are not allowed medoc
+            return True
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
             if self.order_id.partner_id.alcyon_category_id == group:
@@ -521,6 +524,9 @@ class SaleOrderLine(models.Model):
                          ]
         if not self.product_id.veterinary_only:
             return False
+        if not self.order_id.partner_id.alcyon_category_id:
+            # Customer with undefined category are not allowed vet only
+            return True
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
             if self.order_id.partner_id.alcyon_category_id == group:
