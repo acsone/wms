@@ -38,6 +38,7 @@ class TestPickingTransfer(TransactionCase):
 
         self.supplier = self.partner_model.create({
             'name': 'Unittest supplier',
+            'ref': '892374928374234',
         })
 
         self.supplier_location = self.location_model.browse(
