@@ -17,3 +17,11 @@ UPDATE
    partner_invoice_id = t.new_invoice_partner
  FROM t
  WHERE so.id = t.id;
+
+-- Delete views which are block travis build https://travis-ci.com/camptocamp/alcyon_odoo/jobs/141081227#L3521
+-- ir.model.data will be cleaned when the original module will be updated
+
+DELETE FROM
+    ir_ui_view
+    WHERE arch_db
+    LIKE '%supplier_promotion_allowed%';
