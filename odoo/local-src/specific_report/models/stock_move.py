@@ -32,6 +32,8 @@ class StockMove(models.Model):
         res = super(StockMove, self).fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
             submenu=submenu)
+        if view_type != 'tree':
+            return res
         customer_location = self.env.ref('stock.stock_location_customers')
         if (self.env.context.get('default_location_dest_id') !=
                 customer_location.id):
