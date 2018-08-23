@@ -18,12 +18,14 @@ class TestStockPicking(common.TransactionCase):
         location_obj = self.env['stock.location']
 
         self.env.user.write({
+            'ref': '757823948234',
             'tz': 'Europe/Brussels',
         })
 
         # Create partner
         self.partner = self.env['res.partner'].create({
             'name': 'Hello World',
+            'ref': '29969868875',
         })
 
         round_template = self.env['round.template'].create({
