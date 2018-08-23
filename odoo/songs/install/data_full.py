@@ -110,6 +110,7 @@ def import_products(ctx):
     load_ctx = ctx.env.context.copy()
     load_ctx.update({
         'tracking_disable': True,
+        'no_connector_export': True,
         'force_archive_orderpoint': True,
         'disable_constrains_orderpoint': True})
 
