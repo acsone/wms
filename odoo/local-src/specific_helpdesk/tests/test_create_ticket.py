@@ -12,6 +12,7 @@ class TestCreateTicketWizard(TransactionCase):
         self.reason_defect = self.env.ref('specific_helpdesk.product_defect')
         self.partner1 = self.env['res.partner'].create({
             'name': 'Partner One',
+            'ref': '99829422054',
             })
         self.p1 = self.env['product.product'].create({
              'name': 'Unittest P1',
