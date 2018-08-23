@@ -12,6 +12,10 @@ class StockPicking(models.Model):
     def do_new_transfer(self):
         result = super(StockPicking, self).do_new_transfer()
 
+        # magic word to skip create_draft_invoice
+        if self.env.context.get('__no_job_create_draft_invoice'):
+            return result
+
         picking_type_out = self.env.ref('stock.picking_type_out')
         out_picking = self.filtered(
             lambda picking: picking.picking_type_id == picking_type_out)
