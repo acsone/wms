@@ -12,6 +12,7 @@ class TestDeliveryRoundAssign(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
+            'ref': '12344566777878',
         })
 
         self.p1 = self.env['product.product'].create({
