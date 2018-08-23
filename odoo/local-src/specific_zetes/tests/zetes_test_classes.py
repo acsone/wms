@@ -25,7 +25,8 @@ class ZetesTest(TransactionCase):
         super(ZetesTest, self).setUp()
 
         self.env.user.write({
-            'tz': 'Europe/Brussels'
+            'ref': '38229299884',
+            'tz': 'Europe/Brussels',
         })
 
         # Set all picking as finished (to not interfere with tests)
@@ -42,6 +43,7 @@ class ZetesTest(TransactionCase):
 
         self.user = self.env['res.users'].create({
             'name': 'User test',
+            'ref': '02984757889392',
             'login': 'zetes_user_test',
             'operator_code': OPERATOR_CODE,
             'groups_id': [(4, self.env.ref('stock.group_stock_user').id)],
@@ -52,6 +54,7 @@ class ZetesTest(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': PARTNER_NAME,
+            'ref': '93765921390',
             'is_sale_back_order_accepted': True,
         })
 

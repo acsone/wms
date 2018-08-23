@@ -21,6 +21,7 @@ class TestInterruption(ZetesTest):
 
         self.user_2 = self.env['res.users'].create({
             'name': 'User test 2',
+            'ref': '947356253648689',
             'login': 'zetes_user_test_2',
             'operator_code': '98',
             'groups_id': [(4, self.env.ref('stock.group_stock_user').id)],
