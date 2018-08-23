@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-1421: Migration of bad payers that must pay at order
+* ALCYN-1422: Fix sale import without found fiscal position
 
 **Features and Improvements**
 

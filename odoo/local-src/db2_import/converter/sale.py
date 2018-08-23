@@ -115,7 +115,7 @@ class DB2MapperSaleOrder(object):
             'payment_term_id': pay_term.id,
             'partner_invoice_id': addr['invoice'],
             'partner_shipping_id': delivery.id,
-            'fiscal_position_id': fpos.id,
+            'fiscal_position_id': fpos and fpos.id,
             'supplier_promotion_allowed': promo_sale,
             'ignore_exception': True,
         }
