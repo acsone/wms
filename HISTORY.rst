@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-163: Add a reception wizard for the dropshipping of human drug packs
+
 **Bugfixes**
 * ALCYN-243: Serial number must be encoded/visible only on delivery orders
 * ALCYN-125: Fix partner contact ref

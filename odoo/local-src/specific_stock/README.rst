@@ -16,6 +16,7 @@ This module adds Alcyon specific fields and logic for stock.
 * Indicate in reception wizard if operation is related to a product in backorder
 * Create a cron to create automatically a daily inventory according some rules
 * Move the button "Put in Pack" in the form's header
+* Add a reception wizard for the dropshipping of human drug packs
 
 
 Credits

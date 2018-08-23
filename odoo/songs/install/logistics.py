@@ -260,15 +260,6 @@ def create_locations(ctx):
             'usage': 'customer',
         })
 
-    # Pharma
-    create_or_update(
-        ctx, Location, '__setup__.stock_location_pharma',
-        {
-            'name': 'Pharma',
-            'location_id': loc_partner.id,
-            'usage': 'customer',
-        })
-
     # Create a location for migrated Purchases
     create_or_update(
         ctx, Location, '__setup__.mig_purchase_reception',
@@ -575,7 +566,6 @@ def create_picking_types(ctx):
     location_supplier = ctx.env.ref('stock.stock_location_suppliers')
     location_customers_return = ctx.env.ref(
         '__setup__.stock_location_customers_return')
-    location_pharma = ctx.env.ref('__setup__.stock_location_pharma')
     location_in_return = ctx.env.ref('stock.stock_location_company')
     location_scrap = ctx.env.ref('stock.stock_location_scrapped')
     location_scrap_quality = ctx.env.ref(
@@ -755,20 +745,6 @@ def create_picking_types(ctx):
          'color': color_pick,
          'sequence': 63,
          'picking_zone_id': ctx.env.ref('__setup__.picking_zone_frigo').id,
-         'zetes_picking_type': PICKING_ASSIGNMENT,
-         },
-        {'xmlid': '__setup__.stock_picking_type_humain',
-         'name': 'Pick Humain',
-         'code': 'internal',
-         'sequence_id': picking_sequence.id,
-         'default_location_src_id': location_pharma.id,
-         'default_location_dest_id': location_out.id,
-         'use_create_lots': False,
-         'subcode': 'PICK',
-         'groupbypartner': True,
-         'color': color_pick,
-         'sequence': 64,
-         'picking_zone_id': ctx.env.ref('__setup__.picking_zone_humain').id,
          'zetes_picking_type': PICKING_ASSIGNMENT,
          },
 

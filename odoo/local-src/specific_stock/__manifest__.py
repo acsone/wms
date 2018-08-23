@@ -14,6 +14,7 @@
         'product_expiry',
         'purchase',
         'sale',
+        'specific_data',
         'specific_helpdesk',
         'specific_purchase',
         'stock',
@@ -39,6 +40,7 @@
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
         'views/stock_move.xml',
+        'views/reception_pharmacy.xml',
 
         # Wizards
         'wizards/stock_receive_lot.xml',
@@ -55,6 +57,8 @@
         'data/ir_cron.xml',
         'data/ir_config_parameter.xml',
         'data/product.category.csv',
+        'data/ir_sequence.xml',
+        'data/product.xml',
     ],
     'installable': True,
 }
