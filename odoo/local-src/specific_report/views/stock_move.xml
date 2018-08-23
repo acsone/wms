@@ -15,9 +15,8 @@
         <field name="inherit_id" ref="stock.view_move_picking_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']" position="after">
-                <!-- Customer location = 9 -->
-                <field name="serial_number" invisible="context.get('default_location_dest_id') != 9"/>
-                <button name="%(action_edit_serial_number)d" type="action" icon="fa-pencil" invisible="context.get('default_location_dest_id') != 9"/>
+                <field name="serial_number" invisible="1"/>
+                <button name="button_edit_serial_number" type="object" icon="fa-pencil" invisible="1"/>
             </xpath>
         </field>
     </record>

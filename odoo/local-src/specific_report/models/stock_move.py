@@ -1,23 +1,11 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Sylvain Van Hoof <svh@sylvainvh.be>
-#    Copyright 2016 BCIM sprl, Camptocamp
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2017-2018 Sylvain Van Hoof (Okia) <sylvain@okia.be>
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from lxml import etree
+import json
+
 from odoo import models, fields, api
 
 
@@ -31,7 +19,37 @@ class StockMove(models.Model):
     order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
 
     # This field is only used for information
-    serial_number = fields.Char('Serial number', readonly=True)
+    serial_number = fields.Char(
+        'Serial number', readonly=True,
+        help='For delivery order only')
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        """Display serial number + edit button only on delivery order
+        (i.e.  destination location = customer location)
+        """
+        res = super(StockMove, self).fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
+        customer_location = self.env.ref('stock.stock_location_customers')
+        if (self.env.context.get('default_location_dest_id') !=
+                customer_location.id):
+            return res
+        arch = etree.XML(res['arch'])
+        for node in arch.xpath("//field[@name='serial_number'] | "
+                               "//button[@name='button_edit_serial_number']"):
+            if node.get('modifiers'):
+                modifiers = json.loads(node.get('modifiers'))
+                modifiers['tree_invisible'] = False
+                node.set('modifiers', json.dumps(modifiers))
+        res['arch'] = etree.tostring(arch)
+        return res
+
+    @api.multi
+    def button_edit_serial_number(self):
+        return self.env.ref('specific_report.action_edit_serial_number')\
+            .read()[0]
 
     @api.multi
     def get_lots(self):
