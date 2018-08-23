@@ -74,8 +74,22 @@ def import_partner_link(ctx):
 
 
 @anthem.log
+def import_partner_block_delivery(ctx):
+    """Load flag on customer that are bad payers and must pay SO at order. This
+    was managed by T28 in DB2
+    """
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
+    with ctx.log(u"Define bad payers customers (default_delivery_block)"):
+        content = resource_stream(req, 'data/install/res_partner_T28.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
+
+@anthem.log
 def post_import_partner(ctx):
     import_partner_link(ctx)
+    import_partner_block_delivery(ctx)
 
 
 @anthem.log

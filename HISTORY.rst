@@ -6,8 +6,13 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1421: Migration of bad payers that must pay at order
+
 **Features and Improvements**
 
+* ALCYN-1419: Manage sales prepayment (bad payers)
 * ALCYN-163: Add a reception wizard for the dropshipping of human drug packs
 
 **Bugfixes**
@@ -38,7 +43,6 @@ Unreleased
 * ALCYN-449: Set a default bin_checksum, set the bin_checksum_2 and update parking locators
 * ALCYN-448: Fix duplicating sequences in sale_order lines on additional products
 * Update sample data: bis repetita placent
-* ALCYN-1419: Manage sales prepayment (bad payers)
 
 **Bugfixes**
 
