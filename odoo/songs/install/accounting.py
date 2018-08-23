@@ -26,6 +26,13 @@ def no_coa_instance_lock(ctx):
 
 
 @anthem.log
+def enable_expects_chart_of_accounts(ctx):
+    """ Enable the flag Expects a Chart of Accounts on the company """
+    company = ctx.env.ref('base.main_company')
+    company.expects_chart_of_accounts = True
+
+
+@anthem.log
 def no_coa_instance_unlock(ctx):
     """ Remove dummy account on main company """
     ctx.env.ref('__setup__.dummy_holding_account').unlink()
