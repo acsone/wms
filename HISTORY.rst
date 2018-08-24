@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1421: Migration of bad payers that must pay at order
 * ALCYN-1422: Fix sale import without found fiscal position
 * ALCYN-450: Skip ESB update on inital product csv import
+* ALCYN-416: Fix history of imported sale orders setting the right invoice address
 
 **Features and Improvements**
 
