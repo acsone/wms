@@ -349,6 +349,7 @@ migration:
           - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_23_3_update.sql $DB_NAME'"
           - psql -f odoo/songs/upgrade/10_23_3_update.sql
         post:
+          - anthem songs.install.logistics::create_picking_types
           - anthem songs.upgrade.10_23_3_update::post
           - anthem songs.install.accounting::enable_expects_chart_of_accounts
       modes:
