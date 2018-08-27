@@ -38,7 +38,8 @@ class TestPurchaseOrder(common.TransactionCase):
         pol = self.env['purchase.order.line']
 
         partner = self.env['res.partner'].create({
-            'name': 'Partner Test'
+            'name': 'Partner Test',
+            'ref': '9432456677734',
         })
         seller = self.env['product.supplierinfo'].create({
             'name': partner.id,
@@ -77,6 +78,7 @@ class TestPurchaseOrder(common.TransactionCase):
         supplier = self.env['res.partner'].create({
             'name': 'Supplier',
             'supplier': True,
+            'ref': '9690234',
         })
         product = self.env['product.product'].create({
             'name': 'Product 1',
@@ -132,6 +134,7 @@ class TestPurchaseOrder(common.TransactionCase):
         supplier = self.env['res.partner'].create({
             'name': 'Supplier',
             'supplier': True,
+            'ref': '5802034',
         })
 
         supplierinfo = self.env['product.supplierinfo'].create({

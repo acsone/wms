@@ -30,7 +30,8 @@ class TestRoundTags(TransactionCase):
         })
 
         self.partner = self.env['res.partner'].create({
-            'name': 'Partner test'
+            'name': 'Partner test',
+            'ref': '00099876743567',
         })
         self.itinerary = self.env['round.itinerary'].create({
             'name': 'Itinerary test',

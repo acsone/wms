@@ -16,10 +16,12 @@ class TestPurchaseOrder(common.TransactionCase):
         # Create partner
         self.partner = self.env['res.partner'].create({
             'name': 'Hello World',
+            'ref': '85789284',
         })
 
         self.supplier = self.env['res.partner'].create({
             'name': 'Supplier',
+            'ref': '829562231',
             'supplier': True,
         })
 

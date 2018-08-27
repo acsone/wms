@@ -70,6 +70,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         )
         cls.partner_shipping = cls.env['res.partner'].create({
             'name': 'John Doe (ship)',
+            'ref': '58020388759284',
             'type': 'delivery',
             'street': 'Middle street 2',
             'city': 'Some Island',

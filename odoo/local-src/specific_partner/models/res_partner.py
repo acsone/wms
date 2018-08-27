@@ -74,6 +74,28 @@ class ResPartner(models.Model):
                     partner.alcyon_category_id == students
             )
 
+    @api.model
+    def _commercial_fields(self):
+        """Cancel propagation of the field ref to children.
+
+        This changes the default behavior of the module base_partner_sequence,
+         """
+        res = super(ResPartner, self)._commercial_fields()
+        if 'ref' in res:
+            res.remove('ref')
+        return res
+
+    @api.multi
+    def _needsRef(self, vals=None):
+        """Generate a unique ref for addresses and contacts.
+
+        This changes the default behavior of the module base_partner_sequence.
+        """
+        res = super(ResPartner, self)._needsRef(vals)
+        if vals.get('parent_id'):
+            return True
+        return res
+
     @api.one
     @api.constrains('name', 'street', 'city', 'zip', 'country_id')
     def _is_valid_esb_address(self):

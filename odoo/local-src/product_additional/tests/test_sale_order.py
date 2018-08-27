@@ -22,10 +22,12 @@ class TestSaleOrder(common.SavepointCase):
         # Create partner
         cls.partner = cls.env['res.partner'].create({
             'name': 'Hello World',
+            'ref': '95739887576',
         })
 
         cls.supplier = cls.env['res.partner'].create({
             'name': 'Supplier',
+            'ref': '875893929',
             'supplier': True,
         })
 

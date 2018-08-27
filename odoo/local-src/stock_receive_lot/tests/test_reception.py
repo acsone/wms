@@ -35,6 +35,7 @@ class TestReception(TransactionCase):
 
         self.supplier = self.partner_model.create({
             'name': 'Unittest supplier',
+            'ref': '839737475756467',
         })
 
         self.supplier_location = self.location_model.browse(

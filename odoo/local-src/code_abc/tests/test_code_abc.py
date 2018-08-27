@@ -57,7 +57,8 @@ class TestCodeABC(common.TransactionCase):
         })
 
         partner = self.env['res.partner'].create({
-            'name': 'Partner'
+            'name': 'Partner',
+            'ref': '12312394',
         })
 
         business_unit = self.env['product.category'].create({
@@ -182,7 +183,8 @@ class TestCodeABC(common.TransactionCase):
         })
 
         partner = self.env['res.partner'].create({
-            'name': 'Partner'
+            'name': 'Partner',
+            'ref': '87564334',
         })
 
         business_unit_1 = self.env['product.category'].create({

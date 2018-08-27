@@ -166,6 +166,7 @@ class TestStockInventory(TransactionCase):
 
         partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
+            'ref': '92837498234',
         })
 
         ir_config = self.env['ir.config_parameter']

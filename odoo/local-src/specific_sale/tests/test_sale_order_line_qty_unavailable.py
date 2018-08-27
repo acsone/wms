@@ -40,6 +40,7 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': 'Unittest partner',
+            'ref': '4929752',
         })
 
     def _define_product_qty(self, product, quantity):

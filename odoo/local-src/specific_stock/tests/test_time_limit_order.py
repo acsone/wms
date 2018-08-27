@@ -23,7 +23,8 @@ class TestTimeLimitOrder(TransactionCase):
         })
 
         self.partner = self.env['res.partner'].create({
-            'name': 'Partner test'
+            'name': 'Partner test',
+            'ref': '982492834234',
         })
         self.itinerary = self.env['round.itinerary'].create({
             'name': 'Itinerary test',

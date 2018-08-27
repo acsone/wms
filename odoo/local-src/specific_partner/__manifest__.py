@@ -10,6 +10,8 @@
     'category': 'Sales',
     'depends': [
         'sale',
+        'base_partner_sequence',
+        'specific_base',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -20,6 +20,7 @@
         'purchase',
         'sale',
         'sale_stock',
+        'specific_base',
         'specific_partner',
         'specific_print',
         'specific_product',
