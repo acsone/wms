@@ -15,6 +15,7 @@ Unreleased
 * ALCYN-132: Fix mapping for pricelist on partners
 * ALCYN-451: On sale order import, skip jobs to create draft invoices
 * ALCYN-417: on products set to 0 indicated_price filled with nine-ish values.
+* ALCYN-404: Close Purchase orders older than 120 days
 
 **Features and Improvements**
 
