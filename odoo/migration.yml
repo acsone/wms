@@ -334,3 +334,7 @@ migration:
         upgrade:
           ### local-src
           - specific_report
+          - specific_stock
+      operations:
+        post:
+          - anthem songs.upgrade.10_23_3_update::post
