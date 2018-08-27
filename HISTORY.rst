@@ -28,6 +28,7 @@ Unreleased
   * Install the module account_chart_update (OCA - account-financial-tools) to create new taxes later (if needed)
   * Create a song to create new Antibiotic taxes
 * ALCYN-464: Remove the supplier_promotion_allowed flag to the purchase order
+* ALCYN-1431: Customer Rank on Delivery Round instance x1000
 
 **Bugfixes**
 
