@@ -115,8 +115,7 @@ class PurchaseOrder(models.Model):
         """
         _logger.info(
             'Update values for %s' % ', '.join([x.name for x in self]))
-        for line in self.mapped('order_line'):
-            line.onchange_product_id()
+        self.mapped('order_line').recompute_discount_values()
 
 
 class PurchaseOrderLine(models.Model):
@@ -267,26 +266,37 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         result = super(PurchaseOrderLine, self).onchange_product_id()
-
-        date_order = self.order_id.date_order
-
-        if self.product_id:
-            order_date_str \
-                = self.order_id.date_order and self.order_id.date_order[:10]
-            seller = self.product_id._select_seller(
-                partner_id=self.partner_id,
-                quantity=self.product_qty,
-                date=order_date_str,
-                uom_id=self.product_uom)
-            date_planned = self.get_next_scheduled_date(seller, date_order)
-            self.date_planned = date_planned
-
-        if not self.discount_global:
-            self.discount_global = self.order_id.partner_id.supplier_discount
-
-        self.compute_promotion_supplier()
+        self.recompute_discount_values()
 
         return result
+
+    @api.multi
+    def recompute_discount_values(self):
+        """ Recompute discount values
+        (global discount, supplier promotion and scheduled date).
+
+        This method can be use to recompute PO in draft to keep a valid
+        scheduled date and update promotions.
+        """
+        for line in self:
+            date_order = line.order_id.date_order
+
+            if line.product_id:
+                order_date_str = line.order_id.date_order \
+                                 and line.order_id.date_order[:10]
+                seller = line.product_id._select_seller(
+                    partner_id=line.partner_id,
+                    quantity=line.product_qty,
+                    date=order_date_str,
+                    uom_id=line.product_uom)
+                date_planned = line.get_next_scheduled_date(seller, date_order)
+                line.date_planned = date_planned
+
+            if not line.discount_global:
+                line.discount_global = \
+                    line.order_id.partner_id.supplier_discount
+
+            line.compute_promotion_supplier()
 
     @api.multi
     def get_next_scheduled_date(self, seller, date_order_str=None):
