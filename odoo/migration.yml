@@ -363,7 +363,10 @@ migration:
         upgrade:
           ### local-src
           - pricelist_discount
+          - specific_account
           - specific_sale
       operations:
         pre:
           - anthem songs.upgrade.10_24_0_update::pre
+        post:
+          - anthem songs.upgrade.10_24_0_update::post
