@@ -171,6 +171,13 @@ class ESBWebServiceExporter(AbstractComponent):
 
     def _has_to_skip(self):
         """ Return True if the export can be skipped """
+        # this variable contains the name of the models
+        # that _inherit from 'esb.exportable'
+        exportable_models = self.env['esb.exportable']._inherit_children
+        # The 'esb.exportable' abstract model implements an
+        # 'esb_is_exportable' method. Use it when available.
+        if self.model._name in exportable_models:
+            return not self.record.esb_is_exportable()
         return False
 
 

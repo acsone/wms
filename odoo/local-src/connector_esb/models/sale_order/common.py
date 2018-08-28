@@ -22,6 +22,14 @@ class SaleOrder(models.Model):
          _('This reference esb already exists'))
     ]
 
+    @api.multi
+    def esb_is_exportable(self):
+        exportable = (
+            super(SaleOrder, self).esb_is_exportable()
+            and self.state not in ('draft', 'sent', 'confirm_background')
+        )
+        return exportable
+
     @api.model
     def create(self, vals):
         self_ctx = self.with_context(_sale_order_create=True)

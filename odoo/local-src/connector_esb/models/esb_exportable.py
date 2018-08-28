@@ -11,6 +11,11 @@ class ESBExportable(models.Model):
     _name = 'esb.exportable'
 
     @api.multi
+    def esb_is_exportable(self):
+        self.ensure_one()
+        return True
+
+    @api.multi
     @job(default_channel='root.esb')
     @related_action(action='related_action_open_record')
     def esb_export_record(self, timestamp=None):
