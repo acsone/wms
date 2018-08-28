@@ -2,7 +2,12 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from pkg_resources import resource_stream
+
 import anthem
+from anthem.lyrics.loaders import load_csv_stream
+
+from ..common import req
 
 
 @anthem.log
@@ -44,9 +49,28 @@ def add_missing_antibiotic_taxes(ctx):
         # OR update if the tax already existing
         template._generate_tax(company)
 
+# FULL MODE Section
+
+
+@anthem.log
+def import_products(ctx):
+    """ Clean indicated price in products by loading a csv"""
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Product = ctx.env['product.product'].with_context(load_ctx)
+    content = resource_stream(
+        req, 'data/upgrade/10.23.3/product-clean-indicated-price.csv')
+    load_csv_stream(ctx, Product, content, delimiter=',')
+
 
 @anthem.log
 def post(ctx):
     """ POST 10.23.3 """
     remove_pickingtype_humain(ctx)
     add_missing_antibiotic_taxes(ctx)
+
+
+@anthem.log
+def post_full(ctx):
+    """ POST FULL 10.23.3 """
+    import_products(ctx)

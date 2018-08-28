@@ -14,6 +14,7 @@ Unreleased
 * ALCYN-416: Fix history of imported sale orders setting the right invoice address
 * ALCYN-132: Fix mapping for pricelist on partners
 * ALCYN-451: On sale order import, skip jobs to create draft invoices
+* ALCYN-417: on products set to 0 indicated_price filled with nine-ish values.
 
 **Features and Improvements**
 
