@@ -12,6 +12,7 @@ Unreleased
 * ALCYN-1422: Fix sale import without found fiscal position
 * ALCYN-450: Skip ESB update on inital product csv import
 * ALCYN-416: Fix history of imported sale orders setting the right invoice address
+* ALCYN-132: Fix mapping for pricelist on partners
 
 **Features and Improvements**
 

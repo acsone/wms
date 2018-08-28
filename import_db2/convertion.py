@@ -588,9 +588,10 @@ class CustomerMapper(EntityMapper):
 
     @staticmethod
     def convert_product_pricelist(odoo_entity, db2_entity):
-        code_remise = db2_entity.get('cliact')
-        if code_remise:
-            if code_remise < 50:
+        # Code statistique
+        code_stat = db2_entity.get('clista')
+        if code_stat:
+            if code_stat < 50:
                 pricelist = 'specific_data.product_pricelist_pb1'
             else:
                 pricelist = 'specific_data.product_pricelist_pb2'
