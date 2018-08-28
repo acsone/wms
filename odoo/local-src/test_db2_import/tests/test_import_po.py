@@ -91,3 +91,29 @@ class TestImportPO(DB2ImportTestCase):
         self.check_po_values(expected_values)
         self.assertEqual(len(self.po.order_line), 3)
         self.assertEqual(len(self.po.picking_ids), 1)
+
+    @freeze_time("2018-12-31")
+    def test_import_history_expired(self):
+        """Import PO 111523.
+
+        """
+        ref = self.env.ref
+        suite = 111523
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_po.importer_id.mode = 'history'
+
+        DB2MapperPurchaseOrder.process(
+            self.importer_table_po, self.table_name, db2_id)
+        self.po = self.env['purchase.order'].search(
+            [('name', '=', str(suite))])
+        self.assertEqual(len(self.po), 1)
+
+        expected_values = {
+            'name': str(suite), 'state': u'done',
+
+            'partner_id': ref('__import__.supplier_69000'),
+        }
+        self.check_po_values(expected_values)
+        self.assertEqual(len(self.po.order_line), 3)
+        self.assertEqual(len(self.po.picking_ids), 0)

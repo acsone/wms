@@ -2,6 +2,8 @@
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from datetime import datetime, timedelta
+
 from . import mappings
 from .common import (
     convert_date,
@@ -117,6 +119,13 @@ class DB2MapperPurchaseOrder(object):
                )}
         values = cls.prepare_purchase_values(rec, row)
 
+        # a sale order becomes unactive after 120 days
+        # (AS400 doesn't has a proper done state)
+        date_120d_old = (datetime.today().date() - timedelta(days=120))
+        date_120d_old = datetime.strftime(date_120d_old, "%Y-%m-%d")
+        create_date = convert_date('ecfc', row)
+        expired = create_date < date_120d_old
+
         # transform float and string to int to remove . and spaces
         # while creating xmlid
         xmlid = '__import__.purchase_order_%s_%s_%s' % (
@@ -206,6 +215,7 @@ class DB2MapperPurchaseOrder(object):
             received_lines.append(line['dcfquc'] <= line['dcfqul'])
             not_received_lines.append(line['dcfqul'] == 0)
         is_received = all(received_lines)
+        is_done = is_received or expired
         # don't do partial delivery when:
         # - everything is received (put the pick to done)
         # - reception has not been started (keep picking in draft)
@@ -214,11 +224,11 @@ class DB2MapperPurchaseOrder(object):
             not all(not_received_lines)
         )
 
-        state = 'done' if is_received else 'purchase'
+        state = 'done' if is_done else 'purchase'
         new.write({
             'state': state,
         })
-        if is_received:
+        if is_done:
             # force invoiced and received qty in database to avoid to have
             # to create pickings, this needs to be done after state write
             # or it would be recomputed
@@ -234,6 +244,7 @@ class DB2MapperPurchaseOrder(object):
                 " WHERE id = %s"
             )
             for line in lines:
+                # dcfqul is delivered quantity
                 cr.execute(query, (line['dcfqul'], line['odoo_id']))
 
         elif rec.importer_id.mode == 'final_update':
