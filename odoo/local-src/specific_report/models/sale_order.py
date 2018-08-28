@@ -76,7 +76,7 @@ class SaleOrder(models.Model):
             # Do not generate the report during test or during import
             return res
         for order in self:
-            self.with_delay().print_and_attach_report(
+            order.with_delay().print_and_attach_report(
                 'sale.report_saleorder',
                 order.partner_id.fax if order.sale_channel == 'fax' else None
             )
