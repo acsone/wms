@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-450: Skip ESB update on inital product csv import
 * ALCYN-416: Fix history of imported sale orders setting the right invoice address
 * ALCYN-132: Fix mapping for pricelist on partners
+* ALCYN-451: On sale order import, skip jobs to create draft invoices
 
 **Features and Improvements**
 

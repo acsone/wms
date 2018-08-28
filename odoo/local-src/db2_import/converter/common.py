@@ -115,13 +115,17 @@ def do_partial_picking(pick, lines):
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
-        pick = pick.with_context(__skip_check_tracking=True)
+        pick = pick.with_context(
+            __skip_check_tracking=True,
+            __no_job_create_draft_invoice=True,
+        )
         if pick.picking_type_code == 'incoming':
             # disable check on receive note for receptions
             # and skip backorder creation
             pick = pick.with_context(
                 __no_pick_receive_note_check=True,
-                __no_specific_stock_backorder=True)
+                __no_specific_stock_backorder=True,
+                __no_job_create_draft_invoice=True)
             # set destination to location dedicated for migration
             # in order to not mess with the parking inventory
             mig_location = pick.env.ref('__setup__.mig_purchase_reception')
@@ -170,7 +174,8 @@ def do_final_picking(pick, lines):
     # as oposited to odoo process
     if any([op.qty_done for op in pick.pack_operation_ids]):
         pick = pick.with_context(
-            __skip_check_tracking=True)
+            __skip_check_tracking=True,
+            __no_job_create_draft_invoice=True)
         result = pick.do_new_transfer()
         if result and result['res_model'] == 'stock.backorder.confirmation':
             # Accept backorder creation
