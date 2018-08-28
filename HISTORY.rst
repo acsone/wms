@@ -34,6 +34,7 @@ Unreleased
 * ALCYN-243: Serial number must be encoded/visible only on delivery orders
 * ALCYN-125: Fix partner contact ref
 * ALCYN-1423: Fix error singleton printing multiple sale order
+* ALCYN-1428: Fix a bug with the procurement. The method to compute promotion defined all quantity to 1.
 
 **Build**
 

@@ -92,7 +92,8 @@ class ProcurementOrder(models.Model):
                 # Delay jobs to update values on open purchase orders
                 self.env['purchase.order'].delay_update_for_open_po()
                 new_cr.commit()
-            except Exception:
+            except Exception as e:
+                _logger.error(e)
                 new_cr.rollback()
             finally:
                 new_cr.close()
