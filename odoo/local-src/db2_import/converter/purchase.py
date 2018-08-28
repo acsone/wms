@@ -68,7 +68,6 @@ class DB2MapperPurchaseOrder(object):
     def prepare_purchase_values(cls, rec, row):
         create_date = convert_date('ecfc', row)
         supplier = rec.env.ref(convert_supplier(int(row['ecffou'])))
-        promo_purchase = supplier.supplier_promotion_purchase_allowed
 
         # FIXME Don't take user for now as we don't have related users
         # user_xmlid = convert_user(row['ecfuti'])
@@ -82,7 +81,6 @@ class DB2MapperPurchaseOrder(object):
             'create_date': create_date,
             'write_date': convert_date('ecfm', row) or create_date,
             'partner_id': supplier.id,
-            'supplier_promotion_allowed': promo_purchase,
         }
         return values
 

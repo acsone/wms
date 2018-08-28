@@ -337,6 +337,8 @@ migration:
           ### local-src
           - specific_report
           - specific_stock
+          - pricelist_discount
+          - specific_purchase
           ### OCA (external-src)
           # oca/sale-workflow
           - sale_stock_picking_blocking
@@ -346,6 +348,8 @@ migration:
         pre:
           - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_23_3_update.sql $DB_NAME'"
       operations:
+        pre:
+          - psql -f odoo/songs/upgrade/10_23_3_update.sql
         post:
           - anthem songs.upgrade.10_23_3_update::post
           - anthem songs.install.accounting::enable_expects_chart_of_accounts

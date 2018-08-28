@@ -96,11 +96,6 @@ class PurchaseOrder(models.Model):
             else:
                 order.last_date_done = False
 
-    @api.onchange('supplier_promotion_allowed')
-    def onchange_supplier_promotion_allowed(self):
-        for line in self.order_line:
-            line.compute_promotion_supplier()
-
     @api.model
     def delay_update_for_open_po(self):
         """ Delay jobs to update values on all open purchase orders """
@@ -264,11 +259,7 @@ class PurchaseOrderLine(models.Model):
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
                 uom_id=self.product_uom)
-            self.promotion_supplier = (
-                seller.discount_purchase
-                if seller and self.order_id.supplier_promotion_allowed
-                else 0.0
-            )
+            self.promotion_supplier = seller.discount_purchase or 0.0
         else:
             self.promotion_supplier = 0.0
         self._compute_price_unit()

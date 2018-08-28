@@ -14,12 +14,6 @@
                        attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"/>
             </field>
 
-            <group name="purchase" position="inside">
-                <field name="supplier_promotion_purchase_allowed"
-                       attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"/>
-            </group>
-
         </field>
     </record>
 </odoo>
-
