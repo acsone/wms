@@ -337,6 +337,8 @@ migration:
           ### local-src
           - specific_report
           - specific_stock
+          - pricelist_discount
+          - specific_purchase
           ### OCA (external-src)
           # oca/sale-workflow
           - sale_stock_picking_blocking

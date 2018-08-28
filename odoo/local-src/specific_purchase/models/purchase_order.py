@@ -259,11 +259,7 @@ class PurchaseOrderLine(models.Model):
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
                 uom_id=self.product_uom)
-            self.promotion_supplier = (
-                seller.discount_purchase
-                if seller
-                else 0.0
-            )
+            self.promotion_supplier = seller.discount_purchase or 0.0
         else:
             self.promotion_supplier = 0.0
         self._compute_price_unit()

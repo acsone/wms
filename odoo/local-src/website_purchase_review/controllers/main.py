@@ -128,12 +128,11 @@ class PurchaseReview(Home):
 
             # Set the promotion supplier
             if render_values.get('promotion_supplier_overwrite'):
-                promotion_supplier = \
-                    render_values['promotion_supplier_overwrite']
-            elif seller:
-                promotion_supplier = seller.discount_purchase or 0
+                promotion_supplier = render_values[
+                    'promotion_supplier_overwrite'
+                ]
             else:
-                promotion_supplier = 0
+                promotion_supplier = seller.discount_purchase or 0
 
             render_values.update({
                 'price_unit_base': price_unit_base,
