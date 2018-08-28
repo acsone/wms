@@ -42,6 +42,7 @@ migration:
           - anthem songs.install.user::main
           - anthem songs.install.data_all::main
           - anthem songs.install.product_category::main
+          - anthem songs.install.accounting::enable_expects_chart_of_accounts
       modes:
         full:
           operations:
@@ -126,6 +127,7 @@ migration:
           - account_cutoff_accrual_picking
           # OCA/account-financial-tools
           - account_credit_control
+          - account_chart_update
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
@@ -338,9 +340,12 @@ migration:
           ### OCA (external-src)
           # oca/sale-workflow
           - sale_stock_picking_blocking
+          ### account-financial-tools
+          - account_chart_update
       operations:
         post:
           - anthem songs.upgrade.10_23_3_update::post
+          - anthem songs.install.accounting::enable_expects_chart_of_accounts
       modes:
         full:
           operations:

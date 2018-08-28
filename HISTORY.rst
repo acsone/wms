@@ -15,6 +15,11 @@ Unreleased
 * ALCYN-1419: Manage sales prepayment (bad payers)
 * ALCYN-163: Add a reception wizard for the dropshipping of human drug packs
 * ALCYN-491: Add an Anthem song to be called manually for setting up the ESB cron jobs after the data migration.
+* ALCYN-173:
+
+  * Enable the flag "Expects a Chart of Accounts" on the company
+  * Install the module account_chart_update (OCA - account-financial-tools) to create new taxes later (if needed)
+  * Create a song to create new Antibiotic taxes
 
 **Bugfixes**
 
