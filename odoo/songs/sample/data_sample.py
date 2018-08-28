@@ -93,7 +93,11 @@ def import_products(ctx):
     create_or_update(ctx, 'product.product',
                      '__setup__.product_other', values)
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True})
+    load_ctx.update({
+        'tracking_disable': True,
+        'no_connector_export': True,
+        'force_archive_orderpoint': True,
+        'disable_constrains_orderpoint': True})
     Product = ctx.env['product.product'].with_context(load_ctx)
     content = resource_stream(req, 'data/sample/product.csv')
     load_csv_stream(ctx, Product, content, delimiter=',')
