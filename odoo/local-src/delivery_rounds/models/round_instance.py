@@ -233,7 +233,7 @@ class RoundInstance(models.Model):
                 ('itinerary_id', 'in', self.itinerary_ids.ids),
                 ('partner_id', '=', customer.id)])
             if pos:
-                rank = pos.sequence + pos.itinerary_id.sequence*1000
+                rank = (pos.sequence + pos.itinerary_id.sequence*1000) * 1000
             self.env['round.instance.customer'].sudo().create({
                 'delivery_round_id': self.id,
                 'partner_id': customer.id,
