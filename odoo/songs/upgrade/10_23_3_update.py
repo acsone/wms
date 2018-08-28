@@ -7,10 +7,18 @@ import anthem
 
 @anthem.log
 def remove_pickingtype_humain(ctx):
-    picking_type_id = ctx.env.ref('__setup__.stock_picking_type_humain')
-    picking_type_id.unlink()
-    location_id = ctx.env.ref('__setup__.stock_location_pharma')
-    location_id.unlink()
+    picking_type = ctx.env.ref(
+        '__setup__.stock_picking_type_humain',
+        raise_if_not_found=False
+    )
+    if picking_type:
+        picking_type.unlink()
+    location = ctx.env.ref(
+        '__setup__.stock_location_pharma',
+        raise_if_not_found=False
+    )
+    if location:
+        location.unlink()
 
 
 @anthem.log
