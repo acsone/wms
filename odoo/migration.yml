@@ -335,6 +335,14 @@ migration:
           ### local-src
           - specific_report
           - specific_stock
+          ### OCA (external-src)
+          # oca/sale-workflow
+          - sale_stock_picking_blocking
       operations:
         post:
           - anthem songs.upgrade.10_23_3_update::post
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::import_partner_block_delivery

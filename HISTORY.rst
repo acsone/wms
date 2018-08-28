@@ -6,8 +6,13 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1421: Migration of bad payers that must pay at order
+
 **Features and Improvements**
 
+* ALCYN-1419: Manage sales prepayment (bad payers)
 * ALCYN-163: Add a reception wizard for the dropshipping of human drug packs
 
 **Bugfixes**
