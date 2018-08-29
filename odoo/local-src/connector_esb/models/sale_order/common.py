@@ -52,7 +52,9 @@ class SaleOrder(models.Model):
             order_data,
             ['discount_pricelist_id',
              'supplier_promotion_allowed',
-             'partner_id'],
+             'partner_id',
+             'team_id',
+             ],
             )
         order = self.create(order_data)
         order.action_confirm_background()

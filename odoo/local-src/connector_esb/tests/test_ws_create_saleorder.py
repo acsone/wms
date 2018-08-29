@@ -84,6 +84,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         data = deepcopy(self.order_data)
         order = self.env['sale.order']._ws_create_new(data)
         tax_rate = self.p1.taxes_id.amount / 100.0
+        web_team = self.env.ref('sales_team.salesteam_website_sales')
         expected = {
             'esb_ref': 'INC-ID',
             'client_order_ref': 'refClt',
@@ -94,6 +95,8 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'amount_tax': self.p1.list_price * 3 * tax_rate,
             'supplier_promotion_allowed': True,
             'payment_term_id': self.payment_30_net,
+            'team_id': web_team,
+            'sale_channel': 'web',
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
