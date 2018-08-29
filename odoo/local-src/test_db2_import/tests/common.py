@@ -643,6 +643,14 @@ class DB2ImportTestCase(SavepointCase):
             })
             xmlid = '__setup__.stock_location_' + xmlid
             cls.add_xmlid(loc, xmlid)
+        # Create a location for migrated Purchases
+        loc = Location.create({
+            'name': '[MIGRATION] Réception achats',
+            'usage': 'supplier',
+            'active': True,
+        })
+        xmlid = '__setup__.mig_purchase_reception'
+        cls.add_xmlid(loc, xmlid)
         Location._parent_store_compute()
 
     @classmethod

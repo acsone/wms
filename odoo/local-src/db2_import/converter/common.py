@@ -125,7 +125,8 @@ def do_partial_picking(pick, lines):
             pick = pick.with_context(
                 __no_pick_receive_note_check=True,
                 __no_specific_stock_backorder=True,
-                __no_job_create_draft_invoice=True)
+                __no_job_create_draft_invoice=True,
+                __no_backorder_choice=True)
             # set destination to location dedicated for migration
             # in order to not mess with the parking inventory
             mig_location = pick.env.ref('__setup__.mig_purchase_reception')
@@ -145,6 +146,9 @@ def do_partial_picking(pick, lines):
                         pack.location_dest_id = mig_location
             operations_to_delete.unlink()
             pick.do_transfer()
+    # unreserve picking for which no qty has been delivered
+    if pick.state != 'done':
+        pick.do_unreserve()
 
 
 def do_final_picking(pick, lines):
@@ -185,3 +189,6 @@ def do_final_picking(pick, lines):
                 pack.product_qty = pack.qty_done
             operations_to_delete.unlink()
             pick.do_transfer()
+    # unreserve picking for which no qty has been delivered
+    if pick.state != 'done':
+        pick.do_unreserve()

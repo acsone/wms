@@ -15,7 +15,8 @@ class StockPicking(models.Model):
 
         if self.picking_type_code == 'incoming':
             # At reception
-            if self.location_id.usage == 'supplier' and self.check_backorder():
+            if (self.location_id.usage == 'supplier' and self.check_backorder()
+                    and not self.env.context.get('__no_backorder_choice')):
                 # From a PO (not a return) and backorder to make
                 return {
                     'type': 'ir.actions.act_window',

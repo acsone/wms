@@ -267,6 +267,13 @@ class DB2MapperPurchaseOrder(object):
                 pick_lines = cls.map_orderline2move(lines)
                 do_partial_picking(pick, pick_lines)
 
+                # find backorder
+                bo = rec.env['stock.picking'].search(
+                    [('backorder_id', '=', pick.id)])
+                if bo:
+                    # make sure backorder is not assigned
+                    bo.do_unreserve()
+
                 # create invoice for invoiced lines
                 create_supplier_invoice(new, lines)
         return new
