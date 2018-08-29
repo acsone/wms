@@ -30,7 +30,7 @@ class StatsController(http.Controller):
         datefields = ('startDate', 'endDate', )
         for key in datefields:
             try:
-                if values.get(key) == u'':
+                if not values.get(key):
                     continue
                 strptime(values[key])
             except ValueError:
@@ -64,7 +64,7 @@ class StatsController(http.Controller):
 
         start = values.get('startDate')
         end = values.get('endDate')
-        supplier = values.get('manufacturer')
+        supplier = values.get('manufacturer') or ''
 
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('res.partner') as work:
@@ -73,9 +73,9 @@ class StatsController(http.Controller):
                 customer_ref=values['customerErpId'],
                 start=strptime(start) if start else False,
                 end=strptime(end) if end else False,
-                product_type=values['productType'],
+                product_type=values.get('productType'),
                 suppliers=supplier.split(',') if supplier.strip() else False,
-                language=values['language']
+                language=values.get('language')
             )
             res = component.get_message(options)
             headers = [('Content-Type', 'text/xml')]
