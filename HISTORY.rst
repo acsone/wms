@@ -36,6 +36,7 @@ Unreleased
 * ALCYN-125: Fix partner contact ref
 * ALCYN-1423: Fix error singleton printing multiple sale order
 * ALCYN-1428: Fix a bug with the procurement. The method to compute promotion defined all quantity to 1.
+* ALCN-1428: Stock: Set destruction source location
 
 **Build**
 
