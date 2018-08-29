@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.23.3 (2018-08-29)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1421: Migration of bad payers that must pay at order
@@ -41,8 +53,6 @@ Unreleased
 **Build**
 
 * Disable git-lfs on travis tag builds
-
-**Documentation**
 
 
 10.23.2 (2018-08-22)
