@@ -22,9 +22,10 @@ class StockController(http.Controller):
         The stock levels are returned for the SKUs passed in the
         form field ``product[]``::
 
-            $ curl -X POST \
-                    http://localhost:8069/connector_esb/stock/product \
-                    -F "product[0]=1750132" -F "product[1]=0016188"
+            $ curl -H "Content-Type: application/x-www-form-urlencoded" \
+              -X POST http://localhost/connector_esb/stock/product \
+              -d "product[0]=1750132&product[1]=0125732"
+              --cookie session_id=xxx
 
         """
         ensure_db()
@@ -32,6 +33,7 @@ class StockController(http.Controller):
         env = request.env
         _logger.debug('Calling stock/product with data : %s',
                       request.httprequest.form)
+
         params = request.httprequest.form.iterlists()
         # Keep only parameters whose key start by product
         skus = [param[1] for param in params if param[0].startswith('product')]
