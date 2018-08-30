@@ -152,7 +152,7 @@ def do_partial_picking(pick, lines):
 
 
 def do_final_picking(pick, lines):
-    """ Transfert the last picking
+    """ Transfert the last picking (Shipping)
 
     operations are mostly ok
 
