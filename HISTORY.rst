@@ -22,6 +22,8 @@ Unreleased
 * ALCYN-1437: sales orders created from ESB correctly compute the discount field on lines
 * ALCYN-1439: Do not export sales to Magento if they are not yet confirmed
   (handle not only 'draft' state, but also 'sent' and 'background confirm')
+* ALCYN-1441: allow dulication of already exported sales orders
+* ALCYN-1441: never copy references to the ESB when records are duplicated
 
 **Build**
 

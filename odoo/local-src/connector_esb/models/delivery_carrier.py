@@ -9,5 +9,6 @@ class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
     esb_ref = fields.Char(
-        string='Reference for ESB'
+        string='Reference for ESB',
+        copy=False,
     )

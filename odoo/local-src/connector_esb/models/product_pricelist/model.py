@@ -8,4 +8,4 @@ from odoo import fields, models
 class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)
