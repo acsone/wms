@@ -114,6 +114,16 @@ class SaleWebServiceExporter(Component):
     _apply_on = 'sale.order'
     _base_backend_adapter_usage = 'backend.adapter.saleorder'
 
+    def _has_to_skip(self):
+        """ Return True if the export can be skipped """
+        if super(SaleWebServiceExporter, self)._has_to_skip():
+            return True
+        # we don't care about sales without lines, they are
+        # not accepted by the ESB anyway
+        if not self.record.order_line:
+            return True
+        return False
+
     def _get_external_id(self):
         """Return the id for the export
 

@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1438: skip ESB export of sales orders without lines, they are refused by the ESB
+
 **Build**
 
 **Documentation**
