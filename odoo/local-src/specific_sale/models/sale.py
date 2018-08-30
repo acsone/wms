@@ -27,8 +27,8 @@ class Sale(models.Model):
         if not self.sale_channel:
             self.sale_channel = 'phone'
 
-        team_sales = self.env.ref('sales_team.team_sales_department')
-        if self.team_id == team_sales:
+        team_web = self.env.ref('sales_team.salesteam_website_sales')
+        if self.team_id == team_web:
             self.sale_channel = 'web'
 
     @api.multi

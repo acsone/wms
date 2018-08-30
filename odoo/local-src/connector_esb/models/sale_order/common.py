@@ -52,7 +52,9 @@ class SaleOrder(models.Model):
             order_data,
             ['discount_pricelist_id',
              'supplier_promotion_allowed',
-             'partner_id'],
+             'partner_id',
+             'team_id',
+             ],
             )
         order = self.create(order_data)
         order.action_confirm_background()
@@ -106,8 +108,20 @@ class SaleOrder(models.Model):
                 # free line, skip it
                 continue
             product = self.env['product.product'].search([
-                ('default_code', '=', line['sku'])]).exists()
-            if len(product):
+                ('default_code', '=', line['sku'])])
+
+            if len(product) > 1:
+                message = ('Webservice new saleorder, several'
+                           ' products with the same sku %s found')
+                _logger.error(message, line['sku'])
+                raise exceptions.UserError(_(message) % line['sku'])
+
+            elif not len(product):
+                message = 'Webservice new saleorder, product %s not found'
+                _logger.error(message, line['sku'])
+                raise exceptions.UserError(_(message) % line['sku'])
+
+            else:
                 sol = {}
                 sol['product_id'] = product.id
                 sol['name'] = product.name
@@ -117,9 +131,5 @@ class SaleOrder(models.Model):
                 sol['sequence'] = line.pop('line_id')
                 sol['discounting_type'] = 'multiplicative'
                 lines.append((0, 0, sol))
-            else:
-                message = 'Webservice new saleorder, product %s not found'
-                _logger.error(message,
-                              line['sku'])
-                raise exceptions.UserError(_(message) % line['sku'])
+
         return lines
