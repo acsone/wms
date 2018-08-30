@@ -52,6 +52,7 @@ Unreleased
 * ALCYN-1423: Fix error singleton printing multiple sale order
 * ALCYN-1428: Fix a bug with the procurement. The method to compute promotion defined all quantity to 1.
 * ALCN-1428: Stock: Set destruction source location
+* ALCYN-1446: on /connector_esb/statistics/form, make only the customerErpId field mandatory, others are optional
 
 **Build**
 
