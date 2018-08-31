@@ -30,7 +30,10 @@ class SaleOrderLineExportMapper(Component):
         The esb_ref is set to the magento line ID after creation of
         the sales order on Magento.
         """
-        line_number = record.esb_ref if record.esb_ref else record.id
+        if self.options.for_create:
+            line_number = record.id
+        else:
+            line_number = record.esb_ref
         return {'line_number': line_number}
 
     @mapping
