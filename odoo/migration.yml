@@ -358,3 +358,12 @@ migration:
             post:
               - anthem songs.install.data_full::import_partner_block_delivery
               - anthem songs.upgrade.10_23_3_update::post_full
+    - version: 10.24.0
+      addons:
+        upgrade:
+          ### local-src
+          - pricelist_discount
+          - specific_sale
+      operations:
+        pre:
+          - anthem songs.upgrade.10_24_0_update::pre

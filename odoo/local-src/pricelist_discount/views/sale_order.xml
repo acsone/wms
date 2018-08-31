@@ -16,6 +16,10 @@
                 <attribute name="invisible">True</attribute>
             </xpath>
 
+            <xpath expr="//tree/field[@name='discounting_type']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
             <label for="discount" position="attributes">
                 <attribute name="invisible">True</attribute>
             </label>
