@@ -370,3 +370,10 @@ migration:
           - anthem songs.upgrade.10_24_0_update::pre
         post:
           - anthem songs.upgrade.10_24_0_update::post
+      modes:
+        full:
+          operations:
+            pre:
+              - anthem songs.upgrade.10_24_0_update::pre_full
+            post:
+              - anthem songs.install.data_full::import_customer_banks_and_mandats
