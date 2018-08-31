@@ -203,3 +203,46 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                    return_value=None) as export_record:
             self.env['sale.order'].create(data)
             export_record.assert_not_called()
+
+    def test_create_saleorder_with_discount(self):
+        discount_percent = 10.
+        supplier = self.env['res.partner'].create({
+            'name': 'Supplier',
+            'ref': '9001',
+        })
+        self.p1.seller_ids = self.env['product.supplierinfo'].create({
+            'name': supplier.id,
+            'discount_sale': discount_percent,
+        })
+
+        starting_date = fields.Datetime().now()
+        data = deepcopy(self.order_data)
+        order = self.env['sale.order']._ws_create_new(data)
+        tax_rate = self.p1.taxes_id.amount / 100.0
+        unit_price = (self.p1.list_price -
+                      self.p1.list_price * discount_percent / 100)
+        expected = {
+            'esb_ref': 'INC-ID',
+            'client_order_ref': 'refClt',
+            'partner_id': self.partner,
+            'partner_invoice_id': self.partner,
+            'partner_shipping_id': self.partner_shipping,
+            'amount_total': unit_price * 3 * (1 + tax_rate),
+            'amount_tax': unit_price * 3 * tax_rate,
+            'supplier_promotion_allowed': True,
+            'payment_term_id': self.payment_30_net,
+        }
+        for k, v in expected.iteritems():
+            if isinstance(v, float):
+                self.assertAlmostEqual(order[k], v)
+            else:
+                self.assertEqual(order[k], v)
+        # free line: to be skipped
+        self.assertEqual(len(order.order_line), 1)
+        # Confirmtation/order date are the time of creation in Odoo by the ws
+        self.assertTrue(starting_date <= order.confirmation_date <=
+                        fields.Datetime.now())
+        self.assertTrue(starting_date <= order.date_order <=
+                        fields.Datetime.now())
+        # check discounts
+        self.assertEqual(order.order_line.discount2, discount_percent)
