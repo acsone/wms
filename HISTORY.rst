@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-386: Remove useless information and change french label in SO tree view
+
 **Bugfixes**
 
 * ALCYN-1438: skip ESB export of sales orders without lines, they are refused by the ESB
@@ -26,7 +28,6 @@ Unreleased
 
 **Data Migration**
 
-* ALCYN-386: Remove useless information and change french label in SO tree view
 * ALCYN-1421: Migration of bad payers that must pay at order
 * ALCYN-1422: Fix sale import without found fiscal position
 * ALCYN-450: Skip ESB update on inital product csv import
