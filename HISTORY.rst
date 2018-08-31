@@ -13,6 +13,8 @@ Unreleased
 * ALCYN-1438: skip ESB export of sales orders without lines, they are refused by the ESB
 * ALCYN-1436: orders created from ESB must have 'web' sale channel
 * ALCYN-1437: sales orders created from ESB correctly compute the discount field on lines
+* ALCYN-1439: Do not export sales to Magento if they are not yet confirmed
+  (handle not only 'draft' state, but also 'sent' and 'background confirm')
 
 **Build**
 
