@@ -8,4 +8,4 @@ from odoo import models, fields
 class ProductUoM(models.Model):
     _inherit = 'product.uom'
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)

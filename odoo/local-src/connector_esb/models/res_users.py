@@ -8,4 +8,4 @@ from odoo import fields, models
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)

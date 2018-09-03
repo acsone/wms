@@ -8,4 +8,4 @@ from odoo import fields, models
 class ProductState(models.Model):
     _inherit = 'product.state'
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)

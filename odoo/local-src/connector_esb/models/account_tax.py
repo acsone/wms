@@ -8,5 +8,5 @@ from odoo import models, fields
 class AccountTax(models.Model):
     _inherit = 'account.tax'
 
-    esb_ref = fields.Char(string='Reference for ESB')
-    contrib_sku = fields.Char(string='Contribution SKU')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)
+    contrib_sku = fields.Char(string='Contribution SKU', copy=False)

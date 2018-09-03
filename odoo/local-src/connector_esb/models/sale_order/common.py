@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = ['sale.order', 'esb.exportable']
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)
 
     _sql_constraints = [
         ('esb_ref_unique', 'unique(esb_ref)',

@@ -8,7 +8,7 @@ from odoo import api, fields, models
 class ProductCategory(models.Model):
     _inherit = 'product.category'
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string='Reference for ESB', copy=False)
     alcyon_product_type = fields.Char(
         string='Alcyon Product Type',
         compute='_compute_alcyon_product_type',
