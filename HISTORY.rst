@@ -56,6 +56,7 @@ Unreleased
   * Create a song to create new Antibiotic taxes
 * ALCYN-464: Remove the supplier_promotion_allowed flag to the purchase order
 * ALCYN-1431: Customer Rank on Delivery Round instance x1000
+* Upgrade curl docstring to latest data from smile
 
 **Bugfixes**
 
