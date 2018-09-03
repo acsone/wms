@@ -300,6 +300,19 @@ class DB2MapperSaleOrder(object):
                 # Do internal pickings to output location
                 for pick in picks1:
                     do_partial_picking(pick, pick_lines)
+                    # find backorder
+                    bo = rec.env['stock.picking'].search(
+                        [('backorder_id', '=', pick.id)])
+                    if bo:
+                        # make sure backorder is not assigned
+                        bo.do_unreserve()
                 # Do the deliver to customer
                 do_final_picking(pick2, pick_lines)
+                # find backorder
+                bo = rec.env['stock.picking'].search(
+                    [('backorder_id', '=', pick2.id)])
+                if bo:
+                    # make sure backorder is not assigned
+                    bo.do_unreserve()
+
         return new

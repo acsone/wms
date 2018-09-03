@@ -44,6 +44,8 @@ Unreleased
 * ALCYN-451: On sale order import, skip jobs to create draft invoices
 * ALCYN-417: on products set to 0 indicated_price filled with nine-ish values.
 * ALCYN-404: Close Purchase orders older than 120 days
+* ALCYN-159: Fix undone picking stuck without backorder creation for purchase order import due to stock.backorder.choice wizard
+* ALCYN-89+ALCYN-409: Unreserve all backorders created by import of sale orders and purchase orders
 
 **Features and Improvements**
 

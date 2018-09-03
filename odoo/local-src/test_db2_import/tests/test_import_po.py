@@ -117,3 +117,97 @@ class TestImportPO(DB2ImportTestCase):
         self.check_po_values(expected_values)
         self.assertEqual(len(self.po.order_line), 3)
         self.assertEqual(len(self.po.picking_ids), 0)
+
+    @freeze_time("2018-01-30")
+    def test_import_po_106543(self):
+        """Import PO 106543.
+
+        Test picking created from PO is in a done state.
+        And backorder is confirmed state
+        """
+        ref = self.env.ref
+        suite = 106543
+        db2_id = self.get_row_from_suite(suite)
+
+        DB2MapperPurchaseOrder.process(
+            self.importer_table_po, self.table_name, db2_id)
+        self.po = self.env['purchase.order'].search(
+            [('name', '=', str(suite))])
+        self.assertEqual(len(self.po), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_5052036'),
+            },
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_5091157'),
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_5091155'),
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_5029016'),
+            },
+            {
+                'sequence': 50,
+                'product_id': ref('__import__.product_7920006'),
+            },
+            {
+                'sequence': 60,
+                'product_id': ref('__import__.product_5351536'),
+            },
+            {
+                'sequence': 70,
+                'product_id': ref('__import__.product_5350327'),
+            },
+            {
+                'sequence': 80,
+                'product_id': ref('__import__.product_7920037'),
+            },
+            {
+                'sequence': 90,
+                'product_id': ref('__import__.product_5920461'),
+            },
+            {
+                'sequence': 100,
+                'product_id': ref('__import__.product_5920462'),
+            },
+            {
+                'sequence': 110,
+                'product_id': ref('__import__.product_5920467'),
+            },
+            {
+                'sequence': 120,
+                'product_id': ref('__import__.product_5920468'),
+            },
+        ]
+        self.check_pol_values(expected_values)
+
+        expected_values = {
+            'name': str(suite), 'state': u'purchase',
+
+            'partner_id': ref('__import__.supplier_79200'),
+            'date_order': '2018-01-19 00:00:00',
+            'date_planned': '2018-01-26 00:00:00',
+            'amount_untaxed': 499.73,
+            'amount_tax': 101.56,
+            'amount_total': 601.29,
+            'currency_id': ref('base.EUR'),
+
+            # Régime National
+            'fiscal_position_id': False,
+            'invoice_status': u'invoiced',
+
+            'responsible_id': False,
+
+            'origin': False,
+        }
+        self.check_po_values(expected_values)
+        self.assertEqual(len(self.po.order_line), 12)
+        self.assertEqual(len(self.po.picking_ids), 2)
+        self.assertEqual(self.po.picking_ids[0].state, 'done')
+        self.assertEqual(self.po.picking_ids[1].state, 'confirmed')

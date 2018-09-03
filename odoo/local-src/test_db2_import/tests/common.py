@@ -643,6 +643,14 @@ class DB2ImportTestCase(SavepointCase):
             })
             xmlid = '__setup__.stock_location_' + xmlid
             cls.add_xmlid(loc, xmlid)
+        # Create a location for migrated Purchases
+        loc = Location.create({
+            'name': '[MIGRATION] Réception achats',
+            'usage': 'supplier',
+            'active': True,
+        })
+        xmlid = '__setup__.mig_purchase_reception'
+        cls.add_xmlid(loc, xmlid)
         Location._parent_store_compute()
 
     @classmethod
@@ -738,6 +746,12 @@ class DB2ImportTestCase(SavepointCase):
     @classmethod
     def create_procurement_rules(cls):
         """ Creating procurement rules """
+        # First, make existing procurement rule armless
+        # by giving it a ridiculously high route_sequence
+        rule = cls.env['procurement.rule'].search(
+            [('name', '=', 'WH: Stock -> OutputMTO')])
+        rule.route_sequence = 99999999
+
         ref = cls.env.ref
         location_out = ref('stock.stock_location_output')
         warehouse = cls.env.ref('stock.warehouse0')

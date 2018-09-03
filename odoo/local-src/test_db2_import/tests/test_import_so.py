@@ -624,14 +624,14 @@ class TestImportSO(DB2ImportTestCase):
         # Frigo -> Output state: done
         # Mat -> Output state: done
         # Med -> Output state: done
-        # Med -> Output state: assigned (Backorder)
+        # Med -> Output state: confirmed (Backorder)
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so.picking_ids), 7)
         states = [p.state for p in self.so.picking_ids]
         self.assertEqual(
             sorted(states),
-            ['assigned'] * 2 + ['done'] * 5)
+            [u'confirmed'] + [u'done'] * 5 + [u'waiting'])
 
     @freeze_time("2018-02-01")
     def test_import_so_2835952(self):
@@ -700,14 +700,14 @@ class TestImportSO(DB2ImportTestCase):
 
         # 4 pickings
         # Med -> Output state: done
-        # Mat -> Output state: assigned
+        # Mat -> Output state: confirmed
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so.picking_ids), 4)
         states = [p.state for p in self.so.picking_ids]
         self.assertEqual(
             sorted(states),
-            ['assigned'] * 2 + ['done'] * 2)
+            [u'confirmed'] + [u'done'] * 2 + [u'waiting'])
 
     @freeze_time("2018-02-01")
     def test_import_so_2835987(self):
@@ -774,15 +774,15 @@ class TestImportSO(DB2ImportTestCase):
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 2)
         # 4 pickings
-        # Mat -> Output state: assigned
+        # Mat -> Output state: confirmed
         # Med -> Output state: done
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so.picking_ids), 4)
         states = [p.state for p in self.so.picking_ids]
         self.assertEqual(
             sorted(states),
-            ['assigned'] * 2 + ['done'] * 2)
+            [u'confirmed'] + [u'done'] * 2 + [u'waiting'])
 
     @freeze_time("2018-02-01")
     def test_import_so_2842972(self):
@@ -908,14 +908,14 @@ class TestImportSO(DB2ImportTestCase):
         # 5 pickings
         # Aliment -> Output state: done
         # Med -> Output state: done
-        # Med -> Output state: assigned (Backorder)
+        # Med -> Output state: confirmed (Backorder)
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so.picking_ids), 5)
         states = [p.state for p in self.so.picking_ids]
         self.assertEqual(
             sorted(states),
-            ['assigned'] * 2 + ['done'] * 3)
+            [u'confirmed'] + [u'done'] * 3 + [u'waiting'])
 
     @freeze_time("2018-02-01")
     def test_import_so_2844358(self):
@@ -1004,12 +1004,12 @@ class TestImportSO(DB2ImportTestCase):
         # Aliment -> Output state: confirmed (Backorder)
         # Med -> Output state: done
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: confirmed (Backorder)
         self.assertEqual(len(self.so.picking_ids), 5)
         states = [p.state for p in self.so.picking_ids]
         self.assertEqual(
             sorted(states),
-            ['assigned', 'confirmed'] + ['done'] * 3)
+            [u'confirmed'] + [u'done'] * 3 + [u'waiting'])
         ptype_ali = ref('__setup__.stock_picking_type_ali')
         ptype_customer = ref('stock.picking_type_out')
 
@@ -1021,7 +1021,7 @@ class TestImportSO(DB2ImportTestCase):
                 {'2248800': {'ordered_qty': 5, 'delivered_qty': 3}},
             ('confirmed', ptype_ali):
                 {'2248800': {'ordered_qty': 2, 'delivered_qty': 2}},
-            ('assigned', ptype_customer):
+            ('waiting', ptype_customer):
                 {'2248800': {'ordered_qty': 2, 'delivered_qty': 2}},
         }
         for pick in self.so.picking_ids:
@@ -1085,14 +1085,14 @@ class TestImportSO(DB2ImportTestCase):
         # Aliment -> Output state: confirmed (Backorder)
         # Med -> Output state: done
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so1.picking_ids), 5)
 
         # 5 pickings
         # Aliment -> Output state: done
         # Aliment -> Output state: confirmed (Backorder)
         # Output -> Customer state: done
-        # Output -> Customer state: assigned (Backorder)
+        # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so2.picking_ids), 4)
 
         # check that no picking is linked to both sale order
