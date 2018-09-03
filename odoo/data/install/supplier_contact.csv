@@ -113,6 +113,7 @@ __import__.supplier_contact_63900_1,contact,MME DUTOIT,,054/410622,054/410622,Fa
 __import__.supplier_contact_63900_2,contact,MME DEPECENNIER,,,,False,False,fr_BE,,,__import__.supplier_63900
 __import__.supplier_contact_63908_1,contact,SANDRA SAVOIE,,,,False,False,fr_BE,,,__import__.supplier_63908
 __import__.supplier_contact_63935_1,contact,CONTACT,,,,False,False,nl_BE,info@dialexbiomedica.be,,__import__.supplier_63935
+__import__.supplier_contact_63935_2,contact,COMMANDES,,,,False,False,nl_BE,order@dialexbiomedica.be,,__import__.supplier_63935
 __import__.supplier_contact_63960_1,contact,VERA DAEMS,,,,False,False,fr_BE,,,__import__.supplier_63960
 __import__.supplier_contact_63960_2,contact,MR TERSAGO,,,,False,False,fr_BE,,,__import__.supplier_63960
 __import__.supplier_contact_63965_1,contact,MONSIEUR FRANCOIS HEMBERG,,,,False,False,fr_BE,,0474/494035,__import__.supplier_63965
@@ -205,6 +206,7 @@ __import__.supplier_contact_68630_1,contact,MONSIEUR C. HUBERT,,352-502295,352-5
 __import__.supplier_contact_69000_1,contact,MAD. NADINE DELHEZ,NADINE.DELHEZ@HOSPITERA.COM,,,False,False,fr_BE,,0478251729,__import__.supplier_69000
 __import__.supplier_contact_69000_2,contact,COMMANDES,,,,False,False,fr_BE,customerservice@hospithera.com,,__import__.supplier_69000
 __import__.supplier_contact_69106_1,contact,COMMANDES,,,,False,False,fr_BE,info@huckerts.net,,__import__.supplier_69106
+__import__.supplier_contact_69115_1,contact,MR. KOEN VAN DEN HEUVEL,,,,False,False,nl_BE,koen@vissersbvba.be,,__import__.supplier_69115
 __import__.supplier_contact_69124_1,contact,ALEX XU,SALES DIRECTOR,,,False,False,fr_BE,,,__import__.supplier_69124
 __import__.supplier_contact_69300_1,contact,JEANINA CHARPENTIER,,,,False,False,fr_BE,,,__import__.supplier_69300
 __import__.supplier_contact_69600_1,contact,J-M SAILLIER,,,,False,False,fr_BE,,,__import__.supplier_69600
@@ -218,8 +220,9 @@ __import__.supplier_contact_70295_3,contact,KLANTENDIENST,,,,False,False,nl_BE,,
 __import__.supplier_contact_70312_1,contact,MR. STIJN DEGRYSE,,,,False,False,nl_BE,,,__import__.supplier_70312
 __import__.supplier_contact_70312_2,contact,COMMANDES,,,,False,False,fr_BE,,,__import__.supplier_70312
 __import__.supplier_contact_70312_3,contact,RENSEIGNEMENTS HOLLANDE,,0810 433 999,,False,False,fr_BE,,,__import__.supplier_70312
-__import__.supplier_contact_71020_1,contact,MR CRAIG EVANS,,+447787555201,,False,False,fr_BE,,,__import__.supplier_71020
-__import__.supplier_contact_71020_2,contact,COMMANDES,,,,False,False,fr_BE,,,__import__.supplier_71020
+__import__.supplier_contact_71020_1,contact,MR STEPHAN JORGENSEN,,,,False,False,fr_BE,Stephan.Jorgensen@im3dental.com,,__import__.supplier_71020
+__import__.supplier_contact_71020_2,contact,COMMANDES,,,,False,False,fr_BE,sales@im3dental.com,,__import__.supplier_71020
+__import__.supplier_contact_71020_3,contact,SUPPORT,,,,False,False,fr_BE,support@im3dental.com,,__import__.supplier_71020
 __import__.supplier_contact_71045_1,contact,VINCENT CASTRO,,,,False,False,fr_BE,,0475 938 235,__import__.supplier_71045
 __import__.supplier_contact_71050_1,contact,HEDHILI,,02/4683179,,False,False,fr_BE,0477/363345,,__import__.supplier_71050
 __import__.supplier_contact_71066_1,contact,MAD. SANDRINE LUCAS,,,,False,False,fr_BE,Sandrine.lucas@imv-technologies.com,,__import__.supplier_71066
@@ -493,6 +496,7 @@ __import__.supplier_contact_82640_1,contact,HELEN BOWLER,OFFICE MANAGER,00441142
 __import__.supplier_contact_82640_2,contact,ORDERS,,,,False,False,fr_BE,tina@veterinary-instrumentation.co.uk,,__import__.supplier_82640
 __import__.supplier_contact_82650_1,contact,DR FALMAGNE CAROLINE,TRESORIERE,,,False,False,fr_BE,,0475781739,__import__.supplier_82650
 __import__.supplier_contact_82650_2,contact,DR FRANCOIS ANNE,PRESIDENTE,,,False,False,fr_BE,,0477369468,__import__.supplier_82650
+__import__.supplier_contact_82655_1,contact,MAD. JOHANNA BERCHTOLD,,,,False,False,fr_BE,vetmedcare@vetmedcare.at,,__import__.supplier_82655
 __import__.supplier_contact_82670_1,contact,ROBERT CORMAN,,,,False,False,fr_BE,,,__import__.supplier_82670
 __import__.supplier_contact_82701_1,contact,MR BORMANN,REPRESENTANT,084/221694,084/221694,False,False,fr_BE,,,__import__.supplier_82701
 __import__.supplier_contact_82701_2,contact,MARTINE NEVENS,MARK ET SALES MANAGER BELG.,,,False,False,fr_BE,,0475768701,__import__.supplier_82701
