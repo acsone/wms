@@ -155,9 +155,12 @@ class SaleWebServiceExporter(Component):
         lines = result['lines']
         if not isinstance(lines, list):
             lines = [lines]
+
         for sol in self.record['order_line']:
+            # find the id that matches the line we created
+            # on Magento so we can set the corresponding esb_ref
             line = next((line for line in lines
-                        if line['line_number'] == sol.sequence), '')
+                         if line['line_number'] == sol.id), '')
             if line:
                 sol.with_context(no_connector_export=True).write(
                     {'esb_ref': line['created_id']
