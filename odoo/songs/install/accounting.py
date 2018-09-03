@@ -534,6 +534,28 @@ def create_tax_100_outside_eu(ctx):
 
 
 @anthem.log
+def create_tax_extracom(ctx):
+    """ Create/Update the tax Extracom """
+
+    tax_xml_id = 'l10n_be.1_attn_VAT-IN-V81-00-ROW-CC'
+    main_tax_values = {
+        'name': "TVA à l'entrée 0% Hors EU EXTRACOM - "
+                "Approvisionn. et marchandises",
+        'amount': 0,
+        'type_tax_use': 'purchase',
+        'amount_type': 'percent',
+        'account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'refund_account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'description': 'VAT-IN-V81-00-ROW-CC',
+        'tag_ids': [(6, 0, [])],
+        'active': True
+    }
+    create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -560,3 +582,4 @@ def main(ctx):
     setup_intrastat(ctx)
     archived_outside_eu_taxes(ctx)
     create_tax_100_outside_eu(ctx)
+    create_tax_extracom(ctx)
