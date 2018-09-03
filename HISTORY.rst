@@ -18,6 +18,7 @@ Unreleased
 
   * Fix a bug (set the right name) with the additional line (product with an additional product) in a purchase order
   * Remove lines with a quantity == 0 in the purchase order report.
+* ALCYN-143: Show a warning "Narcotic voucher is required" when such product is ordered
 
 **Bugfixes**
 

@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_sale
+# 	* specific_sale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-10 15:55+0000\n"
+"POT-Creation-Date: 2018-09-03 13:10+0000\n"
 "PO-Revision-Date: 2018-07-10 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,12 +22,18 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:303
+#, python-format
+msgid "A narcotic voucher is required for the data entry."
+msgstr "Bon de stupéfiant nécessaire avant l'encodage"
+
+#. module: specific_sale
 #: selection:sale.report,month:0
 msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:96
+#: code:addons/specific_sale/models/sale.py:87
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -87,6 +94,11 @@ msgid "Exception"
 msgstr "Exception"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_older_lot_life_date
+msgid "Expiration date"
+msgstr "Date de péremption"
+
+#. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Fax"
 msgstr "Fax"
@@ -140,17 +152,15 @@ msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euro
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_material_maximum
-msgid "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
-msgstr "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_older_lot_life_date
-msgid "Expiration date"
-msgstr "Date de péremption"
+msgid ""
+"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
+"les produits de type matériel"
+msgstr ""
+"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
+"les produits de type matériel"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
-#: model:ir.ui.view,arch_db:specific_sale.product_template_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
 
@@ -158,6 +168,13 @@ msgstr "Lignes non disponibles"
 #: model:ir.model,name:specific_sale.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr "Lot/N° série"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
+msgid "Lots"
+msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
@@ -208,6 +225,12 @@ msgstr "Mois"
 #: model:exception.rule,description:specific_sale.no_medoc_vet_stup
 msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:302
+#, python-format
+msgid "Narcotic voucher"
+msgstr "Bon de stupéfiant"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_line_under_0
@@ -280,13 +303,24 @@ msgid "October"
 msgstr "Octobre"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_older_lot_id
+#: model:ir.model.fields,field_description:specific_sale.field_product_product_older_lot_id
+msgid "Older lot"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_report_only_narcotic
 #: model:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
 msgid "Only narcotics"
 msgstr "Uniquement les médicaments"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:290
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
+msgid "Order Date"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:294
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr "Rupture de stock fournisseur"
@@ -348,30 +382,30 @@ msgid "Quantity unavailable"
 msgstr "BO"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
 msgid "Quantity unavailable at now"
 msgstr "Quantité actuellement non disponible"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
 msgid "Quantity unavailable at order line save"
 msgstr "Quantité non disponible à la sauvegarde de la ligne"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_search_specific_sale
+msgid "Remains to deliver"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
-msgid "Sale Order Lines Unavailable"
-msgstr "Lignes de commande non disponibles"
+msgid "Sale Order Lines"
+msgstr "Ligne du bon de commande"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
 msgid "Sale channel"
 msgstr "Canal de vente"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel_visible
-msgid "Sale channel visible"
-msgstr "Sale channel visible"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_sale_lines_count
@@ -391,11 +425,6 @@ msgstr "Bon de commande"
 #: model:ir.model,name:specific_sale.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
-msgid "Sales Order Lines Unavailable"
-msgstr "Lignes de commande non disponibles"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_report
@@ -424,8 +453,12 @@ msgstr "Taxes"
 
 #. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
-msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
-msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série deviennent dangereuses et ne doivent plus être consommées."
+msgid ""
+"This is the date on which the goods with this Serial Number may become "
+"dangerous and must not be consumed."
+msgstr ""
+"Ceci est la date à laquelle les marchandises avec ce numéro de série "
+"deviennent dangereuses et ne doivent plus être consommées."
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -446,3 +479,17 @@ msgstr "Prix unitaire"
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 msgid "Veterinary Product Not Allowed"
 msgstr "Produit vétérinaire interdit"
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Web"
+msgstr ""
+
+#~ msgid "Sale Order Lines Unavailable"
+#~ msgstr "Lignes de commande non disponibles"
+
+#~ msgid "Sale channel visible"
+#~ msgstr "Sale channel visible"
+
+#~ msgid "Sales Order Lines Unavailable"
+#~ msgstr "Lignes de commande non disponibles"

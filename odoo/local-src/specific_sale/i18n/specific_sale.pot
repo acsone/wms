@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-07 13:19+0000\n"
-"PO-Revision-Date: 2018-06-07 13:19+0000\n"
+"POT-Creation-Date: 2018-09-03 13:10+0000\n"
+"PO-Revision-Date: 2018-09-03 13:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,12 +21,18 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:303
+#, python-format
+msgid "A narcotic voucher is required for the data entry."
+msgstr ""
+
+#. module: specific_sale
 #: selection:sale.report,month:0
 msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:96
+#: code:addons/specific_sale/models/sale.py:87
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -84,6 +90,11 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_exception
 msgid "Exception"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_older_lot_life_date
+msgid "Expiration date"
 msgstr ""
 
 #. module: specific_sale
@@ -145,13 +156,19 @@ msgstr ""
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
-#: model:ir.ui.view,arch_db:specific_sale.product_template_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
 msgstr ""
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_stock_production_lot
 msgid "Lot/Serial"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
+#: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
+msgid "Lots"
 msgstr ""
 
 #. module: specific_sale
@@ -202,6 +219,12 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_medoc_vet_stup
 msgid "Narcotic Veterinary Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:302
+#, python-format
+msgid "Narcotic voucher"
 msgstr ""
 
 #. module: specific_sale
@@ -275,13 +298,24 @@ msgid "October"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_older_lot_id
+#: model:ir.model.fields,field_description:specific_sale.field_product_product_older_lot_id
+msgid "Older lot"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_report_only_narcotic
 #: model:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
 msgid "Only narcotics"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:285
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
+msgid "Order Date"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:294
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr ""
@@ -343,29 +377,29 @@ msgid "Quantity unavailable"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
 msgid "Quantity unavailable at now"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
 msgid "Quantity unavailable at order line save"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_search_specific_sale
+msgid "Remains to deliver"
 msgstr ""
 
 #. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
-msgid "Sale Order Lines Unavailable"
+msgid "Sale Order Lines"
 msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
 msgid "Sale channel"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel_visible
-msgid "Sale channel visible"
 msgstr ""
 
 #. module: specific_sale
@@ -385,11 +419,6 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_lines_unavailable_tree
-msgid "Sales Order Lines Unavailable"
 msgstr ""
 
 #. module: specific_sale
@@ -418,6 +447,11 @@ msgid "Taxes"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
+msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Total Price"
 msgstr ""
@@ -435,5 +469,10 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 msgid "Veterinary Product Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Web"
 msgstr ""
 

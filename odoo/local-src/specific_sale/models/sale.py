@@ -294,6 +294,18 @@ class SaleOrderLine(models.Model):
             name = name + '\r' + _('Out of stock at supplier level')
 
         self.name = name
+
+        stup_category = self.env.ref('specific_data.product_categ_stupefiant')
+        if (self.product_id
+                and self.product_id.categ_id.has_for_parent(stup_category.id)):
+            warning_mess = {
+                'title': _('Narcotic voucher'),
+                'message': _('A narcotic voucher is '
+                             'required for the data entry.')
+            }
+            result = {
+                'warning': warning_mess
+            }
         return result
 
     @api.multi
