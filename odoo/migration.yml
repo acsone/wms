@@ -125,6 +125,9 @@ migration:
           - account_analytic_required
           # oca/account-closing
           - account_cutoff_accrual_picking
+          - account_cutoff_accrual_return
+          - account_invoice_accrual_merge
+          - account_cutoff_base
           # OCA/account-financial-tools
           - account_credit_control
           - account_chart_update
@@ -166,7 +169,6 @@ migration:
           #oca/queue
           - queue_job_cron
           ### local-src
-          - account_cutoff_accrual_return
           - account_invoice_tax_required
           - account_move_productcateg
           - connector_esb
@@ -365,6 +367,11 @@ migration:
           - pricelist_discount
           - specific_account
           - specific_sale
+          # oca/account-closing
+          - account_cutoff_base
+          - account_cutoff_accrual_return
+          - account_cutoff_accrual_picking
+          - account_invoice_accrual_merge
       operations:
         pre:
           - anthem songs.upgrade.10_24_0_update::pre
