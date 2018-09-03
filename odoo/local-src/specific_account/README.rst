@@ -17,6 +17,7 @@ This module adds Alcyon specific fields and logic for accounting.
 * Set the field "check total" required on vendor bills
 * Define invoice terms and conditions on company
 * Add a short order date on sale order
+* Increase tax decimal precision to 5 digits
 
 Credits
 =======

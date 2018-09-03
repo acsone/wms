@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-386: Remove useless information and change french label in SO tree view
+* ALCYN-74: Create APB tax for 2018, and increase decimal prectision to 5 digits
 
 **Bugfixes**
 
