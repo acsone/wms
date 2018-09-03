@@ -20,6 +20,7 @@ Unreleased
   * Remove lines with a quantity == 0 in the purchase order report.
 * ALCYN-143: Show a warning "Narcotic voucher is required" when such product is ordered
 * ALCYN-1417: Fix ESB connector following addition of customer hierarchy
+* ALCYN-1433: Archive outside EU taxes (21, 12%, 6% and 0%)
 
 **Bugfixes**
 

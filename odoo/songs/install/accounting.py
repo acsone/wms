@@ -457,6 +457,28 @@ def setup_cutoff(ctx):
 
 
 @anthem.log
+def archived_outside_eu_taxes(ctx):
+    """ Archive outside europe taxes """
+    outside_taxes = (
+        'l10n_be.1_attn_VAT-IN-V81-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V81-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V81-06-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-06-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-00-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-06-ROW-CC',
+    )
+
+    for tax_xmlid in outside_taxes:
+        tax = ctx.env.ref(tax_xmlid, raise_if_not_found=False)
+        if tax:
+            tax.active = False
+
+
+@anthem.log
 def setup_intrastat(ctx):
     # Do not declare goods inside country
     ctx.env.ref('base.be').intrastat = False
@@ -487,3 +509,4 @@ def main(ctx):
     import_account_payment_term(ctx)
     setup_cutoff(ctx)
     setup_intrastat(ctx)
+    archived_outside_eu_taxes(ctx)

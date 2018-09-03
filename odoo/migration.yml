@@ -419,3 +419,6 @@ migration:
         upgrade:
           ### local-src
           - specific_report
+      operations:
+        post:
+          - anthem songs.install.accounting::archived_outside_eu_taxes
