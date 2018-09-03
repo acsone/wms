@@ -387,7 +387,8 @@ migration:
               - anthem songs.install.data_full::import_customer_banks_and_mandats
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
+              # parallel import of customer is broken, use diff files to update the partners
+              - anthem songs.upgrade.10_24_0_update::import_customers
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
               - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
               - anthem songs.install.data_full::post_import_partner

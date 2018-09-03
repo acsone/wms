@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+from pkg_resources import resource_stream
 
 import anthem
 from anthem.lyrics.modules import update_translations
 from anthem.lyrics.records import add_xmlid
+from anthem.lyrics.loaders import load_csv_stream
+
+from ..common import req
 
 
 @anthem.log
@@ -60,6 +64,63 @@ def add_apb_tax_2018(ctx):
 
         # tax created by template needs to be noupdate
         add_xmlid(ctx, apb_tax_2018, xmlid_2018, noupdate=True)
+
+
+@anthem.log
+def import_customers(ctx):
+    load_ctx = ctx.env.context.copy()
+    load_ctx.update({'tracking_disable': True})
+    Partner = ctx.env['res.partner'].with_context(load_ctx)
+
+    file_list = [
+        'customer.new.csv',
+        'customer.change-property_product_pricelist.csv',
+        'customer.change-comment.csv',
+        'customer.change-active-call_name-is_sale_back_order_accepted.csv',
+        'customer.change-active.csv',
+        'customer.change-email.csv',
+        'customer.change-comment-city-name-street-suite-email-call_name.csv',
+        'customer.change-help_with_fee.csv',
+        'customer.change-call_name.csv',
+        'customer.change-street.csv',
+        'customer.change-help_with_fee-discount_pricelist_id.csv',
+        'customer.change-vet_depot_number.csv',
+        'customer.change-street-email.csv',
+        'customer.change-is_sale_back_order_accepted.csv',
+        'customer.change-help_with_fee-invoice_sending_method-street-email-pharmacist_id.csv',  # noqa
+        'customer.change-phone-street-email.csv',
+        'customer.change-active-call_name.csv',
+        'customer.change-comment-pharmacist_id.csv',
+        'customer.change-discount_pricelist_id.csv',
+        'customer.change-call_name-customer_payment_mode_id-name.csv',
+        'customer.change-invoice_sending_method-street-email.csv',
+        'customer.change-call_name-discount_pricelist_id-name-property_product_pricelist-user_id.csv',  # noqa
+        'customer.change-comment-mobile.csv',
+        'customer.change-email-alcyon_category_id-property_product_pricelist.csv',  # noqa
+        'customer.change-suite-call_name-customer_payment_mode_id-name.csv',
+        'customer.change-user_id.csv',
+        'customer.change-suite-call_name-vet_depot_number-vet_subscription_number.csv',  # noqa
+        'customer.change-city-street-property_product_pricelist-zip.csv',
+        'customer.change-active-is_sale_back_order_accepted-call_name-customer_payment_mode_id-name.csv',  # noqa
+        'customer.change-invoice_sending_method.csv',
+        'customer.change-mobile.csv',
+        'customer.change-discount_pricelist_id-vet_depot_number-property_product_pricelist.csv',  # noqa
+        'customer.change-vet_depot_number-alcyon_category_id.csv',
+        'customer.change-city-street-vet_depot_number-zip.csv',
+        'customer.change-help_with_fee-supplier_promotion_sale_allowed-discount_pricelist_id.csv',  # noqa
+        'customer.change-pharmacist_id-email-property_product_pricelist.csv',
+        'customer.change-email-is_price_on_labels.csv',
+        'customer.change-invoice_sending_method-email.csv'
+    ]
+
+    content = resource_stream(req, 'data/sample/master_customer.csv')
+
+    for f in file_list:
+        base_path = 'data/update/10.24.0/'
+        f_path = base_path + f
+        with ctx.log(u"Importing customer file: %s" % f_path):
+            content = resource_stream(req, f_path)
+            load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
 @anthem.log
