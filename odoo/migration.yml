@@ -414,3 +414,8 @@ migration:
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
+    - version: 10.24.1
+      addons:
+        upgrade:
+          ### local-src
+          - specific_report

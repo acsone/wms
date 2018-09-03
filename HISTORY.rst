@@ -14,6 +14,11 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1449:
+
+  * Fix a bug (set the right name) with the additional line (product with an additional product) in a purchase order
+  * Remove lines with a quantity == 0 in the purchase order report.
+
 **Bugfixes**
 
 * ALCYN-1469: Fix zero/falsy value in product export and convert the volume in the required unit of measure (ESB)

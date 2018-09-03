@@ -65,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="o.order_line" t-as="line">
+                        <tr t-foreach="o.order_line.filtered(lambda line: line.product_qty > 0)" t-as="line">
                             <td>
                                 <span t-field="line.name"/>
                             </td>

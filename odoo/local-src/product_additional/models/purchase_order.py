@@ -15,8 +15,7 @@ class PurchaseOrder(models.Model):
                 ratio_main_product = line.product_id.ratio_main_product
                 ratio_additional_product = \
                     line.product_id.ratio_additional_product
-                additional_product_id = \
-                    line.product_id.additional_product_id.id
+                additional_product_id = line.product_id.additional_product_id
 
                 if not ratio_main_product \
                         or not ratio_additional_product \
@@ -28,10 +27,17 @@ class PurchaseOrder(models.Model):
                 if not additional_product:
                     continue
 
+                # Set the language of the supplier
+                additional_product_lang = additional_product_id.with_context(
+                    lang=order.partner_id.lang,
+                    partner_id=order.partner_id.id,
+                )
+
                 line.copy(default={
+                    'name': additional_product_lang.display_name,
                     'order_id': order.id,
                     'price_unit_base': 0,
-                    'product_id': additional_product_id,
+                    'product_id': additional_product_id.id,
                     'product_uom': line.product_uom.id,
                     'product_qty': additional_product,
                     'is_additional_product': True,
