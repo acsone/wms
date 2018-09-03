@@ -485,6 +485,55 @@ def setup_intrastat(ctx):
 
 
 @anthem.log
+def create_tax_100_outside_eu(ctx):
+    """ Create the tax 100% Outside EU """
+
+    tax_child_1_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC-C1'
+    tax_child_1_values = {
+        'name': 'VAT-IN-V81-100-ROW-CC-C1',
+        'type_tax_use': 'none',
+        'amount_type': 'percent',
+        'amount': 100,
+        'account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'refund_account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'description': 'VAT-IN-V81-21-ROW-CC-C1',
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])]
+    }
+    tax_child_1 = create_or_update(
+        ctx, 'account.tax', tax_child_1_xml_id, tax_child_1_values)
+
+    tax_child_2_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC-C2'
+    tax_child_2_values = {
+        'name': 'VAT-IN-V81-100-ROW-CC-C2',
+        'type_tax_use': 'none',
+        'amount_type': 'percent',
+        'amount': -100,
+        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'description': 'VAT-IN-V81-21-ROW-CC-C2',
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+    }
+    tax_child_2 = create_or_update(
+        ctx, 'account.tax', tax_child_2_xml_id, tax_child_2_values)
+
+    tax_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC'
+    main_tax_values = {
+        'name': 'TVA Déductible 100% Hors EU',
+        'amount': 100,
+        'type_tax_use': 'purchase',
+        'amount_type': 'group',
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])],
+        'children_tax_ids': [(6, 0, [tax_child_1.id, tax_child_2.id])]
+    }
+    create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -510,3 +559,4 @@ def main(ctx):
     setup_cutoff(ctx)
     setup_intrastat(ctx)
     archived_outside_eu_taxes(ctx)
+    create_tax_100_outside_eu(ctx)

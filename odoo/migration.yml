@@ -422,3 +422,4 @@ migration:
       operations:
         post:
           - anthem songs.install.accounting::archived_outside_eu_taxes
+          - anthem songs.install.accounting::create_tax_100_outside_eu
