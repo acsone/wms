@@ -86,7 +86,9 @@ __import__.bank_CCFRFRPP,CCFRFRPP,HSBC BAGNOLET
 __import__.bank_CCPLLULL,CCPLLULL,POST Group
 __import__.bank_CECRIT2C,CECRIT2C,CASSA DI RISPARMIO DI CESENA
 __import__.bank_CELLLULL,CELLLULL,ING LUXEMBOURG
+__import__.bank_CELLLULL,CELLLULL,ING LUXEMBOURG S.A.
 __import__.bank_CEPAFRPP450,CEPAFRPP450,Caisse d'Epargne Loire Centre
+__import__.bank_CEPAFRPP751,CEPAFRPP751,CE ILE DE FRANCE
 __import__.bank_CHASBEBX,CHASBEBX,JP Morgan Chase Bank
 __import__.bank_CITIBEBX,CITIBEBX,Citibank International PLC
 __import__.bank_CITIBEBX,CITIBEBX,CITIBANK
