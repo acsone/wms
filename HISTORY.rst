@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.24.0 (2018-09-03)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update full csv data from DB2 Production server
@@ -27,10 +39,6 @@ Unreleased
 * ALCYN-1441: never copy references to the ESB when records are duplicated
 * ALCYN-13: Accounting cut-off: add two pending merges (#70 and #73) from OCA/account-closing
 * ALCYN-439: updates of non-web orders pushed to Magento correctly changes lines on Magento
-
-**Build**
-
-**Documentation**
 
 
 10.23.3 (2018-08-29)
