@@ -8,7 +8,7 @@ from __future__ import print_function
 
 import logging
 import re
-
+import os
 from itertools import chain
 
 from invoke import task, exceptions
@@ -25,6 +25,7 @@ from .common import (
     build_path,
     root_path,
     ask_or_abort,
+    get_aggregator_repo,
 )
 
 BRANCH_EXCLUDE = """
@@ -32,6 +33,28 @@ branches:
   except:
     - /^merge-branch-.*$/
 """
+
+
+def get_target_branch(ctx, target_branch=None):
+    """Gets the branch to push on and checks if we're overriding something.
+
+    If target_branch is given only checks for the override.
+    Otherwise create the branch name and check for the override.
+    """
+    current_branch = ctx.run(
+        'git symbolic-ref --short HEAD', hide=True).stdout.strip()
+    project_id = cookiecutter_context()['project_id']
+    if not target_branch:
+        commit = ctx.run('git rev-parse HEAD', hide=True).stdout.strip()[:8]
+        target_branch = 'merge-branch-{}-{}-{}'.format(
+            project_id, current_branch, commit)
+    if current_branch == 'master' or re.match(r'\d{1,2}.\d', target_branch):
+        ask_or_abort('You are on branch {}.'
+                     ' Please confirm override of target branch {}'.format(
+                         current_branch, target_branch
+                     ))
+    return target_branch
+
 
 @task
 def init(ctx):
@@ -99,7 +122,7 @@ def list(ctx, dockerfile=True):
 
 
 @task
-def merges(ctx, submodule_path, push=True):
+def merges(ctx, submodule_path, push=True, target_branch=None):
     """ Regenerate a pending branch for a submodule
 
     It reads pending-merges.yaml, runs gitaggregator on the submodule and
@@ -119,41 +142,47 @@ def merges(ctx, submodule_path, push=True):
 
     Beware, if you changed the remote of the submodule, you still need
     to edit it manually in the ``.gitmodules`` file.
-
     """
     git_aggregator.main.setup_logger()
-    repositories = git_aggregator.config.load_config(
-        build_path('odoo/pending-merges.yaml')
-    )
-    relative_path = submodule_path.lstrip('odoo/')
-    for repo_dict in repositories:
-        repo = git_aggregator.repo.Repo(**repo_dict)
-        if git_aggregator.main.match_dir(repo.cwd, relative_path):
-            break
-    branch = ctx.run('git symbolic-ref --short HEAD', hide=True).stdout.strip()
-    project_id = cookiecutter_context()['project_id']
-    commit = ctx.run('git rev-parse HEAD', hide=True).stdout.strip()[:8]
-    target = 'merge-branch-{}-{}-{}'.format(project_id, branch, commit)
+    repo = get_aggregator_repo(submodule_path)
+    target_branch = get_target_branch(ctx, target_branch)
 
-    if branch == 'master' or re.match(r'\d{1,2}.\d', branch):
-        ask_or_abort('You are on branch {}.'
-                     ' Please confirm override of target branch {}'.format(
-                         branch, target
-                     ))
-
-    print('Building and pushing to camptocamp/{}'.format(target))
+    print('Building and pushing to camptocamp/{}'.format(target_branch))
     print()
     repo.cwd = build_path(submodule_path)
-    repo.target['branch'] = target
+    repo.target['branch'] = target_branch
     repo.aggregate()
+
     edit_travis_yml(ctx, repo)
     commit_travis_yml(ctx, repo)
     if push:
         repo.push()
 
 
+@task
+def push(ctx, submodule_path, target_branch=None):
+    """Push a Submodule
+
+    Pushes the current state of your submodule to the target remote and branch
+    either given by you or specified in pending-merges.yml
+    """
+    git_aggregator.main.setup_logger()
+    repo = get_aggregator_repo(submodule_path)
+    target_branch = get_target_branch(ctx, target_branch)
+    print('Pushing to {}/{}'.format(repo.target['remote'], target_branch))
+    print()
+    repo.cwd = build_path(submodule_path)
+    repo.target['branch'] = target_branch
+    with cd(submodule_path):
+        repo._switch_to_branch(target_branch)
+        edit_travis_yml(ctx, repo)
+        commit_travis_yml(ctx, repo)
+        repo.push()
+
+
 def travis_filepath(repo):
     return "{}/.travis.yml".format(repo.cwd.rstrip('/'))
+
 
 def edit_travis_yml(ctx, repo):
     """
@@ -167,8 +196,11 @@ def edit_travis_yml(ctx, repo):
 
 
 def commit_travis_yml(ctx, repo):
+    tf = '.travis.yml'
+    if not os.path.exists(repo.cwd.rstrip('/') + '/' + tf):
+        print(repo.cwd + tf, 'does not exists. Skipping travis exclude commit')
+        return
     with cd(repo.cwd):
-        tf = '.travis.yml'
         cmd = 'git commit {} -m "Travis: exclude new branch from build"'
         commit = ctx.run(cmd.format(tf), hide=True)
         print("Committed as:\n{}".format(commit.stdout.strip()))
@@ -193,3 +225,19 @@ def show_closed_prs(ctx, submodule_path=None):
         except AttributeError:
             print('You need to upgrade git-aggregator.'
                   ' This function is available since 1.2.0.')
+
+
+@task
+def update(ctx, submodule_path=None):
+    """Synchronize and update given submodule path
+
+    :param submodule_path: submodule path for a precise sync & update
+    """
+    sync_cmd = 'git submodule sync'
+    update_cmd = 'git submodule update --init'
+    if submodule_path is not None:
+        sync_cmd += ' -- {}'.format(submodule_path)
+        update_cmd += ' -- {}'.format(submodule_path)
+    with cd(root_path()):
+        ctx.run(sync_cmd)
+        ctx.run(update_cmd)

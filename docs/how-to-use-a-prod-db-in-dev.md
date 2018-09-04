@@ -11,6 +11,15 @@ https://github.com/camptocamp/odoo-template instead.
 If you already have a local dump on your computer, you can skip this section.
 If the project is not hosted on our cloud-platform, you should ask a dump to the support team or the project manager.
 
+### From odoo-dump-bag
+
+Connect to https://dump-bag.odoo.camptocamp.ch and retrieve the dump using `aws`.
+Then skip to the next section.
+
+### Generate a dump
+
+This is to be used only in case you can't get a dump from odoo-dump-bag
+
 1. Connect to production replication server on odoo-platform-none-db-replication
 
     Make sure you're in C2C VPN and open a terminal.
@@ -34,7 +43,7 @@ If the project is not hosted on our cloud-platform, you should ask a dump to the
 
     Replace DB NAME and user with the names of your project DB.
 
-## Using the production dump
+## Restore and use the production dump
 
 Now that you have a production DB dump on your computer, you want to load it so you can start a Docker composition.
 
@@ -64,5 +73,5 @@ Now that you have a production DB dump on your computer, you want to load it so 
 
 ## Notes
 
-* [How to work with several databases](./docker-dev.md#working-with-several-databases)
-* [How to restore a dump](./how-to-backup-and-restore-volumes.md#restore-a-dump)
+* [How to work with several databases](./docker-and-databases.md#working-with-several-databases)
+* [How to backup and restore a dump](./docker-and-databases.md#backup-and-restore-with-dumps)

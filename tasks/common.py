@@ -19,6 +19,13 @@ from builtins import input
 from contextlib import contextmanager
 from invoke import exceptions
 
+try:
+    import git_aggregator.config
+    import git_aggregator.main
+    import git_aggregator.repo
+except ImportError:
+    print('Please install git-aggregator')
+
 
 def root_path():
     return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -109,3 +116,29 @@ def search_replace(file_path, old, new):
         with open(file_path, 'w') as f_w:
             for line in f_r:
                 f_w.write(line.replace(old, new))
+
+
+def get_aggregator_repo(submodule_path):
+    """Build the git_aggregator repo object.
+
+    Parses the pending merges file and creates the repo object
+    for the one that has the right submodule path.
+    """
+
+    repositories = git_aggregator.config.load_config(
+        build_path(PENDING_MERGES)
+    )
+    relative_path = submodule_path.lstrip('odoo/')
+    repo = None
+    found = False
+    for repo_dict in repositories:
+        repo = git_aggregator.repo.Repo(**repo_dict)
+        if git_aggregator.main.match_dir(repo.cwd, relative_path):
+            found = True
+            break
+    if not found:
+        exit_msg(
+            'No submodule found in pending-merges matching path {}'.format(
+                submodule_path)
+        )
+    return repo

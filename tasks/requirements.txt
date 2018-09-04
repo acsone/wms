@@ -5,3 +5,5 @@ invoke
 pyyaml
 requests
 ruamel.yaml
+gnupg
+psycopg2
