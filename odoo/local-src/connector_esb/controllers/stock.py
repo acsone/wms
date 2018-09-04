@@ -44,3 +44,28 @@ class StockController(http.Controller):
             res = work.component('ws.message.product.stock').get_message(skus)
             headers = [('Content-Type', 'text/xml')]
             return request.make_response(res, headers)
+
+    @http.route('/connector_esb/stock/cnk',
+                type='json', auth='user', csrf=False)
+    def product_stock_cnk(self, products=None):
+        """ Return stock levels of all products (use the CNK)
+        or for specific products
+
+        Expect a POST with multipart/x-www-form-urlencoded
+        The stock levels are returned for all products or for specific
+        products if the form field ``products[]`` is filled with CNK::
+
+            $ curl -X POST \
+                    http://localhost:8069/connector_esb/stock/cnk"
+
+        """
+        ensure_db()
+        request.uid = SUPERUSER_ID
+        env = request.env
+
+        backend = env['esb.backend'].sudo().get_singleton()
+        with backend.work_on('product.product') as work:
+            res = work\
+                .component('ws.message.product.stock.cnk')\
+                .get_message(products)
+            return res

@@ -16,6 +16,7 @@ Unreleased
 * ALCYN-196: Rename the payment method "Manual" by "Domiciliation" and "Virement" by "Virement Manuel"
 * ALCYN-195: Add promotional product just after their corresponding product in the sale order lines sequence.
 * ALCYN-471: Add the legal note from fiscal position on the invoice report
+* ALCYN-1445: Modify the existing ESB connector to add a new API for the wholesaler NewPharma (a route to retrieve the stock, send a command and get the status of this command)
 
 **Bugfixes**
 

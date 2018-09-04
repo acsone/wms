@@ -48,6 +48,12 @@ def import_users(ctx):
 
 
 @anthem.log
+def import_wholesaler_users(ctx):
+    """ Import users """
+    load_users_csv(ctx, 'data/install/res.users.wholesaler.csv')
+
+
+@anthem.log
 def esb_user_password(ctx):
     """ Change ESB User password """
     if os.getenv('RUNNING_ENV') in ('dev', ):
@@ -95,6 +101,7 @@ def main(ctx):
     admin_user_password(ctx)
     set_implied_groups(ctx)
     import_users(ctx)
+    import_wholesaler_users(ctx)
     esb_user_password(ctx)
     smile_user_password(ctx)
     limelogic_user_password(ctx)
