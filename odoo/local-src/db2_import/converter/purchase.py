@@ -147,7 +147,8 @@ class DB2MapperPurchaseOrder(object):
             "       dcfcjj, dcfcmm, dcfcaa, dcfcss,"  # creation date
             "       dcfmjj, dcfmmm, dcfmaa, dcfmss,"  # modification date
             "       dcfljj, dcflmm, dcflaa, dcflss,"  # delivery date
-            "       dcffjj, dcffmm, dcffaa, dcffss"   # done date
+            "       dcffjj, dcffmm, dcffaa, dcffss,"   # done date
+            "       deleted"                          # deleted on AS400
             " FROM db2_pdetcdfo WHERE order_id = %s")
         cr.execute(query, [row['id']])
 
@@ -171,7 +172,8 @@ class DB2MapperPurchaseOrder(object):
         # skip lines without product reference
         # those lines are replaced products
         # we won't import replacements in history
-        lines = [l for l in lines if l['dcfart']]
+        deleted_lines = [l for l in lines if l['deleted']]
+        lines = [l for l in lines if l['dcfart'] and not l['deleted']]
         for line in lines:
             product_code = line['dcfart']
             product_xmlid = convert_product_id(product_code)
@@ -214,6 +216,18 @@ class DB2MapperPurchaseOrder(object):
             po_lines |= line_rec
             received_lines.append(line['dcfquc'] <= line['dcfqul'])
             not_received_lines.append(line['dcfqul'] == 0)
+
+        if deleted_lines:
+            # temporarily change state to draft
+            new.write({'state': 'draft'})
+        # check if we need to clean deleted lines
+        for line in deleted_lines:
+            xmlid = '__import__.purchase_order_line_%s_%s_%s_%s' % (
+                row['ecfsui'], int(row['ecffou']),
+                int(row['ecfsuc']), int(line['dcfnli']))
+            line_rec = rec.env.ref(xmlid, raise_if_not_found=False)
+            line_rec.unlink()
+
         is_received = all(received_lines)
         is_done = is_received or expired
         # don't do partial delivery when:

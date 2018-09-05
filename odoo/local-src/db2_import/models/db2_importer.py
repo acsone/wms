@@ -354,18 +354,70 @@ class DB2ImporterTable(models.Model):
         self.create_convertion_jobs(where)
 
     @api.multi
+    def requeue_deleted(self):
+        """Requeue import for an update of orders with deleted lines
+
+        By forcing the state to 'draft' those orders will be refreshed
+        by the update_draft process.
+
+        We don't directly delete them because the ones to be set
+        to done needs to go through a list of operation and
+        create_or_update_record job will take care of that for us.
+
+        """
+        if self.table_name == 'PENTCDFO':
+            model = 'purchase.order'
+            draft_state = 'purchase'
+            table = 'purchase_order'
+            db2_table = 'pdetcdfo'
+            db2_prefix = 'dcf'
+        elif self.table_name == 'PENTCDCL':
+            model = 'sale.order'
+            draft_state = 'draft'
+            table = 'sale_order'
+            db2_table = 'pdetcdcl'
+            db2_prefix = 'dcc'
+
+        cursor = self.env.cr
+        query = (
+            "SELECT xol.id"
+            " FROM {table}_line AS xol"
+            " INNER JOIN {table} AS xo"
+            "   ON xo.id = xol.order_id"
+            " INNER JOIN db2_{db2_table}"
+            "   ON {db2_prefix}sui = xo.name::integer"
+            "     AND {db2_prefix}nli = xol.sequence"
+            " WHERE deleted = True"
+        ).format(table=table, db2_table=db2_table, db2_prefix=db2_prefix)
+        cursor.execute(query)
+        to_del_ids = [r[0] for r in cursor.fetchall()]
+        to_del = self.env[model + '.line'].browse(to_del_ids)
+
+        orders = to_del.mapped('order_id')
+        orders.write({'state': draft_state})
+        _logger.info(
+             '{number} {model} set to {draft_state}'.format(
+                 number=len(orders), model=model, draft_state=draft_state))
+
+    @api.multi
     @job(default_channel='root.db2.generate_jobs')
     def create_convertion_jobs_for_draft(self):
         """Create conversion jobs all orders in a draft state
         By draft state we mean the states in which the orders
         are incomplete, thus it is 'purchase' for purchase orders.
         """
+
         if self.table_name == 'PENTCDFO':
             model = 'purchase.order'
             state = 'purchase'
         elif self.table_name == 'PENTCDCL':
             model = 'sale.order'
             state = 'draft'
+        else:
+            return
+
+        self.requeue_deleted()
+
         records = self.env[model].search([('state', '=', state)])
         suite_names = records.mapped('name')
 
@@ -506,6 +558,7 @@ class DB2Importer(models.Model):
 
         for table in self.table_ids:
             if table.create_job:
+
                 # Create jobs for data imported by csv
                 if table.csv_until:
                     # here we don't alter start date
@@ -517,7 +570,10 @@ class DB2Importer(models.Model):
                         str_next_start, table.csv_until)
 
                 # Create jobs for history orders to update in final mode
-                if self.update_draft and self.mode == 'final_update':
+                # always update drafts in final mode
+                # replaying draft will help to close older draft orders
+                # in advance and also update orders with deleted lines
+                if self.update_draft or self.mode == 'final_update':
                     table.with_delay().create_convertion_jobs_for_draft()
 
         if not self.fetch:

@@ -211,3 +211,82 @@ class TestImportPO(DB2ImportTestCase):
         self.assertEqual(len(self.po.picking_ids), 2)
         self.assertEqual(self.po.picking_ids[0].state, 'done')
         self.assertEqual(self.po.picking_ids[1].state, 'confirmed')
+
+    @freeze_time("2018-08-11")
+    def test_import_po_deleted_line(self):
+        """Import PO 111523.
+
+        Test reimport with a deleted line.
+
+        """
+        ref = self.env.ref
+        suite = 111523
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_po.importer_id.mode = 'history'
+
+        DB2MapperPurchaseOrder.process(
+            self.importer_table_po, self.table_name, db2_id)
+        self.po = self.env['purchase.order'].search(
+            [('name', '=', str(suite))])
+        self.assertEqual(len(self.po), 1)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_5042450'),
+            },
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_5042265'),
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_5043340'),
+            },
+        ]
+        self.check_pol_values(expected_values)
+
+        expected_values = {
+            'name': str(suite), 'state': u'purchase',
+
+            'amount_untaxed': 1109.54,
+            'amount_tax': 233.0,
+            'amount_total': 1342.54,
+        }
+        self.check_po_values(expected_values)
+        self.assertEqual(len(self.po.order_line), 3)
+        self.assertEqual(len(self.po.picking_ids), 0)
+
+        cr = self.env.cr
+        cr.execute(
+            'UPDATE db2_pdetcdfo SET deleted = True'
+            '  WHERE dcfsui = 111523 AND dcfnli = 20')
+
+        DB2MapperPurchaseOrder.process(
+            self.importer_table_po, self.table_name, db2_id)
+        self.po = self.env['purchase.order'].search(
+            [('name', '=', str(suite))])
+
+        self.assertEqual(len(self.po), 1)
+        self.assertEqual(len(self.po.order_line), 2)
+
+        expected_values = [
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_5042450'),
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_5043340'),
+            },
+        ]
+        self.check_pol_values(expected_values)
+        expected_values = {
+            'name': str(suite), 'state': u'purchase',
+
+            'amount_untaxed': 836.31,
+            'amount_tax': 175.62,
+            'amount_total': 1011.93,
+        }
+        self.check_po_values(expected_values)
