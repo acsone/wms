@@ -9,6 +9,7 @@
  'license': 'AGPL-3',
  'category': 'Misc',
  'depends': ['sale',
+             'purchase',
              'pricelist_discount',
              'queue_job',
              'product_additional',
