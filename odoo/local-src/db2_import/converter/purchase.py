@@ -141,6 +141,15 @@ class DB2MapperPurchaseOrder(object):
         new = create_or_update(
             purchase_model, xmlid, values)
 
+        # We need to set the purchase to draft before writing
+        # its lines, otherwise it will automatically create pickings
+        # when product_qty is written and purchase state is 'purchase'
+        # in src/addons/purchase/models/purchase.py:610
+        # this state is written again later
+        new.write({
+            'state': 'draft',
+        })
+
         query = (
             "SELECT dcfart, dcfnli, dcflib, dcfquc, dcfqul, dcfpac, dcfrem,"
             "       dcfres, dcfunv, dcfnfa,"
