@@ -4,7 +4,10 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import bool2int, dt2esbdate, falsy2emptystring, two_digits_fractional, three_digits_fractional
+from odoo.osv.expression import OR
+from ...components.mapper import (bool2int, dt2esbdate, falsy2emptystring,
+                                  two_digits_fractional,
+                                  three_digits_fractional)
 from ...components.mapper import falsy2zero
 
 
@@ -195,6 +198,21 @@ class ProductCronExporter(Component):
             ('create_date', '>', '2014-7-29 00:00:00'),
         ]
         return domain
+
+    def get_domain_timestamp_product_tmpl(self, export_since):
+        """Domain timestamp for product.template.
+
+        Depending of the fields changed the write_date in the database
+        is changed either on the product_product model or product_template.
+        """
+        return [('product_tmpl_id.write_date', '>=', export_since)]
+
+    def domain_timestamp(self, export_since=None):
+        """Add a check on product_template write_date."""
+        return OR([
+            super(ProductCronExporter, self).domain_timestamp(export_since),
+            self.get_domain_timestamp_product_tmpl(export_since)
+        ])
 
     def _write_esb_exported_mark_on_records(self, records):
         _super = super(ProductCronExporter, self)
