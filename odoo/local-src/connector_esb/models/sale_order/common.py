@@ -79,15 +79,15 @@ class SaleOrder(models.Model):
     def _ws_get_partner(self, ref):
         partner = self.env['res.partner'].search([
             ('ref', '=', ref),
-            ('parent_id', '=', False),
-        ])
+            ],
+            # For main partner and contacts having the same ref, the sort
+            # order forces for the main contact to be returned.
+            # Which is the one with parent_id set at Null.
+            order='parent_id desc',
+            limit=1)
         if not partner:
             raise exceptions.MissingError(
                 _("No match found for customer_id: %s") % ref
-            )
-        elif len(partner) != 1:
-            raise exceptions.MissingError(
-                _("Several partners found for customer_id: %s") % ref
             )
         return partner
 
