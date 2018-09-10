@@ -15,3 +15,4 @@ base.access_res_partner_group_partner_manager,base.res_partner group_partner_man
 stock.access_product_group_res_partner_stock_manager,stock.res_partner group_stock_manager,base.model_res_partner,stock.group_stock_manager,1,0,0,0
 mrp.access_product_group_res_partner_mrp_manager,res_partner group_mrp_manager,base.model_res_partner,mrp.group_mrp_manager,1,0,0,0
 access_res_partner_accounting,access_res_partner_accounting,base.model_res_partner,account.group_account_user,1,1,1,0
+access_queue_job_users,access_queue_job_users,queue_job.model_queue_job,base.group_user,1,0,0,0
