@@ -132,7 +132,8 @@ class DB2MapperSaleOrder(object):
             "       dccres,"
             "       dcccjj, dcccmm, dcccaa, dcccss,"
             "       dccmjj, dccmmm, dccmaa, dccmss,"
-            "       dccsgr, dcccgr"
+            "       dccsgr, dcccgr,"
+            "       deleted"                          # deleted on AS400
             " FROM db2_pdetcdcl WHERE order_id = %s"
             " ORDER BY dccnli")
         cr.execute(query, [row['id']])
@@ -158,8 +159,13 @@ class DB2MapperSaleOrder(object):
 
         # register non skipped lines
         valid_lines = []
+        deleted_lines = []
         previous_line = None
         for line in lines:
+            if line['deleted']:
+                deleted_lines.append(line)
+                continue
+
             product_code = line['dccart']
             if not product_code:
                 # skip lines without product reference
@@ -232,6 +238,14 @@ class DB2MapperSaleOrder(object):
             not is_done and
             not all(not_delivered_lines)
         )
+
+        # check if we need to clean deleted lines
+        for line in deleted_lines:
+            xmlid = '__import__.sale_order_line_%s_%s_%s_%s' % (
+                row['eccsui'], int(row['ecccli']),
+                int(row['eccsuc']), int(line['dccnli']))
+            line_rec = rec.env.ref(xmlid, raise_if_not_found=False)
+            line_rec.unlink()
 
         if is_done:
             # validate sale order

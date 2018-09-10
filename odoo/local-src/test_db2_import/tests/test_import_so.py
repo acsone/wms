@@ -1098,3 +1098,114 @@ class TestImportSO(DB2ImportTestCase):
         # check that no picking is linked to both sale order
         # intersection must be empty
         self.assertFalse(self.so1.picking_ids & self.so2.picking_ids)
+
+    @freeze_time("2018-02-01")
+    def test_import_so_deleted_line(self):
+        """Import SO 2844358.
+
+        Tag a line as deleted and check it is properly deleted
+
+        product | ordered | delivered
+        2248800 |       5 |         3  deleted
+        3563038 |       1 |         1
+        2430205 |       1 |         1
+        8072683 |       1 |         1
+        """
+        ref = self.env.ref
+        suite = 2844358
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_so.importer_id.mode = 'history'
+
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+
+        expected_values = [
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2430205'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_8072683'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_2248800'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_3563038'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+
+        expected_values = {
+            'name': str(suite), 'state': u'draft',
+
+            'amount_untaxed': 45.46,
+            'amount_tax': 9.55,
+            'amount_total': 55.01,
+        }
+        self.check_so_values(expected_values)
+        self.assertEqual(len(self.so.order_line), 4)
+        self.assertEqual(len(self.so.picking_ids), 0)
+
+        cr = self.env.cr
+        cr.execute(
+            'UPDATE db2_pdetcdcl SET deleted = True'
+            '  WHERE dccsui = 2844358 AND dccnli = 30')
+
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+
+        self.assertEqual(len(self.so), 1)
+        self.assertEqual(len(self.so.order_line), 3)
+
+        expected_values = [
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2430205'),
+                'discount2': 0.0,  # Res
+                'discount3': 8.5,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_8072683'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_3563038'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
+        expected_values = {
+            'name': str(suite), 'state': u'done',
+
+            'amount_untaxed': 30.66,
+            'amount_tax': 6.44,
+            'amount_total': 37.1,
+        }
+        self.check_so_values(expected_values)

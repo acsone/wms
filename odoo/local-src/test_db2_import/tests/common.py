@@ -141,7 +141,8 @@ SOL_COLS = (
  "dcclll INTEGER,"
  "dcclop VARCHAR,"
  "dccarc VARCHAR,"
- "dccre  VARCHAR")
+ "dccre  VARCHAR,"
+ "deleted BOOLEAN")
 
 PO_COLS = (
  "ecfctr VARCHAR,"
@@ -244,7 +245,8 @@ POL_COLS = (
  "dcfmaa INTEGER,"
  "dcfmmm INTEGER,"
  "dcfmjj INTEGER,"
- "dcfre  VARCHAR")
+ "dcfre  VARCHAR,"
+ "deleted BOOLEAN")
 
 DRECEP_COLS = (
  "drpsuc VARCHAR,"
