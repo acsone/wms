@@ -4,7 +4,10 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import bool2int, dt2esbdate, falsy2emptystring
+from odoo.osv.expression import OR
+from ...components.mapper import (bool2int, dt2esbdate, falsy2emptystring,
+                                  two_digits_fractional,
+                                  three_digits_fractional)
 from ...components.mapper import falsy2zero
 
 
@@ -17,14 +20,13 @@ class ProductExportMapper(Component):
         ('name', 'Gesdem'),
         (falsy2emptystring('default_code'), 'Gesart'),
         (falsy2emptystring('barcode'), 'Cplz05'),
-        ('weight', 'Gespnt'),
+        (three_digits_fractional('weight'), 'Gespnt'),
         (bool2int('active'), 'Cplz19'),
         (dt2esbdate('create_date'), 'Gescrt'),
-        ('volume', 'Cp2z08'),
         (falsy2emptystring('cnk_code'), 'Cplz03'),
-        ('depth', 'Cp2z01'),
-        ('length', 'Cp2z03'),
-        ('width', 'Cp2z05'),
+        (two_digits_fractional('depth'), 'Cp2z01'),
+        (two_digits_fractional('length'), 'Cp2z03'),
+        (two_digits_fractional('width'), 'Cp2z05'),
         (falsy2zero('unit_in_shrink_wrap'), 'Cp2z02'),
         (falsy2zero('ratio_main_product'), 'Cp2z23'),
         (falsy2zero('ratio_additional_product'), 'Cp2z24'),
@@ -39,6 +41,15 @@ class ProductExportMapper(Component):
     @classmethod
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'product')
+
+    @mapping
+    def volume(self, record):
+        """Mapping for the volume.
+
+        The volume in Odoo is recorded in liter and the ESB expects
+        a value in cm3. So convertion is required.
+        """
+        return {'Cp2z08': '{0:.2f}'.format((record.volume or 0) * 1000)}
 
     @mapping
     def supplier(self, record):
@@ -75,6 +86,17 @@ class ProductExportMapper(Component):
     def temporary_fixed_field(self, record):
         """ This is to help testing before resolution of ALCN-1456."""
         return {'Gescov': 0}
+
+    @mapping
+    def measurement_unit_fields(sefl, record):
+        """Fixed fields required by the ESB."""
+        return {
+            'poids_net-unit': 'KILOGRAM',
+            'volume-unit': 'CUBIC_CENTIMETER',
+            'hauteur-unit': 'CENTIMETER',
+            'longueur-unit': 'CENTIMETER',
+            'largeur-unit': 'CENTIMETER',
+            }
 
     @mapping
     def group_and_subgroup(self, record):
@@ -176,6 +198,21 @@ class ProductCronExporter(Component):
             ('create_date', '>', '2014-7-29 00:00:00'),
         ]
         return domain
+
+    def get_domain_timestamp_product_tmpl(self, export_since):
+        """Domain timestamp for product.template.
+
+        Depending of the fields changed the write_date in the database
+        is changed either on the product_product model or product_template.
+        """
+        return [('product_tmpl_id.write_date', '>=', export_since)]
+
+    def domain_timestamp(self, export_since=None):
+        """Add a check on product_template write_date."""
+        return OR([
+            super(ProductCronExporter, self).domain_timestamp(export_since),
+            self.get_domain_timestamp_product_tmpl(export_since)
+        ])
 
     def _write_esb_exported_mark_on_records(self, records):
         _super = super(ProductCronExporter, self)

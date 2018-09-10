@@ -91,7 +91,18 @@ def two_digits_fractional(field):
 
     """
     def modifier(self, record, to_attr):
-        return '{0:.2f}'.format(record[field])
+        return '{0:.2f}'.format(record[field] or 0)
+    return modifier
+
+
+def three_digits_fractional(field):
+    """ A modifier intended to be used on the ``direct`` mappings.
+
+        Convert a number so it always has 3 digits on the fractional part
+
+    """
+    def modifier(self, record, to_attr):
+        return '{0:.3f}'.format(record[field] or 0)
     return modifier
 
 

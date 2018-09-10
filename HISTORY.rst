@@ -16,6 +16,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1469: Fix zero/falsy value in product export and convert the volume in the required unit of measure (ESB)
+
 **Build**
 
 **Documentation**
