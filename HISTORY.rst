@@ -27,6 +27,9 @@ Unreleased
 
 **Build**
 
+* Upgrade project to 10.0-2.7.0
+* Upgrade from odoo-template
+
 **Documentation**
 
 

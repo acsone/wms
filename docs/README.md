@@ -11,6 +11,7 @@ https://github.com/camptocamp/odoo-template instead.
 * [Docker pre-requisite](./prerequisites.md)
 * [Docker developer guide](./docker-dev.md)
 * [Docker tester guide](./docker-test.md)
+* [Docker and databases](./docker-and-databases.md)
 * [Structure](./structure.md)
 * [Releases and versioning](./releases.md)
 * [Pull Requests](./pull-requests.md)

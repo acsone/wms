@@ -24,3 +24,4 @@ The pull requests must conform to the following points to be merged:
 * The changelog is updated (one or a few lines added in the
   `unreleased` section of [HISTORY.rst](../HISTORY.rst))
 * The [upgrade scripts](./upgrade-scripts.md) have been updated
+* PR [automated quality checks](./pull-requests-quality-check.md) are passing
