@@ -3,7 +3,7 @@
 	url = git@github.com:camptocamp/odoo.git
 [submodule "odoo/external-src/enterprise"]
 	path = odoo/external-src/enterprise
-	url = git@github.com:camptocamp/enterprise
+	url = git@github.com:camptocamp/enterprise.git
 [submodule "odoo/external-src/account-analytic"]
 	path = odoo/external-src/account-analytic
 	url = git@github.com:oca/account-analytic.git
@@ -33,7 +33,7 @@
 	url = git@github.com:oca/purchase-workflow.git
 [submodule "odoo/external-src/queue"]
 	path = odoo/external-src/queue
-	url = git@github.com:camptocamp/queue
+	url = git@github.com:camptocamp/queue.git
 [submodule "odoo/external-src/report-print-send"]
 	path = odoo/external-src/report-print-send
 	url = git@github.com:oca/report-print-send.git
