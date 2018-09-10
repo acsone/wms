@@ -27,6 +27,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1469: Fix zero/falsy value in product export and convert the volume in the required unit of measure (ESB)
+* ALCYN-1468: Add a missing ir.model.access for queue.job (raise an error when an user tried to validate a sale order)
 
 **Build**
 
