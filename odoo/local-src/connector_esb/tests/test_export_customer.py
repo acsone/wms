@@ -97,23 +97,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'alcyon_category_id': self.alcyon_category.id,
             'customer': False,
         })
-        # This one should not be processed because it has a parent
-        self.all_records |= self.model.create({
-            'ref': '102',
-            'name': 'Peter',
-            'lang': 'en_US',
-            'street': 'Chemin des Oies, 1',
-            'street2': u'A côté de la fontaine',
-            'zip': '1010',
-            'city': 'Lausanne',
-            'country_id': 44,
-            'phone': '021123123',
-            'fax': '021121212',
-            'email': 'peter@ch.ch',
-            'pharmacist_id': self.env.ref('base.main_partner').id,
-            'customer': True,
-            'parent_id': self.all_records[0].id
-        })
         # A sale order to test SerialNo
         self.so = self.env['sale.order'].create({
             'partner_id': self.customer1.id,
