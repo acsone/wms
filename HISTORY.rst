@@ -43,6 +43,7 @@ Unreleased
 * ALCYN-1432: Create the tax 100 outside EU
 * ALCYN-1433: Archive outside EU taxes (21, 12%, 6% and 0%)
 * ALCYN-1434: Update tax "TVA à l'entrée 0% Hors EU EXTRACOM - Approvisionn. et marchandises"
+* ALLCYN-195: Add promotional product just after their corresponding product in the sale order lines sequence.
 
 **Bugfixes**
 
