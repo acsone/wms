@@ -131,7 +131,7 @@ class ProductMapper(EntityMapper):
         ]
         db2_product_categ = db2_entity.get('gescsg')
         if db2_product_categ in mappings.PRODUCT_WITH_APB_TAX_CATEG:
-            taxes.append('l10n_be_apb_tax.1_apb_01_out')
+            taxes.append('l10n_be_apb_tax.1_apb_02_out')
 
         if db2_entity.get('cplz07').startswith('8888'):
             tax_rate = mappings.PRODUCT_ANTIBIO_TAX.get(

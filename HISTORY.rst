@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-74: Set new APB tax on products
+
 **Features and Improvements**
 
 **Bugfixes**
