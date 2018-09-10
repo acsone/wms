@@ -457,9 +457,102 @@ def setup_cutoff(ctx):
 
 
 @anthem.log
+def archived_outside_eu_taxes(ctx):
+    """ Archive outside europe taxes """
+    outside_taxes = (
+        'l10n_be.1_attn_VAT-IN-V81-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V81-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V81-06-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-06-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V82-00-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-21-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-12-ROW-CC',
+        'l10n_be.1_attn_VAT-IN-V83-06-ROW-CC',
+    )
+
+    for tax_xmlid in outside_taxes:
+        tax = ctx.env.ref(tax_xmlid, raise_if_not_found=False)
+        if tax:
+            tax.active = False
+
+
+@anthem.log
 def setup_intrastat(ctx):
     # Do not declare goods inside country
     ctx.env.ref('base.be').intrastat = False
+
+
+@anthem.log
+def create_tax_100_outside_eu(ctx):
+    """ Create the tax 100% Outside EU """
+
+    tax_child_1_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC-C1'
+    tax_child_1_values = {
+        'name': 'VAT-IN-V81-100-ROW-CC-C1',
+        'type_tax_use': 'none',
+        'amount_type': 'percent',
+        'amount': 100,
+        'account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'refund_account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'description': 'VAT-IN-V81-21-ROW-CC-C1',
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])]
+    }
+    tax_child_1 = create_or_update(
+        ctx, 'account.tax', tax_child_1_xml_id, tax_child_1_values)
+
+    tax_child_2_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC-C2'
+    tax_child_2_values = {
+        'name': 'VAT-IN-V81-100-ROW-CC-C2',
+        'type_tax_use': 'none',
+        'amount_type': 'percent',
+        'amount': -100,
+        'account_accrued_revenue_id': ctx.env.ref('l10n_be.1_a404').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'description': 'VAT-IN-V81-21-ROW-CC-C2',
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+    }
+    tax_child_2 = create_or_update(
+        ctx, 'account.tax', tax_child_2_xml_id, tax_child_2_values)
+
+    tax_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC'
+    main_tax_values = {
+        'name': 'TVA Déductible 100% Hors EU',
+        'amount': 100,
+        'type_tax_use': 'purchase',
+        'amount_type': 'group',
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])],
+        'children_tax_ids': [(6, 0, [tax_child_1.id, tax_child_2.id])]
+    }
+    create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
+
+
+@anthem.log
+def create_tax_extracom(ctx):
+    """ Create/Update the tax Extracom """
+
+    tax_xml_id = 'l10n_be.1_attn_VAT-IN-V81-00-ROW-CC'
+    main_tax_values = {
+        'name': "TVA à l'entrée 0% Hors EU EXTRACOM - "
+                "Approvisionn. et marchandises",
+        'amount': 0,
+        'type_tax_use': 'purchase',
+        'amount_type': 'percent',
+        'account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'refund_account_id': ctx.env.ref('l10n_be.1_a411059').id,
+        'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
+        'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
+        'description': 'VAT-IN-V81-00-ROW-CC',
+        'tag_ids': [(6, 0, [])],
+        'active': True
+    }
+    create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
 
 
 @anthem.log
@@ -487,3 +580,6 @@ def main(ctx):
     import_account_payment_term(ctx)
     setup_cutoff(ctx)
     setup_intrastat(ctx)
+    archived_outside_eu_taxes(ctx)
+    create_tax_100_outside_eu(ctx)
+    create_tax_extracom(ctx)
