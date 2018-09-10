@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-465: On update of orders delete lines which are tagged from AS400 (this requires first to launch the script to detect deleted lines)
 * ALCYN-465: For all lines tagged as deleted on AS400 check if the order line exists and force recomputation of the order if it does
+* ALCYN-1474: Fix purchases imported and closed which created unwanted pickings
 
 **Features and Improvements**
 
