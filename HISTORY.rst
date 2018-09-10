@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.24.1 (2018-09-10)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-465: On update of orders delete lines which are tagged from AS400 (this requires first to launch the script to detect deleted lines)
@@ -33,8 +45,6 @@ Unreleased
 
 * Upgrade project to 10.0-2.7.0
 * Upgrade from odoo-template
-
-**Documentation**
 
 
 10.24.0 (2018-09-03)
