@@ -15,6 +15,7 @@ Unreleased
 
 * ALCYN-196: Rename the payment method "Manual" by "Domiciliation" and "Virement" by "Virement Manuel"
 * ALCYN-195: Add promotional product just after their corresponding product in the sale order lines sequence.
+* ALCYN-471: Add the legal note from fiscal position on the invoice report
 
 **Bugfixes**
 

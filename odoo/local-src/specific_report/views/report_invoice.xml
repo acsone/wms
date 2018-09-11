@@ -161,6 +161,9 @@
                     </tbody>
                 </table>
             </div>
+            <div t-if="invoice.fiscal_position_id.note">
+                <strong><span t-field="invoice.fiscal_position_id.note"/></strong>
+            </div>
 
             <p><br/></p>
             <div style="page-break-inside: avoid;">
