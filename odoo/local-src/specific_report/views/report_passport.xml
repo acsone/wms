@@ -62,7 +62,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <span t-field="picking.delivery_round_id.name"/>
+                                            <span t-field="picking.delivery_round_id.display_name"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -142,6 +142,15 @@
                         </tr>
                         <t t-set="is_black_background" t-value="not is_black_background"/>
                     </t>
+                    <tr t-if="not is_black_background">
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -153,9 +162,7 @@
                 <t t-set="company" t-value="picking.env.user.company_id"/>
                 <t t-set="partner" t-value="picking.partner_id"/>
 
-                <div class="header">
-
-                </div>
+                <div class="header" />
 
                 <t t-call="specific_report.report_passport_body"/>
 
