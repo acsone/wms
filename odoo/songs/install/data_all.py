@@ -63,6 +63,17 @@ def import_payment_modes(ctx):
 
 
 @anthem.log
+def rename_payment_method(ctx):
+    """ Rename Manual by Domiciliation """
+    payment_method = ctx.env.ref('account.account_payment_method_manual_out',
+                                 raise_if_not_found=False)
+    if payment_method:
+        payment_method.write({
+            'name': 'Domiciliation'
+        })
+
+
+@anthem.log
 def main(ctx):
     """ Loading data """
     default_values(ctx)
@@ -70,3 +81,4 @@ def main(ctx):
     define_esb_ref_on_countries(ctx)
     define_esb_ref_on_taxes(ctx)
     import_payment_modes(ctx)
+    rename_payment_method(ctx)

@@ -425,4 +425,8 @@ migration:
           - anthem songs.install.accounting::archived_outside_eu_taxes
           - anthem songs.install.accounting::create_tax_100_outside_eu
           - anthem songs.install.accounting::create_tax_extracom
-    - version: 10.24.2
+    - version: 10.25.0
+      operations:
+        post:
+          - anthem songs.install.data_all::rename_payment_method
+          - anthem songs.install.data_all::import_payment_modes
