@@ -12,6 +12,7 @@ Unreleased
 * ALCYN-481: Set "Belgium Only" on products for given list and remove previous
 * ALCYN-1494: Fix a regression introduced by ALCYN-465 that was generating errors in imports of sales and purchases
 * ALCYN-1485: SO import - Group shipping backorders by partners
+* ALCYN-126: On import switch discounts when both are set, or when product has GMA price category
 
 **Features and Improvements**
 

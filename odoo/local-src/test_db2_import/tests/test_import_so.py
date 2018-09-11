@@ -329,6 +329,17 @@ class TestImportSO(DB2ImportTestCase):
         """Import SO 2797926.
 
         Fully delivered order many lines (13)
+
+        Contains mixed discounts with discount2 and discount3 reversed
+        on the following lines
+        (ALCYN-126)
+
+        * line 70
+        * line 90
+        * line 100
+
+        Where Res <> 0
+
         """
         ref = self.env.ref
         suite = 2797926
@@ -384,8 +395,8 @@ class TestImportSO(DB2ImportTestCase):
             {
                 'sequence': 100,
                 'product_id': ref('__import__.product_3237765'),
-                'discount2': 8.5,  # Res
-                'discount3': 25.0,  # Rem
+                'discount2': 25.0,  # Rem (reversed)
+                'discount3': 8.5,  # Res (reversed)
                 # taxes 6%
             },
             {
@@ -405,15 +416,15 @@ class TestImportSO(DB2ImportTestCase):
             {
                 'sequence': 70,
                 'product_id': ref('__import__.product_2879559'),
-                'discount2': 8.5,  # Res
-                'discount3': 10.0,  # Rem
+                'discount2': 10.0,  # Rem (reversed)
+                'discount3': 8.5,  # Res (reversed)
                 # taxes 6%
             },
             {
                 'sequence': 90,
                 'product_id': ref('__import__.product_3074440'),
-                'discount2': 8.5,  # Res
-                'discount3': 15.0,  # Rem
+                'discount2': 15.0,  # Rem (reversed)
+                'discount3': 8.5,  # Res (reversed)
                 # taxes 6%
             },
             {
@@ -1332,3 +1343,65 @@ class TestImportSO(DB2ImportTestCase):
 
         nb_po_after = self.env['purchase.order'].search_count([])
         self.assertEqual(nb_po_before, nb_po_after)
+
+    @freeze_time("2018-08-21")
+    def test_import_switch_discount_gma(self):
+        """Import SO 2844358.
+
+        Check discount values are correct with GMA price category
+        (ALCYN-126)
+
+        product | ordered | delivered | GMA
+        2248800 |       5 |         3 |   Y
+        3563038 |       1 |         1 |   N
+        2430205 |       1 |         1 |   N
+        8072683 |       1 |         1 |   N
+        """
+        ref = self.env.ref
+
+        self.importer_table_so.importer_id.mode = 'history'
+
+        price_cat_gma = ref('specific_product.product_price_category_gma')
+
+        # set a product with GMA price category
+        ref('__import__.product_2430205').write({
+            'price_category_id': price_cat_gma.id,
+        })
+
+        suite = 2844358
+        db2_id = self.get_row_from_suite(suite)
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+
+        expected_values = [
+            {
+                'sequence': 20,
+                'product_id': ref('__import__.product_2430205'),
+                'discount2': 8.5,  # Rem (reversed)
+                'discount3': 0.0,  # Res (reversed)
+                # tax 21%
+            },
+            {
+                'sequence': 40,
+                'product_id': ref('__import__.product_8072683'),
+                'discount2': 0.0,  # Res
+                'discount3': 0.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 30,
+                'product_id': ref('__import__.product_2248800'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+            {
+                'sequence': 10,
+                'product_id': ref('__import__.product_3563038'),
+                'discount2': 0.0,  # Res
+                'discount3': 11.0,  # Rem
+                # tax 21%
+            },
+        ]
+        self.check_sol_values(expected_values)
