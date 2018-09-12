@@ -5,7 +5,7 @@ import logging
 from collections import defaultdict
 
 from odoo import api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import UserError
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)

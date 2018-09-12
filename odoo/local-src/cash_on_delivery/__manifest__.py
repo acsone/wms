@@ -4,11 +4,12 @@
 
 {
     'name': 'Cash on delivery',
-    'version': '1.0',
+    'version': '10.0.1.0.0',
     'author': "BCIM",
     'category': 'Stock Management',
     'depends': [
         'sale_stock',
+        'account',
         ],
     'data': [
         'views/account_payment_term.xml',

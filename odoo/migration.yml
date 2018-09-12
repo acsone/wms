@@ -537,6 +537,7 @@ migration:
           - base_exception
           - cash_on_delivery
           - delivery_rounds
+          - specific_report
       operations:
         pre:
           - anthem songs.upgrade.10_25_2_update::pre

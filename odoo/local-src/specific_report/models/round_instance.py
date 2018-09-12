@@ -1,15 +1,28 @@
 # -*- coding: utf-8 -*-
-# © 2017 Okia SPRL
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import math
 from collections import OrderedDict
 
-from odoo import api, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class RoundInstance(models.Model):
     _inherit = 'round.instance'
+
+    @api.multi
+    def print_cash_on_delivery_invoices(self):
+        self.ensure_one()
+        invoices = self.instance_customer_ids.mapped(
+            'cash_on_delivery_invoice_ids')
+        if not invoices:
+            raise UserError(_('No invoice to print'))
+        invoices.filtered(lambda i: not i.sent).write({'sent': True})
+        return self.env['report'].get_action(
+            invoices, 'account.report_invoice')
 
     @api.multi
     def print_delivery_round(self):
@@ -120,3 +133,38 @@ class RoundInstance(models.Model):
             )
 
         return result
+
+
+class RoundInstanceCustomer(models.Model):
+    _inherit = 'round.instance.customer'
+
+    cash_on_delivery_invoice_ids = fields.Many2many(
+        'account.invoice',
+        string='Invoices',
+        compute='_compute_cash_on_delivery_invoice_ids',
+        readonly=True)
+    has_cash_on_delivery_invoice = fields.Boolean(
+        string='Has Invoices',
+        compute='_compute_cash_on_delivery_invoice_ids',
+        readonly=True)
+
+    @api.depends('picking_ids.cash_on_delivery_invoice_ids')
+    def _compute_cash_on_delivery_invoice_ids(self):
+        for rec in self:
+            shippings = rec.picking_ids.filtered(
+                lambda p: p.picking_type_code == 'outgoing')
+            shippings_done = shippings.filtered(
+                lambda shipping: shipping.state == 'done')
+            rec.cash_on_delivery_invoice_ids = shippings_done.mapped(
+                'cash_on_delivery_invoice_ids')
+            if rec.cash_on_delivery_invoice_ids:
+                rec.has_cash_on_delivery_invoice = True
+
+    def print_cash_on_delivery_invoices(self):
+        self.ensure_one()
+        invoices = self.cash_on_delivery_invoice_ids
+        if not invoices:
+            raise UserError(_('No invoice to print'))
+        invoices.filtered(lambda i: not i.sent).write({'sent': True})
+        return self.env['report'].get_action(
+            invoices, 'account.report_invoice')

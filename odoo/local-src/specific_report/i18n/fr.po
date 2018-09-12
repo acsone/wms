@@ -677,3 +677,19 @@ msgid "|\n"
 msgstr "|\n"
 "                <span>Téléphone:</span>"
 
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
+msgid "Has Invoices"
+msgstr "A des factures"
+
+#. module: specific_report
+#: code:addons/specific_report/models/round_instance.py:22
+#: code:addons/specific_report/models/round_instance.py:167
+#, python-format
+msgid "No invoice to print"
+msgstr "Pas de facture à imprimer"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
+msgid "Print invoices"
+msgstr "Imprimer les factures"

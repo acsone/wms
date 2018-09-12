@@ -81,13 +81,13 @@ class ZetesTest(SavepointCase):
         })
 
         cls.round = cls.env['round.instance'].create({
+            'state': 'draft',
             'template_id': round_template.id,
             'date': fields.Date.today(),
             'time_leave_planned': 12.50,
             'time_picking_planned': 12.50,
             'itinerary_ids': [(6, 0, [round_itinerary.id])],
         })
-        cls.round.button_confirm()
 
         # There is a unique constraint on the zone code.
         # If you want to execute this test with an full DB, PostgreSQL will
@@ -203,8 +203,7 @@ class ZetesTest(SavepointCase):
 
         if not hasattr(cls, 'disable_picking_validation'):
             cls.picking.action_assign()
-            # Round to the picking
-            cls.round.button_update()
+        cls.round.button_confirm()
 
         cls.context = {}
 

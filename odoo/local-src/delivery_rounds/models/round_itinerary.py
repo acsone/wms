@@ -80,3 +80,10 @@ class RoundItineraryPosition(models.Model):
                 code += ' (%s)' % tags
             result.append((rec.id, code))
         return result
+
+    @api.multi
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        res = self.search(
+            args + [('itinerary_id.code', operator, name)],
+            limit=limit)
+        return res.name_get()

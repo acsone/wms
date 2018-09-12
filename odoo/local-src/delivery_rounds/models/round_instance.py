@@ -185,16 +185,15 @@ class RoundInstance(models.Model):
 
         self.itinerary_ids |= itineraries
 
-        partner_ids = itineraries.mapped('partner_position_ids.partner_id.id')
+        partners = itineraries.mapped('partner_position_ids.partner_id')
+        # Itineraries can contain partner of any type. So extract corresponding
+        # delivery address
+        partners_delivery_ids = [partner.address_get(['delivery'])['delivery']
+                                 for partner in partners]
 
         picking_confirmed = self.env['stock.picking'].search([
             ('delivery_round_id', '=', False),
-            # FIXME: tree structure. Should be sth like:
-            # '|', '&', ('partner_id.type', '!=', 'contact'),
-            #           ('partner_id', 'in', partner_ids),
-            #      '&', ('partner_id.type', '=', 'contact'),
-            #           ('partner_id.parent_id', 'in', partner_ids),
-            ('partner_id', 'in', partner_ids),
+            ('partner_id', 'in', partners_delivery_ids),
             ('state', '=', 'confirmed')])
         self._assign_pickings(picking_confirmed)
 
@@ -516,7 +515,7 @@ class RoundInstance(models.Model):
 
 class RoundInstanceCustomer(models.Model):
     _name = 'round.instance.customer'
-    _order = 'rank'
+    _order = 'rank,delivered,write_date desc'
     _rec_name = 'partner_id'
 
     delivery_round_id = fields.Many2one(
@@ -554,7 +553,8 @@ class RoundInstanceCustomer(models.Model):
             lambda r: r.picking_type_code == 'outgoing')
         # ensure all related pickings are assigned to the same delivery
         # round
-        pickings = shippings._get_all_src_pickings()
+        # Use | to let it work in tests with one step delivery
+        pickings |= shippings._get_all_src_pickings()
         # TODO: we should ensure a picking is not already done for another
         #       delivery round
         pickings = pickings.filtered(
@@ -574,12 +574,13 @@ class RoundInstanceCustomer(models.Model):
     def _remove(self):
         """ Remvove partner from round instance if no more pickings or all
         canceled """
-        for rec in self:
-            if not self.picking_ids.filtered(lambda p: p.state != 'cancel'):
-                _logger.debug(
-                    "Removing customer %s from round instance %s",
-                    self.partner_id.id, self.delivery_round_id.id)
-                rec.unlink()
+        if not self.mapped('picking_ids').filtered(
+                lambda p: p.state != 'cancel'):
+            _logger.debug(
+                "Removing customers %s from round instance %s",
+                self.mapped('partner_id').ids,
+                self.mapped('delivery_round_id').ids)
+            self.unlink()
 
     @api.multi
     @api.constrains('rank')
@@ -588,16 +589,7 @@ class RoundInstanceCustomer(models.Model):
             rank = instance_customer.rank
             # when we set a rank on a round instance customer,
             # we copy that value on the pickings
-            pickings = self.delivery_round_id.shipping_ids.filtered(
-                lambda p:
-                p.partner_id == instance_customer.partner_id and
-                p.rank != rank
-            )
-            pickings += self.delivery_round_id.picking_ids.filtered(
-                lambda p:
-                p.partner_id == instance_customer.partner_id and
-                p.rank != rank
-            )
+            pickings = self.picking_ids.filtered(lambda p: p.rank != rank)
             if not pickings:
                 continue
             _logger.debug(
@@ -605,6 +597,23 @@ class RoundInstanceCustomer(models.Model):
                 "pickings and shippings %s",
                 self.ids, pickings.ids)
             pickings.write({'rank': rank})
+
+    count_picking_progress = fields.Char(
+        'Picking Progress',
+        compute='_get_count_picking',
+        readonly=True)
+
+    @api.depends('picking_ids')
+    def _get_count_picking(self):
+        for rec in self:
+            pickings = rec.picking_ids.filtered(
+                lambda r: r.picking_type_subcode == 'PICK')
+            count_done = len(pickings.filtered(
+                lambda r: r.state == ('done')))
+            count_total = len(pickings.filtered(
+                lambda r: r.state in ('partially_available', 'assigned',
+                                      'done')))
+            rec.count_picking_progress = '%s/%s' % (count_done, count_total)
 
     delivered = fields.Boolean('Delivered')
 
@@ -618,23 +627,22 @@ class RoundInstanceCustomer(models.Model):
 
     def _deliver(self):
         """ Validate all shipping orders that are available """
-        for rec in self:
-            shippings = self.picking_ids.filtered(
-                lambda p: p.picking_type_code == 'outgoing')
-            for shipping in shippings.filtered(
-                    lambda p: p.state in ('assigned', 'partially_available')):
-                for pack in shipping.pack_operation_ids:
-                    if pack.product_qty > 0:
-                        pack.qty_done = pack.product_qty
-                        for plot in pack.pack_lot_ids:
-                            if plot.qty_todo > 0:
-                                plot.qty = plot.qty_todo
-                    else:
-                        pack.unlink()
-                shipping.do_transfer()
-            rec.picking_ids.filtered(
-                lambda p: p.state not in ('cancel', 'done')).\
-                write({'delivery_round_customer_id': False})
+        shippings = self.mapped('picking_ids').filtered(
+            lambda p: p.picking_type_code == 'outgoing')
+        for shipping in shippings.filtered(
+                lambda p: p.state in ('assigned', 'partially_available')):
+            for pack in shipping.pack_operation_ids:
+                if pack.product_qty > 0:
+                    pack.qty_done = pack.product_qty
+                    for plot in pack.pack_lot_ids:
+                        if plot.qty_todo > 0:
+                            plot.qty = plot.qty_todo
+                else:
+                    pack.unlink()
+            shipping.do_transfer()
+        self.mapped('picking_ids').filtered(
+            lambda p: p.state not in ('cancel', 'done')).\
+            write({'delivery_round_customer_id': False})
         self.write({'delivered': True})
 
     def print_deliveryslip(self):
