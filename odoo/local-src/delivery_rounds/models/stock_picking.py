@@ -3,10 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 from collections import defaultdict
-from itertools import groupby
 
 from odoo import api, fields, models
-
+from odoo.exceptions import Warning as UserError
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -15,8 +14,13 @@ _logger = logging.getLogger(__name__)
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    delivery_round_customer_id = fields.Many2one(
+        'round.instance.customer', 'Delivery Round Customer', copy=False)
     delivery_round_id = fields.Many2one(
-        'round.instance', 'Delivery Round', copy=False)
+        related='delivery_round_customer_id.delivery_round_id',
+        string='Delivery Round',
+        store=True,
+        readonly=True)
 
     @api.model
     def default_get(self, fields_list):
@@ -25,9 +29,15 @@ class StockPicking(models.Model):
         # value in the context. Without doing this, the backorder (created by
         # copy) will get the value no matter of copy=False
 
-        if 'delivery_round_id' in fields_list:
-            fields_list.remove('delivery_round_id')
+        if 'delivery_round_customer_id' in fields_list:
+            fields_list.remove('delivery_round_customer_id')
         return super(StockPicking, self).default_get(fields_list)
+
+    @api.multi
+    def _create_backorder(self, backorder_moves=[]):
+        # Ensure backorder is not processed again
+        return super(StockPicking, self.with_context(round_backorder=True))\
+            ._create_backorder(backorder_moves)
 
     delivery_round_state = fields.Selection(
         related='delivery_round_id.state',
@@ -55,89 +65,25 @@ class StockPicking(models.Model):
         return moves.mapped('picking_id')
 
     @api.multi
-    def write(self, vals):
-        delivery_round_partner = {}
-        partners = []
-        if not vals.get('delivery_round', True):
-            # Delivery round unset on picking
-            for picking in self:
-                partner = picking.partner_id
-                # If delivery address is a contact, take parent
-                if partner.type == 'contact' and partner.parent_id:
-                    partner = partner.parent_id
-                delivery_round_partner.setdefault(
-                    picking.delivery_round_id, set()).\
-                    add(partner)
-        res = super(StockPicking, self).write(vals)
-        for delivery_round, partners in delivery_round_partner.iteritems():
-            for partner in partners:
-                delivery_round._remove_customer(partner)
-        return res
-
-    @api.multi
-    @api.constrains('delivery_round_id')
+    @api.constrains('delivery_round_customer_id')
     def _update_delivery_round(self):
         if self.env.context.get('noround_write'):
             return
-        delivery_round = self.mapped('delivery_round_id')
-        assert len(delivery_round) <= 1, \
-            'Max 1 delivery_round can be written at a time'
-        if not delivery_round:
-            _logger.debug("Delivery round unset on pickings %s", self.ids)
+        delivery_round_customer = self.mapped('delivery_round_customer_id')
+        assert len(delivery_round_customer) <= 1, \
+            'Max 1 delivery round customer can be written at a time'
+        if not delivery_round_customer:
+            _logger.debug("Delivery round customer unset on pickings %s",
+                          self.ids)
             # unreserve quants when picking is disconnected from a delivery
             # round
             self.do_unreserve()
         else:
             if not self.env.context.get('round_assigned'):
-                _logger.warn(
+                raise UserError(
                     "Delivery round assigned to a picking without "
                     "reservation. Method _assign_pickings on delivery.round "
                     "should have been called.")
-            # propagate to delivery when a picking is (un)assigned to a
-            # delivery round
-            shippings = self._get_all_dest_pickings().filtered(
-                lambda r: r.picking_type_code == 'outgoing')
-            # ensure all related pickings are assigned to the same delivery
-            # round
-            pickings = shippings._get_all_src_pickings()
-            # TODO: we should ensure a picking is not already done for another
-            #       delivery round
-            pickings = pickings.filtered(
-                lambda r: r.state in (
-                    'waiting',
-                    'confirmed',
-                    'partially_available',
-                    'assigned') and
-                r.delivery_round_id.id != delivery_round.id)
-            # if not pickings:
-            #     raise Warning(_(
-            #         'No available picking to assign this delivery round'))
-            if pickings:
-                _logger.debug(
-                    "Delivery round %s set on pickings %s. Propagate "
-                    "to group %s",
-                    delivery_round.id, self.ids, pickings.ids)
-
-                # Set rank
-                def key(r):
-                    partner = r.partner_id
-                    # If delivery address is a contact, take parent
-                    if partner.type == 'contact' and partner.parent_id:
-                        partner = partner.parent_id
-                    return partner
-
-                for partner, pickings_bypartner_iter in groupby(
-                        pickings.sorted(key=key), key=key):
-                    rank = delivery_round._add_customer(partner)
-                    pickings_bypartner = reduce(
-                        lambda x, y: x | y, pickings_bypartner_iter)
-                    pickings_bypartner.with_context(noround_write=True).write({
-                        'delivery_round_id': delivery_round.id,
-                        'rank': rank})
-
-            _logger.debug(
-                "Delivery round %s set on pickings %s. Done.",
-                delivery_round.id, self.ids)
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):

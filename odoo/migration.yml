@@ -512,6 +512,7 @@ migration:
       addons:
         upgrade:
           ### local-src
+<<<<<<< 9c07e5a538550a25cd89260e0174c5031851ca59
           - specific_sale
           - product_additional
           - stock_operation_recompute
@@ -533,7 +534,10 @@ migration:
           - specific_purchase
           - stock_unit
           - base_exception
+          - delivery_rounds
       operations:
+        pre:
+          - anthem songs.upgrade.10_25_2_update::pre
         post:
           - anthem songs.install.user::import_wholesaler_users
           - anthem songs.upgrade.10_25_3_update::post

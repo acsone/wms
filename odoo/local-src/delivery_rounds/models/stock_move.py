@@ -27,13 +27,17 @@ class StockMove(models.Model):
         pick_moves = self.filtered(
             lambda m: m.picking_id.picking_type_subcode == 'PICK')
         for picking in pick_moves.mapped('picking_id'):
+            if self.env.context.get('round_backorder'):
+                # Do not assign a backorder
+                continue
             delivery_round = picking.delivery_round_id
             if delivery_round:
                 # related picking is already in a delivery round
                 pick_moves -= picking.move_lines
                 continue
             _logger.debug(
-                "Searching a delivery round for picking %s to assign",
+                "Move reservation (action_assign) is searching a "
+                "round instance for picking %s",
                 picking.id)
             delivery_round = self.env['round.instance'].find(
                 picking.partner_id)
@@ -47,18 +51,7 @@ class StockMove(models.Model):
     @api.multi
     def action_cancel(self):
         res = super(StockMove, self).action_cancel()
-        delivery_round_partner = {}
-        for picking in self.mapped('picking_id'):
-            if (not picking.partner_id or
-                    not picking.delivery_round_id or
-                    picking.state != 'cancel'):
-                continue
-            delivery_round_partner.setdefault(
-                picking.delivery_round_id, set()).\
-                add(picking.partner_id)
-        for delivery_round, partners in delivery_round_partner.iteritems():
-            for partner in partners:
-                delivery_round._remove_customer(partner)
+        self.mapped('picking_id.delivery_round_customer_id')._remove()
         return res
 
     @api.multi
