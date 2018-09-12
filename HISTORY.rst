@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* Upgrade from odoo-template to add Dangerfile fixes
+
 **Documentation**
 
 

@@ -20,12 +20,14 @@ except ImportError:
     print('Please install git-aggregator')
 
 from .common import (
+    ask_or_abort,
+    build_path,
     cookiecutter_context,
     cd,
-    build_path,
-    root_path,
-    ask_or_abort,
+    exit_msg,
     get_aggregator_repo,
+    get_aggregator_repositories,
+    root_path,
 )
 
 BRANCH_EXCLUDE = """
@@ -153,8 +155,7 @@ def merges(ctx, submodule_path, push=True, target_branch=None):
     repo.target['branch'] = target_branch
     repo.aggregate()
 
-    edit_travis_yml(ctx, repo)
-    commit_travis_yml(ctx, repo)
+    process_travis_file(ctx, repo)
     if push:
         repo.push()
 
@@ -175,56 +176,49 @@ def push(ctx, submodule_path, target_branch=None):
     repo.target['branch'] = target_branch
     with cd(submodule_path):
         repo._switch_to_branch(target_branch)
-        edit_travis_yml(ctx, repo)
-        commit_travis_yml(ctx, repo)
+        process_travis_file(ctx, repo)
         repo.push()
 
 
-def travis_filepath(repo):
-    return "{}/.travis.yml".format(repo.cwd.rstrip('/'))
-
-
-def edit_travis_yml(ctx, repo):
-    """
-    add config options in .travis.yml file in order to
-    prevent travis to run on some branches
-    """
-    tf = travis_filepath(repo)
-    print("Writing exclude branch option in {}".format(tf))
-    with open(tf, 'a') as travis:
-        travis.write(BRANCH_EXCLUDE)
-
-
-def commit_travis_yml(ctx, repo):
+def process_travis_file(ctx, repo):
     tf = '.travis.yml'
-    if not os.path.exists(repo.cwd.rstrip('/') + '/' + tf):
-        print(repo.cwd + tf, 'does not exists. Skipping travis exclude commit')
-        return
     with cd(repo.cwd):
+        if not os.path.exists(tf):
+            print(repo.cwd + tf,
+                  'does not exists. Skipping travis exclude commit')
+            return
+
+        print("Writing exclude branch option in {}".format(tf))
+        with open(tf, 'a') as travis:
+            travis.write(BRANCH_EXCLUDE)
+
         cmd = 'git commit {} -m "Travis: exclude new branch from build"'
         commit = ctx.run(cmd.format(tf), hide=True)
         print("Committed as:\n{}".format(commit.stdout.strip()))
 
 
 @task
-def show_closed_prs(ctx, submodule_path=None):
-    """ Show all closed pull requests in pending merges """
+def show_closed_prs(ctx, submodule_path='all'):
+    """Show all closed pull requests in pending merges.
+
+    Pass nothing to check all submodules.
+    Pass `-s path/to/submodule` to check specific ones.
+    """
     git_aggregator.main.setup_logger()
     logging.getLogger('requests').setLevel(logging.ERROR)
-    repositories = git_aggregator.config.load_config(
-        build_path('odoo/pending-merges.yaml')
-    )
-    if submodule_path:
-        submodule_path = submodule_path.lstrip('odoo/')
-    for repo_dict in repositories:
-        repo = git_aggregator.repo.Repo(**repo_dict)
-        if not git_aggregator.main.match_dir(repo.cwd, submodule_path):
-            continue
-        try:
+    if submodule_path == 'all':
+        repositories = get_aggregator_repositories()
+    else:
+        repositories = [get_aggregator_repo(submodule_path)]
+    if not repositories:
+        exit_msg('No repo to check.')
+    try:
+        for repo in repositories:
+            print('Checking', repo.cwd)
             repo.show_closed_prs()
-        except AttributeError:
-            print('You need to upgrade git-aggregator.'
-                  ' This function is available since 1.2.0.')
+    except AttributeError:
+        print('You need to upgrade git-aggregator.'
+                ' This function is available since 1.2.0.')
 
 
 @task

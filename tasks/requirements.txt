@@ -7,3 +7,7 @@ requests
 ruamel.yaml
 gnupg
 psycopg2
+
+# marabunta new versioning
+marabunta >= 0.9.0
+
