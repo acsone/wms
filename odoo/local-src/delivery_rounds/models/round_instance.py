@@ -200,8 +200,10 @@ class RoundInstance(models.Model):
 
         pickings.filtered(
             lambda picking: picking.state == 'draft').action_confirm()
+        # Note: MTO moves in waiting state are updated in standard by a call to
+        # action_assign, so we need to propagate it
         moves = pickings.mapped('move_lines').filtered(
-            lambda move: move.state == 'confirmed' and
+            lambda move: move.state in ('waiting', 'confirmed') and
             not move.linked_move_operation_ids)
         if moves:
             moves.with_context(round_autoset=False).action_assign(

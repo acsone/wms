@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1484: At reception, MTO pickings in backorders are not assigned to delivery round
+
 **Build**
 
 * Upgrade from odoo-template to add Dangerfile fixes
