@@ -512,6 +512,7 @@ migration:
       addons:
         upgrade:
           ### local-src
+<<<<<<< 4fb8f2f430df2706d6554e06fb44a589566dc459
 <<<<<<< 9c07e5a538550a25cd89260e0174c5031851ca59
           - specific_sale
           - product_additional
@@ -534,6 +535,7 @@ migration:
           - specific_purchase
           - stock_unit
           - base_exception
+          - cash_on_delivery
           - delivery_rounds
       operations:
         pre:
