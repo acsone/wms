@@ -70,7 +70,7 @@ else
   unless upgrade_advised.empty?
     migration_advised_msg = ".py: entry in a last migration.yml is advised for modules: "
     migration_advised_msg += upgrade_advised.join(", ")
-    migration_needed_msg += " // please state every local module in a migration.yml explicitly"
+    migration_advised_msg += " // please state every local module in a migration.yml explicitly"
     warn(migration_advised_msg)
   end
 end
@@ -126,4 +126,4 @@ In .gitmodules #{submodule_path}:
   end
 end
 
-commit_lint.check disable: [:subject_length]
+commit_lint.check disable: [:subject_length, :subject_cap]

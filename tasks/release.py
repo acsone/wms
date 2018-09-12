@@ -20,8 +20,8 @@ try:
 except ImportError:
     print('Please install pyyaml')
 
+from marabunta.version import MarabuntaVersion
 from distutils.version import StrictVersion
-
 from invoke import task, exceptions
 from .common import (
     PENDING_MERGES,
@@ -83,35 +83,70 @@ def push_branches(ctx, force=False):
                 )
 
 
+def release_get_next_version3digits(old_version, feature=True, patch=False):
+    """Backward compat for old 3-digits versionins.
+
+    TODO: trash it as we move all projects to 5 digits.
+    """
+    warning = (
+        'You are still using OLD 3-digits versioning. '
+        'Please, consider moving to new versioning w/ 5 digits.'
+    )
+    print()
+    print('!' * len(warning))
+    print(warning)
+    print('!' * len(warning))
+    print()
+    try:
+        version = StrictVersion(old_version).version
+    except ValueError:
+        exit_msg("'{}' is not a valid version".format(old_version))
+    if feature:
+        new_version = (version[0], version[1] + 1, 0)
+    elif patch:
+        new_version = (version[0], version[1], version[2] + 1)
+    return '.'.join([str(v) for v in new_version])
+
+
+def release_get_next_version(
+        old_version, major=False, feature=True, patch=False):
+    if len(old_version.split('.')) == 3:
+        if major:
+            # not supported here
+            feature = True
+        return release_get_next_version3digits(
+            old_version, feature=feature, patch=patch)
+    try:
+        version = MarabuntaVersion(old_version).version
+    except ValueError:
+        exit_msg("'{}' is not a valid version".format(old_version))
+    if major:
+        new_version = list(version[:2]) + [version[2] + 1, 0, 0]
+    elif feature:
+        new_version = list(version[:-2]) + [version[-2] + 1, 0]
+    elif patch:
+        new_version = list(version[:-1]) + [version[-1] + 1]
+    return '.'.join([str(v) for v in new_version])
+
+
 @task
-def bump(ctx, feature=False, patch=False):
+def bump(ctx, major=False, feature=False, patch=False, print_only=False):
     """ Increase the version number where needed """
-    if not (feature or patch):
-        exit_msg("should be a --feature or a --patch version")
+    if not (major or feature or patch):
+        exit_msg("should be a --major or --feature or a --patch version")
     old_version = current_version()
     if not old_version:
         exit_msg("the version file is empty")
-    try:
-        version = StrictVersion(old_version)
-    except ValueError:
-        exit_msg("'{}' is not a valid version".format(version))
 
-    if not len(version.version) == 3:
-        exit_msg("'{}' should be x.y.z".format(version.version))
+    version = release_get_next_version(
+        old_version, major=major, feature=feature, patch=patch)
 
-    if feature:
-        version = (version.version[0],
-                   version.version[1] + 1,
-                   0)
-    elif patch:
-        version = (version.version[0],
-                   version.version[1],
-                   version.version[2] + 1)
-    version = '.'.join([str(v) for v in version])
 
     print('Increasing version number from {} '
           'to {}...'.format(old_version, version))
     print()
+    if print_only:
+        exit_msg('PRINT ONLY mode on. Exiting...')
 
     try:
         ctx.run(r'grep --quiet --regexp "- version:.*{}" {}'.format(
