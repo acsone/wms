@@ -37,7 +37,6 @@ class StockMove(models.Model):
         if moves_to_not_group:
             super(StockMove, moves_to_not_group).assign_picking()
 
-        # FIXME TODO: does not work for MTO products.
         pick_obj = self.env["stock.picking"]
         pickings_cache = {}
         for move in moves_to_group:
