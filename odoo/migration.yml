@@ -430,3 +430,8 @@ migration:
         post:
           - anthem songs.install.data_all::rename_payment_method
           - anthem songs.install.data_all::import_payment_modes
+      modes:
+        full:
+          operations:
+            post:
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
