@@ -425,3 +425,4 @@ migration:
           - anthem songs.install.accounting::archived_outside_eu_taxes
           - anthem songs.install.accounting::create_tax_100_outside_eu
           - anthem songs.install.accounting::create_tax_extracom
+    - version: 10.24.2
