@@ -28,6 +28,8 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         return self.env['res.partner']
 
     def setup_records(self):
+        self.ch = self.env.ref('base.ch')
+        self.ch.esb_ref = '8'
         self.discount_pricelist = self.env['product.pricelist'].create({
             'name': 'Special price',
             'esb_ref': 'REF_ESB'
@@ -80,9 +82,23 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'alcyon_category_id': self.alcyon_category.id,
             'discount_pricelist_id': self.discount_pricelist.id,
         })
+        # This one should be processed, it is a delivery address with parent_id
+        self.all_records |= self.model.create({
+            'parent_id': self.customer1.id,
+            'type': 'delivery',
+            'ref': '101',
+            'name': 'Delivery for Joe',
+            'lang': 'en_US',
+            'street': 'Chemin des Oies, 1',
+            'zip': '1010',
+            'city': 'Lausanne',
+            'country_id': 44,
+            'email': 'peter@ch.ch',
+            'customer': True,
+        })
         # This one should not be processed because not a customer type
         self.all_records |= self.model.create({
-            'ref': '101',
+            'ref': '102',
             'name': 'Peter',
             'lang': 'en_US',
             'street': 'Chemin des Oies, 1',
@@ -162,7 +178,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(self.timestamp.last_export)
-            self.assertEqual(len(items & self.all_records), 2)
+            self.assertEqual(len(items & self.all_records), 3)
 
     def test_export(self):
         """ """
