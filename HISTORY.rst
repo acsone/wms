@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.25.0 (2018-09-14)
+++++++++++++++++++++
+
 **Data Migration**
 
 * Update full csv data from DB2 Production server at 2018-09-14 12:00:00
@@ -31,8 +43,6 @@ Unreleased
 **Build**
 
 * Upgrade from odoo-template to add Dangerfile fixes
-
-**Documentation**
 
 
 10.24.1 (2018-09-10)
