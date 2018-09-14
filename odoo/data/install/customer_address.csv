@@ -508,7 +508,6 @@ __import__.customer_address_delivery_3181,GILLET PATRICK,"Rue de la Barrière,12
 __import__.customer_address_delivery_3190,DOCTEUR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/53 39 10,,False,False,base.be,fr_BE,,delivery,__import__.customer_3190
 __import__.customer_address_delivery_3192,DR GILLET PATRICK,Rue de la Barrière 12,6970,TENNEVILLE,084456161,,False,False,base.be,fr_BE,,delivery,__import__.customer_3192
 __import__.customer_address_delivery_3194,DR DAIGNEUX FABIENNE,Chemin de la Sauvenière 6,4500,HUY,085234338,,False,False,base.be,fr_BE,,delivery,__import__.customer_3194
-__import__.customer_address_delivery_3195,MASSART NATHALIE *,rue René Delhaize 13,6043,RANSART,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3195
 __import__.customer_address_delivery_3198,DR ALAIN DEVEUX,Rue du Village 53,5030,SAUVENIERE,081616116,,False,False,base.be,fr_BE,,delivery,__import__.customer_3198
 __import__.customer_address_delivery_3199,FAC. MEDECINE VETERINAIRE,"Bvd de Colonster, 20 B44",4031,SART TILMAN,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3199
 __import__.customer_address_delivery_3204,DR DEGREZ,Route d'Offagne 3,6850,PALISEUL,061/533910,,False,False,base.be,fr_BE,,delivery,__import__.customer_3204
@@ -927,6 +926,7 @@ __import__.customer_address_delivery_5237,DR DELEUZE JEAN-FRANCOIS *,rue Jean d'
 __import__.customer_address_delivery_5250,DR BONGARTZ ALEXANDRE,"Rue Sopers, 10",4030,GRIVEGNEE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5250
 __import__.customer_address_delivery_5266,DR BURY PHILIPPE,Rue de Gozée 569,6110,MONTIGNY-LE-TILLEUL,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5266
 __import__.customer_address_delivery_5268,DR BOGAERTS PHILIPPE,"Rue Josephine Rauscent, 6",1300,LIMAL,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5268
+__import__.customer_address_delivery_5275,VET G,"Rue aux Fleurs, 4",7800,ATH,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5275
 __import__.customer_address_delivery_5275,DR VANACKER GAETAN,"Chemin du Renardeau, 19",7800,LANQUESAINT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5275
 __import__.customer_address_delivery_5278,DR KERKHOVE MARTINE,Avenue Reine Astrid 5,4680,OUPEYE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5278
 __import__.customer_address_delivery_5299,DRS DUFOUR - DELOYER,Chaussée d'Arlon 65,6600,BASTOGNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5299
@@ -1409,3 +1409,5 @@ __import__.customer_address_delivery_9378,DEVRIES LUC,Rue des Canadiens 24,7180,
 __import__.customer_address_delivery_9379,DEVRIES LUC,Rue des Canadiens 24,7180,SENEFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9379
 __import__.customer_address_delivery_9380,DEVRIES LUC,rue des Canadiens 24,7180,SENEFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9380
 __import__.customer_address_delivery_9381,DAP SAMYN,"Bruggestraat, 220",8930,MENEN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9381
+__import__.customer_address_delivery_9389,NELISSEN BRIGITTE,Aux Deux Croix 30,4920,AYWAILLE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9389
+__import__.customer_address_delivery_9394,MAGASIN VINCOTTE,rue de la Métallurgie 47,4530,VILLERS-LE-BOUILLET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9394

@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* Update full csv data from DB2 Production server at 2018-09-14 12:00:00
 * ALCYN-98: Set production lot alert date and removal date
 * ALCYN-481: Set "Belgium Only" on products for given list
 * ALCYN-1475: Don't create purchase orders when importing sale orders
