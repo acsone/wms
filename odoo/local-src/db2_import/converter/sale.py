@@ -123,9 +123,10 @@ class DB2MapperSaleOrder(object):
         so_model = rec.env['sale.order'].with_context(
             tracking_disable=True,
             no_connector_export=True,
+            skip_pdf_gen=True,
+            __import_no_po_from_so_with_mto=True,
         )
-        new = create_or_update(so_model, xmlid, values)\
-            .with_context(skip_pdf_gen=True)
+        new = create_or_update(so_model, xmlid, values)
 
         query = (
             "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"

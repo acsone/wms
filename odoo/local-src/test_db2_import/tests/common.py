@@ -346,6 +346,20 @@ def load_csv(model, csv_file, **fmtparams):
         raise Exception(u'Could not import CSV. %s' % messages)
 
 
+def create_or_update(cls, model, xmlid, values):
+    """ doppleganger of create_or_update from anthem """
+    rec = cls.env.ref(xmlid, raise_if_not_found=False)
+    if rec:
+        rec.write(values)
+    else:
+        if isinstance(model, str):
+            Model = cls.env[model]
+        else:
+            Model = model
+        res = Model.create(values)
+        cls.add_xmlid(res, xmlid)
+
+
 class DB2ImportTestCase(SavepointCase):
 
     @classmethod
@@ -370,9 +384,16 @@ class DB2ImportTestCase(SavepointCase):
         cls.load_suppliers()
         cls.create_locations()
         cls.setup_warehouse()
+        cls.create_picking_zones()
         cls.create_picking_types()
+        cls.configure_procurement_rules()
         cls.create_procurement_rules()
+        cls.create_procurement_rules_mto()
+        cls.create_procurement_rules_mto_mts()
         cls.create_routes()
+        cls.assign_route_categories()
+        cls.set_picking_zone()
+        cls.set_product_expiry()
         cls.load_products()
         cls.load_supplierinfo()
         cls.load_pricelists()
@@ -622,29 +643,174 @@ class DB2ImportTestCase(SavepointCase):
         loc_stock = ref('stock.stock_location_stock')
         loc_partner = ref('stock.stock_location_locations_partner')
 
-        # Bins = Products available to pick => under Stock
-        locations = [
-            ('materiel', 'Matériel',
-             loc_stock),
-            ('ali', 'Aliments',
-             loc_stock),
-            ('medoc', 'Médicaments',
-             loc_stock),
-            ('froid', 'Froid',
-             loc_stock),
-            ('pharma', 'Pharma',
-             loc_partner),
-        ]
         Location = cls.env['stock.location'].with_context(
-            defer_parent_store_computation=True)
-        for xmlid, name, location in locations:
+                    defer_parent_store_computation=True)
+
+        # Reserves = Products available => under WH, above Stock
+        reserves = [
+            ('reserve_ali', 'Réserve Aliments',
+             loc_stock.location_id),
+            ('reserve_medoc', 'Réserve Médicaments',
+             loc_stock.location_id),
+        ]
+        for xmlid, name, location in reserves:
             loc = Location.create({
                 'name': name,
                 'location_id': location.id,
                 'usage': 'view',
+                'kind': 'reserve',
             })
             xmlid = '__setup__.stock_location_' + xmlid
             cls.add_xmlid(loc, xmlid)
+
+        ('__setup__.stock_location_materiel', 'Matériel',
+         loc_stock.id),
+        ('__setup__.stock_location_ali', 'Aliments',
+         loc_stock.id),
+        ('__setup__.stock_location_medoc', 'Médicaments',
+         loc_stock.id),
+        ('__setup__.stock_location_froid', 'Froid',
+         False,
+         loc_stock.id),
+        # Bins = Products available to pick => under Stock
+        locations = [
+            ('materiel', 'Matériel',
+             False,
+             loc_stock, ),
+            ('ali', 'Aliments',
+             ref('__setup__.stock_location_reserve_ali'),
+             loc_stock),
+            ('medoc', 'Médicaments',
+             ref('__setup__.stock_location_reserve_medoc'),
+             loc_stock),
+            ('froid', 'Froid',
+             False,
+             loc_stock),
+        ]
+        for xmlid, name, reserve, location in locations:
+            loc = Location.create({
+                'name': name,
+                'location_id': location.id,
+                'usage': 'view',
+                'reserve_location_id': reserve and reserve.id,
+            })
+            xmlid = '__setup__.stock_location_' + xmlid
+            cls.add_xmlid(loc, xmlid)
+        locations = [
+            ('__setup__.stock_location_frigo', 'Frigo',
+             False,
+             ref('__setup__.stock_location_froid').id),
+        ]
+        for xmlid, name, reserve_id, location_id in locations:
+            create_or_update(cls, Location, xmlid, {
+                'name': name,
+                'location_id': location_id,
+                'reserve_location_id': reserve_id,
+                'usage': 'view',
+            })
+
+        # Parking is under Input (part of stock)
+        parkings = [
+            (
+                '__setup__.stock_location_parking_medoc',
+                'Parking Medicaments',
+            ),
+            (
+                '__setup__.stock_location_parking_ali',
+                'Parking Aliments',
+            ),
+            (
+                '__setup__.stock_location_parking_materiel',
+                'Parking Matériel',
+            ),
+            (
+                '__setup__.stock_location_parking_frigo',
+                'Parking Frigo',
+            ),
+        ]
+        for xmlid, name in parkings:
+            create_or_update(cls, Location, xmlid, {
+                'name': name,
+                'location_id': ref('stock.stock_location_company').id,
+                'usage': 'view',
+                'kind': 'parking',
+            })
+
+        # Achetés-Vendus is under Input (part of stock)
+        create_or_update(
+            cls, Location, '__setup__.stock_location_onorder',
+            {
+                'name': 'Achetés-Vendus',
+                'location_id': ref('stock.stock_location_company').id,
+                'usage': 'view',
+            })
+        onorders = [
+            ('__setup__.stock_location_order_ali', 'Achetés-Vendus Aliments'),
+            ('__setup__.stock_location_order_medoc',
+             'Achetés-Vendus Médicaments'),
+            ('__setup__.stock_location_order_frigo', 'Achetés-Vendus Frigo'),
+            ('__setup__.stock_location_order_mat', 'Achetés-Vendus Matériel'),
+        ]
+        for xmlid, name in onorders:
+            create_or_update(cls, Location, xmlid, {
+                'name': name,
+                'location_id': ref('__setup__.stock_location_onorder').id,
+                'usage': 'view',
+            })
+
+        # Nouveautés is under Input (part of stock)
+        create_or_update(
+            cls, Location, '__setup__.stock_location_new',
+            {
+                'name': 'Nouveautés',
+                'location_id': ref('stock.stock_location_company').id,
+                'usage': 'view',
+            })
+        news = [
+            ('__setup__.stock_location_new_ali', 'Nouveautés Aliments'),
+            ('__setup__.stock_location_new_medoc', 'Nouveautés Médicaments'),
+            ('__setup__.stock_location_new_frigo', 'Nouveautés Frigo'),
+            ('__setup__.stock_location_new_mat', 'Nouveautés Matériel'),
+        ]
+        for xmlid, name in news:
+            create_or_update(cls, Location, xmlid, {
+                'name': name,
+                'location_id': ref('__setup__.stock_location_new').id,
+                'usage': 'view',
+            })
+
+        # Casse = Products unavailable => not under physical locations
+        create_or_update(
+            cls, Location, 'stock.stock_location_scrapped', {
+                'name': 'Scrap',
+                'location_id': False,
+                'usage': 'view',
+                'scrap_location': False,
+            })
+        scrap = [
+            ('__setup__.stock_location_scrap_destroy', 'A détruire', 0, 0),
+            ('__setup__.stock_location_scrap_quality',
+             'Problème Qualité', 0, 1),
+            ('__setup__.stock_location_scrap_return',
+             'Retours Fournisseur', 1, 0),
+            ]
+        for xmlid, name, accrued_supplier_return, is_scrap in scrap:
+            create_or_update(cls, Location, xmlid, {
+                'name': name,
+                'location_id': ref('stock.stock_location_scrapped').id,
+                'usage': 'internal',
+                'ignore_quants_expiration': True,
+                'scrap_location': is_scrap,
+                'accrued_supplier_return': accrued_supplier_return,
+            })
+
+        loc_partner = ref('stock.stock_location_locations_partner')
+        create_or_update(
+            cls, Location, '__setup__.stock_location_destroyed', {
+                'name': 'Détruit',
+                'location_id': loc_partner.id,
+                'usage': 'customer',
+            })
         # Create a location for migrated Purchases
         loc = Location.create({
             'name': '[MIGRATION] Réception achats',
@@ -660,6 +826,12 @@ class DB2ImportTestCase(SavepointCase):
         cls.env.ref('stock.warehouse0').delivery_steps = 'pick_ship'
 
     @classmethod
+    def create_picking_zones(cls):
+        """ Creating picking zones """
+        with open(INSTALL_CSV_PATH % 'picking.zone') as csv_file:
+            load_csv(cls.env['picking.zone'], csv_file)
+
+    @classmethod
     def create_picking_types(cls):
         """ Creating picking types """
         ref = cls.env.ref
@@ -671,9 +843,28 @@ class DB2ImportTestCase(SavepointCase):
         location_mat = ref('__setup__.stock_location_materiel')
         location_ali = ref('__setup__.stock_location_ali')
         location_froid = ref('__setup__.stock_location_froid')
-        location_pharma = ref('__setup__.stock_location_pharma')
+
+        color_mrp = 0
+        color_in = 1
+        color_internal = 4
+        color_pick = 5
+        color_out = 8
 
         types = [
+            {'xmlid': 'stock.picking_type_in',
+             'name': u'Réception des achats',
+             'use_create_lots': False,
+             'use_existing_lots': True,
+             'subcode': 'RECEIVE',
+             'color': color_in,
+             'sequence': 10,
+             },
+            {'xmlid': 'stock.picking_type_internal',
+             'active': True,
+             'sequence': 50,
+             'color': color_internal,
+             },
+
             {'xmlid': '__setup__.stock_picking_type_materiel',
              'name': 'Pick Matériel',
              'code': 'internal',
@@ -683,7 +874,9 @@ class DB2ImportTestCase(SavepointCase):
              'use_create_lots': False,
              'subcode': 'PICK',
              'groupbypartner': True,
-             'sequence': 6,
+             'color': color_pick,
+             'sequence': 60,
+             'picking_zone_id': ref('__setup__.picking_zone_materiel').id,
              },
             {'xmlid': '__setup__.stock_picking_type_ali',
              'name': 'Pick Aliments',
@@ -694,7 +887,9 @@ class DB2ImportTestCase(SavepointCase):
              'use_create_lots': False,
              'subcode': 'PICK',
              'groupbypartner': True,
-             'sequence': 5,
+             'color': color_pick,
+             'sequence': 61,
+             'picking_zone_id': ref('__setup__.picking_zone_aliments').id,
              'is_portable_printer': True,
              },
             {'xmlid': '__setup__.stock_picking_type_medoc',
@@ -706,7 +901,10 @@ class DB2ImportTestCase(SavepointCase):
              'use_create_lots': False,
              'subcode': 'PICK',
              'groupbypartner': True,
-             'sequence': 4,
+             'color': color_pick,
+             'sequence': 62,
+             'picking_zone_id': ref(
+                 '__setup__.picking_zone_medicament').id,
              },
             {'xmlid': '__setup__.stock_picking_type_froid',
              'name': 'Pick Frigo',
@@ -717,102 +915,231 @@ class DB2ImportTestCase(SavepointCase):
              'use_create_lots': False,
              'subcode': 'PICK',
              'groupbypartner': True,
-             'sequence': 7,
+             'color': color_pick,
+             'sequence': 63,
+             'picking_zone_id': ref('__setup__.picking_zone_frigo').id,
              },
-            {'xmlid': '__setup__.stock_picking_type_humain',
-             'name': 'Pick Humain',
-             'code': 'internal',
-             'sequence_id': picking_sequence.id,
-             'default_location_src_id': location_pharma.id,
-             'default_location_dest_id': location_out.id,
-             'use_create_lots': False,
-             'subcode': 'PICK',
-             'groupbypartner': True,
-             'sequence': 8,
+            {'xmlid': 'stock.picking_type_out',
+             'active': True,
+             'color': color_out,
+             'sequence': 90,
              },
-
         ]
         for record in types:
             xmlid = record.pop('xmlid')
-            p_type = cls.env['stock.picking.type'].create(record)
-            cls.add_xmlid(p_type, xmlid)
-        ref('stock.picking_type_internal').active = True
+            create_or_update(cls, cls.env['stock.picking.type'], xmlid, record)
+
         ref('stock.picking_type_in').write({
-            'use_create_lots': False,
-            'use_existing_lots': True,
-            'subcode': 'RECEIVE',
             'default_location_dest_id': ref(
                 'stock.stock_location_company').id
+        })
+        cls.env['stock.picking.type'].search([('name', '=', 'Pick')]).write({
+            'subcode': 'PICK',
+            'sequence': 59,
+            'color': color_pick,
+            })
+        cls.env['stock.picking.type'].search([('code', '=', 'mrp_operation')])\
+            .write({
+                'sequence': 89,
+                'color': color_mrp,
+                })
+
+    @classmethod
+    def configure_procurement_rules(cls):
+        """
+        Change the procurement location (VLB Stock -> VLB) for the BUY rules
+        """
+        location_vlb_stock = cls.env.ref('stock.stock_location_stock')
+        # The location VLB doesn't have a XML ID
+        location_vlb = location_vlb_stock.location_id
+
+        rulesBuy = cls.env['procurement.rule'].search([('action', '=', 'buy')])
+        rulesBuy.write({
+            'location_id': location_vlb.id
         })
 
     @classmethod
     def create_procurement_rules(cls):
         """ Creating procurement rules """
-        # First, make existing procurement rule armless
-        # by giving it a ridiculously high route_sequence
-        rule = cls.env['procurement.rule'].search(
-            [('name', '=', 'WH: Stock -> OutputMTO')])
-        rule.route_sequence = 99999999
-
         ref = cls.env.ref
         location_out = ref('stock.stock_location_output')
         warehouse = cls.env.ref('stock.warehouse0')
         rules = [
             {'xmlid': '__setup__.procurement_rule_materiel',
-             'type': ['categ', 'prod'],
+             'type': ['categ', 'prod', 'sale'],
              'name': 'WH: Stock -> Output (MAT)',
-             'action': 'move',
-             'location_id': location_out.id,
-             'warehouse_id': warehouse.id,
-             'location_src_id': ref('stock.stock_location_stock').id,
-             'procure_method': 'make_to_stock',
              'picking_type_id': ref(
                  '__setup__.stock_picking_type_materiel').id,
-             'group_propagation_option': 'propagate',
              },
             {'xmlid': '__setup__.procurement_rule_ali',
-             'type': ['categ', 'prod'],
+             'type': ['categ', 'prod', 'sale'],
              'name': 'WH: Stock -> Output (ALI)',
-             'action': 'move',
-             'location_id': location_out.id,
-             'warehouse_id': warehouse.id,
-             'location_src_id': ref('stock.stock_location_stock').id,
-             'procure_method': 'make_to_stock',
              'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
-             'group_propagation_option': 'propagate',
              },
             {'xmlid': '__setup__.procurement_rule_medoc',
-             'type': ['categ', 'prod'],
+             'type': ['categ', 'prod', 'sale'],
              'name': 'WH: Stock -> Output (MED)',
-             'action': 'move',
-             'location_id': location_out.id,
-             'warehouse_id': warehouse.id,
-             'location_src_id': ref('stock.stock_location_stock').id,
-             'procure_method': 'make_to_stock',
              'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
-             'group_propagation_option': 'propagate',
              },
             {'xmlid': '__setup__.procurement_rule_froid',
-             'type': ['prod'],
+             'type': ['prod', 'sale'],
              'name': 'WH: Stock -> Output (FRIGO)',
-             'action': 'move',
-             'location_id': location_out.id,
-             'warehouse_id': warehouse.id,
-             'location_src_id': ref('stock.stock_location_stock').id,
-             'procure_method': 'make_to_stock',
              'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
-             'group_propagation_option': 'propagate',
              },
         ]
         for record in rules:
             base_xmlid = record.pop('xmlid')
             types = record.pop('type')
-            sequences = {'categ': 15, 'prod': 10}
+            default_name = record.pop('name')
+            record.update({
+             'action': 'move',
+             'location_id': location_out.id,
+             'warehouse_id': warehouse.id,
+             'procure_method': 'make_to_stock',
+             'group_propagation_option': 'propagate',
+            })
+            sequences = {'categ': 15, 'prod': 10, 'sale': 0}
             for t in types:
+                xmlid = base_xmlid + '_' + t
+                if t == 'sale':
+                    record['location_src_id'] = ref(
+                        'stock.stock_location_company').id
+                else:
+                    record['location_src_id'] = ref(
+                        'stock.stock_location_stock').id
+                record['name'] = default_name[:-1] + " - " + t.upper() + ")"
                 record['sequence'] = sequences[t]
-                rule = cls.env['procurement.rule'].create(record)
-                xmlid = '%s_%s' % (base_xmlid, t)
-                cls.add_xmlid(rule, xmlid)
+                create_or_update(cls, cls.env['procurement.rule'],
+                                 xmlid, record)
+
+    @classmethod
+    def create_procurement_rules_mto(cls):
+        """ Creating procurement rules MTO """
+
+        # delete existing procurement rule for MTO
+        rule = cls.env['procurement.rule'].search(
+            [('name', '=', 'WH: Stock -> OutputMTO')])
+        rule.unlink()
+
+        ref = cls.env.ref
+        location_out = ref('stock.stock_location_output')
+        warehouse = cls.env.ref('stock.warehouse0')
+        types = [{
+            'xmlid': '__setup__.procurement_rule_materiel_mto',
+            'name': 'WH: Stock -> Output MTO (MAT)',
+            'action': 'move',
+            'sequence': 25,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_order',
+            'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
+            'group_propagation_option': 'propagate',
+        }, {
+            'xmlid': '__setup__.procurement_rule_ali_mto',
+            'name': 'WH: Stock -> Output MTO (ALI)',
+            'action': 'move',
+            'sequence': 25,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_order',
+            'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
+            'group_propagation_option': 'propagate',
+        }, {
+            'xmlid': '__setup__.procurement_rule_medoc_mto',
+            'name': 'WH: Stock -> Output MTO (MED)',
+            'action': 'move',
+            'sequence': 25,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_order',
+            'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
+            'group_propagation_option': 'propagate',
+        }, {
+            'xmlid': '__setup__.procurement_rule_froid_mto',
+            'name': 'WH: Stock -> Output MTO (FRIGO)',
+            'action': 'move',
+            'sequence': 25,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_order',
+            'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
+            'group_propagation_option': 'propagate',
+        }]
+        for record in types:
+            xmlid = record.pop('xmlid')
+            rule = cls.env['procurement.rule'].create(record)
+            cls.add_xmlid(rule, xmlid)
+
+    @classmethod
+    def create_procurement_rules_mto_mts(cls):
+        """ Creating procurement rules MTO+MTS """
+        ref = cls.env.ref
+        location_out = ref('stock.stock_location_output')
+        warehouse = ref('stock.warehouse0')
+        types = [{
+            'xmlid': '__setup__.procurement_rule_materiel_mto_mtu',
+            'name': 'WH: Stock -> Output MTO+MTS (MAT)',
+            'action': 'split_procurement',
+            'sequence': 30,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_stock',
+            'picking_type_id': ref('__setup__.stock_picking_type_materiel').id,
+            'group_propagation_option': 'propagate',
+            'mts_rule_id':
+                ref('__setup__.procurement_rule_materiel_prod').id,
+            'mto_rule_id':
+                ref('__setup__.procurement_rule_materiel_mto').id,
+        }, {
+            'xmlid': '__setup__.procurement_rule_ali_mto_mtu',
+            'name': 'WH: Stock -> Output MTO+MTS (ALI)',
+            'action': 'split_procurement',
+            'sequence': 30,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_stock',
+            'picking_type_id': ref('__setup__.stock_picking_type_ali').id,
+            'group_propagation_option': 'propagate',
+            'mts_rule_id': ref('__setup__.procurement_rule_ali_prod').id,
+            'mto_rule_id': ref('__setup__.procurement_rule_ali_mto').id,
+        }, {
+            'xmlid': '__setup__.procurement_rule_medoc_mto_mtu',
+            'name': 'WH: Stock -> Output MTO+MTS (MED)',
+            'action': 'split_procurement',
+            'sequence': 30,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_stock',
+            'picking_type_id': ref('__setup__.stock_picking_type_medoc').id,
+            'group_propagation_option': 'propagate',
+            'mts_rule_id':
+                ref('__setup__.procurement_rule_medoc_prod').id,
+            'mto_rule_id': ref('__setup__.procurement_rule_medoc_mto').id,
+        }, {
+            'xmlid': '__setup__.procurement_rule_froid_mto_mtu',
+            'name': 'WH: Stock -> Output MTO+MTS (FRIGO)',
+            'action': 'split_procurement',
+            'sequence': 30,
+            'location_id': location_out.id,
+            'warehouse_id': warehouse.id,
+            'location_src_id': ref('stock.stock_location_stock').id,
+            'procure_method': 'make_to_stock',
+            'picking_type_id': ref('__setup__.stock_picking_type_froid').id,
+            'group_propagation_option': 'propagate',
+            'mts_rule_id':
+                ref('__setup__.procurement_rule_froid_prod').id,
+            'mto_rule_id': ref('__setup__.procurement_rule_froid_mto').id,
+        }]
+        for record in types:
+            xmlid = record.pop('xmlid')
+            create_or_update(cls, cls.env['procurement.rule'], xmlid, record)
 
     @classmethod
     def create_routes(cls):
@@ -849,6 +1176,13 @@ class DB2ImportTestCase(SavepointCase):
              'product_selectable': True,
              },
 
+            {'xmlid': '__setup__.stock_location_route_pick_medoc_categ',
+             'name': 'Zone Médicaments (Categ)',
+             'pull_ids': [
+                 (6, 0, ref('__setup__.procurement_rule_medoc_categ').ids)],
+             'product_categ_selectable': True,
+             'product_selectable': False,
+             },
             {'xmlid': '__setup__.stock_location_route_pick_medoc',
              'name': 'Zone Médicaments',
              'pull_ids': [
@@ -864,12 +1198,97 @@ class DB2ImportTestCase(SavepointCase):
              'product_selectable': True,
              },
 
+            {'xmlid': '__setup__.stock_location_route_new',
+             'name': 'Nouveauté',
+             'product_categ_selectable': False,
+             'product_selectable': True,
+             },
         ]
         for record in routes:
             xmlid = record.pop('xmlid')
             record['sequence'] = 20
             route = cls.env['stock.location.route'].create(record)
             cls.add_xmlid(route, xmlid)
+
+        route_mto_values = {
+            'pull_ids': [
+                (6, 0, [ref('__setup__.procurement_rule_materiel_mto_mtu').id,
+                        ref('__setup__.procurement_rule_ali_mto_mtu').id,
+                        ref('__setup__.procurement_rule_medoc_mto_mtu').id,
+                        ref('__setup__.procurement_rule_froid_mto_mtu').id])
+            ]
+        }
+
+        route_mto = ref('stock.route_warehouse0_mto')
+        route_mto.write(route_mto_values)
+
+        # Disable the route MTO+MTS
+        route_mto_mts = ref('stock_mts_mto_rule.route_mto_mts')
+        route_mto_mts.write({'product_selectable': False})
+
+        # Create Sales BO route
+        cls.env['stock.location.route'].create({
+            'name': 'BO',
+            'sequence': 0,
+            'priority': 0,
+            'product_categ_selectable': False,
+            'product_selectable': False,
+            'sale_selectable': True,
+            'pull_ids': [
+                (6, 0, [ref('__setup__.procurement_rule_ali_sale').id,
+                        ref('__setup__.procurement_rule_medoc_sale').id,
+                        ref('__setup__.procurement_rule_materiel_sale').id,
+                        ref('__setup__.procurement_rule_froid_sale').id])],
+        })
+
+    @classmethod
+    def assign_route_categories(cls):
+        """ Assigning routes to product categories """
+        ref = cls.env.ref
+        categs = [('specific_data.product_categ_materiel',
+                   '__setup__.stock_location_route_pick_materiel_categ'),
+                  ('specific_data.product_categ_ali',
+                   '__setup__.stock_location_route_pick_ali_categ'),
+                  ('specific_data.product_categ_medoc',
+                   '__setup__.stock_location_route_pick_medoc_categ'),
+                  ]
+        for category_xmlid, route_xmlid in categs:
+            ref(category_xmlid).route_ids = [(6, 0, ref(route_xmlid).ids)]
+
+    @classmethod
+    def set_picking_zone(cls):
+        """
+        Set the picking zone on all picking locations and on products
+        """
+        main_locations_picking_zone_mapping = {
+            'ali': '__setup__.picking_zone_aliments',
+            'froid': '__setup__.picking_zone_frigo',
+            'materiel': '__setup__.picking_zone_materiel',
+            'medoc': '__setup__.picking_zone_medicament',
+        }
+        base_xmlid = '__setup__.stock_location_'
+        for main_location_xmlid, picking_zone_xmlid in \
+                main_locations_picking_zone_mapping.iteritems():
+            main_location_xmlid = base_xmlid + main_location_xmlid
+            main_location = cls.env.ref(main_location_xmlid)
+            picking_zone_id = cls.env.ref(picking_zone_xmlid)
+            children = cls.env['stock.location'].search([
+                ('id', 'child_of', main_location.id)])
+            (main_location | children).write({
+                'picking_zone_id': picking_zone_id.id
+            })
+
+        # Recompute the picking zone on each products
+        cls.env['product.template'].search([])._compute_picking_zone_id()
+
+    @classmethod
+    def set_product_expiry(cls):
+        """ Set the expiry delay on product categories """
+        cls.env['product.category'].search([]).write({
+            'alert_time': 1,
+            'removal_time': 91,
+            'life_time': 121,
+            })
 
     def check_values(self, record, expected_values):
         for k, expect in expected_values.iteritems():
