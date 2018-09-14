@@ -767,6 +767,7 @@ def create_picking_types(ctx):
 
         {'xmlid': 'stock.picking_type_out',
          'active': True,
+         'groupbypartner': True,
          'color': color_out,
          'sequence': 90,
          },

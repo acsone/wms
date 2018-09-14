@@ -24,6 +24,7 @@ Unreleased
 * ALCYN-1484: At reception, MTO pickings in backorders are not assigned to delivery round
 * ALCYN-1483: Cannot cancel SO with accessories. Fix error missing record in recordset.
 * ALCYN-1454: Update report delivery slip and fix a bug with the report passport
+* ALCYN-1486: Enable group shipping, to have only 1 OUT shipping per delivery (for Alcyon delivery only; not for specific carriers)
 
 **Build**
 
