@@ -113,8 +113,6 @@ def import_customers(ctx):
         'customer.change-invoice_sending_method-email.csv'
     ]
 
-    content = resource_stream(req, 'data/sample/master_customer.csv')
-
     for f in file_list:
         base_path = 'data/update/10.24.0/'
         f_path = base_path + f
