@@ -13,6 +13,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-196: Rename the payment method "Manual" by "Domiciliation" and "Virement" by "Virement Manuel"
+* ALCYN-195: Add promotional product just after their corresponding product in the sale order lines sequence.
 
 **Bugfixes**
 

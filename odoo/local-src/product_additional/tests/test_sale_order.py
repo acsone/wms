@@ -163,3 +163,54 @@ class TestSaleOrder(common.SavepointCase):
         self.sale_order.action_cancel()
         self.sale_order.action_draft()
         self.assertEqual(len(self.sale_order.order_line), 1)
+
+    def test_sequence_on_line_with_additional_product(self):
+        """Check the position of free products in sale order line.
+
+        The free products added at confirmation order should be listed
+        just after the corresponding paid products.
+        """
+        # Create a product without promotion
+        self.product_2 = self.env['product.product'].create({
+            'name': 'Product 2',
+            'default_code': '984928374',
+            'tracking': 'lot',
+            'list_price': 100,
+            'type': 'product',
+        })
+        # Add a free product on the main product
+        self.env['product.supplierinfo'].create({
+            'name': self.supplier.id,
+            'product_tmpl_id': self.main_product.product_tmpl_id.id,
+            'product_code': '123456',
+            'delay': 1,
+            'ratio_main_product': 10,
+            'ratio_promotional_product': 1,
+        })
+        # Create the sale order without setting a sequence on sale order lines
+        self.so_2 = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.main_product.name,
+                    'product_id': self.main_product.id,
+                    'product_uom': self.env.ref('product.product_uom_unit').id,
+                    'product_uom_qty': 10,
+                }),
+                (0, 0, {
+                    'name': self.product_2.name,
+                    'product_id': self.product_2.id,
+                    'product_uom': self.env.ref('product.product_uom_unit').id,
+                    'product_uom_qty': 3,
+                }),
+            ]
+        })
+        self.so_2.action_confirm()
+        self.assertEqual(len(self.so_2.order_line), 3)
+        # Check the sequence on the product and its promotion
+        main_line = self.so_2.order_line.filtered(
+            lambda line: line.product_uom_qty == 10.0)
+        self.assertEqual(main_line.sequence, 1)
+        promotional_line = self.so_2.order_line.filtered(
+            lambda line: line.product_uom_qty == 1.0)
+        self.assertEqual(promotional_line.sequence, 2)

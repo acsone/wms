@@ -19,6 +19,7 @@ class SaleOrder(models.Model):
             return super(SaleOrder, self).action_confirm()
 
         for order in self:
+            sequence = 1
             for line in order.order_line:
                 line_uom = line.product_uom
                 product_uom = line.product_id.uom_id
@@ -54,6 +55,8 @@ class SaleOrder(models.Model):
                     order="sequence, min_qty_sale desc, price",
                     limit=1,
                 )
+                line.sequence = sequence
+                sequence += 1
                 if not result:
                     continue
 
@@ -70,18 +73,14 @@ class SaleOrder(models.Model):
                 # Create the new line with promotional product
                 line.copy(default={
                     'order_id': order.id,
+                    'sequence': sequence,
                     'price_unit': 0,
                     'product_uom': product_uom.id,
                     'product_uom_qty': promotional_product_qty,
                     'is_promotional_product': True,
                 })
-        res = super(SaleOrder, self).action_confirm()
-        # recompute lines sequences
-        for order in self:
-            lines = order.order_line.sorted(key=lambda x: (x.sequence, x.id))
-            for i, rec in enumerate(lines, 1):
-                rec.sequence = i
-        return res
+                sequence += 1
+        return super(SaleOrder, self).action_confirm()
 
     @api.multi
     def action_draft(self):
