@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-98: Set production lot alert date and removal date
+* ALCYN-481: Set "Belgium Only" on products for given list
 
 **Features and Improvements**
 
