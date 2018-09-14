@@ -12,6 +12,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-196: Rename the payment method "Manual" by "Domiciliation" and "Virement" by "Virement Manuel"
+
 **Bugfixes**
 
 **Build**
