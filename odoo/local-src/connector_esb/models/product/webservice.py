@@ -25,3 +25,38 @@ class ProductStockWebserviceMessage(Component):
             }
             data.append(values)
         return self._produce_xml(data, list_item_el='stockItem')
+
+
+class ProductStockCNKWebserviceMessage(Component):
+
+    _name = 'esb.webservice.message.product.stock.cnk'
+    _inherit = ['esb.webservice.message.base']
+    _apply_on = ['product.product']
+    _usage = 'ws.message.product.stock.cnk'
+
+    def get_message(self, product_cnks=None):
+        ProductProduct = self.env['product.product']
+
+        domain = ProductProduct.get_cnk_products_domain()
+
+        if product_cnks:
+            domain.append(('cnk_code', 'in', product_cnks))
+            product_recs = ProductProduct.search(domain, order='cnk_code')
+        else:
+            product_recs = ProductProduct.search(domain, order='cnk_code')
+
+        stock_by_product = product_recs.read(
+            ['cnk_code', 'immediately_usable_qty', 'default_code'])
+
+        result = []
+        for line in stock_by_product:
+            quantity = line['immediately_usable_qty']
+            quantity = quantity >= 0 and quantity or 0
+
+            result.append({
+                'cnk': line['cnk_code'],
+                'quantity': quantity,
+                'pid': line['default_code']
+            })
+
+        return result

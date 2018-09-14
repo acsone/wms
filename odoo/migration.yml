@@ -434,6 +434,7 @@ migration:
         post:
           - anthem songs.install.data_all::rename_payment_method
           - anthem songs.install.data_all::import_payment_modes
+          - anthem songs.install.user::import_wholesaler_users
       modes:
         full:
           operations:

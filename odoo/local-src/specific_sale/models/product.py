@@ -65,6 +65,27 @@ class ProductProduct(models.Model):
             if result:
                 product.older_lot_id = result[0]
 
+    @api.model
+    def get_cnk_products_domain(self):
+        """ Generate the domain to get stock with CNK product """
+        domain = [('sale_ok', '=', True), ('cnk_code', '!=', False)]
+
+        user_newpharma = self.env.ref('__setup__.res_user_newpharma',
+                                      raise_if_not_found=False)
+
+        if user_newpharma and self.env.context.get('uid') == user_newpharma.id:
+            domain += self.get_newpharma_products_domain()
+
+        return domain
+
+    @api.model
+    def get_newpharma_products_domain(self):
+        """ Return an additional domain (used by the method search on
+        product.product) for the wholesaler NewPharma.
+        """
+
+        return [('veterinary_only', '=', False)]
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'

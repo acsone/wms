@@ -65,13 +65,29 @@ class SaleOrder(models.Model):
             )
         order = self.create(order_data)
 
+        is_sale_in_exception = False
         for line in self._ws_create_order_line_data(data)[:]:
             line['order_id'] = order.id
             changed_line = self.env['sale.order.line'].play_onchanges(
                 line,
                 ['product_id'],
             )
-            self.env['sale.order.line'].create(changed_line)
+            line_rec = self.env['sale.order.line'].create(changed_line)
+
+            # Check if the line contains an exception.
+            # In this case, change the qty to 0
+            if line_rec.exception:
+                is_sale_in_exception = True
+                line_rec.write({
+                    'product_uom_qty': 0,
+                    'ignore_exception': True
+                })
+
+        # If there is at least one line in exception, we need to set
+        # the flag "ignore_exception" to True on the sale.order.
+        # Otherwise the method detect_exceptions will return True
+        if is_sale_in_exception:
+            order.ignore_exception = True
 
         order.action_confirm_background()
         return order
@@ -123,19 +139,31 @@ class SaleOrder(models.Model):
             if line.get('free'):
                 # free line, skip it
                 continue
-            product = self.env['product.product'].search([
-                ('default_code', '=', line['sku'])])
 
+            if 'sku' in line:
+                is_sku = True
+                product = self.env['product.product'].search([
+                    ('default_code', '=', line['sku'])])
+            elif 'cnk' in line:
+                is_sku = False
+                product = self.env['product.product'].search([
+                    ('cnk_code', '=', line['cnk'])])
+            else:
+                message = 'You need to provide the SKU or the CNK'
+                _logger.error(message)
+                raise exceptions.UserError(_(message))
+
+            product_code = is_sku and line['sku'] or line['cnk']
             if len(product) > 1:
                 message = ('Webservice new saleorder, several'
-                           ' products with the same sku %s found')
-                _logger.error(message, line['sku'])
-                raise exceptions.UserError(_(message) % line['sku'])
+                           ' products with the same sku/cnk %s found')
+                _logger.error(message, product_code)
+                raise exceptions.UserError(_(message) % product_code)
 
             elif not len(product):
                 message = 'Webservice new saleorder, product %s not found'
-                _logger.error(message, line['sku'])
-                raise exceptions.UserError(_(message) % line['sku'])
+                _logger.error(message, product_code)
+                raise exceptions.UserError(_(message) % product_code)
 
             else:
                 sol = {}
