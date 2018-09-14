@@ -426,6 +426,10 @@ migration:
           - anthem songs.install.accounting::create_tax_100_outside_eu
           - anthem songs.install.accounting::create_tax_extracom
     - version: 10.25.0
+      addons:
+        upgrade:
+          ### local-src
+          - specific_report
       operations:
         post:
           - anthem songs.install.data_all::rename_payment_method
