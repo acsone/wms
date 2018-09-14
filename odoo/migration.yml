@@ -432,7 +432,7 @@ migration:
           - specific_report
       operations:
         pre:
-          - anthem songs.upgrade.10_24_2_update::pre
+          - anthem songs.upgrade.10_25_0_update::pre
         post:
           - anthem songs.install.data_all::rename_payment_method
           - anthem songs.install.data_all::import_payment_modes
