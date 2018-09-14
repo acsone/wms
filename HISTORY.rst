@@ -18,6 +18,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1484: At reception, MTO pickings in backorders are not assigned to delivery round
+* ALCYN-1483: Cannot cancel SO with accessories. Fix error missing record in recordset.
 
 **Build**
 
