@@ -5,7 +5,7 @@ from collections import OrderedDict
 import re
 
 from base import EntityMapper, FieldMapper
-from datetime import datetime
+from datetime import datetime, timedelta
 import checks
 import mappings
 
@@ -1174,7 +1174,20 @@ class StockProductionLotMapper(EntityMapper):
             int('{:.0f}'.format(rec['vloech'])) != 99999999 and
             datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
                     .strftime('%Y-%m-%d 00:00:00') or '2000-01-01 00:00:00',
+        'removal_date': lambda rec:
+            rec['vloech'] and
+            int('{:.0f}'.format(rec['vloech'])) != 99999999 and
+            (datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
+             - timedelta(days=30)
+             ).strftime('%Y-%m-%d 00:00:00') or '2000-01-01 00:00:00',
+        'alert_date': lambda rec:
+            rec['vloech'] and
+            int('{:.0f}'.format(rec['vloech'])) != 99999999 and
+            (datetime.strptime('{:.0f}'.format(rec['vloech']), '%Y%m%d')
+             - timedelta(days=90)
+             ).strftime('%Y-%m-%d 00:00:00') or '2000-01-01 00:00:00',
     }
+
     def get_sql_select(self):
         return "lotref,lotnum,v.vloint,v.vloech"
 

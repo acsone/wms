@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-98: Set production lot alert date and removal date
+
 **Features and Improvements**
 
 **Bugfixes**
