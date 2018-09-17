@@ -80,8 +80,14 @@
                                     <div>
                                         <span>Commande</span>
                                         <span t-field="sale.name"/>
+                                        <t t-if="sale.suite_name">(<t t-esc="sale.suite_name"/>)</t>
                                         <span>du</span>
                                         <span t-field="sale.date_order_short"/>
+                                        <t t-if="sale.partner_id != invoice.partner_id">
+                                            <br/><br/>
+                                            <span>Client</span>
+                                            <span t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"/>
+                                        </t>
                                     </div>
                                 </td>
                             </tr>
