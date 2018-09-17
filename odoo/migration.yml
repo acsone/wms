@@ -487,3 +487,8 @@ migration:
             post:
               # ------------ DATA update ------------
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
+      operations:
+        post:
+          - anthem songs.install.accounting::remove_useless_account
+          - anthem songs.install.accounting::rename_accounts
+          - anthem songs.install.accounting::create_new_accounts
