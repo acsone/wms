@@ -39,6 +39,18 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                 'free': True,
             }, ]
         }
+        cls.order_data_cnk = {
+            "increment_id": "INC-ID",
+            "customer_id": cls.partner.ref,
+            "date": "2017-09-18",
+            "order_ref": "refClt",
+            "lines": [{
+                'line_id': '1',
+                'cnk': '00999',
+                'quantity': 3,
+                'free': False,
+            }]
+        }
         cls.request_data = {
             "jsonrpc": "3.0", "id": "4321",
             "method": "create",
@@ -52,6 +64,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
             'default_code': '0001',
+            'cnk_code': '00999',
             'list_price': 10.0,
         })
         cls.delivery_1 = cls.env['delivery.carrier'].create({
@@ -246,3 +259,28 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                         fields.Datetime.now())
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
+
+    def test_create_saleorder_with_cnk(self):
+        data = deepcopy(self.order_data_cnk)
+        order = self.env['sale.order']._ws_create_new(data)
+        tax_rate = self.p1.taxes_id.amount / 100.0
+        web_team = self.env.ref('sales_team.salesteam_website_sales')
+        expected = {
+            'esb_ref': 'INC-ID',
+            'client_order_ref': 'refClt',
+            'partner_id': self.partner,
+            'partner_invoice_id': self.partner,
+            'partner_shipping_id': self.partner_shipping,
+            'amount_total': self.p1.list_price * 3 * (1 + tax_rate),
+            'amount_tax': self.p1.list_price * 3 * tax_rate,
+            'supplier_promotion_allowed': True,
+            'payment_term_id': self.payment_30_net,
+            'team_id': web_team,
+            'sale_channel': 'web',
+        }
+        for k, v in expected.iteritems():
+            if isinstance(v, float):
+                self.assertAlmostEqual(order[k], v)
+            else:
+                self.assertEqual(order[k], v)
+        self.assertEqual(len(order.order_line), 1)

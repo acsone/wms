@@ -18,3 +18,5 @@ from . import test_export_stock_update_single
 from . import test_export_document_zip
 from . import test_product_supplierinfo_esbflux
 from . import test_product_supplierinfo_esbflux_purge
+from . import test_ws_product_stock_cnk
+from . import test_ws_saleorder_status
