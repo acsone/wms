@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-481: Set "Belgium Only" on products for given list and remove previous
+* ALCYN-1494: Fix a regression introduced by ALCYN-465 that was generating errors in imports of sales and purchases
 
 **Features and Improvements**
 
