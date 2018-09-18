@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
+
 **Bugfixes**
 
 **Build**
