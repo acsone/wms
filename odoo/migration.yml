@@ -1,4 +1,4 @@
-migration:
+1migration:
   options:
     install_command: odoo
   versions:
@@ -478,6 +478,7 @@ migration:
         upgrade:
           ### local-src
           - specific_report
+          - specific_partner
       modes:
         full:
           operations:
