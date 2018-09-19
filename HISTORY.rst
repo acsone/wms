@@ -13,6 +13,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1445: Add unittests for the API NewPharma
+* ALCYN-1490: Invoice report (pdf): display suite name and customer if different from invoice address
 
 **Bugfixes**
 
