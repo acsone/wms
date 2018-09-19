@@ -21,6 +21,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1492: Fix error on customer action duplicate.
+* ALCYN-1503: Fix Picking Force availability does not move a quant
 
 **Build**
 
