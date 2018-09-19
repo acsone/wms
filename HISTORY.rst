@@ -21,6 +21,7 @@ Unreleased
 **Build**
 
 * Improve unit test speed by using SavepointCase instead of TransactionCase
+* Improve test coverage reporting by filtering `*/tests/*` and `*/__manifest__.py`
 
 **Documentation**
 
