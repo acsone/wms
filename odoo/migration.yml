@@ -473,3 +473,13 @@ migration:
               - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               # ----------- DATA update END ----------
+    - version: 10.25.1
+      modes:
+        full:
+          operations:
+            pre:
+              # ------------ DATA delete ------------
+              - psql -f odoo/songs/upgrade/10_25_1_update.sql
+            post:
+              # ------------ DATA update ------------
+              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv

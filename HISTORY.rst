@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-481: Set "Belgium Only" on products for given list and remove previous
+
 **Features and Improvements**
 
 **Bugfixes**
