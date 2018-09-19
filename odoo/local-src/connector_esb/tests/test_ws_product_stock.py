@@ -29,19 +29,16 @@ class WSProductStockTestCase(ESBXMLTestCase):
         self.product1 = self.model.create({
             'name': 'Product1',
             'default_code': 'exportable001',
-            'cnk_code': '000015',
             'state_id': active.id,
         })
         self.product2 = self.model.create({
             'name': 'Product2',
             'default_code': 'exportable002',
-            'cnk_code': '000048',
             'state_id': discontinued.id,
         })
         self.product3 = self.model.create({
             'name': 'Product3',
             'default_code': 'exportable003',
-            'cnk_code': '000115',
             'state_id': active.id,
         })
         self.all_records = self.product1 + self.product2 + self.product3
@@ -58,22 +55,3 @@ class WSProductStockTestCase(ESBXMLTestCase):
             message = component.get_message(skus)
         self.assertXmlEquivalentData(
             message, self.read_test_file('product_stock_ws_1.xml'), 'sku')
-
-    def test_get_message(self):
-        backend = self.env['esb.backend'].get_singleton()
-        cnks = self.all_records.mapped('cnk_code')
-        with backend.work_on('product.product') as work:
-            component = work.component('ws.message.product.stock.cnk')
-            result = component.get_message(cnks)
-
-        product_mapper = {
-            '000015': self.product1,
-            '000048': self.product2,
-            '000115': self.product3
-        }
-
-        self.assertEqual(len(result), 3)
-        for product_values in result:
-            product = product_mapper[product_values['cnk']]
-            qty = product_values['quantity']
-            self.assertEqual(product.immediately_usable_qty, qty)

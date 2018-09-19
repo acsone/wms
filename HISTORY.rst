@@ -12,6 +12,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1445: Add unittests for the API NewPharma
+
 **Bugfixes**
 
 **Build**
