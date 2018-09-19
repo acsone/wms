@@ -5,7 +5,7 @@
 import odoo.addons.decimal_precision as dp
 
 from odoo import api, fields, models, _
-# from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError
 
 
 class Sale(models.Model):
@@ -104,12 +104,13 @@ class Sale(models.Model):
 
         return result
 
-    # @api.constrains('ignore_exception', 'order_line', 'state')
-    # def sale_check_exception(self):
-    #     try:
-    #         super(Sale, self).sale_check_exception()
-    #     except ValidationError:
-    #         print('Validation Exception !!!')
+    @api.constrains('ignore_exception', 'order_line', 'state')
+    def sale_check_exception(self):
+        try:
+            self._check_exception()
+        except ValidationError:
+            # If a sale exception is found it will be displayed on the UI
+            pass
 
 
 class SaleOrderLine(models.Model):
@@ -117,6 +118,7 @@ class SaleOrderLine(models.Model):
 
     supplier_break = fields.Boolean(compute='_compute_supplier_break')
     exception = fields.Char(compute='_compute_exception')
+    warning_text = fields.Char(compute='_compute_exception')
     date_order = fields.Datetime(related="order_id.date_order")
     older_lot_life_date = fields.Datetime(
         string='Expiration date',
@@ -131,24 +133,36 @@ class SaleOrderLine(models.Model):
         for line in self:
             line.supplier_break = line.product_id.state_id == supplier_nostock
 
-    @api.depends('product_id', 'price_unit', 'price_subtotal')
+    @api.depends('product_id', 'price_subtotal', 'order_id.partner_id')
     def _compute_exception(self):
-        line_exceptions = self.env['exception.rule'].search(
-            [
-                ('rule_group', '=', 'sale'),
-                ('model', '=', 'sale.order.line'),
+        """ Compute sale exceptions and warnings on a line.
+
+            The first exception raised is kept to be displayed on the line.
+            Warning text are added to the description of the line.
+        """
+        line_exceptions = self.env['exception.rule'].search([
+            ('rule_group', '=', 'sale'),
+            ('model', '=', 'sale.order.line'),
             ],
-            order='id'
+            order='sequence'
         )
         for line in self:
-            exception = ''
+            exception = warning = ''
             if line.product_id:
                 for rule in line_exceptions:
-                    if self.env['sale.order']._rule_eval(rule, 'line', line):
+                    if not self.env['sale.order']._rule_eval(rule,
+                                                             'line', line):
+                        continue
+                    if rule.warning_only:
+                        if rule.warning_text:
+                            warning += '\n' + rule.warning_text
+                    if not exception:
                         exception = rule.description
-                        line.order_id.main_exception_id = rule
-                        break
+                        # line.order_id.main_exception_id = rule
             line.exception = exception
+            if line.warning_text != warning:
+                line.warning_text = warning
+                line.set_line_name()
 
     product_qty_unavailable = fields.Float(
         string='Quantity unavailable',
@@ -270,14 +284,16 @@ class SaleOrderLine(models.Model):
                     )
                 )
 
-    @api.onchange('product_id')
-    def product_id_change(self):
-        result = super(SaleOrderLine, self).product_id_change()
+    @api.multi
+    def set_line_name(self):
+        """ Set the name description on the line.
 
-        # As there is a column with product code on the SO/invoice, do not put
-        # internal code prefix on the line description. This rule applies for
-        # SO and Invoice at product onchange as invoice line description is
-        # copied from SO line description.
+        As there is a column with product code on the SO/invoice, do not put
+        internal code prefix on the line description. This rule applies for
+        SO and Invoice at product onchange as invoice line description is
+        copied from SO line description.
+        """
+        self.ensure_one()
         product = self.product_id.with_context(
             lang=self.order_id.partner_id.lang,
             partner=self.order_id.partner_id.id,
@@ -289,12 +305,13 @@ class SaleOrderLine(models.Model):
         name = product.name
         if product.description_sale:
             name += '\n' + product.description_sale
-
         if self.supplier_break:
             name = name + '\r' + _('Out of stock at supplier level')
+        self.name = (name or '') + (self.warning_text or '')
 
-        self.name = name
-
+    @api.onchange('product_id')
+    def product_id_change(self):
+        result = super(SaleOrderLine, self).product_id_change()
         stup_category = self.env.ref('specific_data.product_categ_stupefiant')
         if (self.product_id
                 and self.product_id.categ_id.has_for_parent(stup_category.id)):
@@ -307,6 +324,16 @@ class SaleOrderLine(models.Model):
                 'warning': warning_mess
             }
         return result
+
+    @api.onchange('product_id')
+    def product_id_onchange(self):
+        """2nd on change method for product_id.
+
+        The previous onchange method calls super which raises problems
+        with the compute methods being called before defaults fields are
+        set by Odooo
+        """
+        self.set_line_name()
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):

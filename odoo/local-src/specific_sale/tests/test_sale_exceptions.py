@@ -329,3 +329,29 @@ class TestSaleOrderException(SavepointCase):
         line.product_id = self.prod_stup
         self.assertTrue(line.exception)
         rules.write({'active': 0})
+
+    def test_exception_warning_not_blocking(self):
+        """Check that a warning exception does not block confirmation."""
+        self.warning = self.env['exception.rule'].create({
+            'rule_group': 'sale',
+            'model': 'sale.order.line',
+            'name': 'Exception Warning Test',
+            'code': 'failed=True',
+            'active': True,
+            'warning_only': True,
+            })
+        self.so1.action_confirm()
+        self.assertEqual(self.so1.state, 'sale')
+
+    def test_exception_is_blocking(self):
+        """Check that a warning exception does not block confirmation."""
+        self.warning = self.env['exception.rule'].create({
+            'rule_group': 'sale',
+            'model': 'sale.order.line',
+            'name': 'Exception Test',
+            'code': 'failed=True',
+            'active': True,
+            'warning_only': False,
+            })
+        self.so1.action_confirm()
+        self.assertNotEqual(self.so1.state, 'sale')

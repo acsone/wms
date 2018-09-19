@@ -531,6 +531,7 @@ migration:
           - connector_esb
           - specific_purchase
           - stock_unit
+          - base_exception
       operations:
         post:
           - anthem songs.install.user::import_wholesaler_users
