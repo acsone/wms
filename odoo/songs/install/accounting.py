@@ -556,6 +556,155 @@ def create_tax_extracom(ctx):
 
 
 @anthem.log
+def remove_useless_account(ctx):
+    """ Remove a list of 29 accounts """
+    accounts_ro_remove = (
+        '__setup__.account_454100',
+        '__setup__.account_454200',
+        '__setup__.account_454300',
+        '__setup__.account_454400',
+        '__setup__.account_455100',
+        '__setup__.account_455200',
+        '__setup__.account_456100',
+        '__setup__.account_456200',
+        '__setup__.account_459300',
+        '__setup__.account_459310',
+        '__setup__.account_459320',
+        '__setup__.account_459330',
+        '__setup__.account_459400',
+        '__setup__.account_491010',
+        '__setup__.account_491020',
+        '__setup__.account_540000',
+        '__setup__.account_550001',
+        '__setup__.account_550002',
+        '__setup__.account_550003',
+        '__setup__.account_550004',
+        '__setup__.account_550006',
+        '__setup__.account_550007',
+        '__setup__.account_570001',
+        '__setup__.account_620000',
+        '__setup__.account_620100',
+        '__setup__.account_620400',
+        '__setup__.account_621000',
+        '__setup__.account_417000',
+        '__setup__.account_416100',
+    )
+    accounts = ctx.env['account.account']
+    for account_remove in accounts_ro_remove:
+        account = ctx.env.ref(account_remove, raise_if_not_found=False)
+        if not account:
+            continue
+        accounts |= account
+    accounts.unlink()
+
+
+@anthem.log
+def rename_accounts(ctx):
+    """ Rename 3 accounts """
+    # Rename the account 610000
+    account_610000 = ctx.env.ref('__setup__.account_610000',
+                                 raise_if_not_found=False)
+    account_610000.write({
+        'name': 'Location Immeubles'
+    })
+
+    # Rename the account 708000
+    account_708000 = ctx.env.ref('__setup__.account_708000',
+                                 raise_if_not_found=False)
+    account_708000.write({
+        'name': 'Remises pied de facture'
+    })
+
+    # Rename the account 416200
+    account_416200 = ctx.env.ref('__setup__.account_416200',
+                                 raise_if_not_found=False)
+    account_416200.write({
+        'name': 'Avances au personnel'
+    })
+
+
+@anthem.log
+def create_new_accounts(ctx):
+    """ Create 12 new accounts """
+    account_non_current_liabilities_id = \
+        ctx.env.ref('account.data_account_type_non_current_liabilities').id
+    account_current_liabilities_id = \
+        ctx.env.ref('account.data_account_type_current_liabilities').id
+    account_expenses_id = ctx.env.ref('account.data_account_type_expenses').id
+    account_income_id = ctx.env.ref('account.data_account_type_revenue').id
+    account_receivable_id = \
+        ctx.env.ref('account.data_account_type_receivable').id
+
+    new_accounts = (
+        {
+            'name': 'Provisions litiges en cours',
+            'code': '165400',
+            'user_type_id': account_non_current_liabilities_id
+        },
+        {
+            'name': 'Crédit investissement  ING 620000',
+            'code': '173010',
+            'user_type_id': account_non_current_liabilities_id
+        },
+        {
+            'name': 'Crédit investissement  BNP 3750000',
+            'code': '173020',
+            'user_type_id': account_non_current_liabilities_id
+        },
+        {
+            'name': 'Acomptes versés (clients)',
+            'code': '460000',
+            'user_type_id': account_current_liabilities_id,
+            'reconcile': True
+        },
+        {
+            'name': 'Entretiens/ rép autres',
+            'code': '611900',
+            'user_type_id': account_expenses_id
+        },
+        {
+            'name': 'Dons, libéralités',
+            'code': '613160',
+            'user_type_id': account_expenses_id
+        },
+        {
+            'name': "Frais d'actes notariés",
+            'code': '613201',
+            'user_type_id': account_expenses_id
+        },
+        {
+            'name': 'ONSS sur rémun antérieures',
+            'code': '621201',
+            'user_type_id': account_expenses_id
+        },
+        {
+            'name': 'Subsides de formations',
+            'code': '740010',
+            'user_type_id': account_income_id
+        },
+        {
+            'name': 'Autres produits exceptionnels',
+            'code': '766900',
+            'user_type_id': account_income_id
+        },
+        {
+            'name': 'Fournisseurs débiteurs',
+            'code': '403000',
+            'user_type_id': account_receivable_id,
+            'reconcile': True
+        },
+        {
+            'name': 'Frais de recouvrement de créances',
+            'code': '613261',
+            'user_type_id': account_expenses_id
+        }
+    )
+    for new_account in new_accounts:
+        xml_id = '__setup__.account_%s' % new_account['code']
+        create_or_update(ctx, 'account.account', xml_id, new_account)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -583,3 +732,6 @@ def main(ctx):
     archived_outside_eu_taxes(ctx)
     create_tax_100_outside_eu(ctx)
     create_tax_extracom(ctx)
+    remove_useless_account(ctx)
+    rename_accounts(ctx)
+    create_new_accounts(ctx)
