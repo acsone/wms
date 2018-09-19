@@ -119,6 +119,7 @@ def do_picking(pick, lines):
             __skip_check_tracking=True,
             __no_job_create_draft_invoice=True,
         )
+        mig_location = None
         if pick.picking_type_code == 'incoming':
             # disable check on receive note for receptions
             # and skip backorder creation
@@ -133,6 +134,14 @@ def do_picking(pick, lines):
             for ope in pick.pack_operation_ids:
                 if op.qty_done:
                     ope.location_dest_id = mig_location
+        # for internal picks from stock to output location
+        elif pick.picking_type_code == 'internal':
+            # set source to location dedicated for migration
+            # in order to create stock moves that won't affect the stock
+            mig_location = pick.env.ref('__setup__.mig_sale_pick')
+            for ope in pick.pack_operation_ids:
+                if op.qty_done:
+                    ope.location_id = mig_location
 
         result = pick.do_new_transfer()
         if result and result['res_model'] == 'stock.backorder.confirmation':
@@ -141,9 +150,11 @@ def do_picking(pick, lines):
                 lambda o: o.qty_done <= 0)
             for pack in pick.pack_operation_ids - operations_to_delete:
                 pack.product_qty = pack.qty_done
-                if pick.picking_type_code == 'incoming':
+                if pick.picking_type_code in 'incoming':
                     if pack.qty_done:
                         pack.location_dest_id = mig_location
+                elif pick.picking_type_code == 'internal':
+                        pack.location_id = mig_location
             operations_to_delete.unlink()
             pick.do_transfer()
     # unreserve picking for which no qty has been delivered
@@ -161,7 +172,6 @@ def do_shipping(pick, lines):
     Remainings goes in a backorder
     """
     pick.action_confirm()
-    pick.force_assign()
     pick.do_prepare_partial()
     for line in lines:
         product_xmlid = convert_product_id(line['product'])

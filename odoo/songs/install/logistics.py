@@ -260,6 +260,14 @@ def create_locations(ctx):
             'usage': 'customer',
         })
 
+    # Create a location for migrated Sales
+    create_or_update(
+        ctx, Location, '__setup__.mig_sale_pick',
+        {
+            'name': '[MIGRATION] Stock ventes',
+            'usage': 'customer',
+            'active': True,
+        })
     # Create a location for migrated Purchases
     create_or_update(
         ctx, Location, '__setup__.mig_purchase_reception',

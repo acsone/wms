@@ -815,6 +815,16 @@ class DB2ImportTestCase(SavepointCase):
                 'location_id': loc_partner.id,
                 'usage': 'customer',
             })
+        # Create a location for migrated Sales
+        loc = Location.create({
+            'name': '[MIGRATION] Stock ventes',
+            'usage': 'customer',
+            'active': True,
+        })
+        xmlid = '__setup__.mig_sale_pick'
+        cls.add_xmlid(loc, xmlid)
+        Location._parent_store_compute()
+
         # Create a location for migrated Purchases
         loc = Location.create({
             'name': '[MIGRATION] Réception achats',

@@ -1405,3 +1405,81 @@ class TestImportSO(DB2ImportTestCase):
             },
         ]
         self.check_sol_values(expected_values)
+
+    @freeze_time("2018-02-01")
+    def test_import_so_check_picking_and_quants(self):
+        """ When importing a partial sale order
+        there must be multiple pickings with some
+        done and other as backorders.
+        And only 2 shippings, 1 done and the other as backorder.
+
+        Pickings must move the products from migration location
+        Shippings must be standard.
+        """
+        suite = 2844358
+        db2_id = self.get_row_from_suite(suite)
+
+        self.importer_table_so.importer_id.mode = 'final_update'
+
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+        expected_values = {
+            'name': str(suite), 'state': u'sale',
+            'invoice_status': u'to invoice',
+        }
+        self.check_so_values(expected_values)
+        self.assertEqual(len(self.so.order_line), 4)
+        self.assertEqual(len(self.so.picking_ids), 5)
+
+        loc_customer = self.env.ref('stock.stock_location_customers')
+        loc_migration = self.env.ref('__setup__.mig_sale_pick')
+
+        picks = picks_bo = ship = ship_bo = self.env['stock.picking']
+        for p in self.so.picking_ids:
+            if p.location_dest_id == loc_customer:
+                if p.state == 'done':
+                    ship = p
+                else:
+                    ship_bo = p
+            else:
+                if p.state == 'done':
+                    picks |= p
+                else:
+                    picks_bo |= p
+
+        for pick in picks_bo:
+            self.assertEqual(pick.state, 'confirmed')
+        self.assertEqual(ship_bo.state, 'waiting')
+
+        # check done picks with negative quant on Migration
+        # and positive quant on Customer
+        moves = picks.mapped('move_lines')
+        for m in moves:
+            self.assertEqual(len(m.quant_ids), 2)
+            for q in m.quant_ids:
+                if q.qty > 0:
+                    self.assertEqual(q.location_id, loc_customer)
+                else:
+                    self.assertEqual(q.location_id, loc_migration)
+
+        # check picks back order, no quants
+        moves = picks_bo.mapped('move_lines')
+        for m in moves:
+            self.assertFalse(m.quant_ids)
+
+        # check done ship with a positive quant on Customers
+        # this quant is the same as in related Picking
+        # quants being destroyed if nullified
+        moves = ship.move_lines
+        for m in moves:
+            self.assertEqual(len(m.quant_ids), 1)
+            for q in m.quant_ids:
+                if q.qty > 0:
+                    self.assertEqual(q.location_id, loc_customer)
+
+        # check ship back order, no quants
+        moves = ship_bo.move_lines
+        for m in moves:
+            self.assertFalse(m.quant_ids)
