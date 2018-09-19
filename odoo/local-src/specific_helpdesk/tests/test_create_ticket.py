@@ -2,40 +2,41 @@
 # Copyright 2018 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo.tests.common import TransactionCase, at_install, post_install
+from odoo.tests.common import SavepointCase
 
 
-class TestCreateTicketWizard(TransactionCase):
+class TestCreateTicketWizard(SavepointCase):
+    at_install = False
+    post_install = True
 
-    def setUp(self):
-        super(TestCreateTicketWizard, self).setUp()
-        self.reason_defect = self.env.ref('specific_helpdesk.product_defect')
-        self.partner1 = self.env['res.partner'].create({
+    @classmethod
+    def setUpClass(cls):
+        super(TestCreateTicketWizard, cls).setUpClass()
+        cls.reason_defect = cls.env.ref('specific_helpdesk.product_defect')
+        cls.partner1 = cls.env['res.partner'].create({
             'name': 'Partner One',
             'ref': '99829422054',
             })
-        self.p1 = self.env['product.product'].create({
+        cls.p1 = cls.env['product.product'].create({
              'name': 'Unittest P1',
-             'uom_id': self.ref('product.product_uom_unit'),
+             'uom_id': cls.env.ref('product.product_uom_unit').id,
              'type': 'consu',
              })
-        self.so1 = self.env['sale.order'].create({
-             'partner_id': self.partner1.id,
+        cls.so1 = cls.env['sale.order'].create({
+             'partner_id': cls.partner1.id,
              'order_line': [
                  (0, 0, {
-                     'name': self.p1.name,
-                     'product_id': self.p1.id,
-                     'product_uom': self.ref('product.product_uom_unit'),
+                     'name': cls.p1.name,
+                     'product_id': cls.p1.id,
+                     'product_uom': cls.env.ref('product.product_uom_unit').id,
                      'product_uom_qty': 1,
                      'price_unit': 50,
                  }),
              ]
          })
-        self.so1.action_confirm()
-        self.picking = self.so1.picking_ids[0]
+        cls.so1.action_confirm()
+        cls.picking = cls.so1.picking_ids[0]
 
-    @at_install(False)
-    @post_install(True)
     def test_get_wizard_to_create_ticket(self):
         """Test we get the wizard to create tickets."""
         r = self.env['create.helpdesk.ticket'].create({
@@ -44,8 +45,6 @@ class TestCreateTicketWizard(TransactionCase):
         w = self.env['helpdesk.ticket'].new_one(r)
         self.assertEqual(w['res_id'], r.id)
 
-    @at_install(False)
-    @post_install(True)
     def test_create_ticket_for_stock_picking(self):
         """Create a new ticket for a picking with the wizard model"""
         r = self.env['create.helpdesk.ticket'].create({

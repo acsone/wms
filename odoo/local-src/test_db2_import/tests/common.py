@@ -365,6 +365,10 @@ class DB2ImportTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(DB2ImportTestCase, cls).setUpClass()
+
+        cls.env = cls.env(context=dict(cls.env.context,
+                          tracking_disable=True))
+
         cls.create_db2_tables()
         cls.insert_db2_records()
         cls.load_uom()

@@ -2,115 +2,111 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, post_install, at_install
+from odoo.tests.common import SavepointCase, post_install, at_install
 
 import logging
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPricelistDiscount(TransactionCase):
+class TestPricelistDiscount(SavepointCase):
 
-    def setUp(self):
-        super(TestPricelistDiscount, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestPricelistDiscount, cls).setUpClass()
 
-        self.tax = self.env["account.tax"].create({
+        cls.tax = cls.env["account.tax"].create({
             'name': 'Unittest tax',
             'price_include': False,
             'amount_type': 'percent',
             'amount': '0',
         })
 
-        self.product_category = self.env['product.category'].create({
-            'name': 'Unittest category'
-        })
+        cls.category = cls.env.ref('product.product_category_5')
 
-        self.supplier = self.env['res.partner'].create({
-            'name': 'Unittest supplier',
-            'ref': '749248',
-        })
+        cls.supplier = cls.env.ref('base.res_partner_12')
 
-        self.supplierinfo1 = self.env['product.supplierinfo'].create({
-            'name': self.supplier.id,
+        cls.supplierinfo1 = cls.env['product.supplierinfo'].create({
+            'name': cls.supplier.id,
             'discount_sale': 10,
         })
 
-        self.p1 = self.env['product.product'].create({
+        cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
-            'taxes_id': [(6, False, [self.tax.id])],
-            'seller_ids': [(6, 0, [self.supplierinfo1.id])],
+            'taxes_id': [(6, False, [cls.tax.id])],
+            'seller_ids': [(6, 0, [cls.supplierinfo1.id])],
         })
 
-        self.supplierinfo2 = self.env['product.supplierinfo'].create({
-            'name': self.supplier.id,
+        cls.supplierinfo2 = cls.env['product.supplierinfo'].create({
+            'name': cls.supplier.id,
             'discount_sale': 10,
         })
 
-        self.p2 = self.env['product.product'].create({
+        cls.p2 = cls.env['product.product'].create({
             'name': 'Unittest P2',
-            'categ_id': self.product_category.id,
-            'taxes_id': [(6, False, [self.tax.id])],
-            'seller_ids': [(6, 0, [self.supplierinfo2.id])],
+            'categ_id': cls.category.id,
+            'taxes_id': [(6, False, [cls.tax.id])],
+            'seller_ids': [(6, 0, [cls.supplierinfo2.id])],
         })
 
-        self.main_pricelist = self.env['product.pricelist'].create({
+        cls.main_pricelist = cls.env['product.pricelist'].create({
             'name': 'Unittest Pricelist',
             'item_ids': [
                 (0, False, {
                     'applied_on': '0_product_variant',
-                    'product_id': self.p1.id,
+                    'product_id': cls.p1.id,
                     'compute_price': 'fixed',
                     'fixed_price': 100,
                 }),
                 (0, False, {
                     'applied_on': '0_product_variant',
-                    'product_id': self.p2.id,
+                    'product_id': cls.p2.id,
                     'compute_price': 'fixed',
                     'fixed_price': 200,
                 })
             ],
         })
 
-        self.discount_pricelist_id = self.env['product.pricelist'].create({
+        cls.discount_pricelist_id = cls.env['product.pricelist'].create({
             'name': 'Unittest Discount Pricelist',
             'item_ids': [
                 (0, False, {
                     'applied_on': '2_product_category',
-                    'categ_id': self.product_category.id,
+                    'categ_id': cls.category.id,
                     'compute_price': 'percentage',
                     'percent_price': 5,
                 })
             ],
         })
 
-        self.partner = self.env['res.partner'].create({
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Unittest partner',
             'ref': '8893294',
-            'property_product_pricelist': self.main_pricelist.id,
+            'property_product_pricelist': cls.main_pricelist.id,
             'supplier_promotion_sale_allowed': True,
-            'discount_pricelist_id': self.discount_pricelist_id.id,
+            'discount_pricelist_id': cls.discount_pricelist_id.id,
         })
 
-        self.sale = self.env['sale.order'].create({
-            'partner_id': self.partner.id,
+        cls.sale = cls.env['sale.order'].create({
+            'partner_id': cls.partner.id,
             'order_line': [
                 (0, False, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
+                    'name': cls.p1.name,
+                    'product_id': cls.p1.id,
                     'product_uom_qty': 1,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                 }),
                 (0, False, {
-                    'name': self.p2.name,
-                    'product_id': self.p2.id,
+                    'name': cls.p2.name,
+                    'product_id': cls.p2.id,
                     'product_uom_qty': 2,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                 }),
             ]
         })
-        self.sale.onchange_partner_id_discount_pricelist()
-        self.sol_p1 = self.sale.order_line[0]
-        self.sol_p2 = self.sale.order_line[1]
+        cls.sale.onchange_partner_id_discount_pricelist()
+        cls.sol_p1 = cls.sale.order_line[0]
+        cls.sol_p2 = cls.sale.order_line[1]
 
     @post_install(True)
     @at_install(False)

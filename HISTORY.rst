@@ -20,6 +20,8 @@ Unreleased
 
 **Build**
 
+* Improve unit test speed by using SavepointCase instead of TransactionCase
+
 **Documentation**
 
 

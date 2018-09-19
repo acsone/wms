@@ -3,30 +3,31 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests.common import SavepointCase
 
 
-class TestPurchaseOrder(common.TransactionCase):
+class TestPurchaseOrder(SavepointCase):
     post_install = True
     at_install = False
 
-    def setUp(self):
-        super(TestPurchaseOrder, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestPurchaseOrder, cls).setUpClass()
 
         # Create partner
-        self.partner = self.env['res.partner'].create({
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Hello World',
             'ref': '85789284',
         })
 
-        self.supplier = self.env['res.partner'].create({
+        cls.supplier = cls.env['res.partner'].create({
             'name': 'Supplier',
             'ref': '829562231',
             'supplier': True,
         })
 
         # Create the main product
-        self.main_product = self.env['product.product'].create({
+        cls.main_product = cls.env['product.product'].create({
             'name': 'Main product',
             'default_code': '1234567',
             'tracking': 'lot',
@@ -34,7 +35,7 @@ class TestPurchaseOrder(common.TransactionCase):
             'type': 'product',
         })
 
-        self.additional_product = self.env['product.product'].create({
+        cls.additional_product = cls.env['product.product'].create({
             'name': 'Second product',
             'default_code': '987654321',
             'tracking': 'none',
@@ -43,13 +44,13 @@ class TestPurchaseOrder(common.TransactionCase):
         })
 
         # Create the purchase_order
-        self.purchase_order = self.env['purchase.order'].create({
-            'partner_id': self.partner.id,
+        cls.purchase_order = cls.env['purchase.order'].create({
+            'partner_id': cls.partner.id,
             'order_line': [
                 (0, 0, {
-                    'name': self.main_product.name,
-                    'product_id': self.main_product.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'name': cls.main_product.name,
+                    'product_id': cls.main_product.id,
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                     'product_qty': 12,
                     'sequence': 1,
                     'price_unit_base': 100,

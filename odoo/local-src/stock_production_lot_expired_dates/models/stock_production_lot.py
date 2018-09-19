@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Julien Coux (Camptocamp)
+# Copyright 2016-2018 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
@@ -22,10 +22,9 @@ class StockProductionLot(models.Model):
     @api.multi
     def _apply_onchange_interval_date(self, from_field):
         self.ensure_one()
-        settings_model = self.env['stock.config.settings']
-        base_date = settings_model.get_default_production_lot_base_date(None)[
-            'production_lot_base_date'
-        ]
+        base_date = self.env['ir.config_parameter'].get_param(
+            'stock_production_lot_expired_dates.production_lot_base_date',
+        )
         if self.product_id and base_date == from_field:
             if getattr(self, from_field + '_date'):
                 to_fields = ['alert', 'life', 'removal', 'use']

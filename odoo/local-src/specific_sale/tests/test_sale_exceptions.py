@@ -2,85 +2,86 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestSaleOrderException(TransactionCase):
+class TestSaleOrderException(SavepointCase):
 
-    def setUp(self):
-        super(TestSaleOrderException, self).setUp()
-        self.partner = self.env.ref('base.res_partner_1')
-        self.partner.ref = '888534954'
-        self.prod1 = self.env.ref('product.product_product_1')
-        self.prod1.categ_id = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super(TestSaleOrderException, cls).setUpClass()
+        cls.partner = cls.env.ref('base.res_partner_1')
+        cls.partner.ref = '888534954'
+        cls.prod1 = cls.env.ref('product.product_product_1')
+        cls.prod1.categ_id = cls.env.ref(
             'specific_data.product_categ_materiel')
-        self.prod_food = self.env['product.product'].create({
+        cls.prod_food = cls.env['product.product'].create({
             'name': 'I am some food, yam',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_ali_divers').id
         })
-        self.prod_stup = self.env['product.product'].create({
+        cls.prod_stup = cls.env['product.product'].create({
             'name': 'I am a stupefiant',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_stupefiant').id
         })
-        self.prod_matos = self.env['product.product'].create({
+        cls.prod_matos = cls.env['product.product'].create({
             'name': 'I am some gear',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_mat_instrumentation').id
         })
-        self.prod_medoc_pharma = self.env['product.product'].create({
+        cls.prod_medoc_pharma = cls.env['product.product'].create({
             'name': 'I am  a medoc pharmacy',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_parapharmacie').id
         })
-        self.prod_medoc_human = self.env['product.product'].create({
+        cls.prod_medoc_human = cls.env['product.product'].create({
             'name': 'I am a human medoc',
-            'categ_id': self.env.ref('specific_data.product_categ_humain').id
+            'categ_id': cls.env.ref('specific_data.product_categ_humain').id
         })
-        self.prod_medoc_vet_belge = self.env['product.product'].create({
+        cls.prod_medoc_vet_belge = cls.env['product.product'].create({
             'name': 'I am a beligum veterinarian product',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_vet_belges').id
         })
-        self.prod_medoc_belge_only = self.env['product.product'].create({
+        cls.prod_medoc_belge_only = cls.env['product.product'].create({
             'name': 'I am a beligum medoc only',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_parapharmacie').id,
             'belgium_only': True,
         })
-        self.prod_vet_only = self.env['product.product'].create({
+        cls.prod_vet_only = cls.env['product.product'].create({
             'name': 'I am for veterinary only',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_ali_divers').id,
             'veterinary_only': True,
         })
-        self.prod_psycho_III = self.env['product.product'].create({
+        cls.prod_psycho_III = cls.env['product.product'].create({
             'name': 'I am a medoc belge Psychotropes III',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_psychotropes_25').id,
         })
-        self.prod_medoc = self.env['product.product'].create({
+        cls.prod_medoc = cls.env['product.product'].create({
             'name': 'Base medicine category',
-            'categ_id': self.env.ref(
+            'categ_id': cls.env.ref(
                 'specific_data.product_categ_medoc').id,
         })
-        self.delivery = self.env['delivery.carrier'].search(
+        cls.delivery = cls.env['delivery.carrier'].search(
                 [('free_if_more_than', '=', False)], limit=1)
-        self.so1 = self.env['sale.order'].create({
+        cls.so1 = cls.env['sale.order'].create({
             'esb_ref': 'ref_123',
-            'partner_id': self.partner.id,
+            'partner_id': cls.partner.id,
             'date_order': '2018-01-29',
             'sale_channel': 'fax',
-            'carrier_id': self.delivery.id,
+            'carrier_id': cls.delivery.id,
             'client_order_ref': 'whatever the client want',
             'delivery_price': 23.5,
             'suite_name': '0123434234',
             'order_line': [
                 (0, 0, {
                     'sequence': 1,
-                    'name': self.prod1.name,
-                    'product_id': self.prod1.id,
+                    'name': cls.prod1.name,
+                    'product_id': cls.prod1.id,
                     'product_uom_qty': 7,
                 })],
         })

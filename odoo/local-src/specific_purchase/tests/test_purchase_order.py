@@ -7,6 +7,13 @@ from odoo import fields
 
 class TestPurchaseOrder(common.TransactionCase):
 
+    def setUp(self):
+        super(TestPurchaseOrder, self).setUp()
+
+        self.env = self.env(context=dict(self.env.context,
+                            tracking_disable=True))
+        self.supplier = self.env.ref('base.res_partner_12')
+
     def test_get_next_scheduled_date(self):
         """
         Calendar:
@@ -37,12 +44,8 @@ class TestPurchaseOrder(common.TransactionCase):
 
         pol = self.env['purchase.order.line']
 
-        partner = self.env['res.partner'].create({
-            'name': 'Partner Test',
-            'ref': '9432456677734',
-        })
         seller = self.env['product.supplierinfo'].create({
-            'name': partner.id,
+            'name': self.supplier.id,
             'min_qty': 0,
             'price': 100,
             'delay': 3
@@ -75,17 +78,12 @@ class TestPurchaseOrder(common.TransactionCase):
         :return:
         """
 
-        supplier = self.env['res.partner'].create({
-            'name': 'Supplier',
-            'supplier': True,
-            'ref': '9690234',
-        })
         product = self.env['product.product'].create({
             'name': 'Product 1',
         })
 
         po = self.env['purchase.order'].create({
-            'partner_id': supplier.id,
+            'partner_id': self.supplier.id,
             'date_order': fields.Datetime.now(),
             'date_planned': fields.Datetime.now(),
         })
@@ -131,14 +129,9 @@ class TestPurchaseOrder(common.TransactionCase):
         self.assertEquals(po.amount_total, 195)
 
     def test_promotion_supplier(self):
-        supplier = self.env['res.partner'].create({
-            'name': 'Supplier',
-            'supplier': True,
-            'ref': '5802034',
-        })
 
         supplierinfo = self.env['product.supplierinfo'].create({
-            'name': supplier.id,
+            'name': self.supplier.id,
             'discount_purchase': 10,
         })
 
@@ -147,7 +140,7 @@ class TestPurchaseOrder(common.TransactionCase):
         })
 
         purchase = self.env['purchase.order'].create({
-            'partner_id': supplier.id,
+            'partner_id': self.supplier.id,
             'order_line': [
                 (0, False, {
                     'name': product.name,

@@ -2,94 +2,95 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockDeliveryNote(TransactionCase):
+class TestStockDeliveryNote(SavepointCase):
 
-    def setUp(self):
-        super(TestStockDeliveryNote, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockDeliveryNote, cls).setUpClass()
 
         # Create a sale tax
-        self.tax = self.env['account.tax'].create({
-            'tax_group_id': self.env.ref('account.tax_group_taxes').id,
+        cls.tax = cls.env['account.tax'].create({
+            'tax_group_id': cls.env.ref('account.tax_group_taxes').id,
             'amount': 6,
             'name': 'test_tax',
         })
         # Create a couple of products
-        self.p1 = self.env['product.product'].create({
+        cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
             'default_code': '5173360',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'consu',
         })
-        self.p2 = self.env['product.product'].create({
+        cls.p2 = cls.env['product.product'].create({
             'name': 'Unittest P2',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
-        self.p3 = self.env['product.product'].create({
+        cls.p3 = cls.env['product.product'].create({
             'name': 'Unittest P3',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
         # Add some stock for p1 and p2
-        inventory = self.env['stock.inventory'].create({
+        inventory = cls.env['stock.inventory'].create({
             'name': 'Test',
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': cls.env.ref('stock.stock_location_stock').id,
             'filter': 'partial'})
         inventory.prepare_inventory()
-        self.env['stock.inventory.line'].create({
+        cls.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
-            'product_id': self.p1.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_id': cls.p1.id,
+            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
             'product_qty': 100,
-            'location_id': self.env.ref('stock.stock_location_stock').id
+            'location_id': cls.env.ref('stock.stock_location_stock').id
             })
         inventory.action_done()
-        inventory = self.env['stock.inventory'].create({
+        inventory = cls.env['stock.inventory'].create({
             'name': 'Test',
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': cls.env.ref('stock.stock_location_stock').id,
             'filter': 'partial'})
         inventory.prepare_inventory()
-        self.env['stock.inventory.line'].create({
+        cls.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
-            'product_id': self.p2.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_id': cls.p2.id,
+            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
             'product_qty': 100,
-            'location_id': self.env.ref('stock.stock_location_stock').id
+            'location_id': cls.env.ref('stock.stock_location_stock').id
             })
         inventory.action_done()
         # Create the customer
-        self.partner = self.env['res.partner'].create({
-            'title': self.env.ref('base.res_partner_title_prof').id,
+        cls.partner = cls.env['res.partner'].create({
+            'title': cls.env.ref('base.res_partner_title_prof').id,
             'name':  'HOENS OLIVIERé',
             'email': 'tester@pytest.com',
             'ref': '123456789',
             'street':  'Rue Polisart 2 A',
             'zip': '5300',
             'city': 'ANDENNE',
-            'country_id': self.env.ref('base.be').id,
+            'country_id': cls.env.ref('base.be').id,
         })
-        self.destination = self.env.ref('stock.stock_location_customers')
-        self.so = self.env['sale.order'].create({
-            'partner_id': self.partner.id,
+        cls.destination = cls.env.ref('stock.stock_location_customers')
+        cls.so = cls.env['sale.order'].create({
+            'partner_id': cls.partner.id,
             'suite_name': '123454321',
             'order_line': [
                 (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'name': cls.p1.name,
+                    'product_id': cls.p1.id,
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                     'product_uom_qty': 10,
                     'price_unit': 50,
-                    'tax_id': [(4, self.tax.id, False)],
+                    'tax_id': [(4, cls.tax.id, False)],
                 }),
             ]
         })
-        self.so.action_confirm()
-        self.picking = self.so.picking_ids
-        self.picking.action_assign()
-        pack_operation = self.picking.pack_operation_product_ids
+        cls.so.action_confirm()
+        cls.picking = cls.so.picking_ids
+        cls.picking.action_assign()
+        pack_operation = cls.picking.pack_operation_product_ids
         pack_operation.write({
             'pack_lot_ids': [
                 (0, 0, {
@@ -100,6 +101,11 @@ class TestStockDeliveryNote(TransactionCase):
             ],
             'qty_done': 10,
         })
+
+    def setUp(self):
+        super(TestStockDeliveryNote, self).setUp()
+        # do new transfer must be done in setUp as
+        # setUpClass doesn't set odoo.tools.config['test_enable']
         self.picking.do_new_transfer()
 
     def test_delivery_note_filename(self):

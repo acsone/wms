@@ -2,144 +2,148 @@
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestShippingCosts(TransactionCase):
+class TestShippingCosts(SavepointCase):
 
-    def setUp(self):
-        super(TestShippingCosts, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestShippingCosts, cls).setUpClass()
+
+        cls.env = cls.env(context=dict(cls.env.context,
+                          tracking_disable=True))
 
         # Create the product used for "shipping alcyon fees" and is xmlid
-        self.product_shipping_cost = self.env['product.product'].create({
+        cls.product_shipping_cost = cls.env['product.product'].create({
             'name': 'Alcyon shipping cost test'
         })
         # Create the delivery carrier for Alcyon
-        self.fee = 8.5
-        self.delivery_method = self.env['delivery.carrier'].create({
+        cls.fee = 8.5
+        cls.delivery_method = cls.env['delivery.carrier'].create({
             'delivery_type': 'fixed',
-            'fixed_price': self.fee,
+            'fixed_price': cls.fee,
             'free_if_more_than': True,
             'amount': 125,
             'use_specific_cost_calculation': True,
             'name': 'Alcyon',
         })
-        self.fee_2 = 20
-        self.delivery_method_2 = self.env['delivery.carrier'].create({
+        cls.fee_2 = 20
+        cls.delivery_method_2 = cls.env['delivery.carrier'].create({
             'delivery_type': 'fixed',
-            'fixed_price': self.fee_2,
+            'fixed_price': cls.fee_2,
             'free_if_more_than': True,
             'amount': 200,
             'use_specific_cost_calculation': True,
             'name': 'Alcyon 2',
         })
 
-        self.env['ir.model.data'].create({
+        cls.env['ir.model.data'].create({
             'name': 'deliver_carrier_alcyon',
             'module': '__setup__',
             'model': 'delivery.carrier',
-            'res_id': self.delivery_method.id,
+            'res_id': cls.delivery_method.id,
         })
-        self.env['ir.model.data'].create({
+        cls.env['ir.model.data'].create({
             'name': 'deliver_carrier_alcyon_product_product',
             'module': '__setup__',
             'model': 'product.product',
-            'res_id': self.product_shipping_cost.id,
+            'res_id': cls.product_shipping_cost.id,
         })
         # Lets create 2 customers
-        self.partner1 = self.env['res.partner'].create({
+        cls.partner1 = cls.env['res.partner'].create({
             'name': 'Partner One',
             'ref': '89328492342',
             'help_with_fee': True,
         })
-        self.partner2 = self.env['res.partner'].create({
+        cls.partner2 = cls.env['res.partner'].create({
             'name': 'Partner Two',
             'ref': '498298349283',
             'help_with_fee': True,
         })
         # Create a couple of products
-        self.p1 = self.env['product.product'].create({
+        cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'consu',
         })
-        self.p2 = self.env['product.product'].create({
+        cls.p2 = cls.env['product.product'].create({
             'name': 'Unittest P2',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
-        self.p3 = self.env['product.product'].create({
+        cls.p3 = cls.env['product.product'].create({
             'name': 'Unittest P3',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
         # Add some stock for p1 and p2
-        inventory = self.env['stock.inventory'].create({
+        inventory = cls.env['stock.inventory'].create({
             'name': 'Test',
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': cls.env.ref('stock.stock_location_stock').id,
             'filter': 'partial'})
         inventory.prepare_inventory()
-        self.env['stock.inventory.line'].create({
+        cls.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
-            'product_id': self.p1.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_id': cls.p1.id,
+            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
             'product_qty': 100,
-            'location_id': self.env.ref('stock.stock_location_stock').id
+            'location_id': cls.env.ref('stock.stock_location_stock').id
             })
         inventory.action_done()
-        inventory = self.env['stock.inventory'].create({
+        inventory = cls.env['stock.inventory'].create({
             'name': 'Test',
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': cls.env.ref('stock.stock_location_stock').id,
             'filter': 'partial'})
         inventory.prepare_inventory()
-        self.env['stock.inventory.line'].create({
+        cls.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
-            'product_id': self.p2.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_id': cls.p2.id,
+            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
             'product_qty': 100,
-            'location_id': self.env.ref('stock.stock_location_stock').id
+            'location_id': cls.env.ref('stock.stock_location_stock').id
             })
         inventory.action_done()
         # Create a sale order 1 for partner 1
-        self.so1 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
+        cls.so1 = cls.env['sale.order'].create({
+            'partner_id': cls.partner1.id,
+            'carrier_id': cls.delivery_method.id,
             'order_line': [
                 (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'name': cls.p1.name,
+                    'product_id': cls.p1.id,
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                     'product_uom_qty': 1,
                     'price_unit': 50,
                 }),
             ]
         })
         # Create sale order 2 for partner 1
-        self.so2 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
+        cls.so2 = cls.env['sale.order'].create({
+            'partner_id': cls.partner1.id,
+            'carrier_id': cls.delivery_method.id,
             'order_line': [
                 (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
+                    'name': cls.p1.name,
+                    'product_id': cls.p1.id,
+                    'product_uom': cls.env.ref('product.product_uom_unit').id,
                     'product_uom_qty': 1,
                     'price_unit': 10,
                 }),
             ]
         })
         # Finally create 2 delivery round
-        self.delivery_template1 = self.env['round.template'].create({
+        cls.delivery_template1 = cls.env['round.template'].create({
             'name': 'Unittest delivery template',
         })
-        self.dr1 = self.env['round.instance'].create({
-            'template_id': self.delivery_template1.id,
+        cls.dr1 = cls.env['round.instance'].create({
+            'template_id': cls.delivery_template1.id,
         })
-        self.delivery_template2 = self.env['round.template'].create({
+        cls.delivery_template2 = cls.env['round.template'].create({
             'name': 'Unittest delivery template',
         })
-        self.dr2 = self.env['round.instance'].create({
-            'template_id': self.delivery_template2.id,
+        cls.dr2 = cls.env['round.instance'].create({
+            'template_id': cls.delivery_template2.id,
         })
 
     def get_shipping_cost(self, so):

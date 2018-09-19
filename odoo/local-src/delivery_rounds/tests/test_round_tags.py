@@ -5,63 +5,64 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestRoundTags(TransactionCase):
+class TestRoundTags(SavepointCase):
     post_install = True
     at_install = False
 
-    def setUp(self):
-        super(TestRoundTags, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestRoundTags, cls).setUpClass()
 
         # Set all round instance to done to be sure that
         # there are no other active instance
-        self.env['round.instance'].search([]).write({
+        cls.env['round.instance'].search([]).write({
             'state': 'done',
         })
 
-        round_tag = self.env['round.tag']
-        self.tag_monday = round_tag.create({
+        round_tag = cls.env['round.tag']
+        cls.tag_monday = round_tag.create({
             'name': 'Monday'
         })
-        self.tag_friday = round_tag.create({
+        cls.tag_friday = round_tag.create({
             'name': 'Friday'
         })
 
-        self.partner = self.env['res.partner'].create({
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Partner test',
             'ref': '00099876743567',
         })
-        self.itinerary = self.env['round.itinerary'].create({
+        cls.itinerary = cls.env['round.itinerary'].create({
             'name': 'Itinerary test',
             'code': 'test',
             'sequence': 1,
         })
-        self.position = self.env['round.itinerary.position'].create({
-            'itinerary_id': self.itinerary.id,
+        cls.position = cls.env['round.itinerary.position'].create({
+            'itinerary_id': cls.itinerary.id,
             'sequence': 1,
-            'partner_id': self.partner.id,
+            'partner_id': cls.partner.id,
         })
-        self.template = self.env['round.template'].create({
+        cls.template = cls.env['round.template'].create({
             'code': 'TEST',
             'name': 'Test template',
-            'itinerary_ids': [(6, 0, [self.itinerary.id])]
+            'itinerary_ids': [(6, 0, [cls.itinerary.id])]
         })
 
         # delivery rounds shouldn't overlap on the next day
         # so to have consistent tests we will have round instances
         # at 1 hour and 5 hours from 7 hour in the morning
-        self.virtual_now = datetime.now().replace(hour=7)
-        picking_planned = self.virtual_now + relativedelta(hours=3)
-        self.instance = self.env['round.instance'].create({
-            'template_id': self.template.id,
+        cls.virtual_now = datetime.now().replace(hour=7)
+        picking_planned = cls.virtual_now + relativedelta(hours=3)
+        cls.instance = cls.env['round.instance'].create({
+            'template_id': cls.template.id,
             'date': fields.Date.to_string(picking_planned),
             'time_picking_planned': picking_planned.hour,
             'time_leave_planned': 10,
             'name': 'Instance test',
             'state': 'draft',
-            'itinerary_ids': [(6, 0, [self.itinerary.id])]
+            'itinerary_ids': [(6, 0, [cls.itinerary.id])]
         })
 
     def test_01_find(self):

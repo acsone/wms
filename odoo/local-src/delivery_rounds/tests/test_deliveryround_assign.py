@@ -2,63 +2,63 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, at_install, post_install
+from odoo.tests.common import SavepointCase
 
 
-class TestDeliveryRoundAssign(TransactionCase):
+class TestDeliveryRoundAssign(SavepointCase):
+    post_install = True
+    at_install = False
 
-    def setUp(self):
-        super(TestDeliveryRoundAssign, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestDeliveryRoundAssign, cls).setUpClass()
 
-        self.partner = self.env['res.partner'].create({
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Unittest partner',
             'ref': '12344566777878',
         })
 
-        self.p1 = self.env['product.product'].create({
+        cls.p1 = cls.env['product.product'].create({
             'name': 'Unittest P1',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
-        self.p2 = self.env['product.product'].create({
+        cls.p2 = cls.env['product.product'].create({
             'name': 'Unittest P2',
-            'uom_id': self.ref('product.product_uom_unit'),
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'type': 'product',
         })
 
-        inventory = self.env['stock.inventory'].create({
+        inventory = cls.env['stock.inventory'].create({
             'name': 'Test',
-            'product_id': self.p1.id,
+            'product_id': cls.p1.id,
             'filter': 'product'})
         inventory.prepare_inventory()
-        self.assertFalse(inventory.line_ids,
-                         "Inventory line should not created.")
-        self.env['stock.inventory.line'].create({
+        assert not inventory.line_ids, "Inventory line should not created."
+        cls.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
-            'product_id': self.p1.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            'product_id': cls.p1.id,
+            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
             'product_qty': 100,
-            'location_id': self.env.ref('stock.stock_location_stock').id})
+            'location_id': cls.env.ref('stock.stock_location_stock').id})
         inventory.action_done()
 
-        self.delivery_template = self.env['round.template'].create({
+        cls.delivery_template = cls.env['round.template'].create({
             'name': 'Unittest delivery template',
         })
 
-        self.delivery_round_1 = self.env['round.instance'].create({
-            'template_id': self.delivery_template.id,
+        cls.delivery_round_1 = cls.env['round.instance'].create({
+            'template_id': cls.delivery_template.id,
             'date': '2017-01-01',
         })
 
         # pick/ship
-        pick = self.env['stock.picking.type'].search([('name', '=', 'Pick')])
+        pick = cls.env['stock.picking.type'].search([('name', '=', 'Pick')])
         if not pick:
-            pick = self.env['stock.picking.type'].search([
+            pick = cls.env['stock.picking.type'].search([
                 ('name', '=', 'Delivery Orders')])
         pick.write({'subcode': 'PICK'})
 
-    @post_install(True)
-    @at_install(False)
     def test_deliveryround_carrier(self):
         delivery_template = self.env['round.template'].create({
             'name': 'Unittest delivery template',
@@ -96,8 +96,6 @@ class TestDeliveryRoundAssign(TransactionCase):
                 delivery_round.id
             )
 
-    @post_install(True)
-    @at_install(False)
     def test_force_deliveryround_partially_available(self):
         self.assertEqual(self.p1.qty_available, 100)
         self.assertEqual(self.p2.qty_available, 0)
@@ -142,8 +140,6 @@ class TestDeliveryRoundAssign(TransactionCase):
 
         return sale
 
-    @post_install(True)
-    @at_install(False)
     def test_reassign_on_reception(self):
         sale = self.test_force_deliveryround_partially_available()
         pick = sale.picking_ids.filtered(

@@ -4,13 +4,13 @@
 from datetime import date
 
 from odoo import fields
-from odoo.tests.common import TransactionCase, post_install, at_install
+from odoo.tests.common import TransactionCase
 
 
 class TestStockInventory(TransactionCase):
+    post_install = True
+    at_install = False
 
-    @post_install(True)
-    @at_install(False)
     def test_date_last_inventory(self):
         """
         Check if the date of the last inventory
@@ -62,8 +62,6 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(product.date_last_inventory,
                          current_date_last_inventory)
 
-    @post_install(True)
-    @at_install(False)
     def test_create_daily_inventory(self):
         """
         Test if the method test_create_daily_inventory skip all weekends days
@@ -92,8 +90,6 @@ class TestStockInventory(TransactionCase):
         )
         self.assertIsNone(inventory)
 
-    @post_install(True)
-    @at_install(False)
     def test_compute_inventory_periods(self):
         company = self.env.user.company_id
         company.write({
@@ -140,8 +136,6 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(other_products['delay'], 12)
         self.assertEqual(other_products['nbr_inventory_per_year'], 1)
 
-    @post_install(True)
-    @at_install(False)
     def test_get_products_daily_inventory(self):
         """
         To test the method get_products_daily_inventory we need to create a
