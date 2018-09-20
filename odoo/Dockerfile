@@ -40,6 +40,8 @@ RUN dpkg -i /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
     && ln -s /opt/ibm/iSeriesAccess/lib64/libcwbcore.so /usr/lib/libcwbcore.so \
     && mkdir /home/odoo
 COPY ./.odbc.ini /home/odoo/.odbc.ini
+# Place coveragerc where coverage will be launched
+COPY ./.coveragerc /opt/.coveragerc
 
 COPY ./bin/importer.sh bin/
 COPY ./bin/install_cloud_platform.sh bin/
