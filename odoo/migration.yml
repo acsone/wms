@@ -1,4 +1,4 @@
-1migration:
+migration:
   options:
     install_command: odoo
   versions:
