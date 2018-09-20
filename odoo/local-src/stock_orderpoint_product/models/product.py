@@ -69,7 +69,7 @@ class ProductTemplate(models.Model):
                 lambda r: r.active)
             ops.write({'active': False})
             # recompute value of `nbr_reordering_rules`
-            self.invalidate_cache()
+            self.invalidate_cache(['nbr_reordering_rules'])
         return super(ProductTemplate, self).write(values)
 
 
