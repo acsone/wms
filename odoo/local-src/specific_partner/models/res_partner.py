@@ -92,7 +92,7 @@ class ResPartner(models.Model):
         This changes the default behavior of the module base_partner_sequence.
         """
         res = super(ResPartner, self)._needsRef(vals)
-        if vals.get('parent_id'):
+        if vals and vals.get('parent_id'):
             return True
         return res
 
