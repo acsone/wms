@@ -15,6 +15,7 @@ Unreleased
 * ALCYN-1445: Add unittests for the API NewPharma
 * ALCYN-1490: Invoice report (pdf): display suite name and customer if different from invoice address
 * ALCYN-107: Adapt chart of accounts (remove useless accounts, rename 3 accounts and create 12 new accounts)
+* ALCYN-153: Always display the field Opt-out (opt_out) on the view res.partner
 
 **Bugfixes**
 
