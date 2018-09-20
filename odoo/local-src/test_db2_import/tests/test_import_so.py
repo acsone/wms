@@ -1063,9 +1063,11 @@ class TestImportSO(DB2ImportTestCase):
         introduced by module stock_groupbypartner
 
         Check don't have a same picking linked to 2 different sale orders.
+        (but for the open shipping backorder)
 
         """
         self.importer_table_so.importer_id.mode = 'final_update'
+        ref = self.env.ref
 
         suite1 = 2844358
         suite2 = 2844359  # fake additional order by same customer
@@ -1098,9 +1100,87 @@ class TestImportSO(DB2ImportTestCase):
         # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so2.picking_ids), 4)
 
-        # check that no picking is linked to both sale order
-        # intersection must be empty
-        self.assertFalse(self.so1.picking_ids & self.so2.picking_ids)
+        # check that total number is missing one picking
+        # union must result with 8 picking
+        # 4 + 3 + 1 in common
+        pick_union = self.so1.picking_ids | self.so2.picking_ids
+        self.assertEqual(len(pick_union), 8)
+
+        # check that exactly one picking is linked to both sale order
+        # intersection must result with one picking
+        pick_intersect = self.so1.picking_ids & self.so2.picking_ids
+        self.assertEqual(len(pick_intersect), 1)
+        self.assertEqual(pick_intersect.state, 'waiting')
+
+        loc_customer = ref('stock.stock_location_customers')
+        self.assertEqual(pick_intersect.location_dest_id, loc_customer)
+
+    @freeze_time("2018-02-01")
+    def test_import_so_group_shipping(self):
+        """Import SO 2833868 twice with different name.
+
+        Open shippings must grouped in one.
+
+        Pretty much the same test as
+        test_picking_nogrouping_by_partner with other data
+
+        """
+        ref = self.env.ref
+        cursor = self.env.cr
+
+        suite1 = 2833868
+        suite2 = 11111111  # fake duplicate of 2833868
+
+        db2_id = self.get_row_from_suite(suite1)
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+
+        query = "UPDATE db2_pentcdcl SET eccsui = %s WHERE eccsui = %s"
+        cursor.execute(query, (suite2, suite1))
+        query = "UPDATE db2_pdetcdcl SET dccsui = %s WHERE dccsui = %s"
+        cursor.execute(query, (suite2, suite1))
+        db2_id = self.get_row_from_suite(suite2)
+        DB2MapperSaleOrder.process(
+            self.importer_table_so, self.table_name, db2_id)
+
+        self.so1 = self.env['sale.order'].search([('name', '=', str(suite1))])
+        self.so2 = self.env['sale.order'].search([('name', '=', str(suite2))])
+
+        # 7 pickings
+        # Aliment -> Output state: done
+        # Frigo -> Output state: done
+        # Mat -> Output state: done
+        # Med -> Output state: done
+        # Med -> Output state: confirmed (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: waiting (Backorder) (same as for 11111111)
+        self.assertEqual(len(self.so1.picking_ids), 7)
+
+        # 7 pickings
+        # Aliment -> Output state: done
+        # Frigo -> Output state: done
+        # Mat -> Output state: done
+        # Med -> Output state: done
+        # Med -> Output state: confirmed (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: waiting (Backorder) (same as for 2833868)
+        self.assertEqual(len(self.so2.picking_ids), 7)
+
+        pick_union = self.so1.picking_ids | self.so2.picking_ids
+
+        # check that total number is missing one picking
+        # union must result with 13 picking
+        # 6 + 6 + 1 in common
+        self.assertEqual(len(pick_union), 13)
+
+        # check that exactly one picking is linked to both sale order
+        # intersection must result with one picking
+        pick_intersect = self.so1.picking_ids & self.so2.picking_ids
+        self.assertEqual(len(pick_intersect), 1)
+        self.assertEqual(pick_intersect.state, 'waiting')
+
+        loc_customer = ref('stock.stock_location_customers')
+        self.assertEqual(pick_intersect.location_dest_id, loc_customer)
 
     @freeze_time("2018-02-01")
     def test_import_so_deleted_line(self):

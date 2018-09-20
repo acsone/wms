@@ -10,7 +10,7 @@ from .common import (
     convert_product_id,
     convert_supplier,
     create_or_update,
-    do_partial_picking,
+    do_picking,
 )
 
 
@@ -289,7 +289,7 @@ class DB2MapperPurchaseOrder(object):
                     'date_done': date_done,
                 })
                 pick_lines = cls.map_orderline2move(lines)
-                do_partial_picking(pick, pick_lines)
+                do_picking(pick, pick_lines)
 
                 # find backorder
                 bo = rec.env['stock.picking'].search(

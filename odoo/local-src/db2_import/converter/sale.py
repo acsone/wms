@@ -10,8 +10,8 @@ from .common import (
     convert_product_id,
     convert_user,
     create_or_update,
-    do_final_picking,
-    do_partial_picking,
+    do_picking,
+    do_shipping,
 )
 
 
@@ -315,7 +315,7 @@ class DB2MapperSaleOrder(object):
                 pick_lines = cls.map_orderline2move(valid_lines)
                 # Do internal pickings to output location
                 for pick in picks1:
-                    do_partial_picking(pick, pick_lines)
+                    do_picking(pick, pick_lines)
                     # find backorder
                     bo = rec.env['stock.picking'].search(
                         [('backorder_id', '=', pick.id)])
@@ -323,12 +323,23 @@ class DB2MapperSaleOrder(object):
                         # make sure backorder is not assigned
                         bo.do_unreserve()
                 # Do the deliver to customer
-                do_final_picking(pick2, pick_lines)
-                # find backorder
+                do_shipping(pick2, pick_lines)
+                # find backorder if at least one qty is sent
                 bo = rec.env['stock.picking'].search(
                     [('backorder_id', '=', pick2.id)])
                 if bo:
                     # make sure backorder is not assigned
                     bo.do_unreserve()
+                    # regroup shippings back orders
+                    # search for other existing picking
+                    target = rec.env['stock.picking'].search(
+                        [('id', '!=', bo.id),
+                         ('partner_id', '=', bo.partner_id.id),
+                         ('state', '=', 'waiting'),
+                         ('location_dest_id', '=', loc_customers.id)]
+                        )
+                    if target:
+                        bo.move_lines.write({'picking_id': target.id})
+                        bo.unlink()
 
         return new

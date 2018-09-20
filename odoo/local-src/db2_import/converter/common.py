@@ -84,7 +84,7 @@ def convert_coding(value):
     return value
 
 
-def do_partial_picking(pick, lines):
+def do_picking(pick, lines):
     """ Do a partial picking using delivered qty from DB2 """
     pick.action_confirm()
     pick.force_assign()
@@ -151,7 +151,7 @@ def do_partial_picking(pick, lines):
         pick.do_unreserve()
 
 
-def do_final_picking(pick, lines):
+def do_shipping(pick, lines):
     """ Transfert the last picking (Shipping)
 
     operations are mostly ok
