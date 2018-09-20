@@ -18,6 +18,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1492: Fix error on customer action duplicate.
+
 **Build**
 
 * Improve unit test speed by using SavepointCase instead of TransactionCase
