@@ -94,7 +94,7 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
             'AlcyonGroupId': 'Ref123',
             'Percent1': '8.00',
             'Percent2': '0',
-            'ProductType': ' ',
+            'ProductType': '       ',
         }
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

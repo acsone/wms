@@ -33,10 +33,16 @@ class PromotionAlcyonExportMapper(Component):
     def compute_product_type(self, record):
         """ Compute product type.
 
-        For a promotion on all product the price_category_id is empty
-        But the content of the node in xml is a single <space>
+        For a promotion on all other product the price_category_id is empty
+        But the content of the node in xml must be seven <space> char.
+
+        In the historical xml file sent by the AS400 to the ESB the xml node
+        <ProductType> is empty but contains a <CR> so with the file indentation
+        it is interpreted by the ESB/Magento as seven spaces.
+        Without the same behaviour an existing promotion was not replaced and
+        two promotion on all other prodcut became present.
         """
-        product_type = ' '
+        product_type = '       '
         if record.price_category_id:
             product_type = record.price_category_id.name or ''
         return {'ProductType': product_type}

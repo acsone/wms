@@ -482,6 +482,7 @@ migration:
           ### local-src
           - specific_report
           - specific_partner
+          - connector_esb
       modes:
         full:
           operations:

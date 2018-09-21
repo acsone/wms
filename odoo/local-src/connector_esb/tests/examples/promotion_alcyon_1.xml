@@ -11,7 +11,7 @@
       <AlcyonGroupId>Ref123</AlcyonGroupId>
       <Percent1>8.00</Percent1>
       <Percent2>0</Percent2>
-      <ProductType> </ProductType>
+      <ProductType>       </ProductType>
     </Row>
   </Root>
 </ROOT>
