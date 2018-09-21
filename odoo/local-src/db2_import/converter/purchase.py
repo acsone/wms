@@ -235,7 +235,8 @@ class DB2MapperPurchaseOrder(object):
                 row['ecfsui'], int(row['ecffou']),
                 int(row['ecfsuc']), int(line['dcfnli']))
             line_rec = rec.env.ref(xmlid, raise_if_not_found=False)
-            line_rec.unlink()
+            if line_rec:
+                line_rec.unlink()
 
         is_received = all(received_lines)
         is_done = is_received or expired

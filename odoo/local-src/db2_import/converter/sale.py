@@ -246,7 +246,8 @@ class DB2MapperSaleOrder(object):
                 row['eccsui'], int(row['ecccli']),
                 int(row['eccsuc']), int(line['dccnli']))
             line_rec = rec.env.ref(xmlid, raise_if_not_found=False)
-            line_rec.unlink()
+            if line_rec:
+                line_rec.unlink()
 
         if is_done:
             # validate sale order
