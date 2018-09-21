@@ -1130,10 +1130,7 @@ def assign_route_categories(ctx):
 
 @anthem.log
 def set_picking_zone(ctx):
-    """
-    Set the picking zone on all picking locations and on products
-    :param ctx:
-    :return:
+    """ Set the picking zone on all picking locations and on products
     """
     main_locations_picking_zone_mapping = {
         '__setup__.stock_location_ali': '__setup__.picking_zone_aliments',
@@ -1183,5 +1180,10 @@ def main(ctx):
     create_routes(ctx)
     create_putaway(ctx)
     assign_route_categories(ctx)
-    set_picking_zone(ctx)
     set_product_expiry(ctx)
+
+
+@anthem.log
+def post_import_products(ctx):
+    """ Configure products after they have been imported """
+    set_picking_zone(ctx)

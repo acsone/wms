@@ -58,6 +58,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
+              - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
@@ -397,6 +398,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
+              - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
@@ -456,6 +458,7 @@ migration:
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
+              # To add in next release - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
@@ -488,6 +491,8 @@ migration:
             post:
               # ------------ DATA update ------------
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
+              # -- Frigo picking zone were not set --
+              - anthem songs.install.logistics::post_import_products
       operations:
         post:
           - anthem songs.install.accounting::remove_useless_account
