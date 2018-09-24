@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-461: Force picking zone as "Frigo" wasn't set on products, this correct creation of pickings using "Frigo" Route
 * ALCYN-481: Set "Belgium Only" on products for given list and remove previous
 * ALCYN-1494: Fix a regression introduced by ALCYN-465 that was generating errors in imports of sales and purchases
+* ALCYN-1485: SO import - Group shipping cackorders by partners
 
 **Features and Improvements**
 
