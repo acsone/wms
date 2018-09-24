@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.25.1 (2018-09-24)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-461: Force picking zone as "Frigo" wasn't set on products, this correct creation of pickings using "Frigo" Route
@@ -34,8 +46,6 @@ Unreleased
 
 * Improve unit test speed by using SavepointCase instead of TransactionCase
 * Improve test coverage reporting by filtering `*/tests/*` and `*/__manifest__.py`
-
-**Documentation**
 
 
 10.25.0 (2018-09-14)
