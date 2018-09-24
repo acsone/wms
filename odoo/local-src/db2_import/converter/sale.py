@@ -39,6 +39,32 @@ class DB2MapperSaleOrder(object):
         return pick_lines
 
     @classmethod
+    def _get_discounts(cls, rec, line):
+        """ Get discount values with the following rules (ALCYN-126):
+
+        During migration, SO line discount2/3 must be swapped in some cases:
+
+            * When the product price category is GMA
+            * When there is a discount2 and discount3
+
+        Otherwise (discount2=0) don't swap
+        """
+        ref = rec.env.ref
+        price_cat_gma = ref('specific_product.product_price_category_gma')
+        product_code = line['dccart']
+        product_xmlid = convert_product_id(product_code)
+        product = ref(product_xmlid)
+
+        discount2 = line['dccres']
+        discount3 = line['dccrem']
+        if (product.price_category_id == price_cat_gma
+                or discount2 and discount3):
+            discount2 = line['dccrem']
+            discount3 = line['dccres']
+
+        return discount2, discount3
+
+    @classmethod
     def process(cls, rec, db2_table, tmp_id):
         cr = rec.env.cr
         query = (
@@ -199,6 +225,7 @@ class DB2MapperSaleOrder(object):
             taxes = fpos.map_tax(
                 taxes, product, new.partner_shipping_id) if fpos else taxes
             create_date = convert_date('dccc', line)
+            discount2, discount3 = cls._get_discounts(rec, line)
             values = {
                 'order_id': new.id,
                 'product_id': product.id,
@@ -212,8 +239,8 @@ class DB2MapperSaleOrder(object):
                 # discount field is hidden and replaced by
                 # discount2 and discount3
                 'discount': 0,
-                'discount2': line['dccres'],
-                'discount3': line['dccrem'],
+                'discount2': discount2,
+                'discount3': discount3,
                 'create_date': create_date,
                 'write_date': convert_date('dccm', line) or create_date,
             }

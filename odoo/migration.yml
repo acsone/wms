@@ -488,6 +488,8 @@ migration:
             pre:
               # ------------ DATA delete ------------
               - psql -f odoo/songs/upgrade/10_25_1_update.sql
+              # ---------- Switch discounts----------
+              - psql -f odoo/songs/upgrade/mess_with_discounts.sql
             post:
               # ------------ DATA update ------------
               - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
