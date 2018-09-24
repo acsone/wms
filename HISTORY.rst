@@ -16,6 +16,7 @@ Unreleased
 * ALCYN-429: Add Autorisation/APB Fields to res.partner and account.view_partner_property_form
 * ALCYN-1460: Add a sale exception for customer that do not want back order.
 * ALCYN-1530: Install the module product_analytic from akretion
+* ALCYN-221: Add on sale order line a warning exception message if it will include a some promotional products.
 
 **Bugfixes**
 
@@ -35,7 +36,7 @@ Unreleased
 * ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
 * ALCYN-1461: Manage packaging during reservation. Reserve in priority nearly entire pallet, box, shrink-wrap instead of fefo when applicable
 * ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
-* ALCYN-221: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
+* ALCYN-236: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
 
 **Build**
 
