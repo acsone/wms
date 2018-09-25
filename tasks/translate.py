@@ -26,7 +26,7 @@ def generate(ctx, addon_path, update_po=True):
     dbname = 'tmp_generate_pot'
     addon = addon_path.strip('/').split('/')[-1]
     assert os.path.exists(build_path(addon_path)), "%s not found" % addon_path
-    container_path = os.path.join('/opt', addon_path, 'i18n')
+    container_path = os.path.join('/', addon_path, 'i18n')
     i18n_dir = os.path.join(build_path(addon_path), 'i18n')
     if not os.path.exists(i18n_dir):
         os.mkdir(i18n_dir)

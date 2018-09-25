@@ -241,7 +241,7 @@ modes:
       post:
         - anthem songs.install.data_full::main
         #### import heavy stuff
-        - importer.sh songs.install.inventory::setup_locations /opt/odoo/data/install/stock.location.csv
+        - importer.sh songs.install.inventory::setup_locations /odoo/data/install/stock.location.csv
         - anthem songs.install.inventory::location_compute_parents
 ```
 

@@ -20,7 +20,7 @@ If your project relies on CUPS and `base_report_to_printer` then you should alre
 In any case, make sure you have these requirements in place:
 
 * install `cups` and `libcups2-dev` in `odoo/Dockerfile`
-* `/opt/odoo/external-src/report-print-send` in ADDONS_PATH
+* `/odoo/external-src/report-print-send` in ADDONS_PATH
 * `git@github.com:OCA/report-print-send.git` checked out in the path above
 
 
