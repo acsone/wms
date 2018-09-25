@@ -1,37 +1,55 @@
-FROM camptocamp/odoo-project:10.0-2.7.0
+FROM camptocamp/odoo-project:10.0-3.0.0
 MAINTAINER Camptocamp
 
-COPY ./requirements.txt /opt/odoo
+# Steps are grouped by dependency
+# and ordered by compromizing cost and frequency
+
+## Base requirements (Libs and packages)
+# frequency: rarely
+# cost:      high
+
+COPY ./*requirements.txt /odoo/
 
 RUN set -x; \
-         apt-get update \
-         && apt-get install -y --no-install-recommends \
-         parallel \
-         python-cups \
-         # needed by pyodbc
-         unixodbc \
-         # common requirement for builds
-         build-essential python-dev \
-         # needed to build Cryptography
-         libssl-dev libffi-dev \
-         # needed to build pyodbc
-         unixodbc-dev autoconf libtool pkg-config \
-         && cd /opt/odoo \
-         && pip install -r requirements.txt \
-         && apt-get remove -y build-essential libssl-dev libffi-dev python-dev \
-         unixodbc-dev autoconf libtool pkg-config \
-         && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false \
-         && apt-get clean \
-         && rm -rf /var/lib/apt/lists/*
+        apt-get update \
+        && apt-get install -y --no-install-recommends \
+        parallel \
+        python-cups \
+        # needed by pyodbc
+        unixodbc \
+        # common requirement for builds
+        python-dev build-essential \
+        # needed to build Cryptography
+        libssl-dev libffi-dev \
+        # needed to build pyodbc
+        unixodbc-dev autoconf libtool pkg-config \
+        && cd /odoo \
+        && find . -maxdepth 1 -name "*requirements.txt" ! -name src_requirements.txt ! -name base_requirements.txt | xargs -I{} pip install -r {} \
+        # cleaning of dev packages
+        && apt-get remove -y build-essential python-dev \
+        libssl-dev libffi-dev unixodbc-dev autoconf libtool pkg-config \
+        && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
-COPY ./before-migrate-entrypoint.d/* odoo/before-migrate-entrypoint.d/
-COPY ./start-entrypoint.d/* odoo/start-entrypoint.d/
-RUN chmod +x odoo/before-migrate-entrypoint.d/* \
-    && chmod +x odoo/start-entrypoint.d/*
+## Tools of odoo-template
+# frequency: seldom
+# cost:      light
 
-# Install additional python packages if needed
-COPY ./requirements.txt /opt/odoo
-RUN cd /opt/odoo && pip install -r requirements.txt
+# Entrypoints
+COPY ./before-migrate-entrypoint.d/* /before-migrate-entrypoint.d/
+COPY ./start-entrypoint.d/* /start-entrypoint.d/
+RUN chmod +x /before-migrate-entrypoint.d/* \
+    && chmod +x /start-entrypoint.d/*
+# CSV Loader
+# `parallel` + `importer.sh` are needed to load heavy files
+COPY ./bin/importer.sh /odoo-bin/
+COPY ./bin/csv-split.py /odoo-bin/
+
+## Prepare pip install
+# frequency: never
+# cost     : very light
+COPY ./setup.py /odoo/
 
 # Configure ODBC
 COPY ./archives/iseriesaccess_7.1.0-1.0_amd64.deb /tmp
@@ -41,39 +59,49 @@ RUN dpkg -i /tmp/iseriesaccess_7.1.0-1.0_amd64.deb \
     && mkdir /home/odoo
 COPY ./.odbc.ini /home/odoo/.odbc.ini
 # Place coveragerc where coverage will be launched
-COPY ./.coveragerc /opt/.coveragerc
+COPY ./.coveragerc /.coveragerc
 
-COPY ./bin/importer.sh bin/
-COPY ./bin/install_cloud_platform.sh bin/
-COPY ./bin/csv-split.py bin/
+COPY ./bin/install_cloud_platform.sh /odoo-bin/
 
-# Custom runtests and migration
-COPY ./bin/runtests odoo/bin/
-COPY ./bin/runmigration odoo/bin/
-COPY ./bin/list_dependencies.py odoo/bin/
+## Main activity
+# frequency: always
+# costs:     very high to very light
+COPY ./src /odoo/src
+COPY ./external-src /odoo/external-src
+COPY ./local-src /odoo/local-src
+COPY ./data /odoo/data
+COPY ./songs /odoo/songs
+COPY ./VERSION /odoo/
+COPY ./migration.yml /odoo/
 
-ENV ADDONS_PATH="/opt/odoo/local-src, \
-  /opt/odoo/external-src/enterprise, \
-  /opt/odoo/external-src/odoo-cloud-platform, \
-  /opt/odoo/external-src/account-analytic, \
-  /opt/odoo/external-src/account-closing, \
-  /opt/odoo/external-src/account-financial-tools, \
-  /opt/odoo/external-src/account-invoicing, \
-  /opt/odoo/external-src/bank-payment, \
-  /opt/odoo/external-src/connector, \
-  /opt/odoo/external-src/l10n-belgium, \
-  /opt/odoo/external-src/product-attribute, \
-  /opt/odoo/external-src/purchase-workflow, \
-  /opt/odoo/external-src/queue, \
-  /opt/odoo/external-src/report-print-send, \
-  /opt/odoo/external-src/sale-workflow, \
-  /opt/odoo/external-src/server-tools, \
-  /opt/odoo/external-src/stock-logistics-warehouse, \
-  /opt/odoo/external-src/stock-logistics-workflow, \
-  /opt/odoo/external-src/web, \
-  /opt/odoo/external-src/partner-contact, \
-  /opt/odoo/external-src/connector-interfaces, \
-  /opt/odoo/src/addons" \
+# depends on ./setup.py ./src, ./songs and ./VERSION
+RUN cd /odoo && pip install -r src_requirements.txt
+
+## Environment
+# frequency: sometimes
+# cost:      very light
+ENV ADDONS_PATH="/odoo/local-src, \
+  /odoo/external-src/enterprise, \
+  /odoo/external-src/odoo-cloud-platform, \
+  /odoo/external-src/account-analytic, \
+  /odoo/external-src/account-closing, \
+  /odoo/external-src/account-financial-tools, \
+  /odoo/external-src/account-invoicing, \
+  /odoo/external-src/bank-payment, \
+  /odoo/external-src/connector, \
+  /odoo/external-src/l10n-belgium, \
+  /odoo/external-src/product-attribute, \
+  /odoo/external-src/purchase-workflow, \
+  /odoo/external-src/queue, \
+  /odoo/external-src/report-print-send, \
+  /odoo/external-src/sale-workflow, \
+  /odoo/external-src/server-tools, \
+  /odoo/external-src/stock-logistics-warehouse, \
+  /odoo/external-src/stock-logistics-workflow, \
+  /odoo/external-src/web, \
+  /odoo/external-src/partner-contact, \
+  /odoo/external-src/connector-interfaces, \
+  /odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \
   LIMIT_MEMORY_SOFT=1342177280 \

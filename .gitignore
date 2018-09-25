@@ -56,3 +56,9 @@ rancher.env
 .~*#
 
 sftp/share/**/*
+
+# local dev requirements
+odoo/dev_requirements.txt
+
+# local dev composition
+docker-compose.override.yml

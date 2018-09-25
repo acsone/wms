@@ -76,13 +76,13 @@ Here is a minimal **docker-compose.override.yml** config::
           - 8069
           - 8072
         volumes:
-          - "data-odoo-pytest-cache:/opt/odoo/.cache"
-          - "./odoo/src:/opt/odoo/src"
-          - "./odoo/local-src:/opt/odoo/local-src"
-          - "./odoo/external-src:/opt/odoo/external-src"
-          - "./odoo/songs:/opt/odoo/songs"
-          - "./odoo/migration.yml:/opt/odoo/migration.yml"
-          - "./odoo/data:/opt/odoo/data"
+          - "data-odoo-pytest-cache:/odoo/.cache"
+          - "./odoo/src:/odoo/src"
+          - "./odoo/local-src:/odoo/local-src"
+          - "./odoo/external-src:/odoo/external-src"
+          - "./odoo/songs:/odoo/songs"
+          - "./odoo/migration.yml:/odoo/migration.yml"
+          - "./odoo/data:/odoo/data"
         environment:
           RUNNING_ENV: dev
           # could be 'demo' for the minimal db or 'full' for the complete one

@@ -20,7 +20,7 @@ migration:
           - anthem songs.install.accounting::no_coa_instance_unlock
           - anthem songs.install.pre::setup_company
           # Install cloud platform if $C2C_PLATFORM == 'True'
-          - bin/install_cloud_platform.sh
+          - install_cloud_platform.sh
         post:
           # Because this module is auto-install when sale_stock is installed.
           # And the specific module 'procurement_sale' is incompatible with 'procurement_jit' module
@@ -47,30 +47,30 @@ migration:
         full:
           operations:
             post:
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_add_data.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_add_data.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/master_customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer_address.csv
               - anthem songs.install.data_full::post_import_partner
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/additional_product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.logistics::post_import_products
               - bin/importer.sh songs.install.data_full::import_product_name_fr /opt/odoo/data/install/product_name_fr_BE.csv
               - bin/importer.sh songs.install.data_full::import_product_name_en /opt/odoo/data/install/product_name_en_US.csv
               - bin/importer.sh songs.install.data_full::import_product_name_nl /opt/odoo/data/install/product_name_nl_BE.csv
               - anthem songs.install.data_full::import_wh_family_locations
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
               - anthem songs.install.data_full::location_compute_parents
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               - anthem songs.install.data_full::main
-              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - importer.sh songs.install.data_full::import_lots /odoo/data/install/stock_production_lot.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
               - anthem songs.install.data_full::import_inventory
               - anthem songs.install.data_full::import_inventory_without_lot
@@ -95,7 +95,7 @@ migration:
               - anthem songs.install.data_full::create_journals
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/products_only_belgium.csv
         sample:
           operations:
             post:
@@ -106,7 +106,7 @@ migration:
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/sample/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/sample/products_only_belgium.csv
       addons:
         upgrade:
           ### Odoo
@@ -262,29 +262,29 @@ migration:
           operations:
             post:
               - anthem songs.upgrade.common::deactivate_check_on_vat
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/master_customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer_address.csv
               - anthem songs.install.data_full::post_import_partner
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/additional_product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
               - anthem songs.install.data_full::location_compute_parents
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               # import data/install/res_bank_supplier.csv
               - anthem songs.install.data_full::import_banks
               # import data/install/res_partner_bank_supplier.csv
               - anthem songs.install.data_full::import_bank_accounts
-              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - importer.sh songs.install.data_full::import_lots /odoo/data/install/stock_production_lot.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
               # import data/install/product_stock_bin.csv
               - anthem songs.install.data_full::import_stock_bins
@@ -390,31 +390,31 @@ migration:
             post:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - anthem songs.install.data_full::import_customer_banks_and_mandats
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
               # parallel import of customer is broken, use diff files to update the partners
               - anthem songs.upgrade.10_24_0_update::import_customers
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/master_customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer_address.csv
               - anthem songs.install.data_full::post_import_partner
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/additional_product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
               - anthem songs.install.data_full::location_compute_parents
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               # import data/install/res_bank_supplier.csv
               - anthem songs.install.data_full::import_banks
               # import data/install/res_partner_bank_supplier.csv
               - anthem songs.install.data_full::import_bank_accounts
-              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - importer.sh songs.install.data_full::import_lots /odoo/data/install/stock_production_lot.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
               # import data/install/product_stock_bin.csv
               - anthem songs.install.data_full::import_stock_bins
@@ -450,31 +450,31 @@ migration:
               # ------------ DATA update ------------
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - anthem songs.install.data_full::import_customer_banks_and_mandats
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/supplier_contact.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
               # parallel import of customer is broken, use diff files to update the partners
               - anthem songs.upgrade.10_25_0_update::import_customers
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/master_customer.csv
-              - bin/importer.sh songs.install.data_full::import_partner /opt/odoo/data/install/customer_address.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/master_customer.csv
+              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer_address.csv
               - anthem songs.install.data_full::post_import_partner
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/additional_product.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/install/product_new_route_info.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/additional_product.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               # To add in next release - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
-              - bin/importer.sh songs.install.data_full::import_wh_locations /opt/odoo/data/install/location.csv
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
               - anthem songs.install.data_full::location_compute_parents
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_product_supplierinfo /opt/odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
-              - bin/importer.sh songs.install.data_full::import_pricelist_items /opt/odoo/data/install/pricelist_items.csv
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo_promo.csv product_tmpl_id/id
+              - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               # import data/install/res_bank_supplier.csv
               - anthem songs.install.data_full::import_banks
               # import data/install/res_partner_bank_supplier.csv
               - anthem songs.install.data_full::import_bank_accounts
-              - bin/importer.sh songs.install.data_full::import_lots /opt/odoo/data/install/stock_production_lot.csv
+              - importer.sh songs.install.data_full::import_lots /odoo/data/install/stock_production_lot.csv
               # import data/install/product_stock_bin.csv
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.data_full::post_import_stock_bins
@@ -497,7 +497,7 @@ migration:
               - psql -f odoo/songs/upgrade/mess_with_discounts.sql
             post:
               # ------------ DATA update ------------
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/products_only_belgium.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
               # -- Frigo picking zone were not set --
               - anthem songs.install.logistics::post_import_products
       operations:

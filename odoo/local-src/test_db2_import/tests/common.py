@@ -330,7 +330,7 @@ CSV_PATH = path.join(path.dirname(__file__), "data", "%s.csv")
 # Don't copy files of this project
 # Quite ugly but this avoid to copy the files in the project
 # we need some of those data in the tests
-INSTALL_CSV_PATH = path.join("/opt/odoo/data/install", "%s.csv")
+INSTALL_CSV_PATH = path.join("/odoo/data/install", "%s.csv")
 
 
 def load_csv(model, csv_file, **fmtparams):

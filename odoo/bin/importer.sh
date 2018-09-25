@@ -10,7 +10,7 @@
 #
 # Example:
 #    importer.sh songs.install.data_full::import_sale_order_lines \
-#        /opt/odoo/data/install/sale_order_line.csv order_id/id
+#        /odoo/data/install/sale_order_line.csv order_id/id
 #
 set -e
 
@@ -39,7 +39,7 @@ mkdir -p $SPLIT_DIR
 cd ${IMPORTER_DIR}
 
 # Split the csv file in $PROC files
-python /opt/bin/csv-split.py -f ${DATA_PATH} -d ${SPLIT_DIR} -s $PROC -k "$KEY_GROUP"
+python /odoo-bin/csv-split.py -f ${DATA_PATH} -d ${SPLIT_DIR} -s $PROC -k "$KEY_GROUP"
 
 CSV_HEADER=$(sed 1q "${SPLIT_DIR}/00")
 # Add missing CSV header
@@ -47,7 +47,7 @@ for file in `find ${SPLIT_DIR} -type f`; do
     # Split in smaller chunks of 500 maximum
     SUB_SPLIT_DIR=${file}_split
     mkdir $SUB_SPLIT_DIR
-    python /opt/bin/csv-split.py -f ${file} -n 500 -d ${SUB_SPLIT_DIR}
+    python /odoo-bin/csv-split.py -f ${file} -n 500 -d ${SUB_SPLIT_DIR}
     rm $file
     for sub_file in `find ${file}_split -type f`; do
         if [ $CSV_HEADER != "`sed 1q $sub_file`" ]; then
