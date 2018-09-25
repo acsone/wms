@@ -14,10 +14,10 @@ class StockQuant(models.Model):
     @api.model
     def quants_get_preferred_domain(self, qty, move, ops=False, lot_id=False,
                                     domain=None, preferred_domain_list=None):
-        _logger.debug(
-            "Reserve by packaging. Current domain: %s. "
-            "Preferred domain: %s", domain, preferred_domain_list)
-        if not preferred_domain_list:
+        if not preferred_domain_list and not lot_id:
+            _logger.debug(
+                "Reserve by packaging. Current domain: %s. "
+                "Preferred domain: %s", domain, preferred_domain_list)
             config_param = self.env['ir.config_parameter']
             pallet_factor = float(config_param.get_param(
                 'stock.reservation_unit_pallet_factor', 1))
