@@ -11,14 +11,18 @@ _logger = logging.getLogger(__name__)
 class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
-    additional_move = fields.Many2one(
+    additional_move_id = fields.Many2one(
         'stock.move',
         'Additional Product Move',
-        ondelete='set null')
+        ondelete='set null',
+        old='additional_move')
 
     @api.multi
     def unlink(self):
-        additional_moves = self.mapped('additional_move')
+        if self.env.context.get('skip_additional'):
+            return super(StockPackOperation, self).unlink()
+
+        additional_moves = self.mapped('additional_move_id')
         op = additional_moves.mapped('linked_move_operation_ids.operation_id')
         res = super(StockPackOperation, self | op).unlink()
         if additional_moves:

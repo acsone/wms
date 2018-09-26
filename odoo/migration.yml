@@ -217,6 +217,7 @@ migration:
           - stock_lot_track
           - stock_lot_update
           - stock_inventory_controller
+          - stock_operation_recompute
           - stock_picking_assignment
           - stock_picking_backorder
           - stock_picking_fillwithstock
@@ -510,6 +511,9 @@ migration:
         upgrade:
           ### local-src
           - specific_sale
+          - product_additional
+          - stock_operation_recompute
+          - specific_stock
       modes:
         full:
           operations:

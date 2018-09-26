@@ -22,6 +22,7 @@
         'stock_expired',
         'stock_inventory_products',
         'stock_mts_mto_rule',
+        'stock_operation_recompute',
         'stock_picking_assignment',
         'stock_picking_backorder',
         'stock_picking_zone',

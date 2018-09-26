@@ -29,6 +29,8 @@ class StockPicking(models.Model):
         """
         result = super(StockPicking, self)._prepare_pack_ops(
             quants, forced_qties)
+        if self.env.context.get('skip_additional'):
+            return result
 
         product_obj = self.env['product.product']
 
@@ -85,7 +87,7 @@ class StockPicking(models.Model):
                 "Created additional move %s (qty=%s) in the pickings %s",
                 move_add.id, qty_add, picking.id)
             for packop in packops:
-                packop['additional_move'] = move_add.id
+                packop['additional_move_id'] = move_add.id
             additional_moves |= move_add
 
         # Assign moves
