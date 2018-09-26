@@ -30,25 +30,25 @@ services:
       - "./odoo/migration.yml:/odoo/migration.yml"
       - "./odoo/data:/odoo/data"
     environment:
-      - DB_USER=odoo
-      - DB_PASSWORD=odoo
-      - DB_NAME=odoodb
-      - ADMIN_PASSWD=mijaebohb8Thae1g
-      - RUNNING_ENV=dev
-      - SERVER_WIDE_MODULES=web,queue_job
-      - ODOO_QUEUE_JOB_CHANNELS=root:8,root.db2.fetch:1,root.db2.create_or_update:8,root.esb:2,root.action_assign:8,root.background.sale_confirm:1:sequential,root.update_po:8
-      - WORKERS=8
-      - MARABUNTA_MODE=sample # could be 'full' for the db with all the data
-      - MARABUNTA_ALLOW_SERIE=True # should not be set in production
-      - DB2HOST=pissh
-      - DB2USER=lpass DB2 Alcyon
-      - DB2PWD=lpass DB2 Alcyon
+      DB_USER: odoo
+      DB_PASSWORD: odoo
+      DB_NAME: odoodb
+      ADMIN_PASSWD: mijaebohb8Thae1g
+      RUNNING_ENV: dev
+      SERVER_WIDE_MODULES: web,queue_job
+      ODOO_QUEUE_JOB_CHANNELS: root:8,root.db2.fetch:1,root.db2.create_or_update:8,root.esb:2,root.action_assign:8,root.background.sale_confirm:1:sequential,root.update_po:8
+      WORKERS: 8
+      MARABUNTA_MODE: sample # could be 'full' for the db with all the data
+      MARABUNTA_ALLOW_SERIE: 'True' # should not be set in production
+      DB2HOST: pissh
+      DB2USER: lpass DB2 Alcyon
+      DB2PWD: lpass DB2 Alcyon
       # configuration to test exports to sftp (ESB)
-      - ODOO_ESB_SFTP_HOST=esbsftp
-      - ODOO_ESB_SFTP_PATH=share
-      - ODOO_ESB_SFTP_USER=foo
+      ODOO_ESB_SFTP_HOST: esbsftp
+      ODOO_ESB_SFTP_PATH: share
+      ODOO_ESB_SFTP_USER: foo
       # test key from sftp/id_rsa
-      - ODOO_ESB_SFTP_PRIVATE_KEY = |
+      ODOO_ESB_SFTP_PRIVATE_KEY: |
           -----BEGIN RSA PRIVATE KEY-----
           MIICXQIBAAKBgQDNc0wBK+/GRNVgzutyNKbbVkCdGIsHLBc4atuLwZzka58l1UHR
           9Py3tvNymcxX6oj9AXGDNkyMYg514VbxJlwxkU+zN5gUy/Oc18TahKaLFvcRySeP
@@ -64,12 +64,12 @@ services:
           Z31nmzeL68FipXBqdckCQQCCURUp8lWdC5UPwArD5P22Mame0XdlAkbH3vOuFCav
           5Dx0Zwm6sBJUrY64Qt/OvEk0nD+ttP7D+O65+IJ6gmCO
           -----END RSA PRIVATE KEY-----
-      - ODOO_ESB_WS_BASE_URL=https://api-pp3.alcyonbelux.be/magento-erp-api
-      - ODOO_ESB_WS_USER=odoo_test
-      - ODOO_ESB_WS_PWD=0X5avy9C137ssfDy
-      - OVH_FAX_EMAIL_DOMAIN=ecofax.fr
-      - OVH_FAX_NUMBER=003242878272
-      - OVH_FAX_PASSWORD=password
+      ODOO_ESB_WS_BASE_URL: https://api-pp3.alcyonbelux.be/magento-erp-api
+      ODOO_ESB_WS_USER: odoo_test
+      ODOO_ESB_WS_PWD: 0X5avy9C137ssfDy
+      OVH_FAX_EMAIL_DOMAIN: ecofax.fr
+      OVH_FAX_NUMBER: 003242878272
+      OVH_FAX_PASSWORD: password
 
   db:
     image: camptocamp/postgresql:pg9.5-latest
@@ -77,12 +77,12 @@ services:
     ports:
       - 5432
     environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo
-      - PG_SYSTEM_SHARED_BUFFERS=256MB
-      - PG_SYSTEM_MAINTENANCE_WORK_MEM=256MB
-      - PG_SYSTEM_WAL_BUFFERS=8MB
-      - PG_SYSTEM_EFFECTIVE_CACHE_SIZE=1024MB
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      PG_SYSTEM_SHARED_BUFFERS: 256MB
+      PG_SYSTEM_MAINTENANCE_WORK_MEM: 256MB
+      PG_SYSTEM_WAL_BUFFERS: 8MB
+      PG_SYSTEM_EFFECTIVE_CACHE_SIZE: 1024MB
     volumes:
       - "data-db:/var/lib/postgresql/data"
 
