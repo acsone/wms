@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 13:10+0000\n"
+"POT-Creation-Date: 2018-09-28 10:55+0000\n"
 "PO-Revision-Date: 2018-07-10 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:303
+#: code:addons/specific_sale/models/sale.py:320
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -227,7 +227,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:302
+#: code:addons/specific_sale/models/sale.py:319
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -293,6 +293,16 @@ msgid "No line under 0"
 msgstr "Pas de ligne < 0"
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_psychotropic_by_phone
+msgid "No psychotropic by phone"
+msgstr "Pas de psychotrope par téléphone"
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_psychotropic_by_phone
+msgid "No psychotropic ordered by phone"
+msgstr "Pas de commande de psychotrope par téléphone"
+
+#. module: specific_sale
 #: selection:sale.report,month:0
 msgid "November"
 msgstr "Novembre"
@@ -320,7 +330,7 @@ msgid "Order Date"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:294
+#: code:addons/specific_sale/models/sale.py:309
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr "Rupture de stock fournisseur"
@@ -369,6 +379,11 @@ msgstr "Référence d'article"
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Promotion"
 msgstr "Promotion"
+
+#. module: specific_sale
+#: model:exception.rule,warning_text:specific_sale.warning_psychotropic
+msgid "Psychotropic: written order, keep confirmation."
+msgstr "Commande de psychotrope par écrit, gardez la confirmation."
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -479,6 +494,17 @@ msgstr "Prix unitaire"
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 msgid "Veterinary Product Not Allowed"
 msgstr "Produit vétérinaire interdit"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_psychotropic
+#: model:exception.rule,name:specific_sale.warning_psychotropic
+msgid "Warning psychotropic"
+msgstr "Avertissement psychotrope"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_warning_text
+msgid "Warning text"
+msgstr ""
 
 #. module: specific_sale
 #: selection:sale.order,sale_channel:0

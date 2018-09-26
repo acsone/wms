@@ -66,6 +66,7 @@ class TestSaleOrderException(SavepointCase):
             'categ_id': cls.env.ref(
                 'specific_data.product_categ_medoc').id,
         })
+
         cls.delivery = cls.env['delivery.carrier'].search(
                 [('free_if_more_than', '=', False)], limit=1)
         cls.so1 = cls.env['sale.order'].create({
@@ -355,3 +356,28 @@ class TestSaleOrderException(SavepointCase):
             })
         self.so1.action_confirm()
         self.assertNotEqual(self.so1.state, 'sale')
+
+    def test_exception_warning_psychotropic_product(self):
+        """Check sale order line message for psychotropic products."""
+        exception = self.env.ref('specific_sale.warning_psychotropic')
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_stup
+        self.assertTrue(exception.warning_text in line.warning_text)
+
+    def test_psychotropic_by_phone(self):
+        """Check psychotropic are not oredered on the phone."""
+        warning = self.env.ref('specific_sale.warning_psychotropic')
+        exception = self.env.ref('specific_sale.no_psychotropic_by_phone')
+        self.partner.alcyon_category_id = self.env.ref(
+           'specific_partner.partner_category_pharmacy')
+        line = self.so1.order_line[0]
+        line.order_id.sale_channel = 'fax'
+        line.product_id = self.prod_stup
+        # Sale order by fax the line should only have the warning displayed
+        self.assertEqual(line.exception, warning.description)
+        # Sale order by phone should have the exception
+        line.order_id.sale_channel = 'phone'
+        # Switch product to trigger exception checking
+        line.product_id = self.prod_food
+        line.product_id = self.prod_stup
+        self.assertEqual(line.exception, exception.description)

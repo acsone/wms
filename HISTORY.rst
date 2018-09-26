@@ -57,6 +57,7 @@ Unreleased
 * ALCYN-153: Always display the field Opt-out (opt_out) on the view res.partner
 * ALCYN-1482: Improve performance for the reception of products
 * ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
+* ALCYN-221: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
 
 **Bugfixes**
 
