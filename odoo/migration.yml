@@ -231,6 +231,7 @@ migration:
           - stock_receive_lot
           - stock_reception_priority
           - stock_refill
+          - stock_unit
           - stock_valuation
           - web_autorefresh
           - code_abc
@@ -485,8 +486,6 @@ migration:
         upgrade:
           ### local-src
           - connector_esb
-          - specific_partner
-          - specific_report
       modes:
         full:
           operations:
