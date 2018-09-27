@@ -2,7 +2,10 @@
 # Copyright 2018 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
+from contextlib import contextmanager
+
 import csv
+import mock
 from os import path
 
 from odoo.tests.common import SavepointCase
@@ -361,6 +364,16 @@ def create_or_update(cls, model, xmlid, values):
 
 
 class DB2ImportTestCase(SavepointCase):
+
+    @contextmanager
+    def mock_with_delay(self):
+        with mock.patch('odoo.addons.queue_job.models.base.DelayableRecordset',
+                        name='DelayableRecordset', spec=True
+                        ) as delayable_cls:
+            # prepare the mocks
+            delayable = mock.MagicMock(name='DelayableBinding')
+            delayable_cls.return_value = delayable
+            yield delayable_cls, delayable
 
     @classmethod
     def setUpClass(cls):

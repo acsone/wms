@@ -546,6 +546,7 @@ migration:
           - specific_sale
           - product_additional
           - specific_purchase
+          - db2_import
           ### OCA/account-analytic
           - product_analytic
           ### server-tools

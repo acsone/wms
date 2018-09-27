@@ -12,6 +12,7 @@ Unreleased
 * ALCYN-455: Set BO to zero on imported sale orders.
 * ALCYN-1515: Fix import creation of orderpoints when importing values of stock min/max on products
 * ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
+* ALCYN-1485: Fix grouping errors due to paralllism, create jobs that will be executed at end of sale order import.
 
 
 **Features and Improvements**

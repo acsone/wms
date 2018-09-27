@@ -114,6 +114,7 @@
       <field name="name">Helpdesk ticket importer</field>
       <field name="date_start">2018-06-22</field>
       <field name="mode">history</field>
+      <field name="priority">11</field>
     </record>
   </data>
 

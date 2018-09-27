@@ -15,6 +15,7 @@
             <field name="date_start"/>
             <field name="date_end"/>
             <field name="mode"/>
+            <field name="priority"/>
             <field name="update_draft"/>
             <field name="fetch"/>
 

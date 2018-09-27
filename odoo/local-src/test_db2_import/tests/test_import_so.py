@@ -1095,11 +1095,17 @@ class TestImportSO(DB2ImportTestCase):
         suite2 = 2844359  # fake additional order by same customer
 
         db2_id = self.get_row_from_suite(suite1)
-        DB2MapperSaleOrder.process(
-            self.importer_table_so, self.table_name, db2_id)
+        with self.mock_with_delay() as (delayable_cls, delayable):
+            DB2MapperSaleOrder.process(
+                self.importer_table_so, self.table_name, db2_id)
+            # must create a '_regroup_shipping_bo' job
+            self.assertEqual(1, delayable_cls.call_count)
         db2_id = self.get_row_from_suite(suite2)
-        DB2MapperSaleOrder.process(
-            self.importer_table_so, self.table_name, db2_id)
+        with self.mock_with_delay() as (delayable_cls, delayable):
+            DB2MapperSaleOrder.process(
+                self.importer_table_so, self.table_name, db2_id)
+            # must create a '_regroup_shipping_bo' job
+            self.assertEqual(1, delayable_cls.call_count)
         self.so1 = self.env['sale.order'].search([('name', '=', str(suite1))])
         self.so2 = self.env['sale.order'].search([('name', '=', str(suite2))])
 
@@ -1121,6 +1127,15 @@ class TestImportSO(DB2ImportTestCase):
         # Output -> Customer state: done
         # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so2.picking_ids), 4)
+
+        # check that total number is missing one picking
+        # union must result with 14 picking
+        # 7 + 7
+        pick_union = self.so1.picking_ids | self.so2.picking_ids
+        self.assertEqual(len(pick_union), 9)
+
+        partner = self.so1.partner_id
+        partner._regroup_shipping_bo()
 
         # check that total number is missing one picking
         # union must result with 8 picking
@@ -1154,16 +1169,22 @@ class TestImportSO(DB2ImportTestCase):
         suite2 = 11111111  # fake duplicate of 2833868
 
         db2_id = self.get_row_from_suite(suite1)
-        DB2MapperSaleOrder.process(
-            self.importer_table_so, self.table_name, db2_id)
+        with self.mock_with_delay() as (delayable_cls, delayable):
+            DB2MapperSaleOrder.process(
+                self.importer_table_so, self.table_name, db2_id)
+            # must create a '_regroup_shipping_bo' job
+            self.assertEqual(1, delayable_cls.call_count)
 
         query = "UPDATE db2_pentcdcl SET eccsui = %s WHERE eccsui = %s"
         cursor.execute(query, (suite2, suite1))
         query = "UPDATE db2_pdetcdcl SET dccsui = %s WHERE dccsui = %s"
         cursor.execute(query, (suite2, suite1))
         db2_id = self.get_row_from_suite(suite2)
-        DB2MapperSaleOrder.process(
-            self.importer_table_so, self.table_name, db2_id)
+        with self.mock_with_delay() as (delayable_cls, delayable):
+            DB2MapperSaleOrder.process(
+                self.importer_table_so, self.table_name, db2_id)
+            # must create a '_regroup_shipping_bo' job
+            self.assertEqual(1, delayable_cls.call_count)
 
         self.so1 = self.env['sale.order'].search([('name', '=', str(suite1))])
         self.so2 = self.env['sale.order'].search([('name', '=', str(suite2))])
@@ -1188,11 +1209,19 @@ class TestImportSO(DB2ImportTestCase):
         # Output -> Customer state: waiting (Backorder) (same as for 2833868)
         self.assertEqual(len(self.so2.picking_ids), 7)
 
+        # check that total number is missing one picking
+        # union must result with 14 picking
+        # 7 + 7
         pick_union = self.so1.picking_ids | self.so2.picking_ids
+        self.assertEqual(len(pick_union), 14)
+
+        partner = self.so1.partner_id
+        partner._regroup_shipping_bo()
 
         # check that total number is missing one picking
         # union must result with 13 picking
         # 6 + 6 + 1 in common
+        pick_union = self.so1.picking_ids | self.so2.picking_ids
         self.assertEqual(len(pick_union), 13)
 
         # check that exactly one picking is linked to both sale order
