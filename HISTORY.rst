@@ -11,11 +11,14 @@ Unreleased
 * ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
 
 **Features and Improvements**
-* ALCYN-1491: Remove copy from suite_name(SO) and ref(partner)
 
+* ALCYN-1491: Remove copy from suite_name(SO) and ref(partner)
 * ALCYN-1517: Recompute pack operations of a picking for 1 product. Required in case a reserved lot is (partially) physically missing. For Zetes integration
+* ALCYN-70: Import product name translation
 
 **Bugfixes**
+
+* ALCYN-1520: Fix connector_esb test, test export sale order was not called by Travis
 
 **Build**
 
@@ -41,7 +44,6 @@ Unreleased
 * ALCYN-107: Adapt chart of accounts (remove useless accounts, rename 3 accounts and create 12 new accounts)
 * ALCYN-153: Always display the field Opt-out (opt_out) on the view res.partner
 * ALCYN-1482: Improve performance for the reception of products
-* ALCYN-70: Import product name translation
 
 **Bugfixes**
 
@@ -49,7 +51,6 @@ Unreleased
 * ALCYN-1503: Fix Picking Force availability does not move a quant
 * ALCYN-1512: Module declaration should be named __manifest__
 * ALCYN-1509: Fix flux promotion Alcyon, code for all other product is different than previously specified (ESB).
-* ALCYN-1520: Fix connector_esb test, test export sale order was not called by Travis
 
 **Build**
 
