@@ -486,9 +486,9 @@ migration:
       addons:
         upgrade:
           ### local-src
-          - specific_report
-          - specific_partner
           - connector_esb
+          - specific_partner
+          - specific_report
       modes:
         full:
           operations:
@@ -509,6 +509,10 @@ migration:
           - anthem songs.install.accounting::create_new_accounts
           - anthem songs.install.logistics::create_locations
     - version: 10.25.2
+      addons:
+        upgrade:
+          ### local-src
+          - specific_sale
       modes:
         full:
           operations:

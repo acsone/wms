@@ -12,6 +12,7 @@ Unreleased
 
 
 **Features and Improvements**
+* ALCYN-1491: Remove copy from suite_name(SO) and ref(partner)
 
 **Bugfixes**
 
