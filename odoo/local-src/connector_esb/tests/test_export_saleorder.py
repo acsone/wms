@@ -127,7 +127,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             'serial_no': int(so.suite_name),
             'increment_id': so.esb_ref,
             'lines': [{
-                'line_number': so.order_line[0].sequence,
+                'line_number': so.order_line[0].esb_ref,
                 'price': so.order_line[0].price_unit,
                 'price_inc_tax': round(
                     so.order_line[0].price_unit
@@ -165,7 +165,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             'serial_no': int(so.suite_name),
             'increment_id': so.esb_ref,
             'lines': [{
-                'line_number': so.order_line[0].sequence,
+                'line_number': so.order_line[0].esb_ref,
                 'price': so.order_line[0].price_unit,
                 'price_inc_tax': round(
                     so.order_line[0].price_unit
@@ -193,9 +193,10 @@ class ExportSaleOrderTestCase(SavepointCase):
             exporter.record = self.so1
             result = {"erp_id": "42",
                       "increment_id": "1000000348",
-                      "lines": [
-                         {"line_number": 1, "created_id": 106},
-                         ]
+                      "lines": [{
+                          "line_number": self.so1.order_line[0].id,
+                          "created_id": 106
+                          }]
                       }
             exporter._postprocess_create_result(result)
         self.assertEqual(self.so1.esb_ref,
@@ -203,19 +204,20 @@ class ExportSaleOrderTestCase(SavepointCase):
         self.assertEqual(self.so1.order_line[0].esb_ref,
                          result['lines'][0]['created_id'])
 
-    def post_ret_status(url, data, headers, auth):
+    def put_ret_status(url, data, headers, auth):
         resp = requests.Response()
         resp.status_code = 200
         resp.json = lambda: '{"erp_id" : "42", “increment_id” : “1000000348”}'
         return resp
 
-    @mock.patch('requests.put', side_effect=post_ret_status)
-    def test_record_exporter(self, post):
-        """Test export of a sale order catching the post request."""
+    @mock.patch('requests.put', side_effect=put_ret_status)
+    def test_record_exporter(self, put):
+        """Test export of a sale order catching the put request."""
+        self.so1.action_confirm()
         with self.backend.work_on(self.model._name) as work:
             exporter = work.component(usage='record.exporter')
             exporter.run(self.so1)
-        post.assert_called_once()
+        put.assert_called_once()
 
     def test_mapper_state_in_confirm_background(self):
         """ Check status sent for sale order being confirmed in background."""
