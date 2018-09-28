@@ -10,9 +10,10 @@ Unreleased
 
 * ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
 
-
 **Features and Improvements**
 * ALCYN-1491: Remove copy from suite_name(SO) and ref(partner)
+
+* ALCYN-1517: Recompute pack operations of a picking for 1 product. Required in case a reserved lot is (partially) physically missing. For Zetes integration
 
 **Bugfixes**
 
