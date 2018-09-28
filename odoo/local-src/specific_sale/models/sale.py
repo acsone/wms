@@ -17,9 +17,9 @@ class Sale(models.Model):
         ('fax', 'Fax'),
         ('web', 'Web'),
     ])
-
     suite_name = fields.Char(
-        string='Suite Id'
+        string='Suite Id',
+        copy=False,
     )
 
     @api.onchange('team_id')
