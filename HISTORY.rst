@@ -49,6 +49,7 @@ Unreleased
 * ALCYN-1503: Fix Picking Force availability does not move a quant
 * ALCYN-1512: Module declaration should be named __manifest__
 * ALCYN-1509: Fix flux promotion Alcyon, code for all other product is different than previously specified (ESB).
+* ALCYN-1520: Fix connector_esb test, test export sale order was not called by Travis
 
 **Build**
 

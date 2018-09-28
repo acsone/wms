@@ -514,6 +514,7 @@ migration:
           - product_additional
           - stock_operation_recompute
           - specific_stock
+          - connector_esb
       modes:
         full:
           operations:
