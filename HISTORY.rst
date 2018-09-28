@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.25.2 (2018-09-28)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
@@ -19,10 +31,6 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1520: Fix connector_esb test, test export sale order was not called by Travis
-
-**Build**
-
-**Documentation**
 
 
 10.25.1 (2018-09-24)
