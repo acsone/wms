@@ -39,6 +39,7 @@ Unreleased
 * ALCYN-107: Adapt chart of accounts (remove useless accounts, rename 3 accounts and create 12 new accounts)
 * ALCYN-153: Always display the field Opt-out (opt_out) on the view res.partner
 * ALCYN-1482: Improve performance for the reception of products
+* ALCYN-70: Import product name translation
 
 **Bugfixes**
 

@@ -724,6 +724,45 @@ def import_journal_items(ctx, customer=False, supplier=False):
 
 
 @anthem.log
+def import_product_name_fr(ctx):
+    """ Importing product name in french"""
+    ProductTemplate = ctx.env['product.template'].with_context(lang='fr_BE')
+    file_csv = 'data/install/product_name_fr_BE.csv'
+    for content in get_files(req, file_csv):
+        try:
+            load_csv_stream(ctx, ProductTemplate, content, delimiter=',')
+        except anthem.exceptions.AnthemError as e:
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
+
+
+@anthem.log
+def import_product_name_nl(ctx):
+    """ Importing product name in dutch"""
+    ProductTemplate = ctx.env['product.template'].with_context(lang='nl_BE')
+    file_csv = 'data/install/product_name_nl_BE.csv'
+    for content in get_files(req, file_csv):
+        try:
+            load_csv_stream(ctx, ProductTemplate, content, delimiter=',')
+        except anthem.exceptions.AnthemError as e:
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
+
+
+@anthem.log
+def import_product_name_en(ctx):
+    """ Importing product name in english"""
+    ProductTemplate = ctx.env['product.template'].with_context(lang='en_US')
+    file_csv = 'data/install/product_name_en_US.csv'
+    for content in get_files(req, file_csv):
+        try:
+            load_csv_stream(ctx, ProductTemplate, content, delimiter=',')
+        except anthem.exceptions.AnthemError as e:
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
+
+
+@anthem.log
 def main(ctx):
     """ Loading full data (But in this function only small files,
     other files will be import by importer.sh)
