@@ -502,3 +502,4 @@ migration:
           - anthem songs.install.accounting::rename_accounts
           - anthem songs.install.accounting::create_new_accounts
           - anthem songs.install.logistics::create_locations
+    - version: 10.25.2

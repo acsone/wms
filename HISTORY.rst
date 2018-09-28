@@ -6,6 +6,11 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
+
+
 **Features and Improvements**
 
 **Bugfixes**

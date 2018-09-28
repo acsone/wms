@@ -358,12 +358,17 @@ class DB2MapperSaleOrder(object):
                     # make sure backorder is not assigned
                     bo.do_unreserve()
                     # regroup shippings back orders
-                    # search for other existing picking
+                    # search for first existing picking
+                    # with paralellism we could have created
+                    # multiple open backorders at the same time
+                    # TODO move this action in a separate job
+                    # as we don't want this process to be blocking the import
                     target = rec.env['stock.picking'].search(
                         [('id', '!=', bo.id),
                          ('partner_id', '=', bo.partner_id.id),
                          ('state', '=', 'waiting'),
-                         ('location_dest_id', '=', loc_customers.id)]
+                         ('location_dest_id', '=', loc_customers.id)],
+                        limit=1
                         )
                     if target:
                         bo.move_lines.write({'picking_id': target.id})
