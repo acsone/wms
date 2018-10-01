@@ -241,6 +241,7 @@ migration:
           - split_coda
           - stock_inventory_products
           - sale_confirm_background
+          - stock_lot_loss
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
@@ -547,6 +548,7 @@ migration:
           - product_additional
           - specific_purchase
           - db2_import
+          - stock_lot_loss
           ### OCA/account-analytic
           - product_analytic
           ### server-tools

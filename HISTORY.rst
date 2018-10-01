@@ -21,6 +21,8 @@ Unreleased
 * ALCYN-1460: Add a sale exception for customer that do not want back order.
 * ALCYN-1530: Install the module product_analytic from akretion
 * ALCYN-221: Add on sale order line a warning exception message if it will include a some promotional products.
+* ALCYN-1462:
+  * Add module stock_lot_loss to be able to change a lot operation during a picking (used by Zetes)
 
 **Bugfixes**
 
