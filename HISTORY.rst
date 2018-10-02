@@ -14,6 +14,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-429: Add Autorisation/APB Fields to res.partner and account.view_partner_property_form
+* ALCYN-1460: Add a sale exception for customer that do not want back order.
 
 **Bugfixes**
 

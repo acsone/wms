@@ -153,6 +153,18 @@ failed = object.price_subtotal &lt; 0
             </field>
         </record>
 
+        <record id="no_backorder" model="exception.rule">
+            <field name="name">No backorder</field>
+            <field name="description">This customer does not want backorder</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_backorder()
+            </field>
+        </record>
+
 
       <!-- General exceptions not enabled, test only or ? Should keep ? -->
 

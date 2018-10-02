@@ -598,3 +598,9 @@ class SaleOrderLine(models.Model):
         """Add warning for psychotropic product on sale order line."""
         psycho_cat = self.env.ref('specific_data.product_categ_stupefiant')
         return self.product_id.categ_id.has_for_parent(psycho_cat.id)
+
+    def validate_no_backorder(self):
+        """Block backorder for customer that specifically do not want them."""
+        if not self.product_qty_unavailable:
+            return False
+        return not self.order_id.partner_id.is_sale_back_order_accepted

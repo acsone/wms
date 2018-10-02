@@ -539,6 +539,7 @@ migration:
       addons:
         upgrade:
           - specific_partner
+          - specific_sale
       modes:
         full:
           operations:
