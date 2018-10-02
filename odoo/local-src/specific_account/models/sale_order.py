@@ -55,9 +55,10 @@ class SaleOrder(models.Model):
         date_invoice = date.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
         query = """
-        SELECT DISTINCT so.partner_id
+        SELECT DISTINCT so.partner_invoice_id
         FROM sale_order AS so
-          INNER JOIN res_partner AS partner ON partner.id = so.partner_id
+          INNER JOIN res_partner AS partner
+          ON partner.id = so.partner_invoice_id
         WHERE so.invoice_status = 'to invoice'
         AND partner.invoice_grouping = 'all_at_once'
         AND partner.invoice_frequency IN %s
@@ -74,7 +75,8 @@ class SaleOrder(models.Model):
         query = """
         SELECT invoice.id
         FROM account_invoice AS invoice
-          INNER JOIN res_partner AS partner ON invoice.partner_id = partner.id
+          INNER JOIN res_partner AS partner
+          ON invoice.partner_id = partner.id
         WHERE partner.invoice_grouping = 'by_delivery'
         AND partner.invoice_frequency IN %s
         AND invoice.state = 'draft'
@@ -105,8 +107,8 @@ class SaleOrder(models.Model):
 
                 sales_to_merge = self.search(
                     [('invoice_status', '=', 'to invoice'),
-                        ('partner_id', '=', partner.id),
-                        ('is_unique_invoice', '=', False)])
+                     ('partner_invoice_id', '=', partner.id),
+                     ('is_unique_invoice', '=', False)])
                 sales_to_merge = sales_to_merge\
                     .with_context(mail_auto_subscribe_no_notify=True)
                 invoice_ids = \
@@ -114,7 +116,7 @@ class SaleOrder(models.Model):
 
                 sales_to_invoice = self.search([
                     ('invoice_status', '=', 'to invoice'),
-                    ('partner_id', '=', partner.id),
+                    ('partner_invoice_id', '=', partner.id),
                     ('is_unique_invoice', '=', True)])
                 sales_to_invoice = sales_to_invoice\
                     .with_context(mail_auto_subscribe_no_notify=True)
