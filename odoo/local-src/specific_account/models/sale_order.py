@@ -61,16 +61,8 @@ class SaleOrder(models.Model):
         WHERE so.invoice_status = 'to invoice'
         AND partner.invoice_grouping = 'all_at_once'
         AND partner.invoice_frequency IN %s
-        UNION ALL
-        SELECT DISTINCT invoice.partner_id
-        FROM account_invoice AS invoice
-          INNER JOIN res_partner AS partner ON invoice.partner_id = partner.id
-        WHERE partner.invoice_grouping = 'by_delivery'
-        AND partner.invoice_frequency IN %s
-        AND invoice.state = 'draft'
         """
-        self.env.cr.execute(query, (tuple(invoice_frequency),
-                                    tuple(invoice_frequency)))
+        self.env.cr.execute(query, (tuple(invoice_frequency), ))
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
         index = 0
@@ -79,67 +71,61 @@ class SaleOrder(models.Model):
             self.with_delay()._job_invoices_by_partners(chunk, date_invoice)
             index += chunk_size
 
-    @api.multi
-    @job(default_channel='root.invoices_creation')
-    def _job_create_draft_invoice(self):
+        query = """
+        SELECT invoice.id
+        FROM account_invoice AS invoice
+          INNER JOIN res_partner AS partner ON invoice.partner_id = partner.id
+        WHERE partner.invoice_grouping = 'by_delivery'
+        AND partner.invoice_frequency IN %s
+        AND invoice.state = 'draft'
+        AND invoice.type = 'out_invoice'
+        """
+        self.env.cr.execute(query, (tuple(invoice_frequency), ))
+        invoice_ids = [x[0] for x in self.env.cr.fetchall()]
+        invoices = self.env['account.invoice'].browse(invoice_ids)
+        for invoice in invoices:
+            invoice.with_delay()._job_validate_invoice(date_invoice)
 
+    @api.multi
+    @job(default_channel='root.invoice_creation')
+    def _job_create_draft_invoice(self):
         self.with_context(mail_auto_subscribe_no_notify=True)\
             .action_invoice_create(final=True)
 
     @api.multi
-    @job(default_channel='root.invoices_creation')
+    @job(default_channel='root.invoice_creation')
     def _job_invoices_by_partners(self, partner_ids, date_invoice):
-        for partner in self.env['res.partner'].browse(partner_ids):
+        partners = self.env['res.partner'].browse(partner_ids)
+        assert all(p.invoice_grouping == 'all_at_once' for p in partners), \
+            "Invalid invoice grouping"
+        for partner in partners:
             try:
                 cr = registry(self._cr.dbname).cursor()
                 self = self.with_env(self.env(cr=cr))
-                AccountInvoice = self.env['account.invoice']
 
-                invoice_grouping = partner.invoice_grouping
-
-                if not invoice_grouping:
-                    continue
-
-                if invoice_grouping == 'all_at_once':
-                    sales_to_merge = self.search(
-                        [('invoice_status', '=', 'to invoice'),
-                         ('partner_id', 'in', partner_ids),
-                         ('is_unique_invoice', '=', False)])
-                    sales_to_merge = sales_to_merge\
-                        .with_context(mail_auto_subscribe_no_notify=True)
-                    invoice_ids = \
-                        sales_to_merge.action_invoice_create(final=True)
-                    invoices = AccountInvoice.browse(invoice_ids)
-                elif invoice_grouping == 'by_delivery':
-                    invoices = AccountInvoice.search([
-                        ('partner_id', '=', partner.id),
-                        ('state', '=', 'draft')
-                    ])
-                else:
-                    raise UserError(_('Unknown invoice type'))
-
-                sales_to_invoice = self.search(
+                sales_to_merge = self.search(
                     [('invoice_status', '=', 'to invoice'),
-                     ('partner_id', 'in', partner_ids),
-                     ('is_unique_invoice', '=', True)])
+                        ('partner_id', '=', partner.id),
+                        ('is_unique_invoice', '=', False)])
+                sales_to_merge = sales_to_merge\
+                    .with_context(mail_auto_subscribe_no_notify=True)
+                invoice_ids = \
+                    sales_to_merge.action_invoice_create(final=True)
 
-                invoice_ids = []
+                sales_to_invoice = self.search([
+                    ('invoice_status', '=', 'to invoice'),
+                    ('partner_id', '=', partner.id),
+                    ('is_unique_invoice', '=', True)])
+                sales_to_invoice = sales_to_invoice\
+                    .with_context(mail_auto_subscribe_no_notify=True)
                 for sale_to_invoice in sales_to_invoice:
                     invoice_ids.append(
                         sale_to_invoice.action_invoice_create(final=True))
 
-                if invoice_ids:
-                    invoices |= AccountInvoice.browse(invoice_ids)
-
-                cr.commit()
-
-                # Set date
-                invoices.write({
-                    'date_invoice': date_invoice})
-                cr.commit()
+                invoices = self.env['account.invoice'].browse(invoice_ids)
 
                 # Validate invoices
-                invoices.action_invoice_open()
+                invoices.with_delay()._job_validate_invoice(date_invoice)
                 cr.commit()
             except Exception as e:
                 _logger.error(

@@ -18,6 +18,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1522: Fix invoice generation automatic validation
+
 **Build**
 
 **Documentation**
