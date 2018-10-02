@@ -13,7 +13,25 @@ from odoo.addons.specific_zetes import constants
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
+    @api.model
+    def _default_location_id(self):
+        vlb_stock = self.env.ref('stock.stock_location_stock')
+        return vlb_stock.location_id.id
+
+    name = fields.Char(default='/')
+    location_id = fields.Many2one(default=_default_location_id)
+    note = fields.Text('Note')
+
     INVENTORY_NAMES = ['expensive', 'best_sellers', 'other']
+
+    @api.model
+    def create(self, vals):
+        sequence = self.env['ir.sequence']
+
+        if vals.get('name') == '/':
+            vals['name'] = sequence.next_by_code('stock.inventory')
+
+        return super(StockInventory, self).create(vals)
 
     @api.multi
     def action_done(self):

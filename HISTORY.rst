@@ -26,6 +26,7 @@ Unreleased
   * Add a voice identifier (3 letter) on a the lot label and adapt the lot label to add the voice identifier
   * Adapt Zetes to indicate to the operation which lot he must take and offer the possibility to change the current lot in an operation
 * ALCYN-432: Improve the responsiveness of the customer stat form web service, by implementing the fetching of data with a sql query (ESB)
+* ALCYN-1497: Add sequence (INV/######) and a note on inventory. Modify the view list of inventory to add some details.
 
 **Bugfixes**
 
