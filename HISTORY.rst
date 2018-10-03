@@ -20,6 +20,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1519: Disable procurement_order cron with noupdate.
+
 **Build**
 
 * Use Dockerimage: 3.0.0

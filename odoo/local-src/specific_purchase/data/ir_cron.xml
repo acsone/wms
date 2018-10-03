@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
+<odoo noupdate="1">
     <record id="generate_procurement_order" model="ir.cron">
         <field name="name">Generate procurement order</field>
         <field name="active" eval="True"/>
