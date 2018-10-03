@@ -526,7 +526,7 @@ migration:
       addons:
         upgrade:
           ### local-src
-          - specific_partner
+          - specific_sale
           - connector_esb
       operations:
         post:
