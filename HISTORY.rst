@@ -16,6 +16,8 @@ Unreleased
 
 **Build**
 
+* ALCYN-1511: Remove stock_picking_invoice_link from migration and uninstall
+
 **Documentation**
 
 
