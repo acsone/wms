@@ -33,20 +33,28 @@ class Sale(models.Model):
 
     @api.multi
     def order_lines_layouted(self):
+        """Improve the sale order line on the report.
+
+        If some products in the lines belongs to a product category that has a
+        warning message configured. Those lines are grouped together and a
+        line with the message is added before them.
+
+        A specific product category 'Human medicine' has besides the warning
+        message, for each of its product a line added to inform  about the
+        product transfert to a pharmacist.
+        """
         self.ensure_one()
         report_pages = super(Sale, self).order_lines_layouted()
-
         # Get the product categories in the sale order that contains a warning
         categories = self.order_line.mapped(
                 'product_id.categ_id').filtered('warning_info')
         # Group the lines by categories (with warning)
         warn_lines = {}
         for category in categories:
-            warn_lines[category] = self.env['sale.order.line'].search([
-                ('order_id', '=', self.id),
-                ('product_id.categ_id', 'child_of', category.id),
-                ]).sorted()
-        # Get all the line ids that belong to a category with warning
+            warn_lines[category] = self.order_line.filtered(
+                    lambda r: r.product_id.categ_id.id == category.id
+                ).sorted()
+        # Get all the line ids whose product belongs to a category with warning
         warn_line_ids = sum([l.ids for c, l in warn_lines.iteritems()], [])
         # Categories with specific display
         pharmacy_cat = self.env.ref('specific_data.product_categ_humain')
