@@ -536,6 +536,9 @@ migration:
           - anthem songs.install.user::import_wholesaler_users
           - anthem songs.upgrade.10_25_3_update::post
     - version: 10.25.4
+      addons:
+        upgrade:
+          - specific_partner
       modes:
         full:
           operations:
