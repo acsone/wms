@@ -543,6 +543,7 @@ migration:
           ### base
           - base
           ### local
+          - connector_esb
           - specific_partner
           - specific_sale
           - product_additional

@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from collections import namedtuple
-from itertools import groupby
 
 from odoo import fields
 from odoo.addons.component.core import Component
@@ -29,75 +28,77 @@ class StatisticsFormWebserviceMessage(Component):
 
     options_for_form = StatsFormOptions
 
-    def _generate_domain(self, options):
-        partner = self.env['res.partner'].search(
-            [('ref', '=', options.customer_ref)],
-            limit=1,
-        )
-        partner_and_addresses = self.env['res.partner'].search(
-            [('parent_id', 'child_of', partner.id)],
-        )
-
-        domain = [('order_id.partner_id', 'in', partner_and_addresses.ids),
-                  ('invoice_status', '=', 'invoiced')]
-        if options.start:
-            domain_start = fields.Date.to_string(options.start)
-            domain.append(('order_id.date_order', '>=', domain_start))
-        if options.end:
-            domain_end = fields.Date.to_string(options.end)
-            domain.append(('order_id.date_order', '<=', domain_end))
-        if options.product_type:
-            domain.append(
-                ('product_id.categ_id.alcyon_product_type', '=',
-                 options.product_type)
-            )
-        if options.suppliers:
-            domain.append(
-                ('product_id.seller_ids.name.ref', 'in', options.suppliers)
-            )
-        return domain
-
     def _data_for_message(self, options):
-        domain = self._generate_domain(options)
 
-        lang_code = options.language or 'FR'
-        lang = self.env['res.lang'].search([('esb_ref', '=', lang_code)])
+        sql = '''
+            SELECT
+                pp.default_code AS "sku",
 
-        line_model = self.env['sale.order.line'].with_context(lang=lang.code)
-        lines = line_model.search(domain)
+                COALESCE(
+                    (SELECT value
+                        FROM ir_translation
+                        LEFT JOIN res_lang
+                            ON ir_translation.lang = res_lang.code
+                        WHERE res_lang.esb_ref=%s AND
+                            ir_translation.name='product.template,name' AND
+                            res_id = pt.id LIMIT 1
+                    ),
+                    pt.name
+                ) AS "productName",
 
-        data = []
-        lines = lines.sorted(lambda l: l.product_id.id)
-        for __, lines in groupby(lines, key=lambda l: l.product_id.id):
-            lines = list(lines)
-            delivered = 0.
-            total = 0.
-            for line in lines:
-                delivered += line.qty_delivered
-                # compute total price only for delivered items
-                price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-                taxes = line.tax_id.compute_all(
-                    price, line.order_id.currency_id, line.qty_delivered,
-                    product=line.product_id,
-                    partner=line.order_id.partner_shipping_id
-                )
-                total += taxes['total_excluded']
+                pc.alcyon_product_type AS "productType",
 
-            product = lines[0].product_id
-            rate = sum(lines[0].tax_id.mapped('amount'))
-            supplier = (','.join(product.mapped('seller_ids.name.ref'))
-                        if product.seller_ids else '')
-            values = {
-                'sku': product.default_code,
-                'productName': product.name,
-                'productType': product.categ_id.alcyon_product_type,
-                'manufacturer': supplier,
-                'qtyDelivered': delivered,
-                'totalPrice': round(total, 3),
-                'taxRate': rate,
-            }
-            data.append(values)
-        return data
+                STRING_AGG(distinct supplier.ref, ',' ORDER BY supplier.ref)
+                    AS "manufacturer",
+
+                SUM(sol.qty_delivered) / count(sol.id) AS "qtyDelivered",
+
+                ROUND(SUM(sol.qty_delivered * sol.price_unit) / count(sol.id)
+                      , 3)
+                    AS "totalPrice",
+
+                (SELECT SUM(amount)
+                    FROM account_tax
+                    LEFT JOIN product_taxes_rel
+                        ON product_taxes_rel.tax_id = account_tax.id
+                    WHERE product_taxes_rel.prod_id = pt.id
+                )  AS "taxRate"
+
+            FROM sale_order_line AS sol
+            LEFT JOIN product_product AS pp ON sol.product_id = pp.id
+            LEFT JOIN product_template AS pt ON pp.product_tmpl_id = pt.id
+            LEFT JOIN product_category AS pc ON pt.categ_id = pc.id
+            LEFT JOIN sale_order AS so ON sol.order_id = so.id
+            LEFT JOIN res_partner AS customer ON customer.id = so.partner_id
+            RIGHT OUTER JOIN product_supplierinfo AS psi
+                ON psi.product_tmpl_id = pt.id
+            LEFT JOIN res_partner AS supplier ON supplier.id = psi.name
+
+            WHERE sol.invoice_status = 'invoiced' AND
+                  customer.ref = %s
+        '''
+
+        params = []
+        params.append(options.language or 'FR')
+        params.append(options.customer_ref)
+        if options.product_type:
+            sql += " AND pc.alcyon_product_type = %s"
+            params.append(options.product_type)
+        if options.start:
+            sql += " AND so.date_order >= %s"
+            params.append(fields.Date.to_string(options.start))
+        if options.end:
+            sql += " AND so.date_order <= %s"
+            params.append(fields.Date.to_string(options.end))
+        if options.suppliers:
+            sql += " AND supplier.ref in %s"
+            params.append(tuple(options.suppliers))
+        sql += ' GROUP BY pp.id,pp.default_code,pc.alcyon_product_type,pt.id;'
+
+        self.env.cr.execute(sql, params)
+        data = self.env.cr.fetchall()
+        column_names = [column.name for column in self.env.cr.description]
+        return [dict(zip(column_names, row)) for row in data]
 
     def get_message(self, options):
         return self._produce_xml(self._data_for_message(options))
