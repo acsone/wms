@@ -15,6 +15,7 @@
         'calendar',
         'purchase_cancel_reason',
         'specific_product',
+        'stock_unit',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -231,6 +231,7 @@ migration:
           - stock_receive_lot
           - stock_reception_priority
           - stock_refill
+          - stock_unit
           - stock_valuation
           - web_autorefresh
           - code_abc
@@ -528,6 +529,8 @@ migration:
           ### local-src
           - specific_sale
           - connector_esb
+          - specific_purchase
+          - stock_unit
       operations:
         post:
           - anthem songs.install.user::import_wholesaler_users
