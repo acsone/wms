@@ -486,6 +486,8 @@ migration:
         upgrade:
           ### local-src
           - connector_esb
+          - specific_partner
+          - specific_report
       modes:
         full:
           operations:

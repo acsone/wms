@@ -9,9 +9,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
-        'delivery',  # not required but necessary for Travis as it adds a
-                     # required weigth_uom_id field in DB
-        ],
+    ],
     'data': [
         'views/stock_config_settings.xml',
         'views/product_template.xml',
