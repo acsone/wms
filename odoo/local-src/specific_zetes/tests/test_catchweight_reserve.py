@@ -50,7 +50,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 20,  # Pick 20 unit,
             'Usf03': None,
         })
@@ -79,7 +79,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 15,  # Pick 15 unit,
             'Usf03': None,
         })

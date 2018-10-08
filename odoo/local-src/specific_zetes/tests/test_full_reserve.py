@@ -158,7 +158,7 @@ class TestFullReserve(ZetesReserveTest):
         validate_pick_items_params.update({
             'groupNum': picking.id,
             'lineId': line_product_1.moveLineId,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 20,  # Pick 20 items
             'Usf03': None,
         })

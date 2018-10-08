@@ -51,7 +51,7 @@ class TestCatchweight(ZetesTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 5,  # Pick 5 unit,
             'Usf03': None,
         })
@@ -72,7 +72,7 @@ class TestCatchweight(ZetesTest):
         second_request_params = Parameters(domain, action='resu')
         second_request_params.update({
             'lineId': pack_op.id,
-            'Usf01': second_lot.checksum,
+            'Usf01': second_lot.voice_identifier,
             'Usf02': 5,  # Pick 5 unit in a second lot,
             'Usf03': None,
         })
@@ -128,7 +128,7 @@ class TestCatchweight(ZetesTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 15,  # Pick 15 unit,
             'Usf03': None,
         })
@@ -160,7 +160,7 @@ class TestCatchweight(ZetesTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 0,
             'Usf03': 90,
         })
@@ -175,7 +175,7 @@ class TestCatchweight(ZetesTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 0,
             'Usf03': 93,
         })

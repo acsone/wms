@@ -28,6 +28,11 @@ class StockPicking(models.Model):
         copy=False,
         required=True)
     is_zetes_error = fields.Boolean('Zetes error', copy=False)
+    nbr_actions = fields.Integer(
+        'Nbr of actions',
+        compute='_compute_nbr_actions',
+        readonly=True
+    )
 
     @api.model
     def default_get(self, fields_list):
@@ -90,13 +95,25 @@ class StockPicking(models.Model):
             # 1. A wizard if no quantity has been defined on lines
             #   (this wizard will set the quantity on each lines)
             # 2. A wizard if we need to create a back order
-            if isinstance(result, dict):
+            if isinstance(result, dict) and result:
                 model = result.get('res_model')
                 wizard = self.env[model].browse(int(result.get('res_id')))
 
                 # Fortunately these wizards have the same
                 # method "process" to execute the wizard
                 wizard.process()
+
+    @api.multi
+    def _compute_nbr_actions(self):
+        for picking in self:
+            lines = picking.pack_operation_ids
+            lines = lines.filtered(
+                lambda line: int(line.qty_done) != int(line.product_qty)
+                and line.zetes_state in [constants.OP_DEFAULT,
+                                         constants.OP_SKIPPED,
+                                         constants.OP_CANCELED])
+            split_lines = lines.split_pack_op_lines()
+            picking.nbr_actions = len(split_lines)
 
 
 class PackOperationReserveRel(models.Model):
@@ -299,6 +316,21 @@ class StockPackOperation(models.Model):
                 })
 
         pack_lot_to_unlink.unlink()
+
+    @api.multi
+    def split_pack_op_lines(self):
+        result = []
+
+        for line in self:
+            if not line.pack_lot_ids:
+                result.append((line, None))
+                continue
+
+            for pack_op_lot in line.pack_lot_ids:
+                if pack_op_lot.qty < pack_op_lot.qty_todo:
+                    result.append((line, pack_op_lot))
+
+        return result
 
 
 class StockPickingType(models.Model):

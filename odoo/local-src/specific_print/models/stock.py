@@ -2,8 +2,12 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
 from odoo import models, api, _
 from odoo.exceptions import Warning
+
+_logger = logging.getLogger(__name__)
 
 
 def hw_print(self, report_xmlid, printer=False, qty=1):
@@ -18,7 +22,8 @@ def hw_print(self, report_xmlid, printer=False, qty=1):
         printer.print_document(report, document, 'text')
     except UnicodeEncodeError as e:
         raise e
-    except Exception:
+    except Exception as e:
+        _logger.error(str(e))
         raise Warning(_('Printer unavailable'))
 
 

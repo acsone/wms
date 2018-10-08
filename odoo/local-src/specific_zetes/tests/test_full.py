@@ -262,20 +262,24 @@ class TestFull(ZetesTest):
         request_picking_lines_params.update({
             'groupNum': self.picking.id,
             'tripCounter': '1',
-            'Cri01': '0'
+            'Cri01': '0',
+            'Usf06': None
         })
         result_str = itempick_obj.requ(request_picking_lines_params)
         result_lines = result_str.split('\n')
         results = \
             [self.format_result(result_line) for result_line in result_lines]
-        self.assertEqual(len(results), 3)
+        self.assertEqual(len(results), 4)
         line_product_1 = results[0]
         line_product_2 = results[1]
-        line_product_3 = results[2]
+        line_product_3_lot_1 = results[2]
+        line_product_3_lot_2 = results[3]
 
         # Test line 1
         pack_op_1 = self.picking.pack_operation_product_ids[0]
-        self.assertEqual(line_product_1.pickLineId, str(pack_op_1.id))
+        pack_op_1_id, lot_id = line_product_1.pickLineId.split('_')
+        self.assertEqual(pack_op_1_id, str(pack_op_1.id))
+        self.assertEqual(lot_id, str(self.lot_product_1.id))
         self.assertEqual(line_product_1.productCode,
                          self.product_1.default_code)
         self.assertEqual(int(line_product_1.reqQty), 10)
@@ -287,24 +291,45 @@ class TestFull(ZetesTest):
         self.assertEqual(line_product_1.sourceLC4, 'B')
         self.assertEqual(line_product_1.sourceLC5, '1')
         self.assertEqual(line_product_1.sourceLCCD, '12')
-        self.assertEqual(line_product_1.Usf01, self.lot_product_1.checksum)
+        self.assertEqual(line_product_1.Usf01,
+                         self.lot_product_1.voice_identifier)
 
         # Test line 2
         pack_op_2 = self.picking.pack_operation_product_ids[1]
-        self.assertEqual(line_product_2.pickLineId, str(pack_op_2.id))
+        pack_op_2_id, lot_id = line_product_2.pickLineId.split('_')
+        self.assertEqual(pack_op_2_id, str(pack_op_2.id))
+        self.assertEqual(lot_id, str(self.lot_product_2.id))
         self.assertEqual(line_product_2.productCode,
                          self.product_2.default_code)
         self.assertEqual(int(line_product_2.reqQty), 10)
-        self.assertEqual(line_product_2.Usf01, self.lot_product_2.checksum)
+        self.assertEqual(line_product_2.Usf01,
+                         self.lot_product_2.voice_identifier)
 
         # Test line 3
         pack_op_3 = self.picking.pack_operation_product_ids[2]
-        self.assertEqual(line_product_3.pickLineId, str(pack_op_3.id))
-        self.assertEqual(line_product_3.productCode,
+        pack_op_id, lot_id, = line_product_3_lot_1.pickLineId.split('_')
+        self.assertEqual(pack_op_id, str(pack_op_3.id))
+        self.assertEqual(lot_id, str(self.lot_product_3_1.id))
+        self.assertEqual(line_product_3_lot_1.productCode,
                          self.product_3.default_code)
-        self.assertEqual(int(line_product_3.reqQty), 50)
-        self.assertEqual(line_product_3.Usf01, self.lot_product_3_1.checksum)
-        self.assertEqual(line_product_3.Usf02, self.lot_product_3_2.checksum)
+        self.assertEqual(int(line_product_3_lot_1.reqQty), 20)
+        self.assertEqual(line_product_3_lot_1.Usf01,
+                         self.lot_product_3_1.voice_identifier)
+        self.assertEqual(line_product_3_lot_1.Usf02,
+                         self.lot_product_3_1.checksum)
+
+        # Test line 4
+        pack_op_3 = self.picking.pack_operation_product_ids[2]
+        pack_op_id, lot_id, = line_product_3_lot_2.pickLineId.split('_')
+        self.assertEqual(pack_op_id, str(pack_op_3.id))
+        self.assertEqual(lot_id, str(self.lot_product_3_2.id))
+        self.assertEqual(line_product_3_lot_2.productCode,
+                         self.product_3.default_code)
+        self.assertEqual(int(line_product_3_lot_2.reqQty), 30)
+        self.assertEqual(line_product_3_lot_2.Usf01,
+                         self.lot_product_3_2.voice_identifier)
+        self.assertEqual(line_product_3_lot_2.Usf02,
+                         self.lot_product_3_2.checksum)
 
         ##########
         # Step 5 #
@@ -314,7 +339,7 @@ class TestFull(ZetesTest):
             'groupNum': self.picking.id,
             'pickLineId': pack_op_1.id,
             'productCode': self.product_1.default_code,
-            'lotNumber': self.lot_product_1.checksum,
+            'lotNumber': self.lot_product_1.voice_identifier,
             'effQty': None,
         })
 
@@ -327,7 +352,7 @@ class TestFull(ZetesTest):
         request_pick_items_params.update({
             'groupNum': self.picking.id,
             'lineId': pack_op_1.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 10,  # Pick 10 items
             'Usf03': None,
         })
@@ -356,7 +381,7 @@ class TestFull(ZetesTest):
             'groupNum': self.picking.id,
             'pickLineId': pack_op_2.id,
             'productCode': self.product_2.default_code,
-            'lotNumber': self.lot_product_2.checksum,
+            'lotNumber': self.lot_product_2.voice_identifier,
             'effQty': None,
         })
 
@@ -370,7 +395,7 @@ class TestFull(ZetesTest):
         request_pick_items_params.update({
             'groupNum': self.picking.id,
             'lineId': pack_op_2.id,
-            'Usf01': self.lot_product_2.checksum,
+            'Usf01': self.lot_product_2.voice_identifier,
             'Usf02': 6,  # Pick 6 items,
             'Usf03': None,
         })
@@ -399,7 +424,7 @@ class TestFull(ZetesTest):
             'groupNum': self.picking.id,
             'pickLineId': pack_op_3.id,
             'productCode': self.product_3.default_code,
-            'lotNumber': self.lot_product_3_1.checksum,
+            'lotNumber': self.lot_product_3_1.voice_identifier,
             'effQty': None,
         })
 
@@ -413,7 +438,7 @@ class TestFull(ZetesTest):
         request_pick_items_params.update({
             'groupNum': self.picking.id,
             'lineId': pack_op_3.id,
-            'Usf01': self.lot_product_3_1.checksum,
+            'Usf01': self.lot_product_3_1.voice_identifier,
             'Usf02': 20,
             'Usf03': None,
         })
@@ -445,7 +470,7 @@ class TestFull(ZetesTest):
         request_pick_items_params.update({
             'groupNum': self.picking.id,
             'lineId': pack_op_3.id,
-            'Usf01': self.lot_product_3_2.checksum,
+            'Usf01': self.lot_product_3_2.voice_identifier,
             'Usf02': 30,
             'Usf03': None,
         })

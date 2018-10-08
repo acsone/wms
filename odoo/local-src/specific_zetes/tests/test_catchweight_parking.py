@@ -64,7 +64,7 @@ class TestCatchweightParking(ZetesParkingTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 100,  # Pick 100 unit,
             'Usf03': None,
         })
@@ -92,7 +92,7 @@ class TestCatchweightParking(ZetesParkingTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 80,  # Pick 80 unit,
             'Usf03': None,
         })
@@ -118,7 +118,7 @@ class TestCatchweightParking(ZetesParkingTest):
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 20,  # Pick 20 unit,
             'Usf03': None,
         })

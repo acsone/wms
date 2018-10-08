@@ -24,6 +24,7 @@ Unreleased
 * ALCYN-1462:
   * Add module stock_lot_loss to be able to change a lot operation during a picking (used by Zetes)
   * Add a voice identifier (3 letter) on a the lot label and adapt the lot label to add the voice identifier
+  * Adapt Zetes to indicate to the operation which lot he must take and offer the possibility to change the current lot in an operation
 
 **Bugfixes**
 

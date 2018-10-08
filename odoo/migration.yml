@@ -551,6 +551,7 @@ migration:
           - stock_lot_loss
           - specific_stock
           - specific_print
+          - specific_zetes
           ### OCA/account-analytic
           - product_analytic
           ### server-tools

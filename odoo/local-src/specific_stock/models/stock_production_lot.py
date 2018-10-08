@@ -230,7 +230,8 @@ class StockProductionLot(models.Model):
             _____
             (1') the location GK6B06 is correct
             (2') the range for the location GK6B06 is GK4 to GK8
-            (3') there are 4 lots voice identifier in this range (AZS, KCD, IUE)
+            (3') there are 4 lots voice identifier in this range (
+                 AZS, KCD, IUE)
 
         (4) compute the voice identifier WHS not include in
         (ART, DPV, NSD, AZS, KCD, IUE)
