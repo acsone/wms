@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-74: Set new APB tax on products
 * ALCYN-455: Set BO to zero on imported sale orders.
+* ALCYN-1515: Fix import creation of orderpoints when importing values of stock min/max on products
 
 **Features and Improvements**
 

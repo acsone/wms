@@ -111,8 +111,7 @@ def import_products(ctx):
     load_ctx.update({
         'tracking_disable': True,
         'no_connector_export': True,
-        'force_archive_orderpoint': True,
-        'disable_constrains_orderpoint': True})
+        'force_archive_orderpoint': True})
 
     Product = ctx.env['product.product'].with_context(load_ctx)
     file_csv = 'data/install/product.csv'
