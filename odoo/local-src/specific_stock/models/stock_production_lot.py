@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import random
+import string
+from itertools import product as itertools_product
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
@@ -17,6 +19,7 @@ class StockProductionLot(models.Model):
     )
     is_archived = fields.Boolean('Archived', default=False, readonly=True)
     checksum = fields.Char('Checksum', readonly=True)
+    voice_identifier = fields.Char('Voice Identifier', readonly=True)
 
     # Cancel defaults values from `product_expiry` module
     _defaults = {
@@ -37,6 +40,9 @@ class StockProductionLot(models.Model):
 
         if 'checksum' not in vals:
             result.compute_checksum()
+
+        if 'voice_identifier' not in vals:
+            result.compute_voice_identifier()
 
         return result
 
@@ -117,8 +123,8 @@ class StockProductionLot(models.Model):
                 shelf = location.shelf
 
                 # Step 2: Compute the range of shelves
-                # We can ignore this step if we are already
-                # compute this location
+                # We can ignore this step if we have already
+                # computed the range for this location
                 if (zone, corridor, shelf) in location_to_skip:
                     continue
 
@@ -129,7 +135,7 @@ class StockProductionLot(models.Model):
                 try:
                     shelf_code = int(shelf)
                     is_letter = False
-                except Exception:
+                except ValueError:
                     shelf_code = ord(shelf)
                     is_letter = True
 
@@ -189,6 +195,158 @@ class StockProductionLot(models.Model):
             checksum = random.choice(picklist)
             checksum_not_available.add(checksum)
             lot.checksum = checksum
+
+    @api.multi
+    def compute_voice_identifier(self):
+        """
+        This method will compute a voice identifier on each lot.
+        A voice identifier on a lot has some constrains:
+        - The size of the voice identifier should be 3 letters (can be changed)
+        - A voice identifier cannot be used twice in a specific range
+        (1 shelf on the left and 1 shelf on the right)
+
+        To have the shelf next door we have to add 2 to the current shelf.
+
+        A lot may be split in several bin. It's why we need to check all BIN
+         to be sure that there is no other lot with the same voice identifier.
+
+
+         Steps to compute a voice identifier:
+          1. Verify if the lot is linked to a location
+          2. Compute the range of shelves
+          3. Retrieve all voice identifiers in this range (S-2/S+2)
+          4. Compute a random voice identifier not used
+
+        Example:
+        We have a new lot (0000123)
+        The lot will be split in two bin.
+        - bin_1: GB2D11 (zone: G, corridor: B, shelf: 2, height: D, box: 11)
+        - bin_2: GK6B06 (zone: G, corridor: K, shelf: 6, height: B, box: 06)
+
+        For bin_1 and bin_2:
+            (1) the location GB2D11 is correct
+            (2) the range for the location GB2D11 is GB1 to GB4
+            (3) there are 3 lots voice identifier in this range (ART, DPV, NSD)
+            _____
+            (1') the location GK6B06 is correct
+            (2') the range for the location GK6B06 is GK4 to GK8
+            (3') there are 4 lots voice identifier in this range (AZS, KCD, IUE)
+
+        (4) compute the voice identifier WHS not include in
+        (ART, DPV, NSD, AZS, KCD, IUE)
+
+        If there is not voice identifier available
+        no voice identifier will be assigned to the lot
+        :return:
+        """
+        lot_voice_identifier_size = int(
+            self.env['ir.config_parameter']
+                .get_param('lot_voice_identifier_size', 3)
+        )
+        same_lot_voice_identifier_range = int(
+            self.env['ir.config_parameter']
+                .get_param('same_lot_voice_identifier_range', 2)
+        )
+
+        for lot in self:
+            product = lot.product_id
+            if not product or (lot.voice_identifier
+                               and not self._context.get('force_compute')):
+                continue
+
+            voice_identifier_not_available = set()
+            location_to_skip = set()
+            # We check all BINs
+            for stock_bin in product.stock_bin_ids:
+                location = stock_bin.bin_location_id
+
+                # Step 1: Check the location
+                if not location.is_valid_location:
+                    continue
+
+                zone = location.zone
+                corridor = location.corridor
+                shelf = location.shelf
+
+                # Step 2: Compute the range of shelves
+                # We can ignore this step if we are already
+                # compute this location
+                if (zone, corridor, shelf) in location_to_skip:
+                    continue
+
+                location_to_skip.add((zone, corridor, shelf))
+
+                range_of_shelves = []
+
+                try:
+                    shelf_code = int(shelf)
+                    is_letter = False
+                except Exception:
+                    shelf_code = ord(shelf)
+                    is_letter = True
+
+                min_shelf_code = shelf_code - same_lot_voice_identifier_range
+                max_shelf_code = shelf_code + same_lot_voice_identifier_range
+                for code in (min_shelf_code, shelf_code, max_shelf_code):
+                    if is_letter:
+                        if code < ord('A') or code > ord('Z'):
+                            continue
+                        code = unichr(code)
+                    else:
+                        if code < 1:
+                            continue
+                        code = format(code, '0%d' % 2)
+
+                    range_of_shelves.append(code)
+
+                # Step 3: Retrieve all lot voice identifier
+                # used in this shelf range
+                not_available_voice_identifier_query = """
+                SELECT DISTINCT lot.voice_identifier
+                FROM stock_production_lot AS lot
+                WHERE lot.product_id IN (
+                  SELECT product_product.id
+                  FROM product_product
+                  WHERE product_product.product_tmpl_id IN (
+                    SELECT stock_bin.product_id
+                    FROM product_stock_bin AS stock_bin
+                    WHERE stock_bin.bin_location_id IN (
+                      SELECT location.id
+                      FROM stock_location AS location
+                      WHERE location.zone = %s
+                      AND location.corridor = %s
+                      AND location.shelf IN %s)
+                    )
+                  )
+                AND (lot.is_archived = FALSE OR lot.is_archived IS NULL);
+                """
+                self.env.cr.execute(not_available_voice_identifier_query,
+                                    (location.zone,
+                                     location.corridor,
+                                     tuple(range_of_shelves)))
+                for result in self.env.cr.fetchall():
+                    if result[0]:
+                        voice_identifier_not_available.add(result[0])
+
+            # 26 is for number letters in the alphabet
+            nbr_possibilities = 26 ** lot_voice_identifier_size
+            if len(voice_identifier_not_available) == nbr_possibilities:
+                raise UserError(_('There is no voice identifier available'))
+
+            # Step 4: Generate a list with all available identifiers
+            combinations_list = [''.join(cc) for cc in itertools_product(
+                string.ascii_uppercase, repeat=3)]
+            available_voice_identifiers = \
+                list(set(combinations_list) -
+                     set(voice_identifier_not_available))
+
+            if not available_voice_identifiers:
+                raise UserError(_('Cannot generate a voice identifier'))
+
+            # Chose randomly an available voice identifier
+            voice_identifier = random.choice(available_voice_identifiers)
+
+            lot.voice_identifier = voice_identifier
 
     @api.model
     def archive_lots(self):

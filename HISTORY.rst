@@ -23,6 +23,7 @@ Unreleased
 * ALCYN-221: Add on sale order line a warning exception message if it will include a some promotional products.
 * ALCYN-1462:
   * Add module stock_lot_loss to be able to change a lot operation during a picking (used by Zetes)
+  * Add a voice identifier (3 letter) on a the lot label and adapt the lot label to add the voice identifier
 
 **Bugfixes**
 

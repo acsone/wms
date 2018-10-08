@@ -37,6 +37,9 @@ class StockPicking(models.Model):
         # Group by picking/product
         packop_by_product = {}
         for pack_operation in result:
+            if 'product_id' not in pack_operation:
+                continue
+
             picking_id = pack_operation['picking_id']
             product_id = pack_operation['product_id']
             key = (picking_id, product_id)

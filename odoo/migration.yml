@@ -549,6 +549,8 @@ migration:
           - specific_purchase
           - db2_import
           - stock_lot_loss
+          - specific_stock
+          - specific_print
           ### OCA/account-analytic
           - product_analytic
           ### server-tools

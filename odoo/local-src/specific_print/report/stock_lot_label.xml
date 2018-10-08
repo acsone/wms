@@ -18,6 +18,7 @@
 ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS\r
 ^FO35,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS\r
+^FO420,342^A0N,118,103^CI13^FR^FD<t t-esc="lot.voice_identifier"/>^FS\r
 ^PQ<t t-esc="qty"/>,0,0,N
 ^XZ
 </t>
