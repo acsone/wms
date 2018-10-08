@@ -6,8 +6,13 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='main_exception_id']/parent::group" position="attributes">
-                <attribute name="attrs">{'invisible':[('main_exception_id','=', False)]}</attribute>
+            <xpath expr="//field[@name='main_exception_id']/parent::group" position="replace">
+              <div class="alert alert-warning" role="alert" attrs="{'invisible': [('main_exception_id','=',False)]}">
+                <field name="main_exception_id"
+                  options="{'no_open': True}"
+                  class="oe_inline" 
+                  modifiers="{'invisible': [['main_exception_id', '=', false]], 'readonly': true}"/>
+              </div>
             </xpath>
 
             <field name="client_order_ref" position="replace"/>
