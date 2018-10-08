@@ -70,11 +70,28 @@ class ProductProduct(models.Model):
         """ Generate the domain to get stock with CNK product """
         domain = [('sale_ok', '=', True), ('cnk_code', '!=', False)]
 
-        user_newpharma = self.env.ref('__setup__.res_user_newpharma',
-                                      raise_if_not_found=False)
+        # The ESB Connector use the user Admin to execute the method
+        # However, the real user id is in the context
+        current_user = self.env['res.users'].search(
+            [('id', '=', self.env.context.get('uid'))])
 
-        if user_newpharma and self.env.context.get('uid') == user_newpharma.id:
+        if current_user.is_for_newpharma:
             domain += self.get_newpharma_products_domain()
+
+        return domain
+
+    @api.model
+    def get_sku_products_domain(self):
+        """ Generate the domain to get stock with SKU product """
+        domain = [('sale_ok', '=', True), ('default_code', '!=', False)]
+
+        # The ESB Connector use the user Admin to execute the method
+        # However, the real user id is in the context
+        current_user = self.env['res.users'].search(
+            [('id', '=', self.env.context.get('uid'))])
+
+        if current_user.is_for_olalux:
+            domain += self.get_olalux_products_domain()
 
         return domain
 
@@ -85,6 +102,66 @@ class ProductProduct(models.Model):
         """
 
         return [('veterinary_only', '=', False)]
+
+    @api.model
+    def get_olalux_products_domain(self):
+        """ Return an additional domain (used by the method search on
+        product.product) for the wholesaler Olalux.
+
+        Olalux can only have an access to following products:
+        - All products from Royal Canin, Hill's and Nestle
+        - Only food from V.M.D Aliments and DECHRA * (60422)
+        - Only food and parapharmacie from VIRBAC Belgium
+        and VIRBAC Belgium aliments
+        """
+
+        ##########################
+        # All products suppliers #
+        ##########################
+        # 78650: Royal Canin
+        # 68250: Hill's
+        # 61800: Nestle
+        all_products_supplier = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['78650', '68250', '61800'])])
+
+        #######################
+        # only food suppliers #
+        #######################
+        # Dechra: 60422
+        # V.M.D. Aliment: 82702
+        only_food_suppliers = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['60422', '82702'])])
+
+        #######################
+        # specific for Virbac #
+        #######################
+        # Virbac Belgium: 81200
+        # Virbac Belgium Aliment: 81201
+        virbac_suppliers = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['81200', '81201'])])
+
+        categ_ali = self.env.ref('specific_data.product_categ_ali')
+        categ_parapharmacie = \
+            self.env.ref('specific_data.product_categ_parapharmacie')
+
+        domain = [
+            '|',
+            ('supplier_id', 'in', all_products_supplier.ids),
+            '|',
+            '&',
+            ('supplier_id', 'in', only_food_suppliers.ids),
+            ('categ_id', 'child_of', categ_ali.id),
+            '&',
+            ('supplier_id', 'in', virbac_suppliers.ids),
+            '|',
+            ('categ_id', 'child_of', categ_ali.id),
+            ('categ_id', 'child_of', categ_parapharmacie.id)
+        ]
+
+        return domain
 
 
 class ProductTemplate(models.Model):

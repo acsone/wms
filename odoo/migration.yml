@@ -522,3 +522,12 @@ migration:
               - bin/importer.sh songs.install.data_full::import_product_name_nl /opt/odoo/data/install/product_name_nl_BE.csv
               - bin/importer.sh songs.install.data_full::import_product_name_fr /opt/odoo/data/install/product_name_fr_BE.csv
               - bin/importer.sh songs.install.data_full::import_product_name_en /opt/odoo/data/install/product_name_en_US.csv
+    - version: 10.25.3
+      addons:
+        upgrade:
+          ### local-src
+          - specific_sale
+          - connector_esb
+      operations:
+        post:
+          - anthem songs.install.user::import_wholesaler_users

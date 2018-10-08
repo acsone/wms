@@ -16,6 +16,7 @@ from . import test_ws_create_saleorder
 from . import test_ws_delivery_fee
 from . import test_ws_product_stock
 from . import test_ws_product_stock_cnk
+from . import test_ws_product_stock_sku
 from . import test_ws_saleorder_status
 from . import test_ws_stat_customer
 from . import test_ws_stat_product_customer

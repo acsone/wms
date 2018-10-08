@@ -22,6 +22,8 @@ Existing synchronizations:
 Webservices:
 
  * ``/connector_esb/product/stock``: return stock levels of products
+ * ``/connector_esb/product/stock/cnk``: return stock levels of all products or for some specific products with CNK code
+ * ``/connector_esb/product/stock/sku``: return stock levels of all products or for some specific products with SKU code
  * ``/connector_esb/statistics/form``: return statistics from
    parameters sent using a form
  * ``/connector_esb/statistics/product/<sku>/<customer_ref>`` :

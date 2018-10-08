@@ -60,3 +60,37 @@ class ProductStockCNKWebserviceMessage(Component):
             })
 
         return result
+
+
+class ProductStockSKUWebserviceMessage(Component):
+
+    _name = 'esb.webservice.message.product.stock.sku'
+    _inherit = ['esb.webservice.message.base']
+    _apply_on = ['product.product']
+    _usage = 'ws.message.product.stock.sku'
+
+    def get_message(self, product_skus=None):
+        ProductProduct = self.env['product.product']
+
+        domain = ProductProduct.get_sku_products_domain()
+
+        if product_skus:
+            domain.append(('default_code', 'in', product_skus))
+            product_recs = ProductProduct.search(domain, order='default_code')
+        else:
+            product_recs = ProductProduct.search(domain, order='default_code')
+
+        stock_by_product = product_recs.read(
+            ['immediately_usable_qty', 'default_code'])
+
+        result = []
+        for line in stock_by_product:
+            quantity = line['immediately_usable_qty']
+            quantity = quantity >= 0 and quantity or 0
+
+            result.append({
+                'quantity': quantity,
+                'sku': line['default_code']
+            })
+
+        return result

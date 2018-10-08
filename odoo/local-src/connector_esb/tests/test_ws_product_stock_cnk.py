@@ -72,3 +72,38 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
             component = work.component('ws.message.product.stock.cnk')
             result = component.get_message(cnks)
         self.assertEqual(len(result), 2)
+
+    def test_message_for_newpharma(self):
+        newpharma_user = self.env['res.users'].create({
+            'login': 'test_newpharma',
+            'name': 'Test NewPharma',
+            'is_for_newpharma': True
+        })
+
+        # Set the product 2 to veterinary_only == True
+        self.product2.veterinary_only = True
+
+        backend = self.env['esb.backend'].get_singleton()
+        cnks = self.all_records.mapped('cnk_code')
+
+        # Add fake CNK
+        cnks.append('00000001')
+
+        with backend.with_context(uid=newpharma_user.id)\
+                .work_on('product.product') as work:
+            component = work.component('ws.message.product.stock.cnk')
+            result = component.get_message(cnks)
+
+        product_mapper = {
+            '000015': self.product1,
+            '000048': self.product2,
+            '000115': self.product3
+        }
+
+        self.assertEqual(len(result), 2)
+        for product_values in result:
+            product = product_mapper[product_values['cnk']]
+            qty = product_values['quantity']
+            pid = product_values['pid']
+            self.assertEqual(product.immediately_usable_qty, qty)
+            self.assertEqual(product.default_code, pid)
