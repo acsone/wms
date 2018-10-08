@@ -70,10 +70,12 @@ class ProductProduct(models.Model):
         """ Generate the domain to get stock with CNK product """
         domain = [('sale_ok', '=', True), ('cnk_code', '!=', False)]
 
-        user_newpharma = self.env.ref('__setup__.res_user_newpharma',
-                                      raise_if_not_found=False)
+        # The ESB Connector use the user Admin to execute the method
+        # However, the real user id is in the context
+        current_user = self.env['res.users'].search(
+            [('id', '=', self.env.context.get('uid'))])
 
-        if user_newpharma and self.env.context.get('uid') == user_newpharma.id:
+        if current_user.is_for_newpharma:
             domain += self.get_newpharma_products_domain()
 
         return domain
@@ -83,10 +85,12 @@ class ProductProduct(models.Model):
         """ Generate the domain to get stock with SKU product """
         domain = [('sale_ok', '=', True), ('default_code', '!=', False)]
 
-        user_olalux = self.env.ref('__setup__.res_user_olalux',
-                                   raise_if_not_found=False)
+        # The ESB Connector use the user Admin to execute the method
+        # However, the real user id is in the context
+        current_user = self.env['res.users'].search(
+            [('id', '=', self.env.context.get('uid'))])
 
-        if user_olalux and self.env.context.get('uid') == user_olalux.id:
+        if current_user.is_for_olalux:
             domain += self.get_olalux_products_domain()
 
         return domain
@@ -114,48 +118,30 @@ class ProductProduct(models.Model):
         ##########################
         # All products suppliers #
         ##########################
-        royal_canin = self.env.ref('__import__.supplier_78650',
-                                   raise_if_not_found=False)
-        hills = self.env.ref('__import__.supplier_68250',
-                             raise_if_not_found=False)
-        nestle = self.env.ref('__import__.supplier_61800',
-                              raise_if_not_found=False)
-
-        all_products_supplier = self.env['res.partner']
-        if royal_canin:
-            all_products_supplier |= royal_canin
-        if hills:
-            all_products_supplier |= hills
-        if nestle:
-            all_products_supplier |= nestle
+        # 78650: Royal Canin
+        # 68250: Hill's
+        # 61800: Nestle
+        all_products_supplier = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['78650', '68250', '61800'])])
 
         #######################
         # only food suppliers #
         #######################
-        dechra = self.env.ref('__import__.supplier_60422',
-                              raise_if_not_found=False)
-        vmd_aliment = self.env.ref('__import__.supplier_82702',
-                                   raise_if_not_found=False)
-
-        only_food_suppliers = self.env['res.partner']
-        if vmd_aliment:
-            only_food_suppliers |= vmd_aliment
-        if dechra:
-            only_food_suppliers |= dechra
+        # Dechra: 60422
+        # V.M.D. Aliment: 82702
+        only_food_suppliers = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['60422', '82702'])])
 
         #######################
         # specific for Virbac #
         #######################
-        virbac_belgium = self.env.ref('__import__.supplier_81200',
-                                      raise_if_not_found=False)
-        virbac_belgium_aliment = self.env.ref('__import__.supplier_81201',
-                                              raise_if_not_found=False)
-
-        virbac_suppliers = self.env['res.partner']
-        if virbac_belgium:
-            virbac_suppliers |= virbac_belgium
-        if virbac_belgium_aliment:
-            virbac_suppliers |= virbac_belgium_aliment
+        # Virbac Belgium: 81200
+        # Virbac Belgium Aliment: 81201
+        virbac_suppliers = self.env['res.partner'].search(
+            [('supplier', '=', True),
+             ('ref', 'in', ['81200', '81201'])])
 
         categ_ali = self.env.ref('specific_data.product_categ_ali')
         categ_parapharmacie = \
