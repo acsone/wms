@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
 * ALCYN-1461: Manage packaging during reservation. Reserve in priority nearly entire pallet, box, shrink-wrap instead of fefo when applicable
 * ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
+* ALCYN-221: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
 
 **Bugfixes**
 
@@ -56,8 +57,6 @@ Unreleased
 * ALCYN-107: Adapt chart of accounts (remove useless accounts, rename 3 accounts and create 12 new accounts)
 * ALCYN-153: Always display the field Opt-out (opt_out) on the view res.partner
 * ALCYN-1482: Improve performance for the reception of products
-* ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
-* ALCYN-221: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
 
 **Bugfixes**
 
