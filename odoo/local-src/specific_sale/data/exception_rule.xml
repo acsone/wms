@@ -112,6 +112,35 @@ failed = object.validate_no_veterinary_product()
             </field>
         </record>
 
+        <record id="no_psychotropic_by_phone" model="exception.rule">
+            <field name="name">No psychotropic ordered by phone</field>
+            <field name="description">No psychotropic by phone</field>
+            <field name="active">True</field>
+            <field name="sequence">15</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_psychotropic_ordered_by_phone()
+            </field>
+        </record>
+
+        <!-- Warning exceptions -->
+        <record id="warning_psychotropic" model="exception.rule">
+            <field name="name">Warning psychotropic</field>
+            <field name="description">Warning psychotropic</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">Psychotropic: written order, keep confirmation.</field>
+            <field name="code">
+failed = object.warning_psychotropic()
+            </field>
+        </record>
+
+
+        <!-- Other exceptions -->
         <record id="no_line_under_0" model="exception.rule">
             <field name="name">No line under 0</field>
             <field name="description">Negative Sale Order Line Not Allowed</field>

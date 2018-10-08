@@ -54,15 +54,15 @@
                         <t t-esc="layout_category['name']"/>
                     </td>
                 </tr>
-                <tr class="active" t-if="'name_list' in layout_category">
-                    <td colspan="100%" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
-                        <t t-foreach="layout_category['name_list']" t-as="category_name">
-                            <t t-esc="category_name"/>
-                            <br/>
-                        </t>
-                    </td>
-                </tr>
             </t>
+            <tr class="active" t-if="'name_list' in layout_category">
+                <td colspan="100%" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
+                    <t t-foreach="layout_category['name_list']" t-as="category_name">
+                        <t t-esc="category_name"/>
+                        <br/>
+                    </t>
+                </td>
+            </tr>
             <!-- END: Replace entirely -->
 
         </t>
