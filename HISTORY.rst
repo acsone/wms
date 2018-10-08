@@ -8,18 +8,26 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.25.3 (2018-10-08)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
 * ALCYN-1461: Manage packaging during reservation. Reserve in priority nearly entire pallet, box, shrink-wrap instead of fefo when applicable
 * ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
 * ALCYN-221: Add on the sale order line for psychotropic product a specific warning message. And a sale exception when thos product are order through the phone.
 
-**Bugfixes**
-
 **Build**
 
 * ALCYN-1511: Remove stock_picking_invoice_link from migration and uninstall
-
-**Documentation**
 
 
 10.25.2 (2018-09-28)
