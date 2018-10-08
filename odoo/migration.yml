@@ -161,7 +161,6 @@ migration:
           - stock_mts_mto_rule
           # OCA/stock-logistics-workflow
           - stock_disable_force_availability_button
-          - stock_picking_invoice_link
           # oca/web
           - web_environment_ribbon
           - web_sheet_full_width
@@ -535,3 +534,4 @@ migration:
       operations:
         post:
           - anthem songs.install.user::import_wholesaler_users
+          - anthem songs.upgrade.10_25_3_update::post
