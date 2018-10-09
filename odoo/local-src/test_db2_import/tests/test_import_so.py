@@ -1054,10 +1054,18 @@ class TestImportSO(DB2ImportTestCase):
 
         # Check delivered qty on the sale order
         expected_values = {
-            '2248800': {'ordered_qty': 5, 'delivered_qty': 3},
-            '3563038': {'ordered_qty': 1, 'delivered_qty': 1},
-            '2430205': {'ordered_qty': 1, 'delivered_qty': 1},
-            '8072683': {'ordered_qty': 1, 'delivered_qty': 1},
+            '2248800': {
+                'ordered_qty': 5, 'delivered_qty': 3,
+                'product_qty_unavailable': 0.0},
+            '3563038': {
+                'ordered_qty': 1, 'delivered_qty': 1,
+                'product_qty_unavailable': 0.0},
+            '2430205': {
+                'ordered_qty': 1, 'delivered_qty': 1,
+                'product_qty_unavailable': 0.0},
+            '8072683': {
+                'ordered_qty': 1, 'delivered_qty': 1,
+                'product_qty_unavailable': 0.0},
         }
         for line in self.so.order_line:
             expected_qty = expected_values.get(
@@ -1067,6 +1075,9 @@ class TestImportSO(DB2ImportTestCase):
                     expected_qty['ordered_qty'], line.product_uom_qty)
                 self.assertEqual(
                     expected_qty['delivered_qty'], line.qty_delivered)
+                self.assertEqual(
+                    expected_qty['product_qty_unavailable'],
+                    line.product_qty_unavailable)
 
     @freeze_time("2018-02-01")
     def test_picking_nogrouping_by_partner(self):

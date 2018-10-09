@@ -359,7 +359,10 @@ class SaleOrderLine(models.Model):
     @api.model
     def create(self, vals):
         record = super(SaleOrderLine, self).create(vals)
-        if vals.get('product_uom_qty'):
+        # don't trigger product_qty_unavalable computation
+        # if the value is provided.
+        if (vals.get('product_uom_qty')
+                and 'product_qty_unavailable' not in vals):
             # Because product_qty_unavailable is readonly,
             # we need to apply the onchange
             # on create to save the correct values.
@@ -375,7 +378,10 @@ class SaleOrderLine(models.Model):
     @api.multi
     def write(self, vals):
         result = super(SaleOrderLine, self).write(vals)
-        if vals.get('product_uom_qty'):
+        # don't trigger product_qty_unavalable computation
+        # if the value is provided.
+        if (vals.get('product_uom_qty')
+                and 'product_qty_unavailable' not in vals):
             # Because product_qty_unavailable is readonly,
             # we need to apply the onchange
             # on write to save the correct values.
