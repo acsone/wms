@@ -29,6 +29,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1519: Disable procurement_order cron with noupdate.
+* ALCYN-1528: Search partner by ref. Search on ref with exact match and return matched code at first
 
 **Build**
 
