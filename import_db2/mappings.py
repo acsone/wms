@@ -390,7 +390,8 @@ CLIENT_DELIVERY_METHODS = {
     1: '__setup__.deliver_carrier_alcyon',
     2: '__setup__.deliver_carrier_transporter',
     3: '__setup__.deliver_carrier_post_pack',
-    4: '__setup__.deliver_carrier_delegated',
+    # 4: '__setup__.deliver_carrier_delegated',
+    4: '__setup__.deliver_carrier_alcyon',
     9: '__setup__.deliver_carrier_by_client',
     # Was deliver_carrier_invoice, but has been removed
     89: '__setup__.deliver_carrier_alcyon',

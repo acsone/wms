@@ -217,18 +217,21 @@ def import_delivery_round_config(ctx):
         resource_stream(req, 'data/install/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
 
+    content = resource_stream(req, 'data/install/delivery_tags.csv')
+    load_csv_stream(ctx, 'round.tag', content, delimiter=',')
+
     content = resource_stream(req, 'data/install/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
     content = resource_stream(
         req, 'data/install/delivery.carrier.template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
 
-    content = resource_stream(req, 'data/install/delivery_tags.csv')
-    load_csv_stream(ctx, 'round.tag', content, delimiter=',')
     content = resource_stream(req, 'data/install/delivery_itinerary.csv')
     load_csv_stream(ctx, 'round.itinerary', content, delimiter=',')
     content = resource_stream(req, 'data/install/delivery_clients.csv')
     load_csv_stream(ctx, 'round.itinerary.position', content, delimiter=',')
+    content = resource_stream(req, 'data/install/delivery_plan.csv')
+    load_csv_stream(ctx, 'cron.delivery.plan', content, delimiter=',')
 
 
 @anthem.log

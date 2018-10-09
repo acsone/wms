@@ -47,6 +47,7 @@ class RoundTemplate(models.Model):
                                    readonly=True,
                                    compute='_compute_partner_ids',
                                    search='_search_partner_ids')
+    tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.multi
     def _compute_partner_ids(self):

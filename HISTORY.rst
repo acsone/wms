@@ -22,6 +22,11 @@ Unreleased
 * ALCYN-65: Add a button on the purchase order to allow a purchase user to compute additional lines by himself. Don't recompute additional lines when the PO is validated.
 * ALCYN-1420: Cash on delivery. Allow to delivery by customer
 * ALCYN-1216: Update translations for terms used in the view res.partner
+* ALCYN-58: Load delivery rounds setup as defined on 2018-10-18 and customer mapping as of 2018-08-10.
+
+**Features and Improvements**
+
+* ALCYN-58: Add tags on delivery rounds templates to support current setup
 
 **Bugfixes**
 

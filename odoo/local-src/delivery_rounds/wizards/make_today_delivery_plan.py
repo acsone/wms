@@ -18,7 +18,9 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     )
     assign_moves = fields.Boolean(
         'Reserve stock', default=True)
-    tag_ids = fields.Many2many('round.tag', string='Tags')
+    tag_ids = fields.Many2many(
+        'round.tag', string='Tags',
+        help="Only templates having one of the tags will be instanciated")
     execution_date = fields.Date(
         'Date',
         default=fields.Date.context_today,
@@ -29,7 +31,8 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     def confirm(self):
         self.ensure_one()
         round_instance = self.env['round.instance']
-        templates = self.version_id.template_ids
+        templates = self.version_id.template_ids.filtered(
+            lambda t: any(tag in t.tag_ids for tag in self.tag_ids))
         execution_date = self.execution_date
         instances = round_instance.search([
             ('date', '=', execution_date)],

@@ -25,8 +25,23 @@ def update_translations(ctx):
     modules.with_context(overwrite=True).update_translations(langs_to_update)
 
 
+def cleanup_delivery_demo_data(ctx):
+    ctx.env.cr.execute("DELETE FROM round_instance;")
+    ctx.env.cr.execute("DELETE FROM round_wizard_makeplan;")
+    ctx.env.cr.execute("DELETE FROM round_itinerary_import;")
+    ctx.env.cr.execute("DELETE FROM round_itinerary;")
+    ctx.env.cr.execute("DELETE FROM round_template;")
+    ctx.env.cr.execute("DELETE FROM round_template_version;")
+
+
 @anthem.log
 def post(ctx):
     """ POST 10.26.0 """
     update_translations(ctx)
     drop_round_instance_sql_constrain(ctx)
+
+
+@anthem.log
+def post_full(ctx):
+    """ POST FULL 10.26.0 """
+    cleanup_delivery_demo_data(ctx)
