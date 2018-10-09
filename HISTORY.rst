@@ -15,6 +15,7 @@ Unreleased
 
 * ALCYN-429: Add Autorisation/APB Fields to res.partner and account.view_partner_property_form
 * ALCYN-1460: Add a sale exception for customer that do not want back order.
+* ALCYN-1530: Install the module product_analytic from akretion
 
 **Bugfixes**
 
