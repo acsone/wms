@@ -631,6 +631,7 @@ migration:
         upgrade:
           ### local
           - connector_esb
+          - specific_report
       modes:
         full:
           operations:
@@ -638,3 +639,4 @@ migration:
               - anthem songs.install.sales::import_pricelist
               - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
+

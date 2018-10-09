@@ -5,7 +5,7 @@
             <div style="position: fixed; left: 0; top: 420px;">_</div>
             <div style="position: fixed; right: 0; top: 420px;">_</div>
 
-            <div id="logo">
+            <div class="logo">
                 <img t-if="company.logo"
                          t-att-src="'data:image/png;base64,%s' % company.logo"
                          style="max-height: 70px;"/>

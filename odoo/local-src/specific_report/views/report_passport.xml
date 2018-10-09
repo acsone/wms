@@ -2,13 +2,13 @@
     <template id="specific_report.report_passport_body">
         <div class="page" style="font-size: large;">
             <div class="row">
-                        <div id="logo" class="col-xs-6">
+                        <div class="logo col-xs-6">
                             <img t-if="company.logo"
                                  t-att-src="'data:image/png;base64,%s' % company.logo"
                                  style="max-height: 70px;"/>
                         </div>
                         <div class="col-xs-6">
-                            <div id="main_title">
+                            <div class="main_title">
                                 Passport verification
                             </div>
                             <br/>

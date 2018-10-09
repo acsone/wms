@@ -317,12 +317,12 @@
 	                <div style="position: fixed; right: 0; top: 420px;">_</div>
 
                     <div>
-                        <div id="logo">
+                        <div class="logo">
                             <img t-if="company.logo"
                                  t-att-src="'data:image/png;base64,%s' % company.logo"
                                  style="max-height: 70px;"/>
                         </div>
-                        <div id="main_title">
+                        <div class="main_title">
                             <div t-if="invoice.type == 'out_invoice'">
                                 <span t-if="(invoice.state == 'open' or invoice.state == 'paid')">
                                     Invoice

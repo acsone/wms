@@ -14,6 +14,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1495: Add the entry register report just after the delivery report (only if required)
+
 **Bugfixes**
 
 **Build**

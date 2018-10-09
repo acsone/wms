@@ -154,7 +154,16 @@ class StockPicking(models.Model):
             picking.item_number_total = item_number_total
 
     @api.multi
-    def get_moves_by_order(self):
+    def get_moves_by_order(self, is_entry_register=False):
+        """
+        Return lines for the delivery slip report.
+        If the picking contains some medoc products, we have to print
+        an entry register. This register will contains only medoc products.
+
+        :param is_entry_register: Bool - if true, return only lines with
+        a medoc as product.
+        :return: list - list of lines
+        """
         self.ensure_one()
 
         moves_by_order = defaultdict(list)
@@ -162,22 +171,29 @@ class StockPicking(models.Model):
         result = []
         moves_witout_order = []
         backorder_moves_without_order = []
-        lines_done = \
-            self.move_lines.filtered(lambda line: line.state == 'done')
+
+        if is_entry_register:
+            lines_done = self.get_entry_register_lines()
+        else:
+            lines_done = \
+                self.move_lines.filtered(lambda line: line.state == 'done')
+
         for line in lines_done:
             if not line.order_id:
                 moves_witout_order.append(line)
             else:
                 moves_by_order[line.order_id].append(line)
 
-        backorders = self.env['stock.picking']. \
-            search([('backorder_id', '=', self.id)])
-        for backorder in backorders:
-            for line in backorder.move_lines:
-                if not line.order_id:
-                    backorder_moves_without_order.append(line)
-                else:
-                    backorder_moves_by_order[line.order_id].append(line)
+        # We don't need to display backorder for the entry register
+        if not is_entry_register:
+            backorders = self.env['stock.picking']. \
+                search([('backorder_id', '=', self.id)])
+            for backorder in backorders:
+                for line in backorder.move_lines:
+                    if not line.order_id:
+                        backorder_moves_without_order.append(line)
+                    else:
+                        backorder_moves_by_order[line.order_id].append(line)
 
         result_dict = {}
         for order, moves in moves_by_order.iteritems():
@@ -195,3 +211,18 @@ class StockPicking(models.Model):
                                         picking[0][0].id))
         )
         return result
+
+    def get_entry_register_lines(self):
+        categ_medoc = self.env.ref('specific_data.product_categ_medoc')
+
+        all_products = self.mapped('move_lines.product_id')
+        medic_products = self.env['product.product'].search([
+            ('categ_id', 'child_of', categ_medoc.id),
+            ('id', 'in', all_products.ids)
+        ])
+
+        lines = self.mapped('move_lines').filtered(
+            lambda line: line.state == 'done'
+            and line.product_id in medic_products)
+
+        return lines
