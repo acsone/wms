@@ -116,16 +116,31 @@ def add_comment(path, comment):
 
 
 @task
-def sync(ctx, commit=True):
-    """ Sync files from the project template """
+def sync(ctx, commit=True, dev=False, version=None):
+    """Sync files from the project template.
+
+    :param commit: commit changes after sync
+    :param dev: template version to sync. By default: `stable` branch.
+
+        If --dev is passed, the version from `master` is used.
+        It is recommended to always use `stable`
+        unless you really know what you are doing :)
+    :param version: template version to sync.
+
+        In case you want to use a specific branch or tag.
+    """
     if not cookiecutter:
         exit_msg('cookiecutter must be installed')
     check_git_diff(ctx, direct_abort=True)
     context = cookiecutter_context()
     os.chdir(root_path())
+    # use stable branch by default or master
+    if version is None:
+        version = 'stable' if not dev else 'master'
     with tempdir() as tmp:
         cookiecutter(
             TEMPLATE_GIT,
+            checkout=version,
             no_input=True,
             extra_context=context,
             output_dir=tmp,

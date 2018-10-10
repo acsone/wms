@@ -53,7 +53,7 @@ def make_csv_diff(ctx, filename=None):
     load_method = ''
     with open(MIGRATION_FILE, 'r') as fd:
         for line in fd.read().split('\n'):
-            if filename in line and '/opt/odoo/data/install' in line:
+            if filename in line and '/odoo/data/install' in line:
                 load_method = line.split('::')[1].split()[0]
                 break
 
@@ -85,7 +85,7 @@ def make_csv_diff(ctx, filename=None):
             writer.writerows(added)
 
         with open(MIGRATION_FILE, 'a') as fd:
-            fd.write('              - bin/importer.sh songs.install.data_full::{} /opt/{}\n'.format(load_method, file_path))
+            fd.write('              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(load_method, file_path))
 
     def create_csv_changes(changed):
         # get unique type of changes
@@ -114,7 +114,7 @@ def make_csv_diff(ctx, filename=None):
 
         with open(MIGRATION_FILE, 'a') as fd:
             for f in files_to_load:
-                fd.write('              - bin/importer.sh songs.install.data_full::{} /opt/{}\n'.format(load_method,f))
+                fd.write('              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(load_method,f))
 
     create_csv_new(added)
     create_csv_changes(changed)

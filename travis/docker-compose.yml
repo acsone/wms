@@ -10,7 +10,7 @@ services:
       - db
     volumes:
       - "data-odoo:/data/odoo"
-      - "$HOME/.cachedb:/opt/odoo/.cachedb"
+      - "$HOME/.cachedb:/.cachedb"
     environment:
       DB_USER: odoo
       DB_PASSWORD: odoo
@@ -24,8 +24,8 @@ services:
     image: camptocamp/postgres:9.5
     command: -c shared_buffers=256MB -c maintenance_work_mem=256MB -c wal_buffers=8MB -c effective_cache_size=1024MB
     environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
     volumes:
       - "data-db:/var/lib/postgresql/data"
 

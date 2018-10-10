@@ -139,7 +139,7 @@ can be handy to inspect files, check something, ...
 
 ```bash
 # show odoo configuration file (the container name is found using 'docker ps')
-docker-compose exec odoo cat /opt/odoo/etc/odoo.cfg
+docker-compose exec odoo cat /etc/odoo.cfg
 # run bash in the running odoo container
 docker exec odoo bash
 ```
@@ -231,6 +231,25 @@ dood --load=web,connector
 ### Working with several databases
 
 This section has been moved to : [working-with-several-databases](docker-and-databases.md#working-with-several-databases).
+
+
+### Extra dev docker composition
+
+You might want to customize your docker composition like adding a container or setting specific ports.
+For this use `docker-compose.override.yml` file which will always be loaded unless `-f` option of docker-compose
+is used.
+
+Example:
+
+```
+# content of docker-compose.override.yml
+version: '2'
+
+services:
+  odoo:
+    environment:
+      WORKERS=0
+```
 
 
 ### Extra dev packages

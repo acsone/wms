@@ -41,11 +41,11 @@ and you will find this in your odoo/migration
         full:
           operations:
             post:
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.21.0/product.new.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.21.0/product.change-width-length-depth.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.21.0/product.change-width-length-taxes_id-depth.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.21.0/product.change-web_published-name-depth-width-length-state_id-active.csv
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/update/10.21.0/product.change-width-length-depth-orderpoint_min-orderpoint_max.csv
+              - bin/importer.sh songs.install.data_full::import_products /odoo/data/update/10.21.0/product.new.csv
+              - bin/importer.sh songs.install.data_full::import_products /odoo/data/update/10.21.0/product.change-width-length-depth.csv
+              - bin/importer.sh songs.install.data_full::import_products /odoo/data/update/10.21.0/product.change-width-length-taxes_id-depth.csv
+              - bin/importer.sh songs.install.data_full::import_products /odoo/data/update/10.21.0/product.change-web_published-name-depth-width-length-state_id-active.csv
+              - bin/importer.sh songs.install.data_full::import_products /odoo/data/update/10.21.0/product.change-width-length-depth-orderpoint_min-orderpoint_max.csv
               ...
 ```
 
@@ -82,7 +82,7 @@ Thus here is how to disable it:
 
 ```
   - anthem songs.upgrade.common::deactivate_check_on_vat
-  - bin/importer.sh songs.install.data_full::import_clients_addresses /opt/odoo/data/install/customer_address.csv
+  - bin/importer.sh songs.install.data_full::import_clients_addresses /odoo/data/install/customer_address.csv
   - anthem songs.install.accounting::activate_check_on_vat
 ```
 

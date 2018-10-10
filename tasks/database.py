@@ -174,16 +174,15 @@ def share_on_dumps_bag(ctx, dump_file_path):
         'aws --profile=odoo-dumps s3 cp %s s3://odoo-dumps/%s' % (
             gpg_file_path, '/'.join([username, gpg_file_path.split('/')[-1]])
         ), hide=True)
+    # Set ShortExpire tag for the dump to be auto deleted after 1 week
     ctx.run(
         'aws --profile=odoo-dumps s3api put-object-tagging '
         '--bucket odoo-dumps --key %s/%s '
-        '--tagging="TagSet=[{Key=Expire,Value=True}]"' % (
+        '--tagging="TagSet=[{Key=ShortExpire,Value=True}]"' % (
             username, gpg_file_path.split('/')[-1]), hide=True
     )
     print('Encrypted dump successfully shared on dumps bag.')
-    print()
-    print('DO NOT FORGET TO REMOVE IT AS SOON AS POSSIBLE USING : ')
-    print("invoke database.empty-my-dump-bag")
+    print('Note this dump will be auto-deleted after 7 days.')
 
 
 @task(name='dump-and-share')
