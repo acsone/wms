@@ -381,3 +381,18 @@ class TestSaleOrderException(SavepointCase):
         line.product_id = self.prod_food
         line.product_id = self.prod_stup
         self.assertEqual(line.exception, exception.description)
+
+    def test_no_backorder_rule(self):
+        """Check the no backorder rule.
+
+        A customer can be configured to not accept a sale order which implies
+        some back order.
+        """
+        no_backorder_rule = self.env.ref('specific_sale.no_backorder')
+        self.partner.is_sale_back_order_accepted = False
+        line = self.so1.order_line[0]
+        line.product_uom_qty = 234
+        self.assertEqual(no_backorder_rule.description, line.exception)
+        self.partner.is_sale_back_order_accepted = True
+        line.product_uom_qty = 534
+        self.assertEqual('', line.exception)
