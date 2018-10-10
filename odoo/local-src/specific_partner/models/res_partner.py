@@ -53,6 +53,10 @@ class ResPartner(models.Model):
         string='Nickname'
     )
 
+    apb_authorization = fields.Char(
+        string='Authorization/APB'
+    )
+
     @api.multi
     def _display_address(self, without_company=False):
         res = super(ResPartner, self)._display_address(without_company)

@@ -13,6 +13,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-429: Add Autorisation/APB Fields to res.partner and account.view_partner_property_form
+
 **Bugfixes**
 
 **Build**
