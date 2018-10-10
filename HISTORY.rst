@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-74: Set new APB tax on products
+* ALCYN-455: Set BO to zero on imported sale orders.
 
 **Features and Improvements**
 

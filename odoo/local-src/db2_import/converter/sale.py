@@ -234,6 +234,7 @@ class DB2MapperSaleOrder(object):
                 'product_uom_qty': line['dccquc'],
                 'product_uom': rec.env.ref('product.product_uom_unit').id,
                 'qty_delivered': line['dccqul'],
+                'product_qty_unavailable': 0.0,
                 'price_unit': line['dccpvd'],
                 'tax_id': [(4, tax.id) for tax in taxes],
                 # discount field is hidden and replaced by
