@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 15:01+0000\n"
-"PO-Revision-Date: 2018-05-22 15:01+0000\n"
+"POT-Creation-Date: 2018-10-10 10:03+0000\n"
+"PO-Revision-Date: 2018-10-10 10:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,6 +26,12 @@ msgstr "Catégorie Alcyon"
 #: model:ir.model.fields,field_description:specific_partner.field_res_users_pharmacist_id
 msgid "Associated pharmacist"
 msgstr "Pharmacien associé"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_apb_authorization
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_apb_authorization
+msgid "Authorization/APB"
+msgstr "Autorisation/APB"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_create_uid
@@ -58,10 +64,22 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: specific_partner
+#: code:addons/specific_partner/models/res_partner.py:119
+#, python-format
+msgid "For an invoicing or delivery address the following fields (name, street, city, zip, country) are required. And the country must have a reference ESB."
+msgstr "Pour une adresse de facturation ou de livraison, les champs suivants (nom, rue, ville, code postal, pays) sont obligatoires. Et le pays doit avoir une référence ESB."
+
+#. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_id
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
 msgstr "ID"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_is_students
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_is_students
+msgid "Is students"
+msgstr "Est étudiant"
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_is_veterinary
