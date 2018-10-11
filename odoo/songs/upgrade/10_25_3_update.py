@@ -19,5 +19,5 @@ def uninstall_modules(ctx):
 
 @anthem.log
 def post(ctx):
-    """ Post 10.25.4 """
+    """ Post 10.25.3 """
     uninstall_modules(ctx)
