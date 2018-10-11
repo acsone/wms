@@ -539,11 +539,16 @@ migration:
     - version: 10.25.4
       addons:
         upgrade:
+          ### base
           - base
+          ### local
           - specific_partner
           - specific_sale
+          - product_additional
           ### OCA/account-analytic
           - product_analytic
+          ### server-tools
+          - base_exception
       modes:
         full:
           operations:

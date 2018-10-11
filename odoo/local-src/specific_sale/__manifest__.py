@@ -11,6 +11,7 @@
     'depends': [
         'delivery',
         'pricelist_discount',
+        'product_additional',
         'sale',
         'sale_exception',
         'sales_team',

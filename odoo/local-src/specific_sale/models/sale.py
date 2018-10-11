@@ -604,3 +604,10 @@ class SaleOrderLine(models.Model):
         if not self.product_qty_unavailable:
             return False
         return not self.order_id.partner_id.is_sale_back_order_accepted
+
+    def warning_free_product(self):
+        """Raise a warning if order give rights to promotional product."""
+        return self.product_id.product_tmpl_id.get_promotional_product(
+            self.product_uom_qty,
+            self.product_id.uom_id,
+        )

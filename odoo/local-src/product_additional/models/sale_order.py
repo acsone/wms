@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # Copyright 2017 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -11,73 +12,33 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        """
-        Add promotional product in sale order
-        :return:
-        """
+        """Add promotional product in sale order
 
+        For each line in the sale order check if it gives the right
+        to some promotional products. And fix the sequence number on the lines
+        at the same time.
+        """
         if self.env.context.get('__no_promotional_product'):
             return super(SaleOrder, self).action_confirm()
-
         for order in self:
             sequence = 1
             for line in order.order_line:
-                line_uom = line.product_uom
-                product_uom = line.product_id.uom_id
-                product_qty = line.product_uom_qty
-
-                # If the unit of measure is different than the product's UOM
-                # we need to adapt the quantity
-                if line_uom != product_uom:
-                    product_qty = line_uom._compute_quantity(
-                        product_qty, product_uom
-                    )
-
-                product_tmpl_id = line.product_id.product_tmpl_id.id
-
-                # As sale orders are now confirmed in background,
-                # action_confirm performance is not such an issue as before -
-                # we can switch back from raw sql to orm
-                result = self.env["product.supplierinfo"].search(
-                    [
-                        ("ratio_promotional_product", ">", 0),
-                        ("ratio_main_product", ">", 0),
-                        "|",
-                        ("date_start", "=", False),
-                        ("date_start", "<=", fields.Date.today()),
-                        "|",
-                        ("date_end", "=", False),
-                        ("date_end", ">=", fields.Date.today()),
-                        "|",
-                        ("min_qty_sale", "=", False),
-                        ("min_qty_sale", "<=", product_qty),
-                        ("product_tmpl_id", "=", product_tmpl_id)
-                    ],
-                    order="sequence, min_qty_sale desc, price",
-                    limit=1,
+                product_tmpl = line.product_id.product_tmpl_id
+                promotional_qty = product_tmpl.get_promotional_product(
+                    line.product_uom_qty,
+                    line.product_id.uom_id
                 )
                 line.sequence = sequence
                 sequence += 1
-                if not result:
+                if not promotional_qty:
                     continue
-
-                # Compute the coefficient
-                ratio_main_product = result.ratio_main_product
-                ratio_promotional_product = result.ratio_promotional_product
-
-                coefficient = int(product_qty / ratio_main_product)
-                promotional_product_qty = \
-                    coefficient * ratio_promotional_product
-                if not promotional_product_qty:
-                    continue
-
                 # Create the new line with promotional product
                 line.copy(default={
                     'order_id': order.id,
                     'sequence': sequence,
                     'price_unit': 0,
-                    'product_uom': product_uom.id,
-                    'product_uom_qty': promotional_product_qty,
+                    'product_uom': line.product_id.uom_id.id,
+                    'product_uom_qty': promotional_qty,
                     'is_promotional_product': True,
                 })
                 sequence += 1

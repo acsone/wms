@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:55+0000\n"
+"POT-Creation-Date: 2018-10-11 12:15+0000\n"
 "PO-Revision-Date: 2018-06-13 09:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:320
+#: code:addons/specific_sale/models/sale.py:328
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -33,7 +33,7 @@ msgid "April"
 msgstr "April"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:87
+#: code:addons/specific_sale/models/sale.py:95
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transferred to dispensing pharmacy: %s"
@@ -114,6 +114,16 @@ msgstr "February"
 #, fuzzy
 msgid "Food Product Not Allowed"
 msgstr "No Food Product Allowed"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_newpharma
+msgid "For NewPharma"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_olalux
+msgid "For Olalux"
+msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
@@ -232,7 +242,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:319
+#: code:addons/specific_sale/models/sale.py:327
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
@@ -299,6 +309,11 @@ msgid "No Veterinary Product"
 msgstr "No Veterinary Only Product"
 
 #. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_backorder
+msgid "No backorder"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_line_under_0
 msgid "No line under 0"
 msgstr ""
@@ -341,7 +356,12 @@ msgid "Order Date"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:309
+#: model:exception.rule,name:specific_sale.warning_free_product
+msgid "Order offer free product"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:317
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr "Out of stock at supplier level"
@@ -479,6 +499,11 @@ msgid "Taxes"
 msgstr "Belastingen"
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_backorder
+msgid "This customer does not want backorder"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
 msgid ""
 "This is the date on which the goods with this Serial Number may become "
@@ -501,6 +526,11 @@ msgid "Unit Price"
 msgstr "Eenheidsprijs"
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 #, fuzzy
 msgid "Veterinary Product Not Allowed"
@@ -520,6 +550,11 @@ msgstr ""
 #. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Web"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_free_product
+msgid "Will include free product"
 msgstr ""
 
 #~ msgid "Catégorie aliments pas autorisée"

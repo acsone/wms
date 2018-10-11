@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:55+0000\n"
+"POT-Creation-Date: 2018-10-11 12:15+0000\n"
 "PO-Revision-Date: 2018-07-10 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:320
+#: code:addons/specific_sale/models/sale.py:328
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -33,7 +33,7 @@ msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:87
+#: code:addons/specific_sale/models/sale.py:95
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -112,6 +112,16 @@ msgstr "Février"
 #: model:exception.rule,description:specific_sale.no_food_allowed
 msgid "Food Product Not Allowed"
 msgstr "Nourriture interdite"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_newpharma
+msgid "For NewPharma"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_olalux
+msgid "For Olalux"
+msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
@@ -227,7 +237,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:319
+#: code:addons/specific_sale/models/sale.py:327
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -288,6 +298,11 @@ msgid "No Veterinary Product"
 msgstr "Pas de produit vétérinaire"
 
 #. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_backorder
+msgid "No backorder"
+msgstr "Sans réapprovisionnement"
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_line_under_0
 msgid "No line under 0"
 msgstr "Pas de ligne < 0"
@@ -330,7 +345,12 @@ msgid "Order Date"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:309
+#: model:exception.rule,name:specific_sale.warning_free_product
+msgid "Order offer free product"
+msgstr "Commande avec produits gratuits"
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:317
 #, python-format
 msgid "Out of stock at supplier level"
 msgstr "Rupture de stock fournisseur"
@@ -409,7 +429,7 @@ msgstr "Quantité non disponible à la sauvegarde de la ligne"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_search_specific_sale
 msgid "Remains to deliver"
-msgstr ""
+msgstr "Reste à livrer"
 
 #. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
@@ -459,12 +479,17 @@ msgstr "Suite Id"
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_supplier_break
 msgid "Supplier break"
-msgstr ""
+msgstr "Rupture fournisseur"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr "Taxes"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_backorder
+msgid "This customer does not want backorder"
+msgstr "Ce client accepte pas les réapprovisionnement"
 
 #. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
@@ -491,6 +516,11 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 msgid "Veterinary Product Not Allowed"
 msgstr "Produit vétérinaire interdit"
@@ -510,6 +540,11 @@ msgstr ""
 #: selection:sale.order,sale_channel:0
 msgid "Web"
 msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_free_product
+msgid "Will include free product"
+msgstr "Inclus des produits gratuits"
 
 #~ msgid "Sale Order Lines Unavailable"
 #~ msgstr "Lignes de commande non disponibles"
