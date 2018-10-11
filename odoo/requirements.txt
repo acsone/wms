@@ -4,6 +4,9 @@ python-json-logger==0.1.5
 statsd==3.2.1
 unidecode==0.4.20
 
+# fix pytest of docker-odoo-project-3.0.0
+pluggy>=0.7
+
 # connector
 cachetools
 
