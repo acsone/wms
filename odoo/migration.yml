@@ -127,6 +127,7 @@ migration:
           ### OCA (external-src)
           # oca/account-analytic
           - account_analytic_required
+          - product_analytic
           # oca/account-closing
           - account_cutoff_accrual_picking
           - account_cutoff_accrual_return
@@ -541,6 +542,8 @@ migration:
           - base
           - specific_partner
           - specific_sale
+          ### OCA/account-analytic
+          - product_analytic
       modes:
         full:
           operations:
