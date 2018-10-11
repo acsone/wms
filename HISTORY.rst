@@ -21,6 +21,7 @@ Unreleased
 **Build**
 
 * Use Dockerimage: 3.0.0
+* Update base odoo src to include latest security build
 
 **Documentation**
 

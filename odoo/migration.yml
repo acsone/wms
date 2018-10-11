@@ -538,6 +538,7 @@ migration:
     - version: 10.25.4
       addons:
         upgrade:
+          - base
           - specific_partner
           - specific_sale
       modes:
