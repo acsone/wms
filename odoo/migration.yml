@@ -545,6 +545,7 @@ migration:
           - specific_partner
           - specific_sale
           - product_additional
+          - specific_purchase
           ### OCA/account-analytic
           - product_analytic
           ### server-tools
@@ -554,3 +555,6 @@ migration:
           operations:
             post:
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/product-new-apb-tax.csv
+      operations:
+        pre:
+          - anthem songs.upgrade.10_25_4_update::pre
