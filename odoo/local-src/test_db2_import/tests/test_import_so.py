@@ -935,11 +935,13 @@ class TestImportSO(DB2ImportTestCase):
 
         partial delivery with one line partially delivered
 
-        product | ordered | delivered
-        2248800 |       5 |         3
-        3563038 |       1 |         1
-        2430205 |       1 |         1
-        8072683 |       1 |         1
+        test delivered qty and invoiced qty
+
+        product | ordered | delivered | invoiced
+        2248800 |       5 |         3 |        3
+        3563038 |       1 |         1 |        1
+        2430205 |       1 |         1 |        1
+        8072683 |       1 |         1 |        1
         """
         ref = self.env.ref
         suite = 2844358
@@ -1053,16 +1055,24 @@ class TestImportSO(DB2ImportTestCase):
         # Check delivered qty on the sale order
         expected_values = {
             '2248800': {
-                'ordered_qty': 5, 'delivered_qty': 3,
+                'ordered_qty': 5,
+                'delivered_qty': 3,
+                'invoiced_qty': 3,
                 'product_qty_unavailable': 0.0},
             '3563038': {
-                'ordered_qty': 1, 'delivered_qty': 1,
+                'ordered_qty': 1,
+                'delivered_qty': 1,
+                'invoiced_qty': 1,
                 'product_qty_unavailable': 0.0},
             '2430205': {
-                'ordered_qty': 1, 'delivered_qty': 1,
+                'ordered_qty': 1,
+                'delivered_qty': 1,
+                'invoiced_qty': 1,
                 'product_qty_unavailable': 0.0},
             '8072683': {
-                'ordered_qty': 1, 'delivered_qty': 1,
+                'ordered_qty': 1,
+                'delivered_qty': 1,
+                'invoiced_qty': 1,
                 'product_qty_unavailable': 0.0},
         }
         for line in self.so.order_line:
@@ -1074,8 +1084,19 @@ class TestImportSO(DB2ImportTestCase):
                 self.assertEqual(
                     expected_qty['delivered_qty'], line.qty_delivered)
                 self.assertEqual(
+                    expected_qty['invoiced_qty'], line.qty_invoiced)
+                self.assertEqual(
                     expected_qty['product_qty_unavailable'],
                     line.product_qty_unavailable)
+
+        journal_xid = '__setup__.account_journal_ventes_migration'
+        journal = ref(journal_xid)
+        self.assertEqual(len(self.so.invoice_ids), 1)
+        self.assertEqual(
+            self.so.invoice_ids.journal_id,
+            journal
+        )
+        self.assertEqual(self.so.invoice_ids.amount_total, 0)
 
     @freeze_time("2018-02-01")
     def test_picking_nogrouping_by_partner(self):

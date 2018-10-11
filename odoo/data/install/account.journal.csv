@@ -9,3 +9,5 @@ __setup__.account_journal_achat_bsd,,,Achat BSD,1,0,1,Purchase,,,,False,BSD,1
 __setup__.account_journal_ventes_diverses,,,Ventes Diverses,1,0,1,Sale,,,,False,VD,1
 __setup__.expense_journal,,,Expenses,,,,purchase,,,,,EXP,1
 __setup__.accrual_journal,,,Provisions (Accrual),,,,general,,,,,PROV,
+__setup__.account_journal_achat_migration,,,[MIGRATION] Achat,1,0,1,Purchase,,,,False,MIGA,1
+__setup__.account_journal_ventes_migration,,,[MIGRATION] Ventes,1,0,1,Sale,,,,False,MIGV,1

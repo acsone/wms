@@ -212,6 +212,15 @@ class TestImportPO(DB2ImportTestCase):
         self.assertEqual(self.po.picking_ids[0].state, 'done')
         self.assertEqual(self.po.picking_ids[1].state, 'confirmed')
 
+        journal_xid = '__setup__.account_journal_achat_migration'
+        journal = ref(journal_xid)
+        self.assertEqual(len(self.po.invoice_ids), 1)
+        self.assertEqual(
+            self.po.invoice_ids.journal_id,
+            journal
+        )
+        self.assertEqual(self.po.invoice_ids.amount_total, 0)
+
     @freeze_time("2018-08-11")
     def test_import_po_deleted_line(self):
         """Import PO 111523.

@@ -22,18 +22,9 @@ def create_supplier_invoice(order, lines):
         return
     invoiced_lines_no = [l['dcfnli'] for l in invoiced_lines]
 
-    journal_domain = [
-        ('type', '=', 'purchase'),
-        ('company_id', '=', order.company_id.id),
-        ('currency_id', '=', order.currency_id.id),
-    ]
-    journal = order.env['account.journal'].search(journal_domain, limit=1)
-    if not journal:
-        journal_domain = [
-            ('type', '=', 'purchase'),
-            ('company_id', '=', order.company_id.id),
-        ]
-        journal = order.env['account.journal'].search(journal_domain, limit=1)
+    journal_xid = '__setup__.account_journal_achat_migration'
+    journal = order.env.ref(journal_xid)
+
     partner = order.partner_id
     pay_account = partner.property_account_payable_id
     payment_term = partner.property_supplier_payment_term_id
@@ -57,6 +48,7 @@ def create_supplier_invoice(order, lines):
     for line in order.order_line:
         if line.sequence in invoiced_lines_no:
             data = invoice._prepare_invoice_line_from_po_line(line)
+            data['price_unit'] = 0.0
             new_line = new_lines.create(data)
             new_line._set_additional_fields(invoice)
             new_lines += new_line

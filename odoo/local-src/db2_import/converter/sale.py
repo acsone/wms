@@ -14,6 +14,51 @@ from .common import (
     do_shipping,
 )
 
+def create_customer_invoice(order, lines):
+
+    # qul is received qty, we consider that everything
+    # delivered is invoiced
+    invoiced_lines = [l for l in lines if l['dccqul'] > 0]
+    if not invoiced_lines:
+        return
+    invoiced_lines_no = [l['dccnli'] for l in invoiced_lines]
+
+    journal_xid = '__setup__.account_journal_ventes_migration'
+    journal = order.env.ref(journal_xid)
+    partner = order.partner_id
+    pay_account = partner.property_account_payable_id
+    payment_term = partner.property_supplier_payment_term_id
+    delivery_partner_id = partner.address_get(['delivery'])['delivery']
+    fp_id = order.env['account.fiscal.position'].get_fiscal_position(
+        partner.id, delivery_id=delivery_partner_id)
+
+    vals = {'name': '[MIGRATION] SO %s' % order.name,
+            'date_invoice': order.date_order,
+            'sale_id': order.id,
+            'type': 'out_invoice',
+            'partner_id': partner.id,
+            'journal_id': journal.id,
+            'account_id': pay_account.id,
+            'payment_term_id': payment_term.id,
+            'fiscal_position_id': fp_id,
+            }
+    invoice = order.env['account.invoice'].create(vals)
+
+    new_lines = order.env['account.invoice.line']
+    for line in order.order_line:
+        if line.sequence in invoiced_lines_no:
+            data = line._prepare_invoice_line(qty=line.qty_delivered)
+            data.update(
+                {'invoice_id': invoice.id,
+                 'sale_line_ids': [(6, 0, [line.id])],
+                 'price_unit': 0.0,
+                 })
+            new_line = new_lines.create(data)
+            new_line._set_additional_fields(invoice)
+            new_lines += new_line
+    invoice.invoice_line_ids = new_lines
+    invoice.state = 'paid'
+
 
 class DB2MapperSaleOrder(object):
 
@@ -365,5 +410,8 @@ class DB2MapperSaleOrder(object):
                     # highest priority
                     partner = bo.partner_id
                     partner.with_delay(priority=12)._regroup_shipping_bo()
+
+                # create invoice for invoiced lines
+                create_customer_invoice(new, lines)
 
         return new
