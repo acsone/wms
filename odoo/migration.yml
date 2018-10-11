@@ -59,9 +59,9 @@ migration:
               - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.logistics::post_import_products
-              - bin/importer.sh songs.install.data_full::import_product_name_fr /opt/odoo/data/install/product_name_fr_BE.csv
-              - bin/importer.sh songs.install.data_full::import_product_name_en /opt/odoo/data/install/product_name_en_US.csv
-              - bin/importer.sh songs.install.data_full::import_product_name_nl /opt/odoo/data/install/product_name_nl_BE.csv
+              - importer.sh songs.install.data_full::import_product_name_fr /odoo/data/install/product_name_fr_BE.csv
+              - importer.sh songs.install.data_full::import_product_name_en /odoo/data/install/product_name_en_US.csv
+              - importer.sh songs.install.data_full::import_product_name_nl /odoo/data/install/product_name_nl_BE.csv
               - anthem songs.install.data_full::import_wh_family_locations
               - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
@@ -519,9 +519,9 @@ migration:
         full:
           operations:
             post:
-              - bin/importer.sh songs.install.data_full::import_product_name_nl /opt/odoo/data/install/product_name_nl_BE.csv
-              - bin/importer.sh songs.install.data_full::import_product_name_fr /opt/odoo/data/install/product_name_fr_BE.csv
-              - bin/importer.sh songs.install.data_full::import_product_name_en /opt/odoo/data/install/product_name_en_US.csv
+              - importer.sh songs.install.data_full::import_product_name_nl /odoo/data/install/product_name_nl_BE.csv
+              - importer.sh songs.install.data_full::import_product_name_fr /odoo/data/install/product_name_fr_BE.csv
+              - importer.sh songs.install.data_full::import_product_name_en /odoo/data/install/product_name_en_US.csv
     - version: 10.25.3
       addons:
         upgrade:
@@ -544,4 +544,4 @@ migration:
         full:
           operations:
             post:
-              - bin/importer.sh songs.install.data_full::import_products /opt/odoo/data/upgrade/product-new-apb-tax.csv
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/product-new-apb-tax.csv
