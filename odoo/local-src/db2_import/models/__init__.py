@@ -6,3 +6,4 @@ from . import procurement
 from . import queue_job
 from . import esb_backend_timestamp
 from . import ir_cron
+from . import res_partner

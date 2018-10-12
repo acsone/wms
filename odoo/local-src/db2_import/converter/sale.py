@@ -358,21 +358,12 @@ class DB2MapperSaleOrder(object):
                 if bo:
                     # make sure backorder is not assigned
                     bo.do_unreserve()
-                    # regroup shippings back orders
-                    # search for first existing picking
-                    # with paralellism we could have created
-                    # multiple open backorders at the same time
-                    # TODO move this action in a separate job
-                    # as we don't want this process to be blocking the import
-                    target = rec.env['stock.picking'].search(
-                        [('id', '!=', bo.id),
-                         ('partner_id', '=', bo.partner_id.id),
-                         ('state', '=', 'waiting'),
-                         ('location_dest_id', '=', loc_customers.id)],
-                        limit=1
-                        )
-                    if target:
-                        bo.move_lines.write({'picking_id': target.id})
-                        bo.unlink()
+                    # a job is created to regroup shippings
+                    # with a lesser priority than create_or_update jobs
+                    # create_or_update job priority is 10
+                    # and according to doc priority act as a sequence, 0 being
+                    # highest priority
+                    partner = bo.partner_id
+                    partner.with_delay(priority=12)._regroup_shipping_bo()
 
         return new

@@ -285,6 +285,7 @@ class DB2ImporterTable(models.Model):
         rows = cr.fetchall()
 
         mode = self.importer_id.mode
+        priority = self.importer_id.priority
 
         # Use a sql query to speed up insert of jobs
         # (we have ~440k jobs to create)
@@ -295,7 +296,7 @@ class DB2ImporterTable(models.Model):
             "job_function_id,max_retries,date_created,name,model_name,eta)"
             " VALUES ("
             "'db2.importer.table({table_id},)"
-            ".create_or_update_record({{record_id}}, {{ref}})',10,0,1,"
+            ".create_or_update_record({{record_id}}, {{ref}})',{priority},0,1,"
             "'{{uuid}}','[{table_id}]',1,'create_or_update_record','pending',"
             # escape 2 levels to get {}. {{{{}}}} -> {{}} -> {}
             "'{{{{}}}}','<db2.importer.table>.create_or_update_record',"
@@ -304,6 +305,7 @@ class DB2ImporterTable(models.Model):
             "'db2.importer.table','{eta}')"
         ).format(
             table_id=self.id,
+            priority=priority,
             date_created=fields.Datetime.to_string(now),
             eta=fields.Datetime.to_string(next_eta),
         )
@@ -541,6 +543,7 @@ class DB2Importer(models.Model):
         ('history', 'History'),
         ('final_update', 'Final update')],
         default='history')
+    priority = fields.Integer(default=10)
     update_draft = fields.Boolean(
         default=True,
         help="Only for final update"
