@@ -14,6 +14,7 @@ from .common import (
     do_shipping,
 )
 
+
 def create_customer_invoice(order, lines):
 
     # qul is received qty, we consider that everything

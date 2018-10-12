@@ -9,6 +9,8 @@ Unreleased
 **Data Migration**
 
 * ALCYN-1532: add tools to disable MTO for the duration of the import
+* ALCYN-1508: Set 0 prices and special journal on migration purchase invoices.
+* ALCYN-1525: Create migration sale invoices with dedicated journal and prices to zero.
 
 **Features and Improvements**
 
@@ -37,8 +39,6 @@ Unreleased
 * ALCYN-1485: Fix grouping errors due to paralllism, there is still an issue of duplicates which will be adressed in a second fix.
 * ALCYN-1485: Fix grouping errors due to paralllism, create jobs that will be executed at end of sale order import.
 
-* ALCYN-1508: Set 0 prices and special journal on migration purchase invoices.
-* ALCYN-1525: Create migration sale invoices with dedicated journal and prices to zero.
 
 **Features and Improvements**
 
