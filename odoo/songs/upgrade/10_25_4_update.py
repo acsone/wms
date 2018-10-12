@@ -17,6 +17,6 @@ def set_cron_to_noupdate(ctx):
 
 
 @anthem.log
-def pre(ctx):
-    """ PRE 10.25.4 """
+def post(ctx):
+    """ POST 10.25.4 """
     set_cron_to_noupdate(ctx)
