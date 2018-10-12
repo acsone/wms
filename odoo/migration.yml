@@ -556,5 +556,5 @@ migration:
             post:
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/product-new-apb-tax.csv
       operations:
-        pre:
-          - anthem songs.upgrade.10_25_4_update::pre
+        post:
+          - anthem songs.upgrade.10_25_4_update::post
