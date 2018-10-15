@@ -69,7 +69,7 @@ class TestPurchaseOrder(SavepointCase):
         self.purchase_order.button_confirm()
         self.assertEqual(len(self.purchase_order.order_line), 1)
 
-    def test_action_confirm_2(self):
+    def test_button_compute_additional_products(self):
         """
         Set an additional product with ratio (5/2) and cancel this purchase
         order
@@ -82,7 +82,7 @@ class TestPurchaseOrder(SavepointCase):
         })
         self.assertEqual(len(self.purchase_order.order_line), 1)
 
-        self.purchase_order.button_confirm()
+        self.purchase_order.button_compute_additional_products()
         self.assertEqual(len(self.purchase_order.order_line), 2)
         # Check main line
         main_line = self.purchase_order.order_line.filtered(

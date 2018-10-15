@@ -22,6 +22,7 @@
         # Views
         "views/product_template.xml",
         "views/product_supplierinfo.xml",
+        "views/purchase_order.xml",
     ],
     'installable': True,
 }
