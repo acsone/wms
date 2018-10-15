@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.25.4 (2018-10-15)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-74: Set new APB tax on products
@@ -37,8 +49,6 @@ Unreleased
 
 * Use Dockerimage: 3.0.0
 * Update base odoo src to include latest security build
-
-**Documentation**
 
 
 10.25.3 (2018-10-08)
