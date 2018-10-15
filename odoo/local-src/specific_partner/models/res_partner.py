@@ -104,7 +104,9 @@ class ResPartner(models.Model):
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         """Process ref as a code: do not apply ilike on ref.
-        Return matched ref first"""
+        Return matched ref first.
+        This is a copy/paste of the standard method where only 'ilike %ref%'
+        has been changed into '= ref' in the query below."""
         if args is None:
             args = []
         if name and operator in ('=', 'ilike', '=ilike', 'like', '=like'):
