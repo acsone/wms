@@ -31,6 +31,32 @@ class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
     @api.multi
+    def get_so_partner(self):
+        """ Find SO Customer:
+            - first find the related move (picking)
+            - then find the delivery move (shipping)
+            - then find the related procurement
+            - then find the originate sales order
+            - finally have the customer
+        """
+        self.ensure_one()
+        moves = self.linked_move_operation_ids.mapped('move_id')
+
+        def descend_moves(lvl):
+            next_lvl = lvl.mapped('move_dest_id')
+            if next_lvl:
+                lvl |= descend_moves(next_lvl)
+            return lvl
+
+        moves = descend_moves(moves)
+        partners = moves.mapped(
+            'procurement_id.sale_line_id.order_id.partner_id')
+        # While we could potentially have multiple SO, and so partners,
+        # practically it won't be the case in 99% otherwise it's not important
+        # which one we return
+        return partners and partners[0]
+
+    @api.multi
     def print_product_label(self, printer=False):
         for op in self:
             if not op.picking_id.partner_id:

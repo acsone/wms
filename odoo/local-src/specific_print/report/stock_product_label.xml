@@ -8,6 +8,7 @@
 <t t-foreach="pack.get_qty_by_lot()" t-as="line">
 <t t-set="qty" t-value="line[0]"/>
 <t t-set="lot" t-value="line[1]"/>
+<t t-set="customer" t-value="pack.get_so_partner()"/>
 <t t-foreach="xrange(qty)" t-as="index">{U2;0120|}\r
 {D0275,0560,0250|}\r
 {C|}\r
@@ -16,9 +17,9 @@
 {PC004;0010,0040,05,05,J,00,B|}\r
 {RC004;<t t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)"/>|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
-{RC009;6/4420/0466|}\r
+{RC009;<t t-esc="customer.vet_depot_number or ''"/>|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r
-{RC005;<t t-if="False">Doc.n : 1/01790 /</t>|}\r
+{RC005;Doc.n : 1/<t t-esc="customer.vet_subscription_number or ''"/> /|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
 {RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name)"/>|}\r<t t-if="pack.picking_id.partner_id.is_price_on_labels">{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
 {PC003;0030,0280,05,05,J,00,B|}\r
