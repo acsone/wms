@@ -42,6 +42,7 @@
         'views/stock_production_lot.xml',
         'views/stock_config_settings.xml',
         'views/stock_quant_package.xml',
+        'views/stock_quant.xml',
         'views/stock_move.xml',
         'views/reception_pharmacy.xml',
         'views/stock_inventory.xml',
