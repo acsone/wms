@@ -44,6 +44,7 @@
         'views/stock_quant_package.xml',
         'views/stock_move.xml',
         'views/reception_pharmacy.xml',
+        'views/stock_inventory.xml',
 
         # Wizards
         'wizards/stock_receive_lot.xml',
