@@ -61,6 +61,17 @@ def create_customer_invoice(order, lines):
     invoice.state = 'paid'
 
 
+def convert_sale_channel(code):
+    if code == 3:
+        return 'fax'
+    elif code == 4:
+        return 'web'
+    elif code == 8:
+        return 'mail'
+    else:
+        return 'phone'
+
+
 class DB2MapperSaleOrder(object):
 
     @classmethod
@@ -115,6 +126,7 @@ class DB2MapperSaleOrder(object):
         cr = rec.env.cr
         query = (
             "SELECT id, eccsui, eccrin, eccrcl, eccrep, ecccli, eccsuc,"
+            "       ecctyc,"
             "       eccdjj, eccdmm, eccdaa, eccdss,"
             "       ecccjj, ecccmm, ecccaa, ecccss,"
             "       eccmjj, eccmmm, eccmaa, eccmss"
@@ -190,6 +202,7 @@ class DB2MapperSaleOrder(object):
             'fiscal_position_id': fpos and fpos.id,
             'supplier_promotion_allowed': promo_sale,
             'ignore_exception': True,
+            'sale_channel': convert_sale_channel(row['ecctyc']),
         }
 
         so_model = rec.env['sale.order'].with_context(

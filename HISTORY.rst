@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-1532: add tools to disable MTO for the duration of the import
 * ALCYN-1508: Set 0 prices and special journal on migration purchase invoices.
+* ALCYN-1514: New imported field sale_channel on sale orders
 * ALCYN-1525: Create migration sale invoices with dedicated journal and prices to zero.
 
 **Features and Improvements**
@@ -33,6 +34,9 @@ Unreleased
 
 10.25.4 (2018-10-15)
 ++++++++++++++++++++
+
+Unreleased
+++++++++++
 
 **Data Migration**
 
