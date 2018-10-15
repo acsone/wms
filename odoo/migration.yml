@@ -533,12 +533,7 @@ migration:
           - specific_purchase
           - stock_unit
           - base_exception
-          - cash_on_delivery
-          - delivery_rounds
-          - specific_report
       operations:
-        pre:
-          - anthem songs.upgrade.10_25_3_update::pre
         post:
           - anthem songs.install.user::import_wholesaler_users
           - anthem songs.upgrade.10_25_3_update::post
@@ -568,17 +563,20 @@ migration:
             post:
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/product-new-apb-tax.csv
       operations:
+        pre:
+          - anthem songs.upgrade.10_25_4_update::pre
         post:
           - anthem songs.upgrade.10_25_4_update::post
     - version: 10.26.0
       addons:
         upgrade:
           ### local
-          - stock_picking_backorder
+          - cash_on_delivery
           - connector_esb
-          - specific_sale
           - delivery_round
-          - sale_cancel_remaining
-          - specific_stock
-          - delivery_rounds
           - product_additional
+          - sale_cancel_remaining
+          - specific_sale
+          - specific_report
+          - specific_stock
+          - stock_picking_backorder

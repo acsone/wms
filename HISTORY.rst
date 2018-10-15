@@ -18,6 +18,7 @@ Unreleased
 * ALCYN-1536: Display quant supplier for products to return to supplier
 * ALCYN-1538: Delivery round state change for long term deliveries.
 * ALCYN-65: Add a button on the purchase order to allow a purchase user to compute additional lines by himself. Don't recompute additional lines when the PO is validated.
+* ALCYN-1420: Cash on delivery. Allow to delivery by customer
 
 **Bugfixes**
 
@@ -56,7 +57,6 @@ Unreleased
 * ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
 * ALCYN-1461: Manage packaging during reservation. Reserve in priority nearly entire pallet, box, shrink-wrap instead of fefo when applicable
 * ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
-* ALCYN-1420: Cash on delivery. Allow to delivery by customer
 
 **Bugfixes**
 
