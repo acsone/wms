@@ -116,7 +116,7 @@ class Catchweight(DomainInterface):
                 lot = self.request.env['stock.production.lot'] \
                     .sudo(self._user).search(
                     [('product_id', '=', pack_op.product_id.id),
-                     ('checksum', '=', lot_number)], limit=1)
+                     ('voice_identifier', '=', lot_number)], limit=1)
                 if lot:
                     lot_id = lot.id
 

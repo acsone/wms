@@ -8,17 +8,18 @@
 ^XA
 ^PRC
 ^LH0,0^FS\r
+^FO25,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.voice_identifier"/>^FS\r
 ^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum"/>^FS\r
-^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS\r
-^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\r
-^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS\r
-^FO90,45^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS\r
-^FO90,100^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().name"/>^FS\r
-^FO190,180^A0N,60,50^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d-%m-%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS\r
+^FO25,145^A0N,37,32^CI13^FR^FDLot:^FS\r
+^FO90,145^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS\r
+^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\r
+^FO90,190^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().zone"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().height"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().box"/>^FS\r
+^FO25,240^A0N,37,32^CI13^FR^FDDate limite:^FS\r
+^FO190,225^A0N,60,50^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d-%m-%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS\r
 ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS\r
-^FO35,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS\r
-^PQ<t t-esc="qty"/>,0,0,N
+^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS\r
+^PQ<t t-esc="qty"/>,0,0,N\r
 ^XZ
 </t>
 </div>
@@ -39,12 +40,11 @@
 ^XA
 ^PRC
 ^LH0,0^FS\r
-^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="product_id.default_code[:3]"/>^FS\r
-^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\r
-^FO90,100^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().name"/>^FS\r
+^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\r
+^FO90,190^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().zone"/>-<t t-esc="product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="product_id.product_tmpl_id._bin().height"/>-<t t-esc="product_id.product_tmpl_id._bin().box"/>^FS\r
 ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code"/>^FS\r
-^FO35,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS\r
+^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS\r
 ^PQ<t t-esc="qty"/>,0,0,N
 ^XZ
 </t>

@@ -114,7 +114,7 @@ class TestExceptions(ZetesTest):
         request_pick_items_params.update({
             'groupNum': self.picking.id,
             'lineId': pack_op_1.id,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 10,  # Pick 10 items
             'Usf03': None,
         })
@@ -154,7 +154,8 @@ class TestExceptions(ZetesTest):
         request_picking_line_params = Parameters(itempick_obj)
         request_picking_line_params.update({
             'groupNum': self.picking.id,
-            'Cri01': 0
+            'Cri01': 0,
+            'Usf06': None
         })
 
         result_str = itempick_obj.requ(request_picking_line_params)
@@ -162,4 +163,6 @@ class TestExceptions(ZetesTest):
         results = \
             [self.format_result(result_line) for result_line in result_lines]
         self.assertEqual(len(results), 1)
-        self.assertEqual(results[0].pickLineId, str(pack_op_2.id))
+        pick_line_id, lot_id = results[0].pickLineId.split('_')
+        self.assertEqual(pick_line_id, str(pack_op_2.id))
+        self.assertEqual(lot_id, str(self.lot_product_2.id))

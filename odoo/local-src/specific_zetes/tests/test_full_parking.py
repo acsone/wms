@@ -224,7 +224,7 @@ class TestFullParking(ZetesParkingTest):
         validate_pick_items_params.update({
             'groupNum': picking.id,
             'lineId': line_product_2.moveLineId,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 75,  # Pick 75 items
             'Usf03': None,
         })
@@ -271,7 +271,7 @@ class TestFullParking(ZetesParkingTest):
         validate_reserve_qty_params.update({
             'groupNum': picking.id,
             'lineId': line_product_2.moveLineId,
-            'Usf01': self.lot_product_1.checksum,
+            'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 25,  # Pick 25 items
             'Usf03': None,
         })

@@ -119,12 +119,60 @@ class Itempick(DomainInterface):
         else:
             print_on_portable_printer = '0'
 
-        sequence = 1
-        result = []
+        # In case of the lot is sold out (Usf06 == '04'), we need to add split
+        # the pack op lot and reserve quantity in a new lot
+        is_cut_itempick = False
+        if params.Usf06 == constants.OP_CUT:
+            is_cut_itempick = True
+            line_id = params.Usf02
+            if isinstance(line_id, int):
+                line_id = str(line_id)
+
+            line_id_list = line_id.split('_')
+            if len(line_id_list) == 2:
+                pack_operation_id = int(line_id_list[0])
+                lot_id = int(line_id_list[1])
+            else:
+                pack_operation_id = int(line_id)
+                lot_id = None
+
+            picked_qty = int(params.Usf04 or 0)
+
+            pack_op = self.request.env['stock.pack.operation']\
+                .sudo(self._user).browse(pack_operation_id)
+
+            # Retrieve the pack lot
+            pack_lot = self.request.env['stock.pack.operation.lot']\
+                .sudo(self._user).search(
+                [('operation_id', '=', pack_operation_id),
+                 ('lot_id', '=', lot_id)],
+                limit=1
+            )
+            if not pack_lot:
+                result = Parameters(self, action='resp')
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': 'Lot pack operation not found'
+                })
+                return result.format()
+
+            msg = 'Out of stock for lot %s (product %s): %s taken' % \
+                  (pack_lot.lot_id.name, pack_op.product_id.name, picked_qty)
+            params.log(picking_id=picking_id,
+                       operation_id=pack_operation_id,
+                       exception=msg,
+                       error_type='human')
+
+            # Add the picked quantity on the pack lot
+            pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
+
+            # Call the method to skip this lot
+            pack_lot._skip_lot()
+
         # Search all pack operations for this picking
         lines = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .search([('picking_id', '=', picking_id)],
-                    order=order_by)
+            .search([('picking_id', '=', picking_id)], order=order_by)
+
         # Filter lines
         # We want only operation with a quantity to to done different
         # than the quantity done.
@@ -135,8 +183,12 @@ class Itempick(DomainInterface):
                       and line.zetes_state in [constants.OP_DEFAULT,
                                                constants.OP_SKIPPED,
                                                constants.OP_CANCELED])
+        split_lines = lines.split_pack_op_lines()
 
-        if not lines:
+        sequence = 1
+        result = []
+
+        if not split_lines:
             error_message = _('There is no lines for the picking %s') \
                             % picking_id
 
@@ -145,23 +197,42 @@ class Itempick(DomainInterface):
                 exception=error_message
             )
 
+            # If a cut return no lines, we need to return the code 11
+            # (no lines available) and not the code 10 (error)
+            if is_cut_itempick:
+                resp_code = constants.RESPONSE_CODE_NO_LINES
+                error_message = None
+            else:
+                resp_code = constants.RESPONSE_CODE_ERROR
+
             result = Parameters(self, action='resp')
             result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
+                'respCode': resp_code,
                 'respMsg': error_message
             })
             return result.format()
 
-        for line in lines:
+        for line, pack_lot in split_lines:
+            qty_to_do = pack_lot and pack_lot.qty_todo or line.product_qty
+            if pack_lot:
+                qty_done = pack_lot.qty
+            else:
+                qty_done = line.qty_done
+
+            if pack_lot:
+                line_id = '%s_%s' % (line.id, pack_lot.lot_id.id)
+            else:
+                line_id = line.id
+
             line_values = Parameters(self)
             line_values.update({
                 'respCode': constants.RESPONSE_CODE_OK,
                 'groupNum': picking_id,
-                'pickLineId': line.id,
+                'pickLineId': line_id,
                 'reqDestCarSeqNum': 1,
-                'reqQty': format(int(line.product_qty), '0%d' % 6),
-                'effQty': format(int(line.qty_done), '0%d' % 6),
-                'pickStatus': constants.OP_DEFAULT,
+                'reqQty': format(int(qty_to_do), '0%d' % 6),
+                'effQty': format(int(qty_done), '0%d' % 6),
+                'pickStatus': line.zetes_state,
                 'tripCounter': 1,
             })
 
@@ -222,17 +293,12 @@ class Itempick(DomainInterface):
                 'sourceLCCD': location.get_checksum(),
             })
 
-            # Send 5 first lots for this products (ordered by expiration date)
-            lots = self.request.env['stock.production.lot'].sudo(self._user)\
-                .search([('product_id', '=', product.id),
-                         ('is_archived', '=', False)
-                         ],
-                        order='life_date',
-                        limit=5)
-            index = 0
-            for lot in lots:
-                index += 1
-                setattr(line_values, 'Usf0{}'.format(index), lot.checksum)
+            if pack_lot and pack_lot.lot_id:
+                lot = pack_lot.lot_id
+                line_values.update({
+                    'Usf01': lot.voice_identifier or lot.name[-3:],
+                    'Usf02': lot.checksum
+                })
 
             # If the available quantity for this location is less than
             # the zero check limit, it means that we have to ask a zero check.
@@ -274,10 +340,22 @@ class Itempick(DomainInterface):
         """
         if not params.pickLineId:
             return
-        line_id = int(params.pickLineId)
+
+        line_id = params.pickLineId
+
+        if isinstance(line_id, int):
+            line_id = str(line_id)
+
+        line_id_list = line_id.split('_')
+        if len(line_id_list) == 2:
+            pack_operation_id = int(line_id_list[0])
+            lot_id = int(line_id_list[1])
+        else:
+            pack_operation_id = int(line_id)
+            lot_id = None
 
         pack_op = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(line_id)
+            .sudo(self._user).browse(pack_operation_id)
         if not len(pack_op):
             return
 
@@ -290,8 +368,13 @@ class Itempick(DomainInterface):
 
                 # If status == OP_CANCELED => remove all actions for this line
                 if status == constants.OP_CANCELED:
-                    pack_op.pack_lot_ids.unlink()
-                    pack_op.save()
+                    if lot_id:
+                        pack_lot = pack_op.pack_lot_ids.filtered(
+                            lambda line: line.lot_id.id == lot_id)
+                        pack_lot.qty = 0
+                        pack_op.save()
+                    else:
+                        pack_op.qty_done = 0
 
         except Exception as e:
             _logger.error(str(e))

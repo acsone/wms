@@ -7,6 +7,11 @@
         <field name="value">3</field>
     </record>
 
+    <record id="lot_voice_identifier_size" model="ir.config_parameter">
+        <field name="key">lot_voice_identifier_size</field>
+        <field name="value">3</field>
+    </record>
+
     <record id="same_lot_checksum_range" model="ir.config_parameter">
         <field name="key">same_lot_checksum_range</field>
         <field name="value">2</field>

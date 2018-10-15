@@ -23,6 +23,7 @@ class TestItempick(ZetesTest):
         request_params.update({
             'groupNum': self.picking.id,
             'Cri01': None,
+            'Usf06': None
         })
 
         result_str = domain.requ(request_params)
@@ -31,9 +32,12 @@ class TestItempick(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
 
+        pack_op_id, lot_id = result.pickLineId.split('_')
+
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking.id))
-        self.assertEqual(result.pickLineId, str(pack_op.id))
+        self.assertEqual(pack_op_id, str(pack_op.id))
+        self.assertEqual(lot_id, str(lot_id))
         self.assertEqual(result.reqDestCarSeqNum, '1')
         self.assertEqual(int(result.reqQty), 10)
         self.assertEqual(int(result.effQty), 0)
@@ -65,7 +69,7 @@ class TestItempick(ZetesTest):
                          self.location_product_1.get_checksum())
 
         # Check lot name
-        self.assertEqual(result.Usf01, self.lot_product_1.checksum)
+        self.assertEqual(result.Usf01, self.lot_product_1.voice_identifier)
 
     def test_resu_itempick(self):
         """
@@ -94,7 +98,7 @@ class TestItempick(ZetesTest):
         domain.resu(request_params)
         self.assertEqual(pack_op.zetes_state, constants.OP_CANCELED)
         self.assertEqual(pack_op.qty_done, 0)
-        self.assertEqual(len(pack_op.pack_lot_ids), 0)
+        self.assertEqual(len(pack_op.pack_lot_ids), 1)
 
     def test_requ_itempick_zero_check(self):
         """
@@ -107,6 +111,7 @@ class TestItempick(ZetesTest):
         request_params.update({
             'groupNum': self.picking.id,
             'Cri01': None,
+            'Usf06': None,
         })
 
         result_str = domain.requ(request_params)
@@ -132,6 +137,7 @@ class TestItempick(ZetesTest):
         request_params.update({
             'groupNum': self.picking.id,
             'Cri01': None,
+            'Usf06': None
         })
 
         result_str = domain.requ(request_params)

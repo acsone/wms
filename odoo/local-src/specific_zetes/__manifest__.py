@@ -25,6 +25,7 @@
         'stock_groupbypartner',
         'procurement_sale',
         'stock_picking_zone',
+        'stock_lot_loss',
     ],
     'data': [
         # Views
