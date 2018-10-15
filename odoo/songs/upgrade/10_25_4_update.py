@@ -35,13 +35,8 @@ def drop_round_instance_sql_constrain(ctx):
 
 
 @anthem.log
-def pre(ctx):
-    """ PRE 10.25.2 """
-    drop_round_instance_sql_constrain(ctx)
-
-
-@anthem.log
 def post(ctx):
     """ POST 10.25.4 """
+    drop_round_instance_sql_constrain(ctx)
     set_cron_to_noupdate(ctx)
     set_db2_importer_priorities(ctx)
