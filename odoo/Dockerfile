@@ -39,6 +39,10 @@ RUN set -x; \
 # Entrypoints
 COPY ./before-migrate-entrypoint.d/* /before-migrate-entrypoint.d/
 COPY ./start-entrypoint.d/* /start-entrypoint.d/
+# FIXME Temp fix as bin/docker-entrypoint.sh is broken on docker-odoo-project-3.0.0
+COPY ./before-migrate-entrypoint.d/* /odoo/before-migrate-entrypoint.d/
+COPY ./start-entrypoint.d/* /odoo/start-entrypoint.d/
+
 RUN chmod +x /before-migrate-entrypoint.d/* \
     && chmod +x /start-entrypoint.d/*
 # CSV Loader
