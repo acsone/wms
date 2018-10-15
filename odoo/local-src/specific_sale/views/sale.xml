@@ -87,8 +87,8 @@
             </xpath>
 
             <xpath expr="//field[@name='product_uom_qty']" position="after">
-                <field name="product_qty_unavailable" string="Quantity unavailable at order line save"/>
-                <field name="current_product_qty_unavailable" string="Quantity unavailable at now"/>
+                <field name="product_qty_unavailable" string="BO on sale"/>
+                <field name="current_product_qty_unavailable" string="Current BO"/>
                 <field name="product_qty_remains_to_deliver"/>
                 <button name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d" type="action" icon="fa-ban" attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
             </xpath>

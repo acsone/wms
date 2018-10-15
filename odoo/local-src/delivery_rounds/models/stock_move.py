@@ -4,9 +4,13 @@
 
 from odoo import api, models, _
 from odoo.exceptions import ValidationError
+from odoo.addons.queue_job.job import identity_exact
 
 import logging
 _logger = logging.getLogger(__name__)
+
+
+EXPORT_DESC = 'Export sale order {} to ESB webservice (bo changed)'
 
 
 class StockMove(models.Model):
@@ -97,6 +101,21 @@ class StockMove(models.Model):
                 'linked_move_operation_ids.move_id').do_unreserve()
         _logger.debug("Reserve corresponding moves %s", moves_pickings)
         moves_pickings.action_assign()
+
+        # Sale order that need to be resend to the esb !
+        # Because their back order may have changed
+        # Testing for order_id existance has it failed on some Travis tests
+        if 'order_id' not in moves_pickings.fields_get_keys():
+            return res
+        updated_sale_order = moves_pickings.mapped('order_id')
+        for so in updated_sale_order:
+            if not so.esb_is_exportable():
+                continue
+            so.with_delay(
+                description=EXPORT_DESC.format(so.name),
+                identity_key=identity_exact,
+            ).esb_export_record()
+
         return res
 
     @api.multi

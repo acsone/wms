@@ -227,3 +227,54 @@ class ExportSaleOrderTestCase(SavepointCase):
             mapper = work.component(usage='export.mapper')
             values = mapper.map_record(so).values()
         self.assertEqual(values['status'], 'processing')
+
+    def test_bo_qty_changed(self): #, delayable):
+        """Check sale order is sent when back order is modified.
+        """
+        # Make picking type with subcode so it is updated by delivery round
+        pick_type = self.env['stock.picking.type'].search([
+                ('name', '=', 'Delivery Orders')], limit=1)
+        pick_type.write({'subcode': 'PICK'})
+        stock_location = self.env.ref('stock.stock_location_stock')
+        product = self.env['product.template'].create({
+            'name': 'Unittest P1',
+            'uom_id': self.env.ref('product.product_uom_unit').id,
+            'type': 'product',
+        })
+        sale_order = self.model.create({
+            'esb_ref': 'ref_03',
+            'partner_id': self.partner.id,
+            'date_order': '2018-01-29',
+            'order_line': [
+                (0, 0, {
+                    'sequence': 1,
+                    'name': product.name,
+                    'product_id': product.product_variant_ids.id,
+                    'product_uom_qty': 7,
+                })],
+        })
+        assert sale_order.order_line[0].product_qty_unavailable == 7
+        assert sale_order.order_line[0].current_product_qty_unavailable == 7
+        sale_order.action_confirm()
+        assert sale_order.order_line[0].product_qty_unavailable == 7
+        assert sale_order.order_line[0].current_product_qty_unavailable == 7
+        assert sale_order.picking_ids.picking_type_subcode == 'PICK'
+        # Changing the stock of the product should change the back order
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'location_id': stock_location.id,
+            'filter': 'partial',
+        })
+        inventory.prepare_inventory()
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': product.product_variant_id.id,
+            'product_qty': 10,
+            'location_id': stock_location.id})
+        with mock.patch('odoo.addons.queue_job.models.'
+                        'base.DelayableRecordset') as export_record:
+            inventory.action_done()
+            self.assertEqual(export_record.call_count, 1)
+        # Cache refreshing needed for the back order calculation to work ?
+        product.refresh()
+        assert sale_order.order_line[0].current_product_qty_unavailable == 0

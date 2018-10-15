@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1024: Re-send sale order to ESB when the back order quantity of one line has changed.
+
 **Bugfixes**
 
 * ALCYN-410: Fix helpdesk ticket not with a sequence as name when created from backorder wizard
