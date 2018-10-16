@@ -565,3 +565,4 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_25_4_update::post
+    - version: 10.26.0
