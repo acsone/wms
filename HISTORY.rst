@@ -54,9 +54,6 @@ Unreleased
   * Adapt Zetes to indicate to the operation which lot he must take and offer the possibility to change the current lot in an operation
 * ALCYN-432: Improve the responsiveness of the customer stat form web service, by implementing the fetching of data with a sql query (ESB)
 * ALCYN-1497: Add sequence (INV/######) and a note on inventory. Modify the view list of inventory to add some details.
-* ALCYN-1496: Create a new route in the connector ESB to retrieve the stock with SKU. I decided to not use the existing route because we need to be able to retrieve all stocks (filtered by user).
-* ALCYN-1461: Manage packaging during reservation. Reserve in priority nearly entire pallet, box, shrink-wrap instead of fefo when applicable
-* ALCYN-1487: Add the possibility to have sale exception as warning only. When a sale order line raise a warning some additional information is added to the description of the line.
 
 **Bugfixes**
 

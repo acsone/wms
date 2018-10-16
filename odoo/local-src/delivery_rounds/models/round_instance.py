@@ -403,16 +403,16 @@ class RoundInstance(models.Model):
             'stat_time_picking': time_now(self),
             })
 
-    @api.one
+    @api.multi
     def button_deliver(self):
         """ Deliver all customers. This validates all shipping orders that are
         available.
         Mark as done and unlink other deliveries
         """
-        self.instance_customer_ids.filtered(lambda c: not c.delivered).\
-            _deliver()
+        icust = self.mapped('instance_customer_ids')
+        icust.filtered(lambda c: not c.delivered)._deliver()
         # Remove all customer where no picking have been processed
-        self.instance_customer_ids._remove()
+        icust._remove()
         # Close delivery round
         self.button_done()
 
