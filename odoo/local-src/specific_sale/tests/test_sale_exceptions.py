@@ -333,6 +333,8 @@ class TestSaleOrderException(SavepointCase):
 
     def test_exception_warning_not_blocking(self):
         """Check that a warning exception does not block confirmation."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.warning = self.env['exception.rule'].create({
             'rule_group': 'sale',
             'model': 'sale.order.line',
@@ -346,6 +348,8 @@ class TestSaleOrderException(SavepointCase):
 
     def test_exception_is_blocking(self):
         """Check that a warning exception does not block confirmation."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         self.warning = self.env['exception.rule'].create({
             'rule_group': 'sale',
             'model': 'sale.order.line',
@@ -359,6 +363,8 @@ class TestSaleOrderException(SavepointCase):
 
     def test_exception_warning_psychotropic_product(self):
         """Check sale order line message for psychotropic products."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         exception = self.env.ref('specific_sale.warning_psychotropic')
         line = self.so1.order_line[0]
         line.product_id = self.prod_stup
@@ -366,6 +372,8 @@ class TestSaleOrderException(SavepointCase):
 
     def test_psychotropic_by_phone(self):
         """Check psychotropic are not oredered on the phone."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         warning = self.env.ref('specific_sale.warning_psychotropic')
         exception = self.env.ref('specific_sale.no_psychotropic_by_phone')
         self.partner.alcyon_category_id = self.env.ref(
@@ -388,6 +396,8 @@ class TestSaleOrderException(SavepointCase):
         A customer can be configured to not accept a sale order which implies
         some back order.
         """
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
         no_backorder_rule = self.env.ref('specific_sale.no_backorder')
         self.partner.is_sale_back_order_accepted = False
         line = self.so1.order_line[0]

@@ -37,4 +37,16 @@
             <field name="active">0</field>
         </record>
 
+        <record id="no_psychotropic_by_phone" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="warning_psychotropic" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="warning_free_product" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
 </odoo>
