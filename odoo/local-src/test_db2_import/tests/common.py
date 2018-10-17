@@ -1110,7 +1110,9 @@ class DB2ImportTestCase(SavepointCase):
         types = [{
             'xmlid': '__setup__.procurement_rule_materiel_mto_mtu',
             'name': 'WH: Stock -> Output MTO+MTS (MAT)',
-            'action': 'split_procurement',
+            # for data import, consider those rules as MTS only
+            # 'action': 'split_procurement',
+            'action': 'move',
             'sequence': 30,
             'location_id': location_out.id,
             'warehouse_id': warehouse.id,
@@ -1125,7 +1127,9 @@ class DB2ImportTestCase(SavepointCase):
         }, {
             'xmlid': '__setup__.procurement_rule_ali_mto_mtu',
             'name': 'WH: Stock -> Output MTO+MTS (ALI)',
-            'action': 'split_procurement',
+            # for data import, consider those rules as MTS only
+            # 'action': 'split_procurement',
+            'action': 'move',
             'sequence': 30,
             'location_id': location_out.id,
             'warehouse_id': warehouse.id,
@@ -1138,7 +1142,9 @@ class DB2ImportTestCase(SavepointCase):
         }, {
             'xmlid': '__setup__.procurement_rule_medoc_mto_mtu',
             'name': 'WH: Stock -> Output MTO+MTS (MED)',
-            'action': 'split_procurement',
+            # for data import, consider those rules as MTS only
+            # 'action': 'split_procurement',
+            'action': 'move',
             'sequence': 30,
             'location_id': location_out.id,
             'warehouse_id': warehouse.id,
@@ -1152,7 +1158,9 @@ class DB2ImportTestCase(SavepointCase):
         }, {
             'xmlid': '__setup__.procurement_rule_froid_mto_mtu',
             'name': 'WH: Stock -> Output MTO+MTS (FRIGO)',
-            'action': 'split_procurement',
+            # for data import, consider those rules as MTS only
+            # 'action': 'split_procurement',
+            'action': 'move',
             'sequence': 30,
             'location_id': location_out.id,
             'warehouse_id': warehouse.id,

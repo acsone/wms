@@ -711,17 +711,15 @@ class TestImportSO(DB2ImportTestCase):
 
         # 4 pickings
         # Med -> Output state: done
-        # Mat -> Output state: confirmed # FIXME waiting
+        # Mat -> Output state: confirmed
         # Output -> Customer state: done
         # Output -> Customer state: waiting (Backorder)
         self.assertEqual(len(self.so.picking_ids), 4)
         states = [p.state for p in self.so.picking_ids]
-        # FIXME updating setup for tests revealed an issue
         # with picking states
         self.assertEqual(
             sorted(states),
-            # [u'confirmed'] + [u'done'] * 2 + [u'waiting'])
-            [u'done'] * 2 + [u'waiting'] * 2)
+            [u'confirmed'] + [u'done'] * 2 + [u'waiting'])
 
     @freeze_time("2018-02-01")
     def test_import_so_2835987(self):

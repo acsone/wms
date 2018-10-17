@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1532: add tools to disable MTO for the duration of the import
+
 **Features and Improvements**
 
 * ALCYN-1024: Re-send sale order to ESB when the back order quantity of one line has changed.
