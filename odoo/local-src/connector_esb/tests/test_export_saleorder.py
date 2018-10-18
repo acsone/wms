@@ -228,7 +228,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             values = mapper.map_record(so).values()
         self.assertEqual(values['status'], 'processing')
 
-    def test_bo_qty_changed(self): #, delayable):
+    def test_bo_qty_changed(self):
         """Check sale order is sent when back order is modified.
         """
         # Make picking type with subcode so it is updated by delivery round
