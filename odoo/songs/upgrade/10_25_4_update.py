@@ -24,7 +24,7 @@ def set_db2_importer_priorities(ctx):
     ref('db2_import.db2_ticket_importer').priority = 11
 
 
-anthem.log
+@anthem.log
 def post(ctx):
     """ POST 10.25.4 """
     set_cron_to_noupdate(ctx)
