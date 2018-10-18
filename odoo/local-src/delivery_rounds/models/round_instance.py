@@ -555,8 +555,9 @@ class RoundInstanceCustomer(models.Model):
         # round
         # Use | to let it work in tests with one step delivery
         pickings |= shippings._get_all_src_pickings()
-        # TODO: we should ensure a picking is not already done for another
-        #       delivery round
+        # Note that in our case, an open picking cannot have multiple open
+        # shippings, so we don't have to ensure a picking is not already done
+        # for another delivery round
         pickings = pickings.filtered(
             lambda r: r.state in (
                 'waiting',
