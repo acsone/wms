@@ -45,7 +45,7 @@ class StockBackorderChoice(models.TransientModel):
         po = self.env['purchase.order'].search(
             [('name', '=', self.picking_id.origin)], limit=1)
         return {
-            'name': self.helpdesk_ticket_description,
+            'description': self.helpdesk_ticket_description,
             'helpdesk_ticket_reason_id': self.helpdesk_ticket_reason_id.id,
             'stock_picking_id': self.picking_id.id,
             'partner_id': self.picking_id.partner_id.id,

@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-410: Fix helpdesk ticket not with a sequence as name when created from backorder wizard
+
 **Build**
 
 **Documentation**

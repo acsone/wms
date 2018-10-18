@@ -144,6 +144,10 @@ class TestPickingBackorder(SavepointCase):
         if helpdesk_needed:
             self.assertEqual(len(ticket), 1)
             self.assertEqual(ticket.partner_id, self.partner)
+            self.assertEqual(ticket.description, 'test')
+            # Check that the name has a reference and not the default value
+            self.assertTrue(ticket.name)
+            self.assertNotEqual(ticket.name, '/')
             self.assertEqual(
                 ticket.helpdesk_ticket_reason_id,
                 self.ticket_reason

@@ -566,3 +566,7 @@ migration:
         post:
           - anthem songs.upgrade.10_25_4_update::post
     - version: 10.26.0
+      addons:
+        upgrade:
+        ### local
+        - stock_picking_backorder
