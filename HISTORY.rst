@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-410: Fix helpdesk ticket not with a sequence as name when created from backorder wizard
+* ALCYN-1543: Fix product_type in customer form statistique (ESB), the param and the return value must use full word MAT is materiel.
 
 **Build**
 

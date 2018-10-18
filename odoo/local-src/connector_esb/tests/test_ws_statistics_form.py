@@ -23,16 +23,25 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             'ref': '987654321',
         })
         categ_med = self.env.ref('specific_data.product_categ_medoc')
-        categ_med.esb_ref = 'medicament'
+        categ_med.esb_ref = 'MED'
+        categ_med.is_business_unit = True
+        categ_specific_med = self.env['product.category'].create({
+            'name': 'specific med',
+            'esb_ref': '34',
+            'parent_id': categ_med.id
+            })
+
         categ_ali = self.env.ref('specific_data.product_categ_ali')
-        categ_ali.esb_ref = 'aliment'
+        categ_ali.esb_ref = 'ALI'
+        categ_ali.is_business_unit = True
         categ_mat = self.env.ref('specific_data.product_categ_materiel')
-        categ_mat.esb_ref = 'material'
+        categ_mat.esb_ref = 'MAT'
+        categ_mat.is_bustiness_unit = True
         product_model = self.env['product.product']
         self.product1 = product_model.create({
             'name': 'KETOFEN 5MG 10CP',
             'default_code': '1021906',
-            'categ_id': categ_med.id,
+            'categ_id': categ_specific_med.id,
             'seller_ids': [
                 (0, 0, {
                     'name': self.supplier.id,
@@ -176,7 +185,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             component = work.component('ws.message.statistics.form')
             options = component.options_for_form(
                 customer_ref='123',
-                product_type='aliment',
+                product_type='ALI',
             )
             data = component._data_for_message(options)
 

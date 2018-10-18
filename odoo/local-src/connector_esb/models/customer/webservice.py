@@ -31,58 +31,78 @@ class StatisticsFormWebserviceMessage(Component):
     def _data_for_message(self, options):
 
         sql = '''
-            SELECT
-                pp.default_code AS "sku",
+SELECT
+    pp.default_code AS "sku",
 
-                COALESCE(
-                    (SELECT value
-                        FROM ir_translation
-                        LEFT JOIN res_lang
-                            ON ir_translation.lang = res_lang.code
-                        WHERE res_lang.esb_ref=%s AND
-                            ir_translation.name='product.template,name' AND
-                            res_id = pt.id LIMIT 1
-                    ),
-                    pt.name
-                ) AS "productName",
+    COALESCE(
+        (SELECT value
+            FROM ir_translation
+            LEFT JOIN res_lang ON ir_translation.lang = res_lang.code
+            WHERE res_lang.esb_ref=%s AND
+                ir_translation.name='product.template,name' AND
+                res_id = pt.id LIMIT 1
+        ),
+        pt.name
+    ) AS "productName",
 
-                pc.alcyon_product_type AS "productType",
+    CASE business_unit.esb_ref
+    WHEN 'ALI' THEN
+        'aliment'
+    WHEN 'MAT' THEN
+        'materiel'
+    WHEN 'MED' THEN
+        'medicament'
+    ELSE
+        ''
+    END AS "productType",
 
-                STRING_AGG(distinct supplier.ref, ',' ORDER BY supplier.ref)
-                    AS "manufacturer",
+    STRING_AGG(distinct supplier.ref, ',' ORDER BY supplier.ref)
+        AS "manufacturer",
 
-                SUM(sol.qty_delivered) / count(sol.id) AS "qtyDelivered",
+    SUM(sol.qty_delivered) / count(sol.id) AS "qtyDelivered",
 
-                ROUND(SUM(sol.qty_delivered * sol.price_unit) / count(sol.id)
-                      , 3)
-                    AS "totalPrice",
+    ROUND(SUM(sol.qty_delivered * sol.price_unit) / count(sol.id), 3)
+        AS "totalPrice",
 
-                (SELECT SUM(amount)
-                    FROM account_tax
-                    LEFT JOIN product_taxes_rel
-                        ON product_taxes_rel.tax_id = account_tax.id
-                    WHERE product_taxes_rel.prod_id = pt.id
-                )  AS "taxRate"
+    (SELECT SUM(amount)
+        FROM account_tax
+        LEFT JOIN product_taxes_rel
+            ON product_taxes_rel.tax_id = account_tax.id
+        WHERE product_taxes_rel.prod_id = pt.id
+    )  AS "taxRate"
 
-            FROM sale_order_line AS sol
-            LEFT JOIN product_product AS pp ON sol.product_id = pp.id
-            LEFT JOIN product_template AS pt ON pp.product_tmpl_id = pt.id
-            LEFT JOIN product_category AS pc ON pt.categ_id = pc.id
-            LEFT JOIN sale_order AS so ON sol.order_id = so.id
-            LEFT JOIN res_partner AS customer ON customer.id = so.partner_id
-            RIGHT OUTER JOIN product_supplierinfo AS psi
-                ON psi.product_tmpl_id = pt.id
-            LEFT JOIN res_partner AS supplier ON supplier.id = psi.name
+FROM sale_order_line AS sol
+LEFT JOIN product_product AS pp ON sol.product_id = pp.id
+LEFT JOIN product_template AS pt ON pp.product_tmpl_id = pt.id
 
-            WHERE sol.invoice_status = 'invoiced' AND
-                  customer.ref = %s
+LEFT JOIN LATERAL
+    (WITH RECURSIVE parent_category AS (
+        SELECT parent_id, esb_ref, is_business_unit
+            FROM product_category WHERE id=pt.categ_id
+        UNION
+        SELECT pcat.parent_id, pcat.esb_ref, pcat.is_business_unit
+            FROM product_category AS pcat
+            INNER JOIN parent_category p ON p.parent_id = pcat.id
+    )
+    SELECT esb_ref FROM parent_category WHERE is_business_unit IS TRUE limit 1
+    ) business_unit
+    ON TRUE
+
+LEFT JOIN sale_order AS so ON sol.order_id = so.id
+LEFT JOIN res_partner AS customer ON customer.id = so.partner_id
+RIGHT OUTER JOIN product_supplierinfo AS psi
+    ON psi.product_tmpl_id = pt.id
+LEFT JOIN res_partner AS supplier ON supplier.id = psi.name
+
+WHERE sol.invoice_status = 'invoiced' AND
+      customer.ref = %s
         '''
 
         params = []
         params.append(options.language or 'FR')
         params.append(options.customer_ref)
         if options.product_type:
-            sql += " AND pc.alcyon_product_type = %s"
+            sql += " AND business_unit.esb_ref = %s"
             params.append(options.product_type)
         if options.start:
             sql += " AND so.date_order >= %s"
@@ -93,7 +113,7 @@ class StatisticsFormWebserviceMessage(Component):
         if options.suppliers:
             sql += " AND supplier.ref in %s"
             params.append(tuple(options.suppliers))
-        sql += ' GROUP BY pp.id,pp.default_code,pc.alcyon_product_type,pt.id;'
+        sql += ' GROUP BY pp.id,pp.default_code,business_unit.esb_ref,pt.id;'
 
         self.env.cr.execute(sql, params)
         data = self.env.cr.fetchall()
