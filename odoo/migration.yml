@@ -631,3 +631,9 @@ migration:
         upgrade:
           ### local
           - connector_esb
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.sales::import_pricelist
+              - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
