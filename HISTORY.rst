@@ -19,6 +19,10 @@ Unreleased
 
 **Documentation**
 
+**Data Migration**
+
+* ALCYN-481: Set "Belgium Only" on products for given list and remove previous
+
 
 10.26.0 (2018-10-22)
 ++++++++++++++++++++
