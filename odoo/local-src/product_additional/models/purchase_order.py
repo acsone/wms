@@ -9,7 +9,19 @@ class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
     @api.multi
-    def button_confirm(self):
+    def button_compute_additional_products(self):
+        """
+        Compute additional products for a recordsets of purchae orders.
+        In a first time, this method will delete all existing additional
+        lines. After that, for each line, the method will check if we
+        need to create an additional line.
+        """
+        # Remove existing additional lines. These lines will be
+        # recomputed if needed
+        existing_additional_lines = self.mapped('order_line').filtered(
+            lambda line: line.is_additional_product)
+        existing_additional_lines.unlink()
+
         for order in self:
             for line in order.order_line:
                 ratio_main_product = line.product_id.ratio_main_product
@@ -42,8 +54,6 @@ class PurchaseOrder(models.Model):
                     'product_qty': additional_product,
                     'is_additional_product': True,
                 })
-
-        return super(PurchaseOrder, self).button_confirm()
 
     @api.multi
     def button_draft(self):

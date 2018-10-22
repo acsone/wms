@@ -6,13 +6,13 @@
 Product Additional
 ==================
 
-Manage free additional products in sales.
+Manage free additional products in sales and in purchases.
 
-There are two types of additional product: promotional and accessory.
+There are two types of additional product: promotional (only for sales) and accessory.
 
 
-The promotional free product
-----------------------------
+The promotional free product (only for sales)
+---------------------------------------------
 It is defined on the supplier info. For a specific quantity you offer a product
 for free (e.g. 3+1).
 
@@ -30,6 +30,9 @@ The accessory free product
 It is defined on the product. Is is an other product that is offered when the
 main product is sold. (e.g. buy 3 productA and get a free productB).
 
+A) For sales
+------------
+
 The accessory product is managed at pack operation. This ensures that you
 deliver the quantity of accessories based on the delivered quantity of the
 main product.
@@ -44,6 +47,13 @@ operation for the accessory product. When the main product's pack operation is
 deleted, the accessory related move is also cancelled and so it's pack
 operation is also deleted.
 
+B) For purchase
+---------------
+
+Additional products are not automatically computed. The user need to
+click on the button "Compute additional products" on the purchase order.
+This method will delete all existing additional lines and loop on each
+order lines to compute if we need to create a line.
 
 Credits
 =======
