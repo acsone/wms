@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.26.0 (2018-10-22)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1532: add tools to disable MTO for the duration of the import
@@ -36,10 +48,6 @@ Unreleased
 * ALCYN-410: Fix helpdesk ticket not with a sequence as name when created from backorder wizard
 * ALCYN-1543: Fix product_type in customer form statistique (ESB), the param and the return value must use full word MAT is materiel.
 * ALCYN-1546: Fix stock export, export the quantity immediately usable not the physical one.
-
-**Build**
-
-**Documentation**
 
 
 10.25.4 (2018-10-15)
