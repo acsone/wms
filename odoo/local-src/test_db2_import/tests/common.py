@@ -558,8 +558,13 @@ class DB2ImportTestCase(SavepointCase):
 
     @classmethod
     def load_carriers(cls):
+        Carrier = cls.env['delivery.carrier'].with_context(
+            tracking_disable=True,
+            no_connector_export=True,
+            force_archive_orderpoint=True
+        )
         with open(INSTALL_CSV_PATH % 'delivery.carrier') as csv_file:
-            load_csv(cls.env['delivery.carrier'], csv_file)
+            load_csv(Carrier, csv_file)
 
     @classmethod
     def load_account_journals(cls):
@@ -616,8 +621,12 @@ class DB2ImportTestCase(SavepointCase):
 
     @classmethod
     def load_users(cls):
+        User = cls.env['res.users'].with_context(
+            no_reset_password=True,
+            tracking_disable=True,
+        )
         with open(CSV_PATH % 'res.users') as csv_file:
-            load_csv(cls.env['res.users'], csv_file)
+            load_csv(User, csv_file)
 
     @classmethod
     def load_partner_title(cls):
@@ -626,15 +635,23 @@ class DB2ImportTestCase(SavepointCase):
 
     @classmethod
     def load_suppliers(cls):
+        Partner = cls.env['res.partner'].with_context(
+            tracking_disable=True
+        )
         with open(CSV_PATH % 'supplier') as csv_file:
-            load_csv(cls.env['res.partner'], csv_file)
+            load_csv(Partner, csv_file)
 
     @classmethod
     def load_products(cls):
+        Product = cls.env['product.product'].with_context(
+            tracking_disable=True,
+            no_connector_export=True,
+            force_archive_orderpoint=True
+        )
         with open(CSV_PATH % 'product') as csv_file:
-            load_csv(cls.env['product.product'], csv_file)
+            load_csv(Product, csv_file)
         with open(CSV_PATH % 'additional_product') as csv_file:
-            load_csv(cls.env['product.product'], csv_file)
+            load_csv(Product, csv_file)
 
     @classmethod
     def load_supplierinfo(cls):
@@ -650,8 +667,11 @@ class DB2ImportTestCase(SavepointCase):
 
     @classmethod
     def load_customers(cls):
+        Partner = cls.env['res.partner'].with_context(
+            tracking_disable=True
+        )
         with open(CSV_PATH % 'customer') as csv_file:
-            load_csv(cls.env['res.partner'], csv_file)
+            load_csv(Partner, csv_file)
 
     @classmethod
     def create_locations(cls):
@@ -661,7 +681,7 @@ class DB2ImportTestCase(SavepointCase):
         loc_partner = ref('stock.stock_location_locations_partner')
 
         Location = cls.env['stock.location'].with_context(
-                    defer_parent_store_computation=True)
+                    defer_parent_store_computation='manually')
 
         # Reserves = Products available => under WH, above Stock
         reserves = [
