@@ -147,7 +147,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         """ Generate data dict with mapper and check with what is expected """
         product = self.prod1
         expected = {'sku': u'ref1',
-                    'qty': 50 + 25,
+                    'qty': product.immediately_usable_qty,
                     'sales_average': round(55.0/365, 1),
                     'erp_stock_code': u'A',
                     'date_peremption': self.use_date_2.strftime("%Y-%m-%d"),
