@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-1514: New imported field sale_channel on sale orders
 * ALCYN-1525: Create migration sale invoices with dedicated journal and prices to zero.
 * ALCYN-98: recompute all production lot alert_date and removal_date
+* Update full csv data from DB2 replication server at 2018-10-19 18:00:00
 
 **Features and Improvements**
 

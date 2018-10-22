@@ -33,10 +33,12 @@ __import__.bank_BBRUBEBB,BBRUBEBB,ING BANK
 __import__.bank_BBVAESMM,BBVAESMM,BBVA Girona
 __import__.bank_BCEELULL,BCEELULL,Banque/Caisse d'Epargne de l'etat
 __import__.bank_BCEELULL,BCEELULL,BCEE
+__import__.bank_BCITITMM,BCITITMM,INTESA SAN PAOLO
 __import__.bank_BCVLCH2LXXX,BCVLCH2LXXX,Banque Cantonale Vaudoise
 __import__.bank_BDCHBE22,BDCHBE22,Deutsche Bank
 __import__.bank_BGLLLULL,BGLLLULL,BGL BNP Paribas S.A.
 __import__.bank_BILLLULL,BILLLULL,Bil Bank
+__import__.bank_BILLLULL,BILLLULL,BANQUE INT. DE LUXEMBOURG
 __import__.bank_BKBKESMMXXX,BKBKESMMXXX,BANKINTER (Vigo Branch)
 __import__.bank_BKCPBEB1BKB,BKCPBEB1BKB,BKCP
 __import__.bank_BLOPIT22,BLOPIT22,UBI BANCA
@@ -61,6 +63,7 @@ __import__.bank_BOFSGB21260,BOFSGB21260,Bank of Scotland
 __import__.bank_BOTKNL2X,BOTKNL2X,BANK OF TOKYO - MITSUBISHI
 __import__.bank_BOUSFRPP,BOUSFRPP,Boursorama Banque
 __import__.bank_BPOTBEB1,BPOTBEB1,Banque de la Poste
+__import__.bank_BPPIITRRXXX,BPPIITRRXXX,Poste Italiane S.P.A
 __import__.bank_BREXPLPWMUL,BREXPLPWMUL,Multibank
 __import__.bank_BSABESBB,BSABESBB,Banc de Sabadell
 __import__.bank_BSPFFRPP,BSPFFRPP,LCL Banque Palatine
@@ -114,6 +117,7 @@ __import__.bank_CMCIFR2A,CMCIFR2A,CREDIT MUTUEL
 __import__.bank_COBABEBX,COBABEBX,Comerzbank AG
 __import__.bank_COBABEBX,COBABEBX,Commerzbank
 __import__.bank_COBADEFF,COBADEFF,Commerzbank
+__import__.bank_COBADEFFXXX,COBADEFFXXX,Commerzbank Bremen
 __import__.bank_COBADEFF210,COBADEFF210,Commerzbank Kiel
 __import__.bank_COBADEFF356,COBADEFF356,Commerzbank
 __import__.bank_COBADEFF520,COBADEFF520,Commerzbank
@@ -193,6 +197,7 @@ __import__.bank_JVBABE22,JVBABE22,Bank J. Van Breda & C°
 __import__.bank_JVBABE22,JVBABE22,J VAN BREDA & C°
 __import__.bank_KREDBEBB,KREDBEBB,cbc Banque
 __import__.bank_KREDBEBB,KREDBEBB,kbc
+__import__.bank_KREDBEBB,KREDBEBB,kbc bank
 __import__.bank_KREDBEBB,KREDBEBB,KBC
 __import__.bank_KREDBEBB,KREDBEBB,KBC Bank
 __import__.bank_KREDBEBB,KREDBEBB,KBC Banque
@@ -251,12 +256,12 @@ __import__.bank_SPAABE22,SPAABE22,CENTEA
 __import__.bank_SPKHDE2HXXX,SPKHDE2HXXX,SPARKASSE HANNOVER
 __import__.bank_SPNGAT21XXX,SPNGAT21XXX,Sparkasse Neunkirchen
 __import__.bank_SWEDSESS,SWEDSESS,SWEDBANK
+__import__.bank_TRIOBEBB,TRIOBEBB,Banque Triodos
 __import__.bank_UBSWCHZH30A,UBSWCHZH30A,UBS AG
 __import__.bank_UNCRITB1Q45,UNCRITB1Q45,UNICREDIT BANCA SPA
 __import__.bank_UNCRITMM,UNCRITMM,UNICREDIT BANCA SPA - LANGHIRANO
 __import__.bank_UNCRITM1PN9,UNCRITM1PN9,UNICREDIT SPA
 __import__.bank_VBOEATWWSAL,VBOEATWWSAL,VOLKSBANK SEEKIRCHEN
-__import__.bank_VEBHIT2M,VEBHIT2M,VENETO BANCA HOLDING
 __import__.bank_VOHADE2HXXX,VOHADE2HXXX,HANNOVERSCHE VOLKSBANK
 __import__.bank_VOLODE66XXX,VOLODE66XXX,Volksbank Dreiländereck eG
 __import__.bank_11111111,11111111,CENTEA

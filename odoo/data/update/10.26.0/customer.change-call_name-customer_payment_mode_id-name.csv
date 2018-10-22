@@ -1,0 +1,5 @@
+id,call_name,customer_payment_mode_id/id,name
+__import__.customer_5085,PHILIPPEFRANCOISXAVIER*,__setup__.account_payment_mode_1,PHILIPPE FRANCOIS-XAVIER*
+__import__.customer_5939,LIMONNATASHA*,__setup__.account_payment_mode_1,LIMON NATASHA *
+__import__.customer_9145,EPC106*,__setup__.account_payment_mode_1,EPC 106 *
+__import__.customer_9371,EPC107*,__setup__.account_payment_mode_1,EPC 107 *

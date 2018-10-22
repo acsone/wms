@@ -1,0 +1,2 @@
+id,active,company_type,legal_entity_id/id,is_company,email
+__import__.customer_7001,True,company,__setup__.legal_entity_6,True,desk@didier.be

@@ -127,7 +127,7 @@ __import__.supplier_contact_64200_4,contact,DESLOOVER,SALES MANAGER,093/867736,,
 __import__.supplier_contact_64200_5,contact,PONET PHILIPPE,DELEGUE,,023445513,False,False,fr_BE,,0477/768509,__import__.supplier_64200
 __import__.supplier_contact_64275_1,contact,MR FILIP TIMMERMAN,SALES MANAGER BELGIE,,,False,False,fr_BE,,0475/367776,__import__.supplier_64275
 __import__.supplier_contact_64350_1,contact,GHERARD FISCHER,,,,False,False,de_DE,g.fischer@dr-mach.de,,__import__.supplier_64350
-__import__.supplier_contact_64350_2,contact,MAD. SABINE WEBER,,,,False,False,fr_BE,s.weber@dr-mach.de,,__import__.supplier_64350
+__import__.supplier_contact_64350_2,contact,MAD. LINDA TITZE,,,,False,False,fr_BE,l.titze@dr-mach.de,,__import__.supplier_64350
 __import__.supplier_contact_64355_1,contact,MR. RAPHAEL ELLEBOUDT,,,,False,False,fr_BE,raphael.elleboudt@digatrading.be,,__import__.supplier_64355
 __import__.supplier_contact_64400_1,contact,MR CARREE,,,,False,False,fr_BE,,,__import__.supplier_64400
 __import__.supplier_contact_64450_1,contact,MR DE HOUCK,,,,False,False,fr_BE,,,__import__.supplier_64450
@@ -277,6 +277,7 @@ __import__.supplier_contact_74148_2,contact,HENRI DECLOUX,,,,False,False,fr_BE,,
 __import__.supplier_contact_74151_1,contact,MARIE PAULE DENAYER,,02/686.07.82,,False,False,fr_BE,,,__import__.supplier_74151
 __import__.supplier_contact_74154_1,contact,MR. HARALD GREINER,,,,False,False,de_DE,greiner@medvet.de,,__import__.supplier_74154
 __import__.supplier_contact_74154_2,contact,MR. ROSS WATT,,,,False,False,fr_BE,watt@medvet.de,,__import__.supplier_74154
+__import__.supplier_contact_74156_1,contact,MAD. NADIA SIMON,,,,False,False,fr_BE,nadia@maxam.be,,__import__.supplier_74156
 __import__.supplier_contact_74157_1,contact,MEDICAMENTS,,,,False,False,nl_BE,,,__import__.supplier_74157
 __import__.supplier_contact_74158_1,contact,MR. NICOLAS MULS,,,,False,False,fr_BE,muls@medical-promotion.be,,__import__.supplier_74158
 __import__.supplier_contact_74160_1,contact,MAURICE THOMPSON,,,,False,False,fr_BE,,,__import__.supplier_74160
