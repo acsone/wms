@@ -24,6 +24,12 @@ def strptime(val):
 
 class StatsController(http.Controller):
 
+    PRODUCT_TYPES = {
+        'aliment': 'ALI',
+        'medicament': 'MED',
+        'materiel': 'MAT',
+    }
+
     @staticmethod
     def _validate_statistics_form(values):
         errors = []
@@ -73,7 +79,8 @@ class StatsController(http.Controller):
                 customer_ref=values['customerErpId'],
                 start=strptime(start) if start else False,
                 end=strptime(end) if end else False,
-                product_type=values.get('productType'),
+                product_type=self.PRODUCT_TYPES.get(
+                    values.get('productType'), ''),
                 suppliers=supplier.split(',') if supplier.strip() else False,
                 language=values.get('language')
             )
