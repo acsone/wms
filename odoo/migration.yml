@@ -607,7 +607,7 @@ migration:
               - importer.sh songs.install.data_full::import_products /odoo/data/install/additional_product.csv
               - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
-              # To add in next release - anthem songs.install.logistics::post_import_products
+              - anthem songs.install.logistics::post_import_products
               - anthem songs.install.data_full::import_wh_family_locations
               - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
