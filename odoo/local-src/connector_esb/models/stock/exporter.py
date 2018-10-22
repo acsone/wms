@@ -27,7 +27,7 @@ class StockUpdateMapper(Component):
 
     direct = [
         (falsy2emptystring('default_code'), 'sku'),
-        ('qty_available', 'qty')
+        ('immediately_usable_qty', 'qty')
     ]
 
     @mapping
