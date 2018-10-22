@@ -18,7 +18,7 @@ class SaleOrderLineExportMapper(Component):
         (falsy2zero('price_reduce_taxexcl'), 'price'),
         (falsy2zero('price_reduce_taxinc'), 'price_inc_tax'),
         (falsy2zero('product_qty_canceled'), 'qty_cancelled'),
-        (falsy2zero('product_qty_unavailable'), 'qty_backorder')
+        (falsy2zero('current_product_qty_unavailable'), 'qty_backorder')
     ]
 
     @mapping

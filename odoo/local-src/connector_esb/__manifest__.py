@@ -28,6 +28,7 @@
         'specific_stock',
         'specific_data',
         'specific_sale',
+        'stock',
         'product_additional',
         'queue_job_cron',
         'sale_confirm_background',

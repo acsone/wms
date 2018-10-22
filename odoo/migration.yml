@@ -571,3 +571,6 @@ migration:
           ### local
           - stock_picking_backorder
           - connector_esb
+          - specific_sale
+          - delivery_round
+          - sale_cancel_remaining
