@@ -18,6 +18,7 @@ Unreleased
 * ALCYN-1536: Display quant supplier for products to return to supplier
 * ALCYN-1538: Delivery round state change for long term deliveries.
 * ALCYN-65: Add a button on the purchase order to allow a purchase user to compute additional lines by himself. Don't recompute additional lines when the PO is validated.
+* ALCYN-1420: Cash on delivery. Allow to delivery by customer
 
 **Bugfixes**
 

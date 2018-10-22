@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock report for Alcyon',
+    'name': 'Specific report for Alcyon',
     'version': '10.0.1.0.0',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
@@ -16,6 +16,7 @@
         'account',
         'sale',
         'delivery_rounds',
+        'cash_on_delivery',
         'specific_purchase',
         'l10n_be_invoice_bba',
         'specific_data',

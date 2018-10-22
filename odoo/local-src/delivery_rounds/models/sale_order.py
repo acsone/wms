@@ -40,6 +40,8 @@ class SaleOrder(models.Model):
         # 1 shipping is created
         # multiple pickings could be created, or inserted in existing pickings
 
+        # Note for MTO. Move is in state waiting, so pick won't be associated
+        # to a delivery round
         pickings = self.picking_ids.filtered(
             lambda picking:
             picking.picking_type_subcode == 'PICK' and

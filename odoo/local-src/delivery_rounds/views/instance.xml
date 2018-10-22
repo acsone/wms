@@ -186,6 +186,10 @@
                                 <tree editable="bottom" create="0" delete="0">
                                     <field name="rank"/>
                                     <field name="partner_id"/>
+                                    <field name="count_picking_progress"/>
+                                    <field name="delivered" invisible="1"/>
+                                    <button name="button_deliver" type="object" string="Deliver" attrs="{'invisible': [('delivered', '!=', False)]}"/>
+                                    <button name="print_deliveryslip" type="object" string="Print delivery slip" attrs="{'invisible': [('delivered', '=', False)]}"/>
                                 </tree>
                             </field>
                         </page>

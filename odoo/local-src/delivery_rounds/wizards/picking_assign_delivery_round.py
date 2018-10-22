@@ -41,11 +41,14 @@ class PickingAssignDeliveryRound(models.TransientModel):
             return act_close
         pickings = shippings._get_all_src_pickings().filtered(
             lambda x: x.picking_type_subcode == 'PICK')
+        old_round_instance_customers = shippings.mapped(
+            'delivery_round_customer_id')
         pickings_assigned = self.delivery_round_id._assign_pickings(pickings)
         if not pickings_assigned:
             raise UserError(
                 _('No products available.\n'
                   'Cannot assign the delivery round to the picking'))
+        old_round_instance_customers._remove()
         shippings.message_post(
             _('Delivery round "%s" manually assigned') %
             self.delivery_round_id.display_name)

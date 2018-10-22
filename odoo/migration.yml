@@ -569,11 +569,15 @@ migration:
       addons:
         upgrade:
           ### local
-          - stock_picking_backorder
+          - cash_on_delivery
           - connector_esb
-          - specific_sale
           - delivery_round
-          - sale_cancel_remaining
-          - specific_stock
-          - delivery_rounds
           - product_additional
+          - sale_cancel_remaining
+          - specific_sale
+          - specific_report
+          - specific_stock
+          - stock_picking_backorder
+      operations:
+        post:
+          - anthem songs.upgrade.10_26_0_update::pre
