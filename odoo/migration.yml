@@ -575,3 +575,4 @@ migration:
           - delivery_round
           - sale_cancel_remaining
           - specific_stock
+          - delivery_rounds

@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-1024: Re-send sale order to ESB when the back order quantity of one line has changed.
 * ALCYN-1536: Display quant supplier for products to return to supplier
+* ALCYN-1538: Delivery round state change for long term deliveries.
 
 **Bugfixes**
 

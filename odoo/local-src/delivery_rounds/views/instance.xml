@@ -80,6 +80,7 @@
                                     </div>
                                     <div><a name="button_confirm" type="object" states="draft">Launch Pickings</a></div>
                                     <div><a name="button_deliver" type="object" states="open">Deliver</a></div>
+                                    <div><a name="button_resetdraft" type="object" states="open">Reset to draft</a></div>
                                     <div><a name="print_all_deliveryslip" type="object" states="done">Print all deliveryslip</a></div>
                                     <br/>
                                 </div>
@@ -140,6 +141,8 @@
                 <header>
                     <button name="button_confirm" type="object" string="Launch Pickings" states="draft" class="oe_highlight"/>
                     <button name="button_deliver" type="object" string="Deliver" states="open" class="oe_highlight"/>
+                    <button name="button_resetdraft" type="object" string="Reset to Draft" states="open,done"/>
+                    <button name="button_resetpending" type="object" string="Reset to Anticipated" states="draft"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
                     <field name="state" widget="statusbar" clickable="False"/>
 

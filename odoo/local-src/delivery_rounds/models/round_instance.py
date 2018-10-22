@@ -27,7 +27,7 @@ def time2float(value):
 
 
 def time_now(record):
-    tz_name = record._context.get('tz') or record.env.user.tz
+    tz_name = record.env.context.get('tz') or record.env.user.tz
     if not tz_name:
         raise UserError(
             "Please configure your timezone in your user preferences")
@@ -398,12 +398,14 @@ class RoundInstance(models.Model):
 
         return action
 
-    @api.one
+    @api.multi
     def button_confirm(self):
         """ Mark as confirmed. This launch the start of the pickings
         """
-        self.state = 'open'
-        self.stat_time_picking = time_now(self)
+        self.write({
+            'state': 'open',
+            'stat_time_picking': time_now(self),
+            })
 
     @api.one
     def button_deliver(self):
@@ -424,15 +426,29 @@ class RoundInstance(models.Model):
                 shipping.delivery_round_id = None
         self.button_done()
 
-    @api.one
+    @api.multi
+    def button_resetdraft(self):
+        """ Mark state as draft. This allows new pickings
+        """
+        self.write({'state': 'draft'})
+
+    @api.multi
+    def button_resetpending(self):
+        """ Mark state as draft. This allows new pickings
+        """
+        self.write({'state': 'pending'})
+
+    @api.multi
     def button_done(self):
         """ Mark as done and unlink waiting deliveries
         """
-        self.state = 'done'
-        for shipping in self.shipping_ids:
+        for shipping in self.mapped('shipping_ids'):
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
-        self.stat_time_leave = time_now(self)
+        self.write({
+            'state': 'done',
+            'stat_time_leave': time_now(self),
+            })
 
     @api.multi
     def print_all_deliveryslip(self):
