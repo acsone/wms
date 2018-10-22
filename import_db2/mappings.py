@@ -290,8 +290,8 @@ CUSTOMER_ACTIVE = {
 PARTNER_TITLE = {
      11: 'base.res_partner_title_madam',
      10: 'base.res_partner_title_mister',
-     7: 'base.res_partner_title_assveter',
-     1: 'base.res_partner_title_dctveter',
+     7: '__setup__.res_partner_title_assveter',
+     1: '__setup__.res_partner_title_dctveter',
      12: 'base.res_partner_title_doctor',
 }
 

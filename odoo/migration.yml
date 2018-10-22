@@ -589,6 +589,9 @@ migration:
               - anthem songs.install.data_all::import_delivery_carriers
               - anthem songs.install.data_full::import_delivery_round_config
               - anthem songs.install.data_full::import_delivery_carriers_round
+              # fix res.partner.title after update base
+              - anthem songs.install.sales::load_res_title
+              - anthem songs.install.sales::clean_title
               # ------------ DATA update ------------
               - anthem songs.upgrade.common::deactivate_check_on_vat
               - anthem songs.install.data_full::import_customer_banks_and_mandats

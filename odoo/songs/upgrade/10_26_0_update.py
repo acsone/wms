@@ -96,6 +96,7 @@ def import_customers(ctx):
         'customer.change-invoice_frequency.csv',
         'customer.change-comment-call_name.csv',
         'customer.change-vet_depot_number-alcyon_category_id.csv',
+        'customer.fix-title.csv',
     ]
 
     for f in file_list:

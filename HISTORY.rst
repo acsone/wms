@@ -14,6 +14,8 @@ Unreleased
 * ALCYN-1525: Create migration sale invoices with dedicated journal and prices to zero.
 * ALCYN-98: recompute all production lot alert_date and removal_date
 * Update full csv data from DB2 replication server at 2018-10-19 18:00:00
+* Fix parner titles, give proper references (XMLID with __setup__) to the tiles
+  plus recreate and reassign those titles which were lost during last 'update base'
 
 **Features and Improvements**
 
