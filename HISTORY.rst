@@ -36,9 +36,6 @@ Unreleased
 10.25.4 (2018-10-15)
 ++++++++++++++++++++
 
-Unreleased
-++++++++++
-
 **Data Migration**
 
 * ALCYN-74: Set new APB tax on products
