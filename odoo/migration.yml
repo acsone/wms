@@ -580,4 +580,4 @@ migration:
           - stock_picking_backorder
       operations:
         post:
-          - anthem songs.upgrade.10_26_0_update::pre
+          - anthem songs.upgrade.10_26_0_update::post

@@ -15,7 +15,18 @@ def drop_round_instance_sql_constrain(ctx):
     ctx.env.cr.execute(drop_constraint_query)
 
 
+def update_translations(ctx):
+    modules_to_update = ['specific_product', 'specific_purchase']
+    langs_to_update = ['fr_BE']
+
+    IrModuleModule = ctx.env['ir.module.module']
+    modules = IrModuleModule.search([('name', 'in', modules_to_update)])
+
+    modules.with_context(overwrite=True).update_translations(langs_to_update)
+
+
 @anthem.log
-def pre(ctx):
+def post(ctx):
     """ POST 10.26.0 """
+    update_translations(ctx)
     drop_round_instance_sql_constrain(ctx)
