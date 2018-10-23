@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
+<odoo noupdate="1">
     <record id="create_delivery_daily_plan" model="ir.cron">
         <field name="name">Create delivery daily plan</field>
         <field name="active" eval="True"/>
