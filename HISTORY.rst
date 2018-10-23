@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-75: Update price lists
 * ALCYN-98: fix that reverse alert_date and removal_date on lots
 * ALCYN-1554: Fix an issue in shippings with additional products being added on imported sale orders
+* ALCYN-1485: SO import - Fix error in shipping backorders grouping by partners
 
 **Features and Improvements**
 
