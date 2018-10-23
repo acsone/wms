@@ -37,6 +37,7 @@ Unreleased
 * Update full csv data from DB2 replication server at 2018-10-19 18:00:00
 * Fix parner titles, give proper references (XMLID with __setup__) to the tiles
   plus recreate and reassign those titles which were lost during last 'update base'
+* ALCYN-1551: Add the possibility to reset the special promotion and buyx gety flux with a script.
 
 **Features and Improvements**
 

@@ -12,6 +12,7 @@ from . import test_export_stock_update
 from . import test_export_stock_update_single
 from . import test_product_supplierinfo_esbflux
 from . import test_product_supplierinfo_esbflux_purge
+from . import test_product_supplierinfo_esbflux_reset
 from . import test_ws_create_saleorder
 from . import test_ws_delivery_fee
 from . import test_ws_product_stock
