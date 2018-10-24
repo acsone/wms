@@ -86,6 +86,10 @@ def convert_coding(value):
 
 def do_picking(pick, lines):
     """ Do a partial picking using delivered qty from DB2 """
+    # Skip additional is used in force_assign
+    pick = pick.with_context(
+        skip_additional=True,  # disable add additional product
+    )
     pick.action_confirm()
     pick.force_assign()
     pick.do_prepare_partial()
@@ -171,6 +175,10 @@ def do_shipping(pick, lines):
 
     Remainings goes in a backorder
     """
+    # Skip additional is used in do_prepare_partial
+    pick = pick.with_context(
+        skip_additional=True,  # disable add additional product
+    )
     pick.action_confirm()
     pick.do_prepare_partial()
     for line in lines:

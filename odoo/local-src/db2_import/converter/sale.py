@@ -122,8 +122,11 @@ class DB2MapperSaleOrder(object):
         return discount2, discount3
 
     @classmethod
-    def process(cls, rec, db2_table, tmp_id):
-        cr = rec.env.cr
+    def _get_pentcdcl(cls, cr, tmp_id):
+        """Get a sale order header from DB2 table
+
+        :param tmp_id: table id of the header
+        """
         query = (
             "SELECT id, eccsui, eccrin, eccrcl, eccrep, ecccli, eccsuc,"
             "       ecctyc,"
@@ -139,6 +142,38 @@ class DB2MapperSaleOrder(object):
                for idx, c in enumerate(
                    [d[0] for d in cr.description]
                )}
+        return row
+
+    @classmethod
+    def _get_pdetcdcl(cls, cr, tmp_id):
+        """Get sale order lines from DB2 table
+
+        :param tmp_id: table id of the order
+        """
+        query = (
+            "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
+            "       dccres,"
+            "       dcccjj, dcccmm, dcccaa, dcccss,"
+            "       dccmjj, dccmmm, dccmaa, dccmss,"
+            "       dccsgr, dcccgr,"
+            "       deleted"                          # deleted on AS400
+            " FROM db2_pdetcdcl WHERE order_id = %s"
+            " ORDER BY dccnli")
+        cr.execute(query, [tmp_id])
+
+        lines = cr.fetchall()
+        if not lines:
+            raise Exception("No lines were found")
+        lines = [{c.lower(): line[idx]
+                 for idx, c in enumerate(
+                    [d[0] for d in cr.description]
+                 )} for line in lines]
+        return lines
+
+    @classmethod
+    def process(cls, rec, db2_table, tmp_id):
+        cr = rec.env.cr
+        row = cls._get_pentcdcl(cr, tmp_id)
         # transform float and string to int to remove . and spaces
         # while creating xmlid
         xmlid = '__import__.sale_order_%s_%s_%s' % (
@@ -213,24 +248,7 @@ class DB2MapperSaleOrder(object):
         )
         new = create_or_update(so_model, xmlid, values)
 
-        query = (
-            "SELECT dccart, dccnli, dcclib, dccquc, dccqul, dccpvd, dccrem,"
-            "       dccres,"
-            "       dcccjj, dcccmm, dcccaa, dcccss,"
-            "       dccmjj, dccmmm, dccmaa, dccmss,"
-            "       dccsgr, dcccgr,"
-            "       deleted"                          # deleted on AS400
-            " FROM db2_pdetcdcl WHERE order_id = %s"
-            " ORDER BY dccnli")
-        cr.execute(query, [row['id']])
-
-        lines = cr.fetchall()
-        if not lines:
-            raise Exception("No lines were found")
-        lines = [{c.lower(): line[idx]
-                 for idx, c in enumerate(
-                    [d[0] for d in cr.description]
-                 )} for line in lines]
+        lines = cls._get_pdetcdcl(cr, tmp_id)
         if any(l['dccquc'] < 0 for l in lines):
             raise Exception("Negative qty in lines")
         SOLine = rec.env['sale.order.line'].with_context(
