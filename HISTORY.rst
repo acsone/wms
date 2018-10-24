@@ -23,6 +23,7 @@ Unreleased
 * ALCYN-1555: Add invoke tasks for the connector ESB.
 
 **Bugfixes**
+* ALCYN-1557: Security. Allow Inventory User to cause SO cost line without requiring sales rights
 
 * ALCYN-1560: Delivery round kanban wrong button label (print delivery round instead of print invoices)
 * ALCYN-1561: Fix the quantity send by the ws product quantity. Quantity must be the available one not the physical one.

@@ -66,7 +66,7 @@ class RoundInstance(models.Model):
                                        r.carrier_id == carrier
                                        ).sorted(key=lambda r: r.id,
                                                 reverse=True)[0]
-        so.write({'order_line': [
+        so.sudo().write({'order_line': [
                 (0, 0, {
                     'name': _('Shipping cost'),
                     'product_id': self.env.ref(
