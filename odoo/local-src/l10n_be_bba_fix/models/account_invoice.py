@@ -81,7 +81,7 @@ class AccountInvoice(models.Model):
                 type, reference_type, partner_id, reference)
 
         partner_ref = self.env['res.partner'].browse(partner_id).ref
-        partner_ref_nr = re.sub('\D', '', partner_ref or '')
+        partner_ref_nr = re.sub(r'\D', '', partner_ref or '')
         if (len(partner_ref_nr) > 6):
             raise UserError(_(
                 'The partner reference cannot exceed 6 digits for the '
