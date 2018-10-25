@@ -200,7 +200,7 @@ def import_stock_bins(ctx):
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
     content = \
-        resource_stream(req, 'data/install/round.template.version.csv')
+        resource_stream(req, 'data/sample/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
     content = resource_stream(req, 'data/sample/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')

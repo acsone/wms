@@ -13,4 +13,6 @@ def deactivate_all(ctx):
     the database must be mostly inactive.
 
     """
-    ctx.env['ir.cron'].search([]).write({'active': False})
+    crons = ctx.env['ir.cron'].search([])
+    if crons:
+        crons.write({'active': False})
