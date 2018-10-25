@@ -19,6 +19,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1560: Delivery round kanban wrong button label (print delivery round instead of print invoices)
+
 **Build**
 
 **Documentation**
