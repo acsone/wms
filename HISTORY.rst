@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-75: Update price lists
+* ALCYN-98: fix that reverse alert_date and removal_date on lots
 
 **Features and Improvements**
 
