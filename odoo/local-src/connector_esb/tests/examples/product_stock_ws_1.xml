@@ -3,7 +3,7 @@
   <stockItem>
     <sku>exportable001</sku>
     <erpStockCode>A</erpStockCode>
-    <stock>20.0</stock>
+    <stock>15.0</stock>
   </stockItem>
   <stockItem>
     <sku>exportable002</sku>

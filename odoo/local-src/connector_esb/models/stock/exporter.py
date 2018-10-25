@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from odoo.osv.expression import AND
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import falsy2emptystring
+from ...components.mapper import falsy2emptystring, falsy2zero
 
 _logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ class StockUpdateMapper(Component):
 
     direct = [
         (falsy2emptystring('default_code'), 'sku'),
-        ('immediately_usable_qty', 'qty')
+        (falsy2zero('immediately_usable_qty'), 'qty')
     ]
 
     @mapping
