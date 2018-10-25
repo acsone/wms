@@ -7,6 +7,12 @@ from freezegun import freeze_time
 
 from .common import DB2ImportTestCase
 
+from mock import patch
+
+
+PATH_GET_PENTCDCL = 'odoo.addons.db2_import.converter.sale.DB2MapperSaleOrder._get_pentcdcl'  # noqa
+PATH_GET_PDETCDCL = 'odoo.addons.db2_import.converter.sale.DB2MapperSaleOrder._get_pdetcdcl'  # noqa
+
 
 class TestImportSO(DB2ImportTestCase):
 
@@ -160,6 +166,97 @@ class TestImportSO(DB2ImportTestCase):
         self.so = self.env['sale.order'].search([('name', '=', str(suite))])
         self.assertEqual(len(self.so), 1)
         self.assertEqual(len(self.so.order_line), 2)
+
+    @freeze_time("2018-10-19")
+    def test_import_no_additional_product_on_picking(self):
+        suite = 3002526
+        db2_id = self.get_row_from_suite(suite)
+
+        ref = self.env.ref
+
+        product_3120250 = ref('__import__.product_3120250')
+        product_5620011 = ref('__import__.product_5620011')
+        product_3120250.write({
+            'additional_product_id': product_5620011.id,
+            'ratio_main_product': 1,
+            'ratio_additional_product': 1
+        })
+        # add inventory to have some immediately_usable_qty
+        wiz = self.env["stock.change.product.qty"].create({
+            'product_id': product_5620011.id
+        })
+        wiz.new_quantity = 20
+        wiz.change_product_qty()
+
+        self.importer_table_so.importer_id.mode = 'final_update'
+
+        pentcdcl = {
+            'ecccmm': 10, 'eccmmm': 10, 'ecccli': 5651.0, 'eccrep': 2,
+            'eccdjj': 10, 'eccrcl': u'1810262400000', 'eccmaa': 18,
+            'eccmjj': 11, 'ecctyc': 1, 'eccdaa': 18, 'eccsuc': u'1',
+            'eccdmm': 1, 'ecccss': 20, 'ecccjj': 11, 'eccdss': 20,
+            'eccmss': 20, 'eccsui': suite, 'ecccaa': 18, 'eccrin': u'',
+            'id': 0}
+        pdetcdcl = [{
+            'dcccgr': 0.0, 'dccmmm': 0, 'dccqul': 1.0, 'dccmss': 0,
+            'deleted': None, 'dccquc': 1.0, 'dccpvd': 22.08,
+            'dccart': u'3120250', 'dccrem': 10.0, 'dcccss': 20,
+            'dccnli': 130.0, 'dccsgr': 14.0, 'dccmjj': 0, 'dccres': 8.5,
+            'dcccaa': 18, 'dcclib': u'ONSIOR  6MP 60CP CHAT', 'dcccmm': 10,
+            'dccmaa': 0, 'dcccjj': 11
+            }, {
+            'dcccgr': 1.0, 'dccmmm': 0, 'dccqul': 1.0, 'dccmss': 0,
+            'deleted': None, 'dccquc': 1.0, 'dccpvd': 0.0,
+            'dccart': u'5620011', 'dccrem': 0.0, 'dcccss': 20,
+            'dccnli': 131.0, 'dccsgr': 68.0, 'dccmjj': 0, 'dccres': 0.0,
+            'dcccaa': 18, 'dcclib': u'ENVELOPPE ELANCO (25)',
+            'dcccmm': 10, 'dccmaa': 0, 'dcccjj': 11
+            }, {  # not delivered product to trigger creation of pickings
+            'dcccgr': 0.0, 'dccmmm': 0, 'dccqul': 0.0, 'dccmss': 0,
+            'deleted': None, 'dccquc': 1.0, 'dccpvd': 15.04,
+            'dccart': u'3392750', 'dccrem': 0.0, 'dcccss': 20,
+            'dccnli': 270.0, 'dccsgr': 34.0, 'dccmjj': 0, 'dccres': 0.0,
+            'dcccaa': 18, 'dcclib': u'NUTRIBOUND CAT TRIPACK 3x150ml',
+            'dcccmm': 10, 'dccmaa': 0, 'dcccjj': 11
+            }]
+
+        with patch(PATH_GET_PENTCDCL) as mocked_get_pentcdcl:
+            mocked_get_pentcdcl.return_value = pentcdcl
+            with patch(PATH_GET_PDETCDCL) as mocked_get_pdetcdcl:
+                mocked_get_pdetcdcl.return_value = pdetcdcl
+                DB2MapperSaleOrder.process(
+                    self.importer_table_so, self.table_name, db2_id)
+        self.so = self.env['sale.order'].search([('name', '=', str(suite))])
+        self.assertEqual(len(self.so), 1)
+        self.assertEqual(len(self.so.order_line), 3)
+
+        # 5 pickings
+        # Mat -> Output state: done
+        # Med -> Output state: done
+        # Med -> Output state: confirmed (Backorder)
+        # Output -> Customer state: done
+        # Output -> Customer state: waiting (Backorder)
+        self.assertEqual(len(self.so.picking_ids), 5)
+
+        loc_customer = ref('stock.stock_location_customers')
+
+        picks_bo = self.env['stock.picking']
+        for p in self.so.picking_ids:
+            if p.location_dest_id == loc_customer:
+                if p.state != 'done':
+                    ship_bo = p
+            else:
+                if p.state != 'done':
+                    picks_bo |= p
+
+        for pick in picks_bo:
+            self.assertEqual(pick.state, 'confirmed')
+        self.assertEqual(ship_bo.state, 'waiting')
+
+        # check product product_5620011 is delivered
+        ship_bo_line = ship_bo.move_lines.filtered(
+            lambda rec: rec.product_id == product_5620011)
+        self.assertFalse(ship_bo_line)
 
     @freeze_time("2018-02-01")
     def test_import_so_2798516(self):
