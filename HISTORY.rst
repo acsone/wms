@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-75: Update price lists
+
 **Features and Improvements**
 
 **Bugfixes**

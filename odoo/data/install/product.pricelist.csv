@@ -10,6 +10,7 @@ __setup__.pricelist_12,12. Client remise 12%,12
 __setup__.pricelist_13,"13. Client remise 10,75%",13
 __setup__.pricelist_14,14. Clients remise 10 %,14
 __setup__.pricelist_15,15. Clients V Pharmacie 12%,15
+__setup__.pricelist_17,17. Newpharma,17
 __setup__.pricelist_100,100. Vétérinaires remise 0 %,100
 __setup__.pricelist_103,103. Vétérinaires remise 3 %,103
 __setup__.pricelist_104,104. Vétérinaires remise 4 %,104
@@ -21,11 +22,13 @@ __setup__.pricelist_109,109. Vétérinaires remise 9 %,109
 __setup__.pricelist_110,"110. Vétérinaires remise 9,5%",110
 __setup__.pricelist_111,111. Vétérinaires remise 10%,111
 __setup__.pricelist_112,112. Vétos >250000/D7/ALI>60000,112
+__setup__.pricelist_113,113. Clients vétérinaires 10.5 % 11.5 %,113
 __setup__.pricelist_210,210. Clients remise 10 % (G.+ P),210
 __setup__.pricelist_211,211. Vétérinaires remise 11%,211
 __setup__.pricelist_212,212. Clients remise 12 % (G. + P),212
 __setup__.pricelist_213,"213. Codifar remise 11,36%(G.+ P)",213
 __setup__.pricelist_214,"214. Vetria remise 11,36%(G.+ P)",214
+__setup__.pricelist_223,223. CERP 13.1 %,223
 __setup__.pricelist_301,301. Vétos <15000/D7/ALI>7500à15000,301
 __setup__.pricelist_302,302. Vétos 15à30000/D7/ALI>7500à15k,302
 __setup__.pricelist_303,303. Vétos 30à60000/D7/ALI>7500à15k,303
