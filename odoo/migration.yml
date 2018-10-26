@@ -638,9 +638,14 @@ migration:
       modes:
         full:
           operations:
+            pre:
+              # --- DATA delete and it's same as  10_25_1 version ---
+              - psql -f odoo/songs/upgrade/10_25_1_update.sql
             post:
               - anthem songs.install.data_full::import_missing_intrastat_codes
               - importer.sh songs.install.data_full::import_product_intrastat /odoo/data/install/product_intrastat.csv
               - anthem songs.install.sales::import_pricelist
               - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
+              # ------------ DATA update ------------
+              - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv

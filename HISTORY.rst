@@ -26,12 +26,17 @@ Unreleased
 
 * ALCYN-1557: Security. Allow Inventory User to cause SO cost line without requiring sales rights
 * ALCYN-1559: Security. Allow Sales User to reassign delivery to another delivery round
+* ALCYN-1522: Fix invoice generation automatic validation
 * ALCYN-1560: Delivery round kanban wrong button label (print delivery round instead of print invoices)
 * ALCYN-1561: Fix the quantity send by the ws product quantity. Quantity must be the available one not the physical one.
 
 **Build**
 
 **Documentation**
+
+**Data Migration**
+
+* ALCYN-481: Set "Belgium Only" on products for given list and remove previous
 
 
 10.26.0 (2018-10-22)
