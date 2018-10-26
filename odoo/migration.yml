@@ -667,6 +667,7 @@ migration:
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer_address.change-street-name.csv
               - anthem songs.install.data_full::post_import_partner
               # import product.csv
+              - anthem songs.upgrade.10_27_0_update::fix_product_template_xids
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.new.csv
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.change-name.csv
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.change-state_id.csv
