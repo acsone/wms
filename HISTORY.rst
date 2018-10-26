@@ -18,6 +18,7 @@ Unreleased
 
 * ALCYN-1495: Add the entry register report just after the delivery report (only if required)
 * ALCYN-1544: Improve response time of customer 2 years stat web service (ESB).
+* ALCYN-1542: Add import of code intrastat
 
 **Bugfixes**
 

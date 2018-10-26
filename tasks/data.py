@@ -202,3 +202,68 @@ def make_product_translation(ctx, files=None):
         'fr_BE',
         path_to_new_file + 'product_name_fr_BE.csv'
         )
+
+
+@task(name='make-product-intrastat')
+def make_product_intrastat(ctx, files=None):
+    """This task generate product intrastat files.
+
+    Use this task to generate the intrastat files for product
+    from the raw files provided by Alcyon.
+
+    The files that were provided to create this task add the following header
+
+    sku | code_douan
+
+    To use call the task like this :
+
+    invoke data.make-product-intrastat --files raw_file_1.csv,raw_file_2.csv
+
+    With as many file as needed.
+
+    WARNING: The list of intrastat code dates from 2014. There is a lot
+    of new code added by the european union. We cannot use XML ID because
+    in some case, we need to use new intrastat imported by a manual import
+    """
+
+    path_to_new_file = 'odoo/data/install/'
+    xml_id_format = '__import__.product_{}_product_template'
+
+    def make_intrastat_file(raw_files, new_file_name):
+        """Make a intrastat file for one language."""
+
+        col_header = ['id/id', 'code_intrastat']
+        with open(new_file_name, 'wb') as new_file:
+            writer = csv.DictWriter(new_file, fieldnames=col_header)
+            writer.writeheader()
+            for file_path in raw_files:
+                with open(file_path) as raw_file:
+                    reader = csv.DictReader(raw_file, delimiter=';')
+                    for row in reader:
+                        if not row['code_douan']:
+                            # Empty code intrastat are skipped
+                            continue
+
+                        r = {'id/id': xml_id_format.format(row['sku']),
+                             'code_intrastat': row['code_douan'].strip()
+                             }
+                        writer.writerow(r)
+
+    raw_files = files.split(',')
+    if len(raw_files) < 1:
+        print('Which file need to be worked on ?')
+        exit()
+    # Check the existance of the files to work on
+    print('Generating intrastat file from the following files :')
+    for file_name in raw_files:
+        if os.path.isfile(file_name):
+            print(file_name)
+        else:
+            print('\nFile {} can not be found, aborting !'.format(file_name))
+            exit()
+
+    make_intrastat_file(
+        raw_files,
+        path_to_new_file + 'product_intrastat.csv'
+    )
+

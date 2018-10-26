@@ -765,6 +765,79 @@ def import_product_name_en(ctx):
 
 
 @anthem.log
+def import_missing_intrastat_codes(ctx):
+    """ Importing product intrastat
+
+    The intrastat code is a code to define a product accross the europe.
+    These code are managed by the European union.
+    Each year, the European union update this list.
+
+    Odoo (v10) has an old list of intrastat code (2014). It's why I need
+    to import new intrastat code by myselft and the XML cannot be the same
+    that existing intrastat codes.
+    """
+    ReportIntrastatCode = ctx.env['report.intrastat.code']
+    file_csv = 'data/source/missing_intrastat.csv'
+    for content in get_files(req, file_csv):
+        try:
+            load_csv_stream(ctx, ReportIntrastatCode, content, delimiter=',')
+        except anthem.exceptions.AnthemError as e:
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
+
+
+@anthem.log
+def import_product_intrastat(ctx):
+    """
+    Import the relation between a product and a code intrastat.
+    To understand why we use a query please read the comment of the
+    method import_missing_intrastat_codes (see below)
+    """
+    intrastat_codes = {}
+
+    instrastat_query = \
+        "SELECT id FROM report_intrastat_code WHERE name = %s LIMIT 1"
+
+    ProductTemplate = ctx.env['product.template']
+    file_csv = 'data/install/product_intrastat.csv'
+    for content in get_files(req, file_csv):
+        header, lines = read_csv(content, delimiter=',')
+
+        if len(header) != 2 or header[1] != 'code_intrastat':
+            raise anthem.exceptions.AnthemError(
+                "Invalid header for the file %s" % file_csv)
+        # Update the header to use ID in DB
+        header[1] = "intrastat_id/.id"
+
+        # For each line, look the ID in DB
+        rows = []
+        for line in lines:
+            intrastat_code = line[1]
+            if intrastat_code in intrastat_codes:
+                intrastat_id = intrastat_codes[intrastat_code]
+            else:
+                ctx.env.cr.execute(instrastat_query, (intrastat_code, ))
+                intrastat_id = ctx.env.cr.fetchone()
+                if not intrastat_id:
+                    _logger.warning(
+                        'Code intrastat %s not found. Product skipped'
+                        % intrastat_code)
+                    continue
+                intrastat_id = intrastat_id[0]
+                # Keep the result to avoid to execute this query twice
+                intrastat_codes[intrastat_code] = intrastat_id
+
+            # Update the row
+            rows.append((line[0], intrastat_id))
+
+        try:
+            load_rows(ctx, ProductTemplate, header, rows)
+        except anthem.exceptions.AnthemError as e:
+            message = ('File %s\n' % content.name) + e.message
+            raise anthem.exceptions.AnthemError(message)
+
+
+@anthem.log
 def main(ctx):
     """ Loading full data (But in this function only small files,
     other files will be import by importer.sh)
