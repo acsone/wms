@@ -48,7 +48,7 @@ class PickingAssignDeliveryRound(models.TransientModel):
             raise UserError(
                 _('No products available.\n'
                   'Cannot assign the delivery round to the picking'))
-        old_round_instance_customers._remove()
+        old_round_instance_customers.sudo()._remove()
         shippings.message_post(
             _('Delivery round "%s" manually assigned') %
             self.delivery_round_id.display_name)
