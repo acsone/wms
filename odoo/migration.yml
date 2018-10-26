@@ -244,6 +244,9 @@ migration:
           - stock_inventory_products
           - sale_confirm_background
           - stock_lot_loss
+          - account_invoice_accrual
+          - purchase_prepaid
+          - specific_cutoff
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
@@ -258,22 +261,10 @@ migration:
     - version: 10.23.1
       operations:
         post:
-          - anthem songs.upgrade.10_23_1_update::post
+          - anthem songs.upgrade.10_23_1_update::post  # TODO CHECK THESE SONGS
           - anthem songs.install.sales::sale_setup
           - anthem songs.install.logistics::create_procurement_rules
           - anthem songs.install.accounting::set_tax_group
-      addons:
-        upgrade:
-          ### local-src
-          - stock_delivery_note
-          - procurement_sale
-          - specific_report
-          - delivery_rounds
-          - account_cutoff_accrual_picking
-          - account_cutoff_accrual_return
-          - account_invoice_accrual
-          - purchase_prepaid
-          - specific_cutoff
     - version: 10.23.2
       addons:
         upgrade:
