@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[a[@name='print_all_deliveryslip']]" position="after">
                 <div><a name="print_delivery_round" type="object" states="done">Print delivery round</a></div>
-                <div><a name="print_cash_on_delivery_invoices" type="object" states="done">Print delivery round</a></div>
+                <div><a name="print_cash_on_delivery_invoices" type="object" states="done">Print invoices</a></div>
             </xpath>
         </field>
     </record>

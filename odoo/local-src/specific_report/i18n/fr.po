@@ -542,7 +542,6 @@ msgstr "Quantité prélevée"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
 msgstr "Imprimer la tournée"
 
@@ -748,5 +747,6 @@ msgstr "Pas de facture à imprimer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print invoices"
 msgstr "Imprimer les factures"

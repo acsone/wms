@@ -15,10 +15,13 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1495: Add the entry register report just after the delivery report (only if required)
+* ALCYN-1544: Improve response time of customer 2 years stat web service (ESB).
 
 **Bugfixes**
 
 * ALCYN-1522: Fix invoice generation automatic validation
+* ALCYN-1560: Delivery round kanban wrong button label (print delivery round instead of print invoices)
+* ALCYN-1561: Fix the quantity send by the ws product quantity. Quantity must be the available one not the physical one.
 
 **Build**
 
@@ -38,6 +41,7 @@ Unreleased
 * Update full csv data from DB2 replication server at 2018-10-19 18:00:00
 * Fix parner titles, give proper references (XMLID with __setup__) to the tiles
   plus recreate and reassign those titles which were lost during last 'update base'
+* ALCYN-1551: Add the possibility to reset the special promotion and buyx gety flux with a script.
 
 **Features and Improvements**
 

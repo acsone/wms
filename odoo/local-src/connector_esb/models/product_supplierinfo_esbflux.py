@@ -94,3 +94,33 @@ class ProductSupplierinfoEsbflux(models.Model):
             new_rs |= simplify_action(first_action, last_action)
 
         return new_rs
+
+    @api.model
+    def reset_flux(self):
+        """Reset the content of the table with current data.
+
+        This is used for the go live.
+        Because the AS-400 and Odoo do not generate the same hash for the
+        promotions, duplicate will be present on Magento.
+        To prevent that, all promotions on Magento will be deleted and the
+        valid and current promotions on Odoo will be regenerated.
+        By resetting the timestamp on both of this flux all promotions will be
+        resent to the ESB.
+        """
+        today = fields.Date.today()
+        self.search([(1, '=', 1)]).unlink()
+        valid_promotion = self.env['product.supplierinfo'].search([
+            ('date_start', '!=', False),
+            ('date_end', '>=', today),
+        ])
+        for promotion in valid_promotion:
+            if promotion._is_promotion_buyx_gety():
+                promotion._update_flux('create', 'buyxgety')
+            if promotion._is_promotion_special():
+                promotion._update_flux('create', 'specialpromotion')
+        flux_to_reset = [
+            'connector_esb.esb_timestamp_special_promotion',
+            'connector_esb.esb_timestamp_buyx_gety',
+        ]
+        for flux in flux_to_reset:
+            self.env.ref(flux).last_export = None
