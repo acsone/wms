@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-02 10:47+0000\n"
-"PO-Revision-Date: 2018-05-02 10:47+0000\n"
+"POT-Creation-Date: 2018-10-15 09:26+0000\n"
+"PO-Revision-Date: 2018-10-15 09:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,7 @@ msgstr "%<br/>Remise<br/>fournisseur"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "(S/N:"
 msgstr "(S/N:"
 
@@ -53,6 +54,13 @@ msgstr "<br/>\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<br/><br/>\n"
+"                                            <span>Client</span>"
+msgstr "<br/><br/>\n"
+"                                            <span>Client</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Alcyon<br/>discount</span>"
 msgstr "<span>Remise<br/>Alcyon</span>"
 
@@ -68,6 +76,7 @@ msgstr "<span>Commande</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Customer</span>"
 msgstr "<span>Client</span>"
@@ -89,12 +98,14 @@ msgstr "<span>Montant<br/>brut</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>N° Document</span>"
 msgstr "<span>N° Document</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "<span>Order</span>"
 msgstr "<span>Commande</span>"
 
@@ -114,8 +125,9 @@ msgstr "<span>Résumé</span>\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "<span>Scheduled date</span>"
-msgstr "<span>Date prévue</span>"
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+msgid "<span>Date</span>"
+msgstr "<span>Date</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -139,6 +151,7 @@ msgstr "<span>Montant<br/>non taxé</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Your VAT number:</span>"
 msgstr "<span>Votre numéro de TVA:</span>"
@@ -151,7 +164,7 @@ msgstr "<span>du</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "<span>of</span>"
-msgstr "<span>au</span>"
+msgstr "<span>du</span>"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_alcyon_discount
@@ -228,6 +241,7 @@ msgstr "Base taxable"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "By lot"
 msgstr "Par lot"
@@ -269,6 +283,11 @@ msgid "DEXIA:"
 msgstr "DEXIA:"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
+msgid "DUPLICATA"
+msgstr "DUPLICATA"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Date"
 msgstr "Date"
@@ -299,15 +318,33 @@ msgid "Draft Invoice"
 msgstr "Facture en brouillon"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
+msgid "Entry register"
+msgstr "Registre d'entrée"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Expiration date"
 msgstr "Date d'expiration"
 
 #. module: specific_report
+#: model:ir.model.fields,help:specific_report.field_stock_move_serial_number
+msgid "For delivery order only"
+msgstr "Uniquement pour les livraisons"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "Fridge"
 msgstr "Frigo"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
+#: model:ir.model.fields,field_description:specific_report.field_report_async_id
+msgid "ID"
+msgstr "ID"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -352,7 +389,13 @@ msgid "Kg"
 msgstr "Kg"
 
 #. module: specific_report
+#: model:ir.actions.act_window,name:specific_report.action_edit_serial_number
+msgid "Modify Serial Number"
+msgstr "Modifier le numéro de série"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Name"
@@ -366,6 +409,7 @@ msgstr "Aucun ID actif trouvé"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Number"
 msgstr "Numéro"
@@ -504,6 +548,7 @@ msgstr "Imprimer la tournée"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Product<br/>reference"
@@ -511,6 +556,7 @@ msgstr "Référence<br/>produit"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Quantity"
@@ -559,6 +605,12 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: specific_report
+#: code:addons/specific_report/models/report_async.py:45
+#, python-format
+msgid "Sending fax for {} with id {}"
+msgstr "Envoyer par fax pour {} avec l'ID {}"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_serial_number
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_serial_number
 msgid "Serial number"
@@ -580,7 +632,7 @@ msgid "TVA"
 msgstr "TVA"
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:53
+#: code:addons/specific_report/models/sale_order.py:57
 #, python-format
 msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
 msgstr "Le devis ne peut pas être imprimé car le client {} ({})                  n'a pas de référence."
@@ -648,6 +700,11 @@ msgstr "Poids:<br/>"
 #: model:ir.model,name:specific_report.model_modify_serial_number
 msgid "modify.serial.number"
 msgstr "modify.serial.number"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_report_async
+msgid "report.async"
+msgstr "report.async"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_round_instance
