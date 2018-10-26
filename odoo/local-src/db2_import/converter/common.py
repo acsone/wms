@@ -118,7 +118,7 @@ def do_picking(pick, lines):
 
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
-    if any([op.qty_done for op in pick.pack_operation_ids]):
+    if any(op.qty_done for op in pick.pack_operation_ids):
         pick = pick.with_context(
             __skip_check_tracking=True,
             __no_job_create_draft_invoice=True,
@@ -136,7 +136,7 @@ def do_picking(pick, lines):
             # in order to not mess with the parking inventory
             mig_location = pick.env.ref('__setup__.mig_purchase_reception')
             for ope in pick.pack_operation_ids:
-                if op.qty_done:
+                if ope.qty_done:
                     ope.location_dest_id = mig_location
         # for internal picks from stock to output location
         elif pick.picking_type_code == 'internal':
@@ -144,7 +144,7 @@ def do_picking(pick, lines):
             # in order to create stock moves that won't affect the stock
             mig_location = pick.env.ref('__setup__.mig_sale_pick')
             for ope in pick.pack_operation_ids:
-                if op.qty_done:
+                if ope.qty_done:
                     ope.location_id = mig_location
 
         result = pick.do_new_transfer()
@@ -194,7 +194,7 @@ def do_shipping(pick, lines):
 
     # in our case 0 on each operation means we don't want to transfer
     # as oposited to odoo process
-    if any([op.qty_done for op in pick.pack_operation_ids]):
+    if any(op.qty_done for op in pick.pack_operation_ids):
         pick = pick.with_context(
             __skip_check_tracking=True,
             __no_job_create_draft_invoice=True)
