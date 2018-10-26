@@ -634,6 +634,7 @@ migration:
           ### local
           - connector_esb
           - specific_report
+          - specific_print
       modes:
         full:
           operations:
