@@ -26,5 +26,5 @@ class ResPartner(models.Model):
         if len(ship_backorders) > 1:
             target = ship_backorders[0]
             to_del = ship_backorders[1:]
-            to_del.move_lines.write({'picking_id': target.id})
+            to_del.mapped('move_lines').write({'picking_id': target.id})
             to_del.unlink()
