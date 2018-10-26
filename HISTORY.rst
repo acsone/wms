@@ -20,6 +20,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1560: Delivery round kanban wrong button label (print delivery round instead of print invoices)
+* ALCYN-1561: Fix the quantity send by the ws product quantity. Quantity must be the available one not the physical one.
 
 **Build**
 

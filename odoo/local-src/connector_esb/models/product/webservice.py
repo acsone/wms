@@ -20,7 +20,7 @@ class ProductStockWebserviceMessage(Component):
         for product in products:
             values = {
                 'sku': product.default_code,
-                'stock': product.qty_available,
+                'stock': product.product_tmpl_id.immediately_usable_qty,
                 'erpStockCode': product.state_id.esb_ref or '',
             }
             data.append(values)

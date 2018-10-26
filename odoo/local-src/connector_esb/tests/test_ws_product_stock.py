@@ -47,6 +47,32 @@ class WSProductStockTestCase(ESBXMLTestCase):
         self.change_product_qty(self.product2, 0)
         self.change_product_qty(self.product3, 15)
 
+        self.customer = self.env['res.partner'].create({
+            'ref': '123456',
+            'name': 'Joe',
+            'street': 'Chemin des Pins, 23',
+            'street2': '',
+            'zip': '1010',
+            'city': 'Lausanne',
+            'country_id': 44,
+            'phone': '021123123',
+            'fax': '021121212',
+            'email': 'joe@ch.ch',
+        })
+        # Confirm a sale order on product 1 to change the available stock
+        # But not the physical
+        self.so1 = self.env['sale.order'].create({
+            'partner_id': self.customer.id,
+            'order_line': [(0, 0,
+                            {'name': self.product1.name,
+                             'product_id': self.product1.id,
+                             'product_uom': 1,
+                             'product_uom_qty': 5,
+                             }),
+                           ]
+            })
+        self.so1.action_confirm()
+
     def test_message(self):
         backend = self.env['esb.backend'].get_singleton()
         skus = self.all_records.mapped('default_code')
