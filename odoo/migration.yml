@@ -646,8 +646,12 @@ migration:
               - importer.sh songs.install.data_full::import_product_intrastat /odoo/data/install/product_intrastat.csv
               # ------------ DATA update ------------
               - anthem songs.upgrade.common::deactivate_check_on_vat
+              # import_customer_banks_and_mandats
+              # no changes
               # import supplier.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/supplier.change-name.csv
+              # import supplier_contact.csv
+              # no changes
               # import customer.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer.new.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer.change-active-call_name.csv
@@ -662,6 +666,8 @@ migration:
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer.change-comment-city-street-zip.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer.change-comment.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer.change-discount_pricelist_id.csv
+              # master_customer.csv
+              # no significant change
               # import customer_address.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer_address.new.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/update/10.27.0/customer_address.change-street-name.csv
@@ -697,12 +703,17 @@ migration:
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.change-route_ids.csv
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.change-orderpoint_qty_multiple-name-orderpoint_max.csv
               - importer.sh songs.install.data_full::import_products /odoo/data/update/10.27.0/product.change-list_price.csv
+              # import additional_product.csv
+              # no changes
+              # import product_new_route_info.csv
               # reset description_picking before reseting it on all products to take care or products that aren't new anymore
               # description_picking is then used in post_import_products song
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/product_empty_description_picking.sql $DB_NAME'"
               - importer.sh songs.install.data_full::import_products /odoo/data/install/product_new_route_info.csv
               - anthem songs.install.data_full::post_import_products
               - anthem songs.install.logistics::post_import_products
+              # import location_family.csv
+              # no changes
               # import location.csv
               - importer.sh songs.install.data_full::import_wh_locations /odoo/data/update/10.27.0/location.new.csv
               - importer.sh songs.install.data_full::import_wh_locations /odoo/data/update/10.27.0/location.change-bin_checksum_1-bin_checksum_2.csv
@@ -719,8 +730,16 @@ migration:
               # import stock_production_lot.csv
               - importer.sh songs.install.data_full::import_lots /odoo/data/update/10.27.0/stock_production_lot.new.csv
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
+              # import pricelist_items.csv
+              # done in an extra step later as pricelist were updated
+              # import data/install/res_bank_supplier.csv
+              # no changes
+              # import data/install/res_partner_bank_supplier.csv
+              # no changes
+              # import data/install/product_stock_bin.csv
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.data_full::post_import_stock_bins
+              - anthem songs.install.accounting::activate_check_on_vat
               # ----------- DATA update END ----------
               - anthem songs.install.sales::import_pricelist
               - importer.sh songs.install.data_full::import_pricelist_items /odoo/data/install/pricelist_items.csv
