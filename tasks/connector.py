@@ -79,8 +79,6 @@ def _connect(url, username, password, database, use_ssl, port):
     if not odoorpc:
         raise Exception("Missing 'odoorpc' dependency. Please install it.")
     protocol = 'jsonrpc'
-    if port != 443:
-        use_ssl = False
     if use_ssl:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
@@ -165,4 +163,4 @@ def reset_esbflux(
     Reset buyxgety and special promotion flux.
     """
     odoo = _connect(url, username, password, database, use_ssl, port)
-    odoo.env['product_supplierinfo_esbflux'].reset_flux()
+    odoo.env['product.supplierinfo.esbflux'].reset_flux()
