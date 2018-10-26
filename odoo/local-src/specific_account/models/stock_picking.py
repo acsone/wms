@@ -9,8 +9,8 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def do_new_transfer(self):
-        result = super(StockPicking, self).do_new_transfer()
+    def do_transfer(self):
+        result = super(StockPicking, self).do_transfer()
 
         # magic word to skip create_draft_invoice
         if self.env.context.get('__no_job_create_draft_invoice'):
@@ -19,14 +19,13 @@ class StockPicking(models.Model):
         picking_type_out = self.env.ref('stock.picking_type_out')
         out_picking = self.filtered(
             lambda picking: picking.picking_type_id == picking_type_out)
-        partners = out_picking.mapped('partner_id')
-
-        sales = self.env['sale.order'].search(
-            [('partner_id', 'in', partners.ids),
-             ('invoice_status', '=', 'to invoice'),
-             ('partner_id.invoice_grouping', '=', 'by_delivery')])
-
+        if not out_picking:
+            return result
+        proc_group_ids = out_picking.mapped('move_lines.group_id').ids
+        sales = self.env['sale.order'].search([
+            ('procurement_group_id', 'in', proc_group_ids),
+            ('invoice_status', '=', 'to invoice'),
+            ('partner_invoice_id.invoice_grouping', '=', 'by_delivery')])
         if sales:
             sales.with_delay()._job_create_draft_invoice()
-
         return result
