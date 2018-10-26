@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import date, datetime
+from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from odoo.addons.component.core import Component
@@ -51,76 +51,79 @@ class ProductCategoryWebserviceMessage(Component):
     _apply_on = ['sale.order.line']
     _usage = 'ws.message.customer.stat'
 
-    def _get_base_categories(self):
-        """Base categories for sale order line statistics.
-        """
-        return [
-            self.env.ref('specific_data.product_categ_ali'),
-            self.env.ref('specific_data.product_categ_medoc'),
-            self.env.ref('specific_data.product_categ_materiel'),
-        ]
-
-    def _get_all_categories_ids(self, categories):
-        """Get list of ids for all child categories of a base categories.
-        """
-        result = []
-
-        def get_children(category):
-            if category.child_id:
-                result.extend(category.child_id.ids)
-                for child in category.child_id:
-                    get_children(child)
-
-        for category in categories:
-            result.append(category.id)
-            get_children(category)
-
-        return result
-
     def get_message(self, customer_ref):
+        sql = """
+SELECT
+    CASE esb_ref
+        WHEN 'ALI' THEN
+            'aliment'
+        WHEN 'MAT' THEN
+            'materiel'
+        WHEN 'MED' THEN
+            'medicament'
+        ELSE
+            ''
+    END AS "productType",
+    CAST(ROUND(SUM("purchaseYear"), 2) AS TEXT) AS "purchaseYear",
+    CAST(ROUND(SUM("purchaseLastYear"), 2) AS TEXT) AS "purchaseLastYear"
+FROM
+        (
+    SELECT
+        sol.id,
+        sol.state,
+        sol.name,
+        business_unit.esb_ref,
+        CASE (EXTRACT(YEAR FROM current_date) -
+              EXTRACT(YEAR FROM so.date_order::date))
+        WHEN 0 THEN
+            sum(sol.qty_delivered * price_reduce_taxexcl) / count(sol.id)
+        ELSE
+            0
+        END AS "purchaseYear",
 
-        def get_base_category(r):
-            """Return the  base category of a sale order line product.
-            """
-            category = r.product_id.product_tmpl_id.categ_id
-            while True:
-                if category.parent_id.id == 1:
-                    return category.id
-                if not category.parent_id:
-                    return category.id
-                category = category.parent_id
+        CASE (EXTRACT(YEAR FROM current_date) -
+              EXTRACT(YEAR FROM so.date_order::date))
+        WHEN 1 THEN
+            sum(sol.qty_delivered * price_reduce_taxexcl) / count(sol.id)
+        ELSE
+            0
+        END AS "purchaseLastYear"
 
-        data = []
-        values = {}
-        one_year_ago = fields.Date.to_string(
-                datetime.today() - relativedelta(years=1))
-        two_year_ago = fields.Date.to_string(
-                datetime.today() - relativedelta(years=2))
-        base_categories = self._get_base_categories()
-        all_category_ids = self._get_all_categories_ids(base_categories)
+    FROM sale_order_line AS sol
+    LEFT JOIN sale_order AS so ON sol.order_id = so.id
+    LEFT JOIN product_product AS pp ON sol.product_id = pp.id
+    LEFT JOIN product_template AS pt ON pp.product_tmpl_id = pt.id
+    LEFT JOIN res_partner AS customer ON customer.id = so.partner_id
 
-        # Get the sale order line for this customer for the last 2 years
-        sol = self.env['sale.order.line'].search(
-            [('order_id.partner_id.ref', '=', customer_ref),
-             ('order_id.date_order', '>', two_year_ago),
-             ('product_id.categ_id.id', 'in', all_category_ids), ])
-        # Initialize values structure with the base category required
-        for cat in base_categories:
-            values.setdefault(cat.id, {
-                'productType': cat.alcyon_product_type,
-                'purchaseYear': 0,
-                'purchaseLastYear': 0,
-                })
-        for line in sol:
-            category_id = get_base_category(line)
-            if line.order_id.date_order > one_year_ago:
-                values[category_id]['purchaseYear'] += line.price_total
-            else:
-                values[category_id]['purchaseLastYear'] += line.price_total
-        # Format the numeric data properly
-        for i, cat in values.iteritems():
-            cat['purchaseYear'] = '{0:.2f}'.format(cat['purchaseYear'])
-            cat['purchaseLastYear'] = '{0:.2f}'.format(cat['purchaseLastYear'])
-            data.append(cat)
+    LEFT JOIN LATERAL
+(
+WITH RECURSIVE parent_category AS (
+    SELECT parent_id, esb_ref, is_business_unit
+        FROM product_category
+        WHERE id=pt.categ_id
+    UNION
+    SELECT pcat.parent_id, pcat.esb_ref, pcat.is_business_unit
+        FROM product_category AS pcat
+        INNER JOIN parent_category p ON p.parent_id = pcat.id
+)
+SELECT esb_ref FROM parent_category WHERE is_business_unit IS TRUE limit 1
+) business_unit
+    ON TRUE
 
+    WHERE customer.ref = %s
+          AND so.state not in ('cancel', 'draft')
+          AND (EXTRACT(YEAR FROM current_date) -
+               EXTRACT(YEAR FROM so.date_order::date) < 2)
+
+    GROUP BY sol.id, so.date_order, pt.categ_id, business_unit.esb_ref
+    ) AS "resultset"
+
+WHERE esb_ref<>''
+GROUP BY esb_ref;
+
+        """
+        self.env.cr.execute(sql, [customer_ref])
+        raw_data = self.env.cr.fetchall()
+        column_names = [column.name for column in self.env.cr.description]
+        data = [dict(zip(column_names, row)) for row in raw_data]
         return self._produce_xml(data, list_item_el='resultItem')
