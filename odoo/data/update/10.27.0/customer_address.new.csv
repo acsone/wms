@@ -1,0 +1,2 @@
+id,customer,city,fax,name,zip,mobile,parent_id/id,country_id/id,phone,street,supplier,type,lang
+__import__.customer_address_delivery_9429,False,Cortil-Wodon (Fernelmont),,PROPHETE ARNAUD,5380,,__import__.customer_9429,base.be,,Rue Belle Vue 1,False,delivery,fr_BE

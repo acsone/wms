@@ -1,0 +1,23 @@
+id,name/id,sequence,price,product_tmpl_id/id,min_qty_sale,product_code
+__import__.supplierinfo_61920-5192171,__import__.supplier_61920,100,111.41,__import__.product_5192171_product_template,1,E171
+__import__.supplierinfo_62580-5257302,__import__.supplier_62580,100,121.68,__import__.product_5257302_product_template,1,EMC7332
+__import__.supplierinfo_66155-5661820,__import__.supplier_66155,100,238.00,__import__.product_5661820_product_template,1,179080
+__import__.supplierinfo_66155-8279622,__import__.supplier_66155,100,2845.43,__import__.product_8279622_product_template,1,173660
+__import__.supplierinfo_67592-5244045,__import__.supplier_67592,100,14.00,__import__.product_5244045_product_template,1,CABLE TABLE CK
+__import__.supplierinfo_70312-5800016,__import__.supplier_70312,100,0,__import__.product_5800016_product_template,1,
+__import__.supplierinfo_77618-5760351,__import__.supplier_77618,100,47.83,__import__.product_5760351_product_template,1,
+__import__.supplierinfo_79000-1075940,__import__.supplier_79000,100,83.06,__import__.product_1075940_product_template,1,PDT19-16119
+__import__.supplierinfo_79200-5929140,__import__.supplier_79200,100,105.00,__import__.product_5929140_product_template,1,ST01
+__import__.supplierinfo_79200-5929141,__import__.supplier_79200,100,105.00,__import__.product_5929141_product_template,1,ST11
+__import__.supplierinfo_79200-5929142,__import__.supplier_79200,100,105.00,__import__.product_5929142_product_template,1,ST21
+__import__.supplierinfo_79200-5929144,__import__.supplier_79200,100,105.00,__import__.product_5929144_product_template,1,ST41
+__import__.supplierinfo_79200-5929152,__import__.supplier_79200,100,105.00,__import__.product_5929152_product_template,1,ST62
+__import__.supplierinfo_79204-5270301,__import__.supplier_79204,100,95.00,__import__.product_5270301_product_template,1,115-017390-00
+__import__.supplierinfo_79204-5270302,__import__.supplier_79204,100,63.10,__import__.product_5270302_product_template,1,051-001426-01
+__import__.supplierinfo_82448-5301042,__import__.supplier_82448,100,8100.00,__import__.product_5301042_product_template,1,15.30-1243
+__import__.supplierinfo_82540-5002200,__import__.supplier_82540,100,2424.86,__import__.product_5002200_product_template,1,FA002226
+__import__.supplierinfo_82593-2009445,__import__.supplier_82593,100,80.96,__import__.product_2009445_product_template,1,2009445
+__import__.supplierinfo_83300-3761913,__import__.supplier_83300,100,11.39,__import__.product_3761913_product_template,1,
+__import__.supplierinfo_83300-3770237,__import__.supplier_83300,100,11.97,__import__.product_3770237_product_template,1,
+__import__.supplierinfo_83300-3770245,__import__.supplier_83300,100,18.30,__import__.product_3770245_product_template,1,
+__import__.supplierinfo_83322-5031407,__import__.supplier_83322,100,5.45,__import__.product_5031407_product_template,1,23821
