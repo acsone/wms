@@ -13,6 +13,8 @@ Unreleased
 * ALCYN-98: fix that reverse alert_date and removal_date on lots
 * ALCYN-1554: Fix an issue in shippings with additional products being added on imported sale orders
 * ALCYN-1485: SO import - Fix error in shipping backorders grouping by partners
+* ALCYN-481: Set "Belgium Only" on products for given list and remove previous
+* Update full csv data from DB2 prod server at 2018-10-25 18:00:00
 
 **Features and Improvements**
 
@@ -33,10 +35,6 @@ Unreleased
 **Build**
 
 **Documentation**
-
-**Data Migration**
-
-* ALCYN-481: Set "Belgium Only" on products for given list and remove previous
 
 
 10.26.0 (2018-10-22)

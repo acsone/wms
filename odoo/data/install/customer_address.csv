@@ -1023,7 +1023,7 @@ __import__.customer_address_delivery_6527,DR LAMBOTTE GERARD,"Thier de l'Ovreux,
 __import__.customer_address_delivery_6539,DGARNE - DPC - DABRP - UBEA,"Av.Prince de Liège,7- 2e étage",5100,JAMBES,081/33 60 50,,False,False,base.be,fr_BE,,delivery,__import__.customer_6539
 __import__.customer_address_delivery_6546,DR VERHOEVEN BENEDICTE,"Lembergsesteenweg, 60 A",9820,MERELBEKE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_6546
 __import__.customer_address_delivery_6549,C.H.R.V.S : MAGASIN CENTRAL,"Rue Chère-Voie, 75",5060,AUVELAIS,,,False,False,base.be,fr_BE,,delivery,__import__.customer_6549
-__import__.customer_address_delivery_6606,DISP. STICHTING PRINS LAURENT,Dampoortstraat 39,9000,GENT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_6606
+__import__.customer_address_delivery_6606,DISPENSAIRE GENT,Vogelenzangpark 9,9000,GENT,,,False,False,base.be,nl_BE,,delivery,__import__.customer_6606
 __import__.customer_address_delivery_6623,GEMEENTEBESTUUR TIELT-WINGE,"Kruisstraat, 2",3390,TIELT-WINGE,016/639524,,False,False,base.be,nl_BE,,delivery,__import__.customer_6623
 __import__.customer_address_delivery_6631,DR WIJNANT VEERLE,"Astridlaan, 87",9500,GERAARDSBERGEN,,,False,False,base.be,nl_BE,,delivery,__import__.customer_6631
 __import__.customer_address_delivery_6654,DR MAES RITA,"Collegelaan, 27",3990,PEER,,,False,False,base.be,nl_BE,,delivery,__import__.customer_6654
@@ -1210,7 +1210,6 @@ __import__.customer_address_delivery_8033,TARPATAKI FRANÇOISE,Rue Camus 64,5300
 __import__.customer_address_delivery_8042,DR BONTELMPS PHILIPPE,Gd Houmart 13,6941,TOHOGNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8042
 __import__.customer_address_delivery_8048,DR CORBESIER CAROLE,Champ de Harre 3,6960,HARRE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8048
 __import__.customer_address_delivery_8050,DR DUQUESNE PHILIPPE,"Rue Paul Janson, 202 B",4460,GRACE-HOLLOGNE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8050
-__import__.customer_address_delivery_8078,CABINET BERTHO ET COLLABORAT,rue Basse Campagne 1,4260,CIPLET (BRAIVES),,,False,False,base.be,fr_BE,,delivery,__import__.customer_8078
 __import__.customer_address_delivery_8081,CLIN,Lotissement Kemouni local 1-2,05000,BATNA,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8081
 __import__.customer_address_delivery_8088,LA DEFENSE,Chaussée de Namur 100,3053,OUD-HERVERLEE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8088
 __import__.customer_address_delivery_8103,EPC 104 *,rue Edouard d'Inot 32,5590,CINEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_8103
@@ -1416,3 +1415,4 @@ __import__.customer_address_delivery_9394,MAGASIN VINCOTTE,rue de la Métallurgi
 __import__.customer_address_delivery_9420,DAP VAN MULDERS COMM. V,Wolvertemsesteenweg 253,1785,MERCHTEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_9420
 __import__.customer_address_delivery_9421,UNIVERSITÉ LIBRE DE BRUXELLES,Route de Lennik 808 bât GE,1070,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9421
 __import__.customer_address_delivery_9427,MULTIPHARMA SINT-PIETERS-LEEUW,Buitenplas 19,1600,SINT-PIETERS-LEEUW,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9427
+__import__.customer_address_delivery_9429,PROPHETE ARNAUD,Rue Belle Vue 1,5380,Cortil-Wodon (Fernelmont),,,False,False,base.be,fr_BE,,delivery,__import__.customer_9429
