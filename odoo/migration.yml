@@ -690,3 +690,6 @@ migration:
               - anthem songs.install.sales::import_pricelist_item
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/fix_history_of_delivered_qty.sql $DB_NAME'"
     - version: 10.27.2
+      addons:
+        upgrade:
+          - specific_report

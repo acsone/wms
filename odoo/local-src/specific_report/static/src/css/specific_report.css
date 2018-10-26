@@ -3,6 +3,10 @@
     display: inline-block;
 }
 
+.logo > img {
+    max-height: 70px;
+}
+
 .main_title {
     float: right;
     display: inline-block;
@@ -62,11 +66,46 @@
 
 .intrastat_table {
     width: 35%;
-    margin-left: 65%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-left: 5px;
     font-size: x-small;
     padding: 5px;
+    margin-top: 1px;
+}
+
+.border_top {
+    border-top: 1px solid black;
+}
+
+.white_space_pre_wrap {
+    white-space: pre-wrap;
+}
+
+.avoid_break {
+    page-break-inside: avoid;
+}
+
+.indicator_left {
+    position: fixed;
+    left: 0;
+    top: 420px;
+}
+
+.indicator_right {
+    position: fixed;
+    right: 0;
+    top: 420px;
+}
+
+.m-5px {
+    margin: 5px;
+}
+
+.pl-5px {
+    padding-left: 5px;
+}
+
+.font-xxs {
+    font-size: xx-small;
 }
 
 .no_background {
