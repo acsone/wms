@@ -26,3 +26,4 @@ UPDATE sale_order_line AS t
   FROM t_sol
   WHERE t.id = t_sol.id;
 
+UPDATE sale_order_line SET product_qty_canceled = product_uom_qty - qty_delivered WHERE qty_delivered > product_uom_qty AND product_qty_canceled IS NULL AND state = 'done';
