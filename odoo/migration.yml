@@ -703,3 +703,10 @@ migration:
               # ------------ DATA update ------------
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
     - version: 10.27.1
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.sales::import_pricelist
+              - anthem songs.install.sales::clean_pricelist_item
+              - anthem songs.install.sales::import_pricelist_item
