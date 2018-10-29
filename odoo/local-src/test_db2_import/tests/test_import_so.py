@@ -130,8 +130,22 @@ class TestImportSO(DB2ImportTestCase):
 
     @freeze_time("2018-08-21")
     def test_import_final_expired(self):
+        """ Test the SO is closed when expired
+        product | ordered | delivered | invoiced | canceled
+        2248800 |       5 |         3 |        3 |        2
+        3563038 |       1 |         1 |        1 |        0
+        2430205 |       1 |        10 |       10 |        0
+        8072683 |       1 |         1 |        1 |        0
+
+        """
         suite = 2844358
         db2_id = self.get_row_from_suite(suite)
+        cursor = self.env.cr
+
+        # alter 3rd line to test over received products
+        query = ("UPDATE db2_pdetcdcl SET dccqul = 10"
+                 " WHERE dccsui = %s AND dccart = '%s'")
+        cursor.execute(query, (suite, 2430205))
 
         self.importer_table_so.importer_id.mode = 'final_update'
 
@@ -146,6 +160,50 @@ class TestImportSO(DB2ImportTestCase):
         self.check_so_values(expected_values)
         self.assertEqual(len(self.so.order_line), 4)
         self.assertEqual(len(self.so.picking_ids), 0)
+
+        # Check delivered, invoiced and canceled qty on the sale order
+        expected_values = {
+            '2248800': {
+                'ordered_qty': 5,
+                'delivered_qty': 3,
+                'invoiced_qty': 3,
+                'product_qty_canceled': 2,
+                'product_qty_unavailable': 0.0},
+            '3563038': {
+                'ordered_qty': 1,
+                'delivered_qty': 1,
+                'invoiced_qty': 1,
+                'product_qty_canceled': 0,
+                'product_qty_unavailable': 0.0},
+            '2430205': {
+                'ordered_qty': 1,
+                'delivered_qty': 10,
+                'invoiced_qty': 10,
+                'product_qty_canceled': 0,
+                'product_qty_unavailable': 0.0},
+            '8072683': {
+                'ordered_qty': 1,
+                'delivered_qty': 1,
+                'invoiced_qty': 1,
+                'product_qty_canceled': 0,
+                'product_qty_unavailable': 0.0},
+        }
+        for line in self.so.order_line:
+            expected_qty = expected_values.get(
+                line.product_id.default_code)
+            if expected_qty:
+                self.assertEqual(
+                    expected_qty['ordered_qty'], line.product_uom_qty)
+                self.assertEqual(
+                    expected_qty['delivered_qty'], line.qty_delivered)
+                self.assertEqual(
+                    expected_qty['invoiced_qty'], line.qty_invoiced)
+                self.assertEqual(
+                    expected_qty['product_qty_canceled'],
+                    line.product_qty_canceled)
+                self.assertEqual(
+                    expected_qty['product_qty_unavailable'],
+                    line.product_qty_unavailable)
 
     @freeze_time("2018-02-01")
     def test_import_no_additional_product(self):

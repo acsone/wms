@@ -259,7 +259,8 @@ class DB2MapperSaleOrder(object):
         is_done = True
         delivered_lines = []
         not_delivered_lines = []
-        expired_adjustments = []
+        expired_cancel_adjustments = []
+        expired_extra_adjustments = []
 
         # register non skipped lines
         valid_lines = []
@@ -328,8 +329,11 @@ class DB2MapperSaleOrder(object):
                 int(row['eccsuc']), int(line['dccnli']))
             so_line = create_or_update(SOLine, xmlid, values)
             so_lines |= so_line
-            if expired and line['dccquc'] != line['dccqul']:
-                expired_adjustments.append((so_line, line['dccqul']))
+            if expired and line['dccquc'] > line['dccqul']:
+                expired_cancel_adjustments.append((so_line, line['dccqul']))
+            elif expired and line['dccquc'] < line['dccqul']:
+                # register extra quantities
+                expired_extra_adjustments.append((so_line, line['dccqul']))
             previous_line = so_line
             delivered_lines.append(line['dccquc'] <= line['dccqul'])
             not_delivered_lines.append(line['dccqul'] == 0)
@@ -368,8 +372,12 @@ class DB2MapperSaleOrder(object):
             # or it would be recomputed
 
             sol_ids = so_lines.ids
-            if expired_adjustments:
-                for (sol, _) in expired_adjustments:
+            if expired_cancel_adjustments:
+                for (sol, _) in expired_cancel_adjustments:
+                    if sol.id in sol_ids:
+                        sol_ids.remove(sol.id)
+            if expired_extra_adjustments:
+                for (sol, _) in expired_extra_adjustments:
                     if sol.id in sol_ids:
                         sol_ids.remove(sol.id)
 
@@ -382,17 +390,30 @@ class DB2MapperSaleOrder(object):
                     " WHERE id in ( %s )"
                 ) % ','.join(['%s'] * len(sol_ids))
                 cr.execute(query, sol_ids)
-            if not expired_adjustments:
-                # set delivered quantities for old orders we closed without
-                # everything delivered
-                for (sol, qty) in expired_adjustments:
+            if expired_cancel_adjustments:
+                # set delivered, invoiced and canceled quantities for old
+                # orders we closed without everything delivered
+                for (sol, qty) in expired_cancel_adjustments:
+                    query = (
+                        "UPDATE sale_order_line"
+                        " SET qty_delivered = %s,"
+                        "     qty_invoiced = %s,"
+                        "     product_qty_canceled = product_uom_qty - %s"
+                        " WHERE id = %s"
+                    )
+                    cr.execute(query, (qty, qty, qty, sol.id))
+            if expired_extra_adjustments:
+                # set delivered and invoiced quantities for old orders we
+                # closed without everything delivered
+                # canceled quantities remains to 0
+                for (sol, qty) in expired_extra_adjustments:
                     query = (
                         "UPDATE sale_order_line"
                         " SET qty_delivered = %s,"
                         "     qty_invoiced = %s"
                         " WHERE id = %s"
                     )
-                    cr.execute(query, sol.id, qty, qty)
+                    cr.execute(query, (qty, qty, sol.id))
 
         elif rec.importer_id.mode == 'final_update':
             # This will need to be handled by hand if it was confirmed
