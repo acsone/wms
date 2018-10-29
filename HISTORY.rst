@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-1568: Fix delivered and invoiced quantities on partially delivered and expired sale orders.
 * ALCYN-1568: Set canceled quantities on partially delivered and expired sale orders.
+* ALCYN-1581: Fix delivered quantities in the history of closed orders
 
 **Features and Improvements**
 
