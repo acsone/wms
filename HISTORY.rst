@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-447: Add a menu to edit the pricelist (sale price 2)
+
 **Features and Improvements**
 
 * ALCYN-1571: Force to update the module specific_followup for update followup templates
