@@ -8,6 +8,7 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1564: Add the SEPA Creditor Identifier of Alcyon to be able to generate the payments file
 * ALCYN-1228: Hide the field "US Code" in the view product.template. This field duplicate the field Intrastat
 
 **Bugfixes**
