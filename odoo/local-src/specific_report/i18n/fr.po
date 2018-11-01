@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-15 09:26+0000\n"
-"PO-Revision-Date: 2018-10-15 09:26+0000\n"
+"POT-Creation-Date: 2018-10-29 12:26+0000\n"
+"PO-Revision-Date: 2018-10-29 12:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -82,6 +82,8 @@ msgid "<span>Customer</span>"
 msgstr "<span>Client</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Date</span>"
 msgstr "<span>Date</span>"
@@ -124,12 +126,6 @@ msgstr "<span>Résumé</span>\n"
 "                            <span>Remise totale:</span>"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-msgid "<span>Date</span>"
-msgstr "<span>Date</span>"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"
 msgstr "<span>Total<br/>APB</span>"
@@ -163,6 +159,7 @@ msgstr "<span>du</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "<span>of</span>"
 msgstr "<span>du</span>"
 
@@ -273,6 +270,16 @@ msgid "Contribution ids"
 msgstr "Contribution ids"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr "Client"
@@ -308,6 +315,12 @@ msgid "Delivery:"
 msgstr "Livraison:"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_display_name
+#: model:ir.model.fields,field_description:specific_report.field_report_async_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Credit Note"
 msgstr "Ebauche de note de crédit"
@@ -339,6 +352,11 @@ msgstr "Uniquement pour les livraisons"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "Fridge"
 msgstr "Frigo"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
+msgid "Has Invoices"
+msgstr "A des factures"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
@@ -383,10 +401,31 @@ msgid "Invoice only tax ids"
 msgstr "Facture taxes seules IDs"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
+msgid "Invoices"
+msgstr "Factures"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Kg"
 msgstr "Kg"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number___last_update
+#: model:ir.model.fields,field_description:specific_report.field_report_async___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
 
 #. module: specific_report
 #: model:ir.actions.act_window,name:specific_report.action_edit_serial_number
@@ -406,6 +445,13 @@ msgstr "Nom"
 #, python-format
 msgid "No active id found"
 msgstr "Aucun ID actif trouvé"
+
+#. module: specific_report
+#: code:addons/specific_report/models/round_instance.py:22
+#: code:addons/specific_report/models/round_instance.py:167
+#, python-format
+msgid "No invoice to print"
+msgstr "Pas de facture à imprimer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -542,8 +588,15 @@ msgstr "Quantité prélevée"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
 msgstr "Imprimer la tournée"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
+msgid "Print invoices"
+msgstr "Imprimer les factures"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -691,6 +744,16 @@ msgid "VAT Amount"
 msgstr "Montant TVA"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
+msgid "Vendor Bill"
+msgstr "Facture fournisseur"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
+msgid "Vendor Refund"
+msgstr "Avoir fournisseur"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Weight:<br/>"
 msgstr "Poids:<br/>"
@@ -709,6 +772,11 @@ msgstr "report.async"
 #: model:ir.model,name:specific_report.model_round_instance
 msgid "round.instance"
 msgstr "round.instance"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_round_instance_customer
+msgid "round.instance.customer"
+msgstr "round.instance.customer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
@@ -733,20 +801,3 @@ msgid "|\n"
 msgstr "|\n"
 "                <span>Téléphone:</span>"
 
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
-msgid "Has Invoices"
-msgstr "A des factures"
-
-#. module: specific_report
-#: code:addons/specific_report/models/round_instance.py:22
-#: code:addons/specific_report/models/round_instance.py:167
-#, python-format
-msgid "No invoice to print"
-msgstr "Pas de facture à imprimer"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
-msgid "Print invoices"
-msgstr "Imprimer les factures"
