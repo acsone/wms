@@ -703,6 +703,19 @@ migration:
               # ------------ DATA update ------------
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
     - version: 10.27.1
+      operations:
+        post:
+          - anthem songs.install.accounting::import_product_account_analytic
+          - anthem songs.upgrade.10_27_1_update::post          
+        pre:
+          # We need to update noupdate records
+          - odoo -i specific_followup --stop-after-init --workers=0
+          - anthem songs.install.pre::setup_company
+      addons:
+        upgrade:
+          ### local
+          - specific_report
+          - specific_sale
       modes:
         full:
           operations:

@@ -210,6 +210,18 @@ def import_account_analytic_account(ctx):
     load_csv_stream(ctx, 'account.analytic.account', content, delimiter=',')
 
 
+def import_product_account_analytic(ctx):
+    """ Import account analytic tags + accounts for products """
+    # Load tags for products
+    content = \
+        resource_stream(req, 'data/install/product.account.analytic.tag.csv')
+    load_csv_stream(ctx, 'account.analytic.tag', content, delimiter=',')
+
+    content = resource_stream(
+        req, 'data/install/product.account.analytic.account.csv')
+    load_csv_stream(ctx, 'account.analytic.account', content, delimiter=',')
+
+
 @anthem.log
 def company_currency(ctx):
     """ Setting company's currency """
@@ -716,6 +728,7 @@ def main(ctx):
     import_account_journal(ctx)
     import_account_analytic_tag(ctx)
     import_account_analytic_account(ctx)
+    import_product_account_analytic(ctx)
     default_values(ctx)
     company_settings(ctx)
     company_currency(ctx)

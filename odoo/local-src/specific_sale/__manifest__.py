@@ -34,6 +34,7 @@
         'report/sale_order.xml',
         # Views
         'views/product_template.xml',
+        'views/pricelist_pv2.xml',
         'views/res_partner.xml',
         'views/sale.xml',
         'views/sale_report.xml',

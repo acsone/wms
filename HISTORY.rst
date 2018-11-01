@@ -11,8 +11,15 @@ Unreleased
 * ALCYN-1568: Fix delivered and invoiced quantities on partially delivered and expired sale orders.
 * ALCYN-1568: Set canceled quantities on partially delivered and expired sale orders.
 * ALCYN-1581: Fix delivered quantities in the history of closed orders
+* ALCYN-447: Add a menu to edit the pricelist (sale price 2)
 
 **Features and Improvements**
+
+* ALCYN-1563: Add products account analytics tags and accounts
+* ALCYN-1571: Force to update the module specific_followup for update followup templates
+* ALCYN-1574: Add missing translations for the module specific_report and use the right tag to translate the invoice report
+* ALCYN-1564: Add the SEPA Creditor Identifier of Alcyon to be able to generate the payments file
+* ALCYN-1228: Hide the field "US Code" in the view product.template. This field duplicate the field Intrastat
 
 **Bugfixes**
 

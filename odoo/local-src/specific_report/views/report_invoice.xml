@@ -306,53 +306,53 @@
 
     <template id="report_invoice">
         <t t-call="report.html_container">
-            <t t-foreach="docs" t-as="invoice">
-                <t t-set="company" t-value="res_company"/>
-                <t t-set="invoice" t-value="invoice.with_context({'lang': invoice.partner_id.lang})"/>
-                <t t-set="partner" t-value="invoice.partner_id"/>
+            <t t-set="company" t-value="res_company"/>
+            <t t-set="invoice" t-value="invoice.with_context({'lang': invoice.partner_id.lang})"/>
+            <t t-set="partner" t-value="invoice.partner_id"/>
 
-                <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
-                <div class="header">
-                    <div style="position: fixed; left: 0; top: 420px;">_</div>
-	                <div style="position: fixed; right: 0; top: 420px;">_</div>
+            <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
+            <div class="header">
+                <div style="position: fixed; left: 0; top: 420px;">_</div>
+                <div style="position: fixed; right: 0; top: 420px;">_</div>
 
-                    <div>
-                        <div class="logo">
-                            <img t-if="company.logo"
-                                 t-att-src="'data:image/png;base64,%s' % company.logo"
-                                 style="max-height: 70px;"/>
+                <div>
+                    <div class="logo">
+                        <img t-if="company.logo"
+                             t-att-src="'data:image/png;base64,%s' % company.logo"
+                             style="max-height: 70px;"/>
+                    </div>
+                    <div class="main_title">
+                        <div t-if="invoice.type == 'out_invoice'">
+                            <span t-if="invoice.state in ('open', 'paid')">Invoice</span>
+                            <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
+                            <span t-if="invoice.state == 'draft'">Draft Invoice</span>
+                            <span t-if="invoice.state == 'cancel'">Canceled Invoice</span>
                         </div>
-                        <div class="main_title">
-                            <div t-if="invoice.type == 'out_invoice'">
-                                <span t-if="(invoice.state == 'open' or invoice.state == 'paid')">
-                                    Invoice
-                                </span>
-                                <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
-                                <span t-if="invoice.state == 'draft'">Draft Invoice</span>
-                                <span t-if="invoice.state == 'cancel'">Canceled Invoice</span>
-                            </div>
-                            <div t-if="invoice.type == 'out_refund'">
-                                <span t-if="(invoice.state == 'open' or invoice.state == 'paid')">
-                                    Refund
-                                </span>
-                                <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
-                                <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
-                                <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
-                            </div>
-                            <div t-if="duplicata">DUPLICATA</div>
+                        <div t-if="invoice.type == 'out_refund'">
+                            <span t-if="invoice.state in ('open', 'paid')">Refund</span>
+                            <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
+                            <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
+                            <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
                         </div>
+                        <span t-if="duplicata">DUPLICATA</span>
+                        <span t-if="invoice.type == 'in_refund'">Vendor Refund</span>
+                        <span t-if="invoice.type == 'in_invoice'">Vendor Bill</span>
                     </div>
                 </div>
+            </div>
 
-                <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
+            <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
 
-                <t t-call="specific_report.page_number_footer"/>
-                </t>
+            <t t-call="specific_report.page_number_footer"/>
             </t>
         </t>
     </template>
 
     <template id="account.report_invoice">
-        <t t-call="specific_report.report_invoice"/>
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="invoice">
+                <t t-call="specific_report.report_invoice" t-lang="invoice.partner_id.lang"/>
+            </t>
+        </t>
     </template>
 </odoo>

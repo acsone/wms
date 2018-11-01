@@ -42,6 +42,7 @@ def setup_company(ctx):
                       'Email: secretariat@alcyonbelux.be | '
                       'Website: http://www.alcyonbelux.be | '
                       'TIN: BE0421801233 | Reg: RC LIEGE : 138.989',
+        'sepa_creditor_identifier': 'BE90ZZZ0421801233',
     })
 
     # load logo on company
