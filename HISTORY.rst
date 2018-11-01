@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1228: Hide the field "US Code" in the view product.template. This field duplicate the field Intrastat
+
 **Bugfixes**
 
 **Build**
