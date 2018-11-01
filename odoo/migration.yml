@@ -707,14 +707,14 @@ migration:
         pre:
           # We need to update noupdate records
           - odoo -i specific_followup --stop-after-init --workers=0
-          - anthem songs.install.pre::setup_company          
+          - anthem songs.install.pre::setup_company
         post:
           - anthem songs.upgrade.10_27_1_update::post
       addons:
         upgrade:
           ### local
           - specific_report
-          - specific_sale          
+          - specific_sale
       modes:
         full:
           operations:
