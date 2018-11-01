@@ -261,12 +261,6 @@ migration:
     - version: 10.23.0
     - version: 10.23.1
     - version: 10.23.2
-          - anthem songs.upgrade.10_23_2_update::post
-      modes:
-        full:
-          operations:
-            post:
-              - anthem songs.install.data_full::import_other_locations
     - version: 10.23.3
       addons:
         upgrade:
