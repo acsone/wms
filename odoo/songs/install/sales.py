@@ -105,6 +105,13 @@ def clean_title(ctx):
 
 
 @anthem.log
+def set_so_numeration(ctx):
+    """ Set SO numeration to 7 digits """
+    so_sequence = ctx.env.ref('sale.seq_sale_order')
+    so_sequence.padding = 7
+
+
+@anthem.log
 def main(ctx):
     """ run scenario """
     sale_setup(ctx)
@@ -115,3 +122,4 @@ def main(ctx):
     import_pricelist_item(ctx)
     load_res_title(ctx)
     clean_title(ctx)
+    set_so_numeration(ctx)
