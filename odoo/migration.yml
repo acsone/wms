@@ -184,6 +184,7 @@ migration:
           - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
+          - external_fax
           - ir_sequence_period
           - l10n_be_bba_fix
           - monitoring_status
@@ -260,23 +261,6 @@ migration:
     - version: 10.23.0
     - version: 10.23.1
     - version: 10.23.2
-      addons:
-        upgrade:
-          ### local-src
-          - external_fax
-          - specific_report
-          - specific_partner
-          - specific_sale
-          - specific_helpdesk
-          - website_purchase_review
-          - stock_location
-          - pricelist_discount
-          - product_additional
-          ### server-tools
-          - onchange_helper
-      operations:
-        post:
-          - anthem songs.install.logistics::create_routes
           - anthem songs.upgrade.10_23_2_update::post
       modes:
         full:
