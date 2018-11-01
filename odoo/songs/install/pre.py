@@ -68,6 +68,13 @@ def setup_language(ctx):
 
 
 @anthem.log
+def set_default_partner_language(ctx):
+    """Define default partner language"""
+    ctx.env['ir.values'].set_default('res.partner', 'lang', 'fr_BE',
+                                     condition=False)
+
+
+@anthem.log
 def change_config_parameters(ctx):
     """ fix config parameters  """
     url = "http://localhost:8069"
@@ -95,6 +102,7 @@ def disable_module_account_sepa(ctx):
 def main(ctx):
     """ Executing main entry point called before upgrade of addons """
     setup_language(ctx)
+    set_default_partner_language(ctx)
     setup_company_minimal(ctx)
     change_config_parameters(ctx)
     disable_module_account_sepa(ctx)

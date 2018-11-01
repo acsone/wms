@@ -711,6 +711,7 @@ migration:
           # We need to update noupdate records
           - odoo -i specific_followup --stop-after-init --workers=0
           - anthem songs.install.pre::setup_company
+          - anthem odoo.songs.install.pre::set_default_partner_language
       addons:
         upgrade:
           ### local
