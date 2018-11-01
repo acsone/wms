@@ -133,11 +133,11 @@ migration:
           # oca/account-closing
           - account_cutoff_accrual_picking
           - account_cutoff_accrual_return
-          - account_invoice_accrual_merge
           - account_cutoff_base
+          - account_invoice_accrual_merge
           # OCA/account-financial-tools
-          - account_credit_control
           - account_chart_update
+          - account_credit_control
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
@@ -157,17 +157,17 @@ migration:
           - base_exception
           - base_technical_features
           - mail_environment
-          - server_environment
           - onchange_helper
+          - server_environment
           # oca/stock-logistics-warehouse
           - stock_available_immediately
           - stock_mts_mto_rule
           # OCA/stock-logistics-workflow
           - stock_disable_force_availability_button
           # oca/web
+          - web_decimal_numpad_dot
           - web_environment_ribbon
           - web_sheet_full_width
-          - web_decimal_numpad_dot
           # oca/purchase-workflow
           - purchase_cancel_reason
           # oca/connector-interfaces
@@ -175,8 +175,10 @@ migration:
           #oca/queue
           - queue_job_cron
           ### local-src
+          - account_invoice_accrual
           - account_invoice_tax_required
           - account_move_productcateg
+          - code_abc
           - connector_esb
           - csv_file
           - csv_file_export
@@ -192,10 +194,13 @@ migration:
           - procurement_sale
           - product_additional
           - product_price_category
+          - purchase_prepaid
           - sale_cancel_remaining
+          - sale_confirm_background
           - sale_consignment
           - specific_account
           - specific_base
+          - specific_cutoff
           - specific_data
           - specific_followup
           - specific_helpdesk
@@ -206,21 +211,25 @@ migration:
           - specific_purchase_report
           - specific_report
           - specific_sale
+          - specific_security
           - specific_shipping_costs
           - specific_stock
           - specific_zetes
-          - specific_security
           - speedy_views
+          - split_coda
           - stock_barcode_fix
           - stock_delivery_note
           - stock_expired
           - stock_grn
           - stock_groupbypartner
+          - stock_inventory_controller
+          - stock_inventory_products
           - stock_location
+          - stock_lot_loss
           - stock_lot_track
           - stock_lot_update
-          - stock_inventory_controller
           - stock_operation_recompute
+          - stock_orderpoint_product
           - stock_picking_assignment
           - stock_picking_backorder
           - stock_picking_fillwithstock
@@ -237,17 +246,8 @@ migration:
           - stock_unit
           - stock_valuation
           - web_autorefresh
-          - code_abc
-          - stock_orderpoint_product
-          - website_purchase_review
           - web_widget_inputmask
-          - split_coda
-          - stock_inventory_products
-          - sale_confirm_background
-          - stock_lot_loss
-          - account_invoice_accrual
-          - purchase_prepaid
-          - specific_cutoff
+          - website_purchase_review
     - version: 10.19.0
     - version: 10.20.0
     - version: 10.21.0
