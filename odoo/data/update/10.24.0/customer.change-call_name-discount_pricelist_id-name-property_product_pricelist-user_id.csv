@@ -1,2 +1,0 @@
-id,call_name,discount_pricelist_id/id,name,property_product_pricelist/id,user_id/id
-__import__.customer_7901,PROSPECTPATRICIAFABRICE,__setup__.pricelist_100,PROSPECT PATRICIA FABRICE,specific_data.product_pricelist_pb1,__setup__.res_user_20
