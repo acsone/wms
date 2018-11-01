@@ -8,6 +8,8 @@ Unreleased
 
 **Data Migration**
 
+* ALCYN-1568: Fix delivered and invoiced quantities on partially delivered and expired sale orders.
+* ALCYN-1568: Set canceled quantities on partially delivered and expired sale orders.
 * ALCYN-447: Add a menu to edit the pricelist (sale price 2)
 
 **Features and Improvements**
