@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-29 15:37+0000\n"
-"PO-Revision-Date: 2018-10-29 15:37+0000\n"
+"POT-Creation-Date: 2018-11-01 09:42+0000\n"
+"PO-Revision-Date: 2018-11-01 09:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,11 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_medoc_human
 msgid "Human Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,warning_text:specific_sale.provision_on_order
+msgid "Item bought on order, neither taken back nor exchanged."
 msgstr ""
 
 #. module: specific_sale
@@ -412,6 +417,11 @@ msgid "Promotion"
 msgstr ""
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.provision_on_order
+msgid "Provision on order"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_psychotropic
 msgid "Psychotropic: written order, keep confirmation."
 msgstr ""
@@ -520,6 +530,11 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_veterinary_product
 msgid "Veterinary Product Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.provision_on_order
+msgid "Warning provision on order"
 msgstr ""
 
 #. module: specific_sale
