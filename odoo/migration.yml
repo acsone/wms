@@ -692,6 +692,7 @@ migration:
         post:
           - anthem songs.install.accounting::import_product_account_analytic
           - anthem songs.upgrade.10_27_1_update::post
+          - anthem songs.install.logistics::settings_lot_base_date
         pre:
           # We need to update noupdate records
           - odoo -i specific_followup --stop-after-init --workers=0
