@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2017 Sylvain Van Hoof <svh@sylvainvh.be>
+# Copyright 2017 Sylvain Van Hoof <svh@sylvainvh.be>
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+import random
+
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class StockLocation(models.Model):
@@ -78,4 +82,99 @@ class StockLocation(models.Model):
                 location = location.location_id
                 name = location.name + "/" + name
             ret_list.append((orig_location.id, name))
-        return ret_list
+
+    def generate_checksum(self):
+        """
+        Compute a 2 digits checksum. Rules:
+        - Cannot be 00, 12
+        - Cannot already exist on the shelf + shelf left/right
+        """
+        for location in self:
+            if location.bin_checksum_1 not in (False, '00', '12'):
+                # Checksum already exists, skip
+                continue
+
+            if not location.is_valid_location:
+                continue
+
+            shelf = location.shelf
+
+            checksum_not_available = set(['00', '12'])
+
+            try:
+                shelf_code = int(shelf)
+                is_letter = False
+            except ValueError:
+                shelf_code = ord(shelf)
+                is_letter = True
+
+            def convert(code):
+                if is_letter:
+                    if code < ord('A') or code > ord('Z'):
+                        return
+                    code = chr(code)
+                else:
+                    if code < 1 or code > 99:
+                        return
+                    code = '{:02d}'.format(code)
+                return code
+
+            query_or = []
+            query_args = {
+                'zone': location.zone,
+                'corridor': location.corridor,
+                'shelf': location.shelf,
+                'height': location.height,
+                'box': location.box,
+                }
+            # Get checksums of this shelf
+            query_or.append(""" (
+                zone = %(zone)s
+                AND corridor = %(corridor)s
+                AND shelf = %(shelf)s
+                ) """)
+            # Get checksums of left/right/opposite shelfs, same height
+            query_or.append(""" (
+                zone = %(zone)s
+                AND corridor = %(corridor)s
+                AND shelf IN %(next_shelfs)s
+                AND height = %(height)s
+                ) """)
+            query_args['next_shelfs'] = tuple(filter(None, map(convert, (
+                shelf_code - 2, shelf_code + 2, (shelf_code % 2 or -1)))))
+            # Get checksums of other corridors, same location
+            query_or.append(""" (
+                zone = %(zone)s
+                AND shelf = %(shelf)s
+                AND height = %(height)s
+                AND box = %(box)s
+                ) """)
+            # Get checksums of other shelfs, same location
+            query_or.append(""" (
+                zone = %(zone)s
+                AND corridor = %(corridor)s
+                AND height = %(height)s
+                AND box = %(box)s
+                ) """)
+            # Build query
+            query = """
+                SELECT DISTINCT bin_checksum_1
+                FROM stock_location
+                WHERE active AND (
+                """ + " OR ".join(query_or) + ")"
+            self.env.cr.execute(query, query_args)
+
+            checksum_not_available |= set(x[0] for x in self.env.cr.fetchall())
+
+            formated_checksum = ['{:02d}'.format(i) for i in range(100)]
+            picklist = list(set(formated_checksum) -
+                            set(checksum_not_available))
+            if not picklist:
+                raise UserError(_(
+                    'There is no checksum available for location %s' %
+                    location.name))
+
+            # Assign checksum
+            checksum = random.choice(picklist)
+            location.bin_checksum_1 = checksum
+            location.bin_checksum_2 = checksum

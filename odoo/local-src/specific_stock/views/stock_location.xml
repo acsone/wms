@@ -49,4 +49,17 @@
         </field>
     </record>
 
+    <record id="stock_location_pivot" model="ir.ui.view">
+        <field name="name">stock.location.pivot</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock Location">
+                <field name="bin_checksum_1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="stock.action_location_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
 </odoo>

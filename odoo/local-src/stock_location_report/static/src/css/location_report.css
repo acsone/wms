@@ -1,0 +1,42 @@
+.zone {
+    display: table;
+}
+
+.zone div {
+    white-space: nowrap;
+}
+.corridor {
+    display: table-row;
+    text-align: center;
+}
+.corridor > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px;
+    background: lightgray;
+}
+.corridor > div > table {
+    table-layout: fixed;
+    width: 100%;
+    background: white;
+}
+.zone .spacer {
+    margin: 20px 0;
+}
+.height > td:first-child {
+    width: 20px;
+}
+.height > td {
+    width: 120px;
+    padding: 1px;
+    border-right: 2px solid;
+    text-align: center;
+}
+
+.box {
+    font-size: small;
+    display: table-cell;
+    width: 1%;
+    border: 1px solid;
+    text-align: center;
+}
