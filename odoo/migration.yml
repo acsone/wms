@@ -665,3 +665,26 @@ migration:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
               # ------------ DATA update ------------
               - importer.sh songs.install.data_full::import_products /odoo/data/upgrade/products_only_belgium.csv
+    - version: 10.27.1
+      operations:
+        post:
+          - anthem songs.install.accounting::import_product_account_analytic
+          - anthem songs.upgrade.10_27_1_update::post
+        pre:
+          # We need to update noupdate records
+          - odoo -i specific_followup --stop-after-init --workers=0
+          - anthem songs.install.pre::setup_company
+          - anthem songs.install.pre::set_default_partner_language
+      addons:
+        upgrade:
+          ### local
+          - specific_report
+          - specific_sale
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.sales::import_pricelist
+              - anthem songs.install.sales::clean_pricelist_item
+              - anthem songs.install.sales::import_pricelist_item
+              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/fix_history_of_delivered_qty.sql $DB_NAME'"
