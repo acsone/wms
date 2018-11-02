@@ -112,6 +112,18 @@ def set_so_numeration(ctx):
 
 
 @anthem.log
+def change_saleorder_report(ctx):
+    """Remove the toggle print menu in the center of the view sale order.
+
+    Instead of changing the internal of the report generation and saving in
+    ir.attachment, the button is not displayed. There is always the print
+    button available in the action/state toolbar.
+    """
+    report = ctx.env.ref('sale.report_sale_order')
+    report.unlink_action()
+
+
+@anthem.log
 def main(ctx):
     """ run scenario """
     sale_setup(ctx)
@@ -123,3 +135,4 @@ def main(ctx):
     load_res_title(ctx)
     clean_title(ctx)
     set_so_numeration(ctx)
+    change_saleorder_report(ctx)
