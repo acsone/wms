@@ -611,3 +611,8 @@ class SaleOrderLine(models.Model):
             self.product_uom_qty,
             self.product_id.uom_id,
         )
+
+    def warning_provision_on_order(self):
+        """Add a warning if the product is provisioned at ordering time."""
+        routes = self.product_id.route_ids
+        return self.env.ref('stock.route_warehouse0_mto').id in routes.ids

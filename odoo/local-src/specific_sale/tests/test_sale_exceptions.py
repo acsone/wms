@@ -66,7 +66,12 @@ class TestSaleOrderException(SavepointCase):
             'categ_id': cls.env.ref(
                 'specific_data.product_categ_medoc').id,
         })
-
+        cls.prod_provision_on_sale = cls.env['product.product'].create({
+            'name': 'product provision on sale',
+        })
+        cls.prod_provision_on_sale.route_ids = [
+            (4, cls.env.ref('stock.route_warehouse0_mto').id, False)
+        ]
         cls.delivery = cls.env['delivery.carrier'].search(
                 [('free_if_more_than', '=', False)], limit=1)
         cls.so1 = cls.env['sale.order'].create({
@@ -406,3 +411,13 @@ class TestSaleOrderException(SavepointCase):
         self.partner.is_sale_back_order_accepted = True
         line.product_uom_qty = 534
         self.assertEqual('', line.exception)
+
+    def test_exception_warning_provision_on_order(self):
+        """Check the warning provision on order."""
+        rules = self.env['exception.rule'].search([('active', '=', 1)])
+        rules.write({'active': 0})
+        exception = self.env.ref('specific_sale.provision_on_order')
+        exception.write({'active': 1})
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_provision_on_sale
+        self.assertTrue(exception.warning_text in line.warning_text)

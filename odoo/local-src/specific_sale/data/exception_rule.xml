@@ -139,6 +139,19 @@ failed = object.warning_psychotropic()
             </field>
         </record>
 
+        <record id="provision_on_order" model="exception.rule">
+            <field name="name">Warning provision on order</field>
+            <field name="description">Provision on order</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">Item bought on order, neither taken back nor exchanged.</field>
+            <field name="code">
+failed = object.warning_provision_on_order()
+            </field>
+        </record>
 
         <!-- Other exceptions -->
         <record id="no_line_under_0" model="exception.rule">
