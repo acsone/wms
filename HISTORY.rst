@@ -21,8 +21,11 @@ Unreleased
 * ALCYN-1564: Add the SEPA Creditor Identifier of Alcyon to be able to generate the payments file
 * ALCYN-1228: Hide the field "US Code" in the view product.template. This field duplicate the field Intrastat
 * ALCYN-459: Add a warning on sale order lines for a product 'Acheté-Vendu'
+* ALCYN-1516: Change default language of new partners to "French (BE)"
 
 **Bugfixes**
+
+* ALCYN-1562: Fix settings_lot_base_date song not setting the value
 
 **Build**
 

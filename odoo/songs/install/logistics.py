@@ -46,7 +46,7 @@ def settings_lot_base_date(ctx):
     # Default invoice
     define_settings(ctx,
                     'stock.config.settings',
-                    {'product_lot_base_date': 'life'})
+                    {'production_lot_base_date': 'life'})
 
 
 @anthem.log
