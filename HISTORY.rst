@@ -24,6 +24,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1562: Fix settings_lot_base_date song not setting the value
+
 **Build**
 
 **Documentation**
