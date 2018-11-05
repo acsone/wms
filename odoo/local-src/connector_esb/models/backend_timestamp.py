@@ -45,6 +45,10 @@ class ESBBackendTimestamp(models.Model):
     last_export = fields.Datetime(
         string='Timestamp last export'
     )
+    max_records = fields.Integer(
+        default=0,
+        string='Maximum of records to export at once.'
+    )
     export_filename = fields.Char(required=True,
                                   default='{name}_{date}.xml')
     path = fields.Char()
@@ -62,7 +66,9 @@ class ESBBackendTimestamp(models.Model):
 
     @api.multi
     def export(self):
-        """ Export a model from a cron """
+        """ Run an export for a timestamp from a cron.
+
+        """
         self.ensure_one()
         self._lock_timestamp()
         next_last_export = fields.Datetime.now()
@@ -72,8 +78,14 @@ class ESBBackendTimestamp(models.Model):
             except NoComponentError:
                 raise exceptions.UserError(
                     _('This export can not be triggered manually.'))
-            exporter.run(export_since=self.last_export)
-        self.last_export = next_last_export
+            result = exporter.run(
+                export_since=self.last_export,
+                max_records=self.max_records
+            )
+            if self.writer == 'webservice':
+                self.last_export = result or next_last_export
+            else:
+                self.last_export = next_last_export
 
     @api.multi
     def _lock_timestamp(self):

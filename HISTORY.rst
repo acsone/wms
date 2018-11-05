@@ -14,6 +14,7 @@ Unreleased
 * ALCYN-1540 : For sale order from the web recover the suite_name from the received data (ESB)
 * ALCYN-1218: Set a default price on new promotion and add some constrains on promotions
 * ALCYN-1614: Update the balance for customers and suppliers + update mandats
+* ALCYN-1600: Add a maximum of record that can be exported to a web service when ran from a cron, this is to improve the stock status update (ESB).
 
 **Bugfixes**
 * ALCYN-1566: Align Partner Display on reports + screen

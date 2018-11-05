@@ -10,6 +10,7 @@ from . import test_export_saleorder
 from . import test_export_special_promotion
 from . import test_export_stock_update
 from . import test_export_stock_update_single
+from . import test_export_stock_update_split
 from . import test_product_supplierinfo_esbflux
 from . import test_product_supplierinfo_esbflux_purge
 from . import test_product_supplierinfo_esbflux_reset

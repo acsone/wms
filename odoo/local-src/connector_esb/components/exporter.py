@@ -324,12 +324,16 @@ class ESBCronExporter(AbstractComponent):
         items = self.model.with_context(active_test=False).search(domain)
         return items
 
-    def run(self, export_since=None):
+    def run(self, export_since=None, max_records=0):
         """ Run the export on a domain
 
         ``export_since`` can be omitted to ignore the date and export
-        all the records that match the domain.
-
+                         all the records that match the domain.
+        ``max_records``  the maximum number of records that must be exported
+                         in one export. Can be ommited to export all records
+                         that need exporting. (Only used by cron web service
+                         export)
+        ``return``       the path of the file exported
         """
         records = self.get_items(export_since=export_since)
         return self._export_items(records)
@@ -340,11 +344,16 @@ class ESBWebServiceCronExporter(AbstractComponent):
     _inherit = ['esb.webservice.exporter', 'esb.cron.exporter']
     _usage = 'record.exporter.cron'
 
-    def run(self, export_since=None):
+    def run(self, export_since=None, max_records=0):
         """ Run the export on a domain
 
         ``export_since`` can be omitted to ignore the date and export
-        all the records that match the domain.
+                         all the records that match the domain.
+        ``max_records``  the maximum number of records that must be exported
+                         in one export. Can be ommited to export all records
+                         that need exporting.
+        ``return``       the datetime of the last write_date exported, but
+                         only if there was more than max_records to export.
 
         """
         records = self.get_items(export_since=export_since)
@@ -354,7 +363,5 @@ class ESBWebServiceCronExporter(AbstractComponent):
             data.append(self._update_data(mapped_record))
         if data:
             data = {'lines': data}
-        else:
-            return _('Nothing to export.')
-        self._create(data)
-        return _('Records exported.')
+            self._create(data)
+        return
