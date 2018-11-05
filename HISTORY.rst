@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.27.1 (2018-11-05)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1568: Fix delivered and invoiced quantities on partially delivered and expired sale orders.
@@ -26,10 +38,6 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1562: Fix settings_lot_base_date song not setting the value
-
-**Build**
-
-**Documentation**
 
 
 10.27.0 (2018-10-26)
