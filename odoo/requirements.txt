@@ -8,7 +8,7 @@ unidecode==0.4.20
 pluggy>=0.7
 
 # connector
-cachetools
+cachetools==2.1.0
 
 # esb connector
 dicttoxml
