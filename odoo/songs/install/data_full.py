@@ -569,7 +569,9 @@ def post_import_stock_bins(ctx):
 
 @anthem.log
 def create_journals(ctx):
-    """ Create the balance' journals """
+    """ WARNING: Keep this method even if this method is not used.
+    Will be used later (after go live).
+    Create the balance' journals """
     journal = ctx.env['account.journal'].search([
         ('code', '=', 'MISC')
     ], limit=1)
@@ -592,13 +594,17 @@ def create_journals(ctx):
 
 @anthem.log
 def import_customer_journal_items(ctx):
-    """ Import customer journal items """
+    """ WARNING: Keep this method even if this method is not used.
+    Will be used later (after go live).
+    Import customer journal items """
     import_journal_items(ctx, customer=True)
 
 
 @anthem.log
 def import_supplier_journal_items(ctx):
-    """ Import supplier journal items """
+    """ WARNING: Keep this method even if this method is not used.
+    Will be used later (after go live).
+    Import supplier journal items """
     import_journal_items(ctx, supplier=True)
 
 

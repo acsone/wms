@@ -38,6 +38,7 @@ Unreleased
 * ALCYN-1228: Hide the field "US Code" in the view product.template. This field duplicate the field Intrastat
 * ALCYN-459: Add a warning on sale order lines for a product 'Acheté-Vendu'
 * ALCYN-1516: Change default language of new partners to "French (BE)"
+* ALCYN-1576: ALCYN-1576: Remove customer/supplier balances import. Balances will be imported later (after go live)
 
 **Bugfixes**
 
