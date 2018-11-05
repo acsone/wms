@@ -70,8 +70,11 @@ def setup_language(ctx):
 @anthem.log
 def set_default_partner_language(ctx):
     """Define default partner language"""
-    ctx.env['ir.values'].set_default('res.partner', 'lang', 'fr_BE',
-                                     condition=False)
+    if os.environ.get('CI'):
+        ctx.log_line('CI=True => skip lang_install.')
+    else:
+        ctx.env['ir.values'].set_default('res.partner', 'lang', 'fr_BE',
+                                         condition=False)
 
 
 @anthem.log
