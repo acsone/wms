@@ -456,6 +456,7 @@ migration:
           - connector_esb
           - pricelist_discount
           - specific_helpdesk
+          - specific_partner
           - specific_report
           - specific_sale
       operations:
