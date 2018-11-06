@@ -102,7 +102,13 @@ class ResPartner(models.Model):
     def address_get(self, adr_pref=None):
         """ Copy of default method. Changes:
         * Do not use the 'contact' partner as a default address, return self
+            In standard, if an address for a given type is not found, any
+            contact is returned instead of current partner
         * Check field type_delivery
+            Allow an address to be both invoice and delivery. As in standard,
+            the search is performed on children and then on children of the
+            commercial entity, we do not want to catch a delivery address of
+            another child of the commercial entity
         """
         adr_pref = set(adr_pref or [])
         result = {}
@@ -216,11 +222,17 @@ class ResPartner(models.Model):
                 if name and p.title:
                     title = p.title.shortcut or p.title.name
                     name = "%s %s" % (title, name)
+                elif name and p.is_company and p.legal_entity_id:
+                    title = p.legal_entity_id.name
+                    name = "%s %s" % (title, name)
                 full.append(name)
 
             name = partner.name or ''
             if name and partner.title:
                 title = partner.title.shortcut or partner.title.name
+                name = "%s %s" % (title, name)
+            elif name and partner.is_company and partner.legal_entity_id:
+                title = partner.legal_entity_id.name
                 name = "%s %s" % (title, name)
             full.append(name)
 
