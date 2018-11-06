@@ -501,6 +501,9 @@ migration:
         full:
           operations:
             post:
+              - anthem songs.install.logistics::create_putaway
+              - anthem songs.install.data_full::import_wh_family_locations
+              - anthem songs.install.data_full::import_other_locations
               # cleanup bins, new route info and supplier info
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_28_0_update.sql'"
               # import supplierinfo.csv
