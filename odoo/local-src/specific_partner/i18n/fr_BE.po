@@ -194,3 +194,20 @@ msgstr "legal.entity"
 #: model:ir.model,name:specific_partner.model_partner_alcyon_category
 msgid "partner.alcyon_category"
 msgstr "partner.alcyon_category"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_type_name
+msgid "Address Type Name"
+msgstr "Adresse"
+
+#. module: specific_partner
+#: code:addons/specific_partner/models/res_partner.py:110
+#, python-format
+msgid "Invoice and delivery"
+msgstr "Facturation + Livraison"
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_type_delivery
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_type_delivery
+msgid "Is Also Delivery"
+msgstr "Est aussi Livraison"

@@ -96,7 +96,22 @@ class ResPartner(models.Model):
 
     type_delivery = fields.Boolean(
         'Is Also Delivery',
-        help="Allow to mark an invoice address and also delivery address")
+        help="Allow to mark an invoice address as also a delivery address")
+    type_name = fields.Char(
+        'Address Type Name',
+        compute='_compute_type_name')
+
+    @api.multi
+    def _compute_type_name(self):
+        for partner in self:
+            if partner.type == 'contact':
+                name = False
+            elif partner.type == 'invoice' and partner.type_delivery:
+                name = _('Invoice and delivery')
+            elif partner.type:
+                name = dict(self.fields_get(['type'])['type']['selection'])[
+                    partner.type]
+            partner.type_name = name
 
     @api.multi
     def address_get(self, adr_pref=None):

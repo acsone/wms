@@ -61,7 +61,7 @@
                 <field name="ref"/>
                 <field name="customer"/>
                 <field name="supplier"/>
-                <field name="type" attrs="{'invisible':[('type', '=', 'contact')]}"/>
+                <field name="type_name"/>
                 <field name="city"/>
             </field>
         </field>
