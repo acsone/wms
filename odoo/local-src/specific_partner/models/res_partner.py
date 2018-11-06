@@ -237,10 +237,11 @@ class ResPartner(models.Model):
                 if name and p.title:
                     title = p.title.shortcut or p.title.name
                     name = "%s %s" % (title, name)
+                    full.append(name)
                 elif name and p.is_company and p.legal_entity_id:
                     title = p.legal_entity_id.name
                     name = "%s %s" % (title, name)
-                full.append(name)
+                    full.append(name)
 
             name = partner.name or ''
             if name and partner.title:
