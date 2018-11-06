@@ -690,3 +690,6 @@ migration:
       addons:
         upgrade:
           - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.10_27_2_update::post
