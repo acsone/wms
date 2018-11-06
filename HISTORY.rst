@@ -16,6 +16,7 @@ Unreleased
 **Build**
 
 * pin pip requirements
+* Add Mailhog container for mail testing in dev environment
 
 **Documentation**
 

@@ -93,6 +93,11 @@ services:
     ports:
       - 80:80
 
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+
   pissh:
     image: camptocamp/alcyon_pissh
     # PROD
