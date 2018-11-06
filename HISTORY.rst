@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* pin pip requirements
+
 **Documentation**
 
 
