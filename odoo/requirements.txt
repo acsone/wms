@@ -11,19 +11,19 @@ pluggy>=0.7
 cachetools==2.1.0
 
 # esb connector
-dicttoxml
-xmlunittest
+dicttoxml==1.7.4
+xmlunittest==0.5.0
 Cryptography==1.9
 paramiko==2.2.1
-freezegun
+freezegun==0.3.11
 
 # db2 odbc
 pyodbc==3.0.10
 
-iconv
-cchardet
+iconv==1.0
+cchardet==2.1.4
 
 # stock_devlivery_note
-unicodecsv
+unicodecsv==0.14.1
 
 marabunta==0.9.0
