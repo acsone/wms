@@ -457,6 +457,7 @@ migration:
           - pricelist_discount
           - specific_helpdesk
           - specific_report
+          - specific_sale
       operations:
         pre:
           - anthem songs.upgrade.10_27_2_update::pre
