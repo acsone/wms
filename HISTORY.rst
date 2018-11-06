@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1504: Display the intrastat table inside the main table (with products) to avoid break page for small invoice
+* ALCYN-1576: ALCYN-1576: Remove customer/supplier balances import. Balances will be imported later (after go live)
 
 **Bugfixes**
 
