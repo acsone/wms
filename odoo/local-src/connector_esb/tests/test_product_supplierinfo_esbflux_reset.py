@@ -18,10 +18,14 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
         self.partner = self.env.ref('base.res_partner_1')
         self.prod_1 = self.env.ref(
                 'product.product_product_1_product_template')
+        self.prod_2 = self.env.ref(
+                'product.product_product_2_product_template')
         self.date_start = fields.Datetime.to_string(
                 datetime.now() - relativedelta(years=1))
         self.date_end = fields.Datetime.to_string(
                 datetime.now() + relativedelta(years=1))
+        self.old_date_start = fields.Datetime.to_string(
+                datetime.now() - relativedelta(years=1, days=1))
         # Valid promotion
         self.supinfo_1 = self.supinfo.create({
             'name': self.partner.id,
@@ -37,22 +41,15 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
             'product_tmpl_id': self.prod_1.id,
             'ratio_main_product': 5,
             'ratio_promotional_product': 1,
-            'date_start': self.date_start,
-            'date_end': self.date_start,
+            'date_start': self.old_date_start,
+            'date_end': self.old_date_start,
             })
         self.supinfo_3 = self.supinfo.create({
             'name': self.partner.id,
-            'product_tmpl_id': self.prod_1.id,
+            'product_tmpl_id': self.prod_2.id,
             'discount_sale': 4,
             'date_start': self.date_start,
             'date_end': self.date_end,
-            })
-        # Not a valid promotion should appear in the flux
-        self.supinfo.create({
-            'name': self.partner.id,
-            'product_tmpl_id': self.prod_1.id,
-            'discount_sale': 4,
-            'date_start': self.date_start,
             })
         # Set some last export date to check that they will be reset
         self.flux_ids = [

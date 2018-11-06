@@ -156,8 +156,12 @@ def post_import_products(ctx):
 @anthem.log
 def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
+    # We cannot trust data in the AS400. It why I disable the constrain
+    # on supplier info
+    ProductSupplierinfo = \
+        ctx.env['product.supplierinfo'].with_context(disable_check_dates=True)
     for content in get_files(req, 'data/install/supplierinfo.csv'):
-        load_csv_stream(ctx, 'product.supplierinfo', content, delimiter=',')
+        load_csv_stream(ctx, ProductSupplierinfo, content, delimiter=',')
 
 
 @anthem.log

@@ -29,6 +29,14 @@ def switch_helpdesk_ticket_reason_noupdate(ctx, noupdate):
 
 
 @anthem.log
+def reset_default_value_for_supplierinfo(ctx):
+    """ Reset the default value for sale minimum quantity on supplier info """
+
+    ctx.env.cr.execute("UPDATE product_supplierinfo "
+                       "SET min_qty_sale = 0 WHERE min_qty_sale = 1;")
+
+
+@anthem.log
 def pre(ctx):
     """ PRE 10.27.2 """
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=False)
@@ -39,3 +47,4 @@ def post(ctx):
     """ POST 10.27.2 """
     remove_customer_supplier_balance(ctx)
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=True)
+    reset_default_value_for_supplierinfo(ctx)

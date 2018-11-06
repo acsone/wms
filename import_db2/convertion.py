@@ -326,7 +326,7 @@ class BaseSupplierinfo(EntityMapper):
         'name',
         FieldMapper('product_code', 'gesarc'),
         FieldMapper('price', 'gespab'),
-        FieldMapper('min_qty_sale', constant=1),
+        FieldMapper('min_qty_sale', constant=0),
         'product_tmpl_id',
     ]
 

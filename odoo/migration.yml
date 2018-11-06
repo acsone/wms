@@ -692,6 +692,7 @@ migration:
           - specific_helpdesk
           - specific_report
           - connector_esb
+          - pricelist_discount
       operations:
         pre:
           - anthem songs.upgrade.10_27_2_update::pre
