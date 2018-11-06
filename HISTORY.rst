@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1504: Display the intrastat table inside the main table (with products) to avoid break page for small invoice
+
 **Bugfixes**
 
 **Build**
