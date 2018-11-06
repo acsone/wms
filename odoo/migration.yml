@@ -481,3 +481,14 @@ migration:
           - connector_esb
           - specific_report
           - specific_sale
+      operations:
+        post:
+          - anthem songs.install.logistics::create_putaway
+          - anthem songs.install.data_full::import_wh_family_locations
+          - anthem songs.install.data_full::import_other_locations
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::import_stock_bins
+              - anthem songs.install.data_full::post_import_stock_bins
