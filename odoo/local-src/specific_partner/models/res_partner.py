@@ -94,19 +94,51 @@ class ResPartner(models.Model):
             return True
         return res
 
+    type_delivery = fields.Boolean(
+        'Is Also Delivery',
+        help="Allow to mark an invoice address and also delivery address")
+
     @api.multi
     def address_get(self, adr_pref=None):
-        """ Do not use the 'contact' partner as a default address, return self
+        """ Copy of default method. Changes:
+        * Do not use the 'contact' partner as a default address, return self
+        * Check field type_delivery
         """
-        self.ensure_one()
-        res = super(ResPartner, self).address_get(adr_pref=adr_pref)
-        for atype, oid in res.iteritems():
-            if oid != self.id:
-                partner = self.browse(oid)
-                if partner.type != atype:
-                    # restore self as default
-                    res[atype] = self.id
-        return res
+        adr_pref = set(adr_pref or [])
+        result = {}
+        visited = set()
+        for partner in self:
+            current_partner = partner
+            while current_partner:
+                to_scan = [current_partner]
+                # Scan descendants, DFS
+                while to_scan:
+                    record = to_scan.pop(0)
+                    visited.add(record)
+                    # jbaudoux: add 'invoice and delivery' in search
+                    rtypes = [record.type]
+                    if rtypes == ['invoice'] and record.type_delivery:
+                        rtypes = ['invoice', 'delivery']
+                    for rtype in rtypes:
+                        if rtype in adr_pref and not result.get(rtype):
+                            result[rtype] = record.id
+                        if len(result) == len(adr_pref):
+                            return result
+                    # jbaudoux: end of change
+                    to_scan = [c for c in record.child_ids
+                               if c not in visited
+                               if not c.is_company] + to_scan
+
+                # Continue scanning at ancestor if current_partner is not a
+                # commercial entity
+                if current_partner.is_company or not current_partner.parent_id:
+                    break
+                current_partner = current_partner.parent_id
+
+        # jbaudoux: remove partner of type 'contact' as default, use self
+        for adr_type in adr_pref:
+            result[adr_type] = result.get(adr_type) or self.id
+        return result
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
