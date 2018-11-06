@@ -5,3 +5,4 @@
 from . import partner_alcyon_category
 from . import res_partner
 from . import legal_entity
+from . import base_contact

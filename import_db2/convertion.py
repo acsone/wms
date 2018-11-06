@@ -983,10 +983,15 @@ class LocationMapper(EntityMapper):
                 continue
 
             family = value[0]
-            family_xmlid = self.get_xml_id(
-                self.name, 'family_' + family
-            )
             avenue = value[1]
+            if family == 'A':
+                parent_xmlid = self.get_xml_id(
+                    self.name, 'row_' + family + avenue
+                )
+            else:
+                parent_xmlid = self.get_xml_id(
+                    self.name, 'family_' + family
+                )
 
             # If the third and fourth characters is a number, it means
             # that it is a standard location (eg: GC28C3).
@@ -1018,7 +1023,7 @@ class LocationMapper(EntityMapper):
             odoo_entity['name'] = family + avenue + rack + lvl + bin
             odoo_entity['bin_checksum_1'] = control_code
             odoo_entity['bin_checksum_2'] = control_code
-            odoo_entity['location_id/id'] = family_xmlid
+            odoo_entity['location_id/id'] = parent_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'
             odoo_entity['zone'] = family
