@@ -75,7 +75,7 @@
                                         <td>
                                             <strong>
                                             [<span t-field="picking.partner_id.ref" />]
-                                            <span class="partner_inline" t-field="picking.partner_id" t-options='{"widget": "contact", "fields": ["name", "ref"], "no_marker": True}'/>
+                                            <span class="partner_inline" t-field="picking.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/>
                                             </strong>
                                         </td>
                                     </tr>
