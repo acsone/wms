@@ -121,6 +121,8 @@ class SaleOrder(models.Model):
         order_data['client_order_ref'] = data['order_ref']
         order_data['partner_invoice_id'] = partner.id
         order_data['state'] = 'draft'
+        if 'num_suite' in data:
+            order_data['suite_name'] = data['num_suite']
         if 'carrier_id' in data:
             carrier = self.env['delivery.carrier'].search([
                 ('esb_ref', '=', data['carrier_id'])]).exists()

@@ -95,6 +95,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
     def test_create_saleorder(self):
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
+        data['num_suite'] = 'iamsuitename'
         order = self.env['sale.order']._ws_create_new(data)
         tax_rate = self.p1.taxes_id.amount / 100.0
         web_team = self.env.ref('sales_team.salesteam_website_sales')
@@ -110,6 +111,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'payment_term_id': self.payment_30_net,
             'team_id': web_team,
             'sale_channel': 'web',
+            'suite_name': 'iamsuitename',
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
