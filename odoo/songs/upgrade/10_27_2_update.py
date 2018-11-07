@@ -20,6 +20,22 @@ def remove_customer_supplier_balance(ctx):
 
 
 @anthem.log
+def switch_helpdesk_ticket_reason_noupdate(ctx, noupdate):
+    model_datas = ctx.env['ir.model.data'].search([
+        ('model', '=', 'helpdesk.ticket.reason'),
+        ('module', '=', 'specific_helpdesk')
+    ])
+    model_datas.write({'noupdate': noupdate})
+
+
+@anthem.log
+def pre(ctx):
+    """ PRE 10.27.2 """
+    switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=False)
+
+
+@anthem.log
 def post(ctx):
     """ POST 10.27.2 """
     remove_customer_supplier_balance(ctx)
+    switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=True)
