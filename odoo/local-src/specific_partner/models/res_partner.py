@@ -224,11 +224,10 @@ class ResPartner(models.Model):
             return super(ResPartner, self).name_get()
         html_format = self.env.context.get('html_format')
         to_html = html_format or self.env.context.get('to_html')
-        nameget = super(ResPartner, self.with_context(html_format=False))\
-            .name_get()
+        nameget = dict(super(ResPartner, self.with_context(html_format=False))\
+            .name_get())
         res = []
-        for oid, oname in nameget:
-            partner = self.browse(oid)
+        for partner in self:
             full = []
 
             if partner.commercial_partner_id != partner:
@@ -263,14 +262,14 @@ class ResPartner(models.Model):
             if self.env.context.get('show_email') and partner.email:
                 fullname = "%s <%s>" % (fullname, partner.email)
 
-            address = oname.split('\n', 1)
+            address = nameget[partner.id].split('\n', 1)
             if len(address) > 1:
                 fullname += '\n' + address[1]
 
             if html_format:
                 fullname = fullname.replace('\n', '<br/>')
 
-            res.append((oid, fullname))
+            res.append((partner.id, fullname))
         return res
 
     @api.one
