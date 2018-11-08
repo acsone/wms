@@ -224,8 +224,8 @@ class ResPartner(models.Model):
             return super(ResPartner, self).name_get()
         html_format = self.env.context.get('html_format')
         to_html = html_format or self.env.context.get('to_html')
-        nameget = dict(super(ResPartner, self.with_context(html_format=False))\
-            .name_get())
+        nameget = dict(super(ResPartner, self.with_context(html_format=False))
+                       .name_get())
         res = []
         for partner in self:
             full = []
