@@ -20,6 +20,7 @@ def remove_customer_supplier_balance(ctx):
 
 
 @anthem.log
+<<<<<<< 56f0503cc642dc367778d49e94cccbd7006bc64b
 def switch_helpdesk_ticket_reason_noupdate(ctx, noupdate):
     model_datas = ctx.env['ir.model.data'].search([
         ('model', '=', 'helpdesk.ticket.reason'),
@@ -44,6 +45,9 @@ def pre(ctx):
 
 @anthem.log
 def post(ctx):
+=======
+def pre(ctx):
+>>>>>>> ALCYN-1614: Update the balance for customers and suppliers
     """ POST 10.27.2 """
     remove_customer_supplier_balance(ctx)
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=True)

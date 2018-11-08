@@ -401,6 +401,9 @@ def import_customer_banks_and_mandats(ctx):
 
     mandats = ctx.env['account.banking.mandate']
 
+    _logger.warning('/!\\ All warnings after this line for this song'
+                    ' can be ignored /!\\')
+
     index = 1
     for row in rows:
         try:
@@ -410,7 +413,8 @@ def import_customer_banks_and_mandats(ctx):
             result = ctx.env.cr.fetchone()
 
             if not result:
-                _logger.error('Customer not found with ref %s' % ref_customer)
+                _logger.warning(
+                    'Customer not found with ref %s' % ref_customer)
                 continue
             partner_id = result[0]
 
@@ -492,9 +496,9 @@ def import_customer_banks_and_mandats(ctx):
 
             index += 1
         except Exception as e:
-            _logger.error('Cannot import the line %s: %s' %
-                          (index, ', '.join(row)))
-            _logger.error(str(e))
+            _logger.warning('Cannot import the line %s: %s' %
+                            (index, ', '.join(row)))
+            _logger.warning(str(e))
             pass
 
         # Validate all created mandats
