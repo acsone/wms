@@ -54,14 +54,8 @@ class SaleOrder(models.Model):
         if template:
             _logger.debug("Associate SO %d to delivery instance matching "
                           "carrier", self.id)
-            delivery_round = self.env['round.instance'].search(
-                [
-                    ('template_id', '=', template.id),
-                    ('state', '!=', 'done')
-                ],
-                order='date asc, time_leave_planned asc',
-                limit=1,
-            )
+            delivery_round = self.env['round.instance'].find_bytemplate(
+                template)
             if (delivery_round and pickings.mapped('delivery_round_id') and
                     delivery_round != pickings.mapped('delivery_round_id')):
                 raise ValidationError(_(
@@ -74,7 +68,7 @@ class SaleOrder(models.Model):
                     "All pickings at destination of a same shipping must "
                     "be in the same delivery round"))
             if not delivery_round:
-                delivery_round = self.env['round.instance'].find(
+                delivery_round = self.env['round.instance'].find_bypartner(
                     pickings[0].partner_id)
 
         if delivery_round:

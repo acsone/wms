@@ -47,6 +47,8 @@ Unreleased
 
 * ALCYN-1524: Reload helpdesk.ticket.reason datas from specific_helpdesk
 
+* ALCYN-1607: Take care of the delivery carrier when picking is assigned (reserved) for the delivery round instance selection
+
 **Build**
 
 * pin pip requirements
