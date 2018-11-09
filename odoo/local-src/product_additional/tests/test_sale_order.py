@@ -2,6 +2,7 @@
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo import fields
 from odoo.tests import common
 
 
@@ -96,6 +97,8 @@ class TestSaleOrder(common.SavepointCase):
             'delay': 1,
             'ratio_main_product': 3,
             'ratio_promotional_product': 1,
+            'date_start': fields.Date.today(),
+            'date_end': fields.Date.today()
         })
         self.env['product.supplierinfo'].create({
             'name': self.supplier.id,
@@ -105,6 +108,8 @@ class TestSaleOrder(common.SavepointCase):
             'delay': 1,
             'ratio_main_product': 2,
             'ratio_promotional_product': 1,
+            'date_start': fields.Date.today(),
+            'date_end': fields.Date.today()
         })
         self.assertEqual(len(self.sale_order.order_line), 1)
 

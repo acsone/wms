@@ -689,9 +689,11 @@ migration:
     - version: 10.27.2
       addons:
         upgrade:
+          ### local
+          - connector_esb
+          - pricelist_discount
           - specific_helpdesk
           - specific_report
-          - connector_esb
       operations:
         pre:
           - anthem songs.upgrade.10_27_2_update::pre

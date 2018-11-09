@@ -18,6 +18,8 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
         self.partner = self.env.ref('base.res_partner_1')
         self.prod_1 = self.env.ref(
                 'product.product_product_1_product_template')
+        self.prod_2 = self.env.ref(
+                'product.product_product_2_product_template')
         self.date_start = fields.Datetime.to_string(
                 datetime.now() - relativedelta(years=1))
         self.date_end = fields.Datetime.to_string(
@@ -35,7 +37,7 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
         """Check values on created record."""
         r = self.supinfo.create({
             'name': self.partner.id,
-            'product_tmpl_id': self.prod_1.id,
+            'product_tmpl_id': self.prod_2.id,
             'ratio_main_product': 5,
             'ratio_promotional_product': 1,
             'date_start': self.date_start,
@@ -92,7 +94,7 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
     def test_create_update_delete_promotion_buyx_gety(self):
         r = self.supinfo.create({
             'name': self.partner.id,
-            'product_tmpl_id': self.prod_1.id,
+            'product_tmpl_id': self.prod_2.id,
             'ratio_main_product': 5,
             'ratio_promotional_product': 1,
             'date_start': self.date_start,
@@ -121,11 +123,11 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
         # Should not add rows
         self.assertEqual(qty, 3)
 
-    def test_both_promtion_updated_same_time(self):
+    def test_both_promotion_updated_same_time(self):
         """Create and update both promotion at the same time"""
         r = self.supinfo.create({
             'name': self.partner.id,
-            'product_tmpl_id': self.prod_1.id,
+            'product_tmpl_id': self.prod_2.id,
             'ratio_main_product': 5,
             'ratio_promotional_product': 1,
             'discount_sale': 4,

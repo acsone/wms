@@ -63,6 +63,11 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             'default_code': '8332983',
             'categ_id': categ_mat.id,
         })
+        self.product4 = product_model.create({
+            'name': 'CALCI BOROGLUCONATE 500ML',
+            'default_code': '0135996',
+            'categ_id': categ_specific_med.id,
+        })
         self.tax_20 = self.env['account.tax'].search(
             [('type_tax_use', '=', 'sale')],
             limit=1,
@@ -104,12 +109,6 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         return sale
 
     def test_message(self):
-        supplier_foo = self.env['res.partner'].create({
-            'name': 'Foo', 'supplier': True, 'ref': '10',
-        })
-        self.product2.seller_ids = [
-            (0, 0, {'name': supplier_foo.id, 'sequence': 30})
-        ]
         self.create_sale(
             '2017-07-26',
             [(self.product1, 5, 1, 143.2, self.tax_20)],
@@ -208,11 +207,11 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         supplier_bar = self.env['res.partner'].create({
             'name': 'Bar', 'supplier': True, 'ref': '11',
         })
-        self.product1.seller_ids = [(5, 0), (0, 0, {'name': supplier_foo.id})]
+        self.product4.seller_ids = [(5, 0), (0, 0, {'name': supplier_foo.id})]
         self.product3.seller_ids = [(5, 0), (0, 0, {'name': supplier_bar.id})]
         self.create_sale(
             '2017-07-20',
-            [(self.product1, 5, 1, 143.2, self.tax_20)],
+            [(self.product4, 5, 1, 143.2, self.tax_20)],
         )
         self.create_sale(
             '2017-07-26',
@@ -236,10 +235,10 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
         # suppliers we asked
         expected = [
             {'manufacturer': u'10',
-             'productName': u'KETOFEN 5MG 10CP',
+             'productName': u'CALCI BOROGLUCONATE 500ML',
              'productType': u'medicament',
              'qtyDelivered': 1.0,
-             'sku': u'1021906',
+             'sku': u'0135996',
              'taxRate': 20.0,
              'totalPrice': 143.2},
             {'manufacturer': u'987654321',
