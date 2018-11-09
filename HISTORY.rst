@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-1576: ALCYN-1576: Remove customer/supplier balances import. Balances will be imported later (after go live)
 * ALCYN-1540 : For sale order from the web recover the suite_name from the received data (ESB)
 * ALCYN-1218: Set a default price on new promotion and add some constrains on promotions
+* ALCYN-1614: Update the balance for customers and suppliers + update mandats
 
 **Bugfixes**
 
