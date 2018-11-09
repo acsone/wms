@@ -218,11 +218,16 @@ class DB2MapperSaleOrder(object):
 
         promo_sale = customer.supplier_promotion_sale_allowed
 
+        suite_name = ''
+        if customer.is_veterinary and row['eccrcl']:
+            suite_name = row['eccrcl'][-5:]
+
         user_xmlid = convert_user(row['eccrep'])
         values = {
             'name': row['eccsui'],
             'origin': row['eccrin'],
             'client_order_ref': row['eccrcl'],
+            'suite_name': suite_name,
             'user_id': user_xmlid and rec.env.ref(user_xmlid).id,
             'currency_id': rec.env.ref('base.EUR').id,
             'date_order': convert_date('eccd', row),

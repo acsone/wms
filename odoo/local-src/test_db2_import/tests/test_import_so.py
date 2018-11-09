@@ -397,7 +397,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_9134'),
             'client_order_ref': '1710563500000',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '00000',
 
             'date_order': '2017-12-03 00:00:00',
             'confirmation_date': '2017-12-03 00:00:00',
@@ -457,7 +457,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_4590'),
             'client_order_ref': '1810408201100',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '01100',
 
             'date_order': '2018-01-10 00:00:00',
             'confirmation_date': '2018-01-10 00:00:00',
@@ -610,7 +610,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_8857'),
             'client_order_ref': '1710258702763',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '02763',
 
             'date_order': '2017-11-06 00:00:00',
             'confirmation_date': '2017-11-06 00:00:00',
@@ -671,7 +671,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_4778'),
             'client_order_ref': '1810275900000',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '00000',
 
             'date_order': '2018-01-22 00:00:00',
             'confirmation_date': '2018-01-22 00:00:00',
@@ -768,7 +768,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_148'),
             'client_order_ref': '1810142300013',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '00013',
 
             'date_order': '2018-01-07 00:00:00',
             'confirmation_date': '2018-01-07 00:00:00',
@@ -847,7 +847,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_752'),
             'client_order_ref': '1810318900007',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '00007',
 
             'date_order': '2018-01-10 00:00:00',
             'confirmation_date': '2018-01-10 00:00:00',
@@ -925,7 +925,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_5651'),
             'client_order_ref': '1810262400000',
             'sale_channel': 'phone',
-            'suite_name': False,
+            'suite_name': '00000',
 
             'date_order': '2018-01-10 00:00:00',
             'confirmation_date': '2018-01-10 00:00:00',
@@ -1155,7 +1155,7 @@ class TestImportSO(DB2ImportTestCase):
             'partner_shipping_id': ref('__import__.customer_4590'),
             'client_order_ref': '1810408201111',
             'sale_channel': 'web',
-            'suite_name': False,
+            'suite_name': '01111',
 
             'date_order': '2018-01-23 00:00:00',
             'confirmation_date': '2018-01-23 00:00:00',

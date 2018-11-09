@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1541: Set suite name on sale orders when customer is veterinary.
+
 **Features and Improvements**
 
 * ALCYN-1504: Display the intrastat table inside the main table (with products) to avoid break page for small invoice
