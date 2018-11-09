@@ -1,3 +1,4 @@
+-- Kept in case of needs. Not usefull right now
 -- When the product price category is GMA
 -- (and discount3 is not set as catched by second rule)
 WITH t_sol1 AS (
