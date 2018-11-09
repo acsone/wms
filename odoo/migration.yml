@@ -149,6 +149,7 @@ migration:
           - product_manufacturer
           # oca/sale-workflow
           - sale_exception
+          - sale_stock_picking_blocking
           - sale_triple_discount
           # oca/server-tools
           - base_exception
@@ -259,32 +260,6 @@ migration:
     - version: 10.23.1
     - version: 10.23.2
     - version: 10.23.3
-      addons:
-        upgrade:
-          ### local-src
-          - specific_report
-          - specific_stock
-          - pricelist_discount
-          - specific_purchase
-          ### OCA (external-src)
-          # oca/sale-workflow
-          - sale_stock_picking_blocking
-          ### account-financial-tools
-          - account_chart_update
-      operations:
-        pre:
-          - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_23_3_update.sql $DB_NAME'"
-          - psql -f odoo/songs/upgrade/10_23_3_update.sql
-        post:
-          - anthem songs.install.logistics::create_picking_types
-          - anthem songs.upgrade.10_23_3_update::post
-          - anthem songs.install.accounting::enable_expects_chart_of_accounts
-      modes:
-        full:
-          operations:
-            post:
-              - anthem songs.install.data_full::import_partner_block_delivery
-              - anthem songs.upgrade.10_23_3_update::post_full
     - version: 10.24.0
       addons:
         upgrade:
