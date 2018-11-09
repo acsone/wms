@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1504: Display the intrastat table inside the main table (with products) to avoid break page for small invoice
 * ALCYN-62: Add translations on Dutch for reports
 * ALCYN-1576: ALCYN-1576: Remove customer/supplier balances import. Balances will be imported later (after go live)
+* ALCYN-1540 : For sale order from the web recover the suite_name from the received data (ESB)
 
 **Bugfixes**
 

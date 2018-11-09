@@ -34,6 +34,14 @@ Webservices:
         return total of ongoing orders and a flag if the customer must pay
         delivery fees
 
+A detailed documentation of the XML export and the web services is on Confluence
+
+`<https://confluence.camptocamp.com/confluence/display/ALCO/Interfaces+ESB>`_
+
+Some more information on how to tests with Magento
+
+`<https://confluence.camptocamp.com/confluence/pages/viewpage.action?pageId=721768>`_
+
 Configuration
 =============
 
