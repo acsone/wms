@@ -246,22 +246,6 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    - version: 10.25.2
-      addons:
-        upgrade:
-          ### local-src
-          - specific_sale
-          - product_additional
-          - stock_operation_recompute
-          - specific_stock
-          - connector_esb
-      modes:
-        full:
-          operations:
-            post:
-              - importer.sh songs.install.data_full::import_product_name_nl /odoo/data/install/product_name_nl_BE.csv
-              - importer.sh songs.install.data_full::import_product_name_fr /odoo/data/install/product_name_fr_BE.csv
-              - importer.sh songs.install.data_full::import_product_name_en /odoo/data/install/product_name_en_US.csv
     - version: 10.25.3
       addons:
         upgrade:
