@@ -246,14 +246,6 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    - version: 10.24.0
-        post:
-          - anthem songs.upgrade.10_24_0_update::post
-      modes:
-        full:
-          operations:
-            pre:
-              - anthem songs.upgrade.10_24_0_update::pre_full
     - version: 10.24.1
       addons:
         upgrade:
