@@ -246,17 +246,6 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    - version: 10.24.1
-      addons:
-        upgrade:
-          ### local-src
-          - specific_report
-          - specific_security
-      operations:
-        post:
-          - anthem songs.install.accounting::archived_outside_eu_taxes
-          - anthem songs.install.accounting::create_tax_100_outside_eu
-          - anthem songs.install.accounting::create_tax_extracom
     - version: 10.25.0
       addons:
         upgrade:
