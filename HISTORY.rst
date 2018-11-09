@@ -15,6 +15,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1524: Reload helpdesk.ticket.reason datas from specific_helpdesk
+
 **Build**
 
 * pin pip requirements
