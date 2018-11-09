@@ -39,10 +39,10 @@ class StockPicking(models.Model):
         return super(StockPicking, self.with_context(round_backorder=True))\
             ._create_backorder(backorder_moves)
 
-    delivery_round_state = fields.Selection(
-        related='delivery_round_id.state',
+    delivery_round_launched = fields.Boolean(
+        related='delivery_round_id.picking_launched',
         store=True,
-        string="Delivery Round State")
+        string="Delivery Round Launched")
 
     def _get_all_src_pickings(self):
         def _descend_moves(lvl):
@@ -133,5 +133,5 @@ class StockPickingType(models.Model):
         res = super(StockPickingType, self).get_action_picking_tree_ready()
         if self.subcode == 'PICK':
             res['context'] = res['context'].replace(
-                ',', ", 'search_default_delivery_round_state': 'open', ", 1)
+                ',', ", 'search_default_delivery_round_launched': 1, ", 1)
         return res

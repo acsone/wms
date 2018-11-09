@@ -66,10 +66,6 @@ class Usercontext(DomainInterface):
                 'scenarioStatus': '01',
             })
 
-            # TODO Manage parking and reserve
-            # AND picking.delivery_round_state = 'open'
-            # AND type.subcode = 'PICK'
-
             # This query will check if the picker has an open picking.
             # This can happen if the Zetes console crash
             picking_query = """

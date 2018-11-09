@@ -456,6 +456,7 @@ migration:
         upgrade:
           ### local
           - connector_esb
+          - delivery_rounds
           - pricelist_discount
           - specific_helpdesk
           - specific_partner

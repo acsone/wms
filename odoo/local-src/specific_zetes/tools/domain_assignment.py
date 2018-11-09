@@ -207,11 +207,9 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
-              AND (
-               (picking.delivery_round_state = 'open'
-                  AND picking.operator_id IS NULL)
-               OR (picking.delivery_round_state in ('draft', 'pending', 'open')
-                  AND picking.operator_id = %(operator)s))
+              AND round.state in ('draft', 'pending', 'open')
+              AND ((picking.operator_id IS NULL AND round.picking_launched)
+                   OR picking.operator_id = %(operator)s)
                AND NOT EXISTS (SELECT 1
                                FROM stock_pack_operation AS operation
                                  INNER JOIN stock_inventory_line AS sil

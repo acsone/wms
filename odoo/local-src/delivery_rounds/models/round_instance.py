@@ -56,6 +56,8 @@ class RoundInstance(models.Model):
         states={'done': [('readonly', True)]},
         )
 
+    stat_time_closed = fields.Float(
+        'Closed Time', readonly=True)
     stat_time_picking = fields.Float(
         'Picking Start Time', readonly=True)
     stat_time_leave = fields.Float(
@@ -82,12 +84,15 @@ class RoundInstance(models.Model):
         related='template_id.color')
     state = fields.Selection(
         [('pending', 'Anticipated'),
-         ('draft', 'Draft'),
-         ('open', 'Confirmed'),
+         ('draft', 'Open'),
+         ('close', 'Closed'),
          ('done', 'Done')],
         'State',
         readonly=True,
         default='pending')
+    picking_launched = fields.Boolean(
+        'Pickings Launched',
+        readonly=True)
 
     itinerary_ids = fields.Many2many(
         'round.itinerary',
@@ -409,12 +414,41 @@ class RoundInstance(models.Model):
         return action
 
     @api.multi
-    def button_confirm(self):
-        """ Mark as confirmed. This launch the start of the pickings
-        """
+    def toggle_picking_launched(self):
+        started = self.filtered('picking_launched')
+        stopped = self - started
+        started.button_picking_stop()
+        stopped.button_picking_start()
+
+    @api.multi
+    def button_picking_start(self):
+        """ Pickings can be processed """
         self.write({
-            'state': 'open',
+            'picking_launched': True,
             'stat_time_picking': time_now(self),
+            })
+
+    @api.multi
+    def button_picking_stop(self):
+        """ Pickings cannot be processed """
+        self.write({'picking_launched': False})
+
+    @api.multi
+    def toggle_partner_locked(self):
+        opened = self.filtered(lambda r: r.state == 'draft')
+        closed = self.filtered(lambda r: r.state == 'close')
+        opened.button_close()
+        closed.button_resetdraft()
+
+    @api.multi
+    def button_close(self):
+        """ Do not accept new picking automaticaly.
+        """
+        not_started = self.filtered(lambda r: not r.picking_launched)
+        not_started.button_picking_start()
+        self.write({
+            'state': 'close',
+            'stat_time_closed': time_now(self),
             })
 
     @api.multi
@@ -449,6 +483,8 @@ class RoundInstance(models.Model):
         for shipping in self.mapped('shipping_ids'):
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
+        started = self.filtered('picking_launched')
+        started.button_picking_stop()
         self.write({
             'state': 'done',
             'stat_time_leave': time_now(self),
