@@ -33,27 +33,7 @@
                 </table>
             </div>
             <div id="partner_header">
-                <t t-if="partner.parent_id">
-                    <span t-field="partner.parent_id"/>
-                    <br/>
-                </t>
-                <t t-if="partner.title">
-                    <span t-field="partner.title"/>
-                </t>
-                <span t-field="partner.name"/>
-                <br/>
-                <t t-if="partner.street">
-                    <span t-field="partner.street"/>
-                    <br/>
-                </t>
-                <t t-if="partner.zip or partner.city">
-                    <span t-field="partner.zip"/>
-                    <span t-field="partner.city"/>
-                    <br/>
-                </t>
-                <t t-if="partner.country_id">
-                    <span t-field="partner.country_id"/>
-                </t>
+                <div t-field="invoice.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
             </div>
             <table id="products_table" class="round_table">
                 <thead>

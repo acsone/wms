@@ -16,6 +16,8 @@ Unreleased
 * ALCYN-1614: Update the balance for customers and suppliers + update mandats
 
 **Bugfixes**
+* ALCYN-1566: Align Partner Display on reports + screen
+* ALCYN-1589: Allow to mark a partner of both type invoicing and delivery
 
 * ALCYN-1524: Reload helpdesk.ticket.reason datas from specific_helpdesk
 

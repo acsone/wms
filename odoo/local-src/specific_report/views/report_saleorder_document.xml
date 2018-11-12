@@ -12,10 +12,6 @@
 
         <xpath expr="//div[@name='payment_term']" position="replace"/>
 
-        <xpath expr="//div[@t-field='doc.partner_id']" position="attributes">
-            <attribute name="t-options">{'widget': 'contact', 'fields': ['address', 'name', 'suite'], 'no_marker': True}</attribute>
-        </xpath>
-
     </template>
 
 </odoo>

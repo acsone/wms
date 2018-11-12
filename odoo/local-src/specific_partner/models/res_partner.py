@@ -58,13 +58,6 @@ class ResPartner(models.Model):
         string='Authorization/APB'
     )
 
-    @api.multi
-    def _display_address(self, without_company=False):
-        res = super(ResPartner, self)._display_address(without_company)
-        if self.env.context.get('show_suite') and self.suite:
-            res = "%s\n%s" % (self.suite, res)
-        return res
-
     @api.depends('alcyon_category_id')
     def _compute_is_veterinary_or_students(self):
         veterinary = self.env.ref(
@@ -101,6 +94,73 @@ class ResPartner(models.Model):
             return True
         return res
 
+    type_delivery = fields.Boolean(
+        'Is Also Delivery',
+        help="Allow to mark an invoice address as also a delivery address")
+    type_name = fields.Char(
+        'Address Type Name',
+        compute='_compute_type_name')
+
+    @api.multi
+    def _compute_type_name(self):
+        for partner in self:
+            if partner.type == 'contact':
+                name = False
+            elif partner.type == 'invoice' and partner.type_delivery:
+                name = _('Invoice and delivery')
+            elif partner.type:
+                name = dict(self.fields_get(['type'])['type']['selection'])[
+                    partner.type]
+            partner.type_name = name
+
+    @api.multi
+    def address_get(self, adr_pref=None):
+        """ Copy of default method. Changes:
+        * Do not use the 'contact' partner as a default address, return self
+            In standard, if an address for a given type is not found, any
+            contact is returned instead of current partner
+        * Check field type_delivery
+            Allow an address to be both invoice and delivery. As in standard,
+            the search is performed on children and then on children of the
+            commercial entity, we do not want to catch a delivery address of
+            another child of the commercial entity
+        """
+        adr_pref = set(adr_pref or [])
+        result = {}
+        visited = set()
+        for partner in self:
+            current_partner = partner
+            while current_partner:
+                to_scan = [current_partner]
+                # Scan descendants, DFS
+                while to_scan:
+                    record = to_scan.pop(0)
+                    visited.add(record)
+                    # jbaudoux: add 'invoice and delivery' in search
+                    rtypes = [record.type]
+                    if rtypes == ['invoice'] and record.type_delivery:
+                        rtypes = ['invoice', 'delivery']
+                    for rtype in rtypes:
+                        if rtype in adr_pref and not result.get(rtype):
+                            result[rtype] = record.id
+                        if len(result) == len(adr_pref):
+                            return result
+                    # jbaudoux: end of change
+                    to_scan = [c for c in record.child_ids
+                               if c not in visited
+                               if not c.is_company] + to_scan
+
+                # Continue scanning at ancestor if current_partner is not a
+                # commercial entity
+                if current_partner.is_company or not current_partner.parent_id:
+                    break
+                current_partner = current_partner.parent_id
+
+        # jbaudoux: remove partner of type 'contact' as default, use self
+        for adr_type in adr_pref:
+            result[adr_type] = result.get(adr_type) or self.id
+        return result
+
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         """Process ref as a code: do not apply ilike on ref.
@@ -135,7 +195,7 @@ class ResPartner(models.Model):
                            OR {display_name} {operator} {percent}
                            OR ref = {percent})
                            -- don't panic, trust postgres bitmap
-                     ORDER BY ref = {percent},
+                     ORDER BY ref = {percent} desc,
                               {display_name} {operator} {percent} desc,
                               {display_name}
                     """.format(where=where_str,
@@ -157,6 +217,60 @@ class ResPartner(models.Model):
                 return []
         return super(ResPartner, self).name_search(
             name, args, operator=operator, limit=limit)
+
+    @api.multi
+    def name_get(self):
+        if self.env.context.get('show_address_only'):
+            return super(ResPartner, self).name_get()
+        html_format = self.env.context.get('html_format')
+        to_html = html_format or self.env.context.get('to_html')
+        nameget = dict(super(ResPartner, self.with_context(html_format=False))
+                       .name_get())
+        res = []
+        for partner in self:
+            full = []
+
+            if partner.commercial_partner_id != partner:
+                p = partner.commercial_partner_id
+                name = p.name
+                if name and p.title:
+                    title = p.title.shortcut or p.title.name
+                    name = "%s %s" % (title, name)
+                    full.append(name)
+                elif name and p.is_company and p.legal_entity_id:
+                    title = p.legal_entity_id.name
+                    name = "%s %s" % (title, name)
+                    full.append(name)
+
+            name = partner.name or ''
+            if name and partner.title:
+                title = partner.title.shortcut or partner.title.name
+                name = "%s %s" % (title, name)
+            elif name and partner.is_company and partner.legal_entity_id:
+                title = partner.legal_entity_id.name
+                name = "%s %s" % (title, name)
+            full.append(name)
+
+            if partner.suite:
+                full.append(partner.suite)
+
+            if to_html and not self.env.context.get('show_email'):
+                fullname = '\n'.join(full)
+            else:
+                fullname = ', '.join(full)
+
+            if self.env.context.get('show_email') and partner.email:
+                fullname = "%s <%s>" % (fullname, partner.email)
+
+            address = nameget[partner.id].split('\n', 1)
+            if len(address) > 1:
+                fullname += '\n' + address[1]
+
+            if html_format:
+                fullname = fullname.replace('\n', '<br/>')
+
+            res.append((partner.id, fullname))
+        return res
 
     @api.one
     @api.constrains('name', 'street', 'city', 'zip', 'country_id')

@@ -456,7 +456,9 @@ migration:
           - connector_esb
           - pricelist_discount
           - specific_helpdesk
+          - specific_partner
           - specific_report
+          - specific_sale
       operations:
         pre:
           - anthem songs.upgrade.10_27_2_update::pre
@@ -470,3 +472,4 @@ migration:
               - anthem songs.install.data_full::create_journals
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
+              - anthem songs.install.data_full::import_partner_link

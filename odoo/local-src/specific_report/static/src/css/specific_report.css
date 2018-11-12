@@ -32,6 +32,10 @@
     vertical-align: middle;
 }
 
+div.page div.row span.partner_inline address, div.page div.row span.partner_inline address > div {
+    display:inline;
+}
+
 .border_table, .round_table {
     border-collapse:separate;
     border:solid black 1px;
@@ -191,7 +195,6 @@
 }
 
 #products_table tr:not(:last-child) {
-    line-height: 3mm;
     height: 3mm;
 }
 

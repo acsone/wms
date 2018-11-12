@@ -29,16 +29,7 @@
             </div>
 
             <div id="partner_header" class="remove_padding_top">
-                <t t-if="partner.parent_id">
-                    <span t-field="partner.parent_id"/>
-                    <br/>
-                </t>
-                <t t-if="partner.title">
-                    <span t-field="partner.title"/>
-                </t>
-                <span t-field="partner.name"/>
-                <br/>
-                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
             </div>
             <table id="products_table" class="round_table products_table_deliveryslip">
                 <thead>
