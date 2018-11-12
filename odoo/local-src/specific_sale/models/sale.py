@@ -616,3 +616,13 @@ class SaleOrderLine(models.Model):
         """Add a warning if the product is provisioned at ordering time."""
         routes = self.product_id.route_ids
         return self.env.ref('stock.route_warehouse0_mto').id in routes.ids
+
+    def warning_cascade_importation(self):
+        """Add a warning for cascade importation product."""
+        cascade_cat = self.env.ref('specific_data.product_categ_importation')
+        return self.product_id.categ_id.has_for_parent(cascade_cat.id)
+
+    def warning_human_medicine(self):
+        """Add a warning for human medicine product."""
+        human_medoc_cat = self.env.ref('specific_data.product_categ_humain')
+        return self.product_id.categ_id.has_for_parent(human_medoc_cat.id)

@@ -13,6 +13,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1596: Consider consignement flag on sale order report
+* ALCYN-236: Add sale warning for human medicine and cascade import product
 
 **Bugfixes**
 

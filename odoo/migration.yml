@@ -477,4 +477,6 @@ migration:
     - version: 10.27.3
       addons:
         upgrade:
+          ### local
           - specific_report
+          - specific_sale
