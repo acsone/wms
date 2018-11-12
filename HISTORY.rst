@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.27.2 (2018-11-12)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1541: Set suite name on sale orders when customer is veterinary.
@@ -32,8 +44,6 @@ Unreleased
 * pin pip requirements
 * Add Mailhog container for mail testing in dev environment
 * Define server_environment for mailhog for dev and integration environments
-
-**Documentation**
 
 
 10.27.1 (2018-11-05)
