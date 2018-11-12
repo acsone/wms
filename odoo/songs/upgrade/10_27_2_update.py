@@ -20,6 +20,20 @@ def remove_customer_supplier_balance(ctx):
 
 
 @anthem.log
+def set_max_records_on_stock_export(ctx):
+    """Set the maximum of records on stock export.
+
+    The stock export is using a web service on the ESB. If too many
+    records are exported it will fail. Here we set the maximum of records
+    exported to 500.
+    It is just a guess from past test of this export.
+
+    """
+    timestamp = ctx.env.ref('connector_esb.esb_timestamp_stock_update')
+    timestamp.max_records = 500
+
+
+@anthem.log
 def switch_helpdesk_ticket_reason_noupdate(ctx, noupdate):
     model_datas = ctx.env['ir.model.data'].search([
         ('model', '=', 'helpdesk.ticket.reason'),
@@ -48,3 +62,4 @@ def post(ctx):
     """ POST 10.27.2 """
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=True)
     reset_default_value_for_supplierinfo(ctx)
+    set_max_records_on_stock_export(ctx)

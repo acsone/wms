@@ -164,7 +164,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items.mapped('product_id')), 2)
 
     def test_product_no_sku(self):
         """Product without Sku should not be picked up."""
@@ -178,7 +178,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items.mapped('product_id')), 2)
 
     def test_product_type_service(self):
         """Product of type other than product should not be picked up."""
@@ -192,7 +192,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items.mapped('product_id')), 2)
 
     def test_product_not_ok_for_sale(self):
         """Product not for sale should not be picked up"""
@@ -206,7 +206,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items.mapped('product_id')), 2)
 
     def post_ret_status(url, data, headers, auth):
         resp = requests.Response()

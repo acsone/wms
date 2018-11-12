@@ -72,7 +72,12 @@ class StockUpdateExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'stock.update')
 
     def get_items(self, export_since):
-        """Find the products to export based on quants."""
+        """Find all quants that need to be exported.
+
+        Returns the quants instead of the products directly because the
+        write_date on the quants is used to manage the maximum of records
+        that can be sent.
+        """
         domain = [
              ('product_id.default_code', '!=', ''),
              ('product_id.default_code', '!=', False),
@@ -83,8 +88,37 @@ class StockUpdateExporter(Component):
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
         all_quants = self.env['stock.quant'].search(domain)
-        products = all_quants.mapped('product_id')
-        return products
+        return all_quants.sorted(key=lambda r: r.write_date)
+
+    def run(self, export_since=None, max_records=None):
+        """ Run the export of multiple stock status.
+
+        ``export_since`` can be omitted to ignore the date and export
+        all the records that match the domain.
+        ``max_records`` can be set to export only a maximum number of records
+        """
+        data = []
+        exported_ids = []
+        exported_until = None
+        quants = self.get_items(export_since=export_since)
+        for quant in quants:
+            if quant.product_id.id not in exported_ids:
+                if exported_until and quant.write_date != exported_until:
+                    # As the write_date precision is on the second
+                    # All quants in the same second must be exported
+                    break
+                mapped_record = self.mapper.map_record(quant.product_id)
+                data.append(self._update_data(mapped_record))
+                exported_ids += [quant.product_id.id]
+                if max_records != 0 and len(exported_ids) >= max_records:
+                    exported_until = quant.write_date
+        else:
+            exported_until = None
+        if data:
+            data = {'lines': data}
+            self._create(data)
+            return exported_until
+        return
 
 
 class StockUpdateServiceExporter(Component):
