@@ -54,12 +54,12 @@ def reset_default_value_for_supplierinfo(ctx):
 def pre(ctx):
     """ PRE 10.27.2 """
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=False)
-    remove_customer_supplier_balance(ctx)
 
 
 @anthem.log
 def post(ctx):
     """ POST 10.27.2 """
+    remove_customer_supplier_balance(ctx)
     switch_helpdesk_ticket_reason_noupdate(ctx, noupdate=True)
     reset_default_value_for_supplierinfo(ctx)
     set_max_records_on_stock_export(ctx)
