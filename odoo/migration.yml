@@ -461,7 +461,7 @@ migration:
           - specific_sale
       operations:
         pre:
-          - anthem songs.upgrade.10_27_2_update::pre
+          - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_27_2_update.sql'"
         post:
           - anthem songs.upgrade.10_27_2_update::post
       modes:
