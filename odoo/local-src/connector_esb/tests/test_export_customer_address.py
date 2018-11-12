@@ -69,6 +69,31 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'parent_id': self.partner_2.id,
             'type': 'delivery'
         })
+        # Create a supplier that should not be picked by the tests
+        self.supplier_1 = self.model.create({
+            'name': 'Supplier 1',
+            'street': 'Main Street, 2',
+            'ref': '123122424234',
+            'zip': '999888',
+            'city': 'Sale City',
+            'country_id': 44,
+            'supplier': True,
+            'customer': False,
+        })
+        # And a delivery address for it that should not come up either
+        self.supplier_1_delivery = self.model.create({
+            'ref': '1233983298324089234',
+            'name': 'delivery-address',
+            'street': 'H-Street 432',
+            'street2': '',
+            'zip': 'zip',
+            'city': 'DaCity',
+            'country_id': 44,
+            'parent_id': self.supplier_1.id,
+            'type': 'delivery',
+            'supplier': True,
+            'customer': False,
+        })
 
     def test_filename(self):
         self.check_filename('CustomerAddress_{0}_{1}.xml')

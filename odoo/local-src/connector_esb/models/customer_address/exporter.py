@@ -137,61 +137,33 @@ class CustomerAddressCronExporter(Component):
         of the customer must be used.
         For the mapper to know which address is exported, the type is included
         with each item.
+        To find the correct address the default Odoo method is used so for one
+        customer the same delivery/invoice addresses are seen on Odoo and
+        Magento.
+        This default method address_get has been monkey patched for Alcyon.
         """
         items = super(CustomerAddressCronExporter,
                       self).get_items(export_since)
+        modified_items_ids = set(items.mapped('id'))
         # get_items will return all modified partners including the addresses.
-        # Wwe need to get the related parent or children to be sure we include
-        # the pair (invoice, delivery), even if they have not been modified.
-        # The following search extend the items with the children addresses
-        # or the parent.
-        domain = ['|',
-                  ('id', 'child_of', items.ids),
-                  ('child_ids', 'in', items.ids),
-                  ('type', 'in', ('delivery', 'invoice', 'contact')),
-                  ]
-        items = self.env['res.partner'].search(
-                AND([domain, self._valid_address_domain()]),
-                order='create_date DESC'
-                )
-        # group the records by kind of address in dictionaries for fast lookups
-        customers = []
-        invoice_addresses = {}
-        delivery_addresses = {}
-        # As this method does not return a recordset like other get_items
-        # but a list of tuples. The lock on the exported items happens
-        # here instead of in the run method.
-        self._lock(items)
-
-        for item in items:
-            parent_id = item.parent_id.id
-            if item.type == 'invoice':
-                if not invoice_addresses.get(parent_id):
-                    invoice_addresses[parent_id] = item
-            elif item.type == 'delivery':
-                if not delivery_addresses.get(parent_id):
-                    delivery_addresses[parent_id] = item
-            elif item.commercial_partner_id == item:
-                # Ignore items of type 'contact' which are children of a
-                # partner. E.g. prevent to export 'City Z' as both invoice
-                # and delivery for itself in this scenario:
-                #   John Doe (contact)
-                #   - City X (delivery)
-                #   - City Y (invoice)
-                #   - City Z (contact)
-                customers.append(item)
-
-        # Get the address to export for each kind. We can loop on customers as
-        # we did a search for the parent partner previously. Even if only the
-        # invoice address has been modified, the parent partner should be
-        # in the list.
+        # Then extract all the related parents and find its coresponding
+        # addresses as they are always sent as a pair.
+        commercial_partners = items.mapped('commercial_partner_id')
         items2export = []
-        for customer in customers:
-            invoice = invoice_addresses.get(customer.id) or customer
-            items2export.append(('invoice', invoice))
-            delivery = delivery_addresses.get(customer.id) or customer
-            items2export.append(('delivery', delivery))
-
+        for customer in commercial_partners:
+            # For each customer get the invoice and devlivery addresses
+            addresses = customer.address_get(('invoice', 'delivery'))
+            # Export them if at least one as been modified
+            if not modified_items_ids.intersection(set(addresses.values())):
+                continue
+            items2export.append((
+                'invoice',
+                self.env['res.partner'].browse(addresses['invoice'])
+            ))
+            items2export.append((
+                'delivery',
+                self.env['res.partner'].browse(addresses['delivery'])
+            ))
         return items2export
 
     def get_items_domain(self):

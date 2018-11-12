@@ -19,6 +19,7 @@ Unreleased
 * ALCYN-1218: Set a default price on new promotion and add some constrains on promotions
 * ALCYN-1614: Update the balance for customers and suppliers + update mandats
 * ALCYN-1600: Add a maximum of record that can be exported to a web service when ran from a cron, this is to improve the stock status update (ESB).
+* ALCYN-1612: Fix customer address export for is also delivery invoice address for customer 'chapeau'
 
 **Bugfixes**
 * ALCYN-1566: Align Partner Display on reports + screen
