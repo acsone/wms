@@ -456,7 +456,6 @@ migration:
         upgrade:
           ### local
           - connector_esb
-          - delivery_rounds
           - pricelist_discount
           - specific_helpdesk
           - specific_partner
@@ -485,6 +484,8 @@ migration:
           - account_financial_report_qweb
           ### local
           - connector_esb
+          - delivery_rounds
+          - delivery_rounds_alcyon
           - specific_report
           - specific_sale
       operations:

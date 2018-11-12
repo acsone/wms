@@ -21,6 +21,7 @@ Unreleased
 * ALCYN-1455: Add the price on the delivery slip report and add a field on partner to hide these prices
 * ALCYN-1636: Duplicate ir.cron connector ESB exporting documents zip
 * ALCYN-1637: Install OCA financial reports
+* ALCYN-1617: Delivery round. Separate partner list locking and picking launching
 
 **Bugfixes**
 
@@ -53,7 +54,6 @@ Unreleased
 * ALCYN-1614: Update the balance for customers and suppliers + update mandats
 * ALCYN-1600: Add a maximum of record that can be exported to a web service when ran from a cron, this is to improve the stock status update (ESB).
 * ALCYN-1612: Fix customer address export for is also delivery invoice address for customer 'chapeau'
-* ALCYN-1617: Delivery round. Separate partner list locking and picking launching
 
 **Bugfixes**
 

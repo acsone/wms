@@ -207,7 +207,7 @@ class Assignment(DomainInterface):
                               WHERE pack_op.picking_id = picking.id
                                 AND l.is_valid_location = FALSE
                               )
-              AND round.state in ('draft', 'pending', 'open')
+              AND round.state in ('draft', 'pending', 'close')
               AND ((picking.operator_id IS NULL AND round.picking_launched)
                    OR picking.operator_id = %(operator)s)
                AND NOT EXISTS (SELECT 1
