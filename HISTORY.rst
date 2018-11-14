@@ -22,6 +22,7 @@ Unreleased
 * ALCYN-1607: Take care of the delivery carrier when picking is assigned (reserved) for the delivery round instance selection
 * ALCYN-1600: Fix bug with customer addresses. But as well change timestamp failesafe.
 * ALCYN-1460: Fix sale exception customer backorder, if the quantity on the line is zero it should not be raised
+* ALCYN-264: Fix psychotrope sale exception on wrong category (supefiant)
 
 **Build**
 

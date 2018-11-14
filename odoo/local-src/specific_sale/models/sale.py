@@ -588,16 +588,16 @@ class SaleOrderLine(models.Model):
 
     def validate_no_psychotropic_ordered_by_phone(self):
         """No psychotropic ordered on the phone."""
-        psycho_cat = self.env.ref('specific_data.product_categ_stupefiant')
-        if not self.product_id.categ_id.has_for_parent(psycho_cat.id):
+        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
+        if not self.product_id.categ_id.has_for_parent(psych_cat.id):
             return False
         return self.order_id.sale_channel == 'phone'
 
     # Warnings
     def warning_psychotropic(self):
         """Add warning for psychotropic product on sale order line."""
-        psycho_cat = self.env.ref('specific_data.product_categ_stupefiant')
-        return self.product_id.categ_id.has_for_parent(psycho_cat.id)
+        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
+        return self.product_id.categ_id.has_for_parent(psych_cat.id)
 
     def validate_no_backorder(self):
         """Block backorder for customer that specifically do not want them."""
