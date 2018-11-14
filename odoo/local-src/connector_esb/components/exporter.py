@@ -312,7 +312,7 @@ class ESBCronExporter(AbstractComponent):
         """
         if export_since:
             export_date = fields.Datetime.from_string(export_since)
-            export_date = export_date - datetime.timedelta(minutes=5)
+            export_date = export_date - datetime.timedelta(minutes=1)
             export_since = fields.Datetime.to_string(export_date)
         return [('write_date', '>=', export_since)]
 

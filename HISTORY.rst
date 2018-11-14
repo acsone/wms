@@ -20,6 +20,7 @@ Unreleased
 
 * ALCYN-1633: display chapeau traceback
 * ALCYN-1607: Take care of the delivery carrier when picking is assigned (reserved) for the delivery round instance selection
+* ALCYN-1600: Fix bug with customer addresses. But as well change timestamp failesafe.
 
 **Build**
 
