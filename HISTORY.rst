@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* ALCYN-1619: Delete purchase orders when all lines were deleted.
+
 **Features and Improvements**
 
 **Bugfixes**

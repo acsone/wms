@@ -175,6 +175,11 @@ class DB2MapperPurchaseOrder(object):
         # we won't import replacements in history
         deleted_lines = [l for l in lines if l['deleted']]
         lines = [l for l in lines if l['dcfart'] and not l['deleted']]
+        if not lines:
+            # All lines were deleted, we will remove the purchase
+            new.write({'state': 'cancel'})
+            new.unlink()
+            return 'All lines are tagged deleted, PO deleted'
         for line in lines:
             product_code = line['dcfart']
             product_xmlid = convert_product_id(product_code)
