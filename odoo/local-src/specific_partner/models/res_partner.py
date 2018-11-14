@@ -104,9 +104,8 @@ class ResPartner(models.Model):
     @api.multi
     def _compute_type_name(self):
         for partner in self:
-            if partner.type == 'contact':
-                name = False
-            elif partner.type == 'invoice' and partner.type_delivery:
+            name = False
+            if partner.type == 'invoice' and partner.type_delivery:
                 name = _('Invoice and delivery')
             elif partner.type:
                 name = dict(self.fields_get(['type'])['type']['selection'])[
