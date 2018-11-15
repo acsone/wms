@@ -294,6 +294,8 @@ class ESBCronExporter(AbstractComponent):
     _inherit = ['esb.exporter.mixin']
     _usage = 'record.exporter.cron'
 
+    BASIC_LOCK_TIME = 60
+
     def get_items_domain(self):
         return []
 
@@ -304,15 +306,17 @@ class ESBCronExporter(AbstractComponent):
         As write_date is at the very least the same than create_date
         no need to search on create_date >= self.export_since.
 
-        To be sure that we don't miss a record that was updated during
-        the last export 5 minutes are subtracted from the timestamp.
+        To be sure that we don't miss a record that is updated during
+        the last export a few seconds are subtracted from the timestamp.
         Yes poor man locking system !
         But the FOR UPDATE NO WAIT did not seem to succeed at all on the
         product.product table when addressing many records.
         """
         if export_since:
             export_date = fields.Datetime.from_string(export_since)
-            export_date = export_date - datetime.timedelta(minutes=1)
+            export_date = export_date - datetime.timedelta(
+                seconds=self.BASIC_LOCK_TIME
+            )
             export_since = fields.Datetime.to_string(export_date)
         return [('write_date', '>=', export_since)]
 

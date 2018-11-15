@@ -106,6 +106,10 @@ class StockUpdateExporter(Component):
                 if exported_until and quant.write_date != exported_until:
                     # As the write_date precision is on the second
                     # All quants in the same second must be exported
+                    exported_until = (
+                        datetime.strptime(exported_until, "%Y-%m-%d %H:%M:%S")
+                        + timedelta(seconds=self.BASIC_LOCK_TIME + 1)
+                    ).strftime("%Y-%m-%d %H:%M:%S")
                     break
                 mapped_record = self.mapper.map_record(quant.product_id)
                 data.append(self._update_data(mapped_record))
