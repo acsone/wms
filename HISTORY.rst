@@ -15,6 +15,7 @@ Unreleased
 * ALCYN-1596: Consider consignement flag on sale order report
 * ALCYN-236: Add sale warning for human medicine and cascade import product
 * ALCYN-253 helpdesk: mail templates
+* ALCYN-1636: Duplicate ir.cron connector ESB exporting documents zip
 
 **Bugfixes**
 
