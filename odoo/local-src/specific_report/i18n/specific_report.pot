@@ -80,6 +80,11 @@ msgid "<span>Gross<br/>amount</span>"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "<span>Consignement # </span>"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>N° Document</span>"
@@ -421,6 +426,11 @@ msgid "Operator"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "Order #"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
 msgid "Order Reference"
 msgstr ""
@@ -490,9 +500,8 @@ msgid "Quantity"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:53
-#, python-format
-msgid "Quotation can not be printed the client has no reference."
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "Quotation #"
 msgstr ""
 
 #. module: specific_report
