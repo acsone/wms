@@ -603,6 +603,8 @@ class SaleOrderLine(models.Model):
         """Block backorder for customer that specifically do not want them."""
         if not self.product_qty_unavailable:
             return False
+        if self.product_uom_qty == 0:
+            return False
         return not self.order_id.partner_id.is_sale_back_order_accepted
 
     def warning_free_product(self):

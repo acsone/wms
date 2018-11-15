@@ -418,11 +418,25 @@ class TestSaleOrderException(SavepointCase):
         """
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        # This rule is exist but is not activated in the app
+        rule_qty_at_zero = self.env.ref(
+            'specific_sale.no_line_at_zero',
+            raise_if_not_found=False
+        )
+        if rule_qty_at_zero:
+            rule_qty_at_zero.active = 0
         no_backorder_rule = self.env.ref('specific_sale.no_backorder')
         self.partner.is_sale_back_order_accepted = False
         line = self.so1.order_line[0]
         line.product_uom_qty = 234
         self.assertEqual(no_backorder_rule.description, line.exception)
+        # If quantity ordered is zero exception should not be raised
+        line.product_uom_qty = 0
+        self.assertEqual('', line.exception)
+        # And if it is set to a positive number raised again
+        line.product_uom_qty = 234
+        self.assertEqual(no_backorder_rule.description, line.exception)
+        # Check customer accept back order
         self.partner.is_sale_back_order_accepted = True
         line.product_uom_qty = 534
         self.assertEqual('', line.exception)
