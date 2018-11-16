@@ -138,4 +138,7 @@ class CustomerCronExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'customer')
 
     def get_items_domain(self):
-        return [('customer', '=', True)]
+        return [
+            ('customer', '=', True),
+            ('email', '<>', False)
+        ]
