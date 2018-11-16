@@ -478,5 +478,6 @@ migration:
       addons:
         upgrade:
           ### local
+          - connector_esb
           - specific_report
           - specific_sale

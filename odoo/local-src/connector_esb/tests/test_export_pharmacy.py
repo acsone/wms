@@ -176,11 +176,11 @@ class ExportPharmacyTestCase(ESBXMLTestCase):
             items = exporter.get_items(export_since=self.timestamp.last_export)
             # export 2 partners
             self.assertEqual(len(items), 2)
-        # When using a timestamp during the export 5 minutes are subtracted
+        # When using a timestamp during the export 1 minutes are subtracted
         # As in the tests the write_date on a record is always set with the
         # time when the tests started. So we add them here to compensate for
         # this.
-        last_export = datetime.datetime.now() + datetime.timedelta(minutes=5)
+        last_export = datetime.datetime.now() + datetime.timedelta(minutes=1)
         self.timestamp.last_export = fields.Datetime.to_string(last_export)
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

@@ -173,7 +173,7 @@ class CustomerAddressCronExporter(Component):
                   ]
         return AND([domain, self._valid_address_domain()])
 
-    def run(self, export_since=None):
+    def run(self, export_since=None, max_records=0):
         """ Run the export.
 
         Redefined because the get_items does not return a simple

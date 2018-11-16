@@ -97,7 +97,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             exported_until = exporter.run(max_records=3)
             assert exported_until == '2017-11-05 12:00:00'
             # This is annoying and take into account the poor man lock
-            exported_until = '2017-11-05 12:05:01'
+            exported_until = '2017-11-05 12:01:01'
             # Second export
             exported_until = exporter.run(
                 export_since=exported_until,
@@ -142,7 +142,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(max_records=3)
         assert exported_until is not None
-        exported_until = '2017-11-05 12:05:01'
+        exported_until = '2017-11-05 12:01:01'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
