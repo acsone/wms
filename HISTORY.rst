@@ -8,6 +8,7 @@ Unreleased
 
 **Data Migration**
 
+* ALCYN-1604: Cleanup old bins, old "new" routes info and supplier info
 * ALCYN-1619: Delete purchase orders when all lines were deleted.
 * ALCYN-1622: Adapt setup and migration for "Aliments" chaotic storage
 
