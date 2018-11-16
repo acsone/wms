@@ -257,7 +257,21 @@ class RoundInstance(models.Model):
         return ric
 
     @api.model
-    def find(self, partner):
+    def find_bytemplate(self, template):
+        """
+        Find a delivery_round for having a specified template. This is used for
+        deliveries linked to a specific carrier
+        """
+        return self.search([
+                ('template_id', '=', template.id),
+                ('state', '!=', 'done')
+            ],
+            order='date asc, time_leave_planned asc',
+            limit=1,
+        )
+
+    @api.model
+    def find_bypartner(self, partner):
         """
         Find a delivery_round for this partner according to tags defined
         on customer position or round instance.

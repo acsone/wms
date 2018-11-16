@@ -65,22 +65,22 @@ class TestRoundTags(SavepointCase):
             'itinerary_ids': [(6, 0, [cls.itinerary.id])]
         })
 
-    def test_01_find(self):
+    def test_01_find_bypartner(self):
         """
-        Test the method find (to find the best delivery instance)
+        Test the method find_bypartner (to find the best delivery instance)
         :return:
         """
         instance_obj = self.env['round.instance']
 
         # Test simple case (without tags)
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, self.instance)
 
         # Add the tag monday on the instance
         self.instance.write({
             'tag_ids': [(6, 0, [self.tag_monday.id])]
         })
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, self.instance)
 
         # Add the tag friday on the customer position
@@ -89,19 +89,19 @@ class TestRoundTags(SavepointCase):
         self.position.write({
             'tag_ids': [(6, 0, [self.tag_friday.id])]
         })
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertFalse(instance)
 
         # Add the flag friday on the instance
         self.instance.write({
             'tag_ids': [(4, self.tag_friday.id, 0)]
         })
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, self.instance)
 
-    def test_02_find(self):
+    def test_02_find_bypartner(self):
         """
-        Test the method find on delivery with several instance
+        Test the method find_bypartner on delivery with several instance
         and if the method sort correctly instance
         :return:
         """
@@ -160,7 +160,7 @@ class TestRoundTags(SavepointCase):
 
         # The "best itinerary" has a better picking time
         # (picking planned = now + 1 hours)
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, best_instance)
 
         # Add the flag monday on the customer position for all itineraries
@@ -186,12 +186,12 @@ class TestRoundTags(SavepointCase):
             'tag_ids': [(6, 0, [self.tag_monday.id])]
         })
 
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, worst_instance)
 
         # Add the flag friday on the customer position
         best_position.write({
             'tag_ids': [(4, self.tag_friday.id), 0]
         })
-        instance = instance_obj.find(self.partner)
+        instance = instance_obj.find_bypartner(self.partner)
         self.assertEqual(instance, best_instance)

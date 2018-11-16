@@ -18,6 +18,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1633: display chapeau traceback
+* ALCYN-1607: Take care of the delivery carrier when picking is assigned (reserved) for the delivery round instance selection
 
 **Build**
 
@@ -43,9 +44,9 @@ Unreleased
 * ALCYN-1612: Fix customer address export for is also delivery invoice address for customer 'chapeau'
 
 **Bugfixes**
+
 * ALCYN-1566: Align Partner Display on reports + screen
 * ALCYN-1589: Allow to mark a partner of both type invoicing and delivery
-
 * ALCYN-1524: Reload helpdesk.ticket.reason datas from specific_helpdesk
 
 **Build**

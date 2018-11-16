@@ -39,8 +39,16 @@ class StockMove(models.Model):
                 "Move reservation (action_assign) is searching a "
                 "round instance for picking %s",
                 picking.id)
-            delivery_round = self.env['round.instance'].find(
-                picking.partner_id)
+
+            shippings = picking._get_all_dest_pickings().filtered(
+                lambda r: r.picking_type_code == 'outgoing' and
+                r.state not in ('cancel', 'done'))
+            if shippings.mapped('carrier_id.delivery_template_id'):
+                delivery_round = self.env['round.instance'].find_bytemplate(
+                    shippings.mapped('carrier_id.delivery_template_id')[0])
+            else:
+                delivery_round = self.env['round.instance'].find_bypartner(
+                    picking.partner_id)
             if delivery_round:
                 delivery_round._assign_pickings(picking)
         other_moves = self - pick_moves
