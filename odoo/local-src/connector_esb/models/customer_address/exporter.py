@@ -38,12 +38,7 @@ class CustomerAddressExportMapper(Component):
 
     @mapping
     def compute_customerid(self, record):
-        ref_esb = ''
-        if record.parent_id:
-            ref_esb = record.parent_id.ref
-        else:
-            ref_esb = record.ref
-        return {'CustomerId': ref_esb or ''}
+        return {'CustomerId': self.options.customer_id or ''}
 
     @mapping
     def compute_addressid(self, record):
@@ -114,9 +109,12 @@ class CustomerAddressCronExporter(Component):
 
     def _prepare_item(self, items):
         prepared = []
-        for kind, item in items:
+        for customer_id, kind, item in items:
             prepared.append(
-                self.mapper.map_record(item).values(address_kind=kind))
+                self.mapper.map_record(item).values(
+                    customer_id=customer_id,
+                    address_kind=kind)
+            )
         return prepared
 
     def _valid_address_domain(self):
@@ -149,6 +147,14 @@ class CustomerAddressCronExporter(Component):
         # Then extract all the related parents and find its coresponding
         # addresses as they are always sent as a pair.
         commercial_partners = items.mapped('commercial_partner_id')
+        # Then we should search for the impacted customer in the structure.
+        # Thinking about chapeau type customer here, but how to know which ones
+        # need to be sent to the esb or not ?
+        # So not using them yet
+        possible_impacted_customer = self.env['res.partner'].search([
+                ('commercial_partner_id', 'in', commercial_partners.ids),
+                ('customer', '=', True),
+                ])
         items2export = []
         for customer in commercial_partners:
             # For each customer get the invoice and devlivery addresses
@@ -157,10 +163,12 @@ class CustomerAddressCronExporter(Component):
             if not modified_items_ids.intersection(set(addresses.values())):
                 continue
             items2export.append((
+                customer.ref,
                 'invoice',
                 self.env['res.partner'].browse(addresses['invoice'])
             ))
             items2export.append((
+                customer.ref,
                 'delivery',
                 self.env['res.partner'].browse(addresses['delivery'])
             ))

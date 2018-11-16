@@ -117,8 +117,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='invoice'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.main_partner.ref,
+                    address_kind='invoice'
+                ),
+                expected
+            )
 
     def test_mapper_for_shipping_address_without(self):
         """ Generate dict with the mapper and compare with what is expected
@@ -142,8 +146,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='delivery'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.main_partner.ref,
+                    address_kind='delivery'
+                ),
+                expected
+            )
 
     def test_mapper_for_shipping_address_with(self):
         """ Generate dict with the mapper and compare with what is expected
@@ -168,8 +176,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='delivery'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.partner_2.ref,
+                    address_kind='delivery',
+                ),
+                expected
+            )
 
     def test_export(self):
         """ Run export and compare with example file"""
