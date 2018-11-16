@@ -23,6 +23,7 @@
      'data/helpdesk.stage.csv',
      'data/helpdesk.team.csv',
      'data/helpdesk_ticket_reason.xml',
+     'data/mail_template.xml',
      'security/ir.model.access.csv',
      'wizards/create_helpdesk_ticket.xml',
      'wizards/stock_receive_lot.xml',

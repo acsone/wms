@@ -47,6 +47,33 @@ class HelpdeskTicket(models.Model):
         string='Product',
     )
 
+    # fields for email templates
+    qty_ordered = fields.Float(
+        string='Ordered product quantitiy',
+        compute='_compute_purchase_qty',
+        readonly=True,
+    )
+    qty_received = fields.Float(
+        string='Received product quantitiy',
+        compute='_compute_purchase_qty',
+        readonly=True,
+    )
+
+    @api.depends('product_id', 'purchase_order_id.order_line.product_qty',
+                 'purchase_order_id.order_line.qty_received')
+    def _compute_purchase_qty(self):
+        for rec in self:
+            if not rec.product_id or not rec.purchase_order_id:
+                return
+            qty_ordered = 0
+            qty_received = 0
+            for line in rec.purchase_order_id.order_line:
+                if line.product_id == rec.product_id:
+                    qty_ordered += line.product_qty
+                    qty_received += line.qty_received
+            rec.qty_ordered = qty_ordered
+            rec.qty_received = qty_received
+
     @api.model
     def create(self, vals):
         if vals.get('name', '/') == '/':
