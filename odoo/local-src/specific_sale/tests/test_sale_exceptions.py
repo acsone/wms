@@ -66,6 +66,11 @@ class TestSaleOrderException(SavepointCase):
             'categ_id': cls.env.ref(
                 'specific_data.product_categ_medoc').id,
         })
+        cls.prod_cascade_import = cls.env['product.product'].create({
+            'name': 'I am a cascade import product',
+            'categ_id': cls.env.ref(
+                'specific_data.product_categ_importation').id,
+        })
         cls.prod_provision_on_sale = cls.env['product.product'].create({
             'name': 'product provision on sale',
         })
@@ -121,6 +126,8 @@ class TestSaleOrderException(SavepointCase):
     def test_client_alcyonnaire(self):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
+        warns.write({'active': 0})
         # Need the correct category for this one ?
         self.partner.alcyon_category_id = self.env.ref(
            'specific_partner.partner_category_alcyonaire')
@@ -148,6 +155,8 @@ class TestSaleOrderException(SavepointCase):
     def test_client_veterinary_with_depot(self):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
+        warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
            'specific_partner.partner_category_veterinary')
         # Everything is allowed
@@ -174,6 +183,8 @@ class TestSaleOrderException(SavepointCase):
     def test_client_students(self):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
+        warns.write({'active': 0})
         "Test customer students"
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_student')
@@ -200,6 +211,8 @@ class TestSaleOrderException(SavepointCase):
         """ """
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
+        warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_pharmacy')
         # Food and gear and medoc are allowed
@@ -222,6 +235,8 @@ class TestSaleOrderException(SavepointCase):
         """ """
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
+        warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
+        warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
                 'specific_partner.partner_category_callcenter')
         # Food and gear and medoc are allowed
@@ -420,4 +435,22 @@ class TestSaleOrderException(SavepointCase):
         exception.write({'active': 1})
         line = self.so1.order_line[0]
         line.product_id = self.prod_provision_on_sale
+        self.assertTrue(exception.warning_text in line.warning_text)
+
+    def test_exception_warning_cascade_importation(self):
+        """Check sale order line message for cascade importation products."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
+        exception = self.env.ref('specific_sale.warning_cascade_import')
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_cascade_import
+        self.assertTrue(exception.warning_text in line.warning_text)
+
+    def test_exception_warning_medoc_human(self):
+        """Check sale order line message for human medicicine."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
+        exception = self.env.ref('specific_sale.warning_human_medoc')
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_medoc_human
         self.assertTrue(exception.warning_text in line.warning_text)

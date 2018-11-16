@@ -139,6 +139,34 @@ failed = object.warning_psychotropic()
             </field>
         </record>
 
+        <record id="warning_cascade_import" model="exception.rule">
+            <field name="name">Warning cascade importation</field>
+            <field name="description">Warning cascade importation</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">Product of type cascade importation</field>
+            <field name="code">
+failed = object.warning_cascade_importation()
+            </field>
+        </record>
+
+        <record id="warning_human_medoc" model="exception.rule">
+            <field name="name">Warning human medicine</field>
+            <field name="description">Warning human medicine</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">Product of type human medicine</field>
+            <field name="code">
+failed = object.warning_human_medicine()
+            </field>
+        </record>
+
         <record id="provision_on_order" model="exception.rule">
             <field name="name">Warning provision on order</field>
             <field name="description">Provision on order</field>

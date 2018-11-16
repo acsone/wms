@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 09:42+0000\n"
+"POT-Creation-Date: 2018-11-12 11:01+0000\n"
 "PO-Revision-Date: 2018-07-10 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -147,7 +147,9 @@ msgstr "Médicament humain interdit"
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.provision_on_order
 msgid "Item bought on order, neither taken back nor exchanged."
-msgstr "Article acheté sur commande, ni repris, ni échangé quand il s'agit d'article acheté vendu."
+msgstr ""
+"Article acheté sur commande, ni repris, ni échangé quand il s'agit d'article "
+"acheté vendu."
 
 #. module: specific_sale
 #: selection:sale.report,month:0
@@ -412,6 +414,16 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: specific_sale
+#: model:exception.rule,warning_text:specific_sale.warning_cascade_import
+msgid "Product of type cascade importation"
+msgstr "Produit du type cascade import"
+
+#. module: specific_sale
+#: model:exception.rule,warning_text:specific_sale.warning_human_medoc
+msgid "Product of type human medicine"
+msgstr "Product du type médicament humain"
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Product reference"
 msgstr "Référence d'article"
@@ -542,6 +554,19 @@ msgid "Veterinary Product Not Allowed"
 msgstr "Produit vétérinaire interdit"
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_cascade_import
+#: model:exception.rule,name:specific_sale.warning_cascade_import
+msgid "Warning cascade importation"
+msgstr "Avertissement cascade import"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_human_medoc
+#: model:exception.rule,name:specific_sale.warning_human_medoc
+#, fuzzy
+msgid "Warning human medicine"
+msgstr "Avertissement médicament humain"
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.provision_on_order
 msgid "Warning provision on order"
 msgstr "Avertissement article acheté-vendu"
@@ -580,3 +605,4 @@ msgstr "Inclus des produits gratuits"
 #~ msgstr "Sale channel visible"
 
 #~ msgid "Sales Order Lines Unavailable"
+#~ msgstr "Sale Order Lines Unavailable"
