@@ -387,7 +387,7 @@ class TestSaleOrderException(SavepointCase):
         rules.write({'active': 1})
         exception = self.env.ref('specific_sale.warning_psychotropic')
         line = self.so1.order_line[0]
-        line.product_id = self.prod_stup
+        line.product_id = self.prod_psycho_III
         self.assertTrue(exception.warning_text in line.warning_text)
 
     def test_psychotropic_by_phone(self):
@@ -400,14 +400,14 @@ class TestSaleOrderException(SavepointCase):
            'specific_partner.partner_category_pharmacy')
         line = self.so1.order_line[0]
         line.order_id.sale_channel = 'fax'
-        line.product_id = self.prod_stup
+        line.product_id = self.prod_psycho_III
         # Sale order by fax the line should only have the warning displayed
         self.assertEqual(line.exception, warning.description)
         # Sale order by phone should have the exception
         line.order_id.sale_channel = 'phone'
         # Switch product to trigger exception checking
         line.product_id = self.prod_food
-        line.product_id = self.prod_stup
+        line.product_id = self.prod_psycho_III
         self.assertEqual(line.exception, exception.description)
 
     def test_no_backorder_rule(self):
