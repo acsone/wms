@@ -16,6 +16,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1633: display chapeau traceback
+
 **Build**
 
 **Documentation**
