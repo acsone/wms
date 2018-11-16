@@ -85,6 +85,11 @@ msgid "<span>Commande</span>"
 msgstr "<span>Bestelling</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "<span>Consignement # </span>"
+msgstr "<span>Bestelling</span>"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -549,6 +554,11 @@ msgid "Operator"
 msgstr "Operator"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "Order #"
+msgstr "Order #"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
 msgid "Order Reference"
 msgstr "Bestel referentie"
@@ -625,6 +635,11 @@ msgstr "Artikel<br/>nummer"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Quantity"
 msgstr "Hoeveelheid"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "Quotation #"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon

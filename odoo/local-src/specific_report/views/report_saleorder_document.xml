@@ -3,9 +3,19 @@
 
     <template id="report_saleorder_document_inherit" priority="100" inherit_id="sale.report_saleorder_document">
 
-        <xpath expr="//span[@t-field='doc.name']" position="after">
-            <span> n° </span>
-            <span t-field="doc.suite_name"/>
+        <xpath expr="//h2" position="replace">
+            <h2>
+                <t t-if="doc.is_consignement">
+                    <span>Consignement # </span>
+                </t>
+                <t t-else="">
+                    <span t-if="doc.state not in ['draft','sent']">Order # </span>
+                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>
+                </t>
+                <span t-field="doc.name"/>
+                <span> n° </span>
+                <span t-field="doc.suite_name"/>
+            </h2>
         </xpath>
 
         <xpath expr="//div[@t-if='doc.user_id.name']" position="replace"/>

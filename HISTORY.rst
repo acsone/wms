@@ -12,6 +12,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1596: Consider consignement flag on sale order report
+
 **Bugfixes**
 
 **Build**
