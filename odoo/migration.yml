@@ -132,6 +132,8 @@ migration:
           - account_cutoff_accrual_return
           - account_cutoff_base
           - account_invoice_accrual_merge
+          # OCA/account-financial-reporting
+          - account_financial_report_qweb
           # OCA/account-financial-tools
           - account_chart_update
           - account_credit_control
@@ -477,6 +479,9 @@ migration:
     - version: 10.27.3
       addons:
         upgrade:
+          ### OCA (external-src)
+          # OCA/account-financial-reporting
+          - account_financial_report_qweb
           ### local
           - connector_esb
           - specific_report
