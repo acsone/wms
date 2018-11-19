@@ -89,6 +89,7 @@ ENV ADDONS_PATH="/odoo/local-src, \
   /odoo/external-src/odoo-cloud-platform, \
   /odoo/external-src/account-analytic, \
   /odoo/external-src/account-closing, \
+  /odoo/external-src/account-financial-reporting, \
   /odoo/external-src/account-financial-tools, \
   /odoo/external-src/account-invoicing, \
   /odoo/external-src/bank-payment, \
@@ -98,6 +99,7 @@ ENV ADDONS_PATH="/odoo/local-src, \
   /odoo/external-src/purchase-workflow, \
   /odoo/external-src/queue, \
   /odoo/external-src/report-print-send, \
+  /odoo/external-src/reporting-engine, \
   /odoo/external-src/sale-workflow, \
   /odoo/external-src/server-tools, \
   /odoo/external-src/stock-logistics-warehouse, \

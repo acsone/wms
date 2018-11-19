@@ -745,6 +745,6 @@ def is_nine_filled_ish(number):
     if number <= 999999.0:
         return False
     number = str(number)
-    if re.match('^9{5}9*0+(.[0,9]*)?$', number):
+    if re.match('^9{5}9*0?(.[0,9]*)?$', number):
         return True
     return False

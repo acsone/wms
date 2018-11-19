@@ -477,7 +477,7 @@ def create_putaway(ctx):
     # Fixed Locations Per Routes
     create_or_update(
         ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_input_ali',
+        '__setup__.stock_putaway_new_ali',
         {
             'putaway_id': ref('__setup__.stock_putaway_new').id,
             'route_id': ref('__setup__.stock_location_route_pick_ali').id,
@@ -487,7 +487,7 @@ def create_putaway(ctx):
     )
     create_or_update(
         ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_input_med',
+        '__setup__.stock_putaway_new_med',
         {
             'putaway_id': ref('__setup__.stock_putaway_new').id,
             'route_id': ref('__setup__.stock_location_route_pick_medoc').id,
@@ -497,7 +497,7 @@ def create_putaway(ctx):
     )
     create_or_update(
         ctx, 'stock.fixed.putaway.route.strat',
-        '__setup__.stock_putaway_input_mat',
+        '__setup__.stock_putaway_new_mat',
         {
             'putaway_id': ref('__setup__.stock_putaway_new').id,
             'route_id': ref('__setup__.stock_location_route_pick_materiel').id,
