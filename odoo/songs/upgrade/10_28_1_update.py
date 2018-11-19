@@ -23,6 +23,20 @@ def add_xmlid_users(ctx):
         )
 
 
+def remove_customer_supplier_balance(ctx):
+    """ Remove customer and supplier balance """
+    balance_customer = ctx.env.ref(
+        '__setup__.account_move_balance_customer', raise_if_not_found=False)
+    if balance_customer:
+        balance_customer.unlink()
+
+    balance_supplier = ctx.env.ref(
+        '__setup__.account_move_balance_supplier', raise_if_not_found=False)
+    if balance_supplier:
+        balance_supplier.unlink()
+
+
 def post(ctx):
     """ POST 10.28.1 """
     add_xmlid_users(ctx)
+    remove_customer_supplier_balance(ctx)

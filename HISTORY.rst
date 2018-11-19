@@ -12,6 +12,7 @@ Unreleased
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
 * ALCYN-1601: Update the list of users
 * ALCYN-1645: Add `done_date` to stock.picking view
+* ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
 
 **Bugfixes**
 
