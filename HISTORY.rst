@@ -9,6 +9,7 @@ Unreleased
 **Data Migration**
 
 * ALCYN-1619: Delete purchase orders when all lines were deleted.
+* ALCYN-1622: Adapt setup and migration for "Aliments" chaotic storage
 
 **Features and Improvements**
 
@@ -23,6 +24,7 @@ Unreleased
 * ALCYN-1600: Fix bug with customer addresses. But as well change timestamp failesafe.
 * ALCYN-1460: Fix sale exception customer backorder, if the quantity on the line is zero it should not be raised
 * ALCYN-264: Fix psychotrope sale exception on wrong category (supefiant)
+* ALCYN-1632: Products are not sent to the parking according to the zone forced on the product
 
 **Build**
 
