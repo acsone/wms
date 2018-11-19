@@ -25,7 +25,7 @@ class CustomerExportMapper(Component):
     def compute_firstname(self, record):
         try:
             name = record.name_get()[0][1]
-        except:
+        except TypeError:
             name = record.name
         return {'Firstname': name or ''}
 
