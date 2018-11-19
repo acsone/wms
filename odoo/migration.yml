@@ -484,6 +484,8 @@ migration:
           - account_financial_report_qweb
           ### local
           - connector_esb
+          - delivery_rounds
+          - delivery_rounds_alcyon
           - specific_report
           - specific_sale
       operations:

@@ -11,8 +11,40 @@
 @background_color_8: #00C2E0;
 @background_color_9: #4CD98E;
 @background_color_10: #FF80CE;
+@picking_color_started: #27902a;
+@picking_color_stopped: #596166;
+
 
 div.o_delivery_round_kanban.o_kanban_view {
+    .o_kanban_card_content {
+        >.row {
+            >div {
+                padding-top: 2px !important;
+                padding-bottom: 2px !important;
+            }
+        }
+    }
+    .btn-toggle {
+        padding: 0;
+        font-size: 25px;
+    }
+    .btn-picking {
+        width: 100%;
+        padding: 0;
+        background: 0;
+    }
+
+    button.btn-started {
+        color: #fff;
+        background-color: @picking_color_started;
+        text-transform: uppercase;
+    }
+    button.btn-stopped {
+        color: #fff;
+        background-color: @picking_color_stopped;
+        text-transform: uppercase;
+    }
+
     .o_kanban_card_header {
         color: @color_1;
     }

@@ -54,7 +54,6 @@ class TestStockPicking(common.TransactionCase):
             'time_picking_planned': 12.50,
             'itinerary_ids': [(6, 0, [round_itinerary.id])],
         })
-        self.round.button_confirm()
 
         self.parent_location = location_obj.create({
             'name': 'G',

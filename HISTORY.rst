@@ -21,6 +21,7 @@ Unreleased
 * ALCYN-1455: Add the price on the delivery slip report and add a field on partner to hide these prices
 * ALCYN-1636: Duplicate ir.cron connector ESB exporting documents zip
 * ALCYN-1637: Install OCA financial reports
+* ALCYN-1617: Delivery round. Separate partner list locking and picking launching
 
 **Bugfixes**
 

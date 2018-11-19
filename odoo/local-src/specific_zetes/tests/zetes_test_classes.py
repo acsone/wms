@@ -203,7 +203,7 @@ class ZetesTest(SavepointCase):
 
         if not hasattr(cls, 'disable_picking_validation'):
             cls.picking.action_assign()
-        cls.round.button_confirm()
+        cls.round.button_close()
 
         cls.context = {}
 
