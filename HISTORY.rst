@@ -22,6 +22,7 @@ Unreleased
 * ALCYN-1636: Duplicate ir.cron connector ESB exporting documents zip
 * ALCYN-1637: Install OCA financial reports
 * ALCYN-1617: Delivery round. Separate partner list locking and picking launching
+* ALCYN-337: Set some parameters for alcyon delivery carrier
 
 **Bugfixes**
 

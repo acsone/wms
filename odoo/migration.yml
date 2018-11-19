@@ -490,6 +490,7 @@ migration:
           - specific_sale
       operations:
         post:
+          - anthem songs.upgrade.10_27_3_update::post
           - anthem songs.install.logistics::create_putaway
           - anthem songs.install.data_full::import_wh_family_locations
           - anthem songs.install.data_full::import_other_locations
