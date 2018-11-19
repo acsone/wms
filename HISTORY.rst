@@ -18,6 +18,7 @@ Unreleased
 * ALCYN-1596: Consider consignement flag on sale order report
 * ALCYN-236: Add sale warning for human medicine and cascade import product
 * ALCYN-253 helpdesk: mail templates
+* ALCYN-1455: Add the price on the delivery slip report and add a field on partner to hide these prices
 * ALCYN-1636: Duplicate ir.cron connector ESB exporting documents zip
 * ALCYN-1637: Install OCA financial reports
 

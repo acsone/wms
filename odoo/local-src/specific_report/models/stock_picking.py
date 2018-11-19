@@ -21,11 +21,19 @@
 from collections import defaultdict
 
 from odoo import models, fields, api, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    price_total = fields.Monetary(
+        string='Total', compute='_compute_price_total', readonly=True)
+    currency_id = fields.Many2one(
+        'res.currency',
+        string='Currency',
+        compute='_compute_price_total',
+    )
 
     number_of_drug = fields.Float(
         'Number of medical',
@@ -65,6 +73,22 @@ class StockPicking(models.Model):
         'Number of products',
         compute='_compute_number_of_products')
 
+    def _compute_price_total(self):
+        for picking in self:
+            lines_done = \
+                picking.move_lines.filtered(lambda line: line.state == 'done')
+
+            currency = lines_done.mapped('order_id.currency_id')
+            if not currency:
+                raise UserError(_('There is currency defined on orders'))
+            if len(currency) != 1:
+                raise UserError(
+                    _('There are more than one currencies on orders'))
+
+            picking.price_total = \
+                sum(lines_done.mapped('order_line_id.price_subtotal'))
+            picking.currency_id = currency.id
+
     @api.depends('move_lines',
                  'move_lines.product_id',
                  'move_lines.product_uom_qty')
@@ -86,8 +110,8 @@ class StockPicking(models.Model):
 
             for operation in picking.pack_operation_pack_ids:
                 if not operation.package_id.original_picking_zone_id:
-                    raise Warning(_('There is no original picking zone on '
-                                    'this operation.'))
+                    raise UserError(_('There is no original picking zone on '
+                                      'this operation.'))
 
                 picking_zone = operation.package_id.original_picking_zone_id
 
@@ -105,8 +129,8 @@ class StockPicking(models.Model):
                 elif picking_zone == zone_human:
                     number_of_human_drug += qty
                 else:
-                    raise Warning(_('The picking zone %s is not correct')
-                                  % picking_zone.name)
+                    raise UserError(_('The picking zone %s is not correct')
+                                    % picking_zone.name)
 
             picking.number_of_drug = number_of_drug
             picking.number_of_cold = number_of_cold
@@ -125,7 +149,7 @@ class StockPicking(models.Model):
             # Check quantities for products without pack
             for operation in picking.pack_operation_product_ids:
                 if not operation.product_id.categ_id:
-                    raise Warning(_('There is no category on this product'))
+                    raise UserError(_('There is no category on this product'))
 
                 picking_zone = operation.product_id.picking_zone_id
 
@@ -143,8 +167,8 @@ class StockPicking(models.Model):
                 elif picking_zone == zone_human:
                     item_number_of_human_drug += qty
                 else:
-                    raise Warning(_('The picking zone %s is not correct')
-                                  % picking_zone.name)
+                    raise UserError(_('The picking zone %s is not correct')
+                                    % picking_zone.name)
 
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
@@ -213,13 +237,16 @@ class StockPicking(models.Model):
         return result
 
     def get_entry_register_lines(self):
-        categ_medoc = self.env.ref('specific_data.product_categ_medoc')
+        categ_vet = self.env.ref('specific_data.product_categ_vet_belges')
+        categ_import = self.env.ref('specific_data.product_categ_importation')
 
         all_products = self.mapped('move_lines.product_id')
         medic_products = self.env['product.product'].search([
-            ('categ_id', 'child_of', categ_medoc.id),
+            '|',
+            ('categ_id', 'child_of', categ_vet.id),
+            ('categ_id', 'child_of', categ_import.id),
             ('id', 'in', all_products.ids)
-        ])
+        ],  order='categ_id')
 
         lines = self.mapped('move_lines').filtered(
             lambda line: line.state == 'done'
