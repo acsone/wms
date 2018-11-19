@@ -6,6 +6,18 @@ Release History
 Unreleased
 ++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.27.3 (2018-11-19)
+++++++++++++++++++++
+
 **Data Migration**
 
 * ALCYN-1604: Cleanup old bins, old "new" routes info and supplier info
@@ -34,10 +46,6 @@ Unreleased
 * ALCYN-264: Fix psychotrope sale exception on wrong category (supefiant)
 * ALCYN-1632: Products are not sent to the parking according to the zone forced on the product
 * ALCYN-1600: Fix split export of stock, take in basic failsafe locking into account
-
-**Build**
-
-**Documentation**
 
 
 10.27.2 (2018-11-12)
