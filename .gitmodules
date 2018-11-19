@@ -10,6 +10,10 @@
 [submodule "odoo/external-src/account-closing"]
 	path = odoo/external-src/account-closing
 	url = git@github.com:camptocamp/account-closing.git
+[submodule "odoo/external-src/account-financial-reporting"]
+	path = odoo/external-src/account-financial-reporting
+	url = git@github.com:oca/account-financial-reporting.git
+	branch = 10.0
 [submodule "odoo/external-src/account-financial-tools"]
 	path = odoo/external-src/account-financial-tools
 	url = git@github.com:oca/account-financial-tools.git
@@ -34,6 +38,10 @@
 [submodule "odoo/external-src/queue"]
 	path = odoo/external-src/queue
 	url = git@github.com:camptocamp/queue.git
+[submodule "odoo/external-src/reporting-engine"]
+	path = odoo/external-src/reporting-engine
+	url = git@github.com:oca/reporting-engine.git
+	branch = 10.0
 [submodule "odoo/external-src/report-print-send"]
 	path = odoo/external-src/report-print-send
 	url = git@github.com:oca/report-print-send.git
