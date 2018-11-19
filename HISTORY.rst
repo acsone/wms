@@ -23,6 +23,7 @@ Unreleased
 * ALCYN-1637: Install OCA financial reports
 * ALCYN-1617: Delivery round. Separate partner list locking and picking launching
 * ALCYN-337: Set some parameters for alcyon delivery carrier
+* ALCYN-1612: Change customer and customer address export for customer chapeau (ESB)
 
 **Bugfixes**
 

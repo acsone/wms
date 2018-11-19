@@ -17,10 +17,17 @@ class CustomerExportMapper(Component):
         return bool(work.timestamp and work.timestamp.kind == 'customer')
 
     direct = [
-        ('email', 'Email'),
-        ('name', 'Firstname'),
+        (falsy2emptystring('email'), 'Email'),
         (falsy2emptystring('ref'), 'ErpId'),
     ]
+
+    @mapping
+    def compute_firstname(self, record):
+        try:
+            name = record.name_get()[0][1]
+        except TypeError:
+            name = record.name
+        return {'Firstname': name or ''}
 
     @mapping
     def compute_statistic_code(self, record):
@@ -138,4 +145,7 @@ class CustomerCronExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'customer')
 
     def get_items_domain(self):
-        return [('customer', '=', True)]
+        return [
+            ('customer', '=', True),
+            ('email', '<>', False)
+        ]

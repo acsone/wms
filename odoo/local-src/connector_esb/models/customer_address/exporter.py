@@ -21,8 +21,15 @@ class CustomerAddressExportMapper(Component):
 
     direct = [
         (falsy2emptystring('city'), 'City'),
-        (falsy2emptystring('name'), 'Firstname'),
     ]
+
+    @mapping
+    def compute_name(self, record):
+        try:
+            name = record.name_get()[0][1]
+        except TypeError:
+            name = record.name
+        return {'Firstname': name or ''}
 
     @mapping
     def compute_optional_fields(self, record):
@@ -38,12 +45,7 @@ class CustomerAddressExportMapper(Component):
 
     @mapping
     def compute_customerid(self, record):
-        ref_esb = ''
-        if record.parent_id:
-            ref_esb = record.parent_id.ref
-        else:
-            ref_esb = record.ref
-        return {'CustomerId': ref_esb or ''}
+        return {'CustomerId': self.options.customer_id or ''}
 
     @mapping
     def compute_addressid(self, record):
@@ -114,9 +116,12 @@ class CustomerAddressCronExporter(Component):
 
     def _prepare_item(self, items):
         prepared = []
-        for kind, item in items:
+        for customer_id, kind, item in items:
             prepared.append(
-                self.mapper.map_record(item).values(address_kind=kind))
+                self.mapper.map_record(item).values(
+                    customer_id=customer_id,
+                    address_kind=kind)
+            )
         return prepared
 
     def _valid_address_domain(self):
@@ -133,10 +138,8 @@ class CustomerAddressCronExporter(Component):
         """Get customer addresses and add type of address to export
 
         Export for each customer the invoice and delivery address
-        And if the specific address does not exist the default address
-        of the customer must be used.
-        For the mapper to know which address is exported, the type is included
-        with each item.
+        For the mapper to know which address for which customer is exported,
+        the type and customer ref is included with each item.
         To find the correct address the default Odoo method is used so for one
         customer the same delivery/invoice addresses are seen on Odoo and
         Magento.
@@ -145,31 +148,41 @@ class CustomerAddressCronExporter(Component):
         items = super(CustomerAddressCronExporter,
                       self).get_items(export_since)
         modified_items_ids = set(items.mapped('id'))
-        # get_items will return all modified partners including the addresses.
-        # Then extract all the related parents and find its coresponding
-        # addresses as they are always sent as a pair.
+        # get_items will return all modified customer including the addresses.
+        # Then for all commercial partner with potentially modified addresses.
         commercial_partners = items.mapped('commercial_partner_id')
+        # Search for the impacted customers in their structure.
+        possible_impacted_customer = self.env['res.partner'].search([
+                ('commercial_partner_id', 'in', commercial_partners.ids),
+                ('customer', '=', True),
+                ('email', '<>', False),
+                ])
         items2export = []
-        for customer in commercial_partners:
+        for customer in possible_impacted_customer:
             # For each customer get the invoice and devlivery addresses
             addresses = customer.address_get(('invoice', 'delivery'))
-            # Export them if at least one as been modified
-            if not modified_items_ids.intersection(set(addresses.values())):
+            # If one of them has changed
+            impacting_records = set(addresses.values())
+            if not modified_items_ids.intersection(impacting_records):
                 continue
+            # Export them. Together as they are always sent in pair.
             items2export.append((
+                customer.ref,
                 'invoice',
                 self.env['res.partner'].browse(addresses['invoice'])
             ))
             items2export.append((
+                customer.ref,
                 'delivery',
                 self.env['res.partner'].browse(addresses['delivery'])
             ))
         return items2export
 
     def get_items_domain(self):
+        """Find all records that can be used as customer addresses."""
         domain = ['|',
                   ('customer', '=', 1),
-                  ('parent_id.customer', '=', 1)
+                  ('type', 'in', ['invoice', 'delivery']),
                   ]
         return AND([domain, self._valid_address_domain()])
 

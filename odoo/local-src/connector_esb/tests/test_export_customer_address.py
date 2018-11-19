@@ -33,6 +33,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'zip': '999888',
             'city': 'Armagedon',
             'country_id': 44,
+            'email': 'test@test.be',
         })
         self.all_records |= self.main_partner
         self.main_partner_invoice = self.model.create({
@@ -57,6 +58,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
+            'eamil': 'test2@test.be',
         })
         self.partner_2_delivery = self.model.create({
             'ref': '1233',
@@ -117,8 +119,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='invoice'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.main_partner.ref,
+                    address_kind='invoice'
+                ),
+                expected
+            )
 
     def test_mapper_for_shipping_address_without(self):
         """ Generate dict with the mapper and compare with what is expected
@@ -142,8 +148,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='delivery'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.main_partner.ref,
+                    address_kind='delivery'
+                ),
+                expected
+            )
 
     def test_mapper_for_shipping_address_with(self):
         """ Generate dict with the mapper and compare with what is expected
@@ -168,8 +178,12 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
-                mapper.map_record(rec).values(address_kind='delivery'),
-                expected)
+                mapper.map_record(rec).values(
+                    customer_id=self.partner_2.ref,
+                    address_kind='delivery',
+                ),
+                expected
+            )
 
     def test_export(self):
         """ Run export and compare with example file"""
@@ -188,14 +202,23 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
 
     def test_address_incomplete(self):
         """Check that customer with incomplete address are not exported"""
+        # Get all existing possible addresses
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            possible_addresses = exporter.get_items(None)
+        # Create some invalid ones
         # Partner with no name
         self.model.create({
             'name': '',
+            'commercial_partner_id': self.main_partner.id,
             'street': 'Main Street, 2',
             'ref': '991',
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
+            'customer': True,
+            'type': 'invoice',
         })
         # Partner with no street
         self.model.create({
@@ -205,6 +228,8 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
+            'type': 'delivery',
+            'customer': True,
         })
         # Partner with no zip
         self.model.create({
@@ -214,6 +239,8 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'zip': None,
             'city': 'Paradise',
             'country_id': 44,
+            'commercial_partner_id': self.main_partner.id,
+            'type': 'delivery',
         })
         # Partner with no city
         self.model.create({
@@ -246,5 +273,4 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
-        # Two partners with two addresses is four
-        self.assertEqual(len(items), 4)
+        self.assertEqual(len(items), len(possible_addresses))
