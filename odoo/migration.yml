@@ -489,8 +489,6 @@ migration:
           - specific_report
           - specific_sale
       operations:
-        pre:
-          - anthem songs.upgrade.10_27_3_update::pre
         post:
           - anthem songs.install.logistics::create_putaway
           - anthem songs.install.data_full::import_wh_family_locations
@@ -498,6 +496,8 @@ migration:
       modes:
         full:
           operations:
+            pre:
+              - psql -f odoo/songs/upgrade/10_27_3_update_pre.sql
             post:
               # cleanup bins, new route info and supplier info
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_27_3_update.sql'"
