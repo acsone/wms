@@ -477,6 +477,9 @@ migration:
               - anthem songs.install.data_full::import_supplier_journal_items
               - anthem songs.install.data_full::import_partner_link
     - version: 10.27.3
+      operations:
+        pre:
+          - anthem songs.upgrade.10_27_3_update::pre
       addons:
         upgrade:
           ### OCA (external-src)

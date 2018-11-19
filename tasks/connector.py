@@ -56,8 +56,12 @@ all_cron = [
         'nextcall': '03:30:00'
     },
     {
-        'xmlid': 'ir_cron_esb_export_document_zip',
+        'xmlid': 'ir_cron_esb_export_document_zip_morning',
         'nextcall': '04:00:00'
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_document_zip_afternoon',
+        'nextcall': '13:00:00'
     },
 ]
 all_timestamps = [
