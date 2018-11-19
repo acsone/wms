@@ -7,6 +7,8 @@ import os
 import random
 import requests
 
+from datetime import datetime, timedelta
+
 from odoo.tests.common import SavepointCase
 
 
@@ -49,6 +51,13 @@ class ExportStockUpdateTestCase(SavepointCase):
         self.env.cr.execute("""
             UPDATE stock_quant SET write_date = %s WHERE id = %s
         """, (write_date, quant_id))
+
+    def update_timestamp_for_basic_lock(self, timestamp, exporter):
+        """ """
+        return (
+            datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S") +
+            timedelta(seconds=exporter.BASIC_LOCK_TIME + 1)
+        ).strftime("%Y-%m-%d %H:%M:%S")
 
     def post_ret_status(url, data, headers, auth):
         resp = requests.Response()
@@ -95,9 +104,8 @@ class ExportStockUpdateTestCase(SavepointCase):
             exporter = work.component(usage='record.exporter.cron')
             # First export
             exported_until = exporter.run(max_records=3)
-            assert exported_until == '2017-11-05 12:00:00'
-            # This is annoying and take into account the poor man lock
-            exported_until = '2017-11-05 12:01:01'
+            assert exported_until == self.update_timestamp_for_basic_lock(
+                    '2017-11-05 12:00:00', exporter)
             # Second export
             exported_until = exporter.run(
                 export_since=exported_until,
@@ -142,7 +150,6 @@ class ExportStockUpdateTestCase(SavepointCase):
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(max_records=3)
         assert exported_until is not None
-        exported_until = '2017-11-05 12:01:01'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')

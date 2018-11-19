@@ -33,6 +33,7 @@ Unreleased
 * ALCYN-1460: Fix sale exception customer backorder, if the quantity on the line is zero it should not be raised
 * ALCYN-264: Fix psychotrope sale exception on wrong category (supefiant)
 * ALCYN-1632: Products are not sent to the parking according to the zone forced on the product
+* ALCYN-1600: Fix split export of stock, take in basic failsafe locking into account
 
 **Build**
 
