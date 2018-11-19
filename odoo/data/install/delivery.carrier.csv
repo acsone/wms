@@ -1,5 +1,5 @@
 id,name,esb_ref,use_specific_cost_calculation,fixed_price,free_if_more_than
-__setup__.deliver_carrier_alcyon,Alcyon,01,True,7.50,125
+__setup__.deliver_carrier_alcyon,Alcyon,01,True,8.50,125
 __setup__.deliver_carrier_transporter,Transporteur (obsolete),02,False,0,
 __setup__.deliver_carrier_post_pack,Colis Postal BPost,03,False,0,
 __setup__.deliver_carrier_post_pack_tnt,Colis Postal TNT,03,False,0,
