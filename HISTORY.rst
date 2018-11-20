@@ -15,12 +15,11 @@ Unreleased
 **Documentation**
 
 
-10.27.3 (2018-11-19)
+10.27.4 (2018-11-20)
 ++++++++++++++++++++
 
 **Data Migration**
 
-* ALCYN-1604: Cleanup old bins, old "new" routes info and supplier info
 * ALCYN-1619: Delete purchase orders when all lines were deleted.
 * ALCYN-1622: Adapt setup and migration for "Aliments" chaotic storage
 * ALCYN-1624: Fix regexp used to detect nine-ish value implemented for ALCYN-417 for indicated_price
@@ -46,6 +45,12 @@ Unreleased
 * ALCYN-264: Fix psychotrope sale exception on wrong category (supefiant)
 * ALCYN-1632: Products are not sent to the parking according to the zone forced on the product
 * ALCYN-1600: Fix split export of stock, take in basic failsafe locking into account
+
+
+10.27.3 (2018-11-19)
+++++++++++++++++++++
+
+* Moved to 10.27.3
 
 
 10.27.2 (2018-11-12)

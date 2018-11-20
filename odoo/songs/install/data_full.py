@@ -510,9 +510,6 @@ def import_stock_bins(ctx):
     """ Importing Stock Bins"""
     for content in get_files(req, 'data/install/product_stock_bin.csv'):
         load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
-    for content in get_files(req,
-                             'data/install/product_stock_bin_parking.csv'):
-        load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
 
 
 @anthem.log
@@ -549,13 +546,6 @@ def post_import_stock_bins(ctx):
     for family_letter, route in family_map:
         family = ctx.env.ref('__import__.location_family_%s' % family_letter)
         domain = [('bin_location_id', 'child_of', family.id)]
-        if family_letter == 'A':
-            # Some "Aliments" do not have a locator anymore and are dynamic
-            # Match based on the parking rule
-            domain = [
-                '|',
-                ('location_id', '=', '__setup__.stock_location_parking_ali'),
-                ] + domain
         product_bins = StockBin.search(domain)
         if not product_bins:
             continue

@@ -15,7 +15,7 @@ def drop_ir_cron_connector_esb_export_documents(ctx):
 
 @anthem.log
 def pre(ctx):
-    """ PRE 10.27.3 """
+    """ PRE 10.27.4 """
     drop_ir_cron_connector_esb_export_documents(ctx)
 
 
@@ -42,5 +42,5 @@ def configure_alcyon_delivery_method(ctx):
 
 @anthem.log
 def post(ctx):
-    """ POST 10.27.3 """
+    """ POST 10.27.4 """
     configure_alcyon_delivery_method(ctx)
