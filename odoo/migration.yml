@@ -534,8 +534,8 @@ migration:
               # import location_family.csv
               - anthem songs.install.data_full::import_wh_family_locations
               # import location.csv
-              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::import_other_locations
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/location.csv
               - anthem songs.install.data_full::location_compute_parents
               # import supplierinfo.csv
               - importer.sh songs.install.data_full::import_product_supplierinfo /odoo/data/install/supplierinfo.csv product_tmpl_id/id
