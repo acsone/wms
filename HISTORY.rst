@@ -15,7 +15,7 @@ Unreleased
 **Documentation**
 
 
-10.27.3 (2018-11-19)
+10.27.4 (2018-11-20)
 ++++++++++++++++++++
 
 **Data Migration**
@@ -46,9 +46,11 @@ Unreleased
 * ALCYN-1632: Products are not sent to the parking according to the zone forced on the product
 * ALCYN-1600: Fix split export of stock, take in basic failsafe locking into account
 
-**Build**
 
-**Documentation**
+10.27.3 (2018-11-19)
+++++++++++++++++++++
+
+* Moved to 10.27.3
 
 
 10.27.2 (2018-11-12)
