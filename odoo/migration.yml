@@ -496,3 +496,8 @@ migration:
           operations:
             pre:
               - psql -f odoo/songs/upgrade/10_27_4_update_pre.sql
+    - version: 10.28.0
+      operations:
+        post:
+          - anthem songs.install.accounting::setup_sequences
+          - anthem songs.install.accounting::import_account_journal

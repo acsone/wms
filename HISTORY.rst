@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1575: Update the default credit/debit account on journals
+
 **Bugfixes**
 
 **Build**
