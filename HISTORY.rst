@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1642: Indicate if the order is a consignment on the delivery slip
+
 **Bugfixes**
 
 **Build**
