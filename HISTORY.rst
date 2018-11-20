@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1643: Fix main_exception_id not found in parent view
+
 **Build**
 
 **Documentation**
