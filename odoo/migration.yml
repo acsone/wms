@@ -513,7 +513,8 @@ migration:
               # import supplier_contact.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
               # import customer.csv
-              - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer.csv
+              # parallel import of customer is broken, use diff files to update the partners
+              - anthem songs.upgrade.10_28_0_update::import_customers
               # import customer_address.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/customer_address.csv
               # master_customer.csv
