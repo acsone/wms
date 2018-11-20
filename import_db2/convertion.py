@@ -145,11 +145,11 @@ class ProductMapper(EntityMapper):
                 taxes.append(purchase_antibio_tax)
                 taxes.append(sale_antibio_tax)
             else:
-                print(
-                    'WARNING product %s antibiotic tax for %s does not exists'
-                    % (db2_entity['gesdem'], db2_entity.get('cplz07')))
+                print('WARNING product %s antibiotic tax for %s does not exists'
+                      % (db2_entity['gesdem'], db2_entity.get('cplz07')))
 
         odoo_entity['taxes_id/id'] = ','.join(taxes)
+
 
     def convert_name(self, odoo_entity, db2_entity):
         """ Dans la base DB2, si le nom commence par |||, || ou |,
@@ -165,6 +165,7 @@ class ProductMapper(EntityMapper):
 
         odoo_entity['name'] = value
 
+
     def convert_orderpoint_min(self, odoo_entity, db2_entity):
         """
         Set the oderpoint min only if product is active
@@ -177,6 +178,7 @@ class ProductMapper(EntityMapper):
         op_min = db2_entity['stomin'] if is_active else 0
         odoo_entity['orderpoint_min'] = float(op_min)
 
+
     def convert_orderpoint_max(self, odoo_entity, db2_entity):
         """
         Set the oderpoint max only if the product is active
@@ -188,6 +190,7 @@ class ProductMapper(EntityMapper):
         is_active = not (value and value.startswith('|'))
         op_max = db2_entity['stomax'] if is_active else 0
         odoo_entity['orderpoint_max'] = float(op_max)
+
 
     def convert_orderpoint_qty_multiple(self, odoo_entity, db2_entity):
         """
@@ -660,7 +663,6 @@ class CustomerMapper(EntityMapper):
         ]
         odoo_entity['comment'] = '\n'.join([l.strip() for l in lines if l])
 
-
 class MasterCustomerMapper(CustomerMapper):
 
     XMLID_FIELD = 'id'
@@ -981,17 +983,10 @@ class LocationMapper(EntityMapper):
                 continue
 
             family = value[0]
+            family_xmlid = self.get_xml_id(
+                self.name, 'family_' + family
+            )
             avenue = value[1]
-            avenue_list = [
-                'A', 'B', 'C', 'D', 'E', 'G', 'H', 'I', 'K', 'L', 'Z']
-            if family == 'A' and avenue in avenue_list:
-                parent_xmlid = self.get_xml_id(
-                    self.name, 'row_' + family + avenue
-                )
-            else:
-                parent_xmlid = self.get_xml_id(
-                    self.name, 'family_' + family
-                )
 
             # If the third and fourth characters is a number, it means
             # that it is a standard location (eg: GC28C3).
@@ -1023,7 +1018,7 @@ class LocationMapper(EntityMapper):
             odoo_entity['name'] = family + avenue + rack + lvl + bin
             odoo_entity['bin_checksum_1'] = control_code
             odoo_entity['bin_checksum_2'] = control_code
-            odoo_entity['location_id/id'] = parent_xmlid
+            odoo_entity['location_id/id'] = family_xmlid
             odoo_entity['id'] = bin_xmlid
             odoo_entity['kind'] = 'bin'
             odoo_entity['zone'] = family
@@ -1295,52 +1290,10 @@ class ProductStockBinMapper(EntityMapper):
     }
 
     def get_sql_query(self):
-        """ Products in Zone 'A' rows 'A-E' do not have a dedicated locator
-        anymore. A parking rule is later created (see below)
-        """
         query = """
         SELECT storef, stolop FROM sbdata.PSTOCK
         WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
-        AND (
-            SUBSTRING(stolop, 1, 1) IN ('E', 'G', 'P', 'Q')
-            OR (SUBSTRING(stolop, 1, 1) = 'A'
-                AND SUBSTRING(stolop, 2, 2) NOT IN ('A', 'B', 'C', 'D', 'E')
-                )
-            )
-        """
-        if not self.importer.full:
-            query += """
-                    AND storef IN (SELECT dccart
-                                FROM sbdata.PDETCDCL
-                                WHERE dccsui >= %s AND dccsui <= %s)
-                    """ % (SO_MIN, SO_MAX)
-        return query, []
-
-
-class ProductStockBinParkingMapper(EntityMapper):
-    DB2_NAME = 'PSTOCK'
-
-    XMLID_FIELD = "id"
-
-    FIELDS_MAPPING = {
-        'id': concat('storef', 'location_name', delimiter='_'),
-        'product_id/id': lambda rec:
-            ref('product', 'storef', '__import__', check=False)(rec) +
-            '_product_template',
-        'location_id/id': const('__setup__.stock_location_parking_ali'),
-        'bin_location_id/id': ref('stock_location', concat(
-            const('PA_A'), call(lambda rec: rec['stolop'][1]), delimiter=''),
-            '__setup__', check=False),
-    }
-
-    def get_sql_query(self):
-        """ Products in Zone 'A' rows 'A-E' do not have a dedicated locator
-        anymore. Create the parking rule to push in the right row.
-        """
-        query = """
-        SELECT storef, stolop FROM sbdata.PSTOCK
-        WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
-        AND SUBSTRING(stolop, 1, 1) = 'A'
+        AND SUBSTRING(stolop, 1, 1) IN ('A', 'E', 'G', 'P', 'Q')
         """
         if not self.importer.full:
             query += """
@@ -1525,7 +1478,7 @@ MAPPER_CLASSES = [LocationMapper, ProductMapper,
                   SaleOrderLineMapper,
                   StockProductionLotMapper,
                   StockInventoryLineMapper,
-                  ProductStockBinMapper, ProductStockBinParkingMapper,
+                  ProductStockBinMapper,
                   StockInventoryLineWithoutLot,
                   StockInventoryLineWithSerial,
                   ProductNewRouteInfo,
@@ -1541,7 +1494,7 @@ MAPPER_CLASSES_FULL = [LocationMapper, ProductMapper,
                        SupplierContactMapper,
                        StockProductionLotMapper,
                        StockInventoryLineMapper,
-                       ProductStockBinMapper, ProductStockBinParkingMapper,
+                       ProductStockBinMapper,
                        StockInventoryLineWithoutLot,
                        StockInventoryLineWithSerial,
                        ProductNewRouteInfo,
