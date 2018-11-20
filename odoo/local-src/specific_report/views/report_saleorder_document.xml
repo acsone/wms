@@ -5,8 +5,8 @@
 
         <xpath expr="//h2" position="replace">
             <h2>
-                <t t-if="doc.is_consignement">
-                    <span>Consignement # </span>
+                <t t-if="doc.is_consignment">
+                    <span>Consignment # </span>
                 </t>
                 <t t-else="">
                     <span t-if="doc.state not in ['draft','sent']">Order # </span>

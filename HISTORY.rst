@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1644: Fix typo on consignment report
+
 **Build**
 
 **Documentation**

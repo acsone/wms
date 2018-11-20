@@ -77,7 +77,7 @@ msgstr "<span>Bestelling</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
-msgid "<span>Consignement # </span>"
+msgid "<span>Consignment # </span>"
 msgstr "<span>Bestelling</span>"
 
 #. module: specific_report
