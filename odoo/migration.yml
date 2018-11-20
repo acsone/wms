@@ -497,6 +497,7 @@ migration:
             pre:
               - psql -f odoo/songs/upgrade/10_27_4_update_pre.sql
     - version: 10.28.0
+<<<<<<< 687f74a3af1bd578c67782dcbd78a780e3b26d31
       modes:
         full:
           operations:
