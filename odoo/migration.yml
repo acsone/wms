@@ -476,7 +476,7 @@ migration:
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
               - anthem songs.install.data_full::import_partner_link
-    - version: 10.27.3
+    - version: 10.27.4
       addons:
         upgrade:
           ### OCA (external-src)
@@ -490,9 +490,9 @@ migration:
           - specific_sale
       operations:
         post:
-          - anthem songs.upgrade.10_27_3_update::post
+          - anthem songs.upgrade.10_27_4_update::post
       modes:
         full:
           operations:
             pre:
-              - psql -f odoo/songs/upgrade/10_27_3_update_pre.sql
+              - psql -f odoo/songs/upgrade/10_27_4_update_pre.sql
