@@ -1341,6 +1341,8 @@ class ProductStockBinParkingMapper(EntityMapper):
         SELECT storef, stolop FROM sbdata.PSTOCK
         WHERE CHAR_LENGTH(REPLACE(stolop, ' ', '')) >= 6
         AND SUBSTRING(stolop, 1, 1) = 'A'
+        AND SUBSTRING(stolop, 2, 2) IN ('A', 'B', 'C', 'D', 'E',
+                                        'G', 'H', 'I', 'K', 'L', 'Z')
         """
         if not self.importer.full:
             query += """
