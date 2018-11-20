@@ -6,6 +6,10 @@ Release History
 Unreleased
 ++++++++++
 
+**Data Migration**
+
+* Update full csv data from DB2 prod server at 2018-11-20 16:00:00
+
 **Features and Improvements**
 
 **Bugfixes**
