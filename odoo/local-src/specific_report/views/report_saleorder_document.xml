@@ -13,8 +13,10 @@
                     <span t-if="doc.state in ['draft','sent']">Quotation # </span>
                 </t>
                 <span t-field="doc.name"/>
-                <span> n° </span>
-                <span t-field="doc.suite_name"/>
+                <t t-if="doc.suite_name">
+                    <span> n° </span>
+                    <span t-field="doc.suite_name"/>
+                </t>
             </h2>
         </xpath>
 
