@@ -12,6 +12,8 @@ Unreleased
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
 * ALCYN-1601: Update the list of users
 * ALCYN-1645: Add `done_date` to stock.picking view
+* ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record
+
 
 **Bugfixes**
 

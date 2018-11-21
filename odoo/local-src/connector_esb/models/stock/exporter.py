@@ -6,9 +6,11 @@ import logging
 
 from datetime import datetime, timedelta
 
+from odoo import fields
 from odoo.osv.expression import AND
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from odoo.addons.connector.exception import ConnectorException
 from ...components.mapper import falsy2emptystring, falsy2zero
 
 _logger = logging.getLogger(__name__)
@@ -90,38 +92,59 @@ class StockUpdateExporter(Component):
         all_quants = self.env['stock.quant'].search(domain)
         return all_quants.sorted(key=lambda r: r.write_date)
 
-    def run(self, export_since=None, max_records=None):
+    @classmethod
+    def get_exported_until(cls, last_export):
+        """ Make a timestamp based on what has been exported.
+
+        If some records have been exported, but not all. Thes a corresponding
+        timestamp is created taking into account the basic lock offset.
+        Note that the last second will be re-exported.
+        """
+        return fields.Datetime.to_string(
+                fields.Datetime.from_string(last_export)
+                + timedelta(seconds=cls.BASIC_LOCK_TIME)
+        )
+
+    def run(self, export_since=None, max_records=0):
         """ Run the export of multiple stock status.
 
         ``export_since`` can be omitted to ignore the date and export
         all the records that match the domain.
         ``max_records`` can be set to export only a maximum number of records
         """
+
         data = []
         exported_ids = []
-        exported_until = None
+        last_export = None
         quants = self.get_items(export_since=export_since)
         for quant in quants:
             if quant.product_id.id not in exported_ids:
-                if exported_until and quant.write_date != exported_until:
-                    # As the write_date precision is on the second
-                    # All quants in the same second must be exported
-                    exported_until = (
-                        datetime.strptime(exported_until, "%Y-%m-%d %H:%M:%S")
-                        + timedelta(seconds=self.BASIC_LOCK_TIME + 1)
-                    ).strftime("%Y-%m-%d %H:%M:%S")
-                    break
                 mapped_record = self.mapper.map_record(quant.product_id)
                 data.append(self._update_data(mapped_record))
                 exported_ids += [quant.product_id.id]
                 if max_records != 0 and len(exported_ids) >= max_records:
-                    exported_until = quant.write_date
-        else:
-            exported_until = None
+                    # Export a batch of product state
+                    try:
+                        self._create({'lines': data})
+                    except ConnectorException:
+                        if last_export:
+                            return self.get_exported_until(last_export)
+                        raise  # No succesful export, job failed
+                    else:
+                        last_export = quant.write_date
+                        _logger.debug(
+                            'Exporting stock status : %s',
+                            data
+                        )
+                    exported_ids = []
+                    data = []
         if data:
-            data = {'lines': data}
-            self._create(data)
-            return exported_until
+            try:
+                self._create({'lines': data})
+            except ConnectorException:
+                if last_export:
+                    return self.get_exported_until(last_export)
+                raise  # No succesful export, job failed
         return
 
 
