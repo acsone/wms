@@ -6,10 +6,6 @@ Release History
 Unreleased
 ++++++++++
 
-**Data Migration**
-
-* Update full csv data from DB2 prod server at 2018-11-20 16:00:00
-
 **Features and Improvements**
 
 **Bugfixes**
@@ -17,6 +13,14 @@ Unreleased
 **Build**
 
 **Documentation**
+
+
+10.28.0 (2018-11-21)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Update full csv data from DB2 prod server at 2018-11-20 16:00:00
 
 
 10.27.4 (2018-11-20)
