@@ -37,6 +37,10 @@ __import__.supplier_contact_61700_1,contact,DERASSE ALBERT,,02/3553285,,False,Fa
 __import__.supplier_contact_61700_2,contact,MME CARLA VAN DER STEEN,,02/463.23.90,,False,False,fr_BE,,,__import__.supplier_61700
 __import__.supplier_contact_61700_3,contact,JENNY CORTEN,,,,False,False,nl_BE,,0477/22 08 53,__import__.supplier_61700
 __import__.supplier_contact_61740_1,contact,MAD. APRIL FAY,,,,False,False,fr_BE,afay@midmark.com,,__import__.supplier_61740
+__import__.supplier_contact_61745_1,contact,SALES,,,,False,False,fr_BE,Jenny@norvapint.com,,__import__.supplier_61745
+__import__.supplier_contact_61745_2,contact,ACCOUNT,,,,False,False,fr_BE,Jan@norvapint.com,,__import__.supplier_61745
+__import__.supplier_contact_61745_3,contact,CE/ACCREDITATION,,,,False,False,fr_BE,Sarah@norvapint.com,,__import__.supplier_61745
+__import__.supplier_contact_61745_4,contact,R&D,,,,False,False,fr_BE,Andrew@norvapint.com,,__import__.supplier_61745
 __import__.supplier_contact_61780_1,contact,MAD. MELISSA VANHUYSE,,,,False,False,fr_BE,melissa.vanhuyse@cidlines.com,,__import__.supplier_61780
 __import__.supplier_contact_61851_1,contact,MR. PIERRE BUTTIENS,,,,False,False,fr_BE,p.buttiens@outlook.fr,,__import__.supplier_61851
 __import__.supplier_contact_61920_1,contact,MONSIEUR THIERRY POIGNON,DIRECTEUR GENERAL,,,False,False,fr_BE,,,__import__.supplier_61920
@@ -217,9 +221,10 @@ __import__.supplier_contact_70210_2,contact,EMMANUELLE OLIVIER,CREDIT CONTROLLER
 __import__.supplier_contact_70295_1,contact,HILDE TANGHE,I.V. PRODUCT SPECIALIST,,,False,False,nl_BE,,,__import__.supplier_70295
 __import__.supplier_contact_70295_2,contact,SERVICE CLIENTELE,,,,False,False,fr_BE,,,__import__.supplier_70295
 __import__.supplier_contact_70295_3,contact,KLANTENDIENST,,,,False,False,nl_BE,,,__import__.supplier_70295
-__import__.supplier_contact_70312_1,contact,MR. STIJN DEGRYSE,,,,False,False,nl_BE,,,__import__.supplier_70312
+__import__.supplier_contact_70312_1,contact,MAD. JULIE BRASSEUR,,,0472 487 887,False,False,fr_BE,,,__import__.supplier_70312
 __import__.supplier_contact_70312_2,contact,COMMANDES,,,,False,False,fr_BE,,,__import__.supplier_70312
 __import__.supplier_contact_70312_3,contact,RENSEIGNEMENTS HOLLANDE,,0810 433 999,,False,False,fr_BE,,,__import__.supplier_70312
+__import__.supplier_contact_70312_4,contact,MR. PAUL MANSVELT,NATIONAL BUSINESS MANAGER,+31 1 611956261,,False,False,nl_BE,paul-mansvelt@idexx.com,,__import__.supplier_70312
 __import__.supplier_contact_71020_1,contact,MR STEPHAN JORGENSEN,,,,False,False,fr_BE,Stephan.Jorgensen@im3dental.com,,__import__.supplier_71020
 __import__.supplier_contact_71020_2,contact,COMMANDES,,,,False,False,fr_BE,sales@im3dental.com,,__import__.supplier_71020
 __import__.supplier_contact_71020_3,contact,SUPPORT,,,,False,False,fr_BE,support@im3dental.com,,__import__.supplier_71020
@@ -376,10 +381,6 @@ __import__.supplier_contact_78500_1,contact,MONSIEUR CARLOS CREMERS,,,,False,Fal
 __import__.supplier_contact_78500_2,contact,X,,,,False,False,fr_BE,,,__import__.supplier_78500
 __import__.supplier_contact_78501_1,contact,MR DYBAJLO,,0800 91500,,False,False,fr_BE,Rue d'Harscamp 17 4020 LIEGE,,__import__.supplier_78501
 __import__.supplier_contact_78501_2,contact,MR MONSOEUR,,075/270047,,False,False,fr_BE,,,__import__.supplier_78501
-__import__.supplier_contact_78650_1,contact,CABY THIBAUT,DELEGUE,04/2543340,,False,False,fr_BE,AVENUE DE L OBSERVATOIRE 209B82 4000 LIEGE,,__import__.supplier_78650
-__import__.supplier_contact_78650_2,contact,MONSIEUR SMETS,,,,False,False,fr_BE,,0495/575703,__import__.supplier_78650
-__import__.supplier_contact_78650_7,contact,ALEXANDRE LE BERRIGAUD,,,,False,False,fr_BE,,0495 575713,__import__.supplier_78650
-__import__.supplier_contact_78650_8,contact,BENEDICTE FLAMEND,,02 4215372,,False,False,fr_BE,,,__import__.supplier_78650
 __import__.supplier_contact_78805_1,contact,MR YVES DEBISSCOP,,,,False,False,fr_BE,,0475/519910,__import__.supplier_78805
 __import__.supplier_contact_79000_1,contact,MR. SERGE CANDELIER,,0033321246631,,False,False,fr_BE,,,__import__.supplier_79000
 __import__.supplier_contact_79003_1,contact,MR. DANILO SCOTTA,,,,False,False,fr_BE,,,__import__.supplier_79003
@@ -480,6 +481,7 @@ __import__.supplier_contact_81850_4,contact,MME SYLVIE TILLIEUX,,064/520 886,064
 __import__.supplier_contact_81900_1,contact,MONSIEUR CHARLIER,,,,False,False,fr_BE,,,__import__.supplier_81900
 __import__.supplier_contact_82395_1,contact,PIETER DE BAERDEMAKER,,,,False,False,fr_BE,,,__import__.supplier_82395
 __import__.supplier_contact_82400_1,contact,COMMANDES + RETOURS,,,,False,False,fr_BE,vygonbe@vygon.com,,__import__.supplier_82400
+__import__.supplier_contact_82448_1,contact,MR. LODE LEËN,,,,False,False,nl_BE,info@veterinarysolutions.be,,__import__.supplier_82448
 __import__.supplier_contact_82450_1,contact,MR MICHIELS,,,,False,False,fr_BE,,,__import__.supplier_82450
 __import__.supplier_contact_82520_1,contact,MONSIEUR AYMERIC DE HEMPTINNE,ADMINISTRATEUR DELEGUE,,,False,False,fr_BE,,,__import__.supplier_82520
 __import__.supplier_contact_82540_1,contact,MR. PINEAU,,,,False,False,fr_BE,vetinox@orange.fr,,__import__.supplier_82540

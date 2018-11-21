@@ -1,0 +1,2 @@
+id,invoice_sending_method,discount_pricelist_id/id
+__import__.customer_9370,letter,__setup__.pricelist_108
