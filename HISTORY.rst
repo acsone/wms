@@ -13,6 +13,7 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1643: Fix main_exception_id not found in parent view
 * ALCYN-1644: Fix typo on consignment report
 
 **Build**

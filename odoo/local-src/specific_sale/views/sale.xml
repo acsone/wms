@@ -3,7 +3,7 @@
 
     <record id="view_order_form" model="ir.ui.view">
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale_exception.view_order_form"/>
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='main_exception_id']/parent::group" position="replace">
