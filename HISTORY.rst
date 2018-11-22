@@ -9,12 +9,23 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
+* ALCYN-1601: Update the list of users
 
 **Bugfixes**
+
+* ALCYN-1644: Fix typo on consignment report
 
 **Build**
 
 **Documentation**
+
+
+10.28.0 (2018-11-21)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Update full csv data from DB2 prod server at 2018-11-20 16:00:00
 
 
 10.27.4 (2018-11-20)
@@ -22,6 +33,7 @@ Unreleased
 
 **Data Migration**
 
+* ALCYN-1604: Cleanup old bins, old "new" routes info and supplier info
 * ALCYN-1619: Delete purchase orders when all lines were deleted.
 * ALCYN-1622: Adapt setup and migration for "Aliments" chaotic storage
 * ALCYN-1624: Fix regexp used to detect nine-ish value implemented for ALCYN-417 for indicated_price
