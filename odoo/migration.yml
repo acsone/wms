@@ -558,3 +558,7 @@ migration:
               - anthem songs.install.accounting::activate_check_on_vat
               # ----------- DATA update END ----------
     - version: 10.28.1
+      addons:
+        upgrade:
+          ### local
+          - specific_security

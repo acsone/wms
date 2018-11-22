@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1656: Add missing access rule on the model account cutoff lines for employees
+
 **Build**
 
 **Documentation**
