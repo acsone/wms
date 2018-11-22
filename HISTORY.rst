@@ -27,7 +27,7 @@ Unreleased
 * ALCYN-1631: Fix product import on PIM for product with warning_info too long
 * ALCYN-1664: Fix tax required (rule was not applied on invoice validation)
 * ALCYN-1652: Delivery Note must always display the "numero de depot"
-* ALCYN-1566: Align Partner Display on delivery slip (
+* ALCYN-1566: Align Partner Display on delivery slip (also fix entry register)
 
 **Build**
 
