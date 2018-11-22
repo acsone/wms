@@ -335,9 +335,40 @@ def setup_sequences(ctx):
             'implementation': 'no_gap',
         }
     )
+    account_700000 = ctx.env.ref('__setup__.account_700000')
     customer_journal.write({
         'refund_sequence': True,
         'refund_sequence_id': refund_seq.id,
+        'default_credit_account_id': account_700000.id,
+        'default_debit_account_id': account_700000.id,
+    })
+
+    account_604000 = ctx.env.ref('__setup__.account_604000')
+    vendor_bills_journal = journals.filtered(
+        lambda a: a.name == 'Vendor Bills'
+    )
+    add_xmlid(
+        ctx, vendor_bills_journal,
+        '__setup__.account_journal_vendor_bills',
+        noupdate=True
+    )
+    vendor_bills_journal.write({
+        'default_credit_account_id': account_604000.id,
+        'default_debit_account_id': account_604000.id,
+    })
+
+    account_570100 = ctx.env.ref('__setup__.account_570100')
+    cash_journal = journals.filtered(
+        lambda a: a.name == 'Cash'
+    )
+    add_xmlid(
+        ctx, cash_journal,
+        '__setup__.account_journal_cash',
+        noupdate=True
+    )
+    cash_journal.write({
+        'default_credit_account_id': account_570100.id,
+        'default_debit_account_id': account_570100.id,
     })
 
     ctx.env['ir.sequence'].search([
