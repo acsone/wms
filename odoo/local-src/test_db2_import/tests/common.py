@@ -531,8 +531,8 @@ class DB2ImportTestCase(SavepointCase):
     def load_accounts(cls):
         # set xmlids on existing accounts
         codes = ['400000', '440000', '440100',
-                 '550002', '550003', '550004',
-                 '550005', '550006', '550007']
+                 '550000', '550005', '550040',
+                 '550050', '550051', '550060']
         accounts = cls.env['account.account'].search([('code', 'in', codes)])
         imd = cls.env['ir.model.data']
         for acc in accounts:
