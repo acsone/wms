@@ -561,6 +561,7 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_security
           - specific_report
       operations:
         post:

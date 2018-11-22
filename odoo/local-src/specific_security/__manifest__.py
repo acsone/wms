@@ -18,6 +18,7 @@
         'mrp',
         'code_abc',
         'specific_data',
+        'account_cutoff_base',
     ],
     'data': [
         # Security
