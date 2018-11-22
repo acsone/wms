@@ -8,9 +8,16 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1575: Update the default credit/debit account on journals
+* ALCYN-1642: Indicate if the order is a consignment on the delivery slip
+* ALCYN-1601: Update the list of users
+
 **Bugfixes**
 
 * ALCYN-1656: Add missing access rule on the model account cutoff lines for employees
+* ALCYN-1595: Define helpdesk.ticket team_id context according to calling model
+* ALCYN-1643: Fix main_exception_id not found in parent view
+* ALCYN-1644: Fix typo on consignment report
 
 **Build**
 

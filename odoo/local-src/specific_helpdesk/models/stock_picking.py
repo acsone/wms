@@ -27,10 +27,11 @@ class Picking(models.Model):
         action_data = self.env.ref(
             'helpdesk.helpdesk_ticket_action_main_tree'
         ).read()[0]
-        context = "{'search_default_is_open': True, 'default_team_id': %s}"
+        context = eval(action_data.get('context', '{}'))
+        context['default_team_id'] = self.env.ref(
+            'specific_helpdesk.supplier_team').id
+        action_data['context'] = str(context)
         action_data['domain'] = [('stock_picking_id', '=', self.id)]
-        action_data['context'] = context % self.env.ref(
-                'specific_helpdesk.accounting_team').id
         return action_data
 
     @api.multi

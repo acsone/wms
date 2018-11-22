@@ -562,3 +562,10 @@ migration:
         upgrade:
           ### local
           - specific_security
+          - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.10_28_1_update::post
+          - anthem songs.install.user::import_users
+          - anthem songs.install.accounting::setup_sequences
+          - anthem songs.install.accounting::import_account_journal
