@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1601: Update the list of users
+
 **Bugfixes**
 
 **Build**
