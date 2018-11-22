@@ -10,7 +10,7 @@
         <field name="header_line" eval="False"/>
         <field name="header_spacing">20</field>
         <field name="dpi">96</field>
-        <field name="report_ids" eval="[(4, ref('account.account_invoices')), (4, ref('stock.action_report_delivery'))]"/>
+        <field name="report_ids" eval="[(4, ref('account.account_invoices')), (4, ref('stock.action_report_delivery')), (4, ref('stock.action_report_picking'))]"/>
     </record>
 
     <record id="paperformat_alcyon_report_without_header" model="report.paperformat">
