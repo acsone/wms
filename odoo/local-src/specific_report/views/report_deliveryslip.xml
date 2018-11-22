@@ -109,7 +109,8 @@
                         <tr>
                             <td colspan="9" class="sale_separator">
                                 <div>
-                                    <span>Order</span>
+                                    <span t-if="not order.is_consignment">Order</span>
+                                    <span t-if="order.is_consignment">Consignement</span>
                                     <span t-field="order.name"/>
                                     <t t-if="order.suite_name">
                                         (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>/<t t-esc="order.suite_name"/>)
@@ -155,10 +156,10 @@
                                 <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_reduce"/>
+                                <span t-field="order_line.price_reduce" t-if="not order.is_consignment"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_subtotal"/>
+                                <span t-field="order_line.price_subtotal" t-if="not order.is_consignment"/>
                             </td>
                         </tr>
                         <tr t-foreach="quants" t-as="quant">
@@ -240,7 +241,8 @@
                         <tr>
                             <td colspan="7" class="sale_separator">
                                 <div>
-                                    <span>Order</span>
+                                    <span t-if="not order.is_consignment">Order</span>
+                                    <span t-if="order.is_consignment">Consignement</span>
                                     <span t-field="order.name"/>
                                     <t t-if="order.suite_name">
                                         (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>/<t t-esc="order.suite_name"/>)

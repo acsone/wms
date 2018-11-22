@@ -560,6 +560,7 @@ migration:
     - version: 10.28.1
       addons:
         upgrade:
+          ### local
           - specific_report
       operations:
         post:
