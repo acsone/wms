@@ -1,5 +1,13 @@
 ## Specific tasks
 
+The specific tasks need to install additional libs:
+
+```bash
+
+$ pip install -r tasks/local_requirements.txt
+
+```
+
 ### data.make-csv-diff
 
 This task compare 2 csv files and create multiple csv files
