@@ -563,6 +563,7 @@ migration:
           ### local
           - specific_security
           - specific_report
+          - specific_stock
       operations:
         post:
           - anthem songs.upgrade.10_28_1_update::post
