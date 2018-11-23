@@ -109,6 +109,26 @@ Show a list of closed pull requests in the pending merges.
 invoke submodule.show-closed-prs
 ```
 
+
+### database.download_dump
+
+Download Dump from Dump-bag
+:warning: Lastpass-cli should already installed
+
+* with default dump directory `.`
+
+```shell
+invoke database.download-dump [database_name]
+```
+
+or
+
+```shell
+invoke database.download-dump --database_name=[database_name] --dumpdir=[directory_path]
+```
+
+`[database_name]` is Aws database folder name like -> fighting_snail_1024
+
 ### songs.rip
 
 Copy generated songs of a dj.compilation

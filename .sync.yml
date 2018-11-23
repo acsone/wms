@@ -1,0 +1,20 @@
+# List of files to sync
+sync:
+  include:
+    - ./.cookiecutter.context.yml
+    - ./tasks/*
+    - ./docs/*
+    - ./travis/git_submodule_update.py
+    - ./travis/minion-client.py
+    - ./travis/publish.sh
+    - ./odoo/before-migrate-entrypoint.d/*
+    - ./odoo/start-entrypoint.d/*
+  exclude:
+    - ./docs/README.local.md
+  comment: |
+    This file has been generated with 'invoke project.sync'.
+    Do not modify. Any manual change will be lost.
+    Please propose your modification on
+    https://github.com/camptocamp/odoo-template instead.
+  pinned_version: 3.1.4.1-dev
+  last_sync: 20181123-1302

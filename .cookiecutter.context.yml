@@ -5,3 +5,5 @@ repo_name: alcyon
 project_id: '1793'
 project_name: alcyon_odoo
 odoo_company_name: Alcyon
+odoo_main_lang: fr_FR
+odoo_aux_langs: None

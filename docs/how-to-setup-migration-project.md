@@ -21,10 +21,11 @@ Summary:
 3. [Rename modules](#rename-modules)
 4. [Update moved models](#update-moved-models)
 5. [Update moved fields](#update-moved-fields)
-6. [Install/Update all modules](#installupdate-all-modules)
-7. [Uninstall modules](#uninstall-modules)
-8. [Clean the database](#clean-the-database)
-9. [Clean unavailable modules](#clean-unavailable-modules)
+6. [Remove custom views/filters/exports](#remove-custom-viewsfiltersexports)
+7. [Install/Update all modules](#installupdate-all-modules)
+8. [Uninstall modules](#uninstall-modules)
+9. [Clean the database](#clean-the-database)
+10. [Clean unavailable modules](#clean-unavailable-modules)
 
 All these steps are launched from [migration.yml](../odoo/migration.yml)
 in marabunta mode `migration`.
@@ -88,6 +89,24 @@ the update of all modules to avoid build failures or loss of data.
 
 _Implementation_: [songs/migration/pre.py](../odoo/songs/migration/pre.py)
 in function `update_moved_fields`.
+
+### Remove custom views/filters/exports
+
+Some records like views, filters and exports are created by users.
+
+Problem is: Odoo does not migrate them,
+hence you will end up with a lot of possibly broken records of the average user
+(admin user is always a special case).
+
+The best way to fix this is to remove all custom views, filters and exports.
+The ones that were created by modules will be re-created by updating `base` module.
+
+_Implementation_: [songs/migration/pre.py](../odoo/songs/migration/pre.py)
+in functions:
+
+* `remove_all_custom_views`
+* `remove_all_custom_filters`
+* `remove_all_custom_exports`
 
 ### Install/Update all modules
 
