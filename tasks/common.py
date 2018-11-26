@@ -27,6 +27,12 @@ except ImportError:
     print('Please install git-aggregator')
 
 
+try:
+    from ruamel.yaml import YAML
+except ImportError:
+    print('Please install ruamel.yaml')
+
+
 def root_path():
     return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -46,10 +52,21 @@ VERSION_FILE = build_path('odoo/VERSION')
 HISTORY_FILE = build_path('HISTORY.rst')
 PENDING_MERGES = build_path('odoo/pending-merges.yaml')
 MIGRATION_FILE = build_path('odoo/migration.yml')
+GITIGNORE_FILE = build_path('.gitignore')
 COOKIECUTTER_CONTEXT = build_path('.cookiecutter.context.yml')
-
 GIT_REMOTE_NAME = 'camptocamp'
-TEMPLATE_GIT = 'git@github.com:camptocamp/odoo-template.git'
+TEMPLATE_GIT_REPO_URL = 'git@github.com:{}.git'
+TEMPLATE_GIT = TEMPLATE_GIT_REPO_URL.format('camptocamp/odoo-template')
+
+
+def gpg_decrypt_to_file(ctx, password, file_name):
+    """Get a value from lastpass.
+    :param password: password to decript gpg file
+    :param file_name: File .gpg to decrypt
+    """
+    ctx.run(
+        "gpg --yes --passphrase '{}' --no-tty --quiet '{}'".format(password, file_name)
+    )
 
 
 def cookiecutter_context():
@@ -161,3 +178,55 @@ def get_aggregator_repo(submodule_path):
                 submodule_path)
         )
     return repo
+
+
+def update_yml_file(path, new_data, main_key=None):
+    yaml = YAML()
+    # preservation of indentation
+    yaml.indent(mapping=2, sequence=4, offset=2)
+
+    with open(path) as f:
+        data = yaml.load(f.read())
+        if main_key:
+            data[main_key].update(new_data)
+        else:
+            data.update(new_data)
+
+    with open(path, 'w') as f:
+        yaml.dump(data, f)
+
+
+def _git_ignores():
+    ignored = []
+    with open(GITIGNORE_FILE) as f:
+        for line in f.read().splitlines():
+            if line.strip() and not line.startswith('#'):
+                ignored.append(line)
+    return ignored
+
+
+GIT_IGNORES = _git_ignores()
+def get_from_lastpass(ctx, note_id, get_field):
+    """Get a value from lastpass.
+
+    :param note_id: lastpass id of the note to show
+    :param get_field: Lastpass field to get (as specified on lpass --help
+                      for show command)
+    :return: Value of the field for this note
+    """
+    return ctx.run(
+            "lpass show {} {}".format(get_field, note_id), hide=True
+        ).stdout.strip()
+
+
+def make_dir(path_dir):
+    try:
+        os.makedirs(path_dir)
+    except OSError as excpt:
+        if not os.path.isdir(path_dir):
+            msg = (
+                "Directory does not exist and could not be created: {}"
+            ).format(path_dir)
+            exit_msg(msg)
+        else:
+            pass  # directory already exists, nothing to do in this case
