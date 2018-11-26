@@ -37,6 +37,7 @@
         'views/report_passport.xml',
         'views/round_instance.xml',
         'views/report_saleorder_document.xml',
+        'views/report_stockpicking_operations.xml',
         'views/res_partner.xml',
         # Data
         'views/stock_move.xml',

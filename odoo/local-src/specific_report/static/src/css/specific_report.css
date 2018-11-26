@@ -335,3 +335,16 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     font-weight: bold;
     font-size: 1.2em;
 }
+
+.page .bicol {
+}
+.page .pick_card {
+    display: inline-block;
+    vertical-align:top;
+    width: 48%;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 10px 0 0;
+    font-size: larger;
+    page-break-inside: avoid !important;
+}

@@ -15,6 +15,7 @@ Unreleased
 * ALCYN-1645: Add `done_date` to stock.picking view
 * ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
 * ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record
+* ALCYN-1651: Allow picking with barcode for material
 
 **Bugfixes**
 
@@ -25,6 +26,8 @@ Unreleased
 * ALCYN-1655: Fix a bug when the user try to print a delivery split on a picking not linked to an order
 * ALCYN-1631: Fix product import on PIM for product with warning_info too long
 * ALCYN-1664: Fix tax required (rule was not applied on invoice validation)
+* ALCYN-1652: Delivery Note must always display the "numero de depot"
+* ALCYN-1566: Align Partner Display on delivery slip (also fix entry register)
 
 **Build**
 

@@ -80,6 +80,23 @@
         </div>
     </template>
 
+    <template id="specific_report.deliveryslip_orderref">
+        <div>
+            <span t-if="not order.is_consignment">Order</span>
+            <span t-if="order.is_consignment">Consignement</span>
+            <span t-field="order.name"/>
+            <t t-set="depot_number" t-value="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>
+            <t t-if="depot_number">
+                (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="depot_number"/>/<t t-esc="order.suite_name or '000'"/>)
+            </t>
+            <span>of</span>
+            <span t-field="order.date_order_short"/>
+            <t t-if="order.client_order_ref">
+                (<span t-esc="order.client_order_ref"/>)
+            </t>
+        </div>
+    </template>
+
     <template id="specific_report.deliveryslip_with_price">
         <table id="products_table" class="round_table products_table_deliveryslip">
             <thead>
@@ -108,19 +125,7 @@
                         <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
                         <tr>
                             <td colspan="9" class="sale_separator">
-                                <div>
-                                    <span t-if="not order.is_consignment">Order</span>
-                                    <span t-if="order.is_consignment">Consignement</span>
-                                    <span t-field="order.name"/>
-                                    <t t-if="order.suite_name">
-                                        (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>/<t t-esc="order.suite_name"/>)
-                                    </t>
-                                    <span>of</span>
-                                    <span t-field="order.date_order_short"/>
-                                    <t t-if="order.client_order_ref">
-                                        (<span t-esc="order.client_order_ref"/>)
-                                    </t>
-                                </div>
+                                <t t-call="specific_report.deliveryslip_orderref"/>
                             </td>
                         </tr>
                         <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
@@ -240,19 +245,7 @@
                         <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                         <tr>
                             <td colspan="7" class="sale_separator">
-                                <div>
-                                    <span t-if="not order.is_consignment">Order</span>
-                                    <span t-if="order.is_consignment">Consignement</span>
-                                    <span t-field="order.name"/>
-                                    <t t-if="order.suite_name">
-                                        (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>/<t t-esc="order.suite_name"/>)
-                                    </t>
-                                    <span>of</span>
-                                    <span t-field="order.date_order_short"/>
-                                    <t t-if="order.client_order_ref">
-                                        (<span t-esc="order.client_order_ref"/>)
-                                    </t>
-                                </div>
+                                <t t-call="specific_report.deliveryslip_orderref"/>
                             </td>
                         </tr>
                         <tr><td/><td/><td/><td/><td/><td/><td/></tr>
@@ -367,16 +360,7 @@
             </div>
 
             <div id="partner_header" class="remove_padding_top">
-                <t t-if="partner.parent_id">
-                    <span t-field="partner.parent_id"/>
-                    <br/>
-                </t>
-                <t t-if="partner.title">
-                    <span t-field="partner.title"/>
-                </t>
-                <span t-field="partner.name"/>
-                <br/>
-                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
             </div>
             <table id="products_table" class="round_table products_table_entry_register">
                 <thead>
@@ -402,18 +386,7 @@
                             <tr><td/><td/><td/><td/><td/><td/><td/></tr>
                             <tr>
                                 <td colspan="7" class="sale_separator">
-                                    <div>
-                                        <span>Order</span>
-                                        <span t-field="order.name"/>
-                                        <t t-if="order.suite_name">
-                                            (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>/<t t-esc="order.suite_name"/>)
-                                        </t>
-                                        <span>of</span>
-                                        <span t-field="order.date_order_short"/>
-                                        <t t-if="order.client_order_ref">
-                                            (<span t-esc="order.client_order_ref"/>)
-                                        </t>
-                                    </div>
+                                    <t t-call="specific_report.deliveryslip_orderref"/>
                                 </td>
                             </tr>
                             <tr><td/><td/><td/><td/><td/><td/><td/></tr>

@@ -561,11 +561,12 @@ migration:
       addons:
         upgrade:
           ### local
+          - connector_esb
+          - specific_barcode
+          - specific_report
           - specific_security
           - specific_stock
-          - specific_report
           - specific_stock
-          - connector_esb
       operations:
         post:
           - anthem songs.upgrade.10_28_1_update::post
