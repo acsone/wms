@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1575: Update the default credit/debit account on journals
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
 * ALCYN-1601: Update the list of users
+* ALCYN-1645: Add `done_date` to stock.picking view
 
 **Bugfixes**
 

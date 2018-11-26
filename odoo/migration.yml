@@ -562,6 +562,7 @@ migration:
         upgrade:
           ### local
           - specific_security
+          - specific_stock
           - specific_report
           - connector_esb
       operations:

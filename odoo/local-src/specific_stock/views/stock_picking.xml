@@ -45,6 +45,10 @@
                 <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available']), ('operator_id', '=', False)]}</attribute>
                 <attribute name="states"/>
             </xpath>
+
+            <field name="min_date" position="after">
+                <field name="date_done" />
+            </field>
         </field>
     </record>
 
