@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.28.1 (2018-11-26)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1575: Update the default credit/debit account on journals
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
 * ALCYN-1601: Update the list of users
@@ -33,8 +45,6 @@ Unreleased
 **Build**
 
 * Add tasks/local_requirements.txt to install libs required for project specific invoke tasks
-
-**Documentation**
 
 
 10.28.0 (2018-11-21)
