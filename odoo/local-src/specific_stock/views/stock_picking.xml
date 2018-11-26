@@ -49,6 +49,10 @@
             <xpath expr="//h1[field[@name='name']]" position="after">
                 <h3>UOP <field name="id" class="oe_inline"/></h3>
             </xpath>
+
+            <field name="min_date" position="after">
+                <field name="date_done" />
+            </field>
         </field>
     </record>
 

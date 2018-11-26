@@ -472,7 +472,7 @@ migration:
           operations:
             post:
               - anthem songs.install.data_full::import_customer_banks_and_mandats
-              - anthem songs.install.data_full::create_journals
+              - anthem songs.install.data_full::create_current_liabilities_accounts
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::import_supplier_journal_items
               - anthem songs.install.data_full::import_partner_link
@@ -562,11 +562,14 @@ migration:
         upgrade:
           ### local
           - specific_security
+          - specific_stock
           - specific_report
           - specific_stock
+          - connector_esb
       operations:
         post:
           - anthem songs.upgrade.10_28_1_update::post
           - anthem songs.install.user::import_users
           - anthem songs.install.accounting::setup_sequences
           - anthem songs.install.accounting::import_account_journal
+          - anthem songs.install.accounting::set_analytic_account_on_product_category

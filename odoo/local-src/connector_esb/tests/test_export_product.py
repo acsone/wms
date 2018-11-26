@@ -279,3 +279,23 @@ class ExportProductTestCase(ESBXMLTestCase):
                 'Found: `[{default_code}] {name}`.'.format(
                     **unwanted.read()[0])
             )
+
+    def test_mapper_specific_fields(self):
+        """ Checking some specific parts on the mapper.
+
+        Check the warning messages are not more than 255 chars long.
+        """
+        self.p_cat.with_context(
+                {'lang': 'nl_BE'}).warning_info = 'Aandacht__' * 26
+        self.p_cat.with_context(
+                {'lang': 'fr_BE'}).warning_info = 'Attention_' * 26
+        self.p_cat.with_context(
+                {'lang': 'de_DE'}).warning_info = 'Aufmerksam' * 26
+        rec = self.all_records[0]
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            values = mapper.map_record(rec).values()
+            self.assertEqual(len(values['Warceg']), 254)
+            self.assertEqual(len(values['Warcfr']), 254)
+            self.assertEqual(len(values['Warcnl']), 254)

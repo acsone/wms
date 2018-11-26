@@ -13,8 +13,10 @@ If the project is not hosted on our cloud-platform, you should ask a dump to the
 
 ### From odoo-dump-bag
 
-Connect to https://dump-bag.odoo.camptocamp.ch and retrieve the dump using `aws`.
-Then skip to the next section.
+1. > Use [invoke task](../docs/invoke.md#databasedownload_dump) **or** Connect to https://dump-bag.odoo.camptocamp.ch and retrieve the dump using `aws`.
+
+
+2. > Then skip to the next section.
 
 ### Generate a dump
 

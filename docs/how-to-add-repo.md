@@ -59,3 +59,39 @@ You can now push it to your fork and open a pull-request
 When you have your pull-request opened on github, you should see github listing the update
 of the submodule with 10 files updated. If you see directly the update of the files, it means
 that the folder has been added directly to the main git repository instead of a submodule.
+
+# How to delete a local submodule
+
+* Delete the relevant section from the .gitmodules file.  The section would look similar to:
+
+  ```
+  [submodule "odoo/external-src/submodule"]
+  	path = odoo/external-src/submodule
+  	url = git@github.com:camptocamp/submodule.git
+  	branch = 10.0
+  ```
+
+* Stage the .gitmodules changes via command line using: `git add .gitmodules`
+
+* Delete the relevant section from .git/config, which will look like:
+
+  ```
+  [submodule "odoo/external-src/submodule"]
+	url = git://github.com/organisation/submodule.git
+  ```
+
+* Run `git rm --cached odoo/external-src/submodule` .  Don't include a trailing slash -- that will lead to an error.
+
+* Run `rm -rf .git/modules/odoo/external-src/submodule`
+
+* Delete the relevant line from ADDONS_PATH in `odoo/Dockerfile`
+
+  ```
+   /opt/odoo/external-src/submodule, \
+  ```
+
+* `git add odoo/Dockerfile`
+
+* Commit the changes
+
+* Delete the now untracked submodule files `rm -rf odoo/external-src/submodule`

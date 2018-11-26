@@ -6,17 +6,29 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from __future__ import print_function
+import json
 import psycopg2
 import getpass
 import requests
 import gnupg
 import time
-from os.path import expanduser
+import os
 from contextlib import contextmanager
 from invoke import task
 from datetime import datetime
 
-from .common import cookiecutter_context
+from .common import (
+    cd,
+    cookiecutter_context,
+    exit_msg,
+    gpg_decrypt_to_file,
+    get_from_lastpass,
+    make_dir
+)
+
+
+LPASS_GPG_DUMP_KEY_ID = 5794282849981145008
+base_s3_dump_path = "s3://odoo-dumps"
 
 
 @contextmanager
@@ -60,7 +72,7 @@ def get_db_container_port(ctx):
 
 def expand_path(path):
     if path.startswith('~'):
-        path = expanduser(path)
+        path = os.path.expanduser(path)
     return path
 
 
@@ -103,10 +115,22 @@ def list_versions(ctx):
                         res[db_name] = (None, 'unknown')
                         continue
                     res[db_name] = version_tuple
-    print("{:<20} {:<10} {:<12}".format('DB Name', 'Version',
-                                        'Install date'))
-    print('=======              =======    ============')
-    for db_name, version in sorted(res.iteritems(),
+    size1 = max([len(x) for x in res.keys()]) + 1
+    size2 = max([len(x[1]) for x in res.values()]) + 1
+    size3 = 10  # len('2018-01-01')
+    cols = (
+        ('DB Name', size1),
+        ('Version', size2),
+        ('Install date', size3),
+    )
+    thead = ''
+    line_width = 4  # spaces
+    for col_name, col_size in cols:
+        thead += "{:<{size}}".format(col_name, size=col_size + 1)
+        line_width += col_size
+    print(thead)
+    print('=' * line_width)
+    for db_name, version in sorted(res.items(),
                                    key=lambda x: x[1][0] or datetime.min,
                                    reverse=True):
         if version[0]:
@@ -114,7 +138,69 @@ def list_versions(ctx):
         else:
             time = 'unknown'
         print(
-            "{:<20} {:<10} {:<12}".format(db_name, version[1], time))
+            "{:<{size1}} {:<{size2}} {:<12}".format(
+                db_name, version[1], time, size1=size1, size2=size2
+            )
+        )
+
+
+@task(name='download-dump')
+def download_dump(ctx, database_name, dumpdir='.'):
+    """Download Dump
+
+    Works only with Aws
+
+    :param database_name: Aws database folder name like -> fighting_snail_1024
+    :param dumpdir: Location of Dump directory
+    :return: Decrypted Dump on the dumpdir
+    """
+    # TODO May be change the input (now it's database_name) given in hard but
+    # after may be doing dict in Lastpass with {project_name: database_name}
+    # or a other solution
+    # TODO  to be able to select a dump which is not the latest one,
+    # although the latest should obviously be default.
+
+    # Get name of dump in aws list of dump
+    try:
+        dump_path = _get_list_of_dumps(ctx, database_name)[-1]  # get the last
+    except IndexError:
+        exit_msg('Dump not found for {}'.format(database_name))
+    # gpg_fname is like fighting_snail_1024[...].pg.gpg
+    gpg_fname = os.path.basename(dump_path)
+    # fname is like fighting_snail_1024[...].pg
+    fname = os.path.splitext(gpg_fname)[0]
+
+    make_dir(dumpdir)
+    with cd(dumpdir):
+        s3_path_dump = os.path.join(
+            base_s3_dump_path,
+            database_name,
+            gpg_fname
+        )
+        downloaded = False
+        if not os.path.isfile(gpg_fname):
+            print('S3 Downloading dump...')
+            print('From:', s3_path_dump)
+            print('to:', os.getcwd())
+            _download_from_dumpbag(ctx, s3_path_dump)
+            downloaded = True
+        else:
+            print(
+                "A file named {} already exists, "
+                "skipping download.".format(gpg_fname)
+            )
+        # decrypt again if does not exists or downloaded again
+        if not os.path.isfile(fname) or downloaded:
+            # TODO extract this part so it can be reused
+            password_gpg = get_from_lastpass(ctx, LPASS_GPG_DUMP_KEY_ID, "-p")
+            print("Decrypting with gpg")
+            gpg_decrypt_to_file(ctx, password_gpg, gpg_fname)
+            print("File decrypted as {}".format(fname))
+        else:
+            print(
+                "A decrypted file named {} already exists, "
+                "skipping decryption.".format(fname)
+            )
 
 
 @task(name='local-dump')
@@ -133,9 +219,12 @@ def local_dump(ctx, db_name='odoodb', path='.'):
         dump_name = '%s_%s-%s.pg' % (
             username, project_name, datetime.now().strftime('%Y%m%d-%H%M%S'))
         dump_file_path = '%s/%s' % (path, dump_name)
-        ctx.run('pg_dump -h localhost -p %s --format=c -U odoo --file %s %s' % (
-            db_port, dump_file_path, db_name
-        ), hide=True)
+        ctx.run(
+            'pg_dump -h localhost -p %s --format=c -U odoo --file %s %s' % (
+                db_port, dump_file_path, db_name
+            ),
+            hide=True
+        )
         print('Dump succesfully generated at %s' % dump_file_path)
     return dump_file_path
 
@@ -170,19 +259,24 @@ def share_on_dumps_bag(ctx, dump_file_path):
     dump_file_path = expand_path(dump_file_path)
     gpg_file_path = encrypt_for_dump_bags(ctx, dump_file_path)
     username = getpass.getuser()
+    s3_dump_path = 's3://odoo-dumps/%s/%s' % (
+        username, os.path.basename(dump_file_path)
+    )
     ctx.run(
-        'aws --profile=odoo-dumps s3 cp %s s3://odoo-dumps/%s' % (
-            gpg_file_path, '/'.join([username, gpg_file_path.split('/')[-1]])
-        ), hide=True)
+        'aws --profile=odoo-dumps s3 cp %s %s' % (
+            gpg_file_path, s3_dump_path
+        ), hide=True
+    )
     # Set ShortExpire tag for the dump to be auto deleted after 1 week
     ctx.run(
         'aws --profile=odoo-dumps s3api put-object-tagging '
         '--bucket odoo-dumps --key %s/%s '
         '--tagging="TagSet=[{Key=ShortExpire,Value=True}]"' % (
-            username, gpg_file_path.split('/')[-1]), hide=True
+            username, s3_dump_path
+        ), hide=True
     )
-    print('Encrypted dump successfully shared on dumps bag.')
-    print('Note this dump will be auto-deleted after 7 days.')
+    print('Encrypted dump successfully shared on dumps bag at:', s3_dump_path)
+    print('NOTE: this dump will be auto-deleted after 7 days.')
 
 
 @task(name='dump-and-share')
@@ -217,3 +311,34 @@ def empty_my_dump_bag(ctx):
         username, hide=True
     )
     print('Your dumps bag has been emptied successfully.')
+
+
+def _download_from_dumpbag(ctx, s3_path_dump):
+    """Download one dump from Dump-bag with Aws.
+
+    :param s3_path_dump: complete S3 path of dump
+        as s3://odoo-dumps/fighting_snail_1024/fighting_snail_1024[...].pg.gpg
+    """
+    ctx.run(
+        "aws --profile=odoo-dumps s3 cp {} .".format(s3_path_dump)
+    )
+
+
+def _get_list_of_dumps(ctx, database_name):
+    """Download one dump from Dump-bag with Aws.
+
+    :param database_name: database name or equal to S3 folder
+        eg: is fighting_snail_1024 for case of
+        s3://odoo-dumps/fighting_snail_1024/fighting_snail_1024[...].pg.gpg
+    :return json.loads(result_of_aws_call): a list of all dump for one
+        customer in dumpbag
+    """
+    # TODO should be available as "public task"
+
+    result_of_aws_call = ctx.run(
+        "aws --profile=odoo-dumps s3api list-objects-v2 \
+        --bucket odoo-dumps --query 'Contents[].Key' \
+        --prefix {}".format(database_name), hide=True
+    ).stdout.strip()
+
+    return json.loads(result_of_aws_call)

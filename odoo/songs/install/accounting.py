@@ -771,6 +771,15 @@ def add_apb_tax_2018(ctx):
 
 
 @anthem.log
+def set_analytic_account_on_product_category(ctx):
+    """ Add the analytic account on product categories """
+
+    content = \
+        resource_stream(req, 'data/install/product_cat_analytic_account.csv')
+    load_csv_stream(ctx, 'product.category', content, delimiter=',')
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -803,3 +812,4 @@ def main(ctx):
     rename_accounts(ctx)
     create_new_accounts(ctx)
     add_apb_tax_2018(ctx)
+    set_analytic_account_on_product_category(ctx)

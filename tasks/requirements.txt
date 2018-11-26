@@ -1,12 +1,13 @@
-cookiecutter
-future
-git-aggregator
-invoke
-pyyaml
-requests
-ruamel.yaml
-gnupg
-psycopg2
+cookiecutter==1.6.0
+future==0.16.0
+git-aggregator==1.3.0
+invoke==1.1.1
+PyYAML==3.11
+requests==2.19.1
+ruamel.yaml==0.15.66
+gnupg==2.3.1
+psycopg2-binary==2.7.6
+python-dateutil==2.7.3
 
 # marabunta new versioning
 marabunta >= 0.9.0
