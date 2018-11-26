@@ -7,19 +7,21 @@
         <link href="/stock_location_report/static/src/less/location_barcode.less" rel="stylesheet"/>
     </xpath>
 </template>
-
 <template id="stock.report_location_barcode">
     <t t-call="report.html_container">
         <div class="page stock_location_barcode">
-            <div t-foreach="docs" t-as="o" t-att-class="'barcode_label %s'%o.kind">
-                <div class="barcode_name"><t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/></div>
-
+            <div t-foreach="docs" t-as="o" t-att-class="'barcode_label barcode_label_%s %s' % (o.height, o.kind)">
                 <t t-if="o.barcode"><t t-set="content" t-value="o.barcode"/></t>
                 <t t-if="not o.barcode"><t t-set="content" t-value="'L#%s' % o.name"/></t>
                 <t t-set="content" t-value="content.replace('#', '%%23')"/>
-                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', content, 600, 100)" class="barcode_bottom barcode"/>
+                <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content" class="barcode"/>
 
-                <div t-esc="o.bin_checksum_1" class="barcode_bottom barcode_checksum"/>
+                <div class="barcode_name"><t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/></div>
+
+                <div class="barcode_checksum">
+                    <div t-esc="o.bin_checksum_1"/>
+                    <div t-esc="o.bin_checksum_2"/>
+                </div>
             </div>
         </div>
     </t>

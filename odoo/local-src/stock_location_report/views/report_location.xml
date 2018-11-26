@@ -11,10 +11,11 @@
             <div t-foreach="docs.filtered(lambda r: not r.height.isdigit())._get_by_position('zone')" t-as="zone" class="page">
             <h1>Zone: <t t-esc="zone"/></h1>
             <div class="zone">
-                <t t-set="shelfs" t-value="zone_value._get_by_position('shelf').keys()"/>
-
                 <t t-foreach="zone_value._get_by_position('corridor')" t-as="corridor" class="corridor">
-                <t t-foreach="range(2)" t-as="oddeven">
+
+                <t t-set="shelfs" t-value="zone_value._get_by_position('shelf', reverse=corridor_index % 2).keys()"/>
+
+                <t t-foreach="[corridor_index % 2, (corridor_index+1) % 2]" t-as="oddeven">
                     <div class="corridor">
                         <div><t t-esc="corridor"/></div>
                         <div><table>
@@ -29,14 +30,16 @@
                             <tr t-foreach="corridor_value._get_by_position('height', reverse=1)" t-as="height" class="height">
                                 <td><div><t t-esc="height"/></div></td>
                                 <td t-foreach="shelfs" t-as="shelf" t-if="shelf.isdigit() and int(shelf) % 2 - oddeven" class="shelf">
-                                    <div class="box" t-foreach="height_value.filtered(lambda r: r.shelf==shelf)._get_by_position('box')" t-as="box">
+                                    <div class="box"
+                                            t-att-style="'background-color:%s' % box_value.color"
+                                            t-foreach="height_value.filtered(lambda r: r.shelf==shelf)._get_by_position('box', reverse=corridor_index % 2)" t-as="box">
                                         <t t-esc="box_value.bin_checksum_1"/>
                                     </div>
                                 </td>
                             </tr>
                         </table></div>
                     </div>
-                    <div class="spacer" t-if="not oddeven"> </div>
+                    <div class="spacer" t-if="not oddeven_index"> </div>
                 </t>
                 </t>
             </div>

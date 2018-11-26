@@ -40,6 +40,11 @@
         <field name="arch" type="xml">
 
             <xpath expr="//search" position="inside">
+                <field name="zone"/>
+                <field name="corridor"/>
+                <field name="shelf"/>
+                <field name="height"/>
+                <field name="box"/>
                 <separator/>
                 <filter string="Bin" name="bin" domain="[('kind','=','bin')]"/>
                 <filter string="Parking" name="parking" domain="[('kind','=','parking')]"/>

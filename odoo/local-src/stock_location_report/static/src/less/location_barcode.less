@@ -5,7 +5,7 @@
         height: 230px; // =1320/8
         //border: 1px solid;
         overflow: hidden;
-        position: relative;
+        padding: 20px 0;
     }
     .barcode_label:nth-child(odd) {
         margin-right: 20px;
@@ -24,15 +24,14 @@
     }
 
     .barcode_name {
-        font-size: 87px;
+        font-size: 58px;
         font-weight: bold;
         display: block;
         white-space: nowrap;
         overflow: hidden;
         text-align: left;
-        margin-left: 10px;
 
-        margin-top: -5px; // 8
+        // margin-top: -5px; // 8
         //-webkit-transform: scale(1,1); // 8
 
         //margin-top: -30px; // 12
@@ -46,27 +45,41 @@
         // -webkit-transform: scale(1,2); // 6
     }
 
-    .barcode_bottom {
-        position: absolute;
-        bottom: 20px;
-    }
     img.barcode {
-        left: 0px;
-        // height: 40px; // 12
-        height: 50px; // 8
+        float: right;
+        margin: 0 10px;
     }
+    .barcode_label_A img.barcode {
+        float: left !important;
+        margin-right: 20px;
+    }
+    //img.barcode {
+    //    left: 0px;
+    //    // height: 40px; // 12
+    //    height: 50px; // 8
+    //}
     .reserve img.barcode {
         // height: 50px; // 6
         height: 70px; // 4
         margin-left: -40px;
     }
     div.barcode_checksum {
-        background: lightgray;
-        right: 10px;
+        text-align: center;
+    }
+    div.barcode_checksum > div {
         // font-size: 25px; // 12
         font-size: 33px; // 8
+        background: lightgray;
         padding: 0 7px;
         border: 1px solid;
+        margin: 0 5px;
+    }
+    div.barcode_checksum > div:first-child  {
+        float: left;
+    }
+    div.barcode_checksum > div:last-child  {
+        float: right;
+        margin: 0 40px;
     }
     .reserve div.barcode_checksum {
         ///font-size: 32px; // 6

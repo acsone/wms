@@ -9,6 +9,11 @@ class StockLocationWizardChecksum(models.TransientModel):
     _name = 'stock.location.wizard.checksum'
 
     @api.multi
-    def confirm(self):
+    def generate(self):
         self.env['stock.location'].browse(
             self.env.context['active_ids']).generate_checksum()
+
+    @api.multi
+    def check(self):
+        self.env['stock.location'].browse(
+            self.env.context['active_ids']).check_checksum_valid()

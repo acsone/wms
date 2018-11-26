@@ -5,9 +5,10 @@
         <field name="name">form</field>
         <field name="model">stock.location.wizard.checksum</field>
         <field name="arch" type="xml">
-            <form string="Generate Checksum">
+            <form string="Manage Checksum">
                 <footer>
-                    <button name="confirm" string="Confirm" type="object" class="oe_highlight" />
+                    <button name="generate" string="Generate" type="object" class="oe_highlight" />
+                    <button name="check" string="Check" type="object" class="oe_highlight" />
                     or
                     <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
                 </footer>
@@ -15,7 +16,7 @@
         </field>
     </record>
 
-    <act_window name="Generate Checksum"
+    <act_window name="Manage Checksum"
         src_model="stock.location"
         res_model="stock.location.wizard.checksum"
         view_mode="form"

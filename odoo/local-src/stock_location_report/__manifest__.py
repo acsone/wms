@@ -10,6 +10,7 @@
         'specific_stock',
     ],
     'data': [
+        'views/stock_location.xml',
         'views/report_location.xml',
         'views/report_location_barcode.xml',
         'views/paperformat.xml',

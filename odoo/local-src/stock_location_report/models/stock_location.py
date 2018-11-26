@@ -5,11 +5,17 @@
 from itertools import groupby
 from collections import OrderedDict
 
-from odoo import models
+from odoo import fields, models
 
 
 class StockLocation(models.Model):
     _inherit = 'stock.location'
+
+    color = fields.Selection([
+        ('blue', 'Blue'),
+        ('yellow', 'Yellow'),
+        ('green', 'Green'),
+        ], string="Color")
 
     def _get_by_position(self, field, reverse=False):
         def key(r):

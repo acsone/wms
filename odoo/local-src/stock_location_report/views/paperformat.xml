@@ -10,7 +10,6 @@
         <field name="header_line" eval="False"/>
         <field name="header_spacing">0</field>
         <field name="dpi">96</field>
-        <field name="report_ids" eval="[(4, ref('stock.action_report_location_barcode'))]"/>
     </record>
 
     <record id="paperformat_labels_A4_8x2" model="report.paperformat">
@@ -24,5 +23,6 @@
         <field name="header_line" eval="False"/>
         <field name="header_spacing">0</field>
         <field name="dpi">96</field>
+        <field name="report_ids" eval="[(4, ref('stock.action_report_location_barcode'))]"/>
     </record>
 </odoo>

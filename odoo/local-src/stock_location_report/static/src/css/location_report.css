@@ -36,7 +36,9 @@
 .box {
     font-size: small;
     display: table-cell;
-    width: 1%;
     border: 1px solid;
     text-align: center;
+    height: 19px;
+    min-width: 20px;
+    width:1%;
 }
