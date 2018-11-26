@@ -574,4 +574,9 @@ migration:
           - anthem songs.install.accounting::setup_sequences
           - anthem songs.install.accounting::import_account_journal
           - anthem songs.install.accounting::set_analytic_account_on_product_category
-    - version: 10.29.0
+    - version: 10.28.2
+      addons:
+        upgrade:
+          ### local
+          - website_purchase_review
+          - specific_sale

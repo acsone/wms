@@ -28,6 +28,7 @@ Unreleased
 * ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
 * ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record
 * ALCYN-1651: Allow picking with barcode for material
+* ALCYN-1658: Add a context to display the internal quantity of lots on the view product
 
 **Bugfixes**
 
