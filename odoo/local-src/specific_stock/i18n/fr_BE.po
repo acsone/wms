@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-09 16:26+0000\n"
-"PO-Revision-Date: 2018-10-09 16:26+0000\n"
+"POT-Creation-Date: 2018-11-22 16:53+0000\n"
+"PO-Revision-Date: 2018-11-22 16:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:351
+#: code:addons/specific_stock/models/stock_production_lot.py:345
 #, python-format
 msgid "Cannot generate a voice identifier"
 msgstr "Impossible de générer un identifiant vocal"
@@ -123,7 +123,7 @@ msgid "Daily inventory"
 msgstr "Inventaire journalier"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:92
+#: code:addons/specific_stock/models/stock_inventory.py:110
 #, python-format
 msgid "Daily inventory: %s"
 msgstr "Inventaire journalier: %s"
@@ -292,6 +292,11 @@ msgid "Normal product"
 msgstr "Produit normal"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_inventory_note
+msgid "Note"
+msgstr "Note"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_months_between_inventory
 msgid "Number of months between two inventory for a product"
 msgstr "Nombre de mois entre deux inventaires pour un produit"
@@ -361,6 +366,11 @@ msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_picking_internal_search
+msgid "Picking List or UOP"
+msgstr "Bon de transfert ou UOP"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_product_product_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_product_template_picking_zone_id
@@ -404,7 +414,7 @@ msgstr "Délai avant alerte"
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_product_category
 msgid "Product Category"
-msgstr "Catégorie d'articles"
+msgstr "Catégorie d'article"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_life_time
@@ -446,6 +456,11 @@ msgstr "Quantité"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_percent
 msgid "Quantity to take for best sellers (in percent)"
 msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_quant
+msgid "Quants"
+msgstr "Quants"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_reception_move_id
@@ -522,13 +537,13 @@ msgid "The reception must be linked to a Goods Received Note"
 msgstr "La réception doit être liée à un accusé de réception"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:191
+#: code:addons/specific_stock/models/stock_production_lot.py:192
 #, python-format
 msgid "There is no checksum available"
 msgstr "Il n'y a pas de checksum disponnible"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:130
+#: code:addons/specific_stock/models/stock_inventory.py:148
 #, python-format
 msgid "There is no delay for the inventory %s"
 msgstr "Il n'y a pas de delais pour l'inventaire %s"
@@ -552,7 +567,7 @@ msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:334
+#: code:addons/specific_stock/models/stock_production_lot.py:335
 #, python-format
 msgid "There is no voice identifier available"
 msgstr "Il n'y a pas d'identifiant vocal disponible"
@@ -564,9 +579,20 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_picking_tree
+msgid "UOP"
+msgstr "UOP"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
 msgid "Valid location"
 msgstr "Emplacement valide"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_supplier_id
+msgid "Vendor"
+msgstr "Fournisseur"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_voice_identifier
@@ -610,7 +636,7 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:59
+#: code:addons/specific_stock/models/stock_inventory.py:77
 #, python-format
 msgid "You cannot start an inventory of a product having an ongoing stock operation. Please retry later. Blocking operations:\n"
 "%s"

@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1575: Update the default credit/debit account on journals
 * ALCYN-1642: Indicate if the order is a consignment on the delivery slip
 * ALCYN-1601: Update the list of users
+* ALCYN-1657: Display the UOP on the picking view and allow users to search by UOP
 * ALCYN-1645: Add `done_date` to stock.picking view
 * ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
 * ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record

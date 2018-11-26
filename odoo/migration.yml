@@ -564,6 +564,7 @@ migration:
           - specific_security
           - specific_stock
           - specific_report
+          - specific_stock
           - connector_esb
       operations:
         post:
