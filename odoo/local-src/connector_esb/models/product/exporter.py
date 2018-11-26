@@ -167,10 +167,8 @@ class ProductExportMapper(Component):
 
     @mapping
     def mto(self, record):
-        warehouses = self.env['stock.warehouse'].search([])
-        mto_routes = warehouses.mapped('mto_pull_id.route_id')
-        routes = record.route_ids
-        is_mto = 1 if set(routes.ids).intersection(mto_routes.ids) else 0
+        mto_route_id = self.env.ref('stock.route_warehouse0_mto').id
+        is_mto = 1 if mto_route_id in record.route_ids.ids else 0
         return {'Gescde': is_mto}
 
     @mapping

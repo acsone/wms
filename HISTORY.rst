@@ -28,6 +28,7 @@ Unreleased
 * ALCYN-1664: Fix tax required (rule was not applied on invoice validation)
 * ALCYN-1652: Delivery Note must always display the "numero de depot"
 * ALCYN-1566: Align Partner Display on delivery slip (also fix entry register)
+* ACLYN-1666: Fix 'Acheté Vendu' in flux product (ESB)
 
 **Build**
 
