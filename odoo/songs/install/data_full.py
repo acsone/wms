@@ -10,7 +10,6 @@ import anthem
 from datetime import datetime
 from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
 from anthem.lyrics.records import create_or_update
-from anthem.exceptions import AnthemError
 from ..common import req
 
 _logger = logging.getLogger(__name__)
@@ -586,27 +585,26 @@ def post_import_stock_bins(ctx):
 
 
 @anthem.log
-def create_journals(ctx):
+def create_current_liabilities_accounts(ctx):
     """ WARNING: Keep this method even if this method is not used.
     Will be used later (after go live).
-    Create the balance' journals """
-    journal = ctx.env['account.journal'].search([
-        ('code', '=', 'MISC')
-    ], limit=1)
-    if not journal:
-        _logger.error('MISC journal not found')
-        return
+    Create the balance' accounts """
+    account_type_current_liabilities = \
+        ctx.env.ref('account.data_account_type_current_liabilities')
 
-    supplier_xml_id = '__setup__.account_move_balance_supplier'
-    create_or_update(ctx, 'account.move', supplier_xml_id, {
-        'name': 'Balance fournisseur',
-        'journal_id': journal.id,
+    account_customer_xml_id = \
+        '__setup__.account_current_liabilities_customer'
+    create_or_update(ctx, 'account.account', account_customer_xml_id, {
+        'code': '499001',
+        'name': 'Compte d\'attente clients',  # In french for Catherine
+        'user_type_id': account_type_current_liabilities.id,
     })
 
-    customer_xml_id = '__setup__.account_move_balance_customer'
-    create_or_update(ctx, 'account.move', customer_xml_id, {
-        'name': 'Balance clients',  # In french for Catherine
-        'journal_id': journal.id,
+    account_supplier_xml_id = '__setup__.account_current_liabilities_supplier'
+    create_or_update(ctx, 'account.account', account_supplier_xml_id, {
+        'code': '499002',
+        'name': 'Compte d\'attente fournisseurs',  # In french for Catherine
+        'user_type_id': account_type_current_liabilities.id,
     })
 
 
@@ -632,37 +630,31 @@ def import_journal_items(ctx, customer=False, supplier=False):
 
     if customer:
         file_path = 'data/source/BALclients.csv'
-        move = ctx.env.ref('__setup__.account_move_balance_customer')
+        liability_account = \
+            ctx.env.ref('__setup__.account_current_liabilities_customer')
     elif supplier:
         file_path = 'data/source/BALfournisseurs.csv'
-        move = ctx.env.ref('__setup__.account_move_balance_supplier')
+        liability_account = \
+            ctx.env.ref('__setup__.account_current_liabilities_supplier')
     else:
         raise Exception('You cannot start this method without specifying '
                         'the type of import')
-
-    # This import cannot be executed twice. In this case we skip this import
-    # without raise an error
-    if move.line_ids:
-        _logger.error('This import can only be executed once.'
-                      'Lines are not empty')
-        return
 
     ctx.env.cr.execute("SELECT code, id FROM account_account")
     accounts = dict(ctx.env.cr.fetchall())
 
     check_customer_ref_query = "SELECT id FROM res_partner WHERE ref = %s"
 
+    AccountMove = ctx.env['account.move']
     AccountMoveLine = ctx.env['account.move.line']
+    IrModelData = ctx.env['ir.model.data']
 
-    new_header = [
-        'name',
-        'partner_id/.id',
-        'date_maturity',
-        'account_id/.id',
-        'debit',
-        'credit',
-        'move_id/.id'
-    ]
+    journal = ctx.env['account.journal'].search([
+        ('code', '=', 'MISC')
+    ], limit=1)
+    if not journal:
+        _logger.error('MISC journal not found')
+        return
 
     for content in get_files(req, file_path):
         header, rows = read_csv(content)
@@ -674,8 +666,8 @@ def import_journal_items(ctx, customer=False, supplier=False):
         index_debit = header.index('Debit')
         index_num_piece = header.index('n[piece')
         index_journal = header.index('Jrn')
+        index_date_piece = header.index('Dt piece')
 
-        new_rows = []
         for row in rows:
             customer_ref = row[index_customer_ref]
             ctx.env.cr.execute(check_customer_ref_query, (customer_ref,))
@@ -698,6 +690,14 @@ def import_journal_items(ctx, customer=False, supplier=False):
             except Exception:
                 deadline_str = datetime.now().strftime('%Y-%m-%d')
 
+            try:
+                # Date Piece
+                date_piece_str = row[index_date_piece]
+                date_piece = datetime.strptime(date_piece_str, '%d/%m/%Y')
+                date_piece_str = date_piece.strftime('%Y-%m-%d')
+            except Exception:
+                date_piece_str = datetime.now().strftime('%Y-%m-%d')
+
             # Debit
             debit_str = row[index_debit].replace(',', '.')
             debit = debit_str and float(debit_str) or 0
@@ -715,38 +715,42 @@ def import_journal_items(ctx, customer=False, supplier=False):
             original_journal = row[index_journal]
             name = "%s - %s" % (original_journal, num_piece)
 
-            new_rows.append(
-                [name,
-                 partner_id,
-                 deadline_str,
-                 account_id,
-                 debit,
-                 credit,
-                 move.id])
+            move = AccountMove.create({
+                'journal_id': journal.id,
+                'date': date_piece_str,
+                'name': name,
+            })
 
-        # Load rows without the method load_rows (we want to set the context)
-        result = AccountMoveLine\
-            .with_context(check_move_validity=False,
-                          tracking_disable=True,
-                          active_test=False,
-                          import_initial_balance=True)\
-            .load(new_header, new_rows)
-        ids = result['ids']
-        if not ids:
-            messages = u'\n'.join(
-                u'- %s' % msg for msg in result['messages']
-            )
-            ctx.log_line(u"Failed to load CSV "
-                         u"in '%s'. Details:\n%s" %
-                         (AccountMoveLine._name, messages))
-            raise AnthemError(u'Could not import CSV. See the logs')
-        else:
-            ctx.log_line(u"Imported %d records in '%s'" %
-                         (len(ids), AccountMoveLine._name))
+            # We cannot create a XML ID with data (a partner can have
+            # several open invoice with the same date and the reference
+            # is not unique). However we should be able to remove
+            # all moves created by this import. To do that, I create
+            # a specific XML ID
+            IrModelData.create({
+                'name': 'account_move_initial_import_%s' % move.id,
+                'module': '__import__',
+                'model': AccountMove._name,
+                'res_id': move.id,
+                'noupdate': False
+            })
 
-        # Recompute matched percentage and amount
-        move._compute_matched_percentage()
-        move._amount_compute()
+            AccountMoveLine.with_context(check_move_validity=False).create({
+                'name': name,
+                'partner_id': partner_id,
+                'date_maturity': deadline_str,
+                'account_id': account_id,
+                'debit': debit,
+                'credit': credit,
+                'move_id': move.id
+            })
+
+            AccountMoveLine.create({
+                'name': '/',
+                'account_id': liability_account.id,
+                'debit': credit,
+                'credit': debit,
+                'move_id': move.id
+            })
 
 
 @anthem.log
