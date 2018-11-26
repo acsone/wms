@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-1601: Update the list of users
 * ALCYN-1645: Add `done_date` to stock.picking view
 * ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
+* ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record
 
 **Bugfixes**
 
