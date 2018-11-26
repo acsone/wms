@@ -18,6 +18,7 @@ Unreleased
 * ALCYN-1595: Define helpdesk.ticket team_id context according to calling model
 * ALCYN-1643: Fix main_exception_id not found in parent view
 * ALCYN-1644: Fix typo on consignment report
+* ALCYN-1631: Fix product import on PIM for product with warning_info too long
 
 **Build**
 

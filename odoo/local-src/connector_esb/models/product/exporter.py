@@ -70,10 +70,13 @@ class ProductExportMapper(Component):
     def category_warnings(self, record):
         cat = record.categ_id
         return {
-            'Warceg': cat.with_context({'lang': 'de_DE'}).warning_info or '',
-            'Warcfr': cat.with_context({'lang': 'fr_BE'}).warning_info or '',
-            'Warcnl': cat.with_context({'lang': 'nl_BE'}).warning_info or '',
-            }
+            'Warceg': (cat.with_context(
+                {'lang': 'de_DE'}).warning_info or '')[:254],
+            'Warcfr': (cat.with_context(
+                {'lang': 'fr_BE'}).warning_info or '')[:254],
+            'Warcnl': (cat.with_context(
+                {'lang': 'nl_BE'}).warning_info or '')[:254],
+        }
 
     @mapping
     def fixed_fields(self, record):
