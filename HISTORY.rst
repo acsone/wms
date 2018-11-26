@@ -21,6 +21,8 @@ Unreleased
 
 **Build**
 
+* Add tasks/local_requirements.txt to install libs required for project specific invoke tasks
+
 **Documentation**
 
 
