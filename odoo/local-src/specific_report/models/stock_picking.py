@@ -80,7 +80,8 @@ class StockPicking(models.Model):
 
             currency = lines_done.mapped('order_id.currency_id')
             if not currency:
-                raise UserError(_('There is currency defined on orders'))
+                currency = picking.company_id.currency_id
+
             if len(currency) != 1:
                 raise UserError(
                     _('There are more than one currencies on orders'))
