@@ -58,11 +58,11 @@ class AccountInvoice(models.Model):
                     '')['value']['reference']
         self.reference = reference
 
-    def invoice_validate(self):
+    def _check_invoice_reference(self):
         # Do not check uniqueness on reference
         # We require uniqueness on supplier_invoice_number through the
         # sql_constraint
-        return self.write({'state': 'open'})
+        return
 
     @api.multi
     def generate_bbacomm(self, type, reference_type, partner_id, reference):
