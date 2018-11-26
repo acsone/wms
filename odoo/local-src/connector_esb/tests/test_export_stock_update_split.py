@@ -7,154 +7,159 @@ import os
 import random
 import requests
 
-from datetime import datetime, timedelta
-
+from odoo.addons.connector.exception import ConnectorException
 from odoo.tests.common import SavepointCase
 
 
 class ExportStockUpdateTestCase(SavepointCase):
 
-    def setUp(self):
-        super(ExportStockUpdateTestCase, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(ExportStockUpdateTestCase, cls).setUpClass()
         os.environ['ODOO_ESB_WS_USER'] = 'ws_user'
         os.environ['ODOO_ESB_WS_BASE_URL'] = 'https://test.com'
         os.environ['ODOO_ESB_WS_PWD'] = 'pwd'
-        self.backend_model = self.env['esb.backend']
-        self.backend = self.backend_model.get_singleton()
-        self.setup_records()
-        self.maxDiff = None
-        self.timestamp = self.env.ref(
+        cls.backend_model = cls.env['esb.backend']
+        cls.backend = cls.backend_model.get_singleton()
+        cls.setup_records()
+        cls.maxDiff = None
+        cls.timestamp = cls.env.ref(
                 'connector_esb.esb_timestamp_stock_update')
 
     @property
     def model(self):
         return self.env['product.product']
 
-    def setup_records(self):
-        # Create 20 products
-        self.all_products = []
+    @classmethod
+    def setup_records(cls):
+        cls.location = cls.env.ref('stock.stock_location_stock').id
+        # Remove all existing product from sale so they do not interfere
+        products = cls.env['stock.quant'].search([]).mapped('product_id')
+        products.write({'sale_ok': False})
+        # Create 10 products
+        cls.all_products = cls.env['product.product']
         for product_id in range(100, 110):
-            self.all_products.append(self.env['product.product'].create({
+            cls.all_products |= cls.env['product.product'].create({
                 'name': 'test prod {}'.format(product_id),
                 'default_code': 'test prod {}'.format(product_id),
                 'type': 'product',
                 'sale_ok': True,
-            }))
-        # Remove all product from sale so they do not interfere
-        products = self.env['stock.quant'].search([]).mapped('product_id')
-        products.write({'sale_ok': False})
+            })
+        cls.product_ids = cls.all_products.ids
+        # Add a quant for each product
+        for product in cls.all_products:
+            inventory_wizard = cls.env['stock.change.product.qty'].create({
+                'product_id': product.id,
+                'new_quantity': random.randint(1, 100),
+                'location_id': cls.location,
+            })
+            inventory_wizard.change_product_qty()
 
-        self.location = self.env.ref('stock.stock_location_stock').id
+    def set_quant_write_date(self, quants, write_date):
+        """Set the write_date on some quants."""
+        self.env.cr.execute(
+            'UPDATE stock_quant SET write_date = %s WHERE id in %s',
+            (write_date, tuple(quants.ids))
+        )
 
-    def set_quant_write_date(self, quant_id, write_date):
-        """Set the write_date on a quant."""
-        self.env.cr.execute("""
-            UPDATE stock_quant SET write_date = %s WHERE id = %s
-        """, (write_date, quant_id))
-
-    def update_timestamp_for_basic_lock(self, timestamp, exporter):
+    def successful_post_response(url, data, headers, auth):
         """ """
-        return (
-            datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S") +
-            timedelta(seconds=exporter.BASIC_LOCK_TIME + 1)
-        ).strftime("%Y-%m-%d %H:%M:%S")
-
-    def post_ret_status(url, data, headers, auth):
         resp = requests.Response()
         resp.status_code = 200
         resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
         return resp
 
-    @mock.patch('requests.post', side_effect=post_ret_status)
-    def test_all_quants_in_same_second_are_exported(self, post):
+    @mock.patch('requests.post', side_effect=successful_post_response)
+    def test_successful_export(self, post):
         """
         Check with a split with quants in same second.
         And check that all are exported if nb of export is smaller
         than max records
         """
-        # Make quants for the first 9 products in an older date
-        for product in self.all_products[:-1]:
-            inventory_wizard = self.env['stock.change.product.qty'].create({
-                'product_id': product.id,
-                'new_quantity': random.randint(1, 100),
-                'location_id': self.location,
-            })
-            inventory_wizard.change_product_qty()
-            self.set_quant_write_date(
-                self.env['stock.quant'].search(
-                    [('product_id.id', '=', product.id)])[0].id,
-                '2017-11-05 12:00:00'
-            )
-        # All quants in the same second so all must be exported
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
+            # 10 product stock status to export by batch of 3, is 4 export
             exported_until = exporter.run(max_records=3)
-            assert exported_until is None
-        # Add a quant in a more recent date
-        inventory_wizard = self.env['stock.change.product.qty'].create({
-            'product_id': self.all_products[-1].id,
-            'new_quantity': random.randint(1, 100),
-            'location_id': self.location,
-        })
-        inventory_wizard.change_product_qty()
-        # Must be done in two export if max_records is smaller than all records
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
-            exporter = work.component(usage='record.exporter.cron')
-            # First export
-            exported_until = exporter.run(max_records=3)
-            assert exported_until == self.update_timestamp_for_basic_lock(
-                    '2017-11-05 12:00:00', exporter)
-            # Second export
-            exported_until = exporter.run(
-                export_since=exported_until,
-                max_records=3
-            )
-            assert exported_until is None
-            # But if max_records is larger it should export all in one go
-            exported_until = exporter.run(
-                export_since=exported_until,
-                max_records=13
-            )
-            assert exported_until is None
+            self.assertEqual(exported_until, None)
+            self.assertEqual(post.call_count, 4)
+            # 10 product stock status to export by batch of 5, is 2 export
+            exported_until = exporter.run(max_records=5)
+            self.assertEqual(exported_until, None)
+            self.assertEqual(post.call_count, 4 + 2)
+            # 10 product stock status with no limit
+            exported_until = exporter.run(max_records=0)
+            self.assertEqual(exported_until, None)
+            self.assertEqual(post.call_count, 4 + 2 + 1)
 
-    @mock.patch('requests.post', side_effect=post_ret_status)
-    def test_quants_exports_are_split_2(self, post):
+    def failing_post_response(url, data, headers, auth):
+        """ This makes the http post fail when product 103 is in the data."""
+        if 'test prod 103' in data:
+            raise ConnectorException('Failed push')
+        resp = requests.Response()
+        resp.status_code = 200
+        resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
+        return resp
+
+    @mock.patch('requests.post', side_effect=failing_post_response)
+    def test_failing_export_1(self, post):
+        """ Check failed push to ESB after a successfull one.
+
+        A failed post to the ESB after some successful ones, should return
+        as timestamp the write_date of the last exported quant plus the
+        basic lock safety seconds.
+
         """
-        Check with a split with quants in different second.
-        """
-        # Make quants for the first 3 in an older date
-        for product in self.all_products[:3]:
-            inventory_wizard = self.env['stock.change.product.qty'].create({
-                'product_id': product.id,
-                'new_quantity': random.randint(1, 100),
-                'location_id': self.location,
-            })
-            inventory_wizard.change_product_qty()
-            self.set_quant_write_date(
-                self.env['stock.quant'].search(
-                    [('product_id.id', '=', product.id)])[0].id,
-                '2017-11-05 12:00:00'
-            )
-        # Make quants for the next 3 for now
-        for product in self.all_products[3:6]:
-            inventory_wizard = self.env['stock.change.product.qty'].create({
-                'product_id': product.id,
-                'new_quantity': random.randint(1, 100),
-                'location_id': self.location,
-            })
-            inventory_wizard.change_product_qty()
+        # Set three quants in an older date, but not the one for product 103
+        quants = self.env['stock.quant'].search(
+            [('product_id.id', 'in', self.product_ids[0:3])]
+        )
+        self.set_quant_write_date(quants, '2017-11-05 12:00:00')
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(max_records=3)
-        assert exported_until is not None
+            # Failing after the second export
+            self.assertEqual(post.call_count, 2)
+            self.assertEqual(
+                exported_until,
+                exporter.get_exported_until('2017-11-05 12:00:00')
+            )
+
+    @mock.patch('requests.post', side_effect=failing_post_response)
+    def test_failing_export_2(self, post):
+        """ Check export that fails at the first push to the ESB
+
+        When the first HTTP post to the ESB fails the export must return
+        an exception.
+        """
+        # Set three quants in an older date including the one for product 103
+        quants = self.env['stock.quant'].search(
+            [('product_id.id', 'in', self.product_ids[3:5])]
+        )
+        self.set_quant_write_date(quants, '2017-11-05 12:00:00')
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            exporter = work.component(usage='record.exporter.cron')
+            with self.assertRaises(ConnectorException):
+                exporter.run(max_records=3)
+            self.assertEqual(post.call_count, 1)
+
+    @mock.patch('requests.post', side_effect=successful_post_response)
+    def test_nothing_to_export(self, post):
+        """ Check an export that has nothing to do.
+
+        When there is nothing to do the exporter will return None.
+        """
+        # Set all quants in an older date than the export_since params
+        quants = self.env['stock.quant'].search([])
+        self.set_quant_write_date(quants, '2017-11-05 12:00:00')
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(
-                export_since=exported_until,
-                max_records=3
+                max_records=3,
+                export_since='2017-12-12 12:00:00'
             )
-        assert exported_until is None
+            self.assertEqual(post.call_count, 0)
+            self.assertEqual(exported_until, None)
