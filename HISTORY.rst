@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1670: Fix cancel remaining quantity to deliver on a sales order
+
 **Build**
 
 **Documentation**
