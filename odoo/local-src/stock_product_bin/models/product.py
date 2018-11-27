@@ -37,5 +37,5 @@ class ProductTemplate(models.Model):
         order = {key: i for i, key in enumerate(order_list)}
         if self.stock_bin_ids:
             bins = self.stock_bin_ids.mapped('bin_location_id')
-            return sorted(bins, key=lambda bin: order.get(bin.kind, 99))[0]
+            return sorted(bins, key=lambda rec: order.get(rec.kind, 99))[0]
         return self.env['stock.location'].browse()
