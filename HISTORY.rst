@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1668: Add a QR code on lot labels (#PRODUCT_REF#LOT_NAME) and a QR code on label without lot (PRODUCT_REF)
+
 **Bugfixes**
 
 **Build**
