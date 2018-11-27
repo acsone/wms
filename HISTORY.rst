@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1623: Sort bins on products to take first bins for label printing
+
 **Bugfixes**
 
 **Build**
