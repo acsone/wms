@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* SMTP config for PROD server
+
 **Documentation**
 
 
