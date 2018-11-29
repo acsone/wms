@@ -16,6 +16,33 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_report
+#: model:mail.template,body_html:specific_report.email_template_pharmacist_supplier_order
+msgid "\n"
+"                <p>Hello,</p>\n"
+"                <p>\n"
+"                    We have received this order that is subjected to you.<br/>\n"
+"                    We transfer it to you and wait for your packages to deliver them to the customer.\n"
+"                </p>\n"
+"\n"
+"                <p>Please find here attached the order.</p>\n"
+"                <p>We wish you good reception.</p>\n"
+"                <p>Sincerely,</p>\n"
+"                <p>Your Team Alcyon</p>\n"
+"            \n"
+"        "
+msgstr "\n"
+"                <p>Bonjour,</p>\n"
+"                <p>\n"
+"                    Nous avons reçu la commande reprise ci-dessous qui vous est destinée.<br/>\n"
+"                    Nous vous la transférons et attendons vos colis pour la livraison au client.\n"
+"                </p>\n"
+"<p>Vous trouverez ci-joint la note d’envoi électronique de votre livraison.</p>\n"
+"<p>Nous vous en souhaitons bonne réception.</p>\n"
+"<p>Cordialement,</p>\n"
+"<p>Votre équipe Alcyon</p>\n"
+"\n"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Alcyon<br/>discount"
 msgstr "%<br/>Remise<br/>Alcyon"

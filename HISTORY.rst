@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-163: Send fax on order confirm to pharmacist "PHARMACIE DU SOUVERAIN"
+
 **Bugfixes**
 
 **Build**
