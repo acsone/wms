@@ -32,6 +32,8 @@ class StockPickingType(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    is_put_in_pack_done = fields.Boolean('Put in Pack done', default=False)
+
     @api.multi
     def _create_lots_for_picking(self):
         return super(StockPicking, self.with_context(
@@ -99,6 +101,8 @@ class StockPicking(models.Model):
             packages.write({
                 'original_picking_zone_id': original_picking_zone_id.id,
             })
+
+        self.write({'is_put_in_pack_done': True})
 
         return result
 

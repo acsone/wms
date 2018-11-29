@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1684: Force the user to put in pack before validate a picking
+
 **Bugfixes**
 
 **Build**
