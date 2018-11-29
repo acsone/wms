@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1487: Fix sale exception translations
+
 **Build**
 
 **Documentation**
