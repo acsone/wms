@@ -79,18 +79,18 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
                 })],
         })
         # Lets add some stock
-        self.use_date_1 = datetime.today() + timedelta(weeks=40)
-        self.use_date_2 = datetime.today() + timedelta(weeks=1)
-        self.use_date_3 = datetime.today() + timedelta(days=1)
+        self.life_date_1 = datetime.today() + timedelta(weeks=40)
+        self.life_date_2 = datetime.today() + timedelta(weeks=1)
+        self.life_date_3 = datetime.today() + timedelta(days=1)
         self.lot1 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot1',
-            'use_date': self.use_date_1.strftime("%Y-%m-%d %H:%M:%S")
+            'life_date': self.life_date_1.strftime("%Y-%m-%d %H:%M:%S")
             })
         self.lot2 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot2',
-            'use_date': self.use_date_2.strftime("%Y-%m-%d %H:%M:%S")
+            'life_date': self.life_date_2.strftime("%Y-%m-%d %H:%M:%S")
             })
         inventory_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.prod1.id,
@@ -114,7 +114,7 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
                     'qty': product.immediately_usable_qty,
                     'sales_average': round(55.0/365, 1),
                     'erp_stock_code': u'A',
-                    'date_peremption': self.use_date_2.strftime("%Y-%m-%d"),
+                    'date_peremption': self.life_date_2.strftime("%Y-%m-%d"),
                     }
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

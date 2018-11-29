@@ -101,19 +101,36 @@ class ExportStockUpdateTestCase(SavepointCase):
                     'product_uom_qty': 7,
                 })],
         })
+        # Add an older sale order that should not be picked up
+        self.so2 = self.env['sale.order'].create({
+            'esb_ref': 'ref_12388734',
+            'partner_id': self.partner.id,
+            'sale_channel': 'fax',
+            'client_order_ref': 'whatever the client want',
+            'delivery_price': 23.5,
+            'suite_name': '0123434234',
+            'date_order': '2017-10-10',
+            'order_line': [
+                (0, 0, {
+                    'sequence': 1,
+                    'name': 'prod 1',
+                    'product_id': self.prod1.id,
+                    'product_uom_qty': 55,
+                })],
+        })
         # Lets add some stock
-        self.use_date_1 = datetime.today() + timedelta(weeks=40)
-        self.use_date_2 = datetime.today() + timedelta(weeks=1)
-        self.use_date_3 = datetime.today() + timedelta(days=1)
+        self.life_date_1 = datetime.today() + timedelta(weeks=40)
+        self.life_date_2 = datetime.today() + timedelta(weeks=1)
+        self.life_date_3 = datetime.today() + timedelta(days=1)
         self.lot1 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot1',
-            'use_date': self.use_date_1.strftime("%Y-%m-%d %H:%M:%S")
+            'life_date': self.life_date_1.strftime("%Y-%m-%d %H:%M:%S")
             })
         self.lot2 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot2',
-            'use_date': self.use_date_2.strftime("%Y-%m-%d %H:%M:%S")
+            'life_date': self.life_date_2.strftime("%Y-%m-%d %H:%M:%S")
             })
         inventory_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.prod1.id,
@@ -133,7 +150,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         self.lot_p2 = self.env['stock.production.lot'].create({
             'product_id': self.prod2.id,
             'name': 'lot_p2',
-            'use_date': self.use_date_3.strftime("%Y-%m-%d %H:%M:%S")
+            'life_date': self.life_date_3.strftime("%Y-%m-%d %H:%M:%S")
             })
         inventory_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.prod2.id,
@@ -150,7 +167,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                     'qty': product.immediately_usable_qty,
                     'sales_average': round(55.0/365, 1),
                     'erp_stock_code': u'A',
-                    'date_peremption': self.use_date_2.strftime("%Y-%m-%d"),
+                    'date_peremption': self.life_date_2.strftime("%Y-%m-%d"),
                     }
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:

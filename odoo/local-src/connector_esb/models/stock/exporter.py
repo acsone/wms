@@ -4,7 +4,7 @@
 
 import logging
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from odoo import fields
 from odoo.osv.expression import AND
@@ -43,23 +43,30 @@ class StockUpdateMapper(Component):
     def compute_date_peremption(self, record):
         value = ''
         lot = self.env['stock.production.lot'].search([
-            ('quant_ids.product_id', '=', record.id),
-            ('use_date', '!=', False)], order='use_date', limit=1)
+            ('product_id', '=', record.id),
+            ('life_date', '!=', False)], order='life_date', limit=1)
         if lot:
-            value = lot[0].use_date[:10]
+            value = lot[0].life_date[:10]
         return {'date_peremption': value}
 
     @mapping
     def compute_sales_average(self, record):
-        """ Compute the daily average quantity of sale on a year """
-        one_year_back = (datetime.today() - timedelta(days=365))
-        sol = self.env['sale.order.line'].search([
-            ('product_id', '=', record.id),
-            ('create_date', '>=', one_year_back.strftime("%Y-%m-%d")),
-            ('order_id.state', '!=', 'cancel'),
-        ])
-        sale_average = sum(line.product_uom_qty for line in sol) / 365
-        return {'sales_average': round(sale_average, 1)}
+        """ Compute the daily average quantity of sale on a year
+
+        Using direct sql to speed up the export.
+        """
+        sql = '''
+            SELECT
+                COALESCE(SUM(sol.product_uom_qty), 0) /365
+            FROM sale_order_line AS sol
+            LEFT JOIN sale_order AS so ON sol.order_id = so.id
+            WHERE sol.state not in ('cancel')
+                  AND so.date_order > current_date - interval '1' year
+                  AND sol.product_id = %s
+        '''
+        self.env.cr.execute(sql, [record.id])
+        sale_average = self.env.cr.fetchone()[0]
+        return {'sales_average': round(sale_average or 0, 1)}
 
 
 class StockUpdateExporter(Component):
