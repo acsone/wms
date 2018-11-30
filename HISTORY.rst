@@ -11,6 +11,7 @@ Unreleased
 * ALCYN-1667: Allow to search a product by the reference of the supplier
 * ALCYN-1684: Force the user to put in pack before validate a picking
 * ALCYN-1681: Display the depot number on the sale order report
+* ALCYN-1682: Add a menu entry to open an UOP
 
 **Bugfixes**
 
