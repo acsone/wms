@@ -16,6 +16,7 @@ Unreleased
 
 * ALCYN-1649: sale_triple_discount: Fix tax total on report
 * ALCYN-243: Set the serial number on the picking out
+* ALCYN-1689: Fix a bug with the passport and use the right printer for the passport
 
 **Build**
 
