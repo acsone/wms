@@ -4,7 +4,7 @@
 
 from datetime import date
 
-from odoo import models, api, _
+from odoo import models, api, fields, _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.exceptions import UserError
 
