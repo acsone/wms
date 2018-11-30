@@ -588,6 +588,7 @@ migration:
         full:
           operations:
             post:
+              - anthem songs.upgrade.10_29_0_update::set_xid_legal_entity
               # cleanup bins, new route info and supplier info (reuse same as in 10.28.0)
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/10_28_0_update.sql'"
               # ------------ DATA update ------------

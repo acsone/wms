@@ -5,11 +5,27 @@
 
 from pkg_resources import resource_stream
 
+import anthem
 from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.records import add_xmlid
 
 from ..common import req
 
 
+@anthem.log
+def set_xid_legal_entity(ctx):
+    """An xml id is missing on a legal entity"""
+    xid = '__setup__.legal_entity_12'
+    entity = ctx.env.ref(xid, raise_if_not_found=False)
+    if entity:
+        return
+    entity = ctx.env['legal.entity'].search([('name', '=', 'CAB VET')])
+    if not entity:
+        return
+    add_xmlid(ctx, entity, xid)
+
+
+@anthem.log
 def import_customers(ctx):
     # Directly called as post_full in migration.yml
     load_ctx = ctx.env.context.copy()
