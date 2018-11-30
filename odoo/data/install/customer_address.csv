@@ -581,7 +581,6 @@ __import__.customer_address_delivery_3338,DR BIHAIN MICHEL,"Virée du Renard,5",
 __import__.customer_address_delivery_3339,DR PIERRET CHARLY,"Virée du Renard, 48",6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3339
 __import__.customer_address_delivery_3340,DR ONCLINX CECILE,FMV SERV. PHARMACO   B41,4000,LIEGE,,,False,False,base.be,fr_BE,0474/414318,delivery,__import__.customer_3340
 __import__.customer_address_delivery_3343,FMV SERV. PHARMACOLOGIE,Fac. Med. Veteri Bat. B41,4000,LIEGE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3343
-__import__.customer_address_delivery_3355,PHARMA BELGIUM BRUXELLES *,"Brixtonlaan, 7 B",1930,ZAVENTEM,,,False,False,base.be,nl_BE,,delivery,__import__.customer_3355
 __import__.customer_address_delivery_3368,DR VANDEWEERD JEAN-MICHEL,"Rue Verte, 208",4040,HERSTAL,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3368
 __import__.customer_address_delivery_3376,DR BIHAIN MICHEL,Virée du Renard 5,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3376
 __import__.customer_address_delivery_3378,DR PIERRET CHARLY,Virée du Renard 48,6640,SIBRET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_3378
@@ -959,7 +958,6 @@ __import__.customer_address_delivery_5514,DR ERPICUM SUZANNE,"Armand Colinet, 17
 __import__.customer_address_delivery_5522,VAKGRP KLEINE HUISDIEREN HOSPI,Salisburglaan 133,9820,MERELBEKE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_5522
 __import__.customer_address_delivery_5527,SOCIETE BIOZONE,"Rue de la Basse Sambre, 24",5140,SOMBREFFE,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5527
 __import__.customer_address_delivery_5531,EPC 053,"Rue Edouard d'Inot, 32",5590,CINEY,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5531
-__import__.customer_address_delivery_5538,VAKGROEP KL.HUISDIEREN ANESTHE,Salisburylaan 133,9820,MERELBEKE,,,False,False,base.be,nl_BE,,delivery,__import__.customer_5538
 __import__.customer_address_delivery_5540,CLIN.VET.CHAMP DU ROI,"Rue Champ du Roi, 145",1040,ETTERBEEK,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5540
 __import__.customer_address_delivery_5568,DI BLASIO CATHERINE,rue Ferrer 20,7331,BAUDOUR (Saint-Ghislain),,,False,False,base.be,fr_BE,,delivery,__import__.customer_5568
 __import__.customer_address_delivery_5642,DR RANSON-COCK DOMINIQUE,Rue des Eburons 75,1000,BRUXELLES,,,False,False,base.be,fr_BE,,delivery,__import__.customer_5642
@@ -1417,3 +1415,4 @@ __import__.customer_address_delivery_9427,MULTIPHARMA SINT-PIETERS-LEEUW,Buitenp
 __import__.customer_address_delivery_9429,PROPHETE ARNAUD,Rue Belle Vue 1,5380,Cortil-Wodon (Fernelmont),,,False,False,base.be,fr_BE,,delivery,__import__.customer_9429
 __import__.customer_address_delivery_9462,CAROLOVET,"Rue de Gilly, 2",6010,COUILLET,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9462
 __import__.customer_address_delivery_9464,PHARMACIE DU SOUVERAIN,Boulevard du Souverain 264,1160,AUDERGHEM,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9464
+__import__.customer_address_delivery_9470,VET'EXOTICS,Chemin du Bois 92,4000,ROCOURT,,,False,False,base.be,fr_BE,,delivery,__import__.customer_9470

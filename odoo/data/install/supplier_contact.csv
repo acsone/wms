@@ -27,6 +27,7 @@ __import__.supplier_contact_60455_1,contact,MONSIEUR MARC BERLIER,,,,False,False
 __import__.supplier_contact_61400_1,contact,MR. PIERRE LAFOSSE,,,,False,False,fr_BE,apex.medical@skynet.be,0475/681 684,__import__.supplier_61400
 __import__.supplier_contact_61405_1,contact,MONSIEUR PHILIPPE DE CLERCQ,DÉLÉGUÉ,,,False,False,fr_BE,,0496/28.97.51,__import__.supplier_61405
 __import__.supplier_contact_61520_1,contact,COMMANDES,,,,False,False,nl_BE,order@europe.bd.com,,__import__.supplier_61520
+__import__.supplier_contact_61524_1,contact,COMMANDES,,02 8953983,,False,False,fr_BE,be@cs.cardinalhealth.com,,__import__.supplier_61524
 __import__.supplier_contact_61594_1,contact,MONSIEUR SIMON GISLER,,,,False,False,fr_BE,,,__import__.supplier_61594
 __import__.supplier_contact_61597_1,contact,MR. STEPHAN DUNLAP,S.COM,,,False,False,de_DE,,,__import__.supplier_61597
 __import__.supplier_contact_61600_1,contact,ELECTRICITY WALLONIE,,,,False,False,fr_BE,Rue Gilles Magnée 90 4430 ANS,,__import__.supplier_61600

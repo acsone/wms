@@ -1,0 +1,2 @@
+id,active,property_payment_term_id/id,call_name,customer_payment_mode_id/id
+__import__.customer_4959,False,__setup__.account_payment_term_d7,BL BELMEDIS HOBOKEN,__setup__.account_payment_mode_1
