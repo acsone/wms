@@ -147,9 +147,7 @@ msgstr "Médicament humain interdit"
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.provision_on_order
 msgid "Item bought on order, neither taken back nor exchanged."
-msgstr ""
-"Article acheté sur commande, ni repris, ni échangé quand il s'agit d'article "
-"acheté vendu."
+msgstr "Article acheté sur commande, ni repris, ni échangé."
 
 #. module: specific_sale
 #: selection:sale.report,month:0
@@ -421,7 +419,7 @@ msgstr "Produit du type cascade import"
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_human_medoc
 msgid "Product of type human medicine"
-msgstr "Product du type médicament humain"
+msgstr "Produit de type médicament humain"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -562,7 +560,6 @@ msgstr "Avertissement cascade import"
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_human_medoc
 #: model:exception.rule,name:specific_sale.warning_human_medoc
-#, fuzzy
 msgid "Warning human medicine"
 msgstr "Avertissement médicament humain"
 
