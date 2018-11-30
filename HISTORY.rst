@@ -9,8 +9,11 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1623: Sort bins on products to take first bins for label printing
+* ALCYN-1683: Speed up stock export by using direct sql for the sale_average computation (ESB)
 
 **Bugfixes**
+
+* ALCYN-1683: Fix date_peremption on stock export (ESB)
 
 **Build**
 
