@@ -23,7 +23,7 @@ Unreleased
 
 **Build**
 
-* SMTP config for PROD server
+* SMTP and IMAP config for PROD server
 
 **Documentation**
 
