@@ -644,3 +644,8 @@ migration:
               - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
               # ----------- DATA update END ----------
+    - version: 10.29.1
+      addons:
+        upgrade:
+          ### local
+          - specific_report

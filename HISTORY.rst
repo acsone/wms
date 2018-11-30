@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1681: Display the depot number on the sale order report
+
 **Bugfixes**
 
 **Build**
