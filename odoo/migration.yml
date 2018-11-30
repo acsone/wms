@@ -584,3 +584,11 @@ migration:
           - specific_sale
           - stock_location_notranslate
           - website_purchase_review
+      modes:
+        full:
+          operations:
+            post:
+              # set rows for reserve ali
+              - anthem songs.install.data_full::import_wh_family_locations
+              # update reserve and set picking_zone
+              - importer.sh songs.install.data_full::import_wh_locations /odoo/data/install/locators_reserve.csv
