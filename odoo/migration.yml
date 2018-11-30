@@ -582,4 +582,5 @@ migration:
           - specific_helpdesk
           - specific_print
           - specific_sale
+          - stock_location_notranslate
           - website_purchase_review
