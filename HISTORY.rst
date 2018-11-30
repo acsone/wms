@@ -10,6 +10,7 @@ Unreleased
 
 * ALCYN-1623: Sort bins on products to take first bins for label printing
 * ALCYN-1683: Speed up stock export by using direct sql for the sale_average computation (ESB)
+* Update setup of locations for "Aliments". Define rows for "reserve" and set picking_zone
 
 **Bugfixes**
 
