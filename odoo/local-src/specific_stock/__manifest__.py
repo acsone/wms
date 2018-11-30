@@ -14,6 +14,7 @@
         'product_expiry',
         'purchase',
         'sale',
+        'sale_stock',
         'specific_data',
         'specific_helpdesk',
         'specific_purchase',

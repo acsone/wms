@@ -273,6 +273,13 @@ class StockPackOperationLotAdd(models.TransientModel):
         # remaining quantities
         pack = self.operation_id
         if self.location_dest_id != pack.location_dest_id:  # Location changed
+            if self.location_dest_id.scrap_location:
+                # Do not allow this as it is linked through the product to a
+                # move to a non scrap location that will be considered as
+                # sucessful
+                # This was allowed in the wizard to only be able to log a
+                # ticket but we don't process any qty
+                return
             if pack.qty_done:  # split pack
                 pack2 = pack.copy(default={
                     'qty_done': 0.0,
@@ -285,19 +292,25 @@ class StockPackOperationLotAdd(models.TransientModel):
             pack.location_dest_id = self.location_dest_id
 
         if self.lot_id:
-            for lot in self.operation_id.pack_lot_ids:
+            for lot in pack.pack_lot_ids:
                 if lot.lot_id == self.lot_id:
                     lot.qty += self.qty
                     break
             else:
-                self.operation_id.pack_lot_ids = [(0, 0, {
+                pack.pack_lot_ids = [(0, 0, {
                     'qty': self.qty,
                     'lot_name': self.lot_id.name,
                     'lot_id': self.lot_id.id,
                     })]
-            self.operation_id.save()
+            # check Total
+            if (sum([max(lot.qty_todo, lot.qty)
+                     for lot in self.operation_id.pack_lot_ids]) >
+                    self.operation_id.product_qty):
+                raise UserError(_(
+                    'This lot is not in the list of expected lots'))
+            pack.save()
         else:
-            self.operation_id.write({'qty_done': self.qty})
+            pack.write({'qty_done': self.qty})
 
     @api.multi
     def button_nextop(self):

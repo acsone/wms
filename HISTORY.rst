@@ -14,6 +14,11 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1683: Fix date_peremption on stock export (ESB)
+* ALCYN-1669: Mark customer return as to be refunded by default
+
+**Bugfixes**
+
+* ALCYN-1602: Never set a scrap location on a reception pack operation
 
 **Build**
 

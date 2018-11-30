@@ -5,7 +5,6 @@
 from datetime import date
 
 from odoo import models, api, _
-from odoo.exceptions import Warning
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.exceptions import UserError
 
@@ -53,9 +52,10 @@ class StockPicking(models.Model):
                                     (line.lot_id.name,
                                      line.lot_id.removal_date[:DATE_LENGTH]))
             if bad_lots:
-                raise Warning(_('You cannot transfer lots with an expired '
-                                'removal date:\n\t- %s' %
-                                ('\n\t- '.join(bad_lots))))
+                raise UserError(
+                    _('You cannot transfer lots with an expired '
+                      'removal date:\n\t- %s' %
+                      ('\n\t- '.join(bad_lots))))
 
     @api.multi
     def do_new_transfer(self):
@@ -101,3 +101,15 @@ class StockPicking(models.Model):
             })
 
         return result
+
+
+class StockReturnPicking(models.TransientModel):
+    _inherit = "stock.return.picking"
+
+    @api.model
+    def default_get(self, fields):
+        """ Set by default to refund """
+        res = super(StockReturnPicking, self).default_get(fields)
+        for line in res.get('product_return_moves', {}):
+            line[2]['to_refund_so'] = True
+        return res
