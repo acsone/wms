@@ -31,3 +31,6 @@ class ModifySerialNumber(models.TransientModel):
         stock_move.write({
             'serial_number': self.serial_number,
         })
+        stock_move.move_dest_id.write({
+            'serial_number': self.serial_number,
+        })

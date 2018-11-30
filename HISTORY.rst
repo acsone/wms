@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-243: Set the serial number on the picking out
+
 **Build**
 
 **Documentation**
