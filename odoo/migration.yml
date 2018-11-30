@@ -566,7 +566,6 @@ migration:
           - specific_report
           - specific_security
           - specific_stock
-          - specific_stock
       operations:
         post:
           - anthem songs.upgrade.10_28_1_update::post
@@ -579,3 +578,4 @@ migration:
         upgrade:
           ### local
           - connector_esb
+          - specific_helpdesk
