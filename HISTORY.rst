@@ -8,28 +8,40 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.0 (2018-11-30)
+++++++++++++++++++++
+
+**Data Migration**
+
+* Update full csv data from DB2 prod server at 2018-11-30 13:50:00
+
+**Features and Improvements**
+
 * ALCYN-1623: Sort bins on products to take first bins for label printing
+* ALCYN-1658: Add a context to display the internal quantity of lots on the view product
 * ALCYN-1683: Speed up stock export by using direct sql for the sale_average computation (ESB)
 * ALCYN-1685: Disable location translation
 * Update setup of locations for "Aliments". Define rows for "reserve" and set picking_zone
 
 **Bugfixes**
 
-* ALCYN-1683: Fix date_peremption on stock export (ESB)
-* ALCYN-1669: Mark customer return as to be refunded by default
-* ALCYN-1668: Add a QR code on lot labels (#PRODUCT_REF#LOT_NAME) and a QR code on label without lot (PRODUCT_REF)
-
-**Bugfixes**
-
-* ALCYN-1602: Never set a scrap location on a reception pack operation
-* ALCYN-1670: Fix cancel remaining quantity to deliver on a sales order
 * ALCYN-1487: Fix sale exception translations
+* ALCYN-1602: Never set a scrap location on a reception pack operation
+* ALCYN-1668: Add a QR code on lot labels (#PRODUCT_REF#LOT_NAME) and a QR code on label without lot (PRODUCT_REF)
+* ALCYN-1669: Mark customer return as to be refunded by default
+* ALCYN-1670: Fix cancel remaining quantity to deliver on a sales order
+* ALCYN-1683: Fix date_peremption on stock export (ESB)
 
 **Build**
 
 * SMTP and IMAP config for PROD server
-
-**Documentation**
 
 
 10.28.1 (2018-11-26)
@@ -45,7 +57,6 @@ Unreleased
 * ALCYN-1563: Update the product categories to add analytic accounts and reimport customer/supplier balance
 * ALCYN-1600: Improve stock export to make multiple calls to the ESB based on max_record
 * ALCYN-1651: Allow picking with barcode for material
-* ALCYN-1658: Add a context to display the internal quantity of lots on the view product
 
 **Bugfixes**
 
