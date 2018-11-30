@@ -20,6 +20,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1602: Never set a scrap location on a reception pack operation
+* ALCYN-1670: Fix cancel remaining quantity to deliver on a sales order
 
 **Build**
 

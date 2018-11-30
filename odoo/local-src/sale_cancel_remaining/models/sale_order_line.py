@@ -12,6 +12,7 @@ class SaleOrderLine(models.Model):
     product_qty_canceled = fields.Float(
         'Qty canceled',
         readonly=True,
+        copy=False,
         digits=dp.get_precision('Product Unit of Measure')
     )
     product_qty_remains_to_deliver = fields.Float(

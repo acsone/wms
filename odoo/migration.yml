@@ -578,5 +578,6 @@ migration:
         upgrade:
           ### local
           - connector_esb
+          - sale_cancel_remaining
           - specific_helpdesk
           - specific_print

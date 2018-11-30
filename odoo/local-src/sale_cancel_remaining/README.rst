@@ -17,3 +17,4 @@ Contributors
 ------------
 
 * Sylvain Van Hoof <sylvain@okia.be>
+* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
