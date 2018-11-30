@@ -581,3 +581,5 @@ migration:
           - sale_cancel_remaining
           - specific_helpdesk
           - specific_print
+          - specific_sale
+          - website_purchase_review
