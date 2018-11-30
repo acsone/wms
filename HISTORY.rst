@@ -15,6 +15,7 @@ Unreleased
 
 * ALCYN-1683: Fix date_peremption on stock export (ESB)
 * ALCYN-1669: Mark customer return as to be refunded by default
+* ALCYN-1668: Add a QR code on lot labels (#PRODUCT_REF#LOT_NAME) and a QR code on label without lot (PRODUCT_REF)
 
 **Bugfixes**
 

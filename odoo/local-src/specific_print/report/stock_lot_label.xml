@@ -15,10 +15,13 @@
 ^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\r
 ^FO90,190^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().zone"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().height"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().box"/>^FS\r
 ^FO25,240^A0N,37,32^CI13^FR^FDDate limite:^FS\r
-^FO190,225^A0N,60,50^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d-%m-%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS\r
+^FO190,230^A0N,50,40^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d/%m/%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS\r
 ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS\r
 ^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS\r
+^FO420,150\r
+^BQN,2,6\r
+^FDQA,#<t t-esc="lot.product_id.default_code"/>#<t t-esc="lot.name"/>^FS\r
 ^PQ<t t-esc="qty"/>,0,0,N\r
 ^XZ
 </t>
@@ -40,11 +43,14 @@
 ^XA
 ^PRC
 ^LH0,0^FS\r
-^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\r
-^FO90,190^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().zone"/>-<t t-esc="product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="product_id.product_tmpl_id._bin().height"/>-<t t-esc="product_id.product_tmpl_id._bin().box"/>^FS\r
-^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
-^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code"/>^FS\r
-^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="product_id.name"/>^FS\r
+^FO25,40^A0N,50,40^CI13^FR^FD<t t-esc="product_id.name"/>^FS\r
+^FO25,115^A0N,37,32^CI13^FR^FDArticle:^FS\r
+^FO140,115^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code"/>^FS\r
+^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\r
+^FO90,180^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().zone"/>-<t t-esc="product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="product_id.product_tmpl_id._bin().height"/>-<t t-esc="product_id.product_tmpl_id._bin().box"/>^FS\r
+^FO420,150\r
+^BQN,2,6\r
+^FDQA,<t t-esc="product_id.default_code"/>^FS\r
 ^PQ<t t-esc="qty"/>,0,0,N
 ^XZ
 </t>
