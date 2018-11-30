@@ -71,6 +71,20 @@ def import_partner_link(ctx):
         content = resource_stream(req, 'data/install/5-supplier-client.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
+    with ctx.log(u"Apply manual changes from Laurence"):
+        content = resource_stream(
+            req, 'data/install/Laurence-partner-new.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+        content = resource_stream(
+            req, 'data/install/Laurence-partner-override.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+        content = resource_stream(
+            req, 'data/install/Laurence-partner-inactive.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+        content = resource_stream(
+            req, 'data/install/Laurence-partner-parent.csv')
+        load_csv_stream(ctx, Partner, content, delimiter=',')
+
 
 @anthem.log
 def import_partner_block_delivery(ctx):
