@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.1 (2018-12-01)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1667: Allow to search a product by the reference of the supplier
 * ALCYN-1684: Force the user to put in pack before validate a picking
 * ALCYN-1681: Display the depot number on the sale order report
@@ -18,11 +30,6 @@ Unreleased
 * ALCYN-1649: sale_triple_discount: Fix tax total on report
 * ALCYN-243: Set the serial number on the picking out
 * ALCYN-1689: Fix a bug with the passport and use the right printer for the passport
-
-**Build**
-
-**Documentation**
-
 
 10.29.0 (2018-11-30)
 ++++++++++++++++++++
