@@ -4,7 +4,7 @@
 
 from datetime import date
 
-from odoo import models, api, _
+from odoo import models, api, fields, _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.exceptions import UserError
 
@@ -31,6 +31,8 @@ class StockPickingType(models.Model):
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    is_put_in_pack_done = fields.Boolean('Put in Pack done', default=False)
 
     @api.multi
     def _create_lots_for_picking(self):
@@ -99,6 +101,8 @@ class StockPicking(models.Model):
             packages.write({
                 'original_picking_zone_id': original_picking_zone_id.id,
             })
+
+        self.write({'is_put_in_pack_done': True})
 
         return result
 
