@@ -170,7 +170,7 @@ class Assignment(DomainInterface):
                 # If the picking required a verification (passport)
                 # the number of label is 0. The number of label cannot be 0
                 # for a standard picking (without passport).
-                if params.Usf01:
+                if params.Usf01 and int(params.Usf01):
                     picking.sudo(self._user).validate_picking()
 
             elif params.assignmentStatus == constants.AS_CANCELED:

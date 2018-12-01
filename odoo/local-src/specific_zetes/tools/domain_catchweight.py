@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from odoo import fields, _
+
 from domain_interface import DomainInterface, Parameters
 from .. import constants
 
@@ -45,6 +47,26 @@ class Catchweight(DomainInterface):
         :return:
         """
         result = Parameters(self, action='resp')
+
+        line_id = params.pickLineId
+        if not line_id:
+            result.update({
+                'respCode': constants.RESPONSE_CODE_ERROR,
+                'respMsg': _('No picking found')
+            })
+            return result.format()
+
+        if isinstance(line_id, int):
+            line_id = str(line_id)
+
+        line_id_list = line_id.split('_')
+        if len(line_id_list) == 2:
+            lot_id = int(line_id_list[1])
+            lot = self.request.env['stock.production.lot']\
+                .sudo(self._user).browse(lot_id)
+            if lot.life_date:
+                life_date = fields.Datetime.from_string(lot.life_date)
+                result.Usf01 = life_date.strftime('%d%m%y')
 
         result.update({
             'respCode': constants.RESPONSE_CODE_OK,
