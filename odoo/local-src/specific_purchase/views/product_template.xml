@@ -24,6 +24,7 @@
             <xpath expr="//field[@name='seller_ids']" position="before">
                 <group>
                     <field name="supplier_id" />
+                    <field name="vendor_product_code" />
                 </group>
             </xpath>
 
@@ -40,6 +41,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='categ_id']" position="after">
                 <field name="supplier_id" widget="selection" string="Vendor" context="{'supplier': self}"/>
+                <field name="vendor_product_code"/>
             </xpath>
 
             <xpath expr="/search" position="inside">

@@ -21,6 +21,13 @@ class ProductTemplate(models.Model):
                                   compute='_compute_supplier_id',
                                   store=True)
 
+    vendor_product_code = fields.Char(
+        'Vendor Product Code',
+        readonly=True,
+        compute='_compute_supplier_id',
+        store=True
+    )
+
     @api.depends('seller_ids')
     def _compute_supplier_id(self):
         """
@@ -35,6 +42,14 @@ class ProductTemplate(models.Model):
                 product.supplier_id = sellers.id
             else:
                 product.supplier_id = None
+
+            product_codes = product.seller_ids.mapped('product_code')
+            # Remove null entries
+            product_codes = list(set(filter(None, product_codes)))
+            if len(product_codes) == 1:
+                product.vendor_product_code = product_codes[0]
+            else:
+                product.vendor_product_code = ''
 
     @api.onchange('length', 'width', 'depth')
     def onchange_size(self):
@@ -62,3 +77,37 @@ class ProductState(models.Model):
     name = fields.Char(required=True, translate=True)
     code = fields.Char(required=True)
     sequence = fields.Integer()
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        """
+        When want to be able to search by the vendor product product.
+        However we cannot simply modify args by adding the domain
+        [('vendor_product_code', '=', name)].
+
+        The solution is to execute the method and look if the number of records
+        found is less than the limit. It means that Odoo don't found
+        all records. In this case, I search with the vendor_product_code.
+        """
+        if not args:
+            args = []
+
+        result = super(ProductProduct, self).name_search(
+            name=name, args=args, operator=operator, limit=limit)
+
+        if len(result) >= limit:
+            return result
+
+        limit_available = limit - len(result)
+        existing_ids = [x[0] for x in result]
+        products = self.search(
+            [('vendor_product_code', '=', name),
+             ('id', 'not in', existing_ids)] + args,
+            limit=limit_available)
+
+        result += products.name_get()
+        return result

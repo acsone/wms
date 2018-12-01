@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1667: Allow to search a product by the reference of the supplier
+
 **Bugfixes**
 
 **Build**
