@@ -649,4 +649,5 @@ migration:
         upgrade:
           ### local
           - specific_purchase
+          - specific_report
           - specific_stock

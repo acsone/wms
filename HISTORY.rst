@@ -14,6 +14,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1649: sale_triple_discount: Fix tax total on report
+* ALCYN-243: Set the serial number on the picking out
 
 **Build**
 
