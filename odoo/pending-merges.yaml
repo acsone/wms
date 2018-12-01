@@ -67,6 +67,8 @@
     - oca 10.0
       # potential fix for 90 != 100 bug in tests
     - oca refs/pull/671/head
+      # [10] sale_triple_discount: Fix tax total on report
+    - oca refs/pull/740/head
   target: *default_target
 ./external-src/server-tools:
   remotes:

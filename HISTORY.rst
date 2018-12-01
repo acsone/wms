@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1649: sale_triple_discount: Fix tax total on report
+
 **Build**
 
 **Documentation**
