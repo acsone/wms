@@ -25,6 +25,7 @@
         'report/stock_pack_label.xml',
         'report/stock_lot_label.xml',
         'views/stock.xml',
+        'views/stock_production_lot.xml',
         ],
     'installable': True,
     'license': 'AGPL-3',

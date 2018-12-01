@@ -7,9 +7,10 @@
             <form string="Print label">
                 <sheet>
                     <group>
-                        <field name="printer_number"/>
+                        <field name="printer_id"/>
                         <field name="label_type" invisible="1"/>
-                        <field name="picking_id" invisible="1"/>
+                        <field name="picking_ids" invisible="1"/>
+                        <field name="lot_ids" invisible="1"/>
                     </group>
                 </sheet>
                 <footer>

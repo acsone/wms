@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1696: Add the possibility to print a lot label
+
 **Bugfixes**
 
 * ALCYN-1686: Use the date done on the delivery slip and on the exported CSV

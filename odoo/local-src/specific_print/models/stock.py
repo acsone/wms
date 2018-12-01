@@ -124,9 +124,10 @@ class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     @api.multi
-    def print_lot_label(self, quantity=1):
+    def print_lot_label(self, quantity=1, printer=False):
         self.ensure_one()
-        hw_print(self, 'specific_print.report_lot_label', qty=quantity)
+        hw_print(self, 'specific_print.report_lot_label',
+                 qty=quantity, printer=printer)
 
 
 class ProductProduct(models.Model):
