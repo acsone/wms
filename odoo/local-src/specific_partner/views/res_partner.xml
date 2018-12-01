@@ -15,39 +15,9 @@
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='ref']/parent::group" position="attributes">
-                <attribute name="groups">base.group_multi_company</attribute>
-            </xpath>
-
-            <field name="ref" position="replace"/>
-
-            <xpath expr="//field[@name='name']/parent::h1" position="after">
-                <group>
-                    <field name="suite"/>
-                    <field name="call_name"/>
-                    <field name="ref"/>
-                    <field name="master_partner_id"/>
-                </group>
-            </xpath>
-
-            <field name="function" position="before">
-                <field name="alcyon_category_id"/>
-                <field name="apb_authorization"/>
-                <field name="is_veterinary" invisible="1"/>
-                <field name="is_students" invisible="1"/>
-                <field name="vet_depot_number"
-                       attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"/>
-                <field name="vet_subscription_number"
-                       attrs="{'invisible': [('is_veterinary', '=', False),('is_students', '=', False)], 'required': ['|',('is_veterinary', '=', True),('is_students', '=', True)]}"/>
-            </field>
-
             <group name="fiscal_information" position="inside">
                 <field name="legal_entity_id" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
             </group>
-
-            <field name="user_id" position="after">
-                <field name="pharmacist_id" attrs="{'invisible': [('customer', '=', False)]}"/>
-            </field>
         </field>
     </record>
 
@@ -124,6 +94,36 @@
         <xpath expr="//field[@name='title']" position="attributes">
           <attribute name="attrs"/>
         </xpath>
+
+            <xpath expr="//field[@name='ref']/parent::group" position="attributes">
+                <attribute name="groups">base.group_multi_company</attribute>
+            </xpath>
+
+            <field name="ref" position="replace"/>
+
+            <xpath expr="//field[@name='name']/parent::h1" position="after">
+                <group>
+                    <field name="suite"/>
+                    <field name="call_name"/>
+                    <field name="ref"/>
+                    <field name="master_partner_id"/>
+                </group>
+            </xpath>
+
+            <field name="function" position="before">
+                <field name="alcyon_category_id"/>
+                <field name="apb_authorization"/>
+                <field name="is_veterinary" invisible="1"/>
+                <field name="is_students" invisible="1"/>
+                <field name="vet_depot_number"
+                       attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"/>
+                <field name="vet_subscription_number"
+                       attrs="{'invisible': [('is_veterinary', '=', False),('is_students', '=', False)], 'required': ['|',('is_veterinary', '=', True),('is_students', '=', True)]}"/>
+            </field>
+
+            <field name="user_id" position="after">
+                <field name="pharmacist_id" attrs="{'invisible': [('customer', '=', False)]}"/>
+            </field>
       </field>
     </record>
 

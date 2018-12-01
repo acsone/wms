@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record model="ir.ui.view" id="view_partner_simple_form_last_suite_name">
+        <field name="name">res.partner.form.last_suite_name</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="specific_partner.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <field name="call_name" position="after">
+                <field name="last_suite_name"/>
+            </field>
+
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="partner_form_view_sale_lines_unavailable_button">
         <field name="name">res.partner.sale.lines.unavailable.button</field>
         <field name="model">res.partner</field>
@@ -13,19 +26,6 @@
                     <field string="Lines unavailable" name="sale_lines_count" widget="statinfo" />
                 </button>
             </div>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="view_partner_simple_form_last_suite_name">
-        <field name="name">res.partner.form.last_suite_name</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="specific_partner.view_partner_simple_form"/>
-        <field name="arch" type="xml">
-
-            <field name="call_name" position="after">
-                <field name="last_suite_name"/>
-            </field>
-
         </field>
     </record>
 
