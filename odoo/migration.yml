@@ -651,3 +651,11 @@ migration:
           - specific_purchase
           - specific_report
           - specific_stock
+    - version: 10.29.2
+      addons:
+        upgrade:
+          ### local
+          - specific_print
+      operations:
+        post:
+          - anthem songs.upgrade.10_29_2_update::set_not_print_flag_on_materiel_product

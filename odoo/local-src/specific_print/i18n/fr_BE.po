@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-17 09:28+0000\n"
-"PO-Revision-Date: 2017-10-17 09:28+0000\n"
+"POT-Creation-Date: 2018-12-01 16:43+0000\n"
+"PO-Revision-Date: 2018-12-01 16:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid ",0,0,N\n"
+"^XZ"
+msgstr ",0,0,N\n"
+"^XZ"
+
+#. module: specific_print
 #: model:ir.actions.report.xml,name:specific_print.report_lot_label
 msgid "Alcyon Lot Label"
 msgstr "Etiquette de lot Alcyon"
 
 #. module: specific_print
-#: model:ir.actions.report.xml,name:specific_print.report_lot_notlot_label
-msgid "Alcyon Lot Nolot Label"
-msgstr "Etiquette non lot Alcyon"
+#: model:ir.actions.report.xml,name:specific_print.report_lot_nolot_label
+msgid "Alcyon Nolot Label"
+msgstr "Alcyon Nolot Label"
 
 #. module: specific_print
 #: model:ir.actions.report.xml,name:specific_print.report_stock_pick_packs_label
@@ -46,6 +54,11 @@ msgid "Code"
 msgstr "Code"
 
 #. module: specific_print
+#: model:ir.model,name:specific_print.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_create_uid
 msgid "Created by"
 msgstr "Créé par"
@@ -65,6 +78,13 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:specific_print.field_res_users_is_price_on_labels
 msgid "Display price on labels"
 msgstr "Afficher le prix sur les étiquettes"
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_delivery_carrier_is_do_not_print_label
+#: model:ir.model.fields,field_description:specific_print.field_product_product_is_do_not_print_label
+#: model:ir.model.fields,field_description:specific_print.field_product_template_is_do_not_print_label
+msgid "Do not print label"
+msgstr "Ne pas imprimer d'étiquette"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
@@ -108,14 +128,19 @@ msgid "Lot/Serial"
 msgstr "Lot/N° série"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:32
-#: code:addons/specific_print/models/stock.py:69
+#: model:ir.model,name:specific_print.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr "Lot/Numéro de série pour l'opération"
+
+#. module: specific_print
+#: code:addons/specific_print/models/stock.py:63
+#: code:addons/specific_print/models/stock.py:103
 #, python-format
 msgid "No destination partner defined"
 msgstr "Aucun destinaire défini"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:16
+#: code:addons/specific_print/models/stock.py:20
 #, python-format
 msgid "No printer assigned"
 msgstr "Aucune imprimante assignée"
@@ -142,8 +167,8 @@ msgstr "Partenaire"
 
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_picking_id
-msgid "Picking id"
-msgstr "ID du picking"
+msgid "Picking"
+msgstr "Picking"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_lot_add_form
@@ -172,7 +197,7 @@ msgid "Printer"
 msgstr "Imprimante"
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:32
+#: code:addons/specific_print/wizards/print_label.py:34
 #, python-format
 msgid "Printer not found"
 msgstr "Imprimante non trouvée"
@@ -183,7 +208,7 @@ msgid "Printer number"
 msgstr "Numéro de l'imprimante"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:22
+#: code:addons/specific_print/models/stock.py:27
 #, python-format
 msgid "Printer unavailable"
 msgstr "Imprimante indisponible"
@@ -193,6 +218,11 @@ msgstr "Imprimante indisponible"
 #: selection:print.label,label_type:0
 msgid "Product"
 msgstr "Article"
+
+#. module: specific_print
+#: model:ir.model,name:specific_print.model_product_template
+msgid "Product Template"
+msgstr "Modèle de produit"
 
 #. module: specific_print
 #: model:ir.model.fields,help:specific_print.field_stock_pack_operation_lot_add_print_qty
@@ -238,135 +268,128 @@ msgstr "Zetes"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FS\n"
-"       ^FN2^FD"
-msgstr "^FS\n"
-"       ^FN2^FD"
+msgid "^FS\\r\n"
+"^FN2^FD"
+msgstr "^FS\\r\n"
+"^FN2^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FS\n"
-"       ^FN3^FD"
-msgstr "^FS\n"
-"       ^FN3^FD"
+msgid "^FS\\r\n"
+"^FN3^FD"
+msgstr "^FS\\r\n"
+"^FN3^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FS\n"
-"       ^FN4^FD"
-msgstr "^FS\n"
-"       ^FN4^FD"
+msgid "^FS\\r\n"
+"^FN4^FD"
+msgstr "^FS\\r\n"
+"^FN4^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FS\n"
-"       ^FN5^FD"
-msgstr "^FS\n"
-"       ^FN5^FD"
+msgid "^FS\\r\n"
+"^FN5^FD"
+msgstr "^FS\\r\n"
+"^FN5^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FS\n"
-"       ^XZ"
-msgstr "^FS\n"
-"       ^XZ"
+msgid "^FS\\r\n"
+"^FN6^FD"
+msgstr "^FS\\r\n"
+"^FN6^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO190,180^A0N,60,50^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO190,180^A0N,60,50^CI13^FR^FD"
+msgid "^FS\\r\n"
+"^FO190,180^A0N,60,50^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO190,180^A0N,60,50^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS\n"
-"     ^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS\n"
-"     ^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS\n"
-"     ^FO60,342^A0N,31,23^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO20,196^A0N,37,32^CI13^FR^FDRef.Article: ^FS\n"
-"     ^FO173,163^A0N,81,71^CI13^FR^FDaaaa^FS\n"
-"     ^FO20,288^A0N,37,33^CI13^FR^FDLibelle : ^FS\n"
-"     ^FO60,342^A0N,31,23^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\n"
-"     ^FO140,290^A0N,37,40^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\n"
-"     ^FO140,290^A0N,37,40^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS\n"
-"     ^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\n"
-"     ^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS\n"
-"     ^FO90,45^A0N,37,32^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS\n"
-"     ^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\n"
-"     ^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS\n"
-"     ^FO90,45^A0N,37,32^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO35,342^A0N,31,23^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO35,342^A0N,31,23^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^FS\n"
-"     ^FO90,100^A0N,37,32^CI13^FR^FD"
-msgstr "^FS\n"
-"     ^FO90,100^A0N,37,32^CI13^FR^FD"
+msgid "^FS\\r\n"
+"^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO90,100^A0N,37,32^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO90,100^A0N,37,32^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
-msgid "^FS\n"
-"     ^PQ1,0,0,N\n"
-"     ^XZ"
-msgstr "^FS\n"
-"     ^PQ1,0,0,N\n"
-"     ^XZ"
+msgid "^FS\\r\n"
+"^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,290^A0N,37,40^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,290^A0N,37,40^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS\\r\n"
+"^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
+"^FO90,45^A0N,37,32^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO25,45^A0N,37,32^CI13^FR^FDLot:^FS\\r\n"
+"^FO25,100^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO25,195^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
+"^FO90,45^A0N,37,32^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO35,342^A0N,31,23^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO35,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO90,100^A0N,37,32^CI13^FR^FD"
+msgstr "^FS\\r\n"
+"^FO90,100^A0N,37,32^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid "^FS\\r\n"
+"^PQ"
+msgstr "^FS\\r\n"
+"^PQ"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid "^FS\\r\n"
+"^XZ"
+msgstr "^FS\\r\n"
+"^XZ"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid "^XA\n"
+"^PRC\n"
+"^LH0,0^FS\\r\n"
+"^FO420,33^A0N,118,103^CI13^FR^FD"
+msgstr "^XA\n"
+"^PRC\n"
+"^LH0,0^FS\\r\n"
+"^FO420,33^A0N,118,103^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^XA\n"
-"       ^XFE:FORMAT.ZPL^FS\n"
-"       ^FN1^FD"
+"^XFE:FORMAT.ZPL^FS\\r\n"
+"^FN1^FD"
 msgstr "^XA\n"
-"       ^XFE:FORMAT.ZPL^FS\n"
-"       ^FN1^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
-msgid "^XA\n"
-"     ^PRC\n"
-"     ^LH0,0^FS\n"
-"     ^FO32,16^A0N,32,28^CI13^FR^FD"
-msgstr "^XA\n"
-"     ^PRC\n"
-"     ^LH0,0^FS\n"
-"     ^FO32,16^A0N,32,28^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid "^XA\n"
-"     ^PRC\n"
-"     ^LH0,0^FS\n"
-"     ^FO420,33^A0N,118,103^CI13^FR^FD"
-msgstr "^XA\n"
-"     ^PRC\n"
-"     ^LH0,0^FS\n"
-"     ^FO420,33^A0N,118,103^CI13^FR^FD"
+"^XFE:FORMAT.ZPL^FS\\r\n"
+"^FN1^FD"
 
 #. module: specific_print
 #: model:ir.model,name:specific_print.model_print_label
@@ -380,74 +403,70 @@ msgstr "stock.pack.operation.lot.add"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
-msgid "{PC007;0350,0070,05,05,J,00,B|}\\r\n"
-"                                {RC007;PVI :"
-msgstr "{PC007;0350,0070,05,05,J,00,B|}\\r\n"
-"                                {RC007;PVI :"
+msgid "{PC007;0350,0070,05,05,J,00,B|}\\r{RC007;PVI :"
+msgstr "{PC007;0350,0070,05,05,J,00,B|}\\r{RC007;PVI :"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "{U2;0120|}\\r\n"
-"                            {D0275,0560,0250|}\\r\n"
-"                            {C|}\\r\n"
-"                            {PC001;0400,0040,05,05,J,00,B|}\\r\n"
-"                            {RC001;ALCYON sa |}\\r\n"
-"                            {PC004;0010,0040,05,05,J,00,B|}\\r\n"
-"                            {RC004;"
+"{D0275,0560,0250|}\\r\n"
+"{C|}\\r\n"
+"{PC001;0400,0040,05,05,J,00,B|}\\r\n"
+"{RC001;ALCYON sa |}\\r\n"
+"{PC004;0010,0040,05,05,J,00,B|}\\r\n"
+"{RC004;"
 msgstr "{U2;0120|}\\r\n"
-"                            {D0275,0560,0250|}\\r\n"
-"                            {C|}\\r\n"
-"                            {PC001;0400,0040,05,05,J,00,B|}\\r\n"
-"                            {RC001;ALCYON sa |}\\r\n"
-"                            {PC004;0010,0040,05,05,J,00,B|}\\r\n"
-"                            {RC004;"
+"{D0275,0560,0250|}\\r\n"
+"{C|}\\r\n"
+"{PC001;0400,0040,05,05,J,00,B|}\\r\n"
+"{RC001;ALCYON sa |}\\r\n"
+"{PC004;0010,0040,05,05,J,00,B|}\\r\n"
+"{RC004;"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
-msgid "{XB01;0030,0150,9,1,02,0,0080|}\\r\n"
-"                            {RB01;S"
-msgstr "{XB01;0030,0150,9,1,02,0,0080|}\\r\n"
-"                            {RB01;S"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
-msgid "|}\\r\n"
-"                            {PC002;0010,0130,05,05,J,00,B|}\\r\n"
-"                            {RC002;"
-msgstr "|}\\r\n"
-"                            {PC002;0010,0130,05,05,J,00,B|}\\r\n"
-"                            {RC002;"
+msgid "{XB01;0030,0150,9,1,02,0,0080|}\\r{RB01;S"
+msgstr "{XB01;0030,0150,9,1,02,0,0080|}\\r{RB01;S"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "|}\\r\n"
-"                            {PC003;0030,0250,05,05,J,00,B|}\\r\n"
-"                            {RC003;S-"
+"{PC002;0010,0130,05,05,J,00,B|}\\r\n"
+"{RC002;"
 msgstr "|}\\r\n"
-"                            {PC003;0030,0250,05,05,J,00,B|}\\r\n"
-"                            {RC003;S-"
+"{PC002;0010,0130,05,05,J,00,B|}\\r\n"
+"{RC002;"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "|}\\r\n"
-"                            {PC009;0010,0070,05,05,J,00,B|}\\r\n"
-"                            {RC009;6/4420/0466|}\\r\n"
-"                            {PC005;0010,0100,05,05,J,00,B|}\\r\n"
-"                            {RC005;"
+"{PC003;0030,0280,05,05,J,00,B|}\\r\n"
+"{RC003;S-"
 msgstr "|}\\r\n"
-"                            {PC009;0010,0070,05,05,J,00,B|}\\r\n"
-"                            {RC009;6/4420/0466|}\\r\n"
-"                            {PC005;0010,0100,05,05,J,00,B|}\\r\n"
-"                            {RC005;"
+"{PC003;0030,0280,05,05,J,00,B|}\\r\n"
+"{RC003;S-"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "|}\\r\n"
-"                            {XS;I,0001,0002C3200|}\\r\n"
-"                            {U1;0120|}\\r"
+"{PC009;0010,0070,05,05,J,00,B|}\\r\n"
+"{RC009;6/4420/0466|}\\r\n"
+"{PC005;0010,0100,05,05,J,00,B|}\\r\n"
+"{RC005;"
 msgstr "|}\\r\n"
-"                            {XS;I,0001,0002C3200|}\\r\n"
-"                            {U1;0120|}\\r"
+"{PC009;0010,0070,05,05,J,00,B|}\\r\n"
+"{RC009;6/4420/0466|}\\r\n"
+"{PC005;0010,0100,05,05,J,00,B|}\\r\n"
+"{RC005;"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
+msgid "|}\\r\n"
+"{XS;I,0001,0002C3200|}\\r\n"
+"{U1;0120|}\\r"
+msgstr "|}\\r\n"
+"{XS;I,0001,0002C3200|}\\r\n"
+"{U1;0120|}\\r"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_lot_form
