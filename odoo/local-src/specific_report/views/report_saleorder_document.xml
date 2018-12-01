@@ -24,6 +24,22 @@
 
         <xpath expr="//div[@name='payment_term']" position="replace"/>
 
+        <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="attributes">
+            <attribute name="t-options">{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}</attribute>
+        </xpath>
+
+        <xpath expr="//p[@t-if='doc.partner_invoice_id.vat']" position="after">
+            <p t-if="doc.partner_invoice_id.vet_depot_number">Depot number: <span t-field="doc.partner_invoice_id.vet_depot_number"/></p>
+        </xpath>
+
+        <xpath expr="//div[@t-field='doc.partner_shipping_id']" position="attributes">
+            <attribute name="t-options">{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}</attribute>
+        </xpath>
+
+        <xpath expr="//p[@t-if='doc.partner_shipping_id.vat']" position="after">
+            <p t-if="doc.partner_shipping_id.vet_depot_number">Depot number: <span t-field="doc.partner_shipping_id.vet_depot_number"/></p>
+        </xpath>
+
     </template>
 
 </odoo>
