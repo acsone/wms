@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-22 16:53+0000\n"
-"PO-Revision-Date: 2018-11-22 16:53+0000\n"
+"POT-Creation-Date: 2018-11-30 22:13+0000\n"
+"PO-Revision-Date: 2018-11-30 22:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,7 @@ msgstr "Boite"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
 #: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 msgid "Cancel"
 msgstr "Annuler"
@@ -92,6 +93,7 @@ msgstr "Couloir"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_uid
@@ -100,6 +102,7 @@ msgstr "Créé par"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_date
@@ -161,6 +164,7 @@ msgstr "Livraison"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_display_name
@@ -195,6 +199,7 @@ msgstr "Hauteur"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_id
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_id
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_id
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_id
@@ -213,6 +218,7 @@ msgstr "Emplacements de stock"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line___last_update
@@ -221,6 +227,7 @@ msgstr "Dernière modification le"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_uid
@@ -229,6 +236,7 @@ msgstr "Dernière mise à jour par"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_date
@@ -321,6 +329,13 @@ msgid "On Order"
 msgstr "A la commande"
 
 #. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.open_uop_action
+#: model:ir.ui.menu,name:specific_stock.open_uop_menu
+#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
+msgid "Open UOP"
+msgstr "Ouvrir UOP"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_operator_id
 msgid "Operator"
 msgstr "Opérateur"
@@ -364,11 +379,6 @@ msgstr "Colis physiques"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_picking_id
 msgid "Picking"
 msgstr "Opération de manutention"
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_picking_internal_search
-msgid "Picking List or UOP"
-msgstr "Bon de transfert ou UOP"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_picking_zone_id
@@ -573,12 +583,19 @@ msgid "There is no voice identifier available"
 msgstr "Il n'y a pas d'identifiant vocal disponible"
 
 #. module: specific_stock
+#: code:addons/specific_stock/wizards/open_uop.py:18
+#, python-format
+msgid "This UOP does't exist"
+msgstr "Cet UOP n'existe pas"
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
 #: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr "Transfert"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_uop
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 #: model:ir.ui.view,arch_db:specific_stock.view_stock_picking_tree
 msgid "UOP"
@@ -660,6 +677,11 @@ msgstr "Zone"
 #: model:ir.model,name:specific_stock.model_generate_voice_identifier
 msgid "generate.voice.identifier"
 msgstr "generate.voice.identifier"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_open_uop
+msgid "open.uop"
+msgstr "open.uop"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_put_in_pack_helper
