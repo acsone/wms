@@ -651,3 +651,8 @@ migration:
           - specific_purchase
           - specific_report
           - specific_stock
+    - version: 10.29.2
+      addons:
+        upgrade:
+          ### local
+          - specific_report

@@ -114,8 +114,8 @@ class TestStockDeliveryNote(SavepointCase):
                 'NE',
                 '123456789',
                 str(self.picking.id),
-                ''.join(self.picking.create_date[:10].split('-')),
-                ''.join(self.picking.create_date[-8:].split(':')),
+                ''.join(self.picking.date_done[:10].split('-')),
+                ''.join(self.picking.date_done[-8:].split(':')),
                 ]) + '.csv'
         filename = self.picking._get_delivery_note_filename()
         self.assertEqual(filename, expected_filename)

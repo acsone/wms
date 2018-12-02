@@ -29,10 +29,10 @@ class StockPicking(models.Model):
         self.ensure_one()
         return '_'.join([
             'NE',
-            self.partner_id.ref,
+            self.partner_id.ref or '',
             str(self.id),
-            ''.join(self.create_date[:10].split('-')),
-            ''.join(self.create_date[-8:].split(':')),
+            ''.join(self.date_done[:10].split('-')),
+            ''.join(self.date_done[-8:].split(':')),
             ]) + '.csv'
 
     def _save_delivery_note(self):
