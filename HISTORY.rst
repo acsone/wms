@@ -10,11 +10,17 @@ Unreleased
 
 **Bugfixes**
 
-* Fix some problems with zetes and not send an email with an user cancel a purchase order
-
 **Build**
 
 **Documentation**
+
+
+10.29.3 (2018-12-02)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* Fix some problems with zetes and not send an email with an user cancel a purchase order
 
 
 10.29.2 (2018-12-02)
