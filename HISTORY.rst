@@ -8,13 +8,19 @@ Unreleased
 
 **Features and Improvements**
 
-* ALCYN-163: Send fax on order confirm to pharmacist "PHARMACIE DU SOUVERAIN"
-
 **Bugfixes**
 
 **Build**
 
 **Documentation**
+
+
+10.29.4 (2018-12-02)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-163: Send emails on order confirm to pharmacist to unlock human drup picking flow
 
 
 10.29.3 (2018-12-02)
