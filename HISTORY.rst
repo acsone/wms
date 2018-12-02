@@ -13,6 +13,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1686: Use the date done on the delivery slip and on the exported CSV
+* ALCYN-1694: An user without the group accounting cannot see standard fields
 
 **Build**
 
