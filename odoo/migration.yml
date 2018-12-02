@@ -669,3 +669,9 @@ migration:
         upgrade:
           ### local
           - specific_report
+    - version: 10.29.5
+      operations:
+      addons:
+        upgrade:
+          ### local
+          - external_fax

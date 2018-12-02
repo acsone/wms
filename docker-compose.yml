@@ -67,6 +67,7 @@ services:
       ODOO_ESB_WS_BASE_URL: https://api-pp3.alcyonbelux.be/magento-erp-api
       ODOO_ESB_WS_USER: odoo_test
       ODOO_ESB_WS_PWD: 0X5avy9C137ssfDy
+      OVH_FAX_EMAIL_FROM: callcenter-test@alcyonbelux.be
       OVH_FAX_EMAIL_DOMAIN: ecofax.fr
       OVH_FAX_NUMBER: 003242878272
       OVH_FAX_PASSWORD: password

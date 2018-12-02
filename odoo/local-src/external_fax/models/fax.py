@@ -16,6 +16,10 @@ class Fax(models.Model):
     name = fields.Char(
         string='Fax name'
     )
+    email_from = fields.Char(
+        string='Email from',
+        compute='_compute_from_env',
+    )
     email_domain = fields.Char(
         string='Email domain of the service',
         compute='_compute_from_env',
@@ -32,6 +36,7 @@ class Fax(models.Model):
     @api.depends()
     def _compute_from_env(self):
         for record in self:
+            record.email_from = os.getenv('OVH_FAX_EMAIL_FROM', '')
             record.email_domain = os.getenv('OVH_FAX_EMAIL_DOMAIN', '')
             record.fax_number = os.getenv('OVH_FAX_NUMBER', '')
             record.password = os.getenv('OVH_FAX_PASSWORD', '')
@@ -74,10 +79,14 @@ class Fax(models.Model):
                               'id {}. Fax number is empty or invalid.'
                               ).format(attachment_id)
                             )
-        new_mail = self.env['mail.mail'].create({
+        mail_values = {
             'email_to': self.email_recipient(fax_no),
             'body_html': self.body(),
-            })
+            }
+        email_from = self.email_from
+        if email_from:
+            mail_values['email_from'] = email_from
+        new_mail = self.env['mail.mail'].create(mail_values)
         new_mail.mail_message_id.attachment_ids = [(4, attachment_id, False)]
         new_mail.mail_message_id.subject = self.fax_number
         new_mail.send()
