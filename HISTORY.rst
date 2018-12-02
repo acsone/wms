@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1695: Add a flag on product to not print label for these product
+* ALCYN-1696: Add the possibility to print a lot label
 
 **Bugfixes**
 
