@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix some problems with zetes and not send an email with an user cancel a purchase order
+
 **Build**
 
 **Documentation**

@@ -89,6 +89,9 @@ class Assignment(DomainInterface):
             picking = self.request.env['stock.picking'] \
                 .sudo(self._user).browse(picking_id)
 
+        # Assign the picking
+        picking.sudo(self._user).assign_operator()
+
         # There are two bin checksum on location
         # According the day of the month, the picking have to use the "Right"
         # or "Left" checkum. For the even day, the picking take the checksum
@@ -161,16 +164,10 @@ class Assignment(DomainInterface):
 
         try:
             picking.sudo(self._user).zetes_state = params.assignmentStatus
-            # The picking is done
-            if params.assignmentStatus in [constants.AS_START,
-                                           constants.AS_ACTIVE]:
-                picking.sudo(self._user).assign_operator()
-            elif params.assignmentStatus in [constants.AS_DONE,
-                                             constants.AS_FINISHED]:
-                # If the picking required a verification (passport)
-                # the number of label is 0. The number of label cannot be 0
-                # for a standard picking (without passport).
-                if params.Usf01 and int(params.Usf01):
+            if params.assignmentStatus in [constants.AS_DONE,
+                                           constants.AS_FINISHED]:
+
+                if not picking.partner_id.is_passport_required:
                     picking.sudo(self._user).validate_picking()
 
             elif params.assignmentStatus == constants.AS_CANCELED:

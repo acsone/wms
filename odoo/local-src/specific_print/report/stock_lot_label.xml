@@ -51,7 +51,6 @@
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,<t t-esc="product_id.default_code"/>^FS\r
-^PQ<t t-esc="qty"/>,0,0,N
 ^XZ
 </t>
 </div>

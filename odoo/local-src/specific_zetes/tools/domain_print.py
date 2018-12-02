@@ -60,15 +60,6 @@ class Print(DomainInterface):
 
         quantity = int(params.Usf01 or 0)
 
-        try:
-            # Create a pack for this picking
-            box = picking.put_in_pack()
-            if box:
-                # Set the number of packages for this picking
-                box.nbr_packages = quantity
-        except Exception:
-            pass
-
         print_type = params.printType
         printer_num = params.printerNum
 
@@ -105,6 +96,15 @@ class Print(DomainInterface):
                 return result.format()
 
         elif print_type == constants.PRINT_LABELS:
+            try:
+                # Create a pack for this picking
+                box = picking.put_in_pack()
+                if box:
+                    # Set the number of packages for this picking
+                    box.nbr_packages = quantity
+            except Exception:
+                pass
+
             printer_toshiba = self.request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
                                 ('type', '=', 'toshiba')])
