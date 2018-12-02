@@ -23,6 +23,23 @@ class TestExternalFax(TransactionCase):
             'db_datas': 'fake pdf content'.encode('base_64')
         })
 
+    def test_email_from_default(self):
+        new_mail = self.fax.send(
+            '012 0234 23',
+            self.attachment.id
+        )
+        user = self.env.user
+        user_email = "{} <{}>".format(user.name, user.email)
+        self.assertEqual(new_mail.email_from, user_email)
+
+    def test_email_from_env(self):
+        os.environ['OVH_FAX_EMAIL_FROM'] = 'from@domain.test'
+        new_mail = self.fax.send(
+            '012 0234 23',
+            self.attachment.id
+        )
+        self.assertEqual(new_mail.email_from, 'from@domain.test')
+
     def test_email_recipient(self):
         """Check generation of email recipient."""
         recipient = self.fax.email_recipient('079"123 45 67')

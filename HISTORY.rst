@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1703: Add an ENV variable to control mail sender for mails sent to OVH fax service.
+
 **Bugfixes**
 
 * Fix quants reservation for pallet/box/wrap preferred reservation
