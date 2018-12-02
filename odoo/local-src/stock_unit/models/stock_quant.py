@@ -22,24 +22,31 @@ class StockQuant(models.Model):
             min_qty = float(config_param.get_param(
                 'stock.reservation_unit_min_quantity', 0))
             preferred_domain_list = []
+            exclude_domain = []
             if qty >= min_qty:
                 pallet_factor = float(config_param.get_param(
                     'stock.reservation_unit_pallet_factor', 1))
                 pallet_qty = move.product_id.unit_in_pallet * pallet_factor
                 if pallet_qty and qty > pallet_qty:
                     preferred_domain_list.append([('qty', '>=', pallet_qty)])
+                    exclude_domain.append(('qty', '<', pallet_qty))
 
                 box_factor = float(config_param.get_param(
                     'stock.reservation_unit_box_factor', 1))
                 box_qty = move.product_id.unit_in_box * box_factor
                 if box_qty and qty > box_qty:
                     preferred_domain_list.append([('qty', '>=', box_qty)])
+                    exclude_domain.append(('qty', '<', box_qty))
 
                 wrap_factor = float(config_param.get_param(
                     'stock.reservation_unit_wrap_factor', 1))
                 wrap_qty = move.product_id.unit_in_shrink_wrap * wrap_factor
                 if wrap_qty and qty > wrap_qty:
                     preferred_domain_list.append([('qty', '>=', wrap_qty)])
+                    exclude_domain.append(('qty', '<', wrap_qty))
+
+                if preferred_domain_list:
+                    preferred_domain_list.append(exclude_domain)
             _logger.debug("Reserve by packaging. New preferred domain: %s",
                           preferred_domain_list)
         return super(StockQuant, self).quants_get_preferred_domain(
