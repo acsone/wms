@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1695: Add a flag on product to not print label for these product
+
 **Bugfixes**
 
 * ALCYN-1686: Use the date done on the delivery slip and on the exported CSV

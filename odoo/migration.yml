@@ -655,4 +655,8 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_print
           - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.10_29_2_update::set_not_print_flag_on_materiel_product
