@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016-2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'Specific report for Alcyon',
@@ -43,6 +43,7 @@
         'views/stock_move.xml',
         'data/paperformat.xml',
         'data/report_filename.xml',
+        'data/mail_template.xml',
     ],
     'installable': True,
 }

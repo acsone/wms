@@ -663,3 +663,9 @@ migration:
         post:
           - anthem songs.upgrade.10_29_2_update::set_not_print_flag_on_materiel_product
     - version: 10.29.3
+    - version: 10.29.4
+      operations:
+      addons:
+        upgrade:
+          ### local
+          - specific_report

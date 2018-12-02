@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016-2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import config
@@ -47,6 +47,29 @@ class SaleOrder(models.Model):
     _inherit = ['sale.order', 'report.async']
 
     @api.multi
+    def has_human_drug(self):
+        """ Return if there is at least one line in the sale order
+        with human drugs. Lines with qty at 0 don't count.
+        """
+        self.ensure_one()
+        categ = self.env.ref('specific_data.product_categ_humain')
+        for line in self.order_line:
+            if line.product_id.categ_id == categ and line.product_uom_qty > 0:
+                return True
+        return False
+
+    @api.multi
+    def order_lines_human_drug(self):
+        """
+        Returns this order lines filtered by category human drug.
+
+        """
+        self.ensure_one()
+        categ = self.env.ref('specific_data.product_categ_humain')
+        lines = self.order_line
+        return lines.filtered(lambda rec: rec.product_id.categ_id == categ)
+
+    @api.multi
     def get_report_name(self):
         """Generate a specific name for the report save in ir.attachment"""
         self.ensure_one()
@@ -68,6 +91,109 @@ class SaleOrder(models.Model):
             ]) + '.pdf'
 
     @api.multi
+    def create_reports(self):
+        """Create the jobs to create base sale order PDF and send them
+        according to sale_channel
+        """
+        for order in self:
+            order.with_delay().print_and_attach_report(
+                'sale.report_saleorder',
+                order.partner_id.fax if order.sale_channel == 'fax' else None
+            )
+
+    @api.multi
+    def _get_pharmacist(self):
+        """Get the phacist to which we will send emails
+        The pharmacist supplier must be configured in System parameter
+        'pharmacist.supplier.id' and an email must be set on the partner.
+        """
+        pharmacist = self.partner_id.pharmacist_id
+        if not pharmacist:
+            raise UserError(_(
+                'Cannot send pharmacist email\n'
+                'Pharmacist partner must be configured to send email'
+                ' please set System Parameter `pharmacist.supplier.id`.\n'
+                'This parameter must be a partner ID.'
+                ))
+        if not pharmacist.email:
+            raise UserError(_(
+                'Cannot send pharmacist email\n'
+                '%s partner must have an email address.'
+                ) % pharmacist.name)
+        return pharmacist
+
+    @api.multi
+    def action_send_pharmacist_email(self, pharmacist=None):
+        """ This action is not available on front.
+
+        Based on `action_quotation_send`
+        """
+        template_xid = (
+            'specific_report'
+            '.email_template_pharmacist_supplier_order'
+        )
+        mail_template = self.env.ref(template_xid)
+        if not pharmacist:
+            pharmacist = self._get_pharmacist()
+        ctx = {
+            'default_email_to': pharmacist and pharmacist.email,
+            'default_partner_ids': [pharmacist.id],
+            'default_model': 'sale.order',
+            'default_res_id': self.ids[0],
+            'default_use_template': bool(mail_template),
+            'default_template_id': mail_template.id,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': False,
+            'custom_layout': ("specific_sale"
+                              ".mail_template_pharamcist_notification")
+        }
+        try:
+            wiz_xid = 'mail.email_compose_message_wizard_form'
+            compose_form_id = self.env.ref(wiz_xid)
+        except ValueError:
+            compose_form_id = False
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form_id, 'form')],
+            'view_id': compose_form_id,
+            'target': 'new',
+            'context': ctx,
+        }
+
+    @api.multi
+    def force_pharmacist_email_send(self, pharmacist):
+        for order in self:
+            email_act = order.action_send_pharmacist_email(pharmacist)
+            if email_act and email_act.get('context'):
+                email_ctx = email_act['context']
+                email_ctx.update(
+                    default_email_from=order.company_id.email,
+                )
+
+                # FIXME separate chatter and email sending
+                order.with_context(email_ctx).message_post_with_template(
+                    email_ctx.get('default_template_id'),
+                )
+        return True
+
+    @api.multi
+    def create_pharmacist_reports(self):
+        """Create the jobs to forward ordered human drugs to the pharmacist.
+
+        """
+        pharmacist = None
+        for order in self:
+            if order.has_human_drug():
+                # Try to fetch pharmacist only if there is at least
+                # one order with human drugs
+                if not pharmacist:
+                    pharmacist = self._get_pharmacist()
+                order.force_pharmacist_email_send(pharmacist)
+
+    @api.multi
     def action_confirm(self):
         """ Generate the sale order pdf and save it in ir.attachment"""
         res = super(SaleOrder, self).action_confirm()
@@ -75,11 +201,8 @@ class SaleOrder(models.Model):
                 self.env.context.get('skip_pdf_gen')):
             # Do not generate the report during test or during import
             return res
-        for order in self:
-            order.with_delay().print_and_attach_report(
-                'sale.report_saleorder',
-                order.partner_id.fax if order.sale_channel == 'fax' else None
-            )
+        self.create_reports()
+        self.create_pharmacist_reports()
         return res
 
     @api.multi
