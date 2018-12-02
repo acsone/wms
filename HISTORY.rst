@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.2 (2018-12-02)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1695: Add a flag on product to not print label for these product
 * ALCYN-1696: Add the possibility to print a lot label
 
@@ -15,10 +27,6 @@ Unreleased
 
 * ALCYN-1686: Use the date done on the delivery slip and on the exported CSV
 * ALCYN-1694: An user without the group accounting cannot see standard fields
-
-**Build**
-
-**Documentation**
 
 
 10.29.1 (2018-12-01)
