@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix quants reservation for pallet/box/wrap preferred reservation
+
 **Build**
 
 **Documentation**
