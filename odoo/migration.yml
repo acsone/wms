@@ -680,4 +680,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_report
           - stock_delivery_note
