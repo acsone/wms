@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1711: Fix delivery note format, adding a separator at the end of each line ';'
+
 **Build**
 
 **Documentation**

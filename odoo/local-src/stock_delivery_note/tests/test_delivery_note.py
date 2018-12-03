@@ -64,7 +64,7 @@ class TestStockDeliveryNote(SavepointCase):
         # Create the customer
         cls.partner = cls.env['res.partner'].create({
             'title': cls.env.ref('base.res_partner_title_prof').id,
-            'name':  'HOENS OLIVIERé',
+            'name':  'HOENS OLIVIER',
             'email': 'tester@pytest.com',
             'ref': '123456789',
             'street':  'Rue Polisart 2 A',
@@ -130,11 +130,19 @@ class TestStockDeliveryNote(SavepointCase):
         """Check the format of the csv document"""
         tax_amount = ','.join(str(self.tax.amount).split('.'))
         expected = [
-            [self.picking.id, 'tester@pytest.com'],
-            [u'Prof. HOENS OLIVIERé', 'Rue Polisart 2 A',
-             '5300 ANDENNE', self.env.ref('base.be').name],
+            [self.picking.id, 'tester@pytest.com', ''],
+            [u'Prof. HOENS OLIVIER', 'Rue Polisart 2 A',
+             '5300 ANDENNE', self.env.ref('base.be').name, ''],
             ['5173360', self.p1.name, '10,000', '50,00', '50,00',
-             tax_amount, '20170102', '31-01-2017', '123454321'],
+             tax_amount, '20170102', '31-01-2017', '123454321', ''],
         ]
         lines = self.picking._generate_delivery_note()
         self.assertEqual(lines, expected)
+
+    def test_each_line_finishes_with_separator(self):
+        """"""
+        attachments = self.env['ir.attachment'].search([
+            ('res_id', '=', self.picking.id)])
+        content = attachments.index_content
+        for line in content.splitlines():
+            self.assertEqual(line[-1:], ';')

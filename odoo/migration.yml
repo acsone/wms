@@ -675,3 +675,9 @@ migration:
         upgrade:
           ### local
           - external_fax
+    - version: 10.29.6
+      operations:
+      addons:
+        upgrade:
+          ### local
+          - stock_delivery_note

@@ -92,6 +92,7 @@ class StockPicking(models.Model):
             Use dates
             Suite name
 
+        For each line an empty column so it always ends with a semi colon
         """
         def format_number(number, fractional_size=None):
             """Format a number to a string.
@@ -117,6 +118,7 @@ class StockPicking(models.Model):
         lines.append([
             self.id,
             partner.email or '',
+            '',
             ])
         lines.append([
             u'{} {}'.format(partner.title.shortcut or '',
@@ -124,6 +126,7 @@ class StockPicking(models.Model):
             partner.street or '',
             u'{} {}'.format(partner.zip or '', partner.city or '').strip(),
             partner.country_id.name or '',
+            ''
             ])
         # The product lines
         for move in self.move_lines:
@@ -149,6 +152,7 @@ class StockPicking(models.Model):
                 '/'.join(quants.mapped('lot_id.name')),
                 use_date,
                 sol.order_id.suite_name or '',
+                ''
                 ]
             )
         return lines
