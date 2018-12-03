@@ -15,7 +15,7 @@ class Sale(models.Model):
 
     @job(default_channel='root.background.sale_confirm')
     @api.multi
-    def confirm_in_background(self):
+    def confirm_in_background(self, notify=True):
         """Confirm sales order in background
 
         The ODOO_QUEUE_JOB_CHANNELS configuration must configure the
@@ -29,16 +29,17 @@ class Sale(models.Model):
         if self.state != 'confirm_background':
             return
         self.action_confirm()
-        action = self.env.ref('sale.action_orders').read()[0]
-        action.update({
-            'res_id': self.id,
-            'views': [(False, 'form')],
-        })
-        self.env.user.notify_info(
-            _('Order %s is now confirmed.') % self.name,
-            sticky=True,
-            action=action,
-        )
+        if notify:
+            action = self.env.ref('sale.action_orders').read()[0]
+            action.update({
+                'res_id': self.id,
+                'views': [(False, 'form')],
+            })
+            self.env.user.notify_info(
+                _('Order %s is now confirmed.') % self.name,
+                sticky=True,
+                action=action,
+            )
 
     def action_confirm_background(self):
         # compatibility with sale_exception
@@ -57,4 +58,4 @@ class Sale(models.Model):
                 description=_(
                     'Confirmation of sales order %s'
                 ) % order.name,
-            ).confirm_in_background()
+            ).confirm_in_background(notify=False)

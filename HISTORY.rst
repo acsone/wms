@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1567: Do not show a notification popup when a sales order is confirmed in background
+
 **Bugfixes**
 
 * ALCYN-1711: Fix delivery note format, adding a separator at the end of each line ';'
