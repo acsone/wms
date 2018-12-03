@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix falsy value for qty_ordered on sale order line (ESB)
+
 **Build**
 
 **Documentation**
