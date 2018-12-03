@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1567: Do not show a notification popup when a sales order is confirmed in background
+
 **Bugfixes**
 
 **Build**
