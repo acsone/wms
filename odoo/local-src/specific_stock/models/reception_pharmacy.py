@@ -107,7 +107,7 @@ class ReceptionPharmacy(models.TransientModel):
                     "All pickings at destination of a same shipping must "
                     "be in the same delivery round"))
             if not delivery_round:
-                delivery_round = self.env['round.instance'].find(
+                delivery_round = self.env['round.instance'].find_bypartner(
                     pickings[0].partner_id)
             if delivery_round:
                 delivery_round._assign_pickings(pickings)
