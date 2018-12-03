@@ -104,7 +104,7 @@ class TestExceptions(ZetesTest):
         assignement_obj.resu(start_picking_params)
 
         pack_op_1 = self.picking.pack_operation_product_ids[0]
-        pack_op_2 = self.picking.pack_operation_product_ids[1]
+        # pack_op_2 = self.picking.pack_operation_product_ids[1]
 
         ##########
         # Step 2 #
