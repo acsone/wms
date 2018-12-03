@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from mock import patch
+from mock import patch, MagicMock
 from copy import deepcopy
 
 from odoo import fields
@@ -286,3 +286,19 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             else:
                 self.assertEqual(order[k], v)
         self.assertEqual(len(order.order_line), 1)
+
+    def test_create_saleorder_no_notify(self):
+        """Check salesmanager won't receive a "Assigned to you" notification
+        on create of sale order from WS
+
+        """
+        data = deepcopy(self.order_data)
+        demo = self.env.ref('base.user_demo')
+        # set a user that will be copied on sale as salesmanager
+        self.partner.user_id = demo
+        self.env['sale.order']._patch_method(
+            'message_post_with_view', MagicMock()
+        )
+
+        self.env['sale.order']._ws_create_new(data)
+        self.env['sale.order'].message_post_with_view.assert_not_called()

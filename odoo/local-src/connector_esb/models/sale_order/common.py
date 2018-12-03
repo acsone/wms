@@ -32,7 +32,8 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, vals):
-        self_ctx = self.with_context(_sale_order_create=True)
+        self_ctx = self.with_context(
+            _sale_order_create=True)
         return super(SaleOrder, self_ctx).create(vals)
 
     @api.multi
@@ -63,7 +64,10 @@ class SaleOrder(models.Model):
              'team_id',
              ],
             )
-        order = self.create(order_data)
+        # never send notify mail on creation from jobs
+        order = self.with_context(
+            mail_auto_subscribe_no_notify=True,
+        ).create(order_data)
 
         is_sale_in_exception = False
         for line in self._ws_create_order_line_data(data)[:]:
