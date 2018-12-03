@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1709: On new sale order coming from web service. Fix quantity at zero on sale order line with sale exception (ESB).
+
 **Build**
 
 **Documentation**

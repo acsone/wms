@@ -65,6 +65,8 @@ class SaleOrder(models.Model):
             )
         order = self.create(order_data)
 
+        partner_ref = data['customer_id']
+
         is_sale_in_exception = False
         for line in self._ws_create_order_line_data(data)[:]:
             line['order_id'] = order.id
@@ -78,10 +80,17 @@ class SaleOrder(models.Model):
             # In this case, change the qty to 0
             if line_rec.exception:
                 is_sale_in_exception = True
-                line_rec.write({
-                    'product_uom_qty': 0,
-                    'ignore_exception': True
-                })
+                # FIXME: add boolean on res_partner to filter web service users
+                if partner_ref in ('8114', '8264'):
+                    # NewPharma
+                    line_rec.write({
+                        'product_uom_qty': 0,
+                        'ignore_exception': True
+                    })
+                else:
+                    line_rec.write({
+                        'ignore_exception': True
+                    })
 
         # If there is at least one line in exception, we need to set
         # the flag "ignore_exception" to True on the sale.order.
