@@ -12,6 +12,7 @@
     Zetes integration for Alcyon
     """,
     'depends': [
+        'delivery_rounds',
         'stock',
         'stock_refill',
         'specific_print',

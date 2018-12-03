@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Add in picking view: weight, operator, partner, zetes_state
 
 * ALCYN-1567: Do not show a notification popup when a sales order is confirmed in background
 
@@ -15,6 +16,7 @@ Unreleased
 * ALCYN-1711: Fix delivery note format, adding a separator at the end of each line ';'
 * Fix reception pharmacy
 * Fix delivery note: 'NoneType' object has no attribute 'is_consignement'
+
 
 **Build**
 

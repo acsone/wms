@@ -11,6 +11,7 @@
     'depends': [
         'stock',
         'delivery',
+        'stock_picking_assignment',
         'stock_picking_subcode',
         'stock_picking_sequence',
         ],

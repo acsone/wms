@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="view_stock_picking_operator_tree" model="ir.ui.view">
+        <field name="name">zetes state</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_picking_assignment.view_stock_picking_operator_tree"/>
+        <field name="arch" type="xml">
+            <field name="operator_id" position="after">
+                <field name="zetes_state"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_vpicktree_ro" model="ir.ui.view">
+        <field name="name">zetes state</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery_rounds.view_vpicktree_ro"/>
+        <field name="arch" type="xml">
+            <field name="operator_id" position="after">
+                <field name="zetes_state"/>
+            </field>
+        </field>
+    </record>
+
     <record id="view_picking_form" model="ir.ui.view">
         <field name="name">view.picking.form.inherit</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>

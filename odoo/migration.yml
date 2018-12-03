@@ -682,3 +682,6 @@ migration:
           ### local
           - specific_report
           - stock_delivery_note
+          - delivery_rounds
+          - specific_stock
+          - specific_zetes

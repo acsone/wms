@@ -415,6 +415,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     def toggle_picking_launched(self):
+        self.ensure_one()
         started = self.filtered('picking_launched')
         stopped = self - started
         started.button_picking_stop()
@@ -423,10 +424,10 @@ class RoundInstance(models.Model):
     @api.multi
     def button_picking_start(self):
         """ Pickings can be processed """
-        self.write({
-            'picking_launched': True,
-            'stat_time_picking': time_now(self),
-            })
+        self.ensure_one()
+        self.picking_launched = True
+        if not self.stat_time_picking:
+            self.stat_time_picking = time_now(self)
 
     @api.multi
     def button_picking_stop(self):
@@ -444,6 +445,7 @@ class RoundInstance(models.Model):
     def button_close(self):
         """ Do not accept new picking automaticaly.
         """
+        self.ensure_one()
         not_started = self.filtered(lambda r: not r.picking_launched)
         not_started.button_picking_start()
         self.write({

@@ -16,6 +16,10 @@
                     string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
             </xpath>
 
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('picking_type_code', '=', 'internal'),('picking_type_subcode', '!=', 'PICK')]}</attribute>
+            </xpath>
+
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="is_put_in_pack_done" invisible="1"/>
             </xpath>

@@ -196,6 +196,7 @@
                         </page>
                         <page string="Statistics">
                             <group>
+                                <field name="stat_time_closed" widget="float_time"/>
                                 <field name="stat_time_picking" widget="float_time"/>
                                 <field name="stat_time_leave" widget="float_time"/>
                             </group>

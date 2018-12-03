@@ -44,6 +44,7 @@
             <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list" create="false" delete="false" edit="false" >
                 <field name="rank"/>
                 <field name="name"/>
+                <field name="operator_id"/>
                 <field name="location_dest_id"/>
                 <field name="partner_id"/>
                 <field name="date" invisible="1"/>
@@ -53,6 +54,7 @@
                 <field name="backorder_id"/>
                 <field name="state"/>
                 <field name="delivery_round_id"/>
+                <field name="shipping_weight"/>
                 <field name="priority" invisible="1"/>
                 <field name="picking_type_id" invisible="0"/>
             </tree>
