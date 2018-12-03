@@ -35,6 +35,10 @@ class StockPackOperationLot(models.Model):
             ('location_id', '=', op.location_id.id),
             ('qty', '>', 0),
             ('reservation_id', '=', False)])
+        self.env.cr.execute(
+            "SELECT id FROM stock_quant WHERE id in %s FOR UPDATE NOWAIT",
+            (tuple(quants.ids), )
+            )
         qty_available = sum([q.qty for q in quants])
         qty_done = self.qty
         qty_to_block = qty_available - qty_done
@@ -42,21 +46,28 @@ class StockPackOperationLot(models.Model):
             raise UserError(_('No qty to block.'))
 
         # Create a move to block this qty
-        # The location "Inventory Loss" (location_inventory) will avoid that
-        # this lot will be use later.
-        dest_location = self.env.ref('stock.location_inventory')
-        block_move = self.env['stock.move'].create({
-            'product_id': op.product_id.id,
-            'product_uom_qty': qty_to_block,
-            'name': 'Skip Lot',
+        # Send to a temporary location part of the non-pickable stock
+        # This will avoid that this lot will be use later.
+        dest_location = self.env.ref('stock_lot_loss.stock_location_14019')
+
+        block_picking = self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref(
+                'stock_lot_loss.stock_picking_type_23').id,
             'location_id': op.location_id.id,
             'location_dest_id': dest_location.id,
-            'restrict_lot_id': self.lot_id.id,
-            'product_uom': op.product_id.uom_id.id,
-            'origin': 'Operator: %s' % self.env.user.name
-            })
-        block_move.action_confirm()
-        block_move.action_assign()
+            'move_lines': [(0, 0, {
+                'name': 'Skip Lot',
+                'product_id': op.product_id.id,
+                'product_uom_qty': qty_to_block,
+                'location_id': op.location_id.id,
+                'location_dest_id': dest_location.id,
+                'restrict_lot_id': self.lot_id.id,
+                'product_uom': op.product_id.uom_id.id,
+                'origin': 'Operator: %s' % self.env.user.name
+                })]
+        })
+        block_picking.action_confirm()
+        block_picking.action_assign()
 
         # Recompute pack operations
         moves._recompute_pack_op()

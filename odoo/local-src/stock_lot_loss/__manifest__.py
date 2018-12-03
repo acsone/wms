@@ -14,6 +14,9 @@
         'purchase'  # Add only for unittests
         ],
     'data': [
+        'data/ir.sequence.csv',
+        'data/stock.location.csv',
+        'data/stock.picking.type.csv',
     ],
     'installable': True,
     'auto_install': False,

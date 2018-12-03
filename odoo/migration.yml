@@ -680,8 +680,9 @@ migration:
       addons:
         upgrade:
           ### local
-          - specific_report
-          - stock_delivery_note
           - delivery_rounds
+          - specific_report
           - specific_stock
           - specific_zetes
+          - stock_delivery_note
+          - stock_lot_loss
