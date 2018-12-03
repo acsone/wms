@@ -161,10 +161,10 @@
                                 <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_reduce" t-if="not order.is_consignment"/>
+                                <span t-field="order_line.price_reduce" t-if="not order or not order.is_consignment"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_subtotal" t-if="not order.is_consignment"/>
+                                <span t-field="order_line.price_subtotal" t-if="not order or not order.is_consignment"/>
                             </td>
                         </tr>
                         <tr t-foreach="quants" t-as="quant">

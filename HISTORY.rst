@@ -14,6 +14,7 @@ Unreleased
 
 * ALCYN-1711: Fix delivery note format, adding a separator at the end of each line ';'
 * Fix reception pharmacy
+* Fix delivery note: 'NoneType' object has no attribute 'is_consignement'
 
 **Build**
 
