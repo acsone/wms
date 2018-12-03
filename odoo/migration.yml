@@ -681,6 +681,7 @@ migration:
         upgrade:
           ### local
           - delivery_rounds
+          - specific_print
           - specific_report
           - specific_stock
           - specific_zetes

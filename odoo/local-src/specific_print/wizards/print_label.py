@@ -18,6 +18,7 @@ class PrintLabel(models.TransientModel):
                                  required=True)
     picking_ids = fields.Many2many('stock.picking', string='Pickings')
     lot_ids = fields.Many2many('stock.production.lot', string='Lots')
+    qty = fields.Integer('Quantity', default=1)
 
     @api.model
     def default_get(self, fields_list=None):
@@ -46,17 +47,19 @@ class PrintLabel(models.TransientModel):
                 raise UserError(_('Invalid printer'))
 
             for picking in self.picking_ids:
-                picking.print_products_label(printer=self.printer_id)
+                picking.print_products_label(
+                    printer=self.printer_id, quantity=self.qty)
         elif self.label_type == 'package':
             if self.printer_id.type != 'zebra':
                 raise UserError(_('Invalid printer'))
 
             for picking in self.picking_ids:
-                picking.print_packages_label(printer=self.printer_id)
+                picking.print_packages_label(
+                    printer=self.printer_id, quantity=self.qty)
 
         elif self.label_type == 'lot':
             if self.printer_id.type != 'zebra':
                 raise UserError(_('Invalid printer'))
 
             for lot in self.lot_ids:
-                lot.print_lot_label(printer=self.printer_id)
+                lot.print_lot_label(printer=self.printer_id, quantity=self.qty)

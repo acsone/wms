@@ -138,7 +138,8 @@ class StockPackOperation(models.Model):
         (constants.OP_SHORTPICKED, 'Shortpicked'),
         (constants.OP_SKIPPED, 'Skipped'),
         (constants.OP_CUT, 'Cut'),
-        (constants.OP_CANCELED, 'Canceled / Full')
+        (constants.OP_CANCELED, 'Canceled / Full'),
+        (constants.OP_MISSING, 'Missing'),
     ],
         string='Zetes state',
         default=constants.OP_DEFAULT,

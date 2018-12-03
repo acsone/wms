@@ -38,6 +38,9 @@
 
         # Security
         'security/ir.model.access.csv',
+
+        # Wizard
+        'wizard/change_lot.xml',
     ],
     'website': 'http://www.camptocamp.com',
     'installable': True,

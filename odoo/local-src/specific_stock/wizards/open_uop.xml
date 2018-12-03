@@ -30,5 +30,5 @@
         action="open_uop_action"
         id="open_uop_menu"
         parent="stock.menu_stock_warehouse_mgmt"
-        sequence="1"/>
+        sequence="2"/>
 </odoo>

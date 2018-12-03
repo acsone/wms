@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="change_lot_view_form" model="ir.ui.view">
+        <field name="name">change.lot.view.form</field>
+        <field name="model">change.lot</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="uop" states="new"/>
+                    <field name="line_ids" states="get">
+                        <tree editable="bottom" create="0">
+                            <field name="product_id"/>
+                            <field name="lot_id" domain="[('product_id', '=', product_id)]"/>
+                            <field name="qty"/>
+                        </tree>
+                    </field>
+                    <field name="state" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="load_uop" string="Load UOP" type="object" class="oe_highlight" states="new"/>
+                    <button name="validate" string="Validate" type="object" class="oe_highlight" states="get"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="change_lot_action" model="ir.actions.act_window">
+        <field name="name">Change Lot</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">change.lot</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        action="change_lot_action"
+        id="change_lot_menu"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="1"/>
+</odoo>

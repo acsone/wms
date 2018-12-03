@@ -158,20 +158,21 @@ class Assignment(DomainInterface):
         if not picking_id:
             return
 
-        picking = self.request.env['stock.picking'].browse(int(picking_id))
+        picking = self.request.env['stock.picking']\
+            .sudo(self._user).browse(int(picking_id))
         if not len(picking):
             return
 
         try:
-            picking.sudo(self._user).zetes_state = params.assignmentStatus
+            picking.zetes_state = params.assignmentStatus
             if params.assignmentStatus in [constants.AS_DONE,
                                            constants.AS_FINISHED]:
 
                 if not picking.partner_id.is_passport_required:
-                    picking.sudo(self._user).validate_picking()
+                    picking.validate_picking()
 
             elif params.assignmentStatus == constants.AS_CANCELED:
-                picking.sudo(self._user).interrupt_picking()
+                picking.interrupt_picking()
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=picking_id, exception=e)

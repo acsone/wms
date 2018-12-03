@@ -135,12 +135,23 @@ class Catchweight(DomainInterface):
 
             lot_id = None
             if lot_number:
+                lots = pack_op.pack_lot_ids.filtered(
+                    lambda rec: rec.qty < rec.qty_todo
+                ).mapped('lot_id')
+
                 lot = self.request.env['stock.production.lot'] \
                     .sudo(self._user).search(
                     [('product_id', '=', pack_op.product_id.id),
-                     ('voice_identifier', '=', lot_number)], limit=1)
+                     ('voice_identifier', '=', lot_number),
+                     ('id', 'in', lots.ids)], limit=1)
                 if lot:
                     lot_id = lot.id
+                else:
+                    error_message = "Pack op lot %s not found" % lot_number
+                    _logger.error(error_message)
+                    params.log(picking_id=pack_op.picking_id.id,
+                               operation_id=pack_operation_id,
+                               exception=error_message)
 
             # If we receive a value for Usf03, it means that we have to
             # check if the available quantity (in Odoo) is the same than

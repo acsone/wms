@@ -30,12 +30,17 @@ class SaleOrderStatusWebserviceMessage(Component):
 
         lines_values = []
         for line in so.order_line:
-            available = line.product_uom_qty - line.product_qty_unavailable
+            if not line.exception:
+                available = line.product_uom_qty - line.product_qty_unavailable
+                available = max(0, available)
+            else:
+                available = 0
+
             lines_values.append({
                 'line_id': line.sequence,
                 'cnk': line.product_id.cnk_code,
                 'quantity': line.product_uom_qty,
-                'available': not line.exception and available or 0,
+                'available': available,
                 'price_total': line.price_subtotal,
                 'error': line.exception or None
             })

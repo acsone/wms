@@ -32,7 +32,7 @@
             </xpath>
 
             <xpath expr="//button[@name='do_new_transfer']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), ('is_put_in_pack_done', '=', False)]}</attribute>
+                <attribute name="attrs">{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}</attribute>
                 <attribute name="states"/>
             </xpath>
 
@@ -68,6 +68,11 @@
             <field name="min_date" position="after">
                 <field name="date_done" />
             </field>
+
+            <xpath expr="//field[@name='location_id']" position="before">
+                <field name="partner_id" readonly="True"/>
+                <field name="delivery_round_id" readonly="True"/>
+            </xpath>
         </field>
     </record>
 
@@ -87,6 +92,18 @@
 
             <xpath expr="//field[@name='qty_outofstock']" position="after">
                 <field name="weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="name">view.picking.internal.search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="before">
+                <separator/>
+                <field name="operator_id"/>
             </xpath>
         </field>
     </record>

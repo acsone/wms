@@ -163,11 +163,24 @@ class Itempick(DomainInterface):
                        exception=msg,
                        error_type='human')
 
-            # Add the picked quantity on the pack lot
-            pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
+            try:
+                # Add the picked quantity on the pack lot
+                pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
 
-            # Call the method to skip this lot
-            pack_lot._skip_lot()
+                # Call the method to skip this lot
+                pack_lot._skip_lot()
+            except Exception as e:
+                _logger.error(str(e))
+                params.log(picking_id=pack_op.picking_id.id,
+                           operation_id=pack_operation_id,
+                           exception=e)
+
+                result = Parameters(self, action='resp')
+                result.update({
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('Cannot reload the picking %s') % picking_id
+                })
+                return result.format()
 
         # Search all pack operations for this picking
         lines = self.request.env['stock.pack.operation'].sudo(self._user)\
@@ -379,5 +392,5 @@ class Itempick(DomainInterface):
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=line_id,
+                       operation_id=pack_operation_id,
                        exception=e)

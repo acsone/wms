@@ -8,6 +8,7 @@
                 <sheet>
                     <group>
                         <field name="printer_id"/>
+                        <field name="qty"/>
                         <field name="label_type" invisible="1"/>
                         <field name="picking_ids" invisible="1"/>
                         <field name="lot_ids" invisible="1"/>

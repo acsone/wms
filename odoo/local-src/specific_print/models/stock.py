@@ -57,12 +57,12 @@ class StockPackOperation(models.Model):
         return partners and partners[0]
 
     @api.multi
-    def print_product_label(self, printer=False):
+    def print_product_label(self, printer=False, quantity=1):
         for op in self:
             if not op.picking_id.partner_id:
                 raise Warning(_('No destination partner defined'))
         hw_print(self, 'specific_print.report_stock_product_label',
-                 printer=printer)
+                 printer=printer, qty=quantity)
 
     @api.multi
     def get_qty_by_lot(self):
@@ -88,13 +88,14 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def print_products_label(self, printer=False):
+    def print_products_label(self, printer=False, quantity=1):
         self.ensure_one()
 
         packs_to_print = self.pack_operation_ids.filtered(
             lambda pack_op: not pack_op.product_id.is_do_not_print_label)
         if packs_to_print:
-            packs_to_print.print_product_label(printer=printer)
+            packs_to_print.print_product_label(
+                printer=printer, quantity=quantity)
 
     @api.multi
     def print_packages_label(self, quantity=1, printer=False):

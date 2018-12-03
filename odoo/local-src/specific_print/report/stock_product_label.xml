@@ -15,7 +15,7 @@
 {PC001;0400,0040,05,05,J,00,B|}\r
 {RC001;ALCYON sa |}\r
 {PC004;0010,0040,05,05,J,00,B|}\r
-{RC004;<t t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)"/>|}\r
+{RC004;<t t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"/>|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
 {RC009;<t t-esc="customer.vet_depot_number or ''"/>|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r

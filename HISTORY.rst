@@ -16,6 +16,12 @@ Unreleased
 * ALCYN-1711: Fix delivery note format, adding a separator at the end of each line ';'
 * Fix reception pharmacy
 * Fix delivery note: 'NoneType' object has no attribute 'is_consignement'
+* Improve at lot of Zetes features
+  * Set limit to 30 characters on partner name on product labels
+  * Add a field to print multiple labels at once
+  * Add a wizard to change lot used in a picking
+  * Add better error catching and logs when add the picked quantity on the pack lot
+* Ensure webservice.message.sale.order.status returns 0 when availability is negative.
 
 
 **Build**
