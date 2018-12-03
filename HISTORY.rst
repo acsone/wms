@@ -7,8 +7,20 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Add in picking view: weight, operator, partner, zetes_state
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.6 (2018-12-04)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* Add in picking view: weight, operator, partner, zetes_state
 * ALCYN-1567: Do not show a notification popup when a sales order is confirmed in background
 
 **Bugfixes**
@@ -22,11 +34,6 @@ Unreleased
   * Add a wizard to change lot used in a picking
   * Add better error catching and logs when add the picked quantity on the pack lot
 * Ensure webservice.message.sale.order.status returns 0 when availability is negative.
-
-
-**Build**
-
-**Documentation**
 
 
 10.29.5 (2018-12-02)
