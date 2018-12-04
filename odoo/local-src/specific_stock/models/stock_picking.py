@@ -90,20 +90,21 @@ class StockPicking(models.Model):
 
     @api.multi
     def put_in_pack(self):
-        result = super(StockPicking, self).put_in_pack()
+        for pick in self:
+            operations = [x for x in pick.pack_operation_ids if x.qty_done > 0 and (not x.result_package_id)]
+            if operations:
+                result = super(StockPicking, self).put_in_pack()
 
-        original_picking_zone_id = \
-            self.mapped('picking_type_id.picking_zone_id')
-        if len(original_picking_zone_id) == 1:
-            packages = \
-                self.mapped('pack_operation_ids.result_package_id')\
-                .filtered(lambda package: not package.original_picking_zone_id)
-            packages.write({
-                'original_picking_zone_id': original_picking_zone_id.id,
-            })
-
-        self.write({'is_put_in_pack_done': True})
-
+                original_picking_zone_id = \
+                    self.mapped('picking_type_id.picking_zone_id')
+                if len(original_picking_zone_id) == 1:
+                    packages = \
+                        self.mapped('pack_operation_ids.result_package_id')\
+                        .filtered(lambda package: not package.original_picking_zone_id)
+                    packages.write({
+                        'original_picking_zone_id': original_picking_zone_id.id,
+                    })
+            self.write({'is_put_in_pack_done': True})
         return result
 
 
