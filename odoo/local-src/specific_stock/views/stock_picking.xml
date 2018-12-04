@@ -9,26 +9,21 @@
             <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-
+            <xpath expr="//field[@name='priority']" position="after">
+                <field name="is_put_in_pack_done" invisible="0"/>
+            </xpath>
             <xpath expr="//header" position="inside">
-                <button attrs="{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '=', False)]}" class="oe_link oe_right"
-                    name="%(put_in_pack_helper_action)d" type="action"
+                <button attrs="{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '!=', False)]}"
+                    class="oe_highlight"
+                    name="button_put_in_pack" type="object"
+                    string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
+                <button attrs="{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '=', False)]}"
+                    name="button_put_in_pack" type="object"
                     string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="attrs">{'invisible': [('picking_type_code', '=', 'internal'),('picking_type_subcode', '!=', 'PICK')]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="is_put_in_pack_done" invisible="1"/>
-            </xpath>
-
-            <xpath expr="//button[@name='do_new_transfer']" position="after">
-                <button attrs="{'invisible': ['|', '|', ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '=', True)]}" class="oe_highlight"
-                    name="%(put_in_pack_helper_action)d" type="action"
-                    string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"
-                />
             </xpath>
 
             <xpath expr="//button[@name='do_new_transfer']" position="attributes">

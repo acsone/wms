@@ -694,3 +694,9 @@ migration:
           ### local
           - connector_esb
           - delivery_rounds
+    - version: 10.29.8
+      operations:
+      addons:
+        upgrade:
+          ### local
+          - specific_stock

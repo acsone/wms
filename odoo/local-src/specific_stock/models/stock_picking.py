@@ -89,9 +89,26 @@ class StockPicking(models.Model):
                 .write({'printed': True})
 
     @api.multi
+    def button_put_in_pack(self):
+        self.ensure_one()
+        pick = self
+        operations_total = sum(
+            x.qty_done for x in pick.pack_operation_ids
+            if x.qty_done > 0 and (not x.result_package_id))
+        if operations_total:
+            wizard = self.env.ref('specific_stock.put_in_pack_helper_action')
+            if pick.picking_type_id == self.env.ref(
+                    '__setup__.stock_picking_type_ali'):
+                wizard.context = "{'default_nbr_packages': %s}"\
+                    % operations_total
+            return wizard.read()[0]
+        self.write({'is_put_in_pack_done': True})
+
+    @api.multi
     def put_in_pack(self):
         for pick in self:
-            operations = [x for x in pick.pack_operation_ids if x.qty_done > 0 and (not x.result_package_id)]
+            operations = [x for x in pick.pack_operation_ids
+                          if x.qty_done > 0 and (not x.result_package_id)]
             if operations:
                 result = super(StockPicking, self).put_in_pack()
 
@@ -100,9 +117,11 @@ class StockPicking(models.Model):
                 if len(original_picking_zone_id) == 1:
                     packages = \
                         self.mapped('pack_operation_ids.result_package_id')\
-                        .filtered(lambda package: not package.original_picking_zone_id)
+                        .filtered(lambda package:
+                                  not package.original_picking_zone_id)
                     packages.write({
-                        'original_picking_zone_id': original_picking_zone_id.id,
+                        'original_picking_zone_id':
+                            original_picking_zone_id.id,
                     })
             self.write({'is_put_in_pack_done': True})
         return result
