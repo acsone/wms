@@ -13,7 +13,7 @@ class SaleOrderLineExportMapper(Component):
     _apply_on = 'sale.order.line'
 
     direct = [
-        ('product_uom_qty', 'qty_ordered'),
+        (falsy2zero('product_uom_qty'), 'qty_ordered'),
         (falsy2zero('qty_delivered'), 'qty_delivered'),
         (falsy2zero('price_reduce_taxexcl'), 'price'),
         (falsy2zero('price_reduce_taxinc'), 'price_inc_tax'),

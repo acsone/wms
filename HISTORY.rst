@@ -15,6 +15,7 @@ Unreleased
 * Delivery rounds: Fix singleton error
 * ALCYN-1712: Fix default filter on delivery_round, adding today_search as well.
 * ALCYN-1709: On new sale order coming from web service. Fix quantity at zero on sale order line with sale exception (ESB).
+* Fix falsy value for qty_ordered on sale order line (ESB)
 
 **Build**
 

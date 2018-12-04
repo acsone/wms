@@ -692,4 +692,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - connector_esb
           - delivery_rounds
