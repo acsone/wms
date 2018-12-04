@@ -12,7 +12,7 @@ Unreleased
 
 **Bugfixes**
 
-* Fix singleton error
+* Delivery rounds: Fix singleton error
 
 **Build**
 
