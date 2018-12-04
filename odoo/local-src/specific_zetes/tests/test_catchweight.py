@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-
-from odoo import fields
+# from datetime import datetime
+# from dateutil.relativedelta import relativedelta
+#
+# from odoo import fields
 from odoo.tools import mute_logger
 
 from .. import constants
