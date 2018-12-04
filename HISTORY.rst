@@ -8,11 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1713: run delivery operations of a round in background. The rounds have
+  a new state "Delivering". The delivery operations run in background and if
+  there any error, the round stays in this state, with a warning logo. A cron
+  "Check Round Delivery State" is added to transition from Delivering to Done.
+
 **Bugfixes**
 
 ALCYN-1746: Change cplz19 on export product with web_published field (ESB)
 ALCYN-1746: Invert Gescge mapping on export product (ESB)
 ALCYN-1746: Have all products even the unactive ones to be exported to the ESB
+
+* Fix singleton error
 
 **Build**
 

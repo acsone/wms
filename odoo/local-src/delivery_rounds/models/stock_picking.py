@@ -66,6 +66,27 @@ class StockPicking(models.Model):
         return moves.mapped('picking_id')
 
     @api.multi
+    def write(self, vals):
+        unset_round = ('delivery_round_customer_id' in vals
+                       and not vals['delivery_round_customer_id']
+                       and not self.env.context.get('noround_write'))
+        if unset_round:
+            in_round = self.filtered(
+                lambda p: p.delivery_round_customer_id
+            )
+        res = super(StockPicking, self).write(vals)
+        if unset_round:
+            # unreserve quants when picking is disconnected from a delivery
+            # round
+            pickings = self.filtered(
+                lambda p: not p.delivery_round_customer_id and p in in_round
+            )
+            _logger.debug("Delivery round customer unset on pickings %s",
+                          pickings.ids)
+            pickings.do_unreserve()
+        return res
+
+    @api.multi
     @api.constrains('delivery_round_customer_id')
     def _update_delivery_round(self):
         if self.env.context.get('noround_write'):
@@ -73,13 +94,7 @@ class StockPicking(models.Model):
         delivery_round_customer = self.mapped('delivery_round_customer_id')
         assert len(delivery_round_customer) <= 1, \
             'Max 1 delivery round customer can be written at a time'
-        if not delivery_round_customer:
-            _logger.debug("Delivery round customer unset on pickings %s",
-                          self.ids)
-            # unreserve quants when picking is disconnected from a delivery
-            # round
-            self.do_unreserve()
-        else:
+        if delivery_round_customer:
             if not self.env.context.get('round_assigned'):
                 raise UserError(
                     "Delivery round assigned to a picking without "
@@ -95,6 +110,25 @@ class StockPicking(models.Model):
     _group_by_full = {
         'delivery_round_id': _group_delivery_round,
     }
+
+    @api.multi
+    def _do_round_picking_transfer(self):
+        if not self.state in ('assigned', 'partially_available'):
+            return
+        for pack in self.pack_operation_ids:
+            if pack.product_qty > 0:
+                pack.qty_done = pack.product_qty
+                for plot in pack.pack_lot_ids:
+                    if plot.qty_todo > 0:
+                        plot.qty = plot.qty_todo
+            else:
+                pack.unlink()
+        self.do_transfer()
+
+    def _detach_from_round(self):
+        self.filtered(
+            lambda p: p.state not in ('cancel', 'done')
+        ).write({'delivery_round_customer_id': False})
 
     @api.multi
     def button_delivery_round(self):
