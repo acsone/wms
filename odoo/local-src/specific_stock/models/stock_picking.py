@@ -35,6 +35,19 @@ class StockPicking(models.Model):
     is_put_in_pack_done = fields.Boolean('Put in Pack done', default=False)
 
     @api.multi
+    def name_get(self):
+        """ Display the name, the partner and the round """
+        res = []
+        for picking in self:
+            name = picking.name
+            if picking.partner_id:
+                name += ' - %s' % picking.partner_id.display_name
+            if picking.delivery_round_id:
+                name += ' - %s' % picking.delivery_round_id.template_code
+            res.append((picking.id, name))
+        return res
+
+    @api.multi
     def _create_lots_for_picking(self):
         return super(StockPicking, self.with_context(
             default_life_date_allowed=True

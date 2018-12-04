@@ -67,10 +67,14 @@ class Print(DomainInterface):
         if print_type == constants.PRINT_PASSPORT:
             pick_aliment = \
                 self.request.env.ref('__setup__.stock_picking_type_ali')
+            pick_frigo = \
+                self.request.env.ref('__setup__.stock_picking_type_froid')
             if picking.picking_type_id == pick_aliment:
-                printer_code = '2'
+                printer_code = constants.PRINTER_ALIMENT
+            elif picking.picking_type_id == pick_frigo:
+                printer_code = constants.PRINTER_FRIGO
             else:
-                printer_code = '1'
+                printer_code = constants.PRINTER_MEDICAMENT
 
             # The passport is always printed on the printer 1
             printer = self.request.env['printing.printer'].sudo() \

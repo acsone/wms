@@ -40,7 +40,7 @@
         'security/ir.model.access.csv',
 
         # Wizard
-        'wizard/change_lot.xml',
+        'wizard/manage_uop.xml',
     ],
     'website': 'http://www.camptocamp.com',
     'installable': True,
