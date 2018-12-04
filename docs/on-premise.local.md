@@ -4,26 +4,31 @@ The integration instance is hosted by Limelogic in Alcyon buildings.
 
 There are 2 servers which internal hostnames are:
 
-- `lnx001.abl.grp` (Odoo)
-- `lnx002.abl.grp` (DB)
+- `lnx001.abl.grp` (Odoo integration)
+- `lnx002.abl.grp` (DB integration)
+
+- `lnx004.abl.grp` (Odoo prod)
+- `lnx005.abl.grp` (DB prod)
 
 
 From outside we only have access to `lnx001.abl.grp` through `pp-erp.alcyonbelux.be`.
+And to `lnx004.abl.grp` through `erp.alcyonbelux.be`.
 
 # Contacts
 
-eric.granados@limelogic.be
 jean.cardona@limelogic.be
+eric.granados@limelogic.be
+christian.lardinois@limelogic.be
 
 To contact for SSH keys and for each new release.
 
 
 # Firewall
 
-To access `pp-erp.alcyonbelux.be`. You need first to go through the firewall.
+To access `(pp-)erp.alcyonbelux.be`. You need first to go through the firewall.
 By default all ports are blocked. (HTTP, HTTPS and SSH)
 
-To unblock, simply open https://pp-erp.alcyonbelux.be in a browser.
+To unblock, simply open https://erp.alcyonbelux.be in a browser.
 
 You will be prompted for a user and password.
 
@@ -39,7 +44,7 @@ and you will be able to access the server through SSH.
 
 (first ensure you unlocked the firewall)
 
-Odoo is available at https://pp-erp.alcyonbelux.be
+Odoo is available at https://erp.alcyonbelux.be
 
 Login: admin
 Password: <lastpass: "[odoo-test] alcyon test admin - Limelogic">
@@ -82,6 +87,9 @@ journal.container_name: *odoo* AND message: *ERROR*
 To access database we need to make a jump through lnx001.abl.grp:
 
 ```
+# Prod
+ssh -p 23 camptocamp@pp-erp.alcyonbelux.be -L 5555:lnx005.abl.grp:5432
+# Integration
 ssh -p 23 camptocamp@pp-erp.alcyonbelux.be -L 5555:lnx002.abl.grp:5432
 ```
 
@@ -97,7 +105,7 @@ psql -p 5555 -h localhost -U odoo-preprod odoo-preprod
 or create your dump (you will need postgres 9.6):
 
 ```
-/usr/lib/postgresql/9.6/bin/pg_dump -p 5555 -h localhost -U odoo-preprod --format=c --file DATA/dumps/20180619-temp-pp-erp-alcyon.pg odoo-preprod
+/usr/lib/postgresql/9.6/bin/pg_dump -p 5555 -h localhost -U odoo-preprod --format=c --file /tmp/$(date -I)-erp-alcyon.pg odoo-preprod
 ```
 The dump is already heavy. Expect a file bigger than 400 MB.
 
