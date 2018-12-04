@@ -16,9 +16,9 @@ And to `lnx004.abl.grp` through `erp.alcyonbelux.be`.
 
 # Contacts
 
-jean.cardona@limelogic.be
-eric.granados@limelogic.be
-christian.lardinois@limelogic.be
+- jean.cardona@limelogic.be
+- eric.granados@limelogic.be
+- christian.lardinois@limelogic.be
 
 To contact for SSH keys and for each new release.
 
