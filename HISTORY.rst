@@ -13,6 +13,7 @@ Unreleased
 **Bugfixes**
 
 * Delivery rounds: Fix singleton error
+* ALCYN-1712: Fix default filter on delivery_round, adding today_search as well.
 
 **Build**
 
