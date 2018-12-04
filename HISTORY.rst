@@ -9,6 +9,8 @@ Unreleased
 **Features and Improvements**
 * Improve put in pack: manage picking without lines done + count amount of products for Food'
 
+* Create an unique Wizard to validate a picking (passport) and/or change a lot
+
 **Bugfixes**
 * Fix checksum generation for colis pharmacy
 
