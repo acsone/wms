@@ -61,3 +61,8 @@ MOVE_LOAD = '2'
 
 # Zero Check Limit
 ZERO_CHECK_LIMIT = 0
+
+# Printer
+PRINTER_MEDICAMENT = '1'
+PRINTER_ALIMENT = '2'
+PRINTER_FRIGO = '3'

@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Create an unique Wizard to validate a picking (passport) and/or change a lot
+
 **Bugfixes**
 
 **Build**

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="manage_uop_view_form" model="ir.ui.view">
+        <field name="name">manage.uop.view.form</field>
+        <field name="model">manage.uop</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="1"/>
+                <field name="is_change_lots" invisible="1"/>
+                <field name="user_id" invisible="1"/>
+                <div states="main_menu">
+                    <h2>Search your UOP</h2>
+                    <group>
+                        <group>
+                            <h3>By your user</h3>
+                            <field name="user_id" nolabel="1"/>
+                        </group>
+                        <group>
+                            <h3>By the UOP number</h3>
+                            <field name="uop" nolabel="1"/>
+                        </group>
+                    </group>
+                </div>
+                <div states="search_picking">
+                    <h2>Select your UOP</h2>
+                    <group>
+                        <field name="picking_id" domain="[('state', 'in', ('partially_available', 'assigned')), ('operator_id', '=', user_id), ('picking_type_subcode', '=', 'PICK')]"/>
+                    </group>
+                </div>
+
+                <div states="validate_picking">
+                    <div attrs="{'invisible': [('is_change_lots', '=', False)]}">
+                        <h3>Modify your UOP</h3>
+                        <field name="line_ids">
+                            <tree editable="bottom" create="0">
+                                <field name="product_id"/>
+                                <field name="lot_id" domain="[('product_id', '=', product_id)]"/>
+                                <field name="qty"/>
+                            </tree>
+                        </field>
+                    </div>
+                    <h3>Printer</h3>
+                    <group>
+                        <field name="printer_num"/>
+                        <field name="nbr_package"/>
+                    </group>
+                    <button name="validate" string="Validate" type="object" class="oe_highlight"/>
+                </div>
+
+                <footer>
+                    <button name="search_picking" string="Search UOP" type="object" class="oe_highlight" states="main_menu"/>
+                    <button name="load_picking" string="Load UOP" type="object" class="oe_highlight" states="search_picking"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="manage_uop_action" model="ir.actions.act_window">
+        <field name="name">Manage UOP</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">manage.uop</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        action="manage_uop_action"
+        id="manage_uop_menu"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="1"/>
+</odoo>
