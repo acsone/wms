@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1707: Disable assignation mailing to salesman on WS create order
+
 **Bugfixes**
 
 **Build**
