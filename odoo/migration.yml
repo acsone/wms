@@ -687,3 +687,9 @@ migration:
           - specific_zetes
           - stock_delivery_note
           - stock_lot_loss
+    - version: 10.29.7
+      operations:
+      addons:
+        upgrade:
+          ### local
+          - delivery_rounds
