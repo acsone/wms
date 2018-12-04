@@ -39,12 +39,44 @@ class StockUpdateMapper(Component):
             value = record.product_tmpl_id.state_id.esb_ref or ''
         return {'erp_stock_code': value}
 
+    def _get_next_lot(self, record):
+        """ Returns a lot with closest expirancy date and positive quantity.
+
+        Lot with 0 quantity can exists, but there should be not more than one.
+
+        """
+
+        Lot = self.env['stock.production.lot']
+        zero_lots = Lot
+
+        base_domain = [
+            ('product_id', '=', record.id),
+            ('life_date', '!=', False),
+        ]
+        lot = None
+        # there shouldn't be more than one quant with zero quantities
+        # we need to filter it
+        # thus we search for next one if qty is equal to zero,
+        # product_qty is not stored
+        while not lot:
+            domain = base_domain[:]
+            if zero_lots:
+                domain += ('id', 'not in', zero_lots.ids)
+            lot = self.env['stock.production.lot'].search(
+                domain, order='life_date', limit=1)
+
+            if lot.product_qty <= 0:
+                zero_lots |= lot
+                lot = None
+            else:
+                return lot
+
     @mapping
     def compute_date_peremption(self, record):
         value = ''
-        lot = self.env['stock.production.lot'].search([
-            ('product_id', '=', record.id),
-            ('life_date', '!=', False)], order='life_date', limit=1)
+
+        lot = self._get_next_lot(record)
+
         if lot:
             value = lot[0].life_date[:10]
         return {'date_peremption': value}

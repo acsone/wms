@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import mock
+from mock import patch, PropertyMock
 import os
 import requests
 
@@ -118,20 +119,44 @@ class ExportStockUpdateTestCase(SavepointCase):
                     'product_uom_qty': 55,
                 })],
         })
-        # Lets add some stock
+        # Lets add some lots
+        self.life_date_0 = datetime.today() + timedelta(days=3)
         self.life_date_1 = datetime.today() + timedelta(weeks=40)
         self.life_date_2 = datetime.today() + timedelta(weeks=1)
         self.life_date_3 = datetime.today() + timedelta(days=1)
+        self.lot0 = self.env['stock.production.lot'].create({
+            'product_id': self.prod1.id,
+            'name': 'lot0',
+            'life_date': self.life_date_0.strftime("%Y-%m-%d %H:%M:%S")
+            # product_qty: 0
+            })
+
         self.lot1 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot1',
             'life_date': self.life_date_1.strftime("%Y-%m-%d %H:%M:%S")
+            # product_qty: 100
             })
+
         self.lot2 = self.env['stock.production.lot'].create({
             'product_id': self.prod1.id,
             'name': 'lot2',
             'life_date': self.life_date_2.strftime("%Y-%m-%d %H:%M:%S")
+            # product_qty: 100
             })
+
+        # mock some quantities
+        # lot0 is there to ensure it is not picking a zero qty lot
+        def mock_product_qty(rec):
+            if rec.name == 'lot0':
+                qty = 0.0
+            else:
+                qty = 100.0
+            rec.product_qty = qty
+
+        self.env['stock.production.lot']._patch_method(
+            '_product_qty', mock_product_qty
+        )
         inventory_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.prod1.id,
             'new_quantity': 50.0,
@@ -151,6 +176,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             'product_id': self.prod2.id,
             'name': 'lot_p2',
             'life_date': self.life_date_3.strftime("%Y-%m-%d %H:%M:%S")
+            # product_qty: 100
             })
         inventory_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.prod2.id,
