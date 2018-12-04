@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.7 (2018-12-04)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1707: Disable assignation mailing to salesman on WS create order
 
 **Bugfixes**
@@ -16,10 +28,6 @@ Unreleased
 * ALCYN-1712: Fix default filter on delivery_round, adding today_search as well.
 * ALCYN-1709: On new sale order coming from web service. Fix quantity at zero on sale order line with sale exception (ESB).
 * Fix falsy value for qty_ordered on sale order line (ESB)
-
-**Build**
-
-**Documentation**
 
 
 10.29.6 (2018-12-04)
