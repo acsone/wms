@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* On export of stock exported life_date is now based on lot with quantities > 0
+
 **Build**
 
 **Documentation**
