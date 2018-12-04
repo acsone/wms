@@ -7,6 +7,7 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Improve put in pack: manage picking without lines done + count amount of products for Food'
 
 **Bugfixes**
 * Fix checksum generation for colis pharmacy
