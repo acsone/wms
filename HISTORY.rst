@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Fix checksum generation for colis pharmacy
 
 **Build**
 

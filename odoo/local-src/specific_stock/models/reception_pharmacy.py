@@ -63,7 +63,9 @@ class ReceptionPharmacy(models.TransientModel):
         for line in self.line_ids:
             lot_id = lot.create({
                 'product_id': self.product_id.id,
-                'name': sequence.next_by_code('stock.lot.pharmacy')
+                'name': sequence.next_by_code('stock.lot.pharmacy'),
+                'voice_identifier': 'ABC',
+                'checksum': '123',
                 })
             # Put the lot in stock
             line.reception_move_id = move.create({
