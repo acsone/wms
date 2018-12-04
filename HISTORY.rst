@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix singleton error
+
 **Build**
 
 **Documentation**
