@@ -214,7 +214,7 @@
         <field name="res_model">round.instance</field>
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{'search_default_current': 1}</field>
+        <field name="context">{'search_default_current': 1, 'search_default_today': 1}</field>
     </record>
 
     <menuitem action="action_round_instance" id="menu_round_instance" parent="menu_delivery_round" sequence="20"/>
