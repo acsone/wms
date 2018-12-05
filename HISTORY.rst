@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1735: Zetes Assignement - return only open pickings
+
 **Build**
 
 **Documentation**

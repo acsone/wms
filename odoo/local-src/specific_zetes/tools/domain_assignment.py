@@ -192,6 +192,7 @@ class Assignment(DomainInterface):
           INNER JOIN round_instance AS round
             ON picking.delivery_round_id = round.id
         WHERE pick_type.subcode = 'PICK'
+              AND picking.state IN ('partially_available', 'assigned')
               AND picking.zetes_state IN %(picking_zetes_state)s
               AND pick_type.zetes_picking_type = %(picking_type)s
               AND EXISTS(SELECT 1
