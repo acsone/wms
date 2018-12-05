@@ -10,6 +10,7 @@ Unreleased
 
 * Add some logistics onchange tracking
 * Add some track changes in logistics
+* Group by partner: Prevent to create a backorder and use existing picking if possible (like move assignment created from procurement)
 
 **Bugfixes**
 

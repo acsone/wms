@@ -2,11 +2,60 @@
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import time
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 import logging
 _logger = logging.getLogger(__name__)
+
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    @api.multi
+    def _create_backorder(self, backorder_moves=[]):
+        """ Take care of grouping by partner.
+        Reuse the overriden method action_assign that serch a good picking or
+        create a new one.
+        Apply this to all non-done lines into an existing for a new backorder
+        picking. If the key 'do_only_split' is given in the context, then move
+        all lines not in context.get('split', []) instead of all non-done
+        lines.  """
+        if self._context.get('nogrouppicking'):
+            return super(StockPicking, self)._create_backorder(
+                backorder_moves=backorder_moves)
+
+        picking_togroup = self.filtered(
+            lambda p: p.picking_type_id.groupbypartner)
+        picking_notgroup = self - picking_togroup
+
+        for picking in picking_togroup:
+            backorder_moves = backorder_moves or picking.move_lines
+            if self._context.get('do_only_split'):
+                not_done_bo_moves = backorder_moves.filtered(
+                    lambda move: move.id not in self._context.get('split', []))
+            else:
+                not_done_bo_moves = backorder_moves.filtered(
+                    lambda move: move.state not in ('done', 'cancel'))
+            if not not_done_bo_moves:
+                continue
+            if not picking.printed:
+                picking.printed = True
+            not_done_bo_moves.with_context(
+                backorder_assign=picking).assign_picking()
+
+            if not picking.date_done:
+                picking.write({'date_done': time.strftime(
+                    DEFAULT_SERVER_DATETIME_FORMAT)})
+
+        if picking_notgroup:
+            return super(StockPicking, picking_notgroup)._create_backorder(
+                backorder_moves=backorder_moves)
+
+        return self.env['stock.picking']
 
 
 class StockPickingType(models.Model):
@@ -57,6 +106,7 @@ class StockMove(models.Model):
 
             max_weight = (move.picking_type_id.groupbypartner_maxweight -
                           move.product_id.weight * move.product_qty)
+            backorder_orig_id = self.env.context.get('backorder_assign')
             for picking in pickings:
                 if (not move.picking_type_id.groupbypartner_maxweight or
                         picking.weight <= max_weight):
@@ -64,6 +114,11 @@ class StockMove(models.Model):
                     _logger.debug("Assign move %s to existing picking %s",
                                   move.id, picking.id)
                     move.picking_id = picking.id
+                    if backorder_orig_id:
+                        backorder_orig_id.message_post(body=_(
+                            "Remaining move moved to exiting picking "
+                            "<em>%s</em> used as a backorder.") %
+                            (picking.name))
                     # unreserve moves having an operation for that product
                     # Note: (re)check availability (action_assign) does not
                     # work on added move where an operation already exists for
@@ -87,6 +142,10 @@ class StockMove(models.Model):
                 _logger.debug("Assign move %s to new picking", move.id)
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
+                if backorder_orig_id:
+                    backorder_orig_id.message_post(body=_(
+                        "Remaining move moved to new backorder "
+                        "<em>%s</em>.") % (picking.name))
                 if str(domain) not in pickings_cache:
                     pickings_cache[str(domain)] = picking
                 else:
