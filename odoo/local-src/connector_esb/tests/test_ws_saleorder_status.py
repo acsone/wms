@@ -73,7 +73,11 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.assertEqual(len(result['lines']), 2)
 
     def test_saleorder_status_with_wrong_product(self):
-        """ Test the method sale order status with a wrong product """
+        """ Test the method sale order status with a wrong product
+
+        For outside partners (currently hardcoded to
+        partner_ref in ('8114', '8264') with a quick dirty fix.
+        """
         # Create a rule to ban product that cannot be sold (sale_ok == False)
         self.env['exception.rule'].search([]).unlink()
         rule = self.env['exception.rule'].create({
@@ -88,6 +92,8 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.prod2.sale_ok = False
 
         data = deepcopy(self.order_data)
+        data['customer_id'] = '8114'
+        self.partner.ref = '8114'
         self.so0 = self.env['sale.order']._ws_create_new(data)
         self.so0.action_confirm()
 
@@ -119,4 +125,59 @@ class WSSaleOrderStatusTestCase(SavepointCase):
 
         wrong_line = wrong_line[0]
         self.assertEqual(wrong_line['quantity'], 0)
+        self.assertEqual(wrong_line['error'], rule.description)
+
+    def test_saleorder_status_with_wrong_product_from_esb(self):
+        """ Test the method sale order status with a wrong product
+
+        From trusted source, we don't set quantities to 0
+        parole from ESB is considered holy
+        (doesn't mean it can't be wrong but then as we want to be in
+        sync we want to reproduce the same holy errors too)
+        """
+        # Create a rule to ban product that cannot be sold (sale_ok == False)
+        self.env['exception.rule'].search([]).unlink()
+        rule = self.env['exception.rule'].create({
+            'name': 'Test if can be sold',
+            'description': 'This product cannot be sold',
+            'rule_group': 'sale',
+            'model': 'sale.order.line',
+            'code': "failed = not object.product_id.sale_ok",
+            'active': True
+        })
+
+        self.prod2.sale_ok = False
+
+        data = deepcopy(self.order_data)
+        self.so0 = self.env['sale.order']._ws_create_new(data)
+        self.so0.action_confirm()
+
+        partner_ref = self.partner.ref
+        esb_ref = self.so0.esb_ref
+
+        # Compute exceptions
+        self.assertTrue(self.so0.ignore_exception)
+
+        backend = self.env['esb.backend'].get_singleton()
+        with backend.work_on('sale.order') as work:
+            component = work.component('ws.message.sale.order.status')
+            result = component.get_message(partner_ref, esb_ref)
+
+        self.assertEqual(result['state'], 'sale')
+        self.assertEqual(result['price_total'], 30.25)
+        self.assertEqual(len(result['lines']), 2)
+
+        good_line = [l for l in result['lines'] if l['cnk'] == '000015']
+        wrong_line = [l for l in result['lines'] if l['cnk'] == '000062']
+
+        self.assertEqual(len(good_line), 1)
+        self.assertEqual(len(wrong_line), 1)
+
+        # Check the good line
+        good_line = good_line[0]
+        self.assertEqual(good_line['quantity'], 20)
+        self.assertIsNone(good_line['error'])
+
+        wrong_line = wrong_line[0]
+        self.assertEqual(wrong_line['quantity'], 5)
         self.assertEqual(wrong_line['error'], rule.description)
