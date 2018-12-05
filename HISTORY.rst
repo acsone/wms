@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1725: Fix 'Via Pharmacy' in Magento in product export (ESB)
+* ALCYN-1735: Zetes Assignement - return only open pickings
 
 **Build**
 
