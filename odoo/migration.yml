@@ -688,7 +688,6 @@ migration:
           - stock_delivery_note
           - stock_lot_loss
     - version: 10.29.7
-      operations:
       addons:
         upgrade:
           ### local
@@ -703,3 +702,7 @@ migration:
           - specific_zetes
     - version: 10.29.9
       operations:
+      addons:
+        upgrade:
+          # oca/server-tools
+          - server_environment_ir_config_parameter
