@@ -41,7 +41,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         # As the l10n_be module installs it in account_tax_template
         # And it is created in account.tax by the chart of account module
         self.apb_tax = self.env['account.tax'].create({
-            'desription': 'APB-OUT',
+            'description': 'APB-OUT',
             'company_id': 1,
             'include_base_amount': False,
             'analytic': False,
@@ -59,7 +59,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             })
         # And also add a vat tax of 6%
         self.vat_tax = self.env['account.tax'].create({
-            'desription': '6percent',
+            'description': '6percent',
             'company_id': 1,
             'include_base_amount': False,
             'analytic': False,
