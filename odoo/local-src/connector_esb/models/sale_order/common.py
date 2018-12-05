@@ -150,11 +150,8 @@ class SaleOrder(models.Model):
 
     def _ws_create_order_line_data(self, data):
         lines = []
+        human_categ = self.env.ref('specific_data.product_categ_humain')
         for line in data['lines']:
-            if line.get('free'):
-                # free line, skip it
-                continue
-
             if 'sku' in line:
                 is_sku = True
                 product = self.env['product.product'].search([
@@ -167,6 +164,13 @@ class SaleOrder(models.Model):
                 message = 'You need to provide the SKU or the CNK'
                 _logger.error(message)
                 raise exceptions.UserError(_(message))
+
+            if line.get('free'):
+                # free line
+                # check if product is human
+                # if additional product (not human med), skip it
+                if not product or product.categ_id != human_categ:
+                    continue
 
             product_code = is_sku and line['sku'] or line['cnk']
             if len(product) > 1:
