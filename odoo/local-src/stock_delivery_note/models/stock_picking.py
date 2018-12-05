@@ -21,12 +21,15 @@ class StockPicking(models.Model):
         for r in self:
             if r.picking_type_id == picking_type_out:
                 r._save_delivery_note()
+                r._send_delivery_note()
         return result
 
     @api.multi
     def _get_delivery_note_filename(self):
         """Return the delivery note filename."""
         self.ensure_one()
+        if not self.date_done:
+            return
         return '_'.join([
             'NE',
             self.partner_id.ref or '',
@@ -35,6 +38,7 @@ class StockPicking(models.Model):
             ''.join(self.date_done[-8:].split(':')),
             ]) + '.csv'
 
+    @api.multi
     def _save_delivery_note(self):
         """Save the delivery note in csv format in ir.attachment"""
         self.ensure_one()
@@ -45,6 +49,8 @@ class StockPicking(models.Model):
         data = file_data.getvalue()
 
         filename = self._get_delivery_note_filename()
+        if not filename:
+            return
         existing = self.env['ir.attachment'].search([('name', '=', filename)])
         if len(existing):
             existing[0].datas = data.encode('base_64')
@@ -59,8 +65,15 @@ class StockPicking(models.Model):
                 'datas': data.encode('base_64')
             })
 
-        # send by email
+    @api.multi
+    def _send_delivery_note(self):
+        """Send the delivery note by email to the customer."""
+        self.ensure_one()
         if config['test_enable']:
+            return
+        filename = self._get_delivery_note_filename()
+        existing = self.env['ir.attachment'].search([('name', '=', filename)])
+        if not len(existing):
             return
         template = self.env.ref('stock_delivery_note.delivery_note_csv')
         values = template.generate_email(self.id)
@@ -71,6 +84,12 @@ class StockPicking(models.Model):
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
         mail = self.env['mail.mail'].create(values)
         mail.send(raise_exception=True)
+
+    @api.multi
+    def create_delivery_note(self):
+        """Used for the action menu."""
+        for picking in self:
+            picking._save_delivery_note()
 
     @api.multi
     def _generate_delivery_note(self):

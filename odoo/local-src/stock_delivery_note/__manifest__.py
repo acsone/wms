@@ -15,6 +15,7 @@
         ],
     'data': [
         'data/email_template.xml',
+        'views/stock_picking.xml',
     ],
     'website': 'www.camptocamp.com',
     'installable': True,
