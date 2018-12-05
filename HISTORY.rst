@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1725: Fix 'Via Pharmacy' in Magento in product export (ESB)
+
 **Build**
 
 **Documentation**

@@ -701,3 +701,5 @@ migration:
           ### local
           - specific_stock
           - specific_zetes
+    - version: 10.29.9
+      operations:

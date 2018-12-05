@@ -108,14 +108,24 @@ class ProductExportMapper(Component):
         The sub group is the group in which the product is.
         The group is the parent group of the sub group
 
+        The group was never imported into Odoo from db2 (product categories
+        were revamped with tree structure) so it can not be calculated.
+
         """
-        sub_grp = record.categ_id
-        if sub_grp.is_business_unit or not sub_grp.parent_id:
-            grp = sub_grp
-        else:
-            grp = sub_grp.parent_id
-        grp_ref = grp.esb_ref or '0'
-        subgrp_ref = sub_grp.esb_ref or '0'
+        grp_ref = '0'
+        subgrp_ref = record.categ_id.esb_ref or '0'
+        # Human products
+        if subgrp_ref == '15':
+            grp_ref = '6'
+        # Cascade products
+        if subgrp_ref == '75':
+            grp_ref = '75'
+        # Stupefiant
+        if subgrp_ref == '31':
+            grp_ref = '7'
+        # Psychotrop annexe III
+        if subgrp_ref == '30':
+            grp_ref = '8'
         return {
             'Gescgr': grp_ref if grp_ref.isdigit() else '0',
             'Gescsg': subgrp_ref if subgrp_ref.isdigit() else '0',

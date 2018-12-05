@@ -199,7 +199,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gespnt': '10.000',
             'Refdem': 'Export me pls (TLH)',
             'Gesarc': 'supplier001',
-            'Gescgr': '0',
+            'Gescgr': '6',
             'Gescsg': '15',
             'Gesfou': '79001',
             'Cplz25': '79001',
