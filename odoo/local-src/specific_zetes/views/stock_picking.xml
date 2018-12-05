@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="operator_id" position="after">
                 <field name="zetes_state"/>
+                <field name="zetes_state_lastchange"/>
             </field>
         </field>
     </record>
@@ -17,6 +18,7 @@
         <field name="arch" type="xml">
             <field name="operator_id" position="after">
                 <field name="zetes_state"/>
+                <field name="zetes_state_lastchange"/>
             </field>
         </field>
     </record>

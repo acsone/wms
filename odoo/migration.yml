@@ -706,3 +706,8 @@ migration:
         upgrade:
           # oca/server-tools
           - server_environment_ir_config_parameter
+    - version: 10.29.10
+      addons:
+        upgrade:
+          ### local
+          - specific_zetes

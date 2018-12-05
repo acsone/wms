@@ -10,9 +10,11 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     # Odoo Fix: never copy the printed field. Important for backorder creation
-    printed = fields.Boolean(copy=False)
+    printed = fields.Boolean(copy=False, track_visibility='onchange')
 
-    operator_id = fields.Many2one('res.users', string='Operator', copy=False)
+    operator_id = fields.Many2one(
+        'res.users', string='Operator', copy=False,
+        track_visibility='onchange')
 
     @api.multi
     def assign_operator(self):

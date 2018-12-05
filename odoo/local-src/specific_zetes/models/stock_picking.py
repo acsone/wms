@@ -12,7 +12,6 @@ from .. import constants
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    operator_id = fields.Many2one(track_visibility='onchange')
     checksum = fields.Char('Checksum', copy=False)
     zetes_state = fields.Selection([
         (constants.AS_DEFAULT, 'Default'),
@@ -26,13 +25,19 @@ class StockPicking(models.Model):
         string='Zetes state',
         default=constants.AS_DEFAULT,
         copy=False,
-        required=True)
+        required=True,
+        track_visibility='onchange')
+    zetes_state_lastchange = fields.Datetime('Last Zetes state change')
     is_zetes_error = fields.Boolean('Zetes error', copy=False)
     nbr_actions = fields.Integer(
         'Nbr of actions',
         compute='_compute_nbr_actions',
         readonly=True
     )
+
+    @api.constrains('zetes_state')
+    def zetes_state_change(self):
+        self.zetes_state_lastchange = fields.Datetime.now()
 
     @api.model
     def default_get(self, fields_list):

@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Add some logistics onchange tracking
+
 **Bugfixes**
 
 **Build**

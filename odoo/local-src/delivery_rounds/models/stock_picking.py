@@ -20,7 +20,8 @@ class StockPicking(models.Model):
         related='delivery_round_customer_id.delivery_round_id',
         string='Delivery Round',
         store=True,
-        readonly=True)
+        readonly=True,
+        track_visibility='onchange')
 
     @api.model
     def default_get(self, fields_list):
