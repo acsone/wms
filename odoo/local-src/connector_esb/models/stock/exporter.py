@@ -61,7 +61,7 @@ class StockUpdateMapper(Component):
         while not lot:
             domain = base_domain[:]
             if zero_lots:
-                domain += ('id', 'not in', zero_lots.ids)
+                domain += [('id', 'not in', zero_lots.ids)]
             lot = self.env['stock.production.lot'].search(
                 domain, order='life_date', limit=1)
 
