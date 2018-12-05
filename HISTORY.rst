@@ -10,13 +10,19 @@ Unreleased
 
 **Bugfixes**
 
-* ALCYN-1725: Fix 'Via Pharmacy' in Magento in product export (ESB)
-* ALCYN-1735: Zetes Assignement - return only open pickings
-* Fix regression on export of stock for life_date
-
 **Build**
 
 **Documentation**
+
+
+10.29.9 (2018-12-05)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-1725: Fix 'Via Pharmacy' in Magento in product export (ESB)
+* ALCYN-1735: Zetes Assignement - return only open pickings
+* Fix regression on export of stock for life_date
 
 
 10.29.8 (2018-12-04)
