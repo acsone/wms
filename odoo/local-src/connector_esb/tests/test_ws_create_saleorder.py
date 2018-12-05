@@ -287,6 +287,41 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                 self.assertEqual(order[k], v)
         self.assertEqual(len(order.order_line), 1)
 
+    def test_create_saleorder_with_human_drug(self):
+        """Check salesmanager won't receive a "Assigned to you" notification
+        on create of sale order from WS
+
+        """
+        human_categ = self.env.ref('specific_data.product_categ_humain')
+        data = deepcopy(self.order_data)
+        self.p1.categ_id = human_categ
+        self.p1.list_price = 0.0
+
+        # set all lines as free
+        # line 1 not invoiced drug to take
+        data['lines'][0]['free'] = True
+        # line 2 additional product to ignore
+        data['lines'][1]['free'] = True
+        order = self.env['sale.order']._ws_create_new(data)
+        expected = {
+            'esb_ref': 'INC-ID',
+            'client_order_ref': 'refClt',
+            'partner_id': self.partner,
+            'partner_invoice_id': self.partner,
+            'partner_shipping_id': self.partner_shipping,
+            'amount_total': 0.0,
+            'amount_tax': 0.0,
+            'supplier_promotion_allowed': True,
+            'payment_term_id': self.payment_30_net,
+        }
+        for k, v in expected.iteritems():
+            if isinstance(v, float):
+                self.assertAlmostEqual(order[k], v)
+            else:
+                self.assertEqual(order[k], v)
+        # free line: to be skipped but drug is there
+        self.assertEqual(len(order.order_line), 1)
+
     def test_create_saleorder_no_notify(self):
         """Check salesmanager won't receive a "Assigned to you" notification
         on create of sale order from WS
