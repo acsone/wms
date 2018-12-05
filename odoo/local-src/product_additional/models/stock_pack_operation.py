@@ -30,5 +30,6 @@ class StockPackOperation(models.Model):
                           additional_moves.ids)
             additional_moves.with_context(
                 no_recompute_pack=True).action_cancel()
-            additional_moves.unlink()
+            # An standard picker cannot delete a stock.move
+            additional_moves.sudo().unlink()
         return res

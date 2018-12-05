@@ -267,7 +267,7 @@ class Itempick(DomainInterface):
             })
 
             if is_print_price:
-                line_values.Usf07 = line.product_id.list_price
+                line_values.Usf07 = line.product_id.indicated_price
 
             if product.tracking == 'lot':
                 line_values.lotTrackingFlag = 1
