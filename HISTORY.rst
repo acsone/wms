@@ -9,12 +9,14 @@ Unreleased
 **Features and Improvements**
 
 * Add some logistics onchange tracking
+* Add some track changes in logistics
 
 **Bugfixes**
 
 * ALCYN-1723: Fix delivery note csv (last column, tax and file encoding)
 * Improve the wizard to validate a picking and add the possibility to view all datas about a picking
 * Use sudo to remove stock.move when we need to delete an additional pack op
+* Product Additional: Fix additional move unlink on main unreserve/transfer'
 
 **Build**
 

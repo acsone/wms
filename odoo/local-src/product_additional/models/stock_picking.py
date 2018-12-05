@@ -50,6 +50,8 @@ class StockPicking(models.Model):
         additional_moves = self.env['stock.move']
 
         # Compute move to create
+        # TODO: we should check if the move does not exist yet (as we must keep
+        # it in some case where the main pack op is unlinked)
         for (picking_id, product_id), packops in packop_by_product.iteritems():
             product = product_obj.browse(product_id)
             if not product.additional_product_id:
@@ -83,7 +85,9 @@ class StockPicking(models.Model):
                 'location_id': picking.location_id.id,
                 'location_dest_id': picking.location_dest_id.id,
                 'picking_id': picking.id,
+                'picking_type_id': picking.picking_type_id.id,
                 'origin': picking.name,
+                'group_id': picking.group_id.id,
             }
             move_add = self.env['stock.move'].create(move_vals)
             _logger.debug(
