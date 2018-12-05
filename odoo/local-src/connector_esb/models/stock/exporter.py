@@ -58,17 +58,21 @@ class StockUpdateMapper(Component):
         # we need to filter it
         # thus we search for next one if qty is equal to zero,
         # product_qty is not stored
-        while not lot:
+        while True:
             domain = base_domain[:]
             if zero_lots:
                 domain += [('id', 'not in', zero_lots.ids)]
             lot = self.env['stock.production.lot'].search(
                 domain, order='life_date', limit=1)
+            # exit on exhausting all possibilities
+            if not lot:
+                # return the empty record_set
+                return lot
 
             if lot.product_qty <= 0:
                 zero_lots |= lot
-                lot = None
             else:
+                # exit if found a match
                 return lot
 
     @mapping
