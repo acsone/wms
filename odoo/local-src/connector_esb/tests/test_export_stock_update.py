@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import mock
-from mock import patch, PropertyMock
 import os
 import requests
 
