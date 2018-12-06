@@ -23,6 +23,7 @@
         'queue_job',
         'account_invoice_sent',
         'external_fax',
+        'stock_delivery_note',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

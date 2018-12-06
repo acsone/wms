@@ -21,6 +21,7 @@ Unreleased
 * ALCYN-1704: fix crash when printing a supplier fax content document on sales
   orders without associated pharmacist
 * Product Additional: Fix additional move unlink on main unreserve/transfer (traceback singleton error)
+* ALCYN-1723: Fix delivery note, add one line for each quant to not have multiple lot on a line
 
 **Build**
 
