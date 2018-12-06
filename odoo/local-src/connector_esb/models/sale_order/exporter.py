@@ -122,6 +122,8 @@ class SaleWebServiceExporter(Component):
         # not accepted by the ESB anyway
         if not self.record.order_line:
             return True
+        if not self.record.partner_id.email:
+            return True
         return False
 
     def _get_external_id(self):
