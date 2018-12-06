@@ -151,6 +151,13 @@ class StockPicking(models.Model):
                 sale_order.suite_name or '0000',
             ])
 
+        def format_use_date(use_date):
+            """Get the use dates in format dd-mm-yyyy"""
+            if not use_date:
+                return ''
+            use_date = use_date[:10]
+            return use_date[-2:] + use_date[4:8] + use_date[:4]
+
         self.ensure_one()
         lines = []
         partner = self.partner_id
@@ -171,32 +178,30 @@ class StockPicking(models.Model):
 
         vat_group = self.env.ref('stock_delivery_note.vat_tax_group')
         # The product lines
-        for move in self.move_lines:
-            product = move.product_id
-            sol = move.procurement_id.sale_line_id
-            quants = move.quant_ids | move.reserved_quant_ids
-            # Get the use dates in format dd-mm-yyyy
-            use_date = [ld[:10] for ld in quants.mapped('life_date') if ld]
-            use_date = [ld[-2:] + ld[4:8] + ld[:4] for ld in use_date]
-            use_date = '/'.join(use_date)
-            vat = sol.tax_id.filtered(lambda r: r.tax_group_id == vat_group)
-            lines.append([
-                product.default_code or '',
-                product.name,
-                # Quantity computed from the quants
-                format_number(sum(quants.mapped('qty')), 3),
-                #  Net HTVA price
-                format_number(sol.price_reduce, 2),
-                #  Brut HTVA price
-                format_number(sol.price_unit, 2),
-                #  VAT rate, yes only the first one if present
-                # format_number(sol.tax_id[0].amount if sol.tax_id else 0, 1),
-                format_number(sol.tax_id[0].amount if vat else 0, 1),
-                # Lots name
-                '/'.join(quants.mapped('lot_id.name')),
-                use_date,
-                get_last_column(sol.order_id, self.date_done),
-                ''
-                ]
-            )
+        grouped_lines = self.get_moves_by_order()
+        for group in grouped_lines:
+            for move_line in group[1][0]: #self.move_lines:
+                product = move_line.product_id
+                sol = move_line.order_line_id
+                quants = move_line.get_lots()
+                vat = sol.tax_id.filtered(lambda r: r.tax_group_id == vat_group)
+                for quant in quants:
+                    lines.append([
+                        product.default_code or '',
+                        product.name,
+                        # Quantity computed from the quants
+                        format_number(quant[1], 3),
+                        #  Net HTVA price
+                        format_number(sol.price_reduce, 2),
+                        #  Brut HTVA price
+                        format_number(sol.price_unit, 2),
+                        #  VAT rate, yes only the first one if present
+                        format_number(vat[0].amount if vat else 0, 1),
+                        # Lots name
+                        quant[0] or '',
+                        format_use_date(quant[2] or ''),
+                        get_last_column(sol.order_id, self.date_done),
+                        ''
+                        ]
+                    )
         return lines
