@@ -2,6 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from datetime import datetime
 import unicodecsv as csv
 
 from io import BytesIO
@@ -21,12 +22,15 @@ class StockPicking(models.Model):
         for r in self:
             if r.picking_type_id == picking_type_out:
                 r._save_delivery_note()
+                r._send_delivery_note()
         return result
 
     @api.multi
     def _get_delivery_note_filename(self):
         """Return the delivery note filename."""
         self.ensure_one()
+        if not self.date_done:
+            return
         return '_'.join([
             'NE',
             self.partner_id.ref or '',
@@ -35,16 +39,19 @@ class StockPicking(models.Model):
             ''.join(self.date_done[-8:].split(':')),
             ]) + '.csv'
 
+    @api.multi
     def _save_delivery_note(self):
         """Save the delivery note in csv format in ir.attachment"""
         self.ensure_one()
+        filename = self._get_delivery_note_filename()
+        if not filename:
+            # Stock picking probably not done
+            return
         file_data = BytesIO()
-        w = csv.writer(file_data, delimiter=';', encoding='utf-8')
+        w = csv.writer(file_data, delimiter=';', encoding='iso-8859-1')
         for line in self._generate_delivery_note():
             w.writerow(line)
         data = file_data.getvalue()
-
-        filename = self._get_delivery_note_filename()
         existing = self.env['ir.attachment'].search([('name', '=', filename)])
         if len(existing):
             existing[0].datas = data.encode('base_64')
@@ -59,8 +66,15 @@ class StockPicking(models.Model):
                 'datas': data.encode('base_64')
             })
 
-        # send by email
+    @api.multi
+    def _send_delivery_note(self):
+        """Send the delivery note by email to the customer."""
+        self.ensure_one()
         if config['test_enable']:
+            return
+        filename = self._get_delivery_note_filename()
+        existing = self.env['ir.attachment'].search([('name', '=', filename)])
+        if not len(existing):
             return
         template = self.env.ref('stock_delivery_note.delivery_note_csv')
         values = template.generate_email(self.id)
@@ -71,6 +85,12 @@ class StockPicking(models.Model):
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
         mail = self.env['mail.mail'].create(values)
         mail.send(raise_exception=True)
+
+    @api.multi
+    def create_delivery_note(self):
+        """Used for the action menu."""
+        for picking in self:
+            picking._save_delivery_note()
 
     @api.multi
     def _generate_delivery_note(self):
@@ -111,6 +131,27 @@ class StockPicking(models.Model):
             s = formater.format(number)
             return ','.join(s.split('.'))
 
+        def get_last_column(sale_order, delivery_date):
+            """ Compute last column of the delivery note.
+
+            Don't know what it is called but it is also found on the
+            deliverslip report.
+            """
+            customer = sale_order.partner_id
+            depot_number = (
+                customer.vet_depot_number or
+                customer.parent_id.vet_depot_number
+            )
+            if not depot_number:
+                return sale_order.client_order_ref or ''
+            return '/'.join([
+                datetime.strptime(
+                    delivery_date,
+                    '%Y-%m-%d %H:%M:%S').strftime('%y'),
+                depot_number,
+                sale_order.suite_name or '0000',
+            ])
+
         self.ensure_one()
         lines = []
         partner = self.partner_id
@@ -128,6 +169,8 @@ class StockPicking(models.Model):
             partner.country_id.name or '',
             ''
             ])
+
+        vat_group = self.env.ref('stock_delivery_note.vat_tax_group')
         # The product lines
         for move in self.move_lines:
             product = move.product_id
@@ -137,6 +180,7 @@ class StockPicking(models.Model):
             use_date = [ld[:10] for ld in quants.mapped('life_date') if ld]
             use_date = [ld[-2:] + ld[4:8] + ld[:4] for ld in use_date]
             use_date = '/'.join(use_date)
+            vat = sol.tax_id.filtered(lambda r: r.tax_group_id == vat_group)
             lines.append([
                 product.default_code or '',
                 product.name,
@@ -147,11 +191,12 @@ class StockPicking(models.Model):
                 #  Brut HTVA price
                 format_number(sol.price_unit, 2),
                 #  VAT rate, yes only the first one if present
-                format_number(sol.tax_id[0].amount if sol.tax_id else 0, 1),
+                # format_number(sol.tax_id[0].amount if sol.tax_id else 0, 1),
+                format_number(sol.tax_id[0].amount if vat else 0, 1),
                 # Lots name
                 '/'.join(quants.mapped('lot_id.name')),
                 use_date,
-                sol.order_id.suite_name or '',
+                get_last_column(sol.order_id, self.date_done),
                 ''
                 ]
             )

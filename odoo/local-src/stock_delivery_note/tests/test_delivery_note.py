@@ -2,6 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+from datetime import datetime
 from odoo.tests.common import SavepointCase
 
 
@@ -11,9 +12,11 @@ class TestStockDeliveryNote(SavepointCase):
     def setUpClass(cls):
         super(TestStockDeliveryNote, cls).setUpClass()
 
+        cls.smallyear = str(datetime.now().year)[2:]
         # Create a sale tax
         cls.tax = cls.env['account.tax'].create({
-            'tax_group_id': cls.env.ref('account.tax_group_taxes').id,
+            'tax_group_id': cls.env.ref(
+                'stock_delivery_note.vat_tax_group').id,
             'amount': 6,
             'name': 'test_tax',
         })
@@ -76,6 +79,7 @@ class TestStockDeliveryNote(SavepointCase):
         cls.so = cls.env['sale.order'].create({
             'partner_id': cls.partner.id,
             'suite_name': '123454321',
+            'client_order_ref': 'customer.ref.123',
             'order_line': [
                 (0, 0, {
                     'name': cls.p1.name,
@@ -126,15 +130,53 @@ class TestStockDeliveryNote(SavepointCase):
             ('res_id', '=', self.picking.id)])
         self.assertEqual(len(attachments), 1)
 
-    def test_delivery_note(self):
-        """Check the format of the csv document"""
+    def test_delivery_note_for_vet_with_depo(self):
+        """Check the format of the csv with a vet customer."""
+        self.partner.vet_depot_number = '778899'
         tax_amount = ','.join(str(self.tax.amount).split('.'))
         expected = [
             [self.picking.id, 'tester@pytest.com', ''],
             [u'Prof. HOENS OLIVIER', 'Rue Polisart 2 A',
-             '5300 ANDENNE', self.env.ref('base.be').name, ''],
+             '5300 ANDENNE', self.env.ref('base.be').name, ''
+             ],
             ['5173360', self.p1.name, '10,000', '50,00', '50,00',
-             tax_amount, '20170102', '31-01-2017', '123454321', ''],
+             tax_amount, '20170102', '31-01-2017',
+             '/'.join([
+                 self.smallyear,
+                 self.partner.vet_depot_number,
+                 self.so.suite_name
+                 ]), ''
+             ],
+        ]
+        lines = self.picking._generate_delivery_note()
+        self.assertEqual(lines, expected)
+
+    def test_delivery_note_line_for_other_customer(self):
+        """Check the format of the csv document for a normal customer."""
+        tax_amount = ','.join(str(self.tax.amount).split('.'))
+        expected = [
+            [self.picking.id, 'tester@pytest.com', ''],
+            [u'Prof. HOENS OLIVIER', 'Rue Polisart 2 A',
+             '5300 ANDENNE', self.env.ref('base.be').name, ''
+             ],
+            ['5173360', self.p1.name, '10,000', '50,00', '50,00',
+             tax_amount, '20170102', '31-01-2017', 'customer.ref.123', ''
+             ],
+        ]
+        lines = self.picking._generate_delivery_note()
+        self.assertEqual(lines, expected)
+
+    def test_delivery_note_line_without_vat_tax(self):
+        """Check with no vat so vat amount is zero"""
+        self.tax.tax_group_id = self.env.ref('account.tax_group_taxes').id
+        expected = [
+            [self.picking.id, 'tester@pytest.com', ''],
+            [u'Prof. HOENS OLIVIER', 'Rue Polisart 2 A',
+             '5300 ANDENNE', self.env.ref('base.be').name, ''
+             ],
+            ['5173360', self.p1.name, '10,000', '50,00', '50,00',
+             '0,0', '20170102', '31-01-2017', 'customer.ref.123', ''
+             ],
         ]
         lines = self.picking._generate_delivery_note()
         self.assertEqual(lines, expected)

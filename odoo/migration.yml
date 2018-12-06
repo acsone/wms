@@ -707,7 +707,11 @@ migration:
           # oca/server-tools
           - server_environment_ir_config_parameter
     - version: 10.29.10
+      operations:
+        pre:
+          - anthem songs.upgrade.10_29_10_update::create_vat_tax_group
       addons:
         upgrade:
           ### local
           - specific_zetes
+          - stock_delivery_note

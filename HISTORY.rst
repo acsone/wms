@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1723: Fix delivery note csv (last column, tax and file encoding)
+
 **Build**
 
 **Documentation**
