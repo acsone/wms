@@ -34,7 +34,7 @@ class StockPackOperationLot(models.Model):
     def _calc_lotname_from_lifedate(self, life_date):
         date = fields.Datetime.from_string(life_date)
         date_with_timezone = fields.Datetime.context_timestamp(self, date)
-        return date_with_timezone.strftime('%Y%m%d')
+        return date_with_timezone.strftime('%d%m%y')
 
     @api.onchange('life_date')
     def _onchange_life_date(self):
