@@ -118,3 +118,34 @@ Odoo is accessible through https://temp-pp-erp.alcyonbelux.be .
 This server is where we load full data from scratch and shouldn't be used.
 It is a separated server as the load of data takes few days and we can't let the users
 use it during that time.
+
+
+# How to deploy
+
+On lnx004.abl.grp :
+
+- stop Odoo stack:
+
+```
+docker stack rm odoo
+```
+
+- Edit file /srv/ABL-odoo-production/docker-compose.yml and adapt with image.
+
+On lnx005.abl.grp :
+
+- do a database backup:
+
+```
+pg_dump -h lnx005.abl.grp --username=odoo-prod --password -d odoo-prod --no-owner> /mnt/linuxbackup/odoo/odoo-prod-2018-12-04-14-37.sql
+```
+ 
+On lnx004.abl.grp :
+
+- Once the backup is done, we restart the odoo stack:
+
+```
+docker stack deploy --with-registry-auth -c /srv/ABL-odoo-production/docker-compose.yml odoo
+```
+
+Note: make sure you have access to dockerhub, you might need to do a `docker login`
