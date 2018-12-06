@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.10 (2018-12-06)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * Add some logistics onchange tracking
 * Add some track changes in logistics
 * Group by partner: Prevent to create a backorder and use existing picking if possible (like move assignment created from procurement)
@@ -22,8 +34,6 @@ Unreleased
 **Build**
 
 * Disable tests of DB2 import tool to speed CI testing
-
-**Documentation**
 
 
 10.29.9 (2018-12-05)
