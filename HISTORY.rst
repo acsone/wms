@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1717: Do not export to ESB sale order whose customer does not have an email as it will not be accepted by the ESB
+
 **Bugfixes**
 
 **Build**
