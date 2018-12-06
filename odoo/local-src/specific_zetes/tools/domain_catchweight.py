@@ -162,7 +162,7 @@ class Catchweight(DomainInterface):
             # check if the available quantity (in Odoo) is the same than
             # the real quantity (say by the picker).
             actual_stock = params.Usf03
-            if actual_stock.isdigit():
+            if actual_stock and actual_stock.isdigit():
                 actual_stock = int(actual_stock)
                 self.check_actual_stock(params, pack_op, actual_stock, lot_id)
                 return
