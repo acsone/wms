@@ -20,6 +20,7 @@ Unreleased
 * ALCYN-1744: Disable sending New Pharma sale order to the ESB.
 * ALCYN-1704: fix crash when printing a supplier fax content document on sales
   orders without associated pharmacist
+* Product Additional: Fix additional move unlink on main unreserve/transfer (traceback singleton error)
 
 **Build**
 
