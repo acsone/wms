@@ -716,3 +716,7 @@ migration:
           - specific_zetes
           - stock_delivery_note
     - version: 10.29.11
+      addons:
+        upgrade:
+          ### local
+          - specific_report
