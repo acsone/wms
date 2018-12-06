@@ -84,7 +84,6 @@ class StockPicking(models.Model):
             values.pop('email_from')
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
         mail = self.env['mail.mail'].create(values)
-        mail.send(raise_exception=True)
 
     @api.multi
     def create_delivery_note(self):
