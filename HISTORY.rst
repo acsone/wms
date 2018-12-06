@@ -11,6 +11,7 @@ Unreleased
 * Reception: Allow to mark a stock location as acceptable destination for a reception
 
 * ALCYN-1717: Do not export to ESB sale order whose customer does not have an email as it will not be accepted by the ESB
+* Add constraints in logistics to ensure data integrity
 
 **Bugfixes**
 
