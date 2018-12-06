@@ -49,6 +49,11 @@ class StockInventory(models.Model):
 
     @api.multi
     def prepare_inventory(self):
+        return super(StockInventory, self).prepare_inventory()
+
+        # FIXME: To restrictive:
+        # Depends on location.
+        # Need to pay attention to move state
         result = super(StockInventory, self).prepare_inventory()
 
         check_query = """
