@@ -119,7 +119,13 @@ class Catchweight(DomainInterface):
         if isinstance(line_id, int):
             line_id = str(line_id)
 
-        pack_operation_id = int(line_id.split('_')[0])
+        line_id_list = line_id.split('_')
+        if len(line_id_list) == 2:
+            pack_operation_id = int(line_id_list[0])
+            lot_id = int(line_id_list[1])
+        else:
+            pack_operation_id = int(line_id)
+            lot_id = None
 
         pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
             .browse(pack_operation_id)
@@ -133,8 +139,7 @@ class Catchweight(DomainInterface):
             # and the lot number
             lot_number = params.Usf01
 
-            lot_id = None
-            if lot_number:
+            if not lot_id and lot_number:
                 lots = pack_op.pack_lot_ids.filtered(
                     lambda rec: rec.qty < rec.qty_todo
                 ).mapped('lot_id')
@@ -157,7 +162,8 @@ class Catchweight(DomainInterface):
             # check if the available quantity (in Odoo) is the same than
             # the real quantity (say by the picker).
             actual_stock = params.Usf03
-            if actual_stock or actual_stock == 0:
+            if actual_stock.isdigit():
+                actual_stock = int(actual_stock)
                 self.check_actual_stock(params, pack_op, actual_stock, lot_id)
                 return
 
