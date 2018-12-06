@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Product Additional: Fix additional move unlink on main unreserve/transfer (traceback singleton error)
+
 **Build**
 
 **Documentation**
