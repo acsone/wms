@@ -12,12 +12,6 @@ from odoo import models, fields, api
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    order_line_id = fields.Many2one('sale.order.line',
-                                    string='Order line',
-                                    related='procurement_id.sale_line_id',
-                                    store=True)
-    order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
-
     # This field is only used for information
     serial_number = fields.Char(
         'Serial number', readonly=True,
