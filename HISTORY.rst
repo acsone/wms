@@ -16,6 +16,8 @@ Unreleased
   sending emails more than once when there is an error during the validation of
   a picking. Warning: the "Email Queue Manager" cron must be active.
 * ALCYN-1744: Disable sending New Pharma sale order to the ESB.
+* ALCYN-1704: fix crash when printing a supplier fax content document on sales
+  orders without associated pharmacist
 
 **Build**
 

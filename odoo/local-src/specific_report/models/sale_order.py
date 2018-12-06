@@ -102,24 +102,20 @@ class SaleOrder(models.Model):
             )
 
     @api.multi
-    def _get_pharmacist(self):
-        """Get the phacist to which we will send emails
-        The pharmacist supplier must be configured in System parameter
-        'pharmacist.supplier.id' and an email must be set on the partner.
-        """
+    def _get_pharmacist(self, raise_errors=True):
+        """Get the pharmacist to which we will send emails"""
         pharmacist = self.partner_id.pharmacist_id
-        if not pharmacist:
-            raise UserError(_(
-                'Cannot send pharmacist email\n'
-                'Pharmacist partner must be configured to send email'
-                ' please set System Parameter `pharmacist.supplier.id`.\n'
-                'This parameter must be a partner ID.'
-                ))
-        if not pharmacist.email:
-            raise UserError(_(
-                'Cannot send pharmacist email\n'
-                '%s partner must have an email address.'
-                ) % pharmacist.name)
+        if raise_errors:
+            if not pharmacist:
+                raise UserError(_(
+                    'Cannot send pharmacist email\n'
+                    'No pharmacist affiliated to the client.'
+                    ))
+            if not pharmacist.email:
+                raise UserError(_(
+                    'Cannot send pharmacist email\n'
+                    '%s partner must have an email address.'
+                    ) % pharmacist.name)
         return pharmacist
 
     @api.multi
