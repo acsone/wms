@@ -54,7 +54,7 @@
                         <h2>
                             <field name="location_op_dest_id"/>
                             <field name="location_dest_id"
-                                domain="['|', ('scrap_location', '=', True), '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id)]"
+                                domain="['|', '|', ('is_reception_wizard', '=', True), ('scrap_location', '=', True), '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id)]"
                                 required="1" options="{'no_create':1}"/>
                         </h2>
                     </group>

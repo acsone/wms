@@ -720,3 +720,4 @@ migration:
         upgrade:
           ### local
           - specific_report
+          - stock_receive_lot

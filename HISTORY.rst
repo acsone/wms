@@ -7,6 +7,8 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
+* Reception: Change lot default name to dmy instead of Ymd
+* Reception: Allow to mark a stock location as acceptable destination for a reception
 
 * ALCYN-1717: Do not export to ESB sale order whose customer does not have an email as it will not be accepted by the ESB
 

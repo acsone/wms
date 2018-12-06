@@ -16,6 +16,7 @@
         'web_widget_inputmask',
     ],
     'data': [
+        'views/stock_location.xml',
         'views/stock_pack_operation.xml',
         'wizards/stock.xml',
     ],
