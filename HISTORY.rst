@@ -20,6 +20,8 @@ Unreleased
 
 **Build**
 
+* Disable tests of DB2 import tool to speed CI testing
+
 **Documentation**
 
 
