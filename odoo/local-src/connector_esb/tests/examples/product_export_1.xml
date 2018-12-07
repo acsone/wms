@@ -25,7 +25,7 @@
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
+      <!-- active and web published -->
       <Cplz19>1</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>1</Gescde>
@@ -111,8 +111,8 @@
       <Cp2z02>4</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
-      <Cplz19>1</Cplz19>
+      <!-- active but not web_published -->
+      <Cplz19>0</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>0</Gescde>
       <!-- weight -->
@@ -197,7 +197,7 @@
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
+      <!-- unactive and web published  -->
       <Cplz19>0</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>1</Gescde>

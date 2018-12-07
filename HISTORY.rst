@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+ALCYN-1746: Change cplz19 on export product with web_published filed (ESB)
+
 **Build**
 
 **Documentation**

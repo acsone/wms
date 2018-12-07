@@ -73,6 +73,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'name': 'Export me pls',
+            'web_published': True,
             'categ_id': self.p_cat.id,
             'default_code': 'exportable001',
             'type': 'product',
@@ -99,6 +100,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
+            'web_published': False,
             'categ_id': self.p_cat_all.id,
             'default_code': 'exportable002',
             'type': 'product',
@@ -126,6 +128,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 3',
+            'web_published': True,
             'default_code': 'exportable003',
             'type': 'consu',
             'barcode': 'XXX0003',

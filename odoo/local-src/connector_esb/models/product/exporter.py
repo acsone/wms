@@ -21,7 +21,6 @@ class ProductExportMapper(Component):
         (falsy2emptystring('default_code'), 'Gesart'),
         (falsy2emptystring('barcode'), 'Cplz05'),
         (three_digits_fractional('weight'), 'Gespnt'),
-        (bool2int('active'), 'Cplz19'),
         (dt2esbdate('create_date'), 'Gescrt'),
         (falsy2emptystring('cnk_code'), 'Cplz03'),
         (two_digits_fractional('depth'), 'Cp2z01'),
@@ -41,6 +40,14 @@ class ProductExportMapper(Component):
     @classmethod
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == 'product')
+
+    @mapping
+    def pusblished_on_internet(self, record):
+        """Mapping for Cplz19
+
+        This defines if the product will apear on Magento
+        """
+        return {'Cplz19': 1 if record.active and record.web_published else 0}
 
     @mapping
     def volume(self, record):
