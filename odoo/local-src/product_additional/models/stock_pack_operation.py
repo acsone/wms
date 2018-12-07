@@ -24,16 +24,18 @@ class StockPackOperation(models.Model):
         if self.env.context.get('skip_additional'):
             return super(StockPackOperation, self).unlink()
 
-        moves_to_cancel = self.env['stock.move'].browse()
-        for additional_move in self.mapped('additional_move_id'):
+        moves_to_cancel = self.mapped('additional_move_id')
+        for additional_move in moves_to_cancel:
             ops = additional_move.mapped(
                 'linked_move_operation_ids.operation_id')
             ops_done = ops.filtered('qty_done')
             # If a quantity has been already set on the pack op. Keep it.
             # Another one will come back if the main move is reassigned
             # but we don't want to loose what was done.
-            if not ops_done:
-                moves_to_cancel |= additional_move
+            if ops_done:
+                moves_to_cancel -= additional_move
+            else:
+                # Just in case move is not in same picking
                 ops_to_delete = ops - self
                 if ops_to_delete:
                     super(StockPackOperation, ops_to_delete).unlink()
@@ -44,9 +46,7 @@ class StockPackOperation(models.Model):
             moves_to_cancel.with_context(
                 no_recompute_pack=True, force_cancel=True).action_cancel()
             # A standard picker cannot delete a stock.move
-            #moves_to_cancel.sudo().with_context(
-            #    recompute=False,
-            #        ).unlink()
+            moves_to_cancel.sudo().unlink()
 
         super(StockPackOperation, self).with_context(
             skip_additional=True).unlink()
