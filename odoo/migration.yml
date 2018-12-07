@@ -724,3 +724,4 @@ migration:
           - stock_delivery_note
           - stock_receive_lot
           - stock_constraint
+    - version: 10.29.12

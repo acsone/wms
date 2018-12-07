@@ -10,12 +10,18 @@ Unreleased
 
 **Bugfixes**
 
-* Fix Delivery Round delivery ongoing error message
-* Fix missing record in cache
-
 **Build**
 
 **Documentation**
+
+
+10.29.12 (2018-12-07)
++++++++++++++++++++++
+
+**Bugfixes**
+
+* Fix Delivery Round delivery ongoing error message
+* Fix missing record in cache
 
 
 10.29.11 (2018-12-07)
