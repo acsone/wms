@@ -7,28 +7,36 @@ Unreleased
 ++++++++++
 
 **Features and Improvements**
-* Reception: Change lot default name to dmy instead of Ymd
-* Reception: Allow to mark a stock location as acceptable destination for a reception
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.11 (2018-12-07)
++++++++++++++++++++++
+
+**Features and Improvements**
 
 * ALCYN-1717: Do not export to ESB sale order whose customer does not have an email as it will not be accepted by the ESB
+* Reception: Change lot default name to dmy instead of Ymd
+* Reception: Allow to mark a stock location as acceptable destination for a reception
 * Add constraints in logistics to ensure data integrity
 * Inventory: Disable restriction as it is to restrictive
 * Picking: allow to dis/enable passport per picking type
 
 **Bugfixes**
 
+* ALCYN-1744: Disable sending New Pharma sale order to the ESB.
+* ALCYN-1704: fix crash when printing a supplier fax content document on sales
+* ALCYN-1723: Fix delivery note, add one line for each quant to not have multiple lot on a line
 * Send Delivery Note emails using the mail queue, not as direct. Prevent
   sending emails more than once when there is an error during the validation of
   a picking. Warning: the "Email Queue Manager" cron must be active.
-* ALCYN-1744: Disable sending New Pharma sale order to the ESB.
-* ALCYN-1704: fix crash when printing a supplier fax content document on sales
   orders without associated pharmacist
 * Product Additional: Fix additional move unlink on main unreserve/transfer (traceback singleton error)
-* ALCYN-1723: Fix delivery note, add one line for each quant to not have multiple lot on a line
-
-**Build**
-
-**Documentation**
 
 
 10.29.10 (2018-12-06)
