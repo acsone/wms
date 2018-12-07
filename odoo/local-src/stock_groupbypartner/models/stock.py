@@ -161,10 +161,6 @@ class StockMove(models.Model):
         operations """
         _logger.debug("Canceling moves %s", self.ids)
         res = super(StockMove, self).action_cancel()
-        if (self.filtered("picking_id.printed") and
-                not self.env.context.get('force_cancel')):
-            raise UserError(_(
-                "You cannot cancel a move that is part of a started picking"))
         if not self.env.context.get('no_recompute_pack'):
             pickings = self.mapped('picking_id').filtered(
                 lambda picking: picking.state != 'cancel')
