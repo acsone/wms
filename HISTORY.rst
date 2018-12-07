@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-1717: Do not export to ESB sale order whose customer does not have an email as it will not be accepted by the ESB
 * Add constraints in logistics to ensure data integrity
 * Inventory: Disable restriction as it is to restrictive
+* Picking: allow to dis/enable passport per picking type
 
 **Bugfixes**
 

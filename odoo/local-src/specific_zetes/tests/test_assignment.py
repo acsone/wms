@@ -21,6 +21,7 @@ class TestAssignemnt(ZetesTest):
         self.partner.write({
             'is_passport_required': True,
         })
+        self.picking.picking_type_id.passport = True
 
         self.assertEqual(self.picking.picking_type_id.zetes_picking_type,
                          constants.PICKING_ASSIGNMENT)

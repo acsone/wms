@@ -120,8 +120,11 @@ class Assignment(DomainInterface):
             'Usf09': picking.nbr_actions,  # Nbr of operation
         })
 
-        if partner.is_passport_required:
+        is_passport_required = (picking.picking_type_id.passport and
+                                partner.is_passport_required)
+        if is_passport_required:
             result.Usf06 = 'C'  # This partner request a double control
+            picking.assign_picking_checksum()
         else:
             result.Usf06 = 'E'  # Simple packaging
 
@@ -168,7 +171,7 @@ class Assignment(DomainInterface):
             if params.assignmentStatus in [constants.AS_DONE,
                                            constants.AS_FINISHED]:
 
-                if not picking.partner_id.is_passport_required:
+                if not picking.checksum:
                     picking.validate_picking()
 
             elif params.assignmentStatus == constants.AS_CANCELED:

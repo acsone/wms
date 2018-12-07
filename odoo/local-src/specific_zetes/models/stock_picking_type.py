@@ -16,3 +16,9 @@ class StockPickingType(models.Model):
         (constants.REASSORT_ASSIGNMENT, 'Reassort')],
         string="Picking type"
     )
+
+    passport = fields.Boolean('Enable passports')
+
+    def toggle_passport(self):
+        for rec in self:
+            rec.passport = not rec.passport

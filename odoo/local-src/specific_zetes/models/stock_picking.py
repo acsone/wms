@@ -84,7 +84,9 @@ class StockPicking(models.Model):
 
     @api.multi
     def interrupt_picking(self):
-        self.assign_picking_checksum()
+        wo_checksum = self.filtered(lambda p: not p.checksum)
+        if wo_checksum:
+            wo_checksum.assign_picking_checksum()
         self.write({
             'operator_id': None,
         })

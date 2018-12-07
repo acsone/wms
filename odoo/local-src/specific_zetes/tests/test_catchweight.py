@@ -184,7 +184,7 @@ class TestCatchweight(ZetesTest):
         })
         domain.resu(request_params)
 
-        log = self.env['zetes.logger'].search([
+        self.env['zetes.logger'].search([
             ('picking_id', '=', self.picking.id),
             ('operation_id', '=', pack_op.id)])
         # TODO FIME in ALCYN-1745
