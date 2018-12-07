@@ -46,32 +46,3 @@ class StockMove(models.Model):
     def button_edit_serial_number(self):
         return self.env.ref('specific_report.action_edit_serial_number')\
             .read()[0]
-
-    @api.multi
-    def get_lots(self):
-        """
-        Return all lots for the stock move
-        :return: Return a list of tuple
-        """
-        qty_by_lot = {}
-
-        quants = filter(
-            None, self.linked_move_operation_ids.mapped('reserved_quant_id'))
-        for quant in quants:
-            if not quant.lot_id:
-                continue
-            lot = quant.lot_id
-
-            existing_qty = qty_by_lot.get(lot.name, [])
-            if existing_qty:
-                qty_by_lot[lot.name] = [existing_qty[0] +
-                                        quant.qty, existing_qty[1]]
-            else:
-                qty_by_lot[lot.name] = [quant.qty, lot.life_date or '']
-
-        result = [[key, value[0], value[1]]
-                  for key, value
-                  in qty_by_lot.iteritems()]
-
-        # Sort lot by name
-        return sorted(result, key=lambda lot: lot[0])
