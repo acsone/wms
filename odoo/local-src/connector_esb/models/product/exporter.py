@@ -5,7 +5,7 @@
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from odoo.osv.expression import OR
-from ...components.mapper import (bool2int, dt2esbdate, falsy2emptystring,
+from ...components.mapper import (dt2esbdate, falsy2emptystring,
                                   two_digits_fractional,
                                   three_digits_fractional)
 from ...components.mapper import falsy2zero
@@ -212,13 +212,14 @@ class ProductCronExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'product')
 
     def get_items_domain(self):
+        """All products are exported to the ESB.
+
+        Except the contrib antibiotic, which were used as a tax on the old
+        system (AS/400)
+        """
         domain = [
-            # GESCHR!=’L’ (non livrables)
-            # TODO: which field/attribute/condition is this???
-            # not GESTART.startwith(‘8888’) (contrib antibio)
+            # Not GESTART.startwith(‘8888’) (contrib antibio)
             ('default_code', 'not like', '8888%'),
-            # Articles créés depuis 29/7/2014
-            ('create_date', '>', '2014-7-29 00:00:00'),
         ]
         return domain
 

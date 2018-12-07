@@ -270,18 +270,20 @@ class ExportProductTestCase(ESBXMLTestCase):
         # )
 
     def test_record_cron_exporter(self):
+        """ All record are exported. Unactive ones as well."""
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
 
         items = exporter.get_items('')
-        for unwanted in self.unexportable_records:
-            self.assertNotIn(
-                unwanted, items,
-                'Found: `[{default_code}] {name}`.'.format(
-                    **unwanted.read()[0])
-            )
+        self.assertEqual(
+            len(items),
+            self.env['product.product'].with_context(
+                active_test=False).search_count([
+                    ('default_code', 'not like', '8888%'),
+                ])
+        )
 
     def test_mapper_specific_fields(self):
         """ Checking some specific parts on the mapper.

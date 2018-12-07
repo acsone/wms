@@ -12,6 +12,7 @@ Unreleased
 
 ALCYN-1746: Change cplz19 on export product with web_published field (ESB)
 ALCYN-1746: Invert Gescge mapping on export product (ESB)
+ALCYN-1746: Have all products even the unactive ones to be exported to the ESB
 
 **Build**
 
