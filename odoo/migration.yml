@@ -722,4 +722,4 @@ migration:
           - specific_report
           - stock_delivery_note
           - stock_receive_lot
-          - stock_constaint
+          - stock_constraint
