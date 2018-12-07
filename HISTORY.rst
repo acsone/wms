@@ -11,6 +11,7 @@ Unreleased
 **Bugfixes**
 
 * Fix Delivery Round delivery ongoing error message
+* Fix missing record in cache
 
 **Build**
 
