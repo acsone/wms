@@ -680,7 +680,9 @@ class RoundInstanceCustomer(models.Model):
         """ Validate all shipping orders that are available """
         pickings = self.mapped('picking_ids').filtered(
             lambda p: p.picking_type_code != 'outgoing' and
-            p.state not in ('done', 'cancel'))
+#            p.state not in ('done', 'cancel'))
+# FIXME: some done moves are send to backorder?
+             p.state in ('partially_available', 'assigned'))
         if any(op.qty_done for op in pickings.mapped('pack_operation_ids')):
             raise UserError(_(
                 "You cannot deliver when a picking is ongoing"))

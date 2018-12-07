@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix Delivery Round delivery ongoing error message
+
 **Build**
 
 **Documentation**
