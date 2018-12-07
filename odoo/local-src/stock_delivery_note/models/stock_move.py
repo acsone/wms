@@ -16,9 +16,11 @@ class StockMove(models.Model):
     order_id = fields.Many2one('sale.order', related='order_line_id.order_id')
 
     @api.multi
-    def get_lots(self):
+    def get_lots(self, only_with_lot=True):
         """
         Return all lots for the stock move
+        :param only_with_lot: filter quants without lot
+
         :return: Return a list of tuple
         """
         qty_by_lot = {}
@@ -26,7 +28,9 @@ class StockMove(models.Model):
         quants = self.linked_move_operation_ids.mapped('reserved_quant_id')
         for quant in quants:
             if not quant.lot_id:
-                continue
+                if only_with_lot:
+                    continue
+                qty_by_lot[None] = [quant.qty, '']
             lot = quant.lot_id
 
             existing_qty = qty_by_lot.get(lot.name, [])

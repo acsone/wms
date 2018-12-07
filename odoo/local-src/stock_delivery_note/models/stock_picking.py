@@ -183,7 +183,7 @@ class StockPicking(models.Model):
             for move_line in group[1][0]:  # self.move_lines:
                 product = move_line.product_id
                 sol = move_line.order_line_id
-                quants = move_line.get_lots()
+                quants = move_line.get_lots(only_with_lot=False)
                 vat = sol.tax_id.filtered(
                     lambda r: r.tax_group_id == vat_group)
                 for quant in quants:
