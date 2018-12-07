@@ -5,7 +5,6 @@
 import time
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 import logging
