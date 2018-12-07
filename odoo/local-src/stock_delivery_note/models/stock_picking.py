@@ -83,6 +83,7 @@ class StockPicking(models.Model):
         if 'email_from' in values and not values.get('email_from'):
             values.pop('email_from')
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
+        self.env['mail.mail'].create(values)
 
     @api.multi
     def create_delivery_note(self):
