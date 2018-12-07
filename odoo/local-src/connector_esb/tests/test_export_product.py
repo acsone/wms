@@ -73,6 +73,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         self.all_records = self.model.browse()
         self.all_records |= self.model.create({
             'name': 'Export me pls',
+            'web_published': True,
             'categ_id': self.p_cat.id,
             'default_code': 'exportable001',
             'type': 'product',
@@ -99,6 +100,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
+            'web_published': False,
             'categ_id': self.p_cat_all.id,
             'default_code': 'exportable002',
             'type': 'product',
@@ -126,6 +128,7 @@ class ExportProductTestCase(ESBXMLTestCase):
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 3',
+            'web_published': True,
             'default_code': 'exportable003',
             'type': 'consu',
             'barcode': 'XXX0003',
@@ -211,7 +214,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gescsa': 1,
             'Gesctv': '006',
             'Cplz03': 'CNK_001',
-            'Gescge': 1,
+            'Gescge': 0,
             'Cplz07': 'BBB',
             'Cp2z01': '7.00',
             'Cp2z03': '8.50',
@@ -267,18 +270,20 @@ class ExportProductTestCase(ESBXMLTestCase):
         # )
 
     def test_record_cron_exporter(self):
+        """ All record are exported. Unactive ones as well."""
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
                                   timestamp=self.timestamp) as work:
             exporter = work.component(usage='record.exporter.cron')
 
         items = exporter.get_items('')
-        for unwanted in self.unexportable_records:
-            self.assertNotIn(
-                unwanted, items,
-                'Found: `[{default_code}] {name}`.'.format(
-                    **unwanted.read()[0])
-            )
+        self.assertEqual(
+            len(items),
+            self.env['product.product'].with_context(
+                active_test=False).search_count([
+                    ('default_code', 'not like', '8888%'),
+                ])
+        )
 
     def test_mapper_specific_fields(self):
         """ Checking some specific parts on the mapper.

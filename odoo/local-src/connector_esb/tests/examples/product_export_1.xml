@@ -25,7 +25,7 @@
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
+      <!-- active and web published -->
       <Cplz19>1</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>1</Gescde>
@@ -52,7 +52,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_001</Cplz03>
       <!-- stockable -->
-      <Gescge>1</Gescge>
+      <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14>medicament</Cplz14>
       <!-- SKU of the tax -->
@@ -111,8 +111,8 @@
       <Cp2z02>4</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
-      <Cplz19>1</Cplz19>
+      <!-- active but not web_published -->
+      <Cplz19>0</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>0</Gescde>
       <!-- weight -->
@@ -138,7 +138,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_002</Cplz03>
       <!-- stockable -->
-      <Gescge>1</Gescge>
+      <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
       <!-- SKU of the tax -->
@@ -197,7 +197,7 @@
       <Cp2z02>0</Cp2z02>
       <!-- creation date -->
       <Gescrt>2017/07/13</Gescrt>
-      <!-- active -->
+      <!-- unactive and web published  -->
       <Cplz19>0</Cplz19>
       <!-- 1 if procurement on order -->
       <Gescde>1</Gescde>
@@ -224,7 +224,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_003</Cplz03>
       <!-- stockable -->
-      <Gescge>0</Gescge>
+      <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
       <!-- SKU of the tax -->
