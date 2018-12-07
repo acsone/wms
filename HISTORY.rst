@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix missing record in cache
+
 **Build**
 
 **Documentation**
