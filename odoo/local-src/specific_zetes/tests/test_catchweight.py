@@ -168,10 +168,11 @@ class TestCatchweight(ZetesTest):
         })
         domain.resu(request_params)
 
-        log = self.env['zetes.logger'].search([
-            ('picking_id', '=', self.picking.id),
-            ('operation_id', '=', pack_op.id)])
         # TODO FIME in ALCYN-1745
+        # log = self.env['zetes.logger'].search([
+        #     ('picking_id', '=', self.picking.id),
+        #     ('operation_id', '=', pack_op.id)])
+
         # self.assertEqual(len(log), 0)
 
         # But not 93
@@ -184,9 +185,10 @@ class TestCatchweight(ZetesTest):
         })
         domain.resu(request_params)
 
-        self.env['zetes.logger'].search([
-            ('picking_id', '=', self.picking.id),
-            ('operation_id', '=', pack_op.id)])
         # TODO FIME in ALCYN-1745
+        # log = self.env['zetes.logger'].search([
+        #     ('picking_id', '=', self.picking.id),
+        #     ('operation_id', '=', pack_op.id)])
+        #
         # self.assertEqual(len(log), 1)
         # self.assertEqual(log.error_type, 'human')
