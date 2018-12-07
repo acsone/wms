@@ -214,7 +214,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gescsa': 1,
             'Gesctv': '006',
             'Cplz03': 'CNK_001',
-            'Gescge': 1,
+            'Gescge': 0,
             'Cplz07': 'BBB',
             'Cp2z01': '7.00',
             'Cp2z03': '8.50',

@@ -167,7 +167,12 @@ class ProductExportMapper(Component):
 
     @mapping
     def stockable(self, record):
-        return {'Gescge': 1 if record.type == 'product' else 0}
+        """Code de gestion
+
+        This rule has been inverted after the go-live to fix some message
+        on Magento.
+        """
+        return {'Gescge': 0 if record.type == 'product' else 1}
 
     @mapping
     def price_categs(self, record):

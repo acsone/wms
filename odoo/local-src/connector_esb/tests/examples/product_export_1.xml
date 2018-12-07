@@ -52,7 +52,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_001</Cplz03>
       <!-- stockable -->
-      <Gescge>1</Gescge>
+      <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14>medicament</Cplz14>
       <!-- SKU of the tax -->
@@ -138,7 +138,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_002</Cplz03>
       <!-- stockable -->
-      <Gescge>1</Gescge>
+      <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
       <!-- SKU of the tax -->
@@ -224,7 +224,7 @@
       <!-- cnk_code -->
       <Cplz03>CNK_003</Cplz03>
       <!-- stockable -->
-      <Gescge>0</Gescge>
+      <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
       <Cplz14></Cplz14>
       <!-- SKU of the tax -->
