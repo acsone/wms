@@ -30,7 +30,11 @@ class StockMove(models.Model):
             if not quant.lot_id:
                 if only_with_lot:
                     continue
-                qty_by_lot[None] = [quant.qty, '']
+                qty_by_lot[None] = [
+                    qty_by_lot.get(None, [0])[0] + quant.qty,
+                    ''
+                ]
+                continue
             lot = quant.lot_id
 
             existing_qty = qty_by_lot.get(lot.name, [])
