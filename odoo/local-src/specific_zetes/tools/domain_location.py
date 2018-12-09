@@ -155,8 +155,8 @@ class Location(DomainInterface):
                         result.update({
                             'respCode': constants.RESPONSE_CODE_ERROR,
                             'respMsg': _('Lot %s has expired. '
-                                         'Please contact the manager')
-                                       % params.Cri07
+                                         'Please contact the manager'
+                                         ) % params.Cri07
                         })
                         return result.format()
                 result.Usf01 = specific_lot.voice_identifier

@@ -449,7 +449,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
         # Picking not found. Try to create a new one.
         zone_code = params.Cri01
         zone_condition = ""
-        query_values =  {}
+        query_values = {}
         if zone_code:
             zone_condition = "AND picking_zone.code = %(zone_code)s"
             query_values['zone_code'] = zone_code
