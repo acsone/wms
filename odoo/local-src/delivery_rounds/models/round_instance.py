@@ -504,12 +504,18 @@ class RoundInstance(models.Model):
 
     @api.multi
     def button_deliver(self):
+        self._deliver()
+        return True
+
+    def _deliver(self, background=True):
         """ Deliver all customers. This validates all shipping orders that are
         available.
         Mark as done and unlink other deliveries
         """
         icust = self.mapped('instance_customer_ids')
-        icust.filtered(lambda c: not c.delivered)._deliver()
+        icust.filtered(lambda c: not c.delivered)._deliver(
+            background=background
+        )
         self.state = 'delivering'
         self.env.user.notify_info(
             _('Round will be delivered in background.')
@@ -695,6 +701,8 @@ class RoundInstancePickingState(models.Model):
 
     @contextmanager
     def _new_env(self, new_cr=True):
+        if config['test_enable']:
+            new_cr = False
         with api.Environment.manage():
             registry = odoo.modules.registry.RegistryManager.get(
                 self.env.cr.dbname
