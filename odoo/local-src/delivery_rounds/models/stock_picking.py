@@ -113,7 +113,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def _do_round_picking_transfer(self):
-        if not self.state in ('assigned', 'partially_available'):
+        if self.state not in ('assigned', 'partially_available'):
             return
         for pack in self.pack_operation_ids:
             if pack.product_qty > 0:

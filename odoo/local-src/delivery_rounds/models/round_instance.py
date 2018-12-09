@@ -7,6 +7,7 @@ import math
 from contextlib import contextmanager, closing
 from datetime import datetime
 from itertools import groupby
+import psycopg2
 
 import odoo
 from odoo import api, fields, models, _
@@ -609,9 +610,9 @@ class RoundInstance(models.Model):
     def cron_recheck_delivery_state(self):
         """Cron that check if a round is fully delivered
 
-        The pickings are processed by jobs. We cannot know what will be the last
-        job and 2 jobs could be executed at the end which prevent them to transition
-        the round to done.
+        The pickings are processed by jobs. We cannot know what will be the
+        last job and 2 jobs could be executed at the end which prevent them to
+        transition the round to done.
         A solution could be to implement a chain of dependency jobs in the
         queue job but it isn't possible (yet?). A cheap solution is a cron that
         recheck the state.
@@ -702,7 +703,7 @@ class RoundInstancePickingState(models.Model):
                 with closing(registry.cursor()) as cr:
                     try:
                         yield self.env(cr=cr)
-                    except:
+                    except Exception:
                         cr.rollback()
                         raise
                     else:
@@ -770,6 +771,8 @@ class RoundInstancePickingState(models.Model):
         with self._handle_error():
             with self._new_env(new_cr=new_cr) as new_env:
                 self.picking_id.with_env(new_env)._do_round_picking_transfer()
+        self.instance_customer_id.delivery_round_id.with_delay()\
+            .recheck_delivery_state()
 
 
 class RoundInstanceCustomer(models.Model):
@@ -824,7 +827,8 @@ class RoundInstanceCustomer(models.Model):
         for icust in self:
             icust.delivered = (
                 icust.delivery_round_id.state in ('delivering', 'done')
-                and all(state.state == 'done' for state in icust.picking_state_ids)
+                and all(state.state == 'done' for state
+                        in icust.picking_state_ids)
             )
 
     def _search_delivered(self, operator, value):
@@ -837,7 +841,6 @@ class RoundInstanceCustomer(models.Model):
             'instance_customer_id'
         )
         icust_ids = [r['instance_customer_id'][0] for r in not_done_states]
-        picking_domain = ('id', 'not in', 'cust_ids')
         domain = [
             '|',
             ('delivery_round_id.state', 'not in', ('done', 'delivering')),
@@ -961,7 +964,8 @@ class RoundInstanceCustomer(models.Model):
             raise UserError(_("You cannot deliver when a picking is ongoing"))
 
         # start by removing all the states not yet done, so if a picking
-        # has been removed or canceled, we won't expect it to be delivered anymore
+        # has been removed or canceled, we won't expect it to be delivered
+        # anymore
         self.mapped('picking_state_ids').filtered(
             lambda state: state.state != 'done'
         ).unlink()
