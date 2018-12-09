@@ -730,3 +730,4 @@ migration:
         upgrade:
           ### local
           - delivery_rounds
+          - specific_zetes

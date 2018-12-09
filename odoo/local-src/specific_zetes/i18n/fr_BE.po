@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 17:58+0000\n"
-"PO-Revision-Date: 2018-12-04 17:58+0000\n"
+"POT-Creation-Date: 2018-12-09 14:10+0000\n"
+"PO-Revision-Date: 2018-12-09 14:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
+msgid "- Zone"
+msgstr "- Zone"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_action
@@ -57,7 +62,7 @@ msgid "Canceled / Full"
 msgstr "Annulé / Plein"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:102
+#: code:addons/specific_zetes/wizard/manage_uop.py:182
 #, python-format
 msgid "Cannot create the package. Please give the passport to your manager"
 msgstr "Impossible de créer le paquet. Veuillez donner le passport à votre responsable"
@@ -82,7 +87,7 @@ msgid "Cannot found a printer"
 msgstr "Aucune imprimante trouvée"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:112
+#: code:addons/specific_zetes/wizard/manage_uop.py:203
 #, python-format
 msgid "Cannot print labels. Please give the passport to your manager"
 msgstr "Impossible d'imprimer les étiques. Veuillez donner le passport à votre responsable"
@@ -94,7 +99,7 @@ msgid "Cannot reload the picking %s"
 msgstr "Impossible de recharger le picking %s"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:121
+#: code:addons/specific_zetes/wizard/manage_uop.py:191
 #, python-format
 msgid "Cannot validate the UOP. Please give the passport to your manager"
 msgstr "Impossible de valider l'UOP. Veuillez donner le passport à votre responsable"
@@ -134,6 +139,7 @@ msgstr "Commande complète"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_uid
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_uid
 msgid "Created by"
 msgstr "Créé par"
@@ -142,6 +148,7 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_date
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_date
 msgid "Created on"
 msgstr "Créé le"
@@ -172,6 +179,7 @@ msgstr "Indique si les enlèvements pour ce client doivent être vérifiés par 
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_display_name
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
@@ -186,6 +194,11 @@ msgstr "Domaine"
 #: selection:stock.picking,zetes_state:0
 msgid "Done"
 msgstr "Fait"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_passport
+msgid "Enable passports"
+msgstr "Activer les passports"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:97
@@ -223,6 +236,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
 msgstr "ID"
@@ -236,14 +250,16 @@ msgstr "Elément à enlever"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel___last_update
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_uid
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
@@ -252,12 +268,19 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_date
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_state_lastchange
+msgid "Last Zetes state change"
+msgstr "Dernier changement de Zetes"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_pack_op_id
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_pack_op_id
 msgid "Line"
 msgstr "Ligne"
 
@@ -267,20 +290,26 @@ msgid "Lines"
 msgstr "Lignes"
 
 #. module: specific_zetes
-#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
-msgid "Load UOP"
-msgstr "Charger l'UOP"
-
-#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_location_id
 #: selection:zetes.logger,domain:0
 msgid "Location"
-msgstr "Localisation"
+msgstr "Emplacement"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:104
+#: code:addons/specific_zetes/tools/domain_location.py:105
 #, python-format
 msgid "Location %s%s%s%s%s not found"
 msgstr "Emplacement %s%s%s%s%s non trouvé"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_location_checksum_left
+msgid "Location Checksum Left"
+msgstr "Checksum emplacement gauche"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_location_checksum_right
+msgid "Location Checksum Right"
+msgstr "Checksum emplacement droite"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itempick.py:288
@@ -291,10 +320,34 @@ msgstr "Localisation non trouvé pour le produit %s"
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_lot_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_lot_id
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_lot_id
 msgid "Lot"
 msgstr "Lot"
 
 #. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_location.py:157
+#, python-format
+msgid "Lot %s has expired. Please contact the manager"
+msgstr "Le lot %s a expiré. Veuille contacter votre manager"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_location.py:166
+#, python-format
+msgid "Lot %s not found. Please contact the manager"
+msgstr "Lot %s non trouvé. Veuillez contacter votre manager"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_lot_checksum
+msgid "Lot Checksum"
+msgstr "Checksum du lot"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_lot_voice_identifier
+msgid "Lot Voice Identifier"
+msgstr "Identifiant vocal du lot"
+
+#. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
 #: selection:manage.uop,state:0
 msgid "Main Menu"
 msgstr "Menu principale"
@@ -312,8 +365,8 @@ msgstr "Manquant"
 
 #. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
-msgid "Modify your UOP"
-msgstr "Modifier votre UOP"
+msgid "Modify lots"
+msgstr "Modifier les lots"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_name
@@ -336,13 +389,13 @@ msgid "Need to be check"
 msgstr "Doit être vérifié"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:186
+#: code:addons/specific_zetes/models/stock_picking.py:195
 #, python-format
 msgid "No pack operation found"
 msgstr "Aucune opération trouvée"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:191
+#: code:addons/specific_zetes/models/stock_picking.py:200
 #, python-format
 msgid "No pack operation found with ID %s"
 msgstr "Aucune opération trouvée avec l'ID %s"
@@ -350,8 +403,8 @@ msgstr "Aucune opération trouvée avec l'ID %s"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_catchweight.py:55
 #: code:addons/specific_zetes/tools/domain_itemmove.py:68
-#: code:addons/specific_zetes/tools/domain_location.py:51
-#: code:addons/specific_zetes/tools/domain_location.py:71
+#: code:addons/specific_zetes/tools/domain_location.py:52
+#: code:addons/specific_zetes/tools/domain_location.py:72
 #, python-format
 msgid "No picking found"
 msgstr "Aucun UOP trouvé"
@@ -390,8 +443,14 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_zetes
+#: selection:stock.picking,zetes_state:0
+msgid "Passport"
+msgstr "Passport"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_res_partner_is_passport_required
 #: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_passport_required
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_is_passport_required
 msgid "Passport required"
 msgstr "Passeport requis"
 
@@ -406,30 +465,60 @@ msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_line_ids
+msgid "Picking Lines"
+msgstr "Picking Lines"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_uop
+msgid "Picking UOP"
+msgstr "Picking UOP"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_zone_id
+msgid "Picking Zone"
+msgstr "Picking Zone"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_zone_code
+msgid "Picking Zone Code"
+msgstr "Picking Zone Code"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_checksum
+msgid "Picking checksum"
+msgstr "Picking checksum"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_name
+msgid "Picking name"
+msgstr "Picking name"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_type_zetes_picking_type
 msgid "Picking type"
 msgstr "Type de picking"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:41
+#: code:addons/specific_zetes/wizard/manage_uop.py:73
 #, python-format
 msgid "Please insert the UOP or the user"
 msgstr "Veuillez insérer un numéro d'UOP ou un utilisateur"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:58
+#: code:addons/specific_zetes/wizard/manage_uop.py:90
 #, python-format
 msgid "Please select an UOP"
 msgstr "Veuillez sélectionner un UOP"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:82
+#: code:addons/specific_zetes/wizard/manage_uop.py:160
 #, python-format
 msgid "Please select the printer"
 msgstr "Veuillez sélectionner l'imprimante"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:78
+#: code:addons/specific_zetes/wizard/manage_uop.py:147
 #, python-format
 msgid "Please set a lot"
 msgstr "Veuillez définir un lot"
@@ -451,13 +540,14 @@ msgid "Printer"
 msgstr "Imprimante"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:90
+#: code:addons/specific_zetes/wizard/manage_uop.py:168
 #, python-format
 msgid "Printer not found"
 msgstr "Imprimante non trouvée"
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_product_id
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_product_id
 msgid "Product"
 msgstr "Article"
 
@@ -465,6 +555,16 @@ msgstr "Article"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_qty
 msgid "Qty"
 msgstr "Qté"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_qty_done
+msgid "Qty done"
+msgstr "Qté faite"
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_qty_todo
+msgid "Qty todo"
+msgstr "Qté à faire"
 
 #. module: specific_zetes
 #: selection:stock.picking.type,zetes_picking_type:0
@@ -546,6 +646,11 @@ msgid "Start"
 msgstr "Démarré"
 
 #. module: specific_zetes
+#: selection:manage.uop,state:0
+msgid "Start Menu"
+msgstr "Start Menu"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_state
 msgid "State"
 msgstr "État"
@@ -587,13 +692,13 @@ msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:91
-#: code:addons/specific_zetes/tools/domain_itempick.py:205
+#: code:addons/specific_zetes/tools/domain_itempick.py:204
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:117
+#: code:addons/specific_zetes/tools/domain_location.py:118
 #, python-format
 msgid "This location is not a reserve"
 msgstr "This location is not a reserve"
@@ -612,14 +717,15 @@ msgstr "Transfert"
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_picking_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_uop
+#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
 msgid "UOP"
 msgstr "UOP"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:33
+#: code:addons/specific_zetes/wizard/manage_uop.py:65
 #, python-format
-msgid "UOP not found"
-msgstr "UOP non trouvé"
+msgid "UOP not found or this UOP is not open"
+msgstr "UOP non trouvé ou l'UOP n'est plus ouvert"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_assignment.py:76
@@ -661,24 +767,46 @@ msgid "Validate Picking"
 msgstr "Valider votre picking"
 
 #. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
+msgid "Validate UOP"
+msgstr "Valider l'UOP"
+
+#. module: specific_zetes
+#: selection:manage.uop,state:0
+msgid "View Picking"
+msgstr "Voir le picking"
+
+#. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
+msgid "View UOP"
+msgstr "Voir l'UOP"
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_wizard_id
+#: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_wizard_id
 msgid "Wizard"
 msgstr "Assistant"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:171
+#: code:addons/specific_zetes/wizard/manage_uop.py:151
+#, python-format
+msgid "You cannot pick more than %s unit of the product %s"
+msgstr "Vous ne pouvez pas picker plus de %s unités du produit %s"
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/models/stock_picking.py:180
 #, python-format
 msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
 msgstr "Vous ne pouvez pas diviser cette opération parce que la nouvelle quantité (%s) est supérieure à la quantité disponible (%s)"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:196
+#: code:addons/specific_zetes/models/stock_picking.py:205
 #, python-format
 msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
 msgstr "Vous ne pouvez pas diviser ce lot parce que la nouvelle quantité (%s) est supérieure à la quantité disponible (%s)"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:44
+#: code:addons/specific_zetes/wizard/manage_uop.py:76
 #, python-format
 msgid "You do not have an UOP"
 msgstr "Vous n'avez pas d'UOP"
@@ -741,6 +869,11 @@ msgstr "pack.operation.reserve.rel"
 #, python-format
 msgid "right"
 msgstr "droite"
+
+#. module: specific_zetes
+#: model:ir.model,name:specific_zetes.model_view_picking_line
+msgid "view.picking.line"
+msgstr "view.picking.line"
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_zetes_logger

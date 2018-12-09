@@ -259,9 +259,9 @@ class Itemmove(DomainInterface):
         # "MOVE_DEFAULT", "MOVE_SKIPPED" or "MOVE_FULL"
         lines = self.request.env['stock.pack.operation'].sudo(self._user) \
             .search([('picking_id', '=', picking_id),
-                     ('zetes_state', 'in', [constants.MOVE_DEFAULT,
-                                            constants.MOVE_SKIPPED,
-                                            constants.MOVE_FULL])],
+                     ('location_id.is_valid_location', '=', True),
+                     ('zetes_state', 'in', [constants.OP_DEFAULT,
+                                            constants.OP_SKIPPED])],
                     order=order_by)
         # Filter lines
         # We want only operation with a quantity to to done different
@@ -269,6 +269,8 @@ class Itemmove(DomainInterface):
         lines = lines \
             .filtered(lambda line: int(line.qty_done) < int(line.product_qty))
 
+        # FIXME - Check remaining qty after rangement is enough for
+        # filling the reservation
         reserved_quants_query = """
         SELECT quant.lot_id, SUM(quant.qty)
         FROM stock_quant AS quant

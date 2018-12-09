@@ -184,18 +184,17 @@ class Itempick(DomainInterface):
 
         # Search all pack operations for this picking
         lines = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .search([('picking_id', '=', picking_id)], order=order_by)
+            .search([('picking_id', '=', picking_id),
+                     ('location_id.is_valid_location', '=', True),
+                     ('zetes_state', 'in', [constants.OP_DEFAULT,
+                                            constants.OP_SKIPPED])],
+                    order=order_by)
 
         # Filter lines
         # We want only operation with a quantity to to done different
         # than the quantity done.
-        # The state of the line must be
-        # "OP_DEFAULT", "OP_SKIPPED" or "OP_CANCELED"
         lines = lines\
-            .filtered(lambda line: int(line.qty_done) != int(line.product_qty)
-                      and line.zetes_state in [constants.OP_DEFAULT,
-                                               constants.OP_SKIPPED,
-                                               constants.OP_CANCELED])
+            .filtered(lambda line: int(line.qty_done) < int(line.product_qty))
         split_lines = lines.split_pack_op_lines()
 
         sequence = 1
@@ -226,10 +225,11 @@ class Itempick(DomainInterface):
             return result.format()
 
         for line, pack_lot in split_lines:
-            qty_to_do = pack_lot and pack_lot.qty_todo or line.product_qty
             if pack_lot:
+                qty_to_do = pack_lot.qty_todo
                 qty_done = pack_lot.qty
             else:
+                qty_to_do = line.product_qty
                 qty_done = line.qty_done
 
             if pack_lot:
@@ -313,26 +313,30 @@ class Itempick(DomainInterface):
                     'Usf02': lot.checksum
                 })
 
-            # If the available quantity for this location is less than
-            # the zero check limit, it means that we have to ask a zero check.
-            available_qty_query = """
-            SELECT sum(quant.qty)
-            FROM stock_quant AS quant
-            WHERE quant.product_id = %s
-            AND quant.location_id = %s
-            AND quant.reservation_id IS NULL
-            """
-            self.request.env.cr.execute(available_qty_query,
-                                        (line.product_id.id,
-                                         line.location_id.id))
-            query_result = self.request.env.cr.fetchone()
-            available_qty = query_result and query_result[0] or 0
+            # # If the available quantity for this location is less than
+            # # the zero check limit, it means that we have to ask
+            # # a zero check.
+            # available_qty_query = """
+            # SELECT sum(quant.qty)
+            # FROM stock_quant AS quant
+            # WHERE quant.product_id = %s
+            # AND quant.location_id = %s
+            # AND quant.reservation_id IS NULL
+            # """
+            # self.request.env.cr.execute(available_qty_query,
+            #                             (line.product_id.id,
+            #                              line.location_id.id))
+            # query_result = self.request.env.cr.fetchone()
+            # available_qty = query_result and query_result[0] or 0
+            #
+            # forcast_available_qty = available_qty - line.product_qty
+            # if forcast_available_qty <= constants.ZERO_CHECK_LIMIT:
+            #     line_values.cycleCountFlag = 1
+            # else:
+            #     line_values.cycleCountFlag = 0
 
-            forcast_available_qty = available_qty - line.product_qty
-            if forcast_available_qty <= constants.ZERO_CHECK_LIMIT:
-                line_values.cycleCountFlag = 1
-            else:
-                line_values.cycleCountFlag = 0
+            # TODO Review the zero check
+            line_values.cycleCountFlag = 0
 
             result.append(line_values)
             sequence += 1

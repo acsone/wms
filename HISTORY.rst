@@ -20,6 +20,7 @@ Unreleased
 * ALCYN-1746: Have all products even the unactive ones to be exported to the ESB
 * It has been removed on https://github.com/camptocamp/alcyon_odoo/commit/3c5776ffa12e31ba133475e8151d01d7c0bd35f6
   but and added into the release 10.29.12 this morning
+* Zetes: Add the possibility to change a lot and some blocking bugs
 
 * Fix singleton error
 

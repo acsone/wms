@@ -19,6 +19,7 @@ class StockPicking(models.Model):
         (constants.AS_ACTIVE, 'Active'),
         (constants.AS_STAGING, 'Staging'),
         (constants.AS_DONE, 'Done'),
+        ('passport', 'Passport'),
         (constants.AS_CANCELED, 'Canceled'),
         (constants.AS_FINISHED, 'Finished'),
         ],
@@ -34,6 +35,7 @@ class StockPicking(models.Model):
         compute='_compute_nbr_actions',
         readonly=True
     )
+    is_passport_required = fields.Boolean('Passport required', default=False)
 
     @api.constrains('zetes_state')
     def zetes_state_change(self):
@@ -257,7 +259,7 @@ class StockPackOperation(models.Model):
         # We don't need to add the new quantity to the lot
         # because Zetes send one request by lot
         else:
-            pack_lot.write({'qty': qty})
+            pack_lot.qty += qty
 
     @api.multi
     def put_in_reserve(self, reserve_id):
