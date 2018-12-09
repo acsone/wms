@@ -257,8 +257,8 @@ class TestInstancePickingState(SavepointCase):
             set(
                 self.env['round.instance.customer'].search(
                     [('delivery_round_id', '=', self.delivery_round_1.id),
-                    ('delivered', '=', True),
-                    ]
+                     ('delivered', '=', True),
+                     ]
                 ).ids
             ),
             {pstate0.instance_customer_id.id}
@@ -270,8 +270,8 @@ class TestInstancePickingState(SavepointCase):
             set(
                 self.env['round.instance.customer'].search(
                     [('delivery_round_id', '=', self.delivery_round_1.id),
-                    ('delivered', '=', True),
-                    ]
+                     ('delivered', '=', True),
+                     ]
                 ).ids
             ),
             {pstate0.instance_customer_id.id,
@@ -284,12 +284,12 @@ class TestInstancePickingState(SavepointCase):
             set(
                 self.env['round.instance.customer'].search(
                     [('delivery_round_id', '=', self.delivery_round_1.id),
-                    ('delivered', '=', True),
-                    ]
+                     ('delivered', '=', True),
+                     ]
                 ).ids
             ),
             {pstate0.instance_customer_id.id,
              pstate1.instance_customer_id.id,
              pstate2.instance_customer_id.id,
-            },
+             },
         )
