@@ -4,11 +4,17 @@
 
 from ast import literal_eval
 import math
+from contextlib import contextmanager, closing
 from datetime import datetime
 from itertools import groupby
+import psycopg2
 
+import odoo
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import UserError, ValidationError, AccessError
+from odoo.tools import config
+
+from odoo.addons.queue_job.job import job
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -44,16 +50,19 @@ class RoundInstance(models.Model):
     date = fields.Date(
         'Date',
         required=True,
-        states={'done': [('readonly', True)]},
+        states={'done': [('readonly', True)],
+                'delivering': [('readonly', True)]},
         default=fields.Date.context_today)
 
     time_picking_planned = fields.Float(
         'Planned Picking Start Time',
-        states={'done': [('readonly', True)]},
+        states={'done': [('readonly', True)],
+                'delivering': [('readonly', True)]},
         )
     time_leave_planned = fields.Float(
         'Planned Vehicle Start Time',
-        states={'done': [('readonly', True)]},
+        states={'done': [('readonly', True)],
+                'delivering': [('readonly', True)]},
         )
 
     stat_time_closed = fields.Float(
@@ -86,6 +95,7 @@ class RoundInstance(models.Model):
         [('pending', 'Anticipated'),
          ('draft', 'Open'),
          ('close', 'Closed'),
+         ('delivering', 'Delivering'),
          ('done', 'Done')],
         'State',
         readonly=True,
@@ -121,6 +131,47 @@ class RoundInstance(models.Model):
         compute='_compute_partner_ids',
         search='_search_partner_ids'
     )
+    instance_customer_ids = fields.One2many(
+        comodel_name='round.instance.customer',
+        inverse_name='delivery_round_id',
+        string='Customers',
+        states={'done': [('readonly', True)],
+                'delivering': [('readonly', True)]},
+    )
+    delivery_failure = fields.Boolean(
+        compute='_compute_delivery_failure'
+    )
+    report_delivery = fields.Html(
+        compute='_compute_report_delivery',
+        readonly=True,
+    )
+
+    @api.depends('instance_customer_ids.picking_state_ids.state')
+    @api.multi
+    def _compute_delivery_failure(self):
+        for record in self:
+            record.delivery_failure = any(
+                state.state == 'failed'
+                for icust in record.instance_customer_ids
+                for state in icust.picking_state_ids
+            )
+
+    @api.depends('instance_customer_ids.picking_state_ids.message')
+    @api.multi
+    def _compute_report_delivery(self):
+        for record in self:
+            lines = []
+            for customer in record.instance_customer_ids:
+                if customer.delivered or not customer.report:
+                    continue
+                lines.append({
+                    'customer': customer,
+                    'report': customer.report,
+                })
+            if lines:
+                record.report_delivery = self.env.ref(
+                    'delivery_rounds.round_report_delivery'
+                ).render({'round': record, 'customers': lines})
 
     @api.multi
     def _compute_partner_ids(self):
@@ -269,7 +320,7 @@ class RoundInstance(models.Model):
         """
         return self.search([
                 ('template_id', '=', template.id),
-                ('state', '!=', 'done')
+                ('state', 'not in', ('delivering', 'done')),
             ],
             order='date asc, time_leave_planned asc',
             limit=1,
@@ -453,16 +504,23 @@ class RoundInstance(models.Model):
 
     @api.multi
     def button_deliver(self):
+        self._deliver()
+        return True
+
+    def _deliver(self, background=True):
         """ Deliver all customers. This validates all shipping orders that are
         available.
         Mark as done and unlink other deliveries
         """
         icust = self.mapped('instance_customer_ids')
-        icust.filtered(lambda c: not c.delivered)._deliver()
-        # Remove all customer where no picking have been processed
-        icust._remove()
-        # Close delivery round
-        self.button_done()
+        icust.filtered(lambda c: not c.delivered)._deliver(
+            background=background
+        )
+        self.state = 'delivering'
+        self.env.user.notify_info(
+            _('Round will be delivered in background.')
+        )
+        self.recheck_delivery_state()
 
     @api.multi
     def button_resetdraft(self):
@@ -478,8 +536,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     def button_done(self):
-        """ Mark as done and unlink waiting deliveries
-        """
+        """ Mark as done and unlink waiting deliveries """
         for shipping in self.mapped('shipping_ids'):
             if shipping.state == 'waiting':
                 shipping.delivery_round_id = False
@@ -487,6 +544,7 @@ class RoundInstance(models.Model):
         started.button_picking_stop()
         self.write({
             'state': 'done',
+            # TODO move when we start to delay the delivery?
             'stat_time_leave': time_now(self),
             })
 
@@ -555,17 +613,179 @@ class RoundInstance(models.Model):
         ]
         return action_data
 
-    instance_customer_ids = fields.One2many(
-        comodel_name='round.instance.customer',
-        inverse_name='delivery_round_id',
-        string='Customers',
-        states={'done': [('readonly', True)]},
+    def cron_recheck_delivery_state(self):
+        """Cron that check if a round is fully delivered
+
+        The pickings are processed by jobs. We cannot know what will be the
+        last job and 2 jobs could be executed at the end which prevent them to
+        transition the round to done.
+        A solution could be to implement a chain of dependency jobs in the
+        queue job but it isn't possible (yet?). A cheap solution is a cron that
+        recheck the state.
+        """
+        for delivery_round in self.search([('state', '=', 'delivering')]):
+            delivery_round.with_delay().recheck_delivery_state()
+
+    @job(default_channel='root.background.delivery')
+    @api.multi
+    def recheck_delivery_state(self):
+        for record in self.exists():
+            if record.state != 'delivering':
+                continue
+
+            if all(ic.delivered for ic in record.instance_customer_ids):
+                # when we transition from not delivered to delivered,
+                # we detach the pickings that could not be done
+                for icust in record.instance_customer_ids:
+                    icust.mapped('picking_ids')._detach_from_round()
+                    icust._remove_if_empty()
+                # Close delivery round
+                record.button_done()
+
+
+class RoundInstancePickingState(models.Model):
+    """ Relation between picking and instance's customer
+
+    It is created when a round is in the process of being
+    delivered. When button_deliver is created on the round
+    instance, one record per picking is created.
+
+    For each picking, it represents the current state in
+    the delivery process:
+
+    * waiting delivery
+    * delivery done
+    * failure to deliver
+
+    In case of failure, it holds the message for the failure.
+
+    It allows to track the delivery "global" state of a single round:
+
+    * waiting delivery
+    * fully delivered
+    * failure (at least one picking had a failure)
+
+    This is an internal model, the various information is given
+    to the user through the round instance
+    """
+    _name = 'round.instance.picking.state'
+    _description = 'State of a picking in a Round'
+
+    picking_id = fields.Many2one(
+        comodel_name='stock.picking',
+        required=True,
     )
+    instance_customer_id = fields.Many2one(
+        comodel_name='round.instance.customer',
+        required=True,
+        ondelete='cascade',
+    )
+    state = fields.Selection(
+        selection=[
+            ('progress', 'Progress'),
+            ('done', 'Done'),
+            ('failed', 'Failed'),
+        ],
+        required=True,
+        default='progress',
+    )
+    message = fields.Char()
+
+    _sql_constraints = [
+        (
+            'unique_customer_picking_id',
+            'unique(picking_id, instance_customer_id)',
+            _('There is already a delivery in progress for a picking')
+        ),
+    ]
+
+    @contextmanager
+    def _new_env(self, new_cr=True):
+        if config['test_enable']:
+            new_cr = False
+        with api.Environment.manage():
+            registry = odoo.modules.registry.RegistryManager.get(
+                self.env.cr.dbname
+            )
+            if new_cr:
+                with closing(registry.cursor()) as cr:
+                    try:
+                        yield self.env(cr=cr)
+                    except Exception:
+                        cr.rollback()
+                        raise
+                    else:
+                        # disable pylint error because this is a valid commit,
+                        # we are in a new env
+                        if not config['test_enable']:
+                            cr.commit()  # pylint: disable=invalid-commit
+            else:
+                yield self.env()
+
+    @contextmanager
+    def _handle_error(self):
+        try:
+            yield
+        except (ValidationError, UserError, AccessError) as err:
+            # Do nothing on purpose, failed job should not need
+            # user intervention. The record will be marked
+            # as failed, users will see it on the round and be able
+            # to retry to deliver manually.
+            # TODO find why we have concurrent transaction errors
+            # that appears as failed with a message, should be retried
+            self.write({
+                'state': 'failed',
+                'message': unicode(err),
+            })
+            # other kind of exception should still make the job fail
+            # so we can discover them and fix them
+        else:
+            self.write({
+                'state': 'done',
+                'message': '',
+            })
+
+    def _lock(self):
+        """Lock the record
+
+        Lock the record so we are sure that only one export
+        job is running for this record if concurrent jobs have to export the
+        same record.
+        When concurrent jobs try to export the same record, the first one
+        will lock and proceed, the others will fail to lock and will be
+        retried later.
+        """
+        sql = ("SELECT id FROM %s WHERE ID in %%s FOR UPDATE NOWAIT" %
+               self._table)
+        record_ids = tuple(self.ids)
+        try:
+            self.env.cr.execute(sql, (record_ids,), log_exceptions=False)
+        except psycopg2.OperationalError:
+            _logger.info('A concurrent job is already working on the same '
+                         'record. Retry later')
+            raise UserError(
+                    'A job is already working on the same record. '
+                    'You may need to retry later.')
+
+    @job(default_channel='root.background.deliver')
+    @api.multi
+    def deliver(self, new_cr=True):
+        if not self.exists():
+            return
+        self.ensure_one()
+        if self.state == 'done':
+            return
+        self._lock()
+        with self._handle_error():
+            with self._new_env(new_cr=new_cr) as new_env:
+                self.picking_id.with_env(new_env)._do_round_picking_transfer()
+        self.instance_customer_id.delivery_round_id.with_delay()\
+            .recheck_delivery_state()
 
 
 class RoundInstanceCustomer(models.Model):
     _name = 'round.instance.customer'
-    _order = 'rank,delivered,write_date desc'
+    _order = 'rank,write_date desc'
     _rec_name = 'partner_id'
 
     delivery_round_id = fields.Many2one(
@@ -586,6 +806,10 @@ class RoundInstanceCustomer(models.Model):
         ondelete='restrict',
         oldname='res_partner_id',
     )
+    picking_state_ids = fields.One2many(
+        comodel_name='round.instance.picking.state',
+        inverse_name='instance_customer_id',
+    )
 
     rank = fields.Integer(
         string='Rank',
@@ -594,6 +818,65 @@ class RoundInstanceCustomer(models.Model):
     picking_ids = fields.One2many(
         'stock.picking', 'delivery_round_customer_id', 'Pickings',
         readonly=True)
+
+    report = fields.Html(
+        compute='_compute_report',
+        readonly=True,
+    )
+
+    delivered = fields.Boolean(
+        'Delivered',
+        compute='_compute_delivered',
+        search='_search_delivered',
+    )
+
+    @api.depends('delivery_round_id.state', 'picking_state_ids.state')
+    def _compute_delivered(self):
+        for icust in self:
+            icust.delivered = (
+                icust.delivery_round_id.state in ('delivering', 'done')
+                and all(state.state == 'done' for state
+                        in icust.picking_state_ids)
+            )
+
+    def _search_delivered(self, operator, value):
+        if operator not in ('=', '!='):
+            return []
+        # search the picking states that still need to be done
+        not_done_states = self.env['round.instance.picking.state'].read_group(
+            [('state', 'in', ('progress', 'failed'))],
+            ['instance_customer_id'],
+            'instance_customer_id'
+        )
+        icust_ids = [r['instance_customer_id'][0] for r in not_done_states]
+        domain = [
+            '|',
+            ('delivery_round_id.state', 'not in', ('done', 'delivering')),
+            ('id', 'in', icust_ids),
+        ]
+        not_delivered = self.search(domain)
+        if operator == '=':
+            condition = 'not in' if value else 'in'
+        elif operator == '!=':
+            condition = 'in' if value else 'not in'
+        return [('id', condition, not_delivered.ids)]
+
+    @api.depends('picking_state_ids.message')
+    @api.multi
+    def _compute_report(self):
+        for record in self:
+            lines = []
+            for state in record.picking_state_ids:
+                if not state.message:
+                    continue
+                lines.append({
+                    'picking': state.picking_id,
+                    'message': state.message,
+                })
+            if lines:
+                record.report = self.env.ref(
+                    'delivery_rounds.round_customer_report'
+                ).render({'round_customer': record, 'pickings': lines})
 
     @api.multi
     def _link_pickings(self, pickings):
@@ -622,8 +905,8 @@ class RoundInstanceCustomer(models.Model):
                 'delivery_round_customer_id': self.id,
                 'rank': self.rank})
 
-    def _remove(self):
-        """ Remvove partner from round instance if no more pickings or all
+    def _remove_if_empty(self):
+        """ Remove partner from round instance if no more pickings or all
         canceled """
         if not self.mapped('picking_ids').filtered(
                 lambda p: p.state != 'cancel'):
@@ -666,45 +949,55 @@ class RoundInstanceCustomer(models.Model):
                                       'done')))
             rec.count_picking_progress = '%s/%s' % (count_done, count_total)
 
-    delivered = fields.Boolean('Delivered')
-
     def button_deliver(self):
         """ Validate all shipping orders that are available """
         self.ensure_one()
-        self._deliver()
+        self._deliver(background=False)
         if not self.picking_ids:
             # Nothing was picked, all pickings have been disconnected
             raise UserError(_("No picking have been processed yet"))
 
-    def _deliver(self):
-        """ Validate all shipping orders that are available """
+    def _deliver(self, background=True):
+        """ Validate all shipping orders that are available
+
+        It is done by creating records of round.instance.picking.state,
+        each one will be responsible to deliver a picking.
+        """
         pickings = self.mapped('picking_ids').filtered(
             lambda p: p.picking_type_code != 'outgoing' and
-            # FIXME DONE BY Jbaudoux. Modified so it is flake8 compatible
-            # p.state not in ('done', 'cancel'))
             # FIXME: some done moves are send to backorder?
-            p.state in ('partially_available', 'assigned'))
+            p.state in ('partially_available', 'assigned')
+        )
         if any(op.qty_done for op in pickings.mapped('pack_operation_ids')):
-            raise UserError(_(
-                "You cannot deliver when a picking is ongoing"))
+            raise UserError(_("You cannot deliver when a picking is ongoing"))
 
-        shippings = self.mapped('picking_ids').filtered(
-            lambda p: p.picking_type_code == 'outgoing')
-        for shipping in shippings.filtered(
-                lambda p: p.state in ('assigned', 'partially_available')):
-            for pack in shipping.pack_operation_ids:
-                if pack.product_qty > 0:
-                    pack.qty_done = pack.product_qty
-                    for plot in pack.pack_lot_ids:
-                        if plot.qty_todo > 0:
-                            plot.qty = plot.qty_todo
+        # start by removing all the states not yet done, so if a picking
+        # has been removed or canceled, we won't expect it to be delivered
+        # anymore
+        self.mapped('picking_state_ids').filtered(
+            lambda state: state.state != 'done'
+        ).unlink()
+
+        for icust in self:
+            for shipping in icust.picking_ids:
+                if (shipping.state in ('draft', 'waiting', 'confirmed')
+                        or shipping.picking_type_code != 'outgoing'):
+                    continue
+                elif shipping.state not in ('assigned', 'partially_available'):
+                    continue
+                state = self.env['round.instance.picking.state'].create({
+                    'instance_customer_id': icust.id,
+                    'picking_id': shipping.id,
+                })
+                if background:
+                    state.with_delay(
+                        description=_(
+                            'Deliver shipping %s for round %s'
+                        ) % (state.picking_id.name,
+                             icust.delivery_round_id.complete_name)
+                    ).deliver()
                 else:
-                    pack.unlink()
-            shipping.do_transfer()
-        self.mapped('picking_ids').filtered(
-            lambda p: p.state not in ('cancel', 'done')).\
-            write({'delivery_round_customer_id': False})
-        self.write({'delivered': True})
+                    state.deliver()
 
     def print_deliveryslip(self):
         shippings = self.picking_ids.filtered(

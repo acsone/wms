@@ -14,6 +14,8 @@
         'stock_picking_assignment',
         'stock_picking_subcode',
         'stock_picking_sequence',
+        'queue_job',
+        'web_notify',
         ],
     'data': [
         # Views
@@ -27,6 +29,8 @@
         'views/delivery_carrier.xml',
         'views/tag.xml',
         'views/cron_delivery_plan.xml',
+        # Qweb
+        'views/round_customer_report.xml',
         # Data
         'data/ir_cron.xml',
         # Security

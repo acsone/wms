@@ -59,7 +59,7 @@ class StockMove(models.Model):
     @api.multi
     def action_cancel(self):
         res = super(StockMove, self).action_cancel()
-        self.mapped('picking_id.delivery_round_customer_id')._remove()
+        self.mapped('picking_id.delivery_round_customer_id')._remove_if_empty()
         return res
 
     @api.multi

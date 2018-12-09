@@ -156,7 +156,7 @@ class TestShippingCosts(SavepointCase):
         self.partner1.help_with_fee = False
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
 
     def test_2_so_all_delivered_small_amount(self):
@@ -165,7 +165,7 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
 
@@ -176,7 +176,7 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
 
     def test_3_so_in_2_delivery_fee_twice(self):
@@ -210,7 +210,7 @@ class TestShippingCosts(SavepointCase):
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({'qty_done': 1})
         result = pick.with_context(test_mode=True).do_new_transfer()
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         # Second delivery round
@@ -238,7 +238,7 @@ class TestShippingCosts(SavepointCase):
 
         result = pick.with_context(test_mode=True).do_new_transfer()
         self.assertEqual(result, None)
-        self.dr2.button_deliver()
+        self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
@@ -274,7 +274,7 @@ class TestShippingCosts(SavepointCase):
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({'qty_done': 1})
         result = pick.with_context(test_mode=True).do_new_transfer()
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         # Second delivery round
@@ -302,7 +302,7 @@ class TestShippingCosts(SavepointCase):
 
         result = pick.with_context(test_mode=True).do_new_transfer()
         self.assertEqual(result, None)
-        self.dr2.button_deliver()
+        self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
@@ -321,7 +321,7 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 0 % sale order 2
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         # Second delivery round
@@ -342,7 +342,7 @@ class TestShippingCosts(SavepointCase):
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2.button_deliver()
+        self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
@@ -361,7 +361,7 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         # First delivery
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         # Second delivery round
@@ -382,7 +382,7 @@ class TestShippingCosts(SavepointCase):
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2.button_deliver()
+        self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
@@ -399,12 +399,12 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         # First delivery
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         # Second delivery round
         self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2.button_deliver()
+        self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
 
@@ -426,7 +426,7 @@ class TestShippingCosts(SavepointCase):
         })
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
 
     def test_multiple_customer_in_round(self):
@@ -450,7 +450,7 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(so21.picking_ids)
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so21), 0)
@@ -466,6 +466,6 @@ class TestShippingCosts(SavepointCase):
         self.so2.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1.button_deliver()
+        self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee_2)

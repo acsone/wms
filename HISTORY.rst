@@ -8,6 +8,11 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1713: run delivery operations of a round in background. The rounds have
+  a new state "Delivering". The delivery operations run in background and if
+  there any error, the round stays in this state, with a warning logo. A cron
+  "Check Round Delivery State" is added to transition from Delivering to Done.
+
 **Bugfixes**
 
 * ALCYN-1746: Change cplz19 on export product with web_published field (ESB)
@@ -15,6 +20,8 @@ Unreleased
 * ALCYN-1746: Have all products even the unactive ones to be exported to the ESB
 * It has been removed on https://github.com/camptocamp/alcyon_odoo/commit/3c5776ffa12e31ba133475e8151d01d7c0bd35f6
   but and added into the release 10.29.12 this morning
+
+* Fix singleton error
 
 **Build**
 

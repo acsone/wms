@@ -12,6 +12,7 @@
                 <field name="count_picking_available_partner"/>
                 <field name="count_picking_available_weight"/>
                 <field name="picking_launched"/>
+                <field name="delivery_failure"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="#{kanban_color(record.color.raw_value)}">
@@ -39,6 +40,12 @@
                                         <div class="col-xs-4 btn-toggle">
                                             <a name="toggle_partner_locked" type="object" states="draft,close"><i t-attf-class="oe_inline fa #{record.state.raw_value == 'close' ? 'fa-lock' : 'fa-unlock'}" title="Lock/Unlock destinations"/></a>
                                         </div>
+                                        <t t-if="record.state.raw_value == 'delivering' and record.delivery_failure">
+                                            <div class="col-xs-4 btn-delivery">
+
+                                                <a type="open"><i class="oe_inline fa fa-exclamation-triangle" title="Errors during delivery"/></a>
+                                            </div>
+                                        </t>
                                     </div>
                                     <div class="col-xs-6 o_kanban_primary_right">
                                         <div class="row">
@@ -137,18 +144,18 @@
         <field name="arch" type="xml">
             <form string="Delivery Round">
                 <header>
-                    <button name="button_confirm" type="object" string="Lock Destinations" states="draft" class="oe_highlight"/>
+                    <button name="button_close" type="object" string="Lock Destinations" states="draft" class="oe_highlight"/>
                     <button name="button_deliver" type="object" string="Deliver" states="close" class="oe_highlight"/>
                     <button name="button_resetdraft" type="object" string="Reset to Draft" states="close,done"/>
                     <button name="button_resetpending" type="object" string="Reset to Anticipated" states="draft"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" clickable="False"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
 
                 </header>
                 <sheet>
 
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_picking_launched" type="object" class="oe_stat_button" icon="fa-volume-down">
+                        <button name="toggle_picking_launched" states="draft,close" type="object" class="oe_stat_button" icon="fa-volume-down">
                             <field name="picking_launched" widget="boolean_button" options="{&quot;terminology&quot;: {'string_true':'Launched','string_false':'Stopped'}}"/>
                         </button>
 
@@ -168,6 +175,10 @@
                         <h1>
                             <field name="template_id" />
                         </h1>
+                        <field name="delivery_failure" invisible="1"/>
+                        <div class="alert alert-danger" attrs="{'invisible': [('delivery_failure', '=', False)]}">
+                            <field name="report_delivery"/>
+                        </div>
                     </div>
                     <group>
                         <group>
@@ -180,7 +191,8 @@
                             <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
                         </group>
                     </group>
-                    <button name="button_itinerary_import" type="object" string="Import from itinerary"/>
+                    <button name="button_itinerary_import" type="object" string="Import from itinerary"
+                            attrs="{'invisible': [('state', 'in', ('delivering', 'done'))]}"/>
                     <notebook>
                         <page string="Customers">
                             <field name="instance_customer_ids">
