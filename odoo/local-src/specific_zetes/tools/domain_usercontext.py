@@ -77,16 +77,30 @@ FROM stock_picking AS picking
     ON picking.picking_type_id = pick_type.id
   LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
   LEFT JOIN round_instance AS round ON picking.delivery_round_id = round.id
-WHERE picking.zetes_state IN %s
-      AND (picking.is_zetes_error = FALSE OR picking.is_zetes_error IS NULL)
-      AND picking.operator_id = %s
+WHERE pick_type.subcode = 'PICK'
+      AND picking.state IN ('partially_available', 'assigned')
+      AND picking.zetes_state IN %(picking_zetes_state)s
+      AND EXISTS(SELECT 1
+                 FROM stock_pack_operation AS operation
+                 INNER JOIN stock_location l
+                   ON operation.location_id = l.id
+                 WHERE operation.picking_id = picking.id
+                 AND operation.zetes_state in %(op_zetes_state)s
+                 AND l.is_valid_location
+                 )
+      AND picking.operator_id = %(operator_id)s
 ORDER BY round.date, round.time_picking_planned, picking.rank DESC
 LIMIT 1;
             """
 
-            self.request.env.cr.execute(picking_query, ((constants.AS_START,
-                                                         constants.AS_ACTIVE),
-                                                        self._user.id, ))
+            query_values = {
+                'picking_zetes_state': (constants.AS_START,
+                                        constants.AS_ACTIVE),
+                'operator_id': self._user.id,
+                'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            }
+
+            self.request.env.cr.execute(picking_query, query_values)
             query_result = self.request.env.cr.fetchone()
 
             # If the user has a assigned picking

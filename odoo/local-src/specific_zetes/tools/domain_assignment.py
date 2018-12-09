@@ -122,6 +122,7 @@ class Assignment(DomainInterface):
 
         is_passport_required = (picking.picking_type_id.passport and
                                 partner.is_passport_required)
+        picking.is_passport_required = is_passport_required
         if is_passport_required:
             result.Usf06 = 'C'  # This partner request a double control
             picking.assign_picking_checksum()
@@ -167,15 +168,19 @@ class Assignment(DomainInterface):
             return
 
         try:
-            picking.zetes_state = params.assignmentStatus
+            picking_zetes_state = params.assignmentStatus
+
             if params.assignmentStatus in [constants.AS_DONE,
                                            constants.AS_FINISHED]:
 
-                if not picking.checksum:
+                if not picking.is_passport_required:
                     picking.validate_picking()
-
+                else:
+                    picking_zetes_state = 'passport'
             elif params.assignmentStatus == constants.AS_CANCELED:
                 picking.interrupt_picking()
+
+            picking.zetes_state = picking_zetes_state
         except Exception as e:
             _logger.error(str(e))
             params.log(picking_id=picking_id, exception=e)
@@ -187,39 +192,36 @@ class Assignment(DomainInterface):
         :return:
         """
         picking_query = """
-        SELECT picking.id
-        FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS pick_type
-            ON picking.picking_type_id = pick_type.id
-          LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
-          INNER JOIN round_instance AS round
-            ON picking.delivery_round_id = round.id
-        WHERE pick_type.subcode = 'PICK'
-              AND picking.state IN ('partially_available', 'assigned')
-              AND picking.zetes_state IN %(picking_zetes_state)s
-              AND pick_type.zetes_picking_type = %(picking_type)s
-              AND EXISTS(SELECT 1
-                         FROM stock_pack_operation AS operation
-                         WHERE operation.picking_id = picking.id
-                         AND operation.zetes_state in %(op_zetes_state)s)
-              AND NOT EXISTS (SELECT 1
-                              FROM stock_pack_operation AS pack_op
-                                INNER JOIN stock_location l
-                                  ON pack_op.location_id = l.id
-                              WHERE pack_op.picking_id = picking.id
-                                AND l.is_valid_location = FALSE
-                              )
-              AND round.state in ('draft', 'pending', 'close')
-              AND ((picking.operator_id IS NULL AND round.picking_launched)
-                   OR picking.operator_id = %(operator)s)
-               AND NOT EXISTS (SELECT 1
-                               FROM stock_pack_operation AS operation
-                                 INNER JOIN stock_inventory_line AS sil
-                                   ON sil.product_id = operation.product_id
-                                 INNER JOIN stock_inventory AS si
-                                   ON sil.inventory_id = si.id
-                               WHERE operation.picking_id = picking.id
-                               AND si.state = 'confirm')
+SELECT picking.id
+FROM stock_picking AS picking
+  INNER JOIN stock_picking_type AS pick_type
+    ON picking.picking_type_id = pick_type.id
+  LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
+  INNER JOIN round_instance AS round
+    ON picking.delivery_round_id = round.id
+WHERE pick_type.subcode = 'PICK'
+      AND picking.state IN ('partially_available', 'assigned')
+      AND picking.zetes_state IN %(picking_zetes_state)s
+      AND pick_type.zetes_picking_type = %(picking_type)s
+      AND EXISTS(SELECT 1
+                 FROM stock_pack_operation AS operation
+                 INNER JOIN stock_location l
+                   ON operation.location_id = l.id
+                 WHERE operation.picking_id = picking.id
+                 AND operation.zetes_state in %(op_zetes_state)s
+                 AND l.is_valid_location
+                 )
+      AND round.state in ('draft', 'pending', 'close')
+      AND ((picking.operator_id IS NULL AND round.picking_launched)
+           OR picking.operator_id = %(operator)s)
+--      AND NOT EXISTS (SELECT 1
+--                      FROM stock_pack_operation AS operation
+--                        INNER JOIN stock_inventory_line AS sil
+--                           ON sil.product_id = operation.product_id
+--                         INNER JOIN stock_inventory AS si
+--                           ON sil.inventory_id = si.id
+--                       WHERE operation.picking_id = picking.id
+--                       AND si.state = 'confirm')
                 """
         query_values = {
             'picking_zetes_state': (constants.AS_DEFAULT,
@@ -232,8 +234,8 @@ class Assignment(DomainInterface):
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            picking_query += "AND picking_zone.code = %(zone)s "
-            query_values['zone'] = zone_code
+            picking_query += "AND picking_zone.code = %(zone_code)s "
+            query_values['zone_code'] = zone_code
 
         picking_query += "ORDER BY picking.operator_id, " \
                          "round.date, " \
@@ -263,53 +265,52 @@ class Assignment(DomainInterface):
         """
 
         picking_query = """
-        SELECT picking.id
-        FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS pick_type
-            ON picking.picking_type_id = pick_type.id
-          LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
-        WHERE picking.zetes_state IN %s
-          AND pick_type.zetes_picking_type = %s
-          AND picking.is_zetes_error = FALSE
-          AND EXISTS(SELECT 1
-                     FROM stock_pack_operation AS operation
-                     WHERE operation.picking_id = picking.id
-                     AND operation.zetes_state IN %s)
-          AND NOT EXISTS (SELECT 1
-                          FROM stock_pack_operation AS pack_op
-                            INNER JOIN stock_location
-                              ON pack_op.location_dest_id = stock_location.id
-                          WHERE pack_op.picking_id = picking.id
-                            AND (stock_location.zone IS NULL
-                                 OR stock_location.corridor IS NULL))
-          AND NOT EXISTS (SELECT 1
-                          FROM stock_pack_operation AS operation
-                            INNER JOIN stock_inventory_line AS sil
-                              ON sil.product_id = operation.product_id
-                            INNER JOIN stock_inventory AS si
-                              ON sil.inventory_id = si.id
-                          WHERE operation.picking_id = picking.id
-                          AND si.state = 'confirm')
-          AND (picking.operator_id = %s OR picking.operator_id IS NULL)
+SELECT picking.id
+FROM stock_picking AS picking
+  INNER JOIN stock_picking_type AS pick_type
+    ON picking.picking_type_id = pick_type.id
+  LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
+WHERE picking.state IN ('partially_available', 'assigned')
+  AND picking.zetes_state IN %(picking_zetes_state)s
+  AND pick_type.zetes_picking_type = %(picking_type)s
+  AND EXISTS(SELECT 1
+             FROM stock_pack_operation AS operation
+             INNER JOIN stock_location l
+               ON operation.location_dest_id = l.id
+             WHERE operation.picking_id = picking.id
+             AND operation.zetes_state in %(op_zetes_state)s
+             AND l.is_valid_location
+             )
+  AND (picking.operator_id IS NULL OR picking.operator_id = %(operator)s)
+--  AND NOT EXISTS (SELECT 1
+--                  FROM stock_pack_operation AS operation
+--                    INNER JOIN stock_inventory_line AS sil
+--                      ON sil.product_id = operation.product_id
+--                    INNER JOIN stock_inventory AS si
+--                      ON sil.inventory_id = si.id
+--                  WHERE operation.picking_id = picking.id
+--                  AND si.state = 'confirm')
                 """
-        query_values = [
-            (constants.AS_DEFAULT, constants.AS_CANCELED),
-            constants.RANGEMENT_ASSIGNMENT,
-            (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
-            self._user.id
-        ]
+
+        query_values = {
+            'picking_zetes_state': (constants.AS_DEFAULT,
+                                    constants.AS_CANCELED),
+            'picking_type': constants.RANGEMENT_ASSIGNMENT,
+            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            'operator': self._user.id,
+        }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            picking_query += "AND picking_zone.code = %s "
-            query_values.append(zone_code)
+            picking_query += "AND picking_zone.code = %(zone_code)s "
+            query_values['zone_code'] = zone_code
 
         picking_query += "ORDER BY picking.operator_id, " \
                          "picking.rank DESC " \
                          "LIMIT 1;"
 
-        self.request.env.cr.execute(picking_query, tuple(query_values))
+        self.request.env.cr.execute(picking_query, query_values)
         query_result = self.request.env.cr.fetchone()
 
         if query_result and query_result[0]:
@@ -321,10 +322,10 @@ class Assignment(DomainInterface):
         # Picking not found. Try to create a new one.
         zone_code = params.Cri01
         zone_condition = ""
-        query_values = []
+        query_values = {}
         if zone_code:
-            zone_condition = "AND picking_zone.code = %s"
-            query_values.append(zone_code)
+            zone_condition = "AND picking_zone.code = %(zone_code)s"
+            query_values['zone_code'] = zone_code
 
         report_query = """
         SELECT report.id
@@ -346,7 +347,7 @@ class Assignment(DomainInterface):
 
         counter = 0
         while counter < MAX_RETRY:
-            self.request.env.cr.execute(report_query, tuple(query_values))
+            self.request.env.cr.execute(report_query, query_values)
             report_id = self.request.env.cr.fetchone()
             if not report_id:
                 break
@@ -391,54 +392,52 @@ class Assignment(DomainInterface):
         """
         # Search for an existing picking
         picking_query = """
-        SELECT picking.id
-        FROM stock_picking AS picking
-          INNER JOIN stock_picking_type AS pick_type
-            ON picking.picking_type_id = pick_type.id
-          LEFT JOIN picking_zone
-            ON pick_type.picking_zone_id = picking_zone.id
-        WHERE picking.zetes_state IN %s
-          AND pick_type.zetes_picking_type = %s
-          AND picking.is_zetes_error = FALSE
-          AND EXISTS(SELECT 1
-                     FROM stock_pack_operation AS operation
-                     WHERE operation.picking_id = picking.id
-                     AND operation.zetes_state IN %s)
-          AND NOT EXISTS (SELECT 1
-                              FROM stock_pack_operation AS pack_op
-                                INNER JOIN stock_location l
-                                  ON pack_op.location_dest_id = l.id
-                              WHERE pack_op.picking_id = picking.id
-                                AND l.is_valid_location = FALSE
-                              )
-          AND NOT EXISTS (SELECT 1
-                              FROM stock_pack_operation AS operation
-                                INNER JOIN stock_inventory_line AS sil
-                                  ON sil.product_id = operation.product_id
-                                INNER JOIN stock_inventory AS si
-                                  ON sil.inventory_id = si.id
-                              WHERE operation.picking_id = picking.id
-                              AND si.state = 'confirm')
-          AND (picking.operator_id = %s OR picking.operator_id IS NULL)
+SELECT picking.id
+FROM stock_picking AS picking
+  INNER JOIN stock_picking_type AS pick_type
+    ON picking.picking_type_id = pick_type.id
+  LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
+WHERE picking.state IN ('partially_available', 'assigned')
+  AND picking.zetes_state IN %(picking_zetes_state)s
+  AND pick_type.zetes_picking_type = %(picking_type)s
+  AND EXISTS(SELECT 1
+             FROM stock_pack_operation AS operation
+             INNER JOIN stock_location l
+               ON operation.location_dest_id = l.id
+             WHERE operation.picking_id = picking.id
+             AND operation.zetes_state in %(op_zetes_state)s
+             AND l.is_valid_location
+             )
+  AND (picking.operator_id IS NULL OR picking.operator_id = %(operator)s)
+--  AND NOT EXISTS (SELECT 1
+--                  FROM stock_pack_operation AS operation
+--                    INNER JOIN stock_inventory_line AS sil
+--                      ON sil.product_id = operation.product_id
+--                    INNER JOIN stock_inventory AS si
+--                      ON sil.inventory_id = si.id
+--                  WHERE operation.picking_id = picking.id
+--                  AND si.state = 'confirm')
                 """
-        query_values = [
-            (constants.AS_DEFAULT, constants.AS_CANCELED),
-            constants.REASSORT_ASSIGNMENT,
-            (constants.MOVE_DEFAULT, constants.MOVE_SKIPPED),
-            self._user.id
-        ]
+
+        query_values = {
+            'picking_zetes_state': (constants.AS_DEFAULT,
+                                    constants.AS_CANCELED),
+            'picking_type': constants.REASSORT_ASSIGNMENT,
+            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            'operator': self._user.id,
+        }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
-            picking_query += "AND picking_zone.code = %s "
-            query_values.append(zone_code)
+            picking_query += "AND picking_zone.code = %(zone_code)s "
+            query_values['zone_code'] = zone_code
 
         picking_query += "ORDER BY picking.operator_id, " \
                          "picking.rank DESC " \
                          "LIMIT 1;"
 
-        self.request.env.cr.execute(picking_query, tuple(query_values))
+        self.request.env.cr.execute(picking_query, query_values)
         query_result = self.request.env.cr.fetchone()
 
         if query_result and query_result[0]:
@@ -450,10 +449,10 @@ class Assignment(DomainInterface):
         # Picking not found. Try to create a new one.
         zone_code = params.Cri01
         zone_condition = ""
-        query_values = []
+        query_values = {}
         if zone_code:
-            zone_condition = "AND picking_zone.code = %s"
-            query_values.append(zone_code)
+            zone_condition = "AND picking_zone.code = %(zone_code)s"
+            query_values['zone_code'] = zone_code
 
         report_query = """
         SELECT report.id
@@ -475,7 +474,7 @@ class Assignment(DomainInterface):
 
         counter = 0
         while counter < MAX_RETRY:
-            self.request.env.cr.execute(report_query, tuple(query_values))
+            self.request.env.cr.execute(report_query, query_values)
             report_id = self.request.env.cr.fetchone()
             if not report_id:
                 break

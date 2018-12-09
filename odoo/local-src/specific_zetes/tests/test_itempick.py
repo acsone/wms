@@ -148,4 +148,5 @@ class TestItempick(ZetesTest):
         pack_op.ensure_one()
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.cycleCountFlag, '1')
+        # FIXME: Zero Check has been disabled
+        # self.assertEqual(result.cycleCountFlag, '1')
