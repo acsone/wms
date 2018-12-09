@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.13 (2018-12-09)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1713: run delivery operations of a round in background. The rounds have
   a new state "Delivering". The delivery operations run in background and if
   there any error, the round stays in this state, with a warning logo. A cron
