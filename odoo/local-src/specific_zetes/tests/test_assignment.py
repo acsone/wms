@@ -57,30 +57,31 @@ class TestAssignemnt(ZetesTest):
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))
 
-        # Try to create an inventory for the product 1
-        # This picking should be not available
-        inventory = self.env['stock.inventory'].create({
-            'name': 'Test',
-            'filter': 'partial',
-        })
-        inventory.line_ids.create({
-            'inventory_id': inventory.id,
-            'product_id': self.product_1.id,
-            'product_qty': 20,
-            'location_id': self.env.ref('stock.stock_location_stock').id
-        })
-        # Start the inventory
-        inventory.action_start()
-        result_str = domain.requ(request_params)
-        result = self.format_result(result_str)
-        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+        # Inventory desactivated
+        # # Try to create an inventory for the product 1
+        # # This picking should be not available
+        # inventory = self.env['stock.inventory'].create({
+        #     'name': 'Test',
+        #     'filter': 'partial',
+        # })
+        # inventory.line_ids.create({
+        #     'inventory_id': inventory.id,
+        #     'product_id': self.product_1.id,
+        #     'product_qty': 20,
+        #     'location_id': self.env.ref('stock.stock_location_stock').id
+        # })
+        # # Start the inventory
+        # inventory.action_start()
+        # result_str = domain.requ(request_params)
+        # result = self.format_result(result_str)
+        # self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
 
-        # Now validate the inventory
-        inventory.action_done()
-        result_str = domain.requ(request_params)
-        result = self.format_result(result_str)
-        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.groupNum, str(self.picking.id))
+        # # Now validate the inventory
+        # inventory.action_done()
+        # result_str = domain.requ(request_params)
+        # result = self.format_result(result_str)
+        # self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
+        # self.assertEqual(result.groupNum, str(self.picking.id))
 
     def test_resu_assignement(self):
         # FIXME @sylvain please fix all asserts
