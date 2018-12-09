@@ -15,11 +15,14 @@ class StockPicking(models.Model):
 
     @api.multi
     def do_transfer(self):
-        result = super(StockPicking, self).do_transfer()
+        to_do = self.filtered(lambda p: p.state not in ('cancel', 'done'))
+        if not to_do:
+            return True
+        result = super(StockPicking, to_do).do_transfer()
         picking_type_out = self.env.ref('stock.picking_type_out')
         if self.env.context.get('skip_pdf_gen'):
             return result
-        for r in self:
+        for r in to_do:
             if r.picking_type_id == picking_type_out:
                 r._save_delivery_note()
                 r._send_delivery_note()
