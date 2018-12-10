@@ -111,20 +111,6 @@ class StockPicking(models.Model):
         'delivery_round_id': _group_delivery_round,
     }
 
-    @api.multi
-    def _do_round_picking_transfer(self):
-        if self.state not in ('assigned', 'partially_available'):
-            return
-        for pack in self.pack_operation_ids:
-            if pack.product_qty > 0:
-                pack.qty_done = pack.product_qty
-                for plot in pack.pack_lot_ids:
-                    if plot.qty_todo > 0:
-                        plot.qty = plot.qty_todo
-            else:
-                pack.unlink()
-        self.do_transfer()
-
     def _detach_from_round(self):
         self.filtered(
             lambda p: p.state not in ('cancel', 'done')

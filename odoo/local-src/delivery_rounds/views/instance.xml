@@ -36,11 +36,14 @@
                                     <div class="col-xs-6 o_kanban_primary_left">
                                         <div class="col-xs-4 btn-toggle">
                                             <a name="toggle_picking_launched" type="object" states="draft,close"><i t-attf-class="oe_inline fa #{record.picking_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}" title="Start/Stop pickings"/></a>
+
+                                            <i class="oe_inline fa fa-spinner fa-truck-loading" states="delivering"/>
+                                            <i class="oe_inline fa fa-print fa-truck-moving" states="done"/>
                                         </div>
                                         <div class="col-xs-4 btn-toggle">
                                             <a name="toggle_partner_locked" type="object" states="draft,close"><i t-attf-class="oe_inline fa #{record.state.raw_value == 'close' ? 'fa-lock' : 'fa-unlock'}" title="Lock/Unlock destinations"/></a>
                                         </div>
-                                        <t t-if="record.state.raw_value == 'delivering' and record.delivery_failure">
+                                        <t t-if="record.state.raw_value == 'delivering' and record.delivery_failure.raw_value">
                                             <div class="col-xs-4 btn-delivery">
 
                                                 <a type="open"><i class="oe_inline fa fa-exclamation-triangle" title="Errors during delivery"/></a>
@@ -149,7 +152,7 @@
                     <button name="button_resetdraft" type="object" string="Reset to Draft" states="close,done"/>
                     <button name="button_resetpending" type="object" string="Reset to Anticipated" states="draft"/>
                     <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" readonly="1"/>
+                    <field name="state" widget="statusbar" clickable="True"/>
 
                 </header>
                 <sheet>

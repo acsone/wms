@@ -151,15 +151,11 @@ class TestInstancePickingState(SavepointCase):
         self.delivery_round_1._assign_pickings(ship1)
         self.assertEqual(ship1.state, 'assigned')
         icust = self.delivery_round_1.instance_customer_ids
-        pstate = self.env['round.instance.picking.state'].create({
-            'picking_id': ship1.id,
-            'instance_customer_id': icust.id,
-        })
 
         # for the test, we run it in the same transaction
-        pstate.deliver(new_cr=False)
-        self.assertEqual(pstate.state, 'done')
-        self.assertEqual(pstate.picking_id.state, 'done')
+        icust._deliver_job()
+        self.assertEqual(icust.delivered, True)
+        self.assertEqual(ship1.state, 'done')
 
     def test_round_fully_delivered(self):
         """Round goes from delivering to done"""
@@ -181,8 +177,8 @@ class TestInstancePickingState(SavepointCase):
         with self.mock_with_delay() as (__, __):
             self.delivery_round_1.button_deliver()
 
-        pstates = self.delivery_round_1.mapped(
-            'instance_customer_ids.picking_state_ids'
+        icusts = self.delivery_round_1.mapped(
+            'instance_customer_ids'
         )
 
         # we don't care about the details if it is really
@@ -193,11 +189,11 @@ class TestInstancePickingState(SavepointCase):
         ship2.state = 'done'
 
         # for the test, we run it in the same transaction
-        pstates[0].deliver(new_cr=False)
+        icusts[0]._deliver_job()
         self.delivery_round_1.recheck_delivery_state()
         self.assertEqual(self.delivery_round_1.state, 'delivering')
 
-        pstates[1].deliver(new_cr=False)
+        icusts[1]._deliver_job()
         self.delivery_round_1.recheck_delivery_state()
         self.assertEqual(self.delivery_round_1.state, 'done')
 
@@ -207,89 +203,4 @@ class TestInstancePickingState(SavepointCase):
                 'instance_customer_ids.picking_ids'
             ).ids),
             {pick1.id, ship1.id, ship2.id}
-        )
-
-    def test_delivered_compute_search(self):
-        ship1 = self._create_picking_out()
-        partner2 = self.env['res.partner'].create({
-            'name': 'Unittest partner 2',
-            'ref': '12344566777878',
-        })
-        ship2 = self._create_picking_out(partner=partner2)
-        partner3 = self.env['res.partner'].create({
-            'name': 'Unittest partner 3',
-            'ref': '12344566777878',
-        })
-        ship3 = self._create_picking_out(partner=partner3)
-        pickings = ship1 | ship2 | ship3
-        self.delivery_round_1._assign_pickings(pickings)
-
-        self.assertEqual(self.delivery_round_1.state, 'pending')
-        icust = self.delivery_round_1.instance_customer_ids
-        self.assertEqual(len(icust), 3)
-
-        self.assertTrue(all(not i.delivered for i in icust))
-        self.assertEquals(
-            set(
-                self.env['round.instance.customer'].search(
-                    [
-                        ('delivery_round_id', '=', self.delivery_round_1.id),
-                        ('delivered', '=', True),
-                    ]
-                ).ids
-            ),
-            set([]),
-        )
-
-        with self.mock_with_delay() as (__, __):
-            self.delivery_round_1.button_deliver()
-
-        self.assertTrue(all(not i.delivered for i in icust))
-
-        pstates = self.delivery_round_1.mapped(
-            'instance_customer_ids.picking_state_ids'
-        )
-        pstate0, pstate1, pstate2 = pstates
-
-        pstate0.deliver(new_cr=False)
-        self.assertTrue(pstate0.instance_customer_id.delivered)
-        self.assertEquals(
-            set(
-                self.env['round.instance.customer'].search(
-                    [('delivery_round_id', '=', self.delivery_round_1.id),
-                     ('delivered', '=', True),
-                     ]
-                ).ids
-            ),
-            {pstate0.instance_customer_id.id}
-        )
-
-        pstate1.deliver(new_cr=False)
-        self.assertTrue(pstate1.instance_customer_id.delivered)
-        self.assertEquals(
-            set(
-                self.env['round.instance.customer'].search(
-                    [('delivery_round_id', '=', self.delivery_round_1.id),
-                     ('delivered', '=', True),
-                     ]
-                ).ids
-            ),
-            {pstate0.instance_customer_id.id,
-             pstate1.instance_customer_id.id},
-        )
-
-        pstate2.deliver(new_cr=False)
-        self.assertTrue(pstate2.instance_customer_id.delivered)
-        self.assertEquals(
-            set(
-                self.env['round.instance.customer'].search(
-                    [('delivery_round_id', '=', self.delivery_round_1.id),
-                     ('delivered', '=', True),
-                     ]
-                ).ids
-            ),
-            {pstate0.instance_customer_id.id,
-             pstate1.instance_customer_id.id,
-             pstate2.instance_customer_id.id,
-             },
         )
