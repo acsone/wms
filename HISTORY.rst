@@ -15,6 +15,18 @@ Unreleased
 **Documentation**
 
 
+10.29.14 (2018-12-10)
++++++++++++++++++++++
+
+**Features and Improvements**
+* HOTFIX : Run delivery of rounds in background
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
 10.29.13 (2018-12-09)
 +++++++++++++++++++++
 
