@@ -281,12 +281,14 @@ class RoundInstance(models.Model):
         ric = self.env['round.instance.customer'].search([
             ('delivery_round_id', '=', self.id),
             ('partner_id', '=', customer.id),
-            ('delivered', '!=', True)])
+            ('delivered', '!=', True)],
+            limit=1)
         rank = 0
         if not ric:
             pos = self.env['round.itinerary.position'].search([
                 ('itinerary_id', 'in', self.itinerary_ids.ids),
-                ('partner_id', '=', customer.id)])
+                ('partner_id', '=', customer.id)],
+                limit=1)
             if pos:
                 rank = (pos.sequence + pos.itinerary_id.sequence*1000) * 1000
             _logger.warn("Partner added on delivery %s", self.id)
