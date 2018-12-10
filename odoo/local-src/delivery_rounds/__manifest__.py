@@ -12,6 +12,7 @@
         'stock',
         'delivery',
         'stock_picking_assignment',
+        'stock_picking_backorder',
         'stock_picking_subcode',
         'stock_picking_sequence',
         'queue_job',

@@ -9,6 +9,7 @@
 
             <xpath expr="//field[@name='customer']/parent::group" position="inside">
                 <field name="is_sale_back_order_accepted"/>
+                <field name="is_sale_back_order_cancel"/>
             </xpath>
 
             <xpath expr="//field[@name='supplier']/parent::group" position="inside">
