@@ -75,9 +75,11 @@
     oca: git@github.com:oca/server-tools.git
     camptocamp: git@github.com:camptocamp/server-tools.git
   merges:
-    - oca 10.0
+    - oca 06d27d494288358b5177101f4441dc498f0c4304
       # fix onchange_helper when more than 3 chained fields in onchange_specs
     - oca refs/pull/1343/head
       # Add warning to base_exception
     - oca refs/pull/1360/head
+      # Fix avoid_quick_create with multiprocess
+    - oca refs/pull/1454/head
   target: *default_target
