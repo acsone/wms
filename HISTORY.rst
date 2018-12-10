@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* Fix a bug with the pharmacy reception (take also pickings with the state waiting)
+
 **Build**
 
 **Documentation**

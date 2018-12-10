@@ -100,8 +100,7 @@ class ReceptionPharmacy(models.TransientModel):
             pickings = pickings.filtered(
                 lambda picking:
                 picking.picking_type_subcode == 'PICK' and
-                picking.state in ('confirmed',
-                                  'partially_available', 'assigned') and
+                picking.state not in ('draft', 'done', 'cancel') and
                 not picking.printed)
             delivery_round = pickings.mapped('delivery_round_id')
             if len(delivery_round) > 1:
