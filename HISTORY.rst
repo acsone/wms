@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1730: Fix report Feuille de route. Adding customer Alycon reference. Changing column header Equip to Mat
+
 **Bugfixes**
 
 **Build**
