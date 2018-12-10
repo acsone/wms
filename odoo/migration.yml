@@ -731,3 +731,8 @@ migration:
           ### local
           - delivery_rounds
           - specific_zetes
+    - version: 10.29.14
+      addons:
+        upgrade:
+          ### local
+          - delivery_rounds
