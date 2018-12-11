@@ -10,6 +10,9 @@ Unreleased
 
 **Bugfixes**
 
+* Change the type of model for the pharmacy reception
+* Fix a bug with the name_search of product.product
+
 **Build**
 
 * ALCYN-1756: Pin pending-merges to prevent unwanted changes
