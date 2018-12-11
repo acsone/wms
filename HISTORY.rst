@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1680: keep the email sent for the fax on the sales' chatter thread
+
 **Bugfixes**
 
 **Build**
