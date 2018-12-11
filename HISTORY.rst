@@ -8,6 +8,11 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1754: keep delivery note emails once sent to keep track of them
+* ALCYN-1754: show delivery note emails in the delivery mail thread
+* ALCYN-1754: send the delivery note email to the first parent having an email
+  address when the recipient does not have one
+
 **Bugfixes**
 
 **Build**

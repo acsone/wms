@@ -66,6 +66,20 @@ class StockPicking(models.Model):
                 'datas': data.encode('base_64')
             })
 
+    def _delivery_note_recipient_ids(self, values):
+        # we could make this global for all emails by using
+        # https://github.com/OCA/social/pull/329
+        partner_ids = values.get('partner_ids', [])
+        partners_with_emails = set()
+        for partner in self.env['res.partner'].sudo().browse(partner_ids):
+            current = partner
+            while current:
+                if current.email:
+                    break
+                current = current.parent_id
+            partners_with_emails.add(current.id or partner.id)
+        return list(partners_with_emails)
+
     @api.multi
     def _send_delivery_note(self):
         """Send the delivery note by email to the customer."""
@@ -78,8 +92,12 @@ class StockPicking(models.Model):
             return
         template = self.env.ref('stock_delivery_note.delivery_note_csv')
         values = template.generate_email(self.id)
-        values['recipient_ids'] = [
-            (4, pid) for pid in values.get('partner_ids', list())]
+        values.update({
+            'recipient_ids': [
+                (4, pid) for pid in self._delivery_note_recipient_ids(values)
+            ],
+            'auto_delete': False,
+        })
         if 'email_from' in values and not values.get('email_from'):
             values.pop('email_from')
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
