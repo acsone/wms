@@ -12,6 +12,7 @@ Unreleased
 
 * Change the type of model for the pharmacy reception
 * Fix a bug with the name_search of product.product
+* Fix a bug with the wizard to "put in pack"
 
 **Build**
 
