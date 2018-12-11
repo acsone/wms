@@ -171,14 +171,16 @@ class TestInstancePickingState(SavepointCase):
 
         icusts[1]._deliver_job()
         self.delivery_round_1.recheck_delivery_state()
-        # FIXME
-        # self.assertEqual(self.delivery_round_1.state, 'done')
+        self.assertEqual(self.delivery_round_1.state, 'delivering')
+
+        icusts[2]._deliver_job()
+        self.delivery_round_1.recheck_delivery_state()
+        self.assertEqual(self.delivery_round_1.state, 'done')
 
         # pick2 and ship3 are not done so should be removed from the round
-        # FIXME
-        # self.assertEqual(
-        #     set(self.delivery_round_1.mapped(
-        #         'instance_customer_ids.picking_ids'
-        #     ).ids),
-        #     {pick1.id, ship1.id, ship2.id}
-        # )
+        self.assertEqual(
+            set(self.delivery_round_1.mapped(
+                'instance_customer_ids.picking_ids'
+            ).ids),
+            {pick1.id, ship1.id, ship2.id}
+        )

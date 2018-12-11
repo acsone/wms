@@ -741,3 +741,4 @@ migration:
         upgrade:
           ### local
           - specific_stock
+          - specific_report
