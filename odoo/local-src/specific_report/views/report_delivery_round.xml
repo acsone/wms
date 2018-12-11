@@ -197,78 +197,80 @@
                                     </td>
                                     <t t-set="index" t-value="index + 1"/>
                                 </tr>
+
+                                <tr>
+                                  <td colspan="4" class="active">Total number of box(es)</td>
+                                  <td>
+                                    <span t-esc="int(total_medoc_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_cold_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_food_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_mat_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_human_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_total_box)" class="pull-right"/>
+                                  </td>
+                                  <td class="active"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="4" class="active">Total number of unit(s)</td>
+                                  <td>
+                                    <span t-esc="int(total_medoc_unit)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_cold_unit)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_food_unit)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_mat_unit)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_human_unit)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_total_unit)" class="pull-right"/>
+                                  </td>
+                                  <td class="active"></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="4" class="active">Total number of parcel(s)</td>
+                                  <td>
+                                    <span t-esc="int(total_medoc_unit + total_medoc_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_cold_unit + total_cold_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_food_unit + total_food_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_mat_unit + total_mat_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_human_unit + total_human_box)" class="pull-right"/>
+                                  </td>
+                                  <td>
+                                    <span t-esc="int(total_total_unit + total_total_box)" class="pull-right"/>
+                                  </td>
+                                  <td class="active"></td>
+                                </tr>
+
                             </tbody>
-                            <tfoot>
-                              <tr>
-                                <td colspan="4" class="active">Total number of box(es)</td>
-                                <td>
-                                  <span t-esc="int(total_medoc_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_cold_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_food_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_mat_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_human_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_total_box)" class="pull-right"/>
-                                </td>
-                                <td class="active"></td>
-                              </tr>
-                              <tr>
-                                <td colspan="4" class="active">Total number of unit(s)</td>
-                                <td>
-                                  <span t-esc="int(total_medoc_unit)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_cold_unit)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_food_unit)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_mat_unit)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_human_unit)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_total_unit)" class="pull-right"/>
-                                </td>
-                                <td class="active"></td>
-                              </tr>
-                              <tr>
-                                <td colspan="4" class="active">Total number of parcel(s)</td>
-                                <td>
-                                  <span t-esc="int(total_medoc_unit + total_medoc_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_cold_unit + total_cold_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_food_unit + total_food_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_mat_unit + total_mat_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_human_unit + total_human_box)" class="pull-right"/>
-                                </td>
-                                <td>
-                                  <span t-esc="int(total_total_unit + total_total_box)" class="pull-right"/>
-                                </td>
-                                <td class="active"></td>
-                              </tr>
-                            </tfoot>
                         </table>
                     </div>
+
                 </div>
+
             </t>
         </t>
     </template>
