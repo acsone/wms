@@ -13,6 +13,8 @@ Unreleased
 **Bugfixes**
 * ALCYN-1749: propagate the option to prevent quick create on views to all workers in multiprocess
 
+* Fix a bug with the pharmacy reception (take also pickings with the state waiting)
+
 **Build**
 
 **Documentation**

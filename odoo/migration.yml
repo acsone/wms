@@ -740,4 +740,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_stock
           - specific_report
