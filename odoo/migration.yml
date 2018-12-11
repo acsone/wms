@@ -742,3 +742,4 @@ migration:
           ### local
           - specific_stock
           - specific_report
+    - version: 10.29.16
