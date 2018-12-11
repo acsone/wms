@@ -737,14 +737,10 @@ migration:
           ### local
           - delivery_rounds
     - version: 10.29.15
-      addons:
-        upgrade:
-          ### local
-          - specific_stock
-          - specific_report
     - version: 10.29.16
       addons:
         upgrade:
           ### local
           - specific_stock
+          - specific_report
           - specific_print

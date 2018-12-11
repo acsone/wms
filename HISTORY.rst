@@ -8,17 +8,32 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.16 (2018-12-11)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1680: keep the email sent for the fax on the sales' chatter thread
 * ALCYN-1754: keep delivery note emails once sent to keep track of them
 * ALCYN-1754: show delivery note emails in the delivery mail thread
 * ALCYN-1754: send the delivery note email to the first parent having an email
   address when the recipient does not have one
+* ALCYN-1730: Fix report Feuille de route. Adding customer Alycon reference. Changing column header Equip to Mat
 
 **Bugfixes**
 
 * Change the type of model for the pharmacy reception
 * Fix a bug with the name_search of product.product
 * Fix a bug with the wizard to "put in pack"
+* ALCYN-1749: propagate the option to prevent quick create on views to all workers in multiprocess
+* Fix a bug with the pharmacy reception (take also pickings with the state waiting)
 
 **Build**
 
@@ -30,19 +45,7 @@ Unreleased
 10.29.15 (2018-12-11)
 +++++++++++++++++++++
 
-**Features and Improvements**
-
-* ALCYN-1730: Fix report Feuille de route. Adding customer Alycon reference. Changing column header Equip to Mat
-
-**Bugfixes**
-* ALCYN-1749: propagate the option to prevent quick create on views to all workers in multiprocess
-
-* Fix a bug with the pharmacy reception (take also pickings with the state waiting)
-
-**Build**
-
-**Documentation**
-
+Moved to 10.29.16
 
 10.29.14 (2018-12-10)
 +++++++++++++++++++++
