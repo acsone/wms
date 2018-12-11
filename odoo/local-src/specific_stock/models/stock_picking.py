@@ -5,6 +5,7 @@
 from datetime import date
 
 from odoo import models, api, fields, _
+from odoo.tools.safe_eval import safe_eval
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.exceptions import UserError
 
@@ -108,14 +109,25 @@ class StockPicking(models.Model):
         operations_total = sum(
             x.qty_done for x in pick.pack_operation_ids
             if x.qty_done > 0 and (not x.result_package_id))
-        if operations_total:
-            wizard = self.env.ref('specific_stock.put_in_pack_helper_action')
-            if pick.picking_type_id == self.env.ref(
-                    '__setup__.stock_picking_type_ali'):
-                wizard.context = "{'default_nbr_packages': %s}"\
-                    % operations_total
-            return wizard.read()[0]
+
+        # A picking must be "put in pack" to be validated
         self.write({'is_put_in_pack_done': True})
+
+        if not operations_total:
+            return
+
+        wizard = self.env.ref('specific_stock.put_in_pack_helper_action')
+        wizard_values = wizard.read()[0]
+
+        # If the user pick in the aliment, we need to set the number of
+        # packages to the picked qty. Other the number of packages equals 0
+        pick_ali = self.env.ref('__setup__.stock_picking_type_ali')
+        wizard_context = safe_eval(wizard_values.get('context', '{}'))
+        if pick.picking_type_id == pick_ali:
+            wizard_context['default_nbr_packages'] = int(operations_total)
+        wizard_values['context'] = wizard_context
+
+        return wizard_values
 
     @api.multi
     def put_in_pack(self):

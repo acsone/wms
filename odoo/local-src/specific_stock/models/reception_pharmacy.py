@@ -8,7 +8,7 @@ from odoo.exceptions import UserError, ValidationError
 import odoo.addons.decimal_precision as dp
 
 
-class ReceptionPharmacy(models.TransientModel):
+class ReceptionPharmacy(models.Model):
     _name = 'reception.pharmacy'
     _rec_name = 'date'
 
@@ -115,7 +115,7 @@ class ReceptionPharmacy(models.TransientModel):
         self.state = 'done'
 
 
-class ReceptionPharmacyLine(models.TransientModel):
+class ReceptionPharmacyLine(models.Model):
     _name = 'reception.pharmacy.line'
     _rec_name = 'wizard_id'
 

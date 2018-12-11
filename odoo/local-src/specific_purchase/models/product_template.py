@@ -96,6 +96,9 @@ class ProductProduct(models.Model):
         if not args:
             args = []
 
+        if not limit:
+            limit = 100
+
         result = super(ProductProduct, self).name_search(
             name=name, args=args, operator=operator, limit=limit)
 

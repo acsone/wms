@@ -743,3 +743,8 @@ migration:
           - specific_stock
           - specific_report
     - version: 10.29.16
+      addons:
+        upgrade:
+          ### local
+          - specific_stock
+          - specific_print
