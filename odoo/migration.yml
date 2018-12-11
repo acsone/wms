@@ -736,3 +736,8 @@ migration:
         upgrade:
           ### local
           - delivery_rounds
+    - version: 10.29.15
+      addons:
+        upgrade:
+          ### local
+          - specific_report
