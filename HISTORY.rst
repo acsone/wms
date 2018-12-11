@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1705: Add the canceled quantity in the sale order line view of a product
+
 **Bugfixes**
 
 **Build**
