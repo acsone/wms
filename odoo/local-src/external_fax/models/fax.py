@@ -82,6 +82,7 @@ class Fax(models.Model):
         mail_values = {
             'email_to': self.email_recipient(fax_no),
             'body_html': self.body(),
+            'auto_delete': False,
             }
         email_from = self.email_from
         if email_from:
