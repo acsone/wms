@@ -7,7 +7,7 @@
     oca: git@github.com:OCA/OCB.git
     camptocamp: git@github.com:camptocamp/odoo.git
   merges:
-    - oca 10.0
+    - oca 9643408dabd47ca812f9f6905785227cb6c29d70
     # [FIX] allow defering of parent computation after load call
     - oca refs/pull/601/head
     # [FIX] Return the result of super in the method put_in_pack
@@ -18,7 +18,7 @@
     oca: git@github.com:OCA/account-invoicing.git
     camptocamp: git@github.com:camptocamp/account-invoicing.git
   merges:
-    - oca 10.0
+    - oca 7c0ea204a2863e1739eb7365b94e746dfa98e672
       # [10.0] account_invoice_line_default_account
     - oca refs/pull/351/head
   target: *default_target
@@ -27,7 +27,7 @@
     oca: git@github.com:OCA/account-closing.git
     camptocamp: git@github.com:camptocamp/account-closing.git
   merges:
-    - oca 10.0
+    - oca b258ca4311bf93456c9d201b4d86837a1f9cc8c3
     # [MIG][10.0] account_cutoff_accrual_picking
     - oca refs/pull/73/head
     # [10.0] account_cutoff_accrual_return
@@ -39,14 +39,14 @@
     odoo: git@github.com:odoo/enterprise.git
     camptocamp: git@github.com:camptocamp/enterprise.git
   merges:
-    - odoo 10.0
+    - odoo 21eb4b9ba07e19608c1fdcf209ce02fc73eddfee
   target: *default_target
 ./external-src/queue:
   remotes:
     oca: git@github.com:OCA/queue.git
     camptocamp: git@github.com:camptocamp/queue.git
   merges:
-    - oca 10.0
+    - oca e116cff10c8463f66c866df39c3dfa10b70d522f
       # [10.0] Add identity key on job to allow limiting redundant execution
     - oca refs/pull/66/head
   target: *default_target
@@ -55,7 +55,7 @@
     oca: git@github.com:OCA/web.git
     camptocamp: git@github.com:camptocamp/web.git
   merges:
-    - oca 10.0
+    - oca b7b4a9faefb8acdf5a9fde5e5c0c824146c34c8c
     # [10.0] web_notify: interactive notifications
     - oca refs/pull/970/head
   target: *default_target
@@ -64,7 +64,7 @@
     oca: git@github.com:oca/sale-workflow.git
     camptocamp: git@github.com:camptocamp/sale-workflow.git
   merges:
-    - oca 10.0
+    - oca b365fd08c90bc83e3f5f399d616cd0205dd6068e
       # potential fix for 90 != 100 bug in tests
     - oca refs/pull/671/head
       # [10] sale_triple_discount: Fix tax total on report

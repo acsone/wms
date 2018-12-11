@@ -12,6 +12,8 @@ Unreleased
 
 **Build**
 
+* ALCYN-1756: Pin pending-merges to prevent unwanted changes
+
 **Documentation**
 
 
