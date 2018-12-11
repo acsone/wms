@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1749: propagate the option to prevent quick create on views to all workers in multiprocess
 
 **Build**
 
@@ -21,6 +22,10 @@ Unreleased
 **Bugfixes**
 
 * HOTFIX : Run delivery of rounds in background
+
+**Build**
+
+**Documentation**
 
 
 10.29.13 (2018-12-09)
