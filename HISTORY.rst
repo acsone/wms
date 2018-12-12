@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Change environment ribbon name to "preprod" for integration
+
 **Bugfixes**
 
 **Build**
