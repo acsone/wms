@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1755: Fix subtotal calculation on the delivery slip report
+
 **Build**
 
 **Documentation**
