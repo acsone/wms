@@ -159,6 +159,7 @@ migration:
           - mail_environment
           - onchange_helper
           - server_environment
+          - server_environment_ir_config_parameter
           # oca/stock-logistics-warehouse
           - stock_available_immediately
           - stock_mts_mto_rule
