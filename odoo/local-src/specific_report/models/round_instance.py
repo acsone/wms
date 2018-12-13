@@ -115,7 +115,9 @@ class RoundInstance(models.Model):
             shipping_values[shipping.partner_id] = partner_value
 
         ordered_values = OrderedDict(
-            sorted(shipping_values.items(), key=lambda t: t[1].get('rank'))
+            sorted(shipping_values.items(),
+                   key=lambda t: t[1].get('rank'),
+                   reverse=True)
         )
         result = []
         for partner, values in ordered_values.iteritems():

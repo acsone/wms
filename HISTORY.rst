@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1726: reverse list of customers on delivery round report
+
 **Build**
 
 **Documentation**
