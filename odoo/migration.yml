@@ -760,3 +760,4 @@ migration:
         upgrade:
           ### local
           - account_invoice_sent
+          - stock_reassign_auto

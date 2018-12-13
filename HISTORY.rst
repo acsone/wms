@@ -31,6 +31,7 @@ Unreleased
 * Change environment ribbon name to "preprod" for integration
 * ALCYN-1582: add 'base' amount field for taxes on supplier invoices (was added manually already)
 * Add separate picking zone for Human products (AFMPS requirement)
+* Extend automatic reassignment to canceled moved and priority change
 
 **Bugfixes**
 

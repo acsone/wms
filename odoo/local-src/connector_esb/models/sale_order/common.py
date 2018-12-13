@@ -7,6 +7,7 @@ import logging
 from psycopg2 import IntegrityError
 from odoo import _, api, exceptions, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import identity_exact
 
 _logger = logging.getLogger(__name__)
 
@@ -196,3 +197,25 @@ class SaleOrder(models.Model):
                 lines.append(sol)
 
         return lines
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    @api.multi
+    def action_assign(self, no_prepare=False):
+        res = super(StockMove, self).action_assign(no_prepare=no_prepare)
+
+        # Sale order that need to be resend to the esb !
+        # Because their back order may have changed
+        # Testing for order_id existance has it failed on some Travis tests
+        updated_sale_order = self.mapped('order_id')
+        EXPORT_DESC = 'Export sale order {} to ESB webservice (bo changed)'
+        for so in updated_sale_order:
+            if not so.esb_is_exportable():
+                continue
+            so.with_delay(
+                description=EXPORT_DESC.format(so.name),
+                identity_key=identity_exact,
+            ).esb_export_record()
+        return res
