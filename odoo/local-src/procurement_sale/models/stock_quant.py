@@ -24,13 +24,16 @@ class StockQuant(models.Model):
             # ensure the delivery orders exist when performing this check.
             locations = self.env['stock.location'].search(
                 [('usage', '=', 'customer')])
-            previous_moves = move.search([
+            previous_moves_domain = [
                 ('product_id', '=', move.product_id.id),
                 ('state', 'in', ['waiting', 'confirmed', 'assigned']),
                 ('date', '<', move.date),
                 ('priority', '>=', move.priority),
                 ('location_dest_id', 'in', locations.ids),
-                ])
+                ]
+            if move.restrict_lot_id:
+                previous_moves_domain.append(('restrict_lot_id', '=', move.restrict_lot_id.id))
+            previous_moves = move.search(previous_moves_domain)
             blocked_qty = 0
             for pm in previous_moves:
                 if pm.location_id.usage in ('view', 'internal'):
