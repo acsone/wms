@@ -745,3 +745,7 @@ migration:
           - specific_stock
           - specific_report
           - specific_print
+    - version: 10.29.17
+      operations:
+        pre:
+          - anthem songs.upgrade.update_10_29_17::reload_account_invoice_view

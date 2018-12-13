@@ -28,6 +28,9 @@
                 <field name="date" domain="[('state', '=', 'draft'), ('company_id', '=', company_id)]" groups="account.group_account_user"/>
             </field>
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="replace"/>
+            <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']" position="after">
+                <field name="base"/>
+            </xpath>
         </field>
     </record>
 
