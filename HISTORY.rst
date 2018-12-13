@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * Change environment ribbon name to "preprod" for integration
+* ALCYN-1582: add 'base' amount field for taxes on supplier invoices (was added manually already)
 
 **Bugfixes**
 
