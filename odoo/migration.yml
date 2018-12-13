@@ -745,3 +745,4 @@ migration:
           - specific_stock
           - specific_report
           - specific_print
+    - version: 10.29.17

@@ -13,6 +13,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1726: reverse list of customers on delivery round report
+* Correctly catch an error with Zetes to avoid the crash of the voice console
 
 **Build**
 

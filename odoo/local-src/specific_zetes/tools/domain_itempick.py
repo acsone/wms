@@ -171,8 +171,7 @@ class Itempick(DomainInterface):
                 pack_lot._skip_lot()
             except Exception as e:
                 _logger.error(str(e))
-                params.log(picking_id=pack_op.picking_id.id,
-                           operation_id=pack_operation_id,
+                params.log(picking_id=picking_id,
                            exception=e)
 
                 result = Parameters(self, action='resp')
