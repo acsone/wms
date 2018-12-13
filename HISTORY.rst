@@ -10,10 +10,12 @@ Unreleased
 
 * Change environment ribbon name to "preprod" for integration
 * ALCYN-1582: add 'base' amount field for taxes on supplier invoices (was added manually already)
+* Add separate picking zone for Human products (AFMPS requirement)
 
 **Bugfixes**
 
 * ALCYN-1726: reverse list of customers on delivery round report
+* Take care of the restricted lot in the reservation (solving reservation of human products)
 
 **Build**
 

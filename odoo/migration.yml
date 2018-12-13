@@ -749,3 +749,8 @@ migration:
       operations:
         pre:
           - anthem songs.upgrade.update_10_29_17::reload_account_invoice_view
+      addons:
+        upgrade:
+          ### local
+          - delivery_rounds
+          - delivery_rounds_alcyon
