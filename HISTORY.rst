@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Refactor refill report (arrange, reassort) for real-time computation
+
 **Bugfixes**
 
 **Build**

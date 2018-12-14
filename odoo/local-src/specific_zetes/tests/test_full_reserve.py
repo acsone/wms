@@ -89,14 +89,14 @@ class TestFullReserve(ZetesReserveTest):
         ##########
         # Step 3 #
         ##########
-        model_name = 'report.stock.quant.bylocation.reserve'
+        model_name = 'report.stock.refill.reassort'
         report = self.env[model_name].search(
             [('product_id', '=', self.product_1.id)],
             limit=1
         )
         self.assertTrue(len(report))
 
-        picking = report.create_reserve_picking()
+        picking = report.create_picking()
         self.assertEqual(len(picking.pack_operation_product_ids), 1)
         pack_op = picking.pack_operation_product_ids
 
@@ -181,14 +181,14 @@ class TestFullReserve(ZetesReserveTest):
         ##########
         # Step 6 #
         ##########
-        model_name = 'report.stock.quant.bylocation.reserve'
+        model_name = 'report.stock.refill.reassort'
         report = self.env[model_name].search(
             [('product_id', '=', self.product_2.id)],
             limit=1
         )
         self.assertTrue(len(report))
 
-        picking_2 = report.create_reserve_picking()
+        picking_2 = report.create_picking()
         self.assertEqual(len(picking.pack_operation_product_ids), 1)
 
         request_picking_params = Parameters(assignement_obj)

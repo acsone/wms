@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import fields, models, api, _
+from odoo import fields, models, _
 from odoo.exceptions import Warning
 
 
@@ -50,27 +50,6 @@ class StockLocation(models.Model):
               AND p.id in %s""", (tuple(self.ids),))
         res = self._cr.fetchall()
         return self.browse(map(lambda x: x[0], res))
-
-    def _get_children(self):
-        """ This method return the list of all children locations excluding self
-        """
-        self._cr.execute("""
-            SELECT distinct c.id
-            FROM """ + self._table + ' p, ' + self._table + """ c
-            WHERE c.parent_left > p.parent_left
-              AND c.parent_right < p.parent_right
-              AND p.id in %s""", (tuple(self.ids),))
-        res = self._cr.fetchall()
-        return self.browse(map(lambda x: x[0], res))
-
-    @api.multi
-    def write(self, vals):
-        """ Update kind of all children locations if modified """
-        res = super(StockLocation, self).write(vals)
-        if vals.get('kind'):
-            children = self._get_children()
-            super(StockLocation, children).write({'kind': vals['kind']})
-        return res
 
     def get_putaway_strategy(self, product):
         location = self
