@@ -15,6 +15,7 @@ Unreleased
 
 * ALCYN-1726: reverse list of customers on delivery round report
 * ALCYN-1760: Fix delivery note csv so no quantity are missing compared to the pdf version.
+* ALCYN-1766: Change Gescgr to 1 for Psychotrope so they are not flagged as medicament and will be visible on Magento
 
 **Build**
 
