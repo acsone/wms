@@ -16,6 +16,7 @@ Unreleased
 
 * ALCYN-1726: reverse list of customers on delivery round report
 * Take care of the restricted lot in the reservation (solving reservation of human products)
+* ALCYN-1766: Change Gescgr to 1 for Psychotrope so they are not flagged as medicament and will be visible on Magento
 
 **Build**
 
