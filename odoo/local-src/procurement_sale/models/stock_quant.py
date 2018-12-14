@@ -32,7 +32,8 @@ class StockQuant(models.Model):
                 ('location_dest_id', 'in', locations.ids),
                 ]
             if move.restrict_lot_id:
-                previous_moves_domain.append(('restrict_lot_id', '=', move.restrict_lot_id.id))
+                previous_moves_domain.append(
+                    ('restrict_lot_id', '=', move.restrict_lot_id.id))
             previous_moves = move.search(previous_moves_domain)
             blocked_qty = 0
             for pm in previous_moves:
