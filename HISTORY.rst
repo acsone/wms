@@ -14,8 +14,11 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1755: Fix subtotal calculation on the delivery slip report
 * ALCYN-1726: reverse list of customers on delivery round report
 * Take care of the restricted lot in the reservation (solving reservation of human products)
+* Correctly catch an error with Zetes to avoid the crash of the voice console
+* ALCYN-1760: Fix delivery note csv so no quantity are missing compared to the pdf version.
 * ALCYN-1766: Change Gescgr to 1 for Psychotrope so they are not flagged as medicament and will be visible on Magento
 
 **Build**

@@ -164,7 +164,7 @@
                                 <span t-field="order_line.price_reduce" t-if="not order or not order.is_consignment"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_subtotal" t-if="not order or not order.is_consignment"/>
+                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-if="not order or not order.is_consignment"/>
                             </td>
                         </tr>
                         <tr t-foreach="quants" t-as="quant">
