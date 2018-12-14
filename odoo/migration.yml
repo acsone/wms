@@ -752,4 +752,6 @@ migration:
       addons:
         upgrade:
           ### local
+          - delivery_rounds
+          - delivery_rounds_alcyon
           - specific_report

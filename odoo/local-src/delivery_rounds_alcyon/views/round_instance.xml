@@ -29,6 +29,10 @@
                     <field name="count_picking_done_total_mat" widget="progress" title="Matériel"
                         options="{'current_value': 'count_picking_done_total_mat', 'max_value': 'count_picking_available_total_mat'}"/>
                 </button>
+                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
+                    <field name="count_picking_done_total_pharm" widget="progress" title="Humain"
+                        options="{'current_value': 'count_picking_done_total_pharm', 'max_value': 'count_picking_available_total_pharm'}"/>
+                </button>
             </xpath>
         </field>
     </record>
