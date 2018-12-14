@@ -201,10 +201,16 @@ class StockPicking(models.Model):
         # The product lines
         grouped_lines = self.get_moves_by_order()
         for group in grouped_lines:
-            for move_line in group[1][0]:  # self.move_lines:
+            for move_line in group[1][0]:
                 product = move_line.product_id
                 sol = move_line.order_line_id
                 quants = move_line.get_lots(only_with_lot=False)
+                quants_qty = sum([quant[1] for quant in quants])
+                if quants_qty < move_line.product_qty:
+                    # Sometimes get_lots does not return any quants
+                    # but the quantity of the stock still as to be
+                    # represtented in the delivery note
+                    quants.append(['', move_line.product_qty - quants_qty, ''])
                 vat = sol.tax_id.filtered(
                     lambda r: r.tax_group_id == vat_group)
                 for quant in quants:

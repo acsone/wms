@@ -14,6 +14,7 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1726: reverse list of customers on delivery round report
+* ALCYN-1760: Fix delivery note csv so no quantity are missing compared to the pdf version.
 
 **Build**
 
