@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.17 (2018-12-14)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * Change environment ribbon name to "preprod" for integration
 * ALCYN-1582: add 'base' amount field for taxes on supplier invoices (was added manually already)
 * Add separate picking zone for Human products (AFMPS requirement)
