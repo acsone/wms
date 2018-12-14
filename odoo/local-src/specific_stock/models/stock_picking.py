@@ -91,7 +91,12 @@ class StockPicking(models.Model):
         return result
 
     @api.multi
-    @api.constrains('printed')
+    def write(self, vals):
+        res = super(StockPicking, self).write(vals)
+        self._propagate_printed()
+        return res
+
+    @api.multi
     def _propagate_printed(self):
         # When a picking is printed, it cannot be completed
         # anymore (see module stock_groupbypartner).
