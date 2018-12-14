@@ -132,7 +132,7 @@ class ProductExportMapper(Component):
             grp_ref = '7'
         # Psychotrop annexe III
         if subgrp_ref == '30':
-            grp_ref = '8'
+            grp_ref = '1'
         return {
             'Gescgr': grp_ref if grp_ref.isdigit() else '0',
             'Gescsg': subgrp_ref if subgrp_ref.isdigit() else '0',

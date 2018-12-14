@@ -8,9 +8,14 @@ Unreleased
 
 **Features and Improvements**
 
+* Change environment ribbon name to "preprod" for integration
+* ALCYN-1582: add 'base' amount field for taxes on supplier invoices (was added manually already)
+
 **Bugfixes**
 
 * ALCYN-1755: Fix subtotal calculation on the delivery slip report
+* ALCYN-1726: reverse list of customers on delivery round report
+* ALCYN-1766: Change Gescgr to 1 for Psychotrope so they are not flagged as medicament and will be visible on Magento
 
 **Build**
 

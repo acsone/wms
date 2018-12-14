@@ -159,6 +159,7 @@ migration:
           - mail_environment
           - onchange_helper
           - server_environment
+          - server_environment_ir_config_parameter
           # oca/stock-logistics-warehouse
           - stock_available_immediately
           - stock_mts_mto_rule
@@ -745,6 +746,9 @@ migration:
           - specific_report
           - specific_print
     - version: 10.29.17
+      operations:
+        pre:
+          - anthem songs.upgrade.update_10_29_17::reload_account_invoice_view
       addons:
         upgrade:
           ### local
