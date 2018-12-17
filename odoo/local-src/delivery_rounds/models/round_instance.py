@@ -769,8 +769,12 @@ class RoundInstanceCustomer(models.Model):
             # as failed, users will see it on the round and be able
             # to retry to deliver manually.
             self.delivery_error = unicode(err)
-            # other kind of exception should still make the job fail
-            # so we can discover them and fix them
+        except Exception as err:
+            _logger.exception(
+                'Failed to deliver a shipping during a delivery round '
+                'with an unexpected error: %s', unicode(err)
+            )
+            self.delivery_error = _('Unexpected error (%s)') % (unicode(err),)
         else:
             self.write({
                 'delivery_error': '',
