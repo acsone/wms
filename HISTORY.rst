@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
+* ALCYN-1761: generate and send pdf invoices in background
 
 **Bugfixes**
 
