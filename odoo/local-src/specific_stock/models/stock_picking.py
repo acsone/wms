@@ -91,23 +91,6 @@ class StockPicking(models.Model):
         return result
 
     @api.multi
-    def write(self, vals):
-        res = super(StockPicking, self).write(vals)
-        self._propagate_printed()
-        return res
-
-    @api.multi
-    def _propagate_printed(self):
-        # When a picking is printed, it cannot be completed
-        # anymore (see module stock_groupbypartner).
-        # We need to propagate this rule to all pickings of the delivery round.
-        if 'stop_propagate_printed' not in self.env.context:
-            self.filtered('printed')\
-                .mapped('delivery_round_id.picking_ids')\
-                .with_context(stop_propagate_printed=True)\
-                .write({'printed': True})
-
-    @api.multi
     def button_put_in_pack(self):
         self.ensure_one()
         pick = self
