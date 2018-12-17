@@ -96,11 +96,6 @@ class AccountInvoiceSent(models.TransientModel):
         return act_close
 
     @api.multi
-    def button_email_and_print(self):
-        self.button_email()
-        return self.button_print()
-
-    @api.multi
     def button_mark_only(self):
         act_close = {'type': 'ir.actions.act_window_close'}
         active_ids = self._context.get('active_ids', [])

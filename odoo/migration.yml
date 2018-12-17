@@ -755,3 +755,8 @@ migration:
           - delivery_rounds
           - delivery_rounds_alcyon
           - specific_report
+    - version: 10.29.17
+      addons:
+        upgrade:
+          ### local
+          - account_invoice_sent
