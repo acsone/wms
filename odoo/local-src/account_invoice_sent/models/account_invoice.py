@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models, fields, _
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import job, related_action
 
 
 class AccountInvoice(models.Model):
@@ -46,6 +46,7 @@ class AccountInvoice(models.Model):
         )
 
     @job(default_channel='root.background.invoice')
+    @related_action(action='related_action_open_invoice')
     def _generate_send_invoice(self, sending_method):
         """Generate jobs to send invoices"""
         invoices = self.exists()
@@ -55,6 +56,7 @@ class AccountInvoice(models.Model):
             getattr(invoice.with_delay(), method_name)()
 
     @job(default_channel='root.background.invoice')
+    @related_action(action='related_action_open_invoice')
     def _send_invoice_email(self):
         """Generate and send an invoice by email"""
         # we need to apply the filter because the state may have
