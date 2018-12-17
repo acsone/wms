@@ -11,7 +11,7 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         report_query = """
         SELECT report.id
-        FROM report_stock_refill_reassert AS report
+        FROM report_stock_refill_reassort AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
