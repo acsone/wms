@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1767: Fix delivery note csv for product with no vat info on sale order, look for vat in product directly.
+
 **Build**
 
 **Documentation**
