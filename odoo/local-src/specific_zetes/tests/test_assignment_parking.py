@@ -63,12 +63,12 @@ class TestAssignemnt(ZetesParkingTest):
             ON stock_location.picking_zone_id = picking_zone.id
         WHERE report.product_id = %s
           AND picking_zone.code = %s
-          -- AND NOT EXISTS (SELECT 1
-          --                 FROM stock_inventory_line AS sil
-          --                   INNER JOIN stock_inventory AS si
-          --                     ON sil.inventory_id = si.id
-          --                 WHERE si.state = 'confirm'
-          --                 AND sil.location_id = report.location_id)
+          AND NOT EXISTS (SELECT 1
+                          FROM stock_inventory_line AS sil
+                            INNER JOIN stock_inventory AS si
+                              ON sil.inventory_id = si.id
+                          WHERE si.state = 'confirm'
+                          AND sil.location_id = report.location_id)
         LIMIT 1
         """
 
