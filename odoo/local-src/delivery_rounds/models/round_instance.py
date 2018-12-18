@@ -612,11 +612,6 @@ class RoundInstance(models.Model):
                 continue
 
             if all(ic.delivered for ic in record.instance_customer_ids):
-                # when we transition from not delivered to delivered,
-                # we detach the pickings that could not be done
-                for icust in record.instance_customer_ids:
-                    icust.mapped('picking_ids')._detach_from_round()
-                    icust._remove_if_empty()
                 # Close delivery round
                 record.button_done()
                 self.env.user.notify_info(
@@ -795,8 +790,8 @@ class RoundInstanceCustomer(models.Model):
             self.env.context.get('job_uuid')
             and not config['test_enable']
         )
-        with self._new_env(new_cr=not config['test_enable']) as new_env, \
-                self._handle_delivery_error():
+        with self._handle_delivery_error(), \
+                self._new_env(new_cr=not config['test_enable']) as new_env:
             # change the env to the new env so everything happening
             # will be rollbacked by the context manager in case of error
             shippings = new_env['stock.picking'].search(
@@ -819,6 +814,9 @@ class RoundInstanceCustomer(models.Model):
                         pack.unlink()
                 shipping.do_transfer()
 
+            # detach the pickings that could not be done
+            self.with_env(new_env).mapped('picking_ids')._detach_from_round()
+
         if self.delivery_round_id.state == 'delivering':
             self.delivery_round_id.with_delay().recheck_delivery_state()
 
@@ -837,6 +835,9 @@ class RoundInstanceCustomer(models.Model):
                     _('Error when delivering %s: %s') %
                     (self.display_name, self.delivery_error)
                 )
+        # If this customer do not have any linked picking, remove it
+        # We perform this step at last to prevent Missing record error
+        self._remove_if_empty()
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
