@@ -5,7 +5,7 @@
 
 def update_translations(ctx):
     modules_to_update = ['specific_report']
-    langs_to_update = ['fr_BE','nl_BE']
+    langs_to_update = ['fr_BE', 'nl_BE']
     IrModuleModule = ctx.env['ir.module.module']
     modules = IrModuleModule.search([('name', 'in', modules_to_update)])
     modules.with_context(overwrite=True).update_translations(langs_to_update)
