@@ -9,6 +9,8 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* BIZ-2640: Customer Reference on invoice
+* ALCYN-1750: Review Layout invoice to add antibiotics
 
 **Build**
 

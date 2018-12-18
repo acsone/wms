@@ -37,12 +37,11 @@ class AccountInvoice(models.Model):
         compute='_compute_total_amounts'
     )
 
-    invoice_antibiotics_ids = fields.Many2many('account.invoice.tax',
-                                               compute='_compute_total_amounts')
+    invoice_antibiotics_ids = fields.Many2many(
+        'account.invoice.tax', compute='_compute_total_amounts')
     amount_antibiotics = fields.Monetary(
         compute='_compute_total_amounts'
     )
-
 
     invoice_contribution_ids = fields.Many2many(
         'account.invoice.tax',
