@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* ProgrammingError: syntax error at or near ")"
 
 **Build**
 
