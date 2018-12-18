@@ -768,6 +768,24 @@ def import_journal_items(ctx, customer=False, supplier=False):
 
 
 @anthem.log
+def post_journal_entries(ctx):
+    """ Post journal entries created by the customer/supplier balance """
+    query = """
+    SELECT am.id
+    FROM account_move AS am
+        INNER JOIN ir_model_data AS imd
+            ON imd.res_id = am.id AND imd.model = 'account.move'
+    WHERE am.state = 'draft'
+    AND imd.name ILIKE 'account_move_initial_import_%';
+    """
+    ctx.env.cr.execute(query)
+    am_ids = [x[0] for x in ctx.env.cr.fetchall()]
+
+    moves = ctx.env['account.move'].browse(am_ids)
+    moves.post()
+
+
+@anthem.log
 def import_product_name_fr(ctx):
     """ Importing product name in french"""
     ProductTemplate = ctx.env['product.template'].with_context(lang='fr_BE')
