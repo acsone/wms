@@ -11,13 +11,12 @@ class TestCatchweightReserve(ZetesReserveTest):
 
         report_query = """
         SELECT report.id
-        FROM report_stock_quant_bylocation_reserve AS report
+        FROM report_stock_refill_reassort AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         WHERE report.product_id = %s
           AND picking_zone.code = %s
-        ORDER BY report.refill_priority
         LIMIT 1
         """
         self.env.cr.execute(report_query, (self.product_1.id,
@@ -27,10 +26,10 @@ class TestCatchweightReserve(ZetesReserveTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.quant.bylocation.reserve'
+        model_name = 'report.stock.refill.reassort'
         report = self.env[model_name].browse(report_id)
         # Create the picking
-        self.picking_reserve = report.create_reserve_picking()
+        self.picking_reserve = report.create_picking()
 
     def test_01_resu_catchweight(self):
         """

@@ -806,6 +806,8 @@ class RoundInstanceCustomer(models.Model):
                     ('delivery_round_customer_id', '=', self.id),
                 ]
             )
+            if self.partner_id.is_sale_back_order_cancel:
+                shippings = shippings.with_context(cancel_backorder=True)
             for shipping in shippings:
                 for pack in shipping.pack_operation_ids:
                     if pack.product_qty > 0:

@@ -11,13 +11,12 @@ class TestItemmoveParking(ZetesParkingTest):
 
         report_query = """
         SELECT report.id
-        FROM report_stock_quant_bylocation AS report
+        FROM report_stock_refill_arrange AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
         WHERE report.product_id = %s
           AND picking_zone.code = %s
-        ORDER BY report.refill_priority
         LIMIT 1
         """
         self.env.cr.execute(report_query, (self.product_1.id,
@@ -27,10 +26,10 @@ class TestItemmoveParking(ZetesParkingTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.quant.bylocation'
+        model_name = 'report.stock.refill.arrange'
         report = self.env[model_name].browse(report_id)
         # Create the picking
-        self.picking_parking = report.create_parking_picking()
+        self.picking_parking = report.create_picking()
 
     def test_requ_itemmove(self):
         """

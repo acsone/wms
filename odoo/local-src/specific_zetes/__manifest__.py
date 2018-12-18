@@ -13,8 +13,8 @@
     """,
     'depends': [
         'delivery_rounds',
+        'delivery_rounds_refill',
         'stock',
-        'stock_refill',
         'specific_print',
         'specific_data',
         'stock_location',

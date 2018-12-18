@@ -122,14 +122,14 @@ class TestFullParking(ZetesParkingTest):
         ##########
         # Step 3 #
         ##########
-        model_name = 'report.stock.quant.bylocation'
+        model_name = 'report.stock.refill.arrange'
         report = self.env[model_name].search(
             [('product_id', '=', self.product_1.id)],
             limit=1
         )
         self.assertTrue(len(report))
 
-        picking = report.create_parking_picking()
+        picking = report.create_picking()
         self.assertEqual(len(picking.pack_operation_product_ids), 2)
 
         request_picking_params = Parameters(assignement_obj)

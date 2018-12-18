@@ -759,5 +759,15 @@ migration:
       addons:
         upgrade:
           ### local
+          - stock_refill
+          - delivery_rounds_refill
+          - specific_zetes
           - account_invoice_sent
           - stock_reassign_auto
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::create_current_liabilities_accounts
+              - anthem songs.install.data_full::import_customer_journal_items
+              - anthem songs.install.data_full::post_journal_entries
