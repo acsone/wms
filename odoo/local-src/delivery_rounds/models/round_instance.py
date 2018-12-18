@@ -4,12 +4,15 @@
 
 from ast import literal_eval
 import math
+from contextlib import contextmanager, closing
 from datetime import datetime
 from itertools import groupby
 
+import odoo
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError, AccessError
 from odoo.addons.queue_job.job import job
+from odoo.tools import config
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -616,6 +619,10 @@ class RoundInstance(models.Model):
                     icust._remove_if_empty()
                 # Close delivery round
                 record.button_done()
+                self.env.user.notify_info(
+                    _('Delivery Round %s is now completed') %
+                    (self.display_name,)
+                )
 
 
 class RoundInstanceCustomer(models.Model):
@@ -731,22 +738,74 @@ class RoundInstanceCustomer(models.Model):
             # Nothing was picked, all pickings have been disconnected
             raise UserError(_("No picking have been processed yet"))
 
+    @contextmanager
+    def _new_env(self, new_cr=True):
+        with api.Environment.manage():
+            if new_cr:
+                registry = odoo.modules.registry.RegistryManager.get(
+                    self.env.cr.dbname
+                )
+                with closing(registry.cursor()) as cr:
+                    try:
+                        yield self.env(cr=cr)
+                    except Exception:
+                        cr.rollback()
+                        raise
+                    else:
+                        # disable pylint error because this is a valid commit,
+                        # we are in a new env
+                        cr.commit()  # pylint: disable=invalid-commit
+            else:
+                # keep the same env
+                yield self.env
+
+    @contextmanager
+    def _handle_delivery_error(self):
+        try:
+            yield
+        except (ValidationError, UserError, AccessError) as err:
+            # Do nothing on purpose, failed job should not need
+            # user intervention. The record will be marked
+            # as failed, users will see it on the round and be able
+            # to retry to deliver manually.
+            self.delivery_error = unicode(err)
+        except Exception as err:
+            _logger.exception(
+                'Failed to deliver a shipping during a delivery round '
+                'with an unexpected error: %s', unicode(err)
+            )
+            self.delivery_error = _('Unexpected error (%s)') % (unicode(err),)
+        else:
+            self.write({
+                'delivery_error': '',
+                'delivered': True,
+            })
+
     @job(default_channel='root.background.deliver')
     @api.multi
-    def _deliver_job(self, new_cr=True):
+    def _deliver_job(self):
         if not self.exists():
             return
         self.ensure_one()
         if self.delivered:
             return
-        self.env.cr.execute(
-            "SELECT delivered FROM %s WHERE id = %%s FOR UPDATE NOWAIT" %
-            self._table, (self.id, ))
-        self.delivery_error = False
-        shippings = self.picking_ids.filtered(
-            lambda p: p.state in ('assigned', 'partially_available')
-            and p.picking_type_code == 'outgoing')
-        try:
+
+        # when a job is executing, we get this key in the context
+        background = (
+            self.env.context.get('job_uuid')
+            and not config['test_enable']
+        )
+        with self._new_env(new_cr=not config['test_enable']) as new_env, \
+                self._handle_delivery_error():
+            # change the env to the new env so everything happening
+            # will be rollbacked by the context manager in case of error
+            shippings = new_env['stock.picking'].search(
+                [
+                    ('state', 'in', ('assigned', 'partially_available')),
+                    ('picking_type_id.code', '=', 'outgoing'),
+                    ('delivery_round_customer_id', '=', self.id),
+                ]
+            )
             for shipping in shippings:
                 for pack in shipping.pack_operation_ids:
                     if pack.product_qty > 0:
@@ -757,20 +816,25 @@ class RoundInstanceCustomer(models.Model):
                     else:
                         pack.unlink()
                 shipping.do_transfer()
-        except (ValueError, ValidationError, UserError, AccessError) as err:
-            # Do nothing on purpose, failed job should not need
-            # user intervention. The record will be marked
-            # as failed, users will see it on the round and be able
-            # to retry to deliver manually.
-            # TODO find why we have concurrent transaction errors
-            # that appears as failed with a message, should be retried
-            self.delivery_error = unicode(err)
-            # other kind of exception should still make the job fail
-            # so we can discover them and fix them
-        else:
-            self.delivered = True
+
         if self.delivery_round_id.state == 'delivering':
             self.delivery_round_id.with_delay().recheck_delivery_state()
+
+        if self.delivery_error:
+            if background:
+                # write a result to the job
+                message = _(
+                    'Should be delivered manually, could not'
+                    ' deliver because of %s' % (self.delivery_error,)
+                )
+                return message
+            else:
+                # if we raise the error using the normal way, the buttons
+                # on the one2many list stop to work...
+                self.env.user.notify_warning(
+                    _('Error when delivering %s: %s') %
+                    (self.display_name, self.delivery_error)
+                )
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
@@ -778,10 +842,12 @@ class RoundInstanceCustomer(models.Model):
         It is done by creating records of round.instance.picking.state,
         each one will be responsible to deliver a picking.
         """
-        pickings = self.mapped('picking_ids').filtered(
-            lambda p: p.picking_type_code != 'outgoing' and
-            # FIXME: some done moves are send to backorder?
-            p.state in ('partially_available', 'assigned')
+        pickings = self.env['stock.picking'].search(
+            [
+                ('state', 'in', ('assigned', 'partially_available')),
+                ('picking_type_id.code', '!=', 'outgoing'),
+                ('delivery_round_customer_id', 'in', self.ids),
+            ]
         )
         if any(op.qty_done for op in pickings.mapped('pack_operation_ids')):
             raise UserError(_("You cannot deliver when a picking is ongoing"))
@@ -793,7 +859,7 @@ class RoundInstanceCustomer(models.Model):
                 icust.with_delay(
                     description=_(
                         'Deliver customer %s of delivery round %s'
-                    ) % (icust.name_get(),
+                    ) % (icust.display_name,
                          icust.delivery_round_id.complete_name)
                 )._deliver_job()
             else:

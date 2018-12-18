@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import job, related_action
 
 
 class AccountInvoice(models.Model):
@@ -11,6 +11,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     @job(default_channel='root.invoice_validation')
+    @related_action(action='related_action_open_invoice')
     def _job_validate_invoice(self, date_invoice):
         # Reload self as an invoice could have been deleted inbetween
         self = self.search([('id', 'in', self.ids)])

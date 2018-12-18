@@ -10,6 +10,8 @@
     'category': 'Accounting & Finance',
     'depends': [
         'account',
+        'web_notify',
+        'queue_job',
     ],
     'data': [
         'views/account_invoice.xml',
