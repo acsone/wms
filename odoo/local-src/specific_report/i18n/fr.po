@@ -162,13 +162,18 @@ msgstr "<span>Total<br/>APB</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>Antibiotics</span>"
+msgstr "<span>Total<br/>Contr. antibio.</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>amount</span>"
 msgstr "<span>Montant<br/>total</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>tax</span>"
-msgstr "<span>Total<br/>tax</span>"
+msgstr "<span>Total<br/>TVA</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -775,7 +780,7 @@ msgstr "Sous-total"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Subtotal<br/>price"
-msgstr "Sous-total<br/>price"
+msgstr "Sous-total<br/>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
