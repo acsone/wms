@@ -9,18 +9,16 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
-* ProgrammingError: syntax error at or near ")"
 
 **Build**
 
 **Documentation**
 
 
-10.29.18 (2018-12-18)
+10.29.19 (2018-12-18)
 +++++++++++++++++++++
 
 **Features and Improvements**
-
 * Refactor refill report (arrange, reassort) for real-time computation
 * ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
 * ALCYN-1761: generate and send pdf invoices in background
@@ -30,6 +28,9 @@ Unreleased
 * ALCYN-1563: Import the final customer balance and post all new journal entries
 
 **Bugfixes**
+* ProgrammingError: syntax error at or near ")"
+
+**Build**
 * BIZ-2640: Customer Reference on invoice
 * ALCYN-1750: Review Layout invoice to add antibiotics
 
@@ -37,9 +38,13 @@ Unreleased
 * ALCYN-1762: fix transactional errors during background delivery of delivery rounds
 * Fix missing records during a reception with additional product
 
-**Build**
-
 **Documentation**
+
+
+10.29.18 (2018-12-18)
++++++++++++++++++++++
+
+Move to 10.29.19
 
 
 10.29.17 (2018-12-14)

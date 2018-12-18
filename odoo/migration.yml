@@ -755,6 +755,7 @@ migration:
           - delivery_rounds_alcyon
           - specific_report
     - version: 10.29.18
+    - version: 10.29.19
       operations:
         post:
           - anthem songs.upgrade.10_29_18_update::update_translations
@@ -774,4 +775,3 @@ migration:
               - anthem songs.install.data_full::create_current_liabilities_accounts
               - anthem songs.install.data_full::import_customer_journal_items
               - anthem songs.install.data_full::post_journal_entries
-    - version: 10.29.19
