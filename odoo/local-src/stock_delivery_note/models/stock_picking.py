@@ -213,6 +213,9 @@ class StockPicking(models.Model):
                     quants.append(['', move_line.product_qty - quants_qty, ''])
                 vat = sol.tax_id.filtered(
                     lambda r: r.tax_group_id == vat_group)
+                if not vat:
+                    vat = product.taxes_id.filtered(
+                        lambda r: r.tax_group_id == vat_group)
                 for quant in quants:
                     lines.append([
                         product.default_code or '',
