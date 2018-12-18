@@ -57,7 +57,7 @@ class TestAssignemnt(ZetesReserveTest):
     def test_02_requ_assignment(self):
         report_query = """
         SELECT report.id
-        FROM report_stock_quant_bylocation_reserve AS report
+        FROM report_stock_refill_reassort AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
@@ -69,7 +69,6 @@ class TestAssignemnt(ZetesReserveTest):
                               ON sil.inventory_id = si.id
                           WHERE si.state = 'confirm'
                           AND sil.location_id = report.location_id)
-        ORDER BY report.refill_priority
         LIMIT 1
         """
 
@@ -101,10 +100,10 @@ class TestAssignemnt(ZetesReserveTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.quant.bylocation.reserve'
+        model_name = 'report.stock.refill.reassort'
         report = self.env[model_name].browse(report_id)
         # Create the picking
-        picking = report.create_reserve_picking()
+        picking = report.create_picking()
 
         self.assertEqual(picking.picking_type_id.zetes_picking_type,
                          constants.REASSORT_ASSIGNMENT)
