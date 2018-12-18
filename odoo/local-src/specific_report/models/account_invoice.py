@@ -37,6 +37,13 @@ class AccountInvoice(models.Model):
         compute='_compute_total_amounts'
     )
 
+    invoice_antibiotics_ids = fields.Many2many('account.invoice.tax',
+                                               compute='_compute_total_amounts')
+    amount_antibiotics = fields.Monetary(
+        compute='_compute_total_amounts'
+    )
+
+
     invoice_contribution_ids = fields.Many2many(
         'account.invoice.tax',
         compute='_compute_total_amounts')
@@ -61,7 +68,8 @@ class AccountInvoice(models.Model):
     )
     def _compute_total_amounts(self):
         tax_group_apb = self.env.ref('specific_account.tax_group_apb')
-
+        tax_group_antibiotics = self.env.ref(
+            'account.tax_group_taxes')
         for inv in self:
             inv.amount_supplier_discount = sum([
                 (l.price_unit * l.discount2 / 100.0) * l.quantity
@@ -83,10 +91,13 @@ class AccountInvoice(models.Model):
                 inv.amount_supplier_discount + inv.amount_alcyon_discount
             )
 
-            amount_apb = amount_contribution = amount_only_tax = 0
+            amount_apb = amount_antibiotics = amount_contribution = \
+                amount_only_tax\
+                = 0
             invoice_only_tax_ids = self.env['account.invoice.tax']
             invoice_contribution_ids = self.env['account.invoice.tax']
             invoice_apb_ids = self.env['account.invoice.tax']
+            invoice_antibiotics_ids = self.env['account.invoice.tax']
 
             for invoice_tax in inv.tax_line_ids:
                 if invoice_tax.tax_id.include_base_amount:
@@ -95,15 +106,20 @@ class AccountInvoice(models.Model):
                 elif invoice_tax.tax_id.tax_group_id == tax_group_apb:
                     invoice_apb_ids |= invoice_tax
                     amount_apb += invoice_tax.amount
+                elif invoice_tax.tax_id.tax_group_id == tax_group_antibiotics:
+                    invoice_antibiotics_ids |= invoice_tax
+                    amount_antibiotics += invoice_tax.amount
                 else:
                     invoice_only_tax_ids |= invoice_tax
                     amount_only_tax += invoice_tax.amount
             inv.amount_apb = amount_apb
+            inv.amount_antibiotics = amount_antibiotics
             inv.amount_contribution = amount_contribution
             inv.amount_only_tax = amount_only_tax
             inv.invoice_only_tax_ids = invoice_only_tax_ids
             inv.invoice_contribution_ids = invoice_contribution_ids
             inv.invoice_apb_ids = invoice_apb_ids
+            inv.invoice_antibiotics_ids = invoice_antibiotics_ids
 
             inv.amount_without_discount = sum([
                                           l.price_unit * l.quantity

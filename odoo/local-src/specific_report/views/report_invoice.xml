@@ -45,7 +45,7 @@
                         <th>%<br/>Alcyon<br/>discount</th>
                         <th>%<br/>Supplier<br/>discount</th>
                         <th>Subtotal<br/>price</th>
-                        <th>TVA</th>
+                        <th>Taxes</th>
                     </tr>
                 </thead>
                 <tbody class="invoice_tbody">
@@ -63,9 +63,7 @@
                                         <t t-if="sale.suite_name">(<t t-esc="sale.suite_name"/>)</t>
                                         <span>du</span>
                                         <span t-field="sale.date_order_short"/>
-                                        <span>V.ref: (</span>
-                                        <span t-field="sale.client_order_ref"/>
-                                        <span>)</span>
+                                        <t t-if="sale.client_order_ref">V Ref:(<t t-esc="sale.client_order_ref"/>)</t>
                                         <t t-if="sale.partner_id != invoice.partner_id">
                                             <br/><br/>
                                             <span>Client</span>
@@ -166,12 +164,12 @@
                             <span t-field="invoice.amount_without_discount"/>
                         </td>
                         <td>
-                            <span>Base<br/>discount</span>
-                            <span t-field="invoice.amount_supplier_discount"/>
-                        </td>
-                        <td>
                             <span>Alcyon<br/>discount</span>
                             <span t-field="invoice.amount_alcyon_discount"/>
+                        </td>
+                        <td>
+                            <span>Base<br/>discount</span>
+                            <span t-field="invoice.amount_supplier_discount"/>
                         </td>
                         <td>
                             <span>Untaxed<br/>amount</span>
@@ -180,6 +178,10 @@
                         <td>
                             <span>Total<br/>APB</span>
                             <span t-field="invoice.amount_apb"/>
+                        </td>
+                        <td>
+                            <span>Total<br/>Antibiotics</span>
+                            <span t-field="invoice.amount_antibiotics"/>
                         </td>
                         <td>
                             <span>Total<br/>tax</span>

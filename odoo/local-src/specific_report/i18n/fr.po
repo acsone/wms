@@ -95,7 +95,7 @@ msgstr "<span>Remise<br/>Alcyon</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr "<span>Remise<br/>de base</span>"
+msgstr "<span>Remise<br/>Fournisseur</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -173,7 +173,7 @@ msgstr "<span>Total<br/>tax</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Untaxed<br/>amount</span>"
-msgstr "<span>Montant<br/>non taxé</span>"
+msgstr "<span>Base<br/>imposable</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -265,7 +265,7 @@ msgstr "Solde à livrer"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Base taxable"
-msgstr "Base taxable"
+msgstr "Base imposable"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -836,7 +836,7 @@ msgstr "Poids total"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Totals"
-msgstr "Totals"
+msgstr "Totaux"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_stock_picking
