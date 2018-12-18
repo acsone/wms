@@ -63,6 +63,8 @@ class AccountInvoice(models.Model):
         'invoice_line_ids.price_unit',
         'invoice_line_ids.discount2',
         'invoice_line_ids.discount3',
+        'invoice_line_ids.amount_discount2',
+        'invoice_line_ids.amount_discount3',
         'tax_line_ids',
     )
     def _compute_total_amounts(self):
@@ -71,27 +73,19 @@ class AccountInvoice(models.Model):
             'account.tax_group_taxes')
         for inv in self:
             inv.amount_supplier_discount = sum([
-                (l.price_unit * l.discount2 / 100.0) * l.quantity
+                l.amount_discount2
                 for l in inv.invoice_line_ids
             ])
-
-            inv.amount_alcyon_discount = sum([
-                (
-                    (
-                        (
-                            l.price_unit * (1 - (l.discount2 or 0.0) / 100.0)
-                        ) * l.discount3 / 100.0
-                    ) * l.quantity
-                )
-                for l in inv.invoice_line_ids
-            ])
+            inv.amount_alcyon_discount = sum([l.amount_discount3
+                                              for l in inv.invoice_line_ids
+                                              ])
 
             inv.amount_discount_total = (
-                inv.amount_supplier_discount + inv.amount_alcyon_discount
+                    inv.amount_supplier_discount + inv.amount_alcyon_discount
             )
 
             amount_apb = amount_antibiotics = amount_contribution = \
-                amount_only_tax\
+                amount_only_tax \
                 = 0
             invoice_only_tax_ids = self.env['account.invoice.tax']
             invoice_contribution_ids = self.env['account.invoice.tax']
@@ -121,9 +115,9 @@ class AccountInvoice(models.Model):
             inv.invoice_antibiotics_ids = invoice_antibiotics_ids
 
             inv.amount_without_discount = sum([
-                                          l.price_unit * l.quantity
-                                          for l in inv.invoice_line_ids
-                                              ]) + amount_contribution
+                l.price_unit * l.quantity
+                for l in inv.invoice_line_ids
+            ]) + amount_contribution
 
             inv.amount_untaxed_with_contribution = \
                 inv.amount_untaxed + amount_contribution
@@ -204,7 +198,7 @@ class AccountInvoice(models.Model):
             str(self.id),
             ''.join(self.create_date[:10].split('-')),
             ''.join(self.create_date[-8:].split(':')),
-            ]) + '.pdf'
+        ]) + '.pdf'
 
     @api.multi
     def action_invoice_open(self):
@@ -241,6 +235,44 @@ class AccountInvoiceLine(models.Model):
         compute='_compute_all_taxes')
     apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
     amount_contribution = fields.Monetary(compute='_compute_all_taxes')
+
+    amount_discount2 = fields.Monetary(
+        compute='_compute_price_discount_amount')
+
+    amount_discount3 = fields.Monetary(
+        compute='_compute_price_discount_amount')
+
+    @api.multi
+    @api.depends('price_unit', 'discount', 'discount2',
+                 'discount3', 'quantity')
+    def _compute_price_discount_amount(self):
+        account_precision = self.env['decimal.precision'].precision_get(
+            'Account')
+        for line in self:
+            if line.discount2 and not line.discount3:
+                line.amount_discount2 = round(
+                    line.price_unit * (1 - (1 - (
+                            line.discount2 or 0.0) / 100.0)),
+                    account_precision) * line.quantity
+                line.amount_discount3 = 0.0
+            elif not line.discount2 and line.discount3:
+                line.amount_discount3 = round(
+                    line.price_unit * (1 - (
+                            1 - (line.discount3 or 0.0) / 100.0)),
+                    account_precision) * line.quantity
+                line.amount_discount2 = 0.0
+            elif line.discount3 and line.discount2:
+                line.amount_discount2 = round(
+                    line.price_unit * (1 - (
+                            1 - (line.discount2 or 0.0) / 100.0)),
+                    account_precision) * line.quantity
+                line.amount_discount3 = round(
+                    line.quantity * line.price_unit, account_precision) - \
+                    line.amount_discount2 - \
+                    line.price_subtotal
+            else:
+                line.amount_discount3 = 0.0
+                line.amount_discount2 = 0.0
 
     @api.multi
     @api.depends('invoice_line_tax_ids')

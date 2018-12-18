@@ -63,7 +63,7 @@
                                         <t t-if="sale.suite_name">(<t t-esc="sale.suite_name"/>)</t>
                                         <span>du</span>
                                         <span t-field="sale.date_order_short"/>
-                                        <t t-if="sale.client_order_ref">V Ref:(<t t-esc="sale.client_order_ref"/>)</t>
+                                        <t t-if="sale.client_order_ref">(V Ref:<t t-esc="sale.client_order_ref"/>)</t>
                                         <t t-if="sale.partner_id != invoice.partner_id">
                                             <br/><br/>
                                             <span>Client</span>
