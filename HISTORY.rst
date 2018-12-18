@@ -9,6 +9,7 @@ Unreleased
 **Features and Improvements**
 
 **Bugfixes**
+* Fix additional products and pushed moves. Limit additional products to pick only
 
 **Build**
 

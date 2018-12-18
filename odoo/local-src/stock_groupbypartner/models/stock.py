@@ -144,6 +144,17 @@ class StockMove(models.Model):
             max_weight = (move.picking_type_id.groupbypartner_maxweight -
                           move.product_id.weight * move.product_qty)
             backorder_orig_id = self.env.context.get('backorder_assign')
+            # Preferably assign the move in a picking having a move with the
+            # same group_id. Necessary for pushed moves
+            if len(pickings) > 1:
+                def key(r):
+                    return not (
+                        move.group_id and
+                        move.group_id in r.move_lines.filtered(
+                            lambda m: m.state not in ('cancel', 'done'))
+                        .mapped('group_id'))
+                pickings = pickings.sorted(key=key)
+            # Select the right picking to assign to
             for picking in pickings:
                 if (not move.picking_type_id.groupbypartner_maxweight or
                         picking.weight <= max_weight):

@@ -780,3 +780,4 @@ migration:
         upgrade:
           ### local
           - account_invoice_sent
+          - product_additional
