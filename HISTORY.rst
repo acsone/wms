@@ -8,6 +8,18 @@ Unreleased
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.29.18 (2018-12-18)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * Refactor refill report (arrange, reassort) for real-time computation
 * ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
 * ALCYN-1761: generate and send pdf invoices in background
