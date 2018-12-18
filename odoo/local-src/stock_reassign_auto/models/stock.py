@@ -2,7 +2,7 @@
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import models, _
 from odoo.addons.queue_job.job import job
 
 import logging
@@ -28,14 +28,18 @@ class StockMove(models.Model):
             return res
 
         products = received.mapped('product_id')
-        self.with_delay()._reassign_trial(products)
+        self.with_delay(description=_(
+            'Reassign trial on reception for products ids %s'
+            ) % products.ids)._reassign_trial(products)
         return res
 
     def action_cancel(self):
         """ When move is canceled, check if other moves can be assigned """
         products = self.mapped('product_id')
         res = super(StockMove, self).action_cancel()
-        self.with_delay()._reassign_trial(products)
+        self.with_delay(description=_(
+            'Reassign trial on cancel for products ids %s'
+            ) % products.ids)._reassign_trial(products)
         return res
 
     def write(self, vals):
@@ -43,15 +47,14 @@ class StockMove(models.Model):
         res = super(StockMove, self).write(vals)
         if vals.get('priority') == '0':
             products = self.mapped('product_id')
-            self.with_delay()._reassign_trial(products)
+            self.with_delay(description=_(
+                'Reassign on priority lowered for products ids %s'
+                ) % products.ids)._reassign_trial(products)
         return res
 
-    @job(default_channel='root.invoice_validation')
+    @job(default_channel='root.action_assign')
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
-
-        # TODO: move to job queue
-
         if not products:
             return
         moves_pickings = self.search([
