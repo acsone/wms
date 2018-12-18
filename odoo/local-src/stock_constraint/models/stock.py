@@ -12,6 +12,8 @@ class StockPicking(models.Model):
     def do_transfer(self):
         """ Prevent button to be clicked twice as this will perform the action
         twice """
+        if not self:
+            return True
         self.env.cr.execute(
             "SELECT state FROM stock_move WHERE picking_id in %s "
             "FOR UPDATE NOWAIT", (tuple(self.ids), ))
@@ -34,6 +36,8 @@ class StockMove(models.Model):
 
     def action_done(self):
         """ Prevent to do a move twice """
+        if not self:
+            return True
         self.env.cr.execute(
             "SELECT state FROM stock_move WHERE id in %s "
             "FOR UPDATE NOWAIT", (tuple(self.ids), ))
