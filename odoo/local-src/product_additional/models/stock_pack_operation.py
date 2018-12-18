@@ -45,8 +45,12 @@ class StockPackOperation(models.Model):
                           moves_to_cancel.ids)
             moves_to_cancel.with_context(
                 no_recompute_pack=True, force_cancel=True).action_cancel()
-            # A standard picker cannot delete a stock.move
-            moves_to_cancel.sudo().unlink()
+            # FIXME: Disabled as this is causing an error in the reception.
+            #        However, as in a pick, we do recomputation, this was
+            #        cleaner to remove those instead of having them stacking.
+            #        Nevertheless, keeping those canceled moves has no impact.
+            # # A standard picker cannot delete a stock.move
+            # moves_to_cancel.sudo().unlink()
 
         super(StockPackOperation, self).with_context(
             skip_additional=True).unlink()
