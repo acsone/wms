@@ -291,7 +291,7 @@
 
     <template id="report_invoice">
         <t t-call="report.html_container">
-            <t t-set="company" t-value="res_company"/>
+            <t t-set="company" t-value="res_company.with_context({'lang': invoice.partner_id.lang})"/>
             <t t-set="invoice" t-value="invoice.with_context({'lang': invoice.partner_id.lang})"/>
             <t t-set="partner" t-value="invoice.partner_id"/>
 

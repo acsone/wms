@@ -246,6 +246,8 @@ class AccountInvoiceLine(models.Model):
     @api.depends('price_unit', 'discount', 'discount2',
                  'discount3', 'quantity')
     def _compute_price_discount_amount(self):
+        """ We need to compute discount line by line to prevent
+        rounding issue if compute globally"""
         account_precision = self.env['decimal.precision'].precision_get(
             'Account')
         for line in self:
