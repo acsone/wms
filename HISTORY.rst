@@ -17,6 +17,8 @@ Unreleased
 * ALCYN-1563: Import the final customer balance and post all new journal entries
 
 **Bugfixes**
+* BIZ-2640: Customer Reference on invoice
+* ALCYN-1750: Review Layout invoice to add antibiotics
 
 * ALCYN-1767: Fix delivery note csv for product with no vat info on sale order, look for vat in product directly.
 * ALCYN-1762: fix transactional errors during background delivery of delivery rounds

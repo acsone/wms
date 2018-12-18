@@ -596,7 +596,6 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               # import_customer_banks_and_mandats
               - anthem songs.install.data_full::import_customer_banks_and_mandats
-              # import supplier.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
               # import supplier_contact.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
@@ -756,9 +755,13 @@ migration:
           - delivery_rounds_alcyon
           - specific_report
     - version: 10.29.18
+      operations:
+        post:
+          - anthem songs.upgrade.10_29_18_update::update_translations
       addons:
         upgrade:
           ### local
+          - specific_report
           - stock_refill
           - delivery_rounds_refill
           - specific_zetes
