@@ -814,7 +814,6 @@ class RoundInstanceCustomer(models.Model):
 
             # detach the pickings that could not be done
             self.with_env(new_env).mapped('picking_ids')._detach_from_round()
-            self.with_env(new_env)._remove_if_empty()
 
         if self.delivery_round_id.state == 'delivering':
             self.delivery_round_id.with_delay().recheck_delivery_state()
@@ -834,6 +833,9 @@ class RoundInstanceCustomer(models.Model):
                     _('Error when delivering %s: %s') %
                     (self.display_name, self.delivery_error)
                 )
+        # If this customer do not have any linked picking, remove it
+        # We perform this step at last to prevent Missing record error
+        self._remove_if_empty()
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
