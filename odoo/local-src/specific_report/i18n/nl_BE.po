@@ -18,12 +18,12 @@ msgstr ""
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Alcyon<br/>discount"
-msgstr "%<br/>Alcyon<br/>discount"
+msgstr "%<br/>Alcyon<br/>korting"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Supplier<br/>discount"
-msgstr "%<br/>Leverancier<br/>korting"
+msgstr "%<br/>Leveranciers<br/>korting"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -68,7 +68,7 @@ msgstr "<span>Alcyon<br/>korting</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr "<span>Basis<br/>korting</span>"
+msgstr "<span>Leveranciers<br/>korting</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -133,7 +133,12 @@ msgstr "<span>SAMENVATTING</span>\n"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"
-msgstr "<span>SCM<br/>Totaal</span>"
+msgstr "<span>APB<br/>Totaal</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>Antibiotics</span>"
+msgstr "<span>Antibiotica<br/>Totaal</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -670,7 +675,7 @@ msgstr "Offerte #"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Rate"
-msgstr "Tarief"
+msgstr "BTW %"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -738,8 +743,8 @@ msgstr "Sub<br/>totaal"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "TVA"
-msgstr "BTW"
+msgid "Taxes"
+msgstr "BTW %"
 
 #. module: specific_report
 #: code:addons/specific_report/models/sale_order.py:57
