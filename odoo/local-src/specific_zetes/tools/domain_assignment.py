@@ -328,21 +328,22 @@ WHERE picking.state IN ('partially_available', 'assigned')
             query_values['zone_code'] = zone_code
 
         report_query = """
-        SELECT report.id
-        FROM report_stock_quant_bylocation AS report
+          SELECT report.id
+          FROM report_stock_refill_arrange AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
-        WHERE NOT EXISTS (SELECT 1
-                          FROM stock_inventory_line AS sil
-                            INNER JOIN stock_inventory AS si
-                              ON sil.inventory_id = si.id
-                          WHERE si.state = 'confirm'
-                          AND sil.location_id = report.location_id)
-            AND report.reservation_id IS NULL
+          WHERE
+          -- NOT EXISTS (SELECT 1
+          --   FROM stock_inventory_line AS sil
+          --     INNER JOIN stock_inventory AS si
+          --       ON sil.inventory_id = si.id
+          --   WHERE si.state = 'confirm'
+          --   AND sil.location_id = report.location_id)
+          -- AND
+            report.reservation_id IS NULL
             %s
-        ORDER BY report.refill_priority
-        LIMIT 1
+          LIMIT 1
         """ % zone_condition
 
         counter = 0
@@ -354,11 +355,11 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
             report_id = report_id[0]
 
-            model_name = 'report.stock.quant.bylocation'
+            model_name = 'report.stock.refill.arrange'
             report = \
                 self.request.env[model_name].sudo(self._user).browse(report_id)
             # Create the picking
-            picking = report.sudo(self._user).create_parking_picking()
+            picking = report.sudo(self._user).create_picking()
             is_valid_location = True
             for pack_op in picking.pack_operation_product_ids:
                 if not pack_op.location_dest_id.zone \
@@ -455,21 +456,21 @@ WHERE picking.state IN ('partially_available', 'assigned')
             query_values['zone_code'] = zone_code
 
         report_query = """
-        SELECT report.id
-        FROM report_stock_quant_bylocation_reserve AS report
+          SELECT report.id
+          FROM report_stock_refill_reassort AS report
           LEFT JOIN stock_location ON stock_location.id = report.location_id
           LEFT JOIN picking_zone
             ON stock_location.picking_zone_id = picking_zone.id
-        WHERE NOT EXISTS (SELECT 1
-                          FROM stock_inventory_line AS sil
-                            INNER JOIN stock_inventory AS si
-                              ON sil.inventory_id = si.id
-                          WHERE si.state = 'confirm'
-                          AND sil.product_id = report.product_id)
-            AND report.reservation_id IS NULL
+          WHERE
+          -- NOT EXISTS (SELECT 1
+          --   FROM stock_inventory_line AS sil
+          --     INNER JOIN stock_inventory AS si
+          --       ON sil.inventory_id = si.id
+          --   WHERE si.state = 'confirm'
+          --   AND sil.product_id = report.product_id)
+            report.reservation_id IS NULL
             %s
-        ORDER BY refill_priority
-        LIMIT 1;
+          LIMIT 1;
         """ % zone_condition
 
         counter = 0
@@ -480,12 +481,12 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 break
             report_id = report_id[0]
 
-            model_name = 'report.stock.quant.bylocation.reserve'
+            model_name = 'report.stock.refill.reassort'
             report = \
                 self.request.env[model_name].sudo(self._user).browse(report_id)
 
             # Create the picking
-            picking = report.sudo(self._user).create_reserve_picking()
+            picking = report.sudo(self._user).create_picking()
             is_valid_location = True
             for pack_op in picking.pack_operation_product_ids:
                 if not pack_op.location_dest_id.is_valid_location:

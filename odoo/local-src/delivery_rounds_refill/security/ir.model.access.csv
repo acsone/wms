@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_01,report_stock_refill_arrange,model_report_stock_refill_arrange,stock.group_stock_user,1,0,0,0
+access_02,report_stock_refill_reassort,model_report_stock_refill_reassort,stock.group_stock_user,1,0,0,0

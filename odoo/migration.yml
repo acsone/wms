@@ -759,4 +759,7 @@ migration:
       addons:
         upgrade:
           ### local
+          - stock_refill
+          - delivery_rounds_refill
+          - specific_zetes
           - account_invoice_sent

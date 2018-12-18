@@ -3,17 +3,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock Refill',
-    'version': '1.0.1',
+    'name': 'Delivery Rounds Refill',
+    'version': '1.0',
     'author': "BCIM",
-    'maintainer': 'Camptocamp',
     'category': 'Stock Management',
     'depends': [
-        'stock',
-        'stock_quant_bylocation',
+        'stock_refill',
+        'delivery_rounds',
+        'stock_barcode_fix',
         ],
     'data': [
-        'views/stock_location.xml',
+        'security/ir.model.access.csv',
+        'views/report_stock_refill_arrange.xml',
+        'views/report_stock_refill_reassort.xml',
+        'wizards/create_picking.xml',
     ],
     'installable': True,
     'auto_install': False,
