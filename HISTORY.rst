@@ -13,6 +13,7 @@ Unreleased
 * ALCYN-1761: generate and send pdf invoices in background
 * ALCYN-1761: the "Related" button on the job related to invoices now try to open the correct view (customer or supplier)
 * Take only pickings to generate the delivery round
+* Delivery round: Cancel BO for customer that do not want BO
 * ALCYN-1563: Import the final customer balance and post all new journal entries
 
 **Bugfixes**
