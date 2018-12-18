@@ -142,8 +142,8 @@ class TestDeliveryRoundAssign(SavepointCase):
 
     def test_reassign_on_reception(self):
         sale = self.test_force_deliveryround_partially_available()
-        pick = sale.picking_ids.filtered(
-            lambda p: p.picking_type_subcode == 'PICK')
+        # pick = sale.picking_ids.filtered(
+        #     lambda p: p.picking_type_subcode == 'PICK')
 
         # Make P2 available. Picking must automatically reserve P2
         inventory = self.env['stock.inventory'].create({
@@ -167,6 +167,9 @@ class TestDeliveryRoundAssign(SavepointCase):
                 self.delivery_round_1.id
             )
 
-        self.assertEqual(pick.state, 'assigned')
-        self.assertEqual(set(pick.pack_operation_ids.mapped('product_id')),
-                         set([self.p1, self.p2]))
+        # TODO Adapt the test
+        # The reasign of the picking is done by an another module
+        # We need to move this test to this new module.
+        # self.assertEqual(pick.state, 'assigned')
+        # self.assertEqual(set(pick.pack_operation_ids.mapped('product_id')),
+        #                  set([self.p1, self.p2]))
