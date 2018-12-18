@@ -27,14 +27,9 @@ class AccountInvoiceSent(models.TransientModel):
         active_ids = self._context.get('active_ids', [])
         if active_ids is None:
             return {}
-        invoices = self.env['account.invoice'].browse(active_ids).filtered(
-            lambda r: (
-                not r.sent and
-                r.state not in ('draft', 'proforma', 'proforma2')))
-        defaults['count_print'] = len(invoices.filtered(
-            lambda r:
-            r.partner_id.commercial_partner_id.invoice_sending_method ==
-            'letter'))
+        invoices = self.env['account.invoice'].browse(active_ids)
+        invoices = invoices._filter_send_invoice()
+        defaults['count_print'] = len(invoices._filter_send_invoice('letter'))
         invoices_email = invoices.filtered(
             lambda r:
             r.partner_id.commercial_partner_id.invoice_sending_method ==
@@ -48,18 +43,14 @@ class AccountInvoiceSent(models.TransientModel):
 
     @api.multi
     def button_print(self):
+        # TODO create a model to show the attachments and
+        # create jobs on them
         act_close = {'type': 'ir.actions.act_window_close'}
         active_ids = self._context.get('active_ids', [])
         if active_ids is None:
             return act_close
-        invoices = self.env['account.invoice'].browse(active_ids).filtered(
-            lambda r: (
-                not r.sent and
-                r.state not in ('draft', 'proforma', 'proforma2')))
-        invoices = invoices.filtered(
-            lambda r:
-            r.partner_id.commercial_partner_id.invoice_sending_method ==
-            'letter')
+        invoices = self.env['account.invoice'].browse(active_ids)
+        invoices = invoices._filter_send_invoice('letter')
         if invoices:
             template = self.env.ref('account.email_template_edi_invoice')
             invoices.write({'sent': True})
@@ -72,33 +63,21 @@ class AccountInvoiceSent(models.TransientModel):
             return res
         return act_close
 
-    @api.multi
-    def button_email(self):
-        act_close = {'type': 'ir.actions.act_window_close'}
+    def _send_action(self, sending_method):
         active_ids = self._context.get('active_ids', [])
-        if active_ids is None:
-            return act_close
-        invoices = self.env['account.invoice'].browse(active_ids).filtered(
-            lambda r: (
-                not r.sent and
-                r.state not in ('draft', 'proforma', 'proforma2')))
-        invoices = invoices.filtered(
-            lambda r:
-            r.partner_id.commercial_partner_id.email and
-            r.partner_id.commercial_partner_id.invoice_sending_method ==
-            'email')
-        if invoices:
-            invoices.write({'sent': True})
-            template = self.env.ref('account.email_template_edi_invoice')
-            for invoice in invoices:
-                invoice.message_post(body=_("Invoice sent"))
-                template.send_mail(invoice.id)
-        return act_close
+        if not active_ids:
+            return
+        invoices = self.env['account.invoice'].browse(active_ids)
+        invoices = invoices._filter_send_invoice(sending_method)
+        invoices.with_delay()._generate_send_invoice(sending_method)
 
     @api.multi
-    def button_email_and_print(self):
-        self.button_email()
-        return self.button_print()
+    def button_email(self):
+        self._send_action('email')
+        self.env.user.notify_info(
+            _('Invoices will be send by email in background.')
+        )
+        return {'type': 'ir.actions.act_window_close'}
 
     @api.multi
     def button_mark_only(self):
@@ -106,10 +85,8 @@ class AccountInvoiceSent(models.TransientModel):
         active_ids = self._context.get('active_ids', [])
         if active_ids is None:
             return act_close
-        invoices = self.env['account.invoice'].browse(active_ids).filtered(
-            lambda r: (
-                not r.sent and
-                r.state not in ('draft', 'proforma', 'proforma2')))
+        invoices = self.env['account.invoice'].browse(active_ids)
+        invoices = invoices._filter_send_invoice()
         invoices.write({'sent': True})
         for invoice in invoices:
             invoice.message_post(body=_("Invoice sent"))

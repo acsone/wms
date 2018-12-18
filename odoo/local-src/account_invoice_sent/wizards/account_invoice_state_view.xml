@@ -6,35 +6,29 @@
         <field name="model">account.invoice.sent</field>
         <field name="arch" type="xml">
             <form string="Invoices Mass Sending">
-                <group>
-                    <group>
-                        <field name="count_print"/>
-                        <field name="count_email"/>
-                        <field name="count_email_missing" attrs="{'invisible':[('count_email_missing','=',0)]}"/>
-                    </group>
+                <group col="4">
+                    <field name="count_print"/>
+                    <field name="email_copy" attrs="{'invisible':[('count_print','=',0)]}"/>
+                </group>
+                <group col="4">
+                    <field name="count_email"/>
+                    <field name="count_email_missing" attrs="{'invisible':[('count_email_missing','=',0)]}"/>
                 </group>
                 <group>
-                    <group>
-                        <field name="email_copy" attrs="{'invisible':[('count_print','=',0)]}"/>
-                    </group>
+                    <strong>Please select operation...</strong>
                 </group>
-                <p><strong>Please select operation...</strong></p>
 
                 <footer>
-                    <button string="Print + Email" name="button_email_and_print"
-                        help="Based on partner invoice sending method, either print or send by email. Also mark as sent"
-                        type="object" class="oe_highlight"/>
                     <button string="Print" name="button_print"
                         help="Print invoices for partners having an invoice sending method 'letter'. Also mark as sent"
-                        type="object" class="oe_highlight"/>
+                        type="object" class="btn-primary"/>
                     <button string="Email" name="button_email"
                         help="Send by email invoices for partners having an invoice sending method 'email'. Also mark as sent"
-                        type="object" class="oe_highlight"/>
+                        type="object" class="btn-primary"/>
                     <button string="Mark as sent" name="button_mark_only"
                         help="Only mark as sent without sending anything"
                         type="object"/>
-                    or
-                    <button string="Cancel" class="oe_link" special="cancel"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
                 </footer>
             </form>
         </field>

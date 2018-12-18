@@ -22,6 +22,8 @@
         'account_invoice_check_total',
         'specific_shipping_costs',
         'product_analytic',
+        'account_invoice_sent',
+        'queue_job',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

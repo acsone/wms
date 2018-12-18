@@ -8,6 +8,9 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
+* ALCYN-1761: generate and send pdf invoices in background
+* ALCYN-1761: the "Related" button on the job related to invoices now try to open the correct view (customer or supplier)
 * Take only pickings to generate the delivery round
 
 **Bugfixes**
