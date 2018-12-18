@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1762: fix transactional errors during background delivery of delivery rounds
+
 **Build**
 
 **Documentation**
@@ -27,7 +29,6 @@ Unreleased
 **Bugfixes**
 
 * ALCYN-1755: Fix subtotal calculation on the delivery slip report
-* ALCYN-1762: fix transactional errors during background delivery of delivery rounds
 * ALCYN-1726: reverse list of customers on delivery round report
 * Take care of the restricted lot in the reservation (solving reservation of human products)
 * Correctly catch an error with Zetes to avoid the crash of the voice console
