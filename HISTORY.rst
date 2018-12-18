@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Take only pickings to generate the delivery round
+
 **Bugfixes**
 
 * ALCYN-1762: fix transactional errors during background delivery of delivery rounds
