@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* Take only pickings to generate the delivery round
+
 **Bugfixes**
 
 **Build**
