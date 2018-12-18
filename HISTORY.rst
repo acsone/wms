@@ -8,9 +8,17 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
+* ALCYN-1761: generate and send pdf invoices in background
+* ALCYN-1761: the "Related" button on the job related to invoices now try to open the correct view (customer or supplier)
+* Take only pickings to generate the delivery round
+
 **Bugfixes**
 * BIZ-2640: Customer Reference on invoice
 * ALCYN-1750: Review Layout invoice to add antibiotics
+
+* ALCYN-1767: Fix delivery note csv for product with no vat info on sale order, look for vat in product directly.
+* ALCYN-1762: fix transactional errors during background delivery of delivery rounds
 
 **Build**
 

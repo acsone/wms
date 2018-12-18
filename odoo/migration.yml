@@ -596,7 +596,9 @@ migration:
               - anthem songs.upgrade.common::deactivate_check_on_vat
               # import_customer_banks_and_mandats
               - anthem songs.install.data_full::import_customer_banks_and_mandats
-              # import supplier.csv
+              # import supplier.csv>>>>>>> master
+768
+
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier.csv
               # import supplier_contact.csv
               - importer.sh songs.install.data_full::import_partner /odoo/data/install/supplier_contact.csv
@@ -763,3 +765,4 @@ migration:
         upgrade:
           ### local
           - specific_report
+          - account_invoice_sent
