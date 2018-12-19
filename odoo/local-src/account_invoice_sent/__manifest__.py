@@ -15,7 +15,9 @@
     ],
     'data': [
         'views/account_invoice.xml',
+        'views/account_invoice_print_views.xml',
         'views/res_partner.xml',
+        'security/ir.model.access.csv',
         'wizards/account_invoice_state_view.xml',
     ],
     'installable': True,

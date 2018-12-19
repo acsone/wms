@@ -51,17 +51,15 @@ class AccountInvoiceSent(models.TransientModel):
             return act_close
         invoices = self.env['account.invoice'].browse(active_ids)
         invoices = invoices._filter_send_invoice('letter')
-        if invoices:
-            template = self.env.ref('account.email_template_edi_invoice')
-            invoices.write({'sent': True})
-            for invoice in invoices:
-                invoice.message_post(body=_("Invoice sent"))
-                if self.email_copy:
-                    template.send_mail(invoice.id)
-            res = self.env['report'].get_action(self, 'account.report_invoice')
-            res['context']['active_ids'] = invoices.ids
-            return res
-        return act_close
+        invoice_print = self.env['account.invoice.print'].create({
+            'invoice_ids': [(6, 0, invoices.ids)],
+            'send_email_copy': self.email_copy,
+        })
+        invoice_print.with_delay().generate_report()
+        self.env.user.notify_info(
+            _('A report will be generated in background.')
+        )
+        return {'type': 'ir.actions.act_window_close'}
 
     def _send_action(self, sending_method):
         active_ids = self._context.get('active_ids', [])
