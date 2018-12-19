@@ -40,6 +40,11 @@ class ExportProductTestCase(ESBXMLTestCase):
             'supplier': True,
             'ref': '65852',
         })
+        manufacturer = self.env['res.partner'].create({
+            'name': 'Manufacturer',
+            'supplier': True,
+            'ref': 'manu01',
+        })
         self.p_cat_all = self.env.ref('product.product_category_all')
         self.p_cat = self.env.ref('specific_data.product_categ_humain')
         # Set the esb_ref of the business unit
@@ -89,6 +94,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'uom_po_id': unit.id,
             'price_category_id': ali.id,
             'taxes_id': [(4, tax.id)],
+            'manufacturer': manufacturer.id,
             'seller_ids': [
                 (0, 0, {
                     'name': supplier.id,
@@ -205,7 +211,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Gescgr': '6',
             'Gescsg': '15',
             'Gesfou': '79001',
-            'Cplz25': '79001',
+            'Cplz25': 'manu01',
             'Gesunv': '0',
             'Gescrt': '2017/07/13',
             'Cplz19': 1,
