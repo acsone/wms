@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
-from odoo import api, models, fields, _
+from odoo import models, fields, _
 from odoo.addons.queue_job.job import job
 
 
@@ -77,7 +77,8 @@ class AccountInvoicePrint(models.Model):
         if len(invoices) > 1:
             action['domain'] = [('id', 'in', invoices.ids)]
         elif len(invoices) == 1:
-            action['views'] = [(self.env.ref('account.invoice_form').id, 'form')]
+            action['views'] = [(
+                self.env.ref('account.invoice_form').id, 'form')]
             action['res_id'] = invoices.ids[0]
         else:
             action = {'type': 'ir.actions.act_window_close'}
