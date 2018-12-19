@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import time
+from itertools import groupby
 
 from odoo import api, fields, models, _
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -42,9 +43,46 @@ class StockPicking(models.Model):
             if not not_done_bo_moves:
                 continue
             if not picking.printed:
+                # Mark delivery as processed. When reassigning move in
+                # backorder, we look for picking not printed
                 picking.printed = True
-            not_done_bo_moves.with_context(
-                backorder_assign=picking).assign_picking()
+
+            if self.env.context.get('cancel_backorder'):
+                # Triggerred by delivery round shipping delivery
+                # for partner that does not accept backorder
+                not_done_bo_moves.with_context(
+                    no_recompute_pack=True, force_cancel=True).action_cancel()
+                picking.message_post(body=_(
+                    "Remaining moves canceled as partner does not "
+                    "accept backorder:<ul>%s</ul>" % ''.join([
+                        '<li>%s</li>' % m for m
+                        in not_done_bo_moves.mapped('name')])))
+
+                def key(r):
+                    return r.picking_id
+                cancel_moves = not_done_bo_moves \
+                    .filtered(lambda move: move.propagate) \
+                    .mapped('move_orig_ids') \
+                    .filtered(lambda move: move.state
+                              not in ('cancel', 'done')) \
+                    .sorted(key=key)
+                # Propagate to picking
+                for cancel_picking, cancel_moves_iter in groupby(
+                        cancel_moves, key=key):
+                    cancel_moves_bypicking = reduce(
+                        lambda x, y: x | y, cancel_moves_iter)
+                    cancel_moves_bypicking.with_context(
+                        no_recompute_pack=True,
+                        force_cancel=True).action_cancel()
+                    cancel_picking.message_post(body=_(
+                        "Remaining moves canceled as partner does not "
+                        "accept backorder:<ul>%s</ul>" % ''.join([
+                            '<li>%s</li>' % m for m
+                            in cancel_moves_bypicking.mapped('name')])))
+
+            else:
+                not_done_bo_moves.with_context(
+                    backorder_assign=picking).assign_picking()
 
             if not picking.date_done:
                 picking.write({'date_done': time.strftime(
@@ -115,9 +153,9 @@ class StockMove(models.Model):
                     move.picking_id = picking.id
                     if backorder_orig_id:
                         backorder_orig_id.message_post(body=_(
-                            "Remaining move moved to exiting picking "
+                            "Remaining move '%s' moved to exiting picking "
                             "<em>%s</em> used as a backorder.") %
-                            (picking.name))
+                            (move.product_id.display_name, picking.name))
                     # unreserve moves having an operation for that product
                     # Note: (re)check availability (action_assign) does not
                     # work on added move where an operation already exists for
@@ -143,8 +181,9 @@ class StockMove(models.Model):
                 picking = pick_obj.create(values)
                 if backorder_orig_id:
                     backorder_orig_id.message_post(body=_(
-                        "Remaining move moved to new backorder "
-                        "<em>%s</em>.") % (picking.name))
+                        "Remaining move '%s' moved to new backorder "
+                        "<em>%s</em>.") %
+                        (move.product_id.display_name, picking.name))
                 if str(domain) not in pickings_cache:
                     pickings_cache[str(domain)] = picking
                 else:

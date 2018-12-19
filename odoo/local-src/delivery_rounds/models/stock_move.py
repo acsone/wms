@@ -4,13 +4,9 @@
 
 from odoo import api, models, _
 from odoo.exceptions import ValidationError
-from odoo.addons.queue_job.job import identity_exact
 
 import logging
 _logger = logging.getLogger(__name__)
-
-
-EXPORT_DESC = 'Export sale order {} to ESB webservice (bo changed)'
 
 
 class StockMove(models.Model):
@@ -60,63 +56,6 @@ class StockMove(models.Model):
     def action_cancel(self):
         res = super(StockMove, self).action_cancel()
         self.mapped('picking_id.delivery_round_customer_id')._remove_if_empty()
-        return res
-
-    @api.multi
-    def action_done(self):
-        """ Trigger re-reserve on pickings """
-        if not self:
-            return True
-        res = super(StockMove, self).action_done()
-        stock = self.env.ref('stock.stock_location_stock')
-        received = self.filtered(lambda m: (
-            m.location_dest_id.parent_left >= stock.parent_left and
-            m.location_dest_id.parent_right <= stock.parent_right and
-            not (m.location_id.parent_left >= stock.parent_left and
-                 m.location_id.parent_right <= stock.parent_right)))
-        if not received:
-            return res
-        products = received.mapped('product_id')
-        # Find pickings and relaunch reservation
-        moves_pickings = self.search([
-            ('picking_id.picking_type_subcode', '=', 'PICK'),
-            ('state', '=', 'confirmed'),
-            ('product_id', 'in', products.ids),
-            ('picking_id.printed', '!=', True)])
-        pickings = moves_pickings.mapped('picking_id')
-        _logger.debug("Products received are in backorder")
-        # unreserve moves having an operation for that product
-        # Note: (re)check availability (action_assign) does not
-        # work on added move where an operation already exists for
-        # that product. To not recompute all the quants of the
-        # picking, we delete only the pack operation to recompute.
-        # No need to perform the assignment now (new pack operation
-        # creation), it is performed later when the procurement is
-        # run.
-        operations_to_recompute = pickings.mapped('pack_operation_ids'). \
-            filtered(lambda op: op.product_id in products)
-        if operations_to_recompute:
-            _logger.debug("Cleaning operations %s",
-                          operations_to_recompute.ids)
-            operations_to_recompute.mapped(
-                'linked_move_operation_ids.move_id').do_unreserve()
-        _logger.debug("Reserve corresponding moves %s", moves_pickings)
-        moves_pickings.action_assign()
-
-        # Sale order that need to be resend to the esb !
-        # Because their back order may have changed
-        # Testing for order_id existance has it failed on some Travis tests
-        if 'order_id' not in moves_pickings.fields_get_keys():
-            return res
-        updated_sale_order = moves_pickings.mapped('order_id')
-        for so in updated_sale_order:
-            if not so.esb_is_exportable():
-                continue
-            so.with_delay(
-                description=EXPORT_DESC.format(so.name),
-                identity_key=identity_exact,
-            ).esb_export_record()
-
         return res
 
     @api.multi

@@ -125,7 +125,9 @@ class StockPicking(models.Model):
     def _delay_jobs_action_assign(self):
         # Group picking by partner
         pickings_by_partner = defaultdict(lambda: self.env['stock.picking'])
-        for picking in self.search([('state', '=', 'confirmed')]):
+        pickings = self.search([('state', '=', 'confirmed'),
+                                ('picking_type_subcode', '=', 'PICK')])
+        for picking in pickings:
             pickings_by_partner[picking.partner_id.id] |= picking
 
         for pickings in pickings_by_partner.values():
