@@ -18,7 +18,7 @@
       <!-- supplier -->
       <Gesfou>79001</Gesfou>
       <!-- manufacturer -->
-      <Cplz25>79001</Cplz25>
+      <Cplz25>manu01</Cplz25>
       <!-- UoM -->
       <Gesunv>0</Gesunv>
       <!-- unit_in_shrink_wrap -->
@@ -104,7 +104,7 @@
       <!-- supplier -->
       <Gesfou>65852</Gesfou>
       <!-- manufacturer -->
-      <Cplz25>65852</Cplz25>
+      <Cplz25>0</Cplz25>
       <!-- UoM -->
       <Gesunv>2</Gesunv>
       <!-- unit_in_shrink_wrap -->
@@ -190,7 +190,7 @@
       <!-- supplier -->
       <Gesfou>79001</Gesfou>
       <!-- manufacturer -->
-      <Cplz25>79001</Cplz25>
+      <Cplz25>0</Cplz25>
       <!-- UoM -->
       <Gesunv>0</Gesunv>
       <!-- unit_in_shrink_wrap -->

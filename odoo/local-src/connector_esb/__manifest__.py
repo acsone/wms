@@ -16,6 +16,7 @@
         'product',
         'product',
         'product_expiry',
+        'product_manufacturer',
         'product_price_category',
         'purchase',
         'sale',
