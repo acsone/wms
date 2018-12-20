@@ -32,6 +32,10 @@ class StockPicking(models.Model):
         if self.env.context.get('skip_additional'):
             return result
 
+        if self.picking_type_subcode != 'PICK':
+            # This method is only intended for pickings
+            return result
+
         product_obj = self.env['product.product']
 
         # Group by picking/product

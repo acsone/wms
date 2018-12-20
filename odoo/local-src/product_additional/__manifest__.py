@@ -14,6 +14,7 @@
         'product',
         'sale',
         'stock',
+        'stock_picking_subcode',
         'purchase',
         'pricelist_discount',
     ],

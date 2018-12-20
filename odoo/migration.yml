@@ -784,5 +784,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - product_additional
           - connector_esb
-
