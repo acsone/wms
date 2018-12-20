@@ -10,6 +10,8 @@ Unreleased
 
 **Bugfixes**
 
+* ALCYN-1774: Wizard for sending invoice by email, fix inconsistencies with sending method and email used.
+
 **Build**
 
 **Documentation**
