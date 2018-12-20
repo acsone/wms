@@ -62,6 +62,7 @@ class TestStockPicking(common.TransactionCase):
 
         self.pick_type = self.env['stock.picking.type'].search(
             [('code', '=', 'outgoing')], limit=1)
+        self.pick_type.subcode = 'PICK'
 
         # Create additional product and update the available quantity (15)
         self.additional_product = self.env['product.product'].create({
@@ -182,7 +183,7 @@ class TestStockPicking(common.TransactionCase):
                 'product_uom_qty': 20,
                 'product_uom': product_uom_id,
             })]
-        })
+        }).with_context(round_autoset=False)
         picking_1.action_confirm()
         picking_1.action_assign()
         self.assertEqual(len(picking_1.move_lines), 2)
@@ -210,7 +211,7 @@ class TestStockPicking(common.TransactionCase):
                 'product_uom_qty': 20,
                 'product_uom': product_uom_id,
             })]
-        })
+        }).with_context(round_autoset=False)
         picking_2.action_confirm()
         picking_2.action_assign()
         self.assertEqual(len(picking_2.move_lines), 2)
@@ -238,7 +239,7 @@ class TestStockPicking(common.TransactionCase):
                 'product_uom_qty': 20,
                 'product_uom': product_uom_id,
             })]
-        })
+        }).with_context(round_autoset=False)
         picking_3.action_confirm()
         picking_3.action_assign()
         # The system will not create a new line
