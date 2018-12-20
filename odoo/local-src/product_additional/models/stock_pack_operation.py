@@ -45,12 +45,13 @@ class StockPackOperation(models.Model):
                           moves_to_cancel.ids)
             moves_to_cancel.with_context(
                 no_recompute_pack=True, force_cancel=True).action_cancel()
-            # FIXME: Disabled as this is causing an error in the reception.
-            #        However, as in a pick, we do recomputation, this was
-            #        cleaner to remove those instead of having them stacking.
-            #        Nevertheless, keeping those canceled moves has no impact.
-            # # A standard picker cannot delete a stock.move
-            # moves_to_cancel.sudo().unlink()
+            # * We need to unlink that canceled move otherwise do_unreserve
+            #   will complain for 'Cannot unreserve a done move'
+            # * Calling sudo as a standard picker cannot delete a stock.move
+            # * Reception orders are failing on this unlink
+            if 'RECEIVE' not in moves_to_cancel.mapped(
+                    'picking_id.picking_type_subcode'):
+                moves_to_cancel.sudo().unlink()
 
         super(StockPackOperation, self).with_context(
             skip_additional=True).unlink()

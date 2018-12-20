@@ -9,8 +9,10 @@ Unreleased
 **Features and Improvements**
 
 * ALCYN-1775: Only generate a lot name for aliments at the reception
+* ALCYN-1772: Add manufacturer information in product export (ESB)
 
 **Bugfixes**
+* Fix additional products and pushed moves. Limit additional products to pick only
 
 **Build**
 
