@@ -67,11 +67,17 @@ class ProductExportMapper(Component):
             supplier = suppliers[0]
             supplier_product_code = supplier.product_code or ''
             supplier_ref = supplier.name.ref or '0'
+
         return {'Gesarc': supplier_product_code,
                 'Gesfou': supplier_ref,
-                # "fabricant" could maybe be removed
-                'Cplz25': supplier_ref,
                 }
+
+    @mapping
+    def manufacturer(self, record):
+        manufacturer_ref = '0'
+        if record.manufacturer:
+            manufacturer_ref = record.manufacturer.ref or '0'
+        return {'Cplz25': manufacturer_ref}
 
     @mapping
     def category_warnings(self, record):
