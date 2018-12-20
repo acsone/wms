@@ -184,6 +184,8 @@ class StockMove(models.Model):
                             'linked_move_operation_ids.move_id')
                         operations_to_recompute.unlink()
                         op_linked_moves.do_unreserve()
+                    else:
+                        move.do_unreserve()
                     break
             else:
                 # create a new picking
@@ -191,6 +193,8 @@ class StockMove(models.Model):
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
                 if backorder_orig_id:
+                    picking.message_post(body=_(
+                        "Backorder of %s" % backorder_orig_id.name))
                     backorder_orig_id.message_post(body=_(
                         "Remaining move '%s' moved to new backorder "
                         "<em>%s</em>.") %
@@ -200,6 +204,7 @@ class StockMove(models.Model):
                 else:
                     pickings_cache[str(domain)] |= picking
                 move.picking_id = picking.id
+                move.do_unreserve()
                 # see standard assign_picking for why recompute is called
                 move.recompute()
         return True

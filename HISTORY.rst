@@ -3,6 +3,12 @@
 Release History
 ---------------
 
+10.30.2 (2018-12-20)
+++++++++++++++++++++
+
+**Bugfixes**
+Automaticaly unreserve a move that is sent to backorder
+
 10.30.1 (2018-12-20)
 ++++++++++++++++++++
 
