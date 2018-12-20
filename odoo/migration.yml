@@ -787,3 +787,7 @@ migration:
           - product_additional
           - connector_esb
     - version: 10.30.2
+    - version: 10.30.3
+      addons:
+        upgrade:
+          - delivery_rounds

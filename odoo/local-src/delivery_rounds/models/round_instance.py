@@ -194,6 +194,19 @@ class RoundInstance(models.Model):
                 float2time(rec.time_leave_planned),
                 rec.template_id.display_name)
 
+    @api.onchange('template_id')
+    @api.constrains('template_id')
+    def constrains_template_id(self):
+        self.ensure_one()
+
+        if not self.template_id:
+            return
+
+        template = self.template_id
+        self.itinerary_ids = [(6, 0, template.itinerary_ids.ids)]
+        self.time_picking_planned = template.time_picking_planned
+        self.time_leave_planned = template.time_leave_planned
+
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
@@ -238,7 +251,8 @@ class RoundInstance(models.Model):
         picking_confirmed = self.env['stock.picking'].search([
             ('delivery_round_id', '=', False),
             ('partner_id', 'in', partners_delivery_ids),
-            ('state', '=', 'confirmed')])
+            ('state', '=', 'confirmed'),
+            ('picking_type_subcode', '=', 'PICK')])
         self._assign_pickings(picking_confirmed)
 
     def _assign_pickings(self, pickings, no_prepare=False):
