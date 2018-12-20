@@ -786,3 +786,4 @@ migration:
           ### local
           - product_additional
           - connector_esb
+    - version: 10.30.2
