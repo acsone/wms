@@ -31,15 +31,21 @@ class StockPackOperationLot(models.Model):
                     is_removal_date_expired = True
         self.is_removal_date_expired = is_removal_date_expired
 
-    def _calc_lotname_from_lifedate(self, life_date):
+    def _calc_lotname_from_lifedate(self, pack_op, life_date):
+        """ The default lot name is only for an aliment """
+        picking_zone = pack_op.product_id.picking_zone_id
+        if picking_zone != self.env.ref('__setup__.picking_zone_aliments'):
+            return
+
         date = fields.Datetime.from_string(life_date)
         date_with_timezone = fields.Datetime.context_timestamp(self, date)
         return date_with_timezone.strftime('%d%m%y')
 
     @api.onchange('life_date')
     def _onchange_life_date(self):
-        if self.life_date:
-            self.lot_name = self._calc_lotname_from_lifedate(self.life_date)
+        if self.life_date and self.operation_id:
+            self.lot_name = self._calc_lotname_from_lifedate(
+                self.operation_id, self.life_date)
 
     @api.multi
     def write(self, vals):
