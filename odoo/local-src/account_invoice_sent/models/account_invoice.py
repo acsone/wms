@@ -28,12 +28,10 @@ class AccountInvoice(models.Model):
             )
 
         def f_sending_method(r):
-            commercial = r.partner_id.commercial_partner_id
-            return commercial.invoice_sending_method == sending_method
+            return r.sending_method == sending_method
 
         def f_email(r):
-            commercial = r.partner_id.commercial_partner_id
-            return bool(commercial.email)
+            return bool(r.partner_id.email)
 
         filters = [f_state]
         if sending_method:

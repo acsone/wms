@@ -3,8 +3,8 @@
 Release History
 ---------------
 
-Unreleased
-++++++++++
+10.30.1 (2018-12-20)
+++++++++++++++++++++
 
 **Features and Improvements**
 
@@ -12,6 +12,8 @@ Unreleased
 
 **Bugfixes**
 * Fix additional products and pushed moves. Limit additional products to pick only
+
+* ALCYN-1774: Wizard for sending invoice by email, fix inconsistencies with sending method and email used.
 
 **Build**
 
