@@ -8,6 +8,8 @@ Unreleased
 
 **Features and Improvements**
 
+* ALCYN-1775: Only generate a lot name for aliments at the reception
+
 **Bugfixes**
 
 **Build**

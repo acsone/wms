@@ -780,3 +780,4 @@ migration:
         upgrade:
           ### local
           - account_invoice_sent
+    - version: 10.30.1
