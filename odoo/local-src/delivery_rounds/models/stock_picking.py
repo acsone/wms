@@ -28,7 +28,7 @@ class StockPicking(models.Model):
             partner = picking.partner_id
             if partner.type == 'contact' and partner.parent_id:
                 partner = partner.parent_id
-            picking.partner_itinerary_ids = [(6, 0, partner.round_itinerary_ids.ids)]
+            picking.partner_itinerary_ids = partner.round_itinerary_ids
 
     delivery_round_customer_id = fields.Many2one(
         'round.instance.customer', 'Delivery Round Customer', copy=False)
@@ -146,7 +146,7 @@ class StockPicking(models.Model):
             ('state', 'not in', ('done', 'cancel')),
             ('picking_type_subcode', '=', 'PICK')])
         for picking in pickings:
-            pickings_by_partner[picking.partner_id.id] |= picking
+            pickings_by_partner[picking.partner_id] |= picking
 
         for partner, pickings in pickings_by_partner.iteritems():
             pickings.with_delay(description=_(
