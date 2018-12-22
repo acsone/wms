@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock.view_picking_internal_search"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <filter name="partner_delivery_itinerary_id" domain="[('partner_id.round_itinerary_ids', '=', False)]" string="Delivery Itinerary Missing"/>
+                <filter name="partner_delivery_itinerary_id" domain="[('partner_itinerary_ids', '=', False)]" string="Delivery Itinerary Missing"/>
             </field>
             <field name="picking_type_id" position="after">
                 <field name="delivery_round_id"/>
@@ -24,6 +24,9 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.vpicktree"/>
         <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="partner_itinerary_ids" widget="many2many_tags"/>
+            </field>
             <field name="state" position="after">
                 <field name="picking_type_code"/>
                 <field name="delivery_round_id"/>
@@ -47,6 +50,7 @@
                 <field name="operator_id"/>
                 <field name="location_dest_id"/>
                 <field name="partner_id"/>
+                <field name="partner_itinerary_ids" widget="many2many_tags"/>
                 <field name="date" invisible="1"/>
                 <field name="min_date"/>
                 <field name="origin"/>

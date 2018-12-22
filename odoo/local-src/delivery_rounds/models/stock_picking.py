@@ -4,7 +4,7 @@
 import logging
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.addons.queue_job.job import job
 
@@ -13,6 +13,22 @@ _logger = logging.getLogger(__name__)
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    partner_itinerary_ids = fields.Many2many(
+        'round.itinerary.position',
+        string='Itineraries',
+        help="Indicates on which itinerary this partner is",
+        compute='_compute_partner_itinerary_ids')
+
+    def _compute_partner_itinerary_ids(self):
+        for picking in self:
+            if not (picking.picking_type_subcode == 'PICK'
+                    or picking.picking_type_code == 'outgoing'):
+                continue
+            partner = picking.partner_id
+            if partner.type == 'contact' and partner.parent_id:
+                partner = partner.parent_id
+            picking.partner_itinerary_ids = [(6, 0, partner.round_itinerary_ids.ids)]
 
     delivery_round_customer_id = fields.Many2one(
         'round.instance.customer', 'Delivery Round Customer', copy=False)
@@ -125,24 +141,25 @@ class StockPicking(models.Model):
     def _delay_jobs_action_assign(self):
         # Group picking by partner
         pickings_by_partner = defaultdict(lambda: self.env['stock.picking'])
-        pickings = self.search([('state', '=', 'confirmed'),
-                                ('picking_type_subcode', '=', 'PICK')])
+        pickings = self.search([
+            ('delivery_round_id', '=', False),
+            ('state', 'not in', ('done', 'cancel')),
+            ('picking_type_subcode', '=', 'PICK')])
         for picking in pickings:
             pickings_by_partner[picking.partner_id.id] |= picking
 
-        for pickings in pickings_by_partner.values():
-            pickings.with_delay()._job_action_assign()
+        for partner, pickings in pickings_by_partner.iteritems():
+            pickings.with_delay(description=_(
+                'Assign pickings of partner %s') % partner.ref
+                )._job_action_assign()
 
     @api.multi
     @job(default_channel='root.action_assign')
     def _job_action_assign(self):
-        moves = self.env['stock.move'].search(
-            [('picking_id', 'in', self.ids),
-             ('state', '=', 'confirmed'),
-             ('product_uom_qty', '!=', 0.0)],
-            limit=None,
-            order='priority desc, date_expected asc'
-        )
+        moves = self.mapped('move_lines').filtered(
+            lambda move: move.state not in ('done', 'cancel') and
+            move.product_uom_qty > 0.0 and
+            not move.linked_move_operation_ids)
         moves.action_assign()
 
 

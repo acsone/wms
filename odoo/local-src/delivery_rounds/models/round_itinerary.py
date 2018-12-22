@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -70,20 +70,28 @@ class RoundItineraryPosition(models.Model):
     tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.multi
-    @api.depends('itinerary_id')
+    @api.depends('itinerary_id', 'tag_ids')
     def name_get(self):
         result = []
         for rec in self:
-            code = rec.itinerary_id.code
+            name = rec.itinerary_id.name
             tags = ','.join(rec.tag_ids.mapped('name'))
             if tags:
-                code += ' (%s)' % tags
-            result.append((rec.id, code))
+                name += ' (%s)' % tags
+            templates = (
+                rec.itinerary_id.template_ids
+                .with_context(short_round_template_name=True)
+                .mapped('display_name'))
+            if templates:
+                name += ' [%s]' % ', '.join(templates)
+            result.append((rec.id, name))
         return result
 
     @api.multi
     def name_search(self, name, args=None, operator='ilike', limit=100):
+        if name:
+            name = name.split(' ', 1)[0]
         res = self.search(
-            args + [('itinerary_id.code', operator, name)],
+            args + [('itinerary_id.name', operator, name)],
             limit=limit)
         return res.name_get()
