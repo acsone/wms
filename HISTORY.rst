@@ -6,35 +6,13 @@ Release History
 ++++++++++++++++++++
 
 **Bugfixes**
+* Fix reservation by unit - exclude domain at each step
 * ALCYN-1726: reverse list of customers on delivery round report: solves the right report and revert change on the wrong one
-
-10.30.3 (2018-12-23)
-++++++++++++++++++++
 
 **Features and Improvements**
 * Prevent to cancel a pick/ship and allow to recover the one already canceled
-
-10.30.3 (2018-12-23)
-++++++++++++++++++++
-
-**Features and Improvements**
 * Assign waiting pickings to delivery rounds and show default itineraries
-
-latest (unreleased)
-+++++++++++++++++++
-
-**Features and Improvements**
 * BIZ-2655: add filename named accoring to the mandate sequence
-**Bugfixes**
-
-**Build**
-
-**Documentation**
-
-
-
-Release History
----------------
 
 10.30.2 (2018-12-20)
 ++++++++++++++++++++
