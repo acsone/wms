@@ -790,5 +790,7 @@ migration:
     - version: 10.30.3
       addons:
         upgrade:
+          ### local
+          - account_banking_mandate
           - delivery_rounds
           - stock_constraint

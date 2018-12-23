@@ -20,6 +20,22 @@ Release History
 **Features and Improvements**
 * Assign waiting pickings to delivery rounds and show default itineraries
 
+latest (unreleased)
++++++++++++++++++++
+
+**Features and Improvements**
+* BIZ-2655: add filename named accoring to the mandate sequence
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+
+Release History
+---------------
+
 10.30.2 (2018-12-20)
 ++++++++++++++++++++
 
