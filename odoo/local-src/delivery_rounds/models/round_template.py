@@ -86,12 +86,13 @@ class RoundTemplate(models.Model):
             name = rec.code
             if not self.env.context.get('short_round_template_name'):
                 name += ' - %s' % rec.name
-            tags = '/'.join(
-                rec.tag_ids
-                .with_context(short_round_tag_name=True)
-                .mapped('display_name'))
-            if tags:
-                name += ' (%s)' % tags
+            if self.env.context.get('params', {}).get('view_type') != 'kanban':
+                tags = '/'.join(
+                    rec.tag_ids
+                    .with_context(short_round_tag_name=True)
+                    .mapped('display_name'))
+                if tags:
+                    name += ' (%s)' % tags
             result.append((rec.id, name))
         return result
 

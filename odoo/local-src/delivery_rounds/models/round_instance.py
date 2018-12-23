@@ -296,6 +296,10 @@ class RoundInstance(models.Model):
                 ric = self._add_customer(partner)
                 pickings_bypartner = reduce(
                     lambda x, y: x | y, pickings_bypartner_iter)
+                # As we filtered on assigned, we typicaly excluded the waiting
+                # shippings. So include them back
+                pickings_bypartner |= \
+                    pickings_bypartner._get_all_dest_pickings()
                 ric._link_pickings(pickings_bypartner)
         return pickings_assigned
 
