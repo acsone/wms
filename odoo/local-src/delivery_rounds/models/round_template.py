@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+import re
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+
+re_name = re.compile(r'(\w+) ?- ?(\w+)( .*)?')
 
 
 class RoundTemplateVersion(models.Model):
@@ -75,11 +79,21 @@ class RoundTemplate(models.Model):
         return [('itinerary_ids', 'in', itineraries.ids)]
 
     @api.multi
-    @api.depends('name', 'code')
+    @api.depends('name', 'code', 'tag_ids')
     def name_get(self):
         result = []
         for rec in self:
-            result.append((rec.id, rec.code + ' - ' + rec.name))
+            name = rec.code
+            if not self.env.context.get('short_round_template_name'):
+                name += ' - %s' % rec.name
+            if self.env.context.get('show_round_template_tags'):
+                tags = '/'.join(
+                    rec.tag_ids
+                    .with_context(short_round_tag_name=True)
+                    .mapped('display_name'))
+                if tags:
+                    name += ' (%s)' % tags
+            result.append((rec.id, name))
         return result
 
     @api.model
@@ -87,10 +101,12 @@ class RoundTemplate(models.Model):
         args = args or []
         domain = []
         if name:
-            vals = name.split('-', 1)
+            vals = re_name.match(name)
+            if vals:
+                vals = vals.groups()
             if len(vals) > 1:
-                code = vals[0].strip()
-                text = vals[1].strip()
+                code = vals[0]
+                text = vals[1]
                 comb = operator.startswith('not ') and '|' or '&'
             else:
                 code = text = name.strip()

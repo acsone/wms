@@ -9,6 +9,21 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    def action_uncancel(self):
+        """ Try to recover a canceled picking """
+        self.mapped('move_lines').write({'state': 'confirmed'})
+        self.mapped('move_lines').action_assign()
+
+    def action_cancel(self):
+        codes = self.mapped('picking_type_code')
+        if ('outgoing' in codes or
+                'PICK' in self.mapped('picking_type_subcode')):
+            if not self.user_has_groups(
+                    'stock_constraint.group_picking_cancel'):
+                raise UserError(_(
+                    'You are not allowed to cancel such operation'))
+        return super(StockPicking, self).action_cancel()
+
     def do_transfer(self):
         """ Prevent button to be clicked twice as this will perform the action
         twice """

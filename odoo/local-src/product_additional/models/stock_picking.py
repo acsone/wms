@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2017 Sylvain Van Hoof (Okia SPRL)
-# © 2017 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2017 Sylvain Van Hoof (Okia SPRL)
+# Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
@@ -11,6 +11,13 @@ _logger = logging.getLogger(__name__)
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    def action_uncancel(self):
+        """ Try to recover a canceled picking """
+        additional_moves = self.mapped('pack_operation_ids.additional_move_id')
+        moves_to_uncancel = self.mapped('move_lines') - additional_moves
+        moves_to_uncancel.write({'state': 'confirmed'})
+        moves_to_uncancel.action_assign()
 
     @api.multi
     def _prepare_pack_ops(self, quants, forced_qties):

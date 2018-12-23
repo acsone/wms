@@ -34,6 +34,15 @@
     - oca refs/pull/70/head
   target: *default_target
 # We keep this to manage a sharable and updatable fork of enterprise branch
+./external-src/bank-payment:
+  remotes:
+    oca: git@github.com:OCA/bank-payment.git
+    camptocamp: git@github.com:camptocamp/bank-payment.git
+  merges:
+    - oca e042533b5df5e71d8b9089d7e2a445e6c0d51aca
+      # [10.0] improve file name in mandate
+    - oca refs/pull/534/head
+  target: *default_target
 ./external-src/enterprise:
   remotes:
     odoo: git@github.com:odoo/enterprise.git
