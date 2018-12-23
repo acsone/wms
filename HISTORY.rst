@@ -2,6 +2,17 @@
 
 Release History
 ---------------
+10.30.3 (2018-12-23)
+++++++++++++++++++++
+
+**Bugfixes**
+* ALCYN-1726: reverse list of customers on delivery round report: solves the right report and revert change on the wrong one
+
+10.30.3 (2018-12-23)
+++++++++++++++++++++
+
+**Features and Improvements**
+* Prevent to cancel a pick/ship and allow to recover the one already canceled
 
 10.30.3 (2018-12-23)
 ++++++++++++++++++++

@@ -791,3 +791,4 @@ migration:
       addons:
         upgrade:
           - delivery_rounds
+          - stock_constraint
