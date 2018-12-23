@@ -9,8 +9,11 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
+        'stock_picking_subcode',
         ],
     'data': [
+        'security/res_groups.xml',
+        'views/stock_picking.xml',
     ],
     'installable': True,
     'auto_install': False,
