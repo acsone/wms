@@ -792,3 +792,5 @@ migration:
         upgrade:
           ### local
           - account_banking_mandate
+          - delivery_rounds
+          - stock_constraint
