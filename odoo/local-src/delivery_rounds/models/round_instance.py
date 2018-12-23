@@ -194,6 +194,17 @@ class RoundInstance(models.Model):
                 float2time(rec.time_leave_planned),
                 rec.template_id.display_name)
 
+    @api.onchange('template_id')
+    def onchange_template_id(self):
+        self.ensure_one()
+        if not self.template_id:
+            return
+        template = self.template_id
+        self.itinerary_ids = [(6, 0, template.itinerary_ids.ids)]
+        self.tag_ids = [(6, 0, template.tag_ids.ids)]
+        self.time_picking_planned = template.time_picking_planned
+        self.time_leave_planned = template.time_leave_planned
+
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
@@ -229,16 +240,23 @@ class RoundInstance(models.Model):
 
         self.itinerary_ids |= itineraries
 
-        partners = itineraries.mapped('partner_position_ids.partner_id')
-        # Itineraries can contain partner of any type. So extract corresponding
-        # delivery address
+        partners = itineraries\
+            .mapped('partner_position_ids.partner_id')\
+            .filtered(lambda p:  # See find_bypartner tag rules
+                      not self.tag_ids or
+                      not p.tag_ids or
+                      p.tag_ids & self.tag_ids)  # & is intersect
+
+        # Itineraries can contain partners of any type. So extract
+        # corresponding delivery address
         partners_delivery_ids = [partner.address_get(['delivery'])['delivery']
                                  for partner in partners]
 
         picking_confirmed = self.env['stock.picking'].search([
             ('delivery_round_id', '=', False),
             ('partner_id', 'in', partners_delivery_ids),
-            ('state', '=', 'confirmed')])
+            ('state', 'not in', ('done', 'cancel')),
+            ('picking_type_subcode', '=', 'PICK')])
         self._assign_pickings(picking_confirmed)
 
     def _assign_pickings(self, pickings, no_prepare=False):
@@ -251,16 +269,20 @@ class RoundInstance(models.Model):
         # Note: MTO moves in waiting state are updated in standard by a call to
         # action_assign, so we need to propagate it
         moves = pickings.mapped('move_lines').filtered(
-            lambda move: move.state in ('waiting', 'confirmed') and
-            not move.linked_move_operation_ids)
-        if moves:
+            lambda move: move.state not in ('done', 'cancel') and
+            move.product_uom_qty > 0.0)
+        moves_to_assign = moves.filtered(
+            lambda move: not move.linked_move_operation_ids)
+        if moves_to_assign:
             moves.with_context(round_autoset=False).action_assign(
                 no_prepare=no_prepare)
 
-        # retrieve all pickings (partially) available
-        pickings_assigned = self.env['stock.picking'].search([
-            ('id', 'in', pickings.ids),
-            ('state', 'in', ('partially_available', 'assigned'))])
+        # Retrieve all pickings (partially) available
+        # Do not look at the state of the picking as assigned state has the
+        # lowest priority
+        moves_assigned = moves.filtered(
+            lambda move: move.state == 'assigned')
+        pickings_assigned = moves_assigned.mapped('picking_id')
         if pickings_assigned:
             def key(r):
                 partner = r.partner_id
@@ -274,6 +296,10 @@ class RoundInstance(models.Model):
                 ric = self._add_customer(partner)
                 pickings_bypartner = reduce(
                     lambda x, y: x | y, pickings_bypartner_iter)
+                # As we filtered on assigned, we typicaly excluded the waiting
+                # shippings. So include them back
+                pickings_bypartner |= \
+                    pickings_bypartner._get_all_dest_pickings()
                 ric._link_pickings(pickings_bypartner)
         return pickings_assigned
 
@@ -670,11 +696,10 @@ class RoundInstanceCustomer(models.Model):
         # shippings, so we don't have to ensure a picking is not already done
         # for another delivery round
         pickings = pickings.filtered(
-            lambda r: r.state in (
-                'waiting',
-                'confirmed',
-                'partially_available',
-                'assigned') and
+            lambda r: r.state not in (
+                'draft',
+                'cancel',
+                'done') and
             r.delivery_round_customer_id.id != self.id)
         if pickings:
             _logger.debug("Link to delivery round the pickings/shippings %s",

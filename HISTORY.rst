@@ -14,6 +14,12 @@ Release History
 **Features and Improvements**
 * Prevent to cancel a pick/ship and allow to recover the one already canceled
 
+10.30.3 (2018-12-23)
+++++++++++++++++++++
+
+**Features and Improvements**
+* Assign waiting pickings to delivery rounds and show default itineraries
+
 10.30.2 (2018-12-20)
 ++++++++++++++++++++
 
