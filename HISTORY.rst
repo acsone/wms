@@ -2,6 +2,11 @@
 
 Release History
 ---------------
+10.30.3 (2018-12-23)
+++++++++++++++++++++
+
+**Bugfixes**
+* Fix reservation by unit - exclude domain at each step
 
 10.30.2 (2018-12-20)
 ++++++++++++++++++++
