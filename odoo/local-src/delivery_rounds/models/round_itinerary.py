@@ -83,7 +83,8 @@ class RoundItineraryPosition(models.Model):
                 name += ' (%s)' % tags
             templates = (
                 rec.itinerary_id.template_ids
-                .with_context(short_round_template_name=True)
+                .with_context(short_round_template_name=True,
+                              show_round_template_tags=True)
                 .mapped('display_name'))
             if templates:
                 name += ' [%s]' % ', '.join(templates)
