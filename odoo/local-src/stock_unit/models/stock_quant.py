@@ -28,21 +28,24 @@ class StockQuant(models.Model):
                     'stock.reservation_unit_pallet_factor', 1))
                 pallet_qty = move.product_id.unit_in_pallet * pallet_factor
                 if pallet_qty and qty > pallet_qty:
-                    preferred_domain_list.append([('qty', '>=', pallet_qty)])
+                    preferred_domain_list.append(
+                        [('qty', '>=', pallet_qty)] + exclude_domain)
                     exclude_domain.append(('qty', '<', pallet_qty))
 
                 box_factor = float(config_param.get_param(
                     'stock.reservation_unit_box_factor', 1))
                 box_qty = move.product_id.unit_in_box * box_factor
                 if box_qty and qty > box_qty:
-                    preferred_domain_list.append([('qty', '>=', box_qty)])
+                    preferred_domain_list.append(
+                        [('qty', '>=', box_qty)] + exclude_domain)
                     exclude_domain.append(('qty', '<', box_qty))
 
                 wrap_factor = float(config_param.get_param(
                     'stock.reservation_unit_wrap_factor', 1))
                 wrap_qty = move.product_id.unit_in_shrink_wrap * wrap_factor
                 if wrap_qty and qty > wrap_qty:
-                    preferred_domain_list.append([('qty', '>=', wrap_qty)])
+                    preferred_domain_list.append(
+                        [('qty', '>=', wrap_qty)] + exclude_domain)
                     exclude_domain.append(('qty', '<', wrap_qty))
 
                 if preferred_domain_list:
