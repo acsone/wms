@@ -11,6 +11,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-1787: Fix the name search of round template
+* Fix delivery round include itinerary
 
 **Build**
 
