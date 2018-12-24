@@ -278,6 +278,8 @@ class RoundInstance(models.Model):
         if moves_to_assign:
             moves.with_context(round_autoset=False).action_assign(
                 no_prepare=no_prepare)
+            # Due to product_additional, recordset could have changed
+            moves = moves.search([('id', 'in', moves.ids)])
 
         # Retrieve all pickings (partially) available
         # Do not look at the state of the picking as assigned state has the

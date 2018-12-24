@@ -9,6 +9,20 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    def do_prepare_partial(self):
+        # This method deletes all pack operations and then recreates them.
+        # This could trigger action_cancel on stock move but we do not
+        # want other moves to try assignment as we will directly re-reserve
+        # them.
+        return super(
+            StockPicking,
+            self.with_context(no_auto_reassign=True)
+            ).do_prepare_partial()
+
+
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
@@ -37,9 +51,10 @@ class StockMove(models.Model):
         """ When move is canceled, check if other moves can be assigned """
         products = self.mapped('product_id')
         res = super(StockMove, self).action_cancel()
-        self.with_delay(description=_(
-            'Reassign trial on cancel for products ids %s'
-            ) % products.ids)._reassign_trial(products)
+        if not self.env.context.get('no_auto_reassign'):
+            self.with_delay(description=_(
+                'Reassign trial on cancel for products ids %s'
+                ) % products.ids)._reassign_trial(products)
         return res
 
     def write(self, vals):

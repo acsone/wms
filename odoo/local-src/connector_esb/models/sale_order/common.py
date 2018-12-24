@@ -206,6 +206,10 @@ class StockMove(models.Model):
     def action_assign(self, no_prepare=False):
         res = super(StockMove, self).action_assign(no_prepare=no_prepare)
 
+        # Due to product_additional, we need to recompute recordset
+        if self.ids:
+            self = self.search([('id', 'in', self.ids)])
+
         # Sale order that need to be resend to the esb !
         # Because their back order may have changed
         # Testing for order_id existance has it failed on some Travis tests

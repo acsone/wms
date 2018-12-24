@@ -209,7 +209,7 @@ class TestShippingCosts(SavepointCase):
         op = pick.pack_operation_product_ids
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({'qty_done': 1})
-        result = pick.with_context(test_mode=True).do_new_transfer()
+        pick.with_context(test_mode=True).do_transfer()
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
@@ -236,8 +236,7 @@ class TestShippingCosts(SavepointCase):
         op = pick.pack_operation_product_ids
         op.write({'qty_done': 1})
 
-        result = pick.with_context(test_mode=True).do_new_transfer()
-        self.assertEqual(result, None)
+        pick.with_context(test_mode=True).do_transfer()
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
@@ -273,7 +272,7 @@ class TestShippingCosts(SavepointCase):
         op = pick.pack_operation_product_ids
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({'qty_done': 1})
-        result = pick.with_context(test_mode=True).do_new_transfer()
+        pick.with_context(test_mode=True).do_transfer()
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), 0)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
@@ -300,8 +299,7 @@ class TestShippingCosts(SavepointCase):
         op = pick.pack_operation_product_ids
         op.write({'qty_done': 1})
 
-        result = pick.with_context(test_mode=True).do_new_transfer()
-        self.assertEqual(result, None)
+        pick.with_context(test_mode=True).do_transfer()
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)

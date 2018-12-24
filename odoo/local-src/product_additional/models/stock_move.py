@@ -16,3 +16,11 @@ class StockMove(models.Model):
         if self.ids:
             self = self.search([('id', 'in', self.ids)])
         return super(StockMove, self).do_unreserve()
+
+    def check_move_lots(self):
+        # Called in mrp module just after action_assign
+        # As recordset changed, we need to rebuild it otherwise it
+        # will complain for missing records in the recordset
+        if self.ids:
+            self = self.search([('id', 'in', self.ids)])
+        return super(StockMove, self).check_move_lots()

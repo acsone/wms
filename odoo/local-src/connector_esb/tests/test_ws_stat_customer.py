@@ -21,7 +21,7 @@ class WSStatCustomerTestCase(ESBXMLTestCase):
         for op in picks.pack_operation_product_ids:
             op.write({'qty_done': op.ordered_qty})
         for pick in picks:
-            pick.with_context(test_mode=True).do_new_transfer()
+            pick.with_context(test_mode=True).do_transfer()
         # Force this to be set because the delivery is not enough
         sale_order.write({'state': 'done'})
         for sol in sale_order.order_line:
