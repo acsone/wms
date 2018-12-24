@@ -240,12 +240,14 @@ class RoundInstance(models.Model):
 
         self.itinerary_ids |= itineraries
 
-        partners = itineraries\
-            .mapped('partner_position_ids.partner_id')\
+        partners = (
+            itineraries
+            .mapped('partner_position_ids')
             .filtered(lambda p:  # See find_bypartner tag rules
                       not self.tag_ids or
                       not p.tag_ids or
                       p.tag_ids & self.tag_ids)  # & is intersect
+            .mapped('partner_id'))
 
         # Itineraries can contain partners of any type. So extract
         # corresponding delivery address

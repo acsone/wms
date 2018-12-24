@@ -794,3 +794,4 @@ migration:
           - account_banking_mandate
           - delivery_rounds
           - stock_constraint
+    - version: 10.30.4
