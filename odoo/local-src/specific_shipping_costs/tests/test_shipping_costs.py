@@ -237,7 +237,6 @@ class TestShippingCosts(SavepointCase):
         op.write({'qty_done': 1})
 
         result = pick.with_context(test_mode=True).do_transfer()
-        self.assertEqual(result, None)
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
@@ -301,7 +300,6 @@ class TestShippingCosts(SavepointCase):
         op.write({'qty_done': 1})
 
         result = pick.with_context(test_mode=True).do_transfer()
-        self.assertEqual(result, None)
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), 0)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
