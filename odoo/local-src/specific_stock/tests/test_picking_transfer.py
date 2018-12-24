@@ -83,7 +83,7 @@ class TestPickingTransfer(TransactionCase):
             ],
             'qty_done': 1,
         })
-        picking.do_new_transfer()
+        picking.do_transfer()
 
         quants = self.env['stock.quant'].search([
             ('product_id', '=', self.product.id)

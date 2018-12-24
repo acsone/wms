@@ -110,7 +110,7 @@ class TestStockDeliveryNote(SavepointCase):
         super(TestStockDeliveryNote, self).setUp()
         # do new transfer must be done in setUp as
         # setUpClass doesn't set odoo.tools.config['test_enable']
-        self.picking.do_new_transfer()
+        self.picking.do_transfer()
         # This is a hack because the reserved_quant_id are not filled up
         # And they are needed by the get_lot in stock.move
         for sm in self.picking.move_lines:
