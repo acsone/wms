@@ -1,10 +1,35 @@
 .. :changelog:
 
+.. Template:
+
+.. 0.0.1 (2016-05-09)
+.. ++++++++++++++++++
+
+.. **Features and Improvements**
+
+.. **Bugfixes**
+
+.. **Build**
+
+.. **Documentation**
+
 Release History
 ---------------
 
 latest (unreleased)
 +++++++++++++++++++
+
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.4 (2018-12-23)
+++++++++++++++++++++
 
 **Features and Improvements**
 
@@ -16,11 +41,6 @@ latest (unreleased)
 **Build**
 
 **Documentation**
-
-
-
-Release History
----------------
 
 10.30.3 (2018-12-23)
 ++++++++++++++++++++
