@@ -104,7 +104,6 @@ class RoundTemplate(models.Model):
             vals = re_name.match(name)
             if vals:
                 vals = vals.groups()
-            if len(vals) > 1:
                 code = vals[0]
                 text = vals[1]
                 comb = operator.startswith('not ') and '|' or '&'
