@@ -795,3 +795,8 @@ migration:
           - delivery_rounds
           - stock_constraint
     - version: 10.30.4
+    - version: 10.30.5
+      addons:
+        upgrade:
+          ### local
+          - specific_report
