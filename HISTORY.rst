@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1792 fix in customer invoice report
 
 **Build**
 
