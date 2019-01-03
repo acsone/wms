@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-1792 fix in customer invoice report
-
 **Build**
 
 **Documentation**
+
+
+10.30.5 (2018-12-31)
+++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-1792 fix in customer invoice report
 
 
 10.30.4 (2018-12-23)
