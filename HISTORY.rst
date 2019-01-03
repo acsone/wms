@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+
 * ALCYN-1792 fix in customer invoice report
 
 **Build**
@@ -32,25 +33,23 @@ latest (unreleased)
 10.30.4 (2018-12-23)
 ++++++++++++++++++++
 
-**Features and Improvements**
-
 **Bugfixes**
 
 * ALCYN-1787: Fix the name search of round template
 * Fix delivery round include itinerary
 
-**Build**
-
-**Documentation**
 
 10.30.3 (2018-12-23)
 ++++++++++++++++++++
 
 **Bugfixes**
+
 * Fix reservation by unit - exclude domain at each step
-* ALCYN-1726: reverse list of customers on delivery round report: solves the right report and revert change on the wrong one
+* ALCYN-1726: reverse list of customers on delivery round report: solves the
+  right report and revert change on the wrong one
 
 **Features and Improvements**
+
 * Prevent to cancel a pick/ship and allow to recover the one already canceled
 * Assign waiting pickings to delivery rounds and show default itineraries
 * BIZ-2655: add filename named accoring to the mandate sequence
@@ -59,7 +58,9 @@ latest (unreleased)
 ++++++++++++++++++++
 
 **Bugfixes**
-Automaticaly unreserve a move that is sent to backorder
+
+* Automaticaly unreserve a move that is sent to backorder
+
 
 10.30.1 (2018-12-20)
 ++++++++++++++++++++
@@ -70,31 +71,25 @@ Automaticaly unreserve a move that is sent to backorder
 * ALCYN-1772: Add manufacturer information in product export (ESB)
 
 **Bugfixes**
+
 * Fix additional products and pushed moves. Limit additional products to pick only
 
 * ALCYN-1774: Wizard for sending invoice by email, fix inconsistencies with sending method and email used.
-
-**Build**
-
-**Documentation**
 
 
 10.30.0 (2018-12-19)
 ++++++++++++++++++++
 
 **Features and Improvements**
+
 * ALCYN-1761: generate and send pdf invoices in background
-**Bugfixes**
-
-**Build**
-
-**Documentation**
 
 
 10.29.19 (2018-12-18)
 +++++++++++++++++++++
 
 **Features and Improvements**
+
 * Refactor refill report (arrange, reassort) for real-time computation
 * ALCYN-1761: improve the view of the action to send invoices by email / print, make it less confusing
 * ALCYN-1761: the "Related" button on the job related to invoices now try to open the correct view (customer or supplier)
@@ -103,17 +98,13 @@ Automaticaly unreserve a move that is sent to backorder
 * ALCYN-1563: Import the final customer balance and post all new journal entries
 
 **Bugfixes**
-* ProgrammingError: syntax error at or near ")"
 
-**Build**
+* ProgrammingError: syntax error at or near ")"
 * BIZ-2640: Customer Reference on invoice
 * ALCYN-1750: Review Layout invoice to add antibiotics
-
 * ALCYN-1767: Fix delivery note csv for product with no vat info on sale order, look for vat in product directly.
 * ALCYN-1762: fix transactional errors during background delivery of delivery rounds
 * Fix missing records during a reception with additional product
-
-**Documentation**
 
 
 10.29.18 (2018-12-18)
@@ -141,10 +132,6 @@ Move to 10.29.19
 * ALCYN-1760: Fix delivery note csv so no quantity are missing compared to the pdf version.
 * ALCYN-1766: Change Gescgr to 1 for Psychotrope so they are not flagged as medicament and will be visible on Magento
 
-**Build**
-
-**Documentation**
-
 
 10.29.16 (2018-12-11)
 +++++++++++++++++++++
@@ -170,8 +157,6 @@ Move to 10.29.19
 
 * ALCYN-1756: Pin pending-merges to prevent unwanted changes
 
-**Documentation**
-
 
 10.29.15 (2018-12-11)
 +++++++++++++++++++++
@@ -184,10 +169,6 @@ Moved to 10.29.16
 **Bugfixes**
 
 * HOTFIX : Run delivery of rounds in background
-
-**Build**
-
-**Documentation**
 
 
 10.29.13 (2018-12-09)
@@ -210,10 +191,6 @@ Moved to 10.29.16
 * Zetes: Add the possibility to change a lot and some blocking bugs
 
 * Fix singleton error
-
-**Build**
-
-**Documentation**
 
 
 10.29.12 (2018-12-07)
