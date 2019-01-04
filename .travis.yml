@@ -43,9 +43,6 @@ before_install:
 install:
   - if [ "$TESTS" == "1" ] ; then bundle install ; fi
   - if [ "$LINT_CHECK" == "0" ] ; then python ./travis/git_submodule_update.py ; fi
-  # FIXME never include large csv files in tag image only, currently builds don't need those files
-  # as they are already loaded on integration database. To reactivate if necessary, and to remove after go-live.
-  # - if [ "$TESTS" == "1" -a ! -z "$TRAVIS_TAG" ]; then git lfs pull ; fi
     # we always specify '-f docker-compose.yml' so 'docker-compose.override.yml'
     # is not used and so the volumes are not shared with the host
   - if [ "$LINT_CHECK" == "0" ] ; then docker-compose -f $TRAVIS_COMPOSE build --pull ; fi

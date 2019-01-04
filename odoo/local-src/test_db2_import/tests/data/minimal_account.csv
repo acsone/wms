@@ -1,2 +1,0 @@
-id,reconcile,code,name,company_id/id,user_type_id/id,tag_ids/id
-__setup__.account_440100,TRUE,440100,Fournisseurs divers,base.main_company,account.data_account_type_payable,

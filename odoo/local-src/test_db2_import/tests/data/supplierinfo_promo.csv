@@ -1,4 +1,0 @@
-id,name/id,product_code,price,min_qty_sale,product_tmpl_id/id,discount_sale,discount_purchase,date_start,date_end,ratio_main_product,ratio_promotional_product
-__import__.supplierinfo_promo_81200-3237765-20990101,__import__.supplier_81200,30472,180.91,1,__import__.product_3237765_product_template,75.00,75.00,2018-01-01,2099-01-01,1,5
-__import__.supplierinfo_promo_66200-2680544-20990101,__import__.supplier_66200,606177,57.42,1,__import__.product_2680544_product_template,75.00,75.00,2018-01-01,2099-01-01,1,5
-__import__.supplierinfo_promo_66200-7924351-20990101,__import__.supplier_66200,606177,57.42,1,__import__.product_7924351_product_template,75.00,75.00,2018-01-01,2099-01-01,1,10
