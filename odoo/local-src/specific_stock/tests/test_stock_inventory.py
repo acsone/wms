@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from datetime import date, datetime
+from datetime import date, datetime as dt
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -138,8 +138,8 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(other_products['delay'], 12)
         self.assertEqual(other_products['nbr_inventory_per_year'], 1)
 
-    @freeze_time("2018-06-01")
-    def test_get_products_daily_inventory(self):
+    @freeze_time("2018-06-01", as_arg=True)
+    def test_get_products_daily_inventory(frozen_time, self):
         """
         To test the method get_products_daily_inventory we need to create a
         subset of products.
@@ -225,9 +225,9 @@ class TestStockInventory(TransactionCase):
                 })
 
         # Create a first inventory
-        assert datetime.datetime.now() == datetime.datetime(2018, 6, 1)
+        assert dt.now() == dt(2018, 6, 1)
         self.env['bank.holiday'].search(
-            [('date', '=', fields.Date.context_today())]
+            [('date', '=', fields.Date.today())]
         ).unlink()
 
         inventory = stock_obj.create_daily_inventory()
@@ -259,14 +259,14 @@ class TestStockInventory(TransactionCase):
 
         # Rewrite the last_inventory_date
         inventory_products.write({
-            'date_last_inventory': fields.Date.context_today()
+            'date_last_inventory': fields.Date.today()
         })
 
         # Create a inventory the next day month
-        self.move_to('2018-07-20')
-        assert datetime.datetime.now() == datetime.datetime(2018, 7, 20)
+        frozen_time.move_to('2018-07-20')
+        assert dt.now() == dt(2018, 7, 20)
         self.env['bank.holiday'].search(
-            [('date', '=', fields.Date.context_today())]
+            [('date', '=', fields.Date.today())]
         ).unlink()
 
         inventory = stock_obj.create_daily_inventory()
