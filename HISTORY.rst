@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* Add menuentries to customer invoices/refunds for sales users in sales and accounting
 
 * ALCYN-1705: Add the canceled quantity in the sale order line view of a product
 

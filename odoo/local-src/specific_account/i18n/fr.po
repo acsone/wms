@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_account
+#   * specific_account
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 15:52+0000\n"
-"PO-Revision-Date: 2017-07-17 15:52+0000\n"
+"POT-Creation-Date: 2019-01-04 11:27+0000\n"
+"PO-Revision-Date: 2019-01-04 11:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_account
+#: selection:res.partner,invoice_frequency:0
+msgid "1 Month"
+msgstr "1 Mois"
+
+#. module: specific_account
+#: selection:res.partner,invoice_frequency:0
+msgid "10 Days"
+msgstr "10 Jours"
+
+#. module: specific_account
 #: model:account.tax.group,name:specific_account.tax_group_apb
 msgid "APB"
 msgstr "APB"
+
+#. module: specific_account
+#: selection:res.partner,invoice_grouping:0
+msgid "All at once"
+msgstr "Tout en 1 fois"
 
 #. module: specific_account
 #: model:ir.actions.act_window,name:specific_account.action_analytic_tag
@@ -39,37 +54,41 @@ msgid "August"
 msgstr "Août"
 
 #. module: specific_account
-#: model:ir.model.fields,help:specific_account.field_ir_sequence_use_end_date
-msgid "By default Odoo will use\n"
-"                                  the start date (from) to compute date\n"
-"                                  with the prefix range_ (eg: range_year).\n"
-"\n"
-"                                  If you set this flag Odoo will use the end\n"
-"                                  date (to) to compute date with\n"
-"                                  the prefix range.\n"
-"                                  Eg: From 1/10/2016 to 31/9/2017\n"
-"                                  without the flag:\n"
-"                                  %(range_year)s => 2016\n"
-"                                  with the flag\n"
-"                                  %(range_year)s => 2017\n"
-"                                  "
-msgstr "Par défault, Odoo utilise\n"
-"                                  la date de départ (De) pour calculer la date\n"
-"                                  avec le préfixe range_ (eg: range_year).\n"
-"\n"
-"                                  Si vous coché cette case, Odoo va utiliser la date de fin (A)\n"
-"                                  pour calculer la date avec le préfixe range\n"
-"                                  Exemple: Du 1/10/2016 au 31/9/2017\n"
-"                                  sans cocher la case:\n"
-"                                  %(range_year)s => 2016\n"
-"                                  en cochant la case\n"
-"                                  %(range_year)s => 2017\n"
-"                                  "
+#: model:ir.model.fields,help:specific_account.field_res_users_is_sale_back_order_cancel
+msgid "Automaticaly cancel products that could not be delivered. Must be set on delivery addresss"
+msgstr "Automatiquement annuler les articles qui n'ont pas pu être livrés. Doit être défini sur l'adresse de livraison."
+
+#. module: specific_account
+#: selection:res.partner,invoice_grouping:0
+msgid "By delivery"
+msgstr "Par livraison"
+
+#. module: specific_account
+#: model:ir.actions.act_window,help:specific_account.action_invoice_tree1_refund
+msgid "Click to create a customer refund."
+msgstr "Cliquer pour créer une note de crédit client."
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_res_company
 msgid "Companies"
 msgstr "Sociétés"
+
+#. module: specific_account
+#: model:ir.model.fields,help:specific_account.field_sale_order_is_unique_invoice
+msgid "Create an unique invoice for this sale order"
+msgstr "Créer une facture unique pour cette vente"
+
+#. module: specific_account
+#: model:ir.ui.menu,name:specific_account.menu_action_sale_invoice_tree1
+msgid "Customer Invoices"
+msgstr "Factures clients"
+
+#. module: specific_account
+#: model:ir.actions.act_window,name:specific_account.action_invoice_tree1_refund
+#: model:ir.ui.menu,name:specific_account.menu_action_invoice_tree1_refund
+#: model:ir.ui.menu,name:specific_account.menu_action_sale_invoice_tree1_refund
+msgid "Customer Refunds"
+msgstr "Notes de crédit"
 
 #. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_sale_order_date_order_short
@@ -104,6 +123,18 @@ msgid "Invoice Terms and Conditions"
 msgstr "Conditions générales pour facture"
 
 #. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_frequency
+#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_frequency
+msgid "Invoice frequency"
+msgstr "Fréquence de facturation"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_grouping
+#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_grouping
+msgid "Invoice grouping"
+msgstr "Regroupement des factures"
+
+#. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_invoice_report_invoice_month
 msgid "Invoice month"
 msgstr "Mois de la facture"
@@ -114,10 +145,25 @@ msgid "Invoices Statistics"
 msgstr "Statistiques des factures"
 
 #. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.view_account_config_settings
+msgid "Invoices generation"
+msgstr "Génération des factures"
+
+#. module: specific_account
 #: selection:account.invoice.report,due_month:0
 #: selection:account.invoice.report,invoice_month:0
 msgid "January"
 msgstr "Janvier"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
 
 #. module: specific_account
 #: selection:account.invoice.report,due_month:0
@@ -144,6 +190,11 @@ msgid "May"
 msgstr "Mai"
 
 #. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_config_settings_chunk_size
+msgid "Nbr of partners by invoices creation job"
+msgstr "Nbr of partners by invoices creation job"
+
+#. module: specific_account
 #: selection:account.invoice.report,due_month:0
 #: selection:account.invoice.report,invoice_month:0
 msgid "November"
@@ -154,6 +205,27 @@ msgstr "Novembre"
 #: selection:account.invoice.report,invoice_month:0
 msgid "October"
 msgstr "Octobre"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: specific_account
+#: code:addons/specific_account/models/sale_order.py:40
+#, python-format
+msgid "Please set the chunk size in account settings"
+msgstr "Please set the chunk size in account settings"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_res_users_is_sale_back_order_cancel
+msgid "Sale backorder auto-cancel"
+msgstr "Sale backorder auto-annulation"
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_sale_order
@@ -167,27 +239,22 @@ msgid "September"
 msgstr "Septembre"
 
 #. module: specific_account
-#: sql_constraint:account.invoice:0
-msgid "The supplier invoice number must be unique by supplier"
-msgstr "Le numéro de facture doit être unique par facture fournisseur"
+#: model:ir.model,name:specific_account.model_account_tax
+msgid "Tax"
+msgstr "Taxe"
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_ir_sequence_use_end_date
-msgid "Use the end date of the range"
-msgstr "Utiliser la date de fin de l'intervalle"
+#: model:ir.model,name:specific_account.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_sale_order_is_unique_invoice
+msgid "Unique invoice"
+msgstr "Facture unique"
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_ir_sequence
-msgid "ir.sequence"
-msgstr "ir.sequence"
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_ir_sequence_date_range
-msgid "ir.sequence.date_range"
-msgstr "ir.sequence.date_range"
 
