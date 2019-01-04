@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from datetime import date
+from datetime import date, datetime
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
+
+from freezegun import freeze_time
 
 
 class TestStockInventory(TransactionCase):
@@ -136,6 +138,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(other_products['delay'], 12)
         self.assertEqual(other_products['nbr_inventory_per_year'], 1)
 
+    @freeze_time("2018-06-01", as_arg=True)
     def test_get_products_daily_inventory(self):
         """
         To test the method get_products_daily_inventory we need to create a
@@ -151,7 +154,6 @@ class TestStockInventory(TransactionCase):
             'fiscalyear_last_month': 12,
             'fiscalyear_last_day': 31,
         })
-        today_year = date.today().year
 
         product_obj = self.env['product.product']
         so_obj = self.env['sale.order']
@@ -223,14 +225,12 @@ class TestStockInventory(TransactionCase):
                 })
 
         # Create a first inventory
-        date_today_overwrite = date(year=today_year, month=6, day=1)
+        assert datetime.datetime.now() == datetime.datetime(2018, 6, 1)
         self.env['bank.holiday'].search(
-            [('date', '=', fields.Date.to_string(date_today_overwrite))]
+            [('date', '=', fields.Date.context_today())]
         ).unlink()
 
-        inventory = stock_obj.create_daily_inventory(
-            date_today_overwrite=date_today_overwrite,
-        )
+        inventory = stock_obj.create_daily_inventory()
         inventory.prepare_inventory()
         inventory_products = inventory.line_ids.mapped('product_id')
 
@@ -259,18 +259,17 @@ class TestStockInventory(TransactionCase):
 
         # Rewrite the last_inventory_date
         inventory_products.write({
-            'date_last_inventory': fields.Date.to_string(date_today_overwrite)
+            'date_last_inventory': fields.Date.context_today()
         })
 
         # Create a inventory the next day month
-        date_today_overwrite = date(year=today_year, month=7, day=20)
+        self.move_to('2018-07-20')
+        assert datetime.datetime.now() == datetime.datetime(2018, 7, 20)
         self.env['bank.holiday'].search(
-            [('date', '=', fields.Date.to_string(date_today_overwrite))]
+            [('date', '=', fields.Date.context_today())]
         ).unlink()
 
-        inventory = stock_obj.create_daily_inventory(
-            date_today_overwrite=date_today_overwrite,
-        )
+        inventory = stock_obj.create_daily_inventory()
         inventory_products = inventory.product_ids
 
         # This inventory will contains 4 products
@@ -285,9 +284,7 @@ class TestStockInventory(TransactionCase):
         # I'll change the duration between two inventory
         ir_config.set_param('stock.months_between_inventory', '1')
 
-        inventory = stock_obj.create_daily_inventory(
-            date_today_overwrite=date_today_overwrite,
-        )
+        inventory = stock_obj.create_daily_inventory()
         inventory_products = inventory.product_ids
         # This inventory will contains 8 products
         # - 2 expensive product
