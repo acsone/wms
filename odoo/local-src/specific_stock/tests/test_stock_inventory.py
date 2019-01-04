@@ -138,7 +138,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(other_products['delay'], 12)
         self.assertEqual(other_products['nbr_inventory_per_year'], 1)
 
-    @freeze_time("2018-06-01", as_arg=True)
+    @freeze_time("2018-06-01")
     def test_get_products_daily_inventory(self):
         """
         To test the method get_products_daily_inventory we need to create a
