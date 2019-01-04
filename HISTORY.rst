@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1784 Update OCA/account-analytic. The goal is to be able to invoice a
+  supplier with an expense tax
+
 **Build**
 
 * Remove db2_import
