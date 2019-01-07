@@ -1,9 +1,0 @@
-id,code,name,company_id/id,user_type_id/id,tag_ids/id
-__setup__.account_400000,400000,Clients,base.main_company,account.data_account_type_receivable,
-__setup__.account_440000,440000,Fournisseurs marchandises,base.main_company,account.data_account_type_payable,
-__setup__.account_550000,550000,ING 340-0307498-46,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550005,550005,ING livret vert,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550040,550040,CBC,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550050,550050,BELFIUS,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550051,550051,BELFIUS epargne,base.main_company,account.data_account_type_liquidity,
-__setup__.account_550060,550060,BNP paribas fortis,base.main_company,account.data_account_type_liquidity,

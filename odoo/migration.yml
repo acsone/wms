@@ -77,21 +77,11 @@ migration:
               - anthem songs.install.data_full::import_stock_bins
               - anthem songs.install.data_full::post_import_stock_bins
               - anthem songs.install.accounting::activate_check_on_vat
-              - anthem songs.install.db2_import::main
-              # The following modules need to be installed after the db2 data import
+              # The following modules was needed to be installed after the db2 data import
               - odoo -i base_partner_sequence --stop-after-init --workers=0
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
               - anthem songs.install.product::setup_product_default_code_sequence
-              # Create db2 tables and fill them with history data
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdcl_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pentcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/db2_pdetcdfo_table.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdcl.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pentcdfo.sql $DB_NAME'"
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/copy_from_pdetcdfo.sql $DB_NAME'"
               - importer.sh songs.install.data_full::import_products /odoo/data/install/products_only_belgium.csv
               - anthem songs.install.data_full::import_missing_intrastat_codes
               - importer.sh songs.install.data_full::import_product_intrastat /odoo/data/install/product_intrastat.csv
@@ -100,7 +90,7 @@ migration:
             post:
               - anthem songs.sample.data_sample::main
               - anthem songs.install.accounting::activate_check_on_vat
-              # The following modules need to be installed after the db2 data import
+              # The following modules was needed to be installed after the db2 data import
               - odoo -i base_partner_sequence --stop-after-init --workers=0
               - anthem songs.install.partner::setup_customer_ref
               - odoo -i product_sequence --stop-after-init --workers=0
@@ -184,7 +174,6 @@ migration:
           - csv_file
           - csv_file_export
           - csv_file_import
-          - db2_import
           - delivery_rounds
           - delivery_rounds_alcyon
           - external_fax
@@ -800,3 +789,15 @@ migration:
         upgrade:
           ### local
           - specific_report
+    - version: 10.30.6
+      addons:
+        upgrade:
+          ### local
+          # update db2_import to it's empty shell
+          - db2_import
+      modes:
+        full:
+          operations:
+            post:
+              # uninstall completely db2_import
+              - anthem songs.upgrade.10_30_6_update::uninstall_db2_import

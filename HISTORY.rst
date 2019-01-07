@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Build**
 
+* Remove db2_import
+
 **Documentation**
 
 
