@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1804: Fix invoicing address for sale order created on the web
+
 **Build**
 
 * Remove db2_import

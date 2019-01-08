@@ -133,7 +133,6 @@ class SaleOrder(models.Model):
         # it does not have a time part
         order_data['date_order'] = fields.datetime.now()
         order_data['client_order_ref'] = data['order_ref']
-        order_data['partner_invoice_id'] = partner.id
         order_data['state'] = 'draft'
         if 'num_suite' in data:
             order_data['suite_name'] = data['num_suite']
