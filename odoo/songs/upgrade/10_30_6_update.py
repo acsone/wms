@@ -8,4 +8,4 @@ from anthem.lyrics.modules import uninstall
 
 @anthem.log
 def uninstall_db2_import(ctx):
-    uninstall(['db2_import'])
+    uninstall(ctx, ['db2_import'])
