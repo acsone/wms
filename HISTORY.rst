@@ -38,6 +38,7 @@ latest (unreleased)
 
 * Remove unused restriction for inventory
 * ALCYN-1802: Fix customer reference on delivery note filename.
+* ALCYN-1763: Prevent already picked product but not yet delivered to be accounted in the quantity still to pick and blocking the reservable quantity
 
 **Build**
 
