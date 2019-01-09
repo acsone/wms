@@ -25,6 +25,7 @@ latest (unreleased)
 
 * ALCYN-1784 Update OCA/account-analytic. The goal is to be able to invoice a
   supplier with an expense tax
+* ALCYN-1820 Do not override sale confirmation date when an order is canceled for modification and then reconfirmed
 
 **Build**
 

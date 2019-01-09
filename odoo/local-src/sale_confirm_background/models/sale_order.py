@@ -48,9 +48,10 @@ class Sale(models.Model):
             return self._popup_exceptions()
         self.write({
             'state': 'confirm_background',
-            'confirmation_date': fields.Datetime.now(),
         })
         for order in self:
+            if not order.confirmation_date:
+                order.confirmation_date = fields.Datetime.now()
             self.env.user.notify_info(
                 _('Order %s will be confirmed in background.') % order.name,
             )
