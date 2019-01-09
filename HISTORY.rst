@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* Remove unused restriction for inventory
+
 **Build**
 
 * Remove db2_import
