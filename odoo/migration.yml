@@ -826,4 +826,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - account_invoice_sent
           - specific_stock

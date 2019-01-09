@@ -10,7 +10,7 @@
                 <field name="create_uid"/>
                 <field name="create_date"/>
                 <field name="invoice_ids"/>
-                <field name="document"/>
+                <field name="document" filename="fname"/>
                 <field name="send_email_copy"/>
             </tree>
         </field>
@@ -52,7 +52,8 @@
                     <group col="4">
                         <field name="create_uid"/>
                         <field name="create_date"/>
-                        <field name="document"/>
+                        <field name="document" filename="fname"/>
+                        <field name="fname" invisible="1"/>
                         <field name="send_email_copy"/>
                     </group>
                 </sheet>
