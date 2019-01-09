@@ -795,6 +795,8 @@ migration:
           ### local
           # update db2_import to it's empty shell
           - db2_import
+          # oca/account-analytic
+          - product_analytic
       modes:
         full:
           operations:
