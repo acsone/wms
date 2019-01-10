@@ -732,7 +732,6 @@ migration:
           ### local
           - specific_stock
           - specific_report
-<<<<<<< HEAD
           - specific_print
     - version: 10.29.17
       operations:
