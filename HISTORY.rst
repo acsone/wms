@@ -26,6 +26,8 @@ latest (unreleased)
 
 * ALCYN-1745: Reactivate some unittests for Zetes
 
+* ALCYN-1758: Update the order date when the procurement update or create a purchase order
+
 **Bugfixes**
 * Workaround on cutoff extremely slow display by hiding taxes field.
 

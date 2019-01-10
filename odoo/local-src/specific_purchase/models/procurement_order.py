@@ -4,7 +4,7 @@
 import logging
 from datetime import datetime
 
-from odoo import api, models, _
+from odoo import api, fields, models, _
 
 MANAGE_DAY_PREFIX = 'is_manage_day_'
 
@@ -97,5 +97,19 @@ class ProcurementOrder(models.Model):
                 new_cr.rollback()
             finally:
                 new_cr.close()
+
+        return result
+
+    def make_po(self):
+        """
+        Update the order date when the procurement update or create a purchase
+        order. The new order date must be the datetime of now.
+        """
+        result = super(ProcurementOrder, self).make_po()
+
+        procurements = self.browse(result)
+
+        pos = procurements.mapped('purchase_id')
+        pos.write({'date_order': fields.Datetime.now()})
 
         return result
