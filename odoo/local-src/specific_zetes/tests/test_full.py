@@ -163,7 +163,7 @@ class TestFull(ZetesTest):
         logger.search([]).unlink()
 
         printer = self.env['printing.printer']
-        printer.search([]).unlink()
+        printer.search([]).write({'code': None, 'type': None})
 
         printer_server = self.env['printing.server'].create({
             'name': 'Localhost',
@@ -309,8 +309,7 @@ class TestFull(ZetesTest):
         pack_op_3 = self.picking.pack_operation_product_ids[2]
         pack_op_id, lot_id, = line_product_3_lot_1.pickLineId.split('_')
         self.assertEqual(pack_op_id, str(pack_op_3.id))
-        # FIXME later
-        # self.assertEqual(lot_id, str(self.lot_product_3_1.id))
+        self.assertEqual(lot_id, str(self.lot_product_3_1.id))
         self.assertEqual(line_product_3_lot_1.productCode,
                          self.product_3.default_code)
         self.assertEqual(int(line_product_3_lot_1.reqQty), 20)

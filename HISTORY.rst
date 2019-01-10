@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1745: Reactivate some unittests for Zetes
+
 **Bugfixes**
 
 * ALCYN-1784 Update OCA/account-analytic. The goal is to be able to invoice a

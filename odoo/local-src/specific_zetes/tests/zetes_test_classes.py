@@ -144,6 +144,7 @@ class ZetesTest(SavepointCase):
             'categ_id': cls.product_categ_medoc.id,
             'tracking': 'lot',
             'list_price': 100,
+            'indicated_price': 120,
             'type': 'product',
             'stock_bin_ids': [(0, 0, {
                 'sequence': 1,
