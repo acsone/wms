@@ -22,23 +22,31 @@ class StockQuant(models.Model):
             # first one.
             # You still need to run the procurements in the right order to
             # ensure the delivery orders exist when performing this check.
-            locations = self.env['stock.location'].search(
-                [('usage', '=', 'customer')])
+            output_loc = self.env.ref('stock.stock_location_output')
             previous_moves_domain = [
                 ('product_id', '=', move.product_id.id),
-                ('state', 'in', ['waiting', 'confirmed', 'assigned']),
+                ('location_id.usage', 'in', ('internal', 'view')),
+
+                '|',
+                # PICK + SHIP
+                '&', ('location_id', '=', output_loc.id),
+                ('state', '=', 'waiting'),  # any shipping in waiting is
+                                            # awaiting a picking still to do
+                # SHIP only
+                '&', ('location_id', '!=', output_loc.id),
+                ('state', 'in', ('waiting', 'confirmed', 'assigned')),
+
                 ('date', '<', move.date),
                 ('priority', '>=', move.priority),
-                ('location_dest_id', 'in', locations.ids),
+                ('location_dest_id.usage', '=', 'customer'),
                 ]
             if move.restrict_lot_id:
                 previous_moves_domain.append(
                     ('restrict_lot_id', '=', move.restrict_lot_id.id))
-            previous_moves = move.search(previous_moves_domain)
+            previous_moves = move.search(previous_moves_domain, order='id')
             blocked_qty = 0
             for pm in previous_moves:
-                if pm.location_id.usage in ('view', 'internal'):
-                    blocked_qty += pm.product_qty
+                blocked_qty += pm.product_qty
             # Note that qty_available also consider negative quants. However
             # this is an exception that should not happen
             remaining = move.product_id.qty_available - blocked_qty
