@@ -7,8 +7,6 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
-from odoo.addons.specific_zetes import constants
-
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
@@ -44,44 +42,6 @@ class StockInventory(models.Model):
         products.write({
             'date_last_inventory': fields.Datetime.now()
         })
-
-        return result
-
-    @api.multi
-    def prepare_inventory(self):
-        return super(StockInventory, self).prepare_inventory()
-
-        # FIXME: To restrictive:
-        # Depends on location.
-        # Need to pay attention to move state
-        result = super(StockInventory, self).prepare_inventory()
-
-        check_query = """
-            SELECT DISTINCT picking.name
-            FROM stock_pack_operation pack_op
-              INNER JOIN stock_picking picking
-                ON pack_op.picking_id = picking.id
-            WHERE pack_op.product_id IN %s
-            AND picking.zetes_state IN %s
-        """
-
-        for inventory in self:
-            products = inventory.line_ids.mapped('product_id')
-
-            if not products:
-                continue
-
-            self.env.cr.execute(
-                check_query,
-                (tuple(products.ids),
-                 (constants.AS_START, constants.AS_ACTIVE))
-            )
-            query_result = [x[0] for x in self.env.cr.fetchall()]
-            if query_result:
-                raise UserError(
-                    _('You cannot start an inventory of a product having an '
-                      'ongoing stock operation. Please retry later. '
-                      'Blocking operations:\n%s') % '\n'.join(query_result))
 
         return result
 
