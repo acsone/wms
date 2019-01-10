@@ -37,6 +37,7 @@ latest (unreleased)
 * ALCYN-1804: Fix invoicing address for sale order created on the web
 
 * Remove unused restriction for inventory
+* ALCYN-1802: Fix customer reference on delivery note filename.
 
 **Build**
 

@@ -36,7 +36,7 @@ class StockPicking(models.Model):
             return
         return '_'.join([
             'NE',
-            self.partner_id.ref or '',
+            self.partner_id.commercial_partner_id.ref or '',
             str(self.id),
             ''.join(self.date_done[:10].split('-')),
             ''.join(self.date_done[-8:].split(':')),
