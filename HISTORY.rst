@@ -20,33 +20,39 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
-* Add menuentries to customer invoices/refunds for sales users in sales and accounting
-
-* ALCYN-1705: Add the canceled quantity in the sale order line view of a product
-
-* ALCYN-1745: Reactivate some unittests for Zetes
-
-* ALCYN-1758: Update the order date when the procurement update or create a purchase order
 
 **Bugfixes**
-* Workaround on cutoff extremely slow display by hiding taxes field.
 
+**Build**
+
+**Documentation**
+
+
+10.30.6 (2019-01-10)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1705: Add the canceled quantity in the sale order line view of a product
+* ALCYN-1745: Reactivate some unittests for Zetes
+* ALCYN-1758: Update the order date when the procurement update or create a purchase order
+* Add menuentries to customer invoices/refunds for sales users in sales and accounting
+
+**Bugfixes**
+
+* ALCYN-1763: Prevent already picked product but not yet delivered to be accounted in the quantity still to pick and blocking the reservable quantity
+* ALCYN-1771: Fix product expiration date exported to the ESB.
 * ALCYN-1784 Update OCA/account-analytic. The goal is to be able to invoice a
   supplier with an expense tax
-* ALCYN-1820 Do not override sale confirmation date when an order is canceled for modification and then reconfirmed
-* ALCYN-1771: Fix product expiration date exported to the ESB.
-
-* ALCYN-1804: Fix invoicing address for sale order created on the web
-
-* Remove unused restriction for inventory
 * ALCYN-1802: Fix customer reference on delivery note filename.
-* ALCYN-1763: Prevent already picked product but not yet delivered to be accounted in the quantity still to pick and blocking the reservable quantity
+* ALCYN-1804: Fix invoicing address for sale order created on the web
+* ALCYN-1820 Do not override sale confirmation date when an order is canceled for modification and then reconfirmed
+* Remove unused restriction for inventory
+* Workaround on cutoff extremely slow display by hiding taxes field.
 
 **Build**
 
 * Remove db2_import
-
-**Documentation**
 
 **Data Migration**
 
