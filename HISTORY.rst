@@ -24,6 +24,8 @@ latest (unreleased)
 
 * ALCYN-1705: Add the canceled quantity in the sale order line view of a product
 
+* ALCYN-1745: Reactivate some unittests for Zetes
+
 **Bugfixes**
 * Workaround on cutoff extremely slow display by hiding taxes field.
 

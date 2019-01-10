@@ -56,8 +56,7 @@ class TestItempick(ZetesTest):
         self.assertEqual(result.scanProductBarcode, '0')
         # self.assertEqual(result.UOMPrompt, move.product_uom_id.name)
         self.assertEqual(result.itemPickSeqNum, '1')
-        # TODO fixme in ALCYN-1745
-        # self.assertEqual(float(result.Usf07), 100.0)
+        self.assertEqual(float(result.Usf07), 120.0)
         self.assertEqual(result.lotTrackingFlag, '1')
 
         # Check location

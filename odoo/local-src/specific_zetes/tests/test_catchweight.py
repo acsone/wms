@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# from datetime import datetime
-# from dateutil.relativedelta import relativedelta
-#
-# from odoo import fields
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields
 from odoo.tools import mute_logger
 
 from .. import constants
@@ -33,56 +33,54 @@ class TestCatchweight(ZetesTest):
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
 
-    # TODO FIME in ALCYN-1745
-    # def test_resu_catchweight(self):
-    #     """
-    #     Change the picked quantity on the pack operation
-    #     :return:
-    #     """
+    def test_resu_catchweight(self):
+        """
+        Change the picked quantity on the pack operation
+        :return:
+        """
 
-    #     domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
 
-    #     pack_op = self.picking.pack_operation_product_ids
-    #     pack_op.ensure_one()
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
 
-    #     self.assertEqual(pack_op.qty_done, 0)
-    #     self.assertEqual(pack_op.pack_lot_ids.qty, 0)
+        self.assertEqual(pack_op.qty_done, 0)
+        self.assertEqual(pack_op.pack_lot_ids.qty, 0)
 
-    #     # Try with a lot
-    #     request_params = Parameters(domain, action='resu')
-    #     request_params.update({
-    #         'lineId': pack_op.id,
-    #         'Usf01': self.lot_product_1.voice_identifier,
-    #         'Usf02': 5,  # Pick 5 unit,
-    #         'Usf03': None,
-    #     })
-    #     domain.resu(request_params)
+        # Try with a lot
+        request_params = Parameters(domain, action='resu')
+        request_params.update({
+            'lineId': pack_op.id,
+            'Usf01': self.lot_product_1.voice_identifier,
+            'Usf02': 5,  # Pick 5 unit,
+            'Usf03': None,
+        })
+        domain.resu(request_params)
 
-    #     self.assertEqual(pack_op.qty_done, 5)
-    #     self.assertEqual(len(pack_op.pack_lot_ids), 1)
-    #     self.assertEqual(pack_op.pack_lot_ids[0].qty, 5)
+        self.assertEqual(pack_op.qty_done, 5)
+        self.assertEqual(len(pack_op.pack_lot_ids), 1)
+        self.assertEqual(pack_op.pack_lot_ids[0].qty, 5)
 
-        # FIXME Later
-        # # Create a new lot and pick in this lot
-        # two_years = datetime.now() + relativedelta(years=1)
-        # second_lot = self.env['stock.production.lot'].create({
-        #     'name': '000000002',
-        #     'product_id': self.product_1.id,
-        #     'life_date': fields.Datetime.to_string(two_years),
-        # })
-        #
-        # second_request_params = Parameters(domain, action='resu')
-        # second_request_params.update({
-        #     'lineId': pack_op.id,
-        #     'Usf01': second_lot.voice_identifier,
-        #     'Usf02': 5,  # Pick 5 unit in a second lot,
-        #     'Usf03': None,
-        # })
-        # domain.resu(second_request_params)
-        #
-        # self.assertEqual(pack_op.qty_done, 10)
-        # self.assertEqual(len(pack_op.pack_lot_ids), 2)
-        # self.assertEqual(pack_op.pack_lot_ids[1].qty, 5)
+        # Create a new lot and pick in this lot
+        two_years = datetime.now() + relativedelta(years=1)
+        second_lot = self.env['stock.production.lot'].create({
+            'name': '000000002',
+            'product_id': self.product_1.id,
+            'life_date': fields.Datetime.to_string(two_years),
+        })
+
+        second_request_params = Parameters(domain, action='resu')
+        second_request_params.update({
+            'lineId': pack_op.id,
+            'Usf01': second_lot.voice_identifier,
+            'Usf02': 5,  # Pick 5 unit in a second lot,
+            'Usf03': None,
+        })
+        domain.resu(second_request_params)
+
+        self.assertEqual(pack_op.qty_done, 10)
+        self.assertEqual(len(pack_op.pack_lot_ids), 2)
+        self.assertEqual(pack_op.pack_lot_ids[1].qty, 5)
 
     def test_resu_catchweight_without_lot(self):
         """
@@ -164,16 +162,15 @@ class TestCatchweight(ZetesTest):
             'lineId': pack_op.id,
             'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 0,
-            'Usf03': 90,
+            'Usf03': '90',
         })
         domain.resu(request_params)
 
-        # TODO FIME in ALCYN-1745
-        # log = self.env['zetes.logger'].search([
-        #     ('picking_id', '=', self.picking.id),
-        #     ('operation_id', '=', pack_op.id)])
+        log = self.env['zetes.logger'].search([
+            ('picking_id', '=', self.picking.id),
+            ('operation_id', '=', pack_op.id)])
 
-        # self.assertEqual(len(log), 0)
+        self.assertEqual(len(log), 0)
 
         # But not 93
         request_params = Parameters(domain, action='resu')
@@ -181,14 +178,13 @@ class TestCatchweight(ZetesTest):
             'lineId': pack_op.id,
             'Usf01': self.lot_product_1.voice_identifier,
             'Usf02': 0,
-            'Usf03': 93,
+            'Usf03': '93',
         })
         domain.resu(request_params)
 
-        # TODO FIME in ALCYN-1745
-        # log = self.env['zetes.logger'].search([
-        #     ('picking_id', '=', self.picking.id),
-        #     ('operation_id', '=', pack_op.id)])
-        #
-        # self.assertEqual(len(log), 1)
-        # self.assertEqual(log.error_type, 'human')
+        log = self.env['zetes.logger'].search([
+            ('picking_id', '=', self.picking.id),
+            ('operation_id', '=', pack_op.id)])
+
+        self.assertEqual(len(log), 1)
+        self.assertEqual(log.error_type, 'human')

@@ -86,9 +86,9 @@ class Itempick(DomainInterface):
 
         # Cri01 define the order (01 => from the end to the start)
         if params.Cri01 == '1':
-            order_by = 'location_name DESC'
+            order_by = 'location_name DESC, id'
         else:
-            order_by = 'location_name ASC'
+            order_by = 'location_name ASC, id'
 
         print_price_query = """
         SELECT partner.is_price_on_labels
