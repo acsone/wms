@@ -17,6 +17,7 @@
         'l10n_be_invoice_bba',
         'report_intrastat',
         'account',
+        'account_cutoff_base',
         'analytic',
         'account_cancel',
         'account_invoice_check_total',
@@ -32,6 +33,7 @@
         'data/cron.xml',
         # Views
         'views/account_analytic_tag.xml',
+        'views/account_cutoff.xml',
         'views/account_invoice_report.xml',
         'views/account_invoice_view.xml',
         'views/menu.xml',

@@ -11,6 +11,9 @@
                     <field name="invoice_grouping"/>
                 </group>
             </xpath>
+            <xpath expr="//group[@name='accounting_entries']" position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

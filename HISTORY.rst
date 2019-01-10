@@ -25,6 +25,7 @@ latest (unreleased)
 * ALCYN-1705: Add the canceled quantity in the sale order line view of a product
 
 **Bugfixes**
+* Workaround on cutoff extremely slow display by hiding taxes field.
 
 * ALCYN-1784 Update OCA/account-analytic. The goal is to be able to invoice a
   supplier with an expense tax
