@@ -199,6 +199,7 @@ class ZetesTest(SavepointCase):
                 'product_id': cls.product_1.id,
                 'product_uom_qty': 10,
                 'product_uom': cls.env.ref('product.product_uom_unit').id,
+                'picking_type_id': cls.picking_type_medoc.id,
             })]
         })
 

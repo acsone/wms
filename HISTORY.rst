@@ -42,6 +42,7 @@ latest (unreleased)
 * BIZ-2796: Add account-financial-report-qweb
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
 * ALCYN-1796 Add field for product.template.nb_days_out_of_stock
+* ALCYN-1745: Reactivate all remaining unittest for Zetes
 
 **Bugfixes**
 

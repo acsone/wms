@@ -35,6 +35,9 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.Usf06, 'C')
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
+        # Check if the picking has been assigned to the current user
+        self.assertEqual(self.picking.operator_id.id, self.user.id)
+
         # Try with different parameters
         # Set a picking zone (Cri01)
         picking_zone_drugs = self.picking_type_medoc
@@ -84,7 +87,6 @@ class TestAssignemnt(ZetesTest):
         # self.assertEqual(result.groupNum, str(self.picking.id))
 
     def test_resu_assignement(self):
-        # FIXME @sylvain please fix all asserts
         self.assertFalse(self.picking.operator_id)
 
         domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
@@ -96,7 +98,6 @@ class TestAssignemnt(ZetesTest):
         })
 
         domain.resu(request_params)
-        # self.assertEqual(self.picking.operator_id.id, self.user.id)
 
         # Do the picking and set the state to done
         request_params.update({
@@ -112,10 +113,10 @@ class TestAssignemnt(ZetesTest):
             'qty_done': 10,
         })
         domain.resu(request_params)
-        # self.assertEqual(self.picking.state, 'done')
+        self.assertEqual(self.picking.state, 'done')
 
         # Interrupt the picking (NOT cancel the picking himselft)
         request_params.assignmentStatus = constants.AS_CANCELED
         domain.resu(request_params)
-        # self.assertFalse(self.picking.operator_id)
-        # self.assertIsNotNone(self.picking.checksum)
+        self.assertFalse(self.picking.operator_id)
+        self.assertIsNotNone(self.picking.checksum)
