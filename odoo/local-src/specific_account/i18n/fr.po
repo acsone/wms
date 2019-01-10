@@ -93,7 +93,7 @@ msgstr "Notes de crédit"
 #. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_sale_order_date_order_short
 msgid "Date order short"
-msgstr "Date order short"
+msgstr ""
 
 #. module: specific_account
 #: selection:account.invoice.report,due_month:0
@@ -192,7 +192,7 @@ msgstr "Mai"
 #. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_config_settings_chunk_size
 msgid "Nbr of partners by invoices creation job"
-msgstr "Nbr of partners by invoices creation job"
+msgstr ""
 
 #. module: specific_account
 #: selection:account.invoice.report,due_month:0
@@ -215,7 +215,7 @@ msgstr "Partenaire"
 #: code:addons/specific_account/models/sale_order.py:40
 #, python-format
 msgid "Please set the chunk size in account settings"
-msgstr "Please set the chunk size in account settings"
+msgstr ""
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_product_product
