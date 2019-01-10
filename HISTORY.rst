@@ -46,6 +46,10 @@ latest (unreleased)
 
 **Documentation**
 
+**Data Migration**
+
+* Import supplier journal items and post all imported items
+
 
 10.30.5 (2018-12-31)
 ++++++++++++++++++++
