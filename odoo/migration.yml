@@ -805,3 +805,5 @@ migration:
             post:
               # uninstall completely db2_import
               - anthem songs.upgrade.10_30_6_update::uninstall_db2_import
+              - anthem songs.install.data_full::import_supplier_journal_items
+              - anthem songs.install.data_full::post_journal_entries

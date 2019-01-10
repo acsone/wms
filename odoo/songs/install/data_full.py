@@ -657,7 +657,8 @@ def import_journal_items(ctx, customer=False, supplier=False):
     ctx.env.cr.execute("SELECT code, id FROM account_account")
     accounts = dict(ctx.env.cr.fetchall())
 
-    check_customer_ref_query = "SELECT id FROM res_partner WHERE ref = %s"
+    check_customer_ref_query = \
+        "SELECT id FROM res_partner WHERE ref = %s AND parent_id IS NULL"
 
     AccountMove = ctx.env['account.move']
     AccountMoveLine = ctx.env['account.move.line']
@@ -689,6 +690,10 @@ def import_journal_items(ctx, customer=False, supplier=False):
 
             if not result:
                 _logger.error('Customer not found with ref %s' % customer_ref)
+                continue
+            if len(result) > 1:
+                _logger.error(
+                    'Several partners have the same ref %s' % customer_ref)
                 continue
             partner_id = result[0]
 
