@@ -146,12 +146,13 @@ class ExportStockUpdateTestCase(SavepointCase):
 
         # mock some quantities
         # lot0 is there to ensure it is not picking a zero qty lot
-        def mock_product_qty(rec):
-            if rec.name == 'lot0':
-                qty = 0.0
-            else:
-                qty = 100.0
-            rec.product_qty = qty
+        def mock_product_qty(rs):
+            for rec in rs:
+                if rec.name == 'lot0':
+                    qty = 0.0
+                else:
+                    qty = 100.0
+                rec.product_qty = qty
 
         self.env['stock.production.lot']._patch_method(
             '_product_qty', mock_product_qty
