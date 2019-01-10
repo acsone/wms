@@ -34,4 +34,38 @@
         </field>
     </record>
 
+    <record id="action_invoice_tree1_refund" model="ir.actions.act_window">
+        <field name="name">Customer Refunds</field>
+        <field name="res_model">account.invoice</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field eval="False" name="view_id"/>
+        <field name="domain">[('type', '=', 'out_refund')]</field>
+        <field name="context">{'defaut_type': 'out_refund', 'type': 'out_refund', 'journal_type': 'sale'}</field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a customer refund.
+          </p>
+        </field>
+    </record>
+    <record id="action_invoice_tree1_refund_view1" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="account.invoice_tree"/>
+        <field name="act_window_id" ref="action_invoice_tree1_refund"/>
+    </record>
+    <record id="action_invoice_tree1_refund_view2" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account.invoice_form"/>
+        <field name="act_window_id" ref="action_invoice_tree1_refund"/>
+    </record>
+
+    <menuitem action="action_invoice_tree1_refund" id="menu_action_invoice_tree1_refund" parent="account.menu_finance_receivables" sequence="2"/>
+
+    <!-- also add in sales menu -->
+    <menuitem action="account.action_invoice_tree1" id="menu_action_sale_invoice_tree1" parent="sale.menu_sale_invoicing" sequence="1"/>
+    <menuitem action="action_invoice_tree1_refund" id="menu_action_sale_invoice_tree1_refund" parent="sale.menu_sale_invoicing" sequence="1"/>
+
 </odoo>

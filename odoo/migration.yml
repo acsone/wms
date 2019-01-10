@@ -792,12 +792,13 @@ migration:
     - version: 10.30.6
       addons:
         upgrade:
+          # oca/account-analytic
+          - product_analytic
           ### local
           # update db2_import to it's empty shell
           - db2_import
+          - specific_account
           - specific_sale
-          # oca/account-analytic
-          - product_analytic
       modes:
         full:
           operations:
