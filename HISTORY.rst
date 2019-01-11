@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* Prevent to process additional moves when there is no (small speedup)
 
 **Bugfixes**
 
