@@ -285,7 +285,8 @@ class RoundInstance(models.Model):
         # Do not look at the state of the picking as assigned state has the
         # lowest priority
         moves_assigned = moves.filtered(
-            lambda move: move.state == 'assigned')
+            lambda move: move.state == 'assigned' or
+            (move.state == 'confirmed' and move.partially_available))
         pickings_assigned = moves_assigned.mapped('picking_id')
         if pickings_assigned:
             def key(r):

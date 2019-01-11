@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-1834: Fix print delivery slip traceback
 
 * ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
+* ALCYN-1763: Fix blocked pickings that contains only partially available lines
 
 **Build**
 
