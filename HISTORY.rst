@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1799: Fix possible error with carrier_id field in new web sale order web service (ESB)
+
 **Build**
 
 **Documentation**

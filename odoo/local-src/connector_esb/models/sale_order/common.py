@@ -139,8 +139,12 @@ class SaleOrder(models.Model):
         if 'carrier_id' in data:
             carrier = self.env['delivery.carrier'].search([
                 ('esb_ref', '=', data['carrier_id'])]).exists()
-            if len(carrier):
+            if len(carrier) == 1:
                 order_data['carrier_id'] = carrier.id
+            elif len(carrier) > 1:
+                _logger.error(
+                    'Webservice new saleorder, multiple carrier found for %s.',
+                    data['carrier_id'])
             else:
                 _logger.error('Webservice new saleorder, carrier %s not found',
                               data['carrier_id'])
