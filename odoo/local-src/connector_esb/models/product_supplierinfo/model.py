@@ -89,7 +89,7 @@ class ProductSupplierInfo(models.Model):
         """Is one of the field of special promotion being modified."""
         impacting_fields = set(['discount_sale',
                                 'date_start',
-                                'date_dend'])
+                                'date_end'])
         return len(impacting_fields & set(vals.keys()))
 
     @api.multi

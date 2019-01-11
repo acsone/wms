@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
+
 **Build**
 
 **Documentation**

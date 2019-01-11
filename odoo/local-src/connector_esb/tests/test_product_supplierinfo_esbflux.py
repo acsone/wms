@@ -123,6 +123,38 @@ class ProductSupplierInfoEsbFluxTestCase(TransactionCase):
         # Should not add rows
         self.assertEqual(qty, 3)
 
+    def test_create_update_delete_special_promotion(self):
+        r = self.supinfo.create({
+            'name': self.partner.id,
+            'product_tmpl_id': self.prod_2.id,
+            'discount_sale': 10,
+            'date_start': self.date_start,
+            'date_end': self.date_end,
+            })
+        qty = self.esbflux.search_count([('real_id', '=', r.id),
+                                         ('flux', '=', 'specialpromotion')])
+        # A create record is added in the table
+        self.assertEqual(qty, 1)
+        # Modifying the promotion...
+        r.discount_sale = 12
+        qty = self.esbflux.search_count([('real_id', '=', r.id),
+                                         ('flux', '=', 'specialpromotion')])
+        # It creates a delete and a create record
+        self.assertEqual(qty, 3)
+        # Modifying the end date
+        r.date_end = fields.Datetime.to_string(
+                datetime.now() + relativedelta(month=4))
+        qty = self.esbflux.search_count([('real_id', '=', r.id),
+                                         ('flux', '=', 'specialpromotion')])
+        # It adds a delete and a create record
+        self.assertEqual(qty, 5)
+        # Changing an unrelated value...
+        r.price = 12
+        qty = self.esbflux.search_count([('real_id', '=', r.id),
+                                         ('flux', '=', 'specialpromotion')])
+        # Should not add rows
+        self.assertEqual(qty, 5)
+
     def test_both_promotion_updated_same_time(self):
         """Create and update both promotion at the same time"""
         r = self.supinfo.create({
