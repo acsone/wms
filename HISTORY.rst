@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1781: Show primary unit price, net unit price and VAT an delivery orders
+
 **Bugfixes**
 
 **Build**
