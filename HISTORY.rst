@@ -20,21 +20,28 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
-* Prevent to process additional moves when there is no (small speedup)
-
-* ALCYN-1781: Show primary unit price, net unit price and VAT an delivery orders
 
 **Bugfixes**
-* ALCYN-1834: Fix print delivery slip traceback
-
-* ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
-* ALCYN-1763: Fix blocked pickings that contains only partially available lines
-
-* ALCYN-1799: Fix possible error with carrier_id field in new web sale order web service (ESB)
 
 **Build**
 
 **Documentation**
+
+
+10.30.7 (2019-01-11)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1781: Show primary unit price, net unit price and VAT an delivery orders
+* Prevent to process additional moves when there is no (small speedup)
+
+**Bugfixes**
+
+* ALCYN-1763: Fix blocked pickings that contains only partially available lines
+* ALCYN-1799: Fix possible error with carrier_id field in new web sale order web service (ESB)
+* ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
+* ALCYN-1834: Fix print delivery slip traceback
 
 
 10.30.6 (2019-01-10)
