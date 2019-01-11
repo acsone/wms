@@ -799,6 +799,7 @@ migration:
           - db2_import
           - specific_account
           - specific_sale
+    - version: 10.30.7
       modes:
         full:
           operations:
