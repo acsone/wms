@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* Prevent to process additional moves when there is no (small speedup)
 
 * ALCYN-1781: Show primary unit price, net unit price and VAT an delivery orders
 

@@ -109,11 +109,12 @@ class StockPicking(models.Model):
             additional_moves |= move_add
 
         # Assign moves
-        additional_moves.action_confirm()
-        additional_moves.action_assign(no_prepare=True)
-        additional_quants = additional_moves.mapped('reserved_quant_ids')
-        additional_result = super(StockPicking, self).\
-            _prepare_pack_ops(additional_quants, {})
-        result += additional_result
+        if additional_moves:
+            additional_moves.action_confirm()
+            additional_moves.action_assign(no_prepare=True)
+            additional_quants = additional_moves.mapped('reserved_quant_ids')
+            additional_result = super(StockPicking, self).\
+                _prepare_pack_ops(additional_quants, {})
+            result += additional_result
 
         return result
