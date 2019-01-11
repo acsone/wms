@@ -904,5 +904,8 @@ class RoundInstanceCustomer(models.Model):
             lambda p: p.picking_type_code == 'outgoing')
         shipping_done = shippings.filtered(
             lambda shipping: shipping.state == 'done')
+        if not shipping_done:
+            raise UserError(_(
+                'The shipping is not part anymore of this delivery round'))
         return self.env['report'].get_action(shipping_done,
                                              'stock.report_deliveryslip')

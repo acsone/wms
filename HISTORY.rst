@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1834: Fix print delivery slip traceback
 
 **Build**
 
