@@ -84,8 +84,10 @@ class StockPicking(models.Model):
                 raise UserError(
                     _('There are more than one currencies on orders'))
 
-            picking.price_total = \
-                sum(lines_done.mapped('order_line_id.price_subtotal'))
+            picking.price_total = sum(
+                l.order_line_id.price_reduce_taxinc * l.product_qty
+                for l in lines_done
+            )
             picking.currency_id = currency.id
 
     @api.depends('move_lines',
