@@ -34,9 +34,10 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not self.date_done:
             return
+        sale_orders = self.move_lines.mapped('order_id')
         return '_'.join([
             'NE',
-            self.partner_id.commercial_partner_id.ref or '',
+            sale_orders[0].partner_id.ref or '' if len(sale_orders) else '',
             str(self.id),
             ''.join(self.date_done[:10].split('-')),
             ''.join(self.date_done[-8:].split(':')),
