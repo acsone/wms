@@ -816,3 +816,10 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_7_update::translations
+    - version: 10.30.9
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.install.data_full::import_supplier_journal_items
+              - anthem songs.install.data_full::post_journal_entries
