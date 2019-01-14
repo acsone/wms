@@ -219,6 +219,20 @@ failed = object.warning_free_product()
             </field>
         </record>
 
+        <record id="warning_supplier_break" model="exception.rule">
+            <field name="name">Out of stock at supplier level</field>
+            <field name="description">Out of stock at supplier level</field>
+            <field name="active">True</field>
+            <field name="sequence">100</field>
+            <field name="rule_group">sale</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">Out of stock at supplier level</field>
+            <field name="code">
+failed = object.warning_supplier_break()
+            </field>
+        </record>
+
       <!-- General exceptions not enabled, test only or ? Should keep ? -->
 
         <record id="no_line_at_zero" model="exception.rule">

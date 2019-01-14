@@ -124,7 +124,6 @@ class Sale(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    supplier_break = fields.Boolean(compute='_compute_supplier_break')
     exception = fields.Char(compute='_compute_exception')
     warning_text = fields.Char(compute='_compute_exception')
     date_order = fields.Datetime(related="order_id.date_order")
@@ -133,13 +132,6 @@ class SaleOrderLine(models.Model):
         related='product_id.older_lot_id.life_date',
         readonly=True
     )
-
-    @api.depends('product_id')
-    def _compute_supplier_break(self):
-        """Product out of stock at the supplier level"""
-        supplier_nostock = self.env.ref('specific_purchase.product_state_h')
-        for line in self:
-            line.supplier_break = line.product_id.state_id == supplier_nostock
 
     @api.depends('product_id', 'price_subtotal', 'order_id.partner_id')
     def _compute_exception(self):
@@ -313,8 +305,6 @@ class SaleOrderLine(models.Model):
         name = product.name
         if product.description_sale:
             name += '\n' + product.description_sale
-        if self.supplier_break:
-            name = name + '\r' + _('Out of stock at supplier level')
         self.name = (name or '') + (self.warning_text or '')
 
     @api.onchange('product_id')
@@ -628,3 +618,16 @@ class SaleOrderLine(models.Model):
         """Add a warning for human medicine product."""
         human_medoc_cat = self.env.ref('specific_data.product_categ_humain')
         return self.product_id.categ_id.has_for_parent(human_medoc_cat.id)
+
+    def warning_supplier_break(self):
+        """Add a warning for out of stock product at the supplier."""
+        supplier_nostock = self.env.ref('specific_purchase.product_state_h')
+        if self.product_id.state_id != supplier_nostock:
+            return False
+        if self.product_id.immediately_usable_qty >= self.product_uom_qty:
+            # Although it is out of stock at the supplier, there is still
+            # enough stock in Alcyon warehouse
+            return False
+        if self.product_uom_qty == 0:
+            return False
+        return True
