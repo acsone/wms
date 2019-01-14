@@ -800,15 +800,15 @@ migration:
           - specific_account
           - specific_sale
     - version: 10.30.7
+    - version: 10.30.8
       modes:
         full:
           operations:
             post:
               # uninstall completely db2_import
               - anthem songs.upgrade.10_30_6_update::uninstall_db2_import
-              - anthem songs.install.data_full::import_supplier_journal_items
-              - anthem songs.install.data_full::post_journal_entries
-    - version: 10.30.7
+              # - anthem songs.install.data_full::import_supplier_journal_items
+              # - anthem songs.install.data_full::post_journal_entries
       addons:
         upgrade:
           ### local
