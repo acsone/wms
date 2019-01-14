@@ -28,7 +28,7 @@ latest (unreleased)
 **Documentation**
 
 
-10.30.7 (2019-01-11)
+10.30.8 (2019-01-14)
 ++++++++++++++++++++
 
 **Features and Improvements**
@@ -43,6 +43,11 @@ latest (unreleased)
 * ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
 * ALCYN-1834: Fix print delivery slip traceback
 
+
+10.30.7 (2019-01-11)
+++++++++++++++++++++
+
+Move to 10.30.8
 
 10.30.6 (2019-01-10)
 ++++++++++++++++++++
