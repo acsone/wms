@@ -61,8 +61,14 @@ class RoundInstance(models.Model):
             FROM stock_picking p
             LEFT JOIN stock_picking_type t ON p.picking_type_id = t.id
             LEFT JOIN picking_zone z ON t.picking_zone_id = z.id
-            WHERE p.state in ('partially_available',
-                                'assigned', 'done')
+            WHERE
+            -- p.state is done if no stock moves (all sent to backorder)
+            (p.state in ('partially_available', assigned', 'done') OR EXISTS (
+              SELECT id FROM stock_move
+              WHERE stock_move.picking_id = p.id
+              AND (stock_move.state in ('done', 'assigned')
+                OR (stock_move.state = 'confirmed'
+                  AND stock_move.partially_available))))
             AND t.subcode='PICK'
             AND p.delivery_round_id in %s
             GROUP BY p.delivery_round_id, z.code
@@ -101,8 +107,12 @@ class RoundInstance(models.Model):
         query = """
             SELECT p.delivery_round_id, count(distinct partner_id)
             FROM stock_picking p
-            WHERE p.state in ('partially_available',
-                                'assigned', 'done')
+            WHERE EXISTS (
+              SELECT id FROM stock_move
+              WHERE stock_move.picking_id = p.id
+              AND (stock_move.state in ('done', 'assigned')
+                OR (stock_move.state = 'confirmed'
+                  AND stock_move.partially_available)))
             AND p.delivery_round_id in %s
             GROUP BY p.delivery_round_id
         """

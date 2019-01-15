@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1763: Fix blocked pickings that contains only partially available lines
+
 **Build**
 
 **Documentation**
@@ -38,7 +40,6 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-1763: Fix blocked pickings that contains only partially available lines
 * ALCYN-1799: Fix possible error with carrier_id field in new web sale order web service (ESB)
 * ALCYN-1832: Fix special promotion appearing twice on Magento after changing it's end date.
 * ALCYN-1834: Fix print delivery slip traceback

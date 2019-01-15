@@ -451,7 +451,7 @@ class RoundInstance(models.Model):
                 ON stock_pack_operation.product_id = product_product.id
             LEFT JOIN product_template
                 ON product_product.product_tmpl_id = product_template.id
-            WHERE picking.state IN ('partially_available', 'assigned', 'done')
+            WHERE picking.state != 'cancel'
             AND stock_picking_type.subcode = 'PICK'
             AND picking.delivery_round_id in %s
             GROUP BY picking.delivery_round_id
@@ -466,7 +466,10 @@ class RoundInstance(models.Model):
                 lambda r: r.state == ('done')))
             pickings = rec.picking_ids.filtered(
                 lambda r: r.state in ('partially_available', 'assigned',
-                                      'done'))
+                                      'done') or any(
+                    move.state in ('done', 'assigned') or
+                    (move.state == 'confirmed' and move.partially_available)
+                    for move in r.move_lines))
             rec.count_picking_available_total = len(pickings)
             rec.count_picking_available_partner = \
                 len(pickings.mapped('partner_id'))
@@ -754,7 +757,10 @@ class RoundInstanceCustomer(models.Model):
                 lambda r: r.state == ('done')))
             count_total = len(pickings.filtered(
                 lambda r: r.state in ('partially_available', 'assigned',
-                                      'done')))
+                                      'done') or any(
+                    move.state in ('done', 'assigned') or
+                    (move.state == 'confirmed' and move.partially_available)
+                    for move in r.move_lines)))
             rec.count_picking_progress = '%s/%s' % (count_done, count_total)
 
     def button_deliver(self):
@@ -828,7 +834,7 @@ class RoundInstanceCustomer(models.Model):
             # will be rollbacked by the context manager in case of error
             shippings = new_env['stock.picking'].search(
                 [
-                    ('state', 'in', ('assigned', 'partially_available')),
+                    ('state', 'not in', ('cancel', 'done')),
                     ('picking_type_id.code', '=', 'outgoing'),
                     ('delivery_round_customer_id', '=', self.id),
                 ]
@@ -873,14 +879,11 @@ class RoundInstanceCustomer(models.Model):
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
-
-        It is done by creating records of round.instance.picking.state,
-        each one will be responsible to deliver a picking.
         """
         pickings = self.env['stock.picking'].search(
             [
-                ('state', 'in', ('assigned', 'partially_available')),
-                ('picking_type_id.code', '!=', 'outgoing'),
+                ('state', 'not in', ('cancel', 'done')),
+                ('picking_type_id.subcode', '=', 'PICK'),
                 ('delivery_round_customer_id', 'in', self.ids),
             ]
         )
