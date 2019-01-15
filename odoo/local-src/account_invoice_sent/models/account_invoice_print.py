@@ -22,6 +22,9 @@ class AccountInvoicePrint(models.Model):
         attachment=True,
         readonly=True,
     )
+    fname = fields.Char(
+            compute='_compute_file_name'
+    )
     state = fields.Selection(
         selection=[
             ('progress', 'In Progress'),
@@ -31,6 +34,10 @@ class AccountInvoicePrint(models.Model):
         readonly=True,
         default='progress',
     )
+
+    def _compute_file_name(self):
+        for record in self:
+            record.fname = 'account_invoice_print_{}.pdf'.format(self.id)
 
     @job(default_channel='root.background.invoice')
     def generate_report(self):
@@ -47,17 +54,17 @@ class AccountInvoicePrint(models.Model):
         if not invoices:
             return
 
-        invoices.write({'sent': True})
         template = self.env.ref('account.email_template_edi_invoice')
         for invoice in invoices:
             invoice.message_post(body=_("Invoice sent"))
             if self.send_email_copy:
                 template.send_mail(invoice.id)
         pdf = self.env['report'].get_pdf(
-            invoices.ids,
+            invoices.sorted(key=lambda r: r.partner_id.ref).ids,
             'account.report_invoice'
         )
         self.document = base64.b64encode(pdf)
+        invoices.write({'sent': True})
 
         action_xmlid = 'account_invoice_sent.action_account_invoice_print_form'
         action = self.env.ref(action_xmlid).read()[0]

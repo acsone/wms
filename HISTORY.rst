@@ -21,6 +21,11 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1774: Improve mass invoicing
+    * Add a filename with a pdf extension to the report file, to ease file download.
+    * Sort the invoices by customer ref in the report file.
+    * Set the invoices state to 'sent' later in the job to avoid erroneous state if the job fails.
+
 **Bugfixes**
 
 * ALCYN-1763: Fix blocked pickings that contains only partially available lines
