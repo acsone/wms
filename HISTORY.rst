@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1839: Fix failing 'rupture' declared in the voice picking
 
 **Build**
 
