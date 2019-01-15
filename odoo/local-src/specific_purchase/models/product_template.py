@@ -30,6 +30,10 @@ class ProductTemplate(models.Model):
         'product.state',
         string='State',
     )
+    nb_days_out_of_stock = fields.Integer(
+        help='Number of days before running out of stock',
+        compute='compute_date_out_of_stock',
+    )
 
     @api.depends('seller_ids')
     def _compute_supplier_id(self):
@@ -65,6 +69,21 @@ class ProductTemplate(models.Model):
             volume_in_cm3 = product.length * product.width * product.depth
             volume_in_liter = volume_in_cm3 / 1000
             product.volume = volume_in_liter
+
+    @api.onchange('route_ids')
+    def compute_date_out_of_stock(self):
+        route_mto = self.env.ref('stock.route_warehouse0_mto')
+        route_mto_mts = self.env.ref('stock_mts_mto_rule.route_mto_mts')
+        route_ids = [route_mto.id, route_mto_mts.id]
+        for product in self:
+            if any(route in product.route_ids.ids for route in route_ids) or \
+               product.product_variant_count > 1:
+                product.nb_days_out_of_stock = 0
+            else:
+                avg_csp = product.product_variant_id.average_annual_consumption
+                daily_csp = (12 * avg_csp) / 365.0
+                nb_days_out_of_stock = product.virtual_available * daily_csp
+                product.nb_days_out_of_stock = nb_days_out_of_stock
 
 
 class ProductState(models.Model):

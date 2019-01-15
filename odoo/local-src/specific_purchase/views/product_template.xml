@@ -9,6 +9,12 @@
                 <field name="state_id"/>
             </xpath>
 
+            <xpath expr="//group[@name='inventory']/group[@name='group_lots_and_weight']" position="after">
+                <group>
+                    <field name="nb_days_out_of_stock" />
+                </group>
+            </xpath>
+
             <xpath expr="//label[@for='volume']" position="before">
                 <field name="length"/>
                 <field name="width"/>
