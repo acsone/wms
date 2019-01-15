@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.9 (2019-01-15)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1258: Improve sale warning on product out of stock at supplier level
 * ALCYN-1774: Improve mass invoicing
     * Add a filename with a pdf extension to the report file, to ease file download.
@@ -28,20 +40,16 @@ latest (unreleased)
     * Set the invoices state to 'sent' later in the job to avoid erroneous state if the job fails.
 
 **Bugfixes**
-* ALCYN-1839: Fix failing 'rupture' declared in the voice picking
 
 * ALCYN-1763: Fix blocked pickings that contains only partially available lines
-* ALCYN-1840: Remove duplicated 'Partner' field on delivery form
-* ALCYN-1802: Improve customer reference on delivery note filename by searching for the custmoer on sale order related to the stock picking.
 * ALCYN-1793 Date on delivery slip and entry register mismatch
   The right date is date_done defined on the delivery slip
+* ALCYN-1802: Improve customer reference on delivery note filename by searching for the custmoer on sale order related to the stock picking.
 * ALCYN-1837: Remove grand-total tax included on delivery slip as it
   doesn't use the same computation as in invoice it could lead to
   mismatch on cents.
-
-**Build**
-
-**Documentation**
+* ALCYN-1839: Fix failing 'rupture' declared in the voice picking
+* ALCYN-1840: Remove duplicated 'Partner' field on delivery form
 
 
 10.30.8 (2019-01-14)
