@@ -357,7 +357,7 @@
                             <span t-field="deliveryslip.name"/>
                         </td>
                         <td>
-                            <span t-field="deliveryslip.date"/>
+                            <span t-field="deliveryslip.date_done"/>
                         </td>
                     </tr>
                     <tr>
