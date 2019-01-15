@@ -28,6 +28,7 @@ latest (unreleased)
     * Set the invoices state to 'sent' later in the job to avoid erroneous state if the job fails.
 
 **Bugfixes**
+* ALCYN-1839: Fix failing 'rupture' declared in the voice picking
 
 * ALCYN-1763: Fix blocked pickings that contains only partially available lines
 * ALCYN-1840: Remove duplicated 'Partner' field on delivery form
