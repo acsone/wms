@@ -226,7 +226,6 @@
                 <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
             </tbody>
         </table>
-        <p  class="text-right"><strong>Total amount (taxes included): <span t-field="deliveryslip.price_total"/></strong></p>
     </template>
 
     <template id="specific_report.deliveryslip_without_price">
