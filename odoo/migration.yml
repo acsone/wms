@@ -823,3 +823,7 @@ migration:
             post:
               - anthem songs.install.data_full::import_supplier_journal_items
               - anthem songs.install.data_full::post_journal_entries
+      addons:
+        upgrade:
+          ### local
+          - specific_stock
