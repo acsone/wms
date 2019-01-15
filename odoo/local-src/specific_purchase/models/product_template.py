@@ -63,7 +63,6 @@ class ProductTemplate(models.Model):
             volume_in_liter = volume_in_cm3 / 1000
             product.volume = volume_in_liter
 
-    date_out_of_stock_expected = fields.Datetime('Expected out of stock date')
     state_id = fields.Many2one(
         'product.state',
         string='State',
