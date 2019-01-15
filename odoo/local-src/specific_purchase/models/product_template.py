@@ -20,12 +20,15 @@ class ProductTemplate(models.Model):
                                   domain=[('supplier', '=', True)],
                                   compute='_compute_supplier_id',
                                   store=True)
-
     vendor_product_code = fields.Char(
         'Vendor Product Code',
         readonly=True,
         compute='_compute_supplier_id',
         store=True
+    )
+    state_id = fields.Many2one(
+        'product.state',
+        string='State',
     )
 
     @api.depends('seller_ids')
@@ -62,11 +65,6 @@ class ProductTemplate(models.Model):
             volume_in_cm3 = product.length * product.width * product.depth
             volume_in_liter = volume_in_cm3 / 1000
             product.volume = volume_in_liter
-
-    state_id = fields.Many2one(
-        'product.state',
-        string='State',
-    )
 
 
 class ProductState(models.Model):
