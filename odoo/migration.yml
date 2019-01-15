@@ -827,4 +827,5 @@ migration:
         upgrade:
           ### local
           - account_invoice_sent
+          - specific_sale
           - specific_stock

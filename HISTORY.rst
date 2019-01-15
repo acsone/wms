@@ -21,6 +21,7 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1258: Improve sale warning on product out of stock at supplier level
 * ALCYN-1774: Improve mass invoicing
     * Add a filename with a pdf extension to the report file, to ease file download.
     * Sort the invoices by customer ref in the report file.

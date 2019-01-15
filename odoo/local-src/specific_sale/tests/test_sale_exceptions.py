@@ -468,3 +468,34 @@ class TestSaleOrderException(SavepointCase):
         line = self.so1.order_line[0]
         line.product_id = self.prod_medoc_human
         self.assertTrue(exception.warning_text in line.warning_text)
+
+    def test_exception_out_of_stock_at_supplier(self):
+        """Check warning for out of stock at supplier level."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
+        exception = self.env.ref('specific_sale.warning_supplier_break')
+        line = self.so1.order_line[0]
+        # Set the Out Of Stock At Supplier Level state on the product
+        # And switch the product to trigger the exceptions
+        self.prod1.state_id = self.env.ref('specific_purchase.product_state_h')
+        line.product_id = self.prod_medoc_human
+        line.product_id = self.prod1
+        self.assertTrue(exception.warning_text in line.warning_text)
+        # With some inventory there should be no warning
+        stock_location = self.env.ref('stock.stock_location_stock')
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'location_id': stock_location.id,
+        })
+        inventory.prepare_inventory()
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': self.prod1.product_variant_id.id,
+            'product_qty': 1000,
+            'location_id': stock_location.id})
+        inventory.action_done()
+        # Cache refreshing needed for the back order calculation to work ?
+        self.prod1.refresh()
+        line.product_id = self.prod_medoc_human
+        line.product_id = self.prod1
+        self.assertTrue(not line.warning_text)
