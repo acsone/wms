@@ -1093,7 +1093,7 @@ msgstr "Prix<br/>unitaire<br/>net"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "VAT"
-msgstr "TVA"
+msgstr "Taxe"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon

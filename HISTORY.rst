@@ -32,6 +32,11 @@ latest (unreleased)
 * ALCYN-1763: Fix blocked pickings that contains only partially available lines
 * ALCYN-1840: Remove duplicated 'Partner' field on delivery form
 * ALCYN-1802: Improve customer reference on delivery note filename by searching for the custmoer on sale order related to the stock picking.
+* ALCYN-1793 Date on delivery slip and entry register mismatch
+  The right date is date_done defined on the delivery slip
+* ALCYN-1837: Remove grand-total tax included on delivery slip as it
+  doesn't use the same computation as in invoice it could lead to
+  mismatch on cents.
 
 **Build**
 
