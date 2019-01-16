@@ -41,15 +41,14 @@ class StockUpdateMapper(Component):
 
     @mapping
     def compute_date_peremption(self, record):
-        """Get the closest (to now) expiration date """
+        """Get the closest (to now) expiration date."""
         value = ''
         # lot_ids attributes already sorts by life_date
-        lots = record.with_context(
-            only_wh_stock_quants=True).product_tmpl_id.lot_ids.filtered(
-            lambda r: r.life_date and r.product_qty > 0
-        )
-        if lots:
-            value = lots[0].life_date[:10]
+        lots = record.product_tmpl_id.lot_ids.filtered(lambda r: r.life_date)
+        for lot in lots:
+            if lot.with_context(only_wh_stock_quants=True).product_qty > 0:
+                value = lot.life_date[:10]
+                break
         return {'date_peremption': value}
 
     @mapping
@@ -136,6 +135,7 @@ class StockUpdateExporter(Component):
                     # Export a batch of product state
                     try:
                         self._create({'lines': data})
+                        _logger.debug('Stock_exported_until %s', quant.write_date)
                     except ConnectorException:
                         if last_export:
                             return self.get_exported_until(last_export)
