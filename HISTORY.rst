@@ -22,7 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
-
+* ALCYN-1806 : Unpack stock quant package if it's a return from a customer
 **Build**
 
 **Documentation**
