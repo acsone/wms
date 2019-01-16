@@ -63,7 +63,7 @@ class RoundInstance(models.Model):
             LEFT JOIN picking_zone z ON t.picking_zone_id = z.id
             WHERE
             -- p.state is done if no stock moves (all sent to backorder)
-            (p.state in ('partially_available', assigned', 'done') OR EXISTS (
+            (p.state in ('partially_available', 'assigned', 'done') OR EXISTS (
               SELECT id FROM stock_move
               WHERE stock_move.picking_id = p.id
               AND (stock_move.state in ('done', 'assigned')
