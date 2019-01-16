@@ -26,6 +26,8 @@ latest (unreleased)
 
 * ALCYN-1771: Fix very slow export for the stock introduced by this Jira card
 
+* ALCYN-1841: Fix SQL query in delivery_rounds that forced to roll back release 10.30.9 and improve testing
+
 **Build**
 
 **Documentation**
