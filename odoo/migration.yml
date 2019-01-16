@@ -830,3 +830,4 @@ migration:
           - specific_report
           - specific_sale
           - specific_stock
+    - version: 10.30.10

@@ -22,15 +22,20 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
-* ALCYN-1806 : Unpack stock quant package if it's a return from a customer
-
-* ALCYN-1771: Fix very slow export for the stock introduced by this Jira card
-
-* ALCYN-1841: Fix SQL query in delivery_rounds that forced to roll back release 10.30.9 and improve testing
 
 **Build**
 
 **Documentation**
+
+
+10.30.10 (2019-01-16)
++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-1771: Fix very slow export for the stock introduced by this Jira card
+* ALCYN-1806 : Unpack stock quant package if it's a return from a customer
+* ALCYN-1841: Fix SQL query in delivery_rounds that forced to roll back release 10.30.9 and improve testing
 
 
 10.30.9 (2019-01-15)
