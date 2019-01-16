@@ -135,7 +135,8 @@ class StockUpdateExporter(Component):
                     # Export a batch of product state
                     try:
                         self._create({'lines': data})
-                        _logger.debug('Stock_exported_until %s', quant.write_date)
+                        _logger.debug('Stock_exported_until %s',
+                                      quant.write_date)
                     except ConnectorException:
                         if last_export:
                             return self.get_exported_until(last_export)
