@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 * ALCYN-1806 : Unpack stock quant package if it's a return from a customer
+
+* ALCYN-1771: Fix very slow export for the stock introduced by this Jira card
+
 **Build**
 
 **Documentation**
