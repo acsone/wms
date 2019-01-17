@@ -11,6 +11,7 @@
     'depends': [
         'sale_stock',
         'stock_constraint',
+        'delivery',
         ],
     'data': [
         'views/stock.xml',

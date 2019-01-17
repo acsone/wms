@@ -16,3 +16,9 @@ class SaleOrder(models.Model):
                 ('group_id', '=', order.procurement_group_id.id)
                 ]).mapped('picking_id') if order.procurement_group_id else []
             order.delivery_count = len(order.picking_ids)
+
+    def _prepare_procurement_group(self):
+        values = super(SaleOrder, self)._prepare_procurement_group()
+        if self.carrier_id:
+            values['carrier_id'] = self.carrier_id.id
+        return values

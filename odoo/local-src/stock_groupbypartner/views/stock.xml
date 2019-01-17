@@ -13,4 +13,15 @@
         </field>
     </record>
 
+    <record id="procurement_group_form_view_herited" model="ir.ui.view">
+        <field name="name">procurement.group.view.form.inherit.picking</field>
+        <field name="model">procurement.group</field>
+        <field name="inherit_id" ref="procurement.procurement_group_form_view"/>
+        <field name="arch" type="xml">
+            <field name="move_type" position="after">
+                <field name="carrier_id"/>
+            </field>
+        </field>
+    </record>
+
 </odoo>
