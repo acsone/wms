@@ -836,3 +836,11 @@ migration:
         upgrade:
           ### local
           - specific_report
+    - version: 10.30.12
+      addons:
+        upgrade:
+          ### local
+          - stock_groupbypartner
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_12_update::post
