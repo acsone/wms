@@ -239,22 +239,6 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    - version: 10.26.0
-      operations:
-        post:
-          - anthem songs.upgrade.10_26_0_update::post
-      modes:
-        full:
-          operations:
-            post:
-              - anthem songs.upgrade.10_26_0_update::post_full
-              - anthem songs.install.data_all::import_delivery_carriers
-              - anthem songs.install.data_full::import_delivery_round_config
-              - anthem songs.install.data_full::import_delivery_carriers_round
-              # fix res.partner.title after update base
-              - anthem songs.install.sales::load_res_title
-              - anthem songs.install.sales::clean_title
-              - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/data/install/stock_production_lot_date_computation.sql $DB_NAME'"
     - version: 10.27.0
       addons:
         upgrade:
