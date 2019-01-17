@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-1838: Fix product price for sale order created through the web service (ESB) The product pricelist assigned to the customer was not used.
+* ALCYN-1837: Fix delivery condition in Dutch on delivery slip
 
 **Build**
 

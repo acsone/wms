@@ -35,7 +35,8 @@
             <t t-call="specific_report.deliveryslip_with_price" t-if="not partner.is_hide_prices_deliveryslip" t-lang="partner.lang"/>
             <t t-call="specific_report.deliveryslip_without_price" t-if="partner.is_hide_prices_deliveryslip" t-lang="partner.lang"/>
 
-            <p id="delivery_condition" t-field="company.delivery_terms_conditions"/>
+            <!-- Rebrowse company with partner lang to get the right translation -->
+            <p id="delivery_condition" t-field="company.with_context(lang=partner.lang).delivery_terms_conditions"/>
 
             <div class="row">
                 <div class="col-xs-2">
