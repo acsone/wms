@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1838: Fix product price for sale order created through the web service (ESB) The product pricelist assigned to the customer was not used.
+
 **Build**
 
 **Documentation**

@@ -194,7 +194,6 @@ class SaleOrder(models.Model):
                 sol['name'] = product.name
                 sol['product_uom'] = product.uom_id.id
                 sol['product_uom_qty'] = line.pop('quantity')
-                sol['price_unit'] = product.list_price
                 sol['discounting_type'] = 'multiplicative'
                 sol['esb_ref'] = line.pop('line_id')
                 lines.append(sol)

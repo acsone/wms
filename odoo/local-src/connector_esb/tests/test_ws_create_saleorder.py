@@ -91,6 +91,17 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'country_id': cls.fiji.id,
             'parent_id': cls.partner.id,
         })
+        cls.pricelist_1 = cls.env['product.pricelist'].create({
+            'name': 'Pricelist 1',
+            'item_ids': [
+                (0, False, {
+                    'applied_on': '0_product_variant',
+                    'product_id': cls.p1.id,
+                    'compute_price': 'fixed',
+                    'fixed_price': 9,
+                }),
+            ],
+        })
 
     def test_create_saleorder(self):
         starting_date = fields.Datetime().now()
@@ -261,6 +272,16 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                         fields.Datetime.now())
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
+
+    def test_customer_pricelist(self):
+        """Check that the customer assigned pricelist is used."""
+        data = deepcopy(self.order_data)
+        self.partner.property_product_pricelist = self.pricelist_1.id
+        order = self.env['sale.order']._ws_create_new(data)
+        self.assertEqual(
+            order.order_line[0].price_unit,
+            self.pricelist_1.item_ids[0].fixed_price
+        )
 
     def test_create_saleorder_with_cnk(self):
         data = deepcopy(self.order_data_cnk)
