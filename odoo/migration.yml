@@ -831,3 +831,8 @@ migration:
           - specific_sale
           - specific_stock
     - version: 10.30.10
+    - version: 10.30.11
+      addons:
+        upgrade:
+          ### local
+          - specific_report

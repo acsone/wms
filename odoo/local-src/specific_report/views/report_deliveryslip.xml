@@ -35,7 +35,8 @@
             <t t-call="specific_report.deliveryslip_with_price" t-if="not partner.is_hide_prices_deliveryslip" t-lang="partner.lang"/>
             <t t-call="specific_report.deliveryslip_without_price" t-if="partner.is_hide_prices_deliveryslip" t-lang="partner.lang"/>
 
-            <p id="delivery_condition" t-field="company.delivery_terms_conditions"/>
+            <!-- Rebrowse company with partner lang to get the right translation -->
+            <p id="delivery_condition" t-field="company.with_context(lang=partner.lang).delivery_terms_conditions"/>
 
             <div class="row">
                 <div class="col-xs-2">
@@ -118,7 +119,7 @@
                 </tr>
             </thead>
             <tbody class="invoice_tbody">
-                <t t-foreach="deliveryslip.get_moves_by_order()" t-as="grouped_lines">
+                <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()" t-as="grouped_lines">
                     <t t-set="order" t-value="grouped_lines[0]"/>
                     <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
                     <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
@@ -163,13 +164,13 @@
                                 <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_unit" t-if="not order or not order.is_consignment"/>
+                                <span t-field="order_line.price_unit"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_reduce_taxexcl" t-if="not order or not order.is_consignment"/>
+                                <span t-field="order_line.price_reduce_taxexcl"/>
                             </td>
                             <td>
-                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-if="not order or not order.is_consignment"/>
+                                <t t-esc="order_line.price_reduce * int(line.product_qty)"/>
                             </td>
                             <td>
                                 <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.tax_id))"/>
@@ -245,7 +246,7 @@
                 </tr>
             </thead>
             <tbody class="invoice_tbody">
-                <t t-foreach="deliveryslip.get_moves_by_order()" t-as="grouped_lines">
+                <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()" t-as="grouped_lines">
                     <t t-set="order" t-value="grouped_lines[0]"/>
                     <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
                     <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
@@ -387,7 +388,7 @@
                     </tr>
                 </thead>
                 <tbody class="invoice_tbody">
-                    <t t-foreach="deliveryslip.get_moves_by_order(is_entry_register=True)" t-as="grouped_lines">
+                    <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order(is_entry_register=True)" t-as="grouped_lines">
                         <t t-set="order" t-value="grouped_lines[0]"/>
                         <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
 
@@ -507,7 +508,9 @@
     <template id="stock.report_deliveryslip">
         <t t-foreach="docs" t-as="deliveryslip">
             <t t-call="specific_report.report_deliveryslip" t-lang="deliveryslip.partner_id.lang"/>
-            <t t-if="deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
+            <t t-set="depot_number" t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"/>
+            <t t-if="depot_number and deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
+
         </t>
     </template>
 </odoo>

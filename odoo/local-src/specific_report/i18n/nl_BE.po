@@ -177,44 +177,44 @@ msgstr "<span>van</span>"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_alcyon_discount
 msgid "Amount alcyon discount"
-msgstr "Amount alcyon discount"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_apb
 msgid "Amount apb"
-msgstr "Amount apb"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_contribution
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_amount_contribution
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_amount_contribution
 msgid "Amount contribution"
-msgstr "Amount contribution"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_discount_total
 msgid "Amount discount total"
-msgstr "Amount discount total"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_only_tax
 msgid "Amount only tax"
-msgstr "Amount only tax"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_supplier_discount
 msgid "Amount supplier discount"
-msgstr "Amount supplier discount"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_untaxed_with_contribution
 msgid "Amount untaxed with contribution"
-msgstr "Amount untaxed with contribution"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_without_discount
 msgid "Amount without discount"
-msgstr "Amount without discount"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_apb_ids
@@ -287,7 +287,7 @@ msgstr "Consignatie"
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_contribution_ids
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_contribution_ids
 msgid "Contribution ids"
-msgstr "Contribution ids"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_uid
@@ -358,7 +358,7 @@ msgstr "Voorlopige factuur"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
 msgid "Entry register"
-msgstr "Entry register"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -371,7 +371,7 @@ msgstr "Uiterste houdbaarheidsdatum"
 #. module: specific_report
 #: model:ir.model.fields,help:specific_report.field_stock_move_serial_number
 msgid "For delivery order only"
-msgstr "For delivery order only"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -383,13 +383,13 @@ msgstr "Koelkast"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
 msgid "Has Invoices"
-msgstr "Has Invoices"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_prices_deliveryslip
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_prices_deliveryslip
 msgid "Hide prices on deliveryslip"
-msgstr "Hide prices on deliveryslip"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
@@ -421,17 +421,17 @@ msgstr "Factuurlijn"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_apb_ids
 msgid "Invoice apb ids"
-msgstr "Invoice apb ids"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_contribution_ids
 msgid "Invoice contribution ids"
-msgstr "Invoice contribution ids"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_only_tax_ids
 msgid "Invoice only tax ids"
-msgstr "Invoice only tax ids"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
@@ -463,7 +463,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: specific_report
 #: model:ir.actions.act_window,name:specific_report.action_edit_serial_number
 msgid "Modify Serial Number"
-msgstr "Modify Serial Number"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -478,14 +478,14 @@ msgstr "Naam"
 #: code:addons/specific_report/wizard/modify_serial_number.py:28
 #, python-format
 msgid "No active id found"
-msgstr "No active id found"
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/round_instance.py:22
 #: code:addons/specific_report/models/round_instance.py:167
 #, python-format
 msgid "No invoice to print"
-msgstr "No invoice to print"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -493,83 +493,83 @@ msgstr "No invoice to print"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Number"
-msgstr "Number"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_total
 msgid "Number of boxes"
-msgstr "Number of boxes"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_cold
 msgid "Number of cold"
-msgstr "Number of cold"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_cold
 msgid "Number of cold products"
-msgstr "Number of cold products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_equipment
 msgid "Number of equipments"
-msgstr "Number of equipments"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_equipment
 msgid "Number of equipments products"
-msgstr "Number of equipments products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_food
 msgid "Number of food"
-msgstr "Number of food"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_food
 msgid "Number of food products"
-msgstr "Number of food products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_human_drug
 msgid "Number of human drug"
-msgstr "Number of human drug"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_human_drug
 msgid "Number of human drug products"
-msgstr "Number of human drug products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_drug
 msgid "Number of medical"
-msgstr "Number of medical"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_drug
 msgid "Number of medical products"
-msgstr "Number of medical products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_total
 msgid "Number of products"
-msgstr "Number of products"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Number of<br/>packages<br/>"
-msgstr "Number of<br/>packages<br/>"
+msgstr "Aantal<br/>verpakkingen<br/>"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_only_tax_ids
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_only_tax_ids
 msgid "Only tax ids"
-msgstr "Only tax ids"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Operator"
-msgstr "Operator"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -590,7 +590,7 @@ msgstr "Bestel referentie"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_order_line_id
 msgid "Order line"
-msgstr "Order line"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
@@ -625,29 +625,29 @@ msgstr "Klant"
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.action_passport_report
 msgid "Passport report"
-msgstr "Passport report"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Passport verification"
-msgstr "Passport verification"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picked Quantity"
-msgstr "Picked Quantity"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
-msgstr "Print delivery round"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print invoices"
-msgstr "Print invoices"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -718,13 +718,13 @@ msgstr "Verkooporderlijn"
 #: code:addons/specific_report/models/report_async.py:45
 #, python-format
 msgid "Sending fax for {} with id {}"
-msgstr "Sending fax for {} with id {}"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_serial_number
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_serial_number
 msgid "Serial number"
-msgstr "Serial number"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_stock_move
@@ -750,38 +750,38 @@ msgstr "BTW %"
 #: code:addons/specific_report/models/sale_order.py:57
 #, python-format
 msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
-msgstr "The Quotation can not be printed the client {} ({})                  has no reference assigned."
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:132
 #: code:addons/specific_report/models/stock_picking.py:170
 #, python-format
 msgid "The picking zone %s is not correct"
-msgstr "The picking zone %s is not correct"
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:86
 #, python-format
 msgid "There are more than one currencies on orders"
-msgstr "There are more than one currencies on orders"
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:83
 #, python-format
 msgid "There is currency defined on orders"
-msgstr "There is currency defined on orders"
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:152
 #, python-format
 msgid "There is no category on this product"
-msgstr "There is no category on this product"
+msgstr ""
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:113
 #, python-format
 msgid "There is no original picking zone on this operation."
-msgstr "There is no original picking zone on this operation."
+msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_price_total
