@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-1837: Add missing translation for "Number of package" in Dutch
 * ALCYN-1837: Fix product names translations in delivery slip lines
 * ALCYN-1837: Always show price on consignements
+* ALCYN-1837: Print entry register only if the customer has a Veterinary depot number
 
 **Build**
 
