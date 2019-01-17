@@ -27,6 +27,7 @@ latest (unreleased)
 * ALCYN-1837: Fix delivery condition in Dutch on delivery slip
 * ALCYN-1837: Add missing translation for "Number of package" in Dutch
 * ALCYN-1837: Fix product names translations in delivery slip lines
+* ALCYN-1837: Always show price on consignements
 
 **Build**
 

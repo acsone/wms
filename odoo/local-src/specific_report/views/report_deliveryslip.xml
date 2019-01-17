@@ -164,13 +164,13 @@
                                 <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_unit" t-if="not order or not order.is_consignment"/>
+                                <span t-field="order_line.price_unit"/>
                             </td>
                             <td>
-                                <span t-field="order_line.price_reduce_taxexcl" t-if="not order or not order.is_consignment"/>
+                                <span t-field="order_line.price_reduce_taxexcl"/>
                             </td>
                             <td>
-                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-if="not order or not order.is_consignment"/>
+                                <t t-esc="order_line.price_reduce * int(line.product_qty)"/>
                             </td>
                             <td>
                                 <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.tax_id))"/>
@@ -509,6 +509,7 @@
         <t t-foreach="docs" t-as="deliveryslip">
             <t t-call="specific_report.report_deliveryslip" t-lang="deliveryslip.partner_id.lang"/>
             <t t-if="deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
+
         </t>
     </template>
 </odoo>
