@@ -60,9 +60,23 @@ def disable_quickcreate(ctx):
 
 
 @anthem.log
+def set_not_print_flag_on_materiel_product(ctx):
+    """Set the flag do not print label on materiel products"""
+    categ_materiel = ctx.env.ref('specific_data.product_categ_materiel')
+
+    products = ctx.env['product.template'].search([
+        ('categ_id', 'child_of', categ_materiel.id)
+    ])
+    products.write({
+        'is_do_not_print_label': True
+    })
+
+
+@anthem.log
 def main(ctx):
     """ Configuring products """
     set_customer_lead_time(ctx)
     import_accounting_products(ctx)
     zero_digits_for_uom(ctx)
     disable_quickcreate(ctx)
+    set_not_print_flag_on_materiel_product(ctx)
