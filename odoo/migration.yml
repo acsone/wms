@@ -102,6 +102,7 @@ migration:
           # src
           - account
           - account_accountant
+          - board
           - document
           - l10n_be_intrastat
           - l10n_be_invoice_bba
@@ -582,3 +583,9 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_12_update::post
+    - version: 10.30.12
+      addons:
+        upgrade:
+          ### Odoo
+          # src
+          - board
