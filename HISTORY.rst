@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-1675: group moves in pickings considering the delivery method
-
 **Build**
 
 **Documentation**
+
+
+10.30.12 (2019-01-18)
++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-1675: group moves in pickings considering the delivery method
 
 
 10.30.11 (2019-01-17)
