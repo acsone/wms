@@ -14,14 +14,7 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        """ Do not group pickings having a dedicated carrier round """
-        self_carrier = self.filtered('carrier_id.delivery_template_id')
-        if self_carrier:
-            super(SaleOrder, self_carrier.with_context(
-                nogrouppicking=True)).action_confirm()
-        self_nocarrier = self - self_carrier
-        if self_nocarrier:
-            super(SaleOrder, self_nocarrier).action_confirm()
+        super(SaleOrder, self).action_confirm()
         self._assign_delivery_round()
         return True
 

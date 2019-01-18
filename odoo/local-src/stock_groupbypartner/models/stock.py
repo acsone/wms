@@ -24,10 +24,6 @@ class StockPicking(models.Model):
         picking. If the key 'do_only_split' is given in the context, then move
         all lines not in context.get('split', []) instead of all non-done
         lines.  """
-        if self._context.get('nogrouppicking'):
-            return super(StockPicking, self)._create_backorder(
-                backorder_moves=backorder_moves)
-
         picking_togroup = self.filtered(
             lambda p: p.picking_type_id.groupbypartner)
         picking_notgroup = self - picking_togroup
@@ -107,6 +103,21 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     @api.multi
+    def _assign_picking_group_domain(self):
+        self.ensure_one()
+        domain = [
+            ('partner_id', '=', self.group_id.partner_id.id),
+            ('location_id', '=', self.location_id.id),
+            ('location_dest_id', '=', self.location_dest_id.id),
+            ('picking_type_id', '=', self.picking_type_id.id),
+            ('group_id.carrier_id', '=', self.group_id.carrier_id.id),
+            ('printed', '=', False),
+            ('state', 'in', ['draft', 'confirmed', 'waiting',
+                             'partially_available', 'assigned'])
+        ]
+        return domain
+
+    @api.multi
     def assign_picking(self):
         """Try to assign the moves to an existing picking
         that has not been reserved yet and that does not have the same
@@ -114,11 +125,9 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
-        if self._context.get('nogrouppicking'):
-            return super(StockMove, self).assign_picking()
-
         moves_to_group = self.filtered(
             lambda x: x.picking_type_id.groupbypartner)
+
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:
             super(StockMove, moves_to_not_group).assign_picking()
@@ -126,15 +135,7 @@ class StockMove(models.Model):
         pick_obj = self.env["stock.picking"]
         pickings_cache = {}
         for move in moves_to_group:
-            domain = [
-                ('partner_id', '=', move.group_id.partner_id.id),
-                ('location_id', '=', move.location_id.id),
-                ('location_dest_id', '=', move.location_dest_id.id),
-                ('picking_type_id', '=', move.picking_type_id.id),
-                ('printed', '=', False),
-                ('state', 'in', ['draft', 'confirmed', 'waiting',
-                                 'partially_available', 'assigned'])
-            ]
+            domain = move._assign_picking_group_domain()
             if str(domain) in pickings_cache:
                 pickings = pickings_cache[str(domain)]
             else:

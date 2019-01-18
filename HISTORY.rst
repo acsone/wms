@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1675: group moves in pickings considering the delivery method
+
 **Build**
 
 **Documentation**
