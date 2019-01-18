@@ -38,7 +38,7 @@ before_install:
   # Database dumps will land on the master's cache only.
   - if [ "$TESTS" == "1" -a "$TRAVIS_PULL_REQUEST" == "false" -a -z "$TRAVIS_TAG" ] ; then export CREATE_DB_CACHE="true" ; fi
   - if [ "$LINT_CHECK" == "1" ] ; then pip install --user -q flake8 ; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython requests pyyaml ; fi
+  - if [ "$LINT_CHECK" == "0" ] ; then pip install --user -q gitpython requests pyOpenSSL ndg-httpsclient pyasn1 pyyaml; fi
 
 install:
   - if [ "$TESTS" == "1" ] ; then bundle install ; fi
