@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
+
 **Build**
 
 **Documentation**
