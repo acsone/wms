@@ -1,0 +1,66 @@
+From 5472bbded51056a2322a24304db62e1d65dca464 Mon Sep 17 00:00:00 2001
+From: Martin Trigaux <mat@odoo.com>
+Date: Sat, 3 Nov 2018 16:47:43 +0100
+Subject: [PATCH] [FIX] mail: invite: use proper translation terms
+
+Fix translation placeholders in invite wizard, to make them easier to
+understand for translators. Also rework the message generation code
+to ensure proper XML structure.
+---
+ addons/mail/wizard/invite.py | 30 +++++++++++++++++++++---------
+ 1 file changed, 21 insertions(+), 9 deletions(-)
+
+diff --git a/addons/mail/wizard/invite.py b/addons/mail/wizard/invite.py
+index 1d345af517a..17e5fbf842a 100644
+--- a/addons/mail/wizard/invite.py
++++ b/addons/mail/wizard/invite.py
+@@ -1,6 +1,9 @@
+ # -*- coding: utf-8 -*-
+ # Part of Odoo. See LICENSE file for full copyright and licensing details.
+ 
++from lxml import etree
++from lxml.html import builder as html
++
+ from odoo import _, api, fields, models
+ 
+ 
+@@ -12,18 +15,27 @@ class Invite(models.TransientModel):
+     @api.model
+     def default_get(self, fields):
+         result = super(Invite, self).default_get(fields)
++        if self._context.get('mail_invite_follower_channel_only'):
++            result['send_mail'] = False
++        if 'message' not in fields:
++            return result
++
+         user_name = self.env.user.name_get()[0][1]
+         model = result.get('res_model')
+         res_id = result.get('res_id')
+-        if self._context.get('mail_invite_follower_channel_only'):
+-            result['send_mail'] = False
+-        if 'message' in fields and model and res_id:
+-            model_name = self.env['ir.model'].search([('model', '=', model)]).name_get()[0][1]
+-            document_name = self.env[model].browse(res_id).name_get()[0][1]
+-            message = _('<div><p>Hello,</p><p>%s invited you to follow %s document: %s.</p></div>') % (user_name, model_name, document_name)
+-            result['message'] = message
+-        elif 'message' in fields:
+-            result['message'] = _('<div><p>Hello,</p><p>%s invited you to follow a new document.</p></div>') % user_name
++        if model and res_id:
++            document = self.env['ir.model'].search([('model', '=', model)]).name_get()[0][1]
++            title = self.env[model].browse(res_id).display_name
++            msg_fmt = _('%(user_name)s invited you to follow %(document)s document: %(title)s')
++        else:
++            msg_fmt = _('%(user_name)s invited you to follow a new document')
++
++        text = msg_fmt % locals()
++        message = html.DIV(
++            html.P(_('Hello,')),
++            html.P(text)
++        )
++        result['message'] = etree.tostring(message)
+         return result
+ 
+     res_model = fields.Char('Related Document Model', required=True, index=True, help='Model of the followed resource')
+-- 
+2.17.1
+

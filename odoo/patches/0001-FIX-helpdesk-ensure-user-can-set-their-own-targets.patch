@@ -1,0 +1,79 @@
+From 410e038dd4e561143d741862203e7f3ed69f326a Mon Sep 17 00:00:00 2001
+From: jem-odoo <jem@openerp.com>
+Date: Fri, 19 Oct 2018 14:41:33 +0200
+Subject: [PATCH] [FIX] helpdesk: ensure user can set their own targets
+
+Refactor the dedicated controller and replace it with a proper call to
+the `res.users.write()` method, using the existing mechanism for allowing
+a user to write on their own user profile.
+---
+ helpdesk/models/helpdesk.py                  |  7 -------
+ helpdesk/models/res_users.py                 | 19 +++++++++++++++++++
+ helpdesk/static/src/js/helpdesk_dashboard.js |  6 ++++--
+ 3 files changed, 23 insertions(+), 9 deletions(-)
+
+diff --git a/helpdesk/models/helpdesk.py b/helpdesk/models/helpdesk.py
+index 6b835855e..4e9a92059 100644
+--- a/helpdesk/models/helpdesk.py
++++ b/helpdesk/models/helpdesk.py
+@@ -310,13 +310,6 @@ class HelpdeskTeam(models.Model):
+         bad = activity['bad'] * 0.00
+         return great + okey + bad
+ 
+-    @api.model
+-    def modify_target_helpdesk_team_dashboard(self, target_name, target_value):
+-        if target_name:
+-            self.env.user.sudo().write({target_name: target_value})
+-        else:
+-            raise UserError(_('This target does not exist.'))
+-
+     @api.multi
+     def get_new_user(self):
+         self.ensure_one()
+diff --git a/helpdesk/models/res_users.py b/helpdesk/models/res_users.py
+index cd205aef8..76ed163a3 100644
+--- a/helpdesk/models/res_users.py
++++ b/helpdesk/models/res_users.py
+@@ -10,3 +10,22 @@ class ResUsers(models.Model):
+     helpdesk_target_closed = fields.Float(string='Target Tickets to Close')
+     helpdesk_target_rating = fields.Float(string='Target Customer Rating')
+     helpdesk_target_success = fields.Float(string='Target Success Rate')
++
++    def __init__(self, pool, cr):
++        """ Override of __init__ to add access rights.
++            Access rights are disabled by default, but allowed
++            on some specific fields defined in self.SELF_{READ/WRITE}ABLE_FIELDS.
++        """
++        init_res = super(ResUsers, self).__init__(pool, cr)
++        helpdesk_fields = [
++            'helpdesk_target_closed',
++            'helpdesk_target_rating',
++            'helpdesk_target_success',
++        ]
++        # duplicate list to avoid modifying the original reference
++        type(self).SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
++        type(self).SELF_WRITEABLE_FIELDS.extend(helpdesk_fields)
++        # duplicate list to avoid modifying the original reference
++        type(self).SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
++        type(self).SELF_READABLE_FIELDS.extend(helpdesk_fields)
++        return init_res
+diff --git a/helpdesk/static/src/js/helpdesk_dashboard.js b/helpdesk/static/src/js/helpdesk_dashboard.js
+index 765db4eb5..ab7ed8406 100644
+--- a/helpdesk/static/src/js/helpdesk_dashboard.js
++++ b/helpdesk/static/src/js/helpdesk_dashboard.js
+@@ -84,8 +84,10 @@ var HelpdeskTeamDashboardView = KanbanView.extend({
+         if(isNaN(target_value)) {
+             this.do_warn(_t("Wrong value entered!"), _t("Only Integer Value should be valid."));
+         } else {
+-            this._updated = new Model('helpdesk.team')
+-                            .call('modify_target_helpdesk_team_dashboard', [target_name, parseInt(target_value)])
++            var values = {};
++            values[target_name] = parseInt(target_value);
++            this._updated = new Model('res.users')
++                            .call('write', [[session.uid], values])
+                             .then(function() {
+                                 return self.render();
+                             });
+-- 
+2.17.1
+

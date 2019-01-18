@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Build**
 
+* ALCYN-1736: Apply patches for ODOO-SA-2018-11-28
+
 **Documentation**
 
 
