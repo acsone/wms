@@ -120,6 +120,8 @@ class TestLotLoss(SavepointCase):
         op.save()
 
         pack_lot_A.with_context(round_autoset=False)._skip_lot()
+
+        # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
         self.assertNotEqual(op, new_op)
         self.assertEqual(len(new_op.pack_lot_ids), 2)
@@ -133,6 +135,46 @@ class TestLotLoss(SavepointCase):
         self.assertEqual(new_pack_lot_A.qty, 1)
         self.assertEqual(new_pack_lot_B.qty_todo, 5)
         self.assertEqual(new_pack_lot_B.qty, 0)
+
+        # Check blocking move has been created
+        loss_picking_type = self.env.ref(
+            'stock_lot_loss.stock_picking_type_23')
+        block_move = self.env['stock.quant'].search([
+            ('qty', '>', 0.0),
+            ('product_id', '=', self.product_1.id),
+            ('lot_id', '=', self.product_1_lotB.id),
+            ('location_id', '=', self.location.id),
+            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ]).mapped('reservation_id')
+        self.assertEqual(block_move.ids, [])
+        block_move = self.env['stock.quant'].search([
+            ('qty', '>', 0.0),
+            ('product_id', '=', self.product_1.id),
+            ('lot_id', '=', self.product_1_lotA.id),
+            ('location_id', '=', self.location.id),
+            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ]).mapped('reservation_id')
+        self.assertEqual(block_move.state, 'assigned')
+        self.assertEqual(block_move.product_qty, 2)
+
+        # Check blocked lot cleanup
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'filter': 'product',
+            'location_id': self.location.id,
+            'product_id': self.product_1.id,
+        })
+        inventory.prepare_inventory()
+        inventory.line_ids.unlink()
+        inventory.line_ids.create({
+            'product_id': self.product_1.id,
+            'product_qty': 1.0,
+            'inventory_id': inventory.id,
+            'location_id': self.location.id,
+            'prod_lot_id': self.product_1_lotA.id,
+            })
+        inventory.action_done()
+        self.assertEqual(block_move.state, 'cancel')
 
     def test_lot_loss_line2(self):
         """ Create loss of line2 """
@@ -157,6 +199,8 @@ class TestLotLoss(SavepointCase):
         op.save()
 
         pack_lot_B.with_context(round_autoset=False)._skip_lot()
+
+        # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
         self.assertNotEqual(op, new_op)
         self.assertEqual(len(new_op.pack_lot_ids), 2)
@@ -170,3 +214,43 @@ class TestLotLoss(SavepointCase):
         self.assertEqual(new_pack_lot_A.qty, 3)
         self.assertEqual(new_pack_lot_B.qty_todo, 1)
         self.assertEqual(new_pack_lot_B.qty, 1)
+
+        # Check blocking move has been created
+        loss_picking_type = self.env.ref(
+            'stock_lot_loss.stock_picking_type_23')
+        block_move = self.env['stock.quant'].search([
+            ('qty', '>', 0.0),
+            ('product_id', '=', self.product_1.id),
+            ('lot_id', '=', self.product_1_lotA.id),
+            ('location_id', '=', self.location.id),
+            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ]).mapped('reservation_id')
+        self.assertEqual(block_move.ids, [])
+        block_move = self.env['stock.quant'].search([
+            ('qty', '>', 0.0),
+            ('product_id', '=', self.product_1.id),
+            ('lot_id', '=', self.product_1_lotB.id),
+            ('location_id', '=', self.location.id),
+            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ]).mapped('reservation_id')
+        self.assertEqual(block_move.state, 'assigned')
+        self.assertEqual(block_move.product_qty, 4)
+
+        # Check blocked lot cleanup
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test',
+            'filter': 'product',
+            'location_id': self.location.id,
+            'product_id': self.product_1.id,
+        })
+        inventory.prepare_inventory()
+        inventory.line_ids.unlink()
+        inventory.line_ids.create({
+            'product_id': self.product_1.id,
+            'product_qty': 1.0,
+            'inventory_id': inventory.id,
+            'location_id': self.location.id,
+            'prod_lot_id': self.product_1_lotB.id,
+            })
+        inventory.action_done()
+        self.assertEqual(block_move.state, 'cancel')
