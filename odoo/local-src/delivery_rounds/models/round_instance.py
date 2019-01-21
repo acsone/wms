@@ -715,6 +715,21 @@ class RoundInstanceCustomer(models.Model):
             pickings.with_context(noround_write=True).write({
                 'delivery_round_customer_id': self.id,
                 'rank': self.rank})
+            if self.env.context.get('manual_change_delivery_round'):
+                # The delivery carrier on the procurement.group is used
+                # by stock_groupbypartner for the grouping of moves:
+                # moves will be added to a picking only if they share the
+                # same delivery.carrier than their procurement group.
+                # When we change manually the delivery round, we assign
+                # a special (disabled) delivery.carrier, so new moves will
+                # never be grouped with this picking (because we cannot use
+                # this delivery carrier)
+                manual_method = self.env.ref(
+                    'delivery_rounds.delivery_carrier_manual_round_change'
+                )
+                pickings.mapped('group_id').write({
+                    'carrier_id': manual_method.id,
+                })
 
     def _remove_if_empty(self):
         """ Remove partner from round instance if no more pickings or all

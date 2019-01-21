@@ -15,6 +15,7 @@
         'stock_picking_backorder',
         'stock_picking_subcode',
         'stock_picking_sequence',
+        'stock_groupbypartner',
         'queue_job',
         'web_notify',
         ],
@@ -34,6 +35,7 @@
         'views/round_customer_report.xml',
         # Data
         'data/ir_cron.xml',
+        'data/delivery_carrier.xml',
         # Security
         'security/ir.model.access.csv',
         # Wizards

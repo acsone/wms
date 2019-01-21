@@ -19,7 +19,7 @@
         <field name="inherit_id" ref="procurement.procurement_group_form_view"/>
         <field name="arch" type="xml">
             <field name="move_type" position="after">
-                <field name="carrier_id"/>
+                <field name="carrier_id" context="{'active_test': False}"/>
             </field>
         </field>
     </record>

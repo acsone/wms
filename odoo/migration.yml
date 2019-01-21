@@ -604,3 +604,9 @@ migration:
           - account_financial_report_qweb
           # oca/bank-payment
           - account_invoice_tax_required
+          ### local
+          - stock_groupbypartner
+          - delivery_rounds
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_13_update::post

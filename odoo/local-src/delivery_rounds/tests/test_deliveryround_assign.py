@@ -95,6 +95,10 @@ class TestDeliveryRoundAssign(SavepointCase):
                 picking.delivery_round_id.id,
                 delivery_round.id
             )
+            self.assertEqual(
+                picking.group_id.carrier_id,
+                sale.carrier_id
+            )
 
     def test_force_deliveryround_partially_available(self):
         self.assertEqual(self.p1.qty_available, 100)
@@ -173,3 +177,55 @@ class TestDeliveryRoundAssign(SavepointCase):
         # self.assertEqual(pick.state, 'assigned')
         # self.assertEqual(set(pick.pack_operation_ids.mapped('product_id')),
         #                  set([self.p1, self.p2]))
+
+    def test_manual_change_delivery_round(self):
+        sale = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.p1.name,
+                    'product_id': self.p1.id,
+                    'product_uom': self.ref('product.product_uom_unit'),
+                    'product_uom_qty': 3,
+                    'price_unit': 200,
+                }),
+            ]
+        })
+        self.assertFalse(sale.picking_ids)
+        sale.action_confirm()
+
+        pick = sale.picking_ids.filtered(
+            lambda p: p.picking_type_subcode == 'PICK')
+
+        self.delivery_round_1._assign_pickings(pick)
+        for picking in sale.picking_ids:
+            self.assertEqual(
+                picking.delivery_round_id.id,
+                self.delivery_round_1.id
+            )
+
+        delivery_round_2 = self.env['round.instance'].create({
+            'template_id': self.delivery_template.id,
+            'date': '2017-01-01',
+        })
+        ship = sale.picking_ids.filtered(
+            lambda p: p.picking_type_id.code == 'outgoing'
+        )
+        self.env['picking.assign.delivery.round'].with_context(
+            active_ids=ship.ids
+        ).create({
+            'delivery_round_id': delivery_round_2.id,
+        }).confirm()
+
+        carrier_manual_change = self.env.ref(
+            'delivery_rounds.delivery_carrier_manual_round_change'
+        )
+        for picking in sale.picking_ids:
+            self.assertEqual(
+                picking.delivery_round_id.id,
+                delivery_round_2.id
+            )
+            self.assertEqual(
+                picking.group_id.carrier_id,
+                carrier_manual_change
+            )
