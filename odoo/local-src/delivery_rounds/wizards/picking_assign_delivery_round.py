@@ -43,7 +43,9 @@ class PickingAssignDeliveryRound(models.TransientModel):
             lambda x: x.picking_type_subcode == 'PICK')
         old_round_instance_customers = shippings.mapped(
             'delivery_round_customer_id')
-        pickings_assigned = self.delivery_round_id._assign_pickings(pickings)
+        pickings_assigned = self.delivery_round_id.with_context(
+            manual_change_delivery_round=True,
+        )._assign_pickings(pickings)
         if not pickings_assigned:
             raise UserError(
                 _('No products available.\n'
