@@ -17,13 +17,13 @@
 {PC004;0010,0040,05,05,J,00,B|}\r
 {RC004;<t t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"/>|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
-{RC009;<t t-esc="customer and customer.vet_depot_number or ''"/>|}\r
+{RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or u'')"/>|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r
-{RC005;Doc.n : 1/<t t-esc="customer.vet_subscription_number or ''"/> /|}\r
+{RC005;<t t-if="customer.vet_subscription_number">Doc.n : 1/<t t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or u'')"/>/</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
-{RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name)"/>|}\r<t t-if="pack.picking_id.partner_id.is_price_on_labels">{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t t-esc="'%7s' % pack.product_id.default_code[:7]"/><t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
-{PC003;0030,0280,05,05,J,00,B|}\r
-{RC003;S-<t t-esc="'%7s' % pack.product_id.default_code[:7]"/>-<t t-esc="lot and '%12s' % lot.name[:12] or ''"/>|}\r
+{RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name or u'')"/>|}\r<t t-if="pack.picking_id.partner_id.is_price_on_labels">{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t t-esc="pack.product_id.indicated_price"/>|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t t-esc="pack.product_id and pack.product_id.default_code[:7].ljust(7) or ''"/><t t-esc="lot and lot.name[:13].ljust(13) or ''"/><t t-esc="lot and lot.life_date and time.strftime('%d%m%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>|}\r
+{PC003;0030,0250,05,05,J,00,B|}\r
+{RC003;S-<t t-esc="pack.product_id.default_code[:7].ljust(7)"/>-<t t-esc="lot and lot.name[:13].ljust(13) or ''"/>-<t t-esc="lot and lot.life_date and time.strftime('%d/%m/%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>|}\r
 {XS;I,0001,0002C3200|}\r
 {U1;0120|}\r
 </t>
