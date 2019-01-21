@@ -254,7 +254,7 @@ class StockPicking(models.Model):
         moves_by_order = defaultdict(list)
         backorder_moves_by_order = defaultdict(list)
         result = []
-        moves_witout_order = []
+        moves_without_order = []
         backorder_moves_without_order = []
 
         if is_entry_register:
@@ -265,30 +265,32 @@ class StockPicking(models.Model):
 
         for line in lines_done:
             if not line.order_id:
-                moves_witout_order.append(line)
+                moves_without_order.append(line)
             else:
                 moves_by_order[line.order_id].append(line)
 
         # We don't need to display backorder for the entry register
         if not is_entry_register:
-            backorders = self.env['stock.picking']. \
-                search([('backorder_id', '=', self.id)])
-            for backorder in backorders:
-                for line in backorder.move_lines:
-                    if not line.order_id:
-                        backorder_moves_without_order.append(line)
-                    else:
-                        backorder_moves_by_order[line.order_id].append(line)
+            proc_groups = self.move_lines.mapped('procurement_id.group_id')
+            moves = proc_groups.mapped('procurement_ids.move_ids')
+            moves = moves.filtered(
+                lambda rec: (rec.location_dest_id.usage == 'customer' and
+                             rec.state not in ('cancel', 'done'))
+            )
+            for line in moves:
+                if not line.order_id:
+                    backorder_moves_without_order.append(line)
+                else:
+                    backorder_moves_by_order[line.order_id].append(line)
 
         result_dict = {}
         for order, moves in moves_by_order.iteritems():
             result_dict[order] = [moves,
                                   backorder_moves_by_order.get(order, [])]
-
-        if moves_witout_order:
-            result.append((None,
-                           (moves_witout_order, backorder_moves_without_order)
-                           ))
+        if moves_without_order:
+            result.append(
+                (None, (moves_without_order, backorder_moves_without_order))
+            )
 
         result.extend(
             sorted(result_dict.items(),
