@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* BIZ-2795: Add account-financial-report-qweb for journal reporting
+* BIZ-2796: Add account-financial-report-qweb 
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
 
 **Bugfixes**

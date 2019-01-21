@@ -588,4 +588,12 @@ migration:
         upgrade:
           ### Odoo
           # src
+          # update module due to account-financial-tools and account-financial-reporting branch bump rev
+          - account_chart_update
+          - account_credit_control
+          - account_invoice_tax_required
+          - account_reversal
+          - account_type_menu
+          # new modules
+          - account_financial_report_qweb
           - board
