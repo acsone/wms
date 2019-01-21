@@ -610,3 +610,10 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_13_update::post
+    - version: 10.30.14
+      addons:
+        upgrade:
+          - specific_account
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_14_update::post

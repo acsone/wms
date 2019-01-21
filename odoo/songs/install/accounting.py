@@ -45,8 +45,6 @@ def settings(ctx):
     tax_21 = ctx.env['account.tax'].search([('name', '=', '21%')])
     assert len(tax_21) == 1, "Unable to find tax"
 
-    # Define the default chunk size
-    ctx.env['ir.config_parameter'].set_param('account.chunk_size', 10)
     # Default purchase tax
     purchase_tax_21 = ctx.env.ref('l10n_be.1_attn_VAT-IN-V81-21')
 

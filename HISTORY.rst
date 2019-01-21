@@ -21,6 +21,10 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1819: Remove account.chunk_size and never use one for
+  _job_invoices_by_partners. It allows us to have one job per client and it is
+  better in case of failure.
+
 **Bugfixes**
 
 **Build**
@@ -34,7 +38,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * BIZ-2795: Add account-financial-report-qweb for journal reporting
-* BIZ-2796: Add account-financial-report-qweb 
+* BIZ-2796: Add account-financial-report-qweb
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
 
 **Bugfixes**

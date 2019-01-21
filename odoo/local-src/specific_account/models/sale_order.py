@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
-# Copyright 2016 Camptocamp SA
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2016-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models, registry, _
+from odoo import api, fields, models, registry
 from odoo.addons.queue_job.job import job
-from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT,\
     DEFAULT_SERVER_DATE_FORMAT
 
@@ -33,12 +32,6 @@ class SaleOrder(models.Model):
 
     @api.model
     def _cron_invoice_makeall(self, day):
-        chunk_size = \
-            self.env['ir.config_parameter'].get_param('account.chunk_size', 0)
-        chunk_size = int(chunk_size)
-        if not chunk_size:
-            raise UserError(_('Please set the chunk size in account settings'))
-
         if day == -1:
             # take last day of current month (if run at end of the month)
             # of last day of previous month (if run at begin of next month)
@@ -66,11 +59,9 @@ class SaleOrder(models.Model):
         self.env.cr.execute(query, (tuple(invoice_frequency), ))
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
-        index = 0
-        while index < len(partner_ids):
-            chunk = partner_ids[index: index + chunk_size]
-            self.with_delay()._job_invoices_by_partners(chunk, date_invoice)
-            index += chunk_size
+        for partner in partner_ids:
+            self.with_delay()._job_invoices_by_partners(
+                [partner], date_invoice)
 
         query = """
         SELECT invoice.id
