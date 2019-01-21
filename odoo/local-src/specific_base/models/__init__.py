@@ -4,3 +4,4 @@
 
 from . import res_company
 from . import res_country
+from . import mail_thread

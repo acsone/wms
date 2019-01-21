@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
+
 **Bugfixes**
 
 * ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
