@@ -39,12 +39,12 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-1850: after changing manually a delivery round on a transfer, new moves
-  will not be grouped with this transfer anymore
 * ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
 * ALCYN-1843: Recompute picking having a reserved quant stolen by an inventory adjustment
 * ALCYN-1844: Reservation not properly updated in case of stock increase and picking already partially served
 * ALCYN-1847: Fix free product promotion on sales to be given only to allowed customer
+* ALCYN-1850: after changing manually a delivery round on a transfer, new moves
+  will not be grouped with this transfer anymore
 * ALCYN-1851: Do not deliver shipping not available
 
 **Build**
