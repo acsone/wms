@@ -583,7 +583,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_12_update::post
-    - version: 10.30.12
+    - version: 10.30.13
       addons:
         upgrade:
           ### Odoo
