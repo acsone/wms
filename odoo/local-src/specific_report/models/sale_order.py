@@ -133,7 +133,7 @@ class SaleOrder(models.Model):
             pharmacist = self._get_pharmacist()
         ctx = {
             'default_email_to': pharmacist and pharmacist.email,
-            'default_partner_ids': [pharmacist.id],
+            'default_partner_ids': [],
             'default_model': 'sale.order',
             'default_res_id': self.ids[0],
             'default_use_template': bool(mail_template),
