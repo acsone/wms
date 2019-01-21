@@ -21,6 +21,8 @@ class SaleOrder(models.Model):
         if self.env.context.get('__no_promotional_product'):
             return super(SaleOrder, self).action_confirm()
         for order in self:
+            if not order.supplier_promotion_allowed:
+                continue
             sequence = 1
             for line in order.order_line:
                 product_tmpl = line.product_id.product_tmpl_id

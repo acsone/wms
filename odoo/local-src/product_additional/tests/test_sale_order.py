@@ -24,6 +24,7 @@ class TestSaleOrder(common.SavepointCase):
         cls.partner = cls.env['res.partner'].create({
             'name': 'Hello World',
             'ref': '95739887576',
+            'supplier_promotion_sale_allowed': True,
         })
 
         cls.supplier = cls.env['res.partner'].create({
@@ -54,6 +55,39 @@ class TestSaleOrder(common.SavepointCase):
                 }),
             ]
         })
+
+    def test_only_allowed_customer(self):
+        """Check free products are not given to everyone.
+
+        Customer who are not entitled to supplier promotions should
+        not receive the free products.
+        """
+        self.partner.supplier_promotion_sale_allowed = False
+        self.env['product.supplierinfo'].create({
+            'name': self.supplier.id,
+            'product_tmpl_id': self.main_product.product_tmpl_id.id,
+            'product_code': '123456',
+            'delay': 1,
+            'ratio_main_product': 3,
+            'ratio_promotional_product': 1,
+        })
+        # Flag on sale order to give or not supplier promotions is set on
+        # create and with onchanges
+        so = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.main_product.name,
+                    'product_id': self.main_product.id,
+                    'product_uom': self.env.ref('product.product_uom_unit').id,
+                    'product_uom_qty': 10,
+                    'sequence': 1,
+                }),
+            ]
+        })
+        self.assertEqual(len(self.sale_order.order_line), 1)
+        so.action_confirm()
+        self.assertEqual(len(self.sale_order.order_line), 1)
 
     def test_action_confirm_1(self):
         """

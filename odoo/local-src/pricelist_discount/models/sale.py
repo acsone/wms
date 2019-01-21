@@ -28,13 +28,16 @@ class SaleOrder(models.Model):
         """ Fills discount pricelist field (if it is not)
         based on partner configuration.
         """
-        if 'discount_pricelist_id' not in vals:
-            partner_id = vals.get('partner_id')
-            if partner_id:
-                partner = self.env['res.partner'].browse(partner_id)
+        partner_id = vals.get('partner_id')
+        if partner_id:
+            partner = self.env['res.partner'].browse(partner_id)
+            if 'discount_pricelist_id' not in vals:
                 pricelist = partner['discount_pricelist_id']
                 if pricelist:
                     vals['discount_pricelist_id'] = pricelist.id
+            if 'supplier_promotion_allowed' not in vals:
+                vals['supplier_promotion_allowed'] = \
+                    partner.supplier_promotion_sale_allowed
 
         return super(SaleOrder, self).create(vals)
 
