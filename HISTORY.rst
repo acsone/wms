@@ -31,6 +31,7 @@ latest (unreleased)
 
 * ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
 * ALCYN-1847: Fix free product promotion on sales to be given only to allowed customer
+* ALCYN-1851: Do not deliver shipping not available
 
 **Build**
 
