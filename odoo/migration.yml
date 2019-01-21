@@ -128,6 +128,8 @@ migration:
           # OCA/account-financial-tools
           - account_chart_update
           - account_credit_control
+          - account_reversal
+          - account_type_menu
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
@@ -586,14 +588,19 @@ migration:
     - version: 10.30.13
       addons:
         upgrade:
+          # update module due to account-financial-tools
+          # and account-financial-reporting branch bump rev
+          # + install board and account_financial_report_qweb
+          # modules
           ### Odoo
           # src
-          # update module due to account-financial-tools and account-financial-reporting branch bump rev
+          - board
+          # OCA/account-financial-tools
           - account_chart_update
           - account_credit_control
-          - account_invoice_tax_required
           - account_reversal
           - account_type_menu
-          # new modules
+          # OCA/account-financial-reporting
           - account_financial_report_qweb
-          - board
+          # oca/bank-payment
+          - account_invoice_tax_required

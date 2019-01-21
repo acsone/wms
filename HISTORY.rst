@@ -21,23 +21,33 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.13 (2019-01-21)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * BIZ-2795: Add account-financial-report-qweb for journal reporting
 * BIZ-2796: Add account-financial-report-qweb 
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
 
 **Bugfixes**
-* ALCYN-1843: Recompute picking having a reserved quant stolen by an inventory adjustment
-* ALCYN-1844: Reservation not properly updated in case of stock increase and picking already partially served
 
 * ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
+* ALCYN-1843: Recompute picking having a reserved quant stolen by an inventory adjustment
+* ALCYN-1844: Reservation not properly updated in case of stock increase and picking already partially served
 * ALCYN-1847: Fix free product promotion on sales to be given only to allowed customer
 * ALCYN-1851: Do not deliver shipping not available
 
 **Build**
 
 * ALCYN-1736: Apply patches for ODOO-SA-2018-11-28
-
-**Documentation**
 
 
 10.30.12 (2019-01-18)
