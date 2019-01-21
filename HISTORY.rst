@@ -26,6 +26,8 @@ latest (unreleased)
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
 
 **Bugfixes**
+* ALCYN-1843: Recompute picking having a reserved quant stolen by an inventory adjustment
+* ALCYN-1844: Reservation not properly updated in case of stock increase and picking already partially served
 
 * ALCYN-1785: do not delay jobs for generating pdf files on supplier invoices
 

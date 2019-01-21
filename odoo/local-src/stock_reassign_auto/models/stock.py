@@ -26,6 +26,39 @@ class StockPicking(models.Model):
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
+    def recalculate_move_state(self):
+        """ When a reservation has been stolen by another move (typically a
+        negative inventory adjustment), in standard, the state is updated but
+        the pack operations are not updated """
+        super(StockMove, self).recalculate_move_state()
+        operations_to_recompute = self.env['stock.pack.operation']
+        moves_to_reassign = self.env['stock.move']
+        for move in self:
+            # If the move was an inventory loss, we cancel it as we don't want
+            # an unassigned inventory loss move
+            if move.picking_id.picking_type_subcode == 'LOSS':
+                move.action_cancel()
+
+            if move.picking_id.operator_id and move.picking_id.printed:
+                # Picking is ongoing, too late to recompute pack op
+                continue
+
+            operations_to_recompute |= move.picking_id \
+                .mapped('pack_operation_ids') \
+                .filtered(lambda op: op.product_id in move.product_id)
+            moves_to_reassign |= move.picking_id.mapped('move_lines') \
+                .filtered(lambda m: m.product_id in move.product_id)
+
+        if operations_to_recompute:
+            _logger.debug("Cleaning operations %s",
+                          operations_to_recompute.ids)
+            operations_to_recompute.mapped(
+                'linked_move_operation_ids.move_id').do_unreserve()
+        if moves_to_reassign:
+            _logger.debug("Reserve corresponding moves %s",
+                          moves_to_reassign.ids)
+            moves_to_reassign.action_assign()
+
     def action_done(self):
         """ When product is received, check if moves can be assigned """
         if not self:
@@ -94,6 +127,12 @@ class StockMove(models.Model):
         if operations_to_recompute:
             _logger.debug("Cleaning operations %s",
                           operations_to_recompute.ids)
+            # As we de-reserve moves, we need to include them in the following
+            # assignment. This happens when there are multiple moves for a same
+            # product but only some were assigned (we had a partial match in
+            # initial search).
+            moves_pickings |= operations_to_recompute.mapped(
+                'linked_move_operation_ids.move_id')
             operations_to_recompute.mapped(
                 'linked_move_operation_ids.move_id').do_unreserve()
         _logger.debug("Reserve corresponding moves %s", moves_pickings)
