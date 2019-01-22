@@ -21,18 +21,32 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-1819: Remove account.chunk_size and never use one for
-  _job_invoices_by_partners. It allows us to have one job per client and it is
-  better in case of failure.
-* ALCYN-1800: Display the barcode value below the barcode
-
 **Bugfixes**
-
-* ALCYN-1815: Fix pharmacist emails sent in triplicate
 
 **Build**
 
 **Documentation**
+
+
+10.30.14 (2019-01-22)
++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1796 Add field for product.template.nb_days_out_of_stock
+* ALCYN-1800: Display the barcode value below the barcode
+* ALCYN-1819: Remove account.chunk_size and never use one for
+  _job_invoices_by_partners. It allows us to have one job per client and it is
+  better in case of failure.
+
+**Bugfixes**
+
+* ALCYN-1788: restore display of backorders on delivery slip
+* ALCYN-1815: Fix pharmacist emails sent in triplicate
+
+**Build**
+
+* ALCYN-1745: Reactivate all remaining unittest for Zetes
 
 
 10.30.13 (2019-01-21)
@@ -43,8 +57,6 @@ latest (unreleased)
 * BIZ-2795: Add account-financial-report-qweb for journal reporting
 * BIZ-2796: Add account-financial-report-qweb
 * ALCYN-1801: do not send "You have been assigned to..." email to new followers on any documents
-* ALCYN-1796 Add field for product.template.nb_days_out_of_stock
-* ALCYN-1745: Reactivate all remaining unittest for Zetes
 
 **Bugfixes**
 
@@ -55,7 +67,6 @@ latest (unreleased)
 * ALCYN-1850: after changing manually a delivery round on a transfer, new moves
   will not be grouped with this transfer anymore
 * ALCYN-1851: Do not deliver shipping not available
-* ALCYN-1788: restore display of backorders on delivery slip
 
 **Build**
 
@@ -191,6 +202,7 @@ Move to 10.30.8
 **Bugfixes**
 
 * Fix reservation by unit - exclude domain at each step
+* ALCYN-1726: reverse list of customers on delivery round report
 * ALCYN-1726: reverse list of customers on delivery round report: solves the
   right report and revert change on the wrong one
 
@@ -272,7 +284,6 @@ Move to 10.29.19
 **Bugfixes**
 
 * ALCYN-1755: Fix subtotal calculation on the delivery slip report
-* ALCYN-1726: reverse list of customers on delivery round report
 * Take care of the restricted lot in the reservation (solving reservation of human products)
 * Correctly catch an error with Zetes to avoid the crash of the voice console
 * ALCYN-1760: Fix delivery note csv so no quantity are missing compared to the pdf version.
