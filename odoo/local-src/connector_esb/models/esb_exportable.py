@@ -20,6 +20,8 @@ class ESBExportable(models.Model):
     @related_action(action='related_action_open_record')
     def esb_export_record(self, timestamp=None):
         """Export a record"""
+        if not self.exists():
+            return 'Record does not exist'
         backend = self.env['esb.backend'].sudo().get_singleton()
         with backend.work_on(self._name, timestamp=timestamp) as work:
             exporter = work.component('record.exporter')

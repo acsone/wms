@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1858: Job exports do not fail if the record to export has been deleted
+  on Odoo
+
 **Build**
 
 **Documentation**
