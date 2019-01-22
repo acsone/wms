@@ -624,3 +624,4 @@ migration:
         upgrade:
           ### local
           - website_purchase_review
+          - specific_partner
