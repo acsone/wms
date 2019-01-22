@@ -23,7 +23,11 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1857: Retry queue jobs failing due to "Unable to use closed cursor"
+
 **Build**
+
+* ALCYN-1857: Update queue_job with the latest corrections
 
 **Documentation**
 
