@@ -14,5 +14,12 @@ def remove_account_chunk(ctx):
 
 
 @anthem.log
+def change_delivery_note_email_subject(ctx):
+    tmpl = ctx.env.ref('stock_delivery_note.delivery_note_csv')
+    tmpl.subject = 'Alcyon Delivery Note ${object.id}'
+
+
+@anthem.log
 def post(ctx):
     remove_account_chunk(ctx)
+    change_delivery_note_email_subject(ctx)
