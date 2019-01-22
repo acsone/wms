@@ -66,7 +66,10 @@ class TestItemmoveParking(ZetesParkingTest):
         self.assertEqual(result.scanProductBarcode, '0')
 
         # Check location
-        self.assertEqual(result.sourceLC1, self.parking_medoc.zone or '')
+        parking = '%s%s%s%s' % \
+                  (self.parking_medoc.corridor, self.parking_medoc.shelf,
+                   self.parking_medoc.height, self.parking_medoc.box)
+        self.assertEqual(result.sourceLC1, parking)
         self.assertEqual(result.sourceLC2, self.parking_medoc.corridor or '')
         self.assertEqual(result.sourceLC3, self.parking_medoc.shelf or '')
         self.assertEqual(result.sourceLC4, self.parking_medoc.height or '')

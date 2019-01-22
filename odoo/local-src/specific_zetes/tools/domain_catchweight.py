@@ -56,16 +56,23 @@ class Catchweight(DomainInterface):
             })
             return result.format()
 
-        if isinstance(line_id, int):
-            line_id = str(line_id)
+        get_lot_query = """
+        SELECT lot.life_date
+        FROM stock_production_lot AS lot
+            INNER JOIN product_product pp on lot.product_id = pp.id
+            INNER JOIN product_template pt on pp.product_tmpl_id = pt.id
+        WHERE pt.default_code = %s
+        AND lot.voice_identifier = %s
+        LIMIT 1;
+        """
 
-        line_id_list = line_id.split('_')
-        if len(line_id_list) == 2:
-            lot_id = int(line_id_list[1])
-            lot = self.request.env['stock.production.lot']\
-                .sudo(self._user).browse(lot_id)
-            if lot.life_date:
-                life_date = fields.Datetime.from_string(lot.life_date)
+        self.request.env.cr.execute(get_lot_query,
+                                    (params.productCode, params.lotNumber))
+        query_result = self.request.env.cr.fetchone()
+        if query_result:
+            life_date_str = query_result[0]
+            if life_date_str:
+                life_date = fields.Date.from_string(life_date_str)
                 result.Usf01 = life_date.strftime('%d%m%y')
 
         result.update({
