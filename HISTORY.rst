@@ -28,6 +28,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1815: Fix pharmacist emails sent in triplicate
+
 **Build**
 
 **Documentation**

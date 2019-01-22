@@ -20,6 +20,14 @@ def change_delivery_note_email_subject(ctx):
 
 
 @anthem.log
+def change_pharmacist_sale_order_email_subject(ctx):
+    tmpl = ctx.env.ref(
+        'specific_report.email_template_pharmacist_supplier_order')
+    tmpl.subject = '%s ${object.name}' % tmpl.subject
+
+
+@anthem.log
 def post(ctx):
     remove_account_chunk(ctx)
     change_delivery_note_email_subject(ctx)
+    change_pharmacist_sale_order_email_subject(ctx)
