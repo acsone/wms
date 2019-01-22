@@ -427,6 +427,10 @@ migration:
           - anthem songs.upgrade.10_30_24_update::post
       addons:
         upgrade:
+          ### Odoo
+          # src
+          - l10n_be_intrastat
+          - l10n_be_intrastat_2019
           ### local
           - connector_esb
           - delivery_rounds_refill

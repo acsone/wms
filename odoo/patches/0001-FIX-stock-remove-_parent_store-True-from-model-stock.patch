@@ -17,7 +17,7 @@ Fixes #25459
  1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/addons/stock/models/stock_quant.py b/addons/stock/models/stock_quant.py
-index 6006d35449f..aa4f3d70806 100644
+index 6006d35..aa4f3d7 100644
 --- a/addons/stock/models/stock_quant.py
 +++ b/addons/stock/models/stock_quant.py
 @@ -579,10 +579,7 @@ class QuantPackage(models.Model):
@@ -42,5 +42,5 @@ index 6006d35449f..aa4f3d70806 100644
          'product.packaging', 'Package Type', index=True,
          help="This field should be completed only if everything inside the package share the same product, otherwise it doesn't really makes sense.")
 -- 
-2.17.1
+2.7.4
 

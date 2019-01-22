@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1886: Display picking zone also on product (not only template)'
 * ALCYN-1870: Partner. Display amount of sales lines that remains to deliver instead of total amount of lines
 * ALCYN-1937: Fix set account analytic on imported purchase orders
+* Install Belgium intrastat 2019
 
 **Bugfixes**
 * ALCYN-1880: Sales line "Current BO" cannot be bigger than what remains to be delivered
