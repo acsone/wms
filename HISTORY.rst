@@ -55,6 +55,7 @@ latest (unreleased)
 * ALCYN-1850: after changing manually a delivery round on a transfer, new moves
   will not be grouped with this transfer anymore
 * ALCYN-1851: Do not deliver shipping not available
+* ALCYN-1788: restore display of backorders on delivery slip
 
 **Build**
 
