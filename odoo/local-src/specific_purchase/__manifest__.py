@@ -16,6 +16,8 @@
         'purchase_cancel_reason',
         'specific_product',
         'stock_unit',
+        'stock_mts_mto_rule',
+        'website_purchase_review',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
