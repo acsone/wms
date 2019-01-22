@@ -111,7 +111,14 @@
                                             <div class="row">
                                                 <div class="col-md-12 text-center">
                                                     <div class="progress" style="margin-right: 10px; margin-left: 10px;">
-                                                        <div class="progress-bar bg-primary" role="progressbar" t-att-aria-valuenow="po.total_lines_done" aria-valuemin="0" t-att-aria-valuemax="po.total_lines" t-att-style="'width: %d%%%%' % int(((po.total_lines_done / float(po.total_lines)) * 100))">
+                                                        <t t-set="width_pct" t-value="0" />
+                                                        <t t-if="po.total_lines">
+                                                            <t t-set="width_pct" t-value="(po.total_lines_done / float(po.total_lines)) * 100" />
+                                                        </t>
+                                                        <div class="progress-bar bg-primary" role="progressbar"
+                                                             t-att-aria-valuenow="po.total_lines_done" aria-valuemin="0"
+                                                             t-att-aria-valuemax="po.total_lines"
+                                                             t-att-style="'width: %d%%%%' % int(width_pct)">
                                                             <span><strong><t t-esc="po.total_lines_done"/></strong> / <strong><t t-esc="po.total_lines"/></strong></span>
                                                         </div>
                                                     </div>
