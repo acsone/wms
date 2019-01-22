@@ -78,6 +78,7 @@ class TestFull(ZetesTest):
                 'location_id': self.env.ref('stock.stock_location_stock').id,
                 'location_dest_id': self.env.ref(
                     'stock.stock_location_output').id,
+                'picking_type_id': self.picking_type_medoc.id,
             })]
         })
 
@@ -152,6 +153,7 @@ class TestFull(ZetesTest):
                 'location_id': self.env.ref('stock.stock_location_stock').id,
                 'location_dest_id': self.env.ref(
                     'stock.stock_location_output').id,
+                'picking_type_id': self.picking_type_medoc.id,
             })]
         })
 
@@ -275,8 +277,13 @@ class TestFull(ZetesTest):
         line_product_3_lot_1 = results[2]
         line_product_3_lot_2 = results[3]
 
+        pack_operations = self.env['stock.pack.operation'].search(
+            [('picking_id', '=', self.picking.id)],
+            order='location_name ASC, id')
+        self.assertEqual(len(pack_operations), 3)
+
         # Test line 1
-        pack_op_1 = self.picking.pack_operation_product_ids[0]
+        pack_op_1 = pack_operations[0]
         pack_op_1_id, lot_id = line_product_1.pickLineId.split('_')
         self.assertEqual(pack_op_1_id, str(pack_op_1.id))
         self.assertEqual(lot_id, str(self.lot_product_1.id))
@@ -295,7 +302,7 @@ class TestFull(ZetesTest):
                          self.lot_product_1.voice_identifier)
 
         # Test line 2
-        pack_op_2 = self.picking.pack_operation_product_ids[1]
+        pack_op_2 = pack_operations[1]
         pack_op_2_id, lot_id = line_product_2.pickLineId.split('_')
         self.assertEqual(pack_op_2_id, str(pack_op_2.id))
         self.assertEqual(lot_id, str(self.lot_product_2.id))
@@ -306,7 +313,7 @@ class TestFull(ZetesTest):
                          self.lot_product_2.voice_identifier)
 
         # Test line 3
-        pack_op_3 = self.picking.pack_operation_product_ids[2]
+        pack_op_3 = pack_operations[2]
         pack_op_id, lot_id, = line_product_3_lot_1.pickLineId.split('_')
         self.assertEqual(pack_op_id, str(pack_op_3.id))
         self.assertEqual(lot_id, str(self.lot_product_3_1.id))
@@ -319,7 +326,7 @@ class TestFull(ZetesTest):
                          self.lot_product_3_1.checksum)
 
         # Test line 4
-        pack_op_3 = self.picking.pack_operation_product_ids[2]
+        pack_op_3 = pack_operations[2]
         pack_op_id, lot_id, = line_product_3_lot_2.pickLineId.split('_')
         self.assertEqual(pack_op_id, str(pack_op_3.id))
         self.assertEqual(lot_id, str(self.lot_product_3_2.id))
@@ -443,7 +450,7 @@ class TestFull(ZetesTest):
             'Usf03': None,
         })
 
-        # The lot 20 is empty now. The picker will ask for other lots
+        # The lot 20 is empty now. The picker will change the lot
         request_location_params = Parameters(location_obj)
         request_location_params.update({
             'lineId': pack_op_3.id,
@@ -452,15 +459,13 @@ class TestFull(ZetesTest):
             'Cri03': self.location_product_3.shelf,
             'Cri04': self.location_product_3.height,
             'Cri05': self.location_product_3.box,
-            'Cri07': None,
+            'Cri07': self.lot_product_3_2.checksum,
         })
 
         result_str = location_obj.requ(request_location_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        # FIXME
-        # self.assertEqual(result.Usf01, self.lot_product_3_1.checksum)
-        # self.assertEqual(result.Usf02, self.lot_product_3_2.checksum)
+        self.assertEqual(result.Usf01, self.lot_product_3_2.voice_identifier)
         self.assertFalse(result.Usf03)
 
         catchweight_obj.resu(request_pick_items_params)
@@ -520,12 +525,8 @@ class TestFull(ZetesTest):
             'Usf01': 1
         })
 
-        # TODO FIME in ALCYN-1745
-        # assignement_obj.resu(request_finish_picking_params)
-        # self.assertEqual(self.picking.state, 'done')
-        # back_order = self.env['stock.picking'].search(
-        #     [('backorder_id', '=', self.picking.id)])
-        # self.assertEqual(len(back_order), 1)
+        assignement_obj.resu(request_finish_picking_params)
+        self.assertEqual(self.picking.state, 'done')
 
         ###########
         # Step 13 #

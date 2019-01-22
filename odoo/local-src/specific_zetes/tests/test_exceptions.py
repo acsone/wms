@@ -94,6 +94,10 @@ class TestExceptions(ZetesTest):
         ##########
         # Step 1 #
         ##########
+
+        # Assign the operator
+        self.picking.operator_id = self.user.id
+
         # Start the picking
         start_picking_params = Parameters(assignement_obj)
         start_picking_params.update({
@@ -138,9 +142,8 @@ class TestExceptions(ZetesTest):
         result_str = usercontext_obj.requ(login_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        # FIXME @sylvain
-        # self.assertEqual(result.unitSlam, '1')
-        # self.assertEqual(result.Usf01, str(self.picking.id))
+        self.assertEqual(result.unitSlam, '1')
+        self.assertEqual(result.Usf01, str(self.picking.id))
 
         request_restart_picking_params = Parameters(assignement_obj)
         request_restart_picking_params.update({
