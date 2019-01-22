@@ -190,11 +190,6 @@ msgid "May"
 msgstr "Mai"
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_account_config_settings_chunk_size
-msgid "Nbr of partners by invoices creation job"
-msgstr ""
-
-#. module: specific_account
 #: selection:account.invoice.report,due_month:0
 #: selection:account.invoice.report,invoice_month:0
 msgid "November"
@@ -210,12 +205,6 @@ msgstr "Octobre"
 #: model:ir.model,name:specific_account.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
-
-#. module: specific_account
-#: code:addons/specific_account/models/sale_order.py:40
-#, python-format
-msgid "Please set the chunk size in account settings"
-msgstr ""
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_product_product
