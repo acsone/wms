@@ -6,8 +6,9 @@ import logging
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models, registry
+from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.exception import FailedJobError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT,\
     DEFAULT_SERVER_DATE_FORMAT
 
@@ -59,9 +60,10 @@ class SaleOrder(models.Model):
         self.env.cr.execute(query, (tuple(invoice_frequency), ))
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
-        for partner in partner_ids:
-            self.with_delay()._job_invoices_by_partners(
-                [partner], date_invoice)
+        for partner_id in partner_ids:
+            self.with_delay()._job_invoices_by_partner(
+                partner_id, date_invoice
+            )
 
         query = """
         SELECT invoice.id
@@ -88,44 +90,42 @@ class SaleOrder(models.Model):
     @api.multi
     @job(default_channel='root.invoice_creation')
     def _job_invoices_by_partners(self, partner_ids, date_invoice):
-        partners = self.env['res.partner'].browse(partner_ids)
-        assert all(p.invoice_grouping == 'all_at_once' for p in partners), \
-            "Invalid invoice grouping"
-        for partner in partners:
-            try:
-                cr = registry(self._cr.dbname).cursor()
-                self = self.with_env(self.env(cr=cr))
+        # this job is there only for the transition, can be dropped
+        # after release 10.30.15 if all jobs of this kind have been executed
+        _logger.warning('_job_invoices_by_partners is deprecated '
+                        'and replaced by _job_invoices_by_partner')
+        return self._job_invoices_by_partner(partner_ids[0])
 
-                sales_to_merge = self.search(
-                    [('invoice_status', '=', 'to invoice'),
-                     ('partner_invoice_id', '=', partner.id),
-                     ('is_unique_invoice', '=', False)])
-                sales_to_merge = sales_to_merge\
-                    .with_context(mail_auto_subscribe_no_notify=True)
-                invoice_ids = \
-                    sales_to_merge.action_invoice_create(final=True)
+    @api.multi
+    @job(default_channel='root.invoice_creation')
+    def _job_invoices_by_partner(self, partner_id, date_invoice):
+        partner = self.env['res.partner'].browse(partner_id)
+        if partner.invoice_grouping != 'all_at_once':
+            raise FailedJobError('Invalid invoice grouping')
 
-                sales_to_invoice = self.search([
-                    ('invoice_status', '=', 'to invoice'),
-                    ('partner_invoice_id', '=', partner.id),
-                    ('is_unique_invoice', '=', True)])
-                sales_to_invoice = sales_to_invoice\
-                    .with_context(mail_auto_subscribe_no_notify=True)
-                for sale_to_invoice in sales_to_invoice:
-                    invoice_ids.append(
-                        sale_to_invoice.action_invoice_create(final=True))
+        sales_to_merge = self.search(
+            [('invoice_status', '=', 'to invoice'),
+                ('partner_invoice_id', '=', partner.id),
+                ('is_unique_invoice', '=', False)])
+        sales_to_merge = sales_to_merge.with_context(
+            mail_auto_subscribe_no_notify=True
+        )
+        invoice_ids = sales_to_merge.action_invoice_create(final=True)
 
-                invoices = self.env['account.invoice'].browse(invoice_ids)
+        sales_to_invoice = self.search([
+            ('invoice_status', '=', 'to invoice'),
+            ('partner_invoice_id', '=', partner.id),
+            ('is_unique_invoice', '=', True)]
+        )
+        sales_to_invoice = sales_to_invoice.with_context(
+            mail_auto_subscribe_no_notify=True
+        )
+        for sale_to_invoice in sales_to_invoice:
+            invoice_ids.append(
+                sale_to_invoice.action_invoice_create(final=True)
+            )
 
-                # Validate invoices
-                invoices.with_delay()._job_validate_invoice(date_invoice)
-                cr.commit()
-            except Exception as e:
-                _logger.error(
-                    "Invoice Generation Cron Error with partner %s: %s" %
-                    (partner.id, e))
-            finally:
-                try:
-                    cr.close()
-                except Exception:
-                    pass
+        invoices = self.env['account.invoice'].browse(invoice_ids)
+
+        # Validate invoices
+        invoices.with_delay()._job_validate_invoice(date_invoice)
