@@ -24,6 +24,14 @@ latest (unreleased)
 * ALCYN-1865: Some shippings are sometimes not delivered. While this should not happen, prevent this to cause any side effect in the reservation
 * Simplify and remove extra cursor in the job generating the invoice for a partner
 * Improve backorder logging message
+* ALCYN-1864: Sale order, do not allow the modification of order lines if the
+  order is confirmed.
+
+  The only fields which remain editable are:
+    * description
+    * route
+    * promotion
+    * discount
 
 **Bugfixes**
 
