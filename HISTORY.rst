@@ -52,6 +52,7 @@ latest (unreleased)
 * ALCYN-1819: Remove account.chunk_size and never use one for
   _job_invoices_by_partners. It allows us to have one job per client and it is
   better in case of failure.
+* ALCYN-1829: Improve the default search on name for customer by including the "Nom d'appel" in the search
 
 **Bugfixes**
 

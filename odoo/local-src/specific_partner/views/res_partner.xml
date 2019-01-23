@@ -53,6 +53,12 @@
                 <field name="city"/>
                 <field name="vat"/>
             </field>
+            <!-- Add call_name in the default search on name -->
+            <field name="name" position="attributes">
+                <attribute name="filter_domain">
+                  ['|','|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self),('call_name','ilike',self)]
+                </attribute>
+            </field>
         </field>
     </record>
 
