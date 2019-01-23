@@ -28,6 +28,9 @@ latest (unreleased)
 * website_purchase_review: fix ZeroDivisionError on PO w/out lines
 * ALCYN-1858: Job exports do not fail if the record to export has been deleted
   on Odoo
+* ALCYN-1859:
+    * Fix an error with the arrangement workflow (Zetes); wrong value received from Zetes
+    * Fix the label (data sent to Zetes) if the user switch lot in the same transaction
 
 **Build**
 

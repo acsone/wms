@@ -132,6 +132,12 @@ class Itemmove(DomainInterface):
             if len(str(shelf_source)) == 1:
                 shelf_source = '0%s' % shelf_source
 
+            if params.itemMoveType == constants.MOVE_TYPE_LOAD:
+                sourceLC1 = '%s%s%s%s' % (location.corridor, shelf_source,
+                                          location.height, location.box)
+            else:
+                sourceLC1 = location.zone
+
             line_values.update({
                 'moveStatus': constants.MOVE_DEFAULT,
                 'respCode': constants.RESPONSE_CODE_OK,
@@ -145,7 +151,7 @@ class Itemmove(DomainInterface):
                 'productDescription': product.name,
                 'productBarcode': product.barcode,
                 'scanProductBarcode': 0,  # Constant value
-                'sourceLC1': location.zone,
+                'sourceLC1': sourceLC1,
                 'sourceLC2': location.corridor,
                 'sourceLC3': shelf_source,
                 'sourceLC4': location.height,
@@ -180,8 +186,10 @@ class Itemmove(DomainInterface):
 
             if lot:
                 line_values.Usf01 = lot.checksum
+                line_values.Usf03 = lot.voice_identifier
             else:
-                line_values.Usf01 = product.default_code[:3]
+                line_values.Usf01 = product.default_code[-3:]
+                line_values.Usf03 = product.default_code[:3]
 
             # Set the type of load (load or unload) move type "Load"
             if move_type == constants.MOVE_TYPE_LOAD:
