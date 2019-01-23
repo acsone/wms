@@ -26,6 +26,8 @@ latest (unreleased)
 * ALCYN-1824 website_purchase_review: fix onchange on new PO line
 * ALCYN-1857: Retry queue jobs failing due to "Unable to use closed cursor"
 * website_purchase_review: fix ZeroDivisionError on PO w/out lines
+* ALCYN-1858: Job exports do not fail if the record to export has been deleted
+  on Odoo
 
 **Build**
 
