@@ -21,9 +21,19 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-1865: Some shippings are sometimes not delivered. While this should not happen, prevent this to cause any side effect in the reservation
-* Simplify and remove extra cursor in the job generating the invoice for a partner
-* Improve backorder logging message
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.15 (2019-01-23)
++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1829: Improve the default search on name for customer by including the "Nom d'appel" in the search
 * ALCYN-1864: Sale order, do not allow the modification of order lines if the
   order is confirmed.
 
@@ -32,6 +42,9 @@ latest (unreleased)
     * route
     * promotion
     * discount
+* ALCYN-1865: Some shippings are sometimes not delivered. While this should not happen, prevent this to cause any side effect in the reservation
+* Simplify and remove extra cursor in the job generating the invoice for a partner
+* Improve backorder logging message
 
 **Bugfixes**
 
@@ -51,8 +64,6 @@ latest (unreleased)
 * ALCYN-1857: Update queue_job with the latest corrections
 * docker-compose: SERVER_WIDE_MODULES is enough, no need for `--load` param
 
-**Documentation**
-
 
 10.30.14 (2019-01-22)
 +++++++++++++++++++++
@@ -64,7 +75,6 @@ latest (unreleased)
 * ALCYN-1819: Remove account.chunk_size and never use one for
   _job_invoices_by_partners. It allows us to have one job per client and it is
   better in case of failure.
-* ALCYN-1829: Improve the default search on name for customer by including the "Nom d'appel" in the search
 
 **Bugfixes**
 
