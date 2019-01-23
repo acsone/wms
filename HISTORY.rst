@@ -36,6 +36,7 @@ latest (unreleased)
     * Fix an error with the arrangement workflow (Zetes); wrong value received from Zetes
     * Fix the label (data sent to Zetes) if the user switch lot in the same transaction
 * ALCYN-1861: Fix backorder quantities on sale order lines for additional products
+* ALCYN-1869: Launch reservation of moves added in an existing picking in waiting state
 
 **Build**
 
