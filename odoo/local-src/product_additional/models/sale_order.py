@@ -31,19 +31,11 @@ class SaleOrder(models.Model):
                     line.product_id.uom_id
                 )
                 line.sequence = sequence
-                sequence += 1
                 if not promotional_qty:
+                    sequence += 1
                     continue
-                # Create the new line with promotional product
-                line.copy(default={
-                    'order_id': order.id,
-                    'sequence': sequence,
-                    'price_unit': 0,
-                    'product_uom': line.product_id.uom_id.id,
-                    'product_uom_qty': promotional_qty,
-                    'is_promotional_product': True,
-                })
-                sequence += 1
+                line._create_promotional_line(promotional_qty)
+                sequence += 2
         return super(SaleOrder, self).action_confirm()
 
     @api.multi
@@ -78,3 +70,23 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     is_promotional_product = fields.Boolean('Promotional product')
+
+    @api.multi
+    def _prepare_promotional_line(self, qty):
+        self.ensure_one()
+        sequence = self.sequence + 1
+        return {
+            'order_id': self.order_id.id,
+            'sequence': sequence,
+            'price_unit': 0,
+            'product_uom': self.product_id.uom_id.id,
+            'product_uom_qty': qty,
+            'is_promotional_product': True,
+        }
+
+    @api.multi
+    def _create_promotional_line(self, qty):
+        """Create the new line with promotional product."""
+        self.ensure_one()
+        values = self._prepare_promotional_line(qty)
+        self.copy(default=values)
