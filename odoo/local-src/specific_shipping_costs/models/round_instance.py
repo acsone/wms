@@ -56,10 +56,13 @@ class RoundInstance(models.Model):
 
         And charge the customer on his last sale order if nececssary.
         """
+
         sale_orders = sale_orders.filtered(lambda r: r.carrier_id == carrier)
         sum_ordered = sum(sale_orders.mapped('amount_untaxed'))
         sale_orders.write({'used_for_delivery_fee': True})
-        if sum_ordered >= carrier.amount or sum_ordered == 0:
+
+        if sum_ordered >= carrier.amount or \
+                sum_ordered == 0 or not carrier.fixed_price:
             return
         # Find the last sale order passed and charge the customer
         so = round_saleorders.filtered(lambda r: r.partner_id == customer and
@@ -67,13 +70,12 @@ class RoundInstance(models.Model):
                                        ).sorted(key=lambda r: r.id,
                                                 reverse=True)[0]
         so.sudo().write({'order_line': [
-                (0, 0, {
-                    'name': _('Shipping cost'),
-                    'product_id': self.env.ref(
-                        '__setup__.deliver_carrier_alcyon_product_product').id,
-                    'product_uom_qty': 1,
-                    'price_unit': carrier.fixed_price,
-                    'is_delivery': True,
-                    })
-                ]
+            (0, 0, {
+                'name': _('Shipping cost'),
+                'product_id': self.env.ref(
+                    '__setup__.deliver_carrier_alcyon_product_product').id,
+                'product_uom_qty': 1,
+                'price_unit': carrier.fixed_price,
+                'is_delivery': True,
             })
+        ]})
