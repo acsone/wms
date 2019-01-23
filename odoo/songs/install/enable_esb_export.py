@@ -70,8 +70,12 @@ all_cron = [
             'nextcall': day_first_export + ' ' + '03:30:00'
         },
         {
-            'xmlid': 'ir_cron_esb_export_document_zip',
-            'nextcall': day_first_export + ' ' + '04:00:00'
+            'xmlid': 'ir_cron_esb_export_document_zip_morning',
+            'nextcall': day_first_export + ' ' + '05:00:00'
+        },
+        {
+            'xmlid': 'ir_cron_esb_export_document_zip_afternoon',
+            'nextcall': day_first_export + ' ' + '14:00:00'
         },
     ]
 
