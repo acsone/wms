@@ -303,3 +303,4 @@ migration:
           ### local
           - website_purchase_review
           - specific_partner
+          - specific_sale
