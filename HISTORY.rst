@@ -23,7 +23,12 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1824 website_purchase_review: fix onchange on new PO line
+* website_purchase_review: fix ZeroDivisionError on PO w/out lines
+
 **Build**
+
+* docker-compose: SERVER_WIDE_MODULES is enough, no need for `--load` param
 
 **Documentation**
 
