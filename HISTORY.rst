@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* Simplify and remove extra cursor in the job generating the invoice for a partner
+
 **Bugfixes**
 
 **Build**
