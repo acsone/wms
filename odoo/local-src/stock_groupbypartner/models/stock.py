@@ -112,8 +112,7 @@ class StockMove(models.Model):
             ('picking_type_id', '=', self.picking_type_id.id),
             ('group_id.carrier_id', '=', self.group_id.carrier_id.id),
             ('printed', '=', False),
-            ('state', 'in', ['draft', 'confirmed', 'waiting',
-                             'partially_available', 'assigned'])
+            ('state', 'not in', ('draft', 'cancel', 'done'))
         ]
         return domain
 
