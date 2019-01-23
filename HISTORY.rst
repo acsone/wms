@@ -24,10 +24,12 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-1824 website_purchase_review: fix onchange on new PO line
+* ALCYN-1857: Retry queue jobs failing due to "Unable to use closed cursor"
 * website_purchase_review: fix ZeroDivisionError on PO w/out lines
 
 **Build**
 
+* ALCYN-1857: Update queue_job with the latest corrections
 * docker-compose: SERVER_WIDE_MODULES is enough, no need for `--load` param
 
 **Documentation**

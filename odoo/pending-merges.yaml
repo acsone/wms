@@ -64,9 +64,9 @@
     oca: git@github.com:OCA/queue.git
     camptocamp: git@github.com:camptocamp/queue.git
   merges:
-    - oca e116cff10c8463f66c866df39c3dfa10b70d522f
-      # [10.0] Add identity key on job to allow limiting redundant execution
-    - oca refs/pull/66/head
+    - oca 8ea9c75a77e858cfe438120dfe594d2e2e3f8d98
+    # Retry "Unable to use closed cursor"
+    - oca refs/pull/120/head
   target: *default_target
 ./external-src/web:
   remotes:
