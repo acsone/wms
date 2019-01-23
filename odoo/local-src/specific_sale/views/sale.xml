@@ -98,7 +98,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='order_id']" position="before">
                 <field name="product_qty_remains_to_deliver"/>
-                <filter string="Remains to deliver" name="remains_to_deliver" domain="[('product_qty_remains_to_deliver', '>', 0),]"/>
+                <filter string="Remains to deliver" name="remains_to_deliver" domain="[('product_qty_remains_to_deliver', '>', 0),('product_id.type', 'in', ['consu', 'product'])]"/>
             </xpath>
         </field>
     </record>
