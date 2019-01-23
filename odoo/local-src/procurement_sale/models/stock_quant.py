@@ -46,6 +46,13 @@ class StockQuant(models.Model):
             previous_moves = move.search(previous_moves_domain, order='id')
             blocked_qty = 0
             for pm in previous_moves:
+                # Some moves could be in waiting state because the shipping is
+                # not reserved and not because the pick move has not been done.
+                # So we still need to check that the source move is not
+                # effectively done
+                if (pm.location_id == output_loc and
+                        'done' in pm.mapped('move_orig_ids.state')):
+                    continue
                 blocked_qty += pm.product_qty
             # Note that qty_available also consider negative quants. However
             # this is an exception that should not happen

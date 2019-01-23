@@ -21,6 +21,7 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1865: Some shippings are sometimes not delivered. While this should not happen, prevent this to cause any side effect in the reservation
 * Simplify and remove extra cursor in the job generating the invoice for a partner
 
 **Bugfixes**
