@@ -249,10 +249,12 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    # - version: 10.27.4
-    #   operations:
-    #     post:
-    #       - anthem songs.upgrade.10_27_4_update::post
+    - version: 10.27.4
+      operations:
+        post:
+          # There is one point here with configuration. I want to stop loosing
+          # my sanity and let someone else deal with it
+          - anthem songs.upgrade.10_27_4_update::post
     - version: 10.30.12
       addons:
         upgrade:

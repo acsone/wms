@@ -12,10 +12,6 @@ def configure_alcyon_delivery_method(ctx):
     Change the parameter for the carrier
     And the product that is used on a sale order for shipping cost.
     """
-    alcyon_delivery = ctx.env.ref('__setup__.deliver_carrier_alcyon')
-    alcyon_delivery.fixed_price = 8.5
-    alcyon_delivery.free_if_more_than = True
-    alcyon_delivery.amount = 125
     delivery_cost_product = ctx.env.ref(
         '__setup__.deliver_carrier_alcyon_product_product'
     )
