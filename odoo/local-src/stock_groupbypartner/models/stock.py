@@ -165,9 +165,13 @@ class StockMove(models.Model):
                     move.picking_id = picking.id
                     if backorder_orig_id:
                         backorder_orig_id.message_post(body=_(
-                            "Remaining move '%s' moved to exiting picking "
-                            "<em>%s</em> used as a backorder.") %
-                            (move.product_id.display_name, picking.name))
+                            "Remaining move '%s' of qty %s and origin '%s' "
+                            "moved to exiting picking " "<em>%s</em> used as "
+                            "a backorder.") %
+                            (move.product_id.display_name,
+                             move.product_uom_qty,
+                             move.group_id.name,
+                             picking.name))
                     # unreserve moves having an operation for that product
                     # Note: (re)check availability (action_assign) does not
                     # work on added move where an operation already exists for
