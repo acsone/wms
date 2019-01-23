@@ -9,14 +9,18 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
 
     @api.multi
-    def action_confirm(self):
-        super(SaleOrder, self).action_confirm()
-        self._assign_delivery_round()
-        return True
+    def _action_procurement_create(self):
+        res = super(SaleOrderLine, self)._action_procurement_create()
+        self.mapped('order_id')._assign_delivery_round()
+        return res
+
+
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
     @api.one
     def _assign_delivery_round(self):
