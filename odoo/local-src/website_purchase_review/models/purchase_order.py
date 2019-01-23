@@ -175,7 +175,10 @@ class PurchaseOrder(models.Model):
             existing_line.write(vals)
         else:
             product_id = vals.pop('product_id')
+            # TODO: not sure why we don't use all the values defined in `vals`
             line = PurchaseOrderLine.new({'product_id': product_id})
+            # mandatory to make the onchange work fine w/ vendor info
+            line.partner_id = self.partner_id
             line.onchange_product_id()
             new_vals = line._convert_to_write(line._cache)
             new_vals.update(vals)

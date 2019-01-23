@@ -619,3 +619,8 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_14_update::post
+    - version: 10.30.15
+      addons:
+        upgrade:
+          ### local
+          - website_purchase_review
