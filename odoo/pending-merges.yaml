@@ -76,6 +76,8 @@
     - oca b7b4a9faefb8acdf5a9fde5e5c0c824146c34c8c
     # [10.0] web_notify: interactive notifications
     - oca refs/pull/970/head
+    # [10.0][ADD] web_cache_name_get
+    - oca refs/pull/918/head
   target: *default_target
 ./external-src/sale-workflow:
   remotes:

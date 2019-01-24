@@ -160,6 +160,7 @@ migration:
           # OCA/stock-logistics-workflow
           - stock_disable_force_availability_button
           # oca/web
+          - web_cache_name_get
           - web_decimal_numpad_dot
           - web_environment_ribbon
           - web_sheet_full_width
@@ -304,3 +305,8 @@ migration:
           - website_purchase_review
           - specific_partner
           - specific_sale
+    - version: 10.30.16
+      addons:
+        upgrade:
+          ### oca/web
+          - web_cache_name_get

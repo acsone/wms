@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* Add module "web_cache_name_get" reducing requests to name_get on same records
+
 **Bugfixes**
 
 **Build**
