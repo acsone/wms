@@ -25,6 +25,10 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1529 Claim view: set proper ctx for purchase order view
+
+  Setting `show_purchase` on PO view hides/shows meaningful information: use it!
+
 * ALCYN-1853: take priority and stock losses in the sale order line missing qty
 
 **Build**
