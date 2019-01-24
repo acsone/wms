@@ -304,3 +304,11 @@ migration:
           - website_purchase_review
           - specific_partner
           - specific_sale
+    - version: 10.30.16
+      addons:
+        upgrade:
+          ### local
+          - specific_sale
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_16_update::post
