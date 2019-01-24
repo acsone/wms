@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1872: When a sale order line is added in an already confirmed SO for a product already ordered, the reservation of that product must be relaunched
 
 * ALCYN-1854: Make the delivery carrier on sale order required and set its default value to Alcyon Delivery Method
 
