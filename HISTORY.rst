@@ -21,9 +21,21 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.16 (2019-01-24)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1805 : remove puchase order locked(done state) from cut-off
-* ALCYN-1872: When a sale order line is added in an already confirmed SO for a product already ordered, the reservation of that product must be relaunched
 * ALCYN-1854: Make the delivery carrier on sale order required and set its default value to Alcyon Delivery Method
+* ALCYN-1872: When a sale order line is added in an already confirmed SO for a product already ordered, the reservation of that product must be relaunched
 * Add module "web_cache_name_get" reducing requests to name_get on same records
 
 **Bugfixes**
@@ -34,10 +46,6 @@ latest (unreleased)
 
 * ALCYN-1811: Exclude service products from Remains to deliver filter
 * ALCYN-1853: take priority and stock losses in the sale order line missing qty
-
-**Build**
-
-**Documentation**
 
 
 10.30.15 (2019-01-23)
