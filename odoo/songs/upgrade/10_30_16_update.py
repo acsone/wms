@@ -16,5 +16,15 @@ def set_default_carrier_id_on_sale_order(ctx):
 
 
 @anthem.log
+def remove_move_from_locked_purchase_order(ctx):
+    """ Remove cutoff line linked with locked purchase order on the cutoff 3"""
+    ctx.env.cr.execute("DELETE from account_cutoff_line"
+                       " where parent_id = 3 and purchase_line_id in"
+                       " (select id from purchase_order_line where order_id "
+                       "in (select id from purchase_order "
+                       "where state='done'));")
+
+
+@anthem.log
 def post(ctx):
     set_default_carrier_id_on_sale_order(ctx)

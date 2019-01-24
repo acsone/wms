@@ -313,3 +313,8 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_16_update::post
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.upgrade.10_30_16_update::remove_move_from_locked_purchase_order
