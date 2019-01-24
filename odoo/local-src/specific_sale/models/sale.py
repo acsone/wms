@@ -180,7 +180,11 @@ class SaleOrderLine(models.Model):
         for line in self:
             line.current_product_qty_unavailable = (
                 self.get_product_qty_unavailable(
-                    line.product_id,
+                    # context change to get the corrections of immediately
+                    # available qty with the date and priority
+                    line.product_id.with_context(
+                            prio=line.route_id.priority or '1',
+                            date=line.order_id.date_order),
                     line.product_uom_qty,
                     line.state == 'sale',
                     line.id
@@ -270,16 +274,21 @@ class SaleOrderLine(models.Model):
         else:
             return None
 
-    @api.onchange('product_id', 'product_uom_qty')
+    @api.onchange('product_id', 'product_uom_qty', 'route_id',
+                  'order_id.date_order')
     def onchange_for_product_qty_unavailable(self):
         context = self.env.context or {}
         if context.get('must_compute_product_qty_unavailable'):
             for line in self:
                 line.product_qty_unavailable = (
-                    self.get_product_qty_unavailable(
-                        self.product_id,
-                        self.product_uom_qty,
-                        self.state == 'sale',
+                    line.get_product_qty_unavailable(
+                        # context change to get the corrections of immediately
+                        # available qty with the date and priority
+                        line.product_id.with_context(
+                            prio=line.route_id.priority or '1',
+                            date=line.order_id.date_order),
+                        line.product_uom_qty,
+                        line.state == 'sale',
                         None
                     )
                 )
@@ -624,7 +633,11 @@ class SaleOrderLine(models.Model):
         supplier_nostock = self.env.ref('specific_purchase.product_state_h')
         if self.product_id.state_id != supplier_nostock:
             return False
-        if self.product_id.immediately_usable_qty >= self.product_uom_qty:
+        product = self.product_id.with_context(
+                prio=self.route_id.priority or '1',
+                date=self.order_id.date_order
+        )
+        if product.immediately_usable_qty >= self.product_uom_qty:
             # Although it is out of stock at the supplier, there is still
             # enough stock in Alcyon warehouse
             return False

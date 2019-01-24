@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1853: take priority and stock losses in the sale order line missing qty
+
 **Build**
 
 **Documentation**

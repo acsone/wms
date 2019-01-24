@@ -163,6 +163,47 @@ class ProductProduct(models.Model):
 
         return domain
 
+    @api.multi
+    def _compute_available_quantities_dict(self):
+        """change the way immediately_useable_qty is computed by:
+        * deducing the quants in the loss stock location (ruptures)
+        * adding the quantities of moves with a lower priority or same
+          priority but later date
+        """
+        res = super(ProductProduct, self)._compute_available_quantities_dict()
+        prio = self.env.context.get('prio')
+        date = self.env.context.get('date')
+        corrections = {}
+        loc_loss = self.env.ref('stock_lot_loss.stock_location_14019')
+        loc_loss_qty = self.with_context(
+            location=loc_loss.id)._product_available()
+        if prio is not None and date is not None:
+            dom_quant_loc, dom_move_in_loc, dom_move_out_loc = \
+                self._get_domain_locations()
+            domain = dom_move_out_loc + \
+                [('product_id', 'in', self.ids),
+                 ('state', 'not in', ('done', 'cancel')),
+                 '|', ('priority', '>', prio),
+                 '&', ('priority', '=', prio), ('date', '<', date),
+                 ]
+            move_groupby = self.env['stock.move'].read_group(
+                domain, ['product_id', 'product_qty'],
+                ['product_id'], orderby='id'
+            )
+            for group in move_groupby:
+                corrections[group['product_id']] = group['product_qty']
+        for product_id in res:
+            res[product_id]['immediately_usable_qty'] += (
+                corrections.get(product_id, 0) -
+                loc_loss_qty[product_id]['incoming_qty'] -
+                loc_loss_qty[product_id]['qty_available']
+            )
+        return res
+
+    @api.depends('virtual_available', 'incoming_qty')
+    def _compute_available_quantities(self):
+        super(ProductProduct, self)._compute_available_quantities()
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'

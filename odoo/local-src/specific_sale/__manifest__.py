@@ -20,6 +20,7 @@
         'specific_data',
         'specific_partner',
         'stock_lot_track',
+        'stock_lot_loss',
         'sale_cancel_remaining',
         'specific_purchase',
         'stock_picking_backorder',
