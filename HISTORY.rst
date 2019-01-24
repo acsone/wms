@@ -30,6 +30,7 @@ latest (unreleased)
 
   Setting `show_purchase` on PO view hides/shows meaningful information: use it!
 
+* ALCYN-1811: Exclude service products from Remains to deliver filter
 * ALCYN-1853: take priority and stock losses in the sale order line missing qty
 
 **Build**
