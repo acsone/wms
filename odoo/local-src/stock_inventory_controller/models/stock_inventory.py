@@ -48,7 +48,8 @@ class StockInventory(models.Model):
 
         for move in moves:
             try:
-                move.action_done()
+                with self.env.cr.savepoint():
+                    move.action_done()
             except MissingError as me:
                 _logger.error('MissingError: ' + str(me))
                 line = self.line_ids.search(
