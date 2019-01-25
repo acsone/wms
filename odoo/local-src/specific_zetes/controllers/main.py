@@ -6,7 +6,7 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.web.controllers.main import Home
 
-from ..tools.domain_interface import Parameters
+from ..tools.domain_interface import Parameters, Savepoint
 from .. import constants
 
 _logger = logging.getLogger(__name__)
@@ -43,23 +43,26 @@ class Zetes(Home):
         # If the domain is itempick the module name will be
         # openerp.addons.specific_zetes.tools.domain_itempick
         module_name = \
-            'openerp.addons.specific_zetes.tools.domain_{}'.format(
+            'odoo.addons.specific_zetes.tools.domain_{}'.format(
                 domain.lower())
         # Retrieve the class inherited from DomainInterface
         # e.g: domain == 'itempick' => Create an instance of Itempick(header)
         module_obj = importlib.import_module(module_name)
-        instance = getattr(module_obj, domain.title())(header)
+        with Savepoint(request.env.cr) as savepoint:
+            domain_cls = getattr(module_obj, domain.title())
+            instance = domain_cls(header, savepoint)
 
-        # Create the parameter instance with all values received in the request
-        parameter_obj = Parameters(instance,
-                                   action=command.upper(),
-                                   values=values)
-        # Execute the the method
-        # e.g: if the msgType is REQU_ITEMPICK
-        # domain: itempick
-        # action: requ
-        # We will execute the method requ on an instance of Itempick
-        result = getattr(instance, command.lower())(parameter_obj)
+            # Create the parameter instance with all values received in the
+            # request
+            parameter_obj = Parameters(instance,
+                                       action=command.upper(),
+                                       values=values)
+            # Execute the the method
+            # e.g: if the msgType is REQU_ITEMPICK
+            # domain: itempick
+            # action: requ
+            # We will execute the method requ on an instance of Itempick
+            result = getattr(instance, command.lower())(parameter_obj)
 
         # If the method return something (action REQU)
         if result and isinstance(result, str):
@@ -112,7 +115,7 @@ class Zetes(Home):
 
         for domain in domains:
             module_name = \
-                'openerp.addons.specific_zetes.tools.domain_{}'.format(
+                'odoo.addons.specific_zetes.tools.domain_{}'.format(
                     domain.lower())
             module_obj = importlib.import_module(module_name)
 
@@ -127,10 +130,12 @@ class Zetes(Home):
             # => instance = Print([1,1,1,1,1])
             # In this case the system will try to retrive the user
             # with the code 1 (see USER_INDEX)
-            instance = getattr(module_obj, domain.title())([1, 1, 1, 1, 1])
+            with Savepoint(request.env.cr) as savepoint:
+                domain_cls = getattr(module_obj, domain.title())
+                instance = domain_cls([1, 1, 1, 1, 1], savepoint)
 
-            for action in actions:
-                parameter_obj = Parameters(instance, action=action.upper())
-                result += '\n' + str(parameter_obj)
+                for action in actions:
+                    parameter_obj = Parameters(instance, action=action.upper())
+                    result += '\n' + str(parameter_obj)
 
         return result

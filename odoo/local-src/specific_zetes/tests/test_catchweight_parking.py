@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import mock
+
 from .. import constants
 from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -51,7 +53,9 @@ class TestCatchweightParking(ZetesParkingTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking_parking.pack_operation_product_ids
         pack_op.ensure_one()
@@ -79,7 +83,9 @@ class TestCatchweightParking(ZetesParkingTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking_parking.pack_operation_product_ids
         pack_op.ensure_one()

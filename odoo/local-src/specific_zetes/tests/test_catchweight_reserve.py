@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 
 from .zetes_test_classes import ZetesReserveTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -37,7 +38,9 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
@@ -66,7 +69,9 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()

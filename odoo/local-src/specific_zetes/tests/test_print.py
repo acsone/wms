@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from odoo.tools import mute_logger
 
 from .. import constants
@@ -55,7 +56,9 @@ class TestPrint(ZetesTest):
         pack_op.ensure_one()
 
         # Print products labels and package labels
-        domain = Print(DEFAULT_HEADER, request_overwrite=self)
+        domain = Print(DEFAULT_HEADER,
+                       mock.MagicMock(name='Savepoint()'),
+                       request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'groupNum': self.picking.id,

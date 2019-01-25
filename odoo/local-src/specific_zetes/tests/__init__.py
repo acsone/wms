@@ -19,3 +19,4 @@ from . import test_itemmove_reserve
 from . import test_full
 from . import test_full_parking
 from . import test_full_reserve
+from . import test_savepoint

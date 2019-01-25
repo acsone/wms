@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -14,7 +15,9 @@ class TestLocation(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
 
-        domain = Location(DEFAULT_HEADER, request_overwrite=self)
+        domain = Location(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'lineId': pack_op.id,

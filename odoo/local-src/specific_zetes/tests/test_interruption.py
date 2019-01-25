@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -122,10 +123,18 @@ class TestInterruption(ZetesTest):
         :return:
         """
 
-        assignement_obj = Assignment(DEFAULT_HEADER, request_overwrite=self)
-        catchweight_obj = Catchweight(DEFAULT_HEADER, request_overwrite=self)
-        itempick_obj = Itempick(DEFAULT_HEADER, request_overwrite=self)
-        usercontext_obj = Usercontext(DEFAULT_HEADER, request_overwrite=self)
+        assignement_obj = Assignment(DEFAULT_HEADER,
+                                     mock.MagicMock(name='Savepoint()'),
+                                     request_overwrite=self)
+        catchweight_obj = Catchweight(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
+        itempick_obj = Itempick(DEFAULT_HEADER,
+                                mock.MagicMock(name='Savepoint()'),
+                                request_overwrite=self)
+        usercontext_obj = Usercontext(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
 
         ##########
         # Step 1 #
@@ -181,9 +190,15 @@ class TestInterruption(ZetesTest):
         user_2_header[constants.USER_INDEX] = self.user_2.operator_code
 
         new_usercontext_obj = \
-            Usercontext(user_2_header, request_overwrite=self)
-        new_assignment_obj = Assignment(user_2_header, request_overwrite=self)
-        new_itempick_obj = Itempick(user_2_header, request_overwrite=self)
+            Usercontext(user_2_header,
+                        mock.MagicMock(name='Savepoint()'),
+                        request_overwrite=self)
+        new_assignment_obj = Assignment(user_2_header,
+                                        mock.MagicMock(name='Savepoint()'),
+                                        request_overwrite=self)
+        new_itempick_obj = Itempick(user_2_header,
+                                    mock.MagicMock(name='Savepoint()'),
+                                    request_overwrite=self)
 
         request_usercontext_params = Parameters(new_usercontext_obj)
         request_usercontext_params.update({

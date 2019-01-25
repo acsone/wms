@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+import uuid
 
 from odoo import _
 from odoo.http import request
@@ -7,6 +8,31 @@ from odoo.http import request
 from .. import constants
 
 _logger = logging.getLogger(__name__)
+
+
+class Savepoint(object):
+
+    def __init__(self, cr):
+        self._cr = cr
+        self._name = uuid.uuid1().hex
+
+    def start(self):
+        self._cr.execute('SAVEPOINT "%s"' % self._name)
+
+    def release(self):
+        self._cr.execute('RELEASE SAVEPOINT "%s"' % self._name)
+
+    def rollback(self):
+        self._cr.execute('ROLLBACK TO SAVEPOINT "%s"' % self._name)
+
+    def __enter__(self):
+        self.start()
+        return self
+
+    def __exit__(self, type_, value, traceback):
+        if type_:
+            self.rollback()
+        self.release()
 
 
 class DomainInterface:
@@ -17,17 +43,27 @@ class DomainInterface:
     RESP = ()
     RESU = ()
 
-    def __init__(self, header, request_overwrite=None):
+    def __init__(self, header, savepoint, request_overwrite=None):
         if request_overwrite:
             self.request = request_overwrite
         else:
             self.request = request
 
+        self._savepoint = savepoint
         self._header = header
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
         self._user = self.request.env['res.users'].get_user(operator_code)
         _logger.debug('User: {}'.format(self._user.name or 'no user'))
+
+    def rollback_to_savepoint(self):
+        """Rollback to savepoint
+
+        The savepoint is injected at instance creation, so it is likely that
+        you will rollback everything that has been done by this DomainInterface
+        since it has been created.
+        """
+        self._savepoint.rollback()
 
     def requ(self, params):
         """

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import importlib
+import mock
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -234,8 +235,11 @@ class ZetesTest(SavepointCase):
             'openerp.addons.specific_zetes.tools.domain_{}'.format(
                 domain.lower())
         module_obj = importlib.import_module(module_name)
-        instance = getattr(module_obj, domain.title())(DEFAULT_HEADER,
-                                                       request_overwrite=self)
+        domain_cls = getattr(module_obj, domain.title())
+        instance = domain_cls(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self)
 
         # Create the instance of Parameter with the previous domain instance
         result_parameter = Parameters(instance,

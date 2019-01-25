@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, ROUND_CODE
 from ..tools.domain_interface import Parameters
@@ -9,7 +10,9 @@ class TestAssignemnt(ZetesTest):
 
     def test_requ_assignment(self):
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
+        domain = Assignment(DEFAULT_HEADER,
+                            mock.MagicMock(name='Savepoint()'),
+                            request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'Cri01': None,
@@ -89,7 +92,9 @@ class TestAssignemnt(ZetesTest):
     def test_resu_assignement(self):
         self.assertFalse(self.picking.operator_id)
 
-        domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
+        domain = Assignment(DEFAULT_HEADER,
+                            mock.MagicMock(name='Savepoint()'),
+                            request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         # Assign and start the picking
         request_params.update({

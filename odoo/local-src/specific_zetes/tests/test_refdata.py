@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -11,7 +12,9 @@ class TestRefdata(ZetesTest):
         """
         :return:
         """
-        domain = Refdata(DEFAULT_HEADER, request_overwrite=self)
+        domain = Refdata(DEFAULT_HEADER,
+                         mock.MagicMock(name='Savepoint()'),
+                         request_overwrite=self)
         request_params = Parameters(domain, action='requ')
 
         result_str = domain.requ(request_params)

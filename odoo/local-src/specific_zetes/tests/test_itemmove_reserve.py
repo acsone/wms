@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
 from ..tools.domain_interface import Parameters
@@ -36,7 +37,9 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         :return:
         """
-        domain = Itemmove(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itemmove(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
 
         request_params = Parameters(domain, action='requ')
         request_params.update({
@@ -104,7 +107,9 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         self.assertEqual(pack_op.qty_done, 20)
 
-        domain = Itemmove(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itemmove(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'moveLineId': pack_op.id,

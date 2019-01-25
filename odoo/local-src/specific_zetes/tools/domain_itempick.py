@@ -170,6 +170,7 @@ class Itempick(DomainInterface):
                 # Call the method to skip this lot
                 pack_lot._skip_lot()
             except Exception as e:
+                self.rollback_to_savepoint()
                 _logger.error(str(e))
                 params.log(picking_id=picking_id,
                            exception=e)
@@ -393,6 +394,7 @@ class Itempick(DomainInterface):
                         pack_op.qty_done = 0
 
         except Exception as e:
+            self.rollback_to_savepoint()
             _logger.error(str(e))
             params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_operation_id,
