@@ -26,6 +26,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1875: properly rollback on errors happening during the posting of an inventory
+
 **Build**
 
 **Documentation**

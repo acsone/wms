@@ -5,7 +5,7 @@
 import logging
 
 from odoo import models, api, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -17,14 +17,14 @@ def hw_print(self, report_xmlid, printer=False, qty=1):
     if not printer:
         printer = behaviour['printer']
     if not printer:
-        raise Warning(_('No printer assigned'))
+        raise UserError(_('No printer assigned'))
     try:
         printer.print_document(report, document, 'text')
-    except UnicodeEncodeError as e:
-        raise e
-    except Exception as e:
-        _logger.error(str(e))
-        raise Warning(_('Printer unavailable'))
+    except UnicodeEncodeError:
+        raise
+    except Exception:
+        _logger.exception('Printer unavailable')
+        raise UserError(_('Printer unavailable'))
 
 
 class StockPackOperation(models.Model):

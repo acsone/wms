@@ -282,7 +282,7 @@ class StockProductionLot(models.Model):
                 try:
                     shelf_code = int(shelf)
                     is_letter = False
-                except Exception:
+                except ValueError:
                     shelf_code = ord(shelf)
                     is_letter = True
 
