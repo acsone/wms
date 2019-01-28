@@ -321,3 +321,8 @@ migration:
           operations:
             post:
               - anthem songs.upgrade.10_30_16_update::remove_move_from_locked_purchase_order
+    - version: 10.30.17
+      addons:
+        upgrade:
+          ### local
+          - specific_stock
