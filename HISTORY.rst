@@ -27,6 +27,8 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-1875: properly rollback on errors happening during the posting of an inventory
+* ALCYN-1875: correct handling of exceptions during exchanges with Zetes,
+  properly rollback changes on error
 
 **Build**
 

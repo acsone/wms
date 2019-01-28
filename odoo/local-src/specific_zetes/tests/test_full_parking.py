@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 
 from .. import constants
 from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
@@ -87,12 +88,24 @@ class TestFullParking(ZetesParkingTest):
         self.round.button_update()
 
     def test_full(self):
-        assignement_obj = Assignment(DEFAULT_HEADER, request_overwrite=self)
-        catchweight_obj = Catchweight(DEFAULT_HEADER, request_overwrite=self)
-        itemmove_obj = Itemmove(DEFAULT_HEADER, request_overwrite=self)
-        location_obj = Location(DEFAULT_HEADER, request_overwrite=self)
-        refdata_obj = Refdata(DEFAULT_HEADER, request_overwrite=self)
-        usercontext_obj = Usercontext(DEFAULT_HEADER, request_overwrite=self)
+        assignement_obj = Assignment(DEFAULT_HEADER,
+                                     mock.MagicMock(name='Savepoint()'),
+                                     request_overwrite=self)
+        catchweight_obj = Catchweight(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
+        itemmove_obj = Itemmove(DEFAULT_HEADER,
+                                mock.MagicMock(name='Savepoint()'),
+                                request_overwrite=self)
+        location_obj = Location(DEFAULT_HEADER,
+                                mock.MagicMock(name='Savepoint()'),
+                                request_overwrite=self)
+        refdata_obj = Refdata(DEFAULT_HEADER,
+                              mock.MagicMock(name='Savepoint()'),
+                              request_overwrite=self)
+        usercontext_obj = Usercontext(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
 
         ##########
         # Step 1 #

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 
 from .. import constants
 from .zetes_test_classes import ZetesReserveTest, DEFAULT_HEADER
@@ -14,7 +15,9 @@ class TestAssignemnt(ZetesReserveTest):
 
     def test_01_requ_assignment(self):
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
+        domain = Assignment(DEFAULT_HEADER,
+                            mock.MagicMock(name='Savepoint()'),
+                            request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,
@@ -109,7 +112,9 @@ class TestAssignemnt(ZetesReserveTest):
                          constants.REASSORT_ASSIGNMENT)
 
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER, request_overwrite=self)
+        domain = Assignment(DEFAULT_HEADER,
+                            mock.MagicMock(name='Savepoint()'),
+                            request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'Cri01': self.picking_zone_medoc.code,

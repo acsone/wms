@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -18,7 +19,9 @@ class TestCatchweight(ZetesTest):
         The method requ on catchweight is not used.
         :return:
         """
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'groupNum': self.picking.id,
@@ -39,7 +42,9 @@ class TestCatchweight(ZetesTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
@@ -91,7 +96,9 @@ class TestCatchweight(ZetesTest):
             'tracking': 'none'
         })
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
@@ -116,7 +123,9 @@ class TestCatchweight(ZetesTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
@@ -151,7 +160,9 @@ class TestCatchweight(ZetesTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER, request_overwrite=self)
+        domain = Catchweight(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
 
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()

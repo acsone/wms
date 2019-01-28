@@ -224,6 +224,7 @@ class Catchweight(DomainInterface):
                 pack_op.add_qty(virtual_qty, lot_id)
 
         except Exception as e:
+            self.rollback_to_savepoint()
             _logger.error(str(e))
             params.log(picking_id=pack_op.picking_id.id,
                        operation_id=pack_operation_id,

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import mock
+
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -86,10 +88,18 @@ class TestExceptions(ZetesTest):
         :return:
         """
 
-        assignement_obj = Assignment(DEFAULT_HEADER, request_overwrite=self)
-        catchweight_obj = Catchweight(DEFAULT_HEADER, request_overwrite=self)
-        itempick_obj = Itempick(DEFAULT_HEADER, request_overwrite=self)
-        usercontext_obj = Usercontext(DEFAULT_HEADER, request_overwrite=self)
+        assignement_obj = Assignment(DEFAULT_HEADER,
+                                     mock.MagicMock(name='Savepoint()'),
+                                     request_overwrite=self)
+        catchweight_obj = Catchweight(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
+        itempick_obj = Itempick(DEFAULT_HEADER,
+                                mock.MagicMock(name='Savepoint()'),
+                                request_overwrite=self)
+        usercontext_obj = Usercontext(DEFAULT_HEADER,
+                                      mock.MagicMock(name='Savepoint()'),
+                                      request_overwrite=self)
 
         ##########
         # Step 1 #

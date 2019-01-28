@@ -182,6 +182,7 @@ class Assignment(DomainInterface):
 
             picking.zetes_state = picking_zetes_state
         except Exception as e:
+            self.rollback_to_savepoint()
             _logger.error(str(e))
             params.log(picking_id=picking_id, exception=e)
 

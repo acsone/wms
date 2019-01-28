@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, OPERATOR_CODE
 from ..tools.domain_interface import DomainInterface, Parameters
@@ -16,11 +17,16 @@ class TestDomainInterface(ZetesTest):
                                'REQU_USERCONTEXT', '111', '1', '20170207',
                                '072932', '98427733121320']
 
-        domain = DomainInterface(DEFAULT_HEADER, request_overwrite=self)
+        domain = DomainInterface(DEFAULT_HEADER,
+                                 mock.MagicMock(name='Savepoint()'),
+                                 request_overwrite=self)
         self.assertEqual(domain._user.id, self.user.id)
 
-        domain_with_unknow_user = DomainInterface(header_unknown_user,
-                                                  request_overwrite=self)
+        domain_with_unknow_user = DomainInterface(
+            header_unknown_user,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self
+        )
         self.assertEqual(domain_with_unknow_user._user, self.env['res.users'])
 
     def test_params(self):
@@ -28,7 +34,9 @@ class TestDomainInterface(ZetesTest):
         Create a parameters (from a usercontext domain)
         :return:
         """
-        domain = Usercontext(DEFAULT_HEADER, request_overwrite=self)
+        domain = Usercontext(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
         response_params = Parameters(domain)
 
         # Check values
@@ -51,7 +59,9 @@ class TestDomainInterface(ZetesTest):
         Try to execute a simple request
         :return:
         """
-        domain = Usercontext(DEFAULT_HEADER, request_overwrite=self)
+        domain = Usercontext(DEFAULT_HEADER,
+                             mock.MagicMock(name='Savepoint()'),
+                             request_overwrite=self)
         request_params = Parameters(domain, action='requ')
         request_params.update({
             'contextType': '1'

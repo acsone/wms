@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 from .. import constants
 from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
@@ -12,7 +13,9 @@ class TestItempick(ZetesTest):
         The method requ on catchweight is not used.
         :return:
         """
-        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itempick(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
 
         # Set the flag is_price_on_labels
         self.partner.write({
@@ -88,7 +91,9 @@ class TestItempick(ZetesTest):
 
         self.assertEqual(pack_op.qty_done, 10)
 
-        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itempick(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
         request_params = Parameters(domain, action='resu')
         request_params.update({
             'pickLineId': pack_op.id,
@@ -105,7 +110,9 @@ class TestItempick(ZetesTest):
         Test the ZeroCheck flag
         :return:
         """
-        domain = Itempick(DEFAULT_HEADER, request_overwrite=self)
+        domain = Itempick(DEFAULT_HEADER,
+                          mock.MagicMock(name='Savepoint()'),
+                          request_overwrite=self)
 
         request_params = Parameters(domain, action='requ')
         request_params.update({

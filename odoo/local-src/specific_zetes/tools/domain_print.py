@@ -3,7 +3,7 @@ import logging
 
 from odoo import _
 
-from domain_interface import DomainInterface, Parameters
+from domain_interface import DomainInterface, Parameters, Savepoint
 from .. import constants
 
 _logger = logging.getLogger(__name__)
@@ -90,6 +90,7 @@ class Print(DomainInterface):
             try:
                 picking.sudo().print_passport_report(printer=printer)
             except Exception as e:
+                self.rollback_to_savepoint()
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
@@ -100,14 +101,16 @@ class Print(DomainInterface):
                 return result.format()
 
         elif print_type == constants.PRINT_LABELS:
-            try:
-                # Create a pack for this picking
-                box = picking.put_in_pack()
-                if box:
-                    # Set the number of packages for this picking
-                    box.nbr_packages = quantity
-            except Exception:
-                pass
+
+            with Savepoint(self.request.env.cr) as pack_savepoint:
+                try:
+                    # Create a pack for this picking
+                    box = picking.put_in_pack()
+                    if box:
+                        # Set the number of packages for this picking
+                        box.nbr_packages = quantity
+                except Exception:
+                    pack_savepoint.rollback()
 
             printer_toshiba = self.request.env['printing.printer']\
                 .sudo().search([('code', '=', printer_num),
@@ -128,6 +131,7 @@ class Print(DomainInterface):
                 picking.sudo().print_products_label(printer=printer_toshiba)
                 picking.sudo().print_packages_label(printer=printer_zebra)
             except Exception as e:
+                self.rollback_to_savepoint()
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update({
