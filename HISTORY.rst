@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.17 (2019-01-28)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * BIZ-2823: optimize number of requests sent by the Wizard for returning stock
   operations, might have an effect on the server load
 
@@ -29,10 +41,6 @@ latest (unreleased)
 * ALCYN-1875: properly rollback on errors happening during the posting of an inventory
 * ALCYN-1875: correct handling of exceptions during exchanges with Zetes,
   properly rollback changes on error
-
-**Build**
-
-**Documentation**
 
 
 10.30.16 (2019-01-24)
