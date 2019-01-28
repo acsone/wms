@@ -38,6 +38,16 @@ class TestShippingCosts(SavepointCase):
             'name': 'Alcyon 2',
         })
 
+        cls.fee_3 = 25
+        cls.delivery_method_3 = cls.env['delivery.carrier'].create({
+            'delivery_type': 'fixed',
+            'fixed_price': cls.fee_3,
+            'free_if_more_than': True,
+            'amount': 200,
+            'use_specific_cost_calculation': False,
+            'name': 'Alcyon 3',
+        })
+
         cls.env['ir.model.data'].create({
             'name': 'deliver_carrier_alcyon',
             'module': '__setup__',
@@ -151,13 +161,17 @@ class TestShippingCosts(SavepointCase):
         delivery_line = so.order_line.filtered('is_delivery')
         return sum(delivery_line.mapped('price_unit'))
 
+    def no_shipping_line_present(self, so):
+        delivery_line = so.order_line.filtered('is_delivery')
+        return not bool(len(delivery_line))
+
     def test_customer_never_pay_fees(self):
         """Test a customer that should never pay shipping fees"""
         self.partner1.help_with_fee = False
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_2_so_all_delivered_small_amount(self):
         """2 sale order for a small amount all delivered add fee"""
@@ -166,7 +180,7 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
 
     def test_2_so_all_delivered_large_amount(self):
@@ -177,7 +191,7 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_3_so_in_2_delivery_fee_twice(self):
         """Two deliveries both with fee
@@ -211,7 +225,7 @@ class TestShippingCosts(SavepointCase):
         op.write({'qty_done': 1})
         pick.with_context(test_mode=True).do_transfer()
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         # Second delivery round
         # Create a 3rd sale order
@@ -274,8 +288,9 @@ class TestShippingCosts(SavepointCase):
         op.write({'qty_done': 1})
         pick.with_context(test_mode=True).do_transfer()
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
+        self.assertTrue(self.no_shipping_line_present(self.so2))
+
         # Second delivery round
         # Create a 3rd sale order
         so3 = self.env['sale.order'].create({
@@ -301,7 +316,7 @@ class TestShippingCosts(SavepointCase):
 
         pick.with_context(test_mode=True).do_transfer()
         self.dr2._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_3_so_in_2_delivery_fee_twice_2(self):
@@ -321,7 +336,8 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
+
         # Second delivery round
         # Create a 3rd sale order
         so3 = self.env['sale.order'].create({
@@ -341,7 +357,7 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
         self.dr2._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_3_so_in_2_delivery_fee_once_2(self):
@@ -360,8 +376,8 @@ class TestShippingCosts(SavepointCase):
         # First delivery
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
+        self.assertTrue(self.no_shipping_line_present(self.so2))
         # Second delivery round
         # Create a 3rd sale order
         so3 = self.env['sale.order'].create({
@@ -381,7 +397,7 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
         self.dr2._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_no_so_between_delivery_no_fee(self):
@@ -399,12 +415,13 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
+
         # Second delivery round
         self.dr2._assign_pickings(self.so2.picking_ids)
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
-        self.assertEqual(self.get_shipping_cost(self.so2), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
 
     def test_no_shipping_fees(self):
         """Small order in round but second so with large amount"""
@@ -425,7 +442,7 @@ class TestShippingCosts(SavepointCase):
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_multiple_customer_in_round(self):
         """2 customer in round, only partner 1 get charged """
@@ -449,9 +466,9 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), 0)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
-        self.assertEqual(self.get_shipping_cost(so21), 0)
+        self.assertTrue(self.no_shipping_line_present(so21))
 
     def test_one_customer_two_delivery_carrier(self):
         """1 customer 2 sale orders with 2 delivery carrier.
@@ -467,3 +484,45 @@ class TestShippingCosts(SavepointCase):
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee_2)
+
+    def test_no_shipping_fees_no_specific_calc(self):
+        """Order shouldn't have a fee and return in _add_delivery_cost_to_so"""
+        # Create a second sale order for partner One
+        self.so2 = self.env['sale.order'].create({
+            'partner_id': self.partner1.id,
+            'carrier_id': self.delivery_method_3.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.p1.name,
+                    'product_id': self.p1.id,
+                    'product_uom': self.ref('product.product_uom_unit'),
+                    'product_uom_qty': 5,
+                    'price_unit': 200,
+                }),
+            ]
+        })
+        self.so2.action_confirm()
+        self.dr1._assign_pickings(self.so2.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(self.so2))
+
+    def test_shipping_fees_no_specific_calc(self):
+        """Order should have a fee and pass through _add_delivery_cost_to_so"""
+        # Create a second sale order for partner One
+        self.so2 = self.env['sale.order'].create({
+            'partner_id': self.partner1.id,
+            'carrier_id': self.delivery_method_3.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.p1.name,
+                    'product_id': self.p1.id,
+                    'product_uom': self.ref('product.product_uom_unit'),
+                    'product_uom_qty': 1,
+                    'price_unit': 10,
+                }),
+            ]
+        })
+        self.so2.action_confirm()
+        self.dr1._assign_pickings(self.so2.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertEqual(self.get_shipping_cost(self.so2), self.fee_3)
