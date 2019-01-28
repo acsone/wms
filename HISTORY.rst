@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* BIZ-2823: optimize number of requests sent by the Wizard for returning stock
+  operations, might have an effect on the server load
+
 **Bugfixes**
 
 **Build**
