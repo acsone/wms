@@ -43,9 +43,10 @@
     oca: git@github.com:OCA/bank-payment.git
     camptocamp: git@github.com:camptocamp/bank-payment.git
   merges:
-    - oca e042533b5df5e71d8b9089d7e2a445e6c0d51aca
+    - oca 09b962b3c82389d244fa0a2fc93ed434f04184a1
       # [10.0] improve file name in mandate
     - oca refs/pull/534/head
+    - oca refs/pull/543/head
   target: *default_target
 ./external-src/enterprise:
   remotes:

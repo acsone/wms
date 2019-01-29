@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* BIZ-2915: Add import invoice with reference type : Structured in payment order
+
 **Build**
 
 **Documentation**
