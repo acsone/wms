@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_sale
+#	* specific_sale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-12 11:01+0000\n"
-"PO-Revision-Date: 2018-07-10 15:55+0000\n"
+"POT-Creation-Date: 2019-01-25 15:58+0000\n"
+"PO-Revision-Date: 2019-01-25 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,7 +21,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:328
+#: code:addons/specific_sale/models/sale.py:327
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -131,7 +130,7 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_olalux
 msgid "For Olalux"
-msgstr ""
+msgstr "For Olalux"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
@@ -177,12 +176,8 @@ msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euro
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_material_maximum
-msgid ""
-"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
-"les produits de type matériel"
-msgstr ""
-"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
-"les produits de type matériel"
+msgid "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+msgstr "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
@@ -199,12 +194,12 @@ msgstr "Lot/N° série"
 #: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
 #: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
 msgid "Lots"
-msgstr ""
+msgstr "Lots"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
-msgstr "Lots/Numéros de série"
+msgstr "Numéros de lots/séries"
 
 #. module: specific_sale
 #: selection:sale.order,sale_channel:0
@@ -252,7 +247,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:327
+#: code:addons/specific_sale/models/sale.py:326
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -357,7 +352,7 @@ msgstr "Uniquement les médicaments"
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
 msgid "Order Date"
-msgstr ""
+msgstr "Date de la commande"
 
 #. module: specific_sale
 #: model:exception.rule,name:specific_sale.warning_free_product
@@ -365,8 +360,9 @@ msgid "Order offer free product"
 msgstr "Commande avec produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:317
-#, python-format
+#: model:exception.rule,description:specific_sale.warning_supplier_break
+#: model:exception.rule,name:specific_sale.warning_supplier_break
+#: model:exception.rule,warning_text:specific_sale.warning_supplier_break
 msgid "Out of stock at supplier level"
 msgstr "Rupture de stock fournisseur"
 
@@ -404,12 +400,12 @@ msgstr "Article"
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_category
 msgid "Product Category"
-msgstr "Catégorie d'articles"
+msgstr "Catégorie d'article"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
-msgstr "Modèle d'article"
+msgstr "Modèle de produit"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_cascade_import
@@ -461,7 +457,7 @@ msgstr "Reste à livrer"
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines"
-msgstr "Ligne du bon de commande"
+msgstr "Lignes de ventes"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
@@ -503,11 +499,6 @@ msgid "Suite Id"
 msgstr "Suite Id"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_supplier_break
-msgid "Supplier break"
-msgstr "Rupture fournisseur"
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr "Taxes"
@@ -519,12 +510,8 @@ msgstr "Ce client accepte pas les réapprovisionnement"
 
 #. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
-msgid ""
-"This is the date on which the goods with this Serial Number may become "
-"dangerous and must not be consumed."
-msgstr ""
-"Ceci est la date à laquelle les marchandises avec ce numéro de série "
-"deviennent dangereuses et ne doivent plus être consommées."
+msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
+msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série deviennent dangereux et ne doivent plus être consommées."
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -544,7 +531,7 @@ msgstr "Prix unitaire"
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_veterinary_product
@@ -582,24 +569,10 @@ msgstr "Texte d'avertissement"
 #. module: specific_sale
 #: selection:sale.order,sale_channel:0
 msgid "Web"
-msgstr ""
+msgstr "Web"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_free_product
 msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
-#~ msgid "Quantity unavailable at now"
-#~ msgstr "Quantité actuellement non disponible"
-
-#~ msgid "Quantity unavailable at order line save"
-#~ msgstr "Quantité non disponible à la sauvegarde de la ligne"
-
-#~ msgid "Sale Order Lines Unavailable"
-#~ msgstr "Lignes de commande non disponibles"
-
-#~ msgid "Sale channel visible"
-#~ msgstr "Sale channel visible"
-
-#~ msgid "Sales Order Lines Unavailable"
-#~ msgstr "Sale Order Lines Unavailable"
