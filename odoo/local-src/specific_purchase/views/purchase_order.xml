@@ -42,6 +42,26 @@
                 <field name="promotion_supplier"/>
             </xpath>
 
+            <xpath expr="//field[@name='order_line']/tree//field[@name='date_planned']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_qty']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='analytic_tag_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='account_analytic_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='taxes_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+            </xpath>
+
             <xpath expr="//field[@name='order_line']/tree" position="inside">
                 <field name="is_bo_line" invisible="1"/>
             </xpath>

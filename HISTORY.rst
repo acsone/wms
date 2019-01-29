@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1866: Block edition of confirmed purchase lines but description,
+  price_unit, discount and promotion.
+
 **Bugfixes**
 
 * BIZ-2915: Add import invoice with reference type : Structured in payment order
