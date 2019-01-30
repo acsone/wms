@@ -54,8 +54,9 @@ class BuyXGetYExportMapper(Component):
     @mapping
     def compute_checksum(self, record):
         checksum = ''.join([
-            str(record.id),
-            self.options.alcyon_group_id
+            str(record.real_id),
+            self.options.alcyon_group_id,
+            'buyxgety',
         ])
         return {'CheckSum': checksum}
 

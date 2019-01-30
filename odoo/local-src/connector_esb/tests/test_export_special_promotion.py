@@ -86,7 +86,7 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             'EndDate': self.weeks_fromnow.strftime('%Y%m%d'),
             'AlcyonGroupId': '100',
             'Action': 'Create',
-            'CheckSum': ''.join([str(rec.id), '100'])
+            'CheckSum': ''.join([str(rec.real_id), '100', 'special'])
         }
         self.timestamp.writer = 'local'
         with self.backend.work_on(self.model._name,
@@ -103,3 +103,48 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
             self.assertEqual(len(items), 1)
+
+    def test_checksum(self):
+        """Check checksum correctness.
+
+        The checksum for different action of a promotion have to be the same.
+        The checksum for action on different promotion must be different.
+        """
+        promo1 = self.env['product.supplierinfo'].create({
+            'name': self.supplier1.id,
+            'product_tmpl_id': self.p2.id,
+            'discount_sale': 1,
+            'date_start': '2019-01-30',
+            'date_end': '2019-03-30',
+        })
+        promo1.discount_sale = 3
+        promo2 = self.env['product.supplierinfo'].create({
+            'name': self.supplier1.id,
+            'product_tmpl_id': self.p2.id,
+            'discount_sale': 9,
+            'date_start': '2019-07-30',
+            'date_end': '2019-09-30',
+        })
+        promo2.discount_sale = 2
+        flux_promo1 = self.model.search([('real_id', '=', promo1.id)])
+        flux_promo2 = self.model.search([('real_id', '=', promo2.id)])
+        self.assertEqual(len(flux_promo1), 3)
+        self.assertEqual(len(flux_promo2), 3)
+        with self.backend.work_on(self.model._name,
+                                  timestamp=self.timestamp) as work:
+            mapper = work.component(usage='export.mapper')
+            checksums_1 = []
+            for r in flux_promo1:
+                checksums_1.append(
+                    mapper.map_record(r).values(
+                        alcyon_group_id='special')['CheckSum']
+                )
+            self.assertEqual(len(set(checksums_1)), 1)
+            checksums_2 = []
+            for r in flux_promo2:
+                checksums_2.append(
+                    mapper.map_record(r).values(
+                        alcyon_group_id='special')['CheckSum']
+                )
+            self.assertEqual(len(set(checksums_2)), 1)
+        self.assertTrue(checksums_1[0] != checksums_2[0])
