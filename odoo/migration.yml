@@ -339,4 +339,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_purchase
           - specific_sale
