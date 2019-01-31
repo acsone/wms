@@ -335,3 +335,8 @@ migration:
           - account_payment_order
           - account_payment_partner
           - account_payment_sale
+    - version: 10.30.18
+      addons:
+        upgrade:
+          ### local
+          - specific_sale

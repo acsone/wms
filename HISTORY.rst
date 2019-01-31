@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * BIZ-2915: Add import invoice with reference type : Structured in payment order
+* BIZ-2905: Terms not translated in specific sale
 
 **Build**
 
