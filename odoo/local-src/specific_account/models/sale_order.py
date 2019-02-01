@@ -122,8 +122,6 @@ class SaleOrder(models.Model):
         )
         for sale_to_invoice in sales_to_invoice:
             invoice_ids += sale_to_invoice.action_invoice_create(final=True)
-        import pdb
-        pdb.set_trace()
         invoices = self.env['account.invoice'].browse(invoice_ids)
         # Validate invoices
         invoices.with_delay()._job_validate_invoice(date_invoice)
