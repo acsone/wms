@@ -29,6 +29,7 @@ latest (unreleased)
 * BIZ-2915: Add import invoice with reference type : Structured in payment order
 * BIZ-2905: Terms not translated in specific sale
 * ALCYN-1878: Fix supplier promotion created twice on Magento (ESB)
+* ALCYN-1885: Fix concurrency issue in package creation
 
 **Build**
 
