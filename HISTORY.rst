@@ -21,20 +21,28 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.18 (2019-02-01)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1866: Block edition of confirmed purchase lines but description,
   price_unit, discount and promotion.
 
 **Bugfixes**
 
-* BIZ-2915: Add import invoice with reference type : Structured in payment order
 * BIZ-2905: Terms not translated in specific sale
+* BIZ-2915: Add import invoice with reference type : Structured in payment order
 * BIZ-2937: Fix invoice_ids append on invoicing job
 * ALCYN-1878: Fix supplier promotion created twice on Magento (ESB)
 * ALCYN-1885: Fix concurrency issue in package creation
-
-**Build**
-
-**Documentation**
 
 
 10.30.17 (2019-01-28)
