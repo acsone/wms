@@ -202,7 +202,7 @@ class Parameters:
         ordered_values = []
         for label in constants.HEADER_LABELS + self._labels:
             value = getattr(self, label, '')
-            if value is not 0 and not value:
+            if not value and type(value) is not int:
                 value = ''
             elif isinstance(value, (str, unicode)):
                 value = value.encode('utf-8').replace(',', ' ')

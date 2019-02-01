@@ -297,65 +297,65 @@ class TestPickingBackorder(SavepointCase):
         )
         for sale_backorder_accepted in [False, True]:
             for purchase_backorder_accepted in [False, True]:
-                    # Define the backorder behavior on partner
-                    self.partner.write({
-                        'is_sale_back_order_accepted':
-                            sale_backorder_accepted,
-                        'is_purchase_back_order_accepted':
-                            purchase_backorder_accepted,
+                # Define the backorder behavior on partner
+                self.partner.write({
+                    'is_sale_back_order_accepted':
+                        sale_backorder_accepted,
+                    'is_purchase_back_order_accepted':
+                        purchase_backorder_accepted,
+                })
+                for picking_type_id, location_id, location_dest_id in [
+                    sale_case_1, sale_case_2
+                ]:
+
+                    # Create picking
+                    picking = self.stock_picking_model.create({
+                        'picking_type_id': picking_type_id,
+                        'location_id': location_id,
+                        'location_dest_id': location_dest_id,
+                        'partner_id': self.partner.id,
+                        'move_lines': [
+                            (0, 0, {
+                                'name': 'a move',
+                                'product_id': self.product.id,
+                                'product_uom_qty': 10,
+                                'product_uom': self.product.uom_id.id,
+                                'location_id': location_id,
+                                'location_dest_id': location_dest_id,
+                            })
+                        ],
+                        'grn_id': self.grn.id,
                     })
-                    for picking_type_id, location_id, location_dest_id in [
-                        sale_case_1, sale_case_2
-                    ]:
 
-                        # Create picking
-                        picking = self.stock_picking_model.create({
-                            'picking_type_id': picking_type_id,
-                            'location_id': location_id,
-                            'location_dest_id': location_dest_id,
-                            'partner_id': self.partner.id,
-                            'move_lines': [
-                                (0, 0, {
-                                    'name': 'a move',
-                                    'product_id': self.product.id,
-                                    'product_uom_qty': 10,
-                                    'product_uom': self.product.uom_id.id,
-                                    'location_id': location_id,
-                                    'location_dest_id': location_dest_id,
-                                })
-                            ],
-                            'grn_id': self.grn.id,
-                        })
+                    # Transfer picking partially
+                    picking.action_confirm()
+                    picking.force_assign()
+                    pack_operation = picking.pack_operation_product_ids
+                    pack_operation.write({
+                        'qty_done': 3,
+                    })
+                    result = picking.do_new_transfer()
 
-                        # Transfer picking partially
-                        picking.action_confirm()
-                        picking.force_assign()
-                        pack_operation = picking.pack_operation_product_ids
-                        pack_operation.write({
-                            'qty_done': 3,
-                        })
-                        result = picking.do_new_transfer()
+                    # Check that the transfer action return no wizard
+                    self.assertEqual(result, {})
 
-                        # Check that the transfer action return no wizard
-                        self.assertEqual(result, {})
+                    # Search created backorder
+                    backorder = self.stock_picking_model.search([
+                        ('backorder_id', '=', picking.id)
+                    ])
 
-                        # Search created backorder
-                        backorder = self.stock_picking_model.search([
-                            ('backorder_id', '=', picking.id)
-                        ])
+                    # Check picking values
+                    self.assertEqual(
+                        picking.pack_operation_product_ids.product_qty, 3
+                    )
+                    self.assertEqual(picking.state, 'done')
 
-                        # Check picking values
-                        self.assertEqual(
-                            picking.pack_operation_product_ids.product_qty, 3
-                        )
-                        self.assertEqual(picking.state, 'done')
-
-                        # Check backorder values
-                        self.assertEqual(len(backorder), 1)
-                        self.assertEqual(
-                            backorder.move_lines.product_uom_qty, 7
-                        )
-                        self.assertEqual(
-                            backorder.state,
-                            'confirmed'  # always a backorder for Sales
-                        )
+                    # Check backorder values
+                    self.assertEqual(len(backorder), 1)
+                    self.assertEqual(
+                        backorder.move_lines.product_uom_qty, 7
+                    )
+                    self.assertEqual(
+                        backorder.state,
+                        'confirmed'  # always a backorder for Sales
+                    )
