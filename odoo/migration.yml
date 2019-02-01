@@ -135,9 +135,14 @@ migration:
           - account_invoice_line_default_account
           - account_invoice_triple_discount
           # oca/bank-payment
+          - account_banking_pain_base
           - account_banking_mandate
           - account_banking_sepa_credit_transfer
           - account_banking_sepa_direct_debit
+          - account_payment_mode
+          - account_payment_order
+          - account_payment_partner
+          - account_payment_sale
           - account_invoice_tax_required
           # oca/l10n-belgium
           - l10n_be_iso20022_pain
@@ -326,15 +331,6 @@ migration:
         upgrade:
           ### local
           - specific_stock
-          ### oca/bank-payment
-          - account_banking_mandate
-          - account_banking_pain_base
-          - account_banking_sepa_credit_transfer
-          - account_banking_sepa_direct_debit
-          - account_payment_mode
-          - account_payment_order
-          - account_payment_partner
-          - account_payment_sale
     - version: 10.30.18
       modes:
         full:
@@ -348,3 +344,12 @@ migration:
           - specific_sale
           ### core
           - stock
+          ### oca/bank-payment
+          - account_banking_mandate
+          - account_banking_pain_base
+          - account_banking_sepa_credit_transfer
+          - account_banking_sepa_direct_debit
+          - account_payment_mode
+          - account_payment_order
+          - account_payment_partner
+          - account_payment_sale
