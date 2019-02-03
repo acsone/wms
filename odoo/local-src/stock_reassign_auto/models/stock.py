@@ -45,9 +45,11 @@ class StockMove(models.Model):
 
             operations_to_recompute |= move.picking_id \
                 .mapped('pack_operation_ids') \
-                .filtered(lambda op: op.product_id in move.product_id)
+                .filtered(lambda op: op.product_id in move.product_id and
+                          not op.is_done)
             moves_to_reassign |= move.picking_id.mapped('move_lines') \
-                .filtered(lambda m: m.product_id in move.product_id)
+                .filtered(lambda m: m.product_id in move.product_id and
+                          m.state not in ('done', 'cancel'))
 
         if operations_to_recompute:
             _logger.debug("Cleaning operations %s",
