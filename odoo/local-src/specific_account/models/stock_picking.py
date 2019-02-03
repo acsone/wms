@@ -17,8 +17,15 @@ class StockPicking(models.Model):
             return result
 
         picking_type_out = self.env.ref('stock.picking_type_out')
+        fix_ship_type = self.env.ref(
+            '__setup__.stock_picking_type_fix_ship',
+            raise_if_not_found=False
+        )
+        if fix_ship_type:
+            picking_type_out |= fix_ship_type
+
         out_picking = self.filtered(
-            lambda picking: picking.picking_type_id == picking_type_out)
+            lambda picking: picking.picking_type_id in picking_type_out)
         if not out_picking:
             return result
         proc_group_ids = out_picking.mapped('move_lines.group_id').ids

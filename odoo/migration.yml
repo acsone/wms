@@ -376,3 +376,8 @@ migration:
         upgrade:
           ### local
           - stock_delivery_note
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.upgrade.10_30_21_update::post

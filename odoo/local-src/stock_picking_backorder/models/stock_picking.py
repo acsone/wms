@@ -44,8 +44,8 @@ class StockPicking(models.Model):
     @api.multi
     def do_transfer(self):
         for pick in self:
-            if ((pick.state == 'draft' or all([
-                    x.qty_done == 0.0 for x in pick.pack_operation_ids])) and
+            if ((pick.state == 'draft' or all(
+                    x.qty_done == 0.0 for x in pick.pack_operation_ids)) and
                     pick.check_backorder()):
                 # allow to transfer and create backorder even if no line
                 # processed
