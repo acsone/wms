@@ -29,6 +29,7 @@ latest (unreleased)
 * ALCYN-1892: Zetes: do not revert quantity added to a lot when call to skip a
   lot fails
 * ALCYN-1879: Fix post inventory rollback on error
+* ALCYN-1893: Fix cutoff lines generation - Do not generate lines twice
 
 **Build**
 
