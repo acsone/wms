@@ -21,15 +21,27 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* Change SMTP and IMAP configuration to mail.abl.grp
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.19 (2019-02-04)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1708: add a fast view for the input of sale order lines
+* Change SMTP and IMAP configuration to mail.abl.grp
 
 **Bugfixes**
 
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking
+* ALCYN-1879: Fix post inventory rollback on error
 * ALCYN-1892: Zetes: do not revert quantity added to a lot when call to skip a
   lot fails
-* ALCYN-1879: Fix post inventory rollback on error
 
 **Build**
 
@@ -38,13 +50,11 @@ latest (unreleased)
   * Bugfixes
 
     * Remove the NO_DATABASE_LIST option, does not exist, the sole option is DB_LIST
-  
+
   * Libraires
 
     * Bump requests version
     * Bump PyYAML version for CVE-2017-18342
-
-**Documentation**
 
 
 10.30.18 (2019-02-01)
