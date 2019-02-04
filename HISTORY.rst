@@ -31,6 +31,17 @@ latest (unreleased)
 
 **Build**
 
+* Upgrade docker-odoo-project base image to 3.1.1
+
+  * Bugfixes
+
+    * Remove the NO_DATABASE_LIST option, does not exist, the sole option is DB_LIST
+  
+  * Libraires
+
+    * Bump requests version
+    * Bump PyYAML version for CVE-2017-18342
+
 **Documentation**
 
 
