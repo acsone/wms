@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * Change SMTP and IMAP configuration to mail.abl.grp
+* ALCYN-1708: add a fast view for the input of sale order lines
 
 **Bugfixes**
 
