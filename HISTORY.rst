@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking
+
 **Build**
 
 **Documentation**
