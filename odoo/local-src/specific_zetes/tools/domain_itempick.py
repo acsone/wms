@@ -3,7 +3,7 @@ import logging
 
 from odoo import _
 
-from domain_interface import DomainInterface, Parameters
+from domain_interface import DomainInterface, Parameters, Savepoint
 from .. import constants
 
 _logger = logging.getLogger(__name__)
@@ -163,24 +163,26 @@ class Itempick(DomainInterface):
                        exception=msg,
                        error_type='human')
 
-            try:
-                # Add the picked quantity on the pack lot
-                pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
+            # Add the picked quantity on the pack lot
+            pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
 
-                # Call the method to skip this lot
-                pack_lot._skip_lot()
-            except Exception as e:
-                self.rollback_to_savepoint()
-                _logger.error(str(e))
-                params.log(picking_id=picking_id,
-                           exception=e)
+            with Savepoint(self.request.env.cr) as lot_savepoint:
+                try:
+                    # Call the method to skip this lot
+                    pack_lot._skip_lot()
+                except Exception as e:
+                    lot_savepoint.rollback()
+                    _logger.error(str(e))
+                    params.log(picking_id=picking_id,
+                               exception=e)
 
-                result = Parameters(self, action='resp')
-                result.update({
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('Cannot reload the picking %s') % picking_id
-                })
-                return result.format()
+                    result = Parameters(self, action='resp')
+                    result.update({
+                        'respCode': constants.RESPONSE_CODE_ERROR,
+                        'respMsg': _('Cannot reload the picking %s') %
+                        picking_id
+                    })
+                    return result.format()
 
         # Search all pack operations for this picking
         lines = self.request.env['stock.pack.operation'].sudo(self._user)\
