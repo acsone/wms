@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* Change SMTP and IMAP configuration to mail.abl.grp
+
 **Bugfixes**
 
 **Build**
