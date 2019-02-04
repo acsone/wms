@@ -1,4 +1,4 @@
-FROM camptocamp/odoo-project:10.0-3.1.0
+FROM camptocamp/odoo-project:10.0-3.1.1
 MAINTAINER Camptocamp
 
 # Steps are grouped by dependency
