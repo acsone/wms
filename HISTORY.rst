@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* Change SMTP and IMAP configuration to mail.abl.grp
+
 **Bugfixes**
 
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking
