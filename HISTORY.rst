@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking
 * ALCYN-1892: Zetes: do not revert quantity added to a lot when call to skip a
   lot fails
+* ALCYN-1879: Fix post inventory rollback on error
 
 **Build**
 
