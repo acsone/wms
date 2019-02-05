@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1877: add a fast view for the input of supplier invoice lines
+
 **Bugfixes**
 
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking,
