@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.20 (2019-02-05)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1877: add a fast view for the input of supplier invoice lines
 
 
@@ -30,10 +42,6 @@ latest (unreleased)
   replace patch by a more thorough one (https://github.com/odoo/odoo/pull/30681#issuecomment-460254826)
 * BIZ-2925: Fix missing translation in report
 * BIZ-2926: set some accounts being reconciliable
-
-**Build**
-
-**Documentation**
 
 
 10.30.19 (2019-02-04)
