@@ -358,3 +358,11 @@ migration:
         upgrade:
           ### local
           - specific_sale
+    - version: 10.30.20
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_20_update::post
+      addons:
+        upgrade:
+          ### local
+          - stock_delivery_note

@@ -27,6 +27,7 @@ latest (unreleased)
 
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking,
   replace patch by a more thorough one (https://github.com/odoo/odoo/pull/30681#issuecomment-460254826)
+* BIZ-2925: Fix missing translation in report
 
 **Build**
 
