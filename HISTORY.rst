@@ -23,11 +23,13 @@ latest (unreleased)
 
 * ALCYN-1877: add a fast view for the input of supplier invoice lines
 
+
 **Bugfixes**
 
 * ALCYN-1876: Fix handling of lot in multiple locations when a product is several times in a picking,
   replace patch by a more thorough one (https://github.com/odoo/odoo/pull/30681#issuecomment-460254826)
 * BIZ-2925: Fix missing translation in report
+* BIZ-2926: set some accounts being reconciliable
 
 **Build**
 
