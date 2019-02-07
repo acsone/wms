@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1906: Hide transfer button when picking is done. Display put in pack only for Pick operation
 
 **Build**
 
