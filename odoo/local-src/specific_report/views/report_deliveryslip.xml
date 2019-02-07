@@ -39,37 +39,43 @@
             <p id="delivery_condition" t-field="company.with_context(lang=partner.lang).delivery_terms_conditions"/>
 
             <div class="row">
-                <div class="col-xs-2">
-                    <div class="border_table round_table summary_deliverslip">
-                        <div style="text-align: center">
-                            Number of<br/>packages<br/>
-                            <strong><span t-esc="len(deliveryslip.pack_operation_pack_ids)"/></strong>
+                <div class="col-xs-6">
+                    <div class="round_table summary_deliverslip">
+                        <div style="border-bottom: 1px solid black">
+                            Delivery round: <span t-if="deliveryslip.delivery_round_id" t-field="deliveryslip.delivery_round_id.display_name" />
                         </div>
+                        <table style="margin:0 15px; width:100%">
+                            <tr>
+                                <th># Drug</th>
+                                <th># Cold</th>
+                                <th># Food</th>
+                                <th># Mat.</th>
+                                <th># Hum.</th>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="int(deliveryslip.number_of_drug)"/> boxes</td>
+                                <td><t t-esc="int(deliveryslip.number_of_cold)"/> boxes</td>
+                                <td><t t-esc="int(deliveryslip.number_of_food)"/> boxes</td>
+                                <td><t t-esc="int(deliveryslip.number_of_equipment)"/> boxes</td>
+                                <td><t t-esc="int(deliveryslip.number_of_human_drug)"/> boxes</td>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="int(deliveryslip.item_number_of_drug)"/> items</td>
+                                <td><t t-esc="int(deliveryslip.item_number_of_cold)"/> items</td>
+                                <td><t t-esc="int(deliveryslip.item_number_of_food)"/> items</td>
+                                <td><t t-esc="int(deliveryslip.item_number_of_equipment)"/> items</td>
+                                <td><t t-esc="int(deliveryslip.item_number_of_human_drug)"/> items</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="round_table summary_deliverslip" style="text-align: center; padding-top: 30px">
+                        Weight:<br/><span t-field="deliveryslip.weight"/> Kg
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <div class="border_table round_table summary_deliverslip">
-                        <div style="height: 50%; border-bottom: 1px solid black">
-                            Round: <br/>
-                            <span t-if="deliveryslip.delivery_round_id" t-field="deliveryslip.delivery_round_id.display_name" />
-                        </div>
-                        <div style="height: 50%">
-                            Delivery:
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="border_table round_table summary_deliverslip" style="text-align: center">
-                        <div style="height: 50%; border-bottom: 1px solid black">
-                            PORT:
-                        </div>
-                        <div style="height: 50%">
-                            Weight:<br/><span t-field="deliveryslip.weight"/> Kg
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="border_table round_table summary_deliverslip">
+                    <div class="round_table summary_deliverslip">
                         <div>
                             Received the:<br/>
                             Signature:
@@ -110,7 +116,7 @@
                     <th rowspan="2">Primary<br/>unit<br/>price</th>
                     <th rowspan="2">Net<br/>unit<br/>price</th>
                     <th rowspan="2">Subtotal</th>
-                    <th rowspan="2">VAT</th>
+                    <th rowspan="2" style="min-width:70px">VAT</th>
                 </tr>
                 <tr>
                     <th style="border-left: thin solid black;">Number</th>
@@ -170,7 +176,7 @@
                                 <span t-field="order_line.price_reduce_taxexcl"/>
                             </td>
                             <td>
-                                <t t-esc="order_line.price_reduce * int(line.product_qty)"/>
+                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-esc-options='{"widget": "monetary", "display_currency": "order_line.currency_id"}'/>
                             </td>
                             <td>
                                 <span t-esc="', '.join(map(lambda x: (x.description or x.name), order_line.tax_id))"/>

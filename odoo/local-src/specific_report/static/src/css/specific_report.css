@@ -151,16 +151,19 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
 }
 
 #document_reference td, #invoice_reference td {
-    padding: 3px;
+    padding: 5px;
     text-align: center;
-    font-size: 0.85em;
+    font-size: 0.9em;
 }
 
 #products_table {
     height:140mm;
     width: 100%;
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin: 5mm 0;
+}
+#products_table th {
+    font-size: 0.8em;
 }
 
 .products_table_deliveryslip {
@@ -187,7 +190,7 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
 }
 
 #products_table td, #products_table th {
-    padding: 7px;
+    padding: 3px;
 }
 
 #products_table tr:nth-of-type(n + 1) td:nth-of-type(n + 3) {

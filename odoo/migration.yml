@@ -390,6 +390,7 @@ migration:
           - pricelist_discount
           - specific_account
           - specific_sale
+          - specific_report
       operations:
         post:
           - anthem songs.upgrade.10_30_22_update::post

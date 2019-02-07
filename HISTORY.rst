@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 
 **Bugfixes**
 
