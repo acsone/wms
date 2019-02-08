@@ -613,6 +613,7 @@ def create_picking_types(ctx):
          'subcode': 'RECEIVE',
          'color': color_in,
          'sequence': 20,
+         'create_invoice_on_transfer': True,
          },
 
         {'xmlid': '__setup__.stock_picking_type_rangement_medoc',
@@ -778,6 +779,7 @@ def create_picking_types(ctx):
          'groupbypartner': True,
          'color': color_out,
          'sequence': 90,
+         'create_invoice_on_transfer': True,
          },
         {'xmlid': '__setup__.stock_picking_type_return',
          'name': 'Retours fournisseur',

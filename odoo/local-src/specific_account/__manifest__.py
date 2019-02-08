@@ -40,6 +40,7 @@
         'views/res_config.xml',
         'views/res_partner.xml',
         'views/sale_order.xml',
+        'views/stock_picking_type_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

@@ -16,21 +16,17 @@ class StockPicking(models.Model):
         if self.env.context.get('__no_job_create_draft_invoice'):
             return result
 
-        picking_type_out = self.env.ref('stock.picking_type_out')
-        fix_ship_type = self.env.ref(
-            '__setup__.stock_picking_type_fix_ship',
-            raise_if_not_found=False
+        picking_types = self.env['stock.picking.type'].search(
+            [('create_invoice_on_transfer', '=', True)]
         )
-        if fix_ship_type:
-            picking_type_out |= fix_ship_type
-
-        out_picking = self.filtered(
-            lambda picking: picking.picking_type_id in picking_type_out)
-        if not out_picking:
+        create_invoice_pickings = self.filtered(
+            lambda picking: picking.picking_type_id in picking_types
+        )
+        if not create_invoice_pickings:
             return result
-        proc_group_ids = out_picking.mapped('move_lines.group_id').ids
+        proc_groups = create_invoice_pickings.mapped('move_lines.group_id')
         sales = self.env['sale.order'].search([
-            ('procurement_group_id', 'in', proc_group_ids),
+            ('procurement_group_id', 'in', proc_groups.ids),
             ('invoice_status', '=', 'to invoice'),
             ('partner_invoice_id.invoice_grouping', '=', 'by_delivery')])
         if sales:

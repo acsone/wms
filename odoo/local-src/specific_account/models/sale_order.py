@@ -73,7 +73,7 @@ class SaleOrder(models.Model):
         WHERE partner.invoice_grouping = 'by_delivery'
         AND partner.invoice_frequency IN %s
         AND invoice.state = 'draft'
-        AND invoice.type = 'out_invoice'
+        AND invoice.type in ('out_invoice', 'out_refund')
         """
         self.env.cr.execute(query, (tuple(invoice_frequency), ))
         invoice_ids = [x[0] for x in self.env.cr.fetchall()]
