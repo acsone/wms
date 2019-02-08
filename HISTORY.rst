@@ -20,8 +20,11 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* fix the name of moves for promotional products
+* display the order for SHIP moves (in debug mode)
 
 **Bugfixes**
+* ALCYN-1867: fix some reservation problems
 
 **Build**
 
