@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1900: fix lot swapping in PICK in case of a rupture
 
 **Build**
 
