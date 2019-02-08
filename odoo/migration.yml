@@ -371,3 +371,8 @@ migration:
           operations:
             pre:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/update_10_30_20.sql $DB_NAME'"
+    - version: 10.30.21
+      addons:
+        upgrade:
+          ### local
+          - specific_sale

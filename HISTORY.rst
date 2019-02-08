@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1854: Make the delivery method only required when SO is editable
 
 **Build**
 
