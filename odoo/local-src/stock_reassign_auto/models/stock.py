@@ -38,6 +38,7 @@ class StockMove(models.Model):
             # an unassigned inventory loss move
             if move.picking_id.picking_type_subcode == 'LOSS':
                 move.action_cancel()
+                continue
 
             if move.picking_id.operator_id and move.picking_id.printed:
                 # Picking is ongoing, too late to recompute pack op
