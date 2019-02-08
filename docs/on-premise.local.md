@@ -149,3 +149,26 @@ docker stack deploy --with-registry-auth -c /srv/ABL-odoo-production/docker-comp
 ```
 
 Note: make sure you have access to dockerhub, you might need to do a `docker login`
+
+In order to follow the logs during the deployment of a new release you need to search for the service:
+
+```
+camptocamp@LNX001:~$ docker service ls
+ID                  NAME                      MODE                REPLICAS            IMAGE                              PORTS
+3vt3mb90gc32        cups_cups                 replicated          1/1                 cardonaje/cups:latest              *:631->631/tcp, *:631->631/udp
+nzdzf30ce1cw        journalbeat_journalbeat   global              1/1                 nicolaka/journalbeat:latest        
+89k2b8vbovyw        odoo_mailhog              replicated          1/1                 mailhog/mailhog:latest             
+j6a2hkdr0frs        odoo_odoo                 replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b   
+0t0isxmnkar6        odoo_odooqueuejob         replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b   
+46fxjuzjykzz        proftpd_proftpd           replicated          1/1                 cardonaje/proftpd:1.3.5e-1build1   *:23->23/tcp
+nabye48r971m        traefik_traefik           global              1/1                 traefik:v1.7.8
+```
+
+Here we see the 2 containers `odoo_odoo` and `odoo_queuejob`, this is a gamble to get the right ID.
+One of the two will be doing the marabunta steps and the other will be waiting. Thus if you see the message: "A concurrent process is already running the migration" just try to follow the other container.
+
+With the service ID in hand do the following:
+
+```
+docker service logs -f j6a2hkdr0frs
+```
