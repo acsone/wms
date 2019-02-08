@@ -87,7 +87,9 @@ class StockPicking(models.Model):
             # Create move
             picking = self.env['stock.picking'].browse(picking_id)
             move_vals = {
-                'name': product.display_name,
+                'name': u"ADDITIONAL PRODUCT: %s (FROM %s)" % (
+                    additional_product.display_name, product.display_name
+                ),
                 'sequence': 9999,
                 'product_id': additional_product.id,
                 'product_uom_qty': qty_add,
