@@ -20,6 +20,8 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1910: make sure all products needing resupply have a default
+  procurement order (except MTO products)
 
 **Bugfixes**
 
