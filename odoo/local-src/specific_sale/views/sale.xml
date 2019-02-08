@@ -174,7 +174,7 @@
         <field name="arch" type="xml">
 
             <field name="carrier_id" position="attributes">
-              <attribute name="required">1</attribute>
+                <attribute name="attrs">{'required':[('state','in',('draft','sent'))], 'readonly':[('state','not in',('draft','sent'))]}</attribute>
             </field>
 
         </field>
