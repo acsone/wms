@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 * ALCYN-1900: fix lot swapping in PICK in case of a rupture
 * ALCYN-1854: Make the delivery method only required when SO is editable
+* ALCYN-1906: Hide transfer button when picking is done. Display put in pack only for Pick operation
 
 **Build**
 

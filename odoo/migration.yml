@@ -376,3 +376,4 @@ migration:
         upgrade:
           ### local
           - specific_sale
+          - specific_stock
