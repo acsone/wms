@@ -372,12 +372,10 @@ migration:
             pre:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/update_10_30_20.sql $DB_NAME'"
     - version: 10.30.21
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_21_update::post
       addons:
         upgrade:
           ### local
           - stock_delivery_note
-      modes:
-        full:
-          operations:
-            post:
-              - anthem songs.upgrade.10_30_21_update::post
