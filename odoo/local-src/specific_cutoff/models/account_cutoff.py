@@ -52,4 +52,3 @@ class AccountCutoff(models.Model):
                     self._prepare_line(line))
         else:
             return super(AccountCutoff, self).get_lines()
-
