@@ -17,7 +17,7 @@ ADD = 4
 
 @anthem.log
 def post(ctx):
-    """POST 10.30.19"""
+    """clean output location"""
     fix_packages_shipped_because_of_parent_left_bug(ctx)
     correct_quant_on_wrong_move(ctx)
     fix_shipping_not_recorded(ctx)
@@ -57,7 +57,7 @@ def transfer_picking(ctx, picking, date_done=None, change_pick_type=True, force=
         if force:
             if pack.product_id.tracking != 'none':
                 packlot_qty = sum(packlot.qty for packlot in pack.pack_lot_ids)
-                if packlot_qty < pack.ordered_qty:
+                if packlot_qty < pack.product_qty:
                     unknown_lot = ctx.env['stock.production.lot'].search([('product_id', '=', pack.product_id.id),
                                                                           ('name', '=', 'Unknown')])
                     if not unknown_lot:
@@ -65,7 +65,7 @@ def transfer_picking(ctx, picking, date_done=None, change_pick_type=True, force=
                                                                               'name': 'Unknown'})
                     pack.write(
                         {'pack_lot_ids': [
-                            (0, 0, {'qty': pack.ordered_qty - packlot_qty,
+                            (0, 0, {'qty': pack.product_qty - packlot_qty,
                                     'lot_id': unknown_lot.id})
                           ]}
                     )
