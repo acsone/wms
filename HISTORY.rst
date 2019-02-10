@@ -30,6 +30,7 @@ latest (unreleased)
 * ALCYN-1867: fix some reservation problems
 
 **Build**
+* Add a script to clean the output location
 
 **Documentation**
 
