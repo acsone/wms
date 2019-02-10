@@ -708,7 +708,7 @@ def kill_waiting_shipments(ctx):
                 'Cancelled shipment of %s (qty=%s) because '
                 'procurement chain is broken (no picking move found)'
                 'Please manually change the sale order.' %
-                (ship.product_id.display_name, move.product_qty)
+                (ship.product_id.display_name, ship.product_qty)
             )
             ship.picking_type_id = ctx.env.ref('__setup__.stock_picking_type_fix_ship')
             continue
