@@ -399,7 +399,7 @@ def fix_packages_shipped_because_of_parent_left_bug(ctx):
     # When this happens, the stock.move in the package are labelled as "extra
     # moves" and the pack is not listed in teh pack moved by the picking's pack
     # operations
-    EXTRA_MOVE_PREFIX = (u'Extra move', u'Mouvement suppl\xe9mentaire')
+    EXTRA_MOVE_PREFIX = (u'Extra Move', u'Mouvement suppl\xe9mentaire')
     for pack in Pack.browse(ids):
         pack_moves = pack.mapped('quant_ids.history_ids').filtered(
             lambda rec: rec.name.startswith(EXTRA_MOVE_PREFIX)
@@ -446,7 +446,9 @@ def fix_packages_shipped_because_of_parent_left_bug(ctx):
                     move.product_id in pack.mapped('quant_ids.product_id')):
                 if (move.procurement_id
                         and move.procurement_id.product_id != move.product_id):
+                    order_line = move.order_line_id
                     move.procurement_id = False
+                    order_line.qty_delivered = order_line._get_delivered_qty()
                 to_delete.append(move.id)
         ctx.env.cr.execute(
             'DELETE FROM stock_move WHERE id in %s', (tuple(to_delete),)
