@@ -58,7 +58,7 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'zip': '123123',
             'city': 'Paradise',
             'country_id': 44,
-            'eamil': 'test2@test.be',
+            'email': 'test2@test.be',
         })
         self.partner_2_delivery = self.model.create({
             'ref': '1233',
