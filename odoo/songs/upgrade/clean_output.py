@@ -22,6 +22,7 @@ def post(ctx):
     correct_quant_on_wrong_move(ctx)
     fix_shipping_not_recorded(ctx)
     # odoodb_ref2
+    kill_waiting_shipments(ctx)
 
 
 def has_picking_noship_moves(ctx, picking):
@@ -45,7 +46,6 @@ def transfer_picking(ctx, picking, date_done=None, change_pick_type=True, force=
     fix_pick_type = ctx.env.ref(
         '__setup__.stock_picking_type_fix_ship'
     )
-    available_quant_ids = [] if available_quant_ids is None else available_quant_ids
     ctx.log_line(get_picking_stats(picking))
     for pack in picking.pack_operation_ids:
         if pack.product_id:
@@ -58,10 +58,15 @@ def transfer_picking(ctx, picking, date_done=None, change_pick_type=True, force=
             if pack.product_id.tracking != 'none':
                 packlot_qty = sum(packlot.qty for packlot in pack.pack_lot_ids)
                 if packlot_qty < pack.ordered_qty:
+                    unknown_lot = ctx.env['stock.production.lot'].search([('product_id', '=', pack.product_id.id),
+                                                                          ('name', '=', 'Unknown')])
+                    if not unknown_lot:
+                        unknown_lot = ctx.env['stock.production.lot'].create({'product_id': pack.product_id.id,
+                                                                              'name': 'Unknown'})
                     pack.write(
                         {'pack_lot_ids': [
                             (0, 0, {'qty': pack.ordered_qty - packlot_qty,
-                                    'lot_name': 'Unknown'})
+                                    'lot_id': unknown_lot.id})
                           ]}
                     )
     picking.do_transfer()
@@ -667,13 +672,19 @@ def kill_waiting_shipments(ctx):
     pickup_delivery = ctx.env.ref('__setup__.deliver_carrier_by_client')
     long_term_delivery = ctx.env.ref('__setup__.deliver_carrier_long_term')
     ships = ctx.env['stock.move'].search(
-        [('location_id', '=', 16), ('state', '=', 'waiting')]
+        [('location_id', '=', 16), ('state', '=', 'waiting')],
+        order='picking_id'
     )
     to_force = []
     assigned = []
     todo_states = set(['confirmed', 'assigned', 'waiting'])
     dont_touch_quants, available_quants = check_quants_in_output(ctx)
+    nb_ships = len(ships)
+    counter = 0
     for ship in ships:
+        counter += 1
+        if counter % 500 == 0:
+            ctx.log_line('Examining ship move %d/%d' % (counter, nb_ships))
         if ship.reserved_quant_ids:
             print ship.reserved_quant_ids
         ship.action_assign()
@@ -697,7 +708,7 @@ def kill_waiting_shipments(ctx):
                 'Cancelled shipment of %s (qty=%s) because '
                 'procurement chain is broken (no picking move found)'
                 'Please manually change the sale order.' %
-                (move.product_id.display_name, move.product_qty)
+                (ship.product_id.display_name, move.product_qty)
             )
             ship.picking_type_id = ctx.env.ref('__setup__.stock_picking_type_fix_ship')
             continue
@@ -723,19 +734,16 @@ def kill_waiting_shipments(ctx):
     for picking in pickings:
         transfer_picking(ctx, picking, force=True)
         picking.message_post('This delivery was forced pushed. The lot numbers are probably incorrect.')
-    print to_force.mapped('state')
-    print assigned.mapped('state')
     for quant in available_quants:
         # clean output of leftover quants
         if quant.location_id.id == 16:
-            ctx.env['stock.move'].create(
+            move = ctx.env['stock.move'].create(
                 {'location_id': 16,
                  'location_dest_id': 5,  # inventory loss
-                 'name': 'correction inventaire 20190210',
+                 'name': 'correction inventaire 20190210: %s' % quant.product_id.display_name,
                  'product_id': quant.product_id.id,
                  'product_uom': quant.product_id.uom_id.id,
                  'product_uom_qty': quant.qty,
                 })
             quant.reservation_id = move
-            move.action_done
-            print quant, quant.location_id.name
+            move.action_done()

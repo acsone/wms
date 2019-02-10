@@ -20,6 +20,18 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.21 (2019-02-10)
++++++++++++++++++++++
+
+**Features and Improvements**
 * fix the name of moves for promotional products
 * display the order for SHIP moves (in debug mode)
 
@@ -31,8 +43,6 @@ latest (unreleased)
 
 **Build**
 * Add a script to clean the output location
-
-**Documentation**
 
 
 10.30.20 (2019-02-05)
