@@ -444,8 +444,12 @@ def fix_packages_shipped_because_of_parent_left_bug(ctx):
         for move in wrong_shipping.move_lines:
             if (move.name.startswith(EXTRA_MOVE_PREFIX) and
                     move.product_id in pack.mapped('quant_ids.product_id')):
-                if (move.procurement_id
-                        and move.procurement_id.product_id != move.product_id):
+                if ((move.procurement_id
+                        and move.procurement_id.product_id != move.product_id) or
+                        # this one is a special case where the same product was
+                        # ordered twice with the same product and picked
+                        # simultaneously
+                        move.id == 617018):
                     order_line = move.order_line_id
                     move.procurement_id = False
                     order_line.qty_delivered = order_line._get_delivered_qty()
