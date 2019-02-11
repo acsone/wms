@@ -365,3 +365,4 @@ class PurchaseOrderLine(models.Model):
             # cancel)
             self.ensure_one()
             self.procurement_ids.check()
+        return res
