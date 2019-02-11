@@ -55,8 +55,6 @@
                        groups="sale.group_discount_per_so_line"/>
                 <field name="discount3" string="Discount (%)"
                        groups="sale.group_discount_per_so_line"/>
-                <field name="discounting_type" invisible="1" 
-                       groups="sale.group_discount_per_so_line"/>
                 <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
                 <field name="exception"/>
                 <field name="price_total" widget="monetary" groups="sale.group_show_price_total"/>

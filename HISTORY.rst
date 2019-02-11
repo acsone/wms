@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1894: Update the repo OCA sale-workflow - fix the bug to compute the total amount on a sale order if there is a discount
+
 **Bugfixes**
 
 **Build**

@@ -93,7 +93,7 @@
     oca: git@github.com:oca/sale-workflow.git
     camptocamp: git@github.com:camptocamp/sale-workflow.git
   merges:
-    - oca b365fd08c90bc83e3f5f399d616cd0205dd6068e
+    - oca d9b15074dd609bb1ca5719e81ae871d37d85e110
       # potential fix for 90 != 100 bug in tests
     - oca refs/pull/671/head
       # [10] sale_triple_discount: Fix tax total on report

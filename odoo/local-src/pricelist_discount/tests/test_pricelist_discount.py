@@ -17,6 +17,9 @@ class TestPricelistDiscount(SavepointCase):
     def setUpClass(cls):
         super(TestPricelistDiscount, cls).setUpClass()
 
+        cls.env.user.company_id. \
+            tax_calculation_rounding_method = 'round_globally'
+
         cls.tax = cls.env["account.tax"].create({
             'name': 'Unittest tax',
             'price_include': False,
@@ -276,7 +279,7 @@ class TestPricelistDiscount(SavepointCase):
         self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
-        self.assertEqual(348.68, self.sol_p2.price_subtotal)
+        self.assertEqual(348.69, self.sol_p2.price_subtotal)
 
         # Change alcyon discount
         self.sol_p2.discount3 = 3.83

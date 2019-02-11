@@ -381,3 +381,11 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_21_update::post
+    - version: 10.30.22
+      addons:
+        upgrade:
+          ### oca/sale-workflow
+          - sale_triple_discount
+          ### local
+          - pricelist_discount
+          - specific_sale
