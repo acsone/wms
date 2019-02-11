@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1914: Check procurement when qty 0 is purchased
 
 **Bugfixes**
 
