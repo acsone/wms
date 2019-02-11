@@ -27,12 +27,14 @@ latest (unreleased)
   Previously this feature was only active on Delivery Orders.
 
 **Bugfixes**
+
 * ALCYN-1913: Cannot delete multiple delivery rounds at once
 
 **Data**
 
 * ALCYN-1884: generate refunds for Customer Returns grouped by delivery
   which were done in the past
+* ALCYN-1897: recompute invoiced quantity on imported purchase orders from AS400 based on received quantities
 
 **Build**
 
