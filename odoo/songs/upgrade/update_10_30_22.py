@@ -9,6 +9,8 @@ MIGR_LBL = '[MIGRATION]'
 
 
 def is_migration(invoice):
+    if not invoice.name:
+        return False
     return MIGR_LBL in invoice.name
 
 
