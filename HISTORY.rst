@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1912: Automatically cancel procurement from OP on purchase line deletion
 
 **Bugfixes**
 
