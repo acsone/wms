@@ -22,9 +22,17 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-1894: Update the repo OCA sale-workflow - fix the bug to compute the total amount on a sale order if there is a discount
+* ALCYN-1884: add a flag "Create Invoice On Transfer" on picking types.
+  This flag is active on Delivery Orders and Customer Returns (for refund).
+  Previously this feature was only active on Delivery Orders.
 
 **Bugfixes**
 * ALCYN-1913: Cannot delete multiple delivery rounds at once
+
+**Data**
+
+* ALCYN-1884: generate refunds for Customer Returns grouped by delivery
+  which were done in the past
 
 **Build**
 

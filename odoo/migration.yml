@@ -388,4 +388,8 @@ migration:
           - sale_triple_discount
           ### local
           - pricelist_discount
+          - specific_account
           - specific_sale
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_22_update::post
