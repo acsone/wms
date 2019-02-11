@@ -8,7 +8,7 @@
     'author': "BCIM",
     'category': 'Stock Management',
     'depends': [
-        'stock',
+        'purchase',
         ],
     'installable': True,
     'auto_install': False,
