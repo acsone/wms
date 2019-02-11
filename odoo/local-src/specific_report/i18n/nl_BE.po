@@ -182,6 +182,11 @@ msgstr "<span>Te betalen</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>refund</span>"
+msgstr "<span>Af the<br/>trekken</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>tax</span>"
 msgstr "<span>BTW<br/>Totaal</span>"
 
@@ -727,7 +732,7 @@ msgstr "Referentie te vermelden bij betaling"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Crediet"
+msgstr "Crediet nota"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body

@@ -187,8 +187,12 @@
                             <span>Total<br/>tax</span>
                             <span t-field="invoice.amount_only_tax"/>
                         </td>
-                        <td>
+                        <td t-if="invoice.type != 'out_refund'">
                             <span>Total<br/>amount</span>
+                            <strong t-field="invoice.amount_total"/>
+                        </td>
+                        <td t-if="invoice.type == 'out_refund'">
+                            <span>Total<br/>refund</span>
                             <strong t-field="invoice.amount_total"/>
                         </td>
                     </tr>

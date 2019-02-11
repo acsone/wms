@@ -369,6 +369,11 @@ msgstr "<span>Montant<br/>total</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>refund</span>"
+msgstr "<span>Montant<br/>total</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>tax</span>"
 msgstr "<span>Total<br/>TVA</span>"
 
