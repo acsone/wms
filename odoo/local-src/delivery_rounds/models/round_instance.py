@@ -584,7 +584,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     def unlink(self):
-        if self.mapped('state') != ['draft']:
+        if set(self.mapped('state')) != set(['draft']):
             raise UserError(_(
                 'You cannot delete a delivery round that has been started'))
         pickings = self.mapped('picking_ids')
