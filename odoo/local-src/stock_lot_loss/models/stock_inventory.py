@@ -20,7 +20,8 @@ class StockInventoryLine(models.Model):
                 ('lot_id', '=', line.prod_lot_id.id),
                 ('package_id', '=', line.package_id.id),
                 ('location_id', '=', line.location_id.id),
-                ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+                ('reservation_id.picking_id.picking_type_id', '=',
+                    loss_picking_type.id),
                 ])
             quants.mapped('reservation_id').action_cancel()
         return super(StockInventoryLine, self)._generate_moves()

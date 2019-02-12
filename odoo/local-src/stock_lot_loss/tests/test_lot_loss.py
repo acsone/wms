@@ -144,7 +144,8 @@ class TestLotLoss(SavepointCase):
             ('product_id', '=', self.product_1.id),
             ('lot_id', '=', self.product_1_lotB.id),
             ('location_id', '=', self.location.id),
-            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ('reservation_id.picking_id.picking_type_id', '=',
+                loss_picking_type.id),
             ]).mapped('reservation_id')
         self.assertEqual(block_move.ids, [])
         block_move = self.env['stock.quant'].search([
@@ -152,7 +153,8 @@ class TestLotLoss(SavepointCase):
             ('product_id', '=', self.product_1.id),
             ('lot_id', '=', self.product_1_lotA.id),
             ('location_id', '=', self.location.id),
-            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ('reservation_id.picking_id.picking_type_id', '=',
+                loss_picking_type.id),
             ]).mapped('reservation_id')
         self.assertEqual(block_move.state, 'assigned')
         self.assertEqual(block_move.product_qty, 2)
@@ -223,7 +225,8 @@ class TestLotLoss(SavepointCase):
             ('product_id', '=', self.product_1.id),
             ('lot_id', '=', self.product_1_lotA.id),
             ('location_id', '=', self.location.id),
-            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ('reservation_id.picking_id.picking_type_id', '=',
+                loss_picking_type.id),
             ]).mapped('reservation_id')
         self.assertEqual(block_move.ids, [])
         block_move = self.env['stock.quant'].search([
@@ -231,7 +234,8 @@ class TestLotLoss(SavepointCase):
             ('product_id', '=', self.product_1.id),
             ('lot_id', '=', self.product_1_lotB.id),
             ('location_id', '=', self.location.id),
-            ('reservation_id.picking_id.picking_type_id', '=', loss_picking_type.id),
+            ('reservation_id.picking_id.picking_type_id', '=',
+                loss_picking_type.id),
             ]).mapped('reservation_id')
         self.assertEqual(block_move.state, 'assigned')
         self.assertEqual(block_move.product_qty, 4)
