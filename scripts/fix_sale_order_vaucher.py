@@ -102,7 +102,7 @@ def get_sale_order_to_correct(config=False):
                 write_log(order.id,
                           order.name,
                           line.id,
-                          line.name,
+                          line.product_id.default_code,
                           False,
                           False,
                           'Free product line skipped')
@@ -110,10 +110,10 @@ def get_sale_order_to_correct(config=False):
                 write_log(order.id,
                           order.name,
                           line.id,
-                          line.name,
+                          line.product_id.default_code,
                           False,
                           False,
-                          'Qty delivered != Qty ordered %s' (
+                          'Qty delivered != Qty ordered %s' % (
                               line.product_uom_qty - line.qty_delivered))
             # In order to force the onchange
             result = line.onchange(
@@ -190,7 +190,7 @@ def get_sale_order_to_correct(config=False):
                 write_log(order.id,
                           order.name,
                           line.id,
-                          line.name,
+                          line.product_id.default_code,
                           True,
                           new_refund_id,
                           'Done refund for %s' % abs(line.price_total -
@@ -200,7 +200,8 @@ def get_sale_order_to_correct(config=False):
                 write_log(order.id,
                           order.name,
                           line.id,
-                          line.name,
+                          line.product_id.default_code,
+                          False,
                           False,
                           'Everything is fine')
 
