@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
 
 **Bugfixes**
 
