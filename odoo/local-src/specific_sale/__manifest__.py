@@ -24,6 +24,7 @@
         'sale_cancel_remaining',
         'specific_purchase',
         'stock_picking_backorder',
+        'stock_picking_assignment',
         'stock_product_bin',
     ],
     'website': 'http://www.camptocamp.com',
