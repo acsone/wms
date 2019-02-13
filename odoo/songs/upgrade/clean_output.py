@@ -753,3 +753,38 @@ def kill_waiting_shipments(ctx):
                 })
             quant.reservation_id = move
             move.action_done()
+
+@anthem.log
+def restore_quants_in_fix_sortie(ctx):
+    """Move back the required quants from Fix Sortie 20181220"""
+    output_loc = ctx.env['stock.location'].browse(16)
+    fix_output_20191220 = ctx.env['stock.location'].browse(14327)
+    assert fix_output_20191220.name == 'Fix Sortie 20181220'
+    quants = ctx.env['stock.quant'].search(
+        [('location_id', '=', fix_output_20191220.id),
+         ('qty', '>', 0)]
+    )
+    ship_ids = []
+    for q in quants:
+        pick = q.history_ids.filtered(
+            lambda r: r.location_dest_id == output_loc).sorted('date')
+        if pick:
+            pick = pick[-1]
+        ship = find_ship_move(pick)
+        order = ship.order_id
+        if ship.state not in ('done', 'cancel'):
+            q.write({'location_id': output_loc.id,
+                     'reservation_id': ship.id,
+                     })
+            ship_ids.append(ship.id)
+    moves = ctx.env['stock.move'].browse(ship_ids)
+    with ctx.log('assigning %d moves' % len(moves)):
+        # question: is it required? or must it be avoided?
+        ctx.env['stock.move'].browse(ship_ids).action_assign()
+        move.picking_id.pick.message_post(
+            '<p>Restored the picked quants for %s that had been '
+            'stored away in december 2018, and flagged the '
+            'move as available<p>''' % (move.product_id.display_name,))
+
+    for pick in moves.mapped('picking_id').sorted('id'):
+        ctx.log_line('%s: %s' % (pick.name, pick.state))

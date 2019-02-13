@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* move back quants from "Fix Sortie 20181220" that should be shipped
 
 **Build**
 
