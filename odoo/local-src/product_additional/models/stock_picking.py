@@ -100,6 +100,7 @@ class StockPicking(models.Model):
                 'picking_id': picking.id,
                 'picking_type_id': picking.picking_type_id.id,
                 'origin': picking.name,
+                'partner_id': picking.partner_id.id,
                 'group_id': picking.group_id.id,
             }
             move_add = self.env['stock.move'].create(move_vals)
