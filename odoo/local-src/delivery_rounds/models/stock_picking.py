@@ -97,10 +97,17 @@ class StockPicking(models.Model):
             pickings = self.filtered(
                 lambda p: not p.delivery_round_customer_id and p in in_round
             )
-            _logger.debug("Delivery round customer unset on pickings %s",
-                          pickings.ids)
-            pickings.do_unreserve()
+            pickings._unassign_delivery_round()
         return res
+
+    def _unassign_delivery_round(self):
+        if any(self.mapped('printed')):
+            raise UserError(_(
+                'You cannot unassign a delivery round from a started picking'))
+        _logger.debug(
+            "Delivery round customer unset on pickings %s",
+            self.ids)
+        self.do_unreserve()
 
     @api.multi
     @api.constrains('delivery_round_customer_id')

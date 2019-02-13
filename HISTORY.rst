@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1926: Fix processing of delivery round deletion.
 
 **Build**
 
