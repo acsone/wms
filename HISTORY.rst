@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* BIZ-2869: Prevent canceling a sale order already prepared
 
 **Build**
 
