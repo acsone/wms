@@ -8,9 +8,12 @@ from odoo import fields, models, _
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    additional_move_src_ids = fields.One2many(
-        'stock.pack.operation', 'additional_move_id',
-        'Additional Move Source')
+    # Use a boolean instead of reverse relation of
+    # 'stock.pack.operation' 'additional_move_id' because some pack operations
+    # are deleted when the picking is transfered through do_new_transfer() and
+    # this prevent to find the additional moves to not forward to backorder
+    is_additional_move = fields.Boolean(
+        'Is Additional Move')
 
     def do_unreserve(self):
         # picking do_unreserve first unlink pack operations and then calls
@@ -32,7 +35,7 @@ class StockMove(models.Model):
     def assign_picking(self):
         # Prevent any backorder of additional moves
         if self.env.context.get('backorder_assign'):
-            additional_moves = self.filtered('additional_move_src_ids')
+            additional_moves = self.filtered('is_additional_move')
             if additional_moves:
                 additional_moves.with_context(
                     no_recompute_pack=True, force_cancel=True).action_cancel()
@@ -46,3 +49,15 @@ class StockMove(models.Model):
                 return super(StockMove, other_moves).assign_picking()
             return True
         return super(StockMove, self).assign_picking()
+
+    def split(self, qty, restrict_lot_id=False, restrict_partner_id=False):
+        # Prevent any partial backorder of additional moves
+        new_move_id = super(StockMove, self).split(
+            qty, restrict_lot_id=restrict_lot_id,
+            restrict_partner_id=restrict_partner_id)
+        if self.is_additional_move and new_move_id:
+            new_move = self.browse(new_move_id)
+            new_move.with_context(
+                no_recompute_pack=True, force_cancel=True).action_cancel()
+            return False
+        return new_move_id

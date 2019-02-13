@@ -20,6 +20,11 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1928: Manage backorders of additional products (accessories). Support
+  use cases where the computed quantity of additional product to pick is not
+  processed or partially processed. Do not propagate to backorder. The quantity
+  in the backorder will be recomputed based on the main base product quantity
+  to pick.
 
 **Bugfixes**
 

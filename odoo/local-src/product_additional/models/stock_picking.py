@@ -102,6 +102,7 @@ class StockPicking(models.Model):
                 'origin': picking.name,
                 'partner_id': picking.partner_id.id,
                 'group_id': picking.group_id.id,
+                'is_additional_move': True,
             }
             move_add = self.env['stock.move'].create(move_vals)
             _logger.debug(
