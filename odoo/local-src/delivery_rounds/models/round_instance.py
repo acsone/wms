@@ -592,7 +592,8 @@ class RoundInstance(models.Model):
                 'You cannot delete a delivery round having a started picking'))
         if any(self.mapped('shipping_ids.printed')):
             raise UserError(_(
-                'You cannot delete a delivery round having a started shipping'))
+                'You cannot delete a delivery round having a started shipping'
+                ))
         pickings = self.mapped('picking_ids')
         res = super(RoundInstance, self).unlink()
         pickings._unassign_delivery_round()
