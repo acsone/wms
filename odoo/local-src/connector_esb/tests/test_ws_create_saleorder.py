@@ -9,7 +9,6 @@ from odoo import fields
 from odoo.tests.common import SavepointCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
-from werkzeug.exceptions import BadRequest
 
 
 class WSCreateSaleOrderTestCase(SavepointCase):
@@ -134,8 +133,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # Confirmtation/order date are the time of creation in Odoo by the ws
         self.assertTrue(starting_date <= order.confirmation_date <=
                         fields.Datetime.now())
-        self.assertTrue(starting_date <= order.date_order <=
-                        fields.Datetime.now())
+        self.assertTrue(order.date_order == '2017-09-18 12:00:00')
 
     def test_create_saleorder_multiple_ref(self):
         self.partner_shipping.ref = self.partner.ref
@@ -159,44 +157,6 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         order = self.env['sale.order']._ws_create_new(data)
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
-
-    def test_request_data(self):
-        """ Check for well formed data and some compulsory fields """
-        data = deepcopy(self.request_data)
-        data.pop('params')
-        with self.assertRaises(BadRequest):
-            self.controller._validate_request(data)
-
-    def test_required_fields_1(self):
-        data = deepcopy(self.request_data)
-        data['params']['data'].pop('increment_id')
-        with self.assertRaises(BadRequest):
-            self.controller._validate_create_sale_order(data)
-
-    def test_required_fields_2(self):
-        data = deepcopy(self.request_data)
-        data['params']['data'].pop('customer_id')
-        with self.assertRaises(BadRequest):
-            self.controller._validate_create_sale_order(data)
-
-    def test_required_fields_3(self):
-        data = deepcopy(self.request_data)
-        data['params']['data'].pop('date')
-        with self.assertRaises(BadRequest):
-            self.controller._validate_create_sale_order(data)
-
-    def test_required_fields_4(self):
-        data = deepcopy(self.request_data)
-        data['params']['data'].pop('lines')
-        with self.assertRaises(BadRequest):
-            self.controller._validate_create_sale_order(data)
-
-    def test_required_fields_5(self):
-        """Check lines is a list"""
-        data = deepcopy(self.request_data)
-        data['params']['data']['lines'] = data['params']['data']['lines'][0]
-        with self.assertRaises(BadRequest):
-            self.controller._validate_create_sale_order(data)
 
     def test_integrity_error(self):
         data = deepcopy(self.order_data)
@@ -268,8 +228,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # Confirmtation/order date are the time of creation in Odoo by the ws
         self.assertTrue(starting_date <= order.confirmation_date <=
                         fields.Datetime.now())
-        self.assertTrue(starting_date <= order.date_order <=
-                        fields.Datetime.now())
+        self.assertTrue(order.date_order == '2017-09-18 12:00:00')
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
 

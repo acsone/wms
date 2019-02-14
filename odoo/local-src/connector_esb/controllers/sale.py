@@ -8,6 +8,7 @@ Respond to calls from the ESB.
 
 """
 
+from datetime import datetime
 import logging
 import werkzeug
 
@@ -44,6 +45,17 @@ class SaleController(http.Controller):
         if 'lines' in values and not isinstance(values['lines'], list):
             text = _("Field 'lines' must be a <type 'list'> got %s.")
             errors.append(text % type(values['lines']))
+        if errors:
+            raise werkzeug.exceptions.BadRequest('\n'.join(errors))
+        # Check sale date correctness
+        sale_date = values['date']
+        try:
+            if ' ' in sale_date:
+                datetime.strptime(sale_date, '%Y-%m-%d %H:%M:%S')
+            else:
+                datetime.strptime(sale_date, '%Y-%m-%d')
+        except ValueError:
+            errors.append('Invalid sale date %s' % sale_date)
         if errors:
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 

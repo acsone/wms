@@ -13,6 +13,7 @@
         'delivery_rounds',
         'onchange_helper',
         'pricelist_discount',
+        'procurement_sale',
         'product',
         'product',
         'product_expiry',

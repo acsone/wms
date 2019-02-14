@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1930: Fix order_date on sale order created by the web service (ESB)
+
 **Build**
 
 **Documentation**
@@ -63,6 +65,10 @@ latest (unreleased)
 * ALCYN-1933: some delivery slips / CSV delivery notes would not get the lot
   numbers for all lines
 * move back quants from "Fix Sortie 20181220" that should be shipped
+
+**Build**
+
+**Documentation**
 
 
 10.30.22 (2019-02-11)

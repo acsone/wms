@@ -1,3 +1,4 @@
+from . import test_controller_sale
 from . import test_export_buyx_gety
 from . import test_export_customer
 from . import test_export_customer_address

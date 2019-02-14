@@ -404,6 +404,7 @@ migration:
       addons:
         upgrade:
           ### local
+          - connector_esb
           - product_additional
           - purchase_unlink_cancelop
           - sale_cancel_remaining
@@ -420,3 +421,8 @@ migration:
             post:
               - anthem songs.upgrade.clean_output::restore_quants_in_fix_sortie
               - anthem songs.upgrade.10_30_23_update::record_returned_qty
+    - version: 10.30.24
+      addons:
+        upgrade:
+          ### local
+          - connector_esb

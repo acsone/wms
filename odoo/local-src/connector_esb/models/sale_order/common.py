@@ -129,9 +129,10 @@ class SaleOrder(models.Model):
                 'sales_team.salesteam_website_sales').id
         order_data['esb_ref'] = data['increment_id']
         order_data['partner_id'] = partner.id
-        # We do not use the date coming from the web service because
-        # it does not have a time part
-        order_data['date_order'] = fields.datetime.now()
+        if ' ' in data['date']:
+            order_data['date_order'] = data['date']
+        else:
+            order_data['date_order'] = data['date'] + ' 12:00:00'
         order_data['client_order_ref'] = data['order_ref']
         order_data['state'] = 'draft'
         if 'num_suite' in data:
