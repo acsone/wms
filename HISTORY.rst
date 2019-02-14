@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1933: some delivery slips / CSV delivery notes would not get the lot
+  numbers for all lines
+
 **Build**
 
 **Documentation**

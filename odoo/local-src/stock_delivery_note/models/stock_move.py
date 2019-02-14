@@ -24,8 +24,7 @@ class StockMove(models.Model):
         :return: Return a list of tuple
         """
         qty_by_lot = {}
-
-        quants = self.linked_move_operation_ids.mapped('reserved_quant_id')
+        quants = self.quant_ids
         for quant in quants:
             if not quant.lot_id:
                 if only_with_lot:
