@@ -448,6 +448,9 @@ migration:
           ### local
           - specific_product
           - specific_report
+          - stock_valuation
       operations:
+        pre:
+          - anthem songs.upgrade.update_10_30_25::map_vlb_xmlid
         post:
           - anthem songs.upgrade.update_10_30_25::post

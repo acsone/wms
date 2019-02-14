@@ -4,6 +4,20 @@
 
 
 import anthem
+from anthem.lyrics.records import add_xmlid
+
+
+@anthem.log
+def map_vlb_xmlid(ctx):
+    vlb = ctx.env['stock.location'].search(
+        [('name', '=', 'VLB')]
+    )
+    if vlb:
+        add_xmlid(
+            ctx,
+            vlb,
+            'specific_base.stock_location_vlb'
+        )
 
 
 @anthem.log

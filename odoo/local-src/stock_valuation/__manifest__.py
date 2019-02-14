@@ -10,6 +10,7 @@
     'depends': [
         'stock_account',
         'specific_purchase',  # for product supplier
+        'specific_base',
         ],
     'data': [
         'wizards/stock_valuation_history_view.xml',

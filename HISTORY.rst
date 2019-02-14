@@ -82,6 +82,10 @@ latest (unreleased)
   in the backorder will be recomputed based on the main base product quantity
   to pick.
 * ALCYN-1936: Allow inventory user to post inventory without requiring write rights on product
+* ALCYN-1903: compute stock history valuation based on VLB locations
+* ALCYN-1903: store stock history as materialized view, allowing to
+  improve browsing performance thanks to indices and the fact that
+  data is stored
 
 **Bugfixes**
 

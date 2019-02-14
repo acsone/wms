@@ -57,6 +57,19 @@ class StockHistoryMaterialized(models.AbstractModel):
         )
         self.env.cr.execute("""
             CREATE MATERIALIZED VIEW %s AS (
+              WITH internal AS (
+                SELECT parent_left, parent_right
+                FROM stock_location
+                WHERE id = (SELECT res_id
+                            FROM ir_model_data
+                            WHERE module = 'specific_base'
+                            AND name = 'stock_location_vlb')
+              ),
+              -- we want to valorize the goods in the output too
+              output AS (
+                SELECT res_id as id FROM ir_model_data
+                WHERE module = 'stock' AND name = 'stock_location_output'
+              )
               SELECT MIN(id) as id,
                 move_id,
                 location_id,
@@ -64,6 +77,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                 product_id,
                 product_categ_id,
                 product_template_id,
+                product_supplier_id,
                 SUM(quantity) as quantity,
                 date,
                 COALESCE(SUM(price_unit_on_quant * quantity) / NULLIF(SUM(quantity), 0), 0) as price_unit_on_quant,
@@ -77,6 +91,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                     dest_location.company_id AS company_id,
                     stock_move.product_id AS product_id,
                     product_template.id AS product_template_id,
+                    product_template.supplier_id AS product_supplier_id,
                     product_template.categ_id AS product_categ_id,
                     quant.qty AS quantity,
                     stock_move.date AS date,
@@ -99,11 +114,17 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_product ON product_product.id = stock_move.product_id
                 JOIN
                     product_template ON product_template.id = product_product.product_tmpl_id
-                WHERE quant.qty>0 AND stock_move.state = 'done' AND dest_location.usage in ('internal', 'transit')
+                WHERE quant.qty>0 AND stock_move.state = 'done'
+                    AND (dest_location.id = (SELECT id FROM output) OR
+                         dest_location.parent_left >= (SELECT parent_left FROM internal) AND
+                         dest_location.parent_right <= (SELECT parent_right FROM internal)
+                         )
                 AND (
                     not (source_location.company_id is null and dest_location.company_id is null) or
                     source_location.company_id != dest_location.company_id or
-                    source_location.usage not in ('internal', 'transit'))
+                    (source_location.id != (SELECT id FROM output) AND
+                     (source_location.parent_left < (SELECT parent_left FROM internal) OR
+                      source_location.parent_right > (SELECT parent_right FROM internal))))
                 ) UNION ALL
                 (SELECT
                     (-1) * stock_move.id AS id,
@@ -113,6 +134,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                     stock_move.product_id AS product_id,
                     product_template.id AS product_template_id,
                     product_template.categ_id AS product_categ_id,
+                    product_template.supplier_id AS product_supplier_id,
                     - quant.qty AS quantity,
                     stock_move.date AS date,
                     quant.cost as price_unit_on_quant,
@@ -134,14 +156,22 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_product ON product_product.id = stock_move.product_id
                 JOIN
                     product_template ON product_template.id = product_product.product_tmpl_id
-                WHERE quant.qty>0 AND stock_move.state = 'done' AND source_location.usage in ('internal', 'transit')
+                WHERE quant.qty>0 AND stock_move.state = 'done'
+                AND (source_location.id = (SELECT id FROM output) OR
+                     source_location.parent_left >= (SELECT parent_left FROM internal) AND
+                     source_location.parent_right <= (SELECT parent_right FROM internal)
+                     )
                 AND (
                     not (dest_location.company_id is null and source_location.company_id is null) or
                     dest_location.company_id != source_location.company_id or
-                    dest_location.usage not in ('internal', 'transit'))
+                    (dest_location.id != (SELECT id FROM output) AND
+                     (dest_location.parent_left < (SELECT parent_left FROM internal) OR
+                     dest_location.parent_right > (SELECT parent_right FROM internal))))
                 ))
                 AS foo
-                GROUP BY move_id, location_id, company_id, product_id, product_categ_id, date, source, product_template_id
+                GROUP BY move_id, location_id, company_id, product_id,
+                         product_categ_id, product_supplier_id, date,
+                         source, product_template_id
             ) WITH NO DATA;""" % (self._table,))  # noqa
         self.env.cr.execute(
             "CREATE UNIQUE INDEX pk_%s ON %s (id)" % (self._table, self._table)
