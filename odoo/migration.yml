@@ -390,7 +390,6 @@ migration:
           - pricelist_discount
           - specific_account
           - specific_sale
-          - specific_report
       operations:
         post:
           - anthem songs.upgrade.10_30_22_update::post
@@ -401,3 +400,11 @@ migration:
               - "sh -c 'PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -f odoo/songs/upgrade/update_10_30_22.sql $DB_NAME'"
             post:
               - anthem songs.upgrade.update_10_30_22::post_full
+    - version: 10.30.23
+      addons:
+        upgrade:
+          ### local
+          - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_23_update::post

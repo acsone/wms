@@ -36,15 +36,6 @@ def generate_missed_draft_invoices_on_returns(ctx):
 
 
 @anthem.log
-def reload_translation(ctx):
-    """ update translation """
-    ctx.env['ir.module.module'].with_context(overwrite=True).search(
-        [('name', '=', 'specific_report')]
-    ).update_translations()
-
-
-@anthem.log
 def post(ctx):
     configure_stock_picking_type(ctx)
     generate_missed_draft_invoices_on_returns(ctx)
-    reload_translation(ctx)
