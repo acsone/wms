@@ -37,6 +37,11 @@ latest (unreleased)
 
 * ALCYN-1926: Fix processing of delivery round deletion.
 * BIZ-2869: Prevent canceling a sale order already prepared
+* ALCYN-1856: Two new columns available in debug mode:
+
+    - the picking zone of the product is displayed on sale order lines
+    - the procurement group is displayed on the delivery order lines in favor
+      of the SO reference
 
 **Bugfixes**
 
