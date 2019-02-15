@@ -39,6 +39,8 @@ latest (unreleased)
 **Bugfixes**
 * move back quants from "Fix Sortie 20181220" that should be shipped
 
+* ALCYN-1932: add a field on SO lines to record returned qty
+
 **Build**
 
 **Documentation**

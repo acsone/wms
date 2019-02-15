@@ -406,8 +406,9 @@ migration:
           ### local
           - product_additional
           - purchase_unlink_cancelop
-          - specific_sale
+          - sale_cancel_remaining
           - specific_report
+          - specific_sale
       operations:
         post:
           - anthem songs.upgrade.10_30_23_update::post
@@ -416,3 +417,4 @@ migration:
           operations:
             post:
               - anthem songs.upgrade.clean_output::restore_quants_in_fix_sortie
+              - anthem songs.upgrade.10_30_23_update::record_returned_qty
