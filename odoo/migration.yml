@@ -411,3 +411,8 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.10_30_23_update::post
+      modes:
+        full:
+          operations:
+            post:
+              - anthem songs.upgrade.clean_output::restore_quants_in_fix_sortie

@@ -36,6 +36,9 @@ latest (unreleased)
 * ALCYN-1926: Fix processing of delivery round deletion.
 * BIZ-2869: Prevent canceling a sale order already prepared
 
+**Bugfixes**
+* move back quants from "Fix Sortie 20181220" that should be shipped
+
 **Build**
 
 **Documentation**
