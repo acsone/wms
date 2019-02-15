@@ -71,6 +71,33 @@ class ProcurementOrder(models.Model):
             self, use_new_cursor=False, company_id=False):
         """ Run the procurement and recompute promotions if not disabled """
 
+        # if we are running from the resupply wizard, first make sure all
+        # products with a negative stock have a procurement order
+        warehouses = self.env['stock.warehouse'].search(
+            [('company_id', '=', company_id or 1)]
+        )
+        route_mto = self.env.ref('stock.route_warehouse0_mto')
+        for wh in warehouses:
+            Product = self.env['product.product'].with_context(
+                warehouse=wh.id
+            )
+            for product in Product.search(
+                    [('orderpoint_ids', '=', False),
+                     ('type', '=', 'product'),
+                     ('virtual_available', '<', 0),
+                     ('route_ids', 'not in', [route_mto.id]),
+                     ]):
+                self.env['stock.warehouse.orderpoint'].create(
+                    {'warehouse_id': wh.id,
+                     'product_id': product.id,
+                     'company_id': wh.company_id.id,
+                     'product_min_qty': 0,
+                     'product_max_qty': 0,
+                     'location_id': wh.view_location_id.id,
+                     'product_uom': product.uom_id.id
+                     }
+                )
+
         _logger.info('Run the procurement')
         result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor, company_id=company_id)
