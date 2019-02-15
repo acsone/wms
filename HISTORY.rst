@@ -26,6 +26,11 @@ latest (unreleased)
   procurement order (except MTO products)
 * ALCYN-1912: Automatically cancel procurement from OP on purchase line deletion
 * ALCYN-1914: Check procurement when qty 0 is purchased
+* ALCYN-1928: Manage backorders of additional products (accessories). Support
+  use cases where the computed quantity of additional product to pick is not
+  processed or partially processed. Do not propagate to backorder. The quantity
+  in the backorder will be recomputed based on the main base product quantity
+  to pick.
 
 **Bugfixes**
 * ALCYN-1926: Fix processing of delivery round deletion.

@@ -404,6 +404,7 @@ migration:
       addons:
         upgrade:
           ### local
+          - product_additional
           - purchase_unlink_cancelop
           - specific_sale
           - specific_report
