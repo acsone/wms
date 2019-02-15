@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 * ALCYN-1910: make sure all products needing resupply have a default
   procurement order (except MTO products)
+* ALCYN-1912: Automatically cancel procurement from OP on purchase line deletion
 
 **Bugfixes**
 
