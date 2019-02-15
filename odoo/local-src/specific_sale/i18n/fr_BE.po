@@ -576,3 +576,8 @@ msgstr "Web"
 msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:129
+#, python-format
+msgid "You cannot cancel sale order %s, it's already prepared"
+msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"

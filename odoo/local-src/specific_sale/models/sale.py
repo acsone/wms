@@ -5,7 +5,7 @@
 import odoo.addons.decimal_precision as dp
 
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class Sale(models.Model):
@@ -119,6 +119,16 @@ class Sale(models.Model):
         except ValidationError:
             # If a sale exception is found it will be displayed on the UI
             pass
+
+    @api.multi
+    def action_cancel(self):
+        for sale_order in self:
+            if sale_order.picking_ids.filtered(
+                    lambda picking: picking.printed):
+                raise UserError(
+                    _(u"You cannot cancel sale order %s, it's already "
+                      u"prepared") % sale_order.name)
+        return super(Sale, self).action_cancel()
 
 
 class SaleOrderLine(models.Model):

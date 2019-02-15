@@ -404,8 +404,9 @@ migration:
       addons:
         upgrade:
           ### local
-          - specific_report
           - purchase_unlink_cancelop
+          - specific_sale
+          - specific_report
       operations:
         post:
           - anthem songs.upgrade.10_30_23_update::post

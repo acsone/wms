@@ -29,6 +29,7 @@ latest (unreleased)
 
 **Bugfixes**
 * ALCYN-1926: Fix processing of delivery round deletion.
+* BIZ-2869: Prevent canceling a sale order already prepared
 
 **Build**
 
