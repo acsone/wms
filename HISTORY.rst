@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+
 * ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
 * ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 * ALCYN-1910: make sure all products needing resupply have a default
@@ -33,14 +34,14 @@ latest (unreleased)
   to pick.
 
 **Bugfixes**
+
 * ALCYN-1926: Fix processing of delivery round deletion.
 * BIZ-2869: Prevent canceling a sale order already prepared
 
 **Bugfixes**
+
 * move back quants from "Fix Sortie 20181220" that should be shipped
-
 * ALCYN-1932: add a field on SO lines to record returned qty
-
 * ALCYN-1933: some delivery slips / CSV delivery notes would not get the lot
   numbers for all lines
 
