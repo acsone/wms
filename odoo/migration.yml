@@ -443,6 +443,8 @@ migration:
           operations:
             pre:
               - "sh -c 'psql -f odoo/songs/upgrade/update_10_30_25.sql'"
+            post:
+              - anthem songs.upgrade.update_10_30_25::correct_stock_operation_locations
       addons:
         upgrade:
           ### local

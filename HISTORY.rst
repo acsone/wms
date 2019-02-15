@@ -23,6 +23,14 @@ latest (unreleased)
 * ALCYN-1945: Delivery notes improvement (returns + newpharma CNK)
 * ALCYN-1896: Change sorting of products in sales / products and when in
   sale_order_line product selection
+* ALCYN-1903: compute stock history valuation based on VLB locations
+* ALCYN-1903: store stock history as materialized view, allowing to
+  improve browsing performance thanks to indices and the fact that
+  data is stored
+
+**Data**
+
+* ALCYN-1903: fix moves which have had their source or destination location moved out of the stock
 
 **Bugfixes**
 * ALCYN-1946: Products labels do not print when the file send to the printer is
@@ -82,10 +90,6 @@ latest (unreleased)
   in the backorder will be recomputed based on the main base product quantity
   to pick.
 * ALCYN-1936: Allow inventory user to post inventory without requiring write rights on product
-* ALCYN-1903: compute stock history valuation based on VLB locations
-* ALCYN-1903: store stock history as materialized view, allowing to
-  improve browsing performance thanks to indices and the fact that
-  data is stored
 
 **Bugfixes**
 
