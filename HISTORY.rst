@@ -41,6 +41,9 @@ latest (unreleased)
 
 * ALCYN-1932: add a field on SO lines to record returned qty
 
+* ALCYN-1933: some delivery slips / CSV delivery notes would not get the lot
+  numbers for all lines
+
 **Build**
 
 **Documentation**
