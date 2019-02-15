@@ -356,3 +356,13 @@ class PurchaseOrderLine(models.Model):
         date_planned_str = self.get_next_scheduled_date(seller, date_order_str)
 
         return fields.Datetime.from_string(date_planned_str)
+
+    def _prepare_stock_moves(self, picking):
+        res = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
+        if not res:
+            # If no stock move is created, then the procurement will never be
+            # checked (this is done when the move state changes to done or
+            # cancel)
+            self.ensure_one()
+            self.procurement_ids.check()
+        return res

@@ -25,6 +25,7 @@ latest (unreleased)
 * ALCYN-1910: make sure all products needing resupply have a default
   procurement order (except MTO products)
 * ALCYN-1912: Automatically cancel procurement from OP on purchase line deletion
+* ALCYN-1914: Check procurement when qty 0 is purchased
 
 **Bugfixes**
 
