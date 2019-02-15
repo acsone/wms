@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-1914: Check procurement when qty 0 is purchased
 
 **Bugfixes**
+* ALCYN-1926: Fix processing of delivery round deletion.
 
 **Build**
 
