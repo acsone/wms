@@ -138,15 +138,3 @@ class StockPicking(models.Model):
                     })
             self.write({'is_put_in_pack_done': True})
         return result
-
-
-class StockReturnPicking(models.TransientModel):
-    _inherit = "stock.return.picking"
-
-    @api.model
-    def default_get(self, fields):
-        """ Set by default to refund """
-        res = super(StockReturnPicking, self).default_get(fields)
-        for line in res.get('product_return_moves', {}):
-            line[2]['to_refund_so'] = True
-        return res

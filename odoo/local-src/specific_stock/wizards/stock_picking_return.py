@@ -6,7 +6,7 @@
 from odoo import fields, models, api
 
 
-class ReturnPicking(models.TransientModel):
+class StockReturnPicking(models.TransientModel):
     _inherit = 'stock.return.picking'
 
     @api.multi
@@ -26,11 +26,11 @@ class ReturnPicking(models.TransientModel):
                 ])
                 for quant in quants:
                     quant.package_id.unpack()
-        return super(ReturnPicking, self)._create_returns()
+        return super(StockReturnPicking, self)._create_returns()
 
     @api.model
     def default_get(self, fields):
-        result = super(ReturnPicking, self).default_get(fields)
+        result = super(StockReturnPicking, self).default_get(fields)
         if not result.get('product_return_moves'):
             return result
         # first get all the display_name values to have 1 sql query rather than
@@ -42,10 +42,11 @@ class ReturnPicking(models.TransientModel):
 
         for __, __, line_vals in result['product_return_moves']:
             line_vals['product_name'] = names[line_vals['product_id']]
+            line_vals['to_refund_so'] = True
         return result
 
 
-class ReturnPickingLine(models.TransientModel):
+class StockReturnPickingLine(models.TransientModel):
     _inherit = "stock.return.picking.line"
     _rec_name = 'product_name'
 
