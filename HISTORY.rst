@@ -21,6 +21,7 @@ latest (unreleased)
 
 **Features and Improvements**
 * ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
+* ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 
 **Bugfixes**
 
@@ -34,6 +35,7 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1894: Update the repo OCA sale-workflow - fix the bug to compute the total amount on a sale order if there is a discount
 * ALCYN-1884: add a flag "Create Invoice On Transfer" on picking types.
   This flag is active on Delivery Orders and Customer Returns (for refund).
   Previously this feature was only active on Delivery Orders.

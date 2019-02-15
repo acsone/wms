@@ -16,6 +16,41 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Cold"
+msgstr "# Koel"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Drug"
+msgstr "# Gnsm."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Food"
+msgstr "# Voed."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Hum."
+msgstr "# Apo."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Mat."
+msgstr "# Mat."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "boxes"
+msgstr "dozen"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "items"
+msgstr "units"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Alcyon<br/>discount"
 msgstr "%<br/>Alcyon<br/>korting"
@@ -144,6 +179,11 @@ msgstr "<span>Antibiotica<br/>Totaal</span>"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>amount</span>"
 msgstr "<span>Te betalen</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>refund</span>"
+msgstr "<span>Af the<br/>trekken</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -692,7 +732,7 @@ msgstr "Referentie te vermelden bij betaling"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Crediet"
+msgstr "Crediet nota"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body

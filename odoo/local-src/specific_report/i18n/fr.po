@@ -33,6 +33,41 @@ msgid "\n"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Cold"
+msgstr "# Froid"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Drug"
+msgstr "# Médic."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Food"
+msgstr "# Alim."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Hum."
+msgstr "# Hum."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "# Mat."
+msgstr "# Mat."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "boxes"
+msgstr "boîtes"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "items"
+msgstr "pièces"
+
+#. module: specific_report
 #: model:mail.template,report_name:specific_report.email_template_pharmacist_supplier_order
 msgid "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
 msgstr "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_brouillon' or ''}"
@@ -330,6 +365,11 @@ msgstr "<span>Total<br/>Contr. antibio.</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>amount</span>"
+msgstr "<span>Montant<br/>total</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Total<br/>refund</span>"
 msgstr "<span>Montant<br/>total</span>"
 
 #. module: specific_report
@@ -969,8 +1009,8 @@ msgstr "Tournée"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "Round: <br/>"
-msgstr "Tournée: <br/>"
+msgid "Delivery round:"
+msgstr "Tournée:"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_sale_order
