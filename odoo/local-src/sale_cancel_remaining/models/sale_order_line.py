@@ -15,6 +15,12 @@ class SaleOrderLine(models.Model):
         copy=False,
         digits=dp.get_precision('Product Unit of Measure')
     )
+    product_qty_returned = fields.Float(
+        'Qty returned',
+        readonly=True,
+        copy=False,
+        digits=dp.get_precision('Product Unit of Measure')
+    )
     product_qty_remains_to_deliver = fields.Float(
         string='Remains to deliver',
         digits=dp.get_precision('Product Unit of Measure'),
@@ -23,10 +29,12 @@ class SaleOrderLine(models.Model):
     )
 
     @api.multi
-    @api.depends('product_uom_qty', 'qty_delivered', 'product_qty_canceled')
+    @api.depends('product_uom_qty', 'qty_delivered',
+                 'product_qty_canceled', 'product_qty_returned')
     def _compute_product_qty_remains_to_deliver(self):
         for line in self:
             remaining_to_deliver = line.product_uom_qty \
                                  - line.qty_delivered \
-                                 - line.product_qty_canceled
+                                 - line.product_qty_canceled \
+                                 - line.product_qty_returned
             line.product_qty_remains_to_deliver = remaining_to_deliver

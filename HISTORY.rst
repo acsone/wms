@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1932: add a field on SO lines to record returned qty
+
 **Build**
 
 **Documentation**

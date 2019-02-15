@@ -13,6 +13,7 @@
     """,
     'depends': [
         'sale',
+        'stock',
     ],
     'data': [
         "wizard/cancel_remaining_wizard.xml",
