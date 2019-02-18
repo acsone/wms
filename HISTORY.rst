@@ -20,7 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
-
+* ALCYN-1936: Allow inventory user to post inventory without requiring write rights on product
 * ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
 * ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 * ALCYN-1910: make sure all products needing resupply have a default
