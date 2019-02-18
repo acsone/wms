@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1833: Prevent reception order to be unreserved due to undelivered customer in delivery round
+
 **Bugfixes**
 
 **Build**
