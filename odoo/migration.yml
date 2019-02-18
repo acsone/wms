@@ -420,3 +420,9 @@ migration:
             post:
               - anthem songs.upgrade.clean_output::restore_quants_in_fix_sortie
               - anthem songs.upgrade.10_30_23_update::record_returned_qty
+    - version: 10.30.24
+      addons:
+        upgrade:
+          ### local
+          - delivery_rounds_refill
+          - specific_zetes
