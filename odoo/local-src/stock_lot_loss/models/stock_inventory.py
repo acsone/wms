@@ -13,6 +13,7 @@ class StockInventoryLine(models.Model):
         pending inventory moves """
         loss_picking_type = self.env.ref(
             'stock_lot_loss.stock_picking_type_23')
+        moves = self.env['stock.move']
         for line in self:
             quants = self.env['stock.quant'].search([
                 ('qty', '>', 0.0),
@@ -23,5 +24,7 @@ class StockInventoryLine(models.Model):
                 ('reservation_id.picking_id.picking_type_id', '=',
                     loss_picking_type.id),
                 ])
-            quants.mapped('reservation_id').action_cancel()
+            moves |= quants.mapped('reservation_id')
+        if moves:
+            moves.action_cancel()
         return super(StockInventoryLine, self)._generate_moves()
