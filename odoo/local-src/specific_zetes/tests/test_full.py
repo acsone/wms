@@ -41,7 +41,7 @@ class TestFull(ZetesTest):
 
         # Product 2
         # Location: GD80B1
-        # Specificity: Out of stock (10 requested - 6 in stock)
+        # Specificity: 10 in stock. 6 taken
         self.product_2 = self.env['product.product'].create({
             'name': 'Test medoc 2',
             'default_code': '587502',
@@ -60,7 +60,7 @@ class TestFull(ZetesTest):
         self.lot_product_2 = self.env['stock.production.lot'].create({
             'name': '000000001',
             'product_id': self.product_2.id,
-            'life_date': fields.Datetime.to_string(two_years),
+            'removal_date': fields.Datetime.to_string(two_years),
         })
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_2.id,
@@ -101,9 +101,9 @@ class TestFull(ZetesTest):
         # Product 3
         # Location: GD80E8
         # Specificity: Split in two lot (20 in lot 000000001
-        # and 30 in lot 000000002)
+        # and 100 in lot 000000002)
         self.product_3 = self.env['product.product'].create({
-            'name': 'Test medoc 2',
+            'name': 'Test medoc 3',
             'default_code': '025784',
             'categ_id': self.product_categ_medoc.id,
             'tracking': 'lot',
@@ -120,7 +120,7 @@ class TestFull(ZetesTest):
         self.lot_product_3_1 = self.env['stock.production.lot'].create({
             'name': '000000001',
             'product_id': self.product_3.id,
-            'life_date': fields.Datetime.to_string(two_months),
+            'removal_date': fields.Datetime.to_string(two_months),
         })
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_3.id,
@@ -135,7 +135,7 @@ class TestFull(ZetesTest):
         self.lot_product_3_2 = self.env['stock.production.lot'].create({
             'name': '000000002',
             'product_id': self.product_3.id,
-            'life_date': fields.Datetime.to_string(three_months),
+            'removal_date': fields.Datetime.to_string(three_months),
         })
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_3.id,

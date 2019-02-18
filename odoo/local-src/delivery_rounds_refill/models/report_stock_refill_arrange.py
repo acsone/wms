@@ -25,7 +25,7 @@ class ReportStockRefillArrange(models.Model):
           LEFT JOIN stock_production_lot lot ON sq.lot_id = lot.id
           WHERE sl.kind = 'parking'
             AND rso.qty_in_parking > 0
-          ORDER BY product_id, lot.life_date, sq.in_date
+          ORDER BY product_id, lot.removal_date, sq.in_date
         """
         self.env.cr.execute("CREATE OR REPLACE VIEW " + self._table +
                             " AS (" + query + ")")

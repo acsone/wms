@@ -35,7 +35,6 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
 * ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 * ALCYN-1910: make sure all products needing resupply have a default
   procurement order (except MTO products)

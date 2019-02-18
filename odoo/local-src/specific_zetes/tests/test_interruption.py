@@ -65,7 +65,7 @@ class TestInterruption(ZetesTest):
         self.lot_product_2 = self.env['stock.production.lot'].create({
             'name': '000000001',
             'product_id': self.product_2.id,
-            'life_date': fields.Datetime.to_string(two_years),
+            'removal_date': fields.Datetime.to_string(two_years),
         })
         update_qty_wizard = self.env['stock.change.product.qty'].create({
             'product_id': self.product_2.id,
