@@ -409,6 +409,8 @@ migration:
           - sale_cancel_remaining
           - specific_report
           - specific_sale
+          - specific_stock
+          - stock_delivery_note
       operations:
         post:
           - anthem songs.upgrade.10_30_23_update::post

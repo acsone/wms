@@ -19,6 +19,7 @@
         'stock_available_immediately',
         'specific_data',
         'specific_partner',
+        'specific_stock',
         'stock_lot_track',
         'stock_lot_loss',
         'sale_cancel_remaining',

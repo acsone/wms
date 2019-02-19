@@ -147,6 +147,9 @@ class SaleOrderLine(models.Model):
         related='order_id.pricelist_id',
         readonly=True,
     )
+    picking_zone_id = fields.Many2one(
+        related="product_id.picking_zone_id",
+        readonly=True)
 
     @api.depends('product_id', 'price_subtotal', 'order_id.partner_id')
     def _compute_exception(self):
