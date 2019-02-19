@@ -780,11 +780,12 @@ def restore_quants_in_fix_sortie(ctx):
     moves = ctx.env['stock.move'].browse(ship_ids)
     with ctx.log('assigning %d moves' % len(moves)):
         # question: is it required? or must it be avoided?
-        ctx.env['stock.move'].browse(ship_ids).action_assign()
-        move.picking_id.pick.message_post(
-            '<p>Restored the picked quants for %s that had been '
-            'stored away in december 2018, and flagged the '
-            'move as available<p>''' % (move.product_id.display_name,))
+        moves.action_assign()
+        for move in moves:
+            move.picking_id.pick.message_post(
+                '<p>Restored the picked quants for %s that had been '
+                'stored away in december 2018, and flagged the '
+                'move as available<p>''' % (move.product_id.display_name,))
 
     for pick in moves.mapped('picking_id').sorted('id'):
         ctx.log_line('%s: %s' % (pick.name, pick.state))
