@@ -782,7 +782,7 @@ def restore_quants_in_fix_sortie(ctx):
         # question: is it required? or must it be avoided?
         moves.action_assign()
         for move in moves:
-            move.picking_id.pick.message_post(
+            move.picking_id.message_post(
                 '<p>Restored the picked quants for %s that had been '
                 'stored away in december 2018, and flagged the '
                 'move as available<p>''' % (move.product_id.display_name,))
