@@ -20,39 +20,49 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
-* ALCYN-1936: Allow inventory user to post inventory without requiring write rights on product
-* ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.23 (2019-02-19)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1908: Fix/improve delivery note (font-size, nbr packs)
 * ALCYN-1910: make sure all products needing resupply have a default
   procurement order (except MTO products)
 * ALCYN-1912: Automatically cancel procurement from OP on purchase line deletion
 * ALCYN-1914: Check procurement when qty 0 is purchased
+* ALCYN-1919: When an inventory is validated, we need to cancel any remaining pending inventory moves
 * ALCYN-1928: Manage backorders of additional products (accessories). Support
   use cases where the computed quantity of additional product to pick is not
   processed or partially processed. Do not propagate to backorder. The quantity
   in the backorder will be recomputed based on the main base product quantity
   to pick.
+* ALCYN-1936: Allow inventory user to post inventory without requiring write rights on product
 
 **Bugfixes**
 
-* ALCYN-1926: Fix processing of delivery round deletion.
-* BIZ-2869: Prevent canceling a sale order already prepared
 * ALCYN-1856: Two new columns available in debug mode:
 
     - the picking zone of the product is displayed on sale order lines
     - the procurement group is displayed on the delivery order lines in favor
       of the SO reference
 
+* ALCYN-1926: Fix processing of delivery round deletion.
+* BIZ-2869: Prevent canceling a sale order already prepared
+
 **Bugfixes**
 
-* move back quants from "Fix Sortie 20181220" that should be shipped
 * ALCYN-1932: add a field on SO lines to record returned qty
 * ALCYN-1933: some delivery slips / CSV delivery notes would not get the lot
   numbers for all lines
-
-**Build**
-
-**Documentation**
+* move back quants from "Fix Sortie 20181220" that should be shipped
 
 
 10.30.22 (2019-02-11)
