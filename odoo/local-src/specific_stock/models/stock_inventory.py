@@ -39,7 +39,7 @@ class StockInventory(models.Model):
             return result
 
         products = self.line_ids.mapped('product_id')
-        products.write({
+        products.sudo().write({
             'date_last_inventory': fields.Datetime.now()
         })
 
