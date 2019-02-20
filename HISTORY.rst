@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1886: Display picking zone also on product (not only template)'
+
 **Bugfixes**
 
 **Build**
