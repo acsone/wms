@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1870: Partner. Display amount of sales lines that remains to deliver instead of total amount of lines
+
 **Bugfixes**
 
 **Build**
