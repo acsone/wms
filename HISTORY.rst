@@ -21,7 +21,7 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-1813: Fix removal strategy. Consume entirely a pallet before going to next one.
+* ALCYN-1813: Fix removal strategy and fix Zetes tests. Consume entirely a pallet before going to next one.
 
 **Bugfixes**
 
