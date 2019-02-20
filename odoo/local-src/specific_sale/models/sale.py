@@ -196,7 +196,9 @@ class SaleOrderLine(models.Model):
 
     def _compute_current_product_qty_unavailable(self):
         for line in self:
-            line.current_product_qty_unavailable = (
+            if not line.product_qty_remains_to_deliver:
+                continue
+            line.current_product_qty_unavailable = min(
                 self.get_product_qty_unavailable(
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
@@ -206,8 +208,8 @@ class SaleOrderLine(models.Model):
                     line.product_uom_qty,
                     line.state == 'sale',
                     line.id
-                )
-            )
+                ),
+                line.product_qty_remains_to_deliver)
 
     @api.model
     def get_product_qty_unavailable(self, product, product_uom_qty,

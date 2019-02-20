@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1880: Sales line "Current BO" cannot be bigger than what remains to be delivered
 
 **Build**
 
