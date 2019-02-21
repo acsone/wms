@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1937: Fix set account analytic on imported purchase orders
+
 **Bugfixes**
 
 **Build**
