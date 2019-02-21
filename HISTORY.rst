@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1898: Remove consignment from remain to deliver
+
 **Build**
 
 **Documentation**
