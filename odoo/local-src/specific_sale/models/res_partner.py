@@ -40,7 +40,8 @@ class ResPartner(models.Model):
         for partner in self:
             domain = [
                 ('state', 'in', ['sale']),
-                ('order_id.partner_id', '=', partner.id)
+                ('order_id.partner_id', '=', partner.id),
+                ('product_qty_remains_to_deliver', '>', 0),
             ]
 
             partner.sale_lines_count = len(

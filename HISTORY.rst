@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-1813: Fix removal strategy and fix Zetes tests. Consume entirely a pallet before going to next one.
 * ALCYN-1833: Prevent reception order to be unreserved due to undelivered customer in delivery round
 * ALCYN-1886: Display picking zone also on product (not only template)'
+* ALCYN-1870: Partner. Display amount of sales lines that remains to deliver instead of total amount of lines
 
 **Bugfixes**
 * ALCYN-1880: Sales line "Current BO" cannot be bigger than what remains to be delivered
