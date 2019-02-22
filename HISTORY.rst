@@ -31,6 +31,8 @@ latest (unreleased)
 
 * ALCYN-1930: Fix order_date on sale order created by the web service (ESB)
 
+* ALCYN-1898: Remove consignment from remain to deliver
+
 **Build**
 
 **Documentation**
