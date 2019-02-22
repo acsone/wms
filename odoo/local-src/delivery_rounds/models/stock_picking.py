@@ -64,7 +64,8 @@ class StockPicking(models.Model):
     def _get_all_src_pickings(self):
         def _descend_moves(lvl):
             next_lvl = lvl.mapped('move_orig_ids')
-            if next_lvl:
+            if (next_lvl and 'PICK' not in
+                    lvl.mapped('picking_id.picking_type_subcode')):
                 lvl |= _descend_moves(next_lvl)
             return lvl
 
