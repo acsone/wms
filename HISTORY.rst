@@ -33,6 +33,11 @@ latest (unreleased)
 * ALCYN-1930: Fix order_date on sale order created by the web service (ESB)
 
 * ALCYN-1898: Remove consignment from remain to deliver
+* ALCYN-1941: Prevent cleanup of pack operations when a move line is added in a ship.
+  When an already picked product is again ordered while the picking of the
+  first product was already done but the shipping was not yet validated,
+  the shipping move line of the first picked product was unreserved and
+  never processed.
 
 **Build**
 
