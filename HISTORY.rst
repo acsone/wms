@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1886: Display picking zone also on product (not only template)'
 
 **Bugfixes**
+* ALCYN-1880: Sales line "Current BO" cannot be bigger than what remains to be delivered
 
 * ALCYN-1930: Fix order_date on sale order created by the web service (ESB)
 
