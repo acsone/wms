@@ -179,6 +179,11 @@ class StockMove(models.Model):
                     # No need to perform the assignment now (new pack operation
                     # creation), it is performed later when the procurement is
                     # run.
+                    # If the new move is in waiting state (line added in a
+                    # ship), then do not cleanup the pack operation as it won't
+                    # be recomputed
+                    if move.state == 'waiting':
+                        break
                     operations_to_recompute = picking.pack_operation_ids. \
                         filtered(lambda op: op.product_id == move.product_id)
                     if operations_to_recompute:
