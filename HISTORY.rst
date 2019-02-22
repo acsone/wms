@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.30.24 (2019-02-22)
++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1813: Fix removal strategy and fix Zetes tests. Consume entirely a pallet before going to next one.
 * ALCYN-1833: Prevent reception order to be unreserved due to undelivered customer in delivery round
 * ALCYN-1886: Display picking zone also on product (not only template)'
@@ -29,6 +41,7 @@ latest (unreleased)
 * Install Belgium intrastat 2019
 
 **Bugfixes**
+
 * ALCYN-1880: Sales line "Current BO" cannot be bigger than what remains to be delivered
 
 * ALCYN-1930: Fix order_date on sale order created by the web service (ESB)
@@ -39,10 +52,6 @@ latest (unreleased)
   first product was already done but the shipping was not yet validated,
   the shipping move line of the first picked product was unreserved and
   never processed.
-
-**Build**
-
-**Documentation**
 
 
 10.30.23 (2019-02-19)
