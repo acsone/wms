@@ -427,4 +427,5 @@ migration:
           ### local
           - connector_esb
           - delivery_rounds_refill
+          - specific_stock
           - specific_zetes

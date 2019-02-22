@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-1813: Fix removal strategy and fix Zetes tests. Consume entirely a pallet before going to next one.
 * ALCYN-1833: Prevent reception order to be unreserved due to undelivered customer in delivery round
+* ALCYN-1886: Display picking zone also on product (not only template)'
 
 **Bugfixes**
 
