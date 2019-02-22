@@ -27,6 +27,7 @@
         'procurement_sale',
         'stock_picking_zone',
         'stock_lot_loss',
+        'product_expiry',
     ],
     'data': [
         # Views

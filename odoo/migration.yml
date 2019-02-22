@@ -426,3 +426,5 @@ migration:
         upgrade:
           ### local
           - connector_esb
+          - delivery_rounds_refill
+          - specific_zetes

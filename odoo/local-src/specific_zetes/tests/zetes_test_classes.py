@@ -108,6 +108,9 @@ class ZetesTest(SavepointCase):
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.vlb_location = cls.stock_location.location_id
 
+        fefo = cls.env.ref('product_expiry.removal_fefo').id
+        cls.stock_location.removal_strategy_id = fefo
+
         cls.location_medoc = location_obj.create({
             'name': 'Medicament',
             'usage': 'view',
@@ -158,7 +161,7 @@ class ZetesTest(SavepointCase):
         cls.lot_product_1 = cls.env['stock.production.lot'].create({
             'name': '000000001',
             'product_id': cls.product_1.id,
-            'life_date': fields.Datetime.to_string(one_year),
+            'removal_date': fields.Datetime.to_string(one_year),
         })
         update_qty_wizard = cls.env['stock.change.product.qty'].create({
             'product_id': cls.product_1.id,

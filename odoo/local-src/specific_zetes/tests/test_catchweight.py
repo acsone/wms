@@ -71,7 +71,7 @@ class TestCatchweight(ZetesTest):
         second_lot = self.env['stock.production.lot'].create({
             'name': '000000002',
             'product_id': self.product_1.id,
-            'life_date': fields.Datetime.to_string(two_years),
+            'removal_date': fields.Datetime.to_string(two_years),
         })
 
         second_request_params = Parameters(domain, action='resu')

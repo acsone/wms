@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1813: Fix removal strategy and fix Zetes tests. Consume entirely a pallet before going to next one.
+
 **Bugfixes**
 
 * ALCYN-1930: Fix order_date on sale order created by the web service (ESB)

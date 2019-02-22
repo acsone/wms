@@ -337,7 +337,7 @@ class StockPackOperation(models.Model):
                 continue
 
             pack_op_lots = line.pack_lot_ids.sorted(
-                lambda lot_line: lot_line.lot_id.life_date)
+                lambda lot_line: lot_line.lot_id.removal_date)
             for pack_op_lot in pack_op_lots:
                 if pack_op_lot.qty < pack_op_lot.qty_todo:
                     result.append((line, pack_op_lot))
