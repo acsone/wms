@@ -92,7 +92,7 @@ msgstr "Qté retournée"
 #. module: sale_cancel_remaining
 #: model:ir.model.fields,field_description:sale_cancel_remaining.field_sale_order_line_product_qty_remains_to_deliver
 msgid "Remains to deliver"
-msgstr "Reste à liver"
+msgstr "Reste à livrer"
 
 #. module: sale_cancel_remaining
 #: model:ir.model,name:sale_cancel_remaining.model_sale_order_line
