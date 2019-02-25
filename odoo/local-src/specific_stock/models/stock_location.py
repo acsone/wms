@@ -35,7 +35,9 @@ class StockLocation(models.Model):
                 location.is_valid_location = False
             else:
                 location.is_valid_location = True
-                location.name = '{}{}{}{}'.format(location.corridor,
-                                                  location.shelf,
-                                                  location.height,
-                                                  location.box)
+                location.name = '{}{}{}{}{}'.format(
+                    location.zone,
+                    location.corridor,
+                    location.shelf,
+                    location.height,
+                    location.box)

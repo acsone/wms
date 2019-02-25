@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1947: Add the zone in the default name based on the location coordinates
 
 **Bugfixes**
 
