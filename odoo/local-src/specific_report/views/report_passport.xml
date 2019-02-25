@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="main_title">
-                                Passport verification
+                                Picking inspection
                             </div>
                             <br/>
                             <div id="passport_checksum">
@@ -109,7 +109,7 @@
                             <td>
                                 <span t-field="line.product_id.default_code"/>
                             </td>
-                            <td>
+                            <td class="text-left">
                                 <span t-field="line.product_id.name"/>
                             </td>
                             <td>
@@ -188,7 +188,7 @@
     </template>
 
     <report
-        string="Passport report"
+        string="Picking Inspection"
         id="action_passport_report"
         model="stock.picking"
         report_type="qweb-pdf"

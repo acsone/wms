@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1945: Delivery notes improvement (returns + newpharma CNK)
 
 **Bugfixes**
 

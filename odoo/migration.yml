@@ -437,3 +437,11 @@ migration:
           - specific_sale
           - specific_stock
           - specific_zetes
+    - version: 10.30.25
+      addons:
+        upgrade:
+          ### local
+          - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.10_30_25_update::post
