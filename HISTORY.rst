@@ -22,6 +22,9 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* ALCYN-1946: Products labels do not print when the file send to the printer is
+  to big. Reduce file size by sending repeat command to the printer instead of
+  repeating the label inside the file.
 
 **Build**
 
