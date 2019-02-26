@@ -23,6 +23,10 @@ latest (unreleased)
 
 **Bugfixes**
 
+* BIZ-3022: Magento sends only an order date without time, in a previous change (ALCYN-1930),
+  the time 12:00 (UTC) was appended to the Magento date, now the current time at the import
+  will be appended. The correct solution would be that Magento send the time alongside the date.
+
 **Build**
 
 **Documentation**
