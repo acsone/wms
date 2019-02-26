@@ -83,6 +83,7 @@ latest (unreleased)
   a product (https://github.com/odoo/odoo/pull/30545/)
 
 **Bugfixes**
+* Fix label printing of non-ascii characters
 
 * ALCYN-1946: Products labels do not print when the file send to the printer is
   to big. Reduce file size by sending repeat command to the printer instead of
