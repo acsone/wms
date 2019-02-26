@@ -121,6 +121,27 @@ class SaleOrder(models.Model):
             )
         return partner
 
+    @staticmethod
+    def _ws_get_date_order(ws_date):
+        """Return the creation date of an order from WS"""
+        if ' ' in ws_date:
+            # we have a complete datetime, use it
+            return ws_date
+        else:
+            # We have only the date, if the order is for today,
+            # we use the current time (time of import). If the order
+            # is from a previous day, we hard-code the time at the middle
+            # of the day arbitrarily.
+            # With this solution, it means that an order created on Magento
+            # at days N-1 23:59 and imported at day N will have an order_date
+            # of N-1 12:00. This is maybe the best we can do if we are not
+            # provided a time anyway.
+            now_date, _spc, now_time = fields.Datetime.now().partition(' ')
+            if ws_date == now_date:
+                return ws_date + ' ' + now_time
+            else:
+                return ws_date + ' 12:00:00'
+
     def _ws_create_order_data(self, data):
         order_data = {}
         partner_ref = data['customer_id']
@@ -129,10 +150,7 @@ class SaleOrder(models.Model):
                 'sales_team.salesteam_website_sales').id
         order_data['esb_ref'] = data['increment_id']
         order_data['partner_id'] = partner.id
-        if ' ' in data['date']:
-            order_data['date_order'] = data['date']
-        else:
-            order_data['date_order'] = data['date'] + ' 12:00:00'
+        order_data['date_order'] = self._ws_get_date_order(data['date'])
         order_data['client_order_ref'] = data['order_ref']
         order_data['state'] = 'draft'
         if 'num_suite' in data:

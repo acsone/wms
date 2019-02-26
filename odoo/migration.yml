@@ -437,3 +437,10 @@ migration:
           - specific_sale
           - specific_stock
           - specific_zetes
+
+    - version: 10.30.25
+      modes:
+        full:
+          operations:
+            pre:
+              - "sh -c 'psql -f odoo/songs/upgrade/update_10_30_25.sql'"

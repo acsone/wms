@@ -5,6 +5,8 @@
 from mock import patch, MagicMock
 from copy import deepcopy
 
+from freezegun import freeze_time
+
 from odoo import fields
 from odoo.tests.common import SavepointCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
@@ -102,6 +104,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             ],
         })
 
+    @freeze_time("2017-09-18 11:30:20")
     def test_create_saleorder(self):
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
@@ -133,7 +136,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # Confirmtation/order date are the time of creation in Odoo by the ws
         self.assertTrue(starting_date <= order.confirmation_date <=
                         fields.Datetime.now())
-        self.assertTrue(order.date_order == '2017-09-18 12:00:00')
+        self.assertTrue(order.date_order == '2017-09-18 11:30:20')
 
     def test_create_saleorder_multiple_ref(self):
         self.partner_shipping.ref = self.partner.ref
@@ -190,6 +193,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             self.env['sale.order'].create(data)
             export_record.assert_not_called()
 
+    @freeze_time("2017-09-18 11:30:20")
     def test_create_saleorder_with_discount(self):
         discount_percent = 10.
         supplier = self.env['res.partner'].create({
@@ -228,7 +232,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # Confirmtation/order date are the time of creation in Odoo by the ws
         self.assertTrue(starting_date <= order.confirmation_date <=
                         fields.Datetime.now())
-        self.assertTrue(order.date_order == '2017-09-18 12:00:00')
+        self.assertTrue(order.date_order == '2017-09-18 11:30:20')
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
 
@@ -317,3 +321,27 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
         self.env['sale.order']._ws_create_new(data)
         self.env['sale.order'].message_post_with_view.assert_not_called()
+
+    @freeze_time("2019-02-26 11:30:20")
+    def test_date_order(self):
+        get_date_order = self.env['sale.order']._ws_get_date_order
+        self.assertEqual(
+            get_date_order('2019-02-26 11:22:33'),
+            '2019-02-26 11:22:33',
+            "full date provided must be used"
+        )
+        self.assertEqual(
+            get_date_order('2019-02-25 11:22:33'),
+            '2019-02-25 11:22:33',
+            "full date provided must be used"
+        )
+        self.assertEqual(
+            get_date_order('2019-02-26'),
+            '2019-02-26 11:30:20',
+            "current date without time should use current time"
+        )
+        self.assertEqual(
+            get_date_order('2019-02-25'),
+            '2019-02-25 12:00:00',
+            "another date without time should use 12:00:00"
+        )
