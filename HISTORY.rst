@@ -25,6 +25,9 @@ latest (unreleased)
   sale_order_line product selection
 * ALCYN-1947: Add the zone in the default name based on the location coordinates
 
+* Include a performance patch, improving x3 computation of stock availability for
+  a product (https://github.com/odoo/odoo/pull/30545/)
+
 **Bugfixes**
 * ALCYN-1946: Products labels do not print when the file send to the printer is
   to big. Reduce file size by sending repeat command to the printer instead of
