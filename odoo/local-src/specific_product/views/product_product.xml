@@ -24,6 +24,17 @@
         </field>
     </record>
 
+    <record id="view_product_product_tree_specific_product" model="ir.ui.view">
+        <field name="name">product.product.tree.specific_product</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">name</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <!--Disable the view kanban on Products-->
     <record id="product.product_normal_action_sell" model="ir.actions.act_window">
         <field name="view_mode">tree,form</field>

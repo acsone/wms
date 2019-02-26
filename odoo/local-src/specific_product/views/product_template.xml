@@ -63,6 +63,9 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_tree_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+              <attribute name="default_order">name</attribute>
+            </xpath>
 
             <field name="list_price" position="attributes">
                 <attribute name="string">Sale Price 1</attribute>

@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1896: Change sorting of products in sales / products and when in
+  sale_order_line product selection
+
 **Bugfixes**
 
 * BIZ-3022: Magento sends only an order date without time, in a previous change (ALCYN-1930),
