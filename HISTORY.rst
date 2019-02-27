@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1921: allow Accountant group read stock.inventory
 
 **Bugfixes**
+* Fix label printing of non-ascii characters
 * Update hidden dependency between addons
 * ALCYN-1961: Some lots created at reception are not linked to the right product
 
@@ -83,7 +84,6 @@ latest (unreleased)
   a product (https://github.com/odoo/odoo/pull/30545/)
 
 **Bugfixes**
-* Fix label printing of non-ascii characters
 
 * ALCYN-1946: Products labels do not print when the file send to the printer is
   to big. Reduce file size by sending repeat command to the printer instead of

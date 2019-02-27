@@ -39,11 +39,9 @@ class Report(models.Model):
         text = text.replace('\n', '')
         if not isinstance(text, unicode):
             text = text.decode('utf-8')
-        try:
-            nfkd_form = unicodedata.normalize('NFKD', text)
-            text = u"".join([c for c in nfkd_form
-                             if not unicodedata.combining(c)])
-        except Exception:
-            text = text.encode('ASCII', 'ignore')
+        nfkd_form = unicodedata.normalize('NFKD', text)
+        text = u"".join([c for c in nfkd_form
+                         if not unicodedata.combining(c)])
+        text = text.encode('ASCII', 'ignore')
         text = text.decode('string_escape')
         return text
