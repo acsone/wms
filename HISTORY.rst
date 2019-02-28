@@ -34,10 +34,10 @@ latest (unreleased)
 * ALCYN-1903: fix moves which have had their source or destination location moved out of the stock
 
 **Bugfixes**
+
 * ALCYN-1946: Products labels do not print when the file send to the printer is
   to big. Reduce file size by sending repeat command to the printer instead of
   repeating the label inside the file.
-
 * ALCYN-1949: Fix Zetes UnicodeEncodeError for users with non ascii characters in the name
 * BIZ-3022: Magento sends only an order date without time, in a previous change (ALCYN-1930),
   the time 12:00 (UTC) was appended to the Magento date, now the current time at the import
