@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1810: Allow optional printing 'Entry register' part in delivery slip
 
 **Bugfixes**
 * Update hidden dependency between addons
