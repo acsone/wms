@@ -31,7 +31,8 @@ it uses `JSON.stringify` to send params but it strips out undefined values
 and the RPC call is broken for a missing argument.
 
 Here we make sure we always have a good falsy value.
-* ALCYN-1940: query to correct date for country of origin
+* ALCYN-1940: query to correct country of origin on invoice line and products + set correct 
+  precision on float for intrastat report and set close to false in Data tag
 
 **Build**
 
