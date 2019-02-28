@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 **Bugfixes**
+* Update hidden dependency between addons
 
 ALCYN-1950 Hack board.board to fix RPC calls
 

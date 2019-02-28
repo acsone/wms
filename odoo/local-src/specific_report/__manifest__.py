@@ -24,6 +24,8 @@
         'account_invoice_sent',
         'external_fax',
         'stock_delivery_note',
+        'sale_consignment',
+        'account_payment_partner',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
