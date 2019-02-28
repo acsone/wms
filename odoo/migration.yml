@@ -117,6 +117,9 @@ migration:
           ### OCA (external-src)
           # oca/account-analytic
           - account_analytic_required
+          - analytic_tag_dimension
+          - analytic_tag_dimension_purchase_warning
+          - analytic_tag_dimension_sale_warning
           - product_analytic
           # oca/account-closing
           - account_cutoff_accrual_picking
@@ -146,6 +149,10 @@ migration:
           - account_invoice_tax_required
           # oca/l10n-belgium
           - l10n_be_iso20022_pain
+          - l10n_be_mis_reports
+          # oca/mis_builder
+          - mis_builder
+          - mis_builder_budget
           # oca/product-attribute
           - product_manufacturer
           # oca/sale-workflow
@@ -154,11 +161,13 @@ migration:
           - sale_triple_discount
           # oca/server-tools
           - base_exception
+          - base_import_security_group
           - base_technical_features
           - mail_environment
           - onchange_helper
           - server_environment
           - server_environment_ir_config_parameter
+          - sql_request_abstract
           # oca/stock-logistics-warehouse
           - stock_available_immediately
           - stock_mts_mto_rule
@@ -438,10 +447,6 @@ migration:
           - specific_stock
           - specific_zetes
     - version: 10.30.25
-      addons:
-        upgrade:
-          ### odoo
-          - l10n_be_intrastat_2019
       modes:
         full:
           operations:
@@ -449,14 +454,27 @@ migration:
               - "sh -c 'psql -f odoo/songs/upgrade/update_10_30_25.sql'"
             post:
               - anthem songs.upgrade.update_10_30_25::correct_stock_operation_locations
-      addons:
-        upgrade:
-          ### local
-          - specific_product
-          - specific_report
-          - stock_valuation
       operations:
         pre:
           - anthem songs.upgrade.update_10_30_25::map_vlb_xmlid
         post:
           - anthem songs.upgrade.update_10_30_25::post
+      addons:
+        upgrade:
+          ### local
+          - specific_product
+          - specific_report
+          # oca/mis_builder
+          - mis_builder
+          - mis_builder_budget
+          # oca/l10n-belgium
+          - l10n_be_mis_reports
+          # oca/account-analytic
+          - analytic_tag_dimension
+          - analytic_tag_dimension_purchase_warning
+          - analytic_tag_dimension_sale_warning
+          # oca/server-tools
+          - sql_request_abstract
+          - base_import_security_group
+          ### odoo
+          - l10n_be_intrastat_2019
