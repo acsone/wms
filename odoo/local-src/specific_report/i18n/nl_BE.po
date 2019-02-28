@@ -375,6 +375,12 @@ msgid "Delivery slip"
 msgstr "Afleverbon"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
+msgid "Goods return note"
+msgstr "Retourbon"
+
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Delivery:"
 msgstr "Levering:"

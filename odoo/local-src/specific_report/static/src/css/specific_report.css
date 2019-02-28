@@ -116,9 +116,8 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     background-color: transparent !important;
 }
 
-.black_background {
-    background-color: black;
-    color: white;
+.black_background > * {
+    background-color: #EEE;
 }
 
 #left_header {
@@ -193,8 +192,15 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     padding: 3px;
 }
 
-#products_table tr:nth-of-type(n + 1) td:nth-of-type(n + 3) {
+#products_table td {
     text-align: right;
+}
+
+#products_table td.text-left {
+    text-align: left;
+}
+#products_table td.text-center {
+    text-align: center;
 }
 
 #products_table tr:not(:last-child) {
@@ -215,6 +221,7 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     border: thin solid black;
     border-radius: 1.1em;
     -moz-border-radius: 1.1em;
+    text-align: left;
 }
 
 #products_table td:not(:first-child) {

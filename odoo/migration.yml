@@ -445,4 +445,9 @@ migration:
               - "sh -c 'psql -f odoo/songs/upgrade/update_10_30_25.sql'"
       addons:
         upgrade:
+          ### local
           - specific_product
+          - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_30_25::post

@@ -603,6 +603,11 @@ msgid "Delivery slip"
 msgstr "Bon de livraison"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
+msgid "Goods return note"
+msgstr "Bon de retour"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Delivery:"
 msgstr "Livraison:"
@@ -915,14 +920,10 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_report
-#: model:ir.actions.report.xml,name:specific_report.action_passport_report
-msgid "Passport report"
-msgstr "Rapport du passeport"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
-msgid "Passport verification"
-msgstr "Vérification du passeport"
+#: model:ir.actions.report.xml,name:specific_report.action_passport_report
+msgid "Picking inspection"
+msgstr "Vérification de la préparation"
 
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.report_sale_order_pharmacist_supplier
