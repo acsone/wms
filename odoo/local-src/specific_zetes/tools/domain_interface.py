@@ -54,7 +54,7 @@ class DomainInterface:
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
         self._user = self.request.env['res.users'].get_user(operator_code)
-        _logger.debug('User: {}'.format(self._user.name or 'no user'))
+        _logger.debug(u'User: {}'.format(self._user.name or 'no user'))
 
     def rollback_to_savepoint(self):
         """Rollback to savepoint
