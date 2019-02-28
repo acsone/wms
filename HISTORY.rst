@@ -20,6 +20,18 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.31.0 (2019-02-28)
+++++++++++++++++++++
+
+**Features and Improvements**
 * ALCYN-1945: Delivery notes improvement (returns + newpharma CNK)
 * ALCYN-1896: Change sorting of products in sales / products and when in
   sale_order_line product selection
