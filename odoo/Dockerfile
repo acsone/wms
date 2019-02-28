@@ -107,6 +107,7 @@ ENV ADDONS_PATH="/odoo/local-src, \
   /odoo/external-src/web, \
   /odoo/external-src/partner-contact, \
   /odoo/external-src/connector-interfaces, \
+  /odoo/external-src/mis-builder, \
   /odoo/src/addons" \
   LIMIT_TIME_CPU=86400 \
   LIMIT_TIME_REAL=86400 \

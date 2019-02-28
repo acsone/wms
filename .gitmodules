@@ -69,3 +69,6 @@
 [submodule "odoo/external-src/connector-interfaces"]
 	path = odoo/external-src/connector-interfaces
 	url = git@github.com:OCA/connector-interfaces.git
+[submodule "odoo/external-src/mis-builder"]
+	path = odoo/external-src/mis-builder
+	url = git@github.com:OCA/mis-builder.git

@@ -36,6 +36,11 @@ latest (unreleased)
 
 **Build**
 
+* ALCYN-1942: Add the repo mis-builder from OCA and install the module:
+    mis_builder, mis_builder_budget, l10n_be_mis_reports, analytic_tag_dimension
+    analytic_tag_dimension_purchase_warning, analytic_tag_dimension_sale_warning
+    sql_request_abstract, base_import_security_group
+
 **Documentation**
 
 
