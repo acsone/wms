@@ -112,6 +112,7 @@ migration:
           - sale
           - sale_stock
           - stock
+          - l10n_be_intrastat_2019
           # enterprise
           - helpdesk
           ### OCA (external-src)
@@ -446,19 +447,19 @@ migration:
           - specific_sale
           - specific_stock
           - specific_zetes
-    - version: 10.30.25
+    - version: 10.31.0
       modes:
         full:
           operations:
             pre:
-              - "sh -c 'psql -f odoo/songs/upgrade/update_10_30_25.sql'"
+              - "sh -c 'psql -f odoo/songs/upgrade/update_10_31_0.sql'"
             post:
-              - anthem songs.upgrade.update_10_30_25::correct_stock_operation_locations
+              - anthem songs.upgrade.update_10_31_0::correct_stock_operation_locations
       operations:
         pre:
-          - anthem songs.upgrade.update_10_30_25::map_vlb_xmlid
+          - anthem songs.upgrade.update_10_31_0::map_vlb_xmlid
         post:
-          - anthem songs.upgrade.update_10_30_25::post
+          - anthem songs.upgrade.update_10_31_0::post
       addons:
         upgrade:
           ### local
