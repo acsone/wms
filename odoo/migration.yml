@@ -438,6 +438,10 @@ migration:
           - specific_stock
           - specific_zetes
     - version: 10.30.25
+      addons:
+        upgrade:
+          ### odoo
+          - l10n_be_intrastat_2019
       modes:
         full:
           operations:
