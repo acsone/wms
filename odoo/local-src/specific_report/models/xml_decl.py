@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models
+from odoo import models, api
 
 
 class XmlDeclaration(models.TransientModel):
@@ -23,3 +23,13 @@ class XmlDeclaration(models.TransientModel):
                                                       2)).replace(".", ","))
         self._set_Dim(item, 'EXUNITS', unicode(round(amounts[2], 2)).replace(
             ".", ","))
+
+    @api.multi
+    def _get_lines(self, dispatchmode=False, extendedmode=False):
+        decl = super(XmlDeclaration, self)._get_lines(dispatchmode,
+                                                      extendedmode)
+        allclose = decl.findall('.//Data')
+        for closetag in allclose:
+            closetag.set('close', 'false')
+            # set close to false instead of true
+        return decl
