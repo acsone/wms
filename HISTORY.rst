@@ -24,6 +24,14 @@ latest (unreleased)
 * ALCYN-1896: Change sorting of products in sales / products and when in
   sale_order_line product selection
 * ALCYN-1947: Add the zone in the default name based on the location coordinates
+* ALCYN-1903: compute stock history valuation based on VLB locations
+* ALCYN-1903: store stock history as materialized view, allowing to
+  improve browsing performance thanks to indices and the fact that
+  data is stored
+
+**Data**
+
+* ALCYN-1903: fix moves which have had their source or destination location moved out of the stock
 
 **Bugfixes**
 * ALCYN-1946: Products labels do not print when the file send to the printer is

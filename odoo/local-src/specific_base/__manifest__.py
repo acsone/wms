@@ -13,6 +13,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/stock_location.xml',
         'views/res_company.xml',
     ],
     'installable': True,
