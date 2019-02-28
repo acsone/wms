@@ -23,6 +23,7 @@ latest (unreleased)
 * ALCYN-1945: Delivery notes improvement (returns + newpharma CNK)
 * ALCYN-1896: Change sorting of products in sales / products and when in
   sale_order_line product selection
+* ALCYN-1947: Add the zone in the default name based on the location coordinates
 
 **Bugfixes**
 * ALCYN-1946: Products labels do not print when the file send to the printer is
