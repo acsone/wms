@@ -479,3 +479,4 @@ migration:
           - base_import_security_group
           ### odoo
           - l10n_be_intrastat_2019
+    - version: 10.31.1
