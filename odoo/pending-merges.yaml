@@ -31,6 +31,8 @@
     - git am "$(git format-patch -1 223a0e8b19a474bf24bfe9dae09c6c2ba396c8c8 -o ../patches)"
     # [10.0][IMP] stock: performance on _compute_product_availability #30545
     - git am "$(git format-patch -1 d3ab0fb9f5f99ea71858750949b387409c85081c -o ../patches)"
+    # [FIX] stock_account: group on empty field 
+    - git am "$(git format-patch -1 ba09b8989ebbe10aa336dbf850d075fbcda558d0 -o ../patches)"
   target: &default_target camptocamp merge-branch-1793-master
 ./external-src/account-invoicing:
   remotes:
