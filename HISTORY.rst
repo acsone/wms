@@ -36,6 +36,7 @@ Here we make sure we always have a good falsy value.
 
 * ALCYN-1954: add an index on product_price_history.product_id, makes the stock valuation very slow
 * ALCYN-1954: apply a patch correcting the groupbys on stock history (https://github.com/odoo/odoo/commit/ba09b8989ebbe10aa336dbf850d075fbcda558d0)
+* ALCYN-1954: optimize stock history with new indices and a code optimization on groupbys (https://github.com/odoo/odoo/pull/31540)
 
 **Build**
 

@@ -178,11 +178,19 @@ class StockHistoryMaterialized(models.AbstractModel):
             "CREATE UNIQUE INDEX pk_%s ON %s (id)" % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_location_id ON %s (location_id)" %
+            "CREATE INDEX %s_location_id_idx ON %s (location_id)" %
             (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_product_id ON %s (product_id)" %
+            "CREATE INDEX %s_product_id_idx ON %s (product_id)" %
+            (self._table, self._table)
+        )
+        self.env.cr.execute(
+            "CREATE INDEX %s_product_categ_id_idx ON %s (product_categ_id)" %
+            (self._table, self._table)
+        )
+        self.env.cr.execute(
+            "CREATE INDEX %s_date_idx ON %s (date)" %
             (self._table, self._table)
         )
         self.set_refresh_date(date=False)
