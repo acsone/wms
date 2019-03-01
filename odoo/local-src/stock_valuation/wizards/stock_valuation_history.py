@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, tools, models, fields

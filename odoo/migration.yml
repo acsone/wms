@@ -480,3 +480,7 @@ migration:
           ### odoo
           - l10n_be_intrastat_2019
     - version: 10.31.1
+      addons:
+        upgrade:
+          ### local
+          - stock_valuation

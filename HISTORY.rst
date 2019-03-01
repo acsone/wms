@@ -32,6 +32,8 @@ and the RPC call is broken for a missing argument.
 
 Here we make sure we always have a good falsy value.
 
+* ALCYN-1954: add an index on product_price_history.product_id, makes the stock valuation very slow
+
 **Build**
 
 **Documentation**
