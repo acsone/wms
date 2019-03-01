@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1954: Add Inventory Value in the pivot view of Stock History Valuation and remove Location which gives useless results
+
 **Bugfixes**
 
 ALCYN-1950 Hack board.board to fix RPC calls
