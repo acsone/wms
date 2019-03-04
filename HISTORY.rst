@@ -31,6 +31,7 @@ it uses `JSON.stringify` to send params but it strips out undefined values
 and the RPC call is broken for a missing argument.
 
 Here we make sure we always have a good falsy value.
+* ALCYN-1951: apply specific css only for invoice report
 
 **Build**
 

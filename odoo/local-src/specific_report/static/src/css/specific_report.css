@@ -258,54 +258,54 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     padding-bottom: 3mm;
 }
 
-#summary_table {
+#summary_table.round_table{
     display: inline-table;
     height: 140px;
 }
 
-#summary_table tr:nth-child(-n + 2) td {
+#summary_table.round_table tr:nth-child(-n + 2) td {
     border-bottom: solid black 1px;
 }
 
-#summary_table tr:nth-child(n + 2) td {
+#summary_table.round_table tr:nth-child(n + 2) td {
     height: 4mm;
 }
 
 
-#summary_table tr:nth-child(n + 2) td:not(:first-child) {
+#summary_table.round_table tr:nth-child(n + 2) td:not(:first-child) {
     border-left: thin solid grey;
 }
 
-#summary_table tr:nth-child(n + 3) td {
+#summary_table.round_table tr:nth-child(n + 3) td {
     text-align: right;
     padding-right: 2mm;
     padding-left: 3mm;
 }
 
-#summary_table tr:first-child td:first-child {
+#summary_table.round_table tr:first-child td:first-child {
     font-size: 1.3em;
     height: 10mm;
     width: 85mm;
 }
 
-#summary_table span:nth-of-type(3) {
+#summary_table.round_table span:nth-of-type(3) {
     font-weight: bold;
 }
 
-#summary_table tr:nth-child(2) {
+#summary_table.round_table tr:nth-child(2) {
     font-size: 0.8em;
 }
 
-#summary_table tr:nth-child(2) td {
+#summary_table.round_table tr:nth-child(2) td {
     padding: 1.5mm 0 1mm 0;
     text-align: center;
 }
 
-#summary_table tr:not(:first-child) > td:nth-child(3n + 1) {
+#summary_table.round_table tr:not(:first-child) > td:nth-child(3n + 1) {
     width: 25mm;
 }
 
-#summary_table tr:first-child > td:first-child > span:first-child {
+#summary_table.round_table tr:first-child > td:first-child > span:first-child {
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -316,6 +316,7 @@ div.page div.row span.partner_inline address, div.page div.row span.partner_inli
     float: right;
     height: 140px;
 }
+
 
 #bank_table td {
     padding: 1mm;
