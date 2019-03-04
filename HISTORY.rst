@@ -23,6 +23,15 @@ latest (unreleased)
 
 **Bugfixes**
 
+ALCYN-1950 Hack board.board to fix RPC calls
+
+When `custom_view_id` is not valued it gets translated to JS undefined.
+When the unfold action in the dashboard calls `/web/edit_custom`
+it uses `JSON.stringify` to send params but it strips out undefined values
+and the RPC call is broken for a missing argument.
+
+Here we make sure we always have a good falsy value.
+
 **Build**
 
 **Documentation**

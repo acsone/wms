@@ -9,6 +9,7 @@
     'license': 'AGPL-3',
     'category': 'Warehouse',
     'depends': [
+        'board',
         'delivery_rounds',
         'product',
         'product_expiry',
