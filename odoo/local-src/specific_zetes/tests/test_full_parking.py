@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+import unittest
 
 from .. import constants
 from .zetes_test_classes import ZetesParkingTest, DEFAULT_HEADER
@@ -87,6 +88,8 @@ class TestFullParking(ZetesParkingTest):
         # Round to the picking
         self.round.button_update()
 
+    @unittest.skip("Test is failing randomly, see "
+                   "https://github.com/camptocamp/alcyon_odoo/issues/1097")
     def test_full(self):
         assignement_obj = Assignment(DEFAULT_HEADER,
                                      mock.MagicMock(name='Savepoint()'),
