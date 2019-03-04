@@ -74,5 +74,5 @@
 	url = git@github.com:OCA/mis-builder.git
 [submodule "odoo/external-src/account-reconcile"]
 	path = odoo/external-src/account-reconcile
-	url = git@github-work:oca/account-reconcile
+	url = git@github.com:oca/account-reconcile
 	branch = 10.0
