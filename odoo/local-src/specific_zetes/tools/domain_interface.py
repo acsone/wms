@@ -35,7 +35,7 @@ class Savepoint(object):
         self.release()
 
 
-class DomainInterface:
+class DomainInterface(object):
     EXAMPLE_REQU = ''
     EXAMPLE_RESP = ''
     EXAMPLE_RESU = ''
@@ -55,6 +55,14 @@ class DomainInterface:
         operator_code = header[constants.USER_INDEX]
         self._user = self.request.env['res.users'].get_user(operator_code)
         _logger.debug(u'User: {}'.format(self._user.name or 'no user'))
+
+    def __repr__(self):
+        return u'%s(%r, %r, %r)' % (
+            self.__class__.__name__,
+            self._header,
+            self._savepoint,
+            self.request,
+        )
 
     def rollback_to_savepoint(self):
         """Rollback to savepoint
@@ -119,6 +127,11 @@ class Parameters:
             formatted_values = [value.strip() for value in values]
             self.__dict__.update(dict(zip(labels, formatted_values)))
             _logger.debug(str(self))
+
+    def __repr__(self):
+        return u"Parameters(%r, %r, %r)" % (
+            self._domain, self._action, self.__dict__
+        )
 
     def __str__(self):
         """
