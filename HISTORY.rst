@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1956: Allow to receive products directly in stock (without going through the parking)
 
 **Bugfixes**
 
