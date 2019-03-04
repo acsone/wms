@@ -13,3 +13,4 @@ from . import procurement_order
 from . import stock_move
 from . import stock_scrap
 from . import reception_pharmacy
+from . import board
