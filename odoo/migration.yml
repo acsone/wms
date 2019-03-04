@@ -138,6 +138,8 @@ migration:
           - account_invoice_check_total
           - account_invoice_line_default_account
           - account_invoice_triple_discount
+          # oca/account-reconcile
+          - account_mass_reconcile
           # oca/bank-payment
           - account_banking_pain_base
           - account_banking_mandate
@@ -479,3 +481,7 @@ migration:
           - base_import_security_group
           ### odoo
           - l10n_be_intrastat_2019
+    - version: 10.32.0
+      addons:
+        upgrade:
+          - account_mass_reconcile

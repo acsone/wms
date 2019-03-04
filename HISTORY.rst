@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1953: install account_mass_reconcile module
+
 **Bugfixes**
 
 ALCYN-1950 Hack board.board to fix RPC calls

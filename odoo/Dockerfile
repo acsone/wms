@@ -92,6 +92,7 @@ ENV ADDONS_PATH="/odoo/local-src, \
   /odoo/external-src/account-financial-reporting, \
   /odoo/external-src/account-financial-tools, \
   /odoo/external-src/account-invoicing, \
+  /odoo/external-src/account-reconcile, \
   /odoo/external-src/bank-payment, \
   /odoo/external-src/connector, \
   /odoo/external-src/l10n-belgium, \
