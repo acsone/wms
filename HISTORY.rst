@@ -23,18 +23,37 @@ latest (unreleased)
 
 **Bugfixes**
 
-ALCYN-1950 Hack board.board to fix RPC calls
-
-When `custom_view_id` is not valued it gets translated to JS undefined.
-When the unfold action in the dashboard calls `/web/edit_custom`
-it uses `JSON.stringify` to send params but it strips out undefined values
-and the RPC call is broken for a missing argument.
-
-Here we make sure we always have a good falsy value.
-
 **Build**
 
 **Documentation**
+
+
+10.31.1 (2019-03-05)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1954: Add Inventory Value in the pivot view of Stock History Valuation
+  and remove Location which gives useless results
+
+**Bugfixes**
+
+* ALCYN-1950: Hack board.board to fix RPC calls
+  When `custom_view_id` is not valued it gets translated to JS undefined.
+  When the unfold action in the dashboard calls `/web/edit_custom`
+  it uses `JSON.stringify` to send params but it strips out undefined values
+  and the RPC call is broken for a missing argument.
+  Here we make sure we always have a good falsy value.
+* ALCYN-1951: apply specific styling only for invoice report
+* ALCYN-1940: set correct precision on numbers for intrastat report and set close to false in Data tag
+* ALCYN-1954: add an index on product_price_history.product_id, makes the stock valuation very slow
+* ALCYN-1954: apply a patch correcting the groupbys on stock history (https://github.com/odoo/odoo/commit/ba09b8989ebbe10aa336dbf850d075fbcda558d0)
+* ALCYN-1954: optimize stock history with new indices and a code optimization on groupbys (https://github.com/odoo/odoo/pull/31540)
+* ALCYN-1955: Fix crash on the Sales Orders' Fast Line Entries view
+
+**Data**
+
+* ALCYN-1940: Correct country of origin on invoice lines and products
 
 
 10.31.0 (2019-02-28)

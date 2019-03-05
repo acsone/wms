@@ -19,6 +19,7 @@
         'cash_on_delivery',
         'specific_purchase',
         'l10n_be_invoice_bba',
+        'l10n_be_intrastat',
         'specific_data',
         'queue_job',
         'account_invoice_sent',
