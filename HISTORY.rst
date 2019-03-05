@@ -32,7 +32,7 @@ and the RPC call is broken for a missing argument.
 
 Here we make sure we always have a good falsy value.
 
-* ALCYN-1955: Fix creash on Fast Line Entries, default value error
+* ALCYN-1955: Fix crash on Fast Line Entries,due to default value error
 
 **Build**
 
