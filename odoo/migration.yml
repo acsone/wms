@@ -503,3 +503,6 @@ migration:
           - stock_picking_backorder
           - specific_sale
           - delivery_rounds_refill
+      operations:
+        pre:
+          - "sh -c 'psql -f odoo/songs/upgrade/update_10_32_0_clean_models.sql'"
