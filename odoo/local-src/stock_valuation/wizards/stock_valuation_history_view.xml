@@ -39,4 +39,17 @@
             <field name="context">{'search_default_group_by_product': False, 'search_default_group_by_location': False}</field>
     </record>
 
+    <record id="view_stock_history_report_pivot_inventory_value" model="ir.ui.view">
+        <field name="name">stock.history.value.pivot.inventory.value</field>
+        <field name="model">stock.history</field>
+        <field name="inherit_id" ref="stock_account.view_stock_history_report_pivot"/>
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="inventory_value" type="measure"/>
+            </field>
+            <field name="location_id" position="replace">
+            </field>
+        </field>
+    </record>
+
 </odoo>

@@ -30,6 +30,7 @@
                     attrs="{'readonly': [('procurement_ids', '!=', [])]}"
                     context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'pricelist':order_pricelist_id, 'uom':product_uom, 'company_id': company_id}"
                 />
+                <field name="discounting_type"/>
                 <field name="product_qty_unavailable"/>
                 <field name="product_qty_canceled"/>
                 <field name="product_qty_returned"/>

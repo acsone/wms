@@ -484,6 +484,8 @@ migration:
         upgrade:
           ### local
           - specific_report
+          - stock_valuation
+          - specific_sale 
       modes:
         full:
           operations:
