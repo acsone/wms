@@ -35,9 +35,9 @@ latest (unreleased)
 
 * Fix some startup warnings:
 
- * onchange on dotted path field is not supported
- * add missing ACL on Report Stock Overview
- * clean "ir.model" which exists in DB but have been removed from code
+  - onchange on dotted path field is not supported
+  - add missing ACL on Report Stock Overview
+  - clean "ir.model" which exists in DB but have been removed from code
 
 **Build**
 
