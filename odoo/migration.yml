@@ -502,3 +502,4 @@ migration:
           - specific_report
           - stock_picking_backorder
           - specific_sale
+          - delivery_rounds_refill

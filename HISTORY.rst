@@ -36,6 +36,7 @@ latest (unreleased)
 * Fix some startup warnings:
 
  * onchange on dotted path field is not supported
+ * add missing ACL on Report Stock Overview
 
 **Build**
 
