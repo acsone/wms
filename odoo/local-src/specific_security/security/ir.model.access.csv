@@ -17,3 +17,5 @@ mrp.access_product_group_res_partner_mrp_manager,res_partner group_mrp_manager,b
 access_res_partner_accounting,access_res_partner_accounting,base.model_res_partner,account.group_account_user,1,1,1,0
 access_queue_job_users,access_queue_job_users,queue_job.model_queue_job,base.group_user,1,0,0,0
 access_account_cutoff_line_group_user,access_account_cutoff_line_group_user,account_cutoff_base.model_account_cutoff_line,base.group_user,1,0,0,0
+access_stock_inventory_account_user,account.stock.inventory,stock.model_stock_inventory,account.group_account_user,1,0,0,0
+access_stock_inventory_line_account_user,account.stock.inventory.line,stock.model_stock_inventory_line,account.group_account_user,1,0,0,0

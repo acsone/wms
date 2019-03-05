@@ -23,6 +23,7 @@ latest (unreleased)
 * ALCYN-1810: Allow optional printing 'Entry register' part in delivery slip
 
 * ALCYN-1953: install account_mass_reconcile module
+* ALCYN-1921: allow Accountant group read stock.inventory
 
 **Bugfixes**
 * Update hidden dependency between addons
