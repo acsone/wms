@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# Copyright 2019 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+
+from odoo import models, fields
+
+
+class ProductPriceHistory(models.Model):
+    _inherit = 'product.price.history'
+
+    # override to add an index
+    product_id = fields.Many2one(index=True)
