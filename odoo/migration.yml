@@ -483,5 +483,11 @@ migration:
       addons:
         upgrade:
           ### local
+          - specific_report
           - stock_valuation
           - specific_sale 
+      modes:
+        full:
+          operations:
+            post:
+              - "sh -c 'psql -f odoo/songs/upgrade/update_10_31_1.sql'"

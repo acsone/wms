@@ -8,3 +8,4 @@ from . import account_invoice
 from . import stock_move
 from . import round_instance
 from . import res_partner
+from . import xml_decl
