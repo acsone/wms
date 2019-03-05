@@ -33,6 +33,10 @@ latest (unreleased)
 * Update hidden dependency between addons
 * ALCYN-1961: Some lots created at reception are not linked to the right product
 
+* Fix some startup warnings:
+
+ * onchange on dotted path field is not supported
+
 **Build**
 
 **Documentation**
