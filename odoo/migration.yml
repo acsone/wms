@@ -484,3 +484,4 @@ migration:
         upgrade:
           ### local
           - stock_valuation
+          - specific_sale 

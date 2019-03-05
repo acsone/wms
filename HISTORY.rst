@@ -38,6 +38,8 @@ Here we make sure we always have a good falsy value.
 * ALCYN-1954: apply a patch correcting the groupbys on stock history (https://github.com/odoo/odoo/commit/ba09b8989ebbe10aa336dbf850d075fbcda558d0)
 * ALCYN-1954: optimize stock history with new indices and a code optimization on groupbys (https://github.com/odoo/odoo/pull/31540)
 
+* ALCYN-1955: Fix crash on Fast Line Entries,due to default value error
+
 **Build**
 
 **Documentation**

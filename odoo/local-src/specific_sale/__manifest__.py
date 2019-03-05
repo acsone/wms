@@ -17,6 +17,7 @@
         'sales_team',
         'stock',
         'stock_available_immediately',
+        'sale_triple_discount',
         'specific_data',
         'specific_partner',
         'specific_stock',
