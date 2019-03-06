@@ -50,7 +50,7 @@ else
   # Hard check: modules having XML updates - update is *required*
   # `split` following the common pattern "odoo/local-src/<module_name>/..."
   # to get the module name out of it
-  xml_impact_modules = modified_xml_files.uniq.map{ |i| i.split("/")[2] }
+  xml_impact_modules = modified_xml_files.map{ |i| i.split("/")[2] }.uniq
   # names of modules present in diff, though absent in an last upgrade step
   upgrade_required = xml_impact_modules - addons_to_upgrade
   # fail w/ informative msg if not every impacted module is present in the last migration step
@@ -62,7 +62,7 @@ else
   end
 
   # Soft check: modules having Python updates - update is advised
-  python_impact_modules = modified_python_files.uniq.map{ |i| i.split("/")[2] }
+  python_impact_modules = modified_python_files.map{ |i| i.split("/")[2] }.uniq
   upgrade_advised = python_impact_modules - addons_to_upgrade
   # since we're done w/ `upgrade required` step now,
   # we don't need to highlight those for the second time

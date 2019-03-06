@@ -12,18 +12,23 @@ from odoo.exceptions import UserError
 
 
 class CamptocampVersionController(http.Controller):
-
-    @http.route('/web/camptocamp/tools/versions', type='http', auth='user',
-                website=False)
+    @http.route(
+        '/web/camptocamp/tools/versions',
+        type='http',
+        auth='user',
+        website=False,
+    )
     def camptocamp_versions(self, *args, **kwargs):
         if not request.env.user.has_group('base.group_no_one'):
-            raise UserError(_(
-                "Only users with Technical Features activated are allowed."))
+            raise UserError(
+                _("Only users with Technical Features activated are allowed.")
+            )
         sql = """SELECT number, date_done
                  FROM marabunta_version
                  ORDER BY date_done DESC;"""
         request.env.cr.execute(sql)
         res = request.env.cr.dictfetchall()
         values = {'versions': res}
-        return request.render('camptocamp_tools.camptocamp_versions_template',
-                              values)
+        return request.render(
+            'camptocamp_tools.camptocamp_versions_template', values
+        )

@@ -20,6 +20,7 @@ https://github.com/camptocamp/odoo-template instead.
 * [Using automated tasks with Invoke](./invoke.md)
 * [Odoo Cloud Platform](https://confluence.camptocamp.com/confluence/display/BS/Odoo+Cloud+Platform+-+Technical)
 * [Odoo Test Cloud Platform - Minions](https://confluence.camptocamp.com/confluence/display/BS/Odoo+Test+Platform+-+Minions+-+Technical)
+* [pre-commit installation](./pre-commit.md)
 
 ## How-to
 
