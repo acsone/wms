@@ -498,4 +498,5 @@ migration:
         upgrade:
           - account_mass_reconcile
           ### local
+          - specific_security
           - specific_report
