@@ -2,13 +2,25 @@
 sync:
   include:
     - ./.cookiecutter.context.yml
+    - ./.flake8
+    - ./.isort.cfg
+    - ./.pre-commit-config.yaml
+    - ./pyproject.toml
     - ./tasks/*
     - ./docs/*
+    - ./travis/docker-compose.yml
     - ./travis/git_submodule_update.py
     - ./travis/minion-client.py
     - ./travis/publish.sh
+    - ./odoo/.dockerignore
     - ./odoo/before-migrate-entrypoint.d/*
     - ./odoo/start-entrypoint.d/*
+    - ./odoo/local-src/camptocamp_tools/*
+    - ./odoo/local-src/camptocamp_website_tools/*
+    - ./cups-test-server/*
+    - ./Dangerfile
+    - ./Gemfile
+    - ./Gemfile.lock
   exclude:
     - ./docs/README.local.md
   comment: |
