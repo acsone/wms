@@ -45,6 +45,13 @@ def define_esb_ref_on_countries(ctx):
 
 
 @anthem.log
+def define_esb_ref_on_carrier_shipping(ctx):
+    ctx.env.ref('specific_data.deliver_carrier_alcyon_product_product').write({
+        'esb_ref': '1',
+    })
+
+
+@anthem.log
 def define_esb_ref_on_taxes(ctx):
     """ Define esb_res on taxes """
     for taxes in [PRODUCT_SALE_VAT, PRODUCT_PURCHASE_VAT]:
@@ -80,5 +87,6 @@ def main(ctx):
     import_delivery_carriers(ctx)
     define_esb_ref_on_countries(ctx)
     define_esb_ref_on_taxes(ctx)
+    define_esb_ref_on_carrier_shipping(ctx)
     import_payment_modes(ctx)
     rename_payment_method(ctx)

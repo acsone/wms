@@ -267,12 +267,6 @@ migration:
           - web_autorefresh
           - web_widget_inputmask
           - website_purchase_review
-    - version: 10.27.4
-      operations:
-        post:
-          # There is one point here with configuration. I want to stop loosing
-          # my sanity and let someone else deal with it
-          - anthem songs.upgrade.10_27_4_update::post
     - version: 10.30.12
       addons:
         upgrade:
@@ -508,3 +502,6 @@ migration:
           - "sh -c 'psql -f odoo/songs/upgrade/update_10_32_0_clean_models.sql'"
 
     - version: 10.0.1.33.0
+      operations:
+        pre:
+          - "sh -c 'psql -f odoo/songs/upgrade/update_10_0_1_33_0.sql'"
