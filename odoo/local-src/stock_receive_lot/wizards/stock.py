@@ -123,10 +123,10 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.location_dest_id = self.operation_id.location_dest_id
             else:
                 self.location_dest_id = False
-        if not self.lot_required:
-            self.life_date = False
-            self.life_date_char = False
-            self.lot_name = False
+        self.life_date = False
+        self.life_date_char = False
+        self.lot_name = False
+        self.qty = 0
 
     location_op_dest_id = fields.Many2one(
         'stock.location', 'Operation Destination View Location',
@@ -223,9 +223,12 @@ class StockPackOperationLotAdd(models.TransientModel):
         'stock.production.lot', 'Lot')
 
     def _convert_lot_name2id(self, vals):
-        operation = (
-            self.operation_id or
-            self.env['stock.pack.operation'].browse(vals['operation_id']))
+        if ('operation_id' in vals):
+            operation = self.env['stock.pack.operation'].browse(
+                vals['operation_id'])
+        else:
+            operation = self.operation_id
+
         lot_obj = self.env['stock.production.lot']
         lot = lot_obj.search([
             ('name', '=', vals['lot_name']),
