@@ -506,3 +506,5 @@ migration:
       operations:
         pre:
           - "sh -c 'psql -f odoo/songs/upgrade/update_10_32_0_clean_models.sql'"
+
+    - version: 10.0.1.33.0
