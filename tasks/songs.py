@@ -19,7 +19,8 @@ except ImportError:
 try:
     import requests
 except ImportError:
-    print('Please install `requests`')
+    print('Missing python `requests` from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 from invoke import task
 from .common import exit_msg

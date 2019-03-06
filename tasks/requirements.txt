@@ -2,7 +2,8 @@ cookiecutter==1.6.0
 future==0.16.0
 git-aggregator==1.3.0
 invoke==1.1.1
-PyYAML==3.11
+# 3.11 was incompatible with kaptan for git-autoshare
+PyYAML==3.13
 requests==2.19.1
 ruamel.yaml==0.15.66
 gnupg==2.3.1
@@ -12,3 +13,8 @@ python-dateutil==2.7.3
 # marabunta new versioning
 marabunta >= 0.9.0
 
+# fork of git-autoshare
+git+https://github.com/mpanarin/git-autoshare.git@add-submodule-support#egg=git-autoshare
+
+#
+clipboard==0.0.4

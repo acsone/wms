@@ -262,6 +262,37 @@ echo "pdbpp" >> odoo/dev_requirements.txt
 doco build odoo
 ```
 
+### Develop on a python dependency
+
+For some odoo addons, you might have to do changes in their python dependencies, and
+ you obviously don't want to rebuild your image for every change you did in this 
+ package, nor keep the sources inside of your project or add it as a submodule. 
+The only thing to do is to define a Docker volume to override the initial installation
+ by pypi with your local copy.
+ 
+Let's assume your python dependency is called PyExample and you have a local clone on
+ your machine at `/home/user/dev/pyexample`.
+
+Create a symlink inside your project to the package's path
+ 
+```bash
+cd odoo
+ln -s /home/user/dev/pyexample
+```
+
+Then get the path of the package installation inside the container 
+
+```bash
+docker-compose run --rm odoo python -c "import pyexample; print(pyexample)"
+(...)
+<module 'pyexample' from '/usr/local/lib/python2.7/dist-packages/pyexample/__init__.pyc'>
+```
+
+With the path in hand, you can now define a new volume in `docker-compose.override.yml`.
+
+```yaml
+- "./odoo/pyexample/:/usr/local/lib/python2.7/dist-packages/pyexample"
+``` 
 
 ### Troubleshooting
 

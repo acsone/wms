@@ -13,12 +13,20 @@ from datetime import date
 try:
     from builtins import input
 except ImportError:
-    print('Please install future')
+    print('Missing install future from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 try:
     import yaml
 except ImportError:
-    print('Please install pyyaml')
+    print('Missing install pyyaml from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
+
+try:
+    import clipboard
+except ImportError:
+    print('Missing clipboard from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 from marabunta.version import MarabuntaVersion
 from distutils.version import StrictVersion
@@ -141,7 +149,6 @@ def bump(ctx, major=False, feature=False, patch=False, print_only=False):
     version = release_get_next_version(
         old_version, major=major, feature=feature, patch=patch)
 
-
     print('Increasing version number from {} '
           'to {}...'.format(old_version, version))
     print()
@@ -184,8 +191,12 @@ def bump(ctx, major=False, feature=False, patch=False, print_only=False):
 
     push_branches(ctx, force=True)
 
+    clipboard.copy(version)
+
     print()
     print('** Version changed to {} **'.format(version))
+    print()
+    print('Version {} has been copied to your clipboard'.format(version))
     print()
     print('Please continue with the release by:')
     print()

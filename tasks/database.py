@@ -70,6 +70,33 @@ def get_db_container_port(ctx):
     return str(int(run_res.stdout.split(':')[-1]))
 
 
+def get_db_request_result(ctx, dbname, sql):
+    """Return the execution of given SQL request on given db"""
+    result = False
+    with ensure_db_container_up(ctx):
+        db_port = get_db_container_port(ctx)
+        dsn = "host=localhost dbname=%s " \
+              "user=odoo password=odoo port=%s" % (dbname, db_port)
+        # Connect and list DBs
+        with psycopg2.connect(dsn) as db_connection:
+            with db_connection.cursor() as db_cursor:
+                db_cursor.execute(sql)
+                result = db_cursor.fetchall()
+    return result
+
+
+def get_db_list(ctx):
+    """Return the list of db on container"""
+    sql = """
+        SELECT datname
+        FROM pg_database
+        WHERE datistemplate = false
+        AND datname not in ('postgres', 'odoo');
+    """
+    databases_fetch = get_db_request_result(ctx, 'postgres', sql) or []
+    return [db_name_tuple[0] for db_name_tuple in databases_fetch]
+
+
 def expand_path(path):
     if path.startswith('~'):
         path = os.path.expanduser(path)
@@ -79,42 +106,24 @@ def expand_path(path):
 @task(name='list-versions')
 def list_versions(ctx):
     """Print a table of DBs with Marabunta version and install date."""
-    with ensure_db_container_up(ctx):
-        db_port = get_db_container_port(ctx)
-        dsn = "host=localhost dbname=postgres " \
-              "user=odoo password=odoo port=%s" % db_port
-        # Connect and list DBs
-        with psycopg2.connect(dsn) as db_connection:
-            with db_connection.cursor() as db_cursor:
-                db_cursor.execute(
-                    "SELECT datname "
-                    "FROM pg_database "
-                    "WHERE datistemplate = false "
-                    "AND datname not in ('postgres', 'odoo');")
-                databases_fetch = db_cursor.fetchall()
-                db_list = [
-                    db_name_tuple[0] for db_name_tuple in databases_fetch
-                ]
-        res = {}
-        # Get version for each DB
-        for db_name in db_list:
-            dsn = "host=localhost dbname=%s user=odoo " \
-                  "password=odoo port=%s" % (db_name, db_port)
-            with psycopg2.connect(dsn) as db_connection:
-                with db_connection.cursor() as db_cursor:
-                    try:
-                        db_cursor.execute(
-                            "SELECT date_done, number "
-                            "FROM marabunta_version "
-                            "ORDER BY date_done DESC "
-                            "LIMIT 1;")
-                        version_tuple = db_cursor.fetchone()
-                    except psycopg2.ProgrammingError:
-                        # Error expected when marabunta_version table does not
-                        # exist
-                        res[db_name] = (None, 'unknown')
-                        continue
-                    res[db_name] = version_tuple
+    res = {}
+    sql = """
+        SELECT date_done, number
+        FROM marabunta_version
+        ORDER BY date_done DESC
+        LIMIT 1;
+    """
+    # Get version for each DB
+    db_list = get_db_list(ctx)
+    for db_name in db_list:
+        try:
+            version_fetch = get_db_request_result(ctx, db_name, sql)
+            version_tuple = version_fetch[0]
+        except psycopg2.ProgrammingError:
+            # Error expected when marabunta_version table does not exist
+            version_tuple = (None, 'unknown')
+        res[db_name] = version_tuple
+
     size1 = max([len(x) for x in res.keys()]) + 1
     size2 = max([len(x[1]) for x in res.values()]) + 1
     size3 = 10  # len('2018-01-01')
@@ -260,7 +269,7 @@ def share_on_dumps_bag(ctx, dump_file_path):
     gpg_file_path = encrypt_for_dump_bags(ctx, dump_file_path)
     username = getpass.getuser()
     s3_dump_path = 's3://odoo-dumps/%s/%s' % (
-        username, os.path.basename(dump_file_path)
+        username, os.path.basename(gpg_file_path)
     )
     ctx.run(
         'aws --profile=odoo-dumps s3 cp %s %s' % (

@@ -41,8 +41,8 @@ In the following order, at the end of a sprint, the release manager will:
 * Merge all pending pull requests when possible, and for each corresponding card in Jira set the "Fix Version" field accordingly as well as change the status to "Waiting deploy"
 
 * Ensure that the migration scripts are complete and working (see [upgrade-scripts.md](upgrade-scripts.md#run-a-version-upgrade-again) on how to execute a specific version scripts).
-  
-* For projects already used in Production, ensure migration is working in FULL mode. (see [how-to-use-a-prod-db-in-dev.md](how-to-use-a-prod-db-in-dev.md) to get a dump for projects hosted on cloud platform). 
+
+* For projects already used in Production, ensure migration is working in FULL mode. (see [how-to-use-a-prod-db-in-dev.md](how-to-use-a-prod-db-in-dev.md) to get a dump for projects hosted on cloud platform).
 
 * Increase the version number (see [invoke.md](invoke.md#releasebump) for more information)
 
@@ -59,6 +59,8 @@ In the following order, at the end of a sprint, the release manager will:
   ```
 
 * Do the verifications: migration scripts, [changelog](../HISTORY.rst) (remove empty sections, ...)
+
+* The new version number 'x.y.z' is copied to your clipboard in order to speedup the next commands
 
 * Commit the changes to [changelog](../HISTORY.rst), VERSION, ... on master with message 'Release x.y.z'
 
@@ -83,7 +85,7 @@ If everything went well it is worth informing the project manager that a new rel
    correct
 2. Push the branch to the camptocamp repository
 3. Create a working branch based on `patch-R.r.x.y.next-z` which include your fix
-4. Push your working branch on your fork repository and create a pull request 
+4. Push your working branch on your fork repository and create a pull request
    on `patch-R.r.x.y.next-z`
 5. Ask for reviews, get reviewed, merge
 6. Create a release `R.r.x.y.next-z`

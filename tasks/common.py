@@ -24,13 +24,14 @@ try:
     import git_aggregator.main
     import git_aggregator.repo
 except ImportError:
-    print('Please install git-aggregator')
-
+    print('Missing git-aggregator from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 try:
     from ruamel.yaml import YAML
 except ImportError:
-    print('Please install ruamel.yaml')
+    print('Missing ruamel.yaml from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 
 def root_path():

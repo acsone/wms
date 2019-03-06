@@ -153,6 +153,23 @@ invoke songs.rip http://127.0.0.1:8888/dj/download/compilation/account-default-1
 invoke songs.rip /tmp/songs.zip
 ```
 
+### migrate.check-modules
+
+Used for migration projects,
+give information to know which modules are finally installed into databases:
+
+* Migrated database
+  * The database returned by Odoo, without applying any script
+* Full database
+  * The migrated database on which full build has been applied
+* Sample database
+  * The sample database without customer data
+
+_Example of calling:_
+```
+invoke migrate.check-modules odoodb-migrated odoodb-full odoodb-sample
+```
+
 ## Custom tasks
 
 Alongside the core namespaces (release, project. translate), you can create

@@ -87,7 +87,7 @@ that the folder has been added directly to the main git repository instead of a 
 * Delete the relevant line from ADDONS_PATH in `odoo/Dockerfile`
 
   ```
-   /opt/odoo/external-src/submodule, \
+   /odoo/external-src/submodule, \
   ```
 
 * `git add odoo/Dockerfile`
