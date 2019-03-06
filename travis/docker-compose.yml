@@ -1,6 +1,4 @@
 # docker-compose file used by travis
-# docker-compose.override.yml is automatically used by docker-compose when no
-# option -f is provided
 
 version: '2'
 services:
