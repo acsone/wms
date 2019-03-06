@@ -8,6 +8,7 @@
             <xpath expr="//group[@name='delivery']" position="inside">
                 <field name="is_hide_prices_deliveryslip"/>
                 <field name="show_deliveryslip_cnk"/>
+                <field name="is_hide_entry_register"/>
             </xpath>
         </field>
     </record>

@@ -28,6 +28,8 @@
         'stock_picking_backorder',
         'stock_picking_assignment',
         'stock_product_bin',
+        'procurement_sale',
+        'sale_consignment',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

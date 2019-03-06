@@ -522,8 +522,7 @@
         <t t-foreach="docs" t-as="deliveryslip">
             <t t-call="specific_report.report_deliveryslip" t-lang="deliveryslip.partner_id.lang"/>
             <t t-set="depot_number" t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"/>
-            <t t-if="depot_number and deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
-
+            <t t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
         </t>
     </template>
 </odoo>

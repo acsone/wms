@@ -20,10 +20,12 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* ALCYN-1810: Allow optional printing 'Entry register' part in delivery slip
 
 * ALCYN-1953: install account_mass_reconcile module
 
 **Bugfixes**
+* Update hidden dependency between addons
 
 **Build**
 

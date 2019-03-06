@@ -497,3 +497,5 @@ migration:
       addons:
         upgrade:
           - account_mass_reconcile
+          ### local
+          - specific_report
