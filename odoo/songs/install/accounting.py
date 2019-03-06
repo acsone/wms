@@ -778,6 +778,16 @@ def set_analytic_account_on_product_category(ctx):
 
 
 @anthem.log
+def set_reconcilable_accounts(ctx):
+    ctx.env.cr.execute("""
+    UPDATE account_account
+    SET reconcile='t'
+    WHERE code in ('416150','416200','451800','451900',
+                    '453000','454000','455000','459700','580000');
+    """)
+
+
+@anthem.log
 def main(ctx):
     """ Configuring accounting """
     configure_missing_chart_of_account(ctx)
@@ -811,3 +821,4 @@ def main(ctx):
     create_new_accounts(ctx)
     add_apb_tax_2018(ctx)
     set_analytic_account_on_product_category(ctx)
+    set_reconcilable_accounts(ctx)
