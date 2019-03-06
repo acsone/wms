@@ -2,17 +2,17 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import mock
 import os
 import random
+
 import requests
 
+import mock
 from odoo.addons.connector.exception import ConnectorException
 from odoo.tests.common import SavepointCase
 
 
 class ExportStockUpdateTestCase(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(ExportStockUpdateTestCase, cls).setUpClass()
@@ -23,8 +23,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         cls.backend = cls.backend_model.get_singleton()
         cls.setup_records()
         cls.maxDiff = None
-        cls.timestamp = cls.env.ref(
-                'connector_esb.esb_timestamp_stock_update')
+        cls.timestamp = cls.env.ref('connector_esb.esb_timestamp_stock_update')
 
     @property
     def model(self):
@@ -39,27 +38,31 @@ class ExportStockUpdateTestCase(SavepointCase):
         # Create 10 products
         cls.all_products = cls.env['product.product']
         for product_id in range(100, 110):
-            cls.all_products |= cls.env['product.product'].create({
-                'name': 'test prod {}'.format(product_id),
-                'default_code': 'test prod {}'.format(product_id),
-                'type': 'product',
-                'sale_ok': True,
-            })
+            cls.all_products |= cls.env['product.product'].create(
+                {
+                    'name': 'test prod {}'.format(product_id),
+                    'default_code': 'test prod {}'.format(product_id),
+                    'type': 'product',
+                    'sale_ok': True,
+                }
+            )
         cls.product_ids = cls.all_products.ids
         # Add a quant for each product
         for product in cls.all_products:
-            inventory_wizard = cls.env['stock.change.product.qty'].create({
-                'product_id': product.id,
-                'new_quantity': random.randint(1, 100),
-                'location_id': cls.location,
-            })
+            inventory_wizard = cls.env['stock.change.product.qty'].create(
+                {
+                    'product_id': product.id,
+                    'new_quantity': random.randint(1, 100),
+                    'location_id': cls.location,
+                }
+            )
             inventory_wizard.change_product_qty()
 
     def set_quant_write_date(self, quants, write_date):
         """Set the write_date on some quants."""
         self.env.cr.execute(
             'UPDATE stock_quant SET write_date = %s WHERE id in %s',
-            (write_date, tuple(quants.ids))
+            (write_date, tuple(quants.ids)),
         )
 
     def successful_post_response(url, data, headers, auth):
@@ -76,8 +79,9 @@ class ExportStockUpdateTestCase(SavepointCase):
         And check that all are exported if nb of export is smaller
         than max records
         """
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             # 10 product stock status to export by batch of 3, is 4 export
             exported_until = exporter.run(max_records=3)
@@ -115,15 +119,16 @@ class ExportStockUpdateTestCase(SavepointCase):
             [('product_id.id', 'in', self.product_ids[0:3])]
         )
         self.set_quant_write_date(quants, '2017-11-05 12:00:00')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(max_records=3)
             # Failing after the second export
             self.assertEqual(post.call_count, 2)
             self.assertEqual(
                 exported_until,
-                exporter.get_exported_until('2017-11-05 12:00:00')
+                exporter.get_exported_until('2017-11-05 12:00:00'),
             )
 
     @mock.patch('requests.post', side_effect=failing_post_response)
@@ -138,8 +143,9 @@ class ExportStockUpdateTestCase(SavepointCase):
             [('product_id.id', 'in', self.product_ids[3:5])]
         )
         self.set_quant_write_date(quants, '2017-11-05 12:00:00')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             with self.assertRaises(ConnectorException):
                 exporter.run(max_records=3)
@@ -154,12 +160,12 @@ class ExportStockUpdateTestCase(SavepointCase):
         # Set all quants in an older date than the export_since params
         quants = self.env['stock.quant'].search([])
         self.set_quant_write_date(quants, '2017-11-05 12:00:00')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(
-                max_records=3,
-                export_since='2017-12-12 12:00:00'
+                max_records=3, export_since='2017-12-12 12:00:00'
             )
             self.assertEqual(post.call_count, 0)
             self.assertEqual(exported_until, None)

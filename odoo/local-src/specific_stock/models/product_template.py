@@ -2,54 +2,51 @@
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    life_time = fields.Integer(
-        related='categ_id.life_time',
-    )
+    life_time = fields.Integer(related='categ_id.life_time')
 
-    use_time = fields.Integer(
-        related='categ_id.use_time',
-    )
+    use_time = fields.Integer(related='categ_id.use_time')
 
-    removal_time = fields.Integer(
-        related='categ_id.removal_time',
-    )
+    removal_time = fields.Integer(related='categ_id.removal_time')
 
-    alert_time = fields.Integer(
-        related='categ_id.alert_time',
-    )
+    alert_time = fields.Integer(related='categ_id.alert_time')
 
-    picking_zone_id = fields.Many2one('picking.zone',
-                                      string='Picking zone',
-                                      compute='_compute_picking_zone_id',
-                                      readonly=True,
-                                      store=True)
+    picking_zone_id = fields.Many2one(
+        'picking.zone',
+        string='Picking zone',
+        compute='_compute_picking_zone_id',
+        readonly=True,
+        store=True,
+    )
     is_mto_product = fields.Boolean(
         'On Order',
         readonly=True,
         compute='_compute_picking_zone_id',
-        store=True
+        store=True,
     )
 
     @api.depends('route_ids', 'route_from_categ_ids')
     def _compute_picking_zone_id(self):
         Rule = self.env['procurement.rule']
         stock_location = self.env.ref('stock.stock_location_stock')
-        picking_types = self.env['stock.picking.type'].search([
-            ('default_location_src_id', 'child_of', stock_location.id)])
+        picking_types = self.env['stock.picking.type'].search(
+            [('default_location_src_id', 'child_of', stock_location.id)]
+        )
         route_mto = self.env.ref('stock.route_warehouse0_mto')
 
         for product in self:
-            product_routes = \
+            product_routes = (
                 product.route_ids | product.categ_id.total_route_ids
+            )
 
             product.is_mto_product = route_mto in product_routes
             # We need to remove the MTO route because this route has a higher
@@ -58,37 +55,32 @@ class ProductTemplate(models.Model):
             product_routes -= route_mto
 
             res = Rule.search(
-                [('route_id', 'in', product_routes.ids),
-                 ('picking_type_id', 'in', picking_types.ids)],
-                order='route_sequence, sequence', limit=1)
+                [
+                    ('route_id', 'in', product_routes.ids),
+                    ('picking_type_id', 'in', picking_types.ids),
+                ],
+                order='route_sequence, sequence',
+                limit=1,
+            )
             if res:
-                product.picking_zone_id = \
+                product.picking_zone_id = (
                     res.picking_type_id.picking_zone_id.id
+                )
 
 
 # Due to a bug in odoo 10 we need to redefine the fields
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    life_time = fields.Integer(
-        related='categ_id.life_time',
-    )
+    life_time = fields.Integer(related='categ_id.life_time')
 
-    use_time = fields.Integer(
-        related='categ_id.use_time',
-    )
+    use_time = fields.Integer(related='categ_id.use_time')
 
-    removal_time = fields.Integer(
-        related='categ_id.removal_time',
-    )
+    removal_time = fields.Integer(related='categ_id.removal_time')
 
-    alert_time = fields.Integer(
-        related='categ_id.alert_time',
-    )
+    alert_time = fields.Integer(related='categ_id.alert_time')
 
-    date_last_inventory = fields.Datetime(
-        'Last inventory',
-        readonly=True)
+    date_last_inventory = fields.Datetime('Last inventory', readonly=True)
 
     @api.model
     def get_number_of_products_by_category(self):
@@ -112,8 +104,11 @@ class ProductProduct(models.Model):
         self.env.cr.execute(all_products_query)
         nbr_products = self.env.cr.fetchone()[0]
 
-        price = float(self.env['ir.config_parameter']
-                      .get_param('stock.price_limit_for_inventory', 0))
+        price = float(
+            self.env['ir.config_parameter'].get_param(
+                'stock.price_limit_for_inventory', 0
+            )
+        )
         expensive_products_query = """
         SELECT count(*)
         FROM product_product AS product
@@ -131,15 +126,16 @@ class ProductProduct(models.Model):
         # To modify the percent of best sellers change the config
         # "Quantity to take for best sellers (in percent)" in sock settings
         nbr_best_sellers = int(nbr_products * (best_sellers_percent / 100.0))
-        nbr_other_products = \
+        nbr_other_products = (
             nbr_products - nbr_expensive_products - nbr_best_sellers
+        )
 
         return nbr_expensive_products, nbr_best_sellers, nbr_other_products
 
     @api.model
-    def get_products_daily_inventory(self,
-                                     inventory_periods,
-                                     date_today_overwrite=None):
+    def get_products_daily_inventory(
+        self, inventory_periods, date_today_overwrite=None
+    ):
         """
         This method will return a product.product browse record set
         with the daily inventory. The goal of the daily inventory is to
@@ -162,8 +158,9 @@ class ProductProduct(models.Model):
         :return:
         """
         config_param = self.env['ir.config_parameter']
-        price = float(config_param
-                      .get_param('stock.price_limit_for_inventory', 0))
+        price = float(
+            config_param.get_param('stock.price_limit_for_inventory', 0)
+        )
         days = int(config_param.get_param('stock.nbr_open_days', 0))
         interval_between_inventory = int(
             config_param.get_param('stock.months_between_inventory', 0)
@@ -172,15 +169,21 @@ class ProductProduct(models.Model):
             config_param.get_param('stock.best_sellers_duration', 0)
         )
         date_today = date_today_overwrite or date.today()
-        maximum_last_inventory_date = \
-            date_today - relativedelta(months=interval_between_inventory)
-        maximum_last_inventory_date_str = \
-            fields.Date.to_string(maximum_last_inventory_date)
+        maximum_last_inventory_date = date_today - relativedelta(
+            months=interval_between_inventory
+        )
+        maximum_last_inventory_date_str = fields.Date.to_string(
+            maximum_last_inventory_date
+        )
 
         if not price or not days:
-            raise UserError(_('Please set the Price limit for inventory '
-                              'or/and the Number of open days '
-                              'in the stock configuration'))
+            raise UserError(
+                _(
+                    'Please set the Price limit for inventory '
+                    'or/and the Number of open days '
+                    'in the stock configuration'
+                )
+            )
 
         product_ids = set()
 
@@ -192,15 +195,15 @@ class ProductProduct(models.Model):
         WHERE si.state = 'confirm';
         """
         self.env.cr.execute(product_ids_in_open_inventory_query)
-        product_ids_in_open_inventory = \
-            set([x[0] for x in self.env.cr.fetchall()])
+        product_ids_in_open_inventory = {x[0] for x in self.env.cr.fetchall()}
         # Psycopg2 doesn't allow to create a request with an empty list.
         # To avoid to overcomplicate the code, I prefer to add a fake ID
         # in the list.
         product_ids_in_open_inventory.add(0)
 
-        nbr_expensive_products, nbr_best_sellers, nbr_other = \
+        nbr_expensive_products, nbr_best_sellers, nbr_other = (
             self.get_number_of_products_by_category()
+        )
 
         # Expensive products
         # ------------------
@@ -216,7 +219,8 @@ class ProductProduct(models.Model):
             expensive_period_start = maximum_last_inventory_date_str
 
         qty_to_check = int(
-            nbr_expensive_products / (days / expensive_period_nbr_year))
+            nbr_expensive_products / (days / expensive_period_nbr_year)
+        )
 
         query = """
         SELECT product.id
@@ -233,8 +237,12 @@ class ProductProduct(models.Model):
         ORDER BY random()
         LIMIT %s;
         """
-        query_args = [price, expensive_period_start,
-                      tuple(product_ids_in_open_inventory), qty_to_check]
+        query_args = [
+            price,
+            expensive_period_start,
+            tuple(product_ids_in_open_inventory),
+            qty_to_check,
+        ]
 
         self.env.cr.execute(query, tuple(query_args))
         result = self.env.cr.fetchall()
@@ -249,14 +257,16 @@ class ProductProduct(models.Model):
         if not best_sellers_period:
             raise UserError(_('There is no period for best sellers products'))
         best_sellers_period_start = best_sellers_period['date_start']
-        best_sellers_period_nbr_year = \
-            best_sellers_period['nbr_inventory_per_year']
+        best_sellers_period_nbr_year = best_sellers_period[
+            'nbr_inventory_per_year'
+        ]
 
         if maximum_last_inventory_date_str < best_sellers_period_start:
             best_sellers_period_start = maximum_last_inventory_date_str
 
-        qty_to_check = int(nbr_best_sellers /
-                           (days / best_sellers_period_nbr_year))
+        qty_to_check = int(
+            nbr_best_sellers / (days / best_sellers_period_nbr_year)
+        )
 
         query = """
         SELECT product_id
@@ -281,11 +291,13 @@ class ProductProduct(models.Model):
         ORDER BY random()
         LIMIT %s;
         """
-        query_args = [best_sellers_duration,
-                      best_sellers_period_start,
-                      tuple(product_ids | product_ids_in_open_inventory),
-                      nbr_best_sellers,
-                      qty_to_check]
+        query_args = [
+            best_sellers_duration,
+            best_sellers_period_start,
+            tuple(product_ids | product_ids_in_open_inventory),
+            nbr_best_sellers,
+            qty_to_check,
+        ]
         self.env.cr.execute(query, tuple(query_args))
         best_sellers_ids = [x[0] for x in self.env.cr.fetchall()]
 
@@ -321,9 +333,12 @@ class ProductProduct(models.Model):
         """
         self.env.cr.execute(
             query,
-            (other_period_start,
-             tuple(product_ids | product_ids_in_open_inventory),
-             qty_to_check))
+            (
+                other_period_start,
+                tuple(product_ids | product_ids_in_open_inventory),
+                qty_to_check,
+            ),
+        )
         result = self.env.cr.fetchall()
 
         other_product_ids = [x[0] for x in result]

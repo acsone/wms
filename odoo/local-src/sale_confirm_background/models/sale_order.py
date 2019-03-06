@@ -31,10 +31,7 @@ class Sale(models.Model):
         self.action_confirm()
         if notify:
             action = self.env.ref('sale.action_orders').read()[0]
-            action.update({
-                'res_id': self.id,
-                'views': [(False, 'form')],
-            })
+            action.update({'res_id': self.id, 'views': [(False, 'form')]})
             self.env.user.notify_info(
                 _('Order %s is now confirmed.') % self.name,
                 sticky=True,
@@ -46,17 +43,13 @@ class Sale(models.Model):
         # we want to raise interactively, not in background
         if self.detect_exceptions():
             return self._popup_exceptions()
-        self.write({
-            'state': 'confirm_background',
-        })
+        self.write({'state': 'confirm_background'})
         for order in self:
             if not order.confirmation_date:
                 order.confirmation_date = fields.Datetime.now()
             self.env.user.notify_info(
-                _('Order %s will be confirmed in background.') % order.name,
+                _('Order %s will be confirmed in background.') % order.name
             )
             order.with_delay(
-                description=_(
-                    'Confirmation of sales order %s'
-                ) % order.name,
+                description=_('Confirmation of sales order %s') % order.name
             ).confirm_in_background(notify=False)

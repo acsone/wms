@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 
 
 class StockConfig(models.TransientModel):
@@ -28,7 +28,7 @@ class StockConfig(models.TransientModel):
         return {
             'production_lot_base_date': icp.get_param(
                 'stock_production_lot_expired_dates.production_lot_base_date',
-                None
+                None,
             )
         }
 
@@ -36,5 +36,5 @@ class StockConfig(models.TransientModel):
     def set_production_lot_base_date(self):
         self.env['ir.config_parameter'].set_param(
             'stock_production_lot_expired_dates.production_lot_base_date',
-            self.production_lot_base_date
+            self.production_lot_base_date,
         )

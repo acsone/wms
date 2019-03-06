@@ -20,7 +20,6 @@ except ImportError:
     print('Please run `pip install -r tasks/requirements.txt`')
 
 
-
 @task(name='demo-to-sample')
 def demo_to_sample(ctx):
     """ Renaming of demo to sample for MARABUNTA_MODE

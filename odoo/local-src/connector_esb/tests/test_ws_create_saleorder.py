@@ -2,19 +2,17 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from mock import patch, MagicMock
 from copy import deepcopy
 
 from freezegun import freeze_time
-
+from mock import MagicMock, patch
 from odoo import fields
-from odoo.tests.common import SavepointCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
+from odoo.tests.common import SavepointCase
 
 
 class WSCreateSaleOrderTestCase(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(WSCreateSaleOrderTestCase, cls).setUpClass()
@@ -27,82 +25,89 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             "customer_id": cls.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
-            "lines": [{
-                'line_id': '1',
-                'sku': '0001',
-                'quantity': 3,
-                'free': False,
-            }, {
-                # free line: to be skipped
-                'line_id': '2',
-                'sku': 'FOO',
-                'quantity': 3,
-                'free': True,
-            }, ]
+            "lines": [
+                {'line_id': '1', 'sku': '0001', 'quantity': 3, 'free': False},
+                {
+                    # free line: to be skipped
+                    'line_id': '2',
+                    'sku': 'FOO',
+                    'quantity': 3,
+                    'free': True,
+                },
+            ],
         }
         cls.order_data_cnk = {
             "increment_id": "INC-ID",
             "customer_id": cls.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
-            "lines": [{
-                'line_id': '1',
-                'cnk': '00999',
-                'quantity': 3,
-                'free': False,
-            }]
+            "lines": [
+                {'line_id': '1', 'cnk': '00999', 'quantity': 3, 'free': False}
+            ],
         }
         cls.request_data = {
-            "jsonrpc": "3.0", "id": "4321",
+            "jsonrpc": "3.0",
+            "id": "4321",
             "method": "create",
-            "params": {
-                "data": cls.order_data
-            }
+            "params": {"data": cls.order_data},
         }
 
     @classmethod
     def setup_records(cls):
-        cls.p1 = cls.env['product.product'].create({
-            'name': 'Unittest P1',
-            'default_code': '0001',
-            'cnk_code': '00999',
-            'list_price': 10.0,
-        })
-        cls.delivery_1 = cls.env['delivery.carrier'].create({
-            'delivery_type': 'fixed',
-            'name': 'delivery carrier 1',
-            'esb_ref': '031',
-            })
+        cls.p1 = cls.env['product.product'].create(
+            {
+                'name': 'Unittest P1',
+                'default_code': '0001',
+                'cnk_code': '00999',
+                'list_price': 10.0,
+            }
+        )
+        cls.delivery_1 = cls.env['delivery.carrier'].create(
+            {
+                'delivery_type': 'fixed',
+                'name': 'delivery carrier 1',
+                'esb_ref': '031',
+            }
+        )
         cls.payment_30_net = cls.env.ref('account.account_payment_term_net')
         cls.partner = cls.env['res.partner'].create(
-            {'name': 'John Doe',
-             'ref': '111111',
-             'property_delivery_carrier_id': cls.delivery_1.id,
-             'supplier_promotion_sale_allowed': True,
-             'property_payment_term_id': cls.payment_30_net.id,
-             }
+            {
+                'name': 'John Doe',
+                'ref': '111111',
+                'property_delivery_carrier_id': cls.delivery_1.id,
+                'supplier_promotion_sale_allowed': True,
+                'property_payment_term_id': cls.payment_30_net.id,
+            }
         )
-        cls.partner_shipping = cls.env['res.partner'].create({
-            'name': 'John Doe (ship)',
-            'ref': '58020388759284',
-            'type': 'delivery',
-            'street': 'Middle street 2',
-            'city': 'Some Island',
-            'zip': '7492125',
-            'country_id': cls.fiji.id,
-            'parent_id': cls.partner.id,
-        })
-        cls.pricelist_1 = cls.env['product.pricelist'].create({
-            'name': 'Pricelist 1',
-            'item_ids': [
-                (0, False, {
-                    'applied_on': '0_product_variant',
-                    'product_id': cls.p1.id,
-                    'compute_price': 'fixed',
-                    'fixed_price': 9,
-                }),
-            ],
-        })
+        cls.partner_shipping = cls.env['res.partner'].create(
+            {
+                'name': 'John Doe (ship)',
+                'ref': '58020388759284',
+                'type': 'delivery',
+                'street': 'Middle street 2',
+                'city': 'Some Island',
+                'zip': '7492125',
+                'country_id': cls.fiji.id,
+                'parent_id': cls.partner.id,
+            }
+        )
+        cls.pricelist_1 = cls.env['product.pricelist'].create(
+            {
+                'name': 'Pricelist 1',
+                'item_ids': [
+                    (
+                        0,
+                        False,
+                        {
+                            'applied_on': '0_product_variant',
+                            'product_id': cls.p1.id,
+                            'compute_price': 'fixed',
+                            'fixed_price': 9,
+                        },
+                    )
+                ],
+            }
+        )
 
     @freeze_time("2017-09-18 11:30:20")
     def test_create_saleorder(self):
@@ -134,8 +139,9 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # free line: to be skipped
         self.assertEqual(len(order.order_line), 1)
         # Confirmtation/order date are the time of creation in Odoo by the ws
-        self.assertTrue(starting_date <= order.confirmation_date <=
-                        fields.Datetime.now())
+        self.assertTrue(
+            starting_date <= order.confirmation_date <= fields.Datetime.now()
+        )
         self.assertTrue(order.date_order == '2017-09-18 11:30:20')
 
     def test_create_saleorder_multiple_ref(self):
@@ -178,39 +184,45 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'sale_channel': 'fax',
             'state': 'draft',
             'order_line': [
-                (0, 0, {
-                    'sequence': 1,
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom_qty': 7,
-                })],
+                (
+                    0,
+                    0,
+                    {
+                        'sequence': 1,
+                        'name': self.p1.name,
+                        'product_id': self.p1.id,
+                        'product_uom_qty': 7,
+                    },
+                )
+            ],
         }
         # Could not get to patch esb_export_record, so doing it differentely
         # with patch('odoo.addons.connector_esb.models.esb_exportable.'
         #            'ESBExportable.esb_export_record') as export_record:
-        with patch('odoo.addons.queue_job.job.DelayableRecordset.__init__',
-                   return_value=None) as export_record:
+        with patch(
+            'odoo.addons.queue_job.job.DelayableRecordset.__init__',
+            return_value=None,
+        ) as export_record:
             self.env['sale.order'].create(data)
             export_record.assert_not_called()
 
     @freeze_time("2017-09-18 11:30:20")
     def test_create_saleorder_with_discount(self):
-        discount_percent = 10.
-        supplier = self.env['res.partner'].create({
-            'name': 'Supplier',
-            'ref': '9001',
-        })
-        self.p1.seller_ids = self.env['product.supplierinfo'].create({
-            'name': supplier.id,
-            'discount_sale': discount_percent,
-        })
+        discount_percent = 10.0
+        supplier = self.env['res.partner'].create(
+            {'name': 'Supplier', 'ref': '9001'}
+        )
+        self.p1.seller_ids = self.env['product.supplierinfo'].create(
+            {'name': supplier.id, 'discount_sale': discount_percent}
+        )
 
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
         order = self.env['sale.order']._ws_create_new(data)
         tax_rate = self.p1.taxes_id.amount / 100.0
-        unit_price = (self.p1.list_price -
-                      self.p1.list_price * discount_percent / 100)
+        unit_price = (
+            self.p1.list_price - self.p1.list_price * discount_percent / 100
+        )
         expected = {
             'esb_ref': 'INC-ID',
             'client_order_ref': 'refClt',
@@ -230,8 +242,9 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # free line: to be skipped
         self.assertEqual(len(order.order_line), 1)
         # Confirmtation/order date are the time of creation in Odoo by the ws
-        self.assertTrue(starting_date <= order.confirmation_date <=
-                        fields.Datetime.now())
+        self.assertTrue(
+            starting_date <= order.confirmation_date <= fields.Datetime.now()
+        )
         self.assertTrue(order.date_order == '2017-09-18 11:30:20')
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
@@ -243,7 +256,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         order = self.env['sale.order']._ws_create_new(data)
         self.assertEqual(
             order.order_line[0].price_unit,
-            self.pricelist_1.item_ids[0].fixed_price
+            self.pricelist_1.item_ids[0].fixed_price,
         )
 
     def test_create_saleorder_with_cnk(self):
@@ -328,20 +341,20 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         self.assertEqual(
             get_date_order('2019-02-26 11:22:33'),
             '2019-02-26 11:22:33',
-            "full date provided must be used"
+            "full date provided must be used",
         )
         self.assertEqual(
             get_date_order('2019-02-25 11:22:33'),
             '2019-02-25 11:22:33',
-            "full date provided must be used"
+            "full date provided must be used",
         )
         self.assertEqual(
             get_date_order('2019-02-26'),
             '2019-02-26 11:30:20',
-            "current date without time should use current time"
+            "current date without time should use current time",
         )
         self.assertEqual(
             get_date_order('2019-02-25'),
             '2019-02-25 12:00:00',
-            "another date without time should use 12:00:00"
+            "another date without time should use 12:00:00",
         )

@@ -2,24 +2,25 @@
 # Copyright 2015-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 
 
 class AccountInvoiceSent(models.TransientModel):
     """
     This wizard will mark as sent the all the selected validated invoices
     """
+
     _name = "account.invoice.sent"
 
     count_print = fields.Integer('To print', readonly=True)
     count_email = fields.Integer('By email', readonly=True)
     count_email_missing = fields.Integer(
-        'Email address missing', readonly=True)
+        'Email address missing', readonly=True
+    )
 
     email_copy = fields.Boolean(
-        'Send copy by email',
-        help="For printed documents",
-        default=False)
+        'Send copy by email', help="For printed documents", default=False
+    )
 
     @api.model
     def default_get(self, fields_list):
@@ -31,14 +32,13 @@ class AccountInvoiceSent(models.TransientModel):
         invoices = invoices._filter_send_invoice()
         defaults['count_print'] = len(invoices._filter_send_invoice('letter'))
         invoices_email = invoices.filtered(
-            lambda r:
-            r.partner_id.commercial_partner_id.invoice_sending_method ==
-            'email')
+            lambda r: r.partner_id.commercial_partner_id.invoice_sending_method
+            == 'email'
+        )
         defaults['count_email'] = len(invoices_email)
-        defaults['count_email_missing'] = (
-            len(invoices_email) -
-            len(invoices_email.filtered(
-                "partner_id.commercial_partner_id.email")))
+        defaults['count_email_missing'] = len(invoices_email) - len(
+            invoices_email.filtered("partner_id.commercial_partner_id.email")
+        )
         return defaults
 
     @api.multi
@@ -51,10 +51,12 @@ class AccountInvoiceSent(models.TransientModel):
             return act_close
         invoices = self.env['account.invoice'].browse(active_ids)
         invoices = invoices._filter_send_invoice('letter')
-        invoice_print = self.env['account.invoice.print'].create({
-            'invoice_ids': [(6, 0, invoices.ids)],
-            'send_email_copy': self.email_copy,
-        })
+        invoice_print = self.env['account.invoice.print'].create(
+            {
+                'invoice_ids': [(6, 0, invoices.ids)],
+                'send_email_copy': self.email_copy,
+            }
+        )
         invoice_print.with_delay().generate_report()
         self.env.user.notify_info(
             _('A report will be generated in background.')

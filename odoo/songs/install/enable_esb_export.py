@@ -25,59 +25,59 @@ day_first_export = '2018-10-01'
 stock_last_export = '2018-10-01 00:00:01'
 
 all_cron = [
-        {
-            'xmlid': 'ir_cron_esb_export_product',
-            'nextcall': day_first_export + ' ' + '00:00:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_pharmacy',
-            'nextcall': day_first_export + ' ' + '00:30:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_customer_morning',
-            'nextcall': day_first_export + ' ' + '01:00:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_customer_afternoon',
-            'nextcall': day_first_export + ' ' + '15:30:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_customer_address_morning',
-            'nextcall': day_first_export + ' ' + '01:15:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_customer_address_afternoon',
-            'nextcall': day_first_export + ' ' + '15:45:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_promotion_alcyon',
-            'nextcall': day_first_export + ' ' + '02:00:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_product_price',
-            'nextcall': day_first_export + ' ' + '02:30:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_special_promotion',
-            'nextcall': day_first_export + ' ' + '03:00:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_buy_x_get_y',
-            'nextcall': day_first_export + ' ' + '03:15:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_stock_update',
-            'nextcall': day_first_export + ' ' + '03:30:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_document_zip_morning',
-            'nextcall': day_first_export + ' ' + '05:00:00'
-        },
-        {
-            'xmlid': 'ir_cron_esb_export_document_zip_afternoon',
-            'nextcall': day_first_export + ' ' + '14:00:00'
-        },
-    ]
+    {
+        'xmlid': 'ir_cron_esb_export_product',
+        'nextcall': day_first_export + ' ' + '00:00:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_pharmacy',
+        'nextcall': day_first_export + ' ' + '00:30:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_customer_morning',
+        'nextcall': day_first_export + ' ' + '01:00:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_customer_afternoon',
+        'nextcall': day_first_export + ' ' + '15:30:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_customer_address_morning',
+        'nextcall': day_first_export + ' ' + '01:15:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_customer_address_afternoon',
+        'nextcall': day_first_export + ' ' + '15:45:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_promotion_alcyon',
+        'nextcall': day_first_export + ' ' + '02:00:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_product_price',
+        'nextcall': day_first_export + ' ' + '02:30:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_special_promotion',
+        'nextcall': day_first_export + ' ' + '03:00:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_buy_x_get_y',
+        'nextcall': day_first_export + ' ' + '03:15:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_stock_update',
+        'nextcall': day_first_export + ' ' + '03:30:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_document_zip_morning',
+        'nextcall': day_first_export + ' ' + '05:00:00',
+    },
+    {
+        'xmlid': 'ir_cron_esb_export_document_zip_afternoon',
+        'nextcall': day_first_export + ' ' + '14:00:00',
+    },
+]
 
 
 @anthem.log

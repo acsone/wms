@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class StockChangeProductQty(models.TransientModel):
@@ -26,13 +26,15 @@ class StockChangeProductQty(models.TransientModel):
 
     @api.model
     def _get_default_location_id(self):
-        if self.env.context.get('active_model') != 'product.template' or \
-                not self.env.context.get('active_id'):
+        if self.env.context.get(
+            'active_model'
+        ) != 'product.template' or not self.env.context.get('active_id'):
             return
 
         product_tmpl_id = self.env.context['active_id']
         stock_bins = self.env['product.stock.bin'].search(
-            [('product_id', '=', product_tmpl_id)], limit=1)
+            [('product_id', '=', product_tmpl_id)], limit=1
+        )
 
         if stock_bins:
             return stock_bins.bin_location_id.id

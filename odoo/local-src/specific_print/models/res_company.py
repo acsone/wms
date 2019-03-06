@@ -23,5 +23,6 @@ class ResCompany(models.Model):
         if not isinstance(str_to_convert, unicode):
             str.decode('uft-8')
 
-        return unicodedata.normalize('NFKD', str_to_convert)\
-            .encode('ascii', 'ignore')
+        return unicodedata.normalize('NFKD', str_to_convert).encode(
+            'ascii', 'ignore'
+        )

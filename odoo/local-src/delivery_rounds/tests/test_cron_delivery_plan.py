@@ -2,6 +2,7 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -17,15 +18,23 @@ class TestCronDeliveryPlan(TransactionCase):
     def setUp(self):
         super(TestCronDeliveryPlan, self).setUp()
 
-        self.version = self.env['round.template.version'].create({
-            'name': 'Version test',
-            'template_ids': [(0, 0, {
-                'name': 'Round template test',
-                'code': 'TEST',
-                'time_picking_planned': 8,
-                'time_leave_planned': 9,
-            })]
-        })
+        self.version = self.env['round.template.version'].create(
+            {
+                'name': 'Version test',
+                'template_ids': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': 'Round template test',
+                            'code': 'TEST',
+                            'time_picking_planned': 8,
+                            'time_leave_planned': 9,
+                        },
+                    )
+                ],
+            }
+        )
 
     def test_01_cron_delivery_plan(self):
         """
@@ -43,21 +52,20 @@ class TestCronDeliveryPlan(TransactionCase):
         next_monday_str = fields.Date.to_string(next_monday)
 
         # Try with a day of week
-        cron_1 = cron_delivery_plan.create({
-            'week_day': ISO_WEEK_DAY_MONDAY,
-            'version_id': self.version.id,
-        })
+        cron_1 = cron_delivery_plan.create(
+            {'week_day': ISO_WEEK_DAY_MONDAY, 'version_id': self.version.id}
+        )
         self.assertEqual(cron_1.next_execution, next_monday_str)
 
         # Try with a date
-        cron_2 = cron_delivery_plan.create({
-            'date_overwrite': next_monday_str,
-            'version_id': self.version.id,
-        })
+        cron_2 = cron_delivery_plan.create(
+            {'date_overwrite': next_monday_str, 'version_id': self.version.id}
+        )
         self.assertEqual(cron_2.next_execution, next_monday_str)
 
-        cron_delivery_plan.with_context({'assign_moves': False})\
-            .create_daily_plan(today_overwrite=next_monday_str)
+        cron_delivery_plan.with_context(
+            {'assign_moves': False}
+        ).create_daily_plan(today_overwrite=next_monday_str)
 
         # The next execution of cron 1 (with day of week) should be one week
         # late

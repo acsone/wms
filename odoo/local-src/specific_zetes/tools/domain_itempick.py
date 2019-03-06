@@ -1,62 +1,176 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from domain_interface import DomainInterface, Parameters, Savepoint
 from odoo import _
 
-from domain_interface import DomainInterface, Parameters, Savepoint
 from .. import constants
 
 _logger = logging.getLogger(__name__)
 
 
 class Itempick(DomainInterface):
-    EXAMPLE_REQU = '208030828,2.2.3,3iV_101,REQU_ITEMPICK,30,1,20170207,' \
-                   '072904,30427733118044,000000001625844,,,,1,' \
-                   '0,,,,,,,,,,,,,,,,,,,'
-    EXAMPLE_RESP = '208030828,2.2.3,3iV_101,RESP_ITEMPICK,30,1,20170207,' \
-                   '072849,30427733118044,0,,000000001625844,,,,00001,' \
-                   '00000000162584400001,1,1,,G,B,A,4,15,16,,,,,,,,,,' \
-                   '000002,000000,00,Aucune indication,01,2520872,' \
-                   'LAXANORM 100GR,,00006,0,,1,0,0,0,1,0,,pièce,,,,,,,,' \
-                   '0,67709,00000,00000,00000,00000,,0016.65,,,'
-    EXAMPLE_RESU = '208030828,2.2.3,3iV_101,RESU_ITEMPICK,30,1,20170207,' \
-                   '072931,30427733121317,000000001625844,,,,1,' \
-                   '00000000162584400001,,000002,000002,,' \
-                   '01,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
-    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'tripCounter', 'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05',
-            'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Usf01', 'Usf02',
-            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
-            'Usf10')
-    RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
-            'headerSubNum', 'itemPickSeqNum', 'pickLineId', 'tripCounter',
-            'reqDestCarSeqNum', 'reqDestCarSeqCD', 'sourceLC1', 'sourceLC2',
-            'sourceLC3', 'sourceLC4', 'sourceLC5', 'sourceLCCD',
-            'sourceLCBarcode', 'altSourceLC1', 'altSourceLC2', 'altSourceLC3',
-            'altSourceLC4', 'altSourceLC5', 'altSourceLCCD',
-            'altSourceLCBarcode', 'lineIndicator', 'reqQty', 'effQty',
-            'pickStatus', 'promptInfo', 'unitOfMeasure', 'productCode',
-            'productDescription', 'productGroupCode', 'productProperty1',
-            'productProperty2', 'productProperty3', 'lessQtyAllowed',
-            'moreQtyAllowed', 'catchWeightFlag', 'cycleCountFlag',
-            'lotTrackingFlag', 'expiryDateCheckFlag', 'lotNumber', 'UOMPrompt',
-            'singlesInUOM', 'minBlockCW', 'maxBlockCW', 'minAllowedCW',
-            'maxAllowedCW', 'expiryDate', 'productBarcode',
-            'scanProductBarcode', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
-            'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'itemPickSeqNum', 'pickLineId', 'lineIndicator', 'reqQty',
-            'effQtySourceLC', 'effQtyAltSourceLC', 'pickStatus', 'tripCounter',
-            'unitOfMeasure', 'totalCatchWeight', 'lotNumber', 'productBarcode',
-            'sourceLCBarcode', 'altSourceLCBarcode', 'effQtyDestCar01',
-            'effQtyDestCar02', 'effQtyDestCar03', 'effQtyDestCar04',
-            'effQtyDestCar05', 'effQtyDestCar06', 'effQtyDestCar07',
-            'effQtyDestCar08', 'effQtyDestCar09', 'effQtyDestCar10',
-            'effDestCarId01', 'effDestCarId02', 'effDestCarId03',
-            'effDestCarId04', 'effDestCarId05', 'effDestCarId06',
-            'effDestCarId07', 'effDestCarId08', 'effDestCarId09',
-            'effDestCarId10', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05',
-            'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    EXAMPLE_REQU = (
+        '208030828,2.2.3,3iV_101,REQU_ITEMPICK,30,1,20170207,'
+        '072904,30427733118044,000000001625844,,,,1,'
+        '0,,,,,,,,,,,,,,,,,,,'
+    )
+    EXAMPLE_RESP = (
+        '208030828,2.2.3,3iV_101,RESP_ITEMPICK,30,1,20170207,'
+        '072849,30427733118044,0,,000000001625844,,,,00001,'
+        '00000000162584400001,1,1,,G,B,A,4,15,16,,,,,,,,,,'
+        '000002,000000,00,Aucune indication,01,2520872,'
+        'LAXANORM 100GR,,00006,0,,1,0,0,0,1,0,,pièce,,,,,,,,'
+        '0,67709,00000,00000,00000,00000,,0016.65,,,'
+    )
+    EXAMPLE_RESU = (
+        '208030828,2.2.3,3iV_101,RESU_ITEMPICK,30,1,20170207,'
+        '072931,30427733121317,000000001625844,,,,1,'
+        '00000000162584400001,,000002,000002,,'
+        '01,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
+    )
+    REQU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'tripCounter',
+        'Cri01',
+        'Cri02',
+        'Cri03',
+        'Cri04',
+        'Cri05',
+        'Cri06',
+        'Cri07',
+        'Cri08',
+        'Cri09',
+        'Cri10',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESP = (
+        'respCode',
+        'respMsg',
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemPickSeqNum',
+        'pickLineId',
+        'tripCounter',
+        'reqDestCarSeqNum',
+        'reqDestCarSeqCD',
+        'sourceLC1',
+        'sourceLC2',
+        'sourceLC3',
+        'sourceLC4',
+        'sourceLC5',
+        'sourceLCCD',
+        'sourceLCBarcode',
+        'altSourceLC1',
+        'altSourceLC2',
+        'altSourceLC3',
+        'altSourceLC4',
+        'altSourceLC5',
+        'altSourceLCCD',
+        'altSourceLCBarcode',
+        'lineIndicator',
+        'reqQty',
+        'effQty',
+        'pickStatus',
+        'promptInfo',
+        'unitOfMeasure',
+        'productCode',
+        'productDescription',
+        'productGroupCode',
+        'productProperty1',
+        'productProperty2',
+        'productProperty3',
+        'lessQtyAllowed',
+        'moreQtyAllowed',
+        'catchWeightFlag',
+        'cycleCountFlag',
+        'lotTrackingFlag',
+        'expiryDateCheckFlag',
+        'lotNumber',
+        'UOMPrompt',
+        'singlesInUOM',
+        'minBlockCW',
+        'maxBlockCW',
+        'minAllowedCW',
+        'maxAllowedCW',
+        'expiryDate',
+        'productBarcode',
+        'scanProductBarcode',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemPickSeqNum',
+        'pickLineId',
+        'lineIndicator',
+        'reqQty',
+        'effQtySourceLC',
+        'effQtyAltSourceLC',
+        'pickStatus',
+        'tripCounter',
+        'unitOfMeasure',
+        'totalCatchWeight',
+        'lotNumber',
+        'productBarcode',
+        'sourceLCBarcode',
+        'altSourceLCBarcode',
+        'effQtyDestCar01',
+        'effQtyDestCar02',
+        'effQtyDestCar03',
+        'effQtyDestCar04',
+        'effQtyDestCar05',
+        'effQtyDestCar06',
+        'effQtyDestCar07',
+        'effQtyDestCar08',
+        'effQtyDestCar09',
+        'effQtyDestCar10',
+        'effDestCarId01',
+        'effDestCarId02',
+        'effDestCarId03',
+        'effDestCarId04',
+        'effDestCarId05',
+        'effDestCarId06',
+        'effDestCarId07',
+        'effDestCarId08',
+        'effDestCarId09',
+        'effDestCarId10',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
 
     def requ(self, params):
         """
@@ -68,19 +182,24 @@ class Itempick(DomainInterface):
         # If there is no Picking ID we cannot assign a pack operation
         if not params.groupNum:
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': 'No picking found'
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': 'No picking found',
+                }
+            )
             return result.format()
 
         picking_id = params.groupNum
         if not picking_id:
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID %s') % picking_id
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('No picking found with the ID %s')
+                    % picking_id,
+                }
+            )
             return result.format()
         picking_id = int(picking_id)
 
@@ -96,7 +215,7 @@ class Itempick(DomainInterface):
           INNER JOIN res_partner AS partner ON picking.partner_id = partner.id
         WHERE picking.id = %s;
         """
-        self.request.env.cr.execute(print_price_query, (picking_id, ))
+        self.request.env.cr.execute(print_price_query, (picking_id,))
         print_price_result = self.request.env.cr.fetchone()
         if print_price_result and print_price_result[0]:
             is_print_price = True
@@ -110,8 +229,9 @@ class Itempick(DomainInterface):
           INNER JOIN stock_picking_type AS picking_type
           ON picking.picking_type_id = picking_type.id
         WHERE picking.id = %s"""
-        self.request.env.cr.execute(is_portable_printer_result_query,
-                                    (picking_id, ))
+        self.request.env.cr.execute(
+            is_portable_printer_result_query, (picking_id,)
+        )
         is_portable_printer_result = self.request.env.cr.fetchone()
 
         if is_portable_printer_result and is_portable_printer_result[0]:
@@ -138,30 +258,43 @@ class Itempick(DomainInterface):
 
             picked_qty = int(params.Usf04 or 0)
 
-            pack_op = self.request.env['stock.pack.operation']\
-                .sudo(self._user).browse(pack_operation_id)
+            pack_op = (
+                self.request.env['stock.pack.operation']
+                .sudo(self._user)
+                .browse(pack_operation_id)
+            )
 
             # Retrieve the pack lot
-            pack_lot = self.request.env['stock.pack.operation.lot']\
-                .sudo(self._user).search(
-                [('operation_id', '=', pack_operation_id),
-                 ('lot_id', '=', lot_id)],
-                limit=1
+            pack_lot = (
+                self.request.env['stock.pack.operation.lot']
+                .sudo(self._user)
+                .search(
+                    [
+                        ('operation_id', '=', pack_operation_id),
+                        ('lot_id', '=', lot_id),
+                    ],
+                    limit=1,
+                )
             )
             if not pack_lot:
                 result = Parameters(self, action='resp')
-                result.update({
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': 'Lot pack operation not found'
-                })
+                result.update(
+                    {
+                        'respCode': constants.RESPONSE_CODE_ERROR,
+                        'respMsg': 'Lot pack operation not found',
+                    }
+                )
                 return result.format()
 
-            msg = 'Out of stock for lot %s (product %s): %s taken' % \
-                  (pack_lot.lot_id.name, pack_op.product_id.name, picked_qty)
-            params.log(picking_id=picking_id,
-                       operation_id=pack_operation_id,
-                       exception=msg,
-                       error_type='human')
+            msg = 'Out of stock for lot {} (product {}): {} taken'.format(
+                pack_lot.lot_id.name, pack_op.product_id.name, picked_qty
+            )
+            params.log(
+                picking_id=picking_id,
+                operation_id=pack_operation_id,
+                exception=msg,
+                error_type='human',
+            )
 
             # Add the picked quantity on the pack lot
             pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
@@ -173,43 +306,53 @@ class Itempick(DomainInterface):
                 except Exception as e:
                     lot_savepoint.rollback()
                     _logger.error(str(e))
-                    params.log(picking_id=picking_id,
-                               exception=e)
+                    params.log(picking_id=picking_id, exception=e)
 
                     result = Parameters(self, action='resp')
-                    result.update({
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Cannot reload the picking %s') %
-                        picking_id
-                    })
+                    result.update(
+                        {
+                            'respCode': constants.RESPONSE_CODE_ERROR,
+                            'respMsg': _('Cannot reload the picking %s')
+                            % picking_id,
+                        }
+                    )
                     return result.format()
 
         # Search all pack operations for this picking
-        lines = self.request.env['stock.pack.operation'].sudo(self._user)\
-            .search([('picking_id', '=', picking_id),
-                     ('location_id.is_valid_location', '=', True),
-                     ('zetes_state', 'in', [constants.OP_DEFAULT,
-                                            constants.OP_SKIPPED])],
-                    order=order_by)
+        lines = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
+            .search(
+                [
+                    ('picking_id', '=', picking_id),
+                    ('location_id.is_valid_location', '=', True),
+                    (
+                        'zetes_state',
+                        'in',
+                        [constants.OP_DEFAULT, constants.OP_SKIPPED],
+                    ),
+                ],
+                order=order_by,
+            )
+        )
 
         # Filter lines
         # We want only operation with a quantity to to done different
         # than the quantity done.
-        lines = lines\
-            .filtered(lambda line: int(line.qty_done) < int(line.product_qty))
+        lines = lines.filtered(
+            lambda line: int(line.qty_done) < int(line.product_qty)
+        )
         split_lines = lines.split_pack_op_lines()
 
         sequence = 1
         result = []
 
         if not split_lines:
-            error_message = _('There is no lines for the picking %s') \
-                            % picking_id
-
-            params.log(
-                picking_id=picking_id,
-                exception=error_message
+            error_message = (
+                _('There is no lines for the picking %s') % picking_id
             )
+
+            params.log(picking_id=picking_id, exception=error_message)
 
             # If a cut return no lines, we need to return the code 11
             # (no lines available) and not the code 10 (error)
@@ -220,10 +363,7 @@ class Itempick(DomainInterface):
                 resp_code = constants.RESPONSE_CODE_ERROR
 
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': resp_code,
-                'respMsg': error_message
-            })
+            result.update({'respCode': resp_code, 'respMsg': error_message})
             return result.format()
 
         for line, pack_lot in split_lines:
@@ -235,38 +375,42 @@ class Itempick(DomainInterface):
                 qty_done = line.qty_done
 
             if pack_lot:
-                line_id = '%s_%s' % (line.id, pack_lot.lot_id.id)
+                line_id = '{}_{}'.format(line.id, pack_lot.lot_id.id)
             else:
                 line_id = line.id
 
             line_values = Parameters(self)
-            line_values.update({
-                'respCode': constants.RESPONSE_CODE_OK,
-                'groupNum': picking_id,
-                'pickLineId': line_id,
-                'reqDestCarSeqNum': 1,
-                'reqQty': format(int(qty_to_do), '0%d' % 6),
-                'effQty': format(int(qty_done), '0%d' % 6),
-                'pickStatus': line.zetes_state,
-                'tripCounter': 1,
-            })
+            line_values.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_OK,
+                    'groupNum': picking_id,
+                    'pickLineId': line_id,
+                    'reqDestCarSeqNum': 1,
+                    'reqQty': format(int(qty_to_do), '0%d' % 6),
+                    'effQty': format(int(qty_done), '0%d' % 6),
+                    'pickStatus': line.zetes_state,
+                    'tripCounter': 1,
+                }
+            )
 
             product = line.product_id
 
-            line_values.update({
-                'productCode': product.default_code,
-                'productDescription': product.name,
-                'productProperty1': None,
-                'productProperty2': print_on_portable_printer,
-                'lessQtyAllowed': 1,  # Constant value
-                'moreQtyAllowed': 0,  # Constant value
-                'catchWeightFlag': 0,  # Constant value
-                'expiryDateCheckFlag': 0,  # Constant value
-                'productBarcode': product.barcode,
-                'scanProductBarcode': 0,  # Constant value
-                'UOMPrompt': line.product_uom_id.name,
-                'itemPickSeqNum': sequence,
-            })
+            line_values.update(
+                {
+                    'productCode': product.default_code,
+                    'productDescription': product.name,
+                    'productProperty1': None,
+                    'productProperty2': print_on_portable_printer,
+                    'lessQtyAllowed': 1,  # Constant value
+                    'moreQtyAllowed': 0,  # Constant value
+                    'catchWeightFlag': 0,  # Constant value
+                    'expiryDateCheckFlag': 0,  # Constant value
+                    'productBarcode': product.barcode,
+                    'scanProductBarcode': 0,  # Constant value
+                    'UOMPrompt': line.product_uom_id.name,
+                    'itemPickSeqNum': sequence,
+                }
+            )
 
             if is_print_price:
                 line_values.Usf07 = line.product_id.indicated_price
@@ -285,11 +429,13 @@ class Itempick(DomainInterface):
 
             location = line.location_id
             if not location:
-                line_values.update({
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('Location not found for the product %s'
-                                 ) % product.name,
-                })
+                line_values.update(
+                    {
+                        'respCode': constants.RESPONSE_CODE_ERROR,
+                        'respMsg': _('Location not found for the product %s')
+                        % product.name,
+                    }
+                )
                 result.append(line_values)
                 continue
 
@@ -299,21 +445,25 @@ class Itempick(DomainInterface):
                 shelf_source = '0%s' % shelf_source
 
             # Set coordonates location of the bin
-            line_values.update({
-                'sourceLC1': location.zone,
-                'sourceLC2': location.corridor,
-                'sourceLC3': shelf_source,
-                'sourceLC4': location.height,
-                'sourceLC5': location.box,
-                'sourceLCCD': location.get_checksum(),
-            })
+            line_values.update(
+                {
+                    'sourceLC1': location.zone,
+                    'sourceLC2': location.corridor,
+                    'sourceLC3': shelf_source,
+                    'sourceLC4': location.height,
+                    'sourceLC5': location.box,
+                    'sourceLCCD': location.get_checksum(),
+                }
+            )
 
             if pack_lot and pack_lot.lot_id:
                 lot = pack_lot.lot_id
-                line_values.update({
-                    'Usf01': lot.voice_identifier or lot.name[-3:],
-                    'Usf02': lot.checksum
-                })
+                line_values.update(
+                    {
+                        'Usf01': lot.voice_identifier or lot.name[-3:],
+                        'Usf02': lot.checksum,
+                    }
+                )
 
             # # If the available quantity for this location is less than
             # # the zero check limit, it means that we have to ask
@@ -373,23 +523,25 @@ class Itempick(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(pack_operation_id)
+        pack_op = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
+            .browse(pack_operation_id)
+        )
         if not len(pack_op):
             return
 
         try:
             status = params.pickStatus
             if status:
-                pack_op.sudo(self._user).write({
-                    'zetes_state': status
-                })
+                pack_op.sudo(self._user).write({'zetes_state': status})
 
                 # If status == OP_CANCELED => remove all actions for this line
                 if status == constants.OP_CANCELED:
                     if lot_id:
                         pack_lot = pack_op.pack_lot_ids.filtered(
-                            lambda line: line.lot_id.id == lot_id)
+                            lambda line: line.lot_id.id == lot_id
+                        )
                         pack_lot.qty = 0
                         pack_op.save()
                     else:
@@ -398,6 +550,8 @@ class Itempick(DomainInterface):
         except Exception as e:
             self.rollback_to_savepoint()
             _logger.error(str(e))
-            params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=pack_operation_id,
-                       exception=e)
+            params.log(
+                picking_id=pack_op.picking_id.id,
+                operation_id=pack_operation_id,
+                exception=e,
+            )

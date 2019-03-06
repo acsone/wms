@@ -10,12 +10,11 @@ Respond to calls from the ESB.
 
 from datetime import datetime
 
-import werkzeug
-
 import odoo
-from odoo import http, _
-from odoo.http import request
+import werkzeug
+from odoo import _, http
 from odoo.addons.web.controllers.main import ensure_db
+from odoo.http import request
 
 
 def strptime(val):
@@ -24,16 +23,12 @@ def strptime(val):
 
 class StatsController(http.Controller):
 
-    PRODUCT_TYPES = {
-        'aliment': 'ALI',
-        'medicament': 'MED',
-        'materiel': 'MAT',
-    }
+    PRODUCT_TYPES = {'aliment': 'ALI', 'medicament': 'MED', 'materiel': 'MAT'}
 
     @staticmethod
     def _validate_statistics_form(values):
         errors = []
-        datefields = ('startDate', 'endDate', )
+        datefields = ('startDate', 'endDate')
         for key in datefields:
             try:
                 if not values.get(key):
@@ -46,8 +41,9 @@ class StatsController(http.Controller):
         if errors:
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
-    @http.route('/connector_esb/statistics/form',
-                type='http', auth='user', csrf=False)
+    @http.route(
+        '/connector_esb/statistics/form', type='http', auth='user', csrf=False
+    )
     def statistics_form(self, **kw):
         """ Return statistics for customers according to filters
 
@@ -80,17 +76,22 @@ class StatsController(http.Controller):
                 start=strptime(start) if start else False,
                 end=strptime(end) if end else False,
                 product_type=self.PRODUCT_TYPES.get(
-                    values.get('productType'), ''),
+                    values.get('productType'), ''
+                ),
                 suppliers=supplier.split(',') if supplier.strip() else False,
-                language=values.get('language')
+                language=values.get('language'),
             )
             res = component.get_message(options)
             headers = [('Content-Type', 'text/xml')]
             return request.make_response(res, headers)
 
-    @http.route('/connector_esb/statistics/product/<string:sku>/'
-                '<string:customer_ref>', type='http',
-                auth='user', csrf=False)
+    @http.route(
+        '/connector_esb/statistics/product/<string:sku>/'
+        '<string:customer_ref>',
+        type='http',
+        auth='user',
+        csrf=False,
+    )
     def product_customer_stat(self, sku, customer_ref):
         """ Return a customer purchase statistics for a specific product for
             the last 12 months
@@ -111,8 +112,12 @@ class StatsController(http.Controller):
             headers = [('Content-Type', 'text/xml')]
             return request.make_response(res, headers)
 
-    @http.route('/connector_esb/statistics/customer/<string:customer_ref>',
-                type='http', auth='user', csrf=False)
+    @http.route(
+        '/connector_esb/statistics/customer/<string:customer_ref>',
+        type='http',
+        auth='user',
+        csrf=False,
+    )
     def customer_purchase_statistic(self, customer_ref):
         """ Return a customer 2 years purchase statistics by base category.
 
@@ -130,14 +135,18 @@ class StatsController(http.Controller):
         env = request.env
         backend = env['esb.backend'].get_singleton()
         with backend.work_on('sale.order.line') as work:
-            res = work.component(
-                'ws.message.customer.stat'
-            ).get_message(customer_ref)
+            res = work.component('ws.message.customer.stat').get_message(
+                customer_ref
+            )
             headers = [('Content-Type', 'text/xml')]
             return request.make_response(res, headers)
 
-    @http.route('/connector_esb/totalorder/customer/<string:customer_ref>',
-                type='http', auth='public', csrf=False)
+    @http.route(
+        '/connector_esb/totalorder/customer/<string:customer_ref>',
+        type='http',
+        auth='public',
+        csrf=False,
+    )
     def customer_delivery_fee(self, customer_ref):
         """ Return info to calculate a customer delivery fee
 
@@ -152,7 +161,8 @@ class StatsController(http.Controller):
         backend = env['esb.backend'].get_singleton()
 
         with backend.work_on('res.partner') as work:
-            res = (work.component('ws.message.customer.delivery.fee')
-                   .get_message(customer_ref))
+            res = work.component(
+                'ws.message.customer.delivery.fee'
+            ).get_message(customer_ref)
             headers = [('Content-Type', 'text/xml')]
             return request.make_response(res, headers)

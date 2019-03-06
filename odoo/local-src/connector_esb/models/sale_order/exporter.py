@@ -6,6 +6,7 @@ import logging
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+
 from ...components.mapper import falsy2zero
 
 _logger = logging.getLogger(__name__)
@@ -55,9 +56,10 @@ class SaleExportMapper(Component):
 
     @mapping
     def compute_shipping_method(self, record):
-        return {'shipping_method': record.carrier_id.esb_ref or
-                self.env.ref('__setup__.deliver_carrier_alcyon').esb_ref
-                }
+        return {
+            'shipping_method': record.carrier_id.esb_ref
+            or self.env.ref('__setup__.deliver_carrier_alcyon').esb_ref
+        }
 
     @mapping
     def compute_order_ref(self, record):
@@ -90,15 +92,21 @@ class SaleExportMapper(Component):
         apb_tax = self.env.ref('l10n_be_apb_tax.1_apb_01_out')
         total_amount = record.amount_tax or 0
         lines_with_apb = record.mapped('order_line').filtered(
-                lambda r: apb_tax in r.product_id.taxes_id)
-        total_apb = round(sum(lines_with_apb.mapped(
-                            lambda r: r.product_uom_qty * apb_tax.amount
-                        )), 2)
+            lambda r: apb_tax in r.product_id.taxes_id
+        )
+        total_apb = round(
+            sum(
+                lines_with_apb.mapped(
+                    lambda r: r.product_uom_qty * apb_tax.amount
+                )
+            ),
+            2,
+        )
         total_amount = round(total_amount, 2) - total_apb
         return {
             'apb_tax_amount': total_apb,
-            'tax_amount': total_amount if total_amount > 0 else 0
-            }
+            'tax_amount': total_amount if total_amount > 0 else 0,
+        }
 
     @mapping
     def compute_increment_id(self, record):
@@ -158,9 +166,9 @@ class SaleWebServiceExporter(Component):
         """
         _logger.info('result from HTTP POST request %s', result)
         external_id = result['increment_id']
-        self.record.with_context(no_connector_export=True).write({
-            'esb_ref': external_id
-        })
+        self.record.with_context(no_connector_export=True).write(
+            {'esb_ref': external_id}
+        )
         # Fix, their web service does not send one line in an array
         lines = result['lines']
         if not isinstance(lines, list):
@@ -169,9 +177,10 @@ class SaleWebServiceExporter(Component):
         for sol in self.record['order_line']:
             # find the id that matches the line we created
             # on Magento so we can set the corresponding esb_ref
-            line = next((line for line in lines
-                         if line['line_number'] == sol.id), '')
+            line = next(
+                (line for line in lines if line['line_number'] == sol.id), ''
+            )
             if line:
                 sol.with_context(no_connector_export=True).write(
-                    {'esb_ref': line['created_id']
-                     })
+                    {'esb_ref': line['created_id']}
+                )

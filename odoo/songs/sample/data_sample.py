@@ -2,11 +2,11 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import anthem
+from anthem.lyrics.loaders import load_csv_stream, load_rows, read_csv
+from anthem.lyrics.records import create_or_update
 from pkg_resources import resource_stream
 
-import anthem
-from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
-from anthem.lyrics.records import create_or_update
 from ..common import req
 from ..install.data_full import post_import_stock_bins
 
@@ -85,19 +85,17 @@ def import_locations(ctx):
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
-    values = {
-        'name': "Divers",
-        'default_code': "DIVERS",
-        'list_price': 0.0
-    }
-    create_or_update(ctx, 'product.product',
-                     '__setup__.product_other', values)
+    values = {'name': "Divers", 'default_code': "DIVERS", 'list_price': 0.0}
+    create_or_update(ctx, 'product.product', '__setup__.product_other', values)
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({
-        'tracking_disable': True,
-        'no_connector_export': True,
-        'force_archive_orderpoint': True,
-        'disable_constrains_orderpoint': True})
+    load_ctx.update(
+        {
+            'tracking_disable': True,
+            'no_connector_export': True,
+            'force_archive_orderpoint': True,
+            'disable_constrains_orderpoint': True,
+        }
+    )
     Product = ctx.env['product.product'].with_context(load_ctx)
     content = resource_stream(req, 'data/sample/product.csv')
     load_csv_stream(ctx, Product, content, delimiter=',')
@@ -110,12 +108,14 @@ def import_products(ctx):
     load_csv_stream(ctx, Product, content, delimiter=',')
     # Computed fields on product.template are not set for archived product
     # copy the values from product.product
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
         UPDATE product_template as tmpl
         SET active=prod.active, default_code=prod.default_code
         FROM product_product as prod
         WHERE tmpl.id = prod.id AND prod.active=False
-    """)
+    """
+    )
 
 
 @anthem.log
@@ -147,9 +147,7 @@ def import_lots(ctx):
 @anthem.log
 def import_inventory(ctx):
     """ Importing inventory from csv"""
-    inventory = ctx.env['stock.inventory'].create({
-        'name': 'Initial',
-        })
+    inventory = ctx.env['stock.inventory'].create({'name': 'Initial'})
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
@@ -169,9 +167,9 @@ def import_inventory(ctx):
 @anthem.log
 def import_inventory_without_lot(ctx):
     """ Importing inventory from csv"""
-    inventory = ctx.env['stock.inventory'].create({
-        'name': 'Initial (products without lot)',
-        })
+    inventory = ctx.env['stock.inventory'].create(
+        {'name': 'Initial (products without lot)'}
+    )
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
@@ -179,7 +177,8 @@ def import_inventory_without_lot(ctx):
 
     model = 'stock.inventory.line'
     content = resource_stream(
-        req, 'data/sample/stock_inventory_line_without_lot.csv')
+        req, 'data/sample/stock_inventory_line_without_lot.csv'
+    )
     header, rows = read_csv(content)
     header.append('inventory_id/.id')
     new_rows = []
@@ -199,8 +198,7 @@ def import_stock_bins(ctx):
 @anthem.log
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
-    content = \
-        resource_stream(req, 'data/sample/round.template.version.csv')
+    content = resource_stream(req, 'data/sample/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
     content = resource_stream(req, 'data/sample/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
@@ -214,16 +212,13 @@ def import_delivery_round_config(ctx):
 def import_sale_orders(ctx):
     """ Importing sale orders from csv"""
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({'tracking_disable': True,
-                     'no_connector_export': True})
+    load_ctx.update({'tracking_disable': True, 'no_connector_export': True})
     SaleOrder = ctx.env['sale.order'].with_context(load_ctx)
     content = resource_stream(req, 'data/sample/sale_order.csv')
     load_csv_stream(ctx, SaleOrder, content, delimiter=',')
 
     line_load_ctx = ctx.env.context.copy()
-    line_load_ctx.update({
-        'tracking_disable': True,
-    })
+    line_load_ctx.update({'tracking_disable': True})
     SaleOrderLine = ctx.env['sale.order.line'].with_context(line_load_ctx)
     content = resource_stream(req, 'data/sample/sale_order_line.csv')
     load_csv_stream(ctx, SaleOrderLine, content, delimiter=',')

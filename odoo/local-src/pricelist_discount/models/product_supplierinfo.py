@@ -3,37 +3,34 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-
-from odoo import api, models, fields, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class ProductSupplierinfo(models.Model):
     _inherit = 'product.supplierinfo'
-    _order = 'is_null_date_start, date_start DESC, ' \
-             'min_qty DESC, min_qty_sale DESC'
+    _order = (
+        'is_null_date_start, date_start DESC, '
+        'min_qty DESC, min_qty_sale DESC'
+    )
 
     is_null_date_start = fields.Boolean(
         'The date start is null',
         compute='_compute_is_null_date_start',
         store=True,
-        readonly=True)
+        readonly=True,
+    )
     discount_purchase = fields.Float(
         'Purchase discount (%)',
         digits=dp.get_precision('Discount'),
-        default=0.0
+        default=0.0,
     )
 
     discount_sale = fields.Float(
-        'Sale discount (%)',
-        digits=dp.get_precision('Discount'),
-        default=0.0
+        'Sale discount (%)', digits=dp.get_precision('Discount'), default=0.0
     )
 
-    min_qty_sale = fields.Float(
-        string='Sale minimum qty',
-        default=0.0,
-    )
+    min_qty_sale = fields.Float(string='Sale minimum qty', default=0.0)
 
     min_qty = fields.Float(string='Purchase minimum qty')
 
@@ -49,12 +46,15 @@ class ProductSupplierinfo(models.Model):
             if not product_tmpl_id:
                 product_tmpl_id = self._context.get('default_product_tmpl_id')
 
-            default_line = self.search([
-                ('name', '=', promo.name.id),
-                ('product_tmpl_id', '=', product_tmpl_id),
-                ('date_start', '=', False),
-                ('date_end', '=', False)
-            ], limit=1)
+            default_line = self.search(
+                [
+                    ('name', '=', promo.name.id),
+                    ('product_tmpl_id', '=', product_tmpl_id),
+                    ('date_start', '=', False),
+                    ('date_end', '=', False),
+                ],
+                limit=1,
+            )
             if not default_line:
                 continue
 
@@ -73,57 +73,75 @@ class ProductSupplierinfo(models.Model):
             promo.is_null_date_start = not promo.date_start and True or False
 
     @api.constrains(
-        'date_start', 'date_end', 'name', 'min_qty', 'min_qty_sale')
+        'date_start', 'date_end', 'name', 'min_qty', 'min_qty_sale'
+    )
     def check_dates(self):
         # Used by imports to avoid problems with imported data
         if self._context.get('disable_check_dates'):
             return
 
         for promo in self:
-            other_supplier = self.search([
-                ('product_tmpl_id', '=', promo.product_tmpl_id.id),
-                ('name', '!=', promo.name.id)
-            ])
+            other_supplier = self.search(
+                [
+                    ('product_tmpl_id', '=', promo.product_tmpl_id.id),
+                    ('name', '!=', promo.name.id),
+                ]
+            )
             if other_supplier:
                 raise UserError(
-                    _('You cannot two different supplier for a product'))
+                    _('You cannot two different supplier for a product')
+                )
 
             if not promo.date_start and not promo.date_end:
                 if promo.min_qty > 1 or promo.min_qty_sale > 1:
                     raise UserError(
-                        _('You cannot set a minimum quantity (sale and/or '
-                          'purchase) on a default promo'))
+                        _(
+                            'You cannot set a minimum quantity (sale and/or '
+                            'purchase) on a default promo'
+                        )
+                    )
 
-                existing_open_promo = self.search([
-                    ('product_tmpl_id', '=', promo.product_tmpl_id.id),
-                    ('date_start', '=', False),
-                    ('date_end', '=', False),
-                    ('id', '!=', promo.id)
-                ])
+                existing_open_promo = self.search(
+                    [
+                        ('product_tmpl_id', '=', promo.product_tmpl_id.id),
+                        ('date_start', '=', False),
+                        ('date_end', '=', False),
+                        ('id', '!=', promo.id),
+                    ]
+                )
                 if existing_open_promo:
                     raise UserError(
-                        _('You cannot have two promos '
-                          'without start and end date'))
+                        _(
+                            'You cannot have two promos '
+                            'without start and end date'
+                        )
+                    )
             elif not promo.date_start and promo.date_end:
                 raise UserError(
-                    _('You cannot have a promo without start date'))
-            elif promo.date_start and not promo.date_end:
-                raise UserError(
-                    _('You cannot have a promo without end date')
+                    _('You cannot have a promo without start date')
                 )
+            elif promo.date_start and not promo.date_end:
+                raise UserError(_('You cannot have a promo without end date'))
             else:
                 if promo.date_start > promo.date_end:
-                    raise UserError(_('The end date must be equal '
-                                      'or greater than the start date'))
+                    raise UserError(
+                        _(
+                            'The end date must be equal '
+                            'or greater than the start date'
+                        )
+                    )
 
-                existing_promos = self.search([
-                    ('product_tmpl_id', '=', promo.product_tmpl_id.id),
-                    ('date_end', '>=', promo.date_start),
-                    ('date_start', '<=', promo.date_end),
-                    ('min_qty', '=', promo.min_qty),
-                    ('min_qty_sale', '=', promo.min_qty_sale),
-                    ('id', '!=', promo.id)
-                ])
+                existing_promos = self.search(
+                    [
+                        ('product_tmpl_id', '=', promo.product_tmpl_id.id),
+                        ('date_end', '>=', promo.date_start),
+                        ('date_start', '<=', promo.date_end),
+                        ('min_qty', '=', promo.min_qty),
+                        ('min_qty_sale', '=', promo.min_qty_sale),
+                        ('id', '!=', promo.id),
+                    ]
+                )
                 if existing_promos:
                     raise UserError(
-                        _('You cannot have two promos at the same time'))
+                        _('You cannot have two promos at the same time')
+                    )

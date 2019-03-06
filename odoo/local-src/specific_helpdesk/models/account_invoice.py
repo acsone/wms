@@ -29,7 +29,8 @@ class AccountInvoice(models.Model):
         ).read()[0]
         context = eval(action_data.get('context', '{}'))
         context['default_team_id'] = self.env.ref(
-            'specific_helpdesk.accounting_team').id
+            'specific_helpdesk.accounting_team'
+        ).id
         action_data['context'] = str(context)
         action_data['domain'] = [('account_invoice_id', '=', self.id)]
         return action_data

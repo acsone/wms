@@ -4,13 +4,12 @@
 
 from copy import deepcopy
 
-from odoo.tests.common import SavepointCase
 from odoo.addons.connector_esb.controllers.sale import SaleController
+from odoo.tests.common import SavepointCase
 from werkzeug.exceptions import BadRequest
 
 
 class ControllerSaleTestCase(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(ControllerSaleTestCase, cls).setUpClass()
@@ -20,25 +19,22 @@ class ControllerSaleTestCase(SavepointCase):
             "customer_id": '39847598274',
             "date": "2017-09-18",
             "order_ref": "refClt",
-            "lines": [{
-                'line_id': '1',
-                'sku': '0001',
-                'quantity': 3,
-                'free': False,
-            }, {
-                # free line: to be skipped
-                'line_id': '2',
-                'sku': 'FOO',
-                'quantity': 3,
-                'free': True,
-            }, ]
+            "lines": [
+                {'line_id': '1', 'sku': '0001', 'quantity': 3, 'free': False},
+                {
+                    # free line: to be skipped
+                    'line_id': '2',
+                    'sku': 'FOO',
+                    'quantity': 3,
+                    'free': True,
+                },
+            ],
         }
         cls.request_data = {
-            "jsonrpc": "3.0", "id": "4321",
+            "jsonrpc": "3.0",
+            "id": "4321",
             "method": "create",
-            "params": {
-                "data": cls.order_data
-            }
+            "params": {"data": cls.order_data},
         }
 
     def test_valid_request_data(self):

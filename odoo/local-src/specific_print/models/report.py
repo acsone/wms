@@ -2,9 +2,9 @@
 # © 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import lxml.html
 import unicodedata
 
+import lxml.html
 from odoo import api, models
 
 
@@ -30,7 +30,8 @@ class Report(models.Model):
             root = lxml.html.fromstring(html)
             match_klass = (
                 "//div[contains(concat(' ', normalize-space(@class), ' '), "
-                "' {} ')]")
+                "' {} ')]"
+            )
             for x in xrange(qty):
                 for node in root.xpath(match_klass.format('raw')):
                     text += node.text
@@ -40,8 +41,7 @@ class Report(models.Model):
         if not isinstance(text, unicode):
             text = text.decode('utf-8')
         nfkd_form = unicodedata.normalize('NFKD', text)
-        text = u"".join([c for c in nfkd_form
-                         if not unicodedata.combining(c)])
+        text = u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
         text = text.encode('ASCII', 'ignore')
         text = text.decode('string_escape')
         return text

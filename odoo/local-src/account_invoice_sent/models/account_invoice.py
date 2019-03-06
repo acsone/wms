@@ -2,7 +2,7 @@
 # Copyright 2015-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, fields, _
+from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job, related_action
 
 
@@ -11,20 +11,22 @@ class AccountInvoice(models.Model):
 
     # Allow to change value in 'open' state
     sent = fields.Boolean(
-        readonly=True, states={'open': [('readonly', False)]})
+        readonly=True, states={'open': [('readonly', False)]}
+    )
 
     sending_method = fields.Selection(
         readonly=True,
         related="partner_id.invoice_sending_method",
-        string="Sending Method")
+        string="Sending Method",
+    )
 
     @api.multi
     def _filter_send_invoice(self, sending_method=None):
-
         def f_state(r):
-            return (
-                not r.sent and
-                r.state not in ('draft', 'proforma', 'proforma2')
+            return not r.sent and r.state not in (
+                'draft',
+                'proforma',
+                'proforma2',
             )
 
         def f_sending_method(r):
@@ -39,9 +41,7 @@ class AccountInvoice(models.Model):
         if sending_method == 'email':
             filters.append(f_email)
 
-        return self.filtered(
-            lambda r: all(f(r) for f in filters)
-        )
+        return self.filtered(lambda r: all(f(r) for f in filters))
 
     @job(default_channel='root.background.invoice')
     @related_action(action='related_action_open_invoice')
@@ -49,7 +49,7 @@ class AccountInvoice(models.Model):
         """Generate jobs to send invoices"""
         invoices = self.exists()
         invoices = invoices._filter_send_invoice(sending_method)
-        method_name = '_send_invoice_%s' % (sending_method,)
+        method_name = '_send_invoice_{}'.format(sending_method)
         for invoice in invoices:
             getattr(invoice.with_delay(), method_name)()
 

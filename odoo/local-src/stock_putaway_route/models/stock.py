@@ -26,8 +26,10 @@ class ProductPutaway(models.Model):
     _inherit = 'product.putaway'
 
     route_location_ids = fields.One2many(
-        'stock.fixed.putaway.route.strat', 'putaway_id',
-        'Fixed Locations Per Route')
+        'stock.fixed.putaway.route.strat',
+        'putaway_id',
+        'Fixed Locations Per Route',
+    )
 
     def putaway_apply(self, product):
         if self.route_location_ids:
@@ -46,10 +48,10 @@ class StockFixedPutawayRouteStrat(models.Model):
     _order = 'sequence'
 
     putaway_id = fields.Many2one(
-        'product.putaway', 'Put Away Method', required=True)
+        'product.putaway', 'Put Away Method', required=True
+    )
     fixed_location_id = fields.Many2one(
-        'stock.location', 'Location', required=True)
-    route_id = fields.Many2one(
-        'stock.location.route', 'Route', required=True)
-    sequence = fields.Integer(
-        'Priority')
+        'stock.location', 'Location', required=True
+    )
+    route_id = fields.Many2one('stock.location.route', 'Route', required=True)
+    sequence = fields.Integer('Priority')

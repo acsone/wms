@@ -16,12 +16,11 @@ class CustomerAddressExportMapper(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind == 'customer.address')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'customer.address'
+        )
 
-    direct = [
-        (falsy2emptystring('city'), 'City'),
-    ]
+    direct = [(falsy2emptystring('city'), 'City')]
 
     @mapping
     def compute_name(self, record):
@@ -98,7 +97,7 @@ class CustomerAddressExportMapper(Component):
         is_invoicing_address = self.options.address_kind == 'invoice'
         return {
             'IsDefaultBilling': (is_invoicing_address),
-            'IsDefaultShipping': (not is_invoicing_address)
+            'IsDefaultShipping': (not is_invoicing_address),
         }
 
 
@@ -111,16 +110,17 @@ class CustomerAddressCronExporter(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind == 'customer.address')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'customer.address'
+        )
 
     def _prepare_item(self, items):
         prepared = []
         for customer_id, kind, item in items:
             prepared.append(
                 self.mapper.map_record(item).values(
-                    customer_id=customer_id,
-                    address_kind=kind)
+                    customer_id=customer_id, address_kind=kind
+                )
             )
         return prepared
 
@@ -131,7 +131,7 @@ class CustomerAddressCronExporter(Component):
             ('name', '!=', ''),
             ('zip', '!=', ''),
             ('street', '!=', ''),
-            ('country_id.esb_ref', '!=', '')
+            ('country_id.esb_ref', '!=', ''),
         ]
 
     def get_items(self, export_since):
@@ -145,18 +145,21 @@ class CustomerAddressCronExporter(Component):
         Magento.
         This default method address_get has been monkey patched for Alcyon.
         """
-        items = super(CustomerAddressCronExporter,
-                      self).get_items(export_since)
+        items = super(CustomerAddressCronExporter, self).get_items(
+            export_since
+        )
         modified_items_ids = set(items.mapped('id'))
         # get_items will return all modified customer including the addresses.
         # Then for all commercial partner with potentially modified addresses.
         commercial_partners = items.mapped('commercial_partner_id')
         # Search for the impacted customers in their structure.
-        possible_impacted_customer = self.env['res.partner'].search([
+        possible_impacted_customer = self.env['res.partner'].search(
+            [
                 ('commercial_partner_id', 'in', commercial_partners.ids),
                 ('customer', '=', True),
                 ('email', '<>', False),
-                ])
+            ]
+        )
         items2export = []
         for customer in possible_impacted_customer:
             # For each customer get the invoice and devlivery addresses
@@ -166,24 +169,29 @@ class CustomerAddressCronExporter(Component):
             if not modified_items_ids.intersection(impacting_records):
                 continue
             # Export them. Together as they are always sent in pair.
-            items2export.append((
-                customer.ref,
-                'invoice',
-                self.env['res.partner'].browse(addresses['invoice'])
-            ))
-            items2export.append((
-                customer.ref,
-                'delivery',
-                self.env['res.partner'].browse(addresses['delivery'])
-            ))
+            items2export.append(
+                (
+                    customer.ref,
+                    'invoice',
+                    self.env['res.partner'].browse(addresses['invoice']),
+                )
+            )
+            items2export.append(
+                (
+                    customer.ref,
+                    'delivery',
+                    self.env['res.partner'].browse(addresses['delivery']),
+                )
+            )
         return items2export
 
     def get_items_domain(self):
         """Find all records that can be used as customer addresses."""
-        domain = ['|',
-                  ('customer', '=', 1),
-                  ('type', 'in', ['invoice', 'delivery']),
-                  ]
+        domain = [
+            '|',
+            ('customer', '=', 1),
+            ('type', 'in', ['invoice', 'delivery']),
+        ]
         return AND([domain, self._valid_address_domain()])
 
     def run(self, export_since=None, max_records=0):

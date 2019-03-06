@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import random
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 from .. import constants
@@ -13,27 +13,27 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     checksum = fields.Char('Checksum', copy=False)
-    zetes_state = fields.Selection([
-        (constants.AS_DEFAULT, 'Default'),
-        (constants.AS_START, 'Start'),
-        (constants.AS_ACTIVE, 'Active'),
-        (constants.AS_STAGING, 'Staging'),
-        (constants.AS_DONE, 'Done'),
-        ('passport', 'Passport'),
-        (constants.AS_CANCELED, 'Canceled'),
-        (constants.AS_FINISHED, 'Finished'),
+    zetes_state = fields.Selection(
+        [
+            (constants.AS_DEFAULT, 'Default'),
+            (constants.AS_START, 'Start'),
+            (constants.AS_ACTIVE, 'Active'),
+            (constants.AS_STAGING, 'Staging'),
+            (constants.AS_DONE, 'Done'),
+            ('passport', 'Passport'),
+            (constants.AS_CANCELED, 'Canceled'),
+            (constants.AS_FINISHED, 'Finished'),
         ],
         string='Zetes state',
         default=constants.AS_DEFAULT,
         copy=False,
         required=True,
-        track_visibility='onchange')
+        track_visibility='onchange',
+    )
     zetes_state_lastchange = fields.Datetime('Last Zetes state change')
     is_zetes_error = fields.Boolean('Zetes error', copy=False)
     nbr_actions = fields.Integer(
-        'Nbr of actions',
-        compute='_compute_nbr_actions',
-        readonly=True
+        'Nbr of actions', compute='_compute_nbr_actions', readonly=True
     )
     is_passport_required = fields.Boolean('Passport required', default=False)
 
@@ -65,12 +65,8 @@ class StockPicking(models.Model):
         AND state IN ('assigned', 'partially_available')
         """
         self.env.cr.execute(active_picking_query)
-        active_picking_checksum = set([row[0]
-                                       for row
-                                       in self.env.cr.fetchall()])
-        picking_checksums = set([format(i, '0%d' % 2)
-                                 for i
-                                 in range(1, 100)])
+        active_picking_checksum = {row[0] for row in self.env.cr.fetchall()}
+        picking_checksums = {format(i, '0%d' % 2) for i in range(1, 100)}
 
         checksum_available = picking_checksums - active_picking_checksum
         if not checksum_available:
@@ -89,9 +85,7 @@ class StockPicking(models.Model):
         wo_checksum = self.filtered(lambda p: not p.checksum)
         if wo_checksum:
             wo_checksum.assign_picking_checksum()
-        self.write({
-            'operator_id': None,
-        })
+        self.write({'operator_id': None})
 
     @api.multi
     def validate_picking(self):
@@ -118,9 +112,13 @@ class StockPicking(models.Model):
             lines = picking.pack_operation_ids
             lines = lines.filtered(
                 lambda line: int(line.qty_done) != int(line.product_qty)
-                and line.zetes_state in [constants.OP_DEFAULT,
-                                         constants.OP_SKIPPED,
-                                         constants.OP_CANCELED])
+                and line.zetes_state
+                in [
+                    constants.OP_DEFAULT,
+                    constants.OP_SKIPPED,
+                    constants.OP_CANCELED,
+                ]
+            )
             split_lines = lines.split_pack_op_lines()
             picking.nbr_actions = len(split_lines)
 
@@ -128,31 +126,32 @@ class StockPicking(models.Model):
 class PackOperationReserveRel(models.Model):
     _name = 'pack.operation.reserve.rel'
 
-    pack_operation_id = fields.Many2one('stock.pack.operation',
-                                        string='Pack operation',
-                                        required=True)
-    reserve_location_id = fields.Many2one('stock.location',
-                                          string='Reserve',
-                                          required=True)
-    lot_id = fields.Many2one('stock.production.lot',
-                             string='Lot')
+    pack_operation_id = fields.Many2one(
+        'stock.pack.operation', string='Pack operation', required=True
+    )
+    reserve_location_id = fields.Many2one(
+        'stock.location', string='Reserve', required=True
+    )
+    lot_id = fields.Many2one('stock.production.lot', string='Lot')
 
 
 class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
-    zetes_state = fields.Selection([
-        (constants.OP_DEFAULT, 'Default'),
-        (constants.OP_PICKED, 'Picked'),
-        (constants.OP_SHORTPICKED, 'Shortpicked'),
-        (constants.OP_SKIPPED, 'Skipped'),
-        (constants.OP_CUT, 'Cut'),
-        (constants.OP_CANCELED, 'Canceled / Full'),
-        (constants.OP_MISSING, 'Missing'),
-    ],
+    zetes_state = fields.Selection(
+        [
+            (constants.OP_DEFAULT, 'Default'),
+            (constants.OP_PICKED, 'Picked'),
+            (constants.OP_SHORTPICKED, 'Shortpicked'),
+            (constants.OP_SKIPPED, 'Skipped'),
+            (constants.OP_CUT, 'Cut'),
+            (constants.OP_CANCELED, 'Canceled / Full'),
+            (constants.OP_MISSING, 'Missing'),
+        ],
         string='Zetes state',
         default=constants.OP_DEFAULT,
-        required=True)
+        required=True,
+    )
 
     @api.multi
     def split_pack_op(self, new_qty, location_dest_id, lot_id=None):
@@ -177,50 +176,54 @@ class StockPackOperation(models.Model):
         quantity_available = self.product_qty - self.qty_done
         if new_qty > quantity_available:
             raise UserError(
-                _('You cannot split this pack operation because '
-                  'the new quantity (%s) is geater than '
-                  'the available quantity (%s)') %
-                (new_qty, quantity_available))
+                _(
+                    'You cannot split this pack operation because '
+                    'the new quantity (%s) is geater than '
+                    'the available quantity (%s)'
+                )
+                % (new_qty, quantity_available)
+            )
 
         # Step 2
-        new_pack = self.copy({
-            'qty_done': 0.0,
-            'product_qty': new_qty,
-            'location_dest_id': location_dest_id,
-        })
+        new_pack = self.copy(
+            {
+                'qty_done': 0.0,
+                'product_qty': new_qty,
+                'location_dest_id': location_dest_id,
+            }
+        )
 
         # Step 3
         if lot_id:
             if not self.pack_lot_ids:
                 raise UserError(_('No pack operation found'))
             pack_lot = self.pack_lot_ids.filtered(
-                lambda line: line.lot_id.id == lot_id)
+                lambda line: line.lot_id.id == lot_id
+            )
             if not pack_lot:
                 raise UserError(
-                    _('No pack operation found with ID %s' % lot_id))
+                    _('No pack operation found with ID %s' % lot_id)
+                )
 
             lot_quantity_available = pack_lot.qty_todo - pack_lot.qty
             if new_qty > lot_quantity_available:
                 raise UserError(
-                    _('You cannot split this pack operation lot because '
-                      'the new quantity (%s) is greater than '
-                      'the available quantity (%s)') %
-                    (new_qty, lot_quantity_available))
+                    _(
+                        'You cannot split this pack operation lot because '
+                        'the new quantity (%s) is greater than '
+                        'the available quantity (%s)'
+                    )
+                    % (new_qty, lot_quantity_available)
+                )
 
-            pack_lot.copy({
-                'operation_id': new_pack.id,
-                'qty_todo': new_qty,
-                'qty': 0
-            })
+            pack_lot.copy(
+                {'operation_id': new_pack.id, 'qty_todo': new_qty, 'qty': 0}
+            )
 
-            pack_lot.write({
-                'qty_todo': pack_lot.qty_todo - new_qty
-            })
+            pack_lot.write({'qty_todo': pack_lot.qty_todo - new_qty})
 
         # Step 4
-        self.write({
-            'product_qty': self.product_qty - new_qty
-        })
+        self.write({'product_qty': self.product_qty - new_qty})
 
         return new_pack
 
@@ -244,17 +247,16 @@ class StockPackOperation(models.Model):
 
         # When we have the lot, we will check if there no existing
         # quantity for this lot.
-        pack_lot = \
-            self.pack_lot_ids.filtered(lambda line: line.lot_id.id == lot_id)
+        pack_lot = self.pack_lot_ids.filtered(
+            lambda line: line.lot_id.id == lot_id
+        )
 
         # If there no existing line (quantity) for this lot
         # we will create a new line
         if not len(pack_lot):
-            self.pack_lot_ids.create({
-                'operation_id': self.id,
-                'qty': qty,
-                'lot_id': lot_id,
-            })
+            self.pack_lot_ids.create(
+                {'operation_id': self.id, 'qty': qty, 'lot_id': lot_id}
+            )
         # Otherwise we set the quantity for this lot
         # We don't need to add the new quantity to the lot
         # because Zetes send one request by lot
@@ -276,30 +278,27 @@ class StockPackOperation(models.Model):
         # of the current pack operation and set the quantity on the pack
         # operation and pack operation lots
         if not self.qty_done:
-            self.write({
-                'qty_done': self.product_qty,
-                'location_dest_id': reserve_id
-            })
+            self.write(
+                {'qty_done': self.product_qty, 'location_dest_id': reserve_id}
+            )
 
             for pack_lot in self.pack_lot_ids:
-                pack_lot.write({
-                    'qty': pack_lot.qty_todo,
-                })
+                pack_lot.write({'qty': pack_lot.qty_todo})
             return
 
         quantity_remaining = self.product_qty - self.qty_done
 
         # Step 1
-        new_pack = self.copy({
-            'qty_done': quantity_remaining,
-            'product_qty': quantity_remaining,
-            'location_dest_id': reserve_id
-        })
+        new_pack = self.copy(
+            {
+                'qty_done': quantity_remaining,
+                'product_qty': quantity_remaining,
+                'location_dest_id': reserve_id,
+            }
+        )
 
         # Step 2
-        self.write({
-            'product_qty': self.qty_done,
-        })
+        self.write({'product_qty': self.qty_done})
 
         # Step 3
         pack_lot_to_unlink = self.env['stock.pack.operation.lot']
@@ -311,19 +310,19 @@ class StockPackOperation(models.Model):
             qty_todo = pack_lot.qty_todo
 
             qty_remaining = qty_todo - qty
-            pack_lot_obj.create({
-                'operation_id': new_pack.id,
-                'qty': qty_remaining,
-                'qty_todo': qty_remaining,
-                'lot_id': pack_lot.lot_id.id,
-            })
+            pack_lot_obj.create(
+                {
+                    'operation_id': new_pack.id,
+                    'qty': qty_remaining,
+                    'qty_todo': qty_remaining,
+                    'lot_id': pack_lot.lot_id.id,
+                }
+            )
 
             if not pack_lot.qty:
                 pack_lot_to_unlink |= pack_lot
             else:
-                pack_lot.write({
-                    'qty_todo': pack_lot.qty
-                })
+                pack_lot.write({'qty_todo': pack_lot.qty})
 
         pack_lot_to_unlink.unlink()
 
@@ -337,7 +336,8 @@ class StockPackOperation(models.Model):
                 continue
 
             pack_op_lots = line.pack_lot_ids.sorted(
-                lambda lot_line: lot_line.lot_id.removal_date)
+                lambda lot_line: lot_line.lot_id.removal_date
+            )
             for pack_op_lot in pack_op_lots:
                 if pack_op_lot.qty < pack_op_lot.qty_todo:
                     result.append((line, pack_op_lot))

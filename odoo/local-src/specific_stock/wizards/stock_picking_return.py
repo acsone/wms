@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class StockReturnPicking(models.TransientModel):
@@ -12,18 +12,21 @@ class StockReturnPicking(models.TransientModel):
     @api.multi
     def _create_returns(self):
         picking = self.env['stock.picking'].browse(
-            self.env.context['active_id'])
+            self.env.context['active_id']
+        )
         # we want to do unpack only for customer return
         if picking.location_dest_id.usage == 'customer':
             quant_obj = self.env['stock.quant']
             return_moves = self.product_return_moves.mapped('move_id')
             for move in return_moves:
                 # search associate quants
-                quants = quant_obj.search([
-                    ('history_ids', 'in', move.id),
-                    ('package_id', '!=', False),
-                    ('location_id', 'child_of', move.location_dest_id.id)
-                ])
+                quants = quant_obj.search(
+                    [
+                        ('history_ids', 'in', move.id),
+                        ('package_id', '!=', False),
+                        ('location_id', 'child_of', move.location_dest_id.id),
+                    ]
+                )
                 for quant in quants:
                     quant.package_id.unpack()
         return super(StockReturnPicking, self)._create_returns()
@@ -50,7 +53,4 @@ class StockReturnPickingLine(models.TransientModel):
     _inherit = "stock.return.picking.line"
     _rec_name = 'product_name'
 
-    product_name = fields.Char(
-        string="Product",
-        readonly=True,
-    )
+    product_name = fields.Char(string="Product", readonly=True)

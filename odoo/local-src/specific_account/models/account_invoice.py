@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, fields
+from odoo import api, fields, models
 from odoo.addons.queue_job.job import job, related_action
 
 
@@ -42,7 +42,4 @@ class AccountInvoice(models.Model):
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
-    invoice_state = fields.Selection(
-        related='invoice_id.state',
-        readonly=True,
-    )
+    invoice_state = fields.Selection(related='invoice_id.state', readonly=True)

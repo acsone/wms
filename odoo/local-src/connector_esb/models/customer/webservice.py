@@ -7,15 +7,14 @@ from collections import namedtuple
 from odoo import fields
 from odoo.addons.component.core import Component
 
-
 StatsFormOptions = namedtuple(
     'StatsFormOptions',
-    'customer_ref start end product_type suppliers language'
+    'customer_ref start end product_type suppliers language',
 )
 # Make None the default value for fields
 # customer_ref is required, hence the len(fields) - 1
-StatsFormOptions.__new__.__defaults__ = (
-    (None,) * (len(StatsFormOptions._fields) - 1)
+StatsFormOptions.__new__.__defaults__ = (None,) * (
+    len(StatsFormOptions._fields) - 1
 )
 
 
@@ -138,8 +137,10 @@ class CustomerDeliveryFeeWebserviceMessage(Component):
            element makes it difficult to generate with the producer as it is.
            So easier and faster to return what is expected.
         """
-        return ('<?xml version="1.0" encoding="UTF-8" ?>'
-                '<result>'
-                '<byPassTestAmount>True</byPassTestAmount>'
-                '<totalOrderAmount>9999.00</totalOrderAmount>'
-                '</result>')
+        return (
+            '<?xml version="1.0" encoding="UTF-8" ?>'
+            '<result>'
+            '<byPassTestAmount>True</byPassTestAmount>'
+            '<totalOrderAmount>9999.00</totalOrderAmount>'
+            '</result>'
+        )

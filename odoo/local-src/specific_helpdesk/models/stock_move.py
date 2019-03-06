@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class StockMove(models.Model):
@@ -26,11 +26,14 @@ class StockMove(models.Model):
         """Show existing ticket or offer to create a new one"""
         self.ensure_one()
         if self.helpdesk_tickets_count == 0:
-            r = self.env['create.helpdesk.ticket'].create({
-                'stock_move_id': self.id,
-                'stock_picking_id': self.picking_id.id
-            })
+            r = self.env['create.helpdesk.ticket'].create(
+                {
+                    'stock_move_id': self.id,
+                    'stock_picking_id': self.picking_id.id,
+                }
+            )
             return self.env['helpdesk.ticket'].new_one(r)
         else:
             return self.env['helpdesk.ticket'].show_existing(
-                [('stock_move_id', '=', self.id)])
+                [('stock_move_id', '=', self.id)]
+            )

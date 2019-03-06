@@ -4,25 +4,31 @@
 
 import pickle
 
-from pkg_resources import Requirement, resource_stream
 from anthem.lyrics.loaders import load_csv_stream
+from pkg_resources import Requirement, resource_stream
 
 req = Requirement.parse('alcyon-odoo')
 
 
-def load_csv(ctx, path, model, delimiter=',',
-             header=None, header_exclude=None):
+def load_csv(
+    ctx, path, model, delimiter=',', header=None, header_exclude=None
+):
     content = resource_stream(req, path)
-    load_csv_stream(ctx, model, content, delimiter=delimiter,
-                    header=header, header_exclude=header_exclude)
+    load_csv_stream(
+        ctx,
+        model,
+        content,
+        delimiter=delimiter,
+        header=header,
+        header_exclude=header_exclude,
+    )
 
 
 def load_users_csv(ctx, path, delimiter=','):
     # make sure we don't send any email
-    model = ctx.env['res.users'].with_context({
-        'no_reset_password': True,
-        'tracking_disable': True,
-    })
+    model = ctx.env['res.users'].with_context(
+        {'no_reset_password': True, 'tracking_disable': True}
+    )
     load_csv(ctx, path, model, delimiter=delimiter)
 
 
@@ -36,7 +42,8 @@ def define_settings(ctx, model, values):
 
 
 def create_default_value(ctx, model, field, value, company_id):
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
     INSERT INTO ir_values
         (name, model, value, key, key2, company_id, user_id)
     SELECT %(field)s, %(model)s, %(pickled)s, 'default', NULL,
@@ -49,8 +56,11 @@ def create_default_value(ctx, model, field, value, company_id):
             AND user_id is NULL
             AND key = 'default' and key2 is NULL
     )
-    """, {'field': field,
-          'model': model,
-          'company_id': company_id,
-          'pickled': pickle.dumps(value),
-          })
+    """,
+        {
+            'field': field,
+            'model': model,
+            'company_id': company_id,
+            'pickled': pickle.dumps(value),
+        },
+    )

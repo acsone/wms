@@ -27,8 +27,7 @@ class SaleOrder(models.Model):
             for line in order.order_line:
                 product_tmpl = line.product_id.product_tmpl_id
                 promotional_qty = product_tmpl.get_promotional_product(
-                    line.product_uom_qty,
-                    line.product_id.uom_id
+                    line.product_uom_qty, line.product_id.uom_id
                 )
                 line.sequence = sequence
                 if not promotional_qty:
@@ -50,8 +49,9 @@ class SaleOrder(models.Model):
 
     @api.multi
     def _remove_promotional_lines(self):
-        lines_to_remove = self.mapped('order_line')\
-            .filtered(lambda line: line.is_promotional_product)
+        lines_to_remove = self.mapped('order_line').filtered(
+            lambda line: line.is_promotional_product
+        )
         lines_to_remove.unlink()
 
     @api.multi

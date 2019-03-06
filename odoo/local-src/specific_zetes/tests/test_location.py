@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_location import Location
+from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
 
 
 class TestLocation(ZetesTest):
-
     def test_requ_location(self):
         """
         :return:
@@ -15,19 +15,23 @@ class TestLocation(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
 
-        domain = Location(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Location(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'lineId': pack_op.id,
-            'Cri01': self.location_product_1.zone,
-            'Cri02': self.location_product_1.corridor,
-            'Cri03': self.location_product_1.shelf,
-            'Cri04': self.location_product_1.height,
-            'Cri05': self.location_product_1.box,
-            'Cri07': self.lot_product_1.checksum,
-        })
+        request_params.update(
+            {
+                'lineId': pack_op.id,
+                'Cri01': self.location_product_1.zone,
+                'Cri02': self.location_product_1.corridor,
+                'Cri03': self.location_product_1.shelf,
+                'Cri04': self.location_product_1.height,
+                'Cri05': self.location_product_1.box,
+                'Cri07': self.lot_product_1.checksum,
+            }
+        )
 
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)

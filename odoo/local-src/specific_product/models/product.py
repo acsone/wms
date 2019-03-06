@@ -15,9 +15,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
     _order = 'default_code'
 
-    medical_device = fields.Boolean(
-        string='Medical Device',
-    )
+    medical_device = fields.Boolean(string='Medical Device')
 
     sale_price_2 = fields.Float(
         digits=dp.get_precision('Product Price'),
@@ -29,13 +27,11 @@ class ProductTemplate(models.Model):
 
     cnk_code = fields.Char(string='CNK')
 
-    indicated_price = fields.Float(
-        string='Indicated price'
-    )
+    indicated_price = fields.Float(string='Indicated price')
 
     storage_temperature_id = fields.Many2one(
-        'product.storage.temperature',
-        string="Storage temperature")
+        'product.storage.temperature', string="Storage temperature"
+    )
 
     web_published = fields.Boolean(string="Published on website")
 
@@ -46,16 +42,17 @@ class ProductTemplate(models.Model):
         for product in self:
             pricelist = self.env.ref('specific_data.product_pricelist_pb2')
 
-            item_count = self.env['product.pricelist.item'].search_count([
-                ('pricelist_id', '=', pricelist.id),
-                ('applied_on', '=', '1_product'),
-                ('product_tmpl_id', '=', product.id),
-            ])
+            item_count = self.env['product.pricelist.item'].search_count(
+                [
+                    ('pricelist_id', '=', pricelist.id),
+                    ('applied_on', '=', '1_product'),
+                    ('product_tmpl_id', '=', product.id),
+                ]
+            )
 
             # We check if product price is modified by the price list
             if item_count and product.product_variant_ids:
                 price = pricelist.price_get(
-                    prod_id=product.product_variant_ids[0].id,
-                    qty=1
+                    prod_id=product.product_variant_ids[0].id, qty=1
                 )
                 product.sale_price_2 = price.get(pricelist.id, 0.0)

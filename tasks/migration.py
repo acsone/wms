@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from invoke import task, exceptions
 
-import sys
+from invoke import task
+
 try:
     import psycopg2
 except ImportError:
@@ -28,10 +28,10 @@ def disable_mto(odoo):
 
     """
     xmlids = [
-      '__setup__.procurement_rule_materiel_mto_mtu',
-      '__setup__.procurement_rule_ali_mto_mtu',
-      '__setup__.procurement_rule_medoc_mto_mtu',
-      '__setup__.procurement_rule_froid_mto_mtu',
+        '__setup__.procurement_rule_materiel_mto_mtu',
+        '__setup__.procurement_rule_ali_mto_mtu',
+        '__setup__.procurement_rule_medoc_mto_mtu',
+        '__setup__.procurement_rule_froid_mto_mtu',
     ]
     for xid in xmlids:
         proc_rule = odoo.env.ref(xid)
@@ -44,10 +44,10 @@ def enable_mto(odoo):
 
     """
     xmlids = [
-      '__setup__.procurement_rule_materiel_mto_mtu',
-      '__setup__.procurement_rule_ali_mto_mtu',
-      '__setup__.procurement_rule_medoc_mto_mtu',
-      '__setup__.procurement_rule_froid_mto_mtu',
+        '__setup__.procurement_rule_materiel_mto_mtu',
+        '__setup__.procurement_rule_ali_mto_mtu',
+        '__setup__.procurement_rule_medoc_mto_mtu',
+        '__setup__.procurement_rule_froid_mto_mtu',
     ]
     for xid in xmlids:
         proc_rule = odoo.env.ref(xid)
@@ -60,6 +60,7 @@ def _connect(url, username, password, database, use_ssl, port):
     protocol = 'jsonrpc'
     if use_ssl:
         import ssl
+
         ssl._create_default_https_context = ssl._create_unverified_context
         protocol += '+ssl'
     odoo = odoorpc.ODOO(url, protocol, port)
@@ -69,9 +70,14 @@ def _connect(url, username, password, database, use_ssl, port):
 
 @task(name="pre")
 def pre(
-        ctx, url='temp-pp-erp.alcyonbelux.be',
-        username='admin', password='admin',
-        database='temp-odoo-preprod', use_ssl=True, port=443):
+    ctx,
+    url='temp-pp-erp.alcyonbelux.be',
+    username='admin',
+    password='admin',
+    database='temp-odoo-preprod',
+    use_ssl=True,
+    port=443,
+):
     """ Do pre migration tasks
 
     - Disable MTO
@@ -82,9 +88,14 @@ def pre(
 
 @task(name="post")
 def post(
-        ctx, url='temp-pp-erp.alcyonbelux.be',
-        username='admin', password='admin',
-        database='temp-odoo-preprod', use_ssl=True, port=443):
+    ctx,
+    url='temp-pp-erp.alcyonbelux.be',
+    username='admin',
+    password='admin',
+    database='temp-odoo-preprod',
+    use_ssl=True,
+    port=443,
+):
     """ Do post migration tasks
 
     - Enable MTO

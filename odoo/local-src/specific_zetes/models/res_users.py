@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, _, api
+from odoo import _, api, fields, models
 
 
 class ResUsers(models.Model):
@@ -11,8 +11,8 @@ class ResUsers(models.Model):
         (
             'unique_operator_code',
             'unique(operator_code)',
-            _('The operator ID should be unique.')
-        ),
+            _('The operator ID should be unique.'),
+        )
     ]
 
     @api.model
@@ -26,7 +26,8 @@ class ResUsers(models.Model):
             args = []
 
         result = super(ResUsers, self).name_search(
-            name=name, args=args, operator=operator, limit=limit)
+            name=name, args=args, operator=operator, limit=limit
+        )
 
         if len(result) >= limit:
             return result
@@ -34,9 +35,10 @@ class ResUsers(models.Model):
         limit_available = limit - len(result)
         existing_ids = [x[0] for x in result]
         # Execute a strict research (= and not ilike)
-        users = self.search([('operator_code', '=', name),
-                             ('id', 'not in', existing_ids)],
-                            limit=limit_available)
+        users = self.search(
+            [('operator_code', '=', name), ('id', 'not in', existing_ids)],
+            limit=limit_available,
+        )
 
         result += users.name_get()
         return result

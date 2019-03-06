@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from distutils.version import StrictVersion
-import csvdiff
 import csv
 import os
+from distutils.version import StrictVersion
 
-from invoke import task, exceptions
+from invoke import exceptions, task
 
-from .common import (
-    MIGRATION_FILE,
-    current_version,
-    exit_msg,
-)
+import csvdiff
+
+from .common import MIGRATION_FILE, current_version, exit_msg
 
 
 @task(name="make-csv-diff")
@@ -31,9 +28,7 @@ def make_csv_diff(ctx, filename=None):
     except ValueError:
         exit_msg("'{}' is not a valid version".format(version))
 
-    version = (version.version[0],
-               version.version[1] + 1,
-               0)
+    version = (version.version[0], version.version[1] + 1, 0)
     next_version = '.'.join([str(v) for v in version])
 
     target_dir = os.path.join('odoo', 'data', 'update', next_version)
@@ -58,10 +53,11 @@ def make_csv_diff(ctx, filename=None):
                 break
 
     try:
-        ctx.run(r'grep --quiet --regexp "- version:.*{}" {}'.format(
-            next_version,
-            MIGRATION_FILE
-        ))
+        ctx.run(
+            r'grep --quiet --regexp "- version:.*{}" {}'.format(
+                next_version, MIGRATION_FILE
+            )
+        )
     except exceptions.Failure:
         with open(MIGRATION_FILE, 'a') as fd:
             fd.write('    - version: {}\n'.format(next_version))
@@ -85,7 +81,11 @@ def make_csv_diff(ctx, filename=None):
             writer.writerows(added)
 
         with open(MIGRATION_FILE, 'a') as fd:
-            fd.write('              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(load_method, file_path))
+            fd.write(
+                '              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(
+                    load_method, file_path
+                )
+            )
 
     def create_csv_changes(changed):
         # get unique type of changes
@@ -98,7 +98,9 @@ def make_csv_diff(ctx, filename=None):
         files_to_load = []
         for ct in change_types:
             changes_str = '-'.join([i.replace('/id', '') for i in ct])
-            changed_filename = filename[:-4] + '.change-' + changes_str + '.csv'
+            changed_filename = (
+                filename[:-4] + '.change-' + changes_str + '.csv'
+            )
             file_path = os.path.join(target_dir, changed_filename)
             files_to_load.append(file_path)
             change_batch = [c for c in changed if c['fields'].keys() == ct]
@@ -109,12 +111,18 @@ def make_csv_diff(ctx, filename=None):
                 # For each line change get the id column and all new values
                 for c in change_batch:
                     row = {'id': c['key'][0]}
-                    row.update({k: v['to'] for (k, v) in c['fields'].iteritems()})
+                    row.update(
+                        {k: v['to'] for (k, v) in c['fields'].iteritems()}
+                    )
                     writer.writerow(row)
 
         with open(MIGRATION_FILE, 'a') as fd:
             for f in files_to_load:
-                fd.write('              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(load_method,f))
+                fd.write(
+                    '              - bin/importer.sh songs.install.data_full::{} /{}\n'.format(
+                        load_method, f
+                    )
+                )
 
     create_csv_new(added)
     create_csv_changes(changed)
@@ -132,7 +140,7 @@ def make_product_translation(ctx, files=None):
     sku | denom_erp-en_GB | denom_erp-fr_BE | denom_erp-nl_BE
 
     To use call the task like this :
-    
+
     invoke data.make_product_translation --files raw_file_1.csv,raw_file_2.csv
 
     With as many file as needed.
@@ -158,21 +166,24 @@ def make_product_translation(ctx, files=None):
                             language_col = header
                             break
                     else:
-                        print('Language {} not found in file {}.'.format(
-                            language,
-                            file_path
-                            ))
+                        print(
+                            'Language {} not found in file {}.'.format(
+                                language, file_path
+                            )
+                        )
                         print('Aborting !')
                         exit()
                     for row in reader:
                         if not len(row[language_col]):
                             # Empty traduction are skipped
                             continue
-                        r = {'id/id': xml_id_format.format(row['sku']),
-                            'name': row[language_col].translate(None, '|').strip()
-                            }
+                        r = {
+                            'id/id': xml_id_format.format(row['sku']),
+                            'name': row[language_col]
+                            .translate(None, '|')
+                            .strip(),
+                        }
                         writer.writerow(r)
-
 
     raw_files = files.split(',')
     if len(raw_files) < 1:
@@ -188,20 +199,14 @@ def make_product_translation(ctx, files=None):
             exit()
 
     make_translation_file(
-        raw_files,
-        'nl_BE',
-        path_to_new_file + 'product_name_nl_BE.csv'
-        )
+        raw_files, 'nl_BE', path_to_new_file + 'product_name_nl_BE.csv'
+    )
     make_translation_file(
-        raw_files,
-        'en_GB',
-        path_to_new_file + 'product_name_en_US.csv'
-        )
+        raw_files, 'en_GB', path_to_new_file + 'product_name_en_US.csv'
+    )
     make_translation_file(
-        raw_files,
-        'fr_BE',
-        path_to_new_file + 'product_name_fr_BE.csv'
-        )
+        raw_files, 'fr_BE', path_to_new_file + 'product_name_fr_BE.csv'
+    )
 
 
 @task(name='make-product-intrastat')
@@ -244,9 +249,10 @@ def make_product_intrastat(ctx, files=None):
                             # Empty code intrastat are skipped
                             continue
 
-                        r = {'id/id': xml_id_format.format(row['sku']),
-                             'code_intrastat': row['code_douan'].strip()
-                             }
+                        r = {
+                            'id/id': xml_id_format.format(row['sku']),
+                            'code_intrastat': row['code_douan'].strip(),
+                        }
                         writer.writerow(r)
 
     raw_files = files.split(',')
@@ -262,8 +268,4 @@ def make_product_intrastat(ctx, files=None):
             print('\nFile {} can not be found, aborting !'.format(file_name))
             exit()
 
-    make_intrastat_file(
-        raw_files,
-        path_to_new_file + 'product_intrastat.csv'
-    )
-
+    make_intrastat_file(raw_files, path_to_new_file + 'product_intrastat.csv')

@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 from collections import defaultdict
 from datetime import datetime
-import unicodecsv as csv
-
 from io import BytesIO
+
+import unicodecsv as csv
 from odoo import api, models
 from odoo.tools import config
 
@@ -35,13 +35,20 @@ class StockPicking(models.Model):
         if not self.date_done:
             return
         sale_orders = self.move_lines.mapped('order_id')
-        return '_'.join([
-            'NE',
-            sale_orders[0].partner_id.ref or '' if len(sale_orders) else '',
-            str(self.id),
-            ''.join(self.date_done[:10].split('-')),
-            ''.join(self.date_done[-8:].split(':')),
-            ]) + '.csv'
+        return (
+            '_'.join(
+                [
+                    'NE',
+                    sale_orders[0].partner_id.ref or ''
+                    if len(sale_orders)
+                    else '',
+                    str(self.id),
+                    ''.join(self.date_done[:10].split('-')),
+                    ''.join(self.date_done[-8:].split(':')),
+                ]
+            )
+            + '.csv'
+        )
 
     @api.multi
     def _save_delivery_note(self):
@@ -60,15 +67,17 @@ class StockPicking(models.Model):
         if len(existing):
             existing[0].datas = data.encode('base_64')
         else:
-            existing = self.env['ir.attachment'].create({
-                'type': 'binary',
-                'res_model': 'stock.picking',
-                'res_id': self.id,
-                'name': filename,
-                'datas_fname': filename,
-                'mimetype': 'text/csv',
-                'datas': data.encode('base_64')
-            })
+            existing = self.env['ir.attachment'].create(
+                {
+                    'type': 'binary',
+                    'res_model': 'stock.picking',
+                    'res_id': self.id,
+                    'name': filename,
+                    'datas_fname': filename,
+                    'mimetype': 'text/csv',
+                    'datas': data.encode('base_64'),
+                }
+            )
 
     def _delivery_note_recipient_ids(self, values):
         # we could make this global for all emails by using
@@ -96,12 +105,15 @@ class StockPicking(models.Model):
             return
         template = self.env.ref('stock_delivery_note.delivery_note_csv')
         values = template.generate_email(self.id)
-        values.update({
-            'recipient_ids': [
-                (4, pid) for pid in self._delivery_note_recipient_ids(values)
-            ],
-            'auto_delete': False,
-        })
+        values.update(
+            {
+                'recipient_ids': [
+                    (4, pid)
+                    for pid in self._delivery_note_recipient_ids(values)
+                ],
+                'auto_delete': False,
+            }
+        )
         if 'email_from' in values and not values.get('email_from'):
             values.pop('email_from')
         values['attachment_ids'] = [(6, 0, existing[0].ids)]
@@ -135,6 +147,7 @@ class StockPicking(models.Model):
 
         For each line an empty column so it always ends with a semi colon
         """
+
         def format_number(number, fractional_size=None):
             """Format a number to a string.
 
@@ -160,18 +173,20 @@ class StockPicking(models.Model):
             """
             customer = sale_order.partner_id
             depot_number = (
-                customer.vet_depot_number or
-                customer.parent_id.vet_depot_number
+                customer.vet_depot_number
+                or customer.parent_id.vet_depot_number
             )
             if not depot_number:
                 return sale_order.client_order_ref or ''
-            return '/'.join([
-                datetime.strptime(
-                    delivery_date,
-                    '%Y-%m-%d %H:%M:%S').strftime('%y'),
-                depot_number,
-                sale_order.suite_name or '0000',
-            ])
+            return '/'.join(
+                [
+                    datetime.strptime(
+                        delivery_date, '%Y-%m-%d %H:%M:%S'
+                    ).strftime('%y'),
+                    depot_number,
+                    sale_order.suite_name or '0000',
+                ]
+            )
 
         def format_use_date(use_date):
             """Get the use dates in format dd-mm-yyyy"""
@@ -184,19 +199,18 @@ class StockPicking(models.Model):
         lines = []
         partner = self.partner_id
         # The two header lines
-        lines.append([
-            self.id,
-            partner.email or '',
-            '',
-            ])
-        lines.append([
-            u'{} {}'.format(partner.title.shortcut or '',
-                            partner.name or '').strip(),
-            partner.street or '',
-            u'{} {}'.format(partner.zip or '', partner.city or '').strip(),
-            partner.country_id.name or '',
-            ''
-            ])
+        lines.append([self.id, partner.email or '', ''])
+        lines.append(
+            [
+                u'{} {}'.format(
+                    partner.title.shortcut or '', partner.name or ''
+                ).strip(),
+                partner.street or '',
+                u'{} {}'.format(partner.zip or '', partner.city or '').strip(),
+                partner.country_id.name or '',
+                '',
+            ]
+        )
 
         vat_group = self.env.ref('stock_delivery_note.vat_tax_group')
         # The product lines
@@ -213,27 +227,30 @@ class StockPicking(models.Model):
                     # represtented in the delivery note
                     quants.append(['', move_line.product_qty - quants_qty, ''])
                 vat = sol.tax_id.filtered(
-                    lambda r: r.tax_group_id == vat_group)
+                    lambda r: r.tax_group_id == vat_group
+                )
                 if not vat:
                     vat = product.taxes_id.filtered(
-                        lambda r: r.tax_group_id == vat_group)
+                        lambda r: r.tax_group_id == vat_group
+                    )
                 for quant in quants:
-                    lines.append([
-                        product.default_code or '',
-                        product.name,
-                        # Quantity computed from the quants
-                        format_number(quant[1], 3),
-                        #  Net HTVA price
-                        format_number(sol.price_reduce, 2),
-                        #  Brut HTVA price
-                        format_number(sol.price_unit, 2),
-                        #  VAT rate, yes only the first one if present
-                        format_number(vat[0].amount if vat else 0, 1),
-                        # Lots name
-                        quant[0] or '',
-                        format_use_date(quant[2] or ''),
-                        get_last_column(sol.order_id, self.date_done),
-                        ''
+                    lines.append(
+                        [
+                            product.default_code or '',
+                            product.name,
+                            # Quantity computed from the quants
+                            format_number(quant[1], 3),
+                            #  Net HTVA price
+                            format_number(sol.price_reduce, 2),
+                            #  Brut HTVA price
+                            format_number(sol.price_unit, 2),
+                            #  VAT rate, yes only the first one if present
+                            format_number(vat[0].amount if vat else 0, 1),
+                            # Lots name
+                            quant[0] or '',
+                            format_use_date(quant[2] or ''),
+                            get_last_column(sol.order_id, self.date_done),
+                            '',
                         ]
                     )
         return lines
@@ -260,8 +277,9 @@ class StockPicking(models.Model):
         if is_entry_register:
             lines_done = self.get_entry_register_lines()
         else:
-            lines_done = \
-                self.move_lines.filtered(lambda line: line.state == 'done')
+            lines_done = self.move_lines.filtered(
+                lambda line: line.state == 'done'
+            )
 
         for line in lines_done:
             if not line.order_id:
@@ -274,8 +292,10 @@ class StockPicking(models.Model):
             proc_groups = self.move_lines.mapped('procurement_id.group_id')
             moves = proc_groups.mapped('procurement_ids.move_ids')
             moves = moves.filtered(
-                lambda rec: (rec.location_dest_id.usage == 'customer' and
-                             rec.state not in ('cancel', 'done'))
+                lambda rec: (
+                    rec.location_dest_id.usage == 'customer'
+                    and rec.state not in ('cancel', 'done')
+                )
             )
             for line in moves:
                 if not line.order_id:
@@ -285,17 +305,23 @@ class StockPicking(models.Model):
 
         result_dict = {}
         for order, moves in moves_by_order.iteritems():
-            result_dict[order] = [moves,
-                                  backorder_moves_by_order.get(order, [])]
+            result_dict[order] = [
+                moves,
+                backorder_moves_by_order.get(order, []),
+            ]
         if moves_without_order:
             result.append(
                 (None, (moves_without_order, backorder_moves_without_order))
             )
 
         result.extend(
-            sorted(result_dict.items(),
-                   key=lambda picking: (picking[0][0].date_order,
-                                        picking[0][0].id))
+            sorted(
+                result_dict.items(),
+                key=lambda picking: (
+                    picking[0][0].date_order,
+                    picking[0][0].id,
+                ),
+            )
         )
         return result
 
@@ -304,15 +330,19 @@ class StockPicking(models.Model):
         categ_import = self.env.ref('specific_data.product_categ_importation')
 
         all_products = self.mapped('move_lines.product_id')
-        medic_products = self.env['product.product'].search([
-            '|',
-            ('categ_id', 'child_of', categ_vet.id),
-            ('categ_id', 'child_of', categ_import.id),
-            ('id', 'in', all_products.ids)
-        ],  order='categ_id')
+        medic_products = self.env['product.product'].search(
+            [
+                '|',
+                ('categ_id', 'child_of', categ_vet.id),
+                ('categ_id', 'child_of', categ_import.id),
+                ('id', 'in', all_products.ids),
+            ],
+            order='categ_id',
+        )
 
         lines = self.mapped('move_lines').filtered(
             lambda line: line.state == 'done'
-            and line.product_id in medic_products)
+            and line.product_id in medic_products
+        )
 
         return lines

@@ -2,24 +2,18 @@
 # Copyright 2017 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import models, fields, api, tools
+from odoo import api, fields, models, tools
 
 
 class PurchaseReport(models.Model):
     _inherit = 'purchase.report'
 
-    nbr_tickets = fields.Integer(
-        string='Nb. of Tickets',
-        readonly=True
-    )
+    nbr_tickets = fields.Integer(string='Nb. of Tickets', readonly=True)
     last_date_done = fields.Datetime(
-        string='Last date of Transfer',
-        readonly=True,
+        string='Last date of Transfer', readonly=True
     )
     late_delivery = fields.Float(
-        string='Late delivery',
-        digits=(16, 2),
-        readonly=True
+        string='Late delivery', digits=(16, 2), readonly=True
     )
 
     # ***********************************************************************
@@ -28,7 +22,8 @@ class PurchaseReport(models.Model):
     @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self._cr, 'purchase_report')
-        self._cr.execute("""
+        self._cr.execute(
+            """
             create view purchase_report as (
                 WITH currency_rate as (%s)
                 /* **************************************************** */
@@ -162,7 +157,9 @@ class PurchaseReport(models.Model):
                     partner.commercial_partner_id,
                     analytic_account.id
             )
-        """ % self.env['res.currency']._select_companies_rates())
+        """
+            % self.env['res.currency']._select_companies_rates()
+        )
 
     # ***********************************************************************
     # ********************** END OVERRIDE FROM ORIGINAL CLASS ***************

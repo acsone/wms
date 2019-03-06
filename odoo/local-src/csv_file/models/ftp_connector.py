@@ -2,12 +2,12 @@
 # Copyright 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import os
-import paramiko
 from contextlib import contextmanager
 from ftplib import FTP
 from io import StringIO
 
-from odoo import fields, models, api, _
+import paramiko
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 SFTP_TIMEOUT = 30
@@ -17,10 +17,9 @@ class FTPConnector(models.Model):
     _name = 'ftp.connector'
 
     name = fields.Char(required=True)
-    type = fields.Selection([('ftp', 'FTP'),
-                             ('sftp', 'sFTP')],
-                            string='Type',
-                            required=True)
+    type = fields.Selection(
+        [('ftp', 'FTP'), ('sftp', 'sFTP')], string='Type', required=True
+    )
     hostname = fields.Char(required=True)
     username = fields.Char(required=True)
     password = fields.Char()
@@ -28,7 +27,7 @@ class FTPConnector(models.Model):
     pk_env_variable = fields.Char(
         'Primary key environment variable',
         help='The name of the environment variable who '
-             'contains the primary key'
+        'contains the primary key',
     )
 
     def get_ftp_connector(self):
@@ -43,12 +42,12 @@ class FTPConnector(models.Model):
         pk_env_variable = self.pk_env_variable
         if not pk_env_variable:
             raise UserError(
-                _('Please set the primary key environment variable'))
+                _('Please set the primary key environment variable')
+            )
 
         private_key = os.environ.get(pk_env_variable)
         if not private_key:
-            raise UserError(
-                _('%s must be set in environ') % pk_env_variable)
+            raise UserError(_('%s must be set in environ') % pk_env_variable)
 
         pkey = paramiko.RSAKey.from_private_key(
             StringIO(private_key.decode('utf8'))
@@ -56,12 +55,14 @@ class FTPConnector(models.Model):
 
         with paramiko.SSHClient() as ssh:
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
-            ssh.connect(self.hostname,
-                        port=self.port,
-                        username=self.username,
-                        pkey=pkey,
-                        look_for_keys=False,
-                        timeout=SFTP_TIMEOUT)
+            ssh.connect(
+                self.hostname,
+                port=self.port,
+                username=self.username,
+                pkey=pkey,
+                look_for_keys=False,
+                timeout=SFTP_TIMEOUT,
+            )
             with ssh.open_sftp() as sftp:
                 yield sftp
 

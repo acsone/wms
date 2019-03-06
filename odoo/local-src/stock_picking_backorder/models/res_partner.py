@@ -13,14 +13,16 @@ class ResPartner(models.Model):
         string='Sale backorder accepted',
         default=True,
         track_visibility='onchange',
-        help="Do not let customer order products not in stock"
+        help="Do not let customer order products not in stock",
     )
     is_sale_back_order_cancel = fields.Boolean(
         string='Sale backorder auto-cancel',
         track_visibility='onchange',
-        help=("Automaticaly cancel products that could not be delivered. "
-              "Must be set on delivery addresss")
+        help=(
+            "Automaticaly cancel products that could not be delivered. "
+            "Must be set on delivery addresss"
+        ),
     )
     is_purchase_back_order_accepted = fields.Boolean(
-        string='Purchase backorder accepted',
+        string='Purchase backorder accepted'
     )

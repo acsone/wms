@@ -6,7 +6,8 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, fields, models, SUPERUSER_ID
+from odoo import SUPERUSER_ID, api, fields, models
+
 from ..utils import create_index, install_trgm_extension
 
 

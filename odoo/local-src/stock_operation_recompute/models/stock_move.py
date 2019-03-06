@@ -2,11 +2,12 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, _
+import logging
+
+from odoo import _, models
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -25,9 +26,17 @@ class StockMove(models.Model):
         ops = self.mapped('linked_move_operation_ids.operation_id')
         for op in ops:
             _logger.debug(
-                'Old operation %s %s' % (op, [
-                    '%s: %s/%s' % (plot.lot_id, plot.qty, plot.qty_todo)
-                    for plot in op.pack_lot_ids]))
+                'Old operation %s %s'
+                % (
+                    op,
+                    [
+                        '{}: {}/{}'.format(
+                            plot.lot_id, plot.qty, plot.qty_todo
+                        )
+                        for plot in op.pack_lot_ids
+                    ],
+                )
+            )
         qty_done = {}
         for op in ops:
             done = qty_done.setdefault(op.location_id.id, {})
@@ -38,8 +47,11 @@ class StockMove(models.Model):
         # Check if product additional has been done
         additional_ctx = {}
         additional_move = ops.mapped('additional_move_id')
-        if any(additional_move.mapped(
-                'linked_move_operation_ids.operation_id.qty_done')):
+        if any(
+            additional_move.mapped(
+                'linked_move_operation_ids.operation_id.qty_done'
+            )
+        ):
             # In this case, we support only recomputation for product at a time
             additional_move.ensure_one()
             additional_ctx = dict(skip_additional=True)
@@ -58,20 +70,27 @@ class StockMove(models.Model):
             forced_qty = 0.0
             if move.state == 'assigned':
                 qty = move.product_uom._compute_quantity(
-                    move.product_uom_qty, move.product_id.uom_id, round=False)
+                    move.product_uom_qty, move.product_id.uom_id, round=False
+                )
                 forced_qty = qty - sum([x.qty for x in move_quants])
             # if we used force_assign() on the move, or if the move is
             # incoming, forced_qty > 0
-            if float_compare(
-                    forced_qty, 0,
-                    precision_rounding=move.product_id.uom_id.rounding) > 0:
+            if (
+                float_compare(
+                    forced_qty,
+                    0,
+                    precision_rounding=move.product_id.uom_id.rounding,
+                )
+                > 0
+            ):
                 if forced_qties.get(move.product_id):
                     forced_qties[move.product_id] += forced_qty
                 else:
                     forced_qties[move.product_id] = forced_qty
         new_ops = self.env['stock.pack.operation']
         for vals in picking.with_context(**additional_ctx)._prepare_pack_ops(
-                picking_quants, forced_qties):
+            picking_quants, forced_qties
+        ):
             new_ops |= new_ops.create(vals)
         # New pack operations could contain additional products.
         # Filter them out
@@ -83,13 +102,18 @@ class StockMove(models.Model):
         for location_id, lines in qty_done.iteritems():
             for lot_id, qty in lines.iteritems():
                 nop = new_ops.filtered(
-                    lambda op: op.location_id.id == location_id)
+                    lambda op: op.location_id.id == location_id
+                )
                 nol = nop.pack_lot_ids.filtered(
-                    lambda line: line.lot_id.id == lot_id)
+                    lambda line: line.lot_id.id == lot_id
+                )
                 if not nol:
-                    raise UserError(_(
-                        'Internal Error. '
-                        'Cannot match done lot in new pack operation'))
+                    raise UserError(
+                        _(
+                            'Internal Error. '
+                            'Cannot match done lot in new pack operation'
+                        )
+                    )
                 nol.qty = qty
         new_ops.save()
 
@@ -97,12 +121,22 @@ class StockMove(models.Model):
         picking.do_recompute_remaining_quantities()
         for pack in new_ops:
             pack.ordered_qty = sum(
-                pack.mapped('linked_move_operation_ids').mapped('move_id')
-                .filtered(lambda r: r.state != 'cancel').mapped('ordered_qty')
+                pack.mapped('linked_move_operation_ids')
+                .mapped('move_id')
+                .filtered(lambda r: r.state != 'cancel')
+                .mapped('ordered_qty')
             )
 
         for new_mop in moves.mapped('linked_move_operation_ids.operation_id'):
             _logger.debug(
-                'New operation %s %s' % (new_mop, [
-                    '%s: %s/%s' % (plot.lot_id, plot.qty, plot.qty_todo)
-                    for plot in new_mop.pack_lot_ids]))
+                'New operation %s %s'
+                % (
+                    new_mop,
+                    [
+                        '{}: {}/{}'.format(
+                            plot.lot_id, plot.qty, plot.qty_todo
+                        )
+                        for plot in new_mop.pack_lot_ids
+                    ],
+                )
+            )

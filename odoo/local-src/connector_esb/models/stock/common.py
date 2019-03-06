@@ -14,4 +14,4 @@ class ProductProduct(models.Model):
 
         Only stockable product that are ok for sale are exported.
         """
-        return (self.type == 'product' and self.sale_ok)
+        return self.type == 'product' and self.sale_ok

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itemmove import Itemmove
+from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
 
 
 class TestItemmoveReserve(ZetesReserveTest):
@@ -20,8 +21,9 @@ class TestItemmoveReserve(ZetesReserveTest):
           AND picking_zone.code = %s
         LIMIT 1
         """
-        self.env.cr.execute(report_query, (self.product_1.id,
-                                           self.picking_zone_medoc.code))
+        self.env.cr.execute(
+            report_query, (self.product_1.id, self.picking_zone_medoc.code)
+        )
         result = self.env.cr.fetchone()
 
         self.assertTrue(result)
@@ -37,16 +39,20 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         :return:
         """
-        domain = Itemmove(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Itemmove(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
 
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'groupNum': self.picking_reserve.id,
-            'itemMoveType': constants.MOVE_TYPE_PUT,
-            'Cri01': None,
-        })
+        request_params.update(
+            {
+                'groupNum': self.picking_reserve.id,
+                'itemMoveType': constants.MOVE_TYPE_PUT,
+                'Cri01': None,
+            }
+        )
 
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
@@ -56,8 +62,10 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking_reserve.id))
-        self.assertEqual(result.moveLineId,
-                         '%s_%s' % (pack_op.id, self.lot_product_1.id))
+        self.assertEqual(
+            result.moveLineId,
+            '{}_{}'.format(pack_op.id, self.lot_product_1.id),
+        )
         self.assertEqual(int(result.reqQty), 20)
         self.assertEqual(int(result.effQty), 0)
         self.assertEqual(result.moveStatus, str(constants.MOVE_DEFAULT))
@@ -98,24 +106,24 @@ class TestItemmoveReserve(ZetesReserveTest):
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
 
-        pack_op.pack_lot_ids.write({
-            'qty': 20,
-        })
-        pack_op.write({
-            'qty_done': 20,
-        })
+        pack_op.pack_lot_ids.write({'qty': 20})
+        pack_op.write({'qty_done': 20})
 
         self.assertEqual(pack_op.qty_done, 20)
 
-        domain = Itemmove(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Itemmove(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='resu')
-        request_params.update({
-            'moveLineId': pack_op.id,
-            'moveStatus': constants.MOVE_DONE,
-            'itemMoveType': constants.MOVE_TYPE_PUT,
-        })
+        request_params.update(
+            {
+                'moveLineId': pack_op.id,
+                'moveStatus': constants.MOVE_DONE,
+                'itemMoveType': constants.MOVE_TYPE_PUT,
+            }
+        )
 
         domain.resu(request_params)
         self.assertEqual(pack_op.zetes_state, constants.MOVE_DONE)

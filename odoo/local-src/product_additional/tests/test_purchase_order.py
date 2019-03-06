@@ -15,49 +15,58 @@ class TestPurchaseOrder(SavepointCase):
         super(TestPurchaseOrder, cls).setUpClass()
 
         # Create partner
-        cls.partner = cls.env['res.partner'].create({
-            'name': 'Hello World',
-            'ref': '85789284',
-        })
+        cls.partner = cls.env['res.partner'].create(
+            {'name': 'Hello World', 'ref': '85789284'}
+        )
 
-        cls.supplier = cls.env['res.partner'].create({
-            'name': 'Supplier',
-            'ref': '829562231',
-            'supplier': True,
-        })
+        cls.supplier = cls.env['res.partner'].create(
+            {'name': 'Supplier', 'ref': '829562231', 'supplier': True}
+        )
 
         # Create the main product
-        cls.main_product = cls.env['product.product'].create({
-            'name': 'Main product',
-            'default_code': '1234567',
-            'tracking': 'lot',
-            'list_price': 100,
-            'type': 'product',
-        })
+        cls.main_product = cls.env['product.product'].create(
+            {
+                'name': 'Main product',
+                'default_code': '1234567',
+                'tracking': 'lot',
+                'list_price': 100,
+                'type': 'product',
+            }
+        )
 
-        cls.additional_product = cls.env['product.product'].create({
-            'name': 'Second product',
-            'default_code': '987654321',
-            'tracking': 'none',
-            'list_price': 20,
-            'type': 'product',
-        })
+        cls.additional_product = cls.env['product.product'].create(
+            {
+                'name': 'Second product',
+                'default_code': '987654321',
+                'tracking': 'none',
+                'list_price': 20,
+                'type': 'product',
+            }
+        )
 
         # Create the purchase_order
-        cls.purchase_order = cls.env['purchase.order'].create({
-            'partner_id': cls.partner.id,
-            'order_line': [
-                (0, 0, {
-                    'name': cls.main_product.name,
-                    'product_id': cls.main_product.id,
-                    'product_uom': cls.env.ref('product.product_uom_unit').id,
-                    'product_qty': 12,
-                    'sequence': 1,
-                    'price_unit_base': 100,
-                    'date_planned': fields.Datetime.now(),
-                }),
-            ],
-        })
+        cls.purchase_order = cls.env['purchase.order'].create(
+            {
+                'partner_id': cls.partner.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': cls.main_product.name,
+                            'product_id': cls.main_product.id,
+                            'product_uom': cls.env.ref(
+                                'product.product_uom_unit'
+                            ).id,
+                            'product_qty': 12,
+                            'sequence': 1,
+                            'price_unit_base': 100,
+                            'date_planned': fields.Datetime.now(),
+                        },
+                    )
+                ],
+            }
+        )
 
     def test_action_confirm_1(self):
         """
@@ -75,23 +84,27 @@ class TestPurchaseOrder(SavepointCase):
         order
         :return:
         """
-        self.main_product.write({
-            'ratio_main_product': 5,
-            'ratio_additional_product': 2,
-            'additional_product_id': self.additional_product.id
-        })
+        self.main_product.write(
+            {
+                'ratio_main_product': 5,
+                'ratio_additional_product': 2,
+                'additional_product_id': self.additional_product.id,
+            }
+        )
         self.assertEqual(len(self.purchase_order.order_line), 1)
 
         self.purchase_order.button_compute_additional_products()
         self.assertEqual(len(self.purchase_order.order_line), 2)
         # Check main line
         main_line = self.purchase_order.order_line.filtered(
-            lambda line: line.product_qty == 12.0)
+            lambda line: line.product_qty == 12.0
+        )
         self.assertEqual(len(main_line), 1)
         self.assertEqual(main_line.price_unit_base, 100.0)
         # Check promotional line
         additional_line = self.purchase_order.order_line.filtered(
-            lambda line: line.product_qty == 4.0)
+            lambda line: line.product_qty == 4.0
+        )
         self.assertEqual(len(additional_line), 1)
         self.assertEqual(additional_line.price_unit_base, 0.0)
 
@@ -100,9 +113,11 @@ class TestPurchaseOrder(SavepointCase):
         self.assertEqual(len(self.purchase_order.order_line), 1)
         # Check main line
         main_line = self.purchase_order.order_line.filtered(
-            lambda line: line.product_qty == 12.0)
+            lambda line: line.product_qty == 12.0
+        )
         self.assertEqual(len(main_line), 1)
         # Check promotional line
         additional_line = self.purchase_order.order_line.filtered(
-            lambda line: line.product_qty == 4.0)
+            lambda line: line.product_qty == 4.0
+        )
         self.assertEqual(len(additional_line), 0)

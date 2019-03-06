@@ -46,18 +46,21 @@ class ProductStockCNKWebserviceMessage(Component):
             product_recs = ProductProduct.search(domain, order='cnk_code')
 
         stock_by_product = product_recs.read(
-            ['cnk_code', 'immediately_usable_qty', 'default_code'])
+            ['cnk_code', 'immediately_usable_qty', 'default_code']
+        )
 
         result = []
         for line in stock_by_product:
             quantity = line['immediately_usable_qty']
             quantity = quantity >= 0 and quantity or 0
 
-            result.append({
-                'cnk': line['cnk_code'],
-                'quantity': quantity,
-                'pid': line['default_code']
-            })
+            result.append(
+                {
+                    'cnk': line['cnk_code'],
+                    'quantity': quantity,
+                    'pid': line['default_code'],
+                }
+            )
 
         return result
 
@@ -81,16 +84,14 @@ class ProductStockSKUWebserviceMessage(Component):
             product_recs = ProductProduct.search(domain, order='default_code')
 
         stock_by_product = product_recs.read(
-            ['immediately_usable_qty', 'default_code'])
+            ['immediately_usable_qty', 'default_code']
+        )
 
         result = []
         for line in stock_by_product:
             quantity = line['immediately_usable_qty']
             quantity = quantity >= 0 and quantity or 0
 
-            result.append({
-                'quantity': quantity,
-                'sku': line['default_code']
-            })
+            result.append({'quantity': quantity, 'sku': line['default_code']})
 
         return result

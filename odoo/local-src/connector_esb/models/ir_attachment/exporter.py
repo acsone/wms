@@ -10,10 +10,7 @@ class IrAttachmentMapper(Component):
     _inherit = ['esb.export.mapper']
     _apply_on = 'ir.attachment'
 
-    direct = [
-        ('datas_fname', 'filename'),
-        ('datas', 'data')
-    ]
+    direct = [('datas_fname', 'filename'), ('datas', 'data')]
 
 
 class IrAttachmentCronExporter(Component):
@@ -23,16 +20,22 @@ class IrAttachmentCronExporter(Component):
     _apply_on = 'ir.attachment'
 
     def get_items_domain(self):
-        return [('res_model', 'in', ['stock.picking',
-                                     'sale.order',
-                                     'account.invoice']
-                 ),
-                '|', ('name', '=like', 'cf_%'),
-                '|', ('name', '=like', 'CM_%'),
-                '|', ('name', '=like', 'fc_%'),
-                '|', ('name', '=like', 'nc_%'),
-                ('name', '=like', 'NE_%'),
-                ]
+        return [
+            (
+                'res_model',
+                'in',
+                ['stock.picking', 'sale.order', 'account.invoice'],
+            ),
+            '|',
+            ('name', '=like', 'cf_%'),
+            '|',
+            ('name', '=like', 'CM_%'),
+            '|',
+            ('name', '=like', 'fc_%'),
+            '|',
+            ('name', '=like', 'nc_%'),
+            ('name', '=like', 'NE_%'),
+        ]
 
     def _get_producer(self):
         return self.work.component(usage='zip.producer')

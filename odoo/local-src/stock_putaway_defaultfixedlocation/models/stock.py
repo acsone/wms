@@ -29,7 +29,8 @@ class ProductPutaway(models.Model):
         'stock.location',
         string='Default Fixed Location',
         help="Destination fixed location when no fixed location is defined "
-             "for a product category")
+        "for a product category",
+    )
 
     def putaway_apply(self, product):
         res = super(ProductPutaway, self).putaway_apply(product)

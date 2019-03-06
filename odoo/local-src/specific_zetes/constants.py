@@ -1,6 +1,15 @@
 # Request structure
-HEADER_LABELS = ('serNum', 'verNum', 'appNum', 'msgType', 'operId', 'langId',
-                 'msgDate', 'msgTime', 'packageId')
+HEADER_LABELS = (
+    'serNum',
+    'verNum',
+    'appNum',
+    'msgType',
+    'operId',
+    'langId',
+    'msgDate',
+    'msgTime',
+    'packageId',
+)
 METHOD_INDEX = 3
 USER_INDEX = 4
 
@@ -9,19 +18,18 @@ RESPONSE_CODE_ERROR = 10
 RESPONSE_CODE_NO_LINES = 11
 
 # Actions
-ZETES_ACTIONS = [('requ', 'Request'),
-                 ('resp', 'Response'),
-                 ('resu', 'Action')]
+ZETES_ACTIONS = [('requ', 'Request'), ('resp', 'Response'), ('resu', 'Action')]
 
 # Domains
-ZETES_DOMAINS = [('assignment', 'Assignment'),
-                 ('catchweight', 'Catchweight'),
-                 ('itempick', 'Itempick'),
-                 ('location', 'Location'),
-                 ('print', 'Print'),
-                 ('refdata', 'Refdata'),
-                 ('usercontext', 'Usercontext'),
-                 ]
+ZETES_DOMAINS = [
+    ('assignment', 'Assignment'),
+    ('catchweight', 'Catchweight'),
+    ('itempick', 'Itempick'),
+    ('location', 'Location'),
+    ('print', 'Print'),
+    ('refdata', 'Refdata'),
+    ('usercontext', 'Usercontext'),
+]
 
 # Zetes values for assignment (stock.picking) state
 AS_DEFAULT = '00'

@@ -6,9 +6,9 @@
 #  Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import http, _
-from odoo.http import request
+from odoo import _, http
 from odoo.exceptions import UserError
+from odoo.http import request
 
 
 class CamptocampVersionController(http.Controller):

@@ -47,11 +47,12 @@ class SaleLineExportListener(Component):
     def on_record_write(self, record, fields=None):
         if not record.order_id.esb_is_exportable():
             return
-        if (record.env.context.get('_sale_order_create') or
-                record.env.context.get('_sale_order_write')):
+        if record.env.context.get(
+            '_sale_order_create'
+        ) or record.env.context.get('_sale_order_write'):
             # export already triggered by the sale order write/create
             return
-        if set(fields) & set(['qty_delivered', 'product_qty_unavailable']):
+        if set(fields) & {'qty_delivered', 'product_qty_unavailable'}:
             so = record.order_id
             so.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(so.name or ''),

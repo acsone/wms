@@ -2,10 +2,9 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import resource_stream
-
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
+from pkg_resources import resource_stream
 
 from ..common import req
 
@@ -36,7 +35,7 @@ def setup_customer_ref(ctx):
     ref_seq.prefix = ''
     # Change the starting sequence in postgres
     seq_name = 'ir_sequence_%03d' % ref_seq.id
-    sql = ('ALTER SEQUENCE %s RESTART WITH %d;' % (seq_name, sequence_start))
+    sql = 'ALTER SEQUENCE %s RESTART WITH %d;' % (seq_name, sequence_start)
     ctx.env.cr.execute(sql)
 
 

@@ -4,7 +4,7 @@
 
 import re
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 re_name = re.compile(r'(\w+) ?- ?(\w+)( .*)?')
@@ -23,11 +23,16 @@ class RoundTemplateVersion(models.Model):
             if not version.is_default_version:
                 continue
 
-            default_version = self.search([('is_default_version', '=', True),
-                                           ('id', '!=', version.id)])
+            default_version = self.search(
+                [('is_default_version', '=', True), ('id', '!=', version.id)]
+            )
             if default_version:
-                raise UserError(_('You cannot have more '
-                                  'than one default version at once.'))
+                raise UserError(
+                    _(
+                        'You cannot have more '
+                        'than one default version at once.'
+                    )
+                )
 
 
 class RoundTemplate(models.Model):
@@ -36,21 +41,18 @@ class RoundTemplate(models.Model):
 
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True, default="0")
-    itinerary_ids = fields.Many2many(
-        'round.itinerary',
-        string="Itineraries")
+    itinerary_ids = fields.Many2many('round.itinerary', string="Itineraries")
     color = fields.Integer('Color Index')
-    time_picking_planned = fields.Float(
-        'Planned Picking Start Time')
-    time_leave_planned = fields.Float(
-        'Planned Vehicle Start Time')
-    version_ids = fields.Many2many('round.template.version',
-                                   string='Versions')
-    partner_ids = fields.Many2many('res.partner',
-                                   string='Partners',
-                                   readonly=True,
-                                   compute='_compute_partner_ids',
-                                   search='_search_partner_ids')
+    time_picking_planned = fields.Float('Planned Picking Start Time')
+    time_leave_planned = fields.Float('Planned Vehicle Start Time')
+    version_ids = fields.Many2many('round.template.version', string='Versions')
+    partner_ids = fields.Many2many(
+        'res.partner',
+        string='Partners',
+        readonly=True,
+        compute='_compute_partner_ids',
+        search='_search_partner_ids',
+    )
     tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.multi
@@ -71,7 +73,8 @@ class RoundTemplate(models.Model):
         """
 
         positions = self.env['round.itinerary.position'].search(
-            [('partner_id.name', operator, value)])
+            [('partner_id.name', operator, value)]
+        )
         itineraries = self.env['round.itinerary'].search(
             [('partner_position_ids', 'in', positions.ids)]
         )
@@ -88,9 +91,10 @@ class RoundTemplate(models.Model):
                 name += ' - %s' % rec.name
             if self.env.context.get('show_round_template_tags'):
                 tags = '/'.join(
-                    rec.tag_ids
-                    .with_context(short_round_tag_name=True)
-                    .mapped('display_name'))
+                    rec.tag_ids.with_context(short_round_tag_name=True).mapped(
+                        'display_name'
+                    )
+                )
                 if tags:
                     name += ' (%s)' % tags
             result.append((rec.id, name))
@@ -110,9 +114,6 @@ class RoundTemplate(models.Model):
             else:
                 code = text = name.strip()
                 comb = operator.startswith('not ') and '&' or '|'
-            domain = [
-                comb,
-                ('code', operator, code),
-                ('name', operator, text)]
+            domain = [comb, ('code', operator, code), ('name', operator, text)]
         records = self.search(domain + args, limit=limit)
         return records.name_get()

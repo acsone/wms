@@ -4,7 +4,7 @@
 
 from datetime import datetime
 
-from odoo import api, models, fields, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -16,10 +16,17 @@ class StockPackOperation(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            result.append((rec.id, '%s (%d/%d)' % (
-                rec.product_id.display_name,
-                rec.qty_done, rec.product_qty,
-                )))
+            result.append(
+                (
+                    rec.id,
+                    '%s (%d/%d)'
+                    % (
+                        rec.product_id.display_name,
+                        rec.qty_done,
+                        rec.product_qty,
+                    ),
+                )
+            )
         return result
 
     @api.model
@@ -52,17 +59,15 @@ class StockPackOperation(models.Model):
             if picking_id:
                 picking = self.env['stock.picking'].browse(picking_id).exists()
                 picking_products = picking.mapped('move_lines.product_id')
-                product_args.append(
-                    ('id', 'in', picking_products.ids)
-                )
+                product_args.append(('id', 'in', picking_products.ids))
                 # in this particular case we can disable the limit as we want
                 # all the products of the picking, and we shouldn't have
                 # thousands of them matching a term for a picking
                 product_limit = None
 
             product_ids = [
-                pid for pid, __ in
-                self.env['product.product'].name_search(
+                pid
+                for pid, __ in self.env['product.product'].name_search(
                     name,
                     operator=operator,
                     args=product_args,
@@ -84,17 +89,17 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     name = fields.Char(default='New')
 
-    picking_id = fields.Many2one(
-        'stock.picking', readonly="True")
+    picking_id = fields.Many2one('stock.picking', readonly="True")
     partner_id = fields.Many2one(
-        related='picking_id.partner_id', readonly=True)
-    origin = fields.Char(
-        related='picking_id.origin', readonly=True)
+        related='picking_id.partner_id', readonly=True
+    )
+    origin = fields.Char(related='picking_id.origin', readonly=True)
 
     operation_id = fields.Many2one(
         'stock.pack.operation',
         string="Operation",
-        domain=[('state', '=', 'assigned')])
+        domain=[('state', '=', 'assigned')],
+    )
 
     def _is_parent_child(self, parent, child):
         if child.parent_left and child.parent_right:
@@ -114,9 +119,12 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.onchange('operation_id')
     def _onchange_operation_id(self):
-        if not (self.location_dest_id and
-                self._is_parent_child(self.location_op_dest_id,
-                                      self.location_dest_id)):
+        if not (
+            self.location_dest_id
+            and self._is_parent_child(
+                self.location_op_dest_id, self.location_dest_id
+            )
+        ):
             # If in the wizard, there is no location or if the current location
             # is not valid for selected operation then we need to update it
             if self.operation_id.location_dest_id.usage == 'internal':
@@ -129,8 +137,10 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.qty = 0
 
     location_op_dest_id = fields.Many2one(
-        'stock.location', 'Operation Destination View Location',
-        compute='_get_location_op_dest_id')
+        'stock.location',
+        'Operation Destination View Location',
+        compute='_get_location_op_dest_id',
+    )
 
     @api.one
     @api.depends('operation_id')
@@ -141,7 +151,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.location_op_dest_id = loc.id
 
     location_dest_id = fields.Many2one(
-        'stock.location', 'Destination Location')
+        'stock.location', 'Destination Location'
+    )
 
     lot_required = fields.Boolean('Lot Required', compute='_get_lot_required')
 
@@ -151,35 +162,36 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.lot_required = self.operation_id.product_id.tracking != 'none'
 
     product_qty = fields.Float(
-        related='operation_id.product_qty',
-        readonly=True)
+        related='operation_id.product_qty', readonly=True
+    )
     product_uom_id = fields.Many2one(
-        'product.uom',
-        related='operation_id.product_uom_id',
-        readonly=True)
-    remaining_qty = fields.Float(
-        'Qty Remaining',
-        compute='_get_remaining_qty')
+        'product.uom', related='operation_id.product_uom_id', readonly=True
+    )
+    remaining_qty = fields.Float('Qty Remaining', compute='_get_remaining_qty')
 
     @api.depends('operation_id.qty_done')
     @api.one
     def _get_remaining_qty(self):
         self.remaining_qty = (
-            self.operation_id.product_qty - self.operation_id.qty_done)
+            self.operation_id.product_qty - self.operation_id.qty_done
+        )
 
     qty = fields.Float('Qty Done')
 
     @api.onchange('qty')
     def _onchange_qty(self):
         if self.qty > self.remaining_qty:
-            return {'warning': {
-                'title': _("Warning"),
-                'message': _(
-                    'You cannot receive more than the '
-                    'expected remaining quantity')}}
+            return {
+                'warning': {
+                    'title': _("Warning"),
+                    'message': _(
+                        'You cannot receive more than the '
+                        'expected remaining quantity'
+                    ),
+                }
+            }
 
-    life_date_char = fields.Char(
-        string='Expiration date (input)')
+    life_date_char = fields.Char(string='Expiration date (input)')
 
     @api.onchange('life_date_char')
     def _onchange_life_date_char(self):
@@ -188,7 +200,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         else:
             try:
                 life_date = fields.Datetime.to_string(
-                    datetime.strptime(self.life_date_char, '%d/%m/%Y'))
+                    datetime.strptime(self.life_date_char, '%d/%m/%Y')
+                )
                 self.life_date = life_date
             except Exception:
                 self.life_date = False
@@ -196,48 +209,54 @@ class StockPackOperationLotAdd(models.TransientModel):
         for method in methods:
             method(self)
 
-    life_date = fields.Datetime(
-        string='Expiration date')
+    life_date = fields.Datetime(string='Expiration date')
 
     @api.onchange('life_date')
     def _onchange_life_date(self):
         oplot = self.env['stock.pack.operation.lot']
         if self.life_date and self.operation_id:
             self.lot_name = oplot._calc_lotname_from_lifedate(
-                self.operation_id, self.life_date)
+                self.operation_id, self.life_date
+            )
 
     is_removal_date_expired = fields.Boolean(
-        'Removal Date Expired',
-        compute='_get_is_removal_date_expired')
+        'Removal Date Expired', compute='_get_is_removal_date_expired'
+    )
 
     @api.depends('life_date')
     def _get_is_removal_date_expired(self):
         oplot = self.env['stock.pack.operation.lot']
-        line = oplot.new({
-            'life_date': self.life_date,
-            'operation_id': self.operation_id.id})
+        line = oplot.new(
+            {'life_date': self.life_date, 'operation_id': self.operation_id.id}
+        )
         self.is_removal_date_expired = line.is_removal_date_expired
 
     lot_name = fields.Char('Lot Name')
-    lot_id = fields.Many2one(
-        'stock.production.lot', 'Lot')
+    lot_id = fields.Many2one('stock.production.lot', 'Lot')
 
     def _convert_lot_name2id(self, vals):
-        if ('operation_id' in vals):
+        if 'operation_id' in vals:
             operation = self.env['stock.pack.operation'].browse(
-                vals['operation_id'])
+                vals['operation_id']
+            )
         else:
             operation = self.operation_id
 
         lot_obj = self.env['stock.production.lot']
-        lot = lot_obj.search([
-            ('name', '=', vals['lot_name']),
-            ('product_id', '=', operation.product_id.id)])
+        lot = lot_obj.search(
+            [
+                ('name', '=', vals['lot_name']),
+                ('product_id', '=', operation.product_id.id),
+            ]
+        )
         if not lot:
-            lot = lot_obj.create({
-                'name': vals['lot_name'],
-                'life_date': vals.get('life_date', self.life_date),
-                'product_id': operation.product_id.id})
+            lot = lot_obj.create(
+                {
+                    'name': vals['lot_name'],
+                    'life_date': vals.get('life_date', self.life_date),
+                    'product_id': operation.product_id.id,
+                }
+            )
             lot.onchange_life_date()
         vals['lot_id'] = lot.id
 
@@ -255,8 +274,11 @@ class StockPackOperationLotAdd(models.TransientModel):
                 rec._convert_lot_name2id(vals)
         res = super(StockPackOperationLotAdd, self).write(vals)
         for rec in self:
-            if (rec.lot_id and rec.life_date and
-                    rec.lot_id.life_date != rec.life_date):
+            if (
+                rec.lot_id
+                and rec.life_date
+                and rec.lot_id.life_date != rec.life_date
+            ):
                 rec.lot_id.life_date = rec.life_date
                 rec.lot_id.onchange_life_date()
         return res
@@ -265,9 +287,12 @@ class StockPackOperationLotAdd(models.TransientModel):
         if self.qty <= 0:
             raise UserError(_('Quantity must be greater than 0'))
         if self.qty > self.remaining_qty:
-            raise UserError(_(
-                'You cannot receive more than the '
-                'expected remaining quantity'))
+            raise UserError(
+                _(
+                    'You cannot receive more than the '
+                    'expected remaining quantity'
+                )
+            )
 
         # A pack operation is for a destination and can have multiple lot lines
         # (pack_lot_ids) with the constraint that you cannot have 2 lot lines
@@ -285,10 +310,12 @@ class StockPackOperationLotAdd(models.TransientModel):
                 # ticket but we don't process any qty
                 return
             if pack.qty_done:  # split pack
-                pack2 = pack.copy(default={
-                    'qty_done': 0.0,
-                    'product_qty': pack.product_qty - pack.qty_done,
-                    })
+                pack2 = pack.copy(
+                    default={
+                        'qty_done': 0.0,
+                        'product_qty': pack.product_qty - pack.qty_done,
+                    }
+                )
                 pack.product_qty = pack.qty_done
                 if self.operation_id.pack_lot_ids:
                     pack._copy_remaining_pack_lot_ids(pack2.id)
@@ -301,17 +328,30 @@ class StockPackOperationLotAdd(models.TransientModel):
                     lot.qty += self.qty
                     break
             else:
-                pack.pack_lot_ids = [(0, 0, {
-                    'qty': self.qty,
-                    'lot_name': self.lot_id.name,
-                    'lot_id': self.lot_id.id,
-                    })]
+                pack.pack_lot_ids = [
+                    (
+                        0,
+                        0,
+                        {
+                            'qty': self.qty,
+                            'lot_name': self.lot_id.name,
+                            'lot_id': self.lot_id.id,
+                        },
+                    )
+                ]
             # check Total
-            if (sum([max(lot.qty_todo, lot.qty)
-                     for lot in self.operation_id.pack_lot_ids]) >
-                    self.operation_id.product_qty):
-                raise UserError(_(
-                    'This lot is not in the list of expected lots'))
+            if (
+                sum(
+                    [
+                        max(lot.qty_todo, lot.qty)
+                        for lot in self.operation_id.pack_lot_ids
+                    ]
+                )
+                > self.operation_id.product_qty
+            ):
+                raise UserError(
+                    _('This lot is not in the list of expected lots')
+                )
             pack.save()
         else:
             pack.write({'qty_done': self.qty})

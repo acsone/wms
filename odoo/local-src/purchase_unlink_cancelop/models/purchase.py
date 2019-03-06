@@ -16,7 +16,7 @@ class PurchaseOrderLine(models.Model):
         procurement in exception is taken into account in the need computation
         """
         for line in self:
-            line.procurement_ids\
-                .filtered(lambda r: r.orderpoint_id and r.state != 'cancel')\
-                .write({'state': 'cancel'})
+            line.procurement_ids.filtered(
+                lambda r: r.orderpoint_id and r.state != 'cancel'
+            ).write({'state': 'cancel'})
         return super(PurchaseOrderLine, self).unlink()

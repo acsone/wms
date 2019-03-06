@@ -4,9 +4,8 @@
 
 import re
 
-from odoo import models, _
+from odoo import _, models
 from odoo.exceptions import UserError
-
 
 lot_barcode = re.compile(r'#(\w+)#(\w+)#?')
 
@@ -26,33 +25,45 @@ class StockPicking(models.Model):
             op.qty_done = op.product_qty
 
     def _barcode_process_lot(self, m):
-        lot = self.env['stock.production.lot'].search([
-            ('product_id.default_code', '=', m.group(1)),
-            ('name', '=', m.group(2)),
-            ], limit=1)
+        lot = self.env['stock.production.lot'].search(
+            [
+                ('product_id.default_code', '=', m.group(1)),
+                ('name', '=', m.group(2)),
+            ],
+            limit=1,
+        )
         if not lot:
-            return {'warning': {
-                'title': _('Wrong lot'),
-                'message': _('No match for lot %s product %s') % m.groups()
-            }}
+            return {
+                'warning': {
+                    'title': _('Wrong lot'),
+                    'message': _('No match for lot %s product %s')
+                    % m.groups(),
+                }
+            }
         op = self.pack_operation_product_ids.filtered(
             lambda r: r.product_id == lot.product_id
             and not r.result_package_id
-            and not r.location_processed)
+            and not r.location_processed
+        )
         if not op:
-            return {'warning': {
-                'title': _('Wrong lot'),
-                'message': _(
-                    'No operation matched for product %s') % m.group(1)
-            }}
+            return {
+                'warning': {
+                    'title': _('Wrong lot'),
+                    'message': _('No operation matched for product %s')
+                    % m.group(1),
+                }
+            }
         oplot = op.pack_lot_ids.filtered(lambda r: r.lot_id == lot)
         if not oplot:
-            return {'warning': {
-                'title': _('Wrong lot'),
-                'message':
-                _('Operation with product %s does not accept lot %s') %
-                m.groups()
-            }}
+            return {
+                'warning': {
+                    'title': _('Wrong lot'),
+                    'message': _(
+                        'Operation with product %s does not accept lot %s'
+                    )
+                    % m.groups(),
+                }
+            }
         qty_done = op.qty_done
         # Force writing in DB
         op.write({'qty_done': qty_done + 1})
@@ -64,21 +75,24 @@ class StockPicking(models.Model):
         op = self.pack_operation_product_ids.filtered(
             lambda r: r.product_id.id == product.id
             and not r.result_package_id
-            and not r.location_processed)
+            and not r.location_processed
+        )
         if not op:
-            return {'warning': {
-                'title': _('Wrong product'),
-                'message':
-                    _('No operation matched for product %s') %
-                    product.default_code
-            }}
+            return {
+                'warning': {
+                    'title': _('Wrong product'),
+                    'message': _('No operation matched for product %s')
+                    % product.default_code,
+                }
+            }
         if op.pack_lot_ids:
-            return {'warning': {
-                'title': _('Lot required'),
-                'message':
-                    _('Operation with product %s need a lot') %
-                    product.default_code
-            }}
+            return {
+                'warning': {
+                    'title': _('Lot required'),
+                    'message': _('Operation with product %s need a lot')
+                    % product.default_code,
+                }
+            }
         qty_done = op.qty_done
         # Force writing in DB
         op.write({'qty_done': qty_done + 1})
@@ -108,11 +122,14 @@ class StockPicking(models.Model):
             return self._barcode_process_lot(m)
         # Check product
         product = self.env['product.product'].search(
-            [('default_code', '=', barcode)], limit=1)
+            [('default_code', '=', barcode)], limit=1
+        )
         if product:
             return self._barcode_process_product(product)
         # Raise error
-        return {'warning': {
-            'title': _('Unsupported code'),
-            'message': _('%s') % barcode,
-        }}
+        return {
+            'warning': {
+                'title': _('Unsupported code'),
+                'message': _('%s') % barcode,
+            }
+        }

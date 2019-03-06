@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import datetime, date
+from datetime import date, datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -12,19 +13,17 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     advised_qty = fields.Integer(
-        'Advised quantity',
-        readonly=True,
-        compute='_compute_advised_qty'
+        'Advised quantity', readonly=True, compute='_compute_advised_qty'
     )
     average_annual_consumption = fields.Float(
         'Average annual consumption',
         readonly=True,
-        compute='_compute_average_consumption'
+        compute='_compute_average_consumption',
     )
     average_three_months_consumption = fields.Float(
         'Average three months consumption',
         readonly=True,
-        compute='_compute_average_consumption'
+        compute='_compute_average_consumption',
     )
 
     @api.multi
@@ -38,8 +37,9 @@ class ProductProduct(models.Model):
 
         # Compute quantities to subtract
         if orderpoints:
-            subtract_quantity = \
+            subtract_quantity = (
                 orderpoints.subtract_procurements_from_orderpoints()
+            )
         else:
             subtract_quantity = {}
 
@@ -54,30 +54,34 @@ class ProductProduct(models.Model):
             diff_qty = float_compare(
                 virtual_available,
                 orderpoint.product_min_qty,
-                precision_rounding=orderpoint.product_uom.rounding
+                precision_rounding=orderpoint.product_uom.rounding,
             )
             if diff_qty > 0:
                 continue
 
             # Compute the qty to order
             # E.G: Stock = -4; min = 4; max = 10 => 10 - (-4) = 14
-            qty = max(orderpoint.product_min_qty,
-                      orderpoint.product_max_qty) - virtual_available
+            qty = (
+                max(orderpoint.product_min_qty, orderpoint.product_max_qty)
+                - virtual_available
+            )
 
             # Check if we need to order this product by multiple
             # E.G: Qty to order: 14; multiple 5 => remainder = 4
-            remainder = \
-                orderpoint.qty_multiple > 0 \
-                and qty % orderpoint.qty_multiple \
+            remainder = (
+                orderpoint.qty_multiple > 0
+                and qty % orderpoint.qty_multiple
                 or 0.0
+            )
 
             # Check if the difference between the remainder qty is greater
             # or less than 50% of the multiple qty
             # E.G: Remainder = 4; Multiple = 5 => Diff = 4 - (5 / 2) = 1,5
             remainder_diff = float_compare(
-                    remainder,
-                    orderpoint.qty_multiple / 2.0,
-                    precision_rounding=orderpoint.product_uom.rounding)
+                remainder,
+                orderpoint.qty_multiple / 2.0,
+                precision_rounding=orderpoint.product_uom.rounding,
+            )
 
             # If the remainder is greater or equal than 50% of the qty multiple
             # => We complete the quantity with the qty multiple
@@ -92,16 +96,21 @@ class ProductProduct(models.Model):
             elif remainder:
                 qty -= remainder
 
-            if float_compare(
-                    qty, 0.0,
-                    precision_rounding=orderpoint.product_uom.rounding) < 0:
+            if (
+                float_compare(
+                    qty,
+                    0.0,
+                    precision_rounding=orderpoint.product_uom.rounding,
+                )
+                < 0
+            ):
                 continue
 
             if orderpoint and orderpoint.id in subtract_quantity:
                 qty -= subtract_quantity[orderpoint.id]
             qty_rounded = float_round(
-                qty,
-                precision_rounding=orderpoint.product_uom.rounding)
+                qty, precision_rounding=orderpoint.product_uom.rounding
+            )
             if qty_rounded > 0:
                 product.advised_qty = qty_rounded
 
@@ -126,12 +135,13 @@ class ProductProduct(models.Model):
           AND so.state <> 'cancel'
         GROUP BY sol.product_id
         """
-        self.env.cr.execute(query_annual, (tuple(self.ids), ))
+        self.env.cr.execute(query_annual, (tuple(self.ids),))
         annual_consumption_per_products = dict(self.env.cr.fetchall())
 
         # Compute three months consumption
-        last_year_start = \
-            (date.today() - relativedelta(years=1)).replace(day=1)
+        last_year_start = (date.today() - relativedelta(years=1)).replace(
+            day=1
+        )
         last_year_start_str = fields.Datetime.to_string(last_year_start)
         last_year_end = last_year_start + relativedelta(months=3)
         last_year_end_str = fields.Datetime.to_string(last_year_end)
@@ -148,39 +158,44 @@ class ProductProduct(models.Model):
           AND so.state <> 'cancel'
         GROUP BY sol.product_id
         """
-        self.env.cr.execute(query_period, (tuple(self.ids),
-                                           last_year_start_str,
-                                           last_year_end_str))
+        self.env.cr.execute(
+            query_period,
+            (tuple(self.ids), last_year_start_str, last_year_end_str),
+        )
         three_months_consumption_per_products = dict(self.env.cr.fetchall())
 
         for product in self:
-            annual_consumption = \
-                annual_consumption_per_products.get(product.id, 0)
+            annual_consumption = annual_consumption_per_products.get(
+                product.id, 0
+            )
             if annual_consumption:
-                av_annual_consumption = \
-                    round(float(annual_consumption) / 12, 2)
+                av_annual_consumption = round(
+                    float(annual_consumption) / 12, 2
+                )
             else:
                 av_annual_consumption = 0
             product.average_annual_consumption = av_annual_consumption
 
-            three_months_consumption = \
-                three_months_consumption_per_products.get(product.id, 0)
+            three_months_consumption = three_months_consumption_per_products.get(
+                product.id, 0
+            )
             if three_months_consumption:
-                av_three_months_consumption = \
-                    round(float(three_months_consumption) / 3, 2)
+                av_three_months_consumption = round(
+                    float(three_months_consumption) / 3, 2
+                )
             else:
                 av_three_months_consumption = 0
-            product.average_three_months_consumption = \
+            product.average_three_months_consumption = (
                 av_three_months_consumption
+            )
 
     @api.multi
     def get_lots(self):
         self.ensure_one()
 
         lots = self.env['stock.production.lot'].search(
-            [('product_id', '=', self.id),
-             ('is_archived', '=', False)],
-            order='life_date'
+            [('product_id', '=', self.id), ('is_archived', '=', False)],
+            order='life_date',
         )
 
         return lots
@@ -191,10 +206,9 @@ class ProductProduct(models.Model):
 
         sellers = self.seller_ids
         sellers_with_discount = sellers.filtered(
-            lambda s: s.discount_purchase or s.ratio_promotional_product)
-        sellers_with_discount.sorted(
-            lambda seller: seller.date_start
+            lambda s: s.discount_purchase or s.ratio_promotional_product
         )
+        sellers_with_discount.sorted(lambda seller: seller.date_start)
 
         return list(sellers_with_discount)
 
@@ -239,7 +253,7 @@ class ProductProduct(models.Model):
         """
 
         # Store values
-        self.env.cr.execute(query, (self.id, ))
+        self.env.cr.execute(query, (self.id,))
         values = dict(self.env.cr.fetchall())
 
         # Loop on 12 months
@@ -251,10 +265,7 @@ class ProductProduct(models.Model):
             if month < today.month:
                 label = '%02d/%s' % (month, str(today.year)[2:])
                 value = values.get('%s-%02d' % (today.year, month), 0)
-                month_values = [{
-                    'label': label,
-                    'value': value
-                }]
+                month_values = [{'label': label, 'value': value}]
             # If the current month is the same than today
             # (take data in the current year AND in the last year)
             elif month == today.month:
@@ -263,48 +274,43 @@ class ProductProduct(models.Model):
                 if today.day == 1:
                     label = '%02d/%s' % (month, str(today.year - 1)[2:])
                     value = values.get('%s-%02d' % (today.year - 1, month), 0)
-                    month_values = [{
-                        'label': label,
-                        'value': value
-                    }]
+                    month_values = [{'label': label, 'value': value}]
                 # Otherwise we take values in the current year and in the last
                 # year
                 else:
-                    label_current_year = \
-                        '%02d/%02d/%s' % \
-                        (today.day - 1, month, str(today.year)[2:])
+                    label_current_year = '%02d/%02d/%s' % (
+                        today.day - 1,
+                        month,
+                        str(today.year)[2:],
+                    )
                     value_current_year = values.get(
-                        '%s-%02d' % (today.year, month), 0)
+                        '%s-%02d' % (today.year, month), 0
+                    )
 
-                    label_last_year = \
-                        '%02d/%02d/%s' % \
-                        (today.day, month, str(today.year - 1)[2:])
+                    label_last_year = '%02d/%02d/%s' % (
+                        today.day,
+                        month,
+                        str(today.year - 1)[2:],
+                    )
                     value_last_year = values.get(
-                        '%s-%02d' % (today.year - 1, month), 0)
+                        '%s-%02d' % (today.year - 1, month), 0
+                    )
 
-                    month_values = [{
-                        'label': label_current_year,
-                        'value': value_current_year
-                    }, {
-                        'label': label_last_year,
-                        'value': value_last_year
-                    }]
+                    month_values = [
+                        {
+                            'label': label_current_year,
+                            'value': value_current_year,
+                        },
+                        {'label': label_last_year, 'value': value_last_year},
+                    ]
             # Otherwise we take values in the last year
             else:
                 label = '%02d/%s' % (month, str(today.year - 1)[2:])
                 value = values.get('%s-%02d' % (today.year - 1, month), 0)
-                month_values = [{
-                    'label': label,
-                    'value': value
-                }]
+                month_values = [{'label': label, 'value': value}]
 
             graph_values += month_values
 
-        result = [
-            {
-                'key': "Sale order",
-                'values': graph_values
-            }
-        ]
+        result = [{'key': "Sale order", 'values': graph_values}]
 
         return result

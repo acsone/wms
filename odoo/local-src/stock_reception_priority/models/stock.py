@@ -2,9 +2,10 @@
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api
-
 import logging
+
+from odoo import api, fields, models
+
 _logger = logging.getLogger(__name__)
 
 
@@ -14,8 +15,9 @@ class StockPackOperation(models.Model):
     qty_backorder = fields.Integer(
         'Nbr Backorder',
         help="Quantity of customers having a picking waiting for the "
-             "availability of product",
-        readonly=True)
+        "availability of product",
+        readonly=True,
+    )
 
 
 class StockPicking(models.Model):
@@ -23,14 +25,16 @@ class StockPicking(models.Model):
 
     qty_outofstock = fields.Integer(
         'Nbr Out of Stock',
-        help="Quantity of products where the available stock is < 0")
+        help="Quantity of products where the available stock is < 0",
+    )
 
     qty_backorder = fields.Integer(
         'Nbr Backorder',
         help="Quantity of deliveries part of a delivery round waiting for "
-             "availability. For each product of the reception order, we "
-             "count the customers (delivery address) waiting for the goods "
-             "and we sum those quantities")
+        "availability. For each product of the reception order, we "
+        "count the customers (delivery address) waiting for the goods "
+        "and we sum those quantities",
+    )
 
     @api.multi
     def _compute_qty_backorder(self):
@@ -59,7 +63,8 @@ class StockPicking(models.Model):
             if not all_products:
                 continue
 
-            self._cr.execute("""
+            self._cr.execute(
+                """
                 WITH moves AS (
                     SELECT distinct move.partner_id, move.product_id
                     FROM stock_move AS move
@@ -84,7 +89,9 @@ class StockPicking(models.Model):
                     WHERE stock_pack_operation.product_id=quantity.product_id
                     )
                 WHERE id in %s
-                """, (tuple(all_products.ids), stock_id, tuple(packs.ids)))
+                """,
+                (tuple(all_products.ids), stock_id, tuple(packs.ids)),
+            )
 
             # self._cr.execute("""
             #     UPDATE stock_picking SET qty_backorder = (
@@ -97,20 +104,26 @@ class StockPicking(models.Model):
 
             for record in pickings:
                 record.qty_backorder = sum(
-                    record.mapped('pack_operation_product_ids.qty_backorder'))
+                    record.mapped('pack_operation_product_ids.qty_backorder')
+                )
             _logger.debug('Computing qty_backorder - done')
 
     @api.multi
     def _compute_qty_outofstock(self):
         _logger.debug('Computing qty_outofstock')
         all_products = self.mapped('pack_operation_product_ids.product_id')
-        products_unavailable_ids = set(all_products.filtered(
-            lambda r: r.immediately_usable_qty < 0).ids)
+        products_unavailable_ids = set(
+            all_products.filtered(lambda r: r.immediately_usable_qty < 0).ids
+        )
         for record in self:
-            product_ids = set(record.mapped('pack_operation_product_ids')
-                              .mapped('product_id').ids)
+            product_ids = set(
+                record.mapped('pack_operation_product_ids')
+                .mapped('product_id')
+                .ids
+            )
             record.qty_outofstock = len(
-                product_ids.intersection(products_unavailable_ids))
+                product_ids.intersection(products_unavailable_ids)
+            )
         _logger.debug('Computing qty_outofstock - done')
 
     def _calc_priority(self):
@@ -124,8 +137,7 @@ class StockPicking(models.Model):
     @api.multi
     def button_priority_recompute(self):
         super(StockPicking, self).button_priority_recompute()
-        receptions = self.filtered(
-            lambda r: r.location_id.usage == 'supplier')
+        receptions = self.filtered(lambda r: r.location_id.usage == 'supplier')
         receptions._compute_qty_backorder()
         receptions._compute_qty_outofstock()
         for record in receptions:
@@ -135,7 +147,8 @@ class StockPicking(models.Model):
     def _cron_priority_recompute(self):
         domain = [
             ('grn_id', '!=', False),
-            ('state', 'in', ('assigned', 'partially_available'))]
+            ('state', 'in', ('assigned', 'partially_available')),
+        ]
         receptions = self.search(domain)
         receptions._compute_qty_backorder()
         receptions._compute_qty_outofstock()

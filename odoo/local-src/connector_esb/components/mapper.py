@@ -15,8 +15,10 @@ def bool2int(field):
     :param field: name of the source field in the record
     :param binding: True if the relation is a binding record
     """
+
     def modifier(self, record, to_attr):
         return int(record[field])
+
     return modifier
 
 
@@ -35,11 +37,13 @@ def dt2esbdate(field):
     :param field: name of the source field in the record
     :param binding: True if the relation is a binding record
     """
+
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
             return ''
         return value[:10].replace('-', '/')
+
     return modifier
 
 
@@ -58,11 +62,13 @@ def dt2nakeddate(field):
     :param field: name of the source field in the record
     :param binding: True if the relation is a binding record
     """
+
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
             return ''
         return value[:10].replace('-', '')
+
     return modifier
 
 
@@ -76,11 +82,13 @@ def falsy2emptystring(field):
         direct = [(falsy2emptystring('source'), 'target')]
 
     """
+
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
             return ''
         return value
+
     return modifier
 
 
@@ -90,8 +98,10 @@ def two_digits_fractional(field):
         Convert a number so it always has 2 digits on the fractional part
 
     """
+
     def modifier(self, record, to_attr):
-        return '{0:.2f}'.format(record[field] or 0)
+        return '{:.2f}'.format(record[field] or 0)
+
     return modifier
 
 
@@ -101,8 +111,10 @@ def three_digits_fractional(field):
         Convert a number so it always has 3 digits on the fractional part
 
     """
+
     def modifier(self, record, to_attr):
-        return '{0:.3f}'.format(record[field] or 0)
+        return '{:.3f}'.format(record[field] or 0)
+
     return modifier
 
 
@@ -116,9 +128,11 @@ def falsy2zero(field):
         direct = [(falsy2zero('source'), 'target')]
 
     """
+
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
             return 0
         return value
+
     return modifier

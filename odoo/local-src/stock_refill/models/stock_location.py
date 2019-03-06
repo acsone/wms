@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import fields, models, _
+from odoo import _, fields, models
 from odoo.exceptions import Warning
 
 
@@ -27,35 +27,43 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
     kind = fields.Selection(
-        [('reserve', 'Reserve'),
-         ('parking', 'Parking'),
-         ('bin', 'Bin'),
-         ],
-        string='Kind')
+        [('reserve', 'Reserve'), ('parking', 'Parking'), ('bin', 'Bin')],
+        string='Kind',
+    )
 
     reserve_location_id = fields.Many2one(
-        'stock.location', 'Reserve',
+        'stock.location',
+        'Reserve',
         domain=[('kind', '=', 'reserve')],
         help="Destination for putaway strategy when the poduct must be stored "
-             "in reserve")
+        "in reserve",
+    )
 
     def _get_ancestors(self):
         """ This method return the list of all parent locations excluding self
         """
-        self._cr.execute("""
+        self._cr.execute(
+            """
             SELECT distinct c.id
-            FROM """ + self._table + ' p, ' + self._table + """ c
+            FROM """
+            + self._table
+            + ' p, '
+            + self._table
+            + """ c
             WHERE c.parent_left < p.parent_left
               AND c.parent_right > p.parent_right
-              AND p.id in %s""", (tuple(self.ids),))
+              AND p.id in %s""",
+            (tuple(self.ids),),
+        )
         res = self._cr.fetchall()
         return self.browse(map(lambda x: x[0], res))
 
     def get_putaway_strategy(self, product):
         location = self
         location_dest = self.browse(
-            super(StockLocation, self).get_putaway_strategy(
-                product) or location.id)
+            super(StockLocation, self).get_putaway_strategy(product)
+            or location.id
+        )
 
         # check if bin location
         if location_dest.kind != 'bin':
@@ -67,11 +75,18 @@ class StockLocation(models.Model):
             reserve = location_dest.reserve_location_id
             if not reserve:
                 reserve = location_dest._get_ancestors().mapped(
-                    'reserve_location_id')[:1]
+                    'reserve_location_id'
+                )[:1]
             if not reserve:
-                raise Warning(_(
-                    'Product %s must be put in reserve but cannot '
-                    'find a suitable location') % product.display_name)
+                raise Warning(
+                    _(
+                        'Product %s must be put in reserve but cannot '
+                        'find a suitable location'
+                    )
+                    % product.display_name
+                )
             return reserve.id
-        return super(StockLocation, self).get_putaway_strategy(
-            product) or location.id
+        return (
+            super(StockLocation, self).get_putaway_strategy(product)
+            or location.id
+        )

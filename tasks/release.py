@@ -47,7 +47,6 @@ except ImportError:
     print('Please run `pip install -r tasks/requirements.txt`')
 
 
-
 @task(name='push-branches')
 def push_branches(ctx, force=False):
     """ Push the local branches to the camptocamp remote

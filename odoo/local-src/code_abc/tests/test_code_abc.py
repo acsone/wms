@@ -5,23 +5,19 @@ from odoo.tests import common
 
 
 class TestCodeABC(common.TransactionCase):
-
     def test_business_unit_id(self):
         product_category = self.env['product.category']
-        business_unit = product_category.create({
-            'name': 'Business Unit',
-            'is_business_unit': True
-        })
+        business_unit = product_category.create(
+            {'name': 'Business Unit', 'is_business_unit': True}
+        )
 
-        sub_category = product_category.create({
-            'name': 'Test',
-            'parent_id': business_unit.id,
-        })
+        sub_category = product_category.create(
+            {'name': 'Test', 'parent_id': business_unit.id}
+        )
 
-        product = self.env['product.product'].create({
-            'name': 'Product',
-            'categ_id': sub_category.id,
-        })
+        product = self.env['product.product'].create(
+            {'name': 'Product', 'categ_id': sub_category.id}
+        )
         self.assertEquals(product.business_unit_id, business_unit)
 
     def test_compute_turnover_by_product(self):
@@ -37,34 +33,35 @@ class TestCodeABC(common.TransactionCase):
         invoice_obj = self.env['account.invoice']
 
         journal = invoice_obj._default_journal()
-        account_type_rec = \
-            self.env.ref('account.data_account_type_receivable')
-        account = self.env['account.account'].create({
-            'code': '400001',
-            'name': 'Clients (test)',
-            'user_type_id': account_type_rec.id,
-            'reconcile': True,
-        })
+        account_type_rec = self.env.ref('account.data_account_type_receivable')
+        account = self.env['account.account'].create(
+            {
+                'code': '400001',
+                'name': 'Clients (test)',
+                'user_type_id': account_type_rec.id,
+                'reconcile': True,
+            }
+        )
 
         tag_operation = self.env.ref('account.account_tag_operating')
         account_type_inc = self.env.ref('account.data_account_type_revenue')
-        account_line = self.env['account.account'].create({
-            'code': '701001',
-            'name': 'Ventes en Belgique (test)',
-            'user_type_id': account_type_inc.id,
-            'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
-        })
+        account_line = self.env['account.account'].create(
+            {
+                'code': '701001',
+                'name': 'Ventes en Belgique (test)',
+                'user_type_id': account_type_inc.id,
+                'reconcile': True,
+                'tag_ids': [(6, 0, [tag_operation.id])],
+            }
+        )
 
-        partner = self.env['res.partner'].create({
-            'name': 'Partner',
-            'ref': '12312394',
-        })
+        partner = self.env['res.partner'].create(
+            {'name': 'Partner', 'ref': '12312394'}
+        )
 
-        business_unit = self.env['product.category'].create({
-            'name': 'Business Unit',
-            'is_business_unit': True,
-        })
+        business_unit = self.env['product.category'].create(
+            {'name': 'Business Unit', 'is_business_unit': True}
+        )
 
         ir_config = self.env['ir.config_parameter']
         ir_config.set_param('abc.turnover_delay', 12)
@@ -86,27 +83,35 @@ class TestCodeABC(common.TransactionCase):
 
         # Create all products (see invoices_by_product)
         for product_num in range(1, len(invoices_by_product) + 1):
-            product = product_obj.create({
-                'name': 'Product %s' % product_num,
-                'categ_id': business_unit.id,
-            })
+            product = product_obj.create(
+                {
+                    'name': 'Product %s' % product_num,
+                    'categ_id': business_unit.id,
+                }
+            )
             setattr(self, 'product_%s' % product_num, product)
 
             quantity, price_unit = invoices_by_product[product_num]
-            invoice_obj.create({
-                'partner_id': partner.id,
-                'journal_id': journal.id,
-                'account_id': account.id,
-                'invoice_line_ids': [
-                    (0, 0, {
-                        'product_id': product.id,
-                        'name': 'Invoice Line %s' % product_num,
-                        'account_id': account_line.id,
-                        'quantity': quantity,
-                        'price_unit': price_unit
-                    })
-                ]
-            })
+            invoice_obj.create(
+                {
+                    'partner_id': partner.id,
+                    'journal_id': journal.id,
+                    'account_id': account.id,
+                    'invoice_line_ids': [
+                        (
+                            0,
+                            0,
+                            {
+                                'product_id': product.id,
+                                'name': 'Invoice Line %s' % product_num,
+                                'account_id': account_line.id,
+                                'quantity': quantity,
+                                'price_unit': price_unit,
+                            },
+                        )
+                    ],
+                }
+            )
 
         product_obj.compute_turnover_by_product()
 
@@ -122,18 +127,9 @@ class TestCodeABC(common.TransactionCase):
         # Create ABC rate
         abc_obj = self.env['code.abc']
         abc_obj.search([]).unlink()
-        rate_a = abc_obj.create({
-            'code': 'A',
-            'rate': 60
-        })
-        rate_b = abc_obj.create({
-            'code': 'B',
-            'rate': 75
-        })
-        rate_c = abc_obj.create({
-            'code': 'C',
-            'rate': 100
-        })
+        rate_a = abc_obj.create({'code': 'A', 'rate': 60})
+        rate_b = abc_obj.create({'code': 'B', 'rate': 75})
+        rate_c = abc_obj.create({'code': 'C', 'rate': 100})
 
         product_obj.compute_abc_rate()
 
@@ -163,39 +159,39 @@ class TestCodeABC(common.TransactionCase):
         invoice_obj = self.env['account.invoice']
 
         journal = invoice_obj._default_journal()
-        account_type_rec = \
-            self.env.ref('account.data_account_type_receivable')
-        account = self.env['account.account'].create({
-            'code': '400001',
-            'name': 'Clients (test)',
-            'user_type_id': account_type_rec.id,
-            'reconcile': True,
-        })
+        account_type_rec = self.env.ref('account.data_account_type_receivable')
+        account = self.env['account.account'].create(
+            {
+                'code': '400001',
+                'name': 'Clients (test)',
+                'user_type_id': account_type_rec.id,
+                'reconcile': True,
+            }
+        )
 
         tag_operation = self.env.ref('account.account_tag_operating')
         account_type_inc = self.env.ref('account.data_account_type_revenue')
-        account_line = self.env['account.account'].create({
-            'code': '701001',
-            'name': 'Ventes en Belgique (test)',
-            'user_type_id': account_type_inc.id,
-            'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
-        })
+        account_line = self.env['account.account'].create(
+            {
+                'code': '701001',
+                'name': 'Ventes en Belgique (test)',
+                'user_type_id': account_type_inc.id,
+                'reconcile': True,
+                'tag_ids': [(6, 0, [tag_operation.id])],
+            }
+        )
 
-        partner = self.env['res.partner'].create({
-            'name': 'Partner',
-            'ref': '87564334',
-        })
+        partner = self.env['res.partner'].create(
+            {'name': 'Partner', 'ref': '87564334'}
+        )
 
-        business_unit_1 = self.env['product.category'].create({
-            'name': 'Business Unit 1',
-            'is_business_unit': True,
-        })
+        business_unit_1 = self.env['product.category'].create(
+            {'name': 'Business Unit 1', 'is_business_unit': True}
+        )
 
-        business_unit_2 = self.env['product.category'].create({
-            'name': 'Business Unit 2',
-            'is_business_unit': True,
-        })
+        business_unit_2 = self.env['product.category'].create(
+            {'name': 'Business Unit 2', 'is_business_unit': True}
+        )
 
         ir_config = self.env['ir.config_parameter']
         ir_config.set_param('abc.turnover_delay', 12)
@@ -213,26 +209,31 @@ class TestCodeABC(common.TransactionCase):
         # Create all products (see invoices_by_product)
         for product_num in range(1, len(invoices_by_product) + 1):
             categ_id, quantity, price_unit = invoices_by_product[product_num]
-            product = product_obj.create({
-                'name': 'Product %s' % product_num,
-                'categ_id': categ_id,
-            })
+            product = product_obj.create(
+                {'name': 'Product %s' % product_num, 'categ_id': categ_id}
+            )
             setattr(self, 'product_%s' % product_num, product)
 
-            invoice_obj.create({
-                'partner_id': partner.id,
-                'journal_id': journal.id,
-                'account_id': account.id,
-                'invoice_line_ids': [
-                    (0, 0, {
-                        'product_id': product.id,
-                        'name': 'Invoice Line %s' % product_num,
-                        'account_id': account_line.id,
-                        'quantity': quantity,
-                        'price_unit': price_unit
-                    })
-                ]
-            })
+            invoice_obj.create(
+                {
+                    'partner_id': partner.id,
+                    'journal_id': journal.id,
+                    'account_id': account.id,
+                    'invoice_line_ids': [
+                        (
+                            0,
+                            0,
+                            {
+                                'product_id': product.id,
+                                'name': 'Invoice Line %s' % product_num,
+                                'account_id': account_line.id,
+                                'quantity': quantity,
+                                'price_unit': price_unit,
+                            },
+                        )
+                    ],
+                }
+            )
 
         product_obj.compute_turnover_by_product()
 
@@ -242,18 +243,9 @@ class TestCodeABC(common.TransactionCase):
         # Create ABC rate
         abc_obj = self.env['code.abc']
         abc_obj.search([]).unlink()
-        rate_a = abc_obj.create({
-            'code': 'A',
-            'rate': 60
-        })
-        rate_b = abc_obj.create({
-            'code': 'B',
-            'rate': 75
-        })
-        rate_c = abc_obj.create({
-            'code': 'C',
-            'rate': 100
-        })
+        rate_a = abc_obj.create({'code': 'A', 'rate': 60})
+        rate_b = abc_obj.create({'code': 'B', 'rate': 75})
+        rate_c = abc_obj.create({'code': 'C', 'rate': 100})
 
         product_obj.compute_abc_rate()
 

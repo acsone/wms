@@ -3,7 +3,7 @@
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
@@ -13,12 +13,9 @@ class StockPicking(models.Model):
     printed = fields.Boolean(copy=False, track_visibility='onchange')
 
     operator_id = fields.Many2one(
-        'res.users', string='Operator', copy=False,
-        track_visibility='onchange')
+        'res.users', string='Operator', copy=False, track_visibility='onchange'
+    )
 
     @api.multi
     def assign_operator(self):
-        self.write({
-            'operator_id': self.env.uid,
-            'printed': True,
-        })
+        self.write({'operator_id': self.env.uid, 'printed': True})

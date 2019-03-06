@@ -2,7 +2,7 @@
 # Copyright 2018 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -26,10 +26,10 @@ class StockInventory(models.Model):
             vals = {'state': 'confirm', 'date': fields.Datetime.now()}
 
             inventory_lines = inventory._get_inventory_lines_with_lots_values()
-            lines_values = \
-                [(0, 0, line_values) for line_values in inventory_lines]
-            vals.update(
-                {'line_ids': lines_values})
+            lines_values = [
+                (0, 0, line_values) for line_values in inventory_lines
+            ]
+            vals.update({'line_ids': lines_values})
             inventory.write(vals)
         return super(StockInventory, self).prepare_inventory()
 
@@ -38,7 +38,8 @@ class StockInventory(models.Model):
         self.ensure_one()
 
         locations = self.env['stock.location'].search(
-            [('id', 'child_of', [self.location_id.id])])
+            [('id', 'child_of', [self.location_id.id])]
+        )
 
         vals = []
         Product = self.env['product.product']
@@ -65,26 +66,29 @@ class StockInventory(models.Model):
            package_id,
            partner_id"""
         self.env.cr.execute(
-            query,
-            (tuple(self.product_ids.ids), tuple(locations.ids)))
+            query, (tuple(self.product_ids.ids), tuple(locations.ids))
+        )
 
         for product_data in self.env.cr.dictfetchall():
             # replace the None the dictionary by False,
             # because falsy values are tested later on
-            void_fields = \
-                [item[0] for item in product_data.items() if item[1] is None]
+            void_fields = [
+                item[0] for item in product_data.items() if item[1] is None
+            ]
             for void_field in void_fields:
                 product_data[void_field] = False
             product_data['theoretical_qty'] = product_data['product_qty']
             if product_data['product_id']:
-                product_data['product_uom_id'] = \
-                    Product.browse(product_data['product_id']).uom_id.id
+                product_data['product_uom_id'] = Product.browse(
+                    product_data['product_id']
+                ).uom_id.id
                 quant_products |= Product.browse(product_data['product_id'])
             vals.append(product_data)
 
         # Add exhausted products
         exhausted_vals = self._get_empty_product_bin(
-            self.product_ids, quant_products)
+            self.product_ids, quant_products
+        )
         vals.extend(exhausted_vals)
 
         return vals

@@ -10,10 +10,16 @@ class PurchaseOrder(models.Model):
 
     prepayment = fields.Boolean(
         'Prepayment',
-        help="Check this if the invoice is received before reception of goods")
+        help="Check this if the invoice is received before reception of goods",
+    )
 
-    @api.depends('state', 'order_line.qty_invoiced', 'order_line.qty_received',
-                 'order_line.product_qty', 'prepayment')
+    @api.depends(
+        'state',
+        'order_line.qty_invoiced',
+        'order_line.qty_received',
+        'order_line.product_qty',
+        'prepayment',
+    )
     def _get_invoiced(self):
         for order in self:
             if order.prepayment:

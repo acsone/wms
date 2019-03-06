@@ -4,16 +4,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import datetime
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class StockPackOperationLot(models.Model):
     _inherit = 'stock.pack.operation.lot'
 
-    life_date = fields.Datetime(
-        string='Expiration date')
+    life_date = fields.Datetime(string='Expiration date')
     is_removal_date_expired = fields.Boolean(
-        'Removal date', compute='_get_is_removal_date_expired')
+        'Removal date', compute='_get_is_removal_date_expired'
+    )
 
     @api.depends('life_date', 'operation_id')
     @api.one
@@ -22,12 +22,15 @@ class StockPackOperationLot(models.Model):
         is_removal_date_expired = False
         if product and self.life_date:
             if product.removal_time:
-                lot = self.env['stock.production.lot'].new({
-                    'product_id': product.id,
-                    'life_date': self.life_date})
+                lot = self.env['stock.production.lot'].new(
+                    {'product_id': product.id, 'life_date': self.life_date}
+                )
                 lot.onchange_life_date()
-                if (lot.removal_date and fields.Datetime.from_string(
-                        lot.removal_date) < datetime.now()):
+                if (
+                    lot.removal_date
+                    and fields.Datetime.from_string(lot.removal_date)
+                    < datetime.now()
+                ):
                     is_removal_date_expired = True
         self.is_removal_date_expired = is_removal_date_expired
 
@@ -45,7 +48,8 @@ class StockPackOperationLot(models.Model):
     def _onchange_life_date(self):
         if self.life_date and self.operation_id:
             self.lot_name = self._calc_lotname_from_lifedate(
-                self.operation_id, self.life_date)
+                self.operation_id, self.life_date
+            )
 
     @api.multi
     def write(self, vals):

@@ -19,15 +19,15 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class RoundItineraryImport(models.TransientModel):
     _name = 'round.itinerary.import'
 
     itinerary_id = fields.Many2one(
-        'round.itinerary', 'Itinerary',
-        required=True)
+        'round.itinerary', 'Itinerary', required=True
+    )
 
     @api.one
     def confirm(self):

@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+
 from ...components.mapper import falsy2emptystring
 
 

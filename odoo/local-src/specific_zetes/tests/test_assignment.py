@@ -1,33 +1,37 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, ROUND_CODE
-from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
+from ..tools.domain_interface import Parameters
+from .zetes_test_classes import DEFAULT_HEADER, ROUND_CODE, ZetesTest
 
 
 class TestAssignemnt(ZetesTest):
-
     def test_requ_assignment(self):
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER,
-                            mock.MagicMock(name='Savepoint()'),
-                            request_overwrite=self)
+        domain = Assignment(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'Cri01': None,
-            'Cri02': None,
-            'assignmentType': constants.PICKING_ASSIGNMENT,
-            'requestType': '1',
-        })
+        request_params.update(
+            {
+                'Cri01': None,
+                'Cri02': None,
+                'assignmentType': constants.PICKING_ASSIGNMENT,
+                'requestType': '1',
+            }
+        )
 
-        self.partner.write({
-            'is_passport_required': True,
-        })
+        self.partner.write({'is_passport_required': True})
         self.picking.picking_type_id.passport = True
 
-        self.assertEqual(self.picking.picking_type_id.zetes_picking_type,
-                         constants.PICKING_ASSIGNMENT)
+        self.assertEqual(
+            self.picking.picking_type_id.zetes_picking_type,
+            constants.PICKING_ASSIGNMENT,
+        )
 
         # Search for a picking
         result_str = domain.requ(request_params)
@@ -56,9 +60,7 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.groupNum, str(self.picking.id))
 
         # Change the state of the round to pending
-        self.round.write({
-            'state': 'pending'
-        })
+        self.round.write({'state': 'pending'})
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))
@@ -92,31 +94,30 @@ class TestAssignemnt(ZetesTest):
     def test_resu_assignement(self):
         self.assertFalse(self.picking.operator_id)
 
-        domain = Assignment(DEFAULT_HEADER,
-                            mock.MagicMock(name='Savepoint()'),
-                            request_overwrite=self)
+        domain = Assignment(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='resu')
         # Assign and start the picking
-        request_params.update({
-            'groupNum': self.picking.id,
-            'assignmentStatus': constants.AS_START,
-        })
+        request_params.update(
+            {
+                'groupNum': self.picking.id,
+                'assignmentStatus': constants.AS_START,
+            }
+        )
 
         domain.resu(request_params)
 
         # Do the picking and set the state to done
-        request_params.update({
-            'assignmentStatus': constants.AS_DONE,
-            'Usf01': '1',
-        })
+        request_params.update(
+            {'assignmentStatus': constants.AS_DONE, 'Usf01': '1'}
+        )
 
         pack_op = self.picking.pack_operation_product_ids[0]
-        pack_op.pack_lot_ids.write({
-            'qty': 10,
-        })
-        pack_op.write({
-            'qty_done': 10,
-        })
+        pack_op.pack_lot_ids.write({'qty': 10})
+        pack_op.write({'qty_done': 10})
         domain.resu(request_params)
         self.assertEqual(self.picking.state, 'done')
 

@@ -2,17 +2,17 @@
 
 import psycopg2
 
-from odoo.tools import mute_logger
-from odoo.tests.common import SavepointCase
-
 from odoo.addons.specific_zetes.tools.domain_interface import Savepoint
+from odoo.tests.common import SavepointCase
+from odoo.tools import mute_logger
 
 
 class TestSavepoint(SavepointCase):
-
     def _table_exists(self, name):
-        query = ("SELECT relname FROM pg_class WHERE"
-                 " relkind IN ('r','v','m') AND relname=%s")
+        query = (
+            "SELECT relname FROM pg_class WHERE"
+            " relkind IN ('r','v','m') AND relname=%s"
+        )
         self.env.cr.execute(query, (name,))
         return self.env.cr.rowcount
 
@@ -23,10 +23,10 @@ class TestSavepoint(SavepointCase):
         self.assertFalse(self._table_exists(name))
 
     def create_table(self, name):
-        self.env.cr.execute("CREATE TABLE %s ()" % (name,))
+        self.env.cr.execute("CREATE TABLE {} ()".format(name))
 
     def drop_table(self, name):
-        self.env.cr.execute("DROP TABLE IF EXISTS %s" % (name,))
+        self.env.cr.execute("DROP TABLE IF EXISTS {}".format(name))
 
     def table_name(self, savepoint):
         return "test_savepoint_%s" % (savepoint._name)
@@ -46,8 +46,9 @@ class TestSavepoint(SavepointCase):
         self.create_table(name)
         savepoint.release()
         self.assert_table_exists(name)
-        with self.assertRaisesRegexp(psycopg2.InternalError,
-                                     "no such savepoint"):
+        with self.assertRaisesRegexp(
+            psycopg2.InternalError, "no such savepoint"
+        ):
             savepoint.release()
 
     @mute_logger('odoo.sql_db')
@@ -66,6 +67,7 @@ class TestSavepoint(SavepointCase):
             savepoint.release()
             self.assert_table_exists(name)
 
-        with self.assertRaisesRegexp(psycopg2.InternalError,
-                                     "no such savepoint"):
+        with self.assertRaisesRegexp(
+            psycopg2.InternalError, "no such savepoint"
+        ):
             savepoint.release()

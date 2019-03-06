@@ -3,22 +3,17 @@
 # © 2018 Yannick Vaucher (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    ref = fields.Char(
-        copy=False,
-    )
+    ref = fields.Char(copy=False)
     last_suite_name = fields.Char(
-        string='Last Suite Name',
-        compute='_compute_last_suite_name'
+        string='Last Suite Name', compute='_compute_last_suite_name'
     )
-    help_with_fee = fields.Boolean(
-        string='Helps with fees'
-    )
+    help_with_fee = fields.Boolean(string='Helps with fees')
 
     def _compute_last_suite_name(self):
         """ Compute the last suite name used for this customer.
@@ -28,10 +23,10 @@ class ResPartner(models.Model):
         """
         for record in self:
             order = self.env['sale.order'].search(
-                [('partner_id', '=', record.id),
-                 ('suite_name', '!=', False)],
+                [('partner_id', '=', record.id), ('suite_name', '!=', False)],
                 order='date_order desc, id desc',
-                limit=1)
+                limit=1,
+            )
             if order:
                 record.last_suite_name = order.suite_name
 
@@ -48,9 +43,7 @@ class ResPartner(models.Model):
                 self.env['sale.order.line'].search(domain)
             )
 
-    sale_lines_count = fields.Integer(
-        compute='_compute_sale_lines_count'
-    )
+    sale_lines_count = fields.Integer(compute='_compute_sale_lines_count')
 
     @api.multi
     def action_view_sale_lines_unavailable(self):
@@ -61,7 +54,7 @@ class ResPartner(models.Model):
         ).read()[0]
         action_data['domain'] = [
             ('state', 'in', ['sale']),
-            ('order_id.partner_id', '=', self.id)
+            ('order_id.partner_id', '=', self.id),
         ]
 
         return action_data

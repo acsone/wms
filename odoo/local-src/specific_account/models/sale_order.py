@@ -4,13 +4,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.addons.queue_job.exception import FailedJobError
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT,\
-    DEFAULT_SERVER_DATE_FORMAT
+from odoo.addons.queue_job.job import job
+from odoo.tools import (
+    DEFAULT_SERVER_DATE_FORMAT,
+    DEFAULT_SERVER_DATETIME_FORMAT,
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -20,8 +23,8 @@ class SaleOrder(models.Model):
 
     date_order_short = fields.Date(compute='_compute_date_order_short')
     is_unique_invoice = fields.Boolean(
-        'Unique invoice',
-        help='Create an unique invoice for this sale order')
+        'Unique invoice', help='Create an unique invoice for this sale order'
+    )
 
     @api.depends('date_order')
     def _compute_date_order_short(self):
@@ -57,7 +60,7 @@ class SaleOrder(models.Model):
         AND partner.invoice_grouping = 'all_at_once'
         AND partner.invoice_frequency IN %s
         """
-        self.env.cr.execute(query, (tuple(invoice_frequency), ))
+        self.env.cr.execute(query, (tuple(invoice_frequency),))
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
         for partner_id in partner_ids:
@@ -75,7 +78,7 @@ class SaleOrder(models.Model):
         AND invoice.state = 'draft'
         AND invoice.type in ('out_invoice', 'out_refund')
         """
-        self.env.cr.execute(query, (tuple(invoice_frequency), ))
+        self.env.cr.execute(query, (tuple(invoice_frequency),))
         invoice_ids = [x[0] for x in self.env.cr.fetchall()]
         invoices = self.env['account.invoice'].browse(invoice_ids)
         for invoice in invoices:
@@ -84,16 +87,19 @@ class SaleOrder(models.Model):
     @api.multi
     @job(default_channel='root.invoice_creation')
     def _job_create_draft_invoice(self):
-        self.with_context(mail_auto_subscribe_no_notify=True)\
-            .action_invoice_create(final=True)
+        self.with_context(
+            mail_auto_subscribe_no_notify=True
+        ).action_invoice_create(final=True)
 
     @api.multi
     @job(default_channel='root.invoice_creation')
     def _job_invoices_by_partners(self, partner_ids, date_invoice):
         # this job is there only for the transition, can be dropped
         # after release 10.30.15 if all jobs of this kind have been executed
-        _logger.warning('_job_invoices_by_partners is deprecated '
-                        'and replaced by _job_invoices_by_partner')
+        _logger.warning(
+            '_job_invoices_by_partners is deprecated '
+            'and replaced by _job_invoices_by_partner'
+        )
         return self._job_invoices_by_partner(partner_ids[0])
 
     @api.multi
@@ -104,18 +110,23 @@ class SaleOrder(models.Model):
             raise FailedJobError('Invalid invoice grouping')
 
         sales_to_merge = self.search(
-            [('invoice_status', '=', 'to invoice'),
+            [
+                ('invoice_status', '=', 'to invoice'),
                 ('partner_invoice_id', '=', partner.id),
-                ('is_unique_invoice', '=', False)])
+                ('is_unique_invoice', '=', False),
+            ]
+        )
         sales_to_merge = sales_to_merge.with_context(
             mail_auto_subscribe_no_notify=True
         )
         invoice_ids = sales_to_merge.action_invoice_create(final=True)
 
-        sales_to_invoice = self.search([
-            ('invoice_status', '=', 'to invoice'),
-            ('partner_invoice_id', '=', partner.id),
-            ('is_unique_invoice', '=', True)]
+        sales_to_invoice = self.search(
+            [
+                ('invoice_status', '=', 'to invoice'),
+                ('partner_invoice_id', '=', partner.id),
+                ('is_unique_invoice', '=', True),
+            ]
         )
         sales_to_invoice = sales_to_invoice.with_context(
             mail_auto_subscribe_no_notify=True

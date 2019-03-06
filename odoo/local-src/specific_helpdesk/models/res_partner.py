@@ -2,7 +2,7 @@
 # Copyright 2017 Julien Coux (Camptocamp)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -11,9 +11,7 @@ class ResPartner(models.Model):
     @api.multi
     def _compute_helpdesk_tickets_count(self):
         for partner in self:
-            domain = [
-                ('partner_id', '=', partner.id)
-            ]
+            domain = [('partner_id', '=', partner.id)]
 
             partner.helpdesk_tickets_count = len(
                 self.env['helpdesk.ticket'].search(domain)

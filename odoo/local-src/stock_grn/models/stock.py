@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
@@ -37,10 +37,10 @@ class StockPickingType(models.Model):
 
     @api.multi
     def _get_action(self, action_xmlid):
-        result = super(StockPickingType, self)._get_action(
-            action_xmlid)
+        result = super(StockPickingType, self)._get_action(action_xmlid)
         if self:
             if self.code == 'incoming':
                 result['context'] = result['context'].replace(
-                    '{', "{'search_default_grn':1,", 1)
+                    '{', "{'search_default_grn':1,", 1
+                )
         return result

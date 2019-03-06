@@ -2,49 +2,38 @@
 # Copyright 2017 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class HelpdeskTicket(models.Model):
 
     _inherit = 'helpdesk.ticket'
 
-    name = fields.Char(
-        default='/'
-    )
+    name = fields.Char(default='/')
     ticket_type_id = fields.Many2one(
         default=lambda self: self.env.ref('helpdesk.type_incident')
     )
     helpdesk_ticket_reason_id = fields.Many2one(
-        comodel_name='helpdesk.ticket.reason', string='Reason',
-        required=True,
+        comodel_name='helpdesk.ticket.reason', string='Reason', required=True
     )
     stock_picking_id = fields.Many2one(
-        comodel_name='stock.picking',
-        string='Stock picking',
+        comodel_name='stock.picking', string='Stock picking'
     )
     stock_move_id = fields.Many2one(
-        comodel_name='stock.move',
-        string='Stock move',
+        comodel_name='stock.move', string='Stock move'
     )
-    lots = fields.Many2one(
-        related='stock_move_id.quant_ids.lot_id'
-    )
+    lots = fields.Many2one(related='stock_move_id.quant_ids.lot_id')
     sale_order_id = fields.Many2one(
-        comodel_name='sale.order',
-        string='Sale order',
+        comodel_name='sale.order', string='Sale order'
     )
     purchase_order_id = fields.Many2one(
-        comodel_name='purchase.order',
-        string='Purchase order',
+        comodel_name='purchase.order', string='Purchase order'
     )
     account_invoice_id = fields.Many2one(
-        comodel_name='account.invoice',
-        string='Invoice',
+        comodel_name='account.invoice', string='Invoice'
     )
     product_id = fields.Many2one(
-        comodel_name='product.product',
-        string='Product',
+        comodel_name='product.product', string='Product'
     )
 
     # fields for email templates
@@ -59,8 +48,11 @@ class HelpdeskTicket(models.Model):
         readonly=True,
     )
 
-    @api.depends('product_id', 'purchase_order_id.order_line.product_qty',
-                 'purchase_order_id.order_line.qty_received')
+    @api.depends(
+        'product_id',
+        'purchase_order_id.order_line.product_qty',
+        'purchase_order_id.order_line.qty_received',
+    )
     def _compute_purchase_qty(self):
         for rec in self:
             if not rec.product_id or not rec.purchase_order_id:
@@ -98,7 +90,8 @@ class HelpdeskTicket(models.Model):
     def new_one(self, r):
         """Return the action for the wizard to create a new ticket."""
         view = self.env.ref(
-                'specific_helpdesk.create_helpdesk_ticket_view_form')
+            'specific_helpdesk.create_helpdesk_ticket_view_form'
+        )
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'create.helpdesk.ticket',
@@ -107,7 +100,7 @@ class HelpdeskTicket(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',
-            }
+        }
 
     @api.model
     def show_existing(self, domain):
@@ -124,13 +117,8 @@ class HelpdeskTicketReason(models.Model):
     _name = 'helpdesk.ticket.reason'
     _description = 'Ticket Reason'
 
-    name = fields.Char(
-        string='Name',
-        translate=True,
-        required=True)
-    visible_reception_wizard = fields.Boolean(
-        'Visible on Reception Wizard?')
+    name = fields.Char(string='Name', translate=True, required=True)
+    visible_reception_wizard = fields.Boolean('Visible on Reception Wizard?')
     location_dest_id = fields.Many2one(
-        'stock.location',
-        'Destination Location',
-        ondelete='restrict')
+        'stock.location', 'Destination Location', ondelete='restrict'
+    )

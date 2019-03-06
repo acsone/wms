@@ -1,35 +1,34 @@
 # -*- coding: utf-8 -*-
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    volume = fields.Float(string='Volume (liter)',
-                          help='Volume in liter',
-                          digits=(12, 3))
+    volume = fields.Float(
+        string='Volume (liter)', help='Volume in liter', digits=(12, 3)
+    )
 
     length = fields.Float('Length (cm)', help='Length in cm')
     width = fields.Float('Width (cm)', help='Width in cm')
     depth = fields.Float('Depth (cm)', help='Depth in cm')
-    supplier_id = fields.Many2one('res.partner',
-                                  string='Vendor',
-                                  readonly=True,
-                                  domain=[('supplier', '=', True)],
-                                  compute='_compute_supplier_id',
-                                  store=True)
+    supplier_id = fields.Many2one(
+        'res.partner',
+        string='Vendor',
+        readonly=True,
+        domain=[('supplier', '=', True)],
+        compute='_compute_supplier_id',
+        store=True,
+    )
     vendor_product_code = fields.Char(
         'Vendor Product Code',
         readonly=True,
         compute='_compute_supplier_id',
-        store=True
+        store=True,
     )
-    state_id = fields.Many2one(
-        'product.state',
-        string='State',
-    )
+    state_id = fields.Many2one('product.state', string='State')
     nb_days_out_of_stock = fields.Integer(
         help='Number of days before running out of stock',
         compute='compute_date_out_of_stock',
@@ -76,8 +75,10 @@ class ProductTemplate(models.Model):
         route_mto_mts = self.env.ref('stock_mts_mto_rule.route_mto_mts')
         route_ids = [route_mto.id, route_mto_mts.id]
         for product in self:
-            if any(route in product.route_ids.ids for route in route_ids) or \
-               product.product_variant_count > 1:
+            if (
+                any(route in product.route_ids.ids for route in route_ids)
+                or product.product_variant_count > 1
+            ):
                 product.nb_days_out_of_stock = 0
             else:
                 avg_csp = product.product_variant_id.average_annual_consumption
@@ -116,7 +117,8 @@ class ProductProduct(models.Model):
             limit = 100
 
         result = super(ProductProduct, self).name_search(
-            name=name, args=args, operator=operator, limit=limit)
+            name=name, args=args, operator=operator, limit=limit
+        )
 
         if len(result) >= limit:
             return result
@@ -124,9 +126,13 @@ class ProductProduct(models.Model):
         limit_available = limit - len(result)
         existing_ids = [x[0] for x in result]
         products = self.search(
-            [('vendor_product_code', '=', name),
-             ('id', 'not in', existing_ids)] + args,
-            limit=limit_available)
+            [
+                ('vendor_product_code', '=', name),
+                ('id', 'not in', existing_ids),
+            ]
+            + args,
+            limit=limit_available,
+        )
 
         result += products.name_get()
         return result

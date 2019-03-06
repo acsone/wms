@@ -10,10 +10,7 @@ class SaleOrder(models.Model):
 
     supplier_promotion_allowed = fields.Boolean(
         string='Supplier promotion allowed',
-        states={
-            'draft': [('readonly', False)],
-            'sent': [('readonly', False)]
-        },
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
     )
 
     discount_pricelist_id = fields.Many2one(
@@ -36,8 +33,9 @@ class SaleOrder(models.Model):
                 if pricelist:
                     vals['discount_pricelist_id'] = pricelist.id
             if 'supplier_promotion_allowed' not in vals:
-                vals['supplier_promotion_allowed'] = \
-                    partner.supplier_promotion_sale_allowed
+                vals[
+                    'supplier_promotion_allowed'
+                ] = partner.supplier_promotion_sale_allowed
 
         return super(SaleOrder, self).create(vals)
 
@@ -69,8 +67,7 @@ class SaleOrderLine(models.Model):
             discount2 = False
 
             condition = (
-                line.product_id and
-                line.order_id.supplier_promotion_allowed
+                line.product_id and line.order_id.supplier_promotion_allowed
             )
             if condition:
 
@@ -78,10 +75,10 @@ class SaleOrderLine(models.Model):
                     partner_id=False,
                     quantity=line.product_uom_qty,
                     date=(
-                        line.order_id.date_order and
-                        line.order_id.date_order[:10]
+                        line.order_id.date_order
+                        and line.order_id.date_order[:10]
                     ),
-                    uom_id=line.product_uom
+                    uom_id=line.product_uom,
                 )
 
                 if seller:
@@ -98,7 +95,7 @@ class SaleOrderLine(models.Model):
                 price_rule = pricelist.get_product_price_rule(
                     line.product_id,
                     line.product_uom_qty,
-                    line.order_id.partner_id
+                    line.order_id.partner_id,
                 )
 
                 if price_rule and len(price_rule) == 2 and price_rule[1]:
@@ -130,6 +127,6 @@ class SaleOrderLine(models.Model):
         else:
             product_temporary = product.with_context(
                 override_based_price={product.id: price},
-                pricelist=pricelist.id
+                pricelist=pricelist.id,
             ).browse(product.id)
             return product_temporary.price

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import os
 import logging
-import shutil
+import os
 import re
-from io import StringIO
+import shutil
 from contextlib import contextmanager
 from datetime import datetime
+from io import StringIO
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -27,17 +27,15 @@ class CSVFile(models.Model):
     file_encoding = fields.Char(required=True, default='utf_8')
 
     ftp_connector_id = fields.Many2one(
-        'ftp.connector',
-        string='FTP connector',
-        required=False
+        'ftp.connector', string='FTP connector', required=False
     )
 
     _sql_constraints = [
         (
             'unique_csv_file',
             'UNIQUE(filename)',
-            _('The file name must be unique.')
-        ),
+            _('The file name must be unique.'),
+        )
     ]
 
     @api.constrains('filename')
@@ -98,8 +96,13 @@ class CSVFile(models.Model):
             try:
                 value = now.strftime(date_format)
             except Exception:
-                raise UserError(_('The filename is not valid.'
-                                  'Please check the part "%s"') % date_format)
+                raise UserError(
+                    _(
+                        'The filename is not valid.'
+                        'Please check the part "%s"'
+                    )
+                    % date_format
+                )
 
             filename = filename.replace(date_format, value)
 
@@ -254,7 +257,7 @@ class CSVFileLogger(models.Model):
     message = fields.Text('Message')
     nbr_lines = fields.Integer('Number of lines')
     duration = fields.Float('Duration')
-    state = fields.Selection([('success', 'Success'),
-                              ('partial', 'Partial'),
-                              ('error', 'Error')],
-                             default='success')
+    state = fields.Selection(
+        [('success', 'Success'), ('partial', 'Partial'), ('error', 'Error')],
+        default='success',
+    )

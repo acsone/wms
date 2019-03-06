@@ -10,13 +10,11 @@ class ResPartner(models.Model):
     supplier_discount = fields.Float('Supplier discount %')
 
     purchase_manager_id = fields.Many2one(
-        comodel_name='res.users',
-        string='Purchase manager',
+        comodel_name='res.users', string='Purchase manager'
     )
 
     substitute_purchase_manager_id = fields.Many2one(
-        comodel_name='res.users',
-        string='Substitute purchase manager',
+        comodel_name='res.users', string='Substitute purchase manager'
     )
     delivery_lead_time = fields.Integer('Delivery lead time')
     is_manage_day_1 = fields.Boolean('Monday')
@@ -38,7 +36,6 @@ class ResPartner(models.Model):
             if not partner.delivery_lead_time:
                 continue
             suppliers_info = self.env['product.supplierinfo'].search(
-                [('name', '=', partner.id)])
-            suppliers_info.write({
-                'delay': partner.delivery_lead_time
-            })
+                [('name', '=', partner.id)]
+            )
+            suppliers_info.write({'delay': partner.delivery_lead_time})

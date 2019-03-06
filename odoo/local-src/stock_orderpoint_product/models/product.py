@@ -12,8 +12,9 @@ class ProductTemplate(models.Model):
     orderpoint_max = fields.Float('Maximum Quantity')
     orderpoint_qty_multiple = fields.Float('Qty Multiple')
 
-    @api.constrains('orderpoint_min', 'orderpoint_max',
-                    'orderpoint_qty_multiple')
+    @api.constrains(
+        'orderpoint_min', 'orderpoint_max', 'orderpoint_qty_multiple'
+    )
     def constrains_orderpoint(self):
         """
         Set orderpoint values from products to the model orderpoint
@@ -35,26 +36,32 @@ class ProductTemplate(models.Model):
                 continue
             product = product_variant[0]
 
-            rules = product.orderpoint_ids \
-                .filtered(lambda r: r.company_id == self.env.user.company_id)
+            rules = product.orderpoint_ids.filtered(
+                lambda r: r.company_id == self.env.user.company_id
+            )
             if rules:
-                rules.write({
-                    'product_min_qty': product.orderpoint_min,
-                    'product_max_qty': product.orderpoint_max,
-                    'qty_multiple': product.orderpoint_qty_multiple,
-                    'active': product.active,
-                })
+                rules.write(
+                    {
+                        'product_min_qty': product.orderpoint_min,
+                        'product_max_qty': product.orderpoint_max,
+                        'qty_multiple': product.orderpoint_qty_multiple,
+                        'active': product.active,
+                    }
+                )
             else:
-                product.orderpoint_ids.create({
-                    'product_id': product.id,
-                    'product_uom': product.uom_id,
-                    'product_min_qty': product.orderpoint_min,
-                    'product_max_qty': product.orderpoint_max,
-                    'qty_multiple': product.orderpoint_qty_multiple,
-                    'location_id': self.env.ref(
-                        'stock.stock_location_stock').location_id.id,
-                    'active': product.active,
-                })
+                product.orderpoint_ids.create(
+                    {
+                        'product_id': product.id,
+                        'product_uom': product.uom_id,
+                        'product_min_qty': product.orderpoint_min,
+                        'product_max_qty': product.orderpoint_max,
+                        'qty_multiple': product.orderpoint_qty_multiple,
+                        'location_id': self.env.ref(
+                            'stock.stock_location_stock'
+                        ).location_id.id,
+                        'active': product.active,
+                    }
+                )
 
     def write(self, values):
         """If a product has been changed to a type service
@@ -62,11 +69,15 @@ class ProductTemplate(models.Model):
 
         Used only for import.
         """
-        if (self._context.get('force_archive_orderpoint') and
-                'type' in values and values['type'] != 'product' and
-                sum(self.mapped('nbr_reordering_rules')) != 0):
+        if (
+            self._context.get('force_archive_orderpoint')
+            and 'type' in values
+            and values['type'] != 'product'
+            and sum(self.mapped('nbr_reordering_rules')) != 0
+        ):
             ops = self.mapped('product_variant_ids.orderpoint_ids').filtered(
-                lambda r: r.active)
+                lambda r: r.active
+            )
             ops.write({'active': False})
             # recompute value of `nbr_reordering_rules`
             self.invalidate_cache(['nbr_reordering_rules'])
@@ -92,11 +103,13 @@ class ProductProduct(models.Model):
         result = super(ProductProduct, self).create(vals)
 
         if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
-            result.product_tmpl_id.write({
-                'orderpoint_min': orderpoint_min,
-                'orderpoint_max': orderpoint_max,
-                'orderpoint_qty_multiple': orderpoint_qty_multiple,
-            })
+            result.product_tmpl_id.write(
+                {
+                    'orderpoint_min': orderpoint_min,
+                    'orderpoint_max': orderpoint_max,
+                    'orderpoint_qty_multiple': orderpoint_qty_multiple,
+                }
+            )
 
         return result
 
@@ -106,8 +119,11 @@ class ProductProduct(models.Model):
 
         Used only for import.
         """
-        if (self._context.get('force_archive_orderpoint') and
-                'active' in values and not values['active']):
+        if (
+            self._context.get('force_archive_orderpoint')
+            and 'active' in values
+            and not values['active']
+        ):
             ops = self.mapped('orderpoint_ids').filtered(lambda r: r.active)
             ops.write({'active': False})
         return super(ProductProduct, self).write(values)

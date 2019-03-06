@@ -1,43 +1,119 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from odoo import fields, _
-
 from domain_interface import DomainInterface, Parameters
+from odoo import _, fields
+
 from .. import constants
 
 _logger = logging.getLogger(__name__)
 
 
 class Catchweight(DomainInterface):
-    EXAMPLE_REQU = '208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,30,1,20170207,' \
-                   '072929,30427733121295,000000001625844,,,,1,' \
-                   '00000000162584400001,G,B,A,4,15,2520872,00709,01,,,,,,,' \
-                   ',,000002,,67709,,,,,,,,,,,'
-    EXAMPLE_RESP = '208030828,2.2.3,3iV_101,RESP_CATCHWEIGHT,30,1,20170207,' \
-                   '072914,304277331212950,,,000000001625844,,,,1,' \
-                   '00000000162584400001,2520872,000002,,67709,,,,,,,,,,'
-    EXAMPLE_RESU = '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,30,1,20170207,' \
-                   '072930,30427733121306,000000001625844,,,,1,' \
-                   '00000000162584400001,,,,,,,,,,67709,000002,,,,,,,,,'
-    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'itemPickSeqNum', 'pickLineId', 'sourceLC1', 'sourceLC2',
-            'sourceLC3', 'sourceLC4', 'sourceLC5', 'productCode', 'Cri01',
-            'Cri02', 'Cri03', 'Cri04', 'Cri05', 'Cri06', 'Cri07', 'Cri08',
-            'Cri09', 'Cri10', 'effQty', 'totalCatchWeight', 'lotNumber',
-            'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07',
-            'Usf08', 'Usf09', 'Usf10')
-    RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
-            'headerSubNum', 'itemPickSeqNum', 'pickLineId', 'productCode',
-            'effQty', 'totalCatchWeight', 'lotNumber', 'Usf01', 'Usf02',
-            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
-            'Usf10')
-    RESU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'itemSeqNum', 'lineId', 'assignmentType', 'unitOfMeasure',
-            'seqWeightInput', 'weight', 'barcode', 'expiryDate',
-            'destCarSeqNum', 'destCarId', 'lineIndicator', 'Usf01', 'Usf02',
-            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
-            'Usf10')
+    EXAMPLE_REQU = (
+        '208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,30,1,20170207,'
+        '072929,30427733121295,000000001625844,,,,1,'
+        '00000000162584400001,G,B,A,4,15,2520872,00709,01,,,,,,,'
+        ',,000002,,67709,,,,,,,,,,,'
+    )
+    EXAMPLE_RESP = (
+        '208030828,2.2.3,3iV_101,RESP_CATCHWEIGHT,30,1,20170207,'
+        '072914,304277331212950,,,000000001625844,,,,1,'
+        '00000000162584400001,2520872,000002,,67709,,,,,,,,,,'
+    )
+    EXAMPLE_RESU = (
+        '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,30,1,20170207,'
+        '072930,30427733121306,000000001625844,,,,1,'
+        '00000000162584400001,,,,,,,,,,67709,000002,,,,,,,,,'
+    )
+    REQU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemPickSeqNum',
+        'pickLineId',
+        'sourceLC1',
+        'sourceLC2',
+        'sourceLC3',
+        'sourceLC4',
+        'sourceLC5',
+        'productCode',
+        'Cri01',
+        'Cri02',
+        'Cri03',
+        'Cri04',
+        'Cri05',
+        'Cri06',
+        'Cri07',
+        'Cri08',
+        'Cri09',
+        'Cri10',
+        'effQty',
+        'totalCatchWeight',
+        'lotNumber',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESP = (
+        'respCode',
+        'respMsg',
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemPickSeqNum',
+        'pickLineId',
+        'productCode',
+        'effQty',
+        'totalCatchWeight',
+        'lotNumber',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemSeqNum',
+        'lineId',
+        'assignmentType',
+        'unitOfMeasure',
+        'seqWeightInput',
+        'weight',
+        'barcode',
+        'expiryDate',
+        'destCarSeqNum',
+        'destCarId',
+        'lineIndicator',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
 
     def requ(self, params):
         """
@@ -50,10 +126,12 @@ class Catchweight(DomainInterface):
 
         line_id = params.pickLineId
         if not line_id:
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found')
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('No picking found'),
+                }
+            )
             return result.format()
 
         get_lot_query = """
@@ -66,8 +144,9 @@ class Catchweight(DomainInterface):
         LIMIT 1;
         """
 
-        self.request.env.cr.execute(get_lot_query,
-                                    (params.productCode, params.lotNumber))
+        self.request.env.cr.execute(
+            get_lot_query, (params.productCode, params.lotNumber)
+        )
         query_result = self.request.env.cr.fetchone()
         if query_result:
             life_date_str = query_result[0]
@@ -75,15 +154,17 @@ class Catchweight(DomainInterface):
                 life_date = fields.Date.from_string(life_date_str)
                 result.Usf01 = life_date.strftime('%d%m%y')
 
-        result.update({
-            'respCode': constants.RESPONSE_CODE_OK,
-            'groupNum': params.groupNum,
-            'itemPickSeqNum': 1,
-            'pickLineId': params.pickLineId,
-            'productCode': params.productCode,
-            'lotNumber': params.lotNumber,
-            'effQty': params.effQty,
-        })
+        result.update(
+            {
+                'respCode': constants.RESPONSE_CODE_OK,
+                'groupNum': params.groupNum,
+                'itemPickSeqNum': 1,
+                'pickLineId': params.pickLineId,
+                'productCode': params.productCode,
+                'lotNumber': params.lotNumber,
+                'effQty': params.effQty,
+            }
+        )
         return result.format()
 
     def resu(self, params):
@@ -134,8 +215,11 @@ class Catchweight(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = self.request.env['stock.pack.operation'].sudo(self._user)\
+        pack_op = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
             .browse(pack_operation_id)
+        )
         if not len(pack_op):
             return
 
@@ -149,23 +233,38 @@ class Catchweight(DomainInterface):
             lot = None
             if lot_number:
                 if lot_id:
-                    lot = self.request.env['stock.production.lot']\
-                        .sudo(self._user).search(
-                        [('id', '=', lot_id),
-                         ('voice_identifier', '=', lot_number)])
+                    lot = (
+                        self.request.env['stock.production.lot']
+                        .sudo(self._user)
+                        .search(
+                            [
+                                ('id', '=', lot_id),
+                                ('voice_identifier', '=', lot_number),
+                            ]
+                        )
+                    )
 
                 if not lot:
-                    lot = self.request.env['stock.production.lot'] \
-                        .sudo(self._user).search(
-                        [('product_id', '=', pack_op.product_id.id),
-                         ('voice_identifier', '=', lot_number)], limit=1)
+                    lot = (
+                        self.request.env['stock.production.lot']
+                        .sudo(self._user)
+                        .search(
+                            [
+                                ('product_id', '=', pack_op.product_id.id),
+                                ('voice_identifier', '=', lot_number),
+                            ],
+                            limit=1,
+                        )
+                    )
 
                 if not lot:
                     error_message = "Pack op lot %s not found" % lot_number
                     _logger.error(error_message)
-                    params.log(picking_id=pack_op.picking_id.id,
-                               operation_id=pack_operation_id,
-                               exception=error_message)
+                    params.log(
+                        picking_id=pack_op.picking_id.id,
+                        operation_id=pack_operation_id,
+                        exception=error_message,
+                    )
                     return
                 else:
                     lot_id = lot.id
@@ -181,43 +280,58 @@ class Catchweight(DomainInterface):
 
             picking = pack_op.picking_id
             # The stock is full and the picker need to go to the reserve
-            if (picking.picking_type_id.zetes_picking_type ==
-                constants.RANGEMENT_ASSIGNMENT
-                and pack_op.zetes_state == constants.MOVE_FULL) or \
-                (picking.picking_type_id.zetes_picking_type ==
-                 constants.RANGEMENT_ASSIGNMENT
-                 and not virtual_qty):
-                reserve_rel_obj = \
-                    self.request.env['pack.operation.reserve.rel']
-                reserve_rel = reserve_rel_obj.sudo(self._user).search([
-                    ('pack_operation_id', '=', pack_op.id),
-                    ('lot_id', '=', lot_id)
-                ], limit=1, order="id DESC")
+            if (
+                picking.picking_type_id.zetes_picking_type
+                == constants.RANGEMENT_ASSIGNMENT
+                and pack_op.zetes_state == constants.MOVE_FULL
+            ) or (
+                picking.picking_type_id.zetes_picking_type
+                == constants.RANGEMENT_ASSIGNMENT
+                and not virtual_qty
+            ):
+                reserve_rel_obj = self.request.env[
+                    'pack.operation.reserve.rel'
+                ]
+                reserve_rel = reserve_rel_obj.sudo(self._user).search(
+                    [
+                        ('pack_operation_id', '=', pack_op.id),
+                        ('lot_id', '=', lot_id),
+                    ],
+                    limit=1,
+                    order="id DESC",
+                )
 
                 if not reserve_rel:
-                    error_message = "Reserve not found for pack_op %s " \
-                                    "(lot %s)" % (pack_op.id, lot_id)
+                    error_message = (
+                        "Reserve not found for pack_op %s "
+                        "(lot %s)" % (pack_op.id, lot_id)
+                    )
                     _logger.error(error_message)
-                    params.log(picking_id=pack_op.picking_id.id,
-                               operation_id=pack_operation_id,
-                               exception=error_message)
+                    params.log(
+                        picking_id=pack_op.picking_id.id,
+                        operation_id=pack_operation_id,
+                        exception=error_message,
+                    )
                     return
 
                 reserve = reserve_rel.reserve_location_id
                 pack_op.put_in_reserve(reserve.id)
             # Only for "Reserve". The stock is full and the picker will return
             # some quantity to the reserve
-            elif picking.picking_type_id.zetes_picking_type == \
-                    constants.REASSORT_ASSIGNMENT \
-                    and pack_op.product_qty > virtual_qty:
+            elif (
+                picking.picking_type_id.zetes_picking_type
+                == constants.REASSORT_ASSIGNMENT
+                and pack_op.product_qty > virtual_qty
+            ):
                 # Add the new quantity to the current pack op
                 pack_op.add_qty(virtual_qty, lot_id)
                 location_dest_id = pack_op.location_id.id
                 new_qty = pack_op.product_qty - virtual_qty
 
                 # Create the pack op for the quantity left in the reserve
-                pack_op_move = \
-                    pack_op.split_pack_op(new_qty, location_dest_id, lot_id)
+                pack_op_move = pack_op.split_pack_op(
+                    new_qty, location_dest_id, lot_id
+                )
                 pack_op_move.add_qty(new_qty, lot_id)
             # Otherwise simple add the new quantity to the current pack op
             else:
@@ -226,9 +340,11 @@ class Catchweight(DomainInterface):
         except Exception as e:
             self.rollback_to_savepoint()
             _logger.error(str(e))
-            params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=pack_operation_id,
-                       exception=e)
+            params.log(
+                picking_id=pack_op.picking_id.id,
+                operation_id=pack_operation_id,
+                exception=e,
+            )
 
     def check_actual_stock(self, params, pack_op, actual_stock, lot_id=None):
         """
@@ -254,23 +370,32 @@ class Catchweight(DomainInterface):
         available_qty = query_result and query_result[0] or 0
 
         if available_qty != actual_stock:
-            error_message = "The theoretical stock (%s) is different" \
-                            " from the actual stock (%s) for" \
-                            " the product %s in the location %s" % \
-                            (available_qty,
-                             actual_stock,
-                             pack_op.product_id.display_name,
-                             pack_op.location_id.display_name)
+            error_message = (
+                "The theoretical stock (%s) is different"
+                " from the actual stock (%s) for"
+                " the product %s in the location %s"
+                % (
+                    available_qty,
+                    actual_stock,
+                    pack_op.product_id.display_name,
+                    pack_op.location_id.display_name,
+                )
+            )
             if lot_id:
-                lot = self.request.env['stock.production.lot']\
-                    .sudo(self._user).browse(lot_id)
+                lot = (
+                    self.request.env['stock.production.lot']
+                    .sudo(self._user)
+                    .browse(lot_id)
+                )
                 error_message += " (lot %s)" % lot.name
 
             _logger.error(error_message)
-            params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=pack_op.id,
-                       exception=error_message,
-                       error_type='human')
+            params.log(
+                picking_id=pack_op.picking_id.id,
+                operation_id=pack_op.id,
+                exception=error_message,
+                error_type='human',
+            )
 
     def check_picked_quantity(self, params, pack_op, picked_quantity):
         """
@@ -287,18 +412,24 @@ class Catchweight(DomainInterface):
         max_allowed_quantity = pack_op.product_qty
 
         if total_picked_quantity > max_allowed_quantity:
-            error_message = "The total picked quantity (%s) is greater than" \
-                            " the requested quantity (%s) for the product " \
-                            "%s (Operation ID %s)" % \
-                            (total_picked_quantity,
-                             max_allowed_quantity,
-                             pack_op.product_id.display_name,
-                             pack_op.id)
+            error_message = (
+                "The total picked quantity (%s) is greater than"
+                " the requested quantity (%s) for the product "
+                "%s (Operation ID %s)"
+                % (
+                    total_picked_quantity,
+                    max_allowed_quantity,
+                    pack_op.product_id.display_name,
+                    pack_op.id,
+                )
+            )
             _logger.error(error_message)
-            params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=pack_op.id,
-                       exception=error_message,
-                       error_type='human')
+            params.log(
+                picking_id=pack_op.picking_id.id,
+                operation_id=pack_op.id,
+                exception=error_message,
+                error_type='human',
+            )
             return pack_op.product_qty - pack_op.qty_done
 
         return picked_quantity

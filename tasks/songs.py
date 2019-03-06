@@ -27,7 +27,6 @@ except ImportError:
     print('Please run `pip install -r tasks/requirements.txt`')
 
 
-
 def odoo_login(base_url, login, password, db):
     """ Get a session_id from Odoo """
     url = "%s/web/session/authenticate" % base_url

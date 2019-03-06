@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import models, api
+from odoo import api, models
 
 
 class StockProductionLot(models.Model):
@@ -57,20 +57,30 @@ class StockProductionLot(models.Model):
         for table, column in cr.fetchall():
             qs = []
             if table in product_fields:
-                qs.append("%s=%s" % (product_fields[table], product.id))
+                qs.append("{}={}".format(product_fields[table], product.id))
             if table in template_fields:
-                qs.append("%s=%s" % (template_fields[table],
-                          product.product_tmpl_id.id))
+                qs.append(
+                    "%s=%s"
+                    % (template_fields[table], product.product_tmpl_id.id)
+                )
             if not qs:
                 continue
 
-            query = ("UPDATE " + table + " SET " + ','.join(qs) +
-                     " WHERE " + column + " in %s")
+            query = (
+                "UPDATE "
+                + table
+                + " SET "
+                + ','.join(qs)
+                + " WHERE "
+                + column
+                + " in %s"
+            )
             params = (tuple(self.ids),)
 
             if table == 'stock_move':
                 quants = self.env['stock.quant'].search(
-                    [('lot_id', 'in', self.ids)])
+                    [('lot_id', 'in', self.ids)]
+                )
                 moves = set()
                 for quant in quants:
                     moves |= {move.id for move in quant.history_ids}
@@ -82,13 +92,15 @@ class StockProductionLot(models.Model):
 
     @api.multi
     def write(self, vals):
-        if (not self._context.get('product_noupdate') and
-                vals.get('product_id')):
+        if not self._context.get('product_noupdate') and vals.get(
+            'product_id'
+        ):
             for rec in self:
                 if rec.product_id == vals['product_id']:
                     continue
                 new_prod = self.env['product.product'].browse(
-                    vals['product_id'])
+                    vals['product_id']
+                )
                 self._update_relations(new_prod)
                 break
         return super(StockProductionLot, self).write(vals)

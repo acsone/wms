@@ -7,31 +7,33 @@ from odoo.tests.common import SavepointCase
 
 
 class WSSaleOrderStatusTestCase(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(WSSaleOrderStatusTestCase, cls).setUpClass()
 
-        cls.partner = cls.env['res.partner'].create({
-            'name': 'Partner 1',
-            'ref': '93765921390',
-        })
+        cls.partner = cls.env['res.partner'].create(
+            {'name': 'Partner 1', 'ref': '93765921390'}
+        )
 
-        cls.prod1 = cls.env['product.product'].create({
-            'name': 'Product 1',
-            'default_code': 'ref1',
-            'cnk_code': '000015',
-            'sale_ok': True,
-            'type': 'product'
-        })
+        cls.prod1 = cls.env['product.product'].create(
+            {
+                'name': 'Product 1',
+                'default_code': 'ref1',
+                'cnk_code': '000015',
+                'sale_ok': True,
+                'type': 'product',
+            }
+        )
 
-        cls.prod2 = cls.env['product.product'].create({
-            'name': 'Product 2',
-            'default_code': 'ref2',
-            'cnk_code': '000062',
-            'sale_ok': True,
-            'type': 'product'
-        })
+        cls.prod2 = cls.env['product.product'].create(
+            {
+                'name': 'Product 2',
+                'default_code': 'ref2',
+                'cnk_code': '000062',
+                'sale_ok': True,
+                'type': 'product',
+            }
+        )
 
         cls.order_data = {
             'order_ref': 'ref_123',
@@ -39,16 +41,9 @@ class WSSaleOrderStatusTestCase(SavepointCase):
             'customer_id': cls.partner.ref,
             'date': '2018-08-05 15:23:12',
             'lines': [
-                {
-                    'line_id': 1,
-                    'cnk': cls.prod1.cnk_code,
-                    'quantity': 20
-                },
-                {
-                    'line_id': 2,
-                    'cnk': cls.prod2.cnk_code,
-                    'quantity': 5,
-                }],
+                {'line_id': 1, 'cnk': cls.prod1.cnk_code, 'quantity': 20},
+                {'line_id': 2, 'cnk': cls.prod2.cnk_code, 'quantity': 5},
+            ],
         }
 
     def test_saleorder_status(self):
@@ -80,14 +75,16 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         """
         # Create a rule to ban product that cannot be sold (sale_ok == False)
         self.env['exception.rule'].search([]).unlink()
-        rule = self.env['exception.rule'].create({
-            'name': 'Test if can be sold',
-            'description': 'This product cannot be sold',
-            'rule_group': 'sale',
-            'model': 'sale.order.line',
-            'code': "failed = not object.product_id.sale_ok",
-            'active': True
-        })
+        rule = self.env['exception.rule'].create(
+            {
+                'name': 'Test if can be sold',
+                'description': 'This product cannot be sold',
+                'rule_group': 'sale',
+                'model': 'sale.order.line',
+                'code': "failed = not object.product_id.sale_ok",
+                'active': True,
+            }
+        )
 
         self.prod2.sale_ok = False
 
@@ -137,14 +134,16 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         """
         # Create a rule to ban product that cannot be sold (sale_ok == False)
         self.env['exception.rule'].search([]).unlink()
-        rule = self.env['exception.rule'].create({
-            'name': 'Test if can be sold',
-            'description': 'This product cannot be sold',
-            'rule_group': 'sale',
-            'model': 'sale.order.line',
-            'code': "failed = not object.product_id.sale_ok",
-            'active': True
-        })
+        rule = self.env['exception.rule'].create(
+            {
+                'name': 'Test if can be sold',
+                'description': 'This product cannot be sold',
+                'rule_group': 'sale',
+                'model': 'sale.order.line',
+                'code': "failed = not object.product_id.sale_ok",
+                'active': True,
+            }
+        )
 
         self.prod2.sale_ok = False
 

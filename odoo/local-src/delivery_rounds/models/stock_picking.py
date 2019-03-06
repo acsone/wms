@@ -4,9 +4,9 @@
 import logging
 from collections import defaultdict
 
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -18,12 +18,15 @@ class StockPicking(models.Model):
         'round.itinerary.position',
         string='Itineraries',
         help="Indicates on which itinerary this partner is",
-        compute='_compute_partner_itinerary_ids')
+        compute='_compute_partner_itinerary_ids',
+    )
 
     def _compute_partner_itinerary_ids(self):
         for picking in self:
-            if not (picking.picking_type_subcode == 'PICK'
-                    or picking.picking_type_code == 'outgoing'):
+            if not (
+                picking.picking_type_subcode == 'PICK'
+                or picking.picking_type_code == 'outgoing'
+            ):
                 continue
             partner = picking.partner_id
             if partner.type == 'contact' and partner.parent_id:
@@ -31,13 +34,15 @@ class StockPicking(models.Model):
             picking.partner_itinerary_ids = partner.round_itinerary_ids
 
     delivery_round_customer_id = fields.Many2one(
-        'round.instance.customer', 'Delivery Round Customer', copy=False)
+        'round.instance.customer', 'Delivery Round Customer', copy=False
+    )
     delivery_round_id = fields.Many2one(
         related='delivery_round_customer_id.delivery_round_id',
         string='Delivery Round',
         store=True,
         readonly=True,
-        track_visibility='onchange')
+        track_visibility='onchange',
+    )
 
     @api.model
     def default_get(self, fields_list):
@@ -53,19 +58,22 @@ class StockPicking(models.Model):
     @api.multi
     def _create_backorder(self, backorder_moves=[]):
         # Ensure backorder is not processed again
-        return super(StockPicking, self.with_context(round_backorder=True))\
-            ._create_backorder(backorder_moves)
+        return super(
+            StockPicking, self.with_context(round_backorder=True)
+        )._create_backorder(backorder_moves)
 
     delivery_round_launched = fields.Boolean(
         related='delivery_round_id.picking_launched',
         store=True,
-        string="Delivery Round Launched")
+        string="Delivery Round Launched",
+    )
 
     def _get_all_src_pickings(self):
         def _descend_moves(lvl):
             next_lvl = lvl.mapped('move_orig_ids')
-            if (next_lvl and 'PICK' not in
-                    lvl.mapped('picking_id.picking_type_subcode')):
+            if next_lvl and 'PICK' not in lvl.mapped(
+                'picking_id.picking_type_subcode'
+            ):
                 lvl |= _descend_moves(next_lvl)
             return lvl
 
@@ -84,13 +92,13 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
-        unset_round = ('delivery_round_customer_id' in vals
-                       and not vals['delivery_round_customer_id']
-                       and not self.env.context.get('noround_write'))
+        unset_round = (
+            'delivery_round_customer_id' in vals
+            and not vals['delivery_round_customer_id']
+            and not self.env.context.get('noround_write')
+        )
         if unset_round:
-            in_round = self.filtered(
-                lambda p: p.delivery_round_customer_id
-            )
+            in_round = self.filtered(lambda p: p.delivery_round_customer_id)
         res = super(StockPicking, self).write(vals)
         if unset_round:
             # unreserve quants when picking is disconnected from a delivery
@@ -103,11 +111,12 @@ class StockPicking(models.Model):
 
     def _unassign_delivery_round(self):
         if any(self.mapped('printed')):
-            raise UserError(_(
-                'You cannot unassign a delivery round from a started picking'))
-        _logger.debug(
-            "Delivery round customer unset on pickings %s",
-            self.ids)
+            raise UserError(
+                _(
+                    'You cannot unassign a delivery round from a started picking'
+                )
+            )
+        _logger.debug("Delivery round customer unset on pickings %s", self.ids)
         self.do_unreserve()
 
     @api.multi
@@ -116,58 +125,68 @@ class StockPicking(models.Model):
         if self.env.context.get('noround_write'):
             return
         delivery_round_customer = self.mapped('delivery_round_customer_id')
-        assert len(delivery_round_customer) <= 1, \
-            'Max 1 delivery round customer can be written at a time'
+        assert (
+            len(delivery_round_customer) <= 1
+        ), 'Max 1 delivery round customer can be written at a time'
         if delivery_round_customer:
             if not self.env.context.get('round_assigned'):
                 raise UserError(
                     "Delivery round assigned to a picking without "
                     "reservation. Method _assign_pickings on delivery.round "
-                    "should have been called.")
+                    "should have been called."
+                )
 
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
-        instances = self.env['round.instance'].search(
-            [('state', 'in', ('draft', ))]).name_get()
+        instances = (
+            self.env['round.instance']
+            .search([('state', 'in', ('draft',))])
+            .name_get()
+        )
         return instances, None
 
-    _group_by_full = {
-        'delivery_round_id': _group_delivery_round,
-    }
+    _group_by_full = {'delivery_round_id': _group_delivery_round}
 
     def _detach_from_round(self):
-        self.filtered(
-            lambda p: p.state not in ('cancel', 'done')
-        ).write({'delivery_round_customer_id': False})
+        self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
+            {'delivery_round_customer_id': False}
+        )
 
     @api.multi
     def button_delivery_round(self):
-        return dict(self.env.ref(
-            'delivery_rounds.action_picking_assign_delivery_round').read()[0])
+        return dict(
+            self.env.ref(
+                'delivery_rounds.action_picking_assign_delivery_round'
+            ).read()[0]
+        )
 
     @api.multi
     def _delay_jobs_action_assign(self):
         # Group picking by partner
         pickings_by_partner = defaultdict(lambda: self.env['stock.picking'])
-        pickings = self.search([
-            ('delivery_round_id', '=', False),
-            ('state', 'not in', ('done', 'cancel')),
-            ('picking_type_subcode', '=', 'PICK')])
+        pickings = self.search(
+            [
+                ('delivery_round_id', '=', False),
+                ('state', 'not in', ('done', 'cancel')),
+                ('picking_type_subcode', '=', 'PICK'),
+            ]
+        )
         for picking in pickings:
             pickings_by_partner[picking.partner_id] |= picking
 
         for partner, pickings in pickings_by_partner.iteritems():
-            pickings.with_delay(description=_(
-                'Assign pickings of partner %s') % partner.ref
-                )._job_action_assign()
+            pickings.with_delay(
+                description=_('Assign pickings of partner %s') % partner.ref
+            )._job_action_assign()
 
     @api.multi
     @job(default_channel='root.action_assign')
     def _job_action_assign(self):
         moves = self.mapped('move_lines').filtered(
-            lambda move: move.state not in ('done', 'cancel') and
-            move.product_uom_qty > 0.0 and
-            not move.linked_move_operation_ids)
+            lambda move: move.state not in ('done', 'cancel')
+            and move.product_uom_qty > 0.0
+            and not move.linked_move_operation_ids
+        )
         moves.action_assign()
 
 
@@ -181,5 +200,6 @@ class StockPickingType(models.Model):
         res = super(StockPickingType, self).get_action_picking_tree_ready()
         if self.subcode == 'PICK':
             res['context'] = res['context'].replace(
-                ',', ", 'search_default_delivery_round_launched': 1, ", 1)
+                ',', ", 'search_default_delivery_round_launched': 1, ", 1
+            )
         return res

@@ -7,6 +7,7 @@ with the ESB.
 
 import argparse
 import time
+
 import odoorpc
 
 # Default arguments
@@ -42,21 +43,26 @@ product_1 = odoo.env.ref('__import__.product_2761427_product_template')[0]
 
 # Create a new sale order and confirm sale
 so_data = {
-        'partner_id': customer[0],
-        'date_order': '2018-08-24',
-        'sale_channel': 'fax',
-        'carrier_id': 2,
-        'client_order_ref': 'customer ref',
-        'delivery_price': 23.5,
-        'suite_name': '0123434234',
-        'order_line': [
-            (0, 0, {
+    'partner_id': customer[0],
+    'date_order': '2018-08-24',
+    'sale_channel': 'fax',
+    'carrier_id': 2,
+    'client_order_ref': 'customer ref',
+    'delivery_price': 23.5,
+    'suite_name': '0123434234',
+    'order_line': [
+        (
+            0,
+            0,
+            {
                 'sequence': 1,
                 # 'name': '345', #self.prod1.name,
                 'product_id': product_1.id,
                 'product_uom_qty': 7,
-                })],
-        }
+            },
+        )
+    ],
+}
 new_so_id = odoo.execute('sale.order', 'create', so_data)
 print('New sale order with id {}'.format(new_so_id))
 so = odoo.env['sale.order'].browse(new_so_id)

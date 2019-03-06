@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import api, models, _
+from odoo import _, api, models
 from odoo.exceptions import Warning
 
 
@@ -33,10 +33,13 @@ class StockPicking(models.Model):
             raise Warning(_('Please choose a source end location'))
         if self.move_lines:
             raise Warning(_('Moves lines already exsits'))
-        quants = self.env['stock.quant'].search([
-            ('location_id', 'child_of', self.location_id.id),
-            ('reservation_id', '=', False),
-            ('qty', '>', 0.0)])
+        quants = self.env['stock.quant'].search(
+            [
+                ('location_id', 'child_of', self.location_id.id),
+                ('reservation_id', '=', False),
+                ('qty', '>', 0.0),
+            ]
+        )
         products = {}
         available = False
         for quant in quants:
@@ -52,7 +55,7 @@ class StockPicking(models.Model):
                     'picking_type_id': self.picking_type_id.id,
                     'location_id': self.location_id.id,
                     'location_dest_id': self.location_dest_id.id,
-                    }
+                }
             else:
                 products[quant.product_id.id]['product_uom_qty'] += quant.qty
         move_obj = self.env['stock.move']

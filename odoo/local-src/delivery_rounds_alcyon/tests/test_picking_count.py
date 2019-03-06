@@ -6,26 +6,13 @@ from odoo.addons.delivery_rounds.tests.common import DeliveryRoundTestCase
 
 
 class TestInstancePickingCount(DeliveryRoundTestCase):
-
     @classmethod
     def _setup_picking_zones(cls):
         PickingZone = cls.env['picking.zone']
-        cls.zone_ali = PickingZone.create({
-            'name': 'Aliments',
-            'code': '01',
-        })
-        cls.zone_med = PickingZone.create({
-            'name': 'Med',
-            'code': '02',
-        })
-        cls.zone_frigo = PickingZone.create({
-            'name': 'Frigo',
-            'code': '03',
-        })
-        cls.zone_mat = PickingZone.create({
-            'name': 'Mat',
-            'code': '04',
-        })
+        cls.zone_ali = PickingZone.create({'name': 'Aliments', 'code': '01'})
+        cls.zone_med = PickingZone.create({'name': 'Med', 'code': '02'})
+        cls.zone_frigo = PickingZone.create({'name': 'Frigo', 'code': '03'})
+        cls.zone_mat = PickingZone.create({'name': 'Mat', 'code': '04'})
 
     @classmethod
     def _setup_picking_types(cls):
@@ -34,34 +21,42 @@ class TestInstancePickingCount(DeliveryRoundTestCase):
         wh = cls.env.ref('stock.warehouse0')
         picking_sequence = wh.in_type_id.sequence_id
 
-        cls.type_ali = PickingType.create({
-            'name': 'Pick Aliments',
-            'code': 'internal',
-            'subcode': 'PICK',
-            'picking_zone_id': cls.zone_ali.id,
-            'sequence_id': picking_sequence.id,
-        })
-        cls.type_med = PickingType.create({
-            'name': 'Pick Med',
-            'code': 'internal',
-            'subcode': 'PICK',
-            'picking_zone_id': cls.zone_med.id,
-            'sequence_id': picking_sequence.id,
-        })
-        cls.type_frigo = PickingType.create({
-            'name': 'Pick Frigo',
-            'code': 'internal',
-            'subcode': 'PICK',
-            'picking_zone_id': cls.zone_frigo.id,
-            'sequence_id': picking_sequence.id,
-        })
-        cls.type_mat = PickingType.create({
-            'name': 'Pick Mat',
-            'code': 'internal',
-            'subcode': 'PICK',
-            'picking_zone_id': cls.zone_mat.id,
-            'sequence_id': picking_sequence.id,
-        })
+        cls.type_ali = PickingType.create(
+            {
+                'name': 'Pick Aliments',
+                'code': 'internal',
+                'subcode': 'PICK',
+                'picking_zone_id': cls.zone_ali.id,
+                'sequence_id': picking_sequence.id,
+            }
+        )
+        cls.type_med = PickingType.create(
+            {
+                'name': 'Pick Med',
+                'code': 'internal',
+                'subcode': 'PICK',
+                'picking_zone_id': cls.zone_med.id,
+                'sequence_id': picking_sequence.id,
+            }
+        )
+        cls.type_frigo = PickingType.create(
+            {
+                'name': 'Pick Frigo',
+                'code': 'internal',
+                'subcode': 'PICK',
+                'picking_zone_id': cls.zone_frigo.id,
+                'sequence_id': picking_sequence.id,
+            }
+        )
+        cls.type_mat = PickingType.create(
+            {
+                'name': 'Pick Mat',
+                'code': 'internal',
+                'subcode': 'PICK',
+                'picking_zone_id': cls.zone_mat.id,
+                'sequence_id': picking_sequence.id,
+            }
+        )
 
     @classmethod
     def setUpClass(cls):
@@ -119,8 +114,17 @@ class TestInstancePickingCount(DeliveryRoundTestCase):
         ship2.move_lines.write({'state': 'waiting'})
         ship3.move_lines.write({'state': 'waiting'})
 
-        pickings = (pick1 | pick2 | pick3 | pick4 | pick5 | pick6 |
-                    ship1 | ship2 | ship3)
+        pickings = (
+            pick1
+            | pick2
+            | pick3
+            | pick4
+            | pick5
+            | pick6
+            | ship1
+            | ship2
+            | ship3
+        )
         self.delivery_round_1._assign_pickings(pickings)
 
         pick1.move_lines.write({'state': 'done'})

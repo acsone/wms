@@ -2,9 +2,10 @@
 # Copyright 2018 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -39,9 +40,7 @@ class StockInventory(models.Model):
             return result
 
         products = self.line_ids.mapped('product_id')
-        products.sudo().write({
-            'date_last_inventory': fields.Datetime.now()
-        })
+        products.sudo().write({'date_last_inventory': fields.Datetime.now()})
 
         return result
 
@@ -65,17 +64,19 @@ class StockInventory(models.Model):
         vlb_location = vlb_stock_location.location_id
 
         # If the current day is a bank holiday we skip the inventory
-        bank_holiday = self.env['bank.holiday'].search([
-            ('date', '=', fields.Date.to_string(date_today))
-        ])
+        bank_holiday = self.env['bank.holiday'].search(
+            [('date', '=', fields.Date.to_string(date_today))]
+        )
         if bank_holiday:
             return
 
-        inventory = self.create({
-            'name': _('Daily inventory: %s') % fields.Date.today(),
-            'filter': 'products_selected',
-            'location_id': vlb_location.id,
-        })
+        inventory = self.create(
+            {
+                'name': _('Daily inventory: %s') % fields.Date.today(),
+                'filter': 'products_selected',
+                'location_id': vlb_location.id,
+            }
+        )
         product_obj = self.env['product.product']
         inventory_periods = self.compute_inventory_periods(
             date_today_overwrite=date_today_overwrite
@@ -88,9 +89,7 @@ class StockInventory(models.Model):
             inventory.unlink()
             return
 
-        inventory.write({
-            'product_ids': [(6, 0, products_inventory.ids)]
-        })
+        inventory.write({'product_ids': [(6, 0, products_inventory.ids)]})
 
         return inventory
 
@@ -99,31 +98,36 @@ class StockInventory(models.Model):
         config_param = self.env['ir.config_parameter']
 
         date_now = date_today_overwrite or date.today()
-        fiscal_year = \
-            self.env.user.company_id.compute_fiscalyear_dates(date_now)
+        fiscal_year = self.env.user.company_id.compute_fiscalyear_dates(
+            date_now
+        )
         fiscal_year_from = fiscal_year['date_from']
 
         periods = {}
         for inventory in self.INVENTORY_NAMES:
-            delay = int(config_param.get_param(
-                'stock.delay_inventory_%s_products' % inventory
-            ))
+            delay = int(
+                config_param.get_param(
+                    'stock.delay_inventory_%s_products' % inventory
+                )
+            )
             if not delay:
                 raise UserError(
                     _('There is no delay for the inventory %s' % inventory)
                 )
 
             date_start_period = fiscal_year_from
-            date_end_period = \
-                date_start_period + \
-                relativedelta(months=delay) - \
-                relativedelta(days=1)
+            date_end_period = (
+                date_start_period
+                + relativedelta(months=delay)
+                - relativedelta(days=1)
+            )
             while date_end_period < date_now:
                 date_start_period = date_end_period + relativedelta(days=1)
-                date_end_period = \
-                    date_start_period + \
-                    relativedelta(months=delay) - \
-                    relativedelta(days=1)
+                date_end_period = (
+                    date_start_period
+                    + relativedelta(months=delay)
+                    - relativedelta(days=1)
+                )
 
             periods[inventory] = {
                 'date_start': fields.Date.to_string(date_start_period),
@@ -143,17 +147,20 @@ class StockInventory(models.Model):
             exhausted_domain = [('id', 'in', exhausted_products.ids)]
         else:
             exhausted_domain = [('id', 'not in', quant_products.ids)]
-        exhausted_products = \
-            self.env['product.product'].search(exhausted_domain)
+        exhausted_products = self.env['product.product'].search(
+            exhausted_domain
+        )
         for product in exhausted_products:
             bins = product.stock_bin_ids.mapped('bin_location_id')
             location_id = bins and bins[0].id or self.location_id.id
 
-            vals.append({
-                'inventory_id': self.id,
-                'product_id': product.id,
-                'location_id': location_id,
-            })
+            vals.append(
+                {
+                    'inventory_id': self.id,
+                    'product_id': product.id,
+                    'location_id': location_id,
+                }
+            )
         return vals
 
 
@@ -167,5 +174,6 @@ class ProductChangeQuantity(models.TransientModel):
         we don't want to change the last inventory date
         :return:
         """
-        return super(ProductChangeQuantity,
-                     self.with_context(qty_updated=True)).change_product_qty()
+        return super(
+            ProductChangeQuantity, self.with_context(qty_updated=True)
+        ).change_product_qty()

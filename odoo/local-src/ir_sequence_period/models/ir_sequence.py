@@ -4,14 +4,15 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class IrSequence(models.Model):
     _inherit = 'ir.sequence'
 
-    use_end_date = fields.Boolean('Use the end date of the range',
-                                  help="""By default Odoo will use
+    use_end_date = fields.Boolean(
+        'Use the end date of the range',
+        help="""By default Odoo will use
                                   the start date (from) to compute date
                                   with the prefix range_ (eg: range_year).
 
@@ -23,7 +24,8 @@ class IrSequence(models.Model):
                                   %(range_year)s => 2016
                                   with the flag
                                   %(range_year)s => 2017
-                                  """)
+                                  """,
+    )
 
     def _create_date_range_seq(self, date_string):
         user = self.env.user
@@ -40,11 +42,17 @@ class IrSequence(models.Model):
                 end += relativedelta(years=+1)
             else:
                 start -= relativedelta(years=+1)
-        return self.env['ir.sequence.date_range'].sudo().create({
-            'date_from': fields.Date.to_string(start),
-            'date_to': fields.Date.to_string(end),
-            'sequence_id': self.id,
-        })
+        return (
+            self.env['ir.sequence.date_range']
+            .sudo()
+            .create(
+                {
+                    'date_from': fields.Date.to_string(start),
+                    'date_to': fields.Date.to_string(end),
+                    'sequence_id': self.id,
+                }
+            )
+        )
 
 
 class IrSequenceDateRange(models.Model):
@@ -54,7 +62,9 @@ class IrSequenceDateRange(models.Model):
         self.ensure_one()
 
         if self.sequence_id.use_end_date:
-            return super(IrSequenceDateRange, self.with_context(
-                ir_sequence_date_range=self.date_to))._next()
+            return super(
+                IrSequenceDateRange,
+                self.with_context(ir_sequence_date_range=self.date_to),
+            )._next()
 
         return super(IrSequenceDateRange, self)._next()

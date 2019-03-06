@@ -11,6 +11,4 @@ def deactivate_check_on_vat(ctx):
 
     # We want to activate this check after having imported partner data
     # to avoid to have an error on vat which became invalid on db2 database
-    ctx.env.ref('base.main_company').write({
-        'vat_check_vies': False,
-    })
+    ctx.env.ref('base.main_company').write({'vat_check_vies': False})

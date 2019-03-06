@@ -13,7 +13,9 @@ class PickingZone(models.Model):
     code = fields.Char('Code', required=True)
 
     _sql_constraints = [
-        ('unique_picking_zone',
-         'unique (code)',
-         'The picking zone code must be unique')
+        (
+            'unique_picking_zone',
+            'unique (code)',
+            'The picking zone code must be unique',
+        )
     ]

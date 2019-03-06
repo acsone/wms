@@ -12,8 +12,9 @@ class GenerateVoiceIdentifier(models.TransientModel):
     def default_get(self, fields_list=None):
         if not fields_list:
             fields_list = {}
-        result = super(GenerateVoiceIdentifier, self)\
-            .default_get(fields_list=fields_list)
+        result = super(GenerateVoiceIdentifier, self).default_get(
+            fields_list=fields_list
+        )
 
         result['lot_ids'] = [(6, 0, self.env.context.get('active_ids', []))]
 

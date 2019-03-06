@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
+
 import anthem
+
 from ..common import load_users_csv
 
 
@@ -15,7 +17,7 @@ def change_admin_language(ctx):
 
 @anthem.log
 def admin_user_password(ctx):
-    if os.getenv('RUNNING_ENV') in ('dev', ):
+    if os.getenv('RUNNING_ENV') in ('dev',):
         ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
         return
     # password for the test server,
@@ -31,14 +33,14 @@ def set_implied_groups(ctx):
     """ Define some implied groups """
     group_printing = ctx.env.ref('base_report_to_printer.printing_group_user')
     group_helpdesk = ctx.env.ref('helpdesk.group_helpdesk_user')
-    ctx.env.ref('base.group_user').write({
-        'implied_ids': [(4, group_printing.id), (4, group_helpdesk.id)]
-    })
+    ctx.env.ref('base.group_user').write(
+        {'implied_ids': [(4, group_printing.id), (4, group_helpdesk.id)]}
+    )
 
     group_payment = ctx.env.ref('account_payment_order.group_account_payment')
-    ctx.env.ref('account.group_account_user').write({
-        'implied_ids': [(4, group_payment.id)],
-    })
+    ctx.env.ref('account.group_account_user').write(
+        {'implied_ids': [(4, group_payment.id)]}
+    )
 
 
 @anthem.log
@@ -56,7 +58,7 @@ def import_wholesaler_users(ctx):
 @anthem.log
 def esb_user_password(ctx):
     """ Change ESB User password """
-    if os.getenv('RUNNING_ENV') in ('dev', ):
+    if os.getenv('RUNNING_ENV') in ('dev',):
         ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
         return
     user = ctx.env.ref('__setup__.res_user_wso2')
@@ -68,7 +70,7 @@ def esb_user_password(ctx):
 
 @anthem.log
 def smile_user_password(ctx):
-    if os.getenv('RUNNING_ENV') in ('dev', ):
+    if os.getenv('RUNNING_ENV') in ('dev',):
         ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
         return
     # password for the test server,
@@ -82,7 +84,7 @@ def smile_user_password(ctx):
 
 @anthem.log
 def limelogic_user_password(ctx):
-    if os.getenv('RUNNING_ENV') in ('dev', ):
+    if os.getenv('RUNNING_ENV') in ('dev',):
         ctx.log_line('RUNNING_ENV=dev => nothing to do here.')
         return
     # password for the test server,

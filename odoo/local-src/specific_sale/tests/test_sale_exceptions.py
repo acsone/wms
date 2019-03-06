@@ -6,7 +6,6 @@ from odoo.tests.common import SavepointCase
 
 
 class TestSaleOrderException(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(TestSaleOrderException, cls).setUpClass()
@@ -14,88 +13,131 @@ class TestSaleOrderException(SavepointCase):
         cls.partner.ref = '888534954'
         cls.prod1 = cls.env.ref('product.product_product_1')
         cls.prod1.categ_id = cls.env.ref(
-            'specific_data.product_categ_materiel')
-        cls.prod_food = cls.env['product.product'].create({
-            'name': 'I am some food, yam',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_ali_divers').id
-        })
-        cls.prod_stup = cls.env['product.product'].create({
-            'name': 'I am a stupefiant',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_stupefiant').id
-        })
-        cls.prod_matos = cls.env['product.product'].create({
-            'name': 'I am some gear',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_mat_instrumentation').id
-        })
-        cls.prod_medoc_pharma = cls.env['product.product'].create({
-            'name': 'I am  a medoc pharmacy',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_parapharmacie').id
-        })
-        cls.prod_medoc_human = cls.env['product.product'].create({
-            'name': 'I am a human medoc',
-            'categ_id': cls.env.ref('specific_data.product_categ_humain').id
-        })
-        cls.prod_medoc_vet_belge = cls.env['product.product'].create({
-            'name': 'I am a beligum veterinarian product',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_vet_belges').id
-        })
-        cls.prod_medoc_belge_only = cls.env['product.product'].create({
-            'name': 'I am a beligum medoc only',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_parapharmacie').id,
-            'belgium_only': True,
-        })
-        cls.prod_vet_only = cls.env['product.product'].create({
-            'name': 'I am for veterinary only',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_ali_divers').id,
-            'veterinary_only': True,
-        })
-        cls.prod_psycho_III = cls.env['product.product'].create({
-            'name': 'I am a medoc belge Psychotropes III',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_psychotropes_25').id,
-        })
-        cls.prod_medoc = cls.env['product.product'].create({
-            'name': 'Base medicine category',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_medoc').id,
-        })
-        cls.prod_cascade_import = cls.env['product.product'].create({
-            'name': 'I am a cascade import product',
-            'categ_id': cls.env.ref(
-                'specific_data.product_categ_importation').id,
-        })
-        cls.prod_provision_on_sale = cls.env['product.product'].create({
-            'name': 'product provision on sale',
-        })
+            'specific_data.product_categ_materiel'
+        )
+        cls.prod_food = cls.env['product.product'].create(
+            {
+                'name': 'I am some food, yam',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_ali_divers'
+                ).id,
+            }
+        )
+        cls.prod_stup = cls.env['product.product'].create(
+            {
+                'name': 'I am a stupefiant',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_stupefiant'
+                ).id,
+            }
+        )
+        cls.prod_matos = cls.env['product.product'].create(
+            {
+                'name': 'I am some gear',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_mat_instrumentation'
+                ).id,
+            }
+        )
+        cls.prod_medoc_pharma = cls.env['product.product'].create(
+            {
+                'name': 'I am  a medoc pharmacy',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_parapharmacie'
+                ).id,
+            }
+        )
+        cls.prod_medoc_human = cls.env['product.product'].create(
+            {
+                'name': 'I am a human medoc',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_humain'
+                ).id,
+            }
+        )
+        cls.prod_medoc_vet_belge = cls.env['product.product'].create(
+            {
+                'name': 'I am a beligum veterinarian product',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_vet_belges'
+                ).id,
+            }
+        )
+        cls.prod_medoc_belge_only = cls.env['product.product'].create(
+            {
+                'name': 'I am a beligum medoc only',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_parapharmacie'
+                ).id,
+                'belgium_only': True,
+            }
+        )
+        cls.prod_vet_only = cls.env['product.product'].create(
+            {
+                'name': 'I am for veterinary only',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_ali_divers'
+                ).id,
+                'veterinary_only': True,
+            }
+        )
+        cls.prod_psycho_III = cls.env['product.product'].create(
+            {
+                'name': 'I am a medoc belge Psychotropes III',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_psychotropes_25'
+                ).id,
+            }
+        )
+        cls.prod_medoc = cls.env['product.product'].create(
+            {
+                'name': 'Base medicine category',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_medoc'
+                ).id,
+            }
+        )
+        cls.prod_cascade_import = cls.env['product.product'].create(
+            {
+                'name': 'I am a cascade import product',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_importation'
+                ).id,
+            }
+        )
+        cls.prod_provision_on_sale = cls.env['product.product'].create(
+            {'name': 'product provision on sale'}
+        )
         cls.prod_provision_on_sale.route_ids = [
             (4, cls.env.ref('stock.route_warehouse0_mto').id, False)
         ]
         cls.delivery = cls.env['delivery.carrier'].search(
-                [('free_if_more_than', '=', False)], limit=1)
-        cls.so1 = cls.env['sale.order'].create({
-            'esb_ref': 'ref_123',
-            'partner_id': cls.partner.id,
-            'date_order': '2018-01-29',
-            'sale_channel': 'fax',
-            'carrier_id': cls.delivery.id,
-            'client_order_ref': 'whatever the client want',
-            'delivery_price': 23.5,
-            'suite_name': '0123434234',
-            'order_line': [
-                (0, 0, {
-                    'sequence': 1,
-                    'name': cls.prod1.name,
-                    'product_id': cls.prod1.id,
-                    'product_uom_qty': 7,
-                })],
-        })
+            [('free_if_more_than', '=', False)], limit=1
+        )
+        cls.so1 = cls.env['sale.order'].create(
+            {
+                'esb_ref': 'ref_123',
+                'partner_id': cls.partner.id,
+                'date_order': '2018-01-29',
+                'sale_channel': 'fax',
+                'carrier_id': cls.delivery.id,
+                'client_order_ref': 'whatever the client want',
+                'delivery_price': 23.5,
+                'suite_name': '0123434234',
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'sequence': 1,
+                            'name': cls.prod1.name,
+                            'product_id': cls.prod1.id,
+                            'product_uom_qty': 7,
+                        },
+                    )
+                ],
+            }
+        )
 
     def test_customer_with_unknown_category(self):
         """Check exceptions for a customer with no Alcyon Category set."""
@@ -130,7 +172,8 @@ class TestSaleOrderException(SavepointCase):
         warns.write({'active': 0})
         # Need the correct category for this one ?
         self.partner.alcyon_category_id = self.env.ref(
-           'specific_partner.partner_category_alcyonaire')
+            'specific_partner.partner_category_alcyonaire'
+        )
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -158,7 +201,8 @@ class TestSaleOrderException(SavepointCase):
         warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
         warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
-           'specific_partner.partner_category_veterinary')
+            'specific_partner.partner_category_veterinary'
+        )
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -187,7 +231,8 @@ class TestSaleOrderException(SavepointCase):
         warns.write({'active': 0})
         "Test customer students"
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_student')
+            'specific_partner.partner_category_student'
+        )
         # Food and gear and medoc pharmacy are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -214,7 +259,8 @@ class TestSaleOrderException(SavepointCase):
         warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
         warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_pharmacy')
+            'specific_partner.partner_category_pharmacy'
+        )
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -238,7 +284,8 @@ class TestSaleOrderException(SavepointCase):
         warns = self.env['exception.rule'].search([('warning_only', '=', 1)])
         warns.write({'active': 0})
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_callcenter')
+            'specific_partner.partner_category_callcenter'
+        )
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -260,7 +307,8 @@ class TestSaleOrderException(SavepointCase):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_customerexport')
+            'specific_partner.partner_category_customerexport'
+        )
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -288,7 +336,8 @@ class TestSaleOrderException(SavepointCase):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_med_export')
+            'specific_partner.partner_category_med_export'
+        )
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -320,7 +369,8 @@ class TestSaleOrderException(SavepointCase):
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
         self.partner.alcyon_category_id = self.env.ref(
-                'specific_partner.partner_category_only_material')
+            'specific_partner.partner_category_only_material'
+        )
         line = self.so1.order_line[0]
         # Gear is allowed
         line.product_id = self.prod_matos
@@ -355,14 +405,16 @@ class TestSaleOrderException(SavepointCase):
         """Check that a warning exception does not block confirmation."""
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
-        self.warning = self.env['exception.rule'].create({
-            'rule_group': 'sale',
-            'model': 'sale.order.line',
-            'name': 'Exception Warning Test',
-            'code': 'failed=True',
-            'active': True,
-            'warning_only': True,
-            })
+        self.warning = self.env['exception.rule'].create(
+            {
+                'rule_group': 'sale',
+                'model': 'sale.order.line',
+                'name': 'Exception Warning Test',
+                'code': 'failed=True',
+                'active': True,
+                'warning_only': True,
+            }
+        )
         self.so1.action_confirm()
         self.assertEqual(self.so1.state, 'sale')
 
@@ -370,14 +422,16 @@ class TestSaleOrderException(SavepointCase):
         """Check that a warning exception does not block confirmation."""
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
-        self.warning = self.env['exception.rule'].create({
-            'rule_group': 'sale',
-            'model': 'sale.order.line',
-            'name': 'Exception Test',
-            'code': 'failed=True',
-            'active': True,
-            'warning_only': False,
-            })
+        self.warning = self.env['exception.rule'].create(
+            {
+                'rule_group': 'sale',
+                'model': 'sale.order.line',
+                'name': 'Exception Test',
+                'code': 'failed=True',
+                'active': True,
+                'warning_only': False,
+            }
+        )
         self.so1.action_confirm()
         self.assertNotEqual(self.so1.state, 'sale')
 
@@ -397,7 +451,8 @@ class TestSaleOrderException(SavepointCase):
         warning = self.env.ref('specific_sale.warning_psychotropic')
         exception = self.env.ref('specific_sale.no_psychotropic_by_phone')
         self.partner.alcyon_category_id = self.env.ref(
-           'specific_partner.partner_category_pharmacy')
+            'specific_partner.partner_category_pharmacy'
+        )
         line = self.so1.order_line[0]
         line.order_id.sale_channel = 'fax'
         line.product_id = self.prod_psycho_III
@@ -420,8 +475,7 @@ class TestSaleOrderException(SavepointCase):
         rules.write({'active': 1})
         # This rule is exist but is not activated in the app
         rule_qty_at_zero = self.env.ref(
-            'specific_sale.no_line_at_zero',
-            raise_if_not_found=False
+            'specific_sale.no_line_at_zero', raise_if_not_found=False
         )
         if rule_qty_at_zero:
             rule_qty_at_zero.active = 0
@@ -483,16 +537,18 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(exception.warning_text in line.warning_text)
         # With some inventory there should be no warning
         stock_location = self.env.ref('stock.stock_location_stock')
-        inventory = self.env['stock.inventory'].create({
-            'name': 'Test',
-            'location_id': stock_location.id,
-        })
+        inventory = self.env['stock.inventory'].create(
+            {'name': 'Test', 'location_id': stock_location.id}
+        )
         inventory.prepare_inventory()
-        self.env['stock.inventory.line'].create({
-            'inventory_id': inventory.id,
-            'product_id': self.prod1.product_variant_id.id,
-            'product_qty': 1000,
-            'location_id': stock_location.id})
+        self.env['stock.inventory.line'].create(
+            {
+                'inventory_id': inventory.id,
+                'product_id': self.prod1.product_variant_id.id,
+                'product_qty': 1000,
+                'location_id': stock_location.id,
+            }
+        )
         inventory.action_done()
         # Cache refreshing needed for the back order calculation to work ?
         self.prod1.refresh()

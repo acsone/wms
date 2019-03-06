@@ -3,9 +3,9 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, _
-from odoo.exceptions import UserError, ValidationError
 import odoo.addons.decimal_precision as dp
+from odoo import _, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 
 class ReceptionPharmacy(models.Model):
@@ -13,13 +13,14 @@ class ReceptionPharmacy(models.Model):
     _rec_name = 'date'
 
     date = fields.Datetime(
-        default=lambda self: fields.Datetime.now(),
-        copy=False)
+        default=lambda self: fields.Datetime.now(), copy=False
+    )
     product_id = fields.Many2one(
         'product.product',
         string='Product',
         default=lambda self: self.env.ref(
-            'specific_stock.product_colis_souverain'),
+            'specific_stock.product_colis_souverain'
+        ),
         required=True,
         readonly=True,
     )
@@ -29,14 +30,12 @@ class ReceptionPharmacy(models.Model):
         string='Lines',
         states={'done': [('readonly', True)]},
     )
-    state = fields.Selection([
-        ('draft', 'New'),
-        ('done', 'Done'),
-        ],
+    state = fields.Selection(
+        [('draft', 'New'), ('done', 'Done')],
         copy=False,
         readonly=True,
         default='draft',
-        )
+    )
 
     def validate(self):
         self.ensure_one()
@@ -61,55 +60,66 @@ class ReceptionPharmacy(models.Model):
             raise UserError(_('Supplier location is missing'))
 
         for line in self.line_ids:
-            lot_id = lot.create({
-                'product_id': self.product_id.id,
-                'name': sequence.next_by_code('stock.lot.pharmacy'),
-                'voice_identifier': 'ABC',
-                'checksum': '123',
-                })
+            lot_id = lot.create(
+                {
+                    'product_id': self.product_id.id,
+                    'name': sequence.next_by_code('stock.lot.pharmacy'),
+                    'voice_identifier': 'ABC',
+                    'checksum': '123',
+                }
+            )
             # Put the lot in stock
-            line.reception_move_id = move.create({
-                'name': 'Pharmacy',
-                'product_id': self.product_id.id,
-                'product_uom': self.product_id.uom_id.id,
-                'restrict_lot_id': lot_id.id,
-                'product_uom_qty': line.product_qty,
-                'location_id': loc_supplier.id,
-                'location_dest_id': line.bin_id.id,
-                })
+            line.reception_move_id = move.create(
+                {
+                    'name': 'Pharmacy',
+                    'product_id': self.product_id.id,
+                    'product_uom': self.product_id.uom_id.id,
+                    'restrict_lot_id': lot_id.id,
+                    'product_uom_qty': line.product_qty,
+                    'location_id': loc_supplier.id,
+                    'location_dest_id': line.bin_id.id,
+                }
+            )
             line.reception_move_id.action_done()
             # Plan a delivery
             # The procurement will create the ship and pick
-            group_id = proc_group.create({
-                'partner_id': line.customer_id.id})
-            line.procurement_id = proc_order.create({
-                'name': 'Pharmacy',
-                'product_id': self.product_id.id,
-                'product_uom': self.product_id.uom_id.id,
-                'restrict_lot_id': lot_id.id,
-                'product_qty': line.product_qty,
-                'warehouse_id': warehouse.id,
-                'location_id': loc_customer.id,
-                'partner_dest_id': line.customer_id.id,
-                'group_id': group_id.id,
-                })
+            group_id = proc_group.create({'partner_id': line.customer_id.id})
+            line.procurement_id = proc_order.create(
+                {
+                    'name': 'Pharmacy',
+                    'product_id': self.product_id.id,
+                    'product_uom': self.product_id.uom_id.id,
+                    'restrict_lot_id': lot_id.id,
+                    'product_qty': line.product_qty,
+                    'warehouse_id': warehouse.id,
+                    'location_id': loc_customer.id,
+                    'partner_dest_id': line.customer_id.id,
+                    'group_id': group_id.id,
+                }
+            )
             line.procurement_id.run()
-            pickings = self.env['stock.move'].search([
-                ('group_id', '=', group_id.id)
-                ]).mapped('picking_id')
+            pickings = (
+                self.env['stock.move']
+                .search([('group_id', '=', group_id.id)])
+                .mapped('picking_id')
+            )
             pickings = pickings.filtered(
-                lambda picking:
-                picking.picking_type_subcode == 'PICK' and
-                picking.state not in ('draft', 'done', 'cancel') and
-                not picking.printed)
+                lambda picking: picking.picking_type_subcode == 'PICK'
+                and picking.state not in ('draft', 'done', 'cancel')
+                and not picking.printed
+            )
             delivery_round = pickings.mapped('delivery_round_id')
             if len(delivery_round) > 1:
-                raise ValidationError(_(
-                    "All pickings at destination of a same shipping must "
-                    "be in the same delivery round"))
+                raise ValidationError(
+                    _(
+                        "All pickings at destination of a same shipping must "
+                        "be in the same delivery round"
+                    )
+                )
             if not delivery_round:
                 delivery_round = self.env['round.instance'].find_bypartner(
-                    pickings[0].partner_id)
+                    pickings[0].partner_id
+                )
             if delivery_round:
                 delivery_round._assign_pickings(pickings)
         self.state = 'done'
@@ -120,9 +130,7 @@ class ReceptionPharmacyLine(models.Model):
     _rec_name = 'wizard_id'
 
     wizard_id = fields.Many2one(
-        'reception.pharmacy',
-        required=True,
-        string='Wizard'
+        'reception.pharmacy', required=True, string='Wizard'
     )
     customer_id = fields.Many2one(
         'res.partner',
@@ -145,12 +153,8 @@ class ReceptionPharmacyLine(models.Model):
         required=True,
     )
     reception_move_id = fields.Many2one(
-        'stock.move',
-        string='Reception Move',
-        readonly=True,
+        'stock.move', string='Reception Move', readonly=True
     )
     procurement_id = fields.Many2one(
-        'procurement.order',
-        string='Delivery Procurement',
-        readonly=True,
+        'procurement.order', string='Delivery Procurement', readonly=True
     )

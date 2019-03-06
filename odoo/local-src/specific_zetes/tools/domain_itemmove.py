@@ -1,47 +1,146 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from domain_interface import DomainInterface, Parameters
 from odoo import _
 
-from domain_interface import DomainInterface, Parameters
 from .. import constants
 
 _logger = logging.getLogger(__name__)
 
 
 class Itemmove(DomainInterface):
-    EXAMPLE_REQU = '200294543,2.2.3,3iV_101,REQU_ITEMMOVE,02,1,20171120,' \
-                   '102754,02430594358406,2,,,,1,123456789,,,,,,,,,,,,,,,,,,,'
-    EXAMPLE_RESP = '200294543,2.2.3,3iV_101,RESP_ITEMMOVE,02,1,20171120,' \
-                   '102839,02430594364298,0,,2,,,,1,0,1,2,,,,,,,,,,,,,,,' \
-                   '000100,000000,,,,1799881,ADERMA EXOMEGA HUILE DOUCHE ' \
-                   '500ml,,,,,,0,179,,,,,,,,,'
-    EXAMPLE_RESU = '200294543,2.2.3,3iV_101,RESU_ItemMove,02,1,20171120,' \
-                   '113111,02430594800116,6,,,,1,4,,000002,000020,01,' \
-                   ',,,,,,,,,0,,,,,,,,,,,,,,,,,,,'
-    REQU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'itemMoveType', 'Cri01', 'Cri02', 'Cri03', 'Cri04', 'Cri05',
-            'Cri06', 'Cri07', 'Cri08', 'Cri09', 'Cri10', 'Usf01', 'Usf02',
-            'Usf03', 'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09',
-            'Usf10')
-    RESP = ('respCode', 'respMsg', 'groupNum', 'groupSubNum', 'headerNum',
-            'headerSubNum', 'itemMoveSeqNum', 'moveLineId', 'itemMoveType',
-            'sourceLC1', 'sourceLC2', 'sourceLC3', 'sourceLC4', 'sourceLC5',
-            'sourceLCCD', 'sourceLCBarcode', 'destLC1', 'destLC2', 'destLC3',
-            'destLC4', 'destLC5', 'destLCCD', 'destLCBarcode', 'lineIndicator',
-            'reqQty', 'effQty', 'moveStatus', 'promptInfo', 'unitOfMeasure',
-            'productCode', 'productDescription', 'productGroupCode',
-            'productProperty1', 'productProperty2', 'productProperty3',
-            'productBarcode', 'scanProductBarcode', 'Usf01', 'Usf02', 'Usf03',
-            'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESU = ('groupNum', 'groupSubNum', 'headerNum', 'headerSubNum',
-            'itemMoveSeqNum', 'moveLineId', 'lineIndicator', 'itemMoveType',
-            'quantity', 'moveStatus', 'unitOfMeasure', 'lotNumber',
-            'sourceLC1', 'sourceLC2', 'sourceLC3', 'sourceLC4', 'sourceLC5',
-            'sourceLCCD', 'sourceLCBarcode', 'destLCPresentFlag', 'destLC1',
-            'destLC2', 'destLC3', 'destLC4', 'destLC5', 'destLCCD',
-            'destLCBarcode', 'productBarcode', 'Usf01', 'Usf02', 'Usf03',
-            'Usf04', 'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    EXAMPLE_REQU = (
+        '200294543,2.2.3,3iV_101,REQU_ITEMMOVE,02,1,20171120,'
+        '102754,02430594358406,2,,,,1,123456789,,,,,,,,,,,,,,,,,,,'
+    )
+    EXAMPLE_RESP = (
+        '200294543,2.2.3,3iV_101,RESP_ITEMMOVE,02,1,20171120,'
+        '102839,02430594364298,0,,2,,,,1,0,1,2,,,,,,,,,,,,,,,'
+        '000100,000000,,,,1799881,ADERMA EXOMEGA HUILE DOUCHE '
+        '500ml,,,,,,0,179,,,,,,,,,'
+    )
+    EXAMPLE_RESU = (
+        '200294543,2.2.3,3iV_101,RESU_ItemMove,02,1,20171120,'
+        '113111,02430594800116,6,,,,1,4,,000002,000020,01,'
+        ',,,,,,,,,0,,,,,,,,,,,,,,,,,,,'
+    )
+    REQU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemMoveType',
+        'Cri01',
+        'Cri02',
+        'Cri03',
+        'Cri04',
+        'Cri05',
+        'Cri06',
+        'Cri07',
+        'Cri08',
+        'Cri09',
+        'Cri10',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESP = (
+        'respCode',
+        'respMsg',
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemMoveSeqNum',
+        'moveLineId',
+        'itemMoveType',
+        'sourceLC1',
+        'sourceLC2',
+        'sourceLC3',
+        'sourceLC4',
+        'sourceLC5',
+        'sourceLCCD',
+        'sourceLCBarcode',
+        'destLC1',
+        'destLC2',
+        'destLC3',
+        'destLC4',
+        'destLC5',
+        'destLCCD',
+        'destLCBarcode',
+        'lineIndicator',
+        'reqQty',
+        'effQty',
+        'moveStatus',
+        'promptInfo',
+        'unitOfMeasure',
+        'productCode',
+        'productDescription',
+        'productGroupCode',
+        'productProperty1',
+        'productProperty2',
+        'productProperty3',
+        'productBarcode',
+        'scanProductBarcode',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESU = (
+        'groupNum',
+        'groupSubNum',
+        'headerNum',
+        'headerSubNum',
+        'itemMoveSeqNum',
+        'moveLineId',
+        'lineIndicator',
+        'itemMoveType',
+        'quantity',
+        'moveStatus',
+        'unitOfMeasure',
+        'lotNumber',
+        'sourceLC1',
+        'sourceLC2',
+        'sourceLC3',
+        'sourceLC4',
+        'sourceLC5',
+        'sourceLCCD',
+        'sourceLCBarcode',
+        'destLCPresentFlag',
+        'destLC1',
+        'destLC2',
+        'destLC3',
+        'destLC4',
+        'destLC5',
+        'destLCCD',
+        'destLCBarcode',
+        'productBarcode',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
 
     def requ(self, params):
         """
@@ -63,19 +162,24 @@ class Itemmove(DomainInterface):
         # If there is no Picking ID we cannot assign a pack operation
         if not params.groupNum:
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found')
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('No picking found'),
+                }
+            )
             return result.format()
 
         picking_id = params.groupNum
         if not picking_id:
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('No picking found with the ID %s') % picking_id
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('No picking found with the ID %s')
+                    % picking_id,
+                }
+            )
             return result.format()
         picking_id = int(picking_id)
 
@@ -88,19 +192,19 @@ class Itemmove(DomainInterface):
             lines = []
 
         if not lines:
-            error_message = _('There is no lines for the picking %s') \
-                            % picking_id
-
-            params.log(
-                picking_id=picking_id,
-                exception=error_message
+            error_message = (
+                _('There is no lines for the picking %s') % picking_id
             )
 
+            params.log(picking_id=picking_id, exception=error_message)
+
             result = Parameters(self, action='resp')
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': error_message
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': error_message,
+                }
+            )
             return result.format()
 
         sequence = 1
@@ -123,7 +227,7 @@ class Itemmove(DomainInterface):
                 # by lot. In some case we need to know on which lot we are
                 # working.
                 if lot:
-                    line_id = "%s_%s" % (line.id, lot.id)
+                    line_id = "{}_{}".format(line.id, lot.id)
                 else:
                     line_id = line.id
 
@@ -133,31 +237,37 @@ class Itemmove(DomainInterface):
                 shelf_source = '0%s' % shelf_source
 
             if params.itemMoveType == constants.MOVE_TYPE_LOAD:
-                sourceLC1 = '%s%s%s%s' % (location.corridor, shelf_source,
-                                          location.height, location.box)
+                sourceLC1 = '{}{}{}{}'.format(
+                    location.corridor,
+                    shelf_source,
+                    location.height,
+                    location.box,
+                )
             else:
                 sourceLC1 = location.zone
 
-            line_values.update({
-                'moveStatus': constants.MOVE_DEFAULT,
-                'respCode': constants.RESPONSE_CODE_OK,
-                'groupNum': picking_id,
-                'moveLineId': line_id,
-                'itemMoveSeqNum': sequence,
-                'itemMoveType': move_type,
-                'reqQty': format(int(qty), '0%d' % 6),
-                'effQty': format(int(line.qty_done), '0%d' % 6),
-                'productCode': product.default_code,
-                'productDescription': product.name,
-                'productBarcode': product.barcode,
-                'scanProductBarcode': 0,  # Constant value
-                'sourceLC1': sourceLC1,
-                'sourceLC2': location.corridor,
-                'sourceLC3': shelf_source,
-                'sourceLC4': location.height,
-                'sourceLC5': location.box,
-                'sourceLCCD': location.get_checksum(),
-            })
+            line_values.update(
+                {
+                    'moveStatus': constants.MOVE_DEFAULT,
+                    'respCode': constants.RESPONSE_CODE_OK,
+                    'groupNum': picking_id,
+                    'moveLineId': line_id,
+                    'itemMoveSeqNum': sequence,
+                    'itemMoveType': move_type,
+                    'reqQty': format(int(qty), '0%d' % 6),
+                    'effQty': format(int(line.qty_done), '0%d' % 6),
+                    'productCode': product.default_code,
+                    'productDescription': product.name,
+                    'productBarcode': product.barcode,
+                    'scanProductBarcode': 0,  # Constant value
+                    'sourceLC1': sourceLC1,
+                    'sourceLC2': location.corridor,
+                    'sourceLC3': shelf_source,
+                    'sourceLC4': location.height,
+                    'sourceLC5': location.box,
+                    'sourceLCCD': location.get_checksum(),
+                }
+            )
 
             # TODO Please remove me later (when dynamic locations will removed)
             shelf_dest = location_dest_id.shelf
@@ -167,22 +277,26 @@ class Itemmove(DomainInterface):
             # If it is a reserved quantity the location destination
             # is the same than the current location
             if move_type == constants.MOVE_TYPE_LOAD:
-                line_values.update({
-                    'destLC1': location_dest_id.zone,
-                    'destLC2': location_dest_id.corridor,
-                    'destLC3': shelf_dest,
-                    'destLC4': location_dest_id.height,
-                    'destLC5': location_dest_id.box,
-                    'destLCCD': location_dest_id.get_checksum(),
-                })
+                line_values.update(
+                    {
+                        'destLC1': location_dest_id.zone,
+                        'destLC2': location_dest_id.corridor,
+                        'destLC3': shelf_dest,
+                        'destLC4': location_dest_id.height,
+                        'destLC5': location_dest_id.box,
+                        'destLCCD': location_dest_id.get_checksum(),
+                    }
+                )
 
             if line.zetes_state == constants.MOVE_FULL:
-                line_values.update({
-                    'destLC3': None,
-                    'destLC4': None,
-                    'destLC5': None,
-                    'destLCCD': None,
-                })
+                line_values.update(
+                    {
+                        'destLC3': None,
+                        'destLC4': None,
+                        'destLC5': None,
+                        'destLCCD': None,
+                    }
+                )
 
             if lot:
                 line_values.Usf01 = lot.checksum
@@ -223,17 +337,18 @@ class Itemmove(DomainInterface):
 
         pack_operation_id = int(line_id.split('_')[0])
 
-        pack_op = self.request.env['stock.pack.operation']\
-            .sudo(self._user).browse(pack_operation_id)
+        pack_op = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
+            .browse(pack_operation_id)
+        )
         if not len(pack_op):
             return
 
         try:
             status = params.moveStatus
             if status:
-                pack_op.sudo(self._user).write({
-                    'zetes_state': status
-                })
+                pack_op.sudo(self._user).write({'zetes_state': status})
 
                 # For a picking from the reserve (itemMoveType = MOVE_TYPE_PUT)
                 # Zetes doesn't send a RESU_ASSIGNMENT with the status
@@ -245,9 +360,11 @@ class Itemmove(DomainInterface):
         except Exception as e:
             self.rollback_to_savepoint()
             _logger.error(str(e))
-            params.log(picking_id=pack_op.picking_id.id,
-                       operation_id=pack_operation_id,
-                       exception=e)
+            params.log(
+                picking_id=pack_op.picking_id.id,
+                operation_id=pack_operation_id,
+                exception=e,
+            )
 
     def get_load_lines(self, params, picking_id):
         """
@@ -266,17 +383,28 @@ class Itemmove(DomainInterface):
         # Search all pack operations for this picking
         # The state of the line must be
         # "MOVE_DEFAULT", "MOVE_SKIPPED" or "MOVE_FULL"
-        lines = self.request.env['stock.pack.operation'].sudo(self._user) \
-            .search([('picking_id', '=', picking_id),
-                     ('location_id.is_valid_location', '=', True),
-                     ('zetes_state', 'in', [constants.OP_DEFAULT,
-                                            constants.OP_SKIPPED])],
-                    order=order_by)
+        lines = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
+            .search(
+                [
+                    ('picking_id', '=', picking_id),
+                    ('location_id.is_valid_location', '=', True),
+                    (
+                        'zetes_state',
+                        'in',
+                        [constants.OP_DEFAULT, constants.OP_SKIPPED],
+                    ),
+                ],
+                order=order_by,
+            )
+        )
         # Filter lines
         # We want only operation with a quantity to to done different
         # than the quantity done.
-        lines = lines \
-            .filtered(lambda line: int(line.qty_done) < int(line.product_qty))
+        lines = lines.filtered(
+            lambda line: int(line.qty_done) < int(line.product_qty)
+        )
 
         # FIXME - Check remaining qty after rangement is enough for
         # filling the reservation
@@ -296,18 +424,20 @@ class Itemmove(DomainInterface):
         put_away_lines = []
         for line in lines:
             self.request.env.cr.execute(
-                reserved_quants_query, (line.location_id.id,
-                                        line.product_id.id,
-                                        picking_id))
+                reserved_quants_query,
+                (line.location_id.id, line.product_id.id, picking_id),
+            )
             query_result = self.request.env.cr.fetchall()
             for quant in query_result:
                 lot = production_lot_obj.sudo(self._user).browse(quant[0])
                 reserved_lines.append(
-                    (line, lot, quant[1], constants.MOVE_UNLOAD))
+                    (line, lot, quant[1], constants.MOVE_UNLOAD)
+                )
 
             if not line.pack_lot_ids:
                 put_away_lines.append(
-                    (line, None, line.product_qty, constants.MOVE_LOAD))
+                    (line, None, line.product_qty, constants.MOVE_LOAD)
+                )
             else:
                 pack_lots = line.pack_lot_ids.filtered(
                     lambda lot: lot.qty < lot.qty_todo
@@ -315,8 +445,12 @@ class Itemmove(DomainInterface):
                 for pack_lot in pack_lots:
                     if pack_lot.qty_todo:
                         put_away_lines.append(
-                            (line, pack_lot.lot_id,
-                             pack_lot.qty_todo, constants.MOVE_LOAD)
+                            (
+                                line,
+                                pack_lot.lot_id,
+                                pack_lot.qty_todo,
+                                constants.MOVE_LOAD,
+                            )
                         )
 
         return reserved_lines + put_away_lines
@@ -331,16 +465,25 @@ class Itemmove(DomainInterface):
         # Search ONLY ONE pack operations for this picking
         # The state of this line must be
         # "MOVE_DEFAULT" or "MOVE_SKIPPED"
-        lines = self.request.env['stock.pack.operation'].sudo(self._user) \
-            .search([('picking_id', '=', picking_id),
-                     ('zetes_state', 'in', [constants.MOVE_DEFAULT,
-                                            constants.MOVE_SKIPPED])])
+        lines = (
+            self.request.env['stock.pack.operation']
+            .sudo(self._user)
+            .search(
+                [
+                    ('picking_id', '=', picking_id),
+                    (
+                        'zetes_state',
+                        'in',
+                        [constants.MOVE_DEFAULT, constants.MOVE_SKIPPED],
+                    ),
+                ]
+            )
+        )
 
         # Filter line
         # We want only operation with a quantity to to done different
         # than the quantity done.
-        lines = lines.filtered(
-            lambda x: int(x.qty_done) != int(x.product_qty))
+        lines = lines.filtered(lambda x: int(x.qty_done) != int(x.product_qty))
 
         if not lines:
             return []
@@ -350,11 +493,14 @@ class Itemmove(DomainInterface):
         if not line.pack_lot_ids:
             return [[line, None, line.product_qty, None]]
 
-        pack_lots = \
-            line.pack_lot_ids.filtered(lambda lot: lot.qty < lot.qty_todo)
+        pack_lots = line.pack_lot_ids.filtered(
+            lambda lot: lot.qty < lot.qty_todo
+        )
         if not pack_lots:
-            _logger.error('Error with the line %s (picking %s):\n'
-                          'No valid lots' % (line.id, picking_id))
+            _logger.error(
+                'Error with the line %s (picking %s):\n'
+                'No valid lots' % (line.id, picking_id)
+            )
             return []
         pack_lot = pack_lots[0]
 

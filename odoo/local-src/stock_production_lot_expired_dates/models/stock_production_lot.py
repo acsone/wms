@@ -4,7 +4,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class StockProductionLot(models.Model):
@@ -23,7 +23,7 @@ class StockProductionLot(models.Model):
     def _apply_onchange_interval_date(self, from_field):
         self.ensure_one()
         base_date = self.env['ir.config_parameter'].get_param(
-            'stock_production_lot_expired_dates.production_lot_base_date',
+            'stock_production_lot_expired_dates.production_lot_base_date'
         )
         if self.product_id and base_date == from_field:
             if getattr(self, from_field + '_date'):
@@ -40,7 +40,7 @@ class StockProductionLot(models.Model):
                         days = from_time - times[to_fields[index] + '_time']
                         values[
                             to_fields[index] + '_date'
-                        ] = (from_date - relativedelta(days=days))
+                        ] = from_date - relativedelta(days=days)
                 if values:
                     self.update(values)
 

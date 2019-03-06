@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import fields, models, _
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -27,13 +27,13 @@ class OpenUOP(models.TransientModel):
             raise UserError(_('This UOP does\'t exist'))
 
         return {
-                'name': 'UOP',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'stock.picking',
-                'view_id': self.env.ref('stock.view_picking_form').id,
-                'type': 'ir.actions.act_window',
-                'res_id': self.uop,
-                'context': self._context,
-                'target': 'current'
-            }
+            'name': 'UOP',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'stock.picking',
+            'view_id': self.env.ref('stock.view_picking_form').id,
+            'type': 'ir.actions.act_window',
+            'res_id': self.uop,
+            'context': self._context,
+            'target': 'current',
+        }

@@ -2,7 +2,7 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.osv.expression import get_unaccent_wrapper
 
@@ -11,8 +11,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     alcyon_category_id = fields.Many2one(
-        'partner.alcyon_category',
-        string='Alcyon category',
+        'partner.alcyon_category', string='Alcyon category'
     )
 
     vet_depot_number = fields.Char(string='Depot number')
@@ -21,18 +20,12 @@ class ResPartner(models.Model):
     is_veterinary = fields.Boolean(
         compute='_compute_is_veterinary_or_students'
     )
-    is_students = fields.Boolean(
-        compute='_compute_is_veterinary_or_students'
-    )
+    is_students = fields.Boolean(compute='_compute_is_veterinary_or_students')
 
-    legal_entity_id = fields.Many2one(
-        'legal.entity',
-        string='Legal entity'
-    )
+    legal_entity_id = fields.Many2one('legal.entity', string='Legal entity')
 
     pharmacist_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Associated pharmacist',
+        comodel_name='res.partner', string='Associated pharmacist'
     )
     pharmacist_of_ids = fields.One2many(
         comodel_name='res.partner',
@@ -41,36 +34,25 @@ class ResPartner(models.Model):
     )
 
     master_partner_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Customer master'
+        comodel_name='res.partner', string='Customer master'
     )
 
     # temporary field to get the data and make it
     # possible to create contacts by hand in Odoo
-    suite = fields.Char(
-        "Suite Name",
-    )
-    call_name = fields.Char(
-        string='Nickname'
-    )
+    suite = fields.Char("Suite Name")
+    call_name = fields.Char(string='Nickname')
 
-    apb_authorization = fields.Char(
-        string='Authorization/APB'
-    )
+    apb_authorization = fields.Char(string='Authorization/APB')
 
     @api.depends('alcyon_category_id')
     def _compute_is_veterinary_or_students(self):
         veterinary = self.env.ref(
-            'specific_partner.partner_category_veterinary')
-        students = self.env.ref(
-            'specific_partner.partner_category_student')
+            'specific_partner.partner_category_veterinary'
+        )
+        students = self.env.ref('specific_partner.partner_category_student')
         for partner in self:
-            partner.is_veterinary = (
-                partner.alcyon_category_id == veterinary
-            )
-            partner.is_students = (
-                    partner.alcyon_category_id == students
-            )
+            partner.is_veterinary = partner.alcyon_category_id == veterinary
+            partner.is_students = partner.alcyon_category_id == students
 
     @api.model
     def _commercial_fields(self):
@@ -96,10 +78,9 @@ class ResPartner(models.Model):
 
     type_delivery = fields.Boolean(
         'Is Also Delivery',
-        help="Allow to mark an invoice address as also a delivery address")
-    type_name = fields.Char(
-        'Address Type Name',
-        compute='_compute_type_name')
+        help="Allow to mark an invoice address as also a delivery address",
+    )
+    type_name = fields.Char('Address Type Name', compute='_compute_type_name')
 
     @api.multi
     def _compute_type_name(self):
@@ -109,7 +90,8 @@ class ResPartner(models.Model):
                 name = _('Invoice and delivery')
             elif partner.type:
                 name = dict(self.fields_get(['type'])['type']['selection'])[
-                    partner.type]
+                    partner.type
+                ]
             partner.type_name = name
 
     @api.multi
@@ -145,9 +127,12 @@ class ResPartner(models.Model):
                         if len(result) == len(adr_pref):
                             return result
                     # jbaudoux: end of change
-                    to_scan = [c for c in record.child_ids
-                               if c not in visited
-                               if not c.is_company] + to_scan
+                    to_scan = [
+                        c
+                        for c in record.child_ids
+                        if c not in visited
+                        if not c.is_company
+                    ] + to_scan
 
                 # Continue scanning at ancestor if current_partner is not a
                 # commercial entity
@@ -172,12 +157,12 @@ class ResPartner(models.Model):
             self.check_access_rights('read')
             where_query = self._where_calc(args)
             self._apply_ir_rules(where_query, 'read')
-            from_clause, where_clause, where_clause_params = \
+            from_clause, where_clause, where_clause_params = (
                 where_query.get_sql()
+            )
             where_str = (
-                where_clause and
-                (" WHERE %s AND " % where_clause) or
-                ' WHERE ')
+                where_clause and (" WHERE %s AND " % where_clause) or ' WHERE '
+            )
 
             # search on the name of the contacts and of its company
             search_name = name
@@ -197,13 +182,17 @@ class ResPartner(models.Model):
                      ORDER BY ref = {percent} desc,
                               {display_name} {operator} {percent} desc,
                               {display_name}
-                    """.format(where=where_str,
-                               operator=operator,
-                               email=unaccent('email'),
-                               display_name=unaccent('display_name'),
-                               percent=unaccent('%s'))
+                    """.format(
+                where=where_str,
+                operator=operator,
+                email=unaccent('email'),
+                display_name=unaccent('display_name'),
+                percent=unaccent('%s'),
+            )
 
-            where_clause_params += [search_name]*2 + [name]*2 + [search_name]
+            where_clause_params += (
+                [search_name] * 2 + [name] * 2 + [search_name]
+            )
             if limit:
                 query += ' limit %s'
                 where_clause_params.append(limit)
@@ -215,7 +204,8 @@ class ResPartner(models.Model):
             else:
                 return []
         return super(ResPartner, self).name_search(
-            name, args, operator=operator, limit=limit)
+            name, args, operator=operator, limit=limit
+        )
 
     @api.multi
     def name_get(self):
@@ -223,8 +213,9 @@ class ResPartner(models.Model):
             return super(ResPartner, self).name_get()
         html_format = self.env.context.get('html_format')
         to_html = html_format or self.env.context.get('to_html')
-        nameget = dict(super(ResPartner, self.with_context(html_format=False))
-                       .name_get())
+        nameget = dict(
+            super(ResPartner, self.with_context(html_format=False)).name_get()
+        )
         res = []
         for partner in self:
             full = []
@@ -234,20 +225,20 @@ class ResPartner(models.Model):
                 name = p.name
                 if name and p.title:
                     title = p.title.shortcut or p.title.name
-                    name = "%s %s" % (title, name)
+                    name = "{} {}".format(title, name)
                     full.append(name)
                 elif name and p.is_company and p.legal_entity_id:
                     title = p.legal_entity_id.name
-                    name = "%s %s" % (title, name)
+                    name = "{} {}".format(title, name)
                     full.append(name)
 
             name = partner.name or ''
             if name and partner.title:
                 title = partner.title.shortcut or partner.title.name
-                name = "%s %s" % (title, name)
+                name = "{} {}".format(title, name)
             elif name and partner.is_company and partner.legal_entity_id:
                 title = partner.legal_entity_id.name
-                name = "%s %s" % (title, name)
+                name = "{} {}".format(title, name)
             full.append(name)
 
             if partner.suite:
@@ -259,7 +250,7 @@ class ResPartner(models.Model):
                 fullname = ', '.join(full)
 
             if self.env.context.get('show_email') and partner.email:
-                fullname = "%s <%s>" % (fullname, partner.email)
+                fullname = "{} <{}>".format(fullname, partner.email)
 
             address = nameget[partner.id].split('\n', 1)
             if len(address) > 1:
@@ -284,17 +275,27 @@ class ResPartner(models.Model):
             return
         if self.type not in ['invoice', 'delivery']:
             return
-        if (self.name and self.street and self.city and
-                self.zip and self.country_id.esb_ref):
+        if (
+            self.name
+            and self.street
+            and self.city
+            and self.zip
+            and self.country_id.esb_ref
+        ):
             return
-        raise ValidationError(_('For an invoicing or delivery address the '
-                                'following fields (name, street, city, zip, '
-                                'country) are required. And the country '
-                                'must have a reference ESB.'))
+        raise ValidationError(
+            _(
+                'For an invoicing or delivery address the '
+                'following fields (name, street, city, zip, '
+                'country) are required. And the country '
+                'must have a reference ESB.'
+            )
+        )
 
     _sql_constraints = [
-            ('ref_digit_only',
-             "CHECK (ref SIMILAR TO '[[:digit:]]*')",
-             _('The reference must be numeric or empty')
-             )
+        (
+            'ref_digit_only',
+            "CHECK (ref SIMILAR TO '[[:digit:]]*')",
+            _('The reference must be numeric or empty'),
+        )
     ]

@@ -27,8 +27,10 @@ class StockPicking(models.Model):
     _order = "priority desc, rank desc, date asc, id desc"
 
     rank = fields.Integer(
-        'Rank', default=-1,
-        states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
+        'Rank',
+        default=-1,
+        states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
+    )
 
     @api.multi
     def button_priority_recompute(self):

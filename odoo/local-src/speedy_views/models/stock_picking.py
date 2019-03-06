@@ -4,6 +4,7 @@
 
 
 from odoo import api, fields, models
+
 from .utils import create_index
 
 
@@ -18,5 +19,9 @@ class StockPicking(models.Model):
 
         # index for the default _order of stock.picking
         index_name = 'stock_picking_order_list_sort_desc_index'
-        create_index(self.env.cr, index_name, self._table,
-                     '(priority desc, date, id desc)')
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            '(priority desc, date, id desc)',
+        )

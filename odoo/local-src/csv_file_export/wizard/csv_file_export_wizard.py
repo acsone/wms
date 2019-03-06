@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -11,8 +11,9 @@ class CSVFileExportWizard(models.TransientModel):
     export_ids = fields.Many2many('csv.file.export', string='Exports')
 
     def default_get(self, fields_list={}):
-        result = super(CSVFileExportWizard, self)\
-            .default_get(fields_list=fields_list)
+        result = super(CSVFileExportWizard, self).default_get(
+            fields_list=fields_list
+        )
 
         result['export_ids'] = [(6, 0, self.env.context.get('active_ids', []))]
 

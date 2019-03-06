@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
-from pkg_resources import resource_stream
-
 import anthem
-from anthem.lyrics.records import create_or_update
 from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.records import create_or_update
+from pkg_resources import resource_stream
 
 from ..common import req
 
@@ -14,10 +13,9 @@ from ..common import req
 def settings(ctx):
     """ Configure the Purchases Settings.
     """
-    ctx.env['purchase.config.settings'].create({
-        'group_manage_vendor_price': 1,
-        'turnover_delay': 12,
-    }).execute()
+    ctx.env['purchase.config.settings'].create(
+        {'group_manage_vendor_price': 1, 'turnover_delay': 12}
+    ).execute()
 
 
 @anthem.log
@@ -46,10 +44,7 @@ def set_abc_rate(ctx):
         ('__setup__.abc_rate_100', 'C', 100),
     ]
     for xmlid, code, rate in rates:
-        create_or_update(ctx, 'code.abc', xmlid, {
-            'code': code,
-            'rate': rate,
-        })
+        create_or_update(ctx, 'code.abc', xmlid, {'code': code, 'rate': rate})
 
 
 @anthem.log()

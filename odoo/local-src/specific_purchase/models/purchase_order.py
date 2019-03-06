@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import date, timedelta
 import logging
+from datetime import date, timedelta
 
-from odoo import fields, models, api
 import odoo.addons.decimal_precision as dp
-
+from odoo import api, fields, models
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -15,22 +14,24 @@ _logger = logging.getLogger(__name__)
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    total_weight = fields.Float('Total weight',
-                                compute='_compute_total_weight',
-                                readonly=True,
-                                help='Total weight in Kg')
-    responsible_id = fields.Many2one('res.users',
-                                     string='Responsible',
-                                     track_visibility='onchange')
-    nbr_lines = fields.Integer('Nbr lines',
-                               compute='_compute_nbr_lines',
-                               readonly=True
-                               )
-    nbr_lines_bo = fields.Integer('Nbr lines BO',
-                                  compute='_compute_nbr_lines_bo',
-                                  search="_search_nbr_lines_bo",
-                                  readonly=True
-                                  )
+    total_weight = fields.Float(
+        'Total weight',
+        compute='_compute_total_weight',
+        readonly=True,
+        help='Total weight in Kg',
+    )
+    responsible_id = fields.Many2one(
+        'res.users', string='Responsible', track_visibility='onchange'
+    )
+    nbr_lines = fields.Integer(
+        'Nbr lines', compute='_compute_nbr_lines', readonly=True
+    )
+    nbr_lines_bo = fields.Integer(
+        'Nbr lines BO',
+        compute='_compute_nbr_lines_bo',
+        search="_search_nbr_lines_bo",
+        readonly=True,
+    )
 
     @api.multi
     def _compute_nbr_lines(self):
@@ -50,8 +51,11 @@ class PurchaseOrder(models.Model):
         for po in self:
             # NOTE: computing 'immediately_usable_qty' field is very slow,
             # especially when the field is displayed on PO tree view
-            po.nbr_lines_bo = len(po.order_line.filtered(
-                lambda line: line.product_id.immediately_usable_qty < 0))
+            po.nbr_lines_bo = len(
+                po.order_line.filtered(
+                    lambda line: line.product_id.immediately_usable_qty < 0
+                )
+            )
 
     def _search_nbr_lines_bo(self, operator, value):
         orders = self.browse()
@@ -123,8 +127,8 @@ class PurchaseOrder(models.Model):
         open_pos = self.search([('state', '=', 'draft')])
         for open_po in open_pos:
             open_po.with_delay(
-                description='Update values for %s' % open_po.name)\
-                .job_update_open_po()
+                description='Update values for %s' % open_po.name
+            ).job_update_open_po()
 
     @api.multi
     @job(default_channel='root.update_po')
@@ -134,27 +138,26 @@ class PurchaseOrder(models.Model):
         promotion, global promotion and scheduled date
         """
         _logger.info(
-            'Update values for %s' % ', '.join([x.name for x in self]))
+            'Update values for %s' % ', '.join([x.name for x in self])
+        )
         self.mapped('order_line').recompute_discount_values()
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    price_unit_base = fields.Float('Unit Price',
-                                   required=True,
-                                   digits=dp.get_precision('Product Price'))
+    price_unit_base = fields.Float(
+        'Unit Price', required=True, digits=dp.get_precision('Product Price')
+    )
     price_unit = fields.Float(string='Unit Price (discounted)')
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
-    promotion_supplier = fields.Float(
-        default=0.0
-    )
+    promotion_supplier = fields.Float(default=0.0)
     product_ref = fields.Char('Product ref', related='product_id.default_code')
-    is_bo_line = fields.Boolean('BO Line',
-                                compute='_compute_is_bo_line',
-                                readonly=True)
+    is_bo_line = fields.Boolean(
+        'BO Line', compute='_compute_is_bo_line', readonly=True
+    )
 
     @api.multi
     def _compute_is_bo_line(self):
@@ -211,17 +214,17 @@ class PurchaseOrderLine(models.Model):
         # the price unit changed but not the price unit base.
         # And so, the price unit base if recomputed here (What we don't want).
         write_from_view = (
-            context.get('params') and
-            isinstance(context['params'], dict) and
-            context['params'].get('view_type') and
-            context['params']['view_type'] == u'form'
+            context.get('params')
+            and isinstance(context['params'], dict)
+            and context['params'].get('view_type')
+            and context['params']['view_type'] == u'form'
         )
 
         condition = (
-            'price_unit' in vals and
-            'price_unit_base' not in vals and
-            not write_from_view and
-            not self.env.context.get('stop_constrains')
+            'price_unit' in vals
+            and 'price_unit_base' not in vals
+            and not write_from_view
+            and not self.env.context.get('stop_constrains')
         )
         if condition:
             vals['price_unit_base'] = vals['price_unit']
@@ -243,9 +246,11 @@ class PurchaseOrderLine(models.Model):
         or the price_unit (see above the method write).
         """
         for line in self:
-            price_unit = line.price_unit_base * \
-                         (1 - (line.discount_global / 100)) * \
-                         (1 - (line.promotion_supplier / 100))
+            price_unit = (
+                line.price_unit_base
+                * (1 - (line.discount_global / 100))
+                * (1 - (line.promotion_supplier / 100))
+            )
 
             # The method with_context will create a new environment.
             # When an onchange method change a value on a draft record
@@ -277,7 +282,8 @@ class PurchaseOrderLine(models.Model):
             seller = self.product_id._select_seller(
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
-                uom_id=self.product_uom)
+                uom_id=self.product_uom,
+            )
             self.promotion_supplier = seller.discount_purchase or 0.0
         else:
             self.promotion_supplier = 0.0
@@ -302,19 +308,22 @@ class PurchaseOrderLine(models.Model):
             date_order = line.order_id.date_order
 
             if line.product_id:
-                order_date_str = line.order_id.date_order \
-                                 and line.order_id.date_order[:10]
+                order_date_str = (
+                    line.order_id.date_order and line.order_id.date_order[:10]
+                )
                 seller = line.product_id._select_seller(
                     partner_id=line.partner_id,
                     quantity=line.product_qty,
                     date=order_date_str,
-                    uom_id=line.product_uom)
+                    uom_id=line.product_uom,
+                )
                 date_planned = line.get_next_scheduled_date(seller, date_order)
                 line.date_planned = date_planned
 
             if not line.discount_global:
-                line.discount_global = \
+                line.discount_global = (
                     line.order_id.partner_id.supplier_discount
+                )
 
             line.compute_promotion_supplier()
 

@@ -12,7 +12,8 @@ class StockQuant(models.Model):
         'res.partner',
         string='Vendor',
         readonly=True,
-        related='product_id.supplier_id')
+        related='product_id.supplier_id',
+    )
 
     def _quants_removal_get_order(self, removal_strategy):
         """ Fixing issue https://github.com/odoo/odoo/issues/31186 """
@@ -21,4 +22,5 @@ class StockQuant(models.Model):
         elif removal_strategy == 'fifo':
             return 'in_date, id desc'
         return super(StockQuant, self)._quants_removal_get_order(
-            removal_strategy)
+            removal_strategy
+        )
