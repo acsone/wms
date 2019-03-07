@@ -20,29 +20,36 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.32.0 (2019-03-07)
+++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1810: Allow optional printing 'Entry register' part in delivery slip
-
-* ALCYN-1953: install account_mass_reconcile module
-* ALCYN-1921: allow Accountant group read stock.inventory
-* ALCYN-1958: track change on chatter for field : is_sale_back_order_accepted is_sale_back_order_cancel
-
+* ALCYN-1953: Install account_mass_reconcile module
+* ALCYN-1921: Allow users of the Accountant group to read Stock Inventory
+* ALCYN-1958: Track change on chatter for field: is_sale_back_order_accepted, is_sale_back_order_cancel
 * ALCYN-1963: Allow to access picking subcode (PICK, LOSS, ...) on stock move. Convenient for reporting
 
 **Bugfixes**
+
 * Fix label printing of non-ascii characters
-* Update hidden dependency between addons
+* Correct hidden dependency between addons
 * ALCYN-1961: Some lots created at reception are not linked to the right product
 * BIZ-3075: update tags instead of add new one in intrastat report
-
 * Fix some startup warnings:
 
   - onchange on dotted path field is not supported
   - add missing ACL on Report Stock Overview
   - clean "ir.model" which exists in DB but have been removed from code
-
-**Build**
-
-**Documentation**
 
 
 10.31.1 (2019-03-05)
