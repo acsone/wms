@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1921: allow Accountant group read stock.inventory
 * ALCYN-1958: track change on chatter for field : is_sale_back_order_accepted is_sale_back_order_cancel
 
+* ALCYN-1963: Allow to access picking subcode (PICK, LOSS, ...) on stock move. Convenient for reporting
 
 **Bugfixes**
 * Fix label printing of non-ascii characters
