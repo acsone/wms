@@ -294,8 +294,7 @@ class SaleOrderLine(models.Model):
         else:
             return None
 
-    @api.onchange('product_id', 'product_uom_qty', 'route_id',
-                  'order_id.date_order')
+    @api.onchange('product_id', 'product_uom_qty', 'route_id', 'date_order')
     def onchange_for_product_qty_unavailable(self):
         context = self.env.context or {}
         if context.get('must_compute_product_qty_unavailable'):
