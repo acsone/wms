@@ -27,6 +27,7 @@ latest (unreleased)
 
 **Bugfixes**
 * Update hidden dependency between addons
+* ALCYN-1961: Some lots created at reception are not linked to the right product
 
 **Build**
 
