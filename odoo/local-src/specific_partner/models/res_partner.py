@@ -173,7 +173,7 @@ class ResPartner(models.Model):
 
             unaccent = get_unaccent_wrapper(self.env.cr)
 
-            query = """SELECT id
+            query = u"""SELECT id
                          FROM res_partner
                       {where} ({email} {operator} {percent}
                            OR {display_name} {operator} {percent}
@@ -194,7 +194,7 @@ class ResPartner(models.Model):
                 [search_name] * 2 + [name] * 2 + [search_name]
             )
             if limit:
-                query += ' limit %s'
+                query += u' limit %s'
                 where_clause_params.append(limit)
             self.env.cr.execute(query, where_clause_params)
             partner_ids = map(lambda x: x[0], self.env.cr.fetchall())
@@ -225,39 +225,39 @@ class ResPartner(models.Model):
                 name = p.name
                 if name and p.title:
                     title = p.title.shortcut or p.title.name
-                    name = "{} {}".format(title, name)
+                    name = u"{} {}".format(title, name)
                     full.append(name)
                 elif name and p.is_company and p.legal_entity_id:
                     title = p.legal_entity_id.name
-                    name = "{} {}".format(title, name)
+                    name = u"{} {}".format(title, name)
                     full.append(name)
 
             name = partner.name or ''
             if name and partner.title:
                 title = partner.title.shortcut or partner.title.name
-                name = "{} {}".format(title, name)
+                name = u"{} {}".format(title, name)
             elif name and partner.is_company and partner.legal_entity_id:
                 title = partner.legal_entity_id.name
-                name = "{} {}".format(title, name)
+                name = u"{} {}".format(title, name)
             full.append(name)
 
             if partner.suite:
                 full.append(partner.suite)
 
             if to_html and not self.env.context.get('show_email'):
-                fullname = '\n'.join(full)
+                fullname = u'\n'.join(full)
             else:
-                fullname = ', '.join(full)
+                fullname = u', '.join(full)
 
             if self.env.context.get('show_email') and partner.email:
-                fullname = "{} <{}>".format(fullname, partner.email)
+                fullname = u"{} <{}>".format(fullname, partner.email)
 
-            address = nameget[partner.id].split('\n', 1)
+            address = nameget[partner.id].split(u'\n', 1)
             if len(address) > 1:
-                fullname += '\n' + address[1]
+                fullname += u'\n' + address[1]
 
             if html_format:
-                fullname = fullname.replace('\n', '<br/>')
+                fullname = fullname.replace(u'\n', u'<br/>')
 
             res.append((partner.id, fullname))
         return res

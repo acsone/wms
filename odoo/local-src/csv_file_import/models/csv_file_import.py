@@ -169,7 +169,7 @@ class CSVFileImport(models.Model):
                     if files_imported:
                         message += 'Files imported:\n'
                         for file_imported, import_message in files_imported:
-                            message += '- {}: {}\n'.format(
+                            message += u'- {}: {}\n'.format(
                                 file_imported, import_message
                             )
                     if files_not_imported:
@@ -178,7 +178,7 @@ class CSVFileImport(models.Model):
                             file_not_imported,
                             import_message,
                         ) in files_not_imported:
-                            message += '- {}: {}\n'.format(
+                            message += u'- {}: {}\n'.format(
                                 file_not_imported, import_message
                             )
 

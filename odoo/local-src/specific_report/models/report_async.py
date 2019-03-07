@@ -45,7 +45,7 @@ class ReportAsync(models.AbstractModel):
             report_id = existing[0].id if len(existing) else new_report.id
             fax = self.env.ref('external_fax.ovh')
             fax.with_delay(
-                description=_('Sending fax for {} with id {}').format(
+                description=_(u'Sending fax for {} with id {}').format(
                     self._name, self.id
                 )
             ).send(send_to_fax, report_id)

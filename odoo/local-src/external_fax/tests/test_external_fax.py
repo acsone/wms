@@ -28,7 +28,7 @@ class TestExternalFax(TransactionCase):
     def test_email_from_default(self):
         new_mail = self.fax.send('012 0234 23', self.attachment.id)
         user = self.env.user
-        user_email = "{} <{}>".format(user.name, user.email)
+        user_email = u"{} <{}>".format(user.name, user.email)
         self.assertEqual(new_mail.email_from, user_email)
 
     def test_email_from_env(self):

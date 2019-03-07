@@ -108,7 +108,9 @@ class AccountInvoice(models.Model):
                 (
                     'reference',
                     'like',
-                    '+++{}/{}%'.format(partner_ref_nr[:3], partner_ref_nr[3:]),
+                    u'+++{}/{}%'.format(
+                        partner_ref_nr[:3], partner_ref_nr[3:]
+                    ),
                 ),
             ],
             order='reference desc',
@@ -130,7 +132,7 @@ class AccountInvoice(models.Model):
         base = int(bbacomm)
         mod = base % 97 or 97
         bbacomm += '%02d' % mod
-        reference = '+++{}/{}/{}+++'.format(
+        reference = u'+++{}/{}/{}+++'.format(
             bbacomm[0:3], bbacomm[3:8], bbacomm[8:]
         )
         return {'value': {'reference': reference}}

@@ -12,7 +12,7 @@ class SaleExportListener(Component):
     _inherit = 'base.connector.listener'
     _apply_on = ['sale.order']
 
-    EXPORT_DESCRIPTION = "Export sale order {} to ESB's webservice"
+    EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_create(self, record, fields=None):
@@ -41,7 +41,7 @@ class SaleLineExportListener(Component):
     _inherit = 'base.connector.listener'
     _apply_on = ['sale.order.line']
 
-    EXPORT_DESCRIPTION = "Export sale order {} to ESB's webservice"
+    EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):

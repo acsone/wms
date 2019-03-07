@@ -202,7 +202,7 @@ class ESBExporterMixin(AbstractComponent):
     @property
     def logger(self):
         return logging.getLogger(
-            '[{}:{}]'.format(self._usage, self.model._name)
+            u'[{}:{}]'.format(self._usage, self.model._name)
         )
 
     def _prepare_item(self, items):

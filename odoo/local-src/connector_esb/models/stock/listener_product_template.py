@@ -22,7 +22,7 @@ class ProductTemplateListener(Component):
     _inherit = 'base.connector.listener'
     _apply_on = ['product.template']
 
-    EXPORT_DESCRIPTION = "Export product {} stock state change to ESB"
+    EXPORT_DESCRIPTION = u"Export product {} stock state change to ESB"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):

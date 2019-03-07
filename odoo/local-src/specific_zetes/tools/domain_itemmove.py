@@ -237,7 +237,7 @@ class Itemmove(DomainInterface):
                 shelf_source = '0%s' % shelf_source
 
             if params.itemMoveType == constants.MOVE_TYPE_LOAD:
-                sourceLC1 = '{}{}{}{}'.format(
+                sourceLC1 = u'{}{}{}{}'.format(
                     location.corridor,
                     shelf_source,
                     location.height,

@@ -81,12 +81,12 @@ class SaleOrder(models.Model):
         if not self.partner_id.ref:
             raise UserError(
                 _(
-                    'The Quotation can not be printed the client {} ({}) \
-                 has no reference assigned.'
+                    u'The Quotation can not be printed the client {} ({}) '
+                    u'has no reference assigned.'
                 ).format(self.partner_id.name, self.partner_id.id)
             )
         return (
-            '_'.join(
+            u'_'.join(
                 [
                     'cf',
                     self.partner_id.ref,

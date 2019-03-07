@@ -193,7 +193,7 @@ class RoundInstance(models.Model):
     @api.depends('template_id', 'date', 'time_leave_planned')
     def _get_complete_name(self):
         for rec in self:
-            rec.complete_name = '{} {} - {}'.format(
+            rec.complete_name = u'{} {} - {}'.format(
                 rec.date,
                 float2time(rec.time_leave_planned),
                 rec.template_id.display_name,

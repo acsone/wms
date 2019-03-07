@@ -56,7 +56,7 @@ class Fax(models.Model):
     def body(self):
         """ The password to the service is sent in the body of the message."""
         self.ensure_one()
-        return 'password:{}'.format(self.password)
+        return u'password:{}'.format(self.password)
 
     @api.multi
     @job(default_channel='root.background.fax')
@@ -69,8 +69,8 @@ class Fax(models.Model):
         if not fax_no:
             raise UserError(
                 _(
-                    'Fax could not be sent for attachment with '
-                    'id {}. Fax number is empty or invalid.'
+                    u'Fax could not be sent for attachment with '
+                    u'id {}. Fax number is empty or invalid.'
                 ).format(attachment_id)
             )
         mail_values = {
