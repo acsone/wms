@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1921: allow Accountant group read stock.inventory
 
 **Bugfixes**
+* Fix label printing of non-ascii characters
 * Update hidden dependency between addons
 * ALCYN-1961: Some lots created at reception are not linked to the right product
 

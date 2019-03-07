@@ -3,6 +3,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import lxml.html
+import unicodedata
 
 from odoo import api, models
 
@@ -35,5 +36,12 @@ class Report(models.Model):
                     text += node.text
         except lxml.etree.XMLSyntaxError:
             pass
-        text = text.replace('\n', '').decode('string_escape')
+        text = text.replace('\n', '')
+        if not isinstance(text, unicode):
+            text = text.decode('utf-8')
+        nfkd_form = unicodedata.normalize('NFKD', text)
+        text = u"".join([c for c in nfkd_form
+                         if not unicodedata.combining(c)])
+        text = text.encode('ASCII', 'ignore')
+        text = text.decode('string_escape')
         return text
