@@ -24,6 +24,8 @@ latest (unreleased)
 
 * ALCYN-1953: install account_mass_reconcile module
 * ALCYN-1921: allow Accountant group read stock.inventory
+* ALCYN-1958: track change on chatter for field : is_sale_back_order_accepted is_sale_back_order_cancel
+
 
 **Bugfixes**
 * Update hidden dependency between addons

@@ -500,3 +500,4 @@ migration:
           ### local
           - specific_security
           - specific_report
+          - stock_picking_backorder
