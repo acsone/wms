@@ -10,6 +10,11 @@ class XmlDeclaration(models.TransientModel):
     """
     _inherit = "l10n_be_intrastat_xml.xml_decl"
 
+    def _update_Dim(self, item, prop, value):
+        dim = item.find('.//Dim[@prop=\'%s\']' % prop)
+        if dim is not None:
+            dim.text = value
+
     def _build_intrastat_line(self, numlgn, item, linekey, amounts,
                               dispatchmode, extendedmode):
         super(XmlDeclaration, self)._build_intrastat_line(numlgn, item,
@@ -17,12 +22,12 @@ class XmlDeclaration(models.TransientModel):
                                                           dispatchmode,
                                                           extendedmode)
         # change precision from 0 decimal to 2
-        self._set_Dim(item, 'EXTXVAL', unicode(round(amounts[0], 2)).replace(
-            ".", ","))
-        self._set_Dim(item, 'EXWEIGHT', unicode(round(amounts[1],
-                                                      2)).replace(".", ","))
-        self._set_Dim(item, 'EXUNITS', unicode(round(amounts[2], 2)).replace(
-            ".", ","))
+        self._update_Dim(item, 'EXTXVAL', unicode(
+            round(amounts[0], 2)).replace(".", ","))
+        self._update_Dim(item, 'EXWEIGHT', unicode(
+            round(amounts[1], 2)).replace(".", ","))
+        self._update_Dim(item, 'EXUNITS', unicode(
+            round(amounts[2], 2)).replace(".", ","))
 
     @api.multi
     def _get_lines(self, dispatchmode=False, extendedmode=False):

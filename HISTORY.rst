@@ -32,6 +32,7 @@ latest (unreleased)
 * Fix label printing of non-ascii characters
 * Update hidden dependency between addons
 * ALCYN-1961: Some lots created at reception are not linked to the right product
+* BIZ-3075: update tags instead of add new one in intrastat report
 
 * Fix some startup warnings:
 
