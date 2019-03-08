@@ -82,7 +82,6 @@
             </xpath>
             <xpath expr="//field[@name='origin']" position="after">
                 <field name="nbr_lines"/>
-                <field name="nbr_lines_bo"/>
             </xpath>
         </field>
     </record>

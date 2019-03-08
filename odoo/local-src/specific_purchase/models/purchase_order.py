@@ -27,19 +27,28 @@ class PurchaseOrder(models.Model):
                                readonly=True
                                )
     nbr_lines_bo = fields.Integer('Nbr lines BO',
-                                  compute='_compute_nbr_lines',
+                                  compute='_compute_nbr_lines_bo',
                                   readonly=True
                                   )
 
     @api.multi
     def _compute_nbr_lines(self):
         """
-        Compute the number of lines and number of lines with back order
-        by purchase order.
+        Compute the number of lines by purchase order.
         :return:
         """
         for po in self:
             po.nbr_lines = len(po.order_line)
+
+    @api.multi
+    def _compute_nbr_lines_bo(self):
+        """
+        Compute the number of lines with back order by purchase order.
+        :return:
+        """
+        for po in self:
+            # NOTE: computing 'immediately_usable_qty' field is very slow,
+            # especially when the field is displayed on PO tree view
             po.nbr_lines_bo = len(po.order_line.filtered(
                 lambda line: line.product_id.immediately_usable_qty < 0))
 
