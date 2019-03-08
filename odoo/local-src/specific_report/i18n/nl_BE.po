@@ -6,14 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-20 10:50+0000\n"
-"PO-Revision-Date: 2018-11-20 10:50+0000\n"
+"POT-Creation-Date: 2019-03-08 12:38+0000\n"
+"PO-Revision-Date: 2019-03-08 12:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: specific_report
+#: model:mail.template,body_html:specific_report.email_template_pharmacist_supplier_order
+msgid "\n"
+"                <p>Hello,</p>\n"
+"                <p>\n"
+"                    We have received this order that is subjected to you.<br/>\n"
+"                    We transfer it to you and wait for your packages to deliver them to the customer.\n"
+"                </p>\n"
+"\n"
+"                <p>Please find here attached the order.</p>\n"
+"                <p>We wish you good reception.</p>\n"
+"                <p>Sincerely,</p>\n"
+"                <p>Your Team Alcyon</p>\n"
+"            \n"
+"        "
+msgstr "\n"
+"                <p>Hello,</p>\n"
+"                <p>\n"
+"                    We have received this order that is subjected to you.<br/>\n"
+"                    We transfer it to you and wait for your packages to deliver them to the customer.\n"
+"                </p>\n"
+"\n"
+"                <p>Please find here attached the order.</p>\n"
+"                <p>We wish you good reception.</p>\n"
+"                <p>Sincerely,</p>\n"
+"                <p>Your Team Alcyon</p>\n"
+"            \n"
+"        "
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -41,14 +70,14 @@ msgid "# Mat."
 msgstr "# Mat."
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "boxes"
-msgstr "dozen"
+#: model:mail.template,report_name:specific_report.email_template_pharmacist_supplier_order
+msgid "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
+msgstr "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "items"
-msgstr "units"
+#: model:mail.template,subject:specific_report.mail_template_pharamcist_notification
+msgid "${object.subject}"
+msgstr "${object.subject}"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -68,7 +97,13 @@ msgid "(S/N:"
 msgstr "(S/N:"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "(V Ref:"
+msgstr "(V Ref:"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "-\n"
 "                    <span>Fax:</span>"
 msgstr "-\n"
@@ -83,6 +118,7 @@ msgstr "<br/>\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<br/>\n"
 "                    <span>Email:</span>"
 msgstr "<br/>\n"
@@ -94,6 +130,153 @@ msgid "<br/><br/>\n"
 "                                            <span>Client</span>"
 msgstr "<br/><br/>\n"
 "                                            <span>Klant</span>"
+
+#. module: specific_report
+#: model:mail.template,body_html:specific_report.mail_template_pharamcist_notification
+msgid "<html>\n"
+"                <head></head>\n"
+"                % set record = ctx.get('record')\n"
+"                % set company = record and record.company_id or user.company_id\n"
+"                <body style=\"margin: 0; padding: 0;\">\n"
+"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-collapse:separate;\" summary=\"o_mail_notification\">\n"
+"                        <tbody>\n"
+"\n"
+"                            <!-- HEADER -->\n"
+"                            <tr>\n"
+"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                    <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                        <tr>\n"
+"                                            <td valign=\"middle\">\n"
+"                                                <span style=\"font-size:20px; color:white; font-weight: bold;\">\n"
+"                                                    ${object.record_name}\n"
+"                                                </span>\n"
+"                                            </td>\n"
+"                                            <td valign=\"middle\" align=\"right\">\n"
+"                                                <img src=\"/logo.png?company=${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${company.name}\">\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"\n"
+"                                <!-- CONTENT -->\n"
+"                                <tr>\n"
+"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
+"                                            <tbody>\n"
+"                                                <td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
+"                                                    ${object.body | safe}\n"
+"                                                </td>\n"
+"                                            </tbody>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"\n"
+"                                <!-- FOOTER -->\n"
+"                                <tr>\n"
+"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                            <tr>\n"
+"                                                <td valign=\"middle\" align=\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                    ${company.name}<br/>\n"
+"                                                    ${company.phone or ''}\n"
+"                                                </td>\n"
+"                                                <td valign=\"middle\" align=\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                    % if company.email:\n"
+"                                                    <a href=\"mailto:${company.email}\" style=\"text-decoration:none; color: white;\">${company.email}</a><br/>\n"
+"                                                    % endif\n"
+"                                                    % if company.website:\n"
+"                                                    <a href=\"${company.website}\" style=\"text-decoration:none; color: white;\">\n"
+"                                                        ${company.website}\n"
+"                                                    </a>\n"
+"                                                    % endif\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr>\n"
+"                                    <td align=\"center\">\n"
+"                                        Powered by <a href=\"https://www.odoo.com\">Odoo</a>.\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </tbody>\n"
+"                        </table>\n"
+"                    </body>\n"
+"                </html>\n"
+"                "
+msgstr "<html>\n"
+"                <head></head>\n"
+"                % set record = ctx.get('record')\n"
+"                % set company = record and record.company_id or user.company_id\n"
+"                <body style=\"margin: 0; padding: 0;\">\n"
+"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-collapse:separate;\" summary=\"o_mail_notification\">\n"
+"                        <tbody>\n"
+"\n"
+"                            <!-- HEADER -->\n"
+"                            <tr>\n"
+"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                    <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                        <tr>\n"
+"                                            <td valign=\"middle\">\n"
+"                                                <span style=\"font-size:20px; color:white; font-weight: bold;\">\n"
+"                                                    ${object.record_name}\n"
+"                                                </span>\n"
+"                                            </td>\n"
+"                                            <td valign=\"middle\" align=\"right\">\n"
+"                                                <img src=\"/logo.png?company=${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${company.name}\">\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"\n"
+"                                <!-- CONTENT -->\n"
+"                                <tr>\n"
+"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
+"                                            <tbody>\n"
+"                                                <td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
+"                                                    ${object.body | safe}\n"
+"                                                </td>\n"
+"                                            </tbody>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"\n"
+"                                <!-- FOOTER -->\n"
+"                                <tr>\n"
+"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                            <tr>\n"
+"                                                <td valign=\"middle\" align=\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                    ${company.name}<br/>\n"
+"                                                    ${company.phone or ''}\n"
+"                                                </td>\n"
+"                                                <td valign=\"middle\" align=\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                    % if company.email:\n"
+"                                                    <a href=\"mailto:${company.email}\" style=\"text-decoration:none; color: white;\">${company.email}</a><br/>\n"
+"                                                    % endif\n"
+"                                                    % if company.website:\n"
+"                                                    <a href=\"${company.website}\" style=\"text-decoration:none; color: white;\">\n"
+"                                                        ${company.website}\n"
+"                                                    </a>\n"
+"                                                    % endif\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr>\n"
+"                                    <td align=\"center\">\n"
+"                                        Powered by <a href=\"https://www.odoo.com\">Odoo</a>.\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </tbody>\n"
+"                        </table>\n"
+"                    </body>\n"
+"                </html>\n"
+"                "
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -119,6 +302,7 @@ msgstr "<span>Bestelling</span>"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>Customer</span>"
 msgstr "<span>Klant</span>"
 
@@ -126,6 +310,7 @@ msgstr "<span>Klant</span>"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>Date</span>"
 msgstr "<span>Datum</span>"
 
@@ -140,19 +325,26 @@ msgid "<span>Gross<br/>amount</span>"
 msgstr "<span>Bruto<br/>Totaal</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "<span>No associated pharmacist</span>"
+msgstr "<span>No associated pharmacist</span>"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>N° Document</span>"
 msgstr "<span>Document nr</span>"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-msgid "<span>Order</span>"
-msgstr "<span>Bestelling</span>"
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "<span>Order # </span>"
+msgstr "<span>Order # </span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<span>RPM Liège division Huy - TVA</span>"
 msgstr "<span>RPM Liège division Huy - TVA</span>"
 
@@ -208,53 +400,81 @@ msgid "<span>du</span>"
 msgstr "<span>van</span>"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "<span>of</span>"
 msgstr "<span>van</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Customer:</strong>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Date Ordered:</strong>"
+msgstr "<strong>Date Ordered:</strong>"
+
+#. module: specific_report
+#: model:mail.template,subject:specific_report.email_template_pharmacist_supplier_order
+msgid "Alcyon Medicine order"
+msgstr "Alcyon Medicine order"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_alcyon_discount
 msgid "Amount alcyon discount"
-msgstr ""
+msgstr "Amount alcyon discount"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_antibiotics
+msgid "Amount antibiotics"
+msgstr "Amount antibiotics"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_apb
 msgid "Amount apb"
-msgstr ""
+msgstr "Amount apb"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_contribution
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_amount_contribution
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_amount_contribution
 msgid "Amount contribution"
-msgstr ""
+msgstr "Amount contribution"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_discount_total
 msgid "Amount discount total"
-msgstr ""
+msgstr "Amount discount total"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_amount_discount2
+msgid "Amount discount2"
+msgstr "Amount discount2"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_amount_discount3
+msgid "Amount discount3"
+msgstr "Amount discount3"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_only_tax
 msgid "Amount only tax"
-msgstr ""
+msgstr "Amount only tax"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_supplier_discount
 msgid "Amount supplier discount"
-msgstr ""
+msgstr "Amount supplier discount"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_untaxed_with_contribution
 msgid "Amount untaxed with contribution"
-msgstr ""
+msgstr "Amount untaxed with contribution"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_without_discount
 msgid "Amount without discount"
-msgstr ""
+msgstr "Amount without discount"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_apb_ids
@@ -303,6 +523,11 @@ msgid "CBC:"
 msgstr "CBC:"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+msgid "CNK"
+msgstr "CNK"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
 msgid "Cancel"
 msgstr "Annuleer"
@@ -318,8 +543,23 @@ msgid "Canceled Refund"
 msgstr "Geannuleerde terugbetaling"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: code:addons/specific_report/models/sale_order.py:115
+#, python-format
+msgid "Cannot send pharmacist email\n"
+"%s partner must have an email address."
+msgstr "Cannot send pharmacist email\n"
+"%s partner must have an email address."
+
+#. module: specific_report
+#: code:addons/specific_report/models/sale_order.py:110
+#, python-format
+msgid "Cannot send pharmacist email\n"
+"No pharmacist affiliated to the client."
+msgstr "Cannot send pharmacist email\n"
+"No pharmacist affiliated to the client."
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "Consignement"
 msgstr "Consignatie"
 
@@ -327,7 +567,7 @@ msgstr "Consignatie"
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_contribution_ids
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_contribution_ids
 msgid "Contribution ids"
-msgstr ""
+msgstr "Contribution ids"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_uid
@@ -337,7 +577,7 @@ msgstr "Aangemaakt door"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_date
 msgid "Created on"
-msgstr "Aangemaakt op"
+msgstr "Gemaakt op"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_currency_id
@@ -370,20 +610,24 @@ msgid "Delivery round"
 msgstr "Leveringsronde"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "Delivery round:"
+msgstr "Delivery round:"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
 msgid "Delivery slip"
 msgstr "Afleverbon"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
-msgid "Goods return note"
-msgstr "Retourbon"
-
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "Depot number:"
+msgstr "Depot number:"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "Delivery:"
-msgstr "Levering:"
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "Description"
+msgstr "Omschrijving"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_display_name
@@ -404,7 +648,7 @@ msgstr "Voorlopige factuur"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
 msgid "Entry register"
-msgstr ""
+msgstr "Entry register"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -417,7 +661,7 @@ msgstr "Uiterste houdbaarheidsdatum"
 #. module: specific_report
 #: model:ir.model.fields,help:specific_report.field_stock_move_serial_number
 msgid "For delivery order only"
-msgstr ""
+msgstr "For delivery order only"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -427,15 +671,26 @@ msgid "Fridge"
 msgstr "Koelkast"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
+msgid "Goods return note"
+msgstr "Retourbon"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
 msgid "Has Invoices"
-msgstr ""
+msgstr "Has Invoices"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_entry_register
+#: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_entry_register
+msgid "Hide entry register on delivery slip"
+msgstr "Hide entry register on delivery slip"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_prices_deliveryslip
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_prices_deliveryslip
 msgid "Hide prices on deliveryslip"
-msgstr ""
+msgstr "Hide prices on deliveryslip"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
@@ -447,6 +702,11 @@ msgstr "ID"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "ING:"
 msgstr "ING:"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_l10n_be_intrastat_xml_xml_decl
+msgid "Intrastat XML Declaration"
+msgstr "Intrastat XML declaratie"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -465,19 +725,24 @@ msgid "Invoice Line"
 msgstr "Factuurlijn"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_antibiotics_ids
+msgid "Invoice antibiotics ids"
+msgstr "Invoice antibiotics ids"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_apb_ids
 msgid "Invoice apb ids"
-msgstr ""
+msgstr "Invoice apb ids"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_contribution_ids
 msgid "Invoice contribution ids"
-msgstr ""
+msgstr "Invoice contribution ids"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_only_tax_ids
 msgid "Invoice only tax ids"
-msgstr ""
+msgstr "Invoice only tax ids"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
@@ -507,9 +772,14 @@ msgid "Last Updated on"
 msgstr "Laatst bijgewerkt op"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+msgid "Location:"
+msgstr "Location:"
+
+#. module: specific_report
 #: model:ir.actions.act_window,name:specific_report.action_edit_serial_number
 msgid "Modify Serial Number"
-msgstr ""
+msgstr "Modify Serial Number"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -521,17 +791,22 @@ msgid "Name"
 msgstr "Naam"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "Net<br/>unit<br/>price"
+msgstr "Net<br/>unit<br/>price"
+
+#. module: specific_report
 #: code:addons/specific_report/wizard/modify_serial_number.py:28
 #, python-format
 msgid "No active id found"
-msgstr ""
+msgstr "No active id found"
 
 #. module: specific_report
 #: code:addons/specific_report/models/round_instance.py:22
-#: code:addons/specific_report/models/round_instance.py:167
+#: code:addons/specific_report/models/round_instance.py:168
 #, python-format
 msgid "No invoice to print"
-msgstr ""
+msgstr "No invoice to print"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -539,104 +814,98 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Number"
-msgstr ""
+msgstr "Aantal"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_total
 msgid "Number of boxes"
-msgstr ""
+msgstr "Number of boxes"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_cold
 msgid "Number of cold"
-msgstr ""
+msgstr "Number of cold"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_cold
 msgid "Number of cold products"
-msgstr ""
+msgstr "Number of cold products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_equipment
 msgid "Number of equipments"
-msgstr ""
+msgstr "Number of equipments"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_equipment
 msgid "Number of equipments products"
-msgstr ""
+msgstr "Number of equipments products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_food
 msgid "Number of food"
-msgstr ""
+msgstr "Number of food"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_food
 msgid "Number of food products"
-msgstr ""
+msgstr "Number of food products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_human_drug
 msgid "Number of human drug"
-msgstr ""
+msgstr "Number of human drug"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_human_drug
 msgid "Number of human drug products"
-msgstr ""
+msgstr "Number of human drug products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_drug
 msgid "Number of medical"
-msgstr ""
+msgstr "Number of medical"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_drug
 msgid "Number of medical products"
-msgstr ""
+msgstr "Number of medical products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_total
 msgid "Number of products"
-msgstr ""
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "Number of<br/>packages<br/>"
-msgstr "Aantal<br/>verpakkingen<br/>"
+msgstr "Number of products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_only_tax_ids
 #: model:ir.model.fields,field_description:specific_report.field_sale_order_line_only_tax_ids
 msgid "Only tax ids"
-msgstr ""
+msgstr "Only tax ids"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Operator"
-msgstr ""
+msgstr "Operator"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "Order"
-msgstr "Bestel"
+msgstr "Order"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "Order #"
-msgstr "Bestel #"
+msgstr "Order #"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
 msgid "Order Reference"
-msgstr "Bestel referentie"
+msgstr "Order referentie"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_order_line_id
 msgid "Order line"
-msgstr ""
+msgstr "Order line"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
@@ -644,14 +913,14 @@ msgid "Ordered Quantity"
 msgstr "Bestelde hoeveelheid"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "PORT:"
-msgstr "PORT:"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "PRO-FORMA"
 msgstr "PRO-FORMA"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+msgid "Package:"
+msgstr "Package:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport
@@ -660,6 +929,7 @@ msgstr "Pagina:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr "Pagina: <span class=\"page\"/> / <span class=\"topage\"/>"
 
@@ -669,31 +939,41 @@ msgid "Partner"
 msgstr "Klant"
 
 #. module: specific_report
-#: model:ir.actions.report.xml,name:specific_report.action_passport_report
-msgid "Passport report"
-msgstr ""
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
-msgid "Passport verification"
-msgstr ""
+#: model:ir.actions.report.xml,name:specific_report.report_sale_order_pharmacist_supplier
+msgid "Pharmacist fax content"
+msgstr "Pharmacist fax content"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picked Quantity"
-msgstr ""
+msgstr "Picked Quantity"
+
+#. module: specific_report
+#: model:ir.actions.report.xml,name:specific_report.action_passport_report
+msgid "Picking Inspection"
+msgstr "Picking Inspection"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+msgid "Picking inspection"
+msgstr "Picking inspection"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "Primary<br/>unit<br/>price"
+msgstr "Primary<br/>unit<br/>price"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
-msgstr ""
+msgstr "Print delivery round"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print invoices"
-msgstr ""
+msgstr "Print invoices"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -710,6 +990,7 @@ msgstr "Artikel<br/>nummer"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "Quantity"
 msgstr "Hoeveelheid"
 
@@ -731,6 +1012,11 @@ msgstr "Ontvangen op:<br/>\n"
 "                            Handtekening:"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "Ref"
+msgstr "Ref."
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Reference for your payment"
 msgstr "Referentie te vermelden bij betaling"
@@ -738,17 +1024,17 @@ msgstr "Referentie te vermelden bij betaling"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Crediet nota"
+msgstr "Credit"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+msgid "Resulting Package:"
+msgstr "Resulting Package:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Round"
 msgstr "Ronde"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "Round: <br/>"
-msgstr "Ronde: <br/>"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_sale_order
@@ -764,13 +1050,19 @@ msgstr "Verkooporderlijn"
 #: code:addons/specific_report/models/report_async.py:45
 #, python-format
 msgid "Sending fax for {} with id {}"
-msgstr ""
+msgstr "Sending fax for {} with id {}"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_serial_number
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_serial_number
 msgid "Serial number"
-msgstr ""
+msgstr "Serial number"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_res_partner_show_deliveryslip_cnk
+#: model:ir.model.fields,field_description:specific_report.field_res_users_show_deliveryslip_cnk
+msgid "Show CNK on delivery slip"
+msgstr "Show CNK on delivery slip"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_stock_move
@@ -790,54 +1082,43 @@ msgstr "Sub<br/>totaal"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Taxes"
-msgstr "BTW %"
+msgstr "Belastingen"
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:57
+#: code:addons/specific_report/models/sale_order.py:80
 #, python-format
 msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
-msgstr ""
+msgstr "The Quotation can not be printed the client {} ({})                  has no reference assigned."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:132
-#: code:addons/specific_report/models/stock_picking.py:170
+#: code:addons/specific_report/models/stock_picking.py:133
+#: code:addons/specific_report/models/stock_picking.py:171
 #, python-format
 msgid "The picking zone %s is not correct"
-msgstr ""
+msgstr "The picking zone %s is not correct"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:86
+#: code:addons/specific_report/models/stock_picking.py:85
 #, python-format
 msgid "There are more than one currencies on orders"
-msgstr ""
+msgstr "There are more than one currencies on orders"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:83
-#, python-format
-msgid "There is currency defined on orders"
-msgstr ""
-
-#. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:152
+#: code:addons/specific_report/models/stock_picking.py:153
 #, python-format
 msgid "There is no category on this product"
-msgstr ""
+msgstr "There is no category on this product"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:113
+#: code:addons/specific_report/models/stock_picking.py:114
 #, python-format
 msgid "There is no original picking zone on this operation."
-msgstr ""
+msgstr "There is no original picking zone on this operation."
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_price_total
 msgid "Total"
 msgstr "Totaal"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Total amount:"
-msgstr "Totaalbedrag:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -865,19 +1146,24 @@ msgid "UOP"
 msgstr "UOP"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Unit Price"
-msgstr "Eenheidsprijs"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Unit<br/>price"
 msgstr "stuk<br/>prijs"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "VAT"
+msgstr "VAT"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "VAT Amount"
 msgstr "BTW bedrag"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+msgid "VAT:"
+msgstr "Btw:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
@@ -893,6 +1179,16 @@ msgstr "Credietnota leverancier"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Weight:<br/>"
 msgstr "Gewicht:<br/>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "boxes"
+msgstr "dozen"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+msgid "items"
+msgstr "units"
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_modify_serial_number
@@ -916,6 +1212,7 @@ msgstr "round.instance.customer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Fax:</span>"
 msgstr "|\n"
@@ -923,6 +1220,7 @@ msgstr "|\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
@@ -932,6 +1230,7 @@ msgstr "|\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr "|\n"
