@@ -21,6 +21,13 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1962: Speed up loading of partner form view
+
+  The computed field 'last_suite_name' on 'res.partner' performs a search on
+  'sale.order' using 'LIMIT 1', this makes PostgreSQL very slow to get the
+  relevant row. Adding a partial index on corresponding fields fix the
+  performance issue.
+
 **Bugfixes**
 
 **Build**
