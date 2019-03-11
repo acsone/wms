@@ -21,13 +21,21 @@ class XmlDeclaration(models.TransientModel):
                                                           linekey, amounts,
                                                           dispatchmode,
                                                           extendedmode)
+        if dispatchmode:
+            self._update_Dim(item, 'EXTRF', '29')
+        else:
+            self._update_Dim(item, 'EXTRF', '19')
         # change precision from 0 decimal to 2
         self._update_Dim(item, 'EXTXVAL', unicode(
-            round(amounts[0], 2)).replace(".", ","))
+            round(amounts[0], 2)))
+        # if 0.0 is forbid by onegate, must be set to 0.01
+        weight = amounts[1]
+        if weight < 0.01:
+            weight = 0.01
         self._update_Dim(item, 'EXWEIGHT', unicode(
-            round(amounts[1], 2)).replace(".", ","))
+            round(weight, 2)))
         self._update_Dim(item, 'EXUNITS', unicode(
-            round(amounts[2], 2)).replace(".", ","))
+            round(amounts[2], 2)))
 
     @api.multi
     def _get_lines(self, dispatchmode=False, extendedmode=False):

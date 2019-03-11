@@ -28,6 +28,23 @@ latest (unreleased)
 **Documentation**
 
 
+10.32.1 (2019-03-11)
+++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-1957: Reduce the time to open the list of purchase orders.
+
+  The field 'nbr_lines_bo' on PO was quite big to compute (itself based on the
+  'immediately_usable_qty' computed field of product).
+  As the this field is displayed on the PO form, it has been removed from the
+  tree view to reduce drastically the time to open the view.
+
+**Bugfixes**
+
+* BIZ-3075: Fix intrastat report layout 
+
+
 10.32.0 (2019-03-07)
 ++++++++++++++++++++
 
