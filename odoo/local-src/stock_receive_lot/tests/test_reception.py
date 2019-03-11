@@ -54,7 +54,7 @@ class TestReception(TransactionCase):
             'location_id': self.stock_location.id,
             'usage': 'internal',
             })
-        self.bin1 = self.location_model.create({
+        self.bin2 = self.location_model.create({
             'name': 'bin2',
             'location_id': self.stock_location.id,
             'usage': 'internal',
