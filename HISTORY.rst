@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* BIZ-3075: Fix intrastat report layout 
+
 **Build**
 
 **Documentation**
