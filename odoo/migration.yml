@@ -507,3 +507,7 @@ migration:
         pre:
           - "sh -c 'psql -f odoo/songs/upgrade/update_10_32_0_clean_models.sql'"
     - version: 10.32.1
+      addons:
+        upgrade:
+          ### local
+          - specific_purchase
