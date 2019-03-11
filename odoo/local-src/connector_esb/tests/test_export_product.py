@@ -103,6 +103,8 @@ class ExportProductTestCase(ESBXMLTestCase):
             'route_ids': [
                 (4, self.env.ref('stock.route_warehouse0_mto').id),
                 ],
+            'storage_temperature_id': self.env.ref(
+                'specific_product.product_storage_temperature_6').id,
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 2',
@@ -131,6 +133,8 @@ class ExportProductTestCase(ESBXMLTestCase):
             'route_ids': [
                 (4, self.env.ref('purchase.route_warehouse0_buy').id),
                 ],
+            'storage_temperature_id': self.env.ref(
+                'specific_product.product_storage_temperature_minus_12').id,
         })
         self.all_records |= self.model.create({
             'name': 'Export me pls 3',
@@ -238,7 +242,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             'Cp2z02': 0,
             'Cp2z23': 0,
             'Cp2z24': 0,
-            'Cp2z17': 0,
+            'Cp2z17': '6',
             'Cp2z19': 0,
             'Cplz14': 'medicament',
             'Gescov': 0,

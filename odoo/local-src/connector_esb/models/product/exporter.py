@@ -92,9 +92,13 @@ class ProductExportMapper(Component):
         }
 
     @mapping
+    def storage_temperature(self, record):
+        return {'Cp2z17': record.storage_temperature_id.esb_ref or 0}
+
+    @mapping
     def fixed_fields(self, record):
         """ return hardcoded values for fields """
-        zero = ('Cp2z17', 'Cp2z19')
+        zero = ('Cp2z19',)
         values = {f: 0 for f in zero}
         return values
 

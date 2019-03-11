@@ -338,3 +338,4 @@ migration:
           ### local
           - specific_sale
           - specific_purchase
+          - specific_product
