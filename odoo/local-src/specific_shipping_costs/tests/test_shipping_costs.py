@@ -54,12 +54,6 @@ class TestShippingCosts(SavepointCase):
             'model': 'delivery.carrier',
             'res_id': cls.delivery_method.id,
         })
-        cls.env['ir.model.data'].create({
-            'name': 'deliver_carrier_alcyon_product_product',
-            'module': '__setup__',
-            'model': 'product.product',
-            'res_id': cls.product_shipping_cost.id,
-        })
         # Lets create 2 customers
         cls.partner1 = cls.env['res.partner'].create({
             'name': 'Partner One',

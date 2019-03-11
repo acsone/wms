@@ -22,10 +22,11 @@ Summary:
 4. [Update moved models](#update-moved-models)
 5. [Update moved fields](#update-moved-fields)
 6. [Remove custom views/filters/exports](#remove-custom-viewsfiltersexports)
-7. [Install/Update all modules](#installupdate-all-modules)
-8. [Uninstall modules](#uninstall-modules)
-9. [Clean the database](#clean-the-database)
-10. [Clean unavailable modules](#clean-unavailable-modules)
+7. [Restore initial state for all modules](#restore-initial-state-for-all-modules)
+8. [Install/Update all modules](#installupdate-all-modules)
+9. [Uninstall modules](#uninstall-modules)
+10. [Clean the database](#clean-the-database)
+11. [Clean unavailable modules](#clean-unavailable-modules)
 
 All these steps are launched from [migration.yml](../odoo/migration.yml)
 in marabunta mode `migration`.
@@ -34,13 +35,19 @@ in marabunta mode `migration`.
 
 In migrated database:
 
-* all modules installed in source version have the state `to upgrade`
+* all core modules installed in source version have the state `installed`
+* all OCA/specific modules installed in source version have the state `to upgrade`
 * all new core modules to install have the state `to install`
 
 We can't install/update a module unavailable in target code source.
+And for few modules, we need to play scripts to fix/migrate data before updating modules.
 
-So, we need to change the state of all modules to `uninstalled`.
-And then, list in [migration.yml](../odoo/migration.yml) only modules we want to keep.
+So, we need to change the state of all these modules to non-existing state.
+And then, we can play our scripts without problems.
+
+For information, we can no longer set modules to "uninstalled"
+and install those we want in `migration.yml`, because,
+in version 12, the `noupdate` flag is used when updating modules, not when installing them.
 
 _Implementation_: [songs/migration/pre.sql](../odoo/songs/migration/pre.sql)
 
@@ -108,6 +115,22 @@ in functions:
 * `remove_all_custom_filters`
 * `remove_all_custom_exports`
 
+### Restore initial state for all modules
+
+In first step of the build, we define non-existing state for modules to install/update.
+
+Before updating all modules we want to restore initial state for these modules.
+
+For modules we will uninstall later in the build,
+we directly define the `uninstalled` state to avoid to update them for nothing.
+And also, because some of these modules are now unavailable.
+
+_Implementation_:
+
+* [songs/migration/pre_final.py](../odoo/songs/migration/pre_final.py)
+* [songs/migration/uninstall.py](../odoo/songs/migration/uninstall.py)
+  * Function `update_state_for_uninstalled_modules`
+
 ### Install/Update all modules
 
 In the migration build, all modules we want to :
@@ -132,7 +155,7 @@ we must uninstalled them to allow Odoo to remove all their metadata/data.
 
 The source code for these modules is not required to uninstall them.
 
-_Implementation_: [songs/migration/post.py](../odoo/songs/migration/post.py)
+_Implementation_: [songs/migration/uninstall.py](../odoo/songs/migration/uninstall.py)
 in function `uninstall_modules`.
 
 ### Clean the database
@@ -191,6 +214,11 @@ _Implementation_:
 
 * [songs/migration/pre_check_fields.py](../odoo/songs/migration/pre_check_fields.py)
 * [songs/migration/post_check_fields.py](../odoo/songs/migration/post_check_fields.py)
+
+### Invoke task to help to determine modules to install/uninstall
+
+See documentation of task:
+* [invoke.md](invoke.md#migratecheck-modules)
 
 ## Requirements/dependencies
 

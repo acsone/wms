@@ -1,1 +1,0 @@
-UPDATE account_account SET reconcile='t' where code in ('416150','416200','451800','451900','453000','454000','455000','459700','580000');

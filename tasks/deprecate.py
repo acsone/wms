@@ -12,7 +12,8 @@ import os
 try:
     from ruamel.yaml import YAML
 except ImportError:
-    print('Please install ruamel.yaml')
+    print('Missing install ruamel.yaml from requirements')
+    print('Please run `pip install -r tasks/requirements.txt`')
 
 from invoke import task
 from .common import (

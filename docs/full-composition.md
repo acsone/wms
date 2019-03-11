@@ -17,7 +17,7 @@ $ docker-compose -f docker-compose.yml -f akeneo.yml up
 For testers:
 
 ```
-$ docker-compose -f testers.latest.yml -f akeneo.yml up
+$ docker-compose -f test.yml -f akeneo.yml up
 ```
 
 Now, you can open a browser on http://localhost:9000.
@@ -34,7 +34,7 @@ $ docker-compose -f docker-compose.yml -f wso2.yml up
 For testers:
 
 ```
-$ docker-compose -f testers.latest.yml -f wso2.yml up
+$ docker-compose -f test.yml -f wso2.yml up
 ```
 
 
@@ -53,5 +53,5 @@ $ docker-compose -f docker-compose.yml -f akeneo.yml -f wso2.yml up
 For testers:
 
 ```
-$ docker-compose -f testers.latest.yml -f akeneo.yml -f wso2.yml up
+$ docker-compose -f test.yml -f akeneo.yml -f wso2.yml up
 ```

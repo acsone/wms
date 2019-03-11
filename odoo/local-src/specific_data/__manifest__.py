@@ -13,12 +13,17 @@
         'product',
         'stock',
         'code_abc',
+        'delivery',
+        # FIXME specific_data should be at the root
+        # of the custom addons, specific_partner as
+        # other specific* should be a leaf...
         'specific_partner'
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
         'data/product.category.csv',
-        'data/product.pricelist.csv'
+        'data/product.pricelist.csv',
+        'data/delivery_carrier.xml'
     ],
     'installable': True,
 }

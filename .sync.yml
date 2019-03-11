@@ -16,5 +16,5 @@ sync:
     Do not modify. Any manual change will be lost.
     Please propose your modification on
     https://github.com/camptocamp/odoo-template instead.
-  pinned_version: 3.1.4.1-dev
-  last_sync: 20181123-1302
+  pinned_version: stable
+  last_sync: 20190306-0839

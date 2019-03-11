@@ -14,6 +14,7 @@
         'mrp',
         'specific_sale',
         'specific_stock',
+        'specific_data',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

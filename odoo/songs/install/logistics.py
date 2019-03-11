@@ -823,6 +823,30 @@ def create_picking_types(ctx):
 
 
 @anthem.log
+def create_fix_delivery_picking_type(ctx):
+    """create a new picking type to be used for the pickings to fix.
+
+    use self.env.ref('__setup__.stock_picking_type_fix_ship') to acces it.
+    """
+    ptype = ctx.env.ref(
+        '__setup__.stock_picking_type_fix_ship',
+        raise_if_not_found=False
+    )
+    if ptype:  # make sure script is idempotent
+        return ptype
+    ship = ctx.env.ref('stock.picking_type_out')
+    ptype = ship.copy({'name': 'Correction pb livraison'})
+    ctx.env['ir.model.data'].create(
+        {'name': 'stock_picking_type_fix_ship',
+         'module': '__setup__',
+         'model': 'stock.picking.type',
+         'res_id': ptype.id,
+         }
+    )
+    return ptype
+
+
+@anthem.log
 def configure_procurement_rules(ctx):
     """
     Change the procurement location (VLB Stock -> VLB) for the BUY rules
@@ -1187,6 +1211,7 @@ def main(ctx):
     create_locations(ctx)
     set_helpdesk_reason_location(ctx)
     create_picking_types(ctx)
+    create_fix_delivery_picking_type(ctx)
     configure_procurement_rules(ctx)
     create_procurement_rules(ctx)
     create_procurement_rules_mto(ctx)
