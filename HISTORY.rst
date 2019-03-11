@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* Add picking type on declared loss
 
 **Bugfixes**
 

@@ -63,6 +63,8 @@ class StockPackOperationLot(models.Model):
                     'name': 'Skip Lot',
                     'product_id': op.product_id.id,
                     'product_uom_qty': qty_to_block,
+                    'picking_type_id': self.env.ref(
+                        'stock_lot_loss.stock_picking_type_23').id,
                     'location_id': op.location_id.id,
                     'location_dest_id': dest_location.id,
                     'restrict_lot_id': self.lot_id.id,
