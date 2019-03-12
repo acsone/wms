@@ -195,8 +195,10 @@ class StockLocation(models.Model):
             WHERE active AND id!=%(id)s
             """
         if strict:
+            # For Aliment: add
+            #   AND height in ('A', 'B')
             query += """
-            AND height in ('A', 'B')
+            -- AND height in ('A', 'B')
             -- AND corridor in ('A', 'B', 'C', 'D', 'E')
             """
         query += """
