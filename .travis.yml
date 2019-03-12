@@ -42,13 +42,12 @@ before_install:
   # Only create cached dump on commits on master and not on tags.
   # Database dumps will land on the master's cache only.
   - if [ "$TESTS" == "1" -a "$TRAVIS_PULL_REQUEST" == "false" -a -z "$TRAVIS_TAG" ] ; then export CREATE_DB_CACHE="true" ; fi
-  - if [ "$LINT_CHECK" == "1" ] ; then pip2 install --user -q flake8 ; fi
-  - if [ "$LINT_CHECK" == "1" ] ; then pip3 install -q black; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then pip2 install --user -q gitpython requests pyOpenSSL ndg-httpsclient pyasn1 pyyaml; fi
+  - if [ "$LINT_CHECK" == "1" ] ; then pip3 install -q pre-commit ; fi
+  - if [ "$LINT_CHECK" == "0" ] ; then pip3 install -q gitpython requests pyOpenSSL ndg-httpsclient pyasn1 pyyaml; fi
 
 install:
   - if [ "$TESTS" == "1" ] ; then bundle install ; fi
-  - if [ "$LINT_CHECK" == "0" ] ; then python2 ./travis/git_submodule_update.py ; fi
+  - if [ "$LINT_CHECK" == "0" ] ; then python3 ./travis/git_submodule_update.py ; fi
     # we always specify '-f docker-compose.yml' so 'docker-compose.override.yml'
     # is not used and so the volumes are not shared with the host
   - if [ "$LINT_CHECK" == "0" ] ; then docker-compose -f $TRAVIS_COMPOSE build --pull ; fi
@@ -59,8 +58,7 @@ install:
 # after that we validated it has tests and migration passing
 script:
   - if [ "$TESTS" == "1" ] ; then bundle exec danger ; fi
-  - if [ "$LINT_CHECK" == "1" ] ; then python2 $(which flake8) ${ADDONS_DIR} ${SONGS_DIR} --exclude=__init__.py ; fi
-  - if [ "$LINT_CHECK" == "1" ] ; then black --check --fast -S ${ADDONS_DIR} ${SONGS_DIR} ${TASKS_DIR}; fi
+  - if [ "$LINT_CHECK" == "1" ] ; then pre-commit run --all-files ; fi
   # run tests on an empty database, which is dropped afterwards
   - if [ "$TESTS" == "1" ] ; then docker-compose -f $TRAVIS_COMPOSE run --rm -e SUBS_MD5=${SUBS_MD5} -e CREATE_DB_CACHE=${CREATE_DB_CACHE} -e DEMO=True odoo runtests ; fi
   # run the migration
