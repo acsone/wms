@@ -51,22 +51,18 @@ class TestReception(TransactionCase):
             })
         self.bin1 = self.location_model.create({
             'name': 'bin1',
-            'location_id': self.stock_location.id,
+            'location_id': self.reception_location.id,
             'usage': 'internal',
             })
         self.bin2 = self.location_model.create({
             'name': 'bin2',
-            'location_id': self.stock_location.id,
+            'location_id': self.reception_location.id,
             'usage': 'internal',
             })
-
-    @post_install(True)
-    @at_install(False)
-    def test_1_receive_on_view(self):
         picking = self.stock_picking_model.create({
             'picking_type_id': self.ref('stock.picking_type_in'),
             'location_id': self.supplier_location.id,
-            'location_dest_id': self.stock_location.id,
+            'location_dest_id': self.reception_location.id,
             'move_lines': [
                 (0, 0, {
                     'name': 'move 1',
@@ -80,6 +76,12 @@ class TestReception(TransactionCase):
         })
         picking = picking.with_context(test_mode=1)
         picking.action_assign()
+        self.picking = picking
+
+    @post_install(True)
+    @at_install(False)
+    def test_receive_on_view(self):
+        picking = self.picking
 
         # launch wizard
         wiz = self.stock_reception_wizard\
@@ -160,33 +162,8 @@ class TestReception(TransactionCase):
 
     @post_install(True)
     @at_install(False)
-    def test_1_receive_on_bins(self):
-        picking = self.stock_picking_model.create({
-            'picking_type_id': self.ref('stock.picking_type_in'),
-            'location_id': self.supplier_location.id,
-            'location_dest_id': self.stock_location.id,
-            'move_lines': [
-                (0, 0, {
-                    'name': 'move 1',
-                    'product_id': self.products[0].id,
-                    'product_uom_qty': 5,
-                    'product_uom': self.products[0].uom_id.id,
-                    'location_id': self.supplier_location.id,
-                    'location_dest_id': self.bin1.id,
-                }),
-                (0, 0, {
-                    'name': 'move 2',
-                    'product_id': self.products[1].id,
-                    'product_uom_qty': 5,
-                    'product_uom': self.products[1].uom_id.id,
-                    'location_id': self.supplier_location.id,
-                    'location_dest_id': self.bin2.id,
-                }),
-            ],
-        })
-        picking = picking.with_context(test_mode=1)
-        picking.action_assign()
-
+    def test_receive_on_bins(self):
+        picking = self.picking
         # launch wizard
         wiz = self.stock_reception_wizard\
             .with_context(default_life_date_allowed=True)\
@@ -194,6 +171,10 @@ class TestReception(TransactionCase):
 
         op1 = picking.pack_operation_product_ids[0]
         op2 = picking.pack_operation_product_ids[1]
+
+        # Simulate putaway to bin1 and bin2
+        op1.location_dest_id = self.bin1
+        op2.location_dest_id = self.bin2
 
         # select operation
         wiz.operation_id = op1
