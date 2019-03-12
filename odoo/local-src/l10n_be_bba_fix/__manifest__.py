@@ -10,7 +10,7 @@
     'author': "BCIM",
     'depends': [
         'l10n_be_invoice_bba',
-        ],
+    ],
     'data': [
         'views/account_invoice.xml',
     ],

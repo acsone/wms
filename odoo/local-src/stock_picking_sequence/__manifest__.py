@@ -27,7 +27,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/picking.xml',
     ],

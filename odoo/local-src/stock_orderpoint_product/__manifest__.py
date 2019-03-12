@@ -11,11 +11,11 @@
     'website': 'http://www.bcim.be',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/product.xml',
         'views/stock.xml',
-        ],
+    ],
     'installable': True,
     'auto_install': False,
     'license': 'AGPL-3',

@@ -10,7 +10,7 @@
     'category': 'Stock',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/product.xml',
         'views/stock.xml',

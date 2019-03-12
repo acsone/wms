@@ -10,7 +10,7 @@
     'depends': [
         'stock',
         'product_additional',
-        ],
+    ],
     'data': [
     ],
     'installable': True,

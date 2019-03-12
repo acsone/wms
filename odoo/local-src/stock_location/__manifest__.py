@@ -25,10 +25,10 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/stock_location.xml',
-        ],
+    ],
     'installable': True,
     'active': False,
     'license': 'AGPL-3',

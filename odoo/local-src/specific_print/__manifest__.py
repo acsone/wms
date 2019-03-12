@@ -14,7 +14,7 @@
         'stock_receive_lot',
         'specific_report',
         'specific_product',
-        ],
+    ],
     'data': [
         'views/stock_splitlot.xml',
         'views/printer.xml',
@@ -27,7 +27,7 @@
         'views/stock.xml',
         'views/product_template.xml',
         'views/stock_production_lot.xml',
-        ],
+    ],
     'installable': True,
     'license': 'AGPL-3',
     'application': False,

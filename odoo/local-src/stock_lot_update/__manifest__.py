@@ -26,11 +26,11 @@
     'author': 'BCIM',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/stock.xml',
         'views/stock_change_product_qty.xml',
-        ],
+    ],
     'installable': True,
     'active': False,
     'license': 'AGPL-3',

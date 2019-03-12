@@ -11,7 +11,7 @@
     'depends': [
         'stock',
         'stock_quant_bylocation',
-        ],
+    ],
     'data': [
         'views/stock_location.xml',
     ],

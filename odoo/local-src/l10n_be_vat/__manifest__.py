@@ -10,7 +10,7 @@
     'author': "BCIM",
     'depends': [
         'l10n_be',
-        ],
+    ],
     'data': [
         'data/account_tax_template_data.xml',
     ],

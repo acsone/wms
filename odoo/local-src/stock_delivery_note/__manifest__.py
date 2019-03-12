@@ -12,7 +12,7 @@
         'specific_stock',
         'product_expiry',
         'stock_expired',
-        ],
+    ],
     'data': [
         'data/email_template.xml',
         'data/account_tax_group.xml',

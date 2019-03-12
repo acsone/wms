@@ -11,7 +11,7 @@
     'website': 'http://www.okia.be',
     'depends': [
         'l10n_be_coda',
-        ],
+    ],
     'data': [],
     'installable': True,
     'auto_install': False,

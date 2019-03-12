@@ -30,10 +30,10 @@
     """,
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/stock_picking.xml',
-        ],
+    ],
     'installable': True,
     'active': False,
     'license': 'AGPL-3',
