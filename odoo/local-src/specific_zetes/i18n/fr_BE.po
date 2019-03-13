@@ -879,4 +879,3 @@ msgstr "view.picking.line"
 #: model:ir.model,name:specific_zetes.model_zetes_logger
 msgid "zetes.logger"
 msgstr "zetes.logger"
-

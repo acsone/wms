@@ -53,4 +53,3 @@ msgstr "Date limite d'utilisation optimale"
 #: model:ir.model,name:stock_production_lot_expired_dates.model_stock_config_settings
 msgid "stock.config.settings"
 msgstr "stock.config.settings"
-

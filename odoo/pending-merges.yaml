@@ -31,7 +31,7 @@
     - git am "$(git format-patch -1 223a0e8b19a474bf24bfe9dae09c6c2ba396c8c8 -o ../patches)"
     # [10.0][IMP] stock: performance on _compute_product_availability #30545
     - git am "$(git format-patch -1 d3ab0fb9f5f99ea71858750949b387409c85081c -o ../patches)"
-    # [FIX] stock_account: group on empty field 
+    # [FIX] stock_account: group on empty field
     - git am "$(git format-patch -1 ba09b8989ebbe10aa336dbf850d075fbcda558d0 -o ../patches)"
     # Optimize groupby on stock history (https://github.com/odoo/odoo/pull/31540)
     - git am "$(git format-patch -1 7d3a0282566d3b1b5f8ecc398db94a991150678c -o ../patches)"
@@ -115,7 +115,7 @@
     oca: git@github.com:oca/server-tools.git
     camptocamp: git@github.com:camptocamp/server-tools.git
   fetch_all:
-    oca 
+    oca
   merges:
     - oca 06d27d494288358b5177101f4441dc498f0c4304
       # fix onchange_helper when more than 3 chained fields in onchange_specs

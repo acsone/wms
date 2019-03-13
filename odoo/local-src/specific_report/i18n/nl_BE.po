@@ -936,4 +936,3 @@ msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr "|\n"
 "                    <span>Telefoon:</span>"
-

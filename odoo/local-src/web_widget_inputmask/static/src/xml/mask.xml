@@ -20,4 +20,4 @@
     <span t-name="Widget.mask"
           t-att="widget.attrsMask"
           contenteditable="false"/>
-</templates> 
+</templates>

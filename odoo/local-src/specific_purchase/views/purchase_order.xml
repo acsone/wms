@@ -85,7 +85,7 @@
             </xpath>
         </field>
     </record>
-    
+
     <record id="view_purchase_order_filter" model="ir.ui.view">
         <field name="name">view.purchase.order.filter inherit</field>
         <field name="model">purchase.order</field>

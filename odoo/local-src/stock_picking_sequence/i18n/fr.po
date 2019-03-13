@@ -29,4 +29,3 @@ msgstr "Transfert"
 #: model:ir.ui.view,arch_db:stock_picking_sequence.view_picking_form
 msgid "recompute"
 msgstr "recalculer"
-

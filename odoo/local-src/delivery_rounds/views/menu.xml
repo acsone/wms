@@ -5,4 +5,3 @@
         <menuitem id="menu_delivery_round_settings" name="Settings" parent="menu_delivery_round" sequence="100"/>
 
 </odoo>
-

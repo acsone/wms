@@ -717,4 +717,3 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
-

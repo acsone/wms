@@ -139,7 +139,7 @@ On lnx005.abl.grp :
 ```
 pg_dump -h lnx005.abl.grp --username=odoo-prod --password -d odoo-prod --no-owner> /mnt/linuxbackup/odoo/odoo-prod-2018-12-04-14-37.sql
 ```
- 
+
 On lnx004.abl.grp :
 
 - Once the backup is done, we restart the odoo stack:
@@ -156,10 +156,10 @@ In order to follow the logs during the deployment of a new release you need to s
 camptocamp@LNX001:~$ docker service ls
 ID                  NAME                      MODE                REPLICAS            IMAGE                              PORTS
 3vt3mb90gc32        cups_cups                 replicated          1/1                 cardonaje/cups:latest              *:631->631/tcp, *:631->631/udp
-nzdzf30ce1cw        journalbeat_journalbeat   global              1/1                 nicolaka/journalbeat:latest        
-89k2b8vbovyw        odoo_mailhog              replicated          1/1                 mailhog/mailhog:latest             
-j6a2hkdr0frs        odoo_odoo                 replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b   
-0t0isxmnkar6        odoo_odooqueuejob         replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b   
+nzdzf30ce1cw        journalbeat_journalbeat   global              1/1                 nicolaka/journalbeat:latest  
+89k2b8vbovyw        odoo_mailhog              replicated          1/1                 mailhog/mailhog:latest  
+j6a2hkdr0frs        odoo_odoo                 replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b  
+0t0isxmnkar6        odoo_odooqueuejob         replicated          1/1                 camptocamp/alcyon_odoo:10.30.20b  
 46fxjuzjykzz        proftpd_proftpd           replicated          1/1                 cardonaje/proftpd:1.3.5e-1build1   *:23->23/tcp
 nabye48r971m        traefik_traefik           global              1/1                 traefik:v1.7.8
 ```

@@ -30,4 +30,3 @@ msgstr "Démarrer"
 #: model:ir.model,name:stock_picking_assignment.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
-

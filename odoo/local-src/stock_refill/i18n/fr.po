@@ -250,4 +250,3 @@ msgstr "report.stock.quant.bylocation.reserve"
 #: model:ir.model,name:stock_refill.model_stock_wizard_reassort
 msgid "stock.wizard.reassort"
 msgstr "stock.wizard.reassort"
-

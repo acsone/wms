@@ -112,4 +112,3 @@ msgstr "Deuxième lettre de relance et courriel"
 #: model:account_followup.followup.line,name:specific_followup.alcyon_followup_line3
 msgid "Third reminder: phone the customer"
 msgstr "Troisième relance: appel du client"
-

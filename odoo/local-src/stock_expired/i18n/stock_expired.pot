@@ -108,4 +108,3 @@ msgstr ""
 #: model:ir.model,name:stock_expired.model_stock_picking
 msgid "Transfer"
 msgstr ""
-

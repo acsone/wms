@@ -343,4 +343,3 @@ msgstr ""
 #: model:ir.model,name:specific_purchase.model_purchase_config_settings
 msgid "purchase.config.settings"
 msgstr ""
-

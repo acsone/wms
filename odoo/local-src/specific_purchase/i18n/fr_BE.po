@@ -531,4 +531,3 @@ msgstr "purchase.config.settings"
 #: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "to"
 msgstr "au"
-

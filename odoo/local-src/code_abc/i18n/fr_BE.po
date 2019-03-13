@@ -167,4 +167,3 @@ msgstr "code.abc"
 #: model:ir.model,name:code_abc.model_purchase_config_settings
 msgid "purchase.config.settings"
 msgstr "purchase.config.settings"
-

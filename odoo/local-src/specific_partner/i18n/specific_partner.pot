@@ -172,4 +172,3 @@ msgstr ""
 #: model:ir.model,name:specific_partner.model_partner_alcyon_category
 msgid "partner.alcyon_category"
 msgstr ""
-

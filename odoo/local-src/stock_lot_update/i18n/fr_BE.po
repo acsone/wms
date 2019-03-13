@@ -24,4 +24,3 @@ msgstr "Changer la quantité d'articles"
 #: model:ir.model,name:stock_lot_update.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr "Lot/N° série"
-

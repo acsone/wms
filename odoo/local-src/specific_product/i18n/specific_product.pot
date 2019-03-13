@@ -45,4 +45,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_product.field_product_template_sale_price_2
 msgid "Sale Price 2"
 msgstr ""
-

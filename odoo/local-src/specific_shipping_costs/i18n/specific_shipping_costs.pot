@@ -90,4 +90,3 @@ msgstr ""
 #: model:ir.model,name:specific_shipping_costs.model_sale_config_settings
 msgid "sale.config.settings"
 msgstr ""
-

@@ -79,4 +79,3 @@ msgstr "Règles de réapprovisionnement"
 #, python-format
 msgid "You have several variants for this product. Please define the min/max on each variant."
 msgstr "Vous avez plusieurs variantes pour ce produit.Veuillez définier le min/max sur chaque variante."
-

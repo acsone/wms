@@ -9,9 +9,9 @@
 #
 # Usage:
 #   ./odoo/bin/list_dependencies.py local_module1,local_module2
-import sys
-import os
 import ast
+import os
+import sys
 
 BASE_DIR = os.getcwd()
 LOCAL_SRC_DIR = os.path.join(BASE_DIR, 'odoo', 'local-src')

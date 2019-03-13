@@ -20,4 +20,3 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account.invoice_form
 msgid "Send by Email"
 msgstr "Envoyé"
-

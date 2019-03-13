@@ -42,4 +42,3 @@ msgstr "La commande %s va être confirmée en arrière-plan."
 #: model:ir.model,name:sale_confirm_background.model_sale_order
 msgid "Sales Order"
 msgstr "Commandes"
-

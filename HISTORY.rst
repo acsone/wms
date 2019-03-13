@@ -51,7 +51,7 @@ latest (unreleased)
 
 **Bugfixes**
 
-* BIZ-3075: Fix intrastat report layout 
+* BIZ-3075: Fix intrastat report layout
 
 
 10.32.0 (2019-03-07)

@@ -246,4 +246,3 @@ msgstr "Facture unique"
 #: model:ir.model,name:specific_account.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"
-

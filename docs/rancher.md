@@ -63,4 +63,3 @@ $ travis encrypt -r camptocamp/<repository_name> rancher_env_password=xxxxxxx
 
 The output of this command should be added in the `global` section in `env` of
 `travis.yml`.
-

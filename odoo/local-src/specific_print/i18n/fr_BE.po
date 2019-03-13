@@ -482,4 +482,3 @@ msgstr "🖶Imprimer colis"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Products"
 msgstr "🖶Imprimer produits"
-
