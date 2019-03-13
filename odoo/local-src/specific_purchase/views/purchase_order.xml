@@ -94,6 +94,7 @@
             <xpath expr="//filter[@name='draft']" position="before">
                 <filter name="my_orders" string="My Orders" domain="[('responsible_id', '=', uid)]" />
                 <filter name="without_responsible" string="Without responsible" domain="[('responsible_id', '=', False)]" />
+                <filter name="bo_orders" string="In BO" domain="[('nbr_lines_bo', '>', 0)]" />
                 <separtor/>
             </xpath>
         </field>
