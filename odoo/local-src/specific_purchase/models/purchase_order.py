@@ -28,6 +28,7 @@ class PurchaseOrder(models.Model):
                                )
     nbr_lines_bo = fields.Integer('Nbr lines BO',
                                   compute='_compute_nbr_lines_bo',
+                                  search="_search_nbr_lines_bo",
                                   readonly=True
                                   )
 
@@ -51,6 +52,16 @@ class PurchaseOrder(models.Model):
             # especially when the field is displayed on PO tree view
             po.nbr_lines_bo = len(po.order_line.filtered(
                 lambda line: line.product_id.immediately_usable_qty < 0))
+
+    def _search_nbr_lines_bo(self, operator, value):
+        orders = self.browse()
+        draft_orders = self.search([('state', '=', 'draft')])
+        for order in draft_orders:
+            # NOTE: actual operator is ignored here for the sake of simplicity.
+            # To implement if it's really needed.
+            if order.nbr_lines_bo:
+                orders |= order
+        return [('id', 'in', orders.ids)]
 
     @api.model
     def create(self, vals):

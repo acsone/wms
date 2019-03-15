@@ -28,6 +28,8 @@ latest (unreleased)
   relevant row. Adding a partial index on corresponding fields fix the
   performance issue.
 
+* ALCYN-1972: Create filter for articles in BO on purchase
+
 **Bugfixes**
 
 **Build**
