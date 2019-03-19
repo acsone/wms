@@ -78,12 +78,12 @@ while True:
         exit(0)
     elif so['esb_ref']:
         print(
-            'Sale order has been sent to the'
-            ' ESB with esb_id {}'.format(so['esb_ref'])
+            u'Sale order has been sent to the'
+            u' ESB with esb_id {}'.format(so['esb_ref'])
         )
         break
     else:
-        print('Sale order {} is in state {}'.format(so['id'], so['state']))
+        print(u'Sale order {} is in state {}'.format(so['id'], so['state']))
 
 # Update the sale order, changes should be sent to the ESB
 so['order_line'][0].product_uom_qty = 12

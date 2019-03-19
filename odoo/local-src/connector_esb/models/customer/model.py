@@ -16,8 +16,8 @@ class ResPartner(models.Model):
             if record.esb_exported:
                 raise exceptions.UserError(
                     _(
-                        "The customer {} has already been exported, it can be "
-                        "archived  but not deleted."
+                        u"The customer {} has already been exported, it can be "
+                        u"archived  but not deleted."
                     ).format(record.name)
                 )
             return super(ResPartner, self).unlink()

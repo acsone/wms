@@ -194,7 +194,9 @@ class Assignment(DomainInterface):
                 'Usf05': 0,  # Constant value
                 'Usf07': partner.name,  # Partner name
                 # Zip + city
-                'Usf08': '{} {}'.format(partner.zip or '', partner.city or ''),
+                'Usf08': u'{} {}'.format(
+                    partner.zip or '', partner.city or ''
+                ),
                 'Usf09': picking.nbr_actions,  # Nbr of operation
             }
         )

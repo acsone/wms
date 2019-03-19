@@ -21,7 +21,7 @@ class StockPickingType(models.Model):
         res = []
         for picking_type in self:
             if picking_type.warehouse_id:
-                name = '{}: {}'.format(
+                name = u'{}: {}'.format(
                     picking_type.warehouse_id.code, picking_type.name
                 )
             else:
@@ -42,9 +42,9 @@ class StockPicking(models.Model):
         for picking in self:
             name = picking.name
             if picking.partner_id:
-                name += ' - %s' % picking.partner_id.display_name
+                name += u' - %s' % picking.partner_id.display_name
             if picking.delivery_round_id:
-                name += ' - %s' % picking.delivery_round_id.template_code
+                name += u' - %s' % picking.delivery_round_id.template_code
             res.append((picking.id, name))
         return res
 
