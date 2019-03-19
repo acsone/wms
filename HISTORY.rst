@@ -20,8 +20,25 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
-* Add picking type on declared loss
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.33.0 (2019-03-19)
+++++++++++++++++++++++++
+
+**General changes**
+
+* Switch to 5 digits version [10.0] represents the Odoo version and [1.33.0] the project's one.
+* Enforce 'pre-commit' on the project with black, isort, pyupgrade and few others
+
+**Features and Improvements**
+
+* Add picking type on declared loss
 * ALCYN-1962: Speed up loading of partner form view
 
   The computed field 'last_suite_name' on 'res.partner' performs a search on
@@ -36,10 +53,6 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-1948: add invoice number + date invoice in the invoice footer
-
-**Build**
-
-**Documentation**
 
 
 10.32.1 (2019-03-11)
