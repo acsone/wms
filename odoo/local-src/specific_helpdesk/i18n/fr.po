@@ -417,4 +417,3 @@ msgstr "Transfert"
 
 #~ msgid "Repair"
 #~ msgstr "Réparation"
-

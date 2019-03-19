@@ -3,7 +3,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import fields, models, _
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -15,7 +15,9 @@ class DeliveryCarrier(models.Model):
     )
 
     def unlink(self):
-        if self.env['res.partner'].search([
-                ('property_delivery_carrier_id', 'in', self.ids)]):
+        if self.env['res.partner'].search(
+            [('property_delivery_carrier_id', 'in', self.ids)]
+        ):
             raise UserError(
-                _('You cannot delete a record linked from a partner'))
+                _('You cannot delete a record linked from a partner')
+            )

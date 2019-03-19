@@ -2,14 +2,15 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import resource_stream
-
 import logging
 import os
-import anthem
 from datetime import datetime
-from anthem.lyrics.loaders import load_csv_stream, read_csv, load_rows
+
+import anthem
+from anthem.lyrics.loaders import load_csv_stream, load_rows, read_csv
 from anthem.lyrics.records import create_or_update
+from pkg_resources import resource_stream
+
 from ..common import req
 
 _logger = logging.getLogger(__name__)
@@ -72,17 +73,19 @@ def import_partner_link(ctx):
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
     with ctx.log(u"Apply manual changes from Laurence"):
-        content = resource_stream(
-            req, 'data/install/Laurence-partner-new.csv')
+        content = resource_stream(req, 'data/install/Laurence-partner-new.csv')
         load_csv_stream(ctx, Partner, content, delimiter=',')
         content = resource_stream(
-            req, 'data/install/Laurence-partner-override.csv')
+            req, 'data/install/Laurence-partner-override.csv'
+        )
         load_csv_stream(ctx, Partner, content, delimiter=',')
         content = resource_stream(
-            req, 'data/install/Laurence-partner-inactive.csv')
+            req, 'data/install/Laurence-partner-inactive.csv'
+        )
         load_csv_stream(ctx, Partner, content, delimiter=',')
         content = resource_stream(
-            req, 'data/install/Laurence-partner-parent.csv')
+            req, 'data/install/Laurence-partner-parent.csv'
+        )
         load_csv_stream(ctx, Partner, content, delimiter=',')
 
 
@@ -108,23 +111,21 @@ def post_import_partner(ctx):
 @anthem.log
 def create_product_other(ctx):
     """ Create product 'Other' used when importing sale orders """
-    values = {
-        'name': "Divers",
-        'default_code': "DIVERS",
-        'list_price': 0.0
-    }
-    create_or_update(ctx, 'product.product',
-                     '__setup__.product_other', values)
+    values = {'name': "Divers", 'default_code': "DIVERS", 'list_price': 0.0}
+    create_or_update(ctx, 'product.product', '__setup__.product_other', values)
 
 
 @anthem.log
 def import_products(ctx):
     """ Importing products from csv"""
     load_ctx = ctx.env.context.copy()
-    load_ctx.update({
-        'tracking_disable': True,
-        'no_connector_export': True,
-        'force_archive_orderpoint': True})
+    load_ctx.update(
+        {
+            'tracking_disable': True,
+            'no_connector_export': True,
+            'force_archive_orderpoint': True,
+        }
+    )
 
     Product = ctx.env['product.product'].with_context(load_ctx)
     file_csv = 'data/install/product.csv'
@@ -140,24 +141,28 @@ def import_products(ctx):
 def product_copy_on_unactive(ctx):
     # Computed fields on product.template are not set for archived product
     # copy the values from product.product
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
         UPDATE product_template as tmpl
         SET active=prod.active, default_code=prod.default_code
         FROM product_product as prod
         WHERE tmpl.id = prod.product_tmpl_id AND prod.active=False
-    """)
+    """
+    )
 
 
 def product_template_set_create_date(ctx):
     # Update create_date on all products
     # The hack in db2_import on create_date
     # doesn't work with parent objects of inherits
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
         UPDATE product_template as tmpl
         SET create_date=prod.create_date
         FROM product_product as prod
         WHERE tmpl.id = prod.product_tmpl_id
-    """)
+    """
+    )
 
 
 @anthem.log
@@ -171,8 +176,9 @@ def import_product_supplierinfo(ctx):
     """ Importing product supplier infos from csv"""
     # We cannot trust data in the AS400. It why I disable the constrain
     # on supplier info
-    ProductSupplierinfo = \
-        ctx.env['product.supplierinfo'].with_context(disable_check_dates=True)
+    ProductSupplierinfo = ctx.env['product.supplierinfo'].with_context(
+        disable_check_dates=True
+    )
     for content in get_files(req, 'data/install/supplierinfo.csv'):
         load_csv_stream(ctx, ProductSupplierinfo, content, delimiter=',')
 
@@ -230,8 +236,7 @@ def location_compute_parents(ctx):
 @anthem.log
 def import_delivery_round_config(ctx):
     """ Importing delivery round config from csv"""
-    content = \
-        resource_stream(req, 'data/install/round.template.version.csv')
+    content = resource_stream(req, 'data/install/round.template.version.csv')
     load_csv_stream(ctx, 'round.template.version', content, delimiter=',')
 
     content = resource_stream(req, 'data/install/delivery_tags.csv')
@@ -240,7 +245,8 @@ def import_delivery_round_config(ctx):
     content = resource_stream(req, 'data/install/delivery_template.csv')
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
     content = resource_stream(
-        req, 'data/install/delivery.carrier.template.csv')
+        req, 'data/install/delivery.carrier.template.csv'
+    )
     load_csv_stream(ctx, 'round.template', content, delimiter=',')
 
     content = resource_stream(req, 'data/install/delivery_itinerary.csv')
@@ -288,11 +294,10 @@ def purge_inventory(ctx):
 @anthem.log
 def import_inventory(ctx):
     """ Importing inventory from csv"""
-    values = {
-        'name': 'Initial',
-        }
-    inventory = create_or_update(ctx, 'stock.inventory',
-                                 '__setup__.initial_inventory', values)
+    values = {'name': 'Initial'}
+    inventory = create_or_update(
+        ctx, 'stock.inventory', '__setup__.initial_inventory', values
+    )
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
@@ -312,11 +317,10 @@ def import_inventory(ctx):
 @anthem.log
 def import_inventory_without_lot(ctx):
     """ Importing second inventory without lots from csv"""
-    values = {
-        'name': 'Initial (products without lot)',
-    }
-    inventory = create_or_update(ctx, 'stock.inventory',
-                                 '__setup__.initial_inventory_no_lot', values)
+    values = {'name': 'Initial (products without lot)'}
+    inventory = create_or_update(
+        ctx, 'stock.inventory', '__setup__.initial_inventory_no_lot', values
+    )
 
     load_ctx = ctx.env.context.copy()
     load_ctx.update({'tracking_disable': True})
@@ -324,7 +328,8 @@ def import_inventory_without_lot(ctx):
 
     model = 'stock.inventory.line'
     content = resource_stream(
-        req, 'data/install/stock_inventory_line_without_lot.csv')
+        req, 'data/install/stock_inventory_line_without_lot.csv'
+    )
     header, rows = read_csv(content)
     header.append('inventory_id/.id')
     new_rows = []
@@ -337,8 +342,9 @@ def import_inventory_without_lot(ctx):
 @anthem.log
 def import_banks(ctx):
     """ Importing banks """
-    content_supplier = \
-        resource_stream(req, 'data/install/res_bank_supplier.csv')
+    content_supplier = resource_stream(
+        req, 'data/install/res_bank_supplier.csv'
+    )
     load_csv_stream(ctx, 'res.bank', content_supplier, delimiter=',')
 
 
@@ -357,7 +363,8 @@ def import_bank_accounts(ctx):
     ctx.env.cr.execute(drop_constraint_query)
 
     content_supplier = resource_stream(
-        req, 'data/install/res_partner_bank_supplier.csv')
+        req, 'data/install/res_partner_bank_supplier.csv'
+    )
     load_csv_stream(ctx, 'res.partner.bank', content_supplier, delimiter=',')
 
 
@@ -403,19 +410,23 @@ def import_customer_banks_and_mandats(ctx):
         _logger.error(
             'Invalid mandat file. The header must be: X0015,X0011,X0014,'
             'Ref_Mandat,Date_Signature,Siecle,Sequence,Cle_IBAN,'
-            'Compte_Bancaire,BIC,Last_Run')
+            'Compte_Bancaire,BIC,Last_Run'
+        )
         return
 
     check_customer_query = "SELECT id FROM res_partner WHERE ref = %s;"
     check_bank_query = "SELECT id FROM res_bank WHERE bic = %s;"
-    check_bank_account_query = \
-        "SELECT id FROM res_partner_bank WHERE " + \
-        "sanitized_acc_number = %s AND partner_id = %s;"
+    check_bank_account_query = (
+        "SELECT id FROM res_partner_bank WHERE "
+        + "sanitized_acc_number = %s AND partner_id = %s;"
+    )
 
     mandats = ctx.env['account.banking.mandate']
 
-    _logger.warning('/!\\ All warnings after this line for this song'
-                    ' can be ignored /!\\')
+    _logger.warning(
+        '/!\\ All warnings after this line for this song'
+        ' can be ignored /!\\'
+    )
 
     index = 1
     for row in rows:
@@ -427,7 +438,8 @@ def import_customer_banks_and_mandats(ctx):
 
             if not result:
                 _logger.warning(
-                    'Customer not found with ref %s' % ref_customer)
+                    'Customer not found with ref %s' % ref_customer
+                )
                 continue
             partner_id = result[0]
 
@@ -438,10 +450,7 @@ def import_customer_banks_and_mandats(ctx):
 
             if not result:
                 xmlid = '__import__.bank_%s' % bic
-                bank_value = {
-                    'name': bic,
-                    'bic': bic,
-                }
+                bank_value = {'name': bic, 'bic': bic}
                 bank = create_or_update(ctx, 'res.bank', xmlid, bank_value)
                 bank_id = bank.id
             else:
@@ -453,14 +462,17 @@ def import_customer_banks_and_mandats(ctx):
             result = ctx.env.cr.fetchone()
 
             if not result:
-                xmlid = '__import__.bank_account_%s_%s' % (ref_customer, iban)
+                xmlid = '__import__.bank_account_{}_{}'.format(
+                    ref_customer, iban
+                )
                 bank_account_value = {
                     'acc_number': iban,
                     'partner_id': partner_id,
                     'bank_id': bank_id,
                 }
-                bank_account = create_or_update(ctx, 'res.partner.bank',
-                                                xmlid, bank_account_value)
+                bank_account = create_or_update(
+                    ctx, 'res.partner.bank', xmlid, bank_account_value
+                )
                 bank_account_id = bank_account.id
             else:
                 bank_account_id = result[0]
@@ -473,7 +485,7 @@ def import_customer_banks_and_mandats(ctx):
             else:
                 recurrent_sequence_type = 'recurring'
 
-            xmlid = '__import__.mandate_%s_%s' % (ref_customer, ref_mandat)
+            xmlid = '__import__.mandate_{}_{}'.format(ref_customer, ref_mandat)
 
             signature_date_str = row[index_signature_date]
             signature_date = datetime.strptime(signature_date_str, '%d/%m/%Y')
@@ -503,14 +515,16 @@ def import_customer_banks_and_mandats(ctx):
                 last_run_str = last_run.strftime('%Y-%m-%d')
                 mandat_value['last_debit_date'] = last_run_str
 
-            mandat = create_or_update(ctx, 'account.banking.mandate',
-                                      xmlid, mandat_value)
+            mandat = create_or_update(
+                ctx, 'account.banking.mandate', xmlid, mandat_value
+            )
             mandats |= mandat
 
             index += 1
         except Exception as e:
-            _logger.warning('Cannot import the line %s: %s' %
-                            (index, ', '.join(row)))
+            _logger.warning(
+                'Cannot import the line {}: {}'.format(index, ', '.join(row))
+            )
             _logger.warning(str(e))
             pass
 
@@ -523,8 +537,9 @@ def import_stock_bins(ctx):
     """ Importing Stock Bins"""
     for content in get_files(req, 'data/install/product_stock_bin.csv'):
         load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
-    for content in get_files(req,
-                             'data/install/product_stock_bin_parking.csv'):
+    for content in get_files(
+        req, 'data/install/product_stock_bin_parking.csv'
+    ):
         load_csv_stream(ctx, 'product.stock.bin', content, delimiter=',')
 
 
@@ -568,7 +583,7 @@ def post_import_stock_bins(ctx):
             domain = [
                 '|',
                 ('location_id', '=', '__setup__.stock_location_parking_ali'),
-                ] + domain
+            ] + domain
         product_bins = StockBin.search(domain)
         if not product_bins:
             continue
@@ -581,7 +596,8 @@ def post_import_stock_bins(ctx):
             "    AND id NOT IN ("
             "      SELECT product_id FROM stock_route_product"
             "      WHERE route_id = %s)",
-            (route.id, tuple(products.ids), route.id))
+            (route.id, tuple(products.ids), route.id),
+        )
 
     def sql_create_routes(letter, route):
         cr.execute(
@@ -591,7 +607,8 @@ def post_import_stock_bins(ctx):
             "    AND id NOT IN ("
             "      SELECT product_id FROM stock_route_product"
             "      WHERE route_id = %s)",
-            (route.id, family_letter, route.id))
+            (route.id, family_letter, route.id),
+        )
 
     for family_letter, route in family_map:
         sql_create_routes(family_letter, route)
@@ -603,23 +620,33 @@ def create_current_liabilities_accounts(ctx):
     """ WARNING: Keep this method even if this method is not used.
     Will be used later (after go live).
     Create the balance' accounts """
-    account_type_current_liabilities = \
-        ctx.env.ref('account.data_account_type_current_liabilities')
+    account_type_current_liabilities = ctx.env.ref(
+        'account.data_account_type_current_liabilities'
+    )
 
-    account_customer_xml_id = \
-        '__setup__.account_current_liabilities_customer'
-    create_or_update(ctx, 'account.account', account_customer_xml_id, {
-        'code': '499001',
-        'name': 'Compte d\'attente clients',  # In french for Catherine
-        'user_type_id': account_type_current_liabilities.id,
-    })
+    account_customer_xml_id = '__setup__.account_current_liabilities_customer'
+    create_or_update(
+        ctx,
+        'account.account',
+        account_customer_xml_id,
+        {
+            'code': '499001',
+            'name': 'Compte d\'attente clients',  # In french for Catherine
+            'user_type_id': account_type_current_liabilities.id,
+        },
+    )
 
     account_supplier_xml_id = '__setup__.account_current_liabilities_supplier'
-    create_or_update(ctx, 'account.account', account_supplier_xml_id, {
-        'code': '499002',
-        'name': 'Compte d\'attente fournisseurs',  # In french for Catherine
-        'user_type_id': account_type_current_liabilities.id,
-    })
+    create_or_update(
+        ctx,
+        'account.account',
+        account_supplier_xml_id,
+        {
+            'code': '499002',
+            'name': 'Compte d\'attente fournisseurs',  # In french for Catherine
+            'user_type_id': account_type_current_liabilities.id,
+        },
+    )
 
 
 @anthem.log
@@ -644,29 +671,34 @@ def import_journal_items(ctx, customer=False, supplier=False):
 
     if customer:
         file_path = 'data/source/BALclients.csv'
-        liability_account = \
-            ctx.env.ref('__setup__.account_current_liabilities_customer')
+        liability_account = ctx.env.ref(
+            '__setup__.account_current_liabilities_customer'
+        )
     elif supplier:
         file_path = 'data/source/BALfournisseurs.csv'
-        liability_account = \
-            ctx.env.ref('__setup__.account_current_liabilities_supplier')
+        liability_account = ctx.env.ref(
+            '__setup__.account_current_liabilities_supplier'
+        )
     else:
-        raise Exception('You cannot start this method without specifying '
-                        'the type of import')
+        raise Exception(
+            'You cannot start this method without specifying '
+            'the type of import'
+        )
 
     ctx.env.cr.execute("SELECT code, id FROM account_account")
     accounts = dict(ctx.env.cr.fetchall())
 
-    check_customer_ref_query = \
+    check_customer_ref_query = (
         "SELECT id FROM res_partner WHERE ref = %s AND parent_id IS NULL"
+    )
 
     AccountMove = ctx.env['account.move']
     AccountMoveLine = ctx.env['account.move.line']
     IrModelData = ctx.env['ir.model.data']
 
-    journal = ctx.env['account.journal'].search([
-        ('code', '=', 'MISC')
-    ], limit=1)
+    journal = ctx.env['account.journal'].search(
+        [('code', '=', 'MISC')], limit=1
+    )
     if not journal:
         _logger.error('MISC journal not found')
         return
@@ -693,7 +725,8 @@ def import_journal_items(ctx, customer=False, supplier=False):
                 continue
             if len(result) > 1:
                 _logger.error(
-                    'Several partners have the same ref %s' % customer_ref)
+                    'Several partners have the same ref %s' % customer_ref
+                )
                 continue
             partner_id = result[0]
 
@@ -726,50 +759,60 @@ def import_journal_items(ctx, customer=False, supplier=False):
             credit = credit_str and float(credit_str) or 0
 
             if (credit * debit != 0) or (credit + debit < 0):
-                _logger.error('Invalid value for credit (%s) and debit (%s)' %
-                              (credit, debit))
+                _logger.error(
+                    'Invalid value for credit (%s) and debit (%s)'
+                    % (credit, debit)
+                )
                 continue
 
             num_piece = row[index_num_piece]
             original_journal = row[index_journal]
-            name = "%s - %s" % (original_journal, num_piece)
+            name = "{} - {}".format(original_journal, num_piece)
 
-            move = AccountMove.create({
-                'journal_id': journal.id,
-                'date': date_piece_str,
-                'name': name,
-            })
+            move = AccountMove.create(
+                {
+                    'journal_id': journal.id,
+                    'date': date_piece_str,
+                    'name': name,
+                }
+            )
 
             # We cannot create a XML ID with data (a partner can have
             # several open invoice with the same date and the reference
             # is not unique). However we should be able to remove
             # all moves created by this import. To do that, I create
             # a specific XML ID
-            IrModelData.create({
-                'name': 'account_move_initial_import_%s' % move.id,
-                'module': '__import__',
-                'model': AccountMove._name,
-                'res_id': move.id,
-                'noupdate': False
-            })
+            IrModelData.create(
+                {
+                    'name': 'account_move_initial_import_%s' % move.id,
+                    'module': '__import__',
+                    'model': AccountMove._name,
+                    'res_id': move.id,
+                    'noupdate': False,
+                }
+            )
 
-            AccountMoveLine.with_context(check_move_validity=False).create({
-                'name': name,
-                'partner_id': partner_id,
-                'date_maturity': deadline_str,
-                'account_id': account_id,
-                'debit': debit,
-                'credit': credit,
-                'move_id': move.id
-            })
+            AccountMoveLine.with_context(check_move_validity=False).create(
+                {
+                    'name': name,
+                    'partner_id': partner_id,
+                    'date_maturity': deadline_str,
+                    'account_id': account_id,
+                    'debit': debit,
+                    'credit': credit,
+                    'move_id': move.id,
+                }
+            )
 
-            AccountMoveLine.create({
-                'name': '/',
-                'account_id': liability_account.id,
-                'debit': credit,
-                'credit': debit,
-                'move_id': move.id
-            })
+            AccountMoveLine.create(
+                {
+                    'name': '/',
+                    'account_id': liability_account.id,
+                    'debit': credit,
+                    'credit': debit,
+                    'move_id': move.id,
+                }
+            )
 
 
 @anthem.log
@@ -860,8 +903,9 @@ def import_product_intrastat(ctx):
     """
     intrastat_codes = {}
 
-    instrastat_query = \
+    instrastat_query = (
         "SELECT id FROM report_intrastat_code WHERE name = %s LIMIT 1"
+    )
 
     ProductTemplate = ctx.env['product.template']
     file_csv = 'data/install/product_intrastat.csv'
@@ -870,7 +914,8 @@ def import_product_intrastat(ctx):
 
         if len(header) != 2 or header[1] != 'code_intrastat':
             raise anthem.exceptions.AnthemError(
-                "Invalid header for the file %s" % file_csv)
+                "Invalid header for the file %s" % file_csv
+            )
         # Update the header to use ID in DB
         header[1] = "intrastat_id/.id"
 
@@ -881,12 +926,13 @@ def import_product_intrastat(ctx):
             if intrastat_code in intrastat_codes:
                 intrastat_id = intrastat_codes[intrastat_code]
             else:
-                ctx.env.cr.execute(instrastat_query, (intrastat_code, ))
+                ctx.env.cr.execute(instrastat_query, (intrastat_code,))
                 intrastat_id = ctx.env.cr.fetchone()
                 if not intrastat_id:
                     _logger.warning(
                         'Code intrastat %s not found. Product skipped'
-                        % intrastat_code)
+                        % intrastat_code
+                    )
                     continue
                 intrastat_id = intrastat_id[0]
                 # Keep the result to avoid to execute this query twice

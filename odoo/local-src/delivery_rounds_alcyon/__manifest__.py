@@ -11,7 +11,7 @@
     'depends': [
         'delivery_rounds',
         'stock_picking_zone',
-        ],
+    ],
     'data': [
         'views/round_instance.xml',
         'views/css.xml',

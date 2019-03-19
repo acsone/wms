@@ -9,9 +9,8 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     additional_product_id = fields.Many2one(
-        'product.product',
-        string='Additional Product',
-        ondelete='restrict')
+        'product.product', string='Additional Product', ondelete='restrict'
+    )
     ratio_main_product = fields.Integer('Ratio Main Product')
     ratio_additional_product = fields.Integer('Ratio Additional Product')
 
@@ -19,9 +18,11 @@ class ProductTemplate(models.Model):
     def get_qty_additional_product(self, ordered_qty):
         self.ensure_one()
 
-        if not self.additional_product_id \
-                or not self.ratio_main_product \
-                or not self.ratio_additional_product:
+        if (
+            not self.additional_product_id
+            or not self.ratio_main_product
+            or not self.ratio_additional_product
+        ):
             return 0
 
         coefficient = self.ratio_main_product / ordered_qty
@@ -32,9 +33,11 @@ class ProductTemplate(models.Model):
     @api.multi
     def is_an_additional_product(self):
         self.ensure_one()
-        return bool(len(
-            self.env['product.template'].search([
-                ('additional_product_id', '=', self.id)])
+        return bool(
+            len(
+                self.env['product.template'].search(
+                    [('additional_product_id', '=', self.id)]
+                )
             )
         )
 
@@ -62,7 +65,7 @@ class ProductTemplate(models.Model):
                 "|",
                 ("min_qty_sale", "=", False),
                 ("min_qty_sale", "<=", qty),
-                ("product_tmpl_id", "=", self.id)
+                ("product_tmpl_id", "=", self.id),
             ],
             order="sequence, min_qty_sale desc, price",
             limit=1,

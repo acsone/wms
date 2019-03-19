@@ -13,7 +13,7 @@ $ pip install -r tasks/local_requirements.txt
 This task compare 2 csv files and create multiple csv files
 to be loaded in the next version.
 
-Those files are used to 
+Those files are used to
 
 
 Parameters:
@@ -93,4 +93,3 @@ Thus here is how to disable it:
   - bin/importer.sh songs.install.data_full::import_clients_addresses /odoo/data/install/customer_address.csv
   - anthem songs.install.accounting::activate_check_on_vat
 ```
-

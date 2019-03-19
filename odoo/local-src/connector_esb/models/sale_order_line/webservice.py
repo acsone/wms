@@ -3,10 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
 
-from odoo.addons.component.core import Component
 from odoo import fields
+from odoo.addons.component.core import Component
 
 
 class ProductCustomerStatWebserviceMessage(Component):
@@ -28,10 +29,17 @@ class ProductCustomerStatWebserviceMessage(Component):
         # Get the sale order line for the customer and specific product
         # for the last 12 month starting from one month before
         sol = self.env['sale.order.line'].search(
-            [('order_id.partner_id.ref', '=', customer_ref),
-             ('order_id.date_order', '>=', fields.Date.to_string(date_start)),
-             ('order_id.date_order', '<', fields.Date.to_string(date_end)),
-             ('product_tmpl_id.default_code', '=', sku)])
+            [
+                ('order_id.partner_id.ref', '=', customer_ref),
+                (
+                    'order_id.date_order',
+                    '>=',
+                    fields.Date.to_string(date_start),
+                ),
+                ('order_id.date_order', '<', fields.Date.to_string(date_end)),
+                ('product_tmpl_id.default_code', '=', sku),
+            ]
+        )
         # Compute the statistics for each month
         for m in range(12):
             periods.setdefault(fields.Date.to_string(date_start)[:-3], 0)
@@ -39,8 +47,10 @@ class ProductCustomerStatWebserviceMessage(Component):
         for line in sol:
             period = line.order_id.date_order[:7]
             periods[period] += line.product_uom_qty
-        data = [{'salesPeriod': month, 'salesAverage': '{0:.2f}'.format(qty)}
-                for month, qty in periods.iteritems()]
+        data = [
+            {'salesPeriod': month, 'salesAverage': '{:.2f}'.format(qty)}
+            for month, qty in periods.iteritems()
+        ]
         return self._produce_xml(data)
 
 

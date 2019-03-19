@@ -10,7 +10,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
-        ],
+    ],
     'data': [
         'views/picking_zone.xml',
         'views/picking_type.xml',

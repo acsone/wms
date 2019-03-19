@@ -1,4 +1,4 @@
-from odoo import models, api, fields, _
+from odoo import _, api, fields, models
 
 
 class ProductSupplierinfo(models.Model):
@@ -23,15 +23,21 @@ class ProductSupplierinfo(models.Model):
             self._onchange_update_price_and_ref()
 
     def _onchange_update_price_and_ref(self):
-        base_info = self.search([
-            ('name', '=', self.name.id),
-            ('product_tmpl_id', '=', self.product_tmpl_id.id)],
-            limit=1, order='min_qty ASC')
+        base_info = self.search(
+            [
+                ('name', '=', self.name.id),
+                ('product_tmpl_id', '=', self.product_tmpl_id.id),
+            ],
+            limit=1,
+            order='min_qty ASC',
+        )
         if base_info:
-            self.update({
-                'price': base_info.price,
-                'product_code': base_info.product_code
-            })
+            self.update(
+                {
+                    'price': base_info.price,
+                    'product_code': base_info.product_code,
+                }
+            )
 
     @api.multi
     def open_form_view(self):
@@ -47,7 +53,7 @@ class ProductSupplierinfo(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'current',
             'res_id': self.id,
-            'context': self.env.context
+            'context': self.env.context,
         }
 
     @api.model
@@ -64,21 +70,23 @@ class ProductSupplierinfo(models.Model):
         cnk_product_tmpl = False
         code_product_tmpl = False
         if vals_cnk and not vals_prod_tmpl:
-            cnk_product_tmpl = self.env['product.template'].search([
-                ('cnk_code', '=', vals_cnk)])
+            cnk_product_tmpl = self.env['product.template'].search(
+                [('cnk_code', '=', vals_cnk)]
+            )
             values.pop('product_cnk_code')
         if vals_prod_code and not vals_prod_tmpl:
-            code_product_supplierinfo = self.search([
-                ('product_code', '=', vals_prod_code)], limit=1)
+            code_product_supplierinfo = self.search(
+                [('product_code', '=', vals_prod_code)], limit=1
+            )
             code_product_tmpl = code_product_supplierinfo.product_tmpl_id
         if cnk_product_tmpl or code_product_tmpl:
             prod_id = (
-                cnk_product_tmpl and cnk_product_tmpl.id or
-                code_product_tmpl and code_product_tmpl.id
+                cnk_product_tmpl
+                and cnk_product_tmpl.id
+                or code_product_tmpl
+                and code_product_tmpl.id
             )
-            values.update({
-                'product_tmpl_id': prod_id
-            })
+            values.update({'product_tmpl_id': prod_id})
         new_info = super(ProductSupplierinfo, self).create(values)
         new_info._onchange_update_price_and_ref()
         return new_info

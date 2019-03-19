@@ -101,7 +101,7 @@
               <div class="alert alert-warning" role="alert" attrs="{'invisible': [('main_exception_id','=',False)]}">
                 <field name="main_exception_id"
                   options="{'no_open': True}"
-                  class="oe_inline" 
+                  class="oe_inline"
                   modifiers="{'invisible': [['main_exception_id', '=', false]], 'readonly': true}"/>
               </div>
             </xpath>

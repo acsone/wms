@@ -6,7 +6,7 @@
 import math
 from collections import OrderedDict
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -17,19 +17,22 @@ class RoundInstance(models.Model):
     def print_cash_on_delivery_invoices(self):
         self.ensure_one()
         invoices = self.instance_customer_ids.mapped(
-            'cash_on_delivery_invoice_ids')
+            'cash_on_delivery_invoice_ids'
+        )
         if not invoices:
             raise UserError(_('No invoice to print'))
         invoices.filtered(lambda i: not i.sent).write({'sent': True})
         return self.env['report'].get_action(
-            invoices, 'account.report_invoice')
+            invoices, 'account.report_invoice'
+        )
 
     @api.multi
     def print_delivery_round(self):
         self.ensure_one()
 
-        return self.env['report']\
-            .get_action(self, 'delivery_rounds.delivery_round_report')
+        return self.env['report'].get_action(
+            self, 'delivery_rounds.delivery_round_report'
+        )
 
     @api.multi
     def get_time_leave_planned(self):
@@ -76,14 +79,16 @@ class RoundInstance(models.Model):
 
             number_of_equipment = partner_value.get('number_of_equipment', 0)
             number_of_equipment += shipping.number_of_equipment
-            item_number_of_equipment = \
-                partner_value.get('item_number_of_equipment', 0)
+            item_number_of_equipment = partner_value.get(
+                'item_number_of_equipment', 0
+            )
             item_number_of_equipment += shipping.item_number_of_equipment
 
             number_of_human_drug = partner_value.get('number_of_human_drug', 0)
             number_of_human_drug += shipping.number_of_human_drug
-            item_number_of_human_drug = \
-                partner_value.get('item_number_of_human_drug', 0)
+            item_number_of_human_drug = partner_value.get(
+                'item_number_of_human_drug', 0
+            )
             item_number_of_human_drug += shipping.item_number_of_human_drug
 
             number_total = partner_value.get('number_total', 0)
@@ -95,28 +100,29 @@ class RoundInstance(models.Model):
             if shipping.partner_id.comment:
                 note = shipping.partner_id.comment
 
-            partner_value.update({
-                'number_of_drug': number_of_drug,
-                'item_number_of_drug': item_number_of_drug,
-                'number_of_cold': number_of_cold,
-                'item_number_of_cold': item_number_of_cold,
-                'number_of_food': number_of_food,
-                'item_number_of_food': item_number_of_food,
-                'number_of_equipment': number_of_equipment,
-                'item_number_of_equipment': item_number_of_equipment,
-                'number_of_human_drug': number_of_human_drug,
-                'item_number_of_human_drug': item_number_of_human_drug,
-                'number_total': number_total,
-                'item_number_total': item_number_total,
-                'note': note,
-                'rank': shipping.rank,
-                'shipping': shipping,
-            })
+            partner_value.update(
+                {
+                    'number_of_drug': number_of_drug,
+                    'item_number_of_drug': item_number_of_drug,
+                    'number_of_cold': number_of_cold,
+                    'item_number_of_cold': item_number_of_cold,
+                    'number_of_food': number_of_food,
+                    'item_number_of_food': item_number_of_food,
+                    'number_of_equipment': number_of_equipment,
+                    'item_number_of_equipment': item_number_of_equipment,
+                    'number_of_human_drug': number_of_human_drug,
+                    'item_number_of_human_drug': item_number_of_human_drug,
+                    'number_total': number_total,
+                    'item_number_total': item_number_total,
+                    'note': note,
+                    'rank': shipping.rank,
+                    'shipping': shipping,
+                }
+            )
             shipping_values[shipping.partner_id] = partner_value
 
         ordered_values = OrderedDict(
-            sorted(shipping_values.items(),
-                   key=lambda t: t[1].get('rank'))
+            sorted(shipping_values.items(), key=lambda t: t[1].get('rank'))
         )
         result = []
         for partner, values in ordered_values.iteritems():
@@ -143,21 +149,26 @@ class RoundInstanceCustomer(models.Model):
         'account.invoice',
         string='Invoices',
         compute='_compute_cash_on_delivery_invoice_ids',
-        readonly=True)
+        readonly=True,
+    )
     has_cash_on_delivery_invoice = fields.Boolean(
         string='Has Invoices',
         compute='_compute_cash_on_delivery_invoice_ids',
-        readonly=True)
+        readonly=True,
+    )
 
     @api.depends('picking_ids.cash_on_delivery_invoice_ids')
     def _compute_cash_on_delivery_invoice_ids(self):
         for rec in self:
             shippings = rec.picking_ids.filtered(
-                lambda p: p.picking_type_code == 'outgoing')
+                lambda p: p.picking_type_code == 'outgoing'
+            )
             shippings_done = shippings.filtered(
-                lambda shipping: shipping.state == 'done')
+                lambda shipping: shipping.state == 'done'
+            )
             rec.cash_on_delivery_invoice_ids = shippings_done.mapped(
-                'cash_on_delivery_invoice_ids')
+                'cash_on_delivery_invoice_ids'
+            )
             if rec.cash_on_delivery_invoice_ids:
                 rec.has_cash_on_delivery_invoice = True
 
@@ -168,4 +179,5 @@ class RoundInstanceCustomer(models.Model):
             raise UserError(_('No invoice to print'))
         invoices.filtered(lambda i: not i.sent).write({'sent': True})
         return self.env['report'].get_action(
-            invoices, 'account.report_invoice')
+            invoices, 'account.report_invoice'
+        )

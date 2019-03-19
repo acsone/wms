@@ -9,18 +9,15 @@ from __future__ import print_function
 
 import os
 
+from invoke import task
+
+from .common import MIGRATION_FILE, build_path, search_replace
+
 try:
     from ruamel.yaml import YAML
 except ImportError:
     print('Missing install ruamel.yaml from requirements')
     print('Please run `pip install -r tasks/requirements.txt`')
-
-from invoke import task
-from .common import (
-    MIGRATION_FILE,
-    build_path,
-    search_replace,
-)
 
 
 @task(name='demo-to-sample')
@@ -45,19 +42,15 @@ def demo_to_sample(ctx):
     change_list = []
     # .travis.yml
     path = build_path('.travis.yml')
-    search_replace(
-        path,
-        '-e MARABUNTA_MODE=demo',
-        '-e MARABUNTA_MODE=sample')
+    search_replace(path, '-e MARABUNTA_MODE=demo', '-e MARABUNTA_MODE=sample')
     change_list.append(path)
 
     # docker-compose.overide.yml
     path = build_path('docker-compose.override.yml')
     if os.path.exists(path):
         search_replace(
-            path,
-            '- MARABUNTA_MODE=demo',
-            '- MARABUNTA_MODE=sample')
+            path, '- MARABUNTA_MODE=demo', '- MARABUNTA_MODE=sample'
+        )
         change_list.append(path)
 
     # odoo/migration.yml
@@ -65,7 +58,8 @@ def demo_to_sample(ctx):
     search_replace(
         path,
         'anthem songs.install.data_demo',
-        'anthem songs.sample.data_sample')
+        'anthem songs.sample.data_sample',
+    )
     change_list.append(path)
 
     yaml = YAML()
@@ -88,27 +82,24 @@ def demo_to_sample(ctx):
     path = build_path('odoo/songs/install/data_all.py')
     if os.path.exists(path):
         search_replace(
-             path,
-             "The data loaded here will be loaded in the 'demo' and",
-             "The data loaded here will be loaded in the 'sample' and")
+            path,
+            "The data loaded here will be loaded in the 'demo' and",
+            "The data loaded here will be loaded in the 'sample' and",
+        )
         change_list.append(path)
 
     # test.yml
     path = build_path('test.yml')
     if os.path.exists(path):
         search_replace(
-            path,
-            '- MARABUNTA_MODE=demo',
-            '- MARABUNTA_MODE=sample')
+            path, '- MARABUNTA_MODE=demo', '- MARABUNTA_MODE=sample'
+        )
         change_list.append(path)
 
     # travis/minion-files/rancher.list
     path = build_path('travis/minion-files/rancher.list')
     if os.path.exists(path):
-        search_replace(
-             path,
-             'MARABUNTA_MODE=demo',
-             'MARABUNTA_MODE=sample')
+        search_replace(path, 'MARABUNTA_MODE=demo', 'MARABUNTA_MODE=sample')
         change_list.append(path)
 
     ctx.run('git add {}'.format(' '.join(change_list)))
@@ -120,10 +111,7 @@ def demo_to_sample(ctx):
         print("odoo/data/sample directory already exists")
     # move odoo/data/demo to odoo/data/sample
     try:
-        ctx.run(
-            'git mv {} {}'.format(
-                'odoo/data/demo/*',
-                'odoo/data/sample'))
+        ctx.run('git mv {} {}'.format('odoo/data/demo/*', 'odoo/data/sample'))
     except Exception:
         print('nothing to move')
 
@@ -139,17 +127,16 @@ def demo_to_sample(ctx):
         ctx.run(
             'git mv {} {}'.format(
                 'odoo/songs/install/data_demo.py',
-                'odoo/songs/sample/data_sample.py'))
+                'odoo/songs/sample/data_sample.py',
+            )
+        )
     except Exception:
         print('nothing to move')
 
     # Change strings referencing 'data/demo' to 'data/sample'
     path = build_path('odoo/songs/sample/data_sample.py')
     if os.path.exists(path):
-        search_replace(
-             path,
-             'data/demo',
-             'data/sample')
+        search_replace(path, 'data/demo', 'data/sample')
         change_list.append(path)
 
     ctx.run('git add odoo/songs/sample')
@@ -161,21 +148,27 @@ def demo_to_sample(ctx):
     print("- docker-compose.overide.yml")
     print("- odoo/migration.yml")
     print("- odoo/songs/install/data_all.py (for comment)")
-    print("- odoo/songs/install/data_demo.py (path 'data/demo' to "
-          "'data/sample')")
+    print(
+        "- odoo/songs/install/data_demo.py (path 'data/demo' to "
+        "'data/sample')"
+    )
     print("- test.yml")
     print("- travis/minion-files/rancher.list")
 
     print()
     print("The following files were moved:")
     print("- odoo/data/demo to odoo/data/sample")
-    print("- odoo/songs/install/data_demo.py to odoo/songs/sample/data_sample"
-          ".py")
+    print(
+        "- odoo/songs/install/data_demo.py to odoo/songs/sample/data_sample"
+        ".py"
+    )
     print()
     print("Please check your staged files:")
     print("   git diff --cached")
-    print("Please search for any unchanged 'demo' string in odoo/songs "
-          "and fix it manually.")
+    print(
+        "Please search for any unchanged 'demo' string in odoo/songs "
+        "and fix it manually."
+    )
     print("If everything is good:")
     print("   git commit -m 'Apply depreciation of demo in favor of sample'")
     print("      git push")

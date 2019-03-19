@@ -10,7 +10,7 @@
     'depends': [
         'stock_picking_assignment',
         'stock_picking_subcode',
-        ],
+    ],
     'data': [
     ],
     'installable': True,

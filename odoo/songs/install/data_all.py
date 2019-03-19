@@ -2,12 +2,13 @@
 # Copyright 2016-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import resource_stream
-
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
-from ..common import req, create_default_value
-from mappings import COUNTRY, PRODUCT_SALE_VAT, PRODUCT_PURCHASE_VAT
+from pkg_resources import resource_stream
+
+from mappings import COUNTRY, PRODUCT_PURCHASE_VAT, PRODUCT_SALE_VAT
+
+from ..common import create_default_value, req
 
 
 @anthem.log
@@ -31,7 +32,7 @@ def set_default_carrier_id_on_sale_order(ctx):
     ctx.env['ir.values'].set_default(
         'sale.order',
         'carrier_id',
-        ctx.env.ref('__setup__.deliver_carrier_alcyon').id
+        ctx.env.ref('__setup__.deliver_carrier_alcyon').id,
     )
 
 
@@ -39,11 +40,9 @@ def set_default_carrier_id_on_sale_order(ctx):
 def default_values(ctx):
     """ Setting default values """
     for company in ctx.env['res.company'].search([]):
-        create_default_value(ctx,
-                             'product.template',
-                             'type',
-                             'product',
-                             company.id)
+        create_default_value(
+            ctx, 'product.template', 'type', 'product', company.id
+        )
 
 
 @anthem.log
@@ -56,9 +55,9 @@ def define_esb_ref_on_countries(ctx):
 
 @anthem.log
 def define_esb_ref_on_carrier_shipping(ctx):
-    ctx.env.ref('specific_data.deliver_carrier_alcyon_product_product').write({
-        'esb_ref': '1',
-    })
+    ctx.env.ref('specific_data.deliver_carrier_alcyon_product_product').write(
+        {'esb_ref': '1'}
+    )
 
 
 @anthem.log
@@ -82,12 +81,11 @@ def import_payment_modes(ctx):
 @anthem.log
 def rename_payment_method(ctx):
     """ Rename Manual by Domiciliation """
-    payment_method = ctx.env.ref('account.account_payment_method_manual_out',
-                                 raise_if_not_found=False)
+    payment_method = ctx.env.ref(
+        'account.account_payment_method_manual_out', raise_if_not_found=False
+    )
     if payment_method:
-        payment_method.write({
-            'name': 'Domiciliation'
-        })
+        payment_method.write({'name': 'Domiciliation'})
 
 
 @anthem.log

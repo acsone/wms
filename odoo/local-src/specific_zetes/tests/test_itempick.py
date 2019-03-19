@@ -1,33 +1,31 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itempick import Itempick
+from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
 
 
 class TestItempick(ZetesTest):
-
     def test_requ_itempick(self):
         """
         The method requ on catchweight is not used.
         :return:
         """
-        domain = Itempick(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Itempick(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
 
         # Set the flag is_price_on_labels
-        self.partner.write({
-            'is_price_on_labels': True,
-        })
+        self.partner.write({'is_price_on_labels': True})
 
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'groupNum': self.picking.id,
-            'Cri01': None,
-            'Usf06': None
-        })
+        request_params.update(
+            {'groupNum': self.picking.id, 'Cri01': None, 'Usf06': None}
+        )
 
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
@@ -68,8 +66,9 @@ class TestItempick(ZetesTest):
         self.assertEqual(result.sourceLC3, self.location_product_1.shelf)
         self.assertEqual(result.sourceLC4, self.location_product_1.height)
         self.assertEqual(result.sourceLC5, self.location_product_1.box)
-        self.assertEqual(result.sourceLCCD,
-                         self.location_product_1.get_checksum())
+        self.assertEqual(
+            result.sourceLCCD, self.location_product_1.get_checksum()
+        )
 
         # Check lot name
         self.assertEqual(result.Usf01, self.lot_product_1.voice_identifier)
@@ -82,23 +81,20 @@ class TestItempick(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
 
-        pack_op.pack_lot_ids.write({
-            'qty': 10,
-        })
-        pack_op.write({
-            'qty_done': 10,
-        })
+        pack_op.pack_lot_ids.write({'qty': 10})
+        pack_op.write({'qty_done': 10})
 
         self.assertEqual(pack_op.qty_done, 10)
 
-        domain = Itempick(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Itempick(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='resu')
-        request_params.update({
-            'pickLineId': pack_op.id,
-            'pickStatus': constants.OP_CANCELED
-        })
+        request_params.update(
+            {'pickLineId': pack_op.id, 'pickStatus': constants.OP_CANCELED}
+        )
 
         domain.resu(request_params)
         self.assertEqual(pack_op.zetes_state, constants.OP_CANCELED)
@@ -110,16 +106,16 @@ class TestItempick(ZetesTest):
         Test the ZeroCheck flag
         :return:
         """
-        domain = Itempick(DEFAULT_HEADER,
-                          mock.MagicMock(name='Savepoint()'),
-                          request_overwrite=self)
+        domain = Itempick(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
 
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'groupNum': self.picking.id,
-            'Cri01': None,
-            'Usf06': None,
-        })
+        request_params.update(
+            {'groupNum': self.picking.id, 'Cri01': None, 'Usf06': None}
+        )
 
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
@@ -131,21 +127,21 @@ class TestItempick(ZetesTest):
         self.assertEqual(result.cycleCountFlag, '0')
 
         # Empty the stock
-        update_qty_wizard = self.env['stock.change.product.qty'].create({
-            'product_id': self.product_1.id,
-            'product_tmpl_id': self.product_1.product_tmpl_id.id,
-            'new_quantity': 10,
-            'lot_id': self.lot_product_1.id,
-            'location_id': self.location_product_1.id
-        })
+        update_qty_wizard = self.env['stock.change.product.qty'].create(
+            {
+                'product_id': self.product_1.id,
+                'product_tmpl_id': self.product_1.product_tmpl_id.id,
+                'new_quantity': 10,
+                'lot_id': self.lot_product_1.id,
+                'location_id': self.location_product_1.id,
+            }
+        )
         update_qty_wizard.change_product_qty()
 
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'groupNum': self.picking.id,
-            'Cri01': None,
-            'Usf06': None
-        })
+        request_params.update(
+            {'groupNum': self.picking.id, 'Cri01': None, 'Usf06': None}
+        )
 
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)

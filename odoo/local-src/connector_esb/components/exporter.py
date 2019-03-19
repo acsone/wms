@@ -4,14 +4,14 @@
 
 import datetime
 import logging
+
 import psycopg2
 
 import odoo
-
-from odoo import fields, _
-from odoo.osv.expression import AND
+from odoo import _, fields
 from odoo.addons.component.core import AbstractComponent, Component
 from odoo.addons.connector.exception import RetryableJobError
+from odoo.osv.expression import AND
 
 _logger = logging.getLogger(__name__)
 
@@ -28,8 +28,11 @@ class ExportMapper(AbstractComponent):
     }
 
     def translatable_langs(self):
-        return self.env['res.lang'].search([
-            ('translatable', '=', True)]).mapped('code')
+        return (
+            self.env['res.lang']
+            .search([('translatable', '=', True)])
+            .mapped('code')
+        )
 
     def finalize(self, record, values):
         values = super(ExportMapper, self).finalize(record, values)
@@ -42,8 +45,9 @@ class ExportMapper(AbstractComponent):
             if lang not in self.translatable_keys:
                 continue
             translatable = self.translatable_keys[lang]
-            data = record.source.with_context(
-                lang=lang).read(translatable.keys())[0]
+            data = record.source.with_context(lang=lang).read(
+                translatable.keys()
+            )[0]
             for fname, extname in translatable.iteritems():
                 values[extname] = data[fname]
 
@@ -154,20 +158,25 @@ class ESBWebServiceExporter(AbstractComponent):
         """
         if not records and not self.record:
             return
-        sql = ("SELECT id FROM %s WHERE ID in %%s FOR UPDATE NOWAIT" %
-               self.model._table)
-        record_ids = tuple(records.ids) if records else (self.record.id, )
+        sql = (
+            "SELECT id FROM %s WHERE ID in %%s FOR UPDATE NOWAIT"
+            % self.model._table
+        )
+        record_ids = tuple(records.ids) if records else (self.record.id,)
         try:
-            self.env.cr.execute(sql, (record_ids,),
-                                log_exceptions=False)
+            self.env.cr.execute(sql, (record_ids,), log_exceptions=False)
         except psycopg2.OperationalError:
-            _logger.info('A concurrent job is already exporting the same '
-                         'record (%s with id %s). Job delayed later.',
-                         self.model._name, record_ids)
+            _logger.info(
+                'A concurrent job is already exporting the same '
+                'record (%s with id %s). Job delayed later.',
+                self.model._name,
+                record_ids,
+            )
             raise RetryableJobError(
-                    'A concurrent job is already exporting the same record '
-                    '(%s with id %s). The job will be retried later.' %
-                    (self.model._name, record_ids))
+                'A concurrent job is already exporting the same record '
+                '(%s with id %s). The job will be retried later.'
+                % (self.model._name, record_ids)
+            )
 
     def _has_to_skip(self):
         """ Return True if the export can be skipped """
@@ -193,7 +202,8 @@ class ESBExporterMixin(AbstractComponent):
     @property
     def logger(self):
         return logging.getLogger(
-            '[{}:{}]'.format(self._usage, self.model._name))
+            u'[{}:{}]'.format(self._usage, self.model._name)
+        )
 
     def _prepare_item(self, items):
         prepared = []
@@ -230,7 +240,7 @@ class ESBExporterMixin(AbstractComponent):
 
         """
         new_exported = self.model.search(
-            [('id', 'in', items.ids), ('esb_exported', '=', False)],
+            [('id', 'in', items.ids), ('esb_exported', '=', False)]
         )
         if new_exported:
             self._write_esb_exported_mark_on_records(new_exported)
@@ -239,15 +249,11 @@ class ESBExporterMixin(AbstractComponent):
         # we flag the products as exported, bypassing the ORM
         # otherwise the write_date would be modified and the records
         # exported again...
-        query = (
-            "UPDATE %s SET esb_exported = true "
-            "WHERE id IN %%s " % (self.model._table,)
+        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %%s " % (
+            self.model._table,
         )
         self.env.cr.execute(query, (tuple(records.ids),))
-        self.model.invalidate_cache(
-            fnames=['esb_exported'],
-            ids=records.ids
-        )
+        self.model.invalidate_cache(fnames=['esb_exported'], ids=records.ids)
 
     def _lock(self, records):
         """Lock the records.
@@ -260,19 +266,26 @@ class ESBExporterMixin(AbstractComponent):
         """
         if not records:
             return
-        sql = ("SELECT id FROM %s WHERE id in %%s FOR UPDATE NOWAIT" %
-               self.model._table)
+        sql = (
+            "SELECT id FROM %s WHERE id in %%s FOR UPDATE NOWAIT"
+            % self.model._table
+        )
         try:
-            self.env.cr.execute(sql, (tuple(records.ids),),
-                                log_exceptions=False)
+            self.env.cr.execute(
+                sql, (tuple(records.ids),), log_exceptions=False
+            )
         except psycopg2.OperationalError:
-            _logger.info('The export on (%s with ids %s) could not be done.'
-                         'some locked records prevented the execution.',
-                         self.model._name, records.ids)
+            _logger.info(
+                'The export on (%s with ids %s) could not be done.'
+                'some locked records prevented the execution.',
+                self.model._name,
+                records.ids,
+            )
             raise RetryableJobError(
                 'Concurrent access prevented the job to export the records '
-                '(%s with id %s). The job will be retried later.' %
-                (self.model._name, records.ids))
+                '(%s with id %s). The job will be retried later.'
+                % (self.model._name, records.ids)
+            )
 
     def run(self):
         return NotImplementedError

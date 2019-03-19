@@ -2,9 +2,11 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
+
+from odoo import api, models
 
 
 class AccountCutoff(models.Model):
@@ -12,10 +14,13 @@ class AccountCutoff(models.Model):
 
     @api.model
     def _cron_cutoff_refund(self, type):
-        invoices = self.env['account.invoice'].search([
-            ('state', 'in', ('draft', 'proforma2')),
-            ('type', '=', type),
-            ('accrual_move_id', '=', False)])
+        invoices = self.env['account.invoice'].search(
+            [
+                ('state', 'in', ('draft', 'proforma2')),
+                ('type', '=', type),
+                ('accrual_move_id', '=', False),
+            ]
+        )
         if not invoices:
             return
         # Cron is expected to run at begin of new period. We need the last day
@@ -26,9 +31,13 @@ class AccountCutoff(models.Model):
             last_day += relativedelta(months=1)
         last_day = last_day.replace(day=1)
         last_day -= relativedelta(days=1)
-        wizard = self.env['account.move.accrue'].with_context(
-            active_model=invoices[0]._name,
-            active_ids=invoices.ids).create({'date': last_day})
+        wizard = (
+            self.env['account.move.accrue']
+            .with_context(
+                active_model=invoices[0]._name, active_ids=invoices.ids
+            )
+            .create({'date': last_day})
+        )
         wizard.action_accrue()
 
     @api.model
@@ -49,6 +58,7 @@ class AccountCutoff(models.Model):
             )
             for line in lines:
                 self.env['account.cutoff.line'].create(
-                    self._prepare_line(line))
+                    self._prepare_line(line)
+                )
         else:
             return super(AccountCutoff, self).get_lines()

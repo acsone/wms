@@ -4,7 +4,8 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from ...components.mapper import two_digits_fractional, falsy2emptystring
+
+from ...components.mapper import falsy2emptystring, two_digits_fractional
 
 
 class ProductPriceExportMapper(Component):
@@ -24,20 +25,20 @@ class ProductPriceExportMapper(Component):
     @mapping
     def compute_pharmacy_price(self, record):
         price = record.sale_price_2_export
-        return {'PharmacyPrice': '{0:.3f}'.format(price or 0)}
+        return {'PharmacyPrice': '{:.3f}'.format(price or 0)}
 
     @mapping
     def compute_msrp(self, record):
         price = 0
         if record.product_tmpl_id:
             price = record.product_tmpl_id.indicated_price
-        return {'Msrp': '{0:.2f}'.format(price)}
+        return {'Msrp': '{:.2f}'.format(price)}
 
 
 class ProductPriceCronExporter(Component):
 
     _name = 'esb.product.price.cron.exporter'
-    _inherit = ['esb.cron.exporter', ]
+    _inherit = ['esb.cron.exporter']
     _usage = 'record.exporter.cron'
     _apply_on = 'product.product'
 
@@ -65,8 +66,9 @@ class ProductPriceCronExporter(Component):
                 product.write({'sale_price_2_export': sale_price_2})
 
     def get_items_domain(self):
-        return [('active', '=', True),
-                ('sale_ok', '=', True),
-                ('default_code', '!=', ''),
-                ('type', '=', 'product'),
-                ]
+        return [
+            ('active', '=', True),
+            ('sale_ok', '=', True),
+            ('default_code', '!=', ''),
+            ('type', '=', 'product'),
+        ]

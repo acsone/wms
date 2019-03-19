@@ -10,7 +10,7 @@
     'depends': [
         'stock',
         'stock_picking_subcode',
-        ],
+    ],
     'data': [
         'security/res_groups.xml',
         'views/stock_picking.xml',

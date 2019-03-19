@@ -12,7 +12,7 @@
         'procurement',
         'sale_stock',
         'stock_picking_subcode',
-        ],
+    ],
     'data': [
         'views/stock_location_route.xml',
     ],

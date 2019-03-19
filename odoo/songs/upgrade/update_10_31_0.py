@@ -25,7 +25,8 @@ def correct_stock_operation_locations(ctx):
     of the stock operations, which have the correct sublocations.
 
     """
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
 UPDATE stock_move
 SET location_dest_id = buggy_moves.operation_location_dest_id
 FROM (
@@ -60,9 +61,11 @@ FROM (
     )) AS buggy_moves
 WHERE stock_move.id = buggy_moves.id
 ;
-    """)
+    """
+    )
 
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
 UPDATE stock_move
 SET location_id = buggy_moves.operation_location_id
 FROM (
@@ -97,7 +100,8 @@ FROM (
     )) AS buggy_moves
 WHERE stock_move.id = buggy_moves.id
 ;
-    """)
+    """
+    )
 
 
 @anthem.log

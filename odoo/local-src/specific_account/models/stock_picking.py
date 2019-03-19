@@ -25,10 +25,13 @@ class StockPicking(models.Model):
         if not create_invoice_pickings:
             return result
         proc_groups = create_invoice_pickings.mapped('move_lines.group_id')
-        sales = self.env['sale.order'].search([
-            ('procurement_group_id', 'in', proc_groups.ids),
-            ('invoice_status', '=', 'to invoice'),
-            ('partner_invoice_id.invoice_grouping', '=', 'by_delivery')])
+        sales = self.env['sale.order'].search(
+            [
+                ('procurement_group_id', 'in', proc_groups.ids),
+                ('invoice_status', '=', 'to invoice'),
+                ('partner_invoice_id.invoice_grouping', '=', 'by_delivery'),
+            ]
+        )
         if sales:
             sales.with_delay()._job_create_draft_invoice()
         return result

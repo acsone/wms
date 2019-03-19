@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, _
+from odoo import _, api, models
 
 
 class QueueJob(models.Model):
@@ -33,9 +33,11 @@ class QueueJob(models.Model):
         if len(records) == 1:
             action['res_id'] = records.id
         else:
-            action.update({
-                'name': _('Related Records'),
-                'view_mode': 'tree,form',
-                'domain': [('id', 'in', records.ids)],
-            })
+            action.update(
+                {
+                    'name': _('Related Records'),
+                    'view_mode': 'tree,form',
+                    'domain': [('id', 'in', records.ids)],
+                }
+            )
         return action

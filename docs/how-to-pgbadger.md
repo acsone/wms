@@ -42,13 +42,13 @@ It explains how to extract logs and feed them to pgBadger then you can find slow
 
   ```
   $ mkdir -p logs/out
-  $ docker logs --since=2017-04-26T10:37:00.000000000Z <project>_db_1 2> logs/logs.txt 
+  $ docker logs --since=2017-04-26T10:37:00.000000000Z <project>_db_1 2> logs/logs.txt
   ```
   Note: the time here is UTC, you can prefer to use your local time such as: `2017-04-26T12:37:00.000000000+02:00`
 
 5. Generate the pgBadger analysis and open it in a browser
 
   ```
-  $ docker run --rm -v "$(pwd)/logs:/logs" -v "$(pwd)/logs/out:/data" uphold/pgbadger /logs/logs.txt 
+  $ docker run --rm -v "$(pwd)/logs:/logs" -v "$(pwd)/logs/out:/data" uphold/pgbadger /logs/logs.txt
   $ xdg-open logs/out/out.html
   ```

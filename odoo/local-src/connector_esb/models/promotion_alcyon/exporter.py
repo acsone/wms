@@ -13,8 +13,9 @@ class PromotionAlcyonExportMapper(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind == 'promotion.alcyon')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'promotion.alcyon'
+        )
 
     @mapping
     def compute_alcyongroup(self, record):
@@ -24,10 +25,8 @@ class PromotionAlcyonExportMapper(Component):
     def compute_percent(self, record):
         percent = '0.00'
         if record.percent_price:
-            percent = '{0:.2f}'.format(record.percent_price)
-        return {'Percent1': percent,
-                'Percent2': '0',
-                }
+            percent = '{:.2f}'.format(record.percent_price)
+        return {'Percent1': percent, 'Percent2': '0'}
 
     @mapping
     def compute_product_type(self, record):
@@ -51,18 +50,19 @@ class PromotionAlcyonExportMapper(Component):
 class SpecialPromotionCronExporter(Component):
 
     _name = 'esb.promotion.alcyon.cron.exporter'
-    _inherit = ['esb.cron.exporter', ]
+    _inherit = ['esb.cron.exporter']
     _usage = 'record.exporter.cron'
     _apply_on = 'product.pricelist.item'
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp
-                    and work.timestamp.kind == 'promotion.alcyon')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'promotion.alcyon'
+        )
 
     def get_items_domain(self):
 
         return [
             ('applied_on', 'in', ['2b_product_price_category', '3_global']),
-            ('percent_price', '!=', 0)
+            ('percent_price', '!=', 0),
         ]

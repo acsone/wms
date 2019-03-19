@@ -12,7 +12,7 @@
         'stock',
         'stock_operation_recompute',
         'purchase'  # Add only for unittests
-        ],
+    ],
     'data': [
         'data/ir.sequence.csv',
         'data/stock.location.csv',

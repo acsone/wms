@@ -27,7 +27,7 @@
  'complexity': 'normal',
  'depends': [
      'stock',
-     ],
+ ],
  'website': 'http://www.bcim.be/',
  'data': [
      'views/grn.xml',

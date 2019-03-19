@@ -2,11 +2,10 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import resource_stream
-
 import anthem
-from anthem.lyrics.records import create_or_update, add_xmlid
 from anthem.lyrics.loaders import load_csv_stream
+from anthem.lyrics.records import add_xmlid, create_or_update
+from pkg_resources import resource_stream
 
 from ..common import req
 
@@ -18,9 +17,10 @@ def no_coa_instance_lock(ctx):
         'name': "Dummy account to delete",
         'code': "DUMMY",
         'user_type_id': ctx.env.ref('account.data_account_type_equity').id,
-        }
-    create_or_update(ctx, 'account.account',
-                     '__setup__.dummy_holding_account', values)
+    }
+    create_or_update(
+        ctx, 'account.account', '__setup__.dummy_holding_account', values
+    )
     company = ctx.env.ref('base.main_company')
     company.expects_chart_of_accounts = False
 
@@ -48,24 +48,26 @@ def settings(ctx):
     # Default purchase tax
     purchase_tax_21 = ctx.env.ref('l10n_be.1_attn_VAT-IN-V81-21')
 
-    ctx.env['account.config.settings'].create({
-        'fiscalyear_last_month': 9,
-        'fiscalyear_last_day': 30,
-        'module_account_reports': True,
-        'group_multi_currency': False,
-        'group_analytic_accounting': True,
-        'module_account_budget': True,
-        'module_account_bank_statement_import_ofx': False,
-        'module_account_sepa': True,
-        'group_proforma_invoices': True,
-        'module_account_reports_followup': True,
-        'default_sale_tax_id': tax_21.id,
-        'default_purchase_tax_id': purchase_tax_21.id,
-        'module_payment_transfer': False,
-        'group_analytic_account_for_sales': True,
-        'group_analytic_account_for_purchases': True,
-        'group_supplier_inv_check_total': True,
-    }).execute()
+    ctx.env['account.config.settings'].create(
+        {
+            'fiscalyear_last_month': 9,
+            'fiscalyear_last_day': 30,
+            'module_account_reports': True,
+            'group_multi_currency': False,
+            'group_analytic_accounting': True,
+            'module_account_budget': True,
+            'module_account_bank_statement_import_ofx': False,
+            'module_account_sepa': True,
+            'group_proforma_invoices': True,
+            'module_account_reports_followup': True,
+            'default_sale_tax_id': tax_21.id,
+            'default_purchase_tax_id': purchase_tax_21.id,
+            'module_payment_transfer': False,
+            'group_analytic_account_for_sales': True,
+            'group_analytic_account_for_purchases': True,
+            'group_supplier_inv_check_total': True,
+        }
+    ).execute()
 
 
 @anthem.log
@@ -73,41 +75,56 @@ def default_values(ctx):
     """ Set some default values.
     """
     expense_account = ctx.env.ref('l10n_be.1_a604')
-    ctx.env['ir.values'].search([
-        ('name', '=', 'property_account_expense_categ_id')]).write({
-            'value_reference': 'account.account,%d' % expense_account.id})
+    ctx.env['ir.values'].search(
+        [('name', '=', 'property_account_expense_categ_id')]
+    ).write({'value_reference': 'account.account,%d' % expense_account.id})
 
-    create_or_update(ctx, 'ir.values', '__setup__.res_partner_default_bba', {
-        'key': 'default',
-        'name': 'out_inv_comm_type',
-        'model': 'res.partner',
-        'value_unpickle': 'bba',
-        'key2': None,
-    })
-    create_or_update(ctx, 'ir.values', '__setup__.res_partner_bba_random', {
-        'key': 'default',
-        'name': 'out_inv_comm_algorithm',
-        'model': 'res.partner',
-        'value_unpickle': 'partner_ref',
-        'key2': None,
-    })
+    create_or_update(
+        ctx,
+        'ir.values',
+        '__setup__.res_partner_default_bba',
+        {
+            'key': 'default',
+            'name': 'out_inv_comm_type',
+            'model': 'res.partner',
+            'value_unpickle': 'bba',
+            'key2': None,
+        },
+    )
+    create_or_update(
+        ctx,
+        'ir.values',
+        '__setup__.res_partner_bba_random',
+        {
+            'key': 'default',
+            'name': 'out_inv_comm_algorithm',
+            'model': 'res.partner',
+            'value_unpickle': 'partner_ref',
+            'key2': None,
+        },
+    )
 
     account_612031 = ctx.env.ref('__setup__.account_612031')
     tax_xml_id = 'l10n_be.1_attn_VAT-IN-V82-CAR-EXC-C1'
-    create_or_update(ctx, 'account.tax', tax_xml_id, {
-        'account_id': account_612031.id,
-        'refund_account_id': account_612031.id
-    })
+    create_or_update(
+        ctx,
+        'account.tax',
+        tax_xml_id,
+        {
+            'account_id': account_612031.id,
+            'refund_account_id': account_612031.id,
+        },
+    )
 
 
 @anthem.log
 def company_settings(ctx):
     company = ctx.env.ref('base.main_company')
-    company.write({
-        'order_phone': '+32 (0)4 338 84 39',
-        'order_fax': '+32 (0)4 338 34 79',
-        'invoice_terms_conditions':
-            "Sauf stipulation écrite contraire, nos factures sont payables "
+    company.write(
+        {
+            'order_phone': '+32 (0)4 338 84 39',
+            'order_fax': '+32 (0)4 338 34 79',
+            'invoice_terms_conditions': "Sauf stipulation écrite contraire, nos factures sont payables "
             "au comptant.  Toute somme demeurée impayée à son échéance donne "
             "de plein droit lieu à des intérêts de retard calculés "
             "conformément au taux d’intérêt en vigueur de la Banque Nationale,"
@@ -127,26 +144,31 @@ def company_settings(ctx):
             "Nos conditions générales de vente complètes peuvent vous être "
             "envoyées sur demande et sont consultables sur le site internet "
             "http://www.alcyonbelux.be",
-    })
+        }
+    )
 
-    company.with_context(lang='nl_BE').write({'invoice_terms_conditions': (
-        "Behalve indien uitdrukkelijk, zijn onze facturen contant betaalbaar. "
-        "Elke bedrag die op de vervaldag niet betaald zijn, zullen van "
-        "rechtswege en zonder voorafgaande ingebrekestelling een interest "
-        "opbrengen gelijk aan de rentevoet vande Nationale Bank, "
-        "verhoogd met 1%.. Ze worden bovendien van rechtswege en zonder "
-        "voorafgaande ingebrekestelling vermeerderd met een schadevergoeding "
-        "gelijk aan 10% van het bedrag dat op de vervaldag niet betaald is, "
-        "met een minimum van € 40,00.per faktuur.  In geval van geschil, zijn "
-        "de rechtbanken van Luik alleen bevoegd\n"
-        "Als de klant als een consument moet worden beschouwd in de  zin van "
-        "de wet van 6 april 2010 betreffende marktpraktijken en "
-        "consumentenbescherming,  is de voornoemde strafclausule tevens van "
-        "toepassing op de N.V. Alcyon wanneer die haar contractuele "
-        "verplichtingen niet nakomt (wederkerigheidsclausule).\n"
-        "Zie algemene verkoops op http://www.alcyonbelux.be.  "
-        "Een papieren exemplaar wordt op annvraag kosteloos aan u verstrekt."
-    )})
+    company.with_context(lang='nl_BE').write(
+        {
+            'invoice_terms_conditions': (
+                "Behalve indien uitdrukkelijk, zijn onze facturen contant betaalbaar. "
+                "Elke bedrag die op de vervaldag niet betaald zijn, zullen van "
+                "rechtswege en zonder voorafgaande ingebrekestelling een interest "
+                "opbrengen gelijk aan de rentevoet vande Nationale Bank, "
+                "verhoogd met 1%.. Ze worden bovendien van rechtswege en zonder "
+                "voorafgaande ingebrekestelling vermeerderd met een schadevergoeding "
+                "gelijk aan 10% van het bedrag dat op de vervaldag niet betaald is, "
+                "met een minimum van € 40,00.per faktuur.  In geval van geschil, zijn "
+                "de rechtbanken van Luik alleen bevoegd\n"
+                "Als de klant als een consument moet worden beschouwd in de  zin van "
+                "de wet van 6 april 2010 betreffende marktpraktijken en "
+                "consumentenbescherming,  is de voornoemde strafclausule tevens van "
+                "toepassing op de N.V. Alcyon wanneer die haar contractuele "
+                "verplichtingen niet nakomt (wederkerigheidsclausule).\n"
+                "Zie algemene verkoops op http://www.alcyonbelux.be.  "
+                "Een papieren exemplaar wordt op annvraag kosteloos aan u verstrekt."
+            )
+        }
+    )
 
 
 @anthem.log
@@ -170,15 +192,15 @@ def import_account_journal(ctx):
     # Note: The write with an another language WILL NOT change
     # the original journal name but only translate the name in French.
     miscellaneous_operations = ctx.env['account.journal'].search(
-        [('name', '=', 'Miscellaneous Operations')])
-    miscellaneous_operations.with_context(lang='fr_BE').write({
-        'name': 'Opérations Diverses'
-    })
+        [('name', '=', 'Miscellaneous Operations')]
+    )
+    miscellaneous_operations.with_context(lang='fr_BE').write(
+        {'name': 'Opérations Diverses'}
+    )
 
     # Cash journal must be of type Miscellaneous as entries are encoded
     # manually
-    cash = ctx.env['account.journal'].search(
-        [('name', '=', 'Cash')])
+    cash = ctx.env['account.journal'].search([('name', '=', 'Cash')])
     cash.write({'type': 'general'})
 
     content = resource_stream(req, 'data/install/account.journal.csv')
@@ -186,12 +208,10 @@ def import_account_journal(ctx):
 
     # Set the flag "update_posted" on following journals
     # These journals have no XMLid
-    journals_to_flag = ctx.env['account.journal'].search([
-        ('code', 'in', ['STJ', 'BILL', 'EXP', 'INV', 'MISC'])
-    ])
-    journals_to_flag.write({
-        'update_posted': True
-    })
+    journals_to_flag = ctx.env['account.journal'].search(
+        [('code', 'in', ['STJ', 'BILL', 'EXP', 'INV', 'MISC'])]
+    )
+    journals_to_flag.write({'update_posted': True})
 
 
 @anthem.log
@@ -211,12 +231,14 @@ def import_account_analytic_account(ctx):
 def import_product_account_analytic(ctx):
     """ Import account analytic tags + accounts for products """
     # Load tags for products
-    content = \
-        resource_stream(req, 'data/install/product.account.analytic.tag.csv')
+    content = resource_stream(
+        req, 'data/install/product.account.analytic.tag.csv'
+    )
     load_csv_stream(ctx, 'account.analytic.tag', content, delimiter=',')
 
     content = resource_stream(
-        req, 'data/install/product.account.analytic.account.csv')
+        req, 'data/install/product.account.analytic.account.csv'
+    )
     load_csv_stream(ctx, 'account.analytic.account', content, delimiter=',')
 
 
@@ -231,9 +253,9 @@ def company_currency(ctx):
 def activate_multicurrency(ctx):
     """ Activating multi-currency """
     employee_group = ctx.env.ref('base.group_user')
-    employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('base.group_multi_currency').id)]
-    })
+    employee_group.write(
+        {'implied_ids': [(4, ctx.env.ref('base.group_multi_currency').id)]}
+    )
 
 
 @anthem.log
@@ -241,10 +263,8 @@ def add_xmlid_account(ctx):
     accounts = ctx.env['account.account'].search([])
     for account in accounts:
         add_xmlid(
-            ctx, account,
-            '__setup__.account_' + account.code,
-            noupdate=True
-            )
+            ctx, account, '__setup__.account_' + account.code, noupdate=True
+        )
 
 
 @anthem.log
@@ -260,37 +280,29 @@ def add_xmlid_fiscal_position(ctx):
         else:
             code = 'cocontractor'
 
-        add_xmlid(
-            ctx, pos,
-            '__setup__.fiscal_position_' + code,
-            noupdate=True
-            )
+        add_xmlid(ctx, pos, '__setup__.fiscal_position_' + code, noupdate=True)
 
 
 @anthem.log
 def set_fiscal_position_country(ctx):
-    ctx.env.ref('__setup__.fiscal_position_nat').write({
-        'auto_apply': 1,
-        'country_id': ctx.env.ref('base.be').id,
-    })
-    ctx.env.ref('__setup__.fiscal_position_intra').write({
-        'auto_apply': 1,
-        'country_group_id': ctx.env.ref('base.europe').id,
-    })
-    ctx.env.ref('__setup__.fiscal_position_extra').write({
-        'auto_apply': 1,
-    })
+    ctx.env.ref('__setup__.fiscal_position_nat').write(
+        {'auto_apply': 1, 'country_id': ctx.env.ref('base.be').id}
+    )
+    ctx.env.ref('__setup__.fiscal_position_intra').write(
+        {'auto_apply': 1, 'country_group_id': ctx.env.ref('base.europe').id}
+    )
+    ctx.env.ref('__setup__.fiscal_position_extra').write({'auto_apply': 1})
 
 
 @anthem.log
 def set_fiscal_position_mention(ctx):
     """ Set legal mention on fiscal position """
-    ctx.env.ref('__setup__.fiscal_position_extra').write({
-        'note': 'Article 39 – exportation de biens'
-    })
-    ctx.env.ref('__setup__.fiscal_position_intra').write({
-        'note': 'Autoliquidation Art 39 bis – livraison intracommunautaire'
-    })
+    ctx.env.ref('__setup__.fiscal_position_extra').write(
+        {'note': 'Article 39 – exportation de biens'}
+    )
+    ctx.env.ref('__setup__.fiscal_position_intra').write(
+        {'note': 'Autoliquidation Art 39 bis – livraison intracommunautaire'}
+    )
 
 
 @anthem.log
@@ -315,74 +327,82 @@ def setup_sequences(ctx):
         lambda a: a.name == 'Customer Invoices'
     )
     add_xmlid(
-        ctx, customer_journal,
+        ctx,
+        customer_journal,
         '__setup__.account_journal_customer_invoices',
-        noupdate=True
+        noupdate=True,
     )
-    customer_journal.sequence_id.write({
-        'prefix': 'FV/%(range_year)s/',
-        'padding': 5,
-        'use_date_range': True,
-    })
+    customer_journal.sequence_id.write(
+        {'prefix': 'FV/%(range_year)s/', 'padding': 5, 'use_date_range': True}
+    )
     refund_seq = create_or_update(
-        ctx, 'ir.sequence', '__setup__.customer_invoice_refund_seq', {
+        ctx,
+        'ir.sequence',
+        '__setup__.customer_invoice_refund_seq',
+        {
             'name': 'Customer Invoices Refund',
             'prefix': 'NCV/%(range_year)s/',
             'padding': 5,
             'use_date_range': True,
             'implementation': 'no_gap',
-        }
+        },
     )
     account_700000 = ctx.env.ref('__setup__.account_700000')
-    customer_journal.write({
-        'refund_sequence': True,
-        'refund_sequence_id': refund_seq.id,
-        'default_credit_account_id': account_700000.id,
-        'default_debit_account_id': account_700000.id,
-    })
+    customer_journal.write(
+        {
+            'refund_sequence': True,
+            'refund_sequence_id': refund_seq.id,
+            'default_credit_account_id': account_700000.id,
+            'default_debit_account_id': account_700000.id,
+        }
+    )
 
     account_604000 = ctx.env.ref('__setup__.account_604000')
     vendor_bills_journal = journals.filtered(
         lambda a: a.name == 'Vendor Bills'
     )
     add_xmlid(
-        ctx, vendor_bills_journal,
+        ctx,
+        vendor_bills_journal,
         '__setup__.account_journal_vendor_bills',
-        noupdate=True
+        noupdate=True,
     )
-    vendor_bills_journal.write({
-        'default_credit_account_id': account_604000.id,
-        'default_debit_account_id': account_604000.id,
-    })
+    vendor_bills_journal.write(
+        {
+            'default_credit_account_id': account_604000.id,
+            'default_debit_account_id': account_604000.id,
+        }
+    )
 
     account_570100 = ctx.env.ref('__setup__.account_570100')
-    cash_journal = journals.filtered(
-        lambda a: a.name == 'Cash'
-    )
+    cash_journal = journals.filtered(lambda a: a.name == 'Cash')
     add_xmlid(
-        ctx, cash_journal,
-        '__setup__.account_journal_cash',
-        noupdate=True
+        ctx, cash_journal, '__setup__.account_journal_cash', noupdate=True
     )
-    cash_journal.write({
-        'default_credit_account_id': account_570100.id,
-        'default_debit_account_id': account_570100.id,
-    })
+    cash_journal.write(
+        {
+            'default_credit_account_id': account_570100.id,
+            'default_debit_account_id': account_570100.id,
+        }
+    )
 
-    ctx.env['ir.sequence'].search([
-        ('prefix', 'ilike', 'MISC'),
-        ]).write({'prefix': 'OD/%(range_year)s/%(range_month)s/'})
+    ctx.env['ir.sequence'].search([('prefix', 'ilike', 'MISC')]).write(
+        {'prefix': 'OD/%(range_year)s/%(range_month)s/'}
+    )
 
     purchase_journals = journals.filtered(lambda r: r.type == 'purchase')
-    for seq in (purchase_journals.mapped('sequence_id') |
-                purchase_journals.mapped('refund_sequence_id')):
+    for seq in purchase_journals.mapped(
+        'sequence_id'
+    ) | purchase_journals.mapped('refund_sequence_id'):
         if 'range_month' not in seq.prefix:
             seq.prefix = seq.prefix + '%(range_month)s/'
 
-    ctx.env['ir.sequence'].search([
-        ('prefix', 'ilike', 'range_year'),
-        ('prefix', 'not ilike', 'range_month'),
-        ]).write({'use_end_date': True})
+    ctx.env['ir.sequence'].search(
+        [
+            ('prefix', 'ilike', 'range_year'),
+            ('prefix', 'not ilike', 'range_month'),
+        ]
+    ).write({'use_end_date': True})
 
 
 @anthem.log
@@ -395,7 +415,7 @@ def configure_missing_chart_of_account(ctx):
             'template_transfer_account_id': 'l10n_be.trans',
             'sale_tax_id': 'l10n_be.attn_VAT-OUT-21-L',
             'purchase_tax_id': 'l10n_be.attn_VAT-IN-V81-21',
-        },
+        }
     }
     for company_xml_id, values in coa_dict.iteritems():
         company = ctx.env.ref(company_xml_id)
@@ -406,17 +426,19 @@ def configure_missing_chart_of_account(ctx):
         sale_tax = ctx.env.ref(values['sale_tax_id'])
         purchase_tax = ctx.env.ref(values['purchase_tax_id'])
         if not company.chart_template_id:
-            wizard = ctx.env['wizard.multi.charts.accounts'].create({
-                'company_id': company.id,
-                'chart_template_id': coa.id,
-                'transfer_account_id': template_transfer_account.id,
-                'sale_tax_id': sale_tax.id,
-                'purchase_tax_id': purchase_tax.id,
-                'complete_tax_set': coa.complete_tax_set,
-                'currency_id': ctx.env.ref('base.EUR').id,
-                'bank_account_code_prefix': coa.bank_account_code_prefix,
-                'cash_account_code_prefix': coa.cash_account_code_prefix,
-            })
+            wizard = ctx.env['wizard.multi.charts.accounts'].create(
+                {
+                    'company_id': company.id,
+                    'chart_template_id': coa.id,
+                    'transfer_account_id': template_transfer_account.id,
+                    'sale_tax_id': sale_tax.id,
+                    'purchase_tax_id': purchase_tax.id,
+                    'complete_tax_set': coa.complete_tax_set,
+                    'currency_id': ctx.env.ref('base.EUR').id,
+                    'bank_account_code_prefix': coa.bank_account_code_prefix,
+                    'cash_account_code_prefix': coa.cash_account_code_prefix,
+                }
+            )
             wizard.execute()
 
 
@@ -425,12 +447,17 @@ def create_account_types(ctx):
     """ Creating Account Types """
 
     account_type_xml_id = '__setup__.account_type_annexes_hors_bilan'
-    create_or_update(ctx, 'account.account.type', account_type_xml_id, {
-        'name': 'ANNEXES/HORS BILAN',
-        'type': 'other',
-        'analytic_policy': 'optional',
-        'include_initial_balance': False,
-    })
+    create_or_update(
+        ctx,
+        'account.account.type',
+        account_type_xml_id,
+        {
+            'name': 'ANNEXES/HORS BILAN',
+            'type': 'other',
+            'analytic_policy': 'optional',
+            'include_initial_balance': False,
+        },
+    )
 
 
 @anthem.log
@@ -471,9 +498,7 @@ def activate_check_on_vat(ctx):
 
     # We want to activate this check after having import data
     # to avoid to have an error on vat which became invalid on db2 database
-    ctx.env.ref('base.main_company').write({
-        'vat_check_vies': True,
-    })
+    ctx.env.ref('base.main_company').write({'vat_check_vies': True})
 
 
 @anthem.log
@@ -481,20 +506,26 @@ def setup_cutoff(ctx):
     ref = ctx.env.ref
     company = ctx.env.ref('base.main_company')
     journal = ctx.env.ref('__setup__.accrual_journal')
-    company.write({
-        'default_cutoff_journal_id': journal.id,
-        'default_accrued_revenue_account_id': ref('l10n_be.1_a404').id,
-        'default_accrued_expense_account_id': ref('l10n_be.1_a444').id,
-        'default_accrued_revenue_return_account_id':
-            ref('__setup__.account_404100').id,
-        'default_accrued_expense_return_account_id':
-            ref('__setup__.account_444100').id,
-        })
+    company.write(
+        {
+            'default_cutoff_journal_id': journal.id,
+            'default_accrued_revenue_account_id': ref('l10n_be.1_a404').id,
+            'default_accrued_expense_account_id': ref('l10n_be.1_a444').id,
+            'default_accrued_revenue_return_account_id': ref(
+                '__setup__.account_404100'
+            ).id,
+            'default_accrued_expense_return_account_id': ref(
+                '__setup__.account_444100'
+            ).id,
+        }
+    )
     taxes = ctx.env['account.tax'].search([])
-    taxes.write({
-        'account_accrued_revenue_id': ref('l10n_be.1_a404').id,
-        'account_accrued_expense_id': ref('l10n_be.1_a444').id,
-        })
+    taxes.write(
+        {
+            'account_accrued_revenue_id': ref('l10n_be.1_a404').id,
+            'account_accrued_expense_id': ref('l10n_be.1_a444').id,
+        }
+    )
 
 
 @anthem.log
@@ -541,10 +572,11 @@ def create_tax_100_outside_eu(ctx):
         'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
         'description': 'VAT-IN-V81-21-ROW-CC-C1',
         'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
-        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])]
+        'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])],
     }
     tax_child_1 = create_or_update(
-        ctx, 'account.tax', tax_child_1_xml_id, tax_child_1_values)
+        ctx, 'account.tax', tax_child_1_xml_id, tax_child_1_values
+    )
 
     tax_child_2_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC-C2'
     tax_child_2_values = {
@@ -558,7 +590,8 @@ def create_tax_100_outside_eu(ctx):
         'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
     }
     tax_child_2 = create_or_update(
-        ctx, 'account.tax', tax_child_2_xml_id, tax_child_2_values)
+        ctx, 'account.tax', tax_child_2_xml_id, tax_child_2_values
+    )
 
     tax_xml_id = '__setup__.1_attn_VAT-IN-V81-100-ROW-CC'
     main_tax_values = {
@@ -569,7 +602,7 @@ def create_tax_100_outside_eu(ctx):
         'account_accrued_expense_id': ctx.env.ref('l10n_be.1_a444').id,
         'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
         'tag_ids': [(6, 0, [ctx.env.ref('l10n_be.tax_tag_59').id])],
-        'children_tax_ids': [(6, 0, [tax_child_1.id, tax_child_2.id])]
+        'children_tax_ids': [(6, 0, [tax_child_1.id, tax_child_2.id])],
     }
     create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
 
@@ -581,7 +614,7 @@ def create_tax_extracom(ctx):
     tax_xml_id = 'l10n_be.1_attn_VAT-IN-V81-00-ROW-CC'
     main_tax_values = {
         'name': "TVA à l'entrée 0% Hors EU EXTRACOM - "
-                "Approvisionn. et marchandises",
+        "Approvisionn. et marchandises",
         'amount': 0,
         'type_tax_use': 'purchase',
         'amount_type': 'percent',
@@ -591,7 +624,7 @@ def create_tax_extracom(ctx):
         'tax_group_id': ctx.env.ref('account.tax_group_taxes').id,
         'description': 'VAT-IN-V81-00-ROW-CC',
         'tag_ids': [(6, 0, [])],
-        'active': True
+        'active': True,
     }
     create_or_update(ctx, 'account.tax', tax_xml_id, main_tax_values)
 
@@ -643,102 +676,102 @@ def remove_useless_account(ctx):
 def rename_accounts(ctx):
     """ Rename 3 accounts """
     # Rename the account 610000
-    account_610000 = ctx.env.ref('__setup__.account_610000',
-                                 raise_if_not_found=False)
-    account_610000.write({
-        'name': 'Location Immeubles'
-    })
+    account_610000 = ctx.env.ref(
+        '__setup__.account_610000', raise_if_not_found=False
+    )
+    account_610000.write({'name': 'Location Immeubles'})
 
     # Rename the account 708000
-    account_708000 = ctx.env.ref('__setup__.account_708000',
-                                 raise_if_not_found=False)
-    account_708000.write({
-        'name': 'Remises pied de facture'
-    })
+    account_708000 = ctx.env.ref(
+        '__setup__.account_708000', raise_if_not_found=False
+    )
+    account_708000.write({'name': 'Remises pied de facture'})
 
     # Rename the account 416200
-    account_416200 = ctx.env.ref('__setup__.account_416200',
-                                 raise_if_not_found=False)
-    account_416200.write({
-        'name': 'Avances au personnel'
-    })
+    account_416200 = ctx.env.ref(
+        '__setup__.account_416200', raise_if_not_found=False
+    )
+    account_416200.write({'name': 'Avances au personnel'})
 
 
 @anthem.log
 def create_new_accounts(ctx):
     """ Create 12 new accounts """
-    account_non_current_liabilities_id = \
-        ctx.env.ref('account.data_account_type_non_current_liabilities').id
-    account_current_liabilities_id = \
-        ctx.env.ref('account.data_account_type_current_liabilities').id
+    account_non_current_liabilities_id = ctx.env.ref(
+        'account.data_account_type_non_current_liabilities'
+    ).id
+    account_current_liabilities_id = ctx.env.ref(
+        'account.data_account_type_current_liabilities'
+    ).id
     account_expenses_id = ctx.env.ref('account.data_account_type_expenses').id
     account_income_id = ctx.env.ref('account.data_account_type_revenue').id
-    account_receivable_id = \
-        ctx.env.ref('account.data_account_type_receivable').id
+    account_receivable_id = ctx.env.ref(
+        'account.data_account_type_receivable'
+    ).id
 
     new_accounts = (
         {
             'name': 'Provisions litiges en cours',
             'code': '165400',
-            'user_type_id': account_non_current_liabilities_id
+            'user_type_id': account_non_current_liabilities_id,
         },
         {
             'name': 'Crédit investissement  ING 620000',
             'code': '173010',
-            'user_type_id': account_non_current_liabilities_id
+            'user_type_id': account_non_current_liabilities_id,
         },
         {
             'name': 'Crédit investissement  BNP 3750000',
             'code': '173020',
-            'user_type_id': account_non_current_liabilities_id
+            'user_type_id': account_non_current_liabilities_id,
         },
         {
             'name': 'Acomptes versés (clients)',
             'code': '460000',
             'user_type_id': account_current_liabilities_id,
-            'reconcile': True
+            'reconcile': True,
         },
         {
             'name': 'Entretiens/ rép autres',
             'code': '611900',
-            'user_type_id': account_expenses_id
+            'user_type_id': account_expenses_id,
         },
         {
             'name': 'Dons, libéralités',
             'code': '613160',
-            'user_type_id': account_expenses_id
+            'user_type_id': account_expenses_id,
         },
         {
             'name': "Frais d'actes notariés",
             'code': '613201',
-            'user_type_id': account_expenses_id
+            'user_type_id': account_expenses_id,
         },
         {
             'name': 'ONSS sur rémun antérieures',
             'code': '621201',
-            'user_type_id': account_expenses_id
+            'user_type_id': account_expenses_id,
         },
         {
             'name': 'Subsides de formations',
             'code': '740010',
-            'user_type_id': account_income_id
+            'user_type_id': account_income_id,
         },
         {
             'name': 'Autres produits exceptionnels',
             'code': '766900',
-            'user_type_id': account_income_id
+            'user_type_id': account_income_id,
         },
         {
             'name': 'Fournisseurs débiteurs',
             'code': '403000',
             'user_type_id': account_receivable_id,
-            'reconcile': True
+            'reconcile': True,
         },
         {
             'name': 'Frais de recouvrement de créances',
             'code': '613261',
-            'user_type_id': account_expenses_id
-        }
+            'user_type_id': account_expenses_id,
+        },
     )
     for new_account in new_accounts:
         xml_id = '__setup__.account_%s' % new_account['code']
@@ -756,10 +789,12 @@ def add_apb_tax_2018(ctx):
         apb_tax_2018 = apb_tax_old.copy()
 
         # rename old tax
-        apb_tax_old.write({
-            'name': 'APB Out (old)',
-            'description': 'APB-OUT used before 2018-04-23',
-        })
+        apb_tax_old.write(
+            {
+                'name': 'APB Out (old)',
+                'description': 'APB-OUT used before 2018-04-23',
+            }
+        )
 
         # setup new tax value
         apb_tax_2018.amount = 0.02292
@@ -772,19 +807,22 @@ def add_apb_tax_2018(ctx):
 def set_analytic_account_on_product_category(ctx):
     """ Add the analytic account on product categories """
 
-    content = \
-        resource_stream(req, 'data/install/product_cat_analytic_account.csv')
+    content = resource_stream(
+        req, 'data/install/product_cat_analytic_account.csv'
+    )
     load_csv_stream(ctx, 'product.category', content, delimiter=',')
 
 
 @anthem.log
 def set_reconcilable_accounts(ctx):
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
     UPDATE account_account
     SET reconcile='t'
     WHERE code in ('416150','416200','451800','451900',
                     '453000','454000','455000','459700','580000');
-    """)
+    """
+    )
 
 
 @anthem.log

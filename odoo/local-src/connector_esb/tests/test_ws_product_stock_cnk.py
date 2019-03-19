@@ -6,7 +6,6 @@ from .common import ESBXMLTestCase
 
 
 class WSProductStockCNKTestCase(ESBXMLTestCase):
-
     def setUp(self):
         super(WSProductStockCNKTestCase, self).setUp()
         self.setup_records()
@@ -16,27 +15,32 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
         return self.env['product.product']
 
     def change_product_qty(self, product, qty):
-        self.env['stock.change.product.qty'].create({
-            'product_id': product.id,
-            'new_quantity': qty,
-        }).change_product_qty()
+        self.env['stock.change.product.qty'].create(
+            {'product_id': product.id, 'new_quantity': qty}
+        ).change_product_qty()
 
     def setup_records(self):
-        self.product1 = self.model.create({
-            'name': 'Product1',
-            'default_code': 'Product1',
-            'cnk_code': '000015',
-        })
-        self.product2 = self.model.create({
-            'name': 'Product2',
-            'default_code': 'Product2',
-            'cnk_code': '000048',
-        })
-        self.product3 = self.model.create({
-            'name': 'Product3',
-            'default_code': 'Product3',
-            'cnk_code': '000115',
-        })
+        self.product1 = self.model.create(
+            {
+                'name': 'Product1',
+                'default_code': 'Product1',
+                'cnk_code': '000015',
+            }
+        )
+        self.product2 = self.model.create(
+            {
+                'name': 'Product2',
+                'default_code': 'Product2',
+                'cnk_code': '000048',
+            }
+        )
+        self.product3 = self.model.create(
+            {
+                'name': 'Product3',
+                'default_code': 'Product3',
+                'cnk_code': '000115',
+            }
+        )
         self.all_records = self.product1 + self.product2 + self.product3
 
         self.change_product_qty(self.product1, 20)
@@ -53,7 +57,7 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
         product_mapper = {
             '000015': self.product1,
             '000048': self.product2,
-            '000115': self.product3
+            '000115': self.product3,
         }
 
         self.assertEqual(len(result), 3)
@@ -74,11 +78,13 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
         self.assertEqual(len(result), 2)
 
     def test_message_for_newpharma(self):
-        newpharma_user = self.env['res.users'].create({
-            'login': 'test_newpharma',
-            'name': 'Test NewPharma',
-            'is_for_newpharma': True
-        })
+        newpharma_user = self.env['res.users'].create(
+            {
+                'login': 'test_newpharma',
+                'name': 'Test NewPharma',
+                'is_for_newpharma': True,
+            }
+        )
 
         # Set the product 2 to veterinary_only == True
         self.product2.veterinary_only = True
@@ -89,15 +95,16 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
         # Add fake CNK
         cnks.append('00000001')
 
-        with backend.with_context(uid=newpharma_user.id)\
-                .work_on('product.product') as work:
+        with backend.with_context(uid=newpharma_user.id).work_on(
+            'product.product'
+        ) as work:
             component = work.component('ws.message.product.stock.cnk')
             result = component.get_message(cnks)
 
         product_mapper = {
             '000015': self.product1,
             '000048': self.product2,
-            '000115': self.product3
+            '000115': self.product3,
         }
 
         self.assertEqual(len(result), 2)

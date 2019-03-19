@@ -6,8 +6,10 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from invoke import task
 from pprint import pprint
+
+from invoke import task
+
 from .database import get_db_list, get_db_request_result
 
 
@@ -58,10 +60,7 @@ def check_modules(ctx, migrated_db, full_db, sample_db):
         # In full database, we only get "installed" modules
         #
         # So we just compare modules name without their state
-        pprint(
-            set([x[0] for x in migrated_modules]) -
-            set([x[0] for x in full_modules])
-        )
+        pprint({x[0] for x in migrated_modules} - {x[0] for x in full_modules})
 
         print('')
         print('Modules in full database, but not in sample database:')

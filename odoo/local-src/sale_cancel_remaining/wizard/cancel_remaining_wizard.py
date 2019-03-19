@@ -3,7 +3,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models, _
+from odoo import _, api, models
 from odoo.exceptions import UserError
 
 
@@ -20,15 +20,21 @@ class CancelRemainingWizard(models.TransientModel):
 
         internal_pickings = line.order_id.picking_ids.filtered(
             lambda picking: picking.picking_type_code == 'internal'
-            and picking.state not in ('cancel', 'done'))
+            and picking.state not in ('cancel', 'done')
+        )
         if not internal_pickings:
             raise UserError(_('No picking can be canceled'))
         if True in internal_pickings.mapped('printed'):
-            raise UserError(_('You cannot cancel a quantity that is part '
-                              'of a started picking'))
+            raise UserError(
+                _(
+                    'You cannot cancel a quantity that is part '
+                    'of a started picking'
+                )
+            )
 
         cancel_moves = line.procurement_ids.mapped('move_ids').filtered(
-                lambda m: m.state not in ('done', 'cancel'))
+            lambda m: m.state not in ('done', 'cancel')
+        )
 
         def _descend_moves(lvl):
             next_lvl = lvl.mapped('move_orig_ids')
@@ -42,6 +48,6 @@ class CancelRemainingWizard(models.TransientModel):
             # This will mark the procurement as done
             cancel_moves.mapped('procurement_id').check()
 
-        line.write({
-            'product_qty_canceled': line.product_qty_remains_to_deliver
-        })
+        line.write(
+            {'product_qty_canceled': line.product_qty_remains_to_deliver}
+        )

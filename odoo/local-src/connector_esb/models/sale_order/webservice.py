@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from odoo import _, exceptions
 from odoo.addons.component.core import Component
-from odoo import exceptions, _
 
 
 class SaleOrderStatusWebserviceMessage(Component):
@@ -20,13 +20,15 @@ class SaleOrderStatusWebserviceMessage(Component):
         partner = SaleOrder._ws_get_partner(partner_ref)
 
         so = SaleOrder.search(
-            [('partner_id', '=', partner.id), ('esb_ref', '=', esb_ref)])
+            [('partner_id', '=', partner.id), ('esb_ref', '=', esb_ref)]
+        )
 
         if not so:
             raise exceptions.UserError(_('Sale Order not found'))
         if len(so) > 1:
             raise exceptions.UserError(
-                _('There are several sale orders with the same increment ID'))
+                _('There are several sale orders with the same increment ID')
+            )
 
         lines_values = []
         for line in so.order_line:
@@ -36,14 +38,16 @@ class SaleOrderStatusWebserviceMessage(Component):
             else:
                 available = 0
 
-            lines_values.append({
-                'line_id': line.sequence,
-                'cnk': line.product_id.cnk_code,
-                'quantity': line.product_uom_qty,
-                'available': available,
-                'price_total': line.price_subtotal,
-                'error': line.exception or None
-            })
+            lines_values.append(
+                {
+                    'line_id': line.sequence,
+                    'cnk': line.product_id.cnk_code,
+                    'quantity': line.product_uom_qty,
+                    'available': available,
+                    'price_total': line.price_subtotal,
+                    'error': line.exception or None,
+                }
+            )
 
         values = {
             'state': so.state,
@@ -52,7 +56,7 @@ class SaleOrderStatusWebserviceMessage(Component):
             'price_tax': so.amount_tax,
             'price_total': so.amount_total,
             'note': so.note or None,
-            'lines': lines_values
+            'lines': lines_values,
         }
 
         return values

@@ -19,11 +19,12 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class GRN_Type(models.Model):
     """ GRN Type """
+
     _name = 'stock.grn.type'
 
     name = fields.Char(string='Type', required=True)
@@ -31,51 +32,52 @@ class GRN_Type(models.Model):
 
 class GRN(models.Model):
     """ Goods Received Note """
+
     _name = 'stock.grn'
     _description = 'Goods Received Note'
     _order = 'id desc'
 
     name = fields.Char(
-        string='Name',
-        copy=False,
-        index=True,
-        required=True,
-        default='/'
+        string='Name', copy=False, index=True, required=True, default='/'
     )
     carrier_id = fields.Many2one(
-        'res.partner',
-        string='Carrier',
-        required=True)
+        'res.partner', string='Carrier', required=True
+    )
     carrier_ref = fields.Char(string='Carrier Id')
 
     from_info = fields.Char(string='From')
     ref = fields.Char(string='Reference')
 
     date = fields.Datetime(
-        'Date',
-        required=True,
-        default=lambda self: fields.Datetime.now())
+        'Date', required=True, default=lambda self: fields.Datetime.now()
+    )
     description = fields.Text('Description')
-    type_id = fields.Many2one(
-        'stock.grn.type',
-        string='Type')
+    type_id = fields.Many2one('stock.grn.type', string='Type')
     qty_pallet = fields.Integer(string='Qty Pallets')
     qty_box = fields.Integer(string='Qty Boxes')
 
     company_id = fields.Many2one(
-        'res.company', string='Company', change_default=True,
+        'res.company',
+        string='Company',
+        change_default=True,
         default=lambda self: self.env['res.company']._company_default_get(
-            'stock.grn'),
-        required=True, readonly=True)
+            'stock.grn'
+        ),
+        required=True,
+        readonly=True,
+    )
 
     picking_ids = fields.One2many(
-        'stock.picking', 'grn_id',
+        'stock.picking',
+        'grn_id',
         string='Incoming Shipments',
-        domain=[('picking_type_code', '=', 'incoming')])
+        domain=[('picking_type_code', '=', 'incoming')],
+    )
 
     @api.model
     def create(self, vals):
         if vals.get('name', '/') == '/':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'stock.grn') or '/'
+            vals['name'] = (
+                self.env['ir.sequence'].next_by_code('stock.grn') or '/'
+            )
         return super(GRN, self).create(vals)

@@ -7,7 +7,6 @@ from odoo.tests.common import SavepointCase
 
 
 class TestDeliveryNoteRecipient(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(TestDeliveryNoteRecipient, cls).setUpClass()
@@ -18,7 +17,7 @@ class TestDeliveryNoteRecipient(SavepointCase):
         company_vals = {
             'name': 'company_name_test',
             'ref': '12344566777878',
-            'email': 'company.mail.test@company'
+            'email': 'company.mail.test@company',
         }
 
         cls.company_test = cls.env['res.partner'].create(company_vals)
@@ -47,32 +46,26 @@ class TestDeliveryNoteRecipient(SavepointCase):
 
     def test_mail_send_to_partner_no_mail(self):
         """Use company mail if recipient partner has no email."""
-        values = {
-            'partner_ids': [self.partner_no_mail.id],
-        }
+        values = {'partner_ids': [self.partner_no_mail.id]}
         self.assertEqual(
             self.env['stock.picking']._delivery_note_recipient_ids(values),
-            [self.company_test.id]
+            [self.company_test.id],
         )
 
     def test_mail_send_to_partner_with_mail(self):
         """Use partner mail if recipient partner has an email."""
-        values = {
-            'partner_ids': [self.partner_with_mail.id],
-        }
+        values = {'partner_ids': [self.partner_with_mail.id]}
         self.assertEqual(
             self.env['stock.picking']._delivery_note_recipient_ids(values),
-            [self.partner_with_mail.id]
+            [self.partner_with_mail.id],
         )
 
     def test_mail_send_to_company_test(self):
         """Use company mail if recipient is the company."""
-        values = {
-            'partner_ids': [self.partner_with_mail.id],
-        }
+        values = {'partner_ids': [self.partner_with_mail.id]}
         self.assertEqual(
             self.env['stock.picking']._delivery_note_recipient_ids(values),
-            [self.partner_with_mail.id]
+            [self.partner_with_mail.id],
         )
 
     def test_mail_send_all(self):
@@ -82,12 +75,11 @@ class TestDeliveryNoteRecipient(SavepointCase):
                 self.partner_with_mail.id,
                 self.partner_no_mail.id,
                 self.company_test.id,
-            ],
+            ]
         }
         self.assertEqual(
             set(
-                self.env['stock.picking']._delivery_note_recipient_ids(values),
+                self.env['stock.picking']._delivery_note_recipient_ids(values)
             ),
-            {self.partner_with_mail.id,
-             self.company_test.id}
+            {self.partner_with_mail.id, self.company_test.id},
         )

@@ -3,14 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import logging
-
 from datetime import timedelta
 
 from odoo import fields
-from odoo.osv.expression import AND
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from odoo.addons.connector.exception import ConnectorException
+from odoo.osv.expression import AND
+
 from ...components.mapper import falsy2emptystring, falsy2zero
 
 _logger = logging.getLogger(__name__)
@@ -23,13 +23,14 @@ class StockUpdateMapper(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind in ['stock.update',
-                                            'stock.update.single'])
+        return bool(
+            work.timestamp
+            and work.timestamp.kind in ['stock.update', 'stock.update.single']
+        )
 
     direct = [
         (falsy2emptystring('default_code'), 'sku'),
-        (falsy2zero('immediately_usable_qty'), 'qty')
+        (falsy2zero('immediately_usable_qty'), 'qty'),
     ]
 
     @mapping
@@ -73,6 +74,7 @@ class StockUpdateMapper(Component):
 
 class StockUpdateExporter(Component):
     """Multiple product stock status exporter, scheduled by cron."""
+
     _name = 'esb.stock.update.webservice.exporter'
     _inherit = 'esb.webservice.cron.exporter'
     _apply_on = 'product.product'
@@ -90,11 +92,11 @@ class StockUpdateExporter(Component):
         that can be sent.
         """
         domain = [
-             ('product_id.default_code', '!=', ''),
-             ('product_id.default_code', '!=', False),
-             ('product_id.type', '=', 'product'),
-             ('product_id.sale_ok', '=', True),
-             ]
+            ('product_id.default_code', '!=', ''),
+            ('product_id.default_code', '!=', False),
+            ('product_id.type', '=', 'product'),
+            ('product_id.sale_ok', '=', True),
+        ]
         if export_since:
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
@@ -110,8 +112,8 @@ class StockUpdateExporter(Component):
         Note that the last second will be re-exported.
         """
         return fields.Datetime.to_string(
-                fields.Datetime.from_string(last_export)
-                + timedelta(seconds=cls.BASIC_LOCK_TIME)
+            fields.Datetime.from_string(last_export)
+            + timedelta(seconds=cls.BASIC_LOCK_TIME)
         )
 
     def run(self, export_since=None, max_records=0):
@@ -135,18 +137,16 @@ class StockUpdateExporter(Component):
                     # Export a batch of product state
                     try:
                         self._create({'lines': data})
-                        _logger.debug('Stock_exported_until %s',
-                                      quant.write_date)
+                        _logger.debug(
+                            'Stock_exported_until %s', quant.write_date
+                        )
                     except ConnectorException:
                         if last_export:
                             return self.get_exported_until(last_export)
                         raise  # No succesful export, job failed
                     else:
                         last_export = quant.write_date
-                        _logger.debug(
-                            'Exporting stock status : %s',
-                            data
-                        )
+                        _logger.debug('Exporting stock status : %s', data)
                     exported_ids = []
                     data = []
         if data:
@@ -161,6 +161,7 @@ class StockUpdateExporter(Component):
 
 class StockUpdateServiceExporter(Component):
     """Single product stock status exporter."""
+
     _name = 'esb.stock.update.webservice.exporter.single'
     _inherit = 'esb.webservice.exporter'
     _apply_on = 'product.product'
@@ -168,8 +169,9 @@ class StockUpdateServiceExporter(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind == 'stock.update.single')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'stock.update.single'
+        )
 
     def _get_external_id(self):
         """Always send a POST request, so no external id."""

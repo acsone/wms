@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -28,9 +28,5 @@ class ModifySerialNumber(models.TransientModel):
             raise UserError(_('No active id found'))
 
         stock_move = self.env['stock.move'].browse(self._context['active_id'])
-        stock_move.write({
-            'serial_number': self.serial_number,
-        })
-        stock_move.move_dest_id.write({
-            'serial_number': self.serial_number,
-        })
+        stock_move.write({'serial_number': self.serial_number})
+        stock_move.move_dest_id.write({'serial_number': self.serial_number})

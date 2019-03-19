@@ -1,28 +1,83 @@
 # -*- coding: utf-8 -*-
+from domain_interface import DomainInterface, Parameters
 from odoo import _
 
-from domain_interface import DomainInterface, Parameters
 from .. import constants
 
 
 class Usercontext(DomainInterface):
-    EXAMPLE_REQU = '208030824,2.2.3,3iV_101,REQU_USERCONTEXT,98,1,20170207,' \
-                   '072932,98427733121320,1,,01,,,,,,,,,,,,,,,,'
-    EXAMPLE_RESP = '208030824,2.2.3,3iV_101,RESP_USERCONTEXT,98,1,' \
-                   '20170207,072758,98427733121320,0,,1,01,,1,' \
-                   'Serge Diplo,,0,,,,,,,,,,'
-    EXAMPLE_RESU = '208092662,2.2.3,3iV_101,RESU_USERCONTEXT,87,1,20170207,' \
-                   '081534,874277334413394,4,70,,1,Monica Checchi,,,,,,,,,,,,'
-    REQU = ('contextType', 'requestType', 'scenarioStatus', 'Cri01', 'Cri02',
-            'Cri03', 'Cri04', 'Cri05', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
-            'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESP = ('respCode', 'respMsg', 'contextType', 'scenarioStatus',
-            'responseType', 'assignmentType', 'operName', 'operType',
-            'unitSlam', 'Usf01', 'Usf02', 'Usf03', 'Usf04', 'Usf05', 'Usf06',
-            'Usf07', 'Usf08', 'Usf09', 'Usf10')
-    RESU = ('contextType', 'scenarioStatus', 'requestType', 'assignmentType',
-            'operName', 'operType', 'Usf01', 'Usf02', 'Usf03', 'Usf04',
-            'Usf05', 'Usf06', 'Usf07', 'Usf08', 'Usf09', 'Usf10')
+    EXAMPLE_REQU = (
+        '208030824,2.2.3,3iV_101,REQU_USERCONTEXT,98,1,20170207,'
+        '072932,98427733121320,1,,01,,,,,,,,,,,,,,,,'
+    )
+    EXAMPLE_RESP = (
+        '208030824,2.2.3,3iV_101,RESP_USERCONTEXT,98,1,'
+        '20170207,072758,98427733121320,0,,1,01,,1,'
+        'Serge Diplo,,0,,,,,,,,,,'
+    )
+    EXAMPLE_RESU = (
+        '208092662,2.2.3,3iV_101,RESU_USERCONTEXT,87,1,20170207,'
+        '081534,874277334413394,4,70,,1,Monica Checchi,,,,,,,,,,,,'
+    )
+    REQU = (
+        'contextType',
+        'requestType',
+        'scenarioStatus',
+        'Cri01',
+        'Cri02',
+        'Cri03',
+        'Cri04',
+        'Cri05',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESP = (
+        'respCode',
+        'respMsg',
+        'contextType',
+        'scenarioStatus',
+        'responseType',
+        'assignmentType',
+        'operName',
+        'operType',
+        'unitSlam',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
+    RESU = (
+        'contextType',
+        'scenarioStatus',
+        'requestType',
+        'assignmentType',
+        'operName',
+        'operType',
+        'Usf01',
+        'Usf02',
+        'Usf03',
+        'Usf04',
+        'Usf05',
+        'Usf06',
+        'Usf07',
+        'Usf08',
+        'Usf09',
+        'Usf10',
+    )
 
     def requ(self, params):
         """
@@ -37,34 +92,37 @@ class Usercontext(DomainInterface):
 
         user = self._user
         if not user:
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('User not found')
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('User not found'),
+                }
+            )
 
             return result.format()
 
         # The picker should have the group "warehouse"
         if not user.has_group('stock.group_stock_user'):
-            result.update({
-                'respCode': constants.RESPONSE_CODE_ERROR,
-                'respMsg': _('The user should be in the group Inventory')
-            })
+            result.update(
+                {
+                    'respCode': constants.RESPONSE_CODE_ERROR,
+                    'respMsg': _('The user should be in the group Inventory'),
+                }
+            )
 
             return result.format()
 
-        result.update({
-            'respCode': constants.RESPONSE_CODE_OK,
-            'assignmentType': 1,
-            'operName': user.name,
-        })
+        result.update(
+            {
+                'respCode': constants.RESPONSE_CODE_OK,
+                'assignmentType': 1,
+                'operName': user.name,
+            }
+        )
 
         # Do sign on
         if params.contextType == '1':
-            result.update({
-                'contextType': 1,
-                'scenarioStatus': '01',
-            })
+            result.update({'contextType': 1, 'scenarioStatus': '01'})
 
             # This query will check if the picker has an open picking.
             # This can happen if the Zetes console crash
@@ -94,8 +152,10 @@ LIMIT 1;
             """
 
             query_values = {
-                'picking_zetes_state': (constants.AS_START,
-                                        constants.AS_ACTIVE),
+                'picking_zetes_state': (
+                    constants.AS_START,
+                    constants.AS_ACTIVE,
+                ),
                 'operator_id': self._user.id,
                 'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
             }
@@ -105,12 +165,14 @@ LIMIT 1;
 
             # If the user has a assigned picking
             if query_result and query_result[0]:
-                result.update({
-                    'unitSlam': 1,
-                    'Usf01': query_result[0],
-                    'Usf02': query_result[1],
-                    'Usf03': query_result[2],
-                })
+                result.update(
+                    {
+                        'unitSlam': 1,
+                        'Usf01': query_result[0],
+                        'Usf02': query_result[1],
+                        'Usf03': query_result[2],
+                    }
+                )
             else:
                 result.unitSlam = 0
 

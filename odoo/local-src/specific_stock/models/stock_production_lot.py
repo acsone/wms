@@ -6,17 +6,14 @@ import random
 import string
 from itertools import product as itertools_product
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
-    life_date = fields.Datetime(
-        string='Expiration Date',
-        required=True,
-    )
+    life_date = fields.Datetime(string='Expiration Date', required=True)
     is_archived = fields.Boolean('Archived', default=False, readonly=True)
     checksum = fields.Char('Checksum', readonly=True)
     voice_identifier = fields.Char('Voice Identifier', readonly=True)
@@ -98,10 +95,14 @@ class StockProductionLot(models.Model):
         no checksum will be assigned to the lot
         :return:
         """
-        lot_checksum_size = int(self.env['ir.config_parameter'].
-                                get_param('lot_checksum_size', 3))
-        same_lot_checksum_range = int(self.env['ir.config_parameter'].
-                                      get_param('same_lot_checksum_range', 2))
+        lot_checksum_size = int(
+            self.env['ir.config_parameter'].get_param('lot_checksum_size', 3)
+        )
+        same_lot_checksum_range = int(
+            self.env['ir.config_parameter'].get_param(
+                'same_lot_checksum_range', 2
+            )
+        )
 
         for lot in self:
             product = lot.product_id
@@ -173,21 +174,27 @@ class StockProductionLot(models.Model):
                   )
                 AND (lot.is_archived = FALSE OR lot.is_archived IS NULL);
                 """
-                self.env.cr.execute(not_available_checksum_query,
-                                    (location.zone,
-                                     location.corridor,
-                                     tuple(range_of_shelves)))
+                self.env.cr.execute(
+                    not_available_checksum_query,
+                    (
+                        location.zone,
+                        location.corridor,
+                        tuple(range_of_shelves),
+                    ),
+                )
                 for result in self.env.cr.fetchall():
                     if result[0]:
                         checksum_not_available.add(result[0])
 
             minval = 1
             maxval = 10 ** lot_checksum_size
-            formated_checksum = [format(item, '0%d' % lot_checksum_size)
-                                 for item
-                                 in range(minval, maxval)]
-            picklist = list(set(formated_checksum) -
-                            set(checksum_not_available))
+            formated_checksum = [
+                format(item, '0%d' % lot_checksum_size)
+                for item in range(minval, maxval)
+            ]
+            picklist = list(
+                set(formated_checksum) - set(checksum_not_available)
+            )
             if not picklist:
                 raise UserError(_('There is no checksum available'))
 
@@ -241,18 +248,21 @@ class StockProductionLot(models.Model):
         :return:
         """
         lot_voice_identifier_size = int(
-            self.env['ir.config_parameter']
-                .get_param('lot_voice_identifier_size', 3)
+            self.env['ir.config_parameter'].get_param(
+                'lot_voice_identifier_size', 3
+            )
         )
         same_lot_voice_identifier_range = int(
-            self.env['ir.config_parameter']
-                .get_param('same_lot_voice_identifier_range', 2)
+            self.env['ir.config_parameter'].get_param(
+                'same_lot_voice_identifier_range', 2
+            )
         )
 
         for lot in self:
             product = lot.product_id
-            if not product or (lot.voice_identifier
-                               and not self._context.get('force_compute')):
+            if not product or (
+                lot.voice_identifier and not self._context.get('force_compute')
+            ):
                 continue
 
             voice_identifier_not_available = set()
@@ -321,10 +331,14 @@ class StockProductionLot(models.Model):
                   )
                 AND (lot.is_archived = FALSE OR lot.is_archived IS NULL);
                 """
-                self.env.cr.execute(not_available_voice_identifier_query,
-                                    (location.zone,
-                                     location.corridor,
-                                     tuple(range_of_shelves)))
+                self.env.cr.execute(
+                    not_available_voice_identifier_query,
+                    (
+                        location.zone,
+                        location.corridor,
+                        tuple(range_of_shelves),
+                    ),
+                )
                 for result in self.env.cr.fetchall():
                     if result[0]:
                         voice_identifier_not_available.add(result[0])
@@ -335,11 +349,13 @@ class StockProductionLot(models.Model):
                 raise UserError(_('There is no voice identifier available'))
 
             # Step 4: Generate a list with all available identifiers
-            combinations_list = [''.join(cc) for cc in itertools_product(
-                string.ascii_uppercase, repeat=3)]
-            available_voice_identifiers = \
-                list(set(combinations_list) -
-                     set(voice_identifier_not_available))
+            combinations_list = [
+                ''.join(cc)
+                for cc in itertools_product(string.ascii_uppercase, repeat=3)
+            ]
+            available_voice_identifiers = list(
+                set(combinations_list) - set(voice_identifier_not_available)
+            )
 
             if not available_voice_identifiers:
                 raise UserError(_('Cannot generate a voice identifier'))
@@ -383,6 +399,4 @@ class StockProductionLot(models.Model):
         result = self.env.cr.fetchall()
         lot_to_archive_ids = [lot[0] for lot in result]
 
-        self.browse(lot_to_archive_ids).write({
-            'is_archived': True,
-        })
+        self.browse(lot_to_archive_ids).write({'is_archived': True})

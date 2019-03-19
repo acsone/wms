@@ -11,13 +11,13 @@
         'stock_account',
         'specific_purchase',  # for product supplier
         'specific_base',
-        ],
+    ],
     'data': [
         'wizards/stock_valuation_history_view.xml',
         'views/stock_quant_views.xml',
         'data/ir_cron.xml',
         'security/menu.xml',
-        ],
+    ],
     'installable': True,
     'active': False,
     'license': 'AGPL-3',

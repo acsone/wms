@@ -4,6 +4,7 @@
 
 
 from odoo import api, fields, models
+
 from .utils import create_index
 
 
@@ -17,5 +18,9 @@ class StockPackOperation(models.Model):
     def init(self):
         # index for result_package and product
         index_name = 'stock_pack_operation_package_product_index'
-        create_index(self.env.cr, index_name,
-                     self._table, '(result_package_id, product_id)')
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            '(result_package_id, product_id)',
+        )

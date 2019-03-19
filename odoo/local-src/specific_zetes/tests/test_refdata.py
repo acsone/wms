@@ -1,30 +1,33 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER
 from ..tools.domain_interface import Parameters
 from ..tools.domain_refdata import Refdata
+from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
 
 
 class TestRefdata(ZetesTest):
-
     def test_requ_refdata(self):
         """
         :return:
         """
-        domain = Refdata(DEFAULT_HEADER,
-                         mock.MagicMock(name='Savepoint()'),
-                         request_overwrite=self)
+        domain = Refdata(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
 
         result_str = domain.requ(request_params)
         result_lines = result_str.split('\n')
 
-        picking_types = self.env['stock.picking.type']\
-            .search([('subcode', '=', 'PICK'),
-                     ('picking_zone_id', '!=', False)])
-        picking_codes = [pick_type.picking_zone_id.code
-                         for pick_type in picking_types]
+        picking_types = self.env['stock.picking.type'].search(
+            [('subcode', '=', 'PICK'), ('picking_zone_id', '!=', False)]
+        )
+        picking_codes = [
+            pick_type.picking_zone_id.code for pick_type in picking_types
+        ]
 
         results = []
         for result_line in result_lines:

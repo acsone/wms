@@ -29,4 +29,3 @@ msgstr "Emplacement de destination quand aucun emplacement n'est défini pour la
 #: model:ir.model,name:stock_putaway_defaultfixedlocation.model_product_putaway
 msgid "Put Away Strategy"
 msgstr "Stratégie de rangement"
-

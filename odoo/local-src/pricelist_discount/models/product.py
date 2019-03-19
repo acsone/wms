@@ -2,16 +2,16 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
-    def price_compute(self,
-                      price_type, uom=False,
-                      currency=False, company=False):
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False
+    ):
         """ Check if context contains a price to return instead of product
         prices. Otherwise calls parent method.
         """
@@ -19,13 +19,16 @@ class ProductProduct(models.Model):
             return self.env.context['override_based_price']
         except KeyError:
             return super(ProductProduct, self).price_compute(
-                price_type=price_type, uom=uom,
-                currency=currency, company=company
+                price_type=price_type,
+                uom=uom,
+                currency=currency,
+                company=company,
             )
 
     @api.multi
     def _select_seller_for_sale(
-            self, partner_id=False, quantity=0.0, date=None, uom_id=False):
+        self, partner_id=False, quantity=0.0, date=None, uom_id=False
+    ):
         # Copy from _select_seller function
         self.ensure_one()
         if date is None:
@@ -45,7 +48,7 @@ class ProductProduct(models.Model):
                 continue
             if partner_id and seller.name not in [
                 partner_id,
-                partner_id.parent_id
+                partner_id.parent_id,
             ]:
                 continue
             if quantity_uom_seller < seller.min_qty_sale:
@@ -62,9 +65,9 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     @api.multi
-    def price_compute(self,
-                      price_type, uom=False,
-                      currency=False, company=False):
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False
+    ):
         """ Check if context contains a price to return instead of product
         prices. Otherwise calls parent method.
         """
@@ -72,6 +75,8 @@ class ProductTemplate(models.Model):
             return self.env.context['override_based_price']
         except KeyError:
             return super(ProductTemplate, self).price_compute(
-                price_type=price_type, uom=uom,
-                currency=currency, company=company
+                price_type=price_type,
+                uom=uom,
+                currency=currency,
+                company=company,
             )

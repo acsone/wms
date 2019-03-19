@@ -2,7 +2,7 @@
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, fields, _
+from odoo import _, api, fields, models
 from odoo.exceptions import Warning as UserError
 
 
@@ -13,9 +13,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         return 1
 
     print_qty = fields.Integer(
-        'Print Quantity',
-        help="Quantity to print",
-        default=_default_print_qty)
+        'Print Quantity', help="Quantity to print", default=_default_print_qty
+    )
 
     def _add(self):
         super(StockPackOperationLotAdd, self)._add()

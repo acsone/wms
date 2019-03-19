@@ -40,7 +40,7 @@ class ResPartner(models.Model):
         """
 
         for partner in self:
-            self.env.cr.execute(query, (partner.id, ))
+            self.env.cr.execute(query, (partner.id,))
             result = self.env.cr.fetchone()
 
             if not result or not result[0]:

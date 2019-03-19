@@ -17,11 +17,12 @@ class ProductTemplateListener(Component):
     the field product_variant_id is not yet set, so we do not have
     the product_product record to export.
     """
+
     _name = 'esb.product.template.export.listener'
     _inherit = 'base.connector.listener'
     _apply_on = ['product.template']
 
-    EXPORT_DESCRIPTION = "Export product {} stock state change to ESB"
+    EXPORT_DESCRIPTION = u"Export product {} stock state change to ESB"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):
@@ -35,6 +36,8 @@ class ProductTemplateListener(Component):
             record.product_variant_id.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(product_code),
                 identity_key=identity_exact,
-            ).esb_export_record(timestamp=self.env.ref(
-                'connector_esb.esb_timestamp_stock_update_single')
+            ).esb_export_record(
+                timestamp=self.env.ref(
+                    'connector_esb.esb_timestamp_stock_update_single'
                 )
+            )

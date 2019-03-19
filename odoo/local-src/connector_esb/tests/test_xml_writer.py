@@ -2,11 +2,11 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import tools, fields
+from odoo import fields, tools
+
 from .common import ESBXMLTestCase
 
-TEST_DATA0 = {
-}
+TEST_DATA0 = {}
 TEST_RESULT0 = """
     <ROOT>
     </ROOT>
@@ -27,11 +27,7 @@ TEST_RESULT1 = """
     </ROOT>
 """
 TEST_DATA2 = [
-    {
-        'baz_out': 'baz value',
-        'foo_out': 'foo value',
-        'bar_out': 'bar value',
-    },
+    {'baz_out': 'baz value', 'foo_out': 'foo value', 'bar_out': 'bar value'},
     {
         'baz_out': 'baz value 2',
         'foo_out': 'foo value 2',
@@ -114,7 +110,6 @@ TEST_RESULT5 = """
 
 
 class XMLTestCase(ESBXMLTestCase):
-
     def setUp(self):
         super(XMLTestCase, self).setUp()
         self.timestamp = self.env.ref('connector_esb.esb_timestamp_product')
@@ -124,30 +119,35 @@ class XMLTestCase(ESBXMLTestCase):
         return self.env['product.product']
 
     def test_path(self):
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/tmp')
 
         self.timestamp.path = '/write/here/please'
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/write/here/please')
 
         backend = self.backend.with_context(xml_out_path='/somewhere/else')
-        with backend.work_on(self.model._name,
-                             timestamp=self.timestamp) as work:
+        with backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.path(), '/somewhere/else')
 
     def test_default_filename(self):
         today = fields.Date.today().replace('-', '')
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             writer = work.component_by_name('esb.xml.writer')
             self.assertEqual(
-                writer.filename(), 'Products_{}.xml'.format(today))
+                writer.filename(), 'Products_{}.xml'.format(today)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_base(self):
@@ -158,7 +158,8 @@ class XMLTestCase(ESBXMLTestCase):
             paths = ('//Root', '//bar_out', '//foo_out', '//baz_out')
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT1))
+                self.flatten(result), self.flatten(TEST_RESULT1)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_multiple_lines(self):
@@ -167,10 +168,15 @@ class XMLTestCase(ESBXMLTestCase):
             result = writer.produce(TEST_DATA2)
             root = self.assertXmlDocument(result)
             paths = (
-                '//Root', '//Row/bar_out', '//Row/foo_out', '//Row/baz_out')
+                '//Root',
+                '//Row/bar_out',
+                '//Row/foo_out',
+                '//Row/baz_out',
+            )
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT2))
+                self.flatten(result), self.flatten(TEST_RESULT2)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_webservice_base(self):
@@ -181,7 +187,8 @@ class XMLTestCase(ESBXMLTestCase):
             paths = ('//resultItem', '//bar_out', '//foo_out', '//baz_out')
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT3))
+                self.flatten(result), self.flatten(TEST_RESULT3)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_webservice_multiple_lines(self):
@@ -190,12 +197,15 @@ class XMLTestCase(ESBXMLTestCase):
             result = writer.produce(TEST_DATA2)
             root = self.assertXmlDocument(result)
             paths = (
-                '//resultItem', '//resultItem/bar_out',
-                '//resultItem/foo_out', '//resultItem/baz_out',
+                '//resultItem',
+                '//resultItem/bar_out',
+                '//resultItem/foo_out',
+                '//resultItem/baz_out',
             )
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT4))
+                self.flatten(result), self.flatten(TEST_RESULT4)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_webservice_different_list_item(self):
@@ -204,12 +214,15 @@ class XMLTestCase(ESBXMLTestCase):
             result = writer.produce(TEST_DATA2, list_item_el='stockItem')
             root = self.assertXmlDocument(result)
             paths = (
-                '//stockItem', '//stockItem/bar_out',
-                '//stockItem/foo_out', '//stockItem/baz_out',
+                '//stockItem',
+                '//stockItem/bar_out',
+                '//stockItem/foo_out',
+                '//stockItem/baz_out',
             )
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT5))
+                self.flatten(result), self.flatten(TEST_RESULT5)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_xml_base_empty(self):
@@ -220,7 +233,8 @@ class XMLTestCase(ESBXMLTestCase):
             paths = ()
             self.assertXpathsExist(root, paths)
             self.assertXmlEquivalentOutputs(
-                self.flatten(result), self.flatten(TEST_RESULT0))
+                self.flatten(result), self.flatten(TEST_RESULT0)
+            )
 
     @tools.mute_logger('dicttoxml')
     def test_no_xml_version(self):

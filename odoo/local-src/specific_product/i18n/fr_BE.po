@@ -151,4 +151,3 @@ msgstr "Seulemenet pour les vétérinaires"
 #: model:ir.model,name:specific_product.model_product_storage_temperature
 msgid "product.storage.temperature"
 msgstr "product.storage.temperature"
-

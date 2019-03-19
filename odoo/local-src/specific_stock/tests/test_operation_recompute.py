@@ -9,41 +9,47 @@ class TestOperationRecompute(TransactionCase):
     def setUp(self):
         super(TestOperationRecompute, self).setUp()
 
-        self.product_1 = self.env['product.product'].create({
-            'name': 'Product 1',
-            'type': 'product',
-            'uom_id': self.env.ref('product.product_uom_unit').id,
-            'uom_po_id': self.env.ref('product.product_uom_unit').id,
-            'default_code': 'TOR1',
-            'tracking': 'lot',
-        })
-        self.product_1_lotA = self.env['stock.production.lot'].create({
-            'product_id': self.product_1.id,
-            'name': 'LotA',
-        })
-        self.product_1_lotB = self.env['stock.production.lot'].create({
-            'product_id': self.product_1.id,
-            'name': 'LotB',
-        })
-        self.product_1_add = self.env['product.product'].create({
-            'name': 'Product 1 add',
-            'type': 'product',
-            'uom_id': self.env.ref('product.product_uom_unit').id,
-            'uom_po_id': self.env.ref('product.product_uom_unit').id,
-            'default_code': 'TOR1ADD',
-        })
-        self.product_1.write({
-            'additional_product_id': self.product_1_add.id,
-            'ratio_main_product': 1,
-            'ratio_additional_product': 1,
-            })
-        self.product_2 = self.env['product.product'].create({
-            'name': 'Product 2',
-            'type': 'product',
-            'uom_id': self.env.ref('product.product_uom_unit').id,
-            'uom_po_id': self.env.ref('product.product_uom_unit').id,
-            'default_code': 'TOR2',
-        })
+        self.product_1 = self.env['product.product'].create(
+            {
+                'name': 'Product 1',
+                'type': 'product',
+                'uom_id': self.env.ref('product.product_uom_unit').id,
+                'uom_po_id': self.env.ref('product.product_uom_unit').id,
+                'default_code': 'TOR1',
+                'tracking': 'lot',
+            }
+        )
+        self.product_1_lotA = self.env['stock.production.lot'].create(
+            {'product_id': self.product_1.id, 'name': 'LotA'}
+        )
+        self.product_1_lotB = self.env['stock.production.lot'].create(
+            {'product_id': self.product_1.id, 'name': 'LotB'}
+        )
+        self.product_1_add = self.env['product.product'].create(
+            {
+                'name': 'Product 1 add',
+                'type': 'product',
+                'uom_id': self.env.ref('product.product_uom_unit').id,
+                'uom_po_id': self.env.ref('product.product_uom_unit').id,
+                'default_code': 'TOR1ADD',
+            }
+        )
+        self.product_1.write(
+            {
+                'additional_product_id': self.product_1_add.id,
+                'ratio_main_product': 1,
+                'ratio_additional_product': 1,
+            }
+        )
+        self.product_2 = self.env['product.product'].create(
+            {
+                'name': 'Product 2',
+                'type': 'product',
+                'uom_id': self.env.ref('product.product_uom_unit').id,
+                'uom_po_id': self.env.ref('product.product_uom_unit').id,
+                'default_code': 'TOR2',
+            }
+        )
 
         wh = self.env['stock.warehouse'].search([])
         location = wh[0].view_location_id
@@ -54,43 +60,51 @@ class TestOperationRecompute(TransactionCase):
         pick_type.subcode = 'PICK'
 
         # Create picking 1
-        self.picking_1 = self.env['stock.picking'].create({
-            'picking_type_id': pick_type.id,
-            'location_id': location.id,
-            'location_dest_id': loc_customer.id,
-            })
-        self.move_1a = self.env['stock.move'].create({
-            'picking_id': self.picking_1.id,
-            'name': 'Test move 1a',
-            'product_id': self.product_1.id,
-            'product_uom': self.product_1.uom_id.id,
-            'product_uom_qty': 6,
-            'location_id': location.id,
-            'location_dest_id': loc_customer.id,
-            'date': '2018-01-01 00:00:00',
-            })
+        self.picking_1 = self.env['stock.picking'].create(
+            {
+                'picking_type_id': pick_type.id,
+                'location_id': location.id,
+                'location_dest_id': loc_customer.id,
+            }
+        )
+        self.move_1a = self.env['stock.move'].create(
+            {
+                'picking_id': self.picking_1.id,
+                'name': 'Test move 1a',
+                'product_id': self.product_1.id,
+                'product_uom': self.product_1.uom_id.id,
+                'product_uom_qty': 6,
+                'location_id': location.id,
+                'location_dest_id': loc_customer.id,
+                'date': '2018-01-01 00:00:00',
+            }
+        )
         self.move_1a.action_confirm()
-        self.move_1b = self.env['stock.move'].create({
-            'picking_id': self.picking_1.id,
-            'name': 'Test move 1b',
-            'product_id': self.product_1.id,
-            'product_uom': self.product_1.uom_id.id,
-            'product_uom_qty': 1,
-            'location_id': location.id,
-            'location_dest_id': loc_customer.id,
-            'date': '2018-01-01 00:00:00',
-            })
+        self.move_1b = self.env['stock.move'].create(
+            {
+                'picking_id': self.picking_1.id,
+                'name': 'Test move 1b',
+                'product_id': self.product_1.id,
+                'product_uom': self.product_1.uom_id.id,
+                'product_uom_qty': 1,
+                'location_id': location.id,
+                'location_dest_id': loc_customer.id,
+                'date': '2018-01-01 00:00:00',
+            }
+        )
         self.move_1b.action_confirm()
-        self.move_2 = self.env['stock.move'].create({
-            'picking_id': self.picking_1.id,
-            'name': 'Test move 2',
-            'product_id': self.product_2.id,
-            'product_uom': self.product_2.uom_id.id,
-            'product_uom_qty': 1,
-            'location_id': location.id,
-            'location_dest_id': loc_customer.id,
-            'date': '2018-01-01 00:00:00',
-            })
+        self.move_2 = self.env['stock.move'].create(
+            {
+                'picking_id': self.picking_1.id,
+                'name': 'Test move 2',
+                'product_id': self.product_2.id,
+                'product_uom': self.product_2.uom_id.id,
+                'product_uom_qty': 1,
+                'location_id': location.id,
+                'location_dest_id': loc_customer.id,
+                'date': '2018-01-01 00:00:00',
+            }
+        )
         self.move_2.action_confirm()
 
         # Put product in stock
@@ -98,45 +112,56 @@ class TestOperationRecompute(TransactionCase):
         # - Product1 LotB: 5
         # - Product1 Additional: 20
         # - Product2: 10
-        inventory = self.env['stock.inventory'].create({
-            'name': 'Test',
-            'filter': 'product',
-            'location_id': location.id,
-            'product_id': self.product_1.id,
-        })
+        inventory = self.env['stock.inventory'].create(
+            {
+                'name': 'Test',
+                'filter': 'product',
+                'location_id': location.id,
+                'product_id': self.product_1.id,
+            }
+        )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
-        inventory.line_ids.create({
-            'product_id': self.product_1.id,
-            'product_qty': 3,
-            'inventory_id': inventory.id,
-            'location_id': location.id,
-            'prod_lot_id': self.product_1_lotA.id,
-            })
-        inventory.line_ids.create({
-            'product_id': self.product_1.id,
-            'product_qty': 5,
-            'inventory_id': inventory.id,
-            'location_id': location.id,
-            'prod_lot_id': self.product_1_lotB.id,
-            })
-        inventory.line_ids.create({
-            'product_id': self.product_1_add.id,
-            'product_qty': 20,
-            'inventory_id': inventory.id,
-            'location_id': location.id,
-            })
-        inventory.line_ids.create({
-            'product_id': self.product_2.id,
-            'product_qty': 10,
-            'inventory_id': inventory.id,
-            'location_id': location.id,
-            })
+        inventory.line_ids.create(
+            {
+                'product_id': self.product_1.id,
+                'product_qty': 3,
+                'inventory_id': inventory.id,
+                'location_id': location.id,
+                'prod_lot_id': self.product_1_lotA.id,
+            }
+        )
+        inventory.line_ids.create(
+            {
+                'product_id': self.product_1.id,
+                'product_qty': 5,
+                'inventory_id': inventory.id,
+                'location_id': location.id,
+                'prod_lot_id': self.product_1_lotB.id,
+            }
+        )
+        inventory.line_ids.create(
+            {
+                'product_id': self.product_1_add.id,
+                'product_qty': 20,
+                'inventory_id': inventory.id,
+                'location_id': location.id,
+            }
+        )
+        inventory.line_ids.create(
+            {
+                'product_id': self.product_2.id,
+                'product_qty': 10,
+                'inventory_id': inventory.id,
+                'location_id': location.id,
+            }
+        )
         inventory.action_done()
 
         # There should be 2 quant in stock of product 1
-        quants = self.env['stock.quant'].search([
-            ('product_id', '=', self.product_1.id)])
+        quants = self.env['stock.quant'].search(
+            [('product_id', '=', self.product_1.id)]
+        )
         self.assertEqual(len(quants), 2)
         # Force in_date for fifo
         quants[0].in_date = '2018-01-01 00:00:00'
@@ -149,11 +174,14 @@ class TestOperationRecompute(TransactionCase):
 
         self.assertEqual(len(self.picking_1.pack_operation_ids), 3)
         self.op_product1 = self.picking_1.pack_operation_ids.filtered(
-            lambda o: o.product_id == self.product_1)
+            lambda o: o.product_id == self.product_1
+        )
         self.op_product1_add = self.picking_1.pack_operation_ids.filtered(
-            lambda o: o.product_id == self.product_1_add)
+            lambda o: o.product_id == self.product_1_add
+        )
         self.op_product2 = self.picking_1.pack_operation_ids.filtered(
-            lambda o: o.product_id == self.product_2)
+            lambda o: o.product_id == self.product_2
+        )
         self.assertEqual(len(self.op_product1), 1)
         self.assertEqual(len(self.op_product1_add), 1)
         self.assertEqual(len(self.op_product2), 1)
@@ -176,18 +204,21 @@ class TestOperationRecompute(TransactionCase):
             else:
                 qties[op.product_id.id] = (op.product_qty, op.qty_done)
 
-        self.op_product1.linked_move_operation_ids.mapped('move_id')\
-            .with_context(round_autoset=False)\
-            ._recompute_pack_op()
+        self.op_product1.linked_move_operation_ids.mapped(
+            'move_id'
+        ).with_context(round_autoset=False)._recompute_pack_op()
 
         self.assertEqual(len(self.picking_1.pack_operation_ids), 3)
 
         new_op_product1 = self.picking_1.pack_operation_ids.filtered(
-            lambda o: o.product_id == self.product_1)
+            lambda o: o.product_id == self.product_1
+        )
         new_op_product1_add = self.picking_1.pack_operation_ids.filtered(
-                lambda o: o.product_id == self.product_1_add)
+            lambda o: o.product_id == self.product_1_add
+        )
         new_op_product2 = self.picking_1.pack_operation_ids.filtered(
-                lambda o: o.product_id == self.product_2)
+            lambda o: o.product_id == self.product_2
+        )
 
         self.assertNotEqual(self.op_product1, new_op_product1)
         self.assertNotEqual(self.op_product1_add, new_op_product1_add)
@@ -199,7 +230,9 @@ class TestOperationRecompute(TransactionCase):
                 new_qties[op.product_id.id] = {}
                 for l in op.pack_lot_ids:
                     new_qties[op.product_id.id][l.lot_id.id] = (
-                        l.qty_todo, l.qty)
+                        l.qty_todo,
+                        l.qty,
+                    )
             else:
                 new_qties[op.product_id.id] = (op.product_qty, op.qty_done)
 
@@ -223,18 +256,21 @@ class TestOperationRecompute(TransactionCase):
             else:
                 qties[op.product_id.id] = (op.product_qty, op.qty_done)
 
-        self.op_product1.linked_move_operation_ids.mapped('move_id')\
-            .with_context(round_autoset=False)\
-            ._recompute_pack_op()
+        self.op_product1.linked_move_operation_ids.mapped(
+            'move_id'
+        ).with_context(round_autoset=False)._recompute_pack_op()
 
         self.assertEqual(len(self.picking_1.pack_operation_ids), 3)
 
         new_op_product1 = self.picking_1.pack_operation_ids.filtered(
-            lambda o: o.product_id == self.product_1)
+            lambda o: o.product_id == self.product_1
+        )
         new_op_product1_add = self.picking_1.pack_operation_ids.filtered(
-                lambda o: o.product_id == self.product_1_add)
+            lambda o: o.product_id == self.product_1_add
+        )
         new_op_product2 = self.picking_1.pack_operation_ids.filtered(
-                lambda o: o.product_id == self.product_2)
+            lambda o: o.product_id == self.product_2
+        )
 
         self.assertNotEqual(self.op_product1, new_op_product1)
         self.assertEqual(self.op_product1_add, new_op_product1_add)
@@ -246,7 +282,9 @@ class TestOperationRecompute(TransactionCase):
                 new_qties[op.product_id.id] = {}
                 for l in op.pack_lot_ids:
                     new_qties[op.product_id.id][l.lot_id.id] = (
-                        l.qty_todo, l.qty)
+                        l.qty_todo,
+                        l.qty,
+                    )
             else:
                 new_qties[op.product_id.id] = (op.product_qty, op.qty_done)
 

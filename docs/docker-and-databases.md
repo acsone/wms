@@ -21,7 +21,7 @@ So if you just start a new odoo container using:
 docker-compose run --rm odoo
 ```
 
-You will work on `odoodb`. 
+You will work on `odoodb`.
 
 Now let's say you want to work on a database with odoo demo data and no marabunta migration:
 
@@ -39,7 +39,7 @@ docker-compose run --rm -e DB_NAME=prod odoo
 
 ### Automated task to list versions
 
-You can list the odoo databases in your Docker volume using the automated 
+You can list the odoo databases in your Docker volume using the automated
 invoke task :
 
 ```
@@ -48,18 +48,18 @@ invoke database.list-versions
 DB Name              Version    Install date
 =======              =======    ============
 odoodb               11.2.0     2018-08-05
-prod                 11.1.0     2018-07-27  
-odoo_demo            unknown    unknown  
+prod                 11.1.0     2018-07-27
+odoo_demo            unknown    unknown
 ```
 
 Version and install date are stored on `marabunta_version` table of each DB.
 As we specified `-e MIGRATE=False` on `odoo_demo`, no Marabunta migration was
-executed, thus version and install date are unknown. 
+executed, thus version and install date are unknown.
 
 
 ### Manual
 
-However you can also inspect the databases manually, and you should also find 
+However you can also inspect the databases manually, and you should also find
 your 3 databases :
 
 ```
@@ -86,7 +86,7 @@ And you can work as you want on any of them by changing the `DB_NAME`.
 
 ### Create a local dump using automated invoke task
 
-Dump generation is automated by invoke, so the only thing you 
+Dump generation is automated by invoke, so the only thing you
 have to do is :
 
 ```
@@ -95,7 +95,7 @@ invoke database.local-dump
 
 And a *.pg dump will be generated on your project folder.
 
-Moreover you can select which database you want to dump and change the 
+Moreover you can select which database you want to dump and change the
 destination folder using :
 
 ```
@@ -106,9 +106,9 @@ The generated dump will be named as username_projectname_datetime.pg
 
 ### Create a local dump and share it on odoo-dump-bags
 
-Dumps are not only great for backups, they are also the easiest way to share a 
+Dumps are not only great for backups, they are also the easiest way to share a
 database with someone else. So if you want to share one of your local database
-with your colleagues, the process is totally automated and secured, so all you 
+with your colleagues, the process is totally automated and secured, so all you
 have to do is:
 
 ```
@@ -151,7 +151,7 @@ $ docker run --rm --net=${PROJECT_NAME}_default --link ${PROJECT_NAME}_db_1:db 
 
 ### Restore a dump using container
 
-You can restore any dump without worrying too much by commands from the odoo 
+You can restore any dump without worrying too much by commands from the odoo
 container.
 
 First you will have to create an empty database with odoo user as its owner and
@@ -161,7 +161,7 @@ docker-compose run --rm odoo createdb -O odoo my_restored_database
 ```
 
 Then you can use the `pg_restore` command from the odoo container passing the
-path of your dump file: 
+path of your dump file:
 ```
 docker-compose run --rm odoo pg_restore -p 5432 -d my_restored_database < ~/my_dumps/username_projectname_datetime.pg
 ```
@@ -203,7 +203,7 @@ docker-compose run --rm odoo dropdb odoodb
 ```
 
 If somehow your image is broken, you can also use your local dropdb command,
-but you need to know which port is exposed. So you should ensure your db 
+but you need to know which port is exposed. So you should ensure your db
 container is started:
 
 ```
@@ -216,9 +216,9 @@ Then you can retrieve the exposed port using:
 docker-compose port db 5432 | cut -d : -f 2
 ```
 
-And finally drop it using the port (replace 32768 in this example with the 
+And finally drop it using the port (replace 32768 in this example with the
 result from above) and the db name:
 
 ```
-dropdb -h localhost -p 32768 -U odoo odoodb 
+dropdb -h localhost -p 32768 -U odoo odoodb
 ```

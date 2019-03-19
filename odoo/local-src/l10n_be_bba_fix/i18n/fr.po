@@ -30,4 +30,3 @@ msgstr "Communication pour le paiement"
 #: model:ir.model.fields,field_description:l10n_be_invoice_bba.field_res_partner_out_inv_comm_algorithm
 msgid "Communication Algorithm"
 msgstr "BBA algorithme"
-

@@ -3,11 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import os
-from distutils.util import strtobool
 from datetime import date
-from dateutil.relativedelta import relativedelta
+from distutils.util import strtobool
 
 import anthem
+from dateutil.relativedelta import relativedelta
+
 from odoo import fields
 
 """
@@ -27,17 +28,20 @@ By default different importers will be launched depending on environment:
 
 # importer refs with number of years, number of months
 BASE_IMPORTER = [
-    {'ref': 'db2_import.db2_sale_importer',
-     'csv_until': '2018-04-01'},  # csv_until is excluded date
-    {'ref': 'db2_import.db2_purchase_importer',
-     'csv_until': '2018-04-01'},
+    {
+        'ref': 'db2_import.db2_sale_importer',
+        'csv_until': '2018-04-01',
+    },  # csv_until is excluded date
+    {'ref': 'db2_import.db2_purchase_importer', 'csv_until': '2018-04-01'},
 ]
 
 # importer for selection of 10 clients
 EXT_IMPORTER = [
-    {'ref': 'db2_import.db2_importer_10_clients',
-     'is_ext': True,
-     'csv_until': '2018-04-01'},
+    {
+        'ref': 'db2_import.db2_importer_10_clients',
+        'is_ext': True,
+        'csv_until': '2018-04-01',
+    }
 ]
 
 
@@ -109,8 +113,7 @@ def main(ctx):
         return
 
     if use_ext:
-        if (ext_years > years
-                or ext_years == years and ext_months > months):
+        if ext_years > years or ext_years == years and ext_months > months:
             importers.extend(EXT_IMPORTER)
         else:
             # no need for extension if it extends nothing
@@ -118,8 +121,7 @@ def main(ctx):
 
     today = date.today()
     end_date_str = fields.Date.to_string(today)
-    start_date = today + relativedelta(years=-years,
-                                       months=-months)
+    start_date = today + relativedelta(years=-years, months=-months)
     start_date_str = fields.Date.to_string(start_date)
 
     for data in importers:
@@ -128,8 +130,9 @@ def main(ctx):
         if use_ext and data.get('is_ext'):
             end_date = start_date + relativedelta(days=-1)
             end_date_str = fields.Date.to_string(end_date)
-            start_date = today + relativedelta(years=-ext_years,
-                                               months=-ext_months)
+            start_date = today + relativedelta(
+                years=-ext_years, months=-ext_months
+            )
             start_date_str = fields.Date.to_string(start_date)
         csv_until = data.get('csv_until')
         values = {

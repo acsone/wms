@@ -16,11 +16,12 @@ class ProductProductListener(Component):
     because the fields that are of interest to us are there and the
     update on product_product is never called.
     """
+
     _name = 'esb.product.product.export.listener'
     _inherit = 'base.connector.listener'
     _apply_on = ['product.product']
 
-    EXPORT_DESCRIPTION = "Export product {} stock state change to ESB"
+    EXPORT_DESCRIPTION = u"Export product {} stock state change to ESB"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_create(self, record, fields=None):
@@ -30,6 +31,8 @@ class ProductProductListener(Component):
         record.with_delay(
             description=self.EXPORT_DESCRIPTION.format(product_code),
             identity_key=identity_exact,
-        ).esb_export_record(timestamp=self.env.ref(
-                'connector_esb.esb_timestamp_stock_update_single')
-                )
+        ).esb_export_record(
+            timestamp=self.env.ref(
+                'connector_esb.esb_timestamp_stock_update_single'
+            )
+        )

@@ -5,10 +5,14 @@
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from odoo.osv.expression import OR
-from ...components.mapper import (dt2esbdate, falsy2emptystring,
-                                  two_digits_fractional,
-                                  three_digits_fractional)
-from ...components.mapper import falsy2zero
+
+from ...components.mapper import (
+    dt2esbdate,
+    falsy2emptystring,
+    falsy2zero,
+    three_digits_fractional,
+    two_digits_fractional,
+)
 
 
 class ProductExportMapper(Component):
@@ -31,11 +35,7 @@ class ProductExportMapper(Component):
         (falsy2zero('ratio_additional_product'), 'Cp2z24'),
     ]
 
-    translatable_keys = {
-        'nl_BE': {
-            'name': 'Refdem',
-        }
-    }
+    translatable_keys = {'nl_BE': {'name': 'Refdem'}}
 
     @classmethod
     def _component_match(cls, work):
@@ -56,7 +56,7 @@ class ProductExportMapper(Component):
         The volume in Odoo is recorded in liter and the ESB expects
         a value in cm3. So convertion is required.
         """
-        return {'Cp2z08': '{0:.2f}'.format((record.volume or 0) * 1000)}
+        return {'Cp2z08': '{:.2f}'.format((record.volume or 0) * 1000)}
 
     @mapping
     def supplier(self, record):
@@ -68,9 +68,7 @@ class ProductExportMapper(Component):
             supplier_product_code = supplier.product_code or ''
             supplier_ref = supplier.name.ref or '0'
 
-        return {'Gesarc': supplier_product_code,
-                'Gesfou': supplier_ref,
-                }
+        return {'Gesarc': supplier_product_code, 'Gesfou': supplier_ref}
 
     @mapping
     def manufacturer(self, record):
@@ -83,12 +81,15 @@ class ProductExportMapper(Component):
     def category_warnings(self, record):
         cat = record.categ_id
         return {
-            'Warceg': (cat.with_context(
-                {'lang': 'de_DE'}).warning_info or '')[:254],
-            'Warcfr': (cat.with_context(
-                {'lang': 'fr_BE'}).warning_info or '')[:254],
-            'Warcnl': (cat.with_context(
-                {'lang': 'nl_BE'}).warning_info or '')[:254],
+            'Warceg': (cat.with_context({'lang': 'de_DE'}).warning_info or '')[
+                :254
+            ],
+            'Warcfr': (cat.with_context({'lang': 'fr_BE'}).warning_info or '')[
+                :254
+            ],
+            'Warcnl': (cat.with_context({'lang': 'nl_BE'}).warning_info or '')[
+                :254
+            ],
         }
 
     @mapping
@@ -112,7 +113,7 @@ class ProductExportMapper(Component):
             'hauteur-unit': 'CENTIMETER',
             'longueur-unit': 'CENTIMETER',
             'largeur-unit': 'CENTIMETER',
-            }
+        }
 
     @mapping
     def group_and_subgroup(self, record):
@@ -142,7 +143,7 @@ class ProductExportMapper(Component):
         return {
             'Gescgr': grp_ref if grp_ref.isdigit() else '0',
             'Gescsg': subgrp_ref if subgrp_ref.isdigit() else '0',
-            }
+        }
 
     @mapping
     def business_unit(self, record):
@@ -207,7 +208,7 @@ class ProductExportMapper(Component):
 class ProductCronExporter(Component):
 
     _name = 'esb.product.cron.exporter'
-    _inherit = ['esb.cron.exporter', ]
+    _inherit = ['esb.cron.exporter']
     _usage = 'record.exporter.cron'
     _apply_on = 'product.product'
 
@@ -225,7 +226,7 @@ class ProductCronExporter(Component):
         """
         domain = [
             # Not GESTART.startwith(‘8888’) (contrib antibio)
-            ('default_code', 'not like', '8888%'),
+            ('default_code', 'not like', '8888%')
         ]
         return domain
 
@@ -239,10 +240,14 @@ class ProductCronExporter(Component):
 
     def domain_timestamp(self, export_since=None):
         """Add a check on product_template write_date."""
-        return OR([
-            super(ProductCronExporter, self).domain_timestamp(export_since),
-            self.get_domain_timestamp_product_tmpl(export_since)
-        ])
+        return OR(
+            [
+                super(ProductCronExporter, self).domain_timestamp(
+                    export_since
+                ),
+                self.get_domain_timestamp_product_tmpl(export_since),
+            ]
+        )
 
     def _write_esb_exported_mark_on_records(self, records):
         _super = super(ProductCronExporter, self)
@@ -253,12 +258,8 @@ class ProductCronExporter(Component):
         # do the same here. (it bypasses the ORM to avoid to update the
         # write_date which would trigger a new update)
         templates = records.mapped('product_tmpl_id')
-        query = (
-            "UPDATE %s SET esb_exported = true "
-            "WHERE id IN %%s " % (templates._table,)
+        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %%s " % (
+            templates._table,
         )
         self.env.cr.execute(query, (tuple(templates.ids),))
-        self.model.invalidate_cache(
-            fnames=['esb_exported'],
-            ids=templates.ids
-        )
+        self.model.invalidate_cache(fnames=['esb_exported'], ids=templates.ids)

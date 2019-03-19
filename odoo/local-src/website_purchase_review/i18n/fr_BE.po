@@ -424,4 +424,3 @@ msgstr "Date de validation"
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Write date"
 msgstr "Date d'écriture"
-

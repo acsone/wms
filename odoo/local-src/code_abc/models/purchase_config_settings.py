@@ -9,8 +9,9 @@ class PurchaseConfigSettings(models.TransientModel):
 
     turnover_delay = fields.Integer(
         'CA computation delay (in months)',
-        default=lambda self: int(self.env['ir.config_parameter']
-                                 .get_param('abc.turnover_delay', 0))
+        default=lambda self: int(
+            self.env['ir.config_parameter'].get_param('abc.turnover_delay', 0)
+        ),
     )
 
     @api.multi
@@ -18,5 +19,6 @@ class PurchaseConfigSettings(models.TransientModel):
         self.ensure_one()
 
         if self.turnover_delay:
-            self.env['ir.config_parameter']\
-                .set_param('abc.turnover_delay', self.turnover_delay)
+            self.env['ir.config_parameter'].set_param(
+                'abc.turnover_delay', self.turnover_delay
+            )

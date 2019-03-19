@@ -4,6 +4,7 @@
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+
 from ...components.mapper import falsy2emptystring
 
 
@@ -113,17 +114,17 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_empty_ones_or_default(self, record):
-        return {
-                'ShowTimer': True,
-                }
+        return {'ShowTimer': True}
 
     @mapping
     def compute_language(self, record):
-        lang = self.env['res.lang'].search([('code', '=', record.lang)],
-                                           limit=1)
+        lang = self.env['res.lang'].search(
+            [('code', '=', record.lang)], limit=1
+        )
         return {
             # FR is the default value
-            'Language': lang.esb_ref or 'FR',
+            'Language': lang.esb_ref
+            or 'FR'
         }
 
     @mapping
@@ -145,7 +146,4 @@ class CustomerCronExporter(Component):
         return bool(work.timestamp and work.timestamp.kind == 'customer')
 
     def get_items_domain(self):
-        return [
-            ('customer', '=', True),
-            ('email', '<>', False)
-        ]
+        return [('customer', '=', True), ('email', '<>', False)]

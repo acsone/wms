@@ -6,19 +6,20 @@ from .common import DeliveryRoundTestCase
 
 
 class TestInstancePickingState(DeliveryRoundTestCase):
-
     def test_picking_state_deliver_job(self):
         """Job that process a round.instance.picking.state"""
         ship1 = self._create_picking_out()
-        self.env['stock.move'].create({
-            'name': self.p1.name,
-            'product_id': self.p1.id,
-            'product_uom_qty': 1,
-            'product_uom': self.p1.uom_id.id,
-            'picking_id': ship1.id,
-            'location_id': ship1.location_id.id,
-            'location_dest_id': ship1.location_dest_id.id,
-        })
+        self.env['stock.move'].create(
+            {
+                'name': self.p1.name,
+                'product_id': self.p1.id,
+                'product_uom_qty': 1,
+                'product_uom': self.p1.uom_id.id,
+                'picking_id': ship1.id,
+                'location_id': ship1.location_id.id,
+                'location_dest_id': ship1.location_dest_id.id,
+            }
+        )
         self.delivery_round_1._assign_pickings(ship1)
         self.assertEqual(ship1.state, 'assigned')
         icust = self.delivery_round_1.instance_customer_ids
@@ -74,6 +75,10 @@ class TestInstancePickingState(DeliveryRoundTestCase):
 
         # pick2 is not done so should be removed from the round
         self.assertEqual(
-            set(self.delivery_round_1.instance_customer_ids
-                .mapped('picking_ids')),
-            {pick1})
+            set(
+                self.delivery_round_1.instance_customer_ids.mapped(
+                    'picking_ids'
+                )
+            ),
+            {pick1},
+        )

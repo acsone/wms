@@ -255,7 +255,7 @@ odoo.define('website_purchase_review.main_page', function (require) {
             load_product(newProductId);
         }
     }
-    
+
     function load_product(productId) {
         if (productId === current_product_id) {
             return false;

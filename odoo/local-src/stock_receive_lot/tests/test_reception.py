@@ -2,11 +2,10 @@
 # Copyright 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, post_install, at_install
+from odoo.tests.common import TransactionCase, at_install, post_install
 
 
 class TestReception(TransactionCase):
-
     def setUp(self):
         super(TestReception, self).setUp()
         self.category_model = self.env['product.category']
@@ -20,23 +19,25 @@ class TestReception(TransactionCase):
         self.stock_picking_model = self.env['stock.picking']
         self.stock_reception_wizard = self.env['stock.pack.operation.lot.add']
 
-        self.products = [self.product_model.create(d) for d in [
-            {
-                'name': 'Unittest Reception P1',
-                'uom_id': self.ref('product.product_uom_unit'),
-                'tracking': 'lot',
-            },
-            {
-                'name': 'Unittest Reception P2',
-                'uom_id': self.ref('product.product_uom_unit'),
-                'tracking': 'lot',
-            },
-            ]]
+        self.products = [
+            self.product_model.create(d)
+            for d in [
+                {
+                    'name': 'Unittest Reception P1',
+                    'uom_id': self.ref('product.product_uom_unit'),
+                    'tracking': 'lot',
+                },
+                {
+                    'name': 'Unittest Reception P2',
+                    'uom_id': self.ref('product.product_uom_unit'),
+                    'tracking': 'lot',
+                },
+            ]
+        ]
 
-        self.supplier = self.partner_model.create({
-            'name': 'Unittest supplier',
-            'ref': '839737475756467',
-        })
+        self.supplier = self.partner_model.create(
+            {'name': 'Unittest supplier', 'ref': '839737475756467'}
+        )
 
         self.supplier_location = self.location_model.browse(
             self.ref('stock.stock_location_suppliers')
@@ -44,36 +45,42 @@ class TestReception(TransactionCase):
         self.stock_location = self.location_model.browse(
             self.ref('stock.stock_location_stock')
         )
-        self.destination_stock_location = self.location_model.create({
-            'name': 'bin',
-            'location_id': self.stock_location.id,
-            })
+        self.destination_stock_location = self.location_model.create(
+            {'name': 'bin', 'location_id': self.stock_location.id}
+        )
 
     @post_install(True)
     @at_install(False)
     def test_1_picking_transfer(self):
-        picking = self.stock_picking_model.create({
-            'picking_type_id': self.ref('stock.picking_type_in'),
-            'location_id': self.supplier_location.id,
-            'location_dest_id': self.stock_location.id,
-            'move_lines': [
-                (0, 0, {
-                    'name': 'move 1',
-                    'product_id': product.id,
-                    'product_uom_qty': 5,
-                    'product_uom': product.uom_id.id,
-                    'location_id': self.supplier_location.id,
-                    'location_dest_id': self.stock_location.id,
-                }) for product in self.products
-            ],
-        })
+        picking = self.stock_picking_model.create(
+            {
+                'picking_type_id': self.ref('stock.picking_type_in'),
+                'location_id': self.supplier_location.id,
+                'location_dest_id': self.stock_location.id,
+                'move_lines': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': 'move 1',
+                            'product_id': product.id,
+                            'product_uom_qty': 5,
+                            'product_uom': product.uom_id.id,
+                            'location_id': self.supplier_location.id,
+                            'location_dest_id': self.stock_location.id,
+                        },
+                    )
+                    for product in self.products
+                ],
+            }
+        )
         picking = picking.with_context(test_mode=1)
         picking.action_assign()
 
         # launch wizard
-        wiz = self.stock_reception_wizard\
-            .with_context(default_life_date_allowed=True)\
-            .new({'picking_id': picking.id})
+        wiz = self.stock_reception_wizard.with_context(
+            default_life_date_allowed=True
+        ).new({'picking_id': picking.id})
 
         op1 = picking.pack_operation_product_ids[0]
         op2 = picking.pack_operation_product_ids[1]
@@ -143,5 +150,6 @@ class TestReception(TransactionCase):
         picking.with_context(test_mode=True).do_transfer()
         self.assertEqual(picking.state, 'done')
         self.assertEqual(len(picking.move_lines), len(self.products))
-        self.assertEqual(len(picking.pack_operation_product_ids),
-                         len(self.products))
+        self.assertEqual(
+            len(picking.pack_operation_product_ids), len(self.products)
+        )

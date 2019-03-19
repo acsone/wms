@@ -12,18 +12,24 @@ class StockInventoryLine(models.Model):
         """ When an inventory is validated, we need to cancel any remaining
         pending inventory moves """
         loss_picking_type = self.env.ref(
-            'stock_lot_loss.stock_picking_type_23')
+            'stock_lot_loss.stock_picking_type_23'
+        )
         moves = self.env['stock.move']
         for line in self:
-            quants = self.env['stock.quant'].search([
-                ('qty', '>', 0.0),
-                ('product_id', '=', line.product_id.id),
-                ('lot_id', '=', line.prod_lot_id.id),
-                ('package_id', '=', line.package_id.id),
-                ('location_id', '=', line.location_id.id),
-                ('reservation_id.picking_id.picking_type_id', '=',
-                    loss_picking_type.id),
-                ])
+            quants = self.env['stock.quant'].search(
+                [
+                    ('qty', '>', 0.0),
+                    ('product_id', '=', line.product_id.id),
+                    ('lot_id', '=', line.prod_lot_id.id),
+                    ('package_id', '=', line.package_id.id),
+                    ('location_id', '=', line.location_id.id),
+                    (
+                        'reservation_id.picking_id.picking_type_id',
+                        '=',
+                        loss_picking_type.id,
+                    ),
+                ]
+            )
             moves |= quants.mapped('reservation_id')
         if moves:
             moves.action_cancel()

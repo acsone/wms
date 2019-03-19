@@ -118,11 +118,11 @@ class ReportStockOverview(models.Model):
   FULL OUTER JOIN deliveries_todo_byproduct USING (product_id)
   FULL OUTER JOIN deliveries_last_byproduct USING (product_id)
         """
-        self.env.cr.execute("CREATE OR REPLACE VIEW " + self._table +
-                            " AS (" + query + ")")
+        self.env.cr.execute(
+            "CREATE OR REPLACE VIEW " + self._table + " AS (" + query + ")"
+        )
 
-    product_id = fields.Many2one(
-        'product.product', 'Product')
+    product_id = fields.Many2one('product.product', 'Product')
 
     qty_in_bin = fields.Float('Quantity in bin')
     qty_in_parking = fields.Float('Quantity in parking')
@@ -137,7 +137,5 @@ class ReportStockOverview(models.Model):
     average_qty = fields.Integer('Average outgoing qty')
     average_count = fields.Integer('Average outgoing count')
 
-    refill_priority_arrange = fields.Integer(
-        'Arrangement Priority')
-    refill_priority_reassort = fields.Integer(
-        'Reassortment Priority')
+    refill_priority_arrange = fields.Integer('Arrangement Priority')
+    refill_priority_reassort = fields.Integer('Reassortment Priority')

@@ -14,8 +14,9 @@ class SpecialPromotionExportMapper(Component):
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and
-                    work.timestamp.kind == 'special.promotion')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'special.promotion'
+        )
 
     @mapping
     def compute_sku(self, record):
@@ -31,9 +32,7 @@ class SpecialPromotionExportMapper(Component):
         percent = 0
         if record.discount_sale:
             percent = record.discount_sale
-        return {'Percent1': '{0:.2f}'.format(percent),
-                'Percent2': '0'
-                }
+        return {'Percent1': '{:.2f}'.format(percent), 'Percent2': '0'}
 
     @mapping
     def compute_startdate(self, record):
@@ -59,25 +58,24 @@ class SpecialPromotionExportMapper(Component):
 
     @mapping
     def compute_checksum(self, record):
-        checksum = ''.join([
-            str(record.real_id),
-            self.options.alcyon_group_id,
-            'special',
-        ])
+        checksum = ''.join(
+            [str(record.real_id), self.options.alcyon_group_id, 'special']
+        )
         return {'CheckSum': checksum}
 
 
 class SpecialPromotionCronExporter(Component):
 
     _name = 'esb.special.promotion.cron.exporter'
-    _inherit = ['esb.cron.exporter', ]
+    _inherit = ['esb.cron.exporter']
     _usage = 'record.exporter.cron'
     _apply_on = 'product.supplierinfo.esbflux'
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp
-                    and work.timestamp.kind == 'special.promotion')
+        return bool(
+            work.timestamp and work.timestamp.kind == 'special.promotion'
+        )
 
     def _prepare_item(self, items):
         """ For each promotion, multiple items are needed.
@@ -87,20 +85,25 @@ class SpecialPromotionCronExporter(Component):
         prepared = []
         items = items.remove_duplicate_actions()
         price_list = self.env['product.pricelist'].search(
-                [('esb_ref', '!=', '')])
+            [('esb_ref', '!=', '')]
+        )
         price_list = price_list.filtered(lambda r: len(r.esb_ref) > 2)
         alcyon_category_ids = price_list.mapped(lambda r: r.esb_ref)
         for item in items:
             for category in alcyon_category_ids:
-                prepared.append(self.mapper.map_record(item).values(
-                        alcyon_group_id=category))
+                prepared.append(
+                    self.mapper.map_record(item).values(
+                        alcyon_group_id=category
+                    )
+                )
         return prepared
 
     def get_items_domain(self):
         """ Get only entries which are for now and the future """
         today = fields.Date.today()
-        return [('date_start', '!=', False),
-                ('date_end', '>=', today),
-                ('discount_sale', '>', 0),
-                ('flux', '=', 'specialpromotion'),
-                ]
+        return [
+            ('date_start', '!=', False),
+            ('date_end', '>=', today),
+            ('discount_sale', '>', 0),
+            ('flux', '=', 'specialpromotion'),
+        ]

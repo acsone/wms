@@ -6,149 +6,191 @@ from odoo.tests.common import SavepointCase
 
 
 class TestShippingCosts(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(TestShippingCosts, cls).setUpClass()
 
-        cls.env = cls.env(context=dict(cls.env.context,
-                          tracking_disable=True))
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         # Create the product used for "shipping alcyon fees" and is xmlid
-        cls.product_shipping_cost = cls.env['product.product'].create({
-            'name': 'Alcyon shipping cost test'
-        })
+        cls.product_shipping_cost = cls.env['product.product'].create(
+            {'name': 'Alcyon shipping cost test'}
+        )
         # Create the delivery carrier for Alcyon
         cls.fee = 8.5
-        cls.delivery_method = cls.env['delivery.carrier'].create({
-            'delivery_type': 'fixed',
-            'fixed_price': cls.fee,
-            'free_if_more_than': True,
-            'amount': 125,
-            'use_specific_cost_calculation': True,
-            'name': 'Alcyon',
-        })
+        cls.delivery_method = cls.env['delivery.carrier'].create(
+            {
+                'delivery_type': 'fixed',
+                'fixed_price': cls.fee,
+                'free_if_more_than': True,
+                'amount': 125,
+                'use_specific_cost_calculation': True,
+                'name': 'Alcyon',
+            }
+        )
         cls.fee_2 = 20
-        cls.delivery_method_2 = cls.env['delivery.carrier'].create({
-            'delivery_type': 'fixed',
-            'fixed_price': cls.fee_2,
-            'free_if_more_than': True,
-            'amount': 200,
-            'use_specific_cost_calculation': True,
-            'name': 'Alcyon 2',
-        })
+        cls.delivery_method_2 = cls.env['delivery.carrier'].create(
+            {
+                'delivery_type': 'fixed',
+                'fixed_price': cls.fee_2,
+                'free_if_more_than': True,
+                'amount': 200,
+                'use_specific_cost_calculation': True,
+                'name': 'Alcyon 2',
+            }
+        )
 
         cls.fee_3 = 25
-        cls.delivery_method_3 = cls.env['delivery.carrier'].create({
-            'delivery_type': 'fixed',
-            'fixed_price': cls.fee_3,
-            'free_if_more_than': True,
-            'amount': 200,
-            'use_specific_cost_calculation': False,
-            'name': 'Alcyon 3',
-        })
+        cls.delivery_method_3 = cls.env['delivery.carrier'].create(
+            {
+                'delivery_type': 'fixed',
+                'fixed_price': cls.fee_3,
+                'free_if_more_than': True,
+                'amount': 200,
+                'use_specific_cost_calculation': False,
+                'name': 'Alcyon 3',
+            }
+        )
 
-        cls.env['ir.model.data'].create({
-            'name': 'deliver_carrier_alcyon',
-            'module': '__setup__',
-            'model': 'delivery.carrier',
-            'res_id': cls.delivery_method.id,
-        })
+        cls.env['ir.model.data'].create(
+            {
+                'name': 'deliver_carrier_alcyon',
+                'module': '__setup__',
+                'model': 'delivery.carrier',
+                'res_id': cls.delivery_method.id,
+            }
+        )
         # Lets create 2 customers
-        cls.partner1 = cls.env['res.partner'].create({
-            'name': 'Partner One',
-            'ref': '89328492342',
-            'help_with_fee': True,
-        })
-        cls.partner2 = cls.env['res.partner'].create({
-            'name': 'Partner Two',
-            'ref': '498298349283',
-            'help_with_fee': True,
-        })
+        cls.partner1 = cls.env['res.partner'].create(
+            {
+                'name': 'Partner One',
+                'ref': '89328492342',
+                'help_with_fee': True,
+            }
+        )
+        cls.partner2 = cls.env['res.partner'].create(
+            {
+                'name': 'Partner Two',
+                'ref': '498298349283',
+                'help_with_fee': True,
+            }
+        )
         # Create a couple of products
-        cls.p1 = cls.env['product.product'].create({
-            'name': 'Unittest P1',
-            'uom_id': cls.env.ref('product.product_uom_unit').id,
-            'type': 'consu',
-        })
-        cls.p2 = cls.env['product.product'].create({
-            'name': 'Unittest P2',
-            'uom_id': cls.env.ref('product.product_uom_unit').id,
-            'type': 'product',
-        })
-        cls.p3 = cls.env['product.product'].create({
-            'name': 'Unittest P3',
-            'uom_id': cls.env.ref('product.product_uom_unit').id,
-            'type': 'product',
-        })
+        cls.p1 = cls.env['product.product'].create(
+            {
+                'name': 'Unittest P1',
+                'uom_id': cls.env.ref('product.product_uom_unit').id,
+                'type': 'consu',
+            }
+        )
+        cls.p2 = cls.env['product.product'].create(
+            {
+                'name': 'Unittest P2',
+                'uom_id': cls.env.ref('product.product_uom_unit').id,
+                'type': 'product',
+            }
+        )
+        cls.p3 = cls.env['product.product'].create(
+            {
+                'name': 'Unittest P3',
+                'uom_id': cls.env.ref('product.product_uom_unit').id,
+                'type': 'product',
+            }
+        )
         # Add some stock for p1 and p2
-        inventory = cls.env['stock.inventory'].create({
-            'name': 'Test',
-            'location_id': cls.env.ref('stock.stock_location_stock').id,
-            'filter': 'partial'})
+        inventory = cls.env['stock.inventory'].create(
+            {
+                'name': 'Test',
+                'location_id': cls.env.ref('stock.stock_location_stock').id,
+                'filter': 'partial',
+            }
+        )
         inventory.prepare_inventory()
-        cls.env['stock.inventory.line'].create({
-            'inventory_id': inventory.id,
-            'product_id': cls.p1.id,
-            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
-            'product_qty': 100,
-            'location_id': cls.env.ref('stock.stock_location_stock').id
-            })
+        cls.env['stock.inventory.line'].create(
+            {
+                'inventory_id': inventory.id,
+                'product_id': cls.p1.id,
+                'product_uom_id': cls.env.ref('product.product_uom_unit').id,
+                'product_qty': 100,
+                'location_id': cls.env.ref('stock.stock_location_stock').id,
+            }
+        )
         inventory.action_done()
-        inventory = cls.env['stock.inventory'].create({
-            'name': 'Test',
-            'location_id': cls.env.ref('stock.stock_location_stock').id,
-            'filter': 'partial'})
+        inventory = cls.env['stock.inventory'].create(
+            {
+                'name': 'Test',
+                'location_id': cls.env.ref('stock.stock_location_stock').id,
+                'filter': 'partial',
+            }
+        )
         inventory.prepare_inventory()
-        cls.env['stock.inventory.line'].create({
-            'inventory_id': inventory.id,
-            'product_id': cls.p2.id,
-            'product_uom_id': cls.env.ref('product.product_uom_unit').id,
-            'product_qty': 100,
-            'location_id': cls.env.ref('stock.stock_location_stock').id
-            })
+        cls.env['stock.inventory.line'].create(
+            {
+                'inventory_id': inventory.id,
+                'product_id': cls.p2.id,
+                'product_uom_id': cls.env.ref('product.product_uom_unit').id,
+                'product_qty': 100,
+                'location_id': cls.env.ref('stock.stock_location_stock').id,
+            }
+        )
         inventory.action_done()
         # Create a sale order 1 for partner 1
-        cls.so1 = cls.env['sale.order'].create({
-            'partner_id': cls.partner1.id,
-            'carrier_id': cls.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': cls.p1.name,
-                    'product_id': cls.p1.id,
-                    'product_uom': cls.env.ref('product.product_uom_unit').id,
-                    'product_uom_qty': 1,
-                    'price_unit': 50,
-                }),
-            ]
-        })
+        cls.so1 = cls.env['sale.order'].create(
+            {
+                'partner_id': cls.partner1.id,
+                'carrier_id': cls.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': cls.p1.name,
+                            'product_id': cls.p1.id,
+                            'product_uom': cls.env.ref(
+                                'product.product_uom_unit'
+                            ).id,
+                            'product_uom_qty': 1,
+                            'price_unit': 50,
+                        },
+                    )
+                ],
+            }
+        )
         # Create sale order 2 for partner 1
-        cls.so2 = cls.env['sale.order'].create({
-            'partner_id': cls.partner1.id,
-            'carrier_id': cls.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': cls.p1.name,
-                    'product_id': cls.p1.id,
-                    'product_uom': cls.env.ref('product.product_uom_unit').id,
-                    'product_uom_qty': 1,
-                    'price_unit': 10,
-                }),
-            ]
-        })
+        cls.so2 = cls.env['sale.order'].create(
+            {
+                'partner_id': cls.partner1.id,
+                'carrier_id': cls.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': cls.p1.name,
+                            'product_id': cls.p1.id,
+                            'product_uom': cls.env.ref(
+                                'product.product_uom_unit'
+                            ).id,
+                            'product_uom_qty': 1,
+                            'price_unit': 10,
+                        },
+                    )
+                ],
+            }
+        )
         # Finally create 2 delivery round
-        cls.delivery_template1 = cls.env['round.template'].create({
-            'name': 'Unittest delivery template',
-        })
-        cls.dr1 = cls.env['round.instance'].create({
-            'template_id': cls.delivery_template1.id,
-        })
-        cls.delivery_template2 = cls.env['round.template'].create({
-            'name': 'Unittest delivery template',
-        })
-        cls.dr2 = cls.env['round.instance'].create({
-            'template_id': cls.delivery_template2.id,
-        })
+        cls.delivery_template1 = cls.env['round.template'].create(
+            {'name': 'Unittest delivery template'}
+        )
+        cls.dr1 = cls.env['round.instance'].create(
+            {'template_id': cls.delivery_template1.id}
+        )
+        cls.delivery_template2 = cls.env['round.template'].create(
+            {'name': 'Unittest delivery template'}
+        )
+        cls.dr2 = cls.env['round.instance'].create(
+            {'template_id': cls.delivery_template2.id}
+        )
 
     def get_shipping_cost(self, so):
         """Returns the amount of shipping cost billed on a sale order"""
@@ -199,15 +241,25 @@ class TestShippingCosts(SavepointCase):
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.so2.order_line[0].price_unit = 6
-        self.so2.write({'order_line': [
-            (0, 0, {
-                'name': self.p3.name,
-                'product_id': self.p3.id,
-                'product_uom': self.ref('product.product_uom_unit'),
-                'product_uom_qty': 1,
-                'price_unit': 24,
-            }),
-        ]})
+        self.so2.write(
+            {
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p3.name,
+                            'product_id': self.p3.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 24,
+                        },
+                    )
+                ]
+            }
+        )
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 20 % sale order 2
         self.so1.action_confirm()
@@ -223,19 +275,27 @@ class TestShippingCosts(SavepointCase):
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         # Second delivery round
         # Create a 3rd sale order
-        so3 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 70,
-                }),
-            ]
-        })
+        so3 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 70,
+                        },
+                    )
+                ],
+            }
+        )
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         pick = self.so2.picking_ids.filtered(lambda r: r.state != 'done')
@@ -262,15 +322,25 @@ class TestShippingCosts(SavepointCase):
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.so2.order_line[0].price_unit = 6
-        self.so2.write({'order_line': [
-            (0, 0, {
-                'name': self.p3.name,
-                'product_id': self.p3.id,
-                'product_uom': self.ref('product.product_uom_unit'),
-                'product_uom_qty': 1,
-                'price_unit': 24,
-            }),
-        ]})
+        self.so2.write(
+            {
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p3.name,
+                            'product_id': self.p3.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 24,
+                        },
+                    )
+                ]
+            }
+        )
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 20 % sale order 2
         self.so1.action_confirm()
@@ -287,19 +357,27 @@ class TestShippingCosts(SavepointCase):
 
         # Second delivery round
         # Create a 3rd sale order
-        so3 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 70,
-                }),
-            ]
-        })
+        so3 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 70,
+                        },
+                    )
+                ],
+            }
+        )
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         pick = self.so2.picking_ids.filtered(lambda r: r.state != 'done')
@@ -334,19 +412,27 @@ class TestShippingCosts(SavepointCase):
 
         # Second delivery round
         # Create a 3rd sale order
-        so3 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 70,
-                }),
-            ]
-        })
+        so3 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 70,
+                        },
+                    )
+                ],
+            }
+        )
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
@@ -374,19 +460,27 @@ class TestShippingCosts(SavepointCase):
         self.assertTrue(self.no_shipping_line_present(self.so2))
         # Second delivery round
         # Create a 3rd sale order
-        so3 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 70,
-                }),
-            ]
-        })
+        so3 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 70,
+                        },
+                    )
+                ],
+            }
+        )
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._assign_pickings(self.so2.picking_ids)
@@ -420,19 +514,27 @@ class TestShippingCosts(SavepointCase):
     def test_no_shipping_fees(self):
         """Small order in round but second so with large amount"""
         # Create a second sale order for partner One
-        self.so2 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 3,
-                    'price_unit': 200,
-                }),
-            ]
-        })
+        self.so2 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 3,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
@@ -442,19 +544,27 @@ class TestShippingCosts(SavepointCase):
         """2 customer in round, only partner 1 get charged """
         self.so1.action_confirm()
         self.so2.action_confirm()
-        so21 = self.env['sale.order'].create({
-            'partner_id': self.partner2.id,
-            'carrier_id': self.delivery_method.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 1000,
-                }),
-            ]
-        })
+        so21 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner2.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 1000,
+                        },
+                    )
+                ],
+            }
+        )
         so21.action_confirm()
         self.dr1._assign_pickings(so21.picking_ids)
         self.dr1._assign_pickings(self.so2.picking_ids)
@@ -482,19 +592,27 @@ class TestShippingCosts(SavepointCase):
     def test_no_shipping_fees_no_specific_calc(self):
         """Order shouldn't have a fee and return in _add_delivery_cost_to_so"""
         # Create a second sale order for partner One
-        self.so2 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method_3.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 5,
-                    'price_unit': 200,
-                }),
-            ]
-        })
+        self.so2 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method_3.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 5,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
         self.so2.action_confirm()
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._deliver(background=False)
@@ -503,19 +621,27 @@ class TestShippingCosts(SavepointCase):
     def test_shipping_fees_no_specific_calc(self):
         """Order should have a fee and pass through _add_delivery_cost_to_so"""
         # Create a second sale order for partner One
-        self.so2 = self.env['sale.order'].create({
-            'partner_id': self.partner1.id,
-            'carrier_id': self.delivery_method_3.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'product_uom': self.ref('product.product_uom_unit'),
-                    'product_uom_qty': 1,
-                    'price_unit': 10,
-                }),
-            ]
-        })
+        self.so2 = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': self.delivery_method_3.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 10,
+                        },
+                    )
+                ],
+            }
+        )
         self.so2.action_confirm()
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._deliver(background=False)

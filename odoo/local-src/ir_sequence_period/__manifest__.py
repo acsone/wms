@@ -10,7 +10,7 @@
     'author': "BCIM",
     'depends': [
         'account',
-        ],
+    ],
     'data': [
         'views/ir_sequence.xml',
     ],

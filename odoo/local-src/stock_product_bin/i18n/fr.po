@@ -116,4 +116,3 @@ msgstr "product.stock.bin"
 #: model:ir.model,name:stock_product_bin.model_product_stock_bin_temp
 msgid "product.stock.bin.temp"
 msgstr "product.stock.bin.temp"
-

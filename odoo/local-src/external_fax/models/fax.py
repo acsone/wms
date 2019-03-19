@@ -5,7 +5,7 @@
 import os
 import re
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
 
@@ -13,24 +13,16 @@ from odoo.exceptions import UserError
 class Fax(models.Model):
     _name = 'fax.external'
 
-    name = fields.Char(
-        string='Fax name'
-    )
-    email_from = fields.Char(
-        string='Email from',
-        compute='_compute_from_env',
-    )
+    name = fields.Char(string='Fax name')
+    email_from = fields.Char(string='Email from', compute='_compute_from_env')
     email_domain = fields.Char(
-        string='Email domain of the service',
-        compute='_compute_from_env',
+        string='Email domain of the service', compute='_compute_from_env'
     )
     fax_number = fields.Char(
-        string='Fax number of the service',
-        compute='_compute_from_env',
+        string='Fax number of the service', compute='_compute_from_env'
     )
     password = fields.Char(
-        string='Password of the service',
-        compute='_compute_from_env',
+        string='Password of the service', compute='_compute_from_env'
     )
 
     @api.depends()
@@ -64,7 +56,7 @@ class Fax(models.Model):
     def body(self):
         """ The password to the service is sent in the body of the message."""
         self.ensure_one()
-        return 'password:{}'.format(self.password)
+        return u'password:{}'.format(self.password)
 
     @api.multi
     @job(default_channel='root.background.fax')
@@ -75,15 +67,17 @@ class Fax(models.Model):
         """
         self.ensure_one()
         if not fax_no:
-            raise UserError(_('Fax could not be sent for attachment with '
-                              'id {}. Fax number is empty or invalid.'
-                              ).format(attachment_id)
-                            )
+            raise UserError(
+                _(
+                    u'Fax could not be sent for attachment with '
+                    u'id {}. Fax number is empty or invalid.'
+                ).format(attachment_id)
+            )
         mail_values = {
             'email_to': self.email_recipient(fax_no),
             'body_html': self.body(),
             'auto_delete': False,
-            }
+        }
         email_from = self.email_from
         if email_from:
             mail_values['email_from'] = email_from

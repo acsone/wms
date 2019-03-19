@@ -41,9 +41,9 @@ class ReportStockQuantBylocation(models.Model):
             "join": "",
             "where": "",
             "groupby": "quant.product_id, quant.location_id, quant.owner_id, "
-                       "quant.company_id, quant.reservation_id",
+            "quant.company_id, quant.reservation_id",
             "orderby": "",
-            }
+        }
 
     def init(self):
         drop_view_if_exists(self.env.cr, self._table)
@@ -59,22 +59,18 @@ class ReportStockQuantBylocation(models.Model):
         """
         if params.get('orderby'):
             query += "ORDER BY %(orderby)s"
-        self.env.cr.execute("CREATE OR REPLACE VIEW " + self._table +
-                            " AS (" + query % params + ")")
+        self.env.cr.execute(
+            "CREATE OR REPLACE VIEW "
+            + self._table
+            + " AS ("
+            + query % params
+            + ")"
+        )
 
-    product_id = fields.Many2one(
-        'product.product', 'Product',
-        auto_join=True)
-    location_id = fields.Many2one(
-        'stock.location', 'Location',
-        auto_join=True)
-    qty = fields.Float(
-        'Quantity')
-    product_uom_id = fields.Many2one(
-        related='product_id.uom_id')
-    owner_id = fields.Many2one(
-        'res.partner', 'Owner')
-    company_id = fields.Many2one(
-        'res.company', 'Company')
-    reservation_id = fields.Many2one(
-        'stock.move', 'Reserved')
+    product_id = fields.Many2one('product.product', 'Product', auto_join=True)
+    location_id = fields.Many2one('stock.location', 'Location', auto_join=True)
+    qty = fields.Float('Quantity')
+    product_uom_id = fields.Many2one(related='product_id.uom_id')
+    owner_id = fields.Many2one('res.partner', 'Owner')
+    company_id = fields.Many2one('res.company', 'Company')
+    reservation_id = fields.Many2one('stock.move', 'Reserved')

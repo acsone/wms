@@ -2,10 +2,11 @@
 # Copyright 2017 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api, _
+import logging
+
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -38,32 +39,45 @@ class SaleOrder(models.Model):
         # multiple pickings could be created, or inserted in existing pickings
 
         pickings = self.picking_ids.filtered(
-            lambda picking:
-            picking.picking_type_subcode == 'PICK' and
-            picking.state not in ('done', 'cancel') and
-            not picking.printed)
+            lambda picking: picking.picking_type_subcode == 'PICK'
+            and picking.state not in ('done', 'cancel')
+            and not picking.printed
+        )
         if not pickings:
             return
 
         if template:
-            _logger.debug("Associate SO %d to delivery instance matching "
-                          "carrier", self.id)
+            _logger.debug(
+                "Associate SO %d to delivery instance matching " "carrier",
+                self.id,
+            )
             delivery_round = self.env['round.instance'].find_bytemplate(
-                template)
-            if (delivery_round and pickings.mapped('delivery_round_id') and
-                    delivery_round != pickings.mapped('delivery_round_id')):
-                raise ValidationError(_(
-                    "All pickings at destination of a same shipping must "
-                    "be in the same delivery round"))
+                template
+            )
+            if (
+                delivery_round
+                and pickings.mapped('delivery_round_id')
+                and delivery_round != pickings.mapped('delivery_round_id')
+            ):
+                raise ValidationError(
+                    _(
+                        "All pickings at destination of a same shipping must "
+                        "be in the same delivery round"
+                    )
+                )
         else:
             delivery_round = pickings.mapped('delivery_round_id')
             if len(delivery_round) > 1:
-                raise ValidationError(_(
-                    "All pickings at destination of a same shipping must "
-                    "be in the same delivery round"))
+                raise ValidationError(
+                    _(
+                        "All pickings at destination of a same shipping must "
+                        "be in the same delivery round"
+                    )
+                )
             if not delivery_round:
                 delivery_round = self.env['round.instance'].find_bypartner(
-                    pickings[0].partner_id)
+                    pickings[0].partner_id
+                )
 
         if delivery_round:
             delivery_round._assign_pickings(pickings)

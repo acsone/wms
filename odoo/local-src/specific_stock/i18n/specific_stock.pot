@@ -473,4 +473,3 @@ msgstr ""
 #: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr ""
-

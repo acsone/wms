@@ -305,7 +305,7 @@ migration:
           ### local
           - specific_report
           - stock_valuation
-          - specific_sale 
+          - specific_sale
       modes:
         full:
           operations:

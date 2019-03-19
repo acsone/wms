@@ -29,4 +29,3 @@ msgstr "Charge constatée d'avance"
 #: model:ir.model,name:purchase_prepaid.model_purchase_order
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
-

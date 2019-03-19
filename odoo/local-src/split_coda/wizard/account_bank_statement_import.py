@@ -3,12 +3,12 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
-
-from odoo import api, models, _
-from odoo.exceptions import UserError
-from odoo.addons.base.res.res_bank import sanitize_account_number
-
 import logging
+
+from odoo import _, api, models
+from odoo.addons.base.res.res_bank import sanitize_account_number
+from odoo.exceptions import UserError
+
 _logger = logging.getLogger(__name__)
 
 
@@ -53,10 +53,12 @@ class AccountBankStatementImport(models.TransientModel):
 
             # Check if the account number is valid
             journal_obj = self.env['account.journal']
-            journal = \
-                journal_obj.browse(self.env.context.get('journal_id', []))
+            journal = journal_obj.browse(
+                self.env.context.get('journal_id', [])
+            )
             is_valid_account = self._check_journal_bank_account(
-                journal, sanitized_account_number)
+                journal, sanitized_account_number
+            )
             if journal.bank_account_id and not is_valid_account:
                 _logger.info('Skip the CODA for account %s' % account_number)
                 continue
@@ -70,20 +72,28 @@ class AccountBankStatementImport(models.TransientModel):
             if not journal:
                 # The active_id is passed in context so the wizard can call
                 # import_file again once the journal is created
-                return self.with_context(active_id=self.ids[0]).\
-                    _journal_creation_wizard(currency, account_number)
-            if not journal.default_debit_account_id \
-                    or not journal.default_credit_account_id:
-                raise UserError(_(
-                    'You have to set a Default Debit Account and a Default '
-                    'Credit Account for the journal: %s') % journal.name)
+                return self.with_context(
+                    active_id=self.ids[0]
+                )._journal_creation_wizard(currency, account_number)
+            if (
+                not journal.default_debit_account_id
+                or not journal.default_credit_account_id
+            ):
+                raise UserError(
+                    _(
+                        'You have to set a Default Debit Account and a Default '
+                        'Credit Account for the journal: %s'
+                    )
+                    % journal.name
+                )
             # Prepare statement data to be used for bank statements creation
             stmts_vals = self._complete_stmts_vals(
                 stmts_vals, journal, account_number
             )
             # Create the bank statements
-            new_statement_ids, new_notifications = \
-                self._create_bank_statements(stmts_vals)
+            new_statement_ids, new_notifications = self._create_bank_statements(
+                stmts_vals
+            )
             statement_ids += new_statement_ids
             notifications += new_notifications
 
@@ -101,7 +111,7 @@ class AccountBankStatementImport(models.TransientModel):
             'tag': action.tag,
             'context': {
                 'statement_ids': statement_ids,
-                'notifications': notifications
+                'notifications': notifications,
             },
             'type': 'ir.actions.client',
         }

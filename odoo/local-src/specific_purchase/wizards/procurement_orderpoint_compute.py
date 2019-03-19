@@ -2,7 +2,7 @@ import logging
 import threading
 from datetime import datetime
 
-from odoo import api, fields, models, tools, _
+from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -23,8 +23,9 @@ class ProcurementOrderpointCompute(models.TransientModel):
     is_not_recompute_promos = fields.Boolean('Not Recompute Promotions')
 
     type = fields.Selection(
-        [('by_suppliers', 'By suppliers'),
-         ('by_days', 'By days')], string='Type', default='by_suppliers',
+        [('by_suppliers', 'By suppliers'), ('by_days', 'By days')],
+        string='Type',
+        default='by_suppliers',
         required=True,
     )
     supplier_ids = fields.Many2many(
@@ -33,8 +34,9 @@ class ProcurementOrderpointCompute(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        result = \
-            super(ProcurementOrderpointCompute, self).default_get(fields_list)
+        result = super(ProcurementOrderpointCompute, self).default_get(
+            fields_list
+        )
 
         field_name = MANAGE_DAY_PREFIX + str(datetime.now().isoweekday())
         result[field_name] = True
@@ -45,9 +47,7 @@ class ProcurementOrderpointCompute(models.TransientModel):
     def procure_calculation(self):
         self.ensure_one()
 
-        kwargs = {
-            'is_not_recompute_promos': self.is_not_recompute_promos
-        }
+        kwargs = {'is_not_recompute_promos': self.is_not_recompute_promos}
         if self.type == 'by_days':
             kwargs['type'] = self.type
             is_day_selected = False
@@ -66,8 +66,8 @@ class ProcurementOrderpointCompute(models.TransientModel):
                 raise UserError(_('Please select at least one supplier'))
 
         threaded_calculation = threading.Thread(
-            target=self._specific_procure_calculation_orderpoint,
-            kwargs=kwargs)
+            target=self._specific_procure_calculation_orderpoint, kwargs=kwargs
+        )
         threaded_calculation.start()
         return {'type': 'ir.actions.act_window_close'}
 
@@ -86,25 +86,31 @@ class ProcurementOrderpointCompute(models.TransientModel):
             # because the old one may be closed
             new_cr = self.pool.cursor()
             self = self.with_env(self.env(cr=new_cr, context=context))
-            scheduler_cron = \
-                self.sudo().env.ref('procurement.ir_cron_scheduler_action')
+            scheduler_cron = self.sudo().env.ref(
+                'procurement.ir_cron_scheduler_action'
+            )
             # Avoid to run the scheduler multiple times in the same time
             # Alcyon doesn't use this cron. It's why I can use it.
             try:
                 with tools.mute_logger('odoo.sql_db'):
-                    self._cr.execute("SELECT id FROM ir_cron WHERE id = %s "
-                                     "FOR UPDATE NOWAIT", (scheduler_cron.id,))
+                    self._cr.execute(
+                        "SELECT id FROM ir_cron WHERE id = %s "
+                        "FOR UPDATE NOWAIT",
+                        (scheduler_cron.id,),
+                    )
             except Exception:
-                _logger.info('Attempt to run procurement scheduler aborted,'
-                             ' as already running')
+                _logger.info(
+                    'Attempt to run procurement scheduler aborted,'
+                    ' as already running'
+                )
                 self._cr.rollback()
                 self._cr.close()
                 return {}
 
             try:
                 self.env['procurement.order']._procure_orderpoint_confirm(
-                    use_new_cursor=True,
-                    company_id=self.env.user.company_id.id)
+                    use_new_cursor=True, company_id=self.env.user.company_id.id
+                )
             finally:
                 new_cr.close()
             return {}

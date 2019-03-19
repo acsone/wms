@@ -34,4 +34,3 @@ msgstr "Numéro de contrôle 3"
 #: model:ir.model,name:stock_location.model_stock_location
 msgid "Inventory Locations"
 msgstr "Emplacements de stock"
-

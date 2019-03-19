@@ -3,24 +3,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError, UserError
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 
 class Sale(models.Model):
     _inherit = 'sale.order'
 
-    sale_channel = fields.Selection([
-        ('phone', 'Phone'),
-        ('mail', 'Mail'),
-        ('fax', 'Fax'),
-        ('web', 'Web'),
-    ])
-    suite_name = fields.Char(
-        string='Suite Id',
-        copy=False,
+    sale_channel = fields.Selection(
+        [('phone', 'Phone'), ('mail', 'Mail'), ('fax', 'Fax'), ('web', 'Web')]
     )
+    suite_name = fields.Char(string='Suite Id', copy=False)
 
     @api.model_cr
     def init(self):
@@ -61,14 +54,15 @@ class Sale(models.Model):
         self.ensure_one()
         report_pages = super(Sale, self).order_lines_layouted()
         # Get the product categories in the sale order that contains a warning
-        categories = self.order_line.mapped(
-                'product_id.categ_id').filtered('warning_info')
+        categories = self.order_line.mapped('product_id.categ_id').filtered(
+            'warning_info'
+        )
         # Group the lines by categories (with warning)
         warn_lines = {}
         for category in categories:
             warn_lines[category] = self.order_line.filtered(
-                    lambda r: r.product_id.categ_id.id == category.id
-                ).sorted()
+                lambda r: r.product_id.categ_id.id == category.id
+            ).sorted()
         # Get all the line ids whose product belongs to a category with warning
         warn_line_ids = sum([l.ids for c, l in warn_lines.iteritems()], [])
         # Categories with specific display
@@ -80,16 +74,19 @@ class Sale(models.Model):
             for report_page in report_page_category:
                 # Filter out the lines whose categories have a warning message
                 new_lines = [
-                    line for line in report_page['lines']
+                    line
+                    for line in report_page['lines']
                     if line.id not in warn_line_ids
                 ]
                 if new_lines:
-                    new_values.append({
-                        'name': report_page['name'],
-                        'subtotal': report_page['subtotal'],
-                        'pagebreak': report_page['pagebreak'],
-                        'lines': new_lines
-                    })
+                    new_values.append(
+                        {
+                            'name': report_page['name'],
+                            'subtotal': report_page['subtotal'],
+                            'pagebreak': report_page['pagebreak'],
+                            'lines': new_lines,
+                        }
+                    )
             if new_values:
                 new_report_pages.append(new_values)
             else:
@@ -105,10 +102,11 @@ class Sale(models.Model):
             }
             if category == pharmacy_cat:
                 new_page['only_quantity'] = True
-                pharmacist_name = (self.partner_id.pharmacist_id.name or '')
+                pharmacist_name = self.partner_id.pharmacist_id.name or ''
                 new_page['line_additional_text'] = (
-                        _(u'Article transferred to dispensing pharmacy: %s') %
-                        pharmacist_name)
+                    _(u'Article transferred to dispensing pharmacy: %s')
+                    % pharmacist_name
+                )
             new_report_pages[-1].append(new_page)
 
         return new_report_pages
@@ -118,8 +116,9 @@ class Sale(models.Model):
         self.ensure_one()
 
         # Disable tracking
-        result = super(Sale, self.with_context(tracking_disable=True))\
-            .action_confirm()
+        result = super(
+            Sale, self.with_context(tracking_disable=True)
+        ).action_confirm()
 
         # Post the message "Quotation confirmed"
         message = self.env.ref('sale.mt_order_confirmed')
@@ -139,10 +138,15 @@ class Sale(models.Model):
     def action_cancel(self):
         for sale_order in self:
             if sale_order.picking_ids.filtered(
-                    lambda picking: picking.printed):
+                lambda picking: picking.printed
+            ):
                 raise UserError(
-                    _(u"You cannot cancel sale order %s, it's already "
-                      u"prepared") % sale_order.name)
+                    _(
+                        u"You cannot cancel sale order %s, it's already "
+                        u"prepared"
+                    )
+                    % sale_order.name
+                )
         return super(Sale, self).action_cancel()
 
 
@@ -155,16 +159,15 @@ class SaleOrderLine(models.Model):
     older_lot_life_date = fields.Datetime(
         string='Expiration date',
         related='product_id.older_lot_id.life_date',
-        readonly=True
+        readonly=True,
     )
     order_partner_id = fields.Many2one(readonly=True)
     order_pricelist_id = fields.Many2one(
-        related='order_id.pricelist_id',
-        readonly=True,
+        related='order_id.pricelist_id', readonly=True
     )
     picking_zone_id = fields.Many2one(
-        related="product_id.picking_zone_id",
-        readonly=True)
+        related="product_id.picking_zone_id", readonly=True
+    )
 
     @api.depends('product_id', 'price_subtotal', 'order_id.partner_id')
     def _compute_exception(self):
@@ -173,18 +176,17 @@ class SaleOrderLine(models.Model):
             The first exception raised is kept to be displayed on the line.
             Warning text are added to the description of the line.
         """
-        line_exceptions = self.env['exception.rule'].search([
-            ('rule_group', '=', 'sale'),
-            ('model', '=', 'sale.order.line'),
-            ],
-            order='sequence'
+        line_exceptions = self.env['exception.rule'].search(
+            [('rule_group', '=', 'sale'), ('model', '=', 'sale.order.line')],
+            order='sequence',
         )
         for line in self:
             exception = warning = ''
             if line.product_id:
                 for rule in line_exceptions:
-                    if not self.env['sale.order']._rule_eval(rule,
-                                                             'line', line):
+                    if not self.env['sale.order']._rule_eval(
+                        rule, 'line', line
+                    ):
                         continue
                     if rule.warning_only:
                         if rule.warning_text:
@@ -218,17 +220,20 @@ class SaleOrderLine(models.Model):
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
                     line.product_id.with_context(
-                            prio=line.route_id.priority or '1',
-                            date=line.order_id.date_order),
+                        prio=line.route_id.priority or '1',
+                        date=line.order_id.date_order,
+                    ),
                     line.product_uom_qty,
                     line.state == 'sale',
-                    line.id
+                    line.id,
                 ),
-                line.product_qty_remains_to_deliver)
+                line.product_qty_remains_to_deliver,
+            )
 
     @api.model
-    def get_product_qty_unavailable(self, product, product_uom_qty,
-                                    confirmed, line_id):
+    def get_product_qty_unavailable(
+        self, product, product_uom_qty, confirmed, line_id
+    ):
         if product and product_uom_qty:
             immediately_usable_qty = product.immediately_usable_qty
             if confirmed:
@@ -248,36 +253,41 @@ class SaleOrderLine(models.Model):
                     # equals the immediately usable quantity
                     # minus the sum of stock move quantity
                     # which stock move is after the order line stock move
-                    order_line_stock_move = self.env['stock.move'].search([
-                        ('procurement_id.sale_line_id', '=', line_id),
-                        ('state', 'not in', ['draft', 'cancel', 'done'])
-                    ], limit=1)
+                    order_line_stock_move = self.env['stock.move'].search(
+                        [
+                            ('procurement_id.sale_line_id', '=', line_id),
+                            ('state', 'not in', ['draft', 'cancel', 'done']),
+                        ],
+                        limit=1,
+                    )
                     if not order_line_stock_move:
                         return min(
-                            abs(immediately_usable_qty),
-                            product_uom_qty,
+                            abs(immediately_usable_qty), product_uom_qty
                         )
                     stock_move_date_expected = (
                         order_line_stock_move.date_expected
                     )
 
-                    next_stock_moves = self.env['stock.move'].search([
-                        ('product_id', '=', product.id),
-                        ('procurement_id.sale_line_id', '!=', line_id),
-                        ('state', 'not in', ['draft', 'cancel', 'done']),
-                        '|',
-                        '|',
-                        ('priority', '<', order_line_stock_move.priority),
-                        '&',
-                        ('priority', '=', order_line_stock_move.priority),
-                        ('date_expected', '>', stock_move_date_expected),
-                        # in rare case of same date_expected,
-                        # use id to sort the moves
-                        '&', '&',
-                        ('priority', '=', order_line_stock_move.priority),
-                        ('date_expected', '=', stock_move_date_expected),
-                        ('id', '>', order_line_stock_move.id),
-                    ])
+                    next_stock_moves = self.env['stock.move'].search(
+                        [
+                            ('product_id', '=', product.id),
+                            ('procurement_id.sale_line_id', '!=', line_id),
+                            ('state', 'not in', ['draft', 'cancel', 'done']),
+                            '|',
+                            '|',
+                            ('priority', '<', order_line_stock_move.priority),
+                            '&',
+                            ('priority', '=', order_line_stock_move.priority),
+                            ('date_expected', '>', stock_move_date_expected),
+                            # in rare case of same date_expected,
+                            # use id to sort the moves
+                            '&',
+                            '&',
+                            ('priority', '=', order_line_stock_move.priority),
+                            ('date_expected', '=', stock_move_date_expected),
+                            ('id', '>', order_line_stock_move.id),
+                        ]
+                    )
                     next_quantities = sum(
                         move.product_uom_qty for move in next_stock_moves
                     )
@@ -287,8 +297,9 @@ class SaleOrderLine(models.Model):
                     )
 
                     if good_immediately_usable_qty <= 0:
-                        return min(product_uom_qty,
-                                   abs(good_immediately_usable_qty))
+                        return min(
+                            product_uom_qty, abs(good_immediately_usable_qty)
+                        )
                     else:
                         return 0
             else:
@@ -314,17 +325,16 @@ class SaleOrderLine(models.Model):
         context = self.env.context or {}
         if context.get('must_compute_product_qty_unavailable'):
             for line in self:
-                line.product_qty_unavailable = (
-                    line.get_product_qty_unavailable(
-                        # context change to get the corrections of immediately
-                        # available qty with the date and priority
-                        line.product_id.with_context(
-                            prio=line.route_id.priority or '1',
-                            date=line.order_id.date_order),
-                        line.product_uom_qty,
-                        line.state == 'sale',
-                        None
-                    )
+                line.product_qty_unavailable = line.get_product_qty_unavailable(
+                    # context change to get the corrections of immediately
+                    # available qty with the date and priority
+                    line.product_id.with_context(
+                        prio=line.route_id.priority or '1',
+                        date=line.order_id.date_order,
+                    ),
+                    line.product_uom_qty,
+                    line.state == 'sale',
+                    None,
                 )
 
     @api.multi
@@ -343,7 +353,7 @@ class SaleOrderLine(models.Model):
             quantity=self.product_uom_qty,
             date=self.order_id.date_order,
             pricelist=self.order_id.pricelist_id.id,
-            uom=self.product_uom.id
+            uom=self.product_uom.id,
         )
         name = product.name
         if product.description_sale:
@@ -354,16 +364,16 @@ class SaleOrderLine(models.Model):
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
         stup_category = self.env.ref('specific_data.product_categ_stupefiant')
-        if (self.product_id
-                and self.product_id.categ_id.has_for_parent(stup_category.id)):
+        if self.product_id and self.product_id.categ_id.has_for_parent(
+            stup_category.id
+        ):
             warning_mess = {
                 'title': _('Narcotic voucher'),
-                'message': _('A narcotic voucher is '
-                             'required for the data entry.')
+                'message': _(
+                    'A narcotic voucher is ' 'required for the data entry.'
+                ),
             }
-            result = {
-                'warning': warning_mess
-            }
+            result = {'warning': warning_mess}
         return result
 
     @api.onchange('product_id')
@@ -394,8 +404,10 @@ class SaleOrderLine(models.Model):
         record = super(SaleOrderLine, self).create(vals)
         # don't trigger product_qty_unavalable computation
         # if the value is provided.
-        if (vals.get('product_uom_qty')
-                and 'product_qty_unavailable' not in vals):
+        if (
+            vals.get('product_uom_qty')
+            and 'product_qty_unavailable' not in vals
+        ):
             # Because product_qty_unavailable is readonly,
             # we need to apply the onchange
             # on create to save the correct values.
@@ -413,8 +425,10 @@ class SaleOrderLine(models.Model):
         result = super(SaleOrderLine, self).write(vals)
         # don't trigger product_qty_unavalable computation
         # if the value is provided.
-        if (vals.get('product_uom_qty')
-                and 'product_qty_unavailable' not in vals):
+        if (
+            vals.get('product_uom_qty')
+            and 'product_qty_unavailable' not in vals
+        ):
             # Because product_qty_unavailable is readonly,
             # we need to apply the onchange
             # on write to save the correct values.
@@ -441,11 +455,9 @@ class SaleOrderLine(models.Model):
         for line in self:
             production_lot_ids = None
             if line.product_id:
-                production_lot_ids = production_lot_model.search([
-                    ('product_id', '=', line.product_id.id),
-                ]).filtered(
-                    lambda p: p.product_qty > 0
-                )
+                production_lot_ids = production_lot_model.search(
+                    [('product_id', '=', line.product_id.id)]
+                ).filtered(lambda p: p.product_qty > 0)
             if production_lot_ids:
                 line.production_lot_ids = [(6, 0, production_lot_ids.ids)]
             else:
@@ -462,11 +474,15 @@ class SaleOrderLine(models.Model):
         for line in self:
             move = None
             if line.product_id:
-                move = stock_move_model.search([
-                    ('product_id', '=', line.product_id.id),
-                    ('state', '=', 'assigned'),
-                    ('picking_id.picking_type_id.code', '=', 'incoming'),
-                ], order='date_expected', limit=1)
+                move = stock_move_model.search(
+                    [
+                        ('product_id', '=', line.product_id.id),
+                        ('state', '=', 'assigned'),
+                        ('picking_id.picking_type_id.code', '=', 'incoming'),
+                    ],
+                    order='date_expected',
+                    limit=1,
+                )
             if move:
                 line.next_expected_date_for_receipt = move.date_expected
             else:
@@ -479,8 +495,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_food(self):
         """Disallow all products from food categories."""
-        target_groups = ['specific_partner.partner_category_only_material',
-                         ]
+        target_groups = ['specific_partner.partner_category_only_material']
         food = self.env.ref('specific_data.product_categ_ali')
         if not self.product_id.categ_id.has_for_parent(food.id):
             return False
@@ -493,8 +508,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc(self):
         """Disallow all products from medicines categories."""
-        target_groups = ['specific_partner.partner_category_only_material',
-                         ]
+        target_groups = ['specific_partner.partner_category_only_material']
         medoc = self.env.ref('specific_data.product_categ_medoc')
         if not self.product_id.categ_id.has_for_parent(medoc.id):
             return False
@@ -511,10 +525,11 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_cascade_import(self):
         """Disallow all products from medicines cascade importation."""
-        target_groups = ['specific_partner.partner_category_customerexport',
-                         'specific_partner.partner_category_student',
-                         'specific_partner.partner_category_med_export',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_customerexport',
+            'specific_partner.partner_category_student',
+            'specific_partner.partner_category_med_export',
+        ]
         base_category = self.env.ref('specific_data.product_categ_importation')
         if not self.product_id.categ_id.has_for_parent(base_category.id):
             return False
@@ -527,9 +542,10 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_veterinary_belge(self):
         """Disallow all products from medicines veterinary belge."""
-        target_groups = ['specific_partner.partner_category_customerexport',
-                         'specific_partner.partner_category_student',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_customerexport',
+            'specific_partner.partner_category_student',
+        ]
         base_category = self.env.ref('specific_data.product_categ_vet_belges')
         if not self.product_id.categ_id.has_for_parent(base_category.id):
             return False
@@ -542,12 +558,13 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_human(self):
         """Disallow all products from medicines human."""
-        target_groups = ['specific_partner.partner_category_customerexport',
-                         'specific_partner.partner_category_callcenter',
-                         'specific_partner.partner_category_pharmacy',
-                         'specific_partner.partner_category_student',
-                         'specific_partner.partner_category_med_export',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_customerexport',
+            'specific_partner.partner_category_callcenter',
+            'specific_partner.partner_category_pharmacy',
+            'specific_partner.partner_category_student',
+            'specific_partner.partner_category_med_export',
+        ]
         base_category = self.env.ref('specific_data.product_categ_humain')
         if not self.product_id.categ_id.has_for_parent(base_category.id):
             return False
@@ -561,10 +578,11 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_vet_stupefiant(self):
         """Disallow all products from medicines stupefiants."""
-        target_groups = ['specific_partner.partner_category_veterinary',
-                         'specific_partner.partner_category_alcyonaire',
-                         'specific_partner.partner_category_med_export',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_veterinary',
+            'specific_partner.partner_category_alcyonaire',
+            'specific_partner.partner_category_med_export',
+        ]
         base_category = self.env.ref('specific_data.product_categ_stupefiant')
         if not self.product_id.categ_id.has_for_parent(base_category.id):
             return False
@@ -577,10 +595,10 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_vet_psychoIII(self):
         """Disallow all products from medicines psycho III."""
-        target_groups = ['specific_partner.partner_category_med_export',
-                         ]
+        target_groups = ['specific_partner.partner_category_med_export']
         base_category = self.env.ref(
-            'specific_data.product_categ_psychotropes_25')
+            'specific_data.product_categ_psychotropes_25'
+        )
         if not self.product_id.categ_id.has_for_parent(base_category.id):
             return False
         for group_xmlid in target_groups:
@@ -592,9 +610,10 @@ class SaleOrderLine(models.Model):
     @api.multi
     def validate_no_medoc_belgium_only(self):
         """Disallow products which are for Belgium only"""
-        target_groups = ['specific_partner.partner_category_customerexport',
-                         'specific_partner.partner_category_med_export',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_customerexport',
+            'specific_partner.partner_category_med_export',
+        ]
         if not self.product_id.belgium_only:
             return False
         for group_xmlid in target_groups:
@@ -605,9 +624,10 @@ class SaleOrderLine(models.Model):
 
     def validate_no_veterinary_product(self):
         """Disallow products which are only for veterinary"""
-        target_groups = ['specific_partner.partner_category_customerexport',
-                         'specific_partner.partner_category_pharmacy',
-                         ]
+        target_groups = [
+            'specific_partner.partner_category_customerexport',
+            'specific_partner.partner_category_pharmacy',
+        ]
         if not self.product_id.veterinary_only:
             return False
         if not self.order_id.partner_id.alcyon_category_id:
@@ -643,8 +663,7 @@ class SaleOrderLine(models.Model):
     def warning_free_product(self):
         """Raise a warning if order give rights to promotional product."""
         return self.product_id.product_tmpl_id.get_promotional_product(
-            self.product_uom_qty,
-            self.product_id.uom_id,
+            self.product_uom_qty, self.product_id.uom_id
         )
 
     def warning_provision_on_order(self):
@@ -668,8 +687,7 @@ class SaleOrderLine(models.Model):
         if self.product_id.state_id != supplier_nostock:
             return False
         product = self.product_id.with_context(
-                prio=self.route_id.priority or '1',
-                date=self.order_id.date_order
+            prio=self.route_id.priority or '1', date=self.order_id.date_order
         )
         if product.immediately_usable_qty >= self.product_uom_qty:
             # Although it is out of stock at the supplier, there is still
@@ -695,7 +713,7 @@ class SaleOrderLine(models.Model):
             self.product_id,
             self.product_uom_qty + qty,
             self.state == 'sale',
-            None
+            None,
         )
         res['product_qty_unavailable'] = min(qty_unavailable, qty)
         return res

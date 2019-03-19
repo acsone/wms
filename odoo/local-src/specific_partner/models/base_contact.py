@@ -11,5 +11,6 @@ class Contact(models.AbstractModel):
     @api.model
     def value_to_html(self, value, options):
         res = super(Contact, self).value_to_html(
-            value.with_context(to_html=True), options)
+            value.with_context(to_html=True), options
+        )
         return res

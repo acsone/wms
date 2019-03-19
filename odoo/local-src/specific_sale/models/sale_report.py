@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class SaleReport(models.Model):
@@ -21,17 +21,10 @@ class SaleReport(models.Model):
         # Use only in search view
         domain = []
         category_narcotic = self.env.ref(
-            'specific_data.product_categ_medoc',
-            raise_if_not_found=False
+            'specific_data.product_categ_medoc', raise_if_not_found=False
         )
         if category_narcotic:
-            domain.append(
-                (
-                    'categ_id',
-                    'child_of',
-                    category_narcotic.ids
-                )
-            )
+            domain.append(('categ_id', 'child_of', category_narcotic.ids))
         return domain
 
     month = fields.Selection(
@@ -47,7 +40,7 @@ class SaleReport(models.Model):
             ('09', 'September'),
             ('10', 'October'),
             ('11', 'November'),
-            ('12', 'December')
+            ('12', 'December'),
         ],
         readonly=True,
     )

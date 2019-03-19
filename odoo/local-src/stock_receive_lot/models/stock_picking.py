@@ -15,4 +15,5 @@ class StockPicking(models.Model):
             self.assign_operator()
 
         return self.env.ref(
-            'stock_receive_lot.action_pack_operation_lot_add').read()[0]
+            'stock_receive_lot.action_pack_operation_lot_add'
+        ).read()[0]

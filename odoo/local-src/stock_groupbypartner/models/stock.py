@@ -2,13 +2,13 @@
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 import time
 from itertools import groupby
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -25,17 +25,20 @@ class StockPicking(models.Model):
         all lines not in context.get('split', []) instead of all non-done
         lines.  """
         picking_togroup = self.filtered(
-            lambda p: p.picking_type_id.groupbypartner)
+            lambda p: p.picking_type_id.groupbypartner
+        )
         picking_notgroup = self - picking_togroup
 
         for picking in picking_togroup:
             backorder_moves = backorder_moves or picking.move_lines
             if self._context.get('do_only_split'):
                 not_done_bo_moves = backorder_moves.filtered(
-                    lambda move: move.id not in self._context.get('split', []))
+                    lambda move: move.id not in self._context.get('split', [])
+                )
             else:
                 not_done_bo_moves = backorder_moves.filtered(
-                    lambda move: move.state not in ('done', 'cancel'))
+                    lambda move: move.state not in ('done', 'cancel')
+                )
             if not not_done_bo_moves:
                 continue
             if not picking.printed:
@@ -47,46 +50,75 @@ class StockPicking(models.Model):
                 # Triggerred by delivery round shipping delivery
                 # for partner that does not accept backorder
                 not_done_bo_moves.with_context(
-                    no_recompute_pack=True, force_cancel=True).action_cancel()
-                picking.message_post(body=_(
-                    "Remaining moves canceled as partner does not "
-                    "accept backorder:<ul>%s</ul>" % ''.join([
-                        '<li>%s</li>' % m for m
-                        in not_done_bo_moves.mapped('name')])))
+                    no_recompute_pack=True, force_cancel=True
+                ).action_cancel()
+                picking.message_post(
+                    body=_(
+                        "Remaining moves canceled as partner does not "
+                        "accept backorder:<ul>%s</ul>"
+                        % ''.join(
+                            [
+                                '<li>%s</li>' % m
+                                for m in not_done_bo_moves.mapped('name')
+                            ]
+                        )
+                    )
+                )
 
                 def key(r):
                     return r.picking_id
-                cancel_moves = not_done_bo_moves \
-                    .filtered(lambda move: move.propagate) \
-                    .mapped('move_orig_ids') \
-                    .filtered(lambda move: move.state
-                              not in ('cancel', 'done')) \
+
+                cancel_moves = (
+                    not_done_bo_moves.filtered(lambda move: move.propagate)
+                    .mapped('move_orig_ids')
+                    .filtered(
+                        lambda move: move.state not in ('cancel', 'done')
+                    )
                     .sorted(key=key)
+                )
                 # Propagate to picking
                 for cancel_picking, cancel_moves_iter in groupby(
-                        cancel_moves, key=key):
+                    cancel_moves, key=key
+                ):
                     cancel_moves_bypicking = reduce(
-                        lambda x, y: x | y, cancel_moves_iter)
+                        lambda x, y: x | y, cancel_moves_iter
+                    )
                     cancel_moves_bypicking.with_context(
-                        no_recompute_pack=True,
-                        force_cancel=True).action_cancel()
-                    cancel_picking.message_post(body=_(
-                        "Remaining moves canceled as partner does not "
-                        "accept backorder:<ul>%s</ul>" % ''.join([
-                            '<li>%s</li>' % m for m
-                            in cancel_moves_bypicking.mapped('name')])))
+                        no_recompute_pack=True, force_cancel=True
+                    ).action_cancel()
+                    cancel_picking.message_post(
+                        body=_(
+                            "Remaining moves canceled as partner does not "
+                            "accept backorder:<ul>%s</ul>"
+                            % ''.join(
+                                [
+                                    '<li>%s</li>' % m
+                                    for m in cancel_moves_bypicking.mapped(
+                                        'name'
+                                    )
+                                ]
+                            )
+                        )
+                    )
 
             else:
                 not_done_bo_moves.with_context(
-                    backorder_assign=picking).assign_picking()
+                    backorder_assign=picking
+                ).assign_picking()
 
             if not picking.date_done:
-                picking.write({'date_done': time.strftime(
-                    DEFAULT_SERVER_DATETIME_FORMAT)})
+                picking.write(
+                    {
+                        'date_done': time.strftime(
+                            DEFAULT_SERVER_DATETIME_FORMAT
+                        )
+                    }
+                )
 
         if picking_notgroup:
             return super(StockPicking, picking_notgroup)._create_backorder(
-                backorder_moves=backorder_moves)
+                backorder_moves=backorder_moves
+            )
 
         return self.env['stock.picking']
 
@@ -94,8 +126,7 @@ class StockPicking(models.Model):
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    groupbypartner = fields.Boolean(
-        'Use existing picking having same partner')
+    groupbypartner = fields.Boolean('Use existing picking having same partner')
     groupbypartner_maxweight = fields.Integer('Max Weight')
 
 
@@ -112,7 +143,7 @@ class StockMove(models.Model):
             ('picking_type_id', '=', self.picking_type_id.id),
             ('group_id.carrier_id', '=', self.group_id.carrier_id.id),
             ('printed', '=', False),
-            ('state', 'not in', ('draft', 'cancel', 'done'))
+            ('state', 'not in', ('draft', 'cancel', 'done')),
         ]
         return domain
 
@@ -125,7 +156,8 @@ class StockMove(models.Model):
         picking to Assign them to.
         """
         moves_to_group = self.filtered(
-            lambda x: x.picking_type_id.groupbypartner)
+            lambda x: x.picking_type_id.groupbypartner
+        )
 
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:
@@ -141,36 +173,53 @@ class StockMove(models.Model):
                 pickings = pick_obj.search(domain, order="weight")
                 pickings_cache[str(domain)] = pickings
 
-            max_weight = (move.picking_type_id.groupbypartner_maxweight -
-                          move.product_id.weight * move.product_qty)
+            max_weight = (
+                move.picking_type_id.groupbypartner_maxweight
+                - move.product_id.weight * move.product_qty
+            )
             backorder_orig_id = self.env.context.get('backorder_assign')
             # Preferably assign the move in a picking having a move with the
             # same group_id. Necessary for pushed moves
             if len(pickings) > 1:
+
                 def key(r):
                     return not (
-                        move.group_id and
-                        move.group_id in r.move_lines.filtered(
-                            lambda m: m.state not in ('cancel', 'done'))
-                        .mapped('group_id'))
+                        move.group_id
+                        and move.group_id
+                        in r.move_lines.filtered(
+                            lambda m: m.state not in ('cancel', 'done')
+                        ).mapped('group_id')
+                    )
+
                 pickings = pickings.sorted(key=key)
             # Select the right picking to assign to
             for picking in pickings:
-                if (not move.picking_type_id.groupbypartner_maxweight or
-                        picking.weight <= max_weight):
+                if (
+                    not move.picking_type_id.groupbypartner_maxweight
+                    or picking.weight <= max_weight
+                ):
                     # assign move to picking
-                    _logger.debug("Assign move %s to existing picking %s",
-                                  move.id, picking.id)
+                    _logger.debug(
+                        "Assign move %s to existing picking %s",
+                        move.id,
+                        picking.id,
+                    )
                     move.picking_id = picking.id
                     if backorder_orig_id:
-                        backorder_orig_id.message_post(body=_(
-                            "Remaining move '%s' of qty %s and origin '%s' "
-                            "moved to exiting picking " "<em>%s</em> used as "
-                            "a backorder.") %
-                            (move.product_id.display_name,
-                             move.product_uom_qty,
-                             move.group_id.name,
-                             picking.name))
+                        backorder_orig_id.message_post(
+                            body=_(
+                                "Remaining move '%s' of qty %s and origin '%s' "
+                                "moved to exiting picking "
+                                "<em>%s</em> used as "
+                                "a backorder."
+                            )
+                            % (
+                                move.product_id.display_name,
+                                move.product_uom_qty,
+                                move.group_id.name,
+                                picking.name,
+                            )
+                        )
                     # unreserve moves having an operation for that product
                     # Note: (re)check availability (action_assign) does not
                     # work on added move where an operation already exists for
@@ -184,13 +233,17 @@ class StockMove(models.Model):
                     # be recomputed
                     if move.state == 'waiting':
                         break
-                    operations_to_recompute = picking.pack_operation_ids. \
-                        filtered(lambda op: op.product_id == move.product_id)
+                    operations_to_recompute = picking.pack_operation_ids.filtered(
+                        lambda op: op.product_id == move.product_id
+                    )
                     if operations_to_recompute:
-                        _logger.debug("Cleaning operations %s",
-                                      operations_to_recompute.ids)
+                        _logger.debug(
+                            "Cleaning operations %s",
+                            operations_to_recompute.ids,
+                        )
                         op_linked_moves = operations_to_recompute.mapped(
-                            'linked_move_operation_ids.move_id')
+                            'linked_move_operation_ids.move_id'
+                        )
                         operations_to_recompute.unlink()
                         op_linked_moves.do_unreserve()
                     else:
@@ -202,12 +255,16 @@ class StockMove(models.Model):
                 values = move._get_new_picking_values()
                 picking = pick_obj.create(values)
                 if backorder_orig_id:
-                    picking.message_post(body=_(
-                        "Backorder of %s" % backorder_orig_id.name))
-                    backorder_orig_id.message_post(body=_(
-                        "Remaining move '%s' moved to new backorder "
-                        "<em>%s</em>.") %
-                        (move.product_id.display_name, picking.name))
+                    picking.message_post(
+                        body=_("Backorder of %s" % backorder_orig_id.name)
+                    )
+                    backorder_orig_id.message_post(
+                        body=_(
+                            "Remaining move '%s' moved to new backorder "
+                            "<em>%s</em>."
+                        )
+                        % (move.product_id.display_name, picking.name)
+                    )
                 if str(domain) not in pickings_cache:
                     pickings_cache[str(domain)] = picking
                 else:
@@ -226,11 +283,13 @@ class StockMove(models.Model):
         res = super(StockMove, self).action_cancel()
         if not self.env.context.get('no_recompute_pack'):
             pickings = self.mapped('picking_id').filtered(
-                lambda picking: picking.state != 'cancel')
+                lambda picking: picking.state != 'cancel'
+            )
             products = self.mapped('product_id')
             moves = pickings.mapped('move_lines').filtered(
-                lambda move: move.state == 'confirmed' and
-                move.product_id in products)
+                lambda move: move.state == 'confirmed'
+                and move.product_id in products
+            )
             if moves:
                 # action_assign requires to clean existing pack operation
                 moves.mapped('linked_move_operation_ids.operation_id').unlink()

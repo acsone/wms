@@ -20,7 +20,7 @@ class ESBZIPProducer(Component):
             for item in data:
                 zf.writestr(
                     item['filename'] or '',
-                    item['data'].decode('base64') if item['data'] else ''
+                    item['data'].decode('base64') if item['data'] else '',
                 )
         zipdata.seek(0)
         return zipdata.read()

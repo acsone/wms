@@ -3,18 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
-
 from collections import defaultdict
-from odoo.addons.component.tests.common import SavepointComponentCase
-from odoo import fields
 
 import xmlunittest
-from lxml import etree
 from freezegun import freeze_time
+from lxml import etree
+from odoo import fields
+from odoo.addons.component.tests.common import SavepointComponentCase
 
 
 class ESBTestCase(SavepointComponentCase):
-
     @classmethod
     def setUpClass(cls):
         super(ESBTestCase, cls).setUpClass()
@@ -30,14 +28,16 @@ class ESBTestCase(SavepointComponentCase):
         """Create a fictive language to use in tests."""
         Lang = cls.env['res.lang']
         if not Lang.search([('iso_code', '=', 'tlh')], limit=1):
-            cls.env['res.lang'].create({
-                'name': 'Klingon',
-                'code': 'tlh_TLH',
-                'iso_code': 'tlh',
-                'active': True,
-                'translatable': True,
-                'esb_ref': 'TLH',
-            })
+            cls.env['res.lang'].create(
+                {
+                    'name': 'Klingon',
+                    'code': 'tlh_TLH',
+                    'iso_code': 'tlh',
+                    'active': True,
+                    'translatable': True,
+                    'esb_ref': 'TLH',
+                }
+            )
 
 
 class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
@@ -67,7 +67,8 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             # `item` is the el w/ unique_key
             # let's find its match in given xml and go up to the parent
             parent = gxml.xpath(
-                '//{}[text()="{}"]/..'.format(unique_key, item.text))
+                '//{}[text()="{}"]/..'.format(unique_key, item.text)
+            )
             assert parent
             # then compare all the values there
             for expected_elem in item.getparent().iterchildren():
@@ -84,9 +85,7 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             message = []
             keys = set(list(missing_elems) + list(content_differs))
             for key in keys:
-                message.append(
-                    u'Row with unique key: %s' % key
-                )
+                message.append(u'Row with unique key: %s' % key)
 
                 tags = missing_elems[key]
                 if tags:
@@ -104,16 +103,12 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
                     )
                 message.append('')
 
-            raise AssertionError(u'XML does not match:\n\n{}'.format(
-                '\n'.join(message)
-            ))
+            raise AssertionError(
+                u'XML does not match:\n\n{}'.format('\n'.join(message))
+            )
 
     def read_test_file(self, filename):
-        path = os.path.join(
-            os.path.dirname(__file__),
-            'examples',
-            filename
-        )
+        path = os.path.join(os.path.dirname(__file__), 'examples', filename)
         with open(path, 'r') as thefile:
             return thefile.read()
 
@@ -126,8 +121,9 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
         day = fields.Date.today().replace('-', '')
         time = fields.Datetime.now().split(' ')[1].replace(':', '')
         expected = name_template.format(day, time)
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             writer = work.component(usage='local.xml.writer')
             self.assertEqual(writer.filename(), expected)
             writer = work.component(usage='sftp.xml.writer')

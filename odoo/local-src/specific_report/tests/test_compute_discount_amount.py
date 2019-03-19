@@ -6,52 +6,58 @@ from odoo.tests.common import TransactionCase
 
 
 class TestComputeDiscountAmount(TransactionCase):
-
     def setUp(self):
         super(TestComputeDiscountAmount, self).setUp()
 
-        self.tax = self.env["account.tax"].create({
-            'name': 'Unittest tax',
-            'price_include': False,
-            'amount_type': 'percent',
-            'amount': '0',
-        })
+        self.tax = self.env["account.tax"].create(
+            {
+                'name': 'Unittest tax',
+                'price_include': False,
+                'amount_type': 'percent',
+                'amount': '0',
+            }
+        )
 
-        self.p1 = self.env['product.product'].create({
-            'name': 'Unittest P1',
-            'taxes_id': [(6, False, [self.tax.id])],
-        })
+        self.p1 = self.env['product.product'].create(
+            {'name': 'Unittest P1', 'taxes_id': [(6, False, [self.tax.id])]}
+        )
 
-        self.partner = self.env['res.partner'].create({
-            'name': 'Unittest partner',
-            'ref': '84023435243',
-        })
+        self.partner = self.env['res.partner'].create(
+            {'name': 'Unittest partner', 'ref': '84023435243'}
+        )
 
-        self.account_type = self.env['account.account.type'].create({
-            'name': 'Test',
-            'type': 'receivable',
-        })
-        self.account = self.env['account.account'].create({
-            'name': 'Test account',
-            'code': 'TEST',
-            'user_type_id': self.account_type.id,
-            'reconcile': True,
-        })
+        self.account_type = self.env['account.account.type'].create(
+            {'name': 'Test', 'type': 'receivable'}
+        )
+        self.account = self.env['account.account'].create(
+            {
+                'name': 'Test account',
+                'code': 'TEST',
+                'user_type_id': self.account_type.id,
+                'reconcile': True,
+            }
+        )
 
-        self.invoice = self.env['account.invoice'].create({
-            'partner_id': self.partner.id,
-            'account_id': self.account.id,
-            'invoice_line_ids': [
-                (0, False, {
-                    'name': self.p1.name,
-                    'product_id': self.p1.id,
-                    'quantity': 1,
-                    'uom_id': self.ref('product.product_uom_unit'),
-                    'price_unit': 100.0,
-                    'account_id': self.account.id,
-                }),
-            ]
-        })
+        self.invoice = self.env['account.invoice'].create(
+            {
+                'partner_id': self.partner.id,
+                'account_id': self.account.id,
+                'invoice_line_ids': [
+                    (
+                        0,
+                        False,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'quantity': 1,
+                            'uom_id': self.ref('product.product_uom_unit'),
+                            'price_unit': 100.0,
+                            'account_id': self.account.id,
+                        },
+                    )
+                ],
+            }
+        )
 
     def test_discount_amount(self):
         self.assertEqual(self.invoice.invoice_line_ids.quantity, 1)

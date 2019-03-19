@@ -42,4 +42,3 @@ msgstr "Veuillez choisir un emplacement source physique"
 #: model:ir.model,name:stock_picking_fillwithstock.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
-

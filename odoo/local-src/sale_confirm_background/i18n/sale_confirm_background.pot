@@ -42,4 +42,3 @@ msgstr ""
 #: model:ir.model,name:sale_confirm_background.model_sale_order
 msgid "Sales Order"
 msgstr ""
-

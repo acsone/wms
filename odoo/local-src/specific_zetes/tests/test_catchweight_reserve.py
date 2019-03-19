@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import mock
 
-from .zetes_test_classes import ZetesReserveTest, DEFAULT_HEADER
-from ..tools.domain_interface import Parameters
 from ..tools.domain_catchweight import Catchweight
+from ..tools.domain_interface import Parameters
+from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
 
 
 class TestCatchweightReserve(ZetesReserveTest):
@@ -20,8 +20,9 @@ class TestCatchweightReserve(ZetesReserveTest):
           AND picking_zone.code = %s
         LIMIT 1
         """
-        self.env.cr.execute(report_query, (self.product_1.id,
-                                           self.picking_zone_medoc.code))
+        self.env.cr.execute(
+            report_query, (self.product_1.id, self.picking_zone_medoc.code)
+        )
         result = self.env.cr.fetchone()
 
         self.assertTrue(result)
@@ -38,9 +39,11 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER,
-                             mock.MagicMock(name='Savepoint()'),
-                             request_overwrite=self)
+        domain = Catchweight(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
@@ -50,12 +53,14 @@ class TestCatchweightReserve(ZetesReserveTest):
 
         # Try with a lot
         request_params = Parameters(domain, action='resu')
-        request_params.update({
-            'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.voice_identifier,
-            'Usf02': 20,  # Pick 20 unit,
-            'Usf03': None,
-        })
+        request_params.update(
+            {
+                'lineId': pack_op.id,
+                'Usf01': self.lot_product_1.voice_identifier,
+                'Usf02': 20,  # Pick 20 unit,
+                'Usf03': None,
+            }
+        )
         domain.resu(request_params)
 
         self.assertEqual(pack_op.qty_done, 20)
@@ -69,9 +74,11 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(DEFAULT_HEADER,
-                             mock.MagicMock(name='Savepoint()'),
-                             request_overwrite=self)
+        domain = Catchweight(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
@@ -81,18 +88,22 @@ class TestCatchweightReserve(ZetesReserveTest):
 
         # Try with a lot
         request_params = Parameters(domain, action='resu')
-        request_params.update({
-            'lineId': pack_op.id,
-            'Usf01': self.lot_product_1.voice_identifier,
-            'Usf02': 15,  # Pick 15 unit,
-            'Usf03': None,
-        })
+        request_params.update(
+            {
+                'lineId': pack_op.id,
+                'Usf01': self.lot_product_1.voice_identifier,
+                'Usf02': 15,  # Pick 15 unit,
+                'Usf03': None,
+            }
+        )
         domain.resu(request_params)
 
         self.assertEqual(len(self.picking_reserve.pack_operation_ids), 2)
         pack_op_bin = self.picking_reserve.pack_operation_ids.filtered(
-            lambda line: line.qty_done == 15)
+            lambda line: line.qty_done == 15
+        )
         pack_op_reserve = self.picking_reserve.pack_operation_ids.filtered(
-            lambda line: line.qty_done == 5)
+            lambda line: line.qty_done == 5
+        )
         self.assertEqual(len(pack_op_bin), 1)
         self.assertEqual(len(pack_op_reserve), 1)

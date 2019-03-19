@@ -12,7 +12,7 @@
     'depends': [
         'account',
         'account_cutoff_accrual_picking',
-        ],
+    ],
     'data': [
         'views/account_move.xml',
     ],

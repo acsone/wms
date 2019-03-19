@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, models, _
+from odoo import _, api, models
 
 
 class RoundInstance(models.Model):
@@ -22,24 +22,29 @@ class RoundInstance(models.Model):
         moves = self.shipping_ids.mapped('move_lines')
         round_saleorders = moves.mapped('procurement_id.sale_line_id.order_id')
         round_carriers = round_saleorders.mapped('carrier_id').filtered(
-                lambda r: r.use_specific_cost_calculation)
+            lambda r: r.use_specific_cost_calculation
+        )
         if len(round_carriers) == 0:
             # No delivery carrier that use specific shipping cost so out.
             return
         round_customers = round_saleorders.mapped('partner_id').filtered(
-                lambda r: r.help_with_fee is True)
+            lambda r: r.help_with_fee is True
+        )
         for customer in round_customers:
             # Get all sale order used to compute fee for a customer it is not
             # only the sale orders in the round but all the one that have not
             # yet been used to compute those costs.
-            sale_orders = self.env['sale.order'].search([
-                ('partner_id', '=', customer.id),
-                ('state', '!=', 'cancel'),
-                ('used_for_delivery_fee', '=', False),
-                ('carrier_id', 'in', round_carriers.ids),
-            ])
+            sale_orders = self.env['sale.order'].search(
+                [
+                    ('partner_id', '=', customer.id),
+                    ('state', '!=', 'cancel'),
+                    ('used_for_delivery_fee', '=', False),
+                    ('carrier_id', 'in', round_carriers.ids),
+                ]
+            )
             customer_round_saleorders = round_saleorders.filtered(
-                    lambda r: r.partner_id == customer)
+                lambda r: r.partner_id == customer
+            )
             customer_carriers = customer_round_saleorders.mapped('carrier_id')
 
             for delivery_carrier in customer_carriers:
@@ -47,11 +52,13 @@ class RoundInstance(models.Model):
                     delivery_carrier,
                     customer_round_saleorders,
                     sale_orders,
-                    customer)
+                    customer,
+                )
 
     @api.model
-    def charge_shipping_costs_by_carrier(self, carrier, round_saleorders,
-                                         sale_orders, customer):
+    def charge_shipping_costs_by_carrier(
+        self, carrier, round_saleorders, sale_orders, customer
+    ):
         """Check customer fee for one delivery carrier.
 
         And charge the customer on his last sale order if nececssary.
@@ -61,21 +68,32 @@ class RoundInstance(models.Model):
         sum_ordered = sum(sale_orders.mapped('amount_untaxed'))
         sale_orders.write({'used_for_delivery_fee': True})
 
-        if sum_ordered >= carrier.amount or \
-                sum_ordered == 0 or not carrier.fixed_price:
+        if (
+            sum_ordered >= carrier.amount
+            or sum_ordered == 0
+            or not carrier.fixed_price
+        ):
             return
         # Find the last sale order passed and charge the customer
-        so = round_saleorders.filtered(lambda r: r.partner_id == customer and
-                                       r.carrier_id == carrier
-                                       ).sorted(key=lambda r: r.id,
-                                                reverse=True)[0]
-        so.sudo().write({'order_line': [
-            (0, 0, {
-                'name': _('Shipping cost'),
-                'product_id': self.env.ref(
-                    'specific_data.deliver_carrier_alcyon_product_product').id,
-                'product_uom_qty': 1,
-                'price_unit': carrier.fixed_price,
-                'is_delivery': True,
-            })
-        ]})
+        so = round_saleorders.filtered(
+            lambda r: r.partner_id == customer and r.carrier_id == carrier
+        ).sorted(key=lambda r: r.id, reverse=True)[0]
+        so.sudo().write(
+            {
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': _('Shipping cost'),
+                            'product_id': self.env.ref(
+                                'specific_data.deliver_carrier_alcyon_product_product'
+                            ).id,
+                            'product_uom_qty': 1,
+                            'price_unit': carrier.fixed_price,
+                            'is_delivery': True,
+                        },
+                    )
+                ]
+            }
+        )

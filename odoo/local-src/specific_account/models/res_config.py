@@ -10,5 +10,6 @@ class AccountConfigSettings(models.TransientModel):
 
     invoice_terms_conditions = fields.Text(
         related='company_id.invoice_terms_conditions',
-        string='Invoice Terms and Conditions', translate=True
+        string='Invoice Terms and Conditions',
+        translate=True,
     )

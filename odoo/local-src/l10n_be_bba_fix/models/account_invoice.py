@@ -4,7 +4,7 @@
 
 import re
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -17,14 +17,18 @@ class AccountInvoice(models.Model):
     reference = fields.Char('Payment Communication', copy=False)
     supplier_invoice_number = fields.Char(
         'Vendor Reference',
-        readonly=True, states={'draft': [('readonly', False)]},
-        copy=False)
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        copy=False,
+    )
 
     _sql_constraints = [
-        ('unique_invoice_number_by_supplier',
-         'unique (type, company_id, commercial_partner_id, '
+        (
+            'unique_invoice_number_by_supplier',
+            'unique (type, company_id, commercial_partner_id, '
             'supplier_invoice_number)',
-         'The supplier invoice number must be unique per supplier')
+            'The supplier invoice number must be unique per supplier',
+        )
     ]
 
     @api.onchange('supplier_invoice_number', 'reference_type')
@@ -54,8 +58,8 @@ class AccountInvoice(models.Model):
         if self.partner_id and (self.type == 'out_invoice'):
             if self.reference_type:
                 reference = self.generate_bbacomm(
-                    self.type, self.reference_type, self.partner_id.id,
-                    '')['value']['reference']
+                    self.type, self.reference_type, self.partner_id.id, ''
+                )['value']['reference']
         self.reference = reference
 
     def _check_invoice_reference(self):
@@ -75,31 +79,52 @@ class AccountInvoice(models.Model):
             partner = self.env['res.partner'].browse(partner_id)
             algorithm = partner.out_inv_comm_algorithm
         algorithm = algorithm or 'random'
-        if (type != 'out_invoice' or reference_type != 'bba' or
-                algorithm != 'partner_ref' or self.check_bbacomm(reference)):
+        if (
+            type != 'out_invoice'
+            or reference_type != 'bba'
+            or algorithm != 'partner_ref'
+            or self.check_bbacomm(reference)
+        ):
             return super(AccountInvoice, self).generate_bbacomm(
-                type, reference_type, partner_id, reference)
+                type, reference_type, partner_id, reference
+            )
 
         partner_ref = self.env['res.partner'].browse(partner_id).ref
         partner_ref_nr = re.sub(r'\D', '', partner_ref or '')
-        if (len(partner_ref_nr) > 6):
-            raise UserError(_(
-                'The partner reference cannot exceed 6 digits for the '
-                'generation of BBA Structured Communication!'))
+        if len(partner_ref_nr) > 6:
+            raise UserError(
+                _(
+                    'The partner reference cannot exceed 6 digits for the '
+                    'generation of BBA Structured Communication!'
+                )
+            )
 
         partner_ref_nr = partner_ref_nr.rjust(6, '0')
         seq = '0001'
-        invoice = self.search([
-            ('type', '=', 'out_invoice'), ('reference_type', '=', 'bba'),
-            ('reference', 'like', '+++%s/%s%%' % (partner_ref_nr[:3],
-                                                  partner_ref_nr[3:]))
-            ], order='reference desc', limit=1)
+        invoice = self.search(
+            [
+                ('type', '=', 'out_invoice'),
+                ('reference_type', '=', 'bba'),
+                (
+                    'reference',
+                    'like',
+                    u'+++{}/{}%'.format(
+                        partner_ref_nr[:3], partner_ref_nr[3:]
+                    ),
+                ),
+            ],
+            order='reference desc',
+            limit=1,
+        )
         if invoice:
             prev_seq = int(invoice.reference[10:15].replace('/', ''))
             if prev_seq == 9999:
-                raise UserError(_(
-                    'The maximum of outgoing invoices for this partner '
-                    'reference has been reached'))
+                raise UserError(
+                    _(
+                        'The maximum of outgoing invoices for this partner '
+                        'reference has been reached'
+                    )
+                )
 
             seq = '%04d' % (prev_seq + 1)
 
@@ -107,6 +132,7 @@ class AccountInvoice(models.Model):
         base = int(bbacomm)
         mod = base % 97 or 97
         bbacomm += '%02d' % mod
-        reference = '+++%s/%s/%s+++' % (
-            bbacomm[0:3], bbacomm[3:8], bbacomm[8:])
+        reference = u'+++{}/{}/{}+++'.format(
+            bbacomm[0:3], bbacomm[3:8], bbacomm[8:]
+        )
         return {'value': {'reference': reference}}

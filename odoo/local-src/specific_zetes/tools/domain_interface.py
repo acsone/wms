@@ -11,7 +11,6 @@ _logger = logging.getLogger(__name__)
 
 
 class Savepoint(object):
-
     def __init__(self, cr):
         self._cr = cr
         self._name = uuid.uuid1().hex
@@ -57,7 +56,7 @@ class DomainInterface(object):
         _logger.debug(u'User: {}'.format(self._user.name or 'no user'))
 
     def __repr__(self):
-        return u'%s(%r, %r, %r)' % (
+        return u'{}({!r}, {!r}, {!r})'.format(
             self.__class__.__name__,
             self._header,
             self._savepoint,
@@ -110,8 +109,9 @@ class Parameters:
         labels = getattr(domain, action.upper())
 
         new_header = list(domain._header)
-        method = '{}_{}'.format(action.upper(),
-                                domain.__class__.__name__.upper())
+        method = '{}_{}'.format(
+            action.upper(), domain.__class__.__name__.upper()
+        )
         new_header[constants.METHOD_INDEX] = method
 
         self.__dict__.update(dict(zip(constants.HEADER_LABELS, new_header)))
@@ -120,8 +120,9 @@ class Parameters:
         self._domain = domain
 
         if domain._user:
-            domain.request.context = \
-                dict(domain.request.context, lang=domain._user.lang)
+            domain.request.context = dict(
+                domain.request.context, lang=domain._user.lang
+            )
 
         if values:
             formatted_values = [value.strip() for value in values]
@@ -129,7 +130,7 @@ class Parameters:
             _logger.debug(str(self))
 
     def __repr__(self):
-        return u"Parameters(%r, %r, %r)" % (
+        return u"Parameters({!r}, {!r}, {!r})".format(
             self._domain, self._action, self.__dict__
         )
 
@@ -140,8 +141,7 @@ class Parameters:
         :return:
         """
         title = '===========> {}_{} <==========='.format(
-            self._action.upper(),
-            self._domain.__class__.__name__.upper(),
+            self._action.upper(), self._domain.__class__.__name__.upper()
         )
 
         if not self._labels:
@@ -167,14 +167,11 @@ class Parameters:
                 value = str(value)
 
             if i < len(default_values) and default_values[i]:
-                line = '{}. {}: {} ({})'.format(i + 1,
-                                                key,
-                                                value,
-                                                default_values[i])
+                line = '{}. {}: {} ({})'.format(
+                    i + 1, key, value, default_values[i]
+                )
             else:
-                line = '{}. {}: {}'.format(i + 1,
-                                           key,
-                                           value)
+                line = '{}. {}: {}'.format(i + 1, key, value)
             values.append(line)
 
         return '{}\n{}'.format(title, '\n'.join(values))
@@ -222,8 +219,10 @@ class Parameters:
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
-                raise Exception(_('Cannot format the value %s with type %s'
-                                  ) % (value, type(value)))
+                raise Exception(
+                    _('Cannot format the value %s with type %s')
+                    % (value, type(value))
+                )
 
             ordered_values.append(value)
 
@@ -250,14 +249,21 @@ class Parameters:
 
         bad_values = set(current_labels) - set(labels)
         if bad_values:
-            message = _('Some attributes are not valid: {}'
-                        .format(', '.join(list(bad_values))))
+            message = _(
+                'Some attributes are not valid: {}'.format(
+                    ', '.join(list(bad_values))
+                )
+            )
             _logger.error(message)
 
         default_values = self.get_example()
         if len(default_values) != len(ordered_values):
-            _logger.error(_('The number of attributes doen\'t correspond '
-                            'to the example size'))
+            _logger.error(
+                _(
+                    'The number of attributes doen\'t correspond '
+                    'to the example size'
+                )
+            )
 
         empty_mandatory_values = []
         for i in range(len(labels)):
@@ -265,11 +271,21 @@ class Parameters:
                 empty_mandatory_values.append(labels[i])
 
         if empty_mandatory_values:
-            _logger.warning(_('There are some missing mandatory values: {}'
-                            .format(', '.join(empty_mandatory_values))))
+            _logger.warning(
+                _(
+                    'There are some missing mandatory values: {}'.format(
+                        ', '.join(empty_mandatory_values)
+                    )
+                )
+            )
 
-    def log(self, picking_id=None, operation_id=None,
-            exception=None, error_type=None):
+    def log(
+        self,
+        picking_id=None,
+        operation_id=None,
+        exception=None,
+        error_type=None,
+    ):
         """
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
@@ -282,14 +298,16 @@ class Parameters:
         if exception and not isinstance(exception, (str, unicode)):
             exception = str(exception)
 
-        self._domain.request.env['zetes.logger'].sudo().create({
-            'domain': self._domain.__class__.__name__.lower(),
-            'action': self._action.lower(),
-            'request': self.format(),
-            'formatted_request': str(self),
-            'user_id': self._domain._user and self._domain._user.id,
-            'error_type': error_type or 'technical',
-            'picking_id': picking_id,
-            'operation_id': operation_id,
-            'traceback': exception,
-        })
+        self._domain.request.env['zetes.logger'].sudo().create(
+            {
+                'domain': self._domain.__class__.__name__.lower(),
+                'action': self._action.lower(),
+                'request': self.format(),
+                'formatted_request': str(self),
+                'user_id': self._domain._user and self._domain._user.id,
+                'error_type': error_type or 'technical',
+                'picking_id': picking_id,
+                'operation_id': operation_id,
+                'traceback': exception,
+            }
+        )

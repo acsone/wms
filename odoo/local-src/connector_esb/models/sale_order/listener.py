@@ -12,7 +12,7 @@ class SaleExportListener(Component):
     _inherit = 'base.connector.listener'
     _apply_on = ['sale.order']
 
-    EXPORT_DESCRIPTION = "Export sale order {} to ESB's webservice"
+    EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_create(self, record, fields=None):
@@ -41,17 +41,18 @@ class SaleLineExportListener(Component):
     _inherit = 'base.connector.listener'
     _apply_on = ['sale.order.line']
 
-    EXPORT_DESCRIPTION = "Export sale order {} to ESB's webservice"
+    EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):
         if not record.order_id.esb_is_exportable():
             return
-        if (record.env.context.get('_sale_order_create') or
-                record.env.context.get('_sale_order_write')):
+        if record.env.context.get(
+            '_sale_order_create'
+        ) or record.env.context.get('_sale_order_write'):
             # export already triggered by the sale order write/create
             return
-        if set(fields) & set(['qty_delivered', 'product_qty_unavailable']):
+        if set(fields) & {'qty_delivered', 'product_qty_unavailable'}:
             so = record.order_id
             so.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(so.name or ''),

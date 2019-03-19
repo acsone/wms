@@ -2,26 +2,26 @@
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from ast import literal_eval
+import logging
 import math
-from contextlib import contextmanager, closing
+from ast import literal_eval
+from contextlib import closing, contextmanager
 from datetime import datetime
 from itertools import groupby
 
 import odoo
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError, ValidationError, AccessError
+from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools import config
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
 def float2time(value):
     hour = math.floor(value)
     minute = round((value % 1) * 60)
-    if (minute == 60):
+    if minute == 60:
         minute = 0
         hour = hour + 1
     return '%d:%02d' % (hour, minute)
@@ -35,9 +35,11 @@ def time_now(record):
     tz_name = record.env.context.get('tz') or record.env.user.tz
     if not tz_name:
         raise UserError(
-            "Please configure your timezone in your user preferences")
-    return time2float(fields.Datetime.context_timestamp(
-        record, datetime.now()))
+            "Please configure your timezone in your user preferences"
+        )
+    return time2float(
+        fields.Datetime.context_timestamp(record, datetime.now())
+    )
 
 
 class RoundInstance(models.Model):
@@ -48,100 +50,102 @@ class RoundInstance(models.Model):
     date = fields.Date(
         'Date',
         required=True,
-        states={'done': [('readonly', True)],
-                'delivering': [('readonly', True)]},
-        default=fields.Date.context_today)
+        states={
+            'done': [('readonly', True)],
+            'delivering': [('readonly', True)],
+        },
+        default=fields.Date.context_today,
+    )
 
     time_picking_planned = fields.Float(
         'Planned Picking Start Time',
-        states={'done': [('readonly', True)],
-                'delivering': [('readonly', True)]},
-        )
+        states={
+            'done': [('readonly', True)],
+            'delivering': [('readonly', True)],
+        },
+    )
     time_leave_planned = fields.Float(
         'Planned Vehicle Start Time',
-        states={'done': [('readonly', True)],
-                'delivering': [('readonly', True)]},
-        )
+        states={
+            'done': [('readonly', True)],
+            'delivering': [('readonly', True)],
+        },
+    )
 
-    stat_time_closed = fields.Float(
-        'Closed Time', readonly=True)
-    stat_time_picking = fields.Float(
-        'Picking Start Time', readonly=True)
-    stat_time_leave = fields.Float(
-        'Vehicle Start Time', readonly=True)
+    stat_time_closed = fields.Float('Closed Time', readonly=True)
+    stat_time_picking = fields.Float('Picking Start Time', readonly=True)
+    stat_time_leave = fields.Float('Vehicle Start Time', readonly=True)
 
     template_id = fields.Many2one(
-        'round.template', 'Template',
+        'round.template',
+        'Template',
         states={'done': [('readonly', True)]},
         required=True,
-        ondelete='restrict')
+        ondelete='restrict',
+    )
     template_code = fields.Char(
-        'Code',
-        related='template_id.code',
-        store=True,
-        readonly=True
+        'Code', related='template_id.code', store=True, readonly=True
     )
     template_name = fields.Char(
-        'Name',
-        related='template_id.name',
-        store=True,
-        readonly=True
+        'Name', related='template_id.name', store=True, readonly=True
     )
-    color = fields.Integer(
-        related='template_id.color')
+    color = fields.Integer(related='template_id.color')
     state = fields.Selection(
-        [('pending', 'Anticipated'),
-         ('draft', 'Open'),
-         ('close', 'Closed'),
-         ('delivering', 'Delivering'),
-         ('done', 'Done')],
+        [
+            ('pending', 'Anticipated'),
+            ('draft', 'Open'),
+            ('close', 'Closed'),
+            ('delivering', 'Delivering'),
+            ('done', 'Done'),
+        ],
         'State',
         readonly=True,
-        default='pending')
-    picking_launched = fields.Boolean(
-        'Pickings Launched',
-        readonly=True)
+        default='pending',
+    )
+    picking_launched = fields.Boolean('Pickings Launched', readonly=True)
 
     itinerary_ids = fields.Many2many(
-        'round.itinerary',
-        string="Itineraries",
-        readonly=True)
+        'round.itinerary', string="Itineraries", readonly=True
+    )
 
     picking_ids = fields.One2many(
-        'stock.picking', 'delivery_round_id', 'Pickings',
+        'stock.picking',
+        'delivery_round_id',
+        'Pickings',
         domain=[('picking_type_subcode', '=', 'PICK')],
         readonly=True,
-        )
+    )
     shipping_ids = fields.One2many(
-        'stock.picking', 'delivery_round_id', 'Deliveries',
+        'stock.picking',
+        'delivery_round_id',
+        'Deliveries',
         domain=[('picking_type_code', '=', 'outgoing')],
         readonly=True,
-        )
+    )
 
     complete_name = fields.Char(
-        'Display Name', readonly=True,
-        compute='_get_complete_name', store=True)
+        'Display Name', readonly=True, compute='_get_complete_name', store=True
+    )
     tag_ids = fields.Many2many('round.tag', string='Tags')
     partner_ids = fields.Many2many(
         'res.partner',
         string='Partners',
         readonly=True,
         compute='_compute_partner_ids',
-        search='_search_partner_ids'
+        search='_search_partner_ids',
     )
     instance_customer_ids = fields.One2many(
         comodel_name='round.instance.customer',
         inverse_name='delivery_round_id',
         string='Customers',
-        states={'done': [('readonly', True)],
-                'delivering': [('readonly', True)]},
+        states={
+            'done': [('readonly', True)],
+            'delivering': [('readonly', True)],
+        },
     )
-    delivery_failure = fields.Boolean(
-        compute='_compute_delivery_failure'
-    )
+    delivery_failure = fields.Boolean(compute='_compute_delivery_failure')
     report_delivery = fields.Html(
-        compute='_compute_report_delivery',
-        readonly=True,
+        compute='_compute_report_delivery', readonly=True
     )
 
     @api.depends('instance_customer_ids.delivery_error')
@@ -149,8 +153,7 @@ class RoundInstance(models.Model):
     def _compute_delivery_failure(self):
         for record in self:
             record.delivery_failure = any(
-                icust.delivery_error
-                for icust in record.instance_customer_ids
+                icust.delivery_error for icust in record.instance_customer_ids
             )
 
     @api.depends('instance_customer_ids.delivery_error')
@@ -178,7 +181,8 @@ class RoundInstance(models.Model):
         """
 
         positions = self.env['round.itinerary.position'].search(
-            [('partner_id.name', operator, value)])
+            [('partner_id.name', operator, value)]
+        )
         itineraries = self.env['round.itinerary'].search(
             [('partner_position_ids', 'in', positions.ids)]
         )
@@ -189,10 +193,11 @@ class RoundInstance(models.Model):
     @api.depends('template_id', 'date', 'time_leave_planned')
     def _get_complete_name(self):
         for rec in self:
-            rec.complete_name = '%s %s - %s' % (
+            rec.complete_name = u'{} {} - {}'.format(
                 rec.date,
                 float2time(rec.time_leave_planned),
-                rec.template_id.display_name)
+                rec.template_id.display_name,
+            )
 
     @api.onchange('template_id')
     def onchange_template_id(self):
@@ -221,14 +226,18 @@ class RoundInstance(models.Model):
             domain = [
                 comb,
                 ('template_code', operator, code),
-                ('template_name', operator, text)]
+                ('template_name', operator, text),
+            ]
         records = self.search(domain + args, limit=limit)
         return records.name_get()
 
     @api.multi
     def button_itinerary_import(self):
-        return dict(self.env.ref(
-            'delivery_rounds.action_round_itinerary_import').read()[0])
+        return dict(
+            self.env.ref(
+                'delivery_rounds.action_round_itinerary_import'
+            ).read()[0]
+        )
 
     @api.multi
     def button_update(self):
@@ -241,43 +250,56 @@ class RoundInstance(models.Model):
         self.itinerary_ids |= itineraries
 
         partners = (
-            itineraries
-            .mapped('partner_position_ids')
-            .filtered(lambda p:  # See find_bypartner tag rules
-                      not self.tag_ids or
-                      not p.tag_ids or
-                      p.tag_ids & self.tag_ids)  # & is intersect
-            .mapped('partner_id'))
+            itineraries.mapped('partner_position_ids')
+            .filtered(
+                lambda p: not self.tag_ids  # See find_bypartner tag rules
+                or not p.tag_ids
+                or p.tag_ids & self.tag_ids
+            )  # & is intersect
+            .mapped('partner_id')
+        )
 
         # Itineraries can contain partners of any type. So extract
         # corresponding delivery address
-        partners_delivery_ids = [partner.address_get(['delivery'])['delivery']
-                                 for partner in partners]
+        partners_delivery_ids = [
+            partner.address_get(['delivery'])['delivery']
+            for partner in partners
+        ]
 
-        picking_confirmed = self.env['stock.picking'].search([
-            ('delivery_round_id', '=', False),
-            ('partner_id', 'in', partners_delivery_ids),
-            ('state', 'not in', ('done', 'cancel')),
-            ('picking_type_subcode', '=', 'PICK')])
+        picking_confirmed = self.env['stock.picking'].search(
+            [
+                ('delivery_round_id', '=', False),
+                ('partner_id', 'in', partners_delivery_ids),
+                ('state', 'not in', ('done', 'cancel')),
+                ('picking_type_subcode', '=', 'PICK'),
+            ]
+        )
         self._assign_pickings(picking_confirmed)
 
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
-        _logger.debug("Assign to round instance %s the pickings %s",
-                      self.id, pickings.ids)
+        _logger.debug(
+            "Assign to round instance %s the pickings %s",
+            self.id,
+            pickings.ids,
+        )
 
         pickings.filtered(
-            lambda picking: picking.state == 'draft').action_confirm()
+            lambda picking: picking.state == 'draft'
+        ).action_confirm()
         # Note: MTO moves in waiting state are updated in standard by a call to
         # action_assign, so we need to propagate it
         moves = pickings.mapped('move_lines').filtered(
-            lambda move: move.state not in ('done', 'cancel') and
-            move.product_uom_qty > 0.0)
+            lambda move: move.state not in ('done', 'cancel')
+            and move.product_uom_qty > 0.0
+        )
         moves_to_assign = moves.filtered(
-            lambda move: not move.linked_move_operation_ids)
+            lambda move: not move.linked_move_operation_ids
+        )
         if moves_to_assign:
             moves.with_context(round_autoset=False).action_assign(
-                no_prepare=no_prepare)
+                no_prepare=no_prepare
+            )
             # Due to product_additional, recordset could have changed
             moves = moves.search([('id', 'in', moves.ids)])
 
@@ -285,10 +307,12 @@ class RoundInstance(models.Model):
         # Do not look at the state of the picking as assigned state has the
         # lowest priority
         moves_assigned = moves.filtered(
-            lambda move: move.state == 'assigned' or
-            (move.state == 'confirmed' and move.partially_available))
+            lambda move: move.state == 'assigned'
+            or (move.state == 'confirmed' and move.partially_available)
+        )
         pickings_assigned = moves_assigned.mapped('picking_id')
         if pickings_assigned:
+
             def key(r):
                 partner = r.partner_id
                 # If delivery address is a contact, take parent
@@ -297,14 +321,17 @@ class RoundInstance(models.Model):
                 return partner
 
             for partner, pickings_bypartner_iter in groupby(
-                    pickings_assigned.sorted(key=key), key=key):
+                pickings_assigned.sorted(key=key), key=key
+            ):
                 ric = self._add_customer(partner)
                 pickings_bypartner = reduce(
-                    lambda x, y: x | y, pickings_bypartner_iter)
+                    lambda x, y: x | y, pickings_bypartner_iter
+                )
                 # As we filtered on assigned, we typicaly excluded the waiting
                 # shippings. So include them back
-                pickings_bypartner |= \
+                pickings_bypartner |= (
                     pickings_bypartner._get_all_dest_pickings()
+                )
                 ric._link_pickings(pickings_bypartner)
         return pickings_assigned
 
@@ -312,25 +339,37 @@ class RoundInstance(models.Model):
     def _add_customer(self, customer):
         self.ensure_one()
         customer.ensure_one()
-        ric = self.env['round.instance.customer'].search([
-            ('delivery_round_id', '=', self.id),
-            ('partner_id', '=', customer.id),
-            ('delivered', '!=', True)],
-            limit=1)
+        ric = self.env['round.instance.customer'].search(
+            [
+                ('delivery_round_id', '=', self.id),
+                ('partner_id', '=', customer.id),
+                ('delivered', '!=', True),
+            ],
+            limit=1,
+        )
         rank = 0
         if not ric:
-            pos = self.env['round.itinerary.position'].search([
-                ('itinerary_id', 'in', self.itinerary_ids.ids),
-                ('partner_id', '=', customer.id)],
-                limit=1)
+            pos = self.env['round.itinerary.position'].search(
+                [
+                    ('itinerary_id', 'in', self.itinerary_ids.ids),
+                    ('partner_id', '=', customer.id),
+                ],
+                limit=1,
+            )
             if pos:
-                rank = (pos.sequence + pos.itinerary_id.sequence*1000) * 1000
+                rank = (pos.sequence + pos.itinerary_id.sequence * 1000) * 1000
             _logger.warn("Partner added on delivery %s", self.id)
-            ric = self.env['round.instance.customer'].sudo().create({
-                'delivery_round_id': self.id,
-                'partner_id': customer.id,
-                'rank': rank,
-                })
+            ric = (
+                self.env['round.instance.customer']
+                .sudo()
+                .create(
+                    {
+                        'delivery_round_id': self.id,
+                        'partner_id': customer.id,
+                        'rank': rank,
+                    }
+                )
+            )
         return ric
 
     @api.model
@@ -339,7 +378,8 @@ class RoundInstance(models.Model):
         Find a delivery_round for having a specified template. This is used for
         deliveries linked to a specific carrier
         """
-        return self.search([
+        return self.search(
+            [
                 ('template_id', '=', template.id),
                 ('state', 'not in', ('delivering', 'done')),
             ],
@@ -410,7 +450,7 @@ class RoundInstance(models.Model):
         LIMIT 1;
         """
 
-        self.env.cr.execute(best_instance_query, (partner.id, ))
+        self.env.cr.execute(best_instance_query, (partner.id,))
         result = self.env.cr.fetchone()
 
         if result:
@@ -420,25 +460,24 @@ class RoundInstance(models.Model):
         return False
 
     count_picking_available_total = fields.Integer(
-        'Picking Available Total',
-        compute='_get_count_picking',
-        readonly=True)
+        'Picking Available Total', compute='_get_count_picking', readonly=True
+    )
     count_picking_done_total = fields.Integer(
-        'Picking Done Total',
-        compute='_get_count_picking',
-        readonly=True)
+        'Picking Done Total', compute='_get_count_picking', readonly=True
+    )
     count_picking_available_partner = fields.Integer(
         'Picking Available Partner',
         compute='_get_count_picking',
-        readonly=True)
+        readonly=True,
+    )
     count_picking_available_weight = fields.Integer(
-        'Picking Available Total',
-        compute='_get_count_weight',
-        readonly=True)
+        'Picking Available Total', compute='_get_count_weight', readonly=True
+    )
 
     @api.depends('picking_ids')
     def _get_count_weight(self):
-        self._cr.execute("""
+        self._cr.execute(
+            """
             SELECT picking.delivery_round_id,
             sum(coalesce(product_template.weight, 0) *
                 coalesce(stock_pack_operation.product_qty, 0))
@@ -455,24 +494,31 @@ class RoundInstance(models.Model):
             AND stock_picking_type.subcode = 'PICK'
             AND picking.delivery_round_id in %s
             GROUP BY picking.delivery_round_id
-            """, (tuple(self.ids), ))
+            """,
+            (tuple(self.ids),),
+        )
         for r in self._cr.fetchall():
             self.browse(r[0]).count_picking_available_weight = r[1]
 
     @api.depends('picking_ids')
     def _get_count_picking(self):
         for rec in self:
-            rec.count_picking_done_total = len(rec.picking_ids.filtered(
-                lambda r: r.state == ('done')))
+            rec.count_picking_done_total = len(
+                rec.picking_ids.filtered(lambda r: r.state == ('done'))
+            )
             pickings = rec.picking_ids.filtered(
-                lambda r: r.state in ('partially_available', 'assigned',
-                                      'done') or any(
-                    move.state in ('done', 'assigned') or
-                    (move.state == 'confirmed' and move.partially_available)
-                    for move in r.move_lines))
+                lambda r: r.state
+                in ('partially_available', 'assigned', 'done')
+                or any(
+                    move.state in ('done', 'assigned')
+                    or (move.state == 'confirmed' and move.partially_available)
+                    for move in r.move_lines
+                )
+            )
             rec.count_picking_available_total = len(pickings)
-            rec.count_picking_available_partner = \
-                len(pickings.mapped('partner_id'))
+            rec.count_picking_available_partner = len(
+                pickings.mapped('partner_id')
+            )
 
     @api.multi
     def action_picking_tree_available(self):
@@ -521,10 +567,7 @@ class RoundInstance(models.Model):
         """
         not_started = self.filtered(lambda r: not r.picking_launched)
         not_started.button_picking_start()
-        self.write({
-            'state': 'close',
-            'stat_time_closed': time_now(self),
-            })
+        self.write({'state': 'close', 'stat_time_closed': time_now(self)})
 
     @api.multi
     def button_deliver(self):
@@ -540,10 +583,9 @@ class RoundInstance(models.Model):
         self.env.user.notify_info(
             _('Delivery round will be delivered in background.')
         )
-        self.filtered(lambda ri: ri.state != 'done')\
-            .mapped('instance_customer_ids')\
-            .filtered(lambda c: not c.delivered)\
-            ._deliver(background=background)
+        self.filtered(lambda ri: ri.state != 'done').mapped(
+            'instance_customer_ids'
+        ).filtered(lambda c: not c.delivered)._deliver(background=background)
         self.write({'state': 'delivering'})
         self.recheck_delivery_state()
 
@@ -567,33 +609,41 @@ class RoundInstance(models.Model):
                 shipping.delivery_round_id = False
         started = self.filtered('picking_launched')
         started.button_picking_stop()
-        self.write({
-            'state': 'done',
-            # TODO move when we start to delay the delivery?
-            'stat_time_leave': time_now(self),
-            })
+        self.write(
+            {
+                'state': 'done',
+                # TODO move when we start to delay the delivery?
+                'stat_time_leave': time_now(self),
+            }
+        )
 
     @api.multi
     def print_all_deliveryslip(self):
-        shipping_done = (
-            self.shipping_ids
-            .filtered(lambda shipping: shipping.state == 'done')
-            .sorted('rank'))
-        return self.env['report'].get_action(shipping_done,
-                                             'stock.report_deliveryslip')
+        shipping_done = self.shipping_ids.filtered(
+            lambda shipping: shipping.state == 'done'
+        ).sorted('rank')
+        return self.env['report'].get_action(
+            shipping_done, 'stock.report_deliveryslip'
+        )
 
     @api.multi
     def unlink(self):
-        if set(self.mapped('state')) != set(['draft']):
-            raise UserError(_(
-                'You cannot delete a delivery round that has been started'))
+        if set(self.mapped('state')) != {'draft'}:
+            raise UserError(
+                _('You cannot delete a delivery round that has been started')
+            )
         if any(self.mapped('picking_ids.printed')):
-            raise UserError(_(
-                'You cannot delete a delivery round having a started picking'))
+            raise UserError(
+                _(
+                    'You cannot delete a delivery round having a started picking'
+                )
+            )
         if any(self.mapped('shipping_ids.printed')):
-            raise UserError(_(
-                'You cannot delete a delivery round having a started shipping'
-                ))
+            raise UserError(
+                _(
+                    'You cannot delete a delivery round having a started shipping'
+                )
+            )
         pickings = self.mapped('picking_ids')
         res = super(RoundInstance, self).unlink()
         pickings._unassign_delivery_round()
@@ -605,9 +655,7 @@ class RoundInstance(models.Model):
         for shipping in self:
             shipping.shipping_count = len(shipping.shipping_ids)
 
-    shipping_count = fields.Integer(
-        compute='_compute_shipping_count',
-    )
+    shipping_count = fields.Integer(compute='_compute_shipping_count')
 
     @api.multi
     def action_view_shippings(self):
@@ -628,9 +676,7 @@ class RoundInstance(models.Model):
         for picking in self:
             picking.picking_count = len(picking.picking_ids)
 
-    picking_count = fields.Integer(
-        compute='_compute_picking_count',
-    )
+    picking_count = fields.Integer(compute='_compute_picking_count')
 
     @api.multi
     def action_view_pickings(self):
@@ -656,8 +702,8 @@ class RoundInstance(models.Model):
                 # Close delivery round
                 record.button_done()
                 self.env.user.notify_info(
-                    _('Delivery Round %s is now completed') %
-                    (self.display_name,)
+                    _('Delivery Round %s is now completed')
+                    % (self.display_name,)
                 )
 
 
@@ -684,13 +730,14 @@ class RoundInstanceCustomer(models.Model):
         ondelete='restrict',
         oldname='res_partner_id',
     )
-    rank = fields.Integer(
-        string='Rank',
-    )
+    rank = fields.Integer(string='Rank')
 
     picking_ids = fields.One2many(
-        'stock.picking', 'delivery_round_customer_id', 'Pickings',
-        readonly=True)
+        'stock.picking',
+        'delivery_round_customer_id',
+        'Pickings',
+        readonly=True,
+    )
 
     delivered = fields.Boolean('Delivered')
     delivery_error = fields.Char()
@@ -700,7 +747,8 @@ class RoundInstanceCustomer(models.Model):
         self.ensure_one()
         # Link all pickings/shippings
         shippings = pickings._get_all_dest_pickings().filtered(
-            lambda r: r.picking_type_code == 'outgoing')
+            lambda r: r.picking_type_code == 'outgoing'
+        )
         # ensure all related pickings are assigned to the same delivery
         # round
         # Use | to let it work in tests with one step delivery
@@ -709,17 +757,16 @@ class RoundInstanceCustomer(models.Model):
         # shippings, so we don't have to ensure a picking is not already done
         # for another delivery round
         pickings = pickings.filtered(
-            lambda r: r.state not in (
-                'draft',
-                'cancel',
-                'done') and
-            r.delivery_round_customer_id.id != self.id)
+            lambda r: r.state not in ('draft', 'cancel', 'done')
+            and r.delivery_round_customer_id.id != self.id
+        )
         if pickings:
-            _logger.debug("Link to delivery round the pickings/shippings %s",
-                          pickings)
-            pickings.with_context(noround_write=True).write({
-                'delivery_round_customer_id': self.id,
-                'rank': self.rank})
+            _logger.debug(
+                "Link to delivery round the pickings/shippings %s", pickings
+            )
+            pickings.with_context(noround_write=True).write(
+                {'delivery_round_customer_id': self.id, 'rank': self.rank}
+            )
             if self.env.context.get('manual_change_delivery_round'):
                 # The delivery carrier on the procurement.group is used
                 # by stock_groupbypartner for the grouping of moves:
@@ -732,19 +779,21 @@ class RoundInstanceCustomer(models.Model):
                 manual_method = self.env.ref(
                     'delivery_rounds.delivery_carrier_manual_round_change'
                 )
-                pickings.mapped('group_id').write({
-                    'carrier_id': manual_method.id,
-                })
+                pickings.mapped('group_id').write(
+                    {'carrier_id': manual_method.id}
+                )
 
     def _remove_if_empty(self):
         """ Remove partner from round instance if no more pickings or all
         canceled """
         if not self.mapped('picking_ids').filtered(
-                lambda p: p.state != 'cancel'):
+            lambda p: p.state != 'cancel'
+        ):
             _logger.debug(
                 "Removing customers %s from round instance %s",
                 self.mapped('partner_id').ids,
-                self.mapped('delivery_round_id').ids)
+                self.mapped('delivery_round_id').ids,
+            )
             self.unlink()
 
     @api.multi
@@ -760,28 +809,39 @@ class RoundInstanceCustomer(models.Model):
             _logger.debug(
                 "Rank set on round instance customer %s. Propagate to "
                 "pickings and shippings %s",
-                self.ids, pickings.ids)
+                self.ids,
+                pickings.ids,
+            )
             pickings.write({'rank': rank})
 
     count_picking_progress = fields.Char(
-        'Picking Progress',
-        compute='_get_count_picking',
-        readonly=True)
+        'Picking Progress', compute='_get_count_picking', readonly=True
+    )
 
     @api.depends('picking_ids')
     def _get_count_picking(self):
         for rec in self:
             pickings = rec.picking_ids.filtered(
-                lambda r: r.picking_type_subcode == 'PICK')
-            count_done = len(pickings.filtered(
-                lambda r: r.state == ('done')))
-            count_total = len(pickings.filtered(
-                lambda r: r.state in ('partially_available', 'assigned',
-                                      'done') or any(
-                    move.state in ('done', 'assigned') or
-                    (move.state == 'confirmed' and move.partially_available)
-                    for move in r.move_lines)))
-            rec.count_picking_progress = '%s/%s' % (count_done, count_total)
+                lambda r: r.picking_type_subcode == 'PICK'
+            )
+            count_done = len(pickings.filtered(lambda r: r.state == ('done')))
+            count_total = len(
+                pickings.filtered(
+                    lambda r: r.state
+                    in ('partially_available', 'assigned', 'done')
+                    or any(
+                        move.state in ('done', 'assigned')
+                        or (
+                            move.state == 'confirmed'
+                            and move.partially_available
+                        )
+                        for move in r.move_lines
+                    )
+                )
+            )
+            rec.count_picking_progress = '{}/{}'.format(
+                count_done, count_total
+            )
 
     def button_deliver(self):
         """ Validate all shipping orders that are available """
@@ -825,14 +885,12 @@ class RoundInstanceCustomer(models.Model):
         except Exception as err:
             _logger.exception(
                 'Failed to deliver a shipping during a delivery round '
-                'with an unexpected error: %s', unicode(err)
+                'with an unexpected error: %s',
+                unicode(err),
             )
             self.delivery_error = _('Unexpected error (%s)') % (unicode(err),)
         else:
-            self.write({
-                'delivery_error': '',
-                'delivered': True,
-            })
+            self.write({'delivery_error': '', 'delivered': True})
 
     @job(default_channel='root.background.deliver')
     @api.multi
@@ -845,11 +903,11 @@ class RoundInstanceCustomer(models.Model):
 
         # when a job is executing, we get this key in the context
         background = (
-            self.env.context.get('job_uuid')
-            and not config['test_enable']
+            self.env.context.get('job_uuid') and not config['test_enable']
         )
-        with self._handle_delivery_error(), \
-                self._new_env(new_cr=not config['test_enable']) as new_env:
+        with self._handle_delivery_error(), self._new_env(
+            new_cr=not config['test_enable']
+        ) as new_env:
             # change the env to the new env so everything happening
             # will be rollbacked by the context manager in case of error
             shippings = new_env['stock.picking'].search(
@@ -894,8 +952,8 @@ class RoundInstanceCustomer(models.Model):
                 # if we raise the error using the normal way, the buttons
                 # on the one2many list stop to work...
                 self.env.user.notify_warning(
-                    _('Error when delivering %s: %s') %
-                    (self.display_name, self.delivery_error)
+                    _('Error when delivering %s: %s')
+                    % (self.display_name, self.delivery_error)
                 )
         # If this customer do not have any linked picking, remove it
         # We perform this step at last to prevent Missing record error
@@ -919,21 +977,26 @@ class RoundInstanceCustomer(models.Model):
                 continue
             if background:
                 icust.with_delay(
-                    description=_(
-                        'Deliver customer %s of delivery round %s'
-                    ) % (icust.display_name,
-                         icust.delivery_round_id.complete_name)
+                    description=_('Deliver customer %s of delivery round %s')
+                    % (
+                        icust.display_name,
+                        icust.delivery_round_id.complete_name,
+                    )
                 )._deliver_job()
             else:
                 icust._deliver_job()
 
     def print_deliveryslip(self):
         shippings = self.picking_ids.filtered(
-            lambda p: p.picking_type_code == 'outgoing')
+            lambda p: p.picking_type_code == 'outgoing'
+        )
         shipping_done = shippings.filtered(
-            lambda shipping: shipping.state == 'done')
+            lambda shipping: shipping.state == 'done'
+        )
         if not shipping_done:
-            raise UserError(_(
-                'The shipping is not part anymore of this delivery round'))
-        return self.env['report'].get_action(shipping_done,
-                                             'stock.report_deliveryslip')
+            raise UserError(
+                _('The shipping is not part anymore of this delivery round')
+            )
+        return self.env['report'].get_action(
+            shipping_done, 'stock.report_deliveryslip'
+        )

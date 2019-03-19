@@ -2,12 +2,11 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from pkg_resources import resource_stream
-
 import anthem
 from anthem.lyrics.loaders import load_csv_stream
-from ..common import define_settings
-from ..common import req
+from pkg_resources import resource_stream
+
+from ..common import define_settings, req
 
 
 @anthem.log
@@ -16,35 +15,46 @@ def sale_setup(ctx):
     employee_group = ctx.env.ref('base.group_user')
 
     # Active multi Unit of measure
-    employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('product.group_uom').id)]
-    })
+    employee_group.write(
+        {'implied_ids': [(4, ctx.env.ref('product.group_uom').id)]}
+    )
 
     # Active sales prices based formula
-    define_settings(ctx,
-                    'sale.config.settings',
-                    {'sale_pricelist_setting': 'formula'})
-    employee_group.write({
-        'implied_ids': [
-         (4, ctx.env.ref('product.group_pricelist_item').id),
-         (4, ctx.env.ref('product.group_sale_pricelist').id)]
-    })
+    define_settings(
+        ctx, 'sale.config.settings', {'sale_pricelist_setting': 'formula'}
+    )
+    employee_group.write(
+        {
+            'implied_ids': [
+                (4, ctx.env.ref('product.group_pricelist_item').id),
+                (4, ctx.env.ref('product.group_sale_pricelist').id),
+            ]
+        }
+    )
 
     # Default invoice
-    define_settings(ctx,
-                    'sale.config.settings',
-                    {'default_invoice_policy': 'delivery'})
+    define_settings(
+        ctx, 'sale.config.settings', {'default_invoice_policy': 'delivery'}
+    )
 
     # Quotations & Sales
     # Discount
-    employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('sale.group_discount_per_so_line').id)]
-    })
+    employee_group.write(
+        {
+            'implied_ids': [
+                (4, ctx.env.ref('sale.group_discount_per_so_line').id)
+            ]
+        }
+    )
 
     # Activate route on SO
-    employee_group.write({
-        'implied_ids': [(4, ctx.env.ref('sale_stock.group_route_so_lines').id)]
-    })
+    employee_group.write(
+        {
+            'implied_ids': [
+                (4, ctx.env.ref('sale_stock.group_route_so_lines').id)
+            ]
+        }
+    )
 
 
 @anthem.log
@@ -71,14 +81,16 @@ def import_pricelist(ctx):
 @anthem.log
 def clean_pricelist_item(ctx):
     """ Deleting pricelist items """
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
         DELETE FROM product_pricelist_item
         WHERE id NOT IN (
             SELECT res_id
             FROM ir_model_data
             WHERE model='product.pricelist.item'
         )
-    """)
+    """
+    )
 
 
 @anthem.log

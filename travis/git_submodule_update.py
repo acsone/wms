@@ -10,16 +10,18 @@
 #
 import os
 import shutil
+import zipfile
+
+import yaml
+from git import Repo
+
 try:
     # For Python 3.0 and later
     import urllib.request as requestlib
 except ImportError:
     # Fall back to Python 2's urllib2
     import urllib2 as requestlib
-import yaml
-import zipfile
 
-from git import Repo
 
 script_path = os.path.dirname(os.path.realpath(__file__))
 root_path = os.path.abspath(os.path.join(script_path, os.pardir))
@@ -89,7 +91,7 @@ for sub in submodules:
     use_archive = sub.path not in private_repos
     if use_archive:
         url = git_url(sub.url)
-        archive_url = "%s/archive/%s.zip" % (url, sub.hexsha)
+        archive_url = "{}/archive/{}.zip".format(url, sub.hexsha)
         request = requestlib.Request(archive_url)
         with open(ZIP_PATH, 'wb') as f:
             f.write(requestlib.urlopen(request).read())
@@ -100,13 +102,17 @@ for sub in submodules:
             # fall back to standard download
             use_archive = False
             with open(ZIP_PATH) as f:
-                print("Getting archive failed with error %s. Falling back to "
-                      "git clone." % f.read())
+                print(
+                    "Getting archive failed with error %s. Falling back to "
+                    "git clone." % f.read()
+                )
             os.remove(ZIP_PATH)
         except Exception as e:
             use_archive = False
-            print("Getting archive failed with error %s. Falling back to "
-                  "git clone." % e.message)
+            print(
+                "Getting archive failed with error %s. Falling back to "
+                "git clone." % e.message
+            )
         else:
             os.remove(ZIP_PATH)
             os.removedirs(sub.path)

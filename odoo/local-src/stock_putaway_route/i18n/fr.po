@@ -84,4 +84,3 @@ msgstr "Route"
 #: model:ir.model,name:stock_putaway_route.model_stock_fixed_putaway_route_strat
 msgid "stock.fixed.putaway.route.strat"
 msgstr "stock.fixed.putaway.route.strat"
-

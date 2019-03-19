@@ -34,4 +34,3 @@ msgstr "Nb. de tickets"
 #: model:ir.model,name:specific_purchase_report.model_purchase_report
 msgid "Purchases Orders"
 msgstr "Ordres d'achat"
-

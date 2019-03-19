@@ -2,8 +2,8 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, fields, models
 import odoo.addons.decimal_precision as dp
+from odoo import api, fields, models
 
 
 class ProductSupplierinfoEsbflux(models.Model):
@@ -14,34 +14,29 @@ class ProductSupplierinfoEsbflux(models.Model):
     So on creation and updates of a promotions this model is updated so the
     flux can be properly generated later on
     """
+
     _name = 'product.supplierinfo.esbflux'
     _description = 'ESB Promotions XML'
 
     action = fields.Selection(
-        string='Action',
-        selection=[('delete', 'Delete'),
-                   ('create', 'Create')]
+        string='Action', selection=[('delete', 'Delete'), ('create', 'Create')]
     )
     flux = fields.Selection(
         string='Flux name',
-        selection=[('buyxgety', 'Buy X Get Y'),
-                   ('specialpromotion', 'Special Promotion')],
+        selection=[
+            ('buyxgety', 'Buy X Get Y'),
+            ('specialpromotion', 'Special Promotion'),
+        ],
     )
-    real_id = fields.Integer(
-        string='Real Id'
-    )
+    real_id = fields.Integer(string='Real Id')
     # Fields from table product.supplierinfo, needed for the mapping later
     product_tmpl_id = fields.Many2one(
-        'product.template', 'Product Template',
-        index=True,
-        ondelete='cascade',
+        'product.template', 'Product Template', index=True, ondelete='cascade'
     )
     ratio_main_product = fields.Integer('Ratio Main Product')
     ratio_promotional_product = fields.Integer('Ratio Free Product')
     discount_sale = fields.Float(
-        'Sale discount (%)',
-        digits=dp.get_precision('Discount'),
-        default=0.0
+        'Sale discount (%)', digits=dp.get_precision('Discount'), default=0.0
     )
     date_start = fields.Date(string='Start Date')
     date_end = fields.Date(string='End Date')
@@ -109,10 +104,9 @@ class ProductSupplierinfoEsbflux(models.Model):
         """
         today = fields.Date.today()
         self.search([(1, '=', 1)]).unlink()
-        valid_promotion = self.env['product.supplierinfo'].search([
-            ('date_start', '!=', False),
-            ('date_end', '>=', today),
-        ])
+        valid_promotion = self.env['product.supplierinfo'].search(
+            [('date_start', '!=', False), ('date_end', '>=', today)]
+        )
         for promotion in valid_promotion:
             if promotion._is_promotion_buyx_gety():
                 promotion._update_flux('create', 'buyxgety')

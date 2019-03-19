@@ -865,4 +865,3 @@ msgstr "round.wizard.makeplan"
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "unit(s)"
 msgstr "unit(s)"
-

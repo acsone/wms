@@ -2,10 +2,11 @@
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, _
+import logging
+
+from odoo import _, models
 from odoo.addons.queue_job.job import job
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -18,9 +19,8 @@ class StockPicking(models.Model):
         # want other moves to try assignment as we will directly re-reserve
         # them.
         return super(
-            StockPicking,
-            self.with_context(no_auto_reassign=True)
-            ).do_prepare_partial()
+            StockPicking, self.with_context(no_auto_reassign=True)
+        ).do_prepare_partial()
 
 
 class StockMove(models.Model):
@@ -44,22 +44,27 @@ class StockMove(models.Model):
                 # Picking is ongoing, too late to recompute pack op
                 continue
 
-            operations_to_recompute |= move.picking_id \
-                .mapped('pack_operation_ids') \
-                .filtered(lambda op: op.product_id in move.product_id and
-                          not op.is_done)
-            moves_to_reassign |= move.picking_id.mapped('move_lines') \
-                .filtered(lambda m: m.product_id in move.product_id and
-                          m.state not in ('done', 'cancel'))
+            operations_to_recompute |= move.picking_id.mapped(
+                'pack_operation_ids'
+            ).filtered(
+                lambda op: op.product_id in move.product_id and not op.is_done
+            )
+            moves_to_reassign |= move.picking_id.mapped('move_lines').filtered(
+                lambda m: m.product_id in move.product_id
+                and m.state not in ('done', 'cancel')
+            )
 
         if operations_to_recompute:
-            _logger.debug("Cleaning operations %s",
-                          operations_to_recompute.ids)
+            _logger.debug(
+                "Cleaning operations %s", operations_to_recompute.ids
+            )
             operations_to_recompute.mapped(
-                'linked_move_operation_ids.move_id').do_unreserve()
+                'linked_move_operation_ids.move_id'
+            ).do_unreserve()
         if moves_to_reassign:
-            _logger.debug("Reserve corresponding moves %s",
-                          moves_to_reassign.ids)
+            _logger.debug(
+                "Reserve corresponding moves %s", moves_to_reassign.ids
+            )
             moves_to_reassign.action_assign()
 
     def action_done(self):
@@ -69,18 +74,24 @@ class StockMove(models.Model):
         res = super(StockMove, self).action_done()
 
         stock = self.env.ref('stock.stock_location_stock')
-        received = self.filtered(lambda m: (
-            m.location_dest_id.parent_left >= stock.parent_left and
-            m.location_dest_id.parent_right <= stock.parent_right and
-            not (m.location_id.parent_left >= stock.parent_left and
-                 m.location_id.parent_right <= stock.parent_right)))
+        received = self.filtered(
+            lambda m: (
+                m.location_dest_id.parent_left >= stock.parent_left
+                and m.location_dest_id.parent_right <= stock.parent_right
+                and not (
+                    m.location_id.parent_left >= stock.parent_left
+                    and m.location_id.parent_right <= stock.parent_right
+                )
+            )
+        )
         if not received:
             return res
 
         products = received.mapped('product_id')
-        self.with_delay(description=_(
-            'Reassign trial on reception for products ids %s'
-            ) % products.ids)._reassign_trial(products)
+        self.with_delay(
+            description=_('Reassign trial on reception for products ids %s')
+            % products.ids
+        )._reassign_trial(products)
         return res
 
     def action_cancel(self):
@@ -88,9 +99,10 @@ class StockMove(models.Model):
         products = self.mapped('product_id')
         res = super(StockMove, self).action_cancel()
         if not self.env.context.get('no_auto_reassign'):
-            self.with_delay(description=_(
-                'Reassign trial on cancel for products ids %s'
-                ) % products.ids)._reassign_trial(products)
+            self.with_delay(
+                description=_('Reassign trial on cancel for products ids %s')
+                % products.ids
+            )._reassign_trial(products)
         return res
 
     def write(self, vals):
@@ -98,9 +110,12 @@ class StockMove(models.Model):
         res = super(StockMove, self).write(vals)
         if vals.get('priority') == '0':
             products = self.mapped('product_id')
-            self.with_delay(description=_(
-                'Reassign on priority lowered for products ids %s'
-                ) % products.ids)._reassign_trial(products)
+            self.with_delay(
+                description=_(
+                    'Reassign on priority lowered for products ids %s'
+                )
+                % products.ids
+            )._reassign_trial(products)
         return res
 
     @job(default_channel='root.action_assign')
@@ -108,11 +123,14 @@ class StockMove(models.Model):
         """ Find pickings and relaunch reservation """
         if not products:
             return
-        moves_pickings = self.search([
-            ('picking_id.picking_type_subcode', '=', 'PICK'),
-            ('state', '=', 'confirmed'),
-            ('product_id', 'in', products.ids),
-            ('picking_id.operator_id', '=', False)])
+        moves_pickings = self.search(
+            [
+                ('picking_id.picking_type_subcode', '=', 'PICK'),
+                ('state', '=', 'confirmed'),
+                ('product_id', 'in', products.ids),
+                ('picking_id.operator_id', '=', False),
+            ]
+        )
         if not moves_pickings:
             return
         _logger.debug("Products received are in backorder")
@@ -125,18 +143,22 @@ class StockMove(models.Model):
         # No need to perform the assignment now (new pack operation
         # creation), it is performed later when the procurement is
         # run.
-        operations_to_recompute = pickings.mapped('pack_operation_ids'). \
-            filtered(lambda op: op.product_id in products)
+        operations_to_recompute = pickings.mapped(
+            'pack_operation_ids'
+        ).filtered(lambda op: op.product_id in products)
         if operations_to_recompute:
-            _logger.debug("Cleaning operations %s",
-                          operations_to_recompute.ids)
+            _logger.debug(
+                "Cleaning operations %s", operations_to_recompute.ids
+            )
             # As we de-reserve moves, we need to include them in the following
             # assignment. This happens when there are multiple moves for a same
             # product but only some were assigned (we had a partial match in
             # initial search).
             moves_pickings |= operations_to_recompute.mapped(
-                'linked_move_operation_ids.move_id')
+                'linked_move_operation_ids.move_id'
+            )
             operations_to_recompute.mapped(
-                'linked_move_operation_ids.move_id').do_unreserve()
+                'linked_move_operation_ids.move_id'
+            ).do_unreserve()
         _logger.debug("Reserve corresponding moves %s", moves_pickings)
         moves_pickings.action_assign()

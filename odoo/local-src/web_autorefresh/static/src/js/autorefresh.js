@@ -32,7 +32,7 @@ odoo.define('web_autorefresh', function (require) {
             var self = this;
             this._super.apply(this, arguments);
             if(parent.action && parent.action.auto_refresh > 0){
-                self.refresh_interval = setInterval(_.bind(function(){ 
+                self.refresh_interval = setInterval(_.bind(function(){
                     if(this.$el[0].clientWidth != 0 && this.dataset.index != null){
                         this.reload();
                     }
@@ -47,4 +47,3 @@ odoo.define('web_autorefresh', function (require) {
         }
     });
 });
-

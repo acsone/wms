@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import config
 
@@ -9,10 +9,12 @@ from odoo.tools import config
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    only_tax_ids = fields.Many2many('account.tax',
-                                    compute='_compute_all_taxes')
-    contribution_ids = fields.Many2many('account.tax',
-                                        compute='_compute_all_taxes')
+    only_tax_ids = fields.Many2many(
+        'account.tax', compute='_compute_all_taxes'
+    )
+    contribution_ids = fields.Many2many(
+        'account.tax', compute='_compute_all_taxes'
+    )
     apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
     amount_contribution = fields.Monetary(compute='_compute_all_taxes')
 
@@ -29,7 +31,7 @@ class SaleOrderLine(models.Model):
 
             for tax in line.tax_id:
                 if tax.include_base_amount:
-                    amount_contribution += (tax.amount * line.qty_delivered)
+                    amount_contribution += tax.amount * line.qty_delivered
                     contribution_ids |= tax
                 elif tax.tax_group_id == tax_group_apb:
                     apb_ids |= tax
@@ -77,18 +79,24 @@ class SaleOrder(models.Model):
             # Not saving the report in ir.attachment, when not confirmed
             return None
         if not self.partner_id.ref:
-            raise UserError(_(
-                'The Quotation can not be printed the client {} ({}) \
-                 has no reference assigned.')
-                .format(self.partner_id.name, self.partner_id.id)
+            raise UserError(
+                _(
+                    u'The Quotation can not be printed the client {} ({}) '
+                    u'has no reference assigned.'
+                ).format(self.partner_id.name, self.partner_id.id)
             )
-        return '_'.join([
-            'cf',
-            self.partner_id.ref,
-            str(self.id),
-            ''.join(self.create_date[:10].split('-')),
-            ''.join(self.create_date[-8:].split(':')),
-            ]) + '.pdf'
+        return (
+            u'_'.join(
+                [
+                    'cf',
+                    self.partner_id.ref,
+                    str(self.id),
+                    ''.join(self.create_date[:10].split('-')),
+                    ''.join(self.create_date[-8:].split(':')),
+                ]
+            )
+            + '.pdf'
+        )
 
     @api.multi
     def create_reports(self):
@@ -98,7 +106,7 @@ class SaleOrder(models.Model):
         for order in self:
             order.with_delay().print_and_attach_report(
                 'sale.report_saleorder',
-                order.partner_id.fax if order.sale_channel == 'fax' else None
+                order.partner_id.fax if order.sale_channel == 'fax' else None,
             )
 
     @api.multi
@@ -107,15 +115,20 @@ class SaleOrder(models.Model):
         pharmacist = self.partner_id.pharmacist_id
         if raise_errors:
             if not pharmacist:
-                raise UserError(_(
-                    'Cannot send pharmacist email\n'
-                    'No pharmacist affiliated to the client.'
-                    ))
+                raise UserError(
+                    _(
+                        'Cannot send pharmacist email\n'
+                        'No pharmacist affiliated to the client.'
+                    )
+                )
             if not pharmacist.email:
-                raise UserError(_(
-                    'Cannot send pharmacist email\n'
-                    '%s partner must have an email address.'
-                    ) % pharmacist.name)
+                raise UserError(
+                    _(
+                        'Cannot send pharmacist email\n'
+                        '%s partner must have an email address.'
+                    )
+                    % pharmacist.name
+                )
         return pharmacist
 
     @api.multi
@@ -125,8 +138,7 @@ class SaleOrder(models.Model):
         Based on `action_quotation_send`
         """
         template_xid = (
-            'specific_report'
-            '.email_template_pharmacist_supplier_order'
+            'specific_report' '.email_template_pharmacist_supplier_order'
         )
         mail_template = self.env.ref(template_xid)
         if not pharmacist:
@@ -140,8 +152,9 @@ class SaleOrder(models.Model):
             'default_template_id': mail_template.id,
             'default_composition_mode': 'comment',
             'mark_so_as_sent': False,
-            'custom_layout': ("specific_sale"
-                              ".mail_template_pharamcist_notification")
+            'custom_layout': (
+                "specific_sale" ".mail_template_pharamcist_notification"
+            ),
         }
         try:
             wiz_xid = 'mail.email_compose_message_wizard_form'
@@ -165,13 +178,11 @@ class SaleOrder(models.Model):
             email_act = order.action_send_pharmacist_email(pharmacist)
             if email_act and email_act.get('context'):
                 email_ctx = email_act['context']
-                email_ctx.update(
-                    default_email_from=order.company_id.email,
-                )
+                email_ctx.update(default_email_from=order.company_id.email)
 
                 # FIXME separate chatter and email sending
                 order.with_context(email_ctx).message_post_with_template(
-                    email_ctx.get('default_template_id'),
+                    email_ctx.get('default_template_id')
                 )
         return True
 
@@ -193,8 +204,7 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         """ Generate the sale order pdf and save it in ir.attachment"""
         res = super(SaleOrder, self).action_confirm()
-        if (config['test_enable'] or
-                self.env.context.get('skip_pdf_gen')):
+        if config['test_enable'] or self.env.context.get('skip_pdf_gen'):
             # Do not generate the report during test or during import
             return res
         self.create_reports()
@@ -207,8 +217,8 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).print_quotation()
         for so in self:
             filename = so.get_report_name()
-            existing = self.env['ir.attachment'].search([
-                ('name', '=', filename),
-                ('res_model', '=', 'sale.order')])
+            existing = self.env['ir.attachment'].search(
+                [('name', '=', filename), ('res_model', '=', 'sale.order')]
+            )
             existing.unlink()
         return res

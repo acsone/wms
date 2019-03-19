@@ -14,7 +14,7 @@
         'stock_picking_sequence',
         'stock_available_immediately',
         'delivery_rounds',
-        ],
+    ],
     'data': [
         'views/stock.xml',
         'data/data.xml',

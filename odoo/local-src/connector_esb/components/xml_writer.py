@@ -4,15 +4,13 @@
 
 import logging
 import os
-
 from contextlib import contextmanager
 from functools import partial
 from io import StringIO
-from lxml import etree
 
 import dicttoxml
 import paramiko
-
+from lxml import etree
 from odoo import _, exceptions, fields
 from odoo.addons.component.core import AbstractComponent, Component
 
@@ -47,22 +45,25 @@ class ESBXMLProducer(Component):
                 # NOTE: this sets
                 #  `xmlns:dt="urn:schemas-microsoft-com:datatypes"`
                 # as well as an empty `dt:dt=""` attribute
-                root.find(el).set('{%s}%s' % (ns, attr), '')
+                root.find(el).set('{{{}}}{}'.format(ns, attr), '')
         return etree.tostring(
-            root, xml_declaration=True,
-            encoding='utf-8', pretty_print=True)
+            root, xml_declaration=True, encoding='utf-8', pretty_print=True
+        )
 
     def _produce(self, data, main_root, root):
         # Wrap into root
         if data:
             data = {root: data}
         xml = dicttoxml.dicttoxml(
-            data, custom_root=main_root,
-            attr_type=False, item_func=self._dicttoxml_item_func)
+            data,
+            custom_root=main_root,
+            attr_type=False,
+            item_func=self._dicttoxml_item_func,
+        )
         if data:
             xml = self._apply_namespaces(xml)
         # Remove the xml version node
-        xml = xml[xml.find('?>')+2:]
+        xml = xml[xml.find('?>') + 2 :]
         return xml
 
     def _dicttoxml_item_func(self, item):
@@ -87,7 +88,7 @@ class ESBWebServiceXMLProducer(Component):
     def _produce(self, data, root, list_item):
         item = partial(self._dicttoxml_item_func, list_item)
         xml = dicttoxml.dicttoxml(
-            data, attr_type=False, custom_root=root, item_func=item,
+            data, attr_type=False, custom_root=root, item_func=item
         )
         return xml
 
@@ -107,8 +108,9 @@ class ESBXMLWriter(AbstractComponent):
 
     @property
     def config(self):
-        assert self.work.timestamp, ("a esb.backend.timestamp record must "
-                                     "be passed in work_on")
+        assert self.work.timestamp, (
+            "a esb.backend.timestamp record must " "be passed in work_on"
+        )
         return self.work.timestamp
 
     def filename(self):
@@ -116,12 +118,11 @@ class ESBXMLWriter(AbstractComponent):
         return pattern.format(
             name=self.model._name.replace('.', '_'),
             date=fields.Date.today().replace('-', ''),
-            time=fields.Datetime.now().split(' ')[1].replace(':', '')
+            time=fields.Datetime.now().split(' ')[1].replace(':', ''),
         )
 
     def path(self):
-        return (self.env.context.get('xml_out_path') or
-                self.config.path or '')
+        return self.env.context.get('xml_out_path') or self.config.path or ''
 
     def write_file(self, content):
         path = self.path()
@@ -192,12 +193,14 @@ class SFTPESBXMLWriter(Component):
         )
         with paramiko.SSHClient() as ssh:
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
-            ssh.connect(self.backend_record.sftp_host,
-                        port=self.backend_record.sftp_port,
-                        username=self.backend_record.sftp_user,
-                        pkey=pkey,
-                        look_for_keys=False,
-                        timeout=SFTP_TIMEOUT)
+            ssh.connect(
+                self.backend_record.sftp_host,
+                port=self.backend_record.sftp_port,
+                username=self.backend_record.sftp_user,
+                pkey=pkey,
+                look_for_keys=False,
+                timeout=SFTP_TIMEOUT,
+            )
             with ssh.open_sftp() as sftp:
                 self._sftp = sftp
                 yield sftp

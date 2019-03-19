@@ -18,7 +18,7 @@
         'stock_groupbypartner',
         'queue_job',
         'web_notify',
-        ],
+    ],
     'data': [
         # Views
         'views/menu.xml',

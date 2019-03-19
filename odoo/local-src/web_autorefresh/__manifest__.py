@@ -33,7 +33,7 @@
     'depends': [
         'web',
         # 'web_calendar', 'web_graph', 'web_kanban',
-        ],
+    ],
     'data': ['assets.xml'],
     'active': False,
     'installable': True,

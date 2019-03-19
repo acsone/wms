@@ -2,16 +2,14 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import qrcode
 import StringIO
 
+import qrcode
+from odoo.http import Controller, request, route
 from werkzeug import exceptions
-
-from odoo.http import Controller, route, request
 
 
 class SpecificReportController(Controller):
-
     @route(['/report/qrcode'], type='http', auth="public")
     def report_qrcode(self, value, size=5, border=4):
         """
@@ -35,6 +33,8 @@ class SpecificReportController(Controller):
             output.close()
         except (ValueError, AttributeError):
             raise exceptions.HTTPException(
-                description='Cannot convert into qrcode.')
+                description='Cannot convert into qrcode.'
+            )
         return request.make_response(
-            png, headers=[('Content-Type', 'image/png')])
+            png, headers=[('Content-Type', 'image/png')]
+        )

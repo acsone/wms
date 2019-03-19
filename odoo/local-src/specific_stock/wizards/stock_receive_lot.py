@@ -2,7 +2,7 @@
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, fields
+from odoo import api, fields, models
 
 
 class StockPackOperationLotAdd(models.TransientModel):
@@ -11,7 +11,8 @@ class StockPackOperationLotAdd(models.TransientModel):
     qty_backorder = fields.Integer(
         'Backorder',
         compute='_get_qty_backorder',
-        help="Missing quantity of products to pick")
+        help="Missing quantity of products to pick",
+    )
 
     @api.depends('operation_id')
     @api.one

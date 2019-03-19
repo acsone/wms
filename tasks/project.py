@@ -13,22 +13,21 @@ import os
 import shutil
 
 import yaml
-
 from invoke import task
 
 from .common import (
-    exit_msg,
-    check_git_diff,
-    tempdir,
-    cookiecutter_context,
+    GIT_IGNORES,
     TEMPLATE_GIT,
     TEMPLATE_GIT_REPO_URL,
-    cd,
-    root_path,
-    build_path,
     ask_or_abort,
+    build_path,
+    cd,
+    check_git_diff,
+    cookiecutter_context,
+    exit_msg,
+    root_path,
+    tempdir,
     update_yml_file,
-    GIT_IGNORES,
 )
 
 try:
@@ -47,8 +46,7 @@ def sync_meta():
 
 def update_sync_meta(data):
     allowed_data = {
-        k: v for k, v in data.items()
-        if k in ('pinned_version', 'last_sync')
+        k: v for k, v in data.items() if k in ('pinned_version', 'last_sync')
     }
     update_yml_file(SYNC_METADATA, allowed_data, main_key='sync')
 
@@ -58,9 +56,15 @@ def now():
 
 
 def _exclude_fnmatch(root, files, exclude):
-    return list(set(files) -
-                set([d for d in files for excl in exclude
-                     if fnmatch.fnmatch(os.path.join(root, d), excl)]))
+    return list(
+        set(files)
+        - {
+            d
+            for d in files
+            for excl in exclude
+            if fnmatch.fnmatch(os.path.join(root, d), excl)
+        }
+    )
 
 
 def _add_comment_unknown(path, comment):
@@ -216,10 +220,7 @@ def sync(ctx, commit=True, version=None, fork=None, fork_url=None):
         ask_or_abort(
             "Selected version: {}. Are you sure it's correct?".format(version)
         )
-    update_sync_meta({
-        'pinned_version': version,
-        'last_sync': now(),
-    })
+    update_sync_meta({'pinned_version': version, 'last_sync': now()})
     print('Pinned version updated.')
     print('#' * 80)
 
@@ -277,6 +278,4 @@ def _do_sync(ctx, cc_context, version, git_repo, sync_metadata, commit=True):
         ctx.run('git add {}'.format(' '.join(selected_files)))
         if commit:
             msg = 'Update project from odoo-template ver: {}'.format(version)
-            ctx.run(
-                'git commit -m "{}" -e -vv'.format(msg), pty=True
-            )
+            ctx.run('git commit -m "{}" -e -vv'.format(msg), pty=True)

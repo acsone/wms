@@ -12,11 +12,10 @@ import errno
 import os
 import shutil
 import tempfile
-import yaml
-
 from builtins import input
-
 from contextlib import contextmanager
+
+import yaml
 from invoke import exceptions
 
 try:
@@ -66,7 +65,9 @@ def gpg_decrypt_to_file(ctx, password, file_name):
     :param file_name: File .gpg to decrypt
     """
     ctx.run(
-        "gpg --yes --passphrase '{}' --no-tty --quiet '{}'".format(password, file_name)
+        "gpg --yes --passphrase '{}' --no-tty --quiet '{}'".format(
+            password, file_name
+        )
     )
 
 
@@ -109,8 +110,10 @@ def check_git_diff(ctx, direct_abort=False):
     except exceptions.Failure:
         if direct_abort:
             exit_msg('Your repository has local changes. Abort.')
-        ask_or_abort('Your repository has local changes, '
-                     'are you sure you want to continue?')
+        ask_or_abort(
+            'Your repository has local changes, '
+            'are you sure you want to continue?'
+        )
 
 
 @contextmanager
@@ -176,7 +179,8 @@ def get_aggregator_repo(submodule_path):
     if not found:
         exit_msg(
             'No submodule found in pending-merges matching path {}'.format(
-                submodule_path)
+                submodule_path
+            )
         )
     return repo
 
@@ -207,6 +211,8 @@ def _git_ignores():
 
 
 GIT_IGNORES = _git_ignores()
+
+
 def get_from_lastpass(ctx, note_id, get_field):
     """Get a value from lastpass.
 
@@ -216,14 +222,14 @@ def get_from_lastpass(ctx, note_id, get_field):
     :return: Value of the field for this note
     """
     return ctx.run(
-            "lpass show {} {}".format(get_field, note_id), hide=True
-        ).stdout.strip()
+        "lpass show {} {}".format(get_field, note_id), hide=True
+    ).stdout.strip()
 
 
 def make_dir(path_dir):
     try:
         os.makedirs(path_dir)
-    except OSError as excpt:
+    except OSError:
         if not os.path.isdir(path_dir):
             msg = (
                 "Directory does not exist and could not be created: {}"

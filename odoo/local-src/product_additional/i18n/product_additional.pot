@@ -46,4 +46,3 @@ msgstr ""
 #: model:ir.model,name:product_additional.model_mrp_bom_line
 msgid "mrp.bom.line"
 msgstr ""
-

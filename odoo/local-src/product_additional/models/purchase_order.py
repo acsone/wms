@@ -19,19 +19,23 @@ class PurchaseOrder(models.Model):
         # Remove existing additional lines. These lines will be
         # recomputed if needed
         existing_additional_lines = self.mapped('order_line').filtered(
-            lambda line: line.is_additional_product)
+            lambda line: line.is_additional_product
+        )
         existing_additional_lines.unlink()
 
         for order in self:
             for line in order.order_line:
                 ratio_main_product = line.product_id.ratio_main_product
-                ratio_additional_product = \
+                ratio_additional_product = (
                     line.product_id.ratio_additional_product
+                )
                 additional_product_id = line.product_id.additional_product_id
 
-                if not ratio_main_product \
-                        or not ratio_additional_product \
-                        or not additional_product_id:
+                if (
+                    not ratio_main_product
+                    or not ratio_additional_product
+                    or not additional_product_id
+                ):
                     continue
 
                 coefficient = int(line.product_qty / ratio_main_product)
@@ -41,19 +45,20 @@ class PurchaseOrder(models.Model):
 
                 # Set the language of the supplier
                 additional_product_lang = additional_product_id.with_context(
-                    lang=order.partner_id.lang,
-                    partner_id=order.partner_id.id,
+                    lang=order.partner_id.lang, partner_id=order.partner_id.id
                 )
 
-                line.copy(default={
-                    'name': additional_product_lang.display_name,
-                    'order_id': order.id,
-                    'price_unit_base': 0,
-                    'product_id': additional_product_id.id,
-                    'product_uom': line.product_uom.id,
-                    'product_qty': additional_product,
-                    'is_additional_product': True,
-                })
+                line.copy(
+                    default={
+                        'name': additional_product_lang.display_name,
+                        'order_id': order.id,
+                        'price_unit_base': 0,
+                        'product_id': additional_product_id.id,
+                        'product_uom': line.product_uom.id,
+                        'product_qty': additional_product,
+                        'is_additional_product': True,
+                    }
+                )
 
     @api.multi
     def button_draft(self):
@@ -67,8 +72,9 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def _remove_additional_lines(self):
-        lines_to_remove = self.mapped('order_line') \
-            .filtered(lambda line: line.is_additional_product)
+        lines_to_remove = self.mapped('order_line').filtered(
+            lambda line: line.is_additional_product
+        )
         lines_to_remove.unlink()
 
     @api.multi

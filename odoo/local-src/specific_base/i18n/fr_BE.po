@@ -34,4 +34,3 @@ msgstr "Fax pour commande"
 #: model:ir.model.fields,field_description:specific_base.field_res_company_order_phone
 msgid "Order phone"
 msgstr "Téléphone pour commande"
-

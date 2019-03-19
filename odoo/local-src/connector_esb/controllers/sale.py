@@ -8,20 +8,19 @@ Respond to calls from the ESB.
 
 """
 
-from datetime import datetime
 import logging
-import werkzeug
+from datetime import datetime
 
 import odoo
-from odoo import http, _
-from odoo.http import request
+import werkzeug
+from odoo import _, http
 from odoo.addons.web.controllers.main import ensure_db
+from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
 
 class SaleController(http.Controller):
-
     @staticmethod
     def _validate_request(jsonrequest):
         errors = []
@@ -70,16 +69,21 @@ class SaleController(http.Controller):
         if missing:
             text = _('Required field(s) missing: %s')
             errors.append(text % ', '.join(['`%s`' % x for x in missing]))
-        if not(isinstance(customer_id, int)
-               or (isinstance(customer_id, basestring)
-                   and customer_id.isdigit())):
+        if not (
+            isinstance(customer_id, int)
+            or (isinstance(customer_id, basestring) and customer_id.isdigit())
+        ):
             text = _('Customer ID must be a number')
             errors.append(text)
         if errors:
             raise werkzeug.exceptions.BadRequest('\n'.join(errors))
 
-    @http.route('/connector_esb/sales_order/create',
-                type='json', auth='user', csrf=False)
+    @http.route(
+        '/connector_esb/sales_order/create',
+        type='json',
+        auth='user',
+        csrf=False,
+    )
     def create_sale_order(self, **kw):
         """ Create a sale order with data received on request
             (Magento or other customers)
@@ -127,16 +131,21 @@ class SaleController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
-        _logger.debug('Calling sales_order/create with data : %s',
-                      request.jsonrequest)
+        _logger.debug(
+            'Calling sales_order/create with data : %s', request.jsonrequest
+        )
         self._validate_request(request.jsonrequest)
         values = request.jsonrequest['params']['data']
         self._validate_create_sale_order(values)
         delayable = env['sale.order'].with_delay()
         delayable.ws_create_new(values)
 
-    @http.route('/connector_esb/sales_order/status',
-                type='json', auth='user', csrf=False)
+    @http.route(
+        '/connector_esb/sales_order/status',
+        type='json',
+        auth='user',
+        csrf=False,
+    )
     def status_sale_order(self, **kw):
         """ Return the status of a sale order
 
@@ -160,8 +169,9 @@ class SaleController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
-        _logger.debug('Calling sales_order/status with data : %s',
-                      request.jsonrequest)
+        _logger.debug(
+            'Calling sales_order/status with data : %s', request.jsonrequest
+        )
         self._validate_request(request.jsonrequest)
         values = request.jsonrequest['params']['data']
         self._validate_status_sale_order(values)
@@ -171,8 +181,8 @@ class SaleController(http.Controller):
 
         backend = env['esb.backend'].sudo().get_singleton()
         with backend.work_on('sale.order') as work:
-            res = work\
-                .component('ws.message.sale.order.status')\
-                .get_message(partner_ref, esb_ref)
+            res = work.component('ws.message.sale.order.status').get_message(
+                partner_ref, esb_ref
+            )
 
         return res

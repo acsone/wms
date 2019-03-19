@@ -2,10 +2,11 @@
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, _
+import logging
+
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -17,11 +18,11 @@ class StockMove(models.Model):
         """ Picking's moves must be assigned to a delivery round to be reserved
         """
         if not self.env.context.get('round_autoset', True):
-            return super(StockMove, self).action_assign(
-                no_prepare=no_prepare)
+            return super(StockMove, self).action_assign(no_prepare=no_prepare)
 
         pick_moves = self.filtered(
-            lambda m: m.picking_id.picking_type_subcode == 'PICK')
+            lambda m: m.picking_id.picking_type_subcode == 'PICK'
+        )
         for picking in pick_moves.mapped('picking_id'):
             if self.env.context.get('round_backorder'):
                 # Do not assign a backorder
@@ -34,23 +35,26 @@ class StockMove(models.Model):
             _logger.debug(
                 "Move reservation (action_assign) is searching a "
                 "round instance for picking %s",
-                picking.id)
+                picking.id,
+            )
 
             shippings = picking._get_all_dest_pickings().filtered(
-                lambda r: r.picking_type_code == 'outgoing' and
-                r.state not in ('cancel', 'done'))
+                lambda r: r.picking_type_code == 'outgoing'
+                and r.state not in ('cancel', 'done')
+            )
             if shippings.mapped('carrier_id.delivery_template_id'):
                 delivery_round = self.env['round.instance'].find_bytemplate(
-                    shippings.mapped('carrier_id.delivery_template_id')[0])
+                    shippings.mapped('carrier_id.delivery_template_id')[0]
+                )
             else:
                 delivery_round = self.env['round.instance'].find_bypartner(
-                    picking.partner_id)
+                    picking.partner_id
+                )
             if delivery_round:
                 delivery_round._assign_pickings(picking)
         other_moves = self - pick_moves
         if other_moves:
-            super(StockMove, other_moves).action_assign(
-                no_prepare=no_prepare)
+            super(StockMove, other_moves).action_assign(no_prepare=no_prepare)
 
     @api.multi
     def action_cancel(self):
@@ -67,8 +71,12 @@ class StockMove(models.Model):
             # when a picking is assigned to a move, we have to ensure the whole
             # group (all dest moves) has the same delivery round
             orig_drs = move.mapped('move_orig_ids').mapped(
-                'picking_id.delivery_round_id')
+                'picking_id.delivery_round_id'
+            )
             if len(orig_drs) > 1:
-                raise ValidationError(_(
-                    "All pickings at destination of a same shipping must "
-                    "be in the same delivery round"))
+                raise ValidationError(
+                    _(
+                        "All pickings at destination of a same shipping must "
+                        "be in the same delivery round"
+                    )
+                )

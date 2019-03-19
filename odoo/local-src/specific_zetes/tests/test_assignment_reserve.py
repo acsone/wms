@@ -2,9 +2,9 @@
 import mock
 
 from .. import constants
-from .zetes_test_classes import ZetesReserveTest, DEFAULT_HEADER
-from ..tools.domain_interface import Parameters
 from ..tools.domain_assignment import Assignment
+from ..tools.domain_interface import Parameters
+from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
 
 OPERATOR_CODE = '99'
 
@@ -15,16 +15,20 @@ class TestAssignemnt(ZetesReserveTest):
 
     def test_01_requ_assignment(self):
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER,
-                            mock.MagicMock(name='Savepoint()'),
-                            request_overwrite=self)
+        domain = Assignment(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'Cri01': self.picking_zone_medoc.code,
-            'Cri02': None,
-            'assignmentType': constants.REASSORT_ASSIGNMENT,
-            'requestType': '1',
-        })
+        request_params.update(
+            {
+                'Cri01': self.picking_zone_medoc.code,
+                'Cri02': None,
+                'assignmentType': constants.REASSORT_ASSIGNMENT,
+                'requestType': '1',
+            }
+        )
 
         # Search for a picking
         result_str = domain.requ(request_params)
@@ -77,28 +81,31 @@ class TestAssignemnt(ZetesReserveTest):
 
         # Try to create an inventory for the product 1
         # No product should be available
-        inventory = self.env['stock.inventory'].create({
-            'name': 'Test',
-            'filter': 'partial',
-        })
-        inventory.line_ids.create({
-            'inventory_id': inventory.id,
-            'product_id': self.product_1.id,
-            'product_qty': 20,
-            'location_id': self.reserve_medoc.id
-        })
+        inventory = self.env['stock.inventory'].create(
+            {'name': 'Test', 'filter': 'partial'}
+        )
+        inventory.line_ids.create(
+            {
+                'inventory_id': inventory.id,
+                'product_id': self.product_1.id,
+                'product_qty': 20,
+                'location_id': self.reserve_medoc.id,
+            }
+        )
         # Start the inventory
         inventory.action_start()
-        self.env.cr.execute(report_query, (self.product_1.id,
-                                           self.picking_zone_medoc.code))
+        self.env.cr.execute(
+            report_query, (self.product_1.id, self.picking_zone_medoc.code)
+        )
         result = self.env.cr.fetchone()
         self.assertFalse(result)
 
         # Now validate the inventory
         # The product 1 should now be available
         inventory.action_done()
-        self.env.cr.execute(report_query, (self.product_1.id,
-                                           self.picking_zone_medoc.code))
+        self.env.cr.execute(
+            report_query, (self.product_1.id, self.picking_zone_medoc.code)
+        )
         result = self.env.cr.fetchone()
         self.assertTrue(result)
         report_id = result[0]
@@ -108,23 +115,31 @@ class TestAssignemnt(ZetesReserveTest):
         # Create the picking
         picking = report.create_picking()
 
-        self.assertEqual(picking.picking_type_id.zetes_picking_type,
-                         constants.REASSORT_ASSIGNMENT)
+        self.assertEqual(
+            picking.picking_type_id.zetes_picking_type,
+            constants.REASSORT_ASSIGNMENT,
+        )
 
         # Check with no current picking
-        domain = Assignment(DEFAULT_HEADER,
-                            mock.MagicMock(name='Savepoint()'),
-                            request_overwrite=self)
+        domain = Assignment(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'Cri01': self.picking_zone_medoc.code,
-            'Cri02': None,
-            'assignmentType': constants.REASSORT_ASSIGNMENT,
-            'requestType': '1',
-        })
+        request_params.update(
+            {
+                'Cri01': self.picking_zone_medoc.code,
+                'Cri02': None,
+                'assignmentType': constants.REASSORT_ASSIGNMENT,
+                'requestType': '1',
+            }
+        )
 
-        self.assertEqual(picking.picking_type_id.zetes_picking_type,
-                         constants.REASSORT_ASSIGNMENT)
+        self.assertEqual(
+            picking.picking_type_id.zetes_picking_type,
+            constants.REASSORT_ASSIGNMENT,
+        )
 
         # Search for a picking
         result_str = domain.requ(request_params)

@@ -11,7 +11,7 @@
         'stock_refill',
         'delivery_rounds',
         'stock_barcode_fix',
-        ],
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/report_stock_refill_arrange.xml',

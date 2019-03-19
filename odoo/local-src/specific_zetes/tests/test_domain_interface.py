@@ -1,31 +1,41 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from .. import constants
-from .zetes_test_classes import ZetesTest, DEFAULT_HEADER, OPERATOR_CODE
 from ..tools.domain_interface import DomainInterface, Parameters
 from ..tools.domain_usercontext import Usercontext
+from .zetes_test_classes import DEFAULT_HEADER, OPERATOR_CODE, ZetesTest
 
 
 class TestDomainInterface(ZetesTest):
-
     def test_domain(self):
         """
         Create a simple domain without any values
         :return:
         """
-        header_unknown_user = ['208030824', '2.2.3', '3iV_101',
-                               'REQU_USERCONTEXT', '111', '1', '20170207',
-                               '072932', '98427733121320']
+        header_unknown_user = [
+            '208030824',
+            '2.2.3',
+            '3iV_101',
+            'REQU_USERCONTEXT',
+            '111',
+            '1',
+            '20170207',
+            '072932',
+            '98427733121320',
+        ]
 
-        domain = DomainInterface(DEFAULT_HEADER,
-                                 mock.MagicMock(name='Savepoint()'),
-                                 request_overwrite=self)
+        domain = DomainInterface(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         self.assertEqual(domain._user.id, self.user.id)
 
         domain_with_unknow_user = DomainInterface(
             header_unknown_user,
             mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self
+            request_overwrite=self,
         )
         self.assertEqual(domain_with_unknow_user._user, self.env['res.users'])
 
@@ -34,9 +44,11 @@ class TestDomainInterface(ZetesTest):
         Create a parameters (from a usercontext domain)
         :return:
         """
-        domain = Usercontext(DEFAULT_HEADER,
-                             mock.MagicMock(name='Savepoint()'),
-                             request_overwrite=self)
+        domain = Usercontext(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         response_params = Parameters(domain)
 
         # Check values
@@ -49,9 +61,10 @@ class TestDomainInterface(ZetesTest):
         self.assertEqual(response_params._action, 'resp')
 
         result_str = response_params.format()
-        result_expected = \
-            ',208030824,2.2.3,3iV_101,RESP_USERCONTEXT,99,1,20170207,072932,' \
+        result_expected = (
+            ',208030824,2.2.3,3iV_101,RESP_USERCONTEXT,99,1,20170207,072932,'
             '98427733121320,,,,,,,,,,,,,,,,,,,'
+        )
         self.assertEqual(result_str, result_expected)
 
     def test_execute_simple_request(self):
@@ -59,13 +72,13 @@ class TestDomainInterface(ZetesTest):
         Try to execute a simple request
         :return:
         """
-        domain = Usercontext(DEFAULT_HEADER,
-                             mock.MagicMock(name='Savepoint()'),
-                             request_overwrite=self)
+        domain = Usercontext(
+            DEFAULT_HEADER,
+            mock.MagicMock(name='Savepoint()'),
+            request_overwrite=self,
+        )
         request_params = Parameters(domain, action='requ')
-        request_params.update({
-            'contextType': '1'
-        })
+        request_params.update({'contextType': '1'})
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
 

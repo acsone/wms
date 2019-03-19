@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 
-from odoo import _, exceptions, api, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class ProductProduct(models.Model):
@@ -18,8 +18,10 @@ class ProductProduct(models.Model):
             for record in self:
                 if record.esb_exported and record.default_code != new_code:
                     raise exceptions.UserError(
-                        _("Reference can't be modified once a product "
-                          "has been exported.")
+                        _(
+                            "Reference can't be modified once a product "
+                            "has been exported."
+                        )
                     )
         return super(ProductProduct, self).write(vals)
 
@@ -27,8 +29,11 @@ class ProductProduct(models.Model):
         for record in self:
             if record.esb_exported:
                 raise exceptions.UserError(
-                    _("The client has already been exported, "
-                      "it can be archived but not deleted."))
+                    _(
+                        "The client has already been exported, "
+                        "it can be archived but not deleted."
+                    )
+                )
         return super(ProductProduct, self).unlink()
 
 
@@ -41,6 +46,6 @@ class ProductTemplate(models.Model):
     def _compute_esb_exported(self):
         for template in self:
             template.esb_exported = any(
-                variant.esb_exported for variant
-                in template.product_variant_ids
+                variant.esb_exported
+                for variant in template.product_variant_ids
             )

@@ -17,21 +17,27 @@ csv-split.py -f odoo/data/sale_order_line.csv -d /tmp -s 4 -k 'order_id/id'
 
 """
 
-import os
 import csv
-
+import os
 from optparse import OptionParser
 
 parser = OptionParser()
 parser.add_option('-f', dest="filename", help="Filename of the csv file")
-parser.add_option('-d', dest="dest_dir",
-                  help="Dirname in which to write the csv files")
-parser.add_option('-s', dest="nb_split", default=0,
-                  help="Number of split to create")
-parser.add_option('-n', dest="file_size", default=0,
-                  help="Number of line per file")
-parser.add_option('-k', dest="key_group", default=None,
-                  help="Key for which entries will be kept in same file")
+parser.add_option(
+    '-d', dest="dest_dir", help="Dirname in which to write the csv files"
+)
+parser.add_option(
+    '-s', dest="nb_split", default=0, help="Number of split to create"
+)
+parser.add_option(
+    '-n', dest="file_size", default=0, help="Number of line per file"
+)
+parser.add_option(
+    '-k',
+    dest="key_group",
+    default=None,
+    help="Key for which entries will be kept in same file",
+)
 
 (options, args) = parser.parse_args()
 csv_path = options.filename
@@ -94,9 +100,11 @@ with open(csv_path) as csv_file:
                 # stop writing in the current file if we have reached
                 # size limit unless there is a group to continue
                 # or we are writing the last file
-                if (line_counter >= file_size and
-                        split_no != nb_split - 1 and
-                        (current_key != last_key or not key_group)):
+                if (
+                    line_counter >= file_size
+                    and split_no != nb_split - 1
+                    and (current_key != last_key or not key_group)
+                ):
                     rejected_row = current_row
                     break
                 writer.writerow(current_row)

@@ -10,7 +10,7 @@
     'depends': [
         'sale_stock',
         'account',
-        ],
+    ],
     'data': [
         'views/account_payment_term.xml',
         'views/stock_picking.xml',

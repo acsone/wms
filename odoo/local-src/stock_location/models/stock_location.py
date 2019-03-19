@@ -20,7 +20,7 @@
 ##############################################################################
 from datetime import date
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 DEFAULT_BIN_CHECKSUM = '12'
 

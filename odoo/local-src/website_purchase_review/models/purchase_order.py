@@ -5,7 +5,7 @@ import logging
 import urllib
 from datetime import datetime
 
-from odoo import api, models, fields
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -17,14 +17,10 @@ class PurchaseOrder(models.Model):
     discount_global_overwrite = fields.Float('Discount global overwrite')
     promotion_supplier_overwrite = fields.Float('Promotion supplier overwrite')
     total_lines = fields.Integer(
-        'Total lines',
-        compute='_compute_total_lines',
-        readonly=True,
+        'Total lines', compute='_compute_total_lines', readonly=True
     )
     total_lines_done = fields.Integer(
-        'Total lines done',
-        compute='_compute_total_lines',
-        readonly=True
+        'Total lines done', compute='_compute_total_lines', readonly=True
     )
 
     @api.multi
@@ -33,7 +29,8 @@ class PurchaseOrder(models.Model):
             purchase.total_lines = len(purchase.order_line)
             purchase.total_lines_done = len(
                 purchase.order_line.filtered(
-                    lambda line: line.is_confirmed_line)
+                    lambda line: line.is_confirmed_line
+                )
             )
 
     @api.multi
@@ -42,17 +39,15 @@ class PurchaseOrder(models.Model):
 
         if self.order_line:
             products = self.order_line.mapped('product_id').sorted(
-                lambda product: product.name)
-            url = "/purchase_review/%s/%s?products_to_order=true" % \
-                  (self.id, products[0].id)
+                lambda product: product.name
+            )
+            url = "/purchase_review/{}/{}?products_to_order=true".format(
+                self.id, products[0].id
+            )
         else:
             url = "/purchase_review/%s" % self.id
 
-        return {
-            'type': 'ir.actions.act_url',
-            'url': url,
-            'target': 'self',
-        }
+        return {'type': 'ir.actions.act_url', 'url': url, 'target': 'self'}
 
     @api.multi
     def set_overwrite_values(self, vals):
@@ -62,23 +57,17 @@ class PurchaseOrder(models.Model):
         if date_planned_str:
             date_planned = datetime.strptime(date_planned_str, "%Y-%m-%d")
             odoo_date_planned_str = fields.Datetime.to_string(date_planned)
-            self.order_line.write({
-                'date_planned': odoo_date_planned_str
-            })
+            self.order_line.write({'date_planned': odoo_date_planned_str})
             self.date_planned_overwrite = odoo_date_planned_str
 
         discount_global = vals.get('global_discount_global')
         if discount_global:
-            self.order_line.write({
-                'discount_global': discount_global
-            })
+            self.order_line.write({'discount_global': discount_global})
             self.discount_global_overwrite = discount_global
 
         promotion_supplier = vals.get('global_promotion_supplier')
         if promotion_supplier:
-            self.order_line.write({
-                'promotion_supplier': promotion_supplier
-            })
+            self.order_line.write({'promotion_supplier': promotion_supplier})
             self.promotion_supplier_overwrite = promotion_supplier
 
     @api.multi
@@ -86,8 +75,7 @@ class PurchaseOrder(models.Model):
         self.ensure_one()
 
         products = self.env['product.product'].search(
-            [('supplier_id', '=', self.partner_id.id)],
-            order='name'
+            [('supplier_id', '=', self.partner_id.id)], order='name'
         )
         products.sorted(key=lambda product: product.default_code)
         all_products = []
@@ -97,8 +85,9 @@ class PurchaseOrder(models.Model):
                 all_products.append(product.additional_product_id)
 
         # Don't set empty line (qty == 0) as ordered product
-        ordered_products = self.order_line\
-            .filtered(lambda line: line.product_qty).mapped('product_id')
+        ordered_products = self.order_line.filtered(
+            lambda line: line.product_qty
+        ).mapped('product_id')
         partner = self.partner_id
 
         result = []
@@ -113,24 +102,31 @@ class PurchaseOrder(models.Model):
 
             is_in_bo = product.immediately_usable_qty < 0
 
-            result.append({
-                'id': product.id,
-                'name': product.name,
-                'display_name': product.display_name,
-                'ref': product.default_code,
-                'ordered_product': product in ordered_products,
-                'with_promo': is_with_promo,
-                'without_promo': is_without_promo,
-                'is_in_bo': is_in_bo,
-            })
+            result.append(
+                {
+                    'id': product.id,
+                    'name': product.name,
+                    'display_name': product.display_name,
+                    'ref': product.default_code,
+                    'ordered_product': product in ordered_products,
+                    'with_promo': is_with_promo,
+                    'without_promo': is_without_promo,
+                    'is_in_bo': is_in_bo,
+                }
+            )
         return result
 
     @api.multi
     def update_or_create_line(self, vals):
         self.ensure_one()
 
-        for key in ('order_id', 'product_id', 'product_qty',
-                    'price_unit_base', 'date_planned'):
+        for key in (
+            'order_id',
+            'product_id',
+            'product_qty',
+            'price_unit_base',
+            'date_planned',
+        ):
             if not vals.get(key):
                 _logger.error('No value for %s' % key)
                 return False
@@ -153,21 +149,27 @@ class PurchaseOrder(models.Model):
             product = self.env['product.product'].browse(vals['product_id'])
             orderpoint_min = orderpoint_min and float(orderpoint_min) or 0.0
             orderpoint_max = orderpoint_max and float(orderpoint_max) or 0.0
-            orderpoint_qty_multiple = \
-                orderpoint_qty_multiple and float(orderpoint_qty_multiple) \
+            orderpoint_qty_multiple = (
+                orderpoint_qty_multiple
+                and float(orderpoint_qty_multiple)
                 or 0.0
-            product.sudo().write({
-                'orderpoint_min': orderpoint_min,
-                'orderpoint_max': orderpoint_max,
-                'orderpoint_qty_multiple': orderpoint_qty_multiple,
-            })
+            )
+            product.sudo().write(
+                {
+                    'orderpoint_min': orderpoint_min,
+                    'orderpoint_max': orderpoint_max,
+                    'orderpoint_qty_multiple': orderpoint_qty_multiple,
+                }
+            )
 
         PurchaseOrderLine = self.env['purchase.order.line']
 
-        existing_line = PurchaseOrderLine.search([
-            ('order_id', '=', vals['order_id']),
-            ('product_id', '=', vals['product_id'])],
-            limit=1
+        existing_line = PurchaseOrderLine.search(
+            [
+                ('order_id', '=', vals['order_id']),
+                ('product_id', '=', vals['product_id']),
+            ],
+            limit=1,
         )
         if existing_line:
             vals.pop('order_id')

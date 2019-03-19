@@ -2,7 +2,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models, fields
+from odoo import api, fields, models
 
 
 class AccountCutoff(models.Model):
@@ -20,8 +20,7 @@ class AccountCutoff(models.Model):
 
     @api.multi
     def _prepare_provision_line(self, cutoff_line):
-        res = super(AccountCutoff, self)._prepare_provision_line(
-            cutoff_line)
+        res = super(AccountCutoff, self)._prepare_provision_line(cutoff_line)
         res['categ_id'] = cutoff_line.product_id.categ_id.id
         return res
 
@@ -29,7 +28,4 @@ class AccountCutoff(models.Model):
 class AccountCutoffLine(models.Model):
     _inherit = 'account.cutoff.line'
 
-    categ_id = fields.Many2one(
-        related='product_id.categ_id',
-        readonly=True,
-    )
+    categ_id = fields.Many2one(related='product_id.categ_id', readonly=True)

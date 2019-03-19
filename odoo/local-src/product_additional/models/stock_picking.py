@@ -3,9 +3,10 @@
 # Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+
 from odoo import api, models
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -35,7 +36,8 @@ class StockPicking(models.Model):
         :return:
         """
         result = super(StockPicking, self)._prepare_pack_ops(
-            quants, forced_qties)
+            quants, forced_qties
+        )
         if self.env.context.get('skip_additional'):
             return result
 
@@ -87,9 +89,8 @@ class StockPicking(models.Model):
             # Create move
             picking = self.env['stock.picking'].browse(picking_id)
             move_vals = {
-                'name': u"ADDITIONAL PRODUCT: %s (FROM %s)" % (
-                    additional_product.display_name, product.display_name
-                ),
+                'name': u"ADDITIONAL PRODUCT: %s (FROM %s)"
+                % (additional_product.display_name, product.display_name),
                 'sequence': 9999,
                 'product_id': additional_product.id,
                 'product_uom_qty': qty_add,
@@ -106,7 +107,10 @@ class StockPicking(models.Model):
             move_add = self.env['stock.move'].create(move_vals)
             _logger.debug(
                 "Created additional move %s (qty=%s) in the pickings %s",
-                move_add.id, qty_add, picking.id)
+                move_add.id,
+                qty_add,
+                picking.id,
+            )
             for packop in packops:
                 packop['additional_move_id'] = move_add.id
             additional_moves |= move_add
@@ -116,8 +120,9 @@ class StockPicking(models.Model):
             additional_moves.action_confirm()
             additional_moves.action_assign(no_prepare=True)
             additional_quants = additional_moves.mapped('reserved_quant_ids')
-            additional_result = super(StockPicking, self).\
-                _prepare_pack_ops(additional_quants, {})
+            additional_result = super(StockPicking, self)._prepare_pack_ops(
+                additional_quants, {}
+            )
             result += additional_result
 
         return result

@@ -10,7 +10,7 @@
     'category': 'Accounting & Finance',
     'depends': [
         'account_invoice_accrual',
-        ],
+    ],
     'data': [
         'data/ir_cron.xml',
     ],

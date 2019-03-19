@@ -8,6 +8,4 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    create_invoice_on_transfer = fields.Boolean(
-        default=False,
-    )
+    create_invoice_on_transfer = fields.Boolean(default=False)

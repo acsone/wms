@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class Picking(models.Model):
@@ -29,7 +29,8 @@ class Picking(models.Model):
         ).read()[0]
         context = eval(action_data.get('context', '{}'))
         context['default_team_id'] = self.env.ref(
-            'specific_helpdesk.supplier_team').id
+            'specific_helpdesk.supplier_team'
+        ).id
         action_data['context'] = str(context)
         action_data['domain'] = [('stock_picking_id', '=', self.id)]
         return action_data
@@ -39,10 +40,11 @@ class Picking(models.Model):
         """Show existing ticket or offer to create a new one"""
         self.ensure_one()
         if self.helpdesk_tickets_count == 0:
-            r = self.env['create.helpdesk.ticket'].create({
-                'stock_picking_id': self.id
-            })
+            r = self.env['create.helpdesk.ticket'].create(
+                {'stock_picking_id': self.id}
+            )
             return self.env['helpdesk.ticket'].new_one(r)
         else:
             return self.env['helpdesk.ticket'].show_existing(
-                [('stock_picking_id', '=', self.id)])
+                [('stock_picking_id', '=', self.id)]
+            )

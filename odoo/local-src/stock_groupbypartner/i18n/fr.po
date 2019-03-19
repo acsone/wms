@@ -24,4 +24,3 @@ msgstr "Poids maximal"
 #: model:ir.model.fields,field_description:stock_groupbypartner.field_stock_picking_type_groupbypartner
 msgid "Use existing picking having same partner"
 msgstr "Utilise les bons de transfert existant qui ont le même partenaire"
-

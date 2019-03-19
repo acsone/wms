@@ -153,4 +153,3 @@ msgstr "donnés"
 #: model:ir.ui.view,arch_db:product_additional.product_template_form_view
 msgid "products,"
 msgstr "produits,"
-

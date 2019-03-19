@@ -3,17 +3,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
+
 from .common import ESBXMLTestCase
 
 
 class ExportCustomerAddressTestCase(ESBXMLTestCase):
-
     def setUp(self):
         super(ExportCustomerAddressTestCase, self).setUp()
         self.setup_records()
         self.maxDiff = None
         self.timestamp = self.env.ref(
-                'connector_esb.esb_timestamp_customer_address')
+            'connector_esb.esb_timestamp_customer_address'
+        )
 
     @property
     def model(self):
@@ -26,76 +27,88 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
         self.country_no_ref.esb_ref = ''
         self.all_records = self.model.browse()
         # Create a customer with an invoicing address but no delivery address
-        self.main_partner = self.model.create({
-            'name': 'Company 1',
-            'street': 'Main Street, 2',
-            'ref': '1231',
-            'zip': '999888',
-            'city': 'Armagedon',
-            'country_id': 44,
-            'email': 'test@test.be',
-        })
+        self.main_partner = self.model.create(
+            {
+                'name': 'Company 1',
+                'street': 'Main Street, 2',
+                'ref': '1231',
+                'zip': '999888',
+                'city': 'Armagedon',
+                'country_id': 44,
+                'email': 'test@test.be',
+            }
+        )
         self.all_records |= self.main_partner
-        self.main_partner_invoice = self.model.create({
-            'ref': '1232',
-            'name': 'invoicing-address',
-            'street': 'Some streets in one line',
-            'street2': '',
-            'zip': 'xyz',
-            'city': 'Somewhere very far away',
-            'country_id': 44,
-            'phone': '021123123',
-            'fax': '',
-            'parent_id': self.main_partner.id,
-            'type': 'invoice'
-        })
+        self.main_partner_invoice = self.model.create(
+            {
+                'ref': '1232',
+                'name': 'invoicing-address',
+                'street': 'Some streets in one line',
+                'street2': '',
+                'zip': 'xyz',
+                'city': 'Somewhere very far away',
+                'country_id': 44,
+                'phone': '021123123',
+                'fax': '',
+                'parent_id': self.main_partner.id,
+                'type': 'invoice',
+            }
+        )
         self.all_records |= self.main_partner_invoice
         # Create a customer with a delivery address
-        self.partner_2 = self.model.create({
-            'name': 'Company 2',
-            'street': 'Main Street, 2',
-            'ref': '999888',
-            'zip': '123123',
-            'city': 'Paradise',
-            'country_id': 44,
-            'email': 'test2@test.be',
-        })
-        self.partner_2_delivery = self.model.create({
-            'ref': '1233',
-            'name': 'delivery-address',
-            'street': 'street 1',
-            'street2': '',
-            'zip': 'zip',
-            'city': 'TheCity',
-            'country_id': 44,
-            'parent_id': self.partner_2.id,
-            'type': 'delivery'
-        })
+        self.partner_2 = self.model.create(
+            {
+                'name': 'Company 2',
+                'street': 'Main Street, 2',
+                'ref': '999888',
+                'zip': '123123',
+                'city': 'Paradise',
+                'country_id': 44,
+                'email': 'test2@test.be',
+            }
+        )
+        self.partner_2_delivery = self.model.create(
+            {
+                'ref': '1233',
+                'name': 'delivery-address',
+                'street': 'street 1',
+                'street2': '',
+                'zip': 'zip',
+                'city': 'TheCity',
+                'country_id': 44,
+                'parent_id': self.partner_2.id,
+                'type': 'delivery',
+            }
+        )
         # Create a supplier that should not be picked by the tests
-        self.supplier_1 = self.model.create({
-            'name': 'Supplier 1',
-            'street': 'Main Street, 2',
-            'ref': '123122424234',
-            'zip': '999888',
-            'city': 'Sale City',
-            'country_id': 44,
-            'supplier': True,
-            'customer': False,
-        })
+        self.supplier_1 = self.model.create(
+            {
+                'name': 'Supplier 1',
+                'street': 'Main Street, 2',
+                'ref': '123122424234',
+                'zip': '999888',
+                'city': 'Sale City',
+                'country_id': 44,
+                'supplier': True,
+                'customer': False,
+            }
+        )
         # And a delivery address for it that should not come up either
-        self.supplier_1_delivery = self.model.create({
-            'ref': '1233983298324089234',
-            'name': 'delivery-address',
-            'street': 'H-Street 432',
-            'street2': '',
-            'zip': 'zip',
-            'city': 'DaCity',
-            'country_id': 44,
-            'parent_id': self.supplier_1.id,
-            'type': 'delivery',
-            'supplier': True,
-            'customer': False,
-        })
+        self.supplier_1_delivery = self.model.create(
+            {
+                'ref': '1233983298324089234',
+                'name': 'delivery-address',
+                'street': 'H-Street 432',
+                'street2': '',
+                'zip': 'zip',
+                'city': 'DaCity',
+                'country_id': 44,
+                'parent_id': self.supplier_1.id,
+                'type': 'delivery',
+                'supplier': True,
+                'customer': False,
+            }
+        )
 
     def test_filename(self):
         self.check_filename('CustomerAddress_{0}_{1}.xml')
@@ -115,15 +128,15 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'IsDefaultShipping': False,
         }
         rec = self.main_partner_invoice
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
                 mapper.map_record(rec).values(
-                    customer_id=self.main_partner.ref,
-                    address_kind='invoice'
+                    customer_id=self.main_partner.ref, address_kind='invoice'
                 ),
-                expected
+                expected,
             )
 
     def test_mapper_for_shipping_address_without(self):
@@ -144,15 +157,15 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'IsDefaultShipping': True,
         }
         rec = self.main_partner
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
                 mapper.map_record(rec).values(
-                    customer_id=self.main_partner.ref,
-                    address_kind='delivery'
+                    customer_id=self.main_partner.ref, address_kind='delivery'
                 ),
-                expected
+                expected,
             )
 
     def test_mapper_for_shipping_address_with(self):
@@ -174,103 +187,117 @@ class ExportCustomerAddressTestCase(ESBXMLTestCase):
             'IsDefaultShipping': True,
         }
         rec = self.partner_2_delivery
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             mapper = work.component(usage='export.mapper')
             self.assertDictEqual(
                 mapper.map_record(rec).values(
-                    customer_id=self.partner_2.ref,
-                    address_kind='delivery',
+                    customer_id=self.partner_2.ref, address_kind='delivery'
                 ),
-                expected
+                expected,
             )
 
     def test_export(self):
         """ Run export and compare with example file"""
         self.timestamp.writer = 'local'
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             respath = exporter.run()
             self.addCleanup(os.remove, respath)
             with open(respath, 'r') as result_file:
                 result = result_file.read()
             self.assertXmlEquivalentData(
-                result,
-                self.read_test_file('customer_address_1.xml'),
-                'City')
+                result, self.read_test_file('customer_address_1.xml'), 'City'
+            )
 
     def test_address_incomplete(self):
         """Check that customer with incomplete address are not exported"""
         # Get all existing possible addresses
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             possible_addresses = exporter.get_items(None)
         # Create some invalid ones
         # Partner with no name
-        self.model.create({
-            'name': '',
-            'commercial_partner_id': self.main_partner.id,
-            'street': 'Main Street, 2',
-            'ref': '991',
-            'zip': '123123',
-            'city': 'Paradise',
-            'country_id': 44,
-            'customer': True,
-            'type': 'invoice',
-        })
+        self.model.create(
+            {
+                'name': '',
+                'commercial_partner_id': self.main_partner.id,
+                'street': 'Main Street, 2',
+                'ref': '991',
+                'zip': '123123',
+                'city': 'Paradise',
+                'country_id': 44,
+                'customer': True,
+                'type': 'invoice',
+            }
+        )
         # Partner with no street
-        self.model.create({
-            'name': 'no street',
-            'street': '',
-            'ref': '992',
-            'zip': '123123',
-            'city': 'Paradise',
-            'country_id': 44,
-            'type': 'delivery',
-            'customer': True,
-        })
+        self.model.create(
+            {
+                'name': 'no street',
+                'street': '',
+                'ref': '992',
+                'zip': '123123',
+                'city': 'Paradise',
+                'country_id': 44,
+                'type': 'delivery',
+                'customer': True,
+            }
+        )
         # Partner with no zip
-        self.model.create({
-            'name': 'no zip',
-            'street': 'street',
-            'ref': '993',
-            'zip': None,
-            'city': 'Paradise',
-            'country_id': 44,
-            'commercial_partner_id': self.main_partner.id,
-            'type': 'delivery',
-        })
+        self.model.create(
+            {
+                'name': 'no zip',
+                'street': 'street',
+                'ref': '993',
+                'zip': None,
+                'city': 'Paradise',
+                'country_id': 44,
+                'commercial_partner_id': self.main_partner.id,
+                'type': 'delivery',
+            }
+        )
         # Partner with no city
-        self.model.create({
-            'name': 'no zip',
-            'street': 'street',
-            'ref': '994',
-            'zip': '2342342',
-            'city': '',
-            'country_id': 44,
-        })
+        self.model.create(
+            {
+                'name': 'no zip',
+                'street': 'street',
+                'ref': '994',
+                'zip': '2342342',
+                'city': '',
+                'country_id': 44,
+            }
+        )
         # Partner with no country
-        self.model.create({
-            'name': 'no zip',
-            'street': 'street',
-            'ref': '995',
-            'zip': '2342342',
-            'city': 'Ville',
-        })
+        self.model.create(
+            {
+                'name': 'no zip',
+                'street': 'street',
+                'ref': '995',
+                'zip': '2342342',
+                'city': 'Ville',
+            }
+        )
         # Partner with country without esb_ref
-        self.model.create({
-            'name': 'no zip',
-            'street': 'street',
-            'ref': '996',
-            'zip': '2342342',
-            'city': 'CiTy',
-            'country_id': self.country_no_ref.id
-        })
+        self.model.create(
+            {
+                'name': 'no zip',
+                'street': 'street',
+                'ref': '996',
+                'zip': '2342342',
+                'city': 'CiTy',
+                'country_id': self.country_no_ref.id,
+            }
+        )
 
-        with self.backend.work_on(self.model._name,
-                                  timestamp=self.timestamp) as work:
+        with self.backend.work_on(
+            self.model._name, timestamp=self.timestamp
+        ) as work:
             exporter = work.component(usage='record.exporter.cron')
             items = exporter.get_items(None)
         self.assertEqual(len(items), len(possible_addresses))

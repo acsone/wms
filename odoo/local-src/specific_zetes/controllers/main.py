@@ -3,22 +3,24 @@ import importlib
 import logging
 
 from odoo import http
-from odoo.http import request
 from odoo.addons.web.controllers.main import Home
+from odoo.http import request
 
-from ..tools.domain_interface import Parameters, Savepoint
 from .. import constants
+from ..tools.domain_interface import Parameters, Savepoint
 
 _logger = logging.getLogger(__name__)
 
 
 class Zetes(Home):
-    @http.route('/zetes',
-                type='http',
-                methods=['POST'],
-                auth='none',
-                website=True,
-                csrf=False)
+    @http.route(
+        '/zetes',
+        type='http',
+        methods=['POST'],
+        auth='none',
+        website=True,
+        csrf=False,
+    )
     def wrapper(self, **kw):
         cmd = request.httprequest.data
 
@@ -28,8 +30,8 @@ class Zetes(Home):
         # We need to remove this comma before split the request
         params = cmd[:-1].split(',')
         # Split the request in two parts (header and values)
-        header = params[:len(constants.HEADER_LABELS)]
-        values = params[len(constants.HEADER_LABELS):]
+        header = params[: len(constants.HEADER_LABELS)]
+        values = params[len(constants.HEADER_LABELS) :]
 
         # Retrieve the command and the the domain
         # The msgType (command + domain) is always the fourth element
@@ -42,9 +44,9 @@ class Zetes(Home):
         # Create the handler
         # If the domain is itempick the module name will be
         # openerp.addons.specific_zetes.tools.domain_itempick
-        module_name = \
-            'odoo.addons.specific_zetes.tools.domain_{}'.format(
-                domain.lower())
+        module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
+            domain.lower()
+        )
         # Retrieve the class inherited from DomainInterface
         # e.g: domain == 'itempick' => Create an instance of Itempick(header)
         module_obj = importlib.import_module(module_name)
@@ -54,9 +56,9 @@ class Zetes(Home):
 
             # Create the parameter instance with all values received in the
             # request
-            parameter_obj = Parameters(instance,
-                                       action=command.upper(),
-                                       values=values)
+            parameter_obj = Parameters(
+                instance, action=command.upper(), values=values
+            )
             # Execute the the method
             # e.g: if the msgType is REQU_ITEMPICK
             # domain: itempick
@@ -78,8 +80,7 @@ class Zetes(Home):
         return request.make_response(result, [('Content-Type', mimetype)])
 
     # TODO This method is only for TESTS but don't remove it.
-    @http.route('/display_values', type='http',
-                auth="public", website=True)
+    @http.route('/display_values', type='http', auth="public", website=True)
     def display_values(self, **kwargs):
         """
         !!! This method is only for development/test !!!
@@ -114,9 +115,9 @@ class Zetes(Home):
             actions = [action[0] for action in constants.ZETES_ACTIONS]
 
         for domain in domains:
-            module_name = \
-                'odoo.addons.specific_zetes.tools.domain_{}'.format(
-                    domain.lower())
+            module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
+                domain.lower()
+            )
             module_obj = importlib.import_module(module_name)
 
             # Create an instance of the domain and call the method _init_

@@ -23,7 +23,8 @@ def fix_lots(ctx):
 
     lot_to_unlink = spl.browse()
 
-    ctx.env.cr.execute("""
+    ctx.env.cr.execute(
+        """
         select distinct q.lot_id
          , spl.name
          , spl.product_id AS bad_product_id
@@ -31,11 +32,13 @@ def fix_lots(ctx):
         from stock_quant q
         join stock_production_lot spl on spl.id=q.lot_id
         where q.product_id!=spl.product_id
-    """)
+    """
+    )
     for line in ctx.env.cr.dictfetchall():
-        ctx.log_line("Lot %s has product_id %s instead of %s" %
-                     (line['lot_id'], line['bad_product_id'],
-                      line['good_product_id']))
+        ctx.log_line(
+            "Lot %s has product_id %s instead of %s"
+            % (line['lot_id'], line['bad_product_id'], line['good_product_id'])
+        )
         bad_lot = spl.browse(line['lot_id'])
         bad_lot_product_ids = bad_lot.mapped('quant_ids.product_id').ids
         if line['bad_product_id'] in bad_lot_product_ids:
@@ -45,23 +48,27 @@ def fix_lots(ctx):
             keep_bad_lot = False
 
         # Does the right lot already exist?
-        good_lot = spl.search([
-            ('name', '=', line['name']),
-            ('product_id', '=', line['good_product_id'])
-            ])
+        good_lot = spl.search(
+            [
+                ('name', '=', line['name']),
+                ('product_id', '=', line['good_product_id']),
+            ]
+        )
         if not good_lot and keep_bad_lot:
             # Then we need to deduplicate the lot
             ctx.log_line("- deduplicate lot")
-            good_lot = bad_lot.copy(
-                {'product_id': line['good_product_id']})
+            good_lot = bad_lot.copy({'product_id': line['good_product_id']})
         elif not good_lot and not keep_bad_lot:
             # We can simply fix the product_id on the lot
             ctx.log_line("- fixing lot directly")
-            ctx.env.cr.execute("""
+            ctx.env.cr.execute(
+                """
                 UPDATE stock_production_lot
                 SET product_id = %s
                 WHERE id = %s
-            """, (line['good_product_id'], line['lot_id']))
+            """,
+                (line['good_product_id'], line['lot_id']),
+            )
 
         else:
             ctx.log_line("- replacing links with lot %s" % good_lot.id)
@@ -70,20 +77,23 @@ def fix_lots(ctx):
                 where = " WHERE " + column + "=%s "
 
                 query = "SELECT count(*) FROM " + table + where
-                ctx.env.cr.execute(query, (bad_lot.id, ))
+                ctx.env.cr.execute(query, (bad_lot.id,))
                 count = ctx.env.cr.fetchone()[0]
                 if not count:
                     continue
 
                 join = ""
                 if table in product_fields:
-                    where += "AND %s=%s" % (product_fields[table],
-                                            line['good_product_id'])
+                    where += "AND {}={}".format(
+                        product_fields[table], line['good_product_id']
+                    )
                 elif table in template_fields:
                     product = ctx.env['product.product'].browse(
-                        line['good_product_id'])
-                    where += "AND %s=%s" % (template_fields[table],
-                                            product.product_tmpl_id.id)
+                        line['good_product_id']
+                    )
+                    where += "AND {}={}".format(
+                        template_fields[table], product.product_tmpl_id.id
+                    )
                 elif table == 'stock_pack_operation_lot':
                     join += """
                         JOIN stock_pack_operation spo
@@ -91,19 +101,26 @@ def fix_lots(ctx):
                         """
                     where += "AND spo.product_id=%s" % line['good_product_id']
                 else:
-                    ctx.log_line("- skipping %s rows in table %s" %
-                                 (count, table))
+                    ctx.log_line(
+                        "- skipping {} rows in table {}".format(count, table)
+                    )
                     continue
 
                 query = "SELECT " + table + ".id FROM " + table + join + where
-                ctx.env.cr.execute(query, (bad_lot.id, ))
+                ctx.env.cr.execute(query, (bad_lot.id,))
                 ids = tuple([x[0] for x in ctx.env.cr.fetchall()])
                 if not ids:
                     continue
-                ctx.log_line("- fixing ids %s in table %s" % (ids, table))
+                ctx.log_line("- fixing ids {} in table {}".format(ids, table))
 
-                query = ("UPDATE " + table + " SET " + column + "=%s" +
-                         " WHERE id in %s")
+                query = (
+                    "UPDATE "
+                    + table
+                    + " SET "
+                    + column
+                    + "=%s"
+                    + " WHERE id in %s"
+                )
                 ctx.log_line("  " + query % (good_lot.id, ids))
                 ctx.env.cr.execute(query, (good_lot.id, ids))
 

@@ -3,10 +3,10 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from lxml import etree
 import json
 
-from odoo import models, fields, api
+from lxml import etree
+from odoo import api, fields, models
 
 
 class StockMove(models.Model):
@@ -14,27 +14,35 @@ class StockMove(models.Model):
 
     # This field is only used for information
     serial_number = fields.Char(
-        'Serial number', readonly=True,
-        help='For delivery order only')
+        'Serial number', readonly=True, help='For delivery order only'
+    )
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
-                        submenu=False):
+    def fields_view_get(
+        self, view_id=None, view_type='form', toolbar=False, submenu=False
+    ):
         """Display serial number + edit button only on delivery order
         (i.e.  destination location = customer location)
         """
         res = super(StockMove, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar,
-            submenu=submenu)
+            view_id=view_id,
+            view_type=view_type,
+            toolbar=toolbar,
+            submenu=submenu,
+        )
         if view_type != 'tree':
             return res
         customer_location = self.env.ref('stock.stock_location_customers')
-        if (self.env.context.get('default_location_dest_id') !=
-                customer_location.id):
+        if (
+            self.env.context.get('default_location_dest_id')
+            != customer_location.id
+        ):
             return res
         arch = etree.XML(res['arch'])
-        for node in arch.xpath("//field[@name='serial_number'] | "
-                               "//button[@name='button_edit_serial_number']"):
+        for node in arch.xpath(
+            "//field[@name='serial_number'] | "
+            "//button[@name='button_edit_serial_number']"
+        ):
             if node.get('modifiers'):
                 modifiers = json.loads(node.get('modifiers'))
                 modifiers['tree_invisible'] = False
@@ -44,5 +52,6 @@ class StockMove(models.Model):
 
     @api.multi
     def button_edit_serial_number(self):
-        return self.env.ref('specific_report.action_edit_serial_number')\
-            .read()[0]
+        return self.env.ref(
+            'specific_report.action_edit_serial_number'
+        ).read()[0]

@@ -3,8 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 
-from odoo import fields, models, api
-from .utils import install_trgm_extension, create_index
+from odoo import api, fields, models
+
+from .utils import create_index, install_trgm_extension
 
 
 class AccountInvoice(models.Model):
@@ -19,10 +20,18 @@ class AccountInvoice(models.Model):
 
         if trgm_installed:
             index_name = 'account_invoice_origin_gin_trgm'
-            create_index(self.env.cr, index_name, self._table,
-                         'USING gin (origin gin_trgm_ops)')
+            create_index(
+                self.env.cr,
+                index_name,
+                self._table,
+                'USING gin (origin gin_trgm_ops)',
+            )
 
         # default list view sort by those fields desc
         index_name = 'account_invoice_list_sort_index'
-        create_index(self.env.cr, index_name, self._table,
-                     '(date_invoice desc, number desc, id desc) ')
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            '(date_invoice desc, number desc, id desc) ',
+        )

@@ -62,34 +62,34 @@ class ProductSupplierInfo(models.Model):
     def _is_promotion_buyx_gety(self):
         """Is it a valid promotion buyx gety."""
         self.ensure_one()
-        return (self.ratio_main_product and
-                self.ratio_promotional_product and
-                self.date_start and
-                self.date_end)
+        return (
+            self.ratio_main_product
+            and self.ratio_promotional_product
+            and self.date_start
+            and self.date_end
+        )
 
     @api.multi
     def _is_promotion_special(self):
         """Is it a valid special promotion"""
         self.ensure_one()
-        return (self.discount_sale and
-                self.date_start and
-                self.date_end)
+        return self.discount_sale and self.date_start and self.date_end
 
     @api.model
     def _is_modifying_buyx_gety_promotion(self, vals):
         """Is one of the field of the promotion being modified."""
-        impacting_fields = set(['ratio_main_product',
-                                'ratio_promotional_product',
-                                'date_start',
-                                'date_end'])
+        impacting_fields = {
+            'ratio_main_product',
+            'ratio_promotional_product',
+            'date_start',
+            'date_end',
+        }
         return len(impacting_fields & set(vals.keys()))
 
     @api.model
     def _is_modifying_special_promotion(self, vals):
         """Is one of the field of special promotion being modified."""
-        impacting_fields = set(['discount_sale',
-                                'date_start',
-                                'date_end'])
+        impacting_fields = {'discount_sale', 'date_start', 'date_end'}
         return len(impacting_fields & set(vals.keys()))
 
     @api.multi

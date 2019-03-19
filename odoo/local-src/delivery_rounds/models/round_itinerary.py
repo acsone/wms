@@ -14,15 +14,16 @@ class RoundItinerary(models.Model):
     code = fields.Char('Code', required=True)
     color = fields.Integer('Color Index')
     partner_position_ids = fields.One2many(
-        'round.itinerary.position', 'itinerary_id', 'Partners')
-    template_ids = fields.Many2many(
-        'round.template',
-        string='Vehicle')
-    partner_ids = fields.Many2many('res.partner',
-                                   string='Partners',
-                                   compute='_compute_partner_ids',
-                                   search='_search_partner_ids',
-                                   readonly=True)
+        'round.itinerary.position', 'itinerary_id', 'Partners'
+    )
+    template_ids = fields.Many2many('round.template', string='Vehicle')
+    partner_ids = fields.Many2many(
+        'res.partner',
+        string='Partners',
+        compute='_compute_partner_ids',
+        search='_search_partner_ids',
+        readonly=True,
+    )
 
     @api.multi
     def _compute_partner_ids(self):
@@ -39,7 +40,8 @@ class RoundItinerary(models.Model):
         """
 
         positions = self.env['round.itinerary.position'].search(
-            [('partner_id.name', operator, value)])
+            [('partner_id.name', operator, value)]
+        )
 
         return [('partner_position_ids', 'in', positions.ids)]
 
@@ -49,24 +51,26 @@ class RoundItineraryPosition(models.Model):
     _order = 'sequence'
 
     itinerary_id = fields.Many2one(
-        'round.itinerary', 'Itinerary',
-        ondelete='cascade')
+        'round.itinerary', 'Itinerary', ondelete='cascade'
+    )
     sequence = fields.Integer('Sequence')
     partner_id = fields.Many2one(
-        'res.partner', 'Partner',
+        'res.partner',
+        'Partner',
         required=True,
         ondelete='restrict',
         domain=['|', ('customer', '=', True), ('type', '=', 'delivery')],
-        index=True)
-    partner_zip = fields.Char('Partner ZIP',
-                              related='partner_id.zip',
-                              readonly=True)
-    partner_city = fields.Char('Partner city',
-                               related='partner_id.city',
-                               readonly=True)
-    partner_street = fields.Char('Partner street',
-                                 related='partner_id.street',
-                                 readonly=True)
+        index=True,
+    )
+    partner_zip = fields.Char(
+        'Partner ZIP', related='partner_id.zip', readonly=True
+    )
+    partner_city = fields.Char(
+        'Partner city', related='partner_id.city', readonly=True
+    )
+    partner_street = fields.Char(
+        'Partner street', related='partner_id.street', readonly=True
+    )
     tag_ids = fields.Many2many('round.tag', string='Tags')
 
     @api.multi
@@ -76,16 +80,15 @@ class RoundItineraryPosition(models.Model):
         for rec in self:
             name = rec.itinerary_id.name
             tags = '/'.join(
-                rec.tag_ids
-                .with_context(short_round_tag_name=True)
-                .mapped('display_name'))
+                rec.tag_ids.with_context(short_round_tag_name=True).mapped(
+                    'display_name'
+                )
+            )
             if tags:
                 name += ' (%s)' % tags
-            templates = (
-                rec.itinerary_id.template_ids
-                .with_context(short_round_template_name=True,
-                              show_round_template_tags=True)
-                .mapped('display_name'))
+            templates = rec.itinerary_id.template_ids.with_context(
+                short_round_template_name=True, show_round_template_tags=True
+            ).mapped('display_name')
             if templates:
                 name += ' [%s]' % ', '.join(templates)
             result.append((rec.id, name))
@@ -96,6 +99,6 @@ class RoundItineraryPosition(models.Model):
         if name:
             name = name.split(' ', 1)[0]
         res = self.search(
-            args + [('itinerary_id.name', operator, name)],
-            limit=limit)
+            args + [('itinerary_id.name', operator, name)], limit=limit
+        )
         return res.name_get()

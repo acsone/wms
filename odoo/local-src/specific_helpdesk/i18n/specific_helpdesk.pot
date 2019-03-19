@@ -179,4 +179,3 @@ msgstr ""
 #: model:ir.model,name:specific_helpdesk.model_stock_picking
 msgid "Transfer"
 msgstr ""
-

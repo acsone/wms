@@ -30,8 +30,9 @@ class Converter:
 
         suppliers_values = {}
         with open(FILE_NAME_IN, 'rb') as csvfile:
-            lines = \
-                csv.reader(csvfile, delimiter=DELIMITER, quotechar=QUOTECHAR)
+            lines = csv.reader(
+                csvfile, delimiter=DELIMITER, quotechar=QUOTECHAR
+            )
 
             if not lines:
                 raise Exception("The file is empty")
@@ -48,11 +49,13 @@ class Converter:
 
                 purchase_manager = line[manager_index]
                 if purchase_manager in USERS_MAPPING.keys():
-                    supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = \
-                        USERS_MAPPING[purchase_manager]
+                    supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = USERS_MAPPING[
+                        purchase_manager
+                    ]
                 else:
-                    supplier_days[ODOO_FIELD_PURCHASE_MANAGER] = \
-                        BACKUP_RESPONSIBLE
+                    supplier_days[
+                        ODOO_FIELD_PURCHASE_MANAGER
+                    ] = BACKUP_RESPONSIBLE
 
                 for field_day in DAYS_MAPPING.values():
                     day_value = line[getattr(self, field_day)]
@@ -72,7 +75,7 @@ class Converter:
         for supplier_ref, supplier_values in suppliers_values.iteritems():
             csv_line = [
                 '__import__.supplier_%s' % supplier_ref,
-                supplier_values[ODOO_FIELD_PURCHASE_MANAGER]
+                supplier_values[ODOO_FIELD_PURCHASE_MANAGER],
             ]
             for field_day in DAYS_MAPPING.values():
                 csv_line.append(supplier_values[field_day])

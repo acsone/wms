@@ -32,31 +32,41 @@ def generate(ctx, addon_path, update_po=True):
         os.mkdir(i18n_dir)
     container_po_path = os.path.join(container_path, '%s.po' % addon)
     user_id = ctx.run('id --user', hide='both').stdout.strip()
-    cmd = ('docker-compose run --rm  -e LOCAL_USER_ID=%(user)s '
-           '-e DEMO=False -e MIGRATE=False odoo odoo '
-           '--log-level=warn --workers=0 '
-           '--database %(dbname)s --i18n-export=%(path)s '
-           '--modules=%(addon)s --stop-after-init --without-demo=all '
-           '--init=%(addon)s') % {'user': user_id, 'path': container_po_path,
-                                  'dbname': dbname, 'addon': addon}
+    cmd = (
+        'docker-compose run --rm  -e LOCAL_USER_ID=%(user)s '
+        '-e DEMO=False -e MIGRATE=False odoo odoo '
+        '--log-level=warn --workers=0 '
+        '--database %(dbname)s --i18n-export=%(path)s '
+        '--modules=%(addon)s --stop-after-init --without-demo=all '
+        '--init=%(addon)s'
+    ) % {
+        'user': user_id,
+        'path': container_po_path,
+        'dbname': dbname,
+        'addon': addon,
+    }
     ctx.run(cmd)
 
-    ctx.run('docker-compose run --rm -e PGPASSWORD=odoo odoo '
-            'dropdb %s -U odoo -h db' % dbname)
+    ctx.run(
+        'docker-compose run --rm -e PGPASSWORD=odoo odoo '
+        'dropdb %s -U odoo -h db' % dbname
+    )
 
     # mv .po to .pot
     source = os.path.join(i18n_dir, '%s.po' % addon)
     pot_file = source + 't'
     # dirty hack to remove duplicated entries for paths
-    ctx.run('mv %s %s' % (source, pot_file))
-    ctx.run('sed -i "/local-src\|external-src/d" %(pot)s' %
-            {'pot': pot_file, })
+    ctx.run('mv {} {}'.format(source, pot_file))
+    ctx.run(r'sed -i "/local-src\|external-src/d" %(pot)s' % {'pot': pot_file})
 
     if update_po:
         for po_file in glob.glob('%s/*.po' % i18n_dir):
-            ctx.run('msgmerge %(po)s %(pot)s -o %(po)s' %
-                    {'po': po_file, 'pot': pot_file})
+            ctx.run(
+                'msgmerge %(po)s %(pot)s -o %(po)s'
+                % {'po': po_file, 'pot': pot_file}
+            )
             # dirty hack to remove duplicated entries for paths
-            ctx.run('sed -i "/local-src\|external-src/d" %(po)s' %
-                    {'po': po_file, })
+            ctx.run(
+                r'sed -i "/local-src\|external-src/d" %(po)s' % {'po': po_file}
+            )
     print('%s.pot generated' % addon)

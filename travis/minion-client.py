@@ -14,18 +14,20 @@ import os
 
 import requests
 
-
 parser = argparse.ArgumentParser()
-parser.add_argument('docker_tag', type=str,
-                    help="Docker Tag")
-parser.add_argument('minion_server', type=str,
-                    help="Rancher Minion Server")
-parser.add_argument('authorization_token', type=str,
-                    help="Minion Server Authorization Token")
-parser.add_argument('files', type=str, nargs='+',
-                    help="Repeat the argument for the different files. "
-                         "Files needed: 'docker-compose.yml', "
-                         "'rancher-compose.yml', 'rancher.list'")
+parser.add_argument('docker_tag', type=str, help="Docker Tag")
+parser.add_argument('minion_server', type=str, help="Rancher Minion Server")
+parser.add_argument(
+    'authorization_token', type=str, help="Minion Server Authorization Token"
+)
+parser.add_argument(
+    'files',
+    type=str,
+    nargs='+',
+    help="Repeat the argument for the different files. "
+    "Files needed: 'docker-compose.yml', "
+    "'rancher-compose.yml', 'rancher.list'",
+)
 
 args = parser.parse_args()
 
@@ -39,8 +41,7 @@ if not url.startswith('https://'):
     exit(1)
 
 files_content = {
-    os.path.basename(path): open(os.path.abspath(path), 'rb')
-    for path in files
+    os.path.basename(path): open(os.path.abspath(path), 'rb') for path in files
 }
 
 payload = {
@@ -55,7 +56,7 @@ response = requests.post(
     url + '/new',
     data=payload,
     files=files_content,
-    headers={'Authorization': token}
+    headers={'Authorization': token},
 )
 print(response.status_code)
 response.raise_for_status()

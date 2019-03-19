@@ -86,4 +86,3 @@ msgstr "stock.backorder.choice"
 #: model:ir.model,name:stock_picking_backorder.model_stock_backorder_reason
 msgid "stock.backorder.reason"
 msgstr "stock.backorder.reason"
-

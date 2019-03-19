@@ -82,4 +82,3 @@ msgstr "Mauvais lot"
 #, python-format
 msgid "Wrong product"
 msgstr "Mauvais article"
-

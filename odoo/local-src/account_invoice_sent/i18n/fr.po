@@ -189,4 +189,3 @@ msgstr "account.invoice.sent"
 #: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "or"
 msgstr "ou"
-

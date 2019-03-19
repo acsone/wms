@@ -4,7 +4,7 @@
 import logging
 from datetime import datetime
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 
 MANAGE_DAY_PREFIX = 'is_manage_day_'
 
@@ -14,9 +14,13 @@ _logger = logging.getLogger(__name__)
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
-    _sql_constrains = [('unique_procurement_order_by_product',
-                        'UNIQUE(product_id)',
-                        _('The procurement order must be unique by product'))]
+    _sql_constrains = [
+        (
+            'unique_procurement_order_by_product',
+            'UNIQUE(product_id)',
+            _('The procurement order must be unique by product'),
+        )
+    ]
 
     def _get_orderpoint_domain(self, company_id=False):
         """
@@ -25,14 +29,19 @@ class ProcurementOrder(models.Model):
         :param company_id:
         :return:
         """
-        result = super(ProcurementOrder, self).\
-            _get_orderpoint_domain(company_id=company_id)
+        result = super(ProcurementOrder, self)._get_orderpoint_domain(
+            company_id=company_id
+        )
 
         domain = []
         if self._context.get('type') == 'by_suppliers':
-            domain = [('product_id.supplier_id.id',
-                       'in',
-                       self._context['supplier_ids'])]
+            domain = [
+                (
+                    'product_id.supplier_id.id',
+                    'in',
+                    self._context['supplier_ids'],
+                )
+            ]
         elif self._context.get('type') == 'by_days':
             days_selected = []
             for key in self._context.keys():
@@ -48,27 +57,30 @@ class ProcurementOrder(models.Model):
                     # Insert the OR operator
                     domain.insert(0, "|")
                     domain.append(
-                        ('product_id.supplier_id.%s' % day, '=', True))
+                        ('product_id.supplier_id.%s' % day, '=', True)
+                    )
         else:
             isoweekday = datetime.now().isoweekday()
             field_name = MANAGE_DAY_PREFIX + str(isoweekday)
-            domain = \
-                [('product_id.supplier_id.%s' % field_name, '=', True)]
+            domain = [('product_id.supplier_id.%s' % field_name, '=', True)]
 
             # Add suppliers with open purchase order in the
-            open_purchase_orders = \
-                self.env['purchase.order'].search([('state', '=', 'draft')])
+            open_purchase_orders = self.env['purchase.order'].search(
+                [('state', '=', 'draft')]
+            )
             partners = open_purchase_orders.mapped('partner_id')
             if partners:
                 domain.insert(0, '|')
                 domain.append(
-                    ('product_id.supplier_id.id', 'in', partners.ids))
+                    ('product_id.supplier_id.id', 'in', partners.ids)
+                )
 
         return result + domain
 
     @api.model
     def _procure_orderpoint_confirm(
-            self, use_new_cursor=False, company_id=False):
+        self, use_new_cursor=False, company_id=False
+    ):
         """ Run the procurement and recompute promotions if not disabled """
 
         # if we are running from the resupply wizard, first make sure all
@@ -78,29 +90,31 @@ class ProcurementOrder(models.Model):
         )
         route_mto = self.env.ref('stock.route_warehouse0_mto')
         for wh in warehouses:
-            Product = self.env['product.product'].with_context(
-                warehouse=wh.id
-            )
+            Product = self.env['product.product'].with_context(warehouse=wh.id)
             for product in Product.search(
-                    [('orderpoint_ids', '=', False),
-                     ('type', '=', 'product'),
-                     ('virtual_available', '<', 0),
-                     ('route_ids', 'not in', [route_mto.id]),
-                     ]):
+                [
+                    ('orderpoint_ids', '=', False),
+                    ('type', '=', 'product'),
+                    ('virtual_available', '<', 0),
+                    ('route_ids', 'not in', [route_mto.id]),
+                ]
+            ):
                 self.env['stock.warehouse.orderpoint'].create(
-                    {'warehouse_id': wh.id,
-                     'product_id': product.id,
-                     'company_id': wh.company_id.id,
-                     'product_min_qty': 0,
-                     'product_max_qty': 0,
-                     'location_id': wh.view_location_id.id,
-                     'product_uom': product.uom_id.id
-                     }
+                    {
+                        'warehouse_id': wh.id,
+                        'product_id': product.id,
+                        'company_id': wh.company_id.id,
+                        'product_min_qty': 0,
+                        'product_max_qty': 0,
+                        'location_id': wh.view_location_id.id,
+                        'product_uom': product.uom_id.id,
+                    }
                 )
 
         _logger.info('Run the procurement')
         result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
-            use_new_cursor=use_new_cursor, company_id=company_id)
+            use_new_cursor=use_new_cursor, company_id=company_id
+        )
         _logger.info('Procurement finished')
 
         # By default we recompute promotions

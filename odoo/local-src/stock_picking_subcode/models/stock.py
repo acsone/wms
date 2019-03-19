@@ -15,11 +15,13 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     picking_type_subcode = fields.Char(
-        related='picking_type_id.subcode', readonly=True)
+        related='picking_type_id.subcode', readonly=True
+    )
 
 
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
     picking_type_subcode = fields.Char(
-        related='picking_type_id.subcode', readonly=True)
+        related='picking_type_id.subcode', readonly=True
+    )

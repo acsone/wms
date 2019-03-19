@@ -20,7 +20,7 @@
 ##############################################################################
 
 import odoo.addons.decimal_precision as dp
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class ProductProduct(models.Model):
@@ -44,15 +44,18 @@ class ProductProduct(models.Model):
     qty_in_parking = fields.Float(
         'Qty in parking',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_parking')
+        compute='_get_qty_in_parking',
+    )
     qty_in_reserve = fields.Float(
         'Qty in reserve',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_reserve')
+        compute='_get_qty_in_reserve',
+    )
     qty_in_bin = fields.Float(
         'Qty in bins',
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_bin')
+        compute='_get_qty_in_bin',
+    )
 
     @api.one
     def _get_qty_in_parking(self):

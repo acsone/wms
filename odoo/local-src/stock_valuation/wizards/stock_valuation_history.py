@@ -3,7 +3,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, tools, models, fields
+from openerp import api, fields, models, tools
 
 
 class WizardValuationHistory(models.TransientModel):
@@ -20,9 +20,9 @@ class WizardValuationHistory(models.TransientModel):
     def open_table(self):
         materialized_model = self.env['stock.history.materialized']
         refresh_date = materialized_model.get_refresh_date()
-        if (not refresh_date or
-                fields.Datetime.from_string(self.date) >
-                fields.Datetime.from_string(refresh_date)):
+        if not refresh_date or fields.Datetime.from_string(
+            self.date
+        ) > fields.Datetime.from_string(refresh_date):
             materialized_model.refresh_view()
         res = super(WizardValuationHistory, self).open_table()
         res['context']['search_default_group_by_product'] = False
@@ -56,7 +56,8 @@ class StockHistoryMaterialized(models.AbstractModel):
         self.env.cr.execute(
             "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % self._table
         )
-        self.env.cr.execute("""
+        self.env.cr.execute(
+            """
             CREATE MATERIALIZED VIEW %s AS (
               WITH internal AS (
                 SELECT parent_left, parent_right
@@ -173,31 +174,35 @@ class StockHistoryMaterialized(models.AbstractModel):
                 GROUP BY move_id, location_id, company_id, product_id,
                          product_categ_id, product_supplier_id, date,
                          source, product_template_id
-            ) WITH NO DATA;""" % (self._table,))  # noqa
+            ) WITH NO DATA;"""
+            % (self._table,)
+        )  # noqa
         self.env.cr.execute(
-            "CREATE UNIQUE INDEX pk_%s ON %s (id)" % (self._table, self._table)
+            "CREATE UNIQUE INDEX pk_{} ON {} (id)".format(
+                self._table, self._table
+            )
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_location_id_idx ON %s (location_id)" %
-            (self._table, self._table)
+            "CREATE INDEX %s_location_id_idx ON %s (location_id)"
+            % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_product_id_idx ON %s (product_id)" %
-            (self._table, self._table)
+            "CREATE INDEX %s_product_id_idx ON %s (product_id)"
+            % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_product_categ_id_idx ON %s (product_categ_id)" %
-            (self._table, self._table)
+            "CREATE INDEX %s_product_categ_id_idx ON %s (product_categ_id)"
+            % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_date_idx ON %s (date)" %
-            (self._table, self._table)
+            "CREATE INDEX %s_date_idx ON %s (date)"
+            % (self._table, self._table)
         )
         self.set_refresh_date(date=False)
         cron = self.env.ref(
             'stock_valuation.refresh_materialized_view',
             # at install, won't exist yet
-            raise_if_not_found=False
+            raise_if_not_found=False,
         )
         # refresh data asap, but not during the upgrade
         if cron:
@@ -209,19 +214,21 @@ class StockHistory(models.Model):
 
     cost_method = fields.Char(related='product_id.cost_method', readonly=True)
     product_supplier_id = fields.Many2one(
-        'res.partner', 'Supplier', readonly=True)
+        'res.partner', 'Supplier', readonly=True
+    )
 
     product_last_in_date = fields.Datetime(
-        'Last Purchasing Date',
-        compute='_get_product_last_in_date')
+        'Last Purchasing Date', compute='_get_product_last_in_date'
+    )
     product_last_out_date = fields.Datetime(
-        'Last Selling Date',
-        compute='_get_product_last_out_date')
+        'Last Selling Date', compute='_get_product_last_out_date'
+    )
 
     def _get_product_last_in_date(self):
         if 'history_date' not in self._context:
             return
-        self._cr.execute("""
+        self._cr.execute(
+            """
             SELECT DISTINCT ON (product_id)
                 purchase_order_line.product_id,
                 purchase_order.date_order
@@ -234,16 +241,20 @@ class StockHistory(models.Model):
             ORDER BY
                 purchase_order_line.product_id,
                 purchase_order.date_order desc
-            """, (self._context['history_date'],))
+            """,
+            (self._context['history_date'],),
+        )
         dates_by_product = dict(self._cr.fetchall())
         for rec in self:
             rec.product_last_in_date = dates_by_product.get(
-                rec.product_id.id, False)
+                rec.product_id.id, False
+            )
 
     def _get_product_last_out_date(self):
         if 'history_date' not in self._context:
             return
-        self._cr.execute("""
+        self._cr.execute(
+            """
             SELECT DISTINCT ON (product_id)
                 sale_order_line.product_id,
                 sale_order.confirmation_date
@@ -256,11 +267,14 @@ class StockHistory(models.Model):
             ORDER BY
                 sale_order_line.product_id,
                 sale_order.confirmation_date desc
-            """, (self._context['history_date'],))
+            """,
+            (self._context['history_date'],),
+        )
         dates_by_product = dict(self._cr.fetchall())
         for rec in self:
             rec.product_last_out_date = dates_by_product.get(
-                rec.product_id.id, False)
+                rec.product_id.id, False
+            )
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
@@ -268,8 +282,10 @@ class StockHistory(models.Model):
         # name "stock_history" because an upgrade of the
         # stock_account would fail.
         # Use an indirection with another model.
-        self.env.cr.execute("""
+        self.env.cr.execute(
+            """
             CREATE OR REPLACE VIEW stock_history AS (
                 SELECT * FROM stock_history_materialized
             )
-        """)
+        """
+        )

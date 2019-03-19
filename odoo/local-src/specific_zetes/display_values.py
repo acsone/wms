@@ -1,6 +1,7 @@
 #!/usr/bin/python
-import sys
 import getopt
+import sys
+
 import requests
 
 
@@ -38,13 +39,9 @@ def main(argv):
         elif opt in ("-a", "--actions"):
             actions = arg
 
-    data = {
-        'domains': domains,
-        'actions': actions,
-    }
+    data = {'domains': domains, 'actions': actions}
 
-    result = requests.get('http://localhost:8069/display_values',
-                          data=data)
+    result = requests.get('http://localhost:8069/display_values', data=data)
     print result.content
 
 

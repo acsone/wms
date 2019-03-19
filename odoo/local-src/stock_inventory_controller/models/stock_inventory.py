@@ -1,7 +1,7 @@
 import logging
 
-from odoo import api, fields, models
 import odoo
+from odoo import api, fields, models
 from odoo.exceptions import MissingError, UserError
 
 _logger = logging.getLogger(__name__)
@@ -11,14 +11,9 @@ class StockInventoryLine(models.Model):
     _inherit = 'stock.inventory.line'
 
     is_line_failed = fields.Boolean(
-        'Line failed',
-        readonly=True,
-        default=False
+        'Line failed', readonly=True, default=False
     )
-    fail_message = fields.Char(
-        'Fail message',
-        readonly=True,
-    )
+    fail_message = fields.Char('Fail message', readonly=True)
 
 
 class StockInventory(models.Model):
@@ -31,12 +26,10 @@ class StockInventory(models.Model):
         domain=[('is_line_failed', '=', True)],
         copy=False,
         readonly=True,
-        states={'done': [('readonly', True)]}
+        states={'done': [('readonly', True)]},
     )
 
-    line_ids = fields.One2many(
-        domain=[('is_line_failed', '=', False)]
-    )
+    line_ids = fields.One2many(domain=[('is_line_failed', '=', False)])
 
     @api.multi
     def post_inventory(self):
@@ -45,7 +38,8 @@ class StockInventory(models.Model):
         :return:
         """
         moves = self.mapped('move_ids').filtered(
-            lambda move: move.state != 'done')
+            lambda move: move.state != 'done'
+        )
 
         with api.Environment.manage():
             with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
@@ -57,20 +51,26 @@ class StockInventory(models.Model):
                     except MissingError as me:
                         _logger.error('MissingError: ' + str(me))
                         line = new_self.line_ids.search(
-                            [('product_id', '=', move.product_id.id)])
-                        line.write({
-                            'is_line_failed': True,
-                            'fail_message': 'MissingError: ' + str(me)
-                        })
+                            [('product_id', '=', move.product_id.id)]
+                        )
+                        line.write(
+                            {
+                                'is_line_failed': True,
+                                'fail_message': 'MissingError: ' + str(me),
+                            }
+                        )
                         exception = me
                     except UserError as ue:
                         _logger.error('UserError: ' + str(ue))
                         line = new_self.line_ids.search(
-                            [('product_id', '=', move.product_id.id)])
-                        line.write({
-                            'is_line_failed': True,
-                            'fail_message': 'UserError: ' + str(ue)
-                        })
+                            [('product_id', '=', move.product_id.id)]
+                        )
+                        line.write(
+                            {
+                                'is_line_failed': True,
+                                'fail_message': 'UserError: ' + str(ue),
+                            }
+                        )
                         exception = ue
                 if exception:
                     new_cr.commit()

@@ -10,7 +10,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock_barcode',
-        ],
+    ],
     'data': [
     ],
     'installable': True,

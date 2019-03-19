@@ -180,4 +180,3 @@ msgstr "sur"
 #: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
-
