@@ -93,46 +93,46 @@ class SaleOrder(models.Model):
 
     @api.multi
     @job(default_channel='root.invoice_creation')
-    def _job_invoices_by_partners(self, partner_ids, date_invoice):
-        # this job is there only for the transition, can be dropped
-        # after release 10.30.15 if all jobs of this kind have been executed
-        _logger.warning(
-            '_job_invoices_by_partners is deprecated '
-            'and replaced by _job_invoices_by_partner'
-        )
-        return self._job_invoices_by_partner(partner_ids[0])
-
-    @api.multi
-    @job(default_channel='root.invoice_creation')
     def _job_invoices_by_partner(self, partner_id, date_invoice):
         partner = self.env['res.partner'].browse(partner_id)
         if partner.invoice_grouping != 'all_at_once':
             raise FailedJobError('Invalid invoice grouping')
 
-        sales_to_merge = self.search(
+        sales = self.search(
             [
                 ('invoice_status', '=', 'to invoice'),
                 ('partner_invoice_id', '=', partner.id),
-                ('is_unique_invoice', '=', False),
             ]
+        )
+        invoice_ids = sales.action_invoice_create(final=True)
+        invoices = self.env['account.invoice'].browse(invoice_ids)
+        # Validate invoices
+        invoices.with_delay()._job_validate_invoice(date_invoice)
+
+    @api.multi
+    def action_invoice_create(self, grouped=False, final=False):
+        """Overloaded to generate invoices all at once and separately based
+        on the sale order configuration.
+        """
+        # Invoice all SO at once (standard behavior)
+        sales_to_merge = self.search(
+            [('id', 'in', self.ids), ('is_unique_invoice', '=', False)]
         )
         sales_to_merge = sales_to_merge.with_context(
             mail_auto_subscribe_no_notify=True
         )
-        invoice_ids = sales_to_merge.action_invoice_create(final=True)
-
+        invoice_ids = super(SaleOrder, sales_to_merge).action_invoice_create(
+            grouped, final
+        )
+        # Invoice SO separately
         sales_to_invoice = self.search(
-            [
-                ('invoice_status', '=', 'to invoice'),
-                ('partner_invoice_id', '=', partner.id),
-                ('is_unique_invoice', '=', True),
-            ]
+            [('id', 'in', self.ids), ('is_unique_invoice', '=', True)]
         )
         sales_to_invoice = sales_to_invoice.with_context(
             mail_auto_subscribe_no_notify=True
         )
         for sale_to_invoice in sales_to_invoice:
-            invoice_ids += sale_to_invoice.action_invoice_create(final=True)
-        invoices = self.env['account.invoice'].browse(invoice_ids)
-        # Validate invoices
-        invoices.with_delay()._job_validate_invoice(date_invoice)
+            invoice_ids += super(
+                SaleOrder, sale_to_invoice
+            ).action_invoice_create(grouped, final)
+        return invoice_ids
