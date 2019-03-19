@@ -286,7 +286,7 @@ class Itempick(DomainInterface):
                 )
                 return result.format()
 
-            msg = 'Out of stock for lot {} (product {}): {} taken'.format(
+            msg = u'Out of stock for lot {} (product {}): {} taken'.format(
                 pack_lot.lot_id.name, pack_op.product_id.name, picked_qty
             )
             params.log(

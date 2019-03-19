@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1975 Fix crash with .format() called bytestrings
+
 **Build**
 
 **Documentation**

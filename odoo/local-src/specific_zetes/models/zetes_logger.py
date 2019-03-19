@@ -54,10 +54,10 @@ class ZetesLogger(models.Model):
                 log.domain, log.domain
             )
 
-            name = '{} on {} by {}'.format(
+            name = u'{} on {} by {}'.format(
                 command_displayed, domain_displayed, log.user_id.name
             )
-            command = '{}_{}'.format(log.action.upper(), log.domain.upper())
+            command = u'{}_{}'.format(log.action.upper(), log.domain.upper())
             log.name = name
             log.command = command
 
