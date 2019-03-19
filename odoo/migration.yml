@@ -341,3 +341,8 @@ migration:
           - specific_report
           - specific_product
     - version: 10.0.1.33.1
+    - version: 10.0.1.34.0
+      addons:
+        upgrade:
+          ### local
+          - specific_report

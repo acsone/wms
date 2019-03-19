@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-1610: Add SQL views calculating the margin by product for the BI tool
+
 **Bugfixes**
 
 **Build**
