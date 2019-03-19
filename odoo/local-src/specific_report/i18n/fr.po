@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-01 13:40+0000\n"
-"PO-Revision-Date: 2019-03-01 13:40+0000\n"
+"POT-Creation-Date: 2019-03-08 12:29+0000\n"
+"PO-Revision-Date: 2019-03-08 12:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -103,6 +103,7 @@ msgstr "(V Ref:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "-\n"
 "                    <span>Fax:</span>"
 msgstr "-\n"
@@ -117,6 +118,7 @@ msgstr "<br/>\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<br/>\n"
 "                    <span>Email:</span>"
 msgstr "<br/>\n"
@@ -342,6 +344,7 @@ msgstr "<span>Order # </span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<span>RPM Liège division Huy - TVA</span>"
 msgstr "<span>RPM Liège division Huy - TVA</span>"
 
@@ -413,8 +416,8 @@ msgstr "<strong>Date Ordered:</strong>"
 
 #. module: specific_report
 #: model:mail.template,subject:specific_report.email_template_pharmacist_supplier_order
-msgid "Alcyon Medicine order ${object.name} ${object.name}"
-msgstr "Alcyon Medicine order ${object.name} ${object.name}"
+msgid "Alcyon Medicine order"
+msgstr "Alcyon Medicine order ${object.name}"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_amount_alcyon_discount
@@ -648,12 +651,6 @@ msgid "Entry register"
 msgstr "Registre d'entrée"
 
 #. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_entry_register
-#: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_entry_register
-msgid "Hide entry register on delivery slip"
-msgstr "Masquer l'inscription s'inscrire sur le bon de livraison"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -676,12 +673,18 @@ msgstr "Frigo"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
 msgid "Goods return note"
-msgstr "Retourbon"
+msgstr "Bon de retour"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
 msgid "Has Invoices"
 msgstr "A des factures"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_entry_register
+#: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_entry_register
+msgid "Hide entry register on delivery slip"
+msgstr "Le client n'a pas besoin de registre d'entrée"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_prices_deliveryslip
@@ -699,6 +702,11 @@ msgstr "ID"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "ING:"
 msgstr "ING:"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_l10n_be_intrastat_xml_xml_decl
+msgid "Intrastat XML Declaration"
+msgstr "Déclaration XML Intrastat"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -751,7 +759,7 @@ msgstr "Kg"
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number___last_update
 #: model:ir.model.fields,field_description:specific_report.field_report_async___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_write_uid
@@ -761,7 +769,7 @@ msgstr "Dernière mise à jour par"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Dernière mis à jour le"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_picking_body
@@ -806,7 +814,7 @@ msgstr "Pas de facture à imprimer"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Number"
-msgstr "Nombre"
+msgstr "Numéro"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_total
@@ -890,6 +898,16 @@ msgid "Order #"
 msgstr "Commande n°"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
+msgid "Order Reference"
+msgstr "Référence commande"
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_line_id
+msgid "Order line"
+msgstr "Ligne du bon de commande"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Ordered Quantity"
 msgstr "Quantité commandée"
@@ -911,6 +929,7 @@ msgstr "Page :"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 
@@ -932,7 +951,7 @@ msgstr "Quantité prélevée"
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.action_passport_report
 msgid "Picking Inspection"
-msgstr "Vérification de la préparation"
+msgstr "Picking Inspection"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
@@ -1005,7 +1024,7 @@ msgstr "Référence de votre paiement"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Note de crédit"
+msgstr "Rembourser"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_picking_body
@@ -1038,7 +1057,6 @@ msgstr "Envoyer par fax pour {} avec l'ID {}"
 #: model:ir.model.fields,field_description:specific_report.field_stock_move_serial_number
 msgid "Serial number"
 msgstr "Numéro de série"
-
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_show_deliveryslip_cnk
@@ -1130,7 +1148,7 @@ msgstr "UOP"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Unit<br/>price"
-msgstr "Unit<br/>price"
+msgstr "Prix<br/>unitaire"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
@@ -1194,6 +1212,7 @@ msgstr "round.instance.customer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Fax:</span>"
 msgstr "|\n"
@@ -1201,6 +1220,7 @@ msgstr "|\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
@@ -1210,7 +1230,9 @@ msgstr "|\n"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr "|\n"
 "                <span>Téléphone:</span>"
+

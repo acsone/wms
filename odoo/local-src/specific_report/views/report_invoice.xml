@@ -333,7 +333,44 @@
 
             <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
 
-            <t t-call="specific_report.page_number_footer"/>
+        <div class="footer">
+            <div style="padding-top: 3mm;">
+                <div style="border-top: 1px solid black;">
+                    <span t-field="company.street"/>,
+                    <span t-field="company.zip"/>
+                    <span t-field="company.city"/>
+                    -
+                    <span t-field="company.country_id"/>
+                    |
+                    <span>Phone:</span>
+                    <span t-field="company.phone"/>
+                    |
+                    <span>Fax:</span>
+                    <span t-field="company.fax"/>
+                    <br/>
+                    <span>Email:</span>
+                    <span t-field="company.email"/>
+                    |
+                    <span>For commands;</span>
+                    <span>Phone:</span>
+                    <span t-field="company.order_phone"/>
+                    -
+                    <span>Fax:</span>
+                    <span t-field="company.order_fax"/>
+                    <br/>
+                    <div style="width: 50%; float: left">
+                        <span>RPM Liège division Huy - TVA</span>
+                        <span t-field="company.vat"/>
+                    </div>
+                    <span t-field="invoice.number"/>
+                    -
+                    <span t-field="invoice.date_invoice"/>
+                    <div style="width: 50%; float: right; text-align: right">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </div>
             </t>
         </t>
     </template>

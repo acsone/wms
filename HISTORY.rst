@@ -34,6 +34,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1948: add invoice number + date invoice in the invoice footer
+
 **Build**
 
 **Documentation**
