@@ -222,8 +222,8 @@ class ManageUOP(models.TransientModel):
         zone_medoc = self.env.ref('__setup__.picking_zone_medicament')
         if self.picking_zone_id == zone_medoc:
             try:
-                self.picking_id.print_products_label(printer=printer_toshiba)
-                self.picking_id.print_packages_label(printer=printer_zebra)
+                self.picking_id.print_products_label(printer_id=printer_toshiba.id)
+                self.picking_id.print_packages_label(printer_id=printer_zebra.id)
             except Exception as e:
                 _logger.error(e)
                 self.print_passport(picking_id)
@@ -264,7 +264,7 @@ class ManageUOP(models.TransientModel):
                 [('code', '=', printer_code), ('type', '=', 'pdf')]
             )
 
-            picking.print_passport_report(printer=printer)
+            picking.print_passport_report(printer_id=printer.id)
 
 
 class ManageUOPLine(models.TransientModel):

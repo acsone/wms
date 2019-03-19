@@ -28,4 +28,4 @@ class StockPackOperationLotAdd(models.TransientModel):
                 raise UserError(_("Lot is missing"))
             self.lot_id.print_lot_label(self.print_qty)
         else:
-            self.operation_id.product_id.print_lot_label(self.print_qty)
+            self.operation_id.product_id.print_product_label(self.print_qty)
