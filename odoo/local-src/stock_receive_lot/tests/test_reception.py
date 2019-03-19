@@ -45,18 +45,32 @@ class TestReception(TransactionCase):
         self.stock_location = self.location_model.browse(
             self.ref('stock.stock_location_stock')
         )
-        self.destination_stock_location = self.location_model.create(
-            {'name': 'bin', 'location_id': self.stock_location.id}
+        self.reception_location = self.location_model.create(
+            {
+                'name': 'reception',
+                'location_id': self.stock_location.id,
+                'usage': 'view',
+            }
         )
-
-    @post_install(True)
-    @at_install(False)
-    def test_1_picking_transfer(self):
+        self.bin1 = self.location_model.create(
+            {
+                'name': 'bin1',
+                'location_id': self.reception_location.id,
+                'usage': 'internal',
+            }
+        )
+        self.bin2 = self.location_model.create(
+            {
+                'name': 'bin2',
+                'location_id': self.reception_location.id,
+                'usage': 'internal',
+            }
+        )
         picking = self.stock_picking_model.create(
             {
                 'picking_type_id': self.ref('stock.picking_type_in'),
                 'location_id': self.supplier_location.id,
-                'location_dest_id': self.stock_location.id,
+                'location_dest_id': self.reception_location.id,
                 'move_lines': [
                     (
                         0,
@@ -67,7 +81,7 @@ class TestReception(TransactionCase):
                             'product_uom_qty': 5,
                             'product_uom': product.uom_id.id,
                             'location_id': self.supplier_location.id,
-                            'location_dest_id': self.stock_location.id,
+                            'location_dest_id': self.reception_location.id,
                         },
                     )
                     for product in self.products
@@ -76,6 +90,12 @@ class TestReception(TransactionCase):
         )
         picking = picking.with_context(test_mode=1)
         picking.action_assign()
+        self.picking = picking
+
+    @post_install(True)
+    @at_install(False)
+    def test_receive_on_view(self):
+        picking = self.picking
 
         # launch wizard
         wiz = self.stock_reception_wizard.with_context(
@@ -90,8 +110,9 @@ class TestReception(TransactionCase):
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
 
-        # select destination
-        wiz.location_dest_id = self.destination_stock_location.id
+        # select destination - it must be manually set
+        self.assertEqual(wiz.location_dest_id.id, False)
+        wiz.location_dest_id = self.bin1.id
 
         # receive first lot
         self.assertEqual(wiz.lot_required, 1)
@@ -104,7 +125,7 @@ class TestReception(TransactionCase):
         wiz.button_nextlot()
         self.assertEqual(wiz.operation_id, op1)
         self.assertEqual(wiz.remaining_qty, 2)
-        self.assertEqual(wiz.location_dest_id, self.destination_stock_location)
+        self.assertEqual(wiz.location_dest_id, self.bin1)
 
         # receive second lot
         self.assertEqual(wiz.lot_required, 1)
@@ -116,7 +137,7 @@ class TestReception(TransactionCase):
         wiz.button_nextlot()
         self.assertEqual(wiz.operation_id, op1)
         self.assertEqual(wiz.remaining_qty, 1)
-        self.assertEqual(wiz.location_dest_id, self.destination_stock_location)
+        self.assertEqual(wiz.location_dest_id, self.bin1)
 
         # receive again first lot
         self.assertEqual(wiz.lot_required, 1)
@@ -135,7 +156,7 @@ class TestReception(TransactionCase):
         wiz.operation_id = op2
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
-        self.assertEqual(wiz.location_dest_id, self.destination_stock_location)
+        self.assertEqual(wiz.location_dest_id, self.bin1)
 
         # receive lot
         self.assertEqual(wiz.lot_required, 1)
@@ -153,3 +174,56 @@ class TestReception(TransactionCase):
         self.assertEqual(
             len(picking.pack_operation_product_ids), len(self.products)
         )
+
+    @post_install(True)
+    @at_install(False)
+    def test_receive_on_bins(self):
+        picking = self.picking
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_life_date_allowed=True
+        ).new({'picking_id': picking.id})
+
+        op1 = picking.pack_operation_product_ids[0]
+        op2 = picking.pack_operation_product_ids[1]
+
+        # Simulate putaway to bin1 and bin2
+        op1.location_dest_id = self.bin1
+        op2.location_dest_id = self.bin2
+
+        # select operation
+        wiz.operation_id = op1
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 5)
+
+        # destination is already pre-selected
+        self.assertEqual(wiz.location_dest_id, self.bin1)
+
+        # change operation
+        wiz.operation_id = op2
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 5)
+
+        # destination has changed
+        self.assertEqual(wiz.location_dest_id, self.bin2)
+
+        # receive a lot
+        self.assertEqual(wiz.lot_required, 1)
+        wiz.lot_name = 'Unittest Reception L1'
+        wiz.life_date = '2030-01-01 10:00:00'
+        wiz.qty = 1
+
+        # go to next operation
+        wiz.button_nextop()
+        self.assertEqual(wiz.operation_id.id, False)
+        self.assertEqual(wiz.lot_name, False)
+        self.assertEqual(wiz.life_date, False)
+        self.assertEqual(wiz.qty, False)
+
+        # select operation
+        wiz.operation_id = op1
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 5)
+
+        # destination is already pre-selected
+        self.assertEqual(wiz.location_dest_id, self.bin1)

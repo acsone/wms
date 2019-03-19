@@ -119,7 +119,9 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.onchange('operation_id')
     def _onchange_operation_id(self):
-        if not (
+        if self.operation_id.location_dest_id.usage == 'internal':
+            self.location_dest_id = self.operation_id.location_dest_id
+        elif not (
             self.location_dest_id
             and self._is_parent_child(
                 self.location_op_dest_id, self.location_dest_id
@@ -127,10 +129,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         ):
             # If in the wizard, there is no location or if the current location
             # is not valid for selected operation then we need to update it
-            if self.operation_id.location_dest_id.usage == 'internal':
-                self.location_dest_id = self.operation_id.location_dest_id
-            else:
-                self.location_dest_id = False
+            self.location_dest_id = False
         self.life_date = False
         self.life_date_char = False
         self.lot_name = False

@@ -30,6 +30,7 @@ latest (unreleased)
   performance issue.
 
 * ALCYN-1972: Create filter for articles in BO on purchase
+* ALCYN-1956: Allow to receive products directly in stock (without going through the parking)
 
 **Bugfixes**
 
