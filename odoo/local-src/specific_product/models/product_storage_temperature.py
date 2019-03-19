@@ -9,3 +9,4 @@ class StorageTemperatures(models.Model):
 
     name = fields.Char(required=True)
     temperature = fields.Float(u'Temperature (°C)')
+    esb_ref = fields.Char(string='Reference for ESB')

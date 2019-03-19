@@ -339,3 +339,4 @@ migration:
           - specific_sale
           - specific_purchase
           - specific_report
+          - specific_product

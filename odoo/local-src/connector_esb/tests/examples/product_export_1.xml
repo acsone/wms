@@ -58,7 +58,7 @@
       <!-- SKU of the tax -->
       <Cplz07>BBB</Cplz07>
       <!-- always 0 -->
-      <Cp2z17>0</Cp2z17>
+      <Cp2z17>6</Cp2z17>
       <!-- always 0 -->
       <Cp2z19>0</Cp2z19>
       <!-- height in cm -->
@@ -144,7 +144,7 @@
       <!-- SKU of the tax -->
       <Cplz07>CCC</Cplz07>
       <!-- always 0 -->
-      <Cp2z17>0</Cp2z17>
+      <Cp2z17>2</Cp2z17>
       <!-- always 0 -->
       <Cp2z19>0</Cp2z19>
       <!-- height in cm -->

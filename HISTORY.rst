@@ -31,6 +31,7 @@ latest (unreleased)
 
 * ALCYN-1972: Create filter for articles in BO on purchase
 * ALCYN-1956: Allow to receive products directly in stock (without going through the parking)
+* ALCYN-1965: Add the storage temperature when exporting a product to the ESB.
 
 **Bugfixes**
 
