@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-1975 Fix crash with .format() called bytestrings
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.33.1 (2019-03-19)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-1975 Fix crash with .format() called bytestrings
 
 
 10.0.1.33.0 (2019-03-19)
