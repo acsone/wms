@@ -1235,4 +1235,3 @@ msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr "|\n"
 "                <span>Téléphone:</span>"
-
