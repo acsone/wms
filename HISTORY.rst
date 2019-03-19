@@ -20,6 +20,7 @@ latest (unreleased)
 +++++++++++++++++++
 
 **Features and Improvements**
+* Add picking type on declared loss
 
 * ALCYN-1962: Speed up loading of partner form view
 

@@ -57,6 +57,19 @@ class StockPackOperationLot(models.Model):
             # This will avoid that this lot will be use later.
             dest_location = self.env.ref('stock_lot_loss.stock_location_14019')
 
+            move_line = {
+                'name': 'Skip Lot',
+                'product_id': op.product_id.id,
+                'product_uom_qty': qty_to_block,
+                'picking_type_id': self.env.ref(
+                    'stock_lot_loss.stock_picking_type_23'
+                ).id,
+                'location_id': op.location_id.id,
+                'location_dest_id': dest_location.id,
+                'restrict_lot_id': self.lot_id.id,
+                'product_uom': op.product_id.uom_id.id,
+                'origin': u'Operator: %s' % self.env.user.name,
+            }
             block_picking = self.env['stock.picking'].create(
                 {
                     'picking_type_id': self.env.ref(
@@ -64,22 +77,7 @@ class StockPackOperationLot(models.Model):
                     ).id,
                     'location_id': op.location_id.id,
                     'location_dest_id': dest_location.id,
-                    'move_lines': [
-                        (
-                            0,
-                            0,
-                            {
-                                'name': 'Skip Lot',
-                                'product_id': op.product_id.id,
-                                'product_uom_qty': qty_to_block,
-                                'location_id': op.location_id.id,
-                                'location_dest_id': dest_location.id,
-                                'restrict_lot_id': self.lot_id.id,
-                                'product_uom': op.product_id.uom_id.id,
-                                'origin': 'Operator: %s' % self.env.user.name,
-                            },
-                        )
-                    ],
+                    'move_lines': [(0, 0, move_line)],
                 }
             )
             block_picking.action_confirm()
