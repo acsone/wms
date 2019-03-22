@@ -64,4 +64,6 @@ class PrintLabel(models.TransientModel):
                 raise UserError(_('Invalid printer'))
 
             for lot in self.lot_ids:
-                lot.print_lot_label(printer_id=self.printer_id.id, quantity=self.qty)
+                lot.print_lot_label(
+                    printer_id=self.printer_id.id, quantity=self.qty
+                )

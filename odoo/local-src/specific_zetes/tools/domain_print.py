@@ -192,9 +192,11 @@ class Print(DomainInterface):
 
             try:
                 picking.sudo().print_products_label(
-                    printer_id=printer_toshiba.id)
+                    printer_id=printer_toshiba.id
+                )
                 picking.sudo().print_packages_label(
-                    printer_id=printer_zebra.id)
+                    printer_id=printer_zebra.id
+                )
             except Exception as e:
                 self.rollback_to_savepoint()
                 _logger.error(str(e))
