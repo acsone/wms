@@ -21,7 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
-ALCYN-1966: Apply SO unique invoice on all invoicing cases
+* ALCYN-1966: Apply SO unique invoice on all invoicing cases
+* ALCYN-1610: Add SQL views calculating the margin by product for the BI tool
 
 **Bugfixes**
 

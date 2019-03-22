@@ -9,3 +9,5 @@ from . import stock_move
 from . import round_instance
 from . import res_partner
 from . import xml_decl
+from . import sale_order_line_margin_report
+from . import account_invoice_line_margin_report
