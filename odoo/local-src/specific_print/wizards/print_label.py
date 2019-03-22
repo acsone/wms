@@ -48,7 +48,7 @@ class PrintLabel(models.TransientModel):
 
             for picking in self.picking_ids:
                 picking.print_products_label(
-                    printer=self.printer_id, quantity=self.qty
+                    printer_id=self.printer_id.id, quantity=self.qty
                 )
         elif self.label_type == 'package':
             if self.printer_id.type != 'zebra':
@@ -56,7 +56,7 @@ class PrintLabel(models.TransientModel):
 
             for picking in self.picking_ids:
                 picking.print_packages_label(
-                    printer=self.printer_id, quantity=self.qty
+                    printer_id=self.printer_id.id, quantity=self.qty
                 )
 
         elif self.label_type == 'lot':
@@ -64,4 +64,6 @@ class PrintLabel(models.TransientModel):
                 raise UserError(_('Invalid printer'))
 
             for lot in self.lot_ids:
-                lot.print_lot_label(printer=self.printer_id, quantity=self.qty)
+                lot.print_lot_label(
+                    printer_id=self.printer_id.id, quantity=self.qty
+                )

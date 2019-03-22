@@ -10,10 +10,13 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 
-def hw_print(self, report_xmlid, printer=False, qty=1):
+def hw_print(self, report_xmlid, printer_id=False, qty=1):
     document = self.env['report']._get_raw(self._ids, report_xmlid, qty=qty)
     report = self.env.ref(report_xmlid)
     behaviour = report.behaviour()[report.id]
+    printer = False
+    if printer_id:
+        printer = self.env['printing.printer'].browse(printer_id)
     if not printer:
         printer = behaviour['printer']
     if not printer:
@@ -58,14 +61,14 @@ class StockPackOperation(models.Model):
         return partners and partners[0]
 
     @api.multi
-    def print_product_label(self, printer=False, quantity=1):
+    def print_product_label(self, printer_id=False, quantity=1):
         for op in self:
             if not op.picking_id.partner_id:
                 raise Warning(_('No destination partner defined'))
         hw_print(
             self,
             'specific_print.report_stock_product_label',
-            printer=printer,
+            printer_id=printer_id,
             qty=quantity,
         )
 
@@ -93,7 +96,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def print_products_label(self, printer=False, quantity=1):
+    def print_products_label(self, printer_id=False, quantity=1):
         self.ensure_one()
 
         packs_to_print = self.pack_operation_ids.filtered(
@@ -101,27 +104,28 @@ class StockPicking(models.Model):
         )
         if packs_to_print:
             packs_to_print.print_product_label(
-                printer=printer, quantity=quantity
+                printer_id=printer_id, quantity=quantity
             )
 
     @api.multi
-    def print_packages_label(self, quantity=1, printer=False):
+    def print_packages_label(self, quantity=1, printer_id=False):
         self.ensure_one()
         if not self.partner_id:
             raise Warning(_('No destination partner defined'))
         hw_print(
             self,
             'specific_print.report_stock_pick_packs_label',
-            printer=printer,
+            printer_id=printer_id,
             qty=quantity,
         )
 
     @api.multi
-    def print_passport_report(self, printer):
+    def print_passport_report(self, printer_id):
         self.ensure_one()
         pdf = self.env['report'].get_pdf(
             self.ids, 'specific_report.report_passport'
         )
+        printer = self.env['printing.printer'].browse(printer_id)
         printer.print_document('', pdf, '')
 
 
@@ -138,13 +142,13 @@ class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     @api.multi
-    def print_lot_label(self, quantity=1, printer=False):
+    def print_lot_label(self, quantity=1, printer_id=False):
         self.ensure_one()
         hw_print(
             self,
             'specific_print.report_lot_label',
             qty=quantity,
-            printer=printer,
+            printer_id=printer_id,
         )
 
 
@@ -152,6 +156,11 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
-    def print_lot_label(self, quantity=1):
+    def print_product_label(self, quantity=1, printer_id=False):
         self.ensure_one()
-        hw_print(self, 'specific_print.report_lot_nolot_label', qty=quantity)
+        hw_print(
+            self,
+            'specific_print.report_lot_nolot_label',
+            qty=quantity,
+            printer_id=printer_id,
+        )

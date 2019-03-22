@@ -143,7 +143,7 @@ class Print(DomainInterface):
                 return result.format()
 
             try:
-                picking.sudo().print_passport_report(printer=printer)
+                picking.sudo().print_passport_report(printer_id=printer.id)
             except Exception as e:
                 self.rollback_to_savepoint()
                 _logger.error(str(e))
@@ -191,8 +191,12 @@ class Print(DomainInterface):
                 return result.format()
 
             try:
-                picking.sudo().print_products_label(printer=printer_toshiba)
-                picking.sudo().print_packages_label(printer=printer_zebra)
+                picking.sudo().print_products_label(
+                    printer_id=printer_toshiba.id
+                )
+                picking.sudo().print_packages_label(
+                    printer_id=printer_zebra.id
+                )
             except Exception as e:
                 self.rollback_to_savepoint()
                 _logger.error(str(e))
