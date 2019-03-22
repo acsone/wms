@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+ALCYN-1966: Apply SO unique invoice on all invoicing cases
+
 **Bugfixes**
 
 **Build**
