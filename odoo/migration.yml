@@ -117,6 +117,7 @@ migration:
           - helpdesk
           ### OCA (external-src)
           # oca/account-analytic
+          - account_analytic_no_lines
           - account_analytic_required
           - analytic_tag_dimension
           - analytic_tag_dimension_purchase_warning
@@ -183,6 +184,7 @@ migration:
           - web_sheet_full_width
           # oca/purchase-workflow
           - purchase_cancel_reason
+          - purchase_delivery_split_date
           # oca/connector-interfaces
           - base_import_async
           #oca/queue
@@ -346,3 +348,5 @@ migration:
         upgrade:
           ### local
           - specific_report
+          - account_analytic_no_lines
+          - purchase_delivery_split_date
