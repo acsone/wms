@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-1966: Apply SO unique invoice on all invoicing cases
 * ALCYN-1610: Add SQL views calculating the margin by product for the BI tool
 * ALCYN-1973: install account_analytic_no_lines, purchase_delivery_split_date
+* ALCYN-1978: Update OCA/l10n-belgium to the last version
 
 **Bugfixes**
 
