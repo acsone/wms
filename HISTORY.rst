@@ -30,6 +30,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1983: Update account_financial_report_qweb
+
 **Build**
 
 **Documentation**

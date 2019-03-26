@@ -352,3 +352,5 @@ migration:
           - purchase_delivery_split_date
           # OCA/l10n-belgium
           - l10n_be_mis_reports
+          # OCA/account-financial-reporting
+          - account_financial_report_qweb
