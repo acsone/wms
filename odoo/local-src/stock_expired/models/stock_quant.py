@@ -32,7 +32,8 @@ class StockQuant(models.Model):
         initial_domain=None,
     ):
         deny_reservation_for_quants_expired = True
-        if move.picking_id.to_process_quant_expired:
+        move_scrapped = move.scrapped and not move.picking_id
+        if move.picking_id.to_process_quant_expired or move_scrapped:
             deny_reservation_for_quants_expired = False
 
         new_domain = initial_domain or []
