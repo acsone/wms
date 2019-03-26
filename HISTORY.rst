@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-1973: install account_analytic_no_lines, purchase_delivery_split_date
 * ALCYN-1977: Scrap expired products through "Inventory control / Scrap" menu
 * ALCYN-1978: Update OCA/l10n-belgium to the last version
+* ALCYN-1980: Disable domain for mto rules
 
 **Bugfixes**
 

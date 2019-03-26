@@ -88,7 +88,6 @@ class ProcurementOrder(models.Model):
         warehouses = self.env['stock.warehouse'].search(
             [('company_id', '=', company_id or 1)]
         )
-        route_mto = self.env.ref('stock.route_warehouse0_mto')
         for wh in warehouses:
             Product = self.env['product.product'].with_context(warehouse=wh.id)
             for product in Product.search(
@@ -96,7 +95,6 @@ class ProcurementOrder(models.Model):
                     ('orderpoint_ids', '=', False),
                     ('type', '=', 'product'),
                     ('virtual_available', '<', 0),
-                    ('route_ids', 'not in', [route_mto.id]),
                 ]
             ):
                 self.env['stock.warehouse.orderpoint'].create(
