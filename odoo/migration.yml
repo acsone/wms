@@ -350,3 +350,5 @@ migration:
           - specific_report
           - account_analytic_no_lines
           - purchase_delivery_split_date
+          # OCA/l10n-belgium
+          - l10n_be_mis_reports
