@@ -32,6 +32,8 @@ latest (unreleased)
 
 **Build**
 
+* ALCYN-1985: upgrade FROM docker image to 10.0-3.1.2
+
 **Documentation**
 
 

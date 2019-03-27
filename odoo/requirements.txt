@@ -25,5 +25,3 @@ cchardet==2.1.4
 
 # stock_devlivery_note
 unicodecsv==0.14.1
-
-marabunta==0.9.0
