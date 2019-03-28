@@ -31,6 +31,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1983: Update account_financial_report_qweb
+
 **Build**
 
 * ALCYN-1985: upgrade FROM docker image to 10.0-3.1.2
