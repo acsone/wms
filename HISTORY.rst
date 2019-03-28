@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.34.0 (2019-03-28)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-1966: Apply SO unique invoice on all invoicing cases
 * ALCYN-1610: Add SQL views calculating the margin by product for the BI tool
 * ALCYN-1973: install account_analytic_no_lines, purchase_delivery_split_date
@@ -37,8 +49,6 @@ latest (unreleased)
 **Build**
 
 * ALCYN-1985: upgrade FROM docker image to 10.0-3.1.2
-
-**Documentation**
 
 
 10.0.1.33.1 (2019-03-19)
