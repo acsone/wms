@@ -28,6 +28,7 @@ latest (unreleased)
   and through inventory adjustments
 * ALCYN-1978: Update OCA/l10n-belgium to the last version
 * ALCYN-1980: Disable domain for mto rules
+* ALCYN-1809: Add optional label report printing
 
 **Bugfixes**
 

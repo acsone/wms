@@ -74,6 +74,12 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: specific_print
+#: code:addons/specific_print/models/stock.py:137
+#, python-format
+msgid "Customer does not need product labels"
+msgstr "Le client n'a pas besoin d'étiquettes de produits"
+
+#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_res_partner_is_price_on_labels
 #: model:ir.model.fields,field_description:specific_print.field_res_users_is_price_on_labels
 msgid "Display price on labels"
@@ -90,6 +96,12 @@ msgstr "Ne pas imprimer d'étiquette"
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "Doc.n : 1/01790 /"
 msgstr "Doc.n : 1/01790 /"
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_res_partner_no_labels_products
+#: model:ir.model.fields,field_description:specific_print.field_res_users_no_labels_products
+msgid "Do not print product labels"
+msgstr "Ne pas imprimer les étiquettes du produit"
 
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_id
@@ -164,6 +176,11 @@ msgstr "Colisage"
 #: model:ir.model,name:specific_print.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.view_partner_form_inherit
+msgid "Picking & Packing"
+msgstr "Picking et Colisage"
 
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_picking_id
@@ -260,11 +277,6 @@ msgstr "Type"
 #: selection:printing.printer,type:0
 msgid "Zebra"
 msgstr "Zebra"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_partner_form_inherit
-msgid "Zetes"
-msgstr "Zetes"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1

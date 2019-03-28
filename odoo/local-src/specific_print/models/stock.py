@@ -98,6 +98,8 @@ class StockPicking(models.Model):
     @api.multi
     def print_products_label(self, printer_id=False, quantity=1):
         self.ensure_one()
+        if self.partner_id and self.partner_id.no_labels_products:
+            return
 
         packs_to_print = self.pack_operation_ids.filtered(
             lambda pack_op: not pack_op.product_id.is_do_not_print_label
@@ -127,6 +129,22 @@ class StockPicking(models.Model):
         )
         printer = self.env['printing.printer'].browse(printer_id)
         printer.print_document('', pdf, '')
+
+    @api.multi
+    def print_labels_report(self):
+        self.ensure_one()
+        if self.partner_id and self.partner_id.no_labels_products:
+            raise UserError(_('Customer does not need product labels'))
+        return {
+            'name': 'Print label',
+            'type': 'ir.actions.act_window',
+            'id': self.env.ref('specific_print.print_label_action').id,
+            'view_mode': 'form',
+            'res_model': 'print.label',
+            'target': 'new',
+            # sending of all context causes errors
+            'context': {'default_label_type': 'product'},
+        }
 
 
 class StockPackOperationLot(models.Model):
