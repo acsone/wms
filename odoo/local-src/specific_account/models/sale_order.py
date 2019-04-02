@@ -114,6 +114,7 @@ class SaleOrder(models.Model):
         """Overloaded to generate invoices all at once and separately based
         on the sale order configuration.
         """
+        invoice_ids = []
         # Invoice all SO at once (standard behavior)
         sales_to_merge = self.search(
             [('id', 'in', self.ids), ('is_unique_invoice', '=', False)]
@@ -121,9 +122,10 @@ class SaleOrder(models.Model):
         sales_to_merge = sales_to_merge.with_context(
             mail_auto_subscribe_no_notify=True
         )
-        invoice_ids = super(SaleOrder, sales_to_merge).action_invoice_create(
-            grouped, final
-        )
+        if sales_to_merge:
+            invoice_ids += super(
+                SaleOrder, sales_to_merge
+            ).action_invoice_create(grouped, final)
         # Invoice SO separately
         sales_to_invoice = self.search(
             [('id', 'in', self.ids), ('is_unique_invoice', '=', True)]

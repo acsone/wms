@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-1987: fix ALCYN-1966 to invoice SOs configured with "unique invoice"
+
 **Build**
 
 **Documentation**
