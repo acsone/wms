@@ -19,6 +19,10 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
+**Data**
+
+* ALCYN-1553: Set APB Authorization field on non Veterinary customers
+
 **Features and Improvements**
 
 **Bugfixes**
