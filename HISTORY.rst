@@ -19,19 +19,25 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
-**Data**
-
-* ALCYN-1553: Set APB Authorization field on non Veterinary customers
-
 **Features and Improvements**
 
 **Bugfixes**
 
-* ALCYN-1987: fix ALCYN-1966 to invoice SOs configured with "unique invoice"
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.34.1 (2019-04-02)
+++++++++++++++++++++++++
+
+**Data**
+
+* ALCYN-1553: Set APB Authorization field on non Veterinary customers
+
+**Bugfixes**
+
+* ALCYN-1987: fix ALCYN-1966 to invoice SOs configured with "unique invoice"
 
 
 10.0.1.34.0 (2019-03-28)
