@@ -169,7 +169,7 @@ class PurchaseOrderLine(models.Model):
             line.is_bo_line = line.product_id.immediately_usable_qty < 0
 
     # By default there is no way to add a discounts in Purchase Lines.
-    # To do that I added a new field "price_unit_base".
+    # To do that I added a neqw field "price_unit_base".
     # This field will replace the field "price_unit" in the view form and the
     # field price_unit will contains the price of the product with discount.
     #

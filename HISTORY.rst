@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2002: fix average price computation when purchase price is changed
+  after the confirmation of the purchase
+
 **Build**
 
 **Documentation**
