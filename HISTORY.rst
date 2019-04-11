@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* Remove deprecated t-esc-options instruction in delivery slip report, showing a
+  warning on each print
+
 **Build**
 
 **Documentation**

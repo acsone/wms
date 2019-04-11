@@ -357,3 +357,8 @@ migration:
       operations:
         pre:
           - "sh -c 'psql -f odoo/songs/upgrade/update_10_0_1_34_1.sql'"
+    - version: 10.0.1.35.0
+      addons:
+        upgrade:
+          ### local
+          - specific_report
