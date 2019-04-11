@@ -167,6 +167,18 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
 
+    def test_create_saleorder_carrier_id_is_none(self):
+        """Check the use of default delivery carrier from partner.
+
+        When carrier_id in data is set to None
+
+        """
+        data = deepcopy(self.order_data)
+        data['carrier_id'] = None
+        order = self.env['sale.order']._ws_create_new(data)
+        self.assertEqual(len(order.order_line), 1)
+        self.assertEqual(order.carrier_id, self.delivery_1)
+
     def test_integrity_error(self):
         data = deepcopy(self.order_data)
         # set inexisting partner
