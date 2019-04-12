@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2008 Optimize "Remains to deliver" filter performance
+
 **Bugfixes**
 
 **Build**

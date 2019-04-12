@@ -215,7 +215,7 @@
             <xpath expr="//field[@name='order_id']" position="before">
                 <field name="product_qty_remains_to_deliver"/>
                 <filter string="Remains to deliver" name="remains_to_deliver"
-                        domain="[('product_qty_remains_to_deliver', '>', 0),('product_id.type', 'in', ['consu', 'product']),('order_id.is_consignment','=',False)]"/>
+                        domain="[('product_qty_remains_to_deliver', '>', 0),('product_type', 'in', ['consu', 'product']),('is_consignment','=',False)]"/>
             </xpath>
         </field>
     </record>
