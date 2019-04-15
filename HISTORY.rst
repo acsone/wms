@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2005: Fix web service create web sale order when the carrier_id value in the data is None
+
 **Build**
 
 **Documentation**
