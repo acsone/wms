@@ -25,6 +25,7 @@ latest (unreleased)
 
 * ALCYN-2002: fix average price computation when purchase price is changed
   after the confirmation of the purchase
+* ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
 
 **Build**
 
