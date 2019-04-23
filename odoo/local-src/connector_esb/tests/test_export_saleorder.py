@@ -212,6 +212,19 @@ class ExportSaleOrderTestCase(SavepointCase):
         self.maxDiff = None
         self.assertDictEqual(values, expected)
 
+    def test_order_line_is_delivery_not_exported(self):
+        """Check sale order line with is_delivery set to True.
+
+        Sale order line that contains information about the delivery method
+        should not be exported.
+        """
+        so = self.so2
+        so.order_line[0].is_delivery = True
+        with self.backend.work_on(self.model._name) as work:
+            mapper = work.component(usage='export.mapper')
+            values = mapper.map_record(so).values()
+        self.assertEqual(len(values['lines']), 0)
+
     def test_correct_postprocess(self):
         """ Test sale order is updated correctely with return values """
         with self.backend.work_on(self.model._name) as work:
