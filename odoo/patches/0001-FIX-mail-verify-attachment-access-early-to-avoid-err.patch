@@ -10,7 +10,7 @@ Subject: [PATCH] [FIX] mail: verify attachment access early to avoid errors
  2 files changed, 19 insertions(+), 1 deletion(-)
 
 diff --git a/addons/mail/models/mail_mail.py b/addons/mail/models/mail_mail.py
-index d1ffb1d..8730578 100644
+index d1ffb1d756b..87305781784 100644
 --- a/addons/mail/models/mail_mail.py
 +++ b/addons/mail/models/mail_mail.py
 @@ -62,7 +62,18 @@ class MailMail(models.Model):
@@ -34,7 +34,7 @@ index d1ffb1d..8730578 100644
      @api.multi
      def unlink(self):
 diff --git a/addons/mail/models/mail_message.py b/addons/mail/models/mail_message.py
-index 88bd6ae..95ff558 100644
+index 88bd6ae321d..95ff558c900 100644
 --- a/addons/mail/models/mail_message.py
 +++ b/addons/mail/models/mail_message.py
 @@ -742,6 +742,10 @@ class Message(models.Model):
@@ -59,5 +59,5 @@ index 88bd6ae..95ff558 100644
          return res
  
 -- 
-2.7.4
+2.17.1
 

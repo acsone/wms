@@ -69,7 +69,7 @@ closes odoo/odoo#30857
  2 files changed, 9 insertions(+), 7 deletions(-)
 
 diff --git a/addons/stock/models/stock_move.py b/addons/stock/models/stock_move.py
-index c170d2c..43a51a0 100644
+index c170d2cc5fa..43a51a03831 100644
 --- a/addons/stock/models/stock_move.py
 +++ b/addons/stock/models/stock_move.py
 @@ -868,13 +868,15 @@ class StockMove(models.Model):
@@ -95,7 +95,7 @@ index c170d2c..43a51a0 100644
  
                  remaining_move_qty[move.id] -= prout_move_qty[move]
 diff --git a/addons/stock/models/stock_picking.py b/addons/stock/models/stock_picking.py
-index c1f5f98..3d381ac 100644
+index c1f5f98ba09..3d381ac064c 100644
 --- a/addons/stock/models/stock_picking.py
 +++ b/addons/stock/models/stock_picking.py
 @@ -737,7 +737,7 @@ class Picking(models.Model):
@@ -108,5 +108,5 @@ index c1f5f98..3d381ac 100644
                              if not lot_qty:
                                  max_qty_on_link = min(quant.qty, qty_to_assign)
 -- 
-2.7.4
+2.17.1
 
