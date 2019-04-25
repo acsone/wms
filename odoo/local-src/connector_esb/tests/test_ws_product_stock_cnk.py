@@ -41,7 +41,37 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
                 'cnk_code': '000115',
             }
         )
-        self.all_records = self.product1 + self.product2 + self.product3
+        self.product4 = self.model.create(
+            {
+                'name': 'Product4',
+                'default_code': 'Product4',
+                'cnk_code': '000225',
+                'sale_ok': False,
+                'veterinary_only': True,
+                'categ_id': self.env.ref(
+                    'specific_data.product_categ_vet_belges'
+                ).id,
+            }
+        )
+        self.product5 = self.model.create(
+            {
+                'name': 'Product5',
+                'default_code': 'Product5',
+                'cnk_code': '000335',
+                'sale_ok': False,
+                'veterinary_only': True,
+                'categ_id': self.env.ref(
+                    'specific_data.product_categ_psychotropes_25'
+                ).id,
+            }
+        )
+        self.all_records = (
+            self.product1
+            + self.product2
+            + self.product3
+            + self.product4
+            + self.product5
+        )
 
         self.change_product_qty(self.product1, 20)
         self.change_product_qty(self.product2, 0)
@@ -85,9 +115,11 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
                 'is_for_newpharma': True,
             }
         )
-
-        # Set the product 2 to veterinary_only == True
+        # Set the product 2 to veterinary_only so should not be picked up
         self.product2.veterinary_only = True
+        # Activate the belgium medocs, that should be included
+        self.product4.sale_ok = True
+        self.product5.sale_ok = True
 
         backend = self.env['esb.backend'].get_singleton()
         cnks = self.all_records.mapped('cnk_code')
@@ -105,9 +137,11 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
             '000015': self.product1,
             '000048': self.product2,
             '000115': self.product3,
+            '000225': self.product4,
+            '000335': self.product5,
         }
 
-        self.assertEqual(len(result), 2)
+        self.assertEqual(len(result), 4)
         for product_values in result:
             product = product_mapper[product_values['cnk']]
             qty = product_values['quantity']

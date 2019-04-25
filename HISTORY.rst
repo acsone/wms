@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
+
 **Bugfixes**
 
 * ALCYN-2002: fix average price computation when purchase price is changed
