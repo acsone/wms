@@ -2,6 +2,7 @@
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import exceptions
 from odoo.tests.common import SavepointCase
 
 
@@ -32,27 +33,16 @@ class TestDeliveryRoundAssign(SavepointCase):
             }
         )
 
-        inventory = cls.env['stock.inventory'].create(
-            {'name': 'Test', 'product_id': cls.p1.id, 'filter': 'product'}
-        )
-        inventory.prepare_inventory()
-        assert not inventory.line_ids, "Inventory line should not created."
-        cls.env['stock.inventory.line'].create(
-            {
-                'inventory_id': inventory.id,
-                'product_id': cls.p1.id,
-                'product_uom_id': cls.env.ref('product.product_uom_unit').id,
-                'product_qty': 100,
-                'location_id': cls.env.ref('stock.stock_location_stock').id,
-            }
-        )
-        inventory.action_done()
+        cls._add_inventory_qty(cls.p1, 100)
 
         cls.delivery_template = cls.env['round.template'].create(
             {'name': 'Unittest delivery template'}
         )
 
         cls.delivery_round_1 = cls.env['round.instance'].create(
+            {'template_id': cls.delivery_template.id, 'date': '2017-01-01'}
+        )
+        cls.delivery_round_2 = cls.env['round.instance'].create(
             {'template_id': cls.delivery_template.id, 'date': '2017-01-01'}
         )
 
@@ -63,6 +53,25 @@ class TestDeliveryRoundAssign(SavepointCase):
                 [('name', '=', 'Delivery Orders')]
             )
         pick.write({'subcode': 'PICK'})
+
+    @classmethod
+    def _add_inventory_qty(cls, product, qty):
+        inventory = cls.env['stock.inventory'].create(
+            {'name': 'Test', 'product_id': product.id, 'filter': 'product'}
+        )
+        inventory.prepare_inventory()
+        assert not inventory.line_ids, "Inventory line should not created."
+        cls.env['stock.inventory.line'].create(
+            {
+                'inventory_id': inventory.id,
+                'product_id': product.id,
+                'product_uom_id': product.uom_id.id,
+                'product_qty': qty,
+                'location_id': cls.env.ref('stock.stock_location_stock').id,
+            }
+        )
+        inventory.action_done()
+        return inventory
 
     def test_deliveryround_carrier(self):
         delivery_template = self.env['round.template'].create(
@@ -257,3 +266,110 @@ class TestDeliveryRoundAssign(SavepointCase):
             self.assertEqual(
                 picking.group_id.carrier_id, carrier_manual_change
             )
+
+    def test_assign_delivery_round_already_printed(self):
+        sale = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 3,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertFalse(sale.picking_ids)
+        sale.action_confirm()
+
+        pick = sale.picking_ids.filtered(
+            lambda p: p.picking_type_subcode == 'PICK'
+        )
+        self.delivery_round_1._assign_pickings(pick)
+        self.assertEqual(pick.state, 'assigned')
+        self.assertTrue(pick.pack_operation_product_ids)
+        self.assertFalse(pick.printed)
+
+        # should be able to reassign as it is not yet printed
+        self.delivery_round_2._assign_pickings(pick)
+        for picking in sale.picking_ids:
+            self.assertEqual(picking.delivery_round_id, self.delivery_round_2)
+        # should not have changed
+        self.assertEqual(pick.state, 'assigned')
+        self.assertTrue(pick.pack_operation_product_ids)
+        self.assertFalse(pick.printed)
+
+        # from stock_picking_assignment: set an operator and printed to True
+        pick.assign_operator()
+        self.assertEqual(pick.state, 'assigned')
+        self.assertTrue(pick.pack_operation_product_ids)
+        self.assertTrue(pick.printed)
+
+        # when a picking is started and has pack operations, we cannot
+        # change it's delivery round
+        expected_msg = 'You cannot reassign the started picking'
+        with self.assertRaisesRegexp(exceptions.UserError, expected_msg):
+            self.delivery_round_1._assign_pickings(pick)
+
+    def test_assign_delivery_round_new_picking(self):
+        """New picking on a SO can still be added to a delivery round"""
+        sale = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 3,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertFalse(sale.picking_ids)
+        sale.action_confirm()
+
+        pick = sale.picking_ids.filtered(
+            lambda p: p.picking_type_subcode == 'PICK'
+        )
+        self.delivery_round_1._assign_pickings(pick)
+        pick.assign_operator()
+        self.assertEqual(pick.state, 'assigned')
+        self.assertTrue(pick.pack_operation_product_ids)
+        self.assertTrue(pick.printed)
+
+        self._add_inventory_qty(self.p2, 100)
+
+        self.env['sale.order.line'].create(
+            {
+                'order_id': sale.id,
+                'name': self.p2.name,
+                'product_id': self.p2.id,
+                'product_uom': self.ref('product.product_uom_unit'),
+                'product_uom_qty': 3,
+                'price_unit': 200,
+            }
+        )
+        new_pick = sale.picking_ids.filtered(lambda r: r.state == 'confirmed')
+        self.assertEqual(len(new_pick), 1)
+
+        # manually setting delivery round on the new picking
+        # must be possible
+        self.delivery_round_1._assign_pickings(new_pick)
+        self.assertEqual(new_pick.delivery_round_id, self.delivery_round_1)
