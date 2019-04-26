@@ -11,7 +11,7 @@ to ensure proper XML structure.
  1 file changed, 21 insertions(+), 9 deletions(-)
 
 diff --git a/addons/mail/wizard/invite.py b/addons/mail/wizard/invite.py
-index 1d345af..17e5fbf 100644
+index 1d345af517a..17e5fbf842a 100644
 --- a/addons/mail/wizard/invite.py
 +++ b/addons/mail/wizard/invite.py
 @@ -1,6 +1,9 @@
@@ -62,5 +62,5 @@ index 1d345af..17e5fbf 100644
  
      res_model = fields.Char('Related Document Model', required=True, index=True, help='Model of the followed resource')
 -- 
-2.7.4
+2.17.1
 

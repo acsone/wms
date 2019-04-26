@@ -29,6 +29,8 @@ latest (unreleased)
 
 **Build**
 
+* ALCYN-2017: Upgrade wkhtmltopdf to version 0.12.5
+
 **Documentation**
 
 

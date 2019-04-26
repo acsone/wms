@@ -12,14 +12,14 @@ Was requested by opw-1887019
 
 closes odoo/odoo#30400
 ---
- addons/l10n_be_intrastat/wizard/xml_decl.py        | 228 +++++++++++----------
- addons/l10n_be_intrastat_2019/__init__.py          |   4 +
- addons/l10n_be_intrastat_2019/__manifest__.py      |  15 ++
- .../i18n/l10n_be_intrastat_2019.pot                |  32 +++
- addons/l10n_be_intrastat_2019/models/__init__.py   |   4 +
- .../models/account_intrastat_report.py             |  33 +++
- .../models/account_invoice_line.py                 |   9 +
- .../views/account_invoice_line_view.xml            |  13 ++
+ addons/l10n_be_intrastat/wizard/xml_decl.py   | 228 ++++++++++--------
+ addons/l10n_be_intrastat_2019/__init__.py     |   4 +
+ addons/l10n_be_intrastat_2019/__manifest__.py |  15 ++
+ .../i18n/l10n_be_intrastat_2019.pot           |  32 +++
+ .../l10n_be_intrastat_2019/models/__init__.py |   4 +
+ .../models/account_intrastat_report.py        |  33 +++
+ .../models/account_invoice_line.py            |   9 +
+ .../views/account_invoice_line_view.xml       |  13 +
  8 files changed, 233 insertions(+), 105 deletions(-)
  create mode 100644 addons/l10n_be_intrastat_2019/__init__.py
  create mode 100644 addons/l10n_be_intrastat_2019/__manifest__.py
@@ -30,7 +30,7 @@ closes odoo/odoo#30400
  create mode 100644 addons/l10n_be_intrastat_2019/views/account_invoice_line_view.xml
 
 diff --git a/addons/l10n_be_intrastat/wizard/xml_decl.py b/addons/l10n_be_intrastat/wizard/xml_decl.py
-index 1758b65..067be44 100644
+index 1758b650641..067be44ea06 100644
 --- a/addons/l10n_be_intrastat/wizard/xml_decl.py
 +++ b/addons/l10n_be_intrastat/wizard/xml_decl.py
 @@ -102,35 +102,140 @@ class XmlDeclaration(models.TransientModel):
@@ -300,7 +300,7 @@ index 1758b65..067be44 100644
              #no datas
 diff --git a/addons/l10n_be_intrastat_2019/__init__.py b/addons/l10n_be_intrastat_2019/__init__.py
 new file mode 100644
-index 0000000..dc5e6b6
+index 00000000000..dc5e6b693d1
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/__init__.py
 @@ -0,0 +1,4 @@
@@ -310,7 +310,7 @@ index 0000000..dc5e6b6
 +from . import models
 diff --git a/addons/l10n_be_intrastat_2019/__manifest__.py b/addons/l10n_be_intrastat_2019/__manifest__.py
 new file mode 100644
-index 0000000..b3de01c
+index 00000000000..b3de01cd46b
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/__manifest__.py
 @@ -0,0 +1,15 @@
@@ -331,7 +331,7 @@ index 0000000..b3de01c
 +}
 diff --git a/addons/l10n_be_intrastat_2019/i18n/l10n_be_intrastat_2019.pot b/addons/l10n_be_intrastat_2019/i18n/l10n_be_intrastat_2019.pot
 new file mode 100644
-index 0000000..5953a7b
+index 00000000000..5953a7be43c
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/i18n/l10n_be_intrastat_2019.pot
 @@ -0,0 +1,32 @@
@@ -369,7 +369,7 @@ index 0000000..5953a7b
 +
 diff --git a/addons/l10n_be_intrastat_2019/models/__init__.py b/addons/l10n_be_intrastat_2019/models/__init__.py
 new file mode 100644
-index 0000000..9115b4d
+index 00000000000..9115b4d66b6
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/models/__init__.py
 @@ -0,0 +1,4 @@
@@ -379,7 +379,7 @@ index 0000000..9115b4d
 +from . import account_invoice_line
 diff --git a/addons/l10n_be_intrastat_2019/models/account_intrastat_report.py b/addons/l10n_be_intrastat_2019/models/account_intrastat_report.py
 new file mode 100644
-index 0000000..2a09190
+index 00000000000..2a091901a26
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/models/account_intrastat_report.py
 @@ -0,0 +1,33 @@
@@ -418,7 +418,7 @@ index 0000000..2a09190
 +        return 'INTRASTAT_X_EF' if extended else 'INTRASTAT_X_SF'
 diff --git a/addons/l10n_be_intrastat_2019/models/account_invoice_line.py b/addons/l10n_be_intrastat_2019/models/account_invoice_line.py
 new file mode 100644
-index 0000000..01199b0
+index 00000000000..01199b0174a
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/models/account_invoice_line.py
 @@ -0,0 +1,9 @@
@@ -433,7 +433,7 @@ index 0000000..01199b0
 +    intrastat_product_origin_country_id = fields.Many2one('res.country', string='Origin Country of Product')
 diff --git a/addons/l10n_be_intrastat_2019/views/account_invoice_line_view.xml b/addons/l10n_be_intrastat_2019/views/account_invoice_line_view.xml
 new file mode 100644
-index 0000000..187e32b
+index 00000000000..187e32b161e
 --- /dev/null
 +++ b/addons/l10n_be_intrastat_2019/views/account_invoice_line_view.xml
 @@ -0,0 +1,13 @@
@@ -451,5 +451,5 @@ index 0000000..187e32b
 +    </record>
 +</odoo>
 -- 
-2.7.4
+2.17.1
 

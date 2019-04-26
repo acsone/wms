@@ -1,17 +1,19 @@
-From d3ab0fb9f5f99ea71858750949b387409c85081c Mon Sep 17 00:00:00 2001
+From 28f33dc1507ee2428029efdbcb86a86f0aef5136 Mon Sep 17 00:00:00 2001
 From: "Laurent Mignon (ACSONE)" <laurent.mignon@acsone.eu>
-Date: Fri, 25 Jan 2019 11:30:59 +0100
+Date: Fri, 25 Jan 2019 10:30:59 +0000
 Subject: [PATCH] [IMP] stock: performance on _compute_product_availability
 
 Improve performance (*3) on _compute_product_availability
 `mapped` makes use of orm prefetch, which is inefficient in this use
 case when facing high volume.
+
+closes odoo/odoo#30545
 ---
  addons/stock/models/stock_move.py | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/addons/stock/models/stock_move.py b/addons/stock/models/stock_move.py
-index 43a51a0..9ffc2d0 100644
+index 43a51a03831..9ffc2d0df88 100644
 --- a/addons/stock/models/stock_move.py
 +++ b/addons/stock/models/stock_move.py
 @@ -193,8 +193,8 @@ class StockMove(models.Model):
@@ -26,5 +28,5 @@ index 43a51a0..9ffc2d0 100644
      @api.multi
      def _compute_string_qty_information(self):
 -- 
-2.7.4
+2.17.1
 

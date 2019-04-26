@@ -13,7 +13,7 @@ instead of 250.
  1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/addons/stock_account/report/stock_history.py b/addons/stock_account/report/stock_history.py
-index fabf4ff..4cd33a1 100644
+index fabf4ff7add..4cd33a111fc 100644
 --- a/addons/stock_account/report/stock_history.py
 +++ b/addons/stock_account/report/stock_history.py
 @@ -58,9 +58,13 @@ class StockHistory(models.Model):
@@ -43,5 +43,5 @@ index fabf4ff..4cd33a1 100644
                      else:
                          price = histories_dict.get((product_id, history_data['company_id']), 0.0)
 -- 
-2.7.4
+2.17.1
 
