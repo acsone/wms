@@ -99,11 +99,18 @@ class ProductProduct(models.Model):
 
     @api.model
     def get_newpharma_products_domain(self):
-        """ Return an additional domain (used by the method search on
-        product.product) for the wholesaler NewPharma.
-        """
+        """ Return an additional domain for the wholesaler NewPharma.
 
-        return [('veterinary_only', '=', False)]
+        It filters out all the products that are only for veterinary except
+        for the ones in the category 'Médicaments vétérinaires Belges' and its
+        children.
+        """
+        belgium_medoc = self.env.ref('specific_data.product_categ_vet_belges')
+        return [
+            '|',
+            ('veterinary_only', '=', False),
+            ('categ_id', 'child_of', belgium_medoc.id),
+        ]
 
     @api.model
     def get_olalux_products_domain(self):
