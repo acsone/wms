@@ -363,3 +363,4 @@ migration:
         upgrade:
           ### local
           - specific_report
+          - specific_sale

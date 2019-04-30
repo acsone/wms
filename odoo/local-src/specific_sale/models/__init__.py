@@ -5,6 +5,7 @@
 from . import product
 from . import res_partner
 from . import sale
+from . import sale_order_line
 from . import sale_report
 from . import stock_production_lot
 from . import product_category
