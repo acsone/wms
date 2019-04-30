@@ -29,6 +29,9 @@ latest (unreleased)
   after the confirmation of the purchase
 * ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
 
+* Remove deprecated t-esc-options instruction in delivery slip report, showing a
+  warning on each print
+
 **Build**
 
 * ALCYN-2017: Upgrade wkhtmltopdf to version 0.12.5

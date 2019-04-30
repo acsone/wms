@@ -176,7 +176,7 @@
                                 <span t-field="order_line.price_reduce_taxexcl"/>
                             </td>
                             <td>
-                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-esc-options='{"widget": "monetary", "display_currency": "order_line.currency_id"}'/>
+                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"/>
                             </td>
                             <td>
                                 <t t-foreach="order_line.tax_id" t-as="tax"><t t-if="tax_index">, </t><span style="white-space:nowrap"><t t-esc="tax.description or tax.name"/></span></t>
