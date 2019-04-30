@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
 
 * ALCYN-2008 Optimize "Remains to deliver" filter performance
+* ALCYN-2009: Improve `sale.order.line` views
 
 **Bugfixes**
 
