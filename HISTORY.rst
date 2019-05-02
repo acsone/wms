@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.35.0 (2019-05-02)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
 
 * ALCYN-2008 Optimize "Remains to deliver" filter performance
