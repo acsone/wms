@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
+* ALCYN-2041: account_mass_reconcile: Display partially reconciled items
 
 **Bugfixes**
 
