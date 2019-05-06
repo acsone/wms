@@ -28,8 +28,10 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.35.0 (2019-05-02)
+10.0.1.35.1 (2019-05-06)
 ++++++++++++++++++++++++
+
+Replace 10.0.1.35.0 to include 10.0.1.34.3.
 
 **Features and Improvements**
 
@@ -51,7 +53,11 @@ latest (unreleased)
 
 * ALCYN-2017: Upgrade wkhtmltopdf to version 0.12.5
 
-**Documentation**
+
+10.0.1.35.0 (2019-05-02) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Replaced by 10.0.1.35.1
 
 
 10.0.1.34.3 (2019-05-06)

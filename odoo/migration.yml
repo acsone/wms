@@ -368,7 +368,7 @@ migration:
           operations:
             pre:
               - psql -f odoo/songs/upgrade/update_10_0_1_34_3_stock_huge_qties.sql
-    - version: 10.0.1.35.0
+    - version: 10.0.1.35.1
       addons:
         upgrade:
           ### local
