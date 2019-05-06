@@ -139,6 +139,7 @@ migration:
           - account_invoice_triple_discount
           # oca/account-reconcile
           - account_mass_reconcile
+          - account_mass_reconcile_partner
           # oca/bank-payment
           - account_banking_pain_base
           - account_banking_mandate
@@ -359,3 +360,6 @@ migration:
           - "sh -c 'psql -f odoo/songs/upgrade/update_10_0_1_34_1.sql'"
     - version: 10.0.1.34.2
     - version: 10.0.1.34.3
+      addons:
+        upgrade:
+          - account_mass_reconcile_partner

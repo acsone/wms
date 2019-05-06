@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2031: Install account_mass_reconcile_partner
+
 **Bugfixes**
 
 **Build**
