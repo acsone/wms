@@ -129,3 +129,12 @@
       # Fix avoid_quick_create with multiprocess
     - oca refs/pull/1454/head
   target: *default_target
+./external-src/account-reconcile:
+  remotes:
+    oca: git@github.com:oca/account-reconcile.git
+    camptocamp: git@github.com:camptocamp/account-reconcile.git
+  merges:
+    - oca 63afcb24263fdaa15c69099b396cd2713e80a528
+      # [10.0] Add account_mass_reconcile_partner
+    - oca refs/pull/253/head
+  target: *default_target
