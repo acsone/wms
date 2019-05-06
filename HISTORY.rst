@@ -19,6 +19,18 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.34.3 (2019-05-06)
+++++++++++++++++++++++++
+
 **Data**
 
 * ALCYN-2029: lower erroneous stock quantities which were around ``1*10^64``
@@ -27,12 +39,6 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2031: Install account_mass_reconcile_partner
-
-**Bugfixes**
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.34.2 (2019-04-16)
