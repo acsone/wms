@@ -19,6 +19,11 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
+**Data**
+
+* ALCYN-2029: lower erroneous stock quantities which were around ``1*10^64``
+  provoking wrong computations on the concerned product
+
 **Features and Improvements**
 
 * ALCYN-2031: Install account_mass_reconcile_partner
