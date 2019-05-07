@@ -390,4 +390,9 @@ migration:
       addons:
         upgrade:
           ### local
+          - delivery_rounds
+          - specific_sale
           - account_payment_order_background
+          # bank-payment
+          - account_payment_partner
+          - account_payment_order

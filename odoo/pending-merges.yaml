@@ -70,6 +70,7 @@
       # [10.0] improve file name in mandate
     - oca refs/pull/534/head
     - oca refs/pull/543/head
+    - oca refs/pull/590/head
   target: *default_target
 ./external-src/enterprise:
   remotes:
