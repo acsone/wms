@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2027: Execute reconciliations as jobs at Payment Orders's file uploaded
+  confirmation.
+
 **Bugfixes**
 
 **Build**
