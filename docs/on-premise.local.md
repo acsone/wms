@@ -122,6 +122,17 @@ use it during that time.
 
 # How to deploy
 
+## Pre-prod (integration)
+
+* Unlock the firewall (see above)
+* Connect with "connectionlinks" on "alcyon_integration"
+* Edit `/srv/ABL-odoo-preproduction/docker-compose.yml` file and change the image version
+* Deploy with `docker stack deploy --with-registry-auth -c /srv/ABL-odoo-preproduction/docker-compose.yml odoo`
+
+## Production
+
+Normally, the deployment to production is done by LimeLogic.
+
 On lnx004.abl.grp :
 
 - stop Odoo stack:
