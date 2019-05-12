@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2045: set order to proper tax computations
+
 **Build**
 
 **Documentation**
