@@ -374,8 +374,14 @@ migration:
           ### local
           - specific_report
           - specific_sale
-    - version: 10.0.1.36.0
+    - version: 10.0.1.35.2
       addons:
         upgrade:
+          # Odoo/Enterprise
+          - account_reports
+          # OCA/account-financial-tools
+          - account_credit_control
+          # OCA/account-reconcile
+          - account_mass_reconcile
           ### local
           - connector_esb
