@@ -8,6 +8,16 @@ from odoo.addons.connector.components.mapper import mapping
 from ...components.mapper import falsy2zero
 
 
+class SaleOrderLineExportChildMapper(Component):
+    _name = 'esb.sale.order.line.export.child.mapper'
+    _inherit = ['base.map.child.export']
+    _apply_on = 'sale.order.line'
+
+    def skip_item(self, record):
+        """Do not export lines that contains delivery information."""
+        return 'is_delivery' in record.source and record.source.is_delivery
+
+
 class SaleOrderLineExportMapper(Component):
     _name = 'esb.sale.order.line.export.mapper'
     _inherit = ['esb.export.mapper']
