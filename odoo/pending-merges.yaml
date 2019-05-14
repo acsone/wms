@@ -83,6 +83,8 @@
   shell_command_after:
     # security patch ODOO-SA-2018-11-28-1
     - git am "$(git format-patch -1 410e038dd4e561143d741862203e7f3ed69f326a -o ../../patches)"
+    - git am "$(git format-patch -1 dc66021677082317f64907d6307c2c6d298dc648 -o ../../patches)"
+
   target: *default_target
 ./external-src/queue:
   remotes:
