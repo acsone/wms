@@ -44,6 +44,9 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2045: set order to proper tax computations
+* ALCYN-2006: do not allow to change delivery round of an outgoing picking
+  when the PICK one has been started (printed=True)
+
 
 10.0.1.35.1 (2019-05-06)
 ++++++++++++++++++++++++
@@ -62,7 +65,6 @@ Replace 10.0.1.35.0 to include 10.0.1.34.3.
 * ALCYN-2002: fix average price computation when purchase price is changed
   after the confirmation of the purchase
 * ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
-
 * Remove deprecated t-esc-options instruction in delivery slip report, showing a
   warning on each print
 
