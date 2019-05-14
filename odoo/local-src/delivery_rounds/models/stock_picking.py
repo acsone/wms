@@ -34,7 +34,10 @@ class StockPicking(models.Model):
             picking.partner_itinerary_ids = partner.round_itinerary_ids
 
     delivery_round_customer_id = fields.Many2one(
-        'round.instance.customer', 'Delivery Round Customer', copy=False
+        'round.instance.customer',
+        'Delivery Round Customer',
+        copy=False,
+        index=True,
     )
     delivery_round_id = fields.Many2one(
         related='delivery_round_customer_id.delivery_round_id',
@@ -42,6 +45,7 @@ class StockPicking(models.Model):
         store=True,
         readonly=True,
         track_visibility='onchange',
+        index=True,
     )
 
     @api.model

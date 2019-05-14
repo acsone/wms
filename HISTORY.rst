@@ -21,6 +21,11 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2027: Execute reconciliations as jobs at Payment Orders's file uploaded
+  confirmation.
+* ALCYN-2027: Add indexes to optimize payment order queries
+* ALCYN-2027: Add index to optimize Sale count widget on products
+
 **Bugfixes**
 
 **Build**
