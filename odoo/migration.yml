@@ -370,12 +370,8 @@ migration:
             pre:
               - psql -f odoo/songs/upgrade/update_10_0_1_34_3_stock_huge_qties.sql
     - version: 10.0.1.35.1
-      addons:
-        upgrade:
-          ### local
-          - specific_report
-          - specific_sale
     - version: 10.0.1.35.2
+    - version: 10.0.1.35.4
       addons:
         upgrade:
           # Odoo/Enterprise
@@ -386,6 +382,8 @@ migration:
           - account_mass_reconcile
           ### local
           - connector_esb
+          - specific_report
+          - specific_sale
     - version: 10.0.1.36.0
       addons:
         upgrade:
