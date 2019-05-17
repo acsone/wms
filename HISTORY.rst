@@ -30,6 +30,7 @@ latest (unreleased)
 
 * ALCYN-2045: set order to proper tax computations
 * ALCYN-1990: Upgrade intracom VAT report module to fix xml report
+* ALCYN-2012: Revert (Prevent shop move to be consolidated in closed delivery round)
 
 **Build**
 
