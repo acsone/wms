@@ -59,6 +59,18 @@ Replace 10.0.1.35.0 to include 10.0.1.34.3.
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.35.4 (2019-05-17)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
 * ALCYN-2008 Optimize "Remains to deliver" filter performance
 * ALCYN-2009: Improve `sale.order.line` views
@@ -77,9 +89,6 @@ Replace 10.0.1.35.0 to include 10.0.1.34.3.
 **Build**
 
 * ALCYN-2017: Upgrade wkhtmltopdf to version 0.12.5
-
-**Documentation**
-
 
 10.0.1.35.2 (2019-05-13) [YANKED]
 +++++++++++++++++++++++++++++++++
