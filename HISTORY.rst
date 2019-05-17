@@ -60,9 +60,10 @@ Replace 10.0.1.35.0 to include 10.0.1.34.3.
 **Features and Improvements**
 
 * ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
-
 * ALCYN-2008 Optimize "Remains to deliver" filter performance
 * ALCYN-2009: Improve `sale.order.line` views
+* ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
+* ALCYN-2041: account_mass_reconcile: Display partially reconciled items
 
 **Bugfixes**
 
@@ -71,10 +72,24 @@ Replace 10.0.1.35.0 to include 10.0.1.34.3.
 * ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
 * Remove deprecated t-esc-options instruction in delivery slip report, showing a
   warning on each print
+* ALCYN-2045: set order to proper tax computations
 
 **Build**
 
 * ALCYN-2017: Upgrade wkhtmltopdf to version 0.12.5
+
+**Documentation**
+
+
+10.0.1.35.2 (2019-05-13) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Replaced by 10.0.1.35.4
+
+10.0.1.35.1 (2019-05-06) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Replaced by 10.0.1.35.4
 
 
 10.0.1.35.0 (2019-05-02) [YANKED]
