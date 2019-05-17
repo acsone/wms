@@ -243,7 +243,7 @@ msgstr "Produits sans promotions<br/>"
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Promotion supplier"
-msgstr "Promotion fournisseur"
+msgstr "Remise d'achat"
 
 #. module: website_purchase_review
 #: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_promotion_supplier_overwrite
@@ -253,7 +253,7 @@ msgstr "Promotion fournisseur principale"
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Promotion supplier:"
-msgstr "Promotion fournisseur:"
+msgstr "Remise d'achat:"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
@@ -358,7 +358,7 @@ msgstr "Sous-groupe"
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Supplier discount"
-msgstr "Remise fournisseur"
+msgstr "Ristourne globale"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body

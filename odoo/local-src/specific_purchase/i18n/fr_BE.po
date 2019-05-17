@@ -315,7 +315,7 @@ msgstr "Etat du produit"
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
 msgid "Promotion supplier"
-msgstr "Promotion fournisseur"
+msgstr "Remise d'achat"
 
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
@@ -394,7 +394,7 @@ msgstr "Dimanche"
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
 msgid "Supplier discount %"
-msgstr "Remise fournisseur %"
+msgstr "Ristourne globale %"
 
 #. module: specific_purchase
 #: code:addons/specific_purchase/models/product_supplierinfo.py:42

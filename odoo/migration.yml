@@ -397,3 +397,6 @@ migration:
           # bank-payment
           - account_payment_partner
           - account_payment_order
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_36_0::post
