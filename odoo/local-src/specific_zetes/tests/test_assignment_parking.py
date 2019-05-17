@@ -9,7 +9,7 @@ from .zetes_test_classes import DEFAULT_HEADER, ZetesParkingTest
 OPERATOR_CODE = '99'
 
 
-class TestAssignemnt(ZetesParkingTest):
+class TestAssignment(ZetesParkingTest):
     post_install = True
     at_install = False
 

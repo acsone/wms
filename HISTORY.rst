@@ -35,6 +35,10 @@ latest (unreleased)
 * ALCYN-2065: Fix delivery note generating with non ascii characters in product names
 * ALCYN-2049: Fix that sometimes on Magento a sale order back order is not up to date.
 
+* ALCYN-2043: change stock locations with usage 'view' to 'internal' with a new flag "act as view".
+  We cannot move quants to such location, but still they need to have an 'internal' usage to be considered
+  properly by the stock addon's code.
+
 **Build**
 
 **Documentation**
