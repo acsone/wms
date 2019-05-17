@@ -13,6 +13,7 @@ class ResPartner(models.Model):
     alcyon_category_id = fields.Many2one(
         'partner.alcyon_category', string='Alcyon category'
     )
+    ref = fields.Char(copy=False, readonly=True)
 
     vet_depot_number = fields.Char(string='Depot number')
     vet_subscription_number = fields.Char(string='Subscription number')

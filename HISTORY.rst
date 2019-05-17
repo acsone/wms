@@ -25,6 +25,7 @@ latest (unreleased)
   confirmation.
 * ALCYN-2027: Add indexes to optimize payment order queries
 * ALCYN-2027: Add index to optimize Sale count widget on products
+* ALCYN-2020: Make ref field for res.partner model readonly
 
 **Bugfixes**
 

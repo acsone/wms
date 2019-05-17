@@ -392,6 +392,7 @@ migration:
           ### local
           - delivery_rounds
           - specific_sale
+          - specific_partner
           - account_payment_order_background
           # bank-payment
           - account_payment_partner
