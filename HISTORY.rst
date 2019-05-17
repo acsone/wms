@@ -30,36 +30,6 @@ latest (unreleased)
 
 * ALCYN-2045: set order to proper tax computations
 * ALCYN-1990: Upgrade intracom VAT report module to fix xml report
-* ALCYN-2012: Revert (Prevent shop move to be consolidated in closed delivery round)
-
-**Build**
-
-**Documentation**
-
-
-10.0.1.35.2 (2019-05-13)
-++++++++++++++++++++++++
-
-**Features and Improvements**
-
-* ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
-* ALCYN-2041: account_mass_reconcile: Display partially reconciled items
-
-**Bugfixes**
-
-* ALCYN-2045: set order to proper tax computations
-* ALCYN-2006: do not allow to change delivery round of an outgoing picking
-  when the PICK one has been started (printed=True)
-
-
-10.0.1.35.1 (2019-05-06)
-++++++++++++++++++++++++
-
-Replace 10.0.1.35.0 to include 10.0.1.34.3.
-
-**Features and Improvements**
-
-**Bugfixes**
 
 **Build**
 
