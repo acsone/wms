@@ -757,7 +757,7 @@ def kill_waiting_shipments(ctx):
     )
     to_force = []
     assigned = []
-    todo_states = set(['confirmed', 'assigned', 'waiting'])
+    todo_states = {'confirmed', 'assigned', 'waiting'}
     dont_touch_quants, available_quants = check_quants_in_output(ctx)
     nb_ships = len(ships)
     counter = 0
