@@ -30,6 +30,7 @@ latest (unreleased)
 
 * ALCYN-2045: set order to proper tax computations
 * ALCYN-1990: Upgrade intracom VAT report module to fix xml report
+* ALCYN-2049: Fix that sometimes on Magento a sale order back order is not up to date.
 
 **Build**
 

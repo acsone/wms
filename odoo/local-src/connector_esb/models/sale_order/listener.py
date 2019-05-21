@@ -52,7 +52,11 @@ class SaleLineExportListener(Component):
         ) or record.env.context.get('_sale_order_write'):
             # export already triggered by the sale order write/create
             return
-        if set(fields) & {'qty_delivered', 'product_qty_unavailable'}:
+        if set(fields) & {
+            'qty_delivered',
+            'product_qty_unavailable',
+            'product_qty_canceled',
+        }:
             so = record.order_id
             so.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(so.name or ''),
