@@ -397,6 +397,7 @@ migration:
           - stock_product_bin
           - stock_receive_lot
           - specific_stock
+          - stock_inventory_controller
           # bank-payment
           - account_payment_partner
           - account_payment_order
