@@ -49,8 +49,12 @@ class PurchaseReview(Home):
             value = kw.pop(filter, None)
             if value:
                 params[filter] = value
-        if kw:
-            po.update_or_create_line(kw)
+        # Pop debug key to avoid having different results with debug activated
+        kw_copy = kw.copy()
+        if 'debug' in kw_copy:
+            kw_copy.pop('debug')
+        if kw_copy:
+            po.update_or_create_line(kw_copy)
 
             if params.get('next_product_id'):
                 url = '/purchase_review/{}/{}'.format(
