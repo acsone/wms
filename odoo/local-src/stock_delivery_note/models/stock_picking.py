@@ -8,6 +8,7 @@ from io import BytesIO
 import unicodecsv as csv
 from odoo import api, models
 from odoo.tools import config
+from unidecode import unidecode
 
 
 class StockPicking(models.Model):
@@ -61,7 +62,12 @@ class StockPicking(models.Model):
         file_data = BytesIO()
         w = csv.writer(file_data, delimiter=';', encoding='iso-8859-1')
         for line in self._generate_delivery_note():
-            w.writerow(line)
+            w.writerow(
+                [
+                    unidecode(cell) if isinstance(cell, basestring) else cell
+                    for cell in line
+                ]
+            )
         data = file_data.getvalue()
         existing = self.env['ir.attachment'].search([('name', '=', filename)])
         if len(existing):
