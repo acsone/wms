@@ -13,7 +13,6 @@
         'stock',
         'stock_picking_assignment',
         'stock_production_lot_expired_dates',
-        'stock_location_act_as_view',
         'web_widget_inputmask',
     ],
     'data': [

@@ -119,9 +119,8 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.onchange('operation_id')
     def _onchange_operation_id(self):
-        op_dest_loc = self.operation_id.location_dest_id
-        if op_dest_loc.usage == 'internal' and not op_dest_loc.act_as_view:
-            self.location_dest_id = op_dest_loc
+        if self.operation_id.location_dest_id.usage == 'internal':
+            self.location_dest_id = self.operation_id.location_dest_id
         elif not (
             self.location_dest_id
             and self._is_parent_child(
@@ -146,7 +145,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     @api.depends('operation_id')
     def _get_location_op_dest_id(self):
         loc = self.operation_id.location_dest_id
-        while loc and not loc.act_as_view:
+        while loc and loc.usage != 'view':
             loc = loc.location_id
         self.location_op_dest_id = loc.id
 

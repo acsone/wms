@@ -49,8 +49,7 @@ class TestReception(TransactionCase):
             {
                 'name': 'reception',
                 'location_id': self.stock_location.id,
-                'usage': 'internal',
-                'act_as_view': True,
+                'usage': 'view',
             }
         )
         self.bin1 = self.location_model.create(
