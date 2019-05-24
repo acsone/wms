@@ -14,27 +14,15 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     @api.multi
-    def _action_assign_filter_moves(self):
-        move_ids = set()
-        for move in self:
-            picking = move.picking_id
-            if picking.picking_type_subcode != 'PICK' or (
-                picking.printed and picking.pack_operation_product_ids
-            ):
-                continue
-            move_ids.add(move.id)
-
-        return self.env['stock.move'].browse(move_ids)
-
-    @api.multi
     def action_assign(self, no_prepare=False):
         """ Picking's moves must be assigned to a delivery round to be reserved
         """
         if not self.env.context.get('round_autoset', True):
             return super(StockMove, self).action_assign(no_prepare=no_prepare)
 
-        pick_moves = self._action_assign_filter_moves()
-
+        pick_moves = self.filtered(
+            lambda m: m.picking_id.picking_type_subcode == 'PICK'
+        )
         for picking in pick_moves.mapped('picking_id'):
             if self.env.context.get('round_backorder'):
                 # Do not assign a backorder

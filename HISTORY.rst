@@ -51,6 +51,7 @@ latest (unreleased)
 
 **Documentation**
 
+* ALCYN-2045: set order to proper tax computations
 
 10.0.1.35.4 (2019-05-17)
 ++++++++++++++++++++++++
@@ -68,6 +69,7 @@ latest (unreleased)
 * ALCYN-2002: fix average price computation when purchase price is changed
   after the confirmation of the purchase
 * ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
+
 * Remove deprecated t-esc-options instruction in delivery slip report, showing a
   warning on each print
 * ALCYN-2045: set order to proper tax computations
