@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-2020: Make ref field for res.partner model readonly
 * ALCYN-2055: update translations for website_purchase_review, specific_purchase
 * ALCYN-2050: Add custom filters and field `amount_residual` on `account.move.line` view
+* ALCYN-2050: Add custom filters and the residual amount field on the Account Items view
 
 **Bugfixes**
 
