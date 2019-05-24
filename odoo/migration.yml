@@ -389,6 +389,7 @@ migration:
         upgrade:
           ### local
           - delivery_rounds
+          - specific_account
           - specific_sale
           - specific_partner
           - account_payment_order_background
