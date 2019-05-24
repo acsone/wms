@@ -140,7 +140,7 @@ def create_locations(ctx):
             {
                 'name': name,
                 'location_id': location_id,
-                'usage': 'internal',
+                'usage': 'view',
                 'kind': 'reserve',
             },
         )
@@ -171,7 +171,7 @@ def create_locations(ctx):
                 'name': name,
                 'location_id': location_id,
                 'reserve_location_id': reserve_id,
-                'usage': 'internal',
+                'usage': 'view',
             },
         )
     locations = [
@@ -191,7 +191,7 @@ def create_locations(ctx):
                 'name': name,
                 'location_id': location_id,
                 'reserve_location_id': reserve_id,
-                'usage': 'internal',
+                'usage': 'view',
             },
         )
 
@@ -210,7 +210,7 @@ def create_locations(ctx):
             {
                 'name': name,
                 'location_id': ctx.env.ref('stock.stock_location_company').id,
-                'usage': 'internal',
+                'usage': 'view',
                 'kind': 'parking',
             },
         )
@@ -223,7 +223,7 @@ def create_locations(ctx):
         {
             'name': 'Achetés-Vendus',
             'location_id': ctx.env.ref('stock.stock_location_company').id,
-            'usage': 'internal',
+            'usage': 'view',
         },
     )
     onorders = [
@@ -242,7 +242,7 @@ def create_locations(ctx):
                 'location_id': ctx.env.ref(
                     '__setup__.stock_location_onorder'
                 ).id,
-                'usage': 'internal',
+                'usage': 'view',
             },
         )
 
@@ -254,7 +254,7 @@ def create_locations(ctx):
         {
             'name': 'Nouveautés',
             'location_id': ctx.env.ref('stock.stock_location_company').id,
-            'usage': 'internal',
+            'usage': 'view',
         },
     )
     news = [
@@ -271,7 +271,7 @@ def create_locations(ctx):
             {
                 'name': name,
                 'location_id': ctx.env.ref('__setup__.stock_location_new').id,
-                'usage': 'internal',
+                'usage': 'view',
             },
         )
 
@@ -283,7 +283,7 @@ def create_locations(ctx):
         {
             'name': 'Scrap',
             'location_id': False,
-            'usage': 'internal',
+            'usage': 'view',
             'scrap_location': False,
         },
     )

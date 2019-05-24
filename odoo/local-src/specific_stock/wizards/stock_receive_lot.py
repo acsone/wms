@@ -37,8 +37,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _onchange_operation_id(self):
         super(StockPackOperationLotAdd, self)._onchange_operation_id()
         if self.qty_backorder:
-            op_dest_loc = self.operation_id.location_dest_id
-            if op_dest_loc.usage == 'internal' and not op_dest_loc.act_as_view:
-                self.location_dest_id = op_dest_loc
+            if self.operation_id.location_dest_id.usage == 'internal':
+                self.location_dest_id = self.operation_id.location_dest_id
             else:
                 self.location_dest_id = False

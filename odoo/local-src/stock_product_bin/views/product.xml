@@ -11,8 +11,7 @@
                             <tree editable="bottom">
                                 <field name="sequence" widget="handle"/>
                                 <field name="location_id" />
-
-                                <field name="bin_location_id" domain="[('id','child_of',location_id),('usage', '=', 'internal'), ('act_as_view', '=', False)]"
+                                <field name="bin_location_id" domain="[('id','child_of',location_id),('usage', '=', 'internal')]"
                                     attrs="{'readonly':[('location_id','=',False)]}" />
                             </tree>
                         </field>
