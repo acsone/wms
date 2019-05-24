@@ -9,7 +9,6 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    ref = fields.Char(copy=False)
     last_suite_name = fields.Char(
         string='Last Suite Name', compute='_compute_last_suite_name'
     )
