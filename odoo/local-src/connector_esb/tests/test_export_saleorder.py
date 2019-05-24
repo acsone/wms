@@ -11,6 +11,10 @@ from odoo.tests.common import SavepointCase
 
 
 class ExportSaleOrderTestCase(SavepointCase):
+
+    post_install = True
+    at_install = False
+
     def setUp(self):
         super(ExportSaleOrderTestCase, self).setUp()
 
@@ -269,6 +273,18 @@ class ExportSaleOrderTestCase(SavepointCase):
             mapper = work.component(usage='export.mapper')
             values = mapper.map_record(so).values()
         self.assertEqual(values['status'], 'processing')
+
+    def test_so_exported_when_qty_canceled(self):
+        """Check sale order is exported when a quantity canceled is changed."""
+        self.so1.action_confirm()
+        self.so1.state = 'sale'
+        # Clear the context from _sale_order_create left over from creation
+        self.so1.order_line[0].env.context = {}
+        with mock.patch(
+            'odoo.addons.queue_job.models.base.DelayableRecordset'
+        ) as export_record:
+            self.so1.order_line[0].write({'product_qty_canceled': 1})
+            self.assertEqual(export_record.call_count, 1)
 
     def test_bo_qty_changed(self):
         """Check sale order is sent when back order is modified.
