@@ -21,13 +21,24 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.36.0 (2019-05-24)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2027: Execute reconciliations as jobs at Payment Orders's file uploaded
   confirmation.
 * ALCYN-2027: Add indexes to optimize payment order queries
 * ALCYN-2027: Add index to optimize Sale count widget on products
 * ALCYN-2020: Make ref field for res.partner model readonly
 * ALCYN-2055: update translations for website_purchase_review, specific_purchase
-* ALCYN-2050: Add custom filters and field `amount_residual` on `account.move.line` view
 * ALCYN-2050: Add custom filters and the residual amount field on the Account Items view
 
 **Bugfixes**
@@ -36,12 +47,8 @@ latest (unreleased)
 * ALCYN-1990: Upgrade intracom VAT report module to fix xml report
 * ALCYN-2065: Fix delivery note generating with non ascii characters in product names
 * ALCYN-2049: Fix that sometimes on Magento a sale order back order is not up to date.
+* ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
 
-**Build**
-
-**Documentation**
-
-* ALCYN-2045: set order to proper tax computations
 
 10.0.1.35.4 (2019-05-17)
 ++++++++++++++++++++++++
@@ -51,7 +58,6 @@ latest (unreleased)
 * ALCYN-2013: Extend the products available by Newpharma adding all products in the category 'Médicaments vétérinaires belges' (ESB)
 * ALCYN-2008 Optimize "Remains to deliver" filter performance
 * ALCYN-2009: Improve `sale.order.line` views
-* ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
 * ALCYN-2041: account_mass_reconcile: Display partially reconciled items
 
 **Bugfixes**
