@@ -129,7 +129,8 @@ class ZetesTest(SavepointCase):
         cls.location_medoc = location_obj.create(
             {
                 'name': 'Medicament',
-                'usage': 'view',
+                'usage': 'internal',
+                'act_as_view': True,
                 'location_id': cls.stock_location.id,
                 'picking_zone_id': cls.picking_zone_medoc.id,
             }
@@ -303,7 +304,8 @@ class ZetesParkingTest(ZetesTest):
         entree_location = self.env['stock.location'].create(
             {
                 'name': 'Entree',
-                'usage': 'view',
+                'usage': 'internal',
+                'act_as_view': True,
                 'location_id': self.stock_location.id,
             }
         )
@@ -311,7 +313,8 @@ class ZetesParkingTest(ZetesTest):
         parking_medoc_root = self.env['stock.location'].create(
             {
                 'name': 'Parking Medicaments',
-                'usage': 'view',
+                'usage': 'internal',
+                'act_as_view': True,
                 'kind': 'parking',
                 'location_id': entree_location.id,
             }
@@ -377,7 +380,8 @@ class ZetesReserveTest(ZetesTest):
             {
                 'name': 'Reserve Medoc Root',
                 'location_id': self.vlb_location.id,
-                'usage': 'view',
+                'usage': 'internal',
+                'act_as_view': True,
                 'kind': 'reserve',
             }
         )

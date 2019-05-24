@@ -30,7 +30,7 @@ class StockLocation(models.Model):
             return dest_location_id
         # Search on parent location (case we are in Input under Stock and we
         # want to apply stock bin mapping)
-        while location.usage == 'view' and location.location_id:
+        while location.act_as_view and location.location_id:
             location = location.location_id
             lbin = bin_obj.search(
                 [
