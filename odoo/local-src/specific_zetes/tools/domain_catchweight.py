@@ -215,10 +215,8 @@ class Catchweight(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .browse(pack_operation_id)
+        pack_op = self.request.env['stock.pack.operation'].browse(
+            pack_operation_id
         )
         if not len(pack_op):
             return
@@ -233,28 +231,20 @@ class Catchweight(DomainInterface):
             lot = None
             if lot_number:
                 if lot_id:
-                    lot = (
-                        self.request.env['stock.production.lot']
-                        .sudo(self._user)
-                        .search(
-                            [
-                                ('id', '=', lot_id),
-                                ('voice_identifier', '=', lot_number),
-                            ]
-                        )
+                    lot = self.request.env['stock.production.lot'].search(
+                        [
+                            ('id', '=', lot_id),
+                            ('voice_identifier', '=', lot_number),
+                        ]
                     )
 
                 if not lot:
-                    lot = (
-                        self.request.env['stock.production.lot']
-                        .sudo(self._user)
-                        .search(
-                            [
-                                ('product_id', '=', pack_op.product_id.id),
-                                ('voice_identifier', '=', lot_number),
-                            ],
-                            limit=1,
-                        )
+                    lot = self.request.env['stock.production.lot'].search(
+                        [
+                            ('product_id', '=', pack_op.product_id.id),
+                            ('voice_identifier', '=', lot_number),
+                        ],
+                        limit=1,
                     )
 
                 if not lot:
@@ -292,7 +282,7 @@ class Catchweight(DomainInterface):
                 reserve_rel_obj = self.request.env[
                     'pack.operation.reserve.rel'
                 ]
-                reserve_rel = reserve_rel_obj.sudo(self._user).search(
+                reserve_rel = reserve_rel_obj.search(
                     [
                         ('pack_operation_id', '=', pack_op.id),
                         ('lot_id', '=', lot_id),
@@ -382,11 +372,7 @@ class Catchweight(DomainInterface):
                 )
             )
             if lot_id:
-                lot = (
-                    self.request.env['stock.production.lot']
-                    .sudo(self._user)
-                    .browse(lot_id)
-                )
+                lot = self.request.env['stock.production.lot'].browse(lot_id)
                 error_message += " (lot %s)" % lot.name
 
             _logger.error(error_message)

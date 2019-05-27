@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* Use a single "zetes" user for Zetes operations and change operator users to
+  Portal users
+
 **Bugfixes**
 
 **Build**

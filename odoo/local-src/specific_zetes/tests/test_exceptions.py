@@ -12,7 +12,7 @@ from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itempick import Itempick
 from ..tools.domain_usercontext import Usercontext
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestExceptions(ZetesTest):
@@ -115,24 +115,16 @@ class TestExceptions(ZetesTest):
         """
 
         assignement_obj = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         catchweight_obj = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         itempick_obj = Itempick(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         usercontext_obj = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         ##########
@@ -140,7 +132,7 @@ class TestExceptions(ZetesTest):
         ##########
 
         # Assign the operator
-        self.picking.operator_id = self.user.id
+        self.picking.operator_id = self.operator_user.id
 
         # Start the picking
         start_picking_params = Parameters(assignement_obj)

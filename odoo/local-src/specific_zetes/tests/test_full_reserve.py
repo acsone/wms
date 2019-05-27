@@ -8,7 +8,7 @@ from ..tools.domain_interface import Parameters
 from ..tools.domain_itemmove import Itemmove
 from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
-from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
+from .zetes_test_classes import ZetesReserveTest
 
 
 class TestFullReserve(ZetesReserveTest):
@@ -68,29 +68,19 @@ class TestFullReserve(ZetesReserveTest):
 
     def test_full(self):
         assignement_obj = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         catchweight_obj = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         itemmove_obj = Itemmove(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         refdata_obj = Refdata(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         usercontext_obj = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         ##########
@@ -153,7 +143,7 @@ class TestFullReserve(ZetesReserveTest):
             {'groupNum': picking.id, 'assignmentStatus': constants.AS_START}
         )
         assignement_obj.resu(start_picking_params)
-        self.assertEqual(picking.operator_id.id, self.user.id)
+        self.assertEqual(picking.operator_id.id, self.operator_user.id)
 
         ##########
         # Step 4 #
@@ -253,7 +243,7 @@ class TestFullReserve(ZetesReserveTest):
             {'groupNum': picking_2.id, 'assignmentStatus': constants.AS_START}
         )
         assignement_obj.resu(start_picking_params)
-        self.assertEqual(picking_2.operator_id.id, self.user.id)
+        self.assertEqual(picking_2.operator_id.id, self.operator_user.id)
 
         ##########
         # Step 7 #

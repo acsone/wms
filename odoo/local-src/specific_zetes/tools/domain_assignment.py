@@ -160,14 +160,10 @@ class Assignment(DomainInterface):
         # If the picker want to continue a picking (Cri02 is not empty)
         else:
             picking_id = int(params.Cri02)
-            picking = (
-                self.request.env['stock.picking']
-                .sudo(self._user)
-                .browse(picking_id)
-            )
+            picking = self.request.env['stock.picking'].browse(picking_id)
 
         # Assign the picking
-        picking.sudo(self._user).assign_operator()
+        picking.assign_operator()
 
         # There are two bin checksum on location
         # According the day of the month, the picking have to use the "Right"
@@ -246,11 +242,7 @@ class Assignment(DomainInterface):
         if not picking_id:
             return
 
-        picking = (
-            self.request.env['stock.picking']
-            .sudo(self._user)
-            .browse(int(picking_id))
-        )
+        picking = self.request.env['stock.picking'].browse(int(picking_id))
         if not len(picking):
             return
 
@@ -320,7 +312,7 @@ WHERE pick_type.subcode = 'PICK'
             ),
             'picking_type': constants.PICKING_ASSIGNMENT,
             'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._user.id,
+            'operator': self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
@@ -341,11 +333,7 @@ WHERE pick_type.subcode = 'PICK'
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = (
-                self.request.env['stock.picking']
-                .sudo(self._user)
-                .browse(picking_id)
-            )
+            picking = self.request.env['stock.picking'].browse(picking_id)
         else:
             return False
 
@@ -396,7 +384,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
             ),
             'picking_type': constants.RANGEMENT_ASSIGNMENT,
             'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._user.id,
+            'operator': self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
@@ -414,11 +402,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = (
-                self.request.env['stock.picking']
-                .sudo(self._user)
-                .browse(picking_id)
-            )
+            picking = self.request.env['stock.picking'].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -461,11 +445,9 @@ WHERE picking.state IN ('partially_available', 'assigned')
             report_id = report_id[0]
 
             model_name = 'report.stock.refill.arrange'
-            report = (
-                self.request.env[model_name].sudo(self._user).browse(report_id)
-            )
+            report = self.request.env[model_name].browse(report_id)
             # Create the picking
-            picking = report.sudo(self._user).create_picking()
+            picking = report.create_picking()
             is_valid_location = True
             for pack_op in picking.pack_operation_product_ids:
                 if (
@@ -534,7 +516,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
             ),
             'picking_type': constants.REASSORT_ASSIGNMENT,
             'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._user.id,
+            'operator': self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
@@ -552,11 +534,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = (
-                self.request.env['stock.picking']
-                .sudo(self._user)
-                .browse(picking_id)
-            )
+            picking = self.request.env['stock.picking'].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -597,12 +575,10 @@ WHERE picking.state IN ('partially_available', 'assigned')
             report_id = report_id[0]
 
             model_name = 'report.stock.refill.reassort'
-            report = (
-                self.request.env[model_name].sudo(self._user).browse(report_id)
-            )
+            report = self.request.env[model_name].browse(report_id)
 
             # Create the picking
-            picking = report.sudo(self._user).create_picking()
+            picking = report.create_picking()
             is_valid_location = True
             for pack_op in picking.pack_operation_product_ids:
                 if not pack_op.location_dest_id.is_valid_location:
