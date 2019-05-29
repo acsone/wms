@@ -35,6 +35,9 @@ latest (unreleased)
  - Display a cleaner error message both in the inventory lines and pop-up
  - Unit tests using inventory in other modules will not fail
 
+* ALCYN-2006: do not allow to change delivery round of an outgoing picking
+  when the PICK one has been started (printed=True)
+
 **Build**
 
 **Documentation**
@@ -77,7 +80,6 @@ latest (unreleased)
 * ALCYN-2002: fix average price computation when purchase price is changed
   after the confirmation of the purchase
 * ALCYN-2012: Prevent shop move to be consolidated in closed delivery round
-
 * Remove deprecated t-esc-options instruction in delivery slip report, showing a
   warning on each print
 * ALCYN-2045: set order to proper tax computations

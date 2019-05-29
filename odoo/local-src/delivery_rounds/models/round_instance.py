@@ -276,13 +276,39 @@ class RoundInstance(models.Model):
         )
         self._assign_pickings(picking_confirmed)
 
+    def _check_printed_pickings(self, pickings):
+        errors = []
+        for pick in pickings:
+            if (
+                pick.printed
+                and pick.delivery_round_id
+                and pick.delivery_round_id != self
+                and pick.pack_operation_product_ids
+            ):
+                errors.append(
+                    _(
+                        'You cannot reassign the started picking %s '
+                        'on the delivery round %s to the delivery round %s'
+                    )
+                    % (
+                        pick.name,
+                        pick.delivery_round_id.complete_name,
+                        self.complete_name,
+                    )
+                )
+        if errors:
+            raise UserError('\n'.join(errors))
+
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
+
         _logger.debug(
             "Assign to round instance %s the pickings %s",
             self.id,
             pickings.ids,
         )
+
+        self._check_printed_pickings(pickings)
 
         pickings.filtered(
             lambda picking: picking.state == 'draft'
