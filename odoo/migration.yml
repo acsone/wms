@@ -412,3 +412,4 @@ migration:
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_37_0_act_as_view.sql
+          - anthem songs.upgrade.update_10_0_1_37_0::post

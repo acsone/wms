@@ -38,6 +38,10 @@ latest (unreleased)
 * ALCYN-2006: do not allow to change delivery round of an outgoing picking
   when the PICK one has been started (printed=True)
 
+**Data**
+
+* ALCYN-2070: Recompute last historic average price of products
+
 **Build**
 
 **Documentation**
