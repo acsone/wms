@@ -23,6 +23,18 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2043: change stock locations with usage 'view' to 'internal' with a new flag "act as view".
+  We cannot move quants to such location, but still they need to have an 'internal' usage to be considered
+  properly by the stock addon's code.
+* ALCYN-2043: Improve inventory handling:
+
+ - Fix error "Record does not exist or has been deleted" when the update
+   quantity wizard on a product fails
+ - Handle correctly an inventory with the same product more than once (it would
+   set the same error on all the lines)
+ - Display a cleaner error message both in the inventory lines and pop-up
+ - Unit tests using inventory in other modules will not fail
+
 **Build**
 
 **Documentation**

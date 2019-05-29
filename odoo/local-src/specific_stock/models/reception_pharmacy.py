@@ -141,7 +141,7 @@ class ReceptionPharmacyLine(models.Model):
     )
     bin_id = fields.Many2one(
         'stock.location',
-        domain=[('usage', '=', 'internal')],
+        domain=[('usage', '=', 'internal'), ('act_as_view', '=', False)],
         string='Bin',
         required=True,
         ondelete='restrict',

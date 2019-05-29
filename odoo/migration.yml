@@ -244,6 +244,7 @@ migration:
           - stock_inventory_controller
           - stock_inventory_products
           - stock_location
+          - stock_location_act_as_view
           - stock_location_notranslate
           - stock_lot_loss
           - stock_lot_track
@@ -399,3 +400,15 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_36_0::post
+    - version: 10.0.1.37.0
+      addons:
+        upgrade:
+          ### local
+          - stock_location_act_as_view
+          - stock_product_bin
+          - stock_receive_lot
+          - specific_stock
+          - stock_inventory_controller
+      operations:
+        post:
+          - psql -f odoo/songs/upgrade/update_10_0_1_37_0_act_as_view.sql
