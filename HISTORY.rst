@@ -23,6 +23,16 @@ latest (unreleased)
 
 **Bugfixes**
 
+**Build**
+
+**Documentation**
+
+
+10.0.1.37.0 (2019-05-29)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2043: change stock locations with usage 'view' to 'internal' with a new flag "act as view".
   We cannot move quants to such location, but still they need to have an 'internal' usage to be considered
   properly by the stock addon's code.
@@ -41,10 +51,6 @@ latest (unreleased)
 **Data**
 
 * ALCYN-2070: Recompute last historic average price of products
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.36.0 (2019-05-24)
