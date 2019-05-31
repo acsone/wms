@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2064: decrease qty on linked procurement order when the qty on a PO
+  line is decreased.
+
 **Bugfixes**
 
 **Build**
