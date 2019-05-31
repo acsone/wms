@@ -92,3 +92,16 @@ class StockMove(models.Model):
                         "be in the same delivery round"
                     )
                 )
+
+    @api.multi
+    def _assign_picking_group_domain(self):
+        domain = super(StockMove, self)._assign_picking_group_domain()
+        orig_picking = self.move_orig_ids.mapped('picking_id')
+
+        if orig_picking and not orig_picking.mapped('delivery_round_id'):
+            domain += [
+                '|',
+                ('delivery_round_id', '=', False),
+                ('delivery_round_id.state', 'in', ('open', 'draft')),
+            ]
+        return domain
