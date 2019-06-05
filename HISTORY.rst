@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2075: Fix state done when exporting sale order to ESB
+
 **Build**
 
 **Documentation**
@@ -48,6 +50,10 @@ latest (unreleased)
 * ALCYN-2065: Fix delivery note generating with non ascii characters in product names
 * ALCYN-2049: Fix that sometimes on Magento a sale order back order is not up to date.
 * ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
+
+**Build**
+
+**Documentation**
 
 
 10.0.1.35.4 (2019-05-17)
