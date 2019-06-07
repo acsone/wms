@@ -143,3 +143,12 @@
       # [10.0] account_mass_reconcile: Fix display of partially reconciled items
     - oca refs/pull/254/head
   target: *default_target
+./external-src/account-financial-reporting:
+  remotes:
+    oca: git@github.com:oca/account-financial-reporting.git
+    camptocamp: git@github.com:camptocamp/account-financial-reporting.git
+  merges:
+    - oca 66237c6a6f3fa9385fc45dce621a9c98a3a7fcf8
+      # [10.0] account_financial_report_qweb: supplier ref in general ledger
+    - oca refs/pull/570/head
+  target: *default_target

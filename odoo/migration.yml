@@ -425,5 +425,7 @@ migration:
     - version: 10.0.1.38.0
       addons:
         upgrade:
+          ### OCA/account-financial-reporting
+          - account_financial_report_qweb
           ### local
           - purchase_update_procurement_qty

@@ -12,8 +12,7 @@
 	url = git@github.com:camptocamp/account-closing.git
 [submodule "odoo/external-src/account-financial-reporting"]
 	path = odoo/external-src/account-financial-reporting
-	url = git@github.com:oca/account-financial-reporting.git
-	branch = 10.0
+	url = git@github.com:camptocamp/account-financial-reporting.git
 [submodule "odoo/external-src/account-financial-tools"]
 	path = odoo/external-src/account-financial-tools
 	url = git@github.com:oca/account-financial-tools.git
