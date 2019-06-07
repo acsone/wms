@@ -21,16 +21,24 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* Use a single "zetes" user for Zetes operations and change operator users to
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.36.1 (2019-06-07)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-2066: Use a single "zetes" user for Zetes operations and change operator users to
   Portal users
 
 **Bugfixes**
 
 * ALCYN-2075: Fix state done when exporting sale order to ESB
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.36.0 (2019-05-24)
