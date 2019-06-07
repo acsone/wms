@@ -10,7 +10,7 @@ from odoo.tools import mute_logger
 from .. import constants
 from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_interface import Parameters
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestCatchweight(ZetesTest):
@@ -20,9 +20,7 @@ class TestCatchweight(ZetesTest):
         :return:
         """
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(
@@ -47,9 +45,7 @@ class TestCatchweight(ZetesTest):
         """
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking.pack_operation_product_ids
@@ -107,9 +103,7 @@ class TestCatchweight(ZetesTest):
         self.product_1.write({'tracking': 'none'})
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking.pack_operation_product_ids
@@ -138,9 +132,7 @@ class TestCatchweight(ZetesTest):
         """
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking.pack_operation_product_ids
@@ -182,9 +174,7 @@ class TestCatchweight(ZetesTest):
         """
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking.pack_operation_product_ids

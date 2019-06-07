@@ -11,7 +11,7 @@ from ..tools.domain_itemmove import Itemmove
 from ..tools.domain_location import Location
 from ..tools.domain_refdata import Refdata
 from ..tools.domain_usercontext import Usercontext
-from .zetes_test_classes import DEFAULT_HEADER, ZetesParkingTest
+from .zetes_test_classes import ZetesParkingTest
 
 
 class TestFullParking(ZetesParkingTest):
@@ -121,34 +121,22 @@ class TestFullParking(ZetesParkingTest):
     )
     def test_full(self):
         assignement_obj = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         catchweight_obj = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         itemmove_obj = Itemmove(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         location_obj = Location(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         refdata_obj = Refdata(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         usercontext_obj = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         ##########
@@ -210,7 +198,7 @@ class TestFullParking(ZetesParkingTest):
             {'groupNum': picking.id, 'assignmentStatus': constants.AS_START}
         )
         assignement_obj.resu(start_picking_params)
-        self.assertEqual(picking.operator_id.id, self.user.id)
+        self.assertEqual(picking.operator_id.id, self.operator_user.id)
 
         ##########
         # Step 4 #

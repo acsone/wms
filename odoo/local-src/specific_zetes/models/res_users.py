@@ -17,7 +17,10 @@ class ResUsers(models.Model):
 
     @api.model
     def get_user(self, operator_code):
-        return self.sudo().search([('operator_code', '=', operator_code)])
+        self_with_inactive = self.with_context(active_test=False)
+        return self_with_inactive.search(
+            [('operator_code', '=', operator_code)]
+        )
 
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):

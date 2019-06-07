@@ -77,7 +77,7 @@ class SaleExportMapper(Component):
             partial = record.order_line.filtered(lambda r: r.qty_delivered > 0)
             if len(partial) > 0:
                 status = 'partially_shipped'
-        elif record == 'done':
+        elif record.state == 'done':
             status = 'complete'
         return {'status': status}
 

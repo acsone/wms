@@ -84,14 +84,14 @@ class Usercontext(DomainInterface):
         Return information about the picker (a picker is a res.user).
         The code of the picker is send in the header
         (treat by the _init_ of DomainInterface).
-        It's why we already have the attribute self._user with the picker.
+        It's why we already have the attribute self._operator_user with the
+        picker.
         :param params:
         :return:
         """
         result = Parameters(self, action='resp')
 
-        user = self._user
-        if not user:
+        if not self._operator_user:
             result.update(
                 {
                     'respCode': constants.RESPONSE_CODE_ERROR,
@@ -101,7 +101,8 @@ class Usercontext(DomainInterface):
 
             return result.format()
 
-        # The picker should have the group "warehouse"
+        # The picker (zetes user) must have the group "warehouse"
+        user = self.request.env.user
         if not user.has_group('stock.group_stock_user'):
             result.update(
                 {
@@ -116,7 +117,7 @@ class Usercontext(DomainInterface):
             {
                 'respCode': constants.RESPONSE_CODE_OK,
                 'assignmentType': 1,
-                'operName': user.name,
+                'operName': self._operator_user.name,
             }
         )
 
@@ -156,7 +157,7 @@ LIMIT 1;
                     constants.AS_START,
                     constants.AS_ACTIVE,
                 ),
-                'operator_id': self._user.id,
+                'operator_id': self._operator_user.id,
                 'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
             }
 

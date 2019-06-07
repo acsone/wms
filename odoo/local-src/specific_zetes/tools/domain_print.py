@@ -97,11 +97,7 @@ class Print(DomainInterface):
             return result.format()
         picking_id = int(picking_id)
 
-        picking = (
-            self.request.env['stock.picking']
-            .sudo(self._user)
-            .browse(picking_id)
-        )
+        picking = self.request.env['stock.picking'].browse(picking_id)
 
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()

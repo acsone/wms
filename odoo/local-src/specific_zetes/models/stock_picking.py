@@ -56,6 +56,13 @@ class StockPicking(models.Model):
             del res['is_zetes_error']
         return res
 
+    def _prepare_assign_operator_values(self):
+        values = super(StockPicking, self)._prepare_assign_operator_values()
+        zetes_operator_uid = self.env.context.get('zetes_operator_uid')
+        if zetes_operator_uid:
+            values['operator_id'] = zetes_operator_uid
+        return values
+
     @api.multi
     def assign_picking_checksum(self):
         active_picking_query = """

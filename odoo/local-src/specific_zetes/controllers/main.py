@@ -2,7 +2,7 @@
 import importlib
 import logging
 
-from odoo import http
+from odoo import SUPERUSER_ID, http
 from odoo.addons.web.controllers.main import Home
 from odoo.http import request
 
@@ -13,6 +13,26 @@ _logger = logging.getLogger(__name__)
 
 
 class Zetes(Home):
+    """Publish endpoint called by Zetes.
+
+    Example of curl request::
+
+        curl -i -X POST \
+        -H "Content-Type:text/plain" \
+        -d \
+        '6217065310,2.2.3,3iV_101,REQU_ITEMPICK,91,1,20181205,110043,9143439458843589,27013,,,,1,0,,,,,,,,,,1,301828_3897,736,0,,04,,,,' \
+        'http://localhost/zetes'
+
+    """
+
+    def _sudo_zetes(self):
+        # The request comes from a public user without permissions.
+        # The request will be executed as zetes user.
+        zetes_user = request.env(user=SUPERUSER_ID).ref(
+            'specific_zetes.user_zetes'
+        )
+        request.uid = zetes_user.id
+
     @http.route(
         '/zetes',
         type='http',
@@ -47,6 +67,8 @@ class Zetes(Home):
         module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
             domain.lower()
         )
+
+        self._sudo_zetes()
         # Retrieve the class inherited from DomainInterface
         # e.g: domain == 'itempick' => Create an instance of Itempick(header)
         module_obj = importlib.import_module(module_name)
@@ -114,6 +136,7 @@ class Zetes(Home):
         else:
             actions = [action[0] for action in constants.ZETES_ACTIONS]
 
+        self._sudo_zetes()
         for domain in domains:
             module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
                 domain.lower()

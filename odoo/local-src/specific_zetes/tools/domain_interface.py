@@ -4,6 +4,7 @@ import uuid
 
 from odoo import _
 from odoo.http import request
+from odoo.tools import frozendict
 
 from .. import constants
 
@@ -42,18 +43,31 @@ class DomainInterface(object):
     RESP = ()
     RESU = ()
 
-    def __init__(self, header, savepoint, request_overwrite=None):
-        if request_overwrite:
-            self.request = request_overwrite
-        else:
-            self.request = request
+    def __init__(self, header, savepoint):
+        self.request = request
 
         self._savepoint = savepoint
         self._header = header
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
-        self._user = self.request.env['res.users'].get_user(operator_code)
-        _logger.debug(u'User: {}'.format(self._user.name or 'no user'))
+        self._operator_user = (
+            self.request.env['res.users'].sudo().get_user(operator_code)
+        )
+        if self._operator_user:
+            self.request.context = frozendict(
+                self.request.context,
+                lang=self._operator_user.lang,
+                zetes_operator_uid=self._operator_user.id,
+            )
+            # Reset the environment so it will build a new one using
+            # the updated context (it will keep the same cr and uid).
+            # We have to keep using the zetes user as uid to have proper
+            # permissions.
+            self.request._env = None
+
+        _logger.debug(
+            u'User: {}'.format(self._operator_user.name or 'no user')
+        )
 
     def __repr__(self):
         return u'{}({!r}, {!r}, {!r})'.format(
@@ -118,11 +132,6 @@ class Parameters:
         self._labels = labels
         self._action = action
         self._domain = domain
-
-        if domain._user:
-            domain.request.context = dict(
-                domain.request.context, lang=domain._user.lang
-            )
 
         if values:
             formatted_values = [value.strip() for value in values]
@@ -304,7 +313,10 @@ class Parameters:
                 'action': self._action.lower(),
                 'request': self.format(),
                 'formatted_request': str(self),
-                'user_id': self._domain._user and self._domain._user.id,
+                'user_id': (
+                    self._domain._operator_user
+                    and self._domain._operator_user.id
+                ),
                 'error_type': error_type or 'technical',
                 'picking_id': picking_id,
                 'operation_id': operation_id,

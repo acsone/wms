@@ -53,6 +53,19 @@ latest (unreleased)
 * ALCYN-2070: Recompute last historic average price of products
 
 
+10.0.1.36.1 (2019-06-07)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-2066: Use a single "zetes" user for Zetes operations and change operator users to
+  Portal users
+
+**Bugfixes**
+
+* ALCYN-2075: Fix state done when exporting sale order to ESB
+
+
 10.0.1.36.0 (2019-05-24)
 ++++++++++++++++++++++++
 
@@ -73,6 +86,10 @@ latest (unreleased)
 * ALCYN-2065: Fix delivery note generating with non ascii characters in product names
 * ALCYN-2049: Fix that sometimes on Magento a sale order back order is not up to date.
 * ALCYN-1982: Do not export to the ESB sale order line that are actually delivery information.
+
+**Build**
+
+**Documentation**
 
 
 10.0.1.35.4 (2019-05-17)

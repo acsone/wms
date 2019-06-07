@@ -3,7 +3,7 @@ import mock
 
 from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_interface import Parameters
-from .zetes_test_classes import DEFAULT_HEADER, ZetesReserveTest
+from .zetes_test_classes import ZetesReserveTest
 
 
 class TestCatchweightReserve(ZetesReserveTest):
@@ -40,9 +40,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         """
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking_reserve.pack_operation_product_ids
@@ -75,9 +73,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         """
 
         domain = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         pack_op = self.picking_reserve.pack_operation_product_ids

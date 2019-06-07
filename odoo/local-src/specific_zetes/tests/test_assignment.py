@@ -4,16 +4,14 @@ import mock
 from .. import constants
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_interface import Parameters
-from .zetes_test_classes import DEFAULT_HEADER, ROUND_CODE, ZetesTest
+from .zetes_test_classes import ROUND_CODE, ZetesTest
 
 
 class TestAssignemnt(ZetesTest):
     def test_requ_assignment(self):
         # Check with no current picking
         domain = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(
@@ -43,7 +41,7 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.Usf09, '1')  # Nbr of lines
 
         # Check if the picking has been assigned to the current user
-        self.assertEqual(self.picking.operator_id.id, self.user.id)
+        self.assertEqual(self.picking.operator_id.id, self.operator_user.id)
 
         # Try with different parameters
         # Set a picking zone (Cri01)
@@ -54,7 +52,7 @@ class TestAssignemnt(ZetesTest):
         self.assertEqual(result.groupNum, str(self.picking.id))
 
         # Search for a picking with an operator
-        self.picking.operator_id = self.user.id
+        self.picking.operator_id = self.operator_user.id
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))
@@ -95,9 +93,7 @@ class TestAssignemnt(ZetesTest):
         self.assertFalse(self.picking.operator_id)
 
         domain = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='resu')
         # Assign and start the picking

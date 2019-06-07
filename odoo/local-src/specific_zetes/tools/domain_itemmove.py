@@ -337,10 +337,8 @@ class Itemmove(DomainInterface):
 
         pack_operation_id = int(line_id.split('_')[0])
 
-        pack_op = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .browse(pack_operation_id)
+        pack_op = self.request.env['stock.pack.operation'].browse(
+            pack_operation_id
         )
         if not len(pack_op):
             return
@@ -348,7 +346,7 @@ class Itemmove(DomainInterface):
         try:
             status = params.moveStatus
             if status:
-                pack_op.sudo(self._user).write({'zetes_state': status})
+                pack_op.write({'zetes_state': status})
 
                 # For a picking from the reserve (itemMoveType = MOVE_TYPE_PUT)
                 # Zetes doesn't send a RESU_ASSIGNMENT with the status
@@ -383,21 +381,17 @@ class Itemmove(DomainInterface):
         # Search all pack operations for this picking
         # The state of the line must be
         # "MOVE_DEFAULT", "MOVE_SKIPPED" or "MOVE_FULL"
-        lines = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .search(
-                [
-                    ('picking_id', '=', picking_id),
-                    ('location_id.is_valid_location', '=', True),
-                    (
-                        'zetes_state',
-                        'in',
-                        [constants.OP_DEFAULT, constants.OP_SKIPPED],
-                    ),
-                ],
-                order=order_by,
-            )
+        lines = self.request.env['stock.pack.operation'].search(
+            [
+                ('picking_id', '=', picking_id),
+                ('location_id.is_valid_location', '=', True),
+                (
+                    'zetes_state',
+                    'in',
+                    [constants.OP_DEFAULT, constants.OP_SKIPPED],
+                ),
+            ],
+            order=order_by,
         )
         # Filter lines
         # We want only operation with a quantity to to done different
@@ -429,7 +423,7 @@ class Itemmove(DomainInterface):
             )
             query_result = self.request.env.cr.fetchall()
             for quant in query_result:
-                lot = production_lot_obj.sudo(self._user).browse(quant[0])
+                lot = production_lot_obj.browse(quant[0])
                 reserved_lines.append(
                     (line, lot, quant[1], constants.MOVE_UNLOAD)
                 )
@@ -465,19 +459,15 @@ class Itemmove(DomainInterface):
         # Search ONLY ONE pack operations for this picking
         # The state of this line must be
         # "MOVE_DEFAULT" or "MOVE_SKIPPED"
-        lines = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .search(
-                [
-                    ('picking_id', '=', picking_id),
-                    (
-                        'zetes_state',
-                        'in',
-                        [constants.MOVE_DEFAULT, constants.MOVE_SKIPPED],
-                    ),
-                ]
-            )
+        lines = self.request.env['stock.pack.operation'].search(
+            [
+                ('picking_id', '=', picking_id),
+                (
+                    'zetes_state',
+                    'in',
+                    [constants.MOVE_DEFAULT, constants.MOVE_SKIPPED],
+                ),
+            ]
         )
 
         # Filter line

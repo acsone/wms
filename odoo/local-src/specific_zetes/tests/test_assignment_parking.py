@@ -4,7 +4,7 @@ import mock
 from .. import constants
 from ..tools.domain_assignment import Assignment
 from ..tools.domain_interface import Parameters
-from .zetes_test_classes import DEFAULT_HEADER, ZetesParkingTest
+from .zetes_test_classes import ZetesParkingTest
 
 OPERATOR_CODE = '99'
 
@@ -16,9 +16,7 @@ class TestAssignment(ZetesParkingTest):
     def test_01_requ_assignment(self):
         # Check with no current picking
         domain = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(
@@ -122,9 +120,7 @@ class TestAssignment(ZetesParkingTest):
 
         # Check with no current picking
         domain = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(
