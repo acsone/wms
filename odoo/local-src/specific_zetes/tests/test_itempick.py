@@ -4,7 +4,7 @@ import mock
 from .. import constants
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itempick import Itempick
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestItempick(ZetesTest):
@@ -14,9 +14,7 @@ class TestItempick(ZetesTest):
         :return:
         """
         domain = Itempick(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         # Set the flag is_price_on_labels
@@ -87,9 +85,7 @@ class TestItempick(ZetesTest):
         self.assertEqual(pack_op.qty_done, 10)
 
         domain = Itempick(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='resu')
         request_params.update(
@@ -107,9 +103,7 @@ class TestItempick(ZetesTest):
         :return:
         """
         domain = Itempick(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         request_params = Parameters(domain, action='requ')

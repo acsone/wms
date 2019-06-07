@@ -30,6 +30,9 @@
         'product_expiry',
     ],
     'data': [
+        # Data
+        'data/res_users.xml',
+
         # Views
         'views/res_users.xml',
         'views/res_partner.xml',

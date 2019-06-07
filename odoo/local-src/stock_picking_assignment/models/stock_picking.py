@@ -16,6 +16,9 @@ class StockPicking(models.Model):
         'res.users', string='Operator', copy=False, track_visibility='onchange'
     )
 
+    def _prepare_assign_operator_values(self):
+        return {'operator_id': self.env.uid, 'printed': True}
+
     @api.multi
     def assign_operator(self):
-        self.write({'operator_id': self.env.uid, 'printed': True})
+        self.write(self._prepare_assign_operator_values())

@@ -125,10 +125,8 @@ class Location(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .browse(pack_operation_id)
+        pack_op = self.request.env['stock.pack.operation'].browse(
+            pack_operation_id
         )
         if not len(pack_op):
             result.update(
@@ -159,19 +157,15 @@ class Location(DomainInterface):
         if regex_result:
             shelf = regex_result.group(1)
 
-        location = (
-            self.request.env['stock.location']
-            .sudo(self._user)
-            .search(
-                [
-                    ('zone', '=', params.Cri01),
-                    ('corridor', '=', params.Cri02),
-                    ('shelf', '=', shelf),
-                    ('height', '=', params.Cri04),
-                    ('box', '=', params.Cri05),
-                ],
-                limit=1,
-            )
+        location = self.request.env['stock.location'].search(
+            [
+                ('zone', '=', params.Cri01),
+                ('corridor', '=', params.Cri02),
+                ('shelf', '=', shelf),
+                ('height', '=', params.Cri04),
+                ('box', '=', params.Cri05),
+            ],
+            limit=1,
         )
 
         if not location:
@@ -205,9 +199,7 @@ class Location(DomainInterface):
                 )
                 return result.format()
 
-            self.request.env['pack.operation.reserve.rel'].sudo(
-                self._user
-            ).create(
+            self.request.env['pack.operation.reserve.rel'].create(
                 {
                     'pack_operation_id': pack_op.id,
                     'reserve_location_id': location.id,
@@ -233,16 +225,12 @@ class Location(DomainInterface):
 
         # Search a specific lot
         if params.Cri07:
-            specific_lot = (
-                self.request.env['stock.production.lot']
-                .sudo(self._user)
-                .search(
-                    [
-                        ('checksum', '=', params.Cri07),
-                        ('product_id', '=', product.id),
-                    ],
-                    limit=1,
-                )
+            specific_lot = self.request.env['stock.production.lot'].search(
+                [
+                    ('checksum', '=', params.Cri07),
+                    ('product_id', '=', product.id),
+                ],
+                limit=1,
             )
 
             if specific_lot:
