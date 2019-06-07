@@ -28,7 +28,7 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.37.0 (2019-05-29)
+10.0.1.37.1 (2019-06-07)
 ++++++++++++++++++++++++
 
 **Features and Improvements**
@@ -51,6 +51,16 @@ latest (unreleased)
 **Data**
 
 * ALCYN-2070: Recompute last historic average price of products
+
+
++ corrections of 10.0.1.36.1
+
+
+
+10.0.1.37.0 (2019-05-29) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Moved to 10.0.1.37.1 to include corrections of 10.0.1.36.1.
 
 
 10.0.1.36.1 (2019-06-07)
