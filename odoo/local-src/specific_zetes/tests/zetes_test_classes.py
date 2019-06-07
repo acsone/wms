@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 
 import mock
 from odoo import fields
+from odoo.http import WebRequest, _request_stack
 from odoo.tests.common import SavepointCase
 
 from .. import constants
@@ -32,11 +33,27 @@ class ZetesTest(SavepointCase):
     post_install = True
     at_install = False
 
+    def _default_header(self):
+        return DEFAULT_HEADER
+
+    @classmethod
+    def tearDownClass(cls):
+        _request_stack.pop()
+        super(ZetesTest, cls).tearDownClass()
+
     @classmethod
     def setUpClass(cls):
         super(ZetesTest, cls).setUpClass()
 
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
+        # Simulate a Webrequest and push it on the stack so the
+        # code will access to it when reading 'odoo.http.request'
+        fake_request = WebRequest(mock.Mock(name='httprequest'))
+        fake_request._cr = cls.env.cr
+        fake_request._uid = cls.env.uid
+        fake_request._context = cls.env.context
+        _request_stack.push(fake_request)
 
         cls.env.user.write({'ref': '38229299884', 'tz': 'Europe/Brussels'})
 
@@ -54,7 +71,7 @@ class ZetesTest(SavepointCase):
                 'from scratch.' % OPERATOR_CODE
             )
 
-        cls.user = cls.env['res.users'].create(
+        cls.operator_user = cls.env['res.users'].create(
             {
                 'name': 'User test',
                 'ref': '02984757889392',
@@ -271,7 +288,7 @@ class ZetesTest(SavepointCase):
         result_formatted.pop(0)
 
         # Extract response values
-        result_values = result_formatted[len(DEFAULT_HEADER) :]
+        result_values = result_formatted[len(self._default_header()) :]
 
         # Retrieve the method (eg: RESP_USERCONTEXT)
         method = result_formatted[constants.METHOD_INDEX]
@@ -284,9 +301,7 @@ class ZetesTest(SavepointCase):
         module_obj = importlib.import_module(module_name)
         domain_cls = getattr(module_obj, domain.title())
         instance = domain_cls(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         # Create the instance of Parameter with the previous domain instance

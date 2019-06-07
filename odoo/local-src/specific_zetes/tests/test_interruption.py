@@ -12,7 +12,7 @@ from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_interface import Parameters
 from ..tools.domain_itempick import Itempick
 from ..tools.domain_usercontext import Usercontext
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestInterruption(ZetesTest):
@@ -20,7 +20,7 @@ class TestInterruption(ZetesTest):
         self.disable_picking_validation = True
         super(TestInterruption, self).setUp()
 
-        self.user_2 = self.env['res.users'].create(
+        self.operator_user_2 = self.env['res.users'].create(
             {
                 'name': 'User test 2',
                 'ref': '947356253648689',
@@ -155,24 +155,16 @@ class TestInterruption(ZetesTest):
         """
 
         assignement_obj = Assignment(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         catchweight_obj = Catchweight(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         itempick_obj = Itempick(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         usercontext_obj = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
 
         ##########
@@ -232,23 +224,19 @@ class TestInterruption(ZetesTest):
         ##########
         # Step 4 #
         ##########
-        user_2_header = list(DEFAULT_HEADER)
-        user_2_header[constants.USER_INDEX] = self.user_2.operator_code
+        user_2_header = list(self._default_header())
+        user_2_header[
+            constants.USER_INDEX
+        ] = self.operator_user_2.operator_code
 
         new_usercontext_obj = Usercontext(
-            user_2_header,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            user_2_header, mock.MagicMock(name='Savepoint()')
         )
         new_assignment_obj = Assignment(
-            user_2_header,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            user_2_header, mock.MagicMock(name='Savepoint()')
         )
         new_itempick_obj = Itempick(
-            user_2_header,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            user_2_header, mock.MagicMock(name='Savepoint()')
         )
 
         request_usercontext_params = Parameters(new_usercontext_obj)

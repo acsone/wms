@@ -5,7 +5,7 @@ from odoo.tools import mute_logger
 from .. import constants
 from ..tools.domain_interface import Parameters
 from ..tools.domain_print import Print
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestPrint(ZetesTest):
@@ -62,9 +62,7 @@ class TestPrint(ZetesTest):
 
         # Print products labels and package labels
         domain = Print(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(

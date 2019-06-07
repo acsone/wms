@@ -4,7 +4,7 @@ import mock
 from .. import constants
 from ..tools.domain_interface import DomainInterface, Parameters
 from ..tools.domain_usercontext import Usercontext
-from .zetes_test_classes import DEFAULT_HEADER, OPERATOR_CODE, ZetesTest
+from .zetes_test_classes import OPERATOR_CODE, ZetesTest
 
 
 class TestDomainInterface(ZetesTest):
@@ -26,18 +26,16 @@ class TestDomainInterface(ZetesTest):
         ]
 
         domain = DomainInterface(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
-        self.assertEqual(domain._user.id, self.user.id)
+        self.assertEqual(domain._operator_user.id, self.operator_user.id)
 
         domain_with_unknow_user = DomainInterface(
-            header_unknown_user,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            header_unknown_user, mock.MagicMock(name='Savepoint()')
         )
-        self.assertEqual(domain_with_unknow_user._user, self.env['res.users'])
+        self.assertEqual(
+            domain_with_unknow_user._operator_user, self.env['res.users']
+        )
 
     def test_params(self):
         """
@@ -45,9 +43,7 @@ class TestDomainInterface(ZetesTest):
         :return:
         """
         domain = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         response_params = Parameters(domain)
 
@@ -73,9 +69,7 @@ class TestDomainInterface(ZetesTest):
         :return:
         """
         domain = Usercontext(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update({'contextType': '1'})
@@ -85,7 +79,9 @@ class TestDomainInterface(ZetesTest):
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.assignmentType, '1')
         self.assertEqual(result.operName, 'User test')
-        self.assertEqual(result._domain._user.operator_code, OPERATOR_CODE)
+        self.assertEqual(
+            result._domain._operator_user.operator_code, OPERATOR_CODE
+        )
 
         # Execute the method str
         expected_title = "===========> RESP_USERCONTEXT <==========="

@@ -258,23 +258,17 @@ class Itempick(DomainInterface):
 
             picked_qty = int(params.Usf04 or 0)
 
-            pack_op = (
-                self.request.env['stock.pack.operation']
-                .sudo(self._user)
-                .browse(pack_operation_id)
+            pack_op = self.request.env['stock.pack.operation'].browse(
+                pack_operation_id
             )
 
             # Retrieve the pack lot
-            pack_lot = (
-                self.request.env['stock.pack.operation.lot']
-                .sudo(self._user)
-                .search(
-                    [
-                        ('operation_id', '=', pack_operation_id),
-                        ('lot_id', '=', lot_id),
-                    ],
-                    limit=1,
-                )
+            pack_lot = self.request.env['stock.pack.operation.lot'].search(
+                [
+                    ('operation_id', '=', pack_operation_id),
+                    ('lot_id', '=', lot_id),
+                ],
+                limit=1,
             )
             if not pack_lot:
                 result = Parameters(self, action='resp')
@@ -319,21 +313,17 @@ class Itempick(DomainInterface):
                     return result.format()
 
         # Search all pack operations for this picking
-        lines = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .search(
-                [
-                    ('picking_id', '=', picking_id),
-                    ('location_id.is_valid_location', '=', True),
-                    (
-                        'zetes_state',
-                        'in',
-                        [constants.OP_DEFAULT, constants.OP_SKIPPED],
-                    ),
-                ],
-                order=order_by,
-            )
+        lines = self.request.env['stock.pack.operation'].search(
+            [
+                ('picking_id', '=', picking_id),
+                ('location_id.is_valid_location', '=', True),
+                (
+                    'zetes_state',
+                    'in',
+                    [constants.OP_DEFAULT, constants.OP_SKIPPED],
+                ),
+            ],
+            order=order_by,
         )
 
         # Filter lines
@@ -523,10 +513,8 @@ class Itempick(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = (
-            self.request.env['stock.pack.operation']
-            .sudo(self._user)
-            .browse(pack_operation_id)
+        pack_op = self.request.env['stock.pack.operation'].browse(
+            pack_operation_id
         )
         if not len(pack_op):
             return
@@ -534,7 +522,7 @@ class Itempick(DomainInterface):
         try:
             status = params.pickStatus
             if status:
-                pack_op.sudo(self._user).write({'zetes_state': status})
+                pack_op.write({'zetes_state': status})
 
                 # If status == OP_CANCELED => remove all actions for this line
                 if status == constants.OP_CANCELED:

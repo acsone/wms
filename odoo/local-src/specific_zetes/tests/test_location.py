@@ -4,7 +4,7 @@ import mock
 from .. import constants
 from ..tools.domain_interface import Parameters
 from ..tools.domain_location import Location
-from .zetes_test_classes import DEFAULT_HEADER, ZetesTest
+from .zetes_test_classes import ZetesTest
 
 
 class TestLocation(ZetesTest):
@@ -16,9 +16,7 @@ class TestLocation(ZetesTest):
         pack_op.ensure_one()
 
         domain = Location(
-            DEFAULT_HEADER,
-            mock.MagicMock(name='Savepoint()'),
-            request_overwrite=self,
+            self._default_header(), mock.MagicMock(name='Savepoint()')
         )
         request_params = Parameters(domain, action='requ')
         request_params.update(
