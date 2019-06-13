@@ -26,6 +26,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2061 / ALCYN-2012: Prevent stock move to be consolidated in closed
+  delivery round
+
 **Build**
 
 **Documentation**
