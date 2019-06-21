@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.38.0 (2019-06-21)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2064: decrease qty on linked procurement order when the qty on a PO
   line is decreased.
 * ALCYN-2015: Display supplier reference in general ledger reports
@@ -29,10 +41,6 @@ latest (unreleased)
 
 * ALCYN-2061 / ALCYN-2012: Prevent stock move to be consolidated in closed
   delivery round
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.37.1 (2019-06-07)
