@@ -131,6 +131,10 @@ class CustomerExportMapper(Component):
     def compute_onlinepayment(self, record):
         return {'OnlinePayment': False}
 
+    @mapping
+    def compute_freeshipping(self, record):
+        return {'FreeShipping': not record.help_with_fee}
+
 
 class CustomerCronExporter(Component):
 

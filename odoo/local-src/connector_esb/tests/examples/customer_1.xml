@@ -13,6 +13,7 @@
       <ErpId>3162</ErpId>
       <DepositNumber>2/1234/1234</DepositNumber>
       <Email>joe@ch.ch</Email>
+      <FreeShipping>True</FreeShipping>
     </Row>
     <Row>
       <TaxCode>1</TaxCode>
@@ -23,6 +24,7 @@
       <AlcyonGroupId>REF_ESB</AlcyonGroupId>
       <ErpId>100</ErpId>
       <Email>peter@ch.ch</Email>
+      <FreeShipping>False</FreeShipping>
     </Row>
   </Root>
 </ROOT>
