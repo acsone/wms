@@ -18,6 +18,7 @@
         'stock_picking_subcode',
         'purchase',
         'pricelist_discount',
+        'stock_reassign_auto',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
