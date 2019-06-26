@@ -81,6 +81,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 'customer': True,
                 'alcyon_category_id': self.alcyon_category.id,
                 'discount_pricelist_id': self.discount_pricelist.id,
+                'help_with_fee': True,
             }
         )
         # This one should be processed, it is a delivery address with parent_id
@@ -143,6 +144,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             'StatisticCode': '10',
             'SerialNo': '321123',
             'ShowTimer': True,
+            'FreeShipping': True,
         }
         self.timestamp.writer = 'local'
         rec = self.customer1
