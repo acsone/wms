@@ -22,12 +22,17 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2087: Add the FreeShipping node to the customer XML payload exported to the ESB
+* ALCYN-2078: Assign zetes operator to pack operations
+    * Store operator_id in stock.pack.operation
+    * Add operator in `Stock Pack Operation` pivot view
+    * Add new `Nbr lignes Picking` filter
 
 **Bugfixes**
 
 **Build**
 
 **Documentation**
+
 
 
 10.0.1.38.0 (2019-06-21)

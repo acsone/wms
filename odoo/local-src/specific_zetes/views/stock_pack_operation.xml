@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_pack_operation_pivot" model="ir.ui.view">
+        <field name="name">Stock.pack.operation.pivot</field>
+        <field name="model">stock.pack.operation</field>
+        <field name="arch" type="xml">
+            <pivot string="Packing Operation" disable_linking="True">
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nbr_lignes_picking_filter" model="ir.filters">
+        <field name="name">Nbr lignes Picking</field>
+        <field name="model_id">stock.pack.operation</field>
+        <field name="domain">[
+            ('qty_done', '>', 0),
+            ('picking_destination_location_id', 'ilike', 'sortie')
+          ]
+        </field>
+        <field name="context">{
+            'pivot_row_groupby': ['operator_id'],
+            'pivot_column_groupby': [],
+            'group_by': ['operator_id'],
+            'pivot_measures': ['__count__']
+          }
+        </field>
+        <field name="user_id" eval="False"/>
+    </record>
+
+    <record id="action_stock_level_forecast_report_template" model="ir.actions.act_window">
+        <field name="name">Stock Pack Operation</field>
+        <field name="res_model">stock.pack.operation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot,tree</field>
+        <field name="view_id" ref="view_stock_pack_operation_pivot"/>
+    </record>
+
+</odoo>
