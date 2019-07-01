@@ -26,6 +26,7 @@ latest (unreleased)
     * Store operator_id in stock.pack.operation
     * Add operator in `Stock Pack Operation` pivot view
     * Add new `Nbr lignes Picking` filter
+* ALCYN-2086: Update stock move reassign trial to improve performance
 
 **Bugfixes**
 

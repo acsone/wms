@@ -2,7 +2,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class StockMove(models.Model):
@@ -68,3 +68,11 @@ class StockMove(models.Model):
             ).action_cancel()
             return False
         return new_move_id
+
+    @api.multi
+    def _get_moves_to_auto_reassign(self):
+        """Overload the method from 'stock_reassign_auto' module to not
+        process products related to additional moves.
+        """
+        moves = super(StockMove, self)._get_moves_to_auto_reassign()
+        return moves.filtered(lambda m: not m.is_additional_move)

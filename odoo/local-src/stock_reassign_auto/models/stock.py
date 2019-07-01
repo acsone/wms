@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, models
+from odoo import _, api, models
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -94,11 +94,16 @@ class StockMove(models.Model):
         )._reassign_trial(products)
         return res
 
+    @api.multi
+    def _get_moves_to_auto_reassign(self):
+        """Hook to overload if needed."""
+        return self
+
     def action_cancel(self):
         """ When move is canceled, check if other moves can be assigned """
-        products = self.mapped('product_id')
+        products = self._get_moves_to_auto_reassign().mapped('product_id')
         res = super(StockMove, self).action_cancel()
-        if not self.env.context.get('no_auto_reassign'):
+        if not self.env.context.get('no_auto_reassign') and products:
             self.with_delay(
                 description=_('Reassign trial on cancel for products ids %s')
                 % products.ids
@@ -121,7 +126,19 @@ class StockMove(models.Model):
     @job(default_channel='root.action_assign')
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
+        # Do not process products not available in stock
+        products_not_available = products.filtered(
+            lambda p: p.qty_available <= 0
+        )
+        if products_not_available:
+            _logger.info(
+                "No reassign for products {} as they are not available".format(
+                    products_not_available.ids
+                )
+            )
+            products -= products_not_available
         if not products:
+            _logger.info("No product to reassign, exiting")
             return
         moves_pickings = self.search(
             [
