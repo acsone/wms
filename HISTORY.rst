@@ -21,8 +21,6 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-2087: Add the FreeShipping node to the customer XML payload exported to the ESB
-
 **Bugfixes**
 
 **Build**
@@ -30,15 +28,19 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.39.0 (2019-07-01)
+10.0.1.39.1 (2019-07-02)
 ++++++++++++++++++++++++
 
 **Features and Improvements**
 
 * ALCYN-2087: Add the FreeShipping node to the customer XML payload exported to the ESB
-* ALCYN-2078: Store Zetes Operator on Pack Operations and update Operation Pivot
-  view to group by operator
 * ALCYN-2086: Update stock move reassign trial to improve performance
+
+
+10.0.1.39.0 (2019-07-01) [YANKED]
++++++++++++++++++++++++++++++++++
+
+**Moved to 10.0.1.39.1 to revert dev of ALCYN-2O78**
 
 
 10.0.1.38.0 (2019-06-21)
