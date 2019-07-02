@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2087: Add the FreeShipping node to the customer XML payload exported to the ESB
+
 **Bugfixes**
 
 **Build**
