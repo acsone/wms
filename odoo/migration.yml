@@ -208,6 +208,7 @@ migration:
           - ir_sequence_period
           - l10n_be_bba_fix
           - monitoring_status
+          - partner_archive_new_partner
           - pricelist_discount
           - procurement_sale
           - product_additional
@@ -461,3 +462,8 @@ migration:
           - base_exception
           ### local
           - specific_sale
+    - version: 10.0.1.42.0
+      addons:
+        upgrade:
+          ### local
+          - partner_archive_new_partner

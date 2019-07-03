@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2067: Add archive wizard to realocate sales, invoices and pickings to
+  an other customer.
+
 **Bugfixes**
 
 **Build**
