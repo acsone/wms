@@ -19,7 +19,7 @@ class ResPartner(models.Model):
         ]
 
     def _get_invoice_unpaid_domain(self):
-        return [("state", "!=", "unpaid"), ("partner_id", "=", self.id)]
+        return [("state", "!=", "paid"), ("partner_id", "=", self.id)]
 
     def _get_stock_picking_domain(self):
         return [("state", "!=", "done"), ("partner_id", "=", self.id)]
