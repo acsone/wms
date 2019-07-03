@@ -2,7 +2,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api
+from odoo import api, models
 
 
 class ResPartner(models.Model):
@@ -10,38 +10,45 @@ class ResPartner(models.Model):
 
     @api.multi
     def archive_partner(self):
-        for rec in self:
-            if rec.active:
-                total = 0
-                if "sale.order" in self.env:
-                    nb_so_not_done = self.env["sale.order"].search_count([
+        self.ensure_one()
+        if self.active:
+            total = 0
+            # Check if module `sale` is present
+            if "sale.order" in self.env:
+                Sale = self.env["sale.order"]
+                nb_so_not_done = Sale.search_count(
+                    [
                         ("state", "!=", "done"),
-                        "|", "|",
-                        ("partner_id", "=", rec.id),
-                        ("partner_invoice_id", "=", rec.id),
-                        ("partner_shipping_id", "=", rec.id),
-                    ])
-                    total += nb_so_not_done
-                if "account.invoice" in self.env:
-                    nb_invoices_unpaid = self.env["account.invoice"].search_count([
-                        ("state", "!=", "unpaid"),
-                        ("partner_id", "=", rec.id),
-                    ])
-                    total += nb_invoices_unpaid
-                if "stock.picking" in self.env:
-                    nb_deliveries_not_done = self.env["stock.picking"].search_count([
-                        ("state", "!=", "done"),
-                        ("partner_id", "=", rec.id),
-                    ])
-                    total += nb_deliveries_not_done
-                if total > 0:
-                    return {
-                        "name": "Select new partner before archiving",
-                        "type": "ir.actions.act_window", 
-                        "view_type": "form", 
-                        "view_mode": "form",
-                        "res_model": "partner.archive.new.partner.wizard", 
-                        "context": {"default_old_partner_id": self.id},
-                        "target": "new", 
-                    }
-            rec.active = not rec.active
+                        "|",
+                        "|",
+                        ("partner_id", "=", self.id),
+                        ("partner_invoice_id", "=", self.id),
+                        ("partner_shipping_id", "=", self.id),
+                    ]
+                )
+                total += nb_so_not_done
+            # Check if module `account` is present
+            if "account.invoice" in self.env:
+                Invoice = self.env["account.invoice"]
+                nb_invoices_unpaid = Invoice.search_count(
+                    [("state", "!=", "unpaid"), ("partner_id", "=", self.id)]
+                )
+                total += nb_invoices_unpaid
+            # Check if module `stock` is present
+            if "stock.picking" in self.env:
+                Picking = self.env["stock.picking"]
+                nb_deliveries_not_done = Picking.search_count(
+                    [("state", "!=", "done"), ("partner_id", "=", self.id)]
+                )
+                total += nb_deliveries_not_done
+            if total > 0:
+                return {
+                    "name": "Select new partner before archiving",
+                    "type": "ir.actions.act_window",
+                    "view_type": "form",
+                    "view_mode": "form",
+                    "res_model": "partner.archive.new.partner.wizard",
+                    "context": {"default_old_partner_id": self.id},
+                    "target": "new",
+                }
+        self.active = not self.active
