@@ -9,6 +9,9 @@ class PartnerArchiveWizard(models.TransientModel):
     _name = "partner.archive.new.partner.wizard"
 
     old_partner_id = fields.Many2one(comodel_name="res.partner")
+    old_partner_company_id = fields.Many2one(
+        related="old_partner_id.company_id", comodel_name="res.company"
+    )
     new_partner_id = fields.Many2one(
         comodel_name="res.partner", string="New partner", required="True"
     )
@@ -32,11 +35,11 @@ class PartnerArchiveWizard(models.TransientModel):
                 ]
             )
             for so in so_not_done:
-                if so.partner_id.id == self.old_partner_id.id:
+                if so.partner_id == self.old_partner_id:
                     so.write({"partner_id": self.new_partner_id.id})
-                if so.partner_shipping_id.id == self.old_partner_id.id:
+                if so.partner_shipping_id == self.old_partner_id:
                     so.write({"partner_shipping_id": self.new_partner_id.id})
-                if so.partner_invoice_id.id == self.old_partner_id.id:
+                if so.partner_invoice_id == self.old_partner_id:
                     so.write({"partner_invoice_id": self.new_partner_id.id})
 
         # Check if module `account` is present

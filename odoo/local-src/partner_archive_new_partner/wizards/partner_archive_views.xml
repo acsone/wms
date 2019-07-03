@@ -12,20 +12,20 @@
                     <li>Invoices</li>
                     <li>Delivery orders</li>
                 </ul>
-               
+
                 <group>
                     <field name="old_partner_id" invisible="1"/>
-                    <!-- FIXME: Can't add ('company_id.id', '=', old_partner_id.company_id.id), in domain -->
-                    <!-- Got following error Error: AttributeError: object has no attribute 'company_id' -->
-                    <field name="new_partner_id" 
+                    <field name="old_partner_company_id" invisible="1"/>
+                    <field name="new_partner_id"
                         domain="[
                             ('id', '!=', old_partner_id),
-                            ('customer','=',True),]"
-                        required="1"/>
+                            ('customer','=',True),
+                            ('company_id','=', old_partner_company_id),
+                            ]" />
                 </group>
                 <footer>
                     <button string="Change partner and archive" name="action_confirm"
-                        type="object" class="btn-primary" 
+                        type="object" class="btn-primary"
                         attrs="{'invisible': [('new_partner_id', '=', False)]}"/>
                     <button string="Cancel" class="btn-default" special="cancel" />
                 </footer>
