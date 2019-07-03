@@ -10,7 +10,7 @@ class PartnerArchiveWizard(models.TransientModel):
 
     old_partner_id = fields.Many2one(comodel_name="res.partner")
     old_partner_company_id = fields.Many2one(
-        related="old_partner_id.company_id", comodel_name="res.company"
+        related="old_partner_id.company_id"
     )
     new_partner_id = fields.Many2one(
         comodel_name="res.partner", string="New partner", required="True"
