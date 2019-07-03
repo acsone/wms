@@ -25,14 +25,7 @@ class PartnerArchiveWizard(models.TransientModel):
         # Check if module `sale` is present
         if "sale.order" in self.env:
             so_not_done = self.env["sale.order"].search(
-                [
-                    ("state", "!=", "done"),
-                    "|",
-                    "|",
-                    ("partner_id", "=", self.old_partner_id.id),
-                    ("partner_invoice_id", "=", self.old_partner_id.id),
-                    ("partner_shipping_id", "=", self.old_partner_id.id),
-                ]
+                self.old_partner_id._get_sale_order_not_done_domain()
             )
             for so in so_not_done:
                 if so.partner_id == self.old_partner_id:
@@ -45,20 +38,14 @@ class PartnerArchiveWizard(models.TransientModel):
         # Check if module `account` is present
         if "account.invoice" in self.env:
             invoices_unpaid = self.env["account.invoice"].search(
-                [
-                    ("state", "!=", "unpaid"),
-                    ("partner_id", "=", self.old_partner_id.id),
-                ]
+                self.old_partner_id._get_invoice_unpaid_domain()
             )
             invoices_unpaid.write({"partner_id": self.new_partner_id.id})
 
         # Check if module `stock` is present
         if "stock.picking" in self.env:
             deliveries_not_done = self.env["stock.picking"].search(
-                [
-                    ("state", "!=", "done"),
-                    ("partner_id", "=", self.old_partner_id.id),
-                ]
+                self.old_partner_id._get_stock_picking_domain()
             )
             deliveries_not_done.write({"partner_id": self.new_partner_id.id})
 
