@@ -53,6 +53,8 @@
     - oca refs/pull/351/head
       # [10.0] Add module account_invoice_split_refunds
     - oca refs/pull/556/head
+      # [10.0][FIX] Fix dependency issue
+    - oca refs/pull/525/head
   target: *default_target
 ./external-src/account-closing:
   remotes:
