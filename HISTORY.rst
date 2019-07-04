@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2100: Add pivot view with operator for picking
+* ALCYN-2079: Install module account_invoice_split_refund
 
 **Bugfixes**
 

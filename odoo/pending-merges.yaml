@@ -51,6 +51,8 @@
     - oca 7c0ea204a2863e1739eb7365b94e746dfa98e672
       # [10.0] account_invoice_line_default_account
     - oca refs/pull/351/head
+      # [10.0] Add module account_invoice_split_refunds
+    - oca refs/pull/556/head
   target: *default_target
 ./external-src/account-closing:
   remotes:

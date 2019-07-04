@@ -136,6 +136,7 @@ migration:
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
+          - account_invoice_split_refund
           - account_invoice_triple_discount
           # oca/account-reconcile
           - account_mass_reconcile
@@ -442,3 +443,5 @@ migration:
       addons:
         upgrade:
           - specific_zetes
+          ### OCA/account-invoicing
+          - account_invoice_split_refund
