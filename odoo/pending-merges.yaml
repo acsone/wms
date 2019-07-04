@@ -53,7 +53,7 @@
     - oca refs/pull/351/head
       # [10.0] Add module account_invoice_split_refunds
     - oca refs/pull/556/head
-      # [10.0][FIX] Fix dependency issue
+      # [10.0][FIX] Fix dependency issuea
     - oca refs/pull/525/head
   target: *default_target
 ./external-src/account-closing:
@@ -120,9 +120,8 @@
   merges:
     - oca d9b15074dd609bb1ca5719e81ae871d37d85e110
       # potential fix for 90 != 100 bug in tests
-    - oca refs/pull/671/head
       # [10] sale_triple_discount: Fix tax total on report
-    - oca refs/pull/740/head
+    - oca refs/pull/889/head
       # [10.0] sale_stock_picking_blocking: Do not break recordset (performance)
     - oca refs/pull/881/head
   target: *default_target
