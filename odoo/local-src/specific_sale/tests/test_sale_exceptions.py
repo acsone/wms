@@ -407,7 +407,6 @@ class TestSaleOrderException(SavepointCase):
         rules.write({'active': 1})
         self.warning = self.env['exception.rule'].create(
             {
-                'rule_group': 'sale',
                 'model': 'sale.order.line',
                 'name': 'Exception Warning Test',
                 'code': 'failed=True',
@@ -424,7 +423,6 @@ class TestSaleOrderException(SavepointCase):
         rules.write({'active': 1})
         self.warning = self.env['exception.rule'].create(
             {
-                'rule_group': 'sale',
                 'model': 'sale.order.line',
                 'name': 'Exception Test',
                 'code': 'failed=True',

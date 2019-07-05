@@ -447,3 +447,5 @@ migration:
           - account_invoice_split_refund
           ### OCA/server-tools
           - base_exception
+          ### local
+          - specific_sale
