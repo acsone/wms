@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2081: Display pickings linked to sale orders on invoice report
+
 **Bugfixes**
 
 **Build**

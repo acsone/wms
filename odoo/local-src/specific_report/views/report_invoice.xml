@@ -69,6 +69,13 @@
                                             <span>Client</span>
                                             <span t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"/>
                                         </t>
+                                        <t t-set="pickings" t-value="sale.picking_ids.filtered(lambda p: p.picking_type_code in ('incoming', 'outgoing') and p.state == 'done').sorted(lambda p: p.name, reverse=True)" />
+                                        <t t-if="pickings">
+                                            <span> - Notes d'envoi :</span>
+                                            <t t-foreach="pickings" t-as="picking">
+                                                <span t-field="picking.name" />
+                                            </t>
+                                        </t>
                                     </div>
                                 </td>
                             </tr>
