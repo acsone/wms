@@ -21,18 +21,25 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-2092: Improve SO confirmation performance
-
-* ALCYN-2081: Display pickings linked to sale orders on invoice report
-
 **Bugfixes**
-
-* ALCYN-2101: Reservation per units - error in compare
-* ALCYN-2124: Fix Stock History filters and group by product category
 
 **Build**
 
 **Documentation**
+
+
+10.0.1.40.0 (2019-07-08)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-2092: Improve Sales Orders confirmation performance
+* ALCYN-2081: Display Delivery Orders linked to sale orders on invoice report
+
+**Bugfixes**
+
+* ALCYN-2101: Reservation per units - error in comparison
+* ALCYN-2124: Fix Stock History filters and group by product category
 
 
 10.0.1.39.1 (2019-07-02)
