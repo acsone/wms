@@ -13,6 +13,7 @@
     odoo
     oca
     guewen
+    jbaudoux
   merges:
     - oca 9643408dabd47ca812f9f6905785227cb6c29d70
     # [FIX] allow defering of parent computation after load call
@@ -39,6 +40,8 @@
     - git am "$(git format-patch -1 7d3a0282566d3b1b5f8ecc398db94a991150678c -o ../patches)"
     # support for wkhtmltopdf 0.12.5 (https://github.com/odoo/odoo/pull/28864)
     - git am "$(git format-patch -1 bfd7a784c6dd873d3ff808ce6740d59cbecd6ac0 -o ../patches)"
+    # At sale order confirmation, run all procurements at once (performance)
+    - git am "$(git format-patch -1 f291979f6af6d7e11434da3fbf66b5a70d537eb2 -o ../patches)"
   target: &default_target camptocamp merge-branch-1793-master
 ./external-src/account-invoicing:
   remotes:
@@ -116,6 +119,8 @@
     - oca refs/pull/671/head
       # [10] sale_triple_discount: Fix tax total on report
     - oca refs/pull/740/head
+      # [10.0] sale_stock_picking_blocking: Do not break recordset (performance)
+    - oca refs/pull/881/head
   target: *default_target
 ./external-src/server-tools:
   remotes:

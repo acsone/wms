@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2092: Improve SO confirmation performance
+
 **Bugfixes**
 
 **Build**
