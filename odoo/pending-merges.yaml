@@ -147,6 +147,8 @@
     - oca refs/pull/253/head
       # [10.0] account_mass_reconcile: Fix display of partially reconciled items
     - oca refs/pull/254/head
+      # [10.0][ADD] auto_reconcile_structured_ref
+    - oca refs/pull/267/head
   target: *default_target
 ./external-src/account-financial-reporting:
   remotes:

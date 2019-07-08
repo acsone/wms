@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALYCN-2126: bank statement auto match button based on structured ref
+
 **Bugfixes**
 
 **Build**
