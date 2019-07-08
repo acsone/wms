@@ -28,6 +28,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2101: Reservation per units - error in compare
+* ALCYN-2124: Fix Stock History filters and group by product category
 
 **Build**
 

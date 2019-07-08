@@ -435,4 +435,5 @@ migration:
       addons:
         upgrade:
           ### local
+          - stock_valuation
           - specific_report
