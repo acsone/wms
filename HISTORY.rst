@@ -23,6 +23,8 @@ latest (unreleased)
 
 * ALCYN-2092: Improve SO confirmation performance
 
+* ALCYN-2081: Display pickings linked to sale orders on invoice report
+
 **Bugfixes**
 
 * ALCYN-2101: Reservation per units - error in compare
