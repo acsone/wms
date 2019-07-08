@@ -438,3 +438,4 @@ migration:
           - stock_valuation
           - specific_report
     - version: 10.0.1.40.1
+    - version: 10.0.1.41.0
