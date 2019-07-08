@@ -44,7 +44,7 @@ class StockQuant(models.Model):
                     )
                 )
                 pallet_qty = move.product_id.unit_in_pallet * pallet_factor
-                if pallet_qty and qty > pallet_qty:
+                if pallet_qty and qty >= pallet_qty:
                     preferred_domain_list.append(
                         [('qty', '>=', pallet_qty)] + exclude_domain
                     )
@@ -56,7 +56,7 @@ class StockQuant(models.Model):
                     )
                 )
                 box_qty = move.product_id.unit_in_box * box_factor
-                if box_qty and qty > box_qty:
+                if box_qty and qty >= box_qty:
                     preferred_domain_list.append(
                         [('qty', '>=', box_qty)] + exclude_domain
                     )
@@ -68,7 +68,7 @@ class StockQuant(models.Model):
                     )
                 )
                 wrap_qty = move.product_id.unit_in_shrink_wrap * wrap_factor
-                if wrap_qty and qty > wrap_qty:
+                if wrap_qty and qty >= wrap_qty:
                     preferred_domain_list.append(
                         [('qty', '>=', wrap_qty)] + exclude_domain
                     )

@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2101: Reservation per units - error in compare
+
 **Build**
 
 **Documentation**
