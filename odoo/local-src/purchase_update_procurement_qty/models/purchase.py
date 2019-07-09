@@ -32,7 +32,7 @@ class PurchaseOrderLine(models.Model):
         )
         proc_qty = 0.0
         for proc in mto_procurements:
-            proc_qty += proc.product_uom._compute_qty(
+            proc_qty += proc.product_uom._compute_quantity(
                 proc.product_qty, self.product_uom
             )
         return proc_qty

@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2121: Fix typo in upgrade qty on mto
+
 **Build**
 
 **Documentation**
