@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2121: Fix typo in upgrade qty on mto
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.40.1 (2019-07-09)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2121: Fix error in check of purchased quantity for MTO products
 
 
 10.0.1.40.0 (2019-07-08)
