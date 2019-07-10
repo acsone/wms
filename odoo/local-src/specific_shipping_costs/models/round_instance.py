@@ -86,9 +86,7 @@ class RoundInstance(models.Model):
                         0,
                         {
                             'name': _('Shipping cost'),
-                            'product_id': self.env.ref(
-                                'specific_data.deliver_carrier_alcyon_product_product'
-                            ).id,
+                            'product_id': carrier.product_id.id,
                             'product_uom_qty': 1,
                             'price_unit': carrier.fixed_price,
                             'is_delivery': True,

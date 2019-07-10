@@ -29,6 +29,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2089: Fix the expiration date in sale order line, by taking into account only quants in physical location and not reserved.
+* ALCYN-2094: Fix product used to add shipping cost on sale order line
 
 **Build**
 
