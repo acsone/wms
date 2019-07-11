@@ -73,6 +73,10 @@ class StockPackOperation(models.Model):
         )
 
     @api.multi
+    def print_product_product_label(self, printer_id=False, quantity=1):
+        self.product_id.print_product_label(quantity, printer_id)
+
+    @api.multi
     def get_qty_by_lot(self):
         """
         This method will return the quantity by lot.
