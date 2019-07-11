@@ -142,6 +142,7 @@ migration:
           - account_mass_reconcile
           - account_mass_reconcile_partner
           - auto_reconcile_structured_ref
+          - account_reconcile_restrict_partner_mismatch
           # oca/bank-payment
           - account_banking_pain_base
           - account_banking_mandate
@@ -467,3 +468,5 @@ migration:
         upgrade:
           ### local
           - partner_archive_new_partner
+          ### account-reconcile
+          - account_reconcile_restrict_partner_mismatch

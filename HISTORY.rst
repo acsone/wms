@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-2067: Add archive wizard to realocate sales, invoices and pickings to
   an other customer.
+* ALCYN-2046: Install account_reconcile_restrict_partner_mismatch
 
 **Bugfixes**
 

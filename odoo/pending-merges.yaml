@@ -152,6 +152,8 @@
     - oca refs/pull/254/head
       # [10.0][ADD] auto_reconcile_structured_ref
     - oca refs/pull/267/head
+      # [10.0] account_reconcile_restrict_partner_mismatch: Constrain rules for reconcile
+    - oca refs/pull/266/head
   target: *default_target
 ./external-src/account-financial-reporting:
   remotes:
