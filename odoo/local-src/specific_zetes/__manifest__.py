@@ -39,6 +39,7 @@
         'views/zetes_logger.xml',
         'views/stock_picking_type.xml',
         'views/stock_picking.xml',
+        'views/stock_pack_operation_operator.xml',
 
         # Security
         'security/ir.model.access.csv',

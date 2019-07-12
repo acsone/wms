@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2100: Add pivot view with operator for picking
+
 **Bugfixes**
 
 **Build**
