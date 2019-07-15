@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Build**
 
+* Remove Danger Systems checks
+
 **Documentation**
 
 

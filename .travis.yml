@@ -46,7 +46,6 @@ before_install:
   - if [ "$LINT_CHECK" == "0" ] ; then pip3 install -q gitpython requests pyOpenSSL ndg-httpsclient pyasn1 pyyaml; fi
 
 install:
-  - if [ "$TESTS" == "1" ] ; then bundle install ; fi
   - if [ "$LINT_CHECK" == "0" ] ; then python3 ./travis/git_submodule_update.py ; fi
     # we always specify '-f docker-compose.yml' so 'docker-compose.override.yml'
     # is not used and so the volumes are not shared with the host
@@ -57,7 +56,6 @@ install:
 # We run the tests and migration in the same build, so we can push the docker image
 # after that we validated it has tests and migration passing
 script:
-  - if [ "$TESTS" == "1" ] ; then bundle exec danger ; fi
   - if [ "$LINT_CHECK" == "1" ] ; then pre-commit run --all-files ; fi
   # run tests on an empty database, which is dropped afterwards
   - if [ "$TESTS" == "1" ] ; then docker-compose -f $TRAVIS_COMPOSE run --rm -e SUBS_MD5=${SUBS_MD5} -e CREATE_DB_CACHE=${CREATE_DB_CACHE} -e DEMO=True odoo runtests ; fi
