@@ -9,6 +9,6 @@ ALTER TABLE sale_order_line
 ADD COLUMN ignore_exception bool NULL;
 
 UPDATE sale_order_line sol
-SET sol.ignore_exception = so.ignore_exception
+SET ignore_exception = so.ignore_exception
 FROM sale_order so
 WHERE sol.order_id = so.id;
