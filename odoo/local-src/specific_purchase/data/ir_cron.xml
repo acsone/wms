@@ -10,6 +10,7 @@
         <field eval="False" name="doall" />
         <field eval="'procurement.order'" name="model" />
         <field eval="'_procure_orderpoint_confirm'" name="function" />
+        <field name="args" eval="('use_new_cursor=True',)"/>
         <field name="nextcall" eval="(datetime.now()).strftime('%Y-%m-%d 4:00:01')" />
     </record>
 </odoo>
