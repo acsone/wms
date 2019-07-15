@@ -440,6 +440,11 @@ migration:
           - specific_report
     - version: 10.0.1.40.1
     - version: 10.0.1.41.0
+      modes:
+        full:
+          operations:
+            pre:
+              - psql -f odoo/songs/upgrade/update_10_0_1_41_0.sql
       addons:
         upgrade:
           - specific_zetes
