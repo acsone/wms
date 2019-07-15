@@ -177,16 +177,13 @@ class SaleOrderLine(models.Model):
             Warning text are added to the description of the line.
         """
         line_exceptions = self.env['exception.rule'].search(
-            [('rule_group', '=', 'sale'), ('model', '=', 'sale.order.line')],
-            order='sequence',
+            [('model', '=', 'sale.order.line')], order='sequence'
         )
         for line in self:
             exception = warning = ''
             if line.product_id:
                 for rule in line_exceptions:
-                    if not self.env['sale.order']._rule_eval(
-                        rule, 'line', line
-                    ):
+                    if not self.env['sale.order']._rule_eval(rule, line):
                         continue
                     if rule.warning_only:
                         if rule.warning_text:

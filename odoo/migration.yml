@@ -136,6 +136,7 @@ migration:
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
+          - account_invoice_split_refund
           - account_invoice_triple_discount
           # oca/account-reconcile
           - account_mass_reconcile
@@ -439,6 +440,17 @@ migration:
           - specific_report
     - version: 10.0.1.40.1
     - version: 10.0.1.41.0
+      modes:
+        full:
+          operations:
+            pre:
+              - psql -f odoo/songs/upgrade/update_10_0_1_41_0.sql
       addons:
         upgrade:
           - specific_zetes
+          ### OCA/account-invoicing
+          - account_invoice_split_refund
+          ### OCA/server-tools
+          - base_exception
+          ### local
+          - specific_sale

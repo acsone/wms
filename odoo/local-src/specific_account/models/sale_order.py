@@ -104,7 +104,9 @@ class SaleOrder(models.Model):
                 ('partner_invoice_id', '=', partner.id),
             ]
         )
-        invoice_ids = sales.action_invoice_create(final=True)
+        invoice_ids = []
+        invoice_ids += sales.action_invoice_create(final=False)
+        invoice_ids += sales.action_invoice_create(final=True)
         invoices = self.env['account.invoice'].browse(invoice_ids)
         # Validate invoices
         invoices.with_delay()._job_validate_invoice(date_invoice)

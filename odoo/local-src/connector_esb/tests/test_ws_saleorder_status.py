@@ -79,7 +79,6 @@ class WSSaleOrderStatusTestCase(SavepointCase):
             {
                 'name': 'Test if can be sold',
                 'description': 'This product cannot be sold',
-                'rule_group': 'sale',
                 'model': 'sale.order.line',
                 'code': "failed = not object.product_id.sale_ok",
                 'active': True,
@@ -138,7 +137,6 @@ class WSSaleOrderStatusTestCase(SavepointCase):
             {
                 'name': 'Test if can be sold',
                 'description': 'This product cannot be sold',
-                'rule_group': 'sale',
                 'model': 'sale.order.line',
                 'code': "failed = not object.product_id.sale_ok",
                 'active': True,
