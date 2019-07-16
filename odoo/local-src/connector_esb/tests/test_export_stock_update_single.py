@@ -33,8 +33,10 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
         products = self.env['stock.quant'].search([]).mapped('product_id')
         products.write({'sale_ok': False})
         self.partner = self.env.ref('base.res_partner_1')
-        self.location = self.env.ref('stock.stock_location_stock').id
-
+        self.loc_physical = self.env.ref('specific_base.stock_location_vlb')
+        self.location = self.env.ref('stock.stock_location_stock')
+        self.location.location_id = self.loc_physical
+        self.location._parent_store_compute()
         self.prod1 = self.env.ref('product.product_product_20')
         self.prod1.default_code = 'ref1'
         self.prod1.type = 'product'
@@ -113,7 +115,7 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
             {
                 'product_id': self.prod1.id,
                 'new_quantity': 50.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
                 'lot_id': self.lot2.id,
             }
         )
@@ -122,7 +124,7 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
             {
                 'product_id': self.prod1.id,
                 'new_quantity': 25.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
                 'lot_id': self.lot1.id,
             }
         )

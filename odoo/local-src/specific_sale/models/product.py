@@ -46,24 +46,43 @@ class ProductProduct(models.Model):
     )
 
     def _compute_older_lot_id(self):
+        """Find the active lot with the oldest expirtation date.
+
+        The lot must be in a physical location, not reserved and still have
+        some quantity.
+
+        ToDo:
+        When called with multiple product the query could be improved,
+        See this comment :
+        github.com/camptocamp/alcyon_odoo/pull/1515#discussion_r302508955
+
+        """
+        location_physical = self.env.ref('specific_base.stock_location_vlb')
         get_lot_query = """
         SELECT lot.id
         FROM stock_production_lot AS lot
         WHERE lot.product_id = %s
-        AND lot.is_archived = FALSE
-        AND EXISTS (SELECT 1 FROM stock_quant AS quant
-                    WHERE quant.lot_id = lot.id
-                    AND quant.qty > 0)
+        AND EXISTS (
+            SELECT 1 FROM stock_quant AS quant
+                LEFT JOIN stock_location AS location
+                    ON quant.location_id = location.id
+                WHERE quant.lot_id = lot.id AND
+                      location.parent_left > {} AND
+                      location.parent_right < {} AND
+                      quant.reservation_id is null AND
+                      quant.qty > 0)
         ORDER BY lot.life_date
         LIMIT 1;
-        """
-
+        """.format(
+            location_physical.parent_left, location_physical.parent_right
+        )
         for product in self:
             self.env.cr.execute(get_lot_query, (product.id,))
             result = self.env.cr.fetchone()
-
             if result:
                 product.older_lot_id = result[0]
+            else:
+                product.older_lot_id = None
 
     @api.model
     def get_cnk_products_domain(self):

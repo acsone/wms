@@ -27,6 +27,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2089: Fix the expiration date in sale order line, by taking into account only quants in physical location and not reserved.
+
 **Build**
 
 * Remove Danger Systems checks
