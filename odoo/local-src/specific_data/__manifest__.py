@@ -23,7 +23,6 @@
     'data': [
         'data/product.category.csv',
         'data/product.pricelist.csv',
-        'data/delivery_carrier.xml'
     ],
     'installable': True,
 }

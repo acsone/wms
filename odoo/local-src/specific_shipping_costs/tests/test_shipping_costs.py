@@ -51,15 +51,6 @@ class TestShippingCosts(SavepointCase):
                 'name': 'Alcyon 3',
             }
         )
-
-        cls.env['ir.model.data'].create(
-            {
-                'name': 'deliver_carrier_alcyon',
-                'module': '__setup__',
-                'model': 'delivery.carrier',
-                'res_id': cls.delivery_method.id,
-            }
-        )
         # Lets create 2 customers
         cls.partner1 = cls.env['res.partner'].create(
             {
@@ -197,6 +188,11 @@ class TestShippingCosts(SavepointCase):
         delivery_line = so.order_line.filtered('is_delivery')
         return sum(delivery_line.mapped('price_unit'))
 
+    def product_used_for_cost_so_line(self, so):
+        """Returns the product id used on the sale order line with thefee."""
+        delivery_line = so.order_line.filtered('is_delivery')
+        return delivery_line.product_id
+
     def no_shipping_line_present(self, so):
         delivery_line = so.order_line.filtered('is_delivery')
         return not bool(len(delivery_line))
@@ -218,6 +214,10 @@ class TestShippingCosts(SavepointCase):
         self.dr1._deliver(background=False)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
+        self.assertEqual(
+            self.product_used_for_cost_so_line(self.so2),
+            self.so2.carrier_id.product_id,
+        )
 
     def test_2_so_all_delivered_large_amount(self):
         """2 sale order completely delivered large amount no fee"""
@@ -308,6 +308,9 @@ class TestShippingCosts(SavepointCase):
         self.dr2._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
+        self.assertEqual(
+            self.product_used_for_cost_so_line(so3), so3.carrier_id.product_id
+        )
 
     def test_3_so_in_2_delivery_fee_once(self):
         """Two deliveries one without fees the other one with it
