@@ -34,7 +34,10 @@ class ExportStockUpdateTestCase(SavepointCase):
         products = self.env['stock.quant'].search([]).mapped('product_id')
         products.write({'sale_ok': False})
         self.partner = self.env.ref('base.res_partner_1')
-        self.location = self.env.ref('stock.stock_location_stock').id
+        self.loc_physical = self.env.ref('specific_base.stock_location_vlb')
+        self.location = self.env.ref('stock.stock_location_stock')
+        self.location.location_id = self.loc_physical
+        self.location._parent_store_compute()
         # Two products that should be picked up for export
         self.prod1 = self.env.ref('product.product_product_20')
         self.prod1.default_code = 'ref1'
@@ -197,7 +200,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod1.id,
                 'new_quantity': 50.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
                 'lot_id': self.lot2.id,
             }
         )
@@ -206,7 +209,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod1.id,
                 'new_quantity': 25.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
                 'lot_id': self.lot1.id,
             }
         )
@@ -224,7 +227,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod2.id,
                 'new_quantity': 25.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
                 'lot_id': self.lot_p2.id,
             }
         )
@@ -262,7 +265,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod3.id,
                 'new_quantity': 4325.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
             }
         )
         inventory_wizard.change_product_qty()
@@ -279,7 +282,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod4.id,
                 'new_quantity': 9945.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
             }
         )
         inventory_wizard.change_product_qty()
@@ -296,7 +299,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             {
                 'product_id': self.prod5.id,
                 'new_quantity': 2395.0,
-                'location_id': self.location,
+                'location_id': self.location.id,
             }
         )
         inventory_wizard.change_product_qty()
