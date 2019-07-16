@@ -141,7 +141,7 @@ On lnx004.abl.grp :
 docker stack rm odoo
 ```
 
-- Edit file /srv/ABL-odoo-production/docker-compose.yml and adapt with image.
+- Edit file /srv/ABL-odoo-preproduction/docker-compose.yml and adapt with image.
 
 On lnx005.abl.grp :
 
@@ -156,7 +156,7 @@ On lnx004.abl.grp :
 - Once the backup is done, we restart the odoo stack:
 
 ```
-docker stack deploy --with-registry-auth -c /srv/ABL-odoo-production/docker-compose.yml odoo
+docker stack deploy --with-registry-auth -c /srv/ABL-odoo-preproduction/docker-compose.yml odoo
 ```
 
 Note: make sure you have access to dockerhub, you might need to do a `docker login`
