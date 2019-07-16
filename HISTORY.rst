@@ -21,9 +21,21 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-2100: Add pivot view with operator for picking
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.41.0 (2019-07-16)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2079: Install module account_invoice_split_refund
 * ALCYN-2079: Split generation of invoices and refunds in cron job
+* ALCYN-2100: Add pivot view with operator for picking
 * ALYCN-2126: bank statement auto match button based on structured ref
 
 **Bugfixes**
@@ -34,8 +46,6 @@ latest (unreleased)
 **Build**
 
 * Remove Danger Systems checks
-
-**Documentation**
 
 
 10.0.1.40.1 (2019-07-09)
