@@ -141,6 +141,7 @@ migration:
           # oca/account-reconcile
           - account_mass_reconcile
           - account_mass_reconcile_partner
+          - auto_reconcile_structured_ref
           # oca/bank-payment
           - account_banking_pain_base
           - account_banking_mandate
@@ -450,6 +451,8 @@ migration:
           - specific_zetes
           ### OCA/account-invoicing
           - account_invoice_split_refund
+          ### OCA/account-reconcile
+          - auto_reconcile_structured_ref
           ### OCA/server-tools
           - base_exception
           ### local
