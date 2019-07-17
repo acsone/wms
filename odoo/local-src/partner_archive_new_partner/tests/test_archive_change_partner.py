@@ -12,12 +12,13 @@ class TestPartner(common.SavepointCase):
         super(TestPartner, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
+        cls.partner1 = cls.env["res.partner"].create({"name": "Partner1"})
+        cls.partner2 = cls.env["res.partner"].create({"name": "Partner2"})
+
         cls.registry["sale.order"] = MagicMock()
         cls.registry["account.invoice"] = MagicMock()
         cls.registry["stock.picking"] = MagicMock()
 
-        cls.partner1 = cls.env["res.partner"].create({"name": "Partner1"})
-        cls.partner2 = cls.env["res.partner"].create({"name": "Partner2"})
         cls.saleorder = MagicMock()
         cls.invoice = MagicMock()
         cls.delivery = MagicMock()
