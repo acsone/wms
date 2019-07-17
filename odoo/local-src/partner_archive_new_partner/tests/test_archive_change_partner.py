@@ -15,15 +15,38 @@ class TestPartner(common.SavepointCase):
         cls.partner1 = cls.env["res.partner"].create({"name": "Partner1"})
         cls.partner2 = cls.env["res.partner"].create({"name": "Partner2"})
 
-        cls.registry["sale.order"] = MagicMock()
-        cls.registry["account.invoice"] = MagicMock()
-        cls.registry["stock.picking"] = MagicMock()
-
         cls.saleorder = MagicMock()
         cls.invoice = MagicMock()
         cls.delivery = MagicMock()
 
+    def setUp(self):
+        super(TestPartner, self).setUp()
+
+        self.sale_model = self.registry.models.get("sale.order")
+        self.registry.models["sale.order"] = MagicMock()
+        self.invoice_model = self.registry.models.get("account.invoice")
+        self.registry.models["account.invoice"] = MagicMock()
+        self.picking_model = self.registry.models.get("stock.picking")
+        self.registry.models["stock.picking"] = MagicMock()
+
+    def tearDown(self):
+        super(TestPartner, self).setUp()
+
+        if self.sale_model:
+            self.registry["sale.order"] = self.sale_model
+        else:
+            del self.registry.models["sale.order"]
+        if self.invoice_model:
+            self.registry["account.invoice"] = self.invoice_model
+        else:
+            del self.registry.models["account.invoice"]
+        if self.picking_model:
+            self.registry["stock.picking"] = self.picking_model
+        else:
+            del self.registry.models["stock.picking"]
+
     def test_writing_sale_order_partner(self):
+        self.partner1.active = True
         wizard_data = self.partner1.archive_partner()
         self.saleorder.partner_id = self.partner1
         self.env["sale.order"].search = MagicMock(
@@ -38,6 +61,7 @@ class TestPartner(common.SavepointCase):
             self.assertEqual(1, patched_so.call_count)
 
     def test_writing_invoice_partner(self):
+        self.partner1.active = True
         wizard_data = self.partner1.archive_partner()
         self.invoice.partner_id = self.partner1
         self.env["account.invoice"].search = MagicMock(
@@ -52,6 +76,7 @@ class TestPartner(common.SavepointCase):
             self.assertEqual(1, patched_inv.call_count)
 
     def test_writing_delivery_order_partner(self):
+        self.partner1.active = True
         wizard_data = self.partner1.archive_partner()
         self.delivery.partner_id = self.partner1
         self.env["account.invoice"].search = MagicMock(
