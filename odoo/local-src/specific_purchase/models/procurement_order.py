@@ -108,7 +108,6 @@ class ProcurementOrder(models.Model):
                         'product_uom': product.uom_id.id,
                     }
                 )
-
         _logger.info('Run the procurement')
         result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor, company_id=company_id
@@ -116,28 +115,45 @@ class ProcurementOrder(models.Model):
         _logger.info('Procurement finished')
 
         # By default we recompute promotions
-        if self._context.get('is_not_recompute_promos'):
+        if self.env.context.get('is_not_recompute_promos'):
             return result
 
-        # Procurement is running in a new cursor. If we want to access
-        # to purchase orders created by the procurement we need to
-        # open a new cursor
+        if 'is_not_recompute_promos' in self.env.context:
+            # this key pointing it was started from wizard
+            old_po = self.env['purchase.order'].search(
+                [('state', '=', 'draft')]
+            )
+            self._run_updates(immediate_update=True, po_to_exclude=old_po)
+        self._run_updates()
+
+        return result
+
+    def _run_updates(self, immediate_update=False, po_to_exclude=None):
         with api.Environment.manage():
             context = self._context.copy()
             new_cr = self.pool.cursor()
             self = self.with_env(self.env(cr=new_cr, context=context))
-
             try:
-                # Delay jobs to update values on open purchase orders
-                self.env['purchase.order'].delay_update_for_open_po()
+                if immediate_update:
+                    # run computation immediately on newly created PO
+                    # as procurement is run in another cursor, the search in current
+                    # cursor will return result without new POs
+                    new_po = self.env['purchase.order'].search(
+                        [
+                            ('state', '=', 'draft'),
+                            ('id', 'not in', po_to_exclude.ids),
+                        ]
+                    )
+                    new_po.recompute_lines_discount_values()
+                else:
+                    # Delay jobs to update values on open purchase orders
+                    self.env['purchase.order'].delay_update_for_open_po()
                 new_cr.commit()
             except Exception as e:
                 _logger.error(e)
                 new_cr.rollback()
             finally:
                 new_cr.close()
-
-        return result
 
     def make_po(self):
         """
