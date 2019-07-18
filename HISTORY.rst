@@ -125,6 +125,8 @@ Moved to 10.0.1.42.7
 * ALCYN-2080: Install account_payment_mode_auto_reconcile
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
+* ALCYN-2091: Add arguments to execute procurements in separate cursor
+* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
 
 **Bugfixes**
 
@@ -167,7 +169,6 @@ Moved to 10.0.1.42.7
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
 * ALYCN-2126: bank statement auto match button based on structured ref
-* ALCYN-2091: Add arguments to execute procurements in separete cursor
 
 **Bugfixes**
 
