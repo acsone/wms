@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="partner_archive_new_partner_view" model="ir.ui.view">
+        <field name="name">partner.archive.new.partner.form</field>
+        <field name="model">partner.archive.new.partner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select new partner before archiving">
+                <p>Select a new partner to replace the existing one on the following documents :</p>
+                <ul>
+                    <li>Sale orders (Customer, Invoice address or Delivery address)</li>
+                    <li>Invoices</li>
+                    <li>Delivery orders</li>
+                </ul>
+
+                <group>
+                    <field name="old_partner_id" invisible="1"/>
+                    <field name="old_partner_company_id" invisible="1"/>
+                    <field name="new_partner_id"
+                        domain="[
+                            ('id', '!=', old_partner_id),
+                            ('customer','=',True),
+                            ('company_id','=', old_partner_company_id),
+                            ]" />
+                </group>
+                <footer>
+                    <button string="Change partner and archive" name="action_confirm"
+                        type="object" class="btn-primary"
+                        attrs="{'invisible': [('new_partner_id', '=', False)]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
