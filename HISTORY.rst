@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-2046: Install account_reconcile_restrict_partner_mismatch
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
+* ALCYN-2155: Update translation files
 
 **Bugfixes**
 

@@ -127,7 +127,7 @@ msgstr "<br/>\n"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<br/><br/>\n"
-"                                            <span>Client</span>"
+"                                            <span>Customer</span>"
 msgstr "<br/><br/>\n"
 "                                            <span>Klant</span>"
 
@@ -290,8 +290,13 @@ msgstr "<span>Leveranciers<br/>korting</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span>Commande</span>"
+msgid "<span>Sales Order</span>"
 msgstr "<span>Bestelling</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span> - Delivery slip:</span>"
+msgstr "<span> - Afleverbon:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
@@ -515,7 +520,7 @@ msgstr "Belastbare basis"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "By lot"
-msgstr "By lot"
+msgstr "Per partij"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -793,7 +798,7 @@ msgstr "Naam"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "Net<br/>unit<br/>price"
-msgstr "Net<br/>unit<br/>price"
+msgstr "Netto<br/>eenheidsprijs"
 
 #. module: specific_report
 #: code:addons/specific_report/wizard/modify_serial_number.py:28
@@ -960,8 +965,8 @@ msgstr "Picking inspection"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Primary<br/>unit<br/>price"
-msgstr "Primary<br/>unit<br/>price"
+msgid "Gross<br/>unit<br/>price"
+msgstr "Bruto<br/>eenheidsprijs"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form

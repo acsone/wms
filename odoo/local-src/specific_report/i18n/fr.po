@@ -127,7 +127,7 @@ msgstr "<br/>\n"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<br/><br/>\n"
-"                                            <span>Client</span>"
+"                                            <span>Customer</span>"
 msgstr "<br/><br/>\n"
 "                                            <span>Client</span>"
 
@@ -290,8 +290,13 @@ msgstr "<span>Remise<br/>Fournisseur</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span>Commande</span>"
+msgid "<span>Sales Order</span>"
 msgstr "<span>Commande</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span> - Delivery slip:</span>"
+msgstr "<span> - Note d'envoi :</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
@@ -960,7 +965,7 @@ msgstr "Vérification de la préparation"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Primary<br/>unit<br/>price"
+msgid "Gross<br/>unit<br/>price"
 msgstr "Prix<br/>unitaire<br/>brut"
 
 #. module: specific_report
