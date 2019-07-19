@@ -27,6 +27,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2137: Enable re-printing product label without lot
+
 **Build**
 
 **Documentation**

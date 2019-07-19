@@ -468,5 +468,6 @@ migration:
         upgrade:
           ### local
           - partner_archive_new_partner
+          - specific_print
           ### account-reconcile
           - account_reconcile_restrict_partner_mismatch
