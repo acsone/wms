@@ -28,6 +28,7 @@ latest (unreleased)
 * ALCYN-2169: Change fields to see operator picking pivot view
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
+* ALCYN-2080: Install account_invoice_payment_report
 
 **Bugfixes**
 

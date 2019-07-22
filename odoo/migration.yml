@@ -136,6 +136,7 @@ migration:
           # oca/account-invoicing
           - account_invoice_check_total
           - account_invoice_line_default_account
+          - account_invoice_payment_report
           - account_invoice_split_refund
           - account_invoice_triple_discount
           # oca/account-reconcile
@@ -471,5 +472,7 @@ migration:
           - specific_print
           - specific_report
           - specific_zetes
+          ### account-invoicing
+          - account_invoice_payment_report
           ### account-reconcile
           - account_reconcile_restrict_partner_mismatch
