@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-2067: Add archive wizard to realocate sales, invoices and pickings to
   an other customer.
 * ALCYN-2046: Install account_reconcile_restrict_partner_mismatch
+* ALCYN-2100: Add right for stock manager to see operator picking pivot view
 
 **Bugfixes**
 

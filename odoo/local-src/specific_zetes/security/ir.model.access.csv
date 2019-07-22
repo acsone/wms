@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_zetes_logger,access_zetes_logger,model_zetes_logger,base.group_no_one,1,0,0,0
 access_pack_operation_reserve_rel,access_pack_operation_reserve_rel,model_pack_operation_reserve_rel,stock.group_stock_user,1,0,1,0
+access_zetes_stock_pack_operation_operator,access_zetes_stock_pack_operation_operator,model_stock_pack_operation_operator,stock.group_stock_manager,1,0,0,0
