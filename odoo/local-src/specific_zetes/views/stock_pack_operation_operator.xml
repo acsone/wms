@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <pivot string="Packing Operation" disable_linking="True">
               <field name="operator_id" type="row"/>
-              <field name="date" type="col" interval="day"/>
+              <field name="write_date" type="col" interval="day"/>
             </pivot>
         </field>
     </record>
@@ -22,11 +22,11 @@
                   domain="[
                       ('qty_done', '>', 0),
                       ('picking_destination_location_id', '=',%(stock.stock_location_output)d),
-                      ('date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
+                      ('write_date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
                     ]"/>
                 <filter string="Last month" name="filter_last_month"
                   domain="[
-                      ('date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
+                      ('write_date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
                     ]"/>
                 <filter string="Nbr lignes Picking" name="filter_nbr_lines_picking"
                   domain="[
