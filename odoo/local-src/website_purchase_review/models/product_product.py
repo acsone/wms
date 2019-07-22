@@ -120,7 +120,12 @@ class ProductProduct(models.Model):
         # Otherwise SQL query will fail (ids = [])
         if not self:
             return
-
+        today = datetime.now()
+        today_minus_one_year = today - relativedelta(years=1)
+        today_str = fields.Datetime.to_string(today)
+        today_minus_one_year_str = fields.Datetime.to_string(
+            today_minus_one_year
+        )
         # Compute annual consumption
         query_annual = """
         SELECT
@@ -130,12 +135,15 @@ class ProductProduct(models.Model):
           INNER JOIN sale_order so ON sol.order_id = so.id
         WHERE so.confirmation_date IS NOT NULL
           AND sol.product_id IN %s
-          AND so.confirmation_date::DATE >= (NOW() - INTERVAL '1 year')::DATE
-          AND so.confirmation_date::DATE < NOW()::DATE
+          AND so.confirmation_date >= %s
+          AND so.confirmation_date < %s
           AND so.state <> 'cancel'
         GROUP BY sol.product_id
         """
-        self.env.cr.execute(query_annual, (tuple(self.ids),))
+        self.env.cr.execute(
+            query_annual,
+            (tuple(self.ids), today_minus_one_year_str, today_str),
+        )
         annual_consumption_per_products = dict(self.env.cr.fetchall())
 
         # Compute three months consumption

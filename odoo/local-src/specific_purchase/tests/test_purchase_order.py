@@ -204,8 +204,10 @@ class TestPurchaseOrder(SavepointCase):
         # there are no SO in past so it will be null
         self.assertEqual(self.product.nb_days_out_of_stock, 0)
 
-        frozen_time.move_to('2018-07-20')
+        frozen_time.move_to('2018-07-20 12:00:00')
         self.so1.action_confirm()
+        # Ensure fields are computed after the sale order is confirmed
+        frozen_time.move_to('2018-07-21 00:00:00')
         self.so1.refresh()
         self.product.refresh()
 
