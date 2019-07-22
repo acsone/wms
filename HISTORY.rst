@@ -29,6 +29,7 @@ latest (unreleased)
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
 * ALCYN-2080: Install account_invoice_payment_report
+* ALCYN-2080: Install account_payment_mode_auto_reconcile
 
 **Bugfixes**
 

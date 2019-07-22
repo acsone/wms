@@ -150,6 +150,7 @@ migration:
           - account_banking_sepa_credit_transfer
           - account_banking_sepa_direct_debit
           - account_payment_mode
+          - account_payment_mode_auto_reconcile
           - account_payment_order
           - account_payment_partner
           - account_payment_sale
@@ -476,3 +477,5 @@ migration:
           - account_invoice_payment_report
           ### account-reconcile
           - account_reconcile_restrict_partner_mismatch
+          ### bank-payment
+          - account_payment_mode_auto_reconcile
