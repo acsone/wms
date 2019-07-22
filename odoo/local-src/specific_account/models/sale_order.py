@@ -105,8 +105,15 @@ class SaleOrder(models.Model):
             ]
         )
         invoice_ids = []
-        invoice_ids += sales.action_invoice_create(final=False)
-        invoice_ids += sales.action_invoice_create(final=True)
+        qties_to_invoice = sales.mapped('order_line.qty_to_invoice')
+        to_invoice = bool(filter(lambda qty: qty > 0, qties_to_invoice))
+        to_refund = bool(filter(lambda qty: qty < 0, qties_to_invoice))
+        # Create all the invoices
+        if to_invoice:
+            invoice_ids += sales.action_invoice_create(final=False)
+        # Create all the refunds
+        if to_refund:
+            invoice_ids += sales.action_invoice_create(final=True)
         invoices = self.env['account.invoice'].browse(invoice_ids)
         # Validate invoices
         invoices.with_delay()._job_validate_invoice(date_invoice)
