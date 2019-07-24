@@ -469,6 +469,7 @@ migration:
           ### local
           - partner_archive_new_partner
           - specific_print
+          - specific_report
           - specific_zetes
           ### account-reconcile
           - account_reconcile_restrict_partner_mismatch

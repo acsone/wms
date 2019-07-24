@@ -58,7 +58,7 @@
                             <tr>
                                 <td colspan="8" class="sale_separator">
                                     <div>
-                                        <span>Commande</span>
+                                        <span>Sales Order</span>
                                         <span t-field="sale.name"/>
                                         <t t-if="sale.suite_name">(<t t-esc="sale.suite_name"/>)</t>
                                         <span>du</span>
@@ -66,12 +66,12 @@
                                         <t t-if="sale.client_order_ref">(V Ref:<t t-esc="sale.client_order_ref"/>)</t>
                                         <t t-if="sale.partner_id != invoice.partner_id">
                                             <br/><br/>
-                                            <span>Client</span>
+                                            <span>Customer</span>
                                             <span t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"/>
                                         </t>
                                         <t t-set="pickings" t-value="sale.picking_ids.filtered(lambda p: p.picking_type_code in ('incoming', 'outgoing') and p.state == 'done').sorted(lambda p: p.name, reverse=True)" />
                                         <t t-if="pickings">
-                                            <span> - Notes d'envoi :</span>
+                                            <span> - Delivery slip:</span>
                                             <t t-foreach="pickings" t-as="picking">
                                                 <span t-field="picking.name" />
                                             </t>

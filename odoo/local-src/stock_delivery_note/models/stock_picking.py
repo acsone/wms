@@ -223,7 +223,7 @@ class StockPicking(models.Model):
         grouped_lines = self.get_moves_by_order()
         for group in grouped_lines:
             for move_line in group[1][0]:
-                product = move_line.product_id
+                product = move_line.product_id.with_context(lang=partner.lang)
                 sol = move_line.order_line_id
                 quants = move_line.get_lots(only_with_lot=False)
                 quants_qty = sum([quant[1] for quant in quants])

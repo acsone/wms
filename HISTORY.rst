@@ -26,6 +26,8 @@ latest (unreleased)
 * ALCYN-2046: Install account_reconcile_restrict_partner_mismatch
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
+* ALCYN-2155: Update translations for invoice and delivery slip reports
+* ALCYN-2155: Display product name in customer lang in delivery notes
 
 **Bugfixes**
 
