@@ -479,3 +479,5 @@ migration:
           - account_reconcile_restrict_partner_mismatch
           ### bank-payment
           - account_payment_mode_auto_reconcile
+          # account-financial-tools
+          - account_chart_update
