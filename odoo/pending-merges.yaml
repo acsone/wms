@@ -57,6 +57,8 @@
     - oca refs/pull/556/head
       # [10.0][FIX] Fix dependency issuea
     - oca refs/pull/525/head
+      # [10.0] Add module account_invoice_payment_report
+    - oca refs/pull/567/head
   target: *default_target
 ./external-src/account-closing:
   remotes:
@@ -80,6 +82,8 @@
     - oca refs/pull/534/head
     - oca refs/pull/543/head
     - oca refs/pull/590/head
+      # [10.0][ADD] account_payment_mode_auto_reconcile
+    - oca refs/pull/618/head
   target: *default_target
 ./external-src/enterprise:
   remotes:
