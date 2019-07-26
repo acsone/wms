@@ -32,6 +32,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2137: Enable re-printing product label without lot
+* ALCYN-2163: Fix invoice creation when there is no more invoiceable qty
 
 **Build**
 
