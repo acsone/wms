@@ -54,6 +54,13 @@ latest (unreleased)
 **Extracted patch into 10.0.1.40.2**
 **And moved other features into 10.0.1.42.0**
 
+10.0.1.40.3 (2019-07-29)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2186: Fix cutoff computation error (last day of the month for invoice)
+
 
 10.0.1.40.2 (2019-07-22)
 ++++++++++++++++++++++++
