@@ -444,40 +444,39 @@ migration:
           - stock_valuation
           - specific_report
     - version: 10.0.1.40.1
-    - version: 10.0.1.41.0
+    - version: 10.0.1.40.2
       operations:
         post:
-          - anthem songs.upgrade.update_10_41_0::post
-          - "sh -c 'psql -f odoo/songs/upgrade/update_10_41_0.sql'"
+          - anthem songs.upgrade.update_10_0_1_40_2::post
+          - "sh -c 'psql -f odoo/songs/upgrade/update_10_0_1_40_2.sql'"
+      addons:
+        upgrade:
+          - specific_zetes
+    - version: 10.0.1.41.0
+      # yanked, moved to 10.0.1.42.0
+    - version: 10.0.1.42.0
       modes:
         full:
           operations:
             pre:
-              - psql -f odoo/songs/upgrade/update_10_0_1_41_0.sql
+              - psql -f odoo/songs/upgrade/update_10_0_1_42_0.sql
       addons:
         upgrade:
-          - specific_zetes
           ### OCA/account-invoicing
           - account_invoice_split_refund
+          - account_invoice_payment_report
           ### OCA/account-reconcile
+          - account_reconcile_restrict_partner_mismatch
           - auto_reconcile_structured_ref
+          ### OCA/account-financial-tools
+          - account_chart_update
+          ### OCA/bank-payment
+          - account_payment_mode_auto_reconcile
           ### OCA/server-tools
           - base_exception
-          ### local
-          - specific_sale
-    - version: 10.0.1.42.0
-      addons:
-        upgrade:
           ### local
           - partner_archive_new_partner
           - specific_print
           - specific_report
+          - specific_sale
           - specific_zetes
-          ### account-invoicing
-          - account_invoice_payment_report
-          ### account-reconcile
-          - account_reconcile_restrict_partner_mismatch
-          ### bank-payment
-          - account_payment_mode_auto_reconcile
-          # account-financial-tools
-          - account_chart_update
