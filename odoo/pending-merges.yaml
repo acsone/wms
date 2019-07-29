@@ -64,12 +64,15 @@
   remotes:
     oca: git@github.com:OCA/account-closing.git
     camptocamp: git@github.com:camptocamp/account-closing.git
+    jbaudoux: git@github.com:jbaudoux/account-closing.git
   merges:
     - oca b258ca4311bf93456c9d201b4d86837a1f9cc8c3
     # [MIG][10.0] account_cutoff_accrual_picking
     - oca refs/pull/73/head
     # [10.0] account_cutoff_accrual_return
     - oca refs/pull/70/head
+    # Fix comparaison of Date and Datetime
+    - jbaudoux refs/pull/1/head
   target: *default_target
 # We keep this to manage a sharable and updatable fork of enterprise branch
 ./external-src/bank-payment:

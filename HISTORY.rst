@@ -36,6 +36,9 @@ latest (unreleased)
 * ALCYN-2137: Enable re-printing product label without lot
 * ALCYN-2163: Fix invoice creation when there is no more invoiceable qty
 * ALCYN-2145: Fix creation of credit control lines
+**Bugfixes**
+
+* ALCYN-2186: Fix cutoff computation error (last day of the month for invoice)
 
 **Build**
 
