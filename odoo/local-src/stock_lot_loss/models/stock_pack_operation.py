@@ -11,33 +11,33 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 
-class StockPackOperationLot(models.Model):
-    _inherit = 'stock.pack.operation.lot'
+class StockPackOperation(models.Model):
+    _inherit = 'stock.pack.operation'
 
-    def _skip_lot(self):
-        """
-        Unreserve the current lot operation and recreate a new lot operation
-        with a different lot. This method can be use if an operator
-        want to change the reserved lot (out of stock; scrap; ...)
+    def _skip_operation(self, pack_op_lot_id=None):
+        """Unreserve the current move and recreate a new move with a different
+        destination location. This method can be used if an operator
+        wants to change the reserved moves (out of stock; scrap; ...)
+
+        :param pack_op_lot_id: stock.pack.operation.lot
         """
         self.ensure_one()
-        op = self.operation_id
-        moves = op.linked_move_operation_ids.mapped('move_id')
+        moves = self.linked_move_operation_ids.mapped('move_id')
 
         # Unreserve all operations on that lot
         moves.do_unreserve()
 
         # Get the available qty of that lot at that location
         # Consider only unreserved quants
-        quants = self.env['stock.quant'].search(
-            [
-                ('product_id', '=', op.product_id.id),
-                ('lot_id', '=', self.lot_id.id),
-                ('location_id', '=', op.location_id.id),
-                ('qty', '>', 0),
-                ('reservation_id', '=', False),
-            ]
-        )
+        search_domain = [
+            ('product_id', '=', self.product_id.id),
+            ('location_id', '=', self.location_id.id),
+            ('qty', '>', 0),
+            ('reservation_id', '=', False),
+        ]
+        if pack_op_lot_id:
+            search_domain.append(('lot_id', '=', pack_op_lot_id.lot_id.id))
+        quants = self.env['stock.quant'].search(search_domain)
         if quants:
             # Block the quants that are available.
             # If the operation does not match a reserved move, no quant will be
@@ -47,7 +47,10 @@ class StockPackOperationLot(models.Model):
                 (tuple(quants.ids),),
             )
             qty_available = sum([q.qty for q in quants])
-            qty_done = self.qty
+            if pack_op_lot_id:
+                qty_done = pack_op_lot_id.qty
+            else:
+                qty_done = self.qty_done
             qty_to_block = qty_available - qty_done
             if qty_to_block <= 0:
                 raise UserError(_('No qty to block.'))
@@ -59,23 +62,24 @@ class StockPackOperationLot(models.Model):
 
             move_line = {
                 'name': 'Skip Lot',
-                'product_id': op.product_id.id,
+                'product_id': self.product_id.id,
                 'product_uom_qty': qty_to_block,
                 'picking_type_id': self.env.ref(
                     'stock_lot_loss.stock_picking_type_23'
                 ).id,
-                'location_id': op.location_id.id,
+                'location_id': self.location_id.id,
                 'location_dest_id': dest_location.id,
-                'restrict_lot_id': self.lot_id.id,
-                'product_uom': op.product_id.uom_id.id,
+                'product_uom': self.product_id.uom_id.id,
                 'origin': u'Operator: %s' % self.env.user.name,
             }
+            if pack_op_lot_id:
+                move_line['restrict_lot_id'] = pack_op_lot_id.lot_id.id
             block_picking = self.env['stock.picking'].create(
                 {
                     'picking_type_id': self.env.ref(
                         'stock_lot_loss.stock_picking_type_23'
                     ).id,
-                    'location_id': op.location_id.id,
+                    'location_id': self.location_id.id,
                     'location_dest_id': dest_location.id,
                     'move_lines': [(0, 0, move_line)],
                 }

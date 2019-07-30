@@ -295,8 +295,8 @@ class Itempick(DomainInterface):
 
             with Savepoint(self.request.env.cr) as lot_savepoint:
                 try:
-                    # Call the method to skip this lot
-                    pack_lot._skip_lot()
+                    # Call the method to skip this operation
+                    pack_op._skip_operation(pack_op_lot_id=pack_lot)
                 except Exception as e:
                     lot_savepoint.rollback()
                     _logger.error(str(e))

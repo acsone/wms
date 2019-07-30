@@ -132,7 +132,9 @@ class TestLotLoss(SavepointCase):
         pack_lot_A.qty = 1
         op.save()
 
-        pack_lot_A.with_context(round_autoset=False)._skip_lot()
+        op.with_context(round_autoset=False)._skip_operation(
+            pack_op_lot_id=pack_lot_A
+        )
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -240,7 +242,9 @@ class TestLotLoss(SavepointCase):
         pack_lot_B.qty = 1
         op.save()
 
-        pack_lot_B.with_context(round_autoset=False)._skip_lot()
+        op.with_context(round_autoset=False)._skip_operation(
+            pack_op_lot_id=pack_lot_B
+        )
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
