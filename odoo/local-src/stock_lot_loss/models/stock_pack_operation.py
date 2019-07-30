@@ -24,10 +24,10 @@ class StockPackOperation(models.Model):
         self.ensure_one()
         moves = self.linked_move_operation_ids.mapped('move_id')
 
-        # Unreserve all operations on that lot
+        # Unreserve all operations
         moves.do_unreserve()
 
-        # Get the available qty of that lot at that location
+        # Get the available qty at that location
         # Consider only unreserved quants
         search_domain = [
             ('product_id', '=', self.product_id.id),

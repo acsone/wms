@@ -261,37 +261,47 @@ class Itempick(DomainInterface):
             pack_op = self.request.env['stock.pack.operation'].browse(
                 pack_operation_id
             )
-
-            # Retrieve the pack lot
-            pack_lot = self.request.env['stock.pack.operation.lot'].search(
-                [
-                    ('operation_id', '=', pack_operation_id),
-                    ('lot_id', '=', lot_id),
-                ],
-                limit=1,
-            )
-            if not pack_lot:
-                result = Parameters(self, action='resp')
-                result.update(
-                    {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': 'Lot pack operation not found',
-                    }
+            # Check if the product is tracked or not
+            product = pack_op.product_id
+            if product.tracking != 'none':
+                # Retrieve the pack lot
+                pack_lot = self.request.env['stock.pack.operation.lot'].search(
+                    [
+                        ('operation_id', '=', pack_operation_id),
+                        ('lot_id', '=', lot_id),
+                    ],
+                    limit=1,
                 )
-                return result.format()
+                if not pack_lot:
+                    result = Parameters(self, action='resp')
+                    result.update(
+                        {
+                            'respCode': constants.RESPONSE_CODE_ERROR,
+                            'respMsg': 'Lot pack operation not found',
+                        }
+                    )
+                    return result.format()
 
-            msg = u'Out of stock for lot {} (product {}): {} taken'.format(
-                pack_lot.lot_id.name, pack_op.product_id.name, picked_qty
-            )
+                # Add the picked quantity on the pack lot
+                pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
+
+                msg = u'Out of stock for lot {} (product {}): {} taken'.format(
+                    pack_lot.lot_id.name, pack_op.product_id.name, picked_qty
+                )
+            else:
+                pack_lot = None
+                # Add the picked quantity on the pack operation
+                pack_op.add_qty(picked_qty)
+
+                msg = u'Out of stock (product {}): {} taken'.format(
+                    pack_op.product_id.name, picked_qty
+                )
             params.log(
                 picking_id=picking_id,
                 operation_id=pack_operation_id,
                 exception=msg,
                 error_type='human',
             )
-
-            # Add the picked quantity on the pack lot
-            pack_op.add_qty(picked_qty, pack_lot.lot_id.id)
 
             with Savepoint(self.request.env.cr) as lot_savepoint:
                 try:

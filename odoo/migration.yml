@@ -494,3 +494,5 @@ migration:
         upgrade:
           ### OCA/server-tools
           - date_range
+          ### local
+          - stock_lot_loss
