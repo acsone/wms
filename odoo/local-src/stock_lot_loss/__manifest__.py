@@ -11,6 +11,7 @@
     'depends': [
         'stock',
         'stock_operation_recompute',
+        'stock_reassign_auto',
         'purchase'  # Add only for unittests
     ],
     'data': [
