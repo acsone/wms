@@ -206,36 +206,39 @@ class ProductProduct(models.Model):
         prio = self.env.context.get('prio')
         date = self.env.context.get('date')
         corrections = {}
-        loc_loss = self.env.ref('stock_lot_loss.stock_location_14019')
-        loc_loss_qty = self.with_context(
-            location=loc_loss.id
-        )._product_available()
+        loc_loss_id = self.env.ref('stock_lot_loss.stock_location_14019').id
         if prio is not None and date is not None:
             dom_quant_loc, dom_move_in_loc, dom_move_out_loc = (
                 self._get_domain_locations()
             )
+            parking_ids = self.env['stock.location'].search(
+                [('kind', '=', 'parking')]
+            ).ids
             domain = dom_move_out_loc + [
+                ('location_id', 'not in', parking_ids),
+                # We never want to overwrite a move,
+                # which ends in the loss location. The quantity isn't usable
+                # and would have to be deducted in the end anyway.
+                ('location_dest_id', '!=', loc_loss_id),
                 ('product_id', 'in', self.ids),
                 ('state', 'not in', ('done', 'cancel')),
                 '|',
-                ('priority', '>', prio),
+                ('priority', '<', prio),
                 '&',
                 ('priority', '=', prio),
-                ('date', '<', date),
+                ('date', '>', date),
             ]
             move_groupby = self.env['stock.move'].read_group(
                 domain,
-                ['product_id', 'product_qty'],
+                ['product_id', 'product_qty', 'name'],
                 ['product_id'],
                 orderby='id',
             )
             for group in move_groupby:
-                corrections[group['product_id']] = group['product_qty']
+                corrections[group['product_id'][0]] = group['product_qty']
         for product_id in res:
             res[product_id]['immediately_usable_qty'] += (
                 corrections.get(product_id, 0)
-                - loc_loss_qty[product_id]['incoming_qty']
-                - loc_loss_qty[product_id]['qty_available']
             )
         return res
 

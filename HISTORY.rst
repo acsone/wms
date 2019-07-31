@@ -29,6 +29,7 @@ latest (unreleased)
 * ALCYN-2197: Fix model not up to date after pending-merge update
 * ALCYN-2211: Invoice reconciliation jobs blocked
 * ALCYN-2165: Remove spaces in product_template cnk_code field
+* ALCYN-2180: Fix "immediately_available_qty" computation & ignore parking locations
 
 **Build**
 

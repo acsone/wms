@@ -28,6 +28,7 @@
         'stock_picking_backorder',
         'stock_picking_assignment',
         'stock_product_bin',
+        'stock_refill',
         'procurement_sale',
         'sale_consignment',
     ],
