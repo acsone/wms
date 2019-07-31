@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.42.0 (2019-07-31)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2046: Install account_reconcile_restrict_partner_mismatch
 * ALCYN-2067: Add archive wizard to realocate sales, invoices and pickings to
   an other customer.
@@ -28,26 +40,21 @@ latest (unreleased)
 * ALCYN-2079: Split generation of invoices and refunds in cron job
 * ALCYN-2080: Install account_invoice_payment_report
 * ALCYN-2080: Install account_payment_mode_auto_reconcile
+* ALCYN-2091: Add arguments to execute procurements in separate cursor
+* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
 * ALYCN-2126: bank statement auto match button based on structured ref
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
-* ALCYN-2091: Add arguments to execute procurements in separate cursor
-* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
 
 **Bugfixes**
 
 * ALCYN-2137: Enable re-printing product label without lot
 * ALCYN-2145: Fix creation of credit control lines
-**Bugfixes**
-
-* ALCYN-2186: Fix cutoff computation error (last day of the month for invoice)
 * ALCYN-2163: Fix invoice creation when there is no more invoiceable qty
 
 **Build**
 
 * Remove Danger Systems checks
-
-**Documentation**
 
 
 10.0.1.41.0 (2019-07-16) [YANKED]
