@@ -31,6 +31,8 @@ latest (unreleased)
 * ALYCN-2126: bank statement auto match button based on structured ref
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
+* ALCYN-2091: Add arguments to execute procurements in separate cursor
+* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
 
 **Bugfixes**
 
@@ -70,6 +72,7 @@ latest (unreleased)
 * ALCYN-2100: Add pivot view with operator for picking
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
+* ALYCN-2126: bank statement auto match button based on structured ref
 
 **Bugfixes**
 
