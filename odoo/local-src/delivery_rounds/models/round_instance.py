@@ -717,7 +717,7 @@ class RoundInstance(models.Model):
         ]
         return action_data
 
-    @job(default_channel='root.background.delivery')
+    @job(default_channel='root.background.stock_picking_deliver', priority=5)
     @api.multi
     def recheck_delivery_state(self):
         for record in self.exists():
@@ -933,7 +933,7 @@ class RoundInstanceCustomer(models.Model):
         else:
             self.write({'delivery_error': '', 'delivered': True})
 
-    @job(default_channel='root.background.deliver')
+    @job(default_channel='root.background.stock_picking_deliver', priority=5)
     @api.multi
     def _deliver_job(self):
         if not self.exists():

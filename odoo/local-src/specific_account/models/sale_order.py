@@ -85,14 +85,14 @@ class SaleOrder(models.Model):
             invoice.with_delay()._job_validate_invoice(date_invoice)
 
     @api.multi
-    @job(default_channel='root.invoice_creation')
+    @job(default_channel='root.background.invoice_creation', priority=9)
     def _job_create_draft_invoice(self):
         self.with_context(
             mail_auto_subscribe_no_notify=True
         ).action_invoice_create(final=True)
 
     @api.multi
-    @job(default_channel='root.invoice_creation')
+    @job(default_channel='root.background.invoice_creation', priority=9)
     def _job_invoices_by_partner(self, partner_id, date_invoice):
         partner = self.env['res.partner'].browse(partner_id)
         if partner.invoice_grouping != 'all_at_once':

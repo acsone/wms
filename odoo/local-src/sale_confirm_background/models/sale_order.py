@@ -13,7 +13,7 @@ class Sale(models.Model):
         selection_add=[('confirm_background', 'Confirm in Background')]
     )
 
-    @job(default_channel='root.background.sale_confirm')
+    @job(default_channel='root.priority.sale_confirm', priority=1)
     @api.multi
     def confirm_in_background(self, notify=True):
         """Confirm sales order in background
@@ -23,7 +23,7 @@ class Sale(models.Model):
         in order of creation, even if jobs are retried.
         If a job fails, the others jobs will wait.
 
-        Configuration: ``root.background.sale_confirm:1:sequential``
+        Configuration: ``root.priority.sale_confirm:1:sequential``
         """
         self.ensure_one()
         if self.state != 'confirm_background':

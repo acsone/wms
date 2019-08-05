@@ -123,7 +123,7 @@ class StockMove(models.Model):
             )._reassign_trial(products)
         return res
 
-    @job(default_channel='root.action_assign')
+    @job(default_channel='root.background.stock_reassign_trial', priority=6)
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
         # Do not process products not available in stock

@@ -13,7 +13,7 @@ class ReportAsync(models.AbstractModel):
     def get_report_name(self):
         raise NotImplementedError
 
-    @job(default_channel='root.background.report')
+    @job(default_channel='root.background.report', priority=4)
     @api.multi
     def print_and_attach_report(self, report, send_to_fax=None):
         """Print and attach a report.

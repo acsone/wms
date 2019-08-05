@@ -10,7 +10,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     @api.multi
-    @job(default_channel='root.invoice_validation')
+    @job(default_channel='root.background.invoice_validation', priority=3)
     @related_action(action='related_action_open_invoice')
     def _job_validate_invoice(self, date_invoice):
         # Reload self as an invoice could have been deleted inbetween

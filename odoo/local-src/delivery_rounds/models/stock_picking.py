@@ -184,7 +184,7 @@ class StockPicking(models.Model):
             )._job_action_assign()
 
     @api.multi
-    @job(default_channel='root.action_assign')
+    @job(default_channel='root.stock_picking_assign', priority=8)
     def _job_action_assign(self):
         moves = self.mapped('move_lines').filtered(
             lambda move: move.state not in ('done', 'cancel')

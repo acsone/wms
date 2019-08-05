@@ -137,7 +137,7 @@ class PurchaseOrder(models.Model):
             ).job_update_open_po()
 
     @api.multi
-    @job(default_channel='root.update_po')
+    @job(default_channel='root.background.update_po', priority=15)
     def job_update_open_po(self):
         """
         For each lines, we call the method onchange_product_id to update
