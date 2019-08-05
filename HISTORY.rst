@@ -28,7 +28,7 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.42.0 (2019-07-31)
+10.0.1.42.1 (2019-08-05)
 ++++++++++++++++++++++++
 
 **Features and Improvements**
@@ -40,9 +40,6 @@ latest (unreleased)
 * ALCYN-2079: Split generation of invoices and refunds in cron job
 * ALCYN-2080: Install account_invoice_payment_report
 * ALCYN-2080: Install account_payment_mode_auto_reconcile
-* ALCYN-2091: Add arguments to execute procurements in separate cursor
-* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
-* ALYCN-2126: bank statement auto match button based on structured ref
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
 
@@ -55,6 +52,13 @@ latest (unreleased)
 **Build**
 
 * Remove Danger Systems checks
+
+
+10.0.1.42.0 (2019-07-31) [YANKED]
++++++++++++++++++++++++++++++++++
+
+**And moved into 10.0.1.42.1**
+**with revert of ALCYN-2091**
 
 
 10.0.1.41.0 (2019-07-16) [YANKED]
@@ -80,7 +84,6 @@ latest (unreleased)
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
 * ALYCN-2126: bank statement auto match button based on structured ref
-* ALCYN-2091: Add arguments to execute procurements in separete cursor
 
 **Bugfixes**
 
