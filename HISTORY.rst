@@ -80,6 +80,7 @@ latest (unreleased)
 * ALCYN-2100: Add right for stock manager to see operator picking pivot view
 * ALCYN-2169: Change fields to see operator picking pivot view
 * ALYCN-2126: bank statement auto match button based on structured ref
+* ALCYN-2091: Add arguments to execute procurements in separete cursor
 
 **Bugfixes**
 

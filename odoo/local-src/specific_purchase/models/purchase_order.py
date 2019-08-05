@@ -120,16 +120,6 @@ class PurchaseOrder(models.Model):
             else:
                 order.last_date_done = False
 
-    @api.multi
-    def recompute_lines_discount_values(self):
-        """
-        Update values on po
-        this method uses in case when need to update PO without
-        delays
-        """
-        for po in self:
-            po.mapped('order_line').recompute_discount_values()
-
     @api.model
     def delay_update_for_open_po(self):
         """ Delay jobs to update values on all open purchase orders """
