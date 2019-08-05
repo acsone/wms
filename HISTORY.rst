@@ -30,6 +30,7 @@ latest (unreleased)
 * ALCYN-2282: Add partners holidays schedules, enable holidays in delivery roundings
 
 * ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
+* ALCYN-2130: fix issues with delivery rounds and back orders
 
 **Bugfixes**
 
@@ -81,6 +82,12 @@ Content moved to 10.0.1.46.1
   total stock within the warehouse.
 * ALCYN-2307: fix stock valuation with PMP based on current stock
 * ALCYN-2266: Concurrent access on delivery round assignment
+
+**Build**
+
+* updated OCA/queue to get test helpers.
+
+**Documentation**
 
 
 10.0.1.45.3 (2019-11-20)

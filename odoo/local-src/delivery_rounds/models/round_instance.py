@@ -921,7 +921,9 @@ class RoundInstanceCustomer(models.Model):
         """ Validate all shipping orders that are available """
         self.ensure_one()
         self._deliver(background=False)
-        if not self.picking_ids:
+        # we need to check for existence because the current record may have
+        # been unlinked in _deliver()
+        if self.exists() and not self.picking_ids:
             # Nothing was picked, all pickings have been disconnected
             raise UserError(_("No picking have been processed yet"))
 

@@ -18,7 +18,7 @@ class StockPicking(models.Model):
     @api.multi
     def _create_backorder(self, backorder_moves=[]):
         """ Take care of grouping by partner.
-        Reuse the overriden method action_assign that serch a good picking or
+        Reuse the overriden method action_assign that search a good picking or
         create a new one.
         Apply this to all non-done lines into an existing for a new backorder
         picking. If the key 'do_only_split' is given in the context, then move
@@ -165,6 +165,10 @@ class StockMove(models.Model):
 
         pick_obj = self.env["stock.picking"]
         pickings_cache = {}
+        if moves_to_group.mapped('picking_id'):
+            recompute_sale_pickings = True
+        else:
+            recompute_sale_pickings = False
         for move in moves_to_group:
             domain = move._assign_picking_group_domain()
             if str(domain) in pickings_cache:
@@ -277,6 +281,13 @@ class StockMove(models.Model):
                 move.do_unreserve()
                 # see standard assign_picking for why recompute is called
                 move.recompute()
+        if recompute_sale_pickings:
+            procurement_groups = moves_to_group.mapped('group_id')
+            sales = self.env['sale.order'].search(
+                [('procurement_group_id', 'in', procurement_groups.ids)]
+            )
+            # force recompute of picking_ids
+            sales.modified(['procurement_group_id'])
         return True
 
     @api.multi

@@ -67,7 +67,7 @@ class DeliveryRoundTestCase(SavepointCase):
                 'code': 'BWH',
             }
         )
-
+        cls.warehouse_1.pick_type_id.subcode = 'PICK'
         inventory = cls.env['stock.inventory'].create(
             {'name': 'Test', 'product_id': cls.p1.id, 'filter': 'product'}
         )
@@ -110,6 +110,7 @@ class DeliveryRoundTestCase(SavepointCase):
                     {
                         'name': self.p1.name,
                         'product_id': self.p1.id,
+                        'picking_type_id': warehouse.pick_type_id.id,
                         'product_uom_qty': 1,
                         'product_uom': self.p1.uom_id.id,
                         'location_id': self.env.ref(
@@ -141,6 +142,7 @@ class DeliveryRoundTestCase(SavepointCase):
                     {
                         'name': self.p1.name,
                         'product_id': self.p1.id,
+                        'picking_type_id': warehouse.out_type_id.id,
                         'product_uom_qty': 1,
                         'product_uom': self.p1.uom_id.id,
                         'location_id': warehouse.wh_output_stock_loc_id.id,
@@ -152,3 +154,31 @@ class DeliveryRoundTestCase(SavepointCase):
             ],
         }
         return Picking.create(picking_values)
+
+    def _confirm_sale_order(self, partner=None, product=None, qty=1):
+        if partner is None:
+            partner = self.partner1
+        if product is None:
+            product = self.p1
+        warehouse = self.warehouse_1
+        Sale = self.env['sale.order']
+        so_values = {
+            'partner_id': partner.id,
+            'warehouse_id': warehouse.id,
+            'order_line': [
+                (
+                    0,
+                    0,
+                    {
+                        'name': product.name,
+                        'product_id': product.id,
+                        'product_uom_qty': qty,
+                        'product_uom': product.uom_id.id,
+                        'unit_price': 10,
+                    },
+                )
+            ],
+        }
+        so = Sale.create(so_values)
+        so.action_confirm()
+        return so

@@ -16,6 +16,7 @@
         'security/ir.model.access.csv',
         'views/report_stock_refill_arrange.xml',
         'views/report_stock_refill_reassort.xml',
+        'views/round_instance.xml',
         'wizards/create_picking.xml',
     ],
     'installable': True,

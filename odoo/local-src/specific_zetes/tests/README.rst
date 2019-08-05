@@ -42,6 +42,7 @@ Scenario
 11. The picker goes to the packing area and prints labels (REQU_/RESP_PRINT)
 12. Zetes asks the label code to check the package and validates the picking (RESU_ASSIGNMENT)
 13. The picking is now completely finished. Zetes asks for the next picking (REQU_/RESP_ASSIGNMENT)
+  A picking will be found because the backorder will be in the delivery round(ALCYN-2130)
 
 ===============
 Exceptions test
