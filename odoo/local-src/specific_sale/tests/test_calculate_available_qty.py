@@ -2,11 +2,11 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields
-from odoo.tests.common import TransactionCase, at_install, post_install
+from odoo.tests.common import SavepointCase, at_install, post_install
 from datetime import datetime, timedelta
 
 
-class TestCalcAvailableQty(TransactionCase):
+class TestCalcAvailableQty(SavepointCase):
     def setUp(self):
         super(TestCalcAvailableQty, self).setUp()
         self.location_model = self.env['stock.location']
@@ -48,10 +48,12 @@ class TestCalcAvailableQty(TransactionCase):
                 'shelf': 'A',
                 'height': '1',
                 'box': '1',
+                'location_id': self.stock_location.location_id.id
             }
         )
         self.customer_location = self.env.ref('stock.stock_location_customers')
         self.loss_loc = self.env.ref('stock_lot_loss.stock_location_14019')
+        self.loss_loc.location_id = self.stock_location.location_id
         self._define_product_qty(self.stock_location, self.p1, 10.0)
 
     def _define_product_qty(self, location, product, quantity):
@@ -96,7 +98,6 @@ class TestCalcAvailableQty(TransactionCase):
         if transfer:
             picking_out.force_assign()
             picking_out.do_transfer()
-
 
     @at_install(False)
     @post_install(True)

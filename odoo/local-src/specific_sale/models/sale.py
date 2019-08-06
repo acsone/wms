@@ -211,13 +211,17 @@ class SaleOrderLine(models.Model):
         for line in self:
             if not line.product_qty_remains_to_deliver:
                 continue
+            picking_ids = line.order_id.picking_ids
+            date = None
+            if len(picking_ids):
+                date = line.order_id.picking_ids[-1].date
             line.current_product_qty_unavailable = min(
                 self.get_product_qty_unavailable(
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
                     line.product_id.with_context(
                         prio=line.route_id.priority or '1',
-                        date=line.order_id.date_order,
+                        date=date,
                     ),
                     line.product_uom_qty,
                     line.state == 'sale',
@@ -260,41 +264,9 @@ class SaleOrderLine(models.Model):
                         return min(
                             abs(immediately_usable_qty), product_uom_qty
                         )
-                    stock_move_date_expected = (
-                        order_line_stock_move.date_expected
-                    )
-
-                    next_stock_moves = self.env['stock.move'].search(
-                        [
-                            ('product_id', '=', product.id),
-                            ('procurement_id.sale_line_id', '!=', line_id),
-                            ('state', 'not in', ['draft', 'cancel', 'done']),
-                            '|',
-                            '|',
-                            ('priority', '<', order_line_stock_move.priority),
-                            '&',
-                            ('priority', '=', order_line_stock_move.priority),
-                            ('date_expected', '>', stock_move_date_expected),
-                            # in rare case of same date_expected,
-                            # use id to sort the moves
-                            '&',
-                            '&',
-                            ('priority', '=', order_line_stock_move.priority),
-                            ('date_expected', '=', stock_move_date_expected),
-                            ('id', '>', order_line_stock_move.id),
-                        ]
-                    )
-                    next_quantities = sum(
-                        move.product_uom_qty for move in next_stock_moves
-                    )
-
-                    good_immediately_usable_qty = (
-                        immediately_usable_qty + next_quantities
-                    )
-
-                    if good_immediately_usable_qty <= 0:
+                    if immediately_usable_qty <= 0:
                         return min(
-                            product_uom_qty, abs(good_immediately_usable_qty)
+                            product_uom_qty, abs(immediately_usable_qty)
                         )
                     else:
                         return 0

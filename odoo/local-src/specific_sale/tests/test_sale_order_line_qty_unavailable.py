@@ -106,10 +106,13 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
 
         # Confirm the first order
+
         self.sale_1.action_confirm()
 
         # After the confirmation of first order (qty = 10),
         # the product immediately usable quantity is -10
+        self.env['product.product'].refresh()
+        self.env['stock.move'].refresh()
         self.assertEqual(
             self.p1.product_variant_ids[0].immediately_usable_qty, -10
         )
@@ -150,6 +153,7 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
 
         # After the second order (qty = 5), the unavailable quantity is 5
+        self.env['product.product'].refresh()
         self.assertEqual(self.sale_2.order_line[0].product_qty_unavailable, 5)
         self.assertEqual(
             self.sale_2.order_line[0].current_product_qty_unavailable, 5
@@ -165,9 +169,10 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
         # After the confirmation of second order (qty = 5),
         # the unavailable quantity on first order is already 10
-        # self.sale_1.refresh()
-        # self.sale_2.refresh()
-
+        self.sale_1.refresh()
+        self.sale_2.refresh()
+        self.env['product.product'].refresh()
+        self.env['stock.move'].refresh()
         self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 10)
         self.assertEqual(
             self.sale_1.order_line[0].current_product_qty_unavailable, 10
@@ -185,7 +190,10 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
 
         self._define_product_qty(self.p1.product_variant_ids[0], 2)
         self.p1.refresh()
-
+        self.sale_1.refresh()
+        self.sale_2.refresh()
+        self.env['product.product'].refresh()
+        self.env['stock.move'].refresh()
         # After the stock increase (qty = 2),
         # the product immediately usable quantity is -13
         self.assertEqual(
