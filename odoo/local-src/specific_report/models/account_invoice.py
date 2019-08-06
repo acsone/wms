@@ -201,7 +201,7 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.type not in ('out_invoice', 'out_refund'):
                 continue
-            invoice.with_delay().print_and_attach_report(
+            invoice.with_delay(priority=4).print_and_attach_report(
                 'account.report_invoice'
             )
         return res

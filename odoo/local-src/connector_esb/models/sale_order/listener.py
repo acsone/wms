@@ -21,6 +21,7 @@ class SaleExportListener(Component):
         record.with_delay(
             description=self.EXPORT_DESCRIPTION.format(record.name or ''),
             identity_key=identity_exact,
+            priority=25,
         ).esb_export_record()
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
@@ -33,6 +34,7 @@ class SaleExportListener(Component):
         record.with_delay(
             description=self.EXPORT_DESCRIPTION.format(record.name),
             identity_key=identity_exact,
+            priority=25,
         ).esb_export_record()
 
 
@@ -61,4 +63,5 @@ class SaleLineExportListener(Component):
             so.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(so.name or ''),
                 identity_key=identity_exact,
+                priority=25,
             ).esb_export_record()

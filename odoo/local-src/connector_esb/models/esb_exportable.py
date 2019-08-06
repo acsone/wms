@@ -16,7 +16,7 @@ class ESBExportable(models.Model):
         return True
 
     @api.multi
-    @job(default_channel='root.background.esb', priority=25)
+    @job(default_channel='root.background.esb')  # priority=25
     @related_action(action='related_action_open_record')
     def esb_export_record(self, timestamp=None):
         """Export a record"""

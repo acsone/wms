@@ -104,7 +104,7 @@ class SaleOrder(models.Model):
         according to sale_channel
         """
         for order in self:
-            order.with_delay().print_and_attach_report(
+            order.with_delay(priority=4).print_and_attach_report(
                 'sale.report_saleorder',
                 order.partner_id.fax if order.sale_channel == 'fax' else None,
             )

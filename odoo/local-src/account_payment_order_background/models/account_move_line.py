@@ -9,11 +9,11 @@ from odoo.addons.queue_job.job import job
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    @job(default_channel='root.background.move_reconcile', priority=30)
+    @job(default_channel='root.background.move_reconcile')  # priority=30
     @api.multi
     def reconcile(self, writeoff_acc_id=False, writeoff_journal_id=False):
         if self.env.context.get('__reconcile_as_job'):
-            self.with_delay().reconcile(
+            self.with_delay(priority=30).reconcile(
                 writeoff_acc_id=writeoff_acc_id,
                 writeoff_journal_id=writeoff_journal_id,
             )

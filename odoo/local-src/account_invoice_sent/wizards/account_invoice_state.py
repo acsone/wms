@@ -57,7 +57,7 @@ class AccountInvoiceSent(models.TransientModel):
                 'send_email_copy': self.email_copy,
             }
         )
-        invoice_print.with_delay().generate_report()
+        invoice_print.with_delay(priority=40).generate_report()
         self.env.user.notify_info(
             _('A report will be generated in background.')
         )
@@ -69,7 +69,7 @@ class AccountInvoiceSent(models.TransientModel):
             return
         invoices = self.env['account.invoice'].browse(active_ids)
         invoices = invoices._filter_send_invoice(sending_method)
-        invoices.with_delay()._generate_send_invoice(sending_method)
+        invoices.with_delay(priority=50)._generate_send_invoice(sending_method)
 
     @api.multi
     def button_email(self):

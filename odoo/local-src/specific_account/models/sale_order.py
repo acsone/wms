@@ -64,7 +64,7 @@ class SaleOrder(models.Model):
         partner_ids = [x[0] for x in self.env.cr.fetchall()]
 
         for partner_id in partner_ids:
-            self.with_delay()._job_invoices_by_partner(
+            self.with_delay(priority=9)._job_invoices_by_partner(
                 partner_id, date_invoice
             )
 
@@ -82,17 +82,17 @@ class SaleOrder(models.Model):
         invoice_ids = [x[0] for x in self.env.cr.fetchall()]
         invoices = self.env['account.invoice'].browse(invoice_ids)
         for invoice in invoices:
-            invoice.with_delay()._job_validate_invoice(date_invoice)
+            invoice.with_delay(priority=3)._job_validate_invoice(date_invoice)
 
     @api.multi
-    @job(default_channel='root.background.invoice_creation', priority=9)
+    @job(default_channel='root.background.invoice_creation')  # priority=9
     def _job_create_draft_invoice(self):
         self.with_context(
             mail_auto_subscribe_no_notify=True
         ).action_invoice_create(final=True)
 
     @api.multi
-    @job(default_channel='root.background.invoice_creation', priority=9)
+    @job(default_channel='root.background.invoice_creation')  # priority=9
     def _job_invoices_by_partner(self, partner_id, date_invoice):
         partner = self.env['res.partner'].browse(partner_id)
         if partner.invoice_grouping != 'all_at_once':
@@ -116,7 +116,7 @@ class SaleOrder(models.Model):
             invoice_ids += sales.action_invoice_create(final=True)
         invoices = self.env['account.invoice'].browse(invoice_ids)
         # Validate invoices
-        invoices.with_delay()._job_validate_invoice(date_invoice)
+        invoices.with_delay(priority=3)._job_validate_invoice(date_invoice)
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):

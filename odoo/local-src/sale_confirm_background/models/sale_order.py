@@ -13,7 +13,7 @@ class Sale(models.Model):
         selection_add=[('confirm_background', 'Confirm in Background')]
     )
 
-    @job(default_channel='root.priority.sale_confirm', priority=1)
+    @job(default_channel='root.priority.sale_confirm')  # priority=1
     @api.multi
     def confirm_in_background(self, notify=True):
         """Confirm sales order in background
@@ -51,5 +51,6 @@ class Sale(models.Model):
                 _('Order %s will be confirmed in background.') % order.name
             )
             order.with_delay(
-                description=_('Confirmation of sales order %s') % order.name
+                description=_('Confirmation of sales order %s') % order.name,
+                priority=1,
             ).confirm_in_background(notify=False)
