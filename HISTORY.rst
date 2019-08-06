@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2195 Fix MemoryError on WS sale order creation due to recheck of all existing lines.
+
 **Build**
 
 **Documentation**
