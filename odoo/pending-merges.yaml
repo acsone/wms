@@ -146,6 +146,8 @@
     - oca refs/pull/1343/head
       # Add warning to base_exception
     - oca refs/pull/1360/head
+      # [10.0]base_exception Remove empty self feature
+    - oca refs/pull/1620/head
   target: *default_target
 ./external-src/account-reconcile:
   remotes:
