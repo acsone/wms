@@ -148,6 +148,8 @@
     - oca refs/pull/1360/head
       # [10.0]base_exception Remove empty self feature
     - oca refs/pull/1620/head
+      # FIXME added hotfix to solve exception concurency errors
+      # using branch 10.0-base_exception_fix_concurrency_error
   target: *default_target
 ./external-src/account-reconcile:
   remotes:

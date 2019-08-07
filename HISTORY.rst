@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2195 Hotfix exception concurency errors
+
 **Build**
 
 **Documentation**
