@@ -483,3 +483,4 @@ migration:
           - specific_zetes
     - version: 10.0.1.42.1
     - version: 10.0.1.42.2
+    - version: 10.0.1.42.3

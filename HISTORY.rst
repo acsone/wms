@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2195 Hotfix exception concurency errors
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.42.3 (2019-08-07)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2195 Hotfix exception concurency errors
 
 
 10.0.1.42.2 (2019-08-06)
