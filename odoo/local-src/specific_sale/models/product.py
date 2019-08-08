@@ -210,9 +210,9 @@ class ProductProduct(models.Model):
         loc_loss_qty = self.with_context(
             location=loc_loss.id
         )._product_available()
-        parking_ids = self.env['stock.location'].search(
-            [('kind', '=', 'parking')]
-        ).ids
+        parking_ids = (
+            self.env['stock.location'].search([('kind', '=', 'parking')]).ids
+        )
         parking_qty = None
         if len(parking_ids):
             parking_qty = self.with_context(

@@ -220,8 +220,7 @@ class SaleOrderLine(models.Model):
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
                     line.product_id.with_context(
-                        prio=line.route_id.priority or '1',
-                        date=date,
+                        prio=line.route_id.priority or '1', date=date
                     ),
                     line.product_uom_qty,
                     line.state == 'sale',
