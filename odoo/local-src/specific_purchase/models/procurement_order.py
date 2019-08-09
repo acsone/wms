@@ -114,46 +114,7 @@ class ProcurementOrder(models.Model):
         )
         _logger.info('Procurement finished')
 
-        # By default we recompute promotions
-        if self.env.context.get('is_not_recompute_promos'):
-            return result
-
-        if 'is_not_recompute_promos' in self.env.context:
-            # this key pointing it was started from wizard
-            old_po = self.env['purchase.order'].search(
-                [('state', '=', 'draft')]
-            )
-            self._run_updates(immediate_update=True, po_to_exclude=old_po)
-        self._run_updates()
-
         return result
-
-    def _run_updates(self, immediate_update=False, po_to_exclude=None):
-        with api.Environment.manage():
-            context = self._context.copy()
-            new_cr = self.pool.cursor()
-            self = self.with_env(self.env(cr=new_cr, context=context))
-            try:
-                if immediate_update:
-                    # run computation immediately on newly created PO
-                    # as procurement is run in another cursor, the search in current
-                    # cursor will return result without new POs
-                    new_po = self.env['purchase.order'].search(
-                        [
-                            ('state', '=', 'draft'),
-                            ('id', 'not in', po_to_exclude.ids),
-                        ]
-                    )
-                    new_po.recompute_lines_discount_values()
-                else:
-                    # Delay jobs to update values on open purchase orders
-                    self.env['purchase.order'].delay_update_for_open_po()
-                new_cr.commit()
-            except Exception as e:
-                _logger.error(e)
-                new_cr.rollback()
-            finally:
-                new_cr.close()
 
     def make_po(self):
         """
@@ -166,5 +127,34 @@ class ProcurementOrder(models.Model):
 
         pos = procurements.mapped('purchase_id')
         pos.write({'date_order': fields.Datetime.now()})
+        pos.mapped('order_line').recompute_discount_values()
 
         return result
+
+    def _get_pol_promotion_supplier(self, supplier):
+        seller = self.product_id._select_seller(
+            partner_id=supplier.name,  # name is a res.partner on supplier.info
+            quantity=self.product_qty,
+            uom_id=self.product_id.uom_po_id,
+        )
+        return seller.discount_purchase or 0.0
+
+    def _prepare_purchase_order_line(self, po, supplier):
+        values = super(ProcurementOrder, self)._prepare_purchase_order_line(
+            po, supplier
+        )
+        price_unit_base = values['price_unit']
+        discount_global = po.partner_id.supplier_discount
+        promotion_supplier = self._get_pol_promotion_supplier(supplier)
+        price_unit = self.env['purchase.order.line']._compute_discount(
+            values['price_unit'], discount_global, promotion_supplier
+        )
+        values.update(
+            {
+                'price_unit_base': price_unit_base,
+                'price_unit': price_unit,
+                'discount_global': discount_global,
+                'promotion_supplier': promotion_supplier,
+            }
+        )
+        return values

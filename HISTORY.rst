@@ -21,6 +21,13 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2091 refactor purchase discount computations
+    * onchange on purchase order line quantity was calling price_unit computation (`_compute_price_unit`)
+      numerous times through the triggers `api.constraint` which is preventing jobs
+      from restarting correctly in case of concurency errors.
+    * move logic to the procurement instead of trying to be universal with api.constrains
+      it might requires more code, but will be more readable
+
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
@@ -125,8 +132,6 @@ Moved to 10.0.1.42.7
 * ALCYN-2080: Install account_payment_mode_auto_reconcile
 * ALCYN-2155: Update translations for invoice and delivery slip reports
 * ALCYN-2155: Display product name in customer lang in delivery notes
-* ALCYN-2091: Add arguments to execute procurements in separate cursor
-* ALCYN-2091: Allow update PO immediately after creation if scheduler started from wizard
 
 **Bugfixes**
 
