@@ -254,7 +254,14 @@ class TestPurchaseOrder(SavepointCase):
                 'currency_id': self.env.ref('base.EUR').id,
             }
         )
-        self.product.write({'seller_ids': [(6, 0, supplierinfo.ids)]})
+        self.product.write(
+            {
+                'seller_ids': [(6, 0, supplierinfo.ids)],
+                # deflect side effect of other modules adding
+                # taxes by unlinking all taxes
+                'supplier_taxes_id': [(5, False, False)],
+            }
+        )
 
         procurement.make_po()
         purchase = procurement.purchase_id
