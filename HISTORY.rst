@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2201: Remove side-effects from "api.constrains", which prevent HTTP
+  requests and Jobs to be retried
+
 **Build**
 
 **Documentation**
