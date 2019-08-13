@@ -23,6 +23,7 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2187: Set date order as today when confirm purchase order
 * ALCYN-2197: Fix model not up to date after pending-merge update
 
 **Build**
