@@ -23,6 +23,11 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2201: Remove side-effects from "api.constrains", which prevent HTTP
+  requests and Jobs to be retried
+* ALCYN-2201: Fix issue with sale exception taking excessive locks and
+  preventing to create or confirm sale orders concurrently
+
 **Build**
 
 **Documentation**

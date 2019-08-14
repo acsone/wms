@@ -133,6 +133,8 @@
     - oca refs/pull/889/head
       # [10.0] sale_stock_picking_blocking: Do not break recordset (performance)
     - oca refs/pull/881/head
+      # [10.0] sale_exception: Remove side effect from api.constrains
+    - oca refs/pull/916/head
   target: *default_target
 ./external-src/server-tools:
   remotes:
@@ -141,15 +143,15 @@
   fetch_all:
     oca
   merges:
-    - oca 10.0
+    - oca 639bb47fd97db552785e8db755c982be0845826d
       # fix onchange_helper when more than 3 chained fields in onchange_specs
     - oca refs/pull/1343/head
       # Add warning to base_exception
     - oca refs/pull/1360/head
-      # [10.0]base_exception Remove empty self feature
-    - oca refs/pull/1620/head
-      # FIXME added hotfix to solve exception concurency errors
-      # using branch 10.0-base_exception_fix_concurrency_error
+      # base_exception: Remove side effect from api.constrains
+    - oca refs/pull/1644/head
+      # base_exception: Remove RowExclusiveLock on exception_rule
+    - oca refs/pull/1647/head
   target: *default_target
 ./external-src/account-reconcile:
   remotes:

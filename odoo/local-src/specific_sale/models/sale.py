@@ -126,7 +126,6 @@ class Sale(models.Model):
 
         return result
 
-    @api.constrains('ignore_exception', 'order_line', 'state')
     def sale_check_exception(self):
         try:
             self._check_exception()
