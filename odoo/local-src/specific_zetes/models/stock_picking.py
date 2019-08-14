@@ -37,7 +37,20 @@ class StockPicking(models.Model):
     )
     is_passport_required = fields.Boolean('Passport required', default=False)
 
-    @api.constrains('zetes_state')
+    @api.model
+    def create(self, vals):
+        record = super(StockPicking, self).create(vals)
+        if 'zetes_state' in vals:
+            record.zetes_state_change()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(StockPicking, self).write(vals)
+        if 'zetes_state' in vals:
+            self.zetes_state_change()
+        return result
+
     def zetes_state_change(self):
         self.zetes_state_lastchange = fields.Datetime.now()
 

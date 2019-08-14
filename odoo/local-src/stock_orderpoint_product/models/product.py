@@ -12,10 +12,13 @@ class ProductTemplate(models.Model):
     orderpoint_max = fields.Float('Maximum Quantity')
     orderpoint_qty_multiple = fields.Float('Qty Multiple')
 
-    @api.constrains(
-        'orderpoint_min', 'orderpoint_max', 'orderpoint_qty_multiple'
+    _orderpoint_fields = (
+        'orderpoint_min',
+        'orderpoint_max',
+        'orderpoint_qty_multiple',
     )
-    def constrains_orderpoint(self):
+
+    def _propagate_orderpoint(self):
         """
         Set orderpoint values from products to the model orderpoint
         :return:
@@ -63,6 +66,14 @@ class ProductTemplate(models.Model):
                     }
                 )
 
+    @api.model
+    def create(self, vals):
+        record = super(ProductTemplate, self).create(vals)
+        if any(field in vals for field in self._orderpoint_fields):
+            record._propagate_orderpoint()
+        return record
+
+    @api.multi
     def write(self, values):
         """If a product has been changed to a type service
         you can archive the orderpoints with context.
@@ -81,7 +92,12 @@ class ProductTemplate(models.Model):
             ops.write({'active': False})
             # recompute value of `nbr_reordering_rules`
             self.invalidate_cache(['nbr_reordering_rules'])
-        return super(ProductTemplate, self).write(values)
+
+        result = super(ProductTemplate, self).write(values)
+
+        if any(field in values for field in self._orderpoint_fields):
+            self._propagate_orderpoint()
+        return result
 
 
 class ProductProduct(models.Model):

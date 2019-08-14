@@ -25,8 +25,21 @@ class ResPartner(models.Model):
     is_manage_day_6 = fields.Boolean('Saturday')
     is_manage_day_7 = fields.Boolean('Sunday')
 
-    @api.constrains('delivery_lead_time')
-    def constrains_delivery_lead_time(self):
+    @api.model
+    def create(self, vals):
+        record = super(ResPartner, self).create(vals)
+        if 'delivery_lead_time' in vals:
+            record._propagate_delivery_lead_time()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(ResPartner, self).write(vals)
+        if 'delivery_lead_time' in vals:
+            self._propagate_delivery_lead_time()
+        return result
+
+    def _propagate_delivery_lead_time(self):
         """
         When the delivery lead time change on the supplier,
         we have to overwrite the delay on each supplier info for this supplier

@@ -36,6 +36,20 @@ class StockPicking(models.Model):
         "and we sum those quantities",
     )
 
+    @api.model
+    def create(self, vals):
+        record = super(StockPicking, self).create(vals)
+        if 'grn_id' in vals:
+            record.button_priority_recompute()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(StockPicking, self).write(vals)
+        if 'grn_id' in vals:
+            self.button_priority_recompute()
+        return result
+
     @api.multi
     def _compute_qty_backorder(self):
         """ Amount of move lines having a backorder """
@@ -128,11 +142,6 @@ class StockPicking(models.Model):
 
     def _calc_priority(self):
         return self.qty_backorder * 1000 + self.qty_outofstock
-
-    @api.multi
-    @api.constrains('grn_id')
-    def _update_rank_on_grn(self):
-        self.button_priority_recompute()
 
     @api.multi
     def button_priority_recompute(self):

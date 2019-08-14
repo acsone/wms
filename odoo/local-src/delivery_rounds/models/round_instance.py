@@ -768,6 +768,20 @@ class RoundInstanceCustomer(models.Model):
     delivered = fields.Boolean('Delivered')
     delivery_error = fields.Char()
 
+    @api.model
+    def create(self, vals):
+        record = super(RoundInstanceCustomer, self).create(vals)
+        if 'rank' in vals:
+            record._propagate_rank()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(RoundInstanceCustomer, self).write(vals)
+        if 'rank' in vals:
+            self._propagate_rank()
+        return result
+
     @api.multi
     def _link_pickings(self, pickings):
         self.ensure_one()
@@ -823,19 +837,20 @@ class RoundInstanceCustomer(models.Model):
             self.unlink()
 
     @api.multi
-    @api.constrains('rank')
     def _propagate_rank(self):
         for instance_customer in self:
             rank = instance_customer.rank
             # when we set a rank on a round instance customer,
             # we copy that value on the pickings
-            pickings = self.picking_ids.filtered(lambda p: p.rank != rank)
+            pickings = instance_customer.picking_ids.filtered(
+                lambda p: p.rank != rank
+            )
             if not pickings:
                 continue
             _logger.debug(
                 "Rank set on round instance customer %s. Propagate to "
                 "pickings and shippings %s",
-                self.ids,
+                instance_customer.id,
                 pickings.ids,
             )
             pickings.write({'rank': rank})

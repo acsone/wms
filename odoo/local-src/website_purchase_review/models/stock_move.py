@@ -9,7 +9,20 @@ class StockMove(models.Model):
 
     validation_date = fields.Datetime('Validation date')
 
-    @api.constrains('state')
+    @api.model
+    def create(self, vals):
+        record = super(StockMove, self).create(vals)
+        if 'state' in vals:
+            record.set_validation_date()
+        return record
+
+    @api.multi
+    def write(self, vals):
+        result = super(StockMove, self).write(vals)
+        if 'state' in vals:
+            self.set_validation_date()
+        return result
+
     def set_validation_date(self):
         for move in self:
             if move.state != 'done':
