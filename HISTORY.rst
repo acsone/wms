@@ -23,14 +23,20 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2201: Remove side-effects from "api.constrains", which prevent HTTP
-  requests and Jobs to be retried
-* ALCYN-2201: Fix issue with sale exception taking excessive locks and
-  preventing to create or confirm sale orders concurrently
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.42.4 (2019-08-14)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2201: Remove side-effects from "api.constrains", which prevent HTTP
+  requests and Jobs to be retried on concurrent transaction errors
+* ALCYN-2201: Fix issue with sale exception taking excessive locks and
+  preventing to create or confirm sale orders concurrently
 
 
 10.0.1.42.3 (2019-08-07)
