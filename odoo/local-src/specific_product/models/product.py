@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class ProductProduct(models.Model):
@@ -56,3 +56,19 @@ class ProductTemplate(models.Model):
                     prod_id=product.product_variant_ids[0].id, qty=1
                 )
                 product.sale_price_2 = price.get(pricelist.id, 0.0)
+
+    @api.model
+    def create(self, vals):
+        vals = ProductTemplate._remove_spaces_from_cnk(vals)
+        return super(ProductTemplate, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        vals = ProductTemplate._remove_spaces_from_cnk(vals)
+        return super(ProductTemplate, self).write(vals)
+
+    @staticmethod
+    def _remove_spaces_from_cnk(vals):
+        if 'cnk_code' in vals and vals['cnk_code']:
+            vals['cnk_code'] = vals['cnk_code'].replace(' ', '')
+        return vals
