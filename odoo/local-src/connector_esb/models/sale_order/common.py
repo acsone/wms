@@ -47,7 +47,7 @@ class SaleOrder(models.Model):
         self_ctx = self.with_context(_sale_order_write=True)
         return super(SaleOrder, self_ctx).write(vals)
 
-    @job(default_channel='root.esb')
+    @job(default_channel='root.background.esb')  # priority=25
     def ws_create_new(self, data):
         """Create a sale order with data coming from webservices."""
         try:
@@ -256,5 +256,6 @@ class StockMove(models.Model):
             so.with_delay(
                 description=EXPORT_DESC.format(so.name),
                 identity_key=identity_exact,
+                priority=25,
             ).esb_export_record()
         return res

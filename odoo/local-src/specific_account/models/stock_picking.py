@@ -33,5 +33,5 @@ class StockPicking(models.Model):
             ]
         )
         if sales:
-            sales.with_delay()._job_create_draft_invoice()
+            sales.with_delay(priority=9)._job_create_draft_invoice()
         return result

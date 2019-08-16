@@ -180,11 +180,12 @@ class StockPicking(models.Model):
 
         for partner, pickings in pickings_by_partner.iteritems():
             pickings.with_delay(
-                description=_('Assign pickings of partner %s') % partner.ref
+                description=_('Assign pickings of partner %s') % partner.ref,
+                priority=8,
             )._job_action_assign()
 
     @api.multi
-    @job(default_channel='root.action_assign')
+    @job(default_channel='root.stock_picking_assign')  # priority=8
     def _job_action_assign(self):
         moves = self.mapped('move_lines').filtered(
             lambda move: move.state not in ('done', 'cancel')

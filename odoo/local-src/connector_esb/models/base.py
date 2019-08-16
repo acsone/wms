@@ -12,7 +12,7 @@ class Base(models.AbstractModel):
 
     _inherit = 'base'
 
-    @job(default_channel='root.esb')
+    @job(default_channel='root.background.esb')  # priority=25
     @related_action(action='related_action_unwrap_binding')
     @api.multi
     def esb_export_record(self, backend, timestamp, fields=None):

@@ -59,7 +59,7 @@ class Fax(models.Model):
         return u'password:{}'.format(self.password)
 
     @api.multi
-    @job(default_channel='root.background.fax')
+    @job(default_channel='root.background.fax')  # priority=10
     def send(self, fax_no, attachment_id):
         """Send an email to the fax service
 

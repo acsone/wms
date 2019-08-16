@@ -36,6 +36,7 @@ class ProductTemplateListener(Component):
             record.product_variant_id.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(product_code),
                 identity_key=identity_exact,
+                priority=25,
             ).esb_export_record(
                 timestamp=self.env.ref(
                     'connector_esb.esb_timestamp_stock_update_single'

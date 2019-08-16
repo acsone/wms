@@ -43,7 +43,7 @@ class AccountInvoice(models.Model):
 
         return self.filtered(lambda r: all(f(r) for f in filters))
 
-    @job(default_channel='root.background.invoice')
+    @job(default_channel='root.background.invoice_send')  # priority=50
     @related_action(action='related_action_open_invoice')
     def _generate_send_invoice(self, sending_method):
         """Generate jobs to send invoices"""
@@ -51,9 +51,9 @@ class AccountInvoice(models.Model):
         invoices = invoices._filter_send_invoice(sending_method)
         method_name = '_send_invoice_{}'.format(sending_method)
         for invoice in invoices:
-            getattr(invoice.with_delay(), method_name)()
+            getattr(invoice.with_delay(priority=50), method_name)()
 
-    @job(default_channel='root.background.invoice')
+    @job(default_channel='root.background.invoice_send')  # priority=50
     @related_action(action='related_action_open_invoice')
     def _send_invoice_email(self):
         """Generate and send an invoice by email"""

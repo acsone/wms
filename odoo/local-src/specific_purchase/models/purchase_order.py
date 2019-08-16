@@ -133,11 +133,11 @@ class PurchaseOrder(models.Model):
         open_pos = self.search([('state', '=', 'draft')])
         for open_po in open_pos:
             open_po.with_delay(
-                description='Update values for %s' % open_po.name
+                description='Update values for %s' % open_po.name, priority=15
             ).job_update_open_po()
 
     @api.multi
-    @job(default_channel='root.update_po')
+    @job(default_channel='root.background.update_po')  # priority=15
     def job_update_open_po(self):
         """
         For each lines, we call the method onchange_product_id to update
