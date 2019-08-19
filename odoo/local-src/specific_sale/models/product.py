@@ -249,7 +249,6 @@ class ProductProduct(models.Model):
             deducted_amounts += loc_loss_qty[product_id]['incoming_qty']
             deducted_amounts += loc_loss_qty[product_id]['qty_available']
             if parking_qty:
-                deducted_amounts += parking_qty[product_id]['incoming_qty']
                 deducted_amounts += parking_qty[product_id]['qty_available']
 
             res[product_id]['immediately_usable_qty'] += (
