@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2211: Invoice reconciliation jobs blocked
+
 **Build**
 
 **Documentation**
