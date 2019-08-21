@@ -46,6 +46,7 @@ latest (unreleased)
 * ALCYN-2213: Update "date_range" module as its data model changed
 * ALCYN-2214: Correct total amounts of rounding in invoice report
 * ALCYN-2222: Fix correction in account_invoice_accrual
+* ALCYN-2178: Make sure lots are not archived when receiving products
 
 **Build**
 
