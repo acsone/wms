@@ -23,6 +23,18 @@ latest (unreleased)
 
 **Bugfixes**
 
+**Build**
+
+**Documentation**
+
+
+10.0.1.42.5 (2019-08-21)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
+**Bugfixes**
+
 * ALCYN-2211: Invoice reconciliation jobs blocked
 
 **Build**
