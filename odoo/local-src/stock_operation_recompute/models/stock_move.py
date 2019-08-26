@@ -15,8 +15,7 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     def _recompute_pack_op(self):
-        moves = self
-        picking = moves.mapped('picking_id')
+        picking = self.mapped('picking_id')
         picking.ensure_one()
 
         # Re-reserve quants
@@ -40,6 +39,10 @@ class StockMove(models.Model):
         qty_done = {}
         for op in ops:
             done = qty_done.setdefault(op.location_id.id, {})
+            if op.product_id.tracking == 'none' and op.qty_done:
+                # Set 0 as lot_id for products without tracking
+                done[0] = op.qty_done
+                continue
             for l in op.pack_lot_ids:
                 if l.qty:
                     done[l.lot_id.id] = l.qty
@@ -62,7 +65,7 @@ class StockMove(models.Model):
         # Re-generate pack ops - similar to do_prepare_partial
         forced_qties = {}
         picking_quants = self.env['stock.quant']
-        for move in moves:
+        for move in self:
             if move.state not in ('assigned', 'confirmed', 'waiting'):
                 continue
             move_quants = move.reserved_quant_ids
@@ -94,7 +97,9 @@ class StockMove(models.Model):
             new_ops |= new_ops.create(vals)
         # New pack operations could contain additional products.
         # Filter them out
-        new_ops = new_ops.filtered(lambda o: o.product_id == move.product_id)
+        new_ops = new_ops.filtered(
+            lambda o: o.product_id in self.mapped('product_id')
+        )
         if additional_ctx:
             new_ops.write({'additional_move_id': additional_move.id})
 
@@ -104,17 +109,22 @@ class StockMove(models.Model):
                 nop = new_ops.filtered(
                     lambda op: op.location_id.id == location_id
                 )
-                nol = nop.pack_lot_ids.filtered(
-                    lambda line: line.lot_id.id == lot_id
-                )
-                if not nol:
-                    raise UserError(
-                        _(
-                            'Internal Error. '
-                            'Cannot match done lot in new pack operation'
-                        )
+                # lot_id == 0 on products without tracking
+                if not lot_id:
+                    nop.qty_done = qty
+                else:
+                    nol = nop.pack_lot_ids.filtered(
+                        lambda line: line.lot_id.id == lot_id
                     )
-                nol.qty = qty
+                    if not nol:
+                        raise UserError(
+                            _(
+                                'Internal Error. '
+                                'Cannot match done lot in new pack operation'
+                            )
+                        )
+                    nol.qty = qty
+
         new_ops.save()
 
         # recompute the remaining quantities all at once
@@ -127,7 +137,7 @@ class StockMove(models.Model):
                 .mapped('ordered_qty')
             )
 
-        for new_mop in moves.mapped('linked_move_operation_ids.operation_id'):
+        for new_mop in self.mapped('linked_move_operation_ids.operation_id'):
             _logger.debug(
                 'New operation %s %s'
                 % (

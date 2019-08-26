@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2188: Handle inventory shortage of products without tracking
+
 **Bugfixes**
 
 * ALCYN-2187: Set date order as today when confirm purchase order

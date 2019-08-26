@@ -241,14 +241,16 @@ class ZetesTest(SavepointCase):
             }
         )
 
-        tomorrow = datetime.now() + relativedelta(days=1)
+        tomorrow = fields.Datetime.to_string(
+            datetime.now() + relativedelta(days=1)
+        )
         cls.picking = cls.env['stock.picking'].create(
             {
                 'partner_id': cls.partner.id,
                 'picking_type_id': cls.picking_type_medoc.id,
                 'location_id': cls.stock_location.id,
                 'location_dest_id': location_out.id,
-                'min_date': fields.Datetime.to_string(tomorrow),
+                'min_date': tomorrow,
                 'zetes_state': constants.AS_DEFAULT,
                 'move_lines': [
                     (

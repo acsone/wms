@@ -16,20 +16,20 @@ class StockInventoryLine(models.Model):
         )
         moves = self.env['stock.move']
         for line in self:
-            quants = self.env['stock.quant'].search(
-                [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', line.product_id.id),
-                    ('lot_id', '=', line.prod_lot_id.id),
-                    ('package_id', '=', line.package_id.id),
-                    ('location_id', '=', line.location_id.id),
-                    (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
-                        loss_picking_type.id,
-                    ),
-                ]
-            )
+            search_domain = [
+                ('qty', '>', 0.0),
+                ('product_id', '=', line.product_id.id),
+                ('package_id', '=', line.package_id.id),
+                ('location_id', '=', line.location_id.id),
+                (
+                    'reservation_id.picking_id.picking_type_id',
+                    '=',
+                    loss_picking_type.id,
+                ),
+            ]
+            if line.prod_lot_id:
+                search_domain.append(('lot_id', '=', line.prod_lot_id.id))
+            quants = self.env['stock.quant'].search(search_domain)
             moves |= quants.mapped('reservation_id')
         if moves:
             moves.action_cancel()

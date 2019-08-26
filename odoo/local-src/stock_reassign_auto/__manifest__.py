@@ -10,6 +10,7 @@
     'depends': [
         'stock_picking_assignment',
         'stock_picking_subcode',
+        'queue_job',
     ],
     'data': [
     ],
