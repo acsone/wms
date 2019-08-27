@@ -490,6 +490,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.rename_queue_channels::post
+          - anthem songs.upgrade.update_10_0_1_43_0::post
       addons:
         upgrade:
           ### OCA/server-tools
