@@ -4,10 +4,14 @@
 from datetime import datetime, timedelta
 
 from odoo import fields
-from odoo.tests.common import SavepointCase, at_install, post_install
+from odoo.tests.common import SavepointCase
 
 
 class TestCalcAvailableQty(SavepointCase):
+
+    at_install = False
+    post_install = True
+
     def setUp(self):
         super(TestCalcAvailableQty, self).setUp()
         self.location_model = self.env['stock.location']
@@ -110,15 +114,11 @@ class TestCalcAvailableQty(SavepointCase):
             picking_out.force_assign()
             picking_out.do_transfer()
 
-    @at_install(False)
-    @post_install(True)
     def test_inventory(self):
         self._define_product_qty(self.stock_location, self.p1, 10.0)
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_parking_excluded(self):
         self.p1 = self.p1.with_context(
             prio=1, date=fields.Datetime.to_string(datetime.now())
@@ -127,8 +127,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_same_prio(self):
         self.p1 = self.p1.with_context(
             prio=1,
@@ -141,8 +139,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 5.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_higher_prio(self):
         self.p1 = self.p1.with_context(
             prio=2,
@@ -154,8 +150,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_same_prio_later_date(self):
         self.p1 = self.p1.with_context(
             prio=1, date=fields.Datetime.to_string(datetime.now())
@@ -169,8 +163,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_deduct_loss_inc_default(self):
         self.p1 = self.p1.with_context(
             prio=1,
@@ -180,8 +172,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 5.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_deduct_loss_existing(self):
         self.p1 = self.p1.with_context(
             prio=1, date=fields.Datetime.to_string(datetime.now())
@@ -192,8 +182,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 5.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_deduct_loss_inc_high_prio(self):
         self.p1 = self.p1.with_context(
             prio=2,
@@ -203,8 +191,6 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 5.0)
 
-    @at_install(False)
-    @post_install(True)
     def test_deduct_loss_inc_later_date(self):
         self.p1 = self.p1.with_context(
             prio=1, date=fields.Datetime.to_string(datetime.now())
