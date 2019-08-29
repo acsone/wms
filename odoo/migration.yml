@@ -491,3 +491,6 @@ migration:
         upgrade:
           ### OCA/server-tools
           - date_range
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_42_6::post
