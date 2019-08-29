@@ -19,27 +19,17 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
-**Features and Improvements**
-
 **Bugfixes**
 
-**Build**
-
-**Documentation**
+* ALCYN-2213: Update "date_range" module as its data model changed
 
 
 10.0.1.42.5 (2019-08-21)
 ++++++++++++++++++++++++
 
-**Features and Improvements**
-
 **Bugfixes**
 
 * ALCYN-2211: Invoice reconciliation jobs blocked
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.42.4 (2019-08-14)
