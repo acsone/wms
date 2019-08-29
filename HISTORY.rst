@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2214: Compute invoice taxes per line instead of globally, so the total
+  by tax is the same than the total tax amount
 * ALCYN-2213: Update "date_range" module as its data model changed
 * ALCYN-2214: Correct total amounts of rounding in invoice report
 
