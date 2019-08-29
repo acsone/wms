@@ -19,6 +19,18 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.42.6 (2019-08-29)
+++++++++++++++++++++++++
+
 **Bugfixes**
 
 * ALCYN-2214: Compute invoice taxes per line instead of globally, so the total
