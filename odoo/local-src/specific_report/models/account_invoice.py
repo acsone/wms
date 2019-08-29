@@ -249,41 +249,29 @@ class AccountInvoiceLine(models.Model):
     def _compute_price_discount_amount(self):
         """ We need to compute discount line by line to prevent
         rounding issue if compute globally"""
-        account_precision = self.env['decimal.precision'].precision_get(
-            'Account'
-        )
         for line in self:
             if line.discount2 and not line.discount3:
                 line.amount_discount2 = (
-                    round(
-                        line.price_unit
-                        * (1 - (1 - (line.discount2 or 0.0) / 100.0)),
-                        account_precision,
-                    )
+                    line.price_unit
+                    * ((line.discount2 or 0.0) / 100.0)
                     * line.quantity
                 )
                 line.amount_discount3 = 0.0
             elif not line.discount2 and line.discount3:
                 line.amount_discount3 = (
-                    round(
-                        line.price_unit
-                        * (1 - (1 - (line.discount3 or 0.0) / 100.0)),
-                        account_precision,
-                    )
+                    line.price_unit
+                    * ((line.discount3 or 0.0) / 100.0)
                     * line.quantity
                 )
                 line.amount_discount2 = 0.0
             elif line.discount3 and line.discount2:
                 line.amount_discount2 = (
-                    round(
-                        line.price_unit
-                        * (1 - (1 - (line.discount2 or 0.0) / 100.0)),
-                        account_precision,
-                    )
+                    line.price_unit
+                    * ((line.discount2 or 0.0) / 100.0)
                     * line.quantity
                 )
                 line.amount_discount3 = (
-                    round(line.quantity * line.price_unit, account_precision)
+                    line.quantity * line.price_unit
                     - line.amount_discount2
                     - line.price_subtotal
                 )

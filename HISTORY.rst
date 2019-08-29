@@ -22,6 +22,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2213: Update "date_range" module as its data model changed
+* ALCYN-2214: Correct total amounts of rounding in invoice report
 
 
 10.0.1.42.5 (2019-08-21)
