@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2188: Handle inventory shortage of products without tracking
+* ALCYN-2167: Use short name for 'act_as_view' internal locations
 
 **Bugfixes**
 
