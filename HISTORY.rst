@@ -31,19 +31,20 @@ latest (unreleased)
 * ALCYN-2211: Invoice reconciliation jobs blocked
 * ALCYN-2165: Remove spaces in product_template cnk_code field
 * ALCYN-2181: Move menu 'Stock Pack Operaion Report' to Reports
+* ALCYN-2213: Update "date_range" module as its data model changed
+* ALCYN-2214: Correct total amounts of rounding in invoice report
+* ALCYN-2222: Fix correction in account_invoice_accrual
 
 **Build**
 
 **Documentation**
 
 
-10.0.1.42.6 (2019-08-29)
-++++++++++++++++++++++++
+10.0.1.42.6 (2019-08-29) YANKED
++++++++++++++++++++++++++++++++
 
 **Bugfixes**
 
-* ALCYN-2213: Update "date_range" module as its data model changed
-* ALCYN-2214: Correct total amounts of rounding in invoice report
 
 
 10.0.1.42.5 (2019-08-21)

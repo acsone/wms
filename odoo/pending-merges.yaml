@@ -73,6 +73,9 @@
     - oca refs/pull/70/head
     # Fix comparaison of Date and Datetime
     - jbaudoux refs/pull/1/head
+  shell_command_after:
+    # Patch from PR : 155 : Fix typo in account_invoice_accrual
+    - git am "$(git format-patch -1 4c8d7b1cd1dab8a044f17a51ff5314eb32b47031 -o ../patches)"
   target: *default_target
 # We keep this to manage a sharable and updatable fork of enterprise branch
 ./external-src/bank-payment:
