@@ -487,13 +487,11 @@ migration:
     - version: 10.0.1.42.4
     - version: 10.0.1.42.5
     - version: 10.0.1.42.6
+    - version: 10.0.1.42.7
       addons:
         upgrade:
           ### OCA/server-tools
           - date_range
-      operations:
-        post:
-          - anthem songs.upgrade.update_10_0_1_42_6::post
     - version: 10.0.1.43.0
       operations:
         post:
