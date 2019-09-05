@@ -501,6 +501,7 @@ migration:
         upgrade:
           ### OCA/server-tools
           - date_range
-          - specific_zetes
           ### local
+          - specific_stock
+          - specific_zetes
           - stock_lot_loss
