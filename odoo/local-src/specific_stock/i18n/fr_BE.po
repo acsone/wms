@@ -773,13 +773,3 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
-
-#~ msgid ""
-#~ "You cannot start an inventory of a product having an ongoing stock "
-#~ "operation. Please retry later. Blocking operations:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Vous ne pouvez pas démarrer l'inventaire d'un produit ayant une opération "
-#~ "de stock en cours. Veuillez réessayer ultérieurement. Opérations "
-#~ "bloquantes:\n"
-#~ "%s"
