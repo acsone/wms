@@ -13,7 +13,7 @@ a user to write on their own user profile.
  3 files changed, 23 insertions(+), 9 deletions(-)
 
 diff --git a/helpdesk/models/helpdesk.py b/helpdesk/models/helpdesk.py
-index 6b835855e..4e9a92059 100644
+index 6b835855e7..4e9a92059b 100644
 --- a/helpdesk/models/helpdesk.py
 +++ b/helpdesk/models/helpdesk.py
 @@ -310,13 +310,6 @@ class HelpdeskTeam(models.Model):
@@ -31,7 +31,7 @@ index 6b835855e..4e9a92059 100644
      def get_new_user(self):
          self.ensure_one()
 diff --git a/helpdesk/models/res_users.py b/helpdesk/models/res_users.py
-index cd205aef8..76ed163a3 100644
+index cd205aef86..76ed163a39 100644
 --- a/helpdesk/models/res_users.py
 +++ b/helpdesk/models/res_users.py
 @@ -10,3 +10,22 @@ class ResUsers(models.Model):
@@ -58,7 +58,7 @@ index cd205aef8..76ed163a3 100644
 +        type(self).SELF_READABLE_FIELDS.extend(helpdesk_fields)
 +        return init_res
 diff --git a/helpdesk/static/src/js/helpdesk_dashboard.js b/helpdesk/static/src/js/helpdesk_dashboard.js
-index 765db4eb5..ab7ed8406 100644
+index 765db4eb5b..ab7ed84067 100644
 --- a/helpdesk/static/src/js/helpdesk_dashboard.js
 +++ b/helpdesk/static/src/js/helpdesk_dashboard.js
 @@ -84,8 +84,10 @@ var HelpdeskTeamDashboardView = KanbanView.extend({
