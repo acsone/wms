@@ -21,32 +21,40 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-2188: Handle inventory shortage of products without tracking
-* ALCYN-2167: Use short name for 'act_as_view' internal locations
-* ALCYN-2190: Execute script to correct cutoff entries from april and may 2019
-* ALCYN-2166: Make sure partners belong to an itinerary when creating
-  a pharmacy reception
-
 **Bugfixes**
-
-* ALCYN-2187: Set date order as today when confirm purchase order
-* ALCYN-2197: Fix model not up to date after pending-merge update
-* ALCYN-2211: Invoice reconciliation jobs blocked
-* ALCYN-2165: Remove spaces in product_template cnk_code field
-* ALCYN-2181: Move menu 'Stock Pack Operaion Report' to Reports
-* ALCYN-2225: Correct sending of email from Customers Statements,
-  add partner as follower (OPW-2041448)
-* ALCYN-2180: Fix "immediately_available_qty" computation & ignore parking locations
 
 **Build**
 
 **Documentation**
 
 
-10.0.1.42.7 (2019-09-02)
+10.0.1.43.0 (2019-09-09)
 ++++++++++++++++++++++++
 
 **Features and Improvements**
+
+* ALCYN-2188: Handle inventory shortage of products without tracking
+* ALCYN-2167: Use short name for 'act_as_view' internal locations
+* ALCYN-2166: Make sure partners belong to an itinerary when creating
+  a pharmacy reception
+* ALCYN-2165: Remove spaces in product_template cnk_code field
+* ALCYN-2187: Set date order as today when confirm purchase order
+* ALCYN-2181: Move menu 'Stock Pack Operation Report' to Reports
+* ALCYN-2127: Add priority on jobs, improve channels configuration
+
+**Bugfixes**
+
+* ALCYN-2225: Correct sending of email from Customers Statements,
+  add partner as follower (OPW-2041448)
+* ALCYN-2180: Fix "immediately_available_qty" computation & ignore parking locations
+
+**Build**
+
+* ALCYN-2190: Add script to correct cutoff entries from april and may 2019
+
+
+10.0.1.42.7 (2019-09-02)
+++++++++++++++++++++++++
 
 **Bugfixes**
 
@@ -54,16 +62,11 @@ latest (unreleased)
 * ALCYN-2214: Correct total amounts of rounding in invoice report
 * ALCYN-2222: Fix correction in account_invoice_accrual
 
-**Build**
-
-**Documentation**
-
 
 10.0.1.42.6 (2019-08-29) YANKED
 +++++++++++++++++++++++++++++++
 
-**Bugfixes**
-
+Moved to 10.0.1.42.7
 
 
 10.0.1.42.5 (2019-08-21)

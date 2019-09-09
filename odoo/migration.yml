@@ -502,6 +502,7 @@ migration:
           ### OCA/server-tools
           - date_range
           ### local
+          - procurement_sale
           - specific_stock
           - specific_zetes
           - stock_lot_loss
