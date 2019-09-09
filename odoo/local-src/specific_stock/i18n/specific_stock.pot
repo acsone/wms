@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-06 06:35+0000\n"
-"PO-Revision-Date: 2017-09-06 06:35+0000\n"
+"POT-Creation-Date: 2019-09-05 15:54+0000\n"
+"PO-Revision-Date: 2019-09-05 15:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,14 @@ msgid "6 months means that it will be two inventory per year"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
-msgid "Apply"
+#: model:ir.model.fields,help:specific_stock.field_product_category_warning_info
+msgid "Additional information communicated to the customer"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/reception_pharmacy.py:122
+#, python-format
+msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
 
 #. module: specific_stock
@@ -36,40 +42,14 @@ msgid "Backorder"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
-msgid "Backorder action"
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_bin_id
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Bin"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_backorder_action_to_do
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_backorder_action_to_do
-msgid "Backorder action to do"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
-msgid "Backorder choice"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_backorder_confirmation_id
-msgid "Backorder confirmation"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
-msgid "Backorder options"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_reason_id
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
-msgid "Backorder reason"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
-msgid "Backorder reason choice"
+#: model:ir.model,name:specific_stock.model_board_board
+msgid "Board"
 msgstr ""
 
 #. module: specific_stock
@@ -78,13 +58,21 @@ msgid "Box"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 msgid "Cancel"
 msgstr ""
 
 #. module: specific_stock
-#: selection:stock.backorder.reason,backorder_action_to_do:0
-msgid "Cancel backorder"
+#: code:addons/specific_stock/models/stock_production_lot.py:361
+#, python-format
+msgid "Cannot generate a voice identifier"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+msgid "Category"
 msgstr ""
 
 #. module: specific_stock
@@ -98,25 +86,43 @@ msgid "Checksum"
 msgstr ""
 
 #. module: specific_stock
+#: model:product.product,name:specific_stock.product_colis_souverain
+#: model:product.template,name:specific_stock.product_colis_souverain_product_template
+msgid "Colis Souverain"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr ""
 
 #. module: specific_stock
-#: selection:stock.backorder.reason,backorder_action_to_do:0
-msgid "Create backorder"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_uid
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_create_date
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_customer_id
+msgid "Customer"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/reception_pharmacy.py:57
+#, python-format
+msgid "Customer location is missing"
 msgstr ""
 
 #. module: specific_stock
@@ -125,9 +131,20 @@ msgid "Daily inventory"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:54
+#: code:addons/specific_stock/models/stock_inventory.py:75
 #, python-format
 msgid "Daily inventory: %s"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_date
+msgid "Date"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
+#: model:ir.model.fields,field_description:specific_stock.field_res_users_time_limit_order
+msgid "Deadline for ordering"
 msgstr ""
 
 #. module: specific_stock
@@ -146,9 +163,22 @@ msgid "Delay between two inventory for other products"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_display_name
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_procurement_id
+msgid "Delivery Procurement"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: specific_stock
+#: selection:reception.pharmacy,state:0
+msgid "Done"
 msgstr ""
 
 #. module: specific_stock
@@ -157,39 +187,27 @@ msgid "Duration to compute best sellers (in months)"
 msgstr ""
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+msgid "Generate"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.action_generate_lot_voice_identifier
+#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+msgid "Generate voice identifier"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_height
 msgid "Height"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
-msgid "Helpdesk informations"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_form
-msgid "Helpdesk options"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_helpdesk_ticket_default_name
-msgid "Helpdesk ticket defaut name"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_helpdesk_ticket_name
-msgid "Helpdesk ticket name"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_helpdesk_ticket_reason_id
-msgid "Helpdesk ticket reason"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_id
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_id
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_id
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_id
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_id
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_id
 msgid "ID"
 msgstr ""
 
@@ -204,26 +222,29 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_is_helpdesk_ticket_to_create
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_is_helpdesk_ticket_to_create
-msgid "Is helpdesk ticket to create?"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice___last_update
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_uid
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_write_date
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -234,8 +255,18 @@ msgid "Last inventory"
 msgstr ""
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_ids
+msgid "Lines"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.stock_location_form_inherit
 msgid "Localization"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_location_dest_name
+msgid "Location dest name"
 msgstr ""
 
 #. module: specific_stock
@@ -249,13 +280,33 @@ msgid "Lot/Serial"
 msgstr ""
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_procurement_order_restrict_lot_id
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_lot_ids
+msgid "Lots"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_stock_pack_operation_lot_add_qty_backorder
 msgid "Missing quantity of products to pick"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_reason_name
-msgid "Name"
+#: selection:reception.pharmacy,state:0
+msgid "New"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+msgid "Normal product"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_inventory_note
+msgid "Note"
 msgstr ""
 
 #. module: specific_stock
@@ -269,8 +320,44 @@ msgid "Number of open days"
 msgstr ""
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_nbr_packages
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
+msgid "Number of packages"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_is_mto_product
+#: model:ir.model.fields,field_description:specific_stock.field_product_product_is_mto_product
+#: model:ir.model.fields,field_description:specific_stock.field_product_template_is_mto_product
+#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+msgid "On Order"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.open_uop_action
+#: model:ir.ui.menu,name:specific_stock.open_uop_menu
+#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
+msgid "Open UOP"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_pack_operation_operator_id
+msgid "Operator"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_original_picking_zone_id
+msgid "Original picking zone"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_pack_operation
 msgid "Packing Operation"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Parking"
 msgstr ""
 
 #. module: specific_stock
@@ -279,13 +366,47 @@ msgid "Partner"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_picking_id
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_choice_view_form
+#: code:addons/specific_stock/models/reception_pharmacy.py:65
+#, python-format
+msgid "Partner {} does not belong to any itinerary"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
+msgid "Pharmacy Reception"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_tree
+msgid "Pharmacy Receptions"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_quant_package
+msgid "Physical Packages"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_picking_id
 msgid "Picking"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:139
+#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_picking_zone_id
+#: model:ir.model.fields,field_description:specific_stock.field_product_product_picking_zone_id
+#: model:ir.model.fields,field_description:specific_stock.field_product_template_picking_zone_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_picking_zone_id
+msgid "Picking zone"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/reception_pharmacy.py:44
+#, python-format
+msgid "Please insert at least one line"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/product_template.py:181
 #, python-format
 msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
 msgstr ""
@@ -296,7 +417,14 @@ msgid "Price limit for inventory"
 msgstr ""
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_product_product
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_product_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_return_picking_line_product_name
 msgid "Product"
 msgstr ""
 
@@ -331,10 +459,24 @@ msgid "Product Use Time"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_res_partner_is_purchase_back_order_accepted
-#: model:ir.model.fields,field_description:specific_stock.field_res_users_is_purchase_back_order_accepted
-#: model:ir.model.fields,field_description:specific_stock.field_stock_backorder_choice_is_purchase_back_order_accepted
-msgid "Purchase back order accepted"
+#: model:ir.actions.act_window,name:specific_stock.put_in_pack_helper_action
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+msgid "Put in Pack"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_picking_is_put_in_pack_done
+msgid "Put in Pack done"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+msgid "Put in Pack helper"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_product_qty
+msgid "Quantity"
 msgstr ""
 
 #. module: specific_stock
@@ -343,9 +485,29 @@ msgid "Quantity to take for best sellers (in percent)"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_res_partner_is_sale_back_order_accepted
-#: model:ir.model.fields,field_description:specific_stock.field_res_users_is_sale_back_order_accepted
-msgid "Sale back order accepted"
+#: model:ir.model,name:specific_stock.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_reception_move_id
+msgid "Reception Move"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.reception_pharmacy_action
+#: model:ir.ui.menu,name:specific_stock.reception_pharmacy_menu
+msgid "Reception Pharmacy"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+msgid "Reserve"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_return_picking
+msgid "Return Picking"
 msgstr ""
 
 #. module: specific_stock
@@ -354,72 +516,136 @@ msgid "Shelf"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.actions.act_window,name:specific_stock.action_stock_backorder_reason
-#: model:ir.ui.menu,name:specific_stock.menu_stock_backorder_reason
-#: model:ir.ui.view,arch_db:specific_stock.stock_backorder_reason_tree_view
-msgid "Stock backorder reasons"
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_state
+msgid "State"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,help:specific_stock.field_stock_backorder_reason_helpdesk_ticket_default_name
-msgid "The default name to use for create a helpdesk ticket."
+#: model:ir.model,name:specific_stock.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:163
+#: code:addons/specific_stock/models/reception_pharmacy.py:60
+#, python-format
+msgid "Supplier location is missing"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_procurement_order_restrict_lot_id
+msgid "Technical field used to depict a restriction on the lot/serial number of quants to consider when marking this move as 'done'"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_config_settings.py:167
 #, python-format
 msgid "The delay can only be in the following list:\n"
 "(1, 2, 3, 4, 6 or 12 months)"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:160
+#: code:addons/specific_stock/models/stock_location.py:28
+#: sql_constraint:stock.location:0
+#, python-format
+msgid "The location coordinate must be unique"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_config_settings.py:163
 #, python-format
 msgid "The maximum delay is 12 months"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,help:specific_stock.field_stock_backorder_choice_helpdesk_ticket_name
-msgid "The name to use for create a helpdesk ticket."
+#: model:ir.model,name:specific_stock.model_stock_picking_type
+msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:95
+#: code:addons/specific_stock/models/stock_picking.py:92
+#, python-format
+msgid "The reception must be linked to a Goods Received Note"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_production_lot.py:199
+#, python-format
+msgid "There is no checksum available"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_inventory.py:115
 #, python-format
 msgid "There is no delay for the inventory %s"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:189
+#: code:addons/specific_stock/models/product_template.py:258
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:154
+#: code:addons/specific_stock/models/product_template.py:214
 #, python-format
 msgid "There is no period for expensive products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:234
+#: code:addons/specific_stock/models/product_template.py:311
 #, python-format
 msgid "There is no period for other products"
 msgstr ""
 
 #. module: specific_stock
+#: code:addons/specific_stock/models/stock_production_lot.py:349
+#, python-format
+msgid "There is no voice identifier available"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/wizards/open_uop.py:27
+#, python-format
+msgid "This UOP does't exist"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
+#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr ""
 
 #. module: specific_stock
-#: selection:stock.backorder.reason,backorder_action_to_do:0
-msgid "Use partner option (Purchase back order accepted)"
+#: model:ir.model.fields,field_description:specific_stock.field_open_uop_uop
+#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_picking_tree
+msgid "UOP"
 msgstr ""
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
 msgid "Valid location"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_supplier_id
+msgid "Vendor"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_voice_identifier
+msgid "Voice Identifier"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/reception_pharmacy.py:54
+#, python-format
+msgid "Warehouse is missing"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_product_category_warning_info
+msgid "Warning information"
 msgstr ""
 
 #. module: specific_stock
@@ -443,7 +669,12 @@ msgid "When a new a Serial Number is issued, this is the number of days before t
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:39
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_wizard_id
+msgid "Wizard"
+msgstr ""
+
+#. module: specific_stock
+#: code:addons/specific_stock/models/stock_picking.py:79
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
@@ -455,13 +686,28 @@ msgid "Zone"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model,name:specific_stock.model_stock_backorder_choice
-msgid "stock.backorder.choice"
+#: model:ir.model,name:specific_stock.model_generate_voice_identifier
+msgid "generate.voice.identifier"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model,name:specific_stock.model_stock_backorder_reason
-msgid "stock.backorder.reason"
+#: model:ir.model,name:specific_stock.model_open_uop
+msgid "open.uop"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_put_in_pack_helper
+msgid "put.in.pack.helper"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_reception_pharmacy
+msgid "reception.pharmacy"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_reception_pharmacy_line
+msgid "reception.pharmacy.line"
 msgstr ""
 
 #. module: specific_stock
@@ -472,4 +718,19 @@ msgstr ""
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_return_picking_line
+msgid "stock.return.picking.line"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_scrap
+msgid "stock.scrap"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
+msgid "↳Put in Pack"
 msgstr ""

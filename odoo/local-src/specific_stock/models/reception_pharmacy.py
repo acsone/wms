@@ -59,6 +59,14 @@ class ReceptionPharmacy(models.Model):
         if not loc_supplier:
             raise UserError(_('Supplier location is missing'))
 
+        for partner in self.line_ids.mapped('customer_id'):
+            if not partner.round_itinerary_ids:
+                raise UserError(
+                    _('Partner {} does not belong to any itinerary').format(
+                        partner.name
+                    )
+                )
+
         for line in self.line_ids:
             lot_id = lot.create(
                 {
@@ -133,11 +141,7 @@ class ReceptionPharmacyLine(models.Model):
         'reception.pharmacy', required=True, string='Wizard'
     )
     customer_id = fields.Many2one(
-        'res.partner',
-        domain=[('customer', '=', True)],
-        string='Customer',
-        required=True,
-        ondelete='restrict',
+        'res.partner', string='Customer', required=True, ondelete='restrict'
     )
     bin_id = fields.Many2one(
         'stock.location',

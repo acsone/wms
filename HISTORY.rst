@@ -24,6 +24,8 @@ latest (unreleased)
 * ALCYN-2188: Handle inventory shortage of products without tracking
 * ALCYN-2167: Use short name for 'act_as_view' internal locations
 * ALCYN-2190: Execute script to correct cutoff entries from april and may 2019
+* ALCYN-2166: Make sure partners belong to an itinerary when creating
+  a pharmacy reception
 
 **Bugfixes**
 

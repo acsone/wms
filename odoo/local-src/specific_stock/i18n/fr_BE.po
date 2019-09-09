@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_stock
+# 	* specific_stock
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 22:13+0000\n"
+"POT-Creation-Date: 2019-09-05 15:54+0000\n"
 "PO-Revision-Date: 2018-11-30 22:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,10 +27,14 @@ msgid "Additional information communicated to the customer"
 msgstr "Informations complémentaires communiquées au client"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:106
+#: code:addons/specific_stock/models/reception_pharmacy.py:122
 #, python-format
-msgid "All pickings at destination of a same shipping must be in the same delivery round"
-msgstr "Tout les pickings ayant la même adresse d'expédition doivent se trouver dans la même tournée."
+msgid ""
+"All pickings at destination of a same shipping must be in the same delivery "
+"round"
+msgstr ""
+"Tout les pickings ayant la même adresse d'expédition doivent se trouver dans "
+"la même tournée."
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_is_archived
@@ -48,6 +53,11 @@ msgid "Bin"
 msgstr "Bac"
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_board_board
+msgid "Board"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
 msgid "Box"
 msgstr "Boite"
@@ -60,7 +70,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:345
+#: code:addons/specific_stock/models/stock_production_lot.py:361
 #, python-format
 msgid "Cannot generate a voice identifier"
 msgstr "Impossible de générer un identifiant vocal"
@@ -115,7 +125,7 @@ msgid "Customer"
 msgstr "Client"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:58
+#: code:addons/specific_stock/models/reception_pharmacy.py:57
 #, python-format
 msgid "Customer location is missing"
 msgstr "L'adresse du client est manquante"
@@ -126,7 +136,7 @@ msgid "Daily inventory"
 msgstr "Inventaire journalier"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:110
+#: code:addons/specific_stock/models/stock_inventory.py:75
 #, python-format
 msgid "Daily inventory: %s"
 msgstr "Inventaire journalier: %s"
@@ -361,6 +371,12 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_stock
+#: code:addons/specific_stock/models/reception_pharmacy.py:65
+#, python-format
+msgid "Partner {} does not belong to any itinerary"
+msgstr "Le partenaire {} ne figure dans aucun itinéraire."
+
+#. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
 msgid "Pharmacy Reception"
 msgstr "Réception Pharmacie"
@@ -389,7 +405,7 @@ msgid "Picking zone"
 msgstr "Zone de picking"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:45
+#: code:addons/specific_stock/models/reception_pharmacy.py:44
 #, python-format
 msgid "Please insert at least one line"
 msgstr "Veuillez introduire au moins une ligne"
@@ -397,8 +413,12 @@ msgstr "Veuillez introduire au moins une ligne"
 #. module: specific_stock
 #: code:addons/specific_stock/models/product_template.py:181
 #, python-format
-msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
-msgstr "Veuillez définir le prix limite pour les inventaires et/ou le nombre de jours ouvrés dans la configuration de l'inventaire"
+msgid ""
+"Please set the Price limit for inventory or/and the Number of open days in "
+"the stock configuration"
+msgstr ""
+"Veuillez définir le prix limite pour les inventaires et/ou le nombre de "
+"jours ouvrés dans la configuration de l'inventaire"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_price_limit_for_inventory
@@ -413,6 +433,7 @@ msgstr "Approvisionnement"
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_product_product
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_product_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_return_picking_line_product_name
 msgid "Product"
 msgstr "Article"
 
@@ -453,6 +474,12 @@ msgid "Put in Pack"
 msgstr "Ajouter au colis"
 
 #. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_picking_is_put_in_pack_done
+#, fuzzy
+msgid "Put in Pack done"
+msgstr "Ajouter au colis"
+
+#. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 msgid "Put in Pack helper"
 msgstr "Aide pour l'ajout au colis"
@@ -489,6 +516,12 @@ msgid "Reserve"
 msgstr "Réserve"
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_return_picking
+#, fuzzy
+msgid "Return Picking"
+msgstr "Opération de manutention"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_shelf
 msgid "Shelf"
 msgstr "Etagère"
@@ -504,33 +537,39 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:61
+#: code:addons/specific_stock/models/reception_pharmacy.py:60
 #, python-format
 msgid "Supplier location is missing"
 msgstr "L'adresse du fournisseur est manquante"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_procurement_order_restrict_lot_id
-msgid "Technical field used to depict a restriction on the lot/serial number of quants to consider when marking this move as 'done'"
-msgstr "Champ technique utilisé pour définir une restriction sur un lot/numéro de série des quants pour définir si un mouvement doit être marqué comme 'fait'"
+msgid ""
+"Technical field used to depict a restriction on the lot/serial number of "
+"quants to consider when marking this move as 'done'"
+msgstr ""
+"Champ technique utilisé pour définir une restriction sur un lot/numéro de "
+"série des quants pour définir si un mouvement doit être marqué comme 'fait'"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:163
+#: code:addons/specific_stock/models/stock_config_settings.py:167
 #, python-format
-msgid "The delay can only be in the following list:\n"
+msgid ""
+"The delay can only be in the following list:\n"
 "(1, 2, 3, 4, 6 or 12 months)"
-msgstr "Le delai peut seulement être une valeur de la liste suivante:\n"
+msgstr ""
+"Le delai peut seulement être une valeur de la liste suivante:\n"
 "(1, 2, 3, 4, 6 ou 12 mois)"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:24
+#: code:addons/specific_stock/models/stock_location.py:28
 #: sql_constraint:stock.location:0
 #, python-format
 msgid "The location coordinate must be unique"
 msgstr "Les coordonnées de l'emplacement doivent être uniques"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:160
+#: code:addons/specific_stock/models/stock_config_settings.py:163
 #, python-format
 msgid "The maximum delay is 12 months"
 msgstr "Le délai maximum est 12 mois"
@@ -541,49 +580,49 @@ msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:67
+#: code:addons/specific_stock/models/stock_picking.py:92
 #, python-format
 msgid "The reception must be linked to a Goods Received Note"
 msgstr "La réception doit être liée à un accusé de réception"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:192
+#: code:addons/specific_stock/models/stock_production_lot.py:199
 #, python-format
 msgid "There is no checksum available"
 msgstr "Il n'y a pas de checksum disponnible"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:148
+#: code:addons/specific_stock/models/stock_inventory.py:115
 #, python-format
 msgid "There is no delay for the inventory %s"
 msgstr "Il n'y a pas de delais pour l'inventaire %s"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:250
+#: code:addons/specific_stock/models/product_template.py:258
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr "Il n'y a pas de période pour les produits les plus vendus"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:211
+#: code:addons/specific_stock/models/product_template.py:214
 #, python-format
 msgid "There is no period for expensive products"
 msgstr "Il n'y a pas de période pour les produits coûteux"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:299
+#: code:addons/specific_stock/models/product_template.py:311
 #, python-format
 msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:335
+#: code:addons/specific_stock/models/stock_production_lot.py:349
 #, python-format
 msgid "There is no voice identifier available"
 msgstr "Il n'y a pas d'identifiant vocal disponible"
 
 #. module: specific_stock
-#: code:addons/specific_stock/wizards/open_uop.py:18
+#: code:addons/specific_stock/wizards/open_uop.py:27
 #, python-format
 msgid "This UOP does't exist"
 msgstr "Cet UOP n'existe pas"
@@ -617,7 +656,7 @@ msgid "Voice Identifier"
 msgstr "Identifiant Vocal"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:55
+#: code:addons/specific_stock/models/reception_pharmacy.py:54
 #, python-format
 msgid "Warehouse is missing"
 msgstr "Entrepot est manquant"
@@ -629,23 +668,41 @@ msgstr "Informations d'avertissement"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_alert_time
-msgid "When a new a Serial Number is issued, this is the number of days before an alert should be notified."
-msgstr "Quand un nouveau numéro de lot est créé, c'est le nombre de jours avant qu'une alerte soit remontée."
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before an "
+"alert should be notified."
+msgstr ""
+"Quand un nouveau numéro de lot est créé, c'est le nombre de jours avant "
+"qu'une alerte soit remontée."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_life_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods may become dangerous and must not be consumed."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises deviennent dangereuses et ne doivent plus être consommées."
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods may become dangerous and must not be consumed."
+msgstr ""
+"Quand un nouveau numéro de série est créé, c'est le nombre de jours avant "
+"que les marchandises deviennent dangereuses et ne doivent plus être "
+"consommées."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_removal_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods should be removed from the stock."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours après lesquels les marchandises doivent être enlevées du stock."
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods should be removed from the stock."
+msgstr ""
+"Quand un nouveau numéro de série est créé, c'est le nombre de jours après "
+"lesquels les marchandises doivent être enlevées du stock."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_use_time
-msgid "When a new a Serial Number is issued, this is the number of days before the goods starts deteriorating, without being dangerous yet."
-msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods starts deteriorating, without being dangerous yet."
+msgstr ""
+"Quand un nouveau numéro de série est créé, c'est le nombre de jours avant "
+"que les marchandises commencent à se détériorer, sans pour autant être "
+"dangereuses."
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_wizard_id
@@ -653,20 +710,14 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:77
+#: code:addons/specific_stock/models/stock_picking.py:79
 #, python-format
-msgid "You cannot start an inventory of a product having an ongoing stock operation. Please retry later. Blocking operations:\n"
-"%s"
-msgstr "Vous ne pouvez pas démarrer l'inventaire d'un produit ayant une opération de stock en cours. Veuillez réessayer ultérieurement. Opérations bloquantes:\n"
-"%s"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:58
-#, python-format
-msgid "You cannot transfer lots with an expired removal date:\n"
-"	- %s"
-msgstr "Vous ne pouvez pas transférer un lot expiré:\n"
-"	- %s"
+msgid ""
+"You cannot transfer lots with an expired removal date:\n"
+"\t- %s"
+msgstr ""
+"Vous ne pouvez pas transférer un lot expiré:\n"
+"\t- %s"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
@@ -707,6 +758,11 @@ msgstr "stock.config.settings"
 #: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
+
+#. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_return_picking_line
+msgid "stock.return.picking.line"
+msgstr ""
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_scrap
