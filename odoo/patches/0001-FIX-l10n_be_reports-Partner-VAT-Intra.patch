@@ -18,7 +18,7 @@ Signed-off-by: Simon Goffin (sig) <sig@openerp.com>
  1 file changed, 14 insertions(+), 6 deletions(-)
 
 diff --git a/l10n_be_reports/models/partner_vat_intra.py b/l10n_be_reports/models/partner_vat_intra.py
-index 0ce075d..9a53502 100644
+index 0ce075dec2..9a53502f5a 100644
 --- a/l10n_be_reports/models/partner_vat_intra.py
 +++ b/l10n_be_reports/models/partner_vat_intra.py
 @@ -18,7 +18,14 @@ class ReportL10nBePartnerVatIntra(models.AbstractModel):
@@ -64,5 +64,5 @@ index 0ce075d..9a53502 100644
                      'level': 2,
                      'unfoldable': False,
 -- 
-2.7.4
+2.17.1
 

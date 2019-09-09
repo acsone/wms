@@ -31,6 +31,9 @@ latest (unreleased)
 * ALCYN-2211: Invoice reconciliation jobs blocked
 * ALCYN-2165: Remove spaces in product_template cnk_code field
 * ALCYN-2181: Move menu 'Stock Pack Operaion Report' to Reports
+* ALCYN-2225: Correct sending of email from Customers Statements,
+  add partner as follower (OPW-2041448)
+
 **Build**
 
 **Documentation**
