@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2206: Add unique constraint on product cnk_code field
+
 **Build**
 
 **Documentation**

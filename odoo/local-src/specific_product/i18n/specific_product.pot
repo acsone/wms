@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 09:07+0000\n"
-"PO-Revision-Date: 2017-01-03 09:07+0000\n"
+"POT-Creation-Date: 2019-09-10 10:03+0000\n"
+"PO-Revision-Date: 2019-09-10 10:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,71 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_belgium_only
+#: model:ir.model.fields,field_description:specific_product.field_product_product_belgium_only
+#: model:ir.model.fields,field_description:specific_product.field_product_template_belgium_only
+msgid "Belgium only"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_cnk_code
+#: model:ir.model.fields,field_description:specific_product.field_product_product_cnk_code
+#: model:ir.model.fields,field_description:specific_product.field_product_template_cnk_code
+msgid "CNK"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_id
+msgid "ID"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_indicated_price
+#: model:ir.model.fields,field_description:specific_product.field_product_product_indicated_price
+#: model:ir.model.fields,field_description:specific_product.field_product_template_indicated_price
+msgid "Indicated price"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_medical_device
+#: model:ir.model.fields,field_description:specific_product.field_product_product_medical_device
 #: model:ir.model.fields,field_description:specific_product.field_product_template_medical_device
 msgid "Medical Device"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_name
+msgid "Name"
 msgstr ""
 
 #. module: specific_product
@@ -31,8 +94,25 @@ msgid "Pricelist item"
 msgstr ""
 
 #. module: specific_product
+#: model:ir.model,name:specific_product.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: specific_product
 #: model:ir.model,name:specific_product.model_product_template
 msgid "Product Template"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_web_published
+#: model:ir.model.fields,field_description:specific_product.field_product_product_web_published
+#: model:ir.model.fields,field_description:specific_product.field_product_template_web_published
+msgid "Published on website"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_esb_ref
+msgid "Reference for ESB"
 msgstr ""
 
 #. module: specific_product
@@ -42,6 +122,44 @@ msgid "Sale Price 1"
 msgstr ""
 
 #. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_sale_price_2
+#: model:ir.model.fields,field_description:specific_product.field_product_product_sale_price_2
 #: model:ir.model.fields,field_description:specific_product.field_product_template_sale_price_2
 msgid "Sale Price 2"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.ui.view,arch_db:specific_product.storage_temperature_product_template_form_view
+msgid "Storage Temperature"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_storage_temperature_id
+#: model:ir.model.fields,field_description:specific_product.field_product_product_storage_temperature_id
+#: model:ir.model.fields,field_description:specific_product.field_product_template_storage_temperature_id
+msgid "Storage temperature"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_temperature
+msgid "Temperature (°C)"
+msgstr ""
+
+#. module: specific_product
+#: code:addons/specific_product/models/product.py:45
+#: sql_constraint:product.template:0
+#, python-format
+msgid "This cnk_code already exists."
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_veterinary_only
+#: model:ir.model.fields,field_description:specific_product.field_product_product_veterinary_only
+#: model:ir.model.fields,field_description:specific_product.field_product_template_veterinary_only
+msgid "Veterinary only"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model,name:specific_product.model_product_storage_temperature
+msgid "product.storage.temperature"
 msgstr ""

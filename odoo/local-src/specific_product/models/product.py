@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ProductProduct(models.Model):
@@ -37,6 +37,14 @@ class ProductTemplate(models.Model):
 
     veterinary_only = fields.Boolean(string='Veterinary only')
     belgium_only = fields.Boolean(string='Belgium only')
+
+    _sql_constraints = [
+        (
+            'uniq_cnk_code',
+            'unique(cnk_code)',
+            _("This cnk_code already exists."),
+        )
+    ]
 
     def _compute_sale_price_2(self):
         for product in self:
