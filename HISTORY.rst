@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
+* ALCYN-2141: lock picking on printing and validation commands received from Zetes
 
 **Build**
 
