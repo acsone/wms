@@ -13,6 +13,7 @@
         'delivery_rounds',
         'product',
         'product_expiry',
+        'product_last_transaction',
         'purchase',
         'sale',
         'sale_stock',

@@ -215,6 +215,7 @@ migration:
           - pricelist_discount
           - procurement_sale
           - product_additional
+          - product_last_transaction
           - product_price_category
           - purchase_prepaid
           - purchase_unlink_cancelop
@@ -516,3 +517,6 @@ migration:
         upgrade:
           ### local
           - specific_product
+          - product_last_transaction
+          - specific_stock
+          - stock_valuation
