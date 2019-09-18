@@ -30,17 +30,15 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.43.0 (2019-09-09)
+10.0.1.43.1 (2019-09-18)
 ++++++++++++++++++++++++
 
 **Features and Improvements**
 
 * ALCYN-2188: Handle inventory shortage of products without tracking
-* ALCYN-2167: Use short name for 'act_as_view' internal locations
 * ALCYN-2166: Make sure partners belong to an itinerary when creating
   a pharmacy reception
 * ALCYN-2165: Remove spaces in product_template cnk_code field
-* ALCYN-2187: Set date order as today when confirm purchase order
 * ALCYN-2181: Move menu 'Stock Pack Operation Report' to Reports
 * ALCYN-2127: Add priority on jobs, improve channels configuration
 
@@ -49,10 +47,17 @@ latest (unreleased)
 * ALCYN-2225: Correct sending of email from Customers Statements,
   add partner as follower (OPW-2041448)
 * ALCYN-2180: Fix "immediately_available_qty" computation & ignore parking locations
+* ALCYN-2197: Fix model not up to date after pending-merge update
 
 **Build**
 
 * ALCYN-2190: Add script to correct cutoff entries from april and may 2019
+
+
+10.0.1.43.0 (2019-09-09) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Moved to 10.0.1.43.1
 
 
 10.0.1.42.7 (2019-09-02)
