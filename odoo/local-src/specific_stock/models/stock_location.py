@@ -30,16 +30,6 @@ class StockLocation(models.Model):
     ]
 
     @api.multi
-    def name_get(self):
-        ret_list = []
-        for location in self:
-            if location.act_as_view and location.usage == 'internal':
-                ret_list.append((location.id, location.name))
-            else:
-                ret_list += super(StockLocation, location).name_get()
-        return ret_list
-
-    @api.multi
     @api.depends('zone', 'corridor', 'shelf', 'height', 'box')
     def _compute_is_valid_location(self):
         for location in self:
