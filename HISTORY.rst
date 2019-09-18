@@ -47,6 +47,7 @@ latest (unreleased)
 * ALCYN-2225: Correct sending of email from Customers Statements,
   add partner as follower (OPW-2041448)
 * ALCYN-2180: Fix "immediately_available_qty" computation & ignore parking locations
+* ALCYN-2197: Fix model not up to date after pending-merge update
 
 **Build**
 

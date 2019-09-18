@@ -92,13 +92,7 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def button_confirm(self):
-        self.write(
-            {
-                'responsible_id': self.env.user.id,
-                # Set order date ad today
-                'date_order': fields.Date.context_today(self),
-            }
-        )
+        self.responsible_id = self.env.user.id
 
         return super(PurchaseOrder, self).button_confirm()
 
