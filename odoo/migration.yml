@@ -493,6 +493,8 @@ migration:
           ### OCA/server-tools
           - date_range
     - version: 10.0.1.43.0
+      # YANKED, moved to 10.0.1.43.1
+    - version: 10.0.1.43.1
       operations:
         post:
           - anthem songs.upgrade.rename_queue_channels::post
