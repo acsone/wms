@@ -30,6 +30,8 @@ latest (unreleased)
 * ALCYN-2263: Fix CNK unicity error when duplicating a product
 * ALCYN-2256: Union credit and payment lines, sort in chronological order
 * ALCYN-2242: Fix rounding computing
+* ALCYN-2206: Add unique constraint on product cnk_code field
+* ALCYN-2236: Fix differences with inventory to date and stock valuation
 
 **Build**
 

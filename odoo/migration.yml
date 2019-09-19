@@ -549,3 +549,4 @@ migration:
           - specific_data
           - specific_purchase
           - specific_sale
+          - stock_valuation

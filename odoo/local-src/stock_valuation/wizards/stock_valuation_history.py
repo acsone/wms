@@ -2,8 +2,8 @@
 # © 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from openerp import api, fields, models, tools
+from openerp.osv.expression import AND, OR
 
 
 class WizardValuationHistory(models.TransientModel):
@@ -20,13 +20,20 @@ class WizardValuationHistory(models.TransientModel):
     def open_table(self):
         materialized_model = self.env['stock.history.materialized']
         refresh_date = materialized_model.get_refresh_date()
-        if not refresh_date or fields.Datetime.from_string(
-            self.date
-        ) > fields.Datetime.from_string(refresh_date):
+        date_dt = fields.Datetime.from_string(self.date)
+        if not refresh_date or date_dt > fields.Datetime.from_string(
+            refresh_date
+        ):
             materialized_model.refresh_view()
         res = super(WizardValuationHistory, self).open_table()
         res['context']['search_default_group_by_product'] = False
         res['context']['search_default_group_by_location'] = False
+        now = fields.Datetime.now()
+        domain = AND([[('date', '>=', self.date)], [('date', '<=', now)]])
+        domain = OR([domain, [('move_id', '=', False)]])
+
+        res['domain'] = domain
+
         return res
 
 
@@ -59,20 +66,7 @@ class StockHistoryMaterialized(models.AbstractModel):
         self.env.cr.execute(
             """
             CREATE MATERIALIZED VIEW %s AS (
-              WITH internal AS (
-                SELECT parent_left, parent_right
-                FROM stock_location
-                WHERE id = (SELECT res_id
-                            FROM ir_model_data
-                            WHERE module = 'specific_base'
-                            AND name = 'stock_location_vlb')
-              ),
-              -- we want to valorize the goods in the output too
-              output AS (
-                SELECT res_id as id FROM ir_model_data
-                WHERE module = 'stock' AND name = 'stock_location_output'
-              )
-              SELECT MIN(id) as id,
+              SELECT MIN(id) AS id,
                 move_id,
                 location_id,
                 company_id,
@@ -82,7 +76,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                 product_supplier_id,
                 SUM(quantity) as quantity,
                 date,
-                COALESCE(SUM(price_unit_on_quant * quantity) / NULLIF(SUM(quantity), 0), 0) as price_unit_on_quant,
+                COALESCE(SUM(price_unit_on_quant * quantity) / NULLIF(SUM(quantity), 0), 0) AS price_unit_on_quant,
                 source,
                 string_agg(DISTINCT serial_number, ', ' ORDER BY serial_number) AS serial_number
                 FROM
@@ -95,13 +89,13 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_template.id AS product_template_id,
                     product_template.supplier_id AS product_supplier_id,
                     product_template.categ_id AS product_categ_id,
-                    quant.qty AS quantity,
+                    -quant.qty AS quantity,
                     stock_move.date AS date,
-                    quant.cost as price_unit_on_quant,
+                    quant.cost AS price_unit_on_quant,
                     stock_move.origin AS source,
                     stock_production_lot.name AS serial_number
                 FROM
-                    stock_quant as quant
+                    stock_quant AS quant
                 JOIN
                     stock_quant_move_rel ON stock_quant_move_rel.quant_id = quant.id
                 JOIN
@@ -116,17 +110,13 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_product ON product_product.id = stock_move.product_id
                 JOIN
                     product_template ON product_template.id = product_product.product_tmpl_id
-                WHERE quant.qty>0 AND stock_move.state = 'done'
-                    AND (dest_location.id = (SELECT id FROM output) OR
-                         dest_location.parent_left >= (SELECT parent_left FROM internal) AND
-                         dest_location.parent_right <= (SELECT parent_right FROM internal)
-                         )
+                WHERE quant.qty > 0 AND stock_move.state = 'done'
+                AND dest_location.usage IN ('internal', 'transit', 'view')
                 AND (
-                    not (source_location.company_id is null and dest_location.company_id is null) or
-                    source_location.company_id != dest_location.company_id or
-                    (source_location.id != (SELECT id FROM output) AND
-                     (source_location.parent_left < (SELECT parent_left FROM internal) OR
-                      source_location.parent_right > (SELECT parent_right FROM internal))))
+                    NOT (source_location.company_id IS NULL AND dest_location.company_id IS NULL) OR
+                    source_location.company_id != dest_location.company_id OR
+                    source_location.usage NOT IN ('internal', 'transit', 'view')
+                 )
                 ) UNION ALL
                 (SELECT
                     (-1) * stock_move.id AS id,
@@ -137,13 +127,13 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_template.id AS product_template_id,
                     product_template.supplier_id AS product_supplier_id,
                     product_template.categ_id AS product_categ_id,
-                    - quant.qty AS quantity,
+                    quant.qty AS quantity,
                     stock_move.date AS date,
-                    quant.cost as price_unit_on_quant,
+                    quant.cost AS price_unit_on_quant,
                     stock_move.origin AS source,
                     stock_production_lot.name AS serial_number
                 FROM
-                    stock_quant as quant
+                    stock_quant AS quant
                 JOIN
                     stock_quant_move_rel ON stock_quant_move_rel.quant_id = quant.id
                 JOIN
@@ -158,18 +148,45 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_product ON product_product.id = stock_move.product_id
                 JOIN
                     product_template ON product_template.id = product_product.product_tmpl_id
-                WHERE quant.qty>0 AND stock_move.state = 'done'
-                AND (source_location.id = (SELECT id FROM output) OR
-                     source_location.parent_left >= (SELECT parent_left FROM internal) AND
-                     source_location.parent_right <= (SELECT parent_right FROM internal)
-                     )
+                WHERE quant.qty > 0 AND stock_move.state = 'done'
+                  AND source_location.usage in ('internal', 'transit', 'view') AND stock_quant_move_rel.quant_id = quant.id
                 AND (
-                    not (dest_location.company_id is null and source_location.company_id is null) or
-                    dest_location.company_id != source_location.company_id or
-                    (dest_location.id != (SELECT id FROM output) AND
-                     (dest_location.parent_left < (SELECT parent_left FROM internal) OR
-                     dest_location.parent_right > (SELECT parent_right FROM internal))))
-                ))
+                    NOT (dest_location.company_id IS NULL AND source_location.company_id IS NULL) OR
+                    dest_location.company_id != source_location.company_id OR
+                    source_location.usage NOT IN ('internal', 'transit', 'view')
+                     )
+                )
+
+            UNION ALL
+            (
+            /* One record for each product current stock */
+                SELECT
+                     2147483646 - quant.product_id as id,
+                    NULL AS move_id,
+                    0 AS location_id,
+                    quant.company_id AS company_id,
+                    quant.product_id as product_id,
+                    product_template.id AS product_template_id,
+                    product_template.supplier_id AS product_supplier_id,
+                    product_template.categ_id AS product_categ_id,
+                    sum(quant.qty) AS quantity,
+                    now() AS date,
+                    sum(quant.cost) as price_unit_on_quant,
+                    'Current stock valuation' AS source,
+                    NULL AS serial_number
+                    FROM
+                    stock_quant as quant
+                    JOIN
+                    stock_location quant_location ON quant_location.id = quant.location_id
+                    JOIN
+                    product_product ON product_product.id = quant.product_id
+                    JOIN
+                    product_template ON product_template.id = product_product.product_tmpl_id
+                    WHERE quant_location.usage in ('internal', 'transit', 'view')
+                    group by (quant.product_id, quant.company_id, product_template.id)
+               )
+            )
+
                 AS foo
                 GROUP BY move_id, location_id, company_id, product_id,
                          product_categ_id, product_supplier_id, date,
