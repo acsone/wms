@@ -131,10 +131,11 @@ class ProcurementOrder(models.Model):
 
         return result
 
-    def _get_pol_promotion_supplier(self, supplier):
+    def _get_pol_promotion_supplier(self, po, supplier):
         seller = self.product_id._select_seller(
             partner_id=supplier.name,  # name is a res.partner on supplier.info
             quantity=self.product_qty,
+            date=po.date_order and po.date_order[:10],
             uom_id=self.product_id.uom_po_id,
         )
         return seller.discount_purchase or 0.0
@@ -145,7 +146,7 @@ class ProcurementOrder(models.Model):
         )
         price_unit_base = values['price_unit']
         discount_global = po.partner_id.supplier_discount
-        promotion_supplier = self._get_pol_promotion_supplier(supplier)
+        promotion_supplier = self._get_pol_promotion_supplier(po, supplier)
         price_unit = self.env['purchase.order.line']._compute_discount(
             values['price_unit'], discount_global, promotion_supplier
         )

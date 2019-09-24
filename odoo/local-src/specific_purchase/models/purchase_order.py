@@ -228,13 +228,23 @@ class PurchaseOrderLine(models.Model):
 
         return result
 
-    def _set_promotion_supplier(self):
+    def _get_seller(self):
+        """Get supplier info for purchase line"""
+        self.ensure_one()
+        seller = self.env['res.partner']
         if self.product_id:
+            po = self.order_id
             seller = self.product_id._select_seller(
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
+                date=po.date_order and po.date_order[:10],
                 uom_id=self.product_uom,
             )
+        return seller
+
+    def _set_promotion_supplier(self):
+        if self.product_id:
+            seller = self._get_seller()
             self.promotion_supplier = seller.discount_purchase or 0.0
         else:
             self.promotion_supplier = 0.0
@@ -259,15 +269,7 @@ class PurchaseOrderLine(models.Model):
             date_order = line.order_id.date_order
 
             if line.product_id:
-                order_date_str = (
-                    line.order_id.date_order and line.order_id.date_order[:10]
-                )
-                seller = line.product_id._select_seller(
-                    partner_id=line.partner_id,
-                    quantity=line.product_qty,
-                    date=order_date_str,
-                    uom_id=line.product_uom,
-                )
+                seller = line._get_seller()
                 date_planned = line.get_next_scheduled_date(seller, date_order)
                 line.date_planned = date_planned
 
