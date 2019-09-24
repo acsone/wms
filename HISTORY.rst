@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2232: Take into account OPW for cache issue on related fields on inheritsed model
+
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
