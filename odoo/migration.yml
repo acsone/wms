@@ -518,3 +518,5 @@ migration:
         upgrade:
           ### local
           - specific_product
+          ### OCA/bank-payment
+          - account_payment_mode_auto_reconcile

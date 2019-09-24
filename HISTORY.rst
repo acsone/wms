@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only credits on the same journal than the invoice
+
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
