@@ -17,7 +17,7 @@ class SaleOrderLineMarginReport(models.AbstractModel):
         tools.drop_view_if_exists(self.env.cr, self._table)
         sql_view_query = """
             CREATE OR REPLACE VIEW sale_order_line_margin AS (
-                SELECT DISTINCT ON (sol.id, pph.product_id)
+                SELECT
                     so.date_order,
                     sol.*,
                     pph.cost AS unit_cost,
@@ -26,16 +26,22 @@ class SaleOrderLineMarginReport(models.AbstractModel):
                 FROM sale_order_line sol
                 LEFT JOIN sale_order so
                     ON sol.order_id = so.id
-                LEFT JOIN product_price_history pph
-                    ON sol.product_id = pph.product_id
-                        AND so.date_order::date >= pph.datetime::date,
+                LEFT JOIN LATERAL (
+                    SELECT
+                        pph.cost
+                    FROM product_price_history pph
+                    WHERE
+                        sol.product_id = pph.product_id AND
+                        so.date_order::date >= pph.datetime::date
+                    ORDER BY pph.datetime DESC
+                    LIMIT 1
+                ) pph ON true,
                 LATERAL(
                     SELECT ROUND(
                         price_unit
                         * (1 - discount2 / 100)
                         * (1 - discount3 / 100), 2))
                     AS sl(unit_net_price)
-                ORDER BY sol.id, pph.product_id, pph.datetime DESC
             )
         """
         args = (AsIs(self._table),)

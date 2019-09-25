@@ -17,7 +17,7 @@ class AccountInvoiceLineMarginReport(models.AbstractModel):
         tools.drop_view_if_exists(self.env.cr, self._table)
         sql_view_query = """
             CREATE OR REPLACE VIEW account_invoice_line_margin AS (
-                SELECT DISTINCT ON (ail.id, pph.product_id)
+                SELECT
                     ai.date,
                     ail.*,
                     pph.cost AS unit_cost,
@@ -26,16 +26,22 @@ class AccountInvoiceLineMarginReport(models.AbstractModel):
                 FROM account_invoice_line ail
                 LEFT JOIN account_invoice ai
                     ON ail.invoice_id = ai.id
-                LEFT JOIN product_price_history pph
-                    ON ail.product_id = pph.product_id
-                        AND ai.date >= pph.datetime::date,
+                LEFT JOIN LATERAL (
+                    SELECT
+                        pph.cost
+                    FROM product_price_history pph
+                    WHERE
+                        ail.product_id = pph.product_id AND
+                        ai.date >= pph.datetime::date
+                    ORDER BY pph.datetime DESC
+                    LIMIT 1
+                ) pph ON TRUE,
                 LATERAL(
                     SELECT ROUND(
                         price_unit
                         * (1 - discount2 / 100)
                         * (1 - discount3 / 100), 2))
                     AS al(unit_net_price)
-                ORDER BY ail.id, pph.product_id, pph.datetime DESC
             )
         """
         args = (AsIs(self._table),)
