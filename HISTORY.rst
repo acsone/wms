@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2232: Take into account OPW for cache issue on related fields on inheritsed model
+* ALCYN-2233: l10n_be_intrastat: propagate country_id
+
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
