@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alcyon_credit_control
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-26 10:44+0000\n"
+"PO-Revision-Date: 2019-09-26 10:11+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "Client reference :"
+msgstr "Réf client interne :"
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "Date"
+msgstr ""
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "Left to pay"
+msgstr "Montant dû"
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "Reference number"
+msgstr "Numéro de référence"
+
+#. module: alcyon_credit_control
+#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+msgid "Total"
+msgstr "Montant"
+
+#. module: alcyon_credit_control
+#: model:ir.model,name:alcyon_credit_control.model_credit_control_communication
+msgid "credit control communication"
+msgstr ""
