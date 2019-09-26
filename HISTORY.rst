@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
+* ALCYN-2164: Exclude scrap locations from the life date computation
 
 **Build**
 

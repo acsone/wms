@@ -48,7 +48,7 @@ class ProductProduct(models.Model):
     def _compute_older_lot_id(self):
         """Find the active lot with the oldest expirtation date.
 
-        The lot must be in a physical location, not reserved and still have
+        The lot must be in a physical location, not scraped not reserved and still have
         some quantity.
 
         ToDo:
@@ -69,6 +69,7 @@ class ProductProduct(models.Model):
                 WHERE quant.lot_id = lot.id AND
                       location.parent_left > {} AND
                       location.parent_right < {} AND
+                      location.scrap_location = FALSE AND
                       quant.reservation_id is null AND
                       quant.qty > 0)
         ORDER BY lot.life_date
