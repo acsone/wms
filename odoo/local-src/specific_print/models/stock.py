@@ -60,6 +60,13 @@ class StockPackOperation(models.Model):
         # which one we return
         return partners and partners[0]
 
+    def button_print_product_label(self):
+        """
+        Using a wrapper to prevent the context from being passed as argument,
+        using default arguments instead.
+        """
+        self.print_product_label()
+
     @api.multi
     def print_product_label(self, printer_id=False, quantity=1):
         for op in self:
@@ -71,6 +78,13 @@ class StockPackOperation(models.Model):
             printer_id=printer_id,
             qty=quantity,
         )
+
+    def button_print_product_product_label(self):
+        """
+        Using a wrapper to prevent the context from being passed as argument,
+        using default arguments instead.
+        """
+        self.print_product_product_label()
 
     @api.multi
     def print_product_product_label(self, printer_id=False, quantity=1):

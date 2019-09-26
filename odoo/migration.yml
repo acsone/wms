@@ -518,3 +518,4 @@ migration:
         upgrade:
           ### local
           - specific_product
+          - specific_print

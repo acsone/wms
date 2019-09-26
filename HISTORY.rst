@@ -28,6 +28,7 @@ latest (unreleased)
 
 * ALCYN-2206: Add unique constraint on product cnk_code field
 * ALCYN-2164: Exclude scrap locations from the life date computation
+* ALCYN-2223: Fix context error for printing labels
 
 **Build**
 
