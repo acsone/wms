@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-2232: Take into account OPW for cache issue on related fields on inheritsed model
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
+* ALCYN-2177: Add erp_name when exporting sale order to the ESB
 
 **Bugfixes**
 
