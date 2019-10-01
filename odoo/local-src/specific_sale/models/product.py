@@ -211,13 +211,15 @@ class ProductProduct(models.Model):
         loc_loss_qty = self.with_context(
             location=loc_loss.id
         )._product_available()
-        parking_ids = (
-            self.env['stock.location'].search([('kind', '=', 'parking')]).ids
+        exclude_location_ids = (
+            self.env['stock.location']
+            .search([('exclude_from_immediately_usable_qty', '=', True)])
+            .ids
         )
-        parking_qty = None
-        if len(parking_ids):
-            parking_qty = self.with_context(
-                location=parking_ids
+        exclude_qty = None
+        if len(exclude_location_ids):
+            exclude_qty = self.with_context(
+                location=exclude_location_ids
             )._product_available()
 
         if prio is not None and date is not None:
@@ -249,8 +251,8 @@ class ProductProduct(models.Model):
             deducted_amounts = 0.0
             deducted_amounts += loc_loss_qty[product_id]['incoming_qty']
             deducted_amounts += loc_loss_qty[product_id]['qty_available']
-            if parking_qty:
-                deducted_amounts += parking_qty[product_id]['qty_available']
+            if exclude_qty:
+                deducted_amounts += exclude_qty[product_id]['qty_available']
 
             res[product_id]['immediately_usable_qty'] += (
                 corrections.get(product_id, 0) - deducted_amounts

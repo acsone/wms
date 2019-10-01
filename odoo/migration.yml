@@ -514,8 +514,12 @@ migration:
           operations:
             pre:
                - psql -f odoo/songs/upgrade/update_10_0_1_44_0.sql
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_44_0::post
       addons:
         upgrade:
           ### local
           - specific_product
           - specific_print
+          - specific_stock

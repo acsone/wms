@@ -45,13 +45,14 @@ class TestCalcAvailableQty(SavepointCase):
         cls.location_parking = cls.stock_location_model.create(
             {
                 'name': 'Product parking',
-                'kind': 'parking',
+                'kind': 'bin',
                 'zone': 'A',
                 'corridor': 'P',
                 'shelf': 'A',
                 'height': '1',
                 'box': '1',
                 'location_id': cls.stock_location.location_id.id,
+                'exclude_from_immediately_usable_qty': True,
             }
         )
         cls.location_parking._parent_store_compute()
