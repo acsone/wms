@@ -518,3 +518,6 @@ migration:
         upgrade:
           ### local
           - specific_product
+          - sale_delay
+          - sale_confirm_background
+          - connector_esb

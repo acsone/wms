@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-2232: Take into account OPW for cache issue on related fields on inheritsed model
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
+* ALCYN-2244: Allow for the cancelation of sale order at creation and confirmation if the time to run the jobs is too long based on a value set for each customer.
 
 **Bugfixes**
 

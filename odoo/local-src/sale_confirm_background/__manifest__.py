@@ -13,6 +13,7 @@
         'queue_job',
         'web_notify',
         'sale_exception',
+        'sale_delay',
     ],
     'website': 'https://www.camptocamp.com',
     'data': [
