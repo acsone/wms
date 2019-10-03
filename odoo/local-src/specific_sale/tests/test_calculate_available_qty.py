@@ -12,18 +12,16 @@ class TestCalcAvailableQty(SavepointCase):
     at_install = False
     post_install = True
 
-    def setUp(self):
-        super(TestCalcAvailableQty, self).setUp()
-        self.location_model = self.env['stock.location']
-        self.inventory_model = self.env['stock.inventory']
-        self.inventory_line_model = self.env['stock.inventory.line']
-        self.stock_location_model = self.env['stock.location']
-
-        self.stock_location = self.location_model.browse(
-            self.ref('stock.stock_location_stock')
-        )
-        self.supplier_location = self.env.ref('stock.stock_location_suppliers')
-        self.tax = self.env["account.tax"].create(
+    @classmethod
+    def setUpClass(cls):
+        super(TestCalcAvailableQty, cls).setUpClass()
+        cls.location_model = cls.env['stock.location']
+        cls.inventory_model = cls.env['stock.inventory']
+        cls.inventory_line_model = cls.env['stock.inventory.line']
+        cls.stock_location_model = cls.env['stock.location']
+        cls.stock_location = cls.env.ref('stock.stock_location_stock')
+        # cls.supplier_location = cls.env.ref('stock.stock_location_suppliers')
+        cls.tax = cls.env["account.tax"].create(
             {
                 'name': 'Unittest tax',
                 'price_include': False,
@@ -32,19 +30,19 @@ class TestCalcAvailableQty(SavepointCase):
             }
         )
 
-        self.p1 = self.env['product.template'].create(
+        cls.p1 = cls.env['product.template'].create(
             {
                 'name': 'Unittest P1',
-                'uom_id': self.ref('product.product_uom_unit'),
+                'uom_id': cls.env.ref('product.product_uom_unit').id,
                 'type': 'product',
             }
         )
 
-        self.partner = self.env['res.partner'].create(
+        cls.partner = cls.env['res.partner'].create(
             {'name': 'Unittest partner', 'ref': '4929752'}
         )
 
-        self.location_parking = self.stock_location_model.create(
+        cls.location_parking = cls.stock_location_model.create(
             {
                 'name': 'Product parking',
                 'kind': 'parking',
@@ -53,32 +51,35 @@ class TestCalcAvailableQty(SavepointCase):
                 'shelf': 'A',
                 'height': '1',
                 'box': '1',
-                'location_id': self.stock_location.location_id.id,
+                'location_id': cls.stock_location.location_id.id,
             }
         )
-        self.customer_location = self.env.ref('stock.stock_location_customers')
-        self.loss_loc = self.env.ref('stock_lot_loss.stock_location_14019')
-        self.loss_loc.location_id = self.stock_location.location_id
-        self._define_product_qty(self.stock_location, self.p1, 10.0)
+        cls.location_parking._parent_store_compute()
+        cls.customer_location = cls.env.ref('stock.stock_location_customers')
+        cls.loss_loc = cls.env.ref('stock_lot_loss.stock_location_14019')
+        cls.loss_loc.location_id = cls.stock_location.location_id
+        cls.loss_loc._parent_store_compute()
+        cls._define_product_qty(cls.stock_location, cls.p1, 10.0)
 
-    def _define_product_qty(self, location, product, quantity):
-        self.inventory = self.inventory_model.create(
+    @classmethod
+    def _define_product_qty(cls, location, product, quantity):
+        inventory = cls.inventory_model.create(
             {
                 'name': 'Unittest Inventory',
-                'location_id': self.stock_location.id,
+                'location_id': location.id,
                 'filter': 'partial',
             }
         )
-        self.inventory.prepare_inventory()
-        self.inventory_line_model.create(
+        inventory.prepare_inventory()
+        cls.inventory_line_model.create(
             {
-                'inventory_id': self.inventory.id,
+                'inventory_id': inventory.id,
                 'product_id': product.product_variant_ids.id,
                 'location_id': location.id,
                 'product_qty': quantity,
             }
         )
-        self.inventory.action_done()
+        inventory.action_done()
 
     def _create_move(
         self,
@@ -123,8 +124,10 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1 = self.p1.with_context(
             prio=1, date=fields.Datetime.to_string(datetime.now())
         )
-        self._define_product_qty(self.location_parking, self.p1, 10.0)
+        self.assertEqual(self.p1.immediately_usable_qty, 10.0)
+        self._define_product_qty(self.location_parking, self.p1, 30.0)
         self.p1.refresh()
+        self.assertEqual(self.p1.virtual_available, 40.0)
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
     def test_same_prio(self):
