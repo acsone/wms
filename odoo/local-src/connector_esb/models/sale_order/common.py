@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import logging
+from datetime import datetime
 
 from psycopg2 import IntegrityError
 
@@ -48,11 +49,11 @@ class SaleOrder(models.Model):
         return super(SaleOrder, self_ctx).write(vals)
 
     @job(default_channel='root.background.esb')  # priority=25
-    def ws_create_new(self, data):
+    def ws_create_new(self, data, creation_date=datetime.now()):
         """Create a sale order with data coming from webservices."""
         try:
             return self.with_context(no_connector_export=True)._ws_create_new(
-                data
+                data, creation_date
             )
         except IntegrityError as error:
             self.env.cr.rollback()
@@ -61,7 +62,7 @@ class SaleOrder(models.Model):
             )
             raise
 
-    def _ws_create_new(self, data):
+    def _ws_create_new(self, data, creation_date=datetime.now()):
         order_data = self._ws_create_order_data(data)
         order_data = self.env['sale.order'].play_onchanges(
             order_data,
@@ -105,8 +106,16 @@ class SaleOrder(models.Model):
         # Otherwise the method detect_exceptions will return True
         if is_sale_in_exception:
             order.ignore_exception = True
-
-        order.action_confirm_background()
+        if order.is_delayed(creation_date):
+            order.action_cancel()
+            order.message_post(
+                body=_(
+                    "Was automatically cancelled on creation because the"
+                    "job took longer to execute than the customer allows."
+                )
+            )
+        else:
+            order.action_confirm_background()
         return order
 
     def _ws_get_partner(self, ref):

@@ -28,6 +28,15 @@ class Sale(models.Model):
         self.ensure_one()
         if self.state != 'confirm_background':
             return
+        if self.is_delayed(fields.Datetime.from_string(self.create_date)):
+            self.action_cancel()
+            self.message_post(
+                body=_(
+                    "Was automatically cancelled on confirmation because"
+                    "the job took longer to execute than the customer allows."
+                )
+            )
+            return
         self.action_confirm()
         if notify:
             action = self.env.ref('sale.action_orders').read()[0]

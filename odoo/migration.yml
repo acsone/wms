@@ -524,5 +524,8 @@ migration:
           - product_last_transaction
           - specific_stock
           - stock_valuation
+          - sale_delay
+          - sale_confirm_background
+          - connector_esb
           ### OCA/bank-payment
           - account_payment_mode_auto_reconcile

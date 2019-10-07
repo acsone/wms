@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from copy import deepcopy
+from datetime import datetime
 
 from freezegun import freeze_time
 from mock import MagicMock, patch
@@ -370,3 +371,14 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             '2019-02-25 12:00:00',
             "another date without time should use 12:00:00",
         )
+
+    @freeze_time("2019-10-01 11:00:00")
+    def test_create_saleorder_delayed(self):
+        """"Check a sale order processed to slow is cancelled."""
+        job_creation_date = datetime.strptime(
+            "2019-10-01 09:59:00", "%Y-%m-%d %H:%M:%S"
+        )
+        self.partner.max_delay_for_sale_order_creation = 1
+        data = deepcopy(self.order_data)
+        order = self.env['sale.order']._ws_create_new(data, job_creation_date)
+        self.assertEqual(order.state, 'cancel')

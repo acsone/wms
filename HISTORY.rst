@@ -26,6 +26,7 @@ latest (unreleased)
 * ALCYN-2167: Change the stock.location name computation, so a location as the same name if it is of usage 'view' or as the act_as_view flag set.
 * ALCYN-2241: Improve margin SQL views performance
 * ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only credits on the same journal than the invoice
+* ALCYN-2244: Allow for the cancelation of sale order at creation and confirmation if the time to run the jobs is too long based on a value set for each customer.
 
 **Bugfixes**
 

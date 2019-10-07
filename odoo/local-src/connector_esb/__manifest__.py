@@ -21,6 +21,7 @@
         'product_price_category',
         'purchase',
         'sale',
+        'sale_delay',
         'sale_stock',
         'specific_base',
         'specific_partner',
