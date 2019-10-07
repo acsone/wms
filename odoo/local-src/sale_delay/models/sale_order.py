@@ -18,5 +18,5 @@ class SaleOrder(models.Model):
         if not max_delay:
             return False
         max_delay_in_seconds = max_delay * 60 * 60
-        time_elpased = datetime.now() - from_time
-        return time_elpased.total_seconds() > max_delay_in_seconds
+        time_elapsed = datetime.now() - from_time
+        return time_elapsed.total_seconds() > max_delay_in_seconds
