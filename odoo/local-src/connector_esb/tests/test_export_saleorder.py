@@ -139,6 +139,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         so = self.so1
         expected = {
             'erp_id': so.id,
+            'erp_name': so.name,
             'customer_id': so.partner_id.ref,
             'date': so.date_order.split(' ')[0],
             'channel': '03',  # the code for fax
@@ -180,6 +181,7 @@ class ExportSaleOrderTestCase(SavepointCase):
         so = self.so2
         expected = {
             'erp_id': so.id,
+            'erp_name': so.name,
             'customer_id': so.partner_id.ref,
             'date': so.date_order.split(' ')[0],
             'channel': '01',  # Default is phone

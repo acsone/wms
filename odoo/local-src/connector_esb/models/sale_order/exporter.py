@@ -7,7 +7,7 @@ import logging
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 
-from ...components.mapper import falsy2zero
+from ...components.mapper import falsy2emptystring, falsy2zero
 
 _logger = logging.getLogger(__name__)
 
@@ -19,6 +19,7 @@ class SaleExportMapper(Component):
 
     direct = [
         ('id', 'erp_id'),
+        (falsy2emptystring('name'), 'erp_name'),
         (falsy2zero('amount_total'), 'order_amount'),
         (falsy2zero('delivery_price'), 'shipping_amount'),
     ]

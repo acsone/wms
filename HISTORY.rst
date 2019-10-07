@@ -27,6 +27,7 @@ latest (unreleased)
 * ALCYN-2241: Improve margin SQL views performance
 * ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only credits on the same journal than the invoice
 * ALCYN-2244: Allow for the cancelation of sale order at creation and confirmation if the time to run the jobs is too long based on a value set for each customer.
+* ALCYN-2177: Add erp_name when exporting sale order to the ESB
 
 **Bugfixes**
 
