@@ -50,3 +50,29 @@ class StockLocation(models.Model):
                     location.height,
                     location.box,
                 )
+
+    @api.multi
+    def name_get(self):
+        """ Redefined from standard Odoo !
+
+        By default when a location as the usage field set as 'view' its name
+        is not computed with its parents location.
+        Here we want the same to happen when a location as the flag
+        'act_as_view' set.
+
+        """
+        ret_list = []
+        for location in self:
+            orig_location = location
+            name = location.name
+            # Chanded from default implementation
+            # while location.location_id and location.usage != 'view':
+            while (
+                location.location_id
+                and location.usage != 'view'
+                and not location.act_as_view
+            ):
+                location = location.location_id
+                name = location.name + "/" + name
+            ret_list.append((orig_location.id, name))
+        return ret_list
