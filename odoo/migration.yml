@@ -198,6 +198,7 @@ migration:
           - account_invoice_sent
           - account_move_productcateg
           - account_payment_order_background
+          - alcyon_credit_control
           - cash_on_delivery
           - code_abc
           - connector_esb
@@ -521,6 +522,7 @@ migration:
       addons:
         upgrade:
           ### local
+          - alcyon_credit_control
           - specific_product
           - specific_print
           - specific_report

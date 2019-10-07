@@ -35,6 +35,7 @@ latest (unreleased)
       from restarting correctly in case of concurency errors.
     * move logic to the procurement instead of trying to be universal with api.constrains
       it might requires more code, but will be more readable
+* ALCYN-2139: Add a specific module to customize the credit control report
 
 **Bugfixes**
 
