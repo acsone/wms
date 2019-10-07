@@ -520,3 +520,5 @@ migration:
           - specific_product
           - specific_print
           - specific_report
+          ### OCA/bank-payment
+          - account_payment_mode_auto_reconcile

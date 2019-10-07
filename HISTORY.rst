@@ -25,6 +25,7 @@ latest (unreleased)
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
 * ALCYN-2167: Change the stock.location name computation, so a location as the same name if it is of usage 'view' or as the act_as_view flag set.
 * ALCYN-2241: Improve margin SQL views performance
+* ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only credits on the same journal than the invoice
 
 **Bugfixes**
 
