@@ -245,7 +245,7 @@ class Assignment(DomainInterface):
         picking = self.request.env['stock.picking'].browse(int(picking_id))
         if not len(picking):
             return
-
+        picking._lock_rows()
         try:
             picking_zetes_state = params.assignmentStatus
 
