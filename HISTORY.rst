@@ -29,6 +29,12 @@ latest (unreleased)
 * ALCYN-2244: Allow for the cancelation of sale order at creation and confirmation if the time to run the jobs is too long based on a value set for each customer.
 * ALCYN-2177: Add erp_name when exporting sale order to the ESB
 * ALCYN:2246: Add a flag on stock location to mark the ones whose product quantity should not be used in the immediately available quantity computation
+* ALCYN-2091 refactor purchase discount computations
+    * onchange on purchase order line quantity was calling price_unit computation (`_compute_price_unit`)
+      numerous times through the triggers `api.constraint` which is preventing jobs
+      from restarting correctly in case of concurency errors.
+    * move logic to the procurement instead of trying to be universal with api.constrains
+      it might requires more code, but will be more readable
 
 **Bugfixes**
 

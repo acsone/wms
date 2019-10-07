@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # © 2017 Okia SPRL
+# Copyright 2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 from datetime import date, timedelta
 
 import odoo.addons.decimal_precision as dp
 from odoo import api, fields, models
-from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -120,28 +120,6 @@ class PurchaseOrder(models.Model):
             else:
                 order.last_date_done = False
 
-    @api.model
-    def delay_update_for_open_po(self):
-        """ Delay jobs to update values on all open purchase orders """
-
-        open_pos = self.search([('state', '=', 'draft')])
-        for open_po in open_pos:
-            open_po.with_delay(
-                description='Update values for %s' % open_po.name, priority=15
-            ).job_update_open_po()
-
-    @api.multi
-    @job(default_channel='root.background.update_po')  # priority=15
-    def job_update_open_po(self):
-        """
-        For each lines, we call the method onchange_product_id to update
-        promotion, global promotion and scheduled date
-        """
-        _logger.info(
-            'Update values for %s' % ', '.join([x.name for x in self])
-        )
-        self.mapped('order_line').recompute_discount_values()
-
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
@@ -198,96 +176,78 @@ class PurchaseOrderLine(models.Model):
         To keep a good compatibility we set the price_unit_base if the user
         change the price_unit we need to recompute the price_unit_base.
 
-        To avoid infinite loop we need to not write the price_unit_base
-        when we recompute the price_unit.
+        The view will always give both fields.
+
+        :param vals:
+        :return:
         """
-
-        context = self.env.context or {}
-
-        # When the write provides from a form view,
-        # we don't want to recompute the price unit base.
-        #
-        # Because in this case,
-        # the price unit base has already computed by onchange.
-        #
-        # Without that, if you change only a promotion by example on the view,
-        # the price unit changed but not the price unit base.
-        # And so, the price unit base if recomputed here (What we don't want).
-        write_from_view = (
-            context.get('params')
-            and isinstance(context['params'], dict)
-            and context['params'].get('view_type')
-            and context['params']['view_type'] == u'form'
-        )
-
-        condition = (
-            'price_unit' in vals
-            and 'price_unit_base' not in vals
-            and not write_from_view
-            and not self.env.context.get('stop_constrains')
-        )
-        if condition:
+        discount_incl = self.env.context.get('discount_incl')
+        if 'price_unit' in vals and not discount_incl:
             vals['price_unit_base'] = vals['price_unit']
 
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.constrains('price_unit_base', 'discount_global', 'promotion_supplier')
     @api.onchange('price_unit_base', 'discount_global', 'promotion_supplier')
-    def _compute_price_unit(self):
+    def _onchange_price_unit(self):
+        """
+        This method defines when price unit must be recomputed from the view
+        """
+        self._set_price_unit()
+
+    @api.model
+    def _compute_discount(self, base_price, discount1, discount2):
+        return base_price * (1 - (discount1 / 100)) * (1 - (discount2 / 100))
+
+    def _set_price_unit(self):
         """
         This method will compute the price unit according
         the price_unit_base with discounts.
 
-        I use the api constrains and the onchange to ensure that
-        the price unit will be compute in any case.
-        The API onchange will be use in the form view to directly compute
-        the the unit_price and display the right price on the view.
-        The API constrains will be use if a method change a discount
-        or the price_unit (see above the method write).
+        This method must be called to upon changes on
+        price_unit_base, discount_global or promotion_supplier
+
         """
         for line in self:
-            price_unit = (
-                line.price_unit_base
-                * (1 - (line.discount_global / 100))
-                * (1 - (line.promotion_supplier / 100))
+            price_unit = self._compute_discount(
+                line.price_unit_base,
+                line.discount_global,
+                line.promotion_supplier,
             )
-
-            # The method with_context will create a new environment.
-            # When an onchange method change a value on a draft record
-            # this value will set on the environment (=> cache).
-            # If we use the method with_context on a draft record, it will
-            # set the value on a new environment. It means that the value will
-            # never set on the current environment.
-            # Thus if we want to send a specific context for the method write
-            # if check the if the record is in draft mode or if the record
-            # doesn't have an ID.
-            if not self.env.in_draft and line.id:
-                # The record exist and we call the method write
-                line.with_context(stop_constrains=True).price_unit = price_unit
-            else:
-                # The record doesn't yet exit and the value will set in cache
-                line.price_unit = price_unit
+            # set context only out of onchange context
+            # as it would loose cached values otherwise
+            if line.id:
+                line = line.with_context(discount_incl=True)
+            line.price_unit = price_unit
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
         result = super(PurchaseOrderLine, self)._onchange_quantity()
         self.price_unit_base = self.price_unit
-        self.compute_promotion_supplier()
-        self._compute_price_unit()
+        self._set_promotion_supplier()
+        self._set_price_unit()
 
         return result
 
-    def compute_promotion_supplier(self):
+    def _get_seller(self):
+        """Get supplier info for purchase line"""
+        self.ensure_one()
+        seller = self.env['res.partner']
         if self.product_id:
+            po = self.order_id
             seller = self.product_id._select_seller(
                 partner_id=self.partner_id,
                 quantity=self.product_qty,
+                date=po.date_order and po.date_order[:10],
                 uom_id=self.product_uom,
             )
+        return seller
+
+    def _set_promotion_supplier(self):
+        if self.product_id:
+            seller = self._get_seller()
             self.promotion_supplier = seller.discount_purchase or 0.0
         else:
             self.promotion_supplier = 0.0
-        self._compute_price_unit()
 
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -305,18 +265,11 @@ class PurchaseOrderLine(models.Model):
         scheduled date and update promotions.
         """
         for line in self:
+            line._set_promotion_supplier()
             date_order = line.order_id.date_order
 
             if line.product_id:
-                order_date_str = (
-                    line.order_id.date_order and line.order_id.date_order[:10]
-                )
-                seller = line.product_id._select_seller(
-                    partner_id=line.partner_id,
-                    quantity=line.product_qty,
-                    date=order_date_str,
-                    uom_id=line.product_uom,
-                )
+                seller = line._get_seller()
                 date_planned = line.get_next_scheduled_date(seller, date_order)
                 line.date_planned = date_planned
 
@@ -324,8 +277,7 @@ class PurchaseOrderLine(models.Model):
                 line.discount_global = (
                     line.order_id.partner_id.supplier_discount
                 )
-
-            line.compute_promotion_supplier()
+            line._set_price_unit()
 
     @api.multi
     def get_next_scheduled_date(self, seller, date_order_str=None):

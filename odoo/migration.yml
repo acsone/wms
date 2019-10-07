@@ -526,6 +526,7 @@ migration:
           - specific_report
           - product_last_transaction
           - specific_stock
+          - specific_purchase
           - stock_valuation
           - sale_delay
           - sale_confirm_background

@@ -138,18 +138,45 @@ class TestPurchaseOrder(SavepointCase):
 
         # Change the price_unit of my line
         line.price_unit = 10
+        line._onchange_price_unit()
         self.assertEqual(po.amount_total, 250)
         self.assertEqual(line.price_unit, 10)
         self.assertEqual(line.price_unit_base, 10)
 
         # Add a discount of 50% on the last line
         line.discount_global = 50
+        line._onchange_price_unit()
         self.assertEqual(po.amount_total, 200)
 
         # Add a pricelist discount of 10%
         # (this discount will be add to the discount of 50%)
         line.promotion_supplier = 10
+        line._onchange_price_unit()
         self.assertEqual(po.amount_total, 195)
+
+    def test_unit_price_onchange(self):
+        """ Test unit price discount with cache object """
+        line = self.env['purchase.order.line'].new(
+            {'product_qty': 10, 'price_unit_base': 15}
+        )
+        # Change the base_price_unit of my line
+        # (price_unit is not visible on view)
+        line.price_unit_base = 10
+        line._onchange_price_unit()
+        self.assertEqual(line.price_total, 100)
+        self.assertEqual(line.price_unit, 10)
+        self.assertEqual(line.price_unit_base, 10)
+
+        # Add a discount of 50% on the last line
+        line.discount_global = 50
+        line._onchange_price_unit()
+        self.assertEqual(line.price_total, 50)
+
+        # Add a pricelist discount of 10%
+        # (this discount will be add to the discount of 50%)
+        line.promotion_supplier = 10
+        line._onchange_price_unit()
+        self.assertEqual(line.price_total, 45)
 
     def test_promotion_supplier(self):
 
@@ -187,7 +214,61 @@ class TestPurchaseOrder(SavepointCase):
         self.assertEqual(purchase.amount_untaxed, 100)
 
         self.product.write({'seller_ids': [(6, 0, supplierinfo.ids)]})
-        line.compute_promotion_supplier()
+        line._set_promotion_supplier()
+        line._onchange_price_unit()
+
+        self.assertEqual(line.promotion_supplier, 10)
+        self.assertEqual(line.price_unit_base, 100)
+        self.assertEqual(line.price_unit, 90)
+        self.assertEqual(purchase.amount_untaxed, 90)
+
+    def _create_procurement(self, **values):
+        Procurement = self.env['procurement.order']
+        procurement = Procurement.new(values)
+        procurement.onchange_product_id()
+        return Procurement.create(
+            procurement._convert_to_write(procurement._cache)
+        )
+
+    def test_procurement_make_po(self):
+        """Test a purchase created from procurement gets promotions
+        computed"""
+
+        warehouse = self.env.ref('stock.warehouse0')
+
+        procurement = self._create_procurement(
+            partner_id=self.supplier.id,
+            rule_id=warehouse.buy_pull_id.id,
+            product_id=self.product.id,
+            name='Procurement Make PO',
+            product_qty=1.0,
+        )
+
+        # price with taxes
+        price = 100
+        supplierinfo = self.env['product.supplierinfo'].create(
+            {
+                'name': self.supplier.id,
+                'discount_purchase': 10,
+                'price': price,
+                'currency_id': self.env.ref('base.EUR').id,
+            }
+        )
+        self.product.write(
+            {
+                'seller_ids': [(6, 0, supplierinfo.ids)],
+                # deflect side effect of other modules adding
+                # taxes by unlinking all taxes
+                'supplier_taxes_id': [(5, False, False)],
+            }
+        )
+
+        procurement.make_po()
+        purchase = procurement.purchase_id
+
+        line = purchase.order_line.filtered(
+            lambda rec: rec.product_id == self.product
+        )
 
         self.assertEqual(line.promotion_supplier, 10)
         self.assertEqual(line.price_unit_base, 100)

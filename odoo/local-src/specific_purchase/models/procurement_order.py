@@ -108,34 +108,11 @@ class ProcurementOrder(models.Model):
                         'product_uom': product.uom_id.id,
                     }
                 )
-
         _logger.info('Run the procurement')
         result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor, company_id=company_id
         )
         _logger.info('Procurement finished')
-
-        # By default we recompute promotions
-        if self._context.get('is_not_recompute_promos'):
-            return result
-
-        # Procurement is running in a new cursor. If we want to access
-        # to purchase orders created by the procurement we need to
-        # open a new cursor
-        with api.Environment.manage():
-            context = self._context.copy()
-            new_cr = self.pool.cursor()
-            self = self.with_env(self.env(cr=new_cr, context=context))
-
-            try:
-                # Delay jobs to update values on open purchase orders
-                self.env['purchase.order'].delay_update_for_open_po()
-                new_cr.commit()
-            except Exception as e:
-                _logger.error(e)
-                new_cr.rollback()
-            finally:
-                new_cr.close()
 
         return result
 
@@ -150,5 +127,35 @@ class ProcurementOrder(models.Model):
 
         pos = procurements.mapped('purchase_id')
         pos.write({'date_order': fields.Datetime.now()})
+        pos.mapped('order_line').recompute_discount_values()
 
         return result
+
+    def _get_pol_promotion_supplier(self, po, supplier):
+        seller = self.product_id._select_seller(
+            partner_id=supplier.name,  # name is a res.partner on supplier.info
+            quantity=self.product_qty,
+            date=po.date_order and po.date_order[:10],
+            uom_id=self.product_id.uom_po_id,
+        )
+        return seller.discount_purchase or 0.0
+
+    def _prepare_purchase_order_line(self, po, supplier):
+        values = super(ProcurementOrder, self)._prepare_purchase_order_line(
+            po, supplier
+        )
+        price_unit_base = values['price_unit']
+        discount_global = po.partner_id.supplier_discount
+        promotion_supplier = self._get_pol_promotion_supplier(po, supplier)
+        price_unit = self.env['purchase.order.line']._compute_discount(
+            values['price_unit'], discount_global, promotion_supplier
+        )
+        values.update(
+            {
+                'price_unit_base': price_unit_base,
+                'price_unit': price_unit,
+                'discount_global': discount_global,
+                'promotion_supplier': promotion_supplier,
+            }
+        )
+        return values
