@@ -26,6 +26,10 @@
                 </group>
             </xpath>
 
+            <xpath expr="//field[@name='putaway_strategy_id']" position="after">
+              <field name="exclude_from_immediately_usable_qty"/>
+            </xpath>
+
         </field>
     </record>
 
