@@ -21,14 +21,32 @@ latest (unreleased)
 
 **Features and Improvements**
 
-* ALCYN-2232: Take into account OPW for cache issue on related fields on inheritsed model
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.44.0 (2019-10-07)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
+* ALCYN-2232: Take into account OPW for cache issue on related fields on
+  inherited models
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
-* ALCYN-2167: Change the stock.location name computation, so a location as the same name if it is of usage 'view' or as the act_as_view flag set.
+* ALCYN-2239: Change the stock location name computation, a location keeps the
+  same name if it is of usage 'view' or has the "act as view" flag set.
 * ALCYN-2241: Improve margin SQL views performance
-* ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only credits on the same journal than the invoice
-* ALCYN-2244: Allow for the cancelation of sale order at creation and confirmation if the time to run the jobs is too long based on a value set for each customer.
+* ALCYN-2217: Improve auto reconcile module, adding an option to reconcile only
+  credits on the same journal than the invoice
+* ALCYN-2244: Allow for the cancellation of sale order at creation and
+  confirmation if the time to run the jobs is too long based on a value set for
+  each customer.
 * ALCYN-2177: Add erp_name when exporting sale order to the ESB
-* ALCYN:2246: Add a flag on stock location to mark the ones whose product quantity should not be used in the immediately available quantity computation
+* ALCYN:2246: Add a flag on stock location to mark the ones whose product
+  quantity should not be used in the immediately available quantity computation
 * ALCYN-2091 refactor purchase discount computations
     * onchange on purchase order line quantity was calling price_unit computation (`_compute_price_unit`)
       numerous times through the triggers `api.constraint` which is preventing jobs
@@ -36,18 +54,15 @@ latest (unreleased)
     * move logic to the procurement instead of trying to be universal with api.constrains
       it might requires more code, but will be more readable
 * ALCYN-2139: Add a specific module to customize the credit control report
+* ALCYN-2206: Add unique constraint on product cnk_code field
+* ALCYN-2129: Add last selling and purchasing date on Inventory valuation
+* ALCYN-2178: Make sure lots are not archived when receiving products
 
 **Bugfixes**
 
-* ALCYN-2206: Add unique constraint on product cnk_code field
 * ALCYN-2164: Exclude scrap locations from the life date computation
 * ALCYN-2223: Fix context error for printing labels
 * ALCYN-2141: lock picking on printing and validation commands received from Zetes
-* ALCYN-2129: Add last selling and purchasing date on Inventory valuation
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.43.1 (2019-09-18)
