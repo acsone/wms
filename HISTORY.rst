@@ -25,6 +25,8 @@ latest (unreleased)
 * ALCYN-2224: make blocking documents visible in archive wizard
 ** ALCYN-2259: Add new product.category and add exception.rule for it
 
+* ALCYN-2204: Recompute taxes on invoice when invoice line are deleted
+
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product
