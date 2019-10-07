@@ -14,6 +14,12 @@ class StockQuant(models.Model):
         readonly=True,
         related='product_id.supplier_id',
     )
+    product_last_in_date = fields.Datetime(
+        'Last Purchasing Date', related='product_id.product_last_in_date'
+    )
+    product_last_out_date = fields.Datetime(
+        'Last Selling Date', related='product_id.product_last_out_date'
+    )
 
     def _quants_removal_get_order(self, removal_strategy):
         """ Fixing issue https://github.com/odoo/odoo/issues/31186 """

@@ -33,6 +33,7 @@ latest (unreleased)
 * ALCYN-2164: Exclude scrap locations from the life date computation
 * ALCYN-2223: Fix context error for printing labels
 * ALCYN-2141: lock picking on printing and validation commands received from Zetes
+* ALCYN-2129: Add last selling and purchasing date on Inventory valuation
 
 **Build**
 
