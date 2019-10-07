@@ -519,3 +519,4 @@ migration:
           ### local
           - specific_product
           - specific_print
+          - specific_report
