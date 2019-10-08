@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2217: Fix the consolidated branch that did not pull the last changes
+
 **Build**
 
 **Documentation**
