@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2224: make blocking documents visible in archive wizard
+
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product

@@ -538,3 +538,8 @@ migration:
           - connector_esb
           ### OCA/bank-payment
           - account_payment_mode_auto_reconcile
+    - version: 10.0.1.45.0
+      addons:
+        upgrade:
+          ### local
+          - partner_archive_new_partner

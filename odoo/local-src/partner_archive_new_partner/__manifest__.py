@@ -13,7 +13,9 @@
     "application": False,
     "installable": True,
     "depends": [
-        "base",
+        "sale",
+        "stock",
+        "account",
     ],
     "data": [
         "wizards/partner_archive_views.xml",
