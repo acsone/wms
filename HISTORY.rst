@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2260: Improvement of purchase invoice encoding
+
 **Bugfixes**
 
 **Build**

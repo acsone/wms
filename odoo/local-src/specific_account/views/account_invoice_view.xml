@@ -11,8 +11,11 @@
                 <field name="invoice_state" invisible="1"/>
                 <field name="company_id" invisible="1"/>
 
-		<field name="sequence" widget="handle" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
+                <field name="sequence" widget="handle" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
 
+                <field name="purchase_id"/>
+                <field name="purchase_line_qty_received"/>
+                <field name="purchase_line_product_qty"/>
                 <field name="product_id" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
                 <field name="name" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
                 <field name="account_id" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}" groups="account.group_account_user"/>
@@ -41,8 +44,9 @@
             <search>
               <field name="name"/>
               <field name="product_id"/>
-                <field name="account_id" groups="account.group_account_user"/>
-                <field name="account_analytic_id"/>
+              <field name="account_id" groups="account.group_account_user"/>
+              <field name="account_analytic_id"/>
+              <field name="purchase_id"/>
             </search>
         </field>
     </record>

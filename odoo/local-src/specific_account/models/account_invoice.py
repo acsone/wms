@@ -38,8 +38,25 @@ class AccountInvoice(models.Model):
     def _onchange_intrastat_country(self):
         self.intrastat_country_id = self.partner_id.country_id
 
+    def _prepare_invoice_line_from_po_line(self, line):
+        """Overloaded to snapshot the qty received and the ordered qty from
+        the purchase order line when the invoice line is created.
+        """
+        data = super(AccountInvoice, self)._prepare_invoice_line_from_po_line(
+            line
+        )
+        data['purchase_line_qty_received'] = line.qty_received
+        data['purchase_line_product_qty'] = line.product_qty
+        return data
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     invoice_state = fields.Selection(related='invoice_id.state', readonly=True)
+    purchase_line_qty_received = fields.Float(
+        string="Received Qty", readonly=True
+    )
+    purchase_line_product_qty = fields.Float(
+        string="Ordered Qty", readonly=True
+    )

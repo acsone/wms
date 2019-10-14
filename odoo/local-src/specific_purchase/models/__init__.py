@@ -9,3 +9,4 @@ from . import purchase_config_settings
 from . import product_supplierinfo
 from . import procurement_order
 from . import stock_move
+from . import account_invoice
