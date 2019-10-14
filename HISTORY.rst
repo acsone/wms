@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+** ALCYN-2259: Add new product.category and add exception.rule for it
+
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product

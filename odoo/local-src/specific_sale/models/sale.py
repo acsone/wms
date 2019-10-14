@@ -510,6 +510,13 @@ class SaleOrderLine(models.Model):
             return False
         return self.order_id.sale_channel == 'phone'
 
+    def validate_no_stupefiant_vet_by_phone(self):
+        """No psychotropic ordered on the phone."""
+        vet_cat = self.env.ref('specific_data.product_categ_stupefiant_vet')
+        if not self.product_id.categ_id.has_for_parent(vet_cat.id):
+            return False
+        return self.order_id.sale_channel == 'phone'
+
     # Warnings
     def warning_psychotropic(self):
         """Add warning for psychotropic product on sale order line."""

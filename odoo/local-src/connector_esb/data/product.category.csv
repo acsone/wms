@@ -3,6 +3,7 @@ specific_data.product_categ_materiel,MAT
 specific_data.product_categ_ali,ALI
 specific_data.product_categ_medoc,MED
 specific_data.product_categ_vet_belges,
+specific_data.product_categ_stupefiant_vet,80
 specific_data.product_categ_importation,75
 specific_data.product_categ_humain,15
 specific_data.product_categ_parapharmacie,

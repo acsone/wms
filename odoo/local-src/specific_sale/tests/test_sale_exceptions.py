@@ -89,6 +89,14 @@ class TestSaleOrderException(SavepointCase):
                 ).id,
             }
         )
+        cls.prod_stupefiant_vet = cls.env['product.product'].create(
+            {
+                'name': 'I am a Stupéfiant VET',
+                'categ_id': cls.env.ref(
+                    'specific_data.product_categ_stupefiant_vet'
+                ).id,
+            }
+        )
         cls.prod_medoc = cls.env['product.product'].create(
             {
                 'name': 'Base medicine category',
@@ -442,12 +450,13 @@ class TestSaleOrderException(SavepointCase):
         line.product_id = self.prod_psycho_III
         self.assertTrue(exception.warning_text in line.warning_text)
 
-    def test_psychotropic_by_phone(self):
+    def test_exceptions_by_phone(self):
         """Check psychotropic are not oredered on the phone."""
         rules = self.env['exception.rule'].search([('active', '=', 0)])
         rules.write({'active': 1})
         warning = self.env.ref('specific_sale.warning_psychotropic')
-        exception = self.env.ref('specific_sale.no_psychotropic_by_phone')
+        psycotropic = self.env.ref('specific_sale.no_psychotropic_by_phone')
+        vet = self.env.ref('specific_sale.no_stupefiant_vet_by_phone')
         self.partner.alcyon_category_id = self.env.ref(
             'specific_partner.partner_category_pharmacy'
         )
@@ -461,7 +470,11 @@ class TestSaleOrderException(SavepointCase):
         # Switch product to trigger exception checking
         line.product_id = self.prod_food
         line.product_id = self.prod_psycho_III
-        self.assertEqual(line.exception, exception.description)
+        self.assertEqual(line.exception, psycotropic.description)
+        line.product_id = self.prod_food
+        self.assertFalse(line.exception)
+        line.product_id = self.prod_stupefiant_vet
+        self.assertEqual(line.exception, vet.description)
 
     def test_no_backorder_rule(self):
         """Check the no backorder rule.
