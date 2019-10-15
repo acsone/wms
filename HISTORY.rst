@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2256: Show debit lines on credit control report
+
 **Bugfixes**
 
 * ALCYN-2217: Fix the consolidated branch that did not pull the last changes
