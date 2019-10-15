@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2263: Fix CNK unicity error when duplicating a product
+
 **Build**
 
 **Documentation**

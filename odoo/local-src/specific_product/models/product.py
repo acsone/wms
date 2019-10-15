@@ -25,7 +25,7 @@ class ProductTemplate(models.Model):
         string='Sale Price 2',
     )
 
-    cnk_code = fields.Char(string='CNK')
+    cnk_code = fields.Char(string='CNK', copy=False)
 
     indicated_price = fields.Float(string='Indicated price')
 
