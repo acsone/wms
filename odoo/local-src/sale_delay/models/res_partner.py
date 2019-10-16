@@ -10,7 +10,7 @@ class ResPartner(models.Model):
 
     max_delay_for_sale_order_creation = fields.Float(
         string='Max delay on sale order operation',
-        digits=(3, 1),
+        digits=(3, 4),
         help='Used to compute if the processing of a sale order in'
         'the background takes too long. (0.5 is 30 minutes)',
     )
