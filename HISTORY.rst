@@ -21,18 +21,6 @@ latest (unreleased)
 
 **Features and Improvements**
 
-**Bugfixes**
-
-**Build**
-
-**Documentation**
-
-
-10.0.1.44.0 (2019-10-07)
-++++++++++++++++++++++++
-
-**Features and Improvements**
-
 * ALCYN-2232: Take into account OPW for cache issue on related fields on
   inherited models
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
@@ -63,6 +51,16 @@ latest (unreleased)
 * ALCYN-2164: Exclude scrap locations from the life date computation
 * ALCYN-2223: Fix context error for printing labels
 * ALCYN-2141: lock picking on printing and validation commands received from Zetes
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.44.0 (2019-10-07) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Moved to 10.0.1.44.1
 
 
 10.0.1.43.1 (2019-09-18)
