@@ -19,19 +19,11 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
-**Features and Improvements**
-
-**Bugfixes**
+**Fixes for 10.0.1.44.0**
 
 * ALCYN-2217: Fix the consolidated branch that did not pull the last changes
-
-**Build**
-
-**Documentation**
-
-
-10.0.1.44.0 (2019-10-07)
-++++++++++++++++++++++++
+* ALCYN-2264: Fix default creation date for sale order in connector_esb
+* ALCYN-2264: Fix decimal precision on partner Max delay on sale order operation
 
 **Features and Improvements**
 
