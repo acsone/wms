@@ -21,6 +21,20 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+* ALCYN-2217: Fix the consolidated branch that did not pull the last changes
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.44.0 (2019-10-07)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2232: Take into account OPW for cache issue on related fields on
   inherited models
 * ALCYN-2233: l10n_be_intrastat: propagate country_id
