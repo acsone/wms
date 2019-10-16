@@ -21,6 +21,7 @@ latest (unreleased)
 
 **Fixes for 10.0.1.44.0**
 
+* ALCYN-2256: Show debit lines on credit control report
 * ALCYN-2217: Fix the consolidated branch that did not pull the last changes
 * ALCYN-2264: Fix default creation date for sale order in connector_esb
 * ALCYN-2264: Fix decimal precision on partner Max delay on sale order operation
