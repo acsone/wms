@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2264: Fix default creation date for sale order in connector_esb
+* ALCYN-2264: Fix decimal precision on partner Max delay on sale order operation
+
 **Build**
 
 **Documentation**
