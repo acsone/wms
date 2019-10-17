@@ -34,14 +34,34 @@ class CreditCommunication(models.TransientModel):
     def _get_payment(self):
         """Get not reconciled payment for the client of the control line."""
         for comm in self:
-            comm.payment_not_reconciled = self.env['account.move.line'].search(
-                [
-                    ('partner_id', '=', comm.partner_id.id),
-                    ('reconciled', '=', False),
-                    ('credit', '>', 0),
-                    ('account_id.internal_type', '=', 'receivable'),
-                    ('journal_id.type', '=', 'sale'),
-                ]
+            comm.payment_not_reconciled = (
+                self.env['account.move.line']
+                .search(
+                    [
+                        ('partner_id', '=', comm.partner_id.id),
+                        ('reconciled', '=', False),
+                        (
+                            'account_id.internal_type',
+                            'in',
+                            ['receivable', 'payable'],
+                        ),
+                        (
+                            'id',
+                            'not in',
+                            self.mapped(
+                                'credit_control_line_ids.move_line_id'
+                            ).ids,
+                        ),
+                        (
+                            'company_id',
+                            'in',
+                            self.mapped(
+                                'credit_control_line_ids.company_id'
+                            ).ids,
+                        ),
+                    ]
+                )
+                .filtered(lambda l: l.move_id.state == 'posted')
             )
 
     @api.model
@@ -53,5 +73,5 @@ class CreditCommunication(models.TransientModel):
     @api.model
     def _get_total_due(self):
         total = super(CreditCommunication, self)._get_total_due()
-        total += sum(self.mapped('payment_not_reconciled.balance'))
+        total += sum(self.mapped('payment_not_reconciled.amount_residual'))
         return total

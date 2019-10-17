@@ -65,10 +65,15 @@
         </td>
         <td></td>
         <td class="text-right">
-          <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": l.currency_id}'/>
+          <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
         </td>
         <td class="text-right">
-          <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": l.currency_id}'/>
+          <t t-if="l.amount_residual">
+            <span t-field="l.amount_residual" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+          </t>
+          <t t-else="">
+            <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+          </t>
         </td>
       </tr>
     </xpath>

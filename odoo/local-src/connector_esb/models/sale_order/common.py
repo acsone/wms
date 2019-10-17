@@ -49,8 +49,10 @@ class SaleOrder(models.Model):
         return super(SaleOrder, self_ctx).write(vals)
 
     @job(default_channel='root.background.esb')  # priority=25
-    def ws_create_new(self, data, creation_date=datetime.now()):
+    def ws_create_new(self, data, creation_date=None):
         """Create a sale order with data coming from webservices."""
+        if creation_date is None:
+            creation_date = datetime.now()
         try:
             return self.with_context(no_connector_export=True)._ws_create_new(
                 data, creation_date
@@ -62,7 +64,9 @@ class SaleOrder(models.Model):
             )
             raise
 
-    def _ws_create_new(self, data, creation_date=datetime.now()):
+    def _ws_create_new(self, data, creation_date=None):
+        if creation_date is None:
+            creation_date = datetime.now()
         order_data = self._ws_create_order_data(data)
         order_data = self.env['sale.order'].play_onchanges(
             order_data,
