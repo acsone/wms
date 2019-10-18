@@ -5,7 +5,6 @@ specific_data.product_categ_medoc,Médicaments,True,product.product_category_all
 specific_data.product_categ_finance,Finance,True,product.product_category_all,average
 specific_data.product_categ_vet_belges,Médicaments vétérinaires belges,,specific_data.product_categ_medoc,average
 specific_data.product_categ_stupefiant_vet,Stupéfiant VET,,specific_data.product_categ_vet_belges,average
-
 specific_data.product_categ_importation,Cascade importation,,specific_data.product_categ_medoc,average
 specific_data.product_categ_humain,Médicaments humains,,specific_data.product_categ_medoc,average
 specific_data.product_categ_parapharmacie,Parapharmacie,,specific_data.product_categ_medoc,average
