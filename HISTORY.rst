@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product
+* ALCYN-2242: Fix rounding computing
 
 **Build**
 
