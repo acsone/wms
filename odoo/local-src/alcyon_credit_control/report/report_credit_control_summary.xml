@@ -50,30 +50,22 @@
     <xpath expr="//table[@id='summary_table']/following-sibling::div[1]" position="replace">
     </xpath>
 
-    <xpath expr="//tbody" position="inside">
-      <tr t-foreach="doc.payment_not_reconciled" t-as="l">
+    <xpath expr="//tbody" position="replace">
+      <tr t-foreach="doc.get_consolidate_lines()" t-as="l">
         <td>
-          <t t-if="l.invoice_id">
-            <span t-field="l.invoice_id.number"/>
-          </t>
-          <t t-else="">
-            <span t-field="l.name"/>
-          </t>
+          <span t-esc="l['name']"/>
         </td>
         <td>
-          <span t-field="l.date"/>
+          <span t-esc="l['date_entry']"/>
         </td>
-        <td></td>
-        <td class="text-right">
-          <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+        <td>
+          <span t-esc="l['date_due']"/>
         </td>
         <td class="text-right">
-          <t t-if="l.amount_residual">
-            <span t-field="l.amount_residual" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-          </t>
-          <t t-else="">
-            <span t-field="l.balance" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
-          </t>
+          <span t-esc="l['amount_due']" t-options='{"widget": "monetary", "display_currency": l["amount_currency_id"]}'/>
+        </td>
+        <td class="text-right">
+          <span t-esc="l['balance_due']" t-options='{"widget": "monetary", "display_currency": l["balance_currency_id"]}'/>
         </td>
       </tr>
     </xpath>

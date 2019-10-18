@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product
+* ALCYN-2256: Union credit and payment lines, sort in chronological order
 
 **Build**
 
