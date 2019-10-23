@@ -13,7 +13,7 @@ class TestSaleOrderInvoicing(SavepointCase):
         super(TestSaleOrderInvoicing, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner = cls.env['res.partner'].create(
-            {'name': u"TEST", 'is_customer': True}
+            {'name': u"TEST", 'customer': True, 'ref': "42"}
         )
         cls.product = cls.env['product.product'].create(
             {'name': u"TEST", 'type': 'consu'}

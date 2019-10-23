@@ -10,7 +10,9 @@
     'category': 'Sales',
     'depends': [
         'sale',
+        'purchase',
         'specific_base',
+        'specific_purchase',
         'pricelist_discount',
         'l10n_be_apb_tax',
         'l10n_be_antibiotic_tax',

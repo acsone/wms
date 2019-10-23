@@ -14,6 +14,7 @@
         'stock',
         'calendar',
         'purchase_cancel_reason',
+        'purchase_prepaid',
         'specific_product',
         'stock_unit',
         'stock_mts_mto_rule',

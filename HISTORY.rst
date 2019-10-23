@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2260: Improvement of purchase invoice encoding
+
 **Bugfixes**
 
 * ALCYN-2263: Fix CNK unicity error when duplicating a product
