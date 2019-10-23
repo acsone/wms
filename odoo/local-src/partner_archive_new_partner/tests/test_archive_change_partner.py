@@ -1,6 +1,5 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from mock import MagicMock, patch
 from odoo.tests import common
 
 
@@ -14,78 +13,128 @@ class TestPartner(common.SavepointCase):
 
         cls.partner1 = cls.env["res.partner"].create({"name": "Partner1"})
         cls.partner2 = cls.env["res.partner"].create({"name": "Partner2"})
-
-        cls.saleorder = MagicMock()
-        cls.invoice = MagicMock()
-        cls.delivery = MagicMock()
+        cls.product = cls.env.ref('product.product_product_8')
+        cls.account_type = cls.env.ref('account.data_account_type_payable')
+        cls.profit_acc_id = cls.env.ref('account.data_account_type_revenue')
+        cls.account_id = cls.env['account.account'].create(
+            {
+                'name': 'Receive account',
+                'code': '440000_demo',
+                'user_type_id': cls.account_type.id,
+                'reconcile': True,
+            }
+        )
+        cls.profit_acc_id = cls.env['account.account'].create(
+            {
+                'name': 'Revenue account',
+                'code': '702',
+                'user_type_id': cls.profit_acc_id.id,
+            }
+        )
+        cls.journal = cls.env['account.journal'].create(
+            {
+                'name': "Sales Journal - (test)",
+                'code': "TSAJ",
+                'type': "sale",
+                'refund_sequence': True,
+                'default_debit_account_id': cls.account_id.id,
+                'default_credit_account_id': cls.profit_acc_id.id,
+            }
+        )
+        cls.partner1.property_account_receivable_id = cls.account_id
+        cls.partner1.property_account_payable_id = cls.profit_acc_id
 
     def setUp(self):
         super(TestPartner, self).setUp()
 
-        self.sale_model = self.registry.models.get("sale.order")
-        self.registry.models["sale.order"] = MagicMock()
-        self.invoice_model = self.registry.models.get("account.invoice")
-        self.registry.models["account.invoice"] = MagicMock()
-        self.picking_model = self.registry.models.get("stock.picking")
-        self.registry.models["stock.picking"] = MagicMock()
-
-    def tearDown(self):
-        super(TestPartner, self).setUp()
-
-        if self.sale_model:
-            self.registry["sale.order"] = self.sale_model
-        else:
-            del self.registry.models["sale.order"]
-        if self.invoice_model:
-            self.registry["account.invoice"] = self.invoice_model
-        else:
-            del self.registry.models["account.invoice"]
-        if self.picking_model:
-            self.registry["stock.picking"] = self.picking_model
-        else:
-            del self.registry.models["stock.picking"]
+        self.saleorder = self.env["sale.order"].create(
+            {
+                'partner_id': self.partner1.id,
+                'partner_invoice_id': self.partner1.id,
+                'partner_shipping_id': self.partner1.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': 'Product Test',
+                            'product_id': self.product.id,
+                            'product_uom_qty': 1,
+                            'product_uom': self.env.ref(
+                                'product.product_uom_unit'
+                            ).id,
+                            'price_unit': 100.0,
+                        },
+                    )
+                ],
+            }
+        )
+        self.invoice = self.env["account.invoice"].create(
+            {
+                'name': 'Test invoice',
+                'partner_id': self.partner1.id,
+                'invoice_line_ids': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': 'Test line',
+                            'product_id': self.product.id,
+                            'quantity': 10.0,
+                            'price_unit': 50.0,
+                            'account_id': self.account_id.id,
+                        },
+                    )
+                ],
+            }
+        )
+        self.picking = self.env['stock.picking'].create(
+            {
+                'location_id': self.env.ref(
+                    'stock.stock_location_suppliers'
+                ).id,
+                'location_dest_id': self.env.ref(
+                    'stock.stock_location_stock'
+                ).id,
+                'picking_type_id': self.env.ref('stock.picking_type_out').id,
+                'partner_id': self.partner1.id,
+            }
+        )
 
     def test_writing_sale_order_partner(self):
         self.partner1.active = True
         wizard_data = self.partner1.archive_partner()
-        self.saleorder.partner_id = self.partner1
-        self.env["sale.order"].search = MagicMock(
-            return_value=[self.saleorder]
-        )
-        with patch.object(self.saleorder, 'write') as patched_so:
-            context = wizard_data["context"]
-            context["active_id"] = self.partner1.id
-            self.env[wizard_data["res_model"]].with_context(context).create(
-                {"new_partner_id": self.partner2.id}
-            ).action_confirm()
-            self.assertEqual(1, patched_so.call_count)
+        context = wizard_data["context"]
+        context["active_id"] = self.partner1.id
+        self.env[wizard_data["res_model"]].with_context(context).create(
+            {"new_partner_id": self.partner2.id}
+        ).action_confirm()
+        self.assertEqual(self.saleorder.partner_id, self.partner2)
+        self.assertEqual(self.saleorder.partner_invoice_id, self.partner2)
+        self.assertEqual(self.saleorder.partner_shipping_id, self.partner2)
 
     def test_writing_invoice_partner(self):
         self.partner1.active = True
+        self.invoice.action_invoice_open()
+        self.assertEqual(self.invoice.state, 'open')
         wizard_data = self.partner1.archive_partner()
-        self.invoice.partner_id = self.partner1
-        self.env["account.invoice"].search = MagicMock(
-            return_value=self.invoice
+        context = wizard_data["context"]
+        context["active_id"] = self.partner1.id
+        self.env[wizard_data["res_model"]].with_context(context).create(
+            {"new_partner_id": self.partner2.id}
+        ).action_confirm()
+        self.assertEqual(self.invoice.partner_id, self.partner2)
+        # move still keeps old partner
+        self.assertEqual(
+            self.invoice.move_id.mapped('line_ids.partner_id'), self.partner1
         )
-        with patch.object(self.invoice, 'write') as patched_inv:
-            context = wizard_data["context"]
-            context["active_id"] = self.partner1.id
-            self.env[wizard_data["res_model"]].with_context(context).create(
-                {"new_partner_id": self.partner2.id}
-            ).action_confirm()
-            self.assertEqual(1, patched_inv.call_count)
 
     def test_writing_delivery_order_partner(self):
         self.partner1.active = True
         wizard_data = self.partner1.archive_partner()
-        self.delivery.partner_id = self.partner1
-        self.env["account.invoice"].search = MagicMock(
-            return_value=self.delivery
-        )
-        with patch.object(self.delivery, 'write') as patched_picking:
-            context = wizard_data["context"]
-            context["active_id"] = self.partner1.id
-            self.env[wizard_data["res_model"]].with_context(context).create(
-                {"new_partner_id": self.partner2.id}
-            ).action_confirm()
-            self.assertEqual(1, patched_picking.call_count)
+        context = wizard_data["context"]
+        context["active_id"] = self.partner1.id
+        self.env[wizard_data["res_model"]].with_context(context).create(
+            {"new_partner_id": self.partner2.id}
+        ).action_confirm()
+        self.assertEqual(self.picking.partner_id, self.partner2)

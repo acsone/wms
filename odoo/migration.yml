@@ -543,3 +543,5 @@ migration:
         upgrade:
           - specific_account
           - specific_purchase
+          ### local
+          - partner_archive_new_partner
