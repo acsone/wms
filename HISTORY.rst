@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2275: fix sort order of delivery rounds
+
 **Build**
 
 **Documentation**
