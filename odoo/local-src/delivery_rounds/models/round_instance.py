@@ -44,7 +44,7 @@ def time_now(record):
 
 class RoundInstance(models.Model):
     _name = 'round.instance'
-    _order = 'date desc, time_picking_planned asc'
+    _order = 'date asc, time_picking_planned asc'
     _rec_name = 'complete_name'
 
     date = fields.Date(
@@ -472,7 +472,7 @@ class RoundInstance(models.Model):
               OR customer_tag IS NULL
               OR instance_tag IS NULL)
           AND customer.id = %s
-        ORDER BY instance.date DESC, instance.time_picking_planned ASC
+        ORDER BY instance.date ASC, instance.time_picking_planned ASC
         LIMIT 1;
         """
 

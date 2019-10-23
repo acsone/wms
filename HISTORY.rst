@@ -36,6 +36,14 @@ latest (unreleased)
 **Documentation**
 
 
+10.0.1.44.2 (2019-10-23)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2275: fix sort order of delivery rounds
+
+
 10.0.1.44.1 (2019-10-17)
 ++++++++++++++++++++++++
 
