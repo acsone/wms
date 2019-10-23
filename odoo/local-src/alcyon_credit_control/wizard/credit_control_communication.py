@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 
 class CreditCommunication(models.TransientModel):
+
     _inherit = "credit.control.communication"
 
     payment_not_reconciled = fields.Many2many(
@@ -75,3 +76,50 @@ class CreditCommunication(models.TransientModel):
         total = super(CreditCommunication, self)._get_total_due()
         total += sum(self.mapped('payment_not_reconciled.amount_residual'))
         return total
+
+    def get_consolidate_lines(self):
+        """Unify data from credit_control_line_ids and payment_not_reconciled
+        to print them all together in chronological order
+        """
+        self.ensure_one()
+        lines = []
+        for aml in self.payment_not_reconciled:
+            lines.append(
+                {
+                    'invoice_id': aml.invoice_id,
+                    'move_line_id': aml,
+                    'date_entry': aml.date,
+                    'date_due': aml.date_maturity,
+                    'amount_due': aml.balance,
+                    'balance_due': (aml.amount_residual or aml.balance),
+                    'amount_currency_id': self.currency_id,
+                    'balance_currency_id': self.currency_id,
+                }
+            )
+            if aml.invoice_id:
+                lines[-1]['name'] = aml.invoice_id.number
+            else:
+                lines[-1]['name'] = aml.name_get()[0][1]
+
+        for aml in self.credit_control_line_ids:
+            lines.append(
+                {
+                    'invoice_id': aml.invoice_id,
+                    'move_line_id': aml.move_line_id,
+                    'date_entry': aml.date_entry,
+                    'date_due': aml.date_due,
+                    'amount_due': aml.amount_due,
+                    'balance_due': aml.balance_due,
+                    'amount_currency_id': self.currency_id,
+                    'balance_currency_id': aml.currency_id
+                    or aml.company_id.currency_id,
+                }
+            )
+            if aml.invoice_id:
+                lines[-1]['name'] = aml.invoice_id.number
+            else:
+                lines[-1]['name'] = aml.move_line_id.name_get()[0][1]
+
+        return sorted(
+            lines, key=lambda r: fields.Date.from_string(r['date_entry'])
+        )

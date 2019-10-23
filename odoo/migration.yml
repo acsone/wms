@@ -545,3 +545,4 @@ migration:
           - specific_purchase
           ### local
           - partner_archive_new_partner
+          - alcyon_credit_control
