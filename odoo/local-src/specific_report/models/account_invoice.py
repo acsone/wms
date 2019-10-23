@@ -252,28 +252,24 @@ class AccountInvoiceLine(models.Model):
         for line in self:
             if line.discount2 and not line.discount3:
                 line.amount_discount2 = (
-                    line.price_unit
-                    * ((line.discount2 or 0.0) / 100.0)
-                    * line.quantity
-                )
+                    line.quantity * line.price_unit
+                ) - line.price_subtotal
                 line.amount_discount3 = 0.0
             elif not line.discount2 and line.discount3:
                 line.amount_discount3 = (
-                    line.price_unit
-                    * ((line.discount3 or 0.0) / 100.0)
-                    * line.quantity
-                )
+                    line.quantity * line.price_unit
+                ) - line.price_subtotal
                 line.amount_discount2 = 0.0
             elif line.discount3 and line.discount2:
                 line.amount_discount2 = (
-                    line.price_unit
+                    line.quantity
+                    * line.price_unit
                     * ((line.discount2 or 0.0) / 100.0)
-                    * line.quantity
                 )
                 line.amount_discount3 = (
-                    line.quantity * line.price_unit
-                    - line.amount_discount2
+                    (line.quantity * line.price_unit)
                     - line.price_subtotal
+                    - line.amount_discount2
                 )
             else:
                 line.amount_discount3 = 0.0
