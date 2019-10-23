@@ -114,6 +114,17 @@ failed = object.validate_no_psychotropic_ordered_by_phone()
             </field>
         </record>
 
+        <record id="no_stupefiant_vet_by_phone" model="exception.rule">
+            <field name="name">No Stupéfiant VET ordered by phone</field>
+            <field name="description">No Stupéfiant VET by phone</field>
+            <field name="active">True</field>
+            <field name="sequence">16</field>
+            <field name="model">sale.order.line</field>
+            <field name="code">
+failed = object.validate_no_stupefiant_vet_by_phone()
+            </field>
+        </record>
+
         <!-- Warning exceptions -->
         <record id="warning_psychotropic" model="exception.rule">
             <field name="name">Warning psychotropic</field>

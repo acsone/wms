@@ -541,8 +541,10 @@ migration:
     - version: 10.0.1.45.0
       addons:
         upgrade:
-          - specific_account
-          - specific_purchase
-          ### local
-          - partner_archive_new_partner
           - alcyon_credit_control
+          - connector_esb
+          - partner_archive_new_partner
+          - specific_account
+          - specific_data
+          - specific_purchase
+          - specific_sale
