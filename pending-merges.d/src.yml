@@ -1,4 +1,4 @@
-./src:
+../odoo/src:
   remotes:
     odoo: git@github.com:odoo/odoo.git
     OCA: git@github.com:OCA/OCB.git
