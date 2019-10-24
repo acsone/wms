@@ -8,6 +8,8 @@
 
 import logging
 
+from psycopg2 import sql
+
 _logger = logging.getLogger(__name__)
 
 
@@ -16,8 +18,13 @@ def create_index(cr, index_name, table, expression):
         'SELECT indexname FROM pg_indexes WHERE indexname = %s', (index_name,)
     )
     if not cr.fetchone():
+        # pylint: disable=sql-injection
         cr.execute(
-            'CREATE INDEX %s ' 'ON %s %s' % (index_name, table, expression)
+            sql.SQL('CREATE INDEX {}  ON {} {}').format(
+                sql.Identifier(index_name),
+                sql.Identifier(table),
+                sql.SQL(expression),
+            )
         )
 
 

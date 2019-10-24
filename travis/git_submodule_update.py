@@ -8,6 +8,8 @@
 # Keep standard update form private repositories
 # listed in `travis/private_repo`
 #
+from __future__ import print_function
+
 import os
 import shutil
 import zipfile
@@ -23,30 +25,10 @@ except ImportError:
     import urllib2 as requestlib
 
 
-script_path = os.path.dirname(os.path.realpath(__file__))
-root_path = os.path.abspath(os.path.join(script_path, os.pardir))
-
-os.chdir(root_path)
-
-https_proxy = os.environ.get('https_proxy')
-if https_proxy:
-    proxy = requestlib.ProxyHandler({'https': https_proxy})
-    opener = requestlib.build_opener(proxy)
-    requestlib.install_opener(opener)
-
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+ROOT_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir))
 DL_DIR = 'download'
 ZIP_PATH = '%s/submodule.zip' % DL_DIR
-
-if os.path.exists(DL_DIR):  # clean if previous build failed
-    shutil.rmtree(DL_DIR)
-os.makedirs(DL_DIR)
-
-with open('travis/private_repos') as f:
-    private_repos = f.read()
-
-os.system('git submodule init')
-
-submodules = Repo('.').submodules
 
 
 def git_url(url):
@@ -62,61 +44,106 @@ def git_url(url):
     return url
 
 
-# Check consitancy between .gitmodules and pending-merges.yaml
-with open('odoo/pending-merges.yaml') as pending_yml:
-    pending_merges = yaml.safe_load(pending_yml) or []
+INCONSISTENT_MSG = """
+In .gitmodules {path} :\n
+    remote url {remote_url} does not match \n
+    target url {target_url} \n
+in {pending_path}\n
+\n
+If you added pending merges entries you probably forgot to edit
+    target in .gitmodules file to match the fork repository\n
+or if your intent is to clean up entries in pending-merges.yml.\n
+    something went wrong in that file.\n
+    Hint: consider taking a look at specialized `invoke` tasks:\n
+`submodule.add-pending <PR>` and `submodule.remove-pending <PR>`
+"""
 
-for sub in submodules:
-    # replace odoo/ by ./
-    pending_path = "." + sub.path[4:]
-    if pending_path in pending_merges:
-        pending = pending_merges[pending_path]
+
+def check_consistency(submodules):
+    """Check consistency between .gitmodules and pending merges."""
+    for sub in submodules:
+        sub_name = os.path.basename(sub.path)
+        sub_merges_path = './pending-merges.d/{}.yml'.format(sub_name)
+        if not os.path.exists(sub_merges_path):
+            continue
+        with open(sub_merges_path) as pending_yml:
+            pending_merges = yaml.safe_load(pending_yml) or []
+        pending = list(pending_merges.values())[0]
         target = pending['target'].split()[0]
         target_remote = pending['remotes'][target]
-        assert git_url(target_remote) == git_url(sub.url.lower()), (
-            "In .gitmodules %s :\n"
-            "    remote url %s does not match \n"
-            "    target url %s \n"
-            "in pending-merges.yaml\n"
-            "\n"
-            "If you added pending merges entries you probably forgot to edit"
-            " target in .gitmodules file to match the fork repository\n"
-            "or if your intent is to clean up entries in pending-merges.yaml"
-            " something went wrong in that file"
-        ) % (sub.path, target_remote, sub.url)
+        assert git_url(target_remote) == git_url(
+            sub.url.lower()
+        ), INCONSISTENT_MSG.format(
+            path=sub.path,
+            remote_url=target_remote,
+            target_url=sub.url,
+            pending_path=sub_merges_path,
+        )
 
 
-for sub in submodules:
-    print("Getting submodule %s" % sub.path)
-    use_archive = sub.path not in private_repos
-    if use_archive:
-        url = git_url(sub.url)
-        archive_url = "{}/archive/{}.zip".format(url, sub.hexsha)
-        request = requestlib.Request(archive_url)
-        with open(ZIP_PATH, 'wb') as f:
-            f.write(requestlib.urlopen(request).read())
-        try:
-            with zipfile.ZipFile(ZIP_PATH) as zf:
-                zf.extractall(DL_DIR)
-        except zipfile.BadZipfile:
-            # fall back to standard download
-            use_archive = False
-            with open(ZIP_PATH) as f:
+def download_submodules(submodules, private_repos):
+    """Download submodules, possibly via zip archive url."""
+    for sub in submodules:
+        print("Getting submodule %s" % sub.path)
+        use_archive = sub.path not in private_repos
+        if use_archive:
+            url = git_url(sub.url)
+            archive_url = "{}/archive/{}.zip".format(url, sub.hexsha)
+            request = requestlib.Request(archive_url)
+            with open(ZIP_PATH, 'wb') as f:
+                f.write(requestlib.urlopen(request).read())
+            try:
+                with zipfile.ZipFile(ZIP_PATH) as zf:
+                    zf.extractall(DL_DIR)
+            except zipfile.BadZipfile:
+                # fall back to standard download
+                use_archive = False
+                with open(ZIP_PATH) as f:
+                    print(
+                        "Getting archive failed with error %s. "
+                        "Falling back to git clone." % f.read()
+                    )
+                os.remove(ZIP_PATH)
+            except Exception as e:
+                use_archive = False
                 print(
-                    "Getting archive failed with error %s. Falling back to "
-                    "git clone." % f.read()
+                    "Getting archive failed with error %s. "
+                    "Falling back to git clone." % e.message
                 )
-            os.remove(ZIP_PATH)
-        except Exception as e:
-            use_archive = False
-            print(
-                "Getting archive failed with error %s. Falling back to "
-                "git clone." % e.message
-            )
-        else:
-            os.remove(ZIP_PATH)
-            os.removedirs(sub.path)
-            submodule_dir = os.listdir(DL_DIR)[0]
-            shutil.move(os.path.join(DL_DIR, submodule_dir), sub.path)
-    if not use_archive:
-        os.system('git submodule update %s' % sub.path)
+            else:
+                os.remove(ZIP_PATH)
+                os.removedirs(sub.path)
+                submodule_dir = os.listdir(DL_DIR)[0]
+                shutil.move(os.path.join(DL_DIR, submodule_dir), sub.path)
+        if not use_archive:
+            os.system('git submodule update %s' % sub.path)
+
+
+def _setup_proxy():
+    https_proxy = os.environ.get('https_proxy')
+    if https_proxy:
+        proxy = requestlib.ProxyHandler({'https': https_proxy})
+        opener = requestlib.build_opener(proxy)
+        requestlib.install_opener(opener)
+
+
+def _get_private_repos():
+    with open('travis/private_repos') as f:
+        return f.read()
+
+
+if __name__ == '__main__':
+    _setup_proxy()
+    os.chdir(ROOT_DIR)
+
+    if os.path.exists(DL_DIR):  # clean if previous build failed
+        shutil.rmtree(DL_DIR)
+    os.makedirs(DL_DIR)
+
+    os.system('git submodule init')
+
+    submodules = Repo('.').submodules
+
+    check_consistency(submodules)
+    private_repos = _get_private_repos()
+    download_submodules(submodules, private_repos)

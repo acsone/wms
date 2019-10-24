@@ -13,8 +13,11 @@
  'category': 'Others',
  'depends': [
      'base',
-     'web'
+     'web',
  ],
+ 'external_dependencies': {
+     'python': ['psycopg2'],
+ },
  'website': 'http://www.camptocamp.com',
  'data': [
      'templates/camptocamp_version_template.xml',

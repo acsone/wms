@@ -19,7 +19,8 @@ fi
 
 echo "Checking 1st marabunta version."
 
-if [ "$( psql -tAc "SELECT 1 FROM marabunta_version WHERE number='setup'" )" != '1' ]
+if [ "$( psql -tAc "SELECT 1 FROM marabunta_version WHERE number='setup'" )" != '1' ] &&
+   [ "$( psql -tAc "SELECT 1 WHERE NOT EXISTS ( SELECT number FROM marabunta_version );" )" != '1' ]
 then
 
     echo "Setting 1st marabunta version to 'setup'"

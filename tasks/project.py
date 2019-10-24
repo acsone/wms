@@ -273,9 +273,45 @@ def _do_sync(ctx, cc_context, version, git_repo, sync_metadata, commit=True):
             if os.path.isfile(relpath):
                 add_comment(relpath, comment)
 
+        # Must be done before commit,
+        # to be sure that the pre-commit is correctly configured.
+        if _exclude_uninstallable_modules_from_pre_commit(ctx):
+            selected_files.add('.pre-commit-config.yaml')
+
         # update metadata too
         selected_files.add('.sync.yml')
         ctx.run('git add {}'.format(' '.join(selected_files)))
         if commit:
             msg = 'Update project from odoo-template ver: {}'.format(version)
             ctx.run('git commit -m "{}" -e -vv'.format(msg), pty=True)
+
+
+def _exclude_uninstallable_modules_from_pre_commit(ctx):
+    """Exclude uninstallable modules from pre-commit-config file.
+
+    Most of time, uninstalled modules are not finished or not migrated yet,
+    and we don't want to play pre-commit check on them.
+    So, we add a global exclude parameter into pre-commit-config file.
+
+    Returns boolean to indicate that the pre-commit-config have been updated.
+    """
+
+    # Get list of all specific uninstalled modules
+    modules = ctx.run(
+        'for i in $('
+        'find odoo/local-src -name "__manifest__.py" -print'
+        '); '
+        'do egrep -l "installable.+False" $i; '
+        'done | '
+        'sort | '
+        'xargs | '
+        'sed "s/__manifest__.py /|/g" | '
+        'sed "s/__manifest__.py//g"',
+        hide=True,
+    ).stdout
+    if modules and modules != '\n':
+        # Exclude them from pre-commit-config file
+        ctx.run(r"sed -i '1 i\exclude: %s' .pre-commit-config.yaml" % modules)
+        print('Apply exclude of uninstallable modules from pre-commit-config')
+        return True
+    return False

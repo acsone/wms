@@ -21,6 +21,7 @@ https://github.com/camptocamp/odoo-template instead.
 * [Odoo Cloud Platform](https://confluence.camptocamp.com/confluence/display/BS/Odoo+Cloud+Platform+-+Technical)
 * [Odoo Test Cloud Platform - Minions](https://confluence.camptocamp.com/confluence/display/BS/Odoo+Test+Platform+-+Minions+-+Technical)
 * [pre-commit installation](./pre-commit.md)
+* [Migration project](./migration-project.md)
 
 ## How-to
 

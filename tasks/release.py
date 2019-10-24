@@ -15,29 +15,22 @@ from invoke import exceptions, task
 from marabunta.version import MarabuntaVersion
 
 from .common import (
-    GIT_REMOTE_NAME,
+    GIT_C2C_REMOTE_NAME,
     HISTORY_FILE,
     MIGRATION_FILE,
-    PENDING_MERGES,
     VERSION_FILE,
-    build_path,
     cd,
     check_git_diff,
     cookiecutter_context,
     current_version,
     exit_msg,
 )
+from .submodule import Repo, check_pending_merge_version
 
 try:
     from builtins import input
 except ImportError:
     print('Missing install future from requirements')
-    print('Please run `pip install -r tasks/requirements.txt`')
-
-try:
-    import yaml
-except ImportError:
-    print('Missing install pyyaml from requirements')
     print('Please run `pip install -r tasks/requirements.txt`')
 
 try:
@@ -66,28 +59,35 @@ def push_branches(ctx, force=False):
     if not force:
         check_git_diff(ctx)
     print('Pushing pending-merge branches...')
-    with open(PENDING_MERGES, 'rU') as f:
-        merges = yaml.load(f.read())
-        if not merges:
-            print('Nothing to push')
-            return
-        for path, setup in merges.items():
-            print('pushing {}'.format(path))
-            with cd(build_path(path, from_file=PENDING_MERGES)):
-                try:
-                    ctx.run('git config remote.{}.url'.format(GIT_REMOTE_NAME))
-                except exceptions.Failure:
-                    remote_url = setup['remotes'][GIT_REMOTE_NAME]
-                    ctx.run(
-                        'git remote add {} {}'.format(
-                            GIT_REMOTE_NAME, remote_url
-                        )
-                    )
+    check_pending_merge_version()
+
+    # look through all of the files inside PENDING_MERGES_DIR, push everything
+    impacted_repos = []
+    for repo in Repo.repositories_from_pending_folder():
+        if not repo.has_pending_merges():
+            continue
+        config = repo.merges_config()
+        impacted_repos.append(repo.path)
+        print('pushing {}'.format(repo.path))
+        with cd(repo.abs_path):
+            try:
+                ctx.run('git config remote.{}.url'.format(GIT_C2C_REMOTE_NAME))
+            except exceptions.Failure:
+                remote_url = config['remotes'][GIT_C2C_REMOTE_NAME]
                 ctx.run(
-                    'git push -f -v {} HEAD:refs/heads/{}'.format(
-                        GIT_REMOTE_NAME, branch_name
+                    'git remote add {} {}'.format(
+                        GIT_C2C_REMOTE_NAME, remote_url
                     )
                 )
+            ctx.run(
+                'git push -f -v {} HEAD:refs/heads/{}'.format(
+                    GIT_C2C_REMOTE_NAME, branch_name
+                )
+            )
+    if impacted_repos:
+        print('Impacted submodules:')
+        for name in impacted_repos:
+            print(' - {}'.format(name))
 
 
 def release_get_next_version3digits(old_version, feature=True, patch=False):

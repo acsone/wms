@@ -29,7 +29,6 @@ Pre-commit will use these tools on the modified files:
   new syntaxes (e.g. `%` string formatting will be upgraded to use `.format(...)`)
 * [black](https://black.readthedocs.io) to automatically format the code (cfg file: `./pyproject.toml`)
 * [isort](https://isort.readthedocs.io) to sort the import statements automatically (cfg file: `./.isort.cfg`)
-* `trailing-whitespace` (included hook) to trim any trailing whitespaces
 
 ## How it works
 
@@ -39,7 +38,7 @@ files modified in the commit are checked).
 If a hook fails (e.g. `flake8`), the commit operation doesn't occur, and you
 have to fix your code before committing again.
 
-Some hooks, such as `black`, `pyupgrade` or `trailing-whitespace`, are
+Some hooks, such as `black`, `pyupgrade`, are
 configured to format the code directly, so it's normal that your first commit
 operation may fail if your code didn't meet the format expected by these tools.
 If this happens, you can run `git diff` to check the code reformatted, and just
@@ -90,38 +89,20 @@ You also have to update manually the `.travis.yml` file to integrate
 (compare with the `.travis.yml` file available in `odoo-template`).
 
 To get Travis CI green when integrating the first time our `pre-commit`
-configuration in a project, you have to apply `pyupgrade`, `black` and `isort`
-manually on the relevant directories (mainly `tasks`, `travis`,
-`odoo/local-src` and `odoo/songs`, as some of them are the ones checked on
-Travis CI).
-
-Install the tools (we could reuse the ones installed by `pre-commit` but it's
-easier to reinstall them):
-
-    $ pip install pyupgrade black isort --user
+configuration in a project, you have to apply all the hooks manually on all the
+existing code base.
 
 Do not forget to initialize `pre-commit` for this project:
 
     $ pre-commit install
 
-At first, update the code in all relevant folders with `pyupgrade` (this tool
-is unable to process directories, we have to pass it all the Python files
-to update):
+Then run the hooks:
 
-    $ find {tasks/,travis/,odoo/local-src/,odoo/songs/} -type f -name "*.py" -exec pyupgrade {} +
+    $ pre-commit run --all-files
 
-Second, run `black` on the directories which matter:
+Commit, you will see `pre-commit` running again all the checks:
 
-    $ black --fast tasks travis odoo/local-src odoo/songs
-
-Third, run `isort` (like `pyupgrade`, it has to be feed with files,
-not directory entries):
-
-    $ find {tasks/,travis/,odoo/local-src/,odoo/songs/} -type f -name "*.py" -exec isort {} +
-
-Commit, you will see `pre-commit` running all the checks on modified files:
-
-    $ git ci -a -m "Running pyupgrade+black+isort on existing sources"
+    $ git ci -a -m "Running pre-commit hooks on existing sources"
 
 Push, and you are done.
 
