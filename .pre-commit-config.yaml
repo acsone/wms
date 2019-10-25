@@ -13,14 +13,7 @@ repos:
 - repo: https://github.com/pre-commit/mirrors-pylint
   rev: v1.9.1
   hooks:
-  - id: pylint
-    name: pylint odoo
-    # check only specific Odoo addons
-    files: odoo/local-src/
-    types: ['file', 'python']   # to not check .csv and .conf files
-    args: ["--rcfile=travis/pylintrc_odoo", "--valid_odoo_versions=10.0"]
-    additional_dependencies: [pylint-odoo==3.0.1]
-    language_version: python2.7
+    # FIXME add pylint odoo
   - id: pylint
     name: pylint misc
     # check all Python code excepting Odoo addons
