@@ -6,7 +6,9 @@ import logging
 from datetime import date, timedelta
 
 import odoo.addons.decimal_precision as dp
+import pytz
 from odoo import api, fields, models
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -32,6 +34,37 @@ class PurchaseOrder(models.Model):
         search="_search_nbr_lines_bo",
         readonly=True,
     )
+    day_planned = fields.Date(string='Scheduled Day')
+    time_planned = fields.Float(string='Scheduled Time')
+
+    def _get_date_time_format(self):
+        # mock float field to respect user timezone
+        tz_utc = pytz.timezone('UTC')
+        tz_context = pytz.timezone(self.env.context.get('tz'))
+
+        new_planned_date = fields.Datetime.from_string(self.day_planned)
+        hour = int(self.time_planned)
+        minute = int(round((self.time_planned - hour) * 60))
+        new_planned_date = new_planned_date.replace(hour=hour, minute=minute)
+        return tz_context.localize(new_planned_date).astimezone(tz_utc)
+
+    def _inverse_date_planned(self):
+        # set scheduled datetime form new date and time fields
+        for order in self:
+            # do not initialize field with empty values
+            if order.day_planned:
+                order.date_planned = order._get_date_time_format()
+
+    def get_date_planned(self):
+        if self.day_planned:
+            return self._get_date_time_format().strftime(
+                DEFAULT_SERVER_DATETIME_FORMAT
+            )
+
+    def action_set_date_planned(self):
+        # ensure date_planned updated before
+        self._inverse_date_planned()
+        super(PurchaseOrder, self).action_set_date_planned()
 
     @api.multi
     def _compute_nbr_lines(self):
@@ -251,6 +284,12 @@ class PurchaseOrderLine(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
+        """
+        Force discount recomputation, handle scheduled date
+        priority to initialize planned date:
+            if day_planned set - all new lines initialized with this date,
+            otherwise date computed based on seller
+        """
         result = super(PurchaseOrderLine, self).onchange_product_id()
         self.recompute_discount_values()
 
@@ -266,11 +305,10 @@ class PurchaseOrderLine(models.Model):
         """
         for line in self:
             line._set_promotion_supplier()
-            date_order = line.order_id.date_order
 
             if line.product_id:
                 seller = line._get_seller()
-                date_planned = line.get_next_scheduled_date(seller, date_order)
+                date_planned = line._get_date_planned(seller)
                 line.date_planned = date_planned
 
             if not line.discount_global:
@@ -333,8 +371,17 @@ class PurchaseOrderLine(models.Model):
         :param po:
         :return:
         """
-        date_order_str = po.date_order if po else self.order_id.date_order
-        date_planned_str = self.get_next_scheduled_date(seller, date_order_str)
+        date_planned_str = False
+        if not po:
+            po = self.order_id
+        if po.day_planned:
+            # if there is planned date propagate it all lines
+            date_planned_str = po.get_date_planned()
+        if not date_planned_str:
+            date_order_str = po.date_order if po else self.order_id.date_order
+            date_planned_str = self.get_next_scheduled_date(
+                seller, date_order_str
+            )
 
         return fields.Datetime.from_string(date_planned_str)
 
