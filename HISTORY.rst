@@ -21,6 +21,7 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2249: Change account reconciliation partner domain
 * ALCYN-2260: Improvement of purchase invoice encoding
 * ALCYN-2224: make blocking documents visible in archive wizard
 ** ALCYN-2259: Add new product.category and add exception.rule for it
