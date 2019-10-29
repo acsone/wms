@@ -319,6 +319,7 @@ class RoundInstance(models.Model):
             lambda move: move.state not in ('done', 'cancel')
             and move.product_uom_qty > 0.0
         )
+        moves._lock_moves()
         moves_to_assign = moves.filtered(
             lambda move: not move.linked_move_operation_ids
         )
@@ -353,7 +354,7 @@ class RoundInstance(models.Model):
                 pickings_bypartner = reduce(
                     lambda x, y: x | y, pickings_bypartner_iter
                 )
-                # As we filtered on assigned, we typicaly excluded the waiting
+                # As we filtered on assigned, we typically excluded the waiting
                 # shippings. So include them back
                 pickings_bypartner |= (
                     pickings_bypartner._get_all_dest_pickings()
