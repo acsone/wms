@@ -60,3 +60,12 @@ class AccountInvoiceLine(models.Model):
     purchase_line_product_qty = fields.Float(
         string="Ordered Qty", readonly=True
     )
+
+    @api.multi
+    def unlink(self):
+        """Force tax compuation when a line is deleted."""
+        invoices = self.mapped('invoice_id')
+        res = super(AccountInvoiceLine, self).unlink()
+        if self.env.context.get('recompute_taxes_on_delete'):
+            invoices.compute_taxes()
+        return res

@@ -57,6 +57,7 @@
         <field name="view_id" ref="view_supplier_invoice_line_tree_edit"/>
         <field name="search_view_id" ref="specific_account.view_invoice_line_filter" />
         <field name="domain">[('invoice_id', '=', context['active_id'])]</field>
+        <field name="context">{'recompute_taxes_on_delete': 1}</field>
     </record>
 
     <record id="invoice_form_inherit" model="ir.ui.view">
