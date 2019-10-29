@@ -38,6 +38,15 @@ latest (unreleased)
 **Documentation**
 
 
+10.0.1.44.3 (2019-10-29)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2284: Fix recompute of additional product
+* ALCYN-2292: Fix triple discounts miscomputations in some conditions
+
+
 10.0.1.44.2 (2019-10-23)
 ++++++++++++++++++++++++
 
