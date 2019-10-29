@@ -1,0 +1,15 @@
+../odoo/external-src/account-reconcile:
+  remotes:
+    OCA: git@github.com:oca/account-reconcile.git
+    camptocamp: git@github.com:camptocamp/account-reconcile.git
+  merges:
+    - OCA 63afcb24263fdaa15c69099b396cd2713e80a528
+      # [10.0] Add account_mass_reconcile_partner
+    - OCA refs/pull/253/head
+      # [10.0] account_mass_reconcile: Fix display of partially reconciled items
+    - OCA refs/pull/254/head
+      # [10.0][ADD] auto_reconcile_structured_ref
+    - OCA refs/pull/267/head
+      # [10.0] account_reconcile_restrict_partner_mismatch: Constrain rules for reconcile
+    - OCA refs/pull/266/head
+  target: camptocamp merge-branch-1793-master

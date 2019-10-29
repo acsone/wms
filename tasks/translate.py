@@ -57,7 +57,7 @@ def generate(ctx, addon_path, update_po=True):
     pot_file = source + 't'
     # dirty hack to remove duplicated entries for paths
     ctx.run('mv {} {}'.format(source, pot_file))
-    ctx.run(r'sed -i "/local-src\|external-src/d" %(pot)s' % {'pot': pot_file})
+    ctx.run(r'sed -i "/local-src\|external-src/d" {pot}'.format(pot=pot_file))
 
     if update_po:
         for po_file in glob.glob('%s/*.po' % i18n_dir):
@@ -67,6 +67,6 @@ def generate(ctx, addon_path, update_po=True):
             )
             # dirty hack to remove duplicated entries for paths
             ctx.run(
-                r'sed -i "/local-src\|external-src/d" %(po)s' % {'po': po_file}
+                r'sed -i "/local-src\|external-src/d" {po}'.format(po=po_file)
             )
     print('%s.pot generated' % addon)

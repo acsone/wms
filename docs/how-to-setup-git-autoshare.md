@@ -14,10 +14,10 @@ repos locally to avoid downloading them all the time
 
 # Installation
 
-  1. At the moment, git-autoshare should be installed from our fork through pip + git
+  1. You can install git-autoshare with pip
 
   ```bash
-  $ pip install git+https://github.com/mpanarin/git-autoshare.git@add-submodule-support
+  $ pip install git-autoshare
   ```
 
   2. Or install all the requirements for tasks from `odoo/tasks/requirements.txt`

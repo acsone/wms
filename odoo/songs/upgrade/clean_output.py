@@ -328,7 +328,6 @@ def correct_stolen_ships(ctx):
                                 )
                         else:
                             continue
-                            raise Exception('unhandled case')
                     elif last_move.product_qty < sum(
                         last_move.mapped('quant_ids.qty')
                     ):
@@ -406,7 +405,6 @@ def correct_stolen_ships(ctx):
                             )
                         )
                         continue
-                        raise Exception('unhandled case')
                 if (
                     sum(move.mapped('reserved_quant_ids.qty'))
                     == move.product_qty
@@ -778,11 +776,10 @@ def kill_waiting_shipments(ctx):
         pick = ship.get_ancestors().sorted('date')
         if len(pick) == 0:
             ctx.log_line("no pick for %s" % ship)
-            """no pick for stock.move(297754,)
-            no pick for stock.move(298643,)
-            no pick for stock.move(315840,)
-            no pick for stock.move(317179,)
-            """
+            # no pick for stock.move(297754,)
+            # no pick for stock.move(298643,)
+            # no pick for stock.move(315840,)
+            # no pick for stock.move(317179,)
             ship.action_cancel()
             ship.picking_id.message_post(
                 'Cancelled shipment of %s (qty=%s) because '

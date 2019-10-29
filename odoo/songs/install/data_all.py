@@ -6,9 +6,8 @@ import anthem
 from anthem.lyrics.loaders import load_csv_stream
 from pkg_resources import resource_stream
 
-from mappings import COUNTRY, PRODUCT_PURCHASE_VAT, PRODUCT_SALE_VAT
-
 from ..common import create_default_value, req
+from .mappings import COUNTRY, PRODUCT_PURCHASE_VAT, PRODUCT_SALE_VAT
 
 
 @anthem.log

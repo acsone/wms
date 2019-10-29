@@ -19,14 +19,6 @@ import yaml
 from invoke import exceptions
 
 try:
-    import git_aggregator.config
-    import git_aggregator.main
-    import git_aggregator.repo
-except ImportError:
-    print('Missing git-aggregator from requirements')
-    print('Please run `pip install -r tasks/requirements.txt`')
-
-try:
     from ruamel.yaml import YAML
 except ImportError:
     print('Missing ruamel.yaml from requirements')
@@ -50,11 +42,11 @@ def build_path(path, from_root=True, from_file=None):
 
 VERSION_FILE = build_path('odoo/VERSION')
 HISTORY_FILE = build_path('HISTORY.rst')
-PENDING_MERGES = build_path('odoo/pending-merges.yaml')
+PENDING_MERGES_DIR = build_path('pending-merges.d')
 MIGRATION_FILE = build_path('odoo/migration.yml')
 GITIGNORE_FILE = build_path('.gitignore')
 COOKIECUTTER_CONTEXT = build_path('.cookiecutter.context.yml')
-GIT_REMOTE_NAME = 'camptocamp'
+GIT_C2C_REMOTE_NAME = 'camptocamp'
 TEMPLATE_GIT_REPO_URL = 'git@github.com:{}.git'
 TEMPLATE_GIT = TEMPLATE_GIT_REPO_URL.format('camptocamp/odoo-template')
 
@@ -65,9 +57,8 @@ def gpg_decrypt_to_file(ctx, password, file_name):
     :param file_name: File .gpg to decrypt
     """
     ctx.run(
-        "gpg --yes --passphrase '{}' --no-tty --quiet '{}'".format(
-            password, file_name
-        )
+        "gpg --yes --passphrase '{}' "
+        "--no-tty --quiet '{}'".format(password, file_name)
     )
 
 
@@ -97,9 +88,15 @@ def current_version():
     return version
 
 
-def ask_or_abort(message):
+def ask_confirmation(message):
+    """Gently ask user's opinion."""
     r = input(message + ' (y/N) ')
-    if r not in ('y', 'Y', 'yes'):
+    return r in ('y', 'Y', 'yes')
+
+
+def ask_or_abort(message):
+    """Fail (abort) immediately if user disagrees."""
+    if not ask_confirmation(message):
         exit_msg('Aborted')
 
 
@@ -139,52 +136,6 @@ def search_replace(file_path, old, new):
                 f_w.write(line.replace(old, new))
 
 
-def fix_repo_path(path):
-    # FIXME: diry fix to make sure submodule path is correct.
-    # Premise: gitaggregator assumes paths are relative to pending merge file
-    # (odoo/pending-merges.yml as of today)
-    # but we run it from the root of the project, which leads to repo.cwd like:
-    # /home/sorsi/dev/projects/fluxdock/external-src/connector-interfaces
-    # which is not correct! Here we hack it to make it absolutely correct
-    # and then we'll have to adatp it or trash or fix gitaggregator
-    # when we move pending merges to separated files in proj root (#225).
-    if '/odoo/' in path:
-        return path
-    proj_path = root_path()
-    repo_path = path.replace(proj_path.rstrip('/'), '').strip('/')
-    return proj_path + '/odoo/' + repo_path
-
-
-def get_aggregator_repositories():
-    repositories = git_aggregator.config.load_config(
-        build_path(PENDING_MERGES)
-    )
-    for repo_dict in repositories:
-        repo_dict['cwd'] = fix_repo_path(repo_dict['cwd'])
-        yield git_aggregator.repo.Repo(**repo_dict)
-
-
-def get_aggregator_repo(submodule_path):
-    """Build the git_aggregator repo object.
-
-    Parses the pending merges file and creates the repo object
-    for the one that has the right submodule path.
-    """
-    repo = None
-    found = False
-    for repo in get_aggregator_repositories():
-        if git_aggregator.main.match_dir(repo.cwd, submodule_path):
-            found = True
-            break
-    if not found:
-        exit_msg(
-            'No submodule found in pending-merges matching path {}'.format(
-                submodule_path
-            )
-        )
-    return repo
-
-
 def update_yml_file(path, new_data, main_key=None):
     yaml = YAML()
     # preservation of indentation
@@ -201,16 +152,24 @@ def update_yml_file(path, new_data, main_key=None):
         yaml.dump(data, f)
 
 
-def _git_ignores():
+def git_ignores(file):
     ignored = []
-    with open(GITIGNORE_FILE) as f:
+    with open(file) as f:
         for line in f.read().splitlines():
             if line.strip() and not line.startswith('#'):
                 ignored.append(line)
     return ignored
 
 
-GIT_IGNORES = _git_ignores()
+def git_ignores_global(ctx):
+    return git_ignores(
+        ctx.run(
+            'git config --global core.excludesfile', hide=True
+        ).stdout.strip()
+    )
+
+
+GIT_IGNORES = git_ignores(GITIGNORE_FILE)
 
 
 def get_from_lastpass(ctx, note_id, get_field):
@@ -237,3 +196,18 @@ def make_dir(path_dir):
             exit_msg(msg)
         else:
             pass  # directory already exists, nothing to do in this case
+
+
+def get_migration_file_modules(migration_file):
+    """Read the migration.yml and get module list.
+    """
+    with open(migration_file, 'r') as stream:
+        content = yaml.load(stream, Loader=yaml.FullLoader)
+    modules = set()
+    for version in range(len(content['migration']['versions'])):
+        try:
+            migration_version = content['migration']['versions'][version]
+            modules.update(migration_version['addons']['upgrade'])
+        except KeyError:
+            pass
+    return modules

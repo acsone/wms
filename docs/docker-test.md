@@ -39,4 +39,4 @@ Be sure to [install Docker and docker-compose](prerequisite.md) before going any
 
 5. If you want to drop your database, run:
 
-        docker-compose -f test.yml odoo dropdb odoodb
+        docker-compose -f test.yml run --rm odoo dropdb odoodb

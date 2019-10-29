@@ -8,13 +8,24 @@
 from __future__ import print_function
 
 import os
+import re
 
 from invoke import task
 
-from .common import MIGRATION_FILE, build_path, search_replace
+from .common import (
+    MIGRATION_FILE,
+    PENDING_MERGES_DIR,
+    build_path,
+    cd,
+    check_git_diff,
+    exit_msg,
+    root_path,
+    search_replace,
+)
+from .submodule import Repo
 
 try:
-    from ruamel.yaml import YAML
+    from ruamel.yaml import YAML, round_trip_dump
 except ImportError:
     print('Missing install ruamel.yaml from requirements')
     print('Please run `pip install -r tasks/requirements.txt`')
@@ -172,3 +183,84 @@ def demo_to_sample(ctx):
     print("If everything is good:")
     print("   git commit -m 'Apply depreciation of demo in favor of sample'")
     print("      git push")
+
+
+@task
+def split_pending_merges(ctx):
+    """Split odoo/pending-merges.yaml to per-project files.
+
+    It will remove:
+    - odoo/pending-merges.yaml
+
+    It will create following directory:
+    - pending-merges.d/
+
+    That directory will be populated with one YAML file per submodule, each
+    holding it's own pending merges configuration.
+
+    It'll try to commit applied changes afterwards
+    """
+    # create a directory to store module local merges
+    if not os.path.exists(PENDING_MERGES_DIR):
+        print(PENDING_MERGES_DIR, "created")
+        os.makedirs(build_path(PENDING_MERGES_DIR))
+        os.system("touch {}/.gitkeep".format(build_path(PENDING_MERGES_DIR)))
+
+    # both are relative to project root
+    # that's for the sake of being able to commit changes afterwards
+    old_path = build_path('odoo/pending-merges.yaml')
+
+    # check if there's a file can be found by the old path
+    # - that defines if we should even do smth at all
+    if not os.path.exists(build_path(old_path)):
+        exit_msg(
+            'No file found at {}.\nNothing to do here!'.format(
+                build_path(old_path)
+            )
+        )
+
+    # we're gonna commit it afterwards, make sure that user is aware of it
+    check_git_diff(ctx)
+
+    # read the old file, group stuff by modules
+    yaml = YAML()
+    yaml.indent(mapping=2, sequence=4, offset=2)
+    with open(build_path(old_path)) as pending_merges_file:
+        data = yaml.load(
+            '\n'.join(
+                line
+                for line in pending_merges_file.read().splitlines()
+                if line.strip()
+            )
+        )
+        for submodule_relpath in data:
+            submodule_merges_path = Repo.build_submodule_merges_path(
+                submodule_relpath
+            )
+            submodule_config = data[submodule_relpath]
+            # rewrite relative submodule path
+            patched_path = submodule_relpath.replace(
+                './src/', '../odoo/src/', 1
+            ).replace('./external-src/', '../odoo/external-src/', 1)
+            # using dicts here is fine, cause we don't care about remotes order
+            submodule_config['remotes'] = {
+                re.sub(r'\boca\b', 'OCA', remote): url
+                for remote, url in submodule_config['remotes'].items()
+            }
+            # different story w/ merges
+            # we want to preserve comments, thus we have to dump the
+            # whole thing and work with the strings if we don't
+            # want to loose them. Comments are saved as separated
+            # data in a CommentedMap.
+            merges = round_trip_dump(submodule_config['merges']).split('\n')
+            merges = [re.sub(r'\boca\b', 'OCA', merge) for merge in merges]
+            submodule_config['merges'] = yaml.load('\n'.join(merges))
+            with open(submodule_merges_path, 'w') as submodule_merges:
+                yaml.dump({patched_path: submodule_config}, submodule_merges)
+
+    with cd(root_path()):
+        # git only works w/ relative paths, PENDING_MERGES_DIR is real
+        ctx.run('git add -- {}'.format('pending-merges.d'))
+        ctx.run('git rm -- {}'.format(old_path))
+        commit_msg = 'Split odoo/pending-merges.yaml to per-submodule files'
+        ctx.run("git commit -m '{}' -e -vv".format(commit_msg), pty=True)

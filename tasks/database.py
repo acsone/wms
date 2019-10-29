@@ -71,6 +71,22 @@ def get_db_container_port(ctx):
     return str(int(run_res.stdout.split(':')[-1]))
 
 
+def execute_db_request(ctx, dbname, sql):
+    """Return the execution of given SQL request on given db"""
+    result = False
+    with ensure_db_container_up(ctx):
+        db_port = get_db_container_port(ctx)
+        dsn = "host=localhost dbname=%s " "user=odoo password=odoo port=%s" % (
+            dbname,
+            db_port,
+        )
+        # Connect and list DBs
+        with psycopg2.connect(dsn) as db_connection:
+            with db_connection.cursor() as db_cursor:
+                result = db_cursor.execute(sql)
+    return result
+
+
 def get_db_request_result(ctx, dbname, sql):
     """Return the execution of given SQL request on given db"""
     result = False

@@ -29,6 +29,6 @@ In integration and test environment, [mailtrap.io](https://mailtrap.io) is used.
 
 To create a new account for a project, use the email address that can be found on the specific project page (tab "Other Info") of our Odoo instance and a random password.
 
-The confirmation email of mailtrap.io will appear in the issues of the corresponding project.
+The confirmation email of mailtrap.io will appear in the tasks of the corresponding project in Odoo.
 
 Don't forget to add an entry in lastpass.

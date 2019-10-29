@@ -1,2 +1,2 @@
 FROM aadl/cups-alpine
-MAINTAINER Camptocamp
+LABEL maintainer="Camptocamp"
