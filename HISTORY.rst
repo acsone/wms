@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2284: Fix recompute of additional product
+
 **Bugfixes**
 
 **Build**
