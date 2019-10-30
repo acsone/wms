@@ -139,17 +139,6 @@ class Location(DomainInterface):
 
         product = pack_op.product_id
 
-        result.update(
-            {
-                'respCode': constants.RESPONSE_CODE_OK,
-                'headerNum': None,
-                'productCode': product.default_code,
-                'productDescription': product.name,
-                'quantity': product.qty_available,  # Total quantity
-                'Usf07': product.virtual_available,  # Stock available
-            }
-        )
-
         # TODO Please remove me later (when dynamic locations will removed)
         shelf = params.Cri03 or ''
         special_shelf_regex = r'0([A-Z])'
@@ -166,6 +155,22 @@ class Location(DomainInterface):
                 ('box', '=', params.Cri05),
             ],
             limit=1,
+        )
+
+        if location:
+            # As soon as we get a matching location, we set it in the context
+            # of the product to compute the related quantities available.
+            product = product.with_context(location=location.id)
+
+        result.update(
+            {
+                'respCode': constants.RESPONSE_CODE_OK,
+                'headerNum': None,
+                'productCode': product.default_code,
+                'productDescription': product.name,
+                'quantity': product.qty_available,  # Total quantity
+                'Usf07': product.virtual_available,  # Stock available
+            }
         )
 
         if not location:

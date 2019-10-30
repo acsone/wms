@@ -23,6 +23,11 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2261: Voice picking, wrong product qty returned
+
+  The quantity of the current stock location is now returned instead of the
+  total stock within the warehouse.
+
 **Build**
 
 **Documentation**
