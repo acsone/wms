@@ -21,11 +21,22 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.45.0 (2019-10-30)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2249: Change account reconciliation partner domain
 * ALCYN-2260: Improvement of purchase invoice encoding
 * ALCYN-2224: make blocking documents visible in archive wizard
-** ALCYN-2259: Add new product.category and add exception.rule for it
-
+* ALCYN-2259: Add new product.category and add exception.rule for it
 * ALCYN-2204: Recompute taxes on invoice when invoice line are deleted
 
 **Bugfixes**
@@ -35,10 +46,6 @@ latest (unreleased)
 * ALCYN-2242: Fix rounding computing
 * ALCYN-2206: Add unique constraint on product cnk_code field
 * ALCYN-2236: Fix differences with inventory to date and stock valuation
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.44.3 (2019-10-29)
