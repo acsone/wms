@@ -20,3 +20,24 @@ class StockMove(models.Model):
             lots = move.lot_ids.filtered('is_archived')
             lots.write({'is_archived': False})
         return res
+
+    def action_open_update_wizard(self):
+        self.ensure_one()
+        if self.picking_type_id.code != 'incoming' or self.state in ['done']:
+            return
+        action = self.env.ref(
+            'specific_stock.stock_move_wizard_handler_action'
+        )
+        vals = action.read()[0]
+        vals['context'] = {
+            'default_new_date_expected': self.date_expected,
+            'default_move_id': self.id,
+        }
+        vals['target'] = 'new'
+        return vals
+
+    def action_cancel_move(self):
+        if self.picking_type_id.code != 'incoming' or self.state in ['done']:
+            return
+        wizard = self.env['stock.move.wizard'].new({'move_id': self.id})
+        wizard.action_cancel_move()
