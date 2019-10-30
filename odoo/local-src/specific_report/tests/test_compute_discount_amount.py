@@ -6,6 +6,9 @@ from odoo.tests.common import TransactionCase
 
 
 class TestComputeDiscountAmount(TransactionCase):
+    post_install = True
+    at_install = False
+
     def setUp(self):
         super(TestComputeDiscountAmount, self).setUp()
 
