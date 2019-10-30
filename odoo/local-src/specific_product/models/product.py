@@ -37,6 +37,9 @@ class ProductTemplate(models.Model):
 
     veterinary_only = fields.Boolean(string='Veterinary only')
     belgium_only = fields.Boolean(string='Belgium only')
+    count_moves_to_do = fields.Integer(
+        string='Incoming Stock moves', compute="_compute_incoming_stock_moves"
+    )
 
     _sql_constraints = [
         (
@@ -80,3 +83,21 @@ class ProductTemplate(models.Model):
         if 'cnk_code' in vals and vals['cnk_code']:
             vals['cnk_code'] = vals['cnk_code'].replace(' ', '')
         return vals
+
+    def action_open_incoming_stock_moves(self):
+        action = super(ProductTemplate, self).action_view_stock_moves()
+        action['context']['search_default_future'] = 1
+        action['context']['search_default_groupby_picking_id'] = 1
+        action['domain'].append(('picking_type_id.code', '=', 'incoming'))
+        return action
+
+    def _compute_incoming_stock_moves(self):
+        stock_move = self.env['stock.move']
+        for rec in self:
+            rec.count_moves_to_do = stock_move.search_count(
+                [
+                    ('product_id.product_tmpl_id', 'in', rec.ids),
+                    ('picking_type_id.code', '=', 'incoming'),
+                    ('state', 'in', ('assigned', 'confirmed', 'waiting')),
+                ]
+            )
