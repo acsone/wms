@@ -263,6 +263,46 @@ class ResPartner(models.Model):
             res.append((partner.id, fullname))
         return res
 
+    @api.multi
+    def message_subscribe(
+        self, partner_ids=None, channel_ids=None, subtype_ids=None, force=True
+    ):
+        """
+        Add subtype to note automatically for partner
+        """
+        # Get the id from "Note"
+        subtype_note_xmlids = 'mail.mt_note'
+        subtype_note_id = self.env['ir.model.data'].xmlid_to_res_id(
+            subtype_note_xmlids
+        )
+        # Get default subtype item for partner
+        partner_default_subtype_ids = (
+            self.env['mail.message.subtype']
+            .search(
+                [
+                    '|',
+                    ('res_model', '=', False),
+                    '&',
+                    ('res_model', '=', 'res.partner'),
+                    ('default', '=', True),
+                ]
+            )
+            .ids
+        )
+        # add "note id" to be selected
+        if subtype_ids:
+            subtype_ids += partner_default_subtype_ids
+        else:
+            subtype_ids = partner_default_subtype_ids
+        if subtype_note_id and subtype_note_id not in subtype_ids:
+            subtype_ids.append(subtype_note_id)
+        return super(ResPartner, self).message_subscribe(
+            partner_ids=partner_ids,
+            channel_ids=channel_ids,
+            subtype_ids=subtype_ids,
+            force=force,
+        )
+
     @api.one
     @api.constrains('name', 'street', 'city', 'zip', 'country_id')
     def _is_valid_esb_address(self):
