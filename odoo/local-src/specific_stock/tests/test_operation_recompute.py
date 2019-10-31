@@ -2,69 +2,19 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from .common import BaseCase
 
 
-class TestOperationRecompute(TransactionCase):
+class TestOperationRecompute(BaseCase):
     def setUp(self):
         super(TestOperationRecompute, self).setUp()
-
-        self.product_1 = self.env['product.product'].create(
-            {
-                'name': 'Product 1',
-                'type': 'product',
-                'uom_id': self.env.ref('product.product_uom_unit').id,
-                'uom_po_id': self.env.ref('product.product_uom_unit').id,
-                'default_code': 'TOR1',
-                'tracking': 'lot',
-            }
-        )
-        self.product_1_lotA = self.env['stock.production.lot'].create(
-            {'product_id': self.product_1.id, 'name': 'LotA'}
-        )
-        self.product_1_lotB = self.env['stock.production.lot'].create(
-            {'product_id': self.product_1.id, 'name': 'LotB'}
-        )
-        self.product_1_add = self.env['product.product'].create(
-            {
-                'name': 'Product 1 add',
-                'type': 'product',
-                'uom_id': self.env.ref('product.product_uom_unit').id,
-                'uom_po_id': self.env.ref('product.product_uom_unit').id,
-                'default_code': 'TOR1ADD',
-            }
-        )
-        self.product_1.write(
-            {
-                'additional_product_id': self.product_1_add.id,
-                'ratio_main_product': 1,
-                'ratio_additional_product': 1,
-            }
-        )
-        self.product_2 = self.env['product.product'].create(
-            {
-                'name': 'Product 2',
-                'type': 'product',
-                'uom_id': self.env.ref('product.product_uom_unit').id,
-                'uom_po_id': self.env.ref('product.product_uom_unit').id,
-                'default_code': 'TOR2',
-            }
-        )
-
-        wh = self.env['stock.warehouse'].search([])
-        location = wh[0].view_location_id
-        location.usage = 'internal'
-        loc_customer = self.env.ref('stock.stock_location_customers')
-
-        pick_type = self.env.ref('stock.picking_type_out')
-        pick_type.subcode = 'PICK'
 
         # Create picking 1
         self.picking_1 = self.env['stock.picking'].create(
             {
-                'picking_type_id': pick_type.id,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                'picking_type_id': self.pick_type.id,
+                'location_id': self.location.id,
+                'location_dest_id': self.loc_customer.id,
             }
         )
         self.move_1a = self.env['stock.move'].create(
@@ -74,8 +24,8 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_1.id,
                 'product_uom': self.product_1.uom_id.id,
                 'product_uom_qty': 6,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                'location_id': self.location.id,
+                'location_dest_id': self.loc_customer.id,
                 'date': '2018-01-01 00:00:00',
             }
         )
@@ -87,8 +37,8 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_1.id,
                 'product_uom': self.product_1.uom_id.id,
                 'product_uom_qty': 1,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                'location_id': self.location.id,
+                'location_dest_id': self.loc_customer.id,
                 'date': '2018-01-01 00:00:00',
             }
         )
@@ -100,8 +50,8 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_2.id,
                 'product_uom': self.product_2.uom_id.id,
                 'product_uom_qty': 1,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                'location_id': self.location.id,
+                'location_dest_id': self.loc_customer.id,
                 'date': '2018-01-01 00:00:00',
             }
         )
@@ -116,7 +66,7 @@ class TestOperationRecompute(TransactionCase):
             {
                 'name': 'Test',
                 'filter': 'product',
-                'location_id': location.id,
+                'location_id': self.location.id,
                 'product_id': self.product_1.id,
             }
         )
@@ -127,7 +77,7 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_1.id,
                 'product_qty': 3,
                 'inventory_id': inventory.id,
-                'location_id': location.id,
+                'location_id': self.location.id,
                 'prod_lot_id': self.product_1_lotA.id,
             }
         )
@@ -136,7 +86,7 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_1.id,
                 'product_qty': 5,
                 'inventory_id': inventory.id,
-                'location_id': location.id,
+                'location_id': self.location.id,
                 'prod_lot_id': self.product_1_lotB.id,
             }
         )
@@ -145,7 +95,7 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_1_add.id,
                 'product_qty': 20,
                 'inventory_id': inventory.id,
-                'location_id': location.id,
+                'location_id': self.location.id,
             }
         )
         inventory.line_ids.create(
@@ -153,7 +103,7 @@ class TestOperationRecompute(TransactionCase):
                 'product_id': self.product_2.id,
                 'product_qty': 10,
                 'inventory_id': inventory.id,
-                'location_id': location.id,
+                'location_id': self.location.id,
             }
         )
         inventory.action_done()
