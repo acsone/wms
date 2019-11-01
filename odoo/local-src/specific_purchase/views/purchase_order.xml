@@ -18,7 +18,7 @@
             </xpath>
 
             <xpath expr="//sheet/group" position="after">
-            <!-- Adiing a new table to place button in rigth place and don't affect the fields of prevous table -->
+            <!-- Adding a new table to place button in rigth place and don't affect the fields of prevous table -->
                 <group style="margin-top: -20px; margin-bottom: 0px;">
                     <group>
                     </group>
@@ -57,7 +57,7 @@
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree//field[@name='date_planned']" position="attributes">
-                <attribute name="attrs">{'invsiible': True}</attribute>
+                <attribute name="attrs">{'invisible': True}</attribute>
             </xpath>
 
             <!-- Invisible are not aplicable here as it will hide field in form at all -->
