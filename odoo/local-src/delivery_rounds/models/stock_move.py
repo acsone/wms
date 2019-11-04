@@ -105,14 +105,3 @@ class StockMove(models.Model):
                 ('delivery_round_id.state', 'in', ('open', 'draft')),
             ]
         return domain
-
-    def _lock_moves(self):
-        """Lock the database rows of the stock moves to prevent concurrent access.
-
-        The lock is released when the transaction is committed or rolled back.
-        """
-        if self:
-            self.env.cr.execute(
-                'SELECT id FROM stock_move WHERE id in %s FOR UPDATE',
-                (tuple(self.ids),),
-            )

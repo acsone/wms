@@ -299,6 +299,17 @@ class RoundInstance(models.Model):
         if errors:
             raise UserError('\n'.join(errors))
 
+    def _lock(self):
+        """Lock the database rows of the instance to prevent concurrent access.
+
+        The lock is released when the transaction is committed or rolled back.
+        """
+        if self:
+            self.env.cr.execute(
+                'SELECT id FROM round_instance WHERE id in %s FOR UPDATE',
+                (tuple(self.ids),),
+            )
+
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
@@ -307,6 +318,7 @@ class RoundInstance(models.Model):
             self.id,
             pickings.ids,
         )
+        self._lock()
 
         self._check_printed_pickings(pickings)
 
@@ -319,7 +331,6 @@ class RoundInstance(models.Model):
             lambda move: move.state not in ('done', 'cancel')
             and move.product_uom_qty > 0.0
         )
-        moves._lock_moves()
         moves_to_assign = moves.filtered(
             lambda move: not move.linked_move_operation_ids
         )
