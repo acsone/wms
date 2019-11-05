@@ -244,7 +244,12 @@ class AccountInvoiceLine(models.Model):
 
     @api.multi
     @api.depends(
-        'price_unit', 'discount', 'discount2', 'discount3', 'quantity'
+        'price_unit',
+        'price_subtotal',
+        'discount',
+        'discount2',
+        'discount3',
+        'quantity',
     )
     def _compute_price_discount_amount(self):
         """ We need to compute discount line by line to prevent

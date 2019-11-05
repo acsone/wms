@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2268: Fix issue with random wrong discount computation on the first
+  line of the invoice
+
 **Build**
 
 **Documentation**

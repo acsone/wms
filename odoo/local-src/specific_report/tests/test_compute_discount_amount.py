@@ -286,14 +286,6 @@ class TestComputeDiscountAmount(TransactionCase):
 
         # Summary
         tax_lines = self.invoice.invoice_only_tax_ids.sorted('base')
-        self.assertAlmostEqual(
-            sum(tax_lines.mapped('base')),
-            self.invoice.amount_untaxed_with_contribution,
-        )
-        self.assertAlmostEqual(
-            sum(tax_lines.mapped('amount')), self.invoice.amount_only_tax
-        )
-
         self.assertAlmostEqual(tax_lines[0].base, 0.71 * 6)
         self.assertAlmostEqual(tax_lines[1].base, 1.43 * 8)
 
@@ -302,4 +294,18 @@ class TestComputeDiscountAmount(TransactionCase):
         self.assertAlmostEqual(tax_lines[0].amount, 0.89)
         # for taxes 6 if base is not rounded result will be less: 0.68
         self.assertAlmostEqual(tax_lines[1].amount, 0.69)
+
+        self.assertAlmostEqual(
+            sum(tax_lines.mapped('base')),
+            self.invoice.amount_untaxed_with_contribution,
+            msg='sum(%s) != %.2f'
+            % (
+                ', '.join('%.2f' % t for t in tax_lines.mapped('base')),
+                self.invoice.amount_untaxed_with_contribution,
+            ),
+        )
+        self.assertAlmostEqual(
+            sum(tax_lines.mapped('amount')), self.invoice.amount_only_tax
+        )
+
         self.assertAlmostEqual(self.invoice.amount_only_tax, 1.58)
