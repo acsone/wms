@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2279: Set technical group on route category field
+
 **Bugfixes**
 
 **Build**
