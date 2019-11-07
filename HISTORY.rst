@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2302: Add missing sale warning for stupefiant vet
+
 **Build**
 
 **Documentation**
