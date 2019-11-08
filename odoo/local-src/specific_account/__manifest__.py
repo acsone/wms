@@ -27,6 +27,8 @@
         'product_analytic',
         'account_invoice_sent',
         'queue_job',
+        # OCA/web
+        'web_readonly_bypass',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

@@ -185,6 +185,7 @@ migration:
           - web_cache_name_get
           - web_decimal_numpad_dot
           - web_environment_ribbon
+          - web_readonly_bypass
           - web_sheet_full_width
           # oca/purchase-workflow
           - purchase_cancel_reason
@@ -554,3 +555,8 @@ migration:
           - specific_purchase
           - specific_sale
           - stock_valuation
+    - version: 10.0.1.45.1
+      addons:
+        upgrade:
+          - web_readonly_bypass
+          - specific_account

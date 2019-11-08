@@ -105,6 +105,14 @@
             <field name="date_invoice" position="after">
                 <field name="date" domain="[('state', '=', 'draft'), ('company_id', '=', company_id)]" groups="account.group_account_user"/>
             </field>
+            <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+              <!-- To migrate with 'force_save' field attributes on Odoo >= 11 -->
+              <attribute name="readonly_by_pass">['purchase_line_qty_received', 'purchase_line_product_qty']</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+              <field name="purchase_line_qty_received" invisible="1"/>
+              <field name="purchase_line_product_qty" invisible="1"/>
+            </xpath>
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="replace"/>
             <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']" position="after">
                 <field name="base"/>
