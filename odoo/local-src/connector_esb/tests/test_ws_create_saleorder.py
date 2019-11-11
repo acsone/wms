@@ -382,3 +382,20 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         data = deepcopy(self.order_data)
         order = self.env['sale.order']._ws_create_new(data, job_creation_date)
         self.assertEqual(order.state, 'cancel')
+
+    def test_create_saleorder_with_unknown_product(self):
+        """Check sale.order with an unknown product.
+
+        For a new sale order coming from the web service if the product is
+        unknown the sale.order should be accepted but the info is recorded
+        by a message in the chatter.
+        """
+        data = deepcopy(self.order_data)
+        unknown_sku = 'UNKWN'
+        data['lines'].append(
+            {'line_id': '3', 'sku': unknown_sku, 'quantity': 3, 'free': False}
+        ),
+        order = self.env['sale.order']._ws_create_new(data)
+        self.assertEqual(len(order.order_line), 1)
+        message = order.message_ids.filtered(lambda r: unknown_sku in r.body)
+        self.assertEqual(len(message), 1)

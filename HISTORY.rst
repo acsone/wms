@@ -23,10 +23,14 @@ latest (unreleased)
 
 * ALCYN-2279: Set technical group on route category field
 
+* ALCYN-2300: New sale order coming in the web service with an unknown product must be accepted and a message logged (ESB)
+
 **Bugfixes**
 
 * ALCYN-2268: Fix issue with random wrong discount computation on the first
   line of the invoice
+
+* ALCYN-2300: Fix sale channel web on export of sale order (ESB)
 
 **Build**
 
