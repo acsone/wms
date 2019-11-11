@@ -7,6 +7,7 @@ import os
 import requests
 
 import mock
+from odoo.addons.connector.exception import ConnectorException
 from odoo.tests.common import SavepointCase
 
 
@@ -114,7 +115,7 @@ class ExportSaleOrderTestCase(SavepointCase):
                 'esb_ref': 'ref_02',
                 'partner_id': self.partner.id,
                 'date_order': '2018-01-29',
-                'sale_channel': None,
+                'sale_channel': 'phone',
                 'carrier_id': self.delivery.id,
                 'client_order_ref': 'whatever the client want',
                 'delivery_price': 23.5,
@@ -184,7 +185,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             'erp_name': so.name,
             'customer_id': so.partner_id.ref,
             'date': so.date_order.split(' ')[0],
-            'channel': '01',  # Default is phone
+            'channel': '01',
             'order_ref': so.client_order_ref,
             'status': 'processing',
             'shipping_method': so.carrier_id.esb_ref,
@@ -217,6 +218,18 @@ class ExportSaleOrderTestCase(SavepointCase):
             values = mapper.map_record(so).values()
         self.maxDiff = None
         self.assertDictEqual(values, expected)
+
+    def test_mapper_sale_channel_incorrect(self):
+        """Check empty incorrect sale_channel.
+
+        If the sale_channel is empty or of unknown value the job must fail.
+        """
+        so = self.so2
+        so.sale_channel = ''
+        with self.backend.work_on(self.model._name) as work:
+            mapper = work.component(usage='export.mapper')
+            with self.assertRaises(ConnectorException):
+                mapper.map_record(so).values()
 
     def test_order_line_is_delivery_not_exported(self):
         """Check sale order line with is_delivery set to True.
