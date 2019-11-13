@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2309: Fix cancellation of sale orders after some delay
+
 **Build**
 
 **Documentation**
