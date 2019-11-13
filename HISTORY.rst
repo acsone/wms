@@ -27,6 +27,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2317: fix issues with purchase discounts
+* ALCYN-2309: Fix cancellation of sale orders after some delay
 
 **Build**
 
