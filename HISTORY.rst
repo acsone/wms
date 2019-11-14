@@ -23,22 +23,28 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2303: Fix improvement of purchase invoice encoding (ALCYN-2260)
-
-  The invoice lines are generated through an onchange when filling the PO field,
-  as such readonly fields are not send to the server to be stored.
-  The use of 'web_readonly_bypass' from OCA/web solves this issue (equivalent
-  of 'force_save' field attribute on Odoo >= 11).
-
-* ALCYN-2302: Add missing sale warning for stupefiant vet
-
 **Build**
 
 **Documentation**
 
 
-10.0.1.45.0 (2019-10-30)
+10.0.1.45.1 (2019-11-14)
 ++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2303: Fix improvement of purchase invoice encoding (ALCYN-2260)
+  The invoice lines are generated through an onchange when filling the PO field,
+  as such readonly fields are not send to the server to be stored.
+  The use of 'web_readonly_bypass' from OCA/web solves this issue (equivalent
+  of 'force_save' field attribute on Odoo >= 11).
+* ALCYN-2302: Add missing sale warning for stupefiant vet
+
+
+10.0.1.45.0 (2019-10-30) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Note: moved to 10.0.1.45.1
 
 **Features and Improvements**
 
