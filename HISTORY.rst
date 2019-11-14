@@ -30,6 +30,8 @@ latest (unreleased)
   The use of 'web_readonly_bypass' from OCA/web solves this issue (equivalent
   of 'force_save' field attribute on Odoo >= 11).
 
+* ALCYN-2302: Add missing sale warning for stupefiant vet
+
 **Build**
 
 **Documentation**

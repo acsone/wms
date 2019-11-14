@@ -139,6 +139,19 @@ failed = object.warning_psychotropic()
             </field>
         </record>
 
+        <record id="warning_stupefiant_vet" model="exception.rule">
+            <field name="name">Warning stupéfiant VET</field>
+            <field name="description">Warning stupéfiant VET</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="model">sale.order.line</field>
+            <field name="warning_only">True</field>
+            <field name="warning_text">stupéfiant VET: written order, keep confirmation.</field>
+            <field name="code">
+failed = object.warning_stupefiant_vet()
+            </field>
+        </record>
+
         <record id="warning_cascade_import" model="exception.rule">
             <field name="name">Warning cascade importation</field>
             <field name="description">Warning cascade importation</field>

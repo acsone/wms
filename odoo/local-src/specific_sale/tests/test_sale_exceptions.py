@@ -450,6 +450,15 @@ class TestSaleOrderException(SavepointCase):
         line.product_id = self.prod_psycho_III
         self.assertTrue(exception.warning_text in line.warning_text)
 
+    def test_exception_warning_stupefiant_vet_product(self):
+        """Check sale order line message for psychotropic products."""
+        rules = self.env['exception.rule'].search([('active', '=', 0)])
+        rules.write({'active': 1})
+        exception = self.env.ref('specific_sale.warning_stupefiant_vet')
+        line = self.so1.order_line[0]
+        line.product_id = self.prod_stupefiant_vet
+        self.assertTrue(exception.warning_text in line.warning_text)
+
     def test_exceptions_by_phone(self):
         """Check psychotropic are not oredered on the phone."""
         rules = self.env['exception.rule'].search([('active', '=', 0)])

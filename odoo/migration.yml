@@ -560,3 +560,4 @@ migration:
         upgrade:
           - web_readonly_bypass
           - specific_account
+          - specific_sale
