@@ -23,6 +23,13 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2303: Fix improvement of purchase invoice encoding (ALCYN-2260)
+
+  The invoice lines are generated through an onchange when filling the PO field,
+  as such readonly fields are not send to the server to be stored.
+  The use of 'web_readonly_bypass' from OCA/web solves this issue (equivalent
+  of 'force_save' field attribute on Odoo >= 11).
+
 **Build**
 
 **Documentation**
