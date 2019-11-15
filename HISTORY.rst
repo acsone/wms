@@ -55,6 +55,10 @@ Note: moved to 10.0.1.45.1
 * ALCYN-2224: make blocking documents visible in archive wizard
 * ALCYN-2259: Add new product.category and add exception.rule for it
 * ALCYN-2204: Recompute taxes on invoice when invoice line are deleted
+* ALCYN-2281: Add:
+     * new wizard in stock to move stock.move.line to other picking
+     * smart button to product form for quick search incoming not finished moves
+     * split scheduled time in purchase order from datetime format to date and time format
 
 **Bugfixes**
 

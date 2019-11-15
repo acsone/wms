@@ -12,6 +12,20 @@
             <xpath expr="//field[@name='origin']" position="after">
                 <field name="nbr_lines"/>
                 <field name="nbr_lines_bo"/>
+                <field name="date_planned" class="oe_read_only" />
+                <field name="day_planned" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline oe_edit_only"/>
+                <field name="time_planned" widget="float_time" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline oe_edit_only"/>
+            </xpath>
+
+            <xpath expr="//sheet/group" position="after">
+            <!-- Adding a new table to place button in rigth place and don't affect the fields of prevous table -->
+                <group style="margin-top: -20px; margin-bottom: 0px;">
+                    <group>
+                    </group>
+                    <group style="margin-top: 0px;">
+                        <button name="action_set_date_planned" type="object" states="draft,sent" string="Set date to all order lines" help="This changes the scheduled date of all order lines to the given date" class="fa fa-calendar o_icon_button oe_edit_only" />
+                    </group>
+                </group>
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="after">
@@ -43,8 +57,12 @@
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree//field[@name='date_planned']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+                <attribute name="attrs">{'invisible': True}</attribute>
             </xpath>
+
+            <!-- Invisible are not aplicable here as it will hide field in form at all -->
+            <xpath expr="//page[2]/group/group/label[1]" position="replace"/>
+            <xpath expr="//page[2]/group/group/div[1]" position="replace"/>
 
             <xpath expr="//field[@name='order_line']/tree//field[@name='product_qty']" position="attributes">
                 <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>

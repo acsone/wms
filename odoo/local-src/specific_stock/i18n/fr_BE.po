@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_stock
+#	* specific_stock
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-05 15:54+0000\n"
-"PO-Revision-Date: 2018-11-30 22:13+0000\n"
+"POT-Creation-Date: 2019-11-01 08:23+0000\n"
+"PO-Revision-Date: 2019-11-01 08:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -29,12 +28,8 @@ msgstr "Informations complémentaires communiquées au client"
 #. module: specific_stock
 #: code:addons/specific_stock/models/reception_pharmacy.py:122
 #, python-format
-msgid ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
-msgstr ""
-"Tout les pickings ayant la même adresse d'expédition doivent se trouver dans "
-"la même tournée."
+msgid "All pickings at destination of a same shipping must be in the same delivery round"
+msgstr "Tous les pickings ayant la même adresse d'expédition doivent se trouver dans la même tournée."
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_is_archived
@@ -55,7 +50,7 @@ msgstr "Bac"
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_board_board
 msgid "Board"
-msgstr ""
+msgstr "Tableau de bord"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_box
@@ -66,8 +61,15 @@ msgstr "Boite"
 #: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
 #: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
 #: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_update_handler_form
 msgid "Cancel"
 msgstr "Annuler"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_update_handler_form
+#: model:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
+msgid "Cancel move"
+msgstr "Annuler le mouvement de stock"
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/stock_production_lot.py:361
@@ -107,6 +109,7 @@ msgstr "Couloir"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_uid
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
@@ -116,6 +119,7 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_date
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_create_date
 msgid "Created on"
 msgstr "Créé le"
 
@@ -178,6 +182,7 @@ msgstr "Livraison"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_display_name
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -190,6 +195,11 @@ msgstr "Fait"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_duration
 msgid "Duration to compute best sellers (in months)"
 msgstr "Durée (en mois) pour calculer les produits les plus vendus"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_location_exclude_from_immediately_usable_qty
+msgid "Exclude from immediately usable quantity"
+msgstr "Exclure de la quantité immédiatement utilisable"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
@@ -213,6 +223,7 @@ msgstr "Hauteur"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_id
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_id
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_id
 msgid "ID"
 msgstr "ID"
 
@@ -232,8 +243,19 @@ msgstr "Emplacements de stock"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line___last_update
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_product_last_in_date
+msgid "Last Purchasing Date"
+msgstr "Date d'achat la plus récente"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_product_last_out_date
+msgid "Last Selling Date"
+msgstr "Date de dernière vente"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_uid
@@ -241,6 +263,7 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_uid
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
@@ -250,6 +273,7 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_date
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_write_date
 msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
@@ -300,9 +324,31 @@ msgid "Missing quantity of products to pick"
 msgstr "Il n'y a pas assez de quantité à prendre"
 
 #. module: specific_stock
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:59
+#, python-format
+msgid "Move for product {} with quantity {}                     of current picking moved to {}"
+msgstr "Mouvement du produit {} avec la quantité {} du mouvement en cours vers {}"
+
+#. module: specific_stock
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:76
+#, python-format
+msgid "Move for product {} with quantity {} canceled"
+msgstr "Mouvement annulé pour le produit {} avec la quantité {}"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_move_id
+msgid "Move id"
+msgstr "ID du mouvement de stock"
+
+#. module: specific_stock
 #: selection:reception.pharmacy,state:0
 msgid "New"
 msgstr "Nouveau"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_stock_move_update_handler_new_date_expected
+msgid "New date expected"
+msgstr "Nouvelle date prévue"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
@@ -413,12 +459,8 @@ msgstr "Veuillez introduire au moins une ligne"
 #. module: specific_stock
 #: code:addons/specific_stock/models/product_template.py:181
 #, python-format
-msgid ""
-"Please set the Price limit for inventory or/and the Number of open days in "
-"the stock configuration"
-msgstr ""
-"Veuillez définir le prix limite pour les inventaires et/ou le nombre de "
-"jours ouvrés dans la configuration de l'inventaire"
+msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
+msgstr "Veuillez définir le prix limite pour les inventaires et/ou le nombre de jours ouvrés dans la configuration de l'inventaire"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_price_limit_for_inventory
@@ -475,7 +517,6 @@ msgstr "Ajouter au colis"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_picking_is_put_in_pack_done
-#, fuzzy
 msgid "Put in Pack done"
 msgstr "Ajouter au colis"
 
@@ -517,9 +558,13 @@ msgstr "Réserve"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_return_picking
-#, fuzzy
 msgid "Return Picking"
 msgstr "Opération de manutention"
+
+#. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_update_handler_form
+msgid "Set Expiration Date"
+msgstr "Définir la date d'expiration"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_shelf
@@ -537,6 +582,11 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: specific_stock
+#: model:ir.actions.act_window,name:specific_stock.stock_move_update_handler_action
+msgid "Stock Move Wizard"
+msgstr "Assistant de mouvement de stock"
+
+#. module: specific_stock
 #: code:addons/specific_stock/models/reception_pharmacy.py:60
 #, python-format
 msgid "Supplier location is missing"
@@ -544,25 +594,19 @@ msgstr "L'adresse du fournisseur est manquante"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_procurement_order_restrict_lot_id
-msgid ""
-"Technical field used to depict a restriction on the lot/serial number of "
-"quants to consider when marking this move as 'done'"
-msgstr ""
-"Champ technique utilisé pour définir une restriction sur un lot/numéro de "
-"série des quants pour définir si un mouvement doit être marqué comme 'fait'"
+msgid "Technical field used to depict a restriction on the lot/serial number of quants to consider when marking this move as 'done'"
+msgstr "Champ technique utilisé pour définir une restriction sur un lot/numéro de série des quants pour définir si un mouvement doit être marqué comme 'fait'"
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/stock_config_settings.py:167
 #, python-format
-msgid ""
-"The delay can only be in the following list:\n"
+msgid "The delay can only be in the following list:\n"
 "(1, 2, 3, 4, 6 or 12 months)"
-msgstr ""
-"Le delai peut seulement être une valeur de la liste suivante:\n"
+msgstr "Le delai peut seulement être une valeur de la liste suivante:\n"
 "(1, 2, 3, 4, 6 ou 12 mois)"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:28
+#: code:addons/specific_stock/models/stock_location.py:31
 #: sql_constraint:stock.location:0
 #, python-format
 msgid "The location coordinate must be unique"
@@ -641,6 +685,11 @@ msgid "UOP"
 msgstr "UOP"
 
 #. module: specific_stock
+#: model:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
+msgid "Update expected date"
+msgstr "Mettre à jour la date prévue"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_is_valid_location
 msgid "Valid location"
 msgstr "Emplacement valide"
@@ -668,41 +717,23 @@ msgstr "Informations d'avertissement"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_alert_time
-msgid ""
-"When a new a Serial Number is issued, this is the number of days before an "
-"alert should be notified."
-msgstr ""
-"Quand un nouveau numéro de lot est créé, c'est le nombre de jours avant "
-"qu'une alerte soit remontée."
+msgid "When a new a Serial Number is issued, this is the number of days before an alert should be notified."
+msgstr "Quand un nouveau numéro de lot est créé, c'est le nombre de jours avant qu'une alerte soit remontée."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_life_time
-msgid ""
-"When a new a Serial Number is issued, this is the number of days before the "
-"goods may become dangerous and must not be consumed."
-msgstr ""
-"Quand un nouveau numéro de série est créé, c'est le nombre de jours avant "
-"que les marchandises deviennent dangereuses et ne doivent plus être "
-"consommées."
+msgid "When a new a Serial Number is issued, this is the number of days before the goods may become dangerous and must not be consumed."
+msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises deviennent dangereuses et ne doivent plus être consommées."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_removal_time
-msgid ""
-"When a new a Serial Number is issued, this is the number of days before the "
-"goods should be removed from the stock."
-msgstr ""
-"Quand un nouveau numéro de série est créé, c'est le nombre de jours après "
-"lesquels les marchandises doivent être enlevées du stock."
+msgid "When a new a Serial Number is issued, this is the number of days before the goods should be removed from the stock."
+msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours après lesquels les marchandises doivent être enlevées du stock."
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_use_time
-msgid ""
-"When a new a Serial Number is issued, this is the number of days before the "
-"goods starts deteriorating, without being dangerous yet."
-msgstr ""
-"Quand un nouveau numéro de série est créé, c'est le nombre de jours avant "
-"que les marchandises commencent à se détériorer, sans pour autant être "
-"dangereuses."
+msgid "When a new a Serial Number is issued, this is the number of days before the goods starts deteriorating, without being dangerous yet."
+msgstr "Quand un nouveau numéro de série est créé, c'est le nombre de jours avant que les marchandises commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_wizard_id
@@ -712,12 +743,10 @@ msgstr "Assistant"
 #. module: specific_stock
 #: code:addons/specific_stock/models/stock_picking.py:79
 #, python-format
-msgid ""
-"You cannot transfer lots with an expired removal date:\n"
-"\t- %s"
-msgstr ""
-"Vous ne pouvez pas transférer un lot expiré:\n"
-"\t- %s"
+msgid "You cannot transfer lots with an expired removal date:\n"
+"	- %s"
+msgstr "Vous ne pouvez pas transférer un lot expiré:\n"
+"	- %s"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
@@ -755,6 +784,11 @@ msgid "stock.config.settings"
 msgstr "stock.config.settings"
 
 #. module: specific_stock
+#: model:ir.model,name:specific_stock.model_stock_move_update_handler
+msgid "stock.move.wizard"
+msgstr "stock.move.wizard"
+
+#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
@@ -762,7 +796,7 @@ msgstr "stock.pack.operation.lot.add"
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_return_picking_line
 msgid "stock.return.picking.line"
-msgstr ""
+msgstr "stock.return.picking.line"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_scrap

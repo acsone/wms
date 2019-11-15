@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-17 08:15+0000\n"
-"PO-Revision-Date: 2018-07-17 08:15+0000\n"
+"POT-Creation-Date: 2019-11-01 08:38+0000\n"
+"PO-Revision-Date: 2019-11-01 08:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,11 @@ msgstr "Article retiré de la vente"
 #: model:product.state,name:specific_purchase.product_state_m
 msgid "Article retiré de la vente et remplacé"
 msgstr "Article retiré de la vente et remplacé"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_is_bo_line
+msgid "BO Line"
+msgstr "Ligne de BO"
 
 #. module: specific_purchase
 #: model:ir.actions.act_window,name:specific_purchase.bank_holiday_action
@@ -193,9 +198,19 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+msgid "In BO"
+msgstr "Dans le BO"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_product_supplierinfo
 msgid "Information about a product vendor"
 msgstr "Information sur le vendeur de l'article"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday___last_update
@@ -258,6 +273,13 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_nb_days_out_of_stock
+msgid "Nb days out of stock"
+msgstr "Nb jours en rupture de stock"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_nbr_lines
 msgid "Nbr lines"
 msgstr "Nbr lignes"
@@ -268,18 +290,25 @@ msgid "Nbr lines BO"
 msgstr "Nbr lignes BO"
 
 #. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_product_product_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_product_template_nb_days_out_of_stock
+msgid "Number of days before running out of stock"
+msgstr "Nombre de jours avant de manquer de stock"
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:60
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:59
 #, python-format
 msgid "Please select at least one day"
 msgstr "Veuillez sélectionner au moins un jour"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:66
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:65
 #, python-format
 msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"
@@ -293,6 +322,11 @@ msgstr "Liste de prix"
 #: model:ir.model,name:specific_purchase.model_procurement_order
 msgid "Procurement"
 msgstr "Approvisionnement"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_product_product
+msgid "Product"
+msgstr "Article"
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_product_template
@@ -366,9 +400,24 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_day_planned
+msgid "Scheduled Day "
+msgstr "Jour prévu "
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_time_planned
+msgid "Scheduled Time"
+msgstr "Heure prévue"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
 msgid "Sequence"
 msgstr "Séquence"
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+msgid "Set date to all order lines"
+msgstr "Définir la date pour toutes les lignes de la commande"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_state_id
@@ -376,6 +425,11 @@ msgstr "Séquence"
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
 msgid "State"
 msgstr "État"
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
@@ -412,6 +466,11 @@ msgstr "Fournisseurs"
 #, python-format
 msgid "The procurement order must be unique by product"
 msgstr "La règle de réapprovisionnement doit être unique par produit"
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+msgid "This changes the scheduled date of all order lines to the given date"
+msgstr "Définit la date prévue pour toutes les lignes de la commande"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_4
@@ -480,6 +539,13 @@ msgstr "Validité"
 #: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Vendor"
 msgstr "Fournisseur"
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_vendor_product_code
+msgid "Vendor Product Code"
+msgstr "Référence Fournisseur"
 
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard

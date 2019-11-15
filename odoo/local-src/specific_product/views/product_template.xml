@@ -88,6 +88,15 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_stock_moves']" position="after">
+                <button type="object"
+                            name= "action_open_incoming_stock_moves"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            class="oe_stat_button" icon="fa-truck"
+                            groups="stock.group_stock_user">
+                    <field name="count_moves_to_do" widget="statinfo" string="Receptions to do"/>
+                </button>
+            </xpath>
             <field name="default_code" position="after">
                 <field name="cnk_code" />
             </field>

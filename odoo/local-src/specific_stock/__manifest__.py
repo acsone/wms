@@ -53,6 +53,7 @@
         # Wizards
         'wizards/stock_receive_lot.xml',
         'wizards/stock_picking_return_views.xml',
+        'wizards/stock_move_update_handler.xml',
         'wizards/put_in_pack_helper.xml',
         'wizards/generate_voice_identifier.xml',
         'wizards/open_uop.xml',
