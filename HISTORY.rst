@@ -34,6 +34,11 @@ latest (unreleased)
 
 * ALCYN-2309: Fix cancellation of sale orders after some delay
 
+* ALCYN-2261: Voice picking, wrong product qty returned
+
+  The quantity of the current stock location is now returned instead of the
+  total stock within the warehouse.
+
 **Build**
 
 **Documentation**
