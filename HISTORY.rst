@@ -25,6 +25,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2268: Fix issue with random wrong discount computation on the first
+  line of the invoice
+
 **Build**
 
 **Documentation**
@@ -67,6 +70,11 @@ Note: moved to 10.0.1.45.1
 * ALCYN-2242: Fix rounding computing
 * ALCYN-2206: Add unique constraint on product cnk_code field
 * ALCYN-2236: Fix differences with inventory to date and stock valuation
+* ALCYN-2268: Fix rounding issue with taxes on invoice.
+
+  Taxes are now computed on rounded base price.
+  The rounding was done on base price only after tax computation.
+  It fixes the tax amount and the base price of few cents of difference.
 
 
 10.0.1.44.3 (2019-10-29)
