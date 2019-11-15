@@ -115,7 +115,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
         data['num_suite'] = 'iamsuitename'
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
         web_team = self.env.ref('sales_team.salesteam_website_sales')
         expected = {
@@ -154,7 +154,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         carrier.esb_ref = '95'
         data = deepcopy(self.order_data)
         data['carrier_id'] = carrier.esb_ref
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, carrier)
 
@@ -164,7 +164,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         When not specified in the data
         """
         data = deepcopy(self.order_data)
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
 
@@ -176,7 +176,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         """
         data = deepcopy(self.order_data)
         data['carrier_id'] = None
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
 
@@ -186,7 +186,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         data['customer_id'] = 999999
         # internal api will raise IntegrityError
         with self.assertRaises(MissingError):
-            self.env['sale.order']._ws_create_new(data)
+            self.env['sale.order']._ws_create_new(data, datetime.now())
 
     def test_draft_invoice_is_not_exported(self):
         """Check that invoices in state draft are not exported."""
@@ -231,7 +231,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
         unit_price = (
             self.p1.list_price - self.p1.list_price * discount_percent / 100
@@ -266,7 +266,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         """Check that the customer assigned pricelist is used."""
         data = deepcopy(self.order_data)
         self.partner.property_product_pricelist = self.pricelist_1.id
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.assertEqual(
             order.order_line[0].price_unit,
             self.pricelist_1.item_ids[0].fixed_price,
@@ -274,7 +274,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
     def test_create_saleorder_with_cnk(self):
         data = deepcopy(self.order_data_cnk)
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
         web_team = self.env.ref('sales_team.salesteam_website_sales')
         expected = {
@@ -312,7 +312,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         data['lines'][0]['free'] = True
         # line 2 additional product to ignore
         data['lines'][1]['free'] = True
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         expected = {
             'esb_ref': 'INC-ID',
             'client_order_ref': 'refClt',
@@ -345,7 +345,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             'message_post_with_view', MagicMock()
         )
 
-        self.env['sale.order']._ws_create_new(data)
+        self.env['sale.order']._ws_create_new(data, datetime.now())
         self.env['sale.order'].message_post_with_view.assert_not_called()
 
     @freeze_time("2019-02-26 11:30:20")

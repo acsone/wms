@@ -32,6 +32,8 @@ latest (unreleased)
 
 * ALCYN-2300: Fix sale channel web on export of sale order (ESB)
 
+* ALCYN-2309: Fix cancellation of sale orders after some delay
+
 **Build**
 
 **Documentation**
