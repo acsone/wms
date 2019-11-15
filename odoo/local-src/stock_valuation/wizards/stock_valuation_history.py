@@ -261,10 +261,13 @@ class StockHistory(models.Model):
     )
 
     def _compute_inventory_value(self):
-        for record in self:
-            record.inventory_value = (
-                record.quantity * record.price_unit_on_quant
+        history_date = self._context.get('history_date', fields.Datetime.now())
+        for rec in self:
+            # get price_unit at date from product_price_history
+            history_price = rec.product_id.get_history_price(
+                rec.company_id.id, date=history_date
             )
+            rec.inventory_value = rec.quantity * history_price
 
     @api.model
     def read_group(
