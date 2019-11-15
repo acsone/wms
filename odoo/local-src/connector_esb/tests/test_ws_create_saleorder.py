@@ -395,7 +395,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         data['lines'].append(
             {'line_id': '3', 'sku': unknown_sku, 'quantity': 3, 'free': False}
         ),
-        order = self.env['sale.order']._ws_create_new(data)
+        order = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         message = order.message_ids.filtered(lambda r: unknown_sku in r.body)
         self.assertEqual(len(message), 1)
