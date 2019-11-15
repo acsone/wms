@@ -6,6 +6,7 @@ import logging
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
+from odoo.addons.connector.exception import ConnectorException
 
 from ...components.mapper import falsy2emptystring, falsy2zero
 
@@ -48,11 +49,20 @@ class SaleExportMapper(Component):
     @mapping
     def compute_channel(self, record):
         # Phone channel '01' is the default
-        channel = '01'
-        if record.sale_channel == 'fax':
+        if record.sale_channel == 'phone':
+            channel = '01'
+        elif record.sale_channel == 'fax':
             channel = '03'
         elif record.sale_channel == 'mail':
             channel = '08'
+        elif record.sale_channel == 'web':
+            channel = '04'
+        else:
+            raise ConnectorException(
+                'Incorrect or empty sale channel {}.'.format(
+                    record.sale_channel
+                )
+            )
         return {'channel': channel}
 
     @mapping

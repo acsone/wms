@@ -86,6 +86,14 @@ class SaleOrder(models.Model):
 
         is_sale_in_exception = False
         for line in self._ws_create_order_line_data(data)[:]:
+            if line['product_id'] == '':
+                # Unknown product just log the error in the chatter
+                order.message_post(
+                    body="Product with {} : {} was not found".format(
+                        line['code_type'], line['code_searched']
+                    )
+                )
+                continue
             line['order_id'] = order.id
             changed_line = self.env['sale.order.line'].play_onchanges(
                 line, ['product_id']
@@ -229,20 +237,20 @@ class SaleOrder(models.Model):
                 _logger.error(message, product_code)
                 raise exceptions.UserError(_(message) % product_code)
 
-            elif not len(product):
-                message = 'Webservice new saleorder, product %s not found'
-                _logger.error(message, product_code)
-                raise exceptions.UserError(_(message) % product_code)
-
-            else:
-                sol = {}
+            sol = {}
+            if len(product):
                 sol['product_id'] = product.id
                 sol['name'] = product.name
                 sol['product_uom'] = product.uom_id.id
                 sol['product_uom_qty'] = line.pop('quantity')
                 sol['discounting_type'] = 'multiplicative'
                 sol['esb_ref'] = line.pop('line_id')
-                lines.append(sol)
+            else:
+                # Product not found
+                sol['product_id'] = ''
+                sol['code_type'] = 'SKU' if is_sku else 'CNK'
+                sol['code_searched'] = product_code
+            lines.append(sol)
 
         return lines
 
