@@ -52,7 +52,7 @@ class PurchaseOrder(models.Model):
     @api.multi
     def set_overwrite_values(self, vals):
         self.ensure_one()
-
+        trigger_onchange = False
         date_planned_str = vals.get('global_date_planned')
         if date_planned_str:
             date_planned = datetime.strptime(date_planned_str, "%Y-%m-%d")
@@ -64,11 +64,14 @@ class PurchaseOrder(models.Model):
         if discount_global:
             self.order_line.write({'discount_global': discount_global})
             self.discount_global_overwrite = discount_global
-
+            trigger_onchange = True
         promotion_supplier = vals.get('global_promotion_supplier')
         if promotion_supplier:
             self.order_line.write({'promotion_supplier': promotion_supplier})
             self.promotion_supplier_overwrite = promotion_supplier
+            trigger_onchange = True
+        if trigger_onchange:
+            self.order_line._onchange_price_unit()
 
     @api.multi
     def get_products(self):
@@ -175,6 +178,7 @@ class PurchaseOrder(models.Model):
             vals.pop('order_id')
             vals.pop('product_id')
             existing_line.write(vals)
+            existing_line._onchange_price_unit()
         else:
 
             product_id = vals.pop('product_id')
