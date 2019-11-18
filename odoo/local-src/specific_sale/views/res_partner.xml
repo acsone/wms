@@ -36,6 +36,7 @@
         <field name="arch" type="xml">
             <group name="sale" position="inside">
                 <field name="help_with_fee"/>
+                <field name="auto_cancel_unavailable_qty_sold"/>
             </group>
         </field>
     </record>

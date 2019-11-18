@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-2279: Set technical group on route category field
 
 * ALCYN-2300: New sale order coming in the web service with an unknown product must be accepted and a message logged (ESB)
+* ALCYN-2305: Auto-cancel Unavailable Sale Line Quantity
 
 **Bugfixes**
 

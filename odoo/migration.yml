@@ -564,3 +564,4 @@ migration:
           - specific_product
           - specific_stock
           - specific_purchase
+          - specific_sale
