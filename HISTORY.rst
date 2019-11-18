@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2313: change priority of job "Create a sale order with data coming from
+  webservices" to 2 instead of 25
+
 **Bugfixes**
 
 * ALCYN-2317: fix issues with purchase discounts
