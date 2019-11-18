@@ -181,9 +181,9 @@ class PurchaseOrderLine(models.Model):
         :param vals:
         :return:
         """
-        discount_incl = self.env.context.get('discount_incl')
-        if 'price_unit' in vals and not discount_incl:
-            vals['price_unit_base'] = vals['price_unit']
+        # discount_incl = self.env.context.get('discount_incl')
+        # if 'price_unit' in vals and not discount_incl:
+        #     vals['price_unit_base'] = vals['price_unit']
 
         return super(PurchaseOrderLine, self).write(vals)
 
