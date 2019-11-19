@@ -48,9 +48,20 @@ class SaleOrder(models.Model):
         self_ctx = self.with_context(_sale_order_write=True)
         return super(SaleOrder, self_ctx).write(vals)
 
-    @job(default_channel='root.background.esb')  # priority=25
+    @job(default_channel='root.background.esb')  # priority=2
     def ws_create_new(self, data, creation_date=None):
-        """Create a sale order with data coming from webservices."""
+        """Create a sale order with data coming from webservices
+
+        The creation_date is the date of when the controller called to create
+        the sale in datetime's format. It is required because in some cases, we
+        cancel the SO after some delay between the creation of the job and its
+        execution (see module sale_delay).
+        """
+        # This is kept only for backward compatibility so that jobs previously
+        # created without the argument do not fail to execute. All new jobs
+        # will pass the parameter so some time after the deployment, we can
+        # remove the next 2 lines and make 'creation_date' a positional
+        # argument.
         if creation_date is None:
             creation_date = datetime.now()
         try:
@@ -64,9 +75,7 @@ class SaleOrder(models.Model):
             )
             raise
 
-    def _ws_create_new(self, data, creation_date=None):
-        if creation_date is None:
-            creation_date = datetime.now()
+    def _ws_create_new(self, data, creation_date):
         order_data = self._ws_create_order_data(data)
         order_data = self.env['sale.order'].play_onchanges(
             order_data,

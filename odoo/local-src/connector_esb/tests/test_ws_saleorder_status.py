@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from copy import deepcopy
+from datetime import datetime
 
 from odoo.tests.common import SavepointCase
 
@@ -50,7 +51,7 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         """ Test the method sale order status with a standard SO """
 
         data = deepcopy(self.order_data)
-        self.so0 = self.env['sale.order']._ws_create_new(data)
+        self.so0 = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.so0.action_confirm()
 
         partner_ref = self.partner.ref
@@ -90,7 +91,7 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         data = deepcopy(self.order_data)
         data['customer_id'] = '8114'
         self.partner.ref = '8114'
-        self.so0 = self.env['sale.order']._ws_create_new(data)
+        self.so0 = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.so0.action_confirm()
 
         partner_ref = self.partner.ref
@@ -146,7 +147,7 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.prod2.sale_ok = False
 
         data = deepcopy(self.order_data)
-        self.so0 = self.env['sale.order']._ws_create_new(data)
+        self.so0 = self.env['sale.order']._ws_create_new(data, datetime.now())
         self.so0.action_confirm()
 
         partner_ref = self.partner.ref
