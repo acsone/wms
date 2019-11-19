@@ -558,6 +558,7 @@ migration:
           - specific_sale
           - stock_valuation
           - web_readonly_bypass
+    - version: 10.0.1.45.2
     - version: 10.0.1.46.0
       addons:
         upgrade:

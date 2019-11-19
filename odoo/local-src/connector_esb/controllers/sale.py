@@ -137,7 +137,7 @@ class SaleController(http.Controller):
         self._validate_request(request.jsonrequest)
         values = request.jsonrequest['params']['data']
         self._validate_create_sale_order(values)
-        delayable = env['sale.order'].with_delay(priority=25)
+        delayable = env['sale.order'].with_delay(priority=2)
         delayable.ws_create_new(values, datetime.now())
 
     @http.route(

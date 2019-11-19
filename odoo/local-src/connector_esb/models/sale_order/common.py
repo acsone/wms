@@ -48,7 +48,7 @@ class SaleOrder(models.Model):
         self_ctx = self.with_context(_sale_order_write=True)
         return super(SaleOrder, self_ctx).write(vals)
 
-    @job(default_channel='root.background.esb')  # priority=25
+    @job(default_channel='root.background.esb')  # priority=2
     def ws_create_new(self, data, creation_date=None):
         """Create a sale order with data coming from webservices
 
