@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.45.2 (2019-11-19)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2313: change priority of job "Create a sale order with data coming from
   webservices" to 2 instead of 25
 
@@ -28,10 +40,6 @@ latest (unreleased)
 
 * ALCYN-2317: fix issues with purchase discounts
 * ALCYN-2309: Fix cancellation of sale orders after some delay
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.45.1 (2019-11-14)
