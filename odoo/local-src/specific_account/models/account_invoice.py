@@ -69,3 +69,32 @@ class AccountInvoiceLine(models.Model):
         if self.env.context.get('recompute_taxes_on_delete'):
             invoices.compute_taxes()
         return res
+
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, values):
+        rec = super(AccountInvoiceLine, self).create(values)
+        if self.env.context.get('recompute_taxes_on_delete'):
+            # we remove the recompute_taxes_on_delete context key becase the
+            # triple discount module will trigger a write on the invoice lines
+            # when we call invoice.compute_taxes and we want to avoid a
+            # recursive call to write in that case
+            invoice = rec.invoice_id.with_context(
+                recompute_taxes_on_delete=False
+            )
+            invoice.compute_taxes()
+        return rec
+
+    @api.multi
+    def write(self, values):
+        res = super(AccountInvoiceLine, self).write(values)
+        if self.env.context.get('recompute_taxes_on_delete'):
+            # we remove the recompute_taxes_on_delete context key becase the
+            # triple discount module will trigger a write on the invoice lines
+            # when we call invoice.compute_taxes and we want to avoid a
+            # recursive call to write in that case
+            invoices = self.mapped('invoice_id').with_context(
+                recompute_taxes_on_delete=False
+            )
+            invoices.compute_taxes()
+        return res
