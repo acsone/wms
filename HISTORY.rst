@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2317: fix issues with purchase discounts
+
 **Build**
 
 **Documentation**

@@ -109,7 +109,7 @@ class TestPurchaseOrder(SavepointCase):
 
         # Create a line with price_unit (old style)
         # Keep only for compatibility
-        po.order_line.create(
+        line1 = po.order_line.create(
             {
                 'order_id': po.id,
                 'product_id': self.product.id,
@@ -120,10 +120,11 @@ class TestPurchaseOrder(SavepointCase):
                 'price_unit': 15,
             }
         )
+        self.assertEqual(line1.price_unit, line1.price_unit_base)
         self.assertEqual(po.amount_total, 150)
 
         # Create a line with price_unit_base
-        line = po.order_line.create(
+        line2 = po.order_line.create(
             {
                 'order_id': po.id,
                 'product_id': self.product.id,
@@ -137,21 +138,21 @@ class TestPurchaseOrder(SavepointCase):
         self.assertEqual(po.amount_total, 300)
 
         # Change the price_unit of my line
-        line.price_unit = 10
-        line._onchange_price_unit()
+        line2.price_unit_base = 10
+        line2._onchange_price_unit()
+        self.assertEqual(line2.price_unit, 10)
+        self.assertEqual(line2.price_unit_base, 10)
         self.assertEqual(po.amount_total, 250)
-        self.assertEqual(line.price_unit, 10)
-        self.assertEqual(line.price_unit_base, 10)
 
         # Add a discount of 50% on the last line
-        line.discount_global = 50
-        line._onchange_price_unit()
+        line2.discount_global = 50
+        line2._onchange_price_unit()
         self.assertEqual(po.amount_total, 200)
 
         # Add a pricelist discount of 10%
         # (this discount will be add to the discount of 50%)
-        line.promotion_supplier = 10
-        line._onchange_price_unit()
+        line2.promotion_supplier = 10
+        line2._onchange_price_unit()
         self.assertEqual(po.amount_total, 195)
 
     def test_unit_price_onchange(self):
