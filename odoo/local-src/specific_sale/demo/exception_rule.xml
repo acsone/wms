@@ -41,11 +41,55 @@
             <field name="active">0</field>
         </record>
 
+        <record id="no_stupefiant_vet_by_phone" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
         <record id="warning_psychotropic" model="exception.rule">
             <field name="active">0</field>
         </record>
 
+        <record id="warning_stupefiant_vet" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="warning_cascade_import" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="warning_human_medoc" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="provision_on_order" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="no_line_under_0" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="no_backorder" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
         <record id="warning_free_product" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="warning_supplier_break" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="no_line_at_zero" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="order_amount_minimum" model="exception.rule">
+            <field name="active">0</field>
+        </record>
+
+        <record id="order_amount_material_maximum" model="exception.rule">
             <field name="active">0</field>
         </record>
 
