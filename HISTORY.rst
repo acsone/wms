@@ -23,11 +23,17 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2311: fix recomputation of taxes in invoice fast line entry
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.45.3 (2019-11-20)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2311: fix recomputation of taxes in invoice fast line entry
 
 
 10.0.1.45.2 (2019-11-19)
