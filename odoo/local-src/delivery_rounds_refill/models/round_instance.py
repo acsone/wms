@@ -19,32 +19,30 @@ class RoundInstance(models.Model):
     )
 
     def _compute_has_pending_reassort(self):
-        # only open rounds (state == draft) can have pending reassorts
-        draft_close_recs = self.filtered(
-            lambda r: r.state in ('draft', 'close')
+        query = (
+            "WITH reassort_product AS "
+            "(SELECT product_id FROM report_stock_refill_reassort "
+            "WHERE refill_priority_reassort >= 1000) "
+            "SELECT ri.id "
+            "FROM round_instance AS ri "
+            "WHERE EXISTS "
+            "  (SELECT m.id "
+            "   FROM stock_move AS m "
+            "   JOIN stock_picking p on (p.id = m.picking_id) "
+            "   JOIN reassort_product AS rp ON (m.product_id = rp.product_id) "
+            "   WHERE p.delivery_round_id=ri.id "
+            "     AND (m.state = 'confirmed' OR m.partially_available) "
+            "  ) "
+            "AND ri.state in ('draft', 'close') AND ri.id in %s;"
         )
-        for rec in self - draft_close_recs:
-            rec.has_pending_reassort = False
-        pending_reassorts = self.env['report.stock.refill.reassort'].search(
-            [('refill_priority_reassort', '>', 0)]
-        )
-        reassort_products = pending_reassorts.mapped('product_id')
-        for rec in draft_close_recs:
-            # look for moves waiting availability in the delivery round, then
-            # for the products of these moves check for existing replenishments
-            # -> if found then the round has pending reassorts.
-            moves = self.env['stock.move'].search(
-                [
-                    ('picking_id', 'in', rec.picking_ids.ids),
-                    ('state', '=', 'confirmed'),  # waiting availability
-                    ('product_id', 'in', reassort_products.ids),
-                ]
-            )
-            if moves:
-                reassorts = True
-            else:
-                reassorts = False
-            rec.has_pending_reassort = reassorts
+        if self:
+            self.env.cr.execute(query, (tuple(self.ids),))
+            with_pending_refill = []
+            for (id,) in self.env.cr.fetchall():
+                with_pending_refill.append(id)
+            with_pending_refill = set(with_pending_refill)
+            for rec in self:
+                rec.has_pending_reassort = rec.id in with_pending_refill
 
     def _search_has_pending_reassort(self, operator, value):
         if operator == '!=':
