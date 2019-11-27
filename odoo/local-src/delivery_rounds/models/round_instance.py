@@ -299,6 +299,17 @@ class RoundInstance(models.Model):
         if errors:
             raise UserError('\n'.join(errors))
 
+    def _lock(self):
+        """Lock the database rows of the instance to prevent concurrent access.
+
+        The lock is released when the transaction is committed or rolled back.
+        """
+        if self:
+            self.env.cr.execute(
+                'SELECT id FROM round_instance WHERE id in %s FOR UPDATE',
+                (tuple(self.ids),),
+            )
+
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
@@ -307,6 +318,7 @@ class RoundInstance(models.Model):
             self.id,
             pickings.ids,
         )
+        self._lock()
 
         self._check_printed_pickings(pickings)
 
@@ -353,7 +365,7 @@ class RoundInstance(models.Model):
                 pickings_bypartner = reduce(
                     lambda x, y: x | y, pickings_bypartner_iter
                 )
-                # As we filtered on assigned, we typicaly excluded the waiting
+                # As we filtered on assigned, we typically excluded the waiting
                 # shippings. So include them back
                 pickings_bypartner |= (
                     pickings_bypartner._get_all_dest_pickings()
