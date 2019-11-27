@@ -593,3 +593,27 @@ class SaleOrderLine(models.Model):
         )
         res['product_qty_unavailable'] = min(qty_unavailable, qty)
         return res
+
+    @api.multi
+    def _action_procurement_create(self):
+        """Overloaded to ship only available qty in stock to the customer:
+
+            - update the canceled qty with the unavailable qty
+            - substract the ordered qty with the canceled qty
+            - set the unavailable qty to 0
+
+        Then the resulting stock move should not generates a backorder once
+        validated.
+        """
+        for line in self:
+            # Process only lines related to customers with the auto-cancel
+            # option and related to stock products
+            if (
+                line.order_partner_id.auto_cancel_unavailable_qty_sold
+                and line.product_id.type != "service"
+                and line.product_qty_unavailable
+            ):
+                line.product_qty_canceled = line.product_qty_unavailable
+                line.product_uom_qty -= line.product_qty_canceled
+                line.product_qty_unavailable = 0
+        return super(SaleOrderLine, self)._action_procurement_create()

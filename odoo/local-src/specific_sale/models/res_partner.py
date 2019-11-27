@@ -13,6 +13,15 @@ class ResPartner(models.Model):
         string='Last Suite Name', compute='_compute_last_suite_name'
     )
     help_with_fee = fields.Boolean(string='Helps with fees')
+    auto_cancel_unavailable_qty_sold = fields.Boolean(
+        string="Auto-cancel Unavailable Quantity",
+        default=False,
+        help=(
+            "Automatically cancel unavailable ordered quantity to avoid the "
+            "generation of backorders.\n"
+            "In other words it will ship only immediately usable quantity."
+        ),
+    )
 
     def _compute_last_suite_name(self):
         """ Compute the last suite name used for this customer.

@@ -18,6 +18,16 @@ This module adds Alcyon specific fields and logic for sale order:
     * add Lots/Serial Numbers in stock
     * add next expected date for receipt (the receipt of the next purchase order)
 
+* Ability to ship only the available quantity when confirming a sale order:
+
+  * new option on partner to enable the feature
+  * when confirming an order, the unavailable qty for an order line will be
+    set in the "Qty canceled" field and the "Ordered Qty" field will be updated
+    with the available stock qty
+  * the created stock move will reflect the updated Ordered Qty (avoiding
+    the generation of shipping backorders)
+
+
 Credits
 =======
 

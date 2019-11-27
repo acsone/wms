@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_sale
+# 	* specific_sale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 15:58+0000\n"
+"POT-Creation-Date: 2019-11-19 08:50+0000\n"
 "PO-Revision-Date: 2019-01-25 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,10 +22,29 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:327
+#: model:ir.ui.view,arch_db:specific_sale.view_order_form
+msgid "<span>Lines Fast Entry</span>"
+msgstr ""
+
+#. module: specific_sale
+#: code:addons/specific_sale/models/sale.py:236
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
+
+#. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_sale_order_line_product_type
+msgid ""
+"A stockable product is a product for which you manage stock. The \"Inventory"
+"\" app has to be installed.\n"
+"A consumable product, on the other hand, is a product for which stock is not "
+"managed.\n"
+"A service is a non-material product you provide.\n"
+"A digital content is a non-material product you sell online. The files "
+"attached to the products are the one that are sold on the e-commerce such as "
+"e-books, music, pictures,... The \"Digital Product\" module has to be "
+"installed."
+msgstr ""
 
 #. module: specific_sale
 #: selection:sale.report,month:0
@@ -32,7 +52,7 @@ msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:95
+#: code:addons/specific_sale/models/sale.py:107
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -43,9 +63,22 @@ msgid "August"
 msgstr "Août"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
-msgid "BO on sale"
-msgstr "BO à la vente"
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_auto_cancel_unavailable_qty_sold
+msgid "Auto-cancel Unavailable Quantity"
+msgstr "Annuler les quantités indisponibles"
+
+#. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_res_partner_auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,help:specific_sale.field_res_users_auto_cancel_unavailable_qty_sold
+msgid ""
+"Automatically cancel unavailable ordered quantity to avoid the generation of "
+"backorders.\n"
+"In other words it will ship only immediately usable quantity."
+msgstr ""
+"Annule automatiquement les quantités commandées indisponles afin "
+"d'éviter la génération d'un reliquat.\n"
+"Autrement dit seules les quantités immédiatement disponibles seront livrées."
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_medoc_veterinary_belge
@@ -68,19 +101,15 @@ msgid "Confirmed order #"
 msgstr "Commande confirmée #"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_tree_specific_sale
-msgid "Current BO"
-msgstr "BO actuel"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_current_product_qty_unavailable
-msgid "Current quantity unavailable"
-msgstr "Quantité actuellement non disponible"
-
-#. module: specific_sale
 #: selection:sale.report,month:0
 msgid "December"
 msgstr "Décembre"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#, fuzzy
+msgid "Delivered Quantity"
+msgstr "Quantité"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -95,6 +124,12 @@ msgstr "Rem.(%)"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Discount"
+msgstr "Remise"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
+#, fuzzy
+msgid "Discount (%)"
 msgstr "Remise"
 
 #. module: specific_sale
@@ -123,6 +158,11 @@ msgid "Food Product Not Allowed"
 msgstr "Nourriture interdite"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_is_consignment
+msgid "For Consignment"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_newpharma
 msgid "For NewPharma"
 msgstr ""
@@ -142,6 +182,12 @@ msgstr "Participe aux frais"
 #: model:exception.rule,description:specific_sale.no_medoc_human
 msgid "Human Medicine Not Allowed"
 msgstr "Médicament humain interdit"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#, fuzzy
+msgid "Invoiced Quantity"
+msgstr "Quantité"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.provision_on_order
@@ -176,8 +222,12 @@ msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euro
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_material_maximum
-msgid "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
-msgstr "Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel"
+msgid ""
+"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
+"les produits de type matériel"
+msgstr ""
+"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour "
+"les produits de type matériel"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
@@ -247,7 +297,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:326
+#: code:addons/specific_sale/models/sale.py:235
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -301,6 +351,17 @@ msgstr "Pas de médicament Cascade Import"
 #: model:exception.rule,name:specific_sale.no_medoc_vet_stup
 msgid "No Narcotic Veterinary Medicine"
 msgstr "Pas de médicament vétérinaire stupéfiant"
+
+#. module: specific_sale
+#: model:exception.rule,description:specific_sale.no_stupefiant_vet_by_phone
+msgid "No Stupéfiant VET by phone"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,name:specific_sale.no_stupefiant_vet_by_phone
+#, fuzzy
+msgid "No Stupéfiant VET ordered by phone"
+msgstr "Pas de commande de psychotrope par téléphone"
 
 #. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_veterinary_product
@@ -360,6 +421,18 @@ msgid "Order offer free product"
 msgstr "Commande avec produits gratuits"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
+#, fuzzy
+msgid "Ordered Qty"
+msgstr "Date de la commande"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#, fuzzy
+msgid "Ordered Quantity"
+msgstr "Quantité"
+
+#. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_supplier_break
 #: model:exception.rule,name:specific_sale.warning_supplier_break
 #: model:exception.rule,warning_text:specific_sale.warning_supplier_break
@@ -382,8 +455,19 @@ msgid "Phone"
 msgstr "Téléphone"
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_picking_zone_id
+msgid "Picking zone"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Price"
+msgstr "Prix"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_order_pricelist_id
+#, fuzzy
+msgid "Pricelist"
 msgstr "Prix"
 
 #. module: specific_sale
@@ -391,6 +475,18 @@ msgstr "Prix"
 #: model:ir.ui.menu,name:specific_sale.menu_product_pricelist_pv2
 msgid "Pricelist Sale Price 2"
 msgstr "Liste de prix PV 2"
+
+#. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_sale_order_line_order_pricelist_id
+msgid "Pricelist for current sales order."
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_sale_order_line_is_consignment
+msgid ""
+"Procurement will be generated for the consignement location of the selected "
+"customer"
+msgstr ""
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_product
@@ -405,6 +501,12 @@ msgstr "Catégorie d'article"
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
+msgstr "Modèle de produit"
+
+#. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_type
+#, fuzzy
+msgid "Product Type"
 msgstr "Modèle de produit"
 
 #. module: specific_sale
@@ -425,6 +527,12 @@ msgstr "Référence d'article"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Promotion"
+msgstr "Promotion"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
+#, fuzzy
+msgid "Promotion (%)"
 msgstr "Promotion"
 
 #. module: specific_sale
@@ -454,6 +562,7 @@ msgid "Remains to deliver"
 msgstr "Reste à livrer"
 
 #. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_list
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines"
@@ -484,6 +593,12 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#, fuzzy
+msgid "Sales Order Lines"
+msgstr "Ligne du bon de commande"
+
+#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_report
 msgid "Sales Orders Statistics"
 msgstr "Statistiques sur les commandes de ventes"
@@ -510,8 +625,12 @@ msgstr "Ce client accepte pas les réapprovisionnement"
 
 #. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_older_lot_life_date
-msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
-msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série deviennent dangereux et ne doivent plus être consommées."
+msgid ""
+"This is the date on which the goods with this Serial Number may become "
+"dangerous and must not be consumed."
+msgstr ""
+"Ceci est la date à laquelle les marchandises avec ce numéro de série "
+"deviennent dangereux et ne doivent plus être consommées."
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -562,6 +681,12 @@ msgid "Warning psychotropic"
 msgstr "Avertissement psychotrope"
 
 #. module: specific_sale
+#: model:exception.rule,description:specific_sale.warning_stupefiant_vet
+#: model:exception.rule,name:specific_sale.warning_stupefiant_vet
+msgid "Warning stupéfiant VET"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_warning_text
 msgid "Warning text"
 msgstr "Texte d'avertissement"
@@ -577,7 +702,27 @@ msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:129
+#: code:addons/specific_sale/models/sale.py:143
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
+
+#. module: specific_sale
+#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+msgid "days"
+msgstr ""
+
+#. module: specific_sale
+#: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
+#, fuzzy
+msgid "stupéfiant VET: written order, keep confirmation."
+msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "BO on sale"
+#~ msgstr "BO à la vente"
+
+#~ msgid "Current BO"
+#~ msgstr "BO actuel"
+
+#~ msgid "Current quantity unavailable"
+#~ msgstr "Quantité actuellement non disponible"
