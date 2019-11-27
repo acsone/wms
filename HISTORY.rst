@@ -39,6 +39,7 @@ latest (unreleased)
 
   The quantity of the current stock location is now returned instead of the
   total stock within the warehouse.
+* ALCYN-2307 fix stock valuation with PMP based on current stock
 
 * ALCYN-2266: Concurrent access on delivery round assignment
 

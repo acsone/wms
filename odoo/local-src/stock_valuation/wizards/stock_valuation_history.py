@@ -91,7 +91,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_template.categ_id AS product_categ_id,
                     -quant.qty AS quantity,
                     stock_move.date AS date,
-                    quant.cost AS price_unit_on_quant,
+                    coalesce(nullif(stock_move.price_unit, 0), pph.cost) AS price_unit_on_quant,
                     stock_move.origin AS source,
                     stock_production_lot.name AS serial_number
                 FROM
@@ -100,6 +100,13 @@ class StockHistoryMaterialized(models.AbstractModel):
                     stock_quant_move_rel ON stock_quant_move_rel.quant_id = quant.id
                 JOIN
                     stock_move ON stock_move.id = stock_quant_move_rel.move_id
+                LEFT JOIN LATERAL
+                    (SELECT distinct on (product_id) cost
+                    FROM product_price_history pph
+                    WHERE pph.product_id = quant.product_id
+                      AND pph.datetime <= stock_move.date
+                    ORDER BY product_id, datetime DESC, id DESC
+                    ) pph on TRUE
                 LEFT JOIN
                     stock_production_lot ON stock_production_lot.id = quant.lot_id
                 JOIN
@@ -113,7 +120,6 @@ class StockHistoryMaterialized(models.AbstractModel):
                 WHERE quant.qty > 0 AND stock_move.state = 'done'
                 AND dest_location.usage IN ('internal', 'transit', 'view')
                 AND (
-                    NOT (source_location.company_id IS NULL AND dest_location.company_id IS NULL) OR
                     source_location.company_id != dest_location.company_id OR
                     source_location.usage NOT IN ('internal', 'transit', 'view')
                  )
@@ -129,7 +135,7 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_template.categ_id AS product_categ_id,
                     quant.qty AS quantity,
                     stock_move.date AS date,
-                    quant.cost AS price_unit_on_quant,
+                    coalesce(nullif(stock_move.price_unit, 0), pph.cost) as price_unit_on_quant,
                     stock_move.origin AS source,
                     stock_production_lot.name AS serial_number
                 FROM
@@ -138,6 +144,13 @@ class StockHistoryMaterialized(models.AbstractModel):
                     stock_quant_move_rel ON stock_quant_move_rel.quant_id = quant.id
                 JOIN
                     stock_move ON stock_move.id = stock_quant_move_rel.move_id
+                LEFT JOIN LATERAL
+                    (SELECT distinct on (product_id) cost
+                    FROM product_price_history pph
+                    WHERE pph.product_id = quant.product_id
+                      AND pph.datetime <= stock_move.date
+                    ORDER BY product_id, datetime DESC, id DESC
+                    ) pph on TRUE
                 LEFT JOIN
                     stock_production_lot ON stock_production_lot.id = quant.lot_id
                 JOIN
@@ -151,9 +164,8 @@ class StockHistoryMaterialized(models.AbstractModel):
                 WHERE quant.qty > 0 AND stock_move.state = 'done'
                   AND source_location.usage in ('internal', 'transit', 'view') AND stock_quant_move_rel.quant_id = quant.id
                 AND (
-                    NOT (dest_location.company_id IS NULL AND source_location.company_id IS NULL) OR
                     dest_location.company_id != source_location.company_id OR
-                    source_location.usage NOT IN ('internal', 'transit', 'view')
+                    dest_location.usage NOT IN ('internal', 'transit', 'view')
                      )
                 )
 
@@ -163,15 +175,15 @@ class StockHistoryMaterialized(models.AbstractModel):
                 SELECT
                      2147483646 - quant.product_id as id,
                     NULL AS move_id,
-                    0 AS location_id,
-                    quant.company_id AS company_id,
+                    NULL AS location_id,
+                    quant.company_id,
                     quant.product_id as product_id,
                     product_template.id AS product_template_id,
                     product_template.supplier_id AS product_supplier_id,
                     product_template.categ_id AS product_categ_id,
                     sum(quant.qty) AS quantity,
                     now() AS date,
-                    sum(quant.cost) as price_unit_on_quant,
+                    MIN(pph.cost) as price_unit_on_quant,
                     'Current stock valuation' AS source,
                     NULL AS serial_number
                     FROM
@@ -182,8 +194,15 @@ class StockHistoryMaterialized(models.AbstractModel):
                     product_product ON product_product.id = quant.product_id
                     JOIN
                     product_template ON product_template.id = product_product.product_tmpl_id
-                    WHERE quant_location.usage in ('internal', 'transit', 'view')
-                    group by (quant.product_id, quant.company_id, product_template.id)
+                    LEFT JOIN LATERAL
+                        (SELECT distinct on (product_id) cost
+                        FROM product_price_history pph
+                        WHERE pph.product_id = quant.product_id
+                          AND pph.datetime <= now()
+                        ORDER BY product_id, datetime DESC, id DESC
+                        ) pph on TRUE
+                    WHERE quant_location.usage = 'internal'
+                    GROUP BY (quant.product_id, quant.company_id, product_template.id)
                )
             )
 
@@ -240,6 +259,39 @@ class StockHistory(models.Model):
     product_last_out_date = fields.Datetime(
         'Last Selling Date', related='product_id.product_last_out_date'
     )
+
+    def _compute_inventory_value(self):
+        history_date = self._context.get('history_date', fields.Datetime.now())
+        for rec in self:
+            # get price_unit at date from product_price_history
+            history_price = rec.product_id.get_history_price(
+                rec.company_id.id, date=history_date
+            )
+            rec.inventory_value = rec.quantity * history_price
+
+    @api.model
+    def read_group(
+        self,
+        domain,
+        fields,
+        groupby,
+        offset=0,
+        limit=None,
+        orderby=False,
+        lazy=True,
+    ):
+        if 'inventory_value' in fields:
+            fields.remove('inventory_value')
+        res = super(StockHistory, self).read_group(
+            domain,
+            fields,
+            groupby,
+            offset=offset,
+            limit=limit,
+            orderby=orderby,
+            lazy=lazy,
+        )
+        return res
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
