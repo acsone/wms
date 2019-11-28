@@ -21,31 +21,40 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.46.0 (2019-11-28)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2279: Set technical group on route category field
 * ALCYN-2294: Always subscribe on partner with note
 * ALCYN-2300: New sale order coming in the web service with an unknown product must be accepted and a message logged (ESB)
 * ALCYN-2305: Auto-cancel Unavailable Sale Line Quantity
+* ALCYN-2313: Change priority of job for creating new sales orders to 2
+* ALCYN-2281: Customizations of purchase dates management
+
+  * New wizard to move Stock Moves to another delivery order
+  * Smart button to product form for quick search incoming not finished moves
+  * Split scheduled time in purchase order in two fields (date / time)
 
 **Bugfixes**
 
 * ALCYN-2268: Fix issue with random wrong discount computation on the first
   line of the invoice
-
 * ALCYN-2300: Fix sale channel web on export of sale order (ESB)
-
 * ALCYN-2309: Fix cancellation of sale orders after some delay
-
 * ALCYN-2261: Voice picking, wrong product qty returned
-
   The quantity of the current stock location is now returned instead of the
   total stock within the warehouse.
-* ALCYN-2307 fix stock valuation with PMP based on current stock
-
+* ALCYN-2307: fix stock valuation with PMP based on current stock
 * ALCYN-2266: Concurrent access on delivery round assignment
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.45.3 (2019-11-20)
@@ -95,10 +104,6 @@ Note: moved to 10.0.1.45.1
 * ALCYN-2224: make blocking documents visible in archive wizard
 * ALCYN-2259: Add new product.category and add exception.rule for it
 * ALCYN-2204: Recompute taxes on invoice when invoice line are deleted
-* ALCYN-2281: Add:
-     * new wizard in stock to move stock.move.line to other picking
-     * smart button to product form for quick search incoming not finished moves
-     * split scheduled time in purchase order from datetime format to date and time format
 
 **Bugfixes**
 
@@ -656,6 +661,7 @@ Replaced by 10.0.1.35.1
 ++++++++++++++++++++
 
 **Features and Improvements**
+
 * ALCYN-1945: Delivery notes improvement (returns + newpharma CNK)
 * ALCYN-1896: Change sorting of products in sales / products and when in
   sale_order_line product selection
@@ -2886,8 +2892,8 @@ This release can only be applied on top of a failed release 10.19.0, use the 10.
 * ALCN-1037 Set ESF ref on product states data
 * ALCN-187: Add the parking and reserve feature
 * ALCN-869: Add webservice for a customer delivery fee
-  * as of 19.01.18 customer wanted this webservice
-    to always return a static message
+  as of 19.01.18 customer wanted this webservice
+  to always return a static message
 
 **Bugfixes**
 
