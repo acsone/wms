@@ -567,3 +567,9 @@ migration:
           - specific_stock
           - specific_purchase
           - specific_sale
+    - version: 10.0.1.46.1
+      addons:
+        upgrade:
+          - specific_stock
+          - specific_product
+          - purchase_delivery_split_date

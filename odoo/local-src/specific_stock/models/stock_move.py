@@ -39,5 +39,7 @@ class StockMove(models.Model):
     def action_cancel_move(self):
         if self.picking_type_id.code != 'incoming' or self.state in ['done']:
             return
-        wizard = self.env['stock.move.wizard'].new({'move_id': self.id})
+        wizard = self.env['wizard.stock.move.update.handler'].create(
+            {'move_id': self.id}
+        )
         wizard.action_cancel_move()
