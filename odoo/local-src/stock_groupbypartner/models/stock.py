@@ -204,6 +204,10 @@ class StockMove(models.Model):
                         move.id,
                         picking.id,
                     )
+                    self.env.cr.execute(
+                        'SELECT printed FROM stock_picking WHERE id = %s FOR UPDATE',
+                        (picking.id,),
+                    )
                     move.picking_id = picking.id
                     if backorder_orig_id:
                         backorder_orig_id.message_post(

@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2330: use a database lock to avoid interaction between zetes and
+  stock_groupbypartner
+
 **Bugfixes**
 
 **Build**
