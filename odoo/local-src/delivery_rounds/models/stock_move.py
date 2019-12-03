@@ -63,7 +63,10 @@ class StockMove(models.Model):
                     picking.partner_id
                 )
             if delivery_round:
-                delivery_round._assign_pickings(picking)
+                if picking.partner_id.is_shipping_date_allowed(
+                    delivery_round.date
+                ):
+                    delivery_round._assign_pickings(picking)
         other_moves = self - pick_moves
         if other_moves:
             super(StockMove, other_moves).action_assign(no_prepare=no_prepare)

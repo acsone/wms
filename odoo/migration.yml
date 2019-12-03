@@ -209,6 +209,7 @@ migration:
           - delivery_rounds
           - delivery_rounds_alcyon
           - delivery_rounds_refill
+          - partner_schedule
           - external_fax
           - ir_sequence_period
           - l10n_be_bba_fix
@@ -574,6 +575,7 @@ migration:
       addons:
         upgrade:
           - specific_purchase
+          - partner_schedule
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql

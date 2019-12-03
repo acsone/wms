@@ -34,7 +34,9 @@
                 <button name="button_delivery_round" type="object"
                     attrs="{'invisible': ['|', '|', ('printed', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ['draft', 'cancel', 'done'])]}"
                     icon="fa-pencil"
-                    help="Include in a delivery round"/>
+                    help="Include in a delivery round"
+                    context="{'manual_change_delivery_round': True}"
+                    />
             </field>
         </field>
     </record>

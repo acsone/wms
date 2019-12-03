@@ -3,16 +3,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
+from odoo.addons.partner_schedule.tests.common import (
+    TestCustomerWorkingScheduleBase,
+)
 from odoo.tests.common import SavepointCase
 
+from .common import DeliveryRoundTestCase
 
-class TestDeliveryRoundAssign(SavepointCase):
-    post_install = True
-    at_install = False
 
+class TestDeliveryRoundAssignMixin(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDeliveryRoundAssign, cls).setUpClass()
+        super(TestDeliveryRoundAssignMixin, cls).setUpClass()
 
         cls.partner = cls.env['res.partner'].create(
             {'name': 'Unittest partner', 'ref': '12344566777878'}
@@ -73,11 +75,12 @@ class TestDeliveryRoundAssign(SavepointCase):
         inventory.action_done()
         return inventory
 
-    def test_deliveryround_carrier(self):
-        delivery_template = self.env['round.template'].create(
+    @classmethod
+    def _prepare_delivery_round(cls):
+        delivery_template = cls.env['round.template'].create(
             {'name': 'Unittest delivery template'}
         )
-        delivery_carrier_fixed = self.env['delivery.carrier'].create(
+        delivery_carrier_fixed = cls.env['delivery.carrier'].create(
             {
                 'name': 'Unittest shipping costs',
                 'delivery_type': 'fixed',
@@ -85,13 +88,26 @@ class TestDeliveryRoundAssign(SavepointCase):
                 'delivery_template_id': delivery_template.id,
             }
         )
-        delivery_round = self.env['round.instance'].create(
+        delivery_round = cls.env['round.instance'].create(
             {
                 'name': 'Unittest delivery round',
                 'template_id': delivery_template.id,
                 'date': '2017-01-01',
             }
         )
+        return delivery_carrier_fixed, delivery_round
+
+
+class TestDeliveryRoundAssign(TestDeliveryRoundAssignMixin):
+    post_install = True
+    at_install = False
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestDeliveryRoundAssign, cls).setUpClass()
+
+    def test_deliveryround_carrier(self):
+        delivery_carrier_fixed, delivery_round = self._prepare_delivery_round()
         sale = self.env['sale.order'].create(
             {
                 'partner_id': self.partner.id,
@@ -373,3 +389,79 @@ class TestDeliveryRoundAssign(SavepointCase):
         # must be possible
         self.delivery_round_1._assign_pickings(new_pick)
         self.assertEqual(new_pick.delivery_round_id, self.delivery_round_1)
+
+
+class TestRoundWithCustomerWorkingSchedule(
+    TestCustomerWorkingScheduleBase,
+    DeliveryRoundTestCase,
+    TestDeliveryRoundAssignMixin,
+):
+    def test_assign_picking(self):
+        ship1 = self._create_picking_out()
+        self.create_schedule({'partner_id': self.partner1.id})
+        self.env['stock.move'].create(
+            {
+                'name': self.p1.name,
+                'product_id': self.p1.id,
+                'product_uom_qty': 1,
+                'product_uom': self.p1.uom_id.id,
+                'picking_id': ship1.id,
+                'location_id': ship1.location_id.id,
+                'location_dest_id': ship1.location_dest_id.id,
+            }
+        )
+        self.delivery_round_1.date = '2019-01-06'
+        delivery_round = self.delivery_round_1.with_context(
+            manual_change_delivery_round=True
+        )
+        with self.assertRaises(exceptions.UserError):
+            # delivery can be done only on allowed date
+            delivery_round._assign_pickings(ship1)
+
+        delivery_round.date = '2019-02-01'
+        delivery_round._assign_pickings(ship1)
+        self.assertEqual(ship1.state, 'assigned')
+
+    def test_deliveryround_carrier_schedule(self):
+        delivery_carrier_fixed, delivery_round = self._prepare_delivery_round()
+
+        self.create_schedule(
+            {
+                'partner_id': self.partner1.id,
+                'start_date': '2017-01-01',
+                'end_date': False,
+                'is_manage_day_1': True,
+                'is_manage_day_2': True,
+                'is_manage_day_3': True,
+                'is_manage_day_4': True,
+                'is_manage_day_5': True,
+                'is_manage_day_6': True,
+                'is_manage_day_7': True,
+            }
+        )
+        sale = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
+                'carrier_id': delivery_carrier_fixed.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertFalse(sale.picking_ids)
+        sale.action_confirm()
+
+        for picking in sale.picking_ids:
+            self.assertFalse(picking.delivery_round_id.id)

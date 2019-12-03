@@ -80,5 +80,11 @@ class SaleOrder(models.Model):
                 )
 
         if delivery_round:
-            delivery_round._assign_pickings(pickings)
+            pickings = self.picking_ids.filtered(
+                lambda picking: picking.partner_id.is_shipping_date_allowed(
+                    delivery_round.date
+                )
+            )
+            if pickings:
+                delivery_round._assign_pickings(pickings)
         _logger.debug("Searching a delivery round for SO %d. Done.", self.id)
