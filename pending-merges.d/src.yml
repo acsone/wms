@@ -6,7 +6,11 @@
     acsone: git@github.com:acsone/odoo.git
     guewen: git@github.com:guewen/odoo.git
     yvaucher: git@github.com:yvaucher/odoo.git
-  fetch_all: odoo oca guewen jbaudoux
+  fetch_all:
+  - odoo
+  - OCA
+  - guewen
+  - jbaudoux
   merges:
   - OCA 9643408dabd47ca812f9f6905785227cb6c29d70
     # [FIX] allow defering of parent computation after load call
@@ -41,6 +45,8 @@
   - git am "$(git format-patch -1 59c59cd8a04af18cedd5005222de6744a215d903 -o ../patches)"
     # [FIX] l10n_be_intrastat: propagate country_id
   - git am "$(git format-patch -1 0b13c3038f06666333654e0adfea274a396a5b6d -o ../patches)"
-   # Fix base amount for global_rounding on invoice tax #39212 
+   # Fix base amount for global_rounding on invoice tax #39212
   - git am "$(git format-patch -1 f29058075bad5eb50b7ffdb4b1e19984b9ae4316 -o ../patches)"
+   # Make procurement_jit not autoinstallable
+  - git am "$(git format-patch -1 eb0a1feed6940fa720aca2e85f00111888b92b58 -o ../patches)"
   target: camptocamp merge-branch-1793-master

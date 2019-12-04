@@ -18,7 +18,7 @@ Signed-off-by: Lucas Perais (lpe) <lpe@odoo.com>
  1 file changed, 11 insertions(+)
 
 diff --git a/addons/l10n_be_intrastat/models/l10n_be_intrastat.py b/addons/l10n_be_intrastat/models/l10n_be_intrastat.py
-index beff3b4..99f9945 100644
+index beff3b4f698..99f99450a40 100644
 --- a/addons/l10n_be_intrastat/models/l10n_be_intrastat.py
 +++ b/addons/l10n_be_intrastat/models/l10n_be_intrastat.py
 @@ -22,6 +22,17 @@ class AccountInvoice(models.Model):
@@ -40,5 +40,5 @@ index beff3b4..99f9945 100644
  class IntrastatRegion(models.Model):
      _name = 'l10n_be_intrastat.region'
 -- 
-2.7.4
+2.17.1
 

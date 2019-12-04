@@ -10,3 +10,4 @@ from . import sale_report
 from . import stock_production_lot
 from . import product_category
 from . import res_users
+from . import procurement

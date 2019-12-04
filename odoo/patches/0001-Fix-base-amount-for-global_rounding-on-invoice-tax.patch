@@ -11,7 +11,7 @@ a sum of tax lines base amount equals to invoice total untaxed_amount.
  1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/addons/account/models/account.py b/addons/account/models/account.py
-index 1e73900..b0944ba 100644
+index 1e739007490..b0944bac8e0 100644
 --- a/addons/account/models/account.py
 +++ b/addons/account/models/account.py
 @@ -775,15 +775,18 @@ class AccountTax(models.Model):
@@ -37,5 +37,5 @@ index 1e73900..b0944ba 100644
          # search. However, the search method is overridden in account.tax in order to add a domain
          # depending on the context. This domain might filter out some taxes from self, e.g. in the
 -- 
-2.7.4
+2.17.1
 
