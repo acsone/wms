@@ -50,3 +50,5 @@ CREATE INDEX IF NOT EXISTS
   stock_move_origin_returned_move_id_index ON stock_move(origin_returned_move_id);
 CREATE INDEX IF NOT EXISTS
   procurement_order_move_dest_id_index ON procurement_order(move_dest_id);
+CREATE INDEX IF NOT EXISTS
+  stock_move_inventory_id_index ON stock_move(inventory_id);
