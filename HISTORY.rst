@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2333/ALCYN-2334: Add indexes in database to fasten some Stock operations
+
 **Bugfixes**
 
 **Build**
