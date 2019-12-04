@@ -16,6 +16,7 @@ class StockPackOperation(models.Model):
         'stock.move',
         'Additional Product Move',
         ondelete='set null',
+        index=True,
         old='additional_move',
     )
 
