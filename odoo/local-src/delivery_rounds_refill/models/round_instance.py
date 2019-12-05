@@ -20,20 +20,25 @@ class RoundInstance(models.Model):
 
     def _compute_has_pending_reassort(self):
         query = (
-            "WITH reassort_product AS "
-            "(SELECT product_id FROM report_stock_refill_reassort "
-            "WHERE refill_priority_reassort >= 1000) "
             "SELECT ri.id "
-            "FROM round_instance AS ri "
-            "WHERE EXISTS "
-            "  (SELECT m.id "
-            "   FROM stock_move AS m "
-            "   JOIN stock_picking p on (p.id = m.picking_id) "
-            "   JOIN reassort_product AS rp ON (m.product_id = rp.product_id) "
-            "   WHERE p.delivery_round_id=ri.id "
-            "     AND (m.state = 'confirmed' OR m.partially_available) "
-            "  ) "
-            "AND ri.state in ('draft', 'close') AND ri.id in %s;"
+            "FROM round_instance ri "
+            ", LATERAL ( "
+            "  SELECT FROM stock_move AS m "
+            "  JOIN stock_picking p ON p.id = m.picking_id "
+            "  , LATERAL ( "
+            "    SELECT distinct on (sq.id) sq.id "
+            "    FROM stock_quant sq "
+            "    LEFT JOIN stock_location sl ON sq.location_id = sl.id "
+            "    WHERE sq.product_id=m.product_id "
+            "    AND sq.qty > 0 "
+            "    AND sl.kind = 'reserve' "
+            "  ) AS ex2 "
+            "  WHERE (m.state = 'confirmed' OR m.partially_available) "
+            "  AND p.delivery_round_id=ri.id "
+            "  LIMIT 1 "
+            ") AS ex1 "
+            "WHERE state IN ('draft','close') "
+            "AND ri.id IN %s "
         )
         if self:
             self.env.cr.execute(query, (tuple(self.ids),))
