@@ -72,7 +72,7 @@ services:
       OVH_FAX_PASSWORD: password
 
   db:
-    image: camptocamp/postgresql:pg9.5-latest
+    image: camptocamp/postgres:9.5
     command: -c shared_buffers=256MB -c maintenance_work_mem=256MB -c wal_buffers=8MB -c effective_cache_size=1024MB
     ports:
       - 5432
