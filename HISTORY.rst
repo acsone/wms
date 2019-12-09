@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
+
 **Bugfixes**
 
 **Build**

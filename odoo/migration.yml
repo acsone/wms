@@ -211,6 +211,7 @@ migration:
           - delivery_rounds_refill
           - external_fax
           - ir_sequence_period
+          - invoice_only_one_vat
           - l10n_be_bba_fix
           - monitoring_status
           - partner_archive_new_partner
@@ -567,3 +568,7 @@ migration:
           - specific_stock
           - specific_purchase
           - specific_sale
+    - version: 10.0.1.47.0
+      addons:
+        upgrade:
+          - invoice_only_one_vat
