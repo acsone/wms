@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2322: Add existing vendor product code in new product supplier info, if it does not exist set a dash.
+
 **Bugfixes**
 
 **Build**
