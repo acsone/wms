@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2339: fix purchase discount computation for lines added via purchase
+  review
+
 **Build**
 
 **Documentation**

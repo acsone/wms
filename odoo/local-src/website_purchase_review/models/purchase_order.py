@@ -194,7 +194,8 @@ class PurchaseOrder(models.Model):
             line.onchange_product_id()
             new_vals = line._convert_to_write(line._cache)
             new_vals.update(vals)
-            PurchaseOrderLine.create(new_vals)
+            new_line = PurchaseOrderLine.create(new_vals)
+            new_line._onchange_price_unit()
 
         return True
 
