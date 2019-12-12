@@ -25,7 +25,7 @@ UPDATE product_supplierinfo
                 FROM product_template AS pt
                 INNER JOIN product_supplierinfo AS psi ON pt.id = psi.product_tmpl_id
                 WHERE (pt.vendor_product_code = '' OR pt.vendor_product_code IS NULL)
-                GROUP BY pt.id, pt.name HAVING count(DISTINCT(coalesce(psi.product_code,'-'))) BETWEEN 2 AND 2
+                GROUP BY pt.id, pt.name HAVING count(DISTINCT(coalesce(psi.product_code,'-'))) = 2
         ) tempdb
     WHERE product_supplierinfo.product_tmpl_id = tempdb.id
           AND COALESCE(product_supplierinfo.product_code, '-') = '-'
