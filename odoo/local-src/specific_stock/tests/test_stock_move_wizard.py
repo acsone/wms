@@ -11,7 +11,7 @@ class TestStockMoveWizard(BaseCase):
     def setUp(self):
         super(TestStockMoveWizard, self).setUp()
         self.po_model = self.env['purchase.order']
-        self.wizard_obj = self.env['stock.move.wizard']
+        self.wizard_obj = self.env['wizard.stock.move.update.handler']
 
     def create_purchase_order(self, line_vals=None, products=None):
         if not products:
