@@ -28,8 +28,22 @@ latest (unreleased)
 **Documentation**
 
 
-10.0.1.46.0 (2019-11-28)
+10.0.1.46.1 (2019-12-12)
 ++++++++++++++++++++++++
+
+Include content of 10.0.1.46.0 and the following changes
+
+**Bugfixes**
+
+* ALCYN-2339: fix purchase discount computation for lines added via purchase
+  review
+* ALCYN-2281: install 'purchase_delivery_split_date' and fix views and model name
+
+
+10.0.1.46.0 (2019-11-28) [YANKED]
++++++++++++++++++++++++++++++++++
+
+Content moved to 10.0.1.46.1
 
 **Features and Improvements**
 

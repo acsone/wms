@@ -194,7 +194,12 @@ class PurchaseOrder(models.Model):
             line.onchange_product_id()
             new_vals = line._convert_to_write(line._cache)
             new_vals.update(vals)
-            PurchaseOrderLine.create(new_vals)
+            new_line = PurchaseOrderLine.create(new_vals)
+            # The subtotal is not correct if we don't call this onchange.
+            # Calling the onchange after 'onchange_product_id' above does
+            # not give the expected result, probably because the 'create()'
+            # method modifies some values.
+            new_line._onchange_price_unit()
 
         return True
 

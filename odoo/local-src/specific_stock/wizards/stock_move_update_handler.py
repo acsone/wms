@@ -11,9 +11,7 @@ class StockMoveWizard(models.TransientModel):
     _description = 'Stock Move Handler'
 
     move_id = fields.Many2one('stock.move', readonly=True)
-    new_date_expected = fields.Datetime(
-        string='New Scheduled Date', required=True
-    )
+    new_date_expected = fields.Datetime(string='New Scheduled Date')
 
     def action_set_expired_date(self):
         picking = self.move_id.picking_id
