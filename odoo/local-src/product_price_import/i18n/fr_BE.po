@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_price_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-17 14:39+0000\n"
+"PO-Revision-Date: 2019-12-17 14:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_price_import
+#: model:ir.ui.view,arch_db:product_price_import.product_price_importer_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_price_import
+#: model:ir.ui.view,arch_db:product_price_import.product_price_importer_form_view
+msgid "Import"
+msgstr "Import"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
+
+#. module: product_price_import
+#: model:ir.model.fields,field_description:product_price_import.field_product_price_importer_file
+msgid "XLSX file"
+msgstr "Fichier au format xlsx"
+
+#. module: product_price_import
+#: model:ir.actions.act_window,name:product_price_import.product_price_importer_act_window
+#: model:ir.ui.menu,name:product_price_import.product_price_importer_menu
+#: model:ir.ui.view,arch_db:product_price_import.product_price_importer_form_view
+msgid "Product Price Importer"
+msgstr "Import des prix des articles"
+
+#. module: product_price_import
+#: model:ir.model,name:product_price_import.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_price_import
+#: code:addons/product_price_import/report/report_product_price_import.py:107
+#: code:addons/product_price_import/report/report_product_price_import.py:109
+#, python-format
+msgid "Product prices"
+msgstr "Prix des articles"
+
+#. module: product_price_import
+#: model:ir.actions.report.xml,name:product_price_import.report_product_price_import_xlsx
+msgid "Product prices export/import XLSX"
+msgstr "Prix des articles export/import XLSX"
+
+#. module: product_price_import
+#: code:addons/product_price_import/wizards/product_price_importer.py:166
+#, python-format
+msgid "The default supplier %s for product %s is not the same one as found into the file (%s)"
+msgstr "Le fournisseur par défaut %s pour l'aricle %s n'est pas le même que celui trouvé dans le fichier d'import (%s)"
+
+#. module: product_price_import
+#: code:addons/product_price_import/wizards/product_price_importer.py:94
+#, python-format
+msgid "Unknown product identifier %s"
+msgstr "Identifiant d'article inconnu %s"
+
+#. module: product_price_import
+#: code:addons/product_price_import/wizards/product_price_importer.py:101
+#, python-format
+msgid "Unknown supplier identifier %s"
+msgstr "Identifiant de founisseur inconnu %s"
+
+#. module: product_price_import
+#: code:addons/product_price_import/wizards/product_price_importer.py:62
+#, python-format
+msgid "Updated products"
+msgstr "Articles mis à jour"
+
+#. module: product_price_import
+#: model:ir.ui.view,arch_db:product_price_import.product_price_importer_form_view
+msgid "XLSX file"
+msgstr "Fichier XLSX"
+
+#. module: product_price_import
+#: model:ir.model,name:product_price_import.model_product_price_importer
+msgid "product.price.importer"
+msgstr "Wizard d'import des prix des articles"
+
