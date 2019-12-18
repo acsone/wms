@@ -29,7 +29,7 @@
             </xpath>
 
             <xpath expr="//field[@name='seller_ids']" position="attributes">
-                <attribute name="context">{'default_product_tmpl_id': context.get('product_tmpl_id', active_id), 'default_name': supplier_id}</attribute>
+                <attribute name="context">{'default_product_tmpl_id': context.get('product_tmpl_id', active_id), 'default_name': supplier_id, 'default_product_code': vendor_product_code or '-'}</attribute>
             </xpath>
         </field>
     </record>
