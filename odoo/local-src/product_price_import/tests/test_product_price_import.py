@@ -55,6 +55,17 @@ class TestProductPriceImport(SavepointCase):
                 "date_end": cls.tomorrow,
             }
         )
+        cls.supplierinfo_promo_future = cls.env['product.supplierinfo'].create(
+            {
+                'name': cls.supplier.id,
+                'price': 10,
+                'min_qty': 20,
+                "product_code": "SUP01",
+                "discount_purchase": 20,
+                "date_start": cls.tomorrow,
+                "date_end": cls.tomorrow,
+            }
+        )
         cls.supplierinfo_promo_obsolete = cls.env[
             'product.supplierinfo'
         ].create(
@@ -103,6 +114,7 @@ class TestProductPriceImport(SavepointCase):
                 'seller_ids': [
                     (4, cls.supplierinfo_promo_active.id),
                     (4, cls.supplierinfo_promo_obsolete.id),
+                    (4, cls.supplierinfo_promo_future.id),
                 ]
             }
         )
@@ -311,18 +323,19 @@ class TestProductPriceImport(SavepointCase):
     def test_8(self):
         """
         Data:
-            A product with supplier promos (1 active an 1 obsolete)
+            A product with supplier promos (1 active , 1 future,  1 obsolete)
         Test Case:
             call the price update logic _do_update_prices
         Expected result:
             The active promo is closed
             The obsolete promo is untouched
+            Thr future promo is removed
         """
         self.assertEqual(
             self.supplierinfo_promo_active.date_end, self.tomorrow
         )
         self._add_promos()
-        self.assertEqual(len(self.product.seller_ids), 3)
+        self.assertEqual(len(self.product.seller_ids), 4)
         price_info = self.default_product_prive_info.copy()
         self.ProductPriceImporter._do_update_prices([price_info])
         self.supplierinfo_promo_active.refresh()
@@ -332,3 +345,5 @@ class TestProductPriceImport(SavepointCase):
         self.assertEqual(
             self.supplierinfo_promo_obsolete.date_end, self.pastday
         )
+        self.assertFalse(self.supplierinfo_promo_future.exists())
+        self.assertEqual(len(self.product.seller_ids), 3)

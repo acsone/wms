@@ -202,7 +202,8 @@ class ProductPriceImporter(models.TransientModel):
     def _close_supplier_promo_prices(self, product_price_infos):
         """
         Update all the product.supplierinfo with an end date greater than
-        today to close them yesterday
+        today to close them yesterday. In the same time remove those not yet
+        started (with a start date set at today or into the future)
         """
         ProductSupplierInfo = self.env["product.supplierinfo"]
         products_by_supplier = defaultdict(list)
@@ -213,6 +214,13 @@ class ProductPriceImporter(models.TransientModel):
         today = fields.Date.today()
         yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
         for supplier_id, product_tmpl_ids in products_by_supplier.items():
+            ProductSupplierInfo.search(
+                [
+                    ("product_tmpl_id", "in", product_tmpl_ids),
+                    ("name", "=", supplier_id),
+                    ("date_start", ">=", today),
+                ]
+            ).unlink()
             ProductSupplierInfo.search(
                 [
                     ("product_tmpl_id", "in", product_tmpl_ids),
