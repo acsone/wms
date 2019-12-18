@@ -563,8 +563,8 @@ msgstr "Opération de manutention"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.view_stock_move_update_handler_form
-msgid "Set Expiration Date"
-msgstr "Définir la date d'expiration"
+msgid "Set Scheduled Date"
+msgstr "Définir la date planifiée"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_shelf

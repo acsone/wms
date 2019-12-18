@@ -579,3 +579,4 @@ migration:
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql
+          - anthem songs.upgrade.update_10_0_1_47_0::post
