@@ -12,6 +12,7 @@ class ProcurementOrder(models.Model):
     sale_line_id = fields.Many2one(index=True)
     purchase_line_id = fields.Many2one(index=True)
     group_id = fields.Many2one(index=True)
+    move_dest_id = fields.Many2one(index=True)
 
     @api.model
     def create(self, vals):
