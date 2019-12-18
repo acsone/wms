@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
+from datetime import datetime, timedelta
 
+from odoo import fields
 from odoo.addons.product_price_import.wizards.product_price_importer import (
     ProductPriceInfo,
 )
@@ -16,6 +18,15 @@ class TestProductPriceImport(SavepointCase):
     def setUpClass(cls):
         super(TestProductPriceImport, cls).setUpClass()
         cls.BaseImport = cls.env["base_import.import"]
+        cls.pastday = fields.Date.to_string(
+            datetime.now() - timedelta(days=10)
+        )
+        cls.yesterday = fields.Date.to_string(
+            datetime.now() - timedelta(days=1)
+        )
+        cls.tomorrow = fields.Date.to_string(
+            datetime.now() + timedelta(days=1)
+        )
         cls.report_action = cls.env.ref(
             "product_price_import.report_product_price_import_xlsx"
         )
@@ -33,6 +44,29 @@ class TestProductPriceImport(SavepointCase):
 
         cls.supplierinfo = cls.env['product.supplierinfo'].create(
             {'name': cls.supplier.id, 'price': 10, "product_code": "SUP01"}
+        )
+        cls.supplierinfo_promo_active = cls.env['product.supplierinfo'].create(
+            {
+                'name': cls.supplier.id,
+                'price': 10,
+                "product_code": "SUP01",
+                "discount_purchase": 10,
+                "date_start": cls.yesterday,
+                "date_end": cls.tomorrow,
+            }
+        )
+        cls.supplierinfo_promo_obsolete = cls.env[
+            'product.supplierinfo'
+        ].create(
+            {
+                'name': cls.supplier.id,
+                'price': 10,
+                'min_qty': 20,
+                "product_code": "SUP01",
+                "discount_purchase": 20,
+                "date_start": cls.pastday,
+                "date_end": cls.pastday,
+            }
         )
         cls.product.write({'seller_ids': [(6, 0, cls.supplierinfo.ids)]})
 
@@ -60,6 +94,17 @@ class TestProductPriceImport(SavepointCase):
             sale_price_2="13.0",
             indicated_price="13.24",
             supplier_reference="NEWSUP01",
+        )
+
+    @classmethod
+    def _add_promos(cls):
+        cls.product.write(
+            {
+                'seller_ids': [
+                    (4, cls.supplierinfo_promo_active.id),
+                    (4, cls.supplierinfo_promo_obsolete.id),
+                ]
+            }
         )
 
     @classmethod
@@ -261,4 +306,29 @@ class TestProductPriceImport(SavepointCase):
             self.env["product.pricelist.item"].search_count(
                 [("product_id", "=", self.product.id)]
             ),
+        )
+
+    def test_8(self):
+        """
+        Data:
+            A product with supplier promos (1 active an 1 obsolete)
+        Test Case:
+            call the price update logic _do_update_prices
+        Expected result:
+            The active promo is closed
+            The obsolete promo is untouched
+        """
+        self.assertEqual(
+            self.supplierinfo_promo_active.date_end, self.tomorrow
+        )
+        self._add_promos()
+        self.assertEqual(len(self.product.seller_ids), 3)
+        price_info = self.default_product_prive_info.copy()
+        self.ProductPriceImporter._do_update_prices([price_info])
+        self.supplierinfo_promo_active.refresh()
+        self.assertEqual(
+            self.supplierinfo_promo_active.date_end, self.yesterday
+        )
+        self.assertEqual(
+            self.supplierinfo_promo_obsolete.date_end, self.pastday
         )

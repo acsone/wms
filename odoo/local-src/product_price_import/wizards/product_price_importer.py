@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
+from collections import defaultdict
+from datetime import datetime, timedelta
 
 import xlrd
 from odoo import _, api, fields, models
@@ -129,6 +131,7 @@ class ProductPriceImporter(models.TransientModel):
         self._retrieve_records(product_price_infos)
         self._update_product_prices(product_price_infos)
         self._update_supplier_default_prices(product_price_infos)
+        self._close_supplier_promo_prices(product_price_infos)
         self._update_pricelist_pb2(product_price_infos)
 
     @api.model
@@ -194,6 +197,29 @@ class ProductPriceImporter(models.TransientModel):
                         ]
                     }
                 )
+
+    @api.model
+    def _close_supplier_promo_prices(self, product_price_infos):
+        """
+        Update all the product.supplierinfo with an end date greater than
+        today to close them yesterday
+        """
+        ProductSupplierInfo = self.env["product.supplierinfo"]
+        products_by_supplier = defaultdict(list)
+        for price_info in product_price_infos:
+            products_by_supplier[price_info.supplier.id].append(
+                price_info.product.id
+            )
+        today = fields.Date.today()
+        yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
+        for supplier_id, product_tmpl_ids in products_by_supplier.items():
+            ProductSupplierInfo.search(
+                [
+                    ("product_tmpl_id", "in", product_tmpl_ids),
+                    ("name", "=", supplier_id),
+                    ("date_end", ">=", today),
+                ]
+            ).write({"date_end": yesterday})
 
     @api.model
     def _update_pricelist_pb2(self, product_price_infos):
