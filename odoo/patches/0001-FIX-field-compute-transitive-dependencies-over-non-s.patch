@@ -22,14 +22,14 @@ closes odoo/odoo#35636
 
 Signed-off-by: Raphael Collet (rco) <rco@openerp.com>
 ---
- odoo/addons/test_new_api/ir.model.access.csv      |  1 +
- odoo/addons/test_new_api/models.py                | 18 ++++++++++++++++++
- odoo/addons/test_new_api/tests/test_new_fields.py |  5 +++++
- odoo/fields.py                                    | 12 ++++++++----
+ odoo/addons/test_new_api/ir.model.access.csv   |  1 +
+ odoo/addons/test_new_api/models.py             | 18 ++++++++++++++++++
+ .../test_new_api/tests/test_new_fields.py      |  5 +++++
+ odoo/fields.py                                 | 12 ++++++++----
  4 files changed, 32 insertions(+), 4 deletions(-)
 
 diff --git a/odoo/addons/test_new_api/ir.model.access.csv b/odoo/addons/test_new_api/ir.model.access.csv
-index 4e13648..b250877 100644
+index 4e136481512..b250877ada3 100644
 --- a/odoo/addons/test_new_api/ir.model.access.csv
 +++ b/odoo/addons/test_new_api/ir.model.access.csv
 @@ -18,3 +18,4 @@ access_test_new_api_company_attr,access_test_new_api_company_attr,model_test_new
@@ -38,7 +38,7 @@ index 4e13648..b250877 100644
  access_test_new_api_recursive,access_test_new_api_recursive,model_test_new_api_recursive,,1,1,1,1
 +access_test_new_api_cascade,access_test_new_api_cascade,model_test_new_api_cascade,,1,1,1,1
 diff --git a/odoo/addons/test_new_api/models.py b/odoo/addons/test_new_api/models.py
-index 5dccb48..2d79760 100644
+index 5dccb48be43..2d79760631f 100644
 --- a/odoo/addons/test_new_api/models.py
 +++ b/odoo/addons/test_new_api/models.py
 @@ -376,3 +376,21 @@ class ComputeRecursive(models.Model):
@@ -64,7 +64,7 @@ index 5dccb48..2d79760 100644
 +        for record in self:
 +            record.baz = "<%s>" % (record.bar or "")
 diff --git a/odoo/addons/test_new_api/tests/test_new_fields.py b/odoo/addons/test_new_api/tests/test_new_fields.py
-index 2755612..5e9726a 100644
+index 2755612db53..5e9726a5cd9 100644
 --- a/odoo/addons/test_new_api/tests/test_new_fields.py
 +++ b/odoo/addons/test_new_api/tests/test_new_fields.py
 @@ -223,6 +223,11 @@ class TestFields(common.TransactionCase):
@@ -80,7 +80,7 @@ index 2755612..5e9726a 100644
          """ test inverse computation of fields """
          Category = self.env['test_new_api.category']
 diff --git a/odoo/fields.py b/odoo/fields.py
-index 4eea102..0396ec4 100644
+index 4eea1021e9e..0396ec45446 100644
 --- a/odoo/fields.py
 +++ b/odoo/fields.py
 @@ -721,7 +721,7 @@ class Field(object):
@@ -124,5 +124,5 @@ index 4eea102..0396ec4 100644
          return result
  
 -- 
-2.7.4
+2.17.1
 

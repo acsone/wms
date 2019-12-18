@@ -116,6 +116,30 @@ class ProcurementOrder(models.Model):
 
         return result
 
+    def _ensure_product_orderpoints(self, warehouse, products=None):
+        Product = self.env['product.product'].with_context(
+            warehouse=warehouse.id
+        )
+        domain = [
+            ('orderpoint_ids', '=', False),
+            ('type', '=', 'product'),
+            ('virtual_available', '<', 0),
+        ]
+        if products:
+            domain.append(('id', 'in', products.ids))
+        for product in Product.search(domain):
+            self.env['stock.warehouse.orderpoint'].create(
+                {
+                    'warehouse_id': warehouse.id,
+                    'product_id': product.id,
+                    'company_id': warehouse.company_id.id,
+                    'product_min_qty': 0,
+                    'product_max_qty': 0,
+                    'location_id': warehouse.view_location_id.id,
+                    'product_uom': product.uom_id.id,
+                }
+            )
+
     def make_po(self):
         """
         Update the order date when the procurement update or create a purchase

@@ -34,6 +34,16 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
             }
         )
         so.action_confirm()
+        reassign = so.picking_ids.filtered(
+            lambda x: x.state == 'confirmed'
+            or (
+                (x.state in ['partially_available', 'waiting'])
+                and not x.printed
+            )
+        )
+        if reassign:
+            reassign.do_unreserve()
+            reassign.action_assign()
         return so
 
     @classmethod
