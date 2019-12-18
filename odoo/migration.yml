@@ -211,6 +211,7 @@ migration:
           - delivery_rounds_refill
           - external_fax
           - ir_sequence_period
+          - invoice_only_one_vat
           - l10n_be_bba_fix
           - monitoring_status
           - partner_archive_new_partner
@@ -574,6 +575,7 @@ migration:
       addons:
         upgrade:
           - specific_purchase
+          - invoice_only_one_vat
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql

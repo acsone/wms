@@ -28,6 +28,8 @@ latest (unreleased)
 
 * ALCYN-2322: Add existing vendor product code in new product supplier info, if it does not exist set a dash.
 
+* ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
+
 **Bugfixes**
 
 **Build**
