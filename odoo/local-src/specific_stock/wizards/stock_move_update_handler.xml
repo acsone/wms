@@ -13,7 +13,7 @@
                 </sheet>
                 <footer>
                     <button name="action_set_expired_date"
-                            string="Set Expiration Date" type="object"
+                            string="Set Scheduled Date" type="object"
                             class="btn-primary"/>
                     <button name="action_cancel_move"
                             string="Cancel move" class="btn-default"

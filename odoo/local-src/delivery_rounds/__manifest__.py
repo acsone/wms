@@ -16,6 +16,7 @@
         'stock_picking_subcode',
         'stock_picking_sequence',
         'stock_groupbypartner',
+        'partner_schedule',
         'queue_job',
         'web_notify',
     ],

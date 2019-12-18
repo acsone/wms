@@ -24,6 +24,7 @@ class DeliveryRoundTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(DeliveryRoundTestCase, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner1 = cls.env['res.partner'].create(
             {'name': 'Unittest partner', 'ref': '12344566777878'}
         )

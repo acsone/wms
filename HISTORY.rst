@@ -27,6 +27,7 @@ latest (unreleased)
 * ALCYN-2333/ALCYN-2334: Add indexes in database to fasten some Stock operations
 
 * ALCYN-2322: Add existing vendor product code in new product supplier info, if it does not exist set a dash.
+* ALCYN-2282: Add partners holidays schedules, enable holidays in delivery roundings
 
 * ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
 

@@ -865,3 +865,10 @@ msgstr "round.wizard.makeplan"
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "unit(s)"
 msgstr "unit(s)"
+
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_instance.py:310
+#, python-format
+msgid "{} is not working day for {}"
+msgstr "{} n'est pas un jour de travail pour {}"

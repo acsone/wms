@@ -310,6 +310,25 @@ class RoundInstance(models.Model):
                 (tuple(self.ids),),
             )
 
+    def _check_allowed_holidays_pickings(self, pickings):
+        errors = {}
+        for pick in pickings:
+            partner = pick.partner_id
+            if (
+                pick.picking_type_code != 'incoming'
+                and not partner.is_shipping_date_allowed(self.date)
+            ):
+                if partner.id not in errors.keys():
+                    errors[partner.id] = _(
+                        u'{} is not working day for {}, next allowed day is {}'
+                    ).format(
+                        self.date,
+                        partner.name,
+                        partner.get_next_shipping_date(self.date),
+                    )
+        if errors:
+            raise UserError('\n'.join(errors.values()))
+
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
@@ -321,6 +340,8 @@ class RoundInstance(models.Model):
         self._lock()
 
         self._check_printed_pickings(pickings)
+        if self.env.context.get('manual_change_delivery_round'):
+            self._check_allowed_holidays_pickings(pickings)
 
         pickings.filtered(
             lambda picking: picking.state == 'draft'
