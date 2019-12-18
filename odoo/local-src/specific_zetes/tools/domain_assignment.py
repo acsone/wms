@@ -326,7 +326,8 @@ WHERE pick_type.subcode = 'PICK'
             "round.date, "
             "round.time_picking_planned, "
             "picking.rank DESC "
-            "LIMIT 1;"
+            "LIMIT 1 "
+            "FOR UPDATE OF picking SKIP LOCKED;"
         )
         self.request.env.cr.execute(picking_query, query_values)
         query_result = self.request.env.cr.fetchone()
