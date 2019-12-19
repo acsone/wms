@@ -16,7 +16,7 @@ class AccountInvoice(models.Model):
 
     sending_method = fields.Selection(
         readonly=True,
-        related="partner_id.invoice_sending_method",
+        related="commercial_partner_id.invoice_sending_method",
         string="Sending Method",
     )
 

@@ -33,6 +33,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2344: Change invoice sending method to have right method for all customer type
+
 **Build**
 
 **Documentation**
