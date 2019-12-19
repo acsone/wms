@@ -327,23 +327,37 @@ class TestProductPriceImport(SavepointCase):
         Test Case:
             call the price update logic _do_update_prices
         Expected result:
-            The active promo is closed
+            The active promo is updated (price)
             The obsolete promo is untouched
-            Thr future promo is removed
+            Thr future promo is updated (price)
         """
-        self.assertEqual(
-            self.supplierinfo_promo_active.date_end, self.tomorrow
-        )
         self._add_promos()
         self.assertEqual(len(self.product.seller_ids), 4)
         price_info = self.default_product_prive_info.copy()
+        self.assertNotEqual(
+            self.supplierinfo_promo_active.price,
+            float(price_info.purchase_price),
+        )
+        self.assertNotEqual(
+            self.supplierinfo_promo_future.price,
+            float(price_info.purchase_price),
+        )
+        self.assertNotEqual(
+            self.supplierinfo_promo_obsolete.price,
+            float(price_info.purchase_price),
+        )
+
         self.ProductPriceImporter._do_update_prices([price_info])
         self.supplierinfo_promo_active.refresh()
         self.assertEqual(
-            self.supplierinfo_promo_active.date_end, self.yesterday
+            self.supplierinfo_promo_active.price,
+            float(price_info.purchase_price),
         )
         self.assertEqual(
-            self.supplierinfo_promo_obsolete.date_end, self.pastday
+            self.supplierinfo_promo_future.price,
+            float(price_info.purchase_price),
         )
-        self.assertFalse(self.supplierinfo_promo_future.exists())
-        self.assertEqual(len(self.product.seller_ids), 3)
+        self.assertNotEqual(
+            self.supplierinfo_promo_obsolete.price,
+            float(price_info.purchase_price),
+        )

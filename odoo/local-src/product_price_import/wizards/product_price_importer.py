@@ -3,8 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-from collections import defaultdict
-from datetime import datetime, timedelta
 
 import xlrd
 from odoo import _, api, fields, models
@@ -131,7 +129,7 @@ class ProductPriceImporter(models.TransientModel):
         self._retrieve_records(product_price_infos)
         self._update_product_prices(product_price_infos)
         self._update_supplier_default_prices(product_price_infos)
-        self._close_supplier_promo_prices(product_price_infos)
+        self._update_supplier_promo_prices(product_price_infos)
         self._update_pricelist_pb2(product_price_infos)
 
     @api.model
@@ -199,35 +197,20 @@ class ProductPriceImporter(models.TransientModel):
                 )
 
     @api.model
-    def _close_supplier_promo_prices(self, product_price_infos):
+    def _update_supplier_promo_prices(self, product_price_infos):
         """
-        Update all the product.supplierinfo with an end date greater than
-        today to close them yesterday. In the same time remove those not yet
-        started (with a start date set at today or into the future)
+        Update all the active or future product.supplierinfo defiend for promo
         """
         ProductSupplierInfo = self.env["product.supplierinfo"]
-        products_by_supplier = defaultdict(list)
-        for price_info in product_price_infos:
-            products_by_supplier[price_info.supplier.id].append(
-                price_info.product.id
-            )
         today = fields.Date.today()
-        yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
-        for supplier_id, product_tmpl_ids in products_by_supplier.items():
+        for price_info in product_price_infos:
             ProductSupplierInfo.search(
                 [
-                    ("product_tmpl_id", "in", product_tmpl_ids),
-                    ("name", "=", supplier_id),
-                    ("date_start", ">=", today),
-                ]
-            ).unlink()
-            ProductSupplierInfo.search(
-                [
-                    ("product_tmpl_id", "in", product_tmpl_ids),
-                    ("name", "=", supplier_id),
+                    ("product_tmpl_id", "=", price_info.product.id),
+                    ("name", "=", price_info.supplier.id),
                     ("date_end", ">=", today),
                 ]
-            ).write({"date_end": yesterday})
+            ).write({"price": _ensure_float(price_info.purchase_price)})
 
     @api.model
     def _update_pricelist_pb2(self, product_price_infos):
