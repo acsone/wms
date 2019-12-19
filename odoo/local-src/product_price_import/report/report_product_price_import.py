@@ -115,7 +115,8 @@ class ReportProductPriceImport(AbstractReportXlsx):
 
     def _product_prices_report(self, workbook, ws, ws_params, data, products):
         self._set_column_width(ws, ws_params)
-
+        if "active_domain" in self.env.context:
+            products = products.search(self.env.context["active_domain"])
         row_pos = 0
         row_pos = self._write_line(
             ws,
