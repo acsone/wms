@@ -30,7 +30,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'header': {'value': 'product_id'},
             'data': {
                 'type': 'string',
-                'value': self._render("product.xml_id"),
+                'value': self._render("product_info.xml_id"),
             },
             'width': 30,
         }
@@ -38,7 +38,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'header': {'value': 'supplier_id'},
             'data': {
                 'type': 'string',
-                'value': self._render("product.supplier_xml_id or '' "),
+                'value': self._render("product_info.supplier_xml_id or '' "),
             },
             'width': 30,
         }
@@ -52,14 +52,17 @@ class ReportProductPriceImport(AbstractReportXlsx):
         }
         template['product_name'] = {
             'header': {'value': 'product_name'},
-            'data': {'type': 'string', 'value': self._render("product.name")},
+            'data': {
+                'type': 'string',
+                'value': self._render("product_info.name"),
+            },
             'width': 50,
         }
         template['internal_reference'] = {
             'header': {'value': 'internal_reference'},
             'data': {
                 'type': 'string',
-                'value': self._render("product.default_code or ''"),
+                'value': self._render("product_info.default_code or ''"),
             },
             'width': 10,
         }
@@ -68,6 +71,16 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'data': {
                 'type': 'string',
                 'value': self._render("supplier.product_code or ''"),
+            },
+            'width': 10,
+        }
+        template['sale_taxes'] = {
+            'header': {'value': 'sale_taxes'},
+            'data': {
+                'type': 'string',
+                'value': self._render(
+                    "', '.join(product.mapped('taxes_id.name'))"
+                ),
             },
             'width': 10,
         }
@@ -83,7 +96,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'header': {'value': 'sale_price'},
             'data': {
                 'type': 'number',
-                'value': self._render("product.list_price"),
+                'value': self._render("product_info.list_price"),
             },
             'width': 7,
         }
@@ -91,7 +104,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'header': {'value': 'sale_price_2'},
             'data': {
                 'type': 'number',
-                'value': self._render("product.sale_price_2"),
+                'value': self._render("product_info.sale_price_2"),
             },
             'width': 7,
         }
@@ -99,7 +112,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             'header': {'value': 'indicated_price'},
             'data': {
                 'type': 'number',
-                'value': self._render("product.indicated_price"),
+                'value': self._render("product_info.indicated_price"),
             },
             'width': 7,
         }
@@ -142,7 +155,8 @@ class ReportProductPriceImport(AbstractReportXlsx):
                 col_specs_section='data',
                 render_space={
                     'supplier': supplier_info,
-                    'product': product_info,
+                    'product_info': product_info,
+                    'product': product,
                 },
                 default_format=self.format_tcell_left,
             )
