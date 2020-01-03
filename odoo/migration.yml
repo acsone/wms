@@ -221,6 +221,7 @@ migration:
           - product_additional
           - product_last_transaction
           - product_price_category
+          - product_price_import
           - purchase_prepaid
           - purchase_unlink_cancelop
           - sale_cancel_remaining
@@ -579,12 +580,14 @@ migration:
     - version: 10.0.1.47.0
       addons:
         upgrade:
-          - specific_purchase
-          - invoice_only_one_vat
-          - partner_schedule
           - delivery_rounds
           - delivery_rounds_refill
+          - invoice_only_one_vat
+          - partner_schedule
+          - product_price_import
+          - specific_purchase
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql
           - anthem songs.upgrade.update_10_0_1_47_0::post
+

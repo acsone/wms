@@ -27,7 +27,9 @@ class ProductTemplate(models.Model):
 
     cnk_code = fields.Char(string='CNK', copy=False)
 
-    indicated_price = fields.Float(string='Indicated price')
+    indicated_price = fields.Float(
+        string='Indicated price', digits=dp.get_precision('Product Price')
+    )
 
     storage_temperature_id = fields.Many2one(
         'product.storage.temperature', string="Storage temperature"
