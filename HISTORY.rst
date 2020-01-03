@@ -32,6 +32,7 @@ latest (unreleased)
 * ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
 * ALCYN-2130: fix issues with delivery rounds and back orders
 * Product Prices Mass Import
+* ALCYN-2359: Fix ALCYN-2299 don't decrease product uom qty
 
 **Bugfixes**
 

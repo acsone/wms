@@ -630,12 +630,18 @@ class SaleOrderLine(models.Model):
         """Overloaded to ship only available qty in stock to the customer:
 
             - update the canceled qty with the unavailable qty
-            - substract the ordered qty with the canceled qty
+            - substract the shipped qty with the canceled qty
             - set the unavailable qty to 0
 
         Then the resulting stock move should not generates a backorder once
         validated.
+
+        The product qty is overridden by super so we need to backup and restore
+        the proper quantity once the procurement is created.
         """
+        if 'auto_cancel_unavailable_qty' in self.env.context:
+            return
+        backup_qty = {}
         for line in self:
             # Process only lines related to customers with the auto-cancel
             # option and related to stock products
@@ -644,7 +650,14 @@ class SaleOrderLine(models.Model):
                 and line.product_id.type != "service"
                 and line.product_qty_unavailable
             ):
+                backup_qty[line.id] = line.product_uom_qty
                 line.product_qty_canceled = line.product_qty_unavailable
                 line.product_uom_qty -= line.product_qty_canceled
                 line.product_qty_unavailable = 0
-        return super(SaleOrderLine, self)._action_procurement_create()
+        res = super(SaleOrderLine, self)._action_procurement_create()
+        # dont enter again in _action_procurement_create
+        # while restoring ordered qty.
+        for line in self.with_context(auto_cancel_unavailable_qty=True):
+            if line.id in backup_qty:
+                line.product_uom_qty = backup_qty[line.id]
+        return res

@@ -58,9 +58,13 @@ class TestAutoCancelUnavailableQty(SavepointCase):
         self.assertEqual(line.product_qty_canceled, 0)
         self.assertEqual(line.product_qty_unavailable, 4)
         self.order.action_confirm()
-        self.assertEqual(line.product_uom_qty, 6)
+        # the uom qty should not be change cause (it's should include the
+        # cancel qty) ALCYN-2359
+        self.assertEqual(line.product_uom_qty, 10)
         self.assertEqual(line.product_qty_canceled, 4)
         self.assertEqual(line.product_qty_unavailable, 0)
+        proc = line.procurement_ids.filtered(lambda r: r.state != 'cancel')
+        self.assertEqual(proc.product_qty, 6)
 
     def test_option_enabled_qty_available(self):
         """Auto-cancel unavailable qty feature enabled with enough qty in stock
