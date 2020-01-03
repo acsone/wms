@@ -639,7 +639,7 @@ class SaleOrderLine(models.Model):
         The product qty is overridden by super so we need to backup and restore
         the proper quantity once the procurement is created.
         """
-        if 'auto_cancel_unavailable_qty' in self.env.context:
+        if self.env.context.get('auto_cancel_unavailable_qty'):
             return
         backup_qty = {}
         for line in self:
