@@ -21,14 +21,23 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.47.0 (2020-01-03)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2330: use a database lock to avoid interaction between zetes and
   stock_groupbypartner
-
 * ALCYN-2333/ALCYN-2334: Add indexes in database to fasten some Stock operations
-
 * ALCYN-2322: Add existing vendor product code in new product supplier info, if it does not exist set a dash.
 * ALCYN-2282: Add partners holidays schedules, enable holidays in delivery roundings
-
 * ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
 * ALCYN-2130: fix issues with delivery rounds and back orders
 * Product Prices Mass Import
@@ -37,10 +46,6 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2344: Change invoice sending method to have right method for all customer type
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.46.1 (2019-12-12)
