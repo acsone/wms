@@ -93,7 +93,7 @@ msgstr "Prix des articles export/import XLSX"
 #: code:addons/product_price_import/wizards/product_price_importer.py:166
 #, python-format
 msgid "The default supplier %s for product %s is not the same one as found into the file (%s)"
-msgstr "Le fournisseur par défaut %s pour l'aricle %s n'est pas le même que celui trouvé dans le fichier d'import (%s)"
+msgstr "Le fournisseur par défaut %s pour l'article %s n'est pas le même que celui trouvé dans le fichier d'import (%s)"
 
 #. module: product_price_import
 #: code:addons/product_price_import/wizards/product_price_importer.py:94
@@ -105,7 +105,7 @@ msgstr "Identifiant d'article inconnu %s"
 #: code:addons/product_price_import/wizards/product_price_importer.py:101
 #, python-format
 msgid "Unknown supplier identifier %s"
-msgstr "Identifiant de founisseur inconnu %s"
+msgstr "Identifiant de fournisseur inconnu %s"
 
 #. module: product_price_import
 #: code:addons/product_price_import/wizards/product_price_importer.py:62
@@ -122,4 +122,3 @@ msgstr "Fichier XLSX"
 #: model:ir.model,name:product_price_import.model_product_price_importer
 msgid "product.price.importer"
 msgstr "Wizard d'import des prix des articles"
-

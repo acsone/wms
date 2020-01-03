@@ -199,7 +199,7 @@ class ProductPriceImporter(models.TransientModel):
     @api.model
     def _update_supplier_promo_prices(self, product_price_infos):
         """
-        Update all the active or future product.supplierinfo defiend for promo
+        Update all the active or future product.supplierinfo defined for promo
         """
         ProductSupplierInfo = self.env["product.supplierinfo"]
         today = fields.Date.today()
@@ -220,13 +220,13 @@ class ProductPriceImporter(models.TransientModel):
             If sale_price_2 is not set or 0:
                 -> remove item into the pricelist if exists
             Is sale_price_2 is set:
-                -> Update item inot the pricelist if exists or create a new one.
+                -> Update item into the pricelist if exists or create a new one.
 
         Rem: Add this stage we don't support price versioning (price fields
           on the product template are not versioned by default) Therefore changes
-          applies immediately. That's why we update the existing pricelist item
-          if one exists in place of closing the existing one and creating a new
-          starting from now..
+          are applied immediately. That's why we update the existing pricelist item
+          if one exists instead of closing the existing one and creating a new
+          starting from now.
         """
         ProductPricelistItem = self.env["product.pricelist.item"]
         pricelist = self.env.ref('specific_data.product_pricelist_pb2')
