@@ -21,6 +21,21 @@ class StockPicking(models.Model):
         compute='_compute_partner_itinerary_ids',
     )
 
+    @api.model
+    def create(self, values):
+        res = super(StockPicking, self).create(values)
+        backorder = self._context.get('backorder_assign')
+        if backorder:
+            delivery_round_customer = backorder.delivery_round_customer_id
+            delivery_round = backorder.delivery_round_id
+            if delivery_round:
+                delivery_round._assign_pickings(res)
+            res.with_context(
+                round_assigned=True
+            ).delivery_round_customer_id = delivery_round_customer.id
+
+        return res
+
     def _compute_partner_itinerary_ids(self):
         for picking in self:
             if not (
@@ -155,6 +170,22 @@ class StockPicking(models.Model):
         self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
             {'delivery_round_customer_id': False}
         )
+        pending_moves = self.env['stock.move'].search(
+            [
+                ('picking_id', 'in', self.ids),
+                ('state', 'not in', ('cancel', 'done')),
+            ]
+        )
+        if pending_moves:
+            pending_moves.write({'picking_id': False})
+
+            # We could get empty pickings here if all the moves are pending and
+            # therefore removed. But removing them could pose issues
+            # elsewhere. So for now I prefer leaving them, as this should be rare.
+            #
+            # self.filtered(lambda r: not r.move_lines).unlink()
+
+            pending_moves.assign_picking()
 
     @api.multi
     def button_delivery_round(self):

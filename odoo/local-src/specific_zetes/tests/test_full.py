@@ -664,5 +664,6 @@ class TestFull(ZetesTest):
         result_str = assignement_obj.requ(request_picking_params)
         result = self.format_result(result_str)
 
-        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
-        self.assertEqual(result.respMsg, 'Cannot found a picking')
+        # as per ALCYN-2130, we put the backorder in the delivery round,
+        # we assign a delivery round to the backorders, a picking exists
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))

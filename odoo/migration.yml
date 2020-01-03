@@ -553,6 +553,7 @@ migration:
         upgrade:
           - alcyon_credit_control
           - connector_esb
+          - delivery_rounds
           - partner_archive_new_partner
           - specific_account
           - specific_data
@@ -567,6 +568,9 @@ migration:
     - version: 10.0.1.46.1
       addons:
         upgrade:
+          - delivery_rounds
+          - delivery_rounds_refill
+          - specific_product
           - specific_stock
           - specific_product
           - specific_purchase
@@ -578,6 +582,8 @@ migration:
           - specific_purchase
           - invoice_only_one_vat
           - partner_schedule
+          - delivery_rounds
+          - delivery_rounds_refill
       operations:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql

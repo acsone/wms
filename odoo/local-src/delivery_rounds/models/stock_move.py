@@ -107,4 +107,45 @@ class StockMove(models.Model):
                 ('delivery_round_id', '=', False),
                 ('delivery_round_id.state', 'in', ('open', 'draft')),
             ]
+        elif orig_picking and orig_picking.mapped('delivery_round_id'):
+            domain += [
+                (
+                    'delivery_round_customer_id',
+                    'in',
+                    orig_picking.mapped('delivery_round_customer_id').ids,
+                )
+            ]
+        elif not orig_picking and self._context.get('backorder_assign'):
+            back_order = self._context['backorder_assign']
+            domain += [
+                (
+                    'delivery_round_customer_id',
+                    '=',
+                    back_order.delivery_round_customer_id.id,
+                )
+            ]
+        else:
+            domain += [
+                '|',
+                ('delivery_round_id', '=', False),
+                ('delivery_round_id.state', 'in', ('open', 'draft')),
+            ]
         return domain
+
+    @api.multi
+    def assign_picking(self):
+        res = super(StockMove, self).assign_picking()
+        bo_assign = self._context.get(
+            'backorder_assign', self.env['stock.picking']
+        )
+        # if we are assigning the move to a picking in the context of the
+        # creation of a backorder, then make sure that 1. the backorder picking
+        # lands in the same delivery round as the original picking, and 2. run
+        # a job to check the availability of the picking's moves so that if a
+        # replenishment has occured, the moves are available. (See ALCYN-2130)
+        if bo_assign and bo_assign.delivery_round_id:
+            bo_assign.delivery_round_id._assign_pickings(
+                self.mapped('picking_id')
+            )
+            self.mapped('picking_id')._job_action_assign()
+        return res
