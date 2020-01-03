@@ -62,7 +62,7 @@ class ProductPriceImporter(models.TransientModel):
             'name': _('Updated products'),
             'res_model': 'product.template',
             'domain': [
-                ('id', '=', [i.product.id for i in product_price_infos])
+                ('id', 'in', [i.product.id for i in product_price_infos])
             ],
             'view_mode': 'tree,form',
         }
@@ -237,7 +237,7 @@ class ProductPriceImporter(models.TransientModel):
                 ('applied_on', '=', '1_product'),
                 (
                     'product_tmpl_id',
-                    '=',
+                    'in',
                     [i.product.id for i in product_price_infos],
                 ),
             ]
