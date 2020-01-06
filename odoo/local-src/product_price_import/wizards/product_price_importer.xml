@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <form string="Product Price Importer">
                 <group>
-                    <field name="file"/>
+                    <field name="document"/>
                 </group>
                 <footer>
                     <button name="doit"
