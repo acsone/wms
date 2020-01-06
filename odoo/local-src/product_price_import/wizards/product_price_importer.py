@@ -121,7 +121,7 @@ class ProductPriceImporter(models.TransientModel):
     @api.model
     def _do_update_prices(self, product_price_infos):
         """
-        Call the three steps required to update all the prices information
+        Call the steps required to update all the prices information
         related to a product.
         Each step is called with all the prices information to allow batch
         processing
