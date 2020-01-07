@@ -282,7 +282,6 @@ class RoundInstance(models.Model):
             if (
                 pick.printed
                 and pick.delivery_round_id
-                and pick.delivery_round_id != self
                 and pick.pack_operation_product_ids
             ):
                 errors.append(
@@ -338,7 +337,6 @@ class RoundInstance(models.Model):
             pickings.ids,
         )
         self._lock()
-
         self._check_printed_pickings(pickings)
         if self.env.context.get('manual_change_delivery_round'):
             self._check_allowed_holidays_pickings(pickings)

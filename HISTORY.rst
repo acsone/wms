@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2340: prevent user from reassigning a started picking to a delivery round
+  (inc. the same round)
+
 **Build**
 
 **Documentation**
