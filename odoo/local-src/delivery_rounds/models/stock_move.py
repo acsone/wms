@@ -14,6 +14,18 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     @api.multi
+    def write(self, values):
+        picking_id = values.get('picking_id')
+        if picking_id:
+            # We are assigning the move to a picking ->
+            # take a lock on the round instance of the picking (this is a noop
+            # if the picking has no round instance) to prevent concurrent
+            # access and retries
+            picking = self.env['stock.picking'].browse(picking_id)
+            picking.delivery_round_id._lock()
+        return super(StockMove, self).write(values)
+
+    @api.multi
     def _action_assign_filter_moves(self):
         move_ids = set()
         for move in self:
