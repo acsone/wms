@@ -34,37 +34,31 @@ class PurchaseOrder(models.Model):
         search="_search_nbr_lines_bo",
         readonly=True,
     )
-    day_planned = fields.Date(string='Scheduled Day')
-    time_planned = fields.Float(string='Scheduled Time')
 
-    def _get_date_time_format(self):
-        # mock float field to respect user timezone
+    @api.model
+    def convert_time(self, pl_day, pl_time=14.00):
+        """
+        mock float field to respect user timezone
+        pl_day - date in string format
+        pl_time - time in float format
+        """
         tz_utc = pytz.timezone('UTC')
-        tz_context = pytz.timezone(self.env.context.get('tz'))
+        tz_context = pytz.timezone(self.env.context.get('tz', 'UTC'))
 
-        new_planned_date = fields.Datetime.from_string(self.day_planned)
-        hour = int(self.time_planned)
-        minute = int(round((self.time_planned - hour) * 60))
-        new_planned_date = new_planned_date.replace(hour=hour, minute=minute)
+        new_planned_date = fields.Datetime.from_string(pl_day)
+        hour = int(pl_time)
+        minute = int(round(pl_time - hour) * 60)
+        new_planned_date = new_planned_date.replace(
+            hour=hour, minute=minute, second=0
+        )
         return tz_context.localize(new_planned_date).astimezone(tz_utc)
 
-    def _inverse_date_planned(self):
-        # set scheduled datetime form new date and time fields
-        for order in self:
-            # do not initialize field with empty values
-            if order.day_planned:
-                order.date_planned = order._get_date_time_format()
-
-    def get_date_planned(self):
-        if self.day_planned:
-            return self._get_date_time_format().strftime(
-                DEFAULT_SERVER_DATETIME_FORMAT
-            )
-
+    @api.multi
     def action_set_date_planned(self):
-        # ensure date_planned updated before
-        self._inverse_date_planned()
-        super(PurchaseOrder, self).action_set_date_planned()
+        # disabled default method
+        for order in self:
+            renew_date = self.convert_time(order.date_planned)
+            order.order_line.update({'date_planned': renew_date})
 
     @api.multi
     def _compute_nbr_lines(self):
@@ -113,6 +107,13 @@ class PurchaseOrder(models.Model):
                 vals['responsible_id'] = partner.purchase_manager_id.id
 
         return super(PurchaseOrder, self).create(vals)
+
+    def write(self, vals):
+        res = super(PurchaseOrder, self).write(vals)
+        for rec in self:
+            if rec.state == 'draft' and vals.get('date_planned'):
+                rec.action_set_date_planned()
+        return res
 
     @api.multi
     def _compute_total_weight(self):
@@ -308,8 +309,7 @@ class PurchaseOrderLine(models.Model):
 
             if line.product_id:
                 seller = line._get_seller()
-                date_planned = line._get_date_planned(seller)
-                line.date_planned = date_planned
+                line.date_planned = line._get_date_planned(seller)
 
             if not line.discount_global:
                 line.discount_global = (
@@ -355,7 +355,6 @@ class PurchaseOrderLine(models.Model):
                 continue
 
             index += 1
-
         return fields.Datetime.to_string(date_planned)
 
     @api.model
@@ -374,9 +373,11 @@ class PurchaseOrderLine(models.Model):
         date_planned_str = False
         if not po:
             po = self.order_id
-        if po.day_planned:
+        if po.date_planned:
             # if there is planned date propagate it all lines
-            date_planned_str = po.get_date_planned()
+            date_planned_str = po.convert_time(po.date_planned).strftime(
+                DEFAULT_SERVER_DATETIME_FORMAT
+            )
         if not date_planned_str:
             date_order_str = po.date_order if po else self.order_id.date_order
             date_planned_str = self.get_next_scheduled_date(
