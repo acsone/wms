@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2371: Speed improvement for ESB stock update
+
 **Bugfixes**
 
 **Build**

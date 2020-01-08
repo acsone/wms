@@ -94,8 +94,7 @@ class StockUpdateExporter(Component):
         if export_since:
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
-        all_quants = self.env['stock.quant'].search(domain)
-        return all_quants.sorted(key=lambda r: r.write_date)
+        return self.env['stock.quant'].search(domain, order='write_date asc')
 
     @classmethod
     def get_exported_until(cls, last_export):
