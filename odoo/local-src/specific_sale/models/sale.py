@@ -143,6 +143,11 @@ class Sale(models.Model):
         products = lines.mapped('product_id').filtered(
             lambda rec: route_mto in rec.route_ids
         )
+        if not products:
+            # short cut, and especially don't call ensure_product_orderpoints
+            # with an empty recordset, as this will ensure orderpoints for
+            # *all* products
+            return
         warehouse = self.warehouse_id
         Procurement._ensure_product_orderpoints(warehouse, products)
         orderpoints = self.env['stock.warehouse.orderpoint'].search(
