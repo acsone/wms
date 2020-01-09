@@ -14,6 +14,8 @@
         'stock_lot_loss',
         'stock_reassign_auto',
         'specific_sale',
+        'specific_shipping_costs',
+        'specific_account'
     ],
     'data': [
     ],

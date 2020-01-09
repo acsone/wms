@@ -16,10 +16,20 @@ class RoundInstance(models.Model):
         return res
 
     @api.multi
+    def _deliver(self, background=True):
+        """ Override with check_shipping_cost to add fees on shipping invoice.
+        """
+        self.ensure_one()
+        self.check_shipping_cost()
+        res = super(RoundInstance, self)._deliver(background=background)
+        return res
+
+    @api.multi
     def check_shipping_cost(self):
         """Compute shipping costs for the customers in the delivery round"""
         self.ensure_one()
         moves = self.shipping_ids.mapped('move_lines')
+        moves = moves.filtered(lambda m: m.state in ('assigned', 'done'))
         round_saleorders = moves.mapped('procurement_id.sale_line_id.order_id')
         round_carriers = round_saleorders.mapped('carrier_id').filtered(
             lambda r: r.use_specific_cost_calculation
