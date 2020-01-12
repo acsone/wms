@@ -10,6 +10,9 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
     _order = 'default_code'
 
+    def action_open_incoming_stock_moves(self):
+        return self.product_tmpl_id.action_open_incoming_stock_moves()
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
