@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
-from odoo.addons.partner_schedule.tests.common import (
+from odoo.addons.partner_schedule.tests.test_working_schedule import (
     TestCustomerWorkingScheduleBase,
 )
 from odoo.tests.common import SavepointCase
@@ -424,19 +424,11 @@ class TestRoundWithCustomerWorkingSchedule(
 
     def test_deliveryround_carrier_schedule(self):
         delivery_carrier_fixed, delivery_round = self._prepare_delivery_round()
-
         self.create_schedule(
             {
                 'partner_id': self.partner1.id,
                 'start_date': '2017-01-01',
-                'end_date': False,
-                'is_manage_day_1': True,
-                'is_manage_day_2': True,
-                'is_manage_day_3': True,
-                'is_manage_day_4': True,
-                'is_manage_day_5': True,
-                'is_manage_day_6': True,
-                'is_manage_day_7': True,
+                'end_date': '2017-01-01',
             }
         )
         sale = self.env['sale.order'].create(

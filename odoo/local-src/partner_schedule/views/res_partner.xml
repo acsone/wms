@@ -9,7 +9,7 @@
             <xpath expr="//page[last()]" position="after">
                 <page string="Holidays">
                     <field name="working_schedules_ids" widget="one2many_list"  context="{'default_partner_id': active_id}">
-                        <tree>
+                        <tree editable="bottom">
                             <field name="name"/>
                             <field name="start_date"/>
                             <field name="end_date"/>

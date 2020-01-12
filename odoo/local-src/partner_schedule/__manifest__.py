@@ -8,10 +8,9 @@
     'maintainer': 'Camptocamp',
     'category': 'Other',
     'depends': [
-        'base',
+        'sales_team',
     ],
     'data': [
-        'views/partner_working_schedule.xml',
         'views/res_partner.xml',
         'security/ir.model.access.csv',
     ],
