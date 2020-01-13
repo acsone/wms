@@ -613,6 +613,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             # Process only lines related to customers with the auto-cancel
             # option and related to stock products
+
             if (
                 line.order_partner_id.auto_cancel_unavailable_qty_sold
                 and line.product_id.type != "service"
@@ -620,14 +621,26 @@ class SaleOrderLine(models.Model):
             ):
                 backup_qty[line.id] = line.product_uom_qty
                 line.product_qty_canceled = line.product_qty_unavailable
-                line.product_uom_qty -= line.product_qty_canceled
-                line.product_qty_unavailable = 0
+                # NOTE: pass product_qty_unavailable to not recompute it
+                # (see the write method overload)
+                line.write(
+                    {
+                        'product_uom_qty': line.product_uom_qty
+                        - line.product_qty_canceled,
+                        'product_qty_unavailable': line.product_qty_unavailable,
+                    }
+                )
         res = super(SaleOrderLine, self)._action_procurement_create()
         # dont enter again in _action_procurement_create
         # while restoring ordered qty.
         for line in self.with_context(auto_cancel_unavailable_qty=True):
             if line.id in backup_qty:
-                line.product_uom_qty = backup_qty[line.id]
+                line.write(
+                    {
+                        'product_uom_qty': backup_qty[line.id],
+                        'product_qty_unavailable': line.product_qty_unavailable,
+                    }
+                )
         self._check_procurements_for_MTO_products()
         return res
 
