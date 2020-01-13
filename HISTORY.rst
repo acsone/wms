@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2266: Concurrent access on delivery round assignment (fix implementation)
+* ALCYN-2150: fix performance issue (ALCYN-2372)
 
 **Build**
 
@@ -37,13 +38,15 @@ latest (unreleased)
 
 * ALCYN-2330: use a database lock to avoid interaction between zetes and
   stock_groupbypartner
-* ALCYN-2333/ALCYN-2334: Add indexes in database to fasten some Stock operations
-* ALCYN-2322: Add existing vendor product code in new product supplier info, if it does not exist set a dash.
+* ALCYN-2333/ALCYN-2334: Add indexes in database to speed up some Stock operations
+* ALCYN-2322: Add existing vendor product code in new product supplier info, if
+  it does not exist set a dash.
 * ALCYN-2282: Add partners holidays schedules, enable holidays in delivery roundings
 * ALCYN-2323: Add a warning when multiple tax of type VAT are selected on invoice lines
 * ALCYN-2130: fix issues with delivery rounds and back orders
 * Product Prices Mass Import
 * ALCYN-2359: Fix ALCYN-2299 don't decrease product uom qty
+* ALCYN-2150: special case for MTO product: purchase them straight away
 
 **Bugfixes**
 

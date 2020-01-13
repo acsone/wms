@@ -123,39 +123,7 @@ class Sale(models.Model):
         # Post the message "Quotation confirmed"
         message = self.env.ref('sale.mt_order_confirmed')
         self.message_post(body=message.description)
-        self._check_procurements_for_MTO_products()
         return result
-
-    def _check_procurements_for_MTO_products(self):
-        # ALCYN-2150: when a product with the MTO route is sold, we want to
-        # check for reordering rules and generate a purchase immediately if
-        # some stock is missing. The MTO route is an empty shell and is used
-        # simply as a flag on the products, because it is important that the
-        # resupply for the products are not chained to the deliveries -> use
-        # orderpoint to trigger a MTS resupply actually.
-        if not self:
-            return
-        Procurement = self.env['procurement.order']
-        route_mto = self.env.ref('stock.route_warehouse0_mto')
-        lines = self.env['sale.order.line'].search(
-            [('order_id', '=', self.id), ('state', '=', 'sale')]
-        )
-        products = lines.mapped('product_id').filtered(
-            lambda rec: route_mto in rec.route_ids
-        )
-        warehouse = self.warehouse_id
-        Procurement._ensure_product_orderpoints(warehouse, products)
-        orderpoints = self.env['stock.warehouse.orderpoint'].search(
-            [
-                ('product_id', 'in', products.ids),
-                ('warehouse_id', '=', warehouse.id),
-                ('location_id', 'child_of', warehouse.view_location_id.id),
-            ]
-        )
-        if orderpoints:
-            Procurement.with_context(
-                orderpoint_ids=orderpoints.ids
-            )._procure_orderpoint_confirm(company_id=self.company_id.id)
 
     def sale_check_exception(self):
         try:
@@ -660,4 +628,41 @@ class SaleOrderLine(models.Model):
         for line in self.with_context(auto_cancel_unavailable_qty=True):
             if line.id in backup_qty:
                 line.product_uom_qty = backup_qty[line.id]
+        self._check_procurements_for_MTO_products()
         return res
+
+    def _check_procurements_for_MTO_products(self):
+        # ALCYN-2150: when a product with the MTO route is sold, we want to
+        # check for reordering rules and generate a purchase immediately if
+        # some stock is missing. The MTO route is an empty shell and is used
+        # simply as a flag on the products, because it is important that the
+        # resupply for the products are not chained to the deliveries -> use
+        # orderpoint to trigger a MTS resupply actually.
+        if not self:
+            return
+        Procurement = self.env['procurement.order']
+        route_mto = self.env.ref('stock.route_warehouse0_mto')
+        lines = self.filtered(lambda r: r.state == 'sale')
+        products = lines.mapped('product_id').filtered(
+            lambda rec: route_mto in rec.route_ids
+        )
+        if not products:
+            # short cut, and especially don't call ensure_product_orderpoints
+            # with an empty recordset, as this will ensure orderpoints for
+            # *all* products
+            return
+        warehouse = lines.mapped('order_id.warehouse_id')
+        Procurement._ensure_product_orderpoints(warehouse, products)
+        orderpoints = self.env['stock.warehouse.orderpoint'].search(
+            [
+                ('product_id', 'in', products.ids),
+                ('warehouse_id', '=', warehouse.id),
+                ('location_id', 'child_of', warehouse.view_location_id.id),
+            ]
+        )
+        if orderpoints:
+            Procurement.with_context(
+                orderpoint_ids=orderpoints.ids
+            )._procure_orderpoint_confirm(
+                company_id=self.mapped('order_id.company_id').id
+            )
