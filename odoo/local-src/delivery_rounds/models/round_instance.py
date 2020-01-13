@@ -326,12 +326,8 @@ class RoundInstance(models.Model):
             ):
                 if partner.id not in errors.keys():
                     errors[partner.id] = _(
-                        u'{} is not working day for {}, next allowed day is {}'
-                    ).format(
-                        self.date,
-                        partner.name,
-                        partner.get_next_shipping_date(self.date),
-                    )
+                        u'{} is not working day for {}'
+                    ).format(self.date, partner.name)
         if errors:
             raise UserError('\n'.join(errors.values()))
 

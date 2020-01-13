@@ -21,12 +21,19 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2373: simplify closing dates handling
+
 **Bugfixes**
 
 * ALCYN-2266: Concurrent access on delivery round assignment (fix implementation)
 * ALCYN-2150: fix performance issue (ALCYN-2372)
+* ALCYN-2373: force proper filtering of pickings on delivery round
+* ALCYN-2354: improve purchase planned date implementation
+* Product Price Mass import improvements
 
 **Build**
+
+* ALCYN-2373: update translation
 
 **Documentation**
 
