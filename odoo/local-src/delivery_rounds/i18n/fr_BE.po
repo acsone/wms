@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-13 11:05+0000\n"
-"PO-Revision-Date: 2020-01-13 11:05+0000\n"
+"POT-Creation-Date: 2020-01-13 10:34+0000\n"
+"PO-Revision-Date: 2020-01-13 10:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,6 @@ msgstr "# Froid"
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "# Drug"
 msgstr "# Médic."
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "# Equip."
-msgstr "# Equip."
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -178,7 +173,7 @@ msgstr "Plan automatique de tournée"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Current"
-msgstr "Courant"
+msgstr "Non-échu"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_partner_id
@@ -198,7 +193,7 @@ msgstr "Clients"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_date
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_execution_date
 msgid "Date"
-msgstr "Date"
+msgstr "Date "
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_date_overwrite
@@ -220,7 +215,7 @@ msgstr "Delivrer"
 #: code:addons/delivery_rounds/models/round_instance.py:1054
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
-msgstr "Remettre au client %s de livraison %s"
+msgstr "Remettre au client% s de livraison% s"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_delivered
@@ -268,7 +263,7 @@ msgstr "Tournée"
 #: code:addons/delivery_rounds/models/round_instance.py:760
 #, python-format
 msgid "Delivery Round %s is now completed"
-msgstr "Le cycle de livraison %s est maintenant terminé"
+msgstr "Le cycle de livraison% s est maintenant terminé"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_delivery_round_customer_id
@@ -325,7 +320,7 @@ msgstr "Heure de départ"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Destinations"
-msgstr "Destinations"
+msgstr "Les destinations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_display_name
@@ -351,7 +346,7 @@ msgstr "Fini"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Driver"
-msgstr "Conducteur"
+msgstr "Chauffeur"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
@@ -366,7 +361,7 @@ msgstr "Client efficace"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "End mileage"
-msgstr "Kilométrage à la fin"
+msgstr "Kilométrage final"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_instance.py:1029
@@ -456,7 +451,7 @@ msgstr "Itinéraire"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version___last_update
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr "Dernière Modification le"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_write_uid
@@ -471,7 +466,7 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_write_uid
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_write_uid
 msgid "Last Updated by"
-msgstr "Denière mise à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_write_date
@@ -530,12 +525,12 @@ msgstr "Générer le plan de tournée du jour"
 #: model:product.product,name:delivery_rounds.delivery_carrier_manual_round_change_product_product
 #: model:product.template,name:delivery_rounds.delivery_carrier_manual_round_change_product_template
 msgid "Manual Delivery Round Change"
-msgstr "Changement de livraison manuelle"
+msgstr "Changement de ronde de livraison manuelle"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Mobile"
-msgstr "GSM"
+msgstr "Mobile"
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -700,7 +695,7 @@ msgstr "Imprimer tous les bon de livraisons"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Print delivery slip"
-msgstr "Imprimer le bon de livraison"
+msgstr "Print delivery slip"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_rank
@@ -710,12 +705,12 @@ msgstr "Rang"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Registration"
-msgstr "Immatriculation"
+msgstr "Registration"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_report_delivery
 msgid "Report delivery"
-msgstr "Remise du rapport"
+msgstr "Report delivery"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_wizard_makeplan_assign_moves
@@ -725,17 +720,17 @@ msgstr "Réserver le stock"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Anticipated"
-msgstr "Réinitialiser à prévu"
+msgstr "Reset to Anticipated"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Draft"
-msgstr "Rétablir le brouillon"
+msgstr "Remettre en brouillon"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Reset to draft"
-msgstr "Rétablir le brouillon"
+msgstr "Reset to draft"
 
 #. module: delivery_rounds
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_picking
@@ -750,7 +745,7 @@ msgstr "Bon de commande"
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de commande client"
+msgstr "Ligne du bon de commande"
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -797,7 +792,7 @@ msgstr "Doit être livré manuellement, n'a pas pu être livré en raison de %s"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Start mileage"
-msgstr "Kilométrage au départ"
+msgstr "Commencer le kilométrage"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
@@ -828,7 +823,7 @@ msgstr "Opérations de stock"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Stops"
-msgstr "Arrêts"
+msgstr "Stops"
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -862,13 +857,6 @@ msgid "Templates"
 msgstr "Modèles"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:525
-#: sql_constraint:round.instance.customer:0
-#, python-format
-msgid "The customer must be unique in a delivery round."
-msgstr "Le client doit être unique dans une tournée"
-
-#. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_stock_picking_type
 msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
@@ -876,8 +864,8 @@ msgstr "Le type de préparation détermine la vue de préparation"
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_instance.py:1073
 #, python-format
-msgid "There are still partially available pickings"
-msgstr "Il y a encore des pickings partiellement disponibles"
+msgid "The shipping is not part anymore of this delivery round"
+msgstr "L'expédition ne fait plus partie de ce cycle de livraison"
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -897,7 +885,7 @@ msgstr "Nombre total de boîte (s)"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "Total number of parcel(s)"
-msgstr "Nombre total de colis"
+msgstr "Total number of parcel(s)"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -968,25 +956,55 @@ msgid "Weight"
 msgstr "Poids"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:445
+#: code:addons/delivery_rounds/models/round_instance.py:692
+#, python-format
+msgid "You cannot delete a delivery round having a started picking"
+msgstr "Vous ne pouvez pas supprimer un cycle de livraison dont le prélèvement a commencé"
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_instance.py:698
+#, python-format
+msgid "You cannot delete a delivery round having a started shipping"
+msgstr "Vous ne pouvez pas supprimer un cycle de livraison dont l'expédition a commencé"
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_instance.py:688
 #, python-format
 msgid "You cannot delete a delivery round that has been started"
 msgstr "Vous ne pouvez pas supprimer une tournée qui est démarrée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_template.py:25
+#: code:addons/delivery_rounds/models/round_instance.py:1047
+#, python-format
+msgid "You cannot deliver when a picking is ongoing"
+msgstr "Vous ne pouvez pas livrer lorsqu'un prélèvement est en cours"
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_template.py:31
 #, python-format
 msgid "You cannot have more than one default version at once."
 msgstr "Vous ne pouvez pas avoir plus d'une version par défaut à la fois"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/cron_delivery_plan.py:56
+#: code:addons/delivery_rounds/models/round_instance.py:289
+#, python-format
+msgid "You cannot reassign the started picking %s on the delivery round %s to the delivery round %s"
+msgstr "Vous ne pouvez pas réaffecter le prélèvement commencé% s du cycle de livraison% s au cycle de livraison %s"
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:65
 #, python-format
 msgid "You cannot set a week day and a date overwrite in the same time."
 msgstr "Vous ne pouvez pas définir une date spécifique et un jour de la semaine en même temps."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/cron_delivery_plan.py:53
+#: code:addons/delivery_rounds/models/stock_picking.py:134
+#, python-format
+msgid "You cannot unassign a delivery round from a started picking"
+msgstr "Vous ne pouvez pas désaffecter un cycle de livraison d'un prélèvement commencé"
+
+#. module: delivery_rounds
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:61
 #, python-format
 msgid "You have to set the week day or the date overwrite"
 msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
@@ -994,7 +1012,7 @@ msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "box(es)"
-msgstr "Boite(s)"
+msgstr "box(es)"
 
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_cron_delivery_plan
@@ -1073,3 +1091,4 @@ msgstr "unit(s)"
 #, python-format
 msgid "{} is not working day for {}"
 msgstr "{} n'est pas un jour de travail pour {}"
+

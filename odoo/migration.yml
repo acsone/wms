@@ -590,4 +590,10 @@ migration:
         post:
           - psql -f odoo/songs/upgrade/update_10_0_1_47_0.sql
           - anthem songs.upgrade.update_10_0_1_47_0::post
-
+    - version: 10.0.1.47.1
+      addons:
+        upgrade:
+          - partner_schedule
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_48_0::post

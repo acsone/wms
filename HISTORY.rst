@@ -21,9 +21,15 @@ latest (unreleased)
 
 **Features and Improvements**
 
+ALCYN-2373: simplify closing dates handling
+
 **Bugfixes**
 
+ALCYN-2373: force proper filtering of pickings on delivery round
+
 **Build**
+
+ALCYN-2373: update translation
 
 **Documentation**
 
