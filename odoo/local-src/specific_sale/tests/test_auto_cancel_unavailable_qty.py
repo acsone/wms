@@ -62,7 +62,8 @@ class TestAutoCancelUnavailableQty(SavepointCase):
         # cancel qty) ALCYN-2359
         self.assertEqual(line.product_uom_qty, 10)
         self.assertEqual(line.product_qty_canceled, 4)
-        self.assertEqual(line.product_qty_unavailable, 0)
+        # ALCYN-2359 the backorders must keep their value
+        self.assertEqual(line.product_qty_unavailable, 4)
         proc = line.procurement_ids.filtered(lambda r: r.state != 'cancel')
         self.assertEqual(proc.product_qty, 6)
 

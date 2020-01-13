@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2375: Don't reset the BO value to 0
+
 **Bugfixes**
 
 **Build**
