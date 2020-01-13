@@ -303,12 +303,18 @@ class RoundInstance(models.Model):
         """Lock the database rows of the instance to prevent concurrent access.
 
         The lock is released when the transaction is committed or rolled back.
+
+        This method is called:
+        1. when assigning pickings to a delivery round
+        2. when adding stock.moves to a picking which is in a round.
         """
         if self:
+            _logger.debug('acquire lock for round instances %s', self.ids)
             self.env.cr.execute(
                 'SELECT id FROM round_instance WHERE id in %s FOR UPDATE',
                 (tuple(self.ids),),
             )
+            _logger.debug('lock acquired for round instances %s', self.ids)
 
     def _check_allowed_holidays_pickings(self, pickings):
         errors = {}

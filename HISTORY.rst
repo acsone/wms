@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2266: Concurrent access on delivery round assignment (fix implementation)
+
 **Build**
 
 **Documentation**
