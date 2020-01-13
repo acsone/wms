@@ -593,6 +593,7 @@ migration:
     - version: 10.0.1.47.1
       addons:
         upgrade:
+          - delivery_rounds
           - partner_schedule
           - product_price_import
           - sale_only_one_vat
