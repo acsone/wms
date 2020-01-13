@@ -143,7 +143,7 @@ class TestProductPriceImport(SavepointCase):
         Dummy test to validate the import process (not the content)
         """
         importer = self.ProductPriceImporter.create(
-            {"file": base64.b64encode(self.generated_import_content)}
+            {"document": base64.b64encode(self.generated_import_content)}
         )
         res = importer.doit()
         self.assertTrue(res)

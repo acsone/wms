@@ -49,12 +49,12 @@ class ProductPriceImporter(models.TransientModel):
 
     _name = 'product.price.importer'
 
-    file = fields.Binary(string='XLSX file', required=True)
+    document = fields.Binary(string='XLSX file', required=True)
 
     @api.multi
     def doit(self):
         self.ensure_one()
-        content = base64.decodestring(self.file)
+        content = base64.decodestring(self.document)
         product_price_infos = [p for p in self._iter_data(content)]
         self._do_update_prices(product_price_infos)
         action = {
@@ -121,7 +121,7 @@ class ProductPriceImporter(models.TransientModel):
     @api.model
     def _do_update_prices(self, product_price_infos):
         """
-        Call the three steps required to update all the prices information
+        Call the steps required to update all the prices information
         related to a product.
         Each step is called with all the prices information to allow batch
         processing
