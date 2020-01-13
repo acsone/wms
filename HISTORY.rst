@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-2373: simplify closing dates handling
 * ALCYN-2374: Add a warning when multiple tax of type VAT are selected on sale order lines
+* ALCYN-2371: Speed improvement for ESB stock update
 
 **Bugfixes**
 
