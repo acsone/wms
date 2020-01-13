@@ -593,10 +593,11 @@ migration:
     - version: 10.0.1.47.1
       addons:
         upgrade:
-          - specific_purchase
-          - specific_stock
           - partner_schedule
           - product_price_import
+          - sale_only_one_vat
+          - specific_purchase
+          - specific_stock
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_47_1::post
