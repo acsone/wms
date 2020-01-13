@@ -2,11 +2,13 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class StockMove(models.Model):
     _inherit = 'stock.move'
+
+    date_expected = fields.Datetime(group_operator="min")
 
     def _prepare_procurement_from_move(self):
         res = super(StockMove, self)._prepare_procurement_from_move()

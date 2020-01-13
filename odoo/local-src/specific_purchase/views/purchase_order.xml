@@ -12,9 +12,7 @@
             <xpath expr="//field[@name='origin']" position="after">
                 <field name="nbr_lines"/>
                 <field name="nbr_lines_bo"/>
-                <field name="date_planned" class="oe_read_only" />
-                <field name="day_planned" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline oe_edit_only"/>
-                <field name="time_planned" widget="float_time" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline oe_edit_only"/>
+                <field name="date_planned" widget="date" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline"/>
             </xpath>
 
             <xpath expr="//sheet/group" position="after">
@@ -57,7 +55,7 @@
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree//field[@name='date_planned']" position="attributes">
-                <attribute name="attrs">{'invisible': True}</attribute>
+                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
             </xpath>
 
             <!-- Invisible are not aplicable here as it will hide field in form at all -->

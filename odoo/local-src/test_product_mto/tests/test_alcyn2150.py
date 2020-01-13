@@ -122,7 +122,7 @@ class SaleProcurementMTSMTOTestCase(SavepointCase):
             [('partner_id', '=', self.seller.id)]
         )
         self.assertTrue(rfq, 'Did not get an RFQ on %s (%d)' % (today, 0))
-        self.assertEqual(rfq.date_planned, '2019-12-04 12:00:00')
+        self.assertEqual(rfq.date_planned, '2019-12-05 14:00:00')
 
     def test_sale_product_mto_existing_quote(self):
         # first sale order
@@ -163,7 +163,7 @@ class SaleProcurementMTSMTOTestCase(SavepointCase):
                 self.assertTrue(
                     rfq, 'Did not get an RFQ on %s (%d)' % (date, offset)
                 )
-                self.assertEqual(rfq.date_planned, '2019-12-10 12:00:00')
+                self.assertEqual(rfq.date_planned, '2019-12-10 14:00:00')
 
     def _run_reordering_rules(self, date):
         company_id = self.env.user.company_id.id
