@@ -2,6 +2,8 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from collections import defaultdict
+
 import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -312,17 +314,18 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_id')
     def _compute_production_lot_ids(self):
-        production_lot_model = self.env['stock.production.lot'].with_context(
-            only_wh_stock_quants=True
+        production_lots = (
+            self.env['stock.production.lot']
+            .search([('product_id', 'in', self.mapped("product_id").ids)])
+            .filtered(lambda p: p.qty_available > 0)
         )
+        lot_ids_by_product_id = defaultdict(list)
+        for lot in production_lots:
+            lot_ids_by_product_id[lot.product_id.id].append(lot.id)
         for line in self:
-            production_lot_ids = None
-            if line.product_id:
-                production_lot_ids = production_lot_model.search(
-                    [('product_id', '=', line.product_id.id)]
-                ).filtered(lambda p: p.product_qty > 0)
+            production_lot_ids = lot_ids_by_product_id.get(line.product_id.id)
             if production_lot_ids:
-                line.production_lot_ids = [(6, 0, production_lot_ids.ids)]
+                line.production_lot_ids = [(6, 0, production_lot_ids)]
             else:
                 line.production_lot_ids = [(5, 0)]
 
