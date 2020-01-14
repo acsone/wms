@@ -326,31 +326,6 @@ class SaleOrderLine(models.Model):
             else:
                 line.production_lot_ids = [(5, 0)]
 
-    next_expected_date_for_receipt = fields.Date(
-        string='Next expected date for receipt',
-        compute='_compute_next_expected_date_for_receipt',
-    )
-
-    @api.depends('product_id')
-    def _compute_next_expected_date_for_receipt(self):
-        stock_move_model = self.env['stock.move']
-        for line in self:
-            move = None
-            if line.product_id:
-                move = stock_move_model.search(
-                    [
-                        ('product_id', '=', line.product_id.id),
-                        ('state', '=', 'assigned'),
-                        ('picking_id.picking_type_id.code', '=', 'incoming'),
-                    ],
-                    order='date_expected',
-                    limit=1,
-                )
-            if move:
-                line.next_expected_date_for_receipt = move.date_expected
-            else:
-                line.next_expected_date_for_receipt = False
-
     # Vallidation rules for sale order lines, used by the sale_exception module
     # It works by restrictions, so any client alcyon categories not referenced
     # in here would have all the rights !

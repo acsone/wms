@@ -303,11 +303,6 @@ msgid "Negative Sale Order Line Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
-msgid "Next expected date for receipt"
-msgstr ""
-
-#. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
 msgid "No Belgian Veterinary Medicine"
 msgstr ""

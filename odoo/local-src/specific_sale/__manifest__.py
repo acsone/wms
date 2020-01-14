@@ -14,6 +14,7 @@
         'product_additional',
         'sale',
         'sale_exception',
+        'alc_sale_product_expected_receipt_date',
         'sales_team',
         'stock',
         'stock_available_immediately',

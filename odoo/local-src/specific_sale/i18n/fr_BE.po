@@ -308,11 +308,6 @@ msgid "Negative Sale Order Line Not Allowed"
 msgstr "Ligne de vente ne peut pas être négative"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
-msgid "Next expected date for receipt"
-msgstr "Prochaine date prévue de réception"
-
-#. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
 msgid "No Belgian Veterinary Medicine"
 msgstr "Médicament vétérinaire belge interdit"
