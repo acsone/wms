@@ -84,3 +84,4 @@ UPDATE product_supplierinfo
         ) tempdb
     WHERE product_supplierinfo.product_tmpl_id = tempdb.id
           AND COALESCE(product_supplierinfo.product_code, '-') = '-'
+;
