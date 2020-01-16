@@ -278,6 +278,24 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):
+        """
+        NOTE BY LMIGNON: My little attempt to understand the motivation behind
+        this override.
+        The implementation into the onchange method computing a value for
+        product_qty_unavailable is conditioned to the presence of the
+        'must_compute_product_qty_unavailable' attribute into the context.
+        See procurement_sale.models.sale.onchange_for_product_qty_unavailable
+        By default the logic into onchange_for_product_qty_unavailable is
+        disabled if this attribute is not present.
+        Since the override of the onchange method is done into the
+        sale.order.line, the logic in onchange_for_product_qty_unavailable is
+        never executed if the call to onchange is done by editing a line into
+        the order_line tree into the sale order form. The logic is only
+        executed when the same line is edited into the Fast Line entry tree
+        since the onchange is called directly on the sale.order.line model.
+
+        TO BE REMOVED / REFACTORED / EXPLAINED
+        """
         new_context = self.env.context.copy() if self.env.context else {}
         if isinstance(field_name, list):
             if 'product_uom_qty' in field_name or 'product_id' in field_name:
