@@ -253,9 +253,8 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id')
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
-        stup_category = self.env.ref('specific_data.product_categ_stupefiant')
-        if self.product_id and self.product_id.categ_id.has_for_parent(
-            stup_category.id
+        if self.product_id and self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant'
         ):
             warning_mess = {
                 'title': _('Narcotic voucher'),
@@ -380,8 +379,9 @@ class SaleOrderLine(models.Model):
     def validate_no_food(self):
         """Disallow all products from food categories."""
         target_groups = ['specific_partner.partner_category_only_material']
-        food = self.env.ref('specific_data.product_categ_ali')
-        if not self.product_id.categ_id.has_for_parent(food.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_ali'
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -393,8 +393,9 @@ class SaleOrderLine(models.Model):
     def validate_no_medoc(self):
         """Disallow all products from medicines categories."""
         target_groups = ['specific_partner.partner_category_only_material']
-        medoc = self.env.ref('specific_data.product_categ_medoc')
-        if not self.product_id.categ_id.has_for_parent(medoc.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_medoc'
+        ):
             return False
         if not self.order_id.partner_id.alcyon_category_id:
             # Customer with undefined category are not allowed medoc
@@ -414,8 +415,9 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_student',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_importation')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_importation'
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -430,8 +432,9 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_customerexport',
             'specific_partner.partner_category_student',
         ]
-        base_category = self.env.ref('specific_data.product_categ_vet_belges')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_vet_belges'
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -449,8 +452,9 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_student',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_humain')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_humain'
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -467,8 +471,9 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_alcyonaire',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_stupefiant')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant'
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -480,10 +485,9 @@ class SaleOrderLine(models.Model):
     def validate_no_medoc_vet_psychoIII(self):
         """Disallow all products from medicines psycho III."""
         target_groups = ['specific_partner.partner_category_med_export']
-        base_category = self.env.ref(
+        if not self.product_id.categ_id.has_for_parent_xml_id(
             'specific_data.product_categ_psychotropes_25'
-        )
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        ):
             return False
         for group_xmlid in target_groups:
             group = self.env.ref(group_xmlid)
@@ -525,28 +529,32 @@ class SaleOrderLine(models.Model):
 
     def validate_no_psychotropic_ordered_by_phone(self):
         """No psychotropic ordered on the phone."""
-        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
-        if not self.product_id.categ_id.has_for_parent(psych_cat.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_psychotropes_25'
+        ):
             return False
         return self.order_id.sale_channel == 'phone'
 
     def validate_no_stupefiant_vet_by_phone(self):
         """No psychotropic ordered on the phone."""
-        vet_cat = self.env.ref('specific_data.product_categ_stupefiant_vet')
-        if not self.product_id.categ_id.has_for_parent(vet_cat.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant_vet'
+        ):
             return False
         return self.order_id.sale_channel == 'phone'
 
     # Warnings
     def warning_psychotropic(self):
         """Add warning for psychotropic product on sale order line."""
-        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
-        return self.product_id.categ_id.has_for_parent(psych_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_psychotropes_25'
+        )
 
     def warning_stupefiant_vet(self):
         """Add warning for psychotropic product on sale order line."""
-        vet_cat = self.env.ref('specific_data.product_categ_stupefiant_vet')
-        return self.product_id.categ_id.has_for_parent(vet_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant_vet'
+        )
 
     def validate_no_backorder(self):
         """Block backorder for customer that specifically do not want them."""
@@ -569,13 +577,15 @@ class SaleOrderLine(models.Model):
 
     def warning_cascade_importation(self):
         """Add a warning for cascade importation product."""
-        cascade_cat = self.env.ref('specific_data.product_categ_importation')
-        return self.product_id.categ_id.has_for_parent(cascade_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_importation'
+        )
 
     def warning_human_medicine(self):
         """Add a warning for human medicine product."""
-        human_medoc_cat = self.env.ref('specific_data.product_categ_humain')
-        return self.product_id.categ_id.has_for_parent(human_medoc_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_humain'
+        )
 
     def warning_supplier_break(self):
         """Add a warning for out of stock product at the supplier."""
