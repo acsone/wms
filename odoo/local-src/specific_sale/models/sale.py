@@ -384,8 +384,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -401,8 +405,12 @@ class SaleOrderLine(models.Model):
             # Customer with undefined category are not allowed medoc
             return True
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -420,8 +428,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -437,8 +449,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -457,8 +473,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -476,8 +496,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -490,8 +514,12 @@ class SaleOrderLine(models.Model):
         ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -505,8 +533,12 @@ class SaleOrderLine(models.Model):
         if not self.product_id.belgium_only:
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -522,8 +554,12 @@ class SaleOrderLine(models.Model):
             # Customer with undefined category are not allowed vet only
             return True
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
