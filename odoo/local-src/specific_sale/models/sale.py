@@ -217,7 +217,7 @@ class SaleOrderLine(models.Model):
                         exception = rule.description
                         # line.order_id.main_exception_id = rule
             line.exception = exception
-            if line.warning_text != warning:
+            if (line.warning_text or '') != (warning or ''):
                 line.warning_text = warning
                 line.set_line_name()
 
