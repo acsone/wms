@@ -149,6 +149,31 @@ class Sale(models.Model):
                 )
         return super(Sale, self).action_cancel()
 
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        """
+        This override is required to optimize the performance when the onchange
+        method is called for an order_line.
+        When the onchange method is called for an order_line, the field_onchange
+        parameter contains all the fields declared for the sale.order.line tree
+        AND form defined into the sale.order form. Since this list is used by
+        Odoo to detect the impact of an onchange on the displayed attributes,
+        all fields present into this list are evaluated into the base
+        implementation. Unfortunately, even if some costly fields are only
+        declared into the form definition of the sale.order.line, these fields
+        are also present into the field_onchange parameter. (because
+        the form definition is embedded into the xml element field)
+        To avoid to compute these useless fields only displayed into the
+        sale.order.line form, we remove these fields from the field_onchange
+        parameter before calling super
+        """
+        for f in [
+            "order_line.production_lot_ids",
+            "order_line.next_expected_date_for_receipt",
+        ]:
+            field_onchange.pop(f, None)
+        return super(Sale, self).onchange(values, field_name, field_onchange)
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
