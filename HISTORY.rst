@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2367: allow job retrying on connection error
+
 **Bugfixes**
 
 **Build**
