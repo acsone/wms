@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_analytic_category_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-15 13:16+0000\n"
+"PO-Revision-Date: 2020-01-15 13:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_analytic_category_report
+#: model:ir.model,name:alc_analytic_category_report.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Compte analytique"
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_1_id
+msgid "Tag 1"
+msgstr "Etiquette 1"
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_2_id
+msgid "Tag 2"
+msgstr "Etiquette 2"
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_3_id
+msgid "Tag 3"
+msgstr "Etiquette 3"
+
