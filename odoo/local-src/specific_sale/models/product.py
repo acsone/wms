@@ -126,10 +126,16 @@ class ProductProduct(models.Model):
         children.
         """
         belgium_medoc = self.env.ref('specific_data.product_categ_vet_belges')
+        laroyduro_suppliers = self.env['res.partner'].search(
+            [('supplier', '=', True), ('ref', '=', '73657')]
+        )
+
         return [
+            '|',
             '|',
             ('veterinary_only', '=', False),
             ('categ_id', 'child_of', belgium_medoc.id),
+            ('supplier_id', 'in', laroyduro_suppliers.ids),
         ]
 
     @api.model

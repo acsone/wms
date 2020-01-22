@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2377: change domain for Newpharma products
+
 **Bugfixes**
 
 **Build**
