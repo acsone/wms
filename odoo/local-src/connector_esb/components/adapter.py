@@ -92,7 +92,6 @@ class ESBWebServiceAdapter(Component):
         except requests.ConnectionError:
             raise RetryableJobError(
                 'Connection is not available, the job will be retried later.',
-                seconds=5,
             )
         if res.status_code == 202:
             raise ConnectorException('Error %s on PUT' % (res.status_code))
