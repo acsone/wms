@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.47.2 (2020-01-22)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2377: change domain for Newpharma products
 
 **Bugfixes**
