@@ -27,6 +27,7 @@
                 <field name="qty_in_reserve"/>
                 <field name="qty_in_parking"/>
                 <field name="immediate_qty"/>
+                <field name="pending_round_reserved_qty"/>
                 <field name="planned_qty"/>
                 <field name="confirmed_qty"/>
             </tree>

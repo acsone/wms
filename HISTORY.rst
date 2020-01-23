@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2341: fix computation of reassort priority
+
 **Build**
 
 **Documentation**
