@@ -607,3 +607,7 @@ migration:
       addons:
         upgrade:
           - queue_job
+    - version: 10.0.1.48.0
+      addons:
+        upgrade:
+          - alcyon_credit_control

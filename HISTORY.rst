@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2392: Keep total line only on the last credit control lines page
+
 **Bugfixes**
 
 * ALCYN-2364:Fix to add delivery fees on the SO before creating the invoice
