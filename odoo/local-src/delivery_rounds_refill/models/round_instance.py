@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class RoundInstance(models.Model):
@@ -64,3 +63,37 @@ class RoundInstance(models.Model):
         else:
             operator = 'not in'
         return [('id', operator, rounds.ids)]
+
+    @api.multi
+    def open_pending_reassort(self):
+        with_pending = self.filtered('has_pending_reassort')
+        # compute products which are in unavailable moves in the pickings of
+        # the rounds: this is quick and we can use them as a filter for the
+        # reassort report
+        unavailable_products_query = (
+            "SELECT p.id "
+            "FROM product_product p "
+            "JOIN stock_move sm ON ( "
+            "    p.id = sm.product_id "
+            "    AND sm.state = 'confirmed' "
+            ")"
+            "JOIN stock_picking sp ON (sm.picking_id = sp.id) "
+            "JOIN stock_picking_type spt ON (spt.id = sp.picking_type_id AND spt.code = 'internal') "
+            "JOIN round_instance ri ON (sp.delivery_round_id = ri.id) "
+            "WHERE ri.id in %s"
+        )
+        if with_pending:
+            self.env.cr.execute(
+                unavailable_products_query, (tuple(with_pending.ids),)
+            )
+            unavailable_product_ids = [
+                row[0] for row in self.env.cr.fetchall()
+            ]
+        else:
+            unavailable_product_ids = []
+        domain = [('product_id', 'in', unavailable_product_ids)]
+        action = self.env.ref(
+            'delivery_rounds_refill.action_report_stock_refill_reassort'
+        ).read()[0]
+        action['domain'] = domain
+        return action

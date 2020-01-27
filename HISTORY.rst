@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2341: fix computation of reassort priority
+* ALCYN-2393: allow checking which products are pending reassort in a delivery round
 
 **Build**
 
