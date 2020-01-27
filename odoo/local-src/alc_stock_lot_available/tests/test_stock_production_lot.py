@@ -6,6 +6,10 @@ from odoo.tests.common import SavepointCase
 
 
 class TestStrockProdictionLot(SavepointCase):
+    # to avoid trouble with pre installed db where specific_zeste is installed
+    at_install = False
+    post_install = True
+
     @classmethod
     def setUpClass(cls):
         super(TestStrockProdictionLot, cls).setUpClass()
