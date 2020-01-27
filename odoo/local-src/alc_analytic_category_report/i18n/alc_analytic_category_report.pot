@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:26+0000\n"
-"PO-Revision-Date: 2020-01-24 17:26+0000\n"
+"POT-Creation-Date: 2020-01-27 07:58+0000\n"
+"PO-Revision-Date: 2020-01-27 07:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,18 +18,18 @@ msgstr ""
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_account_id
 msgid "Account"
-msgstr "Compte"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_amount
 msgid "Amount"
-msgstr "Montant"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model,name:alc_analytic_category_report.model_account_analytic_account
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_analytic_account_id
 msgid "Analytic Account"
-msgstr "Compte analytique"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.actions.act_window,name:alc_analytic_category_report.analytic_analysis_act_window
@@ -37,122 +37,123 @@ msgstr "Compte analytique"
 #: model:ir.ui.menu,name:alc_analytic_category_report.analytic_analysis_view_menu
 #: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_pivot_view
 msgid "Analytic Analysis"
-msgstr "Analyse Analytique"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_balance
 msgid "Balance"
-msgstr "Bilan"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_company_id
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_credit
 msgid "Credit"
-msgstr "Crédit"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_company_currency_id
 msgid "Currency"
-msgstr "Devise"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_date
 msgid "Date"
-msgstr "Date "
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_debit
 msgid "Debit"
-msgstr "Débit"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_journal_id
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_move_id
 msgid "Journal Entry"
-msgstr "Pièce comptable"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
 msgid "Move"
-msgstr "Mouvement"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_name
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
 msgid "Number (Move)"
-msgstr "Numéro (pièce)"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_partner_id
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_product_id
 msgid "Product"
-msgstr "Article"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_quantity
 msgid "Quantity"
-msgstr "Quantité"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_ref
 msgid "Reference"
-msgstr "Référence"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_1_id
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_1_id
 msgid "Tag 1"
-msgstr "Etiquette 1"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_2_id
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_2_id
 msgid "Tag 2"
-msgstr "Etiquette 2"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_3_id
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_3_id
 msgid "Tag 3"
-msgstr "Etiquette 3"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_user_type_id
 msgid "User type id"
-msgstr "User type id"
+msgstr ""
 
 #. module: alc_analytic_category_report
 #: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
 msgid "account.move.line.with.analytic.category"
-msgstr "account.move.line.with.analytic.category"
+msgstr ""
+

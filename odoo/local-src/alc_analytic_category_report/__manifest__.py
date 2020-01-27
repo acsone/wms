@@ -15,6 +15,8 @@
     ],
     'data': [
         'views/account_analytic_account.xml',
+        'views/account_move_line_with_analytic_categories.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
     ],
