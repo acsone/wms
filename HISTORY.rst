@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2385: set zetes user when confirmation confirmed by portal user
+
 **Build**
 
 **Documentation**
