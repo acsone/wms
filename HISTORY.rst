@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2366: fix delivered qty assigned to consignment location
+
 **Build**
 
 **Documentation**
