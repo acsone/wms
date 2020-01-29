@@ -308,13 +308,21 @@ class RoundInstance(models.Model):
         1. when assigning pickings to a delivery round
         2. when adding stock.moves to a picking which is in a round.
         """
-        if self:
-            _logger.debug('acquire lock for round instances %s', self.ids)
-            self.env.cr.execute(
-                'SELECT id FROM round_instance WHERE id in %s FOR UPDATE',
-                (tuple(self.ids),),
-            )
-            _logger.debug('lock acquired for round instances %s', self.ids)
+        #
+        # HOT FIX ALCYN-2401: remove locking code which causes a deadlock
+        # will find a way to restore ALCYN-2266 later
+        #
+
+        # if self:
+        #     _logger.info('acquire lock for round instances %s', self.ids)
+        #     self.env.cr.execute(
+        #         'SELECT * FROM round_instance '
+        #         'WHERE id in %s '
+        #         'FOR UPDATE',
+        #         (tuple(self.ids),),
+        #     )
+        #     _logger.info('lock acquired for round instances %s', self.ids)
+        return
 
     def _check_allowed_holidays_pickings(self, pickings):
         errors = {}
@@ -334,9 +342,10 @@ class RoundInstance(models.Model):
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
-        _logger.debug(
-            "Assign to round instance %s the pickings %s",
+        _logger.info(
+            "Assign to round instance %s the pickings %s (%s)",
             self.id,
+            pickings.mapped('name'),
             pickings.ids,
         )
         self._lock()

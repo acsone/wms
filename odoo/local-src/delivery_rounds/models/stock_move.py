@@ -22,6 +22,9 @@ class StockMove(models.Model):
             # if the picking has no round instance) to prevent concurrent
             # access and retries
             picking = self.env['stock.picking'].browse(picking_id)
+            _logger.info(
+                'setting a new picking %s on move %s', picking.name, self.ids
+            )
             picking.delivery_round_id._lock()
         return super(StockMove, self).write(values)
 

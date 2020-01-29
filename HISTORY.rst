@@ -23,6 +23,9 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2401: hotfix: remove the locking introduced in ALCYN-2266 (causes deadlocks)
+* update queue_job to remove the errors about missing field removal_interval on queue.job.channel
+
 **Build**
 
 **Documentation**
@@ -35,11 +38,6 @@ latest (unreleased)
 
 * ALCYN-2377: change domain for Newpharma products
 
-**Bugfixes**
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.47.1 (2020-01-14)
