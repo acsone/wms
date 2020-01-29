@@ -23,12 +23,18 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2401: hotfix: remove the locking introduced in ALCYN-2266 (causes deadlocks)
-* update queue_job to remove the errors about missing field removal_interval on queue.job.channel
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.47.3 (2020-01-29)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2401: hotfix: remove the locking introduced in ALCYN-2266 (causes deadlocks)
+* update queue_job to remove the errors about missing field removal_interval on queue.job.channel
 
 
 10.0.1.47.2 (2020-01-22)
