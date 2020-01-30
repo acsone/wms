@@ -9,7 +9,7 @@ from odoo import _, api, exceptions, fields, models
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    esb_exported = fields.Boolean()
+    esb_exported = fields.Boolean(copy=False)
 
     @api.multi
     def write(self, vals):
