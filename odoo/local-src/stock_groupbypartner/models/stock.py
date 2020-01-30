@@ -103,7 +103,7 @@ class StockPicking(models.Model):
 
             else:
                 not_done_bo_moves.with_context(
-                    backorder_assign=picking
+                    backorder_assign=picking.id
                 ).assign_picking()
 
             if not picking.date_done:
@@ -182,6 +182,9 @@ class StockMove(models.Model):
                 - move.product_id.weight * move.product_qty
             )
             backorder_orig_id = self.env.context.get('backorder_assign')
+            backorder_orig_id = self.env['stock.picking'].browse(
+                backorder_orig_id
+            )
             # Preferably assign the move in a picking having a move with the
             # same group_id. Necessary for pushed moves
             if len(pickings) > 1:

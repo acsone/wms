@@ -33,6 +33,7 @@ latest (unreleased)
 * ALCYN-2397: Display on customer statement on report, no supplier
 * ALCYN-2341: fix computation of reassort priority
 * ALCYN-2393: allow checking which products are pending reassort in a delivery round
+* ALCYN-2266 / ALCYN-2401: restore the locking. Needs careful checking.
 
 **Build**
 

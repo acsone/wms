@@ -24,8 +24,11 @@ class StockPicking(models.Model):
     @api.model
     def create(self, values):
         res = super(StockPicking, self).create(values)
-        backorder = self._context.get('backorder_assign')
-        if backorder:
+        backorder_id = self._context.get('backorder_assign')
+        if backorder_id:
+            # backorder and self may have different environment, because some
+            # jobs are creating new cursors -> browse with the current environment.
+            backorder = self.env['stock.picking'].browse(backorder_id)
             delivery_round_customer = backorder.delivery_round_customer_id
             delivery_round = backorder.delivery_round_id
             if delivery_round:

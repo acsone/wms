@@ -22,10 +22,14 @@ class StockMove(models.Model):
             # if the picking has no round instance) to prevent concurrent
             # access and retries
             picking = self.env['stock.picking'].browse(picking_id)
-            _logger.info(
-                'setting a new picking %s on move %s', picking.name, self.ids
-            )
-            picking.delivery_round_id._lock()
+            if picking.delivery_round_id:
+                _logger.info(
+                    'setting a new picking %s on move %s (related round: %d)',
+                    picking.name,
+                    self.ids,
+                    picking.delivery_round_id.id,
+                )
+                picking.delivery_round_id._lock()
         return super(StockMove, self).write(values)
 
     @api.multi
@@ -131,7 +135,8 @@ class StockMove(models.Model):
                 )
             ]
         elif not orig_picking and self._context.get('backorder_assign'):
-            back_order = self._context['backorder_assign']
+            back_order_id = self._context['backorder_assign']
+            back_order = self.env['stock.picking'].browse(back_order_id)
             domain += [
                 (
                     'delivery_round_customer_id',
@@ -150,15 +155,17 @@ class StockMove(models.Model):
     @api.multi
     def assign_picking(self):
         res = super(StockMove, self).assign_picking()
-        bo_assign = self._context.get(
-            'backorder_assign', self.env['stock.picking']
-        )
+        bo_assign = self._context.get('backorder_assign', False)
+        if bo_assign:
+            bo_assign = self.env['stock.picking'].browse(bo_assign)
+        else:
+            bo_assign = self.env['stock.picking']
         # if we are assigning the move to a picking in the context of the
         # creation of a backorder, then make sure that 1. the backorder picking
         # lands in the same delivery round as the original picking, and 2. run
         # a job to check the availability of the picking's moves so that if a
         # replenishment has occured, the moves are available. (See ALCYN-2130)
-        if bo_assign and bo_assign.delivery_round_id:
+        if bo_assign.delivery_round_id:
             bo_assign.delivery_round_id._assign_pickings(
                 self.mapped('picking_id')
             )
