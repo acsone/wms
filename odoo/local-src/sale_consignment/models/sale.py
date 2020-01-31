@@ -55,7 +55,6 @@ class SaleOrderLine(models.Model):
         # despite that they usage type is "internal"
 
         self.ensure_one()
-        super(SaleOrderLine, self)._get_delivered_qty()
         qty = 0.0
         for move in self.procurement_ids.mapped('move_ids').filtered(
             lambda r: r.state == 'done' and not r.scrapped
