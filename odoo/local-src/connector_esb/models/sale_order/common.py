@@ -286,8 +286,9 @@ class StockMove(models.Model):
             # action trigerred without proper access rights replace user
             # to perform with success (probably should be handled by zetes)
             _logger.info(
-                """Webservice update saleorder, user %s doesn't has enough 
-                rights for update replaced on zetes user""" % user
+                """Webservice update saleorder, user %s doesn't has enough
+                 rights for update replaced on zetes user"""
+                % user
             )
             user = self.env.ref('specific_zetes.user_zetes').id
 
