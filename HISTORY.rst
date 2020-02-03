@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2364:Fix to add delivery fees on the SO before creating the invoice
+
 **Build**
 
 **Documentation**
