@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2397: Display on customer statement on report, no supplier
+
 **Build**
 
 **Documentation**
