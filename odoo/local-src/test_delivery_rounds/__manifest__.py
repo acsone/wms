@@ -10,6 +10,7 @@
     'category': 'Stock Management',
     'depends': [
         'delivery_rounds_alcyon',
+        'delivery_rounds_refill',
         'stock_picking_zone',
         'stock_lot_loss',
         'stock_reassign_auto',
