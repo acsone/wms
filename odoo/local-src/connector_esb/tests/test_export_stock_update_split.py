@@ -37,11 +37,11 @@ class ExportStockUpdateTestCase(SavepointCase):
         products.write({'sale_ok': False})
         # Create 10 products
         cls.all_products = cls.env['product.product']
-        for product_id in range(100, 110):
+        for product_code in range(100, 110):
             cls.all_products |= cls.env['product.product'].create(
                 {
-                    'name': 'test prod {}'.format(product_id),
-                    'default_code': 'test prod {}'.format(product_id),
+                    'name': 'test prod {}'.format(product_code),
+                    'default_code': 'test prod {}'.format(product_code),
                     'type': 'product',
                     'sale_ok': True,
                 }
@@ -64,6 +64,7 @@ class ExportStockUpdateTestCase(SavepointCase):
             'UPDATE stock_quant SET write_date = %s WHERE id in %s',
             (write_date, tuple(quants.ids)),
         )
+        quants.refresh()
 
     def successful_post_response(url, data, headers, auth):
         """ """
@@ -116,16 +117,22 @@ class ExportStockUpdateTestCase(SavepointCase):
         """
         # Set three quants in an older date, but not the one for product 103
         quants = self.env['stock.quant'].search(
-            [('product_id.id', 'in', self.product_ids[0:3])]
+            [('product_id', 'in', self.product_ids[0:3])]
         )
         self.set_quant_write_date(quants, '2017-11-05 12:00:00')
+        # set the quant of product 103 at a slightly later date, so that we are
+        # sure it is exported in the 2nd batch of 3
+        quants = self.env['stock.quant'].search(
+            [('product_id', '=', self.product_ids[3])]
+        )
+        self.set_quant_write_date(quants, '2017-11-06 12:00:00')
         with self.backend.work_on(
             self.model._name, timestamp=self.timestamp
         ) as work:
             exporter = work.component(usage='record.exporter.cron')
             exported_until = exporter.run(max_records=3)
             # Failing after the second export
-            self.assertTrue(post.call_count in (2, 3))
+            self.assertEqual(post.call_count, 2)
             self.assertEqual(
                 exported_until,
                 exporter.get_exported_until('2017-11-05 12:00:00'),
@@ -140,7 +147,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         """
         # Set three quants in an older date including the one for product 103
         quants = self.env['stock.quant'].search(
-            [('product_id.id', 'in', self.product_ids[3:5])]
+            [('product_id', 'in', self.product_ids[3:5])]
         )
         self.set_quant_write_date(quants, '2017-11-05 12:00:00')
         with self.backend.work_on(
