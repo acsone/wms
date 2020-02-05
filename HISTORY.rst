@@ -25,6 +25,7 @@ latest (unreleased)
 
 * ALCYN-2385: set zetes user when confirmation confirmed by portal user
 * Disable copying esb_exported by default
+* ALCYN-2364:Fix to add delivery fees on the SO before creating the invoice
 
 **Build**
 
