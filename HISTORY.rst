@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2366: fix delivered qty assigned to consignment location
+* ALCYN-2364:Fix to add delivery fees on the SO before creating the invoice
 
 **Build**
 
