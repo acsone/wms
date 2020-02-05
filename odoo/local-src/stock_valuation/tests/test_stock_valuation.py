@@ -97,17 +97,27 @@ class TestStockValuation(SavepointCase):
         """Test we get the wizard to create tickets."""
         p1 = self.p1
 
-        self.po1 = self.buy(p1, 100, '2020-02-02 00:00:00')
-        self.po2 = self.buy(p1, 50, '2020-02-03 00:00:00')
-        self.po3 = self.buy(p1, 153, '2020-02-04 00:00:00')
-        self.so1 = self.sell(p1, '2020-02-05 00:00:00')
+        # Caution: there are calls to NOW() in the SQL query of the database
+        # view, these are not affected by freeze_time -> we need use dates for
+        # which we are sure that the execution time will not fall in the middle
+        # of the range...
+        self.po1 = self.buy(p1, 100, '2020-01-02 00:00:00')
+        self.po2 = self.buy(p1, 50, '2020-01-03 00:00:00')
+        self.po3 = self.buy(p1, 153, '2020-01-04 00:00:00')
+        self.so1 = self.sell(p1, '2020-01-05 00:00:00')
 
-        now = '2020-02-06 12:00:00'
+        now = '2020-01-06 12:00:00'
         with freeze_time(now):
             self.env['stock.history.materialized'].refresh_view()
 
-            self.check_at_date(p1, '2020-02-01 12:00:00', 0, 0)
-            self.check_at_date(p1, '2020-02-02 12:00:00', 1, 100)
-            self.check_at_date(p1, '2020-02-03 12:00:00', 2, 150)
-            self.check_at_date(p1, '2020-02-04 12:00:00', 3, 303)
-            self.check_at_date(p1, '2020-02-05 12:00:00', 2, 202)
+            self.check_at_date(p1, '2020-01-01 12:00:00', 0, 0)
+            self.check_at_date(p1, '2020-01-02 12:00:00', 1, 100.0)
+            self.check_at_date(
+                p1, '2020-01-03 12:00:00', 2, 2 * (100.0 + 50.0) / 2
+            )
+            self.check_at_date(
+                p1, '2020-01-04 12:00:00', 3, 3 * (100.0 + 50.0 + 153.0) / 3
+            )
+            self.check_at_date(
+                p1, '2020-01-05 12:00:00', 2, 2 * (100.0 + 50.0 + 153.0) / 3
+            )
