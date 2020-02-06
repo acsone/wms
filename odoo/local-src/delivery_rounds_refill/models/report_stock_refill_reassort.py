@@ -49,6 +49,11 @@ class ReportStockRefillReassort(models.Model):
     planned_qty = fields.Integer('Planned outgoing qty')
     planned_count = fields.Integer('Planned outgoing count')
     immediate_qty = fields.Integer('Immediate outgoing qty')
+    pending_round_reserved_qty = fields.Integer(
+        'Reserved qty in bin',
+        help="Quantity in bin, reserved for delivery rounds which "
+        "are not started",
+    )
     immediate_count = fields.Integer('Immediate outgoing count')
     average_qty = fields.Integer('Average outgoing qty')
     average_count = fields.Integer('Average outgoing count')

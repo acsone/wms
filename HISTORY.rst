@@ -31,6 +31,8 @@ latest (unreleased)
 * ALCYN-2366: fix delivered qty assigned to consignment location
 * ALCYN-2364:Fix to add delivery fees on the SO before creating the invoice
 * ALCYN-2397: Display on customer statement on report, no supplier
+* ALCYN-2341: fix computation of reassort priority
+* ALCYN-2393: allow checking which products are pending reassort in a delivery round
 
 **Build**
 

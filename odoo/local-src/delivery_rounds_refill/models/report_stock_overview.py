@@ -26,6 +26,7 @@ class ReportStockOverview(models.Model):
   ),
   deliveries_todo AS (
     SELECT
+      sm.id,
       sm.product_id,
       sm.product_uom_qty,
       sm.picking_id
@@ -38,11 +39,25 @@ class ReportStockOverview(models.Model):
       AND sm.priority > '0'
       AND sm.state not in ('cancel', 'done', 'draft')
   ),
+  pending_deliveries_reserved_by_product AS (
+    -- quantities reserved for pending delivery round instances
+    SELECT
+      sm.product_id,
+      sum(quant.qty) as reserved_qty_pending
+    FROM stock_move sm
+    JOIN stock_picking  sp  ON (sm.picking_id = sp.id)
+    JOIN stock_picking_type spt ON (sp.picking_type_id = spt.id and spt.code='internal')
+    JOIN round_instance ri ON (sp.delivery_round_id = ri.id)
+    JOIN stock_quant quant ON (quant.reservation_id = sm.id)
+    WHERE NOT ri.picking_launched
+    GROUP BY sm.product_id
+  ),
   deliveries_todo_byproduct AS (
     SELECT
-      product_id,
+      sm.product_id,
       sum(product_uom_qty) AS confirmed_qty,
       count(product_uom_qty) AS confirmed_count,
+      sum(COALESCE(p_deli.reserved_qty_pending, 0.)) AS pending_round_reserved_qty,
       sum(product_uom_qty)
         FILTER (WHERE ri.id IS NOT NULL) AS planned_qty,
       count(product_uom_qty)
@@ -54,6 +69,7 @@ class ReportStockOverview(models.Model):
     FROM deliveries_todo sm
     LEFT JOIN stock_picking sp ON sm.picking_id = sp.id
     LEFT JOIN round_instance ri ON sp.delivery_round_id = ri.id
+    LEFT JOIN pending_deliveries_reserved_by_product p_deli ON (p_deli.product_id = sm.product_id)
     GROUP BY sm.product_id
   ),
   deliveries_last AS (
@@ -91,7 +107,7 @@ class ReportStockOverview(models.Model):
   )
   SELECT product_id AS id, *,
   CASE
-    WHEN coalesce(qty_in_bin, 0) < immediate_qty
+    WHEN coalesce(qty_in_bin, 0) - coalesce(pending_round_reserved_qty, 0) < immediate_qty
         THEN 6000 + LEAST(999, immediate_count)
     WHEN coalesce(qty_in_bin, 0) < planned_qty
         THEN 5000 + LEAST(999, planned_count)
@@ -103,7 +119,7 @@ class ReportStockOverview(models.Model):
     ELSE 0
   END AS refill_priority_reassort,
   CASE
-    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < immediate_qty
+    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) - coalesce(pending_round_reserved_qty, 0) < immediate_qty
         THEN 6000 + LEAST(999, immediate_count)
     WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < planned_qty
         THEN 5000 + LEAST(999, planned_count)
@@ -133,6 +149,11 @@ class ReportStockOverview(models.Model):
     planned_qty = fields.Integer('Planned outgoing qty')
     planned_count = fields.Integer('Planned outgoing count')
     immediate_qty = fields.Integer('Immediate outgoing qty')
+    pending_round_reserved_qty = fields.Integer(
+        'Reserved qty in bin',
+        help="Quantity in bin, reserved for delivery rounds which "
+        "are not started",
+    )
     immediate_count = fields.Integer('Immediate outgoing count')
     average_qty = fields.Integer('Average outgoing qty')
     average_count = fields.Integer('Average outgoing count')

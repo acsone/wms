@@ -612,6 +612,7 @@ migration:
         upgrade:
           - alcyon_credit_control
           - connector_esb
+          - delivery_rounds_refill
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_48_0::post
