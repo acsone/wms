@@ -36,6 +36,7 @@ latest (unreleased)
 * ALCYN-2266 / ALCYN-2401: restore the locking. Needs careful checking.
 * ALCYN-2340: prevent user from reassigning a started picking to a delivery round
   (inc. the same round)
+* ALCYN-2405: fix issues with ALCYN-2130
 
 **Build**
 

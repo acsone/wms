@@ -170,25 +170,35 @@ class StockPicking(models.Model):
     _group_by_full = {'delivery_round_id': _group_delivery_round}
 
     def _detach_from_round(self):
+        for picking in self:
+            pending_moves = self.env['stock.move'].search(
+                [
+                    ('picking_id', '=', picking.id),
+                    ('state', 'not in', ('cancel', 'done')),
+                ]
+            )
+            if pending_moves:
+                pending_moves.with_context(
+                    # set no_round_assign to force reassigning the moves to a
+                    # picking which is not in the same round as the picking we
+                    # may be removing from the round.
+                    no_round_assign=True,
+                    # set backorder_assign so that a message will be generated
+                    # on picking to say where the backorder was placed.
+                    backorder_assign=picking,
+                ).assign_picking()
+
+                # make sure that empty pickings are "printed" so that their
+                # state is computed as 'done'
+                if not picking.move_lines:
+                    picking.printed = True
+        # force recomputation of state, as there is no trigger on the 'printed'
+        # field
+        self._compute_state()
+
         self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
             {'delivery_round_customer_id': False}
         )
-        pending_moves = self.env['stock.move'].search(
-            [
-                ('picking_id', 'in', self.ids),
-                ('state', 'not in', ('cancel', 'done')),
-            ]
-        )
-        if pending_moves:
-            pending_moves.write({'picking_id': False})
-
-            # We could get empty pickings here if all the moves are pending and
-            # therefore removed. But removing them could pose issues
-            # elsewhere. So for now I prefer leaving them, as this should be rare.
-            #
-            # self.filtered(lambda r: not r.move_lines).unlink()
-
-            pending_moves.assign_picking()
 
     @api.multi
     def button_delivery_round(self):
