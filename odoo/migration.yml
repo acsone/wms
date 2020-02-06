@@ -228,6 +228,7 @@ migration:
           - sale_cancel_remaining
           - sale_confirm_background
           - sale_consignment
+          - sale_quick_create
           - specific_account
           - specific_base
           - specific_barcode
@@ -615,6 +616,8 @@ migration:
           - alc_analytic_category_report
           - connector_esb
           - delivery_rounds_refill
+          - sale_quick_create
+          - specific_sale
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_48_0::post

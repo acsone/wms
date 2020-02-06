@@ -23,7 +23,8 @@ latest (unreleased)
 
 * ALCYN-2392: Keep total line only on the last credit control lines page
 * ALCYN-2367: allow job retrying on connection error
-* ALCYN-2386 Report analytic multi level
+* ALCYN-2386: Report analytic multi level
+* ALCYN-2379: sale_quick_create: performance
 
 **Bugfixes**
 
