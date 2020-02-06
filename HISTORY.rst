@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.48.0 (2020-02-06)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2392: Keep total line only on the last credit control lines page
 * ALCYN-2367: allow job retrying on connection error
 * ALCYN-2386: Report analytic multi level
@@ -40,10 +52,6 @@ latest (unreleased)
 * ALCYN-2340: prevent user from reassigning a started picking to a delivery round
   (inc. the same round)
 * ALCYN-2405: fix issues with ALCYN-2130
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.47.3 (2020-01-29)
