@@ -16,6 +16,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: purchase_prepaid
+#: model:ir.model.fields,help:purchase_prepaid.field_purchase_order_prepayment
+msgid "Check this if the invoice is received before reception of goods"
+msgstr "Sélectionner ceci si la facture est reçue avant la réception de marchandise"
+
+#. module: purchase_prepaid
 #: model:ir.model.fields,field_description:purchase_prepaid.field_purchase_order_prepayment
 msgid "Prepayment"
-msgstr "Marchandise à recevoir"
+msgstr "Charge constatée d'avance"
+
+#. module: purchase_prepaid
+#: model:ir.model,name:purchase_prepaid.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
