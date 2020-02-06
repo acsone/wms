@@ -34,6 +34,8 @@ latest (unreleased)
 * ALCYN-2341: fix computation of reassort priority
 * ALCYN-2393: allow checking which products are pending reassort in a delivery round
 * ALCYN-2266 / ALCYN-2401: restore the locking. Needs careful checking.
+* ALCYN-2340: prevent user from reassigning a started picking to a delivery round
+  (inc. the same round)
 
 **Build**
 
