@@ -611,3 +611,6 @@ migration:
       addons:
         upgrade:
           - connector_esb
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_48_0::post

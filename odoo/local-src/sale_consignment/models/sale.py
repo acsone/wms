@@ -10,7 +10,7 @@ class SaleOrder(models.Model):
 
     is_consignment = fields.Boolean(
         'For Consignment',
-        help="Procurement will be generated for the consignement location "
+        help="Procurement will be generated for the consignment location "
         "of the selected customer",
     )
 
@@ -47,3 +47,30 @@ class SaleOrderLine(models.Model):
                 )
             vals['location_id'] = location.id
         return vals
+
+    @api.multi
+    def _get_delivered_qty(self):
+        # method repeat logic introduced in odoo/addons/sale_stock
+        # except in current realization moves located to "consignment" also counted as delivered
+        # despite that they usage type is "internal"
+
+        self.ensure_one()
+        qty = 0.0
+        for move in self.procurement_ids.mapped('move_ids').filtered(
+            lambda r: r.state == 'done' and not r.scrapped
+        ):
+            if move.location_dest_id.usage == "customer" or (
+                move.location_dest_id.usage == "internal"
+                and move.picking_id.picking_type_code == "outgoing"
+            ):
+                if not move.origin_returned_move_id:
+                    qty += move.product_uom._compute_quantity(
+                        move.product_uom_qty, self.product_uom
+                    )
+            elif (
+                move.location_dest_id.usage != "customer" and move.to_refund_so
+            ):
+                qty -= move.product_uom._compute_quantity(
+                    move.product_uom_qty, self.product_uom
+                )
+        return qty
