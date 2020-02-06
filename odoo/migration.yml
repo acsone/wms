@@ -199,6 +199,7 @@ migration:
           - account_invoice_sent
           - account_move_productcateg
           - account_payment_order_background
+          - alc_analytic_category_report
           - alcyon_credit_control
           - cash_on_delivery
           - code_abc
@@ -611,6 +612,7 @@ migration:
       addons:
         upgrade:
           - alcyon_credit_control
+          - alc_analytic_category_report
           - connector_esb
           - delivery_rounds_refill
       operations:

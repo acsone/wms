@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Acsone SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_analytic_account_form_inherit_tag">
+        <field name="name">account.analytic.account.form (in alc_analytic_category_report)</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="tag_1_id"/>
+                <field name="tag_2_id"/>
+                <field name="tag_3_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_analytic_account_tree_inherit_tag">
+        <field name="name">account.analytic.account.tree (in alc_analytic_category_report)</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="tag_1_id"/>
+                <field name="tag_2_id"/>
+                <field name="tag_3_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
