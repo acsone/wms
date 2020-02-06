@@ -37,7 +37,7 @@ class PartnerAlcyonCategorie(models.Model):
         # the db to get the id from xml id
         record = self.env.ref(xml_id)
         if record._name != self._name:
-            raise Exception(
+            raise ValueError(
                 "Only alcyon partner category xml_id can be used not %s xml_id"
                 % record._name
             )

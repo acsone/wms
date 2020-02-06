@@ -26,7 +26,7 @@ class ProductCategory(models.Model):
         # the db to get the id from xml id
         record = self.env.ref(category_xml_id)
         if record._name != self._name:
-            raise Exception(
+            raise ValueError(
                 "Only category xml_id can be used not %s xml_id" % record._name
             )
         return record.id
