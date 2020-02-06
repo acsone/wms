@@ -610,6 +610,7 @@ migration:
     - version: 10.0.1.48.0
       addons:
         upgrade:
+          - alcyon_credit_control
           - connector_esb
       operations:
         post:

@@ -27,7 +27,6 @@
 
     <!-- Move total invoiced and total due under the corresponding column -->
     <xpath expr="//table[@id='summary_table']" position="inside">
-      <tfoot>
         <tr>
           <td></td>
           <td></td>
@@ -45,7 +44,6 @@
             </strong>
           </td>
         </tr>
-      </tfoot>
     </xpath>
     <xpath expr="//table[@id='summary_table']/following-sibling::div[1]" position="replace">
     </xpath>

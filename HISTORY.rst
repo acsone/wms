@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2392: Keep total line only on the last credit control lines page
+
 **Bugfixes**
 
 * ALCYN-2385: set zetes user when confirmation confirmed by portal user
