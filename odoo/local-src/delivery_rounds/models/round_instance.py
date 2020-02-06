@@ -308,20 +308,13 @@ class RoundInstance(models.Model):
         1. when assigning pickings to a delivery round
         2. when adding stock.moves to a picking which is in a round.
         """
-        #
-        # HOT FIX ALCYN-2401: remove locking code which causes a deadlock
-        # will find a way to restore ALCYN-2266 later
-        #
-
-        # if self:
-        #     _logger.info('acquire lock for round instances %s', self.ids)
-        #     self.env.cr.execute(
-        #         'SELECT * FROM round_instance '
-        #         'WHERE id in %s '
-        #         'FOR UPDATE',
-        #         (tuple(self.ids),),
-        #     )
-        #     _logger.info('lock acquired for round instances %s', self.ids)
+        if self:
+            _logger.info('acquire lock for round instances %s', self.ids)
+            self.env.cr.execute(
+                'SELECT * FROM round_instance WHERE id in %s FOR UPDATE',
+                (tuple(self.ids),),
+            )
+            _logger.info('lock acquired for round instances %s', self.ids)
         return
 
     def _check_allowed_holidays_pickings(self, pickings):
@@ -982,12 +975,20 @@ class RoundInstanceCustomer(models.Model):
     @job(default_channel='root.background.stock_picking_deliver')  # priority=5
     @api.multi
     def _deliver_job(self):
+        # WARNING
+        # this method opens a new transaction that locks the related
+        # "round.instance" record. Any write or lock acquired on the related
+        # "round.instance" before calling this method could make it fail.
         if not self.exists():
             return
         self.ensure_one()
         if self.delivered:
             return
-
+        _logger.info(
+            'Starting to deliver customer instance %d of instance %d',
+            self.id,
+            self.delivery_round_id.id,
+        )
         # when a job is executing, we get this key in the context
         background = (
             self.env.context.get('job_uuid') and not config['test_enable']
@@ -1004,6 +1005,7 @@ class RoundInstanceCustomer(models.Model):
                     ('delivery_round_customer_id', '=', self.id),
                 ]
             )
+            shippings.mapped('delivery_round_id')._lock()
             if self.partner_id.is_sale_back_order_cancel:
                 shippings = shippings.with_context(cancel_backorder=True)
             for shipping in shippings:
