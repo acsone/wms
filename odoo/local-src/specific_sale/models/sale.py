@@ -2,6 +2,8 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from collections import defaultdict
+
 import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -147,6 +149,31 @@ class Sale(models.Model):
                 )
         return super(Sale, self).action_cancel()
 
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        """
+        This override is required to optimize the performance when the onchange
+        method is called for an order_line.
+        When the onchange method is called for an order_line, the field_onchange
+        parameter contains all the fields declared for the sale.order.line tree
+        AND form defined into the sale.order form. Since this list is used by
+        Odoo to detect the impact of an onchange on the displayed attributes,
+        all fields present into this list are evaluated into the base
+        implementation. Unfortunately, even if some costly fields are only
+        declared into the form definition of the sale.order.line, these fields
+        are also present into the field_onchange parameter. (because
+        the form definition is embedded into the xml element field)
+        To avoid to compute these useless fields only displayed into the
+        sale.order.line form, we remove these fields from the field_onchange
+        parameter before calling super
+        """
+        for f in [
+            "order_line.production_lot_ids",
+            "order_line.next_expected_date_for_receipt",
+        ]:
+            field_onchange.pop(f, None)
+        return super(Sale, self).onchange(values, field_name, field_onchange)
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -190,7 +217,7 @@ class SaleOrderLine(models.Model):
                         exception = rule.description
                         # line.order_id.main_exception_id = rule
             line.exception = exception
-            if line.warning_text != warning:
+            if (line.warning_text or '') != (warning or ''):
                 line.warning_text = warning
                 line.set_line_name()
 
@@ -226,9 +253,8 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id')
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
-        stup_category = self.env.ref('specific_data.product_categ_stupefiant')
-        if self.product_id and self.product_id.categ_id.has_for_parent(
-            stup_category.id
+        if self.product_id and self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant'
         ):
             warning_mess = {
                 'title': _('Narcotic voucher'),
@@ -251,6 +277,24 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):
+        """
+        NOTE BY LMIGNON: My little attempt to understand the motivation behind
+        this override.
+        The implementation into the onchange method computing a value for
+        product_qty_unavailable is conditioned to the presence of the
+        'must_compute_product_qty_unavailable' attribute into the context.
+        See procurement_sale.models.sale.onchange_for_product_qty_unavailable
+        By default the logic into onchange_for_product_qty_unavailable is
+        disabled if this attribute is not present.
+        Since the override of the onchange method is done into the
+        sale.order.line, the logic in onchange_for_product_qty_unavailable is
+        never executed if the call to onchange is done by editing a line into
+        the order_line tree into the sale order form. The logic is only
+        executed when the same line is edited into the Fast Line entry tree
+        since the onchange is called directly on the sale.order.line model.
+
+        TO BE REMOVED / REFACTORED / EXPLAINED
+        """
         new_context = self.env.context.copy() if self.env.context else {}
         if isinstance(field_name, list):
             if 'product_uom_qty' in field_name or 'product_id' in field_name:
@@ -312,44 +356,20 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_id')
     def _compute_production_lot_ids(self):
-        production_lot_model = self.env['stock.production.lot'].with_context(
-            only_wh_stock_quants=True
+        production_lots = (
+            self.env['stock.production.lot']
+            .search([('product_id', 'in', self.mapped("product_id").ids)])
+            .filtered(lambda p: p.qty_available > 0)
         )
+        lot_ids_by_product_id = defaultdict(list)
+        for lot in production_lots:
+            lot_ids_by_product_id[lot.product_id.id].append(lot.id)
         for line in self:
-            production_lot_ids = None
-            if line.product_id:
-                production_lot_ids = production_lot_model.search(
-                    [('product_id', '=', line.product_id.id)]
-                ).filtered(lambda p: p.product_qty > 0)
+            production_lot_ids = lot_ids_by_product_id.get(line.product_id.id)
             if production_lot_ids:
-                line.production_lot_ids = [(6, 0, production_lot_ids.ids)]
+                line.production_lot_ids = [(6, 0, production_lot_ids)]
             else:
                 line.production_lot_ids = [(5, 0)]
-
-    next_expected_date_for_receipt = fields.Date(
-        string='Next expected date for receipt',
-        compute='_compute_next_expected_date_for_receipt',
-    )
-
-    @api.depends('product_id')
-    def _compute_next_expected_date_for_receipt(self):
-        stock_move_model = self.env['stock.move']
-        for line in self:
-            move = None
-            if line.product_id:
-                move = stock_move_model.search(
-                    [
-                        ('product_id', '=', line.product_id.id),
-                        ('state', '=', 'assigned'),
-                        ('picking_id.picking_type_id.code', '=', 'incoming'),
-                    ],
-                    order='date_expected',
-                    limit=1,
-                )
-            if move:
-                line.next_expected_date_for_receipt = move.date_expected
-            else:
-                line.next_expected_date_for_receipt = False
 
     # Vallidation rules for sale order lines, used by the sale_exception module
     # It works by restrictions, so any client alcyon categories not referenced
@@ -359,12 +379,17 @@ class SaleOrderLine(models.Model):
     def validate_no_food(self):
         """Disallow all products from food categories."""
         target_groups = ['specific_partner.partner_category_only_material']
-        food = self.env.ref('specific_data.product_categ_ali')
-        if not self.product_id.categ_id.has_for_parent(food.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_ali'
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -372,15 +397,20 @@ class SaleOrderLine(models.Model):
     def validate_no_medoc(self):
         """Disallow all products from medicines categories."""
         target_groups = ['specific_partner.partner_category_only_material']
-        medoc = self.env.ref('specific_data.product_categ_medoc')
-        if not self.product_id.categ_id.has_for_parent(medoc.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_medoc'
+        ):
             return False
         if not self.order_id.partner_id.alcyon_category_id:
             # Customer with undefined category are not allowed medoc
             return True
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -393,12 +423,17 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_student',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_importation')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_importation'
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -409,12 +444,17 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_customerexport',
             'specific_partner.partner_category_student',
         ]
-        base_category = self.env.ref('specific_data.product_categ_vet_belges')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_vet_belges'
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -428,12 +468,17 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_student',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_humain')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_humain'
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -446,12 +491,17 @@ class SaleOrderLine(models.Model):
             'specific_partner.partner_category_alcyonaire',
             'specific_partner.partner_category_med_export',
         ]
-        base_category = self.env.ref('specific_data.product_categ_stupefiant')
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant'
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -459,14 +509,17 @@ class SaleOrderLine(models.Model):
     def validate_no_medoc_vet_psychoIII(self):
         """Disallow all products from medicines psycho III."""
         target_groups = ['specific_partner.partner_category_med_export']
-        base_category = self.env.ref(
+        if not self.product_id.categ_id.has_for_parent_xml_id(
             'specific_data.product_categ_psychotropes_25'
-        )
-        if not self.product_id.categ_id.has_for_parent(base_category.id):
+        ):
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -480,8 +533,12 @@ class SaleOrderLine(models.Model):
         if not self.product_id.belgium_only:
             return False
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
@@ -497,35 +554,43 @@ class SaleOrderLine(models.Model):
             # Customer with undefined category are not allowed vet only
             return True
         for group_xmlid in target_groups:
-            group = self.env.ref(group_xmlid)
-            if self.order_id.partner_id.alcyon_category_id == group:
+            if (
+                self.order_id.partner_id.alcyon_category_id
+                and self.order_id.partner_id.alcyon_category_id.is_xml_id(
+                    group_xmlid
+                )
+            ):
                 return True
         return False
 
     def validate_no_psychotropic_ordered_by_phone(self):
         """No psychotropic ordered on the phone."""
-        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
-        if not self.product_id.categ_id.has_for_parent(psych_cat.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_psychotropes_25'
+        ):
             return False
         return self.order_id.sale_channel == 'phone'
 
     def validate_no_stupefiant_vet_by_phone(self):
         """No psychotropic ordered on the phone."""
-        vet_cat = self.env.ref('specific_data.product_categ_stupefiant_vet')
-        if not self.product_id.categ_id.has_for_parent(vet_cat.id):
+        if not self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant_vet'
+        ):
             return False
         return self.order_id.sale_channel == 'phone'
 
     # Warnings
     def warning_psychotropic(self):
         """Add warning for psychotropic product on sale order line."""
-        psych_cat = self.env.ref('specific_data.product_categ_psychotropes_25')
-        return self.product_id.categ_id.has_for_parent(psych_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_psychotropes_25'
+        )
 
     def warning_stupefiant_vet(self):
         """Add warning for psychotropic product on sale order line."""
-        vet_cat = self.env.ref('specific_data.product_categ_stupefiant_vet')
-        return self.product_id.categ_id.has_for_parent(vet_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_stupefiant_vet'
+        )
 
     def validate_no_backorder(self):
         """Block backorder for customer that specifically do not want them."""
@@ -548,13 +613,15 @@ class SaleOrderLine(models.Model):
 
     def warning_cascade_importation(self):
         """Add a warning for cascade importation product."""
-        cascade_cat = self.env.ref('specific_data.product_categ_importation')
-        return self.product_id.categ_id.has_for_parent(cascade_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_importation'
+        )
 
     def warning_human_medicine(self):
         """Add a warning for human medicine product."""
-        human_medoc_cat = self.env.ref('specific_data.product_categ_humain')
-        return self.product_id.categ_id.has_for_parent(human_medoc_cat.id)
+        return self.product_id.categ_id.has_for_parent_xml_id(
+            'specific_data.product_categ_humain'
+        )
 
     def warning_supplier_break(self):
         """Add a warning for out of stock product at the supplier."""

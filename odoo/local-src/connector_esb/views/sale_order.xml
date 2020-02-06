@@ -4,7 +4,7 @@
   <record id="view_order_form" model="ir.ui.view">
     <field name="name">sale_view_order_form_esb</field>
     <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="inherit_id" ref="specific_sale.view_order_form"/>
     <field name="arch" type="xml">
       <field name="sale_channel" position="after">
         <field name="esb_ref" readonly="1"/>

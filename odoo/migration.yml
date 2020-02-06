@@ -201,6 +201,8 @@ migration:
           - account_payment_order_background
           - alc_analytic_category_report
           - alcyon_credit_control
+          - alc_sale_product_expected_receipt_date
+          - alc_stock_lot_available
           - cash_on_delivery
           - code_abc
           - connector_esb
@@ -612,11 +614,14 @@ migration:
     - version: 10.0.1.48.0
       addons:
         upgrade:
-          - alcyon_credit_control
           - alc_analytic_category_report
+          - alc_sale_product_expected_receipt_date
+          - alc_stock_lot_available
+          - alcyon_credit_control
           - connector_esb
           - delivery_rounds_refill
           - sale_quick_create
+          - specific_partner
           - specific_sale
       operations:
         post:

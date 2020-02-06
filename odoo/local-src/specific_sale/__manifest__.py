@@ -9,11 +9,13 @@
     'license': 'AGPL-3',
     'category': 'Sales',
     'depends': [
+        'alc_stock_lot_available',
         'delivery',
         'pricelist_discount',
         'product_additional',
         'sale',
         'sale_exception',
+        'alc_sale_product_expected_receipt_date',
         'sales_team',
         'stock',
         'stock_available_immediately',

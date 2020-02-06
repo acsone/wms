@@ -25,6 +25,7 @@ latest (unreleased)
 * ALCYN-2367: allow job retrying on connection error
 * ALCYN-2386: Report analytic multi level
 * ALCYN-2379: sale_quick_create: performance
+* ALCYN-2387: Performances improvement on sale.order and sale.order.line
 
 **Bugfixes**
 
