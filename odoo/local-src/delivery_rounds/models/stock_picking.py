@@ -185,7 +185,7 @@ class StockPicking(models.Model):
                     no_round_assign=True,
                     # set backorder_assign so that a message will be generated
                     # on picking to say where the backorder was placed.
-                    backorder_assign=picking,
+                    backorder_assign=picking.id,
                 ).assign_picking()
 
                 # make sure that empty pickings are "printed" so that their
