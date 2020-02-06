@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2392: Keep total line only on the last credit control lines page
+* ALCYN-2367: allow job retrying on connection error
 
 **Bugfixes**
 

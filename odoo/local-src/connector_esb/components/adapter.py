@@ -8,14 +8,17 @@ import logging
 import requests
 
 from odoo.addons.component.core import Component
-from odoo.addons.connector.exception import ConnectorException
+from odoo.addons.connector.exception import (
+    ConnectorException,
+    RetryableJobError,
+)
 from simplejson.decoder import JSONDecodeError
 
 _logger = logging.getLogger(__name__)
 
 
 class ESBWebServiceAdapter(Component):
-    """ Generic adatper for ESB.
+    """ Generic adapter for ESB.
 
     You need to inherit from this to configure a specific end-point
     with _endpoint or or maybe _url.
@@ -48,12 +51,17 @@ class ESBWebServiceAdapter(Component):
         url = self._get_url()
         data = json.dumps(values)
         _logger.debug('calling POST on %s with this data %s', url, values)
-        res = requests.post(
-            url,
-            data=data,
-            headers=self._get_headers(),
-            auth=(self.backend_record.ws_user, self.backend_record.ws_pwd),
-        )
+        try:
+            res = requests.post(
+                url,
+                data=data,
+                headers=self._get_headers(),
+                auth=(self.backend_record.ws_user, self.backend_record.ws_pwd),
+            )
+        except requests.ConnectionError:
+            raise RetryableJobError(
+                'Connection is not available, the job will be retried later.'
+            )
         if res.status_code == 202:
             raise ConnectorException('Error %s on POST' % (res.status_code))
         elif res.status_code == 200:
@@ -74,12 +82,17 @@ class ESBWebServiceAdapter(Component):
         url = self._get_url()
         data = json.dumps(values)
         _logger.debug('calling PUT on %s with values %s', url, values)
-        res = requests.put(
-            url,
-            data=data,
-            headers=self._get_headers(),
-            auth=(self.backend_record.ws_user, self.backend_record.ws_pwd),
-        )
+        try:
+            res = requests.put(
+                url,
+                data=data,
+                headers=self._get_headers(),
+                auth=(self.backend_record.ws_user, self.backend_record.ws_pwd),
+            )
+        except requests.ConnectionError:
+            raise RetryableJobError(
+                'Connection is not available, the job will be retried later.'
+            )
         if res.status_code == 202:
             raise ConnectorException('Error %s on PUT' % (res.status_code))
         elif res.status_code == 200:
