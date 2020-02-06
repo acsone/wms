@@ -241,7 +241,7 @@ class TestSaleOrderLine(SavepointCase):
         Test Case:
             1. Check next_expected_date_for_receipt
             2. Confirm the 2 pickings
-        Excpected result:
+        Expected result:
             1. next_expected_date_for_receipt must be False for the 2 products
             2. next_expected_date_for_receipt must be set for the 2 products
             at the min expected_date of the incoming stock move into wh1
@@ -268,7 +268,7 @@ class TestSaleOrderLine(SavepointCase):
             1. Check next_expected_date_for_receipt
             2. Confirm the 2 pickings
             3. Assign warehouse_2 on the sale order
-        Excpected result:
+        Expected result:
             1. next_expected_date_for_receipt must be False for the 2 products
             2. next_expected_date_for_receipt must be False for the 2 products
             3. next_expected_date_for_receipt must be set for the 2 products

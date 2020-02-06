@@ -5,14 +5,14 @@
 from odoo.tests.common import SavepointCase
 
 
-class TestStrockProdictionLot(SavepointCase):
+class TestStockProductionLot(SavepointCase):
     # to avoid trouble with pre installed db where specific_zeste is installed
     at_install = False
     post_install = True
 
     @classmethod
     def setUpClass(cls):
-        super(TestStrockProdictionLot, cls).setUpClass()
+        super(TestStockProductionLot, cls).setUpClass()
         # enable lot
         cls.env.user.write(
             {"groups_id": [(4, cls.env.ref("stock.group_production_lot").id)]}

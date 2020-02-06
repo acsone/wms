@@ -46,5 +46,5 @@ class PartnerAlcyonCategorie(models.Model):
     @api.multi
     def unlink(self):
         result = super(PartnerAlcyonCategorie, self).unlink()
-        self._get_id_for_xmlid.clear_cach(self)
+        self._get_id_for_xmlid.clear_cache(self)
         return result

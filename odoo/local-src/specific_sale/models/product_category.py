@@ -53,5 +53,5 @@ class ProductCategory(models.Model):
     def unlink(self):
         result = super(ProductCategory, self).unlink()
         self._has_for_parent.clear_cache(self)
-        self._get_id_for_xmlid.clear_cach(self)
+        self._get_id_for_xmlid.clear_cache(self)
         return result
