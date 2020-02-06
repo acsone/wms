@@ -280,10 +280,22 @@ class StockMove(models.Model):
         # Testing for order_id existance has it failed on some Travis tests
         updated_sale_order = self.mapped('order_id')
         EXPORT_DESC = 'Export sale order {} to ESB webservice (bo changed)'
+
+        user = self.env.user
+        if not user.has_group('base.group_user'):
+            # action trigerred without proper access rights replace user
+            # to perform with success (probably should be handled by zetes)
+            _logger.info(
+                """Webservice update saleorder, user %s doesn't has enough
+                 rights for update replaced on zetes user"""
+                % user
+            )
+            user = self.env.ref('specific_zetes.user_zetes').id
+
         for so in updated_sale_order:
             if not so.esb_is_exportable():
                 continue
-            so.with_delay(
+            so.sudo(user=user).with_delay(
                 description=EXPORT_DESC.format(so.name),
                 identity_key=identity_exact,
                 priority=25,

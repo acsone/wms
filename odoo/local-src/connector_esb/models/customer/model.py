@@ -8,7 +8,7 @@ from odoo import _, api, exceptions, fields, models
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    esb_exported = fields.Boolean()
+    esb_exported = fields.Boolean(copy=False)
 
     @api.multi
     def unlink(self):
