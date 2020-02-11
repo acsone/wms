@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2416: Change date format on customer statements to DD/MM/YYYY
+
 **Bugfixes**
 
 **Build**

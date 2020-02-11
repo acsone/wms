@@ -54,10 +54,10 @@
           <span t-esc="l['name']"/>
         </td>
         <td>
-          <span t-esc="l['date_entry']"/>
+          <span t-esc="l['date_entry']" t-options='{"widget": "date", "format": "dd/MM/YYYY"}'/>
         </td>
         <td>
-          <span t-esc="l['date_due']"/>
+          <span t-esc="l['date_due']" t-options='{"widget": "date", "format": "dd/MM/YYYY"}'/>
         </td>
         <td class="text-right">
           <span t-esc="l['amount_due']" t-options='{"widget": "monetary", "display_currency": l["amount_currency_id"]}'/>

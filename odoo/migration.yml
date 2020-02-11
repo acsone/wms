@@ -626,3 +626,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_48_0::post
+    - version: 10.0.1.49.0
+      addons:
+        upgrade:
+          - alcyon_credit_control
