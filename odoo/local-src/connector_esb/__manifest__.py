@@ -62,4 +62,7 @@
         'security/ir.model.access.csv',
     ],
     'installable': True,
+    'external_dependencies': {
+        'python': ['paramiko', 'simplejson', 'dicttoxml'],
+    },
 }

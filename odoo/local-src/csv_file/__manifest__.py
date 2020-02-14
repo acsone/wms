@@ -21,4 +21,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'installable': True,
+    'external_dependencies': {
+        'python': ['paramiko'],
+    },
 }
