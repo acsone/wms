@@ -48,20 +48,16 @@ class TestCreateTicketWizard(SavepointCase):
 
     def test_get_wizard_to_create_ticket(self):
         """Test we get the wizard to create tickets."""
-        r = self.env['create.helpdesk.ticket'].create(
-            {'stock_picking_id': self.picking.id}
-        )
+        r = self.env['create.helpdesk.ticket'].create({})
         w = self.env['helpdesk.ticket'].new_one(r)
         self.assertEqual(w['res_id'], r.id)
 
     def test_create_ticket_for_stock_picking(self):
         """Create a new ticket for a picking with the wizard model"""
-        r = self.env['create.helpdesk.ticket'].create(
-            {'stock_picking_id': self.picking.id}
-        )
+        r = self.env['create.helpdesk.ticket'].create({})
         r.helpdesk_ticket_reason_id = self.reason_defect
         r.description = 'Test ticket'
-        new_ticket = r.with_context(
+        r.with_context(
             active_id=self.picking.id, active_model='stock.picking'
         ).create_helpdesk_ticket()
         new_ticket = self.env['helpdesk.ticket'].search(

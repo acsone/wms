@@ -26,12 +26,7 @@ class StockMove(models.Model):
         """Show existing ticket or offer to create a new one"""
         self.ensure_one()
         if self.helpdesk_tickets_count == 0:
-            r = self.env['create.helpdesk.ticket'].create(
-                {
-                    'stock_move_id': self.id,
-                    'stock_picking_id': self.picking_id.id,
-                }
-            )
+            r = self.env['create.helpdesk.ticket'].create()
             return self.env['helpdesk.ticket'].new_one(r)
         else:
             return self.env['helpdesk.ticket'].show_existing(
