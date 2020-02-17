@@ -6,6 +6,7 @@
  'version': '10.0.1.0.0',
  'author': 'Camptocamp',
  'license': 'AGPL-3',
+ 'description': 'Alcyon: Improves views preformances',
  'category': 'Misc',
  'depends': ['account',
              'sale_stock',
