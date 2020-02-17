@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from odoo import tools
+
 from .common import TestDeliveryRound
 
 
@@ -39,9 +41,10 @@ class DeliveryFees(TestDeliveryRound):
         preparation.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        self.delivery_round_1.with_context(
-            test_queue_job_no_delay=True
-        )._deliver(background=False)
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            self.delivery_round_1.with_context(
+                test_queue_job_no_delay=True
+            )._deliver(background=False)
         self.delivery_round_1.button_done()
         so_invoice_status = so1.mapped('order_line.invoice_status')
         self.assertEqual(so_invoice_status, ['invoiced', 'invoiced'])
@@ -73,9 +76,10 @@ class DeliveryFees(TestDeliveryRound):
             prep.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        self.delivery_round_1.with_context(
-            test_queue_job_no_delay=True
-        )._deliver(background=False)
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            self.delivery_round_1.with_context(
+                test_queue_job_no_delay=True
+            )._deliver(background=False)
         self.delivery_round_1.button_done()
         so1_invoice_status = so1.mapped('order_line.invoice_status')
         so2_invoice_status = so2.mapped('order_line.invoice_status')
@@ -108,9 +112,11 @@ class DeliveryFees(TestDeliveryRound):
         preparation.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        self.delivery_round_1.with_context(
-            test_queue_job_no_delay=True
-        )._deliver(background=False)
+
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            self.delivery_round_1.with_context(
+                test_queue_job_no_delay=True
+            )._deliver(background=False)
         self.delivery_round_1.button_done()
         so1_invoice_status = so1.mapped('order_line.invoice_status')
         so2_invoice_status = so2.mapped('order_line.invoice_status')

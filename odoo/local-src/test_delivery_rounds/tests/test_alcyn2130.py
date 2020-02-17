@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from odoo import tools
+
 from .common import TestDeliveryRound
 
 
@@ -439,7 +441,8 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
                 ],
             }
         )
-        refill.with_context(test_queue_job_no_delay=1).action_done()
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            refill.with_context(test_queue_job_no_delay=1).action_done()
         # backorder is available
         self.assertEqual(backorder_preparation.state, 'assigned')
 
