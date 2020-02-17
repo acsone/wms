@@ -105,7 +105,6 @@ class SaleProcurementMTSMTOTestCase(SavepointCase):
                         'product_id': product.id,
                         'product_uom_qty': qty,
                         'product_uom': product.uom_id.id,
-                        'unit_price': 10,
                     },
                 )
             ],
