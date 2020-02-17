@@ -7,6 +7,7 @@
     'version': '10.0.1.0.0',
     'author': 'Camptocamp',
     'license': 'AGPL-3',
+    'description': 'Alcyon: SO background confirmation',
     'category': 'Sales',
     'depends': [
         'sale',
