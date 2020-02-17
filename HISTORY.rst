@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2427: Remove impact on invoicing for consignment sale
+
 **Build**
 
 **Documentation**

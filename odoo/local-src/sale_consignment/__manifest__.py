@@ -11,6 +11,7 @@
     'category': 'Stock Management',
     'depends': [
         'sale_stock',
+        'sale_cancel_remaining',
     ],
     'data': [
         'views/res_partner.xml',

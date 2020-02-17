@@ -630,3 +630,6 @@ migration:
       addons:
         upgrade:
           - alcyon_credit_control
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_48_0::recompute_delivered_qty
