@@ -180,7 +180,6 @@ class SaleOrderLine(models.Model):
 
     exception = fields.Char(compute='_compute_exception')
     warning_text = fields.Char(compute='_compute_exception')
-    date_order = fields.Datetime(related="order_id.date_order")
     older_lot_life_date = fields.Datetime(
         string='Expiration date',
         related='product_id.older_lot_id.life_date',
