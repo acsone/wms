@@ -57,7 +57,6 @@ class TestRoundTags(SavepointCase):
                 'date': fields.Date.to_string(picking_planned),
                 'time_picking_planned': picking_planned.hour,
                 'time_leave_planned': 10,
-                'name': 'Instance test',
                 'state': 'draft',
                 'itinerary_ids': [(6, 0, [cls.itinerary.id])],
             }
@@ -119,7 +118,6 @@ class TestRoundTags(SavepointCase):
                 'date': fields.Date.to_string(picking_planned),
                 'time_picking_planned': picking_planned.hour,
                 'time_leave_planned': 7,
-                'name': 'Best instance',
                 'state': 'draft',
                 'itinerary_ids': [(6, 0, [best_itinerary.id])],
             }
@@ -144,7 +142,6 @@ class TestRoundTags(SavepointCase):
                 'date': fields.Date.to_string(picking_planned),
                 'time_picking_planned': picking_planned.hour,
                 'time_leave_planned': 11,
-                'name': 'Worst instance',
                 'state': 'draft',
                 'itinerary_ids': [(6, 0, [worst_itinerary.id])],
             }
