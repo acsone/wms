@@ -89,11 +89,7 @@ class TestDeliveryRoundAssignMixin(SavepointCase):
             }
         )
         delivery_round = cls.env['round.instance'].create(
-            {
-                'name': 'Unittest delivery round',
-                'template_id': delivery_template.id,
-                'date': '2017-01-01',
-            }
+            {'template_id': delivery_template.id, 'date': '2017-01-01'}
         )
         return delivery_carrier_fixed, delivery_round
 
