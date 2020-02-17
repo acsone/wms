@@ -17,10 +17,8 @@ class TestSaleDelay(SavepointCase):
         # self.max_delay_for_sale_order_creation = 1
         self.so = self.env['sale.order'].create(
             {
-                'esb_ref': 'ref_01',
                 'partner_id': self.partner.id,
                 'date_order': '2019-10-10',
-                'sale_channel': 'fax',
                 # 'carrier_id': self.delivery.id,
                 'client_order_ref': 'whatever the client want',
                 # 'delivery_price': 23.5,
