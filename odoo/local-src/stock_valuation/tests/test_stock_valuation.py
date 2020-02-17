@@ -71,7 +71,6 @@ class TestStockValuation(SavepointCase):
                                 'product_id': product.id,
                                 'product_uom': self.uom.id,
                                 'product_qty': 1,
-                                'date_planned': ttime,
                             },
                         )
                     ],
