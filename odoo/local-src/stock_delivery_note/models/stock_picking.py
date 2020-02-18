@@ -64,7 +64,7 @@ class StockPicking(models.Model):
         for line in self._generate_delivery_note():
             w.writerow(
                 [
-                    unidecode(cell) if isinstance(cell, basestring) else cell
+                    unidecode(cell) if isinstance(cell, unicode) else cell
                     for cell in line
                 ]
             )
