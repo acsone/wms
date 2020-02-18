@@ -4,6 +4,7 @@
 
 from odoo import exceptions
 from odoo.tests.common import SavepointCase
+from odoo.tools import mute_logger
 
 
 class TestActAsView(SavepointCase):
@@ -51,6 +52,9 @@ class TestActAsView(SavepointCase):
         )
         inventory.action_done()
 
+    @mute_logger(
+        "odoo.addons.stock_inventory_controller.models.stock_inventory"
+    )
     def test_inventory_in_act_as_view_loc(self):
         msg = 'You cannot move to a location acting as view'
         with self.assertRaisesRegexp(exceptions.UserError, msg):
