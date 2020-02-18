@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+import os
+import subprocess
+
+
+db_name = os.getenv("DB_NAME")
+db_base = os.getenv("DB_BASE")
+
+if db_name:
+    for database in db_name.split(","):
+        if db_base:
+            subprocess.check_call(
+                [
+                    "click-odoo-copydb",
+                    "--force-disconnect",
+                    "--if-source-exists",
+                    "--unless-dest-exists",
+                    db_base,
+                    database,
+                ]
+            )
+        subprocess.check_call(
+            [
+                "click-odoo-update",
+                "--if-exists",
+                "-d",
+                database,
+                "--i18n-overwrite",
+            ]
+        )
+        subprocess.check_call(
+            [
+                "click-odoo-initdb",
+                "--unless-exists",
+                "-n",
+                database,
+                # "-m",
+                # TODO "alc_all,alc_all_enterprise",
+            ]
+        )
