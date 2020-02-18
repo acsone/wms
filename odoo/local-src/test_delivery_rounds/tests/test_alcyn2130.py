@@ -551,3 +551,98 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
             backorder_preparation.delivery_round_id, self.delivery_round_1
         )
         # XXXX kanban progress bar
+
+    def test_case_17B(self):
+        """Test case 17B
+
+        Tournée existe pour le client, état "fermé" avec déjà une livraison
+        pour ce client. Une autre tournée existe pour le client et est dans
+        l'état "ouvert". Le client passe une nouvelle commande.
+
+        La commande est insérée dans la 2e tournée qui est ouverte.
+        """
+        itinerary = self.env['round.itinerary'].create(
+            {
+                'name': 'Itinerary 17B',
+                'code': 'T17B',
+                'sequence': 22,
+                'partner_position_ids': [
+                    (0, 0, {'sequence': 10, 'partner_id': self.partner1.id})
+                ],
+            }
+        )
+        self.delivery_round_1.itinerary_ids = itinerary
+        # round is in draft and open
+        self.delivery_round_1.button_resetdraft()
+        # create sale order
+        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
+        # the pickings are automatically assigned to the delivery round
+        self.assertEqual(
+            so1.mapped('picking_ids.delivery_round_id'), self.delivery_round_1
+        )
+        # close delivery round 1
+        self.delivery_round_1.button_close()
+        # second delivery round, open, same itinerary
+        self.delivery_round_2 = self.env['round.instance'].create(
+            {
+                'template_id': self.delivery_template.id,
+                'date': '2017-01-02',
+                'itinerary_ids': [(4, itinerary.id, 0)],
+            }
+        )
+        self.delivery_round_2.button_resetdraft()
+        # create sale order
+        so2 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
+        # the pickings of so2 are automatically assigned to the delivery round 2
+        self.assertEqual(
+            so2.mapped('picking_ids.delivery_round_id'), self.delivery_round_2
+        )
+
+    def test_case_17C(self):
+        """Test case 17C
+
+        Tournée existe pour le client, état "fermé" avec déjà une livraison
+        pour ce client. Une autre tournée existe pour le client et est dans
+        l'état "ouvert". La préparation du client dans la 1ière tournée n'est
+        pas réalisée, la tournée est délivrée, la livraison est sortie de la
+        tournée.
+
+        La livraison est insérée dans la 2e tournée qui est ouverte.
+        """
+        itinerary = self.env['round.itinerary'].create(
+            {
+                'name': 'Itinerary 17C',
+                'code': 'T17C',
+                'sequence': 22,
+                'partner_position_ids': [
+                    (0, 0, {'sequence': 10, 'partner_id': self.partner1.id})
+                ],
+            }
+        )
+        self.delivery_round_1.itinerary_ids = itinerary
+        # round is in draft and open
+        self.delivery_round_1.button_resetdraft()
+        # create sale order
+        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
+        # the pickings are automatically assigned to the delivery round
+        self.assertEqual(
+            so1.mapped('picking_ids.delivery_round_id'), self.delivery_round_1
+        )
+        # close delivery round 1
+        self.delivery_round_1.button_close()
+        # second delivery round, open, same itinerary
+        self.delivery_round_2 = self.env['round.instance'].create(
+            {
+                'template_id': self.delivery_template.id,
+                'date': '2017-01-02',
+                'itinerary_ids': [(4, itinerary.id, 0)],
+            }
+        )
+        self.delivery_round_2.button_resetdraft()
+        # deliver round 1 without processing the pick of so1
+        self.delivery_round_1._deliver(background=False)
+        self.delivery_round_1.button_done()
+        # the pickings of so2 are automatically assigned to the delivery round 2
+        self.assertEqual(
+            so1.mapped('picking_ids.delivery_round_id'), self.delivery_round_2
+        )
