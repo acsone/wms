@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2424: allow salesmen to create orderpoints
+
 **Build**
 
 **Documentation**

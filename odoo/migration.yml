@@ -630,3 +630,4 @@ migration:
       addons:
         upgrade:
           - alcyon_credit_control
+          - specific_sale
