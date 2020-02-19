@@ -30,6 +30,7 @@ latest (unreleased)
 * ALCYN-2424: allow salesmen to create orderpoints
 * ALCYN-2431: Apply term translation
 * ALCYN-2432: Fix bug in payment listing for customer followup
+* ALCYN-2427: Remove impact on invoicing for consignment sale
 
 **Build**
 
