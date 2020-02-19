@@ -13,6 +13,7 @@ class TestRefillReport(TestDeliveryRound):
                 "kind": "bin",
             }
         )
+        cls.env['stock.location']._parent_store_compute()
         cls.p3 = cls.env['product.product'].create(
             {
                 'name': 'Unittest P3',
@@ -76,6 +77,7 @@ class TestRefillReport(TestDeliveryRound):
         preparation = self.so1.picking_ids.filtered(
             lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
         )
+        self.assertTrue(preparation.pack_operation_ids)
         pack_op = preparation.pack_operation_ids[0]
         pack_op.qty_done = 6.0
         wiz = self.env['stock.backorder.confirmation'].create(
