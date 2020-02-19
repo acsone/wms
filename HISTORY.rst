@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2416: Change date format on customer statements to DD/MM/YYYY
+* ALCYN-2432: Fix bug in payment listing for customer followup
 
 **Bugfixes**
 

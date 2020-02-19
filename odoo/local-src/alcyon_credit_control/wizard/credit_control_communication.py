@@ -41,6 +41,7 @@ class CreditCommunication(models.TransientModel):
                     [
                         ('partner_id', '=', comm.partner_id.id),
                         ('reconciled', '=', False),
+                        ('credit', '>', 0),
                         ('account_id.internal_type', 'in', ['receivable']),
                         (
                             'id',
