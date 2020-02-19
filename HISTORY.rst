@@ -28,6 +28,7 @@ latest (unreleased)
 
 * ALCYN-2423: fix a corner case of ALCYN-2341
 * ALCYN-2424: allow salesmen to create orderpoints
+* ALCYN-2431: Apply term translation
 
 **Build**
 

@@ -630,5 +630,6 @@ migration:
       addons:
         upgrade:
           - alcyon_credit_control
+          - delivery_rounds
           - delivery_rounds_refill
           - specific_sale

@@ -76,7 +76,7 @@ msgstr "Toutes les préparations d'une même livraison doivent se trouver dans l
 #. module: delivery_rounds
 #: selection:round.instance,state:0
 msgid "Anticipated"
-msgstr "Anticipated"
+msgstr "Anticipé"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -236,7 +236,7 @@ msgstr "Livraisons"
 #. module: delivery_rounds
 #: selection:round.instance,state:0
 msgid "Delivering"
-msgstr "Livrer"
+msgstr "En cours de Livraison"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_partner_form
@@ -268,7 +268,7 @@ msgstr "Tournée"
 #: code:addons/delivery_rounds/models/round_instance.py:760
 #, python-format
 msgid "Delivery Round %s is now completed"
-msgstr "La tournée %s est maintenant terminé"
+msgstr "La tournée %s est maintenant terminée"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_delivery_round_customer_id
@@ -309,7 +309,7 @@ msgstr "L'échec de livraison"
 #: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:63
 #, python-format
 msgid "Delivery round \"%s\" manually assigned"
-msgstr "Tournée \"%s\" attribué manuellement"
+msgstr "Tournée \"%s\" attribuée manuellement"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_instance.py:639
@@ -361,7 +361,7 @@ msgstr "Modifier"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Effective Customer"
-msgstr "Client efficace"
+msgstr "Client effectif"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
@@ -377,7 +377,7 @@ msgstr "Erreur lors de la livraison %s: %s"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.round_report_delivery
 msgid "Failed to deliver some shippings, you can retry manually from this view."
-msgstr "Échec de la livraison de certains envois, vous pouvez réessayer manuellement à partir de cette vue."
+msgstr "Certaines livraisons ont échoué, vous pouvez réessayer manuellement à partir de cette vue."
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -491,7 +491,7 @@ msgstr "Dernière mise à jour le"
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_available_round
 msgid "List of pickings attached to a delivery round."
-msgstr "Liste des préparations attachés à une tournée."
+msgstr "Liste des préparations attachées à une tournée."
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,help:delivery_rounds.action_picking_tree_noround
@@ -583,7 +583,7 @@ msgstr "Notes"
 #. module: delivery_rounds
 #: model:ir.model.fields,help:delivery_rounds.field_round_wizard_makeplan_tag_ids
 msgid "Only templates having one of the tags will be instanciated"
-msgstr "Seuls les modèles possédant l'une des balises seront instanciés"
+msgstr "Seuls les modèles possédant l'une des étiquettes seront instanciés"
 
 #. module: delivery_rounds
 #: selection:round.instance,state:0
@@ -628,13 +628,13 @@ msgstr "Téléphone"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_partner
 msgid "Picking Available Partner"
-msgstr "Nombre de destinations"
+msgstr "Total des destinations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_total
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_available_weight
 msgid "Picking Available Total"
-msgstr "Total de picking disponibles"
+msgstr "Total des préparations disponibles"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_count_picking_done_total
@@ -725,17 +725,17 @@ msgstr "Réserver le stock"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Anticipated"
-msgstr "Réinitialiser à Prévu"
+msgstr "Réinitialiser à Anticipé"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Draft"
-msgstr "Réinitialiser à Brouillon"
+msgstr "Réinitialiser à Ouvert"
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Reset to draft"
-msgstr "Réinitialiser à Brouillon"
+msgstr "Réinitialiser à Ouvert"
 
 #. module: delivery_rounds
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_picking
@@ -802,7 +802,7 @@ msgstr "Kilométrage au départ"
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Start/Stop pickings"
-msgstr "Démarrer / arrêter les prélèvements"
+msgstr "Démarrer / arrêter les préparations"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_state
@@ -971,7 +971,7 @@ msgstr "Poids"
 #: code:addons/delivery_rounds/models/round_instance.py:692
 #, python-format
 msgid "You cannot delete a delivery round having a started picking"
-msgstr "Vous ne pouvez pas supprimer tournée dont le prélèvement a commencé"
+msgstr "Vous ne pouvez pas supprimer une tournée dont la préparation a commencé"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_instance.py:698
