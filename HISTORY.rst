@@ -26,6 +26,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2423: fix a corner case of ALCYN-2341
+
 **Build**
 
 **Documentation**
