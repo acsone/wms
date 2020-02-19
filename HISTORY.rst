@@ -27,6 +27,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2423: fix a corner case of ALCYN-2341
+* ALCYN-2424: allow salesmen to create orderpoints
 
 **Build**
 

@@ -631,3 +631,4 @@ migration:
         upgrade:
           - alcyon_credit_control
           - delivery_rounds_refill
+          - specific_sale
