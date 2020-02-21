@@ -44,7 +44,6 @@ class PurchaseOrder(models.Model):
             parent_node, oline, oline.id, ns, version=version
         )
 
-    @api.multi
     def _generate_ubl_order_document(self):
         self.ensure_one()
         return self.generate_ubl_xml_string("order", version="2.2")

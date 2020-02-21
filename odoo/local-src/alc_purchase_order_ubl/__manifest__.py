@@ -10,9 +10,11 @@
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV',
     'website': 'https://acsone.eu/',
-    'depends': ['purchase', 'purchase_order_ubl', "report_xml"],
+    'depends': [
+        'purchase_order_ubl',
+        'report_xml',
+    ],
     'data': [
-        # 'views/purchase_order.xml',
         'report/report_xml_purchase_order_ubl.xml',
     ],
     'demo': [],
