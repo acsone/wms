@@ -17,6 +17,7 @@ class ReportStockOverview(models.Model):
     SELECT
       sq.product_id,
       sum(qty) FILTER (WHERE sl.kind='bin') as qty_in_bin,
+      sum(qty) FILTER (WHERE sl.kind='bin' and reservation_id is null) as qty_in_bin_available,
       sum(qty) FILTER (WHERE sl.kind='parking') as qty_in_parking,
       sum(qty) FILTER (WHERE sl.kind='reserve') as qty_in_reserve
     FROM stock_quant sq
@@ -24,53 +25,38 @@ class ReportStockOverview(models.Model):
     WHERE sl.kind IS NOT NULL
     GROUP BY product_id
   ),
-  deliveries_todo AS (
+  unreserved_pick_moves AS (
     SELECT
-      sm.id,
       sm.product_id,
-      sm.product_uom_qty,
-      (SELECT sum(q.qty) FROM stock_quant AS q WHERE q.reservation_id = sm.id) AS delivery_picked_qty,
+      CASE
+        WHEN state = 'confirmed' THEN sm.product_uom_qty
+        ELSE sm.product_uom_qty - (SELECT sum(qty) FROM stock_quant WHERE reservation_id=sm.id)
+      END AS missing_qty,
       sm.picking_id
     FROM stock_move sm
-    JOIN stock_location sl_src ON sm.location_id = sl_src.id
-    JOIN stock_location sl_dest ON sm.location_dest_id = sl_dest.id
+    JOIN stock_picking_type spt ON sm.picking_type_id=spt.id
     WHERE
-      sl_src.usage in ('view', 'internal')
-      AND sl_dest.usage = 'customer'
+      spt.subcode = 'PICK'
       AND sm.priority > '0'
-      AND sm.state not in ('cancel', 'done', 'draft')
+      AND sm.procure_method = 'make_to_stock'
+      AND (sm.state = 'confirmed' or (sm.state = 'assigned' and sm.partially_available))
   ),
-  pending_deliveries_reserved_by_product AS (
-    -- quantities reserved for pending delivery round instances
+  unreserved_pick_moves_byproduct AS (
     SELECT
       sm.product_id,
-      sum(quant.qty) as reserved_qty_pending
-    FROM stock_move sm
-    JOIN stock_picking  sp  ON (sm.picking_id = sp.id)
-    JOIN stock_picking_type spt ON (sp.picking_type_id = spt.id AND spt.code='internal')
-    JOIN round_instance ri ON (sp.delivery_round_id = ri.id)
-    JOIN stock_quant quant ON (quant.reservation_id = sm.id)
-    WHERE NOT ri.picking_launched
-    GROUP BY sm.product_id
-  ),
-  deliveries_todo_byproduct AS (
-    SELECT
-      sm.product_id,
-      sum(product_uom_qty) AS confirmed_qty,
-      count(product_uom_qty) AS confirmed_count,
-      MAX(COALESCE(p_deli.reserved_qty_pending, 0.)) AS pending_round_reserved_qty,
-      SUM(product_uom_qty - COALESCE(delivery_picked_qty, 0))
+      sum(missing_qty) AS confirmed_qty,
+      count(distinct partner_id) AS confirmed_count,
+      SUM(missing_qty)
         FILTER (WHERE ri.id IS NOT NULL) AS planned_qty,
-      count(product_uom_qty)
+      count(distinct partner_id)
         FILTER (WHERE ri.id IS NOT NULL) AS planned_count,
-      SUM(product_uom_qty - COALESCE(delivery_picked_qty, 0))
+      SUM(missing_qty)
         FILTER (WHERE ri.picking_launched) AS immediate_qty,
-      count(product_uom_qty)
+      count(distinct partner_id)
         FILTER (WHERE ri.picking_launched) AS immediate_count
-    FROM deliveries_todo sm
+    FROM unreserved_pick_moves sm
     LEFT JOIN stock_picking sp ON sm.picking_id = sp.id
     LEFT JOIN round_instance ri ON sp.delivery_round_id = ri.id
-    LEFT JOIN pending_deliveries_reserved_by_product p_deli ON (p_deli.product_id = sm.product_id)
     GROUP BY sm.product_id
   ),
   deliveries_last AS (
@@ -88,8 +74,9 @@ class ReportStockOverview(models.Model):
       sl_src.usage in ('view', 'internal')
       AND sl_dest.usage = 'customer'
       AND sm.priority > '0'
+      -- consider an horizon of 1 week, exclude today
       AND sm.date BETWEEN (NOW() - INTERVAL '7 DAY')::date
-                      AND (NOW() - INTERVAL '1 DAY')::date
+                      AND (NOW())::date
       AND sm.state = 'done'
     WINDOW pid AS (PARTITION BY sm.product_id)
   ),
@@ -108,11 +95,11 @@ class ReportStockOverview(models.Model):
   )
   SELECT product_id AS id, *,
   CASE
-    WHEN coalesce(qty_in_bin, 0)  < immediate_qty + coalesce(pending_round_reserved_qty, 0)
-        THEN 6000 + LEAST(999, immediate_count)
-    WHEN coalesce(qty_in_bin, 0) < planned_qty
-        THEN 5000 + LEAST(999, planned_count)
-    WHEN coalesce(qty_in_bin, 0) < confirmed_qty
+    WHEN coalesce(qty_in_bin_available, 0) < immediate_qty
+        THEN 6000 + LEAST(999, confirmed_count)
+    WHEN coalesce(qty_in_bin_available, 0) < planned_qty
+        THEN 5000 + LEAST(999, confirmed_count)
+    WHEN coalesce(qty_in_bin_available, 0) < confirmed_qty
         THEN 1000 + LEAST(999, confirmed_count)
     -- Days to cover = 2
     WHEN coalesce(qty_in_bin, 0) < average_qty*2
@@ -120,11 +107,11 @@ class ReportStockOverview(models.Model):
     ELSE 0
   END AS refill_priority_reassort,
   CASE
-    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < immediate_qty + coalesce(pending_round_reserved_qty, 0)
+    WHEN coalesce(qty_in_bin_available, 0) + coalesce(qty_in_reserve, 0) < immediate_qty
         THEN 6000 + LEAST(999, immediate_count)
-    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < planned_qty
+    WHEN coalesce(qty_in_bin_available, 0) + coalesce(qty_in_reserve, 0) < planned_qty
         THEN 5000 + LEAST(999, planned_count)
-    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < confirmed_qty
+    WHEN coalesce(qty_in_bin_available, 0) + coalesce(qty_in_reserve, 0) < confirmed_qty
         THEN 1000 + LEAST(999, confirmed_count)
     -- Days to cover = 2
     WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < average_qty*2
@@ -132,7 +119,7 @@ class ReportStockOverview(models.Model):
     ELSE 0
   END AS refill_priority_arrange
   FROM stock_bykind
-  FULL OUTER JOIN deliveries_todo_byproduct USING (product_id)
+  FULL OUTER JOIN unreserved_pick_moves_byproduct USING (product_id)
   FULL OUTER JOIN deliveries_last_byproduct USING (product_id)
         """
         self.env.cr.execute(
@@ -142,22 +129,44 @@ class ReportStockOverview(models.Model):
     product_id = fields.Many2one('product.product', 'Product')
 
     qty_in_bin = fields.Float('Quantity in bin')
+    qty_in_bin_available = fields.Float('Quantity available in bin')
     qty_in_parking = fields.Float('Quantity in parking')
     qty_in_reserve = fields.Float('Quantity in reserve')
 
-    confirmed_qty = fields.Integer('Confirmed outgoing qty')
-    confirmed_count = fields.Integer('Confirmed outgoing count')
-    planned_qty = fields.Integer('Planned outgoing qty')
-    planned_count = fields.Integer('Planned outgoing count')
-    immediate_qty = fields.Integer('Immediate outgoing qty')
-    pending_round_reserved_qty = fields.Integer(
-        'Reserved qty in bin',
-        help="Quantity in bin, reserved for delivery rounds which "
-        "are not started",
+    confirmed_qty = fields.Integer(
+        "Quantity to pick", help="Remaining quantity to pick"
     )
-    immediate_count = fields.Integer('Immediate outgoing count')
-    average_qty = fields.Integer('Average outgoing qty')
-    average_count = fields.Integer('Average outgoing count')
+    confirmed_count = fields.Integer(
+        "Customers to pick",
+        help="Amount of customers having a remaining quantity to pick",
+    )
+    planned_qty = fields.Integer(
+        "Planned quantity to pick",
+        help="Remaining quantity to pick in a planned delivery round",
+    )
+    planned_count = fields.Integer(
+        "Planned customers to pick",
+        help="Amount of customers having a remaining quantity to pick"
+        " in a planned delivery round",
+    )
+    immediate_qty = fields.Integer(
+        "Immediate quantity to pick",
+        help="Remaining quantity to pick in a stared delivery round",
+    )
+    immediate_count = fields.Integer(
+        "Immediate customers to pick",
+        help="Amount of customers having a remaining quantity to pick"
+        " in a started delivery round",
+    )
+
+    average_qty = fields.Integer(
+        'Average daily usage',
+        help="Computed with an horizon of 1 week assuming 5 working days",
+    )
+    average_count = fields.Integer(
+        'Average daily customer',
+        help="Computed with an horizon of 1 week assuming 5 working days",
+    )
 
     refill_priority_arrange = fields.Integer('Arrangement Priority')
     refill_priority_reassort = fields.Integer('Reassortment Priority')
