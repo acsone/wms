@@ -643,3 +643,14 @@ migration:
         upgrade:
           - delivery_rounds_refill
     - version: 10.0.1.48.3
+    - version: 10.0.1.49.0
+      operations:
+        pre:
+          - psql -f odoo/songs/upgrade/update_10_0_1_49_0.sql
+        post:
+          - anthem songs.upgrade.update_10_0_1_49_0::post
+      addons:
+        upgrade:
+          - account_tax_one_vat
+          - specific_data
+          - stock_delivery_note

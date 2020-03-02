@@ -7,6 +7,7 @@
     'license': 'AGPL-3',
     'category': 'Stock',
     'depends': [
+        'specific_data',
         'specific_sale',
         'stock',
         'specific_stock',
@@ -15,7 +16,6 @@
     ],
     'data': [
         'data/email_template.xml',
-        'data/account_tax_group.xml',
         'views/stock_picking.xml',
         'views/stock_move.xml',
     ],

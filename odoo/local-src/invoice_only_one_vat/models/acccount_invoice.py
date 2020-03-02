@@ -11,7 +11,7 @@ class AccountInvoiceLine(models.Model):
     @api.onchange('invoice_line_tax_ids')
     def _onchange_invoice_line_tax_ids(self):
         """Warning if multiple VAT taxes are selected."""
-        vat_group = self.env.ref('stock_delivery_note.vat_tax_group')
+        vat_group = self.env.ref('specific_data.vat_tax_group')
         vat_taxes = self.invoice_line_tax_ids.filtered(
             lambda r: r.tax_group_id == vat_group
         )

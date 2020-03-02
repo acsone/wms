@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2420: Do not allow multiple tax of type VAT in sale, purchase and on product.
+
 **Bugfixes**
 
 **Build**
