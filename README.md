@@ -23,8 +23,50 @@ Please keep this project up-to-date by:
 * ensure the `FROM` image in `odoo/Dockerfile` is the latest release
 * run regularly `invoke project.sync` to retrieve the last template's changes
 
-## Links
+## Development environment howto (with pip)
 
+### Initialize virtualenv
+
+Create and activate virtualenv, possibly with virtualenvwrapper's
+`mkvirtualenv odoo-alcyon -a . --python=$(which python3)`
+
+If you plan to pip install git reference without `-e` you must also upgrade pip with 
+
+```bash
+pip install -U git+https://github.com/pypa/pip@refs/pull/7612/head
+``` 
+
+ (this is only necessary for `pip freeze` to work with git references without `-e, the caching part is already in pip 20.0).
+
+### Install everything
+
+```bash
+cd setup
+pip install -r requirements.txt -e .
+```
+
+### Run
+
+```bash
+odoo
+```
+
+### Develop
+
+This project uses [black](https://github.com/psf/black) as code formatting convention.
+To make sure local coding convention are respected before you commit, install
+[pre-commit](https://github.com/pre-commit/pre-commit) and run `pre-commit install`
+after cloning the repository.
+
+### Release
+
+#### To release manually
+
+* update version in `./acsoo.cfg`
+* commit everything
+* into the setup directory run `pip wheel -r requirements.txt -e . --wheel-dir=./release`
+
+## Links
 * [General documentation](./docs/README.md)
 * [Local documentation](./docs/README.local.md)
 * [Changelog](HISTORY.rst).
