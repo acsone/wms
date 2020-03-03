@@ -23,12 +23,18 @@ latest (unreleased)
 
 **Bugfixes**
 
-* NO CARD: fix reassort and rearrangement views
-* ALCYN-2437: handle some ALCYN-2130 edge cases
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.48.2 (2020-03-03)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* NO CARD: fix reassort and rearrangement views
+* ALCYN-2437: handle some ALCYN-2130 edge cases
 
 
 10.0.1.48.1 (2020-02-20)
