@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * NO CARD: fix reassort and rearrangement views
+* ALCYN-2437: handle some ALCYN-2130 edge cases
 
 **Build**
 

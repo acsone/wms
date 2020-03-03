@@ -13,7 +13,7 @@ class StockProductionLot(models.Model):
 
     qty_available = fields.Float(
         compute="_compute_qty_available",
-        digits_compute=dp.get_precision("Product Unit of Measure"),
+        digits=dp.get_precision("Product Unit of Measure"),
         string="Quantity on hand",
     )
 
