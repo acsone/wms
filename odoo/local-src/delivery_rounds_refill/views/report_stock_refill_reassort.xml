@@ -24,10 +24,10 @@
                 <field name="location_id"/>
                 <field name="reservation_id"/>
                 <field name="qty_in_bin"/>
+                <field name="qty_in_bin_available"/>
                 <field name="qty_in_reserve"/>
                 <field name="qty_in_parking"/>
                 <field name="immediate_qty"/>
-                <field name="pending_round_reserved_qty"/>
                 <field name="planned_qty"/>
                 <field name="confirmed_qty"/>
             </tree>
