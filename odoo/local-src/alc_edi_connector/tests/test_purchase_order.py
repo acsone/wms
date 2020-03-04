@@ -1,0 +1,79 @@
+# -*- coding: utf-8 -*-
+# Copyright 2020 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo.exceptions import UserError
+
+from .common import AlcEdiConnectorCase
+
+
+class TestPurchaseOrder(AlcEdiConnectorCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestPurchaseOrder, cls).setUpClass()
+        cls.draft_purchase_order = cls.purchase_order.copy()
+
+    def test_00(self):
+        """
+        Data:
+            A supplier using the edi connector
+            A purchase order that can sent via edi-UBL
+        Test case:
+            send the ubl document
+        Expected result:
+            the method to write on the ftp is called with the generated
+            document,
+            The sent file is saved as attachment
+        """
+        attachments = self._get_attachments(self.purchase_order)
+        self.assertTrue(self.purchase_order.can_send_ubl_document)
+        self.assertEqual(self.mocked_connector_write_file.call_count, 0)
+        self.purchase_order.send_ubl_order_document()
+        self.assertEqual(self.mocked_connector_write_file.call_count, 1)
+        attachments = self._get_attachments(self.purchase_order) - attachments
+        self.assertTrue(attachments)
+        self.assertTrue(attachments.name.startswith("UblOrderDocument"))
+
+    def test_01(self):
+        """
+        Data:
+            A supplier not using the edi connector
+            A purchase order approved
+        Test case:
+            can_send_ubl_document
+            send the ubl document
+        Expected result:
+            can_send_ubl_document is False
+            a UserError is sent
+        """
+        self.assertTrue(self.purchase_order.partner_id.use_edi_connector)
+        self.assertTrue(self.purchase_order.state, "approved")
+        self.assertTrue(self.purchase_order.can_send_ubl_document)
+        self.purchase_order.partner_id.use_edi_connector = False
+        self.assertFalse(self.purchase_order.can_send_ubl_document)
+        with self.assertRaises(UserError):
+            self.purchase_order.send_ubl_order_document()
+        self.purchase_order.partner_id.use_edi_connector = True
+        self.assertTrue(self.purchase_order.can_send_ubl_document)
+        self.purchase_order.send_ubl_order_document()
+
+    def test_02(self):
+        """
+        Data:
+            A supplier using the edi connector
+            A draft purchase
+        Test case:
+            can_send_ubl_document
+            send the ubl document
+        Expected result:
+            can_send_ubl_document is False
+            a UserError is sent
+        """
+        self.assertTrue(self.draft_purchase_order.partner_id.use_edi_connector)
+        self.assertTrue(self.draft_purchase_order.state, "draft")
+        self.assertFalse(self.draft_purchase_order.can_send_ubl_document)
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            self.draft_purchase_order.send_ubl_order_document()
+        self.draft_purchase_order.button_approve()
+        self.assertTrue(self.draft_purchase_order.can_send_ubl_document)
+        self.draft_purchase_order.send_ubl_order_document()

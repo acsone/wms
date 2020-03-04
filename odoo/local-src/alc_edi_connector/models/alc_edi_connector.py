@@ -86,6 +86,17 @@ class AlcEdiConnector(models.Model):
 
         raise UserError(_('Everything seems ok'))
 
+    def _write_file(self, content, filename, path=None):
+        self.ensure_one()
+        path = path or self.path_write
+        tmp_filename = filename + ".tmp"
+        filepath = os.path.join(path, filename)
+        tmp_filepath = os.path.join(path, tmp_filename)
+        with self.open_sftp() as sftp:
+            with sftp.open(tmp_filepath, "w") as f:
+                f.write(content)
+            sftp.rename(tmp_filepath, filepath)
+
     def send_order_document(self, purchase_order):
         self.ensure_one()
         xml_content = purchase_order.generate_ubl_xml_string(
@@ -94,13 +105,7 @@ class AlcEdiConnector(models.Model):
         filename = "{po_id}_{dt}.xml".format(
             po_id=purchase_order.id, dt=fields.Datetime.now()
         )
-        tmp_filename = filename + ".tmp"
-        filepath = os.path.join(self.path_write, filename)
-        tmp_filepath = os.path.join(self.path_write, tmp_filename)
-        with self.open_sftp() as sftp:
-            with sftp.open(tmp_filepath, "w") as f:
-                f.write(xml_content)
-            sftp.rename(tmp_filepath, filepath)
+        self._write_file(xml_content, filename)
         attachment_name = (
             "UblOrderDocument_%s.xml"
             % fields.Datetime.to_string(

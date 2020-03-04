@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     use_edi_connector = fields.Boolean()
 
     @api.constrains("use_edi_connector", "alc_edi_connector_id")
-    def check_edit_connector(self):
+    def _check_edi_connector(self):
         for rec in self:
             if rec.use_edi_connector and not rec.alc_edi_connector_id:
                 raise ValidationError(_("An EDI connector is required."))
