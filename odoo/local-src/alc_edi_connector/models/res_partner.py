@@ -10,15 +10,15 @@ class ResPartner(models.Model):
 
     _inherit = 'res.partner'
 
-    alc_edi_connector_id = fields.Many2one(
-        comodel_name="alc.edi.connector", string="Edi connector"
+    edi_backend_id = fields.Many2one(
+        comodel_name="edi.backend", string="Edi connector"
     )
     use_edi_connector = fields.Boolean()
 
-    @api.constrains("use_edi_connector", "alc_edi_connector_id")
+    @api.constrains("use_edi_connector", "edi_backend_id")
     def _check_edi_connector(self):
         for rec in self:
-            if rec.use_edi_connector and not rec.alc_edi_connector_id:
+            if rec.use_edi_connector and not rec.edi_backend_id:
                 raise ValidationError(_("An EDI connector is required."))
 
     def check_is_edi_supported(self):

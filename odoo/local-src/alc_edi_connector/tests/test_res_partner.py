@@ -18,7 +18,7 @@ class TestResPartner(AlcEdiConnectorCase):
             ValidationError is raised
         """
         self.assertFalse(self.supplier_no_edi.use_edi_connector)
-        self.assertFalse(self.supplier_no_edi.alc_edi_connector_id)
+        self.assertFalse(self.supplier_no_edi.edi_backend_id)
         with self.assertRaises(ValidationError):
             self.supplier_no_edi.use_edi_connector = True
 
@@ -32,6 +32,6 @@ class TestResPartner(AlcEdiConnectorCase):
             ValidationError is raised
         """
         self.assertTrue(self.supplier.use_edi_connector)
-        self.assertTrue(self.supplier.alc_edi_connector_id)
+        self.assertTrue(self.supplier.edi_backend_id)
         with self.assertRaises(ValidationError):
-            self.supplier.alc_edi_connector_id = False
+            self.supplier.edi_backend_id = False

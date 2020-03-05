@@ -39,4 +39,4 @@ class PurchaseOrder(models.Model):
     def send_ubl_order_document(self):
         for rec in self:
             rec.check_can_send_ubl_document()
-            rec.partner_id.alc_edi_connector_id.send_order_document(rec)
+            rec.partner_id.edi_backend_id.send_order_document(rec)

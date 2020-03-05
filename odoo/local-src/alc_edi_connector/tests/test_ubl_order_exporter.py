@@ -7,10 +7,10 @@ from odoo.exceptions import UserError
 from .common import AlcEdiConnectorCase
 
 
-class TestPurchaseOrder(AlcEdiConnectorCase):
+class TestUblOrderExporter(AlcEdiConnectorCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPurchaseOrder, cls).setUpClass()
+        super(TestUblOrderExporter, cls).setUpClass()
         cls.draft_purchase_order = cls.purchase_order.copy()
 
     def test_00(self):
@@ -27,9 +27,9 @@ class TestPurchaseOrder(AlcEdiConnectorCase):
         """
         attachments = self._get_attachments(self.purchase_order)
         self.assertTrue(self.purchase_order.can_send_ubl_document)
-        self.assertEqual(self.mocked_connector_write_file.call_count, 0)
+        self.assertEqual(self.mocked_sftp_push.call_count, 0)
         self.purchase_order.send_ubl_order_document()
-        self.assertEqual(self.mocked_connector_write_file.call_count, 1)
+        self.assertEqual(self.mocked_sftp_push.call_count, 1)
         attachments = self._get_attachments(self.purchase_order) - attachments
         self.assertTrue(attachments)
         self.assertTrue(attachments.name.startswith("UblOrderDocument"))
