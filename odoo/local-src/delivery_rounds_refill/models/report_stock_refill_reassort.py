@@ -41,22 +41,44 @@ class ReportStockRefillReassort(models.Model):
     reservation_id = fields.Many2one('stock.move', 'Reservation')
 
     qty_in_bin = fields.Float('Quantity in bin')
+    qty_in_bin_available = fields.Float('Quantity available in bin')
     qty_in_parking = fields.Float('Quantity in parking')
     qty_in_reserve = fields.Float('Quantity in reserve')
 
-    confirmed_qty = fields.Integer('Confirmed outgoing qty')
-    confirmed_count = fields.Integer('Confirmed outgoing count')
-    planned_qty = fields.Integer('Planned outgoing qty')
-    planned_count = fields.Integer('Planned outgoing count')
-    immediate_qty = fields.Integer('Immediate outgoing qty')
-    pending_round_reserved_qty = fields.Integer(
-        'Reserved qty in bin',
-        help="Quantity in bin, reserved for delivery rounds which "
-        "are not started",
+    confirmed_qty = fields.Integer(
+        "Quantity to pick", help="Remaining quantity to pick"
     )
-    immediate_count = fields.Integer('Immediate outgoing count')
-    average_qty = fields.Integer('Average outgoing qty')
-    average_count = fields.Integer('Average outgoing count')
+    confirmed_count = fields.Integer(
+        "Customers to pick",
+        help="Amount of customers having a remaining quantity to pick",
+    )
+    planned_qty = fields.Integer(
+        "Planned quantity to pick",
+        help="Remaining quantity to pick in a planned delivery round",
+    )
+    planned_count = fields.Integer(
+        "Planned customers to pick",
+        help="Amount of customers having a remaining quantity to pick"
+        " in a planned delivery round",
+    )
+    immediate_qty = fields.Integer(
+        "Immediate quantity to pick",
+        help="Remaining quantity to pick in a stared delivery round",
+    )
+    immediate_count = fields.Integer(
+        "Immediate customers to pick",
+        help="Amount of customers having a remaining quantity to pick"
+        " in a started delivery round",
+    )
+
+    average_qty = fields.Integer(
+        'Average daily usage',
+        help="Computed with an horizon of 1 week assuming 5 working days",
+    )
+    average_count = fields.Integer(
+        'Average daily customer',
+        help="Computed with an horizon of 1 week assuming 5 working days",
+    )
 
     refill_priority_reassort = fields.Integer('Reassortment Priority')
 

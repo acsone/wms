@@ -21,6 +21,27 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.48.2 (2020-03-03)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* NO CARD: fix reassort and rearrangement views
+* ALCYN-2437: handle some ALCYN-2130 edge cases
+
+
+10.0.1.48.1 (2020-02-20)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2416: Change date format on customer statements to DD/MM/YYYY
 * ALCYN-2419: handle some new edge cases of ALCYN-2130
 
@@ -31,10 +52,6 @@ latest (unreleased)
 * ALCYN-2431: Apply term translation
 * ALCYN-2432: Fix bug in payment listing for customer followup
 * ALCYN-2427: Remove impact on invoicing for consignment sale
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.48.0 (2020-02-06)

@@ -638,3 +638,7 @@ migration:
       operations:
         post:
           - anthem songs.upgrade.update_10_0_1_48_0::recompute_delivered_qty
+    - version: 10.0.1.48.2
+      addons:
+        upgrade:
+          - delivery_rounds_refill

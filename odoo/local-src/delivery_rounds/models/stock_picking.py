@@ -178,6 +178,17 @@ class StockPicking(models.Model):
                 ]
             )
             if pending_moves:
+                # first unreserve the picking, otherwise we get issues in the
+                # cases were pack ops are linked to the moves which are going
+                # to be moved to a new picking.
+                picking.do_unreserve()
+                # this can remove moves (cf. product_additional) -> re-read
+                pending_moves = self.env['stock.move'].search(
+                    [
+                        ('picking_id', '=', picking.id),
+                        ('state', 'not in', ('cancel', 'done')),
+                    ]
+                )
                 pending_moves.with_context(
                     # set no_round_assign to force reassigning the moves to a
                     # picking which is not in the same round as the picking we

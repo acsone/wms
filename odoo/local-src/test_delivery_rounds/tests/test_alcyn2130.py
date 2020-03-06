@@ -606,12 +606,21 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
 
         Tournée existe pour le client, état "fermé" avec déjà une livraison
         pour ce client. Une autre tournée existe pour le client et est dans
-        l'état "ouvert". La préparation du client dans la 1ière tournée n'est
+        l'état "ouvert". La préparation du client dans la 1ère tournée n'est
         pas réalisée, la tournée est délivrée, la livraison est sortie de la
-        tournée.
+        tournée. Pour compliquer un peu, on considère que le produit p2 est un
+        produit additionnel accessoire 1 offert pour un vendu.
 
         La livraison est insérée dans la 2e tournée qui est ouverte.
+
         """
+        self.p1.write(
+            {
+                'additional_product_id': self.p2.id,
+                'ratio_additional_product': 1,
+                'ratio_main_product': 1,
+            }
+        )
         itinerary = self.env['round.itinerary'].create(
             {
                 'name': 'Itinerary 17C',
@@ -627,6 +636,9 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         self.delivery_round_1.button_resetdraft()
         # create sale order
         so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
+        self.assertEqual(
+            so1.mapped('picking_ids.move_lines.product_id'), self.p1 | self.p2
+        )
         # the pickings are automatically assigned to the delivery round
         self.assertEqual(
             so1.mapped('picking_ids.delivery_round_id'), self.delivery_round_1
@@ -643,7 +655,9 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         )
         self.delivery_round_2.button_resetdraft()
         # deliver round 1 without processing the pick of so1
-        self.delivery_round_1._deliver(background=False)
+        self.delivery_round_1.with_context(
+            test_queue_job_no_delay=1
+        ).button_deliver()
         self.delivery_round_1.button_done()
         # the pickings of so2 are automatically assigned to the delivery round 2
         self.assertEqual(
