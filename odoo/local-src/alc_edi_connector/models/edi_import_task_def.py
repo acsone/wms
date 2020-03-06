@@ -20,7 +20,6 @@ class EdiImportTaskDef(models.Model):
             ("ubl.order.response.importer", "Import UBL Order Response")
         ],
         string='Kind of EDI document',
-        readonly=True,
     )
 
     path = fields.Char(

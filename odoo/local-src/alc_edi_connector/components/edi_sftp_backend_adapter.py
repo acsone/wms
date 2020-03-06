@@ -44,7 +44,7 @@ class EdiSftpBackendAdapter(Component):
 
     def _get_paramiko_kwarqs(self):
         pk_env_variable = self.backend_record.pk_env_variable
-        if not pk_env_variable or not self.backend_record.password:
+        if not pk_env_variable and not self.backend_record.password:
             raise ConnectorException(
                 _(
                     'Please set the private key environment variable '
@@ -62,7 +62,7 @@ class EdiSftpBackendAdapter(Component):
                 StringIO(private_key.decode('utf8'))
             )
         return dict(
-            hostanme=self.backend_record.hostname,
+            hostname=self.backend_record.hostname,
             port=self.backend_record.port,
             username=self.backend_record.username,
             password=self.backend_record.password,

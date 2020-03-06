@@ -20,7 +20,6 @@ class EdiExportTaskDef(models.Model):
     kind = fields.Selection(
         selection=[("ubl.order.exporter", "Export UBL Order document")],
         string='Kind of EDI document',
-        readonly=True,
     )
 
     path = fields.Char(

@@ -53,7 +53,7 @@ class EdiBackend(models.Model):
     @api.multi
     def test_connection(self):
         self.ensure_one()
-        backend_adapter_usage = "{}.backend.adapter".format(self.type)
+        backend_adapter_usage = "{}.backend.adapter".format(self.channel)
         with self.work_on("edi.backend") as work:
             backend_adapter = work.component(usage=backend_adapter_usage)
             backend_adapter.test_connection()
