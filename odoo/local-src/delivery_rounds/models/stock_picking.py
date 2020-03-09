@@ -199,6 +199,22 @@ class StockPicking(models.Model):
         self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
             {'delivery_round_customer_id': False}
         )
+        pending_moves = self.env['stock.move'].search(
+            [
+                ('picking_id', 'in', self.ids),
+                ('state', 'not in', ('cancel', 'done')),
+            ]
+        )
+        if pending_moves:
+            pending_moves.write({'picking_id': False})
+
+            # We could get empty pickings here if all the moves are pending and
+            # therefore removed. But removing them could pose issues
+            # elsewhere. So for now I prefer leaving them, as this should be rare.
+            #
+            # self.filtered(lambda r: not r.move_lines).unlink()
+
+            pending_moves.assign_picking()
 
     @api.multi
     def button_delivery_round(self):

@@ -120,10 +120,7 @@ class StockMove(models.Model):
         domain = super(StockMove, self)._assign_picking_group_domain()
         orig_picking = self.move_orig_ids.mapped('picking_id')
         no_round_assign = self._context.get('no_round_assign', False)
-
-        if orig_picking and (
-            no_round_assign or not orig_picking.mapped('delivery_round_id')
-        ):
+        if orig_picking and not orig_picking.mapped('delivery_round_id'):
             domain += [
                 '|',
                 ('delivery_round_id', '=', False),
