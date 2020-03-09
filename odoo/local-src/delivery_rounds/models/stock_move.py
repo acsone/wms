@@ -53,6 +53,7 @@ class StockMove(models.Model):
             return super(StockMove, self).action_assign(no_prepare=no_prepare)
 
         pick_moves = self._action_assign_filter_moves()
+
         for picking in pick_moves.mapped('picking_id'):
             if self.env.context.get('round_backorder'):
                 # Do not assign a backorder
@@ -119,7 +120,7 @@ class StockMove(models.Model):
         domain = super(StockMove, self)._assign_picking_group_domain()
         orig_picking = self.move_orig_ids.mapped('picking_id')
         no_round_assign = self._context.get('no_round_assign', False)
-        round_assign = not no_round_assign
+
         if orig_picking and (
             no_round_assign or not orig_picking.mapped('delivery_round_id')
         ):
@@ -138,7 +139,7 @@ class StockMove(models.Model):
             ]
         elif (
             not orig_picking
-            and round_assign
+            and not no_round_assign
             and self._context.get('backorder_assign')
         ):
             back_order_id = self._context['backorder_assign']
@@ -162,7 +163,6 @@ class StockMove(models.Model):
     def assign_picking(self):
         res = super(StockMove, self).assign_picking()
         bo_assign = self._context.get('backorder_assign', False)
-        detaching_from_round = self._context.get('detaching_from_round')
         if bo_assign:
             bo_assign = self.env['stock.picking'].browse(bo_assign)
         else:
@@ -172,18 +172,9 @@ class StockMove(models.Model):
         # lands in the same delivery round as the original picking, and 2. run
         # a job to check the availability of the picking's moves so that if a
         # replenishment has occured, the moves are available. (See ALCYN-2130)
-        if bo_assign.delivery_round_id and not detaching_from_round:
+        if bo_assign.delivery_round_id:
             bo_assign.delivery_round_id._assign_pickings(
                 self.mapped('picking_id')
             )
             self.mapped('picking_id')._job_action_assign()
-        elif detaching_from_round:
-            for picking in self.mapped('picking_id'):
-                if not picking.delivery_round_id:
-                    round = self.env['round.instance'].find_bypartner(
-                        picking.partner_id
-                    )
-                    if round:
-                        round._assign_pickings(picking)
-
         return res

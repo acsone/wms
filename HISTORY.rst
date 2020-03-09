@@ -24,6 +24,7 @@ latest (unreleased)
 **Reverts**
 
 * ALCYN-2437: handle some ALCYN-2130 edge cases
+* ALCYN-2416: Change date format on customer statements to DD/MM/YYYY
 
 **Bugfixes**
 

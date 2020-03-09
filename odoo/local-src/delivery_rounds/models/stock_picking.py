@@ -25,8 +25,7 @@ class StockPicking(models.Model):
     def create(self, values):
         res = super(StockPicking, self).create(values)
         backorder_id = self._context.get('backorder_assign')
-        round_assign = not self._context.get('no_round_assign', False)
-        if backorder_id and round_assign:
+        if backorder_id:
             # backorder and self may have different environment, because some
             # jobs are creating new cursors -> browse with the current environment.
             backorder = self.env['stock.picking'].browse(backorder_id)
@@ -37,6 +36,7 @@ class StockPicking(models.Model):
             res.with_context(
                 round_assigned=True
             ).delivery_round_customer_id = delivery_round_customer.id
+
         return res
 
     def _compute_partner_itinerary_ids(self):
@@ -186,8 +186,6 @@ class StockPicking(models.Model):
                     # set backorder_assign so that a message will be generated
                     # on picking to say where the backorder was placed.
                     backorder_assign=picking.id,
-                    # detaching_from_round to assign possible newly created picking to a round
-                    detaching_from_round=True,
                 ).assign_picking()
 
                 # make sure that empty pickings are "printed" so that their
