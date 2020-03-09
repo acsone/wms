@@ -17,6 +17,7 @@ from odoo.addons.connector.exception import ConnectorException
 _logger = logging.getLogger(__name__)
 
 SFTP_TIMEOUT = 30
+BANNER_TIMEOUT = 200
 
 
 @contextmanager
@@ -69,6 +70,7 @@ class EdiSftpBackendAdapter(Component):
             pkey=pkey,
             look_for_keys=False,
             timeout=SFTP_TIMEOUT,
+            banner_timeout=BANNER_TIMEOUT,
         )
 
     @contextmanager
