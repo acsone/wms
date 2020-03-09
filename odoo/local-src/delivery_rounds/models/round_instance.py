@@ -644,10 +644,10 @@ class RoundInstance(models.Model):
         self.env.user.notify_info(
             _('Delivery round will be delivered in background.')
         )
-        self.write({'state': 'delivering'})
         self.filtered(lambda ri: ri.state != 'done').mapped(
             'instance_customer_ids'
         ).filtered(lambda c: not c.delivered)._deliver(background=background)
+        self.write({'state': 'delivering'})
         self.recheck_delivery_state()
 
     @api.multi

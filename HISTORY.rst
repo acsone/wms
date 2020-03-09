@@ -19,13 +19,11 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
-**Features and Improvements**
+**ALCYN-2440: reverts**
 
-**Bugfixes**
-
-**Build**
-
-**Documentation**
+* ALCYN-2437: handle some ALCYN-2130 edge cases
+* ALCYN-2419: handle some new edge cases of ALCYN-2130
+* ALCYN-2405: fix issues with ALCYN-2130
 
 
 10.0.1.48.2 (2020-03-03)
