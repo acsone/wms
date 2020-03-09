@@ -19,6 +19,18 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
+**Features and Improvements**
+
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.48.3 (2020-03-09)
+++++++++++++++++++++++++
+
 **ALCYN-2440: reverts**
 
 * ALCYN-2437: handle some ALCYN-2130 edge cases
