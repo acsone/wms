@@ -167,17 +167,23 @@ class StockMove(models.Model):
             bo_assign = self.env['stock.picking'].browse(bo_assign)
         else:
             bo_assign = self.env['stock.picking']
-        pickings = self.mapped('picking_id')
         # if we are assigning the move to a picking in the context of the
         # creation of a backorder, then make sure that 1. the backorder picking
         # lands in the same delivery round as the original picking, and 2. run
         # a job to check the availability of the picking's moves so that if a
         # replenishment has occured, the moves are available. (See ALCYN-2130)
         if bo_assign.delivery_round_id and not detaching_from_round:
-            bo_assign.delivery_round_id._assign_pickings(pickings)
-            pickings._job_action_assign()
+            bo_assign.delivery_round_id._assign_pickings(
+                self.mapped('picking_id')
+            )
+            self.mapped('picking_id')._job_action_assign()
         elif detaching_from_round:
-            # call action_assign on the picking to find a delivery round by
-            # partner or by carrier
-            pickings._job_action_assign()
+            for picking in self.mapped('picking_id'):
+                if not picking.delivery_round_id:
+                    round = self.env['round.instance'].find_bypartner(
+                        picking.partner_id
+                    )
+                    if round:
+                        round._assign_pickings(picking)
+
         return res

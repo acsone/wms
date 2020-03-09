@@ -261,6 +261,10 @@ class StockMove(models.Model):
                         move.do_unreserve()
                     break
             else:
+                # First remove the link between the move and the pack
+                # operations that could exist, as these would be related to the
+                # previous picking
+                move.linked_move_operation_ids.unlink()
                 # create a new picking
                 _logger.debug("Assign move %s to new picking", move.id)
                 values = move._get_new_picking_values()

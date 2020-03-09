@@ -21,6 +21,10 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Reverts**
+
+* ALCYN-2437: handle some ALCYN-2130 edge cases
+
 **Bugfixes**
 
 **Build**
