@@ -19,7 +19,7 @@ Release History
 latest (unreleased)
 +++++++++++++++++++
 
-**Reverts**
+**ALCYN-2440: reverts**
 
 * ALCYN-2437: handle some ALCYN-2130 edge cases
 * ALCYN-2419: handle some new edge cases of ALCYN-2130
