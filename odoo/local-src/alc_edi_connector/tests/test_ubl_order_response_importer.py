@@ -74,12 +74,13 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
         self.import_task_def.execute()
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 1)
+        attachment = self._get_attachments(queue_job)
         job = Job.load(self.env, queue_job.uuid)
         with mock.patch.object(
-            self.OrderResponseImport.__class__, "process_content"
+            self.OrderResponseImport.__class__, "process_attachment"
         ) as patched_process_content:
             job.perform()
             self.assertEqual(patched_process_content.call_count, 1)
             self.assertEqual(
-                patched_process_content.call_args[0], ('content1', 'PO1.xml')
+                patched_process_content.call_args[0], (attachment,)
             )

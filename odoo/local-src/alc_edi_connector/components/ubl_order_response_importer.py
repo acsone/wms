@@ -24,16 +24,17 @@ class UblOrderResponseImporter(Component):
                 filename,
                 self.backend_record.name,
             )
-            new_job = wizard.with_delay(
-                description=description
-            ).process_content(content, filename)
-            queue_job = Job.db_record_from_uuid(self.env, new_job.uuid)
-            self.env['ir.attachment'].create(
+            attachment = self.env['ir.attachment'].create(
                 {
                     'name': filename,
-                    'res_id': queue_job.id,
-                    'res_model': queue_job._name,
                     'datas': base64.b64encode(content),
                     'datas_fname': filename,
                 }
+            )
+            new_job = wizard.with_delay(
+                description=description
+            ).process_attachment(attachment)
+            queue_job = Job.db_record_from_uuid(self.env, new_job.uuid)
+            attachment.write(
+                {'res_id': queue_job.id, 'res_model': queue_job._name}
             )

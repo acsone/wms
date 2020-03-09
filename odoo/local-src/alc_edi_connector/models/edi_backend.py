@@ -84,10 +84,7 @@ class EdiBackend(models.Model):
 
     @api.model
     def cron_import(self):
-        importers = self.search([]).mapped("edi_importer_ids")
+        importers = self.search([]).mapped("edi_import_task_def_ids")
         for importer in importers:
-            description = _("Pull EDI %s from %s") % (
-                importer.kind,
-                importer.backend_id.name,
-            )
+            description = _("Pull EDI %s") % (importer.display_name,)
             importer.with_delay(description=description).execute()

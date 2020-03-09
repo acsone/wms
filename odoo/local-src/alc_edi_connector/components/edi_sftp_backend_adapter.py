@@ -90,7 +90,7 @@ class EdiSftpBackendAdapter(Component):
             tmp_filename = filename + ".wip"
             with sftp.open(tmp_filename, 'w') as thefile:
                 thefile.write(content)
-            sftp.posix_rename(tmp_filename, filename)
+            sftp.rename(tmp_filename, filename)
 
     def pull(self):
         """
@@ -111,7 +111,7 @@ class EdiSftpBackendAdapter(Component):
             filenames = [f for f in sftp.listdir(path) if re_pattern.match(f)]
             for filename in filenames:
                 full_path = os.path.join(path, filename)
-                with sftp.file(full_path, "r") as f:
+                with sftp.file(full_path, "rb") as f:
                     result.append((filename, f.read()))
                 _logger.debug(
                     "SFTP host %s: Pull file %s", hostname, full_path
@@ -121,7 +121,9 @@ class EdiSftpBackendAdapter(Component):
         self.env.cr.after(
             "commit",
             partial(
-                cleanup_pulled_files, self._get_paramiko_kwarqs(), to_cleanup
+                cleanup_pulled_files,
+                paramiko_kwargs=self._get_paramiko_kwarqs(),
+                files_to_remove=to_cleanup,
             ),
         )
         return result
