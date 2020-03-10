@@ -82,6 +82,7 @@ class StockLocation(models.Model):
                 location = location.location_id
                 name = location.name + "/" + name
             ret_list.append((orig_location.id, name))
+        return ret_list
 
     def generate_checksum(self):
         for location in self:
