@@ -1,4 +1,14 @@
 --find-links https://wheelhouse.acsone.eu/manylinux1
 --find-links https://wheelhouse.acsone.eu/acsone-odoo
 
+# odoo required since no reference exists into pypi
+odoo @ git+https://github.com/acsone/odoo.git@3be62e4183209db24233ee61459c7ae769d07788
 
+# oca/puchase-workflow
+
+odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@10.0-purchase_order_approved_by_supplier-lmi#subdirectory=setup/purchase_order_approved
+
+# oca/edi
+odoo10-addon-base-ubl @ git+https://github.com/acsone/edi.git@10.0-add_ubl_2.2-lmi#subdirectory=setup/base_ubl
+odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@10.0-add-OrderResponse-import-lmi#subdirectory=setup/purchase_order_import
+odoo10-addon-purchase-order-import-ubl @ git+https://github.com/acsone/edi.git@10.0-add-OrderResponse-import-lmi#subdirectory=setup/purchase_order_import_ubl

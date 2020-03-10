@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+     <report id="report_xml_purchase_order_ubl"
+            name="alc_purchase_order_ubl.report_xml_purchase_order_ubl"
+            string="UBL Order document"
+            report_type="qweb-xml"
+            model="purchase.order"/>
+</odoo>
