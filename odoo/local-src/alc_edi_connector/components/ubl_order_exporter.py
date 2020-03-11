@@ -3,9 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-from datetime import datetime
 
-from odoo import fields
+from odoo import _
 from odoo.addons.component.core import Component
 
 
@@ -27,15 +26,11 @@ class UblOrderOrderExporter(Component):
 
         self.backend_adapter.push(xml_content)
 
-        attachment_name = (
-            "UblOrderDocument_%s.xml"
-            % fields.Datetime.to_string(
-                fields.Datetime.context_timestamp(
-                    purchase_order, datetime.now()
-                )
-            )
-        )
-        self.env['ir.attachment'].create(
+        task_def = self.work.task_def
+        attachment_name = task_def.filename(purchase_order)
+        body = _("UBL Order document sent")
+        title = _("Connector EDI")
+        attachment = self.env['ir.attachment'].create(
             {
                 'name': attachment_name,
                 'res_id': purchase_order.id,
@@ -43,4 +38,10 @@ class UblOrderOrderExporter(Component):
                 'datas': base64.b64encode(xml_content),
                 'datas_fname': attachment_name,
             }
+        )
+        purchase_order.message_post(
+            body=body,
+            subject=title,
+            subtype="mt_note",
+            attachment_ids=attachment.ids,
         )
