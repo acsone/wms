@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from freezegun import freeze_time
 from odoo.exceptions import UserError
 
 from .common import AlcEdiConnectorCase
@@ -12,7 +13,11 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
     def setUpClass(cls):
         super(TestUblOrderExporter, cls).setUpClass()
         cls.draft_purchase_order = cls.purchase_order.copy()
+        cls.ubl_order_exporter_task_def = cls.edi_backend._get_task(
+            "ubl.order.exporter"
+        )
 
+    @freeze_time()
     def test_00(self):
         """
         Data:
@@ -31,8 +36,10 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
         self.purchase_order.send_ubl_order_document()
         self.assertEqual(self.mocked_sftp_push.call_count, 1)
         attachments = self._get_attachments(self.purchase_order) - attachments
-        self.assertTrue(attachments)
-        self.assertTrue(attachments.name.startswith("UblOrderDocument"))
+        self.assertTrue(
+            attachments.name,
+            self.ubl_order_exporter_task_def.filename(self.purchase_order),
+        )
 
     def test_01(self):
         """
