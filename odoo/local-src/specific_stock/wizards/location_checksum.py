@@ -2,7 +2,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class StockLocationWizardChecksum(models.TransientModel):
@@ -11,9 +11,11 @@ class StockLocationWizardChecksum(models.TransientModel):
     @api.multi
     def generate(self):
         self.env['stock.location'].browse(
-            self.env.context['active_ids']).generate_checksum()
+            self.env.context['active_ids']
+        ).generate_checksum()
 
     @api.multi
     def check(self):
         self.env['stock.location'].browse(
-            self.env.context['active_ids']).check_checksum_valid()
+            self.env.context['active_ids']
+        ).check_checksum_valid()

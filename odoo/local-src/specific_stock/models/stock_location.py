@@ -5,7 +5,7 @@
 
 import random
 
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -86,8 +86,10 @@ class StockLocation(models.Model):
 
     def generate_checksum(self):
         for location in self:
-            if (location.bin_checksum_1 is not False
-                    and not location.is_checksum_invalid):
+            if (
+                location.bin_checksum_1 is not False
+                and not location.is_checksum_invalid
+            ):
                 continue
             # if location.bin_checksum_1 not in (False, '00', '12'):
             #    # Checksum already exists, skip
@@ -95,15 +97,20 @@ class StockLocation(models.Model):
             old_checksum = location.bin_checksum_1
 
             checksum_not_available = location._calculate_unavailable_checksum(
-                strict=True)
+                strict=True
+            )
 
             formated_checksum = ['{:02d}'.format(i) for i in range(100)]
-            picklist = list(set(formated_checksum) -
-                            set(checksum_not_available))
+            picklist = list(
+                set(formated_checksum) - set(checksum_not_available)
+            )
             if not picklist:
-                raise UserError(_(
-                    'There is no checksum available for location %s' %
-                    location.name))
+                raise UserError(
+                    _(
+                        'There is no checksum available for location %s'
+                        % location.name
+                    )
+                )
 
             # Assign checksum
             checksum = random.choice(picklist)
@@ -115,7 +122,8 @@ class StockLocation(models.Model):
 
             self.filtered(
                 lambda r: r.bin_checksum_1 == old_checksum
-                and r.is_checksum_invalid).check_checksum_valid()
+                and r.is_checksum_invalid
+            ).check_checksum_valid()
 
     @api.multi
     def _calculate_unavailable_checksum(self, strict=False):
@@ -131,7 +139,7 @@ class StockLocation(models.Model):
 
         shelf = location.shelf
 
-        checksum_not_available = set(['00', '12'])
+        checksum_not_available = {'00', '12'}
 
         try:
             shelf_code = int(shelf)
@@ -159,36 +167,51 @@ class StockLocation(models.Model):
             'shelf': location.shelf,
             'height': location.height,
             'box': location.box,
-            }
+        }
         # Get checksums of this shelf
-        query_or.append(""" (
+        query_or.append(
+            """ (
             zone = %(zone)s
             AND corridor = %(corridor)s
             AND shelf = %(shelf)s
-            ) """)
+            ) """
+        )
         # Get checksums of left/right/opposite shelfs, same height
-        query_or.append(""" (
+        query_or.append(
+            """ (
             zone = %(zone)s
             AND corridor = %(corridor)s
             AND shelf IN %(next_shelfs)s
             AND height = %(height)s
-            ) """)
-        query_args['next_shelfs'] = tuple(filter(None, map(convert, (
-            shelf_code - 2, shelf_code + 2, (shelf_code % 2 or -1)))))
+            ) """
+        )
+        query_args['next_shelfs'] = tuple(
+            filter(
+                None,
+                map(
+                    convert,
+                    (shelf_code - 2, shelf_code + 2, (shelf_code % 2 or -1)),
+                ),
+            )
+        )
         # Get checksums of other corridors, same location
-        query_or.append(""" (
+        query_or.append(
+            """ (
             zone = %(zone)s
             AND shelf = %(shelf)s
             AND height = %(height)s
             AND box = %(box)s
-            ) """)
+            ) """
+        )
         # Get checksums of other shelfs, same location
-        query_or.append(""" (
+        query_or.append(
+            """ (
             zone = %(zone)s
             AND corridor = %(corridor)s
             AND height = %(height)s
             AND box = %(box)s
-            ) """)
+            ) """
+        )
         # Build query
         query = """
             SELECT DISTINCT bin_checksum_1
@@ -202,12 +225,16 @@ class StockLocation(models.Model):
             -- AND height in ('A', 'B')
             -- AND corridor in ('A', 'B', 'C', 'D', 'E')
             """
-        query += """
+        query += (
+            """
             AND (
-            """ + " OR ".join(query_or) + ")"
+            """
+            + " OR ".join(query_or)
+            + ")"
+        )
         self.env.cr.execute(query, query_args)
 
-        checksum_not_available |= set(x[0] for x in self.env.cr.fetchall())
+        checksum_not_available |= {x[0] for x in self.env.cr.fetchall()}
 
         return checksum_not_available
 
