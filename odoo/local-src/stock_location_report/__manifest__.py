@@ -8,6 +8,7 @@
     'category': 'Warehouse',
     'depends': [
         'specific_stock',
+        'stock_location',
     ],
     'data': [
         'views/stock_location.xml',
