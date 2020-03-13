@@ -1031,12 +1031,12 @@ class RoundInstanceCustomer(models.Model):
                         "Shipping detached from delivery round %s: %s (%s)",
                         self.delivery_round_id.id,
                         shipping.id,
-                        shipping.mapped('name'),
+                        shipping.name,
                     )
-                    shipping.delivery_round_customer_id = False
                     shipping.with_context(
                         tracking_disable=True
                     ).printed = False
+                    shipping.delivery_round_customer_id = False
                     continue
 
                 # Set quantity on all pack operations and deliver
