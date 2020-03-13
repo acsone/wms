@@ -138,9 +138,9 @@ deploy-test:
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
     on_stop: stop_test
   when: manual
-  #only:
-  #  refs:
-  #    - /1\.48\.\d+/
+
+  only:
+    - /1\.48\.\d+/
   dependencies:
     - build
   # allow failures so we can merge without running this deployment job
@@ -159,9 +159,8 @@ stop_test:
     name: test/odoo-alcyon
     action: stop
   when: manual
-  #only:
-  #  refs:
-  #    - /1\.48\.\d+/
+  only:
+    - /1\.48\.\d+/
   dependencies: []
   allow_failure: true
 
