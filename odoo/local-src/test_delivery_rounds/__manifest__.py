@@ -10,14 +10,12 @@
     'category': 'Stock Management',
     'depends': [
         'delivery_rounds_alcyon',
-        'delivery_rounds_refill',
-        'product_additional',
         'stock_picking_zone',
         'stock_lot_loss',
         'stock_reassign_auto',
         'specific_sale',
         'specific_shipping_costs',
-        'specific_account',
+        'specific_account'
     ],
     'data': [
     ],
