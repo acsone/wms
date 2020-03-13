@@ -99,13 +99,13 @@ test:
     - venv/bin/pip install --no-index setup/release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
     - venv/bin/pip install --no-index -e setup/
-    - ADDONS_INIT=$(./acsoo addons --addons-dir odoo/local-src list-depends)
+    - ADDONS_INIT=$(./acsoo addons --addons-dir odoo/local-src --exclude alc_all list-depends)
     - echo Installing ${ADDONS_INIT}
     - unbuffer venv/bin/click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix alc -m ${ADDONS_INIT} | ./acsoo checklog
     # do not test server_environment_files because server_environment depends on it,
     # so testing server_environment_files implies testing server_environment,
     # and the server_environment tests require a very specific server_environment_files
-    - ADDONS_TEST=$(./acsoo addons --addons-dir odoo/local-src --exclude server_environment_files list)
+    - ADDONS_TEST=$(./acsoo addons --addons-dir odoo/local-src --exclude server_environment_files,alc_all list)
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --branch venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | ./acsoo checklog
     - venv/bin/coverage html
@@ -138,9 +138,9 @@ deploy-test:
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
     on_stop: stop_test
   when: manual
-  #only:
-  #  refs:
-  #    - /1\.48\.\d+/
+
+  only:
+    - /1\.48\.\d+/
   dependencies:
     - build
   # allow failures so we can merge without running this deployment job
@@ -159,9 +159,8 @@ stop_test:
     name: test/odoo-alcyon
     action: stop
   when: manual
-  #only:
-  #  refs:
-  #    - /1\.48\.\d+/
+  only:
+    - /1\.48\.\d+/
   dependencies: []
   allow_failure: true
 
