@@ -28,6 +28,16 @@ latest (unreleased)
 **Documentation**
 
 
+10.0.1.48.3 (2020-03-09)
+++++++++++++++++++++++++
+
+**ALCYN-2440: reverts**
+
+* ALCYN-2437: handle some ALCYN-2130 edge cases
+* ALCYN-2419: handle some new edge cases of ALCYN-2130
+* ALCYN-2405: fix issues with ALCYN-2130
+
+
 10.0.1.48.2 (2020-03-03)
 ++++++++++++++++++++++++
 

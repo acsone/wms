@@ -44,7 +44,7 @@ in the created pack operation (could be computed from the aggregation of
 multiple stock moves). Then it creates an additional stock move for the
 accessory product and reserve it in order to create the corresponding pack
 operation for the accessory product. When the main product's pack operation is
-deleted, the accessory related move is also cancelled and so it's pack
+deleted, the accessory related move is also cancelled and so its pack
 operation is also deleted.
 
 B) For purchase

@@ -25,8 +25,7 @@ class StockPicking(models.Model):
     def create(self, values):
         res = super(StockPicking, self).create(values)
         backorder_id = self._context.get('backorder_assign')
-        round_assign = not self._context.get('no_round_assign', False)
-        if backorder_id and round_assign:
+        if backorder_id:
             # backorder and self may have different environment, because some
             # jobs are creating new cursors -> browse with the current environment.
             backorder = self.env['stock.picking'].browse(backorder_id)
@@ -37,6 +36,7 @@ class StockPicking(models.Model):
             res.with_context(
                 round_assigned=True
             ).delivery_round_customer_id = delivery_round_customer.id
+
         return res
 
     def _compute_partner_itinerary_ids(self):
@@ -178,17 +178,6 @@ class StockPicking(models.Model):
                 ]
             )
             if pending_moves:
-                # first unreserve the picking, otherwise we get issues in the
-                # cases were pack ops are linked to the moves which are going
-                # to be moved to a new picking.
-                picking.do_unreserve()
-                # this can remove moves (cf. product_additional) -> re-read
-                pending_moves = self.env['stock.move'].search(
-                    [
-                        ('picking_id', '=', picking.id),
-                        ('state', 'not in', ('cancel', 'done')),
-                    ]
-                )
                 pending_moves.with_context(
                     # set no_round_assign to force reassigning the moves to a
                     # picking which is not in the same round as the picking we
@@ -197,8 +186,6 @@ class StockPicking(models.Model):
                     # set backorder_assign so that a message will be generated
                     # on picking to say where the backorder was placed.
                     backorder_assign=picking.id,
-                    # detaching_from_round to assign possible newly created picking to a round
-                    detaching_from_round=True,
                 ).assign_picking()
 
                 # make sure that empty pickings are "printed" so that their
@@ -212,6 +199,22 @@ class StockPicking(models.Model):
         self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
             {'delivery_round_customer_id': False}
         )
+        pending_moves = self.env['stock.move'].search(
+            [
+                ('picking_id', 'in', self.ids),
+                ('state', 'not in', ('cancel', 'done')),
+            ]
+        )
+        if pending_moves:
+            pending_moves.write({'picking_id': False})
+
+            # We could get empty pickings here if all the moves are pending and
+            # therefore removed. But removing them could pose issues
+            # elsewhere. So for now I prefer leaving them, as this should be rare.
+            #
+            # self.filtered(lambda r: not r.move_lines).unlink()
+
+            pending_moves.assign_picking()
 
     @api.multi
     def button_delivery_round(self):
