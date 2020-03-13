@@ -76,6 +76,7 @@
         # specific
         "alc_analytic_category_report",
         "alc_edi_connector",
+        "alc_product_uom_updatable",
         "account_move_productcateg",
         "account_payment_order_background",
         "camptocamp_tools",  # to remove
