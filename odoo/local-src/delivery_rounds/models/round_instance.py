@@ -1033,6 +1033,8 @@ class RoundInstanceCustomer(models.Model):
                         shipping.id,
                         shipping.name,
                     )
+                    # First mark as not printed otherwise constrain will fail
+                    # when shipping is detached from delivery round customer
                     shipping.with_context(
                         tracking_disable=True
                     ).printed = False
