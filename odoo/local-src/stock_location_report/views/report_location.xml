@@ -5,7 +5,7 @@
         </xpath>
     </template>
 
-    <template id="stock.location_report">
+    <template id="stock_location_report.location_report">
         <t t-call="report.html_container">
         <t t-call="report.external_layout">
             <div t-foreach="docs.filtered(lambda r: not r.height.isdigit())._get_by_position('zone')" t-as="zone" class="page">
