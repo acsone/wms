@@ -98,22 +98,25 @@ class SaleOrder(models.Model):
         if partner.invoice_grouping != 'all_at_once':
             raise FailedJobError('Invalid invoice grouping')
 
-        sales = self.search(
+        invoice_ids = []
+        # Create all the invoices
+        to_invoice_sales = self.search(
             [
                 ('invoice_status', '=', 'to invoice'),
                 ('partner_invoice_id', '=', partner.id),
+                ('order_line.qty_to_invoice', ">", 0),
             ]
         )
-        invoice_ids = []
-        qties_to_invoice = sales.mapped('order_line.qty_to_invoice')
-        to_invoice = bool(filter(lambda qty: qty > 0, qties_to_invoice))
-        to_refund = bool(filter(lambda qty: qty < 0, qties_to_invoice))
-        # Create all the invoices
-        if to_invoice:
-            invoice_ids += sales.action_invoice_create(final=False)
+        invoice_ids += to_invoice_sales.action_invoice_create(final=False)
         # Create all the refunds
-        if to_refund:
-            invoice_ids += sales.action_invoice_create(final=True)
+        to_refund_sales = self.search(
+            [
+                ('invoice_status', '=', 'to invoice'),
+                ('partner_invoice_id', '=', partner.id),
+                ('order_line.qty_to_invoice', "<", 0),
+            ]
+        )
+        invoice_ids += to_refund_sales.action_invoice_create(final=True)
         invoices = self.env['account.invoice'].browse(invoice_ids)
         # Validate invoices
         invoices.with_delay(priority=3)._job_validate_invoice(date_invoice)
