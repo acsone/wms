@@ -28,6 +28,14 @@ latest (unreleased)
 **Documentation**
 
 
+10.0.1.48.5 (2020-03-19)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* FIX edge case for backorder / delivery round with additional products
+
+
 10.0.1.48.4 (2020-03-19)
 ++++++++++++++++++++++++
 
