@@ -827,10 +827,36 @@ class RoundInstanceCustomer(models.Model):
                 # by stock_groupbypartner for the grouping of moves:
                 # moves will be added to a picking only if they share the
                 # same delivery.carrier than their procurement group.
-                # When we change manually the delivery round, we assign
-                # a special (disabled) delivery.carrier, so new moves will
-                # never be grouped with this picking (because we cannot use
-                # this delivery carrier)
+                # When we manually set the delivery round, if it is not
+                # compatible with the one set on the actual delivery carrier,
+                # we assign a special "manual" delivery carrier, so new moves
+                # will never be grouped with this picking (because we cannot
+                # use this delivery carrier)
+                actual_carrier_template = pickings.mapped(
+                    'group_id.carrier_id.delivery_template_id'
+                )
+                all_carrier_templates = (
+                    self.env['delivery.carrier']
+                    .search([('delivery_template_id', '!=', False)])
+                    .mapped('delivery_template_id')
+                )
+                new_template = self.delivery_round_id.template_id
+
+                if (
+                    not actual_carrier_template
+                    and new_template not in all_carrier_templates
+                ):
+                    # carrier is "Alcyon delivery" and set on an Alcyon
+                    # delivery round
+                    return
+                if (
+                    actual_carrier_template
+                    and new_template in actual_carrier_template
+                ):
+                    # carrier is a specific delivery and set on corresponding
+                    # delivery round
+                    return
+
                 manual_method = self.env.ref(
                     'delivery_rounds.delivery_carrier_manual_round_change'
                 )

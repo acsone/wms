@@ -25,6 +25,7 @@ latest (unreleased)
 
 * ALCYN-2442: regression in the website_purchase_review view
 * Refactor ALCYN-2130
+* ALCYN-2440: Fix delivery carrier when delivery round manually assigned
 
 **Build**
 
