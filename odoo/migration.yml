@@ -648,3 +648,6 @@ migration:
         upgrade:
           - website_purchase_review
           - delivery_rounds
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_48_0::fix_pickings_delivery_rounds
