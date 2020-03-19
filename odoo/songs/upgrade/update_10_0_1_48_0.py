@@ -78,16 +78,14 @@ def fix_empty_pickings(ctx):
         .search(
             [
                 ('delivery_round_id', '=', False),
-                ('move_lines', '=', False),
                 ('printed', '=', False),
                 ('state', '=', 'assigned'),
                 ('picking_type_id', 'in', (16, 18, 17, 4, 15)),
             ]
         )
-        .with_context(tracking_disabled=True)
-    )
-    empty_pickings.write({'printed': True})
-    empty_pickings._compute_state()
+        .with_context(tracking_disable=True)
+    ).filtered(lambda r: not r.move_lines)
+    empty_pickings.write({'printed': True, 'state': 'done'})
 
 
 @anthem.log
@@ -107,9 +105,7 @@ def call_action_done(ctx):
         try:
             pick.action_done()
         except exceptions.UserError as exc:
-            anthem.log(
-                None, 'failed to call action_done on %s: %s' % (pick.name, exc)
-            )
+            print 'failed to call action_done on %s: %s' % (pick.name, exc)
 
 
 @anthem.log
@@ -122,15 +118,17 @@ def move_backorders_out(ctx):
             ('printed', '=', False),
         ]
     )
-    pickings.with_context(tracking_disabled=True).write({'printed': True})
+    pickings.with_context(tracking_disable=True).write({'printed': True})
     for pick in pickings:
         if pick.partner_id.is_sale_back_order_cancel:
+            print pick.name, "backorder cancel"
             pick.with_context(
                 no_new_picking=True, cancel_backorder=True
             )._create_backorder()
         else:
+            print pick.name
             pick.with_context(no_new_picking=True)._create_backorder()
-    pickings.with_context(tracking_disabled=True).write({'printed': True})
+    pickings.with_context(tracking_disable=True).write({'printed': False})
     pickings.write({'delivery_round_customer_id': False})
 
 

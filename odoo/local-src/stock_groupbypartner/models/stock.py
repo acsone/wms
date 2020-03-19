@@ -137,7 +137,10 @@ class StockPicking(models.Model):
             # In the call to assign_picking, additional products have been
             # canceled.
             not_done_bo_moves = not_done_bo_moves.filtered(
-                lambda move: move.state not in ('done', 'cancel')
+                # we need to check if the move exists because we can have
+                # deleted moves in case of additional products
+                lambda move: move.exists()
+                and move.state not in ('done', 'cancel')
             )
             backorders |= not_done_bo_moves.mapped('picking_id')
         if backorders:
