@@ -65,6 +65,13 @@ def recompute_delivered_qty(ctx):
 
 @anthem.log
 def fix_pickings_delivery_rounds(ctx):
+    fix_empty_pickings(ctx)
+    call_action_done(ctx)
+    move_backorders_out(ctx)
+
+
+@anthem.log
+def fix_empty_pickings(ctx):
     # 1. fix empty pickings with state = assigned
     empty_pickings = (
         ctx.env['stock.picking']
@@ -82,6 +89,9 @@ def fix_pickings_delivery_rounds(ctx):
     empty_pickings.write({'printed': True})
     empty_pickings._compute_state()
 
+
+@anthem.log
+def call_action_done(ctx):
     # 2. call action_done on pickings with > 1 procurement group
     ctx.env.cr.execute(
         "SELECT m.picking_id "
@@ -101,6 +111,9 @@ def fix_pickings_delivery_rounds(ctx):
                 None, 'failed to call action_done on %s: %s' % (pick.name, exc)
             )
 
+
+@anthem.log
+def move_backorders_out(ctx):
     # 3. move backorders out of delivery rounds
     pickings = ctx.env['stock.picking'].search(
         [
