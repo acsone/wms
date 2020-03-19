@@ -516,8 +516,19 @@ class TestRoundWithCustomerWorkingSchedule(
         delivery_round._assign_pickings(ship1)
         self.assertEqual(ship1.state, 'assigned')
 
-    def test_deliveryround_carrier_schedule(self):
-        delivery_carrier_fixed, delivery_round = self._prepare_delivery_round()
+    def test_deliveryround_carrier_fixed_schedule(self):
+        """
+        Fixed delivery round on carrier. Picking is inserted in the delivery
+        round without taking care of the leave schedule
+        """
+        delivery_carrier_fixed = self.env['delivery.carrier'].create(
+            {
+                'name': 'Unittest shipping costs',
+                'delivery_type': 'fixed',
+                'fixed_price': 10.0,
+                'delivery_template_id': self.delivery_template_2.id,
+            }
+        )
         self.create_schedule(
             {
                 'partner_id': self.partner1.id,
@@ -529,6 +540,44 @@ class TestRoundWithCustomerWorkingSchedule(
             {
                 'partner_id': self.partner1.id,
                 'carrier_id': delivery_carrier_fixed.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 200,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertFalse(sale.picking_ids)
+        sale.action_confirm()
+
+        for picking in sale.picking_ids:
+            self.assertEqual(picking.delivery_round_id, self.delivery_round_2)
+
+    def test_deliveryround_carrier_std_schedule(self):
+        """
+        Standard delivery round without specific carrier. Picking is not
+        inserted in the delivery round due to the leave schedule
+        """
+        self.create_schedule(
+            {
+                'partner_id': self.partner1.id,
+                'start_date': '2017-01-01',
+                'end_date': '2017-01-01',
+            }
+        )
+        sale = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner1.id,
                 'order_line': [
                     (
                         0,
