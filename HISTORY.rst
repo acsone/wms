@@ -36,7 +36,8 @@ latest (unreleased)
 * ALCYN-2442: regression in the website_purchase_review view
 * Refactor ALCYN-2130
 * ALCYN-2440: Fix delivery carrier when delivery round manually assigned
-
+* Fix crash when a PICK for a customer which does not accept backorders is
+  *not* processed at all
 
 
 10.0.1.48.3 (2020-03-09)

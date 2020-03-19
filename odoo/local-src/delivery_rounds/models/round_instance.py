@@ -1078,25 +1078,31 @@ class RoundInstanceCustomer(models.Model):
                         pack.unlink()
                 shipping.do_transfer()
 
-            # detach the pickings that could not be done
-            pickings = (
-                self.with_env(new_env)
-                .mapped('picking_ids')
-                .filtered(lambda p: p.state not in ('cancel', 'done'))
-            )
-            pickings.with_context(tracking_disable=True).write(
-                {'printed': True}
-            )
-            pickings.with_context(no_new_picking=True)._create_backorder()
-            _logger.debug(
-                "Pickings detached from delivery round %s: %s",
-                self.delivery_round_id.id,
-                ",".join(pickings.mapped('name')),
-            )
-            pickings.with_context(tracking_disable=True).write(
-                {'printed': False}
-            )
-            pickings.write({'delivery_round_customer_id': False})
+            # Detach the pickings that could not be done.
+            # When we previously created the backorder on the shipping, if the
+            # customer does not accept backorders, all moves have been canceled
+            # and this causes the deletion of the round instance customer (see
+            # stock.move action_cancel). So to access the pickings from self,
+            # we first need to check if self still exists.
+            if self.with_env(new_env).exists():
+                pickings = (
+                    self.with_env(new_env)
+                    .mapped('picking_ids')
+                    .filtered(lambda p: p.state not in ('cancel', 'done'))
+                )
+                pickings.with_context(tracking_disable=True).write(
+                    {'printed': True}
+                )
+                pickings.with_context(no_new_picking=True)._create_backorder()
+                _logger.debug(
+                    "Pickings detached from delivery round %s: %s",
+                    self.delivery_round_id.id,
+                    ",".join(pickings.mapped('name')),
+                )
+                pickings.with_context(tracking_disable=True).write(
+                    {'printed': False}
+                )
+                pickings.write({'delivery_round_customer_id': False})
 
             # Ensure any backorder is reassigned
             shippings._delay_jobs_action_assign(shippings.mapped('partner_id'))
