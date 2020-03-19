@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2442: regression in the website_purchase_review view
+
 **Build**
 
 **Documentation**
