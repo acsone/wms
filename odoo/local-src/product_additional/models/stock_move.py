@@ -33,26 +33,23 @@ class StockMove(models.Model):
 
     def assign_picking(self):
         # Prevent any backorder of additional moves
-        if self.env.context.get('backorder_assign'):
-            additional_moves = self.filtered('is_additional_move')
-            if additional_moves:
-                additional_moves.with_context(
+        other_moves = self.browse()
+        for move in self:
+            # We are creating a backorder
+            if move.picking_id and move.is_additional_move:
+                move.with_context(
                     no_recompute_pack=True, force_cancel=True
                 ).action_cancel()
-                for move in additional_moves:
-                    if not move.picking_id:
-                        continue
-                    move.picking_id.message_post(
-                        body=_(
-                            "Remaining additional move '%s' canceled"
-                            % move.name
-                        )
+                move.picking_id.message_post(
+                    body=_(
+                        "Remaining additional move '%s' canceled" % move.name
                     )
-            other_moves = self - additional_moves
-            if other_moves:
-                return super(StockMove, other_moves).assign_picking()
-            return True
-        return super(StockMove, self).assign_picking()
+                )
+            else:
+                other_moves |= move
+        if other_moves:
+            return super(StockMove, other_moves).assign_picking()
+        return True
 
     def split(self, qty, restrict_lot_id=False, restrict_partner_id=False):
         # Prevent any partial backorder of additional moves

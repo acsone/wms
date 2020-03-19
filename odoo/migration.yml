@@ -647,3 +647,4 @@ migration:
       addons:
         upgrade:
           - website_purchase_review
+          - delivery_rounds

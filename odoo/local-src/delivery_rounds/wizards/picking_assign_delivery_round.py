@@ -29,7 +29,7 @@ class PickingAssignDeliveryRound(models.TransientModel):
     delivery_round_id = fields.Many2one(
         'round.instance',
         'Delivery Round',
-        domain="[('state', '!=', 'done')]",
+        domain="[('state', 'not in', ('delivering','done'))]",
         required=True,
         ondelete="cascade",
     )

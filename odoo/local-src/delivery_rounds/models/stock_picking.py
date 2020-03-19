@@ -21,24 +21,6 @@ class StockPicking(models.Model):
         compute='_compute_partner_itinerary_ids',
     )
 
-    @api.model
-    def create(self, values):
-        res = super(StockPicking, self).create(values)
-        backorder_id = self._context.get('backorder_assign')
-        if backorder_id:
-            # backorder and self may have different environment, because some
-            # jobs are creating new cursors -> browse with the current environment.
-            backorder = self.env['stock.picking'].browse(backorder_id)
-            delivery_round_customer = backorder.delivery_round_customer_id
-            delivery_round = backorder.delivery_round_id
-            if delivery_round:
-                delivery_round._assign_pickings(res)
-            res.with_context(
-                round_assigned=True
-            ).delivery_round_customer_id = delivery_round_customer.id
-
-        return res
-
     def _compute_partner_itinerary_ids(self):
         for picking in self:
             if not (
@@ -79,10 +61,10 @@ class StockPicking(models.Model):
 
     @api.multi
     def _create_backorder(self, backorder_moves=[]):
-        # Ensure backorder is not processed again
-        return super(
+        backorders = super(
             StockPicking, self.with_context(round_backorder=True)
         )._create_backorder(backorder_moves)
+        return backorders
 
     delivery_round_launched = fields.Boolean(
         related='delivery_round_id.picking_launched',
@@ -114,6 +96,15 @@ class StockPicking(models.Model):
 
     @api.multi
     def write(self, vals):
+        if vals.get('delivery_round_customer') and not self.env.context.get(
+            'noround_write'
+        ):
+            raise UserError(
+                "Delivery round assigned to a picking without "
+                "reservation. Method _assign_pickings on delivery.round "
+                "should have been called."
+            )
+
         unset_round = (
             'delivery_round_customer_id' in vals
             and not vals['delivery_round_customer_id']
@@ -129,6 +120,7 @@ class StockPicking(models.Model):
                 lambda p: not p.delivery_round_customer_id and p in in_round
             )
             pickings._unassign_delivery_round()
+
         return res
 
     def _unassign_delivery_round(self):
@@ -141,23 +133,6 @@ class StockPicking(models.Model):
         _logger.debug("Delivery round customer unset on pickings %s", self.ids)
         self.do_unreserve()
 
-    @api.multi
-    @api.constrains('delivery_round_customer_id')
-    def _update_delivery_round(self):
-        if self.env.context.get('noround_write'):
-            return
-        delivery_round_customer = self.mapped('delivery_round_customer_id')
-        assert (
-            len(delivery_round_customer) <= 1
-        ), 'Max 1 delivery round customer can be written at a time'
-        if delivery_round_customer:
-            if not self.env.context.get('round_assigned'):
-                raise UserError(
-                    "Delivery round assigned to a picking without "
-                    "reservation. Method _assign_pickings on delivery.round "
-                    "should have been called."
-                )
-
     @api.model
     def _group_delivery_round(self, ids, domain, **kwargs):
         instances = (
@@ -169,53 +144,6 @@ class StockPicking(models.Model):
 
     _group_by_full = {'delivery_round_id': _group_delivery_round}
 
-    def _detach_from_round(self):
-        for picking in self:
-            pending_moves = self.env['stock.move'].search(
-                [
-                    ('picking_id', '=', picking.id),
-                    ('state', 'not in', ('cancel', 'done')),
-                ]
-            )
-            if pending_moves:
-                pending_moves.with_context(
-                    # set no_round_assign to force reassigning the moves to a
-                    # picking which is not in the same round as the picking we
-                    # may be removing from the round.
-                    no_round_assign=True,
-                    # set backorder_assign so that a message will be generated
-                    # on picking to say where the backorder was placed.
-                    backorder_assign=picking.id,
-                ).assign_picking()
-
-                # make sure that empty pickings are "printed" so that their
-                # state is computed as 'done'
-                if not picking.move_lines:
-                    picking.printed = True
-        # force recomputation of state, as there is no trigger on the 'printed'
-        # field
-        self._compute_state()
-
-        self.filtered(lambda p: p.state not in ('cancel', 'done')).write(
-            {'delivery_round_customer_id': False}
-        )
-        pending_moves = self.env['stock.move'].search(
-            [
-                ('picking_id', 'in', self.ids),
-                ('state', 'not in', ('cancel', 'done')),
-            ]
-        )
-        if pending_moves:
-            pending_moves.write({'picking_id': False})
-
-            # We could get empty pickings here if all the moves are pending and
-            # therefore removed. But removing them could pose issues
-            # elsewhere. So for now I prefer leaving them, as this should be rare.
-            #
-            # self.filtered(lambda r: not r.move_lines).unlink()
-
-            pending_moves.assign_picking()
-
     @api.multi
     def button_delivery_round(self):
         return dict(
@@ -224,17 +152,18 @@ class StockPicking(models.Model):
             ).read()[0]
         )
 
-    @api.multi
-    def _delay_jobs_action_assign(self):
+    @api.model
+    def _delay_jobs_action_assign(self, partners=None):
         # Group picking by partner
         pickings_by_partner = defaultdict(lambda: self.env['stock.picking'])
-        pickings = self.search(
-            [
-                ('delivery_round_id', '=', False),
-                ('state', 'not in', ('done', 'cancel')),
-                ('picking_type_subcode', '=', 'PICK'),
-            ]
-        )
+        domain = [
+            ('delivery_round_id', '=', False),
+            ('state', 'not in', ('done', 'cancel')),
+            ('picking_type_subcode', '=', 'PICK'),
+        ]
+        if partners:
+            domain += [('partner_id', 'in', partners.ids)]
+        pickings = self.search(domain)
         for picking in pickings:
             pickings_by_partner[picking.partner_id] |= picking
 
