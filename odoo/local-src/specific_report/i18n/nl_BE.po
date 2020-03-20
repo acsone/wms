@@ -351,7 +351,7 @@ msgstr "<span>Order # </span>"
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<span>RPM Liège division Huy - TVA</span>"
-msgstr "<span>RPM Liège division Huy - TVA</span>"
+msgstr "<span>RPM Liège division Huy - BTW</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -380,7 +380,7 @@ msgstr "<span>Te betalen</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>refund</span>"
-msgstr "<span>Af the<br/>trekken</span>"
+msgstr "<span>Af te<br/>trekken</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -412,7 +412,7 @@ msgstr "<span>van</span>"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "<strong>Customer:</strong>"
-msgstr "<strong>Customer:</strong>"
+msgstr "<strong>Klant:</strong>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
@@ -582,7 +582,7 @@ msgstr "Aangemaakt door"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_create_date
 msgid "Created on"
-msgstr "Gemaakt op"
+msgstr "Aangemaakt op"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_currency_id
@@ -643,12 +643,12 @@ msgstr "Weergave naam"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Credit Note"
-msgstr "Klad creditnota"
+msgstr "Concept creditnota"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Invoice"
-msgstr "Voorlopige factuur"
+msgstr "Concept factuur"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
@@ -1158,7 +1158,7 @@ msgstr "stuk<br/>prijs"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "VAT"
-msgstr "VAT"
+msgstr "BTW"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
