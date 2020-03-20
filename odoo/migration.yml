@@ -643,3 +643,9 @@ migration:
         upgrade:
           - delivery_rounds_refill
     - version: 10.0.1.48.3
+    - version: 10.0.1.48.4
+      addons:
+        upgrade:
+          - website_purchase_review
+          - delivery_rounds
+    - version: 10.0.1.48.5

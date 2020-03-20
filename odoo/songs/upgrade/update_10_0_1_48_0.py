@@ -4,6 +4,8 @@
 
 import anthem
 
+from odoo import exceptions
+
 
 @anthem.log
 def reload_translation(ctx):
@@ -59,6 +61,75 @@ def recompute_delivered_qty(ctx):
     )
     for sol in orders_lines:
         sol.qty_delivered = sol._get_delivered_qty()
+
+
+@anthem.log
+def fix_pickings_delivery_rounds(ctx):
+    fix_empty_pickings(ctx)
+    call_action_done(ctx)
+    move_backorders_out(ctx)
+
+
+@anthem.log
+def fix_empty_pickings(ctx):
+    # 1. fix empty pickings with state = assigned
+    empty_pickings = (
+        ctx.env['stock.picking']
+        .search(
+            [
+                ('delivery_round_id', '=', False),
+                ('printed', '=', False),
+                ('state', '=', 'assigned'),
+                ('picking_type_id', 'in', (16, 18, 17, 4, 15)),
+            ]
+        )
+        .with_context(tracking_disable=True)
+    ).filtered(lambda r: not r.move_lines)
+    empty_pickings.write({'printed': True, 'state': 'done'})
+
+
+@anthem.log
+def call_action_done(ctx):
+    # 2. call action_done on pickings with > 1 procurement group
+    ctx.env.cr.execute(
+        "SELECT m.picking_id "
+        "FROM stock_move m "
+        "LEFT JOIN procurement_group g ON m.group_id=g.id "
+        "LEFT JOIN stock_picking p on m.picking_id=p.id "
+        "WHERE not p.printed AND m.state NOT IN ('cancel', 'done') "
+        "GROUP BY m.picking_id "
+        "HAVING COUNT(distinct g.carrier_id) > 1;"
+    )
+    picking_ids = [row[0] for row in ctx.env.cr.fetchall()]
+    for pick in ctx.env['stock.picking'].browse(picking_ids):
+        try:
+            pick.action_done()
+        except exceptions.UserError as exc:
+            print 'failed to call action_done on %s: %s' % (pick.name, exc)
+
+
+@anthem.log
+def move_backorders_out(ctx):
+    # 3. move backorders out of delivery rounds
+    pickings = ctx.env['stock.picking'].search(
+        [
+            ('state', 'not in', ('cancel', 'done')),
+            ('delivery_round_id.state', '=', 'done'),
+            ('printed', '=', False),
+        ]
+    )
+    pickings.with_context(tracking_disable=True).write({'printed': True})
+    for pick in pickings:
+        if pick.partner_id.is_sale_back_order_cancel:
+            print pick.name, "backorder cancel"
+            pick.with_context(
+                no_new_picking=True, cancel_backorder=True
+            )._create_backorder()
+        else:
+            print pick.name
+            pick.with_context(no_new_picking=True)._create_backorder()
+    pickings.with_context(tracking_disable=True).write({'printed': False})
+    pickings.write({'delivery_round_customer_id': False})
 
 
 @anthem.log

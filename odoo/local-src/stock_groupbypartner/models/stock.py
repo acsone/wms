@@ -15,6 +15,25 @@ _logger = logging.getLogger(__name__)
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    def _lock(self):
+        """Lock the database rows of the picking to prevent concurrent access.
+
+        The lock is released when the transaction is committed or rolled back.
+
+        This method is called:
+        1. when adding a move in the picking to prevent the picking to be started
+        2. when detaching the picking from delivery round (no_new_picking)
+        3. when assigning the picking to a delivery round to prevent new moves to be added
+        """
+        if self:
+            _logger.info('acquire lock for pickings %s', self.ids)
+            self.env.cr.execute(
+                'SELECT printed FROM stock_picking WHERE id in %s FOR UPDATE',
+                (tuple(self.ids),),
+            )
+            _logger.info('lock acquired for pickings %s', self.ids)
+        return
+
     @api.multi
     def _create_backorder(self, backorder_moves=[]):
         """ Take care of grouping by partner.
@@ -23,20 +42,23 @@ class StockPicking(models.Model):
         Apply this to all non-done lines into an existing for a new backorder
         picking. If the key 'do_only_split' is given in the context, then move
         all lines not in context.get('split', []) instead of all non-done
-        lines.  """
+        lines.
+        Pay attention to unsafe standard signature "backorder_moves=[]".
+        """
+        backorders = self.env['stock.picking']
+
         picking_togroup = self.filtered(
             lambda p: p.picking_type_id.groupbypartner
         )
         picking_notgroup = self - picking_togroup
 
         for picking in picking_togroup:
-            backorder_moves = backorder_moves or picking.move_lines
             if self._context.get('do_only_split'):
-                not_done_bo_moves = backorder_moves.filtered(
+                not_done_bo_moves = picking.move_lines.filtered(
                     lambda move: move.id not in self._context.get('split', [])
                 )
             else:
-                not_done_bo_moves = backorder_moves.filtered(
+                not_done_bo_moves = picking.move_lines.filtered(
                     lambda move: move.state not in ('done', 'cancel')
                 )
             if not not_done_bo_moves:
@@ -102,9 +124,7 @@ class StockPicking(models.Model):
                     )
 
             else:
-                not_done_bo_moves.with_context(
-                    backorder_assign=picking.id
-                ).assign_picking()
+                not_done_bo_moves.assign_picking()
 
             if not picking.date_done:
                 picking.write(
@@ -114,13 +134,29 @@ class StockPicking(models.Model):
                         )
                     }
                 )
+            # In the call to assign_picking, additional products have been
+            # canceled.
+            not_done_bo_moves = not_done_bo_moves.filtered(
+                # we need to check if the move exists because we can have
+                # deleted moves in case of additional products
+                lambda move: move.exists()
+                and move.state not in ('done', 'cancel')
+            )
+            backorders |= not_done_bo_moves.mapped('picking_id')
+        if backorders:
+            # In standard, created backorders are assigned at the end of the
+            # method
+            backorders.action_assign()
 
-        if picking_notgroup:
-            return super(StockPicking, picking_notgroup)._create_backorder(
-                backorder_moves=backorder_moves
+        for picking in picking_notgroup:
+            # Do not call _create_backorder on recordset due to unsafe
+            # signature "backorder_moves=[]" and ensure backorder_moves is
+            # correctly set
+            backorders |= super(StockPicking, picking)._create_backorder(
+                backorder_moves=picking.move_lines
             )
 
-        return self.env['stock.picking']
+        return backorders
 
 
 class StockPickingType(models.Model):
@@ -141,7 +177,6 @@ class StockMove(models.Model):
             ('location_id', '=', self.location_id.id),
             ('location_dest_id', '=', self.location_dest_id.id),
             ('picking_type_id', '=', self.picking_type_id.id),
-            ('group_id.carrier_id', '=', self.group_id.carrier_id.id),
             ('printed', '=', False),
             ('state', 'not in', ('draft', 'cancel', 'done')),
         ]
@@ -181,10 +216,8 @@ class StockMove(models.Model):
                 move.picking_type_id.groupbypartner_maxweight
                 - move.product_id.weight * move.product_qty
             )
-            backorder_orig_id = self.env.context.get('backorder_assign')
-            backorder_orig_id = self.env['stock.picking'].browse(
-                backorder_orig_id
-            )
+            backorder_orig_id = move.picking_id
+
             # Preferably assign the move in a picking having a move with the
             # same group_id. Necessary for pushed moves
             if len(pickings) > 1:
@@ -201,20 +234,26 @@ class StockMove(models.Model):
                 pickings = pickings.sorted(key=key)
             # Select the right picking to assign to
             for picking in pickings:
+                # Ensure the move related carrier matches the picking related
+                # carrier. This is not part of _assign_picking_group_domain for
+                # performance reasons
+                if picking.group_id.carrier_id != move.group_id.carrier_id:
+                    continue
                 if (
-                    not move.picking_type_id.groupbypartner_maxweight
-                    or picking.weight <= max_weight
+                    move.picking_id != picking
+                    and move.picking_type_id.groupbypartner_maxweight
+                    and picking.weight > max_weight
                 ):
+                    continue
+                if move.picking_id != picking:
                     # assign move to picking
                     _logger.debug(
-                        "Assign move %s to existing picking %s",
+                        "Assign move %s to existing picking %s (%s)",
                         move.id,
                         picking.id,
+                        picking.name,
                     )
-                    self.env.cr.execute(
-                        'SELECT printed FROM stock_picking WHERE id = %s FOR UPDATE',
-                        (picking.id,),
-                    )
+                    picking._lock()
                     move.picking_id = picking.id
                     if backorder_orig_id:
                         backorder_orig_id.message_post(
@@ -231,56 +270,68 @@ class StockMove(models.Model):
                                 picking.name,
                             )
                         )
-                    # unreserve moves having an operation for that product
-                    # Note: (re)check availability (action_assign) does not
-                    # work on added move where an operation already exists for
-                    # that product. To not recompute all the quants of the
-                    # picking, we delete only the pack operation to recompute.
-                    # No need to perform the assignment now (new pack operation
-                    # creation), it is performed later when the procurement is
-                    # run.
-                    # If the new move is in waiting state (line added in a
-                    # ship), then do not cleanup the pack operation as it won't
-                    # be recomputed
-                    if move.state == 'waiting':
-                        break
-                    operations_to_recompute = picking.pack_operation_ids.filtered(
-                        lambda op: op.product_id == move.product_id
-                    )
-                    if operations_to_recompute:
-                        _logger.debug(
-                            "Cleaning operations %s",
-                            operations_to_recompute.ids,
-                        )
-                        op_linked_moves = operations_to_recompute.mapped(
-                            'linked_move_operation_ids.move_id'
-                        )
-                        operations_to_recompute.unlink()
-                        op_linked_moves.do_unreserve()
-                    else:
-                        move.do_unreserve()
+                # unreserve moves having an operation for that product
+                # Note: (re)check availability (action_assign) does not
+                # work on added move where an operation already exists for
+                # that product. To not recompute all the quants of the
+                # picking, we delete only the pack operation to recompute.
+                # No need to perform the assignment now (new pack operation
+                # creation), it is performed later when the procurement is
+                # run.
+                # If the new move is in waiting state (line added in a
+                # ship), then do not cleanup the pack operation as it won't
+                # be recomputed
+                if move.state == 'waiting':
                     break
+                operations_to_recompute = picking.pack_operation_ids.filtered(
+                    lambda op: op.product_id == move.product_id
+                )
+                if operations_to_recompute:
+                    _logger.debug(
+                        "Cleaning operations %s", operations_to_recompute.ids
+                    )
+                    op_linked_moves = operations_to_recompute.mapped(
+                        'linked_move_operation_ids.move_id'
+                    )
+                    operations_to_recompute.unlink()
+                    op_linked_moves.do_unreserve()
+                else:
+                    move.do_unreserve()
+                break
+
             else:
-                # create a new picking
-                _logger.debug("Assign move %s to new picking", move.id)
-                values = move._get_new_picking_values()
-                picking = pick_obj.create(values)
-                if backorder_orig_id:
-                    picking.message_post(
-                        body=_("Backorder of %s" % backorder_orig_id.name)
+                if self.env.context.get('no_new_picking') and not any(
+                    pm.state == 'done' for pm in move.picking_id.move_lines
+                ):
+                    # if picking has not been processed, we can use it as backorder
+                    move.picking_id._lock()
+                    picking = move.picking_id
+                else:
+                    # create a new picking
+                    values = move._get_new_picking_values()
+                    picking = pick_obj.create(values)
+                    _logger.debug(
+                        "Assign move %s to new picking %s (%s)",
+                        move.id,
+                        picking.id,
+                        picking.name,
                     )
-                    backorder_orig_id.message_post(
-                        body=_(
-                            "Remaining move '%s' moved to new backorder "
-                            "<em>%s</em>."
+                    if backorder_orig_id:
+                        picking.message_post(
+                            body=_("Backorder of %s" % backorder_orig_id.name)
                         )
-                        % (move.product_id.display_name, picking.name)
-                    )
+                        backorder_orig_id.message_post(
+                            body=_(
+                                "Remaining move '%s' moved to new backorder "
+                                "<em>%s</em>."
+                            )
+                            % (move.product_id.display_name, picking.name)
+                        )
+                    move.picking_id = picking.id
                 if str(domain) not in pickings_cache:
                     pickings_cache[str(domain)] = picking
                 else:
                     pickings_cache[str(domain)] |= picking
-                move.picking_id = picking.id
                 move.do_unreserve()
                 # see standard assign_picking for why recompute is called
                 move.recompute()
