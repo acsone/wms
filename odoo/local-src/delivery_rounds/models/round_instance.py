@@ -104,9 +104,7 @@ class RoundInstance(models.Model):
     )
     picking_launched = fields.Boolean('Pickings Launched', readonly=True)
 
-    itinerary_ids = fields.Many2many(
-        'round.itinerary', string="Itineraries", readonly=True
-    )
+    itinerary_ids = fields.Many2many('round.itinerary', string="Itineraries")
 
     picking_ids = fields.One2many(
         'stock.picking',
@@ -298,24 +296,6 @@ class RoundInstance(models.Model):
         if errors:
             raise UserError('\n'.join(errors))
 
-    def _lock(self):
-        """Lock the database rows of the instance to prevent concurrent access.
-
-        The lock is released when the transaction is committed or rolled back.
-
-        This method is called:
-        1. when assigning pickings to a delivery round
-        2. when adding stock.moves to a picking which is in a round.
-        """
-        if self:
-            _logger.info('acquire lock for round instances %s', self.ids)
-            self.env.cr.execute(
-                'SELECT * FROM round_instance WHERE id in %s FOR UPDATE',
-                (tuple(self.ids),),
-            )
-            _logger.info('lock acquired for round instances %s', self.ids)
-        return
-
     def _check_allowed_holidays_pickings(self, pickings):
         errors = {}
         for pick in pickings:
@@ -340,7 +320,7 @@ class RoundInstance(models.Model):
             pickings.mapped('name'),
             pickings.ids,
         )
-        self._lock()
+        pickings._lock()
         self._check_printed_pickings(pickings)
         if self.env.context.get('manual_change_delivery_round'):
             self._check_allowed_holidays_pickings(pickings)
@@ -847,10 +827,36 @@ class RoundInstanceCustomer(models.Model):
                 # by stock_groupbypartner for the grouping of moves:
                 # moves will be added to a picking only if they share the
                 # same delivery.carrier than their procurement group.
-                # When we change manually the delivery round, we assign
-                # a special (disabled) delivery.carrier, so new moves will
-                # never be grouped with this picking (because we cannot use
-                # this delivery carrier)
+                # When we manually set the delivery round, if it is not
+                # compatible with the one set on the actual delivery carrier,
+                # we assign a special "manual" delivery carrier, so new moves
+                # will never be grouped with this picking (because we cannot
+                # use this delivery carrier)
+                actual_carrier_template = pickings.mapped(
+                    'group_id.carrier_id.delivery_template_id'
+                )
+                all_carrier_templates = (
+                    self.env['delivery.carrier']
+                    .search([('delivery_template_id', '!=', False)])
+                    .mapped('delivery_template_id')
+                )
+                new_template = self.delivery_round_id.template_id
+
+                if (
+                    not actual_carrier_template
+                    and new_template not in all_carrier_templates
+                ):
+                    # carrier is "Alcyon delivery" and set on an Alcyon
+                    # delivery round
+                    return
+                if (
+                    actual_carrier_template
+                    and new_template in actual_carrier_template
+                ):
+                    # carrier is a specific delivery and set on corresponding
+                    # delivery round
+                    return
+
                 manual_method = self.env.ref(
                     'delivery_rounds.delivery_carrier_manual_round_change'
                 )
@@ -959,16 +965,14 @@ class RoundInstanceCustomer(models.Model):
             # user intervention. The record will be marked
             # as failed, users will see it on the round and be able
             # to retry to deliver manually.
-            self.delivery_error = unicode(err)
+            self.delivery_error = err.name
         except Exception as err:
             _logger.exception(
                 'Failed to deliver a shipping during a delivery round '
                 'with an unexpected error: %s',
                 unicode(err),
             )
-            self.delivery_error = _('Unexpected error (%s)') % (unicode(err),)
-        else:
-            self.write({'delivery_error': '', 'delivered': True})
+            self.delivery_error = _('Unexpected error (%s)') % unicode(err)
 
     @job(default_channel='root.background.stock_picking_deliver')  # priority=5
     @api.multi
@@ -994,6 +998,28 @@ class RoundInstanceCustomer(models.Model):
         with self._handle_delivery_error(), self._new_env(
             new_cr=not config['test_enable']
         ) as new_env:
+            # check there is no ongoing picking
+            pickings = new_env['stock.picking'].search(
+                [
+                    ('state', 'not in', ('cancel', 'done')),
+                    ('picking_type_id.subcode', '=', 'PICK'),
+                    ('delivery_round_customer_id', '=', self.id),
+                ]
+            )
+            ongoing_pickings = pickings.filtered(
+                lambda p: p.printed
+                or any(op.qty_done for op in p.pack_operation_ids)
+            )
+            if ongoing_pickings:
+                raise UserError(
+                    _("You cannot deliver with ongoing picking(s): %s")
+                    % (", ".join(ongoing_pickings.mapped('name')))
+                )
+
+            new_env['round.instance.customer'].browse(self.id).write(
+                {'delivered': True, 'delivery_error': ''}
+            )
+
             # change the env to the new env so everything happening
             # will be rollbacked by the context manager in case of error
             shippings = new_env['stock.picking'].search(
@@ -1003,14 +1029,45 @@ class RoundInstanceCustomer(models.Model):
                     ('delivery_round_customer_id', '=', self.id),
                 ]
             )
-            shippings.mapped('delivery_round_id')._lock()
+            # FIXME: should be moved out of delivery_round module and applied in do_transfer
             if self.partner_id.is_sale_back_order_cancel:
                 shippings = shippings.with_context(cancel_backorder=True)
+
+            # We mark as printed to prevent to be a valid shipping when the
+            # backorder is created.
+            # For shippings that are not available (no pick done), do not track
+            # the change as we are reverting it once detached
+            # Most of the cases, there is only one shipping per delivery round
+            # customer unless a shipping with another delivery method (carrier)
+            # has been forced to this delivery round
             for shipping in shippings:
-                # Do not deliver shipping not available
                 if not shipping.pack_operation_ids:
+                    shipping.with_context(tracking_disable=True).printed = True
+                else:
+                    shipping.printed = True
+
+            for shipping in shippings:
+                # Do not deliver shipping not available (no pick done)
+                # Try to reassign move to another existing shipping
+                if not shipping.pack_operation_ids:
+                    shipping.with_context(
+                        no_new_picking=True
+                    )._create_backorder()
+                    _logger.debug(
+                        "Shipping detached from delivery round %s: %s (%s)",
+                        self.delivery_round_id.id,
+                        shipping.id,
+                        shipping.name,
+                    )
+                    # First mark as not printed otherwise constrain will fail
+                    # when shipping is detached from delivery round customer
+                    shipping.with_context(
+                        tracking_disable=True
+                    ).printed = False
+                    shipping.delivery_round_customer_id = False
                     continue
 
+                # Set quantity on all pack operations and deliver
                 for pack in shipping.pack_operation_ids:
                     if pack.product_qty > 0:
                         pack.qty_done = pack.product_qty
@@ -1021,8 +1078,34 @@ class RoundInstanceCustomer(models.Model):
                         pack.unlink()
                 shipping.do_transfer()
 
-            # detach the pickings that could not be done
-            self.with_env(new_env).mapped('picking_ids')._detach_from_round()
+            # Detach the pickings that could not be done.
+            # When we previously created the backorder on the shipping, if the
+            # customer does not accept backorders, all moves have been canceled
+            # and this causes the deletion of the round instance customer (see
+            # stock.move action_cancel). So to access the pickings from self,
+            # we first need to check if self still exists.
+            if self.with_env(new_env).exists():
+                pickings = (
+                    self.with_env(new_env)
+                    .mapped('picking_ids')
+                    .filtered(lambda p: p.state not in ('cancel', 'done'))
+                )
+                pickings.with_context(tracking_disable=True).write(
+                    {'printed': True}
+                )
+                pickings.with_context(no_new_picking=True)._create_backorder()
+                _logger.debug(
+                    "Pickings detached from delivery round %s: %s",
+                    self.delivery_round_id.id,
+                    ",".join(pickings.mapped('name')),
+                )
+                pickings.with_context(tracking_disable=True).write(
+                    {'printed': False}
+                )
+                pickings.write({'delivery_round_customer_id': False})
+
+            # Ensure any backorder is reassigned
+            shippings._delay_jobs_action_assign(shippings.mapped('partner_id'))
 
         if self.delivery_round_id.state == 'delivering':
             self.delivery_round_id.with_delay(
@@ -1051,16 +1134,6 @@ class RoundInstanceCustomer(models.Model):
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
         """
-        pickings = self.env['stock.picking'].search(
-            [
-                ('state', 'not in', ('cancel', 'done')),
-                ('picking_type_id.subcode', '=', 'PICK'),
-                ('delivery_round_customer_id', 'in', self.ids),
-            ]
-        )
-        if any(op.qty_done for op in pickings.mapped('pack_operation_ids')):
-            raise UserError(_("You cannot deliver when a picking is ongoing"))
-
         for icust in self:
             if icust.delivered:
                 continue

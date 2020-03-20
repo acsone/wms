@@ -14,25 +14,6 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     @api.multi
-    def write(self, values):
-        picking_id = values.get('picking_id')
-        if picking_id:
-            # We are assigning the move to a picking ->
-            # take a lock on the round instance of the picking (this is a noop
-            # if the picking has no round instance) to prevent concurrent
-            # access and retries
-            picking = self.env['stock.picking'].browse(picking_id)
-            if picking.delivery_round_id:
-                _logger.info(
-                    'setting a new picking %s on move %s (related round: %d)',
-                    picking.name,
-                    self.ids,
-                    picking.delivery_round_id.id,
-                )
-                picking.delivery_round_id._lock()
-        return super(StockMove, self).write(values)
-
-    @api.multi
     def _action_assign_filter_moves(self):
         move_ids = set()
         for move in self:
@@ -51,6 +32,16 @@ class StockMove(models.Model):
         """
         if not self.env.context.get('round_autoset', True):
             return super(StockMove, self).action_assign(no_prepare=no_prepare)
+
+        # For PICK backorder, reassign immediately
+        if self.env.context.get('round_backorder'):
+            return super(
+                StockMove,
+                self.filtered(
+                    lambda m: m.picking_id.delivery_round_customer_id
+                    and not m.picking_id.delivery_round_customer_id.delivered
+                ),
+            ).action_assign(no_prepare=no_prepare)
 
         pick_moves = self._action_assign_filter_moves()
 
@@ -118,60 +109,38 @@ class StockMove(models.Model):
     @api.multi
     def _assign_picking_group_domain(self):
         domain = super(StockMove, self)._assign_picking_group_domain()
-        orig_picking = self.move_orig_ids.mapped('picking_id')
-        no_round_assign = self._context.get('no_round_assign', False)
-        if orig_picking and not orig_picking.mapped('delivery_round_id'):
+
+        # Ensure PICK moves are assigned in the same delivery round as the SHIP
+        delivery_round_customer = (
+            self.move_dest_id.picking_id.delivery_round_customer_id
+        )
+        if delivery_round_customer:
             domain += [
-                '|',
-                ('delivery_round_id', '=', False),
-                ('delivery_round_id.state', 'in', ('open', 'draft')),
-            ]
-        elif orig_picking and orig_picking.mapped('delivery_round_id'):
-            domain += [
-                (
-                    'delivery_round_customer_id',
-                    'in',
-                    orig_picking.mapped('delivery_round_customer_id').ids,
-                )
-            ]
-        elif (
-            not orig_picking
-            and not no_round_assign
-            and self._context.get('backorder_assign')
-        ):
-            back_order_id = self._context['backorder_assign']
-            back_order = self.env['stock.picking'].browse(back_order_id)
-            domain += [
-                (
-                    'delivery_round_customer_id',
-                    '=',
-                    back_order.delivery_round_customer_id.id,
-                )
+                ('delivery_round_customer_id', '=', delivery_round_customer.id)
             ]
         else:
+            # Do not allow to add moves in a picking that is in a delivery round
+            # that is not Open (draft)
             domain += [
                 '|',
-                ('delivery_round_id', '=', False),
-                ('delivery_round_id.state', 'in', ('open', 'draft')),
+                ('delivery_round_customer_id', '=', False),
+                ('delivery_round_id.state', '=', 'draft'),
             ]
         return domain
 
     @api.multi
-    def assign_picking(self):
-        res = super(StockMove, self).assign_picking()
-        bo_assign = self._context.get('backorder_assign', False)
-        if bo_assign:
-            bo_assign = self.env['stock.picking'].browse(bo_assign)
-        else:
-            bo_assign = self.env['stock.picking']
-        # if we are assigning the move to a picking in the context of the
-        # creation of a backorder, then make sure that 1. the backorder picking
-        # lands in the same delivery round as the original picking, and 2. run
-        # a job to check the availability of the picking's moves so that if a
-        # replenishment has occured, the moves are available. (See ALCYN-2130)
-        if bo_assign.delivery_round_id:
-            bo_assign.delivery_round_id._assign_pickings(
-                self.mapped('picking_id')
-            )
-            self.mapped('picking_id')._job_action_assign()
+    def _get_new_picking_values(self):
+        res = super(StockMove, self)._get_new_picking_values()
+        # In case of PICK backorder, keep in the delivery round
+        # In case of delivery, move out of delivery round
+        if (
+            self.picking_id.delivery_round_customer_id
+            and not self.picking_id.delivery_round_customer_id.delivered
+            and self.picking_id.delivery_round_id.state
+            not in ('delivering', 'done')
+        ):
+            res[
+                'delivery_round_customer_id'
+            ] = self.picking_id.delivery_round_customer_id.id
+            res['rank'] = self.picking_id.rank
         return res

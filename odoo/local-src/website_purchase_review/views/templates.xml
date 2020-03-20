@@ -261,7 +261,7 @@
                                     </tr>
                                     <tr t-foreach="current_product.get_lots()" t-as="lot">
                                         <td><span t-field="lot.name"/></td>
-                                        <td><span t-esc="int(lot.with_context(only_wh_stock_quants=True).product_qty)"/></td>
+                                        <td><span t-esc="int(lot.qty_available)"/></td>
                                         <td><span t-field="lot.life_date"/></td>
                                     </tr>
                                 </table>
