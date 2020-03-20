@@ -3,16 +3,11 @@
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.round</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="delivery.view_partner_property_form"/>
+        <field name="inherit_id" ref="partner_delivery.res_partner_form_view"/>
         <field name="arch" type="xml">
-            <field name="property_delivery_carrier_id" position="replace"/>
-
-            <group name="purchase" position="after">
-                <group name="delivery" string="Delivery">
-                    <field name="property_delivery_carrier_id"/>
-                    <field name="round_itinerary_ids" widget="many2many_tags"/>
-                </group>
-            </group>
+            <field name="property_delivery_carrier_id" position="after">
+                <field name="round_itinerary_ids" widget="many2many_tags"/>
+            </field>
 
         </field>
     </record>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="round_instance_form_view">
+        <field name="name">round.instance.form (in
+            alc_delivery_rounds_geooptimize)
+        </field>
+        <field name="model">round.instance</field>
+        <field name="inherit_id"
+               ref="delivery_rounds.view_round_instance_form"/>
+        <field name="arch" type="xml">
+            <page name="statistics" position="before">
+                <page name="optimizations" string="Geo Optimization">
+                    <group>
+                        <field name="geo_optimization_enabled"/>
+                        <field name="geo_optimization_task_id"/>
+                        <field name="geo_optimization_start_dt"/>
+                        <field name="geo_optimization_status"/>
+                        <field name="geo_optimization_state"/>
+                        <field name="geo_optimization_result"/>
+                        <field name="geo_optimization_error_message"/>
+                    </group>
+                </page>
+            </page>
+            <button name="button_deliver" position="after">
+                <button name="retry_optimization" type="object"
+                        states="optimization_failure"
+                        string="Retry Geo Optimize"/>
+                <button name="button_ignore_optimization_failure" type="object"
+                        states="optimization_failure"
+                        string="Ignore Optimization Failure"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_round_instance_kanban" model="ir.ui.view">
+        <field name="name">round.instance.kanban (in
+            alc_delivery_rounds_geooptimize)
+        </field>
+        <field name="model">round.instance</field>
+        <field name="inherit_id"
+               ref="delivery_rounds.view_round_instance_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='button_deliver']/parent::div"
+                   position="after">
+                <div>
+                    <a name="retry_optimization" type="object"
+                       states="optimization_failure">Retry Geo Optimize
+                    </a>
+                </div>
+                <div>
+                    <a name="button_ignore_optimization_failure" type="object"
+                       states="optimization_failure">Ignore Optimization
+                        Failure
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="round_instance_search_view">
+        <field name="name">round.instance.search (in
+            alc_delivery_rounds_geooptimize)
+        </field>
+        <field name="model">round.instance</field>
+        <field name="inherit_id"
+               ref="delivery_rounds.view_round_instance_search"/>
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="geo_optimization_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="round_instance_tree_view">
+        <field name="name">round.instance.tree (in
+            alc_delivery_rounds_geooptimize)
+        </field>
+        <field name="model">round.instance</field>
+        <field name="inherit_id"
+               ref="delivery_rounds.view_round_instance_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="geo_optimization_state"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -93,27 +93,28 @@ class DeliveryRoundTestCase(SavepointCase):
         )
         inventory.action_done()
 
-    def _create_picking_pick(self, partner=None):
+    @classmethod
+    def _create_picking_pick(cls, partner=None):
         if not partner:
-            partner = self.partner1
-        warehouse = self.warehouse_1
-        Picking = self.env['stock.picking']
+            partner = cls.partner1
+        warehouse = cls.warehouse_1
+        Picking = cls.env['stock.picking']
         picking_values = {
             'partner_id': partner.id,
             'picking_type_id': warehouse.pick_type_id.id,
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': cls.env.ref('stock.stock_location_stock').id,
             'location_dest_id': warehouse.wh_output_stock_loc_id.id,
             'move_lines': [
                 (
                     0,
                     0,
                     {
-                        'name': self.p1.name,
-                        'product_id': self.p1.id,
+                        'name': cls.p1.name,
+                        'product_id': cls.p1.id,
                         'picking_type_id': warehouse.pick_type_id.id,
                         'product_uom_qty': 1,
-                        'product_uom': self.p1.uom_id.id,
-                        'location_id': self.env.ref(
+                        'product_uom': cls.p1.uom_id.id,
+                        'location_id': cls.env.ref(
                             'stock.stock_location_stock'
                         ).id,
                         'location_dest_id': warehouse.wh_output_stock_loc_id.id,
@@ -123,16 +124,17 @@ class DeliveryRoundTestCase(SavepointCase):
         }
         return Picking.create(picking_values)
 
-    def _create_picking_out(self, partner=None):
+    @classmethod
+    def _create_picking_out(cls, partner=None):
         if not partner:
-            partner = self.partner1
-        warehouse = self.warehouse_1
-        Picking = self.env['stock.picking']
+            partner = cls.partner1
+        warehouse = cls.warehouse_1
+        Picking = cls.env['stock.picking']
         picking_values = {
             'partner_id': partner.id,
             'picking_type_id': warehouse.out_type_id.id,
             'location_id': warehouse.wh_output_stock_loc_id.id,
-            'location_dest_id': self.env.ref(
+            'location_dest_id': cls.env.ref(
                 'stock.stock_location_customers'
             ).id,
             'move_lines': [
@@ -140,13 +142,13 @@ class DeliveryRoundTestCase(SavepointCase):
                     0,
                     0,
                     {
-                        'name': self.p1.name,
-                        'product_id': self.p1.id,
+                        'name': cls.p1.name,
+                        'product_id': cls.p1.id,
                         'picking_type_id': warehouse.out_type_id.id,
                         'product_uom_qty': 1,
-                        'product_uom': self.p1.uom_id.id,
+                        'product_uom': cls.p1.uom_id.id,
                         'location_id': warehouse.wh_output_stock_loc_id.id,
-                        'location_dest_id': self.env.ref(
+                        'location_dest_id': cls.env.ref(
                             'stock.stock_location_customers'
                         ).id,
                     },
@@ -155,13 +157,14 @@ class DeliveryRoundTestCase(SavepointCase):
         }
         return Picking.create(picking_values)
 
-    def _confirm_sale_order(self, partner=None, product=None, qty=1):
+    @classmethod
+    def _confirm_sale_order(cls, partner=None, product=None, qty=1):
         if partner is None:
-            partner = self.partner1
+            partner = cls.partner1
         if product is None:
-            product = self.p1
-        warehouse = self.warehouse_1
-        Sale = self.env['sale.order']
+            product = cls.p1
+        warehouse = cls.warehouse_1
+        Sale = cls.env['sale.order']
         so_values = {
             'partner_id': partner.id,
             'warehouse_id': warehouse.id,
