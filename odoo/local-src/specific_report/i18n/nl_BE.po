@@ -1029,7 +1029,7 @@ msgstr "Referentie te vermelden bij betaling"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Credit"
+msgstr "Creditnota"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_picking_body
