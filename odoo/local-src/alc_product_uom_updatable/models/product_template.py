@@ -14,12 +14,13 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def write(self, vals):
-        uom_id = False
-        if 'uom_id' in vals:
-            uom_id = vals.pop('uom_id')
+        uom_id = vals.pop('uom_id', False)
+        uom_po_id = vals.pop('uom_po_id', False)
         res = super(ProductTemplate, self).write(vals)
         if uom_id:
             self._update_uom(uom_id)
+        if uom_po_id:
+            self._update_uom_po(uom_po_id)
         return res
 
     @api.multi
@@ -30,11 +31,10 @@ class ProductTemplate(models.Model):
             product_id_list = []
             for product in product_list:
                 product_id_list.append(product.id)
-            old_uom_id = product_list[0].uom_id
-            new_uom = uom_obj.search([("id", "=", uom_id)])
+            new_uom = uom_obj.browse(uom_id)
             if (
-                old_uom_id.category_id == new_uom.category_id
-                and old_uom_id.factor == new_uom.factor
+                key.category_id == new_uom.category_id
+                and key.factor == new_uom.factor
             ):
                 self.env.cr.execute(
                     'UPDATE product_template SET uom_id = %(uom)s WHERE id in %(product_id)s',
@@ -44,5 +44,32 @@ class ProductTemplate(models.Model):
                 raise UserError(
                     _(
                         "You can not change the unit of measure of a product to a new unit that doesn't have the same category and factor"
+                    )
+                )
+
+    @api.multi
+    def _update_uom_po(self, uom_po_id):
+        uom_obj = self.env["product.uom"]
+        for key, products_group in groupby(self, key=lambda r: r.uom_po_id):
+            product_list = list(products_group)
+            product_id_list = []
+            for product in product_list:
+                product_id_list.append(product.id)
+            new_uom_po = uom_obj.browse(uom_po_id)
+            if (
+                key.category_id == new_uom_po.category_id
+                and key.factor == new_uom_po.factor
+            ):
+                self.env.cr.execute(
+                    'UPDATE product_template SET uom_po_id = %(uom)s WHERE id in %(product_id)s',
+                    {
+                        'uom': new_uom_po.id,
+                        'product_id': tuple(product_id_list),
+                    },
+                )
+            else:
+                raise UserError(
+                    _(
+                        "You can not change the purchase unit of measure of a product to a new unit that doesn't have the same category and factor"
                     )
                 )

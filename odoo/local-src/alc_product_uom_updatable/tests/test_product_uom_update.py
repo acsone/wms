@@ -18,7 +18,7 @@ class TestProductUomUpdate(TransactionCase):
         self.location_id = self.ref('stock.stock_location_suppliers')
         self.location_dest_id = self.ref('stock.stock_location_stock')
 
-    def test_1(self):
+    def test_update_uom(self):
         self.picking_in = self.env['stock.picking'].create(
             {
                 'picking_type_id': self.picking_type_id,
@@ -50,3 +50,7 @@ class TestProductUomUpdate(TransactionCase):
         # uom is changed with another uom with the same category
         self.product.update({"uom_id": self.new_uom.id})
         self.assertEqual(self.product.uom_id, self.new_uom)
+        # uom_po can also be changed with another uom with the same category
+        self.assertEqual(self.product.uom_po_id, self.uom_unit)
+        self.product.update({"uom_po_id": self.new_uom.id})
+        self.assertEqual(self.product.uom_po_id, self.new_uom)
