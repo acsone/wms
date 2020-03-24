@@ -24,6 +24,7 @@
         'stock_available_immediately',
         'stock_expired',
         'stock_inventory_products',
+        'stock_location',
         'stock_mts_mto_rule',
         'stock_operation_recompute',
         'stock_picking_assignment',
@@ -51,6 +52,7 @@
         'views/stock_inventory.xml',
 
         # Wizards
+        'wizards/location_checksum.xml',
         'wizards/stock_receive_lot.xml',
         'wizards/stock_picking_return_views.xml',
         'wizards/stock_move_update_handler.xml',

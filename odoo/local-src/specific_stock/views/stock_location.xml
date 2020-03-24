@@ -40,6 +40,11 @@
         <field name="arch" type="xml">
 
             <xpath expr="//search" position="inside">
+                <field name="zone"/>
+                <field name="corridor"/>
+                <field name="shelf"/>
+                <field name="height"/>
+                <field name="box"/>
                 <separator/>
                 <filter string="Bin" name="bin" domain="[('kind','=','bin')]"/>
                 <filter string="Parking" name="parking" domain="[('kind','=','parking')]"/>
@@ -49,4 +54,17 @@
         </field>
     </record>
 
+    <record id="stock_location_pivot" model="ir.ui.view">
+        <field name="name">stock.location.pivot</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock Location">
+                <field name="bin_checksum_1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="stock.action_location_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
 </odoo>
