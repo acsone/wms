@@ -12,5 +12,5 @@ setup(
     description='Alcyon Odoo Addons',
     setup_requires=['setuptools-odoo'],
     odoo_addons={'odoo_version_override': '10.0'},
-    install_requires=['odoo-autodiscover', 'click-odoo-contrib'],
+    install_requires=['odoo-autodiscover', 'click-odoo-contrib>=1.9.0'],
 )
