@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.49.0 (2020-03-25)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2451: Fix translations (invoice)
 * Change queue job priority of printing jobs
 * ALCYN-2420: Do not allow multiple tax of type VAT in sale, purchase and on product.
@@ -33,8 +45,6 @@ latest (unreleased)
 **Build**
 
 * Patches by Acsone to reduce the warnings in the tests
-
-**Documentation**
 
 
 10.0.1.48.5 (2020-03-19)
