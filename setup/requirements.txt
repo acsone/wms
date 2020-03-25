@@ -10,7 +10,7 @@ cffi==1.14.0
 chardet==3.0.4
 Click==7.0
 click-odoo==1.4.2
-click-odoo-contrib==1.8.0
+click-odoo-contrib==1.9.0
 cryptography==2.8
 decorator==4.0.10
 dicttoxml==1.7.4
