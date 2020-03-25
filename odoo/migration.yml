@@ -659,8 +659,7 @@ migration:
           - stock_delivery_note
       operations:
         pre:
-          - psql -f odoo/songs/upgrade/update_10_0_1_49_0.sql
+          - anthem songs.upgrade.update_10_0_1_49_0::pre
         post:
           - anthem songs.upgrade.update_10_0_1_49_0::post
-        post:
-          - anthem songs.upgrade.update_10_0_1_49_0::post
+          

@@ -24,3 +24,19 @@ def uninstall_module(ctx):
 def post(ctx):
     reload_translation(ctx)
     uninstall_module(ctx)
+
+
+@anthem.log
+def pre(ctx):
+    imd = ctx.env['ir.model.data'].search(
+        [
+            ('module', '=', 'stock_delivery_note'),
+            ('name', '=', 'vat_tax_group'),
+        ]
+    )
+    for rec in imd:
+        if not ctx.env['ir.model.data'].search(
+            [('module', '=', 'specific_data'), ('name', '=', 'vat_tax_group')]
+        ):
+            rec.copy({'module': 'specific_data'})
+        rec.unlink()
