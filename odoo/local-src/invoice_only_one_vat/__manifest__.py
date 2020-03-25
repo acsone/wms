@@ -10,7 +10,7 @@
  'category': 'account',
  'depends': [
      'account',
-     'stock_delivery_note',
+     'specific_data',
  ],
  'website': 'http://www.camptocamp.com',
  'installable': True,

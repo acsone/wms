@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import anthem
+from anthem.lyrics.modules import uninstall
 
 
 @anthem.log
@@ -14,5 +15,12 @@ def reload_translation(ctx):
 
 
 @anthem.log
+def uninstall_module(ctx):
+    modules = ['invoice_only_one_vat', 'sale_only_one_vat']
+    uninstall(ctx, modules)
+
+
+@anthem.log
 def post(ctx):
     reload_translation(ctx)
+    uninstall_module(ctx)
