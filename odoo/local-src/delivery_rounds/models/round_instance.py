@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2016-2020 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2017-2020 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -1102,7 +1103,17 @@ class RoundInstanceCustomer(models.Model):
                 pickings.with_context(tracking_disable=True).write(
                     {'printed': False}
                 )
+                # If all moves have been sent to another picking during
+                # backorder creation, recompute state to draft to allow to
+                # delete pack operations which happens automaticaly when
+                # detached from delivery round
+                pickings._compute_state()
                 pickings.write({'delivery_round_customer_id': False})
+                # If all moves have been sent to another picking during
+                # backorder creation, mark it as done
+                pickings_empty = pickings.filtered(lambda p: not p.move_lines)
+                pickings_empty.write({'printed': True})
+                pickings_empty._compute_state()
 
             # Ensure any backorder is reassigned
             shippings._delay_jobs_action_assign(shippings.mapped('partner_id'))

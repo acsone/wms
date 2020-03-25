@@ -25,6 +25,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2454: Fix delivery error on done pickings
+
 **Build**
 
 **Documentation**
