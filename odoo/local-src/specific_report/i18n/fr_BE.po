@@ -545,7 +545,7 @@ msgstr "Facture annulée"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Canceled Refund"
-msgstr "Remboursement annulé"
+msgstr "Note de crédit annulée"
 
 #. module: specific_report
 #: code:addons/specific_report/models/sale_order.py:115
@@ -1029,7 +1029,7 @@ msgstr "Référence de votre paiement"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
-msgstr "Rembourser"
+msgstr "Note de crédit"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_picking_body
