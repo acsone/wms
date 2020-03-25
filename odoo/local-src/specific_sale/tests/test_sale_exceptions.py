@@ -124,7 +124,6 @@ class TestSaleOrderException(SavepointCase):
         )
         cls.so1 = cls.env['sale.order'].create(
             {
-                'esb_ref': 'ref_123',
                 'partner_id': cls.partner.id,
                 'date_order': '2018-01-29',
                 'sale_channel': 'fax',

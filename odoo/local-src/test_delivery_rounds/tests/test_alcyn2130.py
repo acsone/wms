@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from odoo import tools
+
 from .common import TestDeliveryRound
 
 
@@ -439,7 +441,8 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
                 ],
             }
         )
-        refill.with_context(test_queue_job_no_delay=1).action_done()
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            refill.with_context(test_queue_job_no_delay=1).action_done()
         # backorder is available
         self.assertEqual(backorder_preparation.state, 'assigned')
 
@@ -652,9 +655,10 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         )
         self.delivery_round_2.button_resetdraft()
         # deliver round 1 without processing the pick of so1
-        self.delivery_round_1.with_context(
-            test_queue_job_no_delay=1
-        ).button_deliver()
+        with tools.mute_logger('odoo.addons.queue_job.models.base'):
+            self.delivery_round_1.with_context(
+                test_queue_job_no_delay=1
+            ).button_deliver()
         self.delivery_round_1.button_done()
         # the pickings of so2 are automatically assigned to the delivery round 2
         self.assertEqual(

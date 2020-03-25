@@ -20,7 +20,6 @@ class TestReportProductPriceImport(SavepointCase):
             {
                 'name': 'Product 1',
                 'list_price': 11.0,
-                "sale_price": 12.5,
                 "indicated_price": 13.75,
                 "default_code": "P01",
             }

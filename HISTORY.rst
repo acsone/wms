@@ -32,6 +32,8 @@ latest (unreleased)
 
 **Build**
 
+* Patches by Acsone to reduce the warnings in the tests
+
 **Documentation**
 
 

@@ -78,6 +78,24 @@ class TestDeliveryRoundAssignMixin(SavepointCase):
         inventory.action_done()
         return inventory
 
+    @classmethod
+    def _prepare_delivery_round(cls):
+        delivery_template = cls.env['round.template'].create(
+            {'name': 'Unittest delivery template'}
+        )
+        delivery_carrier_fixed = cls.env['delivery.carrier'].create(
+            {
+                'name': 'Unittest shipping costs',
+                'delivery_type': 'fixed',
+                'fixed_price': 10.0,
+                'delivery_template_id': delivery_template.id,
+            }
+        )
+        delivery_round = cls.env['round.instance'].create(
+            {'template_id': delivery_template.id, 'date': '2017-01-01'}
+        )
+        return delivery_carrier_fixed, delivery_round
+
 
 class TestDeliveryRoundAssign(TestDeliveryRoundAssignMixin):
     post_install = True

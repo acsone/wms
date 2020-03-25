@@ -37,7 +37,6 @@ class ExportBuyXGetY(ESBXMLTestCase):
         self.si1 = self.model.create(
             {
                 'product_tmpl_id': self.prod_1.id,
-                'name': self.partner.id,
                 'ratio_main_product': 6,
                 'ratio_promotional_product': 1,
                 'date_start': None,
@@ -51,7 +50,6 @@ class ExportBuyXGetY(ESBXMLTestCase):
         self.si2 = self.model.create(
             {
                 'product_tmpl_id': self.prod_1.id,
-                'name': self.partner.id,
                 'ratio_main_product': 3,
                 'ratio_promotional_product': 1,
                 'date_start': datetime.today() - timedelta(days=10),
@@ -65,7 +63,6 @@ class ExportBuyXGetY(ESBXMLTestCase):
         self.si3 = self.model.create(
             {
                 'product_tmpl_id': self.prod_1.id,
-                'name': self.partner.id,
                 'ratio_main_product': 3,
                 'ratio_promotional_product': 1,
                 'date_start': '1971-02-01',
