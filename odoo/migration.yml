@@ -655,6 +655,7 @@ migration:
           - account_tax_one_vat
           - specific_data
           - specific_report
+          - specific_shipping_costs
           - stock_delivery_note
       operations:
         pre:

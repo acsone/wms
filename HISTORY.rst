@@ -24,6 +24,7 @@ latest (unreleased)
 * ALCYN-2451: Fix translations (invoice)
 * Change queue job priority of printing jobs
 * ALCYN-2420: Do not allow multiple tax of type VAT in sale, purchase and on product.
+* ALCYN-2426: Delivery fees are added on the SO before creating the invoice
 
 **Bugfixes**
 
