@@ -21,6 +21,8 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2426: Delivery fees are added on the SO before creating the invoice
+
 **Bugfixes**
 
 **Build**
