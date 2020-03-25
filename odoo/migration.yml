@@ -653,3 +653,6 @@ migration:
       addons:
         upgrade:
           - specific_report
+      operations:
+        post:
+          - anthem songs.upgrade.update_10_0_1_49_0::post
