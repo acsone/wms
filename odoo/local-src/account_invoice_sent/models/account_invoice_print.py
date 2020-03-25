@@ -30,7 +30,7 @@ class AccountInvoicePrint(models.Model):
         for record in self:
             record.fname = 'account_invoice_print_{}.pdf'.format(self.id)
 
-    @job(default_channel='root.background.invoice_print')  # priority=40
+    @job(default_channel='root.background.invoice_print')  # priority=20
     def generate_report(self):
         """Generate a pdf report for all invoices"""
         self.ensure_one()

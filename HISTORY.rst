@@ -22,6 +22,7 @@ latest (unreleased)
 **Features and Improvements**
 
 * ALCYN-2451: Fix translations (invoice)
+* Change queue job priority of printing jobs
 
 **Bugfixes**
 
