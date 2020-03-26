@@ -3,6 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
+import logging
+import os
+import tempfile
+from contextlib import closing
 
 from odoo import _, fields, models
 from odoo.addons.queue_job.job import job
@@ -50,10 +54,52 @@ class AccountInvoicePrint(models.Model):
             invoice.message_post(body=_("Invoice sent"))
             if self.send_email_copy:
                 template.send_mail(invoice.id)
-        pdf = self.env['report'].get_pdf(
+
+        attachment = self.env['report']._check_attachment_use(
             invoices.sorted(key=lambda r: r.partner_id.ref).ids,
-            'account.report_invoice',
+            self.env['report']._get_report_from_name('account.report_invoice'),
         )
+        pdfdocuments = []
+        for document_id, document in attachment['loaded_documents'].items():
+            pdfreport_fd, pdfreport_path = tempfile.mkstemp(
+                suffix='.pdf', prefix='report.tmp.'
+            )
+            if attachment and document:
+                with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
+                    pdfreport.write(document)
+                pdfdocuments.append(pdfreport_path)
+
+        # adding missing documents that weren't already generated
+        expected_invoice_ids = set(invoices.ids)
+        found_invoice_ids = set(attachment['loaded_documents'].keys())
+        missing_invoice_ids = expected_invoice_ids - found_invoice_ids
+        if missing_invoice_ids:
+            missing_invoices = self.env['account.invoice'].browse(
+                missing_invoice_ids
+            )
+            pdfstr = self.env['report'].get_pdf(
+                missing_invoices.sorted(key=lambda r: r.partner_id.ref).ids,
+                'account.report_invoice',
+            )
+            pdfreport_fd, pdfreport_path = tempfile.mkstemp(
+                suffix='.pdf', prefix='report.tmp.'
+            )
+            if pdfstr:
+                with closing(os.fdopen(pdfreport_fd, 'w')) as pdfreport:
+                    pdfreport.write(pdfstr)
+                    pdfdocuments.append(pdfreport_path)
+
+        pdf = self.env['report']._merge_pdf(pdfdocuments)
+
+        # Manual cleanup of the temporary files
+        for document in pdfdocuments:
+            try:
+                os.unlink(document)
+            except (OSError, IOError):
+                logging.getLogger(__name__).error(
+                    'Error when trying to remove file %s' % document
+                )
+
         self.document = base64.b64encode(pdf)
         invoices.write({'sent': True})
 
