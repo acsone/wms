@@ -105,7 +105,7 @@ odoo10-addon-product-price-category @ git+https://github.com/acsone/sale-workflo
 odoo10-addon-product-sequence @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_sequence
 odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_cancel_reason
 odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_delivery_split_date
-odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job
+odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
 odoo10-addon-report-xlsx @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx
 odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx_helper
