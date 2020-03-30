@@ -130,7 +130,7 @@ build-and-publish-image:
     - build_and_push_image
   when: manual
   only:
-    - /1\.49\.\d+/
+    - /1\.50\.\d+/
   dependencies:
     - build
 
@@ -151,7 +151,7 @@ deploy-test:
     on_stop: stop-test
   when: manual
   only:
-    - /1\.49\.\d+/
+    - /1\.50\.\d+/
   dependencies:
     - build-and-publish-image
   # allow failures so we can merge without running this deployment job
@@ -171,7 +171,7 @@ stop-test:
     action: stop
   when: manual
   only:
-    - /1\.49\.\d+/
+    - /1\.50\.\d+/
   dependencies: []
   allow_failure: true
 
