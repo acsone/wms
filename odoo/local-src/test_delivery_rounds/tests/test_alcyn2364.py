@@ -23,8 +23,46 @@ class DeliveryFees(TestDeliveryRound):
         # round is in draft and open
         cls.delivery_round_1.button_resetdraft()
 
+    def get_shipping_cost(self, so):
+        """Returns the amount of shipping cost billed on a sale order"""
+        delivery_line = so.order_line.filtered('is_delivery')
+        return sum(delivery_line.mapped('price_unit'))
+
+    def test_invoicing_shipping_fees_1_sale_order_out_validate_by_client(self):
+        """ We want to be sure the shipping fees are invoiced.
+
+        The OUT validation directly from the client
+        not from the delivery round.
+        """
+        # create sale order
+        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
+        # add carrier to so
+        so1.carrier_id = self.delivery_method
+        # assign picking to the delivery round
+        self.delivery_round_1._assign_pickings(so1.picking_ids)
+        self.delivery_round_1.button_picking_start()
+        preparation = so1.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
+        )
+        pack_op = preparation.pack_operation_ids[0]
+        pack_op.qty_done = 10.0
+        preparation.do_new_transfer()
+        shippings = so1.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.out_type_id
+        )
+        pack_op = shippings.pack_operation_ids[0]
+        pack_op.qty_done = 10.0
+        shippings.do_new_transfer()
+        # close round
+        self.delivery_round_1.button_close()
+        so_invoice_status = so1.mapped('order_line.invoice_status')
+
+        self.assertEqual(so_invoice_status, ['to invoice', 'to invoice'])
+        self.assertTrue(so1.used_for_delivery_fee)
+        self.assertEqual(self.get_shipping_cost(so1), self.fee)
+
     def test_invoicing_shipping_fees_1_sale_order(self):
-        """ We whant to be sure the shipping fees are invoiced.
+        """ We want to be sure the shipping fees are invoiced.
         """
         # create sale order
         so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)

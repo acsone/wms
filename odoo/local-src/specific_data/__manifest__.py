@@ -10,6 +10,7 @@
     'category': 'Base',
     'depends': [
         'base',
+        'account',
         'product',
         'stock',
         'code_abc',
@@ -21,6 +22,7 @@
     ],
     'website': 'http://www.camptocamp.com',
     'data': [
+        'data/account_tax_group.xml',
         'data/product.category.csv',
         'data/product.pricelist.csv',
     ],
