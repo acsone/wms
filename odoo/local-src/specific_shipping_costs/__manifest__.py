@@ -11,6 +11,7 @@
     'depends': [
         'delivery',
         'delivery_rounds',
+        'delivery_rounds_refill',
         'mrp',
         'specific_sale',
         'specific_stock',

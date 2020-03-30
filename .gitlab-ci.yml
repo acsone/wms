@@ -2,6 +2,7 @@ stages:
   - code quality
   - build
   - test
+  - build image
   - deploy
 
 before_script:
@@ -120,14 +121,25 @@ test:
   dependencies:
     - build
 
+build-and-publish-image:
+  stage: build image
+  tags:
+    - docker
+  script: 
+    - cd setup
+    - build_and_push_image
+  when: manual
+  only:
+    - /1\.48\.\d+/
+  dependencies:
+    - build
+
 deploy-test:
   stage: deploy
   tags:
     - kubectl
-    - docker
   script:
     - cd setup
-    - build_and_push_image
     - echo "$TEST_KUBECONFIG" > .kubeconfig
     - export KUBECONFIG=$PWD/.kubeconfig
     - create_gitlab_registry_secret
@@ -136,16 +148,16 @@ deploy-test:
   environment:
     name: test/odoo-alcyon
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
-    on_stop: stop_test
+    on_stop: stop-test
   when: manual
   only:
     - /1\.48\.\d+/
   dependencies:
-    - build
+    - build-and-publish-image
   # allow failures so we can merge without running this deployment job
   allow_failure: true
     
-stop_test:
+stop-test:
   stage: deploy
   tags:
     - kubectl

@@ -116,7 +116,7 @@ odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-wo
 odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@23291f5b23b23b2e276634282922ebc77a0c80e0#subdirectory=setup/purchase_order_import
 odoo10-addon-purchase-order-import-ubl @ git+https://github.com/acsone/edi.git@6b0ab1a08cc9aa3575380d0f4426cb867f2fe03d#subdirectory=setup/purchase_order_import_ubl
 odoo10-addon-purchase-order-ubl==10.0.1.0.0.99.dev10
-odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job
+odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
 odoo10-addon-report-xlsx @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx
 odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx_helper

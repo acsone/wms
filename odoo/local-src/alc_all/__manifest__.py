@@ -6,7 +6,7 @@
     "name": "Alc All",
     "description": """
         Alcyon Odoo App""",
-    "version": "10.0.1.48.1",
+    "version": "10.0.1.48.5",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -79,6 +79,7 @@
         "alc_product_uom_updatable",
         "account_move_productcateg",
         "account_payment_order_background",
+        "account_tax_one_vat",
         "camptocamp_tools",  # to remove
         "connector_esb",
         "csv_file_export",  # to remove
@@ -86,7 +87,6 @@
         "db2_import",  # to remove
         "delivery_rounds_alcyon",
         "external_fax",
-        "invoice_only_one_vat",
         "ir_sequence_period",
         "l10n_be_bba_fix",
         "l10n_be_vat",
@@ -95,7 +95,6 @@
         "purchase_prepaid",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
-        "sale_only_one_vat",
         "sale_quick_create",
         "server_environment_files",
         "specific_account",

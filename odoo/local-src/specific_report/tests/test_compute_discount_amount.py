@@ -115,7 +115,7 @@ class TestComputeDiscountAmount(TransactionCase):
         """
         tax_group_apb = self.env.ref('specific_account.tax_group_apb')
         tax_group_antibiotics = self.env.ref('account.tax_group_taxes')
-        tax_group_vat = self.env.ref('stock_delivery_note.vat_tax_group')
+        tax_group_vat = self.env.ref('specific_data.vat_tax_group')
         tax_6 = self.env["account.tax"].create(
             {
                 'name': 'TEST 6% tax',
@@ -227,7 +227,7 @@ class TestComputeDiscountAmount(TransactionCase):
 
         This test is based on fake values but offer a better coverage.
         """
-        tax_group_vat = self.env.ref('stock_delivery_note.vat_tax_group')
+        tax_group_vat = self.env.ref('specific_data.vat_tax_group')
         tax_6 = self.env["account.tax"].create(
             {
                 'name': 'TEST 6% tax',

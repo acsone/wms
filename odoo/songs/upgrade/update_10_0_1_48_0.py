@@ -111,11 +111,12 @@ def call_action_done(ctx):
 @anthem.log
 def move_backorders_out(ctx):
     # 3. move backorders out of delivery rounds
+    errors = []
     pickings = ctx.env['stock.picking'].search(
         [
             ('state', 'not in', ('cancel', 'done')),
             ('delivery_round_id.state', '=', 'done'),
-            ('printed', '=', False),
+            ('printed', '=', True),
         ]
     )
     pickings.with_context(tracking_disable=True).write({'printed': True})
@@ -128,8 +129,15 @@ def move_backorders_out(ctx):
         else:
             print pick.name
             pick.with_context(no_new_picking=True)._create_backorder()
-    pickings.with_context(tracking_disable=True).write({'printed': False})
-    pickings.write({'delivery_round_customer_id': False})
+        pick.with_context(tracking_disable=True).write({'printed': False})
+        try:
+            pick.write({'delivery_round_customer_id': False})
+        except exceptions.UserError as exc:
+            print
+            print 'ERROR', pick.name, exc
+            print
+            errors.append((pick, pick.name, str(exc)))
+        return errors
 
 
 @anthem.log
