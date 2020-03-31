@@ -23,12 +23,18 @@ latest (unreleased)
 
 **Bugfixes**
 
-* ALCYN-2462: fix typo in purchase line onchange definition
-* ALCYN-2459: fix lang of the added shipping cost line
-
 **Build**
 
 **Documentation**
+
+
+10.0.1.49.1 (2020-03-31)
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+* ALCYN-2462: fix typo in purchase line onchange definition
+* ALCYN-2459: fix lang of the added shipping cost line
 
 
 10.0.1.49.0 (2020-03-25)
