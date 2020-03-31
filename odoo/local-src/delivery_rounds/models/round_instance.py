@@ -660,10 +660,18 @@ class RoundInstance(models.Model):
         )
 
     @api.multi
-    def print_all_deliveryslip(self):
-        shipping_done = self.shipping_ids.filtered(
+    def _get_sorted_shipping_ids(self):
+        """
+        return the shippings into the expected delivery order
+        """
+        self.ensure_one()
+        return self.shipping_ids.filtered(
             lambda shipping: shipping.state == 'done'
         ).sorted('rank')
+
+    @api.multi
+    def print_all_deliveryslip(self):
+        shipping_done = self._get_sorted_shipping_ids()
         return self.env['report'].get_action(
             shipping_done, 'stock.report_deliveryslip'
         )
@@ -733,6 +741,10 @@ class RoundInstance(models.Model):
         ]
         return action_data
 
+    def _is_all_customer_delivered(self):
+        self.ensure_one()
+        return all(ic.delivered for ic in self.instance_customer_ids)
+
     @job(default_channel='root.background.stock_picking_deliver')  # priority=5
     @api.multi
     def recheck_delivery_state(self):
@@ -740,7 +752,7 @@ class RoundInstance(models.Model):
             if record.state != 'delivering':
                 continue
 
-            if all(ic.delivered for ic in record.instance_customer_ids):
+            if record._is_all_customer_delivered():
                 # Close delivery round
                 record.button_done()
                 self.env.user.notify_info(

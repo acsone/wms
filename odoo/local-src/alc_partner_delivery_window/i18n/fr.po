@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_partner_delivery_window
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-24 15:13+0000\n"
+"PO-Revision-Date: 2020-03-24 15:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_delivery_window
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:33
+#, python-format
+msgid "%s must be > %s"
+msgstr "%s doit être > %s"
+
+#. module: alc_partner_delivery_window
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:73
+#, python-format
+msgid "%s overlaps %s"
+msgstr "%s chevauche %s"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_create_uid
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_create_date
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model,name:alc_partner_delivery_window.model_alc_delivery_week_day
+msgid "Delivery Week Day"
+msgstr "Jour de livraison"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model,name:alc_partner_delivery_window.model_alc_delivery_window
+msgid "Delivery Window"
+msgstr "Fenêtre de livraison"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_res_partner_alc_delivery_window_ids
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_res_users_alc_delivery_window_ids
+msgid "Delivery windows"
+msgstr "Fenêtres de livraison"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_display_name
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Friday"
+msgstr "Vendredi"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_start
+msgid "From"
+msgstr "De"
+
+#. module: alc_partner_delivery_window
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window.alc_delivery_window_search_view
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_id
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,help:alc_partner_delivery_window.field_res_partner_alc_delivery_window_ids
+#: model:ir.model.fields,help:alc_partner_delivery_window.field_res_users_alc_delivery_window_ids
+msgid "If specified, delivery is only possible into the specified time windows. (Leaves empty if no restriction)"
+msgstr "SI spécifié, les livraisons ne seront possibles que dans les fenêtres de temps spécifiées. (Laissez vide s'il n'y a pas de restriction)"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day___last_update
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_write_uid
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_write_date
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Monday"
+msgstr "Lundi"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_week_day_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: alc_partner_delivery_window
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_week_day.py:26
+#: sql_constraint:alc.delivery.week.day:0
+#, python-format
+msgid "Name must be unique"
+msgstr "Le nom doit être unique"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model,name:alc_partner_delivery_window.model_res_partner
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window.alc_delivery_window_search_view
+msgid "Partner"
+msgstr "Client"
+
+#. module: alc_partner_delivery_window
+#: model:ir.actions.act_window,name:alc_partner_delivery_window.alc_delivery_window_act_window
+#: model:ir.ui.menu,name:alc_partner_delivery_window.alc_delivery_window_menu
+#: model:ir.ui.menu,name:alc_partner_delivery_window.alc_delivery_window_sale_menu
+msgid "Partner Delivery Windows"
+msgstr "Fenêtres de livraison client."
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_partner_id
+msgid "Partner id"
+msgstr "Client"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Saturday"
+msgstr "Samedi"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Sunday"
+msgstr "Dimanche"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Thursday"
+msgstr "Jeudi"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_end
+msgid "To"
+msgstr "A"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Tuesday"
+msgstr "Mardi"
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.week.day,name:0
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_week_day_ids
+msgid "Week day ids"
+msgstr "Jours de la semaine"

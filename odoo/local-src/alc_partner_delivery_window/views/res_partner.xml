@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="name">res.partner.form (in alc_partner_delivery_window)
+        </field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_delivery.res_partner_form_view"/>
+        <field name="arch" type="xml">
+            <field name="property_delivery_carrier_id" position="after">
+                <field name="alc_delivery_window_ids" widget="one2many_list"
+                       context="{'default_partner_id': active_id}">
+                    <tree editable="bottom">
+                        <field name="start" widget="float_time"/>
+                        <field name="end" widget="float_time"/>
+                        <field name="week_day_ids" widget="many2many_tags"/>
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

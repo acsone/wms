@@ -54,11 +54,9 @@ class RoundInstance(models.Model):
     def get_merged_shippings(self):
         self.ensure_one()
 
-        shippings = self.shipping_ids.filtered(
-            lambda shipping: shipping.state == 'done'
-        )
+        shippings = self._get_sorted_shipping_ids()
 
-        shipping_values = {}
+        shipping_values = OrderedDict()
         for shipping in shippings:
             partner_value = shipping_values.get(shipping.partner_id, {})
 
@@ -121,11 +119,8 @@ class RoundInstance(models.Model):
             )
             shipping_values[shipping.partner_id] = partner_value
 
-        ordered_values = OrderedDict(
-            sorted(shipping_values.items(), key=lambda t: t[1].get('rank'))
-        )
         result = []
-        for partner, values in ordered_values.iteritems():
+        for partner, values in shipping_values.iteritems():
             shipping_value = shipping_values.get(partner)
             if not shipping_value:
                 continue
