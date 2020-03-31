@@ -24,6 +24,7 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2462: fix typo in purchase line onchange definition
+* ALCYN-2459: fix lang of the added shipping cost line
 
 **Build**
 
