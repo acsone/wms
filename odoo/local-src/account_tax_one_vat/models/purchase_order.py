@@ -23,7 +23,7 @@ class PurchaseOrderLine(models.Model):
                 % (self.product_id.display_name,)
             )
 
-    @api.onchange('tax_id')
+    @api.onchange('taxes_id')
     def _onchange_tax_id(self):
         """Warning if multiple VAT taxes are selected."""
         try:
