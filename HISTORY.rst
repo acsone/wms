@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2462: fix typo in purchase line onchange definition
+
 **Build**
 
 **Documentation**
