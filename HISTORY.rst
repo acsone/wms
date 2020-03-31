@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2459: fix lang of the added shipping cost line
+
 **Build**
 
 **Documentation**
