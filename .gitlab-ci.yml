@@ -128,7 +128,6 @@ build-and-publish-image:
   script: 
     - cd setup
     - build_and_push_image
-  when: manual
   only:
     - /1\.50\.\d+/
   dependencies:
@@ -149,7 +148,6 @@ deploy-test:
     name: test/odoo-alcyon
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
     on_stop: stop-test
-  when: manual
   only:
     - /1\.50\.\d+/
   dependencies:
