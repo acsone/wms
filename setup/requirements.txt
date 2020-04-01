@@ -100,8 +100,8 @@ odoo10-addon-l10n-be-mis-reports @ git+https://github.com/acsone/l10n-belgium.gi
 odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/logging_json
 odoo10-addon-mail-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mail_environment
 odoo10-addon-mass-editing @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mass_editing
-odoo10-addon-mis-builder @ git+https://github.com/acsone/mis-builder.git@c3d0a2910bdcc3eb00e214745aa80c3797d9c8f1#subdirectory=setup/mis_builder
-odoo10-addon-mis-builder-budget @ git+https://github.com/acsone/mis-builder.git@c3d0a2910bdcc3eb00e214745aa80c3797d9c8f1#subdirectory=setup/mis_builder_budget
+odoo10-addon-mis-builder==10.0.3.6.0
+odoo10-addon-mis-builder-budget==10.0.3.5.0
 odoo10-addon-monitoring-status @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/monitoring_status
 odoo10-addon-onchange-helper @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/onchange_helper
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
