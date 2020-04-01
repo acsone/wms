@@ -637,6 +637,36 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             self.delivery_round_1.retry_optimization()
         self.assertEqual(self.delivery_round_1.state, "done")
 
+    def test_14(self):
+        """
+        Data:
+            An api url with subpath
+        Test case:
+            call _get_optimization_url
+        Expected result:
+            subpath is preserved
+        """
+        self.StockConfigSettings.create(
+            {
+                "geo_optimization_api_url": "https://geoservices.geoconcept.com/"
+                "ToursolverCloud/api/ts/toursolver/"
+            }
+        ).execute()
+        url = self.delivery_round_1._get_opitization_api_url("test")
+        self.assertEqual(
+            url,
+            "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
+            "toursolver/test?tsCloudApiKey=api+key",
+        )
+        url = self.delivery_round_1._get_opitization_api_url(
+            "test", param1="val2"
+        )
+        self.assertEqual(
+            url,
+            "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
+            "toursolver/test?tsCloudApiKey=api+key&param1=val2",
+        )
+
 
 class _PseudoRequestsResponse(object):
     def __init__(self, status_code, json_result):

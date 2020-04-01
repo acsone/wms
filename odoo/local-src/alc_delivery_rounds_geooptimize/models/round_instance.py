@@ -442,7 +442,7 @@ class RoundInstance(models.Model):
         url_params = url_params or {}
         url_params["tsCloudApiKey"] = cfg.api_key
         url_parts = list(urlparse.urlparse(baseurl))
-        url_parts[2] = action
+        url_parts[2] = url_parts[2] + action
         url_parts[4] = urllib.urlencode(url_params)
         return urlparse.urlunparse(url_parts)
 
