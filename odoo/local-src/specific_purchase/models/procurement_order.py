@@ -151,7 +151,13 @@ class ProcurementOrder(models.Model):
 
         pos = procurements.mapped('purchase_id')
         pos.write({'date_order': fields.Datetime.now()})
-        pos.mapped('order_line').recompute_discount_values()
+        with self.env.norecompute():
+            # The recompute_discount_values makes direct assignments on line
+            # each assignment launch a recompute on the line and on the PO
+            # delay the recompute at the end of the discount recompute
+            # code to be removed into odoo 13
+            pos.mapped('order_line').recompute_discount_values()
+        self.recompute()
 
         return result
 
