@@ -21,6 +21,9 @@ latest (unreleased)
 
 **Features and Improvements**
 
+* ALCYN-2466: change the way the SO line qty_backorder is computed when sent to
+  the ESB
+
 **Bugfixes**
 
 * ALCYN-2465: fix concurrent access on sales when delivering a round

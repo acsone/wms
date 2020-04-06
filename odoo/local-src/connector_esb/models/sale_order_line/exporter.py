@@ -29,7 +29,6 @@ class SaleOrderLineExportMapper(Component):
         (falsy2zero('price_reduce_taxexcl'), 'price'),
         (falsy2zero('price_reduce_taxinc'), 'price_inc_tax'),
         (falsy2zero('product_qty_canceled'), 'qty_cancelled'),
-        (falsy2zero('current_product_qty_unavailable'), 'qty_backorder'),
     ]
 
     @mapping
@@ -50,3 +49,10 @@ class SaleOrderLineExportMapper(Component):
     @mapping
     def compute_sku(self, record):
         return {'sku': record.product_id.default_code or ''}
+
+    @mapping
+    def compute_qty_backorder(self, record):
+        if record.qty_delivered == 0 or record.product_qty_canceled != 0:
+            return {'qty_backorder': record.product_qty_unavailable}
+        else:
+            return {'qty_backorder': record.product_qty_remains_to_deliver}
