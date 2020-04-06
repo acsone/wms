@@ -23,6 +23,8 @@ latest (unreleased)
 
 **Bugfixes**
 
+* ALCYN-2465: fix concurrent access on sales when delivering a round
+
 **Build**
 
 **Documentation**
