@@ -23,6 +23,7 @@ latest (unreleased)
 
 * ALCYN-2466: change the way the SO line qty_backorder is computed when sent to
   the ESB
+* Acsone: Improve procurement order generation speed
 
 **Bugfixes**
 
