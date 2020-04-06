@@ -21,6 +21,18 @@ latest (unreleased)
 
 **Features and Improvements**
 
+**Bugfixes**
+
+**Build**
+
+**Documentation**
+
+
+10.0.1.49.2 (2020-04-06)
+++++++++++++++++++++++++
+
+**Features and Improvements**
+
 * ALCYN-2466: change the way the SO line qty_backorder is computed when sent to
   the ESB
 * Acsone: Improve procurement order generation speed
@@ -28,10 +40,6 @@ latest (unreleased)
 **Bugfixes**
 
 * ALCYN-2465: fix concurrent access on sales when delivering a round
-
-**Build**
-
-**Documentation**
 
 
 10.0.1.49.1 (2020-03-31)
