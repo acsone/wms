@@ -29,7 +29,11 @@ class StockPicking(models.Model):
         self.ensure_one()
         if self.picking_type_code != "outgoing":
             return
-        moves = self.mapped('delivery_round_id.shipping_ids.move_lines')
+        moves = (
+            self.mapped('delivery_round_id.shipping_ids')
+            .filtered(lambda ship: ship.partner_id == self.partner_id)
+            .mapped('move_lines')
+        )
         moves = moves.filtered(lambda m: m.state in ('assigned', 'done'))
         round_saleorders = moves.mapped('procurement_id.sale_line_id.order_id')
         round_carriers = round_saleorders.mapped('carrier_id').filtered(
