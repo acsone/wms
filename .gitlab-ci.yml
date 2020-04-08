@@ -57,7 +57,7 @@ after_script:
 variables:
   PYTHON: python2.7
   DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
-  IMAGE: "${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHA}"
+  IMAGE: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
 
 pre-commit:
   stage: code quality

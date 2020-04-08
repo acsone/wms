@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
-
 from odoo import api, fields, models
 
 
@@ -20,24 +19,21 @@ class SaleOrder(models.Model):
 
         And charge the customer on his last sale order if nececssary.
         """
+        if not carrier.fixed_price:
+            return
         sale_orders = self.search(
             [
                 ('partner_id', '=', customer.id),
                 ('state', '!=', 'cancel'),
                 ('used_for_delivery_fee', '=', False),
-                ('carrier_id', 'in', carrier.ids),
+                ('carrier_id', '=', carrier.id),
             ]
         )
-
-        sale_orders = sale_orders.filtered(lambda r: r.carrier_id == carrier)
+        if not sale_orders:
+            return
         sum_ordered = sum(sale_orders.mapped('amount_untaxed'))
         sale_orders.write({'used_for_delivery_fee': True})
-
-        if (
-            sum_ordered >= carrier.amount
-            or sum_ordered == 0
-            or not carrier.fixed_price
-        ):
+        if sum_ordered == 0 or sum_ordered >= carrier.amount:
             return
         # Find the last sale order passed and charge the customer
         round_saleorders = round_saleorders.filtered(
