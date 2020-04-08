@@ -29,7 +29,7 @@ lxml==3.5.0
 Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
-odoo @ git+https://github.com/acsone/odoo.git@3be62e4183209db24233ee61459c7ae769d07788
+odoo @ git+https://github.com/acsone/odoo.git@8232135c6577c9bef2eeff2975222f4d871c477a
 odoo_addons_enterprise @ git+ssh://git@github.com/acsone/enterprise.git@5c510dfd1911ee59bab0e41ef1530f1f7c1cc40e#subdirectory=setup
 odoo-autodiscover==2.0.0
 odoo10-addon-account-analytic-no-lines @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/account_analytic_no_lines
