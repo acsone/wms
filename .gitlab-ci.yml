@@ -125,7 +125,7 @@ build-and-publish-image:
   stage: build image
   tags:
     - docker
-  script: 
+  script:
     - cd setup
     - build_and_push_image
   only:
@@ -150,10 +150,6 @@ deploy-test:
     on_stop: stop-test
   only:
     - /1\.50\.\d+/
-  dependencies:
-    - build-and-publish-image
-  # allow failures so we can merge without running this deployment job
-  allow_failure: true
     
 stop-test:
   stage: deploy
@@ -173,4 +169,25 @@ stop-test:
   dependencies: []
   allow_failure: true
 
+deploy-preprod:
+  stage: deploy
+  tags:
+    - acsone-lan-lux
+  script:
+    - start_ssh_agent
+    - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
+  when: manual
+  only:
+    - /1\.50\.\d+/
+
+deploy-prod:
+  stage: deploy
+  tags:
+    - acsone-lan-lux
+  script:
+    - start_ssh_agent
+    - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
+  when: manual
+  only:
+    - /1\.50\.\d+/
 

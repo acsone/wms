@@ -29,7 +29,7 @@ lxml==3.5.0
 Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
-odoo @ git+https://github.com/acsone/odoo.git@3be62e4183209db24233ee61459c7ae769d07788
+odoo @ git+https://github.com/acsone/odoo.git@8232135c6577c9bef2eeff2975222f4d871c477a
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@14c3dc9a82d7bceb12e6d59644a91b7e2e8772f5#subdirectory=setup
 odoo-autodiscover==2.0.0
 odoo10-addon-account-analytic-no-lines @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/account_analytic_no_lines
@@ -127,6 +127,7 @@ odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
+odoo10_addon_slow_statement_logger @ git+https://github.com/acsone/server-tools@b9b3daefca4ab5ecbf507344da9d9562896ad9ea#subdirectory=setup/slow_statement_logger
 odoo10-addon-stock-available @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_available
 odoo10-addon-stock-available-immediately @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_available_immediately
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button

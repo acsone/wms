@@ -12,3 +12,7 @@ odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-wo
 odoo10-addon-base-ubl @ git+https://github.com/acsone/edi.git@10.0-add_ubl_2.2-lmi#subdirectory=setup/base_ubl
 odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@10.0-add-OrderResponse-import-lmi#subdirectory=setup/purchase_order_import
 odoo10-addon-purchase-order-import-ubl @ git+https://github.com/acsone/edi.git@10.0-add-OrderResponse-import-lmi#subdirectory=setup/purchase_order_import_ubl
+
+# oca/server-tools
+git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
+
