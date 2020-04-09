@@ -78,7 +78,6 @@ build:
   tags:
     - odoo-10.0
   script:
-    - exit 0 # TODO
     - start_ssh_agent
     - virtualenv --python=$PYTHON venv
     - venv/bin/pip wheel --no-deps -r setup/requirements.txt -e setup --wheel-dir=setup/release
@@ -93,7 +92,6 @@ test:
   tags:
     - odoo-10.0
   script:
-    - exit 0  # TODO
     - install_acsoo
     - start_ssh_agent  # for pushing translations
     - virtualenv --python=$PYTHON venv
@@ -127,8 +125,7 @@ build-and-publish-image:
   stage: build image
   tags:
     - docker
-  script: 
-    - exit 0  # TODO
+  script:
     - cd setup
     - build_and_push_image
   when: manual
@@ -180,7 +177,18 @@ deploy-preprod:
     - acsone-lan-lux
   script:
     - start_ssh_agent
-    - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh 1.49.3
+    - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
-  #only:
-  #  - /1\.49\.\d+/
+  only:
+    - /1\.49\.\d+/
+
+deploy-prod:
+  stage: deploy
+  tags:
+    - acsone-lan-lux
+  script:
+    - start_ssh_agent
+    - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
+  when: manual
+  only:
+    - /1\.49\.\d+/
