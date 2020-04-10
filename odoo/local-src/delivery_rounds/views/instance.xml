@@ -174,7 +174,16 @@
 
                     </div>
 
-²
+                    <div class="oe_title">
+                        <h1>
+                            <field name="template_id" />
+                        </h1>
+                        <field name="delivery_failure" invisible="1"/>
+                        <div class="alert alert-danger" attrs="{'invisible': [('delivery_failure', '=', False)]}">
+                            <field name="report_delivery"/>
+                        </div>
+                    </div>
+
                     <group>
                         <group>
                             <field name="date" />
