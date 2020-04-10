@@ -14,12 +14,24 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     @api.multi
-    def _action_assign_filter_moves(self):
+    def _get_delivery_round_assignable_moves(self):
+        """
+        Return the list of moves to be assigned to a delivery round
+
+        BE CAREFUL: case where the delivery round is not delivered is
+        not tested into unittest. Functional meaning must be clarified and a
+        unittest added for this.
+        """
         move_ids = set()
         for move in self:
             picking = move.picking_id
-            if picking.picking_type_subcode != 'PICK' or (
-                picking.printed and picking.pack_operation_product_ids
+            if (
+                picking.picking_type_subcode != 'PICK'
+                or (picking.printed and picking.pack_operation_product_ids)
+                or (
+                    picking.delivery_round_customer_id
+                    and not picking.delivery_round_customer_id.delivered
+                )
             ):
                 continue
             move_ids.add(move.id)
@@ -33,26 +45,19 @@ class StockMove(models.Model):
         if not self.env.context.get('round_autoset', True):
             return super(StockMove, self).action_assign(no_prepare=no_prepare)
 
-        # For PICK backorder, reassign immediately
-        if self.env.context.get('round_backorder'):
-            return super(
-                StockMove,
-                self.filtered(
-                    lambda m: m.picking_id.delivery_round_customer_id
-                    and not m.picking_id.delivery_round_customer_id.delivered
-                ),
-            ).action_assign(no_prepare=no_prepare)
+        delivery_round_assignable_moves = (
+            self._get_delivery_round_assignable_moves()
+        )
+        other_moves = self - delivery_round_assignable_moves
+        if other_moves:
+            super(StockMove, other_moves).action_assign(no_prepare=no_prepare)
 
-        pick_moves = self._action_assign_filter_moves()
-
-        for picking in pick_moves.mapped('picking_id'):
-            if self.env.context.get('round_backorder'):
-                # Do not assign a backorder
-                continue
+        # special case for moves to be auto assigned to a delivery round...
+        for picking in delivery_round_assignable_moves.mapped('picking_id'):
             delivery_round = picking.delivery_round_id
             if delivery_round:
                 # related picking is already in a delivery round
-                pick_moves -= picking.move_lines
+                delivery_round_assignable_moves -= picking.move_lines
                 continue
             _logger.debug(
                 "Move reservation (action_assign) is searching a "
@@ -77,9 +82,6 @@ class StockMove(models.Model):
                     delivery_round.date
                 ):
                     delivery_round._assign_pickings(picking)
-        other_moves = self - pick_moves
-        if other_moves:
-            super(StockMove, other_moves).action_assign(no_prepare=no_prepare)
 
     @api.multi
     def action_cancel(self):
