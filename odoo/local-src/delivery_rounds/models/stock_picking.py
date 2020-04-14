@@ -61,13 +61,6 @@ class StockPicking(models.Model):
             fields_list.remove('delivery_round_customer_id')
         return super(StockPicking, self).default_get(fields_list)
 
-    @api.multi
-    def _create_backorder(self, backorder_moves=[]):
-        backorders = super(
-            StockPicking, self.with_context(round_backorder=True)
-        )._create_backorder(backorder_moves)
-        return backorders
-
     delivery_round_launched = fields.Boolean(
         related='delivery_round_id.picking_launched',
         store=True,
