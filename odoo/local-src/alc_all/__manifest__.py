@@ -119,6 +119,7 @@
         "split_coda",
         "stock_inventory_controller",
         "stock_location_notranslate",
+        "stock_location_report",
         "stock_lot_update",
         "stock_orderpoint_product",
         "stock_putaway_defaultfixedlocation",
