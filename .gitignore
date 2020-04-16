@@ -67,3 +67,5 @@ docker-compose.override.yml
 
 # build directory
 setup/release
+
+odoo.cfg
