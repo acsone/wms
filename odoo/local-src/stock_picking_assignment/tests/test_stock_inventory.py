@@ -55,7 +55,7 @@ class TestStockInventory(SavepointCase):
         vals.pop("operator_id", None)
         stock_inventory = self.StockInventory.create(vals)
         self.assertFalse(stock_inventory.operator_id)
-        stock_inventory.action_start()
+        stock_inventory.prepare_inventory()
         self.assertEqual(stock_inventory.operator_id, self.env.user)
 
     def test_01(self):
@@ -74,5 +74,5 @@ class TestStockInventory(SavepointCase):
         stock_inventory = self.StockInventory.create(vals)
         self.assertNotEqual(self.demo_user, self.env.user)
         self.assertEqual(stock_inventory.operator_id, self.demo_user)
-        stock_inventory.action_start()
+        stock_inventory.prepare_inventory()
         self.assertEqual(stock_inventory.operator_id, self.demo_user)

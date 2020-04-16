@@ -21,6 +21,8 @@ class StockScrap(models.Model):
     def _get_default_operator_id(self):
         return self.env.user.id
 
+    @api.model
+    @api.returns('self', lambda value: value.id)
     def create(self, vals):
         if "operator_id" not in vals:
             vals["operator_id"] = self._get_default_operator_id()

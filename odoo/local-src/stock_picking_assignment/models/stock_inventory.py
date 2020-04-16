@@ -24,6 +24,6 @@ class StockInventory(models.Model):
         )
 
     @api.multi
-    def action_start(self):
+    def prepare_inventory(self):
         self.assign_operator()
-        return super(StockInventory, self).action_start()
+        return super(StockInventory, self).prepare_inventory()
