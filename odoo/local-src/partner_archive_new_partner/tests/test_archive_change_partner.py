@@ -14,8 +14,9 @@ class TestPartner(common.SavepointCase):
         cls.partner1 = cls.env["res.partner"].create({"name": "Partner1"})
         cls.partner2 = cls.env["res.partner"].create({"name": "Partner2"})
         cls.product = cls.env.ref('product.product_product_8')
-        cls.account_type = cls.env.ref('account.data_account_type_payable')
+        cls.account_type = cls.env.ref('account.data_account_type_receivable')
         cls.profit_acc_id = cls.env.ref('account.data_account_type_revenue')
+        cls.payment_term = cls.env.ref('account.account_payment_term_advance')
         cls.account_id = cls.env['account.account'].create(
             {
                 'name': 'Receive account',
@@ -37,8 +38,6 @@ class TestPartner(common.SavepointCase):
                 'code': "TSAJ",
                 'type': "sale",
                 'refund_sequence': True,
-                'default_debit_account_id': cls.account_id.id,
-                'default_credit_account_id': cls.profit_acc_id.id,
             }
         )
         cls.partner1.property_account_receivable_id = cls.account_id
@@ -73,6 +72,8 @@ class TestPartner(common.SavepointCase):
             {
                 'name': 'Test invoice',
                 'partner_id': self.partner1.id,
+                'type': 'out_invoice',
+                'payment_term_id': self.payment_term.id,
                 'invoice_line_ids': [
                     (
                         0,
@@ -82,7 +83,7 @@ class TestPartner(common.SavepointCase):
                             'product_id': self.product.id,
                             'quantity': 10.0,
                             'price_unit': 50.0,
-                            'account_id': self.account_id.id,
+                            'account_id': self.profit_acc_id.id,
                         },
                     )
                 ],
