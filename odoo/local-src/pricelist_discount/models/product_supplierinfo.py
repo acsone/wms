@@ -121,7 +121,9 @@ class ProductSupplierinfo(models.Model):
                     _('You cannot have a promo without start date')
                 )
             elif promo.date_start and not promo.date_end:
-                raise ValidationError(_('You cannot have a promo without end date'))
+                raise ValidationError(
+                    _('You cannot have a promo without end date')
+                )
             else:
                 if promo.date_start > promo.date_end:
                     raise ValidationError(
