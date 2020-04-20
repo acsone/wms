@@ -55,6 +55,15 @@ class AccountInvoicePrint(models.Model):
             if self.send_email_copy:
                 template.send_mail(invoice.id)
 
+        # In Odoo 13 we should only call and return the result of
+        # self.env['report'].get_pdf(
+        # Unfortunately un Odoo 10, the basic implementation generates the pdf
+        # of all the reports even if an attachment already exists.
+        # (even if the existing attachment is the one used into the final result)
+        # To avoid this performance cost, we re implement the logic of checking
+        # existing reports and only generates the missing one before merging all
+        # the reports into a single file
+        # TO BE REMOVED into Odoo 13
         attachment = self.env['report']._check_attachment_use(
             invoices.sorted(key=lambda r: r.partner_id.ref).ids,
             self.env['report']._get_report_from_name('account.report_invoice'),
@@ -89,18 +98,19 @@ class AccountInvoicePrint(models.Model):
                     pdfreport.write(pdfstr)
                     pdfdocuments.append(pdfreport_path)
 
-        pdf = self.env['report']._merge_pdf(pdfdocuments)
+        temporary_files = pdfdocuments
 
-        # Manual cleanup of the temporary files
-        for document in pdfdocuments:
-            try:
-                os.unlink(document)
-            except (OSError, IOError):
-                logging.getLogger(__name__).error(
-                    'Error when trying to remove file %s' % document
-                )
+        # get final result
+        if len(pdfdocuments) == 1:
+            entire_report_path = pdfdocuments[0]
+        else:
+            entire_report_path = self.env['report']._merge_pdf(pdfdocuments)
+            temporary_files.append(entire_report_path)
 
-        self.document = base64.b64encode(pdf)
+        with open(entire_report_path, 'rb') as pdfdocument:
+            content = pdfdocument.read()
+
+        self.document = base64.b64encode(content)
         invoices.write({'sent': True})
 
         action_xmlid = 'account_invoice_sent.action_account_invoice_print_form'
@@ -111,6 +121,15 @@ class AccountInvoicePrint(models.Model):
             sticky=True,
             action=action,
         )
+
+        # Manual cleanup of the temporary files
+        for document in temporary_files:
+            try:
+                os.unlink(document)
+            except (OSError, IOError):
+                logging.getLogger(__name__).error(
+                    'Error when trying to remove file %s' % document
+                )
 
     def action_view_invoice(self):
         invoices = self.mapped('invoice_ids')
