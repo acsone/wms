@@ -75,7 +75,6 @@
 
         # specific
         "alc_analytic_category_report",
-        "alc_delivery_rounds_geooptimize",
         "alc_edi_connector",
         "alc_product_uom_updatable",
         "account_move_productcateg",
