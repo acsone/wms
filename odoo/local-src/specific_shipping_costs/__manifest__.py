@@ -20,6 +20,7 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         'views/delivery_carrier.xml',
+        'views/stock_picking_type.xml',
     ],
     'installable': True,
 }

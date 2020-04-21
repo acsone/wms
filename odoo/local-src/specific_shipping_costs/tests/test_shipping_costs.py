@@ -649,3 +649,90 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(self.so2.picking_ids)
         self.dr1._deliver(background=False)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee_3)
+
+    def test_avoid_shiping_cost(self):
+        """ If the outgoing picking type has avoid_shipping_cost at True
+        there should be no fee. Test with use_specific_cost_calculation
+        and without."""
+        new_order = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner2.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 10,
+                        },
+                    )
+                ],
+            }
+        )
+        new_order.action_confirm()
+        self.dr1._assign_pickings(new_order.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.get_shipping_cost(new_order), self.fee)
+        # Test with the same SO but we change the picking_type
+        new_order = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner2.id,
+                'carrier_id': self.delivery_method.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 10,
+                        },
+                    )
+                ],
+            }
+        )
+        new_order.action_confirm()
+        picking_type = new_order.picking_ids.filtered(
+            lambda rec: rec.picking_type_code == 'outgoing'
+        ).mapped('picking_type_id')
+        picking_type.avoid_shipping_cost = True
+        self.dr1._assign_pickings(new_order.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(new_order))
+        # Test with the delivery method 3 (With
+        # use_specific_cost_calculation set to False)
+        new_order = self.env['sale.order'].create(
+            {
+                'partner_id': self.partner2.id,
+                'carrier_id': self.delivery_method_3.id,
+                'order_line': [
+                    (
+                        0,
+                        0,
+                        {
+                            'name': self.p1.name,
+                            'product_id': self.p1.id,
+                            'product_uom': self.ref(
+                                'product.product_uom_unit'
+                            ),
+                            'product_uom_qty': 1,
+                            'price_unit': 10,
+                        },
+                    )
+                ],
+            }
+        )
+        new_order.action_confirm()
+        self.dr1._assign_pickings(new_order.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(new_order))
