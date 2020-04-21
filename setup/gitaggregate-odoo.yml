@@ -1,0 +1,36 @@
+./src/odoo:
+    remotes:
+        odoo: git@github.com:odoo/odoo.git
+        OCA: git@github.com:OCA/OCB.git
+        acsone: git@github.com:acsone/odoo.git
+        guewen: git@github.com:guewen/odoo.git
+    fetch_all:
+        - odoo
+        - OCA
+        - guewen
+        - acsone
+    merges:
+          # Odoo 10.0 last version
+        - odoo 10.0
+          # [FIX] allow defering of parent computation after load call
+        - OCA refs/pull/601/head
+          # ACSONE setup
+        - acsone 10.0-with-setup
+          # Log performance
+        - acsone 10.0-add_perf_log-lmi
+          # Branch that contains the patch odoo#pull3706 add country_of_origin instatat 223a0e8b19a474bf24bfe9dae09c6c2ba396c8c8
+        - acsone 10.0-alc_patch
+    shell_command_after:
+          # [FIX] stock: remove `_parent_store=True` from model `stock.quant.package`
+        - git am "$(git format-patch -1 45c42df5f01044b87c01b53d47321c5c80da47bf -o ../patches)"
+          # Optimize groupby on stock history (https://github.com/odoo/odoo/pull/31540)
+        - git am "$(git format-patch -1 7d3a0282566d3b1b5f8ecc398db94a991150678c -o ../patches)"
+          # At sale order confirmation, run all procurements at once (performance)
+        - git am "$(git format-patch -1 f291979f6af6d7e11434da3fbf66b5a70d537eb2 -o ../patches)"
+         # Fix base amount for global_rounding on invoice tax #39212
+        - git am "$(git format-patch -1 f29058075bad5eb50b7ffdb4b1e19984b9ae4316 -o ../patches)"
+         # Make procurement_jit not autoinstallable
+        - git am "$(git format-patch -1 eb0a1feed6940fa720aca2e85f00111888b92b58 -o ../patches)"
+         # models: enable prefetching feedback when using mapped()
+        - git am "$(git format-patch -1 e2e537f247cdd7def87b90d8e91e7e1d58ad5a47 -o ../patches)"
+    target: acsone 10.0-alc_master

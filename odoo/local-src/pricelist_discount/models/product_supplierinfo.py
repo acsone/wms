@@ -4,7 +4,7 @@
 
 import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class ProductSupplierinfo(models.Model):
@@ -88,13 +88,13 @@ class ProductSupplierinfo(models.Model):
                 ]
             )
             if other_supplier:
-                raise UserError(
+                raise ValidationError(
                     _('You cannot two different supplier for a product')
                 )
 
             if not promo.date_start and not promo.date_end:
                 if promo.min_qty > 1 or promo.min_qty_sale > 1:
-                    raise UserError(
+                    raise ValidationError(
                         _(
                             'You cannot set a minimum quantity (sale and/or '
                             'purchase) on a default promo'
@@ -110,21 +110,23 @@ class ProductSupplierinfo(models.Model):
                     ]
                 )
                 if existing_open_promo:
-                    raise UserError(
+                    raise ValidationError(
                         _(
                             'You cannot have two promos '
                             'without start and end date'
                         )
                     )
             elif not promo.date_start and promo.date_end:
-                raise UserError(
+                raise ValidationError(
                     _('You cannot have a promo without start date')
                 )
             elif promo.date_start and not promo.date_end:
-                raise UserError(_('You cannot have a promo without end date'))
+                raise ValidationError(
+                    _('You cannot have a promo without end date')
+                )
             else:
                 if promo.date_start > promo.date_end:
-                    raise UserError(
+                    raise ValidationError(
                         _(
                             'The end date must be equal '
                             'or greater than the start date'
@@ -142,6 +144,6 @@ class ProductSupplierinfo(models.Model):
                     ]
                 )
                 if existing_promos:
-                    raise UserError(
+                    raise ValidationError(
                         _('You cannot have two promos at the same time')
                     )
