@@ -703,8 +703,8 @@ class TestShippingCosts(SavepointCase):
         )
         new_order.action_confirm()
         picking_type = new_order.picking_ids.filtered(
-            lambda rec: rec.picking_type_code == 'outgoing').mapped(
-            'picking_type_id')
+            lambda rec: rec.picking_type_code == 'outgoing'
+        ).mapped('picking_type_id')
         picking_type.avoid_shipping_cost = True
         self.dr1._assign_pickings(new_order.picking_ids)
         self.dr1._deliver(background=False)
