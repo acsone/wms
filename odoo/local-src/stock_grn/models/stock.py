@@ -30,6 +30,13 @@ class StockPicking(models.Model):
         copy=False,
         readonly=True,
     )
+    grn_date = fields.Datetime(
+        related='grn_id.date',
+        string='GRN Date',
+        store=True,
+        index=True,
+        readonly=True,
+    )
 
 
 class StockPickingType(models.Model):
