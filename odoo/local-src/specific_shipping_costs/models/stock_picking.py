@@ -11,6 +11,9 @@ class StockPicking(models.Model):
     @api.multi
     def _add_delivery_cost_to_so(self):
         """Fee line for specific shipping cost is added when round is done"""
+        if (self.picking_type_id.avoid_shipping_cost
+                and self.picking_type_code == "outgoing"):
+            return
         if (
             self.carrier_id.use_specific_cost_calculation
             or not self.carrier_price
@@ -28,6 +31,8 @@ class StockPicking(models.Model):
         """Compute shipping costs for the customers in the delivery round"""
         self.ensure_one()
         if self.picking_type_code != "outgoing":
+            return
+        if self.picking_type_id.avoid_shipping_cost:
             return
         moves = (
             self.mapped('delivery_round_id.shipping_ids')

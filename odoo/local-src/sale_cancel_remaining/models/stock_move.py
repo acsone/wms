@@ -16,5 +16,8 @@ class StockMove(models.Model):
             line = move.procurement_id.sale_line_id
             if move.product_id.expense_policy != 'no' or not line:
                 continue
-            line.product_qty_returned += move.product_uom_qty
+            if move.location_dest_id.usage != "customer":
+                line.product_qty_returned += move.product_uom_qty
+            else:
+                line.product_qty_returned -= move.product_uom_qty
         return result
