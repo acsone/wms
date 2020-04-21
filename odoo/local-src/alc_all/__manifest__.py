@@ -84,7 +84,6 @@
         "connector_esb",
         "csv_file_export",  # to remove
         "csv_file_import",  # to remove
-        "db2_import",  # to remove
         "delivery_rounds_alcyon",
         "external_fax",
         "ir_sequence_period",
