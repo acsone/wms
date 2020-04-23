@@ -63,3 +63,30 @@ class Sale(models.Model):
                 description=_('Confirmation of sales order %s') % order.name,
                 priority=1,
             ).confirm_in_background(notify=False)
+
+    @job(default_channel='root.priority.sale_confirm')
+    @api.multi
+    def remove_delivery_block(self, notify=True):
+        """ Job that execute the remove delivery block on sale order"""
+        self.ensure_one()
+        super(Sale, self).action_remove_delivery_block()
+        if notify:
+            action = self.env.ref('sale.action_orders').read()[0]
+            action.update({'res_id': self.id, 'views': [(False, 'form')]})
+            self.env.user.notify_info(
+                _('Remove delivery block for order %s is now done.') % self.name,
+                action=action,
+            )
+
+    @api.multi
+    def action_remove_delivery_block(self):
+        """Make 'Remove the delivery block' asynchronous."""
+        for order in self.filtered(
+                lambda s: s.state == 'sale'):
+            self.env.user.notify_info(
+                _('Remove delivery block for order %s will be done in background.') % order.name
+            )
+            order.with_delay(
+                description=_('Remove delivery block for sales order %s') % order.name,
+                priority=1,
+            ).remove_delivery_block(notify=True)
