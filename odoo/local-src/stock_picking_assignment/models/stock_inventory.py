@@ -10,11 +10,7 @@ class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
     operator_id = fields.Many2one(
-        'res.users',
-        string='Operator',
-        copy=False,
-        track_visibility='onchange',
-        readonly=True,
+        'res.users', string='Operator', copy=False, track_visibility='onchange'
     )
 
     @api.multi
