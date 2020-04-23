@@ -10,10 +10,7 @@ class StockScrap(models.Model):
     _inherit = 'stock.scrap'
 
     operator_id = fields.Many2one(
-        'res.users',
-        string='Operator',
-        copy=False,
-        track_visibility='onchange',
+        'res.users', string='Operator', copy=False, track_visibility='onchange'
     )
 
     @api.model
