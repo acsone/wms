@@ -14,7 +14,6 @@ class StockScrap(models.Model):
         string='Operator',
         copy=False,
         track_visibility='onchange',
-        readonly=True,
     )
 
     @api.model
