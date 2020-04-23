@@ -74,19 +74,23 @@ class Sale(models.Model):
             action = self.env.ref('sale.action_orders').read()[0]
             action.update({'res_id': self.id, 'views': [(False, 'form')]})
             self.env.user.notify_info(
-                _('Remove delivery block for order %s is now done.') % self.name,
+                _('Remove delivery block for order %s is now done.')
+                % self.name,
                 action=action,
             )
 
     @api.multi
     def action_remove_delivery_block(self):
         """Make 'Remove the delivery block' asynchronous."""
-        for order in self.filtered(
-                lambda s: s.state == 'sale'):
+        for order in self.filtered(lambda s: s.state == 'sale'):
             self.env.user.notify_info(
-                _('Remove delivery block for order %s will be done in background.') % order.name
+                _(
+                    'Remove delivery block for order %s will be done in background.'
+                )
+                % order.name
             )
             order.with_delay(
-                description=_('Remove delivery block for sales order %s') % order.name,
+                description=_('Remove delivery block for sales order %s')
+                % order.name,
                 priority=1,
             ).remove_delivery_block(notify=True)
