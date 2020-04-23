@@ -1129,6 +1129,9 @@ class RoundInstanceCustomer(models.Model):
 
             # Ensure any backorder is reassigned
             shippings._delay_jobs_action_assign(shippings.mapped('partner_id'))
+            # If this customer do not have any linked picking, remove it
+            # We perform this step at last to prevent Missing record error
+            self.with_env(new_env)._remove_if_empty()
 
         if self.delivery_round_id.state == 'delivering':
             self.delivery_round_id.with_delay(
@@ -1150,9 +1153,6 @@ class RoundInstanceCustomer(models.Model):
                     _('Error when delivering %s: %s')
                     % (self.display_name, self.delivery_error)
                 )
-        # If this customer do not have any linked picking, remove it
-        # We perform this step at last to prevent Missing record error
-        self._remove_if_empty()
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
