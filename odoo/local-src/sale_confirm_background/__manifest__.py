@@ -15,6 +15,7 @@
         'web_notify',
         'sale_exception',
         'sale_delay',
+        'sale_stock_picking_blocking',
     ],
     'website': 'https://www.camptocamp.com',
     'data': [
