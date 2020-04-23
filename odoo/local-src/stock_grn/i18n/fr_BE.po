@@ -131,6 +131,11 @@ msgid "Not Received"
 msgstr "Pas reçu"
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
+msgid "Received more than 5 days ago"
+msgstr "Reçu il y a plus de 5 jours"
+
+#. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_form
 msgid "Print"
 msgstr "Imprimer"

@@ -8,6 +8,7 @@
                 <filter name="late" position="after">
                     <filter name="grn" string="Received" domain="[('grn_id', '!=', False)]"/>
                     <filter name="nogrn" string="Not Received" domain="[('grn_id', '=', False)]"/>
+                    <filter name="five_days" string="Received more than 5 days ago" domain="[('grn_date', '&lt;', (context_today() + relativedelta(days=-5)).strftime('%Y-%m-%d'))]"/>
                 </filter>
             </field>
         </record>
@@ -18,6 +19,7 @@
             <field name="arch" type="xml">
                 <field name="state" position="after">
                     <field name="grn_id" widget="boolean" string="GRN"/>
+                    <field name="grn_date" widget="date"/>
                 </field>
             </field>
         </record>
@@ -29,6 +31,7 @@
                 <field name="partner_id" position="after">
                     <field name="picking_type_code" invisible="1" />
                     <field name="grn_id" attrs="{'invisible':[('picking_type_code','!=','incoming')]}" options="{'no_create':True}"/>
+                    <field name="grn_date" attrs="{'invisible':[('picking_type_code','!=','incoming')]}"/>
                 </field>
             </field>
         </record>
