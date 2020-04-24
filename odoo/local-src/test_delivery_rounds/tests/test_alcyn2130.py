@@ -63,10 +63,14 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         so2 = self._confirm_sale_order(self.partner1, product=self.p2)
         # pickings from both sales orders are not merged
         self.assertFalse(so1.picking_ids & so2.picking_ids)
+        # Check that we have an instance customer
+        self.assertTrue(self.delivery_round_1.instance_customer_ids)
         # terminate the round
         self.delivery_round_1.instance_customer_ids.button_deliver()
         # pickings from both sales orders are now merged
         self.assertEqual(so1.picking_ids, so2.picking_ids)
+        # Check that the customer instance are deleted as delivery is done
+        self.assertFalse(self.delivery_round_1.instance_customer_ids)
 
     def test_case_21A(self):
         """Test case 21
@@ -655,10 +659,14 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         )
         self.delivery_round_2.button_resetdraft()
         # deliver round 1 without processing the pick of so1
+        # Check that we have an instance customer
+        self.assertTrue(self.delivery_round_1.instance_customer_ids)
         with tools.mute_logger('odoo.addons.queue_job.models.base'):
             self.delivery_round_1.with_context(
                 test_queue_job_no_delay=1
             ).button_deliver()
+        # Check that the customer instance are deleted as delivery is done
+        self.assertFalse(self.delivery_round_1.instance_customer_ids)
         self.delivery_round_1.button_done()
         # the pickings of so2 are automatically assigned to the delivery round 2
         self.assertEqual(

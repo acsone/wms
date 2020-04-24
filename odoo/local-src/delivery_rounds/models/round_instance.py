@@ -1129,30 +1129,30 @@ class RoundInstanceCustomer(models.Model):
 
             # Ensure any backorder is reassigned
             shippings._delay_jobs_action_assign(shippings.mapped('partner_id'))
+
+            if self.delivery_round_id.state == 'delivering':
+                self.delivery_round_id.with_delay(
+                    priority=5
+                ).recheck_delivery_state()
+
+            if self.delivery_error:
+                if background:
+                    # write a result to the job
+                    message = _(
+                        'Should be delivered manually, could not'
+                        ' deliver because of %s' % (self.delivery_error,)
+                    )
+                    return message
+                else:
+                    # if we raise the error using the normal way, the buttons
+                    # on the one2many list stop to work...
+                    self.env.user.notify_warning(
+                        _('Error when delivering %s: %s')
+                        % (self.display_name, self.delivery_error)
+                    )
             # If this customer do not have any linked picking, remove it
             # We perform this step at last to prevent Missing record error
             self.with_env(new_env)._remove_if_empty()
-
-        if self.delivery_round_id.state == 'delivering':
-            self.delivery_round_id.with_delay(
-                priority=5
-            ).recheck_delivery_state()
-
-        if self.delivery_error:
-            if background:
-                # write a result to the job
-                message = _(
-                    'Should be delivered manually, could not'
-                    ' deliver because of %s' % (self.delivery_error,)
-                )
-                return message
-            else:
-                # if we raise the error using the normal way, the buttons
-                # on the one2many list stop to work...
-                self.env.user.notify_warning(
-                    _('Error when delivering %s: %s')
-                    % (self.display_name, self.delivery_error)
-                )
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
