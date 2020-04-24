@@ -7,7 +7,6 @@ from odoo.tests.common import SavepointCase
 
 
 class TestActAsView(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(TestActAsView, cls).setUpClass()

@@ -15,7 +15,10 @@ class StockInventory(models.Model):
         for inventory in self:
             if inventory.filter != 'none':
                 continue
-            if inventory.location_id and inventory.location_id.is_inventory_forbidden:
+            if (
+                inventory.location_id
+                and inventory.location_id.is_inventory_forbidden
+            ):
                 raise ValidationError(
                     _(
                         "You cannot create an inventory for 'all products' on the %s location."
