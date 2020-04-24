@@ -116,6 +116,7 @@
         "speedy_views",
         "split_coda",
         "stock_inventory_controller",
+        "stock_inventory_constrains",
         "stock_location_notranslate",
         "stock_location_report",
         "stock_lot_update",
