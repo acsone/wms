@@ -331,29 +331,25 @@ class RoundInstance(models.Model):
         ).action_confirm()
         # Note: MTO moves in waiting state are updated in standard by a call to
         # action_assign, so we need to propagate it
-        moves = pickings.mapped('move_lines').filtered(
-            lambda move: move.state not in ('done', 'cancel')
-            and move.product_uom_qty > 0.0
-        )
-        moves_to_assign = moves.filtered(
-            lambda move: not move.linked_move_operation_ids
-        )
-        if moves_to_assign:
-            moves.with_context(round_autoset=False).action_assign(
-                no_prepare=no_prepare
-            )
-            # Due to product_additional, recordset could have changed
-            moves = moves.search([('id', 'in', moves.ids)])
-
+        self._assign_picking_moves_to_assign(pickings, no_prepare=no_prepare)
         # Retrieve all pickings (partially) available
         # Do not look at the state of the picking as assigned state has the
         # lowest priority
-        moves_assigned = moves.filtered(
+        moves_assigned = pickings.mapped('move_lines').filtered(
             lambda move: move.state == 'assigned'
             or (move.state == 'confirmed' and move.partially_available)
         )
         pickings_assigned = moves_assigned.mapped('picking_id')
         if pickings_assigned:
+            # Get and assign linked picking to be sure that they are all into
+            # the same delivery round
+            linked_pickings = self._get_linked_pickings(pickings_assigned)
+            self._assign_picking_moves_to_assign(
+                linked_pickings, no_prepare=no_prepare
+            )
+
+            # Use | to let it work in tests with one step delivery
+            pickings_assigned |= linked_pickings
 
             def key(r):
                 partner = r.partner_id
@@ -376,6 +372,34 @@ class RoundInstance(models.Model):
                 )
                 ric._link_pickings(pickings_bypartner)
         return pickings_assigned
+
+    @api.model
+    def _assign_picking_moves_to_assign(self, pickings, no_prepare=False):
+        moves_to_assign = pickings.mapped("move_lines").filtered(
+            lambda move: move.state not in ('done', 'cancel')
+            and move.product_uom_qty > 0.0
+        )
+        moves_to_assign = moves_to_assign.filtered(
+            lambda move: not move.linked_move_operation_ids
+        )
+        return moves_to_assign.with_context(round_autoset=False).action_assign(
+            no_prepare=no_prepare
+        )
+
+    @api.model
+    def _get_linked_pickings(self, pickings):
+        """
+        Return all the pickings chained to the same outgoing pickings of those
+        of the given pickings.
+
+        This method id usefull to be sure that if a picking is manually added
+        to a delivery round, all the pickings linked to the same outgoing
+        picking are also included into the same delivery_round instance
+        """
+        shippings = pickings._get_all_dest_pickings().filtered(
+            lambda r: r.picking_type_code == 'outgoing'
+        )
+        return shippings._get_all_src_pickings()
 
     @api.multi
     def _add_customer(self, customer):
@@ -813,14 +837,6 @@ class RoundInstanceCustomer(models.Model):
     @api.multi
     def _link_pickings(self, pickings):
         self.ensure_one()
-        # Link all pickings/shippings
-        shippings = pickings._get_all_dest_pickings().filtered(
-            lambda r: r.picking_type_code == 'outgoing'
-        )
-        # ensure all related pickings are assigned to the same delivery
-        # round
-        # Use | to let it work in tests with one step delivery
-        pickings |= shippings._get_all_src_pickings()
         # Note that in our case, an open picking cannot have multiple open
         # shippings, so we don't have to ensure a picking is not already done
         # for another delivery round
