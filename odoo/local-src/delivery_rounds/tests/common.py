@@ -158,7 +158,9 @@ class DeliveryRoundTestCase(SavepointCase):
         return Picking.create(picking_values)
 
     @classmethod
-    def _confirm_sale_order(cls, partner=None, product=None, qty=1):
+    def _confirm_sale_order(
+        cls, partner=None, product=None, qty=1, carrier_id=None
+    ):
         if partner is None:
             partner = cls.partner1
         if product is None:
@@ -182,6 +184,8 @@ class DeliveryRoundTestCase(SavepointCase):
                 )
             ],
         }
+        if carrier_id:
+            so_values["carrier_id"] = carrier_id
         so = Sale.create(so_values)
         so.action_confirm()
         return so

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016-2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 import logging
+from collections import defaultdict
 
 from odoo import _, api, models
 from odoo.exceptions import ValidationError
@@ -53,6 +53,7 @@ class StockMove(models.Model):
             super(StockMove, other_moves).action_assign(no_prepare=no_prepare)
 
         # special case for moves to be auto assigned to a delivery round...
+        pickings_to_assign_by_round = defaultdict(list)
         for picking in delivery_round_assignable_moves.mapped('picking_id'):
             delivery_round = picking.delivery_round_id
             if delivery_round:
@@ -65,23 +66,33 @@ class StockMove(models.Model):
                 picking.id,
             )
 
-            shippings = picking._get_all_dest_pickings().filtered(
-                lambda r: r.picking_type_code == 'outgoing'
-                and r.state not in ('cancel', 'done')
-            )
-            if shippings.mapped('carrier_id.delivery_template_id'):
-                delivery_round = self.env['round.instance'].find_bytemplate(
-                    shippings.mapped('carrier_id.delivery_template_id')[0]
-                )
-            else:
-                delivery_round = self.env['round.instance'].find_bypartner(
-                    picking.partner_id
-                )
+            delivery_round = self._find_delivery_round_candidate(picking)
             if delivery_round:
                 if picking.partner_id.is_shipping_date_allowed(
                     delivery_round.date
                 ):
-                    delivery_round._assign_pickings(picking)
+                    pickings_to_assign_by_round[delivery_round].append(
+                        picking.id
+                    )
+        for delivery_round, picking_ids in pickings_to_assign_by_round.items():
+            delivery_round._assign_pickings(
+                self.env["stock.picking"].browse(picking_ids)
+            )
+
+    @api.model
+    def _find_delivery_round_candidate(self, picking):
+        """
+        Return a delivery round in which the delivery round can be assigned.
+        """
+        shippings = picking._get_all_dest_pickings().filtered(
+            lambda r: r.picking_type_code == 'outgoing'
+            and r.state not in ('cancel', 'done')
+        )
+        if shippings.mapped('carrier_id.delivery_template_id'):
+            return self.env['round.instance'].find_bytemplate(
+                shippings.mapped('carrier_id.delivery_template_id')[0]
+            )
+        return self.env['round.instance'].find_bypartner(picking.partner_id)
 
     @api.multi
     def action_cancel(self):
