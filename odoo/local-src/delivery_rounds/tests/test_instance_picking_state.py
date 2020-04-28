@@ -82,3 +82,24 @@ class TestInstancePickingState(DeliveryRoundTestCase):
             ),
             {pick1},
         )
+
+    def test_round_delivered(self):
+        """Test that after round is delivered, the customer instances are deleted"""
+        self.assertEqual(self.delivery_round_1.state, 'pending')
+        pick = self._create_picking_pick(partner=self.partner2)
+        ship = self._create_picking_out(self.partner2)
+
+        pick.move_lines.write({'state': 'assigned'})
+
+        ship.move_lines.write({'state': 'waiting'})
+
+        pickings = pick | ship
+        self.delivery_round_1._assign_pickings(pickings)
+
+        self.assertEqual(len(self.delivery_round_1.instance_customer_ids), 1)
+
+        with self.mock_with_delay() as (__, __):
+            self.delivery_round_1.button_deliver()
+
+        self.delivery_round_1.instance_customer_ids._deliver_job()
+        self.assertEqual(len(self.delivery_round_1.instance_customer_ids), 0)
