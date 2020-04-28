@@ -253,12 +253,16 @@ class RoundInstance(models.Model):
         return ret
 
     def _generate_optimization_metas(self, cfg):
-        return {"simulationName": self.display_name}
+        return {"simulationName": self.display_name, "countryCode": "BE"}
 
     def _generate_optimization_depots(self, cfg):
         address = self.warehouse_id.partner_id
         return [
-            {"x": address.partner_longitude, "y": address.partner_latitude}
+            {
+                "x": address.partner_longitude,
+                "y": address.partner_latitude,
+                "id": address.id,
+            }
         ]
 
     def _generate_optimization_orders(self, cfg):
@@ -340,7 +344,11 @@ class RoundInstance(models.Model):
         self.ensure_one()
         action = "optimize"
         optimize_url = self._get_opitization_api_url(action)
-        response = requests.post(optimize_url, json=json_request)
+        response = requests.post(
+            optimize_url,
+            json=json_request,
+            headers={"Accept": "application/json"},
+        )
         result = self._check_optimization_response(action, response)
         if result is False:
             return
