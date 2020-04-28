@@ -208,6 +208,7 @@ class RoundInstance(models.Model):
             if not record._is_all_customer_delivered():
                 continue
             if record.geo_optimization_state == "success":
+                record.write({"state": "delivering"})
                 super(RoundInstance, record).recheck_delivery_state()
             elif record.geo_optimization_state == "in_progress":
                 record.write({"state": "optimizing"})
