@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_constrains
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-24 08:01+0000\n"
+"PO-Revision-Date: 2020-04-24 08:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_constrains
+#: model:ir.model.fields,help:stock_inventory_constrains.field_stock_location_is_inventory_forbidden
+msgid "If set to True, you will not be able to generate an inventory on that location for 'all products'"
+msgstr "Si ce champ est sélectionné, vous ne serez pas capable de générer un ajustement de stock pour cet emplacement pour 'Tous les articles'."
+
+#. module: stock_inventory_constrains
+#: model:ir.model,name:stock_inventory_constrains.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_inventory_constrains
+#: model:ir.model,name:stock_inventory_constrains.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements de stock"
+
+#. module: stock_inventory_constrains
+#: model:ir.model.fields,field_description:stock_inventory_constrains.field_stock_location_is_inventory_forbidden
+msgid "Inventory on all products forbidden"
+msgstr "Ajustement de stock pour tous les articles est interdit"
+
+#. module: stock_inventory_constrains
+#: code:addons/stock_inventory_constrains/models/stock_inventory.py:20
+#, python-format
+msgid "You cannot create an inventory for 'all products' on the %s location."
+msgstr "Vous ne pouvez pas créer un ajustement de stock pour 'tous les articles' sur l'emplacement %s."
+
