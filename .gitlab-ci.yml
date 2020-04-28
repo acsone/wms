@@ -164,7 +164,6 @@ stop-test:
   environment:
     name: test/odoo-alcyon
     action: stop
-  when: manual
   only:
     - /1\.50\.\d+/
   dependencies: []
