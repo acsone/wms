@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_expired
+# 	* stock_expired
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2017-01-12 14:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,7 +18,8 @@ msgstr ""
 
 #. module: stock_expired
 #: model:mail.template,body_html:stock_expired.email_template_alert_quant_expired
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>Hello,</p>\n"
 "                    <p>Following quants are on alert:</p>\n"
@@ -30,7 +32,8 @@ msgid "\n"
 "                    </p>\n"
 "                \n"
 "            "
-msgstr "\n"
+msgstr ""
+"\n"
 "                \n"
 "                    <p>Bonjour,</p>\n"
 "                    <p>Les stocks suivants sont en alerte :</p>\n"
@@ -55,8 +58,13 @@ msgid "Best before Date"
 msgstr "Date limite d'utilisation optimale"
 
 #. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_picking_to_process_quant_expired
+msgid "Bypass restriction on expired quants"
+msgstr ""
+
+#. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_quant_life_date
-msgid "Expiration date"
+msgid "Expiration Date"
 msgstr "Date de péremption"
 
 #. module: stock_expired
@@ -86,6 +94,11 @@ msgid "Quants on alert"
 msgstr "Stocks en alerte"
 
 #. module: stock_expired
+#: model:stock.picking.type,name:stock_expired.picking_type_scrap
+msgid "Scrap"
+msgstr ""
+
+#. module: stock_expired
 #: model:ir.actions.act_window,name:stock_expired.action_stock_quant_expired_tree
 #: model:ir.ui.menu,name:stock_expired.menu_action_stock_quant_expired_tree
 msgid "Stock quant expired"
@@ -98,25 +111,35 @@ msgstr "Stocks"
 
 #. module: stock_expired
 #: model:ir.model.fields,help:stock_expired.field_stock_quant_alert_date
-msgid "This is the date on which an alert should be notified about the goods with this Serial Number."
-msgstr "Ceci est la date à laquelle une alerte doit être remontée à propos des marchandises avec ce numéro de série."
+msgid ""
+"This is the date on which an alert should be notified about the goods with "
+"this Serial Number."
+msgstr ""
+"Ceci est la date à laquelle une alerte doit être remontée à propos des "
+"marchandises avec ce numéro de série."
 
 #. module: stock_expired
 #: model:ir.model.fields,help:stock_expired.field_stock_quant_life_date
-msgid "This is the date on which the goods with this Serial Number may become dangerous and must not be consumed."
-msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série deviennent dangereux et ne doivent plus être consommées."
+msgid ""
+"This is the date on which the goods with this Serial Number may become "
+"dangerous and must not be consumed."
+msgstr ""
+"Ceci est la date à laquelle les marchandises avec ce numéro de série "
+"deviennent dangereux et ne doivent plus être consommées."
 
 #. module: stock_expired
 #: model:ir.model.fields,help:stock_expired.field_stock_quant_use_date
-msgid "This is the date on which the goods with this Serial Number start deteriorating, without being dangerous yet."
-msgstr "Ceci est la date à laquelle les marchandises avec ce numéro de série commencent à se détériorer, sans pour autant être dangereuses."
-
-#. module: stock_expired
-#: model:ir.model.fields,field_description:stock_expired.field_stock_picking_to_process_quant_expired
-msgid "To process quant expired"
-msgstr "Stocks expirés à traiter"
+msgid ""
+"This is the date on which the goods with this Serial Number start "
+"deteriorating, without being dangerous yet."
+msgstr ""
+"Ceci est la date à laquelle les marchandises avec ce numéro de série "
+"commencent à se détériorer, sans pour autant être dangereuses."
 
 #. module: stock_expired
 #: model:ir.model,name:stock_expired.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#~ msgid "To process quant expired"
+#~ msgstr "Stocks expirés à traiter"

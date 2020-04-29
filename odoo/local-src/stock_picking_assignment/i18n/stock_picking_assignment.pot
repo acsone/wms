@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-20 13:27+0000\n"
-"PO-Revision-Date: 2017-01-20 13:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_picking_assignment
+#: model:ir.model,name:stock_picking_assignment.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_picking_assignment
+#: model:ir.model.fields,field_description:stock_picking_assignment.field_stock_inventory_operator_id
 #: model:ir.model.fields,field_description:stock_picking_assignment.field_stock_picking_operator_id
+#: model:ir.model.fields,field_description:stock_picking_assignment.field_stock_scrap_operator_id
+#: model:ir.ui.view,arch_db:stock_picking_assignment.stock_inventory_search_view
+#: model:ir.ui.view,arch_db:stock_picking_assignment.stock_scrap_search_view
 #: model:ir.ui.view,arch_db:stock_picking_assignment.view_stock_picking_operator_search
 msgid "Operator"
 msgstr ""
@@ -30,3 +37,9 @@ msgstr ""
 #: model:ir.model,name:stock_picking_assignment.model_stock_picking
 msgid "Transfer"
 msgstr ""
+
+#. module: stock_picking_assignment
+#: model:ir.model,name:stock_picking_assignment.model_stock_scrap
+msgid "stock.scrap"
+msgstr ""
+

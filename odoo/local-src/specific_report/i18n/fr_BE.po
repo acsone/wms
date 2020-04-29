@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_report
+# 	* specific_report
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2019-03-08 12:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,11 +18,14 @@ msgstr ""
 
 #. module: specific_report
 #: model:mail.template,body_html:specific_report.email_template_pharmacist_supplier_order
-msgid "\n"
+msgid ""
+"\n"
 "                <p>Hello,</p>\n"
 "                <p>\n"
-"                    We have received this order that is subjected to you.<br/>\n"
-"                    We transfer it to you and wait for your packages to deliver them to the customer.\n"
+"                    We have received this order that is subjected to you.<br/"
+">\n"
+"                    We transfer it to you and wait for your packages to "
+"deliver them to the customer.\n"
 "                </p>\n"
 "\n"
 "                <p>Please find here attached the order.</p>\n"
@@ -30,11 +34,14 @@ msgid "\n"
 "                <p>Your Team Alcyon</p>\n"
 "            \n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "                <p>Hello,</p>\n"
 "                <p>\n"
-"                    We have received this order that is subjected to you.<br/>\n"
-"                    We transfer it to you and wait for your packages to deliver them to the customer.\n"
+"                    We have received this order that is subjected to you.<br/"
+">\n"
+"                    We transfer it to you and wait for your packages to "
+"deliver them to the customer.\n"
 "                </p>\n"
 "\n"
 "                <p>Please find here attached the order.</p>\n"
@@ -71,8 +78,12 @@ msgstr "# Mat."
 
 #. module: specific_report
 #: model:mail.template,report_name:specific_report.email_template_pharmacist_supplier_order
-msgid "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
-msgstr "${(object.name or '').replace('/','_')}${object.state == 'draft' and '_brouillon' or ''}"
+msgid ""
+"${(object.name or '').replace('/','_')}${object.state == 'draft' and "
+"'_draft' or ''}"
+msgstr ""
+"${(object.name or '').replace('/','_')}${object.state == 'draft' and "
+"'_brouillon' or ''}"
 
 #. module: specific_report
 #: model:mail.template,subject:specific_report.mail_template_pharamcist_notification
@@ -104,55 +115,74 @@ msgstr "(V Ref:"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
-msgid "-\n"
+msgid ""
+"-\n"
 "                    <span>Fax:</span>"
-msgstr "-\n"
+msgstr ""
+"-\n"
 "                    <span>Fax:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<br/>\n"
+msgid ""
+"<br/>\n"
 "                                BIC:"
-msgstr "<br/>\n"
+msgstr ""
+"<br/>\n"
 "                                BIC:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
-msgid "<br/>\n"
+msgid ""
+"<br/>\n"
 "                    <span>Email:</span>"
-msgstr "<br/>\n"
+msgstr ""
+"<br/>\n"
 "                    <span>Email:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<br/><br/>\n"
+msgid ""
+"<br/><br/>\n"
 "                                            <span>Customer</span>"
-msgstr "<br/><br/>\n"
+msgstr ""
+"<br/><br/>\n"
 "                                            <span>Client</span>"
 
 #. module: specific_report
 #: model:mail.template,body_html:specific_report.mail_template_pharamcist_notification
-msgid "<html>\n"
+msgid ""
+"<html>\n"
 "                <head></head>\n"
 "                % set record = ctx.get('record')\n"
-"                % set company = record and record.company_id or user.company_id\n"
+"                % set company = record and record.company_id or user."
+"company_id\n"
 "                <body style=\"margin: 0; padding: 0;\">\n"
-"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-collapse:separate;\" summary=\"o_mail_notification\">\n"
+"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" "
+"bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-"
+"collapse:separate;\" summary=\"o_mail_notification\">\n"
 "                        <tbody>\n"
 "\n"
 "                            <!-- HEADER -->\n"
 "                            <tr>\n"
-"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                    <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                    <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-"
+"color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
 "                                        <tr>\n"
 "                                            <td valign=\"middle\">\n"
-"                                                <span style=\"font-size:20px; color:white; font-weight: bold;\">\n"
+"                                                <span style=\"font-"
+"size:20px; color:white; font-weight: bold;\">\n"
 "                                                    ${object.record_name}\n"
 "                                                </span>\n"
 "                                            </td>\n"
-"                                            <td valign=\"middle\" align=\"right\">\n"
-"                                                <img src=\"/logo.png?company=${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${company.name}\">\n"
+"                                            <td valign=\"middle\" align="
+"\"right\">\n"
+"                                                <img src=\"/logo.png?company="
+"${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;"
+"\" alt=\"${company.name}\">\n"
 "                                                </td>\n"
 "                                            </tr>\n"
 "                                        </table>\n"
@@ -161,10 +191,14 @@ msgid "<html>\n"
 "\n"
 "                                <!-- CONTENT -->\n"
 "                                <tr>\n"
-"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
+"                                    <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-"
+"color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
 "                                            <tbody>\n"
-"                                                <td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
+"                                                <td valign=\"top\" style="
+"\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
 "                                                    ${object.body | safe}\n"
 "                                                </td>\n"
 "                                            </tbody>\n"
@@ -174,19 +208,29 @@ msgid "<html>\n"
 "\n"
 "                                <!-- FOOTER -->\n"
 "                                <tr>\n"
-"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                    <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-"
+"color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
 "                                            <tr>\n"
-"                                                <td valign=\"middle\" align=\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                <td valign=\"middle\" align="
+"\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-"
+"size: 12px;\">\n"
 "                                                    ${company.name}<br/>\n"
 "                                                    ${company.phone or ''}\n"
 "                                                </td>\n"
-"                                                <td valign=\"middle\" align=\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                <td valign=\"middle\" align="
+"\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-"
+"size: 12px;\">\n"
 "                                                    % if company.email:\n"
-"                                                    <a href=\"mailto:${company.email}\" style=\"text-decoration:none; color: white;\">${company.email}</a><br/>\n"
+"                                                    <a href=\"mailto:"
+"${company.email}\" style=\"text-decoration:none; color: white;\">${company."
+"email}</a><br/>\n"
 "                                                    % endif\n"
 "                                                    % if company.website:\n"
-"                                                    <a href=\"${company.website}\" style=\"text-decoration:none; color: white;\">\n"
+"                                                    <a href=\"${company."
+"website}\" style=\"text-decoration:none; color: white;\">\n"
 "                                                        ${company.website}\n"
 "                                                    </a>\n"
 "                                                    % endif\n"
@@ -197,7 +241,8 @@ msgid "<html>\n"
 "                                </tr>\n"
 "                                <tr>\n"
 "                                    <td align=\"center\">\n"
-"                                        Powered by <a href=\"https://www.odoo.com\">Odoo</a>.\n"
+"                                        Powered by <a href=\"https://www."
+"odoo.com\">Odoo</a>.\n"
 "                                    </td>\n"
 "                                </tr>\n"
 "                            </tbody>\n"
@@ -205,26 +250,37 @@ msgid "<html>\n"
 "                    </body>\n"
 "                </html>\n"
 "                "
-msgstr "<html>\n"
+msgstr ""
+"<html>\n"
 "                <head></head>\n"
 "                % set record = ctx.get('record')\n"
-"                % set company = record and record.company_id or user.company_id\n"
+"                % set company = record and record.company_id or user."
+"company_id\n"
 "                <body style=\"margin: 0; padding: 0;\">\n"
-"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-collapse:separate;\" summary=\"o_mail_notification\">\n"
+"                    <table border=\"0\" width=\"100%\" cellpadding=\"0\" "
+"bgcolor=\"#ededed\" style=\"padding: 20px; background-color: #ededed; border-"
+"collapse:separate;\" summary=\"o_mail_notification\">\n"
 "                        <tbody>\n"
 "\n"
 "                            <!-- HEADER -->\n"
 "                            <tr>\n"
-"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                    <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                    <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-"
+"color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
 "                                        <tr>\n"
 "                                            <td valign=\"middle\">\n"
-"                                                <span style=\"font-size:20px; color:white; font-weight: bold;\">\n"
+"                                                <span style=\"font-"
+"size:20px; color:white; font-weight: bold;\">\n"
 "                                                    ${object.record_name}\n"
 "                                                </span>\n"
 "                                            </td>\n"
-"                                            <td valign=\"middle\" align=\"right\">\n"
-"                                                <img src=\"/logo.png?company=${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${company.name}\">\n"
+"                                            <td valign=\"middle\" align="
+"\"right\">\n"
+"                                                <img src=\"/logo.png?company="
+"${company.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;"
+"\" alt=\"${company.name}\">\n"
 "                                                </td>\n"
 "                                            </tr>\n"
 "                                        </table>\n"
@@ -233,10 +289,14 @@ msgstr "<html>\n"
 "\n"
 "                                <!-- CONTENT -->\n"
 "                                <tr>\n"
-"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
+"                                    <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#ffffff\" style=\"min-width: 590px; background-"
+"color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;\">\n"
 "                                            <tbody>\n"
-"                                                <td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
+"                                                <td valign=\"top\" style="
+"\"font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;\">\n"
 "                                                    ${object.body | safe}\n"
 "                                                </td>\n"
 "                                            </tbody>\n"
@@ -246,19 +306,29 @@ msgstr "<html>\n"
 "\n"
 "                                <!-- FOOTER -->\n"
 "                                <tr>\n"
-"                                    <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                        <table width=\"590\" border=\"0\" cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
+"                                    <td align=\"center\" style=\"min-width: "
+"590px;\">\n"
+"                                        <table width=\"590\" border=\"0\" "
+"cellpadding=\"0\" bgcolor=\"#875A7B\" style=\"min-width: 590px; background-"
+"color: rgb(135,90,123); padding: 20px; border-collapse:separate;\">\n"
 "                                            <tr>\n"
-"                                                <td valign=\"middle\" align=\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                <td valign=\"middle\" align="
+"\"left\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-"
+"size: 12px;\">\n"
 "                                                    ${company.name}<br/>\n"
 "                                                    ${company.phone or ''}\n"
 "                                                </td>\n"
-"                                                <td valign=\"middle\" align=\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;\">\n"
+"                                                <td valign=\"middle\" align="
+"\"right\" style=\"color: #fff; padding-top: 10px; padding-bottom: 10px; font-"
+"size: 12px;\">\n"
 "                                                    % if company.email:\n"
-"                                                    <a href=\"mailto:${company.email}\" style=\"text-decoration:none; color: white;\">${company.email}</a><br/>\n"
+"                                                    <a href=\"mailto:"
+"${company.email}\" style=\"text-decoration:none; color: white;\">${company."
+"email}</a><br/>\n"
 "                                                    % endif\n"
 "                                                    % if company.website:\n"
-"                                                    <a href=\"${company.website}\" style=\"text-decoration:none; color: white;\">\n"
+"                                                    <a href=\"${company."
+"website}\" style=\"text-decoration:none; color: white;\">\n"
 "                                                        ${company.website}\n"
 "                                                    </a>\n"
 "                                                    % endif\n"
@@ -269,7 +339,8 @@ msgstr "<html>\n"
 "                                </tr>\n"
 "                                <tr>\n"
 "                                    <td align=\"center\">\n"
-"                                        Powered by <a href=\"https://www.odoo.com\">Odoo</a>.\n"
+"                                        Powered by <a href=\"https://www."
+"odoo.com\">Odoo</a>.\n"
 "                                    </td>\n"
 "                                </tr>\n"
 "                            </tbody>\n"
@@ -277,6 +348,11 @@ msgstr "<html>\n"
 "                    </body>\n"
 "                </html>\n"
 "                "
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span> - Delivery slip:</span>"
+msgstr "<span> - Note d'envoi :</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -287,16 +363,6 @@ msgstr "<span>Remise<br/>Alcyon</span>"
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Base<br/>discount</span>"
 msgstr "<span>Remise<br/>Fournisseur</span>"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span>Sales Order</span>"
-msgstr "<span>Commande</span>"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span> - Delivery slip:</span>"
-msgstr "<span> - Note d'envoi :</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
@@ -355,12 +421,19 @@ msgstr "<span>RPM Liège division Huy - TVA</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span>SUMMARY</span>\n"
+msgid ""
+"<span>SUMMARY</span>\n"
 "                                <br/>\n"
 "                                <span>Total discount:</span>"
-msgstr "<span>Résumé</span>\n"
+msgstr ""
+"<span>Résumé</span>\n"
 "                            <br/>\n"
 "                            <span>Remise totale:</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Sales Order</span>"
+msgstr "<span>Commande</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
@@ -421,7 +494,7 @@ msgstr "<strong>Date Ordered:</strong>"
 
 #. module: specific_report
 #: model:mail.template,subject:specific_report.email_template_pharmacist_supplier_order
-msgid "Alcyon Medicine order"
+msgid "Alcyon Medicine order ${object.name}"
 msgstr "Alcyon Medicine order ${object.name}"
 
 #. module: specific_report
@@ -548,19 +621,23 @@ msgid "Canceled Refund"
 msgstr "Note de crédit annulée"
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:115
+#: code:addons/specific_report/models/sale_order.py:126
 #, python-format
-msgid "Cannot send pharmacist email\n"
+msgid ""
+"Cannot send pharmacist email\n"
 "%s partner must have an email address."
-msgstr "Cannot send pharmacist email\n"
+msgstr ""
+"Cannot send pharmacist email\n"
 "%s partner must have an email address."
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:110
+#: code:addons/specific_report/models/sale_order.py:119
 #, python-format
-msgid "Cannot send pharmacist email\n"
+msgid ""
+"Cannot send pharmacist email\n"
 "No pharmacist affiliated to the client."
-msgstr "Cannot send pharmacist email\n"
+msgstr ""
+"Cannot send pharmacist email\n"
 "No pharmacist affiliated to the client."
 
 #. module: specific_report
@@ -635,8 +712,10 @@ msgid "Description"
 msgstr "Description"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin_display_name
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_display_name
 #: model:ir.model.fields,field_description:specific_report.field_report_async_display_name
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -661,7 +740,7 @@ msgstr "Registre d'entrée"
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Expiration date"
-msgstr "Date d'expiration"
+msgstr "Date de péremption"
 
 #. module: specific_report
 #: model:ir.model.fields,help:specific_report.field_stock_move_serial_number
@@ -681,6 +760,11 @@ msgid "Goods return note"
 msgstr "Bon de retour"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "Gross<br/>unit<br/>price"
+msgstr "Prix<br/>unitaire<br/>brut"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
 msgid "Has Invoices"
 msgstr "A des factures"
@@ -698,8 +782,10 @@ msgid "Hide prices on deliveryslip"
 msgstr "Cacher les prix sur le bon de livraison"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin_id
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
 #: model:ir.model.fields,field_description:specific_report.field_report_async_id
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin_id
 msgid "ID"
 msgstr "ID"
 
@@ -761,8 +847,10 @@ msgid "Kg"
 msgstr "Kg"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin___last_update
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number___last_update
 #: model:ir.model.fields,field_description:specific_report.field_report_async___last_update
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -807,8 +895,8 @@ msgid "No active id found"
 msgstr "Aucun ID actif trouvé"
 
 #. module: specific_report
-#: code:addons/specific_report/models/round_instance.py:22
-#: code:addons/specific_report/models/round_instance.py:168
+#: code:addons/specific_report/models/round_instance.py:23
+#: code:addons/specific_report/models/round_instance.py:174
 #, python-format
 msgid "No invoice to print"
 msgstr "Pas de facture à imprimer"
@@ -903,16 +991,6 @@ msgid "Order #"
 msgstr "Commande n°"
 
 #. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
-msgid "Order Reference"
-msgstr "Référence commande"
-
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_line_id
-msgid "Order line"
-msgstr "Ligne du bon de commande"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Ordered Quantity"
 msgstr "Quantité commandée"
@@ -964,11 +1042,6 @@ msgid "Picking inspection"
 msgstr "Vérification de la préparation"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Gross<br/>unit<br/>price"
-msgstr "Prix<br/>unitaire<br/>brut"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
@@ -1011,9 +1084,11 @@ msgstr "Taux"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "Received the:<br/>\n"
+msgid ""
+"Received the:<br/>\n"
 "                            Signature:"
-msgstr "Reçu le:<br/>\n"
+msgstr ""
+"Reçu le:<br/>\n"
 "                            Signature:"
 
 #. module: specific_report
@@ -1052,7 +1127,7 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: specific_report
-#: code:addons/specific_report/models/report_async.py:45
+#: code:addons/specific_report/models/report_async.py:48
 #, python-format
 msgid "Sending fax for {} with id {}"
 msgstr "Envoyer par fax pour {} avec l'ID {}"
@@ -1090,14 +1165,18 @@ msgid "Taxes"
 msgstr "Taxes"
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:80
+#: code:addons/specific_report/models/sale_order.py:83
 #, python-format
-msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
-msgstr "Le devis ne peut pas être imprimé car le client {} ({})                  n'a pas de référence."
+msgid ""
+"The Quotation can not be printed the client {} ({}) has no reference "
+"assigned."
+msgstr ""
+"Le devis ne peut pas être imprimé car le client {} ({}) n'a "
+"pas de référence."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:133
-#: code:addons/specific_report/models/stock_picking.py:171
+#: code:addons/specific_report/models/stock_picking.py:139
+#: code:addons/specific_report/models/stock_picking.py:179
 #, python-format
 msgid "The picking zone %s is not correct"
 msgstr "La zone de picking %s n'est pas correcte"
@@ -1109,13 +1188,13 @@ msgid "There are more than one currencies on orders"
 msgstr "Vous ne pouvez pas avoir plusieurs devises sur ces commandes"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:153
+#: code:addons/specific_report/models/stock_picking.py:160
 #, python-format
 msgid "There is no category on this product"
 msgstr "Il n'y a pas de catégorie pour ce produit"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:114
+#: code:addons/specific_report/models/stock_picking.py:116
 #, python-format
 msgid "There is no original picking zone on this operation."
 msgstr "Il n'y a pas de zone de picking d'origine sur cette opération."
@@ -1186,6 +1265,11 @@ msgid "Weight:<br/>"
 msgstr "Poids:<br/>"
 
 #. module: specific_report
+#: model:ir.model,name:specific_report.model_account_invoice_line_margin
+msgid "account.invoice.line.margin"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "boxes"
 msgstr "boîtes"
@@ -1216,27 +1300,44 @@ msgid "round.instance.customer"
 msgstr "round.instance.customer"
 
 #. module: specific_report
+#: model:ir.model,name:specific_report.model_sale_order_line_margin
+msgid "sale.order.line.margin"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
-msgid "|\n"
+msgid ""
+"|\n"
 "                    <span>Fax:</span>"
-msgstr "|\n"
+msgstr ""
+"|\n"
 "                    <span>Fax:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
-msgid "|\n"
+msgid ""
+"|\n"
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
-msgstr "|\n"
+msgstr ""
+"|\n"
 "                <span>Pour les commandes;</span>\n"
 "                <span>Téléphone:</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
-msgid "|\n"
+msgid ""
+"|\n"
 "                    <span>Phone:</span>"
-msgstr "|\n"
+msgstr ""
+"|\n"
 "                <span>Téléphone:</span>"
+
+#~ msgid "Order Reference"
+#~ msgstr "Référence commande"
+
+#~ msgid "Order line"
+#~ msgstr "Ligne du bon de commande"

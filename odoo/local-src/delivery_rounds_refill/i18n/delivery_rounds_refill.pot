@@ -6,14 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 15:02+0000\n"
-"PO-Revision-Date: 2020-02-06 15:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_confirmed_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_count
+msgid "Amount of customers having a remaining quantity to pick"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_planned_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_planned_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_planned_count
+msgid "Amount of customers having a remaining quantity to pick in a planned delivery round"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_immediate_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_immediate_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_immediate_count
+msgid "Amount of customers having a remaining quantity to pick in a started delivery round"
+msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_refill_priority_arrange
@@ -36,14 +55,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_average_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_average_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_average_count
-msgid "Average outgoing count"
+msgid "Average daily customer"
 msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_average_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_average_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_average_qty
-msgid "Average outgoing qty"
+msgid "Average daily usage"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -52,22 +71,18 @@ msgid "Cancel"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_average_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_average_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_average_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_average_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_average_count
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_average_qty
+msgid "Computed with an horizon of 1 week assuming 5 working days"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Confirm"
-msgstr ""
-
-#. module: delivery_rounds_refill
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_confirmed_count
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_count
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_count
-msgid "Confirmed outgoing count"
-msgstr ""
-
-#. module: delivery_rounds_refill
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_confirmed_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_qty
-msgid "Confirmed outgoing qty"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -85,6 +100,13 @@ msgstr ""
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_wizard_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_confirmed_count
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_count
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_count
+msgid "Customers to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -118,14 +140,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_immediate_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_immediate_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_immediate_count
-msgid "Immediate outgoing count"
+msgid "Immediate customers to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_immediate_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_immediate_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_immediate_qty
-msgid "Immediate outgoing qty"
+msgid "Immediate quantity to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -159,13 +181,13 @@ msgid "Lot"
 msgstr ""
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:69
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:91
 #, python-format
 msgid "Missing Operation Type on Location %s"
 msgstr ""
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:69
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:91
 #, python-format
 msgid "Missing operation type on location %s"
 msgstr ""
@@ -180,14 +202,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_planned_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_planned_count
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_planned_count
-msgid "Planned outgoing count"
+msgid "Planned customers to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_planned_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_planned_qty
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_planned_qty
-msgid "Planned outgoing qty"
+msgid "Planned quantity to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -209,17 +231,17 @@ msgid "Quantity"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_qty_in_bin_available
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_qty_in_bin_available
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_qty_in_bin_available
+msgid "Quantity available in bin"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_qty_in_bin
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_qty_in_bin
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_qty_in_bin
 msgid "Quantity in bin"
-msgstr ""
-
-#. module: delivery_rounds_refill
-#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_pending_round_reserved_qty
-#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_pending_round_reserved_qty
-#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_pending_round_reserved_qty
-msgid "Quantity in bin, reserved for delivery rounds which are not started"
 msgstr ""
 
 #. module: delivery_rounds_refill
@@ -237,6 +259,13 @@ msgid "Quantity in reserve"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_confirmed_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_qty
+msgid "Quantity to pick"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.action_report_stock_refill_reassort
 #: model:ir.ui.menu,name:delivery_rounds_refill.menu_report_stock_refill_reassort
 #: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_reassort_tree
@@ -250,6 +279,27 @@ msgid "Reassortment Priority"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_confirmed_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_confirmed_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_confirmed_qty
+msgid "Remaining quantity to pick"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_planned_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_planned_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_planned_qty
+msgid "Remaining quantity to pick in a planned delivery round"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_immediate_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_immediate_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_immediate_qty
+msgid "Remaining quantity to pick in a stared delivery round"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_reservation_id
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_reservation_id
 msgid "Reservation"
@@ -259,13 +309,6 @@ msgstr ""
 #: code:addons/delivery_rounds_refill/wizards/create_picking.py:27
 #, python-format
 msgid "Reserve"
-msgstr ""
-
-#. module: delivery_rounds_refill
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_pending_round_reserved_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_pending_round_reserved_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_pending_round_reserved_qty
-msgid "Reserved qty in bin"
 msgstr ""
 
 #. module: delivery_rounds_refill

@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 06:18+0000\n"
-"PO-Revision-Date: 2018-06-28 06:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,24 +19,49 @@ msgid "Cancel"
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:48
+#: code:addons/sale_confirm_background/models/sale_order.py:63
 #, python-format
 msgid "Confirmation of sales order %s"
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:30
+#: code:addons/sale_confirm_background/models/sale_order.py:45
 #, python-format
 msgid "Order %s is now confirmed."
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:45
+#: code:addons/sale_confirm_background/models/sale_order.py:60
 #, python-format
 msgid "Order %s will be confirmed in background."
+msgstr ""
+
+#. module: sale_confirm_background
+#: code:addons/sale_confirm_background/models/sale_order.py:77
+#, python-format
+msgid "Remove delivery block for order %s is now done."
+msgstr ""
+
+#. module: sale_confirm_background
+#: code:addons/sale_confirm_background/models/sale_order.py:87
+#, python-format
+msgid "Remove delivery block for order %s will be done in background."
+msgstr ""
+
+#. module: sale_confirm_background
+#: code:addons/sale_confirm_background/models/sale_order.py:93
+#, python-format
+msgid "Remove delivery block for sales order %s"
 msgstr ""
 
 #. module: sale_confirm_background
 #: model:ir.model,name:sale_confirm_background.model_sale_order
 msgid "Sales Order"
 msgstr ""
+
+#. module: sale_confirm_background
+#: code:addons/sale_confirm_background/models/sale_order.py:34
+#, python-format
+msgid "Was automatically cancelled on confirmation becausethe job took longer to execute than the customer allows."
+msgstr ""
+

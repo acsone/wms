@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 14:55+0000\n"
-"PO-Revision-Date: 2017-08-22 14:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,33 +14,152 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_additional
-#: code:addons/product_additional/models/mrp_bom.py:30
+#: code:addons/product_additional/models/product_supplierinfo.py:18
+#: sql_constraint:product.supplierinfo:0
 #, python-format
-msgid "A bill of material with additional product must have 'kit' type and 2 components of which only one is an additional product."
+msgid "A valid promotion on quantity must have both value higher than\n"
+"                 zero"
 msgstr ""
 
 #. module: product_additional
-#: code:addons/product_additional/models/mrp_bom.py:41
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_product_product_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_product_template_additional_product_id
+msgid "Additional Product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_stock_pack_operation_additional_move_id
+msgid "Additional Product Move"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_purchase_order_line_is_additional_product
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "Additional product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.purchase_order_form
+msgid "Compute additional products"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "For"
+msgstr ""
+
+#. module: product_additional
+#: code:addons/product_additional/models/product_supplierinfo.py:39
 #, python-format
-msgid "A bill of material without additional product must only have non additional product components."
+msgid "For %s products, %s free"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model,name:product_additional.model_mrp_bom
-msgid "Bill of Material"
+#: model:ir.model,name:product_additional.model_product_supplierinfo
+msgid "Information about a product vendor"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_bom_with_additional_product
-msgid "Bill of material with additional product"
+#: model:ir.model.fields,field_description:product_additional.field_stock_move_is_additional_move
+msgid "Is Additional Move"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model.fields,field_description:product_additional.field_mrp_bom_line_is_additional_product
-msgid "Is additional product"
+#: model:ir.model,name:product_additional.model_stock_pack_operation
+msgid "Packing Operation"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model,name:product_additional.model_mrp_bom_line
-msgid "mrp.bom.line"
+#: model:ir.model,name:product_additional.model_product_template
+msgid "Product Template"
 msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_display_name
+msgid "Promotion"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_sale_order_line_is_promotional_product
+msgid "Promotional product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_additional_product
+msgid "Ratio Additional Product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_promotional_product
+msgid "Ratio Free Product"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_main_product
+msgid "Ratio Main Product"
+msgstr ""
+
+#. module: product_additional
+#: code:addons/product_additional/models/stock_move.py:44
+#, python-format
+msgid "Remaining additional move '%s' canceled"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.purchase_order_form
+msgid "This action will erase all existing additional lines"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model,name:product_additional.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+msgid "free."
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "given"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.ui.view,arch_db:product_additional.product_supplierinfo_form_view
+#: model:ir.ui.view,arch_db:product_additional.product_template_form_view
+msgid "products,"
+msgstr ""
+

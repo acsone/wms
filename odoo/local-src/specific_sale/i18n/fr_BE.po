@@ -22,12 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_form
-msgid "<span>Lines Fast Entry</span>"
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:236
+#: code:addons/specific_sale/models/sale.py:260
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -52,7 +47,7 @@ msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:107
+#: code:addons/specific_sale/models/sale.py:109
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -76,8 +71,8 @@ msgid ""
 "backorders.\n"
 "In other words it will ship only immediately usable quantity."
 msgstr ""
-"Annule automatiquement les quantités commandées indisponles afin "
-"d'éviter la génération d'un reliquat.\n"
+"Annule automatiquement les quantités commandées indisponles afin d'éviter la "
+"génération d'un reliquat.\n"
 "Autrement dit seules les quantités immédiatement disponibles seront livrées."
 
 #. module: specific_sale
@@ -107,9 +102,8 @@ msgstr "Décembre"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Delivered Quantity"
-msgstr "Quantité"
+msgstr "Quantité livrée"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -124,12 +118,6 @@ msgstr "Rem.(%)"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Discount"
-msgstr "Remise"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Discount (%)"
 msgstr "Remise"
 
 #. module: specific_sale
@@ -185,9 +173,8 @@ msgstr "Médicament humain interdit"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Invoiced Quantity"
-msgstr "Quantité"
+msgstr "Quantité facturée"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.provision_on_order
@@ -233,11 +220,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
-
-#. module: specific_sale
-#: model:ir.model,name:specific_sale.model_stock_production_lot
-msgid "Lot/Serial"
-msgstr "Lot/N° série"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
@@ -297,7 +279,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:235
+#: code:addons/specific_sale/models/sale.py:259
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -354,7 +336,6 @@ msgstr ""
 
 #. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_stupefiant_vet_by_phone
-#, fuzzy
 msgid "No Stupéfiant VET ordered by phone"
 msgstr "Pas de commande de psychotrope par téléphone"
 
@@ -406,26 +387,14 @@ msgid "Only narcotics"
 msgstr "Uniquement les médicaments"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
-msgid "Order Date"
-msgstr "Date de la commande"
-
-#. module: specific_sale
 #: model:exception.rule,name:specific_sale.warning_free_product
 msgid "Order offer free product"
 msgstr "Commande avec produits gratuits"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Ordered Qty"
-msgstr "Date de la commande"
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Ordered Quantity"
-msgstr "Quantité"
+msgstr "Quantité commandée"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_supplier_break
@@ -461,9 +430,8 @@ msgstr "Prix"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_order_pricelist_id
-#, fuzzy
 msgid "Pricelist"
-msgstr "Prix"
+msgstr "Liste de prix"
 
 #. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_product_pricelist_pv2
@@ -477,9 +445,14 @@ msgid "Pricelist for current sales order."
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_is_consignment
 msgid ""
-"Procurement will be generated for the consignement location of the selected "
+"Procurement will be generated for the consignment location of the selected "
 "customer"
 msgstr ""
 
@@ -500,9 +473,8 @@ msgstr "Modèle de produit"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_type
-#, fuzzy
 msgid "Product Type"
-msgstr "Modèle de produit"
+msgstr "Type de produit"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_cascade_import
@@ -522,12 +494,6 @@ msgstr "Référence d'article"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Promotion"
-msgstr "Promotion"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Promotion (%)"
 msgstr "Promotion"
 
 #. module: specific_sale
@@ -557,7 +523,6 @@ msgid "Remains to deliver"
 msgstr "Reste à livrer"
 
 #. module: specific_sale
-#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_list
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines"
@@ -589,7 +554,6 @@ msgstr "Ligne du bon de commande"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Sales Order Lines"
 msgstr "Ligne du bon de commande"
 
@@ -697,7 +661,7 @@ msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:143
+#: code:addons/specific_sale/models/sale.py:144
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
@@ -709,15 +673,5 @@ msgstr ""
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
-#, fuzzy
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
-
-#~ msgid "BO on sale"
-#~ msgstr "BO à la vente"
-
-#~ msgid "Current BO"
-#~ msgstr "BO actuel"
-
-#~ msgid "Current quantity unavailable"
-#~ msgstr "Quantité actuellement non disponible"

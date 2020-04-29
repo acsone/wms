@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2017-03-07 12:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,8 +18,12 @@ msgstr ""
 
 #. module: stock_receive_lot
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
-msgid "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style=\"margin:0 5px\">Expired</span></i>"
-msgstr "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style=\"margin:0 5px\">Expired</span></i>"
+msgid ""
+"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
+"\"margin:0 5px\">Expired</span></i>"
+msgstr ""
+"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
+"\"margin:0 5px\">Expired</span></i>"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_create_uid
@@ -42,13 +47,24 @@ msgstr "Afficher le nom"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_life_date
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_life_date
 msgid "Expiration date"
+msgstr "Date de péremption"
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_life_date_char
+msgid "Expiration date (input)"
 msgstr "Date de péremption"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_id
 msgid "ID"
 msgstr "Identifiant"
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements d'inventaire"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add___last_update
@@ -81,9 +97,24 @@ msgid "Lot Required"
 msgstr "Lot Requis"
 
 #. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr "Lot/numéro de série pour les colisage"
+
+#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_name
 msgid "Name"
 msgstr "Nom"
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Next Destination"
+msgstr "Prochaine destination"
 
 #. module: stock_receive_lot
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
@@ -131,6 +162,12 @@ msgid "Qty Remaining"
 msgstr "Qté Restante"
 
 #. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:288
+#, python-format
+msgid "Quantity must be greater than 0"
+msgstr ""
+
+#. module: stock_receive_lot
 #: model:ir.actions.act_window,name:stock_receive_lot.action_pack_operation_lot_add
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_picking_form
 msgid "Receive"
@@ -157,9 +194,10 @@ msgid "Source Document"
 msgstr "Document d'origine"
 
 #. module: stock_receive_lot
-#: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot
-msgid "Specifies lot/serial number for pack operations that need it"
-msgstr "Spécifie le lot/numéro de série pour les colisage qui le nécessitent"
+#: code:addons/stock_receive_lot/wizards/stock.py:353
+#, python-format
+msgid "This lot is not in the list of expected lots"
+msgstr ""
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_qty
@@ -167,9 +205,33 @@ msgid "To Do"
 msgstr "A Faire"
 
 #. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_picking
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_uom_id
 msgid "Unit of Measure"
 msgstr "Unité de mesure"
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_location_is_reception_wizard
+msgid "Visible in reception wizard"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:186
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:187
+#: code:addons/stock_receive_lot/wizards/stock.py:291
+#, python-format
+msgid "You cannot receive more than the expected remaining quantity"
+msgstr ""
 
 #. module: stock_receive_lot
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form

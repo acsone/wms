@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2017-01-22 08:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,6 +22,60 @@ msgid "Available"
 msgstr "Disponible"
 
 #. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_company_id
+#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_search
+msgid "Company"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,help:stock_quant_bylocation.field_report_stock_quant_bylocation_product_uom_id
+msgid "Default Unit of Measure used for all stock operation."
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_search
+msgid "Group by..."
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_location_id
+#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_search
+msgid "Location"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_owner_id
+#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_search
+msgid "Owner"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_product_id
+#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_search
+msgid "Product"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_quant_bylocation
 #: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_reservation_id
 msgid "Reserved"
 msgstr "Reservé"
@@ -28,4 +83,14 @@ msgstr "Reservé"
 #. module: stock_quant_bylocation
 #: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_tree
 msgid "Stock by location"
+msgstr "Stock par emplacement"
+
+#. module: stock_quant_bylocation
+#: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_product_uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_quant_bylocation
+#: model:ir.model,name:stock_quant_bylocation.model_report_stock_quant_bylocation
+msgid "report.stock.quant.bylocation"
 msgstr "Stock par emplacement"

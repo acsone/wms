@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 12:39+0000\n"
-"PO-Revision-Date: 2019-03-08 12:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -112,7 +110,7 @@ msgstr ""
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<br/><br/>\n"
-"                                            <span>Client</span>"
+"                                            <span>Customer</span>"
 msgstr ""
 
 #. module: specific_report
@@ -193,17 +191,17 @@ msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span> - Delivery slip:</span>"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Alcyon<br/>discount</span>"
 msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr ""
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "<span>Commande</span>"
 msgstr ""
 
 #. module: specific_report
@@ -270,6 +268,11 @@ msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Sales Order</span>"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"
 msgstr ""
 
@@ -327,7 +330,7 @@ msgstr ""
 
 #. module: specific_report
 #: model:mail.template,subject:specific_report.email_template_pharmacist_supplier_order
-msgid "Alcyon Medicine order"
+msgid "Alcyon Medicine order ${object.name}"
 msgstr ""
 
 #. module: specific_report
@@ -454,14 +457,14 @@ msgid "Canceled Refund"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:115
+#: code:addons/specific_report/models/sale_order.py:126
 #, python-format
 msgid "Cannot send pharmacist email\n"
 "%s partner must have an email address."
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:110
+#: code:addons/specific_report/models/sale_order.py:119
 #, python-format
 msgid "Cannot send pharmacist email\n"
 "No pharmacist affiliated to the client."
@@ -539,8 +542,10 @@ msgid "Description"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin_display_name
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_display_name
 #: model:ir.model.fields,field_description:specific_report.field_report_async_display_name
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin_display_name
 msgid "Display Name"
 msgstr ""
 
@@ -585,6 +590,11 @@ msgid "Goods return note"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "Gross<br/>unit<br/>price"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_has_cash_on_delivery_invoice
 msgid "Has Invoices"
 msgstr ""
@@ -602,8 +612,10 @@ msgid "Hide prices on deliveryslip"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin_id
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number_id
 #: model:ir.model.fields,field_description:specific_report.field_report_async_id
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin_id
 msgid "ID"
 msgstr ""
 
@@ -665,8 +677,10 @@ msgid "Kg"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_line_margin___last_update
 #: model:ir.model.fields,field_description:specific_report.field_modify_serial_number___last_update
 #: model:ir.model.fields,field_description:specific_report.field_report_async___last_update
+#: model:ir.model.fields,field_description:specific_report.field_sale_order_line_margin___last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -711,8 +725,8 @@ msgid "No active id found"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/round_instance.py:22
-#: code:addons/specific_report/models/round_instance.py:168
+#: code:addons/specific_report/models/round_instance.py:23
+#: code:addons/specific_report/models/round_instance.py:174
 #, python-format
 msgid "No invoice to print"
 msgstr ""
@@ -807,16 +821,6 @@ msgid "Order #"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_id
-msgid "Order Reference"
-msgstr ""
-
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_move_order_line_id
-msgid "Order line"
-msgstr ""
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Ordered Quantity"
 msgstr ""
@@ -865,11 +869,6 @@ msgstr ""
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picking inspection"
-msgstr ""
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-msgid "Primary<br/>unit<br/>price"
 msgstr ""
 
 #. module: specific_report
@@ -955,7 +954,7 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/report_async.py:45
+#: code:addons/specific_report/models/report_async.py:48
 #, python-format
 msgid "Sending fax for {} with id {}"
 msgstr ""
@@ -993,14 +992,14 @@ msgid "Taxes"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:80
+#: code:addons/specific_report/models/sale_order.py:83
 #, python-format
-msgid "The Quotation can not be printed the client {} ({})                  has no reference assigned."
+msgid "The Quotation can not be printed the client {} ({}) has no reference assigned."
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:133
-#: code:addons/specific_report/models/stock_picking.py:171
+#: code:addons/specific_report/models/stock_picking.py:139
+#: code:addons/specific_report/models/stock_picking.py:179
 #, python-format
 msgid "The picking zone %s is not correct"
 msgstr ""
@@ -1012,13 +1011,13 @@ msgid "There are more than one currencies on orders"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:153
+#: code:addons/specific_report/models/stock_picking.py:160
 #, python-format
 msgid "There is no category on this product"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:114
+#: code:addons/specific_report/models/stock_picking.py:116
 #, python-format
 msgid "There is no original picking zone on this operation."
 msgstr ""
@@ -1089,6 +1088,11 @@ msgid "Weight:<br/>"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model,name:specific_report.model_account_invoice_line_margin
+msgid "account.invoice.line.margin"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "boxes"
 msgstr ""
@@ -1119,6 +1123,11 @@ msgid "round.instance.customer"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model,name:specific_report.model_sale_order_line_margin
+msgid "sale.order.line.margin"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
@@ -1139,3 +1148,4 @@ msgstr ""
 msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr ""
+

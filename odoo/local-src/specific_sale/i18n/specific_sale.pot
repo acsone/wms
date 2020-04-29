@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 08:50+0000\n"
-"PO-Revision-Date: 2019-11-19 08:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,12 +19,7 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_form
-msgid "<span>Lines Fast Entry</span>"
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:236
+#: code:addons/specific_sale/models/sale.py:260
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -45,7 +38,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:107
+#: code:addons/specific_sale/models/sale.py:109
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -111,11 +104,6 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Discount"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-msgid "Discount (%)"
 msgstr ""
 
 #. module: specific_sale
@@ -216,11 +204,6 @@ msgid "Lines unavailable"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model,name:specific_sale.model_stock_production_lot
-msgid "Lot/Serial"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
 #: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
 #: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
@@ -278,7 +261,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:235
+#: code:addons/specific_sale/models/sale.py:259
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
@@ -286,11 +269,6 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_line_under_0
 msgid "Negative Sale Order Line Not Allowed"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_next_expected_date_for_receipt
-msgid "Next expected date for receipt"
 msgstr ""
 
 #. module: specific_sale
@@ -391,18 +369,8 @@ msgid "Only narcotics"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
-msgid "Order Date"
-msgstr ""
-
-#. module: specific_sale
 #: model:exception.rule,name:specific_sale.warning_free_product
 msgid "Order offer free product"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-msgid "Ordered Qty"
 msgstr ""
 
 #. module: specific_sale
@@ -459,8 +427,13 @@ msgid "Pricelist for current sales order."
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_is_consignment
-msgid "Procurement will be generated for the consignement location of the selected customer"
+msgid "Procurement will be generated for the consignment location of the selected customer"
 msgstr ""
 
 #. module: specific_sale
@@ -504,11 +477,6 @@ msgid "Promotion"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-msgid "Promotion (%)"
-msgstr ""
-
-#. module: specific_sale
 #: model:exception.rule,description:specific_sale.provision_on_order
 msgid "Provision on order"
 msgstr ""
@@ -535,7 +503,6 @@ msgid "Remains to deliver"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_list
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines"
@@ -670,7 +637,7 @@ msgid "Will include free product"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:143
+#: code:addons/specific_sale/models/sale.py:144
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr ""

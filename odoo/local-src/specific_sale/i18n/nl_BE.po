@@ -22,12 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_form
-msgid "<span>Lines Fast Entry</span>"
-msgstr ""
-
-#. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:236
+#: code:addons/specific_sale/models/sale.py:260
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -52,7 +47,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:107
+#: code:addons/specific_sale/models/sale.py:109
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -104,9 +99,8 @@ msgstr ""
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Delivered Quantity"
-msgstr "Hoeveelheid"
+msgstr "Geleverde Hoeveelheid"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
@@ -121,12 +115,6 @@ msgstr "Korting(%)"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Discount"
-msgstr "Korting"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Discount (%)"
 msgstr "Korting"
 
 #. module: specific_sale
@@ -182,9 +170,8 @@ msgstr ""
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Invoiced Quantity"
-msgstr "Hoeveelheid"
+msgstr "Gefactureerde Hoeveelheid"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.provision_on_order
@@ -228,11 +215,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
 msgstr ""
-
-#. module: specific_sale
-#: model:ir.model,name:specific_sale.model_stock_production_lot
-msgid "Lot/Serial"
-msgstr "Partij"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
@@ -292,7 +274,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:235
+#: code:addons/specific_sale/models/sale.py:259
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
@@ -400,26 +382,14 @@ msgid "Only narcotics"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_date_order
-msgid "Order Date"
-msgstr "Orderdatum"
-
-#. module: specific_sale
 #: model:exception.rule,name:specific_sale.warning_free_product
 msgid "Order offer free product"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Ordered Qty"
-msgstr "Orderdatum"
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Ordered Quantity"
-msgstr "Hoeveelheid"
+msgstr "Bestelde Hoeveelheid"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_supplier_break
@@ -455,9 +425,8 @@ msgstr "Prijs"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_order_pricelist_id
-#, fuzzy
 msgid "Pricelist"
-msgstr "Prijs"
+msgstr "Prijslijst"
 
 #. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_product_pricelist_pv2
@@ -471,9 +440,14 @@ msgid "Pricelist for current sales order."
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model,name:specific_sale.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_sale_order_line_is_consignment
 msgid ""
-"Procurement will be generated for the consignement location of the selected "
+"Procurement will be generated for the consignment location of the selected "
 "customer"
 msgstr ""
 
@@ -494,9 +468,8 @@ msgstr "Productsjabloon"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_type
-#, fuzzy
 msgid "Product Type"
-msgstr "Productsjabloon"
+msgstr "Product Type"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_cascade_import
@@ -516,12 +489,6 @@ msgstr "Referentie"
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Promotion"
-msgstr "Promotie"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_tree_edit
-#, fuzzy
-msgid "Promotion (%)"
 msgstr "Promotie"
 
 #. module: specific_sale
@@ -551,7 +518,6 @@ msgid "Remains to deliver"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_list
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 #: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines"
@@ -583,9 +549,8 @@ msgstr "Verkooporderlijn"
 
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
-#, fuzzy
 msgid "Sales Order Lines"
-msgstr "Verkooporderlijn"
+msgstr "Verkooporderlijnen"
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_sale_report
@@ -691,7 +656,7 @@ msgid "Will include free product"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:143
+#: code:addons/specific_sale/models/sale.py:144
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr ""
