@@ -5,6 +5,7 @@
 import datetime
 import json
 import logging
+from collections import deque
 from contextlib import contextmanager
 
 from requests.exceptions import HTTPError
@@ -115,21 +116,15 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
 
     @contextmanager
     def api_get_results(
-        self,
-        status_status_code,
-        status_json_result,
-        result_status_code,
-        result_json_result,
+        self, *results  # must be a list of tuple (status_code, json_resul)
     ):
+        res = deque(results)
+
         def get(url):
-            if "status" in url:
-                return _PseudoRequestsResponse(
-                    status_status_code, status_json_result
-                )
-            else:
-                return _PseudoRequestsResponse(
-                    result_status_code, result_json_result
-                )
+            result_status_code, result_json_result = res.popleft()
+            return _PseudoRequestsResponse(
+                result_status_code, result_json_result
+            )
 
         self.mocked_requests_get.side_effect = get
         yield
@@ -147,10 +142,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            expected_result,
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, expected_result),
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "done")
@@ -213,7 +206,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         """
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
-        ), self.api_get_results(400, {}, None, None):
+        ), self.api_get_results((400, {})):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
@@ -239,7 +232,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200, {"status": "ERROR", "message": "status error"}, None, None
+            (200, {"status": "ERROR", "message": "status error"})
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
@@ -266,7 +259,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200, {"status": "OK", "optimizeStatus": "terminated"}, 400, {}
+            (200, {"status": "OK", "optimizeStatus": "terminated"}), (400, {})
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
@@ -293,10 +286,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            {"status": "ERROR", "message": "result error"},
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, {"status": "ERROR", "message": "result error"}),
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
@@ -322,16 +313,17 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            {
-                "status": "OK",
-                "plannedOrders": [
-                    {"stopId": self.partner1.id},
-                    {"stopId": self.partner2.id},
-                ],
-            },
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (
+                200,
+                {
+                    "status": "OK",
+                    "plannedOrders": [
+                        {"stopId": self.partner1.id},
+                        {"stopId": self.partner2.id},
+                    ],
+                },
+            ),
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
@@ -357,19 +349,20 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            {
-                "status": "OK",
-                "plannedOrders": [
-                    {"stopId": self.partner1.id},
-                    {"stopId": self.partner2.id},
-                    {"stopId": self.partner3.id},
-                    {"stopId": 4},
-                    {"stopId": 5},
-                ],
-            },
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (
+                200,
+                {
+                    "status": "OK",
+                    "plannedOrders": [
+                        {"stopId": self.partner1.id},
+                        {"stopId": self.partner2.id},
+                        {"stopId": self.partner3.id},
+                        {"stopId": 4},
+                        {"stopId": 5},
+                    ],
+                },
+            ),
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
@@ -403,10 +396,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            expected_result,
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, expected_result),
         ):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "done")
@@ -629,10 +620,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results(
-            200,
-            {"status": "OK", "optimizeStatus": "terminated"},
-            200,
-            expected_result,
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, expected_result),
         ):
             self.delivery_round_1.retry_optimization()
         self.assertEqual(self.delivery_round_1.state, "done")
@@ -665,6 +654,42 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             url,
             "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
             "toursolver/test?tsCloudApiKey=api+key&param1=val2",
+        )
+
+    def test_15(self):
+        """
+           Data:
+               A round ready to be delivered
+           Test case:
+               Deliver
+               Receive a result with a task id
+               Recieve a status ok and optimizeStatus running
+               Receive a status ok and optimizeStatus terminated
+               Receive a result with the required infos
+           Expected result:
+               state: done
+               geo_optimization_json contains the result received from the api
+           """
+        expected_result = {
+            "status": "OK",
+            "plannedOrders": [
+                {"stopId": self.partner2.id},
+                {"stopId": self.partner1.id},
+                {"stopId": self.partner3.id},
+            ],
+        }
+        with self.api_post_optimize(
+            200, {"taskId": "123", "status": "OK"}
+        ), self.api_get_results(
+            (200, {"status": "OK", "optimizeStatus": "running"}),
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, expected_result),
+        ):
+            self.delivery_round_1.button_deliver()
+        self.assertEqual(self.delivery_round_1.state, "done")
+
+        self.assertDictEqual(
+            self.delivery_round_1.geo_optimization_json, expected_result
         )
 
 
