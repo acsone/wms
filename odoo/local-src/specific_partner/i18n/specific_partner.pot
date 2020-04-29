@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-10 10:02+0000\n"
-"PO-Revision-Date: 2018-10-10 10:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +14,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_type_name
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_type_name
+msgid "Address Type Name"
+msgstr ""
+
+#. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_alcyon_category_id
 #: model:ir.model.fields,field_description:specific_partner.field_res_users_alcyon_category_id
 msgid "Alcyon category"
+msgstr ""
+
+#. module: specific_partner
+#: model:ir.model.fields,help:specific_partner.field_res_partner_type_delivery
+#: model:ir.model.fields,help:specific_partner.field_res_users_type_delivery
+msgid "Allow to mark an invoice address as also a delivery address"
 msgstr ""
 
 #. module: specific_partner
@@ -64,7 +74,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:119
+#: code:addons/specific_partner/models/res_partner.py:328
 #, python-format
 msgid "For an invoicing or delivery address the following fields (name, street, city, zip, country) are required. And the country must have a reference ESB."
 msgstr ""
@@ -73,6 +83,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_id
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
+msgstr ""
+
+#. module: specific_partner
+#: code:addons/specific_partner/models/res_partner.py:91
+#, python-format
+msgid "Invoice and delivery"
+msgstr ""
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_type_delivery
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_type_delivery
+msgid "Is Also Delivery"
 msgstr ""
 
 #. module: specific_partner
@@ -88,27 +110,37 @@ msgid "Is veterinary"
 msgstr ""
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity___last_update
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_uid
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_date
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_legal_entity
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_legal_entity
+#: model:ir.actions.act_window,name:specific_partner.action_legal_entity
+#: model:ir.ui.menu,name:specific_partner.menu_legal_entity
+msgid "Legal Entities"
+msgstr ""
+
+#. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_res_partner_legal_entity_id
+#: model:ir.model.fields,field_description:specific_partner.field_res_users_legal_entity_id
 msgid "Legal entity"
 msgstr ""
 
 #. module: specific_partner
+#: model:ir.model.fields,field_description:specific_partner.field_legal_entity_name
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_name
 msgid "Name"
 msgstr ""
@@ -148,27 +180,45 @@ msgid "Suite Name"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:127
+#: code:addons/specific_partner/models/res_partner.py:340
 #: sql_constraint:res.partner:0
 #, python-format
 msgid "The reference must be numeric or empty"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:21
+#: code:addons/specific_partner/models/partner_alcyon_category.py:17
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
 msgid "This category name already exists"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:23
+#: code:addons/specific_partner/models/legal_entity.py:14
+#: sql_constraint:legal.entity:0
+#, python-format
+msgid "This legal entity already exists"
+msgstr ""
+
+#. module: specific_partner
+#: code:addons/specific_partner/models/partner_alcyon_category.py:22
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
 msgid "This reference esb already exists"
 msgstr ""
 
 #. module: specific_partner
+#: model:ir.model,name:specific_partner.model_ir_qweb_field_contact
+msgid "ir.qweb.field.contact"
+msgstr ""
+
+#. module: specific_partner
+#: model:ir.model,name:specific_partner.model_legal_entity
+msgid "legal.entity"
+msgstr ""
+
+#. module: specific_partner
 #: model:ir.model,name:specific_partner.model_partner_alcyon_category
 msgid "partner.alcyon_category"
 msgstr ""
+

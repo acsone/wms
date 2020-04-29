@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 10:03+0000\n"
-"PO-Revision-Date: 2019-09-10 10:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +45,13 @@ msgstr ""
 #. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_id
 msgid "ID"
+msgstr ""
+
+#. module: specific_product
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_count_moves_to_do
+#: model:ir.model.fields,field_description:specific_product.field_product_product_count_moves_to_do
+#: model:ir.model.fields,field_description:specific_product.field_product_template_count_moves_to_do
+msgid "Incoming Stock moves"
 msgstr ""
 
 #. module: specific_product
@@ -111,6 +116,12 @@ msgid "Published on website"
 msgstr ""
 
 #. module: specific_product
+#: model:ir.ui.view,arch_db:specific_product.product_normal_form_view
+#: model:ir.ui.view,arch_db:specific_product.product_template_form_view_procurement_button
+msgid "Receptions to do"
+msgstr ""
+
+#. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_esb_ref
 msgid "Reference for ESB"
 msgstr ""
@@ -146,7 +157,7 @@ msgid "Temperature (°C)"
 msgstr ""
 
 #. module: specific_product
-#: code:addons/specific_product/models/product.py:45
+#: code:addons/specific_product/models/product.py:53
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This cnk_code already exists."
@@ -163,3 +174,4 @@ msgstr ""
 #: model:ir.model,name:specific_product.model_product_storage_temperature
 msgid "product.storage.temperature"
 msgstr ""
+

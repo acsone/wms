@@ -17,6 +17,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_account
+#: model:ir.model.fields,help:specific_account.field_account_invoice_line_invoice_state
+msgid ""
+" * The 'Draft' status is used when a user is encoding a new and unconfirmed "
+"Invoice.\n"
+" * The 'Pro-forma' status is used when the invoice does not have an invoice "
+"number.\n"
+" * The 'Open' status is used when user creates invoice, an invoice number is "
+"generated. It stays in the open status till the user pays the invoice.\n"
+" * The 'Paid' status is set automatically when the invoice is paid. Its "
+"related journal entries may or may not be reconciled.\n"
+" * The 'Cancelled' status is used when user cancel invoice."
+msgstr ""
+
+#. module: specific_account
 #: selection:res.partner,invoice_frequency:0
 msgid "1 Month"
 msgstr "1 Mois"
@@ -25,6 +39,11 @@ msgstr "1 Mois"
 #: selection:res.partner,invoice_frequency:0
 msgid "10 Days"
 msgstr "10 Jours"
+
+#. module: specific_account
+#: model:ir.ui.view,arch_db:specific_account.invoice_supplier_form_inherit
+msgid "<span>Lines Fast Entry</span>"
+msgstr ""
 
 #. module: specific_account
 #: model:account.tax.group,name:specific_account.tax_group_apb
@@ -55,11 +74,6 @@ msgid "August"
 msgstr "Août"
 
 #. module: specific_account
-#: model:ir.model.fields,help:specific_account.field_res_users_is_sale_back_order_cancel
-msgid "Automaticaly cancel products that could not be delivered. Must be set on delivery addresss"
-msgstr "Automatiquement annuler les articles qui n'ont pas pu être livrés. Doit être défini sur l'adresse de livraison."
-
-#. module: specific_account
 #: selection:res.partner,invoice_grouping:0
 msgid "By delivery"
 msgstr "Par livraison"
@@ -78,6 +92,11 @@ msgstr "Sociétés"
 #: model:ir.model.fields,help:specific_account.field_sale_order_is_unique_invoice
 msgid "Create an unique invoice for this sale order"
 msgstr "Créer une facture unique pour cette vente"
+
+#. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_stock_picking_type_create_invoice_on_transfer
+msgid "Create invoice on transfer"
+msgstr "Créer une facture lors du transfert"
 
 #. module: specific_account
 #: model:ir.ui.menu,name:specific_account.menu_action_sale_invoice_tree1
@@ -134,6 +153,16 @@ msgid "Invoice"
 msgstr "Facture"
 
 #. module: specific_account
+#: model:ir.model,name:specific_account.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de facture"
+
+#. module: specific_account
+#: model:ir.actions.act_window,name:specific_account.action_supplier_invoice_lines_list
+msgid "Invoice Lines"
+msgstr "Lignes de facture"
+
+#. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_config_settings_invoice_terms_conditions
 msgid "Invoice Terms and Conditions"
 msgstr "Conditions générales pour facture"
@@ -159,11 +188,6 @@ msgstr "Mois de la facture"
 #: model:ir.model,name:specific_account.model_account_invoice_report
 msgid "Invoices Statistics"
 msgstr "Statistiques des factures"
-
-#. module: specific_account
-#: model:ir.ui.view,arch_db:specific_account.view_account_config_settings
-msgid "Invoices generation"
-msgstr "Génération des factures"
 
 #. module: specific_account
 #: selection:account.invoice.report,due_month:0
@@ -218,6 +242,11 @@ msgid "October"
 msgstr "Octobre"
 
 #. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_line_purchase_line_product_qty
+msgid "Ordered Qty"
+msgstr ""
+
+#. module: specific_account
 #: model:ir.model,name:specific_account.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
@@ -228,9 +257,9 @@ msgid "Product"
 msgstr "Article"
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_res_users_is_sale_back_order_cancel
-msgid "Sale backorder auto-cancel"
-msgstr "Sale backorder auto-annulation"
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_line_purchase_line_qty_received
+msgid "Received Qty"
+msgstr ""
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_sale_order
@@ -244,9 +273,19 @@ msgid "September"
 msgstr "Septembre"
 
 #. module: specific_account
+#: model:ir.model.fields,field_description:specific_account.field_account_invoice_line_invoice_state
+msgid "Status"
+msgstr ""
+
+#. module: specific_account
 #: model:ir.model,name:specific_account.model_account_tax
 msgid "Tax"
 msgstr "Taxe"
+
+#. module: specific_account
+#: model:ir.model,name:specific_account.model_stock_picking_type
+msgid "The picking type determines the picking view"
+msgstr ""
 
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_stock_picking
@@ -262,3 +301,16 @@ msgstr "Facture unique"
 #: model:ir.model,name:specific_account.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"
+
+#~ msgid ""
+#~ "Automaticaly cancel products that could not be delivered. Must be set on "
+#~ "delivery addresss"
+#~ msgstr ""
+#~ "Automatiquement annuler les articles qui n'ont pas pu être livrés. Doit "
+#~ "être défini sur l'adresse de livraison."
+
+#~ msgid "Invoices generation"
+#~ msgstr "Génération des factures"
+
+#~ msgid "Sale backorder auto-cancel"
+#~ msgstr "Sale backorder auto-annulation"

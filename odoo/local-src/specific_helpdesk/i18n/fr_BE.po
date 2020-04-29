@@ -17,8 +17,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_helpdesk
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_1
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_2
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_3
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_4
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_5
+#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_6
+msgid "${object.display_name}"
+msgstr ""
+
+#. module: specific_helpdesk
 #: model:helpdesk.ticket.reason,name:specific_helpdesk.product_defect
-msgid "01-Poduct defect"
+msgid "01-Product defect"
 msgstr "01-Article défecteux"
 
 #. module: specific_helpdesk
@@ -62,18 +72,19 @@ msgid "09-Delivery error"
 msgstr "09-Erreur de livraison"
 
 #. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.delivery_error
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.misc
 msgid "10-Miscalenious"
 msgstr "10-Divers"
 
 #. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.delivery_error
+#: model:helpdesk.ticket.reason,name:specific_helpdesk.price_issue
 msgid "11-Price issue"
 msgstr "11-Problème de prix"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_1
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -82,15 +93,20 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_01\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous avons constaté que ${object.qty_received} de ${object.product_id.name} étai(en)t abîmé(s)\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous "
+"avons constaté que ${object.qty_received} de ${object.product_id.name} "
+"étai(en)t abîmé(s)\n"
 "        Merci de reprendre ce(s) produit(s) et de nous le(s) créditer.\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
@@ -100,7 +116,8 @@ msgstr "<?xml version=\"1.0\"?>\n"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_2
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -109,15 +126,20 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_02\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous indiquez ${object.qty_ordered} livrés de ${object.product_id.name} et avons reçu ${object.qty_received}. Merci faire suivre les quantités manquantes.\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous "
+"indiquez ${object.qty_ordered} livrés de ${object.product_id.name} et avons "
+"reçu ${object.qty_received}. Merci faire suivre les quantités manquantes.\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
 "    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
@@ -126,7 +148,8 @@ msgstr "<?xml version=\"1.0\"?>\n"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_3
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -135,17 +158,20 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_03\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous avons constaté que votre transporteur n'a pas respecté la chaîne de froid.\n"
-"        Nous refusons la livraison."
-"    </div><br/>\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous "
+"avons constaté que votre transporteur n'a pas respecté la chaîne de froid.\n"
+"        Nous refusons la livraison.    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
 "    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
 "</div>\n"
@@ -153,7 +179,8 @@ msgstr "<?xml version=\"1.0\"?>\n"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_4
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -162,17 +189,24 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_04\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Dans votre livraison du ${object.stock_picking_id.date_done} vous avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object.lots.name} dont la date de péremption est inférieure aux 6 mois demandés dans notre commande. Nous acceptons néanmoins la livraison sous réserve de vente.\n"
-"        En cas de non vente, une note de crédit vous sera demandée."
-"    </div><br/>\n"
+"        Dans votre livraison du ${object.stock_picking_id.date_done} vous "
+"avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object."
+"lots.name} dont la date de péremption est inférieure aux 6 mois demandés "
+"dans notre commande. Nous acceptons néanmoins la livraison sous réserve de "
+"vente.\n"
+"        En cas de non vente, une note de crédit vous sera demandée.    </"
+"div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
 "    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
 "</div>\n"
@@ -180,7 +214,8 @@ msgstr "<?xml version=\"1.0\"?>\n"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_5
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -189,16 +224,23 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_05\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Dans votre livraison du ${object.stock_picking_id.date_done} vous avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object.lots.name} dont la péremption est inférieure aux 6 mois demandés dans notre commande.\n"
-"        Nous refusons votre livraison et vous demandons de bien vouloir nous créditer. Nous tenons les produits à votre disposition.\n"
+"        Dans votre livraison du ${object.stock_picking_id.date_done} vous "
+"avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object."
+"lots.name} dont la péremption est inférieure aux 6 mois demandés dans notre "
+"commande.\n"
+"        Nous refusons votre livraison et vous demandons de bien vouloir nous "
+"créditer. Nous tenons les produits à votre disposition.\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
 "    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
@@ -207,7 +249,8 @@ msgstr "<?xml version=\"1.0\"?>\n"
 
 #. module: specific_helpdesk
 #: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_6
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "    <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -216,16 +259,22 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        MESSAGE_06\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id."
+"name or 'Helpdesk'} Team.</span>\n"
 "</div>\n"
 "        "
-msgstr "<?xml version=\"1.0\"?>\n"
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
-"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/"
+"><br/>\n"
 "    </div>\n"
 "    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
-"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous nous avez livré ${object.qty_received} de ${object.product_id.name}, produit que nous n'avions pas commandé.\n"
-"        Nous refusons la livraison et tenons le produit à votre disposition.\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous "
+"nous avez livré ${object.qty_received} de ${object.product_id.name}, produit "
+"que nous n'avions pas commandé.\n"
+"        Nous refusons la livraison et tenons le produit à votre "
+"disposition.\n"
 "        Nous attendons une note de crédit.\n"
 "    </div><br/>\n"
 "    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
@@ -244,16 +293,34 @@ msgid "After Sale Service"
 msgstr "SAV - Matériel"
 
 #. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: specific_helpdesk
 #: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
 msgid "Click to create a new ticket reason."
 msgstr "Cliquer pour créer une nouvelle cause du ticket"
 
 #. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.view_pack_operation_lot_add_form
+msgid "Create a helpdesk ticket"
+msgstr "Créer un ticket helpdesk"
+
+#. module: specific_helpdesk
+#: model:ir.actions.act_window,name:specific_helpdesk.action_create_helpdesk_ticket
+#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+msgid "Create helpdesk ticket"
+msgstr "Créer un ticket helpdesk"
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_create_uid
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_create_date
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_date
 msgid "Created on"
 msgstr "Créé le"
@@ -264,48 +331,77 @@ msgid "Customer"
 msgstr "Clients"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_description
+#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_description
+msgid "Description"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_location_dest_id
+msgid "Destination Location"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_display_name
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_account_invoice_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_purchase_order_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_res_partner_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_res_users_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_sale_order_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_move_helpdesk_tickets_count
 #: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
 msgid "Helpdesk tickets count"
 msgstr "Nombre de tickets helpdesk"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_id
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_id
 msgid "ID"
 msgstr "ID"
 
 #. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_account_invoice
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_account_invoice_id
 msgid "Invoice"
 msgstr "Facture"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket___last_update
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason___last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_write_uid
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_write_date
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_lots
+msgid "Lot/Serial Number"
+msgstr "Lot/Numéro de série"
+
+#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_name
 msgid "Name"
 msgstr "Nom"
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_qty_ordered
+msgid "Ordered product quantitiy"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_res_partner
@@ -314,19 +410,12 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
-msgid "Picking"
-msgstr "Opération de manutention"
-
-#. module: specific_helpdesk
-#: selection:helpdesk.ticket,ref:0
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_product_id
 msgid "Product"
 msgstr "Produit"
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_purchase_order
-#, fuzzy
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
@@ -338,9 +427,15 @@ msgstr "Commande fournisseur"
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_reason_id
 #: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_form
 msgid "Reason"
 msgstr "Cause"
+
+#. module: specific_helpdesk
+#: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
+msgid "Reason allows to organize tickets."
+msgstr "La cause permet d'organiser les tickets"
 
 #. module: specific_helpdesk
 #: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_tree
@@ -348,9 +443,9 @@ msgid "Reasons"
 msgstr "Causes"
 
 #. module: specific_helpdesk
-#: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
-msgid "Reason allows to organize tickets."
-msgstr "La cause permet d'organiser les tickets"
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_qty_received
+msgid "Received product quantitiy"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_sale_order_id
@@ -363,20 +458,30 @@ msgid "Sales Order"
 msgstr "Commande client"
 
 #. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_move_id
+msgid "Stock move"
+msgstr ""
+
+#. module: specific_helpdesk
 #: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
 msgid "Stock picking"
 msgstr "Opération de manutention"
 
 #. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_sale_order
-#, fuzzy
-msgid "Sales Order"
-msgstr "Commande client"
-
-#. module: specific_helpdesk
 #: model:helpdesk.team,name:specific_helpdesk.supplier_team
 msgid "Supplier"
 msgstr "Fournisseurs"
+
+#. module: specific_helpdesk
+#: code:addons/specific_helpdesk/wizards/create_helpdesk_ticket.py:26
+#, python-format
+msgid "The record related to the new helpdeskticket was not found !"
+msgstr ""
 
 #. module: specific_helpdesk
 #: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket
@@ -391,6 +496,8 @@ msgid "Ticket Reason"
 msgstr "Cause du ticket"
 
 #. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.account_invoice_specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.account_supplier_invoice_specific_helpdesk
 #: model:ir.ui.view,arch_db:specific_helpdesk.partner_form_view_helpdesk_tickets_button
 #: model:ir.ui.view,arch_db:specific_helpdesk.purchase_order_specific_form
 #: model:ir.ui.view,arch_db:specific_helpdesk.sale_order_specific_form
@@ -403,8 +510,28 @@ msgstr "Tickets"
 msgid "Transfer"
 msgstr "Transfert"
 
-#~ msgid "Lot/Serial number"
-#~ msgstr "Lot/Numéro de série"
+#. module: specific_helpdesk
+#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+msgid "Validate"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_visible_reception_wizard
+msgid "Visible on Reception Wizard?"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_create_helpdesk_ticket
+msgid "create.helpdesk.ticket"
+msgstr ""
+
+#. module: specific_helpdesk
+#: model:ir.model,name:specific_helpdesk.model_stock_pack_operation_lot_add
+msgid "stock.pack.operation.lot.add"
+msgstr ""
+
+#~ msgid "Picking"
+#~ msgstr "Opération de manutention"
 
 #~ msgid "Partner Email"
 #~ msgstr "Email du partenaire"

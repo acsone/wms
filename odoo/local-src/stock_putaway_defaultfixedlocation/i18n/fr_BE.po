@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2016-09-15 12:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,8 +23,12 @@ msgstr "Emplacement fixe par défaut"
 
 #. module: stock_putaway_defaultfixedlocation
 #: model:ir.model.fields,help:stock_putaway_defaultfixedlocation.field_product_putaway_fixed_location_id
-msgid "Destination fixed location when no fixed location is defined for a product category"
-msgstr "Emplacement de destination quand aucun emplacement n'est défini pour la catégorie de produit"
+msgid ""
+"Destination fixed location when no fixed location is defined for a product "
+"category"
+msgstr ""
+"Emplacement de destination quand aucun emplacement n'est défini pour la "
+"catégorie de produit"
 
 #. module: stock_putaway_defaultfixedlocation
 #: model:ir.model,name:stock_putaway_defaultfixedlocation.model_product_putaway

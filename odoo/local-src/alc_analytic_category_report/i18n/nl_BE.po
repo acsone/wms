@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_analytic_category_report
+# 	* alc_analytic_category_report
 #
 msgid ""
 msgstr ""
@@ -10,28 +10,150 @@ msgstr ""
 "PO-Revision-Date: 2020-01-15 13:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_account_id
+msgid "Account"
+msgstr "Analytische rekening"
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_amount
+msgid "Amount"
+msgstr ""
+
+#. module: alc_analytic_category_report
 #: model:ir.model,name:alc_analytic_category_report.model_account_analytic_account
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_analytic_account_id
 msgid "Analytic Account"
 msgstr "Analytische rekening"
 
 #. module: alc_analytic_category_report
+#: model:ir.actions.act_window,name:alc_analytic_category_report.analytic_analysis_act_window
+#: model:ir.ui.menu,name:alc_analytic_category_report.analytic_analysis_menu
+#: model:ir.ui.menu,name:alc_analytic_category_report.analytic_analysis_view_menu
+#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_pivot_view
+msgid "Analytic Analysis"
+msgstr "Analytische analyse"
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_balance
+msgid "Balance"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_company_id
+msgid "Company"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_credit
+msgid "Credit"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_company_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_date
+msgid "Date"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_debit
+msgid "Debit"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_id
+msgid "ID"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_move_id
+msgid "Journal Entry"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
+msgid "Move"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_name
+msgid "Name"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
+msgid "Number (Move)"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_product_id
+msgid "Product"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_ref
+msgid "Reference"
+msgstr ""
+
+#. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_1_id
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_1_id
 msgid "Tag 1"
 msgstr "Tag 1"
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_2_id
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_2_id
 msgid "Tag 2"
 msgstr "Tag 2"
 
 #. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_analytic_account_tag_3_id
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_tag_3_id
 msgid "Tag 3"
 msgstr "Tag 3"
 
+#. module: alc_analytic_category_report
+#: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category_user_type_id
+msgid "User type id"
+msgstr ""
+
+#. module: alc_analytic_category_report
+#: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
+msgid "account.move.line.with.analytic.category"
+msgstr ""

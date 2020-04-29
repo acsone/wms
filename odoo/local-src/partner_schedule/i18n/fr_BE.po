@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_schedule
+# 	* partner_schedule
 #
 msgid ""
 msgstr ""
@@ -10,20 +10,11 @@ msgstr ""
 "PO-Revision-Date: 2020-01-13 11:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: partner_schedule
-#: model:ir.ui.view,arch_db:partner_schedule.scheduled_week_days_form
-msgid "Closing delivery dates"
-msgstr "Dates de livraison de clôture"
-
-#. module: partner_schedule
-#: model:ir.ui.view,arch_db:partner_schedule.partner_scheduled_week_form
-msgid "Closing delivery dates End date included"
-msgstr "Closing delivery dates End date included"
 
 #. module: partner_schedule
 #: model:ir.model.fields,field_description:partner_schedule.field_partner_scheduled_week_create_uid
@@ -76,11 +67,6 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: partner_schedule
-#: model:ir.model,name:partner_schedule.model_scheduled_week_days
-msgid "Non working days"
-msgstr "Jours non ouvrés"
-
-#. module: partner_schedule
 #: model:ir.model,name:partner_schedule.model_res_partner
 #: model:ir.model.fields,field_description:partner_schedule.field_partner_scheduled_week_partner_id
 msgid "Partner"
@@ -93,19 +79,9 @@ msgid "Partner Schedule"
 msgstr "Calendrier des partenaires"
 
 #. module: partner_schedule
-#: model:ir.actions.act_window,name:partner_schedule.partner_scheduled_week_action
-msgid "Partner Scheduled Days"
-msgstr "Planning de fermeture"
-
-#. module: partner_schedule
 #: model:ir.model,name:partner_schedule.model_partner_scheduled_week
 msgid "Partner non working days"
 msgstr "Jours fériés du partenaire"
-
-#. module: partner_schedule
-#: model:ir.ui.view,arch_db:partner_schedule.scheduled_week_days_tree
-msgid "Partners working days"
-msgstr "Jours ouvrés du partenaire"
 
 #. module: partner_schedule
 #: model:ir.model.fields,field_description:partner_schedule.field_partner_scheduled_week_start_date
@@ -116,7 +92,14 @@ msgstr "Date de début"
 #: code:addons/partner_schedule/models/partner_working_schedule.py:30
 #, python-format
 msgid "The end date of a schedule must be after the start date or empty"
-msgstr "La date de fin d'un programme doit être postérieure à la date de début ou vide"
+msgstr ""
+"La date de fin d'un programme doit être postérieure à la date de début ou "
+"vide"
+
+#. module: partner_schedule
+#: model:ir.model.fields,help:partner_schedule.field_partner_scheduled_week_start_date
+msgid "To mark only one day set same date as start and end date"
+msgstr ""
 
 #. module: partner_schedule
 #: code:addons/partner_schedule/models/partner_working_schedule.py:55
@@ -124,3 +107,17 @@ msgstr "La date de fin d'un programme doit être postérieure à la date de déb
 msgid "You cannot have 2 schedules that overlap!."
 msgstr "Vous ne pouvez pas avoir 2 horaires qui se chevauchent!."
 
+#~ msgid "Closing delivery dates"
+#~ msgstr "Dates de livraison de clôture"
+
+#~ msgid "Closing delivery dates End date included"
+#~ msgstr "Closing delivery dates End date included"
+
+#~ msgid "Non working days"
+#~ msgstr "Jours non ouvrés"
+
+#~ msgid "Partner Scheduled Days"
+#~ msgstr "Planning de fermeture"
+
+#~ msgid "Partners working days"
+#~ msgstr "Jours ouvrés du partenaire"

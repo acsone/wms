@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 10:05+0000\n"
-"PO-Revision-Date: 2017-07-28 10:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,24 +18,74 @@ msgstr ""
 msgid "\n"
 "            \n"
 "                <p>Hello,</p>\n"
-"                <p>We decided to cancel the purchase order ${object.partner_ref} (${object.amount_total}) from ${object.date_order} for the following reason:<br/>\n"
+"                <p>We decided to cancel the purchase order ${object.partner_ref or ''} (${object.amount_total} €) from ${object.date_order} for the following reason:<br/>\n"
 "                ${object.cancel_reason_id.name}</p>\n"
 "                <p>Thank you for your understanding.</p>\n"
-"                <p>Best regards,</br>\n"
+"                <p>Best regards,<br/>\n"
 "                Alcyon</p>\n"
 "            \n"
 "        "
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_active
-msgid "Active"
+#: model:product.state,name:specific_purchase.product_state_a
+msgid "Article de remplacement"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_d
+msgid "Article déffectueux en attente du fournisseur"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_n
+msgid "Article non suivi par Alcyon"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_l
+msgid "Article retiré de la vente"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_m
+msgid "Article retiré de la vente et remplacé"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_is_bo_line
+msgid "BO Line"
 msgstr ""
 
 #. module: specific_purchase
 #: model:ir.actions.act_window,name:specific_purchase.bank_holiday_action
 #: model:ir.ui.menu,name:specific_purchase.menu_bank_holiday_action
 msgid "Bank Holidays"
+msgstr ""
+
+#. module: specific_purchase
+#: selection:procurement.orderpoint.compute,type:0
+msgid "By days"
+msgstr ""
+
+#. module: specific_purchase
+#: selection:procurement.orderpoint.compute,type:0
+msgid "By suppliers"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_supplierinfo_product_cnk_code
+msgid "CNK"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_product_state_code
+msgid "Code"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_procurement_orderpoint_compute
+msgid "Compute Minimum Stock Rules"
 msgstr ""
 
 #. module: specific_purchase
@@ -63,8 +111,24 @@ msgid "Date"
 msgstr ""
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_partner_form
+msgid "Days for management"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
+msgid "Days to generate"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_config_settings_lead_time
 msgid "Default Lead time (in days)"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_delivery_lead_time
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_delivery_lead_time
+msgid "Delivery lead time"
 msgstr ""
 
 #. module: specific_purchase
@@ -82,11 +146,6 @@ msgid "Depth in cm"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_discontinued
-msgid "Discontinued"
-msgstr ""
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_global
 msgid "Discount global"
 msgstr ""
@@ -98,10 +157,10 @@ msgid "Display Name"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_date_out_of_stock_expected
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_date_out_of_stock_expected
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_date_out_of_stock_expected
-msgid "Expected out of stock date"
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_5
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_5
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_5
+msgid "Friday"
 msgstr ""
 
 #. module: specific_purchase
@@ -116,8 +175,8 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_inactive
-msgid "Inactive"
+#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+msgid "In BO"
 msgstr ""
 
 #. module: specific_purchase
@@ -126,8 +185,8 @@ msgid "Information about a product vendor"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_introduction
-msgid "Introduction"
+#: model:ir.model,name:specific_purchase.model_account_invoice
+msgid "Invoice"
 msgstr ""
 
 #. module: specific_purchase
@@ -168,24 +227,82 @@ msgid "Length in cm"
 msgstr ""
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_1
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_1
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_1
+msgid "Monday"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+msgid "My Orders"
+msgstr ""
+
+#. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_i
+msgid "Médicaments humain avec importé équivalent"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_name
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_name
 msgid "Name"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_new
-msgid "New"
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_nb_days_out_of_stock
+msgid "Nb days out of stock"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_out_of_stock
-msgid "Out of stock"
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_nbr_lines
+msgid "Nbr lines"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_nbr_lines_bo
+msgid "Nbr lines BO"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_product_product_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_product_template_nb_days_out_of_stock
+msgid "Number of days before running out of stock"
 msgstr ""
 
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_res_partner
 msgid "Partner"
+msgstr ""
+
+#. module: specific_purchase
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:59
+#, python-format
+msgid "Please select at least one day"
+msgstr ""
+
+#. module: specific_purchase
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:65
+#, python-format
+msgid "Please select at least one supplier"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Price List"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model,name:specific_purchase.model_product_product
+msgid "Product"
 msgstr ""
 
 #. module: specific_purchase
@@ -207,13 +324,13 @@ msgid "Product state"
 msgstr ""
 
 #. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_promotion_ony
-msgid "Promotion Only"
+#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
+msgid "Promotion supplier"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_promotion_supplier
-msgid "Promotion supplier"
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Purchase"
 msgstr ""
 
 #. module: specific_purchase
@@ -234,12 +351,7 @@ msgstr ""
 
 #. module: specific_purchase
 #: model:mail.template,subject:specific_purchase.cancel_purchase_order
-msgid "Purchase order ${object.partner_ref} canceled"
-msgstr ""
-
-#. module: specific_purchase
-#: model:product.state,name:specific_purchase.product_state_remnant
-msgid "Remnant"
+msgid "Purchase order ${object.partner_ref or ''} canceled"
 msgstr ""
 
 #. module: specific_purchase
@@ -248,8 +360,25 @@ msgid "Responsible"
 msgstr ""
 
 #. module: specific_purchase
+#: model:product.state,name:specific_purchase.product_state_h
+msgid "Rupture chez le founisseur"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_6
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_6
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_6
+msgid "Saturday"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
 msgid "Sequence"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+msgid "Set date to all order lines"
 msgstr ""
 
 #. module: specific_purchase
@@ -260,8 +389,8 @@ msgid "State"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_stop_constrains
-msgid "Stop constrains"
+#: model:ir.model,name:specific_purchase.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: specific_purchase
@@ -271,19 +400,45 @@ msgid "Substitute purchase manager"
 msgstr ""
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_7
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_7
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_7
+msgid "Sunday"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
 msgid "Supplier discount %"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+#: code:addons/specific_purchase/models/product_supplierinfo.py:48
+#, python-format
 msgid "Supplier info"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
-msgid "Total weight in Kg"
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_supplier_ids
+msgid "Suppliers"
+msgstr ""
+
+#. module: specific_purchase
+#: code:addons/specific_purchase/models/procurement_order.py:21
+#, python-format
+msgid "The procurement order must be unique by product"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+msgid "This changes the scheduled date of all order lines to the given date"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_4
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_4
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_4
+msgid "Thursday"
 msgstr ""
 
 #. module: specific_purchase
@@ -292,13 +447,30 @@ msgid "Total weight"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model,name:specific_purchase.model_stock_picking
-msgid "Transfer"
+#: model:ir.model.fields,help:specific_purchase.field_purchase_order_total_weight
+msgid "Total weight in Kg"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_2
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_2
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_2
+msgid "Tuesday"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_type
+msgid "Type"
 msgstr ""
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_price_unit_base
 msgid "Unit Price"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "Validity"
 msgstr ""
 
 #. module: specific_purchase
@@ -310,9 +482,22 @@ msgid "Vendor"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.actions.act_window,name:specific_purchase.action_product_supplierinfo
-#: model:ir.ui.menu,name:specific_purchase.menu_product_supplierinfo
-msgid "Vendor Promotions"
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_vendor_product_code
+msgid "Vendor Product Code"
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
+msgid "WARNING - You will generate procurement order by days. This process can take a very long time."
+msgstr ""
+
+#. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_3
+#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_3
+#: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_3
+msgid "Wednesday"
 msgstr ""
 
 #. module: specific_purchase
@@ -330,6 +515,11 @@ msgid "Width in cm"
 msgstr ""
 
 #. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+msgid "Without responsible"
+msgstr ""
+
+#. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_bank_holiday
 msgid "bank.holiday"
 msgstr ""
@@ -343,3 +533,9 @@ msgstr ""
 #: model:ir.model,name:specific_purchase.model_purchase_config_settings
 msgid "purchase.config.settings"
 msgstr ""
+
+#. module: specific_purchase
+#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+msgid "to"
+msgstr ""
+

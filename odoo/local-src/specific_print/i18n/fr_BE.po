@@ -80,7 +80,7 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:141
+#: code:addons/specific_print/models/stock.py:155
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #, python-format
@@ -182,8 +182,8 @@ msgid "Lots"
 msgstr "Lots"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:67
-#: code:addons/specific_print/models/stock.py:120
+#: code:addons/specific_print/models/stock.py:74
+#: code:addons/specific_print/models/stock.py:134
 #, python-format
 msgid "No destination partner defined"
 msgstr "Aucun destinaire défini"
@@ -282,6 +282,11 @@ msgstr "Article"
 #: model:ir.model,name:specific_print.model_product_template
 msgid "Product Template"
 msgstr "Modèle de produit"
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_print_label_qty
+msgid "Quantity"
+msgstr "Quantité"
 
 #. module: specific_print
 #: model:ir.model.fields,help:specific_print.field_stock_pack_operation_lot_add_print_qty

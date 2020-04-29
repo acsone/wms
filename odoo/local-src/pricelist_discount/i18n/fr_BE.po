@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* pricelist_discount
+# 	* pricelist_discount
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2018-11-06 11:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -61,11 +62,6 @@ msgid "Promotion (%)"
 msgstr "Promotion (%)"
 
 #. module: pricelist_discount
-#: model:ir.model,name:pricelist_discount.model_purchase_order
-msgid "Purchase Order"
-msgstr "Commande fournisseur"
-
-#. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_product_supplierinfo_discount_purchase
 msgid "Purchase discount (%)"
 msgstr "Remise d'achat (%)"
@@ -112,43 +108,51 @@ msgid "The date start is null"
 msgstr "La date de début est nul"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:88
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:130
 #, python-format
 msgid "The end date must be equal or greater than the start date"
 msgstr "La date de fin doit être égale ou supérieure à la date de début"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:84
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:125
 #, python-format
 msgid "You cannot have a promo without end date"
 msgstr "Vous ne pouvez pas avoir une promotion sans date de fin"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:81
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:121
 #, python-format
 msgid "You cannot have a promo without start date"
 msgstr "Vous ne pouvez pas avoir une promotion sans date de début"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:101
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:148
 #, python-format
 msgid "You cannot have two promos at the same time"
 msgstr "Vous ne pouvez pas avoir deux promotions en même temps"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:77
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:114
 #, python-format
 msgid "You cannot have two promos without start and end date"
-msgstr "Vous ne pouvez pas avoir deux promotions sans date de début et sans date de fin"
+msgstr ""
+"Vous ne pouvez pas avoir deux promotions sans date de début et sans date de "
+"fin"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:66
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:98
 #, python-format
-msgid "You cannot set a minimum quantity (sale and/or purchase) on a default promo"
-msgstr "Vous ne pouvez pas définir de mimimum (vente et achat) sur la promotion par défaut"
+msgid ""
+"You cannot set a minimum quantity (sale and/or purchase) on a default promo"
+msgstr ""
+"Vous ne pouvez pas définir de mimimum (vente et achat) sur la promotion par "
+"défaut"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:61
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:92
 #, python-format
 msgid "You cannot two different supplier for a product"
 msgstr "Vous ne pouvez pas avoir plusieurs fournisseurs pour un même produit"
+
+#~ msgid "Purchase Order"
+#~ msgstr "Commande fournisseur"

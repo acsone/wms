@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_tax_one_vat
+# 	* account_tax_one_vat
 #
 msgid ""
 msgstr ""
@@ -10,58 +10,91 @@ msgstr ""
 "PO-Revision-Date: 2020-03-02 11:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:21
+#: code:addons/account_tax_one_vat/models/purchase_order.py:20
 #: code:addons/account_tax_one_vat/models/sale.py:18
 #, python-format
-msgid "For %s multiple tax from the VAT group are selected. Only one is allowed."
-msgstr "Pour %s plusieurs taxes de type TVA sont sélectionnées. Au maximum une est autorisée."
+msgid ""
+"For %s multiple tax from the VAT group are selected. Only one is allowed."
+msgstr ""
+"Pour %s plusieurs taxes de type TVA sont sélectionnées. Au maximum une est "
+"autorisée."
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:19
-#, python-format
-msgid "Multiple customer tax of type VAT are selected. Only one is allowed."
-msgstr "Plusieurs taxes de vente du type TVA sont sélectionnées. Seulement une est autorisée."
-
-#. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:32
-#, python-format
-msgid "Multiple supplier tax of type VAT are selected. Only one is allowed."
-msgstr "Plusieurs taxes fournisseur du type TVA sont sélectionnées. Seulement une est autorisée."
+#: model:ir.model,name:account_tax_one_vat.model_account_invoice_line
+msgid "Invoice Line"
+msgstr ""
 
 #. module: account_tax_one_vat
 #: code:addons/account_tax_one_vat/models/acccount_invoice.py:20
-#: code:addons/account_tax_one_vat/models/purchase_order.py:34
+#: code:addons/account_tax_one_vat/models/purchase_order.py:33
 #: code:addons/account_tax_one_vat/models/sale.py:31
 #, python-format
 msgid "More than one VAT tax selected!"
 msgstr "Plusieurs taxes de type TVA sélectionnées !"
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/acccount_invoice.py:21
+#: code:addons/account_tax_one_vat/models/product.py:20
 #, python-format
-msgid "You selected more than one tax of type VAT on an invoice line, it does not make sense."
-msgstr "Vous avez sélectionné plusieurs taxes de type TVA pour une ligne de facturation, cela semble erroné."
+msgid "Multiple customer tax of type VAT are selected. Only one is allowed."
+msgstr ""
+"Plusieurs taxes de vente du type TVA sont sélectionnées. Seulement une est "
+"autorisée."
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:35
+#: code:addons/account_tax_one_vat/models/product.py:33
 #, python-format
-msgid "You selected more than one tax of type VAT on a line, it does not make sense."
-msgstr "Vous avez sélectionné plusieurs taxes de type TVA pour une ligne d'achat, cela semble erroné."
+msgid "Multiple supplier tax of type VAT are selected. Only one is allowed."
+msgstr ""
+"Plusieurs taxes fournisseur du type TVA sont sélectionnées. Seulement une "
+"est autorisée."
+
+#. module: account_tax_one_vat
+#: model:ir.model,name:account_tax_one_vat.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: model:ir.model,name:account_tax_one_vat.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: model:ir.model,name:account_tax_one_vat.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: code:addons/account_tax_one_vat/models/purchase_order.py:34
+#, python-format
+msgid ""
+"You selected more than one tax of type VAT on a line, it does not make sense."
+msgstr ""
+"Vous avez sélectionné plusieurs taxes de type TVA pour une ligne d'achat, "
+"cela semble erroné."
 
 #. module: account_tax_one_vat
 #: code:addons/account_tax_one_vat/models/sale.py:32
 #, python-format
-msgid "You selected more than one tax of type VAT on a sale order line, it does not make sense."
-msgstr "Vous avez sélectionné plusieurs taxes de type TVA pour une ligne de commande, cela semble erroné."
+msgid ""
+"You selected more than one tax of type VAT on a sale order line, it does not "
+"make sense."
+msgstr ""
+"Vous avez sélectionné plusieurs taxes de type TVA pour une ligne d'achat, "
+"cela semble erroné."
 
 #. module: account_tax_one_vat
 #: code:addons/account_tax_one_vat/models/acccount_invoice.py:21
 #, python-format
-msgid "You selected more than one tax of type VAT on an invoice line, it does not make sense."
-msgstr "Vous avez sélectionné plusieurs taxes de type TVA pour une ligne de facturation, cela semble erroné."
+msgid ""
+"You selected more than one tax of type VAT on an invoice line, it does not "
+"make sense."
+msgstr ""
+"Vous avez sélectionné plusieurs taxes de type TVA pour une ligne de "
+"facturation, cela semble erroné."

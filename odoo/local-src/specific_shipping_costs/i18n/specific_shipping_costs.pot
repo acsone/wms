@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 09:12+0000\n"
-"PO-Revision-Date: 2017-05-17 09:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_additional_product_ids
-msgid "Additional products"
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_use_specific_cost_calculation
+msgid "Alcyon specific cost"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: code:addons/specific_shipping_costs/models/account_invoice.py:82
-#, python-format
-msgid "An invoice can't be opened or paid if shipping costs are not computed"
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_stock_picking_type_avoid_shipping_cost
+msgid "Avoid shipping cost"
 msgstr ""
 
 #. module: specific_shipping_costs
@@ -32,48 +29,13 @@ msgid "Carrier"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.ui.view,arch_db:specific_shipping_costs.view_account_invoice_specific_form
-msgid "Compute Shipping Costs"
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_used_for_delivery_fee
+msgid "Has been used for delivery fee calculation"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_intrastat_id
-msgid "Intrastat code"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model,name:specific_shipping_costs.model_account_invoice
-msgid "Invoice"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model,name:specific_shipping_costs.model_account_invoice_line
-msgid "Invoice Line"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_account_invoice_line_is_shipping_line
-msgid "Is shipping line"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_medical_device
-msgid "Medical Device"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_price_category_id
-msgid "Price Category"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_sale_price_2
-msgid "Sale Price 2"
-msgstr ""
-
-#. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_sale_lines_count
-msgid "Sale lines count"
+#: model:ir.model.fields,help:specific_shipping_costs.field_stock_picking_type_avoid_shipping_cost
+msgid "Is selected, the shipping cost will not be added to the saleorder."
 msgstr ""
 
 #. module: specific_shipping_costs
@@ -82,11 +44,23 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_account_invoice_shipping_costs_computed
-msgid "Shipping costs computed"
+#: model:ir.model,name:specific_shipping_costs.model_stock_picking_type
+msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.model,name:specific_shipping_costs.model_sale_config_settings
-msgid "sale.config.settings"
+#: model:ir.model,name:specific_shipping_costs.model_stock_picking
+msgid "Transfer"
 msgstr ""
+
+#. module: specific_shipping_costs
+#: code:addons/specific_shipping_costs/models/delivery_carrier.py:22
+#, python-format
+msgid "You cannot delete a record linked from a partner"
+msgstr ""
+
+#. module: specific_shipping_costs
+#: model:ir.model,name:specific_shipping_costs.model_round_instance
+msgid "round.instance"
+msgstr ""
+

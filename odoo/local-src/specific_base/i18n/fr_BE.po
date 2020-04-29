@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_base
+# 	* specific_base
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2016-11-07 09:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,6 +20,21 @@ msgstr ""
 #: model:ir.model,name:specific_base.model_res_company
 msgid "Companies"
 msgstr "Sociétés"
+
+#. module: specific_base
+#: model:ir.model,name:specific_base.model_res_country
+msgid "Country"
+msgstr ""
+
+#. module: specific_base
+#: model:ir.model.fields,field_description:specific_base.field_res_company_delivery_terms_conditions
+msgid "Delivery Terms and Conditions"
+msgstr "Conditions générales pour livraison"
+
+#. module: specific_base
+#: model:ir.model,name:specific_base.model_mail_thread
+msgid "Email Thread"
+msgstr ""
 
 #. module: specific_base
 #: model:ir.model.fields,field_description:specific_base.field_res_company_invoice_terms_conditions
@@ -34,3 +50,13 @@ msgstr "Fax pour commande"
 #: model:ir.model.fields,field_description:specific_base.field_res_company_order_phone
 msgid "Order phone"
 msgstr "Téléphone pour commande"
+
+#. module: specific_base
+#: model:ir.model.fields,field_description:specific_base.field_res_country_esb_ref
+msgid "Reference for ESB"
+msgstr ""
+
+#. module: specific_base
+#: model:ir.ui.view,arch_db:specific_base.view_company_form
+msgid "Report configuration"
+msgstr ""

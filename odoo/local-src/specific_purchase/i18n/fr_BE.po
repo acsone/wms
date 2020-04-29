@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* specific_purchase
+# 	* specific_purchase
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2019-11-01 08:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,31 +18,32 @@ msgstr ""
 
 #. module: specific_purchase
 #: model:mail.template,body_html:specific_purchase.cancel_purchase_order
-msgid "\n"
+msgid ""
+"\n"
 "            \n"
 "                <p>Hello,</p>\n"
-"                <p>We decided to cancel the purchase order ${object.partner_ref or ''} (${object.amount_total} €) from ${object.date_order} for the following reason:<br/>\n"
+"                <p>We decided to cancel the purchase order ${object."
+"partner_ref or ''} (${object.amount_total} €) from ${object.date_order} for "
+"the following reason:<br/>\n"
 "                ${object.cancel_reason_id.name}</p>\n"
 "                <p>Thank you for your understanding.</p>\n"
 "                <p>Best regards,<br/>\n"
 "                Alcyon</p>\n"
 "            \n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "            \n"
 "                <p>Bonjour,</p>\n"
-"                <p>Nous avons décidé d'annuler la commande ${object.partner_ref or ''} (${object.amount_total} €) du ${object.date_order} pour la cause suivante:<br/>\n"
+"                <p>Nous avons décidé d'annuler la commande ${object."
+"partner_ref or ''} (${object.amount_total} €) du ${object.date_order} pour "
+"la cause suivante:<br/>\n"
 "                ${object.cancel_reason_id.name}</p>\n"
 "                <p>Nous vous remercions de votre compréhension.</p>\n"
 "                <p>Bien à vous,<br/>\n"
 "                Alcyon</p>\n"
 "            \n"
 "        "
-
-#. module: specific_purchase
-#: model:ir.model,name:specific_purchase.model_purchase_order_cancel
-msgid " Ask a reason for the purchase order cancellation."
-msgstr " Demande une cause de l'annulation de la commande."
 
 #. module: specific_purchase
 #: model:product.state,name:specific_purchase.product_state_a
@@ -171,13 +173,6 @@ msgstr "Ristourne globale"
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_date_out_of_stock_expected
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_date_out_of_stock_expected
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_date_out_of_stock_expected
-msgid "Expected out of stock date"
-msgstr "Date escomptée de réapprovisionnement"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_5
@@ -378,11 +373,6 @@ msgid "Purchase order ${object.partner_ref or ''} canceled"
 msgstr "Bon de commande ${object.partner_ref or ''} annulé"
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_not_recompute_promos
-msgid "Not Recompute Promotions"
-msgstr "Ne pas recalculer les promotions"
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_responsible_id
 msgid "Responsible"
 msgstr "Responsable"
@@ -398,16 +388,6 @@ msgstr "Rupture chez le founisseur"
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_6
 msgid "Saturday"
 msgstr "Samedi"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_day_planned
-msgid "Scheduled Day "
-msgstr "Jour prévu "
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_time_planned
-msgid "Scheduled Time"
-msgstr "Heure prévue"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_sequence
@@ -451,7 +431,7 @@ msgid "Supplier discount %"
 msgstr "Ristourne globale %"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/models/product_supplierinfo.py:42
+#: code:addons/specific_purchase/models/product_supplierinfo.py:48
 #, python-format
 msgid "Supplier info"
 msgstr "Informations sur le fournisseur"
@@ -462,7 +442,7 @@ msgid "Suppliers"
 msgstr "Fournisseurs"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/models/procurement_order.py:16
+#: code:addons/specific_purchase/models/procurement_order.py:21
 #, python-format
 msgid "The procurement order must be unique by product"
 msgstr "La règle de réapprovisionnement doit être unique par produit"
@@ -507,27 +487,6 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_box
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_box
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_box
-msgid "Unit in box"
-msgstr "Nombre d'unités par boite"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_pallet
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_pallet
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_pallet
-msgid "Unit in pallet"
-msgstr "Nombre d'unités par palette"
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_unit_in_shrink_wrap
-msgid "Unit in shrink-wrap"
-msgstr "Nombre d'unités par fardelage"
-
-#. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "Validity"
 msgstr "Validité"
@@ -549,8 +508,12 @@ msgstr "Référence Fournisseur"
 
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
-msgid "WARNING - You will generate procurement order by days. This process can take a very long time."
-msgstr "ATTENTION - Vous allez générer les ordres d'approvisionnement par jours. Ce processus peut prendre beaucoup de temps."
+msgid ""
+"WARNING - You will generate procurement order by days. This process can take "
+"a very long time."
+msgstr ""
+"ATTENTION - Vous allez générer les ordres d'approvisionnement par jours. Ce "
+"processus peut prendre beaucoup de temps."
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_3
@@ -597,3 +560,27 @@ msgstr "purchase.config.settings"
 #: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "to"
 msgstr "au"
+
+#~ msgid " Ask a reason for the purchase order cancellation."
+#~ msgstr " Demande une cause de l'annulation de la commande."
+
+#~ msgid "Expected out of stock date"
+#~ msgstr "Date escomptée de réapprovisionnement"
+
+#~ msgid "Not Recompute Promotions"
+#~ msgstr "Ne pas recalculer les promotions"
+
+#~ msgid "Scheduled Day "
+#~ msgstr "Jour prévu "
+
+#~ msgid "Scheduled Time"
+#~ msgstr "Heure prévue"
+
+#~ msgid "Unit in box"
+#~ msgstr "Nombre d'unités par boite"
+
+#~ msgid "Unit in pallet"
+#~ msgstr "Nombre d'unités par palette"
+
+#~ msgid "Unit in shrink-wrap"
+#~ msgstr "Nombre d'unités par fardelage"
