@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * stock_grn
+#	* stock_grn
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-15 12:06+0000\n"
-"PO-Revision-Date: 2016-09-15 12:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,50 +17,50 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_carrier_id
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 msgid "Carrier"
-msgstr "Transporteur"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_carrier_ref
 msgid "Carrier Id"
-msgstr "Carrier Id"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_company_id
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_create_uid
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_create_date
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_date
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_description
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_display_name
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_display_name
 msgid "Display Name"
-msgstr "Afficher le nom"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_from_info
 msgid "From"
-msgstr "De"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_form
@@ -71,12 +68,12 @@ msgstr "De"
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_tree
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_tree
 msgid "GRN"
-msgstr "GRN"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_picking_grn_date
 msgid "GRN Date"
-msgstr "Date GRN"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.actions.act_window,name:stock_grn.action_grn_view
@@ -84,76 +81,76 @@ msgstr "Date GRN"
 #: model:ir.model.fields,field_description:stock_grn.field_stock_picking_grn_id
 #: model:ir.ui.menu,name:stock_grn.menu_stock_grn
 msgid "Goods Received Note"
-msgstr "Accusé de réception de marchandises"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 msgid "Group by..."
-msgstr "Regrouper par..."
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_id
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id
 msgid "ID"
-msgstr "Identifiant"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_picking_ids
 msgid "Incoming Shipments"
-msgstr "Réceptions"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn___last_update
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_write_uid
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_write_date
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_name
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Not Received"
-msgstr "Pas reçu"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_qty_box
 msgid "Qty Boxes"
-msgstr "Qté Boîtes"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_qty_pallet
 msgid "Qty Pallets"
-msgstr "Qté Palettes"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Received"
-msgstr "Reçu"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Received more than 5 days ago"
-msgstr "Reçu il y a plus de 5 jours"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_ref
 msgid "Reference"
-msgstr "Référence"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_picking_type
@@ -163,15 +160,16 @@ msgstr ""
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_picking
 msgid "Transfer"
-msgstr "Transfert"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_7986
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_grn_type
 msgid "stock.grn.type"
-msgstr "stock.grn.type"
+msgstr ""
+
