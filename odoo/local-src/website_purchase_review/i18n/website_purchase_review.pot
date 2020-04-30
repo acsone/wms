@@ -1,0 +1,389 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* website_purchase_review
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "% amount"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "% nbr lines"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmed"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "<i class=\"fa fa-circle-o\" aria-hidden=\"true\"/> To confirm"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "<i class=\"fa fa-long-arrow-left\" aria-hidden=\"true\"/> Return"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> New line"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "ABC amount"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "ABC code"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "ABC nbr lines"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Advised qty"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_advised_qty
+#: model:ir.model.fields,field_description:website_purchase_review.field_product_product_advised_qty
+msgid "Advised quantity"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Av. 3 months consumption"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Av. annual consumption"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_average_annual_consumption
+#: model:ir.model.fields,field_description:website_purchase_review.field_product_product_average_annual_consumption
+msgid "Average annual consumption"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_average_three_months_consumption
+#: model:ir.model.fields,field_description:website_purchase_review.field_product_product_average_three_months_consumption
+msgid "Average three months consumption"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Confirm"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_line_is_confirmed_line
+msgid "Confirmed line"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Creation date"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_date_planned_overwrite
+msgid "Date planned overwrite"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Discount global"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_discount_global_overwrite
+msgid "Discount global overwrite"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Discount global:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "End"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Expiration date"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Free"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Gross weight"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Group"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Kg"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Lot"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Lots"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Normal product"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.purchase_order_form
+msgid "Open PO"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Order code"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Ordered qty"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Price"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model,name:website_purchase_review.model_product_product
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Product"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Product name"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Product on order"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Products to order<br/>"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Products with promotions<br/>"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Products without promotions<br/>"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Promotion supplier"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_promotion_supplier_overwrite
+msgid "Promotion supplier overwrite"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Promotion supplier:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Promotions"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model,name:website_purchase_review.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model,name:website_purchase_review.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Purchase discount"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Qty"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Qty multiple"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Save"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Scheduled date"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Scheduled date:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Sold out"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Start"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock BO"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock Customer"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model,name:website_purchase_review.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock available"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock max"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock min"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock supplier"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Sub group"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Supplier discount"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Total amount:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_total_lines
+msgid "Total lines"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_total_lines_done
+msgid "Total lines done"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Total weight:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Unit in box"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Unit in pallet"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Unit in shrink-wrap"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.model.fields,field_description:website_purchase_review.field_stock_move_validation_date
+msgid "Validation date"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Write date"
+msgstr ""
+
