@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_rounds_alcyon
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Aliments"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Frigo"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Humain"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Matériel"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Médicaments"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_available_total_ali
+msgid "Picking Available Total Aliment"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_available_total_frigo
+msgid "Picking Available Total Frigo"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_available_total_mat
+msgid "Picking Available Total Materiel"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_available_total_med
+msgid "Picking Available Total Medicament"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_available_total_pharm
+msgid "Picking Available Total Pharmacie"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_ali
+msgid "Picking Done Total Aliment"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_frigo
+msgid "Picking Done Total Frigo"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_mat
+msgid "Picking Done Total Materiel"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_med
+msgid "Picking Done Total Medicament"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_pharm
+msgid "Picking Done Total Pharmacie"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.model,name:delivery_rounds_alcyon.model_round_instance
+msgid "round.instance"
+msgstr ""
+
