@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* split_coda
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: split_coda
+#: model:ir.model,name:split_coda.model_account_bank_statement_import
+msgid "Import Bank Statement"
+msgstr ""
+
+#. module: split_coda
+#: code:addons/split_coda/wizard/account_bank_statement_import.py:105
+#, python-format
+msgid "No coda imported. Please check the journal"
+msgstr ""
+
+#. module: split_coda
+#: code:addons/split_coda/wizard/account_bank_statement_import.py:83
+#, python-format
+msgid "You have to set a Default Debit Account and a Default Credit Account for the journal: %s"
+msgstr ""
+
