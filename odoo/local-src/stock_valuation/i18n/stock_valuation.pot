@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_valuation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_cost_method
+msgid "Cost method"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_materialized_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_materialized_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_materialized___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_product_last_in_date
+msgid "Last Purchasing Date"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_product_last_out_date
+msgid "Last Selling Date"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model.fields,field_description:stock_valuation.field_stock_history_product_supplier_id
+msgid "Supplier"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model,name:stock_valuation.model_wizard_valuation_history
+msgid "Wizard that opens the stock valuation history table"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model,name:stock_valuation.model_product_price_history
+msgid "product.price.history"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model,name:stock_valuation.model_stock_history
+msgid "stock.history"
+msgstr ""
+
+#. module: stock_valuation
+#: model:ir.model,name:stock_valuation.model_stock_history_materialized
+msgid "stock.history.materialized"
+msgstr ""
+
