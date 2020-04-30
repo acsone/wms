@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_prepaid
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_prepaid
+#: model:ir.model.fields,help:purchase_prepaid.field_purchase_order_prepayment
+msgid "Check this if the invoice is received before reception of goods"
+msgstr ""
+
+#. module: purchase_prepaid
+#: model:ir.model,name:purchase_prepaid.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: purchase_prepaid
+#: model:ir.model.fields,field_description:purchase_prepaid.field_purchase_order_prepayment
+msgid "Prepayment"
+msgstr ""
+
+#. module: purchase_prepaid
+#: model:ir.model,name:purchase_prepaid.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
