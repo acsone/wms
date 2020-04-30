@@ -1,0 +1,393 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_edi_connector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:59
+#, python-format
+msgid "%s must be set in environ"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_import_task_def.py:39
+#, python-format
+msgid "A File Matcher Pattern is required for task %s with an SFTP backend"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+msgid "API Configuration"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/res_partner.py:22
+#, python-format
+msgid "An EDI connector is required."
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_export_task_def.py:42
+#, python-format
+msgid "An export filename is required for task %s with an SFTP backend"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.actions.act_window,name:alc_edi_connector.edi_backend_act_window
+#: model:ir.ui.menu,name:alc_edi_connector.edi_backend_menu
+msgid "Backend"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_backend_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_backend_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_backend_id
+msgid "Backend Id"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_purchase_order_can_send_ubl_document
+msgid "Can send ubl document"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_channel
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_channel
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_channel
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_channel
+msgid "Channel"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:32
+#, python-format
+msgid "Connector EDI"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_create_uid
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_create_uid
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_create_date
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_create_date
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_display_name
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_display_name
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_display_name
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.menu,name:alc_edi_connector.alc_edi_connector_menu
+msgid "EDI"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/res_partner.py:27
+#, python-format
+msgid "EDI is not supported by %s"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_edi_backend
+msgid "Edi Backend"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_edi_export_task_def
+msgid "Edi Export Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_edi_import_task_def
+msgid "Edi Import Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_edi_task_def
+msgid "Edi Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_res_partner_edi_backend_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_res_users_edi_backend_id
+msgid "Edi connector"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_backend.py:61
+#, python-format
+msgid "Everything seems ok"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_edi_export_task_def_ids
+msgid "Export Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: selection:edi.export.task.def,kind:0
+msgid "Export UBL Order document"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_export_filename
+msgid "Export filename"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+msgid "Exports"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_file_matcher_pattern
+msgid "File matcher pattern"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_hostname
+msgid "Hostname"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_id
+msgid "ID"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,help:alc_edi_connector.field_edi_export_task_def_path
+#: model:ir.model.fields,help:alc_edi_connector.field_edi_import_task_def_path
+msgid "If specified, is a sub path of the path specified on the backend"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/ubl_order_response_importer.py:23
+#, python-format
+msgid "Import Order Response %s from %s"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_edi_import_task_def_ids
+msgid "Import Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: selection:edi.import.task.def,kind:0
+msgid "Import UBL Order Response"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+msgid "Imports"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_task_def.py:30
+#: sql_constraint:edi.export.task.def:0
+#: sql_constraint:edi.import.task.def:0
+#: sql_constraint:edi.task.def:0
+#, python-format
+msgid "Kind must be unique"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_kind
+msgid "Kind of EDI Process"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_kind
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_kind
+msgid "Kind of EDI document"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend___last_update
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def___last_update
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def___last_update
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_write_uid
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_write_uid
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_write_date
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_write_date
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_model_name
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_model_name
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_task_def_model_name
+msgid "Model name"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_name
+msgid "Name"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_password
+msgid "Password"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_path
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_path
+msgid "Path"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_path_read
+msgid "Path read"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_path_write
+msgid "Path write"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:50
+#, python-format
+msgid "Please set the private key environment variable or a password"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_port
+msgid "Port"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_pk_env_variable
+msgid "Private key environment variable"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_backend.py:89
+#, python-format
+msgid "Pull EDI %s"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_order_response_import
+msgid "Purchase Order Response Import from Files"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,help:alc_edi_connector.field_edi_import_task_def_file_matcher_pattern
+msgid "Regexp used to identify the file to import"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.purchase_order_form_view
+msgid "Send UBL Order"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/purchase_order.py:33
+#, python-format
+msgid "Sending UBL Order documet is only allowed in state approved"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+msgid "Test connection"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,help:alc_edi_connector.field_edi_export_task_def_export_filename
+msgid "The following place holders are available: name, id, date, time"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,help:alc_edi_connector.field_edi_backend_pk_env_variable
+msgid "The name of the environment variable who contains the private sh key"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_last_export_dt
+msgid "Timestamp last export"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_last_import_dt
+msgid "Timestamp last import"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/edi_backend.py:76
+#, python-format
+msgid "UBL Oder Document Generation not configured on the backend %s"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:31
+#, python-format
+msgid "UBL Order document sent"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_purchase_order_is_edi_available
+#: model:ir.model.fields,field_description:alc_edi_connector.field_res_partner_use_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_res_users_use_edi_connector
+msgid "Use edi connector"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_username
+msgid "Username"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+msgid "ble\"/&gt;"
+msgstr ""
+
+#. module: alc_edi_connector
+#: selection:edi.backend,channel:0
+msgid "ftp/sftp"
+msgstr ""
+
