@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_delay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_delay
+#: model:ir.model.fields,field_description:sale_delay.field_res_partner_max_delay_for_sale_order_creation
+#: model:ir.model.fields,field_description:sale_delay.field_res_users_max_delay_for_sale_order_creation
+msgid "Max delay on sale order operation"
+msgstr ""
+
+#. module: sale_delay
+#: model:ir.model,name:sale_delay.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: sale_delay
+#: model:ir.model,name:sale_delay.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_delay
+#: model:ir.model.fields,help:sale_delay.field_res_partner_max_delay_for_sale_order_creation
+#: model:ir.model.fields,help:sale_delay.field_res_users_max_delay_for_sale_order_creation
+msgid "Used to compute if the processing of a sale order inthe background takes too long. (0.5 is 30 minutes)"
+msgstr ""
+
